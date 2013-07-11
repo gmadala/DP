@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearApp')
+angular.module('nextgearWebApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
