@@ -4879,21 +4879,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 .float-right {
   float: left; }
 
-.container {
-  position: relative; }
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
 .logo {
   width: 200px;
   margin: 10px; }
 
 header {
-  overflow: hidden;
-  border: 1px solid #222222; }
+  overflow: hidden; }
 
 .quick-links {
   position: absolute;
@@ -4925,11 +4916,25 @@ header {
   float: right;
   margin: 10px 10px 0 0; }
   .pay-queue.summary ul {
-    list-style-type: none;
-    font-size: 12px; }
+    list-style-type: none; }
+    .pay-queue.summary ul li {
+      font-size: 12px;
+      line-height: 1.1; }
+  .pay-queue.summary label, .pay-queue.summary p {
+    display: inline-block; }
+  .pay-queue.summary p {
+    line-height: 1.2;
+    margin: 0px; }
   .pay-queue.summary label {
-    display: inline-block;
     width: 100px;
     text-align: right;
     font: bold 12px/1.1 Helvetica, Arial, sans-serif;
     margin: 0 10px 0 0; }
+
+.container {
+  position: relative; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }

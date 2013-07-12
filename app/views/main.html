@@ -1,1 +1,26 @@
-<div navigation></div>
+
+<!-- TODO: Pull out and place in partial -->
+<header>
+    <div class="logo">[NEXTGEAR LOGO]</div>
+    <nav navigation role="navigation"></nav>
+
+    <div class="quick-links">
+        <div class="c2a chat"><a href="#">Chat Now!</a></div>
+
+        <div class="box dealer-info">
+            <a class="settings" href="#">Set</a>
+
+            <div>
+                <h6>Rocky Mountain Hybrids</h6>
+                <p class="small">dealer #76543</p>
+            </div>
+        </div>
+
+        <div class="pay-queue summary">
+            <ul>
+                <li><label>Payment Queue:</label> <p>0 items</p></li>
+                <li><label>Subtotal:</label> <p>{{ 0 | currency }}</p></li>
+            </ul>
+        </div>
+    </div>
+</header>
