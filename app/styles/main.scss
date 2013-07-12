@@ -3,20 +3,12 @@
 // ===============
 
 @import "../components/sass-bootstrap/lib/bootstrap";
-@import "variables";
-@import "mixins";
-@import "typography";
-@import "helpers";
-@import "modals";
-@import "forms";
-@import "buttons";
-@import "header";
-
-// TODO: Place styles in respective scss partials.
-.container {
-  position: relative;
-}
-
-* {
-  @include box-sizing(border-box);
-}
+@import "basic/variables";
+@import "basic/base";
+@import "basic/mixins";
+@import "common/typography";
+@import "basic/helpers";
+@import "common/modals";
+@import "common/forms";
+@import "common/buttons";
+@import "common/header";

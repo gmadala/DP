@@ -4852,6 +4852,18 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.container {
+  position: relative; }
+
+::-moz-selection, ::selection {
+  background: white;
+  color: #fff; }
+
 .full-width {
   width: 100%; }
 
@@ -4884,6 +4896,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   margin: 10px; }
 
 header {
+  position: relative;
   overflow: hidden; }
 
 .quick-links {
@@ -4928,13 +4941,5 @@ header {
   .pay-queue.summary label {
     width: 100px;
     text-align: right;
-    font: bold 12px/1.1 Helvetica, Arial, sans-serif;
+    font: bold 12px/1.1 Helvetica;
     margin: 0 10px 0 0; }
-
-.container {
-  position: relative; }
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }

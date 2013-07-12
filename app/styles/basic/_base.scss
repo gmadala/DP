@@ -1,0 +1,16 @@
+// ===============
+// Base Styles
+// ===============
+
+* {
+  @include box-sizing(border-box);
+}
+
+.container {
+  position: relative;
+}
+
+::-moz-selection, ::selection {
+  background: $selection;
+  color: #fff;
+}
