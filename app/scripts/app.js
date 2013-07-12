@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', [])
+angular.module('nextgearWebApp', ['$strap.directives'])
   .config(function($routeProvider) {
       $routeProvider
         .when('/login', {
