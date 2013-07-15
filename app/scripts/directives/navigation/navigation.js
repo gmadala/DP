@@ -10,19 +10,5 @@ angular.module('nextgearWebApp')
   })
 
   .controller('NavigationCtrl', function($scope) {
-      $scope.tabs = [
-          {
-              title: 'Home',
-              templateUrl: '../../views/home.html'
-          },
-          {
-              title: 'Reports',
-              templateUrl: 'views/reports.html'
-          },
-          {
-              title: 'Documents',
-              templateUrl: 'views/documents.html'
-          }
-      ];
-      $scope.tabs.activeTab = 0;
+
   });

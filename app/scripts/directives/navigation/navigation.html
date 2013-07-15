@@ -1,4 +1,32 @@
-<div data-fade="1" ng-model="tabs.activeTab" bs-tabs>
-    <div ng-repeat="tab in tabs" data-title="{{tab.title}}"></div>
-    <div ng-include src="tabs[tabs.activeTab].templateUrl"></div>
+<!-- TODO: Pull out and place in partial -->
+<div class="logo">[NEXTGEAR LOGO]</div>
+<nav role="navigation">
+    <a href="#/home">Home</a>
+    <a href="#/floorcar">Floor a Car</a>
+    <a href="#/reports">View a Report</a>
+    <a href="#/analytics">View Analytics</a>
+    <a href="#/documents">Documents</a>
+</nav>
+
+<div class="quick-links">
+    <!-- TODO: Add ng-show so its only visible for dealers -->
+    <div class="c2a chat" ng-show=""><a href="#">Chat Now!</a></div>
+
+    <div class="box dealer-info">
+        <a class="settings" href="#">Set</a>
+
+        <div>
+            <h6>Rocky Mountain Hybrids</h6>
+            <!-- TODO: Add ng-show so its only visible for dealers -->
+            <p class="small" ng-show="">dealer #76543</p>
+        </div>
+    </div>
+
+    <!-- TODO: Add ng-show so its only visible for dealers -->
+    <div class="pay-queue summary" ng-show="">
+        <ul>
+            <li><label>Payment Queue:</label> <p>0 items</p></li>
+            <li><label>Subtotal:</label> <p>{{ 0 | currency }}</p></li>
+        </ul>
+    </div>
 </div>
