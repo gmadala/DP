@@ -11,6 +11,22 @@ angular.module('nextgearWebApp', ['$strap.directives'])
             templateUrl: 'views/home.html',
             controller: 'HomeCtrl'
         })
+        .when('/floorcar', {
+            templateUrl: 'views/floorcar.html',
+            controller: 'FloorCarCtrl'
+        })
+        .when('/reports', {
+            templateUrl: 'views/reports.html',
+            controller: 'ReportsCtrl'
+        })
+        .when('/analytics', {
+            templateUrl: 'views/analytics.html',
+            controller: 'AnalyticsCtrl'
+        })
+        .when('/documents', {
+            templateUrl: 'views/documents.html',
+            controller: 'DocumentsCtrl'
+        })
         .otherwise({ redirectTo: '/home' });
   })
   .run(function($rootScope, $location) {
