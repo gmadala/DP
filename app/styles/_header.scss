@@ -1,0 +1,49 @@
+// ===============
+// Header
+// ===============
+
+header > .row {
+  margin-bottom: 10px;
+}
+.dealer-info {
+  p, h6 {
+    line-height: 1.35;
+    text-align: right;
+    margin: 0 40px 0 0;
+  }
+  .settings {
+    @include size(35px, 35px);
+    display: block;
+    position: absolute;
+    right: 0;
+    background: #ccc;
+  }
+}
+
+.pay-queue.summary {
+  ul {
+    list-style-type: none;
+
+    li {
+      font-size: 12px;
+      line-height: 1.1;
+      text-align: right;
+    }
+  }
+
+  p {
+    line-height: 1.2;
+    margin: 0px;
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font: bold 12px/1.1 $baseFontFamily;
+  }
+
+  label + p {
+    display: inline-block;
+  }
+}

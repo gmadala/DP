@@ -4860,86 +4860,34 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 .container {
   position: relative; }
 
-::-moz-selection, ::selection {
-  background: white;
-  color: #fff; }
+header > .row {
+  margin-bottom: 10px; }
 
-.full-width {
-  width: 100%; }
-
-.half-width {
-  width: 50%; }
-
-.quarter-width {
-  width: 25%; }
-
-.small {
-  font-size: 11px; }
-
-.l-horizontal, .l-vertical {
-  list-style-type: none; }
-
-.l-horizontal li {
-  display: inline-block; }
-
-.l-vertical li {
-  display: block; }
-
-.float-left {
-  float: right; }
-
-.float-right {
-  float: left; }
-
-.logo {
-  width: 200px;
-  margin: 10px; }
-
-header {
-  position: relative;
-  overflow: hidden; }
-
-.quick-links {
-  position: absolute;
-  top: 5px;
-  right: 0;
-  width: 300px; }
-
-.c2a.chat {
-  width: 100px;
-  float: left; }
-
-.dealer-info {
-  width: 200px;
+.dealer-info p, .dealer-info h6 {
+  line-height: 1.35;
   text-align: right;
-  float: right; }
-  .dealer-info p, .dealer-info h6 {
-    line-height: 1.35;
-    margin: 0; }
-  .dealer-info .settings {
-    display: block;
-    width: 40px;
-    height: 30px;
-    float: right;
-    background: #ccc;
-    padding: 5px;
-    margin: 0 5px 0 10px; }
+  margin: 0 40px 0 0; }
+.dealer-info .settings {
+  width: 35px;
+  height: 35px;
+  display: block;
+  position: absolute;
+  right: 0;
+  background: #ccc; }
 
-.pay-queue.summary {
-  float: right;
-  margin: 10px 10px 0 0; }
-  .pay-queue.summary ul {
-    list-style-type: none; }
-    .pay-queue.summary ul li {
-      font-size: 12px;
-      line-height: 1.1; }
-  .pay-queue.summary label, .pay-queue.summary p {
-    display: inline-block; }
-  .pay-queue.summary p {
-    line-height: 1.2;
-    margin: 0px; }
-  .pay-queue.summary label {
-    width: 100px;
-    text-align: right;
-    font: bold 12px/1.1 Helvetica;
-    margin: 0 10px 0 0; }
+.pay-queue.summary ul {
+  list-style-type: none; }
+  .pay-queue.summary ul li {
+    font-size: 12px;
+    line-height: 1.1;
+    text-align: right; }
+.pay-queue.summary p {
+  line-height: 1.2;
+  margin: 0px; }
+.pay-queue.summary label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  font: bold 12px/1.1 "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.pay-queue.summary label + p {
+  display: inline-block; }

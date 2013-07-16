@@ -2,13 +2,7 @@
 // Main
 // ===============
 
+@import "variables";
 @import "../components/sass-bootstrap/lib/bootstrap";
-@import "basic/variables";
-@import "basic/base";
-@import "basic/mixins";
-@import "common/typography";
-@import "basic/helpers";
-@import "common/modals";
-@import "common/forms";
-@import "common/buttons";
-@import "common/header";
+@import "scaffolding";
+@import "header";
