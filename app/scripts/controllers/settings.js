@@ -2,6 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('SettingsCtrl', function ($scope) {
+    console.log('in settings');
     $scope.username = "test user";
     $scope.password = "test pword";
     $scope.secQuestion = "Where were you born?";
