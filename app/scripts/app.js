@@ -63,6 +63,10 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state'])
             templateUrl: 'views/documents.html',
             controller: 'DocumentsCtrl'
         })
+        .state('settings', {
+          templateUrl: 'views/settings.html',
+          controller: 'SettingsCtrl'
+        })
   })
   .run(function($rootScope, $location) {
 
