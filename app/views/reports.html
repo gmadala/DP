@@ -1,2 +1,84 @@
-<p>This is the reports view.</p>
+<div class="row">
+    <div class="span5">
+        <h3>Current Reports</h3>
+        <ul>
+            <li ng-repeat="report in currentReports">
+                <a ng-href="{{ report.url }}">{{ report.title }}</a>
+            </li>
+        </ul>
 
+    </div>
+
+    <div class="span7">
+        <h3>Historical Reports</h3>
+        <form class="form-horizontal">
+            <h4>Dealer Statement</h4>
+            <div class="control-group">
+                <label class="control-label" for="stmtStart">Start Date</label>
+                <div class="controls">
+                    <input type="date" id="stmtStart" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="stmtEnd">End Date</label>
+                <div class="controls">
+                    <input type="date" id="stmtEnd" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="stmtVinFilter">Filter for VIN</label>
+                <div class="controls">
+                    <input type="text" id="stmtVinFilter" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">View Report</button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-inline">
+            <h4>Disbursement Detail</h4>
+                    <input type="date" id="disDate" />
+
+                    <button type="submit" class="btn">View Report</button>
+
+        </form>
+
+        <form class="form-horizontal">
+            <h4>Paid off Summary</h4>
+            <div class="control-group">
+                <label class="control-label" for="paidOffStart">Start Date</label>
+                <div class="controls">
+                    <input type="date" id="paidOffStart" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="paidOffEnd">End Date</label>
+                <div class="controls">
+                    <input type="date" id="paidOffEnd" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="paidOffVinFilter">Filter for VIN</label>
+                <div class="controls">
+                    <input type="text" id="paidOffVinFilter" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="paidOffStockNo">Stock Number Filter</label>
+                <div class="controls">
+                    <select id="paidOffStockNo">
+                           <option>None</option>
+                        </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">View Report</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

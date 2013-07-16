@@ -1,1 +1,79 @@
-<p>This is the settings view.</p>
+<!-- TODO: Replace placeholders with actual angular variables/real data -->
+<!-- TODO: Add edit buttons -->
+<!-- TODO: Create means of switching to form view for editing purposes -->
+<div>
+    <header>
+        <h3>User Profile</h3>
+    </header>
+    <table>
+        {{ funVar }}
+        <tr>
+            <td>Username:</td>
+            <td> {{ username }}</td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td> {{ password }}</td>
+        </tr>
+        <tr>
+            <td>Security Question:</td>
+            <td> {{ secQuestion }}</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td> {{ email }}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td> {{ phone }}</td>
+        </tr>
+    </table>
+</div>
+
+<section>
+    <header>
+        <h3>Business Settings</h3>
+    </header>
+    <table>
+        <tr>
+            <td>Business Email:</td>
+            <td> {{ busEmail }}</td>
+        </tr>
+        <tr>
+            <td>Enhanced?</td>
+            <td ng-show="enhanced">Yes</td>
+            <td ng-hide="enhanced">No</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <header>
+        <h3>Title Settings</h3>
+    </header>
+    <table>
+        <tr>
+            <td>Address:</td>
+            <td> {{ street }} <br/> {{ city }}, {{ state }} {{ zip }}
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <header>
+        <h3>Notifications</h3>
+    </header>
+    <table>
+        <tr>
+            <td>Active Notifications:</td>
+        </tr>
+
+        <tr>
+            <td> {{ notification.title }}</td>
+            <td> {{ notification.type }}</td>
+            <td ng-show="notification.on">On</td>
+            <td ng-hide="notification.on">Off</td>
+        </tr>
+    </table>
+</section>
