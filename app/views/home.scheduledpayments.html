@@ -1,1 +1,140 @@
-<p>This is the home.scheduledpayments view.</p>
+<form class="form-horizontal well search payments">
+    <strong>Scheduled Payment Search</strong>
+    <div class="control-group">
+        <label class="control-label" for="keyword">Keyword</label>
+
+        <div class="controls">
+            <input type="text" id="keyword" placeholder="Enter Stock # or VIN"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="startDate">Date Range</label>
+
+        <div class="controls">
+            <input type="date" id="startDate"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="endDate">To</label>
+
+        <div class="controls">
+            <input type="date" id="endDate"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="statusFilter">Filter List by Status</label>
+
+        <div class="controls">
+            <select id="statusFilter">
+                <option value="all">View All</option>
+                <option value="pending">Pending</option>
+                <option value="processed">Processed</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="voided">Voided</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <input type="submit" value="search"/>
+    </div>
+</form>
+
+        <div class="alert">Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.</div>
+        <div class="alert">Note: No payment may be scheduled on an overdue loan, or a loan due today.</div>
+
+<!-- TODO: Add directives for payments and fees. -->
+<section class="schPayments-list">
+    <ul class="unstyled">
+        <li ng-repeat="pay in schPayments">
+            <header class="row-fluid">
+                <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>
+                <div class="span3"> {{ pay.vehicle }}</div>
+                <div class="span2"><strong>stock # </strong> {{ pay.stockNo }}</div>
+                <div class="span2"><strong>status </strong> {{ pay.status }}</div>
+            </header>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <strong>Scheduled </strong><p> {{ pay.scheduledDate }} </p>
+                        </div>
+                        <div class="span3">
+                            <strong>Payoff: </strong><p> {{ pay.payoff | currency }} </p>
+                        </div>
+                        <div class="span4">
+                            <strong>Curtailment: </strong><p> {{ pay.curtailment | currency }} </p>
+                        </div>
+                        <div class="span3">
+                            <strong>Setup: </strong><p> {{ pay.setup }} </p>
+                        </div>
+                        <div class="span4">
+                            <strong>Scheduled by: </strong><p> {{ pay.scheduledBy }} </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
+                <div class="span2 offset2">
+                    <button class="btn btn-small btn-block">Payoff Now</button>
+                    <button class="btn btn-small btn-block">Cancel</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+    <div collapse="isCollapsed" class="more-details">
+
+        <div class="row-fluid">
+            <div class="span3 vehicle-info">
+                <strong>Vehicle Information</strong>
+                <ul>
+                    <li>Lorem ipsum</li>
+                    <li>dolor sit amet</li>
+                </ul>
+            </div>
+            <div class="span3 floor-info">
+                <strong>Flooring Information</strong>
+                <ul>
+                    <li>Lorem ipsum</li>
+                    <li>dolor sit amet</li>
+                </ul>
+            </div>
+            <div class="span3 title-info">
+                <strong>Title Information</strong>
+                <ul>
+                    <li>Lorem ipsum</li>
+                    <li>dolor sit amet</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <strong>Original Curtailment Schedule</strong>
+            <table class="span10">
+                <tr>
+                    <th>Start Date</th>
+                    <th>Due Date</th>
+                    <th>Principal</th>
+                    <th>Principal Payment</th>
+                    <th>Interest</th>
+                    <th>CPP</th>
+                    <th>Fees</th>
+                    <th>Total Payment</th>
+                    <th>Highline Fee Applied</th>
+                </tr>
+                <tr ng-repeat="cur in curtailment">
+                    <td> {{ cur.startDate }} </td>
+                    <td> {{ cur.dueDate }} </td>
+                    <td> {{ cur.principal | currency }} </td>
+                    <td> {{ cur.principalPay | currency }} </td>
+                    <td> {{ cur.interest | currency }} </td>
+                    <td> {{ cur.cpp | currency }} </td>
+                    <td> {{ cur.fees | currency }} </td>
+                    <td> {{ cur.totalPay | currency }} </td>
+                    <td> <span ng-hide="{{ cur.highline }}">N/A</span> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
