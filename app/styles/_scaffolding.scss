@@ -6,6 +6,10 @@
   @include box-sizing(border-box);
 }
 
-.container {
+.container-fluid {
   position: relative;
+  width: 100%;
+  max-width: 940px;
+  min-width: 768px;
+  margin: 0 auto;
 }
