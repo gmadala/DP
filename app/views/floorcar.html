@@ -1,1 +1,95 @@
-<p>This is the floorcar view.</p>
+<!-- TODO: Add error messaging -->
+<form class="row-fluid floorcar">
+   <fieldset class="span6">
+       <legend>Vehicle Information</legend>
+       <label for="inputVin">VIN</label>
+       <input type="text" id="inputVin" />
+
+       <label for="inputColor">Color</label>
+       <select id="inputColor">
+           <option></option>
+           <option>Black</option>
+           <option>Blue</option>
+           <option>Bronze</option>
+           <option>Brown</option>
+           <option>Cream</option>
+           <option>Purple</option>
+       </select>
+
+       <label for="inputMileage">Mileage</label>
+       <input type="text" id="inputMileage" />
+
+       <label for="vin">VIN</label>
+       <input type="text" id="vin" />
+
+       <label for="inputNGBookVal">NextGear Book Value</label>
+       <input type="text" id="inputNGBookVal" />
+
+       <label for="inputTitleHolder">Who has the Title?</label>
+       <select id="inputTitleHolder">
+           <option></option>
+           <option>I have it</option>
+           <option>Unknown/TA</option>
+           <option>No Title Needed</option>
+       </select>
+
+       <label for="inputTitleState">Title State</label>
+       <select id="inputTitleState">
+           <option></option>
+           <option>NY</option>
+           <option>MA</option>
+           <option>PA</option>
+       </select>
+
+       <label for="inputTitleNo">Title Number</label>
+       <input type="text" id="inputTitleNo" />
+
+       <label for="inputInvLoc">Inventory Location</label>
+      <select id="inputInvLoc">
+          <option></option>
+          <option>Denver, CO</option>
+          <option>Anytown, MI</option>
+      </select>
+   </fieldset>
+
+    <fieldset class="span6">
+        <legend>Sale Information</legend>
+
+        <label>Trade In</label>
+        <label><input type="radio" name="inputTradeIn" value="no" checked> No </label>
+        <label><input type="radio" name="inputTradeIn" value="yes"> Yes </label>
+
+        <label for="inputSeller">Seller</label>
+        <input type="text" id="inputSeller" />
+
+        <label for="inputPurchaseAmt">Purchase Amount</label>
+        <input type="text" id="inputPurchaseAmt" />
+
+        <label for="inputPurchaseDate">Purchase Date</label>
+        <input type="date" id="inputPurchaseDate" />
+
+        <label for="inputCreditLine">Line of Credit</label>
+        <select id="inputCreditLine">
+            <option></option>
+            <option>Retail (Buyer)</option>
+            <option>Foo</option>
+            <option>Lorem</option>
+        </select>
+
+        <label for="inputSendPay">Send Payment To:</label>
+        <select id="inputSendPay">
+            <option></option>
+            <option>Buyer</option>
+        </select>
+
+        <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
+        <select id="inputDisburseAcct">
+            <option></option>
+            <option>My Account</option>
+        </select>
+        <div>
+            <button class="btn btn-small">Cancel</button>
+            <button class="btn btn-small" type="submit">Submit</button>
+        </div>
+    </fieldset>
+</form>
