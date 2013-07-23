@@ -66,5 +66,12 @@ angular.module('nextgearWebApp')
               releasedTo: "Buyer",
               floored: "5/10/2013",
               seller: "MAFS Pennsylvania"}
-      ];
+      ]; // end dummy data
+
+      $scope.openModal = function() {
+          $scope.shouldBeOpen = true;
+      }
+      $scope.closeModal = function() {
+          $scope.shouldBeOpen = false;
+      }
   });
