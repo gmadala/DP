@@ -1,1 +1,45 @@
-<p>This is the analytics view.</p>
+<section class="row-fluid business-summary">
+    <div class="span4">
+        <h4>Approved Floorplans</h4>
+        {{ floorplans.length }} Approved
+        <ul>
+            <li>Total Book Value {{ 6140300.00 | currency }} </li>
+            <li>Total Financed Amount {{ 4781220.48 | currency }} </li>
+            <li>Total Outstanding {{ 4779017.98 | currency }} </li>
+        </ul>
+    </div>
+    <div class="span4">
+        <h4>Pending Floorplans</h4>
+        {{ floorplans.length }} Pending
+        <ul>
+            <li>Total Purchase Price {{ 1500.00 | currency }} </li>
+            <li>Total NextGear Capital Book value {{ 0 | currency }} </li>
+        </ul>
+    </div>
+    <div class="span4">
+        <h4>Credits and Payments</h4>
+        <ul>
+            <li>Available Credit {{ 6359899.86 | currency }} </li>
+            <li>Reserve Funds {{ 0 | currency }} </li>
+            <li>Last Payment {{ 8005.60 | currency }} </li>
+            <li>Last Payment Date 7/10/2013</li>
+        </ul>
+    </div>
+</section>
+
+<section class="row-fluid">
+    <div class="span6">
+        <h4>Average Turn</h4>
+        <p>[graphic chart will go here]</p>
+    </div>
+    <div class="span6">
+        <h4>Stale and Aging Vehicles</h4>
+        <ul>
+            <li>[num] 100-125 Days</li>
+            <li>[num] 75-99 Days</li>
+            <li>[num] 50-74 days</li>
+            <li>[num] 1-25 Days</li>
+        </ul>
+        <a href="#">View All Payments</a>
+    </div>
+</section>
