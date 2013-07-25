@@ -1,13 +1,40 @@
 <div class="span12 logo">[NEXTGEAR LOGO]</div>
 <div class="span12 alert">This is an example alert.</div>
-<div class="hero-unit span8">
+
+<!-- LOGIN VIEW -->
+<div ng-hide="forgot" class="hero-unit span8">
   <h1>Sign In</h1>
+
   <div><label>Username: </label><input type="text" ng-model="credentials.username"></div>
   <div><label>Password: </label><input type="text" ng-model="credentials.password"></div>
   <button ng-click="authenticate()">Log In</button>
+  <a ng-click="forgot=true">Forgot your username or password?</a>
+
+  <div class="help">
+    <strong>Do you have Adobe Acrobat Reader 8.1 or newer?</strong>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>
 </div>
 
-        <div class="span12 help">
-            <strong>Do you have Adobe Acrobat Reader 8.1 or newer?</strong>
-            <p>Lorem ipsum dolor sit amet.</p>
-        </div>
+<!-- FORGOT USERNAME/PASSWORD VIEW -->
+<div ng-show="forgot" class="row-fluid span8">
+    <h2 class="center">Forgot Your User Name or Password?</h2>
+
+    <div class="span4">
+        <h3>Forgot Your User Name?</h3>
+
+        <p>Enter the email address associated with your account to receive your username via email.</p>
+        <label for="userEmail">Email Address</label>
+        <input type="text" id="userEmail"/>
+        <input type="submit" class="btn" value="submit"/>
+    </div>
+
+    <div class="span4 offset1">
+        <h3>Forgot Your Password?</h3>
+
+        <p>Enter your username to receive a new password via email.</p>
+        <label for="userEmail">User Name</label>
+        <input type="text" id="userName"/>
+        <input type="submit" class="btn" value="submit"/>
+    </div>
+</div>
