@@ -5,9 +5,22 @@
 <div ng-hide="forgot" class="hero-unit span8">
   <h1>Sign In</h1>
 
-  <div><label>Username: </label><input type="text" ng-model="credentials.username"></div>
-  <div><label>Password: </label><input type="text" ng-model="credentials.password"></div>
-  <button ng-click="authenticate()">Log In</button>
+  <form name="loginForm">
+
+      <div>
+        <label>Username: </label>
+        <input type="text" ng-model="credentials.username" name="credUsername" required />
+
+        <label>Password: </label>
+        <input type="text" ng-model="credentials.password" name="credPassword" required />
+
+        <!-- TODO: Check for variable that determines whether username/password are valid via server side -->
+        <span ng-show="">The username or password you entered is incorrect.</span>
+      </div>
+
+    <button ng-click="authenticate()" ng-disabled="loginForm.credUsername.$pristine || loginForm.credPassword.$pristine">Log In</button>
+  </form>
+
   <a ng-click="forgot=true">Forgot your username or password?</a>
 
   <div class="help">
@@ -24,17 +37,21 @@
         <h3>Forgot Your User Name?</h3>
 
         <p>Enter the email address associated with your account to receive your username via email.</p>
-        <label for="userEmail">Email Address</label>
-        <input type="text" id="userEmail"/>
-        <input type="submit" class="btn" value="submit"/>
+        <form name="forgotUsername">
+          <label>Email Address</label>
+          <input type="text" name="email" required/>
+          <button class="btn">Submit</button>
+        </form>
     </div>
 
     <div class="span4 offset1">
         <h3>Forgot Your Password?</h3>
 
         <p>Enter your username to receive a new password via email.</p>
-        <label for="userEmail">User Name</label>
-        <input type="text" id="userName"/>
-        <input type="submit" class="btn" value="submit"/>
+        <form name="forgotPassword">
+          <label>User Name</label>
+          <input type="text" name="userName" required/>
+          <button class="btn">Submit</button>
+        </form>
     </div>
 </div>
