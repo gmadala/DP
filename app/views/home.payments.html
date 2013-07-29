@@ -127,7 +127,8 @@
                         <td> {{ cur.cpp | currency }} </td>
                         <td> {{ cur.fees | currency }} </td>
                         <td> {{ cur.totalPay | currency }} </td>
-                        <td> <span ng-hide="{{ cur.highline }}">N/A</span> </td>
+                        <td> <span ng-hide="cur.highline">N/A</span>
+                        <span ng-show="cur.highline"> {{ cur.highline }} </span> </td>
                     </tr>
                 </table>
             </div>
