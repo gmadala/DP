@@ -11,4 +11,5 @@ angular.module('nextgearWebApp')
 
 .controller('NavBarCtrl', function($scope) {
     $scope.isDealer = true;
+    $scope.showSettings = false;
 });

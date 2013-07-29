@@ -2,25 +2,28 @@
 // Header
 // ===============
 
-header > .row {
+header > .row-fluid {
   margin-bottom: 10px;
 }
+
+.nxg-settings-drop {
+  position: absolute;
+  background: #eee;
+}
+
 .dealer-info {
+  position: relative;
+
+
   p, h6 {
     line-height: 1.35;
     text-align: right;
-    margin: 0 40px 0 0;
-  }
-  .settings {
-    @include size(35px, 35px);
-    display: block;
-    position: absolute;
-    right: 0;
-    background: #ccc;
+    margin: 0;
   }
 }
 
 .pay-queue.summary {
+
   ul {
     list-style-type: none;
 

@@ -4,18 +4,27 @@
         <div class="span2 logo">[NEXTGEAR LOGO]</div>
 
         <!-- TODO: Add ng-show so its only visible for dealers -->
-        <div class="span2 offset5 c2a chat" ng-show="isDealer">
-            <a href="#">Chat Now!</a>
+        <div class="span2 offset5 c2a chat">
+            <a ng-show="isDealer" href="#">Chat Now!</a>
         </div>
 
         <div class="span3 dealer-info">
-            <div class="row">
-                <a class="settings" href="#/settings">Set</a>
+            <div class="row-fluid">
+                <div class="span12 nxg-settings-drop">
 
-                <div class="span12">
-                    <h6>Rocky Mountain Hybrids</h6>
+                    <div>
+                        <h6>Rocky Mountain Hybrids <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
+                        <p class="small" ng-show="isDealer">dealer #76543</p>
+                    </div>
+
                     <!-- TODO: Add ng-show so its only visible for dealers -->
-                    <p class="small" ng-show="isDealer">dealer #76543</p>
+                    <div class="nxg-settings" ng-show="showSettings">
+                        <ul class="unstyled">
+                            <li><a href="#/settings">Settings</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li><button class="btn btn-small" ng-click="">Sign Out</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
