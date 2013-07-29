@@ -29,29 +29,40 @@
   </div>
 </div>
 
+<!-- TODO: Add 'OR' vertical separator between forms -->
+
 <!-- FORGOT USERNAME/PASSWORD VIEW -->
 <div ng-show="forgot" class="row-fluid span8">
     <h2 class="center">Forgot Your User Name or Password?</h2>
+    <!-- TODO: toggle forms so that only one is active at a time -->
 
-    <div class="span4">
+    <div class="span4 {{ uClass }}">
         <h3>Forgot Your User Name?</h3>
 
         <p>Enter the email address associated with your account to receive your username via email.</p>
         <form name="forgotUsername">
           <label>Email Address</label>
-          <input type="text" name="email" required/>
-          <button class="btn">Submit</button>
+          <input type="email" name="email" ng-model="email" required/>
+          <!-- TODO: Add error text for when email is valid but not recogized by NextGear -->
+          <div ng-show="forgotUsername.email.$invalid && forgotUsername.email.$dirty">
+            <p class="error">XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721</p>
+          </div>
+          <button class="btn" ng-disabled="forgotUsername.email.$invalid">Submit</button>
         </form>
     </div>
 
-    <div class="span4 offset1">
+    <div ng-disabled="forgotten == 'username'" class="span4 offset1 {{ pClass }}">
         <h3>Forgot Your Password?</h3>
 
         <p>Enter your username to receive a new password via email.</p>
         <form name="forgotPassword">
           <label>User Name</label>
-          <input type="text" name="userName" required/>
-          <button class="btn">Submit</button>
+          <input type="text" name="userName" ng-model="credentials.username" required/>
+          <div ng-show="identity.showQuestion">
+            <p>{{ identity.securityQuestion }}</p>
+            <input type="text" name="answer" ng-model="identity.securityAnswer" required />
+          </div>
+          <button class="btn" ng-disabled="forgotPassword.username.$invalid" ng-click="onForgotPasswordSubmit()">Submit</button>
         </form>
     </div>
 </div>

@@ -13,3 +13,7 @@
   min-width: 768px;
   margin: 0 auto 30px;
 }
+
+.nxg-fade {
+  @include opacity(50);
+}
