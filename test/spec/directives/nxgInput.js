@@ -6,8 +6,8 @@ describe('Directive: nxgInput', function () {
   var element;
 
   it('should make hidden element visible', inject(function ($rootScope, $compile) {
-    element = angular.element('<nxg-input></nxg-input>');
+    element = angular.element('<div nxg-input></div>');
     element = $compile(element)($rootScope);
-    expect(element.text()).toBe('this is the nxgInput directive');
+    expect(element.text()).toBe(' {{ model }}');
   }));
 });

@@ -16,7 +16,11 @@ describe('Controller: DocumentsCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach a list of documents to the scope', function () {
+    expect(scope.documents.length).toBe(4);
+  });
+
+  it('should attach a list of collateralProtection to the scope', function () {
+    expect(scope.collateralProtection.length).toBe(4);
   });
 });
