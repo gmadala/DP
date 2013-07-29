@@ -1,9 +1,10 @@
 <header>
+    <button ng-click="isDealer=!isDealer">Toggle Auction/Dealer</button> <span>{{ userType }}</span>
     <div class="row-fluid">
         <div class="span2 logo">[NEXTGEAR LOGO]</div>
 
         <!-- TODO: Add ng-show so its only visible for dealers -->
-        <div class="span2 offset5 c2a chat" ng-show="1">
+        <div class="span2 offset5 c2a chat" ng-show="isDealer">
             <a href="#">Chat Now!</a>
         </div>
 
@@ -14,7 +15,7 @@
                 <div class="span12">
                     <h6>Rocky Mountain Hybrids</h6>
                     <!-- TODO: Add ng-show so its only visible for dealers -->
-                    <p class="small" ng-show="1">dealer #76543</p>
+                    <p class="small" ng-show="isDealer">dealer #76543</p>
                 </div>
             </div>
         </div>
@@ -30,7 +31,7 @@
         </nav>
 
         <!-- TODO: Add ng-show so its only visible for dealers -->
-        <div class="span3 pay-queue summary" ng-show="1">
+        <div class="span3 pay-queue summary" ng-show="isDealer">
             <ul>
                 <li><label>Payment Queue:</label> <p>0 items</p></li>
                 <li><label>Subtotal:</label> <p>{{ 0 | currency }}</p></li>
