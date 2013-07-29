@@ -21,7 +21,7 @@ module.exports = function(karma) {
 			'app/components/angular/angular.js',
 			'app/components/angular-mocks/angular-mocks.js',
 			'app/components/angular-strap/dist/angular-strap.js',
-			'app/components/ui-router/release/angular-ui-router.js',
+			'app/components/angular-ui-router/release/angular-ui-router.js',
 			'app/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
