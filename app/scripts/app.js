@@ -69,7 +69,12 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap
             controller: 'SettingsCtrl'
         });
   })
-  .run(function($rootScope, $location) {
+  .run(function($rootScope, $location, apiBaseUrl) {
+
+      // If ?mock exists, set the baseUrl to nothing (localhost)
+      if ($location.absUrl().match(/\?mock/)) {
+        apiBaseUrl.set('');
+      };
 
       /**
        * Returns true if the route requires authentication, false otherwise.
