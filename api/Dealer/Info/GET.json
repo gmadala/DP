@@ -1,0 +1,148 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO",
+        "MarketName": "Arlington",
+        "MarketPhoneNumber": "8176818254",
+        "CSCPhoneNumber": "8889693721",
+        "MarketEMail": "service@discoverdsc.com",
+        "IsBuyerDirectlyPayable": true,
+        "HasUCC": true,
+        "MarketNumber": 195,
+        "DealerAuctionStatusForGA": "Dealer",
+        "CurrentlyApprovedMinFlooringUnixDate": 1370304000,
+        "BusinessEmail": "tyates@tricolorauto.com",
+        "BusinessContactEmail": "tyates@tricolorauto.com",
+        "DealerBusinessAddresses": [
+            {
+                "Line1": "545 JOHN W CARPENTER FWY",
+                "Line2": null,
+                "City": "DALLAS",
+                "State": "TX",
+                "Zip": "75062"
+            },
+            {
+                "Line1": "545 JOHN W CARPENTER FWY",
+                "Line2": "STE 1900",
+                "City": "IRVING",
+                "State": "TX",
+                "Zip": "75062"
+            },
+            {
+                "Line1": "8301 BEACHNUT ST",
+                "Line2": null,
+                "City": "HOUSTON",
+                "State": "TX",
+                "Zip": "77036"
+            },
+            {
+                "Line1": "1300 JACKSBORO HWY",
+                "Line2": null,
+                "City": "FT WORTH",
+                "State": "TX",
+                "Zip": "76114"
+            },
+            {
+                "Line1": "12812 GULF FWY",
+                "Line2": null,
+                "City": "HOUSTON",
+                "State": "TX",
+                "Zip": "77034"
+            },
+            {
+                "Line1": "5219 NORTH FWY",
+                "Line2": null,
+                "City": "HOUSTON",
+                "State": "TX",
+                "Zip": "77022"
+            },
+            {
+                "Line1": "3312 MARVIN D LOVE FWY",
+                "Line2": null,
+                "City": "DALLAS",
+                "State": "TX",
+                "Zip": "75220"
+            },
+            {
+                "Line1": "8655 Hwy 6 South",
+                "Line2": null,
+                "City": "Houston",
+                "State": "TX",
+                "Zip": "77083"
+            },
+            {
+                "Line1": "551 S BUCKNER BLVD",
+                "Line2": null,
+                "City": "DALLAS",
+                "State": "TX",
+                "Zip": "75217"
+            },
+            {
+                "Line1": "911 SW 59TH ST",
+                "Line2": null,
+                "City": "OKLAHOMA CITY",
+                "State": "OK",
+                "Zip": "73109"
+            },
+            {
+                "Line1": "3363 W NW HWY",
+                "Line2": null,
+                "City": "DALLAS",
+                "State": "TX",
+                "Zip": "75220"
+            },
+            {
+                "Line1": "7417 N I35",
+                "Line2": null,
+                "City": "AUSTIN",
+                "State": "TX",
+                "Zip": "78752"
+            },
+            {
+                "Line1": "4500 SOUTH FREEWAY",
+                "Line2": null,
+                "City": "FORT WORTH",
+                "State": "TX",
+                "Zip": "76115"
+            },
+            {
+                "Line1": "12000 E NORTHWEST HWY",
+                "Line2": null,
+                "City": "DALLAS",
+                "State": "TX",
+                "Zip": "75218"
+            },
+            {
+                "Line1": "612 N COLLINS ST",
+                "Line2": null,
+                "City": "ARLINGTON",
+                "State": "TX",
+                "Zip": "76011"
+            },
+            {
+                "Line1": "2751 SW Military Dr",
+                "Line2": null,
+                "City": "San Antonio",
+                "State": "TX",
+                "Zip": "78224"
+            },
+            {
+                "Line1": "6730 GULF FWY",
+                "Line2": null,
+                "City": "HOUSTON",
+                "State": "TX",
+                "Zip": "77087"
+            },
+            {
+                "Line1": "545 JOHN W CARPENTER FWY",
+                "Line2": "Suite 925",
+                "City": "IRVING",
+                "State": "TX",
+                "Zip": "75062"
+            }
+        ]
+    }
+}

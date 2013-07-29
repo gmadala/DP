@@ -1,0 +1,12 @@
+{
+    "ProductType": null,
+    "Colors": null,
+    "States": null,
+    "Locations": null,
+    "BankAccounts": null,
+    "LinesOfCredit": null,
+    "TitleLocationOptions": null,
+    "Success": true,
+    "Message": "Error retrieving dealer info.",
+    "Data": null
+}
