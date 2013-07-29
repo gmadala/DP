@@ -9,17 +9,17 @@ angular.module('nextgearWebApp')
     ];
 
     $scope.currentReports = [
-      { "title": 'Credit Availability Report (PDF)',
-        "date": 'MMDDYYYY',
-        "url": 'path/to/link'
+      { 'title': 'Credit Availability Report (PDF)',
+        'date': 'MMDDYYYY',
+        'url': 'path/to/link'
       },
-      { "title": "Receivable Detail (PDF)",
-        "date": "MMDDYYYY",
-      "url": "path/to/link"
+      { 'title': 'Receivable Detail (PDF)',
+        'date': 'MMDDYYYY',
+      'url': 'path/to/link'
       },
-      { "title": "Upcoming Curtailment / Payoff Quote (PDF)",
-        "date": "MMDDYYYY",
-        "url": "path/to/link"
+      { 'title': 'Upcoming Curtailment / Payoff Quote (PDF)',
+        'date': 'MMDDYYYY',
+        'url': 'path/to/link'
       }
     ];
   });

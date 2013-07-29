@@ -8,11 +8,9 @@ angular.module('nextgearWebApp')
       replace: true,
       transclude: true,
       scope: {
-          model: '=', editable: '='
-      },
-
-      link: function postLink(scope, element, attrs) {
-
+        model: '=',
+        editable: '='
       }
+      // link: function postLink(scope, element, attrs) {}
     };
   });

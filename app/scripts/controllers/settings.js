@@ -1,16 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('SettingsCtrl', function ($scope) {
-
-  })
+  .controller('SettingsCtrl', function() {})
   .controller('ProfileCtrl', function($scope) {
     $scope.profile = {
-      username: "test user",
-      password: "test pword",
-      secQuestion: "Where were you born?",
-      email: "dealername@company.com",
-      phone: "(555) 555-5555"
+      username: 'test user',
+      password: 'test pword',
+      secQuestion: 'Where were you born?',
+      email: 'dealername@company.com',
+      phone: '(555) 555-5555'
     };
 
     $scope.editable = false;
@@ -22,7 +20,7 @@ angular.module('nextgearWebApp')
   })
   .controller('BusinessCtrl', function($scope) {
     $scope.business = {
-      email: "dealername@company.com",
+      email: 'dealername@company.com',
       enhanced: true,
       pin: '',
     };
@@ -48,8 +46,8 @@ angular.module('nextgearWebApp')
   })
   .controller('NotificationCtrl', function($scope) {
     $scope.notification = {
-      title: "Weekly Upcoming Payments Report",
-      type: "email",
+      title: 'Weekly Upcoming Payments Report',
+      type: 'email',
       on: true
     };
   });
