@@ -89,7 +89,7 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        if ($rootScope.authToken === null && routeRequiresAuth(toState)) {
+        if (!angular.isDefined($rootScope.authToken) && routeRequiresAuth(toState)) {
           // not logged in, redirect to login screen
           $location.path('/login');
         }
