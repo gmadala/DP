@@ -21,6 +21,6 @@
     "angular-scenario": "~1.0.7"
   },
   "resolutions": {
-    "jquery": "1.10.2"
+    "jquery": "~1.x"
   }
 }
