@@ -1,10 +1,24 @@
 <nav role="navigation">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#/home/">Dashboard</a></li>
-        <li><a href="#/home/payments" >Payments</a></li>
-        <li><a href="#/home/scheduledPayments" >Scheduled Payments</a></li>
-        <li><a href="#/home/receipts" >Receipts</a></li>
-        <li><a href="#/home/floorplan" >Floorplan</a></li>
+        <li ng-class="{ 'active': $state.includes('home.dashboard') }">
+          <a href="#/home/">Dashboard</a>
+        </li>
+
+        <li ng-class="{ 'active': $state.includes('home.payments') }">
+          <a href="#/home/payments" >Payments</a>
+        </li>
+
+        <li ng-class="{ 'active': $state.includes('home.scheduledPayments') }">
+          <a href="#/home/scheduledPayments" >Scheduled Payments</a>
+        </li>
+
+        <li ng-class="{ 'active': $state.includes('home.receipts') }">
+          <a href="#/home/receipts" >Receipts</a>
+        </li>
+
+        <li ng-class="{ 'active': $state.includes('home.floorplan') }">
+          <a href="#/home/floorplan" >Floorplan</a>
+        </li>
     </ul>
 </nav>
 

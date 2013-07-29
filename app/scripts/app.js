@@ -69,7 +69,10 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap
         controller: 'SettingsCtrl'
       });
   })
-  .run(function($rootScope, $location) {
+  .run(function($rootScope, $location, $state, $stateParams) {
+
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
 
     /**
      * Returns true if the route requires authentication, false otherwise.
