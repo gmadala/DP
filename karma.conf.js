@@ -3,7 +3,7 @@ module.exports = function(karma) {
 	karma.set({
 
 		// base path, that will be used to resolve files and exclude
-		basePath: 'app',
+		basePath: '',
 
 		frameworks: ['jasmine'],
 
@@ -18,19 +18,24 @@ module.exports = function(karma) {
 
 		// list of files / patterns to load in the browser
 		files: [
-		  'components/angular/angular.js',
-		  'components/angular-mocks/angular-mocks.js',
-			'components/angular-strap/dist/angular-strap.js',
-			'components/ui-router/release/angular-ui-router.js',
-			'components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-		  'scripts/*.js',
-		  'scripts/**/*.js',
-		  '../test/spec/**/*.js'
+			'app/components/angular/angular.js',
+			'app/components/angular-mocks/angular-mocks.js',
+			'app/components/angular-strap/dist/angular-strap.js',
+			'app/components/ui-router/release/angular-ui-router.js',
+			'app/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+			'app/scripts/*.js',
+			'app/scripts/**/*.js',
+			'app/scripts/directives/**/*.html',
+			'test/spec/**/*.js'
 		],
 
 		preprocessors: {
-			'**/*.html': 'html2js',
-			'scripts/**/*.js': 'coverage'
+			'app/scripts/directives/**/*.html': 'html2js',
+			'app/scripts/**/*.js': 'coverage'
+		},
+
+		ngHtml2JsPreprocessor: {
+			stripPrefix: 'app/'
 		},
 
 		// list of files to exclude
@@ -42,7 +47,7 @@ module.exports = function(karma) {
 
 		coverageReporter: {
 			type: 'html',
-			dir: '../test/coverage/'
+			dir: 'test/coverage/'
 		},
 
 		// web server port
