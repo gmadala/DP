@@ -16,11 +16,6 @@ angular.module('nextgearWebApp')
 
     // TODO: Replace these mock variables with actual ones.
     $scope.forgot = false;
-    $scope.forgotten = 'password';
-
-    // TODO: Set which one is active based on which one user interacts with first?
-    $scope.pClass = $scope.forgotten === 'username' ? 'nxg-fade' : '';
-    $scope.uClass = $scope.forgotten === 'password' ? 'nxg-fade' : '';
 
     $scope.authenticate = function() {
       console.log('authenticating with: ' + $scope.credentials.username + '/' + $scope.credentials.password);
