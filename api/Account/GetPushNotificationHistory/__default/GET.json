@@ -1,0 +1,9 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "MessageBody": "MessageBody",
+        "SentToDeviceUnixDate": "SentToDeviceUnixDate",
+        "PushNotificationMessageId": "PushNotificationMessageId"
+    }
+}

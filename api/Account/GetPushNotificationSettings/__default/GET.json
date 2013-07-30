@@ -1,0 +1,10 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "ItemName": "ItemName",
+        "Enabled": true,
+        "TypeName": "TypeName",
+        "TypeId": "TypeId"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "MessageCategoryName": "MessageCategoryName",
+        "StockNumber": 2352,
+        "VehicleDetails": "VehicleDetails",
+        "FloorplanId": "FloorplanId"
+    }
+}
