@@ -1,47 +1,31 @@
 'use strict';
 
-describe('Controller: BusinesssearchCtrl', function () {
+describe('Controller: BusinessSearchCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
-  var BusinesssearchCtrl,
+  var BusinessSearchCtrl,
       scope,
       httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend) {
-    httpBackend = $httpBackend;
-    httpBackend.when('GET', 'views/home.html').respond('');
-    httpBackend.when('GET', 'views/home.dashboard.html').respond('');
-    httpBackend.when('GET', 'views/login.html').respond('');
-    httpBackend.when('GET', 'http://test.discoverdsc.com/MobileService/api/Dealer/SearchSeller').respond({
-      'Data': {
-        'DealerInfoList': [
-          {
-            'BusinessId': '1',
-            'BusinessNumber': '1',
-            'BusinessName': 'One',
-            'IsUniversalSource': true
-          }
-        ]
-      }
-    });
+  beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    BusinesssearchCtrl = $controller('BusinessSearchCtrl', {
+    BusinessSearchCtrl = $controller('BusinessSearchCtrl', {
       $scope: scope,
-      dialog: {}
+      dialog: {
+        close: function() {}
+      }
     });
   }));
 
-  it('should attach a list of results to the scope', function () {
-    expect(scope.results.length).toBe(0);
+  it('should attach a businessSearch to the scope', function () {
+    expect(scope.businessSearch).toBeDefined();
   });
 
-  it('should fetch additional results', function() {
-    expect(scope.loadMore).toBeDefined();
-    scope.loadMore();
-    httpBackend.flush();
-    expect(scope.results.length).toBe(1);
+  it('should attach a close to the scope', function () {
+    expect(scope.close).toBeDefined();
+    scope.close();
   });
 });
