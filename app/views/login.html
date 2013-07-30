@@ -36,7 +36,7 @@
     <h2 class="center">Forgot Your User Name or Password?</h2>
     <!-- TODO: toggle forms so that only one is active at a time -->
 
-    <div class="span4 {{ forgotPassword.$dirty && 'nxg-fade' || '' }} " >
+    <div class="span4" ng-class="{'nxg-fade' : forgotPassword.$dirty}">
         <h3>Forgot Your User Name?</h3>
 
         <p>Enter the email address associated with your account to receive your username via email.</p>
@@ -47,11 +47,11 @@
           <div ng-show="forgotUsername.email.$invalid && forgotUsername.email.$dirty">
             <p class="error">XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721</p>
           </div>
-          <button class="btn" ng-disabled="forgotUsername.email.$invalid">Submit</button>
+          <button class="btn" ng-disabled="forgotUsername.email.$invalid || forgotPassword.$dirty">Submit</button>
         </form>
     </div>
 
-    <div class="span4 offset1 {{ forgotUsername.$dirty && 'nxg-fade' || ''}}">
+    <div class="span4 offset1" ng-class="{'nxg-fade' : forgotUsername.$dirty}">
         <h3>Forgot Your Password?</h3>
 
         <p>Enter your username to receive a new password via email.</p>
@@ -62,7 +62,7 @@
             <p>{{ identity.securityQuestion }}</p>
             <input type="text" name="answer" ng-model="identity.securityAnswer" required />
           </div>
-          <button class="btn" ng-disabled="forgotPassword.username.$invalid" ng-click="onForgotPasswordSubmit()">Submit</button>
+          <button class="btn" ng-disabled="forgotPassword.username.$invalid || forgotUsername.$dirty" ng-click="onForgotPasswordSubmit()">Submit</button>
         </form>
     </div>
 </div>
