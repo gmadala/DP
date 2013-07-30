@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap'])
+angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap', 'infinite-scroll'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');

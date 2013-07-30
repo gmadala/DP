@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h3>Business Search</h3>
+</div>
+<div class="modal-body">
+  <label>Business Name or Number</label>
+  <input type="text">
+  <table>
+    <thead>
+      <tr>
+        <th>Business Name</th>
+        <th>Legal Name</th>
+        <th>Business #</th>
+        <th>City</th>
+        <th>State</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody infinite-scroll="loadMore()" infinite-scroll-distance="5">
+      <tr ng-repeat="result in results">
+        <td>{{result.BusinessId}}</td>
+        <td>{{result.BusinessName}}</td>
+        <td>{{result.BusinessNumber}}</td>
+        <td>Grand Prarie</td>
+        <td>TX</td>
+        <td><a href class="btn btn-mini">Select</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn btn-primary" >Cancel</button>
+</div>
