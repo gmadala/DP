@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('nxgUpcomingCalendar', function () {
     return {
       template: '<div ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
-      restrict: 'E',
+      restrict: 'AC',
       scope: {
         display: '=' // week or month
       },

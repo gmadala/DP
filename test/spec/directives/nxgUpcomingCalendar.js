@@ -9,7 +9,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
   beforeEach(inject(function ($rootScope, $compile) {
     scope = $rootScope.$new();
     scope.mode = 'week';
-    element = angular.element('<nxg-upcoming-calendar display="mode"></nxg-upcoming-calendar>');
+    element = angular.element('<div nxg-upcoming-calendar display="mode"></div>');
     element = $compile(element)(scope);
   }));
 
