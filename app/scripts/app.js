@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap', 'infinite-scroll'])
+angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap', 'infinite-scroll', 'ui.calendar'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -24,23 +24,28 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap
       })
       .state('home.dashboard', {
         url: '',
-        templateUrl: 'views/home.dashboard.html'
+        templateUrl: 'views/home.dashboard.html',
+        controller: 'DashboardCtrl'
       })
       .state('home.payments', {
         url: '/payments',
-        templateUrl: 'views/home.payments.html'
+        templateUrl: 'views/home.payments.html',
+        controller: 'PaymentsCtrl'
       })
       .state('home.scheduledPayments', {
         url: '/scheduledPayments',
-        templateUrl: 'views/home.scheduledpayments.html'
+        templateUrl: 'views/home.scheduledpayments.html',
+        controller: 'ScheduledCtrl'
       })
       .state('home.receipts', {
         url: '/receipts',
-        templateUrl: 'views/home.receipts.html'
+        templateUrl: 'views/home.receipts.html',
+        controller: 'ReceiptsCtrl'
       })
       .state('home.floorplan', {
         url: '/floorplan',
-        templateUrl: 'views/home.floorplan.html'
+        templateUrl: 'views/home.floorplan.html',
+        controller: 'FloorplanCtrl'
       })
 
       .state('floorcar', {
@@ -69,10 +74,7 @@ angular.module('nextgearWebApp', ['$strap.directives', 'ui.state', 'ui.bootstrap
         controller: 'SettingsCtrl'
       });
   })
-  .run(function($rootScope, $location, $state, $stateParams) {
-
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
+  .run(function($rootScope, $location) {
 
     /**
      * Returns true if the route requires authentication, false otherwise.

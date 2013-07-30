@@ -17,3 +17,7 @@
 .nxg-fade {
   @include opacity(50);
 }
+
+.row-item {
+  display: inline-block;
+}

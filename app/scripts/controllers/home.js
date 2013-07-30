@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('HomeCtrl', function($scope) {
+  .controller('HomeCtrl', function($scope, $state, $stateParams) {
+    $scope.$state = $state;
+    $scope.$stateParams = $stateParams;
+
     // dummy data
     $scope.payments = [{
       vin: 'CH224157',
