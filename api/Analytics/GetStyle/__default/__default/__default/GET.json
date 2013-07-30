@@ -2,6 +2,8 @@
     "Success": true,
     "Message": null,
     "Data": {
-        "StockNumber": 1353
+        "Results": [
+            "LX"
+        ]
     }
 }

@@ -1,0 +1,21 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "Referrals": [
+            "Referrals"
+        ],
+        "CreditType": [
+            "CreditType"
+        ],
+        "Titles": [
+            "Titles"
+        ],
+        "UnitsObtained": [
+            "UnitsObtained"
+        ],
+        "States": [
+            "States"
+        ]
+    }
+}

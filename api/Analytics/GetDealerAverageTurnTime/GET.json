@@ -1,0 +1,9 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+      "EOM_Date": 2013-07-30T17:36:38.134Z,
+      "EndOfMonthUnixData": 32,
+      "AvgTurnTimeForVehiclesCompleteIn60DaysPriorDaysPrior": 3
+    }
+}

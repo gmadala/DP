@@ -1,0 +1,15 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "DealerName": "Muffin Man",
+        "AddressLine1": "124 Druery Lane",
+        "AddressLine2": null,
+        "City": "Rochester",
+        "State": "NY",
+        "Zip": "14620",
+        "TokenId": "LSDGLKJHWIONLKGJH",
+        "Roleid": 12,
+        "Phone": "5855555555"
+    }
+}

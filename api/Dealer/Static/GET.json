@@ -1,12 +1,21 @@
 {
-    "ProductType": null,
-    "Colors": null,
-    "States": null,
-    "Locations": null,
-    "BankAccounts": null,
-    "LinesOfCredit": null,
-    "TitleLocationOptions": null,
     "Success": true,
     "Message": "Error retrieving dealer info.",
-    "Data": null
+    "Data": {
+        "ProductType": "Type1, Type2, Type3",
+        "Colors": "Red, Green, Blue, Purple, Blue, Bisque",
+        "States": "NY, NH, NB",
+        "Locations": "Place1, Place2, Place3, Place4",
+        "BankAccounts": "Bank1, Bank2, Bank3",
+        "LinesOfCredit": "LinesOfCredit1, LinesOfCredit2, LinesOfCredit3",
+        "TitleLocationOptions": [
+            {
+                "Name": "Dealer N Ame",
+                "ResultingtitleLocationid": 243,
+                "TitleInfoenabled": true,
+                "TitleInfoRequired": true,
+                "DisplayOrder": 2
+            }
+        ]
+    }
 }

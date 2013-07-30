@@ -1,0 +1,33 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "Results": [
+            {
+                "Make": "Make",
+                "Model": "Model",
+                "NinetyFifthPercentileTurnTime": 0.235
+            },
+            {
+                "Make": "Make",
+                "Model": "Model",
+                "NinetyFifthPercentileTurnTime": 0.235
+            },
+            {
+                "Make": "Make",
+                "Model": "Model",
+                "NinetyFifthPercentileTurnTime": 0.235
+            },
+            {
+                "Make": "Make",
+                "Model": "Model",
+                "NinetyFifthPercentileTurnTime": 0.235
+            },
+            {
+                "Make": "Make",
+                "Model": "Model",
+                "NinetyFifthPercentileTurnTime": 0.235
+            }
+        ]
+    }
+}

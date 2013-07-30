@@ -1,0 +1,36 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "Results": [
+            {
+                "AvgMarginBelowBookValue": 0.34,
+                "AvgBookValue": 0.235,
+                "AvgBookPurchasePrice": 0.235,
+                "SellerName": "Usedcars Gallore",
+                "NumVehiclesAnalyzed": 23
+            },
+            {
+                "AvgMarginBelowBookValue": 0.34,
+                "AvgBookValue": 0.235,
+                "AvgBookPurchasePrice": 0.235,
+                "SellerName": "Usedcars Gallore",
+                "NumVehiclesAnalyzed": 23
+            },
+            {
+                "AvgMarginBelowBookValue": 0.34,
+                "AvgBookValue": 0.235,
+                "AvgBookPurchasePrice": 0.235,
+                "SellerName": "Usedcars Gallore",
+                "NumVehiclesAnalyzed": 23
+            },
+            {
+                "AvgMarginBelowBookValue": 0.34,
+                "AvgBookValue": 0.235,
+                "AvgBookPurchasePrice": 0.235,
+                "SellerName": "Usedcars Gallore",
+                "NumVehiclesAnalyzed": 23
+            }
+        ]
+    }
+}

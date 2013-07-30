@@ -1,0 +1,21 @@
+{
+    "Success": true,
+    "Message": "Error retrieving dealer info.",
+    "Data": {
+        "ApprovedFloorplans": 3,
+        "AveragePurchasePrice": 34390.00,
+        "TotalApprovedPurchasePrice": 5334390.00,
+        "TotalApprovedFinanceAmount": 15334390.00,
+        "TotalApprovedBlackbookValue": 1334390.00,
+        "TotalOutstandingPrincipal": 234390.00,
+        "PendingFloorplans": 34,
+        "TotalPendingPurchasePrice": 34904384.00,
+        "TotalPendingBlackBookPrice": 7604384.00,
+        "TotalOutstandingCredit": 604384.00,
+        "TotalAvailableCredit": 4234390.00,
+        "LastPaymentUnitDate": 346658,
+        "LastPaymentAmount": 34653.00,
+        "TotalPaymentInLast7Days": 34653.00,
+        "ReserveFundsBalance": 34653.00
+    }
+}
