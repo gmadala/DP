@@ -11,7 +11,7 @@
  * @see http://localhost:9000/?mock#/floorcar
  */
 angular.module('nextgearWebApp')
-  .factory('BusinessSearch', function($http, apiBaseUrl) {
+  .factory('BusinessSearch', function($http, nxgConfig) {
     var BusinessSearch = function() {
       this.results = [];
       this.loading = false;
@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
       }
       this.loading = true;
 
-      $http.get(apiBaseUrl.get() + '/Dealer/SearchSeller').success(function(result) {
+      $http.get(nxgConfig.apiBase + '/Dealer/SearchSeller').success(function(result) {
         this.results = this.results.concat(result.Data.DealerInfoList);
         this.loading = false;
       }.bind(this));

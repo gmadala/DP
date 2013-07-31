@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($rootScope, $scope, $http, $location, Base64, apiBaseUrl) {
+  .controller('LoginCtrl', function($rootScope, $scope, $http, $location, Base64, nxgConfig) {
 
     $scope.credentials = {
       username: '',
@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
       console.log('authenticating with: ' + $scope.credentials.username + '/' + $scope.credentials.password);
 
       $http.post(
-        apiBaseUrl.get() + '/UserAccount/Authenticate/',
+        nxgConfig.apiBase + '/UserAccount/Authenticate/',
         {
           Authorization: 'CT ' + Base64.encode($scope.credentials.username + ':' + $scope.credentials.password)
         })

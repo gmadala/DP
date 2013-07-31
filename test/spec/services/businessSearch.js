@@ -12,7 +12,7 @@ describe('Service: BusinessSearch', function () {
   beforeEach(inject(function (_BusinessSearch_, $httpBackend) {
     BusinessSearch = new _BusinessSearch_();
     httpBackend = $httpBackend;
-    httpBackend.when('GET', 'http://test.discoverdsc.com/MobileService/api/Dealer/SearchSeller').respond({
+    httpBackend.when('GET', '/Dealer/SearchSeller').respond({
       'Data': {
         'DealerInfoList': [
           {
