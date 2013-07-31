@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
       $scope.editable = false;
     };
   })
-  .controller('BusinessCtrl', function($scope) {
+  .controller('BusinessCtrl', function($scope, $dialog) {
     $scope.business = {
       email: 'dealername@company.com',
       enhanced: true,
@@ -27,10 +27,42 @@ angular.module('nextgearWebApp')
 
     $scope.editable = false;
 
+    $scope.confirmDisableEnhanced = function() {
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/confirmDisableEnhanced.html',
+        controller: 'ConfirmDisableCtrl',
+      };
+
+      $dialog.dialog(dialogOptions).open();
+    }
+
+    $scope.$watch('business.enhanced', function(newVal) {
+      if (newVal == false) {
+        $scope.confirmDisableEnhanced();
+      }
+    });
+
     $scope.save = function() {
       // TODO: update model with new data
       $scope.editable = false;
     };
+
+
+  })
+  .controller('ConfirmDisableCtrl', function($scope, dialog) {
+    $scope.disableEnhanced = function() {
+      // TODO: Clear pin #
+      // TODO: Update business.enhanced to be false
+      dialog.close();
+    }
+
+    $scope.noThanks = function() {
+      // TODO: set business.enhanced back to true
+      dialog.close();
+    }
   })
   .controller('TitleCtrl', function($scope) {
     $scope.title = {
