@@ -37,10 +37,10 @@ angular.module('nextgearWebApp')
       };
 
       $dialog.dialog(dialogOptions).open();
-    }
+    };
 
     $scope.$watch('business.enhanced', function(newVal) {
-      if (newVal == false) {
+      if (newVal === false) {
         $scope.confirmDisableEnhanced();
       }
     });
@@ -57,12 +57,12 @@ angular.module('nextgearWebApp')
       // TODO: Clear pin #
       // TODO: Update business.enhanced to be false
       dialog.close();
-    }
+    };
 
     $scope.noThanks = function() {
       // TODO: set business.enhanced back to true
       dialog.close();
-    }
+    };
   })
   .controller('TitleCtrl', function($scope) {
     $scope.title = {
