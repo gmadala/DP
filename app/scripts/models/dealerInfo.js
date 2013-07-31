@@ -1,9 +1,9 @@
 "use strict";
 
 angular.module('nextgearWebApp')
-  .factory('DealerInfo', function($resource, apiBaseUrl) {
+  .factory('DealerInfo', function($resource, nxgConfig) {
 
-      var DealerInfo = $resource(apiBaseUrl.get() + '/Dealer/Info/');
+      var DealerInfo = $resource(nxgConfig.apiBase + '/Dealer/Info/');
 
       return DealerInfo;
   });

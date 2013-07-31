@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($rootScope, $scope, $http, $location, Base64, nxgConfig) {
+  .controller('LoginCtrl', function($rootScope, $scope, $http, $location, Base64, nxgConfig, DealerInfo) {
 
     $scope.credentials = {
       username: '',
