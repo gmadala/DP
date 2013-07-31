@@ -8,3 +8,9 @@ Directory structure:
 Files:
 
   Either real call response data, manually generated data based on specs doc, or the call description from specs doc.
+
+- call
+  description
+  - parameter
+    call
+  - specific param response

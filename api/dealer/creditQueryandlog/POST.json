@@ -1,0 +1,17 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "LinesOfCredit": [
+            {
+                "CreditType": "Retail",
+                "ApprovedCredit": 15500000,
+                "TemporaryCredit": 0,
+                "TotalCredit": 15500000,
+                "Outstanding": 8769843.81,
+                "CreditAvailable": 0,
+                "TemporaryExpiration": ""
+            }
+        ]
+    }
+}
