@@ -1,0 +1,17 @@
+
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+      "PaymentMethods": "Dictionary<int, string>",
+      "Receipts": [
+            {
+                "ReceiptNumber": 2353,
+                "StockNumber": 3252,
+                "Vin": "ADGLKJSHGLKJGRHS",
+                "CheckNumber": "ALKDFJHSLKGJHgs",
+                "paymentDate": 243598
+            }
+        ]
+    }
+}
