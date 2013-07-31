@@ -26,14 +26,14 @@ angular.module('nextgearWebApp')
           Authorization: 'CT ' + Base64.encode($scope.credentials.username + ':' + $scope.credentials.password)
         })
         .success(function(response) {
-          if (response.Success) {
-            console.log(['Login success']);
-            $rootScope.authToken = response.Data;
-            $location.path('/home');
-          }
-          else {
-            $rootScope.authToken = null;
-          }
+            if (response.Success) {
+                console.log(['Login success']);
+                DealerInfo.isLogged = true;
+                $rootScope.$broadcast("AuthenticationSuccess");
+                // set a default Authorization header with the authentication token
+                $http.defaults.headers.common.Authorization = "CT " + response.Data;
+                $location.path('/home');
+            }
         })
         .error(function(error) {
           console.error('Login error', error);

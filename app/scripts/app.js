@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll', 'ui.calendar'])
+angular.module('nextgearWebApp', ['ngResource', 'ui.state', 'ui.bootstrap', 'infinite-scroll', 'ui.calendar'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -74,7 +74,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
         controller: 'SettingsCtrl'
       });
   })
-  .run(function($rootScope, $location) {
+  .run(function($rootScope, $location, DealerInfo) {
 
     /**
      * Returns true if the route requires authentication, false otherwise.
@@ -94,7 +94,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        if (!angular.isDefined($rootScope.authToken) && routeRequiresAuth(toState)) {
+        if (!DealerInfo.isLogged && routeRequiresAuth(toState)) {
           // not logged in, redirect to login screen
           $location.path('/login');
         }

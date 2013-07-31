@@ -28,7 +28,7 @@
     <!-- *************************************************************
         Add your site or application content here
     ************************************************************* -->
-    <div class="container-fluid" nav-bar ng-show="$root.authToken != null"></div>
+    <div class="container-fluid" nav-bar ng-show="showNavbar"></div>
     <div class="container-fluid" ui-view></div>
 
     <!-- build:js scripts/components.js -->
@@ -67,6 +67,7 @@
     <script src="scripts/directives/navBar/navBar.js"></script>
     <script src="scripts/directives/nxgInput.js"></script>
     <script src="scripts/directives/nxgUpcomingCalendar.js"></script>
+    <script src="scripts/models/dealerInfo.js"></script>
     <!-- endbuild -->
 
     <!-- build:remove unused -->
