@@ -34,7 +34,7 @@ angular.module('nextgearWebApp')
           // https://code.google.com/p/fullcalendar/issues/detail?id=293
           // TODO: test this to make sure it doesn't break the ng-model support in the calendar
           $scope.cal.fullCalendar('destroy');
-          $scope.cal.fullCalendar(angular.extend({}, $scope.options, {
+          $scope.cal.fullCalendar(angular.extend($scope.options, {
             weekends: (newValue === 'month'),
             defaultView: newValue === 'month' ? newValue : 'basicWeek'
           }));

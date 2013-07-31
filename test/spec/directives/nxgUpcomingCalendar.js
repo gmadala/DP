@@ -25,13 +25,14 @@ describe('Directive: nxgUpcomingCalendar', function () {
     expect(element.scope().options).toBeDefined();
   });
 
-  it('should tell the calendar to change views when display setting changes in the parent scope', function () {
+  it('should tell the calendar to rebuild when display setting changes in the parent scope', function () {
     spyOn(element.scope().cal, 'fullCalendar');
 
     scope.$apply(function () {
       scope.mode = 'month';
     });
-    expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith('changeView', 'month');
+    expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
+    expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith(element.scope().options);
   });
 
 });
