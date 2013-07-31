@@ -36,7 +36,15 @@ angular.module('nextgearWebApp')
         controller: 'ConfirmDisableCtrl',
       };
 
-      $dialog.dialog(dialogOptions).open();
+      $dialog.dialog(dialogOptions).open().then(function(result){
+        if (result) {
+          // TODO: Change variables on server
+          $scope.business.pin = '';
+          $scope.business.enhanced = false;
+        } else {
+          $scope.business.enhanced = true;
+        }
+      });
     };
 
     $scope.$watch('business.enhanced', function(newVal) {
@@ -49,19 +57,10 @@ angular.module('nextgearWebApp')
       // TODO: update model with new data
       $scope.editable = false;
     };
-
-
   })
   .controller('ConfirmDisableCtrl', function($scope, dialog) {
-    $scope.disableEnhanced = function() {
-      // TODO: Clear pin #
-      // TODO: Update business.enhanced to be false
-      dialog.close();
-    };
-
-    $scope.noThanks = function() {
-      // TODO: set business.enhanced back to true
-      dialog.close();
+    $scope.close = function(result) {
+      dialog.close(result);
     };
   })
   .controller('TitleCtrl', function($scope) {
