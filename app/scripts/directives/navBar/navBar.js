@@ -17,9 +17,9 @@ angular.module('nextgearWebApp')
 
       // fetch the dealer info every time there's a new session (user could have changed)
       $scope.$on("AuthenticationSuccess", function() {
-          DealerInfo.get(function(results) {
-              $scope.dealerInfo = results.Data;
-          });
+          DealerInfo.refreshInfo().then(function(results) {
+              $scope.dealerInfo = results;
+          })
           $scope.showNavbar = true;
       });
   });

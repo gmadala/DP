@@ -1,9 +1,17 @@
 "use strict";
 
 angular.module('nextgearWebApp')
-  .factory('DealerInfo', function($resource, nxgConfig) {
+  .service('DealerInfo', function(api) {
+      var info = null;
 
-      var DealerInfo = $resource(nxgConfig.apiBase + '/Dealer/Info/');
+      function refreshInfo() {
+          info = api.request('GET', '/Dealer/Info/');
+          return info;
+      }
 
-      return DealerInfo;
+      return {
+          isLogged: false,
+          info: info,
+          refreshInfo: refreshInfo
+      }
   });
