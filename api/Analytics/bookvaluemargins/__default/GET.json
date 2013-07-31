@@ -1,0 +1,167 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": [
+        {
+            "AvgMarginBelowBookValue": 185,
+            "AvgBookValue": 11965,
+            "AvgPurchasePrice": 11780,
+            "SellerName": "ERAC of St. Louis  DR GROUP 01",
+            "NumVehiclesAnalyzed": 5
+        },
+        {
+            "AvgMarginBelowBookValue": -315,
+            "AvgBookValue": 8525,
+            "AvgPurchasePrice": 8840,
+            "SellerName": "Manheim Arena Illinois",
+            "NumVehiclesAnalyzed": 2
+        },
+        {
+            "AvgMarginBelowBookValue": -630,
+            "AvgBookValue": 12450,
+            "AvgPurchasePrice": 13080,
+            "SellerName": "Manheim Nashville",
+            "NumVehiclesAnalyzed": 2
+        },
+        {
+            "AvgMarginBelowBookValue": -667.5,
+            "AvgBookValue": 10850,
+            "AvgPurchasePrice": 11517.5,
+            "SellerName": "Houston Auto Auction, Inc.",
+            "NumVehiclesAnalyzed": 2
+        },
+        {
+            "AvgMarginBelowBookValue": -742.6,
+            "AvgBookValue": 9695.83,
+            "AvgPurchasePrice": 10438.44,
+            "SellerName": "Manheim Dallas",
+            "NumVehiclesAnalyzed": 48
+        },
+        {
+            "AvgMarginBelowBookValue": -902.14,
+            "AvgBookValue": 8917.86,
+            "AvgPurchasePrice": 9820,
+            "SellerName": "Manheim Orlando",
+            "NumVehiclesAnalyzed": 7
+        },
+        {
+            "AvgMarginBelowBookValue": -978.13,
+            "AvgBookValue": 9215.63,
+            "AvgPurchasePrice": 10193.75,
+            "SellerName": "Manheim Chicago",
+            "NumVehiclesAnalyzed": 8
+        },
+        {
+            "AvgMarginBelowBookValue": -986.76,
+            "AvgBookValue": 8391.18,
+            "AvgPurchasePrice": 9377.94,
+            "SellerName": "Manheim Texas Hobby",
+            "NumVehiclesAnalyzed": 17
+        },
+        {
+            "AvgMarginBelowBookValue": -995,
+            "AvgBookValue": 9662.5,
+            "AvgPurchasePrice": 10657.5,
+            "SellerName": "Manheim Milwaukee",
+            "NumVehiclesAnalyzed": 6
+        },
+        {
+            "AvgMarginBelowBookValue": -1185.43,
+            "AvgBookValue": 9538.04,
+            "AvgPurchasePrice": 10723.48,
+            "SellerName": "Manheim San Antonio",
+            "NumVehiclesAnalyzed": 23
+        },
+        {
+            "AvgMarginBelowBookValue": -1206.25,
+            "AvgBookValue": 7793.75,
+            "AvgPurchasePrice": 9000,
+            "SellerName": "Manheim Tampa",
+            "NumVehiclesAnalyzed": 4
+        },
+        {
+            "AvgMarginBelowBookValue": -1245,
+            "AvgBookValue": 9418.75,
+            "AvgPurchasePrice": 10663.75,
+            "SellerName": "Manheim Lakeland",
+            "NumVehiclesAnalyzed": 4
+        },
+        {
+            "AvgMarginBelowBookValue": -1260.59,
+            "AvgBookValue": 8652.94,
+            "AvgPurchasePrice": 9913.53,
+            "SellerName": "Manheim Central Florida",
+            "NumVehiclesAnalyzed": 17
+        },
+        {
+            "AvgMarginBelowBookValue": -1470,
+            "AvgBookValue": 9710,
+            "AvgPurchasePrice": 11180,
+            "SellerName": "Manheim Dallas-Fort Worth",
+            "NumVehiclesAnalyzed": 5
+        },
+        {
+            "AvgMarginBelowBookValue": -1522.5,
+            "AvgBookValue": 11650,
+            "AvgPurchasePrice": 13172.5,
+            "SellerName": "ADESA Los Angeles",
+            "NumVehiclesAnalyzed": 2
+        },
+        {
+            "AvgMarginBelowBookValue": -1588.8,
+            "AvgBookValue": 9294.28,
+            "AvgPurchasePrice": 10883.08,
+            "SellerName": "MAFS Dallas ",
+            "NumVehiclesAnalyzed": 94
+        },
+        {
+            "AvgMarginBelowBookValue": -1603.75,
+            "AvgBookValue": 11468.75,
+            "AvgPurchasePrice": 13072.5,
+            "SellerName": "1st Choice Auto Auction Inc",
+            "NumVehiclesAnalyzed": 4
+        },
+        {
+            "AvgMarginBelowBookValue": -1658.42,
+            "AvgBookValue": 9501.32,
+            "AvgPurchasePrice": 11159.74,
+            "SellerName": "ADESA Dallas",
+            "NumVehiclesAnalyzed": 19
+        },
+        {
+            "AvgMarginBelowBookValue": -1721.67,
+            "AvgBookValue": 9880.56,
+            "AvgPurchasePrice": 11602.22,
+            "SellerName": "Metro Auto Auction Dallas",
+            "NumVehiclesAnalyzed": 18
+        },
+        {
+            "AvgMarginBelowBookValue": -1755,
+            "AvgBookValue": 10429.55,
+            "AvgPurchasePrice": 12184.55,
+            "SellerName": "Alliance Auto Auction of Waco",
+            "NumVehiclesAnalyzed": 11
+        },
+        {
+            "AvgMarginBelowBookValue": -1863.33,
+            "AvgBookValue": 6683.33,
+            "AvgPurchasePrice": 8546.67,
+            "SellerName": "ABC Orlando",
+            "NumVehiclesAnalyzed": 3
+        },
+        {
+            "AvgMarginBelowBookValue": -2042.29,
+            "AvgBookValue": 7337.5,
+            "AvgPurchasePrice": 9379.79,
+            "SellerName": "Manheim Houston",
+            "NumVehiclesAnalyzed": 24
+        },
+        {
+            "AvgMarginBelowBookValue": -2275,
+            "AvgBookValue": 9741.67,
+            "AvgPurchasePrice": 12016.67,
+            "SellerName": "OpenLane",
+            "NumVehiclesAnalyzed": 3
+        }
+    ]
+}

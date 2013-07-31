@@ -1,0 +1,10 @@
+The goal of this structure is to avoid the need for referencing an API doc AND this structure. Everything here mirrors exactly the API document, except for the added actual response data. Layout of data and information is as follows:
+
+Directory structure:
+
+  Main folders follow API URL structure
+  Secondary folders are either a Parameter Name, Example Parameter Data, or a __default folder for mock data system.
+
+Files:
+
+  Either real call response data, manually generated data based on specs doc, or the call description from specs doc.

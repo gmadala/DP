@@ -1,0 +1,50 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": [
+        {
+            "EndOfMonthUnixDate": 1375263415,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 15
+        },
+        {
+            "EndOfMonthUnixDate": 1372550400,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 13
+        },
+        {
+            "EndOfMonthUnixDate": 1369958400,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1367280000,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1364688000,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1362009600,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1359590400,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1356912000,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1354233600,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1351641600,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        },
+        {
+            "EndOfMonthUnixDate": 1348963200,
+            "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
+        }
+    ]
+}

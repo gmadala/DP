@@ -5,6 +5,6 @@
         "ItemName": "ItemName",
         "Enabled": true,
         "TypeName": "TypeName",
-        "TypeId": "TypeId"
+        "TypeId": 2
     }
 }
