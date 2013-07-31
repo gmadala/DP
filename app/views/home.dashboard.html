@@ -76,7 +76,7 @@
     </div>
     <div class="span3 summary unapplied-funds">
         <h3>Unapplied Funds</h3>
-        <a class="more" ng-click="openModal()">Request Payout</a>
+        <a class="more" ng-click="openRequestPayout()">Request Payout</a>
     </div>
     <div class="span2 summary floorplan">
         <h3>Floorplan</h3>
@@ -87,44 +87,3 @@
         <a class="more" href="#/home/receipts">View All Receipts</a>
     </div>
 </section>
-
-<!-- TODO: Pull out into partial? -->
-<section modal="shouldBeOpen" close="closeModal()">
-    <div class="modal-header">
-        <h3>Request Unapplied Funds Payout
-            <button class="btn btn-mini cancel" ng-click="closeModal()">X</button>
-        </h3>
-    </div>
-
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="control-group">
-                <label class="control-label">Unapplied Funds</label>
-                <div class="controls">$2,837.11</div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">Total Available</label>
-                <div class="controls">$2,837.11</div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="payoutAmt">Payout Request Amount</label>
-                <div class="controls">
-                    <input type="text" id="payoutAmt" placeholder="$0.00"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="payoutBankAcct">Bank Account for Payout</label>
-                <div class="controls">
-                    <select id="payoutBankAcct">
-                        <option>PNC Bank - Main St.</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button class="btn btn-small left-align" type="submit">Request Payout</button>
-            </div>
-        </form>
-    </div>
-</section>
-

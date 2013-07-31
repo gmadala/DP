@@ -1,0 +1,33 @@
+<h3 class="modal-header">Request Unapplied Funds Payout</h3>
+
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Unapplied Funds</label>
+            <div class="controls">$2,837.11</div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Total Available</label>
+            <div class="controls">$2,837.11</div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="payoutAmt">Payout Request Amount</label>
+            <div class="controls">
+                <input type="text" id="payoutAmt" placeholder="$0.00"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="payoutBankAcct">Bank Account for Payout</label>
+            <div class="controls">
+                <select id="payoutBankAcct">
+                    <option>PNC Bank - Main St.</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-small left-align" type="submit" ng-click="close()">Request Payout</button>
+        </div>
+    </form>
+</div>
+
