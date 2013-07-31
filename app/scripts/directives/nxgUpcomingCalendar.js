@@ -14,11 +14,25 @@ angular.module('nextgearWebApp')
         ];
 
         $scope.options = {
-          contentHeight: 150
+          contentHeight: 150,
+          titleFormat: {
+            month: 'MMMM yyyy',
+            week: ''
+          },
+          columnFormat: {
+            month: 'ddd',
+            week: 'dddd\nMMMM d'
+          }
         };
 
         $scope.$watch('display', function(newValue) {
-          $scope.cal.fullCalendar('changeView', newValue === 'month' ? newValue : 'basicWeek');
+          // unfortunately fullCalendar does not have live option setter support, see
+          // https://code.google.com/p/fullcalendar/issues/detail?id=293
+          $scope.cal.fullCalendar('destroy');
+          $scope.cal.fullCalendar(angular.extend({}, $scope.options, {
+            weekends: (newValue === 'month'),
+            defaultView: newValue === 'month' ? newValue : 'basicWeek'
+          }));
         });
       }
     };
