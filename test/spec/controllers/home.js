@@ -32,10 +32,6 @@ describe('Controller: HomeCtrl', function () {
     expect(scope.schPayments.length).toBe(1);
   });
 
-  it('should attach receipts to the scope', function () {
-    expect(scope.receipts.length).toBe(1);
-  });
-
   it('should attach floorplan to the scope', function () {
     expect(scope.floorplan.length).toBe(1);
   });

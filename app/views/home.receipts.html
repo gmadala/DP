@@ -45,44 +45,44 @@
 <!-- TODO: Add directives for payments and fees. -->
 <section class="receipts-list">
     <ul class="unstyled">
-        <li ng-repeat="rec in receipts">
+        <li ng-repeat="receipt in receipts">
             <header class="row-fluid">
-                <div class="span2"><strong>vin </strong><span>{{ rec.vin }}</span></div>
-                <div class="span3"> {{ rec.vehicle }}</div>
-                <div class="span2"><strong>stock # </strong> {{ rec.stockNo }}</div>
-                <div class="span2"><strong>status </strong> {{ rec.status }}</div>
+                <div class="span2"><strong>vin </strong><span>{{ receipt.vin }}</span></div>
+                <div class="span3"> {{ receipt.vehicle }}</div>
+                <div class="span2"><strong>stock # </strong> {{ receipt.stockNo }}</div>
+                <div class="span2"><strong>status </strong> {{ receipt.status }}</div>
             </header>
             <div class="row-fluid">
                 <div class="span8">
                     <div class="row-fluid">
                         <div class="span3">
-                            <strong>Payment Date </strong><p> {{ rec.payDate }} </p>
+                            <strong>Payment Date </strong><p> {{ receipt.CreateDate * 1000 | date }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Amt Applied: </strong><p> {{ rec.applied | currency }} </p>
+                            <strong>Amt Applied: </strong><p> {{ receipt.AmountApplied | currency }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Amt Provided: </strong><p> {{ rec.provided | currency }} </p>
+                            <strong>Amt Provided: </strong><p> {{ receipt.AmountProvided | currency }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Receipt Number: </strong><p> {{ rec.receiptNo }} </p>
+                            <strong>Receipt Number: </strong><p> {{ receipt.TransactionNumber }} </p>
                         </div>
                         </div>
                     <div class="row-fluid">
                         <div class="span3">
-                            <strong>Payment: </strong><p> {{ rec.payment }} </p>
+                            <strong>Payment: </strong><p> {{ receipt.PaymentMethod }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Check #: </strong><p> {{ rec.checkNo }} </p>
+                            <strong>Check #: </strong><p> {{ receipt.CheckNumber }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Payee Desc: </strong><p> {{ rec.payee }} </p>
+                            <strong>Payee Desc: </strong><p> {{ receipt.PayeeDescription }} </p>
                         </div>
                     </div>
                 </div>
                 <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
                 <div class="span2 offset2">
-                    <button class="btn btn-small btn-block">Receipt</button>
+                    <a ng-href="/receipt/view/{{receipt.FinancialTransactionId}}" class="btn btn-small btn-block">Receipt</a>
                 </div>
             </div>
         </li>
