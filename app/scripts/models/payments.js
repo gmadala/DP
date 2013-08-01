@@ -41,6 +41,17 @@ angular.module('nextgearWebApp')
               }
             };
           });
+      },
+      fetchSummary: function() {
+        // Placeholder until I can checkout Lucas' wireframe service mapping document
+        return $q.all([]).then(function() {
+          return {
+            overdue:     {quantity: 1, amount: 3432.32},
+            dueToday:    {quantity: 1, amount: 2859.02},
+            thisWeek:    {quantity: 8, amount: 53592.71},
+            accountFees: {quantity: 1, amount: 85.00}
+          };
+        });
       }
     };
   });

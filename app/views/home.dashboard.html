@@ -10,29 +10,33 @@
             <ul>
                 <li>
                     <a class="more" href="#/home/payments">
-                        <span class="item-total">4</span>
-                        Overdue
+                        <span class="item-total">{{summary.overdue.quantity}}</span>
+                        <span ng-pluralize count="summary.overdue.quantity" when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}"></span>
+                        <span> - {{summary.overdue.amount | currency}}</span>
                         <i class="icon-arrow-right"></i>
                     </a>
                 </li>
                 <li>
                     <a class="more" href="#/home/payments">
-                        <span class="item-total">1</span>
-                        Due Today
+                        <span class="item-total">{{summary.dueToday.quantity}}</span>
+                        <span ng-pluralize count="summary.dueToday.quantity" when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}"></span>
+                        <span> - {{summary.dueToday.amount | currency}}</span>
                         <i class="icon-arrow-right"></i>
                     </a>
                 </li>
                 <li>
                     <a class="more" href="#/home/payments">
-                        <span class="item-total">8</span>
-                        Upcoming
+                        <span class="item-total">{{summary.thisWeek.quantity}}</span>
+                        <span ng-pluralize count="summary.thisWeek.quantity" when="{'1': 'Payment THIS WEEK', 'other': 'Payments THIS WEEK'}"></span>
+                        <span> - {{summary.thisWeek.amount | currency}}</span>
                         <i class="icon-arrow-right"></i>
                     </a>
                 </li>
                 <li>
                     <a class="more" href="#/home/payments">
-                        <span class="item-total">1</span>
-                        Account Fees
+                        <span class="item-total">{{summary.accountFees.quantity}}</span>
+                        <span ng-pluralize count="summary.accountFees.quantity" when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
+                        <span> - {{summary.accountFees.amount | currency}}</span>
                         <i class="icon-arrow-right"></i>
                     </a>
                 </li>
