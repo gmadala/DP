@@ -65,7 +65,7 @@
                 </tr>
             </table>
             <tfoot>
-            <a class="more" href="#/home/payments">View All Payments<i class="icon-arrow-right"></i></a>
+            <a class="more" href="#/home/payments">View All Payments <i class="icon-arrow-right"></i></a>
             </tfoot>
         </div>
         <div class="span4 graphic">
@@ -81,14 +81,18 @@
     </div>
     <div class="span3 summary unapplied-funds">
         <h3>Unapplied Funds</h3>
-        <a class="more" ng-click="openRequestPayout()">Request Payout</a>
+        <h4>Unapplied Funds</h4>
+        <p>{{ unappliedFunds | currency }}</p>
+        <h4>Total Available</h4>
+        <p>{{ totalAvailable | currency }}</p>
+        <a class="more" ng-click="openRequestPayout()">Request Payout<i class="icon-arrow-right"></i></a>
     </div>
     <div class="span2 summary floorplan">
         <h3>Floorplan</h3>
-        <a class="more" href="#/home/floorplan">View Floorplan</a>
+        <a class="more" href="#/home/floorplan">View Floorplan<i class="icon-arrow-right"></i></a>
     </div>
     <div class="span3 summary receipts">
         <h3>Most Recent Receipts</h3>
-        <a class="more" href="#/home/receipts">View All Receipts</a>
+        <a class="more" href="#/home/receipts">View All Receipts<i class="icon-arrow-right"></i></a>
     </div>
 </section>

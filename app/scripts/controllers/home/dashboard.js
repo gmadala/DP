@@ -4,6 +4,9 @@ angular.module('nextgearWebApp')
   .controller('DashboardCtrl', function($scope, $dialog) {
     $scope.viewMode = 'week';
 
+    $scope.unappliedFunds = 2641.00;
+    $scope.totalAvailable = 2641.90;
+
     $scope.openRequestPayout = function() {
       var dialogOptions = {
         backdrop: true,
