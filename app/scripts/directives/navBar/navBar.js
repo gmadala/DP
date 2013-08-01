@@ -18,6 +18,7 @@ angular.module('nextgearWebApp')
     $scope.$on("AuthenticationSuccess", function() {
       User.refreshInfo().then(function(results) {
         $scope.dealerInfo = results;
+        $scope.isDealer = User.isDealer();
       })
       $scope.showNavbar = true;
     });

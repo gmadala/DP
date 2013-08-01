@@ -1,5 +1,4 @@
 <header>
-    <button ng-click="isDealer=!isDealer">Toggle Auction/Dealer</button> <span>{{ userType }}</span>
     <div class="row-fluid">
         <div class="span2 logo">[NEXTGEAR LOGO]</div>
 
@@ -13,8 +12,8 @@
                 <div class="span12 nxg-settings-drop">
 
                     <div>
-                        <h6>{{dealerInfo.BusinessName}} <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
-                        <p class="small" ng-show="isDealer">dealer #76543</p>
+                        <h6>{{ dealerInfo.BusinessName }} <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
+                        <p class="small" ng-show="isDealer">{{ dealerInfo.BusinessNumber }}</p>
                     </div>
                     <!-- TODO: Add ng-show so its only visible for dealers -->
                     <div class="nxg-settings" ng-show="showSettings">
@@ -32,9 +31,9 @@
     <div class="row-fluid">
         <nav role="navigation" class="span9">
             <a href="#/home">Home</a>
-            <a href="#/floorcar">Floor a Car</a>
+            <a ng-show="isDealer" href="#/floorcar">Floor a Car</a>
             <a href="#/reports">View a Report</a>
-            <a href="#/analytics">View Analytics</a>
+            <a ng-show="isDealer" href="#/analytics">View Analytics</a>
             <a href="#/documents">Documents</a>
         </nav>
 
