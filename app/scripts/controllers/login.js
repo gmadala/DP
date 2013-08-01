@@ -23,11 +23,11 @@ angular.module('nextgearWebApp')
       console.log('authenticating with: ' + $scope.credentials.username + '/' + $scope.credentials.password);
 
       User.authenticate($scope.credentials.username, $scope.credentials.password)
-        .then(function(data) {
+        .then(function(/*data*/) {
           User.isLogged = true;
           $rootScope.$broadcast('AuthenticationSuccess');
           $location.path('/home');
-        }, function(error) {
+        }, function(/*error*/) {
           $scope.showLoginError = true;
         });
     };
