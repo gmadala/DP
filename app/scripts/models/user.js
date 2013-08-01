@@ -28,11 +28,18 @@ angular.module('nextgearWebApp')
     };
 
     this.refreshInfo = function() {
-      info = api.request('GET', '/Dealer/Info/');
-      return info;
+      var promise = api.request('GET', '/Dealer/Info/');
+      promise.then(function(data) {
+        info = data;
+      });
+      return promise;
     };
 
     this.getInfo = function() {
       return info;
     };
+
+    this.isDealer = function() {
+      return info && info.DealerAuctionStatusForGA === "Dealer";
+    }
   });
