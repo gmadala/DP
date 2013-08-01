@@ -74,7 +74,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
         controller: 'SettingsCtrl'
       });
   })
-  .run(function($rootScope, $location, DealerInfo) {
+  .run(function($rootScope, $location, User) {
 
     /**
      * Returns true if the route requires authentication, false otherwise.
@@ -94,7 +94,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        if (!DealerInfo.isLogged && routeRequiresAuth(toState)) {
+        if (!User.isLogged && routeRequiresAuth(toState)) {
           // not logged in, redirect to login screen
           $location.path('/login');
         }

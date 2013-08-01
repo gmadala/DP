@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
             deferred.resolve(response.data.Data);
           }
           else {
-            deferred.reject('Failure');
+            deferred.reject(response.data.Message); // reject with error message
           }
         }
         else {
