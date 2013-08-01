@@ -3,14 +3,16 @@
   "Success": true,
   "Message": null,
   "Data": {
-      "PaymentMethods": "Dictionary<int, string>",
+      "PaymentMethods": {
+          "1": "word"
+      },
       "Receipts": [
             {
                 "ReceiptNumber": 2353,
                 "StockNumber": 3252,
                 "Vin": "ADGLKJSHGLKJGRHS",
                 "CheckNumber": "2324",
-                "paymentDate": 243598
+                "paymentDate": 1375263415
             }
         ]
     }

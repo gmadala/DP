@@ -18,15 +18,15 @@
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
-                "DueDate": 123012,
-                "ScheduleSetupDate": 122099,
+                "DueDate": 1377975036,
+                "ScheduleSetupDate": 1377975036,
                 "Scheduled": true,
                 "HasNsf": false,
                 "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "TitleLocationName",
-                "ScheduledPaymentDate": 12122013
+                "ScheduledPaymentDate": 1377975036
             },
             {
                 "FloorplanId": "2049",
@@ -42,15 +42,15 @@
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
-                "DueDate": 123012,
-                "ScheduleSetupDate": 122099,
+                "DueDate": 1377975036,
+                "ScheduleSetupDate": 1377975036,
                 "Scheduled": true,
                 "HasNsf": false,
                 "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "TitleLocationName",
-                "ScheduledPaymentDate": 12122013
+                "ScheduledPaymentDate": 1377975036
             },
             {
                 "FloorplanId": "2049",
@@ -66,15 +66,15 @@
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
-                "DueDate": 123012,
-                "ScheduleSetupDate": 122099,
+                "DueDate": 1377975036,
+                "ScheduleSetupDate": 1377975036,
                 "Scheduled": true,
                 "HasNsf": false,
                 "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "TitleLocationName",
-                "ScheduledPaymentDate": 12122013
+                "ScheduledPaymentDate": 1377975036
             }
         ],
         "AccountFees": [
@@ -82,7 +82,7 @@
                 "FinancialRecordId": "24626",
                 "FinancialRecordTypeId": 13,
                 "Balance": 3490.00,
-                "EffectiveUnixDate": 340913,
+                "EffectiveUnixDate": 1377975036,
                 "Description": "Description of whatever this is for.",
                 "IsFee": true,
                 "FloorplanId": "2490",
@@ -94,7 +94,7 @@
                 "FinancialRecordId": "24626",
                 "FinancialRecordTypeId": 13,
                 "Balance": 3490.00,
-                "EffectiveUnixDate": 340913,
+                "EffectiveUnixDate": 1377975036,
                 "Description": "Description of whatever this is for.",
                 "IsFee": true,
                 "FloorplanId": "2490",
@@ -106,7 +106,7 @@
                 "FinancialRecordId": "24626",
                 "FinancialRecordTypeId": 13,
                 "Balance": 3490.00,
-                "EffectiveUnixDate": 340913,
+                "EffectiveUnixDate": 1377975036,
                 "Description": "Description of whatever this is for.",
                 "IsFee": true,
                 "FloorplanId": "2490",

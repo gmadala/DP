@@ -2,8 +2,10 @@
     "Success": true,
     "Message": null,
     "Data": [
-        {
-            "List<int>": "List<int>"
-        }
+            1,
+            2,
+            3,
+            4,
+            5
     ]
 }

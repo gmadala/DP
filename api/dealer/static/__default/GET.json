@@ -2,12 +2,54 @@
     "Success": true,
     "Message": "Error retrieving dealer info.",
     "Data": {
-        "ProductType": "dictionary<string,string>",
-        "Colors": "dictionary<string,string>",
-        "States": "dictionary<string,string>",
-        "Locations": "dictionary<string,string>",
-        "BankAccounts": "dictionary<string,string>",
-        "LinesOfCredit": "dictionary<string,string>",
+        "ProductType": [
+            {
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar"
+            }
+        ],
+        "Colors": [
+            {
+                "blue": "Blue",
+                "red": "Red",
+                "green": "Green",
+                "bisque": "Bisque"
+            }
+        ],
+        "States": [
+            {
+                "ny": "NY",
+                "nh": "NH",
+                "ca": "CA",
+                "ct": "CT"
+            }
+        ],
+        "Locations": [
+            {
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar"
+            }
+        ],
+        "BankAccounts": [
+            {
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar"
+            }
+        ],
+        "LinesOfCredit": [
+            {
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar",
+                "foo": "bar"
+            }
+        ],
         "TitleLocationOptions": [
             {
                 "Name": "Dealer N Ame",

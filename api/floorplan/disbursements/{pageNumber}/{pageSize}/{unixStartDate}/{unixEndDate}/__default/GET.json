@@ -2,17 +2,29 @@
     "Success": true,
     "Message": null,
     "Data": {
-        "DisbursementSummary": [
-            {
+        "DisbursementSummary": {
+            "DisbursementSummaryString": {
+                "PaidCount": 13,
+                "PaidAmount": 23.394,
+                "PendingCount": 22,
+                "PendingAmount": 23424.95
+            },
+            "DisbursementSummaryString": {
+                "PaidCount": 13,
+                "PaidAmount": 23.394,
+                "PendingCount": 22,
+                "PendingAmount": 23424.95
+            },
+            "DisbursementSummaryString": {
                 "PaidCount": 13,
                 "PaidAmount": 23.394,
                 "PendingCount": 22,
                 "PendingAmount": 23424.95
             }
-        ],
+        },
         "Disbursements": [
             {
-                "Disbursementdate": 12122014,
+                "Disbursementdate": 1377975036,
                 "StockNumber": 3125,
                 "DisbursementAmount": 23535.93
             }

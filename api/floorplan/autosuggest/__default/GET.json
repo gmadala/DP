@@ -2,16 +2,17 @@
     "Success": true,
     "Message": null,
     "Data": {
-        "FloorplanStatuses": [
-            {
+        "FloorplanStatuses": {
+                "Status": "Status",
+                "Status": "Status",
+                "Status": "Status",
                 "Status": "Status"
-            }
-        ],
+        },
         "Floorplans": [
             {
                 "Vin": "ADHKSDJGHLSFS",
                 "Stocknumber": 3125,
-                "FlooringDate": 12122012
+                "FlooringDate": 1377975036
             }
         ]
     }

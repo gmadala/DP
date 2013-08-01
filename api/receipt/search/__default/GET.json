@@ -9,7 +9,7 @@
             "TransactionNumber" : 1241,
             "CheckNumber": "string",
             "IsVoided": true,
-            "CreateDate": 121213,
+            "CreateDate": 1375263415,
             "IsNsf": false,
             "AmountApplied": 24553.35,
             "AmountProvided": 43.43,
