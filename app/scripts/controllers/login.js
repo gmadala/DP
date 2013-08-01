@@ -8,6 +8,8 @@ angular.module('nextgearWebApp')
       password: ''
     };
 
+    $scope.showLoginError = false;
+
     $scope.identity = {
       securityQuestion: 'Where did you attend high school?',
       securityAnswer: 'chsn',
@@ -22,14 +24,11 @@ angular.module('nextgearWebApp')
 
       User.authenticate($scope.credentials.username, $scope.credentials.password)
         .then(function(data) {
-          console.log(['Login success']);
           User.isLogged = true;
           $rootScope.$broadcast('AuthenticationSuccess');
-          // set a default Authorization header with the authentication token
-          $http.defaults.headers.common.Authorization = 'CT ' + data;
           $location.path('/home');
         }, function(error) {
-          console.error('Login error', error);
+          $scope.showLoginError = true;
         });
     };
 

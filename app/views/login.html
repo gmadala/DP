@@ -15,7 +15,7 @@
         <input type="text" ng-model="credentials.password" name="credPassword" required />
 
         <!-- TODO: Check for variable that determines whether username/password are valid via server side -->
-        <span ng-show="">The username or password you entered is incorrect.</span>
+        <span ng-show="showLoginError">The username or password you entered is incorrect.</span>
       </div>
 
     <button ng-click="authenticate()" ng-disabled="loginForm.credUsername.$pristine || loginForm.credPassword.$pristine">Log In</button>

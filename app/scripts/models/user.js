@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .service('User', function(api, Base64) {
+  .service('User', function(api, $http, Base64) {
     // Private
     var info = null;
     var authToken = null;
@@ -21,6 +21,8 @@ angular.module('nextgearWebApp')
         });
       promise.then(function(data) {
         authToken = data;
+        // set a default Authorization header with the authentication token
+        $http.defaults.headers.common.Authorization = 'CT ' + data;
       });
       return promise;
     };
