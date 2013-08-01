@@ -1,0 +1,23 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+      "ReceiptRowCount": 24535,
+      "Receipts": [
+            {
+            "FinancialTransactionId" : "string",
+            "TransactionNumber" : 1241,
+            "CheckNumber": "string",
+            "IsVoided": true,
+            "CreateDate": 121213,
+            "IsNsf": false,
+            "AmountApplied": 24553.35,
+            "AmountProvided": 43.43,
+            "TransactionTypeId": 12,
+            "PayeeDescription": "PayeeDescription",
+            "PaymentMethodId": 12,
+            "PaymentMethod": "PaymentMethod"
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "Success": true,
+    "Message": null,
+    "Data": {
+        "FloorplanStatuses": [
+            {
+                "Status": "Status"
+            }
+        ],
+        "Floorplans": [
+            {
+                "Vin": "ADHKSDJGHLSFS",
+                "Stocknumber": 3125,
+                "FlooringDate": 12122012
+            }
+        ]
+    }
+}

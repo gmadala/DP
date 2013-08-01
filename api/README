@@ -1,16 +1,20 @@
-The goal of this structure is to avoid the need for referencing an API doc AND this structure. Everything here mirrors exactly the API document, except for the added actual response data. Layout of data and information is as follows:
+This mock data structure mirrors the API document except for the added call response data and the exclusion of the request object specs.
 
-Directory structure:
+Keep in mind that the API doc is unfinished, and most of this data structure has been copied directly from it's (often erroneous) pages. Fixes will need to be made as API doc is updated.
 
-  Main folders follow API URL structure
-  Secondary folders are either a Parameter Name, Example Parameter Data, or a __default folder for mock data system.
+Layout of data and information:
+-------------------------------
 
-Files:
+Main folders follow API URL structure.
+Secondary folders are either a Parameter Name ( ex: {model} ), Example Parameter Data ( ex: honda ), or a __default folder for mock data system.
+Files are either JSON take directly from current API responses, manually generated JSON data based on the specs doc, or call descriptions from the specs doc.
 
-  Either real call response data, manually generated data based on specs doc, or the call description from specs doc.
-
-- call
-  description
+Example structure: (Folders are prepended with a dash. Files are prepended with an asterisk.)
+- url
   - parameter
-    call
-  - specific param response
+    * call description file
+    - __default
+      * call data
+  - specific parameter
+    - __default
+      * call data

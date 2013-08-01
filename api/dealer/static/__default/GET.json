@@ -1,0 +1,21 @@
+{
+    "Success": true,
+    "Message": "Error retrieving dealer info.",
+    "Data": {
+        "ProductType": "dictionary<string,string>",
+        "Colors": "dictionary<string,string>",
+        "States": "dictionary<string,string>",
+        "Locations": "dictionary<string,string>",
+        "BankAccounts": "dictionary<string,string>",
+        "LinesOfCredit": "dictionary<string,string>",
+        "TitleLocationOptions": [
+            {
+                "Name": "Dealer N Ame",
+                "ResultingtitleLocationid": 243,
+                "TitleInfoenabled": true,
+                "TitleInfoRequired": true,
+                "DisplayOrder": 2
+            }
+        ]
+    }
+}
