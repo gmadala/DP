@@ -3,7 +3,8 @@
 angular.module('nextgearWebApp')
   .directive('nxgUpcomingCalendar', function () {
     return {
-      template: '<div ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
+      template: '<div ui-calendar="options" ng-model="eventSources" calendar="cal"></div>' +
+        '<div nxg-upcoming-detail></div>',
       restrict: 'AC',
       scope: {
         display: '=' // week or month
@@ -15,6 +16,8 @@ angular.module('nextgearWebApp')
         $scope.eventSources = [
           // no data initially
         ];
+
+        $scope.selectedDetail = null;
 
         $scope.options = {
           contentHeight: 150,
@@ -46,11 +49,11 @@ angular.module('nextgearWebApp')
           },
           dayRender: function(date, cell) {
             var dateKey = $filter('date')(date, 'yyyy-MM-dd');
-            // add information about open vs. closed days for payment
+            // add a styling hook for open vs. closed days for payment
             if (!$scope.openDates[dateKey]) {
               cell.addClass('closed');
             }
-            // add information about whether there are events on a given date
+            // add a styling hook based on whether there are events on a given date
             if ($scope.eventsByDate[dateKey] && $scope.eventsByDate[dateKey].length > 0) {
               cell.addClass('has-events');
             }
@@ -61,18 +64,62 @@ angular.module('nextgearWebApp')
               return false;
             }
             return element;
+          },
+          dayClick: function(date, allDay, jsEvent, view) {
+            var dateKey = $filter('date')(date, 'yyyy-MM-dd');
+            if (view.name === 'month' && $scope.openDates[dateKey]) {
+              var dayElement = this; // the <td> that was clicked
+              $scope.$apply(function () {
+                $scope.selectedDetail = {
+                  date: date,
+                  events: $scope.eventsByDate[dateKey],
+                  positionFrom: angular.element(dayElement)
+                };
+              });
+            }
           }
         };
 
         $scope.$watch('display', function(newValue) {
           // unfortunately fullCalendar does not have live option setter support, see
           // https://code.google.com/p/fullcalendar/issues/detail?id=293
-          // TODO: test this to make sure it doesn't break the ng-model support in the calendar
           $scope.cal.fullCalendar('destroy');
           $scope.cal.fullCalendar(angular.extend($scope.options, {
             weekends: (newValue === 'month'),
             defaultView: newValue === 'month' ? newValue : 'basicWeek'
           }));
+        });
+      }
+    };
+  })
+
+/**
+ * Private-ish helper directive for showing the details popup when user clicks a date on the month view
+ */
+  .directive('nxgUpcomingDetail', function () {
+    return {
+      restrict: 'A',
+      replace: true,
+      template: '<div style="position: absolute; background-color: #fff; border: 2px solid #333"><h2>THIS IS A POPUP!</h2><button ng-click="close()">close</button></div>',
+      link: function(scope, element) {
+        element.hide().appendTo('body');
+        scope.$on('$destroy', function () {
+          element.remove();
+        });
+      },
+      controller: function($scope, $element) {
+        $scope.close = function () {
+          $element.hide();
+        };
+
+        $scope.$watch('selectedDetail', function (detail) {
+          if (detail) {
+            console.log('source element offset:', detail.positionFrom.offset());
+            $element.show().offset(detail.positionFrom.offset());
+            console.log('popup element offset:', $element.offset());
+          } else {
+            $scope.close();
+          }
         });
       }
     };

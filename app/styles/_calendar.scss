@@ -1,0 +1,19 @@
+/* this is just some placeholder styling to demonstrate information exposed by nxgUpcomingCalendar directive */
+
+.fc-view {
+  .closed {
+    background-color: #eee;
+  }
+  .has-events {
+    font-weight: bold;
+  }
+}
+
+.fc-view-month {
+  .fc-day {
+    cursor: pointer;
+    &.closed {
+      cursor: default;
+    }
+  }
+}
