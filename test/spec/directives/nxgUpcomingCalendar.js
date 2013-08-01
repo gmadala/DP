@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgUpcomingCalendar', function () {
-  beforeEach(module('nextgearWebApp'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgUpcomingCalendar/nxgUpcomingDetailPopup.html'));
 
   var element,
     scope;

@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('nxgUpcomingCalendar', function () {
     return {
       template: '<div ui-calendar="options" ng-model="eventSources" calendar="cal"></div>' +
-        '<div nxg-upcoming-detail></div>',
+        '<div nxg-upcoming-detail-popup></div>',
       restrict: 'AC',
       scope: {
         display: '=' // week or month
@@ -96,11 +96,11 @@ angular.module('nextgearWebApp')
 /**
  * Private-ish helper directive for showing the details popup when user clicks a date on the month view
  */
-  .directive('nxgUpcomingDetail', function () {
+  .directive('nxgUpcomingDetailPopup', function () {
     return {
       restrict: 'A',
       replace: true,
-      template: '<div style="position: absolute; background-color: #fff; border: 2px solid #333"><h2>THIS IS A POPUP!</h2><button ng-click="close()">close</button></div>',
+      templateUrl: 'scripts/directives/nxgUpcomingCalendar/nxgUpcomingDetailPopup.html',
       link: function(scope, element) {
         element.hide().appendTo('body');
         scope.$on('$destroy', function () {
@@ -114,9 +114,10 @@ angular.module('nextgearWebApp')
 
         $scope.$watch('selectedDetail', function (detail) {
           if (detail) {
-            console.log('source element offset:', detail.positionFrom.offset());
-            $element.show().offset(detail.positionFrom.offset());
-            console.log('popup element offset:', $element.offset());
+            var origin = detail.positionFrom.offset();
+            origin.left += detail.positionFrom.width() + 10;
+            origin.top -= 20;
+            $element.show().offset(origin);
           } else {
             $scope.close();
           }

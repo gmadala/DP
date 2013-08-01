@@ -1,5 +1,7 @@
 /* this is just some placeholder styling to demonstrate information exposed by nxgUpcomingCalendar directive */
 
+@import "compass/css3/border-radius";
+
 .fc-view {
   .closed {
     background-color: #eee;
@@ -15,5 +17,28 @@
     &.closed {
       cursor: default;
     }
+  }
+}
+
+.nxg-upcoming-detail {
+  position: absolute;
+  background-color: #eee;
+  border: 1px solid #000;
+  @include border-radius();
+  header {
+    text-align: center;
+    padding: 0 20px;
+  }
+  footer {
+    height: 5px;
+  }
+  .close {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+  }
+  div {
+    background-color: #fff;
+    padding: 5px 20px 5px 30px;
   }
 }
