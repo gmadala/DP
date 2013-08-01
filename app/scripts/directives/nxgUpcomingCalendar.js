@@ -38,11 +38,11 @@ angular.module('nextgearWebApp')
                 $scope.eventsByDate = results.eventsByDate;
                 $scope.eventSources.length = 0;
                 $scope.eventSources.push(results.dueEvents, results.scheduledEvents);
-              }, function (error) {
+              }, function (/*error*/) {
                 // TODO: Do something with the error
                 console.log('calendar population failed');
               }
-            )
+            );
           },
           dayRender: function(date, cell) {
             var dateKey = $filter('date')(date, 'yyyy-MM-dd');

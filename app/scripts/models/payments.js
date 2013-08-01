@@ -9,10 +9,10 @@ angular.module('nextgearWebApp')
         endDate = endDate.getTime();
 
         return $q.all([
-            api.request('GET','/payment/search', {DueDateStart: startDate, DueDateEnd: endDate}),
-            api.request('GET','/payment/searchscheduled', {StartDate: startDate, EndDate: endDate}),
+            api.request('GET','/payment/search', {DueDateStart: startDate, DueDateEnd: endDate}, {}),
+            api.request('GET','/payment/searchscheduled', {StartDate: startDate, EndDate: endDate}, {}),
             api.request('GET','/payment/possiblePaymentDates/'+startDate+'/'+endDate)
-          ]).then(function(responses) {
+          ]).then(function(/*responses*/) {
             // TODO: Transform response data into daily summary events & open dates hash table
             return {
               dueEvents: [
@@ -42,5 +42,5 @@ angular.module('nextgearWebApp')
             };
           });
       }
-    }
+    };
   });
