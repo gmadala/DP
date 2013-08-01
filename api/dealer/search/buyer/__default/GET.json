@@ -3,17 +3,15 @@
   "Message": null,
   "Data": {
     "DealerRowCount": 12,
-    "SearchResults": [
-      {
-        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
-        "BusinessName": "TRICOLOR AUTO",
-        "Address": "123 Main St.",
-        "City": "San Antonio",
-        "State": "California",
-        "PostalCode": "12345",
-        "IsBuyer": true
-      }
-    ]
+    "SearchResults": {
+      "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+      "BusinessNumber": 72694,
+      "BusinessName": "TRICOLOR AUTO",
+      "Address": "123 Main St.",
+      "City": "San Antonio",
+      "State": "California",
+      "PostalCode": "12345",
+      "IsBuyer": true
+    }
   }
 }
