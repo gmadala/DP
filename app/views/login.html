@@ -44,9 +44,13 @@
           <label>Email Address</label>
           <input type="email" name="email" ng-model="email" ng-disabled="forgotPassword.$dirty" required/>
           <!-- TODO: Add error text for when email is valid but not recogized by NextGear -->
-          <div ng-show="forgotUsername.email.$invalid && forgotUsername.email.$dirty">
-            <p class="error">XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721</p>
-          </div>
+          <p class="error"  ng-show="">
+            We were unable to locate this email address.  If you need assistance, please call NextGear Capital Support at: (888) 969-3721
+          </p>
+
+          <p class="error" ng-show="forgotUsername.email.$invalid && forgotUsername.email.$dirty">
+            XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721
+          </p>
           <button class="btn" ng-disabled="forgotUsername.email.$invalid || forgotPassword.$dirty">Submit</button>
         </form>
     </div>
@@ -58,9 +62,15 @@
         <form name="forgotPassword">
           <label>User Name</label>
           <input type="text" name="userName" ng-model="credentials.username" ng-disabled="forgotUsername.$dirty" required/>
+          <!-- TODO: Add error text for when username is valid but no trecognized by NextGear -->
+          <p class="error" ng-show="">
+            We were unable to locate this username. If you need assistance, please call NextGear Capital Support at: (888) 969-3721
+          </p>
+
           <div ng-show="identity.showQuestion">
             <p>{{ identity.securityQuestion }}</p>
             <input type="text" name="answer" ng-model="identity.securityAnswer" required />
+            <!-- TODO: Add error text for when answer is not correct (server side validation) -->
           </div>
           <button class="btn" ng-disabled="forgotPassword.username.$invalid || forgotUsername.$dirty" ng-click="onForgotPasswordSubmit()">Submit</button>
         </form>
