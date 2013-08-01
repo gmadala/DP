@@ -1,26 +1,9 @@
 'use strict';
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var fs = require('fs');
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
-var findFolder = function(folder, done) {
-  folder = folder.lastIndexOf('/') === folder.length - 1 ? folder.substring(0, folder.length - 1) : folder;
-  fs.exists(folder, function(exists) {
-    if (exists) {
-      done(folder + '/');
-    }
-    else {
-      folder = folder.substring(0, folder.lastIndexOf('/'));
-      findFolder(folder, done);
-    }
-  });
-};
-var serveContent = function(file, res) {
-  fs.readFile(file, function(err, json) {
-    res.end(json);
-  });
-};
+var mockApi = require('./api/mockApi.js');
 
 module.exports = function (grunt) {
   // load all grunt tasks
@@ -31,7 +14,8 @@ module.exports = function (grunt) {
     app: 'app',
     dist: 'dist',
     api: 'api'
-  };
+  },
+  useMock = mockApi.mockApi(yeomanConfig.api);
 
   try {
     yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
@@ -76,29 +60,7 @@ module.exports = function (grunt) {
               mountFolder(connect, yeomanConfig.app),
               mountFolder(connect, 'test'),
               mountFolder(connect, 'api'),
-              function(req, res) {
-                var originalFolder = yeomanConfig.api + req.url,
-                    file;
-
-                findFolder(originalFolder, function(foundFolder) {
-                  // If the result is not found at the top level, we're using default data
-                  if (foundFolder !== originalFolder && foundFolder !== (originalFolder + '/')) {
-                    foundFolder += '__default/';
-                    serveContent(foundFolder + req.method + '.json', res);
-                  }
-                  else {
-                    file = foundFolder + req.method + '.json';
-                    fs.exists(file, function(exists) {
-                      if (exists) {
-                        serveContent(file, res);
-                      }
-                      else {
-                        serveContent(foundFolder + '__default/' + req.method + '.json', res);
-                      }
-                    });
-                  }
-                });
-              }
+              useMock
             ];
           }
         }
