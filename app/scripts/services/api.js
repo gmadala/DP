@@ -23,14 +23,15 @@ angular.module('nextgearWebApp')
         // retry or something?
         //console.error('Network failure', error);
         deferred.reject();
-      };
-
-      $http({
-        method: method,
+      },
+      httpConfig = {
+        method: method.toUpperCase(),
         url: nxgConfig.apiBase + url,
-        data: data,
         headers: headers
-      }).then(success, failure);
+      };
+      httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
+
+      $http(httpConfig).then(success, failure);
 
       return deferred.promise;
     };
