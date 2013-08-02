@@ -26,7 +26,8 @@ angular.module('nextgearWebApp')
               dateMap,
               date,
               dateKey,
-              list;
+              list,
+              reducer;
 
             // aggregate due payments list into a set of calendar events, max 1 per day, summarizing payments due that day
             dateMap = {};
@@ -37,22 +38,23 @@ angular.module('nextgearWebApp')
               list.push(payment);
               dateMap[dateKey] = list;
             });
-            for (dateKey in dateMap) {
-              list = dateMap[dateKey];
-              date = list.reduce(function (summary, payment) {
-                summary.count += 1;
-                summary.total += payment.AmountDue;
-                return summary;
-              }, {count: 0, total: 0});
+            reducer = function (summary, payment) {
+              summary.count += 1;
+              summary.total += payment.AmountDue;
+              return summary;
+            };
+            for (var key in dateMap) {
+              list = dateMap[key];
+              date = list.reduce(reducer, {count: 0, total: 0});
               date = {
                 title: date.count + (date.count === 1 ? ' Payment Due' : ' Payments Due'),
                 subTitle: formatMoney(date.total),
-                start: dateKey
+                start: key
               };
               dueEvents.push(date);
-              list = eventsByDate[dateKey] || [];
+              list = eventsByDate[key] || [];
               list.push(date);
-              eventsByDate[dateKey] = list;
+              eventsByDate[key] = list;
             }
 
             // aggregate scheduled payments list into a set of calendar events, max 1 per day, summarizing payments scheduled that day
@@ -64,23 +66,24 @@ angular.module('nextgearWebApp')
               list.push(payment);
               dateMap[dateKey] = list;
             });
-            for (dateKey in dateMap) {
-              list = dateMap[dateKey];
-              date = list.reduce(function (summary, payment) {
-                summary.count += 1;
-                // is this the right way to find the scheduled payment amount?
-                summary.total += payment.IsPayoff ? payment.CurrentPayoff : payment.AmountDue;
-                return summary;
-              }, {count: 0, total: 0});
+            reducer = function (summary, payment) {
+              summary.count += 1;
+              // is this the right way to find the scheduled payment amount?
+              summary.total += payment.IsPayoff ? payment.CurrentPayoff : payment.AmountDue;
+              return summary;
+            };
+            for (var key2 in dateMap) {
+              list = dateMap[key2];
+              date = list.reduce(reducer, {count: 0, total: 0});
               date = {
                 title: date.count + ' Scheduled',
                 subTitle: formatMoney(date.total),
-                start: dateKey
+                start: key2
               };
               scheduledEvents.push(date);
-              list = eventsByDate[dateKey] || [];
+              list = eventsByDate[key2] || [];
               list.push(date);
-              eventsByDate[dateKey] = list;
+              eventsByDate[key2] = list;
             }
 
             // convert possiblePaymentDates into a map of 'yyyy-MM-dd': true
