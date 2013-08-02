@@ -29,6 +29,10 @@ describe('Directive: nxgUpcomingCalendar', function () {
     spyOn(element.scope().cal, 'fullCalendar');
 
     scope.$apply(function () {
+      scope.mode = 'week';
+    });
+    // first time won't do it, we have to call a second time
+    scope.$apply(function () {
       scope.mode = 'month';
     });
     expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
