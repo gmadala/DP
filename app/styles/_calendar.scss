@@ -20,6 +20,12 @@
   }
 }
 
+.fc-view-basicWeek {
+  .fc-event-subtitle {
+    display: block;
+  }
+}
+
 .nxg-upcoming-detail {
   position: absolute;
   background-color: #eee;
@@ -40,5 +46,8 @@
   div {
     background-color: #fff;
     padding: 5px 20px 5px 30px;
+  }
+  p {
+    margin-bottom: 0;
   }
 }

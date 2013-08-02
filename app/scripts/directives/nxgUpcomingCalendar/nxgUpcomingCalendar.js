@@ -63,6 +63,7 @@ angular.module('nextgearWebApp')
               // don't render events directly on month calendar (user must click a day to see events in a popup)
               return false;
             }
+            element.find('.fc-event-inner').append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
             return element;
           },
           dayClick: function(date, allDay, jsEvent, view) {

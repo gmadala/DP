@@ -4,7 +4,8 @@
         <a class="close" ng-click="close()">X</a>
     </header>
     <div ng-repeat="event in selectedDetail.events">
-        {{ event.title }}
+        <p>{{ event.title }}</p>
+        <p>{{ event.subTitle }}</p>
     </div>
     <div ng-show="!selectedDetail.events || selectedDetail.events.length == 0">
         No payments for this date

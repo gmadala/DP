@@ -16,19 +16,19 @@ angular.module('nextgearWebApp')
             // TODO: Transform response data into daily summary events & open dates hash table
             return {
               dueEvents: [
-                {title: '2 Payments Due\n$5,000', start: '2013-08-01'},
-                {title: '3 Payments Due\n$8,000', start: '2013-08-07'}
+                {title: '2 Payments Due', subTitle: '$5,000', start: '2013-08-01'},
+                {title: '3 Payments Due', subTitle: '$8,000', start: '2013-08-07'}
               ],
               scheduledEvents: [
-                {title: '2 Scheduled\n$5,000', start: '2013-08-01'}
+                {title: '2 Scheduled', subTitle: '$5,000', start: '2013-08-01'}
               ],
               eventsByDate: {
                 '2013-08-01': [
-                  {title: '2 Payments Due\n$5,000', start: '2013-08-01'},
-                  {title: '2 Scheduled\n$5,000', start: '2013-08-01'}
+                  {title: '2 Payments Due', subTitle: '$5,000', start: '2013-08-01'},
+                  {title: '2 Scheduled', subTitle: '$5,000', start: '2013-08-01'}
                 ],
                 '2013-08-07': [
-                  {title: '3 Payments Due\n$8,000', start: '2013-08-07'}
+                  {title: '3 Payments Due', subTitle: '$8,000', start: '2013-08-07'}
                 ]
               },
               openDates: {
