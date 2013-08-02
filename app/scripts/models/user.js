@@ -40,6 +40,6 @@ angular.module('nextgearWebApp')
     };
 
     this.isDealer = function() {
-      return info && info.DealerAuctionStatusForGA === "Dealer";
-    }
+      return info && info.DealerAuctionStatusForGA === 'Dealer';
+    };
   });
