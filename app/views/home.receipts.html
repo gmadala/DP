@@ -1,5 +1,5 @@
 <!-- TODO: Pull out form code into partial for reuse across payments, sch. payments & receipts. -->
-<form class="form-horizontal well search payments">
+<form class="form-horizontal well search payments" novalidate>
     <strong>Receipt Search</strong>
     <div class="control-group">
         <label class="control-label" for="keyword">Keyword</label>
@@ -85,65 +85,65 @@
                     <a ng-href="/receipt/view/{{receipt.FinancialTransactionId}}" class="btn btn-small btn-block">Receipt</a>
                 </div>
             </div>
+
+            <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+            <div collapse="isCollapsed" class="more-details">
+
+                <div class="row-fluid">
+                    <div class="span3 vehicle-info">
+                        <strong>Vehicle Information</strong>
+                        <ul>
+                            <li>Lorem ipsum</li>
+                            <li>dolor sit amet</li>
+                        </ul>
+                    </div>
+                    <div class="span3 floor-info">
+                        <strong>Flooring Information</strong>
+                        <ul>
+                            <li>Lorem ipsum</li>
+                            <li>dolor sit amet</li>
+                        </ul>
+                    </div>
+                    <div class="span3 title-info">
+                        <strong>Title Information</strong>
+                        <ul>
+                            <li>Lorem ipsum</li>
+                            <li>dolor sit amet</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <strong>Original Curtailment Schedule</strong>
+                    <table class="span10">
+                        <tr>
+                            <th>Start Date</th>
+                            <th>Due Date</th>
+                            <th>Principal</th>
+                            <th>Principal Payment</th>
+                            <th>Interest</th>
+                            <th>CPP</th>
+                            <th>Fees</th>
+                            <th>Total Payment</th>
+                            <th>Highline Fee Applied</th>
+                        </tr>
+                        <tr ng-repeat="cur in curtailment">
+                            <td> {{ cur.startDate }} </td>
+                            <td> {{ cur.dueDate }} </td>
+                            <td> {{ cur.principal | currency }} </td>
+                            <td> {{ cur.principalPay | currency }} </td>
+                            <td> {{ cur.interest | currency }} </td>
+                            <td> {{ cur.cpp | currency }} </td>
+                            <td> {{ cur.fees | currency }} </td>
+                            <td> {{ cur.totalPay | currency }} </td>
+                            <td>
+                                <span ng-hide="cur.highline">N/A</span>
+                                <span ng-show="cur.highline"> {{ cur.highline }} </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- end more-details div -->
         </li>
     </ul>
-
-    <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
-    <div collapse="isCollapsed" class="more-details">
-
-        <div class="row-fluid">
-            <div class="span3 vehicle-info">
-                <strong>Vehicle Information</strong>
-                <ul>
-                    <li>Lorem ipsum</li>
-                    <li>dolor sit amet</li>
-                </ul>
-            </div>
-            <div class="span3 floor-info">
-                <strong>Flooring Information</strong>
-                <ul>
-                    <li>Lorem ipsum</li>
-                    <li>dolor sit amet</li>
-                </ul>
-            </div>
-            <div class="span3 title-info">
-                <strong>Title Information</strong>
-                <ul>
-                    <li>Lorem ipsum</li>
-                    <li>dolor sit amet</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row-fluid">
-            <strong>Original Curtailment Schedule</strong>
-            <table class="span10">
-                <tr>
-                    <th>Start Date</th>
-                    <th>Due Date</th>
-                    <th>Principal</th>
-                    <th>Principal Payment</th>
-                    <th>Interest</th>
-                    <th>CPP</th>
-                    <th>Fees</th>
-                    <th>Total Payment</th>
-                    <th>Highline Fee Applied</th>
-                </tr>
-                <tr ng-repeat="cur in curtailment">
-                    <td> {{ cur.startDate }} </td>
-                    <td> {{ cur.dueDate }} </td>
-                    <td> {{ cur.principal | currency }} </td>
-                    <td> {{ cur.principalPay | currency }} </td>
-                    <td> {{ cur.interest | currency }} </td>
-                    <td> {{ cur.cpp | currency }} </td>
-                    <td> {{ cur.fees | currency }} </td>
-                    <td> {{ cur.totalPay | currency }} </td>
-                    <td>
-                        <span ng-hide="cur.highline">N/A</span>
-                        <span ng-show="cur.highline"> {{ cur.highline }} </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
 </section>
