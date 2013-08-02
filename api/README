@@ -18,3 +18,10 @@ Example structure: (Folders are prepended with a dash. Files are prepended with 
   - specific parameter
     - __default
       * call data
+
+
+Postman
+-------
+[Postman](http://www.getpostman.com/) helps you be more efficient while working with APIs. Using Postman, you can construct complex HTTP requests quickly, organize them in collections and share them with your co-workers.
+
+We've included a Postman test environment and collections in the `api/postman/` directory. These can be imported into Postman.
