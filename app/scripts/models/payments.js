@@ -111,6 +111,10 @@ angular.module('nextgearWebApp')
             accountFees: {quantity: 1, amount: 85.00}
           };
         });
+      },
+      fetchUpcomingPayments: function() {
+        var promise = api.request('GET','/payment/search', {DueDateStart: (new Date().getTime())});
+        return promise;
       }
     };
   });

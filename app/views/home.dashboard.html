@@ -62,11 +62,11 @@
                     <th>Payment Due</th>
                 </tr>
                 </thead>
-                <tr ng-repeat="foo in foos">
-                    <td title="Due Date">7/22/13</td>
-                    <td title="Description">2004 Jeep Lib Ltd White</td>
-                    <td title="Payoff Due"></td>
-                    <td title="Payment Due">$662.27</td>
+                <tr ng-repeat="payment in upcomingPayments">
+                    <td title="Due Date">{{ payment.DueDate }}</td>
+                    <td title="Description">{{ payment.UnitDescription }}</td>
+                    <td title="Payoff Due">${{ payment.PrincipalPayoff }}</td>
+                    <td title="Payment Due">${{ payment.AmountDue }}</td>
                 </tr>
             </table>
             <tfoot>

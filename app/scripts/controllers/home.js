@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('HomeCtrl', function($scope, $state, $stateParams) {
+  .controller('HomeCtrl', function($scope, $state, $stateParams, Payments) {
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
 
@@ -64,4 +64,8 @@ angular.module('nextgearWebApp')
     $scope.closeModal = function() {
       $scope.shouldBeOpen = false;
     };
+
+    Payments.fetchUpcomingPayments().then(function(results) {
+      $scope.upcomingPayments = results;
+    });
   });
