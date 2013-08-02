@@ -20,6 +20,8 @@ angular.module('nextgearWebApp')
         $scope.selectedDetail = null;
 
         $scope.options = {
+          defaultView: 'basicWeek',
+          weekends: false,
           contentHeight: 150,
           titleFormat: {
             month: 'MMMM yyyy',
@@ -81,7 +83,10 @@ angular.module('nextgearWebApp')
           }
         };
 
-        $scope.$watch('display', function(newValue) {
+        $scope.$watch('display', function(newValue, oldValue) {
+          if (newValue === oldValue) {
+            return;
+          }
           // unfortunately fullCalendar does not have live option setter support, see
           // https://code.google.com/p/fullcalendar/issues/detail?id=293
           $scope.cal.fullCalendar('destroy');
