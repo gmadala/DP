@@ -18,15 +18,16 @@ module.exports = function(karma) {
 
 		// list of files / patterns to load in the browser
 		files: [
-            'app/components/es5-shim/es5-shim.js',
-            'app/components/jquery/jquery.js',
+      'app/components/es5-shim/es5-shim.js',
+      'app/components/json3/lib/json3.min.js',
+      'app/components/jquery/jquery.js',
 			'app/components/angular/angular.js',
 			'app/components/angular-mocks/angular-mocks.js',
 			'app/components/angular-ui-router/release/angular-ui-router.js',
 			'app/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 			'app/components/nginfinitescroll/build/ng-infinite-scroll.js',
-            'app/components/fullcalendar/fullcalendar.js',
-            'app/components/angular-ui-calendar/src/calendar.js',
+      'app/components/fullcalendar/fullcalendar.js',
+      'app/components/angular-ui-calendar/src/calendar.js',
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			'app/scripts/directives/**/*.html',
