@@ -43,6 +43,11 @@ angular.module('nextgearWebApp')
                 $scope.eventsByDate = results.eventsByDate;
                 $scope.eventSources.length = 0;
                 $scope.eventSources.push(results.dueEvents, results.scheduledEvents);
+                // hack: force the dayRender logic to run again for each day now that we have data
+                $element.find('.fc-day').each(function (index, day) {
+                  day = $(day);
+                  $scope.options.dayRender(day.attr('data-date'), day);
+                });
               }, function (/*error*/) {
                 // TODO: Do something with the error
                 console.log('calendar population failed');
@@ -50,14 +55,18 @@ angular.module('nextgearWebApp')
             );
           },
           dayRender: function(date, cell) {
-            var dateKey = $filter('date')(date, 'yyyy-MM-dd');
+            var dateKey = angular.isString(date) ? date : $filter('date')(date, 'yyyy-MM-dd');
             // add a styling hook for open vs. closed days for payment
             if (!$scope.openDates[dateKey]) {
               cell.addClass('closed');
+            } else {
+              cell.removeClass('closed');
             }
             // add a styling hook based on whether there are events on a given date
             if ($scope.eventsByDate[dateKey] && $scope.eventsByDate[dateKey].length > 0) {
               cell.addClass('has-events');
+            } else {
+              cell.removeClass('has-events');
             }
           },
           eventRender: function(event, element, view) {
