@@ -2,6 +2,20 @@
 
 angular.module('nextgearWebApp')
   .factory('Payments', function($q, $filter, api) {
+
+    // Daniel's temporary date comparison function.
+    // This will be refactored and relocated.
+    // Perhaps we can utilize a proper JavaScript date library.
+    var isToday = function(otherDate) {
+      var today = new Date(),
+          d = new Date(otherDate * 1000);
+      return (
+        (today.getFullYear() === d.getFullYear()) &&
+        (today.getMonth()    === d.getMonth()) &&
+        (today.getDate()     === d.getDate())
+      );
+    };
+
     return {
       fetchUpcomingCalendar: function(startDate, endDate) {
         // convert to UNIX epoch datetime values
@@ -102,13 +116,46 @@ angular.module('nextgearWebApp')
           });
       },
       fetchSummary: function() {
-        // Placeholder until I can checkout Lucas' wireframe service mapping document
-        return $q.all([]).then(function() {
+        return $q.all([
+
+          // Still need to pass the correct dates to these service calls..
+          api.request('GET', '/dealer/summary'),
+          api.request('GET', '/payment/search'),
+          api.request('GET', '/payment/info')
+
+        ]).then(function(responses) {
+
+          var overdue = {
+            quantity: 1,
+            // According to the docs, this should be `OverduePaymentAmount`, but I don't see that field.
+            amount: responses[0].LastPaymentAmount
+          };
+
+          var dueToday = responses[1].SearchResults || [];
+          dueToday = {
+            quantity: dueToday.length, // This total is wrong, it's not considering the dates
+            amount: _.reduce(dueToday, function(total, item) {
+              return isToday(item.DueDate) ? total + item.AmountDue : total;
+            }, 0)
+          };
+
+          var thisWeek = responses[2].SearchResults || [];
+          thisWeek = {
+            quantity: thisWeek.length,
+            amount: _.reduce(thisWeek, function(total, item) { return total + item.AmountDue; }, 0)
+          };
+
+          var accountFees = responses[1].AccountFees || [];
+          accountFees = {
+            quantity: accountFees.length,
+            amount: _.reduce(accountFees, function(total, item) { return total + item.Balance; }, 0)
+          };
+
           return {
-            overdue:     {quantity: 1, amount: 3432.32},
-            dueToday:    {quantity: 1, amount: 2859.02},
-            thisWeek:    {quantity: 8, amount: 53592.71},
-            accountFees: {quantity: 1, amount: 85.00}
+            overdue:     overdue,
+            dueToday:    dueToday,
+            thisWeek:    thisWeek,
+            accountFees: accountFees
           };
         });
       },
