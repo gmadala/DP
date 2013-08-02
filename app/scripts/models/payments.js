@@ -114,7 +114,17 @@ angular.module('nextgearWebApp')
       },
       fetchUpcomingPayments: function() {
         var promise = api.request('GET','/payment/search', {DueDateStart: (new Date().getTime())});
-        return promise;
+        
+        return promise.then(function(results) {
+          var upcomingPayments = results.SearchResults;
+          for (var i = 0; i < upcomingPayments.length; i++) {
+            // Dates coming from the service are in Unix time which are the number of seconds since 1/1/1970,
+            // but the views expect it to be in milliseconds (e.g. Angular date filter)
+            upcomingPayments[i].DueDate *= 1000;
+            upcomingPayments[i].ScheduleSetupDate *= 1000;
+          }
+          return upcomingPayments;
+        });
       }
     };
   });
