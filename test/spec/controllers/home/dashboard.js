@@ -6,13 +6,23 @@ describe('Controller: DashboardCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var DashboardCtrl,
-    scope;
+      scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     DashboardCtrl = $controller('DashboardCtrl', {
-      $scope: scope
+      $scope: scope,
+      Payments: {
+        fetchSummary: function() { return { then: function() {} } },
+        fetchUpcomingPayments: function() { return { then: function() {} } }
+      },
+      Receipts: {
+        fetchRecent: function() { return { then: function() {} } }
+      },
+      DealerCredit: {
+        fetch: function() { return { then: function() {} } }
+      }
     });
   }));
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts, DealerCredit) {
     $scope.viewMode = 'week';
 
     $scope.isCollapsed = true;
@@ -20,19 +20,14 @@ angular.module('nextgearWebApp')
       function(error) { $log.error(error); }
     );
 
+    DealerCredit.fetch().then(
+      function(results) { $scope.credit = results; },
+      function(error) { $log.error(error); }
+    );
+
     // dummy data
     $scope.unappliedFunds = 2641.00;
     $scope.totalAvailable = 2641.90;
-    $scope.fakeCreditChartData = {
-      outer: [
-        { color: '#9F9F9F', value: 75000 },
-        { color: '#575757', value: 450000 }
-      ],
-      inner: [
-        { color: '#54BD45', value: 50500 },
-        { color: '#3D9AF4', value: 474000 }
-      ]
-    };
 
     // move this + PayoutCtrl into a directive?
     $scope.openRequestPayout = function() {

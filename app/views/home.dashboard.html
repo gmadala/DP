@@ -100,7 +100,7 @@
                     class="nxg-doughnut-chart-outer"
                     nxg-chart
                     nxg-chart-type="Doughnut"
-                    nxg-chart-data="fakeCreditChartData.outer"
+                    nxg-chart-data="credit.chartData.outer"
                     nxg-chart-options="{percentageInnerCutout: 77}">
             </canvas>
             <canvas width="80"
@@ -108,10 +108,33 @@
                     class="nxg-doughnut-chart-inner"
                     nxg-chart
                     nxg-chart-type="Doughnut"
-                    nxg-chart-data="fakeCreditChartData.inner"
+                    nxg-chart-data="credit.chartData.inner"
                     nxg-chart-options="{percentageInnerCutout: 80}">
             </canvas>
         </div>
+
+        <table>
+            <tr>
+                <td>Available Credit</td>
+                <td>{{credit.availableCredit | currency}}</td>
+            </tr>
+            <tr>
+                <td>Utilized Credit</td>
+                <td>{{credit.utilizedCredit | currency}}</td>
+            </tr>
+            <tr>
+                <td>Temp Line of Credit</td>
+                <td>{{credit.tempLineOfCredit | currency}}</td>
+            </tr>
+            <tr>
+                <td>Line of Credit</td>
+                <td>{{credit.lineOfCredit | currency}}</td>
+            </tr>
+            <tr>
+                <td>Total Credit</td>
+                <td>{{credit.totalCredit | currency}}</td>
+            </tr>
+        </table>
 
     </div>
     <div class="span3 summary unapplied-funds">

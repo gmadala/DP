@@ -5,11 +5,11 @@
         "LinesOfCredit": [
             {
                 "CreditType": "Retail",
-                "ApprovedCredit": 15500000,
-                "TemporaryCredit": 0,
-                "TotalCredit": 15500000,
-                "Outstanding": 8769843.81,
-                "CreditAvailable": 0,
+                "ApprovedCredit": 450000,
+                "TemporaryCredit": 75000,
+                "TotalCredit": 525000,
+                "Outstanding": 474000,
+                "CreditAvailable": 50500,
                 "TemporaryExpiration": ""
             }
         ]
