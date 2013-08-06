@@ -93,12 +93,26 @@
 <section class="row-fluid summaries">
     <div class="span4 summary credit">
         <h3>Credit</h3>
-        <canvas width="100"
-                height="100"
-                nxg-chart
-                nxg-chart-type="Doughnut"
-                nxg-chart-data="summary.chartData">
-        </canvas>
+
+        <div class="nxg-doughnut-chart-nested">
+            <canvas width="100"
+                    height="100"
+                    class="nxg-doughnut-chart-outer"
+                    nxg-chart
+                    nxg-chart-type="Doughnut"
+                    nxg-chart-data="fakeCreditChartData.outer"
+                    nxg-chart-options="{percentageInnerCutout: 77}">
+            </canvas>
+            <canvas width="80"
+                    height="80"
+                    class="nxg-doughnut-chart-inner"
+                    nxg-chart
+                    nxg-chart-type="Doughnut"
+                    nxg-chart-data="fakeCreditChartData.inner"
+                    nxg-chart-options="{percentageInnerCutout: 80}">
+            </canvas>
+        </div>
+
     </div>
     <div class="span3 summary unapplied-funds">
         <h3>Unapplied Funds</h3>

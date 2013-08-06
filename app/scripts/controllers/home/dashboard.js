@@ -23,6 +23,16 @@ angular.module('nextgearWebApp')
     // dummy data
     $scope.unappliedFunds = 2641.00;
     $scope.totalAvailable = 2641.90;
+    $scope.fakeCreditChartData = {
+      outer: [
+        { color: '#9F9F9F', value: 75000 },
+        { color: '#575757', value: 450000 }
+      ],
+      inner: [
+        { color: '#54BD45', value: 50500 },
+        { color: '#3D9AF4', value: 474000 }
+      ]
+    };
 
     // move this + PayoutCtrl into a directive?
     $scope.openRequestPayout = function() {
