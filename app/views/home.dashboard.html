@@ -65,8 +65,8 @@
                 <tr ng-repeat="payment in upcomingPayments">
                     <td title="Due Date">{{ payment.DueDate | date:'shortDate'  }}</td>
                     <td title="Description">{{ payment.UnitDescription }}</td>
-                    <td title="Payoff Due">{{ payment.PrincipalPayoff | currency }}</td>
-                    <td title="Payment Due">{{ payment.AmountDue | currency }}</td>
+                    <td title="Payoff Due"><span ng-show="payment.IsPayoff">{{ payment.PrincipalPayoff | currency }}</span></td>
+                    <td title="Payment Due"><span ng-show="!payment.IsPayoff">{{ payment.AmountDue | currency }}</span></td>
                 </tr>
             </table>
             <tfoot>
