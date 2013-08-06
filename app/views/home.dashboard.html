@@ -74,8 +74,12 @@
             </tfoot>
         </div>
         <div class="span4 graphic">
-            <!-- TODO: Add once charting library is chosen. -->
-            [payments pie chart]
+            <div nxg-chart
+                 nxg-chart-width="100"
+                 nxg-chart-height="100"
+                 nxg-chart-type="Pie"
+                 nxg-chart-data="summary.chartData">
+            </div>
         </div>
     </div>
 </section>

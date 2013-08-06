@@ -151,17 +151,23 @@ angular.module('nextgearWebApp')
             amount: _.reduce(accountFees, function(total, item) { return total + item.Balance; }, 0)
           };
 
+          var chartData = [
+            { color: '#66554E', value: accountFees.amount }, // Fees
+            { color: '#897A71', value: 10000 },              // Payments
+            { color: '#B4A8A0', value: 10000 }               // Scheduled Payments
+          ];
+
           return {
             overdue:     overdue,
             dueToday:    dueToday,
             thisWeek:    thisWeek,
-            accountFees: accountFees
+            accountFees: accountFees,
+            chartData:   chartData
           };
         });
       },
       fetchUpcomingPayments: function() {
         var promise = api.request('GET','/payment/search', {DueDateStart: (new Date().getTime())});
-        
         return promise.then(function(results) {
           var upcomingPayments = results.SearchResults;
           for (var i = 0; i < upcomingPayments.length; i++) {
