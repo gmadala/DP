@@ -37,10 +37,29 @@ describe('Controller: ReceiptsCtrl', function () {
     expect(typeof scope.search).toBe('function');
   });
 
-  it('should attach receipts to the scope', function () {
+  it('should attach receipts to the scope upon search', function () {
     scope.search();
     httpBackend.flush();
     expect(scope.receipts.length).toBe(1);
   });
+
+  it('should auto-search with a provided search param on the URL', inject(function ($controller, $rootScope) {
+    httpBackend.expectGET(/\/receipt\/search\?.+/).respond({
+      'Success': true,
+      'Message': null,
+      'Data': {
+        'Receipts': [{}]
+      }
+    });
+
+    var scope2 = $rootScope.$new(),
+    ReceiptsCtrl2 = $controller('ReceiptsCtrl', {
+      $scope: scope,
+      $stateParams: {search: '123'}
+    });
+
+    httpBackend.flush();
+    expect(scope.receipts.length).toBe(1);
+  }));
 
 });
