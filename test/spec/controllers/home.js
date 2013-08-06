@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: HomeCtrl', function () {
+describe('Controller: HomeCtrl', function() {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
@@ -9,9 +9,9 @@ describe('Controller: HomeCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope) {
     scope = $rootScope.$new();
-      HomeCtrl = $controller('HomeCtrl', {
+    HomeCtrl = $controller('HomeCtrl', {
       $scope: scope
     });
   }));

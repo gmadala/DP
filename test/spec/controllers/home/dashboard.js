@@ -6,19 +6,74 @@ describe('Controller: DashboardCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var DashboardCtrl,
-      scope;
+    scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
+
     scope = $rootScope.$new();
     DashboardCtrl = $controller('DashboardCtrl', {
       $scope: scope,
+
       Payments: {
-        fetchSummary: function() { return { then: function() {} } },
-        fetchUpcomingPayments: function() { return { then: function() {} } }
+        fetchSummary: function() {
+          return {
+            then: function(success, error) {
+              success({
+                overdue:     { quantity: 1, amount: 0 },
+                dueToday:    { quantity: 1, amount: 0 },
+                thisWeek:    { quantity: 1, amount: 0 },
+                accountFees: { quantity: 1, amount: 0 },
+                chartData:   [
+                  { color: "#66554E", value: 10470 },
+                  { color: "#897A71", value: 10000 },
+                  { color: "#B4A8A0", value: 10000 }
+                ]
+              });
+            }
+          };
+        },
+        fetchUpcomingPayments: function() {
+          return {
+            then: function(success, error) {
+              success([])
+            }
+          }
+        },
+        fetchUpcomingCalendar: function() {
+          return {
+            then: function(success, error) {
+              success({
+                dueEvents: [],
+                scheduledEvents: [],
+                eventsByDate: [],
+                openDates: []
+              });
+            }
+          };
+        }
       },
       Receipts: {
-        fetchRecent: function() { return { then: function() {} } }
+        fetchRecent: function() {
+          return {
+            then: function(success, error) {
+              success({
+                ReceiptRowCount: 0,
+                Receipts: []
+              });
+            }
+          }
+        },
+        search: function() {
+          return {
+            then: function(success, error) {
+              success({
+                ReceiptRowCount: 0,
+                Receipts: []
+              });
+            }
+          }
+        }
       },
       DealerCredit: {
         fetch: function() { return { then: function() {} } }
@@ -32,6 +87,10 @@ describe('Controller: DashboardCtrl', function () {
 
   it('should attach a viewMode to the scope', function () {
     expect(scope.viewMode).toBeDefined();
+  });
+
+  it('should attach a list of upcoming payments to the scope', function() {
+    expect(scope.upcomingPayments).toBeDefined();
   });
 
 });
