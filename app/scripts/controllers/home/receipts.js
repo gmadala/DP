@@ -3,6 +3,8 @@
 angular.module('nextgearWebApp')
   .controller('ReceiptsCtrl', function($scope, $log, Receipts) {
 
+    $scope.isCollapsed = true;
+
     // This is a generic piece of data that maps to multiple API params
     $scope.keyword = null;
 
