@@ -62,7 +62,7 @@ describe('Controller: DashboardCtrl', function () {
                 Receipts: []
               });
             }
-          }
+          };
         },
         search: function() {
           return {
@@ -72,14 +72,26 @@ describe('Controller: DashboardCtrl', function () {
                 Receipts: []
               });
             }
-          }
+          };
         }
       },
       DealerCredit: {
-        fetch: function() { return { then: function() {} } }
+        fetch: function() {
+          return {
+            then: function(success) {
+              success({});
+            }
+          };
+        }
       },
       Floorplan: {
-        fetchStatusSummary: function() { return { then: function() {} } }
+        fetchStatusSummary: function() {
+          return {
+            then: function(success) {
+              success({});
+            }
+          };
+        }
       }
     });
   }));
@@ -94,6 +106,22 @@ describe('Controller: DashboardCtrl', function () {
 
   it('should attach a list of upcoming payments to the scope', function() {
     expect(scope.upcomingPayments).toBeDefined();
+  });
+
+  it('should attach a payment summary to the scope', function() {
+    expect(scope.summary).toBeDefined();
+  });
+
+  it('should attach a list of recent receipts to the scope', function() {
+    expect(scope.recentReceipts).toBeDefined();
+  });
+
+  it('should attach some credit information to the scope', function() {
+    expect(scope.credit).toBeDefined();
+  });
+
+  it('should attach a floorplan status summary to the scope', function() {
+    expect(scope.floorplanSummary).toBeDefined();
   });
 
 });
