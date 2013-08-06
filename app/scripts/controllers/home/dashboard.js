@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts) {
     $scope.viewMode = 'week';
 
     $scope.isCollapsed = true;
@@ -14,6 +14,11 @@ angular.module('nextgearWebApp')
     Payments.fetchUpcomingPayments().then(function(results) {
       $scope.upcomingPayments = results;
     });
+
+    Receipts.fetchRecent().then(
+      function(results) { $scope.recentReceipts = results.Receipts; },
+      function(error) { $log.error(error); }
+    );
 
     // dummy data
     $scope.unappliedFunds = 2641.00;

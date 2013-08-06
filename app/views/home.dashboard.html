@@ -114,6 +114,14 @@
     </div>
     <div class="span3 summary receipts">
         <h3>Most Recent Receipts</h3>
+        <table>
+            <tr ng-repeat="receipt in recentReceipts">
+                <td>{{ receipt.CreateDate * 1000 | date:'shortDate' }}</td>
+                <td>#{{ receipt.TransactionNumber }}</td>
+                <td>{{ receipt.AmountProvided | currency }}</td>
+                <td><a ng-href="#/home/receipts?search={{ receipt.TransactionNumber }}">View</a></td>
+            </tr>
+        </table>
         <a class="more" href="#/home/receipts">View All Receipts<i class="icon-arrow-right"></i></a>
     </div>
 </section>
