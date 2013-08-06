@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgChart', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgChart/nxgChart.html'));
+  beforeEach(module('nextgearWebApp'));
 
   var element;
 
