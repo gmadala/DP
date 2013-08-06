@@ -74,12 +74,18 @@
             </tfoot>
         </div>
         <div class="span4 graphic">
-            <div nxg-chart
-                 nxg-chart-width="100"
-                 nxg-chart-height="100"
-                 nxg-chart-type="Pie"
-                 nxg-chart-data="summary.chartData">
-            </div>
+            <canvas width="100"
+                    height="100"
+                    nxg-chart
+                    nxg-chart-type="Pie"
+                    nxg-chart-data="summary.chartData">
+            </canvas>
+            <ul>
+                <li>Fees: {{summary.chartData[0].value | currency}}</li>
+                <li>Payments: {{summary.chartData[1].value | currency}}</li>
+                <li>Scheduled Payments: {{summary.chartData[2].value | currency}}</li>
+                <li>Total for this week: {{summary.chartData[0].value + summary.chartData[1].value + summary.chartData[2].value | currency}}</li>
+            </ul>
         </div>
     </div>
 </section>
@@ -87,6 +93,12 @@
 <section class="row-fluid summaries">
     <div class="span4 summary credit">
         <h3>Credit</h3>
+        <canvas width="100"
+                height="100"
+                nxg-chart
+                nxg-chart-type="Doughnut"
+                nxg-chart-data="summary.chartData">
+        </canvas>
     </div>
     <div class="span3 summary unapplied-funds">
         <h3>Unapplied Funds</h3>

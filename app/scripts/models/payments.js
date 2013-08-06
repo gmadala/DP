@@ -151,6 +151,7 @@ angular.module('nextgearWebApp')
             amount: _.reduce(accountFees, function(total, item) { return total + item.Balance; }, 0)
           };
 
+          // @see http://www.chartjs.org/docs/#pieChart-dataStructure
           var chartData = [
             { color: '#66554E', value: accountFees.amount }, // Fees
             { color: '#897A71', value: 10000 },              // Payments
