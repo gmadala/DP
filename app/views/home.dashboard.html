@@ -147,6 +147,26 @@
     </div>
     <div class="span2 summary floorplan">
         <h3>Floorplan</h3>
+        <ul>
+            <li>
+                <a class="more" href="#/home/floorplan">
+                    <span class="item-total">{{ floorplanSummary.approved | ifMissing }}</span>
+                    <span>Approved</span>
+                </a>
+            </li>
+            <li>
+                <a class="more" href="#/home/floorplan">
+                    <span class="item-total">{{ floorplanSummary.pending | ifMissing }}</span>
+                    <span>Pending</span>
+                </a>
+            </li>
+            <li>
+                <a class="more" href="#/home/floorplan">
+                    <span class="item-total">{{ floorplanSummary.denied | ifMissing }}</span>
+                    <span>Denied</span>
+                </a>
+            </li>
+        </ul>
         <a class="more" href="#/home/floorplan">View Floorplan<i class="icon-arrow-right"></i></a>
     </div>
     <div class="span3 summary receipts">

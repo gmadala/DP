@@ -77,6 +77,9 @@ describe('Controller: DashboardCtrl', function () {
       },
       DealerCredit: {
         fetch: function() { return { then: function() {} } }
+      },
+      Floorplan: {
+        fetchStatusSummary: function() { return { then: function() {} } }
       }
     });
   }));

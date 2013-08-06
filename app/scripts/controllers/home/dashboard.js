@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts, DealerCredit) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts, DealerCredit, Floorplan) {
     $scope.viewMode = 'week';
 
     $scope.isCollapsed = true;
@@ -22,6 +22,17 @@ angular.module('nextgearWebApp')
 
     DealerCredit.fetch().then(
       function(results) { $scope.credit = results; },
+      function(error) { $log.error(error); }
+    );
+
+    Floorplan.fetchStatusSummary().then(
+      function(results) {
+        $scope.floorplanSummary = {
+          approved: results.ApprovedFloorplans,
+          pending: results.PendingFloorplans,
+          denied: results.DeniedFloorplans
+        };
+      },
       function(error) { $log.error(error); }
     );
 
