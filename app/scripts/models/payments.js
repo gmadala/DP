@@ -176,6 +176,7 @@ angular.module('nextgearWebApp')
             // but the views expect it to be in milliseconds (e.g. Angular date filter)
             upcomingPayments[i].DueDate *= 1000;
             upcomingPayments[i].ScheduleSetupDate *= 1000;
+            upcomingPayments[i].ScheduledPaymentDate *= 1000;
           }
           return upcomingPayments;
         });
