@@ -16,23 +16,4 @@ describe('Controller: HomeCtrl', function () {
     });
   }));
 
-  it('should attach a list of payments to the scope', function () {
-    expect(scope.payments.length).toBe(1);
-  });
-
-  it('should attach a list of curtailment to the scope', function () {
-    expect(scope.curtailment.length).toBe(1);
-  });
-
-  it('should attach isCollapsed to the scope', function () {
-    expect(scope.isCollapsed).toBe(true);
-  });
-
-  it('should attach schPayments to the scope', function () {
-    expect(scope.schPayments.length).toBe(1);
-  });
-
-  it('should attach floorplan to the scope', function () {
-    expect(scope.floorplan.length).toBe(1);
-  });
 });

@@ -42,4 +42,5 @@ describe('Controller: ReceiptsCtrl', function () {
     httpBackend.flush();
     expect(scope.receipts.length).toBe(1);
   });
+
 });

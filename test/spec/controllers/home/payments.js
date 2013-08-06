@@ -16,4 +16,12 @@ describe('Controller: PaymentsCtrl', function () {
     });
   }));
 
+  it('should attach a list of payments to the scope', function () {
+    expect(scope.payments.length).toBe(1);
+  });
+
+  it('should attach a list of curtailment to the scope', function () {
+    expect(scope.curtailment.length).toBe(1);
+  });
+
 });
