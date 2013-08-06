@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, Receipts) {
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts) {
 
     $scope.isCollapsed = true;
 
@@ -35,4 +35,15 @@ angular.module('nextgearWebApp')
         function(error) { $log.error(error); }
       );
     };
+
+    // handle deep-link search param on URL
+    if ($stateParams.search) {
+      $scope.keyword = $stateParams.search;
+      angular.extend($scope.criteria, {
+        StartDate: null,
+        EndDate: null,
+        PaymentMethod: null
+      });
+      $scope.search();
+    }
   });

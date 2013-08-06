@@ -38,7 +38,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
         controller: 'ScheduledCtrl'
       })
       .state('home.receipts', {
-        url: '/receipts',
+        url: '/receipts?search',
         templateUrl: 'views/home.receipts.html',
         controller: 'ReceiptsCtrl'
       })
