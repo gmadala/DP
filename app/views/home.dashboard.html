@@ -94,6 +94,29 @@
     <div class="span4 summary credit">
         <h3>Credit</h3>
 
+        <table class="credit-summary-table">
+            <tr>
+                <td>Line of Credit</td>
+                <td>+ {{credit.lineOfCredit | numeral:'$0,0'}}</td>
+            </tr>
+            <tr class="credit-summary-table-total-row">
+                <td>Temp Line of Credit</td>
+                <td>+ {{credit.tempLineOfCredit | numeral:'$0,0'}}</td>
+            </tr>
+            <tr>
+                <td>Total Credit</td>
+                <td>= {{credit.totalCredit | numeral:'$0,0'}}</td>
+            </tr>
+            <tr class="credit-summary-table-total-row">
+                <td>Utilized Credit</td>
+                <td>- {{credit.utilizedCredit | numeral:'$0,0'}}</td>
+            </tr>
+            <tr>
+                <td>Available Credit</td>
+                <td>= {{credit.availableCredit | numeral:'$0,0'}}</td>
+            </tr>
+        </table>
+
         <div class="nxg-doughnut-chart-nested">
             <canvas width="110"
                     height="110"
@@ -101,7 +124,7 @@
                     nxg-chart
                     nxg-chart-type="Doughnut"
                     nxg-chart-data="credit.chartData.outer"
-                    nxg-chart-options="{percentageInnerCutout: 77}">
+                    nxg-chart-options="{animation: true, percentageInnerCutout: 77}">
             </canvas>
             <canvas width="90"
                     height="90"
@@ -109,36 +132,13 @@
                     nxg-chart
                     nxg-chart-type="Doughnut"
                     nxg-chart-data="credit.chartData.inner"
-                    nxg-chart-options="{percentageInnerCutout: 85}">
+                    nxg-chart-options="{animation: true, percentageInnerCutout: 85}">
             </canvas>
             <label class="nxg-doughnut-chart-label">
                 <p class="nxg-doughnut-chart-label-primary">{{credit.availableCredit | numeral:'($0a)'}}</p>
                 <p class="nxg-doughnut-chart-label-secondary">of {{credit.totalCredit | numeral:'($0a)'}}</p>
             </label>
         </div>
-
-        <table>
-            <tr>
-                <td>Available Credit</td>
-                <td>{{credit.availableCredit | currency}}</td>
-            </tr>
-            <tr>
-                <td>Utilized Credit</td>
-                <td>{{credit.utilizedCredit | currency}}</td>
-            </tr>
-            <tr>
-                <td>Temp Line of Credit</td>
-                <td>{{credit.tempLineOfCredit | currency}}</td>
-            </tr>
-            <tr>
-                <td>Line of Credit</td>
-                <td>{{credit.lineOfCredit | currency}}</td>
-            </tr>
-            <tr>
-                <td>Total Credit</td>
-                <td>{{credit.totalCredit | currency}}</td>
-            </tr>
-        </table>
 
     </div>
     <div class="span3 summary unapplied-funds">

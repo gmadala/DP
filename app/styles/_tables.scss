@@ -1,0 +1,13 @@
+.credit-summary-table {
+  float: right;
+  font-size: 11px;
+  line-height: 16px;
+  tr {
+    td:last-child {
+      text-align: right;
+    }
+  }
+}
+.credit-summary-table-total-row {
+  border-bottom: 1px solid #999;
+}
