@@ -14,12 +14,12 @@ angular.module('nextgearWebApp')
             totalCredit:      response.LinesOfCredit[0].TotalCredit,
             chartData: {
               outer: [
-                { color: '#9F9F9F', value: response.LinesOfCredit[0].TemporaryCredit },
-                { color: '#575757', value: response.LinesOfCredit[0].ApprovedCredit }
+                { color: '#575757', value: response.LinesOfCredit[0].ApprovedCredit },
+                { color: '#9F9F9F', value: response.LinesOfCredit[0].TemporaryCredit }
               ],
               inner: [
-                { color: '#54BD45', value: response.LinesOfCredit[0].CreditAvailable },
-                { color: '#3D9AF4', value: response.LinesOfCredit[0].Outstanding }
+                { color: '#3D9AF4', value: response.LinesOfCredit[0].Outstanding },
+                { color: '#54BD45', value: response.LinesOfCredit[0].CreditAvailable }
               ]
             }
           };

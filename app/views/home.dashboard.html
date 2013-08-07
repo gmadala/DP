@@ -95,22 +95,26 @@
         <h3>Credit</h3>
 
         <div class="nxg-doughnut-chart-nested">
-            <canvas width="100"
-                    height="100"
+            <canvas width="110"
+                    height="110"
                     class="nxg-doughnut-chart-outer"
                     nxg-chart
                     nxg-chart-type="Doughnut"
                     nxg-chart-data="credit.chartData.outer"
                     nxg-chart-options="{percentageInnerCutout: 77}">
             </canvas>
-            <canvas width="80"
-                    height="80"
+            <canvas width="90"
+                    height="90"
                     class="nxg-doughnut-chart-inner"
                     nxg-chart
                     nxg-chart-type="Doughnut"
                     nxg-chart-data="credit.chartData.inner"
-                    nxg-chart-options="{percentageInnerCutout: 80}">
+                    nxg-chart-options="{percentageInnerCutout: 85}">
             </canvas>
+            <label class="nxg-doughnut-chart-label">
+                <p class="nxg-doughnut-chart-label-primary">{{credit.availableCredit | nxgCurrency}}</p>
+                <p class="nxg-doughnut-chart-label-secondary">of {{credit.totalCredit | nxgCurrency}}</p>
+            </label>
         </div>
 
         <table>

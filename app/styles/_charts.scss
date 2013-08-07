@@ -8,3 +8,20 @@
   left: 10px;
   bottom: 15px;
 }
+.nxg-doughnut-chart-label {
+  position: absolute;
+  top: 40px;
+  left: 35px;
+  text-align: center;
+}
+.nxg-doughnut-chart-label-primary {
+  font-size: 18px;
+  color: #53BF42;
+  margin: 0;
+}
+.nxg-doughnut-chart-label-secondary {
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 9px;
+  margin: 0;
+}
