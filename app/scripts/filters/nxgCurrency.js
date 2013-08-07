@@ -2,10 +2,13 @@
 
 angular.module('nextgearWebApp')
   .filter('nxgCurrency', function () {
-    return function(n) {
-      if (!angular.isNumber(n)) {
+    return function(num) {
+      if (!angular.isNumber(num)) {
         return '';
       }
-      return '$' + (n / 1000).toFixed(0) + 'k';
+      if (num > 999) {
+        num = (num / 1000).toFixed(0) + 'k';
+      }
+      return '$' + num;
     };
   });
