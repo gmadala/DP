@@ -38,7 +38,7 @@ describe('Controller: DashboardCtrl', function () {
             then: function(success, error) {
               success([])
             }
-          }
+          };
         },
         fetchUpcomingCalendar: function() {
           return {
