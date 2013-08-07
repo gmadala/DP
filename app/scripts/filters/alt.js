@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .filter('ifMissing', function () {
+  .filter('alt', function () {
     return function (input, alternative) {
       alternative = angular.isDefined(alternative) ? alternative : '?';
       if (angular.isDefined(input) && input !== null && input !== '') {

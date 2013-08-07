@@ -150,19 +150,19 @@
         <ul>
             <li>
                 <a class="more" href="#/home/floorplan">
-                    <span class="item-total">{{ floorplanSummary.approved | ifMissing }}</span>
+                    <span class="item-total">{{ floorplanSummary.approved | alt }}</span>
                     <span>Approved</span>
                 </a>
             </li>
             <li>
                 <a class="more" href="#/home/floorplan">
-                    <span class="item-total">{{ floorplanSummary.pending | ifMissing }}</span>
+                    <span class="item-total">{{ floorplanSummary.pending | alt }}</span>
                     <span>Pending</span>
                 </a>
             </li>
             <li>
                 <a class="more" href="#/home/floorplan">
-                    <span class="item-total">{{ floorplanSummary.denied | ifMissing }}</span>
+                    <span class="item-total">{{ floorplanSummary.denied | alt }}</span>
                     <span>Denied</span>
                 </a>
             </li>
