@@ -43,7 +43,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
         controller: 'ReceiptsCtrl'
       })
       .state('home.floorplan', {
-        url: '/floorplan',
+        url: '/floorplan?filter',
         templateUrl: 'views/home.floorplan.html',
         controller: 'FloorplanCtrl'
       })
