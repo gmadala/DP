@@ -30,7 +30,7 @@ angular.module('nextgearWebApp')
         $scope.floorplanSummary = {
           approved: results.ApprovedFloorplans,
           pending: results.PendingFloorplans,
-          denied: results.DeniedFloorplans
+          denied: results.DeniedFloorplans  // availability pending Leaf API change ticket DTWO-1891
         };
       },
       function(error) { $log.error(error); }
