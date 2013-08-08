@@ -158,19 +158,34 @@
         <h3>Floorplan</h3>
         <ul>
             <li>
-                <a class="more" href="#/home/floorplan?filter=approved">
+                <a class="more" href="#/home/floorplan?filter=approved"
+                   tooltip="This status applies to vehicles floored via NextGearCapital.com
+                     or by a NextGear employee via NextGear's Discover system that have been approved
+                      and are currently on the NextGear dealers floorplan."
+                   tooltip-placement="right"
+                   tooltip-popup-delay="700">
                     <span class="item-total">{{ floorplanSummary.approved | alt }}</span>
                     <span>Approved</span>
                 </a>
             </li>
             <li>
-                <a class="more" href="#/home/floorplan?filter=pending">
+                <a class="more" href="#/home/floorplan?filter=pending"
+                   tooltip="This status applies to vehicles floored via NextGearCapital.com
+                    or by a NextGear employee via NextGear's Discover system that have not yet been
+                    approved by a NextGear employee."
+                   tooltip-placement="right"
+                   tooltip-popup-delay="700">
                     <span class="item-total">{{ floorplanSummary.pending | alt }}</span>
                     <span>Pending</span>
                 </a>
             </li>
             <li>
-                <a class="more" href="#/home/floorplan?filter=denied">
+                <a class="more" href="#/home/floorplan?filter=denied"
+                   tooltip="This status applies to vehicles floored via NextGearCapital.com
+                    that have been denied by a NextGear employee. Please contact NextGear Customer
+                    Service to find out why a vehicle has been denied."
+                   tooltip-placement="right"
+                   tooltip-popup-delay="700">
                     <span class="item-total">{{ floorplanSummary.denied | alt }}</span>
                     <span>Denied</span>
                 </a>
