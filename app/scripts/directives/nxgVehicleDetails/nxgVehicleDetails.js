@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('vehicleDetails', function() {
     return {
       restrict: 'A',
-      templateUrl: 'scripts/directives/vehicleDetails/vehicleDetails.html',
+      templateUrl: 'scripts/directives/nxgVehicleDetails/nxgVehicleDetails.html',
       scope: {
         stockNumber: '='
       },
