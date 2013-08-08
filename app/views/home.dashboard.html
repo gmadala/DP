@@ -96,22 +96,27 @@
 
         <table class="credit-summary-table">
             <tr>
+                <td><i class="nxg-chart-legend-color nxg-chart-approved-credit"></i></td>
                 <td>Line of Credit</td>
                 <td>+ {{credit.lineOfCredit | numeral:'$0,0'}}</td>
             </tr>
             <tr class="credit-summary-table-total-row">
+                <td><i class="nxg-chart-legend-color nxg-chart-temporary-credit"></i></td>
                 <td>Temp Line of Credit</td>
                 <td>+ {{credit.tempLineOfCredit | numeral:'$0,0'}}</td>
             </tr>
             <tr>
+                <td></td>
                 <td>Total Credit</td>
                 <td>= {{credit.totalCredit | numeral:'$0,0'}}</td>
             </tr>
             <tr class="credit-summary-table-total-row">
+                <td><i class="nxg-chart-legend-color nxg-chart-utilized-credit"></i></td>
                 <td>Utilized Credit</td>
                 <td>- {{credit.utilizedCredit | numeral:'$0,0'}}</td>
             </tr>
             <tr>
+                <td><i class="nxg-chart-legend-color nxg-chart-available-credit"></i></td>
                 <td>Available Credit</td>
                 <td>= {{credit.availableCredit | numeral:'$0,0'}}</td>
             </tr>

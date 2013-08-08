@@ -26,3 +26,17 @@
   line-height: 9px;
   margin: 0;
 }
+.nxg-chart-legend-color {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+/**
+ * These chart colors are also defined in the chart's JSON data.
+ * So if you need change these hex colors, you need to do that in both places.
+ * @see app/scripts/models/dealerCredit.js
+ */
+.nxg-chart-approved-credit  { background-color: #575757 }
+.nxg-chart-temporary-credit { background-color: #9F9F9F }
+.nxg-chart-utilized-credit  { background-color: #3D9AF4 }
+.nxg-chart-available-credit { background-color: #54BD45 }
