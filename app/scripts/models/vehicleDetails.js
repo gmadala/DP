@@ -33,7 +33,7 @@ angular.module('nextgearWebApp')
           };
         });
       },
-      getCurtailmentSchedule: function(stockNum) {
+      getCurtailmentSchedule: function(/*stockNum*/) {
         // TODO: Yet to be defined in the service
         /*return api.request('GET', 'someServiceURL/' + stockNum).then(function(r) {
          return {

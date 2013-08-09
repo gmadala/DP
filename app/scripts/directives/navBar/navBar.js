@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('navBar', function() {
     return {
       restrict: 'A',
-      templateUrl: "scripts/directives/navBar/navBar.html",
+      templateUrl: 'scripts/directives/navBar/navBar.html',
       controller: 'NavBarCtrl'
     };
   })
@@ -15,11 +15,11 @@ angular.module('nextgearWebApp')
     $scope.showNavbar = false;
 
     // fetch the dealer info every time there's a new session (user could have changed)
-    $scope.$on("AuthenticationSuccess", function() {
+    $scope.$on('AuthenticationSuccess', function() {
       User.refreshInfo().then(function(results) {
         $scope.dealerInfo = results;
         $scope.isDealer = User.isDealer();
-      })
+      });
       $scope.showNavbar = true;
     });
   });

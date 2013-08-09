@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('vehicleDetails', function($timeout) {
+  .directive('vehicleDetails', function() {
     return {
       restrict: 'A',
       templateUrl: 'scripts/directives/vehicleDetails/vehicleDetails.html',

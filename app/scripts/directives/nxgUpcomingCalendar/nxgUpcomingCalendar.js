@@ -45,7 +45,7 @@ angular.module('nextgearWebApp')
                 $scope.eventSources.push(results.dueEvents, results.scheduledEvents);
                 // hack: force the dayRender logic to run again for each day now that we have data
                 $element.find('.fc-day').each(function (index, day) {
-                  day = $(day);
+                  day = angular.element(day);
                   $scope.options.dayRender(day.attr('data-date'), day);
                 });
               }, function (/*error*/) {

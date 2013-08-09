@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
         type: '@nxgChartType',
         options: '&nxgChartOptions'
       },
-      link: function(scope, element, attrs) {
+      link: function(scope, element) {
 
         // Default settings for all charts.
         // Can be overridden by passing options via `nxg-chart-options` attribute.
