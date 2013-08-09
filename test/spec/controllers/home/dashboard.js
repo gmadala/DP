@@ -51,12 +51,6 @@ describe('Controller: DashboardCtrl', function () {
               });
             }
           };
-        },
-        fetchUnappliedFundsInfo: function () {
-          return {
-            balance: 0,
-            available: 0
-          };
         }
       },
       Receipts: {
@@ -116,12 +110,6 @@ describe('Controller: DashboardCtrl', function () {
 
   it('should attach a payment summary to the scope', function() {
     expect(scope.paymentSummary).toBeDefined();
-  });
-
-  it('should attach an unapplied funds information object to the scope', function() {
-    expect(scope.unappliedFunds).toBeDefined();
-    expect(scope.unappliedFunds.balance).toBeDefined();
-    expect(scope.unappliedFunds.available).toBeDefined();
   });
 
   it('should attach a list of recent receipts to the scope', function() {
