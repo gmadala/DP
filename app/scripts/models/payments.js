@@ -182,7 +182,12 @@ angular.module('nextgearWebApp')
         });
       },
       fetchUnappliedFundsInfo: function () {
-        return api.request('GET', '/payment/info');
+        return api.request('GET', '/payment/info').then(function(result) {
+          return {
+            balance: result.UnappliedFundsBalance,
+            available: result.AvailableUnappliedFundsBalance
+          };
+        });
       }
     };
   });

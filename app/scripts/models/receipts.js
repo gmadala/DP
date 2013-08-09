@@ -7,7 +7,9 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/receipt/search', params);
       },
       fetchRecent: function() {
-        return api.request('GET', '/receipt/search?OrderBy=CreateDate&PageSize=5');
+        return api.request('GET', '/receipt/search?OrderBy=CreateDate&PageSize=5').then(function(result) {
+          return result.Receipts;
+        });
       }
     };
   });

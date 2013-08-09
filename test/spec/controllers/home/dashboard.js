@@ -54,12 +54,8 @@ describe('Controller: DashboardCtrl', function () {
         },
         fetchUnappliedFundsInfo: function () {
           return {
-            then: function(success, error) {
-              success({
-                UnappliedFundsBalance: 0,
-                AvailableUnappliedFundsBalance: 0
-              });
-            }
+            balance: 0,
+            available: 0
           };
         }
       },

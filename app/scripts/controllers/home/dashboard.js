@@ -2,49 +2,15 @@
 
 angular.module('nextgearWebApp')
   .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts, DealerCredit, Floorplan) {
-    $scope.viewMode = 'week';
 
-    $scope.isCollapsed = true;
-
-    Payments.fetchSummary().then(
-      function(results) { $scope.summary = results; },
-      function(error) { $log.error(error); }
-    );
-
-    Payments.fetchUpcomingPayments().then(function(results) {
-      $scope.upcomingPayments = results;
-    });
-
-    Receipts.fetchRecent().then(
-      function(results) { $scope.recentReceipts = results.Receipts; },
-      function(error) { $log.error(error); }
-    );
-
-    DealerCredit.fetch().then(
-      function(results) { $scope.credit = results; },
-      function(error) { $log.error(error); }
-    );
-
-    Payments.fetchUnappliedFundsInfo().then(
-      function(results) {
-        $scope.unappliedFunds = {
-          balance: results.UnappliedFundsBalance,
-          available: results.AvailableUnappliedFundsBalance
-        };
-      },
-      function(error) { $log.error(error); }
-    );
-
-    Floorplan.fetchStatusSummary().then(
-      function(results) {
-        $scope.floorplanSummary = {
-          approved: results.ApprovedFloorplans,
-          pending: results.PendingFloorplans,
-          denied: results.DeniedFloorplans  // availability pending Leaf API change ticket DTWO-1891
-        };
-      },
-      function(error) { $log.error(error); }
-    );
+    $scope.credit           = DealerCredit.fetch();
+    $scope.floorplanSummary = Floorplan.fetchStatusSummary();
+    $scope.isCollapsed      = true;
+    $scope.recentReceipts   = Receipts.fetchRecent();
+    $scope.summary          = Payments.fetchSummary();
+    $scope.unappliedFunds   = Payments.fetchUnappliedFundsInfo();
+    $scope.upcomingPayments = Payments.fetchUpcomingPayments();
+    $scope.viewMode         = 'week';
 
     // move this + PayoutCtrl into a directive?
     $scope.openRequestPayout = function() {
