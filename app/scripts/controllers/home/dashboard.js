@@ -25,6 +25,16 @@ angular.module('nextgearWebApp')
       function(error) { $log.error(error); }
     );
 
+    Payments.fetchUnappliedFundsInfo().then(
+      function(results) {
+        $scope.unappliedFunds = {
+          balance: results.UnappliedFundsBalance,
+          available: results.AvailableUnappliedFundsBalance
+        };
+      },
+      function(error) { $log.error(error); }
+    );
+
     Floorplan.fetchStatusSummary().then(
       function(results) {
         $scope.floorplanSummary = {
@@ -35,10 +45,6 @@ angular.module('nextgearWebApp')
       },
       function(error) { $log.error(error); }
     );
-
-    // dummy data
-    $scope.unappliedFunds = 2641.00;
-    $scope.totalAvailable = 2641.90;
 
     // move this + PayoutCtrl into a directive?
     $scope.openRequestPayout = function() {

@@ -149,9 +149,9 @@
     <div class="span3 summary unapplied-funds">
         <h3>Unapplied Funds</h3>
         <h4>Unapplied Funds</h4>
-        <p>{{ unappliedFunds | currency }}</p>
+        <p>{{ unappliedFunds.balance | currency | alt }}</p>
         <h4>Total Available</h4>
-        <p>{{ totalAvailable | currency }}</p>
+        <p>{{ unappliedFunds.available | currency | alt }}</p>
         <a class="more" ng-click="openRequestPayout()">Request Payout<i class="icon-arrow-right"></i></a>
     </div>
     <div class="span2 summary floorplan">

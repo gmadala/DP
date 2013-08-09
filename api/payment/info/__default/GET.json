@@ -1,26 +1,24 @@
 {
   "Success": true,
   "Message": null,
-  "Data": [
-    {
-      "UnappliedFundsBalance": 0,
-      "AvailableUnappliedFundsBalance": 0,
-      "PaymentRowCount": 824,
-      "SearchResults": [],
-      "AccountFees": [
-        {
-          "FinancialRecordId": "9baf65a7-02f7-45ff-b85c-50cd3bec9e6e",
-          "FinancialRecordTypeId": 4,
-          "Balance": 120,
-          "EffectiveUnixDate": 1373984256,
-          "Description": "Arbitrated:72694; Stock: 936",
-          "IsFee": true,
-          "FloorplanId": "00000000-0000-0000-0000-000000000000",
-          "StockNumber": null,
-          "Vin": null,
-          "ApplyToFinancialRecordId": null
-        }
-      ]
-    }
-  ]
+  "Data": {
+    "UnappliedFundsBalance": 0,
+    "AvailableUnappliedFundsBalance": 0,
+    "PaymentRowCount": 824,
+    "SearchResults": [],
+    "AccountFees": [
+      {
+        "FinancialRecordId": "9baf65a7-02f7-45ff-b85c-50cd3bec9e6e",
+        "FinancialRecordTypeId": 4,
+        "Balance": 120,
+        "EffectiveUnixDate": 1373984256,
+        "Description": "Arbitrated:72694; Stock: 936",
+        "IsFee": true,
+        "FloorplanId": "00000000-0000-0000-0000-000000000000",
+        "StockNumber": null,
+        "Vin": null,
+        "ApplyToFinancialRecordId": null
+      }
+    ]
+  }
 }

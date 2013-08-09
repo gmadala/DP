@@ -180,6 +180,9 @@ angular.module('nextgearWebApp')
           }
           return upcomingPayments;
         });
+      },
+      fetchUnappliedFundsInfo: function () {
+        return api.request('GET', '/payment/info');
       }
     };
   });
