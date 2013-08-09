@@ -1,6 +1,6 @@
 <section class="row-fluid upcoming">
     <h4 class="row-item">Upcoming Payments</h4>
-    <select class="row-item" name="viewMode" ng-model="viewMode">
+    <select class="row-item" name="viewMode" ng-model="viewMode" ng-init="viewMode = 'week'">
         <option value="week">This Week</option>
         <option value="month">This Month</option>
     </select>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
-    <div collapse="isCollapsed" class="row-fluid more-details">
+    <div collapse="isCollapsed" ng-init="isCollapsed = true" class="row-fluid more-details">
         <div class="span8">
             <h4>Upcoming Payments</h4>
             <table>
