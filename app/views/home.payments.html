@@ -1,85 +1,116 @@
-<form class="form-horizontal well search payments" novalidate>
-    <strong>Payments Search</strong>
-    <div class="control-group">
-        <label class="control-label" for="keyword">Keyword</label>
+<section class="row-fluid">
+    <section class="span9">
+        <form class="form-horizontal well search payments" novalidate>
+            <strong>Payments Search</strong>
+            <div class="control-group">
+                <label class="control-label" for="keyword">Keyword</label>
 
-        <div class="controls">
-            <input type="text" id="keyword" placeholder="Enter Stock # or VIN"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="startDate">Date Range</label>
-
-        <div class="controls">
-            <input type="date" id="startDate"/>
-        </div>
-        </div>
-    <div class="control-group">
-        <label class="control-label" for="endDate">To</label>
-
-        <div class="controls">
-            <input type="date" id="endDate"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="dateFilter">Filter List by Due Date</label>
-
-        <div class="controls">
-            <select id="dateFilter">
-                <option value="all">View All</option>
-                <option value="today">Due Today</option>
-                <option value="week">Due This Week</option>
-            </select>
-        </div>
-    </div>
-    <div class="control-group">
-        <input type="submit" value="search"/>
-    </div>
-</form><!-- end search form -->
-
-<!-- TODO: Add directives for payments and fees. -->
-<section class="payments-list">
-    <ul class="unstyled payments">
-        <li ng-repeat="pay in payments">
-            <header class="row-fluid">
-                <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>
-                <div class="span3"> {{ pay.vehicle }}</div>
-                <div class="span2"><strong>stock # </strong> {{ pay.stockNo }}</div>
-                <div class="span2"><strong>status </strong> {{ pay.status }}</div>
-            </header>
-            <div class="row-fluid">
-                <div class="span8">
-                    <div class="row-fluid">
-                        <div class="span2">
-                            <strong>due </strong><p> {{ pay.dueDate }} </p>
-                        </div>
-                        <div class="span2">
-                            <strong>payoff: </strong><p> {{ pay.payoff | currency }} </p>
-                        </div>
-                        <div class="span2">
-                            <strong>payment: </strong><p> {{ pay.payment | currency }} </p>
-                        </div>
-                        <div class="span2">
-                            <strong>title location: </strong><p> {{ pay.title }} </p>
-                        </div>
-                        <div class="span2">
-                            <strong>floored on: </strong><p> {{ pay.floorDate }} </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
-                <div class="span2 offset2">
-                    <button class="btn btn-small btn-block">Add Payment</button>
-                    <button class="btn btn-small btn-block">Add Payoff</button>
-                    <button class="btn btn-small btn-block">View Title</button>
+                <div class="controls">
+                    <input type="text" id="keyword" placeholder="Enter Stock # or VIN"/>
                 </div>
             </div>
+            <div class="control-group">
+                <label class="control-label" for="startDate">Date Range</label>
 
-            <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
-            <div collapse="isCollapsed" class="more-details">
-                <div vehicle-details stock-number="pay.stockNo"></div>
-            </div><!-- end more-details div -->
-        </li>
-    </ul>
+                <div class="controls">
+                    <input type="date" id="startDate"/>
+                </div>
+                </div>
+            <div class="control-group">
+                <label class="control-label" for="endDate">To</label>
+
+                <div class="controls">
+                    <input type="date" id="endDate"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="dateFilter">Filter List by Due Date</label>
+
+                <div class="controls">
+                    <select id="dateFilter">
+                        <option value="all">View All</option>
+                        <option value="today">Due Today</option>
+                        <option value="week">Due This Week</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <input type="submit" value="search"/>
+            </div>
+        </form><!-- end search form -->
+
+        <!-- TODO: Add directives for payments and fees. -->
+        <ul class="unstyled payments">
+            <li ng-repeat="pay in payments">
+                <header class="row-fluid">
+                    <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>
+                    <div class="span3"> {{ pay.vehicle }}</div>
+                    <div class="span2"><strong>stock # </strong> {{ pay.stockNo }}</div>
+                    <div class="span2"><strong>status </strong> {{ pay.status }}</div>
+                </header>
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="row-fluid">
+                            <div class="span2">
+                                <strong>due </strong><p> {{ pay.dueDate }} </p>
+                            </div>
+                            <div class="span2">
+                                <strong>payoff: </strong><p> {{ pay.payoff | currency }} </p>
+                            </div>
+                            <div class="span2">
+                                <strong>payment: </strong><p> {{ pay.payment | currency }} </p>
+                            </div>
+                            <div class="span2">
+                                <strong>title location: </strong><p> {{ pay.title }} </p>
+                            </div>
+                            <div class="span2">
+                                <strong>floored on: </strong><p> {{ pay.floorDate }} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
+                    <div class="span2 offset2">
+                        <button class="btn btn-small btn-block">Add Payment</button>
+                        <button class="btn btn-small btn-block">Add Payoff</button>
+                        <button class="btn btn-small btn-block">View Title</button>
+                    </div>
+                </div>
+
+                <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+                <div collapse="isCollapsed" class="more-details">
+                    <div vehicle-details stock-number="pay.stockNo"></div>
+                </div><!-- end more-details div -->
+            </li>
+        </ul>
+    </section>
+
+    <section class="span3 pay-queue">
+      <div>
+        <h3>Payment Summary</h3>
+        <p>Choose to make payments today or schedule your payments when you checkout.</p>
+      </div>
+
+      <div class="queue-items">
+        <p ng-hide="fees.length || queue.length">You have not selected a payment. <br/> Click the Add Payment or Add Payoff button to add one.</p>
+        <ul ng-show="fees.length || queue.length">
+          <li ng-repeat="fee in fees">
+            Account Fee <br/>
+            {{ fee.type }}<br/>
+            Payment {{ fee.payment | currency }}
+          </li>
+          <li ng-repeat="q in queue">
+            <button class="btn btn-mini" ng-click="remove()">X</button>
+            VIN: {{ q.vin }} <br/>
+            {{ q.year }} {{ q.make }} {{ q.model }} <br/>
+            Payment {{ q.payment | currency }}
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        Subtotal: {{ total }}
+
+        <button class="btn" ng-click="toCheckout()" ng-disabled="false">Continue to Checkout</button>
+      </div>
+    </section>
 </section>
-
