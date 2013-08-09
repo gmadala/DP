@@ -91,7 +91,7 @@
           <label>Enhanced Registration PIN</label>
           <input type="text" name="pin" ng-model="business.pin" ng-disable="business.enhanced" ng-pattern="/^[0-9]+$/" ng-minlength=4 required />
             <p class="error" ng-show="busSettings.pin.$error.minlength">
-              You need at least four numbers for your PIN.
+              Your PIN must consist of four numbers.
             </p>
             <p class="error" ng-show="busSettings.pin.$error.pattern">
               Your PIN must contain only numbers, no letters or special characters.

@@ -36,13 +36,5 @@
             <a ng-show="isDealer" href="#/analytics">View Analytics</a>
             <a href="#/documents">Documents</a>
         </nav>
-
-        <!-- TODO: Add ng-show so its only visible for dealers -->
-        <div class="span3 pay-queue summary" ng-show="isDealer">
-            <ul>
-                <li><label>Payment Queue:</label> <p>0 items</p></li>
-                <li><label>Subtotal:</label> <p>{{ 0 | currency }}</p></li>
-            </ul>
-        </div>
     </div>
 </header>
