@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
             pending: result.PendingFloorplans,
             denied: result.DeniedFloorplans  // availability pending Leaf API change ticket DTWO-1891
           };
-      });
+        });
       }
     };
   });
