@@ -4,11 +4,11 @@
     <form class="form-horizontal">
         <div class="control-group">
             <label class="control-label">Unapplied Funds</label>
-            <div class="controls">$2,837.11</div>
+            <div class="controls">{{ funds.balance | currency }}</div>
         </div>
         <div class="control-group">
             <label class="control-label">Total Available</label>
-            <div class="controls">$2,837.11</div>
+            <div class="controls">{{ funds.available | currency }}</div>
         </div>
 
         <div class="control-group">
