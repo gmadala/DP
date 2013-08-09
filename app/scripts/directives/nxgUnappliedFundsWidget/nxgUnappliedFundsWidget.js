@@ -10,7 +10,9 @@ angular.module('nextgearWebApp')
       controller: function ($scope, $dialog, Payments) {
         $scope.unappliedFunds = Payments.fetchUnappliedFundsInfo();
 
-        $scope.openRequestPayout = function() {
+        $scope.openRequestPayout = function($event) {
+          $event.preventDefault();
+
           var dialogOptions = {
             backdrop: true,
             keyboard: true,

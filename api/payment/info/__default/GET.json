@@ -2,8 +2,8 @@
   "Success": true,
   "Message": null,
   "Data": {
-    "UnappliedFundsBalance": 0,
-    "AvailableUnappliedFundsBalance": 0,
+    "UnappliedFundsBalance": 2222,
+    "AvailableUnappliedFundsBalance": 1111,
     "PaymentRowCount": 824,
     "SearchResults": [],
     "AccountFees": [

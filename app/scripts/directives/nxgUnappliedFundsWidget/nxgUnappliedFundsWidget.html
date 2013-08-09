@@ -4,5 +4,10 @@
     <p>{{ unappliedFunds.balance | currency | alt }}</p>
     <h4>Total Available</h4>
     <p>{{ unappliedFunds.available | currency | alt }}</p>
-    <a class="more" ng-click="openRequestPayout()">Request Payout<i class="icon-arrow-right"></i></a>
+    <a class="more" href="#"
+       ng-show="unappliedFunds.available > 0"
+       ng-click="openRequestPayout($event)">
+        Request Payout
+        <i class="icon-arrow-right"></i>
+    </a>
 </div>
