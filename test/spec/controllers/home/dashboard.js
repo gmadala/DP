@@ -96,14 +96,6 @@ describe('Controller: DashboardCtrl', function () {
     });
   }));
 
-  it('should attach isCollapsed to the scope', function () {
-    expect(scope.isCollapsed).toBe(true);
-  });
-
-  it('should attach a viewMode to the scope', function () {
-    expect(scope.viewMode).toBeDefined();
-  });
-
   it('should attach a list of upcoming payments to the scope', function() {
     expect(scope.upcomingPayments).toBeDefined();
   });
