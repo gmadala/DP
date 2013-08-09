@@ -115,7 +115,7 @@ describe('Controller: DashboardCtrl', function () {
   });
 
   it('should attach a payment summary to the scope', function() {
-    expect(scope.summary).toBeDefined();
+    expect(scope.paymentSummary).toBeDefined();
   });
 
   it('should attach an unapplied funds information object to the scope', function() {

@@ -3,14 +3,15 @@
 angular.module('nextgearWebApp')
   .controller('DashboardCtrl', function($scope, $dialog, $log, Payments, Receipts, DealerCredit, Floorplan) {
 
+    $scope.isCollapsed      = true;
+    $scope.viewMode         = 'week';
+
     $scope.credit           = DealerCredit.fetch();
     $scope.floorplanSummary = Floorplan.fetchStatusSummary();
-    $scope.isCollapsed      = true;
     $scope.recentReceipts   = Receipts.fetchRecent();
-    $scope.summary          = Payments.fetchSummary();
+    $scope.paymentSummary   = Payments.fetchSummary();
     $scope.unappliedFunds   = Payments.fetchUnappliedFundsInfo();
     $scope.upcomingPayments = Payments.fetchUpcomingPayments();
-    $scope.viewMode         = 'week';
 
     // move this + PayoutCtrl into a directive?
     $scope.openRequestPayout = function() {
