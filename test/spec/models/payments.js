@@ -152,5 +152,30 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('fetchUnappliedFundsInfo method', function () {
+
+    beforeEach(function () {
+      httpBackend.whenGET('/payment/info').respond({
+        "Success": true,
+        "Message": null,
+        "Data": {
+          "UnappliedFundsBalance": 0,
+          "AvailableUnappliedFundsBalance": 0
+        }
+      });
+    });
+
+    it('should return a promise', function () {
+      var ret = payments.fetchUnappliedFundsInfo();
+      expect(typeof ret.then).toBe('function');
+    });
+
+    it('should make the expected http request', function () {
+      payments.fetchUnappliedFundsInfo();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+  });
+
 
 });
