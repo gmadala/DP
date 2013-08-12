@@ -9,7 +9,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
       .state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl',
+        allowAnonymous: true
       })
 
       /**
@@ -76,25 +77,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
   })
   .run(function($rootScope, $location, User) {
 
-    /**
-     * Returns true if the route requires authentication, false otherwise.
-     * @param route
-     * @returns {boolean}
-     */
-    var routeRequiresAuth = function(state) {
-      switch(state.name) {
-      case 'login':
-      case 'forgotUsernameOrPassword':
-        return false;
-      default:
-        return true;
-      }
-    };
-
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        if (!User.isLoggedIn() && routeRequiresAuth(toState)) {
+        if (!User.isLoggedIn() && !toState.allowAnonymous) {
           // not logged in, redirect to login screen
           $location.path('/login');
         }
