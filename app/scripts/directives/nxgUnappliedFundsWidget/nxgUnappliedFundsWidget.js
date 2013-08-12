@@ -33,8 +33,9 @@ angular.module('nextgearWebApp')
       // TODO: Add MVC integration so that user gets a confirmation message when successful.
     };
   })
-  .controller('PayoutModalCtrl', function($scope, dialog, funds) {
+  .controller('PayoutModalCtrl', function($scope, dialog, funds, User) {
     $scope.funds = funds;
+    $scope.accounts = User.getStatics().BankAccounts;
 
     $scope.close = function() {
       // actually send data for payout here.

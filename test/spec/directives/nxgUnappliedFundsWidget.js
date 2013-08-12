@@ -72,4 +72,51 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
   });
 
+  describe('Payout modal controller', function () {
+
+    var scope, payoutCtrl;
+
+    beforeEach(inject(function ($rootScope, $controller) {
+      scope = $rootScope.$new();
+      payoutCtrl = $controller('PayoutModalCtrl', {
+        $scope: scope,
+        dialog: {
+          close: angular.noop
+        },
+        funds: {
+          balance: 1,
+          available: 2
+        },
+        User: {
+          getStatics: function () {
+            return {
+              BankAccounts: {
+                id1: 'name1',
+                id2: 'name2'
+              }
+            };
+          }
+        }
+      });
+
+    }));
+
+    it('should attach the list of accounts to the scope', function () {
+      var accountMock = {
+        id1: 'name1',
+        id2: 'name2'
+      };
+      expect(angular.equals(scope.accounts, accountMock)).toBe(true);
+    });
+
+    it('should attach the funds object to the scope', function () {
+      var fundsMock = {
+        balance: 1,
+        available: 2
+      };
+      expect(angular.equals(scope.funds, fundsMock)).toBe(true);
+    });
+
+  });
+
 });

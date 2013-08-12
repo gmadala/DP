@@ -21,7 +21,7 @@
             <label class="control-label" for="payoutBankAcct">Bank Account for Payout</label>
             <div class="controls">
                 <select id="payoutBankAcct">
-                    <option>PNC Bank - Main St.</option>
+                    <option ng-repeat="(id, name) in accounts" value="{{ id }}">{{ name }}</option>
                 </select>
             </div>
         </div>
