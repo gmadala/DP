@@ -78,14 +78,30 @@
                     height="100"
                     nxg-chart
                     nxg-chart-type="Pie"
-                    nxg-chart-data="paymentSummary.chartData">
+                    nxg-chart-data="paymentSummary.summary.chartData">
             </canvas>
-            <ul>
-                <li>Fees: {{paymentSummary.chartData[0].value | currency}}</li>
-                <li>Payments: {{paymentSummary.chartData[1].value | currency}}</li>
-                <li>Scheduled Payments: {{paymentSummary.chartData[2].value | currency}}</li>
-                <li>Total for this week: {{paymentSummary.chartData[0].value + paymentSummary.chartData[1].value + paymentSummary.chartData[2].value | currency}}</li>
-            </ul>
+            <table class="chart-summary-table">
+                <tr>
+                    <td><i class="nxg-chart-legend-color nxg-chart-fees"></i></td>
+                    <td>Fees</td>
+                    <td>{{paymentSummary.summary.fees | currency}}</td>
+                </tr>
+                <tr>
+                    <td><i class="nxg-chart-legend-color nxg-chart-payments"></i></td>
+                    <td>Payments</td>
+                    <td>{{paymentSummary.summary.payments | currency}}</td>
+                </tr>
+                <tr class="chart-summary-table-total-row">
+                    <td><i class="nxg-chart-legend-color nxg-chart-scheduled-payments"></i></td>
+                    <td>Scheduled Payments</td>
+                    <td>{{paymentSummary.summary.scheduledPayments | currency}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Total for this {{viewMode}}</td>
+                    <td>{{paymentSummary.summary.total | currency}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </section>
@@ -94,13 +110,13 @@
     <div class="span4 summary credit">
         <h3>Credit</h3>
 
-        <table class="credit-summary-table">
+        <table class="chart-summary-table">
             <tr>
                 <td><i class="nxg-chart-legend-color nxg-chart-approved-credit"></i></td>
                 <td>Line of Credit</td>
                 <td>+ {{credit.lineOfCredit | numeral:'$0,0'}}</td>
             </tr>
-            <tr class="credit-summary-table-total-row">
+            <tr class="chart-summary-table-total-row">
                 <td><i class="nxg-chart-legend-color nxg-chart-temporary-credit"></i></td>
                 <td>Temp Line of Credit</td>
                 <td>+ {{credit.tempLineOfCredit | numeral:'$0,0'}}</td>
@@ -110,7 +126,7 @@
                 <td>Total Credit</td>
                 <td>= {{credit.totalCredit | numeral:'$0,0'}}</td>
             </tr>
-            <tr class="credit-summary-table-total-row">
+            <tr class="chart-summary-table-total-row">
                 <td><i class="nxg-chart-legend-color nxg-chart-utilized-credit"></i></td>
                 <td>Utilized Credit</td>
                 <td>- {{credit.utilizedCredit | numeral:'$0,0'}}</td>

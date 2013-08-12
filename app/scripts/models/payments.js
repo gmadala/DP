@@ -151,19 +151,25 @@ angular.module('nextgearWebApp')
             amount: _.reduce(accountFees, function(total, item) { return total + item.Balance; }, 0)
           };
 
-          // @see http://www.chartjs.org/docs/#pieChart-dataStructure
-          var chartData = [
-            { color: '#66554E', value: accountFees.amount }, // Fees
-            { color: '#897A71', value: 10000 },              // Payments
-            { color: '#B4A8A0', value: 10000 }               // Scheduled Payments
-          ];
+          var summary = {
+            fees:              accountFees.amount,                                     // Correct data
+            payments:          overdue.amount,                                         // Incorrect data
+            scheduledPayments: thisWeek.amount,                                        // Incorrect data
+            total:             accountFees.amount + overdue.amount + thisWeek.amount,  // Incorrect data
+            // @see http://www.chartjs.org/docs/#pieChart-dataStructure
+            chartData: [
+              { color: '#66554E', value: accountFees.amount }, // Fees                    Correct data
+              { color: '#897A71', value: overdue.amount },     // Payments                Incorrect Data
+              { color: '#B4A8A0', value: thisWeek.amount }     // Scheduled Payments      Incorrect Data
+            ]
+          };
 
           return {
             overdue:     overdue,
             dueToday:    dueToday,
             thisWeek:    thisWeek,
             accountFees: accountFees,
-            chartData:   chartData
+            summary:     summary
           };
         });
       },
