@@ -2,62 +2,51 @@
     "Success": true,
     "Message": "Error retrieving dealer info.",
     "Data": {
-        "ProductType": [
-            {
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar"
-            }
-        ],
-        "Colors": [
-            {
-                "blue": "Blue",
-                "red": "Red",
-                "green": "Green",
-                "bisque": "Bisque"
-            }
-        ],
-        "States": [
-            {
-                "ny": "NY",
-                "nh": "NH",
-                "ca": "CA",
-                "ct": "CT"
-            }
-        ],
-        "Locations": [
-            {
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar"
-            }
-        ],
-        "BankAccounts": [
-            {
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar"
-            }
-        ],
-        "LinesOfCredit": [
-            {
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar",
-                "foo": "bar"
-            }
-        ],
+        "ProductType": {
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar"
+        },
+        "Colors": {
+            "blue": "Blue",
+            "red": "Red",
+            "green": "Green",
+            "bisque": "Bisque"
+        },
+        "States": {
+            "ny": "NY",
+            "nh": "NH",
+            "ca": "CA",
+            "ct": "CT"
+        },
+        "Locations": {
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar"
+        },
+        "BankAccounts": {
+            "id123": "PNC Bank - Main St.",
+            "id456": "Wells Fargo - XXX234",
+            "id789": "ESL Credit Union - XXX213"
+        },
+        "LinesOfCredit": {
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar",
+            "foo": "bar"
+        },
         "TitleLocationOptions": [
-            {
-                "Name": "Dealer N Ame",
-                "ResultingtitleLocationid": 243,
-                "TitleInfoenabled": true,
-                "TitleInfoRequired": true,
-                "DisplayOrder": 2
-            }
+          {
+            "id": 1,
+            "Name": "Dealer N Ame",
+            "ResultingTitleLocationid": 243,
+            "ResultingTitleTypeId": 456,
+            "TitleInfoEnabled": true,
+            "TitleInfoRequired": true,
+            "DisplayOrder": 2
+          }
         ]
     }
 }
