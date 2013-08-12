@@ -194,6 +194,13 @@ angular.module('nextgearWebApp')
             available: result.AvailableUnappliedFundsBalance
           };
         });
+      },
+      requestUnappliedFundsPayout: function (amount, bankAccountId) {
+        // API method for this is not yet spec'ed out - these are placeholder assumptions
+        return api.request('POST', '/payment/requestPayout', {
+          amount: amount,
+          bankAccountId: bankAccountId
+        });
       }
     };
   });

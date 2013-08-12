@@ -177,5 +177,26 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('requestUnappliedFundsPayout method', function () {
+
+    beforeEach(function () {
+      httpBackend.expectPOST('/payment/requestPayout').respond({
+        "Success": true,
+        "Message": null,
+      });
+    });
+
+    it('should return a promise', function () {
+      var ret = payments.requestUnappliedFundsPayout();
+      expect(typeof ret.then).toBe('function');
+    });
+
+    it('should make the expected http request', function () {
+      payments.requestUnappliedFundsPayout();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+  });
+
 
 });

@@ -33,7 +33,11 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       dialogMock = {
         dialog: function () {
           return {
-            open: angular.noop
+            open: function () {
+              return {
+                then: angular.noop
+              };
+            }
           };
         }
       }
@@ -74,15 +78,33 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
   describe('Payout modal controller', function () {
 
-    var scope, payoutCtrl;
+    var scope, payoutCtrl, paymentsMock, dialogMock,
+      flushPayoutRequestSuccess, flushPayoutRequestError;
 
     beforeEach(inject(function ($rootScope, $controller) {
+      paymentsMock = {
+        requestUnappliedFundsPayout: function (amount, accountId) {
+          return {
+            then: function (success, error) {
+              flushPayoutRequestSuccess = function () {
+                success();
+              };
+              flushPayoutRequestError = function (value) {
+                error(value);
+              };
+            }
+          };
+        }
+      };
+
+      dialogMock = {
+        close: angular.noop
+      };
+
       scope = $rootScope.$new();
       payoutCtrl = $controller('PayoutModalCtrl', {
         $scope: scope,
-        dialog: {
-          close: angular.noop
-        },
+        dialog: dialogMock,
         funds: {
           balance: 1,
           available: 2
@@ -96,7 +118,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
               }
             };
           }
-        }
+        },
+        Payments: paymentsMock
       });
 
     }));
@@ -115,6 +138,57 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         available: 2
       };
       expect(angular.equals(scope.funds, fundsMock)).toBe(true);
+    });
+
+    describe('submit function', function () {
+
+      it('should send along the expected data', function () {
+        spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
+        scope.selections = {
+          amount: 100,
+          accountId: 'foo'
+        };
+        scope.submit();
+        expect(paymentsMock.requestUnappliedFundsPayout).toHaveBeenCalledWith(100, 'foo');
+      });
+
+      it('should update the submitInProgress flag', function () {
+        scope.submit();
+        expect(scope.submitInProgress).toBe(true);
+        flushPayoutRequestSuccess();
+        expect(scope.submitInProgress).toBe(false);
+
+        scope.submit();
+        expect(scope.submitInProgress).toBe(true);
+        flushPayoutRequestError();
+        expect(scope.submitInProgress).toBe(false);
+      });
+
+      it('should expose any error on the scope', function () {
+        scope.submit();
+        expect(scope.submitError).toBe(null);
+        flushPayoutRequestError('10876');
+        expect(scope.submitError).toBe('10876');
+      });
+
+      it('should close the dialog with submitted data on success', function () {
+        spyOn(dialogMock, 'close');
+        scope.accounts = {
+          foo: 'BofA',
+          foo2: 'Chase'
+        };
+        scope.selections = {
+          amount: 100,
+          accountId: 'foo2'
+        };
+        scope.submit();
+        flushPayoutRequestSuccess();
+        expect(dialogMock.close).toHaveBeenCalled();
+        expect(dialogMock.close.mostRecentCall.args[0].amount).toBe(100);
+        expect(dialogMock.close.mostRecentCall.args[0].accountId).toBe('foo2');
+        expect(dialogMock.close.mostRecentCall.args[0].accountName).toBe('Chase');
+      });
+
     });
 
   });

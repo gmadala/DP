@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, Payments) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, Payments) {
     $scope.unappliedFunds = Payments.fetchUnappliedFundsInfo();
 
     $scope.openRequestPayout = function($event) {
@@ -18,8 +18,8 @@ angular.module('nextgearWebApp')
 
       var dialogOptions = {
         backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        keyboard: false,
+        backdropClick: false,
         templateUrl: 'scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html',
         controller: 'PayoutModalCtrl',
         resolve: {
@@ -29,16 +29,48 @@ angular.module('nextgearWebApp')
         }
       };
 
-      $dialog.dialog(dialogOptions).open();
-      // TODO: Add MVC integration so that user gets a confirmation message when successful.
+      $dialog.dialog(dialogOptions).open().then(
+        function (result) {
+          if (result) {
+            // wireframes do not specify any kind of success display, so let's just do a simple one
+            var title = 'Request submitted',
+              msg = 'Your request for a payout in the amount of ' +
+                $filter('currency')(result.amount) +
+                ' to your account "' + result.accountName +
+                '" has been successfully submitted.',
+              buttons = [{label: 'OK', cssClass: 'btn-primary'}];
+            $dialog.messageBox(title, msg, buttons).open();
+          }
+        }
+      );
     };
   })
-  .controller('PayoutModalCtrl', function($scope, dialog, funds, User) {
+  .controller('PayoutModalCtrl', function($scope, dialog, funds, User, Payments) {
     $scope.funds = funds;
     $scope.accounts = User.getStatics().BankAccounts;
+    $scope.selections = {
+      amount: undefined,
+      accountId: undefined
+    };
 
-    $scope.close = function() {
-      // actually send data for payout here.
+    $scope.submit = function () {
+      $scope.submitError = null;
+      $scope.submitInProgress = true;
+      Payments.requestUnappliedFundsPayout($scope.selections.amount, $scope.selections.accountId).then(
+        function (/*result*/) {
+          $scope.submitInProgress = false;
+          var selected = angular.extend({}, $scope.selections, {
+            accountName: $scope.accounts[$scope.selections.accountId]
+          });
+          dialog.close(selected);
+        }, function (error) {
+          $scope.submitInProgress = false;
+          $scope.submitError = error || 'Unable to request a payout at this time. Please contact NextGear for assistance.';
+        }
+      );
+    };
+
+    $scope.cancel = function () {
       dialog.close();
     };
   });
