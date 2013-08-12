@@ -94,7 +94,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        if (!User.isLogged && routeRequiresAuth(toState)) {
+        if (!User.isLoggedIn() && routeRequiresAuth(toState)) {
           // not logged in, redirect to login screen
           $location.path('/login');
         }

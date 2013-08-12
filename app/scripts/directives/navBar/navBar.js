@@ -9,17 +9,9 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($scope, User) {
-    $scope.isDealer = true;
+  .controller('NavBarCtrl', function($scope, $state, User) {
     $scope.showSettings = false;
-    $scope.showNavbar = false;
 
-    // fetch the dealer info every time there's a new session (user could have changed)
-    $scope.$on('AuthenticationSuccess', function() {
-      User.refreshInfo().then(function(results) {
-        $scope.dealerInfo = results;
-        $scope.isDealer = User.isDealer();
-      });
-      $scope.showNavbar = true;
-    });
+    $scope.user = User;
+    $scope.navState = $state;
   });

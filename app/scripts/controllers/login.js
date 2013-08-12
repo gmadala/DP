@@ -24,8 +24,6 @@ angular.module('nextgearWebApp')
 
       User.authenticate($scope.credentials.username, $scope.credentials.password)
         .then(function(/*data*/) {
-          User.isLogged = true;
-          $rootScope.$broadcast('AuthenticationSuccess');
           $location.path('/home');
         }, function(/*error*/) {
           $scope.showLoginError = true;

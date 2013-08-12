@@ -44,7 +44,9 @@ module.exports = function(karma) {
 		},
 
 		// list of files to exclude
-		exclude: [],
+		exclude: [
+      'app/scripts/dev/**/*.js'
+    ],
 
 		// test results reporter to use
 		// possible values: dots || progress || growl

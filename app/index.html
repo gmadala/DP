@@ -29,7 +29,7 @@
     <!-- *************************************************************
         Add your site or application content here
     ************************************************************* -->
-    <div class="container-fluid" nav-bar ng-show="showNavbar"></div>
+    <div class="container-fluid" nav-bar ng-show="!navState.includes('login')"></div>
     <div class="container-fluid" ui-view></div>
 
     <!-- build:js scripts/components.js -->
@@ -93,6 +93,7 @@
 
     <!-- build:remove unused -->
     <script src="scripts/config/nxgConfig.mock.js"></script>
+    <script src="scripts/dev/autologin.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
