@@ -1,36 +1,35 @@
-<form class="form-horizontal well search payments" novalidate>
+<form class="form-horizontal well search payments" novalidate ng-submit="scheduledPayments.search()">
     <strong>Scheduled Payment Search</strong>
     <div class="control-group">
         <label class="control-label" for="keyword">Keyword</label>
 
         <div class="controls">
-            <input type="text" id="keyword" placeholder="Enter Stock # or VIN"/>
+            <input type="text" id="keyword" placeholder="Enter Stock # or VIN" ng-model="scheduledPayments.criteria.query"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="startDate">Date Range</label>
 
         <div class="controls">
-            <input type="date" id="startDate"/>
+            <input type="date" id="startDate" ng-model="scheduledPayments.criteria.startDate"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="endDate">To</label>
 
         <div class="controls">
-            <input type="date" id="endDate"/>
+            <input type="date" id="endDate" ng-model="scheduledPayments.criteria.endDate"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="statusFilter">Filter List by Status</label>
 
         <div class="controls">
-            <select id="statusFilter">
-                <option value="all">View All</option>
-                <option value="pending">Pending</option>
-                <option value="processed">Processed</option>
-                <option value="cancelled">Cancelled</option>
-                <option value="voided">Voided</option>
+            <select id="statusFilter" ng-model="scheduledPayments.criteria.filter">
+                <option value="{{scheduledPayments.FILTER_BY_ALL}}">View All</option>
+                <option value="{{scheduledPayments.FILTER_BY_PROCESSED}}">Processed</option>
+                <option value="{{scheduledPayments.FILTER_BY_CANCELED}}">Canceled</option>
+                <option value="{{scheduledPayments.FILTER_BY_VOIDED}}">Voided</option>
             </select>
         </div>
     </div>
@@ -44,12 +43,12 @@
 
 <!-- TODO: Add directives for payments and fees. -->
 <section class="schPayments-list">
-    <ul class="unstyled">
-        <li ng-repeat="pay in schPayments">
+    <ul class="unstyled" infinite-scroll="scheduledPayments.loadMoreData()" infinite-scroll-disabled="scheduledPayments.loading">
+        <li ng-repeat="pay in scheduledPayments.results">
             <header class="row-fluid">
                 <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>
-                <div class="span3"> {{ pay.vehicle }}</div>
-                <div class="span2"><strong>stock # </strong> {{ pay.stockNo }}</div>
+                <div class="span3"> {{ pay.description }}</div>
+                <div class="span2"><strong>stock # </strong> {{ pay.stockNumber }}</div>
                 <div class="span2"><strong>status </strong> {{ pay.status }}</div>
             </header>
             <div class="row-fluid">
@@ -59,13 +58,13 @@
                             <strong>Scheduled On</strong><p> {{ pay.scheduledDate }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Payoff: </strong><p> {{ pay.payoff | currency }} </p>
+                            <strong>Payoff: </strong><p> {{ pay.payoffAmount | currency }} </p>
                         </div>
                         <div class="span4">
-                            <strong>Curtailment: </strong><p> {{ pay.curtailment | currency }} </p>
+                            <strong>Curtailment: </strong><p> {{ pay.curtailmentAmount | currency }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Setup: </strong><p> {{ pay.setup }} </p>
+                            <strong>Setup: </strong><p> {{ pay.setupDate }} </p>
                         </div>
                         <div class="span4">
                             <strong>Scheduled by: </strong><p> {{ pay.scheduledBy }} </p>
@@ -81,59 +80,7 @@
 
             <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
             <div collapse="isCollapsed" class="more-details">
-
-                <div class="row-fluid">
-                    <div class="span3 vehicle-info">
-                        <strong>Vehicle Information</strong>
-                        <ul>
-                            <li>Lorem ipsum</li>
-                            <li>dolor sit amet</li>
-                        </ul>
-                    </div>
-                    <div class="span3 floor-info">
-                        <strong>Flooring Information</strong>
-                        <ul>
-                            <li>Lorem ipsum</li>
-                            <li>dolor sit amet</li>
-                        </ul>
-                    </div>
-                    <div class="span3 title-info">
-                        <strong>Title Information</strong>
-                        <ul>
-                            <li>Lorem ipsum</li>
-                            <li>dolor sit amet</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="row-fluid">
-                    <strong>Original Curtailment Schedule</strong>
-                    <table class="span10">
-                        <tr>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>Principal</th>
-                            <th>Principal Payment</th>
-                            <th>Interest</th>
-                            <th>CPP</th>
-                            <th>Fees</th>
-                            <th>Total Payment</th>
-                            <th>Highline Fee Applied</th>
-                        </tr>
-                        <tr ng-repeat="cur in curtailment">
-                            <td> {{ cur.startDate }} </td>
-                            <td> {{ cur.dueDate }} </td>
-                            <td> {{ cur.principal | currency }} </td>
-                            <td> {{ cur.principalPay | currency }} </td>
-                            <td> {{ cur.interest | currency }} </td>
-                            <td> {{ cur.cpp | currency }} </td>
-                            <td> {{ cur.fees | currency }} </td>
-                            <td> {{ cur.totalPay | currency }} </td>
-                            <td> <span ng-hide="cur.highline">N/A</span>
-                                <span ng-show="cur.highline"> {{ cur.highline }} </span> </td>
-                        </tr>
-                    </table>
-                </div>
+                <div vehicle-details stock-number="pay.stockNo"></div>
             </div><!-- end more-details div -->
         </li>
     </ul>
