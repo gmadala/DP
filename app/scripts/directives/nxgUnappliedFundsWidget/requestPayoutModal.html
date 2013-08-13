@@ -1,10 +1,12 @@
 <h3 class="modal-header">Request Unapplied Funds Payout</h3>
 
 <div class="modal-body">
-    <div class="alert alert-error" ng-show="!!submitError">
-        {{ submitError }}
+    <div class="alert alert-error" ng-show="submitErrors.length > 0">
+        <ul>
+            <li ng-repeat="error in submitErrors">{{ error }}</li>
+        </ul>
     </div>
-    <form class="form-horizontal">
+    <form name="form" class="form-horizontal" novalidate>
         <div class="control-group">
             <label class="control-label">Unapplied Funds</label>
             <div class="controls">{{ funds.balance | currency }}</div>
@@ -18,19 +20,29 @@
             <label class="control-label" for="payoutAmt">Payout Request Amount</label>
             <div class="controls">
                 <span>$</span>
-                <input type="text" id="payoutAmt" placeholder="0.00" ng-model="selections.amount"/>
+                <input type="text"
+                       id="payoutAmt"
+                       name="payoutAmt"
+                       placeholder="0.00"
+                       ng-model="selections.amount"
+                       nxg-min="0.01"
+                       nxg-max="funds.available"
+                       ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+                       required
+                       autofocus="autofocus"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="payoutBankAcct">Bank Account for Payout</label>
             <div class="controls">
-                <select id="payoutBankAcct" ng-model="selections.accountId">
+                <select id="payoutBankAcct" name="payoutBankAcct" ng-model="selections.accountId" required>
                     <option ng-repeat="(accountId, name) in accounts" value="{{ accountId }}">{{ name }}</option>
                 </select>
             </div>
         </div>
         <div>
             <button class="btn btn-small left-align"
+                    ng-class="{'btn-primary': form.$valid}"
                     type="submit"
                     ng-disabled="submitInProgress"
                     ng-click="submit()">

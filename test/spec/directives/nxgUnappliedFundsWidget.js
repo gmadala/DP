@@ -140,7 +140,85 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(angular.equals(scope.funds, fundsMock)).toBe(true);
     });
 
+    describe('getLocalErrors function', function () {
+
+      // mock up a form controller on the scope
+      var form;
+      beforeEach(function () {
+        form = {
+          $valid: true,
+          payoutAmt: {
+            $error: {}
+          },
+          payoutBankAcct: {
+            $error: {}
+          }
+        };
+        scope.form = form;
+      });
+
+      it('should return an empty array if the form is valid', function () {
+        var result = scope.getLocalErrors();
+        expect(result.length).toBe(0);
+      });
+
+      it('should return an error if the amount field is invalid', function () {
+        form.$valid = false;
+
+        form.payoutAmt.$error = {required: true}; //empty
+        expect(scope.getLocalErrors().length).toBe(1);
+
+        form.payoutAmt.$error = {pattern: true}; //invalid numeric pattern
+        expect(scope.getLocalErrors().length).toBe(1);
+
+        form.payoutAmt.$error = {nxgMax: true}; //too big
+        expect(scope.getLocalErrors().length).toBe(1);
+
+        form.payoutAmt.$error = {nxgMin: true}; //too small
+        expect(scope.getLocalErrors().length).toBe(1);
+      });
+
+      it('should return an error if the account field is invalid', function () {
+        form.$valid = false;
+
+        form.payoutBankAcct.$error = {required: true}; //empty
+        expect(scope.getLocalErrors().length).toBe(1);
+      });
+
+    });
+
     describe('submit function', function () {
+
+      // mock up a form controller on the scope
+      var form;
+      beforeEach(function () {
+        form = {
+          $valid: true
+        };
+        scope.form = form;
+      });
+
+      it('should not submit, but rather expose the errors on the scope, if there are local validation errors', function () {
+        spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
+        scope.selections = {
+          amount: 100,
+          accountId: 'foo'
+        };
+        scope.form = {
+          $valid: false,
+          payoutAmt: {
+            $error: {
+              required: true
+            }
+          },
+          payoutBankAcct: {
+            $error: {}
+          }
+        };
+        scope.submit();
+        expect(paymentsMock.requestUnappliedFundsPayout).not.toHaveBeenCalled();
+        expect(scope.submitErrors.length > 0).toBe(true);
+      });
 
       it('should send along the expected data', function () {
         spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
@@ -164,11 +242,12 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         expect(scope.submitInProgress).toBe(false);
       });
 
-      it('should expose any error on the scope', function () {
+      it('should expose any server error on the scope', function () {
         scope.submit();
-        expect(scope.submitError).toBe(null);
+        expect(scope.submitErrors.length).toBe(0);
         flushPayoutRequestError('10876');
-        expect(scope.submitError).toBe('10876');
+        expect(scope.submitErrors.length).toBe(1);
+        expect(scope.submitErrors[0]).toBe('10876');
       });
 
       it('should close the dialog with submitted data on success', function () {
