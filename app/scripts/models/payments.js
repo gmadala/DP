@@ -126,30 +126,37 @@ angular.module('nextgearWebApp')
         ]).then(function(responses) {
 
           var overdue = {
-            quantity: 1,
+            quantity: 0,
             // According to the docs, this should be `OverduePaymentAmount`, but I don't see that field.
-            amount: responses[0].LastPaymentAmount
+            // https://effectiveui.basecamphq.com/projects/10178421-nextgear-desktop-and-mobile-internal/posts/78346018/comments#comment_246355577
+            amount: responses[0].OverduePaymentAmount || 0
           };
 
-          var dueToday = responses[1].SearchResults || [];
-          dueToday = {
-            quantity: dueToday.length, // This total is wrong, it's not considering the dates
-            amount: _.reduce(dueToday, function(total, item) {
-              return isToday(item.DueDate) ? total + item.AmountDue : total;
-            }, 0)
-          };
+          // Sum of all AmountDue for payments with a date of today
+          var dueToday = _.reduce(responses[1].SearchResults || [], function(accumulator, item) {
+            // Hopefully the isToday() stuff will improve/simplify when the API date format solidifies
+            if (isToday(item.DueDate)) {
+              accumulator.amount += item.AmountDue;
+              accumulator.quantity++;
+            }
+            return accumulator;
+          }, {quantity: 0, amount: 0});
 
-          var thisWeek = responses[2].SearchResults || [];
-          thisWeek = {
-            quantity: thisWeek.length,
-            amount: _.reduce(thisWeek, function(total, item) { return total + item.AmountDue; }, 0)
-          };
+          // Sum of all AmountDue for payments with a due date of tomorrow or later with the UPCOMING PAYMENTS pulldown as the time frame
+          // @todo: Filter this by date range ^DM
+          var thisWeek = _.reduce(responses[2].SearchResults || [], function(accumulator, item) {
+            accumulator.amount += item.AmountDue;
+            accumulator.quantity++;
+            return accumulator;
+          }, {quantity: 0, amount: 0});
 
-          var accountFees = responses[1].AccountFees || [];
-          accountFees = {
-            quantity: accountFees.length,
-            amount: _.reduce(accountFees, function(total, item) { return total + item.Balance; }, 0)
-          };
+          // Sum of all all AcountFee's Balance value. For the time frame specified by UPCOMING PAYMENTS
+          // @todo: Filter this by date range ^DM
+          var accountFees = _.reduce(responses[1].AccountFees || [], function(accumulator, item) {
+            accumulator.amount += item.Balance;
+            accumulator.quantity++;
+            return accumulator;
+          }, {quantity: 0, amount: 0});
 
           var summary = {
             fees:              accountFees.amount,                                     // Correct data
