@@ -12,16 +12,61 @@ describe('Controller: ScheduledCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     ScheduledCtrl = $controller('ScheduledCtrl', {
-      $scope: scope
+      $scope: scope,
+
+      ScheduledPaymentsSearch: {
+        search: function() {
+          return {
+            then: function(success, error) {
+              success([{
+                vin: '',
+                description: '',
+                stockNumber: '',
+                status: '',
+                scheduledDate: '',
+                setupDate: '',
+                payoffAmount: 1000,
+                curtailmentAmount: 1000,
+                scheduledBy: ''
+              }]);
+            }
+          };
+        },
+        loadMoreData: function() {
+          return {
+            then: function(success, error) {
+              success([{
+                vin: '',
+                description: '',
+                stockNumber: '',
+                status: '',
+                scheduledDate: '',
+                setupDate: '',
+                payoffAmount: 1000,
+                curtailmentAmount: 1000,
+                scheduledBy: ''
+              }]);
+            }
+          };
+        }
+      }
     });
   }));
 
-  it('should attach schPayments to the scope', function () {
-    expect(scope.schPayments.length).toBe(1);
+  it('should attach scheduledPayments.results to the scope', function () {
+    expect(scope.scheduledPayments.results).toBeDefined();
   });
 
-  it('should attach a list of curtailment to the scope', function () {
-    expect(scope.curtailment.length).toBe(1);
+  it('should attach scheduledPayments.criteria to the scope', function () {
+    expect(scope.scheduledPayments.criteria).toBeDefined();
+  });
+
+  it('should attach scheduledPayments.loading to the scope', function () {
+    expect(scope.scheduledPayments.loading).toBeDefined();
+  });
+
+  it('should attach isCollapsed to the scope', function () {
+    expect(scope.isCollapsed).toBeDefined();
   });
 
 });
