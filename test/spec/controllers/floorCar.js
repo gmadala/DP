@@ -37,4 +37,28 @@ describe('Controller: FloorCarCtrl', function () {
     scope.reset();
     expect(angular.equals(scope.defaultData, scope.data)).toBe(true);
   });
+
+  describe('submit function', function () {
+
+    it('should exist', function () {
+      expect(scope.submit).toBeDefined();
+    });
+
+    it('should create a form validity snapshot on the scope', function () {
+      scope.form = {
+        foo: 'bar'
+      };
+      scope.submit();
+      expect(angular.equals(scope.validity, scope.form)).toBe(true);
+    });
+
+    it('should abort (returning false) if form is invalid', function () {
+      scope.form = {
+        $valid: false
+      };
+      var result = scope.submit();
+      expect(result).toBe(false);
+    });
+
+  });
 });

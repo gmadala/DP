@@ -56,7 +56,7 @@ angular.module('nextgearWebApp')
     $scope.submit = function () {
       $scope.submitError = null;
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
-      $scope.v = angular.copy($scope.form);
+      $scope.validity = angular.copy($scope.form);
       if (!$scope.form.$valid) {
         // form invalid, do not submit
         return;

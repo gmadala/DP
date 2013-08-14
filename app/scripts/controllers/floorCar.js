@@ -3,10 +3,15 @@
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, User) {
 
+    //$scope.form = <form directive's controller, assigned by view>
+
     // user model holds "dealer static" data needed to populate form dropdowns via user.getStatics()
     $scope.user = User;
 
-    // default values for a new blank form
+    // form data model holds values filled into form
+    $scope.data = null;
+
+    // default values for a new blank form - should be considered read-only
     $scope.defaultData = {
       ApplicationOSName: null, // string
       BuyerBankAccountId: null, // string
@@ -26,7 +31,7 @@ angular.module('nextgearWebApp')
       UnitTitleNumber: null, // string
       UnitTitleStateId: null, // string
       UnitVin: null, // string
-      VinAckLookupFailure: null, // Boolean (should be true if SelectedVehicle is not set, I believe)
+      VinAckLookupFailure: null, // Boolean (must be true if SelectedVehicle is not set, I believe)
       UnitYear: null, // int
       TitleLocationId: null, // int
       TitleTypeId: null // int
@@ -37,6 +42,14 @@ angular.module('nextgearWebApp')
     };
 
     $scope.reset();
+
+    $scope.submit = function () {
+      // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+      $scope.validity = angular.copy($scope.form);
+      if (!$scope.form.$valid) {
+        return false;
+      }
+    };
 
     // TODO: Move this temporary code into business search directive as part of req #304
     $scope.openBusinessSearch = function() {

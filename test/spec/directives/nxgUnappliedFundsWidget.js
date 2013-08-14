@@ -153,7 +153,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       it('should expose a snapshot copy of the form controller\'s state on the scope', function () {
         scope.submit();
-        expect(angular.equals(scope.v, scope.form)).toBe(true);
+        expect(angular.equals(scope.validity, scope.form)).toBe(true);
       });
 
       it('should not submit if there are local validation errors', function () {
