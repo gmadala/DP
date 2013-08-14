@@ -1,21 +1,57 @@
 'use strict';
 
+function createPromiseMock(setting) {
+  return {
+    then: function(success, fail) {
+      if (setting.error !== null) {
+        fail(setting.error);
+      } else if (setting.resolution !== null) {
+        success(setting.resolution);
+      }
+    }
+  };
+}
+
 describe('Controller: FloorCarCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
   var FloorCarCtrl,
-    scope;
+    scope,
+    protect,
+    dialogMock,
+    floorplanMock,
+    confirmSetting = {error: null, resolution: null},
+    createSetting = {error: null, resolution: null};
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  // Initialize the controller and mocks
+  beforeEach(inject(function ($controller, $rootScope, _protect_) {
     scope = $rootScope.$new();
+    protect = _protect_;
+    dialogMock = {
+      dialog: function () {
+        return createPromiseMock(confirmSetting);
+      },
+      messageBox: function () {
+        return {
+          open: angular.noop
+        };
+      }
+    };
+    floorplanMock = {
+      create: function () {
+        return createPromiseMock(createSetting);
+      }
+    };
+
     FloorCarCtrl = $controller('FloorCarCtrl', {
       $scope: scope,
       User: {
         foo: 'bar'
-      }
+      },
+      $dialog: dialogMock,
+      Floorplan: floorplanMock
     });
   }));
 
@@ -56,9 +92,85 @@ describe('Controller: FloorCarCtrl', function () {
       scope.form = {
         $valid: false
       };
+      spyOn(dialogMock, 'dialog').andCallThrough();
       var result = scope.submit();
       expect(result).toBe(false);
+      expect(dialogMock.dialog).not.toHaveBeenCalled();
+    });
+
+    it('should open a confirmation dialog if form is valid', function () {
+      scope.form = {
+        $valid: true
+      };
+      spyOn(dialogMock, 'dialog').andCallThrough();
+      var result = scope.submit();
+      expect(result).not.toBeDefined();
+      expect(dialogMock.dialog).toHaveBeenCalled(); // TODO: Add dialog parameters once known
+    });
+
+    it('should stop if dialog promise resolves to anything other than true', function () {
+      scope.form = {
+        $valid: true
+      };
+      confirmSetting.resolution = 'I want to edit some more';
+      spyOn(scope, 'reallySubmit');
+      scope.submit();
+      expect(scope.reallySubmit).not.toHaveBeenCalled();
+    });
+
+    it('should hand off to reallySubmit if dialog promise resolves to true', function () {
+      scope.form = {
+        $valid: true
+      };
+      confirmSetting.resolution = true;
+      spyOn(scope, 'reallySubmit');
+      scope.submit();
+      expect(scope.reallySubmit).toHaveBeenCalled();
     });
 
   });
+
+  describe('reallySubmit function', function () {
+
+    it('should balk if called directly from view', function () {
+      expect(scope.reallySubmit).toThrow();
+    });
+
+    it('should work if called with guard', function () {
+      expect(function () {
+        scope.reallySubmit(protect);
+      }).not.toThrow();
+    });
+
+    it('should call floorplan create method with form data model', function () {
+      spyOn(floorplanMock, 'create').andCallThrough();
+      scope.reallySubmit(protect);
+      expect(floorplanMock.create).toHaveBeenCalledWith(scope.data);
+    })
+
+    it('should open a message box and reset form data on success', function () {
+      scope.data.foo = 'bar';
+      createSetting.resolution = 'it worked!';
+      spyOn(dialogMock, 'messageBox').andCallThrough();
+
+      scope.reallySubmit(protect);
+
+      expect(dialogMock.messageBox).toHaveBeenCalled();
+      expect(angular.equals(scope.data, scope.defaultData)).toBe(true);
+    });
+
+    it('should publish the error message on error and leave the form as-is', function () {
+      scope.data.foo = 'bar';
+      createSetting.error = 'problem123';
+      spyOn(dialogMock, 'messageBox').andCallThrough();
+
+      scope.reallySubmit(protect);
+
+      expect(scope.submitError).toBe('problem123');
+      expect(dialogMock.messageBox).not.toHaveBeenCalled();
+      expect(angular.equals(scope.data, scope.defaultData)).toBe(false);
+    });
+
+  });
+
 });

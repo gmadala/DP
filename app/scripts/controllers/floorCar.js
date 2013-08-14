@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, User) {
+  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect) {
 
     //$scope.form = <form directive's controller, assigned by view>
 
@@ -49,9 +49,35 @@ angular.module('nextgearWebApp')
       if (!$scope.form.$valid) {
         return false;
       }
+
+      var confirmation = {}; // TODO: Define confirmation dialog
+      $dialog.dialog(confirmation).then(function (result) {
+        if (result === true) {
+          // submission confirmed
+          $scope.reallySubmit(protect);
+        }
+      });
     };
 
-    // TODO: Move this temporary code into business search directive as part of req #304
+    $scope.reallySubmit = function (guard) {
+      if (guard !== protect) {
+        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
+      }
+
+      Floorplan.create($scope.data).then(
+        function (/*success*/) {
+          var title = 'Flooring Request Submitted',
+            msg = 'Your flooring request has been submitted to NextGear Capital.',
+            buttons = [{label: 'OK', cssClass: 'btn-primary'}];
+          $dialog.messageBox(title, msg, buttons).open();
+          $scope.reset();
+        }, function (error) {
+          $scope.submitError = error || 'Unable to submit your request. Please contact NextGear for assistance.';
+        }
+      );
+    };
+
+    // TODO: Finish implementation of seller search under req #304
     $scope.openBusinessSearch = function() {
       var dialogOptions = {
         backdrop: true,
