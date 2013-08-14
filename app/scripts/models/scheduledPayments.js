@@ -21,8 +21,8 @@ angular.module('nextgearWebApp')
               description: item.UnitDescription,
               stockNumber: item.StockNumber,
               status: self.toStatus(item.UnitStatusId),
-              scheduledDate: self.toDateString(item.ScheduledPaymentDate),
-              setupDate: self.toDateString(item.ScheduleSetupDate),
+              scheduledDate: item.ScheduledPaymentDate,
+              setupDate: item.ScheduleSetupDate,
               canBePaidOff: item.PayPayoffAmount,
               payoffAmount: item.PrincipalPayoff,
               curtailmentAmount: item.AmountDue,
@@ -32,27 +32,6 @@ angular.module('nextgearWebApp')
           return searchResults;
         }
       );
-    };
-
-    /**
-     * Parses from string ISO 8601 format with the time
-     * portion truncated (e.g. YYYY-MM-DD) and converts
-     * it to D/MM/YYYY.
-     *
-     * TODO: Confirm with API doc (once complete) that this is in fact the expected format.
-     */
-    self.toDateString = function(str) {
-      var tokens = str.split('-');
-      var converted;
-
-      if (tokens.length === 3) {
-        converted = parseInt(tokens[2], 10) + '/' + tokens[1] + '/' + tokens[0];
-      }
-      else {
-        console.error('Invalid date format. Expecting "YYYY-MM-DD".');
-        converted = '';
-      }
-      return converted;
     };
 
     self.toStatus = function(statusId) {
