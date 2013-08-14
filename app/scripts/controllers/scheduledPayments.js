@@ -11,8 +11,9 @@ angular.module('nextgearWebApp')
       results: [],
 
       criteria: {
-        startDate: null,
-        endDate: null,
+        query: '',
+        startDate: '',
+        endDate: '',
         filter: ''
       },
 
@@ -41,8 +42,51 @@ angular.module('nextgearWebApp')
             this.loading = false;
             this.results = results;
           }.bind(this));
+      },
+
+      clearCriteria: function() {
+        this.criteria = {
+          query: '',
+          startDate: '',
+          endDate: '',
+          filter: ''
+        };
+      },
+
+      clearSearch: function() {
+        this.clearCriteria();
+        this.search();
+      },
+
+      isOnPaymentQueue: function(payment) {
+        // TODO: Check on the Payment Queue and return true if found there.
+        return false;
+      },
+
+      isProcessed: function(payment) {
+        return payment.status === this.FILTER_BY_PROCESSED;
+      },
+
+      isScheduled: function(payment) {
+        return payment.status === this.FILTER_BY_SCHEDULED;
+      },
+
+      payOff: function(payment) {
+        // TODO: Add it to the PaymentQueue
+        console.log('ScheduledPayments::payOff()' + ' - ' + payment.floorplanId);
+      },
+
+      showReceipt: function(payment) {
+        // TODO: Hook it to the model
+        console.log('ScheduledPayments::showReceipt()' + ' - ' + payment.floorplanId);
+      },
+
+      cancelPayment: function(payment) {
+        // TODO: Hook it to the model
+        console.log('ScheduledPayments::cancelPayment()' + ' - ' + payment.floorplanId);
       }
     };
 
+    $scope.scheduledPayments.clearCriteria();
     $scope.scheduledPayments.search();
   });

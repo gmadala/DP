@@ -36,6 +36,7 @@
     <div class="control-group">
         <input type="submit" value="search"/>
     </div>
+    <button class="btn btn-small" ng-click="scheduledPayments.clearSearch(pay)">X Clear Search Results</button>
 </form>
 
         <div class="alert">Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.</div>
@@ -73,8 +74,9 @@
                 </div>
                 <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
                 <div class="span2 offset2">
-                    <button class="btn btn-small btn-block">Payoff Now</button>
-                    <button class="btn btn-small btn-block">Cancel</button>
+                    <button class="btn btn-small btn-block" ng-show="scheduledPayments.isScheduled(pay) && !scheduledPayments.isOnPaymentQueue(payment)" ng-disabled="!pay.canBePaidOff" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
+                    <button class="btn btn-small btn-block" ng-show="scheduledPayments.isScheduled(pay)" ng-click="scheduledPayments.cancelPayment(pay)">Cancel</button>
+                    <button class="btn btn-small btn-block" ng-show="scheduledPayments.isProcessed(pay)" ng-click="scheduledPayments.showReceipt(pay)">Receipt</button>
                 </div>
             </div>
 

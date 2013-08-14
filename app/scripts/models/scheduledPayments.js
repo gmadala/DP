@@ -16,12 +16,14 @@ angular.module('nextgearWebApp')
           for (var i = 0; i < results.SearchResults.length; i++) {
             var item = results.SearchResults[i];
             searchResults.push({
+              floorplanId: item.FloorplanId,
               vin: item.Vin,
               description: item.UnitDescription,
               stockNumber: item.StockNumber,
               status: self.toStatus(item.UnitStatusId),
               scheduledDate: self.toDateString(item.ScheduledPaymentDate),
               setupDate: self.toDateString(item.ScheduleSetupDate),
+              canBePaidOff: item.PayPayoffAmount,
               payoffAmount: item.PrincipalPayoff,
               curtailmentAmount: item.AmountDue,
               scheduledBy: 'Michael Bluth' // TODO: Needs to be mapped to correct field
@@ -36,6 +38,8 @@ angular.module('nextgearWebApp')
      * Parses from string ISO 8601 format with the time
      * portion truncated (e.g. YYYY-MM-DD) and converts
      * it to D/MM/YYYY.
+     *
+     * TODO: Confirm with API doc (once complete) that this is in fact the expected format.
      */
     self.toDateString = function(str) {
       var tokens = str.split('-');
@@ -55,14 +59,14 @@ angular.module('nextgearWebApp')
       var status;
 
       switch (statusId) {
-
       default:
-        status = 'Pending';
+        status = 'scheduled';
       }
       return status;
     };
 
     return {
+      // TODO: Confirm with API spec (once complete) if this is the filter types the service will expect.
       FILTER_BY_ALL: '',
       FILTER_BY_SCHEDULED: 'scheduled',
       FILTER_BY_PROCESSED: 'processed',
