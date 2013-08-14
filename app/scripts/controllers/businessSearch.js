@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
       results: [],
       loadMoreData: function() {
         this.loading = true;
-        BusinessSearch.then(function(results) {
+        BusinessSearch.searchSeller().then(function(results) {
           this.loading = false;
           this.results = this.results.concat(results.DealerInfoList);
         }.bind(this));
