@@ -47,7 +47,7 @@ angular.module('nextgearWebApp')
   })
   .controller('PayoutModalCtrl', function($scope, $filter, dialog, funds, User, Payments) {
     $scope.funds = funds;
-    $scope.accounts = User.getStatics().BankAccounts;
+    $scope.user = User;
     $scope.selections = {
       amount: undefined,
       accountId: undefined
@@ -66,7 +66,7 @@ angular.module('nextgearWebApp')
         function (/*result*/) {
           $scope.submitInProgress = false;
           var selected = angular.extend({}, $scope.selections, {
-            accountName: $scope.accounts[$scope.selections.accountId]
+            accountName: User.getStatics().bankAccounts[$scope.selections.accountId]
           });
           dialog.close(selected);
         }, function (error) {

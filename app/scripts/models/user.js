@@ -38,7 +38,16 @@ angular.module('nextgearWebApp')
     this.refreshStatics = function () {
       var promise = api.request('GET', '/Dealer/Static');
       promise.then(function(data) {
-        statics = data;
+        statics = {
+          // API translation layer -- add transformation logic here as needed
+          productTypes: data.ProductType || {},
+          colors: data.Colors || {}, // map object: {id: name}
+          states: data.States || {}, // map object: {id: name}
+          locations: data.Locations || {}, // map object: {id: name}
+          bankAccounts: data.BankAccounts || {}, // map object: {id: name}
+          linesOfCredit: data.LinesOfCredit || {}, // map object: {id: name}
+          titleLocationOptions: data.TitleLocationOptions || [] // array
+        };
       });
       return promise;
     };

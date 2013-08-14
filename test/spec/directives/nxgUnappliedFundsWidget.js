@@ -112,7 +112,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         User: {
           getStatics: function () {
             return {
-              BankAccounts: {
+              bankAccounts: {
                 id1: 'name1',
                 id2: 'name2'
               }
@@ -124,12 +124,12 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
     }));
 
-    it('should attach the list of accounts to the scope', function () {
+    it('should attach the user model to the scope', function () {
       var accountMock = {
         id1: 'name1',
         id2: 'name2'
       };
-      expect(angular.equals(scope.accounts, accountMock)).toBe(true);
+      expect(angular.equals(scope.user.getStatics().bankAccounts, accountMock)).toBe(true);
     });
 
     it('should attach the funds object to the scope', function () {
@@ -208,20 +208,16 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       it('should close the dialog with submitted data on success', function () {
         spyOn(dialogMock, 'close');
-        scope.accounts = {
-          foo: 'BofA',
-          foo2: 'Chase'
-        };
         scope.selections = {
           amount: 100,
-          accountId: 'foo2'
+          accountId: 'id2'
         };
         scope.submit();
         flushPayoutRequestSuccess();
         expect(dialogMock.close).toHaveBeenCalled();
         expect(dialogMock.close.mostRecentCall.args[0].amount).toBe(100);
-        expect(dialogMock.close.mostRecentCall.args[0].accountId).toBe('foo2');
-        expect(dialogMock.close.mostRecentCall.args[0].accountName).toBe('Chase');
+        expect(dialogMock.close.mostRecentCall.args[0].accountId).toBe('id2');
+        expect(dialogMock.close.mostRecentCall.args[0].accountName).toBe('name2');
       });
 
     });
