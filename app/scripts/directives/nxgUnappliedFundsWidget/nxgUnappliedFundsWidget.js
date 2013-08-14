@@ -53,36 +53,12 @@ angular.module('nextgearWebApp')
       accountId: undefined
     };
 
-    $scope.getLocalErrors = function () {
-      var form = $scope.form;
-      if (form.$valid) {
-        return [];
-      }
-
-      var msgs = [],
-        amountErrors = form.payoutAmt.$error,
-        accountErrors = form.payoutBankAcct.$error;
-
-      if (amountErrors.required) {
-        msgs.push('Please enter a payout request amount.');
-      } else if (amountErrors.pattern) {
-        msgs.push('Please enter payout request amount in the format 123.45 or 123');
-      } else if (amountErrors.nxgMin || amountErrors.nxgMax) {
-        var max = $filter('currency')($scope.funds.available);
-        msgs.push('Payout request amount must be $0.01 to ' + max);
-      }
-
-      if (accountErrors.required) {
-        msgs.push('Please select a bank account for payout.');
-      }
-
-      return msgs;
-    };
-
     $scope.submit = function () {
-      $scope.submitErrors = $scope.getLocalErrors();
-      if ($scope.submitErrors.length > 0) {
-        // local validation failed, do not submit
+      $scope.submitError = null;
+      // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+      $scope.v = angular.copy($scope.form);
+      if (!$scope.form.$valid) {
+        // form invalid, do not submit
         return;
       }
       $scope.submitInProgress = true;
@@ -95,7 +71,7 @@ angular.module('nextgearWebApp')
           dialog.close(selected);
         }, function (error) {
           $scope.submitInProgress = false;
-          $scope.submitErrors = [error || 'Unable to request a payout at this time. Please contact NextGear for assistance.'];
+          $scope.submitError = error || 'Unable to request a payout at this time. Please contact NextGear for assistance.';
         }
       );
     };
