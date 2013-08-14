@@ -74,7 +74,7 @@
                 </div>
                 <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
                 <div class="span2 offset2">
-                    <button class="btn btn-small btn-block" ng-show="scheduledPayments.isScheduled(pay) && !scheduledPayments.isOnPaymentQueue(payment)" ng-disabled="!pay.canBePaidOff" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
+                    <button class="btn btn-small btn-block" ng-show="scheduledPayments.isScheduled(pay) && !scheduledPayments.isOnPaymentQueue(pay)" ng-disabled="!pay.canBePaidOff" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
                     <button class="btn btn-small btn-block" ng-show="scheduledPayments.isScheduled(pay)" ng-click="scheduledPayments.cancelPayment(pay)">Cancel</button>
                     <button class="btn btn-small btn-block" ng-show="scheduledPayments.isProcessed(pay)" ng-click="scheduledPayments.showReceipt(pay)">Receipt</button>
                 </div>
