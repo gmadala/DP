@@ -48,7 +48,7 @@
                 "HasNsf": false,
                 "IsPayoff": false,
                 "PayAmountDue": true,
-                "PayPayoffAmount": false,
+                "PayPayoffAmount": true,
                 "TitleLocationName": "TitleLocationName",
                 "ScheduledPaymentDate": "2013-08-13"
             },
@@ -72,7 +72,7 @@
                 "HasNsf": false,
                 "IsPayoff": false,
                 "PayAmountDue": true,
-                "PayPayoffAmount": false,
+                "PayPayoffAmount": true,
                 "TitleLocationName": "TitleLocationName",
                 "ScheduledPaymentDate": "2013-08-13"
             }
