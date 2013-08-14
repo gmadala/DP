@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
       var converted;
 
       if (tokens.length === 3) {
-        converted = parseInt(tokens[2]) + '/' + tokens[1] + '/' + tokens[0];
+        converted = parseInt(tokens[2], 10) + '/' + tokens[1] + '/' + tokens[0];
       }
       else {
         console.error('Invalid date format. Expecting "YYYY-MM-DD".');
@@ -57,10 +57,10 @@ angular.module('nextgearWebApp')
       switch (statusId) {
 
       default:
-        status = "Pending";
+        status = 'Pending';
       }
       return status;
-    }
+    };
 
     return {
       FILTER_BY_ALL: '',
