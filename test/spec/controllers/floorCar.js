@@ -12,11 +12,14 @@ describe('Controller: FloorCarCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     FloorCarCtrl = $controller('FloorCarCtrl', {
-      $scope: scope
+      $scope: scope,
+      User: {
+        foo: 'bar'
+      }
     });
   }));
 
-  it('should attach a openBusinessSearch funtion to the scope', function () {
-    expect(scope.openBusinessSearch).toBeDefined();
+  it('should attach user object to the scope', function () {
+    expect(scope.user.foo).toBe('bar');
   });
 });
