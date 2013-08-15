@@ -11,15 +11,15 @@ angular.module('nextgearWebApp')
     // form data model holds values filled into form
     $scope.data = null;
 
-    // default values for a new blank form - should be considered read-only
+    // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
-      ApplicationOSName: null, // string
+      ApplicationOSName: null, // string - WARNING: NOT MAPPED TO ANYTHING IN VIEW
       BuyerBankAccountId: null, // string
       LineOfCreditId: null, // string
       PaySeller: false, // Boolean, default is pay buyer
       PhysicalInventoryAddressId: null, //string
       SaleTradeIn: null, // Boolean
-      SelectedVehicle: null, // Object from VIN lookup, if applicable
+      SelectedVehicle: null, // Object returned from VIN lookup, if it succeeded
       SellerBusinessId: null, // string
       UnitColorId: null, // string
       UnitMake: null, // string
@@ -34,7 +34,7 @@ angular.module('nextgearWebApp')
       VinAckLookupFailure: null, // Boolean (must be true if SelectedVehicle is not set, I believe)
       UnitYear: null, // int
       TitleLocationId: null, // int
-      TitleTypeId: null // int
+      TitleTypeId: null // int - WARNING: NOT MAPPED TO ANYTHING IN VIEW
     };
 
     $scope.reset = function () {

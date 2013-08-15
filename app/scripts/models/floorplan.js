@@ -11,6 +11,25 @@ angular.module('nextgearWebApp')
             denied: result.DeniedFloorplans  // availability pending Leaf API change ticket DTWO-1891
           };
         });
+      },
+      create: function(data) {
+        // transform data types as needed for API
+        data = angular.copy(data);
+
+        angular.extend(data, {
+          // boolean
+          PaySeller: api.toBoolean(data.PaySeller),
+          SaleTradeIn: api.toBoolean(data.SaleTradeIn),
+          VinAckLookupFailure: api.toBoolean(data.VinAckLookupFailure),
+          // int
+          UnitYear: api.toInt(data.UnitYear),
+          TitleLocationId: api.toInt(data.TitleLocationId),
+          TitleTypeId: api.toInt(data.TitleTypeId),
+          // date
+          UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate)
+        });
+
+        return api.request('POST', '/floorplan/create', data);
       }
     };
   });
