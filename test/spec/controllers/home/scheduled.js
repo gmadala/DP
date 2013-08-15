@@ -17,7 +17,7 @@ describe('Controller: ScheduledCtrl', function () {
       ScheduledPaymentsSearch: {
         search: function() {
           return {
-            then: function(success, error) {
+            then: function(success) {
               success([{
                 vin: '',
                 description: '',
@@ -34,7 +34,7 @@ describe('Controller: ScheduledCtrl', function () {
         },
         loadMoreData: function() {
           return {
-            then: function(success, error) {
+            then: function(success) {
               success([{
                 vin: '',
                 description: '',
@@ -46,6 +46,19 @@ describe('Controller: ScheduledCtrl', function () {
                 curtailmentAmount: 1000,
                 scheduledBy: ''
               }]);
+            }
+          };
+        }
+      },
+
+      BusinessHours: {
+        get: function() {
+          return {
+            then: function(success) {
+              success({
+                startTime: new Date(),
+                endTime: new Date()
+              });
             }
           };
         }

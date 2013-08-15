@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch) {
+  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours) {
 
     $scope.isCollapsed = true;
 
@@ -90,4 +90,11 @@ angular.module('nextgearWebApp')
 
     $scope.scheduledPayments.clearCriteria();
     $scope.scheduledPayments.search();
+
+    BusinessHours.get().then(function(businessHours) {
+      var currentTime = (new Date()).getTime(),
+        startTime = businessHours.startTime.getTime(),
+        endTime = businessHours.endTime.getTime();
+      $scope.outOfBusinessHours = currentTime <  startTime || currentTime > endTime;
+    });
   });
