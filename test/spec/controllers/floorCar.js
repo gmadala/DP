@@ -105,7 +105,9 @@ describe('Controller: FloorCarCtrl', function () {
       spyOn(dialogMock, 'dialog').andCallThrough();
       var result = scope.submit();
       expect(result).not.toBeDefined();
-      expect(dialogMock.dialog).toHaveBeenCalled(); // TODO: Add dialog parameters once known
+      expect(dialogMock.dialog).toHaveBeenCalled();
+      expect(dialogMock.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/floorCarConfirm.html');
+      expect(dialogMock.dialog.mostRecentCall.args[0].controller).toBe('FloorCarConfirmCtrl');
     });
 
     it('should stop if dialog promise resolves to anything other than true', function () {

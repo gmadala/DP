@@ -50,7 +50,13 @@ angular.module('nextgearWebApp')
         return false;
       }
 
-      var confirmation = {}; // TODO: Define confirmation dialog
+      var confirmation = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/floorCarConfirm.html',
+        controller: 'FloorCarConfirmCtrl'
+      };
       $dialog.dialog(confirmation).then(function (result) {
         if (result === true) {
           // submission confirmed
