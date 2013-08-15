@@ -25,7 +25,19 @@ describe('Controller: FloorCarConfirmCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach the form data to the scope', function () {
+    expect(scope.formData).toBe(formDataMock);
+  });
+
+  it('should provide a confirm function that closes the dialog with true result', function () {
+    spyOn(dialogMock, 'close');
+    scope.confirm();
+    expect(dialogMock.close).toHaveBeenCalledWith(true);
+  });
+
+  it('should provide a cancel function that closes the dialog with false result', function () {
+    spyOn(dialogMock, 'close');
+    scope.cancel();
+    expect(dialogMock.close).toHaveBeenCalledWith(false);
   });
 });
