@@ -208,6 +208,19 @@ angular.module('nextgearWebApp')
           amount: amount,
           bankAccountId: bankAccountId
         });
+      },
+      search: function(searchData) {
+        var defaults = {
+          Criteria:     null, // Search string
+          DueDateStart: null, // Earliest due date to include (UNIX time)
+          DueDateEnd:   null, // Latest due date to include (UNIX time)
+          OrderBy:      null, // Field to order records by
+          PageNumber:   null, // Page number to return
+          PageSize:     null  // Number of records to return
+        };
+        return api.request('GET', '/payment/search', angular.extend(defaults, searchData)).then(function(result) {
+          return result.SearchResults || [];
+        });
       }
     };
   });

@@ -6,18 +6,31 @@ describe('Controller: PaymentsCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var PaymentsCtrl,
-    scope;
+      scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     PaymentsCtrl = $controller('PaymentsCtrl', {
-      $scope: scope
+      $scope: scope,
+
+      // Mock Payments model/service
+      Payments: {
+        search: function() {
+          return {
+            then: function(success) {
+              success([{}]);
+            }
+          }
+        }
+      }
+
     });
   }));
 
   it('should attach a list of payments to the scope', function () {
-    expect(scope.payments.length).toBe(1);
+    scope.search();
+    expect(scope.payments).toBeDefined();
   });
 
   it('should attach a list of curtailment to the scope', function () {

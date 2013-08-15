@@ -1,23 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope) {
+  .controller('PaymentsCtrl', function($scope, Payments) {
 
     $scope.isCollapsed = true;
 
     // dummy data
-    $scope.payments = [{
-      vin: 'CH224157',
-      vehicle: '2008 Toyota Sequoia Limited Tan',
-      stockNo: 1064,
-      status: 'In Stock',
-      dueDate: '6/10/2013',
-      payoff: 23273.41,
-      payment: 3544.49,
-      title: 'NextGear',
-      floorDate: '3/12/2013'
-    }];
-
     $scope.curtailment = [{
       startDate: '6/5/2013',
       dueDate: '8/5/2013',
@@ -54,5 +42,14 @@ angular.module('nextgearWebApp')
 
     $scope.total = 3544.49*3;
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
+
+    $scope.searchData = {
+      Criteria: null,
+      DueDateStart: null,
+      DueDateEnd: null
+    };
+    $scope.search = function(searchData) {
+      $scope.payments = Payments.search(searchData);
+    };
 
   });
