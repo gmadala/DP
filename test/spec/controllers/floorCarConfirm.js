@@ -6,13 +6,22 @@ describe('Controller: FloorCarConfirmCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var FloorCarConfirmCtrl,
-    scope;
+    scope,
+    dialogMock,
+    formDataMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
+    dialogMock = {
+      close: angular.noop
+    };
+    formDataMock = {};
+
     FloorCarConfirmCtrl = $controller('FloorCarConfirmCtrl', {
-      $scope: scope
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock
     });
   }));
 

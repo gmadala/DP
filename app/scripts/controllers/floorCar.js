@@ -55,7 +55,12 @@ angular.module('nextgearWebApp')
         keyboard: true,
         backdropClick: true,
         templateUrl: 'views/modals/floorCarConfirm.html',
-        controller: 'FloorCarConfirmCtrl'
+        controller: 'FloorCarConfirmCtrl',
+        resolve: {
+          formData: function () {
+            return angular.copy($scope.data);
+          }
+        }
       };
       $dialog.dialog(confirmation).then(function (result) {
         if (result === true) {
