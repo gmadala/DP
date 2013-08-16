@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, Payments) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, Payments) {
 
     $scope.isCollapsed = true;
 
@@ -43,13 +43,15 @@ angular.module('nextgearWebApp')
     $scope.total = 3544.49*3;
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
 
+    $scope.filter = $stateParams.filter;
+
     $scope.searchData = {
       Criteria: null,
       DueDateStart: null,
       DueDateEnd: null
     };
+
     $scope.search = function(searchData) {
       $scope.payments = Payments.search(searchData);
     };
-
   });

@@ -29,7 +29,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', 'infinite-scroll',
         controller: 'DashboardCtrl'
       })
       .state('home.payments', {
-        url: '/payments',
+        url: '/payments?filter',
         templateUrl: 'views/home.payments.html',
         controller: 'PaymentsCtrl'
       })
