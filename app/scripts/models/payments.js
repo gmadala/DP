@@ -219,7 +219,10 @@ angular.module('nextgearWebApp')
           PageSize:     null  // Number of records to return
         };
         return api.request('GET', '/payment/search', angular.extend(defaults, searchData)).then(function(result) {
-          return result.SearchResults || [];
+          return {
+            'payments': result.SearchResults || [],
+            'fees': result.AccountFees || []
+          };
         });
       }
     };

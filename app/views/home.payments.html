@@ -39,9 +39,33 @@
             </div>
         </form><!-- end search form -->
 
+        <ul class="unstyled">
+            <li ng-repeat="fee in results.fees">
+                <header class="row-fluid">
+                    <div class="span2"><strong>Account Fee</strong></div>
+                    <div class="span3"><strong>Fee Type</strong> {fee.FeeType}</div>
+                    <div class="span7"><strong>Description</strong> <span>{{fee.Description}}</span></div>
+                </header>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <p><strong>Due</strong> {{fee.EffectiveDate | date:'M/dd/yyyy'}}</p>
+                        <p><strong>Posted</strong> {fee.PostedDate}</p>
+                    </div>
+                    <div class="span2"><strong>Fee Amount</strong> {{fee.Balance | currency}}</div>
+                    <div class="span6">
+                        <p>Account Fees cannot be paid as part of a scheduled web payment.</p>
+                        <p>Account fees paid online will need to be paid by 8pm EST.</p>
+                    </div>
+                    <div class="span2">
+                        <button class="btn btn-small btn-block">Add Fee</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
         <!-- TODO: Add directives for payments and fees. -->
         <ul class="unstyled payments">
-            <li ng-repeat="payment in payments">
+            <li ng-repeat="payment in results.payments">
                 <header class="row-fluid">
                     <div class="span2"><strong>VIN</strong> <span>{{payment.Vin}}</span></div>
                     <div class="span3">{{payment.UnitDescription}}</div>
@@ -75,7 +99,9 @@
                     </div>
                     <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
                     <div class="span2 offset2">
-                        <button class="btn btn-small btn-block">Add Payment</button>
+                        <button class="btn btn-small btn-block"
+                                tooltip="Select the payments you want to Make or Schedule by adding it your Payment Queue."
+                                tooltip-placement="right">Add Payment</button>
                         <button class="btn btn-small btn-block">Add Payoff</button>
                         <button class="btn btn-small btn-block">View Title</button>
                     </div>

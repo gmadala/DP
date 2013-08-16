@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
     $scope.total = 3544.49*3;
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
 
-    $scope.filter = $stateParams.filter;
+    $scope.filter = $stateParams.filter || 'all';
 
     $scope.searchData = {
       Criteria: null,
@@ -52,6 +52,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.search = function(searchData) {
-      $scope.payments = Payments.search(searchData);
+      $scope.results = Payments.search(searchData);
     };
   });

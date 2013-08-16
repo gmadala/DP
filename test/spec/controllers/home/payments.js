@@ -28,9 +28,9 @@ describe('Controller: PaymentsCtrl', function () {
     });
   }));
 
-  it('should attach a list of payments to the scope', function () {
+  it('should attach a list of results to the scope', function () {
     scope.search();
-    expect(scope.payments).toBeDefined();
+    expect(scope.results).toBeDefined();
   });
 
   it('should attach a list of curtailment to the scope', function () {
