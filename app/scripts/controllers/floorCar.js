@@ -31,7 +31,7 @@ angular.module('nextgearWebApp')
       UnitTitleNumber: null, // string
       UnitTitleStateId: null, // string
       UnitVin: null, // string
-      VinAckLookupFailure: null, // Boolean (must be true if SelectedVehicle is not set, I believe)
+      VinAckLookupFailure: false, // Boolean (must be true if SelectedVehicle is not set, I believe)
       UnitYear: null, // int
       TitleLocationId: null, // int
       TitleTypeId: null // int - WARNING: NOT MAPPED TO ANYTHING IN VIEW
