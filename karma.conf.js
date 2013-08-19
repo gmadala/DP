@@ -28,6 +28,7 @@ module.exports = function(karma) {
 			'app/components/nginfinitescroll/build/ng-infinite-scroll.js',
       'app/components/fullcalendar/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',
+      'app/components/moment/moment.js',
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			'app/scripts/directives/**/*.html',
