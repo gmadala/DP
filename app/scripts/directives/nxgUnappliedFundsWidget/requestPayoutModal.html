@@ -42,10 +42,11 @@
         <div class="control-group">
             <label class="control-label" for="payoutBankAcct">Bank Account for Payout</label>
             <div class="controls" ng-class="{invalid: validity.payoutBankAcct.$invalid}">
-                <select id="payoutBankAcct" name="payoutBankAcct" ng-model="selections.accountId" required>
-                    <option ng-repeat="(accountId, name) in user.getStatics().bankAccounts" value="{{ accountId }}">
-                        {{ name }}
-                    </option>
+                <select id="payoutBankAcct"
+                        name="payoutBankAcct"
+                        ng-model="selections.account"
+                        ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
+                        required>
                 </select>
                 <p class="text-error" ng-show="validity.payoutBankAcct.$error.required">
                     Please select a bank account for payout.

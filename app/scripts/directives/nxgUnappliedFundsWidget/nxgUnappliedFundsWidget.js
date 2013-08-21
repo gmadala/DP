@@ -36,7 +36,7 @@ angular.module('nextgearWebApp')
             var title = 'Request submitted',
               msg = 'Your request for a payout in the amount of ' +
                 $filter('currency')(result.amount) +
-                ' to your account "' + result.accountName +
+                ' to your account "' + result.account.BankAccountName +
                 '" has been successfully submitted.',
               buttons = [{label: 'OK', cssClass: 'btn-primary'}];
             $dialog.messageBox(title, msg, buttons).open();
@@ -50,7 +50,7 @@ angular.module('nextgearWebApp')
     $scope.user = User;
     $scope.selections = {
       amount: undefined,
-      accountId: undefined
+      account: undefined
     };
 
     $scope.submit = function () {
@@ -62,13 +62,10 @@ angular.module('nextgearWebApp')
         return;
       }
       $scope.submitInProgress = true;
-      Payments.requestUnappliedFundsPayout($scope.selections.amount, $scope.selections.accountId).then(
+      Payments.requestUnappliedFundsPayout($scope.selections.amount, $scope.selections.account.BankAccountId).then(
         function (/*result*/) {
           $scope.submitInProgress = false;
-          var selected = angular.extend({}, $scope.selections, {
-            accountName: User.getStatics().bankAccounts[$scope.selections.accountId]
-          });
-          dialog.close(selected);
+          dialog.close($scope.selections);
         }, function (error) {
           $scope.submitInProgress = false;
           $scope.submitError = error || 'Unable to request a payout at this time. Please contact NextGear for assistance.';

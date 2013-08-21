@@ -149,6 +149,13 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
           $valid: true
         };
         scope.form = form;
+        scope.selections = {
+          amount: 100,
+          account: {
+            BankAccountName: 'foo',
+            BankAccountId: 'fooId'
+          }
+        };
       });
 
       it('should expose a snapshot copy of the form controller\'s state on the scope', function () {
@@ -158,10 +165,6 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       it('should not submit if there are local validation errors', function () {
         spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
-        scope.selections = {
-          amount: 100,
-          accountId: 'foo'
-        };
         scope.form = {
           $valid: false,
           payoutAmt: {
@@ -179,12 +182,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       it('should send along the expected data', function () {
         spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
-        scope.selections = {
-          amount: 100,
-          accountId: 'foo'
-        };
         scope.submit();
-        expect(paymentsMock.requestUnappliedFundsPayout).toHaveBeenCalledWith(100, 'foo');
+        expect(paymentsMock.requestUnappliedFundsPayout).toHaveBeenCalledWith(100, 'fooId');
       });
 
       it('should update the submitInProgress flag', function () {
@@ -208,16 +207,12 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       it('should close the dialog with submitted data on success', function () {
         spyOn(dialogMock, 'close');
-        scope.selections = {
-          amount: 100,
-          accountId: 'id2'
-        };
         scope.submit();
         flushPayoutRequestSuccess();
         expect(dialogMock.close).toHaveBeenCalled();
         expect(dialogMock.close.mostRecentCall.args[0].amount).toBe(100);
-        expect(dialogMock.close.mostRecentCall.args[0].accountId).toBe('id2');
-        expect(dialogMock.close.mostRecentCall.args[0].accountName).toBe('name2');
+        expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountId).toBe('fooId');
+        expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountName).toBe('foo');
       });
 
     });
