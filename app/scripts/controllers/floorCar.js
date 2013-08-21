@@ -19,22 +19,22 @@ angular.module('nextgearWebApp')
       PaySeller: false, // Boolean, default is pay buyer
       PhysicalInventoryAddressId: null, //string
       SaleTradeIn: null, // Boolean
-      SelectedVehicle: null, // Object returned from VIN lookup, if it succeeded
+      SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
       SellerBusinessId: null, // string
       UnitColorId: null, // string
-      UnitMake: null, // string
+      UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
-      UnitModel: null, // string
+      UnitModel: null, // string -should match SelectedVehicle.Model
       UnitPurchaseDate: new Date(), // Date locally, formatted to string for API transmission, default is today
       UnitPurchasePrice: null, // string
-      UnitStyle: null, // string
+      UnitStyle: null, // string - should match SelectedVehicle.Style
       UnitTitleNumber: null, // string
       UnitTitleStateId: null, // string
       UnitVin: null, // string
-      VinAckLookupFailure: false, // Boolean (must be true if SelectedVehicle is not set, I believe)
-      UnitYear: null, // int
-      TitleLocationId: null, // int
-      TitleTypeId: null // int - WARNING: NOT MAPPED TO ANYTHING IN VIEW
+      VinAckLookupFailure: false, // Boolean (whether SelectedVehicle data came from VIN or manual attribute entry)
+      UnitYear: null, // int - should match SelectedVehicle.Year
+      TitleLocationId: null, // int - from selected title location option
+      TitleTypeId: null // int - from selected title location option
     };
 
     $scope.reset = function () {

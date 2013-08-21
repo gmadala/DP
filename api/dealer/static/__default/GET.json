@@ -2,50 +2,349 @@
     "Success": true,
     "Message": "Error retrieving dealer info.",
     "Data": {
-        "ProductType": {
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar"
-        },
-        "Colors": {
-            "blue": "Blue",
-            "red": "Red",
-            "green": "Green",
-            "bisque": "Bisque"
-        },
-        "States": {
-            "ny": "NY",
-            "nh": "NH",
-            "ca": "CA",
-            "ct": "CT"
-        },
-        "Locations": {
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar"
-        },
-        "BankAccounts": {
-            "id123": "PNC Bank - Main St.",
-            "id456": "Wells Fargo - XXX234",
-            "id789": "ESL Credit Union - XXX213"
-        },
-        "LinesOfCredit": {
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar",
-            "foo": "bar"
-        },
+        "ProductType": [
+          {
+            "productName": "foo",
+            "productId": "bar"
+          },
+          {
+            "productName": "foz",
+            "productId": "baz"
+          }
+        ],
+        "Colors": [
+          {
+            "ColorName": "Black",
+            "ColorId": "bk"
+          },
+          {
+            "ColorName": "Blue",
+            "ColorId": "bl"
+          },
+          {
+            "ColorName": "Bronze",
+            "ColorId": "bz"
+          },
+          {
+            "ColorName": "Brown",
+            "ColorId": "bn"
+          },
+          {
+            "ColorName": "Cream",
+            "ColorId": "cm"
+          },
+          {
+            "ColorName": "Gold",
+            "ColorId": "au"
+          },
+          {
+            "ColorName": "Gray",
+            "ColorId": "gr"
+          },
+          {
+            "ColorName": "Green",
+            "ColorId": "gn"
+          },
+          {
+            "ColorName": "Maroon",
+            "ColorId": "ik"
+          },
+          {
+            "ColorName": "Orange",
+            "ColorId": "og"
+          },
+          {
+            "ColorName": "Purple",
+            "ColorId": "pl"
+          },
+          {
+            "ColorName": "Red",
+            "ColorId": "rd"
+          },
+          {
+            "ColorName": "Silver",
+            "ColorId": "ag"
+          },
+          {
+            "ColorName": "Tan",
+            "ColorId": "tn"
+          },
+          {
+            "ColorName": "White",
+            "ColorId": "wh"
+          },
+          {
+            "ColorName": "Yellow",
+            "ColorId": "yl"
+          }
+        ],
+        "States": [
+          {
+            "StateName": "Alabama",
+            "StateId": "AL"
+          },
+          {
+            "StateName": "Alaska",
+            "StateId": "AK"
+          },
+          {
+            "StateName": "Arizona",
+            "StateId": "AZ"
+          },
+          {
+            "StateName": "Arkansas",
+            "StateId": "AR"
+          },
+          {
+            "StateName": "California",
+            "StateId": "CA"
+          },
+          {
+            "StateName": "Colorado",
+            "StateId": "CO"
+          },
+          {
+            "StateName": "Connecticut",
+            "StateId": "CT"
+          },
+          {
+            "StateName": "Delaware",
+            "StateId": "DE"
+          },
+          {
+            "StateName": "Florida",
+            "StateId": "FL"
+          },
+          {
+            "StateName": "Georgia",
+            "StateId": "GA"
+          },
+          {
+            "StateName": "Hawaii",
+            "StateId": "HI"
+          },
+          {
+            "StateName": "Idaho",
+            "StateId": "ID"
+          },
+          {
+            "StateName": "Illinois",
+            "StateId": "IL"
+          },
+          {
+            "StateName": "Indiana",
+            "StateId": "IN"
+          },
+          {
+            "StateName": "Iowa",
+            "StateId": "IA"
+          },
+          {
+            "StateName": "Kansas",
+            "StateId": "KS"
+          },
+          {
+            "StateName": "Kentucky",
+            "StateId": "KY"
+          },
+          {
+            "StateName": "Louisiana",
+            "StateId": "LA"
+          },
+          {
+            "StateName": "Maine",
+            "StateId": "ME"
+          },
+          {
+            "StateName": "Maryland",
+            "StateId": "MD"
+          },
+          {
+            "StateName": "Massachusetts",
+            "StateId": "MA"
+          },
+          {
+            "StateName": "Michigan",
+            "StateId": "MI"
+          },
+          {
+            "StateName": "Minnesota",
+            "StateId": "MN"
+          },
+          {
+            "StateName": "Mississippi",
+            "StateId": "MS"
+          },
+          {
+            "StateName": "Missouri",
+            "StateId": "MO"
+          },
+          {
+            "StateName": "Montana",
+            "StateId": "MT"
+          },
+          {
+            "StateName": "Nebraska",
+            "StateId": "NE"
+          },
+          {
+            "StateName": "Nevada",
+            "StateId": "NV"
+          },
+          {
+            "StateName": "New Hampshire",
+            "StateId": "NH"
+          },
+          {
+            "StateName": "New Jersey",
+            "StateId": "NJ"
+          },
+          {
+            "StateName": "New Mexico",
+            "StateId": "NM"
+          },
+          {
+            "StateName": "New York",
+            "StateId": "NY"
+          },
+          {
+            "StateName": "North Carolina",
+            "StateId": "NC"
+          },
+          {
+            "StateName": "North Dakota",
+            "StateId": "ND"
+          },
+          {
+            "StateName": "Ohio",
+            "StateId": "OH"
+          },
+          {
+            "StateName": "Oklahoma",
+            "StateId": "OK"
+          },
+          {
+            "StateName": "Oregon",
+            "StateId": "OR"
+          },
+          {
+            "StateName": "Pennsylvania",
+            "StateId": "PA"
+          },
+          {
+            "StateName": "Rhode Island",
+            "StateId": "RI"
+          },
+          {
+            "StateName": "South Carolina",
+            "StateId": "SC"
+          },
+          {
+            "StateName": "South Dakota",
+            "StateId": "SD"
+          },
+          {
+            "StateName": "Tennessee",
+            "StateId": "TN"
+          },
+          {
+            "StateName": "Texas",
+            "StateId": "TX"
+          },
+          {
+            "StateName": "Utah",
+            "StateId": "UT"
+          },
+          {
+            "StateName": "Vermont",
+            "StateId": "VT"
+          },
+          {
+            "StateName": "Virginia",
+            "StateId": "VA"
+          },
+          {
+            "StateName": "Washington",
+            "StateId": "WA"
+          },
+          {
+            "StateName": "West Virginia",
+            "StateId": "WV"
+          },
+          {
+            "StateName": "Wisconsin",
+            "StateId": "WI"
+          },
+          {
+            "StateName": "Wyoming",
+            "StateId": "WY"
+          }
+        ],
+        "Locations": [
+          {
+            "LocationName": "Rochester",
+            "LocationId": "a1"
+          },
+          {
+            "LocationName": "Canandaigua",
+            "LocationId": "b2"
+          },
+          {
+            "LocationName": "Victor",
+            "LocationId": "b3"
+          }
+        ],
+        "BankAccounts": [
+          {
+            "BankAccountName": "PNC Bank - Main St.",
+            "BankAccountId": "id123"
+          },
+          {
+            "BankAccountName": "Wells Fargo - XXX234",
+            "BankAccountId": "id456"
+          },
+          {
+            "BankAccountName": "ESL Credit Union - XXX213",
+            "BankAccountId": "id789"
+          }
+        ],
+        "LinesOfCredit": [
+          {
+            "LineOfCreditName": "Main Line",
+            "LineOfCreditId": "cr01"
+          },
+          {
+            "LineOfCreditName": "Temp Extension",
+            "LineOfCreditId": "tx02"
+          }
+        ],
         "TitleLocationOptions": [
           {
             "id": 1,
-            "Name": "Dealer N Ame",
-            "ResultingTitleLocationid": 243,
-            "ResultingTitleTypeId": 456,
+            "Name": "I have it",
+            "ResultingTitleLocationid": 111,
+            "ResultingTitleTypeId": 112,
             "TitleInfoEnabled": true,
             "TitleInfoRequired": true,
+            "DisplayOrder": 1
+          },
+          {
+            "id": 2,
+            "Name": "Unknown/TA(Title Absent)",
+            "ResultingTitleLocationid": 222,
+            "ResultingTitleTypeId": 223,
+            "TitleInfoEnabled": true,
+            "TitleInfoRequired": false,
             "DisplayOrder": 2
+          },
+          {
+            "id": 3,
+            "Name": "No Title Needed",
+            "ResultingTitleLocationid": 333,
+            "ResultingTitleTypeId": 334,
+            "TitleInfoEnabled": false,
+            "TitleInfoRequired": false,
+            "DisplayOrder": 3
           }
         ]
     }
