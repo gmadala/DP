@@ -31,7 +31,11 @@ describe('Controller: FloorCarCtrl', function () {
     protect = _protect_;
     dialogMock = {
       dialog: function () {
-        return createPromiseMock(confirmSetting);
+        return {
+          open: function () {
+            return createPromiseMock(confirmSetting);
+          }
+        };
       },
       messageBox: function () {
         return {

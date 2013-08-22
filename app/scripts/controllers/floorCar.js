@@ -62,7 +62,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(confirmation).then(function (result) {
+      $dialog.dialog(confirmation).open().then(function (result) {
         if (result === true) {
           // submission confirmed
           $scope.reallySubmit(protect);
