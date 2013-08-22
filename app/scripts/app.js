@@ -69,6 +69,11 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/documents.html',
         controller: 'DocumentsCtrl'
       })
+      .state('feedback', {
+        url: '/feedback',
+        templateUrl: 'views/feedback.html',
+        controller: 'FeedbackCtrl'
+      })
       .state('settings', {
         url: '/settings',
         templateUrl: 'views/settings.html',
