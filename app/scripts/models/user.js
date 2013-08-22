@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .service('User', function(api, $http, $rootScope, Base64) {
+  .service('User', function(api, $http, $rootScope, Base64, $log) {
     // Private
     var info = null;
     var statics = null;
@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
     };
 
     this.authenticate = function(username, password) {
-      console.log('authenticating with: ' + username + '/' + password);
+      $log.info('authenticating with: ' + username + '/' + password);
       var self = this;
       var promise = api.request(
         'POST',

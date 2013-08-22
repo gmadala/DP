@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, $log) {
 
     $scope.isCollapsed = true;
 
     // TODO: handle filter param from dashboard to auto-search for a certain status (approved, pending, denied)
-    console.log('requested filter:', $stateParams.filter);
+    $log.info('requested filter:', $stateParams.filter);
 
     // dummy data
     $scope.floorplan = [{
