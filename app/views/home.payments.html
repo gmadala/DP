@@ -57,7 +57,7 @@
                         <p>Account fees paid online will need to be paid by 8pm EST.</p>
                     </div>
                     <div class="span2">
-                        <button class="btn btn-small btn-block">Add Fee</button>
+                        <div nxg-payment-buttons="'fee'" is-added="fee.isAdded"></div>
                     </div>
                 </div>
             </li>
@@ -97,14 +97,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
-                    <div class="span2 offset2">
-                        <button class="btn btn-small btn-block"
-                                tooltip="Select the payments you want to Make or Schedule by adding it your Payment Queue."
-                                tooltip-placement="right">Add Payment</button>
-                        <button class="btn btn-small btn-block">Add Payoff</button>
-                        <button class="btn btn-small btn-block">View Title</button>
-                    </div>
+                    <div class="span2 offset2"
+                         nxg-payment-buttons="'payment'"
+                         is-added="payment.IsAdded"
+                         is-payoff="payment.IsPayoff"
+                         is-scheduled="payment.IsScheduled"></div>
                 </div>
 
                 <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
