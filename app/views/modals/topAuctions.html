@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h3>Top Auctions</h3>
+</div>
+<div class="modal-body">
+  <p>Top Auctions is a list of autions and dealers that you have purchased at least two vehicles from in the past 12 months. For each auction, a breakdown is given which allows you to analyze which auctions or sellers are providing you with the best value on vehicle purchases.</p>
+  <!-- ng-repeat="auctions in topAuctions" -->
+  <div class="auction-title">
+    <p>Auction Name</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Purchased</th>
+          <th>Avg Purchase Price</th>
+          <th>Avg Nextgear Capital Book Value</th>
+          <th>Savings Per Purchase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- these vars don't actually exist. -->
+          <td>$scope.topAuctions.auction.purchased</td>
+          <td>$scope.topAuctions.auction.purchasePrice</td>
+          <td>$scope.topAuctions.auction.bookValue</td>
+          <td>($scope.topAuctions.auction.savings)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- -->
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn btn-primary" >Close</button>
+</div>

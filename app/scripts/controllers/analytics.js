@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('AnalyticsCtrl', function ($scope, $dialog) {
+    $scope.openTopAuctions = function() {
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/topAuctions.html',
+        controller: 'TopAuctionsCtrl'
+      };
+      $dialog.dialog(dialogOptions).open();
+    };
   });

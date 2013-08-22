@@ -1,23 +1,21 @@
 'use strict';
 
-describe('Controller: AnalyticsCtrl', function () {
+describe('Controller: TopAuctionsCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
-  var AnalyticsCtrl,
+  var TopAuctionsCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AnalyticsCtrl = $controller('AnalyticsCtrl', {
+    TopAuctionsCtrl = $controller('TopAuctionsCtrl', {
       $scope: scope
     });
   }));
 
-  it('should exist', function () {
-    expect(scope.openTopAuctions).toBeDefined;
-  });
+  /* TODO: Write valid tests for this controller. It doesn't do anything but open and close a modal right now. */
 
 });
