@@ -38,18 +38,19 @@
         </div>
     </div>
     <div class="control-group">
-        <input type="submit" value="search" ng-click="search()"/>
+        <input type="submit" value="Search" ng-click="search()"/>
+        <!-- Should this really be a type="reset"? -->
+        <input type="reset" value="Clear Search Results" ng-show="receipts"/>
     </div>
 </form>
+
 
 <!-- TODO: Add directives for payments and fees. -->
 <section class="receipts-list">
     <ul class="unstyled">
         <li ng-repeat="receipt in receipts">
             <header class="row-fluid">
-                <div class="span2"><strong>VIN </strong><span>{{unavailable.from.api}}</span></div>
-                <div class="span3">{{unavailable.from.api}}</div>
-                <div class="span2"><strong>Stock # </strong> {{unavailable.from.api}}</div>
+                <div class="span2"><strong>Receipt# </strong><span>{{unavailable.from.api}}</span></div>
                 <div class="span2">
                     <strong>Status </strong>
                     <span ng-show="receipt.IsNsf">NSF</span>

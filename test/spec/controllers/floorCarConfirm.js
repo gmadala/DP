@@ -37,7 +37,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
 
   it('should provide a cancel function that closes the dialog with false result', function () {
     spyOn(dialogMock, 'close');
-    scope.cancel();
+    scope.close();
     expect(dialogMock.close).toHaveBeenCalledWith(false);
   });
 });

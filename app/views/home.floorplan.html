@@ -2,10 +2,10 @@
 <form class="form-horizontal well search payments" novalidate>
     <strong>Floorplan Search</strong>
     <div class="control-group">
-        <label class="control-label" for="keyword">Keyword</label>
+        <label class="control-label" for="keyword">VIN</label>
 
         <div class="controls">
-            <input type="text" id="keyword" placeholder="Enter VIN"/>
+            <input type="text" id="keyword" placeholder="Enter Stock #, VIN, Make, Model, or Year"/>
         </div>
     </div>
     <div class="control-group">
@@ -39,6 +39,8 @@
     </div>
     <div class="control-group">
         <input type="submit" value="search"/>
+        <!-- Should this really be type="reset"? -->
+        <input type="reset" value="Clear Search Results" ng-show="floorplan"/>
     </div>
 </form>
 

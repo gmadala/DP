@@ -1,1 +1,53 @@
-<div>Placeholder - fill me in with content for the Floor a Car confirmation modal!</div>
+<div class="modal-header">
+  <h3>Confirm Flooring Request</h3>
+</div>
+<div class="modal-body">
+  <p>Confirm the vehicle information to send the flooring request to NextGear. Print this screen for your records.</p>
+  <table>
+    <thead>Vehicle Information</thead>
+    <tbody>
+      <tr>
+        <td>VIN</td>
+        <td>$scope.formData.VIN</td>
+      </tr>
+      <tr>
+        <td>Make</td>
+        <td>$scope.formData.Make</td>
+      </tr>
+      <tr>
+        <td>Model</td>
+        <td>$scope.formData.Model</td>
+      </tr>
+      <tr>
+        <td>Style</td>
+        <td>$scope.formData.Style</td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td>$scope.formData.Year</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>Flooring Information</thead>
+    <tbody>
+      <tr>
+        <td>Purchase Amount</td>
+        <td>$scope.formData.PurchaseAmount</td>
+      </tr>
+      <tr>
+        <td>Purchase Date</td>
+        <td>$scope.formData.PurchaseDate</td>
+      </tr>
+      <tr>
+        <td>Send Payment To</td>
+        <td>$scope.formData.SendPaymentTo</td>
+      </tr>
+    </tbody>
+  </table>
+  <span>View Vehicle Verification Checklist</span>
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn btn-primary">Return to Form</button>
+  <button class="btn btn-primary">Submit Flooring Request</button>
+</div>

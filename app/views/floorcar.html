@@ -5,6 +5,29 @@
        <label for="inputVin">VIN</label>
        <input type="text" id="inputVin" />
 
+      <span class="row">
+        <input type="checkbox" id="vinFailure">
+        <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+      </span>
+
+      <!-- Start conditional VIN failure fields. -->
+      <div ng-show="true">
+
+        <label for="inputMake">Make</label>
+        <input type="text" id="inputMake" />
+
+        <label for="inputModel">Model</label>
+        <input type="text" id="inputModel" />
+
+        <label for="inputYear">Year</label>
+        <input type="text" id="inputYear" />
+
+        <label for="inputStyle">Style</label>
+        <input type="text" id="inputStyle" />
+      </div>
+
+      <!-- End conditional VIN failure fields. -->
+
        <label for="inputColor">Color</label>
        <select id="inputColor">
            <option></option>
@@ -90,7 +113,7 @@
         </select>
         <div>
             <button class="btn btn-small">Cancel</button>
-            <button class="btn btn-small" type="submit">Submit</button>
+            <button class="btn btn-small" type="submit" ng-click="openFloorCarConfirm()">Submit</button>
         </div>
     </fieldset>
 </form>

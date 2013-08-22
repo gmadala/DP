@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
       dialog.close(true);
     };
 
-    $scope.cancel = function () {
+    $scope.close = function () {
       dialog.close(false);
     };
 
