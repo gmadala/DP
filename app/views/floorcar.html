@@ -3,10 +3,10 @@
    <fieldset class="span6">
        <legend>Vehicle Information</legend>
        <label for="inputVin">VIN</label>
-       <input type="text" id="inputVin" />
+       <input type="text" id="inputVin" ng-model="data.UnitVin" />
 
       <span class="row">
-        <input type="checkbox" id="vinFailure">
+        <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
         <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
       </span>
 
@@ -14,22 +14,26 @@
       <div ng-show="true">
 
         <label for="inputMake">Make</label>
-        <input type="text" id="inputMake" />
+        <select id="inputMake" ng-model="data.UnitMake">
+        </select>
 
         <label for="inputModel">Model</label>
-        <input type="text" id="inputModel" />
+        <select id="inputModel" ng-model="data.UnitModel">
+        </select>
 
         <label for="inputYear">Year</label>
-        <input type="text" id="inputYear" />
+        <select id="inputYear" ng-model="data.UnitYear">
+        </select>
 
         <label for="inputStyle">Style</label>
-        <input type="text" id="inputStyle" />
+        <select id="inputStyle" ng-model="data.UnitStyle">
+        </select>
       </div>
 
       <!-- End conditional VIN failure fields. -->
 
        <label for="inputColor">Color</label>
-       <select id="inputColor">
+       <select id="inputColor" ng-model="data.UnitColorId">
            <option></option>
            <option>Black</option>
            <option>Blue</option>
@@ -40,16 +44,19 @@
        </select>
 
        <label for="inputMileage">Mileage</label>
-       <input type="text" id="inputMileage" />
+       <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
 
-       <label for="vin">VIN</label>
-       <input type="text" id="vin" />
-
-       <label for="inputNGBookVal">NextGear Book Value</label>
-       <input type="text" id="inputNGBookVal" />
+       <label for="NXGBookVal">NextGear Book Value</label>
+       <p class="muted help" ng-show="!data.SelectedVehicle">Enter vehicle identity + mileage for book value</p>
+       <ul id="NXGBookVal" ng-show="!!data.SelectedVehicle">
+         <li>Rough: {{ data.SelectedVehicle.RoughValue | currency }}</li>
+         <li>Average: {{ data.SelectedVehicle.AverageValue | currency }}</li>
+         <li>Clean: {{ data.SelectedVehicle.CleanValue | currency }}</li>
+         <li>Extra Clean: {{ data.SelectedVehicle.ExtraCleanValue | currency }}</li>
+       </ul>
 
        <label for="inputTitleHolder">Who has the Title?</label>
-       <select id="inputTitleHolder">
+       <select id="inputTitleHolder" ng-model="data.TitleLocationId">
            <option></option>
            <option>I have it</option>
            <option>Unknown/TA</option>
@@ -57,7 +64,7 @@
        </select>
 
        <label for="inputTitleState">Title State</label>
-       <select id="inputTitleState">
+       <select id="inputTitleState" ng-model="data.UnitTitleStateId">
            <option></option>
            <option>NY</option>
            <option>MA</option>
@@ -65,35 +72,35 @@
        </select>
 
        <label for="inputTitleNo">Title Number</label>
-       <input type="text" id="inputTitleNo" />
+       <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber" />
 
        <label for="inputInvLoc">Inventory Location</label>
-      <select id="inputInvLoc">
+       <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId">
           <option></option>
           <option>Denver, CO</option>
           <option>Anytown, MI</option>
-      </select>
+       </select>
    </fieldset>
 
     <fieldset class="span6">
         <legend>Sale Information</legend>
 
         <label>Trade In</label>
-        <label><input type="radio" name="inputTradeIn" value="no" checked> No </label>
-        <label><input type="radio" name="inputTradeIn" value="yes"> Yes </label>
+        <label><input type="radio" name="inputTradeIn" ng-value="false" ng-model="data.SaleTradeIn"> No </label>
+        <label><input type="radio" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn"> Yes </label>
 
         <label for="inputSeller">Seller</label>
-        <input type="text" id="inputSeller" />
+        <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" />
         <a href ng-click="openBusinessSearch()"><i class="icon-search"></i></a>
 
         <label for="inputPurchaseAmt">Purchase Amount</label>
-        <input type="text" id="inputPurchaseAmt" />
+        <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
 
         <label for="inputPurchaseDate">Purchase Date</label>
-        <input id="inputPurchaseDate" nxg-date-field />
+        <input id="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate" />
 
         <label for="inputCreditLine">Line of Credit</label>
-        <select id="inputCreditLine">
+        <select id="inputCreditLine" ng-model="LineOfCreditId">
             <option></option>
             <option>Retail (Buyer)</option>
             <option>Foo</option>
@@ -101,19 +108,18 @@
         </select>
 
         <label for="inputSendPay">Send Payment To:</label>
-        <select id="inputSendPay">
-            <option></option>
-            <option>Buyer</option>
+        <select id="inputSendPay" ng-model="data.PaySeller"
+                ng-options="name for (name, value) in {Buyer: false, Seller: true}">
         </select>
 
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-        <select id="inputDisburseAcct">
+        <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId">
             <option></option>
             <option>My Account</option>
         </select>
         <div>
             <button class="btn btn-small">Cancel</button>
-            <button class="btn btn-small" type="submit" ng-click="openFloorCarConfirm()">Submit</button>
+            <button class="btn btn-small" type="submit" ng-click="submit()">Submit</button>
         </div>
     </fieldset>
 </form>
