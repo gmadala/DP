@@ -14,10 +14,10 @@ angular.module('nextgearWebApp')
     // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
       ApplicationOSName: null, // string - WARNING: NOT MAPPED TO ANYTHING IN VIEW
-      BuyerBankAccountId: null, // string
-      LineOfCreditId: null, // string
+      BuyerBankAccountId: null, // BankAccount object locally, flatten to string for API tx
+      LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: false, // Boolean, default is pay buyer
-      PhysicalInventoryAddressId: null, //string
+      PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: null, // Boolean
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
       SellerBusinessId: null, // string
@@ -25,16 +25,16 @@ angular.module('nextgearWebApp')
       UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
       UnitModel: null, // string -should match SelectedVehicle.Model
-      UnitPurchaseDate: new Date(), // Date locally, formatted to string for API transmission, default is today
+      UnitPurchaseDate: new Date(), // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string - should match SelectedVehicle.Style
       UnitTitleNumber: null, // string
-      UnitTitleStateId: null, // string
+      UnitTitleStateId: null, // State object locally, flatten to string for API tx
       UnitVin: null, // string
       VinAckLookupFailure: false, // Boolean (whether SelectedVehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int - should match SelectedVehicle.Year
-      TitleLocationId: null, // int - from selected title location option
-      TitleTypeId: null // int - from selected title location option
+      TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
+      TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
     };
 
     $scope.reset = function () {

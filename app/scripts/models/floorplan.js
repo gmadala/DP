@@ -23,10 +23,15 @@ angular.module('nextgearWebApp')
           VinAckLookupFailure: api.toBoolean(data.VinAckLookupFailure),
           // int
           UnitYear: api.toInt(data.UnitYear),
-          TitleLocationId: api.toInt(data.TitleLocationId),
-          TitleTypeId: api.toInt(data.TitleTypeId),
           // date
-          UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate)
+          UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate),
+          // option object values that need flattened to ids
+          TitleLocationId: data.TitleLocationId.ResultingTitleLocationId,
+          TitleTypeId: data.TitleLocationId.ResultingTitleTypeId,
+          UnitTitleStateId: data.UnitTitleStateId.StateId,
+          PhysicalInventoryAddressId: data.PhysicalInventoryAddressId.LocationId,
+          LineOfCreditId: data.LineOfCreditId.LineOfCreditId,
+          BuyerBankAccountId: data.BuyerBankAccountId.BankAccountId
         });
 
         return api.request('POST', '/floorplan/create', data);

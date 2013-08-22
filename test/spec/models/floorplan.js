@@ -41,7 +41,14 @@ describe('Model: Floorplan', function () {
 
   describe('create method', function () {
 
-    var sentData;
+    var sentData,
+      dummyFormData = {
+        TitleLocationId: {ResultingTitleLocationId: 'titleLoc1', ResultingTitleTypeId: 'titleType1'},
+        UnitTitleStateId: {StateId: 'state1'},
+        PhysicalInventoryAddressId: {LocationId: 'loc1'},
+        LineOfCreditId: {LineOfCreditId: 'line1'},
+        BuyerBankAccountId: {BankAccountId: 'account1'}
+      };
 
     beforeEach(function () {
       httpBackend.expectPOST('/floorplan/create')
@@ -53,16 +60,16 @@ describe('Model: Floorplan', function () {
     });
 
     it('should make the expected POST', function () {
-      floorplan.create({});
+      floorplan.create(angular.extend({}, dummyFormData));
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should coerce boolean properties', function () {
-      floorplan.create({
+      floorplan.create(angular.extend({}, dummyFormData, {
         PaySeller: 'true',
         SaleTradeIn: 'false',
         VinAckLookupFailure: 'foobar'
-      });
+      }));
       httpBackend.flush();
       expect(sentData.PaySeller).toBe(true);
       expect(sentData.SaleTradeIn).toBe(false);
@@ -70,23 +77,30 @@ describe('Model: Floorplan', function () {
     });
 
     it('should coerce int properties', function () {
-      floorplan.create({
+      floorplan.create(angular.extend({}, dummyFormData, {
         UnitYear: '2004',
-        TitleLocationId: '0',
-        TitleTypeId: 'abcd'
-      });
+      }));
       httpBackend.flush();
       expect(sentData.UnitYear).toBe(2004);
-      expect(sentData.TitleLocationId).toBe(0);
-      expect(sentData.TitleTypeId).toBe(null);
     });
 
     it('should format purchase date to a short ISO string', function () {
-      floorplan.create({
+      floorplan.create(angular.extend({}, dummyFormData, {
         UnitPurchaseDate: new Date(2013, 1, 1)
-      });
+      }));
       httpBackend.flush();
       expect(sentData.UnitPurchaseDate).toBe('2013-02-01');
+    });
+
+    it('should flatten option objects to ids', function () {
+      floorplan.create(angular.extend({}, dummyFormData));
+      httpBackend.flush();
+      expect(sentData.TitleLocationId).toBe('titleLoc1');
+      expect(sentData.TitleTypeId).toBe('titleType1');
+      expect(sentData.UnitTitleStateId).toBe('state1');
+      expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
+      expect(sentData.LineOfCreditId).toBe('line1');
+      expect(sentData.BuyerBankAccountId).toBe('account1');
     });
 
   });

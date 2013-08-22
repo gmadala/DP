@@ -56,29 +56,21 @@
        </ul>
 
        <label for="inputTitleHolder">Who has the Title?</label>
-       <select id="inputTitleHolder" ng-model="data.TitleLocationId">
-           <option></option>
-           <option>I have it</option>
-           <option>Unknown/TA</option>
-           <option>No Title Needed</option>
+       <select id="inputTitleHolder" ng-model="data.TitleLocationId"
+               ng-options="location.Name for location in user.getStatics().titleLocationOptions">
        </select>
 
        <label for="inputTitleState">Title State</label>
-       <select id="inputTitleState" ng-model="data.UnitTitleStateId">
-           <option></option>
-           <option>NY</option>
-           <option>MA</option>
-           <option>PA</option>
+       <select id="inputTitleState" ng-model="data.UnitTitleStateId"
+               ng-options="state.StateName for state in user.getStatics().states">
        </select>
 
        <label for="inputTitleNo">Title Number</label>
        <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber" />
 
        <label for="inputInvLoc">Inventory Location</label>
-       <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId">
-          <option></option>
-          <option>Denver, CO</option>
-          <option>Anytown, MI</option>
+       <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
+               ng-options="location.LocationName for location in user.getStatics().locations">
        </select>
    </fieldset>
 
@@ -100,11 +92,8 @@
         <input id="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate" />
 
         <label for="inputCreditLine">Line of Credit</label>
-        <select id="inputCreditLine" ng-model="LineOfCreditId">
-            <option></option>
-            <option>Retail (Buyer)</option>
-            <option>Foo</option>
-            <option>Lorem</option>
+        <select id="inputCreditLine" ng-model="data.LineOfCreditId"
+                ng-options="line.LineOfCreditName for line in user.getStatics().linesOfCredit">
         </select>
 
         <label for="inputSendPay">Send Payment To:</label>
@@ -113,9 +102,8 @@
         </select>
 
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-        <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId">
-            <option></option>
-            <option>My Account</option>
+        <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
+                ng-options="account.BankAccountName for account in user.getStatics().bankAccounts">
         </select>
         <div>
             <button class="btn btn-small">Cancel</button>
