@@ -5,8 +5,8 @@ angular.module('nextgearWebApp')
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    // user model holds "dealer static" data needed to populate form dropdowns via user.getStatics()
-    $scope.user = User;
+    // user model holds "dealer static" data needed to populate form dropdowns -- use: options().foo
+    $scope.options = User.getStatics;
 
     // form data model holds values filled into form
     $scope.data = null;

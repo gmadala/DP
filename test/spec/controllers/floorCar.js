@@ -52,15 +52,17 @@ describe('Controller: FloorCarCtrl', function () {
     FloorCarCtrl = $controller('FloorCarCtrl', {
       $scope: scope,
       User: {
-        foo: 'bar'
+        getStatics: function () {
+          return 'ok';
+        }
       },
       $dialog: dialogMock,
       Floorplan: floorplanMock
     });
   }));
 
-  it('should attach user object to the scope', function () {
-    expect(scope.user.foo).toBe('bar');
+  it('should attach an options function to the scope', function () {
+    expect(scope.options()).toBe('ok');
   });
 
   it('should attach a default data object to the scope', function () {

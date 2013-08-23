@@ -34,7 +34,7 @@
 
        <label for="inputColor">Color</label>
        <select id="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in user.getStatics().colors">
+               ng-options="color.ColorName for color in options().colors">
        </select>
 
        <label for="inputMileage">Mileage</label>
@@ -51,12 +51,12 @@
 
        <label for="inputTitleHolder">Who has the Title?</label>
        <select id="inputTitleHolder" ng-model="data.TitleLocationId"
-               ng-options="location.Name for location in user.getStatics().titleLocationOptions">
+               ng-options="location.Name for location in options().titleLocationOptions">
        </select>
 
        <label for="inputTitleState">Title State</label>
        <select id="inputTitleState" ng-model="data.UnitTitleStateId"
-               ng-options="state.StateName for state in user.getStatics().states"
+               ng-options="state.StateName for state in options().states"
                ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
        </select>
 
@@ -66,7 +66,7 @@
 
        <label for="inputInvLoc">Inventory Location</label>
        <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
-               ng-options="location.LocationName for location in user.getStatics().locations">
+               ng-options="location.LocationName for location in options().locations">
        </select>
    </fieldset>
 
@@ -103,7 +103,7 @@
 
         <label for="inputCreditLine">Line of Credit</label>
         <select id="inputCreditLine" ng-model="data.LineOfCreditId"
-                ng-options="line.LineOfCreditName for line in user.getStatics().linesOfCredit">
+                ng-options="line.LineOfCreditName for line in options().linesOfCredit">
         </select>
 
         <label for="inputSendPay">Send Payment To:</label>
@@ -115,7 +115,7 @@
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
         <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
                 ng-disabled="data.PaySeller"
-                ng-options="account.BankAccountName for account in user.getStatics().bankAccounts">
+                ng-options="account.BankAccountName for account in options().bankAccounts">
         </select>
         <div>
             <button class="btn btn-small">Cancel</button>
