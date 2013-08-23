@@ -82,8 +82,11 @@
         <label><input type="radio" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn"> Yes </label>
 
         <label for="inputSeller">Seller</label>
-        <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" />
-        <a href ng-click="openBusinessSearch()"><i class="icon-search"></i></a>
+        <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" ng-disabled="data.SaleTradeIn" />
+        <a href ng-click="data.SaleTradeIn || openBusinessSearch()"
+           ng-class="{disabled: data.SaleTradeIn}">
+          <i class="icon-search"></i>
+        </a>
 
         <label for="inputPurchaseAmt">Purchase Amount</label>
         <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />

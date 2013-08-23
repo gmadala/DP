@@ -34,6 +34,11 @@ angular.module('nextgearWebApp')
           BuyerBankAccountId: data.BuyerBankAccountId.BankAccountId
         });
 
+        // seller info is disabled for trade-in sales
+        if (data.SaleTradeIn) {
+          data.SellerBusinessId = null;
+        }
+
         return api.request('POST', '/floorplan/create', data);
       }
     };

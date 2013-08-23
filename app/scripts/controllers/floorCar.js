@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: false, // Boolean, default is pay buyer
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: null, // Boolean
+      SaleTradeIn: false, // Boolean, default is no
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
       SellerBusinessId: null, // string
       UnitColorId: null, // string
