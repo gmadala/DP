@@ -49,7 +49,8 @@
                 height="300"
                 nxg-chart
                 nxg-chart-type="Bar"
-                nxg-chart-data="averageTurn.analytics.chartData">
+                nxg-chart-data="averageTurn"
+                nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
         </canvas>
         <p>The Last 12 Months</p>
       </div>
@@ -64,14 +65,16 @@
                 ng-show="true"
                 nxg-chart
                 nxg-chart-type="Bar"
-                nxg-chart-data="bestMovers.analytics.chartData">
+                nxg-chart-data="bestMovers"
+                nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
         </canvas>
         <canvas width="300"
                 height="300"
                 ng-show="false"
                 nxg-chart
                 nxg-chart-type="Bar"
-                nxg-chart-data="worstMovers.analytics.chartData">
+                nxg-chart-data="worstMovers"
+                nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
         </canvas>
         <p>Average Number of Days to Turn</p>
       </div>
@@ -93,7 +96,8 @@
                 height="300"
                 nxg-chart
                 nxg-chart-type="Bar"
-                nxg-chart-data="top10autions.analytics.chartData">
+                nxg-chart-data="top10auctions"
+                nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
         </canvas>
         <p>Average Number of Cars Purchased in the last 12 months</p>
         <p><a href ng-click="openTopAuctions()">View All Auctions</a></p>
