@@ -56,11 +56,13 @@
 
        <label for="inputTitleState">Title State</label>
        <select id="inputTitleState" ng-model="data.UnitTitleStateId"
-               ng-options="state.StateName for state in user.getStatics().states">
+               ng-options="state.StateName for state in user.getStatics().states"
+               ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
        </select>
 
        <label for="inputTitleNo">Title Number</label>
-       <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber" />
+       <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber"
+              ng-disabled="!data.TitleLocationId.TitleInfoEnabled"/>
 
        <label for="inputInvLoc">Inventory Location</label>
        <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
