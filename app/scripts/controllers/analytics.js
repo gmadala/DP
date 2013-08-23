@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('AnalyticsCtrl', function ($scope, $dialog) {
     $scope.averageTurn = {
-      labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", ],
+      labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ],
       datasets : [
         {
           data : [65,59,90,81,56,55]
@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
       ]
     };
     $scope.bestMovers = {
-      labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", ],
+      labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ],
       datasets : [
         {
           data : [65,59,90,81,56,55]
@@ -19,7 +19,7 @@ angular.module('nextgearWebApp')
       ]
     };
     $scope.worstMovers = {
-      labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", ],
+      labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ],
       datasets : [
         {
           data : [65,59,90,81,56,55]
@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
       ]
     };
     $scope.top10auctions = {
-      labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", ],
+      labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ],
       datasets : [
         {
           data : [65,59,90,81,56,55]
