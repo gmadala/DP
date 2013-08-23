@@ -20,6 +20,8 @@ describe('Controller: FloorCarCtrl', function () {
   var FloorCarCtrl,
     scope,
     protect,
+    userMock,
+    optionSetMock = [],
     dialogMock,
     floorplanMock,
     confirmSetting = {error: null, resolution: null},
@@ -49,20 +51,26 @@ describe('Controller: FloorCarCtrl', function () {
       }
     };
 
+    userMock = {
+      getStatics: function () {
+        return {
+          locations: optionSetMock,
+          linesOfCredit: optionSetMock,
+          bankAccounts: optionSetMock
+        };
+      }
+    };
+
     FloorCarCtrl = $controller('FloorCarCtrl', {
       $scope: scope,
-      User: {
-        getStatics: function () {
-          return 'ok';
-        }
-      },
+      User: userMock,
       $dialog: dialogMock,
       Floorplan: floorplanMock
     });
   }));
 
   it('should attach an options function to the scope', function () {
-    expect(scope.options()).toBe('ok');
+    expect(scope.options()).toBeDefined();
   });
 
   it('should attach a default data object to the scope', function () {
@@ -78,6 +86,15 @@ describe('Controller: FloorCarCtrl', function () {
     scope.data.UnitMake = 'Ford';
     scope.reset();
     expect(angular.equals(scope.defaultData, scope.data)).toBe(true);
+  });
+
+  it('reset should default dealer options where only 1 exists', function () {
+    optionSetMock = ['one'];
+    scope.reset();
+    scope.$apply();
+    expect(scope.data.PhysicalInventoryAddressId).toBe('one');
+    expect(scope.data.LineOfCreditId).toBe('one');
+    expect(scope.data.BuyerBankAccountId).toBe('one');
   });
 
   describe('submit function', function () {

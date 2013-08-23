@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect) {
+  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper) {
 
     //$scope.form = <form directive's controller, assigned by view>
 
@@ -37,8 +37,24 @@ angular.module('nextgearWebApp')
       TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
     };
 
+    $scope.defaultHelper = OptionDefaultHelper.create([
+      {
+        scopeSrc: 'options().locations',
+        modelDest: 'PhysicalInventoryAddressId'
+      },
+      {
+        scopeSrc: 'options().linesOfCredit',
+        modelDest: 'LineOfCreditId'
+      },
+      {
+        scopeSrc: 'options().bankAccounts',
+        modelDest: 'BuyerBankAccountId'
+      }
+    ]);
+
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
+      $scope.defaultHelper.applyDefaults($scope, $scope.data);
     };
 
     $scope.reset();
