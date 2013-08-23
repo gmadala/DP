@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
       SaleTradeIn: false, // Boolean, default is no
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
       SellerBusinessId: null, // string
-      UnitColorId: null, // string
+      UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
       UnitModel: null, // string -should match SelectedVehicle.Model

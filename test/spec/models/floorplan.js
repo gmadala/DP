@@ -43,6 +43,7 @@ describe('Model: Floorplan', function () {
 
     var sentData,
       dummyFormData = {
+        UnitColorId: {ColorId: 'col1'},
         TitleLocationId: {ResultingTitleLocationId: 'titleLoc1', ResultingTitleTypeId: 'titleType1'},
         UnitTitleStateId: {StateId: 'state1'},
         PhysicalInventoryAddressId: {LocationId: 'loc1'},
@@ -95,6 +96,7 @@ describe('Model: Floorplan', function () {
     it('should flatten option objects to ids', function () {
       floorplan.create(angular.extend({}, dummyFormData));
       httpBackend.flush();
+      expect(sentData.UnitColorId).toBe('col1');
       expect(sentData.TitleLocationId).toBe('titleLoc1');
       expect(sentData.TitleTypeId).toBe('titleType1');
       expect(sentData.UnitTitleStateId).toBe('state1');

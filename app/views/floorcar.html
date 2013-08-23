@@ -33,14 +33,8 @@
       <!-- End conditional VIN failure fields. -->
 
        <label for="inputColor">Color</label>
-       <select id="inputColor" ng-model="data.UnitColorId">
-           <option></option>
-           <option>Black</option>
-           <option>Blue</option>
-           <option>Bronze</option>
-           <option>Brown</option>
-           <option>Cream</option>
-           <option>Purple</option>
+       <select id="inputColor" ng-model="data.UnitColorId"
+               ng-options="color.ColorName for color in user.getStatics().colors">
        </select>
 
        <label for="inputMileage">Mileage</label>
