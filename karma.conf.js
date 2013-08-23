@@ -31,6 +31,7 @@ module.exports = function(karma) {
       'app/components/fullcalendar/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
+	    'app/components/nnnick-chartjs/Chart.js',
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			'app/scripts/directives/**/*.html',
