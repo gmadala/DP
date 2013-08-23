@@ -17,7 +17,7 @@ describe('Controller: DocumentsCtrl', function () {
   }));
 
   it('should attach a list of documents to the scope', function () {
-    expect(scope.documents.length).toBe(4);
+    expect(scope.documents.length).toBe(3);
   });
 
   it('should attach a list of collateralProtection to the scope', function () {

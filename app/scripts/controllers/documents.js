@@ -1,12 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope) {
+  .controller('DocumentsCtrl', function ($scope, $dialog) {
     $scope.documents = [
       { 'title': 'Welcome Packet(PDF)',
-        'url': 'path/to/link'
-      },
-      { 'title': 'Rates and Fees',
         'url': 'path/to/link'
       },
       { 'title': 'Vehicle Verification Checklist (PDF)',
@@ -31,4 +28,14 @@ angular.module('nextgearWebApp')
         'url': 'path/to/link'
       }
     ];
+    $scope.openRatesAndFees = function() {
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/ratesAndFees.html',
+        controller: 'RatesAndFeesCtrl'
+      };
+      $dialog.dialog(dialogOptions).open();
+    };
   });
