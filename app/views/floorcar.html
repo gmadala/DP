@@ -72,8 +72,19 @@
         <legend>Sale Information</legend>
 
         <label>Trade In</label>
-        <label><input type="radio" name="inputTradeIn" ng-value="false" ng-model="data.SaleTradeIn"> No </label>
-        <label><input type="radio" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn"> Yes </label>
+        <label><input type="radio"
+                      name="inputTradeIn"
+                      ng-value="false"
+                      ng-model="data.SaleTradeIn">
+          No
+        </label>
+        <label><input type="radio"
+                      name="inputTradeIn"
+                      ng-value="true"
+                      ng-model="data.SaleTradeIn"
+                      ng-change="data.SellerBusinessId = null">
+          Yes
+        </label>
 
         <label for="inputSeller">Seller</label>
         <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" ng-disabled="data.SaleTradeIn" />
@@ -95,11 +106,13 @@
 
         <label for="inputSendPay">Send Payment To:</label>
         <select id="inputSendPay" ng-model="data.PaySeller"
-                ng-options="name for (name, value) in {Buyer: false, Seller: true}">
+                ng-options="name for (name, value) in {Buyer: false, Seller: true}"
+                ng-change="data.BuyerBankAccountId = null">
         </select>
 
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
         <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
+                ng-disabled="data.PaySeller"
                 ng-options="account.BankAccountName for account in user.getStatics().bankAccounts">
         </select>
         <div>
