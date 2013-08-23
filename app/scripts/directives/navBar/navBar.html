@@ -12,8 +12,8 @@
                 <div class="span12 nxg-settings-drop">
 
                     <div>
-                        <h6>{{ user.getInfo().BusinessName }} <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
-                        <p class="small" ng-show="user.isDealer()">{{ user.getInfo().BusinessNumber }}</p>
+                        <h6>{{ user.info().BusinessName }} <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
+                        <p class="small" ng-show="user.isDealer()">{{ user.info().BusinessNumber }}</p>
                     </div>
                     <!-- TODO: Add ng-show so its only visible for dealers -->
                     <div class="nxg-settings" ng-show="showSettings">
@@ -30,11 +30,9 @@
 
     <div class="row-fluid">
         <nav role="navigation" class="span9">
-            <a href="#/home">Home</a>
-            <a ng-show="user.isDealer()" href="#/floorcar">Floor a Car</a>
-            <a href="#/reports">View a Report</a>
-            <a ng-show="user.isDealer()" href="#/analytics">View Analytics</a>
-            <a href="#/documents">Documents</a>
+            <span ng-repeat="link in user.navLinks()" >
+                <a href="{{link.href}}" class="navLink">{{link.name}}</a>
+            </span>
         </nav>
     </div>
 </header>

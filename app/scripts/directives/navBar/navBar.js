@@ -10,8 +10,26 @@ angular.module('nextgearWebApp')
   })
 
   .controller('NavBarCtrl', function($scope, $state, User) {
-    $scope.showSettings = false;
+    var dealerLinks = [
+        { name: 'Home', href: '#/home' },
+        { name: 'View a Report', href: '#/reports' },
+        { name: 'View Analytics', href: '#/analytics' },
+        { name: 'Floor a Car', href: '#/floorcar' },
+        { name: 'Resources', href: '#/documents' }
+      ],
+      auctionLinks = [
+        { name: 'Home', href: '#/act/home' },
+        { name: 'View a Report', href: '#/act/reports' },
+        { name: 'Resources', href: '#/act/documents' }
+      ];
 
-    $scope.user = User;
+    $scope.user = {
+      isDealer: User.isDealer,
+      info: User.getInfo,
+      navLinks: function() {
+        return User.isDealer() ? dealerLinks : auctionLinks;
+      }
+    };
+    $scope.showSettings = false;
     $scope.navState = $state;
   });
