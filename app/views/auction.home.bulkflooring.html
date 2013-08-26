@@ -6,28 +6,34 @@
        <input type="text" id="inputVin" ng-model="data.UnitVin" />
 
       <span class="row">
+        <label for="vinFailure" class="text-error">VIN was not located, please enter Make, Model, Year and Style.</label>
+        <label for="vinFailure" class="text-error">VIN should be from 6 to 17 Characters.</label>
         <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
         <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
       </span>
 
       <!-- Start conditional VIN failure fields. -->
-      <div ng-show="false">
+      <div ng-show="true">
 
         <label for="inputMake">Make</label>
-        <select id="inputMake" ng-model="data.UnitMake">
-        </select>
+        <input id="inputMake" ng-model="data.UnitMake">
+        </input>
+        <label for="inputMake" class="text-error">Make</label>
 
         <label for="inputModel">Model</label>
-        <select id="inputModel" ng-model="data.UnitModel">
-        </select>
+        <input id="inputModel" ng-model="data.UnitModel">
+        </input>
+        <label for="inputModel" class="text-error">Please enter a Model</label>
 
         <label for="inputYear">Year</label>
-        <select id="inputYear" ng-model="data.UnitYear">
-        </select>
+        <input id="inputYear" ng-model="data.UnitYear">
+        </input>
+        <label for="inputYear" class="text-error">Please input a Year</label>
 
         <label for="inputStyle">Style</label>
-        <select id="inputStyle" ng-model="data.UnitStyle">
-        </select>
+        <input id="inputStyle" ng-model="data.UnitStyle">
+        </input>
+        <label for="inputStyle" class="text-error">Please input a Style</label>
       </div>
 
       <!-- End conditional VIN failure fields. -->
@@ -36,28 +42,38 @@
        <select id="inputColor" ng-model="data.UnitColorId"
                ng-options="color.ColorName for color in options().colors">
        </select>
+       <label for="inputColor" class="text-error">Please select a Color</label>
 
        <label for="inputMileage">Mileage</label>
        <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
+       <label for="inputMileage" class="text-error">Please enter the Milage</label>
+       <label for="inputMileage" class="text-error">Please enter a numeric value</label>
 
        <label for="inputTitleHolder">Who has the Title?</label>
        <select id="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-options="location.Name for location in options().titleLocationOptions">
+                <option value="">I have it</option>
+                <option value="">Seller</option>
+                <option value="">Unkown/TA(Title Absent)</option>
+                <option value="">No Title Needed</option>
        </select>
+       <label for="inputTitleHolder" class="text-error">Please select who has the title.</label>
 
        <label for="inputTitleState">Title State</label>
        <select id="inputTitleState" ng-model="data.UnitTitleStateId"
                ng-options="state.StateName for state in options().states"
                ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
        </select>
+       <label for="inputTitleState" class="text-error">Please select a Title State</label>
 
        <label for="consignerTicketNumber">Cosigner Ticket Number</label>
        <input type="text" id="CosignerTicketNumber" ng-model="data.CosignerTicketNumber"/>
+       <label for="cosignerTicketNumber" class="text-error">Please enter a Cosigner Ticket Number</label>
 
        <label for="inputInvLotNum">Lot Number</label>
-       <select id="inputInvLotNum" ng-model="data.PhysicalInventoryLotNumber"
-               ng-options="location.LotNumber for location in options().locations">
-       </select>
+       <input id="inputInvLotNum" ng-model="data.PhysicalInventoryLotNumber"
+               ng-options="location.LotNumber for location in options().locations"/>
+       <label for="inputInvLotNum" class="text-error">Please enter the Lot Number</label>
    </fieldset>
 
     <fieldset class="span6">
@@ -65,21 +81,27 @@
 
         <label for="inputSeller">Seller</label>
         <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" ng-disabled="data.SaleTradeIn" />
-        <a href ng-click="data.SaleTradeIn || openBusinessSearch()"
-           ng-class="{disabled: data.SaleTradeIn}">
+        <a href ng-click="openBusinessSearch()">
           <i class="icon-search"></i>
         </a>
+        <label for="inputSeller" class="text-error">Please enter a Seller</label>
 
         <label for="inputPurchaseAmt">Purchase Amount</label>
         <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
+        <label for="inputPurchaseAmt" class="text-error">Please enter the Purchase Amount</label>
+        <label for="inputPurchaseAmt" class="text-error">Please enter the Please enter a numeric value with no commas or special characters.</label>
 
         <label for="inputSalesDate">Sales Date</label>
         <input id="inputSalesDate" nxg-date-field ng-model="data.UnitSalesDate" />
+        <label for="inputSalesDate" class="text-error">Please select a Sale Date</label>
+        <span>The actual sale date must be used when flooring a car. <a ng-show="false" href="?tooltip">Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct.</a></span>
 
         <label for="inputBankAcct">Bank Account</label>
         <select id="inputBankAcct" ng-model="data.BuyerBankAccountId"
                 ng-options="account.BankAccountName for account in options().bankAccounts">
         </select>
+        <label for="inputBankAcct" class="text-error">Please select a Bank Account.</label>
+
         <div>
             <button class="btn btn-small">Cancel</button>
             <button class="btn btn-small" type="submit" ng-click="submit()">Submit</button>

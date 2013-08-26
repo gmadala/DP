@@ -8,26 +8,34 @@
       <span class="row">
         <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
         <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+        <label for="vinFailure" class="text-error">VIN should be from 6 to 17 Characters.</label>
+        <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
+        <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
       </span>
 
       <!-- Start conditional VIN failure fields. -->
       <div ng-show="true">
 
         <label for="inputMake">Make</label>
-        <select id="inputMake" ng-model="data.UnitMake">
-        </select>
+        <input id="inputMake" ng-model="data.UnitMake">
+        </input>
+        <label for="inputMake" class="text-error">Make</label>
 
         <label for="inputModel">Model</label>
-        <select id="inputModel" ng-model="data.UnitModel">
-        </select>
+        <input id="inputModel" ng-model="data.UnitModel">
+        </input>
+        <label for="inputModel" class="text-error">Please enter a Model</label>
 
         <label for="inputYear">Year</label>
-        <select id="inputYear" ng-model="data.UnitYear">
-        </select>
+        <input id="inputYear" ng-model="data.UnitYear">
+        </input>
+        <label for="inputYear" class="text-error">Please input a Year</label>
 
         <label for="inputStyle">Style</label>
-        <select id="inputStyle" ng-model="data.UnitStyle">
-        </select>
+        <input id="inputStyle" ng-model="data.UnitStyle">
+        </input>
+        <label for="inputStyle" class="text-error">Please input a Style</label>
+
       </div>
 
       <!-- End conditional VIN failure fields. -->
@@ -36,9 +44,12 @@
        <select id="inputColor" ng-model="data.UnitColorId"
                ng-options="color.ColorName for color in options().colors">
        </select>
+       <label for="inputColor" class="text-error">Please select a Color</label>
 
        <label for="inputMileage">Mileage</label>
        <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
+       <label for="inputMileage" class="text-error">Please enter the Milage</label>
+       <label for="inputMileage" class="text-error">Please enter a numeric value</label>
 
        <label for="NXGBookVal">NextGear Book Value</label>
        <p class="muted help" ng-show="!data.SelectedVehicle">Enter vehicle identity + mileage for book value</p>
@@ -53,21 +64,26 @@
        <select id="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-options="location.Name for location in options().titleLocationOptions">
        </select>
+       <label for="inputTitleHolder" class="text-error">Please select who has the title.</label>
 
        <label for="inputTitleState">Title State</label>
        <select id="inputTitleState" ng-model="data.UnitTitleStateId"
                ng-options="state.StateName for state in options().states"
                ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
        </select>
+       <label for="inputTitleState" class="text-error">Please select a Title State</label>
 
        <label for="inputTitleNo">Title Number</label>
        <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber"
               ng-disabled="!data.TitleLocationId.TitleInfoEnabled"/>
+       <label for="inputTitleNo" class="text-error">Please input a Title Number</label>
 
        <label for="inputInvLoc">Inventory Location</label>
        <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                ng-options="location.LocationName for location in options().locations">
        </select>
+       <label for="inputInvLoc" class="text-error">Please enter the Inventory Location</label>
+
    </fieldset>
 
     <fieldset class="span6">
@@ -91,9 +107,12 @@
         <input nxg-business-field="seller" id="inputSeller"
                ng-disabled="data.SaleTradeIn"
                selected-business="data.SellerBusinessId"/>
+        <label for="inputSeller" class="text-error">Please enter a seller</label>
 
         <label for="inputPurchaseAmt">Purchase Amount</label>
         <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
+        <label for="inputPurchaseAmt" class="text-error">Please enter the Purchase Amount</label>
+        <label for="inputPurchaseAmt" class="text-error">Please enter the Please enter a numeric value with no commas or special characters.</label>
 
         <label for="inputPurchaseDate">Purchase Date</label>
         <input id="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate" />
