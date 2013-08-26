@@ -1,1 +1,88 @@
-Auction - Bulk Flooring
+<!-- TODO: Add error messaging -->
+<form class="row-fluid floorcar" name="form">
+   <fieldset class="span6">
+       <legend>Vehicle Information</legend>
+       <label for="inputVin">VIN</label>
+       <input type="text" id="inputVin" ng-model="data.UnitVin" />
+
+      <span class="row">
+        <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
+        <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+      </span>
+
+      <!-- Start conditional VIN failure fields. -->
+      <div ng-show="false">
+
+        <label for="inputMake">Make</label>
+        <select id="inputMake" ng-model="data.UnitMake">
+        </select>
+
+        <label for="inputModel">Model</label>
+        <select id="inputModel" ng-model="data.UnitModel">
+        </select>
+
+        <label for="inputYear">Year</label>
+        <select id="inputYear" ng-model="data.UnitYear">
+        </select>
+
+        <label for="inputStyle">Style</label>
+        <select id="inputStyle" ng-model="data.UnitStyle">
+        </select>
+      </div>
+
+      <!-- End conditional VIN failure fields. -->
+
+       <label for="inputColor">Color</label>
+       <select id="inputColor" ng-model="data.UnitColorId"
+               ng-options="color.ColorName for color in options().colors">
+       </select>
+
+       <label for="inputMileage">Mileage</label>
+       <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
+
+       <label for="inputTitleHolder">Who has the Title?</label>
+       <select id="inputTitleHolder" ng-model="data.TitleLocationId"
+               ng-options="location.Name for location in options().titleLocationOptions">
+       </select>
+
+       <label for="inputTitleState">Title State</label>
+       <select id="inputTitleState" ng-model="data.UnitTitleStateId"
+               ng-options="state.StateName for state in options().states"
+               ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
+       </select>
+
+       <label for="consignerTicketNumber">Cosigner Ticket Number</label>
+       <input type="text" id="CosignerTicketNumber" ng-model="data.CosignerTicketNumber"/>
+
+       <label for="inputInvLotNum">Lot Number</label>
+       <select id="inputInvLotNum" ng-model="data.PhysicalInventoryLotNumber"
+               ng-options="location.LotNumber for location in options().locations">
+       </select>
+   </fieldset>
+
+    <fieldset class="span6">
+        <legend>Sale Information</legend>
+
+        <label for="inputSeller">Seller</label>
+        <input type="text" id="inputSeller" ng-model="data.SellerBusinessId" ng-disabled="data.SaleTradeIn" />
+        <a href ng-click="data.SaleTradeIn || openBusinessSearch()"
+           ng-class="{disabled: data.SaleTradeIn}">
+          <i class="icon-search"></i>
+        </a>
+
+        <label for="inputPurchaseAmt">Purchase Amount</label>
+        <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
+
+        <label for="inputSalesDate">Sales Date</label>
+        <input id="inputSalesDate" nxg-date-field ng-model="data.UnitSalesDate" />
+
+        <label for="inputBankAcct">Bank Account</label>
+        <select id="inputBankAcct" ng-model="data.BuyerBankAccountId"
+                ng-options="account.BankAccountName for account in options().bankAccounts">
+        </select>
+        <div>
+            <button class="btn btn-small">Cancel</button>
+            <button class="btn btn-small" type="submit" ng-click="submit()">Submit</button>
+        </div>
+    </fieldset>
+</form>
