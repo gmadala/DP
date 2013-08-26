@@ -96,11 +96,6 @@ module.exports = {
             var files = fs.readdirSync(f);
             for (var x in files) {
               var file = files[x];
-              if (file === defaultDirectory) {
-                done(f + '/' + file + '/');
-                return;
-              }
-              
               if (dynamicQuery.test(file)) {
                 keepGoing = false;
                 break;
