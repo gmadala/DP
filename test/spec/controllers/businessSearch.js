@@ -18,7 +18,9 @@ describe('Controller: BusinessSearchCtrl', function () {
       $scope: scope,
       dialog: {
         close: function() {}
-      }
+      },
+      initialQuery: '',
+      mode: 'seller'
     });
   }));
 

@@ -4,6 +4,9 @@ angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper) {
 
     //$scope.form = <form directive's controller, assigned by view>
+    $scope.$watch('data.SellerBusinessId', function (value) {
+      console.log('SellerBusinessId is:', value);
+    });
 
     // user model holds "dealer static" data needed to populate form dropdowns -- use: options().foo
     $scope.options = User.getStatics;
@@ -20,7 +23,7 @@ angular.module('nextgearWebApp')
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: false, // Boolean, default is no
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
-      SellerBusinessId: null, // string
+      SellerBusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
@@ -104,15 +107,4 @@ angular.module('nextgearWebApp')
       );
     };
 
-    // TODO: Finish implementation of seller search under req #304
-    $scope.openBusinessSearch = function() {
-      var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
-        templateUrl: 'views/modals/businessSearch.html',
-        controller: 'BusinessSearchCtrl'
-      };
-      $dialog.dialog(dialogOptions).open();
-    };
   });

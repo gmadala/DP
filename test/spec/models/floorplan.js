@@ -48,7 +48,8 @@ describe('Model: Floorplan', function () {
         UnitTitleStateId: {StateId: 'state1'},
         PhysicalInventoryAddressId: {LocationId: 'loc1'},
         LineOfCreditId: {LineOfCreditId: 'line1'},
-        BuyerBankAccountId: {BankAccountId: 'account1'}
+        BuyerBankAccountId: {BankAccountId: 'account1'},
+        SellerBusinessId: {BusinessId: 'seller1'}
       };
 
     beforeEach(function () {
@@ -103,6 +104,7 @@ describe('Model: Floorplan', function () {
       expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
       expect(sentData.LineOfCreditId).toBe('line1');
       expect(sentData.BuyerBankAccountId).toBe('account1');
+      expect(sentData.SellerBusinessId).toBe('seller1');
     });
 
   });

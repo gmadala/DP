@@ -32,7 +32,8 @@ angular.module('nextgearWebApp')
           UnitTitleStateId: data.UnitTitleStateId.StateId,
           PhysicalInventoryAddressId: data.PhysicalInventoryAddressId.LocationId,
           LineOfCreditId: data.LineOfCreditId.LineOfCreditId,
-          BuyerBankAccountId: data.BuyerBankAccountId.BankAccountId
+          BuyerBankAccountId: data.BuyerBankAccountId.BankAccountId,
+          SellerBusinessId: data.SellerBusinessId.BusinessId
         });
 
         return api.request('POST', '/floorplan/create', data);

@@ -3,7 +3,9 @@
 </div>
 <div class="modal-body">
   <label>Business Name or Number</label>
-  <input type="text">
+  <input type="text" ng-model="query">
+  <!-- demo/debug: shows the current business search mode -->
+  <em>Mode: {{ mode }}</em>
   <table>
     <thead>
       <tr>
@@ -22,7 +24,7 @@
         <td>{{result.BusinessNumber}}</td>
         <td>Grand Prarie</td>
         <td>TX</td>
-        <td><a href class="btn btn-mini">Select</a></td>
+        <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
       </tr>
       <tr ng-show="businessSearch.loading">
         <td colspan="6">Loading data...</td>

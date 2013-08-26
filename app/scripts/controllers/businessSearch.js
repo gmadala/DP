@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function ($scope, dialog, BusinessSearch) {
+  .controller('BusinessSearchCtrl', function ($scope, dialog, BusinessSearch, initialQuery, mode) {
+
+    $scope.mode = mode;
+    $scope.query = initialQuery;
 
     $scope.businessSearch = {
       loading: false,
@@ -20,4 +23,9 @@ angular.module('nextgearWebApp')
     $scope.close = function() {
       dialog.close();
     };
+
+    $scope.select = function (business) {
+      dialog.close(business);
+    };
+
   });

@@ -1,0 +1,10 @@
+<span class="nxg-business-field">
+  <input type="text" id="{{ inputId }}"
+         ng-model="query"
+         ng-disabled="disabled"
+         ng-change="clearSelected()"/>
+  <a href ng-click="disabled || openBusinessSearch()"
+     ng-class="{disabled: disabled}">
+    <i class="icon-search"></i>
+  </a>
+</span>
