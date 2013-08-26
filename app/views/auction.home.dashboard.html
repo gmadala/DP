@@ -1,1 +1,70 @@
-Auction Dashboard
+<div class="row">
+  <div class="span3">Disbursement Groups
+    <ul>
+      <li>
+        <span class="item-total">{{disbursementSummary.paidAwaitingTitle.quantity}}</span>
+        <span>Paid Awaiting Title ({{disbursementSummary.paidAwaitingTitle.total | currency}})</span>
+      </li>
+      <li>
+        <span class="item-total">{{disbursementSummary.paid.quantity}}</span>
+        <span>Paid ({{disbursementSummary.paid.total | currency}})</span>
+      </li>
+      <li>
+        <span class="item-total">{{disbursementSummary.pending.quantity}}</span>
+        <span>Pending ({{disbursementSummary.pending.total | currency}})</span>
+      </li>
+    </ul>
+  </div>
+  <div class="span4">Most Recent Disbursements
+    <table>
+      <tbody>
+        <tr ng-repeat="disbursements in recentDisbursements">
+          <td>{{date}}</td>
+          <td>{{id}}</td>
+          <td>{{amount}}</td>
+          <td><a href="#">{{View}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <span>
+      <a href="">Disbursement Reports<i class="icon icon-arrow-right"></i></a>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="span3">Floorplan
+    <ul>
+      <li>
+        <span class="item-total">{{floorplanSummary.approved.quantity}}</span>
+        <span>Approved ({{floorplanSummary.approved.total | currency}})</span>
+      </li>
+      <li>
+        <span class="item-total">{{floorplanSummary.awaitingTitles.quantity}}</span>
+        <span>Awaiting Titles ({{floorplanSummary.awaitingTitles.total | currency}})</span>
+      </li>
+      <li>
+        <span class="item-total">{{floorplanSummary.pending.quantity}}</span>
+        <span>Pending ({{floorplanSummary.pending.total | currency}})</span>
+      </li>
+    </ul>
+  </div>
+  <div class="span6">Volume of Nextgear Floorplans
+    <span class="row">
+      <select name="" id="">
+        <option value="">1 Year</option>
+        <option value="">1 Month</option>
+        <option value="">5 Years</option>
+      </select>
+    </span>
+    <span>Number of Floored Vehicles</span>
+    <canvas width="300"
+            height="300"
+            ng-show="true"
+            nxg-chart
+            nxg-chart-type="Line"
+            nxg-chart-data="volume"
+            nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
+    </canvas>
+    <span>Month this year</span>
+  </div>
+</div>
