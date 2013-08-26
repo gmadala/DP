@@ -2,7 +2,8 @@
   <input type="text" id="{{ inputId }}"
          ng-model="query"
          ng-disabled="disabled"
-         ng-change="clearSelected()"/>
+         ng-change="clearSelected()"
+         nxg-blur="handleExit($event)"/>
   <a href ng-click="disabled || openBusinessSearch()"
      ng-class="{disabled: disabled}">
     <i class="icon-search"></i>

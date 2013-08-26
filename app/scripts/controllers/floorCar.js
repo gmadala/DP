@@ -4,9 +4,6 @@ angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper) {
 
     //$scope.form = <form directive's controller, assigned by view>
-    $scope.$watch('data.SellerBusinessId', function (value) {
-      console.log('SellerBusinessId is:', value);
-    });
 
     // user model holds "dealer static" data needed to populate form dropdowns -- use: options().foo
     $scope.options = User.getStatics;

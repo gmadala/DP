@@ -18,16 +18,18 @@ angular.module('nextgearWebApp')
         inputId: '@id',
         mode: '@nxgBusinessField',
         disabled: '=ngDisabled',
-        setSelected: '&onSelect'
+        selection: '=selectedBusiness'
       },
       controller: 'BusinessFieldCtrl'
     };
   })
-  .controller('BusinessFieldCtrl', function($scope, $dialog) {
+  .controller('BusinessFieldCtrl', function($scope, $element, $dialog) {
+    var searchOpen = false;
+
     $scope.query = '';
 
     $scope.clearSelected = function () {
-      $scope.setSelected({business: null});
+      $scope.selection = null;
     };
 
     // TODO: Final integration with business search modal should be covered under req #304
@@ -47,12 +49,16 @@ angular.module('nextgearWebApp')
           }
         }
       };
+      searchOpen = true;
       $dialog.dialog(dialogOptions).open().then(function (selectedBusiness) {
         if (selectedBusiness) {
           // replace any existing query text with the selected business name
           $scope.query = selectedBusiness.BusinessName;
-          $scope.setSelected({business: selectedBusiness});
+          $scope.selection = selectedBusiness;
         }
+        searchOpen = false;
+        // return focus to the element
+        $element.find('input').focus();
       });
     };
 
@@ -63,5 +69,12 @@ angular.module('nextgearWebApp')
         $scope.clearSelected();
       }
     });
+
+    // force user to resolve a query to a business selection before leaving the field
+    $scope.handleExit = function() {
+      if ($scope.query && !$scope.selection && !searchOpen) {
+        $scope.openBusinessSearch();
+      }
+    };
 
   });
