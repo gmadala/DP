@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionBulkFlooringCtrl', function($scope, $dialog) {
+  .controller('AuctionBulkFlooringCtrl', function($scope, $dialog, protect, Floorplan) {
     $scope.foo = '';
 
     $scope.openBusinessSearch = function() {
