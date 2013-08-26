@@ -1,13 +1,11 @@
 <!-- TODO: Add error messaging -->
-<form class="row-fluid floorcar" name="form">
+<form class="row-fluid floorcar" name="form" novalidate>
    <fieldset class="span6">
        <legend>Vehicle Information</legend>
        <label for="inputVin">VIN</label>
        <input type="text" id="inputVin" ng-model="data.UnitVin" />
 
       <span class="row">
-        <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
-        <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
         <label for="vinFailure" class="text-error">VIN should be from 6 to 17 Characters.</label>
         <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
         <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
@@ -17,22 +15,22 @@
       <div ng-show="true">
 
         <label for="inputMake">Make</label>
-        <input id="inputMake" ng-model="data.UnitMake">
+        <input type="text" id="inputMake" ng-model="data.UnitMake">
         </input>
-        <label for="inputMake" class="text-error">Make</label>
+        <label for="inputMake" class="text-error">Please enter a Make</label>
 
         <label for="inputModel">Model</label>
-        <input id="inputModel" ng-model="data.UnitModel">
+        <input type="text" id="inputModel" ng-model="data.UnitModel">
         </input>
         <label for="inputModel" class="text-error">Please enter a Model</label>
 
         <label for="inputYear">Year</label>
-        <input id="inputYear" ng-model="data.UnitYear">
+        <input type="text" id="inputYear" ng-model="data.UnitYear">
         </input>
         <label for="inputYear" class="text-error">Please input a Year</label>
 
         <label for="inputStyle">Style</label>
-        <input id="inputStyle" ng-model="data.UnitStyle">
+        <input type="text" id="inputStyle" ng-model="data.UnitStyle">
         </input>
         <label for="inputStyle" class="text-error">Please input a Style</label>
 
@@ -48,7 +46,7 @@
 
        <label for="inputMileage">Mileage</label>
        <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
-       <label for="inputMileage" class="text-error">Please enter the Milage</label>
+       <label for="inputMileage" class="text-error">Please enter the Mileage</label>
        <label for="inputMileage" class="text-error">Please enter a numeric value</label>
 
        <label for="NXGBookVal">NextGear Book Value</label>
@@ -112,7 +110,7 @@
         <label for="inputPurchaseAmt">Purchase Amount</label>
         <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
         <label for="inputPurchaseAmt" class="text-error">Please enter the Purchase Amount</label>
-        <label for="inputPurchaseAmt" class="text-error">Please enter the Please enter a numeric value with no commas or special characters.</label>
+        <label for="inputPurchaseAmt" class="text-error">Please enter a numeric value with no commas or special characters.</label>
 
         <label for="inputPurchaseDate">Purchase Date</label>
         <input id="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate" />
