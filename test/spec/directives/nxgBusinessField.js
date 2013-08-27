@@ -34,12 +34,16 @@ describe('Directive: nxgBusinessField', function () {
   beforeEach(inject(function ($rootScope, $compile) {
     scope = $rootScope.$new();
     scope.model = {
+      requireMe: true,
       disableMe: false,
       bizness: null
     };
 
-    element = angular.element('<input id="fooInput" nxg-business-field="seller" ' +
-      'ng-disabled="model.disableMe" selected-business="model.bizness"></input>');
+    element = angular.element('<form name="myForm">' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field="seller" ' +
+      'ng-disabled="model.disableMe" selected-business="model.bizness"' +
+      'ng-required="model.requireMe">' +
+      '</input></form>');
     element = $compile(element)(scope);
     $rootScope.$digest();
   }));
@@ -50,12 +54,12 @@ describe('Directive: nxgBusinessField', function () {
 
   it('should pass the mode through to the business search', inject(function ($dialog) {
     spyOn($dialog, 'dialog').andCallThrough();
-    element.scope().openBusinessSearch();
+    element.find('input').scope().openBusinessSearch();
     expect($dialog.dialog.mostRecentCall.args[0].resolve.mode()).toBe('seller');
   }));
 
   it('should respect the ng-disabled attribute on the original input', function () {
-    var iScope = element.scope();
+    var iScope = element.find('input').scope();
     spyOn(iScope, 'openBusinessSearch');
 
     expect(element.find('input').attr('disabled')).toBeUndefined();
@@ -87,27 +91,56 @@ describe('Directive: nxgBusinessField', function () {
     expect(element.find('input').val()).toBe('');
   });
 
-  it('should force a business search on blur if a search value is present but not resolved', function () {
-    spyOn(element.scope(), 'openBusinessSearch');
+  it('should trigger a business search on blur if a search value is present but not resolved', function () {
+    spyOn(element.find('input').scope(), 'openBusinessSearch');
 
-    element.scope().query = 'foo';
+    element.find('input').scope().query = 'foo';
     element.find('input').trigger('blur');
 
-    expect(element.scope().openBusinessSearch).toHaveBeenCalled();
+    expect(element.find('input').scope().openBusinessSearch).toHaveBeenCalled();
   });
 
   it('should not force a business search on blur if no search value is present', function () {
-    spyOn(element.scope(), 'openBusinessSearch');
+    spyOn(element.find('input').scope(), 'openBusinessSearch');
     element.find('input').trigger('blur');
-    expect(element.scope().openBusinessSearch).not.toHaveBeenCalled();
+    expect(element.find('input').scope().openBusinessSearch).not.toHaveBeenCalled();
   });
 
   it('should not force a business search on blur if a selected business is already present', function () {
-    spyOn(element.scope(), 'openBusinessSearch');
+    spyOn(element.find('input').scope(), 'openBusinessSearch');
     scope.model.bizness = {};
-    element.scope().query = 'foo';
+    element.find('input').scope().query = 'foo';
     element.find('input').trigger('blur');
-    expect(element.scope().openBusinessSearch).toHaveBeenCalled();
+    expect(element.find('input').scope().openBusinessSearch).toHaveBeenCalled();
+  });
+
+  it('should publish an ngModelController under the original input name', function () {
+    expect(scope.myForm.fooInputName).toBeDefined();
+    expect(typeof scope.myForm.fooInputName.$valid).toBe('boolean');
+  });
+
+  it('should provide validity state based on the ng-requires attribute', function () {
+    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    scope.$apply(function () {
+      scope.model.requireMe = false;
+    });
+    expect(scope.myForm.fooInputName.$valid).toBe(true);
+  });
+
+  it('should update validity state when selected business changes', function () {
+    expect(scope.myForm.fooInputName.$valid).toBe(false);
+
+    // select a business
+    scope.$apply(function () {
+      scope.model.bizness = fakeBiz;
+    });
+    expect(scope.myForm.fooInputName.$valid).toBe(true);
+
+    // deselect (by entering a value in the field)
+    scope.$apply(function () {
+      scope.myForm.fooInputName.$setViewValue('blah');
+    });
+    expect(scope.myForm.fooInputName.$valid).toBe(false);
   });
 
 });

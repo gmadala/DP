@@ -3,6 +3,7 @@
          ng-model="query"
          ng-disabled="disabled"
          ng-change="clearSelected()"
+         nxg-requires="!isRequired() || selection"
          nxg-blur="handleExit($event)"/>
   <a href ng-click="disabled || openBusinessSearch()"
      ng-class="{disabled: disabled}">
