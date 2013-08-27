@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
           // int
           UnitYear: api.toInt(data.UnitYear),
           // date
-          UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate),
+          UnitPurchaseDate: api.toUTCShortISODate(data.UnitPurchaseDate),
           // option object values that need flattened to ids
           UnitColorId: data.UnitColorId.ColorId,
           TitleLocationId: data.TitleLocationId.ResultingTitleLocationId,

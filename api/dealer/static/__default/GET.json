@@ -322,7 +322,7 @@
           {
             "id": 1,
             "Name": "I have it",
-            "ResultingTitleLocationid": 111,
+            "ResultingTitleLocationId": 111,
             "ResultingTitleTypeId": 112,
             "TitleInfoEnabled": true,
             "TitleInfoRequired": true,
@@ -331,7 +331,7 @@
           {
             "id": 2,
             "Name": "Unknown/TA(Title Absent)",
-            "ResultingTitleLocationid": 222,
+            "ResultingTitleLocationId": 222,
             "ResultingTitleTypeId": 223,
             "TitleInfoEnabled": true,
             "TitleInfoRequired": false,
@@ -340,7 +340,7 @@
           {
             "id": 3,
             "Name": "No Title Needed",
-            "ResultingTitleLocationid": 333,
+            "ResultingTitleLocationId": 333,
             "ResultingTitleTypeId": 334,
             "TitleInfoEnabled": false,
             "TitleInfoRequired": false,

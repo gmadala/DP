@@ -14,5 +14,5 @@ angular.module('nextgearWebApp')
     };
 
     // note: no controller services for opening "View Vehicle Verification Checklist" link -- it's just a static link
-    // to https://test.discoverdsc.com/MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf with a _blank target
+    // to /MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf with a _blank target
   });

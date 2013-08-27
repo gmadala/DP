@@ -70,7 +70,7 @@ describe('Service: api', function () {
   });
 
   describe('toShortISODate function', function () {
-    it('should format a date object to a short ISO string with no time zone skew', function () {
+    it('should format a date object to a short ISO string with no skew from local time', function () {
       expect(api.toShortISODate(new Date(2013, 1, 1))).toBe('2013-02-01');
     });
 
@@ -85,6 +85,30 @@ describe('Service: api', function () {
       }).toThrow();
       expect(function () {
         api.toShortISODate('2013-04-05');
+      }).toThrow();
+    });
+  });
+
+  describe('toUTCShortISODate function', function () {
+    it('should format a date object to a short ISO string relative to UTC time', function () {
+      var date = new Date(2013, 1, 1);
+      date.setUTCFullYear(2013);
+      date.setUTCMonth(1);
+      date.setUTCDate(1);
+      expect(api.toUTCShortISODate(date)).toBe('2013-02-01');
+    });
+
+    it('should make null or undefined into null', function () {
+      expect(api.toUTCShortISODate(null)).toBe(null);
+      expect(api.toUTCShortISODate(undefined)).toBe(null);
+    });
+
+    it('should reject strings (pending implementation of safe, robust string reformatting, if needed)', function () {
+      expect(function () {
+        api.toUTCShortISODate('05/13/2000');
+      }).toThrow();
+      expect(function () {
+        api.toUTCShortISODate('2013-04-05');
       }).toThrow();
     });
   });

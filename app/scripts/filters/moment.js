@@ -12,11 +12,17 @@
 angular.module('nextgearWebApp')
   .filter('moment', function (moment) {
     return function (input, outputFormat, inputFormat) {
+      if (input === null || !angular.isDefined(input)) {
+        return input;
+      }
       return moment(input, inputFormat).format(outputFormat);
     };
   })
   .filter('momentUTC', function (moment) {
     return function (input, outputFormat, inputFormat) {
+      if (input === null || !angular.isDefined(input)) {
+        return input;
+      }
       return moment.utc(input, inputFormat).format(outputFormat);
     };
   });

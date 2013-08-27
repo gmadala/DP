@@ -33,6 +33,11 @@ describe('Filter: moment', function () {
     expect(moment(text, usFormat, 'dddd, MMMM D, YYYY')).toBe('8/19/2013');
   });
 
+  it('should return the original value for null or undefined values"', function () {
+    expect(moment(null, usFormat, 'dddd, MMMM D, YYYY')).toBe(null);
+    expect(moment(undefined, usFormat, 'dddd, MMMM D, YYYY')).toBe(undefined);
+  });
+
   describe('utc version', function () {
 
     var momentUTC;
@@ -60,6 +65,11 @@ describe('Filter: moment', function () {
     it('should read and reformat randomly formatted dates with an input format hint"', function () {
       var text = 'Monday, August 19, 2013';
       expect(momentUTC(text, usFormat, 'dddd, MMMM D, YYYY')).toBe('8/19/2013');
+    });
+
+    it('should also return the original value for null or undefined values"', function () {
+      expect(momentUTC(null, usFormat, 'dddd, MMMM D, YYYY')).toBe(null);
+      expect(momentUTC(undefined, usFormat, 'dddd, MMMM D, YYYY')).toBe(undefined);
     });
 
   });

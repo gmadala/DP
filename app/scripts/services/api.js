@@ -55,7 +55,13 @@ angular.module('nextgearWebApp')
         if (typeof value === 'string') {
           throw 'api.toShortISODate does not currently support (re)formatting of strings. Use a Date object.';
         }
-        return $filter('date')(value, 'yyyy-MM-dd') || null;
+        return $filter('moment')(value, 'YYYY-MM-DD') || null;
+      },
+      toUTCShortISODate: function (value) {
+        if (typeof value === 'string') {
+          throw 'api.toUTCShortISODate does not currently support (re)formatting of strings. Use a Date object.';
+        }
+        return $filter('momentUTC')(value, 'YYYY-MM-DD') || null;
       }
     };
   });
