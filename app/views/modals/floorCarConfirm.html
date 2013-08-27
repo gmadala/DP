@@ -8,23 +8,23 @@
     <tbody>
       <tr>
         <td>VIN</td>
-        <td>formData.VIN</td>
+        <td>{{ formData.UnitVin }}</td>
       </tr>
       <tr>
         <td>Make</td>
-        <td>formData.Make</td>
+        <td>???</td>
       </tr>
       <tr>
         <td>Model</td>
-        <td>formData.Model</td>
+        <td>???</td>
       </tr>
       <tr>
         <td>Style</td>
-        <td>formData.Style</td>
+        <td>???</td>
       </tr>
       <tr>
         <td>Year</td>
-        <td>formData.Year</td>
+        <td>???</td>
       </tr>
     </tbody>
   </table>
@@ -33,19 +33,19 @@
     <tbody>
       <tr>
         <td>Purchase Amount</td>
-        <td>formData.PurchaseAmount</td>
+        <td>{{ formData.UnitPurchasePrice | currency }}</td>
       </tr>
       <tr>
         <td>Purchase Date</td>
-        <td>formData.PurchaseDate</td>
+        <td>{{ formData.UnitPurchaseDate | momentUTC:'M/D/YYYY' }}</td>
       </tr>
       <tr>
         <td>Send Payment To</td>
-        <td>formData.SendPaymentTo</td>
+        <td>{{ formData.PaySeller && 'Seller' || 'Buyer' }}</td>
       </tr>
     </tbody>
   </table>
-  <span>View Vehicle Verification Checklist</span>
+  <a href="/MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf" target="_blank">View Vehicle Verification Checklist</a>
 </div>
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-primary">Return to Form</button>

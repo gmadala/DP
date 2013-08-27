@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper) {
+  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper, moment) {
+
+    // init a special version of today's date for our datepicker which only works right with dates @ midnight UTC
+    var today = new Date();
+    today = moment.utc([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
 
     //$scope.form = <form directive's controller, assigned by view>
 
@@ -25,7 +29,7 @@ angular.module('nextgearWebApp')
       UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
       UnitModel: null, // string -should match SelectedVehicle.Model
-      UnitPurchaseDate: new Date(), // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string - should match SelectedVehicle.Style
       UnitTitleNumber: null, // string
@@ -37,7 +41,7 @@ angular.module('nextgearWebApp')
       TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
     };
 
-    $scope.defaultHelper = OptionDefaultHelper.create([
+    $scope.optionsHelper = OptionDefaultHelper.create([
       {
         scopeSrc: 'options().locations',
         modelDest: 'PhysicalInventoryAddressId'
@@ -54,7 +58,7 @@ angular.module('nextgearWebApp')
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
-      $scope.defaultHelper.applyDefaults($scope, $scope.data);
+      $scope.optionsHelper.applyDefaults($scope, $scope.data);
     };
 
     $scope.reset();
