@@ -84,8 +84,13 @@ describe('Controller: FloorCarCtrl', function () {
   it('should have a reset function that resets data to default', function () {
     expect(scope.reset).toBeDefined();
     scope.data.UnitMake = 'Ford';
+    scope.validity = {};
+    var resetHandler = jasmine.createSpy('resetEvent');
+    scope.$on('reset', resetHandler);
     scope.reset();
     expect(angular.equals(scope.defaultData, scope.data)).toBe(true);
+    expect(scope.validity).not.toBeDefined();
+    expect(resetHandler).toHaveBeenCalled();
   });
 
   it('reset should default dealer options where only 1 exists', function () {

@@ -143,4 +143,10 @@ describe('Directive: nxgBusinessField', function () {
     expect(scope.myForm.fooInputName.$valid).toBe(false);
   });
 
+  it('should clear the query on a reset event', function () {
+    element.find('input').scope().query = 'foobar';
+    scope.$broadcast('reset');
+    expect(element.find('input').scope().query).toBe('');
+  });
+
 });

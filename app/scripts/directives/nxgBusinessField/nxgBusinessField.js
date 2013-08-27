@@ -92,4 +92,8 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.$on('reset', function () {
+      $scope.query = '';
+    });
+
   });

@@ -59,6 +59,8 @@ angular.module('nextgearWebApp')
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
+      $scope.validity = undefined;
+      $scope.$broadcast('reset');
     };
 
     $scope.reset();
