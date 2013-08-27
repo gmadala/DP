@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, User, Floorplan, protect, OptionDefaultHelper, moment) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, protect, OptionDefaultHelper, moment) {
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight UTC
     var today = new Date();
@@ -106,6 +106,23 @@ angular.module('nextgearWebApp')
           $scope.submitError = error || 'Unable to submit your request. Please contact NextGear for assistance.';
         }
       );
+    };
+
+    $scope.cancel = function () {
+      var title = 'Cancel',
+        msg = 'What would you like to do?',
+        buttons = [
+          {label: 'Go Home', result:'home', cssClass: 'btn-danger'},
+          {label: 'Start Over', result: 'reset', cssClass: 'btn-danger'},
+          {label: 'Keep Editing', result: null, cssClass: 'btn-primary'}
+        ];
+      $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
+        if (choice === 'home') {
+          $location.path('');
+        } else if (choice === 'reset') {
+          $scope.reset();
+        }
+      });
     };
 
   });
