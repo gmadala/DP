@@ -3,11 +3,21 @@
    <fieldset class="span6">
        <legend>Vehicle Information</legend>
        <label for="inputVin">VIN</label>
-       <input type="text" id="inputVin" ng-model="data.UnitVin" />
+       <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
+              required ng-minlength="6" ng-maxlength="17"
+              autofocus="autofocus"/>
+       <label for="inputVin" class="text-error"
+              ng-show="validity.inputVin.$error.required">
+         Please enter a VIN
+       </label>
+       <label for="inputVin" class="text-error"
+              ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength">
+         VIN should be from 6 to 17 characters
+       </label>
+       <label for="inputVin" class="text-error">VIN was not located, please enter Make, Model, Year and Style</label>
 
       <span class="row">
-        <label for="vinFailure" class="text-error">VIN should be from 6 to 17 Characters.</label>
-        <input type="checkbox" id="vinFailure" ng-model="data.VinAckLookupFailure">
+        <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure">
         <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
       </span>
 
@@ -15,39 +25,51 @@
       <div ng-show="true">
 
         <label for="inputMake">Make</label>
-        <input type="text" id="inputMake" ng-model="data.UnitMake">
+        <input type="text" id="inputMake" name="inputMake" ng-model="data.UnitMake">
         </input>
         <label for="inputMake" class="text-error">Please enter a Make</label>
 
         <label for="inputModel">Model</label>
-        <input type="text" id="inputModel" ng-model="data.UnitModel">
+        <input type="text" id="inputModel" name="inputModel" ng-model="data.UnitModel">
         </input>
         <label for="inputModel" class="text-error">Please enter a Model</label>
 
         <label for="inputYear">Year</label>
-        <input type="text" id="inputYear" ng-model="data.UnitYear">
+        <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear">
         </input>
-        <label for="inputYear" class="text-error">Please input a Year</label>
+        <label for="inputYear" class="text-error">Please enter a Year</label>
+        <label for="inputYear" class="text-error">Please enter a valid four digit Year</label>
 
         <label for="inputStyle">Style</label>
-        <input type="text" id="inputStyle" ng-model="data.UnitStyle">
+        <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle">
         </input>
-        <label for="inputStyle" class="text-error">Please input a Style</label>
+        <label for="inputStyle" class="text-error">Please enter a Style</label>
 
       </div>
 
       <!-- End conditional VIN failure fields. -->
 
        <label for="inputColor">Color</label>
-       <select id="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in options().colors">
+       <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
+               ng-options="color.ColorName for color in options().colors" required>
        </select>
-       <label for="inputColor" class="text-error">Please select a Color</label>
+       <label for="inputColor" class="text-error"
+              ng-show="validity.inputColor.$error.required">
+         Please select a Color
+       </label>
 
        <label for="inputMileage">Mileage</label>
-       <input type="text" id="inputMileage" ng-model="data.UnitMileage" />
-       <label for="inputMileage" class="text-error">Please enter the Mileage</label>
-       <label for="inputMileage" class="text-error">Please enter a numeric value</label>
+       <input type="text" id="inputMileage" name="inputMileage" ng-model="data.UnitMileage"
+              ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+              required />
+       <label for="inputMileage" class="text-error"
+              ng-show="validity.inputMileage.$error.required">
+         Please enter the Mileage
+       </label>
+       <label for="inputMileage" class="text-error"
+              ng-show="validity.inputMileage.$error.pattern">
+         Please enter a numeric value
+       </label>
 
        <label for="NXGBookVal">NextGear Book Value</label>
        <p class="muted help" ng-show="!data.SelectedVehicle">Enter vehicle identity + mileage for book value</p>
@@ -59,28 +81,44 @@
        </ul>
 
        <label for="inputTitleHolder">Who has the Title?</label>
-       <select id="inputTitleHolder" ng-model="data.TitleLocationId"
-               ng-options="location.Name for location in options().titleLocationOptions">
+       <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
+               ng-options="location.Name for location in options().titleLocationOptions"
+               required>
        </select>
-       <label for="inputTitleHolder" class="text-error">Please select who has the title.</label>
+       <label for="inputTitleHolder" class="text-error"
+              ng-show="validity.inputTitleHolder.$error.required">
+         Please select who has the title
+       </label>
 
        <label for="inputTitleState">Title State</label>
-       <select id="inputTitleState" ng-model="data.UnitTitleStateId"
+       <select id="inputTitleState" name="inputTitleState" ng-model="data.UnitTitleStateId"
                ng-options="state.StateName for state in options().states"
-               ng-disabled="!data.TitleLocationId.TitleInfoEnabled">
+               ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
+               ng-required="data.TitleLocationId.TitleInfoRequired">
        </select>
-       <label for="inputTitleState" class="text-error">Please select a Title State</label>
+       <label for="inputTitleState" class="text-error"
+              ng-show="validity.inputTitleState.$error.required">
+         Please select a Title State
+       </label>
 
        <label for="inputTitleNo">Title Number</label>
-       <input type="text" id="inputTitleNo" ng-model="data.UnitTitleNumber"
-              ng-disabled="!data.TitleLocationId.TitleInfoEnabled"/>
-       <label for="inputTitleNo" class="text-error">Please input a Title Number</label>
+       <input type="text" id="inputTitleNo" name="inputTitleNo" ng-model="data.UnitTitleNumber"
+              ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
+              ng-required="data.TitleLocationId.TitleInfoRequired"/>
+       <label for="inputTitleNo" class="text-error"
+              ng-show="validity.inputTitleNo.$error.required">
+         Please enter the Title Number
+       </label>
 
        <label for="inputInvLoc">Inventory Location</label>
-       <select id="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
-               ng-options="location.LocationName for location in options().locations">
+       <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
+               ng-options="location.LocationName for location in options().locations"
+               required>
        </select>
-       <label for="inputInvLoc" class="text-error">Please enter the Inventory Location</label>
+       <label for="inputInvLoc" class="text-error"
+              ng-show="validity.inputInvLoc.$error.required">
+         Please select an Inventory Location
+       </label>
 
    </fieldset>
 
@@ -107,35 +145,65 @@
                ng-disabled="data.SaleTradeIn"
                ng-required="!data.SaleTradeIn"
                selected-business="data.SellerBusinessId" />
-        <label for="inputSeller" class="text-error">Please enter a seller</label>
+        <label for="inputSeller" class="text-error"
+               ng-show="validity.inputSeller.$error.nxgRequires">
+          Please look up a Seller
+        </label>
 
         <label for="inputPurchaseAmt">Purchase Amount</label>
-        <input type="text" id="inputPurchaseAmt" ng-model="data.UnitPurchasePrice" />
-        <label for="inputPurchaseAmt" class="text-error">Please enter the Purchase Amount</label>
-        <label for="inputPurchaseAmt" class="text-error">Please enter a numeric value with no commas or special characters.</label>
+        <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
+               ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+               required />
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="validity.inputPurchaseAmt.$error.required">
+          Please enter the Purchase Amount
+        </label>
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="validity.inputPurchaseAmt.$error.pattern">
+          Please enter a numeric value (no $ sign)
+        </label>
 
         <label for="inputPurchaseDate">Purchase Date</label>
-        <input id="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate" />
+        <input id="inputPurchaseDate" name="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate"
+                required />
+        <label for="inputPurchaseDate" class="text-error"
+               ng-show="validity.inputPurchaseDate.$error.required">
+          Please enter the Purchase Date
+        </label>
 
         <label for="inputCreditLine">Line of Credit</label>
-        <select id="inputCreditLine" ng-model="data.LineOfCreditId"
-                ng-options="line.LineOfCreditName for line in options().linesOfCredit">
+        <select id="inputCreditLine" name="inputCreditLine" ng-model="data.LineOfCreditId"
+                ng-options="line.LineOfCreditName for line in options().linesOfCredit"
+                required>
         </select>
+        <label for="inputCreditLine" class="text-error"
+               ng-show="validity.inputCreditLine.$error.required">
+          Please select a Line of Credit
+        </label>
 
         <label for="inputSendPay">Send Payment To:</label>
-        <select id="inputSendPay" ng-model="data.PaySeller"
+        <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
                 ng-options="name for (name, value) in {Buyer: false, Seller: true}"
                 ng-change="data.BuyerBankAccountId = null">
         </select>
 
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-        <select id="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
+        <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
                 ng-disabled="data.PaySeller"
+                ng-required="!data.PaySeller"
                 ng-options="account.BankAccountName for account in options().bankAccounts">
         </select>
+        <label for="inputDisburseAcct" class="text-error"
+               ng-show="validity.inputDisburseAcct.$error.required">
+          Please select a Bank Account for Disbursement
+        </label>
+
         <div>
             <button class="btn btn-small">Cancel</button>
-            <button class="btn btn-small" type="submit" ng-click="submit()">Submit</button>
+            <button class="btn btn-small" ng-class="{'btn-primary': form.$valid}"
+                    type="submit" ng-click="submit()">
+              Submit
+            </button>
         </div>
     </fieldset>
 </form>
