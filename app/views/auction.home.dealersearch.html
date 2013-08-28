@@ -1,1 +1,48 @@
-Dealer Search
+<div class="row-fluid well">
+  <div class="span6 form-horizontal">
+    <h4>Dealer Number Search</h4>
+    <p>
+      If you have the NextGear dealer number or Auction Access Number, use the Dealer Number search.
+    </p>
+    <div class="control-group">
+      <label for="dealer-num" class="control-label">Nextgear Dealer Number</label>
+      <div class="controls">
+        <input type="text" id="dealer-mum"></div>
+    </div>
+    -OR-
+    <div class="control-group">
+      <label for="auction-access-num" class="control-label">Auction Access Number</label>
+      <div class="controls">
+        <input type="text" id="auction-access-num"></div>
+    </div>
+    <button type="submit" ng-click="openNumSearch()">Search</button>
+  </div>
+  <div class="span6 form-horizontal">
+    <h4>Dealer Name Search</h4>
+    <p>
+      To look up a dealer in Dealer search, use a combination of their name and City or State.
+    </p>
+    <div class="control-group">
+      <label for="dealer-name" class="control-label">Dealer Name</label>
+      <div class="controls">
+        <input type="text" id="dealer-name"></div>
+    </div>
+    -AND-
+    <div class="control-group">
+      <label for="city" class="control-label">City</label>
+      <div class="controls">
+        <input type="text" id="city"></div>
+    </div>
+    -OR-
+    <div class="control-group">
+      <label class="control-label" for="dateFilter">State</label>
+      <div class="controls" selected="NY">
+        <select id="state">
+          <option value="NY">NY</option>
+          <option value="CA">CA</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" ng-click="openNameSearch()">Search</button>
+  </div>
+</div>
