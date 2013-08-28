@@ -12,6 +12,9 @@
         <th>Business Name</th>
         <th>Legal Name</th>
         <th>Business #</th>
+        <!-- this should be hidden unless on the Bulk Flooring page -->
+        <th ng-hide="true">Auction Access #</th>
+        <!-- -->
         <th>City</th>
         <th>State</th>
         <th></th>
@@ -22,6 +25,9 @@
         <td>{{result.BusinessId}}</td>
         <td>{{result.BusinessName}}</td>
         <td>{{result.BusinessNumber}}</td>
+        <!-- this should be hidden unless on the Bulk Flooring page -->
+        <td ng-hide="true">{{result.AuctionAccessNum}}</td>
+        <!-- -->
         <td>Grand Prarie</td>
         <td>TX</td>
         <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
