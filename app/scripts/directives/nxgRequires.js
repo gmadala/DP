@@ -21,17 +21,12 @@ angular.module('nextgearWebApp')
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
-        scope.$watch(attrs.nxgRequires, function () {
-          // force re-validation when expression result changes
-          ctrl.$setViewValue(ctrl.$viewValue);
+        scope.$watch(attrs.nxgRequires, function (newValue) {
+          ctrl.$setValidity('nxgRequires', !!newValue);
         });
 
         var validator = function(value) {
-          if (!!scope.$eval(attrs.nxgRequires)) {
-            ctrl.$setValidity('nxgRequires', true);
-          } else {
-            ctrl.$setValidity('nxgRequires', false);
-          }
+          ctrl.$setValidity('nxgRequires', !!scope.$eval(attrs.nxgRequires));
           return value;
         };
 
