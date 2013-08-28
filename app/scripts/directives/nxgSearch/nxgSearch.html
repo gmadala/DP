@@ -1,0 +1,43 @@
+<p>{{showDateRange}}</p>
+<form class="form-horizontal well search payments" novalidate ng-submit="search(searchData)">
+
+    <strong>{{title}} Search</strong>
+
+    <div class="control-group">
+      <label class="control-label" for="keyword">Keyword</label>
+
+      <div class="controls">
+          <input type="text" id="keyword" placeholder="{{keywordPlaceholder}}" ng-model="searchModel.query"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="startDate">Date Range</label>
+
+      <div class="controls">
+          <input type="date" id="startDate" ng-model="searchModel.startDate"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="endDate">To</label>
+
+      <div class="controls">
+          <input type="date" id="endDate" ng-model="searchModel.endDate"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="dateFilter">Filter List by {{filterLabel}}</label>
+
+        <div class="controls">
+            <select id="dateFilter" ng-model="filterSelected.selected" ng-options="o.value as o.label for o in filterOptions">
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <!-- Should we be using input type="reset" like this?-->
+        <input type="reset" value="Clear Search Results"/>
+        <input type="submit" value="Search" ng-click="searchHandler()"/>
+    </div>
+
+</form><!-- end search form -->

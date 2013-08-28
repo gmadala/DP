@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3>Edit Title</h3>
+</div>
+<div class="modal-body">
+
+  <span><strong>VIN</strong>{{ title.vin }}</span>
+  <span>{{ title.vehicle }}</span>
+
+  <label for="titleNumber">Title Number</label>
+  <input name="titleNumber" type="text" ng-model="query">
+
+  <label for="titleState">Title State</label>
+  <select name="titleState" id="titleState" placeholder="Select a State">
+    <option value="NY">NY</option>
+    <option value="CA">CA</option>
+  </select>
+
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn btn-primary">Cancel</button>
+  <button ng-click="updateTitle()" class="btn btn-primary">Update Title</button>
+</div>

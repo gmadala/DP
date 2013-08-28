@@ -1,1 +1,54 @@
-Auction - Seller Floorplan Search
+<div nxg-search="placeholder"></div>
+
+<section>
+    <ul class="unstyled">
+        <li ng-repeat="result in searchResults">
+            <header class="row-fluid">
+                <div class="span3"><strong>VIN</strong><span>{{ title.vin }}</span></div>
+                <div class="span5"> {{ title.vehicle }}</div>
+                <div class="span4"><strong>Status </strong> {{ title.status }}</div>
+            </header>
+            <div class="row-fluid">
+                <div class="span8">
+
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <strong>Purchased </strong><p> {{ title.purchased }} </p>
+                        </div>
+                        <div class="span3">
+                            <strong>Last Payment: </strong><p> {{ title.lastPay }} </p>
+                        </div>
+                        <div class="span3">
+                            <strong>Title Release: </strong><p> {{ title.titleRelease }} </p>
+                        </div>
+                        <div class="span3">
+                            <strong>Released To: </strong><p> {{ title.releaseTo }} </p>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <strong>Floored: </strong><p> {{ title.floorDate }} </p>
+                        </div>
+                        <div class="span5">
+                            <strong>Buyer: </strong> {{ title.seller }}
+                        </div>
+                        <div class="span5">
+                            <strong>Ticket Number: </strong> {{ title.ticketNumber }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
+
+                <div class="span2 offset2">
+                    <button class="btn btn-small btn-block">Title</button>
+                    <button ng-show="true" ng-click="openEditTitle()" class="btn btn-small btn-block">Edit Title</button>
+                </div>
+
+            </div>
+
+        </li>
+    </ul>
+
+</section>
