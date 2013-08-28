@@ -1,0 +1,97 @@
+<label for="inputVin">VIN</label>
+<span>
+  <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
+         required ng-minlength="6" ng-maxlength="17"
+         nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
+         ng-change="vinChange()" nxg-blur="vinExit()"
+         autofocus="autofocus"/>
+  <a href ng-click="lookupVin()">
+    <i class="icon-search"></i>
+  </a>
+</span>
+<label for="inputVin" class="text-error"
+       ng-show="validity.inputVin.$error.required">
+  Please enter a VIN
+</label>
+<label for="inputVin" class="text-error"
+       ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength">
+  VIN should be from 6 to 17 characters
+</label>
+<label for="inputVin" class="text-error"
+       ng-show="validity.inputVin.$error.nxgRequires && !validity.inputVin.$error.required && (!validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength)">
+  Please look up the VIN
+</label>
+<label for="inputVin" class="text-error"
+       ng-show="settings.vinMode == 'noMatch'">
+  VIN was not located; please enter Make, Model, Year and Style
+</label>
+
+<span class="row" ng-show="settings.vinMode == 'noMatch'">
+  <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure"
+         ng-required="settings.vinMode == 'noMatch'" />
+  <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+  <label for="vinFailure" class="text-error"
+         ng-show="validity.vinFailure.$error.required">
+    Please acknowledge VIN look-up failure
+  </label>
+</span>
+
+<div ng-switch="settings.vinMode">
+
+  <div class="nxg-vin-match-info nxg-static" ng-switch-when="matched">
+    <label for="outputMake">Make</label>
+    <span id="outputMake">{{ data.SelectedVehicle.Make }}</span>
+
+    <label for="outputModel">Model</label>
+    <span id="outputModel">{{ data.SelectedVehicle.Model }}</span>
+
+    <label for="outputYear">Year</label>
+    <span id="outputYear">{{ data.SelectedVehicle.Year }}</span>
+
+    <label for="outputStyle">Style</label>
+    <span id="outputStyle">{{ data.SelectedVehicle.Style }}</span>
+  </div>
+
+  <div id="nxg-vin-no-match-info" ng-switch-when="noMatch">
+    <label for="inputMake">Make</label>
+    <input type="text" id="inputMake" name="inputMake" ng-model="data.UnitMake"
+           required />
+    <label for="inputMake" class="text-error"
+           ng-show="validity.inputMake.$error.required">
+      Please enter a Make
+    </label>
+
+    <label for="inputModel">Model</label>
+    <input type="text" id="inputModel" name="inputModel" ng-model="data.UnitModel"
+           required />
+    <label for="inputModel" class="text-error"
+           ng-show="validity.inputModel.$error.required">
+      Please enter a Model
+    </label>
+
+    <label for="inputYear">Year</label>
+    <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear"
+           required ng-pattern="/^\d{4}$/" nxg-min="1900" nxg-max="settings.maxYear" />
+    <label for="inputYear" class="text-error"
+           ng-show="validity.inputYear.$error.required">
+      Please enter a Year
+    </label>
+    <label for="inputYear" class="text-error"
+           ng-show="validity.inputYear.$error.pattern">
+      Please enter a four-digit Year
+    </label>
+    <label for="inputYear" class="text-error"
+           ng-show="validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax">
+      Please enter a Year between 1900 and {{ settings.maxYear }}
+    </label>
+
+    <label for="inputStyle">Style</label>
+    <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle"
+           required />
+    <label for="inputStyle" class="text-error"
+           ng-show="validity.inputStyle.$error.required">
+      Please enter a Style
+    </label>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": [
+    {
+      "VinPos1To8": "JHMGE872",
+      "VinYearCode": "9",
+      "Make": "Honda",
+      "Model": "Fit",
+      "Style": "4D Hatchback 1.5L I-4 MPI SOHC VTEC",
+      "Year": 2009,
+      "RoughValue": 7050,
+      "AverageValue": 9400,
+      "CleanValue": 10400,
+      "ExtraCleanValue": 11025,
+      "BlackBookImportId": "6c53f368-9c4f-4ffb-89f4-8b04e33229bd",
+      "GroupNumber": "4109",
+      "MakeNumber": "360",
+      "UVc": "140",
+      "DSCRegionalAveragePurchasePrice": null,
+      "DSCRegionalMaxPurchasePrice": null,
+      "DSCRegionalMinPurchasePrice": null
+    },
+    {
+      "VinPos1To8": "JHMGE872",
+      "VinYearCode": "9",
+      "Make": "Honda",
+      "Model": "Fit",
+      "Style": "4D Hatchback 2.0L I-4 MPI DOHC VTEC",
+      "Year": 2009,
+      "RoughValue": 8050,
+      "AverageValue": 10400,
+      "CleanValue": 11400,
+      "ExtraCleanValue": 12025,
+      "BlackBookImportId": "6c53f368-9c4f-4ffb-89f4-8b04e33229be",
+      "GroupNumber": "4109",
+      "MakeNumber": "360",
+      "UVc": "140",
+      "DSCRegionalAveragePurchasePrice": null,
+      "DSCRegionalMaxPurchasePrice": null,
+      "DSCRegionalMinPurchasePrice": null
+    }
+  ]
+}

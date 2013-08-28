@@ -2,52 +2,8 @@
 <form class="row-fluid floorcar" name="form" novalidate>
    <fieldset class="span6">
        <legend>Vehicle Information</legend>
-       <label for="inputVin">VIN</label>
-       <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
-              required ng-minlength="6" ng-maxlength="17"
-              autofocus="autofocus"/>
-       <label for="inputVin" class="text-error"
-              ng-show="validity.inputVin.$error.required">
-         Please enter a VIN
-       </label>
-       <label for="inputVin" class="text-error"
-              ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength">
-         VIN should be from 6 to 17 characters
-       </label>
-       <label for="inputVin" class="text-error">VIN was not located, please enter Make, Model, Year and Style</label>
 
-      <span class="row">
-        <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure">
-        <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
-      </span>
-
-      <!-- Start conditional VIN failure fields. -->
-      <div ng-show="true">
-
-        <label for="inputMake">Make</label>
-        <input type="text" id="inputMake" name="inputMake" ng-model="data.UnitMake">
-        </input>
-        <label for="inputMake" class="text-error">Please enter a Make</label>
-
-        <label for="inputModel">Model</label>
-        <input type="text" id="inputModel" name="inputModel" ng-model="data.UnitModel">
-        </input>
-        <label for="inputModel" class="text-error">Please enter a Model</label>
-
-        <label for="inputYear">Year</label>
-        <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear">
-        </input>
-        <label for="inputYear" class="text-error">Please enter a Year</label>
-        <label for="inputYear" class="text-error">Please enter a valid four digit Year</label>
-
-        <label for="inputStyle">Style</label>
-        <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle">
-        </input>
-        <label for="inputStyle" class="text-error">Please enter a Style</label>
-
-      </div>
-
-      <!-- End conditional VIN failure fields. -->
+       <div nxg-vin-details floor-model="data" validity="validity" form="form"></div>
 
        <label for="inputColor">Color</label>
        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
@@ -72,14 +28,9 @@
          Please enter a numeric value
        </label>
 
-       <label for="NXGBookVal">NextGear Book Value</label>
-       <p class="muted help" ng-show="!data.SelectedVehicle">Enter vehicle identity + mileage for book value</p>
-       <ul id="NXGBookVal" ng-show="!!data.SelectedVehicle">
-         <li>Rough: {{ data.SelectedVehicle.RoughValue | currency }}</li>
-         <li>Average: {{ data.SelectedVehicle.AverageValue | currency }}</li>
-         <li>Clean: {{ data.SelectedVehicle.CleanValue | currency }}</li>
-         <li>Extra Clean: {{ data.SelectedVehicle.ExtraCleanValue | currency }}</li>
-       </ul>
+       <label for="bookVal">NextGear Book Value</label>
+       <p class="muted help" ng-show="!data.SelectedVehicle">N/A</p>
+       <p id="bookVal" ng-show="data.SelectedVehicle">{{ data.SelectedVehicle.AverageValue | currency }}</p>
 
        <label for="inputTitleHolder">Who has the Title?</label>
        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
@@ -200,12 +151,14 @@
           Please select a Bank Account for Disbursement
         </label>
 
-        <div>
-            <button class="btn btn-small" ng-click="cancel()">Cancel</button>
-            <button class="btn btn-small" ng-class="{'btn-primary': form.$valid}"
-                    type="submit" ng-click="submit()">
-              Submit
-            </button>
+        <div class="footer">
+          <!-- order of these buttons here is important b/c most browsers trigger first button on Enter key -->
+          <!-- if a different visual order is desired, use CSS e.g. float: right -->
+          <button class="btn btn-small" ng-class="{'btn-primary': form.$valid}"
+                  type="submit" ng-click="submit()">
+            Submit
+          </button>
+          <button class="btn btn-small" ng-click="cancel()">Cancel</button>
         </div>
     </fieldset>
 </form>

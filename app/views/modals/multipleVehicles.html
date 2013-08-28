@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h3>Multiple Vehicles Found</h3>
+</div>
+<div class="modal-body nxg-multiple-vehicles">
+  <table>
+    <tr>
+     <th>Make</th>
+     <th>Model</th>
+     <th>Style</th>
+     <th>Year</th>
+     <th>&nbsp;</th>
+    </tr>
+    <tr ng-repeat="match in matches">
+      <td>{{ match.Make }}</td>
+      <td>{{ match.Model }}</td>
+      <td>{{ match.Style }}</td>
+      <td>{{ match.Year }}</td>
+      <td><a href class="btn btn-mini" ng-click="select(match)">Select</a></td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button ng-click="close()" class="btn">Close</button>
+</div>
