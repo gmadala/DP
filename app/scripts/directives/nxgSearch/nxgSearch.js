@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
 
       //dumps placeholder values into any directive call with attribute value of "placeholder".
       scope: {
-        searchType: '@nxgSearch',
+        searchType: '@nxgSearch'
       },
       controller: function($scope) {
         var filterOptions = {
@@ -31,8 +31,6 @@ angular.module('nextgearWebApp')
           $scope.filterLabel = filterOptions[$scope.searchType].filterLabel;
           $scope.filterOptions = filterOptions[$scope.searchType].filterOptions;
         });
-      },
-
-
+      }
     };
-  })
+  });

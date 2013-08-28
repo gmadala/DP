@@ -11,5 +11,3 @@ angular.module('nextgearWebApp')
       dialog.close();
     };
   });
-
-'use strict';
