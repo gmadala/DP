@@ -26,14 +26,14 @@ angular.module('nextgearWebApp')
           // date
           UnitPurchaseDate: api.toUTCShortISODate(data.UnitPurchaseDate),
           // option object values that need flattened to ids
-          UnitColorId: data.UnitColorId.ColorId,
-          TitleLocationId: data.TitleLocationId.ResultingTitleLocationId,
-          TitleTypeId: data.TitleLocationId.ResultingTitleTypeId,
-          UnitTitleStateId: data.UnitTitleStateId.StateId,
-          PhysicalInventoryAddressId: data.PhysicalInventoryAddressId.LocationId,
-          LineOfCreditId: data.LineOfCreditId.LineOfCreditId,
-          BuyerBankAccountId: data.BuyerBankAccountId.BankAccountId,
-          SellerBusinessId: data.SellerBusinessId.BusinessId
+          UnitColorId:  data.UnitColorId ? data.UnitColorId.ColorId : null,
+          TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId: null,
+          TitleTypeId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleTypeId : null,
+          UnitTitleStateId: data.UnitTitleStateId ? data.UnitTitleStateId.StateId : null,
+          PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.LocationId : null,
+          LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
+          BuyerBankAccountId: data.BuyerBankAccountId ? data.BuyerBankAccountId.BankAccountId : null,
+          SellerBusinessId: data.SellerBusinessId ? data.SellerBusinessId.BusinessId : null
         });
 
         return api.request('POST', '/floorplan/create', data);

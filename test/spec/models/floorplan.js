@@ -107,6 +107,27 @@ describe('Model: Floorplan', function () {
       expect(sentData.SellerBusinessId).toBe('seller1');
     });
 
+    it('should handle options that are not set without bombing', function () {
+      floorplan.create({
+        UnitColorId: null,
+        TitleLocationId: null,
+        UnitTitleStateId: null,
+        PhysicalInventoryAddressId: null,
+        LineOfCreditId: null,
+        BuyerBankAccountId: null,
+        SellerBusinessId: null
+      });
+      httpBackend.flush();
+      expect(sentData.UnitColorId).toBe(null);
+      expect(sentData.TitleLocationId).toBe(null);
+      expect(sentData.TitleTypeId).toBe(null);
+      expect(sentData.UnitTitleStateId).toBe(null);
+      expect(sentData.PhysicalInventoryAddressId).toBe(null);
+      expect(sentData.LineOfCreditId).toBe(null);
+      expect(sentData.BuyerBankAccountId).toBe(null);
+      expect(sentData.SellerBusinessId).toBe(null);
+    });
+
   });
 
 });
