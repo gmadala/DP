@@ -53,9 +53,7 @@ angular.module('nextgearWebApp')
       FILTER_BY_VOIDED: 'voided',
 
       search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
-        if (query === undefined || query === null) {
-          query = '';
-        }
+        query = query || '';
         if (filterBy === null || filterBy === undefined || filterBy === '') {
           filterBy = this.FILTER_BY_ALL;
         }
