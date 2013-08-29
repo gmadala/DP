@@ -1,0 +1,54 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "SellerCount": 300,
+    "SearchResults": [
+      {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO1",
+        "IsUniversalSource": true,
+        "LegalName": "TriColor Auto1",
+        "City": "Rochester",
+        "State": "New York"
+      },
+      {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO2",
+        "IsUniversalSource": true,
+        "LegalName": "TriColor Auto2",
+        "City": "Rochester",
+        "State": "New York"
+      },
+      {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO3",
+        "IsUniversalSource": true,
+        "LegalName": "TriColor Auto3",
+        "City": "Rochester",
+        "State": "New York"
+      },
+      {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO4",
+        "IsUniversalSource": true,
+        "LegalName": "TriColor Auto4",
+        "City": "Rochester",
+        "State": "New York"
+      },
+      {
+        "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessNumber": 72694,
+        "BusinessName": "TRICOLOR AUTO5",
+        "IsUniversalSource": true,
+        "LegalName": "TriColor Auto5",
+        "City": "Rochester",
+        "State": "New York"
+      }
+    ]
+  }
+}
