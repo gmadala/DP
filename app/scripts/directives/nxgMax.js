@@ -35,7 +35,7 @@ angular.module('nextgearWebApp')
           }
         };
 
-        ctrl.$parsers.unshift(validate);
+        ctrl.$parsers.push(validate);
 
         scope.$watch(attrs.nxgMax, function () {
           ctrl.$setViewValue(ctrl.$viewValue);
