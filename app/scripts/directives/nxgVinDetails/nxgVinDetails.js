@@ -27,6 +27,9 @@ angular.module('nextgearWebApp')
     });
 
     $scope.vinIsSyntacticallyValid = function (errorObj) {
+      if (!errorObj) {
+        return false;
+      }
       return (!errorObj.required &&
         !errorObj.minlength &&
         !errorObj.maxlength);

@@ -18,7 +18,7 @@
   VIN should be from 6 to 17 characters
 </label>
 <label for="inputVin" class="text-error"
-       ng-show="validity.inputVin.$error.nxgRequires && !validity.inputVin.$error.required && (!validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength)">
+       ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires">
   Please look up the VIN
 </label>
 <label for="inputVin" class="text-error"
