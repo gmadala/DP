@@ -12,19 +12,19 @@
       </tr>
       <tr>
         <td>Make</td>
-        <td>???</td>
+        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Make || formData.UnitMake }}</td>
       </tr>
       <tr>
         <td>Model</td>
-        <td>???</td>
+        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Model || formData.UnitModel }}</td>
       </tr>
       <tr>
         <td>Style</td>
-        <td>???</td>
+        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Style || formData.UnitStyle }}</td>
       </tr>
       <tr>
         <td>Year</td>
-        <td>???</td>
+        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Year || formData.UnitYear }}</td>
       </tr>
     </tbody>
   </table>
