@@ -100,7 +100,32 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
   });
 
-  // TODO: Add tests for other default values -- these are an important component of business logic
+  it('should default vin failure acknowledged, pay seller and trade-in to false', function () {
+    expect(scope.defaultData.PaySeller).toBe(false);
+    expect(scope.defaultData.SaleTradeIn).toBe(false);
+    expect(scope.defaultData.VinAckLookupFailure).toBe(false);
+  });
+
+  it('should default everything else to null', function () {
+    expect(scope.defaultData.BuyerBankAccountId).toBe(null);
+    expect(scope.defaultData.LineOfCreditId).toBe(null);
+    expect(scope.defaultData.PhysicalInventoryAddressId).toBe(null);
+    expect(scope.defaultData.SelectedVehicle).toBe(null);
+    expect(scope.defaultData.SellerBusinessId).toBe(null);
+    expect(scope.defaultData.UnitColorId).toBe(null);
+    expect(scope.defaultData.UnitMake).toBe(null);
+    expect(scope.defaultData.UnitMileage).toBe(null);
+    expect(scope.defaultData.UnitModel).toBe(null);
+    expect(scope.defaultData.UnitPurchasePrice).toBe(null);
+    expect(scope.defaultData.UnitStyle).toBe(null);
+    expect(scope.defaultData.UnitTitleNumber).toBe(null);
+    expect(scope.defaultData.UnitTitleStateId).toBe(null);
+    expect(scope.defaultData.UnitVin).toBe(null);
+    expect(scope.defaultData.UnitYear).toBe(null);
+    expect(scope.defaultData.TitleLocationId).toBe(null);
+    expect(scope.defaultData.TitleTypeId).toBe(null);
+    expect(scope.defaultData.$blackbookMileage).toBe(null);
+  });
 
   it('should initialize live data with default data', function () {
     expect(angular.equals(scope.defaultData, scope.data)).toBe(true);
