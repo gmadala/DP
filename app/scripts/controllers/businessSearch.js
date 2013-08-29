@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function ($scope, dialog, BusinessSearch, initialQuery, mode) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, mode) {
 
     $scope.mode = mode;
     $scope.query = initialQuery;
@@ -9,12 +9,21 @@ angular.module('nextgearWebApp')
     $scope.businessSearch = {
       loading: false,
       results: [],
+      search: function() {
+        this.loading = true;
+        BusinessSearch.searchSeller($scope.query).then(function(results) {
+          this.loading = false;
+          this.results = results.SearchResults;
+        }.bind(this));
+      },
       loadMoreData: function() {
         this.loading = true;
-        BusinessSearch.searchSeller().then(function(results) {
-          this.loading = false;
-          this.results = this.results.concat(results.DealerInfoList);
-        }.bind(this));
+        if (BusinessSearch.hasMoreData()) {
+          BusinessSearch.loadMoreData().then(function(results) {
+            this.loading = false;
+            this.results = this.results.concat(results.SearchResults);
+          }.bind(this));
+        }
       }
     };
 
@@ -24,8 +33,11 @@ angular.module('nextgearWebApp')
       dialog.close();
     };
 
-    $scope.select = function (business) {
+    $scope.select = function(business) {
       dialog.close(business);
     };
+
+    // Do a search with the initial query
+    $scope.businessSearch.search();
 
   });

@@ -12,7 +12,7 @@ describe('Controller: BusinessSearchCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $httpBackend) {
     httpBackend = $httpBackend;
-    httpBackend.when('GET', '/Dealer/SearchSeller').respond({});
+    httpBackend.when('GET', /\/dealer\/search\/seller\/?.+/).respond({});
     scope = $rootScope.$new();
     BusinessSearchCtrl = $controller('BusinessSearchCtrl', {
       $scope: scope,
