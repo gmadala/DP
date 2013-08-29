@@ -4,7 +4,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
-
     $stateProvider
       .state('login', {
         url: '/login',
@@ -32,6 +31,11 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/payments?filter',
         templateUrl: 'views/home.payments.html',
         controller: 'PaymentsCtrl'
+      })
+      .state('home.checkout', {
+        url: '/checkout',
+        templateUrl: 'views/home.checkout.html',
+        controller: 'CheckoutCtrl'
       })
       .state('home.scheduledPayments', {
         url: '/scheduledPayments',

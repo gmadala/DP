@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h3>Select the Schedule Date and Account</h3>
+</div>
+<div class="modal-body">
+  <section>
+    <div class="row">
+      <header class="row-fluid">
+        <div class="span4"> <strong>VIN</strong>
+          {{payment.vin}} <strong>Stock #</strong>
+          {{payment.stockNumber}}
+        </div>
+        <div class="span8">
+          <strong>Description</strong>
+          {{payment.description}}
+        </div>
+      </header>
+      <span class="row-fluid">
+        <span class="span4">
+          <span>
+            <strong>Due</strong>
+          </span>
+          <p>{{payment.DueDate | date:'M/dd/yyyy'}}</p>
+        </span>
+        <span class="span6">
+          <span>
+            <strong>Payment</strong>
+          </span>
+          <p>{{payment.Amount}}</p>
+        </span>
+      </span>
+    </div>
+  </section>
+  <p>
+    <label for="bank">Account</label>
+    <select name="bank" id="bank" selected="1">
+      <option value="1">PNC Bank - Main</option>
+    </select>
+  </p>
+  <p>
+    <label for="unappliedUse">Next Avail Date</label>
+    <input id="inputPurchaseDate" name="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate"
+            required />
+    <label for="inputPurchaseDate" class="text-error"
+           ng-show="validity.inputPurchaseDate.$error.required">
+      Please enter the Purchase Date
+    </label>
+  </p>
+</div>
+<div class="modal-footer">
+  <p>Would you like to view your receipts?</p>
+  <button ng-click="close()" class="btn btn-primary" >Ok</button>
+  <button ng-click="close()" class="btn btn-primary" >Cancel</button>
+</div>

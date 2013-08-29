@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <h3>Your payment(s) have been submitted and scheduled.</h3>
+</div>
+<div class="modal-body">
+    <h4>Scheduled Payment(s)</h4>
+    <section>
+      <div class="row">
+        <header class="row-fluid">
+          <div class="span4"> <strong>VIN</strong>
+            {{payment.vin}} <strong>Stock Number</strong>
+            {{payment.stockNumber}}
+          </div>
+          <div class="span8">
+            <strong>Description</strong>
+            {{payment.description}}
+          </div>
+        </header>
+        <span class="row-fluid">
+          <span class="span4">
+            <span>
+              <strong>Scheduled</strong>
+            </span>
+            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+          </span>
+          <span class="span6">
+            <span>
+              <strong>Payment</strong>
+            </span>
+            <p>{{payment.Amount}}</p>
+          </span>
+        </span>
+      </div>
+    </section>
+  <h4>Submitted Payments(s): {{submittedPayments | currency}}</h4>
+    <section>
+      <div class="row">
+        <header class="row-fluid">
+          <div class="span4"> <strong>VIN</strong>
+            {{payment.vin}} <strong>Stock Number</strong>
+            {{payment.stockNumber}}
+          </div>
+          <div class="span8">
+            <strong>Description</strong>
+            {{payment.description}}
+          </div>
+        </header>
+        <span class="row-fluid">
+          <span class="span4">
+            <span>
+              <strong>Scheduled</strong>
+            </span>
+            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+          </span>
+          <span class="span6">
+            <span>
+              <strong>Payment</strong>
+            </span>
+            <p>{{payment.Amount}}</p>
+          </span>
+        </span>
+      </div>
+    </section>
+    <section>
+      <div class="row">
+        <header class="row-fluid">
+          <div class="span4"> <strong>VIN</strong>
+            {{payment.vin}} <strong>Stock Number</strong>
+            {{payment.stockNumber}}
+          </div>
+          <div class="span8">
+            <strong>Description</strong>
+            {{payment.description}}
+          </div>
+        </header>
+        <span class="row-fluid">
+          <span class="span4">
+            <span>
+              <strong>Scheduled</strong>
+            </span>
+            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+          </span>
+          <span class="span6">
+            <span>
+              <strong>Payment</strong>
+            </span>
+            <p>{{payment.Amount}}</p>
+          </span>
+        </span>
+      </div>
+    </section>
+</div>
+<div class="modal-footer">
+  <p>Would you like to view your receipts?</p>
+  <button ng-click="close()" class="btn btn-primary" >Yes</button>
+  <button ng-click="close()" class="btn btn-primary" >No, Thank You</button>
+</div>
