@@ -24,11 +24,13 @@ describe('Controller: FloorCarCtrl', function () {
     optionSetMock = [],
     dialogMock,
     floorplanMock,
+    blackbookMock,
+    vinLookupResult,
     confirmSetting = {error: null, resolution: null},
     createSetting = {error: null, resolution: null};
 
   // Initialize the controller and mocks
-  beforeEach(inject(function ($controller, $rootScope, _protect_) {
+  beforeEach(inject(function ($controller, $rootScope, _protect_, $q) {
     scope = $rootScope.$new();
     protect = _protect_;
     dialogMock = {
@@ -50,6 +52,13 @@ describe('Controller: FloorCarCtrl', function () {
         return createPromiseMock(createSetting);
       }
     };
+    blackbookMock = {
+      fetchVehicleTypeInfoForVin: function () {
+        var def = $q.defer();
+        def.resolve(vinLookupResult);
+        return def.promise;
+      }
+    };
 
     userMock = {
       getStatics: function () {
@@ -65,7 +74,8 @@ describe('Controller: FloorCarCtrl', function () {
       $scope: scope,
       User: userMock,
       $dialog: dialogMock,
-      Floorplan: floorplanMock
+      Floorplan: floorplanMock,
+      Blackbook: blackbookMock
     });
   }));
 
@@ -76,6 +86,21 @@ describe('Controller: FloorCarCtrl', function () {
   it('should attach a default data object to the scope', function () {
     expect(scope.defaultData).toBeDefined();
   });
+
+  it('should default the sale date to the current date, midnight UTC', function () {
+    // time information will be stripped off when sending to API, but angular-strap datepicker is fussy about time
+    var today = new Date();
+    today.setUTCFullYear(today.getFullYear());
+    today.setUTCMonth(today.getMonth());
+    today.setUTCDate(today.getDate());
+    today.setUTCHours(0);
+    today.setUTCMinutes(0);
+    today.setUTCSeconds(0);
+    today.setUTCMilliseconds(0);
+    expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
+  });
+
+  // TODO: Add tests for other default values -- these are an important component of business logic
 
   it('should initialize live data with default data', function () {
     expect(angular.equals(scope.defaultData, scope.data)).toBe(true);
@@ -100,6 +125,68 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.data.PhysicalInventoryAddressId).toBe('one');
     expect(scope.data.LineOfCreditId).toBe('one');
     expect(scope.data.BuyerBankAccountId).toBe('one');
+  });
+
+  describe('mileageExit function', function () {
+
+    var fakeModelCtrl;
+
+    beforeEach(function () {
+      spyOn(blackbookMock, 'fetchVehicleTypeInfoForVin').andCallThrough();
+      fakeModelCtrl = {
+        $valid: true
+      };
+      scope.data.SelectedVehicle = {};
+      scope.data.UnitMileage = '1200';
+      scope.data.UnitVin = 'abc123';
+      scope.data.$blackbookMileage = null;
+    });
+
+    it('should do nothing if the VIN has not been resolved to a vehicle', function () {
+      scope.data.SelectedVehicle = null;
+      scope.mileageExit(fakeModelCtrl);
+      expect(blackbookMock.fetchVehicleTypeInfoForVin).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if the mileage is not valid', function () {
+      fakeModelCtrl.$valid = false;
+      scope.mileageExit(fakeModelCtrl);
+      expect(blackbookMock.fetchVehicleTypeInfoForVin).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if the current black book value is already based on the current mileage', function () {
+      scope.data.$blackbookMileage = '1200';
+      scope.mileageExit(fakeModelCtrl);
+      expect(blackbookMock.fetchVehicleTypeInfoForVin).not.toHaveBeenCalled();
+    });
+
+    it('should call for blackbook info with the current VIN, mileage, and resolved vehicle', function () {
+      scope.mileageExit(fakeModelCtrl);
+      expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('abc123', '1200', scope.data.SelectedVehicle);
+    });
+
+    it('should expose the new blackbook vehicle info on success', function () {
+      vinLookupResult = {foo: 'bar'};
+      scope.mileageExit(fakeModelCtrl);
+      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      expect(scope.data.SelectedVehicle).toBe(vinLookupResult);
+    });
+
+    it('should cache the mileage used for the current blackbook info on success', function () {
+      vinLookupResult = {foo: 'bar'};
+      scope.mileageExit(fakeModelCtrl);
+      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      expect(scope.data.$blackbookMileage).toBe('1200');
+    });
+
+    it('should clear the blackbook mileage cache on error (to signal no current valid mileage)', inject(function ($q) {
+      vinLookupResult = $q.reject();
+      scope.data.$blackbookMileage = '1800';
+      scope.mileageExit(fakeModelCtrl);
+      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      expect(scope.data.$blackbookMileage).toBe(null);
+    }));
+
   });
 
   describe('submit function', function () {

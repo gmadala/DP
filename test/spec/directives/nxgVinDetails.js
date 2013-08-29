@@ -161,10 +161,14 @@ describe('Directive: nxgVinDetails', function () {
         scope.form = {
           inputVin: {
             $error: {}
+          },
+          inputMileage: {
+            $valid: false
           }
         };
         scope.data = {
-          UnitVin: '123456'
+          UnitVin: '123456',
+          UnitMileage: '1200'
         };
       });
 
@@ -197,10 +201,25 @@ describe('Directive: nxgVinDetails', function () {
         expect(scope.validity.inputVin.$error.required).toBe(true);
       });
 
-      it('should call the lookup method with the VIN in the model if everything is valid', function () {
+      it('should call the lookup method with the VIN if just that is valid', function () {
         spyOn(blackbookMock, 'fetchVehicleTypeInfoForVin').andCallThrough();
         scope.lookupVin();
-        expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('123456');
+        expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('123456', null);
+      });
+
+      it('should call the lookup method with the VIN + mileage if both are valid', function () {
+        scope.form.inputMileage.$valid = true;
+        spyOn(blackbookMock, 'fetchVehicleTypeInfoForVin').andCallThrough();
+        scope.lookupVin();
+        expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('123456', '1200');
+      });
+
+      it('should cache the mileage last used to calculate book values', function () {
+        scope.data.$blackbookMileage = null;
+        scope.form.inputMileage.$valid = true;
+        scope.lookupVin();
+        scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+        expect(scope.data.$blackbookMileage).toBe('1200');
       });
 
       it('should attach the result to SelectedVehicle upon success, and change to matched mode', function () {

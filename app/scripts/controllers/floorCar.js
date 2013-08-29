@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, protect, OptionDefaultHelper, moment) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment) {
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight UTC
     var today = new Date();
@@ -38,7 +38,9 @@ angular.module('nextgearWebApp')
       VinAckLookupFailure: false, // Boolean (whether SelectedVehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int - should match SelectedVehicle.Year
       TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
-      TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
+      TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
+      // transient local values
+      $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
 
     $scope.optionsHelper = OptionDefaultHelper.create([
@@ -64,6 +66,26 @@ angular.module('nextgearWebApp')
     };
 
     $scope.reset();
+
+    $scope.mileageExit = function(modelCtrl) {
+      var newMileage = $scope.data.UnitMileage;
+      if (!$scope.data.SelectedVehicle || !modelCtrl.$valid ||
+          newMileage === $scope.data.$blackbookMileage) {
+        return;
+      }
+
+      Blackbook.fetchVehicleTypeInfoForVin(
+          $scope.data.UnitVin,
+          newMileage,
+          $scope.data.SelectedVehicle).then(
+        function (result) {
+          $scope.data.SelectedVehicle = result;
+          $scope.data.$blackbookMileage = newMileage;
+        }, function (/*error*/) {
+          $scope.data.$blackbookMileage = null;
+        }
+      );
+    };
 
     $scope.submit = function () {
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display

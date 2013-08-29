@@ -51,6 +51,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.lookupVin = function () {
+      var mileage = null;
       // disable this while a lookup is already running
       if (s.vinLookupPending) {
         return;
@@ -69,11 +70,17 @@ angular.module('nextgearWebApp')
         return;
       }
 
+      // check if we have valid mileage to send
+      if ($scope.form.inputMileage.$valid) {
+        mileage = $scope.data.UnitMileage;
+      }
+
       s.vinLookupPending = true;
-      Blackbook.fetchVehicleTypeInfoForVin($scope.data.UnitVin).then(
+      Blackbook.fetchVehicleTypeInfoForVin($scope.data.UnitVin, mileage).then(
         function (result) {
           s.vinLookupPending = false;
           $scope.data.SelectedVehicle = result;
+          $scope.data.$blackbookMileage = mileage;
           s.vinMode = 'matched';
         },
         function (error) {
