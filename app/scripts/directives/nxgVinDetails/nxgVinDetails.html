@@ -55,7 +55,7 @@
   <div id="nxg-vin-no-match-info" ng-switch-when="noMatch">
     <label for="inputMake">Make</label>
     <input type="text" id="inputMake" name="inputMake" ng-model="data.UnitMake"
-           required />
+           required maxlength="50"/>
     <label for="inputMake" class="text-error"
            ng-show="validity.inputMake.$error.required">
       Please enter a Make
@@ -63,7 +63,7 @@
 
     <label for="inputModel">Model</label>
     <input type="text" id="inputModel" name="inputModel" ng-model="data.UnitModel"
-           required />
+           required maxlength="50"/>
     <label for="inputModel" class="text-error"
            ng-show="validity.inputModel.$error.required">
       Please enter a Model
@@ -87,7 +87,7 @@
 
     <label for="inputStyle">Style</label>
     <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle"
-           required />
+           required maxlength="50"/>
     <label for="inputStyle" class="text-error"
            ng-show="validity.inputStyle.$error.required">
       Please enter a Style

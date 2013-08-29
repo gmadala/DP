@@ -56,7 +56,8 @@
        <label for="inputTitleNo">Title Number</label>
        <input type="text" id="inputTitleNo" name="inputTitleNo" ng-model="data.UnitTitleNumber"
               ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
-              ng-required="data.TitleLocationId.TitleInfoRequired"/>
+              ng-required="data.TitleLocationId.TitleInfoRequired"
+              maxlength="50"/>
        <label for="inputTitleNo" class="text-error"
               ng-show="validity.inputTitleNo.$error.required">
          Please enter the Title Number
