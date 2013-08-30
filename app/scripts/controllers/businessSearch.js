@@ -17,8 +17,8 @@ angular.module('nextgearWebApp')
         }.bind(this));
       },
       loadMoreData: function() {
-        this.loading = true;
         if (BusinessSearch.hasMoreData()) {
+          this.loading = true;
           BusinessSearch.loadMoreData().then(function(results) {
             this.loading = false;
             this.results = this.results.concat(results.SearchResults);

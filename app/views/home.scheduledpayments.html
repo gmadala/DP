@@ -44,7 +44,7 @@
 
 <!-- TODO: Add directives for payments and fees. -->
 <section class="schPayments-list">
-    <ul class="unstyled" infinite-scroll="scheduledPayments.loadMoreData()" infinite-scroll-disabled="scheduledPayments.loading">
+    <ul class="unstyled" nxg-infinite-scroll="scheduledPayments.loadMoreData()" nxg-infinite-scroll-disabled="scheduledPayments.loading">
         <li ng-repeat="pay in scheduledPayments.results">
             <header class="row-fluid">
                 <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>

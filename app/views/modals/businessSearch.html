@@ -1,26 +1,33 @@
 <div class="modal-header">
   <h3>Business Search</h3>
 </div>
+
 <div class="modal-body">
-  <label>Business Name or Number</label>
-  <input type="text" ng-model="query"><button ng-click="businessSearch.search()">Search</button>
-  <!-- demo/debug: shows the current business search mode -->
-  <em>Mode: {{ mode }}</em>
-  <table>
-    <thead>
-      <tr>
-        <th>Business Name</th>
-        <th>Legal Name</th>
-        <th>Business #</th>
-        <!-- this should be hidden unless on the Bulk Flooring page -->
-        <th ng-hide="true">Auction Access #</th>
-        <!-- -->
-        <th>City</th>
-        <th>State</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody infinite-scroll="businessSearch.loadMoreData()" infinite-scroll-disabled="businessSearch.loading">
+    <label>Business Name or Number</label>
+    <input type="text" ng-model="query"><button ng-click="businessSearch.search()">Search</button>
+    <!-- demo/debug: shows the current business search mode -->
+    <em>Mode: {{ mode }}</em>
+    <table>
+        <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Legal Name</th>
+            <th>Business #</th>
+            <!-- this should be hidden unless on the Bulk Flooring page -->
+            <th ng-hide="true">Auction Access #</th>
+            <!-- -->
+            <th>City</th>
+            <th>State</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- TODO: The modal-body that grows with the infinite scroll needs to have a set height (e.g. 400px) otherwise it has a resize issue on IE -->
+<div class="modal-body" ngx-infinite-scroll="businessSearch.loadMoreData()" nxg-infinite-scroll-disabled="businessSearch.loading">
+    <table>
+    <tbody>
       <tr ng-repeat="result in businessSearch.results">
         <td>{{result.BusinessId}}</td>
         <td>{{result.BusinessName}}</td>
