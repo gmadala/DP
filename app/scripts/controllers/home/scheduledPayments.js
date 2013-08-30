@@ -58,9 +58,8 @@ angular.module('nextgearWebApp')
         this.search();
       },
 
-      isOnPaymentQueue: function(payment) {
+      isOnPaymentQueue: function(/*payment*/) {
         // TODO: Check on the Payment Queue and return true if found there.
-        console.log('ScheduledPayments::isOnPaymentQueue()' + ' - ' + payment.floorplanId);
         return false;
       },
 

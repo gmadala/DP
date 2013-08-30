@@ -7,7 +7,7 @@
  * data.
  */
 angular.module('nextgearWebApp')
-  .directive('ngxInfiniteScroll', function($rootScope, $timeout) {
+  .directive('nxgInfiniteScroll', function($rootScope, $timeout) {
       var container = null;
 
       return {
@@ -19,7 +19,7 @@ angular.module('nextgearWebApp')
 
           if (attrs.nxgInfiniteScrollDistance !== null) {
             scope.$watch(attrs.nxgInfiniteScrollDistance, function(value) {
-              value = parseInt(value, 10)
+              value = parseInt(value, 10);
               if (!isNaN(value)) {
                 scrollDistance = value;
               }
@@ -47,9 +47,9 @@ angular.module('nextgearWebApp')
 
             if (shouldScroll && scrollEnabled) {
               if ($rootScope.$$phase) {
-                return scope.$eval(attrs.ngxInfiniteScroll);
+                return scope.$eval(attrs.nxgInfiniteScroll);
               } else {
-                return scope.$apply(attrs.ngxInfiniteScroll);
+                return scope.$apply(attrs.nxgInfiniteScroll);
               }
             } else if (shouldScroll) {
               checkWhenEnabled = true;

@@ -1,3 +1,4 @@
+
 <form class="form-horizontal well search payments" novalidate ng-submit="scheduledPayments.search()">
     <strong>Scheduled Payment Search</strong>
     <div class="control-group">
@@ -43,8 +44,8 @@
         <div class="alert" ng-show="outOfBusinessHours">Note: No payment may be scheduled on an overdue loan, or a loan due today.</div>
 
 <!-- TODO: Add directives for payments and fees. -->
-<section class="schPayments-list">
-    <ul class="unstyled" nxg-infinite-scroll="scheduledPayments.loadMoreData()" nxg-infinite-scroll-disabled="scheduledPayments.loading">
+<section class="schPayments-list" nxg-infinite-scroll="scheduledPayments.loadMoreData()" nxg-infinite-scroll-disabled="scheduledPayments.loading" nxg-fill-height>
+    <ul class="unstyled">
         <li ng-repeat="pay in scheduledPayments.results">
             <header class="row-fluid">
                 <div class="span2"><strong>vin </strong><span>{{ pay.vin }}</span></div>

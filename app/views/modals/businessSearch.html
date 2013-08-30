@@ -25,7 +25,7 @@
 </div>
 
 <!-- TODO: The modal-body that grows with the infinite scroll needs to have a set height (e.g. 400px) otherwise it has a resize issue on IE -->
-<div class="modal-body" ngx-infinite-scroll="businessSearch.loadMoreData()" nxg-infinite-scroll-disabled="businessSearch.loading">
+<div class="modal-body" nxg-infinite-scroll="businessSearch.loadMoreData()" nxg-infinite-scroll-disabled="businessSearch.loading">
     <table>
     <tbody>
       <tr ng-repeat="result in businessSearch.results">
