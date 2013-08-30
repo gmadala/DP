@@ -1,38 +1,53 @@
 <header>
-    <div class="row-fluid">
-        <div class="span2 logo">[NEXTGEAR LOGO]</div>
+  <div class="row-fluid">
+    <div class="container-fluid app-header">
+      <div class="span3 logo">
+        <p></p>
+        <img src="../img/nxg_logo_blue_2x.png" alt=""></div>
 
-        <!-- TODO: Add ng-show so its only visible for dealers -->
-        <div class="span2 offset5 c2a chat">
-            <a ng-show="user.isDealer()" href="#">Chat Now!</a>
-        </div>
+      <!-- TODO: Add ng-show so its only visible for dealers -->
+      <div class="span2 offset4 c2a chat">
+        <a ng-show="user.isDealer()" href="#">Chat Now!</a>
+      </div>
+      <div class="span3 dealer-info">
+        <div class="row-fluid">
+          <div class="span12 nxg-settings-drop">
 
-        <div class="span3 dealer-info">
-            <div class="row-fluid">
-                <div class="span12 nxg-settings-drop">
-
-                    <div>
-                        <h6>{{ user.info().BusinessName }} <a href="" ng-click="showSettings=!showSettings">Set</a></h6>
-                        <p class="small" ng-show="user.isDealer()">{{ user.info().BusinessNumber }}</p>
-                    </div>
-                    <!-- TODO: Add ng-show so its only visible for dealers -->
-                    <div class="nxg-settings" ng-show="showSettings">
-                        <ul class="unstyled">
-                            <li><a href="#/settings">Settings</a></li>
-                            <li><a href="#">Feedback</a></li>
-                            <li><button class="btn btn-small" ng-click="">Sign Out</button></li>
-                        </ul>
-                    </div>
-                </div>
+            <div>
+              <a class="account-btn" ng-click="showSettings=!showSettings">
+                <i class="icon icon-cog icon-2x"></i>
+              </a>
+              <h6>
+                {{ user.info().BusinessName }}
+              </h6>
+              <p class="small" ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
             </div>
+            <!-- TODO: Add ng-show so its only visible for dealers -->
+            <div class="nxg-settings" ng-show="showSettings">
+              <ul class="unstyled">
+                <li>
+                  <a href="#/settings">Settings</a>
+                </li>
+                <li>
+                  <a href="#">Feedback</a>
+                </li>
+                <li>
+                  <button class="btn btn-small" ng-click="">Sign Out</button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-    <div class="row-fluid">
-        <nav role="navigation" class="span9">
-            <span ng-repeat="link in user.navLinks()" >
-                <a href="{{link.href}}" class="navLink">{{link.name}}</a>
-            </span>
-        </nav>
+  </div>
+  <div class="nav-bg">
+    <div class="container-fluid row-fluid">
+      <nav role="navigation" class="span9">
+        <span ng-repeat="link in user.navLinks()" >
+          <a href="{{link.href}}" class="navLink">{{link.name}}</a>
+        </span>
+      </nav>
     </div>
+  </div>
 </header>

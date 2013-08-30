@@ -1,0 +1,10 @@
+// FONTS
+
+@font-face {
+    font-family: 'NextGearIcons';
+    src: url('../fonts/nextgeariconfont-webfont.eot'); // IE9
+    src: url('../fonts/nextgeariconfont-webfont.eot?#iefix') format('embedded-opentype'), // IE8 & earlier
+         url('../fonts/nextgeariconfont-webfont.woff') format('woff'),
+         url('../fonts/nextgeariconfont-webfont.ttf') format('truetype'),
+         url('../fonts/nextgeariconfont-webfont.svg#NextGear') format('svg');
+}

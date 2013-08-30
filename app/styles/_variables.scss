@@ -7,3 +7,130 @@
 $brand: #222;
 $brand-second: #222;
 $brand-third: #fff;
+
+// Colors
+$brand: #135889; // blue
+$brand-text: #1864A1;
+$brand-light: #17659D; // slightly lighter than brand; resembles #0266A2
+$brand-bright: #1879BB; // brighter blue for buttons; resembles #1B78C0
+$brand-dark: #0F4C76; // darker blue for button down states and shadows; slight greenish tint
+$brand-darkest: #115186; // dark blue shadow for buttons and text
+
+$error: #D80000; // red
+
+// GRAYS
+// Because we use so many;
+// Named according to their hex numbers to make it easier
+$gray-2: #222; // darkest
+$gray-3: #333;
+$gray-4: #444;
+$gray-5: #555;
+$gray-6: #666;
+$gray-7: #777;
+$gray-9: #999;
+$gray-a: #AAA;
+$gray-b: #BBB;
+$gray-c: #CCC;
+$gray-d: #DDD;
+$gray-e: #EEE; // lightest
+
+// OTHER NEUTRALS
+$lighter: #EBEBF0;
+$lightest: #EDEDED;
+$white: #FFF;
+$black: #000;
+
+// Fonts
+$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-size: 12px;
+$base-line-height: 1.2;
+
+// Text
+$p-size: 1rem; // 12px
+$h1-size: 3rem; // 36px
+$h2-size: 2.5rem; // 30px
+$h3-size: 2rem; // 24px
+$h4-size: 1.66rem; // 20px
+$h5-size: 1.25rem; // 14px
+$h6-size: 1rem; // 12px
+
+$p-line-height: 120%;
+
+$p-color: #434343;
+$h1-color: #434343;
+$h2-color: $brand;
+$h3-color: #434343;
+$h4-color: #434343;
+$h5-color: #434343;
+$h6-color: #434343;
+
+// Links
+$link-color: #434343;
+$link-hover-color: #434343;
+
+// Navigation
+$nav-text: #B5B5B5;
+$nav-contact-text: #BBB;
+
+// BUTTONS
+// Primary enabled: light text on dark blue
+$btn-text-enabled: #EBEBF0;
+$btn-color-enabled: #135889;
+$btn-stroke-enabled: #15436D;
+
+// Primary enabled and active (hovered): light text on darker blue
+$btn-text-active: #EBEBF0;
+$btn-color-active: #0E4A74;
+$btn-stroke-active: #0B3D61;
+
+// Primary disabled
+$btn-text-disabled: #666;
+$btn-color-disabled: #999;
+$btn-stroke-disabled: #757575;
+
+// Secondary enabled:
+$btn2-text-enabled: #EBEBF0;
+$btn2-color-enabled: #555;
+$btn2-stroke-enabled: #444;
+
+// Secondary enabled & active:
+$btn2-color-active: #444;
+$btn2-stroke-active: #333;
+
+// Tertiary (Green) enabled:
+$btn3-text-enabled: $white;
+$btn3-color-enabled: #0BAE00;
+$btn3-stroke-enabled: #24B200;
+
+// Tertiary enabled & active
+$btn3-color-active: #1D8900;
+$btn3-stroke-active: #1C9500;
+
+// Tertiary disabled:
+$btn3-text-disabled: #CCC;
+$btn3-color-disabled: #999;
+$btn3-stroke-disabled: #666;
+
+// Forms
+$input-placeholder-text: #999;
+$input-text: #434343;
+$label-text: #999;
+$input-stroke-color: #ddd;
+
+$input-bkgd: #fff;
+$input-bkgd-disabled: #ddd;
+
+// Layering
+$z-modal: 500;
+$z-modal-backdrop: 450;
+
+// Table Lists (Title Vault, Payments)
+$tl-bkgd: #666666;
+$tl-text: #DDD;
+$tl-bkgd-active: #444;
+$tl-text-active: #FFF;
+
+$tl-row-border-bottom: #333;
+$tl-border:#777;
+$tl-border-right: #4B4B4B;
+$tl-border-top: #545454;

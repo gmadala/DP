@@ -1,23 +1,27 @@
-<nav role="navigation">
-    <ul class="nav nav-tabs">
-        <li ng-class="{ 'active': $state.includes('auction_home.dashboard') }">
-            <a href="#/act/home/">Dashboard</a>
-        </li>
+<div class="nav-bg">
+  <div class="container-fluid">
+    <nav role="navigation">
+        <ul class="nav nav-tabs">
+            <li ng-class="{ 'active': $state.includes('auction_home.dashboard') }">
+                <a href="#/act/home/">Dashboard</a>
+            </li>
 
-        <li ng-class="{ 'active': $state.includes('auction_home.dealersearch') }">
-            <a href="#/act/home/dealersearch" >Dealer Search</a>
-        </li>
+            <li ng-class="{ 'active': $state.includes('auction_home.dealersearch') }">
+                <a href="#/act/home/dealersearch" >Dealer Search</a>
+            </li>
 
-        <li ng-class="{ 'active': $state.includes('auction_home.bulkflooring') }">
-            <a href="#/act/home/bulkflooring" >Bulk Flooring</a>
-        </li>
+            <li ng-class="{ 'active': $state.includes('auction_home.bulkflooring') }">
+                <a href="#/act/home/bulkflooring" >Bulk Flooring</a>
+            </li>
 
-        <li ng-class="{ 'active': $state.includes('auction_home.sellerfloorplan') }">
-            <a href="#/act/home/sellerfloorplan" >Seller Floorplan Search</a>
-        </li>
-    </ul>
-</nav>
+            <li ng-class="{ 'active': $state.includes('auction_home.sellerfloorplan') }">
+                <a href="#/act/home/sellerfloorplan" >Seller Floorplan Search</a>
+            </li>
+        </ul>
+    </nav>
+  </div>
+</div>
 
-<div ui-view>
+<div ui-view class="container-fluid">
     something here
 </div>

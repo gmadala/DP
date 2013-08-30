@@ -1,124 +1,126 @@
-<span class="row">Do you have
-  <a href="">Adobe Acrobat Reader 8.1</a>
-   or newer? Your reports are displayed in Acrobat Reader.
-</span>
-<div class="row-fluid">
-    <div class="span5">
-        <h3>Current Reports</h3>
-        <ul>
-            <li ng-repeat="report in currentReports">
-                <a ng-href="{{ report.url }}">{{ report.title }}</a>
-            </li>
-        </ul>
+<div class="container-fluid">
+    <span class="row">Do you have
+      <a href="">Adobe Acrobat Reader 8.1</a>
+       or newer? Your reports are displayed in Acrobat Reader.
+    </span>
+    <div class="row-fluid">
+        <div class="span5">
+            <h3>Current Reports</h3>
+            <ul>
+                <li ng-repeat="report in currentReports">
+                    <a ng-href="{{ report.url }}">{{ report.title }}</a>
+                </li>
+            </ul>
 
-    </div>
+        </div>
 
-    <div class="span7">
-        <h3>Historical Reports</h3>
-        <form class="form-horizontal">
-            <h4>Dealer Statement</h4>
-            <div class="control-group">
-                <label class="control-label" for="stmtStart">Start Date</label>
-                <div class="controls">
-                    <input type="date" id="stmtStart" />
+        <div class="span7">
+            <h3>Historical Reports</h3>
+            <form class="form-horizontal">
+                <h4>Dealer Statement</h4>
+                <div class="control-group">
+                    <label class="control-label" for="stmtStart">Start Date</label>
+                    <div class="controls">
+                        <input type="date" id="stmtStart" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="stmtEnd">End Date</label>
-                <div class="controls">
-                    <input type="date" id="stmtEnd" />
+                <div class="control-group">
+                    <label class="control-label" for="stmtEnd">End Date</label>
+                    <div class="controls">
+                        <input type="date" id="stmtEnd" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="stmtVinFilter">Filter for VIN</label>
-                <div class="controls">
-                    <input type="text" id="stmtVinFilter" />
+                <div class="control-group">
+                    <label class="control-label" for="stmtVinFilter">Filter for VIN</label>
+                    <div class="controls">
+                        <input type="text" id="stmtVinFilter" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn">View Report</button>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">View Report</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-        <form class="form-inline">
-            <h4>Disbursement Detail</h4>
-                    <input type="date" id="disDate" />
+            <form class="form-inline">
+                <h4>Disbursement Detail</h4>
+                        <input type="date" id="disDate" />
 
-                    <button type="submit" class="btn">View Report</button>
+                        <button type="submit" class="btn">View Report</button>
 
-        </form>
+            </form>
 
-        <form class="form-horizontal">
-            <h4>Paid off Summary</h4>
-            <div class="control-group">
-                <label class="control-label" for="paidOffStart">Start Date</label>
-                <div class="controls">
-                    <input type="date" id="paidOffStart" />
+            <form class="form-horizontal">
+                <h4>Paid off Summary</h4>
+                <div class="control-group">
+                    <label class="control-label" for="paidOffStart">Start Date</label>
+                    <div class="controls">
+                        <input type="date" id="paidOffStart" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="paidOffEnd">End Date</label>
-                <div class="controls">
-                    <input type="date" id="paidOffEnd" />
+                <div class="control-group">
+                    <label class="control-label" for="paidOffEnd">End Date</label>
+                    <div class="controls">
+                        <input type="date" id="paidOffEnd" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="paidOffVinFilter">Filter for VIN</label>
-                <div class="controls">
-                    <input type="text" id="paidOffVinFilter" />
+                <div class="control-group">
+                    <label class="control-label" for="paidOffVinFilter">Filter for VIN</label>
+                    <div class="controls">
+                        <input type="text" id="paidOffVinFilter" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="paidOffStockNo">Stock Number Filter</label>
-                <div class="controls">
-                    <select id="paidOffStockNo">
-                           <option>None</option>
-                            <!-- Selectors for following conditional inputs. -->
-                           <option>Range of Stock #'s</option>
-                           <option>Specific Stock #'s</option>
-                        </select>
+                <div class="control-group">
+                    <label class="control-label" for="paidOffStockNo">Stock Number Filter</label>
+                    <div class="controls">
+                        <select id="paidOffStockNo">
+                               <option>None</option>
+                                <!-- Selectors for following conditional inputs. -->
+                               <option>Range of Stock #'s</option>
+                               <option>Specific Stock #'s</option>
+                            </select>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Range of stock numbers conditional fields. -->
-            <div class="control-group" ng-show="false">
-                <label class="control-label" for="paidOffStockNo">Stock # Range Start</label>
-                <div class="controls">
-                    <select id="paidOffStockNo">
-                           <option>None</option>
-                           <option>Range of Stock #'s</option>
-                           <option>Specific Stock #'s</option>
-                        </select>
+                <!-- Range of stock numbers conditional fields. -->
+                <div class="control-group" ng-show="false">
+                    <label class="control-label" for="paidOffStockNo">Stock # Range Start</label>
+                    <div class="controls">
+                        <select id="paidOffStockNo">
+                               <option>None</option>
+                               <option>Range of Stock #'s</option>
+                               <option>Specific Stock #'s</option>
+                            </select>
+                    </div>
                 </div>
-            </div>
-            <div class="control-group" ng-show="false">
-                <label class="control-label" for="paidOffStockNo">Stock # Range End</label>
-                <div class="controls">
-                    <select id="paidOffStockNo">
-                           <option>None</option>
-                           <option>Range of Stock #'s</option>
-                           <option>Specific Stock #'s</option>
-                        </select>
+                <div class="control-group" ng-show="false">
+                    <label class="control-label" for="paidOffStockNo">Stock # Range End</label>
+                    <div class="controls">
+                        <select id="paidOffStockNo">
+                               <option>None</option>
+                               <option>Range of Stock #'s</option>
+                               <option>Specific Stock #'s</option>
+                            </select>
+                    </div>
                 </div>
-            </div>
-            <!-- -->
+                <!-- -->
 
-            <!-- Specific stock number conditional field. -->
-            <div class="control-group" ng-show="false">
-                <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
-                <div class="controls">
-                    <input type="text" class="text">
+                <!-- Specific stock number conditional field. -->
+                <div class="control-group" ng-show="false">
+                    <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
+                    <div class="controls">
+                        <input type="text" class="text">
+                    </div>
                 </div>
-            </div>
-            <!-- -->
+                <!-- -->
 
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn">View Report</button>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">View Report</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
