@@ -84,13 +84,16 @@
         <label><input type="radio"
                       name="inputTradeIn"
                       ng-value="false"
-                      ng-model="data.SaleTradeIn">
+                      ng-model="data.SaleTradeIn"
+                      ng-disabled="!canPayBuyer()">
           No
         </label>
         <label><input type="radio"
                       name="inputTradeIn"
                       ng-value="true"
-                      ng-model="data.SaleTradeIn">
+                      ng-model="data.SaleTradeIn"
+                      ng-change="data.PaySeller = !data.SaleTradeIn"
+                      ng-disabled="!canPayBuyer()">
           Yes
         </label>
 
@@ -139,8 +142,9 @@
 
         <label for="inputSendPay">Send Payment To:</label>
         <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
-                ng-options="name for (name, value) in {Buyer: false, Seller: true}"
-                ng-change="data.BuyerBankAccountId = null">
+                ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions()"
+                ng-change="data.BuyerBankAccountId = null"
+                ng-disabled="data.SaleTradeIn">
         </select>
 
         <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>

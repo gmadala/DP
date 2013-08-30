@@ -5,7 +5,16 @@ angular.module('nextgearWebApp')
     // Private
     var info = null,
       statics = null,
-      authToken = null;
+      authToken = null,
+      paySellerOptions = [];
+
+    var calculateCanPayBuyer = function() {
+      if (!info) {
+        return undefined;
+      }
+
+      return info.IsBuyerDirectlyPayable && info.HasUCC;
+    };
 
     // Public API
     return {
@@ -70,6 +79,29 @@ angular.module('nextgearWebApp')
 
       isDealer: function() {
         return info && info.DealerAuctionStatusForGA === 'Dealer';
+      },
+
+      canPayBuyer: calculateCanPayBuyer,
+
+      getPaySellerOptions: function() {
+        // when flooring a car, the options this user has to pay seller vs. pay buyer
+        var payBuyerAllowed = calculateCanPayBuyer();
+
+        if (!angular.isDefined(payBuyerAllowed)) {
+          return null;
+        }
+
+        if (paySellerOptions.length === 0) {
+          if (payBuyerAllowed) {
+            paySellerOptions.push(false, true); // buyer or seller
+          } else {
+            paySellerOptions.push(true); // seller only
+          }
+        }
+
+        // always return the same array object so that this can be used in a binding
+        return paySellerOptions;
       }
+
     };
   });

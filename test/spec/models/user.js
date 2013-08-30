@@ -66,4 +66,107 @@ describe('Model: User', function () {
 
   });
 
+  describe('canPayBuyer method', function () {
+
+    var userInfo = {};
+
+    beforeEach(function () {
+      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+        Success: true,
+        Data: 12345
+      });
+
+      httpBackend.whenGET('/Dealer/Info').respond({
+        Success: true,
+        Data: userInfo
+      });
+
+      httpBackend.whenGET('/Dealer/Static').respond({
+        Success: true,
+        Data: {}
+      });
+    });
+
+    it('should return undefined if user info is not loaded', function () {
+      expect(user.canPayBuyer()).not.toBeDefined();
+    });
+
+    it('should return true if IsBuyerDirectlyPayable and HasUCC are both true in user info', function () {
+      userInfo.IsBuyerDirectlyPayable = true;
+      userInfo.HasUCC = true;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.canPayBuyer()).toBe(true);
+    });
+
+    it('should return false if IsBuyerDirectlyPayable or HasUCC are false in user info', function () {
+      userInfo.IsBuyerDirectlyPayable = false;
+      userInfo.HasUCC = true;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.canPayBuyer()).toBe(false);
+
+      userInfo.IsBuyerDirectlyPayable = true;
+      userInfo.HasUCC = false;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.canPayBuyer()).toBe(false);
+    });
+
+  });
+
+  describe('getPaySellerOptions method', function () {
+
+    var userInfo = {};
+
+    beforeEach(function () {
+      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+        Success: true,
+        Data: 12345
+      });
+
+      httpBackend.whenGET('/Dealer/Info').respond({
+        Success: true,
+        Data: userInfo
+      });
+
+      httpBackend.whenGET('/Dealer/Static').respond({
+        Success: true,
+        Data: {}
+      });
+    });
+
+    it('should return null if user info is not loaded', function () {
+      expect(user.getPaySellerOptions()).toBe(null);
+    });
+
+    it('should return both options, false (pay buyer) first, if pay buyer is allowed', function () {
+      userInfo.IsBuyerDirectlyPayable = true;
+      userInfo.HasUCC = true;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(angular.equals(user.getPaySellerOptions(), [false, true])).toBe(true);
+    });
+
+    it('should return only true (force pay seller) if pay buyer is not allowed', function () {
+      userInfo.IsBuyerDirectlyPayable = false;
+      userInfo.HasUCC = true;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(angular.equals(user.getPaySellerOptions(), [true])).toBe(true);
+    });
+
+    it('should return the same array instance on every call to avoid infinite $watch loops', function () {
+      userInfo.IsBuyerDirectlyPayable = true;
+      userInfo.HasUCC = true;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      var res1, res2;
+      res1 = user.getPaySellerOptions();
+      res2 = user.getPaySellerOptions();
+      expect(res1 === res2).toBe(true);
+    });
+
+  });
+
 });

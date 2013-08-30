@@ -9,8 +9,12 @@ angular.module('nextgearWebApp')
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    // user model holds "dealer static" data needed to populate form dropdowns -- use: options().foo
+    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options().foo
     $scope.options = User.getStatics;
+
+    // pay seller vs. buyer options are derived separately
+    $scope.paySellerOptions = User.getPaySellerOptions;
+    $scope.canPayBuyer = User.canPayBuyer;
 
     // form data model holds values filled into form
     $scope.data = null;
@@ -20,7 +24,7 @@ angular.module('nextgearWebApp')
       ApplicationOSName: null, // string - WARNING: NOT MAPPED TO ANYTHING IN VIEW
       BuyerBankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
-      PaySeller: false, // Boolean, default is pay buyer
+      PaySeller: null, // Boolean, default is false if buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: false, // Boolean, default is no
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
@@ -55,8 +59,23 @@ angular.module('nextgearWebApp')
       {
         scopeSrc: 'options().bankAccounts',
         modelDest: 'BuyerBankAccountId'
+      },
+      {
+        scopeSrc: 'paySellerOptions()',
+        modelDest: 'PaySeller',
+        useFirst: true
       }
     ]);
+
+    // if canPayBuyer setting arrives after defaults have been applied, make sure it's enforced
+    var payBuyerUnwatch = $scope.$watch('canPayBuyer()', function(enablePayBuyer) {
+      if (enablePayBuyer === false && $scope.data) {
+        $scope.data.SaleTradeIn = false;
+      }
+      if (typeof enablePayBuyer === 'boolean') {
+        payBuyerUnwatch();
+      }
+    });
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);

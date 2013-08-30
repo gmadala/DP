@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Provides an object that can be used to check sets of options (e.g. for dropdowns),
- * and for any sets that contain only a single option, automatically apply that option
- * to an associated model property as the default value.
+ * Provides an object that can be used to check sets of options (e.g. for dropdowns), and
+ * automatically apply the first or only option to an associated model property as the default value.
  *
  * This has a super power -- you don't have to care whether the option sets exist yet;
  * they can be loaded asynchronously and will be correctly applied regardless of timing.
@@ -13,6 +12,7 @@
  * {
  *   scopeSrc - {String} scope expression that yields an option list as array
  *   modelDest - {String} name of property on model object to apply the default value (does not currently support sub-objects)
+ *   useFirst - {Boolean} if true, auto-select first option; otherwise only auto-select if there's just 1 option
  * }
  * @return helper instance with applyDefaults method (see below)
  *
@@ -36,7 +36,11 @@ angular.module('nextgearWebApp')
             // apply the mappings via new watches
             mappings.forEach(function (mapping) {
               var unwatch = scope.$watch(mapping.scopeSrc, function (options) {
-                if (angular.isArray(options) && options.length === 1 && model[mapping.modelDest] === null) {
+                if (angular.isArray(options) &&
+                  options.length > 0 &&
+                  (options.length === 1 || mapping.useFirst) &&
+                  model[mapping.modelDest] === null) {
+
                   model[mapping.modelDest] = options[0];
                 }
               });

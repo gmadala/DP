@@ -62,12 +62,13 @@ describe('Service: optionDefaultHelper', function () {
         },
         {
           scopeSrc: 'foo.bazs',
-          modelDest: 'fooBaz'
+          modelDest: 'fooBaz',
+          useFirst: true
         }
       ]);
     });
 
-    it('should do nothing if multiple options exist', function () {
+    it('should do nothing if multiple options exist, unless useFirst is set', function () {
       scope.foo.bars = ['one', 'two'];
       scope.foo.bazs = ['three', 'four'];
 
@@ -75,7 +76,7 @@ describe('Service: optionDefaultHelper', function () {
         helper.applyDefaults(scope, model);
       });
       expect(model.fooBar).toBe(null);
-      expect(model.fooBaz).toBe(null);
+      expect(model.fooBaz).toBe('three');
     });
 
     it('should not overwrite existing non-null values in the model', function () {
@@ -91,9 +92,9 @@ describe('Service: optionDefaultHelper', function () {
       expect(model.fooBaz).toBe('six');
     });
 
-    it('should apply solitary options as the default, when they are already present', function () {
+    it('should apply appropriate options as the default, when they are already present', function () {
       scope.foo.bars = ['one'];
-      scope.foo.bazs = ['two'];
+      scope.foo.bazs = ['two', 'three'];
 
       scope.$apply(function () {
         helper.applyDefaults(scope, model);

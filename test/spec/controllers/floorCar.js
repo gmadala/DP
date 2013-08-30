@@ -27,12 +27,14 @@ describe('Controller: FloorCarCtrl', function () {
     blackbookMock,
     vinLookupResult,
     confirmSetting = {error: null, resolution: null},
-    createSetting = {error: null, resolution: null};
+    createSetting = {error: null, resolution: null},
+    paySellerOpts;
 
   // Initialize the controller and mocks
   beforeEach(inject(function ($controller, $rootScope, _protect_, $q) {
     scope = $rootScope.$new();
     protect = _protect_;
+    paySellerOpts = [false, true];
     dialogMock = {
       dialog: function () {
         return {
@@ -67,6 +69,12 @@ describe('Controller: FloorCarCtrl', function () {
           linesOfCredit: optionSetMock,
           bankAccounts: optionSetMock
         };
+      },
+      getPaySellerOptions: function () {
+        return paySellerOpts;
+      },
+      canPayBuyer: function () {
+        return undefined;
       }
     };
 
@@ -79,8 +87,16 @@ describe('Controller: FloorCarCtrl', function () {
     });
   }));
 
-  it('should attach an options function to the scope', function () {
-    expect(scope.options()).toBeDefined();
+  it('should attach getStatics from user to the scope as options', function () {
+    expect(scope.options).toBe(userMock.getStatics);
+  });
+
+  it('should attach getPaySellerOptions from user to the scope', function () {
+    expect(scope.paySellerOptions).toBe(userMock.getPaySellerOptions);
+  });
+
+  it('should attach canPayBuyer from user to the scope', function () {
+    expect(scope.canPayBuyer).toBe(userMock.canPayBuyer);
   });
 
   it('should attach a default data object to the scope', function () {
@@ -100,14 +116,14 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
   });
 
-  it('should default vin failure acknowledged, pay seller and trade-in to false', function () {
-    expect(scope.defaultData.PaySeller).toBe(false);
+  it('should default vin failure acknowledged and trade-in to false', function () {
     expect(scope.defaultData.SaleTradeIn).toBe(false);
     expect(scope.defaultData.VinAckLookupFailure).toBe(false);
   });
 
   it('should default everything else to null', function () {
     expect(scope.defaultData.BuyerBankAccountId).toBe(null);
+    expect(scope.defaultData.PaySeller).toBe(null);
     expect(scope.defaultData.LineOfCreditId).toBe(null);
     expect(scope.defaultData.PhysicalInventoryAddressId).toBe(null);
     expect(scope.defaultData.SelectedVehicle).toBe(null);
@@ -150,6 +166,22 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.data.PhysicalInventoryAddressId).toBe('one');
     expect(scope.data.LineOfCreditId).toBe('one');
     expect(scope.data.BuyerBankAccountId).toBe('one');
+  });
+
+  it('reset should default to the first available option for pay seller', function () {
+    paySellerOpts = [true];
+    scope.reset();
+    scope.$apply();
+    expect(scope.data.PaySeller).toBe(true);
+  });
+
+  it('should ensure that trade-in is not true if buyer payment disallowed setting arrives asynchronously', function () {
+    scope.data.SaleTradeIn = true;
+    scope.canPayBuyer = function () {
+      return false;
+    };
+    scope.$apply();
+    expect(scope.data.SaleTradeIn).toBe(false);
   });
 
   describe('mileageExit function', function () {
