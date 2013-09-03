@@ -20,6 +20,31 @@
   }
 }
 
+.nav-bg {
+  height: 42px;
+  vertical-align: middle;
+  border-top: 1px solid #dfdfdf;
+  background-image: linear-gradient(#fff, #e2e1e5);
+  font-weight: bold;
+  .container-fluid {
+    margin-bottom: 0;
+  }
+  span {
+    display: inline-block;
+    margin-top: 0.7em;
+    margin-right: 2em;
+    margin-left: 1em;
+  }
+  a {
+    color: $gray-9;
+    font-size: 12px;
+    text-transform: uppercase;
+    .active {
+      color: #0f4e9d;
+    }
+  }
+}
+
 .nav-tabs {
   border: none;
   font-size: 11px;
@@ -28,6 +53,8 @@
     margin: 0;
     & > a {
       border: none;
+      padding-top: 12px;
+      padding-bottom: 10px;
       padding-right: 20px;
       padding-left: 20px;
     }
@@ -39,7 +66,7 @@
   & > .active {
     @include box-shadow(
       inset rgba(black, 0.25) 0px 2px 5px,
-      inset #215184 0px -2px 0px,
+      inset rgba(white, 0.2) 0px -2px 0px,
       inset rgba(black, 0.5) 0px 0px 2px
      );
     background-image: url('../img/secondaryNavBgActive.gif');
@@ -68,37 +95,28 @@
   }
 }
 
-.nav-bg {
-  height: 42px;
-  vertical-align: middle;
-  border-top: 1px solid #dfdfdf;
-  background-image: linear-gradient(#fff, #e2e1e5);
-  font-weight: bold;
-  .container-fluid {
-    margin-bottom: 0;
-  }
-  span {
-    display: inline-block;
-    margin-top: 0.7em;
-    margin-right: 2em;
-    margin-left: 1em;
-  }
-  a {
-    color: $gray-9;
-    font-size: 12px;
-    text-transform: uppercase;
-    .active {
-      color: #0f4e9d;
-    }
-  }
-}
-
 .secondary-nav-bg {
   background-image: url('../img/secondaryNavBg.gif');
-  @include box-shadow(inset rgba(black, 0.25) 0px 2px 5px, inset #316595 0px -2px 0px);
+  @include box-shadow(inset rgba(black, 0.25) 0px 2px 5px, inset rgba(white, 0.2) 0px -2px 0px);
   border-bottom: 1px solid #1b447d;
   margin-bottom: 1em;
   .container-fluid {
     margin-bottom: 0;
+  }
+}
+
+.container-line {
+  padding-top: 1em;
+  position: relative;
+  &:before {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 4px;
+    content: " ";
+    background-image: url('../img/secondaryNavBg.gif');
+    @include box-shadow(inset rgba(black, 0.15) 0px 1px 0px, inset rgba(black, 0.3) 0px -1px 0px);
   }
 }
