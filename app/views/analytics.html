@@ -1,108 +1,110 @@
-<div class="container-fluid">
-  <section class="row-fluid business-summary">
-      <div class="span4">
-          <h4>Approved Floorplans</h4>
-          {{ floorplans.length }} Approved
-          <ul>
-              <li>Total Book Value {{ 6140300.00 | currency }} </li>
-              <li>Total Financed Amount {{ 4781220.48 | currency }} </li>
-              <li>Total Outstanding {{ 4779017.98 | currency }} </li>
-              <!-- should show conditionally on-click of "Show Details" bar. -->
-              <li ng-show="false">Average purchase price: {{ 4779017.98 | currency }} </li>
-              <li ng-show="false">Total purchase price: {{ 4779017.98 | currency }} </li>
-              <li ng-show="false">Total NextGear Capital Book value {{ 4779017.98 | currency }} </li>
-              <li  ng-show="false" class="small"> NextGear Capital Book is 468.25% of the Purchase Price </li>
-              <li  ng-show="false" class="small">Amount Outstanding is 468.25% of the NextGear Capital Book</li>
-              <!-- end conditional <li>s -->
-          </ul>
-      </div>
-      <div class="span4">
-          <h4>Pending Floorplans</h4>
-          {{ floorplans.length }} Pending
-          <ul>
-              <li>Total Purchase Price {{ 1500.00 | currency }} </li>
-              <li>Total NextGear Capital Book value {{ 0 | currency }} </li>
-              <!-- should show conditionally on-click of "Show Details" bar. -->
-              <li  ng-show="false" class="small">NextGear Capital Book is 0.00% of the Purchase Price</li>
-              <!-- end conditional <li>s -->
-          </ul>
-      </div>
-      <div class="span4">
-          <h4>Credits and Payments</h4>
-          <ul>
-              <li>Available Credit {{ 6359899.86 | currency }} </li>
-              <li>Reserve Funds {{ 0 | currency }} </li>
-              <li>Last Payment {{ 8005.60 | currency }} </li>
-              <li>Last Payment Date 7/10/2013</li>
-          </ul>
-      </div>
-  </section>
-  <button class="row"><!-- activates above conditional <li>s -->
-      <i class="icon icon-arrow-down"></i>
-      Show Details
-  </button>
-  <section class="row-fluid">
-      <div class="span6">
-        <div class="row">
-          <h4>Average Turn</h4>
-          <span>Average Number of Days to Turn</span>
-          <canvas width="300"
-                  height="300"
-                  nxg-chart
-                  nxg-chart-type="Bar"
-                  nxg-chart-data="averageTurn"
-                  nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
-          </canvas>
-          <p>The Last 12 Months</p>
+<div class="container-line">
+  <div class="container-fluid">
+    <section class="row-fluid business-summary">
+        <div class="span4">
+            <h4>Approved Floorplans</h4>
+            {{ floorplans.length }} Approved
+            <ul>
+                <li>Total Book Value {{ 6140300.00 | currency }} </li>
+                <li>Total Financed Amount {{ 4781220.48 | currency }} </li>
+                <li>Total Outstanding {{ 4779017.98 | currency }} </li>
+                <!-- should show conditionally on-click of "Show Details" bar. -->
+                <li ng-show="false">Average purchase price: {{ 4779017.98 | currency }} </li>
+                <li ng-show="false">Total purchase price: {{ 4779017.98 | currency }} </li>
+                <li ng-show="false">Total NextGear Capital Book value {{ 4779017.98 | currency }} </li>
+                <li  ng-show="false" class="small"> NextGear Capital Book is 468.25% of the Purchase Price </li>
+                <li  ng-show="false" class="small">Amount Outstanding is 468.25% of the NextGear Capital Book</li>
+                <!-- end conditional <li>s -->
+            </ul>
         </div>
-        <div class="row">
-          <h4>NextGear's Best and Worst Movers</h4>
-          <select>
-            <option value="">The best movers.</option>
-            <option value="">The worst movers.</option>
-          </select>
-          <canvas width="300"
-                  height="300"
-                  ng-show="true"
-                  nxg-chart
-                  nxg-chart-type="Bar"
-                  nxg-chart-data="bestMovers"
-                  nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
-          </canvas>
-          <canvas width="300"
-                  height="300"
-                  ng-show="false"
-                  nxg-chart
-                  nxg-chart-type="Bar"
-                  nxg-chart-data="worstMovers"
-                  nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
-          </canvas>
-          <p>Average Number of Days to Turn</p>
+        <div class="span4">
+            <h4>Pending Floorplans</h4>
+            {{ floorplans.length }} Pending
+            <ul>
+                <li>Total Purchase Price {{ 1500.00 | currency }} </li>
+                <li>Total NextGear Capital Book value {{ 0 | currency }} </li>
+                <!-- should show conditionally on-click of "Show Details" bar. -->
+                <li  ng-show="false" class="small">NextGear Capital Book is 0.00% of the Purchase Price</li>
+                <!-- end conditional <li>s -->
+            </ul>
         </div>
-      </div>
-      <div class="span6">
-        <div class="row">
-          <h4>Stale and Aging Vehicles</h4>
-          <ul>
-              <li>[num] 100-125 Days</li>
-              <li>[num] 75-99 Days</li>
-              <li>[num] 50-74 days</li>
-              <li>[num] 1-25 Days</li>
-          </ul>
-          <a href="#/home/payments">View All Payments</a>
+        <div class="span4">
+            <h4>Credits and Payments</h4>
+            <ul>
+                <li>Available Credit {{ 6359899.86 | currency }} </li>
+                <li>Reserve Funds {{ 0 | currency }} </li>
+                <li>Last Payment {{ 8005.60 | currency }} </li>
+                <li>Last Payment Date 7/10/2013</li>
+            </ul>
         </div>
-        <div class="row">
-          <h4>Top 10 Auctions</h4>
-          <canvas width="300"
-                  height="300"
-                  nxg-chart
-                  nxg-chart-type="Bar"
-                  nxg-chart-data="top10auctions"
-                  nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
-          </canvas>
-          <p>Average Number of Cars Purchased in the last 12 months</p>
-          <p><a href ng-click="openTopAuctions()">View All Auctions</a></p>
+    </section>
+    <button class="row"><!-- activates above conditional <li>s -->
+        <i class="icon icon-arrow-down"></i>
+        Show Details
+    </button>
+    <section class="row-fluid">
+        <div class="span6">
+          <div class="row">
+            <h4>Average Turn</h4>
+            <span>Average Number of Days to Turn</span>
+            <canvas width="300"
+                    height="300"
+                    nxg-chart
+                    nxg-chart-type="Bar"
+                    nxg-chart-data="averageTurn"
+                    nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
+            </canvas>
+            <p>The Last 12 Months</p>
+          </div>
+          <div class="row">
+            <h4>NextGear's Best and Worst Movers</h4>
+            <select>
+              <option value="">The best movers.</option>
+              <option value="">The worst movers.</option>
+            </select>
+            <canvas width="300"
+                    height="300"
+                    ng-show="true"
+                    nxg-chart
+                    nxg-chart-type="Bar"
+                    nxg-chart-data="bestMovers"
+                    nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
+            </canvas>
+            <canvas width="300"
+                    height="300"
+                    ng-show="false"
+                    nxg-chart
+                    nxg-chart-type="Bar"
+                    nxg-chart-data="worstMovers"
+                    nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
+            </canvas>
+            <p>Average Number of Days to Turn</p>
+          </div>
         </div>
-      </div>
-  </section>
+        <div class="span6">
+          <div class="row">
+            <h4>Stale and Aging Vehicles</h4>
+            <ul>
+                <li>[num] 100-125 Days</li>
+                <li>[num] 75-99 Days</li>
+                <li>[num] 50-74 days</li>
+                <li>[num] 1-25 Days</li>
+            </ul>
+            <a href="#/home/payments">View All Payments</a>
+          </div>
+          <div class="row">
+            <h4>Top 10 Auctions</h4>
+            <canvas width="300"
+                    height="300"
+                    nxg-chart
+                    nxg-chart-type="Bar"
+                    nxg-chart-data="top10auctions"
+                    nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
+            </canvas>
+            <p>Average Number of Cars Purchased in the last 12 months</p>
+            <p><a href ng-click="openTopAuctions()">View All Auctions</a></p>
+          </div>
+        </div>
+    </section>
+  </div>
 </div>
