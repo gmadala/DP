@@ -2,16 +2,27 @@
 // Base Styles
 // ===============
 
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+
 * {
   @include box-sizing(border-box);
+}
+
+body, html {
+  min-width: 940px;
 }
 
 .container-fluid {
   position: relative;
   width: 100%;
-  max-width: 940px;
-  min-width: 768px;
+  width: 940px;
   margin: 0 auto 30px;
+}
+
+h4 {
+  font-weight: 300;
+  color: #08c;
 }
 
 .nxg-fade {
@@ -21,4 +32,45 @@
 .row-item {
   display: inline-block;
   margin-right: 1px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.well {
+  @include border-radius(0px);
+  padding: 1em;
+  background-color: #eee;
+  @include box-shadow(none);
+  border: 1px solid #eee;
+  h4 {
+    margin-top: 0px;
+    margin-bottom: 28px;
+  }
+  legend {
+    @extend h4;
+    border: none;
+  }
+}
+
+.well-out {
+  display: block;
+  padding: 14px;
+  margin: -15px;
+  background-color: #fff;
+  border-bottom: 1px solid #d5d5d5;
+  border-left: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
+}
+
+.well.adjacent {
+  border: none;
+  border-left: 1px solid white;
+  &:first-child {
+    border-left: 1px solid #eee;
+  }
+  &:last-child {
+    border-right: 1px solid #eee;
+  }
 }

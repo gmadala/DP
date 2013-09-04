@@ -1,49 +1,54 @@
 <section class="row-fluid upcoming">
-    <h4 class="row-item">Upcoming Payments</h4>
-    <select class="row-item" name="viewMode" ng-model="viewMode" ng-init="viewMode = 'week'">
-        <option value="week">This Week</option>
-        <option value="month">This Month</option>
-    </select>
-    <div class="row-fluid basic">
-        <div class="span8" nxg-upcoming-calendar display="viewMode"></div>
-        <div class="span4">
-            <ul>
+
+    <div class="row-fluid">
+        <div class="span9" >
+          <h4>Upcoming Payments</h4>
+          <input type="radio" name="viewMode" id="week" ng-checked="true" value="week" ng-model="viewMode" placeholder="This Week">
+          <label for="week">This Week</label>
+          <input type="radio" name="viewMode" id="month" value="month" ng-model="viewMode" placeholder="This Month">
+          <label for="month">This Month</label>
+          <div nxg-upcoming-calendar display="viewMode"></div>
+        </div>
+        <div class="span3 well payment-summary">
+          <h4>Payments Summary</h4>
+            <ul class="well-out">
                 <li>
                     <span class="item-total">{{paymentSummary.overdue.quantity}}</span>
                     <span ng-pluralize count="paymentSummary.overdue.quantity" when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}"></span>
-                    <span> - {{paymentSummary.overdue.amount | currency}}</span>
+                    <p>{{paymentSummary.overdue.amount | currency}}</p>
                 </li>
                 <li>
                     <a class="more" href="#/home/payments?filter=today">
                         <span class="item-total">{{paymentSummary.dueToday.quantity}}</span>
                         <span ng-pluralize count="paymentSummary.dueToday.quantity" when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}"></span>
-                        <span> - {{paymentSummary.dueToday.amount | currency}}</span>
-                        <i class="icon-arrow-right"></i>
+                        <p>{{paymentSummary.dueToday.amount | currency}}</p>
                     </a>
                 </li>
                 <li>
                     <a class="more" href="#/home/payments?filter=week">
                         <span class="item-total">{{paymentSummary.thisWeek.quantity}}</span>
                         <span ng-pluralize count="paymentSummary.thisWeek.quantity" when="{'1': 'Payment THIS WEEK', 'other': 'Payments THIS WEEK'}"></span>
-                        <span> - {{paymentSummary.thisWeek.amount | currency}}</span>
-                        <i class="icon-arrow-right"></i>
+                        <p>{{paymentSummary.thisWeek.amount | currency}}</p>
                     </a>
                 </li>
                 <li>
                     <span class="item-total">{{paymentSummary.accountFees.quantity}}</span>
                     <span ng-pluralize count="paymentSummary.accountFees.quantity" when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
-                    <span> - {{paymentSummary.accountFees.amount | currency}}</span>
+                    <p>{{paymentSummary.accountFees.amount | currency}}</p>
                 </li>
                 <li>
-                    <a class="more" href="#/home/payments">
+                    <a class="more btn btn-mini" href="#/home/payments">
+                        <i class="icon-eye-open"></i>
                         View All Payments
-                        <i class="icon-arrow-right"></i>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+    <button ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">
+
+      More Details
+    </button>
     <div collapse="isCollapsed" ng-init="isCollapsed = true" class="row-fluid more-details">
         <div class="span8">
             <h4>Upcoming Payments</h4>
@@ -101,111 +106,119 @@
 </section>
 
 <section class="row-fluid summaries">
-    <div class="span4 summary credit">
-        <h3>Credit</h3>
+    <div class="span6 summary credit well adjacent">
+        <h4>Credit</h4>
+        <div class="well-out">
+          <table class="chart-summary-table">
+              <tr>
+                  <td><i class="nxg-chart-legend-color nxg-chart-approved-credit"></i></td>
+                  <td>Line of Credit</td>
+                  <td>+ {{credit.lineOfCredit | numeral:'$0,0'}}</td>
+              </tr>
+              <tr class="chart-summary-table-total-row">
+                  <td><i class="nxg-chart-legend-color nxg-chart-temporary-credit"></i></td>
+                  <td>Temp Line of Credit</td>
+                  <td>+ {{credit.tempLineOfCredit | numeral:'$0,0'}}</td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>Total Credit</td>
+                  <td>= {{credit.totalCredit | numeral:'$0,0'}}</td>
+              </tr>
+              <tr class="chart-summary-table-total-row">
+                  <td><i class="nxg-chart-legend-color nxg-chart-utilized-credit"></i></td>
+                  <td>Utilized Credit</td>
+                  <td>- {{credit.utilizedCredit | numeral:'$0,0'}}</td>
+              </tr>
+              <tr>
+                  <td><i class="nxg-chart-legend-color nxg-chart-available-credit"></i></td>
+                  <td>Available Credit</td>
+                  <td>= {{credit.availableCredit | numeral:'$0,0'}}</td>
+              </tr>
+          </table>
 
-        <table class="chart-summary-table">
-            <tr>
-                <td><i class="nxg-chart-legend-color nxg-chart-approved-credit"></i></td>
-                <td>Line of Credit</td>
-                <td>+ {{credit.lineOfCredit | numeral:'$0,0'}}</td>
-            </tr>
-            <tr class="chart-summary-table-total-row">
-                <td><i class="nxg-chart-legend-color nxg-chart-temporary-credit"></i></td>
-                <td>Temp Line of Credit</td>
-                <td>+ {{credit.tempLineOfCredit | numeral:'$0,0'}}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Total Credit</td>
-                <td>= {{credit.totalCredit | numeral:'$0,0'}}</td>
-            </tr>
-            <tr class="chart-summary-table-total-row">
-                <td><i class="nxg-chart-legend-color nxg-chart-utilized-credit"></i></td>
-                <td>Utilized Credit</td>
-                <td>- {{credit.utilizedCredit | numeral:'$0,0'}}</td>
-            </tr>
-            <tr>
-                <td><i class="nxg-chart-legend-color nxg-chart-available-credit"></i></td>
-                <td>Available Credit</td>
-                <td>= {{credit.availableCredit | numeral:'$0,0'}}</td>
-            </tr>
-        </table>
-
-        <div class="nxg-doughnut-chart-nested">
-            <canvas width="110"
-                    height="110"
-                    class="nxg-doughnut-chart-outer"
-                    nxg-chart
-                    nxg-chart-type="Doughnut"
-                    nxg-chart-data="credit.chartData.outer"
-                    nxg-chart-options="{percentageInnerCutout: 77}">
-            </canvas>
-            <canvas width="90"
-                    height="90"
-                    class="nxg-doughnut-chart-inner"
-                    nxg-chart
-                    nxg-chart-type="Doughnut"
-                    nxg-chart-data="credit.chartData.inner"
-                    nxg-chart-options="{percentageInnerCutout: 85}">
-            </canvas>
-            <label class="nxg-doughnut-chart-label">
-                <p class="nxg-doughnut-chart-label-primary">{{credit.availableCredit | numeral:'($0a)'}}</p>
-                <p class="nxg-doughnut-chart-label-secondary">of {{credit.totalCredit | numeral:'($0a)'}}</p>
-            </label>
+          <div class="nxg-doughnut-chart-nested">
+              <canvas width="110"
+                      height="110"
+                      class="nxg-doughnut-chart-outer"
+                      nxg-chart
+                      nxg-chart-type="Doughnut"
+                      nxg-chart-data="credit.chartData.outer"
+                      nxg-chart-options="{percentageInnerCutout: 75}">
+              </canvas>
+              <canvas width="94"
+                      height="94"
+                      class="nxg-doughnut-chart-inner"
+                      nxg-chart
+                      nxg-chart-type="Doughnut"
+                      nxg-chart-data="credit.chartData.inner"
+                      nxg-chart-options="{percentageInnerCutout: 80}">
+              </canvas>
+              <label class="nxg-doughnut-chart-label">
+                  <p class="nxg-doughnut-chart-label-primary">{{credit.availableCredit | numeral:'($0a)'}}</p>
+                  <p class="nxg-doughnut-chart-label-secondary">available</p>
+              </label>
+          </div>
         </div>
-
     </div>
     <div nxg-unapplied-funds-widget></div>
-    <div class="span2 summary floorplan">
-        <h3>Floorplan</h3>
-        <ul>
-            <li>
-                <a class="more" href="#/home/floorplan?filter=approved"
-                   tooltip="This status applies to vehicles floored via NextGearCapital.com
-                     or by a NextGear employee via NextGear's Discover system that have been approved
-                      and are currently on the NextGear dealers floorplan."
-                   tooltip-placement="right"
-                   tooltip-popup-delay="700">
-                    <span class="item-total">{{ floorplanSummary.approved | alt }}</span>
-                    <span>Approved</span>
-                </a>
-            </li>
-            <li>
-                <a class="more" href="#/home/floorplan?filter=pending"
-                   tooltip="This status applies to vehicles floored via NextGearCapital.com
-                    or by a NextGear employee via NextGear's Discover system that have not yet been
-                    approved by a NextGear employee."
-                   tooltip-placement="right"
-                   tooltip-popup-delay="700">
-                    <span class="item-total">{{ floorplanSummary.pending | alt }}</span>
-                    <span>Pending</span>
-                </a>
-            </li>
-            <li>
-                <a class="more" href="#/home/floorplan?filter=denied"
-                   tooltip="This status applies to vehicles floored via NextGearCapital.com
-                    that have been denied by a NextGear employee. Please contact NextGear Customer
-                    Service to find out why a vehicle has been denied."
-                   tooltip-placement="right"
-                   tooltip-popup-delay="700">
-                    <span class="item-total">{{ floorplanSummary.denied | alt }}</span>
-                    <span>Denied</span>
-                </a>
-            </li>
-        </ul>
-        <a class="more" href="#/home/floorplan">View Floorplan<i class="icon-arrow-right"></i></a>
+    <div class="span3 summary floorplan well adjacent ">
+        <h4>Floorplan</h4>
+        <div class="well-out">
+          <ul>
+              <li>
+                  <a class="more" href="#/home/floorplan?filter=approved"
+                     tooltip="This status applies to vehicles floored via NextGearCapital.com
+                       or by a NextGear employee via NextGear's Discover system that have been approved
+                        and are currently on the NextGear dealers floorplan."
+                     tooltip-placement="right"
+                     tooltip-popup-delay="700">
+                      <span class="item-total">{{ floorplanSummary.approved | alt }}</span>
+                      <span>Approved</span>
+                  </a>
+              </li>
+              <li>
+                  <a class="more" href="#/home/floorplan?filter=pending"
+                     tooltip="This status applies to vehicles floored via NextGearCapital.com
+                      or by a NextGear employee via NextGear's Discover system that have not yet been
+                      approved by a NextGear employee."
+                     tooltip-placement="right"
+                     tooltip-popup-delay="700">
+                      <span class="item-total">{{ floorplanSummary.pending | alt }}</span>
+                      <span>Pending</span>
+                  </a>
+              </li>
+              <li>
+                  <a class="more" href="#/home/floorplan?filter=denied"
+                     tooltip="This status applies to vehicles floored via NextGearCapital.com
+                      that have been denied by a NextGear employee. Please contact NextGear Customer
+                      Service to find out why a vehicle has been denied."
+                     tooltip-placement="right"
+                     tooltip-popup-delay="700">
+                      <span class="item-total">{{ floorplanSummary.denied | alt }}</span>
+                      <span>Denied</span>
+                  </a>
+              </li>
+          </ul>
+          <a class="more btn btn-mini" href="#/home/floorplan">
+            <i class="icon-eye-open"></i> View Floorplan
+          </a>
+        </div>
     </div>
-    <div class="span3 summary receipts">
-        <h3>Most Recent Receipts</h3>
-        <table>
-            <tr ng-repeat="receipt in recentReceipts">
-                <td>{{ receipt.CreateDate * 1000 | date:'shortDate' }}</td>
-                <td>#{{ receipt.TransactionNumber }}</td>
-                <td>{{ receipt.AmountProvided | currency }}</td>
-                <td><a ng-href="#/home/receipts?search={{ receipt.TransactionNumber }}">View</a></td>
-            </tr>
-        </table>
-        <a class="more" href="#/home/receipts">View All Receipts<i class="icon-arrow-right"></i></a>
+    <div class="span4 summary receipts well adjacent ">
+        <h4>Most Recent Receipts</h4>
+        <div class="well-out">
+          <table>
+              <tr ng-repeat="receipt in recentReceipts">
+                  <td>{{ receipt.CreateDate * 1000 | date:'shortDate' }}</td>
+                  <td>#{{ receipt.TransactionNumber }}</td>
+                  <td>{{ receipt.AmountProvided | currency }}</td>
+                  <td><a ng-href="#/home/receipts?search={{ receipt.TransactionNumber }}">View</a></td>
+              </tr>
+          </table>
+          <a class="more btn btn-mini" href="#/home/receipts">
+            <i class="icon-eye-open"></i>
+            View All Receipts</a>
+        </div>
     </div>
 </section>

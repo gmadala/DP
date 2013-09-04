@@ -31,3 +31,15 @@
   }
 }
 
+.payment-summary {
+  ul {
+    text-align: right;
+  }
+  .item-total {
+    float: left;
+  }
+}
+
+.summaries .well-out, .payment-summary .well-out {
+  font-size: 11px;
+}

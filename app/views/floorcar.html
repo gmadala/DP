@@ -2,8 +2,9 @@
   <div class="container-fluid">
     <!-- TODO: Add error messaging -->
     <form class="row-fluid floorcar" name="form" novalidate>
-       <fieldset class="span6">
-           <legend>Vehicle Information</legend>
+       <fieldset class="span8 well adjacent">
+          <h4>Vehicle Information</h4>
+          <div class="well-out">
 
            <div nxg-vin-details floor-model="data" validity="validity" form="form"></div>
 
@@ -76,11 +77,12 @@
                   ng-show="validity.inputInvLoc.$error.required">
              Please select an Inventory Location
            </label>
-
+          </div>
        </fieldset>
 
-        <fieldset class="span6">
-            <legend>Sale Information</legend>
+        <fieldset class="span8 well adjacent">
+          <h4>Sale Information</h4>
+          <div class="well-out">
 
             <label>Trade In</label>
             <label><input type="radio"
@@ -169,6 +171,7 @@
               </button>
               <button class="btn btn-small" ng-click="cancel()">Cancel</button>
             </div>
+          </div>
         </fieldset>
     </form>
   </div>

@@ -1,13 +1,14 @@
-<div class="span3 summary unapplied-funds">
-    <h3>Unapplied Funds</h3>
+<div class="span3 summary unapplied-funds well adjacent">
     <h4>Unapplied Funds</h4>
-    <p>{{ unappliedFunds.balance | currency | alt }}</p>
-    <h4>Total Available</h4>
-    <p>{{ unappliedFunds.available | currency | alt }}</p>
-    <a class="more" href="#"
-       ng-show="unappliedFunds.available > 0"
-       ng-click="openRequestPayout($event)">
-        Request Payout
-        <i class="icon-arrow-right"></i>
-    </a>
+    <div class="well-out">
+      <span>Unapplied Funds</span>
+      <p>{{ unappliedFunds.balance | currency | alt }}</p>
+      <span>Total Available</span>
+      <p>{{ unappliedFunds.available | currency | alt }}</p>
+      <button class="more btn btn-mini" href="#"
+         ng-show="unappliedFunds.available > 0"
+         ng-click="openRequestPayout($event)">
+          Request Payout
+      </button>
+    </div>
 </div>

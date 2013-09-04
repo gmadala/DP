@@ -36,11 +36,15 @@
     margin-left: 1em;
   }
   a {
-    color: $gray-9;
+    color: $gray-8;
     font-size: 12px;
     text-transform: uppercase;
-    .active {
-      color: #0f4e9d;
+    &.active {
+      color: #1863a1;
+    }
+    &:hover, &:focus, &:active {
+      color: #1863a1;
+      text-decoration: none;
     }
   }
 }

@@ -6,8 +6,8 @@
 }
 .nxg-doughnut-chart-inner {
   position: absolute;
-  left: 10px;
-  bottom: 15px;
+  left: 8px;
+  bottom: 13px;
 }
 .nxg-doughnut-chart-label {
   position: absolute;
@@ -36,8 +36,8 @@
  * So if you need change these hex colors, you need to do that in both places.
  * @see app/scripts/models/dealerCredit.js
  */
-.nxg-chart-approved-credit    { background-color: #575757 }
-.nxg-chart-temporary-credit   { background-color: #9F9F9F }
+.nxg-chart-approved-credit    { background-color: #9F9F9F }
+.nxg-chart-temporary-credit   { background-color: #575757 }
 .nxg-chart-utilized-credit    { background-color: #3D9AF4 }
 .nxg-chart-available-credit   { background-color: #54BD45 }
 .nxg-chart-fees               { background-color: #65554E }
