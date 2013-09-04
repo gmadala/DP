@@ -22,4 +22,18 @@ angular.module('nextgearWebApp')
         'url': 'path/to/link'
       }
     ];
+	
+	$scope.viewDealerStatement = function() {
+
+		console.log('viewDealerStatement');
+
+        if (!$scope.stmtForm.$valid) {
+			console.log('form not valid');
+          return false;
+        }
+		
+		console.log('form valid');
+
+	};
+  
   });

@@ -1,0 +1,37 @@
+<div>
+	<div class="control-group">
+	    <label class="control-label" for="paidOffStockNo">Stock Number Filter (optional)</label>
+	    <div class="controls">
+	        <select id="paidOffStockNo">
+	               <option selected>None</option>
+	                <!-- Selectors for following conditional inputs. -->
+	               <option>Range of Stock #'s</option>
+	               <option>Specific Stock #'s</option>
+	            </select>
+	    </div>
+	</div>
+
+	<!-- Range of stock numbers conditional fields. -->
+	<div class="control-group" ng-show="false">
+	    <label class="control-label" for="paidOffRangeStart">Stock # Range Start</label>
+	    <div class="controls">
+	        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.paidOffRangeStart" />
+	    </div>
+	</div>
+	<div class="control-group" ng-show="false">
+	    <label class="control-label" for="paidOffRangeEnd">Stock # Range End</label>
+	    <div class="controls">
+			<input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.paidOffRangeEnd" />
+	    </div>
+	</div>
+	<!-- -->
+
+	<!-- Specific stock number conditional field. -->
+	<div class="control-group" ng-show="false">
+	    <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
+	    <div class="controls">
+	        <input type="text" class="text">
+	    </div>
+	</div>
+	<!-- -->
+</div>
