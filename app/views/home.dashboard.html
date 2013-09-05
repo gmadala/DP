@@ -15,28 +15,24 @@
           <h4>Payments Summary</h4>
             <ul class="well-out">
                 <li>
-                    <span class="item-total">{{paymentSummary.overdue.quantity}}</span>
+                    <span class="item-total">{{dashboardData.OverduePayments}}</span>
                     <span ng-pluralize count="paymentSummary.overdue.quantity" when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}"></span>
-                    <p>{{paymentSummary.overdue.amount | currency}}</p>
+                    <p>{{dashboardData.OverduePaymentAmount | currency}}</p>
                 </li>
                 <li>
-                    <a class="more" href="#/home/payments?filter=today">
-                        <span class="item-total">{{paymentSummary.dueToday.quantity}}</span>
-                        <span ng-pluralize count="paymentSummary.dueToday.quantity" when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}"></span>
-                        <p>{{paymentSummary.dueToday.amount | currency}}</p>
-                    </a>
+                    <span class="item-total">{{dashboardData.PaymentsDueToday}}</span>
+                    <span ng-pluralize count="paymentSummary.dueToday.quantity" when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}"></span>
+                    <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
                 </li>
                 <li>
-                    <a class="more" href="#/home/payments?filter=week">
-                        <span class="item-total">{{paymentSummary.thisWeek.quantity}}</span>
-                        <span ng-pluralize count="paymentSummary.thisWeek.quantity" when="{'1': 'Payment THIS WEEK', 'other': 'Payments THIS WEEK'}"></span>
-                        <p>{{paymentSummary.thisWeek.amount | currency}}</p>
-                    </a>
+                    <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
+                    <span ng-pluralize count="paymentSummary.thisWeek.quantity" when="{'1': 'Payment THIS WEEK', 'other': 'Payments THIS WEEK'}"></span>
+                    <p>{{dashboardData.UpcomingPaymentAmount | currency}}</p>
                 </li>
                 <li>
-                    <span class="item-total">{{paymentSummary.accountFees.quantity}}</span>
+                    <span class="item-total">{{dashboardData.AccountFees}}</span>
                     <span ng-pluralize count="paymentSummary.accountFees.quantity" when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
-                    <p>{{paymentSummary.accountFees.amount | currency}}</p>
+                    <p>{{dashboardData.AccountFeeAmount | currency}}</p>
                 </li>
                 <li>
                     <a class="more btn btn-mini" href="#/home/payments">
