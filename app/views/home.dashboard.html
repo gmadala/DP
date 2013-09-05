@@ -44,7 +44,6 @@
         </div>
     </div>
     <button ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">
-
       More Details
     </button>
     <div collapse="isCollapsed" ng-init="isCollapsed = true" class="row-fluid more-details">
@@ -59,11 +58,11 @@
                     <th>Payment Due</th>
                 </tr>
                 </thead>
-                <tr ng-repeat="payment in upcomingPayments">
-                    <td title="Due Date">{{ payment.DueDate | date:'shortDate'  }}</td>
-                    <td title="Description">{{ payment.UnitDescription }}</td>
-                    <td title="Payoff Due"><span ng-show="payment.IsPayoff">{{ payment.PrincipalPayoff | currency }}</span></td>
-                    <td title="Payment Due"><span ng-show="!payment.IsPayoff">{{ payment.AmountDue | currency }}</span></td>
+                <tr ng-repeat="payment in dashboardData.UpcomingPaymentsList">
+                    <td title="Due Date">{{ payment.DueDate | moment:'M/D/YYYY'  }}</td>
+                    <td title="Description">{{ payment.Description }}</td>
+                    <td title="Payoff Due"><span ng-show="payment.PayoffDue">{{ payment.PayoffDue | currency }}</span></td>
+                    <td title="Payment Due"><span ng-show="!payment.PayoffDue">{{ payment.PaymentDue | currency }}</span></td>
                 </tr>
             </table>
             <tfoot>
