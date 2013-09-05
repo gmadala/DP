@@ -87,8 +87,8 @@ describe("Model: Payments", function () {
 
     it('should create the expected dueEvents', function () {
       var expected = [
-        {title: '2 Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-        {title: '1 Payment Due', subTitle: '$8,000.00', start: '2013-08-07'}
+        {title: '<span class="nxg-calendar-count">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
+        {title: '<span class="nxg-calendar-count">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'}
       ];
 
       if (new Date().getTimezoneOffset() === 240) {
@@ -101,7 +101,7 @@ describe("Model: Payments", function () {
 
     it('should create the expected scheduledEvents', function () {
       var expected = [
-        {title: '2 Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+        {title: '<span class="nxg-calendar-count">2</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
       ];
 
 
@@ -116,11 +116,11 @@ describe("Model: Payments", function () {
     it('should create the expected eventsByDate', function () {
       var expected = {
         '2013-08-01': [
-          {title: '2 Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-          {title: '2 Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+          {title: '<span class="nxg-calendar-count">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
+          {title: '<span class="nxg-calendar-count">2</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
         ],
         '2013-08-07': [
-          {title: '1 Payment Due', subTitle: '$8,000.00', start: '2013-08-07'}
+          {title: '<span class="nxg-calendar-count">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'}
         ]
       };
 

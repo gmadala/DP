@@ -90,7 +90,7 @@ angular.module('nextgearWebApp')
               list = dateMap[key2];
               date = list.reduce(reducer, {count: 0, total: 0});
               date = {
-                title: date.count + ' Scheduled',
+                title: '<span class="nxg-calendar-count">' + date.count + '</span>' + ' Scheduled',
                 subTitle: formatMoney(date.total),
                 start: key2
               };
