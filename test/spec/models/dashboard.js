@@ -26,7 +26,7 @@ describe('Model: dashboard', function () {
           "PaymentsDueToday": 3,
           "PaymentsDueTodayAmount": 1280.34,
           "UpcomingPayments": 4,
-          "UpcomingPaymentAmount": 4367.22,
+          "UpcomingPaymentAmount": 8367.22,
           "AccountFees": 1,
           "AccountFeeAmount": 400,
           "AvailableCredit": 50500,
@@ -62,8 +62,8 @@ describe('Model: dashboard', function () {
             {
               "ScheduledDate": "2013-08-01",
               "Description": "Toyota Sequoia Limited Tan",
-              "PayoffDue": 0,
-              "PaymentDue": 2200.00
+              "PayoffDue": 2200.00,
+              "PaymentDue": 0
             },
             {
               "ScheduledDate": "2013-08-01",
@@ -140,6 +140,37 @@ describe('Model: dashboard', function () {
       expect(resultData.creditChartData.inner.length).toBe(2);
       expect(resultData.creditChartData.inner[0].value).toBe(474000);
       expect(resultData.creditChartData.inner[1].value).toBe(50500);
+    });
+
+    it('should add a paymentChartData object with expected structure', function () {
+      expect(resultData.paymentChartData).toBeDefined();
+      expect(resultData.paymentChartData.fees).toBeDefined();
+      expect(resultData.paymentChartData.payments).toBeDefined();
+      expect(resultData.paymentChartData.scheduledPayments).toBeDefined();
+      expect(resultData.paymentChartData.total).toBeDefined();
+      expect(angular.isArray(resultData.paymentChartData.chartData)).toBe(true);
+    });
+
+    it('should populate paymentChartData fees with the fee amount from API', function () {
+      expect(resultData.paymentChartData.fees).toBe(400);
+    });
+
+    it('should populate paymentChartData payments with upcoming minus scheduled payments', function () {
+      expect(resultData.paymentChartData.payments.toPrecision(6)).toBe('3367.22');
+    });
+
+    it('should populate paymentChartData scheduledPayments with total of all scheduled payments', function () {
+      expect(resultData.paymentChartData.scheduledPayments).toBe(5000);
+    });
+
+    it('should populate paymentChartData total with fees plus upcoming payments', function () {
+      expect(resultData.paymentChartData.total).toBe(8767.22);
+    });
+
+    it('should wrap this data up into a chart-compatible format', function () {
+      expect(resultData.paymentChartData.chartData[0].value).toBe(resultData.paymentChartData.fees);
+      expect(resultData.paymentChartData.chartData[1].value).toBe(resultData.paymentChartData.payments);
+      expect(resultData.paymentChartData.chartData[2].value).toBe(resultData.paymentChartData.scheduledPayments);
     });
 
     it('should add a calendarData object with the expected properties', function () {

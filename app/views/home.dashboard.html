@@ -74,28 +74,28 @@
                     height="100"
                     nxg-chart
                     nxg-chart-type="Pie"
-                    nxg-chart-data="paymentSummary.summary.chartData">
+                    nxg-chart-data="dashboardData.paymentChartData.chartData">
             </canvas>
             <table class="chart-summary-table">
                 <tr>
                     <td><i class="nxg-chart-legend-color nxg-chart-fees"></i></td>
                     <td>Fees</td>
-                    <td>{{paymentSummary.summary.fees | currency}}</td>
+                    <td>{{ dashboardData.paymentChartData.fees | currency }}</td>
                 </tr>
                 <tr>
                     <td><i class="nxg-chart-legend-color nxg-chart-payments"></i></td>
                     <td>Payments</td>
-                    <td>{{paymentSummary.summary.payments | currency}}</td>
+                    <td>{{ dashboardData.paymentChartData.payments | currency }}</td>
                 </tr>
                 <tr class="chart-summary-table-total-row">
                     <td><i class="nxg-chart-legend-color nxg-chart-scheduled-payments"></i></td>
                     <td>Scheduled Payments</td>
-                    <td>{{paymentSummary.summary.scheduledPayments | currency}}</td>
+                    <td>{{ dashboardData.paymentChartData.scheduledPayments | currency }}</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Total for this {{viewMode}}</td>
-                    <td>{{paymentSummary.summary.total | currency}}</td>
+                    <td>Total for this {{ viewMode }}</td>
+                    <td>{{ dashboardData.paymentChartData.total | currency }}</td>
                 </tr>
             </table>
         </div>
