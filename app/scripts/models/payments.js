@@ -61,7 +61,7 @@ angular.module('nextgearWebApp')
               list = dateMap[key];
               date = list.reduce(reducer, {count: 0, total: 0});
               date = {
-                title: date.count + (date.count === 1 ? ' Payment Due' : ' Payments Due'),
+                title: '<span class="nxg-calendar-count">' + date.count + '</span>' + (date.count === 1 ? ' Payment Due' : ' Payments Due'),
                 subTitle: formatMoney(date.total),
                 start: key
               };
