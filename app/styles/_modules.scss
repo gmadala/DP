@@ -43,3 +43,22 @@
 .summaries .well-out, .payment-summary .well-out {
   font-size: 11px;
 }
+
+.nxg-dash-calendar-container {
+  background-color: #eeeeee;
+  position: relative;
+}
+
+.nxg-dash-calendar-header {
+  h4 {
+    margin-top: 0;
+  }
+  &> * {
+    display: inline-block;
+  }
+  position: absolute;
+  right: 25;
+  margin-left: 4em;
+  margin-top: 0.5em;
+  height: 2em;
+}

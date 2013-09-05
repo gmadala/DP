@@ -1,12 +1,14 @@
 <section class="row-fluid upcoming">
 
     <div class="row-fluid">
-        <div class="span9" >
-          <h4>Upcoming Payments</h4>
-          <input type="radio" name="viewMode" id="week" ng-checked="true" value="week" ng-model="viewMode" placeholder="This Week">
-          <label for="week">This Week</label>
-          <input type="radio" name="viewMode" id="month" value="month" ng-model="viewMode" placeholder="This Month">
-          <label for="month">This Month</label>
+        <div class="span9 nxg-dash-calendar-container" >
+          <div class="nxg-dash-calendar-header">
+            <h4>Upcoming Payments</h4>
+            <input type="radio" name="viewMode" id="week" ng-checked="true" value="week" ng-model="viewMode" placeholder="This Week">
+            <label for="week">This Week</label>
+            <input type="radio" name="viewMode" id="month" value="month" ng-model="viewMode" placeholder="This Month">
+            <label for="month">This Month</label>
+          </div>
           <div nxg-upcoming-calendar display="viewMode"></div>
         </div>
         <div class="span3 well payment-summary">

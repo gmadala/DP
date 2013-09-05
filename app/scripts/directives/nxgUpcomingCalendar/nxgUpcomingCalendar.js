@@ -22,19 +22,24 @@ angular.module('nextgearWebApp')
         $scope.options = {
           defaultView: 'basicWeek',
           weekends: false,
+          header: {
+            left: 'prev',
+            center: '',
+            right: 'today, next'
+          },
           contentHeight: 150,
           titleFormat: {
-            month: 'MMMM yyyy',
+            month: 'MMM yyyy',
             week: ''
           },
           columnFormat: {
-            month: 'ddd',
-            week: 'dddd\nMMMM d'
+            month: '<b>ddd</b> <b>MMM d</b>',
+            week: '<b>ddd</b> <b>MMM d</b>'
           },
           viewDisplay: function(view) {
             // prevent navigation into the past
-            $element.find('.fc-button-prev').toggleClass('fc-state-disabled',
-              view.start.valueOf() < new Date().valueOf());
+            //$element.find('.fc-button-prev').toggleClass('fc-state-disabled',
+              //view.start.valueOf() < new Date().valueOf());
 
             // load the data for this view
             Payments.fetchUpcomingCalendar(view.start, view.end).then(
@@ -54,6 +59,15 @@ angular.module('nextgearWebApp')
               }
             );
           },
+          viewRender: function (view, element) {
+            // un-escape HTML characters in event title to make HTML formatting & entities work
+            // see http://code.google.com/p/fullcalendar/issues/detail?id=152
+            var dayTitles = element.find('th.fc-day-header');
+            angular.forEach(dayTitles, function(value, key) {
+              var dayTitle = angular.element(value);
+              dayTitle.html(dayTitle.text());
+            });
+          },
           dayRender: function(date, cell) {
             var dateKey = angular.isString(date) ? date : $filter('date')(date, 'yyyy-MM-dd');
             // add a styling hook for open vs. closed days for payment
@@ -70,26 +84,16 @@ angular.module('nextgearWebApp')
             }
           },
           eventRender: function(event, element, view) {
-            if (view.name === 'month') {
-              // don't render events directly on month calendar (user must click a day to see events in a popup)
-              return false;
-            }
+            // un-escape HTML characters in event title to make HTML formatting & entities work
+            // see http://code.google.com/p/fullcalendar/issues/detail?id=152
+            var dayEvents = element.find('span.fc-event-title');
+            angular.forEach(dayEvents, function(value, key) {
+              var dayEvent = angular.element(value);
+              dayEvent.html(dayEvent.text());
+            });
             element.find('.fc-event-inner').append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
             return element;
           },
-          dayClick: function(date, allDay, jsEvent, view) {
-            var dateKey = $filter('date')(date, 'yyyy-MM-dd');
-            if (view.name === 'month' && $scope.openDates[dateKey]) {
-              var dayElement = this; // the <td> that was clicked
-              $scope.$apply(function () {
-                $scope.selectedDetail = {
-                  date: date,
-                  events: $scope.eventsByDate[dateKey],
-                  positionFrom: angular.element(dayElement)
-                };
-              });
-            }
-          }
         };
 
         $scope.$watch('display', function(newValue, oldValue) {
@@ -100,43 +104,10 @@ angular.module('nextgearWebApp')
           // https://code.google.com/p/fullcalendar/issues/detail?id=293
           $scope.cal.fullCalendar('destroy');
           $scope.cal.fullCalendar(angular.extend($scope.options, {
-            weekends: (newValue === 'month'),
+            //weekends: (newValue === 'month'),
             defaultView: newValue === 'month' ? newValue : 'basicWeek'
           }));
         });
       }
     };
   })
-
-/**
- * Private-ish helper directive for showing the details popup when user clicks a date on the month view
- */
-  .directive('nxgUpcomingDetailPopup', function () {
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'scripts/directives/nxgUpcomingCalendar/nxgUpcomingDetailPopup.html',
-      link: function(scope, element) {
-        element.hide().appendTo('body');
-        scope.$on('$destroy', function () {
-          element.remove();
-        });
-      },
-      controller: function($scope, $element) {
-        $scope.close = function () {
-          $element.hide();
-        };
-
-        $scope.$watch('selectedDetail', function (detail) {
-          if (detail) {
-            var origin = detail.positionFrom.offset();
-            origin.left += detail.positionFrom.width() + 10;
-            origin.top -= 20;
-            $element.show().offset(origin);
-          } else {
-            $scope.close();
-          }
-        });
-      }
-    };
-  });

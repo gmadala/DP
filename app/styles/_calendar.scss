@@ -4,7 +4,7 @@
 
 .fc-view {
   .closed {
-    background-color: #eee;
+    background-color: #fff;
   }
   .has-events {
     font-weight: bold;
@@ -13,7 +13,6 @@
 
 .fc-view-month {
   .fc-day {
-    cursor: pointer;
     &.closed {
       cursor: default;
     }
@@ -24,6 +23,23 @@
   .fc-event-subtitle {
     display: block;
   }
+}
+
+.fc-widget-header.fc-day-header {
+  color: #535353;
+  font-size: 12px;
+  background-color: #fff;
+  text-transform: uppercase;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  b:last-child {
+    float: right;
+    font-weight: normal;
+  }
+  font-weight: normal;
 }
 
 .nxg-upcoming-detail {
