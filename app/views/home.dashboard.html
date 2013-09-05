@@ -207,11 +207,11 @@
         <h4>Most Recent Receipts</h4>
         <div class="well-out">
           <table>
-              <tr ng-repeat="receipt in recentReceipts">
-                  <td>{{ receipt.CreateDate * 1000 | date:'shortDate' }}</td>
-                  <td>#{{ receipt.TransactionNumber }}</td>
-                  <td>{{ receipt.AmountProvided | currency }}</td>
-                  <td><a ng-href="#/home/receipts?search={{ receipt.TransactionNumber }}">View</a></td>
+              <tr ng-repeat="receipt in dashboardData.Receipts">
+                  <td>{{ receipt.ReceiptDate | moment:'M/D/YYYY' }}</td>
+                  <td>#{{ receipt.ReceiptNumber }}</td>
+                  <td>{{ receipt.ReceiptAmount | currency }}</td>
+                  <td><a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a></td>
               </tr>
           </table>
           <a class="more btn btn-mini" href="#/home/receipts">
