@@ -11,8 +11,20 @@ angular.module('nextgearWebApp')
             api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate),
             api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate)
           ]).then(function (responses) {
-            // result looks like response object for /dealer/buyer/dashboard, with added .calendarData property
+            // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
             var result = responses[0];
+
+            // calculate .creditChartData
+            result.creditChartData = {
+              outer: [
+                { color: '#9F9F9F', value: result.LineOfCredit },
+                { color: '#575757', value: result.TempLineOfCredit }
+              ],
+              inner: [
+                { color: '#3D9AF4', value: result.UtilizedCredit },
+                { color: '#54BD45', value: result.AvailableCredit }
+              ]
+            };
 
             // calculate .calendarData
             var dueRaw = responses[0].UpcomingPaymentsList || [],

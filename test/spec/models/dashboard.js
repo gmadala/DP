@@ -124,8 +124,26 @@ describe('Model: dashboard', function () {
       expect(resultData.UpcomingPaymentsList.length).toBe(3);
     });
 
+    it('should add a creditChartData object with expected structure', function () {
+      expect(resultData.creditChartData).toBeDefined();
+      expect(angular.isArray(resultData.creditChartData.outer)).toBe(true);
+      expect(angular.isArray(resultData.creditChartData.inner)).toBe(true);
+    });
+
+    it('should populate creditChartData outer with breakdown of credit by type', function () {
+      expect(resultData.creditChartData.outer.length).toBe(2);
+      expect(resultData.creditChartData.outer[0].value).toBe(450000);
+      expect(resultData.creditChartData.outer[1].value).toBe(75000);
+    });
+
+    it('should populate creditChartData inner with breakdown of credit by utilization', function () {
+      expect(resultData.creditChartData.inner.length).toBe(2);
+      expect(resultData.creditChartData.inner[0].value).toBe(474000);
+      expect(resultData.creditChartData.inner[1].value).toBe(50500);
+    });
+
     it('should add a calendarData object with the expected properties', function () {
-      expect(resultData.calendarData).not.toBe(null);
+      expect(resultData.calendarData).toBeDefined();
       expect(resultData.calendarData.dueEvents).toBeDefined();
       expect(resultData.calendarData.scheduledEvents).toBeDefined();
       expect(resultData.calendarData.eventsByDate).toBeDefined();
