@@ -171,7 +171,7 @@
                         and are currently on the NextGear dealers floorplan."
                      tooltip-placement="right"
                      tooltip-popup-delay="700">
-                      <span class="item-total">{{ floorplanSummary.approved | alt }}</span>
+                      <span class="item-total">{{ dashboardData.ApprovedFloorplans | alt }}</span>
                       <span>Approved</span>
                   </a>
               </li>
@@ -182,7 +182,7 @@
                       approved by a NextGear employee."
                      tooltip-placement="right"
                      tooltip-popup-delay="700">
-                      <span class="item-total">{{ floorplanSummary.pending | alt }}</span>
+                      <span class="item-total">{{ dashboardData.PendingFloorplans | alt }}</span>
                       <span>Pending</span>
                   </a>
               </li>
@@ -193,7 +193,7 @@
                       Service to find out why a vehicle has been denied."
                      tooltip-placement="right"
                      tooltip-popup-delay="700">
-                      <span class="item-total">{{ floorplanSummary.denied | alt }}</span>
+                      <span class="item-total">{{ dashboardData.DeniedFloorplans | alt }}</span>
                       <span>Denied</span>
                   </a>
               </li>
