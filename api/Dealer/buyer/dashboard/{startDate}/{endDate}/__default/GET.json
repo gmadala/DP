@@ -1,0 +1,83 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "OverduePayments": 1,
+    "OverduePaymentAmount": 340.00,
+    "PaymentsDueToday": 3,
+    "PaymentsDueTodayAmount": 1280.34,
+    "UpcomingPayments": 4,
+    "UpcomingPaymentAmount": 4367.22,
+    "AccountFees": 1,
+    "AccountFeeAmount": 400,
+    "AvailableCredit": 50500,
+    "UtilizedCredit": 474000,
+    "TempLineOfCredit": 75000,
+    "LineOfCredit": 450000,
+    "UnappliedFundTotal": 2222,
+    "TotalAvailableUnappliedFunds": 1111,
+    "ApprovedFloorplans": 820,
+    "PendingFloorplans": 12,
+    "DeniedFloorplans": 5,
+    "UpcomingPaymentsList": [
+      {
+        "DueDate": "2013-09-06",
+        "Description": "Toyota Sequoia Limited Tan",
+        "PayoffDue": 0,
+        "PaymentDue": 2490
+      },
+      {
+        "DueDate": "2013-09-09",
+        "Description": "BMW 7-Series 750Li Black",
+        "PayoffDue": 0,
+        "PaymentDue": 3860
+      },
+      {
+        "DueDate": "2013-09-11",
+        "Description": "Toyota Sequoia Unlimited Red",
+        "PayoffDue": 4980,
+        "PaymentDue": 0
+      }
+    ],
+    "ScheduledPayments": [
+      {
+        "ScheduledDate": "2013-09-06",
+        "Description": "Toyota Sequoia Limited Tan",
+        "PayoffDue": 0,
+        "PaymentDue": 2490
+      },
+      {
+        "ScheduledDate": "2013-09-09",
+        "Description": "BMW 7-Series 750Li Black",
+        "PayoffDue": 0,
+        "PaymentDue": 3860
+      },
+      {
+        "ScheduledDate": "2013-09-09",
+        "Description": "Toyota Sequoia Limited Red",
+        "PayoffDue": 4980,
+        "PaymentDue": 0
+      }
+    ],
+    "Receipts": [
+      {
+        "FinancialTransactionId": "abc123",
+        "ReceiptDate": "2013-09-01",
+        "ReceiptNumber": 456,
+        "ReceiptAmount": 480.34
+      },
+      {
+        "FinancialTransactionId": "def456",
+        "ReceiptDate": "2013-08-31",
+        "ReceiptNumber": 789,
+        "ReceiptAmount": 8120.00
+      },
+      {
+        "FinancialTransactionId": "ghi789",
+        "ReceiptDate": "2013-08-22",
+        "ReceiptNumber": 127,
+        "ReceiptAmount": 2090.02
+      },
+    ]
+  }
+}
