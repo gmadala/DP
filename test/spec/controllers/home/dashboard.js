@@ -92,6 +92,15 @@ describe('Controller: DashboardCtrl', function () {
             }
           };
         }
+      },
+      Dashboard: {
+        fetchDealerDashboard: function() {
+          return {
+            then: function(success) {
+              success({});
+            }
+          };
+        }
       }
     });
   }));
