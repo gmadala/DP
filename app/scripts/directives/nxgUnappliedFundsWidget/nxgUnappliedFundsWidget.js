@@ -6,12 +6,14 @@ angular.module('nextgearWebApp')
       templateUrl: 'scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html',
       restrict: 'AC',
       replace: true,
-      scope: {},
+      scope: {
+        fundsBalance: '=balance',
+        fundsAvail: '=available'
+      },
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, Payments) {
-    $scope.unappliedFunds = Payments.fetchUnappliedFundsInfo();
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter) {
 
     $scope.openRequestPayout = function($event) {
       $event.preventDefault();
@@ -24,7 +26,10 @@ angular.module('nextgearWebApp')
         controller: 'PayoutModalCtrl',
         resolve: {
           funds: function () {
-            return angular.copy($scope.unappliedFunds);
+            return {
+              balance: $scope.fundsBalance,
+              available: $scope.fundsAvail
+            };
           }
         }
       };

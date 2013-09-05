@@ -2,11 +2,11 @@
     <h4>Unapplied Funds</h4>
     <div class="well-out">
       <span>Unapplied Funds</span>
-      <p>{{ unappliedFunds.balance | currency | alt }}</p>
+      <p>{{ fundsBalance | currency | alt }}</p>
       <span>Total Available</span>
-      <p>{{ unappliedFunds.available | currency | alt }}</p>
+      <p>{{ fundsAvail | currency | alt }}</p>
       <button class="more btn btn-mini" href="#"
-         ng-show="unappliedFunds.available > 0"
+         ng-show="fundsAvail > 0"
          ng-click="openRequestPayout($event)">
           Request Payout
       </button>

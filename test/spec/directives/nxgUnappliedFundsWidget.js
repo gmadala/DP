@@ -7,28 +7,28 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     isolateScope;
 
   beforeEach(inject(function ($rootScope, $compile) {
-    element = angular.element('<div nxg-unapplied-funds-widget></div>');
+    $rootScope.foo = 1;
+    $rootScope.bar = 2;
+    element = angular.element('<div nxg-unapplied-funds-widget balance="foo" available="bar"></div>');
     element = $compile(element)($rootScope);
     isolateScope = element.scope();
+    $rootScope.$digest();
   }));
 
   it('should create a new scope', inject(function ($rootScope) {
     expect(isolateScope).not.toBe($rootScope);
   }));
 
+  it('should expose the balance and available values onto the isolate scope', function () {
+    expect(isolateScope.fundsBalance).toBe(1);
+    expect(isolateScope.fundsAvail).toBe(2);
+  });
+
   describe('main controller', function () {
 
-    var scope, ctrl, dialogMock, httpBackend;
+    var scope, ctrl, dialogMock;
 
-    beforeEach(inject(function ($rootScope, $controller, $httpBackend) {
-      httpBackend = $httpBackend;
-      httpBackend.whenGET('/payment/info').respond({
-        Success: true,
-        Data: {
-          UnappliedFundsBalance: 1,
-          AvailableUnappliedFundsBalance: 2
-        }
-      });
+    beforeEach(inject(function ($rootScope, $controller) {
 
       dialogMock = {
         dialog: function () {
@@ -40,18 +40,17 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
             }
           };
         }
-      }
+      };
 
       scope = $rootScope.$new();
+      scope.fundsBalance = 1;
+      scope.fundsAvail = 2;
+
       ctrl = $controller('UnappliedFundsWidgetCtrl', {
         $scope: scope,
         $dialog: dialogMock
       });
     }));
-
-    it('should attach an unappliedFunds object to the scope', function () {
-      expect(scope.unappliedFunds).toBeDefined();
-    });
 
     it('should attach an openRequestPayout function to the scope', function () {
       expect(typeof scope.openRequestPayout).toBe('function');
@@ -65,11 +64,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(config.templateUrl).toBeDefined();
       expect(config.controller).toBe('PayoutModalCtrl');
 
-      var resolvedFunds = {};
-      config.resolve.funds().then(function (value) {
-        resolvedFunds = value;
-      });
-      httpBackend.flush();
+      var resolvedFunds = config.resolve.funds();
       expect(resolvedFunds.balance).toBe(1);
       expect(resolvedFunds.available).toBe(2);
     });
