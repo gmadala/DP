@@ -37,6 +37,18 @@
         "Description": "Toyota Sequoia Unlimited Red",
         "PayoffDue": 4980,
         "PaymentDue": 0
+      },
+      {
+        "DueDate": "2013-09-19",
+        "Description": "A Car Being Paid For",
+        "PayoffDue": 0,
+        "PaymentDue": 3333
+      },
+      {
+        "DueDate": "2013-09-19",
+        "Description": "A Car Being Paid Off",
+        "PayoffDue": 2222,
+        "PaymentDue": 0
       }
     ],
     "ScheduledPayments": [
@@ -57,6 +69,12 @@
         "Description": "Toyota Sequoia Limited Red",
         "PayoffDue": 4980,
         "PaymentDue": 0
+      },
+      {
+        "ScheduledDate": "2013-09-19",
+        "Description": "A Payment Scheduled",
+        "PayoffDue": 0,
+        "PaymentDue": 180
       }
     ],
     "Receipts": [

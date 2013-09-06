@@ -54,53 +54,49 @@ angular.module('nextgearWebApp')
               openDates = {},
               formatMoney = $filter('currency'),
               dateMap,
-              date,
               dateKey,
               list,
               sumPayments = function (accumulator, payment) {
                 return accumulator + (payment.PaymentDue || payment.PayoffDue);
+              },
+              addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
+                if (sourceList.length === 0) { return; }
+                var event = {
+                  title: '<span class="nxg-calendar-count">' + sourceList.length + '</span>' +
+                    (sourceList.length === 1 ? singularLabel : pluralLabel),
+                  subTitle: formatMoney(sourceList.reduce(sumPayments, 0)),
+                  start: dateKey
+                };
+                destList.push(event);
+                list = eventsByDate[dateKey] || (eventsByDate[dateKey] = []);
+                list.push(event);
               };
 
-            // aggregate due payments list into a set of calendar events, max 1 per day, summarizing payments due that day
+            // aggregate due payments list into a set of calendar events, max 2 per day, summarizing payments & payoffs due that day
             dateMap = {};
             dueRaw.forEach(function (payment) {
               dateKey = payment.DueDate;
-              list = dateMap[dateKey] || [];
-              list.push(payment);
-              dateMap[dateKey] = list;
+              list = dateMap[dateKey] || (dateMap[dateKey] = { payments: [], payoffs: [] });
+              if (payment.PayoffDue) {
+                list.payoffs.push(payment);
+              } else {
+                list.payments.push(payment);
+              }
             });
             for (var key in dateMap) {
-              list = dateMap[key];
-              date = {
-                title: '<span class="nxg-calendar-count">' + list.length + '</span>' + (list.length === 1 ? ' Payment Due' : ' Payments Due'),
-                subTitle: formatMoney(list.reduce(sumPayments, 0)),
-                start: key
-              };
-              dueEvents.push(date);
-              list = eventsByDate[key] || [];
-              list.push(date);
-              eventsByDate[key] = list;
+              addEvent(dateMap[key].payments, dueEvents, ' Payment Due', ' Payments Due', key);
+              addEvent(dateMap[key].payoffs, dueEvents, ' Payoff Due', ' Payoffs Due', key);
             }
 
             // aggregate scheduled payments list into a set of calendar events, max 1 per day, summarizing payments scheduled that day
             dateMap = {};
             scheduledRaw.forEach(function (payment) {
               dateKey = payment.ScheduledDate;
-              list = dateMap[dateKey] || [];
+              list = dateMap[dateKey] || (dateMap[dateKey] = []);
               list.push(payment);
-              dateMap[dateKey] = list;
             });
             for (var key2 in dateMap) {
-              list = dateMap[key2];
-              date = {
-                title: '<span class="nxg-calendar-count">' + list.length + '</span>' + ' Scheduled',
-                subTitle: formatMoney(list.reduce(sumPayments, 0)),
-                start: key2
-              };
-              scheduledEvents.push(date);
-              list = eventsByDate[key2] || [];
-              list.push(date);
-              eventsByDate[key2] = list;
+              addEvent(dateMap[key2], scheduledEvents, ' Scheduled', ' Scheduled', key2);
             }
 
             // convert possiblePaymentDates into a map of 'yyyy-MM-dd': true
