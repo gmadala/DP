@@ -7,6 +7,7 @@
 
 .nav {
   margin-bottom: 0;
+
   & > li > a {
     margin: 0;
     &:focus {
@@ -24,7 +25,8 @@
   height: 42px;
   vertical-align: middle;
   border-top: 1px solid #dfdfdf;
-  background-image: linear-gradient(#fff, #e2e1e5);
+  border-bottom: 2px solid white;
+  background-image: linear-gradient(#fff, #e0e0e0);
   font-weight: bold;
   .container-fluid {
     margin-bottom: 0;

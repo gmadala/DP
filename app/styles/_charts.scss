@@ -7,9 +7,10 @@
 .nxg-doughnut-chart-inner {
   position: absolute;
   left: 8px;
-  bottom: 13px;
+  bottom: 14px;
 }
 .nxg-doughnut-chart-label {
+  cursor: default;
   position: absolute;
   top: 40px;
   left: 35px;
@@ -29,6 +30,7 @@
 .nxg-chart-legend-color {
   width: 10px;
   height: 10px;
+  margin-right: 5px;
   display: block;
 }
 /**

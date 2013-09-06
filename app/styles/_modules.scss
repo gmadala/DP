@@ -2,6 +2,27 @@
 // Modules
 // ===============
 
+@import "compass/css3/border-radius";
+
+.nxg-dash-calendar-container {
+  background-color: #eeeeee;
+  position: relative;
+}
+
+.nxg-dash-calendar-header {
+  h4 {
+    margin-top: 0;
+  }
+  &> * {
+    display: inline-block;
+  }
+  position: absolute;
+  right: 25;
+  margin-left: 4em;
+  margin-top: 0.5em;
+  height: 2em;
+}
+
 .pay-queue.summary {
 
   ul {
@@ -44,21 +65,100 @@
   font-size: 11px;
 }
 
-.nxg-dash-calendar-container {
-  background-color: #eeeeee;
-  position: relative;
+.summaries {
+  .well-out {
+    height: 14em;
+    position: relative;
+    .btn {
+      color: #08c;
+      font-weight: bold;
+      position: absolute;
+      margin: 1em;
+      bottom: 0;
+      right: 0;
+    }
+  }
 }
 
-.nxg-dash-calendar-header {
-  h4 {
-    margin-top: 0;
+.chart-summary-table {
+  color: #555;
+  font-weight: bold;
+  float: right;
+  font-size: 11px;
+  line-height: 20px;
+  margin-bottom: 3px;
+  tr {
+    td:last-child {
+      text-align: right;
+    }
   }
-  &> * {
-    display: inline-block;
+  td.taller {
+    padding-top: 6px;
   }
-  position: absolute;
-  right: 25;
-  margin-left: 4em;
-  margin-top: 0.5em;
-  height: 2em;
+  td.no-bold {
+    font-weight: normal;
+  }
+  .table-symbol {
+    padding-left: 5px;
+    padding-right: 5px;
+    &.red {
+      color: #ce0012;
+    }
+  }
+}
+.chart-summary-table-total-row {
+  border-bottom: 1px solid #999;
+}
+
+//overly specific rule to over-write bootstrap's grid for these two modules.
+.summaries {
+  .unapplied-funds.adjacent {
+    width: 22.75%;
+  }
+  .floorplan.adjacent {
+    width: 14.75%;
+  }
+}
+
+.unapplied-funds {
+  span {
+    margin-bottom: 4px;
+  }
+  .pull-right {
+    font-weight: bold;
+  }
+}
+.floorplan {
+  ul {
+    color: #555;
+    margin: 0;
+    li {
+      height: 28px;
+      .item-total {
+        @include border-radius(7px);
+        width: 28px;
+        text-align: center;
+        margin-right: 7px;
+        float: left;
+        border: 1px solid $gray-c;
+      }
+    }
+  }
+}
+
+.receipts {
+  table {
+    margin-top: -1px;
+    width: 100%;
+    text-align: right;
+    td:first-child {
+      text-align: left;
+    }
+    td:nth-child(2) {
+      text-align: left;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
 }
