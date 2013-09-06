@@ -16,22 +16,35 @@
             <ul class="well-out">
                 <li>
                     <span class="item-total">{{dashboardData.OverduePayments}}</span>
-                    <span ng-pluralize count="dashboardData.OverduePayments" when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}"></span>
+                    <span ng-pluralize
+                          count="dashboardData.OverduePayments"
+                          when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}">
+                    </span>
                     <p>{{dashboardData.OverduePaymentAmount | currency}}</p>
                 </li>
                 <li>
                     <span class="item-total">{{dashboardData.PaymentsDueToday}}</span>
-                    <span ng-pluralize count="dashboardData.PaymentsDueToday" when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}"></span>
+                    <span ng-pluralize
+                          count="dashboardData.PaymentsDueToday"
+                          when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}">
+                    </span>
                     <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
                 </li>
                 <li>
                     <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
-                    <span ng-pluralize count="dashboardData.UpcomingPayments" when="{'1': 'Payment THIS WEEK', 'other': 'Payments THIS WEEK'}"></span>
+                    <span ng-pluralize
+                          count="dashboardData.UpcomingPayments"
+                          when="{'1': 'Payment', 'other': 'Payments'}">
+                    </span>
+                    <span>THIS {{ viewMode | uppercase }}</span>
                     <p>{{dashboardData.UpcomingPaymentAmount | currency}}</p>
                 </li>
                 <li>
                     <span class="item-total">{{dashboardData.AccountFees}}</span>
-                    <span ng-pluralize count="dashboardData.AccountFees" when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
+                    <span ng-pluralize
+                          count="dashboardData.AccountFees"
+                          when="{'1': 'Account Fee', 'other': 'Account Fees'}">
+                    </span>
                     <p>{{dashboardData.AccountFeeAmount | currency}}</p>
                 </li>
                 <li>
