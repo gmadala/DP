@@ -3,15 +3,6 @@
 angular.module('nextgearWebApp')
   .factory('Floorplan', function(api) {
     return {
-      fetchStatusSummary: function() {
-        return api.request('GET', '/dealer/summary').then(function(result) {
-          return {
-            approved: result.ApprovedFloorplans,
-            pending: result.PendingFloorplans,
-            denied: result.DeniedFloorplans  // availability pending Leaf API change ticket DTWO-1891
-          };
-        });
-      },
       create: function(data) {
         // transform data types as needed for API
         data = angular.copy(data);

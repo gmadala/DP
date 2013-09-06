@@ -39,25 +39,4 @@ describe('Service: Receipts', function () {
 
   });
 
-  describe('fetchRecent method', function () {
-
-    beforeEach(function () {
-      httpBackend.expectGET(/receipt\/search.*/)
-        .respond({Success: true, Data: {Receipts: []}});
-    });
-
-    it('should make a GET request to the expected endpoint', function () {
-      receipts.fetchRecent();
-      httpBackend.flush();
-    });
-
-    it('should return a promise', function () {
-      var resolveFn = jasmine.createSpy('success');
-      receipts.fetchRecent().then(resolveFn);
-      httpBackend.flush();
-      expect(resolveFn).toHaveBeenCalled();
-    });
-
-  });
-
 });

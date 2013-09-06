@@ -6,7 +6,16 @@ describe('Controller: DashboardCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var DashboardCtrl,
-    scope;
+    scope,
+    dashMock = {
+      fetchDealerDashboard: function() {
+        return {
+          then: function(success) {
+            success({});
+          }
+        };
+      }
+    };
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
@@ -14,115 +23,23 @@ describe('Controller: DashboardCtrl', function () {
     scope = $rootScope.$new();
     DashboardCtrl = $controller('DashboardCtrl', {
       $scope: scope,
-
-      Payments: {
-        fetchSummary: function() {
-          return {
-            then: function(success, error) {
-              success({
-                overdue:     { quantity: 1, amount: 0 },
-                dueToday:    { quantity: 1, amount: 0 },
-                thisWeek:    { quantity: 1, amount: 0 },
-                accountFees: { quantity: 1, amount: 0 },
-                chartData:   [
-                  { color: "#66554E", value: 10470 },
-                  { color: "#897A71", value: 10000 },
-                  { color: "#B4A8A0", value: 10000 }
-                ]
-              });
-            }
-          };
-        },
-        fetchUpcomingPayments: function() {
-          return {
-            then: function(success, error) {
-              success([])
-            }
-          };
-        },
-        fetchUpcomingCalendar: function() {
-          return {
-            then: function(success, error) {
-              success({
-                dueEvents: [],
-                scheduledEvents: [],
-                eventsByDate: [],
-                openDates: []
-              });
-            }
-          };
-        }
-      },
-      Receipts: {
-        fetchRecent: function() {
-          return {
-            then: function(success, error) {
-              success({
-                ReceiptRowCount: 0,
-                Receipts: []
-              });
-            }
-          };
-        },
-        search: function() {
-          return {
-            then: function(success, error) {
-              success({
-                ReceiptRowCount: 0,
-                Receipts: []
-              });
-            }
-          };
-        }
-      },
-      DealerCredit: {
-        fetch: function() {
-          return {
-            then: function(success) {
-              success({});
-            }
-          };
-        }
-      },
-      Floorplan: {
-        fetchStatusSummary: function() {
-          return {
-            then: function(success) {
-              success({});
-            }
-          };
-        }
-      },
-      Dashboard: {
-        fetchDealerDashboard: function() {
-          return {
-            then: function(success) {
-              success({});
-            }
-          };
-        }
-      }
+      Dashboard: dashMock
     });
   }));
 
-  it('should attach a list of upcoming payments to the scope', function() {
-    expect(scope.upcomingPayments).toBeDefined();
+  it('should set up a default viewMode', function() {
+    expect(scope.viewMode).toBe('week');
   });
 
-  it('should attach a payment summary to the scope', function() {
-    expect(scope.paymentSummary).toBeDefined();
-  });
+  it('should call for data on a setDateRange event and attach the data promise to the scope', function() {
+    var start = new Date(),
+      end = new Date(),
+      fakePromise = {};
 
-  it('should attach a list of recent receipts to the scope', function() {
-    expect(scope.recentReceipts).toBeDefined();
-  });
-
-  it('should attach some credit information to the scope', function() {
-    expect(scope.credit).toBeDefined();
-  });
-
-  it('should attach a floorplan status summary to the scope', function() {
-    expect(scope.floorplanSummary).toBeDefined();
+    spyOn(dashMock, 'fetchDealerDashboard').andReturn(fakePromise);
+    scope.$emit('setDateRange', start, end);
+    expect(dashMock.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
+    expect(scope.dashboardData).toBe(fakePromise);
   });
 
 });
