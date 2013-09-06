@@ -9,18 +9,12 @@ angular.module('nextgearWebApp')
     $scope.recentReceipts   = Receipts.fetchRecent();
     $scope.paymentSummary   = Payments.fetchSummary();
     $scope.upcomingPayments = Payments.fetchUpcomingPayments();
-
-    $scope.$watch('viewMode', function(newValue, oldValue) {
-      if (newValue === oldValue) { return; }
-      $scope.paymentSummary = Payments.fetchSummary($scope.viewMode);
-    });
     // END OLD STUFF
+
+    $scope.viewMode = 'week';
 
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       $scope.dashboardData = Dashboard.fetchDealerDashboard(startDate, endDate);
     });
-
-    // temp - hardcode the date range until the calendar gets re-wired to drive this:
-    $scope.$emit('setDateRange', new Date(2013, 8, 2), new Date(2013, 8, 6));
 
   });
