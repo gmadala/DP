@@ -3,19 +3,6 @@
 angular.module('nextgearWebApp')
   .factory('Payments', function($q, $filter, api) {
 
-    // Daniel's temporary date comparison function.
-    // This will be refactored and relocated.
-    // Perhaps we can utilize a proper JavaScript date library.
-    var isToday = function(otherDate) {
-      var today = new Date(),
-          d = new Date(otherDate * 1000);
-      return (
-        (today.getFullYear() === d.getFullYear()) &&
-        (today.getMonth()    === d.getMonth()) &&
-        (today.getDate()     === d.getDate())
-      );
-    };
-
     return {
       requestUnappliedFundsPayout: function (amount, bankAccountId) {
         return api.request('POST', '/payment/payoutUnappliedFunds', {
