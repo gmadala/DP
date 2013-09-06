@@ -57,7 +57,9 @@ angular.module('nextgearWebApp')
               date,
               dateKey,
               list,
-              reducer;
+              sumPayments = function (accumulator, payment) {
+                return accumulator + (payment.PaymentDue || payment.PayoffDue);
+              };
 
             // aggregate due payments list into a set of calendar events, max 1 per day, summarizing payments due that day
             dateMap = {};
@@ -67,17 +69,11 @@ angular.module('nextgearWebApp')
               list.push(payment);
               dateMap[dateKey] = list;
             });
-            reducer = function (summary, payment) {
-              summary.count += 1;
-              summary.total += payment.PaymentDue || payment.PayoffDue;
-              return summary;
-            };
             for (var key in dateMap) {
               list = dateMap[key];
-              date = list.reduce(reducer, {count: 0, total: 0});
               date = {
-                title: '<span class="nxg-calendar-count">' + date.count + '</span>' + (date.count === 1 ? ' Payment Due' : ' Payments Due'),
-                subTitle: formatMoney(date.total),
+                title: '<span class="nxg-calendar-count">' + list.length + '</span>' + (list.length === 1 ? ' Payment Due' : ' Payments Due'),
+                subTitle: formatMoney(list.reduce(sumPayments, 0)),
                 start: key
               };
               dueEvents.push(date);
@@ -94,18 +90,11 @@ angular.module('nextgearWebApp')
               list.push(payment);
               dateMap[dateKey] = list;
             });
-            reducer = function (summary, payment) {
-              summary.count += 1;
-              // is this the right way to find the scheduled payment amount?
-              summary.total += payment.PaymentDue || payment.PayoffDue;
-              return summary;
-            };
             for (var key2 in dateMap) {
               list = dateMap[key2];
-              date = list.reduce(reducer, {count: 0, total: 0});
               date = {
-                title: '<span class="nxg-calendar-count">' + date.count + '</span>' + ' Scheduled',
-                subTitle: formatMoney(date.total),
+                title: '<span class="nxg-calendar-count">' + list.length + '</span>' + ' Scheduled',
+                subTitle: formatMoney(list.reduce(sumPayments, 0)),
                 start: key2
               };
               scheduledEvents.push(date);
