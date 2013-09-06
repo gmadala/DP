@@ -22,6 +22,7 @@ angular.module('nextgearWebApp')
         $scope.options = {
           defaultView: 'basicWeek',
           weekends: false,
+          weekMode: 'liquid',
           header: {
             left: 'prev',
             center: '',
@@ -33,7 +34,7 @@ angular.module('nextgearWebApp')
             week: ''
           },
           columnFormat: {
-            month: '<b>ddd</b> <b>MMM d</b>',
+            month: '<b>ddd</b>',
             week: '<b>ddd</b> <b>MMM d</b>'
           },
           viewDisplay: function(view) {

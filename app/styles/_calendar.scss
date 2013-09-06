@@ -1,5 +1,3 @@
-/* this is just some placeholder styling to demonstrate information exposed by nxgUpcomingCalendar directive */
-
 @import "compass/css3/border-radius";
 
 .fc-view {
@@ -25,7 +23,11 @@
   }
 }
 
-.fc-widget-header.fc-day-header {
+.fc-day {
+  height: 120px;
+}
+
+.fc-widget-header.fc-day-header, .fc-widget-content {
   color: #535353;
   font-size: 12px;
   background-color: #fff;
@@ -34,9 +36,9 @@
   padding-bottom: 4px;
   padding-left: 10px;
   padding-right: 10px;
-  text-align: left;
-  b:last-child {
-    float: right;
+  text-align: right;
+  b:first-child {
+    float: left;
     font-weight: normal;
   }
   font-weight: normal;

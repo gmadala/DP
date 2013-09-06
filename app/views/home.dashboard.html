@@ -166,7 +166,7 @@
         <div class="well-out">
           <ul>
               <li>
-                  <a class="more" href="#/home/floorplan?filter=approved"
+                  <span class="more" href="#/home/floorplan?filter=approved"
                      tooltip="This status applies to vehicles floored via NextGearCapital.com
                        or by a NextGear employee via NextGear's Discover system that have been approved
                         and are currently on the NextGear dealers floorplan."
@@ -174,10 +174,10 @@
                      tooltip-popup-delay="700">
                       <span class="item-total">{{ dashboardData.ApprovedFloorplans | alt }}</span>
                       <span>Approved</span>
-                  </a>
+                  </span>
               </li>
               <li>
-                  <a class="more" href="#/home/floorplan?filter=pending"
+                  <span class="more" href="#/home/floorplan?filter=pending"
                      tooltip="This status applies to vehicles floored via NextGearCapital.com
                       or by a NextGear employee via NextGear's Discover system that have not yet been
                       approved by a NextGear employee."
@@ -185,10 +185,10 @@
                      tooltip-popup-delay="700">
                       <span class="item-total">{{ dashboardData.PendingFloorplans | alt }}</span>
                       <span>Pending</span>
-                  </a>
+                  </span>
               </li>
               <li>
-                  <a class="more" href="#/home/floorplan?filter=denied"
+                  <span class="more" href="#/home/floorplan?filter=denied"
                      tooltip="This status applies to vehicles floored via NextGearCapital.com
                       that have been denied by a NextGear employee. Please contact NextGear Customer
                       Service to find out why a vehicle has been denied."
@@ -196,7 +196,7 @@
                      tooltip-popup-delay="700">
                       <span class="item-total">{{ dashboardData.DeniedFloorplans | alt }}</span>
                       <span>Denied</span>
-                  </a>
+                  </span>
               </li>
           </ul>
           <a class="more btn btn-mini" href="#/home/floorplan">
@@ -211,7 +211,7 @@
               <tr ng-repeat="receipt in dashboardData.Receipts">
                   <td>{{ receipt.ReceiptDate | moment:'M/D/YYYY' }}</td>
                   <td>#{{ receipt.ReceiptNumber }}</td>
-                  <td>{{ receipt.ReceiptAmount | currency }}</td>
+                  <td><b>{{ receipt.ReceiptAmount | currency }}<b></td>
                   <td><a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a></td>
               </tr>
           </table>
