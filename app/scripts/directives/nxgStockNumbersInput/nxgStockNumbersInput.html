@@ -3,6 +3,7 @@
 	    <label class="control-label" for="paidOffStockNo">Stock Number Filter (optional)</label>
 	    <div class="controls">
 	        <select id="paidOffStockNo"
+	        	name="paidOffStockNo"
 				ng-model="selectData.value"
 				ng-options="v for v in selectData.values"
 				ng-change="selectChange()" />
@@ -14,13 +15,13 @@
 		<div class="control-group"
 		    <label class="control-label" for="paidOffRangeStart">Stock # Range Start</label>
 		    <div class="controls">
-		        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="rangeStart" />
+		        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.rangeStart" />
 		    </div>
 		</div>
 		<div class="control-group"
 		    <label class="control-label" for="paidOffRangeEnd">Stock # Range End</label>
 		    <div class="controls">
-				<input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="rangeEnd" />
+				<input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" />
 		    </div>
 		</div>
 	</div>
@@ -31,7 +32,7 @@
 		<div class="control-group" 
 		    <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
 		    <div class="controls">
-		        <input type="text" class="text" ng-model="stockNos">
+		        <input type="text" class="text" id="paidOffStockNos" name="paidOffStockNos" ng-model="data.stockNos">
 		    </div>
 		</div>
 	</div>

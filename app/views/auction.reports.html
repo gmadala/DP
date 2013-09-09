@@ -8,7 +8,7 @@
           <h3>Current Reports</h3>
           <ul>
               <li ng-repeat="doc in documents">
-                  <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
+                  <a target="_blank" ng-href="{{ doc.url }}">{{ doc.title }}</a>
               </li>
           </ul>
       </div>
@@ -16,8 +16,13 @@
           <h3>Historical Reports</h3>
           <div class="well">
             <h5>Disbursement Detail</h5>
-            <input name="inputSalesDate" nxg-date-field ng-model="disbursementDetailReport" />
-            <button for="inputSalesDate" type="submit">View Report</button>
+            <form id="disForm" name="disForm">
+            <input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
+            <button ng-click="viewDisbursementDetail()">View Report</button>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
+                    Please select a Date
+              </label>
+            </form>
           </div>
       </div>
   </div>

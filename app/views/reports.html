@@ -10,7 +10,7 @@
 	            <h3>Current Reports</h3>
 	            <ul>
 	                <li ng-repeat="report in currentReports">
-	                    <a ng-href="{{ report.url }}">{{ report.title }}</a>
+	                    <a target="_blank" ng-href="{{ report.url }}">{{ report.title }}</a>
 	                </li>
 	            </ul>
 	        </div>
@@ -79,14 +79,22 @@
 		            <div class="control-group">
 		                <label class="control-label" for="paidOffStart">Start Date</label>
 		                <div class="controls">
-		                    <input type="date" id="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" required / />
+		                    <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" required />
 		                </div>
+		                <label for="paidOffStart" class="text-error"
+			                   ng-show="paidOffFormValidity.paidOffStart.$error.required">
+			              Please select a Start Date
+			            </label>
 		            </div>
 		            <div class="control-group">
 		                <label class="control-label" for="paidOffEnd">End Date</label>
 		                <div class="controls">
-		                    <input type="date" id="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" required //>
+		                    <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" required />
 		                </div>
+		                <label for="paidOffEnd" class="text-error"
+			                   ng-show="paidOffFormValidity.paidOffEnd.$error.required">
+			              Please select an End Date
+			            </label>
 		            </div>
 		            <div class="control-group">
 		                <label class="control-label" for="paidOffVinFilter">Filter for VIN (optional)</label>
@@ -95,11 +103,11 @@
 		                </div>
 		            </div>
 			
-					<div nxg-stock-numbers-input="placeholder"></div>
+					<div nxg-stock-numbers-input="placeholder" data="data"></div>
 
 		            <div class="control-group">
 		                <div class="controls">
-		                    <button type="submit" class="btn">View Report</button>
+		                    <button type="submit" class="btn" ng-click="viewPaidOffSummary()">View Report</button>
 		                </div>
 		            </div>       
 				</form>

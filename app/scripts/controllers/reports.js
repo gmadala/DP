@@ -6,13 +6,8 @@ angular.module('nextgearWebApp')
     $scope.data = null;
 
     $scope.currentReports = [
-      { 'title': 'Credit Availability Report (PDF)',
-        'date': 'MMDDYYYY',
-        'url': 'path/to/link'
-      },
       { 'title': 'Receivable Detail (PDF)',
-        'date': 'MMDDYYYY',
-        'url': 'path/to/link'
+        'url': '/report/getReceivableDetail'
       },
       { 'title': 'Upcoming Curtailment / Payoff Quote (PDF)',
         'date': 'MMDDYYYY',
@@ -62,6 +57,55 @@ angular.module('nextgearWebApp')
             strUrl,
             '_blank'  // open a new window every time
           );
+        };
+
+    $scope.viewPaidOffSummary = function() {
+
+          // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+          $scope.paidOffFormValidity = angular.copy($scope.paidOffForm);
+
+          if (!$scope.paidOffForm.$valid) {
+            return false;
+          }
+
+          var startDate = api.toShortISODate($scope.data.paidOffStartDate);
+          var endDate = api.toShortISODate($scope.data.paidOffEndDate);
+
+          var strUrl = 'report/paidoffsumary?startDate=' + startDate + '&endDate=' + endDate;
+
+          if ($scope.data.paidOffVinFilter) {
+            strUrl += '&VIN=' + encodeURIComponent($scope.data.paidOffVinFilter);
+          }
+
+          if ($scope.data.stockNos) {
+            strUrl += 'stockNumber=' + $scope.trimCommasAndWhitespace( $scope.data.stockNos );
+          }
+          else if ($scope.data.rangeStart || $scope.data.rangeEnd) {
+            strUrl += 'stockNumber=' + $scope.data.rangeStart;
+            if ($scope.data.rangeEnd) {
+              strUrl += '-' + $scope.data.rangeEnd;
+            }
+          }
+
+          window.open(
+            strUrl,
+            '_blank'  // open a new window every time
+          );
+
+        };
+
+    $scope.trimCommasAndWhitespace = function(value) {
+
+          var parts = value.split(',');
+
+          _.each(
+            parts,
+            function(el, i, list) {
+                list[i] = el.trim();
+              }
+          );
+
+          return parts.join(',');
 
         };
   });

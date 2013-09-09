@@ -1,13 +1,36 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function($scope) {
+  .controller('AuctionReportsCtrl', function($scope, api) {
+
+    $scope.data = null;
+
     $scope.documents = [
       { 'title': 'Credit Availability Query History (PDF)',
-        'url': 'path/to/link'
+        'url': '/report/credtiavailabilityqueryhistory'
       },
       { 'title': 'Receivable Detail (PDF)',
-        'url': 'path/to/link'
+        'url': '/report/getReceivableDetail'
       }
     ];
+
+    $scope.viewDisbursementDetail = function() {
+
+          // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+          $scope.disFormValidity = angular.copy($scope.disForm);
+
+          if (!$scope.disForm.$valid) {
+            return false;
+          }
+
+          var date = api.toShortISODate($scope.data.disDate);
+          var strUrl = 'report/disbursementdetail/' + date;
+
+          window.open(
+            strUrl,
+            '_blank'  // open a new window every time
+          );
+        };
+
+
   });

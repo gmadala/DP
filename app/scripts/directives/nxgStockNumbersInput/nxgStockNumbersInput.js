@@ -5,12 +5,20 @@ angular.module('nextgearWebApp')
     return {
       templateUrl: 'scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html',
       replace: true,
-      scope: {},
+      scope: {
+        data: '=data',
+        validity: '=',
+        form: '='
+      },
       controller: function($scope) {
 
-				$scope.rangeStart = '';
-				$scope.rangeEnd = '';
-				$scope.stockNos = '';
+				if (!$scope.data) {
+					$scope.data = {};
+				}
+
+				$scope.data.rangeStart = '';
+				$scope.data.rangeEnd = '';
+				$scope.data.stockNos = '';
 				$scope.isRange = false;
 				$scope.isSpecific = false;
 
@@ -27,8 +35,8 @@ angular.module('nextgearWebApp')
 					if ($scope.selectData.value === $scope.selectData.values[1]) {
 						$scope.isRange = true;
 						$scope.isSpecific = false;
-						$scope.rangeStart = '';
-						$scope.rangeEnd = '';
+						$scope.data.rangeStart = '';
+						$scope.data.rangeEnd = '';
 						return;
 					}
 
@@ -36,13 +44,16 @@ angular.module('nextgearWebApp')
 					if ($scope.selectData.value === $scope.selectData.values[2]) {
 						$scope.isRange = false;
 						$scope.isSpecific = true;
-						$scope.stockNos = '';
+						$scope.data.stockNos = '';
 						return;
 					}
 
 					/* Hide additional fields if "None" was selected */
 					$scope.isRange = false;
 					$scope.isSpecific = false;
+					$scope.data.rangeStart = '';
+					$scope.data.rangeEnd = '';
+					$scope.data.stockNos = '';
 				};
 			}
 		};
