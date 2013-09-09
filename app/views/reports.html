@@ -25,6 +25,10 @@
 							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate"
 								required />
 		                </div>
+			            <label for="stmtStart" class="text-error"
+			                   ng-show="stmtFormValidity.stmtStart.$error.required">
+			              Please select a Start Date
+			            </label>
 		            </div>
 		            <div class="control-group">
 		                <label class="control-label" for="stmtEnd">End Date</label>
@@ -32,6 +36,10 @@
 							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate"
 								required />
 		                </div>
+			            <label for="stmtEnd" class="text-error"
+			                   ng-show="stmtFormValidity.stmtEnd.$error.required">
+			              Please select an End Date
+			            </label>
 		            </div>
 		            <div class="control-group">
 		                <label class="control-label" for="stmtVinFilter">Filter for VIN (optional)</label>
@@ -49,22 +57,19 @@
 		        <form class="form-inline" name="disForm">
 		            <h4>Disbursement Detail</h4>
 		            <div class="control-group">
-		                <label class="control-label" for="disStart">Start Date</label>
+		                <label class="control-label" for="disDate">Date</label>
 		                <div class="controls">
-							<input id="disStart" name="disStart" nxg-date-field ng-model="data.disStartDate"
+							<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate"
 								required />
 		                </div>
-		            </div>
-		            <div class="control-group">
-		                <label class="control-label" for="disEnd">End Date</label>
-		                <div class="controls">
-							<input id="disEnd" name="disEnd" nxg-date-field ng-model="data.disEndDate"
-								required />
-		                </div>
-		            </div>
+		                 <label for="disDate" class="text-error"
+			                   ng-show="disFormValidity.disDate.$error.required">
+			              Please select a Date
+			            </label>
+					</div>
 	                <div class="control-group">
 	                    <div class="controls">
-	                        <button type="submit" class="btn" ng-click="viewDealerStatement()">View Report</button>
+	                        <button type="submit" class="btn" ng-click="viewDisbursementDetail()">View Report</button>
 	                    </div>
 	                </div>
 		        </form>
