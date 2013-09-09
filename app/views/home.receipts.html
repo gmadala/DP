@@ -1,54 +1,17 @@
-<!-- TODO: Pull out form code into partial for reuse across payments, sch. payments & receipts. -->
-<form class="form-horizontal well search payments" novalidate>
-    <strong>Receipt Search</strong>
-    <div class="control-group">
-        <label class="control-label" for="keyword">Keyword</label>
-
-        <div class="controls">
-            <input type="text" id="keyword" placeholder="Enter Receipt #, Stock #, VIN, Check #" ng-model="keyword"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="startDate">Date Range</label>
-
-        <div class="controls">
-            <input type="date" id="startDate" ng-model="criteria.StartDate"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="endDate">To</label>
-
-        <div class="controls">
-            <input type="date" id="endDate" ng-model="criteria.EndDate"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="dateFilter">Filter List by Payment Method</label>
-
-        <div class="controls">
-            <select id="dateFilter" ng-model="criteria.PaymentMethod">
-                <option value="all">View All</option>
-                <option value="ach">Auction Check</option>
-                <option value="certified">Certified Funds</option>
-                <option value="check">Check</option>
-                <option value="cpp">CPP Claim</option>
-                <option value="nondealerCheck">Non Dealer Check</option>
-                <option value="proceeds">Proceeds</option>
-            </select>
-        </div>
-    </div>
-    <div class="control-group">
-        <input type="submit" value="Search" ng-click="search()"/>
-        <!-- Should this really be a type="reset"? -->
-        <input type="reset" value="Clear Search Results" ng-show="receipts"/>
-    </div>
-</form>
-
+<div nxg-search
+     title="Receipt Search"
+     prompt="Enter Receipt #, Stock #, VIN, Check #"
+     filter-label="Filter List by Payment Method"
+     filter-options="filterOptions"
+     active-criteria="searchCriteria"
+     on-search="search()"
+     on-clear="resetSearch()">
+</div>
 
 <!-- TODO: Add directives for payments and fees. -->
 <section class="receipts-list">
     <ul class="unstyled">
-        <li ng-repeat="receipt in receipts">
+        <li ng-repeat="receipt in results.Receipts">
             <header class="row-fluid">
                 <div class="span2"><strong>Receipt# </strong><span>{{unavailable.from.api}}</span></div>
                 <div class="span2">
