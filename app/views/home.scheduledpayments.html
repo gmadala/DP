@@ -1,47 +1,15 @@
+<div nxg-search
+     title="Scheduled Payment Search"
+     prompt="Enter Stock # or VIN"
+     filter-label="Filter List by Status"
+     filter-options="scheduledPayments.filterOptions"
+     active-criteria="scheduledPayments.searchCriteria"
+     on-search="scheduledPayments.search()"
+     on-clear="scheduledPayments.resetSearch()">
+</div>
 
-<form class="form-horizontal well search payments" novalidate ng-submit="scheduledPayments.search()">
-    <strong>Scheduled Payment Search</strong>
-    <div class="control-group">
-        <label class="control-label" for="keyword">Keyword</label>
-
-        <div class="controls">
-            <input type="text" id="keyword" placeholder="Enter Stock # or VIN" ng-model="scheduledPayments.criteria.query"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="startDate">Date Range</label>
-
-        <div class="controls">
-            <input type="date" id="startDate" ng-model="scheduledPayments.criteria.startDate"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="endDate">To</label>
-
-        <div class="controls">
-            <input type="date" id="endDate" ng-model="scheduledPayments.criteria.endDate"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="statusFilter">Filter List by Status</label>
-
-        <div class="controls">
-            <select id="statusFilter" ng-model="scheduledPayments.criteria.filter">
-                <option value="{{scheduledPayments.FILTER_BY_ALL}}">View All</option>
-                <option value="{{scheduledPayments.FILTER_BY_PROCESSED}}">Processed</option>
-                <option value="{{scheduledPayments.FILTER_BY_CANCELED}}">Canceled</option>
-                <option value="{{scheduledPayments.FILTER_BY_VOIDED}}">Voided</option>
-            </select>
-        </div>
-    </div>
-    <div class="control-group">
-        <input type="submit" value="search"/>
-    </div>
-    <button class="btn btn-small" ng-click="scheduledPayments.clearSearch(pay)">X Clear Search Results</button>
-</form>
-
-        <div class="alert" ng-show="outOfBusinessHours">Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.</div>
-        <div class="alert" ng-show="outOfBusinessHours">Note: No payment may be scheduled on an overdue loan, or a loan due today.</div>
+<div class="alert" ng-show="outOfBusinessHours">Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.</div>
+<div class="alert" ng-show="outOfBusinessHours">Note: No payment may be scheduled on an overdue loan, or a loan due today.</div>
 
 <!-- TODO: Add directives for payments and fees. -->
 <section class="schPayments-list" nxg-infinite-scroll="scheduledPayments.loadMoreData()" nxg-infinite-scroll-disabled="scheduledPayments.loading" nxg-fill-height>

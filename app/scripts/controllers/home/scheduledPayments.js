@@ -10,18 +10,34 @@ angular.module('nextgearWebApp')
 
       results: [],
 
-      criteria: {
-        query: '',
-        startDate: '',
-        endDate: '',
-        filter: ''
-      },
-
       FILTER_BY_ALL: '',
       FILTER_BY_SCHEDULED: ScheduledPaymentsSearch.FILTER_BY_SCHEDULED,
       FILTER_BY_PROCESSED: ScheduledPaymentsSearch.FILTER_BY_PROCESSED,
       FILTER_BY_CANCELED: ScheduledPaymentsSearch.FILTER_BY_CANCELED,
       FILTER_BY_VOIDED: ScheduledPaymentsSearch.FILTER_BY_VOIDED,
+
+      filterOptions: [
+        {
+          label: 'View All',
+          value: ''
+        },
+        {
+          label: 'Pending',
+          value: ScheduledPaymentsSearch.FILTER_BY_SCHEDULED
+        },
+        {
+          label: 'Processed',
+          value: ScheduledPaymentsSearch.FILTER_BY_PROCESSED
+        },
+        {
+          label: 'Cancelled',
+          value: ScheduledPaymentsSearch.FILTER_BY_CANCELED
+        },
+        {
+          label: 'Voided',
+          value: ScheduledPaymentsSearch.FILTER_BY_VOIDED
+        }
+      ],
 
       loadMoreData: function() {
         this.loading = true;
@@ -34,27 +50,23 @@ angular.module('nextgearWebApp')
       search: function() {
         this.loading = true;
         ScheduledPaymentsSearch.search(
-            this.criteria.query,
-            this.criteria.startDate,
-            this.criteria.endDate,
-            this.criteria.filter)
+            this.searchCriteria.query,
+            this.searchCriteria.startDate,
+            this.searchCriteria.endDate,
+            this.searchCriteria.filter)
           .then(function(results) {
             this.loading = false;
             this.results = results;
           }.bind(this));
       },
 
-      clearCriteria: function() {
-        this.criteria = {
-          query: '',
-          startDate: '',
-          endDate: '',
+      resetSearch: function () {
+        this.searchCriteria = {
+          query: null,
+          startDate: null,
+          endDate: null,
           filter: ''
         };
-      },
-
-      clearSearch: function() {
-        this.clearCriteria();
         this.search();
       },
 
@@ -87,8 +99,7 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.scheduledPayments.clearCriteria();
-    $scope.scheduledPayments.search();
+    $scope.scheduledPayments.resetSearch();
 
     BusinessHours.get().then(function(businessHours) {
       var currentTime = (new Date()).getTime(),

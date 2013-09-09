@@ -70,8 +70,8 @@ describe('Controller: ScheduledCtrl', function () {
     expect(scope.scheduledPayments.results).toBeDefined();
   });
 
-  it('should attach scheduledPayments.criteria to the scope', function () {
-    expect(scope.scheduledPayments.criteria).toBeDefined();
+  it('should attach scheduledPayments.searchCriteria to the scope', function () {
+    expect(scope.scheduledPayments.searchCriteria).toBeDefined();
   });
 
   it('should attach scheduledPayments.loading to the scope', function () {
