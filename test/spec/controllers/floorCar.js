@@ -1,17 +1,5 @@
 'use strict';
 
-function createPromiseMock(setting) {
-  return {
-    then: function(success, fail) {
-      if (setting.error !== null) {
-        fail(setting.error);
-      } else if (setting.resolution !== null) {
-        success(setting.resolution);
-      }
-    }
-  };
-}
-
 describe('Controller: FloorCarCtrl', function () {
 
   // load the controller's module
@@ -20,26 +8,28 @@ describe('Controller: FloorCarCtrl', function () {
   var FloorCarCtrl,
     scope,
     protect,
+    q,
     userMock,
     optionSetMock = [],
     dialogMock,
     floorplanMock,
     blackbookMock,
     vinLookupResult,
-    confirmSetting = {error: null, resolution: null},
-    createSetting = {error: null, resolution: null},
+    confirmResult,
+    createResult,
     paySellerOpts;
 
   // Initialize the controller and mocks
   beforeEach(inject(function ($controller, $rootScope, _protect_, $q) {
     scope = $rootScope.$new();
     protect = _protect_;
+    q = $q;
     paySellerOpts = [false, true];
     dialogMock = {
       dialog: function () {
         return {
           open: function () {
-            return createPromiseMock(confirmSetting);
+            return $q.resolved(confirmResult);
           }
         };
       },
@@ -51,14 +41,12 @@ describe('Controller: FloorCarCtrl', function () {
     };
     floorplanMock = {
       create: function () {
-        return createPromiseMock(createSetting);
+        return $q.resolved(createResult);
       }
     };
     blackbookMock = {
       fetchVehicleTypeInfoForVin: function () {
-        var def = $q.defer();
-        def.resolve(vinLookupResult);
-        return def.promise;
+        return $q.resolved(vinLookupResult);
       }
     };
 
@@ -225,14 +213,14 @@ describe('Controller: FloorCarCtrl', function () {
     it('should expose the new blackbook vehicle info on success', function () {
       vinLookupResult = {foo: 'bar'};
       scope.mileageExit(fakeModelCtrl);
-      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      scope.$apply();
       expect(scope.data.SelectedVehicle).toBe(vinLookupResult);
     });
 
     it('should cache the mileage used for the current blackbook info on success', function () {
       vinLookupResult = {foo: 'bar'};
       scope.mileageExit(fakeModelCtrl);
-      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      scope.$apply();
       expect(scope.data.$blackbookMileage).toBe('1200');
     });
 
@@ -240,7 +228,7 @@ describe('Controller: FloorCarCtrl', function () {
       vinLookupResult = $q.reject();
       scope.data.$blackbookMileage = '1800';
       scope.mileageExit(fakeModelCtrl);
-      scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+      scope.$apply();
       expect(scope.data.$blackbookMileage).toBe(null);
     }));
 
@@ -300,9 +288,10 @@ describe('Controller: FloorCarCtrl', function () {
       scope.form = {
         $valid: true
       };
-      confirmSetting.resolution = 'I want to edit some more';
+      confirmResult = 'I want to edit some more';
       spyOn(scope, 'reallySubmit');
       scope.submit();
+      scope.$apply();
       expect(scope.reallySubmit).not.toHaveBeenCalled();
     });
 
@@ -310,9 +299,10 @@ describe('Controller: FloorCarCtrl', function () {
       scope.form = {
         $valid: true
       };
-      confirmSetting.resolution = true;
+      confirmResult = true;
       spyOn(scope, 'reallySubmit');
       scope.submit();
+      scope.$apply();
       expect(scope.reallySubmit).toHaveBeenCalled();
     });
 
@@ -338,21 +328,23 @@ describe('Controller: FloorCarCtrl', function () {
 
     it('should open a message box and reset form data on success', function () {
       scope.data.foo = 'bar';
-      createSetting.resolution = 'it worked!';
+      createResult = 'it worked!';
       spyOn(dialogMock, 'messageBox').andCallThrough();
 
       scope.reallySubmit(protect);
+      scope.$apply();
 
       expect(dialogMock.messageBox).toHaveBeenCalled();
-      expect(angular.equals(scope.data, scope.defaultData)).toBe(true);
+      expect(scope.data.foo).not.toBeDefined();
     });
 
     it('should publish the error message on error and leave the form as-is', function () {
       scope.data.foo = 'bar';
-      createSetting.error = 'problem123';
+      createResult = q.reject('problem123');
       spyOn(dialogMock, 'messageBox').andCallThrough();
 
       scope.reallySubmit(protect);
+      scope.$apply();
 
       expect(scope.submitError).toBe('problem123');
       expect(dialogMock.messageBox).not.toHaveBeenCalled();

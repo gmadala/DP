@@ -13,16 +13,13 @@ describe('Controller: ReceiptsCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope, $q) {
     receiptsMock = {
       search: function () {
-        var deferred = $q.defer();
-        deferred.resolve({
+        return $q.resolved({
           'Success': true,
           'Message': null,
           'Data': {
             'Receipts': [{}]
           }
         });
-        $rootScope.$apply();
-        return deferred.promise;
       }
     };
 

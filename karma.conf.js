@@ -7,14 +7,14 @@ module.exports = function(karma) {
 
 		frameworks: ['jasmine'],
 
-		plugins: [
-            'karma-jasmine',
-            'karma-coverage',
-            'karma-ng-html2js-preprocessor',
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-script-launcher'
-		],
+    plugins: [
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-ng-html2js-preprocessor',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-script-launcher'
+    ],
 
 		// list of files / patterns to load in the browser
 		files: [
@@ -34,7 +34,8 @@ module.exports = function(karma) {
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			'app/scripts/directives/**/*.html',
-			'test/spec/**/*.js'
+			'test/spec/**/*.js',
+			'test/util/**/*.js'
 		],
 
 		preprocessors: {
