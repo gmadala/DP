@@ -1,43 +1,15 @@
 <section class="row-fluid">
     <section class="span9">
-        <form class="form-horizontal well search payments" novalidate ng-submit="search(searchData)">
-            <strong>Payments Search</strong>
-            <div class="control-group">
-                <label class="control-label" for="keyword">Keyword</label>
-
-                <div class="controls">
-                    <input type="text" id="keyword" placeholder="Enter Stock # or VIN" ng-model="searchData.Criteria"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="startDate">Date Range</label>
-
-                <div class="controls">
-                    <input type="date" id="startDate" ng-model="searchData.DueDateStart"/>
-                </div>
-                </div>
-            <div class="control-group">
-                <label class="control-label" for="endDate">To</label>
-
-                <div class="controls">
-                    <input type="date" id="endDate" ng-model="searchData.DueDateEnd"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="dateFilter">Filter List by Due Date</label>
-
-                <div class="controls">
-                    <select id="dateFilter" ng-model="filter">
-                        <option value="all">View All</option>
-                        <option value="today">Due Today</option>
-                        <option value="week">Due This Week</option>
-                    </select>
-                </div>
-            </div>
-            <div class="control-group">
-                <input type="submit" value="search"/>
-            </div>
-        </form><!-- end search form -->
+        <div nxg-search
+             title="Payment Search"
+             prompt="Enter Stock # or VIN"
+             filter-label="Filter List by Due Date"
+             filter-options="filterOptions"
+             active-criteria="searchCriteria"
+             show-date-range="searchCriteria.filter == 'range'"
+             on-search="search()"
+             on-clear="resetSearch()">
+        </div>
 
         <ul class="unstyled">
             <li ng-repeat="fee in results.fees">

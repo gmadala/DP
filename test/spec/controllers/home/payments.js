@@ -33,8 +33,4 @@ describe('Controller: PaymentsCtrl', function () {
     expect(scope.results).toBeDefined();
   });
 
-  it('should attach a list of curtailment to the scope', function () {
-    expect(scope.curtailment.length).toBe(1);
-  });
-
 });

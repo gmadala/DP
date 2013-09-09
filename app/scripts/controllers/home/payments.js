@@ -5,19 +5,7 @@ angular.module('nextgearWebApp')
 
     $scope.isCollapsed = true;
 
-    // dummy data
-    $scope.curtailment = [{
-      startDate: '6/5/2013',
-      dueDate: '8/5/2013',
-      principal: 10216.40,
-      principalPay: 1135.15,
-      interest: 34.52,
-      cpp: 87.79,
-      fees: 0,
-      totalPay: 1317.46,
-      highlight: ''
-    }];
-
+    // dummy data - payment queue
     $scope.queue = [{
       vin: 'CH224157',
       make: 'Toyota',
@@ -39,21 +27,43 @@ angular.module('nextgearWebApp')
       payment: 3544.49,
       year: 2013
     }];
-
     $scope.total = 3544.49*3;
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
+    // end dummy data
 
-    $scope.filter = $stateParams.filter || 'all';
-
-    $scope.searchData = {
-      Criteria: null,
-      DueDateStart: null,
-      DueDateEnd: null
-    };
+    $scope.filterOptions = [
+      {
+        label: 'View All',
+        value: 'all'
+      },
+      {
+        label: 'Due Today',
+        value: 'today'
+      },
+      {
+        label: 'Due This Week',
+        value: 'week'
+      },
+      {
+        label: 'Date Range',
+        value: 'range'
+      }
+    ];
 
     $scope.search = function(searchData) {
       $scope.results = Payments.search(searchData);
     };
-    $scope.search();
+
+    $scope.resetSearch = function (initialFilter) {
+      $scope.searchCriteria = {
+        query: null,
+        startDate: null,
+        endDate: null,
+        filter: initialFilter || 'all'
+      };
+      $scope.search();
+    };
+
+    $scope.resetSearch($stateParams.filter);
 
   });

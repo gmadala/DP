@@ -4,33 +4,48 @@ angular.module('nextgearWebApp')
   .directive('nxgSearch', function () {
     return {
       templateUrl: 'scripts/directives/nxgSearch/nxgSearch.html',
-
-
-      //dumps placeholder values into any directive call with attribute value of "placeholder".
       scope: {
-        searchType: '@nxgSearch'
+        title: '@',
+        prompt: '@',
+        filterLabel: '@',
+        filterOptions: '=', // array of objects with properties label, value
+        activeCriteria: '=', // object with properties: query, startDate, endDate, filter
+        showDateRange: '&',
+        onSearch: '&',
+        onClear: '&'
       },
-      controller: function($scope) {
-        var filterOptions = {
-          filterSelected: { selected: 'null'},
-          placeholder: {
-            title: 'Placeholder',
-            keywordPlaceholder: 'Placeholder',
-            filterLabel: 'Placeholder',
-            filterOptions: [
-              {label: 'None', value: 'null'},
-              {label: 'Placeholder', value: 'placeholder'},
-            ]
-          },
-        };
-        //force objects to be updated and available.
-        $scope.$watch('filterType', function() {
-          $scope.title = filterOptions[$scope.searchType].title;
-          $scope.keywordPlaceholder = filterOptions[$scope.searchType].keywordPlaceholder;
-          $scope.filterSelected = filterOptions.filterSelected;
-          $scope.filterLabel = filterOptions[$scope.searchType].filterLabel;
-          $scope.filterOptions = filterOptions[$scope.searchType].filterOptions;
-        });
-      }
+      controller: 'NxgSearchCtrl'
     };
+  })
+  .controller('NxgSearchCtrl', function ($scope, $attrs) {
+
+    $scope.dateRangeShown = true;
+    if (angular.isDefined($attrs.showDateRange)) {
+      $scope.$watch($scope.showDateRange, function (value) {
+        $scope.dateRangeShown = value;
+      });
+    }
+
+    $scope.dateRangeValid = function (startDate, endDate) {
+      if (!$scope.dateRangeShown) { return true; }
+      if (startDate && endDate) {
+        return startDate.getTime() <= endDate.getTime();
+      }
+      return true;
+      // validation is permissive in that startDate, endDate, or both can be missing.
+      // you should substitute an appropriate default value for these if the user doesn't specify
+    };
+
+    $scope.search = function () {
+      $scope.validity = angular.copy($scope.searchForm);
+      if (!$scope.searchForm.$valid) {
+        return;
+      }
+      $scope.onSearch();
+    };
+
+    $scope.clear = function () {
+      $scope.onClear();
+    };
+
   });
