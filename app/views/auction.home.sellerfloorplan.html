@@ -1,4 +1,12 @@
-<div nxg-search="placeholder"></div>
+<div nxg-search
+     title="Floorplan Search"
+     prompt="Enter VIN"
+     filter-label="Filter List by Status"
+     filter-options="filterOptions"
+     active-criteria="searchCriteria"
+     on-search="search()"
+     on-clear="resetSearch()">
+</div>
 
 <section>
     <ul class="unstyled">

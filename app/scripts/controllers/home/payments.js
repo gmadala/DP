@@ -50,8 +50,8 @@ angular.module('nextgearWebApp')
       }
     ];
 
-    $scope.search = function(searchData) {
-      $scope.results = Payments.search(searchData);
+    $scope.search = function() {
+      $scope.results = Payments.search($scope.searchCriteria);
     };
 
     $scope.resetSearch = function (initialFilter) {
