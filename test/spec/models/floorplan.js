@@ -14,10 +14,6 @@ describe('Model: Floorplan', function () {
     floorplan = Floorplan;
   }));
 
-  it('should exist', function () {
-    expect(!!floorplan).toBe(true);
-  });
-
   describe('create method', function () {
 
     var sentData,
@@ -105,6 +101,290 @@ describe('Model: Floorplan', function () {
       expect(sentData.LineOfCreditId).toBe(null);
       expect(sentData.BuyerBankAccountId).toBe(null);
       expect(sentData.SellerBusinessId).toBe(null);
+    });
+
+  });
+
+  describe('filterValues property', function () {
+
+    it('should have the expected values', function () {
+      expect(floorplan.filterValues).toBeDefined();
+      expect(floorplan.filterValues.ALL).toBeDefined();
+      expect(floorplan.filterValues.PENDING).toBeDefined();
+      expect(floorplan.filterValues.DENIED).toBeDefined();
+      expect(floorplan.filterValues.APPROVED).toBeDefined();
+      expect(floorplan.filterValues.COMPLETED).toBeDefined();
+      expect(floorplan.filterValues.PENDING_NOT_PAID).toBeDefined();
+      expect(floorplan.filterValues.DENIED_NOT_PAID).toBeDefined();
+      expect(floorplan.filterValues.APPROVED_PAID).toBeDefined();
+      expect(floorplan.filterValues.APPROVED_NOT_PAID).toBeDefined();
+      expect(floorplan.filterValues.COMPLETED_PAID).toBeDefined();
+      expect(floorplan.filterValues.COMPLETED_NOT_PAID).toBeDefined();
+      expect(floorplan.filterValues.NO_TITLE_PAID).toBeDefined();
+    });
+
+  });
+
+  describe('search method', function () {
+
+    var paginate,
+      defaultCriteria = {
+        query: '',
+        startDate: null,
+        endDate: null,
+        filter: ''
+      },
+      callParams,
+      extractParams = function(method, url, data, headers) {
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
+        var match,
+          pl     = /\+/g,  // Regex for replacing addition symbol with a space
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
+          query = url.substring(url.indexOf('?') + 1);
+
+        callParams = {};
+
+        while (match = search.exec(query)) {
+          callParams[decode(match[1])] = decode(match[2]);
+        }
+
+        return [200, {
+          Success: true,
+          Data: {
+            FloorplanRowCount: 20
+          }
+        }, {}];
+      };
+
+    beforeEach(inject(function (Paginate) {
+      paginate = Paginate;
+      httpBackend.whenGET(/\/floorplan\/search.*/).respond(extractParams);
+      defaultCriteria.filter = floorplan.filterValues.ALL;
+    }));
+
+    it('should call the expected API path', function () {
+      httpBackend.expectGET(/\/floorplan\/search.*/);
+      floorplan.search(defaultCriteria);
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should ask for items sorted by most recent first', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('FlooringDate');
+      expect(callParams.OrderDirection).toBe('DESC');
+    });
+
+    it('should provide a page size', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(isNaN(parseInt(callParams.PageSize, 10))).toBe(false);
+    });
+
+    it('should start on the first page if a paginator is not provided', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.PageNumber).toBe(paginate.firstPage().toString());
+    });
+
+    it('should start on the next page if a paginator is provided', function () {
+      floorplan.search(defaultCriteria, {
+        nextPage: function () {
+          return 11;
+        }
+      });
+      httpBackend.flush();
+      expect(callParams.PageNumber).toBe('11');
+    });
+
+    it('should add a paginator to the results', function () {
+      var output = {};
+      floorplan.search(defaultCriteria).then(function (results) {
+        output = results;
+      });
+      httpBackend.flush();
+      expect(output.$paginator).toBeDefined();
+      expect(output.$paginator.nextPage()).toBe(2);
+    });
+
+    it('should send the search term as Keyword', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {query: 'foo'}));
+      httpBackend.flush();
+      expect(callParams.Keyword).toBe('foo');
+    });
+
+    it('should not send startDate and endDate if not provided', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.StartDate).not.toBeDefined();
+      expect(callParams.EndDate).not.toBeDefined();
+    });
+
+    it('should send startDate and endDate if provided', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {
+        startDate: new Date(2013, 1, 1),
+        endDate: new Date(2013, 2, 1)
+      }));
+      httpBackend.flush();
+      expect(callParams.StartDate).toBe('2013-02-01');
+      expect(callParams.EndDate).toBe('2013-03-01');
+    });
+
+    it('should set no filter flags to false for ALL filter', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.SearchPending).not.toBe('false');
+      expect(callParams.SearchApproved).not.toBe('false');
+      expect(callParams.SearchCompleted).not.toBe('false');
+      expect(callParams.SearchDenied).not.toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but pending + title + paid flags to false for PENDING filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.PENDING}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).not.toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but denied + title + paid flags to false for DENIED filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.DENIED}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).not.toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but approved + title + paid filter flags to false for APPROVED filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.APPROVED}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).not.toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but completed + title + paid flags to false for COMPLETED filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.COMPLETED}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).not.toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but pending + title + not-paid flags to false for PENDING_NOT_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.PENDING_NOT_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).not.toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but denied + title + not-paid flags to false for DENIED_NOT_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.DENIED_NOT_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).not.toBe('false');
+      expect(callParams.SearchPaid).toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but approved + title + yes-paid flags to false for APPROVED_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.APPROVED_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).not.toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but approved + title + not-paid flags to false for APPROVED_NOT_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.APPROVED_NOT_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).not.toBe('false');
+      expect(callParams.SearchCompleted).toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but completed + title + yes-paid flags to false for COMPLETED_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.COMPLETED_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).not.toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set all but completed + title + not-paid flags to false for COMPLETED_NOT_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.COMPLETED_NOT_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).toBe('false');
+      expect(callParams.SearchApproved).toBe('false');
+      expect(callParams.SearchCompleted).not.toBe('false');
+      expect(callParams.SearchDenied).toBe('false');
+      expect(callParams.SearchPaid).toBe('false');
+      expect(callParams.SearchUnPaid).not.toBe('false');
+      expect(callParams.SearchHasTitle).not.toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
+    });
+
+    it('should set yes-title and not-paid flags to false for NO_TITLE_PAID filter', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {filter: floorplan.filterValues.NO_TITLE_PAID}));
+      httpBackend.flush();
+      expect(callParams.SearchPending).not.toBe('false');
+      expect(callParams.SearchApproved).not.toBe('false');
+      expect(callParams.SearchCompleted).not.toBe('false');
+      expect(callParams.SearchDenied).not.toBe('false');
+      expect(callParams.SearchPaid).not.toBe('false');
+      expect(callParams.SearchUnPaid).toBe('false');
+      expect(callParams.SearchHasTitle).toBe('false');
+      expect(callParams.SearchNoTitle).not.toBe('false');
     });
 
   });

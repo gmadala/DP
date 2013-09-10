@@ -1,40 +1,40 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionSellerFloorplanCtrl', function($scope, $dialog) {
+  .controller('AuctionSellerFloorplanCtrl', function($scope, $dialog, Floorplan) {
 
     $scope.filterOptions = [
       {
         label: 'View All',
-        value: 'all'
+        value: Floorplan.filterValues.ALL
       },
       {
         label: 'Pending/Not Paid',
-        value: 'pending'
+        value: Floorplan.filterValues.PENDING_NOT_PAID
       },
       {
         label: 'Denied/Not Paid',
-        value: 'denied'
+        value: Floorplan.filterValues.DENIED_NOT_PAID
       },
       {
         label: 'Approved/Paid',
-        value: 'approvedPaid'
+        value: Floorplan.filterValues.APPROVED_PAID
       },
       {
         label: 'Approved/Not Paid',
-        value: 'approvedNotPaid'
+        value: Floorplan.filterValues.APPROVED_NOT_PAID
       },
       {
         label: 'Completed/Paid',
-        value: 'completedPaid'
+        value: Floorplan.filterValues.COMPLETED_PAID
       },
       {
         label: 'Completed/Not Paid',
-        value: 'completedNotPaid'
+        value: Floorplan.filterValues.COMPLETED_NOT_PAID
       },
       {
         label: 'No Title/Paid',
-        value: 'noTitlePaid'
+        value: Floorplan.filterValues.NO_TITLE_PAID
       }
     ];
 

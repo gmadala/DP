@@ -1,30 +1,30 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan) {
 
     $scope.isCollapsed = true;
 
     $scope.filterOptions = [
       {
         label: 'View All',
-        value: 'all'
+        value: Floorplan.filterValues.ALL
       },
       {
         label: 'Pending',
-        value: 'pending'
+        value: Floorplan.filterValues.PENDING
       },
       {
         label: 'Denied',
-        value: 'denied'
+        value: Floorplan.filterValues.DENIED
       },
       {
         label: 'Approved',
-        value: 'approved'
+        value: Floorplan.filterValues.APPROVED
       },
       {
         label: 'Completed',
-        value: 'completed'
+        value: Floorplan.filterValues.COMPLETED
       }
     ];
 
