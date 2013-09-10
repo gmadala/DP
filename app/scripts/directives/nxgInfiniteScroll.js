@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
           container = elem;
           scrollDistance = 0;
 
-          if (attrs.nxgInfiniteScrollDistance !== null) {
+          if (attrs.nxgInfiniteScrollDistance) {
             scope.$watch(attrs.nxgInfiniteScrollDistance, function(value) {
               value = parseInt(value, 10);
               if (!isNaN(value)) {
@@ -28,7 +28,7 @@ angular.module('nextgearWebApp')
           }
           scrollEnabled = true;
           checkWhenEnabled = false;
-          if (attrs.nxgInfiniteScrollDisabled !== null) {
+          if (attrs.nxgInfiniteScrollDisabled) {
             scope.$watch(attrs.nxgInfiniteScrollDisabled, function(value) {
               scrollEnabled = !value;
               if (scrollEnabled && checkWhenEnabled) {
