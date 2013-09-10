@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
       scope: {
         data: '=data',
         validity: '=',
-        form: '='
+				form: '=form',
       },
       controller: function($scope) {
 
@@ -22,7 +22,7 @@ angular.module('nextgearWebApp')
 				$scope.isRange = false;
 				$scope.isSpecific = false;
 
-				$scope.selectData = {
+				$scope.data.selectData = {
 					'type' : 'select',
 					'value' : 'None',
 					'values' : [ 'None', 'Range of Stock #\'s', 'Specific Stock #\'s']
@@ -32,7 +32,7 @@ angular.module('nextgearWebApp')
 				$scope.selectChange = function() {
 
 					/* Show the empty range entry fields as needed */
-					if ($scope.selectData.value === $scope.selectData.values[1]) {
+					if ($scope.data.selectData.value === $scope.data.selectData.values[1]) {
 						$scope.isRange = true;
 						$scope.isSpecific = false;
 						$scope.data.rangeStart = '';
@@ -41,7 +41,7 @@ angular.module('nextgearWebApp')
 					}
 
 					/* Show the specific range field as needed */
-					if ($scope.selectData.value === $scope.selectData.values[2]) {
+					if ($scope.data.selectData.value === $scope.data.selectData.values[2]) {
 						$scope.isRange = false;
 						$scope.isSpecific = true;
 						$scope.data.stockNos = '';

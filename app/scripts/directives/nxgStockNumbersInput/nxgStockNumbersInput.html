@@ -4,8 +4,8 @@
 	    <div class="controls">
 	        <select id="paidOffStockNo"
 	        	name="paidOffStockNo"
-				ng-model="selectData.value"
-				ng-options="v for v in selectData.values"
+				ng-model="data.selectData.value"
+				ng-options="v for v in data.selectData.values"
 				ng-change="selectChange()" />
 	    </div>
 	</div>
@@ -15,14 +15,22 @@
 		<div class="control-group"
 		    <label class="control-label" for="paidOffRangeStart">Stock # Range Start</label>
 		    <div class="controls">
-		        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.rangeStart" />
+		        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.rangeStart" ng-required="isRange"/>
 		    </div>
+			<label for="paidOffRangeStart" class="text-error"
+				ng-show="form.paidOffRangeStart.$error.required">
+				Please enter a Start Stock Number
+			</label>
 		</div>
 		<div class="control-group"
 		    <label class="control-label" for="paidOffRangeEnd">Stock # Range End</label>
 		    <div class="controls">
-				<input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" />
+				<input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" ng-required="isRange"/>
 		    </div>
+		    <label for="paidOffRangeEnd" class="text-error"
+				ng-show="form.paidOffRangeEnd.$error.required">
+				Please enter an End Stock Number
+			</label>
 		</div>
 	</div>
 	<!-- -->
@@ -32,8 +40,12 @@
 		<div class="control-group" 
 		    <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
 		    <div class="controls">
-		        <input type="text" class="text" id="paidOffStockNos" name="paidOffStockNos" ng-model="data.stockNos">
+		        <input type="text" class="text" id="paidOffStockNos" name="paidOffStockNos" ng-model="data.stockNos" ng-required="isSpecific">
 		    </div>
+		     <label for="paidOffStockNos" class="text-error"
+				ng-show="form.paidOffStockNos.$error.required">
+				Please enter one or more Stock Numbers
+			</label>
 		</div>
 	</div>
 	<!-- -->

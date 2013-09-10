@@ -67,7 +67,7 @@ angular.module('nextgearWebApp')
           var startDate = api.toShortISODate($scope.data.paidOffStartDate);
           var endDate = api.toShortISODate($scope.data.paidOffEndDate);
 
-          var strUrl = 'report/paidoffsumary?startDate=' + startDate + '&endDate=' + endDate;
+          var strUrl = 'report/paidoffsummary?startDate=' + startDate + '&endDate=' + endDate;
 
           if ($scope.data.paidOffVinFilter) {
             strUrl += '&VIN=' + encodeURIComponent($scope.data.paidOffVinFilter);
