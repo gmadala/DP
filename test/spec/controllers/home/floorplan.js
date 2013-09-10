@@ -20,8 +20,4 @@ describe('Controller: FloorplanCtrl', function () {
     expect(scope.results.length).toBe(1);
   });
 
-  it('should attach a list of curtailment to the scope', function () {
-    expect(scope.curtailment.length).toBe(1);
-  });
-
 });

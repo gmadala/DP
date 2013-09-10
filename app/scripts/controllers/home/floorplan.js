@@ -42,18 +42,6 @@ angular.module('nextgearWebApp')
         floored: '5/10/2013',
         seller: 'MAFS Pennsylvania'
       }];
-
-      $scope.curtailment = [{
-        startDate: '6/5/2013',
-        dueDate: '8/5/2013',
-        principal: 10216.40,
-        principalPay: 1135.15,
-        interest: 34.52,
-        cpp: 87.79,
-        fees: 0,
-        totalPay: 1317.46,
-        highlight: ''
-      }];
     };
 
     $scope.resetSearch = function (initialFilter) {
