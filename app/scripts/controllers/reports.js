@@ -8,10 +8,6 @@ angular.module('nextgearWebApp')
     $scope.currentReports = [
       { 'title': 'Receivable Detail (PDF)',
         'url': '/report/getReceivableDetail'
-      },
-      { 'title': 'Upcoming Curtailment / Payoff Quote (PDF)',
-        'date': 'MMDDYYYY',
-        'url': 'path/to/link'
       }
     ];
 
@@ -93,6 +89,27 @@ angular.module('nextgearWebApp')
           );
 
         };
+
+    $scope.viewCurtailment = function() {
+
+          // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+          $scope.curtailmentFormValidity = angular.copy($scope.curtailmentForm);
+
+          if (!$scope.curtailmentForm.$valid) {
+            return false;
+          }
+
+          var date = api.toShortISODate($scope.data.curtailmentDate);
+          var strUrl = 'report/getupcomingcurtailmentpayments/' + date;
+
+          console.log(strUrl);
+
+          window.open(
+            strUrl,
+            '_blank'  // open a new window every time
+          );
+        };
+
 
     $scope.trimCommasAndWhitespace = function(value) {
 

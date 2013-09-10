@@ -13,6 +13,29 @@
 	                    <a target="_blank" ng-href="{{ report.url }}">{{ report.title }}</a>
 	                </li>
 	            </ul>
+
+	            <hr />
+
+	            <form class="form-inline" name="curtailmentForm">
+		            <h4>Upcoming Curtailment / Payoff Quote (PDF)</h4>
+		            <div class="control-group">
+		                <label class="control-label" for="curtailmentDate">Date</label>
+		                <div class="controls">
+							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate"
+								required />
+		                </div>
+		                 <label for="curtailmentDate" class="text-error"
+			                   ng-show="curtailmentFormValidity.curtailmentDate.$error.required">
+			              Please select a Date
+			            </label>
+					</div>
+	                <div class="control-group">
+	                    <div class="controls">
+	                        <button type="submit" class="btn" ng-click="viewCurtailment()">View Report</button>
+	                    </div>
+	                </div>
+		        </form>
+
 	        </div>
 
 		    <div class="span7">
