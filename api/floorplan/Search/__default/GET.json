@@ -1,0 +1,40 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "FloorplanRowCount": 20,
+    "Floorplans": [
+      {
+        "$__SECTION 1__": "----- Common data -----",
+        "FloorplanId": "abc123",
+        "FloorplanStatusName": "Approved",
+        "StockNumber": 106423,
+        "UnitVin": "CH22415739545567",
+        "UnitYear": 2008,
+        "UnitMake": "Toyota",
+        "UnitModel": "Sequoia",
+        "UnitStyle": "Limited",
+        "Color": "Tan",
+        "FlooringDate": "2013-05-10",
+        "TitleImageAvailable": true,
+
+        "$__SECTION 2__": "----- Dealer-specific data -----",
+        "UnitPurchaseDate": "2013-05-10",
+        "LastPaymentDate": "2013-06-01",
+        "TitleReleaseDate": "2013-05-15",
+        "TitleReleaseLocation": "Chase bank",
+        "SellerName": "MAFS Pennsylvania",
+
+        "$__SECTION 3__": "----- Auction-specific data -----",
+        "DisbursmentDate": "2013-05-12",
+        "PurchaseAmount": 18216.4,
+        "TitleNumber": "PD-235345",
+        "TitleState": "NY",
+        "TitleLocation": "Buyer",
+        "BuyerName": "Tricolor Auto",
+        "ConsignerTicketNumber": "abcdefg-3245346",
+        "TitleEditable": false
+      }
+    ]
+  }
+}
