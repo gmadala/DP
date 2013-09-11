@@ -5,6 +5,16 @@ angular.module('nextgearWebApp')
 
     $scope.isCollapsed = true;
 
+    $scope.getVehicleDescription = function (floorplan) {
+      return [
+        floorplan.UnitYear,
+        floorplan.UnitMake,
+        floorplan.UnitModel,
+        floorplan.UnitStyle,
+        floorplan.Color
+      ].join(' ');
+    };
+
     $scope.filterOptions = [
       {
         label: 'View All',
@@ -28,20 +38,37 @@ angular.module('nextgearWebApp')
       }
     ];
 
+    $scope.data = {
+      results: [],
+      loading: false,
+      paginator: null
+    };
+
     $scope.search = function() {
-      // dummy data
-      $scope.results = [{
-        vin: 'CH224157',
-        vehicle: '2008 Toyota Sequoia Limited Tan',
-        stockNo: '1064',
-        status: 'Processed',
-        purchased: '5/10/2013',
-        lastPay: '6/1/2013',
-        titleRelease: '5/15/2013',
-        releasedTo: 'Buyer',
-        floored: '5/10/2013',
-        seller: 'MAFS Pennsylvania'
-      }];
+      // search means "start from the beginning with current criteria"
+      $scope.data.paginator = null;
+      $scope.data.results.length = 0;
+      $scope.fetchNextResults();
+    };
+
+    $scope.fetchNextResults = function () {
+      var paginator = $scope.data.paginator;
+      if (paginator && !paginator.hasMore()) {
+        return;
+      }
+
+      // get the next applicable batch of results
+      $scope.data.loading = true;
+      Floorplan.search($scope.searchCriteria, paginator).then(
+        function (result) {
+          $scope.data.loading = false;
+          $scope.data.paginator = result.$paginator;
+          // fast concatenation of results into existing array
+          Array.prototype.push.apply($scope.data.results, result.Floorplans);
+        }, function (/*error*/) {
+          $scope.data.loading = false;
+        }
+      );
     };
 
     $scope.resetSearch = function (initialFilter) {
@@ -49,7 +76,7 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: initialFilter || 'all'
+        filter: initialFilter || Floorplan.filterValues.ALL
       };
       $scope.search();
     };
