@@ -28,6 +28,7 @@
 <div class="modal-body"
      nxg-infinite-scroll="businessSearch.loadMoreData()"
      nxg-infinite-scroll-disabled="businessSearch.loading"
+     nxg-infinite-scroll-show-indicator="businessSearch.loading"
      nxg-scroll-container>
   <table>
     <tbody>
@@ -41,9 +42,6 @@
         <td>Grand Prarie</td>
         <td>TX</td>
         <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
-      </tr>
-      <tr ng-show="businessSearch.loading">
-        <td colspan="6">Loading data...</td>
       </tr>
     </tbody>
   </table>

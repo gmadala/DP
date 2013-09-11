@@ -34,13 +34,22 @@ angular.module('nextgearWebApp')
 
       return {
         link: function(scope, elem, attrs) {
-          var checkWhenEnabled, handler, scrollDistance, scrollEnabled, container;
+          var checkWhenEnabled, handler, scrollDistance, scrollEnabled, container, indicator;
 
           if (!angular.isDefined(attrs.nxgScrollContainer) || attrs.nxgScrollContainer === 'false') {
             $window = angular.element($window);
             container = $window;
           } else {
             container = elem;
+          }
+
+          indicator = angular.element('<div class="nxg-infinite-scroll-indicator"></div>');
+          elem.append(indicator);
+
+          if (attrs.nxgInfiniteScrollShowIndicator !== null) {
+            scope.$watch(attrs.nxgInfiniteScrollShowIndicator, function(value) {
+              indicator.css('display', value ? 'block' : 'none');
+            });
           }
 
           scrollDistance = 0;
