@@ -19,9 +19,16 @@
          url('../fonts/nextgeariconfont-webfont.svg#NextGear') format('svg');
 }
 
+.nxg-icon-eye-btn-mini {
+  display: inline-block;
+  font-size: 28px;
+  font-family: 'NextGearIcons';
+  font-style: normal;
+}
+
 body, html {
   min-width: 940px;
-  color: #555;
+  color: #666666;
 }
 
 .container-fluid {
@@ -33,7 +40,7 @@ body, html {
 
 h4 {
   font-weight: 300;
-  color: #08c;
+  color: #17659D;
 }
 
 .nxg-fade {

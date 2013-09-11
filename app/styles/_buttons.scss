@@ -1,0 +1,64 @@
+@import "compass/css3/images";
+
+.btn {
+  box-sizing: border-box;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #17659D;
+  font-weight: bold;
+  border: none;
+  border-bottom: 1px solid #9c9c9c;
+  text-shadow: none;
+  background-color: #dadada;
+  @include background(linear-gradient(#f0f0f0, #dadada));
+  &:hover, &:focus {
+    color: #005b88;
+    background-color: #d5d5d5;
+    @include background(linear-gradient(#eaeaea, #c4c4c4));
+    background-position: 0;
+  }
+  &:active, &.active {
+    color: #005b88;
+    border: none;
+    margin-top: 1px;
+  }
+  &.disabled {
+    @include opacity(65);
+    &:hover {
+      @extend .disabled;
+    }
+  }
+}
+
+.btn-secondary {
+  color: #666666;
+  background-color: #dadada;
+  @include background(linear-gradient(#f0f0f0, #dadada));
+  &:hover, &:focus {
+    color: #4c4c4c;
+    background-color: #d5d5d5;
+    @include background(linear-gradient(#eaeaea, #c4c4c4));
+  }
+  &:active, &.active {
+    color: #4c4c4c;
+  }
+}
+
+.btn-primary {
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  border-bottom: 1px solid #9c9c9c;
+  background-color: #4078a0;
+  @include background-image(linear-gradient(#76a0bb, #155287));
+  &:hover, &:focus {
+    color: #e5e5e5;
+    background-color: #295f8a;
+    @include background-image(linear-gradient(#39739b, #1b4b7a));
+  }
+  &:active, &.active {
+    color: #e5e5e5;
+    @include background-image(linear-gradient(#39739b, #1b4b7a));
+  }
+}

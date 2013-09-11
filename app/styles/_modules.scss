@@ -62,7 +62,7 @@
 }
 
 .summaries .well-out, .payment-summary .well-out {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .summaries {
@@ -70,8 +70,6 @@
     height: 14em;
     position: relative;
     .btn {
-      color: #08c;
-      font-weight: bold;
       position: absolute;
       margin: 1em;
       bottom: 0;
@@ -80,16 +78,22 @@
   }
 }
 
+.summary.credit {
+  .well-out {
+    padding-left: 10px;
+  }
+}
+
 .chart-summary-table {
-  color: #555;
   font-weight: bold;
   float: right;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 20px;
   margin-bottom: 3px;
   tr {
     td:last-child {
       text-align: right;
+      font-size: 13px;
     }
   }
   td.taller {
@@ -113,10 +117,10 @@
 //overly specific rule to over-write bootstrap's grid for these two modules.
 .summaries {
   .unapplied-funds.adjacent {
-    width: 22.75%;
+    width: 21.5%;
   }
   .floorplan.adjacent {
-    width: 14.75%;
+    width: 16%;
   }
 }
 
@@ -126,6 +130,7 @@
   }
   .pull-right {
     font-weight: bold;
+    font-size: 13px;
   }
 }
 .floorplan {
@@ -135,6 +140,7 @@
     li {
       height: 28px;
       .item-total {
+        font-weight: bold;
         @include border-radius(7px);
         width: 28px;
         text-align: center;
@@ -159,6 +165,9 @@
     }
     a {
       text-decoration: underline;
+    }
+    tr td:nth-child(3) {
+      font-size: 13px;
     }
   }
 }

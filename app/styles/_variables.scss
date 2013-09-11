@@ -47,13 +47,13 @@ $base-font-size: 12px;
 $base-line-height: 1.2;
 
 // Text
-$p-size: 1rem; // 12px
-$h1-size: 3rem; // 36px
-$h2-size: 2.5rem; // 30px
-$h3-size: 2rem; // 24px
-$h4-size: 1.66rem; // 20px
-$h5-size: 1.25rem; // 14px
-$h6-size: 1rem; // 12px
+$p-size: 1em; // 12px
+$h1-size: 3em; // 36px
+$h2-size: 2.5em; // 30px
+$h3-size: 2em; // 24px
+$h4-size: 1.66em; // 20px
+$h5-size: 1.25em; // 14px
+$h6-size: 1em; // 12px
 
 $p-line-height: 120%;
 
@@ -64,74 +64,3 @@ $h3-color: #434343;
 $h4-color: #434343;
 $h5-color: #434343;
 $h6-color: #434343;
-
-// Links
-$link-color: #434343;
-$link-hover-color: #434343;
-
-// Navigation
-$nav-text: #B5B5B5;
-$nav-contact-text: #BBB;
-
-// BUTTONS
-// Primary enabled: light text on dark blue
-$btn-text-enabled: #EBEBF0;
-$btn-color-enabled: #135889;
-$btn-stroke-enabled: #15436D;
-
-// Primary enabled and active (hovered): light text on darker blue
-$btn-text-active: #EBEBF0;
-$btn-color-active: #0E4A74;
-$btn-stroke-active: #0B3D61;
-
-// Primary disabled
-$btn-text-disabled: #666;
-$btn-color-disabled: #999;
-$btn-stroke-disabled: #757575;
-
-// Secondary enabled:
-$btn2-text-enabled: #EBEBF0;
-$btn2-color-enabled: #555;
-$btn2-stroke-enabled: #444;
-
-// Secondary enabled & active:
-$btn2-color-active: #444;
-$btn2-stroke-active: #333;
-
-// Tertiary (Green) enabled:
-$btn3-text-enabled: $white;
-$btn3-color-enabled: #0BAE00;
-$btn3-stroke-enabled: #24B200;
-
-// Tertiary enabled & active
-$btn3-color-active: #1D8900;
-$btn3-stroke-active: #1C9500;
-
-// Tertiary disabled:
-$btn3-text-disabled: #CCC;
-$btn3-color-disabled: #999;
-$btn3-stroke-disabled: #666;
-
-// Forms
-$input-placeholder-text: #999;
-$input-text: #434343;
-$label-text: #999;
-$input-stroke-color: #ddd;
-
-$input-bkgd: #fff;
-$input-bkgd-disabled: #ddd;
-
-// Layering
-$z-modal: 500;
-$z-modal-backdrop: 450;
-
-// Table Lists (Title Vault, Payments)
-$tl-bkgd: #666666;
-$tl-text: #DDD;
-$tl-bkgd-active: #444;
-$tl-text-active: #FFF;
-
-$tl-row-border-bottom: #333;
-$tl-border:#777;
-$tl-border-right: #4B4B4B;
-$tl-border-top: #545454;

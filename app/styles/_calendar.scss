@@ -27,6 +27,13 @@
   height: 120px;
 }
 
+.fc-day.closed {
+  background-color: #eaeaea;
+  .fc-day-number {
+    @include opacity(30);
+  }
+}
+
 .fc-widget-header.fc-day-header, .fc-widget-content {
   color: #535353;
   font-size: 12px;
