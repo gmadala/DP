@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgUpcomingCalendar', function () {
+  .directive('nxgUpcomingCalendar', function (moment) {
     return {
       template: '<div ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
       restrict: 'AC',
@@ -77,6 +77,10 @@ angular.module('nextgearWebApp')
               var dayEvent = angular.element(value);
               dayEvent.html(dayEvent.text());
             });
+            // add styling hook for events that are today
+            if (moment().isSame(event.start, 'day')) {
+              element.addClass('today');
+            }
             element.find('.fc-event-inner').append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
             return element;
           }
