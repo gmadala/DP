@@ -71,7 +71,7 @@
                 </tr>
                 </thead>
                 <tr ng-repeat="payment in dashboardData.UpcomingPaymentsList">
-                    <td title="Due Date">{{ payment.DueDate | moment:'M/D/YYYY'  }}</td>
+                    <td title="Due Date">{{ payment.DueDate | moment  }}</td>
                     <td title="Description">{{ payment.Description }}</td>
                     <td title="Payoff Due"><span ng-show="payment.PayoffDue">{{ payment.PayoffDue | currency }}</span></td>
                     <td title="Payment Due"><span ng-show="!payment.PayoffDue">{{ payment.PaymentDue | currency }}</span></td>
@@ -226,7 +226,7 @@
         <div class="well-out">
           <table>
               <tr ng-repeat="receipt in dashboardData.Receipts">
-                  <td>{{ receipt.ReceiptDate | moment:'M/D/YYYY' }}</td>
+                  <td>{{ receipt.ReceiptDate | moment }}</td>
                   <td>#{{ receipt.ReceiptNumber }}</td>
                   <td><b>{{ receipt.ReceiptAmount | currency }}<b></td>
                   <td><a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a></td>
