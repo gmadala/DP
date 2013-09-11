@@ -135,7 +135,7 @@ describe('Model: Floorplan', function () {
         filter: ''
       },
       callParams,
-      extractParams = function(method, url, data, headers) {
+      extractParams = function(method, url) {
         // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
         var match,
           pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -208,7 +208,13 @@ describe('Model: Floorplan', function () {
       expect(output.$paginator.nextPage()).toBe(2);
     });
 
-    it('should send the search term as Keyword', function () {
+    it('should NOT send a Keyword if search term is empty/null', function () {
+      floorplan.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.Keyword).not.toBeDefined();
+    });
+
+    it('should send the search term as Keyword, if present', function () {
       floorplan.search(angular.extend({}, defaultCriteria, {query: 'foo'}));
       httpBackend.flush();
       expect(callParams.Keyword).toBe('foo');

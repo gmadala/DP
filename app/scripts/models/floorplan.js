@@ -47,15 +47,18 @@ angular.module('nextgearWebApp')
       },
       search: function (criteria, paginator) {
         var params = {
-          Keyword: criteria.query,
-          SearchPending: criteria.filter.indexOf('pending') >= 0,
-          SearchApproved: criteria.filter.indexOf('approved') >= 0,
-          SearchCompleted: criteria.filter.indexOf('completed') >= 0,
-          SearchDenied: criteria.filter.indexOf('denied') >= 0,
-          SearchPaid: criteria.filter.indexOf('paidYes') >= 0,
-          SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0,
-          SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0,
-          SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0,
+          Keyword: criteria.query || undefined,
+          // optimization: only set filter params if they are false, since not setting them is same as true
+          // per Heath Matthias: "If true or not set, the search includes items, if set to false items are
+          // filtered out (this is how the status filters work)"
+          SearchPending: criteria.filter.indexOf('pending') >= 0 ? undefined : false,
+          SearchApproved: criteria.filter.indexOf('approved') >= 0 ? undefined : false,
+          SearchCompleted: criteria.filter.indexOf('completed') >= 0 ? undefined : false,
+          SearchDenied: criteria.filter.indexOf('denied') >= 0 ? undefined : false,
+          SearchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
+          SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
+          SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
+          SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
           // default values for un-set dates may need adjusted during API integration
           StartDate: api.toShortISODate(criteria.startDate) || undefined,
           EndDate: api.toShortISODate(criteria.endDate) || undefined,
