@@ -1,0 +1,9 @@
+select {
+  @include border-radius(0);
+  background: transparent;
+  color: #17659D;
+  font-weight: bold;
+  border: 1px solid #c8c8c8;
+  height: 28px;
+  -webkit-user-select: none;
+}

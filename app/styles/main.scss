@@ -2,6 +2,8 @@
 // Main
 // ===============
 
+@import "compass/css3";
+
 @import "variables";
 @import "../components/sass-bootstrap/lib/bootstrap";
 @import "adjacent-grid";
@@ -15,4 +17,5 @@
 @import "nav";
 @import "modules";
 @import "modals";
+@import "inputs";
 @import "glyphicons";
