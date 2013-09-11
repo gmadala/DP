@@ -24,7 +24,9 @@
         <th></th>
       </tr>
     </thead>
-    <tbody nxg-infinite-scroll="businessSearch.loadMoreData()" ngx-infinite-scroll-disabled="businessSearch.loading">
+    <tbody nxg-infinite-scroll="businessSearch.loadMoreData()"
+           nxg-infinite-scroll-disabled="businessSearch.loading"
+           nxg-scroll-container>
       <tr ng-repeat="result in businessSearch.results">
         <td>{{result.BusinessId}}</td>
         <td>{{result.BusinessName}}</td>
