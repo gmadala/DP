@@ -2,25 +2,6 @@
 // Modules
 // ===============
 
-.nxg-dash-calendar-container {
-  background-color: #eeeeee;
-  position: relative;
-}
-
-.nxg-dash-calendar-header {
-  h4 {
-    margin-top: 0;
-  }
-  &> * {
-    display: inline-block;
-  }
-  position: absolute;
-  right: 25;
-  margin-left: 4em;
-  margin-top: 0.5em;
-  height: 2em;
-}
-
 .pay-queue.summary {
 
   ul {
@@ -137,15 +118,6 @@
     margin: 0;
     li {
       height: 28px;
-      .item-total {
-        font-weight: bold;
-        @include border-radius(7px);
-        width: 28px;
-        text-align: center;
-        margin-right: 7px;
-        float: left;
-        border: 1px solid $gray-c;
-      }
     }
   }
 }
@@ -167,5 +139,61 @@
     tr td:nth-child(3) {
       font-size: 13px;
     }
+  }
+}
+
+.modal.request-unapplied-funds-modal {
+  width: 300px;
+  margin-left: -150px;
+  .modal-body {
+    padding-left: 1.5em;
+    padding-top: 0.5em;
+  }
+  label {
+    font-size: 12px;
+    margin: 0;
+    margin-top: 0.5em;
+  }
+  .amounts {
+    div {
+      padding-left: 2px;
+      padding-bottom: 4px;
+      font-weight: bold;
+      color: #174e8a;
+    }
+  }
+  #payoutAmt, #payoutBankAcct {
+    width: 260px;
+  }
+}
+
+.payment-summary {
+  .well-out {
+    height: 18.5em;
+    position: relative;
+    .btn {
+      position: absolute;
+      margin: 1em;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  li {
+    line-height: 14px;
+    span:nth-child(n+2) {
+      color: #999;
+    }
+  }
+  p {
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 13px;
+    color: #666;
+    &.overdue-amount {
+      color: #ce0012;
+    }
+  }
+  .btn {
+    margin-top: 0.5em;
   }
 }

@@ -15,18 +15,18 @@
           <h4>Payments Summary</h4>
             <ul class="well-out">
                 <li>
-                    <span class="item-total">{{dashboardData.OverduePayments}}</span>
+                    <span class="item-total overdue">{{dashboardData.OverduePayments}}</span>
                     <span ng-pluralize
                           count="dashboardData.OverduePayments"
-                          when="{'1': 'OVERDUE Payment', 'other': 'OVERDUE Payments'}">
+                          when="{'1': 'Overdue', 'other': 'Overdue'}">
                     </span>
-                    <p>{{dashboardData.OverduePaymentAmount | currency}}</p>
+                    <p class="overdue-amount">{{dashboardData.OverduePaymentAmount | currency}}</p>
                 </li>
                 <li>
-                    <span class="item-total">{{dashboardData.PaymentsDueToday}}</span>
+                    <span class="item-total due-today">{{dashboardData.PaymentsDueToday}}</span>
                     <span ng-pluralize
                           count="dashboardData.PaymentsDueToday"
-                          when="{'1': 'Payment DUE TODAY', 'other': 'Payments DUE TODAY'}">
+                          when="{'1': 'Due Today', 'other': 'Due Today'}">
                     </span>
                     <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
                 </li>
@@ -36,7 +36,7 @@
                           count="dashboardData.UpcomingPayments"
                           when="{'1': 'Payment', 'other': 'Payments'}">
                     </span>
-                    <span>THIS {{ viewMode | uppercase }}</span>
+                    <span>This {{ viewMode | lowercase }}</span>
                     <p>{{dashboardData.UpcomingPaymentAmount | currency}}</p>
                 </li>
                 <li>
@@ -47,11 +47,9 @@
                     </span>
                     <p>{{dashboardData.AccountFeeAmount | currency}}</p>
                 </li>
-                <li>
-                    <a class="more btn btn-mini" href="#/home/payments">
-                        <span class="glyphicon glyphicon-eye-open"></span> View All Payments
-                    </a>
-                </li>
+                <a class="more btn btn-mini" href="#/home/payments">
+                    <span class="glyphicon glyphicon-eye-open"></span> View All Payments
+                </a>
             </ul>
         </div>
     </div>

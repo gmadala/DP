@@ -14,3 +14,23 @@
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+.item-total {
+  line-height: 16px;
+  font-weight: bold;
+  @include border-radius(6px);
+  width: 28px;
+  text-align: center;
+  margin-right: 7px;
+  float: left;
+  border: 1px solid $gray-c;
+  &.overdue {
+    color: #fff;
+    background-color: #ce0012;
+    border: 1px solid #ce0012;
+  }
+  &.due-today {
+    background-color: #fdd33a;
+    border: 1px solid #fdd33a;
+  }
+}

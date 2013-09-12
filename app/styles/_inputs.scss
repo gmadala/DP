@@ -4,6 +4,63 @@ select {
   color: #17659D;
   font-weight: bold;
   border: 1px solid #c8c8c8;
-  height: 28px;
+  height: 2em;
   -webkit-user-select: none;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  @include border-radius(0px);
+  @include box-shadow(none);
+  border: 1px solid #c8c8c8;
+  height: 2em;
+}
+
+.input-prepend.single .add-on{
+padding-top: 5px;
+background-color: #fff;
+border: none;
+margin-right: -16px;
+}
+
+.input-prepend.single .add-on:first-child, .input-prepend.single .btn:first-child {
+  padding: 4px 0 0 4px;
+  color: #9a9a9a;
+  @include border-radius(0);
+}
+
+.input-prepend.single select,
+.input-prepend.single textarea,
+.input-prepend.single input[type="text"],
+.input-prepend.single input[type="password"],
+.input-prepend.single input[type="datetime"],
+.input-prepend.single input[type="datetime-local"],
+.input-prepend.single input[type="date"],
+.input-prepend.single input[type="month"],
+.input-prepend.single input[type="time"],
+.input-prepend.single input[type="week"],
+.input-prepend.single input[type="number"],
+.input-prepend.single input[type="email"],
+.input-prepend.single input[type="url"],
+.input-prepend.single input[type="search"],
+.input-prepend.single input[type="tel"],
+.input-prepend.single input[type="color"],
+.input-prepend.single
+.uneditable-input {
+  padding-left: 16px;
+  background: transparent;
 }

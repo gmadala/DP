@@ -19,6 +19,7 @@ angular.module('nextgearWebApp')
       $event.preventDefault();
 
       var dialogOptions = {
+        dialogClass: 'modal request-unapplied-funds-modal',
         backdrop: true,
         keyboard: false,
         backdropClick: false,
