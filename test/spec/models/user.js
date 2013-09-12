@@ -17,7 +17,11 @@ describe('Model: User', function () {
     beforeEach(function () {
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
         Success: true,
-        Data: 12345
+        Message: null,
+        Data: {
+          Token: '12345',
+          ShowUserInitialization: true
+        }
       });
 
       httpBackend.whenGET('/Dealer/Info').respond({
@@ -41,7 +45,7 @@ describe('Model: User', function () {
       spyOn(api, 'setAuthToken');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(api.setAuthToken).toHaveBeenCalledWith(12345);
+      expect(api.setAuthToken).toHaveBeenCalledWith('12345');
     });
 
     it('should update the isLoggedIn function result', function () {
@@ -79,7 +83,11 @@ describe('Model: User', function () {
     beforeEach(function () {
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
         Success: true,
-        Data: 12345
+        Message: null,
+        Data: {
+          Token: '12345',
+          ShowUserInitialization: true
+        }
       });
 
       httpBackend.whenGET('/Dealer/Info').respond({
@@ -128,7 +136,11 @@ describe('Model: User', function () {
     beforeEach(function () {
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
         Success: true,
-        Data: 12345
+        Message: null,
+        Data: {
+          Token: '12345',
+          ShowUserInitialization: true
+        }
       });
 
       httpBackend.whenGET('/Dealer/Info').respond({

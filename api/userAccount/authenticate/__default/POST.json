@@ -1,5 +1,9 @@
 {
   "Success": true,
   "Message": null,
-  "Data": "ZTIwNzZjNzktNmE1MS00MmMxLTkxOTctMjQ2MjM2NjI4YjBj"
+  "Data":{
+    "Token": "Mzc2ZWI4NmEtZGYxYS00MGRjLWIwYjUtYTI1MTIxMzk3YTNl",
+    "ShowUserInitialization": true
+  }
 }
+
