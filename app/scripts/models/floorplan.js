@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Floorplan', function(api, Paginate) {
+  .factory('Floorplan', function(api, Paginate, User) {
     return {
       create: function(data) {
         // transform data types as needed for API
@@ -69,6 +69,13 @@ angular.module('nextgearWebApp')
         };
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
+            var bizNum = User.getInfo().BusinessNumber;
+            angular.forEach(results.Floorplans, function (value) {
+              if (value.TitleImageAvailable) {
+                var displayId = bizNum + '-' + value.StockNumber;
+                value.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/false');
+              }
+            });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);
           }
         );

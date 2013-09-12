@@ -134,6 +134,7 @@ describe('Model: Floorplan', function () {
         endDate: null,
         filter: ''
       },
+      searchResults = [],
       callParams,
       extractParams = function(method, url) {
         // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
@@ -152,15 +153,17 @@ describe('Model: Floorplan', function () {
         return [200, {
           Success: true,
           Data: {
-            FloorplanRowCount: 20
+            FloorplanRowCount: 20,
+            Floorplans: searchResults
           }
         }, {}];
       };
 
-    beforeEach(inject(function (Paginate) {
+    beforeEach(inject(function (Paginate, User) {
       paginate = Paginate;
       httpBackend.whenGET(/\/floorplan\/search.*/).respond(extractParams);
       defaultCriteria.filter = floorplan.filterValues.ALL;
+      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
     }));
 
     it('should call the expected API path', function () {
@@ -206,6 +209,24 @@ describe('Model: Floorplan', function () {
       httpBackend.flush();
       expect(output.$paginator).toBeDefined();
       expect(output.$paginator.nextPage()).toBe(2);
+    });
+
+    it('should add the appropriate $titleURL to floorplans that have a title available', function () {
+      var output = {};
+      searchResults = [
+        {
+          StockNumber: '456',
+          TitleImageAvailable: true
+        },
+        {
+          StockNumber: '789',
+          TitleImageAvailable: false
+        }
+      ];
+      floorplan.search(defaultCriteria).then(function (results) { output = results; });
+      httpBackend.flush();
+      expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/false');
+      expect(output.Floorplans[1].$titleURL).not.toBeDefined();
     });
 
     it('should NOT send a Keyword if search term is empty/null', function () {

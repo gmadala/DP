@@ -45,9 +45,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
                 <div class="span2 offset2">
-                    <button class="btn btn-small btn-block">Title</button>
+                    <a class="btn btn-small btn-block"
+                       ng-show="item.TitleImageAvailable"
+                       ng-href="{{ item.$titleURL }}"
+                       target="_blank">
+                      Title
+                    </a>
                 </div>
             </div>
 
