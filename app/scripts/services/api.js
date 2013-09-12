@@ -2,7 +2,17 @@
 
 angular.module('nextgearWebApp')
   .factory('api', function($q, $http, $filter, nxgConfig) {
+    var authToken = null;
+
     return {
+      setAuthToken: function(token) {
+        authToken = token;
+        // set a default Authorization header with the authentication token
+        $http.defaults.headers.common.Authorization = 'CT ' + token;
+      },
+      hasAuthToken: function() {
+        return !!authToken;
+      },
       request: function(method, url, data, headers) {
         var deferred = $q.defer(),
 
@@ -62,6 +72,27 @@ angular.module('nextgearWebApp')
           throw 'api.toUTCShortISODate does not currently support (re)formatting of strings. Use a Date object.';
         }
         return $filter('momentUTC')(value, 'YYYY-MM-DD') || null;
+      },
+      contentLink: function (path, params) {
+        if (!path) {
+          throw 'api.contentLink requires a path string';
+        }
+
+        var queryParts = [];
+
+        angular.forEach(params, function(value, key) {
+          queryParts.push(key + '=' + value);
+        });
+
+        if (authToken) {
+          queryParts.push('token=' + authToken);
+        }
+
+        if (queryParts.length > 0) {
+          return nxgConfig.apiBase + path + '?' + queryParts.join('&');
+        } else {
+          return nxgConfig.apiBase + path;
+        }
       }
     };
   });

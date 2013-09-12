@@ -5,7 +5,6 @@ angular.module('nextgearWebApp')
     // Private
     var info = null,
       statics = null,
-      authToken = null,
       paySellerOptions = [];
 
     var calculateCanPayBuyer = function() {
@@ -19,11 +18,7 @@ angular.module('nextgearWebApp')
     // Public API
     return {
       isLoggedIn: function() {
-        return authToken !== null;
-      },
-
-      getAuthToken: function() {
-        return authToken;
+        return api.hasAuthToken();
       },
 
       authenticate: function(username, password) {
@@ -34,9 +29,7 @@ angular.module('nextgearWebApp')
             Authorization: 'CT ' + Base64.encode(username + ':' + password)
           })
           .then(function(data) {
-            authToken = data;
-            // set a default Authorization header with the authentication token
-            $http.defaults.headers.common.Authorization = 'CT ' + data;
+            api.setAuthToken(data);
             // fetch the dealer info & statics every time there's a new session (user could have changed)
             return $q.all([self.refreshInfo(), self.refreshStatics()]);
           });

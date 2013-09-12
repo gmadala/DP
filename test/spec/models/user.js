@@ -4,10 +4,11 @@ describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend;
+  var user, httpBackend, api;
 
-  beforeEach(inject(function ($httpBackend, User) {
+  beforeEach(inject(function ($httpBackend, User, _api_) {
     user = User;
+    api = _api_;
     httpBackend = $httpBackend;
   }));
 
@@ -36,13 +37,18 @@ describe('Model: User', function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should setup the auth token and isLoggedIn function', function () {
+    it('should set the api auth token with the value from the response', function () {
+      spyOn(api, 'setAuthToken');
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(api.setAuthToken).toHaveBeenCalledWith(12345);
+    });
+
+    it('should update the isLoggedIn function result', function () {
       expect(user.isLoggedIn()).toBe(false);
-      expect(user.getAuthToken()).toBe(null);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(user.isLoggedIn()).toBe(true);
-      expect(user.getAuthToken()).toBe(12345);
     });
 
     it('should set the auth header for all further requests', inject(function ($http) {

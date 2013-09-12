@@ -6,10 +6,31 @@ describe('Service: api', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var api;
-  beforeEach(inject(function (_api_) {
+  var api, http;
+  beforeEach(inject(function (_api_, $http) {
     api = _api_;
+    http = $http;
   }));
+
+  describe('setAuthToken and hasAuthToken functions', function () {
+    it('should set the correct http default Authorization header', function () {
+      api.setAuthToken('foo');
+      expect(http.defaults.headers.common.Authorization).toBe('CT foo');
+    });
+
+    it('should cause hasAuthToken to return true if a token was provided', function () {
+      api.setAuthToken('foo');
+      expect(api.hasAuthToken()).toBe(true);
+    });
+
+    it('should cause hasAuthToken to return false if no token was provided', function () {
+      api.setAuthToken(null);
+      expect(api.hasAuthToken()).toBe(false);
+
+      api.setAuthToken();
+      expect(api.hasAuthToken()).toBe(false);
+    });
+  });
 
   describe('request function', function () {
     // TODO: Add test coverage for request function
@@ -110,6 +131,57 @@ describe('Service: api', function () {
       expect(function () {
         api.toUTCShortISODate('2013-04-05');
       }).toThrow();
+    });
+  });
+
+  describe('contentLink function', function () {
+    var user,
+      originalBase;
+
+    beforeEach(inject(function (User, nxgConfig) {
+      user = User;
+      nxgConfig.apiBase = 'http://example.com/api';
+    }));
+
+    afterEach(inject(function (nxgConfig) {
+      nxgConfig.apiBase = originalBase;
+    }));
+
+    it('should throw an error if no path is provided', function () {
+      expect(api.contentLink).toThrow();
+    });
+
+    it('should return the expected URL when user is not logged in, and no params are provided', function () {
+      spyOn(user, 'isLoggedIn').andReturn(false);
+      var url = api.contentLink('/foo/bar');
+      expect(url).toBe('http://example.com/api/foo/bar');
+    });
+
+    it('should return the expected URL when user is not logged in, and 1 param is provided', function () {
+      spyOn(user, 'isLoggedIn').andReturn(false);
+      var url = api.contentLink('/foo/bar', {param1: 'value1'});
+      expect(url).toBe('http://example.com/api/foo/bar?param1=value1');
+    });
+
+    it('should return the expected URL when user is not logged in, and 2+ params are provided', function () {
+      spyOn(user, 'isLoggedIn').andReturn(false);
+      var url = api.contentLink('/foo/bar', {param1: 'value1', param2: 'value2'});
+      expect(url === 'http://example.com/api/foo/bar?param1=value1&param2=value2' ||
+        url === 'http://example.com/api/foo/bar?param2=value2&param1=value1').toBe(true);
+    });
+
+    it('should return the expected URL when user is logged in, and no params are provided', function () {
+      spyOn(user, 'isLoggedIn').andReturn(true);
+      api.setAuthToken('SECRET');
+      var url = api.contentLink('/foo/bar');
+      expect(url).toBe('http://example.com/api/foo/bar?token=SECRET');
+    });
+
+    it('should return the expected URL when user is logged in, and any params are provided', function () {
+      spyOn(user, 'isLoggedIn').andReturn(true);
+      api.setAuthToken('SECRET');
+      var url = api.contentLink('/foo/bar', {param1: 'value1'});
+      expect(url).toBe('http://example.com/api/foo/bar?param1=value1&token=SECRET');
     });
   });
 
