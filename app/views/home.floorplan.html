@@ -8,7 +8,10 @@
      on-clear="resetSearch()">
 </div>
 
-<section class="floorplan-list">
+<section class="floorplan-list"
+         nxg-infinite-scroll="fetchNextResults()"
+         nxg-infinite-scroll-disabled="data.loading"
+         nxg-infinite-scroll-show-indicator="data.loading">
     <ul class="unstyled">
         <li ng-repeat="item in data.results">
             <header class="row-fluid">
@@ -54,6 +57,5 @@
           </div><!-- end more-details div -->
         </li>
     </ul>
-
 
 </section>

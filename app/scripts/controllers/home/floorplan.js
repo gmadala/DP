@@ -53,6 +53,7 @@ angular.module('nextgearWebApp')
 
     $scope.fetchNextResults = function () {
       var paginator = $scope.data.paginator;
+      console.log('fetchNextResults, hasMore: ', paginator ? paginator.hasMore() : 'n/a');
       if (paginator && !paginator.hasMore()) {
         return;
       }
