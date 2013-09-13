@@ -34,19 +34,19 @@ angular.module('nextgearWebApp')
     $scope.filterOptions = [
       {
         label: 'View All',
-        value: 'all'
+        value: Payments.filterValues.ALL
       },
       {
         label: 'Due Today',
-        value: 'today'
+        value: Payments.filterValues.TODAY
       },
       {
         label: 'Due This Week',
-        value: 'week'
+        value: Payments.filterValues.THIS_WEEK
       },
       {
         label: 'Date Range',
-        value: 'range'
+        value: Payments.filterValues.RANGE
       }
     ];
 
@@ -59,7 +59,7 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: initialFilter || 'all'
+        filter: initialFilter || Payments.filterValues.ALL
       };
       $scope.search();
     };

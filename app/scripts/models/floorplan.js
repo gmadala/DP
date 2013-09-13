@@ -46,39 +46,44 @@ angular.module('nextgearWebApp')
         NO_TITLE_PAID: 'pending,approved,completed,denied,titleNo,paidYes'
       },
       search: function (criteria, paginator) {
-        var params = {
-          Keyword: criteria.query || undefined,
-          // optimization: only set filter params if they are false, since not setting them is same as true
-          // per Heath Matthias: "If true or not set, the search includes items, if set to false items are
-          // filtered out (this is how the status filters work)"
-          SearchPending: criteria.filter.indexOf('pending') >= 0 ? undefined : false,
-          SearchApproved: criteria.filter.indexOf('approved') >= 0 ? undefined : false,
-          SearchCompleted: criteria.filter.indexOf('completed') >= 0 ? undefined : false,
-          SearchDenied: criteria.filter.indexOf('denied') >= 0 ? undefined : false,
-          SearchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
-          SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
-          SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
-          SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
-          // default values for un-set dates may need adjusted during API integration
-          StartDate: api.toShortISODate(criteria.startDate) || undefined,
-          EndDate: api.toShortISODate(criteria.endDate) || undefined,
-          OrderBy: 'FlooringDate',
-          OrderDirection: 'DESC',
-          PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-          PageSize: Paginate.PAGE_SIZE_MEDIUM
-        };
+        var self = this,
+          params = {
+            Keyword: criteria.query || undefined,
+            // optimization: only set filter params if they are false, since not setting them is same as true
+            // per Heath Matthias: "If true or not set, the search includes items, if set to false items are
+            // filtered out (this is how the status filters work)"
+            SearchPending: criteria.filter.indexOf('pending') >= 0 ? undefined : false,
+            SearchApproved: criteria.filter.indexOf('approved') >= 0 ? undefined : false,
+            SearchCompleted: criteria.filter.indexOf('completed') >= 0 ? undefined : false,
+            SearchDenied: criteria.filter.indexOf('denied') >= 0 ? undefined : false,
+            SearchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
+            SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
+            SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
+            SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
+            // default values for un-set dates may need adjusted during API integration
+            StartDate: api.toShortISODate(criteria.startDate) || undefined,
+            EndDate: api.toShortISODate(criteria.endDate) || undefined,
+            OrderBy: 'FlooringDate',
+            OrderDirection: 'DESC',
+            PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
+            PageSize: Paginate.PAGE_SIZE_MEDIUM
+          };
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
-            var bizNum = User.getInfo().BusinessNumber;
-            angular.forEach(results.Floorplans, function (value) {
-              if (value.TitleImageAvailable) {
-                var displayId = bizNum + '-' + value.StockNumber;
-                value.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/false');
+            angular.forEach(results.Floorplans, function (floorplan) {
+              if (floorplan.TitleImageAvailable) {
+                self.addTitleURL(floorplan);
               }
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);
           }
         );
+      },
+      addTitleURL: function (item) {
+        if (!item.StockNumber) { return item; }
+        var displayId = User.getInfo().BusinessNumber + '-' + item.StockNumber;
+        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/false');
+        return item;
       }
     };
   });

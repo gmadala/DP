@@ -416,4 +416,24 @@ describe('Model: Floorplan', function () {
 
   });
 
+  describe('addTitleURL method', function () {
+
+    beforeEach(inject(function (User) {
+      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+    }));
+
+    it('should not add the property if item has no stock number', function () {
+      var out = floorplan.addTitleURL({});
+      expect(out.$titleURL).not.toBeDefined();
+    });
+
+    it('should add the expected property based on user business number and item stock number', function () {
+      var out = floorplan.addTitleURL({
+        StockNumber: 'foo'
+      });
+      expect(out.$titleURL).toBe('/floorplan/title/123-foo/false');
+    });
+
+  });
+
 });

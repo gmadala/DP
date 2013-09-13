@@ -16,12 +16,15 @@ describe('Controller: PaymentsCtrl', function () {
 
       // Mock Payments model/service
       Payments: {
+        filterValues: {
+
+        },
         search: function() {
           return {
             then: function(success) {
               success([{}]);
             }
-          }
+          };
         }
       }
 
