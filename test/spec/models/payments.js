@@ -195,10 +195,10 @@ describe("Model: Payments", function () {
       expect(callParams.DueDateEnd).toBe(moment().endOf('week').format('YYYY-MM-DD'));
     });
 
-    it('should send whatever dates are passed if filter is range', function () {
+    it('should send whatever dates are passed, in UTC, if filter is range', function () {
       payments.search(angular.extend({}, defaultCriteria, {
-        startDate: new Date(2013, 0 , 1),
-        endDate: new Date(2013, 0 , 2),
+        startDate: moment.utc([2013, 0 , 1]).toDate(),
+        endDate: moment.utc([2013, 0 , 2]).toDate(),
         filter: payments.filterValues.RANGE
       }));
       httpBackend.flush();
