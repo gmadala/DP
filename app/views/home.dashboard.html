@@ -3,13 +3,13 @@
     <div class="row-fluid">
         <div class="span9 nxg-dash-calendar-container" >
           <div class="nxg-dash-calendar-header">
-            <h4>Upcoming Payments</h4>
-            <span class="floater">
+            <h4 class="nxg-cal-header">Upcoming Payments</h4>
+            <div class="nxg-cal-toggle">
               <input type="radio" name="viewMode" id="week" value="week" ng-model="viewMode" placeholder="This Week">
               <label for="week" id="week-label"></label>
               <input type="radio" name="viewMode" id="month" value="month" ng-model="viewMode" placeholder="This Month">
               <label for="month" id="month-label"></label>
-            </span>
+            </div>
           </div>
           <div nxg-upcoming-calendar display="viewMode" data="dashboardData.calendarData"></div>
         </div>

@@ -53,6 +53,11 @@ angular.module('nextgearWebApp')
               var dayTitle = angular.element(value);
               dayTitle.html(dayTitle.text());
             });
+            //Inject month string into calendar header.
+            if ($scope.options.defaultView !== 'basicWeek') {
+              angular.element('.nxg-cal-month-name').remove();
+              angular.element('.fc-header-right').prepend('<h4 class=\"nxg-cal-month-name\">' + moment(view.start).format('MMMM') + '</h4>');
+            }
           },
           dayRender: function(date, cell) {
             var dateKey = angular.isString(date) ? date : $filter('date')(date, 'yyyy-MM-dd');
