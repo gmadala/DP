@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('nxgPaymentButtons', function () {
     return {
       scope: {
-        type:        '=nxgPaymentButtons',
+        type:        '@nxgPaymentButtons',
         isAdded:     '=',
         isPayoff:    '=',
         isScheduled: '='

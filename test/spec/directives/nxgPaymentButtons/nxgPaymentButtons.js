@@ -8,9 +8,9 @@ describe('Directive: nxgPaymentButtons', function () {
   beforeEach(module('nextgearWebApp', 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'));
 
   it('should toggle the value of `isAdded`', inject(function($rootScope, $compile) {
-    element = angular.element('<div nxg-payment-buttons="foo.type" is-added="foo.added"></div>');
+    element = angular.element('<div nxg-payment-buttons="fee" is-added="foo.added"></div>');
     scope = $rootScope;
-    scope.foo = {type: 'fee', added: false};
+    scope.foo = {added: false};
     $compile(element)(scope);
     scope.$digest();
 
@@ -22,9 +22,9 @@ describe('Directive: nxgPaymentButtons', function () {
   }));
 
   it('should toggle the value of `isPayoff`', inject(function($rootScope, $compile) {
-    element = angular.element('<div nxg-payment-buttons="foo.type" is-added="foo.added" is-payoff="foo.payoff"></div>');
+    element = angular.element('<div nxg-payment-buttons="payment" is-added="foo.added" is-payoff="foo.payoff"></div>');
     scope = $rootScope;
-    scope.foo = {type: 'payment', added: false, payoff: false};
+    scope.foo = {added: false, payoff: false};
     $compile(element)(scope);
     scope.$digest();
 

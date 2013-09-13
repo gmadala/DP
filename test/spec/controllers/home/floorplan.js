@@ -115,7 +115,11 @@ describe('Controller: FloorplanCtrl', function () {
     }));
 
     it('should pass back the paginator from previous calls on subsequent ones', function () {
-      var p = null;
+      var p = {
+        hasMore: function () {
+          return true;
+        }
+      };
       searchResult.data = {
         $paginator: p
       };

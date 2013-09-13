@@ -75,7 +75,12 @@ angular.module('nextgearWebApp')
         );
       },
       fetchFees: function () {
-        return api.request('GET', '/payment/getaccountfees');
+        return api.request('GET', '/payment/getaccountfees').then(
+          function (result) {
+            // unwrap the array
+            return result.AccountFees;
+          }
+        );
       },
       canPayNow: function () {
         return businessHours.resolve().then(function (hours) {

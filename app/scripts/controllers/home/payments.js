@@ -31,7 +31,13 @@ angular.module('nextgearWebApp')
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
     // end dummy data
 
-    $scope.filterOptions = [
+    $scope.payments = {
+      results: [],
+      loading: false,
+      paginator: null
+    };
+
+    $scope.payments.filterOptions = [
       {
         label: 'View All',
         value: Payments.filterValues.ALL
@@ -50,20 +56,45 @@ angular.module('nextgearWebApp')
       }
     ];
 
-    $scope.search = function() {
-      $scope.results = Payments.search($scope.searchCriteria);
+    $scope.payments.search = function() {
+      // search means "start from the beginning with current criteria"
+      $scope.payments.paginator = null;
+      $scope.payments.results.length = 0;
+      $scope.payments.fetchNextResults();
     };
 
-    $scope.resetSearch = function (initialFilter) {
-      $scope.searchCriteria = {
+    $scope.payments.fetchNextResults = function () {
+      var paginator = $scope.payments.paginator;
+      if (paginator && !paginator.hasMore()) {
+        return;
+      }
+
+      // get the next applicable batch of results
+      $scope.payments.loading = true;
+      Payments.search($scope.payments.searchCriteria, paginator).then(
+        function (result) {
+          $scope.payments.loading = false;
+          $scope.payments.paginator = result.$paginator;
+          // fast concatenation of results into existing array
+          Array.prototype.push.apply($scope.payments.results, result.SearchResults);
+        }, function (/*error*/) {
+          $scope.payments.loading = false;
+        }
+      );
+    };
+
+    $scope.payments.resetSearch = function (initialFilter) {
+      $scope.payments.searchCriteria = {
         query: null,
         startDate: null,
         endDate: null,
         filter: initialFilter || Payments.filterValues.ALL
       };
-      $scope.search();
+      $scope.payments.search();
     };
 
-    $scope.resetSearch($stateParams.filter);
+    $scope.payments.resetSearch($stateParams.filter);
+
+    $scope.fees = Payments.fetchFees();
 
   });

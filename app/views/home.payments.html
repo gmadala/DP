@@ -4,84 +4,94 @@
              title="Payment Search"
              prompt="Enter Stock # or VIN"
              filter-label="Filter List by Due Date"
-             filter-options="filterOptions"
-             active-criteria="searchCriteria"
-             show-date-range="searchCriteria.filter == 'range'"
-             on-search="search()"
-             on-clear="resetSearch()">
+             filter-options="payments.filterOptions"
+             active-criteria="payments.searchCriteria"
+             show-date-range="payments.searchCriteria.filter == 'range'"
+             on-search="payments.search()"
+             on-clear="payments.resetSearch()">
         </div>
 
         <ul class="unstyled">
-            <li ng-repeat="fee in results.fees">
+            <li ng-repeat="fee in fees">
                 <header class="row-fluid">
                     <div class="span2"><strong>Account Fee</strong></div>
-                    <div class="span3"><strong>Fee Type</strong> {fee.FeeType}</div>
-                    <div class="span7"><strong>Description</strong> <span>{{fee.Description}}</span></div>
+                    <div class="span3"><strong>Fee Type</strong> {{ fee.FeeType }}</div>
+                    <div class="span7"><strong>Description</strong> <span>{{ fee.Description }}</span></div>
                 </header>
                 <div class="row-fluid">
                     <div class="span2">
-                        <p><strong>Due</strong> {{fee.EffectiveDate | date:'M/dd/yyyy'}}</p>
-                        <p><strong>Posted</strong> {fee.PostedDate}</p>
+                        <p><strong>Due</strong> {{ fee.EffectiveDate | moment }}</p>
+                        <p><strong>Posted</strong> {{ fee.Posted | moment }}</p>
                     </div>
-                    <div class="span2"><strong>Fee Amount</strong> {{fee.Balance | currency}}</div>
+                    <div class="span2"><strong>Fee Amount</strong> {{ fee.Balance | currency }}</div>
                     <div class="span6">
                         <p>Account Fees cannot be paid as part of a scheduled web payment.</p>
                         <p>Account fees paid online will need to be paid by 8pm EST.</p>
                     </div>
                     <div class="span2">
-                        <div nxg-payment-buttons="'fee'" is-added="fee.isAdded"></div>
+                        <div nxg-payment-buttons="fee" is-added="fee.isAdded"></div>
                     </div>
                 </div>
             </li>
         </ul>
 
-        <!-- TODO: Add directives for payments and fees. -->
-        <ul class="unstyled payments">
-            <li ng-repeat="payment in results.payments">
-                <header class="row-fluid">
-                    <div class="span2"><strong>VIN</strong> <span>{{payment.Vin}}</span></div>
-                    <div class="span3">{{payment.UnitDescription}}</div>
-                    <div class="span2"><strong>Stock #</strong> <span>{{payment.StockNumber}}</span></div>
-                    <div class="span2"><strong>Status</strong> <span>{{payment.UnitStatusId}}</span></div>
-                </header>
-                <div class="row-fluid">
-                    <div class="span8">
-                        <div class="row-fluid">
-                            <div class="span2">
-                                <strong>Due</strong>
-                                <p>{{payment.DueDate | date:'M/dd/yyyy'}}</p>
-                            </div>
-                            <div class="span2">
-                                <strong>Payoff</strong>
-                                <p>{{payment.CurrentPayoff | currency}}</p>
-                            </div>
-                            <div class="span2">
-                                <strong>Payment</strong>
-                                <p>{{payment.AmountDue | currency}}</p>
-                            </div>
-                            <div class="span2">
-                                <strong>Title</strong>
-                                <p>{{payment.TitleLocationName}}</p>
-                            </div>
-                            <div class="span2">
-                                <strong>Floored</strong>
-                                <p>{{payment.FlooringDate | date:'M/dd/yyyy'}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span2 offset2"
-                         nxg-payment-buttons="'payment'"
-                         is-added="payment.IsAdded"
-                         is-payoff="payment.IsPayoff"
-                         is-scheduled="payment.IsScheduled"></div>
-                </div>
+        <div nxg-infinite-scroll="payments.fetchNextResults()"
+             nxg-infinite-scroll-disabled="payments.loading"
+             nxg-infinite-scroll-show-indicator="payments.loading">
+          <ul class="unstyled payments">
+              <li ng-repeat="payment in payments.results">
+                  <header class="row-fluid">
+                      <div class="span2"><strong>VIN</strong> <span>{{ payment.Vin }}</span></div>
+                      <div class="span3">{{ payment.UnitDescription }}</div>
+                      <div class="span2"><strong>Stock #</strong> <span>{{ payment.StockNumber }}</span></div>
+                      <div class="span2"><strong>Status</strong> <span>{{ payment.UnitStatus }}</span></div>
+                  </header>
+                  <div class="row-fluid">
+                      <div class="span8">
+                          <div class="row-fluid">
+                              <div class="span2">
+                                  <strong>Due</strong>
+                                  <p>{{ payment.DueDate | moment }}</p>
+                              </div>
+                              <div class="span2">
+                                  <strong>Payoff</strong>
+                                  <p>{{ payment.CurrentPayoff | currency }}</p>
+                              </div>
+                              <div class="span2">
+                                  <strong>Payment</strong>
+                                  <p>{{ payment.AmountDue | currency }}</p>
+                              </div>
+                              <div class="span2">
+                                  <strong>Title Location</strong>
+                                  <p>{{ payment.TitleLocationName }}</p>
+                              </div>
+                              <div class="span2">
+                                  <strong>Floored</strong>
+                                  <p>{{ payment.FlooringDate | moment }}</p>
+                              </div>
+                              <div class="span2">
+                                <a class="btn btn-small btn-block"
+                                   ng-href="{{ payment.$titleURL }}"
+                                   target="_blank">
+                                  Title
+                                </a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="span2 offset2"
+                           nxg-payment-buttons="payment"
+                           is-added="payment.IsAdded"
+                           is-payoff="payment.IsPayoff"
+                           is-scheduled="payment.IsScheduled"></div>
+                  </div>
 
-                <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
-                <div collapse="isCollapsed" class="more-details">
-                    <div vehicle-details stock-number="payment.StockNumber"></div>
-                </div><!-- end more-details div -->
-            </li>
-        </ul>
+                  <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+                  <div collapse="isCollapsed" class="more-details">
+                      <div vehicle-details stock-number="payment.StockNumber"></div>
+                  </div><!-- end more-details div -->
+              </li>
+          </ul>
+        </div>
     </section>
 
     <section class="span3 pay-queue">

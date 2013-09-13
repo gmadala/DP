@@ -225,7 +225,7 @@ describe("Model: Payments", function () {
       httpBackend.whenGET('/payment/getaccountfees').respond({
           Success: true,
           Data: {
-            foo: 'bar'
+            AccountFees: 'bar'
           }
         });
     });
@@ -236,13 +236,13 @@ describe("Model: Payments", function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should return a promise that resolves to the returned data', function () {
+    it('should return a promise that resolves to the AccountFees property of the returned data', function () {
       var out = null;
       payments.fetchFees().then(function (result) {
         out = result;
       });
       httpBackend.flush();
-      expect(out.foo).toBe('bar');
+      expect(out).toBe('bar');
     });
 
   });

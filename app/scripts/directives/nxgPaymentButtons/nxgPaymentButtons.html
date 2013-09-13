@@ -18,9 +18,6 @@
             ng-disabled="isAdded && !isPayoff"
             ng-click="toggle({payoff: true})">{{ (isAdded && isPayoff) && (isScheduled && 'Cancel Scheduled' || 'Remove') || 'Add'}} Payoff</button>
 
-    <button type="button"
-            class="btn btn-mini btn-block">View Title</button>
-
   </div>
 
   <div ng-switch-when="payment-checkout">
