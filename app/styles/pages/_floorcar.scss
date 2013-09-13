@@ -1,0 +1,10 @@
+.floorcar label {
+  line-height: 18px;
+  font-size: 12px;
+  margin: 0;
+}
+
+.input-append .btn[name=inputPurchaseDate] {
+  @include opacity(50);
+  background: transparent;
+}

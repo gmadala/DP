@@ -30,36 +30,36 @@ input[type="color"],
   height: 2em;
 }
 
-.input-prepend.single .add-on{
+.input-prepend.dollar .add-on{
 padding-top: 5px;
 background-color: #fff;
 border: none;
 margin-right: -16px;
 }
 
-.input-prepend.single .add-on:first-child, .input-prepend.single .btn:first-child {
+.input-prepend.dollar .add-on, .input-prepend.dollar .add-on:first-child, .input-prepend.dollar .btn:first-child {
   padding: 4px 0 0 4px;
   color: #9a9a9a;
   @include border-radius(0);
 }
 
-.input-prepend.single select,
-.input-prepend.single textarea,
-.input-prepend.single input[type="text"],
-.input-prepend.single input[type="password"],
-.input-prepend.single input[type="datetime"],
-.input-prepend.single input[type="datetime-local"],
-.input-prepend.single input[type="date"],
-.input-prepend.single input[type="month"],
-.input-prepend.single input[type="time"],
-.input-prepend.single input[type="week"],
-.input-prepend.single input[type="number"],
-.input-prepend.single input[type="email"],
-.input-prepend.single input[type="url"],
-.input-prepend.single input[type="search"],
-.input-prepend.single input[type="tel"],
-.input-prepend.single input[type="color"],
-.input-prepend.single
+.input-prepend.dollar select,
+.input-prepend.dollar textarea,
+.input-prepend.dollar input[type="text"],
+.input-prepend.dollar input[type="password"],
+.input-prepend.dollar input[type="datetime"],
+.input-prepend.dollar input[type="datetime-local"],
+.input-prepend.dollar input[type="date"],
+.input-prepend.dollar input[type="month"],
+.input-prepend.dollar input[type="time"],
+.input-prepend.dollar input[type="week"],
+.input-prepend.dollar input[type="number"],
+.input-prepend.dollar input[type="email"],
+.input-prepend.dollar input[type="url"],
+.input-prepend.dollar input[type="search"],
+.input-prepend.dollar input[type="tel"],
+.input-prepend.dollar input[type="color"],
+.input-prepend.dollar
 .uneditable-input {
   padding-left: 16px;
   background: transparent;

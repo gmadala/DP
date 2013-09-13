@@ -111,20 +111,22 @@
                    ng-show="validity.inputSeller.$error.nxgRequires">
               Please look up a Seller
             </label>
-
-            <label for="inputPurchaseAmt">Purchase Amount</label>
-            <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
-                   ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
-                   required
-                   nxg-deformat-number />
-            <label for="inputPurchaseAmt" class="text-error"
-                   ng-show="validity.inputPurchaseAmt.$error.required">
-              Please enter the Purchase Amount
-            </label>
-            <label for="inputPurchaseAmt" class="text-error"
-                   ng-show="validity.inputPurchaseAmt.$error.pattern">
-              Please enter a numeric value (no $ sign)
-            </label>
+            <div class="input-prepend dollar">
+              <label for="inputPurchaseAmt">Purchase Amount</label>
+              <span class="add-on">$</span>
+              <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
+                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+                     required
+                     nxg-deformat-number />
+              <label for="inputPurchaseAmt" class="text-error"
+                     ng-show="validity.inputPurchaseAmt.$error.required">
+                Please enter the Purchase Amount
+              </label>
+              <label for="inputPurchaseAmt" class="text-error"
+                     ng-show="validity.inputPurchaseAmt.$error.pattern">
+                Please enter a numeric value (no $ sign)
+              </label>
+            </div>
 
             <label for="inputPurchaseDate">Purchase Date</label>
             <input id="inputPurchaseDate" name="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate"
@@ -162,14 +164,14 @@
               Please select a Bank Account for Disbursement
             </label>
 
-            <div class="footer">
+            <div class="footer modal-footer">
               <!-- order of these buttons here is important b/c most browsers trigger first button on Enter key -->
               <!-- if a different visual order is desired, use CSS e.g. float: right -->
-              <button class="btn btn-small" ng-class="{'btn-primary': form.$valid}"
+              <button class="btn btn-small btn-secondary" ng-click="cancel()">Cancel</button>
+              <button class="btn btn-small btn-primary" ng-class="{'btn-primary': form.$valid}"
                       type="submit" ng-click="submit()">
-                Submit
+                Floor
               </button>
-              <button class="btn btn-small" ng-click="cancel()">Cancel</button>
             </div>
           </div>
         </fieldset>
