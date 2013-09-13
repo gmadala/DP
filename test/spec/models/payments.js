@@ -219,5 +219,32 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('fetchFees function', function () {
+
+    beforeEach(function () {
+      httpBackend.whenGET('/payment/getaccountfees').respond({
+          Success: true,
+          Data: {
+            foo: 'bar'
+          }
+        });
+    });
+
+    it('should make the expected HTTP request', function () {
+      httpBackend.expectGET('/payment/getaccountfees');
+      payments.fetchFees();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise that resolves to the returned data', function () {
+      var out = null;
+      payments.fetchFees().then(function (result) {
+        out = result;
+      });
+      httpBackend.flush();
+      expect(out.foo).toBe('bar');
+    });
+
+  });
 
 });

@@ -48,6 +48,9 @@ angular.module('nextgearWebApp')
             return Paginate.addPaginator(results, results.PaymentRowCount, params.PageNumber, params.PageSize);
           }
         );
+      },
+      fetchFees: function () {
+        return api.request('GET', '/payment/getaccountfees');
       }
     };
   });
