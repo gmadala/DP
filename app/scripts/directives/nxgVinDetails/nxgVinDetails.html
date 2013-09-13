@@ -5,8 +5,8 @@
          nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
          ng-change="vinChange()" nxg-blur="vinExit()"
          autofocus="autofocus"/>
-  <a href ng-click="lookupVin()">
-    <i class="icon-search"></i>
+  <a href class="btn btn-secondary nxg-search-btn" ng-click="lookupVin()">
+    <i class="glyphicon glyphicon-search"></i>
   </a>
 </span>
 <label for="inputVin" class="text-error"

@@ -19,4 +19,7 @@
 @import "modals";
 @import "inputs";
 @import "glyphicons";
-@import "pages/page-index";
+
+// Individual page styles.
+@import "pages/floorcar";
+@import "pages/dashboard";

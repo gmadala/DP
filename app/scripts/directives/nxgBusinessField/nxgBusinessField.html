@@ -5,8 +5,8 @@
          ng-change="clearSelected()"
          nxg-requires="!isRequired() || selection"
          nxg-blur="handleExit($event)"/>
-  <a href ng-click="disabled || openBusinessSearch()"
+  <a href class="btn btn-secondary nxg-search-btn" ng-click="disabled || openBusinessSearch()"
      ng-class="{disabled: disabled}">
-    <i class="icon-search"></i>
+    <i class="glyphicon glyphicon-search"></i>
   </a>
 </span>

@@ -1,0 +1,195 @@
+.pay-queue.summary {
+
+  ul {
+    list-style-type: none;
+
+    li {
+      font-size: 12px;
+      line-height: 1.1;
+      text-align: right;
+    }
+  }
+
+  p {
+    line-height: 1.2;
+    margin: 0px;
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font: bold 12px/1.1 $baseFontFamily;
+  }
+
+  label + p {
+    display: inline-block;
+  }
+}
+
+.payment-summary {
+  ul {
+    text-align: right;
+  }
+  .item-total {
+    float: left;
+  }
+}
+
+.summaries .well-out, .payment-summary .well-out {
+  font-size: 12px;
+}
+
+.summaries {
+  .well-out {
+    height: 14em;
+    position: relative;
+    .btn {
+      position: absolute;
+      margin: 1em;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.summary.credit {
+  .well-out {
+    padding-left: 10px;
+  }
+}
+
+.chart-summary-table {
+  font-weight: bold;
+  float: right;
+  font-size: 12px;
+  line-height: 20px;
+  margin-bottom: 3px;
+  tr {
+    td:last-child {
+      text-align: right;
+      font-size: 13px;
+    }
+  }
+  td.taller {
+    padding-top: 6px;
+  }
+  td.no-bold {
+    font-weight: normal;
+  }
+  .table-symbol {
+    padding-left: 5px;
+    padding-right: 5px;
+    &.red {
+      color: #ce0012;
+    }
+  }
+}
+.chart-summary-table-total-row {
+  border-bottom: 1px solid #999;
+}
+
+//overly specific rule to over-write bootstrap's grid for these two modules.
+.summaries {
+  .unapplied-funds.adjacent {
+    width: 21.5%;
+  }
+  .floorplan.adjacent {
+    width: 16%;
+  }
+}
+
+.unapplied-funds {
+  span {
+    margin-bottom: 4px;
+  }
+  .pull-right {
+    font-weight: bold;
+    font-size: 13px;
+  }
+}
+.floorplan {
+  ul {
+    color: #555;
+    margin: 0;
+    li {
+      height: 28px;
+    }
+  }
+}
+
+.receipts {
+  table {
+    margin-top: -1px;
+    width: 100%;
+    text-align: right;
+    td:first-child {
+      text-align: left;
+    }
+    td:nth-child(2) {
+      text-align: left;
+    }
+    a {
+      text-decoration: underline;
+    }
+    tr td:nth-child(3) {
+      font-size: 13px;
+    }
+  }
+}
+
+.modal.request-unapplied-funds-modal {
+  width: 300px;
+  margin-left: -150px;
+  .modal-body {
+    padding-left: 1.5em;
+    padding-top: 0.5em;
+  }
+  label {
+    font-size: 12px;
+    margin: 0;
+    margin-top: 0.5em;
+  }
+  .amounts {
+    div {
+      padding-left: 2px;
+      padding-bottom: 4px;
+      font-weight: bold;
+      color: #174e8a;
+    }
+  }
+  #payoutAmt, #payoutBankAcct {
+    width: 260px;
+  }
+}
+
+.payment-summary {
+  .well-out {
+    height: 17.5em;
+    position: relative;
+    .btn {
+      position: absolute;
+      margin: 1em;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  li {
+    line-height: 12px;
+    span:nth-child(n+2) {
+      color: #999;
+    }
+  }
+  p {
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 13px;
+    color: #666;
+    &.overdue-amount {
+      color: #ce0012;
+    }
+  }
+  .btn {
+    margin-top: 0.5em;
+  }
+}

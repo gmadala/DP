@@ -4,7 +4,9 @@ select {
   color: #17659D;
   font-weight: bold;
   border: 1px solid #c8c8c8;
-  height: 2em;
+  height: 28px;
+  width: 200px;
+  font-size: 13px;
   -webkit-user-select: none;
 }
 
@@ -27,14 +29,23 @@ input[type="color"],
   @include border-radius(0px);
   @include box-shadow(none);
   border: 1px solid #c8c8c8;
-  height: 2em;
+  height: 28px;
+  margin: 0;
+}
+
+select, .nxg-date-field {
+  margin-bottom: 0;
+}
+
+.input-prepend.dollar {
+  margin-bottom: 0;
 }
 
 .input-prepend.dollar .add-on{
-padding-top: 5px;
-background-color: #fff;
-border: none;
-margin-right: -16px;
+  padding-top: 5px;
+  background-color: #fff;
+  border: none;
+  margin-right: -16px;
 }
 
 .input-prepend.dollar .add-on, .input-prepend.dollar .add-on:first-child, .input-prepend.dollar .btn:first-child {
@@ -63,4 +74,32 @@ margin-right: -16px;
 .uneditable-input {
   padding-left: 16px;
   background: transparent;
+}
+
+.nxg-date-field {
+  input {
+    background-color: transparent;
+  }
+  .btn {
+    color: #9a9a9a;
+    @include opacity(50);
+    background: transparent;
+    @include border-radius(0);
+    border: none;
+    margin-left: -28px;
+    font-size: 17px;
+    margin-top: -1px;
+    width: 28px;
+    height: 28px;
+    &:active {
+      border: none;
+      @include box-shadow(none);
+    }
+  }
+}
+
+.text-error {
+  display: block;
+  padding-left: 0.5em;
+  margin: 0;
 }

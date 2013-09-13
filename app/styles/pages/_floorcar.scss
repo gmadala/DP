@@ -1,10 +1,48 @@
-.floorcar label {
+label {
   line-height: 18px;
   font-size: 12px;
   margin: 0;
+  margin-top: 14px;
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
-.input-append .btn[name=inputPurchaseDate] {
-  @include opacity(50);
-  background: transparent;
+.floorcar {
+  position: relative;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  padding-bottom: 15px;
+  &:before {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    content: '';
+    border-left: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
+    height: 47px;
+    width: 100%;
+  }
+  .modal-footer {
+    margin: 1em 0 0 0;
+  }
+  .span8 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    .well-out {
+      border-bottom: none;
+      border-right: none;
+    }
+    &:first-child {
+      .well-out {
+        border-left: none;
+        border-right: 1px solid #cccccc;
+      }
+    }
+  }
+}
+
+#inputSeller, #inputVin {
+  width: 300px;
 }
