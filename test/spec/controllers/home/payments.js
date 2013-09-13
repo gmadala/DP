@@ -11,6 +11,9 @@ describe('Controller: PaymentsCtrl', function () {
     searchResult = {
       data: {}
     },
+    canPayResult = {
+      data: true
+    },
     scope;
 
   // Initialize the controller and a mock scope
@@ -28,6 +31,9 @@ describe('Controller: PaymentsCtrl', function () {
       },
       fetchFees: function () {
         return $q.when(searchResult.data);
+      },
+      canPayNow: function () {
+        return $q.when(true);
       }
     };
 
@@ -40,6 +46,15 @@ describe('Controller: PaymentsCtrl', function () {
       Payments: modelMock
     });
   }));
+
+  it('should attach promise for canPayNow to the scope', function () {
+    var out = null;
+    scope.canPayNow.then(function (result) {
+      out = result;
+    });
+    scope.$apply();
+    expect(out).toBe(true);
+  });
 
   it('should attach a payments view model to the scope', function () {
     expect(scope.payments).toBeDefined();

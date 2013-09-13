@@ -25,11 +25,18 @@
                     </div>
                     <div class="span2"><strong>Fee Amount</strong> {{ fee.Balance | currency }}</div>
                     <div class="span6">
-                        <p>Account Fees cannot be paid as part of a scheduled web payment.</p>
-                        <p>Account fees paid online will need to be paid by 8pm EST.</p>
+                        <p class="text-error" ng-show="!canPayNow">
+                          Account Fees cannot be paid as part of a scheduled web payment.
+                        </p>
+                        <p ng-show="canPayNow">
+                          Account fees paid online will need to be paid by 8pm EST.
+                        </p>
                     </div>
                     <div class="span2">
-                        <div nxg-payment-buttons="fee" is-added="fee.isAdded"></div>
+                        <div nxg-payment-buttons="fee"
+                             is-added="fee.isAdded"
+                             can-pay-now="canPayNow">
+                        </div>
                     </div>
                 </div>
             </li>

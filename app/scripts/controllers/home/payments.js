@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, Payments) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, Payments) {
 
     $scope.isCollapsed = true;
 
@@ -96,5 +96,11 @@ angular.module('nextgearWebApp')
     $scope.payments.resetSearch($stateParams.filter);
 
     $scope.fees = Payments.fetchFees();
+
+    var refreshCanPayNow = function () {
+      $scope.canPayNow = Payments.canPayNow();
+      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+    };
+    refreshCanPayNow();
 
   });

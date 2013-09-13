@@ -7,7 +7,8 @@ angular.module('nextgearWebApp')
         type:        '@nxgPaymentButtons',
         isAdded:     '=',
         isPayoff:    '=',
-        isScheduled: '='
+        isScheduled: '=',
+        canPayNow:   '='
       },
       controller: function($scope) {
         $scope.toggle = function(options) {

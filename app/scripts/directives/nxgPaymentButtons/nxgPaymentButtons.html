@@ -3,6 +3,7 @@
   <div ng-switch-when="fee">
     <button type="button"
             class="btn btn-mini btn-block"
+            ng-disabled="!canPayNow"
             ng-click="toggle()">{{isAdded && 'Remove' || 'Add'}} Fee</button>
   </div>
 
