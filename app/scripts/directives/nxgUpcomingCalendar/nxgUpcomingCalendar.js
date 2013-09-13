@@ -86,6 +86,10 @@ angular.module('nextgearWebApp')
             if (moment().isSame(event.start, 'day')) {
               element.addClass('today');
             }
+            // add styling hook for events that are overdue
+            if (moment().isAfter(event.start, 'day')) {
+              element.addClass('overdue');
+            }
             element.find('.fc-event-inner').append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
             return element;
           }
