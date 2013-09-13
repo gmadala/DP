@@ -31,6 +31,7 @@ module.exports = function(karma) {
       'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
 	    'app/components/nnnick-chartjs/Chart.js',
+	    'app/components/sinon/lib/sinon/util/fake_timers.js',
 			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			'app/scripts/directives/**/*.html',
