@@ -4,40 +4,28 @@
     "Data": {
         "AccountFees": [
             {
-                "FinancialRecordId": "24626",
+                "FeeType": "Membership Dues",
+                "FinancialRecordId": "24625",
                 "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveUnixDate": 1377835200,
+                "Balance": 340.00,
+                "EffectiveDate": "2013-09-08",
                 "Description": "Description of whatever this is for.",
-                "IsFee": true,
                 "FloorplanId": "2490",
                 "StockNumber": "3490",
                 "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
+                "Posted": "2013-09-01"
             },
             {
+                "FeeType": "Overdue Payment Fee",
                 "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveUnixDate": 1377835200,
+                "FinancialRecordTypeId": 14,
+                "Balance": 290.00,
+                "EffectiveDate": "2013-09-13",
                 "Description": "Description of whatever this is for.",
-                "IsFee": true,
                 "FloorplanId": "2490",
                 "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
-            },
-            {
-                "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveUnixDate": 1377835200,
-                "Description": "Description of whatever this is for.",
-                "IsFee": true,
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
+                "Vin": "SDLKGHOWRIHGGHKLP",
+                "Posted": "2013-09-13"
             }
         ]
     }

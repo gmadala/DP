@@ -3,7 +3,7 @@
     "Message": null,
     "Data": {
         "UnappliedFundsBalance": 23934.00,
-        "AvailableUnappliedfundsBalance": 132.403,
+        "AvailableUnappliedFundsBalance": 132.403,
         "PaymentRowCount": 20,
         "SearchResults": [
             {
@@ -14,7 +14,7 @@
                 "DaysOnFloorplan": "34",
                 "UnitDescription": "2008 Toyota Sequoia Limited Tan",
                 "UnitColor": "Purple",
-                "UnitStatusId": "In Stock",
+                "UnitStatus": "In Stock",
                 "CreditType": "VISA",
                 "CurrentPayoff": 34098.00,
                 "AmountDue": 2409.00,
@@ -24,7 +24,6 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": true,
                 "HasNsf": false,
-                "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "NextGear",
@@ -39,7 +38,7 @@
                 "DaysOnFloorplan": "34",
                 "UnitDescription": "2007 BMW 7-Series 750Li Black",
                 "UnitColor": "Purple",
-                "UnitStatusId": "In Stock",
+                "UnitStatus": "In Stock",
                 "CreditType": "VISA",
                 "CurrentPayoff": 34098.00,
                 "AmountDue": 2409.00,
@@ -49,7 +48,6 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": true,
                 "HasNsf": false,
-                "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "NextGear",
@@ -64,7 +62,7 @@
                 "DaysOnFloorplan": "34",
                 "UnitDescription": "2008 Toyota Sequoia Limited Tan",
                 "UnitColor": "Purple",
-                "UnitStatusId": "In Stock",
+                "UnitStatus": "In Stock",
                 "CreditType": "VISA",
                 "CurrentPayoff": 34098.00,
                 "AmountDue": 2409.00,
@@ -74,50 +72,11 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": true,
                 "HasNsf": false,
-                "IsPayoff": false,
                 "PayAmountDue": true,
                 "PayPayoffAmount": false,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30"
-            }
-        ],
-        "AccountFees": [
-            {
-                "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveDate": "2013-08-16",
-                "Description": "Description of whatever this is for.",
-                "IsFee": true,
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
-            },
-            {
-                "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveDate": "2013-08-16",
-                "Description": "Description of whatever this is for.",
-                "IsFee": true,
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
-            },
-            {
-                "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 13,
-                "Balance": 3490.00,
-                "EffectiveDate": "2013-08-16",
-                "Description": "Description of whatever this is for.",
-                "IsFee": true,
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "ApplyToFinancialRecordId": "true"
             }
         ]
     }
