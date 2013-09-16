@@ -26,7 +26,7 @@ describe('Model: dashboard', function () {
           "PaymentsDueToday": 3,
           "PaymentsDueTodayAmount": 1280.34,
           "UpcomingPayments": 4,
-          "UpcomingPaymentAmount": 8367.22,
+          "UpcomingPaymentsAmount": 8367.22,
           "AccountFees": 1,
           "AccountFeeAmount": 400,
           "AvailableCredit": 50500,
