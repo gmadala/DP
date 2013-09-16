@@ -7,10 +7,10 @@ angular.module('nextgearWebApp')
 
     $scope.documents = [
       { 'title': 'Credit Availability Query History (PDF)',
-        'url': '/report/credtiavailabilityqueryhistory'
+        'url': api.contentLink('/report/credtiavailabilityqueryhistory', {})
       },
       { 'title': 'Receivable Detail (PDF)',
-        'url': '/report/getReceivableDetail'
+        'url': api.contentLink('/report/getReceivableDetail', {})
       }
     ];
 
@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
           }
 
           var date = api.toShortISODate($scope.data.disDate);
-          var strUrl = 'report/disbursementdetail/' + date;
+          var strUrl = api.contentLink('report/disbursementdetail/' + date, {});
 
           window.open(
             strUrl,

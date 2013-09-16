@@ -7,7 +7,7 @@ angular.module('nextgearWebApp')
 
     $scope.currentReports = [
       { 'title': 'Receivable Detail (PDF)',
-        'url': '/report/getReceivableDetail'
+        'url': api.contentLink('/report/getReceivableDetail', {})
       }
     ];
 
@@ -31,7 +31,7 @@ angular.module('nextgearWebApp')
           }
 
           window.open(
-            strUrl,
+            api.contentLink(strUrl, {}),
             '_blank'  // open a new window every time
           );
 
@@ -47,7 +47,10 @@ angular.module('nextgearWebApp')
           }
 
           var date = api.toShortISODate($scope.data.disDate);
-          var strUrl = 'report/disbursementdetail/' + date;
+          var strUrl = api.contentLink(
+            'report/disbursementdetail/' + date,
+            {}
+          );
 
           window.open(
             strUrl,
@@ -67,21 +70,26 @@ angular.module('nextgearWebApp')
           var startDate = api.toShortISODate($scope.data.paidOffStartDate);
           var endDate = api.toShortISODate($scope.data.paidOffEndDate);
 
-          var strUrl = 'report/paidoffsummary?startDate=' + startDate + '&endDate=' + endDate;
+          var params = {
+            'startDate' : startDate,
+            'endDate' : endDate
+          };
 
           if ($scope.data.paidOffVinFilter) {
-            strUrl += '&VIN=' + encodeURIComponent($scope.data.paidOffVinFilter);
+            params.VIN = encodeURIComponent($scope.data.paidOffVinFilter);
           }
 
           if ($scope.data.stockNos) {
-            strUrl += 'stockNumber=' + $scope.trimCommasAndWhitespace( $scope.data.stockNos );
+            params.stockNumber = $scope.trimCommasAndWhitespace( $scope.data.stockNos );
           }
           else if ($scope.data.rangeStart || $scope.data.rangeEnd) {
-            strUrl += 'stockNumber=' + $scope.data.rangeStart;
-            if ($scope.data.rangeEnd) {
-              strUrl += '-' + $scope.data.rangeEnd;
-            }
+            params.stockNumber = $scope.data.rangeStart + '-' + $scope.data.rangeEnd;
           }
+
+          var strUrl = api.contentLink(
+            'report/paidoffsummary',
+            params
+          );
 
           window.open(
             strUrl,
@@ -100,9 +108,10 @@ angular.module('nextgearWebApp')
           }
 
           var date = api.toShortISODate($scope.data.curtailmentDate);
-          var strUrl = 'report/getupcomingcurtailmentpayments/' + date;
-
-          console.log(strUrl);
+          var strUrl = api.contentLink(
+            'report/getupcomingcurtailmentpayments/' + date,
+            {}
+          );
 
           window.open(
             strUrl,
