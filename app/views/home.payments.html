@@ -59,6 +59,13 @@
                               <div class="span2">
                                   <strong>Due</strong>
                                   <p>{{ payment.DueDate | moment }}</p>
+                                  <p class="nxg-payment-due-status"
+                                     ng-class="getDueStatus(payment)"
+                                     ng-switch="getDueStatus(payment)">
+                                    <i class="icon"></i>
+                                    <span ng-switch-when="today">Due Today</span>
+                                    <span ng-switch-when="overdue">Overdue</span>
+                                  </p>
                               </div>
                               <div class="span2">
                                   <strong>Payoff</strong>

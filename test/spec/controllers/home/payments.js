@@ -47,13 +47,39 @@ describe('Controller: PaymentsCtrl', function () {
     });
   }));
 
-  it('should attach promise for canPayNow to the scope', function () {
-    var out = null;
-    scope.canPayNow.then(function (result) {
-      out = result;
+  it('should attach a getDueStatus function to the scope', function () {
+    expect(typeof scope.getDueStatus).toBe('function');
+  });
+
+  describe('getDueStatus function', function () {
+
+    var clock;
+
+    beforeEach(function () {
+      // mock the system clock so we have a predictable current date & time for testing
+      // see http://sinonjs.org/docs/#clock
+      clock = sinon.useFakeTimers(moment([2013, 0, 1, 11, 15]).valueOf(), 'Date');
     });
-    scope.$apply();
-    expect(out).toBe(true);
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return overdue for past due dates', function () {
+      var result = scope.getDueStatus({DueDate: '2012-12-31'});
+      expect(result).toBe('overdue');
+    });
+
+    it('should return today for same-day due dates', function () {
+      var result = scope.getDueStatus({DueDate: '2013-01-01'});
+      expect(result).toBe('today');
+    });
+
+    it('should return future for future due dates', function () {
+      var result = scope.getDueStatus({DueDate: '2013-01-02'});
+      expect(result).toBe('future');
+    });
+
   });
 
   it('should attach a payments view model to the scope', function () {
@@ -165,6 +191,15 @@ describe('Controller: PaymentsCtrl', function () {
     });
     scope.$apply();
     expect(out).toBe(searchResult.data);
+  });
+
+  it('should attach promise for canPayNow to the scope', function () {
+    var out = null;
+    scope.canPayNow.then(function (result) {
+      out = result;
+    });
+    scope.$apply();
+    expect(out).toBe(true);
   });
 
 });

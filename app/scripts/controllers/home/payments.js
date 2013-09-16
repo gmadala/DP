@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, Payments) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments) {
 
     $scope.isCollapsed = true;
 
@@ -30,6 +30,19 @@ angular.module('nextgearWebApp')
     $scope.total = 3544.49*3;
     $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
     // end dummy data
+
+    $scope.getDueStatus = function (payment) {
+      var due = moment(payment.DueDate),
+        today = moment();
+
+      if (due.isBefore(today, 'day')) {
+        return 'overdue';
+      } else if (due.isSame(today, 'day')) {
+        return 'today';
+      } else {
+        return 'future';
+      }
+    };
 
     $scope.payments = {
       results: [],
