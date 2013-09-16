@@ -236,14 +236,14 @@
 }
 
 #foo:checked::before,
-input[type="radio"] {
+.nxg-dash-calendar-container input[type="radio"] {
     position:absolute;
     clip: rect(0,0,0,0);
     clip: rect(0 0 0 0);
 }
 
 #foo:checked,
-input[type="radio"]#week + label::before {
+.nxg-dash-calendar-container input[type="radio"]#week + label::before {
   @extend .btn;
   @include background(linear-gradient(#ffffff, #ddd));
   content: 'Week';
@@ -256,7 +256,7 @@ input[type="radio"]#week + label::before {
 }
 
 #foo:checked,
-input[type="radio"]#month + label::before {
+.nxg-dash-calendar-container input[type="radio"]#month + label::before {
   @extend .btn;
   @include background(linear-gradient(#ffffff, #ddd));
   content: 'Month';
@@ -268,13 +268,13 @@ input[type="radio"]#month + label::before {
   margin-left: -2px;
 }
 
-input[type="radio"]#week:checked + label::before {
+.nxg-dash-calendar-container input[type="radio"]#week:checked + label::before {
   @extend .btn:active;
   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset -1px 1px 1px rgba(0,0,0,0.4));
   @include background(linear-gradient(#eaeaea, #c4c4c4));
 }
 
-input[type="radio"]#month:checked + label::before {
+.nxg-dash-calendar-container input[type="radio"]#month:checked + label::before {
   @extend .btn:active;
   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
   @include background(linear-gradient(#eaeaea, #c4c4c4));
