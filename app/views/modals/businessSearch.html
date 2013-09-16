@@ -1,13 +1,14 @@
 <div class="modal-header">
-  <h3>Business Search</h3>
+  Business Search
 </div>
 
 <div class="modal-body">
     <label>Business Name or Number</label>
     <input type="text" ng-model="query"><button ng-click="businessSearch.search()">Search</button>
     <!-- demo/debug: shows the current business search mode -->
+    <!-- TODO: Remove this debug code for reployment. -->
     <em>Mode: {{ mode }}</em>
-    <table>
+    <table class="separated-table-head">
         <thead>
         <tr>
             <th>Business Name</th>
@@ -18,7 +19,7 @@
             <!-- -->
             <th>City</th>
             <th>State</th>
-            <th></th>
+            <th>s</th>
         </tr>
         </thead>
     </table>

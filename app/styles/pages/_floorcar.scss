@@ -9,6 +9,7 @@ label {
 }
 
 .floorcar {
+  margin-top: 1em;
   position: relative;
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -19,8 +20,8 @@ label {
     top: 0;
     left: -1px;
     content: '';
-    border-left: 1px solid #eaeaea;
-    border-right: 1px solid #eaeaea;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
     height: 47px;
     width: 100%;
   }
@@ -45,4 +46,20 @@ label {
 
 #inputSeller, #inputVin {
   width: 300px;
+}
+
+#foo:checked::before,
+input[type="radio"] {
+    position:absolute;
+    clip: rect(0,0,0,0);
+    clip: rect(0 0 0 0);
+}
+
+#foo:checked,
+input[type="radio"] + label::before {
+  content: url('../img/radio.gif');
+}
+
+input[type="radio"]:checked + label::before {
+  content: url('../img/radio-checked.gif');
 }
