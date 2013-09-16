@@ -34,7 +34,8 @@
                     </div>
                     <div class="span2">
                         <div nxg-payment-buttons="fee"
-                             is-added="fee.isAdded"
+                             item="fee"
+                             queue-status="getQueueStatus(fee)"
                              can-pay-now="canPayNow">
                         </div>
                     </div>
@@ -94,9 +95,10 @@
                       </div>
                       <div class="span2 offset2"
                            nxg-payment-buttons="payment"
-                           is-added="payment.IsAdded"
-                           is-payoff="payment.IsPayoff"
-                           is-scheduled="payment.IsScheduled"></div>
+                           item="payment"
+                           is-scheduled="payment.Scheduled"
+                           queue-status="getQueueStatus(payment)">
+                      </div>
                   </div>
 
                   <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>

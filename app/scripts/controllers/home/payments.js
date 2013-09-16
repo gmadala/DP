@@ -44,6 +44,8 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.getQueueStatus = Payments.getPaymentQueueStatus;
+
     $scope.payments = {
       results: [],
       loading: false,

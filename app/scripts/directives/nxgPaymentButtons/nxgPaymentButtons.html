@@ -2,34 +2,58 @@
 
   <div ng-switch-when="fee">
     <button type="button"
+            id="toggleFee"
             class="btn btn-mini btn-block"
+            ng-class="{'in-queue': queueStatus}"
             ng-disabled="!canPayNow"
-            ng-click="toggle()">{{isAdded && 'Remove' || 'Add'}} Fee</button>
+            ng-click="toggleInQueue()"
+            tooltip="{{ !queueStatus && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+      {{!queueStatus && 'Add' || 'Remove'}} Fee
+    </button>
   </div>
 
   <div ng-switch-when="payment">
+    <button type="button"
+            id="togglePayment"
+            class="btn btn-mini btn-block"
+            ng-class="{'in-queue': queueStatus == 'payment'}"
+            ng-disabled="queueStatus == 'payoff'"
+            ng-click="toggleInQueue()"
+            tooltip="{{ queueStatus != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+      {{ (queueStatus != 'payment') && 'Add' || 'Remove' }} Payment
+    </button>
 
     <button type="button"
+            id="togglePayoff"
             class="btn btn-mini btn-block"
-            ng-disabled="isAdded && isPayoff"
-            ng-click="toggle()">{{ (isAdded && !isPayoff) && (isScheduled && 'Cancel Scheduled' || 'Remove') || 'Add'}} Payment</button>
-
-    <button type="button"
-            class="btn btn-mini btn-block"
-            ng-disabled="isAdded && !isPayoff"
-            ng-click="toggle({payoff: true})">{{ (isAdded && isPayoff) && (isScheduled && 'Cancel Scheduled' || 'Remove') || 'Add'}} Payoff</button>
-
+            ng-class="{'in-queue': queueStatus == 'payoff'}"
+            ng-disabled="queueStatus == 'payment'"
+            ng-click="toggleInQueue(true)"
+            tooltip="{{ queueStatus != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+      {{ (queueStatus != 'payoff') && 'Add' || 'Remove' }} Payoff
+    </button>
   </div>
 
-  <div ng-switch-when="payment-checkout">
+  <div ng-switch-when="scheduled-payment">
+    <button type="button"
+            id="cancelScheduled"
+            class="btn btn-mini btn-block"
+            ng-click="cancelScheduled()">
+      Cancel Scheduled Payment
+    </button>
 
     <button type="button"
+            id="fakeTogglePayoff"
             class="btn btn-mini btn-block"
-            ng-click="toggle()">{{ (isAdded) && (isScheduled && 'Cancel Scheduled' || 'Remove') || 'Add'}} Payment</button>
-
-    <button type="button"
-            class="btn btn-mini btn-block"
-            ng-click="toggle()">{{ (!isScheduled) && (isAdded && 'Cancel Scheduled' || 'Remove') || 'Add'}} Payment</button>
-
+            disabled>
+      Add Payoff
+    </button>
   </div>
+
 </div>

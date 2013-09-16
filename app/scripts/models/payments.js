@@ -103,13 +103,13 @@ angular.module('nextgearWebApp')
         // TODO: flesh out method stub
         return item;
       },
-      isInPaymentQueue: function (item) {
+      getPaymentQueueStatus: function (item) {
         // TODO: flesh out method stub
         if (item.FloorplanId === '2049') {
-          return true;
+          return 'payment';
         } else if (item.FloorplanId === '2048') {
           return 'payoff';
-        } else if (item.FloorplanId) {
+        } else if (item.DueDate) {
           return false;
         } else {
           return item.FinancialRecordId === '24625';

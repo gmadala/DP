@@ -34,6 +34,9 @@ describe('Controller: PaymentsCtrl', function () {
       },
       canPayNow: function () {
         return $q.when(true);
+      },
+      getPaymentQueueStatus: function () {
+        return false;
       }
     };
 
@@ -46,6 +49,10 @@ describe('Controller: PaymentsCtrl', function () {
       Payments: modelMock
     });
   }));
+
+  it('should attach the getQueueStatus function to the scope', function () {
+    expect(scope.getQueueStatus).toBe(modelMock.getPaymentQueueStatus);
+  });
 
   it('should attach a getDueStatus function to the scope', function () {
     expect(typeof scope.getDueStatus).toBe('function');

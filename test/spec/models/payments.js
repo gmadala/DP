@@ -338,10 +338,10 @@ describe("Model: Payments", function () {
     });
   });
 
-  describe('isInPaymentQueue function', function () {
+  describe('getPaymentQueueStatus function', function () {
     // TODO: update tests once this is implemented
     it('should exist', function () {
-      expect(typeof payments.isInPaymentQueue).toBe('function');
+      expect(typeof payments.getPaymentQueueStatus).toBe('function');
     });
   });
 

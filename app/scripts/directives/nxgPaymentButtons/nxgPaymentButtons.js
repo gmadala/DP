@@ -5,30 +5,33 @@ angular.module('nextgearWebApp')
     return {
       scope: {
         type:        '@nxgPaymentButtons',
-        isAdded:     '=',
-        isPayoff:    '=',
+        item:        '=',
+        queueStatus: '=',
         isScheduled: '=',
         canPayNow:   '='
       },
-      controller: function($scope) {
-        $scope.toggle = function(options) {
+      controller: function($scope, Payments) {
 
-          $scope.isAdded = !$scope.isAdded;
-
-          // Delete `isScheduled` if they remove a scheduled payment
-          if (!$scope.isAdded) {
-            delete $scope.isScheduled;
+        $scope.$watch('isScheduled + type', function () {
+          if ($scope.isScheduled && $scope.type === 'payment') {
+            $scope.type = 'scheduled-payment';
+          } else if (!$scope.isScheduled && $scope.type === 'scheduled-payment') {
+            $scope.type = 'payment';
           }
+        });
 
-          // Delete `isPayoff` if they remove a payoff, otherwise set it to true
-          if (options && options.payoff) {
-            if (!$scope.isAdded) {
-              delete $scope.isPayoff;
-            } else {
-              $scope.isPayoff = true;
-            }
+        $scope.toggleInQueue = function (asPayoff) {
+          if (!$scope.queueStatus) {
+            Payments.addToPaymentQueue($scope.item, asPayoff);
+          } else {
+            Payments.removeFromPaymentQueue($scope.item);
           }
         };
+
+        $scope.cancelScheduled = function () {
+          // TODO: Implement this
+        };
+
       },
       templateUrl: 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'
     };
