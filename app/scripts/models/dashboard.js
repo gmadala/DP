@@ -28,7 +28,7 @@ angular.module('nextgearWebApp')
 
             // calculate .paymentChartData
             var scheduledPaymentAmount = result.ScheduledPayments.reduce(function (prev, current) {
-              return prev + (current.PaymentDue || current.PayoffDue);
+              return prev + current.ScheduledPaymentAmount;
             }, 0);
 
             result.paymentChartData = {
@@ -57,7 +57,7 @@ angular.module('nextgearWebApp')
               dateKey,
               list,
               sumPayments = function (accumulator, payment) {
-                return accumulator + (payment.PaymentDue || payment.PayoffDue);
+                return accumulator + (payment.ScheduledPaymentAmount || payment.PaymentDue || payment.PayoffDue);
               },
               addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
                 if (sourceList.length === 0) { return; }

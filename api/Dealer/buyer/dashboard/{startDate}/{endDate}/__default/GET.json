@@ -54,27 +54,19 @@
     "ScheduledPayments": [
       {
         "ScheduledDate": "2013-09-06",
-        "Description": "Toyota Sequoia Limited Tan",
-        "PayoffDue": 0,
-        "PaymentDue": 2490
+        "ScheduledPaymentAmount": 2490
       },
       {
         "ScheduledDate": "2013-09-09",
-        "Description": "BMW 7-Series 750Li Black",
-        "PayoffDue": 0,
-        "PaymentDue": 3860
+        "ScheduledPaymentAmount": 3860
       },
       {
         "ScheduledDate": "2013-09-09",
-        "Description": "Toyota Sequoia Limited Red",
-        "PayoffDue": 4980,
-        "PaymentDue": 0
+        "ScheduledPaymentAmount": 4980,
       },
       {
         "ScheduledDate": "2013-09-19",
-        "Description": "A Payment Scheduled",
-        "PayoffDue": 0,
-        "PaymentDue": 180
+        "ScheduledPaymentAmount": 180
       }
     ],
     "Receipts": [

@@ -67,15 +67,7 @@ describe('Model: dashboard', function () {
           "ScheduledPayments": [
             {
               "ScheduledDate": "2013-08-01",
-              "Description": "Toyota Sequoia Limited Tan",
-              "PayoffDue": 2200.00,
-              "PaymentDue": 0
-            },
-            {
-              "ScheduledDate": "2013-08-01",
-              "Description": "BMW 7-Series 750Li Black",
-              "PayoffDue": 0,
-              "PaymentDue": 2800.00
+              "ScheduledPaymentAmount": 5000
             }
           ],
           "Receipts": [
@@ -199,7 +191,7 @@ describe('Model: dashboard', function () {
 
     it('should create the expected scheduledEvents on calendarData', function () {
       var expected = [
-        {title: '<span class="nxg-calendar-count">2</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+        {title: '<span class="nxg-calendar-count">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
       ];
 
       expect(angular.equals(resultData.calendarData.scheduledEvents, expected)).toBe(true);
@@ -209,7 +201,7 @@ describe('Model: dashboard', function () {
       var expected = {
         '2013-08-01': [
           {title: '<span class="nxg-calendar-count">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-          {title: '<span class="nxg-calendar-count">2</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+          {title: '<span class="nxg-calendar-count">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
         ],
         '2013-08-07': [
           {title: '<span class="nxg-calendar-count">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
