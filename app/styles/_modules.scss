@@ -197,3 +197,53 @@
     margin-top: 0.5em;
   }
 }
+
+
+// Tooltips
+.tooltip .tooltip-arrow {
+  z-index: $zindexTooltip + 100;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    z-index: $zindexTooltip -1;
+  }
+}
+
+.tooltip {
+  &.in {
+    @include opacity(100);
+  }
+
+  &.right {
+    margin-left: 10px;
+
+    .tooltip-arrow {
+      left: -4px;
+      border-right-color: #BBB;
+
+      &:before {
+        top: 50%;
+        left: 1px;
+        margin-top: -$tooltipArrowWidth;
+        border-width: $tooltipArrowWidth $tooltipArrowWidth $tooltipArrowWidth 0;
+        border-right-color: #FFF;
+      }
+    }
+  }
+}
+
+.tooltip-inner {
+  @include border-radius(0);
+  color: #666;
+  font-size: 12px;
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #BBB;
+  z-index: $zindexTooltip;
+}
