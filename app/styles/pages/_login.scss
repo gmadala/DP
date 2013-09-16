@@ -1,0 +1,89 @@
+// LOGIN & FORGOT USERNAME/PASSWORD
+
+#nxg-logo {
+  width: 209px;
+}
+
+.login-head {
+  @include gradient-row();
+  border-bottom: 2px solid $white;
+
+  .container-fluid {
+    margin: 20px auto;
+  }
+
+  & + .container-line::after {
+    background-color: $brand-gradient-top; // IE fallback
+    @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -5;
+  }
+}
+
+.login-contents {
+  form {
+    padding: 10px 20px 0;
+  }
+
+  label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    cursor: pointer;
+  }
+
+  .well-single {
+    @include box-shadow(rgba(0,0,0,0.35) 0 0 6px);
+    width: 300px;
+    margin: 25px auto;
+
+    .modal-footer {
+      padding: 10px 0;
+      margin: 10px 20px 0;
+    }
+  }
+
+  .forgot {
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .headline {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .notice, .login-help {
+    color: $white;
+  }
+
+  .login-help {
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+
+    a {
+      color: $white;
+      border-bottom: 1px solid $white;
+
+      &:hover, &:active {
+        color: #EEE;
+        border-bottom: 1px solid #EEE;
+      }
+    }
+  }
+}
