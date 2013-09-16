@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     return {
       getDetails: function(stockNum) {
-        return api.request('GET', 'floorplan/' + stockNum).then(function(r) {
+        return api.request('GET', '/floorplan/' + stockNum).then(function(r) {
           return {
             vin: r.UnitVin,
             make: r.UnitMake,
