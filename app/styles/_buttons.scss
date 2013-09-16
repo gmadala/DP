@@ -1,9 +1,6 @@
 .btn {
-  box-sizing: border-box;
-  padding-top: 2px;
-  padding-bottom: 1px;
-  padding-right: 10px;
-  padding-left: 10px;
+  @include box-sizing(border-box);
+  padding: 2px 10px 1px 10px;
   color: #17659D;
   font-weight: bold;
   border: none;

@@ -5,6 +5,7 @@
 .modal {
   border: 1px solid #adadad;
   @include border-radius(0);
+
   form {
     margin: 0;
   }
@@ -15,7 +16,7 @@
   padding: 9px;
   border: none;
   font-size: 16px;
-  line-height: 16px;
+  line-height: 1;
   color: #17659D;
   font-weight: normal;
   background-color: #eeeeee;
@@ -27,6 +28,7 @@
   right: 11px;
   color: #878787;
   cursor: pointer;
+
   &:hover {
     color: #676767;
   }
