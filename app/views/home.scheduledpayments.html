@@ -32,10 +32,7 @@
                             <strong>Scheduled On</strong><p> {{ pay.scheduledDate | date:'MM/dd/yyyy' }} </p>
                         </div>
                         <div class="span3">
-                            <strong>Payoff: </strong><p> {{ pay.payoffAmount | currency }} </p>
-                        </div>
-                        <div class="span4">
-                            <strong>Curtailment: </strong><p> {{ pay.curtailmentAmount | currency }} </p>
+                            <strong>{{(pay.isCurtailment && 'Curtailment' || Payoff)}}: </strong><p> {{ pay.paymentAmount | currency }} </p>
                         </div>
                         <div class="span3">
                             <strong>Setup: </strong><p> {{ pay.setupDate | date:'MM/dd/yyyy' }} </p>

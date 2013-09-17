@@ -6,27 +6,29 @@ angular.module('nextgearWebApp')
     var self = this;
     var PAGE_SIZE = 15;
     var lastRequest = null;
+    var totalCount = 0;
 
     self.request = function(request) {
       lastRequest = request;
       return api.request('GET', '/payment/searchscheduled', lastRequest).then(
         function(results) {
           var searchResults = [];
+          totalCount = results.PaymentRowCount;
 
           for (var i = 0; i < results.SearchResults.length; i++) {
             var item = results.SearchResults[i];
             searchResults.push({
               floorplanId: item.FloorplanId,
               vin: item.Vin,
-              description: item.UnitDescription,
+              description: item.VehicleDescription,
               stockNumber: item.StockNumber,
-              status: self.toStatus(item.UnitStatusId),
-              scheduledDate: item.ScheduledPaymentDate,
-              setupDate: item.ScheduleSetupDate,
-              canBePaidOff: item.PayPayoffAmount,
-              payoffAmount: item.PrincipalPayoff,
-              curtailmentAmount: item.AmountDue,
-              scheduledBy: 'Michael Bluth' // TODO: Needs to be mapped to correct field
+              status: self.toStatus(item),
+              scheduledDate: item.ScheduledForDate,
+              setupDate: item.SetupDate,
+              canBePaidOff: self.isPending(item),
+              isCurtailment: item.CurtailmentPayment,
+              paymentAmount: item.ScheduledPaymentAmount,
+              scheduledBy: item.ScheduledByUserDisplayname
             });
           }
           return searchResults;
@@ -34,12 +36,24 @@ angular.module('nextgearWebApp')
       );
     };
 
-    self.toStatus = function(statusId) {
+    self.isPending = function(item) {
+      return !item.Processed && !item.Cancelled && !item.Voided;
+    };
+
+    self.toStatus = function(item) {
       var status;
 
-      switch (statusId) {
-      default:
-        status = 'scheduled';
+      if (item.Processed) {
+        status = 'Processed';
+      }
+      else if (item.Cancelled) {
+        status = 'Cancelled';
+      }
+      else if (item.Voided) {
+        status = 'Voided';
+      }
+      else {
+        status = 'Pending';
       }
       return status;
     };
