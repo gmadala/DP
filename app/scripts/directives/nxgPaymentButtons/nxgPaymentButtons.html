@@ -1,59 +1,74 @@
-<div ng-switch="type">
+<div ng-switch="internalType">
 
-  <div ng-switch-when="fee">
-    <button type="button"
-            id="toggleFee"
-            class="btn btn-mini btn-block"
-            ng-class="{'in-queue': queueStatus}"
-            ng-disabled="!canPayNow"
-            ng-click="toggleInQueue()"
-            tooltip="{{ !queueStatus && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-      {{!queueStatus && 'Add' || 'Remove'}} Fee
-    </button>
-  </div>
+  <button ng-switch-when="fee"
+          type="button"
+          id="toggleFee"
+          class="btn btn-mini btn-block"
+          ng-class="{'in-queue': queueStatus}"
+          ng-disabled="!canPayNow"
+          ng-click="toggleInQueue()"
+          tooltip="{{ !queueStatus && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
+          tooltip-placement="right"
+          tooltip-popup-delay="700">
+    {{!queueStatus && 'Add' || 'Remove'}} Fee
+  </button>
 
-  <div ng-switch-when="payment">
-    <button type="button"
-            id="togglePayment"
-            class="btn btn-mini btn-block"
-            ng-class="{'in-queue': queueStatus == 'payment'}"
-            ng-disabled="queueStatus == 'payoff'"
-            ng-click="toggleInQueue()"
-            tooltip="{{ queueStatus != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-      {{ (queueStatus != 'payment') && 'Add' || 'Remove' }} Payment
-    </button>
+  <button ng-switch-when="payment"
+          type="button"
+          id="togglePayment"
+          class="btn btn-mini btn-block"
+          ng-class="{'in-queue': queueStatus == 'payment'}"
+          ng-disabled="queueStatus == 'payoff'"
+          ng-click="toggleInQueue()"
+          tooltip="{{ queueStatus != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip-placement="right"
+          tooltip-popup-delay="700">
+    {{ (queueStatus != 'payment') && 'Add' || 'Remove' }} Payment
+  </button>
 
-    <button type="button"
-            id="togglePayoff"
-            class="btn btn-mini btn-block"
-            ng-class="{'in-queue': queueStatus == 'payoff'}"
-            ng-disabled="queueStatus == 'payment'"
-            ng-click="toggleInQueue(true)"
-            tooltip="{{ queueStatus != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-      {{ (queueStatus != 'payoff') && 'Add' || 'Remove' }} Payoff
-    </button>
-  </div>
+  <button ng-switch-when="payment-scheduledPayment"
+          type="button"
+          id="cancelScheduledPayment"
+          class="btn btn-mini btn-block"
+          ng-click="cancelScheduled()">
+    Cancel Scheduled Payment
+  </button>
 
-  <div ng-switch-when="scheduled-payment">
-    <button type="button"
-            id="cancelScheduled"
-            class="btn btn-mini btn-block"
-            ng-click="cancelScheduled()">
-      Cancel Scheduled Payment
-    </button>
+  <button ng-switch-when="payment-scheduledPayoff"
+          type="button"
+          id="fakeTogglePayment"
+          class="btn btn-mini btn-block"
+          disabled>
+    Add Payment
+  </button>
 
-    <button type="button"
-            id="fakeTogglePayoff"
-            class="btn btn-mini btn-block"
-            disabled>
-      Add Payoff
-    </button>
-  </div>
+  <button ng-switch-when="payoff"
+          type="button"
+          id="togglePayoff"
+          class="btn btn-mini btn-block"
+          ng-class="{'in-queue': queueStatus == 'payoff'}"
+          ng-disabled="queueStatus == 'payment'"
+          ng-click="toggleInQueue(true)"
+          tooltip="{{ queueStatus != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip-placement="right"
+          tooltip-popup-delay="700">
+    {{ (queueStatus != 'payoff') && 'Add' || 'Remove' }} Payoff
+  </button>
+
+  <button ng-switch-when="payoff-scheduledPayment"
+          type="button"
+          id="fakeTogglePayoff"
+          class="btn btn-mini btn-block"
+          disabled>
+    Add Payoff
+  </button>
+
+  <button ng-switch-when="payoff-scheduledPayoff"
+          type="button"
+          id="cancelScheduledPayoff"
+          class="btn btn-mini btn-block"
+          ng-click="cancelScheduled()">
+    Cancel Scheduled Payoff
+  </button>
 
 </div>

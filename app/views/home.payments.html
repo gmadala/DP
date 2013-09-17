@@ -97,7 +97,11 @@
                       <div class="span2 offset2"
                            nxg-payment-buttons="payment"
                            item="payment"
-                           is-scheduled="payment.Scheduled"
+                           queue-status="getQueueStatus(payment)">
+                      </div>
+                      <div class="span2 offset2"
+                           nxg-payment-buttons="payoff"
+                           item="payment"
                            queue-status="getQueueStatus(payment)">
                       </div>
                   </div>

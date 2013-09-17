@@ -4,20 +4,26 @@ angular.module('nextgearWebApp')
   .directive('nxgPaymentButtons', function () {
     return {
       scope: {
-        type:        '@nxgPaymentButtons',
+        type:        '@nxgPaymentButtons', // fee | payment | payoff
         item:        '=',
         queueStatus: '=',
-        isScheduled: '=',
         canPayNow:   '='
       },
       controller: function($scope, $dialog, Payments) {
 
-        $scope.$watch('isScheduled + type', function () {
-          if ($scope.isScheduled && $scope.type === 'payment') {
-            $scope.type = 'scheduled-payment';
-          } else if (!$scope.isScheduled && $scope.type === 'scheduled-payment') {
-            $scope.type = 'payment';
+        // set internalType based on type and scheduled state
+        $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
+          var result = $scope.type;
+
+          if ($scope.item.Scheduled) {
+            if ($scope.item.PayPayoffAmount) {
+              result += '-scheduledPayoff';
+            } else {
+              result += '-scheduledPayment';
+            }
           }
+
+          $scope.internalType = result;
         });
 
         $scope.toggleInQueue = function (asPayoff) {
