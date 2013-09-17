@@ -10,7 +10,7 @@
   <div class="container-fluid login-contents">
 
     <!-- TODO: Check to see if there's a notice to show or not. -->
-    <p class="notice" ng-show="true">
+    <p class="notice" ng-show="">
       EXAMPLE: MyNextGear will be down for maintenance June 24, 2013 - June 25, 2013 from 10:00pm - 1:00am EST. Thanks for your patience!
     </p>
 
@@ -20,32 +20,28 @@
         <h4>Sign In</h4>
 
         <div class="well-out">
-          <form name="loginForm">
-
-            <label>Username:</label>
+          <form class="login-form" name="loginForm">
+            <label for="credUsername">Username:</label>
             <input type="text" ng-model="credentials.username" id="credUsername" name="credUsername" required />
 
             <label for="credPassword">Password:</label>
             <input type="text" ng-model="credentials.password" id="credPassword" name="credPassword" required />
 
-            <!-- TODO: Check for variable that determines whether username/password are valid via server side -->
             <span class="error" ng-show="showLoginError">The username or password you entered is incorrect.</span>
-
-
           </form>
 
           <div class="footer modal-footer">
             <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.credUsername.$pristine || loginForm.credPassword.$pristine">Log In</button>
           </div>
 
-          <div class="forgot">
+          <div class="forgot-link">
             <a ng-click="forgot=true">Forgot your username or password?</a>
           </div>
         </div><!-- end .well-out -->
       </div><!-- end .well -->
     </div><!-- end .row-fluid -->
 
-    <div class="row-fluid">
+    <div class="row-fluid" ng-hide="forgot">
       <div class="span6 offset3 login-help">
         <p class="headline">Do you have <a href="http://get.adobe.com/reader/">Adobe Acrobat Reader 8.1</a> or newer?</p>
         <p>You will need it in order to view your reports.<br/>
@@ -55,48 +51,59 @@
     </div>
 
     <!-- FORGOT USERNAME/PASSWORD VIEW -->
-    <div ng-show="forgot" class="row-fluid span8">
-      <h2 class="center">Forgot Your User Name or Password?</h2>
+    <div ng-show="forgot" class="row-fluid forgot">
+      <h3>Forgot Your User Name or Password?</h3>
 
-      <div class="span4" ng-class="{'nxg-fade' : forgotPassword.$dirty}">
-        <h3>Forgot Your User Name?</h3>
-
-        <p>
-          Enter the email address associated with your account to receive your username via email.
-        </p>
-        <form name="forgotUsername">
-          <label>Email Address</label>
-          <input type="email" name="email" ng-model="email" ng-disabled="forgotPassword.$dirty" required/>
-          <!-- TODO: Add error text for when email is valid but not recogized by NextGear -->
-          <p class="error"  ng-show="">
-            We were unable to locate this email address.  If you need assistance, please call NextGear Capital Support at: (888) 969-3721
+      <div class="well well-double span6 offset2 adjacent" ng-class="{'nxg-fade' : forgotPassword.$dirty}">
+        <h4>Forgot Your User Name?</h4>
+        <div class="well-out">
+          <p class="instructions">
+            Enter the email address associated with your account to receive your username via email.
           </p>
 
-          <p class="error" ng-show="forgotUsername.email.$invalid && forgotUsername.email.$dirty">
-            XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721
-          </p>
-          <button class="btn" ng-disabled="forgotUsername.email.$invalid || forgotPassword.$dirty">Submit</button>
-        </form>
+          <form name="forgotUsername">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" ng-model="email" required/>
+
+            <!-- TODO: Add error text for when email is valid but not recogized by NextGear -->
+            <p class="form-error"  ng-show="">
+              We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+
+            <p class="form-error" ng-show="uValidity.email.$error">
+              XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+          </form>
+          <div class="footer modal-footer">
+            <button class="btn btn-small btn-primary" ng-class="{ disabled: forgotUsername.email.$invalid }" ng-click="onForgotUsernameSubmit()">Submit</button>
+          </div>
+        </div><!-- end .well-out -->
       </div>
 
-      <div class="span4 offset1" ng-class="{'nxg-fade' : forgotUsername.$dirty}">
-        <h3>Forgot Your Password?</h3>
+      <div class="well well-double span6 adjacent" ng-class="{'nxg-fade' : forgotUsername.$dirty}">
+        <h4>Forgot Your Password?</h4>
+        <div class="well-out">
+          <p class="instructions">Enter your username to receive a<br/> new password via email.</p>
 
-        <p>Enter your username to receive a new password via email.</p>
-        <form name="forgotPassword">
-          <label>User Name</label>
-          <input type="text" name="userName" ng-model="credentials.username" ng-disabled="forgotUsername.$dirty" required/>
-          <!-- TODO: Add error text for when username is valid but no trecognized by NextGear -->
-          <p class="error" ng-show="">
-            We were unable to locate this username. If you need assistance, please call NextGear Capital Support at: (888) 969-3721
-          </p>
+          <form name="forgotPassword">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" name="userName" ng-model="credentials.username" required/>
 
-          <div ng-show="identity.showQuestion">
-            <p>{{ identity.securityQuestion }}</p>
-            <input type="text" name="answer" ng-model="identity.securityAnswer" required />
-            <!-- TODO: Add error text for when answer is not correct (server side validation) --> </div>
-          <button class="btn" ng-disabled="forgotPassword.username.$invalid || forgotUsername.$dirty" ng-click="onForgotPasswordSubmit()">Submit</button>
-        </form>
+            <p class="form-error" ng-show="">
+              We were unable to locate this username. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+
+            <div ng-show="identity.showQuestion">
+              <label>Security Question</label>
+              <p class="security-question">{{ identity.securityQuestion }}</p>
+              <label class="answer-label" for="securityAnswer">Security Question Answer</label>
+              <input type="text" name="securityAnswer" id="securityAnswer" ng-model="identity.securityAnswer" required />
+            </div>
+          </form>
+          <div class="footer modal-footer">
+            <button class="btn btn-small btn-primary" ng-class="{ disabled: forgotPassword.userName.$invalid}" ng-click="onForgotPasswordSubmit()">Submit</button>
+          </div>
+        </div><!-- end .well-out -->
       </div>
     </div><!-- end forgot username/password view -->
   </div>

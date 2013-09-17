@@ -24,7 +24,11 @@ h4 {
 }
 
 .nxg-fade {
-  @include opacity(50);
+  background-color: $white;
+
+  & * {
+    @include opacity(50);
+  }
 }
 
 .row-item {
@@ -63,7 +67,16 @@ ul {
 }
 
 .well-single {
+  width: 300px;
   margin: 25px auto;
+}
+
+.well-double {
+  margin: 25px 0;
+}
+
+.well-single, .well-double {
+  @include box-shadow(rgba(0,0,0,0.35) 0 0 6px);
 }
 
 .well.adjacent {

@@ -1,0 +1,13 @@
+// TYPOGRAPHY
+
+a {
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+    color: #888;
+  }
+}

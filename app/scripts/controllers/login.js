@@ -28,7 +28,22 @@ angular.module('nextgearWebApp')
         });
     };
 
+    $scope.onForgotUsernameSubmit = function() {
+      console.log('forgot username');
+      $scope.uValidity = angular.copy($scope.forgotUsername);
+      if (!$scope.forgotUsername.$valid) {
+        return false;
+      }
+    }
+
     $scope.onForgotPasswordSubmit = function() {
+      console.log('forgot password');
+       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+      $scope.pValidity = angular.copy($scope.forgotPassword);
+      if (!$scope.forgotPassword.$valid) {
+        return false;
+      }
+
       // TODO: Grab security question and answer data
       $scope.identity.showQuestion = true;
 

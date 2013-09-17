@@ -97,6 +97,7 @@ select, .nxg-date-field {
     margin-top: -1px;
     width: 28px;
     height: 28px;
+
     &:active {
       border: none;
       @include box-shadow(none);
@@ -108,4 +109,10 @@ select, .nxg-date-field {
   display: block;
   padding-left: 0.5em;
   margin: 0;
+}
+
+.form-error {
+  font-size: 12px;
+  color: $error;
+  margin: 5px 0;
 }

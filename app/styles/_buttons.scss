@@ -20,11 +20,9 @@
     border: none;
     margin-top: 1px;
   }
-  &.disabled {
+  &.disabled, &.disabled:hover {
     @include opacity(65);
-    &:hover {
-      @extend .disabled;
-    }
+
     &:active {
       border-bottom: 1px solid #9c9c9c;
       margin-top: 0px;
@@ -61,7 +59,7 @@
     color: #e5e5e5;
     @include background-image(linear-gradient(#39739b, #1b4b7a));
   }
-  &:disabled {
+  &:disabled, &.disabled {
     color: $white;
     background-color: #4078a0;
     @include background-image(linear-gradient(#76a0bb, #155287));
