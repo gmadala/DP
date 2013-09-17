@@ -33,6 +33,7 @@ angular.module('nextgearWebApp')
         };
 
       },
-      templateUrl: 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'
+      templateUrl: 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html',
+      replace: true
     };
   });

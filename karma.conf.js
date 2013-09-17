@@ -89,7 +89,7 @@ module.exports = function(karma) {
 		browsers: ['Chrome'],
 
 		// If browser does not capture in given timeout [ms], kill it
-		captureTimeout: 10000,
+		captureTimeout: 60000,
 
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit
