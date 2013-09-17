@@ -398,6 +398,46 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('getPaymentQueue function', function () {
+
+    it('should return the live payment queue contents as fees and payments hashes', function () {
+      var fee = {
+        FeeType: 'a fee type',
+        FinancialRecordId: 'fee1',
+        Posted: '2013-01-01'
+      };
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan2',
+        Posted: '2013-01-01'
+      };
+
+      payments.addToPaymentQueue(fee);
+
+      var content = payments.getPaymentQueue();
+
+      expect(content.fees).toBeDefined();
+      expect(content.payments).toBeDefined();
+
+      var items = [];
+      angular.forEach(content.fees, function (value, key) {
+        items.push(value);
+      });
+      expect(items.length).toBe(1);
+      expect(items[0]).toBe(fee);
+
+      payments.addToPaymentQueue(payment);
+
+      items = [];
+      angular.forEach(content.payments, function (value, key) {
+        items.push(value);
+      });
+      expect(items.length).toBe(1);
+      expect(items[0]).toBe(payment);
+    });
+
+  });
+
   describe('cancelScheduled function', function () {
 
     var request;

@@ -151,6 +151,12 @@ angular.module('nextgearWebApp')
           return true;
         }
       },
+      getPaymentQueue: function () {
+        return {
+          fees: paymentQueue.fees,
+          payments: paymentQueue.payments
+        };
+      },
       cancelScheduled: function (payment) {
         var data = {
           FloorplanId: payment.FloorplanId
