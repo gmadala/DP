@@ -95,22 +95,26 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('auction_home.dashboard', {
         url: '',
         templateUrl: 'views/auction.home.dashboard.html',
-        controller: 'AuctionDashboardCtrl'
+        controller: 'AuctionDashboardCtrl',
+        isAuctionState: true
       })
       .state('auction_home.dealersearch', {
         url: '/dealersearch',
         templateUrl: 'views/auction.home.dealersearch.html',
-        controller: 'AuctionDealerSearchCtrl'
+        controller: 'AuctionDealerSearchCtrl',
+        isAuctionState: true
       })
       .state('auction_home.bulkflooring', {
         url: '/bulkflooring',
         templateUrl: 'views/auction.home.bulkflooring.html',
-        controller: 'AuctionBulkFlooringCtrl'
+        controller: 'AuctionBulkFlooringCtrl',
+        isAuctionState: true
       })
       .state('auction_home.sellerfloorplan', {
         url: '/sellerfloorplan',
         templateUrl: 'views/auction.home.sellerfloorplan.html',
-        controller: 'AuctionSellerFloorplanCtrl'
+        controller: 'AuctionSellerFloorplanCtrl',
+        isAuctionState: true
       })
       .state('auction_reports', {
         url: '/act/reports',
@@ -138,10 +142,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           $location.path('/login');
         }
         if (User.infoLoaded()) {
-          if (toState.isAuctionState && isDealer) {
-            $location.path('');
-          }
-          else if (toState.url === '') {
+          if ((toState.isAuctionState && isDealer) || !(toState.isAuctionState || isDealer) || toState.url === '') {
             $location.path(isDealer ? '/home' : '/act/home');
           }
         }
