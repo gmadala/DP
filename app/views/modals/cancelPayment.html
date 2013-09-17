@@ -1,0 +1,31 @@
+<div class="modal-header">
+  Are you sure you would like to cancel your scheduled payment?
+</div>
+
+<div class="modal-body">
+  <div class="alert alert-error" ng-show="!!submitError">{{ submitError }}</div>
+  <div>
+    <strong>VIN</strong> {{ payment.Vin }}
+  </div>
+  <div>
+    {{ payment.UnitDescription }}
+  </div>
+  <div>
+    <strong>Stock #</strong> {{ payment.StockNumber }}
+  </div>
+  <div>
+    <strong>Scheduled</strong>
+    <p>{{ payment.ScheduledPaymentDate | moment }}</p>
+  </div>
+  <div>
+    <strong>Payment Amount</strong>
+    <p>{{ (payment.PayPayoffAmount && payment.CurrentPayoff || payment.AmountDue) | currency }}</p>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <span class="loading" ng-show="submitInProgress"></span>
+  <button ng-click="handleYes()" class="btn" ng-disabled="submitInProgress">Yes</button>
+  <button ng-click="handleNo()" class="btn btn-primary" ng-disabled="submitInProgress">No</button>
+</div>
+

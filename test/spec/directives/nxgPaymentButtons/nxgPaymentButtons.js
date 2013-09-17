@@ -127,4 +127,39 @@ describe('Directive: nxgPaymentButtons', function () {
 
   });
 
+  describe('scheduled-payment mode', function () {
+
+    var dialog;
+
+    beforeEach(inject(function ($rootScope, $compile, $dialog) {
+      dialog = $dialog;
+      element = angular.element('<div nxg-payment-buttons="payment" ' +
+        'item="myPayment" queue-status="inQueue" is-scheduled="isScheduled"></div>');
+      scope = $rootScope.$new();
+      scope.myPayment = {};
+      scope.inQueue = false;
+      scope.isScheduled = true;
+      $compile(element)(scope);
+      $rootScope.$digest();
+    }));
+
+    it('should have an inert add payoff button', function() {
+      expect(element.find('#fakeTogglePayoff').attr('disabled')).toBeDefined();
+    });
+
+    it('cancel scheduled payment button should invoke the cancel scheduled payment modal', function() {
+      spyOn(dialog, 'dialog').andReturn({
+        open: angular.noop
+      });
+
+      element.find('#cancelScheduled').click();
+
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/cancelPayment.html');
+      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('CancelPaymentCtrl');
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(scope.myPayment);
+    });
+
+  });
+
 });

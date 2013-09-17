@@ -114,6 +114,17 @@ angular.module('nextgearWebApp')
         } else {
           return item.FinancialRecordId === '24625';
         }
+      },
+      cancelScheduled: function (payment) {
+        var data = {
+          FloorplanId: payment.FloorplanId
+        };
+        return api.request('POST', '/payment/cancelscheduledpayment', data).then(
+          function (/*success*/) {
+            payment.Scheduled = false;
+            return payment;
+          }
+        );
       }
     };
   });

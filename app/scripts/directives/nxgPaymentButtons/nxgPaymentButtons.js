@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
         isScheduled: '=',
         canPayNow:   '='
       },
-      controller: function($scope, Payments) {
+      controller: function($scope, $dialog, Payments) {
 
         $scope.$watch('isScheduled + type', function () {
           if ($scope.isScheduled && $scope.type === 'payment') {
@@ -29,7 +29,20 @@ angular.module('nextgearWebApp')
         };
 
         $scope.cancelScheduled = function () {
-          // TODO: Implement this
+          var dialogOptions = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            templateUrl: 'views/modals/cancelPayment.html',
+            controller: 'CancelPaymentCtrl',
+            resolve: {
+              payment: function () {
+                return $scope.item;
+              }
+            }
+          };
+
+          $dialog.dialog(dialogOptions).open();
         };
 
       },
