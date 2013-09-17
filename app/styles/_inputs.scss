@@ -1,6 +1,6 @@
 select {
   @include border-radius(0);
-  background: transparent;
+  background: $white;
   color: #17659D;
   font-weight: bold;
   border: 1px solid #c8c8c8;
@@ -8,6 +8,12 @@ select {
   width: 200px;
   font-size: 13px;
   -webkit-user-select: none;
+
+  &:focus {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    outline: 0;
+    border-color: #C8C8C8;
+  }
 }
 
 textarea,
@@ -31,6 +37,12 @@ input[type="color"],
   border: 1px solid #c8c8c8;
   height: 28px;
   margin: 0;
+
+  &:focus {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    outline: 0;
+    border-color: #C8C8C8;
+  }
 
   &:focus:invalid {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);

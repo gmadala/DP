@@ -1,53 +1,64 @@
-<form name="searchForm" class="form-horizontal well search payments" novalidate>
+<div class="well">
+  <h4>{{ title }}</h4>
 
-    <strong>{{ title }}</strong>
+  <div class="well-out">
+    <form name="searchForm" class="search payments" novalidate>
+      <div class="row-fluid">
+        <div class="span5 keyword">
+          <div class="control-group">
+            <label class="control-label" for="keyword">Keyword</label>
 
-    <div class="control-group">
-      <label class="control-label" for="keyword">Keyword</label>
+            <div class="controls">
+              <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
+            </div>
+          </div><!-- end .control-group -->
 
-      <div class="controls">
-          <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
-      </div>
-    </div>
+          <div class="control-group search-clear-btns">
+            <a ng-click="clear()">Clear Search Results</a>
+            <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
+          </div>
+        </div><!-- end .span5 -->
 
-    <div class="control-group">
-        <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
+        <div class="span7">
+          <div class="control-group filters">
+            <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
 
-        <div class="controls">
-            <select id="filterSelect" name="filterSelect" ng-model="activeCriteria.filter"
-                    ng-options="o.value as o.label for o in filterOptions">
-            </select>
-        </div>
-    </div>
+            <div class="controls">
+              <select id="filterSelect" name="filterSelect" ng-model="activeCriteria.filter"
+                            ng-options="o.value as o.label for o in filterOptions"></select>
+            </div>
+          </div><!-- end .control-group -->
 
-    <div class="control-group" ng-show="dateRangeShown">
-      <label class="control-label" for="startDate">Date Range</label>
+          <div class="control-group date" ng-show="dateRangeShown">
+            <label class="control-label" for="startDate">Date Range</label>
 
-      <div class="controls">
-        <input type="text" id="startDate" name="startDate" ng-model="activeCriteria.startDate"
-               data-date-format="mm/dd/yy" bs-datepicker
-               nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-        <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
-      </div>
-    </div>
-    <div class="control-group" ng-show="dateRangeShown">
-      <label class="control-label" for="endDate">To</label>
+            <div class="controls">
+              <input type="text" id="startDate" name="startDate" ng-model="activeCriteria.startDate"
+                       data-date-format="mm/dd/yy" bs-datepicker
+                       nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
+              <button type="button" class="btn btn-cal" data-toggle="datepicker"> <i class="icon-calendar"></i>
+              </button>
+            </div>
+          </div><!-- end .control-group -->
 
-      <div class="controls">
-        <input type="text" id="endDate" name="endDate" ng-model="activeCriteria.endDate"
-               data-date-format="mm/dd/yy" bs-datepicker
-               nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-        <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
-        <label for="endDate" class="text-error"
-               ng-show="validity.endDate.$error.nxgRequires">
-          Invalid date range
-        </label>
-      </div>
-    </div>
+          <div class="control-group date" ng-show="dateRangeShown">
 
-    <div class="control-group">
-        <a ng-click="clear()">Clear Search Results</a>
-        <input type="submit" value="Search" ng-click="search()"/>
-    </div>
+            <label class="control-label" for="endDate">To</label>
+            <div class="controls">
+              <input type="text" id="endDate" name="endDate" ng-model="activeCriteria.endDate"
+                       data-date-format="mm/dd/yy" bs-datepicker
+                       nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
+              <button type="button" class="btn btn-cal" data-toggle="datepicker">
+                <i class="icon-calendar"></i>
+              </button>
 
-</form>
+              <label for="endDate" class="text-error"
+                       ng-show="validity.endDate.$error.nxgRequires">Invalid date range</label>
+            </div><!-- end .controls -->
+          </div><!-- end .control-group -->
+        </div><!-- end .span7 -->
+      </div><!-- end .row-fluid -->
+    </form>
+  </div>
+
+</div>

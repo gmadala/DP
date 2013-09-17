@@ -1,0 +1,52 @@
+// SEARCH FORM
+
+.search-form {
+  form.search {
+    margin-bottom: 0;
+  }
+
+  .well-out {
+    padding: 10px;
+  }
+
+  .control-group {
+    @extend %float-l;
+
+    &.date {
+      position: relative;
+
+      & + .date {
+        margin-left: 5px;
+      }
+
+      input {
+        width: 120px;
+      }
+    }
+  }
+
+  .keyword {
+    padding-right: 10px;
+    border-right: 1px solid #D1D1D1;
+
+    .control-group, input {
+       @extend %full-width;
+    }
+  }
+
+  .filters {
+    margin-right: 10px;
+
+    select {
+      width: 150px;
+    }
+  }
+
+  .search-clear-btns {
+    @extend %align-right;
+
+    .btn-small {
+      margin-left: 10px;
+    }
+  }
+}
