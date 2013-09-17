@@ -1,6 +1,11 @@
 <div class="modal-header">
-  <h3>Confirm Flooring Request</h3>
+  Confirm Flooring Request
 </div>
+
+<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
+  <span class="glyphicon glyphicon-remove"></span>
+</div>
+
 <div class="modal-body">
   <p>Confirm the vehicle information to send the flooring request to NextGear. Print this screen for your records.</p>
     <table>
@@ -69,6 +74,6 @@
   <span>View Vehicle Verification Checklist</span>
 </div>
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-primary">Return to Form</button>
+  <button ng-click="close()" class="btn btn-mini btn-primary">Return to Form</button>
   <button class="btn btn-primary">Submit Flooring Request</button>
 </div>

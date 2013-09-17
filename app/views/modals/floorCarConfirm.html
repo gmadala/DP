@@ -1,53 +1,89 @@
 <div class="modal-header">
-  <h3>Confirm Flooring Request</h3>
+  Confirm Flooring Request
 </div>
-<div class="modal-body">
-  <p>Confirm the vehicle information to send the flooring request to NextGear. Print this screen for your records.</p>
-  <table>
-    <thead>Vehicle Information</thead>
-    <tbody>
-      <tr>
-        <td>VIN</td>
-        <td>{{ formData.UnitVin }}</td>
-      </tr>
-      <tr>
-        <td>Make</td>
-        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Make || formData.UnitMake }}</td>
-      </tr>
-      <tr>
-        <td>Model</td>
-        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Model || formData.UnitModel }}</td>
-      </tr>
-      <tr>
-        <td>Style</td>
-        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Style || formData.UnitStyle }}</td>
-      </tr>
-      <tr>
-        <td>Year</td>
-        <td>{{ formData.SelectedVehicle && formData.SelectedVehicle.Year || formData.UnitYear }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
-    <thead>Flooring Information</thead>
-    <tbody>
-      <tr>
-        <td>Purchase Amount</td>
-        <td>{{ formData.UnitPurchasePrice | currency }}</td>
-      </tr>
-      <tr>
-        <td>Purchase Date</td>
-        <td>{{ formData.UnitPurchaseDate | momentUTC:'M/D/YYYY' }}</td>
-      </tr>
-      <tr>
-        <td>Send Payment To</td>
-        <td>{{ formData.PaySeller && 'Seller' || 'Buyer' }}</td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
+  <span class="glyphicon glyphicon-remove"></span>
+</div>
+
+<div class="modal-body row-fluid">
+  <p>
+    Confirm the vehicle information to send the flooring request to NextGear. <br />Print this screen for your records.
+  </p>
+  <span class="row-fluid">
+    <span class="well span8 adjacent">
+      <span>Vehicle Information</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>VIN</td>
+            <td>{{ formData.UnitVin }}</td>
+          </tr>
+          <tr>
+            <td>Make</td>
+            <td>
+              {{ formData.SelectedVehicle && formData.SelectedVehicle.Make || formData.UnitMake }}
+            </td>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td>
+              {{ formData.SelectedVehicle && formData.SelectedVehicle.Model || formData.UnitModel }}
+            </td>
+          </tr>
+          <tr>
+            <td>Style</td>
+            <td>
+              {{ formData.SelectedVehicle && formData.SelectedVehicle.Style || formData.UnitStyle }}
+            </td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>
+              {{ formData.SelectedVehicle && formData.SelectedVehicle.Year || formData.UnitYear }}
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </span>
+
+    <span class="well span8 adjacent">
+      <span>Flooring Information</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>Purchase Amount</td>
+            <td>{{ formData.UnitPurchasePrice | currency }}</td>
+          </tr>
+          <tr>
+            <td>Purchase Date</td>
+            <td>{{ formData.UnitPurchaseDate | momentUTC:'M/D/YYYY' }}</td>
+          </tr>
+          <tr>
+            <td>Send Payment To</td>
+            <td>{{ formData.PaySeller && 'Seller' || 'Buyer' }}</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </span>
+
+  </span>
+</div>
+
+<div class="floorcar-confirm-view-checklist">
   <a href="/MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf" target="_blank">View Vehicle Verification Checklist</a>
 </div>
+
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-primary">Return to Form</button>
-  <button ng-click="confirm()" class="btn btn-primary">Submit Flooring Request</button>
+  <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>
+  <button ng-click="confirm()" class="btn btn-mini btn-primary">Submit Flooring Request</button>
 </div>

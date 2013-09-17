@@ -63,3 +63,67 @@ input[type="radio"] + label::before {
 input[type="radio"]:checked + label::before {
   content: url('../img/radio-checked.gif');
 }
+
+.search-modal.search-modal-business {
+  width: 720px;
+  margin-left: -360px;
+  .modal-body {
+    padding: 1em;
+    margin: 1em 1em 0 1em;
+    border: 1px solid #eaeaea;
+    &.search-results {
+      height: 400px;
+      border-bottom: 1px solid #eaeaea;
+      margin: -1px 1em 1em 1em;
+    }
+  }
+  td, th {
+    height: 50px;
+  }
+  .modal-footer {
+    padding: 0;
+  }
+}
+
+.floor-confirmation-modal {
+  width: 480px;
+  margin-left: -240px;
+  .well {
+    color: #666666;
+    font-size: 14px;
+    line-height: 26px;
+    span {
+      margin-left: 6px;
+    }
+    padding: 0;
+    margin: -1px;
+    border-bottom: 1px solid #c7c7c7;
+    border-left: 1px solid #c7c7c7;
+    border-right: 1px solid #c7c7c7;
+    &.adjacent:first-child {
+      border-left: 1px solid #c7c7c7;
+    }
+    &.adjacent:last-child {
+      border-right: 1px solid #c7c7c7;
+    }
+  }
+  table {
+    tr td:nth-child(2) {
+      color: #434343;
+      font-weight: bold;
+    }
+    td {
+      font-size: 11px;
+      padding: 5px 0 5px 6px;
+      line-height: 11px;
+    }
+    padding: 1em;
+    background: #fff;
+    width: 100%;
+  }
+}
+
+.floorcar-confirm-view-checklist {
+  text-align: center;
+  margin-bottom: 1em;
+}

@@ -107,7 +107,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submit = function () {
-      // take a snapshot of form state -- view can bind to this for submit-time update of validation display
+      //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
       if (!$scope.form.$valid) {
         return false;
@@ -117,6 +117,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: true,
         backdropClick: true,
+        dialogClass: 'modal floor-confirmation-modal',
         templateUrl: 'views/modals/floorCarConfirm.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
@@ -142,7 +143,7 @@ angular.module('nextgearWebApp')
         function (/*success*/) {
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',
-            buttons = [{label: 'OK', cssClass: 'btn-primary'}];
+            buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
           $dialog.messageBox(title, msg, buttons).open();
           $scope.reset();
         }, function (error) {

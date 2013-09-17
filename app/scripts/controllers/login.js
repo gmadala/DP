@@ -34,7 +34,7 @@ angular.module('nextgearWebApp')
       if (!$scope.forgotUsername.$valid) {
         return false;
       }
-    }
+    };
 
     $scope.onForgotPasswordSubmit = function() {
       console.log('forgot password');

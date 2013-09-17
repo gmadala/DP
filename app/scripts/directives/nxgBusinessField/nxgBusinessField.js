@@ -50,6 +50,7 @@ angular.module('nextgearWebApp')
     // TODO: Final integration with business search modal should be covered under req #304
     $scope.openBusinessSearch = function() {
       var dialogOptions = {
+        dialogClass: 'modal search-modal search-modal-business',
         backdrop: true,
         keyboard: true,
         backdropClick: true,
