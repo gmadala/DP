@@ -324,25 +324,78 @@ describe("Model: Payments", function () {
 
   });
 
-  describe('addToPaymentQueue function', function () {
-    // TODO: update tests once this is implemented
-    it('should exist', function () {
-      expect(typeof payments.addToPaymentQueue).toBe('function');
+  describe('addToPaymentQueue function + getPaymentQueueStatus', function () {
+
+    it('should add fees to the queue', function () {
+      var fee = {
+        FeeType: 'a fee type',
+        FinancialRecordId: 'fee1',
+        Posted: '2013-01-01'
+      };
+      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(false);
+      payments.addToPaymentQueue(fee);
+      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(true);
     });
+
+    it('should add payments to the queue', function () {
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan1',
+        Posted: '2013-01-01'
+      };
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+      payments.addToPaymentQueue(payment);
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payment');
+    });
+
+    it('should add payoffs to the queue', function () {
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan2',
+        Posted: '2013-01-01'
+      };
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+      payments.addToPaymentQueue(payment, true);
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payoff');
+    });
+
   });
 
-  describe('removeFromPaymentQueue function', function () {
-    // TODO: update tests once this is implemented
-    it('should exist', function () {
-      expect(typeof payments.removeFromPaymentQueue).toBe('function');
-    });
-  });
+  describe('removeFromPaymentQueue function + getPaymentQueueStatus', function () {
 
-  describe('getPaymentQueueStatus function', function () {
-    // TODO: update tests once this is implemented
-    it('should exist', function () {
-      expect(typeof payments.getPaymentQueueStatus).toBe('function');
+    it('should remove fees from the queue', function () {
+      var fee = {
+        FeeType: 'a fee type',
+        FinancialRecordId: 'fee1',
+        Posted: '2013-01-01'
+      };
+      payments.addToPaymentQueue(fee);
+      payments.removeFromPaymentQueue(angular.copy(fee));
+      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(false);
     });
+
+    it('should remove payments from the queue', function () {
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan1',
+        Posted: '2013-01-01'
+      };
+      payments.addToPaymentQueue(payment);
+      payments.removeFromPaymentQueue(angular.copy(payment));
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+    });
+
+    it('should remove payoffs from the queue', function () {
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan2',
+        Posted: '2013-01-01'
+      };
+      payments.addToPaymentQueue(payment, true);
+      payments.removeFromPaymentQueue(angular.copy(payment));
+      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+    });
+
   });
 
   describe('cancelScheduled function', function () {

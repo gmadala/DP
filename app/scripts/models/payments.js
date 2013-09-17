@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .factory('Payments', function($q, $filter, api, moment, Paginate, Floorplan) {
 
-    // private state:
+    // private global state:
 
     // provides caching such that we only have to request business hours data once per day;
     // use businessHours.resolve() in methods below to access the data via a promise
@@ -23,6 +23,31 @@ angular.module('nextgearWebApp')
         } else {
           return $q.when(businessHours.data);
         }
+      }
+    };
+
+    var paymentQueue = {
+      fees: {},
+      payments: {},
+      getKey: function (item) {
+        if (angular.isDefined(item.FeeType)) {
+          // fee
+          return item.FinancialRecordId + '_' + item.Posted;
+        } else if (angular.isDefined(item.Scheduled)) {
+          // payment
+          return item.FloorplanId + '_' + item.DueDate;
+        }
+        return null;
+      },
+      getStorage: function (item) {
+        if (angular.isDefined(item.FeeType)) {
+          // fee
+          return paymentQueue.fees;
+        } else if (angular.isDefined(item.Scheduled)) {
+          // payment
+          return paymentQueue.payments;
+        }
+        return null;
       }
     };
 
@@ -96,23 +121,34 @@ angular.module('nextgearWebApp')
         });
       },
       addToPaymentQueue: function (item, asPayoff) {
-        // TODO: flesh out method stub
-        return {item: item, asPayoff: asPayoff};
+        var key = paymentQueue.getKey(item),
+          storage = paymentQueue.getStorage(item);
+        if (storage === paymentQueue.payments) {
+          item.$queueAsPayoff = !!asPayoff;
+        }
+        storage[key] = item;
       },
       removeFromPaymentQueue: function (item) {
-        // TODO: flesh out method stub
-        return item;
+        var key = paymentQueue.getKey(item),
+          storage = paymentQueue.getStorage(item);
+        delete item.$queueAsPayoff;
+        delete storage[key];
       },
       getPaymentQueueStatus: function (item) {
-        // TODO: flesh out method stub
-        if (item.FloorplanId === '2049') {
-          return 'payment';
-        } else if (item.FloorplanId === '2048') {
-          return 'payoff';
-        } else if (item.DueDate) {
-          return false;
+        var key = paymentQueue.getKey(item),
+          storage = paymentQueue.getStorage(item),
+          queueItem = storage[key];
+
+        if (!queueItem) {
+          return false; // not in queue
+        }
+
+        if (storage === paymentQueue.payments) {
+          // in queue as curtailment payment or payoff
+          return (queueItem.$queueAsPayoff ? 'payoff' : 'payment');
         } else {
-          return item.FinancialRecordId === '24625';
+          // simply in queue (e.g. a fee)
+          return true;
         }
       },
       cancelScheduled: function (payment) {
