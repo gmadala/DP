@@ -193,3 +193,37 @@
     margin-top: 0.5em;
   }
 }
+
+.upcoming-payments {
+  padding: 0;
+}
+
+.upcoming-payments-table {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 12px;
+  //for "View All Payments button"
+  text-align: right;
+  background-color: $white;
+  .more.btn {
+    margin: 1em;
+  }
+  table {
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid #eee;
+  }
+  td, th {
+    padding: 2px 0 2px 5px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    &:first-child {
+      border: none;
+    }
+    &:last-child {
+      border: none;
+    }
+  }
+}

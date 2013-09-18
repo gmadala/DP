@@ -171,15 +171,9 @@ input[type="radio"] {
 }
 
 input[type="radio"] + label::before {
-  position: relative;
-  top: 6px;
-  left: -6px;
   content: url('../img/radio.gif');
 }
 
 input[type="radio"]:checked + label::before {
-  position: relative;
-  top: 6px;
-  left: -6px;
   content: url('../img/radio-checked.gif');
 }
