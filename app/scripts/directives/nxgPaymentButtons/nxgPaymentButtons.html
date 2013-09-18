@@ -10,7 +10,7 @@
           tooltip="{{ !queueStatus && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    {{!queueStatus && 'Add' || 'Remove'}} Fee
+    <span>{{!queueStatus && 'Add' || 'Remove'}}</span>
   </button>
 
   <button ng-switch-when="payment"
@@ -23,7 +23,7 @@
           tooltip="{{ queueStatus != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    {{ (queueStatus != 'payment') && 'Add' || 'Remove' }} Payment
+    <span>{{ (queueStatus != 'payment') && 'Add' || 'Remove' }}</span>
   </button>
 
   <button ng-switch-when="payment-scheduledPayment"
@@ -31,7 +31,7 @@
           id="cancelScheduledPayment"
           class="btn btn-mini btn-block"
           ng-click="cancelScheduled()">
-    Cancel Scheduled Payment
+    <span>Unschedule</span>
   </button>
 
   <button ng-switch-when="payment-scheduledPayoff"
@@ -39,7 +39,7 @@
           id="fakeTogglePayment"
           class="btn btn-mini btn-block"
           disabled>
-    Add Payment
+    <span>Add Payment</span>
   </button>
 
   <button ng-switch-when="payoff"
@@ -52,7 +52,7 @@
           tooltip="{{ queueStatus != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    {{ (queueStatus != 'payoff') && 'Add' || 'Remove' }} Payoff
+    <span>{{ (queueStatus != 'payoff') && 'Add' || 'Remove' }}</span>
   </button>
 
   <button ng-switch-when="payoff-scheduledPayment"
@@ -60,7 +60,7 @@
           id="fakeTogglePayoff"
           class="btn btn-mini btn-block"
           disabled>
-    Add Payoff
+    <span>Add Payoff</span>
   </button>
 
   <button ng-switch-when="payoff-scheduledPayoff"
@@ -68,7 +68,7 @@
           id="cancelScheduledPayoff"
           class="btn btn-mini btn-block"
           ng-click="cancelScheduled()">
-    Cancel Scheduled Payoff
+    <span>Unschedule</span>
   </button>
 
 </div>

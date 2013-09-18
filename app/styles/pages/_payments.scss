@@ -1,0 +1,73 @@
+// PAYMENTS
+
+.fees .main-info,
+.payments .main-info {
+  height: 70px;
+}
+
+.fees .table-list-head {
+  background-color: #AAA;
+}
+
+.cell {
+  &.fee-type { @extend %quarter-width; }
+  &.fee-desc { @extend %quarter-width; }
+  &.fee-due { width: 13%; }
+  &.fee-posted { width: 15%; }
+  &.fee-amt { width: 22%; }
+
+  &.pay-more { min-width: 4%; }
+  &.pay-desc { width: 17%; }
+  &.pay-due { width: 13%; }
+  &.pay-vin { width: 10%; }
+  &.pay-stock { width: 10%; }
+  &.pay-status { width: 9%; }
+  &.pay-payment-amt { width: 16%; }
+  &.pay-payoff-amt { width: 15%; }
+  &.pay-title { width: 6%; }
+}
+
+.pay-due {
+  .warning {
+    margin-top: 20px;
+  }
+}
+
+.more-details {
+  clear:both;
+  height: 50px;
+}
+
+.payments .cell .btn-block,
+    .fees .cell .btn-block,
+    .fees .cell .btn-block:hover,
+    .fees .cell .btn-block:active {
+    margin-top: 15px;
+}
+
+#togglePayoff, #togglePayment, #toggleFee {
+  position: relative;
+  padding-left: 26px;
+
+  span:before {
+    content: '';
+    @include background-image(url('../img/icons/twocolor_chkbx.png'));
+    display: block;
+    position: absolute;
+    left: 5px;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0;
+  }
+
+  &.in-queue span:before {
+    width: 17px;
+    @include background-image(url('../img/icons/twocolor_chkbx_checked.png'));
+  }
+
+  &.in-queue {
+    background-color: #878787;
+    @include background-image(linear-gradient(#878787, #555));
+    color: $white;
+  }
+}
