@@ -103,7 +103,8 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/services/base64.js',
-        '!app/scripts/directives/nxgChart/nxgChart.js'
+        '!app/scripts/directives/nxgChart/nxgChart.js',
+        '!app/scripts/directives/tooltip.js'
       ]
     },
     karma: {
