@@ -52,10 +52,10 @@
       </ul>
     </div>
   </div>
-  <button ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">Show Details</button>
+
   <div collapse="isCollapsed" ng-init="isCollapsed = false" class="row-fluid more-details">
     <div class="span9 well upcoming-payments">
-      <h6>Upcoming Payments</h6>
+      <p>Upcoming Payments</p>
       <div class="well-out upcoming-payments-table">
         <table>
           <thead>
@@ -119,6 +119,11 @@
       </table>
     </div>
   </div>
+  <span class="details-toggle-line">
+    <button ng-click="isCollapsed = !isCollapsed" class="details-toggle-btn">
+      <i class="glyphicon glyphicon-chevron-{{ isCollapsed && 'down' || 'up'}}"></i>
+      {{ isCollapsed && 'Show' || 'Close'}} Details</button>
+  </span>
 </section>
 
 <section class="row-fluid summaries">

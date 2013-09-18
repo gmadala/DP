@@ -129,9 +129,6 @@
     td:nth-child(2) {
       text-align: left;
     }
-    a {
-      text-decoration: underline;
-    }
     tr td:nth-child(3) {
       font-size: 13px;
     }
@@ -196,6 +193,9 @@
 
 .upcoming-payments {
   padding: 0;
+  p {
+    margin: 0.5em 0 0.5em 1em;
+  }
 }
 
 .upcoming-payments-table {
@@ -206,8 +206,11 @@
   //for "View All Payments button"
   text-align: right;
   background-color: $white;
-  .more.btn {
+  .btn {
     margin: 1em;
+    &:active {
+      margin-bottom: 14px;
+    }
   }
   table {
     text-align: left;
@@ -216,7 +219,7 @@
     border-bottom: 1px solid #eee;
   }
   td, th {
-    padding: 2px 0 2px 5px;
+    padding: 0.25em 0 0.25em 1em;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
     &:first-child {
@@ -225,5 +228,33 @@
     &:last-child {
       border: none;
     }
+  }
+  th {
+    padding: 5px 0 5px 1em;
+  }
+  tr:last-child td {
+    padding-bottom: 14px;
+  }
+}
+
+.details-toggle-line {
+  display: block;
+  border-top: 1px solid #eee;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.details-toggle-btn {
+  background-image: none;
+  background-color: $white;
+  border: none;
+  font-weight: bold;
+  margin-top: 0.5em;
+  color: #777777;
+  &:hover {
+    color: $gray-4;
+  }
+  i {
+    color: #3076A8;
   }
 }
