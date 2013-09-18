@@ -26,7 +26,7 @@
   VIN was not located; please enter Make, Model, Year and Style
 </label>
 
-<span class="row" ng-show="settings.vinMode == 'noMatch'">
+<span class="form-inline nxg-checkbox" ng-show="settings.vinMode == 'noMatch'">
   <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure"
          ng-required="settings.vinMode == 'noMatch'" />
   <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>

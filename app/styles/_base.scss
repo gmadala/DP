@@ -6,6 +6,9 @@
   @include box-sizing(border-box);
 }
 
+//drop a span with this ID anywhere you use checkboxes.
+#checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
+
 body, html {
   min-width: 940px;
   color: #666666;

@@ -1,3 +1,22 @@
+.nxg-vin-match-info {
+  padding-top: 1em;
+  label {
+    display: block;
+  }
+  span {
+    display: block;
+    margin: 0 0 1em 0;
+    width: 230px;
+    padding: 3px;
+    border: 1px solid #c8c8c8;
+    background-color: #eee;
+  }
+  #outputStyle {
+    width: 300px;
+  }
+}
+
+
 label {
   line-height: 18px;
   font-size: 12px;
@@ -48,25 +67,7 @@ label {
   width: 300px;
 }
 
-#foo:checked::before,
-input[type="radio"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
-}
-
-#foo:checked,
-input[type="radio"] + label::before {
-  content: url('../img/radio.gif');
-}
-
-input[type="radio"]:checked + label::before {
-  content: url('../img/radio-checked.gif');
-}
-
 .search-modal.search-modal-business {
-  width: 720px;
-  margin-left: -360px;
   .modal-body {
     padding: 1em;
     margin: 1em 1em 0 1em;
@@ -77,7 +78,7 @@ input[type="radio"]:checked + label::before {
       margin: -1px 1em 1em 1em;
     }
   }
-  td, th {
+  td {
     height: 50px;
   }
   .modal-footer {
@@ -111,6 +112,7 @@ input[type="radio"]:checked + label::before {
     tr td:nth-child(2) {
       color: #434343;
       font-weight: bold;
+      height: 32px;
     }
     td {
       font-size: 11px;

@@ -128,3 +128,58 @@ select, .nxg-date-field {
   color: $error;
   margin: 5px 0;
 }
+
+.nxg-checkbox {
+  label {
+    margin: 0.5em 0 1em 0.5em;
+  }
+}
+
+#foo:checked::before,
+input[type="checkbox"] {
+    position:absolute;
+    clip: rect(0,0,0,0);
+    clip: rect(0 0 0 0);
+}
+
+#foo:checked,
+input[type="checkbox"] + label::before {
+    position: relative;
+    top: 3px;
+    left: -6px;
+    content: url('../img/checkbox.gif');
+}
+
+input[type="checkbox"]:checked + label::before {
+    position: relative;
+    top: 3px;
+    left: -6px;
+    content: url('../img/checkbox-checked.gif');
+}
+
+.nxg-radios {
+  label {
+    margin: 0 0.5em 0 0.5em;
+  }
+}
+
+#foo:checked::before,
+input[type="radio"] {
+  position:absolute;
+  clip: rect(0,0,0,0);
+  clip: rect(0 0 0 0);
+}
+
+input[type="radio"] + label::before {
+  position: relative;
+  top: 6px;
+  left: -6px;
+  content: url('../img/radio.gif');
+}
+
+input[type="radio"]:checked + label::before {
+  position: relative;
+  top: 6px;
+  left: -6px;
+  content: url('../img/radio-checked.gif');
+}
