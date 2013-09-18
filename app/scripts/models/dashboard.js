@@ -38,9 +38,9 @@ angular.module('nextgearWebApp')
               total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
               // @see http://www.chartjs.org/docs/#pieChart-dataStructure
               chartData: [
-                { color: '#66554E', value: result.AccountFeeAmount },                               // Fees
-                { color: '#897A71', value: result.UpcomingPaymentsAmount - scheduledPaymentAmount }, // Payments
-                { color: '#B4A8A0', value: scheduledPaymentAmount }                                 // Scheduled Payments
+                { color: '#444444', value: result.AccountFeeAmount },                               // Fees
+                { color: '#2286f5', value: result.UpcomingPaymentsAmount - scheduledPaymentAmount }, // Payments
+                { color: '#3fb232', value: scheduledPaymentAmount }                                 // Scheduled Payments
               ]
             };
 

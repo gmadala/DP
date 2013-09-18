@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div collapse="isCollapsed" ng-init="isCollapsed = false" class="row-fluid more-details">
+  <div collapse="isCollapsed" ng-init="isCollapsed = false" class="row-fluid dashboard-more-details">
     <div class="span9 well upcoming-payments">
       <p>Upcoming Payments</p>
       <div class="well-out upcoming-payments-table">
@@ -82,12 +82,18 @@
         </a>
       </div>
     </div>
-    <div class="span3 graphic well-out">
-      <canvas width="100"
-                    height="100"
+    <div class="span3 credit-chart">
+      <canvas width="120"
+                    height="120"
                     nxg-chart
-                    nxg-chart-type="Pie"
-                    nxg-chart-data="dashboardData.paymentChartData.chartData"></canvas>
+                    nxg-chart-type="Doughnut"
+                    nxg-chart-data="dashboardData.paymentChartData.chartData"
+                    nxg-chart-options="{percentageInnerCutout: 65}">
+      </canvas>
+      <label class="nxg-doughnut-chart-label">
+        <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.paymentChartData.total | numeral:'(0.0a)' }}</p>
+        <p class="nxg-doughnut-chart-label-secondary">available</p>
+      </label>
       <table class="chart-summary-table">
         <tr>
           <td> <i class="nxg-chart-legend-color nxg-chart-fees"></i>
