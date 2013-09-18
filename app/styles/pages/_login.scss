@@ -5,6 +5,8 @@
 }
 
 .login-head {
+  background-color: #eeeeee;
+
   @include gradient-row();
   border-bottom: 2px solid $white;
 
@@ -20,7 +22,7 @@
     background-color: $brand-gradient-top; // IE fallback
     @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     height: 100%;
     width: 100%;

@@ -1,0 +1,44 @@
+//absurdly long selector to overcome Bootstrap's specificity.
+footer.container-fluid.row-fluid {
+  text-align: center;
+  font-size: 11px;
+  color: #08c;
+  background-color: #eeeeee;
+  @include gradient-row();
+  padding: 1.25em 0 1em 0;
+  margin: 0 0 -50px 0;
+  width: 100%;
+  border-top: 1px solid #DDDDDD;
+  @include box-shadow(rgba(black, 0.3) 0px 1px 1px)
+}
+
+.nxg-main-view {
+  margin-bottom: 4em;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.nxg-main-container {
+  min-height: 100%;
+  overflow: hidden;
+  /* equal to footer height */
+  margin-bottom: -50px;
+}
+
+.nxg-main:after {
+  content: "";
+  display: block;
+}
+
+footer, .nxg-main:after {
+  /* .push must be the same height as footer */
+  height: 50px;
+}

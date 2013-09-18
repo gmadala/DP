@@ -30,8 +30,16 @@
     <!-- *************************************************************
         Add your site or application content here
     ************************************************************* -->
-    <div nav-bar ng-show="!navState.includes('login')"></div>
-    <div ui-view></div>
+    <div class="nxg-main-container">
+      <div nav-bar ng-show="!navState.includes('login')"></div>
+      <div class="nxg-main-view" ui-view></div>
+    </div>
+
+    <footer class="container-fluid row-fluid">
+        © 2013 NextGear Capital, Inc. All Rights Reserved. 1320 City Center Drive, Suite 100 Carmel, IN 46032 888-969-3721
+        <!-- TODO: Find URLS for Privacy Statement and Contact us. -->
+        <a href="#">Privacy Statement</a> | <a href="#">Contact Us</a>
+    </footer>
 
     <!-- build:js scripts/components.js -->
     <script src="components/jquery/jquery.js"></script>
