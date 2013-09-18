@@ -48,6 +48,9 @@ angular.module('nextgearWebApp')
           return paymentQueue.payments;
         }
         return null;
+      },
+      isEmpty: function () {
+        return !(_.find(paymentQueue.fees) || _.find(paymentQueue.payments));
       }
     };
 
@@ -124,14 +127,16 @@ angular.module('nextgearWebApp')
         var key = paymentQueue.getKey(item),
           storage = paymentQueue.getStorage(item);
         if (storage === paymentQueue.payments) {
-          item.$queueAsPayoff = !!asPayoff;
+          item.$queuedAsPayoff = !!asPayoff;
+          item.$queuedAmount = asPayoff ? item.CurrentPayoff : item.AmountDue;
         }
         storage[key] = item;
       },
       removeFromPaymentQueue: function (item) {
         var key = paymentQueue.getKey(item),
           storage = paymentQueue.getStorage(item);
-        delete item.$queueAsPayoff;
+        delete item.$queuedAsPayoff;
+        delete item.$queuedAmount;
         delete storage[key];
       },
       getPaymentQueueStatus: function (item) {
@@ -145,7 +150,7 @@ angular.module('nextgearWebApp')
 
         if (storage === paymentQueue.payments) {
           // in queue as curtailment payment or payoff
-          return (queueItem.$queueAsPayoff ? 'payoff' : 'payment');
+          return (queueItem.$queuedAsPayoff ? 'payoff' : 'payment');
         } else {
           // simply in queue (e.g. a fee)
           return true;
@@ -154,7 +159,8 @@ angular.module('nextgearWebApp')
       getPaymentQueue: function () {
         return {
           fees: paymentQueue.fees,
-          payments: paymentQueue.payments
+          payments: paymentQueue.payments,
+          isEmpty: paymentQueue.isEmpty
         };
       },
       cancelScheduled: function (payment) {

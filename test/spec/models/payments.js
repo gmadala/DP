@@ -337,26 +337,36 @@ describe("Model: Payments", function () {
       expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(true);
     });
 
-    it('should add payments to the queue', function () {
+    it('should add payments to the queue with $queuedAmount matching amount due', function () {
       var payment = {
         Scheduled: false,
         FloorplanId: 'floorplan1',
-        Posted: '2013-01-01'
+        Posted: '2013-01-01',
+        AmountDue: 400,
+        CurrentPayoff: 5000
       };
       expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
       payments.addToPaymentQueue(payment);
       expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payment');
+
+      payment = _.find(payments.getPaymentQueue().payments);
+      expect(payment.$queuedAmount).toBe(400);
     });
 
-    it('should add payoffs to the queue', function () {
+    it('should add payoffs to the queue with $queuedAmount matching current payoff amount', function () {
       var payment = {
         Scheduled: false,
         FloorplanId: 'floorplan2',
-        Posted: '2013-01-01'
+        Posted: '2013-01-01',
+        AmountDue: 400,
+        CurrentPayoff: 5000
       };
       expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
       payments.addToPaymentQueue(payment, true);
       expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payoff');
+
+      payment = _.find(payments.getPaymentQueue().payments);
+      expect(payment.$queuedAmount).toBe(5000);
     });
 
   });
@@ -434,6 +444,35 @@ describe("Model: Payments", function () {
       });
       expect(items.length).toBe(1);
       expect(items[0]).toBe(payment);
+    });
+
+    it('should expose an isEmpty function that calculates whether the queue is empty', function () {
+      var fee = {
+        FeeType: 'a fee type',
+        FinancialRecordId: 'fee1',
+        Posted: '2013-01-01'
+      };
+      var payment = {
+        Scheduled: false,
+        FloorplanId: 'floorplan2',
+        Posted: '2013-01-01'
+      };
+
+      var queue = payments.getPaymentQueue();
+
+      expect(queue.isEmpty()).toBe(true);
+
+      payments.addToPaymentQueue(fee);
+
+      expect(queue.isEmpty()).toBe(false);
+
+      payments.removeFromPaymentQueue(fee);
+      payments.addToPaymentQueue(payment);
+
+      expect(queue.isEmpty()).toBe(false);
+
+      payments.removeFromPaymentQueue(payment);
+      expect(queue.isEmpty()).toBe(true);
     });
 
   });

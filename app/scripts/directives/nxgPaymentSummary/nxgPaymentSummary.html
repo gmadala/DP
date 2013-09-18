@@ -5,26 +5,31 @@
   </div>
 
   <div class="queue-items">
-    <p ng-hide="fees.length || queue.length">You have not selected a payment. <br/> Click the Add Payment or Add Payoff button to add one.</p>
-    <ul ng-show="fees.length || queue.length">
-      <li ng-repeat="fee in fees">
+    <p ng-show="paymentQueue.isEmpty()">
+      You have not selected a payment. <br/> Click the Add Payment or Add Payoff button to add one.
+    </p>
+    <ul ng-hide="paymentQueue.isEmpty()">
+      <li ng-repeat="fee in paymentQueue.fees">
+        <button class="btn btn-mini" ng-click="removeItem(fee)">X</button>
         Account Fee <br/>
-        {{ fee.type }}<br/>
-        Payment {{ fee.payment | currency }}
+        {{ fee.FeeType }}<br/>
+        Payment {{ fee.Balance | currency }}
       </li>
-      <li ng-repeat="q in queue">
-        <button class="btn btn-mini" ng-click="remove()">X</button>
-        VIN: {{ q.vin }} <br/>
-        {{ q.year }} {{ q.make }} {{ q.model }} <br/>
-        Payment {{ q.payment | currency }}
+      <li ng-repeat="payment in paymentQueue.payments">
+        <button class="btn btn-mini" ng-click="removeItem(payment)">X</button>
+        VIN: {{ payment.Vin }} <br/>
+        {{ payment.UnitDescription }} <br/>
+        {{ payment.$queuedAsPayoff && 'Payoff' || 'Payment' }} {{ payment.$queuedAmount | currency }}
       </li>
     </ul>
   </div>
 
   <div>
-    Subtotal: {{ total }}
-    <a href="#/home/checkout">
-      <button class="btn" ng-disabled="false">Continue to Checkout</button>
-    </a>
+    Subtotal: {{ getSubtotal() | currency }}
+    <button class="btn"
+            ng-disabled="paymentQueue.isEmpty()"
+            ng-click="navigate('home.checkout')">
+      Continue to Checkout
+    </button>
   </div>
 </section>

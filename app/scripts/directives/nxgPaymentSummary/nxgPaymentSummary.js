@@ -9,30 +9,32 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope) {
-    // dummy data - payment queue
-    $scope.queue = [{
-      vin: 'CH224157',
-      make: 'Toyota',
-      model: 'Corolla',
-      payment: 3544.49,
-      year: 2013
-    },
-      {
-        vin: 'CH224157',
-        make: 'Toyota',
-        model: 'Corolla',
-        payment: 3544.49,
-        year: 2013
-      },
-      {
-        vin: 'CH224157',
-        make: 'Toyota',
-        model: 'Corolla',
-        payment: 3544.49,
-        year: 2013
-      }];
-    $scope.total = 3544.49*3;
-    $scope.fees=[{ type: 'Collateral Audit', payment: 150}];
-    // end dummy data
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments) {
+
+    $scope.navigate = $state.transitionTo;
+
+    $scope.paymentQueue = Payments.getPaymentQueue();
+
+    $scope.removeItem = function (item) {
+      Payments.removeFromPaymentQueue(item);
+    };
+
+    $scope.getSubtotal = function () {
+      // note: if it becomes a performance issue to loop through and recalculate this on every
+      // $digest cycle, we could move it into the Payments model and have it only recalculate when
+      // an item is actually added to or removed from the payment queue
+      var total = 0,
+        queue = $scope.paymentQueue;
+
+      angular.forEach(queue.fees, function (fee) {
+        total += fee.Balance;
+      });
+
+      angular.forEach(queue.payments, function (payment) {
+        total += payment.$queuedAmount;
+      });
+
+      return total;
+    };
+
   });
