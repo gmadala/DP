@@ -1,25 +1,17 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours) {
+  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments) {
 
     $scope.isCollapsed = true;
 
     $scope.scheduledPayments = {
       loading: false,
-
       results: [],
-
-      FILTER_BY_ALL: '',
-      FILTER_BY_SCHEDULED: ScheduledPaymentsSearch.FILTER_BY_SCHEDULED,
-      FILTER_BY_PROCESSED: ScheduledPaymentsSearch.FILTER_BY_PROCESSED,
-      FILTER_BY_CANCELED: ScheduledPaymentsSearch.FILTER_BY_CANCELED,
-      FILTER_BY_VOIDED: ScheduledPaymentsSearch.FILTER_BY_VOIDED,
-
       filterOptions: [
         {
           label: 'View All',
-          value: ''
+          value: ScheduledPaymentsSearch.FILTER_BY_ALL
         },
         {
           label: 'Pending',
@@ -32,10 +24,6 @@ angular.module('nextgearWebApp')
         {
           label: 'Cancelled',
           value: ScheduledPaymentsSearch.FILTER_BY_CANCELED
-        },
-        {
-          label: 'Voided',
-          value: ScheduledPaymentsSearch.FILTER_BY_VOIDED
         }
       ],
 
@@ -86,6 +74,7 @@ angular.module('nextgearWebApp')
       payOff: function(payment) {
         // TODO: Add it to the PaymentQueue
         console.log('ScheduledPayments::payOff()' + ' - ' + payment.floorplanId);
+        Payments.addToPaymentQueue(payment, true /*asPayOff*/);
       },
 
       showReceipt: function(payment) {
@@ -96,6 +85,7 @@ angular.module('nextgearWebApp')
       cancelPayment: function(payment) {
         // TODO: Hook it to the model
         console.log('ScheduledPayments::cancelPayment()' + ' - ' + payment.floorplanId);
+        Payments.cancelScheduled(payment);
       }
     };
 

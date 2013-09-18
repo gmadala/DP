@@ -33,9 +33,9 @@ angular.module('nextgearWebApp')
         if (angular.isDefined(item.FeeType)) {
           // fee
           return item.FinancialRecordId + '_' + item.Posted;
-        } else if (angular.isDefined(item.Scheduled)) {
+        } else if (angular.isDefined(item.FloorplanId)) {
           // payment
-          return item.FloorplanId + '_' + item.DueDate;
+          return item.FloorplanId;
         }
         return null;
       },
@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
         if (angular.isDefined(item.FeeType)) {
           // fee
           return paymentQueue.fees;
-        } else if (angular.isDefined(item.Scheduled)) {
+        } else if (angular.isDefined(item.FloorplanId)) {
           // payment
           return paymentQueue.payments;
         }

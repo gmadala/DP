@@ -18,14 +18,17 @@ angular.module('nextgearWebApp')
           for (var i = 0; i < results.SearchResults.length; i++) {
             var item = results.SearchResults[i];
             searchResults.push({
-              floorplanId: item.FloorplanId,
+              FloorplanId: item.FloorplanId,
               vin: item.Vin,
               description: item.VehicleDescription,
               stockNumber: item.StockNumber,
               status: self.toStatus(item),
+              statusDate: self.getStatusDate(item),
               scheduledDate: item.ScheduledForDate,
-              setupDate: item.SetupDate,
-              canBePaidOff: self.isPending(item),
+              isPending: self.isPending(item),
+              isCancelled: item.Cancelled,
+              isVoided: item.Voided,
+              isProcessed: item.Processed,
               isCurtailment: item.CurtailmentPayment,
               paymentAmount: item.ScheduledPaymentAmount,
               scheduledBy: item.ScheduledByUserDisplayname
@@ -49,38 +52,70 @@ angular.module('nextgearWebApp')
       else if (item.Cancelled) {
         status = 'Cancelled';
       }
-      else if (item.Voided) {
-        status = 'Voided';
-      }
       else {
         status = 'Pending';
       }
       return status;
     };
 
+    self.getStatusDate = function(item) {
+      var date = '';
+
+      if (item.Processed) {
+        date = item.ProcessedOnDate;
+      }
+      else if (item.Cancelled) {
+        date = item.CancelledDate;
+      }
+      else {
+        date = item.SetupDate;
+      }
+      return date;
+    };
+
     return {
       // TODO: Confirm with API spec (once complete) if this is the filter types the service will expect.
-      FILTER_BY_ALL: '',
-      FILTER_BY_SCHEDULED: 'scheduled',
-      FILTER_BY_PROCESSED: 'processed',
-      FILTER_BY_CANCELED: 'canceled',
-      FILTER_BY_VOIDED: 'voided',
+      FILTER_BY_ALL: 0,
+      FILTER_BY_PENDING: 1,
+      FILTER_BY_PROCESSED: 2,
+      FILTER_BY_CANCELED: 3,
 
       search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
         query = query || '';
+
         if (filterBy === null || filterBy === undefined || filterBy === '') {
           filterBy = this.FILTER_BY_ALL;
         }
 
         lastRequest = {
-          OrderBy: 'ScheduledPaymentDate',
+          OrderBy: 'UnitStatus',
+          OrderDirection: 'ASC',
           PageNumber: 0,
           PageSize: PAGE_SIZE,
-          Criteria: query,
-          StartEnd: dateStart,
+          Keyword: query,
+          StartDate: dateStart,
           EndDate: dateEnd,
-          filterBy: filterBy
+          SearchCancelled: false,
+          SearchPending: false,
+          SearchProcessed: false
         };
+        // set up filters
+        switch (filterBy) {
+        case this.FILTER_BY_PENDING:
+          lastRequest.SearchPending = true;
+          break;
+        case this.FILTER_BY_PROCESSED:
+          lastRequest.SearchProcessed = true;
+          break;
+        case this.FILTER_BY_CANCELED:
+          lastRequest.SearchCancelled = true;
+          break;
+        default:
+          // Show all scheduled payments of all statuses
+          lastRequest.SearchPending = true;
+          lastRequest.SearchProcessed = true;
+          lastRequest.SearchCancelled = true;
+        }
         return self.request(lastRequest);
       },
 
