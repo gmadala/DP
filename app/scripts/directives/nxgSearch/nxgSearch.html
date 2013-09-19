@@ -34,10 +34,7 @@
 
             <div class="controls">
               <input type="text" id="startDate" name="startDate" ng-model="activeCriteria.startDate"
-                       data-date-format="mm/dd/yy" bs-datepicker
-                       nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-              <button type="button" class="btn btn-cal" data-toggle="datepicker"> <i class="icon-calendar"></i>
-              </button>
+                       nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
             </div>
           </div><!-- end .control-group -->
 
@@ -46,12 +43,7 @@
             <label class="control-label" for="endDate">To</label>
             <div class="controls">
               <input type="text" id="endDate" name="endDate" ng-model="activeCriteria.endDate"
-                       data-date-format="mm/dd/yy" bs-datepicker
-                       nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-              <button type="button" class="btn btn-cal" data-toggle="datepicker">
-                <i class="icon-calendar"></i>
-              </button>
-
+                       nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
               <label for="endDate" class="text-error"
                        ng-show="validity.endDate.$error.nxgRequires">Invalid date range</label>
             </div><!-- end .controls -->

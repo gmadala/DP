@@ -1,66 +1,69 @@
-<div nxg-search
-     title="Floorplan Search"
-     class="search-form"
-     prompt="Enter Stock #, VIN, Make, Model, or Year"
-     filter-label="Filter List by Status"
-     filter-options="filterOptions"
-     active-criteria="searchCriteria"
-     on-search="search()"
-     on-clear="resetSearch()">
-</div>
+<section class="row-fluid">
+    <section class="span10">
+    <div nxg-search
+         title="Floorplan Search"
+         class="search-form"
+         prompt="Enter Stock #, VIN, Make, Model, or Year"
+         filter-label="Filter List by Status"
+         filter-options="filterOptions"
+         active-criteria="searchCriteria"
+         on-search="search()"
+         on-clear="resetSearch()">
+    </div>
 
-<section class="floorplan-list"
-         nxg-infinite-scroll="fetchNextResults()"
-         nxg-infinite-scroll-disabled="data.loading"
-         nxg-infinite-scroll-show-indicator="data.loading">
-    <ul class="unstyled">
-        <li ng-repeat="item in data.results">
-            <header class="row-fluid">
-                <div class="span2"><strong>vin </strong><span>{{ item.UnitVin }}</span></div>
-                <div class="span3"> {{ getVehicleDescription(item) }}</div>
-                <div class="span2"><strong>stock # </strong> {{ item.StockNumber }}</div>
-                <div class="span2"><strong>status </strong> {{ item.FloorplanStatusName }}</div>
-            </header>
-            <div class="row-fluid">
-                <div class="span8">
-                    <div class="row-fluid">
-                        <div class="span3">
-                            <strong>Purchased </strong><p> {{ item.UnitPurchaseDate | moment }} </p>
+    <section class="floorplan-list"
+             nxg-infinite-scroll="fetchNextResults()"
+             nxg-infinite-scroll-disabled="data.loading"
+             nxg-infinite-scroll-show-indicator="data.loading">
+        <ul class="unstyled">
+            <li ng-repeat="item in data.results">
+                <header class="row-fluid">
+                    <div class="span2"><strong>vin </strong><span>{{ item.UnitVin }}</span></div>
+                    <div class="span3"> {{ getVehicleDescription(item) }}</div>
+                    <div class="span2"><strong>stock # </strong> {{ item.StockNumber }}</div>
+                    <div class="span2"><strong>status </strong> {{ item.FloorplanStatusName }}</div>
+                </header>
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <strong>Purchased </strong><p> {{ item.UnitPurchaseDate | moment }} </p>
+                            </div>
+                            <div class="span3">
+                                <strong>Last Payment: </strong><p> {{ item.LastPaymentDate | moment }} </p>
+                            </div>
+                            <div class="span3">
+                                <strong>Title Release: </strong><p> {{ item.TitleReleaseDate | moment }} </p>
+                            </div>
+                            <div class="span3">
+                                <strong>Released To: </strong><p> {{ item.TitleReleaseLocation }} </p>
+                            </div>
                         </div>
-                        <div class="span3">
-                            <strong>Last Payment: </strong><p> {{ item.LastPaymentDate | moment }} </p>
-                        </div>
-                        <div class="span3">
-                            <strong>Title Release: </strong><p> {{ item.TitleReleaseDate | moment }} </p>
-                        </div>
-                        <div class="span3">
-                            <strong>Released To: </strong><p> {{ item.TitleReleaseLocation }} </p>
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <strong>Floored: </strong><p> {{ item.FlooringDate | moment }} </p>
+                            </div>
+                            <div class="span3">
+                                <strong>Seller: </strong><p> {{ item.SellerName }} </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span3">
-                            <strong>Floored: </strong><p> {{ item.FlooringDate | moment }} </p>
-                        </div>
-                        <div class="span3">
-                            <strong>Seller: </strong><p> {{ item.SellerName }} </p>
-                        </div>
+                    <div class="span2 offset2">
+                        <a class="btn btn-small btn-block"
+                           ng-show="item.TitleImageAvailable"
+                           ng-href="{{ item.$titleURL }}"
+                           target="_blank">
+                          Title
+                        </a>
                     </div>
                 </div>
-                <div class="span2 offset2">
-                    <a class="btn btn-small btn-block"
-                       ng-show="item.TitleImageAvailable"
-                       ng-href="{{ item.$titleURL }}"
-                       target="_blank">
-                      Title
-                    </a>
-                </div>
-            </div>
 
-          <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
-          <div collapse="isCollapsed" class="more-details">
-            <div vehicle-details stock-number="item.StockNumber"></div>
-          </div><!-- end more-details div -->
-        </li>
-    </ul>
-
+              <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
+              <div collapse="isCollapsed" class="more-details">
+                <div vehicle-details stock-number="item.StockNumber"></div>
+              </div><!-- end more-details div -->
+            </li>
+        </ul>
+      </section>
+    </section>
 </section>

@@ -1,6 +1,16 @@
 // SEARCH FORM
 
 .search-form {
+  &.payments .control-group.date {
+    & + .date {
+      margin-left: 5px;
+    }
+
+    input {
+      width: 102px;
+    }
+  }
+
   form.search {
     margin-bottom: 0;
   }
@@ -16,7 +26,7 @@
       position: relative;
 
       & + .date {
-        margin-left: 5px;
+        margin-left: 10px;
       }
 
       input {
