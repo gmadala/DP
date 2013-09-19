@@ -183,6 +183,43 @@ angular.module('nextgearWebApp')
             return payment;
           }
         );
+      },
+      fetchPossiblePaymentDates: function (startDate, endDate) {
+        startDate = api.toShortISODate(startDate);
+        endDate = api.toShortISODate(endDate);
+        return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
+          function (result) {
+            var dateMap = {};
+            result.forEach(function (date) {
+              dateMap[date] = true;
+            });
+            return dateMap;
+          }
+        );
+      },
+      checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
+        var shortFees = [],
+          shortPayments = [];
+        angular.forEach(payments, function (payment) {
+          shortPayments.push({
+            FloorplanId: payment.FloorplanId,
+            ScheduledSetupDate: api.toShortISODate(payment.$scheduleDate) || null,
+            IsPayoff: payment.$queuedAsPayoff
+          });
+        });
+        angular.forEach(fees, function (fee) {
+          shortFees.push({
+            FinancialRecordId: fee.FinancialRecordId
+          });
+        });
+
+        var data = {
+          SelectedFloorplans: shortPayments,
+          AccountFees: shortFees,
+          BankAccountId: bankAccount.BankAccountId,
+          UnappliedFundsAmount: unappliedFundsAmt || 0
+        };
+        return api.request('POST', '/payment/make', data);
       }
     };
   });

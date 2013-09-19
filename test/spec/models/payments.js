@@ -526,4 +526,143 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('fetchPossiblePaymentDates function', function () {
+
+    it('should make the expected API call', function () {
+      var start = new Date(2013, 0, 1),
+        end = new Date(2013, 0, 31);
+      httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31').respond({
+        Success: true,
+        Data: []
+      });
+      payments.fetchPossiblePaymentDates(start, end);
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should transform results into a map of booleans by date', function () {
+      var start = new Date(),
+        end = new Date(),
+        out = null;
+      httpBackend.whenGET(/\/payment\/possiblePaymentDates\/.*/).respond({
+        Success: true,
+        Data: [
+          '2013-09-03',
+          '2013-09-06'
+        ]
+      });
+      payments.fetchPossiblePaymentDates(start, end).then(function (result) {
+        out = result;
+      });
+      httpBackend.flush();
+      expect(out['2013-09-03']).toBe(true);
+      expect(out['2013-09-06']).toBe(true);
+      expect(out['2013-09-07']).not.toBe(true);
+    });
+
+  });
+
+  describe('checkout function', function () {
+
+    var stubResponse;
+
+    beforeEach(function () {
+      stubResponse = {
+        Success: true,
+        Data: {
+          foo: 'bar'
+        }
+      };
+    });
+
+    it('should make the expected API endpoint call', function () {
+      httpBackend.expectPOST('/payment/make').respond(stubResponse);
+      payments.checkout([], [], 'bank1');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send fees in the expected format', function () {
+      var fees = [
+        {
+          FinancialRecordId: 'one',
+          FeeType: 'Membership Dues'
+        },
+        {
+          FinancialRecordId: 'two',
+          FeeType: 'Other Fee'
+        }
+      ];
+
+      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
+        var expectedFees = [
+          { FinancialRecordId: 'one' },
+          { FinancialRecordId: 'two' }
+        ];
+        data = angular.fromJson(data);
+        expect(angular.equals(data.AccountFees, expectedFees)).toBe(true);
+        return [200, stubResponse, {}];
+      });
+
+      payments.checkout(fees, [], 'bank1');
+      httpBackend.flush();
+    });
+
+    it('should send payments in the expected format', function () {
+      var paymentsData = [
+        {
+          "FloorplanId": "2049",
+          "Vin": "CH224157",
+          $scheduleDate: new Date(2013, 4, 5),
+          $queuedAsPayoff: false
+        },
+        {
+          "FloorplanId": "2048",
+          "Vin": "LL2469R6",
+          $queuedAsPayoff: true
+        }
+      ];
+
+      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
+        var expectedPayments = [
+          {
+            FloorplanId: '2049',
+            ScheduledSetupDate: '2013-05-05',
+            IsPayoff: false
+          },
+          {
+            FloorplanId: '2048',
+            ScheduledSetupDate: null,
+            IsPayoff: true
+          }
+        ];
+        data = angular.fromJson(data);
+        expect(angular.equals(data.SelectedFloorplans, expectedPayments)).toBe(true);
+        return [200, stubResponse, {}];
+      });
+
+      payments.checkout([], paymentsData, 'bank1');
+      httpBackend.flush();
+    });
+
+    it('should send the bank account id', function () {
+      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
+        data = angular.fromJson(data);
+        expect(data.BankAccountId).toBe('bank1');
+        return [200, stubResponse, {}];
+      });
+      payments.checkout([], [], {BankAccountId: 'bank1'});
+      httpBackend.flush();
+    });
+
+    it('should send the unapplied funds amount', function () {
+      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
+        data = angular.fromJson(data);
+        expect(data.UnappliedFundsAmount).toBe(180.45);
+        return [200, stubResponse, {}];
+      });
+      payments.checkout([], [], {BankAccountId: 'bank1'}, 180.45);
+      httpBackend.flush();
+    });
+
+  });
+
 });
