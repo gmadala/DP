@@ -1,35 +1,37 @@
 <section class="pay-queue">
-  <div>
-    <h3>Payment Summary</h3>
+  <h4>Payment Summary</h4>
+
+  <div class="well-out">
     <p>Choose to make payments today or schedule your payments when you checkout.</p>
-  </div>
 
-  <div class="queue-items">
-    <p ng-show="paymentQueue.isEmpty()">
-      You have not selected a payment. <br/> Click the Add Payment or Add Payoff button to add one.
-    </p>
-    <ul ng-hide="paymentQueue.isEmpty()">
-      <li ng-repeat="fee in paymentQueue.fees">
-        <button class="btn btn-mini" ng-click="removeItem(fee)">X</button>
-        Account Fee <br/>
-        {{ fee.FeeType }}<br/>
-        Payment {{ fee.Balance | currency }}
-      </li>
-      <li ng-repeat="payment in paymentQueue.payments">
-        <button class="btn btn-mini" ng-click="removeItem(payment)">X</button>
-        VIN: {{ payment.Vin }} <br/>
-        {{ payment.UnitDescription }} <br/>
-        {{ payment.$queuedAsPayoff && 'Payoff' || 'Payment' }} {{ payment.$queuedAmount | currency }}
-      </li>
-    </ul>
-  </div>
+    <div class="queue-items">
+      <p ng-show="paymentQueue.isEmpty()">You have not selected a payment.</p>
+      <p ng-show="paymentQueue.isEmpty()">Click the Add button to add a payoff or a payment.</p>
+      <ul ng-hide="paymentQueue.isEmpty()">
+        <li ng-repeat="fee in paymentQueue.fees">
+          <button class="btn-unstyle btn-x" ng-click="removeItem(fee)"><span class="glyphicon"></span></button>
+          Account Fee <br/>
+          {{ fee.FeeType }}<br/>
+          <span class="queued-as">Payment</span>
+          <span class="amount">{{ fee.Balance | currency }}</span>
+        </li>
+        <li ng-repeat="payment in paymentQueue.payments">
+          <button class="btn-unstyle btn-x" ng-click="removeItem(payment)"><span class="glyphicon"></span></button>
+          VIN: {{ payment.Vin }} <br/>
+          {{ payment.UnitDescription }}<br/>
+          <span class="queued-as">{{ payment.$queuedAsPayoff && 'Payoff' || 'Payment' }}</span>
+          <span class="amount">{{ payment.$queuedAmount | currency }}</span>
+        </li>
+      </ul>
+    </div>
 
-  <div>
-    Subtotal: {{ getSubtotal() | currency }}
-    <button class="btn"
-            ng-disabled="paymentQueue.isEmpty()"
-            ng-click="navigate('home.checkout')">
-      Continue to Checkout
-    </button>
+    <div>
+      <h4 class="subtotal">Subtotal: <span class="value">{{ getSubtotal() | currency }}</span></h4>
+      <button class="btn btn-primary btn-checkout"
+              ng-disabled="paymentQueue.isEmpty()"
+              ng-click="navigate('home.checkout')">
+        <span class="ie-text">Continue to Checkout</span>
+      </button>
+    </div>
   </div>
 </section>

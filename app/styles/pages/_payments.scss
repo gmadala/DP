@@ -68,6 +68,7 @@
   }
 }
 
+// Vehicle Details
 .vehicle-details {
   clear:both;
 }
@@ -127,5 +128,77 @@
   td {
     color: #434343;
     padding: 0 10px;
+  }
+}
+
+// Payments Summary
+.pay-queue {
+  p, li {
+    @extend %thin;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #666;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  .queue-items {
+    border-top: 1px solid #D1D1D1;
+    border-bottom: 1px solid #D1D1D1;
+
+    p:first-child {
+      margin-top: 10px;
+    }
+
+    li {
+      overflow: hidden;
+      padding: 5px 0;
+
+      .queued-as {
+        @extend %float-l;
+        text-transform: lowercase;
+        font-variant: small-caps;
+        font-size: 16px;
+      }
+
+      .amount {
+        @extend %float-r;
+        @extend %heavy;
+      }
+
+      & + li {
+        border-top: 1px solid #D1D1D1;
+      }
+    }
+
+    .btn-x {
+      float: right;
+
+      span {
+        @extend .glyphicon-remove-circle;
+        color: #999;
+      }
+
+      &:hover span {
+        color: #666;
+      }
+    }
+  }
+
+  .subtotal {
+    font-size: 16px;
+    color: $brand-text;
+    margin: 10px 0 20px;
+
+    .value {
+      @extend %float-r;
+      @extend %heavy;
+    }
+
+    & + button {
+      margin: 0 5px;
+    }
   }
 }
