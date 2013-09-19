@@ -3,6 +3,7 @@
 .fees .main-info,
 .payments .main-info {
   height: 70px;
+  border-bottom: 1px solid #DDD;
 }
 
 .fees .table-list-head {
@@ -31,11 +32,6 @@
   .warning {
     margin-top: 20px;
   }
-}
-
-.more-details {
-  clear:both;
-  height: 50px;
 }
 
 .payments .cell .btn-block,
@@ -69,5 +65,67 @@
     background-color: #878787;
     @include background-image(linear-gradient(#878787, #555));
     color: $white;
+  }
+}
+
+.vehicle-details {
+  clear:both;
+}
+
+.vehicle-info {
+  border-bottom: 1px solid #D1D1D1;
+}
+
+.detail-col {
+  @extend %float-l;
+  width: 33%;
+  height: 290px;
+
+  & + .detail-col {
+    border-left: 1px solid #D1D1D1;
+  }
+
+  &:first-child {
+    width: 34%;
+  }
+}
+
+.detail-label, .detail-value {
+  vertical-align: top;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 5px 10px 2px;
+}
+
+.detail-label {
+  @extend %thin;
+  color: #666;
+  width: 50%;
+}
+
+.detail-value {
+  color: #434343;
+}
+
+.curtail-sch {
+  font-size: 12px;
+
+  table {
+    margin-bottom: 20px;
+  }
+
+  th {
+    @extend %align-left;
+    vertical-align: bottom;
+    color: #666;
+    font-weight: normal;
+    line-height: 1.2;
+    padding: 5px 10px;
+    border-bottom: 1px solid #D1D1D1;
+  }
+
+  td {
+    color: #434343;
+    padding: 0 10px;
   }
 }

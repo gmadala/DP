@@ -20,3 +20,14 @@ a {
   border: 1px solid #F1F1F1;
   margin-bottom: 0;
 }
+
+// looks like h4s in .well, but isn't part of .well
+.well-head {
+  @extend %thin;
+  background: #F1F1F1;
+  font-size: 1em;
+  line-height: 1.2;
+  color: #666;
+  padding: 5px 10px;
+  margin: 0;
+}

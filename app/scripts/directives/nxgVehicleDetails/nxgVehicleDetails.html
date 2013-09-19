@@ -1,52 +1,146 @@
-<div class="row-fluid">
-    <div class="span3 vehicle-info">
-        <strong>Vehicle Information</strong>
-        <ul>
-            <li>Lorem ipsum</li>
-            <li>dolor sit amet</li>
-        </ul>
-    </div>
-    <div class="span3 floor-info">
-        <strong>Flooring Information</strong>
-        <ul>
-            <li>Lorem ipsum</li>
-            <li>dolor sit amet</li>
-        </ul>
-    </div>
-    <div class="span3 title-info">
-        <strong>Title Information</strong>
-        <ul>
-            <li>Lorem ipsum</li>
-            <li>dolor sit amet</li>
-        </ul>
-    </div>
+<div class="row-fluid vehicle-info">
+  <div class="detail-col ">
+    <h4 class="well-head">Vehicle Information</h4>
+    <table>
+      <tr>
+        <td class="detail-label">VIN</td>
+        <td class="detail-value">4JGBB8GBXAA580518</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Make</td>
+        <td class="detail-value">Toyota</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Model</td>
+        <td class="detail-value">Tacoma</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Style</td>
+        <td class="detail-value">LImited TRD Off Road 4X4 V8</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Color</td>
+        <td class="detail-value">Fores Green</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Year</td>
+        <td class="detail-value">2013</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Current Mileage</td>
+        <td class="detail-value">324,352</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Salvage</td>
+        <td class="detail-value">No</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="detail-col">
+    <h4 class="well-head">Flooring Information</h4>
+    <table>
+      <tr>
+        <td class="detail-label">Status</td>
+        <td class="detail-value">Approved</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Stock Number</td>
+        <td class="detail-value">1064</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Purchase Date</td>
+        <td class="detail-value">05/24/2013</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Date Submitted</td>
+        <td class="detail-value">05/24/2013</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Finance Amount</td>
+        <td class="detail-value">$23,045.34</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Purchase Amount</td>
+        <td class="detail-value">$23,045.34</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Last Payment</td>
+        <td class="detail-value">N/A</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Line of Credit</td>
+        <td class="detail-value">Retail (Buyer)</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Term Plan Name</td>
+        <td class="detail-value">MAFS Rollover Conversion</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Product Type</td>
+        <td class="detail-value">Auto</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Seller</td>
+        <td class="detail-value">MAFS Pennsylvania</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="detail-col">
+    <h4 class="well-head">Title Information</h4>
+    <table>
+      <tr>
+        <td class="detail-label">Title Location</td>
+        <td class="detail-value">NextGear</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Title State</td>
+        <td class="detail-value">Indiana</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Tracking Number</td>
+        <td class="detail-value">12345678910</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Disbursement Date</td>
+        <td class="detail-value">05/24/2013</td>
+      </tr>
+    </table>
+  </div>
 </div>
 
-<div class="row-fluid">
-    <strong>Original Curtailment Schedule</strong>
-    <table class="span10">
-        <tr>
-            <th>Start Date</th>
-            <th>Due Date</th>
-            <th>Principal</th>
-            <th>Principal Payment</th>
-            <th>Interest</th>
-            <th>CPP</th>
-            <th>Fees</th>
-            <th>Total Payment</th>
-            <th>Highline Fee Applied</th>
-        </tr>
-        <tr ng-repeat="cur in curtailment">
-            <td> {{ cur.startDate }} </td>
-            <td> {{ cur.dueDate }} </td>
-            <td> {{ cur.principal | currency }} </td>
-            <td> {{ cur.principalPay | currency }} </td>
-            <td> {{ cur.interest | currency }} </td>
-            <td> {{ cur.cpp | currency }} </td>
-            <td> {{ cur.fees | currency }} </td>
-            <td> {{ cur.totalPay | currency }} </td>
-            <td> <span ng-hide="cur.highline">N/A</span>
-                <span ng-show="cur.highline"> {{ cur.highline }} </span> </td>
-        </tr>
-    </table>
+<div class="row-fluid curtail-sch">
+  <h4 class="well-head">Original Curtailment Schedule</h4>
+  <table>
+      <tr>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Principal</th>
+          <th>Principal <br/>Payment</th>
+          <th>Interest</th>
+          <th>CPP</th>
+          <th>Fees</th>
+          <th>Total Payments</th>
+          <th>Highline Fee Applied</th>
+      </tr>
+      <tr >
+          <td> placeholder {{ cur.startDate }} </td>
+          <td> placeholder {{ cur.dueDate }} </td>
+          <td> placeholder {{ cur.principal | currency }} </td>
+          <td> placeholder {{ cur.principalPay | currency }} </td>
+          <td> placeholder {{ cur.interest | currency }} </td>
+          <td> placolder {{ cur.cpp | currency }} </td>
+          <td> plader {{ cur.fees | currency }} </td>
+          <td> placeholder {{ cur.totalPay | currency }} </td>
+          <td><span ng-hide="cur.highline">N/A</span>
+            <span ng-show="cur.highline"> placeholder {{ cur.highline }} </span>
+          </td>
+      </tr>
+  </table>
+
+  <!-- TODO: Connect this button to payments controller with isCollapsed variable -->
+  <button class="btn-close" ng-click="isCollapsed = !isCollapsed">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </button>
 </div>
