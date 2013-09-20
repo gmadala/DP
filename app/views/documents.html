@@ -9,7 +9,7 @@
             <h3>NextGear Documents</h3>
             <ul>
                 <li>
-                    <a ng-click="openRatesAndFees()">Rates and Fees</a>
+                    <a ng-href="{{ feeScheduleUrl }}" target="_blank">Rates and Fees</a>
                 </li>
                 <li ng-repeat="doc in documents">
                     <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
