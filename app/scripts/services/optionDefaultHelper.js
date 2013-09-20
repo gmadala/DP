@@ -47,6 +47,7 @@ angular.module('nextgearWebApp')
 
               unwatchers.push(unwatch);
             });
+            return this;
           }
         };
       }

@@ -68,6 +68,11 @@ describe('Service: optionDefaultHelper', function () {
       ]);
     });
 
+    it('should return the helper it was called on', function () {
+      var result = helper.applyDefaults(scope, model);
+      expect(result).toBe(helper);
+    });
+
     it('should do nothing if multiple options exist, unless useFirst is set', function () {
       scope.foo.bars = ['one', 'two'];
       scope.foo.bazs = ['three', 'four'];
