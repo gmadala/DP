@@ -1,7 +1,7 @@
 // SEARCH FORM
 
 .search-form {
-  &.payments .control-group.half {
+  &.payments .control-group.half, &.schPayments .control-group.half {
     & + .half {
       margin-left: 5px;
     }

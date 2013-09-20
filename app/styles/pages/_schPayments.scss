@@ -1,0 +1,26 @@
+// Scheduled Payments
+
+.schPayments-list {
+  .main-info {
+    height: 85px;
+  }
+}
+
+.sch-label {
+  @extend %heavy;
+}
+
+.sch-sub-label {
+  @extend %thin;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-variant: small-caps;
+}
+
+.cell {
+  &.sch-more { min-width: 4%; }
+  &.sch-schDate { width: 18%; }
+  &.sch-desc { width: 34%; }
+  &.sch-status { width: 20%; }
+  &.sch-amount { width: 24%; }
+}

@@ -69,7 +69,18 @@
 
 // Vehicle Details
 .vehicle-details {
-  clear:both;
+  clear: both;
+}
+
+.btn-close {
+  @extend %center;
+  width: 100%;
+  clear: both;
+  margin: 0 auto 10px;
+
+  button {
+    @extend .btn-unstyle;
+  }
 }
 
 .vehicle-info {
@@ -165,6 +176,7 @@
       .amount {
         @extend %float-r;
         @extend %heavy;
+        line-height: 22px; // to match .queued-as height
       }
 
       & + li {

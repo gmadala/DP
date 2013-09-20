@@ -32,6 +32,10 @@
   .boxed + & {
     border-top: 0;
   }
+
+  &.text-error {
+    color: $error;
+  }
 }
 
 .message {
@@ -61,40 +65,41 @@
     color: $white;
     font: bold 16px/1 "Times New Roman", serif;
     font-style: normal;
-    margin: 0 12px 0 8px;
+    padding-left: 4px;
+    margin: 0 12px 0 0px;
     z-index: 3;
 
     &:before {
       content: '';
       position: absolute;
-      left: -5px;
+      // left: 0px;
       z-index: -1;
     }
   }
 
   .excl-overdue {
     top: 1px;
-    left: 1px;
+    left: 0px;
 
     &:before {
       @include border-radius(50%);
       background: $error;
       top: 0;
+      left: -1px;
       width: 16px;
       height: 16px;
     }
   }
 
   .excl-today {
-    margin-left: 6px;
-
     &:before {
       @include border-radius(3px);
       @include rotate(45deg);
       background: #FFBF00;
       top: 2px;
-      width: 15px;
-      height: 15px;
+      left: 0px;
+      width: 14px;
+      height: 14px;
     }
   }
 }
