@@ -87,7 +87,7 @@
   }
 }
 .chart-summary-table-total-row {
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #D1D1D1;
 }
 
 //overly specific rule to over-write bootstrap's grid for these two modules.
@@ -273,12 +273,4 @@
   i {
     color: #3076A8;
   }
-}
-
-.credit-chart {
-  border: 1px solid #d5d5d5;
-}
-
-.dashboard-more-details {
-  margin-top: 1em;
 }

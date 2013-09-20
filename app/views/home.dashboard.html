@@ -82,7 +82,17 @@
         </a>
       </div>
     </div>
-    <div class="span3 credit-chart">
+
+
+
+
+    <div class="span3 payments-chart">
+
+      <label class="nxg-doughnut-chart-label">
+        <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.paymentChartData.total | numeral:'(0.0a)' }}</p>
+        <p class="nxg-doughnut-chart-label-secondary">available</p>
+      </label>
+
       <canvas width="120"
                     height="120"
                     nxg-chart
@@ -90,40 +100,42 @@
                     nxg-chart-data="dashboardData.paymentChartData.chartData"
                     nxg-chart-options="{percentageInnerCutout: 65}">
       </canvas>
-      <label class="nxg-doughnut-chart-label">
-        <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.paymentChartData.total | numeral:'(0.0a)' }}</p>
-        <p class="nxg-doughnut-chart-label-secondary">available</p>
-      </label>
+
       <table class="chart-summary-table">
         <tr>
           <td> <i class="nxg-chart-legend-color nxg-chart-fees"></i>
           </td>
-          <td>Fees</td>
+          <td class="no-bold">Fees</td>
           <td>{{ dashboardData.paymentChartData.fees | currency }}</td>
         </tr>
         <tr>
           <td>
             <i class="nxg-chart-legend-color nxg-chart-payments"></i>
           </td>
-          <td>Payments</td>
+          <td class="no-bold">Payments</td>
           <td>{{ dashboardData.paymentChartData.payments | currency }}</td>
         </tr>
         <tr class="chart-summary-table-total-row">
           <td>
             <i class="nxg-chart-legend-color nxg-chart-scheduled-payments"></i>
           </td>
-          <td>Scheduled Payments</td>
+          <td class="no-bold">Scheduled</td>
           <td>
             {{ dashboardData.paymentChartData.scheduledPayments | currency }}
           </td>
         </tr>
         <tr>
-          <td></td>
-          <td>Total for this {{ viewMode }}</td>
-          <td>{{ dashboardData.paymentChartData.total | currency }}</td>
+          <td class="taller" colspan="2">Total for this {{ viewMode }}:</td>
+          <td class="taller">{{ dashboardData.paymentChartData.total | currency }}</td>
         </tr>
       </table>
+
+
     </div>
+
+
+
+
   </div>
   <span class="details-toggle-line">
     <button ng-click="isCollapsed = !isCollapsed" class="details-toggle-btn">
@@ -135,7 +147,7 @@
 <section class="row-fluid summaries">
   <div class="span6 summary credit well adjacent">
     <h4>Credit</h4>
-    <div class="well-out">
+    <div class="well-out credit-chart">
       <table class="chart-summary-table">
         <tr>
           <td>
