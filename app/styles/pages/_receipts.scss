@@ -1,0 +1,15 @@
+// Receipts
+
+.cell {
+    &.rec-num { width: 9%; }
+    &.rec-status { width: 9%; }
+    &.rec-payDate { width: 14%; }
+    &.rec-payInfo { width: 23%; }
+    &.rec-amtApplied { width: 15%; }
+    &.rec-amtProvided { width: 15%; }
+    &.rec-view { width: 15%; }
+}
+
+.receipts-list .table-list-row {
+    height: 80px;
+}
