@@ -3,7 +3,6 @@
 .fees .main-info,
 .payments .main-info {
   height: 70px;
-  border-bottom: 1px solid #DDD;
 }
 
 .fees .table-list-head {
@@ -20,10 +19,10 @@
   &.pay-more { min-width: 4%; }
   &.pay-desc { width: 17%; }
   &.pay-due { width: 13%; }
-  &.pay-vin { width: 10%; }
+  &.pay-vin { width: 11%; }
   &.pay-stock { width: 10%; }
   &.pay-status { width: 9%; }
-  &.pay-payment-amt { width: 16%; }
+  &.pay-payment-amt { width: 15%; }
   &.pay-payoff-amt { width: 15%; }
   &.pay-title { width: 6%; }
 }

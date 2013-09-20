@@ -5,6 +5,7 @@
   margin-bottom: 0;
 
   hr {
+    @extend %align-left;
     width: 230px;
   }
 

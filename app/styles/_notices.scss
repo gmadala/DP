@@ -85,11 +85,16 @@
     }
   }
 
-  .excl-today:before {
-    @include border-radius(3px);
-    @include rotate(45deg);
-    background: #FFBF00;
-    width: 15px;
-    height: 15px;
+  .excl-today {
+    margin-left: 6px;
+
+    &:before {
+      @include border-radius(3px);
+      @include rotate(45deg);
+      background: #FFBF00;
+      top: 2px;
+      width: 15px;
+      height: 15px;
+    }
   }
 }

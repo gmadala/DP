@@ -1,0 +1,19 @@
+// FLOORPLAN
+
+.cell {
+  &.fl-more { min-width: 3%; }
+  &.fl-desc { width: 15%; }
+  &.fl-vin { width: 8%; }
+  &.fl-stock { width: 7%; }
+  &.fl-status { width: 9%; }
+  &.fl-purchaseDate { width: 10%; }
+  &.fl-floorDate { width: 9%; }
+  &.fl-seller { width: 10%; }
+  &.fl-lastPayDate { width: 12%; }
+  &.fl-titleRelease { width: 12%; }
+  &.fl-title { width: 5%; }
+}
+
+.floor-list .main-info {
+  height: 60px;
+}
