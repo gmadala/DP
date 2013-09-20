@@ -184,11 +184,15 @@ angular.module('nextgearWebApp')
           }
         );
       },
-      fetchPossiblePaymentDates: function (startDate, endDate) {
+      fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);
         endDate = api.toShortISODate(endDate);
         return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
           function (result) {
+            if (!asMap) {
+              return result;
+            }
+
             var dateMap = {};
             result.forEach(function (date) {
               dateMap[date] = true;

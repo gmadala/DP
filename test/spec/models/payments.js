@@ -539,7 +539,7 @@ describe("Model: Payments", function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should transform results into a map of booleans by date', function () {
+    it('should transform results into a map of booleans by date, if requested', function () {
       var start = new Date(),
         end = new Date(),
         out = null;
@@ -550,13 +550,32 @@ describe("Model: Payments", function () {
           '2013-09-06'
         ]
       });
-      payments.fetchPossiblePaymentDates(start, end).then(function (result) {
+      payments.fetchPossiblePaymentDates(start, end, true).then(function (result) {
         out = result;
       });
       httpBackend.flush();
       expect(out['2013-09-03']).toBe(true);
       expect(out['2013-09-06']).toBe(true);
       expect(out['2013-09-07']).not.toBe(true);
+    });
+
+    it('should just return the results list otherwise', function () {
+      var start = new Date(),
+        end = new Date(),
+        responseList = [
+          '2013-09-03',
+          '2013-09-06'
+        ],
+        out = null;
+      httpBackend.whenGET(/\/payment\/possiblePaymentDates\/.*/).respond({
+        Success: true,
+        Data: responseList
+      });
+      payments.fetchPossiblePaymentDates(start, end).then(function (result) {
+        out = result;
+      });
+      httpBackend.flush();
+      expect(angular.equals(out, responseList)).toBe(true);
     });
 
   });
