@@ -115,9 +115,33 @@ angular.module('nextgearWebApp')
             return result;
           });
       },
+
       fetchAuctionDashboard: function () {
-        return api.request('GET', '/dealer/seller/dashboard/');
-        // TODO: add any transformation needed
+        return api.request('GET', '/dealer/seller/dashboard').then(
+          function (response) {
+            return response;
+          }
+        );
+      },
+
+      fetchFloorplanChartData: function (range) {
+        return api.request('GET', '/Floorplan/getChartData/' + range).then(
+          function (response) {
+
+            // Prepare a data model appropriate for charting from the points returned            
+            var result = { labels: [], datasets: [ { data: [] } ] };
+
+            _.each(
+              response.Points,
+              function (point) {
+                  result.labels.push(point.x);
+                  result.datasets[0].data.push(point.y);
+                }
+            );
+
+            return result;
+          }
+        );
       }
     };
   });

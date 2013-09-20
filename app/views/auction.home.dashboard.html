@@ -2,27 +2,27 @@
   <div class="span3">Disbursement Groups
     <ul>
       <li>
-        <span class="item-total">{{disbursementSummary.paidAwaitingTitle.quantity}}</span>
-        <span>Paid Awaiting Title ({{disbursementSummary.paidAwaitingTitle.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.PaidAwaitingTitleDisbursments }}</span>
+        <span>Paid Awaiting Title ({{ dashboardData.PaidAwaitingTitleDisbursementTotal | currency }})</span>
       </li>
       <li>
-        <span class="item-total">{{disbursementSummary.paid.quantity}}</span>
-        <span>Paid ({{disbursementSummary.paid.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.PaidDisbursments }}</span>
+        <span>Paid ({{ dashboardData.PaidDisbursmentTotal | currency }})</span>
       </li>
       <li>
-        <span class="item-total">{{disbursementSummary.pending.quantity}}</span>
-        <span>Pending ({{disbursementSummary.pending.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.PendingDisbursements }}</span>
+        <span>Pending ({{ dashboardData.PendingDisbursementTotal | currency }})</span>
       </li>
     </ul>
   </div>
   <div class="span4">Most Recent Disbursements
     <table>
       <tbody>
-        <tr ng-repeat="disbursements in recentDisbursements">
-          <td>{{date}}</td>
-          <td>{{id}}</td>
-          <td>{{amount}}</td>
-          <td><a href="#">{{View}}</a></td>
+        <tr ng-repeat="dis in dashboardData.Disbursements">
+          <td>{{ dis.DisbursmentDate | moment }}</td>
+          <td>{{ dis.DisbursementNumber }}</td>
+          <td>{{ dis.DisbursementAmount | currency }}</td>
+          <td><a href="#">View</a></td> <!-- TODO: Wire link for viewing single disbursements -->
         </tr>
       </tbody>
     </table>
@@ -35,26 +35,22 @@
   <div class="span3">Floorplan
     <ul>
       <li>
-        <span class="item-total">{{floorplanSummary.approved.quantity}}</span>
-        <span>Approved ({{floorplanSummary.approved.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.ApprovedFloorplans }}</span>
+        <span>Approved ({{ dashboardData.ApprovedFloorplanOutstandingAmount | currency }})</span>
       </li>
       <li>
-        <span class="item-total">{{floorplanSummary.awaitingTitles.quantity}}</span>
-        <span>Awaiting Titles ({{floorplanSummary.awaitingTitles.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.FloorplansAwaitingTitle }}</span>
+        <span>Awaiting Titles ({{ dashboardData.FloorplansAwaitingTitleOutstandingAmount | currency }})</span>
       </li>
       <li>
-        <span class="item-total">{{floorplanSummary.pending.quantity}}</span>
-        <span>Pending ({{floorplanSummary.pending.total | currency}})</span>
+        <span class="item-total">{{ dashboardData.PendingFloorplans }}</span>
+        <span>Pending ({{ dashboardData.PendingFloorplansOutstandingAmount | currency }})</span>
       </li>
     </ul>
   </div>
   <div class="span6">Volume of Nextgear Floorplans
     <span class="row">
-      <select name="" id="">
-        <option value="">1 Year</option>
-        <option value="">1 Month</option>
-        <option value="">5 Years</option>
-      </select>
+      <select ng-model="floorplanChartSelection" ng-options="o for o in floorplanChartOptions"></select>
     </span>
     <span>Number of Floored Vehicles</span>
     <canvas width="300"
@@ -62,7 +58,7 @@
             ng-show="true"
             nxg-chart
             nxg-chart-type="Line"
-            nxg-chart-data="volume"
+            nxg-chart-data="chartData"
             nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
     </canvas>
     <span>Month this year</span>
