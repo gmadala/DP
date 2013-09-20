@@ -31,3 +31,11 @@ a {
   padding: 5px 10px;
   margin: 0;
 }
+
+.subtitle {
+  @extend %heavy;
+  color: #666;
+  font-size: 14px;
+  line-height: 1;
+  margin: 20px 0 10px 0;
+}
