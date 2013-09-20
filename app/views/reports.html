@@ -1,142 +1,167 @@
 <div class="container-line">
+	<div class="container-fluid reports">
+    <p class="message">Do you have <a href="http://get.adobe.com/reader/">Adobe Acrobat Reader 8.1</a>
+	       or newer? Your reports are displayed in Acrobat Reader.</p>
 
-	<div class="container-fluid">
-	    <span class="row">Do you have
-	      <a href="">Adobe Acrobat Reader 8.1</a>
-	       or newer? Your reports are displayed in Acrobat Reader.
-	    </span>
-	    <div class="row-fluid">
-	        <div class="span5">
-	            <h3>Current Reports</h3>
-	            <ul>
-	                <li ng-repeat="report in currentReports">
-	                    <a target="_blank" ng-href="{{ report.url }}">{{ report.title }}</a>
-	                </li>
-	            </ul>
+    <div class="row-fluid two-col">
+	    <div class="span8 well adjacent">
+        <h4>Current Reports</h4>
 
-	            <hr />
+        <div class="well-out">
+          <ul class="unstyled">
+            <li ng-repeat="report in currentReports">
+              <a target="_blank" ng-href="{{ report.url }}">{{ report.title }}</a>
+            </li>
+          </ul>
 
-	            <form class="form-inline" name="curtailmentForm">
-		            <h4>Upcoming Curtailment / Payoff Quote (PDF)</h4>
-		            <div class="control-group">
-		                <label class="control-label" for="curtailmentDate">Date</label>
-		                <div class="controls">
-							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate"
-								required />
-		                </div>
-		                 <label for="curtailmentDate" class="text-error"
-			                   ng-show="curtailmentFormValidity.curtailmentDate.$error.required">
-			              Please select a Date
-			            </label>
-					</div>
-	                <div class="control-group">
-	                    <div class="controls">
-	                        <button type="submit" class="btn" ng-click="viewCurtailment()">View Report</button>
-	                    </div>
-	                </div>
-		        </form>
+          <hr/>
 
-	        </div>
+          <!-- Curtailment Form -->
+          <form class="form-inline" name="curtailmentForm">
+            <h3 class="form-title">Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
-		    <div class="span7">
-		        <h3>Historical Reports</h3>
-		        <form class="form-inline" name="stmtForm">
-		            <h4>Dealer Statement</h4>
-		            <div class="control-group">
-		                <label class="control-label" for="stmtStart">Start Date</label>
-		                <div class="controls">
-							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate"
-								required />
-		                </div>
-			            <label for="stmtStart" class="text-error"
-			                   ng-show="stmtFormValidity.stmtStart.$error.required">
-			              Please select a Start Date
-			            </label>
-		            </div>
-		            <div class="control-group">
-		                <label class="control-label" for="stmtEnd">End Date</label>
-		                <div class="controls">
-							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate"
-								required />
-		                </div>
-			            <label for="stmtEnd" class="text-error"
-			                   ng-show="stmtFormValidity.stmtEnd.$error.required">
-			              Please select an End Date
-			            </label>
-		            </div>
-		            <div class="control-group">
-		                <label class="control-label" for="stmtVinFilter">Filter for VIN (optional)</label>
-		                <div class="controls">
-		                    <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" />
-		                </div>
-		                <div class="control-group">
-		                    <div class="controls">
-		                        <button type="submit" class="btn" ng-click="viewDealerStatement()">View Report</button>
-		                    </div>
-		                </div>
-					</div>
-				</form>
+            <div class="control-group half">
+              <label class="control-label" for="curtailmentDate">Date</label>
+              <div class="controls">
+  							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate" required />
+  		        </div>
+              <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required">
+                Please select a Date
+              </label>
+  					</div><!-- end .control-group -->
 
-		        <form class="form-inline" name="disForm">
-		            <h4>Disbursement Detail</h4>
-		            <div class="control-group">
-		                <label class="control-label" for="disDate">Date</label>
-		                <div class="controls">
-							<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate"
-								required />
-		                </div>
-		                 <label for="disDate" class="text-error"
-			                   ng-show="disFormValidity.disDate.$error.required">
-			              Please select a Date
-			            </label>
-					</div>
-	                <div class="control-group">
-	                    <div class="controls">
-	                        <button type="submit" class="btn" ng-click="viewDisbursementDetail()">View Report</button>
-	                    </div>
-	                </div>
-		        </form>
+            <div class="control-group inline-submit">
+              <div class="controls">
+                <button type="submit" class="btn btn-primary" ng-click="viewCurtailment()">View Report</button>
+              </div>
+            </div><!-- end .control-group -->
+  		    </form><!-- end Curtailment Form -->
 
-		        <form class="form-inline" name="paidOffForm">
-		            <h4>Paid off Summary</h4>
-		            <div class="control-group">
-		                <label class="control-label" for="paidOffStart">Start Date</label>
-		                <div class="controls">
-		                    <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" required />
-		                </div>
-		                <label for="paidOffStart" class="text-error"
-			                   ng-show="paidOffFormValidity.paidOffStart.$error.required">
-			              Please select a Start Date
-			            </label>
-		            </div>
-		            <div class="control-group">
-		                <label class="control-label" for="paidOffEnd">End Date</label>
-		                <div class="controls">
-		                    <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" required />
-		                </div>
-		                <label for="paidOffEnd" class="text-error"
-			                   ng-show="paidOffFormValidity.paidOffEnd.$error.required">
-			              Please select an End Date
-			            </label>
-		            </div>
-		            <div class="control-group">
-		                <label class="control-label" for="paidOffVinFilter">Filter for VIN (optional)</label>
-		                <div class="controls">
-		                    <input type="text" id="paidOffVinFilter" ng-model="data.paidOffVinFilter" />
-		                </div>
-		            </div>
-			
-					<div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
+        </div><!-- end .well-out -->
+      </div><!-- end .well.adjacent.span8 -->
 
-		            <div class="control-group">
-		                <div class="controls">
-		                    <button type="submit" class="btn" ng-click="viewPaidOffSummary()">View Report</button>
-		                </div>
-		            </div>       
-				</form>
-		
-		    </div>
-		</div>
-	</div>
+	    <div class="span8 well adjacent">
+        <h4>Historical Reports</h4>
 
-</div>
+        <div class="well-out">
+          <!-- Dealer Statement Form -->
+          <form class="form-inline" name="stmtForm">
+            <h3 class="form-title">Dealer Statement</h3>
+
+            <div class="range">
+              <div class="control-group half">
+                <label class="control-label" for="stmtStart">Start Date</label>
+                <div class="controls">
+    							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate"
+    								required />
+                </div>
+
+              </div><!-- end .control-group -->
+
+              <div class="control-group half">
+                <label class="control-label" for="stmtEnd">End Date</label>
+                <div class="controls">
+    							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate"
+    								required />
+                </div>
+              </div>
+            </div><!-- end .range -->
+
+            <!-- Dealer Statement Date Range Errors -->
+            <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required">
+                  Please select a Start Date
+            </label>
+            <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required">
+              Please select an End Date
+            </label>
+            <!-- end errors -->
+
+            <div class="control-group">
+              <label class="control-label" for="stmtVinFilter">Filter for VIN (optional)</label>
+              <div class="controls">
+                <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" />
+              </div>
+            </div><!-- end .control-group -->
+
+            <hr/>
+
+            <div class="control-group right">
+              <div class="controls">
+                <button type="submit" class="btn btn-primary" ng-click="viewDealerStatement()">View Report</button>
+              </div>
+            </div><!-- end .control-group -->
+  				</form><!-- end Dealer Statement Form -->
+
+          <hr/>
+
+          <!-- Disbursement Form -->
+          <form class="form-inline" name="disForm">
+            <h3 class="form-title">Disbursement Detail</h3>
+
+            <div class="control-group half">
+              <label class="control-label" for="disDate">Date</label>
+              <div class="controls">
+      					<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
+              </div>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
+  	             Please select a Date
+              </label>
+  					</div><!-- end .control-group -->
+
+            <div class="control-group inline-submit">
+              <div class="controls">
+                <button type="submit" class="btn btn-primary" ng-click="viewDisbursementDetail()">View Report</button>
+              </div>
+            </div>
+          </form><!-- end Disbursement Form -->
+
+          <hr/>
+
+          <!-- Paid Off Form -->
+          <form class="form-inline" name="paidOffForm">
+            <h3 class="form-title">Paid off Summary</h3>
+
+            <div class="range">
+              <div class="control-group half">
+                <label class="control-label" for="paidOffStart">Start Date</label>
+                <div class="controls">
+                  <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" required />
+                </div>
+              </div><!-- end .control-group -->
+
+              <div class="control-group half">
+                <label class="control-label" for="paidOffEnd">End Date</label>
+                <div class="controls">
+                  <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" required />
+                </div>
+              </div>
+            </div><!-- end .range -->
+
+            <!-- Paid Off Summary Date Range Errors -->
+            <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required">Please select a Start Date</label>
+            <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required">Please select an End Date</label>
+            <!-- end errors -->
+
+            <div class="control-group">
+              <label class="control-label" for="paidOffVinFilter">Filter for VIN (optional)</label>
+              <div class="controls">
+                <input type="text" id="paidOffVinFilter" ng-model="data.paidOffVinFilter" />
+              </div>
+            </div><!-- end .control-group -->
+
+  					<div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
+
+            <hr/>
+
+            <div class="control-group right">
+              <div class="controls">
+                <button type="submit" class="btn btn-primary" ng-click="viewPaidOffSummary()">View Report</button>
+              </div>
+            </div><!-- end .control-group -->
+  				</form><!-- end Paid Off Form -->
+
+        </div><!-- end .well-out -->
+	    </div><!-- end .well.adjacent.span8 -->
+		</div><!-- end .row-fluid -->
+	</div><!-- end .container-fluid -->
+</div><!-- end .container-line -->

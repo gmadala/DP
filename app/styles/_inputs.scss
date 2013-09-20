@@ -177,3 +177,44 @@ input[type="radio"] + label::before {
 input[type="radio"]:checked + label::before {
   content: url('../img/radio-checked.gif');
 }
+
+.form-title {
+  @extend %heavy;
+  color: #666;
+  font-size: 14px;
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+.control-group.half {
+  @extend %float-l;
+  position: relative;
+
+  & + .half {
+    margin-left: 10px;
+  }
+
+  input {
+    width: 110px;
+  }
+}
+
+.range {
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  .half {
+    @extend %float-l;
+    margin-bottom: 0;
+  }
+}
+
+.inline-submit {
+  margin: 0;
+  padding: 20px 0 0 120px;
+
+  button, button:active, button:focus, button:hover {
+    margin: 3px 0;
+    z-index: 100;
+  }
+}
