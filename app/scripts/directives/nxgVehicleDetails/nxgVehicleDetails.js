@@ -15,12 +15,13 @@ angular.module('nextgearWebApp')
         // yet been lazy-loaded, load it via a promise so it can be rendered into
         // the associated view. If we already have the data loaded, do nothing...
         $scope.$watch('collapse', function() {
-          if (!$scope.collapse && !$scope.vehicleDetails)
-          VehicleDetails.getDetails($scope.stockNumber).then(
-            function(results) {
-              $scope.vehicleDetails = results;
-            }
-          );
+          if (!$scope.collapse && !$scope.vehicleDetails) {
+            VehicleDetails.getDetails($scope.stockNumber).then(
+              function(results) {
+                $scope.vehicleDetails = results;
+              }
+            );
+          }
         });
       }
     };
