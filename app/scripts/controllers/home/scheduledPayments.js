@@ -1,7 +1,17 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments) {
+  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments, moment) {
+
+    var prv = {
+      cancelLocalScheduledPayment: function(p) {
+        p.isPending = p.isVoided = p.isProcessed = false;
+        p.isCancelled = true;
+        p.statusDate = moment().format('YYYY-MM-DD');
+        p.status = 'Cancelled';
+        return p;
+      }
+    };
 
     $scope.isCollapsed = true;
 
@@ -24,6 +34,10 @@ angular.module('nextgearWebApp')
         {
           label: 'Cancelled',
           value: ScheduledPaymentsSearch.FILTER_BY_CANCELED
+        },
+        {
+          label: 'Voided',
+          value: ScheduledPaymentsSearch.FILTER_BY_VOIDED
         }
       ],
 
@@ -48,7 +62,7 @@ angular.module('nextgearWebApp')
           }.bind(this));
       },
 
-      resetSearch: function () {
+      resetSearch: function() {
         this.searchCriteria = {
           query: null,
           startDate: null,
@@ -58,23 +72,18 @@ angular.module('nextgearWebApp')
         this.search();
       },
 
-      isOnPaymentQueue: function(/*payment*/) {
-        // TODO: Check on the Payment Queue and return true if found there.
-        return false;
+      isOnPaymentQueue: function(payment) {
+        return !!Payments.isPaymentOnQueue(payment.floorplanId);
       },
 
-      isProcessed: function(payment) {
-        return payment.status === this.FILTER_BY_PROCESSED;
-      },
-
-      isScheduled: function(payment) {
-        return payment.status === this.FILTER_BY_SCHEDULED;
-      },
-
-      payOff: function(payment) {
-        // TODO: Add it to the PaymentQueue
-        console.log('ScheduledPayments::payOff()' + ' - ' + payment.floorplanId);
-        Payments.addToPaymentQueue(payment, true /*asPayOff*/);
+      payOff: function(p) {
+        console.log('ScheduledPayments::payOff() (cancel first)' + ' - ' + p.floorplanId);
+        Payments.cancelScheduled(p).then(
+          function(/*success*/) {
+            console.log('ScheduledPayments::payOff()' + ' - ' + p.floorplanId);
+            prv.cancelLocalScheduledPayment(p);
+            Payments.addToPaymentQueue(p.floorplanId, p.vin, p.description, p.payoutAmount, true /*asPayOff*/);
+          });
       },
 
       showReceipt: function(payment) {
@@ -85,7 +94,10 @@ angular.module('nextgearWebApp')
       cancelPayment: function(payment) {
         // TODO: Hook it to the model
         console.log('ScheduledPayments::cancelPayment()' + ' - ' + payment.floorplanId);
-        Payments.cancelScheduled(payment);
+        Payments.cancelScheduled(payment).then(
+          function(/*success*/) {
+            prv.cancelLocalScheduledPayment(payment);
+          });
       }
     };
 
@@ -95,6 +107,6 @@ angular.module('nextgearWebApp')
       var currentTime = (new Date()).getTime(),
         startTime = businessHours.startTime.getTime(),
         endTime = businessHours.endTime.getTime();
-      $scope.outOfBusinessHours = currentTime <  startTime || currentTime > endTime;
+      $scope.outOfBusinessHours = currentTime < startTime || currentTime > endTime;
     });
   });

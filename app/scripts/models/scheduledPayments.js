@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
           for (var i = 0; i < results.SearchResults.length; i++) {
             var item = results.SearchResults[i];
             searchResults.push({
-              FloorplanId: item.FloorplanId,
+              floorplanId: item.FloorplanId,
               vin: item.Vin,
               description: item.VehicleDescription,
               stockNumber: item.StockNumber,
@@ -31,6 +31,7 @@ angular.module('nextgearWebApp')
               isProcessed: item.Processed,
               isCurtailment: item.CurtailmentPayment,
               paymentAmount: item.ScheduledPaymentAmount,
+              payoutAmount: item.ScheduledPayoutAmount,
               scheduledBy: item.ScheduledByUserDisplayname
             });
           }
@@ -52,6 +53,9 @@ angular.module('nextgearWebApp')
       else if (item.Cancelled) {
         status = 'Cancelled';
       }
+      else if (item.Voided) {
+        status = 'Voided';
+      }
       else {
         status = 'Pending';
       }
@@ -67,6 +71,9 @@ angular.module('nextgearWebApp')
       else if (item.Cancelled) {
         date = item.CancelledDate;
       }
+      else if (item.Voided) {
+        date = item.VoidedDate;
+      }
       else {
         date = item.SetupDate;
       }
@@ -79,6 +86,7 @@ angular.module('nextgearWebApp')
       FILTER_BY_PENDING: 1,
       FILTER_BY_PROCESSED: 2,
       FILTER_BY_CANCELED: 3,
+      FILTER_BY_VOIDED: 4,
 
       search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
         query = query || '';
@@ -97,7 +105,8 @@ angular.module('nextgearWebApp')
           EndDate: dateEnd,
           SearchCancelled: false,
           SearchPending: false,
-          SearchProcessed: false
+          SearchProcessed: false,
+          SearchVoided: false
         };
         // set up filters
         switch (filterBy) {
@@ -110,11 +119,15 @@ angular.module('nextgearWebApp')
         case this.FILTER_BY_CANCELED:
           lastRequest.SearchCancelled = true;
           break;
+        case this.FILTER_BY_VOIDED:
+          lastRequest.SearchVoided = true;
+          break;
         default:
           // Show all scheduled payments of all statuses
           lastRequest.SearchPending = true;
           lastRequest.SearchProcessed = true;
           lastRequest.SearchCancelled = true;
+          lastRequest.SearchVoided = true;
         }
         return self.request(lastRequest);
       },

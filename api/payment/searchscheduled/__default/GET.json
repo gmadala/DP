@@ -2,6 +2,8 @@
     "Success": true,
     "Message": null,
     "Data": {
+        "UnappliedFundsBalance": 0,
+        "AvailableUnappliedFundsBalance": 0,
         "ScheduledPaymentRowCount": 3,
         "SearchResults": [
             {
@@ -22,9 +24,12 @@
                 "CancelledByBusinessContactId": "",
                 "CancelledByUserDisplayname": "",
                 "FinancialTransactionId": "1000001",
+                "Voided": false,
+                "VoidedDate": null,
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
                 "ScheduledPaymentAmount": 14098.00,
+                "ScheduledPayoutAmount": 84022,
                 "SetupDate": "2013-08-01"
             },
             {
@@ -45,9 +50,12 @@
                 "CancelledByBusinessContactId": "",
                 "CancelledByUserDisplayname": "",
                 "FinancialTransactionId": "1000002",
+                "Voided": false,
+                "VoidedDate": null,
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
-                "ScheduledPaymentAmount": 34098.00,
+                "ScheduledPaymentAmount": 3098.00,
+                "ScheduledPayoutAmount": 34022,
                 "SetupDate": "2013-06-06"
             },
             {
@@ -68,9 +76,12 @@
                 "CancelledByBusinessContactId": "",
                 "CancelledByUserDisplayname": "John Denver",
                 "FinancialTransactionId": "1000003",
+                "Voided": false,
+                "VoidedDate": null,
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
-                "ScheduledPaymentAmount": 40498.00,
+                "ScheduledPaymentAmount": 4098.00,
+                "ScheduledPayoutAmount": 52131.50,
                 "SetupDate": "2013-03-28"
             },
             {
@@ -83,17 +94,20 @@
               "ScheduledByUserAccountId": "u10005",
               "ScheduledByBusinessContactId": "b1005",
               "ScheduledByUserDisplayname": "John Rambo",
-              "Processed": true,
+              "Processed": false,
               "ProcessedOnDate": "",
               "Cancelled": false,
-              "CancelledDate": "2013-08-02",
+              "CancelledDate": null,
               "CancelledByUserAccountId": "",
               "CancelledByBusinessContactId": "",
               "CancelledByUserDisplayname": "John Denver",
               "FinancialTransactionId": "1000003",
+              "Voided": true,
+              "VoidedDate": "2013-08-13",
               "CurtailmentPayment": true,
-              "CurtailmentDueDate": "2013-08-13",
+              "CurtailmentDueDate": null,
               "ScheduledPaymentAmount": 40498.00,
+              "ScheduledPayoutAmount": 131455.15,
               "SetupDate": "2013-03-28"
             }
         ]

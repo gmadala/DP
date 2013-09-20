@@ -9,18 +9,18 @@
       <p ng-show="paymentQueue.isEmpty()">Click the Add button to add a payoff or a payment.</p>
       <ul ng-hide="paymentQueue.isEmpty()">
         <li ng-repeat="fee in paymentQueue.fees">
-          <button class="btn-unstyle btn-x" ng-click="removeItem(fee)"><span class="glyphicon"></span></button>
+          <button class="btn-unstyle btn-x" ng-click="removeFee(fee.id)"><span class="glyphicon"></span></button>
           Account Fee <br/>
-          {{ fee.FeeType }}<br/>
+          {{ fee.description }}<br/>
           <span class="queued-as">Payment</span>
-          <span class="amount">{{ fee.Balance | currency }}</span>
+          <span class="amount">{{ fee.amount | currency }}</span>
         </li>
         <li ng-repeat="payment in paymentQueue.payments">
-          <button class="btn-unstyle btn-x" ng-click="removeItem(payment)"><span class="glyphicon"></span></button>
-          VIN: {{ payment.Vin }} <br/>
-          {{ payment.UnitDescription }}<br/>
-          <span class="queued-as">{{ payment.$queuedAsPayoff && 'Payoff' || 'Payment' }}</span>
-          <span class="amount">{{ payment.$queuedAmount | currency }}</span>
+          <button class="btn-unstyle btn-x" ng-click="removePayment(payment.id)"><span class="glyphicon"></span></button>
+          VIN: {{ payment.vin }} <br/>
+          {{ payment.description }}<br/>
+          <span class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</span>
+          <span class="amount">{{ payment.amount | currency }}</span>
         </li>
       </ul>
     </div>

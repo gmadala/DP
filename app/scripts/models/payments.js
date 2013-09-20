@@ -123,38 +123,48 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addToPaymentQueue: function (item, asPayoff) {
-        var key = paymentQueue.getKey(item),
-          storage = paymentQueue.getStorage(item);
-        if (storage === paymentQueue.payments) {
-          item.$queuedAsPayoff = !!asPayoff;
-          item.$queuedAmount = asPayoff ? item.CurrentPayoff : item.AmountDue;
-        }
-        storage[key] = item;
+      addToPaymentQueue: function (floorplanId, vin, description, amount, asPayoff) {
+        var key = floorplanId,
+          storage = paymentQueue.payments,
+          payment = {
+            id: floorplanId,
+            vin: vin,
+            description: description,
+            amount: amount,
+            isPayOff: asPayoff
+          };
+        storage[key] = payment;
       },
-      removeFromPaymentQueue: function (item) {
-        var key = paymentQueue.getKey(item),
-          storage = paymentQueue.getStorage(item);
-        delete item.$queuedAsPayoff;
-        delete item.$queuedAmount;
-        delete storage[key];
+      addFeeToQueue: function(financialRecordId, vin, description, amount) {
+        var key = financialRecordId,
+          storage = paymentQueue.fees,
+          fee = {
+            id: financialRecordId,
+            vin: vin,
+            description: description,
+            amount: amount
+          };
+        storage[key] = fee;
       },
-      getPaymentQueueStatus: function (item) {
-        var key = paymentQueue.getKey(item),
-          storage = paymentQueue.getStorage(item),
-          queueItem = storage[key];
+      removePaymentFromQueue: function (id) {
+        delete paymentQueue.payments[id];
+      },
+      removeFeeFromQueue: function (id) {
+        delete paymentQueue.fees[id];
+      },
+      isPaymentOnQueue: function (id) {
+        var queueItem = paymentQueue.payments[id];
 
         if (!queueItem) {
           return false; // not in queue
         }
-
-        if (storage === paymentQueue.payments) {
-          // in queue as curtailment payment or payoff
-          return (queueItem.$queuedAsPayoff ? 'payoff' : 'payment');
-        } else {
-          // simply in queue (e.g. a fee)
-          return true;
+        else {
+          // payment is on queue, return whether it is a payoff or payment
+          return (queueItem.isPayOff ? 'payoff' : 'payment');
         }
+      },
+      isFeeOnQueue: function (id) {
+        return !!paymentQueue.fees[id];
       },
       getPaymentQueue: function () {
         return {

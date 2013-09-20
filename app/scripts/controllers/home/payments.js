@@ -18,7 +18,8 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.getQueueStatus = Payments.getPaymentQueueStatus;
+    $scope.isPaymentOnQueue = Payments.isPaymentOnQueue;
+    $scope.isFeeOnQueue = Payments.isFeeOnQueue;
 
     $scope.payments = {
       results: [],

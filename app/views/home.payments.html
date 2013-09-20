@@ -34,7 +34,7 @@
               <div class="cell fee-amt"><p>{{ fee.Balance | currency }}</p>
                 <div nxg-payment-buttons="fee"
                                item="fee"
-                               queue-status="getQueueStatus(fee)"
+                               on-queue="isFeeOnQueue(fee.FinancialRecordId)"
                                can-pay-now="canPayNow">
                 </div>
               </div>
@@ -83,10 +83,10 @@
                   <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
                   <div class="cell pay-payment-amt">
                     <p>{{ payment.AmountDue | currency }}</p>
-                    <div nxg-payment-buttons="payment" item="payment" queue-status="getQueueStatus(payment)"></div>
+                    <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                   </div>
                   <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
-                    <div nxg-payment-buttons="payoff" item="payment" queue-status="getQueueStatus(payment)"></div>
+                    <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                   </div>
 
                   <div class="cell pay-title">

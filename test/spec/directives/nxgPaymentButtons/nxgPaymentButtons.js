@@ -16,9 +16,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="fee" ' +
-        'item="myFee" queue-status="inQueue" can-pay-now="isOpen"></div>');
+        'item="myFee" on-queue="inQueue" can-pay-now="isOpen"></div>');
       scope = $rootScope.$new();
-      scope.myFee = {};
+      scope.myFee = {
+        FinancialRecordId: 'financialRecordId',
+        Vin: 'FeeVin',
+        Description: 'FeeDescription',
+        Balance: 1500
+      };
       scope.inQueue = false;
       scope.isOpen = true;
       $compile(element)(scope);
@@ -26,8 +31,8 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a button that toggles fee presence in the payment queue', function() {
-      spyOn(Payments, 'addToPaymentQueue');
-      spyOn(Payments, 'removeFromPaymentQueue');
+      spyOn(Payments, 'addFeeToQueue');
+      spyOn(Payments, 'removeFeeFromQueue');
 
       element.find('#toggleFee').click();
 
@@ -37,17 +42,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#toggleFee').click();
 
-      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myFee, undefined);
-      expect(Payments.removeFromPaymentQueue).toHaveBeenCalledWith(scope.myFee);
+      expect(Payments.addFeeToQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId, scope.myFee.Vin, scope.myFee.Description, scope.myFee.Balance);
+      expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
     it('button should be disabled if we are outside business hours', function() {
-      spyOn(Payments, 'addToPaymentQueue');
-
       scope.$apply(function () {
         scope.isOpen = false;
       });
-
       expect(element.find('#toggleFee').attr('disabled')).toBeDefined();
     });
 
@@ -57,9 +59,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="payment" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue" ng-click="togglePaymentInQueue(false)"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
+        FloorplanId: 'floorplanId',
+        Vin: 'vin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 20000,
+        AmountDue: 1000,
         Scheduled: false,
         PayPayoffAmount: false
       };
@@ -70,7 +77,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should have a button that toggles payment presence in the payment queue', function() {
       spyOn(Payments, 'addToPaymentQueue');
-      spyOn(Payments, 'removeFromPaymentQueue');
+      spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayment').click();
 
@@ -80,8 +87,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayment').click();
 
-      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment, undefined);
-      expect(Payments.removeFromPaymentQueue).toHaveBeenCalledWith(scope.myPayment);
+      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId, scope.myPayment.Vin, scope.myPayment.UnitDescription, scope.myPayment.AmountDue, false);
+      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
     it('payment toggle button should be disabled if payment is already in queue as payoff', function() {
@@ -101,7 +108,7 @@ describe('Directive: nxgPaymentButtons', function () {
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
       element = angular.element('<div nxg-payment-buttons="payment" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
         Scheduled: true,
@@ -134,7 +141,7 @@ describe('Directive: nxgPaymentButtons', function () {
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
       element = angular.element('<div nxg-payment-buttons="payment" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
         Scheduled: true,
@@ -155,9 +162,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
+        FloorplanId: 'floorplanId',
+        Vin: 'vin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 20000,
+        AmountDue: 1000,
         Scheduled: false,
         PayPayoffAmount: false
       };
@@ -168,7 +180,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should have a button that toggles payoff presence in the payment queue', function() {
       spyOn(Payments, 'addToPaymentQueue');
-      spyOn(Payments, 'removeFromPaymentQueue');
+      spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayoff').click();
 
@@ -178,8 +190,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayoff').click();
 
-      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment, true);
-      expect(Payments.removeFromPaymentQueue).toHaveBeenCalledWith(scope.myPayment);
+      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId, scope.myPayment.Vin, scope.myPayment.UnitDescription, scope.myPayment.CurrentPayoff, true);
+      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
     it('payoff toggle button should be disabled if payment is already in queue', function() {
@@ -199,7 +211,7 @@ describe('Directive: nxgPaymentButtons', function () {
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
         Scheduled: true,
@@ -232,7 +244,7 @@ describe('Directive: nxgPaymentButtons', function () {
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
-        'item="myPayment" queue-status="inQueue"></div>');
+        'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
       scope.myPayment = {
         Scheduled: true,

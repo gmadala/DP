@@ -324,86 +324,96 @@ describe("Model: Payments", function () {
 
   });
 
-  describe('addToPaymentQueue function + getPaymentQueueStatus', function () {
+  describe('addToPaymentQueue function + isPaymentOnQueue', function () {
 
     it('should add fees to the queue', function () {
       var fee = {
-        FeeType: 'a fee type',
         FinancialRecordId: 'fee1',
-        Posted: '2013-01-01'
+        Vin: 'someVin',
+        Decription: 'fee description',
+        Balance: 350.85
       };
-      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(false);
-      payments.addToPaymentQueue(fee);
-      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(true);
+      expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(false);
+      payments.addFeeToQueue(fee.FinancialRecordId, fee.Vin, fee.Description, fee.Balance);
+      expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(true);
     });
 
-    it('should add payments to the queue with $queuedAmount matching amount due', function () {
+    it('should add payments to the queue with amount matching amount due', function () {
       var payment = {
-        Scheduled: false,
         FloorplanId: 'floorplan1',
-        Posted: '2013-01-01',
-        AmountDue: 400,
-        CurrentPayoff: 5000
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
-      payments.addToPaymentQueue(payment);
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payment');
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.AmountDue, false);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payment');
 
       payment = _.find(payments.getPaymentQueue().payments);
-      expect(payment.$queuedAmount).toBe(400);
+      expect(payment.amount).toBe(1000);
     });
 
-    it('should add payoffs to the queue with $queuedAmount matching current payoff amount', function () {
+    it('should add payoffs to the queue with amount matching current payoff amount', function () {
       var payment = {
-        Scheduled: false,
-        FloorplanId: 'floorplan2',
-        Posted: '2013-01-01',
-        AmountDue: 400,
-        CurrentPayoff: 5000
+        FloorplanId: 'floorplan1',
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
-      payments.addToPaymentQueue(payment, true);
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe('payoff');
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.CurrentPayoff, true);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payoff');
 
       payment = _.find(payments.getPaymentQueue().payments);
-      expect(payment.$queuedAmount).toBe(5000);
+      expect(payment.amount).toBe(5000);
     });
 
   });
 
-  describe('removeFromPaymentQueue function + getPaymentQueueStatus', function () {
+  describe('removeFeeFromQueue + removePaymentFromQueue + isFeeOnQueue + isPaymentOnQueue', function () {
 
     it('should remove fees from the queue', function () {
       var fee = {
-        FeeType: 'a fee type',
         FinancialRecordId: 'fee1',
-        Posted: '2013-01-01'
+        Vin: 'someVin',
+        Decription: 'fee description',
+        Balance: 350.85
       };
-      payments.addToPaymentQueue(fee);
-      payments.removeFromPaymentQueue(angular.copy(fee));
-      expect(payments.getPaymentQueueStatus(angular.copy(fee))).toBe(false);
+      payments.addFeeToQueue(fee.FinancialRecordId, fee.Vin, fee.Description, fee.Balance);
+      payments.removeFeeFromQueue(fee.FinancialRecordId);
+      expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(false);
     });
 
     it('should remove payments from the queue', function () {
       var payment = {
-        Scheduled: false,
         FloorplanId: 'floorplan1',
-        Posted: '2013-01-01'
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
-      payments.addToPaymentQueue(payment);
-      payments.removeFromPaymentQueue(angular.copy(payment));
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.AmountDue, false);
+      payments.removePaymentFromQueue(payment.FloorplanId);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
 
     it('should remove payoffs from the queue', function () {
       var payment = {
-        Scheduled: false,
-        FloorplanId: 'floorplan2',
-        Posted: '2013-01-01'
+        FloorplanId: 'floorplan1',
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
-      payments.addToPaymentQueue(payment, true);
-      payments.removeFromPaymentQueue(angular.copy(payment));
-      expect(payments.getPaymentQueueStatus(angular.copy(payment))).toBe(false);
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.CurrentPayoff, true);
+      payments.removePaymentFromQueue(payment.FloorplanId);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
 
   });
@@ -412,66 +422,73 @@ describe("Model: Payments", function () {
 
     it('should return the live payment queue contents as fees and payments hashes', function () {
       var fee = {
-        FeeType: 'a fee type',
         FinancialRecordId: 'fee1',
-        Posted: '2013-01-01'
+        Vin: 'someVin',
+        Decription: 'fee description',
+        Balance: 350.85
       };
       var payment = {
-        Scheduled: false,
-        FloorplanId: 'floorplan2',
-        Posted: '2013-01-01'
+        FloorplanId: 'floorplan1',
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
-
-      payments.addToPaymentQueue(fee);
-
       var content = payments.getPaymentQueue();
-
       expect(content.fees).toBeDefined();
       expect(content.payments).toBeDefined();
+
+      payments.addFeeToQueue(fee.FinancialRecordId, fee.Vin, fee.Description, fee.Balance);
 
       var items = [];
       angular.forEach(content.fees, function (value, key) {
         items.push(value);
       });
       expect(items.length).toBe(1);
-      expect(items[0]).toBe(fee);
+      expect(items[0].id).toBe(fee.FinancialRecordId);
 
-      payments.addToPaymentQueue(payment);
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.AmountDue, false);
 
       items = [];
       angular.forEach(content.payments, function (value, key) {
         items.push(value);
       });
       expect(items.length).toBe(1);
-      expect(items[0]).toBe(payment);
+      expect(items[0].id).toBe(payment.FloorplanId);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {
       var fee = {
-        FeeType: 'a fee type',
         FinancialRecordId: 'fee1',
-        Posted: '2013-01-01'
+        Vin: 'someVin',
+        Decription: 'fee description',
+        Balance: 350.85
       };
       var payment = {
-        Scheduled: false,
-        FloorplanId: 'floorplan2',
-        Posted: '2013-01-01'
+        FloorplanId: 'floorplan1',
+        Vin: 'someVin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 5000,
+        AmountDue: 1000,
+        PayPayoffAmount: true
       };
 
       var queue = payments.getPaymentQueue();
 
       expect(queue.isEmpty()).toBe(true);
 
-      payments.addToPaymentQueue(fee);
+      payments.addFeeToQueue(fee.FinancialRecordId, fee.Vin, fee.Description, fee.Balance);
 
       expect(queue.isEmpty()).toBe(false);
 
-      payments.removeFromPaymentQueue(fee);
-      payments.addToPaymentQueue(payment);
+      payments.removeFeeFromQueue(fee.FinancialRecordId);
+
+      payments.addToPaymentQueue(payment.FloorplanId, payment.Vin, payment.UnitDescription, payment.AmountDue, false);
 
       expect(queue.isEmpty()).toBe(false);
 
-      payments.removeFromPaymentQueue(payment);
+      payments.removePaymentFromQueue(payment.FloorplanId);
       expect(queue.isEmpty()).toBe(true);
     });
 

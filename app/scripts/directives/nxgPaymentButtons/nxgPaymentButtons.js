@@ -4,10 +4,10 @@ angular.module('nextgearWebApp')
   .directive('nxgPaymentButtons', function () {
     return {
       scope: {
-        type:        '@nxgPaymentButtons', // fee | payment | payoff
-        item:        '=',
-        queueStatus: '=',
-        canPayNow:   '='
+        type:       '@nxgPaymentButtons', // fee | payment | payoff
+        item:       '=',
+        onQueue:  '=',
+        canPayNow:  '='
       },
       controller: function($scope, $dialog, Payments) {
 
@@ -26,11 +26,21 @@ angular.module('nextgearWebApp')
           $scope.internalType = result;
         });
 
-        $scope.toggleInQueue = function (asPayoff) {
-          if (!$scope.queueStatus) {
-            Payments.addToPaymentQueue($scope.item, asPayoff);
+        $scope.toggleFeeInQueue = function () {
+          var f = $scope.item;
+          if (!$scope.onQueue) {
+            Payments.addFeeToQueue(f.FinancialRecordId, f.Vin, f.Description, f.Balance);
           } else {
-            Payments.removeFromPaymentQueue($scope.item);
+            Payments.removeFeeFromQueue(f.FinancialRecordId);
+          }
+        };
+
+        $scope.togglePaymentInQueue = function (asPayoff) {
+          var p = $scope.item;
+          if (!$scope.onQueue) {
+            Payments.addToPaymentQueue(p.FloorplanId, p.Vin, p.UnitDescription, asPayoff ? p.CurrentPayoff : p.AmountDue, asPayoff);
+          } else {
+            Payments.removePaymentFromQueue(p.FloorplanId);
           }
         };
 
