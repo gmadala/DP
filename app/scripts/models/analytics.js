@@ -12,7 +12,7 @@ angular.module('nextgearWebApp')
             // Calculate a couple of client-side derived values needed later and append it to the marshalled response
             response.DerivedCapitalBook = response.TotalOutstandingPrincipal / response.TotalApprovedPurchasePrice * 100;
             response.DerivedAmountOutstanding = response.TotalOutstandingPrincipal / response.TotalApprovedBlackBookValue * 100;
-            
+
             return response;
           }
         );
@@ -25,17 +25,17 @@ angular.module('nextgearWebApp')
             api.request('GET', '/analytics/bookvaluemargins/12')
           ]).then(
             function (responses) {
-             
+
               var monthAbbrevs = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
               var result = {};
 
               // Parse average turn time into a model suitable for charting
-              result.averageTurn = { labels: [], datasets: [ { data: [] } ] };              
+              result.averageTurn = { labels: [], datasets: [ { data: [] } ] };
               _.each(
                 responses[0],
                 function ( item ) {
-                  var month = parseInt(item.EndOfMonthDate.split('-')[1]);
+                  var month = parseInt(item.EndOfMonthDate.split('-')[1], 10);
                   var monthStr = monthAbbrevs[month];
                   result.averageTurn.labels.push(monthStr);
                   result.averageTurn.datasets[0].data.push(item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior);
@@ -55,10 +55,8 @@ angular.module('nextgearWebApp')
                 }
               );
 
+              result.top10Auctions = { labels: [], datasets: [ { data: [] } ] };
 
-              
-              result.top10Auctions = { labels: [], datasets: [ { data: [] } ] };  
-              
               // Sort by NumVehiclesAnalyzed and trim down to the top ten auctions 
               var top10 = _.sortBy(
                 responses[2],
@@ -76,14 +74,14 @@ angular.module('nextgearWebApp')
 
               return result;
             }
-          );
-        },
+        );
+      },
 
-        fetchMovers: function(isTop) {
+      fetchMovers: function(isTop) {
         return api.request('GET', 'analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
-            var result = { labels: [], makes: [], models: [], datasets: [ { data: [] } ] };  
+            var result = { labels: [], makes: [], models: [], datasets: [ { data: [] } ] };
 
             _.each(
               response.reverse(),
@@ -93,7 +91,7 @@ angular.module('nextgearWebApp')
                 result.models.push(item.Model);
                 result.datasets[0].data.push(item.NinetyFifthPercentileTurnTime);
               }
-            )
+            );
 
             return result;
           }

@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics) {
-    
+
     $scope.moversOptions = ['The best movers.', 'The worst movers.'];
     $scope.moversSelection = $scope.moversOptions[0];
 
@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
 
     $scope.toggleDetails = function() {
       $scope.showDetails = !$scope.showDetails;
-    }
+    };
 
     $scope.toggleMovers = function() {
       if ($scope.moversSelection === $scope.moversOptions[0]) {
@@ -30,7 +30,7 @@ angular.module('nextgearWebApp')
       else {
         if (!$scope.worstMovers) { $scope.worstMovers = Analytics.fetchMovers(false); }
       }
-    }
+    };
 
     $scope.businessSummary = Analytics.fetchBusinessSummary();
     $scope.analytics = Analytics.fetchAnalytics();
