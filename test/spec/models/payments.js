@@ -616,16 +616,16 @@ describe("Model: Payments", function () {
     });
 
     it('should send fees in the expected format', function () {
-      var fees = [
-        {
+      var fees = {
+        one: {
           FinancialRecordId: 'one',
           FeeType: 'Membership Dues'
         },
-        {
+        two: {
           FinancialRecordId: 'two',
           FeeType: 'Other Fee'
         }
-      ];
+    };
 
       httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
         var expectedFees = [
@@ -633,7 +633,8 @@ describe("Model: Payments", function () {
           { FinancialRecordId: 'two' }
         ];
         data = angular.fromJson(data);
-        expect(angular.equals(data.AccountFees, expectedFees)).toBe(true);
+        data = _.sortBy(data.AccountFees, 'FinancialRecordId');
+        expect(angular.equals(data, expectedFees)).toBe(true);
         return [200, stubResponse, {}];
       });
 
@@ -642,35 +643,36 @@ describe("Model: Payments", function () {
     });
 
     it('should send payments in the expected format', function () {
-      var paymentsData = [
-        {
+      var paymentsData = {
+        2049: {
           "FloorplanId": "2049",
           "Vin": "CH224157",
           $scheduleDate: new Date(2013, 4, 5),
           $queuedAsPayoff: false
         },
-        {
+        2048: {
           "FloorplanId": "2048",
           "Vin": "LL2469R6",
           $queuedAsPayoff: true
         }
-      ];
+    };
 
       httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
         var expectedPayments = [
           {
-            FloorplanId: '2049',
-            ScheduledSetupDate: '2013-05-05',
-            IsPayoff: false
-          },
-          {
             FloorplanId: '2048',
             ScheduledSetupDate: null,
             IsPayoff: true
+          },
+          {
+            FloorplanId: '2049',
+            ScheduledSetupDate: '2013-05-05',
+            IsPayoff: false
           }
         ];
         data = angular.fromJson(data);
-        expect(angular.equals(data.SelectedFloorplans, expectedPayments)).toBe(true);
+        data = _.sortBy(data.SelectedFloorplans, 'FloorplanId');
+        expect(angular.equals(data, expectedPayments)).toBe(true);
         return [200, stubResponse, {}];
       });
 
