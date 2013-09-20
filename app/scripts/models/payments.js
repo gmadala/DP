@@ -29,6 +29,7 @@ angular.module('nextgearWebApp')
     var paymentQueue = {
       fees: {},
       payments: {},
+      unappliedFundsAvailable: 0,
       getKey: function (item) {
         if (angular.isDefined(item.FeeType)) {
           // fee
@@ -70,6 +71,7 @@ angular.module('nextgearWebApp')
         RANGE: 'range'
       },
       search: function(criteria, paginator) {
+        var self = this;
         criteria = angular.copy(criteria);
 
         var dateFormatter = api.toShortISODate;
@@ -100,6 +102,7 @@ angular.module('nextgearWebApp')
         };
         return api.request('GET', '/payment/search', params).then(
           function (results) {
+            self.setAvailableUnappliedFunds(results.AvailableUnappliedFundsBalance);
             angular.forEach(results.SearchResults, function (payment) {
                 Floorplan.addTitleURL(payment);
               });
@@ -172,6 +175,14 @@ angular.module('nextgearWebApp')
           payments: paymentQueue.payments,
           isEmpty: paymentQueue.isEmpty
         };
+      },
+      setAvailableUnappliedFunds: function (amount) {
+        // a bit goofy - we don't have a dedicated endpoint to fetch this @ checkout, but
+        // it comes back with other data earlier in the workflow, so remember it for later use
+        paymentQueue.unappliedFundsAvailable = amount;
+      },
+      getAvailableUnappliedFunds: function () {
+        return paymentQueue.unappliedFundsAvailable;
       },
       cancelScheduled: function (payment) {
         var data = {

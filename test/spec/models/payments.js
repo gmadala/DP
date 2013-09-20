@@ -86,6 +86,7 @@ describe("Model: Payments", function () {
           Success: true,
           Data: {
             PaymentRowCount: 20,
+            AvailableUnappliedFundsBalance: 21.6,
             SearchResults: searchResults
           }
         }, {}];
@@ -130,6 +131,12 @@ describe("Model: Payments", function () {
       });
       httpBackend.flush();
       expect(callParams.PageNumber).toBe('11');
+    });
+
+    it('should save the unapplied funds available from results', function () {
+      payments.search(defaultCriteria);
+      httpBackend.flush();
+      expect(payments.getAvailableUnappliedFunds()).toBe(21.6);
     });
 
     it('should add a paginator to the results', function () {
@@ -320,6 +327,15 @@ describe("Model: Payments", function () {
       });
       expect(httpBackend.flush).not.toThrow();
       expect(out).toBe(false);
+    });
+
+  });
+
+  describe('get/setAvailableUnappliedFunds functions', function () {
+
+    it('should store the value and return it when asked', function () {
+      payments.setAvailableUnappliedFunds(234.56);
+      expect(payments.getAvailableUnappliedFunds()).toBe(234.56);
     });
 
   });
