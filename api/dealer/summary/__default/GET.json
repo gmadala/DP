@@ -13,7 +13,7 @@
         "TotalPendingBlackBookPrice": 0,
         "TotalOutstandingCredit": 0,
         "TotalAvailableCredit": 0,
-        "LastPaymentUnixDate": 1373042262,
+        "LastPaymentDate": "2013-09-06",
         "LastPaymentAmount": 170668.41,
         "TotalPaymentInLast7Days": 0,
         "ReserveFundsBalance": 0

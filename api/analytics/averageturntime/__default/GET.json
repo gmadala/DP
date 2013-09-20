@@ -3,47 +3,47 @@
     "Message": null,
     "Data": [
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2012-10-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 15
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2012-11-30",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 13
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2012-12-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-01-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-02-28",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-03-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-04-30",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-05-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-06-30",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-07-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         },
         {
-            "EndOfMonthUnixDate": 1377971773,
+            "EndOfMonthDate": "2013-08-31",
             "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
         }
     ]

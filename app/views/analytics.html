@@ -3,42 +3,42 @@
     <section class="row-fluid business-summary">
         <div class="span4">
             <h4>Approved Floorplans</h4>
-            {{ floorplans.length }} Approved
+            {{ businessSummary.ApprovedFloorplans }} Approved
             <ul>
-                <li>Total Book Value {{ 6140300.00 | currency }} </li>
-                <li>Total Financed Amount {{ 4781220.48 | currency }} </li>
-                <li>Total Outstanding {{ 4779017.98 | currency }} </li>
+                <li>Total Book Value {{ businessSummary.TotalApprovedBlackBookValue | currency }} </li>
+                <li>Total Financed Amount {{ businessSummary.TotalApprovedFinancedAmount| currency }} </li>
+                <li>Total Outstanding {{ businessSummary.TotalOutstandingPrincipal | currency }} </li>
                 <!-- should show conditionally on-click of "Show Details" bar. -->
-                <li ng-show="false">Average purchase price: {{ 4779017.98 | currency }} </li>
-                <li ng-show="false">Total purchase price: {{ 4779017.98 | currency }} </li>
-                <li ng-show="false">Total NextGear Capital Book value {{ 4779017.98 | currency }} </li>
-                <li  ng-show="false" class="small"> NextGear Capital Book is 468.25% of the Purchase Price </li>
-                <li  ng-show="false" class="small">Amount Outstanding is 468.25% of the NextGear Capital Book</li>
+                <li ng-show="showDetails">Average purchase price: {{ businessSummary.AveragePurchasePrice | currency }} </li>
+                <li ng-show="showDetails">Total purchase price: {{ businessSummary.TotalApprovedPurchasePrice | currency }} </li>
+                <li ng-show="showDetails">Total NextGear Capital Book value {{ businessSummary.TotalApprovedBlackbookValue | currency }} </li>
+                <li ng-show="showDetails" class="small"> NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price </li>
+                <li ng-show="showDetails" class="small">Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book</li>
                 <!-- end conditional <li>s -->
             </ul>
         </div>
         <div class="span4">
             <h4>Pending Floorplans</h4>
-            {{ floorplans.length }} Pending
+            {{ businessSummary.PendingFloorplans }} Pending
             <ul>
-                <li>Total Purchase Price {{ 1500.00 | currency }} </li>
-                <li>Total NextGear Capital Book value {{ 0 | currency }} </li>
+                <li>Total Purchase Price {{ businessSummary.TotalPendingPurchasePrice | currency }} </li>
+                <li>Total NextGear Capital Book value {{ businessSummary.TotalPendingBlackBookPrice | currency }} </li>
                 <!-- should show conditionally on-click of "Show Details" bar. -->
-                <li  ng-show="false" class="small">NextGear Capital Book is 0.00% of the Purchase Price</li>
+                <li ng-show="showDetails" class="small">NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price</li>
                 <!-- end conditional <li>s -->
             </ul>
         </div>
         <div class="span4">
             <h4>Credits and Payments</h4>
             <ul>
-                <li>Available Credit {{ 6359899.86 | currency }} </li>
-                <li>Reserve Funds {{ 0 | currency }} </li>
-                <li>Last Payment {{ 8005.60 | currency }} </li>
-                <li>Last Payment Date 7/10/2013</li>
+                <li>Available Credit {{ businessSummary.TotalAvailableCredit | currency }} </li>
+                <li>Reserve Funds {{ businessSummary.ReserveFundsBalance | currency }} </li>
+                <li>Last Payment {{ businessSummary.LastPaymentAmount | currency }} </li>
+                <li>Last Payment Date {{ businessSummary.LastPaymentDate | moment }}</li>
             </ul>
         </div>
     </section>
-    <button class="row"><!-- activates above conditional <li>s -->
+    <button class="row" ng-click="toggleDetails()"><!-- activates above conditional <li>s -->
         <i class="icon icon-arrow-down"></i>
         Show Details
     </button>
@@ -50,18 +50,15 @@
             <canvas width="300"
                     height="300"
                     nxg-chart
-                    nxg-chart-type="Bar"
-                    nxg-chart-data="averageTurn"
+                    nxg-chart-type="Line"
+                    nxg-chart-data="analytics.averageTurn"
                     nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
             </canvas>
             <p>The Last 12 Months</p>
           </div>
           <div class="row">
             <h4>NextGear's Best and Worst Movers</h4>
-            <select>
-              <option value="">The best movers.</option>
-              <option value="">The worst movers.</option>
-            </select>
+            <select ng-model="moversSelection" ng-options="v for v in moversOptions" ng-change="toggleMovers()"></select>
             <canvas width="300"
                     height="300"
                     ng-show="true"
@@ -85,10 +82,10 @@
           <div class="row">
             <h4>Stale and Aging Vehicles</h4>
             <ul>
-                <li>[num] 100-125 Days</li>
-                <li>[num] 75-99 Days</li>
-                <li>[num] 50-74 days</li>
-                <li>[num] 1-25 Days</li>
+                <li>{{ analytics.aging[3] }} 100-125 Days</li>
+                <li>{{ analytics.aging[2] }} 75-99 Days</li>
+                <li>{{ analytics.aging[1] }} 50-74 days</li>
+                <li>{{ analytics.aging[0] }} 1-25 Days</li>
             </ul>
             <a href="#/home/payments">View All Payments</a>
           </div>
@@ -98,7 +95,7 @@
                     height="300"
                     nxg-chart
                     nxg-chart-type="Bar"
-                    nxg-chart-data="top10auctions"
+                    nxg-chart-data="analytics.top10Auctions"
                     nxg-chart-options="{scaleOverride:true, scaleSteps:10, scaleStepWidth:10}">
             </canvas>
             <p>Average Number of Cars Purchased in the last 12 months</p>
