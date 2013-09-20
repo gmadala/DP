@@ -11,9 +11,9 @@ angular.module('nextgearWebApp')
             make: r.UnitMake,
             model: r.UnitModel,
             style: r.UnitStyle,
-            color: r.Color,
+            color: r.UnitColor,
             year: r.UnitYear,
-            currentMileage: r.UnitMileageAtApproval,
+            currentMileage: r.UnitCurrentMileage,
             salvage: r.Salvage,
             status: r.FloorplanStatusName,
             stockNumber: r.StockNumber,
@@ -21,26 +21,18 @@ angular.module('nextgearWebApp')
             dateSubmitted: r.FlooringDate,
             financedAmount: r.AmountFinanced,
             purchaseAmount: r.PurchaseAmount,
-            lastPayment: null, // TODO: This has yet to be added to the contract
-            lineOfCredit: null, // TODO: This has yet to be added to the contract
-            termPlanName: null, // TODO: This has yet to be added to the contract
+            lastPayment: r.LastPaymentDate, 
+            lineOfCredit: r.LineOfCredit, 
+            termPlanName: r.TermPlanName, 
             productType: r.ProductType,
             seller: r.SellerName,
             titleLocation: r.TitleLocation,
             titleState: r.TitleState,
-            trackingNumber: null, // TODO: This has yet to be added to the contract
-            disbursementDate: r.DisbursementDate
+            trackingNumber: r.TrackingNumber,
+            disbursementDate: r.DisbursementDate,
+            curtailments: r.Curtailments
           };
         });
-      },
-      getCurtailmentSchedule: function(/*stockNum*/) {
-        // TODO: Yet to be defined in the service
-        /*return api.request('GET', 'someServiceURL/' + stockNum).then(function(r) {
-         return {
-
-         };
-         })*/
-        return $q;
       }
     };
   });

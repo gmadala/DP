@@ -4,35 +4,35 @@
     <table>
       <tr>
         <td class="detail-label">VIN</td>
-        <td class="detail-value">4JGBB8GBXAA580518</td>
+        <td class="detail-value">{{ vehicleDetails.vin }}</td>
       </tr>
       <tr>
         <td class="detail-label">Make</td>
-        <td class="detail-value">Toyota</td>
+        <td class="detail-value">{{ vehicleDetails.make }}</td>
       </tr>
       <tr>
         <td class="detail-label">Model</td>
-        <td class="detail-value">Tacoma</td>
+        <td class="detail-value">{{ vehicleDetails.model }}</td>
       </tr>
       <tr>
         <td class="detail-label">Style</td>
-        <td class="detail-value">LImited TRD Off Road 4X4 V8</td>
+        <td class="detail-value">{{ vehicleDetails.style }}</td>
       </tr>
       <tr>
         <td class="detail-label">Color</td>
-        <td class="detail-value">Fores Green</td>
+        <td class="detail-value">{{ vehicleDetails.color }}</td>
       </tr>
       <tr>
         <td class="detail-label">Year</td>
-        <td class="detail-value">2013</td>
+        <td class="detail-value">{{ vehicleDetails.year }}</td>
       </tr>
       <tr>
         <td class="detail-label">Current Mileage</td>
-        <td class="detail-value">324,352</td>
+        <td class="detail-value">{{ vehicleDetails.currentMileage | number }}</td>
       </tr>
       <tr>
         <td class="detail-label">Salvage</td>
-        <td class="detail-value">No</td>
+        <td class="detail-value">{{ vehicleDetails.salvage | yesno }}</td>
       </tr>
     </table>
   </div>
@@ -42,47 +42,47 @@
     <table>
       <tr>
         <td class="detail-label">Status</td>
-        <td class="detail-value">Approved</td>
+        <td class="detail-value">{{ vehicleDetails.status }}</td>
       </tr>
       <tr>
         <td class="detail-label">Stock Number</td>
-        <td class="detail-value">1064</td>
+        <td class="detail-value">{{ vehicleDetails.stockNumber }}</td>
       </tr>
       <tr>
         <td class="detail-label">Purchase Date</td>
-        <td class="detail-value">05/24/2013</td>
+        <td class="detail-value">{{ vehicleDetails.purchaseDate | moment }}</td>
       </tr>
       <tr>
         <td class="detail-label">Date Submitted</td>
-        <td class="detail-value">05/24/2013</td>
+        <td class="detail-value">{{ vehicleDetails.dateSubmitted | moment }}</td>
       </tr>
       <tr>
         <td class="detail-label">Finance Amount</td>
-        <td class="detail-value">$23,045.34</td>
+        <td class="detail-value">{{ vehicleDetails.financedAmount | currency }}</td>
       </tr>
       <tr>
         <td class="detail-label">Purchase Amount</td>
-        <td class="detail-value">$23,045.34</td>
+        <td class="detail-value">{{ vehicleDetails.purchaseAmount | currency }}</td>
       </tr>
       <tr>
         <td class="detail-label">Last Payment</td>
-        <td class="detail-value">N/A</td>
+        <td class="detail-value">{{ vehicleDetails.lastPayment | moment }}</td>
       </tr>
       <tr>
         <td class="detail-label">Line of Credit</td>
-        <td class="detail-value">Retail (Buyer)</td>
+        <td class="detail-value">{{ vehicleDetails.lineOfCredit }}</td>
       </tr>
       <tr>
         <td class="detail-label">Term Plan Name</td>
-        <td class="detail-value">MAFS Rollover Conversion</td>
+        <td class="detail-value">{{ vehicleDetails.termPlanName }}</td>
       </tr>
       <tr>
         <td class="detail-label">Product Type</td>
-        <td class="detail-value">Auto</td>
+        <td class="detail-value">{{ vehicleDetails.productType }}</td>
       </tr>
       <tr>
         <td class="detail-label">Seller</td>
-        <td class="detail-value">MAFS Pennsylvania</td>
+        <td class="detail-value">{{ vehicleDetails.seller }}</td>
       </tr>
     </table>
   </div>
@@ -92,19 +92,19 @@
     <table>
       <tr>
         <td class="detail-label">Title Location</td>
-        <td class="detail-value">NextGear</td>
+        <td class="detail-value">{{ vehicleDetails.titleLocation }}</td>
       </tr>
       <tr>
         <td class="detail-label">Title State</td>
-        <td class="detail-value">Indiana</td>
+        <td class="detail-value">{{ vehicleDetails.titleState }}</td>
       </tr>
       <tr>
         <td class="detail-label">Tracking Number</td>
-        <td class="detail-value">12345678910</td>
+        <td class="detail-value">{{ vehicleDetails.trackingNumber }}</td>
       </tr>
       <tr>
         <td class="detail-label">Disbursement Date</td>
-        <td class="detail-value">05/24/2013</td>
+        <td class="detail-value">{{ vehicleDetails.disbursementDate | moment }}</td>
       </tr>
     </table>
   </div>
@@ -124,17 +124,17 @@
           <th>Total Payments</th>
           <th>Highline Fee Applied</th>
       </tr>
-      <tr >
-          <td> placeholder {{ cur.startDate }} </td>
-          <td> placeholder {{ cur.dueDate }} </td>
-          <td> placeholder {{ cur.principal | currency }} </td>
-          <td> placeholder {{ cur.principalPay | currency }} </td>
-          <td> placeholder {{ cur.interest | currency }} </td>
-          <td> placolder {{ cur.cpp | currency }} </td>
-          <td> plader {{ cur.fees | currency }} </td>
-          <td> placeholder {{ cur.totalPay | currency }} </td>
-          <td><span ng-hide="cur.highline">N/A</span>
-            <span ng-show="cur.highline"> placeholder {{ cur.highline }} </span>
+      <tr ng-repeat="cur in vehicleDetails.curtailments">
+          <td> {{ cur.StartDate | moment }} </td>
+          <td> {{ cur.DueDate | moment }} </td>
+          <td> {{ cur.Principal | currency }} </td>
+          <td> {{ cur.PrincipalPayment | currency }} </td>
+          <td> {{ cur.Interest | currency }} </td>
+          <td> {{ cur.Cpp | currency }} </td>
+          <td> {{ cur.Fees | currency }} </td>
+          <td> {{ cur.TotalPayment | currency }} </td>
+          <td><span ng-hide="cur.HighlineFeeApplied">N/A</span>
+            <span ng-show="cur.HighlineFeeApplied">Yes</span>
           </td>
       </tr>
   </table>

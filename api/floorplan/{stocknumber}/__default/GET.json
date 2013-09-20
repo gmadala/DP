@@ -41,6 +41,7 @@
             {
                 "StartDate": "2013-08-15",
                 "DueDate": "2013-09-01",
+                "Principal": 390.23,
                 "PrincipalPayment": 409.23,
                 "Interest": 32.45,
                 "Cpp": 21.12,
@@ -51,12 +52,13 @@
             {
                 "StartDate": "2013-09-15",
                 "DueDate": "2013-10-01",
+                "Principal": 390.23,
                 "PrincipalPayment": 409.23,
                 "Interest": 30.22,
                 "Cpp": 21.12,
                 "Fees": 8.95,
                 "TotalPayment": 472.32,
-                "HighlineFeeApplied": true 
+                "HighlineFeeApplied": false 
             }
         ]
     }

@@ -60,7 +60,7 @@
 
               <btn ng-click="isCollapsed = !isCollapsed" class="more btn btn-mini">More Details</btn>
               <div collapse="isCollapsed" class="more-details">
-                <div vehicle-details stock-number="item.StockNumber"></div>
+                <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
               </div><!-- end more-details div -->
             </li>
         </ul>
