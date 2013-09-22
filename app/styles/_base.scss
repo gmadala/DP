@@ -23,7 +23,7 @@ body, html {
 
 h4 {
   font-weight: 300;
-  color: #17659D;
+  color: $brand-light;
 }
 
 .nxg-fade {
@@ -41,91 +41,4 @@ h4 {
 
 ul {
   list-style-type: none;
-}
-
-.well {
-  @include border-radius(0px);
-  padding: 1em;
-  background-color: #eee;
-  @include box-shadow(none);
-  border: 1px solid #eee;
-  h4 {
-    margin-top: 0px;
-    margin-bottom: 28px;
-  }
-  legend {
-    @extend h4;
-    border: none;
-  }
-}
-
-.well-out {
-  display: block;
-  padding: 14px;
-  margin: -15px;
-  background-color: #fff;
-  border-bottom: 1px solid #d5d5d5;
-  border-left: 1px solid #d5d5d5;
-  border-right: 1px solid #d5d5d5;
-}
-
-.well-single {
-  width: 300px;
-  margin: 25px auto;
-}
-
-.well-double {
-  margin: 25px 0;
-}
-
-.well-single, .well-double {
-  @include box-shadow(rgba(0,0,0,0.35) 0 0 6px);
-}
-
-.well.adjacent {
-  border: none;
-  border-left: 1px solid white;
-  &:first-child {
-    border-left: 1px solid #eee;
-  }
-  &:last-child {
-    border-right: 1px solid #eee;
-  }
-}
-
-.two-col {
-  position: relative;
-  border: 1px solid #cccccc;
-  border-top: 0;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: -1px;
-    content: '';
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
-    height: 47px;
-    width: 100%;
-  }
-
-  .well {
-    @extend .span8;
-    padding-bottom: 0;
-    margin-bottom: 0;
-
-    .well-out {
-      border-bottom: none;
-      border-right: none;
-    }
-
-    &:first-child {
-      .well-out {
-        border-left: none;
-        border-right: 1px solid #cccccc;
-      }
-    }
-  }
 }

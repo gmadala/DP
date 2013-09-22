@@ -28,8 +28,8 @@ header > .row-fluid {
   position: relative;
 
   p, h6 {
+    @extend %align-right;
     line-height: 1.35;
-    text-align: right;
     margin: 0;
   }
 }

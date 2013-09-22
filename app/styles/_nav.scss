@@ -7,6 +7,7 @@
 
   & > li > a {
     margin: 0;
+
     &:focus, &:hover {
       border: none;
       background: transparent;
@@ -15,12 +16,12 @@
 }
 
 .nav-bg {
+  @extend %heavy;
   @include gradient-row;
   height: 44px;
   vertical-align: middle;
   border-top: 1px solid #dfdfdf;
   border-bottom: 2px solid white;
-  font-weight: bold;
 
   .container-fluid {
     margin-bottom: 0;
@@ -36,11 +37,13 @@
     font-size: 12px;
     text-transform: uppercase;
     border-bottom: 0;
+
     &.active {
-      color: #1863a1;
+      color: $brand-text;
     }
+
     &:hover, &:focus, &:active {
-      color: #1863a1;
+      color: $brand-text;
       text-decoration: none;
     }
   }
@@ -53,15 +56,18 @@
 
   & > li {
     margin: 0;
+
     & > a {
       padding: 12px 20px 10px;
       border: none;
     }
   }
+
   a {
     color: $white;
     border: none;
   }
+
   & > .active {
     @include box-shadow(
       inset rgba(black, 0.25) 0px 2px 5px,
@@ -89,6 +95,7 @@
   @include box-shadow(inset rgba(black, 0.25) 0px 2px 5px, inset rgba(white, 0.2) 0px -2px 0px);
   border-bottom: 1px solid #1b447d;
   margin-bottom: 1em;
+
   .container-fluid {
     margin-bottom: 0;
   }
@@ -97,6 +104,7 @@
 .container-line {
   padding-top: 1em;
   position: relative;
+
   &:before {
     position: absolute;
     z-index: -1;

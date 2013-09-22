@@ -16,19 +16,21 @@
 }
 
 .item-total {
-  line-height: 16px;
-  font-weight: bold;
+  @extend %heavy;
+  @extend %center;
+  @extend %float-l;
   @include border-radius(6px);
+  line-height: 16px;
   width: 28px;
-  text-align: center;
   margin-right: 7px;
-  float: left;
   border: 1px solid $gray-c;
+
   &.overdue {
     color: #fff;
     background-color: #ce0012;
     border: 1px solid #ce0012;
   }
+
   &.due-today {
     background-color: #fdd33a;
     border: 1px solid #fdd33a;

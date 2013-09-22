@@ -3,11 +3,6 @@
 // ===============
 // TODO: Replace dummy values with actual info from design specs.
 
-// Brand (dummy)
-$brand: #222;
-$brand-second: #222;
-$brand-third: #fff;
-
 // Colors
 $brand: #135889; // blue
 $brand-text: #1864A1;
@@ -45,31 +40,84 @@ $lightest: #EDEDED;
 $white: #FFF;
 $black: #000;
 
+// TYPOGRAPHY
 // Fonts
 $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-size: 12px;
 $base-line-height: 1.2;
 
 // Text
-$p-size: 1em; // 12px
-$h1-size: 3em; // 36px
-$h2-size: 2.5em; // 30px
-$h3-size: 2em; // 24px
-$h4-size: 1.66em; // 20px
-$h5-size: 1.25em; // 14px
-$h6-size: 1em; // 12px
+// $p-size: 1em; // 12px
+// $h1-size: 3em; // 36px
+// $h2-size: 2.5em; // 30px
+// $h3-size: 2em; // 24px
+// $h4-size: 1.66em; // 20px
+// $h5-size: 1.25em; // 14px
+// $h6-size: 1em; // 12px
 
-$p-line-height: 120%;
+// $p-line-height: 120%;
 
-$p-color: #434343;
-$h1-color: #434343;
-$h2-color: $brand;
-$h3-color: #434343;
-$h4-color: #434343;
-$h5-color: #434343;
-$h6-color: #434343;
+// $p-color: #434343;
+// $h1-color: #434343;
+// $h2-color: $brand;
+// $h3-color: #434343;
+// $h4-color: #434343;
+// $h5-color: #434343;
+// $h6-color: #434343;
+
+// BUTTONS
+// Default Buttons
+$btn-disabled-text: #333;
+$btn-disabled-bkgd: #DADADA;
+
+$btn-active-text: #17659D;
+$btn-active-bkgd: #DADADA;
+$btn-active-grad-1: #F0F0F0;
+$btn-active-grad-2: #DADADA;
+$btn-active-stroke: #9C9C9C;
+
+$btn-hover-text: #005B88;
+$btn-hover-bkgd: #D5D5D5;
+$btn-hover-grad-1: #EAEAEA;
+$btn-hover-grad-2: #C4C4C4;
+
+// Primary Buttons
+$btn1-disabled-text: $white;
+$btn1-disabled-bkgd: #4078A0;
+$btn1-disabled-grad-1: #76A0BB;
+$btn1-disabled-grad-2: #155287;
+
+$btn1-active-text: $white;
+$btn1-active-bkgd: #4078A0;
+$btn1-active-grad-1: #76A0BB;
+$btn1-active-grad-2: #155287;
+$btn1-active-stroke: #9C9C9C;
+
+$btn1-hover-text: #E5E5E5;
+$btn1-hover-bkgd: #295F8A;
+$btn1-hover-grad-1: #39739B;
+$btn1-hover-grad-2: #1B4B7A;
+
+// Secondary Buttons
+$btn2-active-text: #666;
+$btn2-active-bkgd: #DADADA;
+$btn2-active-grad-1: #F0F0F0;
+$btn2-active-grad-2: #DADADA;
+
+$btn2-hover-text: #4C4C4C;
+$btn2-hover-bkgd: #D5D5D5;
+$btn2-hover-grad-1: #EAEAEA;
+$btn2-hover-grad-2: #C4C4C4;
 
 // Tooltip
 $tooltipArrowWidth: 10px;
 $tooltipArrowColor: #FFF;
 $tooltipBackground: #FFF;
+
+// Wells
+$well-bkgd: #EEE;
+$well-border: #EEE;
+$well-out-bkgd: $white;
+$well-out-border: #D5D5D5;
+$well-twocol-border: #CCC;
+$well-adj-border: #EEE;

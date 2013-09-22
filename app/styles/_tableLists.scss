@@ -47,8 +47,8 @@
 }
 
 .cell {
+  @extend %float-l;
   @include box-sizing(border-box);
-  float: left;
   min-height: 100%;
   height: 100%;
 }

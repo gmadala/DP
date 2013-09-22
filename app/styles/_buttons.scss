@@ -1,75 +1,80 @@
 .btn {
   @include box-sizing(border-box);
   @include border-radius(3px);
-  padding: 2px 10px 1px 10px;
-  color: #17659D;
-  font-weight: bold;
-  border: none;
-  border-bottom: 1px solid #9c9c9c;
+  background-color: $btn-active-bkgd;
+  @include background(linear-gradient($btn-active-grad-1, $btn-active-grad-2));
+  color: $btn-active-text;
   text-shadow: none;
-  background-color: #dadada;
-  @include background(linear-gradient(#f0f0f0, #dadada));
+  font-weight: bold;
+  padding: 2px 10px 1px 10px;
+  border: none;
+  border-bottom: 1px solid $btn-active-stroke;
 
   &:hover, &:focus {
-    color: #005b88;
-    background-color: #d5d5d5;
-    @include background(linear-gradient(#eaeaea, #c4c4c4));
+    color: $btn-hover-text;
+    background-color: $btn-hover-bkgd;
+    @include background(linear-gradient($btn-hover-grad-1, $btn-hover-grad-2));
     background-position: 0;
     outline: 0;
   }
   &:active, &.active {
-    color: #005b88;
-    border: none;
+    color: $btn-hover-text;
+    border: 0;
     margin-top: 1px;
   }
   &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {
     @include opacity(65);
-    color: #333;
-    background: #dadada;
+    color: $btn-disabled-text;
+    background: $btn-disabled-bkgd;
 
     &:active {
-      border-bottom: 1px solid #9c9c9c;
+      border-bottom: 1px solid $btn-active-stroke;
       margin-top: 0px;
     }
   }
 }
 
 .btn-secondary {
-  color: #666666;
-  background-color: #dadada;
-  @include background(linear-gradient(#f0f0f0, #dadada));
+  color: $btn2-active-text;
+  background-color: $btn2-active-bkgd;
+  @include background(linear-gradient($btn2-active-grad-1, $btn2-active-grad-2));
+
   &:hover, &:focus {
-    color: #4c4c4c;
-    background-color: #d5d5d5;
-    @include background(linear-gradient(#eaeaea, #c4c4c4));
+    color: $btn2-hover-text;
+    background-color: $btn2-hover-bkgd;
+    @include background(linear-gradient($btn2-hover-grad-1, $btn2-hover-grad-2));
   }
+
   &:active, &.active {
-    color: #4c4c4c;
+    color: $btn2-hover-text;
   }
 }
 
 .btn-primary {
   -webkit-font-smoothing: antialiased;
-  color: $white;
-  border-bottom: 1px solid #9c9c9c;
-  background-color: #4078a0;
-  @include background-image(linear-gradient(#76a0bb, #155287));
+  color: $btn1-active-text;
+  border-bottom: 1px solid $btn1-active-stroke;
+  background-color: $btn1-active-bkgd;
+  @include background-image(linear-gradient($btn1-active-grad-1, $btn1-active-grad-2));
+
   &:hover, &:focus {
-    color: #e5e5e5;
-    background-color: #295f8a;
-    @include background-image(linear-gradient(#39739b, #1b4b7a));
+    color: $btn1-hover-text;
+    background-color: $btn1-hover-bkgd;
+    @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
   }
+
   &:active, &.active {
-    color: #e5e5e5;
-    @include background-image(linear-gradient(#39739b, #1b4b7a));
+    color: $btn1-hover-text;
+    @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
   }
+
   &:disabled, &.disabled,
   &:disabled:hover, &.disabled:hover,
   &:disabled:focus, &.disabled:focus,
   &:disabled:active, &.disabled:active {
-    color: $white;
-    background-color: #4078a0;
-    @include background-image(linear-gradient(#76a0bb, #155287));
+    color: $btn1-disabled-text;
+    background-color: $btn1-disabled-bkgd;
+    @include background-image(linear-gradient($btn1-disabled-grad-1, $btn1-disabled-grad-2));
   }
 }
 
@@ -78,22 +83,24 @@
   &:disabled:hover, &.disabled:hover,
   &:disabled:focus, &.disabled:focus,
   &:disabled:active, &.disabled:active {
-    background-color: #dadada;
+    background-color: $btn-disabled-bkgd;
   }
 }
 
 .nxg-search-btn {
+  @extend %align-left;
   position: relative;
   display: inline-block;
   font-size: 17px;
   height: 28px;
   width: 90px;
-  text-align: left;
   padding-top: 3px;
   margin-left: 0.3em;
+
   &:active {
     margin-top: -1px;
   }
+
   &:after {
     position: absolute;
     top: 4px;
