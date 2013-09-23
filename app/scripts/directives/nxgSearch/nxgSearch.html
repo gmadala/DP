@@ -24,8 +24,9 @@
             <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
 
             <div class="controls">
-              <select id="filterSelect" name="filterSelect" ng-model="activeCriteria.filter"
-                            ng-options="o.value as o.label for o in filterOptions"></select>
+              <select id="filterSelect" name="filterSelect"
+                      ng-model="activeCriteria.filter"
+                      ng-options="o.value as o.label for o in filterOptions"></select>
             </div>
           </div><!-- end .control-group -->
 
@@ -33,8 +34,9 @@
             <label class="control-label" for="startDate">Date Range</label>
 
             <div class="controls">
-              <input type="text" id="startDate" name="startDate" ng-model="activeCriteria.startDate"
-                       nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
+              <input type="text" id="startDate" name="startDate"
+                    ng-model="activeCriteria.startDate"
+                    nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
             </div>
           </div><!-- end .control-group -->
 
@@ -42,12 +44,13 @@
 
             <label class="control-label" for="endDate">To</label>
             <div class="controls">
-              <input type="text" id="endDate" name="endDate" ng-model="activeCriteria.endDate"
-                       nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-              <label for="endDate" class="text-error"
-                       ng-show="validity.endDate.$error.nxgRequires">Invalid date range</label>
+              <input type="text" id="endDate" name="endDate"
+                    ng-model="activeCriteria.endDate"
+                    nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
             </div><!-- end .controls -->
           </div><!-- end .control-group -->
+                        <label for="endDate" class="text-error"
+                    ng-show="validity.endDate.$error.nxgRequires">Invalid date range</label>
         </div><!-- end .span7 -->
       </div><!-- end .row-fluid -->
     </form>

@@ -98,6 +98,7 @@ select, .nxg-date-field {
   input {
     background-color: transparent;
   }
+
   .btn {
     color: #9a9a9a;
     @include opacity(50);
@@ -119,7 +120,7 @@ select, .nxg-date-field {
 
 .text-error {
   display: block;
-  padding-left: 0.5em;
+  padding-left: 6px;
   margin: 0;
 }
 
