@@ -31,7 +31,7 @@ angular.module('nextgearWebApp')
               var result = {};
 
               // Parse average turn time into a model suitable for charting
-              result.averageTurn = { labels: [], datasets: [ { data: [] } ] };
+              result.averageTurn = { labels: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
               _.each(
                 responses[0],
                 function ( item ) {
@@ -55,9 +55,9 @@ angular.module('nextgearWebApp')
                 }
               );
 
-              result.top10Auctions = { labels: [], datasets: [ { data: [] } ] };
+              result.top10Auctions = { labels: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
 
-              // Sort by NumVehiclesAnalyzed and trim down to the top ten auctions 
+              // Sort by NumVehiclesAnalyzed and trim down to the top ten auctions
               var top10 = _.sortBy(
                 responses[2],
                 'NumVehiclesAnalyzed'
@@ -73,6 +73,7 @@ angular.module('nextgearWebApp')
               );
 
               return result;
+
             }
         );
       },
@@ -81,7 +82,7 @@ angular.module('nextgearWebApp')
         return api.request('GET', 'analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
-            var result = { labels: [], makes: [], models: [], datasets: [ { data: [] } ] };
+            var result = { labels: [], makes: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
 
             _.each(
               response.reverse(),
@@ -102,6 +103,7 @@ angular.module('nextgearWebApp')
         return api.request('GET', 'analytics/bookvaluemargins/12').then(
           function (response) {
             return response;
+
           }
         );
       },
