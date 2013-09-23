@@ -42,23 +42,23 @@ describe('Directive: nxgPaymentSummary', function () {
     });
 
     it('should attach a removePayment function to the scope that calls the corresponding model method', function () {
-      var item = {
-        id: 'someid'
+      var pmt = {
+        floorplanId: 'someid'
       };
       spyOn(payments, 'removePaymentFromQueue');
       expect(typeof scope.removePayment).toBe('function');
-      scope.removePayment(item.id);
-      expect(payments.removePaymentFromQueue).toHaveBeenCalledWith(item.id);
+      scope.removePayment(pmt);
+      expect(payments.removePaymentFromQueue).toHaveBeenCalledWith(pmt.floorplanId);
     });
 
     it('should attach a removeFee function to the scope that calls the corresponding model method', function () {
-      var item = {
-        id: 'someid'
+      var fee = {
+        financialRecordId: 'someid'
       };
       spyOn(payments, 'removeFeeFromQueue');
       expect(typeof scope.removeFee).toBe('function');
-      scope.removeFee(item.id);
-      expect(payments.removeFeeFromQueue).toHaveBeenCalledWith(item.id);
+      scope.removeFee(fee);
+      expect(payments.removeFeeFromQueue).toHaveBeenCalledWith(fee.financialRecordId);
     });
 
     it('should attach a getSubtotal function to the scope that sums items in the queue', function () {

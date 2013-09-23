@@ -21,8 +21,10 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.myFee = {
         FinancialRecordId: 'financialRecordId',
         Vin: 'FeeVin',
+        FeeType: 'FeeType',
         Description: 'FeeDescription',
-        Balance: 1500
+        Balance: 1500,
+        EffectiveDate: '2013-01-01'
       };
       scope.inQueue = false;
       scope.isOpen = true;
@@ -42,7 +44,13 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#toggleFee').click();
 
-      expect(Payments.addFeeToQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId, scope.myFee.Vin, scope.myFee.Description, scope.myFee.Balance);
+      expect(Payments.addFeeToQueue).toHaveBeenCalledWith(
+        scope.myFee.FinancialRecordId,
+        scope.myFee.Vin,
+        scope.myFee.FeeType,
+        scope.myFee.Description,
+        scope.myFee.Balance,
+        scope.myFee.EffectiveDate);
       expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
@@ -65,10 +73,12 @@ describe('Directive: nxgPaymentButtons', function () {
         FloorplanId: 'floorplanId',
         Vin: 'vin',
         UnitDescription: 'some description',
+        StockNumber: 'stockNum',
         CurrentPayoff: 20000,
         AmountDue: 1000,
         Scheduled: false,
-        PayPayoffAmount: false
+        PayPayoffAmount: false,
+        DueDate: '2013-01-01'
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -76,7 +86,7 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a button that toggles payment presence in the payment queue', function() {
-      spyOn(Payments, 'addToPaymentQueue');
+      spyOn(Payments, 'addPaymentToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayment').click();
@@ -87,7 +97,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayment').click();
 
-      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId, scope.myPayment.Vin, scope.myPayment.UnitDescription, scope.myPayment.AmountDue, false);
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
+        scope.myPayment.FloorplanId,
+        scope.myPayment.Vin,
+        scope.myPayment.StockNumber,
+        scope.myPayment.UnitDescription,
+        scope.myPayment.AmountDue,
+        scope.myPayment.DueDate,
+        false);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -171,7 +188,9 @@ describe('Directive: nxgPaymentButtons', function () {
         CurrentPayoff: 20000,
         AmountDue: 1000,
         Scheduled: false,
-        PayPayoffAmount: false
+        PayPayoffAmount: false,
+        DueDate: '2013-02-03',
+        StockNumber: '1234'
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -179,7 +198,7 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a button that toggles payoff presence in the payment queue', function() {
-      spyOn(Payments, 'addToPaymentQueue');
+      spyOn(Payments, 'addPaymentToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayoff').click();
@@ -190,7 +209,14 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayoff').click();
 
-      expect(Payments.addToPaymentQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId, scope.myPayment.Vin, scope.myPayment.UnitDescription, scope.myPayment.CurrentPayoff, true);
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
+        scope.myPayment.FloorplanId,
+        scope.myPayment.Vin,
+        scope.myPayment.StockNumber,
+        scope.myPayment.UnitDescription,
+        scope.myPayment.CurrentPayoff,
+        scope.myPayment.DueDate,
+        true);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 

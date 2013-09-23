@@ -30,26 +30,6 @@ angular.module('nextgearWebApp')
       fees: {},
       payments: {},
       unappliedFundsAvailable: 0,
-      getKey: function (item) {
-        if (angular.isDefined(item.FeeType)) {
-          // fee
-          return item.FinancialRecordId + '_' + item.Posted;
-        } else if (angular.isDefined(item.FloorplanId)) {
-          // payment
-          return item.FloorplanId;
-        }
-        return null;
-      },
-      getStorage: function (item) {
-        if (angular.isDefined(item.FeeType)) {
-          // fee
-          return paymentQueue.fees;
-        } else if (angular.isDefined(item.FloorplanId)) {
-          // payment
-          return paymentQueue.payments;
-        }
-        return null;
-      },
       isEmpty: function () {
         return !(_.find(paymentQueue.fees) || _.find(paymentQueue.payments));
       }
@@ -126,28 +106,28 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addToPaymentQueue: function (floorplanId, vin, description, amount, asPayoff) {
-        var key = floorplanId,
-          storage = paymentQueue.payments,
-          payment = {
-            id: floorplanId,
-            vin: vin,
-            description: description,
-            amount: amount,
-            isPayOff: asPayoff
-          };
-        storage[key] = payment;
+      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff) {
+        var payment = {
+          floorplanId: floorplanId,
+          vin: vin,
+          stockNum: stockNum,
+          description: description,
+          amount: amount,
+          dueDate: dueDate,
+          isPayoff: asPayoff
+        };
+        paymentQueue.payments[floorplanId] = payment;
       },
-      addFeeToQueue: function(financialRecordId, vin, description, amount) {
-        var key = financialRecordId,
-          storage = paymentQueue.fees,
-          fee = {
-            id: financialRecordId,
-            vin: vin,
-            description: description,
-            amount: amount
-          };
-        storage[key] = fee;
+      addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
+        var fee = {
+          financialRecordId: financialRecordId,
+          type: type,
+          vin: vin,
+          description: description,
+          amount: amount,
+          dueDate: dueDate
+        };
+        paymentQueue.fees[financialRecordId] = fee;
       },
       removePaymentFromQueue: function (id) {
         delete paymentQueue.payments[id];
@@ -163,7 +143,7 @@ angular.module('nextgearWebApp')
         }
         else {
           // payment is on queue, return whether it is a payoff or payment
-          return (queueItem.isPayOff ? 'payoff' : 'payment');
+          return (queueItem.isPayoff ? 'payoff' : 'payment');
         }
       },
       isFeeOnQueue: function (id) {
@@ -217,14 +197,14 @@ angular.module('nextgearWebApp')
           shortPayments = [];
         angular.forEach(payments, function (payment) {
           shortPayments.push({
-            FloorplanId: payment.FloorplanId,
-            ScheduledSetupDate: api.toShortISODate(payment.$scheduleDate) || null,
-            IsPayoff: payment.$queuedAsPayoff
+            FloorplanId: payment.floorplanId,
+            ScheduledSetupDate: api.toShortISODate(payment.scheduleDate) || null,
+            IsPayoff: payment.isPayoff
           });
         });
         angular.forEach(fees, function (fee) {
           shortFees.push({
-            FinancialRecordId: fee.FinancialRecordId
+            FinancialRecordId: fee.financialRecordId
           });
         });
 

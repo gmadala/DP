@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
           var content = $scope.paymentQueue.contents,
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
-            if (!value.$scheduleDate) {
+            if (!value.scheduleDate) {
               accumulator += 1;
             }
             return accumulator;
@@ -19,7 +19,7 @@ angular.module('nextgearWebApp')
         scheduledCount: function () {
           var payments = $scope.paymentQueue.contents.payments; // fees are never scheduled
           return _.reduce(payments, function (accumulator, value) {
-            if (value.$scheduleDate) {
+            if (value.scheduleDate) {
               accumulator += 1;
             }
             return accumulator;
@@ -29,8 +29,8 @@ angular.module('nextgearWebApp')
           var content = $scope.paymentQueue.contents,
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
-            if (!value.$scheduleDate) {
-              accumulator += value.$queuedAmount || value.Balance;
+            if (!value.scheduleDate) {
+              accumulator += value.amount;
             }
             return accumulator;
           }, 0);
@@ -38,17 +38,18 @@ angular.module('nextgearWebApp')
         scheduledTotal: function () {
           var payments = $scope.paymentQueue.contents.payments; // fees are never scheduled
           return _.reduce(payments, function (accumulator, value) {
-            if (value.$scheduleDate) {
-              accumulator += value.$queuedAmount || value.Balance;
+            if (value.scheduleDate) {
+              accumulator += value.amount;
             }
             return accumulator;
           }, 0);
         }
       },
-      removeItem: Payments.removeFromPaymentQueue,
+      removePayment: Payments.removePaymentFromQueue,
+      removeFee: Payments.removeFeeFromQueue,
       canSchedule: function (payment) {
         // overdue payments cannot be scheduled
-        return !moment(payment.DueDate).isBefore(moment(), 'day');
+        return !moment(payment.dueDate).isBefore(moment(), 'day');
       },
       schedule: function (payment) {
         var dialogOptions = {
@@ -189,16 +190,16 @@ angular.module('nextgearWebApp')
             ejectedPayments = [];
           // eject all fees since they cannot be scheduled
           angular.forEach($scope.paymentQueue.contents.fees, function (fee) {
-            Payments.removeFromPaymentQueue(fee);
+            Payments.removeFeeFromQueue(fee.financialRecordId);
             ejectedFees.push(fee);
           });
           // eject payments that can't be scheduled; auto-schedule any others not already scheduled
           angular.forEach($scope.paymentQueue.contents.payments, function (payment) {
             if (!$scope.paymentQueue.canSchedule(payment)) {
-              Payments.removeFromPaymentQueue(payment);
+              Payments.removePaymentFromQueue(payment.floorplanId);
               ejectedPayments.push(payment);
-            } else if (!payment.$scheduleDate) {
-              payment.$scheduleDate = nextAvail;
+            } else if (!payment.scheduleDate) {
+              payment.scheduleDate = nextAvail;
             }
           });
           // tell the user what we did

@@ -54,18 +54,18 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total fees plus unscheduled payments for today', function () {
       fees.feeId1 = {
-        Balance: 100
+        amount: 100
       };
       payments.pmtId1 = {
-        $scheduleDate: new Date(),
-        $queuedAmount: 210.1
+        scheduleDate: new Date(),
+        amount: 210.1
       };
       payments.pmtId2 = {
-        $queuedAmount: 367.4
+        amount: 367.4
       };
       payments.pmtId3 = {
-        $scheduleDate: null,
-        $queuedAmount: 85.22
+        scheduleDate: null,
+        amount: 85.22
       };
       run();
       expect(scope.paymentQueue.sum.todayCount()).toBe(3);
@@ -74,19 +74,19 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total scheduled payments', function () {
       fees.feeId1 = {
-        Balance: 100
+        amount: 100
       };
       payments.pmtId1 = {
-        $scheduleDate: new Date(),
-        $queuedAmount: 210.1
+        scheduleDate: new Date(),
+        amount: 210.1
       };
       payments.pmtId2 = {
-        $scheduleDate: new Date(),
-        $queuedAmount: 367.4
+        scheduleDate: new Date(),
+        amount: 367.4
       };
       payments.pmtId3 = {
-        $scheduleDate: null,
-        $queuedAmount: 85.22
+        scheduleDate: null,
+        amount: 85.22
       };
       run();
       expect(scope.paymentQueue.sum.scheduledCount()).toBe(2);
@@ -95,9 +95,10 @@ describe('Controller: CheckoutCtrl', function () {
 
   });
 
-  it('should attach the removeItem function to the scope', function () {
+  it('should attach the remove functions to the scope', function () {
     run();
-    expect(scope.paymentQueue.removeItem).toBe(Payments.removeFromPaymentQueue);
+    expect(scope.paymentQueue.removeFee).toBe(Payments.removeFeeFromQueue);
+    expect(scope.paymentQueue.removePayment).toBe(Payments.removePaymentFromQueue);
   });
 
   describe('canSchedule function', function () {
@@ -115,21 +116,21 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should return false if the payment due date is in the past (overdue)', function () {
       var result = scope.paymentQueue.canSchedule({
-        DueDate: '2013-01-01'
+        dueDate: '2013-01-01'
       });
       expect(result).toBe(false);
     });
 
     it('should return true if the payment due date is today', function () {
       var result = scope.paymentQueue.canSchedule({
-        DueDate: '2013-01-02'
+        dueDate: '2013-01-02'
       });
       expect(result).toBe(true);
     });
 
     it('should return true if the payment due date is in the future', function () {
       var result = scope.paymentQueue.canSchedule({
-        DueDate: '2013-01-03'
+        dueDate: '2013-01-03'
       });
       expect(result).toBe(true);
     });
@@ -473,16 +474,8 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should remove all fees from the queue', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      Payments.addToPaymentQueue({
-        FeeType: 'one',
-        FinancialRecordId: 'fee1',
-        Posted: 'blah'
-      });
-      Payments.addToPaymentQueue({
-        FeeType: 'two',
-        FinancialRecordId: 'fee2',
-        Posted: 'blah'
-      });
+      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'fee desc', 120, '2013-01-01');
+      Payments.addFeeToQueue('fee2', 'ch124', 'type', 'fee desc 2', 130, '2013-01-02');
       expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
@@ -491,74 +484,81 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should remove overdue payments from the queue', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      Payments.addToPaymentQueue({
-        FloorplanId: 'one',
-        DueDate: '2013-01-01'
-      });
-      Payments.addToPaymentQueue({
-        FloorplanId: 'two',
-        DueDate: '2013-01-03'
-      });
+      Payments.addPaymentToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-01',
+        false
+      );
+      Payments.addPaymentToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-03',
+        false
+      );
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.payments)[0].FloorplanId).toBe('two');
+      expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('two');
     });
 
     it('should schedule payments that have not been scheduled already for the next avail date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
       var priorSchedule = new Date();
-      Payments.addToPaymentQueue({
-        FloorplanId: 'one',
-        DueDate: '2013-01-10',
-        $scheduleDate: priorSchedule
-      });
-      Payments.addToPaymentQueue({
-        FloorplanId: 'two',
-        DueDate: '2013-01-10'
-      });
+      Payments.addPaymentToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-10',
+        false
+      );
+      Payments.addPaymentToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-10',
+        false
+      );
+      Payments.getPaymentQueue().payments['one'].scheduleDate = priorSchedule;
       scope.handleAfterHoursViolation();
       scope.$apply();
       var newQueue = _.map(scope.paymentQueue.contents.payments);
-      newQueue = _.sortBy(newQueue, 'FloorplanId');
+      newQueue = _.sortBy(newQueue, 'floorplanId');
       var expectedScheduleDate = moment([2013, 0, 4]);
       expect(newQueue.length).toBe(2);
-      expect(newQueue[0].$scheduleDate).toBe(priorSchedule);
-      expect(expectedScheduleDate.isSame(newQueue[1].$scheduleDate, 'day')).toBe(true);
+      expect(newQueue[0].scheduleDate).toBe(priorSchedule);
+      expect(expectedScheduleDate.isSame(newQueue[1].scheduleDate, 'day')).toBe(true);
     });
 
     it('should invoke the after hours notice modal with ejected items and the auto schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
-      var fee1 = {
-        FeeType: 'some type',
-        FinancialRecordId: 'fee1',
-        Posted: 'blah'
-      };
-      Payments.addToPaymentQueue(fee1);
-      var overdue1 = {
-        FloorplanId: 'overdue',
-        DueDate: '2013-01-01'
-      };
-      Payments.addToPaymentQueue(overdue1);
-      Payments.addToPaymentQueue({
-        FloorplanId: 'scheduled',
-        DueDate: '2013-01-10',
-        $scheduleDate: new Date()
-      });
-      Payments.addToPaymentQueue({
-        FloorplanId: 'regular',
-        DueDate: '2013-01-10'
-      });
+
+      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-04');
+      Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
+      Payments.addPaymentToQueue('scheduled', 'v2', 's2', 'd2', 2, '2013-01-10', false);
+      Payments.getPaymentQueue().payments['scheduled'].scheduleDate = new Date();
+      Payments.addPaymentToQueue('regular', 'v3', 's3', 'd3', 3, '2013-01-10', false);
+
       scope.handleAfterHoursViolation();
       scope.$apply();
       expect(dialog.dialog).toHaveBeenCalled();
       expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/afterHoursCheckout.html');
       expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('AfterHoursCheckoutCtrl');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees().length).toBe(1);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees()[0]).toBe(fee1);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees()[0].financialRecordId).toBe('fee1');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments().length).toBe(1);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0]).toBe(overdue1);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0].floorplanId).toBe('overdue');
       var date = dialog.dialog.mostRecentCall.args[0].resolve.autoScheduleDate();
       expect(moment([2013, 0, 4]).isSame(date, 'day')).toBe(true);
     });

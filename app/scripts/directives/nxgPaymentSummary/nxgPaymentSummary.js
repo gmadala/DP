@@ -15,12 +15,12 @@ angular.module('nextgearWebApp')
 
     $scope.paymentQueue = Payments.getPaymentQueue();
 
-    $scope.removeFee = function (id) {
-      Payments.removeFeeFromQueue(id);
+    $scope.removeFee = function (fee) {
+      Payments.removeFeeFromQueue(fee.financialRecordId);
     };
 
-    $scope.removePayment = function (id) {
-      Payments.removePaymentFromQueue(id);
+    $scope.removePayment = function (payment) {
+      Payments.removePaymentFromQueue(payment.floorplanId);
     };
 
     $scope.getSubtotal = function () {

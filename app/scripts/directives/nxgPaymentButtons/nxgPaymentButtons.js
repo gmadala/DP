@@ -6,7 +6,7 @@ angular.module('nextgearWebApp')
       scope: {
         type:       '@nxgPaymentButtons', // fee | payment | payoff
         item:       '=',
-        onQueue:  '=',
+        onQueue:    '=',
         canPayNow:  '='
       },
       controller: function($scope, $dialog, Payments) {
@@ -29,7 +29,13 @@ angular.module('nextgearWebApp')
         $scope.toggleFeeInQueue = function () {
           var f = $scope.item;
           if (!$scope.onQueue) {
-            Payments.addFeeToQueue(f.FinancialRecordId, f.Vin, f.Description, f.Balance);
+            Payments.addFeeToQueue(
+              f.FinancialRecordId,
+              f.Vin,
+              f.FeeType,
+              f.Description,
+              f.Balance,
+              f.EffectiveDate);
           } else {
             Payments.removeFeeFromQueue(f.FinancialRecordId);
           }
@@ -38,7 +44,14 @@ angular.module('nextgearWebApp')
         $scope.togglePaymentInQueue = function (asPayoff) {
           var p = $scope.item;
           if (!$scope.onQueue) {
-            Payments.addToPaymentQueue(p.FloorplanId, p.Vin, p.UnitDescription, asPayoff ? p.CurrentPayoff : p.AmountDue, asPayoff);
+            Payments.addPaymentToQueue(
+              p.FloorplanId,
+              p.Vin,
+              p.StockNumber,
+              p.UnitDescription,
+              asPayoff ? p.CurrentPayoff : p.AmountDue,
+              p.DueDate,
+              asPayoff);
           } else {
             Payments.removePaymentFromQueue(p.FloorplanId);
           }
