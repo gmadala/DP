@@ -1,0 +1,154 @@
+// SETTINGS
+
+.settings {
+  margin-top: 20px;
+
+  .well {
+    position: relative;
+  }
+}
+
+.settings-opts {
+  @extend %full-width;
+  font-size: 12px;
+
+  label {
+    @extend %thin;
+    @extend %float-l;
+    width: 35%;
+    color: #666;
+  }
+
+  .static {
+    font-weight: normal;
+    color: #434343;
+  }
+
+  .head-labels {
+    overflow: hidden;
+
+    label {
+      @extend %heavy;
+      @extend %float-l;
+      margin: 0 0 10px;
+
+      &:first-child {
+        width: 35%;
+      }
+    }
+  }
+
+  .notifications {
+    .n-title {
+      @extend %float-l;
+      width: 35%;
+    }
+
+    .inner {
+      @extend %float-l;
+      margin: 0;
+    }
+
+    .read-only {
+      line-height: 1.2;
+      display: inline-block;
+
+      & + .read-only {
+        margin-left: 10px;
+      }
+    }
+
+    .notification {
+      line-height: 1.2;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+  }
+
+  // When in edit mode:
+  &.editable {
+    .control-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      width: auto;
+      float: none;
+      padding: 0;
+    }
+
+    .nxg-radios label + p {
+      margin-top: 10px;
+    }
+
+    .notifications {
+      .n-title {
+        width: auto;
+      }
+
+      .n-title, .inner {
+        float: none;
+      }
+
+      .inner {
+        padding: 5px 0;
+        margin-left: 20px;
+
+        label {
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+// Settings Form Buttons
+.edit-btn, .save-btn, .cancel-btn {
+  @extend .btn-small;
+  position: absolute;
+  top: 10px;
+}
+
+.edit-btn, .cancel-btn {
+  @include background-image(linear-gradient($white, #F0F0F0));
+
+  &:hover, &:active {
+    @include background-image(linear-gradient(#EEEEEE, #CFCFCF));
+  }
+}
+
+.edit-btn, .save-btn {
+  right: 10px;
+}
+
+.edit-btn {
+  padding-left: 24px;
+
+  i {
+   position: absolute;
+   top: 5px;
+   left: 8px;
+  }
+}
+
+.save-btn {
+  @extend .btn-primary;
+}
+
+.cancel-btn {
+  right: 70px;
+}
+
+.btn-help {
+  @extend .btn-unstyle;
+  @extend %heavy;
+  @include border-radius(50%);
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: $brand-text;
+  color: $white;
+  font-size: 12px;
+  line-height: 1;
+  margin-left: 10px;
+}

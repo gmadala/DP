@@ -243,28 +243,27 @@
 }
 
 #foo:checked,
-.nxg-dash-calendar-container input[type="radio"]#week + label::before {
-  @extend .btn;
-  @include background(linear-gradient(#ffffff, #ddd));
-  content: 'Week';
-  font-size: 12px;
-  text-transform: uppercase;
-  @include border-radius(3px 0 0 3px);
-  padding-right: 14px;
-  padding-left: 14px;
-  margin-right: -2px;
-}
-
-#foo:checked,
+.nxg-dash-calendar-container input[type="radio"]#week + label::before,
 .nxg-dash-calendar-container input[type="radio"]#month + label::before {
   @extend .btn;
   @include background(linear-gradient(#ffffff, #ddd));
-  content: 'Month';
   font-size: 12px;
   text-transform: uppercase;
-  @include border-radius(0 3px 3px 0);
+  top: 0;
+  left: 0;
   padding-right: 14px;
   padding-left: 14px;
+}
+
+.nxg-dash-calendar-container input[type="radio"]#week + label::before {
+  content: 'Week';
+  @include border-radius(3px 0 0 3px);
+  margin-right: -2px;
+}
+
+.nxg-dash-calendar-container input[type="radio"]#month + label::before {
+  content: 'Month';
+  @include border-radius(0 3px 3px 0);
   margin-left: -2px;
 }
 
@@ -283,7 +282,7 @@
 .lt-ie9 {
   .fc-button-today {
     &:hover {
-      color: #17659D;
+      color: $brand-light;
     }
   }
   input[type="radio"] {
@@ -294,7 +293,7 @@
     display: inline-block;
     margin-top: 3px;
     text-transform: uppercase;
-    color: #17659D;
+    color: $brand-light;
     font-size: 12px;
     &:after {
       content: 'Week';

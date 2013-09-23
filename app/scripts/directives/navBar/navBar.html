@@ -14,8 +14,8 @@
           <div class="span12 nxg-settings-drop">
 
             <div>
-              <a class="account-btn" ng-click="showSettings=!showSettings">
-                <i class="icon icon-cog icon-2x"></i>
+              <a class="account-btn" ng-class="{ 'settings-open': showSettings }" ng-click="showSettings=!showSettings">
+                <i class="glyphicon glyphicon-cog"></i>
               </a>
               <h6>
                 {{ user.info().BusinessName }}
@@ -29,10 +29,7 @@
                   <a href="#/settings">Settings</a>
                 </li>
                 <li>
-                  <a href="#">Feedback</a>
-                </li>
-                <li>
-                  <button class="btn btn-small" ng-click="">Sign Out</button>
+                  <button class="btn btn-mini" ng-click="">Sign Out</button>
                 </li>
               </ul>
             </div>

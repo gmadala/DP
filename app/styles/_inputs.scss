@@ -171,6 +171,13 @@ input[type="radio"] {
   clip: rect(0 0 0 0);
 }
 
+input[type="radio"] + label::before,
+input[type="radio"]:checked + label::before {
+  position: relative;
+  top: 6px;
+  left: -6px;
+}
+
 input[type="radio"] + label::before {
   content: url('../img/radio.gif');
 }

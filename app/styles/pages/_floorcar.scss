@@ -33,13 +33,6 @@ label {
   .modal-footer {
     margin: 1em 0 0 0;
   }
-
-  input[type="radio"] + label::before,
-  input[type="radio"]:checked + label::before {
-    position: relative;
-    top: 6px;
-    left: -6px;
-  }
 }
 
 #inputSeller, #inputVin {

@@ -1,152 +1,200 @@
 <div class="container-line">
   <!-- TODO: Replace placeholders with actual angular variables/real data -->
-  <!-- TODO: Add edit buttons -->
   <!-- TODO: Create means of switching to form view for editing purposes -->
-  <!-- TODO: Pull out inputs and make reusable directive? -->
-  <section ng-controller="ProfileCtrl">
-    <header>
-      <h3>User Profile
-        <button ng-hide="editable" class="btn pull-right" ng-click="editable=!editable">Edit</button>
-        <button ng-show="editable" class="btn pull-right" ng-click="save()">Save</button>
-      </h3>
-    </header>
 
-    <form name="userSettings" novalidate>
-        <table>
-          <tr>
-            <td>Username:</td>
-            <!-- TODO: Add error to show if username is taken (server side validation) -->
-            <td nxg-input model="profile.username" editable="editable">
-                <input type="text" ng-model="profile.username" value="profile.username" required/>
-            </td>
-          </tr>
-          <tr>
-            <td>Password:</td>
-            <td nxg-input model="profile.password" editable="editable">
-                <input type="password" name="password" ng-model="profile.password" required/>
-                <input type="password" name="password2" ng-model="profile.passwordConfirm" required />
-                <p class="error" ng-show="(userSettings.password.$dirty && userSettings.password2.$dirty) && profile.password != profile.passwordConfirm">
+  <div class="container-fluid settings">
+    <div class="row-fluid two-col">
+
+      <section class="span8 well adjacent" ng-controller="ProfileCtrl">
+        <h4>User Profile</h4>
+        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
+        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable: editable }" name="userSettings" novalidate>
+
+            <div class="control-group">
+              <label class="control-label" for="setUsername">User Name</label>
+              <div class="controls" nxg-input model="profile.username" editable="editable">
+                <input type="text" id="setUsername" ng-model="profile.username" value="profile.username" required/>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="setPassword"><span ng-show="editable">New </span>Password</label>
+              <div class="controls" nxg-input model="profile.password" editable="editable">
+                <input type="password" name="setPassword" id="setPassword" ng-model="profile.password" required/><button class="btn-help" tooltip="Info about the password field." tooltip-placement="right" tooltip-title="Password Reset" popover-animation="true">?</button>
+              </div>
+            </div>
+
+            <div class="control-group" ng-show="editable">
+              <label class="control-label" for="confirmPassword">Confirm Password</label>
+              <div class="controls">
+                <input type="password" id="confirmPassword" ng-model="profile.passwordConfirm" required />
+                <p class="form-error" ng-show="">
                   The passwords do not match. Please re-enter the password.
                 </p>
-            </td>
+              </div>
+            </div>
 
-            <!-- TODO: Use template to fill in popover content? -->
-            <button class="nxg-help" popover="Info about the password field." popover-placement="right" popover-title="Password Reset" popover-animation="true" class="btn">?</button>
-          </tr>
-          <tr>
-            <td>Security Question:</td>
-            <td nxg-input model="profile.secQuestion" editable="editable">
-                <input type="text" ng-model="profile.secQuestion" value="profile.secQuestion"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Email:</td>
-            <td nxg-input model="profile.email" editable="editable">
-                <input type="email" name="email" ng-model="profile.email" value="profile.email" required/>
-                <p class="error" ng-show="userSettings.email.$invalid && userSettings.email.$dirty">
+            <div class="control-group">
+              <label class="control-label" for="secQuestion">Security Question</label>
+              <div class="controls" nxg-input id="secQuestion" model="profile.secQuestion" editable="editable">
+                <select ng-model="profile.secQuestion" value="profile.secQuestion">
+                  <option>profile.secQuestion</option>
+                  <option>Question 2</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group" ng-show="editable">
+              <label class="control-label" for="secAnswer">Answer</label>
+              <div class="controls">
+                <input type="text" id="secAnswer" ng-model="foo" />
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="email">Email</label>
+              <div class="controls" nxg-input model="profile.email" editable="editable">
+                <input type="email" name="email" id="email" ng-model="profile.email" value="profile.email" required/>
+                <p class="form-error" ng-show="userSettings.email.$invalid && userSettings.email.$dirty">
                   Please enter a valid email address.
                 </p>
-            </td>
-          </tr>
-          <tr>
-            <td>Phone:</td>
-            <td nxg-input model="profile.phone" editable="editable">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="phone">Phone</label>
+              <div class="controls" nxg-input model="profile.phone" editable="editable">
                 <input type="tel" ng-model="profile.phone" value="profile.phone" required/>
-            </td>
-          </tr>
-        </table>
-    </form>
-  </section>
+              </div>
+            </div>
 
-  <section ng-controller="BusinessCtrl" novalidate>
-    <header>
-      <h3>Business Settings
-        <button ng-hide="editable" class="btn pull-right" ng-click="editable=!editable">Edit</button>
-        <button ng-show="editable" class="btn pull-right" ng-click="save()">Save</button>
-      </h3>
-    </header>
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
 
-    <form name="busSettings">
-      <table>
-        <tr>
-          <td>Business Email:</td>
-          <td nxg-input model="business.email" editable="editable">
-            <input type="email" name="email" ng-model="business.email" value="business.email" required />
-            <p class="error" ng-show="busSettings.email.$error.email">
-              XXXX@email.m is not a valid email address.
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td>Enhanced Registration Enabled?</td>
-          <td ng-hide="editable" ng-show="business.enhanced && !editable">Yes</td>
-          <td ng-show="editable">
-            <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
-            <input type="radio" ng-model="business.enhanced" ng-value='false'/> No
-            <input type="radio" ng-model="business.enhanced" ng-value='true' /> Yes
 
-            <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
-            <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
-            <p>Create your Enhanced Registration four digit PIN.</p>
+      <section class="span8 well adjacent" ng-controller="BusinessCtrl" novalidate>
+        <h4>Business Settings</h4>
+        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
+        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
 
-            <label>Enhanced Registration PIN</label>
-            <input type="text" name="pin" ng-model="business.pin" ng-disable="business.enhanced" ng-pattern="/^[0-9]+$/" ng-minlength=4 required />
-              <p class="error" ng-show="busSettings.pin.$error.minlength">
-                Your PIN must consist of four numbers.
-              </p>
-              <p class="error" ng-show="busSettings.pin.$error.pattern">
-                Your PIN must contain only numbers, no letters or special characters.
-              </p>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </section>
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{editable: editable }" name="busSettings">
+            <div class="control-group">
+              <label class="control-label" for="businessEmail">Business Email</label>
+              <div class="controls" nxg-input model="business.email" editable="editable">
+                <input type="email" id="businessEmail" name="businessEmail" ng-model="business.email" value="business.email" required />
+                <p class="form-error" ng-show="busSettings.businessEmail.$error.email">
+                  XXXX@email.m is not a valid email address.
+                </p>
+              </div>
+            </div>
 
-  <section ng-controller="TitleCtrl">
-    <header>
-      <h3>Title Settings
-        <button ng-hide="editable" class="btn pull-right" ng-click="editable=!editable">Edit</button>
-        <button ng-show="editable" class="btn pull-right" ng-click="save()">Save</button>
-      </h3>
-    </header>
-    <form name="titleSettings">
-      <table>
-        <tr>
-          <td>Address:</td>
-          <!-- TODO: Once data is available, generate select menu with address options. -->
-          <td nxg-input model="title.address" editable="editable">
-            <input type="text" ng-model="title.address" value="title.address" required />
-          </td>
-          <!-- TODO: Populate popover with a template of some kind? -->
-          <button class="nxg-help" popover="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555" popover-placement="right" popover-animation="true" class="btn">?</button>
-        </tr>
-      </table>
-    </form>
-  </section>
+            <div class="control-group">
+              <label class="control-label" for="enhanced">Enhanced Registration Enabled?</label>
 
-  <section ng-controller="NotificationCtrl">
-    <header>
-      <h3>Notifications <button class="btn pull-right" ng-click="">Edit</button></h3>
-    </header>
+              <!-- Show "Yes" if enhanced registration is enabled.
+              If it is not enabled, show nothing. -->
+              <div class="controls" ng-show="business.enhanced && !editable">
+                Yes
+              </div>
 
-    <form name="notificationSettings">
-      <table>
-        <tr>
-          <td>Active Notifications:</td>
-        </tr>
+              <div class="controls form-inline nxg-radios" ng-show="editable">
+                <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
+                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.enhanced" ng-value='false'/><label for="enhancedNo">No</label>
+                <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.enhanced" ng-value='true' /> <label for="enhancedYes">Yes</label>
 
-        <tr>
-          <!-- TODO: Replace show/hids with radio button and editing ability -->
-          <td> {{ notification.title }}</td>
-          <td> {{ notification.type }}</td>
-          <td>
-            <input type="checkbox" ng-model="notification.on" ng-value="true" />
-          </td>
-          <td ng-show="notification.on">On</td>
-          <td ng-hide="notification.on">Off</td>
-        </tr>
-      </table>
-    </form>
-  </section>
-</div>
+                <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
+                <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
+                <p>Create your Enhanced Registration four digit PIN.</p>
+              </div>
+            </div>
+
+            <div class="control-group" ng-show="editable">
+              <label class="control-label">Enhanced Registration PIN</label>
+
+              <div class="controls">
+                <input type="text" name="pin" ng-model="business.pin" ng-disable="business.enhanced" ng-pattern="/^[0-9]+$/" ng-minlength=4 required />
+                <p class="form-error" ng-show="busSettings.pin.$error.minlength">
+                  Your PIN must consist of four numbers.
+                </p>
+                <p class="form-error" ng-show="busSettings.pin.$error.pattern">
+                  Your PIN must contain only numbers, no letters or special characters.
+                </p>
+              </div>
+            </div>
+
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
+    </div><!-- end .row-fluid.two-col -->
+
+    <div class="row-fluid two-col">
+      <section class="span8 well adjacent" ng-controller="TitleCtrl">
+        <h4>Title Settings</h4>
+        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
+        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable: editable }"name="titleSettings">
+            <div class="control-group">
+
+              <label class="control-label" for="titleAddr">Address</label>
+              <div class="controls" nxg-input model="title.address" editable="editable">
+                <select ng-model="title.address" required>
+                  <option>foo</option>
+                </select>
+
+                <button class="btn-help" tooltip="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555" tooltip-placement="right" tooltip-animation="true" class="btn">?</button>
+              </div>
+            </div>
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
+
+      <section class="span8 well adjacent" ng-controller="NotificationCtrl">
+        <!-- SEE NOTE IN TICKETS #15 & #17 -->
+        <h4>Notifications</h4>
+        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
+        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable: editable }" name="notificationSettings">
+            <div class="head-labels">
+              <label>Notifications</label>
+              <label ng-hide="editable">Delivery Type</label>
+            </div>
+
+            <div class="control-group">
+              <div class="controls notifications">
+                <ul class="unstyled">
+                  <li class="notification" ng-repeat="n in notifications">
+                    <div class="n-title">{{ n.title }}</div>
+                    <ul class="inner">
+                      <li class="read-only" ng-repeat="t in n.types" ng-show="!editable && t.on">
+                        {{ t.type }}
+                      </li>
+
+                      <!-- TODO: Fix this as part of MVC Ticket -->
+                      <li ng-repeat="t in n.types" ng-show="editable">
+                        <input type="checkbox" name="{{ t.type }}" id="{{ t.type }}" ng-model="t.on" ng-value="t.on" />
+                        <label for="{{ t.type }}">{{ t.type }}</label>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section><!-- end .span8.well.adjacent -->
+    </div><!-- end .row-fluid.two-col -->
+  </div><!-- end .container-fluid.settings -->
+</div><!-- end .container-line -->

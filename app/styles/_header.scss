@@ -11,17 +11,39 @@ header > .row-fluid {
 }
 
 .nxg-settings-drop {
-  background-color: #fff;
-  margin-top: 1em;
-  font-size: 12px;
-  color: #237ec0;
   position: absolute;
-  padding-right: 2.5em;
+  background-color: $white;
+  font-size: 12px;
+  color: $brand-text;
+  margin-top: 1em;
+}
+
+.nxg-settings {
+  padding: 10px;
+  border: 1px solid #DDD;
 }
 
 .account-btn {
   position: absolute;
   right: 0;
+  display: block;
+  height: 33px;
+  color: $brand-text;
+  padding: 0 5px;
+  border: 1px solid transparent;
+
+  &.settings-open {
+    border: 1px solid #DDD;
+    border-bottom-color: $white;
+  }
+
+  i {
+    font-size: 1.75em;
+  }
+
+  & ~ h6, & ~ p {
+    padding-right: 35px;
+  }
 }
 
 .dealer-info {

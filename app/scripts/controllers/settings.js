@@ -13,6 +13,14 @@ angular.module('nextgearWebApp')
 
     $scope.editable = false;
 
+    $scope.makeEditable = function() {
+      $scope.editable = true;
+    };
+
+    $scope.cancel = function() {
+      $scope.editable = false;
+    };
+
     $scope.save = function() {
       // TODO: update model with new data
       $scope.editable = false;
@@ -53,6 +61,14 @@ angular.module('nextgearWebApp')
       }
     });
 
+    $scope.makeEditable = function() {
+      $scope.editable = true;
+    };
+
+    $scope.cancel = function() {
+      $scope.editable = false;
+    };
+
     $scope.save = function() {
       // TODO: update model with new data
       $scope.editable = false;
@@ -70,15 +86,63 @@ angular.module('nextgearWebApp')
 
     $scope.editable = false;
 
+    $scope.makeEditable = function() {
+      $scope.editable = true;
+    };
+
+    $scope.cancel = function() {
+      $scope.editable = false;
+    };
+
     $scope.save = function() {
       // TODO: update model with new data
       $scope.editable = false;
     };
   })
   .controller('NotificationCtrl', function($scope) {
-    $scope.notification = {
-      title: 'Weekly Upcoming Payments Report',
-      type: 'email',
-      on: true
+    $scope.notifications = [
+      {
+        'title': 'Weekly Upcoming Payments Report',
+        'types': [
+          {
+            type: 'email',
+            on: true
+          },
+          {
+            type: 'text',
+            on: false
+          }
+        ]
+      },
+
+      {
+        'title': 'Another Notification',
+        'types': [
+          {
+            type: 'text',
+            on: true
+          },
+          {
+            type: 'phone call',
+            on: true
+          }
+        ]
+      }
+    ];
+
+    $scope.editable = false;
+
+    $scope.makeEditable = function() {
+      $scope.editable = true;
     };
+
+    $scope.cancel = function() {
+      $scope.editable = false;
+    };
+
+    $scope.save = function() {
+      // TODO: update model with new data
+      $scope.editable = false;
+    };
+
   });
