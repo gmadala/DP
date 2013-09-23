@@ -1057,7 +1057,8 @@ window.Chart = function(context){
 				}
 
 				ctx.stroke();
-				ctx.fillText(data.labels[j],yAxisPosX - 7,xAxisPosY - ((j+1) * valueHop));
+        // "-5" is the right side padding needed for right justified text.
+				ctx.fillText(data.labels[j],yAxisPosX - 5,xAxisPosY - ((j+1) * valueHop - 22));
 
 			}
 
@@ -1083,6 +1084,7 @@ window.Chart = function(context){
 				//Check i isnt 0, so we dont go over the Y axis twice.
 					ctx.lineWidth = config.scaleGridLineWidth;
 					ctx.strokeStyle = config.scaleGridLineColor;
+          // "-20" is the top-padding needed to vertically center labels with bars.
 					ctx.lineTo(yAxisPosX + (i) * scaleHop, height - yAxisLength -20);
 				ctx.stroke();
 			}

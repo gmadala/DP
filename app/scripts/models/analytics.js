@@ -31,7 +31,16 @@ angular.module('nextgearWebApp')
               var result = {};
 
               // Parse average turn time into a model suitable for charting
-              result.averageTurn = { labels: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+              result.averageTurn = {
+                labels: [],
+                datasets: [
+                  {
+                    fillColor: 'rgba(0, 0, 0, 0)',
+                    strokeColor: '#009EFF',
+                    data: []
+                  }
+                ]
+              };
               _.each(
                 responses[0],
                 function ( item ) {
@@ -86,8 +95,8 @@ angular.module('nextgearWebApp')
 
             _.each(
               response.reverse(),
-              function ( item, index ) {
-                result.labels.push(index);
+              function ( item ) {
+                result.labels.push('');
                 result.makes.push(item.Make);
                 result.models.push(item.Model);
                 result.datasets[0].data.push(item.NinetyFifthPercentileTurnTime);

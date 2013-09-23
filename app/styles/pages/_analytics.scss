@@ -1,0 +1,189 @@
+
+#foo:checked::before,
+.movers-container input[type="radio"] {
+    position:absolute;
+    clip: rect(0,0,0,0);
+    clip: rect(0 0 0 0);
+}
+
+#foo:checked,
+.movers-container input[type="radio"]#best-movers + label::before {
+  @extend .btn;
+  @include background(linear-gradient(#ffffff, #ddd));
+  content: 'TEN BEST MOVERS';
+  font-size: 12px;
+  text-transform: uppercase;
+  @include border-radius(3px 0 0 3px);
+  padding-right: 14px;
+  padding-left: 14px;
+  margin-right: -2px;
+}
+
+#foo:checked,
+.movers-container input[type="radio"]#worst-movers + label::before {
+  @extend .btn;
+  @include background(linear-gradient(#ffffff, #ddd));
+  content: 'TEN WORST MOVERS';
+  font-size: 12px;
+  text-transform: uppercase;
+  @include border-radius(0 3px 3px 0);
+  padding-right: 14px;
+  padding-left: 14px;
+  margin-left: -2px;
+}
+
+.movers-container input[type="radio"]#best-movers:checked + label::before {
+  @extend .btn:active;
+  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset -1px 1px 1px rgba(0,0,0,0.4));
+  @include background(linear-gradient(#eaeaea, #c4c4c4));
+}
+
+.movers-container input[type="radio"]#worst-movers:checked + label::before {
+  @extend .btn:active;
+  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+  @include background(linear-gradient(#eaeaea, #c4c4c4));
+}
+
+.lt-ie9 {
+  input[type="radio"] {
+    display: inline-block;
+    margin-top: -3px;
+  }
+  #best-movers-label {
+    display: inline-block;
+    margin-top: 3px;
+    text-transform: uppercase;
+    color: #17659D;
+    font-size: 12px;
+    &:after {
+      content: 'Ten Best Movers';
+    }
+  }
+  #worst-movers-label {
+    @extend #best-movers-label;
+    &:after {
+      content: 'Ten Worst Movers';
+    }
+  }
+}
+
+.nxg-movers-toggle {
+  label {
+    display: inline;
+  }
+}
+
+.nxg-analytics {
+  .details-toggle-btn {
+    padding-left: 0;
+    display: block;
+  }
+  .aging-vehicles {
+    .well-out {
+      height: 30em;
+      text-align: right;
+    }
+    li {
+      line-height: 32px;
+    }
+  }
+  .average-turn-chart {
+    .well-out {
+      height: 30em;
+    }
+    span {
+      position: relative;
+      margin-left: 1em;
+      &:after {
+        content: ' ';
+        position: absolute;
+        top: 16px;
+        left: 14px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid #535353;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+      }
+    }
+  }
+  .well .well-out {
+    font-size: 12px;
+  }
+  .business-summary {
+    padding: 0;
+    margin: 0;
+    h5 {
+      margin-top: 0;
+    }
+    li {
+      font-size: 11px;
+    }
+    &.collapsed .well-out {
+      height: 15em;
+    }
+    &.expanded .well-out{
+      height: 24em;
+    }
+    table {
+      margin-top: 0.3em;
+      margin-bottom: 1em;
+      width: 100%;
+      font-size: 11px;
+      tr td:last-child {
+        text-align: right;
+        font-weight: bold;
+      }
+    }
+  }
+  .nxg-movers-toggle {
+    padding-top: 1em;
+  }
+  .movers-container {
+    position: relative;
+    canvas {
+      margin-left: 10.5em;
+      margin-top: 1.5em;
+    }
+    .movers-chart {
+      position: relative;
+    }
+    .ranks {
+      position: absolute;
+      left: -22px;
+      top: 29px;
+      font-size: 18px;
+      li {
+        line-height: 30px;
+      }
+    }
+    .models {
+      position: absolute;
+      top: 31px;
+      font-size: 11px;
+      li {
+        width: 102px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        div:first-child {
+          font-weight: bold;
+        }
+        line-height: 12px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+  .top-auctions-container {
+    position: relative;
+  }
+  .scale-description {
+    font-size: 11px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    left: 14px;
+  }
+}
+
+
