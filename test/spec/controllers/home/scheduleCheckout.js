@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ScheduleCheckoutCtrl', function () {
+xdescribe('Controller: ScheduleCheckoutCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));

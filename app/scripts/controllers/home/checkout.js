@@ -59,7 +59,12 @@ angular.module('nextgearWebApp')
           templateUrl: 'views/modals/scheduleCheckout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
-            payment: function () { return payment; }
+            payment: function () { return payment; },
+            possibleDates: function () {
+              var tomorrow = moment().add(1, 'day').toDate(),
+                dueDate = moment(payment.dueDate).toDate();
+              return Payments.fetchPossiblePaymentDates(tomorrow, dueDate, true);
+            }
           }
         };
         $dialog.dialog(dialogOptions).open();

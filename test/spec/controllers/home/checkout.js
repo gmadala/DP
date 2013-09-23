@@ -137,15 +137,62 @@ describe('Controller: CheckoutCtrl', function () {
 
   });
 
-  it('should have a schedule function that hands off to the schedule modal', function () {
-    spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-    run();
-    var payment = {};
-    scope.paymentQueue.schedule(payment);
-    expect(dialog.dialog).toHaveBeenCalled();
-    expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
-    expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('ScheduleCheckoutCtrl');
-    expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
+  describe('schedule function', function () {
+
+    var $q;
+
+    beforeEach(inject(function (_$q_) {
+      $q = _$q_;
+    }));
+
+    it('should hand off to the schedule modal', function () {
+      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+      run();
+      var payment = {dueDate: '2013-01-10'};
+      scope.paymentQueue.schedule(payment);
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
+      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('ScheduleCheckoutCtrl');
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
+    });
+
+    it('should pass the payment to be scheduled', function () {
+      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+      run();
+      var payment = {dueDate: '2013-01-10'};
+      scope.paymentQueue.schedule(payment);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
+    });
+
+    it('should pass a promise for map of possible payment dates between tomorrow and the payment due date', function () {
+      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+
+      var possibleDates = {
+        '2013-01-08': true,
+        '2013-01-09': true
+      };
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(possibleDates));
+      run();
+
+      var payment = {dueDate: '2013-01-10'};
+      scope.paymentQueue.schedule(payment);
+
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates().then(
+        function (result) {
+          expect(result).toBe(possibleDates);
+        }
+      );
+
+      expect(Payments.fetchPossiblePaymentDates).toHaveBeenCalled();
+      var startDate = Payments.fetchPossiblePaymentDates.mostRecentCall.args[0];
+      var endDate = Payments.fetchPossiblePaymentDates.mostRecentCall.args[1];
+      expect(moment().add(1, 'day').isSame(startDate, 'day')).toBe(true);
+      expect(moment(payment.dueDate).isSame(endDate, 'day')).toBe(true);
+      expect(Payments.fetchPossiblePaymentDates.mostRecentCall.args[2]).toBe(true);
+
+      scope.$apply();
+    });
+
   });
 
   describe('bankAccounts.getList', function () {
