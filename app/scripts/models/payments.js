@@ -54,7 +54,6 @@ angular.module('nextgearWebApp')
         var self = this;
         criteria = angular.copy(criteria);
 
-        var dateFormatter = api.toShortISODate;
         switch (criteria.filter) {
         case 'all':
           criteria.startDate = criteria.endDate = null;
@@ -67,14 +66,13 @@ angular.module('nextgearWebApp')
           criteria.endDate = moment().endOf('week').toDate();
           break;
         case 'range':
-          // use dates as entered by user; read these in terms of UTC since that's how our date picker makes em
-          dateFormatter = api.toUTCShortISODate;
+          // use dates as entered by user
         }
 
         var params = {
           Criteria: criteria.query || undefined,
-          DueDateStart: dateFormatter(criteria.startDate) || undefined,
-          DueDateEnd: dateFormatter(criteria.endDate) || undefined,
+          DueDateStart: api.toShortISODate(criteria.startDate) || undefined,
+          DueDateEnd: api.toShortISODate(criteria.endDate) || undefined,
           OrderBy: 'DueDate',
           OrderDirection: 'ASC',
           PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),

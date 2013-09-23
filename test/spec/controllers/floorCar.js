@@ -91,16 +91,16 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData).toBeDefined();
   });
 
-  it('should default the sale date to the current date, midnight UTC', function () {
+  it('should default the sale date to the current date, midnight', function () {
     // time information will be stripped off when sending to API, but angular-strap datepicker is fussy about time
     var today = new Date();
-    today.setUTCFullYear(today.getFullYear());
-    today.setUTCMonth(today.getMonth());
-    today.setUTCDate(today.getDate());
-    today.setUTCHours(0);
-    today.setUTCMinutes(0);
-    today.setUTCSeconds(0);
-    today.setUTCMilliseconds(0);
+    today.setFullYear(today.getFullYear());
+    today.setMonth(today.getMonth());
+    today.setDate(today.getDate());
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    today.setMilliseconds(0);
     expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
   });
 

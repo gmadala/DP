@@ -15,7 +15,7 @@ angular.module('nextgearWebApp')
           // int
           UnitYear: api.toInt(data.UnitYear),
           // date
-          UnitPurchaseDate: api.toUTCShortISODate(data.UnitPurchaseDate),
+          UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate),
           // option object values that need flattened to ids
           UnitColorId:  data.UnitColorId ? data.UnitColorId.ColorId : null,
           TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId: null,
@@ -61,8 +61,8 @@ angular.module('nextgearWebApp')
             SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
             SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
             // default values for un-set dates may need adjusted during API integration
-            StartDate: api.toUTCShortISODate(criteria.startDate) || undefined,
-            EndDate: api.toUTCShortISODate(criteria.endDate) || undefined,
+            StartDate: api.toShortISODate(criteria.startDate) || undefined,
+            EndDate: api.toShortISODate(criteria.endDate) || undefined,
             OrderBy: 'FlooringDate',
             OrderDirection: 'DESC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),

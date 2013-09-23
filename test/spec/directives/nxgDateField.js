@@ -31,4 +31,24 @@ describe('Directive: nxgDateField', function () {
     expect(scope.bar).toBe(value);
   });
 
+  describe('beforeShowDay support', function () {
+
+    beforeEach(inject(function ($rootScope, $compile) {
+      scope = $rootScope;
+      scope.bar = new Date();
+      scope.onDayRender = jasmine.createSpy('onDayRender');
+      element = angular.element('<form name="form">' +
+        '<input name="dateInput" id="foo" ng-model="bar" nxg-date-field before-show-day="onDayRender(date)" />' +
+        '</form>');
+      element = $compile(element)(scope);
+      scope.$digest();
+    }));
+
+    it('should cause the before-show-day function to be called with date(s) being rendered', function () {
+      expect(scope.onDayRender).toHaveBeenCalled();
+      expect(angular.isDate(scope.onDayRender.mostRecentCall.args[0])).toBe(true);
+    });
+
+  });
+
 });

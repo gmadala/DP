@@ -25,7 +25,7 @@ module.exports = function(karma) {
 			'app/components/angular-mocks/angular-mocks.js',
 			'app/components/angular-ui-router/release/angular-ui-router.js',
 			'app/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'app/components/angular-strap/vendor/bootstrap-datepicker.js',
+      'app/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
 			'app/components/angular-strap/dist/angular-strap.js',
       'app/components/fullcalendar/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',

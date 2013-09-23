@@ -3,9 +3,9 @@
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment) {
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight UTC
+    // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
-    today = moment.utc([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
+    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
 
     //$scope.form = <form directive's controller, assigned by view>
 

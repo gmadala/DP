@@ -250,8 +250,8 @@ describe('Model: Floorplan', function () {
 
     it('should send startDate and endDate if provided', function () {
       floorplan.search(angular.extend({}, defaultCriteria, {
-        startDate: moment.utc([2013, 1, 1]).toDate(),
-        endDate: moment.utc([2013, 2, 1]).toDate()
+        startDate: moment([2013, 1, 1]).toDate(),
+        endDate: moment([2013, 2, 1]).toDate()
       }));
       httpBackend.flush();
       expect(callParams.StartDate).toBe('2013-02-01');
