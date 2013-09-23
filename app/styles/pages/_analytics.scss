@@ -1,3 +1,15 @@
+.modal.top-auctions-modal {
+  width: 640px;
+  margin-left: -320px;
+  h4 {
+    margin-left: 3px;
+  }
+  thead {
+    font-size: 11px;
+    color: #666666;
+    background-color: #eaeaea;
+  }
+}
 
 #foo:checked::before,
 .movers-container input[type="radio"] {

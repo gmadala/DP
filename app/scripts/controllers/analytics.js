@@ -10,6 +10,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: true,
         backdropClick: true,
+        dialogClass: 'modal search-modal top-auctions-modal',
         templateUrl: 'views/modals/topAuctions.html',
         controller: 'TopAuctionsCtrl'
       };
