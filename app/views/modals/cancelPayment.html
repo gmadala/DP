@@ -1,25 +1,25 @@
 <div class="modal-header">
-  Are you sure you would like to cancel your scheduled payment?
+  {{title}}
 </div>
 
 <div class="modal-body">
   <div class="alert alert-error" ng-show="!!submitError">{{ submitError }}</div>
   <div>
-    <strong>VIN</strong> {{ payment.Vin }}
+    <strong>VIN</strong> {{ payment.vin }}
   </div>
   <div>
-    {{ payment.UnitDescription }}
+    {{ payment.description }}
   </div>
   <div>
-    <strong>Stock #</strong> {{ payment.StockNumber }}
+    <strong>Stock #</strong> {{ payment.stockNumber }}
   </div>
   <div>
     <strong>Scheduled</strong>
-    <p>{{ payment.ScheduledPaymentDate | moment }}</p>
+    <p>{{ payment.scheduledDate | moment }}</p>
   </div>
   <div>
     <strong>Payment Amount</strong>
-    <p>{{ (payment.PayPayoffAmount && payment.CurrentPayoff || payment.AmountDue) | currency }}</p>
+    <p>{{ (payment.isPayOff && payment.currentPayoff || payment.amountDue) | currency }}</p>
   </div>
 </div>
 

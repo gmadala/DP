@@ -31,7 +31,7 @@ angular.module('nextgearWebApp')
               isProcessed: item.Processed,
               isCurtailment: item.CurtailmentPayment,
               paymentAmount: item.ScheduledPaymentAmount,
-              payoutAmount: item.ScheduledPayoutAmount,
+              payoffAmount: item.ScheduledPayoutAmount,
               scheduledBy: item.ScheduledByUserDisplayname
             });
           }

@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments, moment) {
-
+  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments, moment, $dialog) {
     var prv = {
       cancelLocalScheduledPayment: function(p) {
         p.isPending = p.isVoided = p.isProcessed = false;
@@ -77,13 +76,35 @@ angular.module('nextgearWebApp')
       },
 
       payOff: function(p) {
-        console.log('ScheduledPayments::payOff() (cancel first)' + ' - ' + p.floorplanId);
-        Payments.cancelScheduled(p).then(
-          function(/*success*/) {
-            console.log('ScheduledPayments::payOff()' + ' - ' + p.floorplanId);
-            prv.cancelLocalScheduledPayment(p);
-            Payments.addToPaymentQueue(p.floorplanId, p.vin, p.description, p.payoutAmount, true /*asPayOff*/);
-          });
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/cancelPayment.html',
+          controller: 'CancelPaymentCtrl',
+          resolve: {
+            options: function() {
+              return {
+                payment: {
+                  floorplanId: p.floorplanId,
+                  vin: p.vin,
+                  description: p.description,
+                  stockNumber: p.stockNumber,
+                  scheduledDate: p.scheduledDate,
+                  isPayOff: !p.isCurtailment,
+                  currentPayOff: p.payoffAmount,
+                  amountDue: p.paymentAmount
+                },
+                title: 'To pay off a scheduled payment it must first be cancelled. Would you like to proceed and cancel your scheduled payment?',
+                onCancel: function() {
+                  prv.cancelLocalScheduledPayment(p);
+                  Payments.addToPaymentQueue(p.floorplanId, p.vin, p.description, p.payoffAmount, true /*payoff*/);
+                }
+              };
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
       },
 
       showReceipt: function(payment) {
@@ -92,12 +113,32 @@ angular.module('nextgearWebApp')
       },
 
       cancelPayment: function(payment) {
-        // TODO: Hook it to the model
-        console.log('ScheduledPayments::cancelPayment()' + ' - ' + payment.floorplanId);
-        Payments.cancelScheduled(payment).then(
-          function(/*success*/) {
-            prv.cancelLocalScheduledPayment(payment);
-          });
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/cancelPayment.html',
+          controller: 'CancelPaymentCtrl',
+          resolve: {
+            options: function() {
+              return {
+                payment: {
+                  vin: payment.vin,
+                  description: payment.description,
+                  stockNumber: payment.stockNumber,
+                  scheduledDate: payment.scheduledDate,
+                  isPayOff: !payment.isCurtailment,
+                  currentPayOff: payment.payoffAmount,
+                  amountDue: payment.paymentAmount
+                },
+                onCancel: function() {
+                  prv.cancelLocalScheduledPayment(payment);
+                }
+              };
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
       }
     };
 
@@ -109,4 +150,5 @@ angular.module('nextgearWebApp')
         endTime = businessHours.endTime.getTime();
       $scope.outOfBusinessHours = currentTime < startTime || currentTime > endTime;
     });
-  });
+  })
+;

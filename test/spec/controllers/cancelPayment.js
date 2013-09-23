@@ -7,13 +7,25 @@ describe('Controller: CancelPaymentCtrl', function () {
 
   var CancelPaymentCtrl,
     scope,
-    paymentMock,
+    optionsMock,
     dialogMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    paymentMock = {};
+    optionsMock = {
+      payment: {
+        vin: 'somevin',
+        description: 'some description',
+        stockNumber: 'stockNumber',
+        scheduledDate: '2010-10-10',
+        isPayOff: false,
+        currentPayOff: 5000,
+        amountDue: 1000
+      },
+      title: 'some title',
+      onCancel: function() {}
+    };
     dialogMock = {
       close: angular.noop
     };
@@ -21,12 +33,16 @@ describe('Controller: CancelPaymentCtrl', function () {
     CancelPaymentCtrl = $controller('CancelPaymentCtrl', {
       $scope: scope,
       dialog: dialogMock,
-      payment: paymentMock
+      options: optionsMock
     });
   }));
 
   it('should attach the provided payment object to the scope', function () {
-    expect(scope.payment).toBe(paymentMock);
+    expect(scope.payment).toBe(optionsMock.payment);
+  });
+
+  it('should attach the provided title to the scope', function () {
+    expect(scope.title).toBe(optionsMock.title);
   });
 
   describe('handleNo function', function () {
@@ -57,7 +73,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     it('should call cancelScheduled in payments model with provided payment', function () {
       spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
       scope.handleYes();
-      expect(Payments.cancelScheduled).toHaveBeenCalledWith(paymentMock);
+      expect(Payments.cancelScheduled).toHaveBeenCalledWith(optionsMock.payment);
     });
 
     it('should set submitInProgress to false and close the dialog with true on success', function () {
