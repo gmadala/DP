@@ -51,14 +51,11 @@ describe('Controller: ScheduledCtrl', function () {
         }
       },
 
-      BusinessHours: {
-        get: function() {
+      Payments: {
+        canPayNow: function() {
           return {
-            then: function(success) {
-              success({
-                startTime: new Date(),
-                endTime: new Date()
-              });
+            then: function() {
+              return true;
             }
           };
         }

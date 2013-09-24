@@ -3,81 +3,88 @@
 angular.module('nextgearWebApp')
   .factory('ScheduledPaymentsSearch', function(api) {
 
-    var self = this;
     var PAGE_SIZE = 15;
     var lastRequest = null;
     var totalCount = 0;
 
-    self.request = function(request) {
-      lastRequest = request;
-      return api.request('GET', '/payment/searchscheduled', lastRequest).then(
-        function(results) {
-          var searchResults = [];
-          totalCount = results.PaymentRowCount;
+    var prv = {
+      request: function(request) {
+        lastRequest = request;
+        return api.request('GET', '/payment/searchscheduled', lastRequest).then(
+          function(results) {
+            var searchResults = [];
+            totalCount = results.PaymentRowCount;
 
-          for (var i = 0; i < results.SearchResults.length; i++) {
-            var item = results.SearchResults[i];
-            searchResults.push({
-              floorplanId: item.FloorplanId,
-              vin: item.Vin,
-              description: item.VehicleDescription,
-              stockNumber: item.StockNumber,
-              status: self.toStatus(item),
-              statusDate: self.getStatusDate(item),
-              scheduledDate: item.ScheduledForDate,
-              isPending: self.isPending(item),
-              isCancelled: item.Cancelled,
-              isVoided: item.Voided,
-              isProcessed: item.Processed,
-              isCurtailment: item.CurtailmentPayment,
-              paymentAmount: item.ScheduledPaymentAmount,
-              payoffAmount: item.ScheduledPayoutAmount,
-              scheduledBy: item.ScheduledByUserDisplayname
-            });
+            for (var i = 0; i < results.SearchResults.length; i++) {
+              var item = results.SearchResults[i];
+              searchResults.push({
+                floorplanId: item.FloorplanId,
+                financialTransactionId: item.FinancialTransactionId,
+                vin: item.Vin,
+                description: item.VehicleDescription,
+                stockNumber: item.StockNumber,
+                status: prv.toStatus(item),
+                statusDate: prv.getStatusDate(item),
+                scheduledDate: item.ScheduledForDate,
+                isPending: prv.isPending(item),
+                isCancelled: item.Cancelled,
+                isVoided: item.Voided,
+                isProcessed: item.Processed,
+                isCurtailment: item.CurtailmentPayment,
+                paymentAmount: item.ScheduledPaymentAmount,
+                payoffAmount: item.ScheduledPayoutAmount,
+                scheduledBy: item.ScheduledByUserDisplayname,
+                receiptURL: prv.getReceiptURL(item)
+              });
+            }
+            return searchResults;
           }
-          return searchResults;
+        );
+      },
+
+      getReceiptURL: function(item) {
+        return api.contentLink('/receipt/view/' + item.FinancialTransactionId);
+      },
+
+      isPending: function(item) {
+        return !item.Processed && !item.Cancelled && !item.Voided;
+      },
+
+      toStatus: function(item) {
+        var status;
+
+        if (item.Processed) {
+          status = 'Processed';
         }
-      );
-    };
+        else if (item.Cancelled) {
+          status = 'Cancelled';
+        }
+        else if (item.Voided) {
+          status = 'Voided';
+        }
+        else {
+          status = 'Pending';
+        }
+        return status;
+      },
 
-    self.isPending = function(item) {
-      return !item.Processed && !item.Cancelled && !item.Voided;
-    };
+      getStatusDate: function(item) {
+        var date = '';
 
-    self.toStatus = function(item) {
-      var status;
-
-      if (item.Processed) {
-        status = 'Processed';
+        if (item.Processed) {
+          date = item.ProcessedOnDate;
+        }
+        else if (item.Cancelled) {
+          date = item.CancelledDate;
+        }
+        else if (item.Voided) {
+          date = item.VoidedDate;
+        }
+        else {
+          date = item.SetupDate;
+        }
+        return date;
       }
-      else if (item.Cancelled) {
-        status = 'Cancelled';
-      }
-      else if (item.Voided) {
-        status = 'Voided';
-      }
-      else {
-        status = 'Pending';
-      }
-      return status;
-    };
-
-    self.getStatusDate = function(item) {
-      var date = '';
-
-      if (item.Processed) {
-        date = item.ProcessedOnDate;
-      }
-      else if (item.Cancelled) {
-        date = item.CancelledDate;
-      }
-      else if (item.Voided) {
-        date = item.VoidedDate;
-      }
-      else {
-        date = item.SetupDate;
-      }
-      return date;
     };
 
     return {
@@ -129,7 +136,7 @@ angular.module('nextgearWebApp')
           lastRequest.SearchCancelled = true;
           lastRequest.SearchVoided = true;
         }
-        return self.request(lastRequest);
+        return prv.request(lastRequest);
       },
 
       loadMoreData: function() {
@@ -138,7 +145,7 @@ angular.module('nextgearWebApp')
         }
         else {
           lastRequest.PageNumber++;
-          return self.request(lastRequest);
+          return prv.request(lastRequest);
         }
       }
     };

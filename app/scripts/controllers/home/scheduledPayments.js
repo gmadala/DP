@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, ScheduledPaymentsSearch, BusinessHours, Payments, moment, $dialog) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog) {
     var prv = {
       cancelLocalScheduledPayment: function(p) {
         p.isPending = p.isVoided = p.isProcessed = false;
@@ -107,11 +107,6 @@ angular.module('nextgearWebApp')
         $dialog.dialog(dialogOptions).open();
       },
 
-      showReceipt: function(payment) {
-        // TODO: Hook it to the model
-        console.log('ScheduledPayments::showReceipt()' + ' - ' + payment.floorplanId);
-      },
-
       cancelPayment: function(payment) {
         var dialogOptions = {
           backdrop: true,
@@ -144,11 +139,10 @@ angular.module('nextgearWebApp')
 
     $scope.scheduledPayments.resetSearch();
 
-    BusinessHours.get().then(function(businessHours) {
-      var currentTime = (new Date()).getTime(),
-        startTime = businessHours.startTime.getTime(),
-        endTime = businessHours.endTime.getTime();
-      $scope.outOfBusinessHours = currentTime < startTime || currentTime > endTime;
-    });
+    var refreshCanPayNow = function () {
+      $scope.canPayNow = Payments.canPayNow();
+      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+    };
+    refreshCanPayNow();
   })
 ;
