@@ -209,17 +209,16 @@
     margin: 0;
     padding: 0;
   }
+  .nxg-fancy-radios {
+    top: 6px;
+    left: 230px;
+    position: absolute;
+  }
 }
 
 .nxg-cal-month-name {
   top: 4px;
   right: 144px;
-  position: absolute;
-}
-
-.nxg-cal-toggle {
-  top: 12px;
-  left: 230px;
   position: absolute;
 }
 
@@ -235,74 +234,22 @@
   right: 59px;
 }
 
-#foo:checked::before,
-.nxg-dash-calendar-container input[type="radio"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
+#foo:checked,
+.nxg-fancy-radios input[type="radio"] + label::before {
+
 }
 
 #foo:checked,
-.nxg-dash-calendar-container input[type="radio"]#week + label::before,
-.nxg-dash-calendar-container input[type="radio"]#month + label::before {
-  @extend .btn;
-  @include background(linear-gradient(#ffffff, #ddd));
-  font-size: 12px;
-  text-transform: uppercase;
-  top: 0;
-  left: 0;
-  padding-right: 14px;
-  padding-left: 14px;
-}
-
-.nxg-dash-calendar-container input[type="radio"]#week + label::before {
+.nxg-fancy-radios input[type="radio"]#week + label::before {
   content: 'Week';
-  @include border-radius(3px 0 0 3px);
-  margin-right: -2px;
 }
 
-.nxg-dash-calendar-container input[type="radio"]#month + label::before {
+#foo:checked,
+.nxg-fancy-radios input[type="radio"]#month + label::before {
   content: 'Month';
-  @include border-radius(0 3px 3px 0);
-  margin-left: -2px;
 }
 
-.nxg-dash-calendar-container input[type="radio"]#week:checked + label::before {
-  @extend .btn:active;
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset -1px 1px 1px rgba(0,0,0,0.4));
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-}
-
-.nxg-dash-calendar-container input[type="radio"]#month:checked + label::before {
-  @extend .btn:active;
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-}
-
-.lt-ie9 {
-  .fc-button-today {
-    &:hover {
-      color: $brand-light;
-    }
-  }
-  input[type="radio"] {
-    display: inline-block;
-    margin-top: -3px;
-  }
-  #week-label {
-    display: inline-block;
-    margin-top: 3px;
-    text-transform: uppercase;
-    color: $brand-light;
-    font-size: 12px;
-    &:after {
-      content: 'Week';
-    }
-  }
-  #month-label {
-    @extend #week-label;
-    &:after {
-      content: 'Month';
-    }
-  }
+#foo:checked,
+.nxg-fancy-radios input[type="radio"]#year + label::before {
+  content: 'Year';
 }

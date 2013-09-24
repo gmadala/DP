@@ -167,7 +167,7 @@
                   nxg-chart
                   nxg-chart-type="Line"
                   nxg-chart-data="analytics.averageTurn"
-                  nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false, align:'h' }"></canvas>
+                  nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }"></canvas>
         </div>
       </div>
       <div class="span3 well aging-vehicles">
@@ -198,12 +198,12 @@
       <div class="span8 adjacent movers-container well">
           <h4>NextGear's Best and Worst Movers</h4>
           <div class="well-out">
-            <div class="nxg-movers-toggle">
+            <div class="nxg-fancy-radios">
 
-              <input type="radio" name="best-movers" id="best-movers" value="true" ng-model="selectedMoverChart" placeholder="Ten Best Movers">
+              <input type="radio" class="first" name="best-movers" id="best-movers" value="true" ng-model="selectedMoverChart" placeholder="Ten Best Movers">
               <label for="best-movers" id="best-movers-label"></label>
 
-              <input type="radio" name="worst-movers" id="worst-movers" value="false" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
+              <input type="radio" class="last" name="worst-movers" id="worst-movers" value="false" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
               <label for="worst-movers" id="worst-movers-label"></label>
 
             </div>

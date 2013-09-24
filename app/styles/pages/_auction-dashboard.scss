@@ -1,0 +1,31 @@
+.auction-dashboard-summaries {
+  margin-top: 7px;
+  li {
+    margin-bottom: 3px;
+  }
+  .well-out {
+    font-size: 12px;
+    height: 11em;
+  }
+  .recent-disbursements table {
+    width: 100%;
+    td:last-child {
+      text-align: right;
+    }
+  }
+  .recent-disbursements {
+    position: relative;
+    .btn {
+      margin: 14px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.auction-dashboard {
+  .nxg-fancy-radios {
+    margin-bottom: 1em;
+  }
+}

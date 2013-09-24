@@ -78,15 +78,6 @@
   }
 }
 
-.ie9 .btn-primary {
-  &:disabled, &.disabled,
-  &:disabled:hover, &.disabled:hover,
-  &:disabled:focus, &.disabled:focus,
-  &:disabled:active, &.disabled:active {
-    background-color: $btn-disabled-bkgd;
-  }
-}
-
 .nxg-search-btn {
   @extend %align-left;
   position: relative;

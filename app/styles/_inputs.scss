@@ -223,3 +223,55 @@ input[type="radio"]:checked + label::before {
     z-index: 100;
   }
 }
+
+
+.nxg-fancy-radios {
+  margin-left: 7px;
+  label {
+    display: inline;
+  }
+}
+
+#foo:checked::before,
+.nxg-fancy-radios input[type="radio"] {
+    position:absolute;
+    clip: rect(0,0,0,0);
+    clip: rect(0 0 0 0);
+}
+
+#foo:checked,
+.nxg-fancy-radios input[type="radio"] + label::before {
+  @extend .btn;
+  @include background(linear-gradient(#ffffff, #ddd));
+  font-size: 12px;
+  text-transform: uppercase;
+  padding-right: 14px;
+  padding-left: 14px;
+  margin-right: -4px;
+}
+
+
+#foo:checked,
+.nxg-fancy-radios input[type="radio"].first + label::before {
+  @include border-radius(3px 0 0 3px);
+}
+
+#foo:checked,
+.nxg-fancy-radios input[type="radio"] + label::before {
+  @include border-radius(0);
+}
+
+#foo:checked,
+.nxg-fancy-radios input[type="radio"].last + label::before {
+  @include border-radius(0 3px 3px 0);
+}
+
+.nxg-fancy-radios input[type="radio"]:checked + label::before {
+  @extend .btn:active;
+  @include background(linear-gradient(#eaeaea, #c4c4c4));
+  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+}
+
+.nxg-fancy-radios input[type="radio"].last:checked + label::before {
+  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+}

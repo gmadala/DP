@@ -128,8 +128,18 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/Floorplan/getChartData/' + range).then(
           function (response) {
 
-            // Prepare a data model appropriate for charting from the points returned            
-            var result = { labels: [], datasets: [ { data: [] } ] };
+            // Prepare a data model appropriate for charting from the points returned
+            var result = {
+
+              labels: [],
+              datasets: [
+                {
+                  fillColor: 'rgba(0, 0, 0, 0)',
+                  strokeColor: '#009EFF',
+                  data: []
+                }
+              ]
+            };
 
             _.each(
               response.Points,

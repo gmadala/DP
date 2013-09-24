@@ -3,23 +3,22 @@
 angular.module('nextgearWebApp')
   .controller('AuctionDashboardCtrl', function($scope, Dashboard) {
 
-    $scope.floorplanChartOptions = ['This Year', 'This Month', 'This Week'];
-    $scope.floorplanChartSelection = 'This Year';
-
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
 
-    $scope.$watch('floorplanChartSelection', function(newVal) {
+    $scope.selectedFloorplanChart = 'month';
+
+    $scope.$watch('selectedFloorplanChart', function(newVal) {
 
       var range = -1;  // See API for full definition, 0 = week, 1 = month, 2 = year
 
       switch(newVal) {
-      case 'This Year':
+      case 'year':
         range = 2;
         break;
-      case 'This Month':
+      case 'month':
         range = 1;
         break;
-      case 'This Week':
+      case 'week':
         range = 0;
         break;
       default:
@@ -27,5 +26,6 @@ angular.module('nextgearWebApp')
       }
 
       $scope.chartData = Dashboard.fetchFloorplanChartData(range);
+
     });
   });

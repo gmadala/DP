@@ -11,80 +11,6 @@
   }
 }
 
-#foo:checked::before,
-.movers-container input[type="radio"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
-}
-
-#foo:checked,
-.movers-container input[type="radio"]#best-movers + label::before {
-  @extend .btn;
-  @include background(linear-gradient(#ffffff, #ddd));
-  content: 'TEN BEST MOVERS';
-  font-size: 12px;
-  text-transform: uppercase;
-  @include border-radius(3px 0 0 3px);
-  padding-right: 14px;
-  padding-left: 14px;
-  margin-right: -2px;
-}
-
-#foo:checked,
-.movers-container input[type="radio"]#worst-movers + label::before {
-  @extend .btn;
-  @include background(linear-gradient(#ffffff, #ddd));
-  content: 'TEN WORST MOVERS';
-  font-size: 12px;
-  text-transform: uppercase;
-  @include border-radius(0 3px 3px 0);
-  padding-right: 14px;
-  padding-left: 14px;
-  margin-left: -2px;
-}
-
-.movers-container input[type="radio"]#best-movers:checked + label::before {
-  @extend .btn:active;
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset -1px 1px 1px rgba(0,0,0,0.4));
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-}
-
-.movers-container input[type="radio"]#worst-movers:checked + label::before {
-  @extend .btn:active;
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-}
-
-.lt-ie9 {
-  input[type="radio"] {
-    display: inline-block;
-    margin-top: -3px;
-  }
-  #best-movers-label {
-    display: inline-block;
-    margin-top: 3px;
-    text-transform: uppercase;
-    color: #17659D;
-    font-size: 12px;
-    &:after {
-      content: 'Ten Best Movers';
-    }
-  }
-  #worst-movers-label {
-    @extend #best-movers-label;
-    &:after {
-      content: 'Ten Worst Movers';
-    }
-  }
-}
-
-.nxg-movers-toggle {
-  label {
-    display: inline;
-  }
-}
-
 .nxg-analytics {
   .details-toggle-btn {
     padding-left: 0;
@@ -199,3 +125,12 @@
 }
 
 
+#foo:checked,
+.nxg-fancy-radios input[type="radio"]#best-movers + label::before {
+  content: 'Ten Best Movers';
+}
+
+#foo:checked,
+.nxg-fancy-radios input[type="radio"]#worst-movers + label::before {
+  content: 'Ten Worst Movers';
+}
