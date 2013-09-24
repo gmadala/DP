@@ -9,8 +9,12 @@
   </p>
 
   <ul>
-    <li ng-show="ejectedFees.length > 0">{{ ejectedFees.length }} Account Fee(s)</li>
-    <li ng-show="ejectedPayments.length > 0">{{ ejectedPayments.length }} Overdue Payment(s)</li>
+    <li ng-show="ejectedFees.length > 0">
+      {{ ejectedFees.length }} Account Fee(s)
+    </li>
+    <li ng-show="ejectedPayments.length > 0">
+      {{ ejectedPayments.length }} Payment(s) due before next available schedule date
+    </li>
   </ul>
 
   <p>

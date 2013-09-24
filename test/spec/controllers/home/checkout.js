@@ -626,6 +626,33 @@ describe('Controller: CheckoutCtrl', function () {
       expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('two');
     });
 
+    it('should remove payments that are due before the next available schedule date', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
+      Payments.addPaymentToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-08',
+        false
+      );
+      Payments.addPaymentToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-04',
+        false
+      );
+      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
+      scope.handleAfterHoursViolation();
+      scope.$apply();
+      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
+      expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('one');
+    });
+
     it('should schedule payments that have not been scheduled already for the next avail date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
       var priorSchedule = new Date();

@@ -219,7 +219,7 @@ angular.module('nextgearWebApp')
           });
           // eject payments that can't be scheduled; auto-schedule any others not already scheduled
           angular.forEach($scope.paymentQueue.contents.payments, function (payment) {
-            if (!$scope.paymentQueue.canSchedule(payment)) {
+            if (!$scope.paymentQueue.canSchedule(payment) || moment(payment.dueDate).isBefore(nextAvail, 'day')) {
               Payments.removePaymentFromQueue(payment.floorplanId);
               ejectedPayments.push(payment);
             } else if (!payment.scheduleDate) {
