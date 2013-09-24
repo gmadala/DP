@@ -39,7 +39,7 @@
             </div>
 
             <div class="cell sch-schDate">
-              <p> {{ pay.scheduledDate | date:'MM/dd/yyyy' }} </p>
+              <p> {{ pay.scheduledDate | moment }} </p>
               <p><span class="sch-label">Scheduled By: </span> {{ pay.scheduledBy }} </p>
             </div>
 
@@ -52,7 +52,7 @@
             <div class="cell sch-status">
               <p><span class="sch-label"> {{ pay.status }} </span><br/>
                 <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
-                 {{ pay.statusDate | date:'MM/dd/yyyy' }}
+                 {{ pay.statusDate | moment }}
               </p>
               <button class="btn btn-small" ng-show="pay.isProcessed" ng-click="scheduledPayments.showReceipt(pay)">Receipt</button>
             </div>
