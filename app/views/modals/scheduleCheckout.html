@@ -5,13 +5,12 @@
   <section>
     <div class="row">
       <header class="row-fluid">
-        <div class="span2 offset1"> <strong>VIN</strong>
-          {{payment.vin}} <strong>Stock #</strong>
-          {{payment.stockNumber}}
+        <div class="span2 offset1">
+          <strong>VIN</strong> {{ payment.vin }}
+          <strong>Stock #</strong> {{ payment.stockNum }}
         </div>
         <div class="span4">
-          <strong>Description</strong>
-          {{payment.description}}
+          <strong>Description</strong> {{ payment.description }}
         </div>
       </header>
       <span class="row-fluid">
@@ -19,33 +18,37 @@
           <span>
             <strong>Due</strong>
           </span>
-          <p>{{payment.DueDate | date:'M/dd/yyyy'}}</p>
+          <p>{{ payment.dueDate | moment }}</p>
         </span>
         <span class="span3">
           <span>
             <strong>Payment</strong>
           </span>
-          <p>{{payment.Amount}}</p>
+          <p>{{ payment.amount }}</p>
         </span>
       </span>
     </div>
   </section>
-  <p>
+  <form name="dateForm">
     <label for="inputScheduleDate">Schedule For</label>
     <input id="inputScheduleDate" name="inputScheduleDate"
            nxg-date-field before-show-day="checkDate(date)"
            ng-model="model.selectedDate"
-           required />
+           required nxg-requires="checkDate(model.selectedDate)" />
     <label for="inputScheduleDate" class="text-error"
            ng-show="validity.inputScheduleDate.$error.required">
-      Please enter the Schedule Date
+      Please select a schedule date
     </label>
-  </p>
-  <p>
-    or <button ng-click="close()" class="btn btn-primary" ng-disabled="!model.canPayNow">Pay Now</button>
-  </p>
+    <label for="inputScheduleDate" class="text-error"
+           ng-show="validity.inputScheduleDate.$error.nxgRequires">
+      Please select a valid banking date no earlier than tomorrow and no later than the payment due date
+    </label>
+  </form>
+  <div>
+    or <button ng-click="removeSchedule()" class="btn btn-primary" ng-disabled="!model.canPayNow">Pay Now</button>
+  </div>
 </div>
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-primary" >OK</button>
-  <button ng-click="close()" class="btn btn-primary" >Cancel</button>
+  <button ng-click="commit()" class="btn btn-primary">OK</button>
+  <button ng-click="close()" class="btn btn-primary">Cancel</button>
 </div>
