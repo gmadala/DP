@@ -2,34 +2,27 @@
   <div class="row-fluid">
     <div class="container-fluid app-header">
       <div class="span3 logo">
-        <p></p>
-        <img src="../img/nxg_logo_blue_2x.png" alt=""></div>
+        <img src="../img/nxg_logo_blue_2x.png" alt="">
+      </div>
 
-      <!-- TODO: Isn't this feature dropped? This snipped should probably be removed.
-      <div class="span2 offset4 c2a chat">
-        <a ng-show="user.isDealer()" href="#">Chat Now!</a>
-      </div> -->
+      <div class="span2 offset4 chat">
+        <a ng-show="user.isDealer()" href="https://home-c4.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0a63c698-c417-4ade-8e0d-55cccf2b0d85&bu=4592556"><i class="glyphicon glyphicon-comment"></i>Chat Now!</a>
+      </div>
       <div class="span3 pull-right dealer-info">
         <div class="row-fluid">
-          <div class="span12 nxg-settings-drop">
+          <div class="nxg-settings-drop">
 
-            <div>
-              <a class="account-btn" ng-class="{ 'settings-open': showSettings }" ng-click="showSettings=!showSettings">
-                <i class="glyphicon glyphicon-cog"></i>
-              </a>
-              <h6>
-                {{ user.info().BusinessName }}
-              </h6>
-              <p class="small" ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
-            </div>
-            <!-- TODO: Add ng-show so its only visible for dealers -->
-            <div class="nxg-settings" ng-show="showSettings">
+            <a class="account-btn dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
+            <h6>{{ user.info().BusinessName }}</h6>
+            <p class="small" ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
+
+            <div class="nxg-settings dropdown-menu">
               <ul class="unstyled">
                 <li>
                   <a href="#/settings">Settings</a>
                 </li>
                 <li>
-                  <button class="btn btn-mini" ng-click="">Sign Out</button>
+                  <button class="btn btn-mini btn-secondary" ng-click="">Sign Out</button>
                 </li>
               </ul>
             </div>

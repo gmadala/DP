@@ -7,42 +7,96 @@ header > .row-fluid {
 }
 
 .app-header {
-  margin-bottom: 0.5em;
+  margin: 10px auto 0.5em;
 }
 
 .nxg-settings-drop {
   position: absolute;
+  top: 0;
+  left: 0;
   background-color: $white;
   font-size: 12px;
   color: $brand-text;
-  margin-top: 1em;
+  padding: 10px;
+  border: 1px solid transparent;
+  z-index: 1;
+
+  &.open {
+    @include box-shadow(rgba(0,0,0,0.5) 0 4px 4px);
+    border-color: #BBB;
+  }
 }
 
-.nxg-settings {
-  padding: 10px;
-  border: 1px solid #DDD;
+.nxg-settings.dropdown-menu {
+  @include border-radius(0);
+  @include box-shadow(0 0 0 rgba(0,0,0,0));
+  position: relative;
+  float: none;
+  min-width: 100%;
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  border: 0;
+
+  ul {
+    padding: 10px 10px 5px 5px;
+    margin: 0;
+  }
+
+  button {
+    margin-top: 10px;
+  }
 }
 
 .account-btn {
-  position: absolute;
-  right: 0;
   display: block;
+  position: absolute;
+  right: 20px;
   height: 33px;
   color: $brand-text;
   padding: 0 5px;
-  border: 1px solid transparent;
-
-  &.settings-open {
-    border: 1px solid #DDD;
-    border-bottom-color: $white;
-  }
+  border: 0;
 
   i {
     font-size: 1.75em;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: -15px;
+      top: 10px;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $brand-text;
+    }
   }
 
-  & ~ h6, & ~ p {
-    padding-right: 35px;
+  &:hover i:after {
+    border-top-color: #888;
+  }
+}
+
+.chat {
+  @extend %align-right;
+  margin-top: 8px;
+
+  a {
+    font-size: 12px;
+    color: $brand-text;
+    border: 0;
+
+    &:hover, &:active {
+      text-decoration: underline;
+    }
+
+    i {
+      color: $brand-text;
+      font-size: 15px;
+      margin-right: 4px;
+    }
   }
 }
 
@@ -52,6 +106,7 @@ header > .row-fluid {
   p, h6 {
     @extend %align-right;
     line-height: 1.35;
+    padding-right: 45px;
     margin: 0;
   }
 }
