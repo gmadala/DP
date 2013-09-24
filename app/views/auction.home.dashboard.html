@@ -53,7 +53,7 @@
     </div>
   </div>
 </div>
-<div class="row-fluid auction-dashboard">
+<div class="row-fluid auction-dashboard-chart">
   <div class="span16 adjacent well">
     <h4>Volume of Nextgear Floorplans</h4>
     <div class="well-out">
@@ -70,8 +70,8 @@
 
       </div>
 
-      <span>Number of Floored Vehicles</span>
-      <canvas width="720"
+      <span class="scale-description-y">Number of Floored Vehicles</span>
+      <canvas width="860"
               height="300"
               ng-show="true"
               nxg-chart
@@ -79,7 +79,7 @@
               nxg-chart-data="chartData"
               nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }">
       </canvas>
-      <span>Month this year</span>
+      <span class="scale-description-x">Months this year</span>
     </div>
   </div>
 </div>

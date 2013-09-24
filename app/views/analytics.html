@@ -218,42 +218,22 @@
                 <li>7</li>
                 <li>8</li>
                 <li>9</li>
+                <li>10</li>
               </ul>
 
               <ul class="models">
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div>
+                <li ng-repeat="models in bestMovers.models">
+                  <div>
+                    <span>{{ bestMovers.years[$index] }}</span>
+                    <span>{{ bestMovers.makes[$index] }}</span>
+                  </div>
+                  <div>{{ models }}</div>
                 </li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
-                <li>
-                  <div>Brand</div>
-                  <div>Model (Year)</div></li>
               </ul>
 
               <div ng-show="selectedMoverChart">
                 <canvas width="290"
-                        height="300"
+                        height="350"
                         nxg-chart
                         nxg-chart-type="Bar"
                         nxg-chart-data="bestMovers"
@@ -261,14 +241,14 @@
               </div>
               <div ng-hide="selectedMoverChart">
                 <canvas width="290"
-                        height="300"
+                        height="350"
                         nxg-chart
                         nxg-chart-type="Bar"
                         nxg-chart-data="worstMovers"
                         nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
               </div>
             </div>
-              <p class="scale-description">Avg. # of Days to Turn:</p>
+              <p class="scale-description-x">Avg. # of Days to Turn</p>
           </div>
         </div>
 
@@ -276,17 +256,20 @@
 
           <h4>Top 10 Auctions</h4>
           <div class="well-out">
+
             <p>Average Number of Cars Purchased Per-Auction (in the last 12 months.)</p>
+
             <a href class="btn btn-mini" ng-click="openTopAuctions()"> <i class="glyphicon glyphicon-eye-open"></i>
               View All Auctions
             </a>
+
             <canvas width="420"
-                      height="300"
+                      height="335"
                       nxg-chart
                       nxg-chart-type="Bar"
                       nxg-chart-data="analytics.top10Auctions"
                       nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-            <p class="scale-description"># of Cars Purchased:</p>
+            <p class="scale-description-x"># of Cars Purchased</p>
           </div>
         </div>
     </section>

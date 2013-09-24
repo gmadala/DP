@@ -24,8 +24,25 @@
   }
 }
 
-.auction-dashboard {
+.auction-dashboard-chart {
+  position: relative;
   .nxg-fancy-radios {
     margin-bottom: 1em;
+  }
+  canvas {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+  }
+  .scale-description-y {
+    @extend .scale-description;
+    position: absolute;
+    top: 108px;
+    left: 18px;
+  }
+  .scale-description-x {
+    @extend .scale-description;
+    position: absolute;
+    bottom: 36px;
+    left: 418px;
   }
 }

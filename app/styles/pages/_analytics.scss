@@ -74,25 +74,26 @@
       }
     }
   }
-  .nxg-movers-toggle {
-    padding-top: 1em;
-  }
   .movers-container {
     position: relative;
+    .well-out {
+      height: 36em;
+    }
     canvas {
       margin-left: 10.5em;
-      margin-top: 1.5em;
+      margin-top: 1em;
     }
     .movers-chart {
       position: relative;
     }
     .ranks {
+      text-align: right;
       position: absolute;
-      left: -22px;
+      left: -32px;
       top: 29px;
       font-size: 18px;
       li {
-        line-height: 30px;
+        line-height: 32px;
       }
     }
     .models {
@@ -107,20 +108,30 @@
         div:first-child {
           font-weight: bold;
         }
-        line-height: 12px;
+        line-height: 13px;
         margin-bottom: 6px;
       }
+    }
+    .scale-description-x {
+      @extend .scale-description;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: 0px;
     }
   }
   .top-auctions-container {
     position: relative;
-  }
-  .scale-description {
-    font-size: 11px;
-    font-weight: bold;
-    position: absolute;
-    bottom: 10px;
-    left: 14px;
+    .well-out {
+      height: 36em;
+    }
+    .scale-description-x {
+      @extend .scale-description;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 0px;
+    }
   }
 }
 
