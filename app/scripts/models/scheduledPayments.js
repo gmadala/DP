@@ -105,7 +105,7 @@ angular.module('nextgearWebApp')
         lastRequest = {
           OrderBy: 'UnitStatus',
           OrderDirection: 'ASC',
-          PageNumber: 0,
+          PageNumber: 1,
           PageSize: PAGE_SIZE,
           Keyword: query,
           StartDate: dateStart,
