@@ -387,7 +387,7 @@ describe('Controller: CheckoutCtrl', function () {
       guard = protect;
       $q = _$q_;
       run();
-      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+      spyOn(dialog, 'dialog').andReturn({ open: function () { return $q.when('done'); } });
     }));
 
     it('should throw an error if called without the protect object', function () {
@@ -452,6 +452,14 @@ describe('Controller: CheckoutCtrl', function () {
       expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('ConfirmCheckoutCtrl');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.queue()).toBe(scope.paymentQueue.contents);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.transactionInfo()).toBe(txInfo);
+    });
+
+    it('should clear the payment queue when the confirmation modal closes', function () {
+      spyOn(Payments, 'checkout').andReturn($q.when({}));
+      spyOn(Payments, 'clearPaymentQueue');
+      scope.reallySubmit(guard);
+      scope.$apply();
+      expect(Payments.clearPaymentQueue).toHaveBeenCalled();
     });
 
     it('should publish the error on the scope, on error', function () {

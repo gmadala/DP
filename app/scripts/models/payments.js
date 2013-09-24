@@ -154,6 +154,14 @@ angular.module('nextgearWebApp')
           isEmpty: paymentQueue.isEmpty
         };
       },
+      clearPaymentQueue: function () {
+        angular.forEach(paymentQueue.fees, function (value, key) {
+          delete paymentQueue.fees[key];
+        });
+        angular.forEach(paymentQueue.payments, function (value, key) {
+          delete paymentQueue.payments[key];
+        });
+      },
       setAvailableUnappliedFunds: function (amount) {
         // a bit goofy - we don't have a dedicated endpoint to fetch this @ checkout, but
         // it comes back with other data earlier in the workflow, so remember it for later use

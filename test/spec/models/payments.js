@@ -547,6 +547,20 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('clearPaymentQueue function', function () {
+
+    it('should remove fees and payments from the queue', function () {
+      var queue = payments.getPaymentQueue();
+      payments.addFeeToQueue('id1', 'vin', 'type', 'desc', 1, '2013-01-01');
+      payments.addFeeToQueue('id2', 'vin', 'type', 'desc', 1, '2013-01-01');
+      payments.addPaymentToQueue('id3', 'vin', 's1', 'desc', 3, '2013-01-02', false);
+      payments.addPaymentToQueue('id4', 'vin', 's1', 'desc', 3, '2013-01-02', true);
+      payments.clearPaymentQueue();
+      expect(queue.isEmpty()).toBe(true);
+    });
+
+  });
+
   describe('cancelScheduled function', function () {
 
     var request;

@@ -158,7 +158,9 @@ angular.module('nextgearWebApp')
               transactionInfo: function () { return result; }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          $dialog.dialog(dialogOptions).open().then(function () {
+            Payments.clearPaymentQueue();
+          });
         }, function (error) {
           $scope.submitInProgress = false;
           console.log('checkout call failed');
