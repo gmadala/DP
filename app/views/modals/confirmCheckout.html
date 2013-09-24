@@ -1,18 +1,17 @@
 <div class="modal-header">
-  <h3>Your payment(s) have been submitted and scheduled.</h3>
+  <h3>Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}.</h3>
 </div>
 <div class="modal-body">
     <h4>Scheduled Payment(s)</h4>
     <section>
-      <div class="row">
+      <div class="row" ng-repeat="payment in items.paymentsScheduled">
         <header class="row-fluid">
           <div class="span4"> <strong>VIN</strong>
-            {{payment.vin}} <strong>Stock Number</strong>
-            {{payment.stockNumber}}
+            {{ payment.vin }} <strong>Stock Number</strong>
+            {{ payment.stockNum }}
           </div>
           <div class="span8">
-            <strong>Description</strong>
-            {{payment.description}}
+            {{ payment.description }}
           </div>
         </header>
         <span class="row-fluid">
@@ -20,77 +19,78 @@
             <span>
               <strong>Scheduled</strong>
             </span>
-            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+            <p>{{ payment.scheduleDate | moment }}</p>
           </span>
           <span class="span6">
             <span>
               <strong>Payment</strong>
             </span>
-            <p>{{payment.Amount}}</p>
+            <p>{{ payment.amount }}</p>
           </span>
         </span>
       </div>
     </section>
-  <h4>Submitted Payments(s): {{submittedPayments | currency}}</h4>
+    <h4>Submitted Payments(s): {{ items.todayTotal() | currency }}</h4>
     <section>
-      <div class="row">
-        <header class="row-fluid">
-          <div class="span4"> <strong>VIN</strong>
-            {{payment.vin}} <strong>Stock Number</strong>
-            {{payment.stockNumber}}
+      <div class="row" ng-repeat="fee in items.fees">
+        <header class="row-fluid" >
+          <div class="span4">
+            Account Fee
+            <strong>Fee Type</strong>
+            {{ fee.type }}
           </div>
           <div class="span8">
             <strong>Description</strong>
-            {{payment.description}}
+            {{ fee.description }}
           </div>
         </header>
         <span class="row-fluid">
           <span class="span4">
             <span>
-              <strong>Scheduled</strong>
+              <strong>Paid</strong>
             </span>
-            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+            <p>{{ today | moment }}</p>
           </span>
           <span class="span6">
             <span>
-              <strong>Payment</strong>
+              <strong>Payment Amount</strong>
             </span>
-            <p>{{payment.Amount}}</p>
+            <p>{{ fee.amount }}</p>
           </span>
         </span>
       </div>
-    </section>
-    <section>
-      <div class="row">
-        <header class="row-fluid">
+      <div class="row" ng-repeat="payment in items.paymentsToday">
+        <header class="row-fluid" >
           <div class="span4"> <strong>VIN</strong>
-            {{payment.vin}} <strong>Stock Number</strong>
-            {{payment.stockNumber}}
+            {{ payment.vin }} <strong>Stock Number</strong>
+            {{ payment.stockNum }}
           </div>
           <div class="span8">
-            <strong>Description</strong>
-            {{payment.description}}
+            {{ payment.description }}
           </div>
         </header>
         <span class="row-fluid">
           <span class="span4">
             <span>
-              <strong>Scheduled</strong>
+              <strong>Paid</strong>
             </span>
-            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
+            <p>{{ today | moment }}</p>
           </span>
           <span class="span6">
             <span>
-              <strong>Payment</strong>
+              <strong>Payment Amount</strong>
             </span>
-            <p>{{payment.Amount}}</p>
+            <p>{{ payment.amount }}</p>
           </span>
         </span>
       </div>
     </section>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" ng-show="!!receiptUrls.length">
   <p>Would you like to view your receipts?</p>
-  <button ng-click="close()" class="btn btn-primary" >Yes</button>
-  <button ng-click="close()" class="btn btn-primary" >No, Thank You</button>
+  <button ng-click="viewReceipts()" class="btn btn-primary">Yes</button>
+  <button ng-click="close()" class="btn btn-primary">No, Thank You</button>
+</div>
+<div class="modal-footer" ng-hide="!!receiptUrls.length">
+  <button ng-click="close()" class="btn btn-primary">OK</button>
 </div>
