@@ -121,6 +121,14 @@ describe('Controller: CheckoutCtrl', function () {
       expect(result).toBe(false);
     });
 
+    it('should return false if the payment has the scheduleBlocked flag set', function () {
+      var result = scope.paymentQueue.canSchedule({
+        dueDate: '2013-01-03',
+        scheduleBlocked: true
+      });
+      expect(result).toBe(false);
+    });
+
     it('should return true if the payment due date is today', function () {
       var result = scope.paymentQueue.canSchedule({
         dueDate: '2013-01-02'
@@ -143,11 +151,21 @@ describe('Controller: CheckoutCtrl', function () {
 
     beforeEach(inject(function (_$q_) {
       $q = _$q_;
-    }));
-
-    it('should hand off to the schedule modal', function () {
       spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
       run();
+    }));
+
+    it('should clear any scheduleError on the payment and set scheduleLoading to true', function () {
+      var payment = {
+        dueDate: '2013-01-10',
+        scheduleError: 'oops!'
+      };
+      scope.paymentQueue.schedule(payment);
+      expect(payment.scheduleError).toBe(false);
+      expect(payment.scheduleLoading).toBe(true);
+    });
+
+    it('should invoke the schedule modal', function () {
       var payment = {dueDate: '2013-01-10'};
       scope.paymentQueue.schedule(payment);
       expect(dialog.dialog).toHaveBeenCalled();
@@ -157,22 +175,17 @@ describe('Controller: CheckoutCtrl', function () {
     });
 
     it('should pass the payment to be scheduled', function () {
-      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-      run();
       var payment = {dueDate: '2013-01-10'};
       scope.paymentQueue.schedule(payment);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
     });
 
-    it('should pass a promise for map of possible payment dates between tomorrow and the payment due date', function () {
-      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-
+    it('should pass a promise for a map of possible payment dates from tomorrow to the payment due date', function () {
       var possibleDates = {
         '2013-01-08': true,
         '2013-01-09': true
       };
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(possibleDates));
-      run();
 
       var payment = {dueDate: '2013-01-10'};
       scope.paymentQueue.schedule(payment);
@@ -191,6 +204,63 @@ describe('Controller: CheckoutCtrl', function () {
       expect(Payments.fetchPossiblePaymentDates.mostRecentCall.args[2]).toBe(true);
 
       scope.$apply();
+    });
+
+    it('should reject the promise of possible dates (to suppress modal display) if none are returned', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({}));
+      var payment = {dueDate: '2013-01-10'},
+        success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+      scope.paymentQueue.schedule(payment);
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates().then(success, failure);
+      scope.$apply();
+      expect(success).not.toHaveBeenCalled();
+      expect(failure).toHaveBeenCalled();
+    });
+
+    it('should set scheduleError & scheduleBlocked, and clear scheduleDate, if there are no avail. dates', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({}));
+      var payment = {dueDate: '2013-01-10', scheduleDate: new Date()};
+      scope.paymentQueue.schedule(payment);
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
+      scope.$apply();
+      expect(payment.scheduleLoading).toBe(false);
+      expect(typeof payment.scheduleError).toBe('string');
+      expect(payment.scheduleBlocked).toBe(true);
+      expect(payment.scheduleDate).toBe(null);
+    });
+
+    it('should reject the promise of possible dates (to suppress modal display) if the load fails', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('server died'));
+      var payment = {dueDate: '2013-01-10'},
+        success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+      scope.paymentQueue.schedule(payment);
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates().then(success, failure);
+      scope.$apply();
+      expect(success).not.toHaveBeenCalled();
+      expect(failure).toHaveBeenCalled();
+    });
+
+    it('should set scheduleError if the load fails (but leave schedule date & allow retry)', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('oof'));
+      var payment = {dueDate: '2013-01-10', scheduleDate: new Date()};
+      scope.paymentQueue.schedule(payment);
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
+      scope.$apply();
+      expect(payment.scheduleLoading).toBe(false);
+      expect(typeof payment.scheduleError).toBe('string');
+      expect(payment.scheduleBlocked).not.toBe(true);
+      expect(angular.isDate(payment.scheduleDate)).toBe(true);
+    });
+
+    it('should clear the scheduleLoading flag when the possible dates promise is resolved', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({ '2013-01-01': true }));
+      var payment = { dueDate: '2013-01-10'};
+      scope.paymentQueue.schedule(payment);
+      dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
+      scope.$apply();
+      expect(payment.scheduleLoading).toBe(false);
     });
 
   });

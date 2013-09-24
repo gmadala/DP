@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $dialog, protect, moment, User, Payments, OptionDefaultHelper) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, User, Payments, OptionDefaultHelper) {
 
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
@@ -48,10 +48,13 @@ angular.module('nextgearWebApp')
       removePayment: Payments.removePaymentFromQueue,
       removeFee: Payments.removeFeeFromQueue,
       canSchedule: function (payment) {
-        // overdue payments cannot be scheduled
-        return !moment(payment.dueDate).isBefore(moment(), 'day');
+        // false for overdue payments and payments that we've noticed have no available dates
+        return !moment(payment.dueDate).isBefore(moment(), 'day') && !payment.scheduleBlocked;
       },
       schedule: function (payment) {
+        payment.scheduleError = false;
+        payment.scheduleLoading = true;
+
         var dialogOptions = {
           backdrop: true,
           keyboard: true,
@@ -63,7 +66,23 @@ angular.module('nextgearWebApp')
             possibleDates: function () {
               var tomorrow = moment().add(1, 'day').toDate(),
                 dueDate = moment(payment.dueDate).toDate();
-              return Payments.fetchPossiblePaymentDates(tomorrow, dueDate, true);
+              return Payments.fetchPossiblePaymentDates(tomorrow, dueDate, true).then(
+                function (result) {
+                  payment.scheduleLoading = false;
+                  if (!_.find(result)) {
+                    // no possible schedule dates for this payment (edge case, but could happen)
+                    payment.scheduleError = 'This payment cannot be scheduled';
+                    payment.scheduleBlocked = true;
+                    payment.scheduleDate = null;
+                    return $q.reject();
+                  }
+                  return result;
+                }, function (error) {
+                  payment.scheduleLoading = false;
+                  payment.scheduleError = error || 'Error retrieving schedule information';
+                  return $q.reject(error);
+                }
+              );
             }
           }
         };
