@@ -4,11 +4,14 @@
 
 <div class="modal-body">
   <p>
-    Same-day payments cannot be made after 8pm Eastern. The following items that cannot
-    be scheduled have been removed from your checkout list:
+    Same-day payments cannot be made after 8pm Eastern.
   </p>
 
-  <ul>
+  <p ng-show="ejectedFees.length > 0 || ejectedPayments.length > 0">
+    The following items that cannot be scheduled have been removed from your checkout list:
+  </p>
+
+  <ul ng-show="ejectedFees.length > 0 || ejectedPayments.length > 0">
     <li ng-show="ejectedFees.length > 0">
       {{ ejectedFees.length }} Account Fee(s)
     </li>
@@ -18,9 +21,12 @@
   </ul>
 
   <p>
-    Any other payments that were not scheduled have been scheduled for the next available
-    business day ({{ autoScheduleDate | moment }}). Please review and confirm these changes
-    before submitting.
+    Any <span ng-show="ejectedFees.length > 0 || ejectedPayments.length > 0">other</span>
+    payments that were not scheduled have been scheduled for the next available
+    business day ({{ autoScheduleDate | moment }}).
+  </p>
+  <p>
+    Please review and confirm these changes before submitting.
   </p>
 </div>
 
