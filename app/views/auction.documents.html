@@ -1,16 +1,20 @@
-<div class="container-fluid">
-  <p class="text-info">
-      Do you have <a href="#">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
-  </p>
+<div class="container-line">
+  <div class="container-fluid auction-documents">
 
-  <div class="row-fluid">
-      <div class="span5">
-          <h3>NextGear Documents</h3>
-          <ul>
-              <li ng-repeat="doc in documents">
-                  <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
-              </li>
-          </ul>
-      </div>
+    <p class="text-info">
+        Do you have <a href="#">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
+    </p>
+
+    <div class="row-fluid">
+        <div class="span12 well">
+            <h4>NextGear Documents</h4>
+            <ul class="well-out">
+                <li ng-repeat="doc in documents">
+                    <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
   </div>
 </div>
