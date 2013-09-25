@@ -200,13 +200,9 @@ describe('Controller: PaymentsCtrl', function () {
     expect(out).toBe(searchResult.data);
   });
 
-  it('should attach promise for canPayNow to the scope', function () {
-    var out = null;
-    scope.canPayNow.then(function (result) {
-      out = result;
-    });
+  it('should attach a value for canPayNow to the scope', function () {
     scope.$apply();
-    expect(out).toBe(true);
+    expect(scope.canPayNow).toBe(true);
   });
 
 });
