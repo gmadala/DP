@@ -91,12 +91,13 @@ angular.module('nextgearWebApp')
         return api.request('GET', 'analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
-            var result = { labels: [], makes: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+            var result = { labels: [], years: [], makes: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
 
             _.each(
               response.reverse(),
               function ( item ) {
                 result.labels.push('');
+                result.years.push(item.Year);
                 result.makes.push(item.Make);
                 result.models.push(item.Model);
                 result.datasets[0].data.push(item.NinetyFifthPercentileTurnTime);

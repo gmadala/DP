@@ -1,3 +1,13 @@
+/*
+
+pksjce fork of Chart.js (needed for horizontal bar chart functionality).
+Last commit at time of download was: July 11, 2013 - 9ed51fe353fbe77e407990554c6bc58c877c2016
+https://github.com/pksjce/Chart.js
+
+Slightly modified by Mikey McOrmond at Effective UI to adjust label alignment.
+
+*/
+
 /*!
  * Chart.js
  * http://chartjs.org/

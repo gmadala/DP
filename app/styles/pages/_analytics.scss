@@ -105,11 +105,11 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        div:first-child {
+        div span:last-child {
           font-weight: bold;
         }
         line-height: 13px;
-        margin-bottom: 6px;
+        margin-bottom: 0.45em;
       }
     }
     .scale-description-x {
