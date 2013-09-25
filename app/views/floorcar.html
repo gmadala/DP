@@ -167,13 +167,10 @@
             </label>
 
             <div class="footer modal-footer">
-              <!-- order of these buttons here is important b/c most browsers trigger first button on Enter key -->
-              <!-- if a different visual order is desired, use CSS e.g. float: right -->
-              <button class="btn btn-small btn-secondary" ng-click="cancel()">Cancel</button>
-              <button class="btn btn-small btn-primary" ng-class="{'btn-primary': form.$valid}"
-                      type="submit" ng-click="submit()">
+              <button class="btn btn-small btn-primary" ng-class="{'btn-primary': form.$valid}" type="submit" ng-click="submit()">
                 Floor
               </button>
+              <button class="btn btn-small btn-secondary" ng-click="cancel()">Cancel</button>
             </div>
           </div>
         </fieldset>

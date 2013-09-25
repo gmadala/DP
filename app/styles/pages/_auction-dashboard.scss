@@ -9,7 +9,7 @@
   }
   .recent-disbursements table {
     width: 100%;
-    td:last-child {
+    td:last-child, td:nth-child(3) {
       text-align: right;
     }
   }

@@ -1,1 +1,7 @@
-/* look in _auction-documents for the 3 rules that actually apply to only this page. */
+/* look in _auction-documents for the other 3 rules that actually apply to only this page. */
+
+.auction-documents {
+  .well-out {
+    padding-bottom: 1.5em;
+  }
+}

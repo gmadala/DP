@@ -18,8 +18,10 @@
             <div class="well-out">
               <h5>Disbursement Detail</h5>
               <form id="disForm" name="disForm">
-              <input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
-              <button class="btn btn-mini" ng-click="viewDisbursementDetail()">View Report</button>
+                <label for="disDate">Date Search</label>
+                <input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
+
+                <button class="btn btn-mini" ng-click="viewDisbursementDetail()">View Report</button>
                 <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
                       Please select a Date
                 </label>

@@ -34,6 +34,10 @@
   }
 }
 
+.btn, .btn-mini {
+  font-size: 12px;
+}
+
 .btn-secondary {
   color: $btn2-active-text;
   background-color: $btn2-active-bkgd;
