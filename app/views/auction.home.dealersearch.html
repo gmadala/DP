@@ -4,16 +4,19 @@
     <p>
       If you have the NextGear dealer number or Auction Access Number, use the Dealer Number search.
     </p>
+    <p for="city" class="text-error" ng-show="invalid.dealerOrAccessNumber">
+        Please enter a dealer number or an auction access number.
+    </p>
     <div class="control-group">
       <label for="dealer-num" class="control-label">Nextgear Dealer Number</label>
       <div class="controls">
-        <input type="text" id="dealer-mum"></div>
+        <input type="text" id="dealer-num" ng-model="query.dealerNumber"></div>
     </div>
     -OR-
     <div class="control-group">
       <label for="auction-access-num" class="control-label">Auction Access Number</label>
       <div class="controls">
-        <input type="text" id="auction-access-num"></div>
+        <input type="text" id="auction-access-num" ng-model="query.auctionAccessNumber"></div>
     </div>
     <button type="submit" ng-click="openNumSearch()">Search</button>
   </div>
@@ -25,22 +28,32 @@
     <div class="control-group">
       <label for="dealer-name" class="control-label">Dealer Name</label>
       <div class="controls">
-        <input type="text" id="dealer-name"></div>
+        <input type="text" id="dealer-name" ng-model="query.dealerName">
+        <p for="city" class="text-error" ng-show="invalid.dealerName">
+            Please enter a dealer name.
+        </p>
+      </div>
     </div>
     -AND-
     <div class="control-group">
       <label for="city" class="control-label">City</label>
       <div class="controls">
-        <input type="text" id="city"></div>
+        <input type="text" id="city" ng-model="query.city">
+        <p for="city" class="text-error" ng-show="invalid.CityOrState">
+          Please enter a city or select a state.
+        </p>
+      </div>
     </div>
     -OR-
     <div class="control-group">
       <label class="control-label" for="dateFilter">State</label>
-      <div class="controls" selected="NY">
-        <select id="state">
-          <option value="NY">NY</option>
-          <option value="CA">CA</option>
+      <div class="controls">
+        <select id="state" ng-model="query.state" ng-options="state.StateName for state in states">
+          <option value=""></option>
         </select>
+        <p for="city" class="text-error" ng-show="invalid.CityOrState">
+          Please enter a city or select a state.
+        </p>
       </div>
     </div>
     <button type="submit" ng-click="openNameSearch()">Search</button>
