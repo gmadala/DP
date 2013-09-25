@@ -61,6 +61,14 @@ angular.module('nextgearWebApp')
           return intVal;
         }
       },
+      toFloat: function (value) {
+        var floatVal = parseFloat(value);
+        if (isNaN(floatVal)) {
+          return null;
+        } else {
+          return floatVal;
+        }
+      },
       toShortISODate: function (value) {
         if (typeof value === 'string') {
           throw 'api.toShortISODate does not currently support (re)formatting of strings. Use a Date object.';

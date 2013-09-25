@@ -218,7 +218,7 @@ angular.module('nextgearWebApp')
           SelectedFloorplans: shortPayments,
           AccountFees: shortFees,
           BankAccountId: bankAccount.BankAccountId,
-          UnappliedFundsAmount: unappliedFundsAmt || 0
+          UnappliedFundsAmount: api.toFloat(unappliedFundsAmt )|| 0
         };
         return api.request('POST', '/payment/make', data);
       }

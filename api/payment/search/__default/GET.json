@@ -3,7 +3,7 @@
     "Message": null,
     "Data": {
         "UnappliedFundsBalance": 23934.00,
-        "AvailableUnappliedFundsBalance": 132.403,
+        "AvailableUnappliedFundsBalance": 800.00,
         "PaymentRowCount": 20,
         "SearchResults": [
             {
@@ -44,7 +44,7 @@
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
-                "DueDate": "2013-09-16",
+                "DueDate": "2013-09-28",
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": true,
                 "HasNsf": false,
@@ -68,7 +68,7 @@
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
-                "DueDate": "2013-09-20",
+                "DueDate": "2013-09-30",
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": false,
                 "HasNsf": false,

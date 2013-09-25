@@ -1,83 +1,110 @@
+<h2>Checkout</h2>
 <section class="row-fluid">
-    <section class="span9">
 
-        <span>Payments</span>
-        <div>
-            If you would like to schedule any of the payments click the Scheduled Payment Button to select date and payment account (if you have multiple accounts).
-        </div>
+  <div class="pay-list" ng-switch="paymentQueue.contents.isEmpty() && 'empty' || 'not-empty'">
 
-        <ul class="unstyled">
-            <li ng-repeat="fee in fees">
-                <header class="row-fluid">
-                    <div class="span2"> <strong>Account Fee</strong>
-                    </div>
-                    <div class="span3"> <strong>Fee Type</strong>
-                        {fee.FeeType}
-                    </div>
-                    <div class="span7">
-                        <strong>Description</strong>
-                        <span>{{fee.Description}}</span>
-                    </div>
-                </header>
-                <div class="row-fluid">
-                    <div class="span8">
-                        <span class="span6">
-                            <span>
-                                <strong>Due</strong>
-                            </span>
-                            <p>{{fee.EffectiveDate | date:'M/dd/yyyy'}}</p>
-                        </span>
-                        <span class="span6">
-                            <span>
-                                <strong>Fee Amount</strong>
-                            </span>
-                            <p>{{fee.PostedDate}}</p>
-                        </span>
-                        <span class="span12">Status: {{status}}</span>
-                    </div>
-                    <div class="span4 pull-right">
-                        <div nxg-payment-buttons="'fee'" is-added="fee.isAdded"></div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-        <ul class="unstyled payments">
-            <li ng-repeat="payments in payments">
-                <header class="row-fluid">
-                    <div class="span2">
-                        <strong>VIN</strong>
-                        {{payment.vin}}
-                    </div>
-                    <div class="span3">
-                        <strong>Description</strong>
-                        {{payment.description}}
-                    </div>
-                </header>
-                <div class="row-fluid">
-                    <div class="span8">
-                        <span class="span3">
-                            <span>
-                                <strong>Due</strong>
-                            </span>
-                            <p>{{payment.EffectiveDate | date:'M/dd/yyyy'}}</p>
-                        </span>
-                        <span class="span2">
-                            <span>
-                                <strong>Payment</strong>
-                            </span>
-                            <p>{{payment.Amount}}</p>
-                        </span>
-                        <span class="span12">Status: {{status}}</span>
-                    </div>
-                    <div class="span4 pull-right">
-                        <button class="btn btn-mini btn-block" ng-click="removePayment()">Remove Payment</button>
-                        <button class="btn btn-mini btn-block" ng-click="schedulePayment()">Schedule Payment</button>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <section class="span9" ng-switch-when="empty">
+      You have no payments selected for checkout. Please visit the
+      <a href="#/home/payments">Payments list</a> to select some.
     </section>
+
+    <section class="span9" ng-switch-when="not-empty">
+      <h3>Payments</h3>
+      <div>
+        If you would like to schedule any of the payments, click the Schedule Payment button to select a date.
+      </div>
+
+      <ul class="unstyled">
+        <li ng-repeat="fee in paymentQueue.contents.fees">
+          <header class="row-fluid">
+            <div class="span2"> <strong>Account Fee</strong>
+            </div>
+            <div class="span3"> <strong>Fee Type</strong>
+              {{ fee.type }}
+            </div>
+            <div class="span7">
+              <strong>Description</strong>
+              <span>{{ fee.description }}</span>
+            </div>
+          </header>
+          <div class="row-fluid">
+            <div class="span8">
+              <span class="span6">
+                  <span>
+                      <strong>Due</strong>
+                  </span>
+                  <p>{{ fee.dueDate | moment }}</p>
+              </span>
+              <span class="span6">
+                  <strong>Fee Amount</strong>
+                  <p>{{ fee.amount | currency }}</p>
+              </span>
+              <span class="span12">Status: Unavailable to Schedule</span>
+            </div>
+            <div class="span4 pull-right">
+              <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
+                Remove Fee
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="unstyled payments">
+        <li ng-repeat="payment in paymentQueue.contents.payments">
+          <header class="row-fluid">
+            <div class="span2">
+              <strong>VIN</strong>
+              {{ payment.vin }}
+            </div>
+            <div class="span3">
+              {{ payment.description }}
+              <strong>Stock #</strong>
+              {{ payment.stockNum }}
+            </div>
+          </header>
+          <div class="row-fluid">
+            <div class="span8">
+              <span class="span3">
+                  <span>
+                      <strong>Due</strong>
+                  </span>
+                  <p>{{ payment.dueDate | moment }}</p>
+              </span>
+              <span class="span2">
+                  <strong>{{ payment.isPayoff && 'Payoff' || 'Payment' }}</strong>
+                  <p>{{ payment.amount | currency }}</p>
+              </span>
+              <span class="span12">Status:
+                <span ng-show="!paymentQueue.canSchedule(payment)">
+                  Unavailable to Schedule
+                </span>
+                <span ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">
+                  Available to Schedule
+                </span>
+                <span ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">
+                  Scheduled for {{ payment.scheduleDate | moment }}
+                </span>
+              </span>
+            </div>
+            <div class="span4 pull-right">
+              <button class="btn btn-mini btn-block"
+                      ng-click="paymentQueue.removePayment(payment.floorplanId)">
+                Remove Payment
+              </button>
+              <button class="btn btn-mini btn-block"
+                      ng-click="paymentQueue.schedule(payment)"
+                      ng-show="paymentQueue.canSchedule(payment)"
+                      ng-disabled="payment.scheduleLoading">
+                {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
+              </button>
+              <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
     <form class="span3 pay-summary" name="paymentForm">
         <div>
@@ -87,37 +114,73 @@
             </p>
         </div>
 
-        <div class="queue-items">
-            <h4>{{payments.length}} Payment(s) for Today</h4>
-            <p>Payment Total {{ payments.total | currency }}</p>
-            <p>Available Unapplied Funds {{ unappliedFunds | currency}}</p>
+        <div class="today-items">
+            <h4>{{ paymentQueue.sum.todayCount() }} Payment(s) for Today</h4>
+            <p>Payment Total {{ paymentQueue.sum.todayTotal() | currency }}</p>
+
+            <div class="unapplied-funds-section" ng-show="unappliedFunds.available > 0">
+              <p>Available Unapplied Funds {{ unappliedFunds.available | currency }}</p>
+              <p>Apply funds to payment?</p>
+              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
+                     ng-value="false" ng-model="unappliedFunds.useFunds"
+                     ng-disabled="paymentQueue.sum.todayTotal() == 0">
+              <label for="unappliedNo">No</label>
+              <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
+                     ng-value="true" ng-model="unappliedFunds.useFunds"
+                     ng-disabled="paymentQueue.sum.todayTotal() == 0">
+              <label for="unappliedYes">Yes</label>
+              <div ng-show="unappliedFunds.useFunds">
+                  <p>
+                    <label for="unappliedAmt">Unapplied Funds to Use</label>
+                    <input id="unappliedAmt" name="unappliedAmt" type="text"
+                           placeholder="$0.00"
+                           ng-model="unappliedFunds.useAmount"
+                           nxg-min="unappliedFunds.min()"
+                           nxg-max="unappliedFunds.max()"
+                           ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+                           ng-required="unappliedFunds.useFunds">
+                  </p>
+                  <p class="text-error" ng-show="validity.unappliedAmt.$error.required">
+                    Please enter the amount of unapplied funds to use.
+                  </p>
+                  <p class="text-error" ng-show="validity.unappliedAmt.$error.pattern">
+                    Please enter the amount of unapplied funds as a number.
+                  </p>
+                  <p class="text-error"
+                     ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
+                      Unapplied funds must be {{ unappliedFunds.min() | currency }} to {{ unappliedFunds.max() | currency }}
+                  </p>
+                  <span class="divider"></span>
+                  <p>
+                    Remaining Payment Balance
+                    {{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}
+                  </p>
+              </div>
+            </div>
+        </div>
+
+        <div class="scheduled-items">
+            <h4>{{ paymentQueue.sum.scheduledCount() }} Scheduled Payment(s)</h4>
+            <p>Scheduled Total: {{ paymentQueue.sum.scheduledTotal() | currency }}</p>
+        </div>
+
+        <div class="bank-account">
             <p>
-                <p>Apply funds to payment?</p>
-                <label for="unappliedNo">No</label>
-                <input type="radio" name="useUnapplied" value="Yes" placeholder="Yes" id="unappliedNo" checked="checked {{useUnapplied}}">
-                <label for="unappliedYes">Yes</label>
-                <input type="radio" name="useUnapplied" value="No" placeholder="No" id="unappliedYes">
+              <label for="bankAccount">Account</label>
+              <select name="bankAccount" id="bankAccount"
+                      ng-model="bankAccounts.selectedAccount"
+                      ng-options="account.BankAccountName for account in bankAccounts.getList()"
+                      required></select>
             </p>
-            <span ng-show="">
-                <p>
-                    <label for="unappliedUse">Unapplied Funds to Use</label>
-                    <input id="unappliedUse" type="text" placeholder="$0.00">
-                </p>
-                <span class="divider"></span>
-                <p>Remaining Payment Balance {{ remainingBalance | currency}}</p>
-            </span>
-            <p>
-                <label for="bank">Account</label>
-                <select name="bank" id="bank" selected="1">
-                    <option value="1">PNC Bank - Main</option>
-                </select>
+            <p class="text-error" ng-show="validity.bankAccount.$error.required">
+              Please select a bank account for payment
             </p>
         </div>
 
-        <div>
-            <h4>{{scheduledPayments.length}} Scheduled Payment(s)</h4>
-            <p>Scheduled Total: {{ total | currency }}</p>
-            <button class="btn" ng-disabled="false" ng-click="confirm()">Submit Payments and Commit Scheduled Payments</button>
+        <div class="submit">
+            <button class="btn" ng-disabled="paymentQueue.contents.isEmpty()" ng-click="submit()">
+              Submit Payments and Commit Scheduled Payments
+            </button>
         </div>
     </form>
 </section>

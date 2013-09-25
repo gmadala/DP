@@ -107,9 +107,21 @@ angular.module('nextgearWebApp')
 
     $scope.unappliedFunds = {
       available: Payments.getAvailableUnappliedFunds(),
+      min: function () {
+        return $scope.unappliedFunds.useFunds ? 0.01 : 0;
+      },
+      max: function () {
+        // cannot use more unapplied funds than available, or than the total owed for same-day payments
+        return Math.min($scope.unappliedFunds.available, $scope.paymentQueue.sum.todayTotal());
+      },
       useFunds: false,
       useAmount: 0
     };
+
+    // if todayTotal becomes 0 later on, force unapplied funds to OFF (template should disable)
+    $scope.$watch('paymentQueue.sum.todayTotal()', function (total) {
+      if (total === 0) { $scope.unappliedFunds.useFunds = false; }
+    });
 
     // ----- begin uber-complex submit logic -----
 
@@ -120,7 +132,9 @@ angular.module('nextgearWebApp')
 
       // validate user selections for payment
       $scope.validity = angular.copy($scope.paymentForm);
-      if (!$scope.paymentForm.$valid) {
+      var accountInvalid = $scope.paymentForm.bankAccount.$invalid,
+        unappliedInvalid = $scope.unappliedFunds.useFunds && $scope.paymentForm.unappliedAmt.$invalid;
+      if (accountInvalid || unappliedInvalid) {
         return;
       }
 

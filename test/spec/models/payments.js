@@ -741,13 +741,13 @@ describe("Model: Payments", function () {
       httpBackend.flush();
     });
 
-    it('should send the unapplied funds amount', function () {
+    it('should send the unapplied funds amount as a number', function () {
       httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
         data = angular.fromJson(data);
         expect(data.UnappliedFundsAmount).toBe(180.45);
         return [200, stubResponse, {}];
       });
-      payments.checkout([], [], {BankAccountId: 'bank1'}, 180.45);
+      payments.checkout([], [], {BankAccountId: 'bank1'}, '180.45');
       httpBackend.flush();
     });
 

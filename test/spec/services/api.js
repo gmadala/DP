@@ -90,6 +90,30 @@ describe('Service: api', function () {
     });
   });
 
+  describe('toFloat function', function () {
+    it('should coerce strings containing numeric values into floats', function () {
+      expect(api.toFloat('0')).toBe(0);
+      expect(api.toFloat('-1')).toBe(-1);
+      expect(api.toFloat('1')).toBe(1);
+      expect(api.toFloat('1200')).toBe(1200);
+      expect(api.toFloat('3.1415')).toBe(3.1415);
+      expect(api.toFloat('-3.1415')).toBe(-3.1415);
+    });
+
+    it('should leave existing numeric values unmodified', function () {
+      expect(api.toFloat(0)).toBe(0);
+      expect(api.toFloat(-1)).toBe(-1);
+      expect(api.toFloat(1)).toBe(1);
+      expect(api.toFloat(1.63)).toBe(1.63);
+    });
+
+    it('should make null, undefined, or non-numeric strings into null', function () {
+      expect(api.toFloat(null)).toBe(null);
+      expect(api.toFloat(undefined)).toBe(null);
+      expect(api.toFloat('abcdef')).toBe(null);
+    });
+  });
+
   describe('toShortISODate function', function () {
     it('should format a date object to a short ISO string with no skew from local time', function () {
       expect(api.toShortISODate(new Date(2013, 1, 1))).toBe('2013-02-01');

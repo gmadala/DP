@@ -323,6 +323,54 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.unappliedFunds.useAmount).toBe(0);
     });
 
+    it('should force unapplied funds use to false if last item is removed from today bucket', function () {
+      var queue = Payments.getPaymentQueue();
+      Payments.addPaymentToQueue('id', 'vin', 's#', 'desc', 100, '2013-01-01', false);
+      run();
+      scope.unappliedFunds.useFunds = true;
+      queue.payments['id'].scheduleDate = new Date();
+      scope.$apply();
+      expect(scope.unappliedFunds.useFunds).toBe(false);
+    });
+
+    describe('min function', function () {
+
+      beforeEach(function () {
+        run();
+      });
+
+      it('should return 0 when unapplied funds are not being used', function () {
+        scope.unappliedFunds.useFunds = false;
+        expect(scope.unappliedFunds.min()).toBe(0);
+      });
+
+      it('should return a value greater than 0 when unapplied funds are being used', function () {
+        scope.unappliedFunds.useFunds = true;
+        expect(scope.unappliedFunds.min() > 0).toBe(true);
+      });
+
+    });
+
+    describe('max function', function () {
+
+      beforeEach(function () {
+        run();
+      });
+
+      it('should return unapplied funds avail. amount if that is less than total for today', function () {
+        scope.unappliedFunds.available = 100;
+        spyOn(scope.paymentQueue.sum, 'todayTotal').andReturn(200);
+        expect(scope.unappliedFunds.max()).toBe(100);
+      });
+
+      it('should return today total if that is less than unapplied funds avail. amount', function () {
+        scope.unappliedFunds.available = 300;
+        spyOn(scope.paymentQueue.sum, 'todayTotal').andReturn(200);
+        expect(scope.unappliedFunds.max()).toBe(200);
+      });
+
+    });
+
   });
 
   describe('submit function', function () {
@@ -333,7 +381,13 @@ describe('Controller: CheckoutCtrl', function () {
       $q = _$q_;
       run();
       scope.paymentForm = {
-        $valid: true
+        $valid: true,
+        bankAccount: {
+          $invalid: false
+        },
+        unappliedAmt: {
+          $invalid: false
+        }
       };
     }));
 
@@ -346,14 +400,28 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should publish a snapshot of the form validation state', function () {
       scope.paymentForm.$valid = false;
+      scope.paymentForm.bankAccount.$invalid = true;
       scope.submit();
       expect(angular.equals(scope.validity, scope.paymentForm)).toBe(true);
     });
 
-    it('should not proceed to business hours validation or commit if the form is invalid', function () {
+    it('should not proceed to business hours validation or commit if bank account is invalid', function () {
       spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
       spyOn(scope, 'reallySubmit');
       scope.paymentForm.$valid = false;
+      scope.paymentForm.bankAccount.$invalid = true;
+      scope.submit();
+      scope.$apply(); // apply promise resolutions
+      expect(scope.validateBusinessHours).not.toHaveBeenCalled();
+      expect(scope.reallySubmit).not.toHaveBeenCalled();
+    });
+
+    it('should not proceed if unapplied funds are enabled, and unapplied funds amount is invalid', function () {
+      spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
+      spyOn(scope, 'reallySubmit');
+      scope.unappliedFunds.useFunds = true;
+      scope.paymentForm.$valid = false;
+      scope.paymentForm.unappliedAmt.$invalid = true;
       scope.submit();
       scope.$apply(); // apply promise resolutions
       expect(scope.validateBusinessHours).not.toHaveBeenCalled();
@@ -368,9 +436,20 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.reallySubmit).not.toHaveBeenCalled();
     });
 
-    it('should proceed to commit if all pre-validation passes', function () {
+    it('should proceed to commit if everything is valid', function () {
       spyOn(scope, 'validateBusinessHours').andReturn($q.when(true));
       spyOn(scope, 'reallySubmit');
+      scope.submit();
+      scope.$apply(); // apply promise resolutions
+      expect(scope.reallySubmit).toHaveBeenCalled();
+    });
+
+    it('should proceed to commit if unapplied funds are disabled, & ONLY unapplied funds amt is invalid', function () {
+      spyOn(scope, 'validateBusinessHours').andReturn($q.when(true));
+      spyOn(scope, 'reallySubmit');
+      scope.unappliedFunds.useFunds = false;
+      scope.paymentForm.$valid = false;
+      scope.paymentForm.unappliedAmt.$invalid = true;
       scope.submit();
       scope.$apply(); // apply promise resolutions
       expect(scope.reallySubmit).toHaveBeenCalled();
