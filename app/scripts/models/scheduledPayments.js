@@ -88,7 +88,6 @@ angular.module('nextgearWebApp')
     };
 
     return {
-      // TODO: Confirm with API spec (once complete) if this is the filter types the service will expect.
       FILTER_BY_ALL: 0,
       FILTER_BY_PENDING: 1,
       FILTER_BY_PROCESSED: 2,
