@@ -1,0 +1,16 @@
+{
+  "Success": true,
+  "Message": "",
+  "Data": {
+    "LinesOfCredit": [
+      {
+        "CreditType": "Credit type 1",
+        "CreditAvailable": 10235.15
+      },
+      {
+        "CreditType": "Credit type 2",
+        "CreditAvailable": 1050.20
+      }
+    ]
+  }
+}

@@ -3,15 +3,55 @@
   "Message": null,
   "Data": {
     "DealerRowCount": 12,
-    "SearchResults": {
-      "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-      "BusinessNumber": 72694,
-      "BusinessName": "TRICOLOR AUTO",
-      "Address": "123 Main St.",
-      "City": "San Antonio",
-      "State": "California",
-      "PostalCode": "12345",
-      "IsBuyer": true
-    }
+    "SearchResults": [
+      {
+        "BusinessId": "1addd16e-0e12-40a5-8558-3b926b4c9049",
+        "BusinessName": "Cortese Chrysler Jeep Dodge Ram",
+        "BusinessLegalName": "Cortese Auto Group.",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [ 12345, 23455 ],
+        "Address": "2400 W Henrietta Rd",
+        "City": "Rochester",
+        "State": "New York",
+        "PostalCode": "14623",
+        "IsBuyer": true
+      },
+      {
+        "BusinessId": "1addd16e-0e12-40a5-85aa-350555555049",
+        "BusinessName": "Cortese Lincoln",
+        "BusinessLegalName": "Cortese Auto Group.",
+        "BusinessNumber": 72695,
+        "AuctionAccessDealershipNumbers": [ 12346, 23456 ],
+        "Address": "2452 West Henrietta Road",
+        "City": "Rochester",
+        "State": "New York",
+        "PostalCode": "14623",
+        "IsBuyer": true
+      },
+      {
+        "BusinessId": "1addd16e-3001-40a5-8558-0101014c9049",
+        "BusinessName": "Cortese Ford",
+        "BusinessLegalName": "Cortese Auto Group.",
+        "BusinessNumber": 72696,
+        "AuctionAccessDealershipNumbers": [ 12346 ],
+        "Address": "2500 W Henrietta Rd",
+        "City": "Rochester",
+        "State": "New York",
+        "PostalCode": "14623",
+        "IsBuyer": true
+      },
+      {
+        "BusinessId": "1add0101-0e12-40a5-8001-3bs2fb4dd049",
+        "BusinessName": "Cortese Mitsubish",
+        "BusinessLegalName": "Cortese Auto Group.",
+        "BusinessNumber": 72697,
+        "AuctionAccessDealershipNumbers": [ 12347, 3115, 5100, 123, 106788 ],
+        "Address": "2500 W Henrietta Rd",
+        "City": "Rochester",
+        "State": "New York",
+        "PostalCode": "14623",
+        "IsBuyer": true
+      }
+    ]
   }
 }
