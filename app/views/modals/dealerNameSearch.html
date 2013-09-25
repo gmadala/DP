@@ -1,0 +1,48 @@
+<div class="modal-header">
+    Business Search
+</div>
+
+<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
+    <span class="glyphicon glyphicon-remove"></span>
+</div>
+
+<div class="modal-body search-controls">
+    <label>Business Name</label>
+    <input type="text" ng-model="query.name"><button class="btn btn-secondary nxg-search-btn" ng-click="dealerNameSearch.search()"><i class="glyphicon glyphicon-search"></i></button>
+    <label>City</label>
+    <input type="text" ng-model="query.city">
+    <label>State</label>
+    <input type="text" ng-model="query.state.StateName">
+</div>
+
+<div class="modal-body search-results"
+     nxg-infinite-scroll="dealerNameSearch.loadMoreData()"
+     nxg-infinite-scroll-disabled="dealerNameSearch.loading"
+     nxg-infinite-scroll-show-indicator="dealerNameSearch.loading"
+     nxg-scroll-container>
+    <table>
+        <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Legal Name</th>
+            <th>Business&nbsp;#</th>
+            <th>City</th>
+            <th>State</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="business in dealerNameSearch.results">
+            <td>{{business.BusinessName}}</td>
+            <td>{{business.BusinessLegalName}}</td>
+            <td>{{business.BusinessNumber}}</td>
+            <td>{{business.City}}</td>
+            <td>{{business.State}}</td>
+            <td><a href class="btn btn-mini" ng-click="creditQuery.get(business)">Query</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
+</div>
