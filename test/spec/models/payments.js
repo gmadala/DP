@@ -37,7 +37,7 @@ describe("Model: Payments", function () {
     });
 
     it('should send the expected data', function () {
-      payments.requestUnappliedFundsPayout(200, 'foo');
+      payments.requestUnappliedFundsPayout('200', 'foo');
       httpBackend.flush();
       expect(request.RequestAmount).toBe(200);
       expect(request.BankAccountId).toBe('foo');

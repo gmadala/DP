@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
     return {
       requestUnappliedFundsPayout: function (amount, bankAccountId) {
         return api.request('POST', '/payment/payoutUnappliedFunds', {
-          RequestAmount: amount,
+          RequestAmount: api.toFloat(amount),
           BankAccountId: bankAccountId
         });
       },
