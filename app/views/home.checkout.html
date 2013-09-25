@@ -1,14 +1,14 @@
 <h2>Checkout</h2>
 <section class="row-fluid">
 
-  <div class="pay-list" ng-switch="paymentQueue.contents.isEmpty() && 'empty' || 'not-empty'">
+  <div class="pay-list" ng-switch="paymentQueue.contents.isEmpty()">
 
-    <section class="span9" ng-switch-when="empty">
+    <section class="span9" ng-switch-when="true">
       You have no payments selected for checkout. Please visit the
       <a href="#/home/payments">Payments list</a> to select some.
     </section>
 
-    <section class="span9" ng-switch-when="not-empty">
+    <section class="span9" ng-switch-when="false">
       <h3>Payments</h3>
       <div>
         If you would like to schedule any of the payments, click the Schedule Payment button to select a date.
