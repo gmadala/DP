@@ -86,30 +86,28 @@
     .movers-chart {
       position: relative;
     }
-    .ranks {
-      text-align: right;
+    table {
       position: absolute;
-      left: -32px;
-      top: 29px;
-      font-size: 18px;
-      li {
-        line-height: 32px;
+      top: 28px;
+      left: -7px;
+      height: 320px;
+      tr td:first-child {
+        font-size: 18px;
+        text-align: right;
+        padding-right: 7px;
       }
     }
     .models {
-      position: absolute;
-      top: 31px;
-      font-size: 11px;
-      li {
-        width: 102px;
+      div {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        div span:last-child {
-          font-weight: bold;
-        }
-        line-height: 13px;
-        margin-bottom: 0.45em;
+        width: 104px;
+      }
+      font-size: 11px;
+      line-height: 14px;
+      span:last-child {
+        font-weight: bold;
       }
     }
     .scale-description-x {
