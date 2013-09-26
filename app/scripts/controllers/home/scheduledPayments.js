@@ -45,6 +45,8 @@ angular.module('nextgearWebApp')
         ScheduledPaymentsSearch.loadMoreData().then(function(results) {
           this.loading = false;
           this.results = this.results.concat(results);
+        }.bind(this), function (/*error*/) {
+          this.loading = false;
         }.bind(this));
       },
 
@@ -58,6 +60,8 @@ angular.module('nextgearWebApp')
           .then(function(results) {
             this.loading = false;
             this.results = results;
+          }.bind(this), function (/*error*/) {
+            this.loading = false;
           }.bind(this));
       },
 
@@ -66,7 +70,7 @@ angular.module('nextgearWebApp')
           query: null,
           startDate: null,
           endDate: null,
-          filter: ''
+          filter: ScheduledPaymentsSearch.FILTER_BY_ALL
         };
         this.search();
       },
