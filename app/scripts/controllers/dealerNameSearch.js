@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, dialog, DealerNameSearch, CreditQuery, options) {
+  .controller('DealerNameSearchCtrl', function($scope, dialog, $dialog, DealerNameSearch, CreditQuery, options) {
     $scope.query = {
       name: options.dealerName,
       city: options.city,
@@ -28,14 +28,31 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.creditQuery = {
-      get: function(business) {
-        CreditQuery.get(business.BusinessId).then(
-          function(data) {
-            console.log('got credit query - ' + data);
+    $scope.showCreditQuery = function(business) {
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/creditQuery.html',
+        controller: 'CreditQueryCtrl',
+        resolve: {
+          options: function() {
+            return {
+              businessId: business.BusinessId,
+              businessNumber: business.BusinessName,
+              auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
+              businessName: business.BusinessName,
+              address: business.Address,
+              city: business.City,
+              state: business.State,
+              zipCode: business.PostalCode,
+              autoQueryCredit: true
+            };
           }
-        );
-      }
+        }
+      };
+      $dialog.dialog(dialogOptions).open();
+      dialog.close();
     };
 
     // Allow the dialog to close itself using the "Cancel" button.
