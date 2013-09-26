@@ -99,7 +99,7 @@ angular.module('nextgearWebApp')
                   currentPayOff: p.payoffAmount,
                   amountDue: p.paymentAmount
                 },
-                title: 'To pay off a scheduled payment it must first be cancelled. Would you like to proceed and cancel your scheduled payment?',
+                title: 'Add this vehicle to the payment list and cancel your scheduled payment?',
                 onCancel: function() {
                   prv.cancelLocalScheduledPayment(p);
                   Payments.addPaymentToQueue(p.floorplanId, p.vin, p.stockNumber, p.description, p.payoffAmount, true /*payoff*/);

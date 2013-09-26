@@ -67,8 +67,20 @@
                 <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
                   {{ pay.paymentAmount | currency }} </p>
 
-                <button class="btn btn-small" ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay)" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
-                <button class="btn btn-small" ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">Cancel</button>
+                <button class="btn btn-small"
+                        ng-show="pay.isPending"
+                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay)"
+                        ng-click="scheduledPayments.payOff(pay)"
+                        tooltip="Payoff Now will add the full payoff amount to your payment summary and cancel the scheduled payment."
+                        tooltip-placement="right"
+                        tooltip-popup-delay="700">
+                    <span>Payoff Now</span>
+                </button>
+                <button class="btn btn-small"
+                        ng-show="pay.isPending"
+                        ng-click="scheduledPayments.cancelPayment(pay)">
+                    <span>Cancel</span>
+                </button>
               </div>
             </div><!-- end .main-info -->
 
