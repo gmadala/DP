@@ -1,9 +1,5 @@
 <div class="modal-header">
-    Buyer Business Line of Credit Query
-</div>
-
-<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
-    <span class="glyphicon glyphicon-remove"></span>
+    <h3>Buyer Business Line of Credit Query</h3>
 </div>
 
 <section>
@@ -21,7 +17,7 @@
             <div>{{business.city}}, {{business.state}} {{business.zipCode}}</div>
         </dd>
     </dl>
-    <table>
+    <table ng-show="business.creditQuery.retrieved">
         <thead>
         <tr>
             <th>Credit Type</th>
@@ -42,6 +38,6 @@
 <div class="modal-footer">
     <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
     <button ng-click="business.creditQuery.get()"
-            class="btn btn-mini btn-secondary"
-            ng-disabled="business.creditQuery.disableManualRequest" >Query</button>
+            class="btn btn-mini btn-primary"
+            ng-disabled="business.creditQuery.requested">Query</button>
 </div>

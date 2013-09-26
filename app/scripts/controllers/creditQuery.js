@@ -12,20 +12,24 @@ angular.module('nextgearWebApp')
       state: options.state,
       zipCode: options.zipCode,
       creditQuery: {
-        disableManualRequest: options.autoQueryCredit,
+        requested: false,
+        retrieved: false,
         loading: false,
         error: null,
         get: function() {
           this.loading = true;
+          this.requested = true;
           CreditQuery.get(options.businessId).then(
             function(data) {
               this.loading = false;
               this.error = null;
               this.results = data;
+              this.retrieved = true;
             }.bind(this),
             function(reason) {
               this.error = reason;
               this.loading = false;
+              this.retrieved = true;
             }.bind(this)
           );
         },
