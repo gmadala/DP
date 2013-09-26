@@ -172,6 +172,22 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.data.SaleTradeIn).toBe(false);
   });
 
+  it('should clear title information if title location is switched to one that disables title info', function () {
+    scope.data.TitleLocationId = {
+      TitleInfoEnabled: true
+    };
+    scope.$apply();
+    scope.data.UnitTitleNumber = 'foo';
+    scope.data.UnitTitleStateId = {};
+
+    scope.data.TitleLocationId = {
+      TitleInfoEnabled: false
+    };
+    scope.$apply();
+    expect(scope.data.UnitTitleNumber).toBe(null);
+    expect(scope.data.UnitTitleStateId).toBe(null);
+  });
+
   describe('mileageExit function', function () {
 
     var fakeModelCtrl;

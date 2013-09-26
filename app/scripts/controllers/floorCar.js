@@ -77,6 +77,14 @@ angular.module('nextgearWebApp')
       }
     });
 
+    // if user switches to a title location that does not allow title info, clear any info already entered
+    $scope.$watch('data.TitleLocationId.TitleInfoEnabled', function (titleInfoEnabled) {
+      if (titleInfoEnabled === false) {
+        $scope.data.UnitTitleNumber = null;
+        $scope.data.UnitTitleStateId = null;
+      }
+    });
+
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
