@@ -48,7 +48,8 @@ angular.module('nextgearWebApp')
             locations: data.Locations || {}, // map object: {id: name}
             bankAccounts: data.BankAccounts || {}, // map object: {id: name}
             linesOfCredit: data.LinesOfCredit || {}, // map object: {id: name}
-            titleLocationOptions: data.TitleLocationOptions || [] // array
+            titleLocationOptions: data.TitleLocationOptions || [], // array
+            paymentMethods: data.PaymentMethods || []
           };
         });
         return promise;

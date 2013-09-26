@@ -6,55 +6,64 @@
        prompt="Enter Receipt #, Stock #, VIN, Check #"
        filter-label="Filter List by Payment Method"
        filter-options="filterOptions"
-       active-criteria="searchCriteria"
-       on-search="search()"
-       on-clear="resetSearch()">
+       active-criteria="receipts.searchCriteria"
+       on-search="receipts.search()"
+       on-clear="receipts.resetSearch()">
     </div>
 
-    <section class="receipts-list" ng-switch="results.Receipts.length > 0">
+    <div ng-switch="receipts.results.length > 0 || receipts.loading">
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please try a new search.
       </p>
 
-      <ul class="unstyled" ng-switch-when="true">
-        <li class="table-list-head">
-          <div class="cell rec-num">Receipt #</div>
-          <div class="cell rec-status">Status</div>
-          <div class="cell rec-payDate">Payment Date</div>
-          <div class="cell rec-payInfo">Payment Description</div>
-          <div class="cell rec-amtApplied">Amount Applied</div>
-          <div class="cell rec-amtProvided">Amount Provided</div>
-          <div class="cell rec-view">Receipt</div>
-        </li>
+      <section class="receipts-list" ng-switch-when="true"
+               nxg-infinite-scroll="receipts.fetchNextResults()"
+               nxg-infinite-scroll-disabled="receipts.loading"
+               nxg-infinite-scroll-show-indicator="receipts.loading">
 
-        <li class="table-list-row" ng-repeat="receipt in results.Receipts">
-          <div class="cell rec-num"><p> {{receipt.TransactionNumber}} </p></div>
-          <div class="cell rec-status">
-            <p><span ng-show="receipt.IsNsf">NSF</span>
-            <span ng-show="!receipt.IsNsf">Processed</span></p>
-          </div>
+        <ul class="unstyled">
+          <li class="table-list-head">
+            <div class="cell rec-num">Receipt #</div>
+            <div class="cell rec-status">Status</div>
+            <div class="cell rec-payDate">Payment Date</div>
+            <div class="cell rec-payInfo">Payment Description</div>
+            <div class="cell rec-amtApplied">Amount Applied</div>
+            <div class="cell rec-amtProvided">Amount Provided</div>
+            <div class="cell rec-view">Receipt</div>
+          </li>
 
-          <div class="cell rec-payDate">
-            <p>{{receipt.CreateDate * 1000 | date}}</p>
-          </div>
+          <li class="table-list-row" ng-repeat="receipt in receipts.results">
+            <div class="cell rec-num"><p>{{ receipt.ReceiptNumber }}</p></div>
+            <div class="cell rec-status">
+              <p ng-switch="getReceiptStatus(receipt)">
+                <span ng-switch-when="nsf">Insufficient Funds</span>
+                <span ng-switch-when="void">Voided</span>
+                <span ng-switch-when="normal">Processed</span>
+              </p>
+            </div>
 
-          <div class="cell rec-payInfo">
-            <p><span class="sch-sub-label">Payment:</span> {{receipt.PaymentMethod}}<br/>
-            <span class="sch-sub-label">Check #:</span> {{receipt.CheckNumber}} </p>
-            <p>{{receipt.PayeeDescription}}</p>
-          </div>
-          <div class="cell rec-amtApplied">
-            <p> {{receipt.AmountApplied | currency}} </p>
-          </div>
-          <div class="cell rec-amtProvided">
-            <p> {{receipt.AmountProvided | currency}} </p>
-          </div>
-          <div class="cell rec-view">
-            <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
-            <a ng-href="/receipt/view/{{receipt.FinancialTransactionId}}" class="btn btn-small">View Receipt</a>
-          </div>
-        </li>
-      </ul>
-    </section>
+            <div class="cell rec-payDate">
+              <p>{{ receipt.CreateDate | moment }}</p>
+            </div>
+
+            <div class="cell rec-payInfo">
+              <p><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
+                <span class="sch-sub-label">Check #:</span> {{ receipt.CheckNumber }} </p>
+              <p>{{ receipt.PayeeDescription }}</p>
+            </div>
+            <div class="cell rec-amtApplied">
+              <p>{{ receipt.AmountApplied | currency }}</p>
+            </div>
+            <div class="cell rec-amtProvided">
+              <p>{{ receipt.AmountProvided | currency }}</p>
+            </div>
+            <div class="cell rec-view">
+              <a ng-href="{{ receipt.$receiptURL }}" target="_blank" class="btn btn-small">View Receipt</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
   </section>
 </section>

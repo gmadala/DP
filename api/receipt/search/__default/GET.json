@@ -2,22 +2,53 @@
   "Success": true,
   "Message": null,
   "Data": {
-      "ReceiptRowCount": 24535,
+      "ReceiptRowCount": 20,
       "Receipts": [
-            {
-            "FinancialTransactionId" : "string",
-            "TransactionNumber" : 1241,
-            "CheckNumber": "string",
-            "IsVoided": true,
-            "CreateDate": 1375263415,
-            "IsNsf": false,
-            "AmountApplied": 24553.35,
-            "AmountProvided": 43.43,
-            "TransactionTypeId": 12,
-            "PayeeDescription": "PayeeDescription",
-            "PaymentMethodId": 12,
-            "PaymentMethod": "PaymentMethod"
-            }
-        ]
+        {
+          "ReceiptNumber": "abc123",
+          "FinancialTransactionId" : "fn-123",
+          "TransactionNumber" : 1241,
+          "CheckNumber": "chk123",
+          "IsVoided": false,
+          "CreateDate": "2013-09-01",
+          "IsNsf": false,
+          "AmountApplied": 24553.35,
+          "AmountProvided": 43.43,
+          "TransactionTypeId": 12,
+          "PayeeDescription": "PayeeDescription",
+          "PaymentMethodId": 12,
+          "PaymentMethod": "PaymentMethod"
+        },
+        {
+          "ReceiptNumber": "def456",
+          "FinancialTransactionId" : "fn-345",
+          "TransactionNumber" : 1242,
+          "CheckNumber": "chk124",
+          "IsVoided": true,
+          "CreateDate": "2013-09-02",
+          "IsNsf": false,
+          "AmountApplied": 2553.35,
+          "AmountProvided": 243.43,
+          "TransactionTypeId": 12,
+          "PayeeDescription": "PayeeDescription2",
+          "PaymentMethodId": 12,
+          "PaymentMethod": "PaymentMethod2"
+        },
+        {
+          "ReceiptNumber": "ghi789",
+          "FinancialTransactionId" : "fn-678",
+          "TransactionNumber" : 1243,
+          "CheckNumber": "chk125",
+          "IsVoided": false,
+          "CreateDate": "2013-09-02",
+          "IsNsf": true,
+          "AmountApplied": 2953.35,
+          "AmountProvided": 943.43,
+          "TransactionTypeId": 12,
+          "PayeeDescription": "PayeeDescription3",
+          "PaymentMethodId": 12,
+          "PaymentMethod": "PaymentMethod3"
+        }
+      ]
     }
 }
