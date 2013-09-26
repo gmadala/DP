@@ -11,67 +11,74 @@
       on-clear="scheduledPayments.resetSearch()">
     </div>
 
-    <p class="text-error notice-box" ng-show="!canPayNow">
-      Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.<br/>
-      Note: No payment may be scheduled on an overdue loan, or a loan due today.
-    </p>
+    <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0">
 
-    <section class="schPayments-list"
-      nxg-infinite-scroll="scheduledPayments.loadMoreData()"
-      nxg-infinite-scroll-disabled="scheduledPayments.loading"
-      nxg-infinite-scroll-show-indicator="scheduledPayments.loading">
+      <p class="no-results" ng-switch-when="false">
+        Sorry, no results found. Please try a new search.
+      </p>
 
-      <ul class="unstyled">
-        <li class="table-list-head">
-          <div class="cell sch-more"></div>
-          <div class="cell sch-schDate">Scheduled On</div>
-          <div class="cell sch-desc">Description</div>
-          <div class="cell sch-status">Status</div>
-          <div class="cell sch-amount">Amount</div>
-        </li><!-- end .table-list-head -->
+      <section ng-switch-when="true"
+        nxg-infinite-scroll="scheduledPayments.loadMoreData()"
+        nxg-infinite-scroll-disabled="scheduledPayments.loading"
+        nxg-infinite-scroll-show-indicator="scheduledPayments.loading">
 
-        <li class="table-list-row" ng-repeat="pay in scheduledPayments.results">
-          <div class="main-info">
-            <div class="cell sch-more">
-              <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed">
-                <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
-              </button>
-            </div>
+        <p class="text-error notice-box" ng-show="!canPayNow">
+          Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.<br/>
+          Note: No payment may be scheduled on an overdue loan, or a loan due today.
+        </p>
 
-            <div class="cell sch-schDate">
-              <p> {{ pay.scheduledDate | moment }} </p>
-              <p><span class="sch-label">Scheduled By: </span> {{ pay.scheduledBy }} </p>
-            </div>
+        <ul class="unstyled">
+          <li class="table-list-head">
+            <div class="cell sch-more"></div>
+            <div class="cell sch-schDate">Scheduled On</div>
+            <div class="cell sch-desc">Description</div>
+            <div class="cell sch-status">Status</div>
+            <div class="cell sch-amount">Amount</div>
+          </li><!-- end .table-list-head -->
 
-            <div class="cell sch-desc">
-              <p><span class="sch-label">VIN: </span>{{ pay.vin }}<br/>
-              <span class="sch-label">Stock #: </span>{{ pay.stockNumber }}</p>
-              <p> {{ pay.description }} </p>
-            </div>
+          <li class="table-list-row" ng-repeat="pay in scheduledPayments.results">
+            <div class="main-info">
+              <div class="cell sch-more">
+                <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed">
+                  <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
+                </button>
+              </div>
 
-            <div class="cell sch-status">
-              <p><span class="sch-label"> {{ pay.status }} </span><br/>
-                <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
-                 {{ pay.statusDate | moment }}
-              </p>
-              <a class="btn btn-small" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
-            </div>
+              <div class="cell sch-schDate">
+                <p> {{ pay.scheduledDate | moment }} </p>
+                <p><span class="sch-label">Scheduled By: </span> {{ pay.scheduledBy }} </p>
+              </div>
 
-            <div class="cell sch-amount">
-              <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
-                {{ pay.paymentAmount | currency }} </p>
+              <div class="cell sch-desc">
+                <p><span class="sch-label">VIN: </span>{{ pay.vin }}<br/>
+                <span class="sch-label">Stock #: </span>{{ pay.stockNumber }}</p>
+                <p> {{ pay.description }} </p>
+              </div>
 
-              <button class="btn btn-small" ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay)" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
-              <button class="btn btn-small" ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">Cancel</button>
-            </div>
-          </div><!-- end .main-info -->
+              <div class="cell sch-status">
+                <p><span class="sch-label"> {{ pay.status }} </span><br/>
+                  <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
+                   {{ pay.statusDate | moment }}
+                </p>
+                <a class="btn btn-small" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
+              </div>
 
-          <div collapse="isCollapsed" class="vehicle-details">
-            <div vehicle-details collapse="isCollapsed" stock-number="pay.stockNumber"></div>
-          </div><!-- end vehicle-details div -->
-        </li>
-      </ul>
-    </section>
+              <div class="cell sch-amount">
+                <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
+                  {{ pay.paymentAmount | currency }} </p>
+
+                <button class="btn btn-small" ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay)" ng-click="scheduledPayments.payOff(pay)">Payoff Now</button>
+                <button class="btn btn-small" ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">Cancel</button>
+              </div>
+            </div><!-- end .main-info -->
+
+            <div collapse="isCollapsed" class="vehicle-details">
+              <div vehicle-details collapse="isCollapsed" stock-number="pay.stockNumber"></div>
+            </div><!-- end vehicle-details div -->
+          </li>
+        </ul>
+      </section>
+    </div>
   </section>
 
   <section class="span3 well" nxg-payment-summary></section>

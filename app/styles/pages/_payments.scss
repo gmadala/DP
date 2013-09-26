@@ -201,18 +201,24 @@
     }
   }
 
-  .subtotal {
-    font-size: 16px;
-    color: $brand-text;
-    margin: 10px 0 20px;
+  .pay-sum-footer {
+    .subtotal {
+      font-size: 16px;
+      color: $brand-text;
+      margin: 10px 0 20px;
+    }
 
     .value {
       @extend %float-r;
       @extend %heavy;
     }
 
-    & + button {
-      margin: 0 5px;
+    .btn-checkout {
+      .ie9 &:disabled {
+        color: $btn-disabled-text;
+        background-color: $btn-disabled-bkgd;
+      }
+      margin: 0 18px;
     }
   }
 }

@@ -11,8 +11,12 @@
        on-clear="resetSearch()">
     </div>
 
-    <section class="receipts-list">
-      <ul class="unstyled">
+    <section class="receipts-list" ng-switch="results.Receipts.length > 0">
+      <p class="no-results" ng-switch-when="false">
+        Sorry, no results found. Please try a new search.
+      </p>
+
+      <ul class="unstyled" ng-switch-when="true">
         <li class="table-list-head">
           <div class="cell rec-num">Receipt #</div>
           <div class="cell rec-status">Status</div>

@@ -11,12 +11,16 @@
       on-clear="resetSearch()">
     </div>
 
-    <section
+    <section ng-switch="data.results.length > 0"
       nxg-infinite-scroll="fetchNextResults()"
       nxg-infinite-scroll-disabled="data.loading"
       nxg-infinite-scroll-show-indicator="data.loading">
 
-      <ul class="unstyled floor-list">
+      <p class="no-results" ng-switch-when="false">
+        Sorry, no results found. Please try a new search.
+      </p>
+
+      <ul class="unstyled floor-list" ng-switch-when="true">
         <li class="table-list-head">
           <div class="cell fl-more"></div>
           <div class="cell fl-desc">Description</div>
