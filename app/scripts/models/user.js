@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
     // Private
     var info = null,
       statics = null,
-      showUserInitialzation = false,
+      showUserInitialization = false,
       paySellerOptions = [];
 
     var calculateCanPayBuyer = function() {
@@ -22,6 +22,10 @@ angular.module('nextgearWebApp')
         return api.hasAuthToken();
       },
 
+      initializationRequired: function() {
+        return showUserInitialization;
+      },
+
       authenticate: function(username, password) {
         var self = this;
         return api.request(
@@ -31,7 +35,7 @@ angular.module('nextgearWebApp')
           })
           .then(function(data) {
             api.setAuthToken(data.Token);
-            showUserInitialzation = data.ShowUserInitialzation;
+            showUserInitialization = data.ShowUserInitialization;
             // fetch the dealer info & statics every time there's a new session (user could have changed)
             return $q.all([self.refreshInfo(), self.refreshStatics()]);
           });

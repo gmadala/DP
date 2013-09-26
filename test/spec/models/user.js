@@ -4,12 +4,13 @@ describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend, api;
+  var user, httpBackend, api, $q;
 
-  beforeEach(inject(function ($httpBackend, User, _api_) {
+  beforeEach(inject(function ($httpBackend, _$q_, User, _api_) {
     user = User;
     api = _api_;
     httpBackend = $httpBackend;
+    $q = _$q_;
   }));
 
   describe('Authenticate method', function () {
@@ -55,6 +56,12 @@ describe('Model: User', function () {
       expect(user.isLoggedIn()).toBe(true);
     });
 
+    it('should update the initializationRequired function result', function () {
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.initializationRequired()).toBe(true);
+    });
+
     it('should set the auth header for all further requests', inject(function ($http) {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -65,13 +72,45 @@ describe('Model: User', function () {
       expect(httpBackend.flush).not.toThrow();
     }));
 
-    it('should also load statics and info upon success', function () {
+    it('should refresh statics and info upon auth success', function () {
+      spyOn(user, 'refreshInfo').andReturn($q.when({}));
+      spyOn(user, 'refreshStatics').andReturn($q.when({}));
       user.authenticate('test', 'testpw');
-      httpBackend.expectGET('/Dealer/Info');
-      httpBackend.expectGET('/Dealer/Static');
-      expect(httpBackend.flush).not.toThrow();
-      expect(user.getInfo()).not.toBe(null);
-      expect(user.getStatics()).not.toBe(null);
+      httpBackend.flush();
+      expect(user.refreshInfo).toHaveBeenCalled();
+      expect(user.refreshStatics).toHaveBeenCalled();
+    });
+
+  });
+
+  describe('isDealer method', function () {
+
+    it('should return null if dealer info is not yet loaded', function () {
+      expect(user.isDealer()).toBe(null);
+    });
+
+    it('should return true if dealer info DealerAuctionStatusForGA flag is Dealer', function () {
+      httpBackend.whenGET('/Dealer/Info').respond({
+        Success: true,
+        Data: {
+          DealerAuctionStatusForGA: 'Dealer'
+        }
+      });
+      user.refreshInfo();
+      httpBackend.flush();
+      expect(user.isDealer()).toBe(true);
+    });
+
+    it('should return false if dealer info DealerAuctionStatusForGA flag is anything else', function () {
+      httpBackend.whenGET('/Dealer/Info').respond({
+        Success: true,
+        Data: {
+          DealerAuctionStatusForGA: 'foo'
+        }
+      });
+      user.refreshInfo();
+      httpBackend.flush();
+      expect(user.isDealer()).toBe(false);
     });
 
   });
