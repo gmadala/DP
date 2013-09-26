@@ -11,7 +11,7 @@
       on-clear="scheduledPayments.resetSearch()">
     </div>
 
-    <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0">
+    <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
 
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please try a new search.

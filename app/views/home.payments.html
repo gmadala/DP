@@ -58,7 +58,7 @@
 
           <h3 class="boxed">Payments</h3>
 
-          <div class="payments" ng-switch="payments.results.length > 0">
+          <div class="payments" ng-switch="payments.results.length > 0 || payments.loading">
             <p class="no-results" ng-switch-when="false">
               Sorry, no results found. Please try a new search.
             </p>

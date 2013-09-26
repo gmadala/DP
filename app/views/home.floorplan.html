@@ -11,64 +11,65 @@
       on-clear="resetSearch()">
     </div>
 
-    <section ng-switch="data.results.length > 0"
-      nxg-infinite-scroll="fetchNextResults()"
-      nxg-infinite-scroll-disabled="data.loading"
-      nxg-infinite-scroll-show-indicator="data.loading">
-
+    <div ng-switch="data.results.length > 0 || data.loading">
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please try a new search.
       </p>
+      <section ng-switch-when="true"
+               nxg-infinite-scroll="fetchNextResults()"
+               nxg-infinite-scroll-disabled="data.loading"
+               nxg-infinite-scroll-show-indicator="data.loading">
 
-      <ul class="unstyled floor-list" ng-switch-when="true">
-        <li class="table-list-head">
-          <div class="cell fl-more"></div>
-          <div class="cell fl-desc">Description</div>
-          <div class="cell fl-vin">VIN</div>
-          <div class="cell fl-stock">Stock #</div>
-          <div class="cell fl-status">Status</div>
-          <div class="cell fl-purchaseDate">Purchased</div>
-          <div class="cell fl-floorDate">Floored</div>
-          <div class="cell fl-seller">Seller</div>
-          <div class="cell fl-lastPayDate">Last Payment</div>
-          <div class="cell fl-titleRelease">Title Release</div>
-          <div class="cell fl-title">Title</div>
-        </li><!-- end .table-list-head -->
+        <ul class="unstyled floor-list">
+          <li class="table-list-head">
+            <div class="cell fl-more"></div>
+            <div class="cell fl-desc">Description</div>
+            <div class="cell fl-vin">VIN</div>
+            <div class="cell fl-stock">Stock #</div>
+            <div class="cell fl-status">Status</div>
+            <div class="cell fl-purchaseDate">Purchased</div>
+            <div class="cell fl-floorDate">Floored</div>
+            <div class="cell fl-seller">Seller</div>
+            <div class="cell fl-lastPayDate">Last Payment</div>
+            <div class="cell fl-titleRelease">Title Release</div>
+            <div class="cell fl-title">Title</div>
+          </li><!-- end .table-list-head -->
 
-        <li class="table-list-row" ng-repeat="item in data.results">
-          <div class="main-info">
-            <div class="cell fl-more">
-              <button class="btn btn-more"
-                      ng-click="isCollapsed = !isCollapsed"
-                      class="more btn btn-mini">
-                <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
-              </button>
-            </div>
+          <li class="table-list-row" ng-repeat="item in data.results">
+            <div class="main-info">
+              <div class="cell fl-more">
+                <button class="btn btn-more"
+                        ng-click="isCollapsed = !isCollapsed"
+                        class="more btn btn-mini">
+                  <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
+                </button>
+              </div>
 
-            <div class="cell fl-desc"><p> {{ getVehicleDescription(item) }} </p></div>
-            <div class="cell fl-vin"><p> {{ item.UnitVin | shortenVIN }} </p></div>
-            <div class="cell fl-stock"><p> {{ item.StockNumber }} </p></div>
-            <div class="cell fl-status"><p> {{ item.FloorplanStatusName }} </p></div>
-            <div class="cell fl-purchaseDate"><p> {{ item.UnitPurchaseDate | moment }} </p></div>
-            <div class="cell fl-floorDate"><p> {{ item.FlooringDate | moment }} </p></div>
-            <div class="cell fl-seller"><p> {{ item.SellerName }} </p></div>
-            <div class="cell fl-lastPayDate"><p> {{ item.LastPaymentDate | moment }} </p></div>
-            <div class="cell fl-titleRelease"><p> {{ item.TitleReleaseDate | moment }} <br/>To {{ item.TitleReleaseLocation }}</p></div>
-            <div class="cell fl-title">
-              <a ng-show="item.TitleImageAvailable"
-                 ng-href="{{ item.$titleURL }}"
-                 target="_blank">
-                Title
-              </a>
-            </div>
-          </div><!-- end .main-info -->
+              <div class="cell fl-desc"><p> {{ getVehicleDescription(item) }} </p></div>
+              <div class="cell fl-vin"><p> {{ item.UnitVin | shortenVIN }} </p></div>
+              <div class="cell fl-stock"><p> {{ item.StockNumber }} </p></div>
+              <div class="cell fl-status"><p> {{ item.FloorplanStatusName }} </p></div>
+              <div class="cell fl-purchaseDate"><p> {{ item.UnitPurchaseDate | moment }} </p></div>
+              <div class="cell fl-floorDate"><p> {{ item.FlooringDate | moment }} </p></div>
+              <div class="cell fl-seller"><p> {{ item.SellerName }} </p></div>
+              <div class="cell fl-lastPayDate"><p> {{ item.LastPaymentDate | moment }} </p></div>
+              <div class="cell fl-titleRelease"><p> {{ item.TitleReleaseDate | moment }} <br/>To {{ item.TitleReleaseLocation }}</p></div>
+              <div class="cell fl-title">
+                <a ng-show="item.TitleImageAvailable"
+                   ng-href="{{ item.$titleURL }}"
+                   target="_blank">
+                  Title
+                </a>
+              </div>
+            </div><!-- end .main-info -->
 
-          <div collapse="isCollapsed" class="vehicle-details">
-            <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
-          </div><!-- end .vehicle-details div -->
+            <div collapse="isCollapsed" class="vehicle-details">
+              <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
+            </div><!-- end .vehicle-details div -->
 
-        </li><!-- end .table-list-row -->
-      </ul><!-- end .floor-list -->
-    </section>
+          </li><!-- end .table-list-row -->
+        </ul><!-- end .floor-list -->
+      </section>
+    </div>
   </section><!-- end .span12 -->
 </section><!-- end .row-fluid -->
