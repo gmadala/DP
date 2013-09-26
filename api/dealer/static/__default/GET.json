@@ -346,6 +346,32 @@
             "TitleInfoRequired": false,
             "DisplayOrder": 3
           }
+        ],
+        "PaymentMethods": [
+          {
+            "Id": 0,
+            "Name": "Auction Check"
+          },
+          {
+            "Id": 1,
+            "Name": "Certified Funds"
+          },
+          {
+            "Id": 2,
+            "Name": "Check"
+          },
+          {
+            "Id": 3,
+            "Name": "CPP Claim"
+          },
+          {
+            "Id": 4,
+            "Name": "Non Dealer Check"
+          },
+          {
+            "Id": 5,
+            "Name": "Proceeds"
+          }
         ]
     }
 }
