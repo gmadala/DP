@@ -7,11 +7,13 @@ describe('Service: Receipts', function () {
 
   // instantiate service
   var receipts,
-    httpBackend;
+    httpBackend,
+    urlParser;
 
-  beforeEach(inject(function ($httpBackend,_Receipts_) {
+  beforeEach(inject(function ($httpBackend,_Receipts_, URLParser) {
     httpBackend = $httpBackend;
     receipts = _Receipts_;
+    urlParser = URLParser;
   }));
 
   describe('search method', function () {
@@ -25,20 +27,8 @@ describe('Service: Receipts', function () {
       },
       searchResults = [],
       callParams,
-      extractParams = function(method, url) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
-        var match,
-          pl     = /\+/g,  // Regex for replacing addition symbol with a space
-          search = /([^&=]+)=?([^&]*)/g,
-          decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
-          query = url.substring(url.indexOf('?') + 1);
-
-        callParams = {};
-
-        while (match = search.exec(query)) {
-          callParams[decode(match[1])] = decode(match[2]);
-        }
-
+      respondFnc = function(method, url) {
+        callParams = urlParser.extractParams(url);
         return [200, {
           Success: true,
           Data: {
@@ -50,7 +40,7 @@ describe('Service: Receipts', function () {
 
     beforeEach(inject(function (Paginate) {
       paginate = Paginate;
-      httpBackend.whenGET(/\/receipt\/search.*/).respond(extractParams);
+      httpBackend.whenGET(/\/receipt\/search.*/).respond(respondFnc);
     }));
 
     it('should make a GET request to the expected endpoint', function () {

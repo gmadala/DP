@@ -5,11 +5,13 @@ describe("Model: Payments", function () {
   beforeEach(module('nextgearWebApp'));
 
   var payments,
-    httpBackend;
+    httpBackend,
+    urlParser;
 
-  beforeEach(inject(function ($httpBackend, Payments) {
+  beforeEach(inject(function ($httpBackend, Payments, URLParser) {
     payments = Payments;
     httpBackend = $httpBackend;
+    urlParser = URLParser;
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
@@ -68,20 +70,8 @@ describe("Model: Payments", function () {
       },
       searchResults = [],
       callParams,
-      extractParams = function(method, url) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
-        var match,
-          pl     = /\+/g,  // Regex for replacing addition symbol with a space
-          search = /([^&=]+)=?([^&]*)/g,
-          decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
-          query = url.substring(url.indexOf('?') + 1);
-
-        callParams = {};
-
-        while (match = search.exec(query)) {
-          callParams[decode(match[1])] = decode(match[2]);
-        }
-
+      respondFnc = function(method, url) {
+        callParams = urlParser.extractParams(url);
         return [200, {
           Success: true,
           Data: {
@@ -94,7 +84,7 @@ describe("Model: Payments", function () {
 
     beforeEach(inject(function (Paginate, User) {
       paginate = Paginate;
-      httpBackend.whenGET(/\/payment\/search.*/).respond(extractParams);
+      httpBackend.whenGET(/\/payment\/search.*/).respond(respondFnc);
       spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
     }));
 

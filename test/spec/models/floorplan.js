@@ -7,11 +7,13 @@ describe('Model: Floorplan', function () {
 
   // instantiate service
   var floorplan,
-    httpBackend;
+    httpBackend,
+    urlParser;
 
-  beforeEach(inject(function ($httpBackend, Floorplan) {
+  beforeEach(inject(function ($httpBackend, Floorplan, URLParser) {
     httpBackend = $httpBackend;
     floorplan = Floorplan;
+    urlParser = URLParser;
   }));
 
   describe('create method', function () {
@@ -136,20 +138,8 @@ describe('Model: Floorplan', function () {
       },
       searchResults = [],
       callParams,
-      extractParams = function(method, url) {
-        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
-        var match,
-          pl     = /\+/g,  // Regex for replacing addition symbol with a space
-          search = /([^&=]+)=?([^&]*)/g,
-          decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
-          query = url.substring(url.indexOf('?') + 1);
-
-        callParams = {};
-
-        while (match = search.exec(query)) {
-          callParams[decode(match[1])] = decode(match[2]);
-        }
-
+      respondFnc = function(method, url) {
+        callParams = urlParser.extractParams(url);
         return [200, {
           Success: true,
           Data: {
@@ -161,7 +151,7 @@ describe('Model: Floorplan', function () {
 
     beforeEach(inject(function (Paginate, User) {
       paginate = Paginate;
-      httpBackend.whenGET(/\/floorplan\/search.*/).respond(extractParams);
+      httpBackend.whenGET(/\/floorplan\/search.*/).respond(respondFnc);
       defaultCriteria.filter = floorplan.filterValues.ALL;
       spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
     }));
