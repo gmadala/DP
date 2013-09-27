@@ -174,14 +174,14 @@ describe('Service: api', function () {
       spyOn(user, 'isLoggedIn').andReturn(true);
       api.setAuthToken('SECRET');
       var url = api.contentLink('/foo/bar');
-      expect(url).toBe('http://example.com/api/foo/bar?token=SECRET');
+      expect(url).toBe('http://example.com/api/foo/bar?AuthToken=SECRET');
     });
 
     it('should return the expected URL when user is logged in, and any params are provided', function () {
       spyOn(user, 'isLoggedIn').andReturn(true);
       api.setAuthToken('SECRET');
       var url = api.contentLink('/foo/bar', {param1: 'value1'});
-      expect(url).toBe('http://example.com/api/foo/bar?param1=value1&token=SECRET');
+      expect(url).toBe('http://example.com/api/foo/bar?param1=value1&AuthToken=SECRET');
     });
   });
 

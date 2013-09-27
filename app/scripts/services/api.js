@@ -87,7 +87,7 @@ angular.module('nextgearWebApp')
         });
 
         if (authToken) {
-          queryParts.push('token=' + authToken);
+          queryParts.push('AuthToken=' + authToken);
         }
 
         if (queryParts.length > 0) {
