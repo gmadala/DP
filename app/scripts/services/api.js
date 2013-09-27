@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($q, $http, $filter, nxgConfig) {
+  .factory('api', function($q, $http, $filter, nxgConfig, activity) {
     var authToken = null;
 
     return {
@@ -17,6 +17,7 @@ angular.module('nextgearWebApp')
         var deferred = $q.defer(),
 
           success = function(response) {
+            activity.remove(url);
             if (angular.isDefined(response.data) && angular.isDefined(response.data.Success)) {
               if (response.data.Success) {
                 deferred.resolve(response.data.Data);
@@ -31,6 +32,7 @@ angular.module('nextgearWebApp')
             }
           },
           failure = function(/*error*/) {
+            activity.remove(url);
             // retry or something?
             //console.error('Network failure', error);
             deferred.reject();
@@ -42,6 +44,7 @@ angular.module('nextgearWebApp')
           };
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
 
+        activity.add(url);
         $http(httpConfig).then(success, failure);
 
         return deferred.promise;
