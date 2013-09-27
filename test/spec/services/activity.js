@@ -15,19 +15,19 @@ describe('Service: activity', function () {
     expect(activity.indicators.arePresent()).toBe(false);
   });
 
-  it('should add an indicator for new activities by default', function () {
+  it('should report indicators are present when an activity has been added', function () {
     activity.add('foo');
     expect(activity.indicators.arePresent()).toBe(true);
     activity.remove('foo');
   });
 
-  it('should remove the indicator when the activity is removed', function () {
+  it('should report indicators are no longer present when the activity has been removed', function () {
     activity.add('foo');
     activity.remove('foo');
     expect(activity.indicators.arePresent()).toBe(false);
   });
 
-  it('should correctly track indicators as multiple activities are added and removed in arbitrary order', function () {
+  it('should correctly report indicator presence as multiple activities are added and removed', function () {
     activity.add('foo');
     activity.add('bar');
     expect(activity.indicators.arePresent()).toBe(true);
@@ -40,57 +40,15 @@ describe('Service: activity', function () {
     expect(activity.indicators.arePresent()).toBe(false);
   });
 
-  it('should allow new indicators to be suppressed individually', function () {
-    activity.add('foo', false);
-    expect(activity.indicators.arePresent()).toBe(false);
-    activity.remove('foo');
-  });
-
-  it('should allow new indicators to be suppressed globally', function () {
-    activity.indicators.off();
+  it('should allow indicators to be suppressed and re-enabled globally', function () {
     activity.add('foo');
-    activity.add('bar');
+    activity.indicators.suppress();
     expect(activity.indicators.arePresent()).toBe(false);
+
+    activity.indicators.allow();
+    expect(activity.indicators.arePresent()).toBe(true);
+
     activity.remove('foo');
-    activity.remove('bar');
-    activity.indicators.on();
-    expect(activity.indicators.arePresent()).toBe(false);
-  });
-
-  it('should correctly track indicators as activities are added with and without them in arbitrary order', function () {
-    activity.add('noIndicatorDirect', false);
-    activity.add('indicator1');
-
-    activity.indicators.off();
-    activity.add('noIndicatorGlobal');
-    expect(activity.indicators.arePresent()).toBe(true);
-    activity.indicators.on();
-
-    activity.add('indicator2');
-    expect(activity.indicators.arePresent()).toBe(true);
-
-    activity.remove('indicator2');
-    expect(activity.indicators.arePresent()).toBe(true);
-
-    activity.remove('indicator1');
-    expect(activity.indicators.arePresent()).toBe(false);
-
-    activity.remove('noIndicatorDirect');
-    expect(activity.indicators.arePresent()).toBe(false);
-
-    activity.add('newIndicator');
-    expect(activity.indicators.arePresent()).toBe(true);
-
-    activity.remove('newIndicator');
-    expect(activity.indicators.arePresent()).toBe(false);
-
-    activity.remove('noIndicatorGlobal');
-    expect(activity.indicators.arePresent()).toBe(false);
-
-    activity.add('newIndicator');
-    expect(activity.indicators.arePresent()).toBe(true);
-
-    activity.remove('newIndicator');
     expect(activity.indicators.arePresent()).toBe(false);
   });
 
@@ -98,30 +56,27 @@ describe('Service: activity', function () {
     activity.add('foo');
     activity.remove('foo');
 
-    activity.add('foo', false);
-    expect(activity.indicators.arePresent()).toBe(false);
-    activity.remove('foo');
-
     activity.add('foo');
     expect(activity.indicators.arePresent()).toBe(true);
+
     activity.remove('foo');
     expect(activity.indicators.arePresent()).toBe(false);
   });
 
-  it('should replace the activity and update indicators to match if an existing id is used', function () {
+  it('should only count the activity once if the same id is used while still active', function () {
     activity.add('foo');
-    activity.add('foo', false);
-    expect(activity.indicators.arePresent()).toBe(false);
-
     activity.add('foo');
     expect(activity.indicators.arePresent()).toBe(true);
 
     activity.remove('foo');
     expect(activity.indicators.arePresent()).toBe(false);
+  });
 
-    activity.add('foo');
+  it('should gracefully handle removal of a non-existent activity id', function () {
+    activity.remove('whee');
     activity.add('foo');
     expect(activity.indicators.arePresent()).toBe(true);
+
     activity.remove('foo');
     expect(activity.indicators.arePresent()).toBe(false);
   });

@@ -21,7 +21,7 @@
  * Disables some overly eager scroll handling logic that could cause 2 pages to be loaded at a time.
  */
 angular.module('nextgearWebApp')
-  .directive('nxgInfiniteScroll', function($rootScope, $timeout, $window) {
+  .directive('nxgInfiniteScroll', function($rootScope, $timeout, $window, activity) {
 
       var windowShouldScroll = function(window, elem, scrollDistance) {
         var elementBottom, remaining, windowBottom;
@@ -54,8 +54,13 @@ angular.module('nextgearWebApp')
           elem.append(indicator);
 
           if (attrs.nxgInfiniteScrollShowIndicator !== null) {
-            scope.$watch(attrs.nxgInfiniteScrollShowIndicator, function(value) {
-              indicator.css('display', value ? 'block' : 'none');
+            scope.$watch(attrs.nxgInfiniteScrollShowIndicator, function(show) {
+              indicator.css('display', show ? 'block' : 'none');
+              if (show) {
+                activity.indicators.suppress();
+              } else {
+                activity.indicators.allow();
+              }
             });
           }
 

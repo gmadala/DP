@@ -5,39 +5,32 @@ angular.module('nextgearWebApp')
     // Private
 
     var activityMap = {},
-      indicatorCount = 0,
-      indicatorsOn = true;
+      activityCount = 0,
+      indicatorsAllowed = true;
 
     // Public API
     return {
-      add: function (id, indicator) {
+      add: function (id) {
         var oldActivity = activityMap[id];
-        indicator = indicatorsOn && (!angular.isDefined(indicator) || indicator === true);
-        activityMap[id] = {
-          indicator: indicator
-        };
-        if (indicator && (!oldActivity || !oldActivity.indicator)) {
-          indicatorCount++;
-        } else if (!indicator && oldActivity && oldActivity.indicator) {
-          indicatorCount--;
-        }
+        if (!oldActivity) { activityCount++; }
+        activityMap[id] = true;
       },
       remove: function (id) {
         var activity = activityMap[id];
-        if (activity && activity.indicator && indicatorCount > 0) {
-          indicatorCount--;
+        if (activity && activityCount > 0) {
+          activityCount--;
         }
         delete activityMap[id];
       },
       indicators: {
-        off: function () {
-          indicatorsOn = false;
+        suppress: function () {
+          indicatorsAllowed = false;
         },
-        on: function () {
-          indicatorsOn = true;
+        allow: function () {
+          indicatorsAllowed = true;
         },
         arePresent: function () {
-          return indicatorCount > 0;
+          return indicatorsAllowed && activityCount > 0;
         }
       }
     };
