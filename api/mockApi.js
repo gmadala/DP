@@ -57,21 +57,27 @@ module.exports = {
   mockApi: function(apiFolder) {
     var dynamicQuery = /\{\w+\}/,
       defaultDirectory = '__default';
-      
+
     function serveContent(file, res) {
       console.log('mockApi is serving a file, path=', file);
       fs.readFile(file, function(err, json) {
         res.end(json);
       });
-    } 
-    
+    }
+
     function serveDefault(folder, req, res) {
       while (!fs.existsSync(folder + '/' + defaultDirectory)) {
         folder = folder.substring(0, folder.lastIndexOf('/'));
+        if (folder.length === 0) {
+          // File does not exist
+          res.statusCode = 404;
+          res.end();
+          break;
+        }
       }
       serveContent(folder + '/' + defaultDirectory + '/' + req.method + '.json', res);
     }
-  
+
     function findFolder(folder, done, failure) {
       folder = folder.lastIndexOf('/') === folder.length - 1 ? folder.substring(0, folder.length - 1) : folder;
       if (fs.existsSync(folder)) {
@@ -80,13 +86,13 @@ module.exports = {
       else {
         // If the file does not exist directly on the file system, automatically use default data
         // unless a __default directory exists at any point
-        
+
         // Backtrace to find the base folder
-        var baseFolder, 
+        var baseFolder,
           level = 0,
           f = folder,
           keepGoing = true;
-          
+
         while (keepGoing && f.length !== 0) {
           // Note: we don't necessarily want to stop when we found a file that exists
           // because if the full path does not exist, we go down the defaults or {} tree
@@ -111,15 +117,15 @@ module.exports = {
             level++;
           }
         }
-        
+
         // We cannot find a base path for this url, 404
         if (f.length === 0) {
           failure();
           return;
         }
-        
+
         baseFolder = f;
-        
+
         // Go {level} deep to find the right default to serve
         for (var i = 0; i < level; i++) {
           var files = fs.readdirSync(baseFolder);
@@ -130,15 +136,15 @@ module.exports = {
             }
           }
         }
-        
-        done(baseFolder); 
+
+        done(baseFolder);
       }
     }
-  
+
     return function(req, res/*,next*/) {
       var originalFolder = apiFolder + req.url,
           file;
-  
+
       findFolder(originalFolder, function success(foundFolder) {
         // If the result is not found at the top level, we're using default data
         //console.log('Found folder', foundFolder);
