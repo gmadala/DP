@@ -7,16 +7,35 @@
     <p for="city" class="text-error" ng-show="numberSearch.invalid.dealerOrAccessNumber">
         Please enter a dealer number or an auction access number.
     </p>
-    <div class="control-group">
+    <div class="control-group"
+         ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
+         ng-click="numberSearch.setDealerNumActive()">
       <label for="dealer-num" class="control-label">Nextgear Dealer Number</label>
       <div class="controls">
         <input type="text" id="dealer-num" ng-model="numberSearch.query.dealerNumber"></div>
+        <p for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
+            No results found, please enter a valid dealer number.
+        </p>
+        <p for="dealer-num" class="text-error" ng-show="numberSearch.invalid.dealerNumber">
+            Please enter a dealer number.
+        </p>
     </div>
     -OR-
-    <div class="control-group">
+    <div class="control-group"
+         ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
+         ng-click="numberSearch.setAuctionNumActive()">
       <label for="auction-access-num" class="control-label">Auction Access Number</label>
       <div class="controls">
-        <input type="text" id="auction-access-num" ng-model="numberSearch.query.auctionAccessNumber"></div>
+        <input type="text"
+               id="auction-access-num"
+               ng-model="numberSearch.query.auctionAccessNumber"
+               ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive}"></div>
+        <p for="dealer-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
+            No results found, please enter a valid auction access number.
+        </p>
+        <p for="dealer-num" class="text-error" ng-show="numberSearch.invalid.auctionAccessNumber">
+            Please enter an auction access number.
+        </p>
     </div>
     <button type="submit" ng-click="numberSearch.search()">Search</button>
   </div>
@@ -35,13 +54,13 @@
       </div>
     </div>
     -AND-
+    <p class="text-error" ng-show="nameSearch.invalid.CityOrState">
+      Please enter a city or select a state.
+    </p>
     <div class="control-group">
       <label for="city" class="control-label">City</label>
       <div class="controls">
         <input type="text" id="city" ng-model="nameSearch.query.city">
-        <p for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
-          Please enter a city or select a state.
-        </p>
       </div>
     </div>
     -OR-
@@ -51,9 +70,6 @@
         <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
           <option value=""></option>
         </select>
-        <p for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
-          Please enter a city or select a state.
-        </p>
       </div>
     </div>
     <button type="submit" ng-click="nameSearch.search()">Search</button>

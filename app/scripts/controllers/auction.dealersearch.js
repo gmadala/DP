@@ -2,48 +2,24 @@
 
 angular.module('nextgearWebApp')
   .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
-    var prv = {
-      searchByNumberHandler: function(business) {
-        if (business) {
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/creditQuery.html',
-            controller: 'CreditQueryCtrl',
-            resolve: {
-              options: function() {
-                return {
-                  businessId: business.BusinessId,
-                  businessNumber: business.BusinessName,
-                  auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
-                  businessName: business.BusinessName,
-                  address: business.Address,
-                  city: business.City,
-                  state: business.State,
-                  zipCode: business.PostalCode,
-                  autoQueryCredit: false
-                };
-              }
-            }
-          };
-          $dialog.dialog(dialogOptions).open();
-        }
-        else {
-          // TODO: Show a no results found message.
-        }
-      },
-      searchByNumberErrorHandler: function(reason) {
-        // TODO: Show error
-        console.error(reason);
-      }
-    };
-
     /*** Number Search ***/
     $scope.numberSearch = {
+      dealerNumInactive: false,
+      auctionNumInactive: false,
       query: {},
       invalid: {},
+      noresults: {},
+      setDealerNumActive: function() {
+        this.dealerNumInactive = false;
+        this.auctionNumInactive = true;
+      },
+      setAuctionNumActive: function() {
+        this.dealerNumInactive = true;
+        this.auctionNumInactive = false;
+      },
       search: function() {
+        this.noresults = {}; // reset the no result messages, we're doing a new search
+
         if (this.validate()) {
           var dealerNumber = this.query.dealerNumber,
             auctionAccessNumber = this.query.auctionAccessNumber;
@@ -63,14 +39,25 @@ angular.module('nextgearWebApp')
         }
       },
       validate: function() {
-        if (!this.query.dealerNumber && !this.query.auctionAccessNumber) {
+        var isValid = false,
+          invalidDealerNum = !(this.query.dealerNumber || this.dealerNumInactive),
+          invalidAuctionAccessNum = !(this.query.auctionAccessNumber || this.auctionNumInactive);
+
+        this.invalid = {};
+
+        if (invalidDealerNum && invalidAuctionAccessNum) {
           this.invalid.dealerOrAccessNumber = true;
-          return false; // invalid
+        }
+        else if (invalidDealerNum) {
+          this.invalid.dealerNumber = true;
+        }
+        else if (invalidAuctionAccessNum) {
+          this.invalid.auctionAccessNumber = true;
         }
         else {
-          this.invalid = {};
-          return true; // valid
+          isValid = true;
         }
+        return isValid;
       }
     };
 
@@ -119,7 +106,50 @@ angular.module('nextgearWebApp')
       }
     };
 
-// Get list of states
+    // Get list of states
     $scope.states = User.getStatics().states;
+
+    /*** Private ***/
+    var prv = {
+      searchByNumberHandler: function(business) {
+        if (business) {
+          var dialogOptions = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            templateUrl: 'views/modals/creditQuery.html',
+            controller: 'CreditQueryCtrl',
+            resolve: {
+              options: function() {
+                return {
+                  businessId: business.BusinessId,
+                  businessNumber: business.BusinessName,
+                  auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
+                  businessName: business.BusinessName,
+                  address: business.Address,
+                  city: business.City,
+                  state: business.State,
+                  zipCode: business.PostalCode,
+                  autoQueryCredit: false
+                };
+              }
+            }
+          };
+          $dialog.dialog(dialogOptions).open();
+        }
+        else {
+          if (this.auctionNumInactive) {
+            this.noresults.dealerNumber = true;
+          }
+          else {
+            this.noresults.auctionAccessNumber = true;
+          }
+        }
+      }.bind($scope.numberSearch),
+      searchByNumberErrorHandler: function(reason) {
+        // TODO: Show error
+        console.error(reason);
+      }
+    };
   })
 ;
