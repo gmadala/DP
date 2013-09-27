@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, $http, $rootScope, Base64) {
+  .factory('User', function($q, api, Base64) {
     // Private
     var info = null,
       statics = null,
