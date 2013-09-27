@@ -167,10 +167,17 @@
             </label>
 
             <div class="footer modal-footer">
-              <button class="btn btn-small btn-primary" ng-class="{'btn-primary': form.$valid}" type="submit" ng-click="submit()">
+              <button class="btn btn-small btn-primary"
+                      ng-disabled="submitInProgress"
+                      type="submit"
+                      ng-click="submit()">
                 Floor
               </button>
-              <button class="btn btn-small btn-secondary" ng-click="cancel()">Cancel</button>
+              <button class="btn btn-small btn-secondary"
+                      ng-disabled="submitInProgress"
+                      ng-click="cancel()">
+                Cancel
+              </button>
             </div>
           </div>
         </fieldset>

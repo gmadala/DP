@@ -147,14 +147,17 @@ angular.module('nextgearWebApp')
         throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
       }
 
+      $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (/*success*/) {
+          $scope.submitInProgress = false;
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',
             buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
           $dialog.messageBox(title, msg, buttons).open();
           $scope.reset();
         }, function (error) {
+          $scope.submitInProgress = false;
           $scope.submitError = error || 'Unable to submit your request. Please contact NextGear for assistance.';
         }
       );
