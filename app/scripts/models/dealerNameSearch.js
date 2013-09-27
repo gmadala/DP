@@ -5,7 +5,13 @@ angular.module('nextgearWebApp')
 
     var PAGE_SIZE = 15;
     var totalCount = 0;
-    var lastRequest = null;
+    var lastRequest = {
+      OrderBy: 'BusinessName',
+      OrderDirection: 'ASC',
+      PageNumber: 1,
+      PageSize: PAGE_SIZE,
+      BusinessName: ''
+    };
 
     /** PRIVATE METHODS **/
     var prv = {
@@ -42,14 +48,17 @@ angular.module('nextgearWebApp')
         }
         return prv.request(lastRequest);
       },
-      loadMore: function() {
+      loadMoreData: function() {
         if (lastRequest === null) {
           return this.search();
         }
-        else if (lastRequest.PageNumber * PAGE_SIZE < totalCount) {
+        else {
           lastRequest.PageNumber++;
           return prv.request(lastRequest);
         }
+      },
+      hasMoreData: function() {
+        return lastRequest.PageNumber * PAGE_SIZE < totalCount;
       }
     };
   });

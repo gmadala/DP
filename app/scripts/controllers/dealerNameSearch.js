@@ -20,11 +20,13 @@ angular.module('nextgearWebApp')
           }.bind(this));
       },
       loadMoreData: function() {
-        this.loading = true;
-        DealerNameSearch.loadMoreData().then(function(results) {
-          this.loading = false;
-          this.results = this.results.concat(results);
-        }.bind(this));
+        if (DealerNameSearch.hasMoreData()) {
+          this.loading = true;
+          DealerNameSearch.loadMoreData().then(function(results) {
+            this.loading = false;
+            this.results = this.results.concat(results);
+          }.bind(this));
+        }
       }
     };
 
