@@ -186,6 +186,15 @@ input[type="radio"]:checked + label::before {
   content: url('../img/radio-checked.gif');
 }
 
+input[type="radio"]:disabled {
+  & + label {
+    color: #ccc;
+  }
+  & + label::before {
+    @include opacity(40);
+  }
+}
+
 .form-title {
   @extend .subtitle;
   margin: 0 0 10px 0;
