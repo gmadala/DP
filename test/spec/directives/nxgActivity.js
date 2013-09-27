@@ -7,13 +7,15 @@ describe('Directive: nxgActivity', function () {
     scope,
     status,
     httpBackend,
-    http;
+    http,
+    timeout;
 
-  beforeEach(inject(function ($rootScope, $compile, $http, $httpBackend, _status_) {
+  beforeEach(inject(function ($rootScope, $compile, $http, $httpBackend, $timeout, _status_) {
     status = _status_;
     httpBackend = $httpBackend;
     http = $http;
     scope = $rootScope;
+    timeout = $timeout;
 
     element = angular.element('<div nxg-activity></div>');
     element = $compile(element)($rootScope);
@@ -24,10 +26,14 @@ describe('Directive: nxgActivity', function () {
     expect(element.css('display')).toBe('none');
   });
 
-  it('should display while there are in-progress http requests, and it has not been suppressed', function () {
+  it('should display after delay while there are in-progress http requests, and it has not been suppressed', function () {
     httpBackend.whenGET('/foo').respond('OK');
 
     http.get('/foo');
+    scope.$apply();
+    expect(element.css('display')).toBe('none');
+
+    timeout.flush();
     scope.$apply();
     expect(element.css('display')).not.toBe('none');
 
@@ -46,6 +52,7 @@ describe('Directive: nxgActivity', function () {
 
     status.show();
     scope.$apply();
+    timeout.flush();
     expect(element.css('display')).not.toBe('none');
 
     httpBackend.flush();
