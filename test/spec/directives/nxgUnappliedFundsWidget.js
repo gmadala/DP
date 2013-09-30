@@ -193,13 +193,6 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         expect(scope.submitInProgress).toBe(false);
       });
 
-      it('should expose any server error on the scope', function () {
-        scope.submit();
-        expect(scope.submitError).toBe(null);
-        flushPayoutRequestError('10876');
-        expect(scope.submitError).toBe('10876');
-      });
-
       it('should close the dialog with submitted data on success', function () {
         spyOn(dialogMock, 'close');
         scope.submit();

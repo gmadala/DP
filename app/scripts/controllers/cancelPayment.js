@@ -18,9 +18,8 @@ angular.module('nextgearWebApp')
             options.onCancel();
           }
           dialog.close(true);
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          $scope.submitError = error || 'Unable to cancel this payment. Please contact NextGear for assistance.';
         }
       );
     };

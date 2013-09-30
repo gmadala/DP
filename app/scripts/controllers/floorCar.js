@@ -156,9 +156,8 @@ angular.module('nextgearWebApp')
             buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
           $dialog.messageBox(title, msg, buttons).open();
           $scope.reset();
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          $scope.submitError = error || 'Unable to submit your request. Please contact NextGear for assistance.';
         }
       );
     };

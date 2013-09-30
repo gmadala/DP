@@ -391,13 +391,6 @@ describe('Controller: CheckoutCtrl', function () {
       };
     }));
 
-    it('should clear any existing submitError', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
-      scope.submitError = 'ludicrous speed not supported';
-      scope.submit();
-      expect(scope.submitError).toBe(null);
-    });
-
     it('should publish a snapshot of the form validation state', function () {
       scope.paymentForm.$valid = false;
       scope.paymentForm.bankAccount.$invalid = true;
@@ -541,13 +534,6 @@ describe('Controller: CheckoutCtrl', function () {
       expect(Payments.clearPaymentQueue).toHaveBeenCalled();
     });
 
-    it('should publish the error on the scope, on error', function () {
-      spyOn(Payments, 'checkout').andReturn($q.reject('error123'));
-      scope.reallySubmit(guard);
-      scope.$apply();
-      expect(scope.submitError).toBe('error123');
-    });
-
   });
 
   describe('validateBusinessHours function', function () {
@@ -572,14 +558,13 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.submitInProgress).toBe(false);
     });
 
-    it('should set submitInProgress back to false, publish the error, and resolve to false on error', function () {
+    it('should set submitInProgress back to false and resolve to false on error', function () {
       spyOn(Payments, 'canPayNow').andReturn($q.reject('oops'));
       scope.validateBusinessHours().then(function (result) {
         expect(result).toBe(false);
       });
       scope.$apply();
       expect(scope.submitInProgress).toBe(false);
-      expect(scope.submitError).toBe('oops');
     });
 
     it('should resolve to true if user can pay now (during business hours)', function () {
@@ -649,12 +634,11 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.submitInProgress).toBe(false);
     });
 
-    it('should set submitInProgress back to false and publish the error on error', function () {
+    it('should set submitInProgress back to false on error', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('no scheduling for you'));
       scope.handleAfterHoursViolation();
       scope.$apply();
       expect(scope.submitInProgress).toBe(false);
-      expect(scope.submitError).toBe('no scheduling for you');
     });
 
     it('should search for possible payments dates between tomorrow and some time out', function () {
@@ -668,13 +652,13 @@ describe('Controller: CheckoutCtrl', function () {
       expect(moment(endDate).diff(moment(), 'days') > 10).toBe(true);
     });
 
-    it('should stop and set submitError if no possible date was found', function () {
+    it('should stop and create an error message if no possible date was found', inject(function (messages) {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when([]));
       scope.handleAfterHoursViolation();
       scope.$apply();
-      expect(typeof scope.submitError).toBe('string');
       expect(dialog.dialog).not.toHaveBeenCalled();
-    });
+      expect(messages.list().length).toBe(1);
+    }));
 
     it('should remove all fees from the queue', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));

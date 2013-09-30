@@ -60,7 +60,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submit = function () {
-      $scope.submitError = null;
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
       if (!$scope.form.$valid) {
@@ -72,9 +71,8 @@ angular.module('nextgearWebApp')
         function (/*result*/) {
           $scope.submitInProgress = false;
           dialog.close($scope.selections);
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          $scope.submitError = error || 'Unable to request a payout at this time. Please contact NextGear for assistance.';
         }
       );
     };

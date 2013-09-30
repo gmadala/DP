@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, User, Payments, OptionDefaultHelper) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper) {
 
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
@@ -130,7 +130,6 @@ angular.module('nextgearWebApp')
     var defaultCheckoutError = 'Unable to complete checkout. Please contact NextGear for assistance.';
 
     $scope.submit = function () {
-      $scope.submitError = null;
 
       // validate user selections for payment
       $scope.validity = angular.copy($scope.paymentForm);
@@ -178,10 +177,8 @@ angular.module('nextgearWebApp')
           $dialog.dialog(dialogOptions).open().then(function () {
             Payments.clearPaymentQueue();
           });
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          console.log('checkout call failed');
-          $scope.submitError = error || defaultCheckoutError;
         }
       );
     };
@@ -205,10 +202,8 @@ angular.module('nextgearWebApp')
               return true;
             }
           }
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          console.log('unable to retrieve business hours');
-          $scope.submitError = error || defaultCheckoutError;
           return false;
         }
       );
@@ -224,8 +219,7 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
           if (!result.length) {
             // no possible payments dates in the next month were found; cannot check out
-            console.log('no suitable date found for scheduling after-hours payments');
-            $scope.submitError = defaultCheckoutError;
+            messages.add(defaultCheckoutError, 'no suitable dates in next month for scheduling after-hours payments');
             return;
           }
           var nextAvail = moment(result.sort()[0]).toDate(),
@@ -259,10 +253,8 @@ angular.module('nextgearWebApp')
             }
           };
           $dialog.dialog(dialogOptions).open();
-        }, function (error) {
+        }, function (/*error*/) {
           $scope.submitInProgress = false;
-          console.log('error loading potential dates for scheduling after-hours payments');
-          $scope.submitError = error || defaultCheckoutError;
         }
       );
     };

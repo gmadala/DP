@@ -94,20 +94,6 @@ describe('Controller: CancelPaymentCtrl', function () {
       expect(dialogMock.close).not.toHaveBeenCalled();
     });
 
-    it('should expose the error on the scope as submitError', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.reject('Error 1234'));
-      scope.handleYes();
-      scope.$apply();
-      expect(scope.submitError).toBe('Error 1234');
-    });
-
-    xit('should provide a default submitError if none is given', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.reject());
-      scope.handleYes();
-      scope.$apply();
-      expect(typeof scope.submitError).toBe('string');
-    });
-
   });
 
 });

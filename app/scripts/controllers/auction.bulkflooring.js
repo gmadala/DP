@@ -2,6 +2,8 @@
 
 angular.module('nextgearWebApp')
   .controller('AuctionBulkFlooringCtrl', function($scope, $dialog, protect, Floorplan) {
+    // TODO: Replace this controller with regular floor a car controller
+
     $scope.foo = '';
 
     $scope.openBusinessSearch = function() {
@@ -54,8 +56,8 @@ angular.module('nextgearWebApp')
             buttons = [{label: 'OK', cssClass: 'btn-primary'}];
           $dialog.messageBox(title, msg, buttons).open();
           $scope.reset();
-        }, function (error) {
-          $scope.submitError = error || 'Unable to submit your request. Please contact NextGear for assistance.';
+        }, function (/*error*/) {
+          return 'foo';
         }
       );
     };

@@ -354,7 +354,7 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.data.foo).not.toBeDefined();
     });
 
-    it('should publish the error message on error and leave the form as-is', function () {
+    it('should leave the form as-is on error', function () {
       scope.data.foo = 'bar';
       createResult = q.reject('problem123');
       spyOn(dialogMock, 'messageBox').andCallThrough();
@@ -362,7 +362,6 @@ describe('Controller: FloorCarCtrl', function () {
       scope.reallySubmit(protect);
       scope.$apply();
 
-      expect(scope.submitError).toBe('problem123');
       expect(dialogMock.messageBox).not.toHaveBeenCalled();
       expect(angular.equals(scope.data, scope.defaultData)).toBe(false);
     });
