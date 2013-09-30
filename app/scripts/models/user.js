@@ -5,7 +5,6 @@ angular.module('nextgearWebApp')
     // Private
     var info = null,
       statics = null,
-      showUserInitialization = false,
       paySellerOptions = [];
 
     var calculateCanPayBuyer = function() {
@@ -22,10 +21,6 @@ angular.module('nextgearWebApp')
         return api.hasAuthToken();
       },
 
-      initializationRequired: function() {
-        return showUserInitialization;
-      },
-
       authenticate: function(username, password) {
         var self = this;
         return api.request(
@@ -33,30 +28,34 @@ angular.module('nextgearWebApp')
           '/UserAccount/Authenticate', {}, {
             Authorization: 'CT ' + Base64.encode(username + ':' + password)
           })
-          .then(function(data) {
-            api.setAuthToken(data.Token);
-            showUserInitialization = data.ShowUserInitialization;
+          .then(function(authResult) {
+            api.setAuthToken(authResult.Token);
             // fetch the dealer info & statics every time there's a new session (user could have changed)
-            return $q.all([self.refreshInfo(), self.refreshStatics()]);
+            return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
+              function () {
+                return {
+                  showUserInit: authResult.ShowUserInitialization
+                };
+              }
+            );
           });
       },
 
       refreshStatics: function() {
-        var promise = api.request('GET', '/Dealer/Static');
-        promise.then(function(data) {
+        return api.request('GET', '/Dealer/Static').then(function(data) {
           statics = {
             // API translation layer -- add transformation logic here as needed
-            productTypes: data.ProductType || {},
-            colors: data.Colors || {}, // map object: {id: name}
-            states: data.States || {}, // map object: {id: name}
-            locations: data.Locations || {}, // map object: {id: name}
-            bankAccounts: data.BankAccounts || {}, // map object: {id: name}
-            linesOfCredit: data.LinesOfCredit || {}, // map object: {id: name}
-            titleLocationOptions: data.TitleLocationOptions || [], // array
+            productTypes: data.ProductType || [],
+            colors: data.Colors || [],
+            states: data.States || [],
+            locations: data.Locations || [],
+            bankAccounts: data.BankAccounts || [],
+            linesOfCredit: data.LinesOfCredit || [],
+            titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
+          return statics;
         });
-        return promise;
       },
 
       getStatics: function() {
@@ -66,6 +65,7 @@ angular.module('nextgearWebApp')
       refreshInfo: function() {
         return api.request('GET', '/Dealer/Info').then(function(data) {
           info = data;
+          return info;
         });
       },
 

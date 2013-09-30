@@ -13,7 +13,7 @@ describe('Model: User', function () {
     $q = _$q_;
   }));
 
-  describe('Authenticate method', function () {
+  describe('Authenticate + isLoggedIn method', function () {
 
     beforeEach(function () {
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
@@ -56,12 +56,6 @@ describe('Model: User', function () {
       expect(user.isLoggedIn()).toBe(true);
     });
 
-    it('should update the initializationRequired function result', function () {
-      user.authenticate('test', 'testpw');
-      httpBackend.flush();
-      expect(user.initializationRequired()).toBe(true);
-    });
-
     it('should set the auth header for all further requests', inject(function ($http) {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -79,6 +73,129 @@ describe('Model: User', function () {
       httpBackend.flush();
       expect(user.refreshInfo).toHaveBeenCalled();
       expect(user.refreshStatics).toHaveBeenCalled();
+    });
+
+    it('should return a promise for authentication metadata including ShowUserInitialization', function () {
+      var out = null;
+
+      user.authenticate('test', 'testpw').then(function (result) {
+        out = result;
+      });
+
+      httpBackend.flush();
+
+      expect(out).toBeDefined();
+      expect(out.showUserInit).toBe(true);
+    });
+
+  });
+
+  describe('refreshStatics + getStatics methods', function () {
+
+    var resultData;
+
+    beforeEach(function () {
+      resultData = {};
+      httpBackend.whenGET('/Dealer/Static').respond({
+        Success: true,
+        Data: resultData
+      });
+    });
+
+    it('should be null if not loaded', function () {
+      expect(user.getStatics()).toBe(null);
+    });
+
+    it('should call the expected endpoint', function () {
+      httpBackend.expectGET('/Dealer/Static');
+      user.refreshStatics();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for an object with the expected properties (defaulted if missing)', function () {
+      user.refreshStatics().then(function (result) {
+        expect(result).toBeDefined();
+        expect(angular.isArray(result.productTypes)).toBe(true);
+        expect(angular.isArray(result.colors)).toBe(true);
+        expect(angular.isArray(result.states)).toBe(true);
+        expect(angular.isArray(result.locations)).toBe(true);
+        expect(angular.isArray(result.bankAccounts)).toBe(true);
+        expect(angular.isArray(result.linesOfCredit)).toBe(true);
+        expect(angular.isArray(result.titleLocationOptions)).toBe(true);
+        expect(angular.isArray(result.paymentMethods)).toBe(true);
+      });
+      httpBackend.flush();
+    });
+
+    it('result should also be cached and available by get method', function () {
+      user.refreshStatics().then(function (result) {
+        expect(user.getStatics()).toBe(result);
+      });
+      httpBackend.flush();
+    });
+
+    it('should map properties from the API when present', function () {
+      angular.extend(resultData,  {
+        ProductType: [],
+        Colors: [],
+        States: [],
+        Locations: [],
+        BankAccounts: [],
+        LinesOfCredit: [],
+        TitleLocationOptions: [],
+        PaymentMethods: []
+      });
+
+      user.refreshStatics();
+      httpBackend.flush();
+      var statics = user.getStatics();
+
+      expect(statics.productTypes).toBe(resultData.ProductType);
+      expect(statics.colors).toBe(resultData.Colors);
+      expect(statics.states).toBe(resultData.States);
+      expect(statics.locations).toBe(resultData.Locations);
+      expect(statics.bankAccounts).toBe(resultData.BankAccounts);
+      expect(statics.linesOfCredit).toBe(resultData.LinesOfCredit);
+      expect(statics.titleLocationOptions).toBe(resultData.TitleLocationOptions);
+      expect(statics.paymentMethods).toBe(resultData.PaymentMethods);
+    });
+
+  });
+
+  describe('refreshInfo + getInfo methods', function () {
+
+    var resultData;
+
+    beforeEach(function () {
+      resultData = {};
+      httpBackend.whenGET('/Dealer/Info').respond({
+        Success: true,
+        Data: resultData
+      });
+    });
+
+    it('should be null if not loaded', function () {
+      expect(user.getInfo()).toBe(null);
+    });
+
+    it('should call the expected endpoint', function () {
+      httpBackend.expectGET('/Dealer/Info');
+      user.refreshInfo();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for the result data', function () {
+      user.refreshInfo().then(function (result) {
+        expect(result).toBe(resultData);
+      });
+      httpBackend.flush();
+    });
+
+    it('result should also be cached and available by get method', function () {
+      user.refreshInfo().then(function (result) {
+        expect(user.getInfo()).toBe(result);
+      });
+      httpBackend.flush();
     });
 
   });
