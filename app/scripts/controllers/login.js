@@ -23,7 +23,8 @@ angular.module('nextgearWebApp')
       User.authenticate($scope.credentials.username, $scope.credentials.password)
         .then(function(/*data*/) {
           $location.path('/home');
-        }, function(/*error*/) {
+        }, function(error) {
+          error.dismiss();
           $scope.showLoginError = true;
         });
     };

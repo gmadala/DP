@@ -1,0 +1,13 @@
+<h3 class="modal-header">{{ title }}</h3>
+
+<div class="modal-body" ng-switch="messages.length > 1">
+  <span ng-switch-when="false">{{ messages[0].text }}</span>
+  <ul ng-switch-when="true">
+    <li ng-repeat="msg in messages">{{ msg.text }}</li>
+  </ul>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-small btn-primary left-align"
+          ng-click="close()">OK</button>
+</div>

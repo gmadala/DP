@@ -36,10 +36,12 @@ describe('Service: api', function () {
 
     var httpBackend,
       successResponse,
-      config;
+      config,
+      messages;
 
-    beforeEach(inject(function ($httpBackend, nxgConfig) {
+    beforeEach(inject(function ($httpBackend, nxgConfig, _messages_) {
       config = nxgConfig;
+      messages = _messages_;
       httpBackend = $httpBackend;
       successResponse = {
         Success: true,
@@ -95,27 +97,29 @@ describe('Service: api', function () {
       expect(typeof result.then).toBe('function');
     });
 
-    it('should reject the promise with undefined upon HTTP error', function () {
+    it('should reject the promise with a newly added message service object upon HTTP error', function () {
       httpBackend.whenGET('/foo').respond(404, 'wrong URL');
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
-      expect(error).toHaveBeenCalledWith(undefined);
+      expect(messages.list().length).toBe(1);
+      expect(error).toHaveBeenCalledWith(messages.list()[0]);
       expect(success).not.toHaveBeenCalled();
     });
 
-    it('should reject the promise with undefined upon invalid response', function () {
+    it('should reject the promise with a newly added message service object upon invalid response', function () {
       httpBackend.whenGET('/foo').respond({foo: 'bar'});
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
-      expect(error).toHaveBeenCalledWith(undefined);
+      expect(messages.list().length).toBe(1);
+      expect(error).toHaveBeenCalledWith(messages.list()[0]);
       expect(success).not.toHaveBeenCalled();
     });
 
-    it('should reject the promise with the message value upon data error', function () {
+    it('should reject the promise with a msg service object containing API message value upon API error', function () {
       httpBackend.whenGET('/foo').respond({
         Success: false,
         Message: 'Error 321'
@@ -124,7 +128,9 @@ describe('Service: api', function () {
         error = jasmine.createSpy('error');
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
-      expect(error).toHaveBeenCalledWith('Error 321');
+      expect(messages.list().length).toBe(1);
+      expect(error).toHaveBeenCalledWith(messages.list()[0]);
+      expect(error.mostRecentCall.args[0].text).toBe('Error 321');
       expect(success).not.toHaveBeenCalled();
     });
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($q, $http, $filter, nxgConfig) {
+  .factory('api', function($q, $http, $filter, nxgConfig, messages) {
     var authToken = null;
 
     return {
@@ -18,28 +18,32 @@ angular.module('nextgearWebApp')
           method: method.toUpperCase(),
           url: nxgConfig.apiBase + url,
           headers: headers
-        };
+        },
+        defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
+        debug = httpConfig.method + ' ' + httpConfig.url + ': ';
+
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
 
         return $http(httpConfig).then(
           function (response) {
+            var error;
             if (response.data && angular.isDefined(response.data.Success)) {
               if (response.data.Success) {
                 return response.data.Data;
               }
               else {
-                return $q.reject(response.data.Message);
+                error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+                return $q.reject(error);
               }
             }
             else {
-              if (console && console.error) {
-                console.error('Invalid response:', response);
-              }
-              return $q.reject(); // Unknown error
+              error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
+              return $q.reject(error); // Unknown error
               //throw new Error('Invalid response'); // dev only
             }
-          }, function (/* low-level http or connection error */) {
-            return $q.reject(); // Treat as unknown error
+          }, function (error) {
+            error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
+            return $q.reject(error); // Treat as unknown error
           }
         );
       },
