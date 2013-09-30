@@ -31,11 +31,11 @@ angular.module('nextgearWebApp')
         queue = $scope.paymentQueue;
 
       angular.forEach(queue.fees, function (fee) {
-        total += fee.Balance;
+        total += fee.amount;
       });
 
       angular.forEach(queue.payments, function (payment) {
-        total += payment.$queuedAmount;
+        total += payment.amount;
       });
 
       return total;
