@@ -1,14 +1,17 @@
 .floorcar {
   .btn-primary {
+    @extend %float-r;
     margin-left: 1em;
-    float: right;
   }
 }
+
 .nxg-vin-match-info {
   padding-top: 1em;
+
   label {
     display: block;
   }
+
   span {
     display: block;
     margin: 0 0 1em 0;
@@ -17,6 +20,7 @@
     border: 1px solid #c8c8c8;
     background-color: #eee;
   }
+
   #outputStyle {
     width: 300px;
   }
@@ -24,8 +28,8 @@
 
 
 label {
+  @extend %small;
   line-height: 18px;
-  font-size: 12px;
   margin: 14px 0 0 0;
 
   &:first-child {
@@ -50,15 +54,18 @@ label {
     padding: 1em;
     margin: 1em 1em 0 1em;
     border: 1px solid #eaeaea;
+
     &.search-results {
       height: 400px;
       border-bottom: 1px solid #eaeaea;
       margin: -1px 1em 1em 1em;
     }
   }
+
   td {
     height: 50px;
   }
+
   .modal-footer {
     padding: 0;
   }

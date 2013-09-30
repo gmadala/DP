@@ -5,8 +5,7 @@
 }
 
 .login-head {
-  background-color: #eeeeee;
-
+  background-color: #eeeeee; // IE fallback
   @include gradient-row();
   border-bottom: 2px solid $white;
 
@@ -21,11 +20,11 @@
   & + .container-line::after {
     background-color: $brand-gradient-top; // IE fallback
     @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
+    @extend %full-width;
     content: '';
     position: fixed;
     top: 0;
     height: 100%;
-    width: 100%;
     z-index: -5;
   }
 }
@@ -36,13 +35,13 @@
   }
 
   label {
-    font-size: 14px;
+    font-size: $base-font-size;
     color: #666;
     margin-bottom: 2px;
   }
 
   input {
-    width: 100%;
+    @extend %full-width;
   }
 
   .modal-footer {
@@ -51,13 +50,13 @@
   }
 
   .forgot-link {
-    text-align: center;
+    @extend %center;
     margin: 10px auto;
   }
 
   .headline {
-    font-size: 18px;
-    font-weight: bold;
+    @extend %heavy;
+    font-size: $large-font-size;
     margin-bottom: 0;
   }
 
@@ -66,7 +65,7 @@
   }
 
   .login-help {
-    font-size: 12px;
+    @extend %small;
     line-height: 1.8;
     margin-bottom: 20px;
 
@@ -84,10 +83,10 @@
 
 .forgot {
   h3 {
+    @extend %center;
     color: $white;
     font-size: 22px;
     font-weight: normal;
-    text-align: center;
     margin: 30px auto 20px;
   }
 
@@ -115,7 +114,7 @@
   }
 
   .security-question {
-    font-size: 18px;
+    font-size: $large-font-size;
     color: $brand-text;
     margin: 0;
   }
@@ -127,6 +126,6 @@
 
 .instructions {
   font-size: 13px;
-  line-height: 1.2;
+  line-height: $base-line-height;
   margin-bottom: 20px;
 }

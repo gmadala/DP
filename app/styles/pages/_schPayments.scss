@@ -12,7 +12,7 @@
 
 .sch-sub-label {
   @extend %thin;
-  font-size: 12px;
+  @extend %small;
   text-transform: uppercase;
   font-variant: small-caps;
 }

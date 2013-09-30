@@ -3,8 +3,8 @@
 .notice {
   @extend %center;
   width: 75%;
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: $large-font-size;
+  line-height: $base-line-height;
   margin: 0 auto;
 
   &:before {
@@ -24,7 +24,7 @@
 .notice-box {
   color: #666;
   font-size: 11px;
-  line-height: 1.2;
+  line-height: $base-line-height;
   padding: 10px 15px;
   border: 1px solid #F1F1F1;
   margin: 0;
@@ -41,8 +41,8 @@
 
 .message {
   @extend %thin;
-  font-size: 12px;
-  line-height: 1.2;
+  @extend %small;
+  line-height: $base-line-height;
   padding: 5px 10px 10px;
   margin: 10px 0
 }

@@ -40,11 +40,11 @@
   }
 
   .count {
-    font-size: 18px;
+    font-size: $large-font-size;
   }
 
   .count-label {
-    font-size: 14px;
+    font-size: $base-font-size;
   }
 
   .chkout-label, .chkout-value {
@@ -57,7 +57,7 @@
   }
 
   .chkout-value {
-    font-size: 18px;
+    font-size: $large-font-size;
     color: $brand-text;
   }
 
@@ -66,7 +66,7 @@
   }
 
   .bank-account select {
-    width: 100%;
+    @extend %full-width;
   }
 
   .form-inline {
@@ -78,7 +78,7 @@
     margin-top: 10px;
 
     input {
-      width: 100%;
+      @extend %full-width;
       margin-bottom: 5px;
     }
   }
@@ -117,7 +117,7 @@
 
   .notice-box {
     @extend %thin;
-    font-size: 14px;
+    font-size: $base-font-size;
     padding: 8px 10px;
   }
 
@@ -145,5 +145,4 @@
       height: 60px;
     }
   }
-
 }

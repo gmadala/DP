@@ -1,20 +1,26 @@
 .auction-dashboard-summaries {
   margin-top: 7px;
+
   li {
     margin-bottom: 3px;
   }
+
   .well-out {
-    font-size: 12px;
+    @extend %small;
     height: 11em;
   }
-  .recent-disbursements table {
-    width: 100%;
-    td:last-child, td:nth-child(3) {
-      text-align: right;
-    }
-  }
+
   .recent-disbursements {
     position: relative;
+
+    table {
+      @extend %full-width;
+
+      td:last-child, td:nth-child(3) {
+        @extend %align-right;
+      }
+    }
+
     .btn {
       margin: 14px;
       position: absolute;
@@ -26,19 +32,23 @@
 
 .auction-dashboard-chart {
   position: relative;
+
   .nxg-fancy-radios {
     margin-bottom: 1em;
   }
+
   canvas {
     margin-top: 1.5em;
     margin-bottom: 1em;
   }
+
   .scale-description-y {
     @extend .scale-description;
     position: absolute;
     top: 108px;
     left: 18px;
   }
+
   .scale-description-x {
     @extend .scale-description;
     position: absolute;

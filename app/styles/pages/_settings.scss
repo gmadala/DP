@@ -10,7 +10,7 @@
 
 .settings-opts {
   @extend %full-width;
-  font-size: 12px;
+  @extend %small;
 
   label {
     @extend %thin;
@@ -50,7 +50,7 @@
     }
 
     .read-only {
-      line-height: 1.2;
+      line-height: $base-line-height;
       display: inline-block;
 
       & + .read-only {
@@ -59,7 +59,7 @@
     }
 
     .notification {
-      line-height: 1.2;
+      line-height: $base-line-height;
       overflow: hidden;
       margin-bottom: 10px;
     }
@@ -142,13 +142,13 @@
 .btn-help {
   @extend .btn-unstyle;
   @extend %heavy;
+  @extend %small;
   @include border-radius(50%);
   position: relative;
   width: 15px;
   height: 15px;
   background: $brand-text;
   color: $white;
-  font-size: 12px;
   line-height: 1;
   margin-left: 10px;
 }

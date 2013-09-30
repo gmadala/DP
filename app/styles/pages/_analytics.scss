@@ -1,9 +1,11 @@
 .modal.top-auctions-modal {
   width: 640px;
   margin-left: -320px;
+
   h4 {
     margin-left: 3px;
   }
+
   thead {
     font-size: 11px;
     color: #666666;
@@ -12,26 +14,39 @@
 }
 
 .nxg-analytics {
+    .scale-description-x {
+      @extend .scale-description;
+      @extend %full-width;
+      @extend %center;
+      position: absolute;
+      bottom: 0px;
+    }
+
   .details-toggle-btn {
     padding-left: 0;
     display: block;
   }
+
   .aging-vehicles {
     .well-out {
+      @extend %align-right;
       height: 30em;
-      text-align: right;
     }
+
     li {
       line-height: 32px;
     }
   }
+
   .average-turn-chart {
     .well-out {
       height: 30em;
     }
+
     span {
       position: relative;
       margin-left: 1em;
+
       &:after {
         content: ' ';
         position: absolute;
@@ -45,90 +60,92 @@
       }
     }
   }
+
   .well .well-out {
-    font-size: 12px;
+    @extend %small;
   }
+
   .business-summary {
     padding: 0;
     margin: 0;
+
     h5 {
       margin-top: 0;
     }
+
     li {
       font-size: 11px;
     }
+
     &.collapsed .well-out {
       height: 15em;
     }
+
     &.expanded .well-out{
       height: 24em;
     }
+
     table {
-      margin-top: 0.3em;
-      margin-bottom: 1em;
+      margin: 0.3em 0 1em;
       width: 100%;
       font-size: 11px;
+
       tr td:last-child {
-        text-align: right;
-        font-weight: bold;
+        @extend %align-right;
+        @extend %heavy;
       }
     }
   }
+
   .movers-container {
     position: relative;
+
     .well-out {
       height: 36em;
     }
+
     canvas {
-      margin-left: 10.5em;
-      margin-top: 1em;
+      margin: 1em 0 0 10.5em;
     }
+
     .movers-chart {
       position: relative;
     }
+
     table {
       position: absolute;
       top: 28px;
       left: -7px;
       height: 320px;
+
       tr td:first-child {
-        font-size: 18px;
-        text-align: right;
+        @extend %align-right;
+        font-size: $large-font-size;
         padding-right: 7px;
       }
     }
     .models {
+      font-size: 11px;
+      line-height: 14px;
+
       div {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 104px;
       }
-      font-size: 11px;
-      line-height: 14px;
+
       span:last-child {
-        font-weight: bold;
+        @extend %heavy;
       }
     }
-    .scale-description-x {
-      @extend .scale-description;
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      bottom: 0px;
-    }
   }
+
   .top-auctions-container {
     position: relative;
+
     .well-out {
       height: 36em;
-    }
-    .scale-description-x {
-      @extend .scale-description;
-      width: 100%;
-      text-align: center;
-      position: absolute;
-      bottom: 0px;
     }
   }
 }

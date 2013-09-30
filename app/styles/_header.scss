@@ -11,11 +11,11 @@ header > .row-fluid {
 }
 
 .nxg-settings-drop {
+  @extend %small;
   position: absolute;
   top: 0;
   right: 0;
   background-color: $white;
-  font-size: 12px;
   color: $brand-text;
   padding: 10px;
   border: 1px solid transparent;
@@ -84,7 +84,7 @@ header > .row-fluid {
   margin-top: 8px;
 
   a {
-    font-size: 12px;
+    @extend %small;
     color: $brand-text;
     border: 0;
 

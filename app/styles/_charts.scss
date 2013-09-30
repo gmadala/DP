@@ -1,7 +1,7 @@
 .scale-description {
+  @extend %heavy;
   font-size: 11px;
   line-height: 14px;
-  font-weight: bold;
 }
 
 .nxg-doughnut-chart-nested {
@@ -16,12 +16,12 @@
   bottom: 14px;
 }
 .nxg-doughnut-chart-label {
+  @extend %center;
   cursor: default;
   position: absolute;
-  text-align: center;
 }
 .nxg-doughnut-chart-label-primary {
-  font-size: 18px;
+  font-size: $large-font-size;
   color: #53BF42;
   margin: 0;
 }
@@ -51,7 +51,7 @@
 
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {
-  text-align: center;
+  @extend %center;
   padding: 1em;
   border: 1px solid #d5d5d5;
   position: relative;
@@ -59,8 +59,8 @@
     @include rotate(10deg);
   }
   table {
-    width: 100%;
-    text-align: left;
+    @extend %full-width;
+    @extend %left-align;
   }
   .nxg-doughnut-chart-label {
     top: 58px;

@@ -63,7 +63,7 @@
   }
 
   &.in-queue {
-    background-color: #878787;
+    background-color: #878787; // IE fallback
     @include background-image(linear-gradient(#878787, #555));
     color: $white;
   }
@@ -76,7 +76,7 @@
 
 .btn-close {
   @extend %center;
-  width: 100%;
+  @extend %full-width;
   clear: both;
   margin: 0 auto 10px;
 
@@ -91,7 +91,7 @@
 
 .detail-col {
   @extend %float-l;
-  width: 50%;
+  @extend %half-width;
   padding-bottom: 10px;
 
   & + .detail-col {
@@ -109,16 +109,16 @@
 }
 
 .detail-label, .detail-value {
-  vertical-align: top;
   font-size: 11px;
-  line-height: 1.2;
+  line-height: $base-line-height;
+  vertical-align: top;
   padding: 5px 10px 2px;
 }
 
 .detail-label {
   @extend %thin;
+  @extend %half-width;
   color: #666;
-  width: 50%;
 }
 
 .detail-value {
@@ -126,10 +126,10 @@
 }
 
 .curtail-sch {
-  font-size: 12px;
+  @extend %small;
 
   table {
-    width: 100%;
+    @extend %full-width;
     margin-bottom: 20px;
   }
 
@@ -138,7 +138,7 @@
     vertical-align: bottom;
     color: #666;
     font-weight: normal;
-    line-height: 1.2;
+    line-height: $base-line-height;
     padding: 5px 10px;
     border-bottom: 1px solid #D1D1D1;
   }
@@ -193,7 +193,7 @@
     }
 
     .btn-x {
-      float: right;
+      @extend %float-r;
 
       span {
         @extend .glyphicon-remove-circle;

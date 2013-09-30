@@ -15,7 +15,7 @@
 
    .cell {
     @extend %thin;
-    font-size: 12px;
+    @extend %small;
     text-transform: uppercase;
 
     & + .cell {
@@ -38,7 +38,7 @@
 
   .cell {
     font-size: 13px;
-    line-height: 1.2;
+    line-height: $base-line-height;
 
     & + .cell {
       border-left: 1px solid #DDD;
@@ -55,8 +55,8 @@
 
 .no-results {
   @extend %center;
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: $large-font-size;
+  line-height: $base-line-height;
   color: #AAA;
   margin: 20px 0;
 }

@@ -1,8 +1,8 @@
 select {
+  @extend %heavy;
   @include border-radius(0);
   background: $white;
   color: #17659D;
-  font-weight: bold;
   border: 1px solid #c8c8c8;
   height: 28px;
   width: 200px;
@@ -125,7 +125,7 @@ select, .nxg-date-field {
 }
 
 .form-error {
-  font-size: 12px;
+  @extend %small;
   color: $error-dark;
   margin: 5px 0;
 }
@@ -251,8 +251,8 @@ input[type="radio"]:disabled {
 #foo:checked,
 .nxg-fancy-radios input[type="radio"] + label::before {
   @extend .btn;
+  @extend %small;
   @include background(linear-gradient(#ffffff, #ddd));
-  font-size: 12px;
   text-transform: uppercase;
   padding-right: 14px;
   padding-left: 14px;

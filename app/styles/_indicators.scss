@@ -26,12 +26,12 @@
   z-index: 8000; /* make sure it's in front of modal backgrounds */
 
   p, p + div {
-    float: left;
+    @extend %float-l;
   }
 
   p {
+    @extend %small;
     color: #888;
-    font-size: 12px;
   }
 
   p + div {

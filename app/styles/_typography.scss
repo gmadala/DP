@@ -26,7 +26,7 @@ a {
   @extend %thin;
   background: #F1F1F1;
   font-size: 1em;
-  line-height: 1.2;
+  line-height: $base-line-height;
   color: #666;
   padding: 5px 10px;
   margin: 0;
@@ -35,7 +35,7 @@ a {
 .subtitle {
   @extend %heavy;
   color: #666;
-  font-size: 14px;
+  font-size: $base-font-size;
   line-height: 1;
   margin: 20px 0 10px 0;
 }

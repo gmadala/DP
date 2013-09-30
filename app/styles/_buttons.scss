@@ -35,7 +35,7 @@
 }
 
 .btn, .btn-mini {
-  font-size: 12px;
+  @extend %small;
 }
 
 .btn-secondary {
@@ -86,7 +86,7 @@
   @extend %align-left;
   position: relative;
   display: inline-block;
-  font-size: 17px;
+  font-size: $large-font-size;
   height: 28px;
   width: 90px;
   padding-top: 3px;
@@ -97,11 +97,11 @@
   }
 
   &:after {
+    @extend %small;
     position: absolute;
     top: 4px;
     right: 6px;
     width: 50px;
-    font-size: 12px;
     content: 'Look Up';
   }
 }

@@ -8,9 +8,9 @@
 }
 
 .modal {
-  border: 1px solid #adadad;
+  @extend %small;
   @include border-radius(0);
-  font-size: 12px;
+  border: 1px solid #adadad;
   form {
     margin: 0;
   }
@@ -25,6 +25,7 @@
   color: $brand-text;
   font-weight: normal;
   background-color: #eeeeee;
+
   h3 {
     @extend h4;
     line-height: 14px;
@@ -32,7 +33,7 @@
 }
 
 .modal-close {
-  font-size: 14px;
+  font-size: $base-font-size;
   position: absolute;
   top: 8px;
   right: 11px;
@@ -77,7 +78,7 @@
     color: white;
   }
   th {
-    text-align: left;
+    @extend %align-left;
     text-transform: uppercase;
     font-weight: normal;
   }
@@ -91,4 +92,3 @@
     border: none;
   }
 }
-
