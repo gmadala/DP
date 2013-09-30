@@ -67,43 +67,29 @@ label {
 .floor-confirmation-modal {
   width: 480px;
   margin-left: -240px;
-  .well {
-    color: #666666;
-    font-size: 14px;
-    line-height: 26px;
-    span {
-      margin-left: 6px;
+
+  .floor-confirmation {
+    border: 1px solid #D1D1D1;
+
+    .detail-col {
+      border: 0;
+
+      &:first-child {
+        border-right: 1px solid #D1D1D1;
+
+        .detail-label {
+          width: 30%;
+        }
+
+        .detail-value {
+          width: 70%;
+        }
+      }
     }
-    padding: 0;
-    margin: -1px;
-    border-bottom: 1px solid #c7c7c7;
-    border-left: 1px solid #c7c7c7;
-    border-right: 1px solid #c7c7c7;
-    &.adjacent:first-child {
-      border-left: 1px solid #c7c7c7;
-    }
-    &.adjacent:last-child {
-      border-right: 1px solid #c7c7c7;
-    }
-  }
-  table {
-    tr td:nth-child(2) {
-      color: #434343;
-      font-weight: bold;
-      height: 32px;
-    }
-    td {
-      font-size: 11px;
-      padding: 5px 0 5px 6px;
-      line-height: 11px;
-    }
-    padding: 1em;
-    background: #fff;
-    width: 100%;
   }
 }
 
 .floorcar-confirm-view-checklist {
-  text-align: center;
+  @extend %center;
   margin-bottom: 1em;
 }

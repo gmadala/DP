@@ -1,0 +1,149 @@
+// CHECKOUT
+
+.checkout-list {
+  .fees .main-info {
+    height: 70px;
+  }
+
+  .payments .main-info {
+    height: 100px;
+  }
+
+  .cell {
+    &.fee-desc { width: 30%; }
+    &.fee-due { width: 17%; }
+    &.fee-amt { width: 26%; }
+    &.pay-desc { width: 20%; }
+    &.pay-due { width: 12%; }
+    &.pay-vin { width: 12%;}
+    &.pay-stock { width: 10%; }
+    &.pay-status { width: 18%; }
+    &.pay-pymt { width: 28%; }
+  }
+
+  .payments .pay-pymt .btn-block {
+    margin: 10px 0 0;
+  }
+}
+
+.checkout-summary {
+  hr {
+    margin: 10px 0;
+  }
+
+  .well-out h4 {
+    margin-bottom: 10px;
+  }
+
+  .count, .count-label {
+    color: #434343;
+  }
+
+  .count {
+    font-size: 18px;
+  }
+
+  .count-label {
+    font-size: 14px;
+  }
+
+  .chkout-label, .chkout-value {
+    color: #666;
+    margin: 0;
+  }
+
+  .chkout-label {
+    @extend %small;
+  }
+
+  .chkout-value {
+    font-size: 18px;
+    color: $brand-text;
+  }
+
+  .btn-primary {
+    padding: 3px 5px;
+  }
+
+  .bank-account select {
+    width: 100%;
+  }
+
+  .form-inline {
+    .chkout-label {
+      margin-top: 10px;
+    }
+  }
+  .control-group {
+    margin-top: 10px;
+
+    input {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+// Modals
+.sch-checkout .detail-col,
+.confirm-checkout .detail-col {
+  @extend %full-width;
+  border: 1px solid #D1D1D1;
+  margin-bottom: 10px;
+}
+
+.sch-checkout {
+  .detail-label {
+    width: 30%;
+  }
+
+  .date-form {
+    overflow: hidden;
+  }
+
+  form .pay-now {
+    @extend %float-r;
+    padding: 18px 30px 0 0;
+  }
+}
+
+.confirm-checkout {
+  width: 550px;
+  margin-left: -275px;
+
+  section {
+    margin-bottom: 10px;
+  }
+
+  .notice-box {
+    @extend %thin;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .scheduled-payments, .submitted-payments {
+    .table-list-row {
+      height: 50px;
+    }
+  }
+
+  .cell {
+    &.sch-desc, &.pay-desc { width: 30%; }
+    &.sch-vin, &.pay-vin { width: 18%; }
+    &.sch-stock, &.pay-stock { width: 15%; }
+    &.sch-date, &.pay-date { width: 17%; }
+    &.sch-amt, &.pay-amt { width: 20%; }
+
+    &.fee-type { width: 25%; }
+    &.fee-desc { width: 35%; }
+    &.fee-date { width: 20%; }
+    &.fee-amt { width: 20%; }
+  }
+
+  .submitted-fees {
+    .table-list-row {
+      height: 60px;
+    }
+  }
+
+}

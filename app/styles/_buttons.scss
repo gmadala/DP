@@ -134,13 +134,17 @@
 }
 
 .btn-unstyle {
+  @extend %center;
   background: transparent;
   color: #999;
-  text-align: center;
   padding: 0;
   border: 0;
 }
 
 .btn-x {
   font-size: 16px;
+}
+
+.btn-inline {
+  margin-left: 10px;
 }

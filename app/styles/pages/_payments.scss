@@ -91,15 +91,20 @@
 
 .detail-col {
   @extend %float-l;
-  width: 33%;
-  height: 290px;
+  width: 50%;
+  padding-bottom: 10px;
 
   & + .detail-col {
     border-left: 1px solid #D1D1D1;
   }
 
-  &:first-child {
-    width: 34%;
+  .vehicle-info & {
+    width: 33%;
+    height: 290px;
+
+    &:first-child {
+      width: 34%;
+    }
   }
 }
 

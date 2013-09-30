@@ -1,53 +1,62 @@
 <div class="modal-header">
   <h3>Select the Schedule Date</h3>
 </div>
-<div class="modal-body">
-  <section>
-    <div class="row">
-      <header class="row-fluid">
-        <div class="span2 offset1">
-          <strong>VIN</strong> {{ payment.vin }}
-          <strong>Stock #</strong> {{ payment.stockNum }}
-        </div>
-        <div class="span4">
-          <strong>Description</strong> {{ payment.description }}
-        </div>
-      </header>
-      <span class="row-fluid">
-        <span class="span2 offset1">
-          <span>
-            <strong>Due</strong>
-          </span>
-          <p>{{ payment.dueDate | moment }}</p>
-        </span>
-        <span class="span3">
-          <span>
-            <strong>Payment</strong>
-          </span>
-          <p>{{ payment.amount }}</p>
-        </span>
-      </span>
+<div class="modal-body sch-checkout">
+  <section class="row-fluid">
+    <div class="detail-col">
+      <h4 class="well-head">Vehicle Information</h4>
+      <table>
+        <tr>
+          <td class="detail-label">VIN</td>
+          <td class="detail-value">{{ model.payment.vin }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Stock #</td>
+          <td class="detail-value">{{ model.payment.stockNum }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Description</td>
+          <td class="detail-value">{{ model.payment.description }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Due</td>
+          <td class="detail-value">{{ model.payment.dueDate | moment }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Payment</td>
+          <td class="detail-value">{{ model.payment.amount | currency }}</td>
+        </tr>
+      </table>
+    </div><!-- end .detail-col -->
+  </section><!-- end .sch-checkout -->
+
+  <form name="dateForm" class="date-form">
+    <div class="control-group half">
+      <label class="control-label" for="inputScheduleDate">Schedule For</label>
+      <div class="controls">
+        <input id="inputScheduleDate" name="inputScheduleDate"
+               nxg-date-field before-show-day="checkDate(date)"
+               ng-model="model.selectedDate"
+               required nxg-requires="checkDate(model.selectedDate)" />
+      </div>
     </div>
-  </section>
-  <form name="dateForm">
-    <label for="inputScheduleDate">Schedule For</label>
-    <input id="inputScheduleDate" name="inputScheduleDate"
-           nxg-date-field before-show-day="checkDate(date)"
-           ng-model="model.selectedDate"
-           required nxg-requires="checkDate(model.selectedDate)" />
+    <div class="control-group half pay-now">
+      or <button ng-click="removeSchedule()" class="btn btn-primary btn-inline" ng-disabled="!model.canPayNow">Pay Now</button>
+    </div>
+  </form><!-- end .date-form -->
+
+  <div class="label-container">
     <label for="inputScheduleDate" class="text-error"
-           ng-show="validity.inputScheduleDate.$error.required">
-      Please select a schedule date
+             ng-show="validity.inputScheduleDate.$error.required">
+        Please select a schedule date
     </label>
     <label for="inputScheduleDate" class="text-error"
            ng-show="validity.inputScheduleDate.$error.nxgRequires">
-      Please select a valid banking date no earlier than tomorrow and no later than the payment due date
+        Please select a valid banking date no earlier than tomorrow and no later than the payment due date
     </label>
-  </form>
-  <div>
-    or <button ng-click="removeSchedule()" class="btn btn-primary" ng-disabled="!model.canPayNow">Pay Now</button>
   </div>
 </div>
+
 <div class="modal-footer">
   <button ng-click="commit()" class="btn btn-primary">OK</button>
   <button ng-click="close()" class="btn btn-primary">Cancel</button>

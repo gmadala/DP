@@ -1,187 +1,191 @@
-<h2>Checkout</h2>
-<div class="alert alert-error" ng-show="!!submitError">{{ submitError }}</div>
 <section class="row-fluid">
-
-  <div class="pay-list" ng-switch="paymentQueue.contents.isEmpty()">
-
-    <section class="span9" ng-switch-when="true">
-      You have no payments selected for checkout. Please visit the
-      <a href="#/home/payments">Payments list</a> to select some.
-    </section>
-
-    <section class="span9" ng-switch-when="false">
-      <h3>Payments</h3>
-      <div>
-        If you would like to schedule any of the payments, click the Schedule Payment button to select a date.
+  <section class="span9">
+    <div class="well">
+      <h4>Payments Checkout</h4>
+      <div class="well-out">
+        <p>If you would like to schedule any of the payments, click the Schedule Payment Button to select date and payment account (if you have multiple accounts).</p>
       </div>
+    </div><!-- end .well -->
 
-      <ul class="unstyled">
-        <li ng-repeat="fee in paymentQueue.contents.fees">
-          <header class="row-fluid">
-            <div class="span2"> <strong>Account Fee</strong>
-            </div>
-            <div class="span3"> <strong>Fee Type</strong>
-              {{ fee.type }}
-            </div>
-            <div class="span7">
-              <strong>Description</strong>
-              <span>{{ fee.description }}</span>
-            </div>
-          </header>
-          <div class="row-fluid">
-            <div class="span8">
-              <span class="span6">
-                  <span>
-                      <strong>Due</strong>
-                  </span>
-                  <p>{{ fee.dueDate | moment }}</p>
-              </span>
-              <span class="span6">
-                  <strong>Fee Amount</strong>
-                  <p>{{ fee.amount | currency }}</p>
-              </span>
-              <span class="span12">Status: Unavailable to Schedule</span>
-            </div>
-            <div class="span4 pull-right">
-              <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
-                Remove Fee
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="alert alert-error" ng-show="!!submitError">
+      {{ submitError }}
+    </div>
 
-      <ul class="unstyled payments">
-        <li ng-repeat="payment in paymentQueue.contents.payments">
-          <header class="row-fluid">
-            <div class="span2">
-              <strong>VIN</strong>
-              {{ payment.vin }}
-            </div>
-            <div class="span3">
-              {{ payment.description }}
-              <strong>Stock #</strong>
-              {{ payment.stockNum }}
-            </div>
-          </header>
-          <div class="row-fluid">
-            <div class="span8">
-              <span class="span3">
-                  <span>
-                      <strong>Due</strong>
-                  </span>
-                  <p>{{ payment.dueDate | moment }}</p>
-              </span>
-              <span class="span2">
-                  <strong>{{ payment.isPayoff && 'Payoff' || 'Payment' }}</strong>
-                  <p>{{ payment.amount | currency }}</p>
-              </span>
-              <span class="span12">Status:
-                <span ng-show="!paymentQueue.canSchedule(payment)">
-                  Unavailable to Schedule
-                </span>
-                <span ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">
-                  Available to Schedule
-                </span>
-                <span ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">
-                  Scheduled for {{ payment.scheduleDate | moment }}
-                </span>
-              </span>
-            </div>
-            <div class="span4 pull-right">
-              <button class="btn btn-mini btn-block"
-                      ng-click="paymentQueue.removePayment(payment.floorplanId)">
-                Remove Payment
-              </button>
-              <button class="btn btn-mini btn-block"
-                      ng-click="paymentQueue.schedule(payment)"
-                      ng-show="paymentQueue.canSchedule(payment)"
-                      ng-disabled="payment.scheduleLoading">
-                {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
-              </button>
-              <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-  </div>
+    <div class="checkout-list" ng-switch="paymentQueue.contents.isEmpty()">
+      <!-- When there are no payments or fees -->
+      <p class="notice-box" ng-switch-when="true">
+        You have no payments selected for checkout. Please visit the
+        <a href="#/home/payments">Payments list</a> to select some.
+      </p>
 
-    <form class="span3 pay-summary" name="paymentForm">
-        <div>
-            <h3>Payment Summary</h3>
-            <p>
-                Review the Summary and submit your payments and scheduled payments.
-            </p>
-        </div>
+      <!-- When you have payments or fees in your cart -->
+      <section ng-switch-when="false">
+        <h3 class="boxed">Fees</h3>
 
-        <div class="today-items">
-            <h4>{{ paymentQueue.sum.todayCount() }} Payment(s) for Today</h4>
-            <p>Payment Total {{ paymentQueue.sum.todayTotal() | currency }}</p>
+        <!-- Fees List -->
+        <ul class="unstyled fees">
+          <li class="table-list-head">
+            <div class="cell fee-type">Fee Type</div>
+            <div class="cell fee-desc">Description</div>
+            <div class="cell fee-due">Date Due</div>
+            <div class="cell fee-amt">Fee Amount</div>
+          </li>
 
-            <div class="unapplied-funds-section" ng-show="unappliedFunds.available > 0">
-              <p>Available Unapplied Funds {{ unappliedFunds.available | currency }}</p>
-              <p>Apply funds to payment?</p>
-              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
-                     ng-value="false" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0">
-              <label for="unappliedNo">No</label>
-              <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
-                     ng-value="true" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0">
-              <label for="unappliedYes">Yes</label>
-              <div ng-show="unappliedFunds.useFunds">
-                  <p>
-                    <label for="unappliedAmt">Unapplied Funds to Use</label>
-                    <input id="unappliedAmt" name="unappliedAmt" type="text"
-                           placeholder="$0.00"
-                           ng-model="unappliedFunds.useAmount"
-                           nxg-min="unappliedFunds.min()"
-                           nxg-max="unappliedFunds.max()"
-                           ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
-                           ng-required="unappliedFunds.useFunds">
-                  </p>
-                  <p class="text-error" ng-show="validity.unappliedAmt.$error.required">
-                    Please enter the amount of unapplied funds to use.
-                  </p>
-                  <p class="text-error" ng-show="validity.unappliedAmt.$error.pattern">
-                    Please enter the amount of unapplied funds as a number.
-                  </p>
-                  <p class="text-error"
-                     ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
-                      Unapplied funds must be {{ unappliedFunds.min() | currency }} to {{ unappliedFunds.max() | currency }}
-                  </p>
-                  <span class="divider"></span>
-                  <p>
-                    Remaining Payment Balance
-                    {{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}
-                  </p>
+          <li class="table-list-row" ng-repeat="fee in paymentQueue.contents.fees">
+            <div class="main-info">
+              <div class="cell fee-type"><p>{{ fee.type }}</p></div>
+              <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
+              <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
+              <div class="cell fee-amt">
+                <p>{{ fee.amount | currency }}</p>
+                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
+                  Remove Fee
+                </button>
               </div>
             </div>
+          </li>
+        </ul><!-- end Fees List -->
+
+        <h3 class="boxed">Payments</h3>
+
+        <!-- Payments List -->
+        <ul class="unstyled payments">
+          <li class="table-list-head">
+            <div class="cell pay-desc">Description</div>
+            <div class="cell pay-due">Date Due</div>
+            <div class="cell pay-vin">VIN</div>
+            <div class="cell pay-stock">Stock #</div>
+            <div class="cell pay-status">Status</div>
+            <div class="cell pay-pymt">Payment</div>
+          </li>
+
+          <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
+            <div class="main-info">
+              <div class="cell pay-desc"><p>{{ payment.description }}</p></div>
+              <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
+              <div class="cell pay-vin"><p>{{ payment.vin }}</p></div>
+              <div class="cell pay-stock"><p>{{ payment.stockNum }}</p></div>
+              <div class="cell pay-status">
+                <p ng-show="!paymentQueue.canSchedule(payment)">
+                Unavailable to Schedule</p>
+                <p ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">Available to Schedule</p>
+                <p ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</p>
+              </div>
+              <div class="cell pay-pymt">
+                <p>{{ payment.amount | currency }}</p>
+                <button class="btn btn-mini btn-block"
+                        ng-click="paymentQueue.removePayment(payment.floorplanId)">
+                  Remove Payment
+                </button>
+                <button class="btn btn-mini btn-block"
+                        ng-click="paymentQueue.schedule(payment)"
+                        ng-show="paymentQueue.canSchedule(payment)"
+                        ng-disabled="payment.scheduleLoading">
+                  {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
+                </button>
+              </div>
+            </div>
+            <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
+          </li>
+        </ul><!-- end Payments List -->
+      </section>
+    </div><!-- end .checkout-list -->
+  </section><!-- end .span9 -->
+
+  <form class="span3 well checkout-summary" name="paymentForm">
+    <h4>Payment Summary</h4>
+    <div class="well-out">
+      <p>Review the Summary and submit your payments and scheduled payments.</p>
+
+      <hr/>
+
+      <!-- Payments -->
+      <div class="today-items">
+        <h4>
+          <span class="count">{{ paymentQueue.sum.todayCount() }}</span>
+          <span class="count-label" ng-show="paymentQueue.sum.todayCount() == 1">Payment</span>
+          <span class="count-label" ng-hide="paymentQueue.sum.todayCount() == 1">Payments</span>
+        </h4>
+        <p class="chkout-label">Total </p>
+        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.todayTotal > 0}">{{ paymentQueue.sum.todayTotal() | currency }}</p>
+      </div><!-- end Payments -->
+
+      <!-- If User has Unapplied Funds -->
+      <div class="unapplied-funds-section" ng-show="unappliedFunds.available > 0">
+        <hr/>
+        <p class="chkout-label">Available Unapplied Funds</p>
+        <p class="chkout-value">{{ unappliedFunds.available | currency }}</p>
+
+        <div class="form-inline nxg-radios">
+          <p class="chkout-label">Apply funds to payment?</p>
+          <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
+                 ng-value="false" ng-model="unappliedFunds.useFunds"
+                 ng-disabled="paymentQueue.sum.todayTotal() == 0">
+          <label for="unappliedNo">No</label>
+          <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
+                 ng-value="true" ng-model="unappliedFunds.useFunds"
+                 ng-disabled="paymentQueue.sum.todayTotal() == 0">
+          <label for="unappliedYes">Yes</label>
         </div>
 
-        <div class="scheduled-items">
-            <h4>{{ paymentQueue.sum.scheduledCount() }} Scheduled Payment(s)</h4>
-            <p>Scheduled Total: {{ paymentQueue.sum.scheduledTotal() | currency }}</p>
-        </div>
+        <div class="control-group" ng-show="unappliedFunds.useFunds">
+          <label for="unappliedAmt">Unapplied Funds to Use</label>
+          <input id="unappliedAmt" name="unappliedAmt" type="text"
+                 placeholder="$0.00"
+                 ng-model="unappliedFunds.useAmount"
+                 nxg-min="unappliedFunds.min()"
+                 nxg-max="unappliedFunds.max()"
+                 ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
+                 ng-required="unappliedFunds.useFunds">
 
-        <div class="bank-account">
-            <p>
-              <label for="bankAccount">Account</label>
-              <select name="bankAccount" id="bankAccount"
-                      ng-model="bankAccounts.selectedAccount"
-                      ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                      required></select>
-            </p>
-            <p class="text-error" ng-show="validity.bankAccount.$error.required">
-              Please select a bank account for payment
-            </p>
-        </div>
+          <p class="text-error" ng-show="validity.unappliedAmt.$error.required">
+            Please enter the amount of unapplied funds to use.
+          </p>
+          <p class="text-error" ng-show="validity.unappliedAmt.$error.pattern">
+            Please enter the amount of unapplied funds as a number.
+          </p>
+          <p class="text-error"
+             ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
+              Unapplied funds must be {{ unappliedFunds.min() | currency }} to {{ unappliedFunds.max() | currency }}
+          </p>
 
-        <div class="submit">
-            <button class="btn" ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress" ng-click="submit()">
-              Submit Payments and Commit Scheduled Payments
-            </button>
+          <hr/>
+
+          <p class="chkout-label">Remaining Payment Balance</p>
+          <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}</p>
         </div>
-    </form>
+      </div><!-- end of Unapplied Funds -->
+
+      <hr/>
+
+      <!-- Bank Account -->
+      <div class="bank-account">
+        <label for="bankAccount">Account</label>
+        <select name="bankAccount" id="bankAccount"
+                ng-model="bankAccounts.selectedAccount"
+                ng-options="account.BankAccountName for account in bankAccounts.getList()"
+                required></select>
+        <p class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</p>
+      </div><!-- end Bank Account selection -->
+
+      <hr/>
+
+      <!-- Scheduled Payments -->
+      <div class="scheduled-items">
+        <h4><span class="count">{{ paymentQueue.sum.scheduledCount() }}</span>
+          <span class="count-label" ng-show="paymentQueue.sum.scheduledCount() == 1">Scheduled Payment</span>
+          <span class="count-label" ng-hide="paymentQueue.sum.scheduledCount() == 1">Scheduled Payments</span>
+        </h4>
+        <p class="chkout-label">Scheduled Total</p>
+        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.scheduledTotal > 0 }">{{ paymentQueue.sum.scheduledTotal() | currency }}</p>
+      </div><!-- end Scheduled Payments -->
+
+      <hr/>
+
+      <div class="submit">
+        <button class="btn btn-primary" ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress" ng-click="submit()">
+          Submit Payments and Commit Scheduled Payments
+        </button>
+      </div>
+  </form>
 </section>
