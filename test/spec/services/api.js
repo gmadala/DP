@@ -33,7 +33,115 @@ describe('Service: api', function () {
   });
 
   describe('request function', function () {
-    // TODO: Add test coverage for request function
+
+    var httpBackend,
+      successResponse,
+      config;
+
+    beforeEach(inject(function ($httpBackend, nxgConfig) {
+      config = nxgConfig;
+      httpBackend = $httpBackend;
+      successResponse = {
+        Success: true,
+        Data: {}
+      };
+    }));
+
+    it('should make a call with the specified method', function () {
+      httpBackend.expectGET(/.*/).respond(successResponse);
+      api.request('GET', '/foo');
+      expect(httpBackend.flush).not.toThrow();
+
+      httpBackend.expectPOST(/.*/).respond(successResponse);
+      api.request('POST', '/foo');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should make a call to the specified path, with api base config prepended', function () {
+      config.apiBase = 'http://api.example.com/v1';
+
+      httpBackend.expectGET('http://api.example.com/v1/foo/bar').respond(successResponse);
+      api.request('GET', '/foo/bar');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send the specified data as query string parameters for GET method', function () {
+      httpBackend.expectGET('/foo?bar=baz').respond(successResponse);
+      api.request('GET', '/foo', { bar: 'baz' });
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send the specified data as JSON in the body for POST method', function () {
+      httpBackend.expectPOST('/foo').respond(function (method, url, data) {
+        expect(data).toBe('{"bar":"baz"}');
+        return [200, successResponse, {}];
+      });
+      api.request('POST', '/foo', { bar: 'baz' });
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send the specified headers', function () {
+      httpBackend.expectGET('/foo').respond(function (method, url, data, headers) {
+        expect(headers.foo).toBe('bar');
+        return [200, successResponse, {}];
+      });
+      api.request('GET', '/foo', null, { foo: 'bar' });
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise', function () {
+      httpBackend.whenGET('/foo').respond(successResponse);
+      var result = api.request('GET', '/foo');
+      expect(typeof result.then).toBe('function');
+    });
+
+    it('should reject the promise with undefined upon HTTP error', function () {
+      httpBackend.whenGET('/foo').respond(404, 'wrong URL');
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      api.request('GET', '/foo').then(success, error);
+      httpBackend.flush();
+      expect(error).toHaveBeenCalledWith(undefined);
+      expect(success).not.toHaveBeenCalled();
+    });
+
+    it('should reject the promise with undefined upon invalid response', function () {
+      httpBackend.whenGET('/foo').respond({foo: 'bar'});
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      api.request('GET', '/foo').then(success, error);
+      httpBackend.flush();
+      expect(error).toHaveBeenCalledWith(undefined);
+      expect(success).not.toHaveBeenCalled();
+    });
+
+    it('should reject the promise with the message value upon data error', function () {
+      httpBackend.whenGET('/foo').respond({
+        Success: false,
+        Message: 'Error 321'
+      });
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      api.request('GET', '/foo').then(success, error);
+      httpBackend.flush();
+      expect(error).toHaveBeenCalledWith('Error 321');
+      expect(success).not.toHaveBeenCalled();
+    });
+
+    it('should resolve the promise with data value upon success', function () {
+      httpBackend.whenGET('/foo').respond('{"Success":true,"Data":{"Prop1":"Value1","Prop2":"Value2"}}');
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      api.request('GET', '/foo').then(success, error);
+      httpBackend.flush();
+      expect(error).not.toHaveBeenCalled();
+      expect(success).toHaveBeenCalled();
+      expect(angular.equals(success.mostRecentCall.args[0], {
+        Prop1: 'Value1',
+        Prop2: 'Value2'
+      })).toBe(true);
+    });
+
   });
 
   describe('toBoolean function', function () {

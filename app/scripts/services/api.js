@@ -14,37 +14,34 @@ angular.module('nextgearWebApp')
         return !!authToken;
       },
       request: function(method, url, data, headers) {
-        var deferred = $q.defer(),
+        var httpConfig = {
+          method: method.toUpperCase(),
+          url: nxgConfig.apiBase + url,
+          headers: headers
+        };
+        httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
 
-          success = function(response) {
-            if (angular.isDefined(response.data) && angular.isDefined(response.data.Success)) {
+        return $http(httpConfig).then(
+          function (response) {
+            if (response.data && angular.isDefined(response.data.Success)) {
               if (response.data.Success) {
-                deferred.resolve(response.data.Data);
+                return response.data.Data;
               }
               else {
-                deferred.reject(response.data.Message); // reject with error message
+                return $q.reject(response.data.Message);
               }
             }
             else {
-              //console.error(response);
-              throw new Error('Invalid response'); //todo: only dev
+              if (console && console.error) {
+                console.error('Invalid response:', response);
+              }
+              return $q.reject(); // Unknown error
+              //throw new Error('Invalid response'); // dev only
             }
-          },
-          failure = function(/*error*/) {
-            // retry or something?
-            //console.error('Network failure', error);
-            deferred.reject();
-          },
-          httpConfig = {
-            method: method.toUpperCase(),
-            url: nxgConfig.apiBase + url,
-            headers: headers
-          };
-        httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
-
-        $http(httpConfig).then(success, failure);
-
-        return deferred.promise;
+          }, function (/* low-level http or connection error */) {
+            return $q.reject(); // Treat as unknown error
+          }
+        );
       },
       toBoolean: function (value) {
         if (value === null || !angular.isDefined(value)) {
