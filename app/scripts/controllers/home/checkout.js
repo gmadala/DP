@@ -48,8 +48,10 @@ angular.module('nextgearWebApp')
       removePayment: Payments.removePaymentFromQueue,
       removeFee: Payments.removeFeeFromQueue,
       canSchedule: function (payment) {
-        // false for overdue payments and payments that we've noticed have no available dates
-        return !moment(payment.dueDate).isBefore(moment(), 'day') && !payment.scheduleBlocked;
+        // false for overdue payments, payments due today, and payments that we've noticed have no available dates
+        return !moment(payment.dueDate).isBefore(moment(), 'day') &&
+          !moment(payment.dueDate).isSame(moment(), 'day') &&
+          !payment.scheduleBlocked;
       },
       schedule: function (payment) {
         payment.scheduleError = false;

@@ -129,11 +129,11 @@ describe('Controller: CheckoutCtrl', function () {
       expect(result).toBe(false);
     });
 
-    it('should return true if the payment due date is today', function () {
+    it('should return false if the payment due date is today', function () {
       var result = scope.paymentQueue.canSchedule({
         dueDate: '2013-01-02'
       });
-      expect(result).toBe(true);
+      expect(result).toBe(false);
     });
 
     it('should return true if the payment due date is in the future', function () {
