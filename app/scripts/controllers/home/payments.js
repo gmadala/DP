@@ -88,10 +88,16 @@ angular.module('nextgearWebApp')
     $scope.fees = Payments.fetchFees();
 
     var refreshCanPayNow = function () {
-      Payments.canPayNow().then(function (result) {
-        $scope.canPayNow = result;
-        $scope.canPayNowLoaded = true;
-      });
+      Payments.canPayNow().then(
+        function (result) {
+          $scope.canPayNow = result;
+          $scope.canPayNowLoaded = true;
+        }, function (error) {
+          // suppress error message display from this to avoid annoyance since it runs continually
+          error.dismiss();
+          $scope.canPayNow = false;
+          $scope.canPayNowLoaded = false;
+        });
       $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
     refreshCanPayNow();
