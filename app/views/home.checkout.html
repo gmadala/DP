@@ -7,10 +7,6 @@
       </div>
     </div><!-- end .well -->
 
-    <div class="alert alert-error" ng-show="!!submitError">
-      {{ submitError }}
-    </div>
-
     <div class="checkout-list" ng-switch="paymentQueue.contents.isEmpty()">
       <!-- When there are no payments or fees -->
       <p class="notice-box" ng-switch-when="true">
