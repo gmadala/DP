@@ -1,0 +1,61 @@
+<div class="login container-line">
+  <div class="container-fluid login-contents">
+
+    <div class="row-fluid forgot">
+      <h3>Forgot Your User Name or Password?</h3>
+
+      <div class="well well-double span6 offset2 adjacent" ng-class="{'nxg-fade' : forgotPassword.$dirty}">
+        <h4>Forgot Your User Name?</h4>
+        <div class="well-out">
+          <p class="instructions">
+            Enter the email address associated with your account to receive your username via email.
+          </p>
+
+          <form name="forgotUsername">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" ng-model="email" required/>
+
+            <!-- TODO: Add error text for when email is valid but not recogized by NextGear -->
+            <p class="form-error"  ng-show="">
+              We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+
+            <p class="form-error" ng-show="uValidity.email.$error">
+              XXXX is not a valid email address. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+          </form>
+          <div class="footer modal-footer">
+            <button class="btn btn-small btn-primary" ng-class="{ disabled: forgotUsername.email.$invalid }" ng-click="onForgotUsernameSubmit()">Submit</button>
+          </div>
+        </div><!-- end .well-out -->
+      </div>
+
+      <div class="well well-double span6 adjacent" ng-class="{'nxg-fade' : forgotUsername.$dirty}">
+        <h4>Forgot Your Password?</h4>
+        <div class="well-out">
+          <p class="instructions">Enter your username to receive a<br/> new password via email.</p>
+
+          <form name="forgotPassword">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" name="userName" ng-model="credentials.username" required/>
+
+            <p class="form-error" ng-show="">
+              We were unable to locate this username. If you need assistance, please call NextGear Capital Support at: (888) 969-3721.
+            </p>
+
+            <div ng-show="identity.showQuestion">
+              <label>Security Question</label>
+              <p class="security-question">{{ identity.securityQuestion }}</p>
+              <label class="answer-label" for="securityAnswer">Security Question Answer</label>
+              <input type="text" name="securityAnswer" id="securityAnswer" ng-model="identity.securityAnswer" required />
+            </div>
+          </form>
+          <div class="footer modal-footer">
+            <button class="btn btn-small btn-primary" ng-class="{ disabled: forgotPassword.userName.$invalid}" ng-click="onForgotPasswordSubmit()">Submit</button>
+          </div>
+        </div><!-- end .well-out -->
+      </div>
+    </div>
+
+  </div>
+</div>

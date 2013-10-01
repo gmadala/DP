@@ -11,6 +11,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'LoginCtrl',
         allowAnonymous: true
       })
+      .state('loginRecover', {
+        url: '/login/recover',
+        templateUrl: 'views/login.recover.html',
+        controller: 'LoginRecoverCtrl',
+        allowAnonymous: true
+      })
 
       /**
        * Home State - Parent of Dashboard, Payments, Scheduled Payments,

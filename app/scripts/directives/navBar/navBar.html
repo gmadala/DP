@@ -1,4 +1,14 @@
-<header>
+<!-- NOT LOGGED IN HEADER -->
+<header class="login-head" ng-show="navState.current.allowAnonymous">
+  <div class="row-fluid">
+    <div class="container-fluid">
+      <img id="nxg-logo" src="../img/nxg_logo_blue_2x.png" alt="" />
+    </div>
+  </div>
+</header>
+
+<!-- LOGGED IN HEADER -->
+<header ng-hide="navState.current.allowAnonymous">
   <div class="row-fluid">
     <div class="container-fluid app-header">
       <div class="span3 logo">
