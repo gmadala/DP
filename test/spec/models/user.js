@@ -13,6 +13,136 @@ describe('Model: User', function () {
     $q = _$q_;
   }));
 
+  describe('recoverUserName method', function () {
+
+    var response;
+
+    beforeEach(function () {
+      response = {
+        Success: true,
+        Message: null,
+        Data: null
+      };
+    });
+
+    it('should post to the expected endpoint', function () {
+      httpBackend.expectPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      user.recoverUserName('foo@example.com');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for the success/failure result', function () {
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      httpBackend.whenPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      user.recoverUserName('foo@example.com').then(success, error);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalled();
+      expect(error).not.toHaveBeenCalled();
+    });
+
+  });
+
+  describe('fetchPasswordResetQuestions method', function () {
+
+    var response,
+      messages;
+
+    beforeEach(inject(function (_messages_) {
+      messages = _messages_;
+      response = {
+        Success: true,
+        Message: null,
+        Data: {
+          List: [
+            {
+              QuestionId: 0,
+              QuestionText: 'foo'
+            },
+            {
+              QuestionId: 1,
+              QuestionText: 'bar'
+            }
+          ]
+        }
+      };
+    }));
+
+    it('should call to the expected endpoint', function () {
+      httpBackend.expectGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      user.fetchPasswordResetQuestions('foouser');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for the question list', function () {
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      user.fetchPasswordResetQuestions('foouser').then(success, error);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalledWith(response.Data.List);
+      expect(error).not.toHaveBeenCalled();
+    });
+
+    it('should reject the promise with a message object if the returned question list is empty', function () {
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      response.Data.List = [];
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      user.fetchPasswordResetQuestions('foouser').then(success, error);
+      httpBackend.flush();
+      expect(success).not.toHaveBeenCalled();
+      expect(error).toHaveBeenCalledWith(messages.list()[0]);
+    });
+
+  });
+
+  describe('resetPassword method', function () {
+
+    var response;
+
+    beforeEach(function () {
+      response = {
+        Success: true,
+        Message: null,
+        Data: null
+      };
+    });
+
+    it('should post to the expected endpoint with the expected data', function () {
+      var requestData = null,
+        answers = [
+          {
+            QuestionId: 0,
+            Answer: 'to seek the holy grail'
+          },
+          {
+            QuestionId: 1,
+            Answer: 'blue'
+          }
+        ];
+      httpBackend.expectPOST('/userAccount/resetpassword').respond(function (method, url, data) {
+        requestData = angular.fromJson(data);
+        return [200, response, {}];
+      });
+      user.resetPassword('foouser', answers);
+      expect(httpBackend.flush).not.toThrow();
+      expect(requestData.UserName).toBe('foouser');
+      expect(angular.equals(requestData.List, answers)).toBe(true);
+    });
+
+    it('should return a promise for the success/failure result', function () {
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      httpBackend.whenPOST('/userAccount/resetpassword').respond(response);
+      user.resetPassword('foouser').then(success, error);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalled();
+      expect(error).not.toHaveBeenCalled();
+    });
+
+  });
+
   describe('Authenticate + isLoggedIn method', function () {
 
     beforeEach(function () {

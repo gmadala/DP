@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64) {
+  .factory('User', function($q, api, Base64, messages) {
     // Private
     var info = null,
       statics = null,
@@ -19,6 +19,33 @@ angular.module('nextgearWebApp')
     return {
       isLoggedIn: function() {
         return api.hasAuthToken();
+      },
+
+      recoverUserName: function(email) {
+        return api.request('POST', '/userAccount/RecoverUserName/' + email);
+      },
+
+      fetchPasswordResetQuestions: function(username) {
+        return api.request('GET', '/UserAccount/passwordResetQuestions/' + username).then(
+          function (result) {
+            if (result.List && result.List.length > 0) {
+              return result.List;
+            } else {
+              var error = messages.add('You do not appear to have any security questions configured. ' +
+                'Please contact NextGear for assistance.',
+                '/UserAccount/passwordResetQuestions/ returned no security questions');
+              return $q.reject(error);
+            }
+          }
+        );
+      },
+
+      resetPassword: function(username, questionAnswers) {
+        var data = {
+          UserName: username,
+          List: questionAnswers
+        };
+        return api.request('POST', '/userAccount/resetpassword', data);
       },
 
       authenticate: function(username, password) {
