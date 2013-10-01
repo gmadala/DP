@@ -3,7 +3,7 @@ footer.container-fluid.row-fluid {
   @extend %center;
   @include gradient-row();
   @include box-shadow(rgba(black, 0.3) 0px 1px 1px);
-  font-size: 11px;
+  font-size: $tiny-font-size;
   color: #08c;
   background-color: #eeeeee;
   width: 100%;
