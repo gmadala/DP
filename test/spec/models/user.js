@@ -109,15 +109,17 @@ describe('Model: User', function () {
       };
     });
 
-    it('should post to the expected endpoint with the expected data', function () {
+    it('should post to the expected endpoint with username + trimmed question objects', function () {
       var requestData = null,
         answers = [
           {
             QuestionId: 0,
-            Answer: 'to seek the holy grail'
+            QuestionText: 'What is your quest?',
+            Answer: 'grail'
           },
           {
             QuestionId: 1,
+            QuestionText: 'What is your favorite color?',
             Answer: 'blue'
           }
         ];
@@ -128,7 +130,15 @@ describe('Model: User', function () {
       user.resetPassword('foouser', answers);
       expect(httpBackend.flush).not.toThrow();
       expect(requestData.UserName).toBe('foouser');
-      expect(angular.equals(requestData.List, answers)).toBe(true);
+      expect(requestData.List.length).toBe(2);
+      expect(angular.equals(requestData.List[0], {
+        QuestionId: 0,
+        Answer: 'grail'
+      })).toBe(true);
+      expect(angular.equals(requestData.List[1], {
+        QuestionId: 1,
+        Answer: 'blue'
+      })).toBe(true);
     });
 
     it('should return a promise for the success/failure result', function () {

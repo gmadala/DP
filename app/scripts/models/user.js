@@ -43,7 +43,9 @@ angular.module('nextgearWebApp')
       resetPassword: function(username, questionAnswers) {
         var data = {
           UserName: username,
-          List: questionAnswers
+          List: _.map(questionAnswers, function (question) {
+            return _.pick(question, ['QuestionId', 'Answer']);
+          })
         };
         return api.request('POST', '/userAccount/resetpassword', data);
       },
