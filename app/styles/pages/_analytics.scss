@@ -7,7 +7,7 @@
   }
 
   thead {
-    font-size: 11px;
+    font-size: $tiny-font-size;
     color: #666666;
     background-color: #eaeaea;
   }
@@ -74,7 +74,7 @@
     }
 
     li {
-      font-size: 11px;
+      font-size: $tiny-font-size;
     }
 
     &.collapsed .well-out {
@@ -88,7 +88,7 @@
     table {
       margin: 0.3em 0 1em;
       width: 100%;
-      font-size: 11px;
+      font-size: $tiny-font-size;
 
       tr td:last-child {
         @extend %align-right;
@@ -125,7 +125,7 @@
       }
     }
     .models {
-      font-size: 11px;
+      font-size: $tiny-font-size;
       line-height: 14px;
 
       div {
