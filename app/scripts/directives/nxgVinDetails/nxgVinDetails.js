@@ -84,6 +84,10 @@ angular.module('nextgearWebApp')
           s.vinMode = 'matched';
         },
         function (error) {
+          // treat all errors as "no match" & suppress error messages
+          if (error.dismiss) {
+            error.dismiss();
+          }
           s.vinLookupPending = false;
           if (!Blackbook.wasUserCancelled(error)) {
             s.vinMode = 'noMatch';

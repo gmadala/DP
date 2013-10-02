@@ -104,18 +104,22 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
   });
 
+  it('should set FloorplanSourceId to 1', function () {
+    expect(scope.defaultData.FloorplanSourceId).toBe(1);
+  });
+
   it('should default vin failure acknowledged and trade-in to false', function () {
     expect(scope.defaultData.SaleTradeIn).toBe(false);
     expect(scope.defaultData.VinAckLookupFailure).toBe(false);
   });
 
   it('should default everything else to null', function () {
-    expect(scope.defaultData.BuyerBankAccountId).toBe(null);
+    expect(scope.defaultData.BankAccountId).toBe(null);
     expect(scope.defaultData.PaySeller).toBe(null);
     expect(scope.defaultData.LineOfCreditId).toBe(null);
     expect(scope.defaultData.PhysicalInventoryAddressId).toBe(null);
     expect(scope.defaultData.SelectedVehicle).toBe(null);
-    expect(scope.defaultData.SellerBusinessId).toBe(null);
+    expect(scope.defaultData.BusinessId).toBe(null);
     expect(scope.defaultData.UnitColorId).toBe(null);
     expect(scope.defaultData.UnitMake).toBe(null);
     expect(scope.defaultData.UnitMileage).toBe(null);
@@ -128,6 +132,8 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.UnitYear).toBe(null);
     expect(scope.defaultData.TitleLocationId).toBe(null);
     expect(scope.defaultData.TitleTypeId).toBe(null);
+    expect(scope.defaultData.ConsignerTicketNumber).toBe(null);
+    expect(scope.defaultData.LotNumber).toBe(null);
     expect(scope.defaultData.$blackbookMileage).toBe(null);
   });
 
@@ -153,7 +159,7 @@ describe('Controller: FloorCarCtrl', function () {
     scope.$apply();
     expect(scope.data.PhysicalInventoryAddressId).toBe('one');
     expect(scope.data.LineOfCreditId).toBe('one');
-    expect(scope.data.BuyerBankAccountId).toBe('one');
+    expect(scope.data.BankAccountId).toBe('one');
   });
 
   it('reset should default to the first available option for pay seller', function () {
