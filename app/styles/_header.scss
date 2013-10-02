@@ -10,6 +10,16 @@ header > .row-fluid {
   margin: 10px auto 0.5em;
 }
 
+.nxg-logo {
+  background-image: url(../img/nxg_logo_blue_2x.png);
+  background-repeat: no-repeat;
+  background-size: 220px 50px;
+  height: 50px;
+  top: 0;
+  padding-top: 1px;
+  z-index: 5;
+}
+
 .nxg-settings-drop {
   @extend %small;
   position: absolute;
