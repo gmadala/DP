@@ -1,8 +1,7 @@
 <!-- NOT LOGGED IN HEADER -->
 <header class="login-head" ng-show="navState.current.allowAnonymous">
   <div class="row-fluid">
-    <div class="container-fluid">
-      <img id="nxg-logo" src="../img/nxg_logo_blue_2x.png" alt="" />
+    <div class="container-fluid nxg-logo">
     </div>
   </div>
 </header>
@@ -11,11 +10,10 @@
 <header ng-hide="navState.current.allowAnonymous">
   <div class="row-fluid">
     <div class="container-fluid app-header">
-      <div class="span3 logo">
-        <img src="../img/nxg_logo_blue_2x.png" alt="">
+      <div class="span4 nxg-logo">
       </div>
 
-      <div class="span2 offset4 chat">
+      <div class="span2 offset3 chat">
         <a ng-show="user.isDealer()" href="https://home-c4.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0a63c698-c417-4ade-8e0d-55cccf2b0d85&bu=4592556"><i class="glyphicon glyphicon-comment"></i>Chat Now!</a>
       </div>
       <div class="span3 pull-right dealer-info">
