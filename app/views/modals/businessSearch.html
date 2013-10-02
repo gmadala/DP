@@ -8,15 +8,18 @@
 
 <div class="modal-body search-controls">
     <label>Business Name or Number</label>
-    <input type="text" ng-model="query"><button class="btn btn-secondary nxg-search-btn" ng-click="businessSearch.search()"><i class="glyphicon glyphicon-search"></i></button>
+    <input type="text" ng-model="data.query">
+    <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
+      <i class="glyphicon glyphicon-search"></i>
+    </button>
     <!-- demo/debug: shows the current business search mode -->
     <em>Mode: {{ mode }}</em>
 </div>
 
 <div class="modal-body search-results"
-     nxg-infinite-scroll="businessSearch.loadMoreData()"
-     nxg-infinite-scroll-disabled="businessSearch.loading"
-     nxg-infinite-scroll-show-indicator="businessSearch.loading"
+     nxg-infinite-scroll="fetchNextResults()"
+     nxg-infinite-scroll-disabled="data.loading"
+     nxg-infinite-scroll-show-indicator="data.loading"
      nxg-scroll-container>
   <table>
     <thead>
@@ -33,20 +36,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="result in businessSearch.results">
-        <td>{{result.BusinessId}}</td>
-        <td>{{result.BusinessName}}</td>
-        <td>{{result.BusinessNumber}}</td>
+      <tr ng-repeat="result in data.results">
+        <td>{{ result.BusinessName }}</td>
+        <td>{{ result.BusinessLegalName }}</td>
+        <td>{{ result.BusinessNumber }}</td>
         <!-- this should be hidden unless on the Bulk Flooring page -->
-        <td ng-hide="true">{{result.AuctionAccessNum}}</td>
+        <td ng-hide="true">{{ result.AuctionAccessNum }}</td>
         <!-- -->
-        <td>{{result.City}}</td>
-        <td>{{result.State}}</td>
+        <td>{{ result.City }}</td>
+        <td>{{ result.State }}</td>
         <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
       </tr>
     </tbody>
   </table>
 </div>
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
+  <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>
 </div>

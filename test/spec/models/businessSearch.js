@@ -15,5 +15,5 @@ describe('Service: BusinessSearch', function () {
     businessSearch = BusinessSearch;
   }));
 
-  // Not sure how to test this one yet.
+  // TODO: Write tests
 });
