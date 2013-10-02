@@ -24,11 +24,9 @@ describe('Controller: BusinessSearchCtrl', function () {
     });
   }));
 
-  it('should attach a businessSearch to the scope', function () {
-    expect(scope.businessSearch).toBeDefined();
-  });
+  // TODO: test this controller properly
 
-  it('should attach a close to the scope', function () {
+  it('should attach a close function to the scope', function () {
     expect(scope.close).toBeDefined();
     scope.close();
   });

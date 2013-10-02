@@ -3,28 +3,39 @@
 angular.module('nextgearWebApp')
   .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, mode) {
 
-    $scope.mode = mode;
-    $scope.query = initialQuery;
-
-    $scope.businessSearch = {
-      loading: false,
+    $scope.data = {
+      mode: mode,
+      query: initialQuery,
       results: [],
-      search: function() {
-        this.loading = true;
-        BusinessSearch.searchSeller($scope.query).then(function(results) {
-          this.loading = false;
-          this.results = results.SearchResults;
-        }.bind(this));
-      },
-      loadMoreData: function() {
-        if (BusinessSearch.hasMoreData()) {
-          this.loading = true;
-          BusinessSearch.loadMoreData().then(function(results) {
-            this.loading = false;
-            this.results = this.results.concat(results.SearchResults);
-          }.bind(this));
-        }
+      loading: false,
+      paginator: null,
+      sortBy: 'BusinessName',
+      sortDescending: false
+    };
+
+    $scope.search = function() {
+      // search means "start from the beginning with current criteria"
+      $scope.data.paginator = null;
+      $scope.data.results.length = 0;
+      $scope.fetchNextResults();
+    };
+
+    $scope.fetchNextResults = function() {
+      var paginator = $scope.data.paginator;
+      if (paginator && !paginator.hasMore()) {
+        return;
       }
+
+      $scope.data.loading = true;
+      BusinessSearch.searchSeller($scope.data.query, $scope.data.sortBy, $scope.data.sortDescending, paginator).then(
+        function(result) {
+          $scope.data.loading = false;
+          $scope.data.paginator = result.$paginator;
+          Array.prototype.push.apply($scope.data.results, result.SearchResults);
+        }, function (/*error*/) {
+          $scope.data.loading = false;
+        }
+      );
     };
 
     // Allow the dialog to close itself using the "Cancel" button.
@@ -38,6 +49,6 @@ angular.module('nextgearWebApp')
     };
 
     // Do a search with the initial query
-    $scope.businessSearch.search();
+    $scope.search();
 
   });
