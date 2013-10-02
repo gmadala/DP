@@ -38,6 +38,10 @@ angular.module('nextgearWebApp')
       $dialog.dialog(dialogOptions).open().then(
         function (result) {
           if (result) {
+            // update balances (will be reflected on next data refresh from API too)
+            $scope.fundsBalance -= result.amount;
+            $scope.fundsAvail -= result.amount;
+
             // wireframes do not specify any kind of success display, so let's just do a simple one
             var title = 'Request submitted',
               msg = 'Your request for a payout in the amount of ' +

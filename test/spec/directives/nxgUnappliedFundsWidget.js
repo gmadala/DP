@@ -26,10 +26,10 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
   describe('main controller', function () {
 
-    var scope, ctrl, dialogMock;
+    var scope, ctrl, dialogMock, $q;
 
-    beforeEach(inject(function ($rootScope, $controller) {
-
+    beforeEach(inject(function ($rootScope, $controller, _$q_) {
+      $q = _$q_;
       dialogMock = {
         dialog: function () {
           return {
@@ -39,12 +39,17 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
               };
             }
           };
+        },
+        messageBox: function () {
+          return {
+            open: angular.noop
+          };
         }
       };
 
       scope = $rootScope.$new();
-      scope.fundsBalance = 1;
-      scope.fundsAvail = 2;
+      scope.fundsBalance = 500;
+      scope.fundsAvail = 400;
 
       ctrl = $controller('UnappliedFundsWidgetCtrl', {
         $scope: scope,
@@ -65,8 +70,33 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(config.controller).toBe('PayoutModalCtrl');
 
       var resolvedFunds = config.resolve.funds();
-      expect(resolvedFunds.balance).toBe(1);
-      expect(resolvedFunds.available).toBe(2);
+      expect(resolvedFunds.balance).toBe(500);
+      expect(resolvedFunds.available).toBe(400);
+    });
+
+    it('openRequestPayout() should show a success modal and update fund balances on success', function () {
+      spyOn(dialogMock, 'dialog').andReturn({
+        open: function () {
+          return $q.when({
+            amount: 100,
+            account: {
+              BankAccountName: 'foo',
+              BankAccountId: 'fooId'
+            }
+          });
+        }
+      });
+      spyOn(dialogMock, 'messageBox').andCallThrough();
+      scope.openRequestPayout({preventDefault: angular.noop});
+      scope.$apply();
+      expect(dialogMock.messageBox).toHaveBeenCalled();
+      expect(typeof dialogMock.messageBox.mostRecentCall.args[0]).toBe('string');
+      expect(dialogMock.messageBox.mostRecentCall.args[1]).toBe('Your request for a payout in the amount of ' +
+        '$100.00 to your account "foo" has been successfully submitted.');
+      expect(dialogMock.messageBox.mostRecentCall.args[2].length).toBe(1);
+
+      expect(scope.fundsBalance).toBe(400);
+      expect(scope.fundsAvail).toBe(300);
     });
 
   });

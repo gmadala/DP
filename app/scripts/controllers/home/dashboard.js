@@ -16,7 +16,11 @@ angular.module('nextgearWebApp')
      * drive (re)loading of all data, using that date range.
      */
     $scope.$on('setDateRange', function (event, startDate, endDate) {
-      $scope.dashboardData = Dashboard.fetchDealerDashboard(startDate, endDate);
+      Dashboard.fetchDealerDashboard(startDate, endDate).then(
+        function (result) {
+          $scope.dashboardData = result;
+        }
+      );
     });
 
   });

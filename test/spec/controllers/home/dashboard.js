@@ -7,23 +7,16 @@ describe('Controller: DashboardCtrl', function () {
 
   var DashboardCtrl,
     scope,
-    dashMock = {
-      fetchDealerDashboard: function() {
-        return {
-          then: function(success) {
-            success({});
-          }
-        };
-      }
-    };
+    dashboard,
+    $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-
+  beforeEach(inject(function ($controller, $rootScope, Dashboard, _$q_) {
     scope = $rootScope.$new();
+    $q = _$q_;
+    dashboard = Dashboard;
     DashboardCtrl = $controller('DashboardCtrl', {
-      $scope: scope,
-      Dashboard: dashMock
+      $scope: scope
     });
   }));
 
@@ -31,15 +24,16 @@ describe('Controller: DashboardCtrl', function () {
     expect(scope.viewMode).toBe('week');
   });
 
-  it('should call for data on a setDateRange event and attach the data promise to the scope', function() {
+  it('should call for data on a setDateRange event and attach the result to the scope', function() {
     var start = new Date(),
       end = new Date(),
-      fakePromise = {};
+      data = {};
 
-    spyOn(dashMock, 'fetchDealerDashboard').andReturn(fakePromise);
+    spyOn(dashboard, 'fetchDealerDashboard').andReturn($q.when(data));
     scope.$emit('setDateRange', start, end);
-    expect(dashMock.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
-    expect(scope.dashboardData).toBe(fakePromise);
+    expect(dashboard.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
+    scope.$apply();
+    expect(scope.dashboardData).toBe(data);
   });
 
 });
