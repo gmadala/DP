@@ -38,9 +38,8 @@ angular.module('nextgearWebApp')
       $dialog.dialog(dialogOptions).open().then(
         function (result) {
           if (result) {
-            // update balances (will be reflected on next data refresh from API too)
-            $scope.fundsBalance -= result.amount;
-            $scope.fundsAvail -= result.amount;
+            // update balance
+            $scope.fundsAvail = result.newAvailableAmount;
 
             // wireframes do not specify any kind of success display, so let's just do a simple one
             var title = 'Request submitted',
@@ -72,9 +71,12 @@ angular.module('nextgearWebApp')
       }
       $scope.submitInProgress = true;
       Payments.requestUnappliedFundsPayout($scope.selections.amount, $scope.selections.account.BankAccountId).then(
-        function (/*result*/) {
+        function (result) {
           $scope.submitInProgress = false;
-          dialog.close($scope.selections);
+          var resultData = angular.extend({}, $scope.selections, {
+            newAvailableAmount: result.BalanceAfter
+          });
+          dialog.close(resultData);
         }, function (/*error*/) {
           $scope.submitInProgress = false;
         }

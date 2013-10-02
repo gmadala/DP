@@ -74,7 +74,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(resolvedFunds.available).toBe(400);
     });
 
-    it('openRequestPayout() should show a success modal and update fund balances on success', function () {
+    it('openRequestPayout() should show a success modal and update available balance on success', function () {
       spyOn(dialogMock, 'dialog').andReturn({
         open: function () {
           return $q.when({
@@ -82,7 +82,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
             account: {
               BankAccountName: 'foo',
               BankAccountId: 'fooId'
-            }
+            },
+            newAvailableAmount: 80
           });
         }
       });
@@ -95,8 +96,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         '$100.00 to your account "foo" has been successfully submitted.');
       expect(dialogMock.messageBox.mostRecentCall.args[2].length).toBe(1);
 
-      expect(scope.fundsBalance).toBe(400);
-      expect(scope.fundsAvail).toBe(300);
+      expect(scope.fundsAvail).toBe(80);
     });
 
   });
@@ -112,7 +112,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
           return {
             then: function (success, error) {
               flushPayoutRequestSuccess = function () {
-                success();
+                success({BalanceAfter: 80});
               };
               flushPayoutRequestError = function (value) {
                 error(value);
@@ -223,12 +223,13 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         expect(scope.submitInProgress).toBe(false);
       });
 
-      it('should close the dialog with submitted data on success', function () {
+      it('should close the dialog with submitted/result data on success', function () {
         spyOn(dialogMock, 'close');
         scope.submit();
         flushPayoutRequestSuccess();
         expect(dialogMock.close).toHaveBeenCalled();
         expect(dialogMock.close.mostRecentCall.args[0].amount).toBe(100);
+        expect(dialogMock.close.mostRecentCall.args[0].newAvailableAmount).toBe(80);
         expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountId).toBe('fooId');
         expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountName).toBe('foo');
       });
