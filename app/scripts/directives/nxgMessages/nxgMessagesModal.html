@@ -2,7 +2,7 @@
 
 <div class="modal-body" ng-switch="messages.length > 1">
   <span ng-switch-when="false">{{ messages[0].text }}</span>
-  <ul ng-switch-when="true">
+  <ul class="unstyled" ng-switch-when="true">
     <li ng-repeat="msg in messages">{{ msg.text }}</li>
   </ul>
 </div>
