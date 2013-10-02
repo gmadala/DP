@@ -21,14 +21,14 @@ angular.module('nextgearWebApp')
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
-      ApplicationOSName: null, // string - WARNING: NOT MAPPED TO ANYTHING IN VIEW
-      BuyerBankAccountId: null, // BankAccount object locally, flatten to string for API tx
+      FloorplanSourceId : 1, // always 1 for web app
+      BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
-      PaySeller: null, // Boolean, default is false if buyer payment is possible, otherwise true
+      PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: false, // Boolean, default is no
+      SaleTradeIn: false, // Boolean, default is no (DEALER ONLY)
       SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
-      SellerBusinessId: null, // business search result object locally, flatten to string for API tx
+      BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string - should match SelectedVehicle.Make
       UnitMileage: null, // string
@@ -43,6 +43,8 @@ angular.module('nextgearWebApp')
       UnitYear: null, // int - should match SelectedVehicle.Year
       TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
       TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
+      ConsignerTicketNumber: null, // string (AUCTION ONLY)
+      LotNumber: null, // string (AUCTION ONLY)
       // transient local values
       $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
@@ -58,7 +60,7 @@ angular.module('nextgearWebApp')
       },
       {
         scopeSrc: 'options().bankAccounts',
-        modelDest: 'BuyerBankAccountId'
+        modelDest: 'BankAccountId'
       },
       {
         scopeSrc: 'paySellerOptions()',

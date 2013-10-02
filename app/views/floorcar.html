@@ -104,7 +104,7 @@
                    name="inputSeller"
                    ng-disabled="data.SaleTradeIn"
                    ng-required="!data.SaleTradeIn"
-                   selected-business="data.SellerBusinessId" />
+                   selected-business="data.BusinessId" />
             <label for="inputSeller" class="text-error"
                    ng-show="validity.inputSeller.$error.nxgRequires">
               Please look up a Seller
@@ -149,13 +149,13 @@
             <label for="inputSendPay">Send Payment To:</label>
             <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
                     ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions()"
-                    ng-change="data.BuyerBankAccountId = null"
+                    ng-change="data.BankAccountId = null"
                     ng-disabled="data.SaleTradeIn">
              <option class="disabled" disabled="disabled" value="">Make Selection</option>
             </select>
 
             <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-            <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BuyerBankAccountId"
+            <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
                     ng-disabled="data.PaySeller"
                     ng-required="!data.PaySeller"
                     ng-options="account.BankAccountName for account in options().bankAccounts">

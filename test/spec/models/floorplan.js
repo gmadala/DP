@@ -25,8 +25,8 @@ describe('Model: Floorplan', function () {
         UnitTitleStateId: {StateId: 'state1'},
         PhysicalInventoryAddressId: {LocationId: 'loc1'},
         LineOfCreditId: {LineOfCreditId: 'line1'},
-        BuyerBankAccountId: {BankAccountId: 'account1'},
-        SellerBusinessId: {BusinessId: 'seller1'}
+        BankAccountId: {BankAccountId: 'account1'},
+        BusinessId: {BusinessId: 'seller1'}
       };
 
     beforeEach(function () {
@@ -80,8 +80,8 @@ describe('Model: Floorplan', function () {
       expect(sentData.UnitTitleStateId).toBe('state1');
       expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
       expect(sentData.LineOfCreditId).toBe('line1');
-      expect(sentData.BuyerBankAccountId).toBe('account1');
-      expect(sentData.SellerBusinessId).toBe('seller1');
+      expect(sentData.BankAccountId).toBe('account1');
+      expect(sentData.BusinessId).toBe('seller1');
     });
 
     it('should handle options that are not set without bombing', function () {
@@ -91,8 +91,8 @@ describe('Model: Floorplan', function () {
         UnitTitleStateId: null,
         PhysicalInventoryAddressId: null,
         LineOfCreditId: null,
-        BuyerBankAccountId: null,
-        SellerBusinessId: null
+        BankAccountId: null,
+        BusinessId: null
       });
       httpBackend.flush();
       expect(sentData.UnitColorId).toBe(null);
@@ -101,8 +101,46 @@ describe('Model: Floorplan', function () {
       expect(sentData.UnitTitleStateId).toBe(null);
       expect(sentData.PhysicalInventoryAddressId).toBe(null);
       expect(sentData.LineOfCreditId).toBe(null);
-      expect(sentData.BuyerBankAccountId).toBe(null);
-      expect(sentData.SellerBusinessId).toBe(null);
+      expect(sentData.BankAccountId).toBe(null);
+      expect(sentData.BusinessId).toBe(null);
+    });
+
+    it('should trim the SelectedVehicle if present and clear redundant Unit* properties', function () {
+      floorplan.create(angular.extend({}, dummyFormData, {
+        SelectedVehicle: {
+          GroupNumber: 'gn',
+          UVc: 'uvc',
+          VinPos1To8: 'vh34t45y',
+          DSCRegionalAveragePurchasePrice: 1,
+          foo: 'bar'
+        },
+        UnitMake: 'make',
+        UnitModel: 'model',
+        UnitYear: 'year',
+        UnitStyle: 'style'
+      }));
+      httpBackend.flush();
+      expect(angular.equals(sentData.SelectedVehicle, {GroupNumber: 'gn', UVc: 'uvc'})).toBe(true);
+      expect(sentData.UnitMake).toBe(null);
+      expect(sentData.UnitModel).toBe(null);
+      expect(sentData.UnitYear).toBe(null);
+      expect(sentData.UnitStyle).toBe(null);
+    });
+
+    it('should retain Unit* property values if SelectedVehicle not present', function () {
+      floorplan.create(angular.extend({}, dummyFormData, {
+        SelectedVehicle: null,
+        UnitMake: 'make',
+        UnitModel: 'model',
+        UnitYear: '2004',
+        UnitStyle: 'style'
+      }));
+      httpBackend.flush();
+      expect(sentData.SelectedVehicle).toBe(null);
+      expect(sentData.UnitMake).toBe('make');
+      expect(sentData.UnitModel).toBe('model');
+      expect(sentData.UnitYear).toBe(2004);
+      expect(sentData.UnitStyle).toBe('style');
     });
 
   });

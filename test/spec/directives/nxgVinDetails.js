@@ -245,6 +245,15 @@ describe('Directive: nxgVinDetails', function () {
         expect(scope.settings.vinLookupPending).toBe(false);
       }));
 
+      it('should suppress API errors if lookup failed at the API level', inject(function ($q, messages) {
+        vinLookupResult = $q.reject(messages.add('Please enter a valid VIN'));
+
+        scope.lookupVin();
+
+        scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
+        expect(messages.list().length).toBe(0);
+      }));
+
       it('should stay in starting mode if there were multiple matches and the user canceled resolution', inject(function ($q) {
         vinLookupResult = $q.reject('userCancel');
 

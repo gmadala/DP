@@ -23,9 +23,17 @@ angular.module('nextgearWebApp')
           UnitTitleStateId: data.UnitTitleStateId ? data.UnitTitleStateId.StateId : null,
           PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.LocationId : null,
           LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
-          BuyerBankAccountId: data.BuyerBankAccountId ? data.BuyerBankAccountId.BankAccountId : null,
-          SellerBusinessId: data.SellerBusinessId ? data.SellerBusinessId.BusinessId : null
+          BankAccountId: data.BankAccountId ? data.BankAccountId.BankAccountId : null,
+          BusinessId: data.BusinessId ? data.BusinessId.BusinessId : null
         });
+
+        if (data.SelectedVehicle) {
+          data.SelectedVehicle = _.pick(data.SelectedVehicle, ['GroupNumber', 'UVc']);
+          data.UnitMake = null;
+          data.UnitModel = null;
+          data.UnitYear = null;
+          data.UnitStyle = null;
+        }
 
         return api.request('POST', '/floorplan/create', data);
       },
