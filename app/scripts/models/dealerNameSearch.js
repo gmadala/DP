@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
         if (state) {
           lastRequest.State = state.StateId;
         }
-        else {
+        if (!city && !state) {
           // invalid scenario, fail early
           throw new Error('DealerSearch::search() - Must provide city or state');
         }
