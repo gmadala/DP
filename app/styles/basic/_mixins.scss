@@ -6,3 +6,11 @@
 @mixin gradient-row() {
   @include background-image(linear-gradient(#fff, #e4e4e4));
 }
+
+/*
+ * Used for counter icons, square boxes, etc.
+ */
+@mixin box($length) {
+  width: $length;
+  height: $length;
+}

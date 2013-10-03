@@ -220,10 +220,7 @@
     }
 
     .btn-checkout {
-      .ie9 &:disabled {
-        color: $btn-disabled-text;
-        background-color: $btn-disabled-bkgd;
-      }
+
       margin: 0 18px;
     }
   }

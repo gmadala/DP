@@ -1,7 +1,7 @@
 .scale-description {
   @extend %heavy;
   font-size: $tiny-font-size;
-  line-height: 14px;
+  line-height: 1.25;
 }
 
 .nxg-doughnut-chart-nested {
@@ -27,12 +27,11 @@
 }
 .nxg-doughnut-chart-label-secondary {
   font-size: $tiny-font-size;
-  line-height: 10px;
+  line-height: 1;
   margin: 0;
 }
 .nxg-chart-legend-color {
-  width: 10px;
-  height: 10px;
+  @include box(10px);
   display: block;
 }
 /**
