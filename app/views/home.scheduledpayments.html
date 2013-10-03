@@ -70,10 +70,7 @@
                 <button class="btn btn-small"
                         ng-show="pay.isPending"
                         ng-disabled="scheduledPayments.isOnPaymentQueue(pay)"
-                        ng-click="scheduledPayments.payOff(pay)"
-                        tooltip="Payoff Now will add the full payoff amount to your payment summary and cancel the scheduled payment."
-                        tooltip-placement="right"
-                        tooltip-popup-delay="700">
+                        ng-click="scheduledPayments.payOff(pay)">
                     <span>Payoff Now</span>
                 </button>
                 <button class="btn btn-small"
