@@ -1,0 +1,177 @@
+// AUCTION
+
+// Dashboard
+.auction-dashboard-summaries {
+  margin-top: 7px;
+
+  li {
+    margin-bottom: 3px;
+  }
+
+  .well-out {
+    @extend %small;
+    height: 11em;
+  }
+
+  .recent-disbursements {
+    position: relative;
+
+    table {
+      @extend %full-width;
+
+      td:last-child, td:nth-child(3) {
+        @extend %align-right;
+      }
+    }
+
+    .btn {
+      margin: 14px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.auction-dashboard-chart {
+  position: relative;
+
+  .nxg-fancy-radios {
+    margin-bottom: 1em;
+  }
+
+  canvas {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .scale-description-y {
+    @extend .scale-description;
+    position: absolute;
+    top: 108px;
+    left: 18px;
+  }
+
+  .scale-description-x {
+    @extend .scale-description;
+    position: absolute;
+    bottom: 36px;
+    left: 418px;
+  }
+}
+
+// Dealer Search
+.credit-query {
+  &.modal {
+    width: 500px;
+    margin-left: -250px;
+  }
+
+  th, td {
+    @extend %align-left;
+    line-height: $base-line-height;
+    padding: 3px 0;
+  }
+
+  .buyer-info {
+    @extend %full-width;
+
+    th {
+      @extend %thin;
+      width: 35%;
+      vertical-align: top;
+    }
+  }
+
+  .credit-values {
+    @extend %full-width;
+
+    td:first-child {
+      width: 35%;
+    }
+  }
+}
+
+.bus-search {
+  .control-group {
+    @extend %float-l;
+    width: 48%;
+    margin-left: 10px;
+
+    &.shorten {
+      width: 20%;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      input, select {
+        @extend %full-width;
+      }
+    }
+  }
+
+  &.search-modal .modal-footer {
+    border-top: 1px solid #EAEAEA;
+    margin-top: 12px;
+  }
+}
+
+// Bulk Flooring
+.bulkflooring {
+  .btn-primary {
+    @extend %float-r;
+    margin-left: 1em;
+  }
+}
+
+// Seller Floorplan Search
+.selfloor-list {
+  .cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 5em;
+
+    p {
+      margin-bottom: 4px;
+    }
+
+    &.selfloor-vin { width: 16%; }
+    &.selfloor-descr {  width: 10.5%; }
+    &.selfloor-stat { width: 8.5%; }
+    &.selfloor-dates { width: 10.5%; }
+    &.selfloor-purch { width: 9%; }
+    &.selfloor-title-st { width: 6%; }
+    &.selfloor-title-loc { width: 8%; }
+    &.selfloor-floored { width: 8%; }
+    &.selfloor-buy { width: 8%; }
+    &.selfloor-id-nums { width: 14%; }
+    &.selfloor-actions { width: 9.5%; }
+  }
+
+  .table-list-row {
+    height: 80px;
+  }
+}
+
+// Reports & Resources/Documents
+.auction-documents, .auction-reports {
+  p {
+    @extend %small;
+  }
+
+  h5 {
+    margin-top: 0;
+  }
+
+  .text-info {
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
+}
+
+.auction-documents {
+  .well-out {
+    padding-bottom: 1.5em;
+  }
+}

@@ -2,42 +2,55 @@
     <h3>Buyer Business Line of Credit Query</h3>
 </div>
 
-<section>
-    <title>Buyer Information</title>
-    <dl>
-        <dt>Business Number</dt>
-        <dd>{{business.number}}</dd>
-        <dt>Auction Access Number</dt>
-        <dd>{{business.auctionAccessNumbers}}</dd>
-        <dt>Business Name</dt>
-        <dd>{{business.name}}</dd>
-        <dt>Address</dt>
-        <dd>
-            <div>{{business.address}}</div>
-            <div>{{business.city}}, {{business.state}} {{business.zipCode}}</div>
-        </dd>
-    </dl>
-    <table ng-show="business.creditQuery.retrieved">
-        <thead>
-        <tr>
-            <th>Credit Type</th>
-            <th>Available Credit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-show="business.creditQuery.error">
-            <td class="text-error">{{business.creditQuery.error}}</td>
-        </tr>
-        <tr ng-repeat="credit in business.creditQuery.results">
-            <td>{{credit.CreditType}}</td>
-            <td>{{credit.CreditAvailable}}</td>
-        </tr>
-        </tbody>
-    </table>
+<section class="modal-body">
+  <p class="modal-subtitle">Buyer Information</p>
+
+  <table class="buyer-info">
+    <tr>
+      <th>Business Number</th>
+      <td>{{ business.number }}</td>
+    </tr>
+    <tr>
+      <th>Auction Access Number</th>
+      <td>{{ business.auctionAccessNumbers }}</td>
+    </tr>
+    <tr>
+      <th>Business Name</th>
+      <td>{{ business.name }}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>
+        {{ business.address }} <br/>
+        {{ business.city }}, {{ business.state }} {{ business.zipCode }}
+      </td>
+    </tr>
+  </table>
+
+  <hr ng-show="business.creditQuery.retrieved" />
+
+  <table class="credit-values" ng-show="business.creditQuery.retrieved">
+    <thead>
+      <tr>
+          <th>Credit Type</th>
+          <th>Available Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr ng-show="business.creditQuery.error">
+        <td class="text-error">{{ business.creditQuery.error }}</td>
+    </tr>
+    <tr ng-repeat="credit in business.creditQuery.results">
+        <td>{{ credit.CreditType }}</td>
+        <td>{{ credit.CreditAvailable | currency }}</td>
+    </tr>
+    </tbody>
+  </table>
 </section>
+
 <div class="modal-footer">
-    <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
-    <button ng-click="business.creditQuery.get()"
-            class="btn btn-mini btn-primary"
-            ng-disabled="business.creditQuery.requested">Query</button>
+  <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
+  <button ng-click="business.creditQuery.get()"
+          class="btn btn-mini btn-primary"
+          ng-disabled="business.creditQuery.requested">Query</button>
 </div>
