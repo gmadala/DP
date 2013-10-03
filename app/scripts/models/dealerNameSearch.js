@@ -39,8 +39,8 @@ angular.module('nextgearWebApp')
         if (city) {
           lastRequest.City = city;
         }
-        else if (state) {
-          lastRequest.State = state;
+        if (state) {
+          lastRequest.State = state.StateId;
         }
         else {
           // invalid scenario, fail early
