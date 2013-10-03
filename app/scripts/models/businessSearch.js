@@ -3,27 +3,18 @@
 angular.module('nextgearWebApp')
   .factory('BusinessSearch', function(api, Paginate) {
 
-    var sortableFields = ['BusinessName', 'LegalName', 'BusinessNumber', 'FederalTaxId', 'Line1', 'City', 'State', 'Zip'],
-      getValidSortField = function (fieldName) {
-        for (var i = 0; i < sortableFields.length; i++) {
-          if (fieldName === sortableFields[i]) {
-            return fieldName;
-          }
-        }
-        return 'BusinessName'; // default value
-      },
-      isNumeric = function (value) {
-        if (!value) {
-          return false;
-        }
-        return (/^\d+$/).test(value.trim());
-      };
+    var isNumeric = function (value) {
+      if (!value) {
+        return false;
+      }
+      return (/^\d+$/).test(value.trim());
+    };
 
     return {
       search: function (searchBuyers, query, sortField, sortDesc, paginator) {
         var url, countField,
           params = {
-            OrderBy: getValidSortField(sortField),
+            OrderBy: sortField,
             OrderDirection: sortDesc ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM
@@ -33,7 +24,7 @@ angular.module('nextgearWebApp')
           url = '/dealer/search/buyer';
           countField = 'DealerRowCount';
           angular.extend(params, {
-            BusinessName: isNumeric(query) ? undefined : query,
+            BusinessName: isNumeric(query) ? undefined : (query || undefined),
             BusinessNumber: isNumeric(query) ? query : undefined
           });
         } else {
