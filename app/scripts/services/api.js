@@ -10,6 +10,9 @@ angular.module('nextgearWebApp')
         // set a default Authorization header with the authentication token
         $http.defaults.headers.common.Authorization = 'CT ' + token;
       },
+      resetAuthToken: function() {
+        authToken = null;
+      },
       hasAuthToken: function() {
         return !!authToken;
       },
