@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, mode) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode) {
 
     $scope.data = {
-      mode: mode,
+      searchBuyersMode: searchBuyersMode,
       query: initialQuery,
       results: [],
       loading: false,
@@ -27,7 +27,13 @@ angular.module('nextgearWebApp')
       }
 
       $scope.data.loading = true;
-      BusinessSearch.searchSeller($scope.data.query, $scope.data.sortBy, $scope.data.sortDescending, paginator).then(
+      BusinessSearch.search(
+          $scope.data.searchBuyersMode,
+          $scope.data.query,
+          $scope.data.sortBy,
+          $scope.data.sortDescending,
+          paginator
+        ).then(
         function(result) {
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
