@@ -1,11 +1,10 @@
 .loading {
+  @include box(16px);
   display: inline-block;
-  margin-right: 1px;
-  width: 16px;
-  height: 16px;
   background-image: url('../img/loading.gif');
   background-position: center center;
   background-repeat: no-repeat;
+  margin-right: 1px;
 }
 
 .nxg-infinite-scroll-indicator {
@@ -53,10 +52,10 @@
   @extend %center;
   @extend %float-l;
   @include border-radius(6px);
-  line-height: 16px;
+  line-height: 1.33333333;
   width: 28px;
   margin-right: 7px;
-  border: 1px solid $gray-c;
+  border: 1px solid #CCC;
 
   &.overdue {
     color: $white;

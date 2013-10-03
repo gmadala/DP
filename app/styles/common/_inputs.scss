@@ -3,7 +3,7 @@ select {
   @include border-radius(0);
   background: $white;
   color: $brand-light;
-  border: 1px solid #c8c8c8;
+  border: 1px solid $input-border;
   height: 28px;
   width: 200px;
   font-size: 13px;
@@ -12,7 +12,7 @@ select {
   &:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     outline: 0;
-    border-color: #C8C8C8;
+    border-color: $input-border;
   }
 }
 
@@ -34,20 +34,20 @@ input[type="color"],
 .uneditable-input {
   @include border-radius(0px);
   @include box-shadow(none);
-  border: 1px solid #c8c8c8;
+  border: 1px solid $input-border;
   height: 28px;
   margin: 0;
 
   &:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     outline: 0;
-    border-color: #C8C8C8;
+    border-color: $input-border;
   }
 
   &:focus:invalid {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     color: #555;
-    border: 1px solid #c8c8c8;
+    border: 1px solid $input-border;
   }
 }
 
@@ -104,12 +104,10 @@ select, .nxg-date-field {
     @include opacity(50);
     background: transparent;
     @include border-radius(0);
-    border: none;
-    margin-left: -28px;
-    font-size: 17px;
-    margin-top: -1px;
-    width: 28px;
-    height: 28px;
+    @include box(28px);
+    font-size: $large-font-size;
+    border: 0;
+    margin: -1px 0 0 -28px;
 
     &:active {
       border: none;
@@ -259,7 +257,7 @@ input[type="radio"]:disabled {
 .nxg-fancy-radios input[type="radio"] + label::before {
   @extend .btn;
   @extend %small;
-  @include background(linear-gradient(#ffffff, #ddd));
+  @include background(linear-gradient($white, #ddd));
   text-transform: uppercase;
   padding-right: 14px;
   padding-left: 14px;
