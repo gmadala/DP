@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, dialog, $dialog, DealerNameSearch, CreditQuery, options) {
+  .controller('DealerNameSearchCtrl', function($scope, dialog, $dialog, DealerNameSearch, CreditQuery, User, options) {
     $scope.query = {
       name: options.dealerName,
       city: options.city,
@@ -65,4 +65,7 @@ angular.module('nextgearWebApp')
 
     // Do an initial search with the initial query
     $scope.dealerNameSearch.search();
+
+    // Get list of states
+    $scope.states = User.getStatics().states;
   });
