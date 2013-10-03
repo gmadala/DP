@@ -77,6 +77,7 @@ angular.module('nextgearWebApp')
             backdropClick: true,
             templateUrl: 'views/modals/dealerNameSearch.html',
             controller: 'DealerNameSearchCtrl',
+            dialogClass: 'modal search-modal bus-search',
             resolve: {
               options: function() {
                 return {
@@ -119,6 +120,7 @@ angular.module('nextgearWebApp')
             backdropClick: true,
             templateUrl: 'views/modals/creditQuery.html',
             controller: 'CreditQueryCtrl',
+            dialogClass: 'modal credit-query',
             resolve: {
               options: function() {
                 return {

@@ -37,6 +37,7 @@ angular.module('nextgearWebApp')
         backdropClick: true,
         templateUrl: 'views/modals/creditQuery.html',
         controller: 'CreditQueryCtrl',
+        dialogClass: 'modal credit-query',
         resolve: {
           options: function() {
             return {

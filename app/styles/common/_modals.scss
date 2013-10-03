@@ -17,6 +17,10 @@
   }
 }
 
+.modal-subtitle {
+  @extend %heavy;
+}
+
 .modal-header {
   margin: 0;
   padding: 9px;
