@@ -80,35 +80,7 @@ angular.module('nextgearWebApp')
       },
 
       payOff: function(p) {
-        var dialogOptions = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
-          templateUrl: 'views/modals/cancelPayment.html',
-          controller: 'CancelPaymentCtrl',
-          resolve: {
-            options: function() {
-              return {
-                payment: {
-                  floorplanId: p.floorplanId,
-                  vin: p.vin,
-                  description: p.description,
-                  stockNumber: p.stockNumber,
-                  scheduledDate: p.scheduledDate,
-                  isPayOff: !p.isCurtailment,
-                  currentPayOff: p.payoffAmount,
-                  amountDue: p.paymentAmount
-                },
-                title: 'Add this vehicle to the payment list and cancel your scheduled payment?',
-                onCancel: function() {
-                  prv.cancelLocalScheduledPayment(p);
-                  Payments.addPaymentToQueue(p.floorplanId, p.vin, p.stockNumber, p.description, p.payoffAmount, true /*payoff*/);
-                }
-              };
-            }
-          }
-        };
-        $dialog.dialog(dialogOptions).open();
+        Payments.addPaymentToQueue(p.floorplanId, p.vin, p.stockNumber, p.description, p.payoffAmount, true /*payoff*/);
       },
 
       cancelPayment: function(payment) {
