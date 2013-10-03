@@ -62,6 +62,20 @@ label {
     }
   }
 
+  .sortable {
+    cursor: pointer;
+  }
+
+  .sorted {
+    /* TODO: replace with up-pointing arrow */
+    text-decoration: underline;
+  }
+
+  .sorted.desc {
+    /* TODO: replace with down-pointing arrow */
+    font-style: italic;
+  }
+
   td {
     height: 50px;
   }

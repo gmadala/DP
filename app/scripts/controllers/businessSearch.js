@@ -44,6 +44,17 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.sortBy = function (fieldName) {
+      if ($scope.data.sortBy === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.data.sortDescending = !$scope.data.sortDescending;
+      } else {
+        $scope.data.sortBy = fieldName;
+        $scope.data.sortDescending = false;
+      }
+      $scope.search();
+    };
+
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
     $scope.close = function() {
