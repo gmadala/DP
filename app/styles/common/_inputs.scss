@@ -2,7 +2,7 @@ select {
   @extend %heavy;
   @include border-radius(0);
   background: $white;
-  color: #17659D;
+  color: $brand-light;
   border: 1px solid #c8c8c8;
   height: 28px;
   width: 200px;

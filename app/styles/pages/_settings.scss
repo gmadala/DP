@@ -16,12 +16,12 @@
     @extend %thin;
     @extend %float-l;
     width: 35%;
-    color: #666;
+    color: $base-text-color;
   }
 
   .static {
     font-weight: normal;
-    color: #434343;
+    color: $darker-text-color;
   }
 
   .head-labels {

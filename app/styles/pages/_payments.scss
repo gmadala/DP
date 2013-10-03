@@ -86,7 +86,7 @@
 }
 
 .vehicle-info {
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid $border;
 }
 
 .detail-col {
@@ -95,7 +95,7 @@
   padding-bottom: 10px;
 
   & + .detail-col {
-    border-left: 1px solid #D1D1D1;
+    border-left: 1px solid $border;
   }
 
   .vehicle-info & {
@@ -118,11 +118,11 @@
 .detail-label {
   @extend %thin;
   @extend %half-width;
-  color: #666;
+  color: $base-text-color;
 }
 
 .detail-value {
-  color: #434343;
+  color: $darker-text-color;
 }
 
 .curtail-sch {
@@ -136,15 +136,16 @@
   th {
     @extend %align-left;
     vertical-align: bottom;
-    color: #666;
+    color: $base-text-color;
     font-weight: normal;
     line-height: $base-line-height;
     padding: 5px 10px;
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid $border;
   }
 
   td {
-    color: #434343;
+    color: $darker-text-color;
+    color: $darker-text-color;
     padding: 0 10px;
   }
 }
@@ -155,7 +156,7 @@
     @extend %thin;
     font-size: 13px;
     line-height: 1.4;
-    color: #666;
+    color: $base-text-color;
   }
 
   ul {
@@ -163,8 +164,8 @@
   }
 
   .queue-items {
-    border-top: 1px solid #D1D1D1;
-    border-bottom: 1px solid #D1D1D1;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
 
     p:first-child {
       margin-top: 10px;
@@ -188,7 +189,7 @@
       }
 
       & + li {
-        border-top: 1px solid #D1D1D1;
+        border-top: 1px solid $border;
       }
     }
 
@@ -201,7 +202,7 @@
       }
 
       &:hover span {
-        color: #666;
+        color: $base-text-color;
       }
     }
   }

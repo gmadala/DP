@@ -4,6 +4,10 @@
 
 * {
   @include box-sizing(border-box);
+
+  &:focus {
+    outline: none;
+  }
 }
 
 //drop a span with this ID anywhere you use checkboxes.
@@ -11,7 +15,7 @@
 
 body, html {
   min-width: 940px;
-  color: #666666;
+  color: $base-text-color;
 }
 
 .container-fluid {

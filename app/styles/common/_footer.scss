@@ -4,7 +4,7 @@ footer.container-fluid.row-fluid {
   @include gradient-row();
   @include box-shadow(rgba(black, 0.3) 0px 1px 1px);
   font-size: $tiny-font-size;
-  color: #08c;
+  color: $footer-text;
   background-color: #eeeeee;
   width: 100%;
   padding: 1.25em 0 1em 0;

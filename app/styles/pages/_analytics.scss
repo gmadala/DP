@@ -8,41 +8,46 @@
 
   thead {
     font-size: $tiny-font-size;
-    color: #666666;
+    color: $base-text-color;
     background-color: #eaeaea;
   }
 }
 
 .nxg-analytics {
-    .scale-description-x {
-      @extend .scale-description;
-      @extend %full-width;
-      @extend %center;
-      position: absolute;
-      bottom: 0px;
-    }
+  .scale-description-x {
+    @extend .scale-description;
+    @extend %full-width;
+    @extend %center;
+    position: absolute;
+    bottom: 0px;
+  }
 
   .details-toggle-btn {
     padding-left: 0;
     display: block;
   }
 
+  .aging-vehicles, .average-turn-chart {
+    .well-out {
+      height: 360px;
+    }
+  }
+
   .aging-vehicles {
     .well-out {
       @extend %align-right;
-      height: 30em;
     }
 
     li {
-      line-height: 32px;
+      margin-bottom: 10px;
+
+      .item-total {
+        margin: 2px 0;
+      }
     }
   }
 
   .average-turn-chart {
-    .well-out {
-      height: 30em;
-    }
-
     span {
       position: relative;
       margin-left: 1em;
@@ -78,17 +83,17 @@
     }
 
     &.collapsed .well-out {
-      height: 15em;
+      height: 180px;
     }
 
     &.expanded .well-out{
-      height: 24em;
+      height: 290px;
     }
 
     table {
-      margin: 0.3em 0 1em;
-      width: 100%;
+      @extend %full-width;
       font-size: $tiny-font-size;
+      margin: 0.3em 0 1em;
 
       tr td:last-child {
         @extend %align-right;
@@ -98,12 +103,6 @@
   }
 
   .movers-container {
-    position: relative;
-
-    .well-out {
-      height: 36em;
-    }
-
     canvas {
       margin: 1em 0 0 10.5em;
     }
@@ -126,7 +125,7 @@
     }
     .models {
       font-size: $tiny-font-size;
-      line-height: 14px;
+      line-height: 1.25;
 
       div {
         white-space: nowrap;
@@ -141,11 +140,11 @@
     }
   }
 
-  .top-auctions-container {
+  .top-auctions-container, .movers-container {
     position: relative;
 
     .well-out {
-      height: 36em;
+      height: 430px;
     }
   }
 }

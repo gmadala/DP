@@ -1,9 +1,22 @@
 // ===============
 // Variables
 // ===============
-// TODO: Replace dummy values with actual info from design specs.
 
-// Colors
+// TYPOGRAPHY
+// Fonts
+$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-size: 14px;
+$base-line-height: 1.2;
+$base-text-color: #666;
+$darker-text-color: #434343;
+
+// Type Sizes
+$tiny-font-size: 11px;
+$small-font-size: 12px;
+$large-font-size: 18px;
+
+// COLORS
+// Branding
 $brand: #135889; // blue
 $brand-text: #1864A1;
 $brand-light: #17659D; // slightly lighter than brand; resembles #0266A2
@@ -14,10 +27,22 @@ $brand-darkest: #115186; // dark blue shadow for buttons and text
 $brand-gradient-top: #499EC6; // login page background
 $brand-gradient-bottom: #319FC7;
 
+// Indicators
 $error: #D90000;
 $error-dark: #B01100; // red
 
-// GRAYS
+// Calendar
+$upcoming: #8EBE31; // green
+$today: #FDD33A; // yellow
+$overdue: #CE0012; // red
+
+// Footer
+$footer-text: #0088CC;
+
+// Borders/Rules
+$border: #D1D1D1;
+
+// Grays
 // Because we use so many;
 // Named according to their hex numbers to make it easier
 $gray-2: #222; // darkest
@@ -34,41 +59,11 @@ $gray-c: #CCC;
 $gray-d: #DDD;
 $gray-e: #EEE; // lightest
 
-// OTHER NEUTRALS
+// Other Neutrals
 $lighter: #EBEBF0;
 $lightest: #EDEDED;
 $white: #FFF;
 $black: #000;
-
-// TYPOGRAPHY
-// Fonts
-$base-font-family: Helvetica, Arial, sans-serif;
-$base-font-size: 14px;
-$base-line-height: 1.2;
-
-// Type Sizes
-$tiny-font-size: 11px;
-$small-font-size: 12px;
-$large-font-size: 18px;
-
-// Text
-// $p-size: 1em; // 12px
-// $h1-size: 3em; // 36px
-// $h2-size: 2.5em; // 30px
-// $h3-size: 2em; // 24px
-// $h4-size: 1.66em; // 20px
-// $h5-size: 1.25em; // 14px
-// $h6-size: 1em; // 12px
-
-// $p-line-height: 120%;
-
-// $p-color: #434343;
-// $h1-color: #434343;
-// $h2-color: $brand;
-// $h3-color: #434343;
-// $h4-color: #434343;
-// $h5-color: #434343;
-// $h6-color: #434343;
 
 // BUTTONS
 // Default Buttons
@@ -114,12 +109,12 @@ $btn2-hover-bkgd: #D5D5D5;
 $btn2-hover-grad-1: #EAEAEA;
 $btn2-hover-grad-2: #C4C4C4;
 
-// Tooltip
+// TOOLTIPS
 $tooltipArrowWidth: 10px;
 $tooltipArrowColor: #FFF;
 $tooltipBackground: #FFF;
 
-// Wells
+// WELLS
 $well-bkgd: #EEE;
 $well-border: #EEE;
 $well-out-bkgd: $white;

@@ -81,7 +81,7 @@
     top: 10px;
   }
   div {
-    background-color: #fff;
+    background-color: $white;
     padding: 5px 20px 5px 30px;
   }
   p {
@@ -93,7 +93,7 @@
   @extend %align-right;
   display: block;
   padding: 0.5em 0.5em 0 0.5em;
-  color: #666;
+  color: $base-text-color;
   border: none;
   background-color: transparent;
 
@@ -105,15 +105,15 @@
 .fc-event-title {
   @extend %small;
   display: block;
-  line-height: 14px;
+  line-height: 1.166666667;
   color: #999;
 }
 
 .fc-event-subtitle {
   @extend %heavy;
   font-size: 13px;
-  color: #666;
-  line-height: 16px;
+  color: $base-text-color;
+  line-height: 1.23;
 }
 
 .nxg-calendar-count {
@@ -121,22 +121,22 @@
   @extend %center;
   @extend %float-l;
   @include border-radius(6px);
-  line-height: 15px;
+  line-height: 1.25;
   width: 24px;
   color: $white;
-  background-color: #8ebe31;
-  border: 1px solid #8ebe31;
+  background-color: $upcoming;
+  border: 1px solid $upcoming;
 }
 
 .today .nxg-calendar-count {
-  color: #666;
-  background-color: #fdd33a;
-  border: 1px solid #fdd33a;
+  color: $base-text-color;
+  background-color: $today;
+  border: 1px solid $today;
 }
 
 .overdue .nxg-calendar-count {
-  background-color: #ce0012;
-  border: 1px solid #ce0012;
+  background-color: $overdue;
+  border: 1px solid $overdue;
 }
 
 .fc-text-arrow {
@@ -148,28 +148,28 @@
 }
 
 .fc-header .fc-button.fc-button-prev {
-  padding-right: 1.1em;
-  padding-left: 1em;
+  padding: 0 15px 0 14px;
+
   &.fc-state-disabled {
     margin: 0px 0px 0px 1px;
-    border-right: 1px solid #d5d5d5;
+    border-right: 1px solid $border;
     @include box-shadow(white 1px 0 0);
   }
 }
 
 .fc-button-next {
-  padding-left: 1.1em;
-  padding-right: 1em;
+  padding: 0 14px 0 15px;
 }
 
 .fc-header .fc-button {
-  color: #17659D;
+  color: $brand-light;
   border-bottom: none;
-  background-color: #fff;
+  background-color: $white;
   @include background-image(none);
   @include border-radius(0);
   height: 48px;
   margin: 0;
+
   &.fc-state-disabled {
     .fc-text-arrow {
       color: #9a9a9a;
@@ -177,6 +177,7 @@
     background-color: #eeeeee;
     border: 0;
   }
+
   &:hover {
     color: #56a4e6;
     @include box-shadow(none);
@@ -186,7 +187,7 @@
 .fc-header .fc-button.fc-button-today {
   @extend .btn;
   @extend %small;
-  @include background(linear-gradient(#ffffff, #ddd));
+  @include background(linear-gradient($white, #ddd));
   height: 23px;
   text-transform: uppercase;
   padding-right: 14px;

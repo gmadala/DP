@@ -52,16 +52,18 @@
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {
   @extend %center;
-  padding: 1em;
-  border: 1px solid #d5d5d5;
+  border: 1px solid $border;
   position: relative;
+
   canvas {
     @include rotate(10deg);
   }
+
   table {
     @extend %full-width;
     @extend %align-left;
   }
+
   .nxg-doughnut-chart-label {
     top: 58px;
     left: 81px;
@@ -69,16 +71,18 @@
 }
 
 .dashboard-more-details {
-  margin-top: 1em;
+  margin-top: 14px;
 }
 
 .credit-chart {
   canvas {
     @include scale(-1);
   }
+
   .nxg-doughnut-chart-label {
     top: 28px;
     left: 35px;
+
     .nxg-chart-legend-color {
       margin-right: 5px;
     }
