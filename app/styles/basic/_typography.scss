@@ -15,7 +15,7 @@ a {
   @extend %thin;
   font-size: 20px;
   line-height: 1;
-  color: #666;
+  color: $base-text-color;
   padding: 10px 10px 12px;
   border: 1px solid #F1F1F1;
   margin-bottom: 0;
@@ -27,14 +27,14 @@ a {
   background: #F1F1F1;
   font-size: 1em;
   line-height: $base-line-height;
-  color: #666;
+  color: $base-text-color;
   padding: 5px 10px;
   margin: 0;
 }
 
 .subtitle {
   @extend %heavy;
-  color: #666;
+  color: $base-text-color;
   font-size: $base-font-size;
   line-height: 1;
   margin: 20px 0 10px 0;

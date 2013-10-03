@@ -50,13 +50,13 @@
   border: 1px solid $gray-c;
 
   &.overdue {
-    color: #fff;
-    background-color: #ce0012;
-    border: 1px solid #ce0012;
+    color: $white;
+    background-color: $overdue;
+    border: 1px solid $overdue;
   }
 
   &.due-today {
-    background-color: #fdd33a;
-    border: 1px solid #fdd33a;
+    background-color: $today;
+    border: 1px solid $today;
   }
 }

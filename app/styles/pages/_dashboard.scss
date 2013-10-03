@@ -65,7 +65,7 @@
   @extend %heavy;
   @extend %float-r;
   @extend %small;
-  line-height: 20px;
+  line-height: 1.6666666667;
   margin-bottom: 3px;
 
   tr {
@@ -87,12 +87,12 @@
     padding: 0 5px;
 
     &.red {
-      color: #ce0012;
+      color: $overdue;
     }
   }
 }
 .chart-summary-table-total-row {
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid $border;
 }
 
 //overly specific rule to over-write bootstrap's grid for these two modules.
@@ -176,7 +176,7 @@
   }
 
   li {
-    line-height: 12px;
+    line-height: 1;
 
     span:nth-child(n+2) {
       color: #999;
@@ -185,12 +185,12 @@
 
   p {
     @extend %heavy;
-    line-height: 18px;
     font-size: 13px;
-    color: #666;
+    line-height: 1.4;
+    color: $base-text-color;
 
     &.overdue-amount {
-      color: #ce0012;
+      color: $overdue;
     }
   }
 
@@ -202,7 +202,7 @@
 .upcoming-payments {
   position: relative;
   padding: 0;
-  border: 1px solid #D5D5D5;
+  border: 1px solid $border;
   border-top: 0;
   margin-bottom: 14px;
 
@@ -242,12 +242,12 @@
     @extend %full-width;
     @extend %align-left;
     border-collapse: collapse;
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid $border;
   }
   td, th {
     padding: 0.25em 0 0.25em 1em;
-    border-left: 1px solid #d5d5d5;
-    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid $border;
+    border-right: 1px solid $border;
 
     &:first-child {
       border: 0;
@@ -270,7 +270,7 @@
 .details-toggle-line {
   @extend %full-width;
   display: block;
-  border-top: 1px solid #d5d5d5;
+  border-top: 1px solid $border;
   margin-bottom: 0.5em;
 }
 

@@ -25,7 +25,7 @@
 
   .keyword {
     padding-right: 10px;
-    border-right: 1px solid #D1D1D1;
+    border-right: 1px solid $border;
 
     .control-group, input {
        @extend %full-width;

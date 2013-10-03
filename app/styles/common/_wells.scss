@@ -41,9 +41,11 @@
 .well.adjacent {
   border: none;
   border-left: 1px solid white;
+
   &:first-child {
     border-left: 1px solid $well-adj-border;
   }
+
   &:last-child {
     border-right: 1px solid $well-adj-border;
   }

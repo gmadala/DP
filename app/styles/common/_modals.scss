@@ -29,7 +29,7 @@
 
   h3 {
     @extend h4;
-    line-height: 14px;
+    line-height: 1;
   }
 }
 
@@ -50,39 +50,46 @@
 }
 
 .modal-footer {
-  background-color: #fff;
-  padding: 1em 0 0 0;
-  margin: 0 1em 1em 1em;
+  background-color: $white;
+  padding: 12px 0 0 0;
+  margin: 0 12px 12px 12px;
 }
 
 .modal.search-modal {
   width: 720px;
   margin-left: -360px;
+
   .nxg-search-btn {
     i {
       top: 0;
     }
   }
+
   .modal-body {
-    padding: 0em;
-    margin: 1em 1em 0 1em;
+    padding: 0;
+    margin: 12px 12px 0 12px;
+
     &.search-results {
       padding: 0;
       border: none;
     }
   }
+
   table {
-    width: 100%;
+    @extend %full-width;
   }
+
   thead {
     background-color: #535353;
-    color: white;
+    color: $white;
   }
+
   th {
     @extend %align-left;
     text-transform: uppercase;
     font-weight: normal;
   }
+
   td, th {
     vertical-align: top;
     border: 1px solid #eaeaea;

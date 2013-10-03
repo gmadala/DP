@@ -29,7 +29,7 @@
 
 label {
   @extend %small;
-  line-height: 18px;
+  line-height: 1.5;
   margin: 14px 0 0 0;
 
   &:first-child {
@@ -76,13 +76,13 @@ label {
   margin-left: -240px;
 
   .floor-confirmation {
-    border: 1px solid #D1D1D1;
+    border: 1px solid $border;
 
     .detail-col {
       border: 0;
 
       &:first-child {
-        border-right: 1px solid #D1D1D1;
+        border-right: 1px solid $border;
 
         .detail-label {
           width: 30%;

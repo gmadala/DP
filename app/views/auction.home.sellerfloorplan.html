@@ -8,7 +8,7 @@
      on-search="search()"
      on-clear="resetSearch()"></div>
 
-<section class="receipts-list">
+<section class="selfloor-list">
   <ul class="unstyled">
     <li class="table-list-head">
       <div class="cell selfloor-vin">VIN</div>
@@ -55,15 +55,9 @@
       <div class="cell selfloor-actions">
 
         <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
-        <p>
-          <a class="btn btn-mini btn-block"> Title</a>
-        </p>
-        <p>
-          <a class="btn btn-mini btn-block" ng-show="true" ng-click="openEditTitle()">Edit Title</a>
-        </p>
+        <p><a class="btn btn-mini btn-block"> Title</a></p>
+        <p><a class="btn btn-mini btn-block" ng-show="true" ng-click="openEditTitle()">Edit Title</a></p>
       </div>
     </li>
-
   </ul>
-
 </section>

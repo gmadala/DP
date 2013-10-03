@@ -36,7 +36,7 @@
   }
 
   .count, .count-label {
-    color: #434343;
+    color: $darker-text-color;
   }
 
   .count {
@@ -48,7 +48,7 @@
   }
 
   .chkout-label, .chkout-value {
-    color: #666;
+    color: $base-text-color;
     margin: 0;
   }
 
@@ -88,7 +88,7 @@
 .sch-checkout .detail-col,
 .confirm-checkout .detail-col {
   @extend %full-width;
-  border: 1px solid #D1D1D1;
+  border: 1px solid $border;
   margin-bottom: 10px;
 }
 

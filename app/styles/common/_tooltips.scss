@@ -32,7 +32,7 @@
         left: 1px;
         margin-top: -$tooltipArrowWidth;
         border-width: $tooltipArrowWidth $tooltipArrowWidth $tooltipArrowWidth 0;
-        border-right-color: #FFF;
+        border-right-color: $white;
       }
     }
   }
@@ -41,7 +41,7 @@
 .tooltip-inner {
   @extend %small;
   @include border-radius(0);
-  color: #666;
+  color: $base-text-color;
   width: 250px;
   padding: 10px;
   border: 1px solid #BBB;
