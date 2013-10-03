@@ -22,13 +22,30 @@
   <table>
     <thead>
       <tr>
-          <th>Business Name</th>
-          <th>Legal Name</th>
-          <th>Business&nbsp;#</th>
-          <th ng-show="data.searchBuyersMode">Auction Access #</th>
-          <th>City</th>
-          <th>State</th>
-          <th></th>
+        <th ng-click="sortBy('BusinessName')" class="sortable"
+            ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+          Business Name
+        </th>
+        <th ng-click="sortBy('BusinessLegalName')" class="sortable"
+            ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+          Legal Name
+        </th>
+        <th ng-click="sortBy('BusinessNumber')" class="sortable"
+            ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+          Business&nbsp;#
+        </th>
+        <th ng-show="data.searchBuyersMode">
+          Auction Access #
+        </th>
+        <th ng-click="sortBy('City')" class="sortable"
+            ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+          City
+        </th>
+        <th ng-click="sortBy('State')" class="sortable"
+            ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+          State
+        </th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
