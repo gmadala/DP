@@ -20,7 +20,7 @@ describe('Controller: BusinessSearchCtrl', function () {
         close: function() {}
       },
       initialQuery: '',
-      mode: 'seller'
+      searchBuyersMode: false
     });
   }));
 

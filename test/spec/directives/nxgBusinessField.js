@@ -40,7 +40,7 @@ describe('Directive: nxgBusinessField', function () {
     };
 
     element = angular.element('<form name="myForm">' +
-      '<input id="fooInput" name="fooInputName" nxg-business-field="seller" ' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field="sellers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
       'ng-required="model.requireMe">' +
       '</input></form>');
@@ -52,10 +52,25 @@ describe('Directive: nxgBusinessField', function () {
     expect(element.find('input').attr('id')).toBe('fooInput');
   });
 
-  it('should pass the mode through to the business search', inject(function ($dialog) {
+  it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($dialog) {
     spyOn($dialog, 'dialog').andCallThrough();
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.dialog.mostRecentCall.args[0].resolve.mode()).toBe('seller');
+    expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(false);
+  }));
+
+  it('should set the searchBuyersMode for the search to true if field is in buyers mode',
+    inject(function ($dialog, $compile, $rootScope) {
+    element = angular.element('<form name="myForm">' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
+      'ng-disabled="model.disableMe" selected-business="model.bizness"' +
+      'ng-required="model.requireMe">' +
+      '</input></form>');
+    element = $compile(element)(scope);
+    $rootScope.$digest();
+
+    spyOn($dialog, 'dialog').andCallThrough();
+    element.find('input').scope().openBusinessSearch();
+    expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(true);
   }));
 
   it('should respect the ng-disabled attribute on the original input', function () {

@@ -9,7 +9,7 @@
  * business.
  *
  * This supports the following attributes:
- * @param nxg-business-field="seller|buyer" - required, type of business to select
+ * @param nxg-business-field="sellers|buyers" - required, type of business to match against
  * @param selected-business="expr" - selected business will be bound to this scope location
  * @param name="any" - if present, publish an ngModelController to the parent form controller under this name
  *  this controller's values will reflect the search field only, but validity will follow ng-required as below
@@ -47,7 +47,6 @@ angular.module('nextgearWebApp')
       $scope.selection = null;
     };
 
-    // TODO: Final integration with business search modal should be covered under req #304
     $scope.openBusinessSearch = function() {
       var dialogOptions = {
         dialogClass: 'modal search-modal search-modal-business',
@@ -60,8 +59,8 @@ angular.module('nextgearWebApp')
           initialQuery: function () {
             return $scope.query;
           },
-          mode: function () {
-            return $scope.mode;
+          searchBuyersMode: function () {
+            return $scope.mode === 'buyers';
           }
         }
       };

@@ -6,93 +6,133 @@
     "SearchResults": [
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO1",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto1",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto1"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO2",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto2",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto2"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO3",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto3",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto3"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO4",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto4",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto4"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO5",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto5",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto5"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO6",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto6",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto6"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO7",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto7",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto7"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO8",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto8",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto8"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO9",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto9",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto9"
       },
       {
         "BusinessId": "13fbf16e-0e12-40a5-8558-3b926b4c9049",
-        "BusinessNumber": 72694,
         "BusinessName": "TRICOLOR AUTO10",
-        "IsUniversalSource": true,
-        "LegalName": "TriColor Auto10",
+        "BusinessNumber": 72694,
+        "AuctionAccessDealershipNumbers": [0],
+        "Address": "123 Main St.",
         "City": "Rochester",
-        "State": "New York"
+        "State": "New York",
+        "PostalCode": "14621",
+        "IsBuyer": "false",
+        "IsSeller": "true",
+        "BusinessLegalName": "TriColor Auto10"
       }
     ]
   }
