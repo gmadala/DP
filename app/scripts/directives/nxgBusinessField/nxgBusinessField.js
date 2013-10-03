@@ -72,8 +72,6 @@ angular.module('nextgearWebApp')
           $scope.selection = selectedBusiness;
         }
         searchOpen = false;
-        // return focus to the element
-        $element.find('input').focus();
       });
     };
 
