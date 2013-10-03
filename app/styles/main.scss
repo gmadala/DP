@@ -4,28 +4,28 @@
 
 @import "compass/css3";
 
-@import "variables";
+@import "basic/variables";
 @import "../components/sass-bootstrap/lib/bootstrap";
-@import "mixins";
-@import "adjacent-grid";
-@import "base";
-@import "helpers";
-@import "typography";
-@import "buttons";
-@import "header";
-@import "footer";
-@import "tableLists";
-@import "calendar";
-@import "charts";
-@import "indicators";
-@import "wells";
-@import "nav";
-@import "modals";
-@import "notices";
-@import "inputs";
-@import "glyphicons";
-@import "tooltips";
-@import "search";
+@import "basic/mixins";
+@import "basic/adjacent-grid";
+@import "basic/base";
+@import "basic/helpers";
+@import "basic/typography";
+@import "common/buttons";
+@import "common/header";
+@import "common/footer";
+@import "common/tableLists";
+@import "common/calendar";
+@import "common/charts";
+@import "common/indicators";
+@import "common/wells";
+@import "common/nav";
+@import "common/modals";
+@import "common/notices";
+@import "common/inputs";
+@import "basic/glyphicons";
+@import "common/tooltips";
+@import "common/search";
 
 // Individual page styles.
 @import "pages/login";
