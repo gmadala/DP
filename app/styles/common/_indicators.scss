@@ -51,9 +51,10 @@
   @extend %heavy;
   @extend %center;
   @extend %float-l;
-  @include border-radius(6px);
+  @include border-radius(5px);
   line-height: 1.33333333;
-  width: 28px;
+  min-width: 20px;
+  padding: 0 5px;
   margin-right: 7px;
   border: 1px solid #CCC;
 
