@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar'])
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+    
+    var interceptor;
 
     $urlRouterProvider.otherwise('/home');
     $stateProvider
@@ -16,6 +18,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
         allowAnonymous: true
+      })
+      .state('logout', {
+        controller:'LogoutCtrl'
       })
 
       /**
@@ -135,8 +140,31 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         isAuctionState: true
       })
     ;
+
+    interceptor = ['$rootScope', '$q', function($rootScope, $q) {
+      function success(response) {
+        return response;
+      }
+
+      function error(response) {
+        var status = response.status;
+
+        if (status === 401) {
+          $rootScope.$broadcast('event:requiresAuth');
+        }
+
+        return $q.reject(response);
+      }
+
+      return function (promise) {
+        return promise.then(success, error);
+      };
+    }];
+
+    $httpProvider.responseInterceptors.push(interceptor);
+
   })
-  .run(function($rootScope, $location, User) {
+  .run(function($rootScope, $location, $state, User) {
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
@@ -153,5 +181,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           }
         }
       }
-    );
+    ).$on('event:requiresAuth',
+      function() {
+        $state.transitionTo('logout');
+      });
   });
