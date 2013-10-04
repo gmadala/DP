@@ -74,10 +74,10 @@ angular.module('nextgearWebApp')
       },
 
       logout: function() {
-        // return api.request('GET', '/some/logout/endpoint')
-        //   .then(function(){
+        return api.request('GET', '/userAccount/logout')
+          .then(function(){
             api.resetAuthToken();
-          // });
+          });
       },
 
       refreshStatics: function() {
