@@ -7,7 +7,7 @@ angular.module('nextgearWebApp')
         var self = this,
           params = {
             Keyword: criteria.query || undefined,
-            PaymentMethodIds: criteria.filter,
+            PaymentMethods: criteria.filter,
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,
             OrderBy: 'CreateDate',
