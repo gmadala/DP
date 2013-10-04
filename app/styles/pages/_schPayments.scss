@@ -1,11 +1,5 @@
 // Scheduled Payments
 
-.schPayments-list {
-  .main-info {
-    height: 85px;
-  }
-}
-
 .sch-label {
   @extend %heavy;
 }
@@ -18,7 +12,7 @@
 }
 
 .cell {
-  &.sch-more { min-width: 4%; }
+  &.sch-more { width: 4%; }
   &.sch-schDate { width: 18%; }
   &.sch-desc { width: 34%; }
   &.sch-status { width: 20%; }

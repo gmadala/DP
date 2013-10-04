@@ -48,8 +48,8 @@
 
             <div class="cell rec-payInfo">
               <p><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
-                <span class="sch-sub-label">Check #:</span> {{ receipt.CheckNumber }} </p>
-              <p>{{ receipt.PayeeDescription }}</p>
+                <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span> {{ receipt.CheckNumber }} </p>
+              <p ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</p>
             </div>
             <div class="cell rec-amtApplied">
               <p>{{ receipt.AmountApplied | currency }}</p>

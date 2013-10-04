@@ -112,7 +112,8 @@
 
 <div class="row-fluid curtail-sch">
   <h4 class="well-head">Original Curtailment Schedule</h4>
-  <table>
+  <p class="notice-box" ng-hide="vehicleDetails.curtailments">No curtailment schedule available.</p>
+  <table ng-show="vehicleDetails.curtailments">
       <tr>
           <th>Start Date</th>
           <th>Due Date</th>
