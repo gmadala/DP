@@ -33,7 +33,7 @@
           </li>
 
           <li class="table-list-row" ng-repeat="receipt in receipts.results">
-            <div class="cell rec-num"><p>{{ receipt.ReceiptNumber }}</p></div>
+            <div class="cell rec-num"><p>{{ receipt.TransactionNumber }}</p></div>
             <div class="cell rec-status">
               <p ng-switch="getReceiptStatus(receipt)">
                 <span ng-switch-when="nsf">Insufficient Funds</span>

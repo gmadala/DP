@@ -5,7 +5,6 @@
       "ReceiptRowCount": 20,
       "Receipts": [
         {
-          "ReceiptNumber": "abc123",
           "FinancialTransactionId" : "fn-123",
           "TransactionNumber" : 1241,
           "CheckNumber": "chk123",
@@ -20,7 +19,6 @@
           "PaymentMethod": "PaymentMethod"
         },
         {
-          "ReceiptNumber": "def456",
           "FinancialTransactionId" : "fn-345",
           "TransactionNumber" : 1242,
           "CheckNumber": "chk124",
@@ -35,7 +33,6 @@
           "PaymentMethod": "PaymentMethod2"
         },
         {
-          "ReceiptNumber": "ghi789",
           "FinancialTransactionId" : "fn-678",
           "TransactionNumber" : 1243,
           "CheckNumber": "chk125",
