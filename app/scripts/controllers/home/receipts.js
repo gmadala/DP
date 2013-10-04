@@ -63,10 +63,10 @@ angular.module('nextgearWebApp')
           allIds = [];
         angular.forEach(statics.paymentMethods, function (method) {
           filters.push({
-            label: method.Name,
-            value: method.Id
+            label: method.PaymentMethodName,
+            value: method.PaymentMethodId
           });
-          allIds.push(method.Id);
+          allIds.push(method.PaymentMethodId);
         });
         // special View All filter is simply a list of all payment method ids
         filters.unshift({

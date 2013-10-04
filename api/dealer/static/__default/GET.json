@@ -349,28 +349,28 @@
         ],
         "PaymentMethods": [
           {
-            "Id": 0,
-            "Name": "Auction Check"
+            "PaymentMethodId": 0,
+            "PaymentMethodName": "Auction Check"
           },
           {
-            "Id": 1,
-            "Name": "Certified Funds"
+            "PaymentMethodId": 1,
+            "PaymentMethodName": "Certified Funds"
           },
           {
-            "Id": 2,
-            "Name": "Check"
+            "PaymentMethodId": 2,
+            "PaymentMethodName": "Check"
           },
           {
-            "Id": 3,
-            "Name": "CPP Claim"
+            "PaymentMethodId": 3,
+            "PaymentMethodName": "CPP Claim"
           },
           {
-            "Id": 4,
-            "Name": "Non Dealer Check"
+            "PaymentMethodId": 4,
+            "PaymentMethodName": "Non Dealer Check"
           },
           {
-            "Id": 5,
-            "Name": "Proceeds"
+            "PaymentMethodId": 5,
+            "PaymentMethodName": "Proceeds"
           }
         ]
     }
