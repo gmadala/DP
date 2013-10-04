@@ -30,7 +30,7 @@ angular.module('nextgearWebApp')
             titleState: r.TitleState,
             trackingNumber: r.TrackingNumber,
             disbursementDate: r.DisbursementDate,
-            curtailments: r.Curtailments
+            curtailments: r.OriginalCurtailmentSchedule
           };
         });
       }
