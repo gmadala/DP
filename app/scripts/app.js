@@ -13,14 +13,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'LoginCtrl',
         allowAnonymous: true
       })
+      .state('logout', {
+        controller:'LogoutCtrl'
+      })
       .state('loginRecover', {
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
         allowAnonymous: true
-      })
-      .state('logout', {
-        controller:'LogoutCtrl'
       })
 
       /**
@@ -181,8 +181,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           }
         }
       }
-    ).$on('event:requiresAuth',
+    );
+    $rootScope.$on('event:requiresAuth',
       function() {
         $state.transitionTo('logout');
-      });
+      }
+    );
   });
