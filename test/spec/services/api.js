@@ -12,7 +12,7 @@ describe('Service: api', function () {
     http = $http;
   }));
 
-  describe('setAuthToken and hasAuthToken functions', function () {
+  describe('setAuthToken, resetAuthToken and hasAuthToken functions', function () {
     it('should set the correct http default Authorization header', function () {
       api.setAuthToken('foo');
       expect(http.defaults.headers.common.Authorization).toBe('CT foo');
@@ -28,6 +28,12 @@ describe('Service: api', function () {
       expect(api.hasAuthToken()).toBe(false);
 
       api.setAuthToken();
+      expect(api.hasAuthToken()).toBe(false);
+    });
+
+    it('should correctly reset the token', function() {
+      api.setAuthToken('foo');
+      api.resetAuthToken();
       expect(api.hasAuthToken()).toBe(false);
     });
   });

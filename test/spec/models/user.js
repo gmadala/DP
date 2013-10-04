@@ -174,6 +174,11 @@ describe('Model: User', function () {
         Success: true,
         Data: {}
       });
+
+      httpBackend.whenGET('/userAccount/logout').respond({
+        Success: true,
+        Data: {}
+      });
     });
 
     it('should make the expected POST request', function () {
@@ -226,6 +231,15 @@ describe('Model: User', function () {
 
       expect(out).toBeDefined();
       expect(out.showUserInit).toBe(true);
+    });
+
+    it('should reset the auth token on logout', function() {
+      expect(user.isLoggedIn()).toBe(false);
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.isLoggedIn()).toBe(true);
+      user.logout();
+      expect(user.isLoggedIn()).toBe(false);
     });
 
   });

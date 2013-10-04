@@ -27,7 +27,8 @@ angular.module('nextgearWebApp')
       isDealer: User.isDealer,
       info: User.getInfo,
       logout: function() {
-        $state.transitionTo('logout');
+        User.logout();
+        $location.path('/login');
       },
       navLinks: function() {
         return User.isDealer() ? dealerLinks : auctionLinks;
