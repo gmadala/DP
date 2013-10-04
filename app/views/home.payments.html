@@ -94,7 +94,7 @@
                       </div>
                     </div>
 
-                    <div class="cell pay-vin"><p>{{ payment.Vin }}</p></div>
+                    <div class="cell pay-vin"><p>{{ payment.Vin | shortenVIN }}</p></div>
                     <div class="cell pay-stock"><p>{{ payment.StockNumber }}</p></div>
                     <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
                     <div class="cell pay-payment-amt">

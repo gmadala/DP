@@ -1,9 +1,14 @@
 // TABLE LISTS (Payments, Sch. Payments, Receipts, Floorplan)
 
 .table-list-head, .table-list-row {
+  @extend %full-width;
   position: relative;
+  display: table;
 
   .cell {
+    display: table-cell;
+    vertical-align: top;
+    word-wrap: break-word;
     padding: 8px 5px;
   }
 }
@@ -44,13 +49,13 @@
       border-left: 1px solid #DDD;
     }
   }
-}
 
-.cell {
-  @extend %float-l;
-  @include box-sizing(border-box);
-  min-height: 100%;
-  height: 100%;
+  p {
+    margin: 0;
+    & + p {
+      margin-top: 10px;
+    }
+  }
 }
 
 .no-results {

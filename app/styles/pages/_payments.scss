@@ -1,10 +1,5 @@
 // PAYMENTS
 
-.fees .main-info,
-.payments .main-info {
-  height: 70px;
-}
-
 .fees .table-list-head {
   background-color: #AAA;
 }
@@ -16,7 +11,7 @@
   &.fee-posted { width: 15%; }
   &.fee-amt { width: 22%; }
 
-  &.pay-more { min-width: 4%; }
+  &.pay-more { width: 4%; }
   &.pay-desc { width: 17%; }
   &.pay-due { width: 13%; }
   &.pay-vin { width: 11%; }

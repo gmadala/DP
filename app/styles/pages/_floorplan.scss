@@ -1,7 +1,7 @@
 // FLOORPLAN
 
 .cell {
-  &.fl-more { min-width: 3%; }
+  &.fl-more { width: 3%; }
   &.fl-desc { width: 15%; }
   &.fl-vin { width: 8%; }
   &.fl-stock { width: 7%; }
@@ -12,8 +12,4 @@
   &.fl-lastPayDate { width: 12%; }
   &.fl-titleRelease { width: 12%; }
   &.fl-title { width: 5%; }
-}
-
-.floor-list .main-info {
-  height: 60px;
 }
