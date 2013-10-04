@@ -72,12 +72,12 @@ describe('Controller: ReceiptsCtrl', function () {
       spyOn(user, 'getStatics').andReturn({
         paymentMethods: [
           {
-            Name: 'Foo',
-            Id: 'fooId'
+            PaymentMethodName: 'Foo',
+            PaymentMethodId: 'fooId'
           },
           {
-            Name: 'Bar',
-            Id: 'barId'
+            PaymentMethodName: 'Bar',
+            PaymentMethodId: 'barId'
           }
         ]
       });
