@@ -133,11 +133,11 @@ describe('Model: User', function () {
       expect(requestData.List.length).toBe(2);
       expect(angular.equals(requestData.List[0], {
         QuestionId: 0,
-        Answer: 'grail'
+        QuestionText: 'grail'
       })).toBe(true);
       expect(angular.equals(requestData.List[1], {
         QuestionId: 1,
-        Answer: 'blue'
+        QuestionText: 'blue'
       })).toBe(true);
     });
 
