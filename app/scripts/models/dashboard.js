@@ -144,8 +144,8 @@ angular.module('nextgearWebApp')
             _.each(
               response.Points,
               function (point) {
-                  result.labels.push(point.x);
-                  result.datasets[0].data.push(point.y);
+                  result.labels.push(point.X);
+                  result.datasets[0].data.push(point.Y);
                 }
             );
 
