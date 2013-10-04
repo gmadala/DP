@@ -27,8 +27,11 @@ angular.module('nextgearWebApp')
           BusinessId: data.BusinessId ? data.BusinessId.BusinessId : null
         });
 
-        if (data.SelectedVehicle) {
-          data.SelectedVehicle = _.pick(data.SelectedVehicle, ['GroupNumber', 'UVc']);
+        if (data.$selectedVehicle) {
+          // selected vehicle from black book is identified by the following two properties
+          data.BlackBookGroupNumber = data.$selectedVehicle.GroupNumber;
+          data.BlackBookUvc = data.$selectedVehicle.UVc;
+          // selected vehicle from black book takes precedence over manually-entered vehicle characteristics
           data.UnitMake = null;
           data.UnitModel = null;
           data.UnitYear = null;

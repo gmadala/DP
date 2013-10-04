@@ -118,7 +118,6 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.PaySeller).toBe(null);
     expect(scope.defaultData.LineOfCreditId).toBe(null);
     expect(scope.defaultData.PhysicalInventoryAddressId).toBe(null);
-    expect(scope.defaultData.SelectedVehicle).toBe(null);
     expect(scope.defaultData.BusinessId).toBe(null);
     expect(scope.defaultData.UnitColorId).toBe(null);
     expect(scope.defaultData.UnitMake).toBe(null);
@@ -134,6 +133,7 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.TitleTypeId).toBe(null);
     expect(scope.defaultData.ConsignerTicketNumber).toBe(null);
     expect(scope.defaultData.LotNumber).toBe(null);
+    expect(scope.defaultData.$selectedVehicle).toBe(null);
     expect(scope.defaultData.$blackbookMileage).toBe(null);
   });
 
@@ -203,14 +203,14 @@ describe('Controller: FloorCarCtrl', function () {
       fakeModelCtrl = {
         $valid: true
       };
-      scope.data.SelectedVehicle = {};
+      scope.data.$selectedVehicle = {};
       scope.data.UnitMileage = '1200';
       scope.data.UnitVin = 'abc123';
       scope.data.$blackbookMileage = null;
     });
 
     it('should do nothing if the VIN has not been resolved to a vehicle', function () {
-      scope.data.SelectedVehicle = null;
+      scope.data.$selectedVehicle = null;
       scope.mileageExit(fakeModelCtrl);
       expect(blackbookMock.fetchVehicleTypeInfoForVin).not.toHaveBeenCalled();
     });
@@ -229,14 +229,14 @@ describe('Controller: FloorCarCtrl', function () {
 
     it('should call for blackbook info with the current VIN, mileage, and resolved vehicle', function () {
       scope.mileageExit(fakeModelCtrl);
-      expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('abc123', '1200', scope.data.SelectedVehicle);
+      expect(blackbookMock.fetchVehicleTypeInfoForVin).toHaveBeenCalledWith('abc123', '1200', scope.data.$selectedVehicle);
     });
 
     it('should expose the new blackbook vehicle info on success', function () {
       vinLookupResult = {foo: 'bar'};
       scope.mileageExit(fakeModelCtrl);
       scope.$apply();
-      expect(scope.data.SelectedVehicle).toBe(vinLookupResult);
+      expect(scope.data.$selectedVehicle).toBe(vinLookupResult);
     });
 
     it('should cache the mileage used for the current blackbook info on success', function () {

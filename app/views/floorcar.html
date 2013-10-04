@@ -34,8 +34,8 @@
            </label>
 
            <label for="bookVal">NextGear Book Value</label>
-           <p id="bookVal" ng-class="{muted: !data.$blackbookMileage || !data.SelectedVehicle }">
-             {{ data.$blackbookMileage && data.SelectedVehicle && (data.SelectedVehicle.AverageValue | currency) || 'N/A' }}
+           <p id="bookVal" ng-class="{muted: !data.$blackbookMileage || !data.$selectedVehicle }">
+             {{ data.$blackbookMileage && data.$selectedVehicle && (data.$selectedVehicle.AverageValue | currency) || 'N/A' }}
            </p>
 
            <label for="inputTitleHolder">Who has the Title?</label>
