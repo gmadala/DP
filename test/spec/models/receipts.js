@@ -129,12 +129,12 @@ describe('Service: Receipts', function () {
       expect(callParams.EndDate).toBe('2013-03-01');
     });
 
-    it('should send the filter as PaymentMethodIds', function () {
+    it('should send the filter as PaymentMethods', function () {
       receipts.search(angular.extend({}, defaultCriteria, {
         filter: '1,2,3,4'
       }));
       httpBackend.flush();
-      expect(callParams.PaymentMethodIds).toBe('1,2,3,4');
+      expect(callParams.PaymentMethods).toBe('1,2,3,4');
     });
 
   });
