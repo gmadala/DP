@@ -38,7 +38,7 @@ angular.module('nextgearWebApp')
     $scope.vinChange = function () {
       if (s.vinMode !== 'none') {
         // if the VIN changes after lookup, clear any match state
-        $scope.data.SelectedVehicle = null;
+        $scope.data.$selectedVehicle = null;
         s.vinMode = 'none';
       }
     };
@@ -79,7 +79,7 @@ angular.module('nextgearWebApp')
       Blackbook.fetchVehicleTypeInfoForVin($scope.data.UnitVin, mileage).then(
         function (result) {
           s.vinLookupPending = false;
-          $scope.data.SelectedVehicle = result;
+          $scope.data.$selectedVehicle = result;
           $scope.data.$blackbookMileage = mileage;
           s.vinMode = 'matched';
         },

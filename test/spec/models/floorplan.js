@@ -105,9 +105,9 @@ describe('Model: Floorplan', function () {
       expect(sentData.BusinessId).toBe(null);
     });
 
-    it('should trim the SelectedVehicle if present and clear redundant Unit* properties', function () {
+    it('should set Blackboook properties and clear redundant Unit* properties if $selectedVehicle present ', function () {
       floorplan.create(angular.extend({}, dummyFormData, {
-        SelectedVehicle: {
+        $selectedVehicle: {
           GroupNumber: 'gn',
           UVc: 'uvc',
           VinPos1To8: 'vh34t45y',
@@ -120,23 +120,25 @@ describe('Model: Floorplan', function () {
         UnitStyle: 'style'
       }));
       httpBackend.flush();
-      expect(angular.equals(sentData.SelectedVehicle, {GroupNumber: 'gn', UVc: 'uvc'})).toBe(true);
+      expect(sentData.BlackBookGroupNumber).toBe('gn');
+      expect(sentData.BlackBookUvc).toBe('uvc');
       expect(sentData.UnitMake).toBe(null);
       expect(sentData.UnitModel).toBe(null);
       expect(sentData.UnitYear).toBe(null);
       expect(sentData.UnitStyle).toBe(null);
     });
 
-    it('should retain Unit* property values if SelectedVehicle not present', function () {
+    it('should retain Unit* property values if $selectedVehicle not present', function () {
       floorplan.create(angular.extend({}, dummyFormData, {
-        SelectedVehicle: null,
+        $selectedVehicle: null,
         UnitMake: 'make',
         UnitModel: 'model',
         UnitYear: '2004',
         UnitStyle: 'style'
       }));
       httpBackend.flush();
-      expect(sentData.SelectedVehicle).toBe(null);
+      expect(sentData.BlackBookGroupNumber).toBeFalsy();
+      expect(sentData.BlackBookUvc).toBeFalsy();
       expect(sentData.UnitMake).toBe('make');
       expect(sentData.UnitModel).toBe('model');
       expect(sentData.UnitYear).toBe(2004);

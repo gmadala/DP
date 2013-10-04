@@ -40,16 +40,16 @@
 
   <div class="nxg-vin-match-info nxg-static" ng-switch-when="matched">
     <label for="outputMake">Make</label>
-    <span id="outputMake">{{ data.SelectedVehicle.Make }}</span>
+    <span id="outputMake">{{ data.$selectedVehicle.Make }}</span>
 
     <label for="outputModel">Model</label>
-    <span id="outputModel">{{ data.SelectedVehicle.Model }}</span>
+    <span id="outputModel">{{ data.$selectedVehicle.Model }}</span>
 
     <label for="outputYear">Year</label>
-    <span id="outputYear">{{ data.SelectedVehicle.Year }}</span>
+    <span id="outputYear">{{ data.$selectedVehicle.Year }}</span>
 
     <label for="outputStyle">Style</label>
-    <span id="outputStyle">{{ data.SelectedVehicle.Style }}</span>
+    <span id="outputStyle">{{ data.$selectedVehicle.Style }}</span>
   </div>
 
   <div id="nxg-vin-no-match-info" ng-switch-when="noMatch">

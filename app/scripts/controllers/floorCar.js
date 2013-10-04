@@ -27,25 +27,25 @@ angular.module('nextgearWebApp')
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: false, // Boolean, default is no (DEALER ONLY)
-      SelectedVehicle: null, // Object returned from VIN lookup or manual vehicle lookup chain (make>model>year>style)
       BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
-      UnitMake: null, // string - should match SelectedVehicle.Make
+      UnitMake: null, // string
       UnitMileage: null, // string
-      UnitModel: null, // string -should match SelectedVehicle.Model
+      UnitModel: null, // string
       UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
-      UnitStyle: null, // string - should match SelectedVehicle.Style
+      UnitStyle: null, // string
       UnitTitleNumber: null, // string
       UnitTitleStateId: null, // State object locally, flatten to string for API tx
       UnitVin: null, // string
-      VinAckLookupFailure: false, // Boolean (whether SelectedVehicle data came from VIN or manual attribute entry)
-      UnitYear: null, // int - should match SelectedVehicle.Year
+      VinAckLookupFailure: false, // Boolean (whether vehicle data came from VIN or manual attribute entry)
+      UnitYear: null, // int
       TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
       TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
       ConsignerTicketNumber: null, // string (AUCTION ONLY)
       LotNumber: null, // string (AUCTION ONLY)
       // transient local values
+      $selectedVehicle: null, // Object returned from VIN lookup, populates BlackBookGroupNumber & BlackBookUvc on tx
       $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
 
@@ -98,7 +98,7 @@ angular.module('nextgearWebApp')
 
     $scope.mileageExit = function(modelCtrl) {
       var newMileage = $scope.data.UnitMileage;
-      if (!$scope.data.SelectedVehicle || !modelCtrl.$valid ||
+      if (!$scope.data.$selectedVehicle || !modelCtrl.$valid ||
           newMileage === $scope.data.$blackbookMileage) {
         return;
       }
@@ -106,9 +106,9 @@ angular.module('nextgearWebApp')
       Blackbook.fetchVehicleTypeInfoForVin(
           $scope.data.UnitVin,
           newMileage,
-          $scope.data.SelectedVehicle).then(
+          $scope.data.$selectedVehicle).then(
         function (result) {
-          $scope.data.SelectedVehicle = result;
+          $scope.data.$selectedVehicle = result;
           $scope.data.$blackbookMileage = newMileage;
         }, function (/*error*/) {
           $scope.data.$blackbookMileage = null;

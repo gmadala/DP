@@ -107,12 +107,12 @@ describe('Directive: nxgVinDetails', function () {
 
       it('should clear any selected vehicle from the model & return to starting mode', function () {
         scope.data = {
-          SelectedVehicle: {}
+          $selectedVehicle: {}
         };
         scope.settings.vinMode = 'matched';
 
         scope.vinChange();
-        expect(scope.data.SelectedVehicle).toBe(null);
+        expect(scope.data.$selectedVehicle).toBe(null);
         expect(scope.settings.vinMode).toBe('none');
       });
 
@@ -222,14 +222,14 @@ describe('Directive: nxgVinDetails', function () {
         expect(scope.data.$blackbookMileage).toBe('1200');
       });
 
-      it('should attach the result to SelectedVehicle upon success, and change to matched mode', function () {
+      it('should attach the result to $selectedVehicle upon success, and change to matched mode', function () {
         vinLookupResult = {};
 
         scope.lookupVin();
         expect(scope.settings.vinLookupPending).toBe(true);
 
         scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
-        expect(scope.data.SelectedVehicle).toBe(vinLookupResult);
+        expect(scope.data.$selectedVehicle).toBe(vinLookupResult);
         expect(scope.settings.vinMode).toBe('matched');
         expect(scope.settings.vinLookupPending).toBe(false);
       });
