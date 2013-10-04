@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar'])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
-    
+
     var interceptor;
 
     $urlRouterProvider.otherwise('/home');
