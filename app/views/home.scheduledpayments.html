@@ -60,7 +60,7 @@
                   <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
                    {{ pay.statusDate | moment }}
                 </p>
-                <a class="btn btn-small" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
+                <a class="receipt-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
               </div>
 
               <div class="cell sch-amount">
