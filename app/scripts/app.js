@@ -136,30 +136,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       })
     ;
 
-    // response interceptors are deprecated as of 1.1.4 in favor of more generalized
-    // interceptors which may be pushed onto the $httpProvider.interceptors array
-    var interceptor = ['$rootScope', '$q', function($rootScope, $q) {
-      function success(response) {
-        return response;
-      }
-
-      function error(response) {
-        var status = response.status;
-
-        if (status === 401) {
-          $rootScope.$broadcast('event:requiresAuth');
-        }
-
-        return $q.reject(response);
-      }
-
-      return function (promise) {
-        return promise.then(success, error);
-      };
-    }];
-
-    $httpProvider.responseInterceptors.push(interceptor);
-
   })
   .run(function($rootScope, $location, User) {
 
