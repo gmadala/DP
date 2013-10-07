@@ -1,0 +1,43 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "Username": "10264DG",
+    "SecurityQuestions": [
+      {
+        "SecurityQuestionId": 1,
+        "Answer": "The Matrix"
+      },
+      {
+        "SecurityQuestionId": 3,
+        "Answer": "Imagínate"
+      }
+    ],
+    "Email": "diana.guarin@manheim.com",
+    "CellPhone": "2143301800",
+    "BusinessEmail": "diana.guarin@manheim.com",
+    "EnhancedRegistrationEnabled": false,
+    "Addresses": [
+      {
+        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
+        "City": "Dallas",
+        "Fax": "2143399361",
+        "IsTitleReleaseAddress": true,
+        "Line1": "5333 West Kiest Blvd",
+        "Line2": null,
+        "State": "TX",
+        "Zip": "75236",
+        "Phone": "2143301800"
+      }
+    ],
+    "Notifications": [
+      {
+        "NotificationId": "e4b6c079-3ae0-4ac4-84bc-0474d56bb2f5",
+        "NotificationName": "Some Notification",
+        "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403d84",
+        "DeliveryMethodName": "Email",
+        "Enabled": false
+      }
+    ]
+  }
+}

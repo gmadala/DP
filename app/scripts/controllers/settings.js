@@ -1,21 +1,52 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('SettingsCtrl', function() {})
-  .controller('ProfileCtrl', function($scope) {
-    $scope.profile = {
-      username: 'test user',
-      password: 'test pword',
-      secQuestion: 'Where were you born?',
-      email: 'dealername@company.com',
-      phone: '(555) 555-5555'
-    };
+  .controller('SettingsCtrl', function($scope, $dialog, Settings) {
+    $scope.loading = false;
 
-    $scope.editable = false;
+    Settings.get().then(function(results) {
+        $scope.loading = true;
+        $scope.profile = {
+          data: {
+            username: results.Username,
+            email: results.BusinessEmail,
+            phone: results.CellPhone,
+            questions: results.SecurityQuestions,
+            allQuestions: results.AllSecurityQuestions
+          },
+          dirtyData: null, // a copy of the data for editing (lazily built)
+          editable: false,
+          edit: function() {
+            this.dirtyData = angular.copy(this.data);
+            this.editable = true;
+          },
+          cancel: function() {
+            this.dirtyData = null;
+            this.editable = false;
+          },
+          save: function() {
+            var d = this.data = this.dirtyData;
+            this.dirtyData = null;
+            Settings.saveProfile(d.username, null /*TODO: Hook up password*/, d.email, d.phone, d.questions);
+          }
+        };
+      },
+      function(/*reason*/) {
+        $scope.loading = false;
+      });
 
-    $scope.makeEditable = function() {
-      $scope.editable = true;
+    $scope.formatPhonenumber = function(item) {
+      if (typeof item === 'string' && item.length === 10) {
+        return '(' + item.substr(0, 3) + ') ' + item.substr(3, 3) + '-' + item.substr(6, 4);
+      }
+      else if (item) {
+        return item.toString();
+      }
+      else {
+        return '';
+      }
     };
+    //////////////////////////////////
 
     $scope.cancel = function() {
       $scope.editable = false;
@@ -25,12 +56,11 @@ angular.module('nextgearWebApp')
       // TODO: update model with new data
       $scope.editable = false;
     };
-  })
-  .controller('BusinessCtrl', function($scope, $dialog) {
+
     $scope.business = {
       email: 'dealername@company.com',
       enhanced: true,
-      pin: '',
+      pin: ''
     };
 
     $scope.editable = false;
@@ -44,7 +74,7 @@ angular.module('nextgearWebApp')
         controller: 'ConfirmDisableCtrl',
       };
 
-      $dialog.dialog(dialogOptions).open().then(function(result){
+      $dialog.dialog(dialogOptions).open().then(function(result) {
         if (result) {
           // TODO: Change variables on server
           $scope.business.pin = '';
@@ -73,13 +103,7 @@ angular.module('nextgearWebApp')
       // TODO: update model with new data
       $scope.editable = false;
     };
-  })
-  .controller('ConfirmDisableCtrl', function($scope, dialog) {
-    $scope.close = function(result) {
-      dialog.close(result);
-    };
-  })
-  .controller('TitleCtrl', function($scope) {
+
     $scope.title = {
       address: '1234 Main St, Denver, CO',
     };
@@ -98,8 +122,7 @@ angular.module('nextgearWebApp')
       // TODO: update model with new data
       $scope.editable = false;
     };
-  })
-  .controller('NotificationCtrl', function($scope) {
+
     $scope.notifications = [
       {
         'title': 'Weekly Upcoming Payments Report',
@@ -145,4 +168,10 @@ angular.module('nextgearWebApp')
       $scope.editable = false;
     };
 
+  })
+
+  .controller('ConfirmDisableCtrl', function($scope, dialog) {
+    $scope.close = function(result) {
+      dialog.close(result);
+    };
   });

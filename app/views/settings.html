@@ -1,33 +1,32 @@
 <div class="container-line">
-  <!-- TODO: Replace placeholders with actual angular variables/real data -->
-
   <div class="container-fluid settings">
     <div class="row-fluid two-col">
 
-      <section class="span8 well adjacent" ng-controller="ProfileCtrl">
+      <section class="span8 well adjacent">
         <h4>User Profile</h4>
-        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
-        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+        <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="profile.editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
+        <button ng-show="profile.editable" class="btn save-btn" ng-click="save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ editable: editable }" name="userSettings" novalidate>
+          <form class="settings-opts" ng-class="{ profile.editable: editable }" name="userSettings" novalidate>
 
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
-              <div class="controls" nxg-input model="profile.username" editable="editable">
+              <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
                 <input type="text" id="setUsername" ng-model="profile.username" value="profile.username" required/>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for="setPassword"><span ng-show="editable">New </span>Password</label>
-              <div class="controls" nxg-input model="profile.password" editable="editable">
-                <input type="password" name="setPassword" id="setPassword" ng-model="profile.password" required/><button class="btn-help" tooltip="Info about the password field." tooltip-placement="right" tooltip-title="Password Reset" popover-animation="true">?</button>
+              <div class="static" ng-hide="profile.editable">***********</div>
+              <div class="controls" nxg-input model="profile.data.password" editable="profile.editable">
+                <input type="password" name="setPassword" id="setPassword" ng-model="profile.data.password" required/><button class="btn-help" tooltip="Info about the password field." tooltip-placement="right" tooltip-title="Password Reset" popover-animation="true">?</button>
               </div>
             </div>
 
-            <div class="control-group" ng-show="editable">
+            <div class="control-group" ng-show="profile.editable">
               <label class="control-label" for="confirmPassword">Confirm Password</label>
               <div class="controls">
                 <input type="password" id="confirmPassword" ng-model="profile.passwordConfirm" required />
@@ -37,27 +36,32 @@
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="secQuestion">Security Question</label>
-              <div class="controls" nxg-input id="secQuestion" model="profile.secQuestion" editable="editable">
-                <select ng-model="profile.secQuestion" value="profile.secQuestion">
-                  <option>profile.secQuestion</option>
-                  <option>Question 2</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="control-group" ng-show="editable">
-              <label class="control-label" for="secAnswer">Answer</label>
-              <div class="controls">
-                <input type="text" id="secAnswer" ng-model="foo" />
-              </div>
+            <div ng-repeat="question in profile.data.questions">
+                <!-- Question Select -->
+                <div class="control-group">
+                  <label class="control-label">Security Question {{$index}}</label>
+                  <div class="controls" nxg-input model="question.QuestionText" editable="profile.editable">
+                    <select ng-model="question.SecurityQuestionId"
+                            ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
+                            tooltip="{{ question.QuestionText }}"
+                            tooltip-placement="right"
+                            tooltip-popup-delay="700">
+                    </select>
+                  </div>
+                </div>
+                <!-- Answer -->
+                <div class="control-group" ng-show="profile.editable">
+                    <label class="control-label" for="secAnswer">Answer</label>
+                    <div class="controls">
+                        <input type="text" id="secAnswer" ng-model="question.Answer" />
+                    </div>
+                </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for="email">Email</label>
-              <div class="controls" nxg-input model="profile.email" editable="editable">
-                <input type="email" name="email" id="email" ng-model="profile.email" value="profile.email" required/>
+              <div class="controls" nxg-input model="profile.data.email" editable="profile.editable">
+                <input type="email" name="email" id="email" ng-model="profile.data.email" value="profile.data.email" required/>
                 <p class="form-error" ng-show="userSettings.email.$invalid && userSettings.email.$dirty">
                   Please enter a valid email address.
                 </p>
@@ -66,8 +70,8 @@
 
             <div class="control-group">
               <label class="control-label" for="phone">Phone</label>
-              <div class="controls" nxg-input model="profile.phone" editable="editable">
-                <input type="tel" ng-model="profile.phone" value="profile.phone" required/>
+              <div class="controls" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
+                <input type="tel" id="phone" ng-model="profile.data.phone" value="profile.data.phone" required/>
               </div>
             </div>
 
@@ -76,7 +80,7 @@
       </section><!-- end .span8.well.adjacent -->
 
 
-      <section class="span8 well adjacent" ng-controller="BusinessCtrl" novalidate>
+      <section class="span8 well adjacent" novalidate>
         <h4>Business Settings</h4>
         <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
@@ -134,7 +138,7 @@
     </div><!-- end .row-fluid.two-col -->
 
     <div class="row-fluid two-col">
-      <section class="span8 well adjacent" ng-controller="TitleCtrl">
+      <section class="span8 well adjacent">
         <h4>Title Settings</h4>
         <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
@@ -157,7 +161,7 @@
         </div><!-- end .well-out -->
       </section><!-- end .span8.well.adjacent -->
 
-      <section class="span8 well adjacent" ng-controller="NotificationCtrl">
+      <section class="span8 well adjacent">
         <!-- SEE NOTE IN TICKETS #15 & #17 -->
         <h4>Notifications</h4>
         <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
