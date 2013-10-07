@@ -35,7 +35,6 @@
             </li>
 
             <li class="table-list-row" ng-repeat="fee in fees">
-              <div class="main-info">
                 <div class="cell fee-type"><p>{{ fee.FeeType }}</p></div>
                 <div class="cell fee-desc"><p>{{ fee.Description }}</p></div>
                 <div class="cell fee-due"><p>{{ fee.EffectiveDate | moment }}</p></div>
@@ -47,7 +46,6 @@
                                  can-pay-now="canPayNow">
                   </div>
                 </div>
-              </div>
             </li>
           </ul>
         </div><!-- end fees list -->
@@ -106,10 +104,7 @@
                     </div>
 
                     <div class="cell pay-title">
-                      <a ng-href="{{ payment.$titleURL }}"
-                         target="_blank">
-                        View
-                      </a>
+                      <a ng-href="{{ payment.$titleURL }}" target="_blank">View</a>
                     </div>
                   </div><!-- end .main-info div -->
 
