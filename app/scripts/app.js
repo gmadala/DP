@@ -3,8 +3,6 @@
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar'])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    var interceptor;
-
     $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('login', {
@@ -138,7 +136,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       })
     ;
 
-    interceptor = ['$rootScope', '$q', function($rootScope, $q) {
+    // response interceptors are deprecated as of 1.1.4 in favor of more generalized
+    // interceptors which may be pushed onto the $httpProvider.interceptors array
+    var interceptor = ['$rootScope', '$q', function($rootScope, $q) {
       function success(response) {
         return response;
       }
