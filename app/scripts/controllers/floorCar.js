@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
-      FloorplanSourceId : 1, // always 1 for web app
+      FloorplanSourceId : 6, // always 6 for web app
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
