@@ -12,11 +12,9 @@
   &.fee-amt { width: 22%; }
 
   &.pay-more { width: 4%; }
-  &.pay-desc { width: 17%; }
-  &.pay-due { width: 13%; }
-  &.pay-vin { width: 11%; }
-  &.pay-stock { width: 10%; }
-  &.pay-status { width: 9%; }
+  &.pay-desc { width: 33%; }
+  &.pay-due { width: 11%; }
+  &.pay-status { width: 18%; }
   &.pay-payment-amt { width: 15%; }
   &.pay-payoff-amt { width: 15%; }
   &.pay-title { width: 6%; }
@@ -215,8 +213,9 @@
     }
 
     .btn-checkout {
-
-      margin: 0 18px;
+      display: block;
+      width: 150px;
+      margin: 0 auto;
     }
   }
 }

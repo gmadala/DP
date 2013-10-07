@@ -68,8 +68,6 @@
                   <div class="cell pay-more"></div>
                   <div class="cell pay-desc">Description</div>
                   <div class="cell pay-due">Date Due</div>
-                  <div class="cell pay-vin">VIN</div>
-                  <div class="cell pay-stock">Stock #</div>
                   <div class="cell pay-status">Status</div>
                   <div class="cell pay-payment-amt">Payment</div>
                   <div class="cell pay-payoff-amt">Pay Off</div>
@@ -83,7 +81,12 @@
                         <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span></button>
                     </div>
 
-                    <div class="cell pay-desc"><p>{{ payment.UnitDescription }}</p></div>
+                    <div class="cell pay-desc">
+                      <p><span class="sch-label">VIN: </span>{{ payment.Vin }}<br/>
+                      <span class="sch-label">Stock #: </span>{{ payment.StockNumber }}</p>
+                      <p>{{ payment.UnitDescription }}</p>
+                    </div>
+
                     <div class="cell pay-due">
                       <p>{{ payment.DueDate | moment }}</p>
                       <div class="nxg-payment-due-status"
@@ -93,9 +96,6 @@
                         <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
                       </div>
                     </div>
-
-                    <div class="cell pay-vin"><p>{{ payment.Vin | shortenVIN }}</p></div>
-                    <div class="cell pay-stock"><p>{{ payment.StockNumber }}</p></div>
                     <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
                     <div class="cell pay-payment-amt">
                       <p>{{ payment.AmountDue | currency }}</p>
@@ -113,13 +113,13 @@
                     </div>
                   </div><!-- end .main-info div -->
 
-                  <div collapse="isCollapsed" class="vehicle-details">
-                      <div vehicle-details collapse="isCollapsed" stock-number="payment.StockNumber"></div>
-                  </div><!-- end more-details div -->
-                </li>
+                <div collapse="isCollapsed" class="vehicle-details">
+                    <div vehicle-details collapse="isCollapsed" stock-number="payment.StockNumber"></div>
+                </div><!-- end more-details div -->
+              </li>
             </ul>
           </div><!-- end payments list -->
         </div>
-    </section>
+      </section>
     <section class="span3 well" nxg-payment-summary></section>
 </section>

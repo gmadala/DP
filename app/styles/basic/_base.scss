@@ -14,14 +14,15 @@
 #checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
 
 body, html {
-  min-width: 940px;
+  min-width: 1020px;
   color: $base-text-color;
 }
 
 .container-fluid {
   position: relative;
   width: 100%;
-  width: 940px;
+  min-width: 1020px;
+  max-width: 1180px;
   margin: 0 auto 30px;
 }
 
