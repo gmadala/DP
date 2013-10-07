@@ -190,24 +190,26 @@
       </table>
 
       <div class="nxg-doughnut-chart-nested">
-        <canvas width="110"
-                      height="110"
-                      class="nxg-doughnut-chart-outer"
-                      nxg-chart
-                      nxg-chart-type="Doughnut"
-                      nxg-chart-data="dashboardData.creditChartData.outer"
-                      nxg-chart-options="{percentageInnerCutout: 75}"></canvas>
-        <canvas width="94"
-                      height="94"
-                      class="nxg-doughnut-chart-inner"
-                      nxg-chart
-                      nxg-chart-type="Doughnut"
-                      nxg-chart-data="dashboardData.creditChartData.inner"
-                      nxg-chart-options="{percentageInnerCutout: 80}"></canvas>
-        <label class="nxg-doughnut-chart-label">
-          <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.AvailableCredit | numeral:'(0.0a)' }}</p>
-          <p class="nxg-doughnut-chart-label-secondary">available</p>
-        </label>
+        <div class="inner-nested">
+          <canvas width="110"
+                        height="110"
+                        class="nxg-doughnut-chart-outer"
+                        nxg-chart
+                        nxg-chart-type="Doughnut"
+                        nxg-chart-data="dashboardData.creditChartData.outer"
+                        nxg-chart-options="{percentageInnerCutout: 75}"></canvas>
+          <canvas width="94"
+                        height="94"
+                        class="nxg-doughnut-chart-inner"
+                        nxg-chart
+                        nxg-chart-type="Doughnut"
+                        nxg-chart-data="dashboardData.creditChartData.inner"
+                        nxg-chart-options="{percentageInnerCutout: 80}"></canvas>
+          <label class="nxg-doughnut-chart-label">
+            <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.AvailableCredit | numeral:'(0.0a)' }}</p>
+            <p class="nxg-doughnut-chart-label-secondary">available</p>
+          </label>
+        </div>
       </div>
     </div>
   </div><!-- end .summary.credit -->

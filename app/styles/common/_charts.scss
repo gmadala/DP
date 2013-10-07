@@ -5,11 +5,17 @@
 }
 
 .nxg-doughnut-chart-nested {
-  position: relative;
   display: inline-block;
+  width: 35%;
+  padding-right: 7px; // to account for well padding
+
+  .inner-nested {
+    position: relative;
+    width: 110px;
+    margin: 0 auto;
+  }
 }
-.nxg-doughnut-chart-outer {
-}
+
 .nxg-doughnut-chart-inner {
   position: absolute;
   left: 8px;
