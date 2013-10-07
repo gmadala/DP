@@ -8,66 +8,75 @@
 
 <div class="modal-body search-controls">
     <label>Business Name or Number</label>
-    <input type="text" ng-model="data.query">
+    <input type="text" ng-model="data.proposedQuery">
     <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
       <i class="glyphicon glyphicon-search"></i>
     </button>
 </div>
 
-<div class="modal-body search-results"
-     nxg-infinite-scroll="fetchNextResults()"
-     nxg-infinite-scroll-disabled="data.loading"
-     nxg-infinite-scroll-show-indicator="data.loading"
-     nxg-scroll-container>
-  <table>
-    <thead>
-      <tr>
-        <th ng-click="sortBy('BusinessName')" class="sortable"
-            ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-          Business Name
-        </th>
-        <th ng-click="sortBy('BusinessLegalName')" class="sortable"
-            ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-          Legal Name
-        </th>
-        <th ng-click="sortBy('BusinessNumber')" class="sortable"
-            ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-          Business&nbsp;#
-        </th>
-        <th ng-show="data.searchBuyersMode">
-          Auction Access #
-        </th>
-        <th ng-click="sortBy('City')" class="sortable"
-            ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-          City
-        </th>
-        <th ng-click="sortBy('State')" class="sortable"
-            ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-          State
-        </th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="result in data.results">
-        <td>{{ result.BusinessName }}</td>
-        <td>{{ result.BusinessLegalName }}</td>
-        <td>{{ result.BusinessNumber }}</td>
-        <td ng-show="data.searchBuyersMode">
-          <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
-                tooltip-placement="right"
-                tooltip-popup-delay="700"
-                tooltip-append-to-body="true">
-            {{ result.AuctionAccessDealershipNumbers | list }}
-          </span>
-        </td>
-        <td>{{ result.City }}</td>
-        <td>{{ result.State }}</td>
-        <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
-      </tr>
-    </tbody>
-  </table>
+
+<div ng-switch="data.results.length > 0 || data.loading">
+  <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
+    <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
+    <span ng-switch-when="true">Please enter a business name or number to search.</span>
+  </p>
+
+  <div class="modal-body search-results" ng-switch-when="true"
+       nxg-infinite-scroll="fetchNextResults()"
+       nxg-infinite-scroll-disabled="data.loading"
+       nxg-infinite-scroll-show-indicator="data.loading"
+       nxg-scroll-container>
+    <table>
+      <thead>
+        <tr>
+          <th ng-click="sortBy('BusinessName')" class="sortable"
+              ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+            Business Name
+          </th>
+          <th ng-click="sortBy('BusinessLegalName')" class="sortable"
+              ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+            Legal Name
+          </th>
+          <th ng-click="sortBy('BusinessNumber')" class="sortable"
+              ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+            Business&nbsp;#
+          </th>
+          <th ng-show="data.searchBuyersMode">
+            Auction Access #
+          </th>
+          <th ng-click="sortBy('City')" class="sortable"
+              ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+            City
+          </th>
+          <th ng-click="sortBy('State')" class="sortable"
+              ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+            State
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="result in data.results">
+          <td>{{ result.BusinessName }}</td>
+          <td>{{ result.BusinessLegalName }}</td>
+          <td>{{ result.BusinessNumber }}</td>
+          <td ng-show="data.searchBuyersMode">
+            <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
+                  tooltip-placement="right"
+                  tooltip-popup-delay="700"
+                  tooltip-append-to-body="true">
+              {{ result.AuctionAccessDealershipNumbers | list }}
+            </span>
+          </td>
+          <td>{{ result.City }}</td>
+          <td>{{ result.State }}</td>
+          <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>
 </div>
