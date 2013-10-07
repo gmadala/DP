@@ -104,8 +104,8 @@ describe('Controller: FloorCarCtrl', function () {
     expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
   });
 
-  it('should set FloorplanSourceId to 1', function () {
-    expect(scope.defaultData.FloorplanSourceId).toBe(1);
+  it('should set FloorplanSourceId to 6', function () {
+    expect(scope.defaultData.FloorplanSourceId).toBe(6);
   });
 
   it('should default vin failure acknowledged and trade-in to false', function () {
