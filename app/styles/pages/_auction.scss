@@ -10,7 +10,7 @@
 
   .well-out {
     @extend %small;
-    height: 11em;
+    height: 170px;
   }
 
   .recent-disbursements {
@@ -130,27 +130,21 @@
   .cell {
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 5em;
 
     p {
       margin-bottom: 4px;
     }
 
-    &.selfloor-vin { width: 16%; }
-    &.selfloor-descr {  width: 10.5%; }
-    &.selfloor-stat { width: 8.5%; }
-    &.selfloor-dates { width: 10.5%; }
-    &.selfloor-purch { width: 9%; }
+    &.selfloor-descr {  width: 18%; }
+    &.selfloor-stat { width: 9%; }
+    &.selfloor-dates { width: 12%; }
+    &.selfloor-purch { width: 10%; }
     &.selfloor-title-st { width: 6%; }
     &.selfloor-title-loc { width: 8%; }
     &.selfloor-floored { width: 8%; }
     &.selfloor-buy { width: 8%; }
-    &.selfloor-id-nums { width: 14%; }
-    &.selfloor-actions { width: 9.5%; }
-  }
-
-  .table-list-row {
-    height: 80px;
+    &.selfloor-id-nums { width: 16%; }
+    &.selfloor-actions { width: 5%; }
   }
 }
 

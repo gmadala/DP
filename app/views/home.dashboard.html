@@ -1,6 +1,7 @@
 <section class="row-fluid upcoming">
 
   <div class="row-fluid">
+    <!-- Calendar -->
     <div class="span9 nxg-dash-calendar-container" >
       <div class="nxg-dash-calendar-header">
         <h4 class="nxg-cal-header">Upcoming Payments</h4>
@@ -12,7 +13,9 @@
         </div>
       </div>
       <div nxg-upcoming-calendar display="viewMode" data="dashboardData.calendarData"></div>
-    </div>
+    </div><!-- end .nxg-dash-calendar-container -->
+
+    <!-- Payment Summary -->
     <div class="span3 well payment-summary">
       <h4>Payments Summary</h4>
       <ul class="well-out">
@@ -50,10 +53,12 @@
           View All Payments
         </a>
       </ul>
-    </div>
-  </div>
+    </div><!-- end .payments-summary -->
+  </div><!-- end .row-fluid -->
 
+  <!-- More Details -->
   <div collapse="isCollapsed" ng-init="isCollapsed = true" class="row-fluid dashboard-more-details">
+    <!-- Upcoming Payments -->
     <div class="span9 well upcoming-payments">
       <p>Upcoming Payments</p>
       <div class="well-out upcoming-payments-table">
@@ -80,14 +85,11 @@
         <a class="more btn btn-mini" href="#/home/payments"> <i class="glyphicon glyphicon-eye-open"></i>
           View All Payments
         </a>
-      </div>
-    </div>
+      </div><!-- end .upcoming-payments-table -->
+    </div><!-- end .well.upcoming-payments -->
 
-
-
-
+    <!-- Payments Chart -->
     <div class="span3 payments-chart">
-
       <label class="nxg-doughnut-chart-label">
         <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.paymentChartData.total | numeral:'(0.0a)' }}</p>
         <p class="nxg-doughnut-chart-label-secondary">available</p>
@@ -129,14 +131,9 @@
           <td class="taller">{{ dashboardData.paymentChartData.total | currency }}</td>
         </tr>
       </table>
+    </div><!-- end .payments-chart -->
+  </div><!-- end .dashboard-more-details -->
 
-
-    </div>
-
-
-
-
-  </div>
   <span class="details-toggle-line">
     <button ng-click="isCollapsed = !isCollapsed" class="details-toggle-btn">
       <i class="glyphicon glyphicon-chevron-{{ isCollapsed && 'down' || 'up'}}"></i>
@@ -145,6 +142,7 @@
 </section>
 
 <section class="row-fluid summaries">
+  <!-- Credit Summary -->
   <div class="span6 summary credit well adjacent">
     <h4>Credit</h4>
     <div class="well-out credit-chart">
@@ -212,10 +210,15 @@
         </label>
       </div>
     </div>
-  </div>
+  </div><!-- end .summary.credit -->
+
+  <!-- Unapplied Funds Summary -->
   <div nxg-unapplied-funds-widget
-         balance="dashboardData.UnappliedFundsTotal"
-         available="dashboardData.TotalAvailableUnappliedFunds"></div>
+       balance="dashboardData.UnappliedFundsTotal"
+       available="dashboardData.TotalAvailableUnappliedFunds">
+  </div><!-- end .nxg-unapplied-funds-widget -->
+
+  <!-- Floorplan Summary -->
   <div class="span3 summary floorplan well adjacent ">
     <h4>Floorplan</h4>
     <div class="well-out">
@@ -259,7 +262,9 @@
         View Floorplan
       </a>
     </div>
-  </div>
+  </div><!-- end .summary.floorplan -->
+
+  <!-- Receipts Summary -->
   <div class="span4 summary receipts well adjacent ">
     <h4>Most Recent Receipts</h4>
     <div class="well-out">
@@ -267,16 +272,16 @@
         <tr ng-repeat="receipt in dashboardData.Receipts">
           <td>{{ receipt.ReceiptDate | moment }}</td>
           <td>#{{ receipt.ReceiptNumber }}</td>
-          <td> <b>{{ receipt.ReceiptAmount | currency }} <b></td>
-              <td>
-                <a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a>
-              </td>
-            </tr>
-          </table>
-          <a class="more btn btn-mini" href="#/home/receipts">
-            <span class="glyphicon glyphicon-eye-open"></span>
-            View All Receipts
-          </a>
-        </div>
-      </div>
-    </section>
+          <td> <strong>{{ receipt.ReceiptAmount | currency }} <strong></td>
+          <td>
+            <a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a>
+          </td>
+        </tr>
+      </table>
+      <a class="more btn btn-mini" href="#/home/receipts">
+        <span class="glyphicon glyphicon-eye-open"></span>
+        View All Receipts
+      </a>
+    </div>
+  </div><!-- end .summary.receipts -->
+</section>

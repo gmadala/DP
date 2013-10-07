@@ -95,25 +95,20 @@
   border-bottom: 1px solid $border;
 }
 
-//overly specific rule to over-write bootstrap's grid for these two modules.
-.summaries {
-  .unapplied-funds.adjacent {
-    width: 21%;
+.unapplied-funds {
+  p {
+    @extend %float-l;
+    width: 60%;
+    margin-bottom: 4px;
   }
-  .floorplan.adjacent {
-    width: 16.5%;
+  .fund-amount {
+    @extend %heavy;
+    @extend %align-right;
+    font-size: 13px;
+    width: 40%;
   }
 }
 
-.unapplied-funds {
-  span {
-    margin-bottom: 4px;
-  }
-  .pull-right {
-    @extend %heavy;
-    font-size: 13px;
-  }
-}
 .floorplan {
   ul {
     color: #555;
@@ -131,8 +126,13 @@
     @extend %full-width;
     margin-top: -1px;
 
-    tr td:nth-child(3) {
-      font-size: 13px;
+    tr td {
+      @extend %align-left;
+      padding: 0 2px;
+
+      &:nth-child(3) {
+        font-size: 13px;
+      }
     }
   }
 }
@@ -197,6 +197,13 @@
   .btn {
     margin-top: 0.5em;
   }
+}
+
+.span3.adjacent.summary.floorplan {
+  width: 15%;
+}
+.span4.adjacent.summary.receipts {
+  width: 28.75%;
 }
 
 .upcoming-payments {

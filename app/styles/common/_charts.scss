@@ -51,8 +51,10 @@
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {
   @extend %center;
-  border: 1px solid $border;
   position: relative;
+  padding: 10px;
+  border: 1px solid $border;
+  margin-bottom: 10px;
 
   canvas {
     @include rotate(10deg);
@@ -64,8 +66,10 @@
   }
 
   .nxg-doughnut-chart-label {
-    top: 58px;
-    left: 81px;
+    width: 120px;
+    top: 50px;
+    left: 50%;
+    margin-left: -60px;
   }
 }
 
@@ -79,8 +83,10 @@
   }
 
   .nxg-doughnut-chart-label {
-    top: 28px;
-    left: 35px;
+    top: 20px;
+    width: 100px;
+    left: 50%;
+    margin-left: -50px;
 
     .nxg-chart-legend-color {
       margin-right: 5px;
