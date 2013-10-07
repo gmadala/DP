@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($q, $http, $filter, nxgConfig, messages) {
+  .factory('api', function($q, $http, $filter, $location, nxgConfig, messages) {
     var authToken = null;
 
     return {
@@ -22,7 +22,9 @@ angular.module('nextgearWebApp')
           url: nxgConfig.apiBase + url,
           headers: headers
         },
+        self = this,
         defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
+        authError = 'You need to be authenticated for this request.',
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
@@ -41,12 +43,19 @@ angular.module('nextgearWebApp')
             }
             else {
               error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
-              return $q.reject(error); // Unknown error
+              return $q.reject(error); // Treat as unknown error 
               //throw new Error('Invalid response'); // dev only
             }
           }, function (error) {
-            error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
-            return $q.reject(error); // Treat as unknown error
+            if (error.status === 401) {
+              self.resetAuthToken();
+              $location.path('/login');
+              error = messages.add(authError, debug + 'invalid API response: ' + error);
+            }
+            else {
+              error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
+            }
+            return $q.reject(error); // reject w/ appropriate error
           }
         );
       },
