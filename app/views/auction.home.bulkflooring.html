@@ -53,13 +53,13 @@
          </label>
 
          <label for="consignerTicketNumber">Cosigner Ticket Number</label>
-         <input type="text" id="CosignerTicketNumber" ng-model="data.CosignerTicketNumber"/>
-         <label for="cosignerTicketNumber" class="text-error">Please enter a Cosigner Ticket Number</label>
+         <input type="text" id="cosignerTicketNumber" ng-model="data.CosignerTicketNumber"required/>
+         <label for="cosignerTicketNumber" class="text-error" ng-show="validity.cosignerTicketNumber.$error.required">Please enter a Cosigner Ticket Number</label>
 
          <label for="inputInvLotNum">Lot Number</label>
-         <input id="inputInvLotNum" ng-model="data.PhysicalInventoryLotNumber"
-                 ng-options="location.LotNumber for location in options().locations"/>
-         <label for="inputInvLotNum" class="text-error">Please enter the Lot Number</label>
+         <input type="text" id="inputInvLotNum" ng-model="data.PhysicalInventoryLotNumber"
+                 ng-options="location.LotNumber for location in options().locations" required/>
+         <label for="inputInvLotNum" class="text-error" ng-show="validity.inputInvLotNum.$error.required">Please enter the Lot Number</label>
         </div>
    </fieldset>
 
@@ -90,22 +90,22 @@
             </label>
             <label for="inputPurchaseAmt" class="text-error"
                    ng-show="validity.inputPurchaseAmt.$error.pattern">
-              Please enter the Please enter a numeric value with no commas or special characters.
+              Please enter a numeric value with no commas or special characters.
             </label>
           </div>
 
           <label for="inputSalesDate">Sales Date</label>
-          <input id="inputSalesDate" nxg-date-field ng-model="data.UnitSalesDate" />
-          <label for="inputSalesDate" class="text-error">Please select a Sale Date</label>
-          <span class="scale-description">The actual sale date must be used when flooring a car. <a ng-show="false" href="?tooltip">Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct.</a></span>
+          <input id="inputSalesDate" nxg-date-field ng-model="data.UnitSalesDate" required />
+          <label for="inputSalesDate" class="text-error" ng-show="validity.inputSalesDate.$error.required">Please select a Sale Date</label>
+          <p class="scale-description">The actual sale date must be used when flooring a car. <a ng-show="false" href="?tooltip">Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct.</a></p>
 
           <label for="inputBankAcct">Bank Account</label>
           <select id="inputBankAcct" ng-model="data.BankAccountId"
-                  ng-options="account.BankAccountName for account in options().bankAccounts">
+                  ng-options="account.BankAccountName for account in options().bankAccounts" ng-required="true">
              <option class="disabled" disabled="disabled" value="">Make Selection</option>
 
           </select>
-          <label for="inputBankAcct" class="text-error">Please select a Bank Account.</label>
+          <label for="inputBankAcct" class="text-error" ng-show="validity.inputBankAcct.$error.required">Please select a Bank Account.</label>
 
           <div class="footer modal-footer">
               <button class="btn btn-small btn-primary" type="submit" ng-click="submit()">Submit</button>

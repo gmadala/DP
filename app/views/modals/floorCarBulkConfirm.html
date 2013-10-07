@@ -8,70 +8,84 @@
 
 <div class="modal-body">
   <p>Confirm the vehicle information to send the flooring request to NextGear. Print this screen for your records.</p>
-    <table>
-    <thead>Buyer Information</thead>
-    <tbody>
-      <tr>
-        <td>Business Number</td>
-        <td>formData.Business.BusinessNumber</td>
-      </tr>
-      <tr>
-        <td>Auction Access Number</td>
-        <td>formData.Business.AuctionAccessNumber</td>
-      </tr>
-      <tr>
-        <td>Business Name</td>
-        <td>formData.Business.BusinessName</td>
-      </tr>
-      <tr>
-        <td>Address</td>
-        <td>formData.Business.Address</td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
-    <thead>Vehicle Information</thead>
-    <tbody>
-      <tr>
-        <td>VIN</td>
-        <td>formData.VIN</td>
-      </tr>
-      <tr>
-        <td>Make</td>
-        <td>formData.Make</td>
-      </tr>
-      <tr>
-        <td>Model</td>
-        <td>formData.Model</td>
-      </tr>
-      <tr>
-        <td>Style</td>
-        <td>formData.Style</td>
-      </tr>
-      <tr>
-        <td>Year</td>
-        <td>formData.Year</td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
-    <thead>Flooring Information</thead>
-    <tbody>
-      <tr>
-        <td>Purchase Amount</td>
-        <td>formData.PurchaseAmount</td>
-      </tr>
-      <tr>
-        <td>Purchase Date</td>
-        <td>formData.PurchaseDate</td>
-      </tr>
-      <tr>
-        <td>Send Payment To</td>
-        <td>formData.SendPaymentTo</td>
-      </tr>
-    </tbody>
-  </table>
-  <span>View Vehicle Verification Checklist</span>
+
+  <div class="row-fluid bulk-confirmation">
+    <div class="detail-col">
+      <h4 class="well-head">Buyer Information</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td class="detail-label">Business Number</td>
+            <td class="detail-value">{{ formData.Business.BusinessNumber }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Auction Access Number</td>
+            <td class="detail-value">{{ formData.Business.AuctionAccessNumber }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Business Name</td>
+            <td class="detail-value">{{ formData.Business.BusinessName }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Address</td>
+            <td class="detail-value">{{ formData.Business.Address }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end first .detail-col -->
+
+    <div class="detail-col">
+      <h4 class="well-head">Vehicle Information</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td class="detail-label">VIN</td>
+            <td class="detail-value">{{ formData.VIN }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Make</td>
+            <td class="detail-value">{{ formData.Make }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Model</td>
+            <td class="detail-value">{{ formData.Model }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Style</td>
+            <td class="detail-value">{{ formData.Style }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Year</td>
+            <td class="detail-value">{{ formData.Year }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end second .detail-col -->
+
+    <div class="detail-col">
+      <h4 class="well-head">Flooring Information</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td class="detail-label">Purchase Amount</td>
+            <td class="detail-value">{{ formData.PurchaseAmount }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Purchase Date</td>
+            <td class="detail-value">{{ formData.PurchaseDate }}</td>
+          </tr>
+          <tr>
+            <td class="detail-label">Send Payment To</td>
+            <td class="detail-value">{{ formData.SendPaymentTo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end third .detail-col -->
+  </div>
+
+  <div class="floor-confirm-view-checklist">
+    <a href="/MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf" target="_blank">View Vehicle Verification Checklist</a>
+  </div>
 </div>
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-mini btn-primary">Return to Form</button>

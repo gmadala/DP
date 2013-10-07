@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionBulkFlooringCtrl', function($scope, $dialog, protect, Floorplan) {
+  .controller('AuctionBulkFlooringCtrl', function($scope, $dialog, protect, Floorplan, User) {
     // TODO: Replace this controller with regular floor a car controller
 
     $scope.foo = '';
+
+    $scope.options = User.getStatics;
 
     $scope.openBusinessSearch = function() {
       var dialogOptions = {
@@ -30,6 +32,7 @@ angular.module('nextgearWebApp')
         backdropClick: true,
         templateUrl: 'views/modals/floorCarBulkConfirm.html',
         controller: 'FloorCarBulkConfirmCtrl',
+        dialogClass: 'modal bulk-confirmation-modal',
         resolve: {
           formData: function () {
             return angular.copy($scope.data);
