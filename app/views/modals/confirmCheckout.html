@@ -9,18 +9,20 @@
     <ul class="unstyled scheduled-payments">
       <li class="table-list-head">
         <div class="cell sch-desc">Description</div>
-        <div class="cell sch-vin">VIN</div>
-        <div class="cell sch-stock">Stock #</div>
         <div class="cell sch-date">Scheduled</div>
         <div class="cell sch-amt">Amount</div>
       </li>
 
       <li class="table-list-row" ng-repeat="payment in items.paymentsScheduled">
         <div class="cell sch-desc">
+          <p>
+            <span class="sch-label">VIN: </span>
+            {{ payment.vin }}<br/>
+            <span class="sch-label">Stock #: </span>
+            {{ payment.stockNum }}
+          </p>
           <p>{{ payment.description }}</p>
         </div>
-        <div class="cell sch-vin"><p>{{ payment.vin }}</p></div>
-        <div class="cell sch-stock"><p>{{ payment.stockNum }}</p></div>
         <div class="cell sch-date">
           <p>{{ payment.scheduleDate | moment }}</p>
         </div>
@@ -47,6 +49,7 @@
           <div class="cell fee-date">Paid</div>
           <div class="cell fee-amt">Amount</div>
         </li>
+
         <li class="table-list-row" ng-repeat="fee in items.fees">
           <div class="cell fee-type"><p>{{ fee.type }}</p></div>
           <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
@@ -62,16 +65,17 @@
       <ul class="unstyled submitted-payments">
         <li class="table-list-head">
           <div class="cell pay-desc">Description</div>
-          <div class="cell pay-vin">VIN</div>
-          <div class="cell pay-stock">Stock #</div>
           <div class="cell pay-date">Paid</div>
           <div class="cell pay-amt">Amount</div>
         </li>
 
         <li class="table-list-row" ng-repeat="payment in items.paymentsToday">
-          <div class="cell pay-desc"><p>{{ payment.description }}</p></div>
-          <div class="cell pay-vin"><p>{{ payment.vin }}</p></div>
-          <div class="cell pay-stock"><p>{{ payment.stockNum }}</p></div>
+          <div class="cell pay-desc">
+            <p><span class="sch-label">VIN: </span>
+            {{ payment.vin }}<br/>
+            <span class="sch-label">Stock #: </span>
+            {{ payment.stockNum }}</p>
+            <p>{{ payment.description }}</p></div>
           <div class="cell pay-date"><p>{{ today | moment }}</p></div>
           <div class="cell pay-amt">
             <p>{{ payment.amount | currency }}</p>

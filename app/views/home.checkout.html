@@ -28,16 +28,14 @@
           </li>
 
           <li class="table-list-row" ng-repeat="fee in paymentQueue.contents.fees">
-            <div class="main-info">
-              <div class="cell fee-type"><p>{{ fee.type }}</p></div>
-              <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
-              <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
-              <div class="cell fee-amt">
-                <p>{{ fee.amount | currency }}</p>
-                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
-                  Remove Fee
-                </button>
-              </div>
+            <div class="cell fee-type"><p>{{ fee.type }}</p></div>
+            <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
+            <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
+            <div class="cell fee-amt">
+              <p>{{ fee.amount | currency }}</p>
+              <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
+                Remove Fee
+              </button>
             </div>
           </li>
         </ul><!-- end Fees List -->
@@ -49,18 +47,21 @@
           <li class="table-list-head">
             <div class="cell pay-desc">Description</div>
             <div class="cell pay-due">Date Due</div>
-            <div class="cell pay-vin">VIN</div>
-            <div class="cell pay-stock">Stock #</div>
             <div class="cell pay-status">Status</div>
             <div class="cell pay-pymt">Payment</div>
           </li>
 
           <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
-            <div class="main-info">
-              <div class="cell pay-desc"><p>{{ payment.description }}</p></div>
+              <div class="cell pay-desc">
+                <p>
+                  <span class="sch-label">VIN: </span>
+                  {{ payment.vin }}<br/>
+                  <span class="sch-label">Stock #: </span>
+                  {{ payment.stockNum }}
+                </p>
+                <p>{{ payment.description }}</p>
+              </div>
               <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
-              <div class="cell pay-vin"><p>{{ payment.vin }}</p></div>
-              <div class="cell pay-stock"><p>{{ payment.stockNum }}</p></div>
               <div class="cell pay-status">
                 <p ng-show="!paymentQueue.canSchedule(payment)">
                 Unavailable to Schedule</p>
@@ -80,7 +81,6 @@
                   {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
                 </button>
               </div>
-            </div>
             <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
           </li>
         </ul><!-- end Payments List -->

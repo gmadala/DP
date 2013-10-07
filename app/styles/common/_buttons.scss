@@ -19,7 +19,7 @@
   }
   &:active, &.active {
     color: $btn-hover-text;
-    border: 0;
+    border-color: transparent;
     margin-top: 1px;
   }
   &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {

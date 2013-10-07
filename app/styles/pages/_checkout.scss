@@ -1,23 +1,15 @@
 // CHECKOUT
 
 .checkout-list {
-  .fees .main-info {
-    height: 70px;
-  }
-
-  .payments .main-info {
-    height: 100px;
-  }
-
   .cell {
+    &.fee-type { width: 27%; }
     &.fee-desc { width: 30%; }
     &.fee-due { width: 17%; }
     &.fee-amt { width: 26%; }
-    &.pay-desc { width: 20%; }
+
+    &.pay-desc { width: 35%; }
     &.pay-due { width: 12%; }
-    &.pay-vin { width: 12%;}
-    &.pay-stock { width: 10%; }
-    &.pay-status { width: 18%; }
+    &.pay-status { width: 25%; }
     &.pay-pymt { width: 28%; }
   }
 
@@ -121,28 +113,14 @@
     padding: 8px 10px;
   }
 
-  .scheduled-payments, .submitted-payments {
-    .table-list-row {
-      height: 50px;
-    }
-  }
-
   .cell {
-    &.sch-desc, &.pay-desc { width: 30%; }
-    &.sch-vin, &.pay-vin { width: 18%; }
-    &.sch-stock, &.pay-stock { width: 15%; }
-    &.sch-date, &.pay-date { width: 17%; }
-    &.sch-amt, &.pay-amt { width: 20%; }
+    &.sch-desc, &.pay-desc { @extend %half-width; }
+    &.sch-date, &.pay-date { @extend %quarter-width; }
+    &.sch-amt, &.pay-amt { @extend %quarter-width; }
 
     &.fee-type { width: 25%; }
     &.fee-desc { width: 35%; }
     &.fee-date { width: 20%; }
     &.fee-amt { width: 20%; }
-  }
-
-  .submitted-fees {
-    .table-list-row {
-      height: 60px;
-    }
   }
 }
