@@ -5,7 +5,8 @@ angular.module('nextgearWebApp')
 
     $scope.data = {
       searchBuyersMode: searchBuyersMode,
-      query: initialQuery,
+      proposedQuery: initialQuery,
+      query: null,
       results: [],
       loading: false,
       paginator: null,
@@ -17,7 +18,14 @@ angular.module('nextgearWebApp')
       // search means "start from the beginning with current criteria"
       $scope.data.paginator = null;
       $scope.data.results.length = 0;
-      $scope.fetchNextResults();
+
+      // commit the proposed query
+      $scope.data.query = $scope.data.proposedQuery;
+
+      if ($scope.data.query) {
+        // a query is required for the search to be executed
+        $scope.fetchNextResults();
+      }
     };
 
     $scope.fetchNextResults = function() {

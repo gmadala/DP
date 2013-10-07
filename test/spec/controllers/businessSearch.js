@@ -42,6 +42,7 @@ describe('Controller: BusinessSearchCtrl', function () {
   it('should attach a data model object to the scope with expected defaults', function () {
     var expected = {
       searchBuyersMode: false,
+      proposedQuery: 'x',
       query: 'x',
       results: [],
       loading: true, // a load is started automatically
@@ -61,9 +62,23 @@ describe('Controller: BusinessSearchCtrl', function () {
       expect(scope.data.results.length).toBe(0);
     });
 
-    it('should call for data with no paginator to start at beginning', function () {
+    it('should commit proposedQuery to query', function () {
+      scope.data.proposedQuery = 'foo';
+      scope.search();
+      expect(scope.data.query).toBe('foo');
+    });
+
+    it('should call for data with no paginator to start at beginning, if query is present', function () {
+      scope.search();
       expect(model.search).toHaveBeenCalled();
       expect(model.search.mostRecentCall.args[4]).toBe(null);
+    });
+
+    it('should not call for data if no query is present', function () {
+      model.search.reset();
+      scope.data.proposedQuery = '';
+      scope.search();
+      expect(model.search).not.toHaveBeenCalled();
     });
 
   });
