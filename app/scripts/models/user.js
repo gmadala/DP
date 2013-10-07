@@ -5,7 +5,8 @@ angular.module('nextgearWebApp')
     // Private
     var info = null,
       statics = null,
-      paySellerOptions = [];
+      paySellerOptions = [],
+      securityQuestions = null;
 
     var calculateCanPayBuyer = function() {
       if (!info) {
@@ -38,6 +39,13 @@ angular.module('nextgearWebApp')
             }
           }
         );
+      },
+
+      getSecurityQuestions: function() {
+        if (!securityQuestions) {
+          securityQuestions = api.request('GET', '/UserAccount/securityquestions');
+        }
+        return securityQuestions;
       },
 
       resetPassword: function(username, questionAnswers) {
