@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar'])
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
     $stateProvider
@@ -155,10 +155,5 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }
       }
     );
-    $rootScope.$on('event:requiresAuth',
-      function() {
-        User.logout();
-        $location.path('/login');
-      }
-    );
+
   });
