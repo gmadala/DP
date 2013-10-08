@@ -85,7 +85,7 @@ angular.module('nextgearWebApp')
           options: function() {
             return {
               businessId: business.BusinessId,
-              businessNumber: business.BusinessName,
+              businessNumber: business.BusinessNumber,
               auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
               businessName: business.BusinessName,
               address: business.Address,

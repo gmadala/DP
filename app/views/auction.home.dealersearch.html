@@ -33,7 +33,7 @@
                  id="auction-access-num"
                  ng-model="numberSearch.query.auctionAccessNumber"
                  ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive}"></div>
-          <label for="dealer-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
+          <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
               No results found, please enter a valid auction access number.
           </label>
           <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.auctionAccessNumber">
@@ -78,7 +78,7 @@
       <p class="form-separator">-OR-</p>
 
       <div class="control-group">
-        <label class="control-label" for="dateFilter">State</label>
+        <label class="control-label" for="state">State</label>
         <div class="controls">
           <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
             <option value=""></option>
