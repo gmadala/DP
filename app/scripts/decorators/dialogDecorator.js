@@ -10,6 +10,7 @@ angular.module('nextgearWebApp')
           currentlyOpen = [];
 
       return _.extend($delegate, {
+
         dialog: function(opts) {
           var dialog = new OriginalDialog(opts),
               originalOpen = dialog.open,
@@ -36,15 +37,20 @@ angular.module('nextgearWebApp')
             originalClose.apply(dialog, arguments);
           };
 
-          dialog.closeAll = function() {
-            angular.forEach(currentlyOpen, function(openDialog){
-              openDialog.close();
-            });
-            currentlyOpen = [];
-          };
-
           return dialog;
+        },
+
+        closeAll: function() {
+          angular.forEach(currentlyOpen, function(openDialog){
+            openDialog.close();
+          });
+          currentlyOpen = [];
+        },
+
+        openDialogsCount: function() {
+          return currentlyOpen.length;
         }
+
       });
     });
   });
