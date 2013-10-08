@@ -15,7 +15,6 @@ angular.module('nextgearWebApp')
         var url, countField,
           params = {
             OrderBy: sortField,
-            OrderDirection: sortDesc ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM
           };
@@ -25,13 +24,15 @@ angular.module('nextgearWebApp')
           countField = 'DealerRowCount';
           angular.extend(params, {
             BusinessName: isNumeric(query) ? undefined : (query || undefined),
-            BusinessNumber: isNumeric(query) ? query : undefined
+            BusinessNumber: isNumeric(query) ? query : undefined,
+            OrderByDirection: sortDesc ? 'DESC' : 'ASC'
           });
         } else {
           url = '/dealer/search/seller';
           countField = 'SellerCount';
           angular.extend(params, {
-            SearchCriteria: query || undefined
+            SearchCriteria: query || undefined,
+            OrderDirection: sortDesc ? 'DESC' : 'ASC'
           });
         }
 
