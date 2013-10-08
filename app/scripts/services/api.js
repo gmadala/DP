@@ -49,7 +49,7 @@ angular.module('nextgearWebApp')
           }, function (error) {
             if (error.status === 401) {
               self.resetAuthToken();
-              $dialog.dialog().closeAll();
+              $dialog.closeAll();
               $location.path('/login');
               error = messages.add(defaultError, debug + 'invalid API response: ' + error);
             }

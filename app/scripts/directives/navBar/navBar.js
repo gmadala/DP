@@ -28,6 +28,7 @@ angular.module('nextgearWebApp')
       info: User.getInfo,
       logout: function() {
         User.logout();
+        $dialog.closeAll();
         $location.path('/login');
       },
       navLinks: function() {
