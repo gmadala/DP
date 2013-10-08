@@ -1,64 +1,30 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('DealerNameSearch', function(api) {
+  .factory('DealerNameSearch', function(api, Paginate) {
 
-    var PAGE_SIZE = 15;
-    var totalCount = 0;
-    var lastRequest = {
-      OrderBy: 'BusinessName',
-      OrderDirection: 'ASC',
-      PageNumber: 1,
-      PageSize: PAGE_SIZE,
-      BusinessName: ''
-    };
-
-    /** PRIVATE METHODS **/
-    var prv = {
-      request: function(request) {
-        lastRequest = request;
-        return api.request('GET', '/dealer/search/buyer', lastRequest).then(
-          function(results) {
-            totalCount = results.DealerRowCount;
-            return results.SearchResults;
-          }
-        );
-      }
-    };
-
-    /** Public API **/
     return {
-      search: function(name, city, state) {
-        lastRequest = {
-          OrderBy: 'BusinessName',
-          OrderDirection: 'ASC',
-          PageNumber: 1,
-          PageSize: PAGE_SIZE,
-          BusinessName: name
+      search: function(name, city, state, sortField, sortDesc, paginator) {
+        var params = {
+          BusinessName: name,
+          City: city || undefined,
+          StateId: state ? state.StateId : undefined,
+          OrderBy: sortField,
+          OrderDirection: sortDesc ? 'DESC' : 'ASC',
+          PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
+          PageSize: Paginate.PAGE_SIZE_MEDIUM
         };
-        if (city) {
-          lastRequest.City = city;
-        }
-        if (state) {
-          lastRequest.State = state.StateId;
-        }
+
         if (!city && !state) {
           // invalid scenario, fail early
           throw new Error('DealerSearch::search() - Must provide city or state');
         }
-        return prv.request(lastRequest);
-      },
-      loadMoreData: function() {
-        if (lastRequest === null) {
-          return this.search();
-        }
-        else {
-          lastRequest.PageNumber++;
-          return prv.request(lastRequest);
-        }
-      },
-      hasMoreData: function() {
-        return lastRequest.PageNumber * PAGE_SIZE < totalCount;
+
+        return api.request('GET', '/dealer/search/buyer', params).then(
+          function(results) {
+            return Paginate.addPaginator(results, results.DealerRowCount, params.PageNumber, params.PageSize);
+          }
+        );
       }
     };
   });
