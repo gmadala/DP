@@ -137,7 +137,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User) {
+  .run(function($rootScope, $location, $dialog, User) {
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
@@ -153,6 +153,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
             $location.path(isDealer ? '/home' : '/act/home');
           }
         }
+      }
+    );
+
+    $rootScope.$on('event:redirectToLogin',
+      function(){
+        $dialog.closeAll();
+        $location.path('/login');
       }
     );
 
