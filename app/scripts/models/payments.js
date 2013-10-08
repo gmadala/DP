@@ -171,7 +171,6 @@ angular.module('nextgearWebApp')
         };
         return api.request('POST', '/payment/cancelscheduledpayment', data).then(
           function (/*success*/) {
-            payment.Scheduled = false;
             return payment;
           }
         );
