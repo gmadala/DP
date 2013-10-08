@@ -85,7 +85,20 @@ angular.module('nextgearWebApp')
 
     $scope.payments.resetSearch($stateParams.filter);
 
-    $scope.fees = Payments.fetchFees();
+    $scope.fees = {
+      results: [],
+      loading: false
+    };
+
+    $scope.fees.loading = true;
+    Payments.fetchFees().then(
+      function (result) {
+        $scope.fees.loading = false;
+        $scope.fees.results = result;
+      }, function (/*error*/) {
+        $scope.fees.loading = false;
+      }
+    );
 
     var refreshCanPayNow = function () {
       Payments.canPayNow().then(
