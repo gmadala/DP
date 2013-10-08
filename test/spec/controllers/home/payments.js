@@ -190,14 +190,38 @@ describe('Controller: PaymentsCtrl', function () {
     expect(modelMock.search).toHaveBeenCalled();
   });
 
-  it('should request fees and attach a promise of the results to the scope', function () {
-    expect(modelMock.fetchFees).toHaveBeenCalled();
-    var out = null;
-    scope.fees.then(function (results) {
-      out = results;
+  describe('fees retrieval logic', function () {
+
+    it('should attach a fees model to the scope', function () {
+      expect(scope.fees).toBeDefined();
+      expect(typeof scope.fees.loading).toBe('boolean');
+      expect(angular.isArray(scope.fees.results)).toBe(true);
     });
-    scope.$apply();
-    expect(out).toBe(searchResult.data);
+
+    it('should auto request fees and set loading to true', function () {
+      expect(modelMock.fetchFees).toHaveBeenCalled();
+      expect(scope.fees.loading).toBe(true);
+    });
+
+    it('should set loading to false and attach results to the scope on success', function () {
+      scope.$apply();
+      expect(scope.fees.loading).toBe(false);
+      expect(scope.fees.results).toBe(searchResult.data);
+    });
+
+    it('should set loading to false on error', inject(function ($q, $rootScope) {
+      searchResult.data.then = function(callback, errback) {
+        var result = $q.defer();
+        $rootScope.$evalAsync(function() {
+          result.resolve(errback('oops'));
+        });
+        return result.promise;
+      };
+      scope.$apply();
+      expect(scope.fees.loading).toBe(false);
+      expect(scope.fees.results.length).toBe(0);
+    }));
+
   });
 
   it('should attach a value for canPayNow to the scope', function () {
