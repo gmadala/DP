@@ -1,32 +1,30 @@
 {
     "Success": true,
     "Message": null,
-    "Data": {
-        "AccountFees": [
-            {
-                "FeeType": "Membership Dues",
-                "FinancialRecordId": "24625",
-                "FinancialRecordTypeId": 13,
-                "Balance": 340.00,
-                "EffectiveDate": "2013-09-08",
-                "Description": "Description of whatever this is for.",
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLJ",
-                "Posted": "2013-09-01"
-            },
-            {
-                "FeeType": "Overdue Payment Fee",
-                "FinancialRecordId": "24626",
-                "FinancialRecordTypeId": 14,
-                "Balance": 290.00,
-                "EffectiveDate": "2013-09-13",
-                "Description": "Description of whatever this is for.",
-                "FloorplanId": "2490",
-                "StockNumber": "3490",
-                "Vin": "SDLKGHOWRIHGGHKLP",
-                "Posted": "2013-09-13"
-            }
-        ]
-    }
+    "Data": [
+        {
+            "FeeType": "Membership Dues",
+            "FinancialRecordId": "24625",
+            "FinancialRecordTypeId": 13,
+            "Balance": 340.00,
+            "EffectiveDate": "2013-09-08",
+            "Description": "Description of whatever this is for.",
+            "FloorplanId": "2490",
+            "StockNumber": "3490",
+            "Vin": "SDLKGHOWRIHGGHKLJ",
+            "Posted": "2013-09-01"
+        },
+        {
+            "FeeType": "Overdue Payment Fee",
+            "FinancialRecordId": "24626",
+            "FinancialRecordTypeId": 14,
+            "Balance": 290.00,
+            "EffectiveDate": "2013-09-13",
+            "Description": "Description of whatever this is for.",
+            "FloorplanId": "2490",
+            "StockNumber": "3490",
+            "Vin": "SDLKGHOWRIHGGHKLP",
+            "Posted": "2013-09-13"
+        }
+    ]
 }
