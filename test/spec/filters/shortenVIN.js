@@ -14,4 +14,17 @@ describe('Filter: shortenVIN', function () {
   it('should shorten to 6 characters', function() {
     expect(shortenVIN('abcdefg')).toBe('...bcdefg');
   });
+
+  it('should do nothing if the input is already 6 characters or less', function() {
+    expect(shortenVIN('abcdef')).toBe('abcdef');
+  });
+
+  it('should do nothing if the input is not a string', function() {
+    var obj = {},
+      arr = [];
+    expect(shortenVIN(null)).toBe(null);
+    expect(shortenVIN(obj)).toBe(obj);
+    expect(shortenVIN(arr)).toBe(arr);
+  });
+
 });
