@@ -57,10 +57,15 @@
 
   <button ng-switch-when="payoff-scheduledPayment"
           type="button"
-          id="fakeTogglePayoff"
+          id="togglePayoff2"
           class="btn btn-mini btn-block"
-          disabled>
-    <span>Add</span>
+          ng-class="{'in-queue': onQueue == 'payoff'}"
+          ng-disabled="onQueue == 'payment'"
+          ng-click="togglePaymentInQueue(true)"
+          tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip-placement="right"
+          tooltip-popup-delay="700">
+    <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
   </button>
 
   <button ng-switch-when="payoff-scheduledPayoff"
