@@ -16,6 +16,7 @@ angular.module('nextgearWebApp')
           $location.path('/home');
         }, function(error) {
           error.dismiss();
+          $scope.errorMsg = error.text;
           $scope.showLoginError = true;
         });
     };
