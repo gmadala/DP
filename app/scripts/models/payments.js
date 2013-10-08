@@ -70,7 +70,7 @@ angular.module('nextgearWebApp')
         }
 
         var params = {
-          Criteria: criteria.query || undefined,
+          Keyword: criteria.query || undefined,
           DueDateStart: api.toShortISODate(criteria.startDate) || undefined,
           DueDateEnd: api.toShortISODate(criteria.endDate) || undefined,
           OrderBy: 'DueDate',
