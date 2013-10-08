@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
           City: city || undefined,
           StateId: state ? state.StateId : undefined,
           OrderBy: sortField,
-          OrderDirection: sortDesc ? 'DESC' : 'ASC',
+          OrderByDirection: sortDesc ? 'DESC' : 'ASC',
           PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
           PageSize: Paginate.PAGE_SIZE_MEDIUM
         };

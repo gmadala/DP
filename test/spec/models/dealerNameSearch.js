@@ -47,12 +47,12 @@ describe('Service: DealerNameSearch', function () {
       ds.search('foo', 'denver', { StateId: 'CO' }, 'BusinessName', false);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('BusinessName');
-      expect(callParams.OrderDirection).toBe('ASC');
+      expect(callParams.OrderByDirection).toBe('ASC');
 
       ds.search('foo', 'denver', { StateId: 'CO' }, 'City', true);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('City');
-      expect(callParams.OrderDirection).toBe('DESC');
+      expect(callParams.OrderByDirection).toBe('DESC');
     });
 
     it('should provide a page size', function () {
