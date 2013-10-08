@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($q, $http, $filter, $location, nxgConfig, messages) {
+  .factory('api', function($q, $http, $filter, $location, $dialog, nxgConfig, messages) {
     var authToken = null;
 
     return {
@@ -49,8 +49,9 @@ angular.module('nextgearWebApp')
           }, function (error) {
             if (error.status === 401) {
               self.resetAuthToken();
+              $dialog.dialog().closeAll();
               $location.path('/login');
-              error = messages.add(authError, debug + 'invalid API response: ' + error);
+              error = messages.add(defaultError, debug + 'invalid API response: ' + error);
             }
             else {
               error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
