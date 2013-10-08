@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($scope, $state, $location, User) {
+  .controller('NavBarCtrl', function($rootScope, $scope, $state, User) {
     var dealerLinks = [
         { name: 'Home', href: '#/home' },
         { name: 'Floor a Car', href: '#/floorcar' },
@@ -28,8 +28,7 @@ angular.module('nextgearWebApp')
       info: User.getInfo,
       logout: function() {
         User.logout();
-        $dialog.closeAll();
-        $location.path('/login');
+        $rootScope.$broadcast('event:redirectToLogin');
       },
       navLinks: function() {
         return User.isDealer() ? dealerLinks : auctionLinks;

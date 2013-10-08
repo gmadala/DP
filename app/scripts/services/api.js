@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($q, $http, $filter, $location, $dialog, nxgConfig, messages) {
+  .factory('api', function($rootScope, $q, $http, $filter, nxgConfig, messages) {
     var authToken = null;
 
     return {
@@ -24,7 +24,6 @@ angular.module('nextgearWebApp')
         },
         self = this,
         defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
-        authError = 'You need to be authenticated for this request.',
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
@@ -49,8 +48,7 @@ angular.module('nextgearWebApp')
           }, function (error) {
             if (error.status === 401) {
               self.resetAuthToken();
-              $dialog.closeAll();
-              $location.path('/login');
+              $rootScope.$broadcast('event:redirectToLogin');
               error = messages.add(defaultError, debug + 'invalid API response: ' + error);
             }
             else {
