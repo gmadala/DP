@@ -572,14 +572,15 @@ describe("Model: Payments", function () {
       expect(request.FloorplanId).toBe('foo');
     });
 
-    it('should flip the Scheduled flag on the payment to false upon success', function () {
+    it('should return a promise that resolves to the payment on success', function () {
       var pmt = {
         FloorplanId: 'foo',
         Scheduled: true
       };
-      payments.cancelScheduled(pmt);
+      payments.cancelScheduled(pmt).then(function (result) {
+        expect(result).toBe(pmt);
+      });
       httpBackend.flush();
-      expect(pmt.Scheduled).toBe(false);
     });
 
   });
