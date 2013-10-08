@@ -19,15 +19,16 @@ angular.module('nextgearWebApp')
         get: function() {
           this.loading = true;
           this.requested = true;
+          this.error = null;
           CreditQuery.get(options.businessId).then(
             function(data) {
               this.loading = false;
-              this.error = null;
               this.results = data;
               this.retrieved = true;
             }.bind(this),
-            function(reason) {
-              this.error = reason;
+            function(message) {
+              message.dismiss();
+              this.error = message.text;
               this.loading = false;
               this.retrieved = true;
             }.bind(this)

@@ -261,6 +261,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
       scope.showCreditQuery({
         BusinessId: 'businessId',
         BusinessName: 'businessName',
+        BusinessNumber: 'businessNumber',
         AuctionAccessDealershipNumbers: [
           'aa1',
           'aa2'
@@ -272,7 +273,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
       });
       var options = $dialog.dialog.mostRecentCall.args[0].resolve.options();
       expect(options.businessId).toBe('businessId');
-      expect(options.businessNumber).toBe('businessName'); // TODO: is this really correct?
+      expect(options.businessNumber).toBe('businessNumber');
       expect(options.auctionAccessNumbers).toBe('aa1, aa2');
       expect(options.businessName).toBe('businessName');
       expect(options.address).toBe('address');

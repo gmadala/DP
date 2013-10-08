@@ -3,15 +3,14 @@
     "Message": null,
     "Data": {
         "LinesOfCredit": [
-            {
-                "CreditType": "Retail",
-                "ApprovedCredit": 15500000,
-                "TemporaryCredit": 0,
-                "TotalCredit": 15500000,
-                "Outstanding": 8769843.81,
-                "CreditAvailable": 0,
-                "TemporaryExpiration": ""
-            }
+          {
+            "CreditType": "Credit type 1",
+            "CreditAvailable": 10235.15
+          },
+          {
+            "CreditType": "Credit type 2",
+            "CreditAvailable": 1050.20
+          }
         ]
     }
 }

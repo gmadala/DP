@@ -26,14 +26,12 @@ angular.module('nextgearWebApp')
 
           if (dealerNumber) {
             DealerNumberSearch.searchByDealerNumber(dealerNumber).then(
-              prv.searchByNumberHandler,
-              prv.searchByNumberErrorHandler
+              prv.searchByNumberHandler
             );
           }
           else if (auctionAccessNumber) {
             DealerNumberSearch.searchByAuctionAccessNumber(auctionAccessNumber).then(
-              prv.searchByNumberHandler,
-              prv.searchByNumberErrorHandler
+              prv.searchByNumberHandler
             );
           }
         }
@@ -125,7 +123,7 @@ angular.module('nextgearWebApp')
               options: function() {
                 return {
                   businessId: business.BusinessId,
-                  businessNumber: business.BusinessName,
+                  businessNumber: business.BusinessNumber,
                   auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
                   businessName: business.BusinessName,
                   address: business.Address,
@@ -147,11 +145,7 @@ angular.module('nextgearWebApp')
             this.noresults.auctionAccessNumber = true;
           }
         }
-      }.bind($scope.numberSearch),
-      searchByNumberErrorHandler: function(reason) {
-        // TODO: Show error
-        console.error(reason);
-      }
+      }.bind($scope.numberSearch)
     };
   })
 ;
