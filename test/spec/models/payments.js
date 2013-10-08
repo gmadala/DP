@@ -151,16 +151,16 @@ describe("Model: Payments", function () {
       expect(output.SearchResults[0].$titleURL).toBe('/floorplan/title/123-456/false');
     });
 
-    it('should NOT send a Criteria if search term is empty/null', function () {
+    it('should NOT send a Keyword if search term is empty/null', function () {
       payments.search(defaultCriteria);
       httpBackend.flush();
-      expect(callParams.Criteria).not.toBeDefined();
+      expect(callParams.Keyword).not.toBeDefined();
     });
 
-    it('should send the search term as Criteria, if present', function () {
+    it('should send the search term as Keyword, if present', function () {
       payments.search(angular.extend({}, defaultCriteria, {query: 'foo'}));
       httpBackend.flush();
-      expect(callParams.Criteria).toBe('foo');
+      expect(callParams.Keyword).toBe('foo');
     });
 
     it('should not send startDate or endDate if filter is all', function () {
