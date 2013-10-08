@@ -93,7 +93,7 @@ angular.module('nextgearWebApp')
       addTitleURL: function (item) {
         if (!item.StockNumber) { return item; }
         var displayId = User.getInfo().BusinessNumber + '-' + item.StockNumber;
-        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/false');
+        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0'); // 0 = not first page only
         return item;
       }
     };

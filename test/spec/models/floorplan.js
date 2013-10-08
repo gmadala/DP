@@ -255,7 +255,7 @@ describe('Model: Floorplan', function () {
       ];
       floorplan.search(defaultCriteria).then(function (results) { output = results; });
       httpBackend.flush();
-      expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/false');
+      expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/0');
       expect(output.Floorplans[1].$titleURL).not.toBeDefined();
     });
 
@@ -461,7 +461,7 @@ describe('Model: Floorplan', function () {
       var out = floorplan.addTitleURL({
         StockNumber: 'foo'
       });
-      expect(out.$titleURL).toBe('/floorplan/title/123-foo/false');
+      expect(out.$titleURL).toBe('/floorplan/title/123-foo/0');
     });
 
   });
