@@ -33,7 +33,11 @@
           </li>
 
           <li class="table-list-row" ng-repeat="receipt in receipts.results">
-            <div class="cell rec-num"><p>{{ receipt.TransactionNumber }}</p></div>
+            <div class="cell rec-num">
+              <p>
+                <span ng-bind-html-unsafe="receipt.TransactionNumber | highlight:receipt.data.query"></span>
+              </p>
+            </div>
             <div class="cell rec-status">
               <p ng-switch="getReceiptStatus(receipt)">
                 <span ng-switch-when="nsf">Insufficient Funds</span>
@@ -47,8 +51,10 @@
             </div>
 
             <div class="cell rec-payInfo">
-              <p><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
-                <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span> {{ receipt.CheckNumber }} </p>
+              <p ><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
+                <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span>
+                <span ng-bind-html-unsafe="receipt.CheckNumber | highlight:receipt.data.query"></span>
+              </p>
               <p ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</p>
             </div>
             <div class="cell rec-amtApplied">

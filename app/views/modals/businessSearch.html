@@ -57,9 +57,9 @@
       </thead>
       <tbody>
         <tr ng-repeat="result in data.results">
-          <td ng-bind-html-unsafe="result.BusinessName | highlight:data.proposedQuery"></td>
-          <td ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.proposedQuery"></td>
-          <td ng-bind-html-unsafe="result.BusinessNumber | highlight:data.proposedQuery"></td>
+          <td ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
+          <td ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
+          <td ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
           <td ng-show="data.searchBuyersMode">
             <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
                   tooltip-placement="right"
@@ -68,8 +68,8 @@
               {{ result.AuctionAccessDealershipNumbers | list }}
             </span>
           </td>
-          <td ng-bind-html-unsafe="result.City | highlight:data.proposedQuery"></td>
-          <td ng-bind-html-unsafe="result.State | highlight:data.proposedQuery"></td>
+          <td ng-bind-html-unsafe="result.City | highlight:data.query"></td>
+          <td ng-bind-html-unsafe="result.State | highlight:data.query"></td>
           <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
         </tr>
       </tbody>
