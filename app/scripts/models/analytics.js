@@ -82,7 +82,7 @@ angular.module('nextgearWebApp')
               var top10 = _.sortBy(
                 responses[2],
                 'NumVehiclesAnalyzed'
-              ).reverse().slice(0, 10);
+              ).reverse().slice(0, 10).reverse(); // horizontal bar chart renders items in reverse order, for some reason
 
               // And create a model suitable for charting from the top ten items
               _.each(
