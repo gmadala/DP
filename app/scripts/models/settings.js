@@ -46,6 +46,16 @@ angular.module('nextgearWebApp')
           req.Password = password;
         }
         return api.request('POST', '/UserAccount/usersettings', req);
+      },
+      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
+        var req = {
+          BusinessEmailAddress: email,
+          EnhancedRegistrationEnabled: enhancedRegEnabled
+        };
+        if (enhancedRegEnabled) {
+          req.EnhancedRegistrationPin = enhancedRegPin;
+        }
+        return api.request('POST', '/api/userAccount/businessSettings', req);
       }
     };
   });

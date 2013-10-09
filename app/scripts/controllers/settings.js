@@ -20,10 +20,12 @@ angular.module('nextgearWebApp')
 
     Settings.get().then(function(results) {
         $scope.loading = true;
+
+        /** PROFILE **/
         $scope.profile = {
           data: {
             username: results.Username,
-            email: results.BusinessEmail,
+            email: results.Email,
             phone: results.CellPhone,
             questions: results.SecurityQuestions,
             allQuestions: results.AllSecurityQuestions
@@ -40,11 +42,11 @@ angular.module('nextgearWebApp')
             this.editable = false;
           },
           save: function() {
-            if (!this.isDirty()) {
-              this.cancel();
+            if (!this.validate()) {
               return false;
             }
-            if (!this.validate()) {
+            if (!this.isDirty()) {
+              this.cancel();
               return false;
             }
             var d = this.data = this.dirtyData,
@@ -122,6 +124,58 @@ angular.module('nextgearWebApp')
               groupCount++;
             }
             return groupCount >= 3 && pwd.length >= 8;
+          }
+        };
+
+        /** BUSINESS SETTINGS **/
+        $scope.business = {
+          data: {
+            email: results.BusinessEmail,
+            enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
+            enhancedRegistrationPin: null
+          },
+          dirtyData: null, // a copy of the data for editing (lazily built)
+          editable: false,
+          edit: function() {
+            this.dirtyData = angular.copy(this.data);
+            this.editable = true;
+            this.showError = false;
+          },
+          cancel: function() {
+            this.dirtyData = this.validation = null;
+            this.editable = false;
+          },
+          save: function() {
+            if (!this.validate()) {
+              return false;
+            }
+            if (!this.isDirty()) {
+              this.cancel();
+              return false;
+            }
+            var d = this.data = this.dirtyData;
+
+            Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
+              function(/*success*/) {
+                this.dirtyData = this.validation = null;
+                this.editable = false;
+                this.showError = false;
+              }.bind(this),
+              function(error) {
+                console.log(error.text);
+                this.showError = true;
+                this.errorMsg = error.text;
+              }.bind(this)
+            );
+          },
+          isDirty: function() {
+            return $scope.busSettings.$dirty;
+          },
+          validate: function() {
+            var business = $scope.business;
+            business.validation = angular.copy($scope.busSettings);
+
+            return business.validation.$valid;
           }
         };
       },

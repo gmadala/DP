@@ -16,7 +16,7 @@
     "Email": "diana.guarin@manheim.com",
     "CellPhone": "2143301800",
     "BusinessEmail": "diana.guarin@manheim.com",
-    "EnhancedRegistrationEnabled": false,
+    "EnhancedRegistrationEnabled": true,
     "Addresses": [
       {
         "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
