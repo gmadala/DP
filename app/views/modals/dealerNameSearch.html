@@ -72,12 +72,12 @@
       </thead>
       <tbody>
         <tr ng-repeat="business in data.results">
-            <td class="bus-name">{{ business.BusinessName }}</td>
-            <td class="bus-legalName">{{ business.BusinessLegalName }}</td>
-            <td class="bus-num">{{ business.BusinessNumber }}</td>
-            <td class="bus-city">{{ business.City }}</td>
-            <td class="bus-state">{{ business.State }}</td>
-            <td class="bus-select"><a href class="btn btn-mini" ng-click="showCreditQuery(business)">Query</a></td>
+          <td class="bus-name" ng-bind-html-unsafe="business.BusinessName | highlight:business.data.query"></td>
+          <td class="bus-legalName">{{ business.BusinessLegalName }}</td>
+          <td class="bus-num">{{ business.BusinessNumber }}</td>
+          <td class="bus-city">{{ business.City }}</td>
+          <td class="bus-state">{{ business.State }}</td>
+          <td class="bus-select"><a href class="btn btn-mini" ng-click="showCreditQuery(business)">Query</a></td>
         </tr>
       </tbody>
     </table>
