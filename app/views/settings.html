@@ -5,55 +5,79 @@
       <section class="span8 well adjacent">
         <h4>User Profile</h4>
         <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="profile.editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
-        <button ng-show="profile.editable" class="btn save-btn" ng-click="save()">Save</button>
+        <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()">Cancel</button>
+        <button ng-show="profile.editable" class="btn save-btn" ng-click="profile.save()">Save</button>
 
         <div class="well-out">
+
           <form class="settings-opts" ng-class="{ profile.editable: editable }" name="userSettings" novalidate>
+            <span class="error" ng-show="profile.showError">{{ profile.errorMsg }}</span>
 
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
-                <input type="text" id="setUsername" ng-model="profile.username" value="profile.username" required/>
+                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" required/>
+              </div>
+              <div for="setUsername" class="form-error"
+                     ng-show="profile.validation.setUsername.$error.required">
+                  Please enter a User Name.
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for="setPassword"><span ng-show="editable">New </span>Password</label>
               <div class="static" ng-hide="profile.editable">***********</div>
-              <div class="controls" nxg-input model="profile.data.password" editable="profile.editable">
-                <input type="password" name="setPassword" id="setPassword" ng-model="profile.data.password" required/><button class="btn-help" tooltip="Info about the password field." tooltip-placement="right" tooltip-title="Password Reset" popover-animation="true">?</button>
+              <div class="controls" ng-show="profile.editable">
+                <input type="password" name="setPassword" ng-model="profile.dirtyData.password"/>
+                  <button class="btn-help"
+                          tooltip-placement="right"
+                          tooltip-title="Password Reset"
+                          tooltip-html="true"
+                          tooltip-html-unsafe="<p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
+                          popover-animation="true">?</button>
+              </div>
+              <div class="form-error" ng-show="profile.validation.setPassword.$error.pattern">
+                  Please enter a valid password.
               </div>
             </div>
 
             <div class="control-group" ng-show="profile.editable">
               <label class="control-label" for="confirmPassword">Confirm Password</label>
               <div class="controls">
-                <input type="password" id="confirmPassword" ng-model="profile.passwordConfirm" required />
-                <p class="form-error" ng-show="">
+                <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm"/>
+              </div>
+              <div class="form-error" ng-show="profile.validation.setPassword.$error.nomatch">
                   The passwords do not match. Please re-enter the password.
-                </p>
               </div>
             </div>
 
-            <div ng-repeat="question in profile.data.questions">
+            <div ng-repeat="question in profile.data.questions" ng-hide="profile.editable">
                 <!-- Question Select -->
                 <div class="control-group">
-                  <label class="control-label">Security Question {{$index}}</label>
-                  <div class="controls" nxg-input model="question.QuestionText" editable="profile.editable">
+                    <label class="control-label">Security Question {{$index + 1}}</label>
+                    <div class="static" ng-hide="editable"> {{ question.QuestionText }} </div>
+                </div>
+            </div>
+
+            <div ng-repeat="question in profile.dirtyData.questions" ng-show="profile.editable">
+                <!-- Question Select -->
+                <div class="control-group">
+                  <label class="control-label">Security Question {{$index + 1}}</label>
                     <select ng-model="question.SecurityQuestionId"
                             ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
                             tooltip="{{ question.QuestionText }}"
                             tooltip-placement="right"
                             tooltip-popup-delay="700">
                     </select>
-                  </div>
                 </div>
                 <!-- Answer -->
                 <div class="control-group" ng-show="profile.editable">
                     <label class="control-label" for="secAnswer">Answer</label>
                     <div class="controls">
-                        <input type="text" id="secAnswer" ng-model="question.Answer" />
+                        <input type="text" name="secAnswer" ng-model="question.Answer" required/>
+                    </div>
+                    <div class="form-error" ng-show="question.$error.required">
+                        Please enter an Answer.
                     </div>
                 </div>
             </div>
@@ -61,17 +85,25 @@
             <div class="control-group">
               <label class="control-label" for="email">Email</label>
               <div class="controls" nxg-input model="profile.data.email" editable="profile.editable">
-                <input type="email" name="email" id="email" ng-model="profile.data.email" value="profile.data.email" required/>
-                <p class="form-error" ng-show="userSettings.email.$invalid && userSettings.email.$dirty">
+                <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" required/>
+                <div class="form-error" ng-show="profile.validation.email.$invalid">
                   Please enter a valid email address.
-                </p>
+                </div>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for="phone">Phone</label>
               <div class="controls" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
-                <input type="tel" id="phone" ng-model="profile.data.phone" value="profile.data.phone" required/>
+                <input type="tel"
+                       name="phone"
+                       ng-model="profile.dirtyData.phone"
+                       required
+                       ng-pattern="phonePattern"
+                       size="10"/>
+                  <div class="form-error" ng-show="profile.validation.phone.$error.pattern">
+                      Please enter a valid phone number.
+                  </div>
               </div>
             </div>
 
