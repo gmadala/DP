@@ -39,9 +39,9 @@
     <div class="well-out recent-disbursements">
       <table>
         <tbody>
-            <td>{{ dis.DisbursmentDate | moment }}</td>
-            <td>{{ dis.DisbursementNumber }}</td>
           <tr ng-repeat="dis in dashboardData.Disbursements | limitTo:5">
+            <td>{{ dis.DisbursementDate | moment }}</td>
+            <td>#{{ dis.StockNumber }}</td>
             <td><strong>{{ dis.DisbursementAmount | currency }}</strong></td>
             <td><a href="#">View</a></td> <!-- TODO: Wire link for viewing single disbursements -->
           </tr>

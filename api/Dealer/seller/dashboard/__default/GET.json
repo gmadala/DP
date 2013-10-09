@@ -16,19 +16,25 @@
     "PendingFloorplansOutstandingAmount": 34646,
     "Disbursements": [
       {
-        "DisbursmentDate": "2013-08-20",
-        "DisbursementNumber": 124,
-        "DisbursementAmount": 2467.44
-      },
-      {
-        "DisbursmentDate": "2013-08-25",
-        "DisbursementNumber": 125,
-        "DisbursementAmount": 3298.33
-      },
-      {
-        "DisbursmentDate": "2013-08-31",
-        "DisbursementNumber": 128,
-        "DisbursementAmount": 3400.00
+        "DisbursementDate": "2013-09-27",
+        "StockNumber": 17,
+        "DisbursementAmount": 5985.0000
+      }, {
+        "DisbursementDate": "2013-09-27",
+        "StockNumber": 16,
+        "DisbursementAmount": 3860.0000
+      }, {
+        "DisbursementDate": "2013-09-27",
+        "StockNumber": 15,
+        "DisbursementAmount": 4560.0000
+      }, {
+        "DisbursementDate": "2013-09-27",
+        "StockNumber": 10,
+        "DisbursementAmount": 23350.0000
+      }, {
+        "DisbursementDate": "2013-09-27",
+        "StockNumber": 465,
+        "DisbursementAmount": 27445.0000
       }
     ]
   }
