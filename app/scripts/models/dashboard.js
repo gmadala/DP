@@ -117,11 +117,7 @@ angular.module('nextgearWebApp')
       },
 
       fetchAuctionDashboard: function () {
-        return api.request('GET', '/dealer/seller/dashboard').then(
-          function (response) {
-            return response;
-          }
-        );
+        return api.request('GET', '/dealer/seller/dashboard');
       },
 
       fetchFloorplanChartData: function (range) {
