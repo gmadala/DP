@@ -56,7 +56,7 @@
                 Total NextGear Capital Book Value:
               </td>
               <td>
-                {{ businessSummary.TotalApprovedBlackbookValue | currency }}
+                {{ businessSummary.TotalApprovedBlackBookValue | currency }}
               </td>
             </tr>
           </table>
@@ -108,7 +108,7 @@
 
           <!-- should show conditionally on-click of "Show Details" bar. -->
           <li ng-show="showDetails" class="small">
-            NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price.
+            NextGear Capital Book is {{ businessSummary.DerivedPendingBook | number:2 }}% of the Purchase Price.
           </li>
           <!-- end conditional <li>s --></ul>
       </div>

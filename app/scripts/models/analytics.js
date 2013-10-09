@@ -10,8 +10,21 @@ angular.module('nextgearWebApp')
           function (response) {
 
             // Calculate a couple of client-side derived values needed later and append it to the marshalled response
-            response.DerivedCapitalBook = response.TotalOutstandingPrincipal / response.TotalApprovedPurchasePrice * 100;
+            response.DerivedCapitalBook = response.TotalApprovedBlackBookValue / response.TotalApprovedPurchasePrice * 100;
             response.DerivedAmountOutstanding = response.TotalOutstandingPrincipal / response.TotalApprovedBlackBookValue * 100;
+            response.DerivedPendingBook = response.TotalPendingBlackBookPrice / response.TotalPendingPurchasePrice * 100;
+
+            // If we got NaN or Infinity from either of these calculations, just make them 0
+            // (not totally mathematically accurate, but avoids a missing value in the UI)
+            if (!isFinite(response.DerivedCapitalBook)) {
+              response.DerivedCapitalBook = 0;
+            }
+            if (!isFinite(response.DerivedAmountOutstanding)) {
+              response.DerivedAmountOutstanding = 0;
+            }
+            if (!isFinite(response.DerivedPendingBook)) {
+              response.DerivedPendingBook = 0;
+            }
 
             return response;
           }
