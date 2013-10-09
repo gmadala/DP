@@ -12,7 +12,14 @@ angular.module('nextgearWebApp')
         backdropClick: true,
         dialogClass: 'modal search-modal top-auctions-modal',
         templateUrl: 'views/modals/topAuctions.html',
-        controller: 'TopAuctionsCtrl'
+        controller: 'TopAuctionsCtrl',
+        resolve: {
+          auctions: function () {
+            return $scope.analytics.then(function (result) {
+              return result.allAuctions;
+            });
+          }
+        }
       };
       $dialog.dialog(dialogOptions).open();
     };

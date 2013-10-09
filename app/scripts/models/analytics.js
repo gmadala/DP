@@ -76,15 +76,13 @@ angular.module('nextgearWebApp')
                 }
               );
 
+              // Parse book value margins data into a model suitable for charting and all auctions modal
+              result.allAuctions = _.sortBy(responses[2], 'NumVehiclesAnalyzed').reverse(); // sort descending
+
+              // trim down to the top ten for chart
+              var top10 = result.allAuctions.slice(0, 10).reverse(); // horizontal bar chart renders items in reverse order
               result.top10Auctions = { labels: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
 
-              // Sort by NumVehiclesAnalyzed and trim down to the top ten auctions
-              var top10 = _.sortBy(
-                responses[2],
-                'NumVehiclesAnalyzed'
-              ).reverse().slice(0, 10).reverse(); // horizontal bar chart renders items in reverse order, for some reason
-
-              // And create a model suitable for charting from the top ten items
               _.each(
                 top10,
                 function ( item ) {
@@ -128,16 +126,7 @@ angular.module('nextgearWebApp')
             return result;
           }
         );
-      },
-
-      fetchTopAuctions: function() {
-        return api.request('GET', '/analytics/bookvaluemargins/12').then(
-          function (response) {
-            return response;
-
-          }
-        );
-      },
+      }
 
     };
   });
