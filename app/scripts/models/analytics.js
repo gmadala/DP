@@ -103,18 +103,27 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
-            var result = { labels: [], years: [], makes: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+            var result = { labels: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+
+            response = _.sortBy(response, 'NinetyFifthPercentileTurnTime');
+            if (isTop) {
+              response.reverse();
+            }
 
             _.each(
-              response.reverse(),
+              response,
               function ( item ) {
                 result.labels.push('');
-                result.years.push(item.Year);
-                result.makes.push(item.Make);
-                result.models.push(item.Model);
+                result.models.push({
+                  model: item.Model,
+                  year: item.Year,
+                  make: item.Make
+                });
                 result.datasets[0].data.push(item.NinetyFifthPercentileTurnTime);
               }
             );
+
+            result.models.reverse(); // chart will flip the data set; do the same to data behind our custom labels
 
             return result;
           }
