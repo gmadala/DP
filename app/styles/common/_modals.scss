@@ -90,18 +90,46 @@
 
   th {
     @extend %align-left;
+    vertical-align: middle;
     text-transform: uppercase;
     font-weight: normal;
+    padding: 6px 20px 6px 6px;
   }
 
   td, th {
-    vertical-align: top;
+    line-height: $base-line-height;
     border: 1px solid #eaeaea;
     border-top: none;
-    padding: 0.5em;
+  }
+
+  td {
+    vertical-align: top;
+    padding: 6px;
   }
   .modal-footer {
     border: none;
+  }
+
+  &.search-modal-business, &.dealer-search-modal {
+    td, th {
+      &.bus-name, &.bus-legalName {
+        @extend %quarter-width;
+      }
+      &.bus-num { width: 15%; }
+      &.bus-city { width: 15%; }
+      &.bus-state {  width: 10%; }
+      &.bus-select { width: 10%; }
+    }
+
+    .show-access-num td, .show-access-num th {
+      &.bus-name { width: 20%; }
+      &.bus-legalName { width: 18%;}
+      &.bus-num { width: 15%; }
+      &.bus-city { width: 14%; }
+      &.bus-state { width: 10%;}
+      &.bus-auctionNum { width: 13%; }
+      &.bus-select { width: 10%; }
+    }
   }
 }
 
@@ -122,28 +150,26 @@
 .sortable {
   position: relative;
   cursor: pointer;
+  padding-right: 20px;
 
   &::before, &::after {
     content: '';
     @include box(0);
     position: absolute;
     right: 10px;
+    border: 0;
+    margin: 3px 0 0;
   }
 
-  &::before {
-    @extend .up-arrow;
-    margin-top: 3px;
-  }
-
-  &::after {
-    @extend .down-arrow;
-    margin-top: 12px;
+  &:hover {
+    &::before {
+      @extend .up-arrow;
+    }
   }
 
   &.sorted {
     &::before {
       @extend .up-arrow;
-      margin-top: 7px;
     }
     &::after {
       border: 0;
@@ -155,7 +181,6 @@
       }
       &::after {
         @extend .down-arrow;
-        margin-top: 7px;
       }
     }
   }

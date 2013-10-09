@@ -26,41 +26,41 @@
        nxg-infinite-scroll-disabled="data.loading"
        nxg-infinite-scroll-show-indicator="data.loading"
        nxg-scroll-container>
-    <table>
+    <table ng-class="{ 'show-access-num': data.searchBuyersMode }">
       <thead>
         <tr>
-          <th ng-click="sortBy('BusinessName')" class="sortable"
+          <th ng-click="sortBy('BusinessName')" class="bus-name sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
             Business Name
           </th>
-          <th ng-click="sortBy('BusinessLegalName')" class="sortable"
+          <th ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
             Legal Name
           </th>
-          <th ng-click="sortBy('BusinessNumber')" class="sortable"
+          <th ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
             Business&nbsp;#
           </th>
-          <th ng-show="data.searchBuyersMode">
+          <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
             Auction Access #
           </th>
-          <th ng-click="sortBy('City')" class="sortable"
+          <th ng-click="sortBy('City')" class="bus-city sortable"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
             City
           </th>
-          <th ng-click="sortBy('State')" class="sortable"
+          <th ng-click="sortBy('State')" class="bus-state sortable"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
             State
           </th>
-          <th></th>
+          <th class="bus-select"></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="result in data.results">
-          <td ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
-          <td ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
-          <td ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
-          <td ng-show="data.searchBuyersMode">
+          <td class="bus-name" ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
+          <td class="bus-legalName" ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
+          <td class="bus-num" ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
+          <td class="bus-auctionNum" ng-show="data.searchBuyersMode">
             <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
                   tooltip-placement="right"
                   tooltip-popup-delay="700"
@@ -68,9 +68,9 @@
               {{ result.AuctionAccessDealershipNumbers | list }}
             </span>
           </td>
-          <td ng-bind-html-unsafe="result.City | highlight:data.query"></td>
-          <td ng-bind-html-unsafe="result.State | highlight:data.query"></td>
-          <td><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
+          <td class="bus-city" ng-bind-html-unsafe="result.City | highlight:data.query"></td>
+          <td class="bus-state" ng-bind-html-unsafe="result.State | highlight:data.query"></td>
+          <td class="bus-select"><a href class="btn btn-mini" ng-click="select(result)">Select</a></td>
         </tr>
       </tbody>
     </table>
