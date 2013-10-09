@@ -45,9 +45,9 @@
                 </button>
               </div>
 
-              <div class="cell fl-desc"><p> {{ getVehicleDescription(item) }} </p></div>
-              <div class="cell fl-vin"><p> {{ item.UnitVIN | shortenVIN }} </p></div>
-              <div class="cell fl-stock"><p> {{ item.StockNumber }} </p></div>
+              <div class="cell fl-desc"><p ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></p></div>
+              <div class="cell fl-vin"><p ng-bind-html-unsafe="item.UnitVIN | shortenVIN  | highlight:item.data.query"></p></div>
+              <div class="cell fl-stock"><p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p></div>
               <div class="cell fl-status"><p> {{ item.FloorplanStatusName }} </p></div>
               <div class="cell fl-purchaseDate"><p> {{ item.UnitPurchaseDate | moment }} </p></div>
               <div class="cell fl-floorDate"><p> {{ item.FlooringDate | moment }} </p></div>

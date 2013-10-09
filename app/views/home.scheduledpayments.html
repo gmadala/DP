@@ -50,8 +50,12 @@
               </div>
 
               <div class="cell sch-desc">
-                <p><span class="sch-label">VIN: </span>{{ pay.vin }}<br/>
-                <span class="sch-label">Stock #: </span>{{ pay.stockNumber }}</p>
+                <p>
+                  <span class="sch-label">VIN: </span>
+                  <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
+                  <span class="sch-label">Stock #: </span>
+                  <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
+                </p>
                 <p> {{ pay.description }} </p>
               </div>
 

@@ -19,6 +19,7 @@ angular.module('nextgearWebApp')
           function (results) {
             angular.forEach(results.Receipts, function (receipt) {
               receipt.$receiptURL = self.getReceiptUrl(receipt.FinancialTransactionId);
+              receipt.data = {query: criteria.query};
             });
             return Paginate.addPaginator(results, results.ReceiptRowCount, params.PageNumber, params.PageSize);
           }

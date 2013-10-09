@@ -34,7 +34,8 @@ angular.module('nextgearWebApp')
                 paymentAmount: item.ScheduledPaymentAmount,
                 payoffAmount: item.ScheduledPayoutAmount,
                 scheduledBy: item.ScheduledByUserDisplayname,
-                receiptURL: prv.getReceiptURL(item)
+                receiptURL: prv.getReceiptURL(item),
+                data: {query: request.Keyword}
               });
             }
             return searchResults;

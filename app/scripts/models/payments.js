@@ -82,8 +82,9 @@ angular.module('nextgearWebApp')
           function (results) {
             self.setAvailableUnappliedFunds(results.AvailableUnappliedFundsBalance);
             angular.forEach(results.SearchResults, function (payment) {
-                Floorplan.addTitleURL(payment);
-              });
+              payment.data = {query: criteria.query};
+              Floorplan.addTitleURL(payment);
+            });
             return Paginate.addPaginator(results, results.PaymentRowCount, params.PageNumber, params.PageSize);
           }
         );

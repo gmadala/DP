@@ -82,6 +82,7 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
             angular.forEach(results.Floorplans, function (floorplan) {
+              floorplan.data = {query: criteria.query};
               if (floorplan.TitleImageAvailable) {
                 self.addTitleURL(floorplan);
               }
