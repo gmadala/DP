@@ -204,44 +204,38 @@
           <div class="well-out">
             <div class="nxg-fancy-radios">
 
-              <input type="radio" class="first" name="best-movers" id="best-movers" value="true" ng-model="selectedMoverChart" placeholder="Ten Best Movers">
+              <input type="radio" class="first" name="best-movers" id="best-movers"
+                     ng-value="bestMovers" ng-model="selectedMoverChart" placeholder="Ten Best Movers">
               <label for="best-movers" id="best-movers-label"></label>
 
-              <input type="radio" class="last" name="worst-movers" id="worst-movers" value="false" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
+              <input type="radio" class="last" name="worst-movers" id="worst-movers"
+                     ng-value="worstMovers" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
               <label for="worst-movers" id="worst-movers-label"></label>
 
             </div>
             <div class="movers-chart">
 
               <table>
-                <tr ng-repeat="models in bestMovers.models">
+                <tr ng-repeat="model in selectedMoverChart.models">
                   <td class="rank">
                     {{ $index + 1 }}
                   </td>
                   <td class="models">
                     <div>
-                      <span>({{ bestMovers.years[$index] }})</span>
-                      <span>{{ bestMovers.makes[$index] }}</span>
+                      <span>({{ model.year }})</span>
+                      <span>{{ model.make }}</span>
                     </div>
-                    <div>{{ models }}</div>
+                    <div>{{ model.model }}</div>
                   </td>
                 </tr>
               </table>
 
-              <div ng-show="selectedMoverChart">
+              <div>
                 <canvas width="290"
                         height="350"
                         nxg-chart
                         nxg-chart-type="Bar"
-                        nxg-chart-data="bestMovers"
-                        nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-              </div>
-              <div ng-hide="selectedMoverChart">
-                <canvas width="290"
-                        height="350"
-                        nxg-chart
-                        nxg-chart-type="Bar"
-                        nxg-chart-data="worstMovers"
+                        nxg-chart-data="selectedMoverChart"
                         nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
               </div>
             </div>
