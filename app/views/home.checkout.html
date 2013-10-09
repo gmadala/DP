@@ -154,18 +154,6 @@
 
       <hr/>
 
-      <!-- Bank Account -->
-      <div class="bank-account">
-        <label for="bankAccount">Account</label>
-        <select name="bankAccount" id="bankAccount"
-                ng-model="bankAccounts.selectedAccount"
-                ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                required></select>
-        <p class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</p>
-      </div><!-- end Bank Account selection -->
-
-      <hr/>
-
       <!-- Scheduled Payments -->
       <div class="scheduled-items">
         <h4><span class="count">{{ paymentQueue.sum.scheduledCount() }}</span>
@@ -175,6 +163,18 @@
         <p class="chkout-label">Scheduled Total</p>
         <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.scheduledTotal > 0 }">{{ paymentQueue.sum.scheduledTotal() | currency }}</p>
       </div><!-- end Scheduled Payments -->
+
+      <hr/>
+
+      <!-- Bank Account -->
+      <div class="bank-account">
+        <label for="bankAccount">Account</label>
+        <select name="bankAccount" id="bankAccount"
+                ng-model="bankAccounts.selectedAccount"
+                ng-options="account.BankAccountName for account in bankAccounts.getList()"
+                required></select>
+        <p class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</p>
+      </div><!-- end Bank Account selection -->
 
       <hr/>
 

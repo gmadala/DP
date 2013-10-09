@@ -107,7 +107,13 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
 
   it('should not add receipt URLs to the scope if not present', function () {
     transactionInfo.FinancialTransactionId = null;
-    transactionInfo. UnappliedFundsTransactionId = '';
+    transactionInfo.UnappliedFundsTransactionId = '';
+    run();
+    expect(scope.receiptUrls.length).toBe(0);
+  });
+
+  it('should not add receipt URLs to the scope if parent object is null', function () {
+    transactionInfo = null;
     run();
     expect(scope.receiptUrls.length).toBe(0);
   });
