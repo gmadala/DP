@@ -22,6 +22,9 @@ angular.module('nextgearWebApp')
 
         return api.request('GET', '/dealer/search/buyer', params).then(
           function(results) {
+            angular.forEach(results.SearchResults, function (dealer) {
+              dealer.data = {query: name};
+            });
             return Paginate.addPaginator(results, results.DealerRowCount, params.PageNumber, params.PageSize);
           }
         );
