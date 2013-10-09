@@ -31,10 +31,10 @@
                 <input type="password" name="setPassword" ng-model="profile.dirtyData.password"/>
                   <button class="btn-help"
                           tooltip-placement="right"
-                          tooltip-title="Password Reset"
+                          tooltip-trigger="click"
                           tooltip-html="true"
-                          tooltip-html-unsafe="<p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
-                          popover-animation="true">?</button>
+                          tooltip-html-unsafe="<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
+                          tooltip-animation="true">?</button>
               </div>
               <div class="form-error" ng-show="profile.validation.setPassword.$error.pattern">
                   Please enter a valid password.
@@ -183,7 +183,12 @@
                   <option>foo</option>
                 </select>
 
-                <button class="btn-help" tooltip="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555" tooltip-placement="right" tooltip-animation="true" class="btn">?</button>
+                <button class="btn-help"
+                  tooltip-placement="right"
+                  tooltip-trigger="click"
+                  tooltip-html="true"
+                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555"
+                  tooltip-animation="true">?</button>
               </div>
             </div>
           </form>
