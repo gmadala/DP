@@ -29,8 +29,23 @@ angular.module('nextgearWebApp')
           }
         );
       },
-      saveProfile: function(/*username, password, email, phone, securityAnswers*/) {
-        // TODO: Hook up correct api call
+      saveProfile: function(username, password, email, phone, securityAnswers) {
+        var req = {
+          Username: username,
+          EmailAddress: email,
+          Cellphone: phone,
+          SecurityAnswers: []
+        };
+        for (var i = 0; i < securityAnswers.length; i++) {
+          req.SecurityAnswers.push({
+            SecurityQuestionId: securityAnswers[i].SecurityQuestionId,
+            Answer: securityAnswers[i].Answer
+          });
+        }
+        if (password) {
+          req.Password = password;
+        }
+        return api.request('POST', '/UserAccount/usersettings', req);
       }
     };
   });
