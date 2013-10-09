@@ -146,6 +146,13 @@ angular.module('nextgearWebApp')
 
         // always return the same array object so that this can be used in a binding
         return paySellerOptions;
+      },
+
+      reset: function() {
+        statics = null;
+        info = null;
+        paySellerOptions = [];
+        securityQuestions = null;
       }
 
     };
