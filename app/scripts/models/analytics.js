@@ -101,7 +101,7 @@ angular.module('nextgearWebApp')
       },
 
       fetchMovers: function(isTop) {
-        return api.request('GET', 'analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
+        return api.request('GET', '/analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
             var result = { labels: [], years: [], makes: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
@@ -123,7 +123,7 @@ angular.module('nextgearWebApp')
       },
 
       fetchTopAuctions: function() {
-        return api.request('GET', 'analytics/bookvaluemargins/12').then(
+        return api.request('GET', '/analytics/bookvaluemargins/12').then(
           function (response) {
             return response;
 
