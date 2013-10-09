@@ -227,4 +227,83 @@ describe('Model: dashboard', function () {
 
   });
 
+  describe('fetchAuctionDashboard method', function () {
+
+    beforeEach(function () {
+      httpBackend.whenGET('/dealer/seller/dashboard').respond({
+        Success: true,
+        Message: null,
+        Data: 'dashboard data'
+      });
+    });
+
+    it('should call the expected endpoint', function () {
+      httpBackend.expectGET('/dealer/seller/dashboard');
+      dashboard.fetchAuctionDashboard();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for the result', function () {
+      dashboard.fetchAuctionDashboard().then(
+        function (result) {
+          expect(result).toBe('dashboard data');
+        }
+      );
+      httpBackend.flush();
+    });
+
+  });
+
+  describe('fetchFloorplanChartData method', function () {
+
+    beforeEach(function () {
+      httpBackend.whenGET(/\/Floorplan\/getChartData\/\d$/).respond({
+        Success: true,
+        Message: null,
+        Data: {
+          Range: 0,
+          Points: [
+            {
+              X: 'a',
+              Y: 1
+            },
+            {
+              X: 'b',
+              Y: 2
+            }
+          ]
+        }
+      });
+    });
+
+    it('should call the expected endpoint with the provided range value', function () {
+      httpBackend.expectGET('/Floorplan/getChartData/8');
+      dashboard.fetchFloorplanChartData(8);
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for the expected chart data format', function () {
+      dashboard.fetchFloorplanChartData(0).then(
+        function (result) {
+          expect(angular.isArray(result.labels)).toBe(true);
+          expect(result.labels.length).toBe(2);
+          expect(result.labels[0]).toBe('a');
+          expect(result.labels[1]).toBe('b');
+
+          expect(angular.isArray(result.datasets)).toBe(true);
+          expect(result.datasets.length).toBe(1);
+          expect(result.datasets[0].fillColor).toBeDefined();
+          expect(result.datasets[0].strokeColor).toBeDefined();
+
+          expect(angular.isArray(result.datasets[0].data)).toBe(true);
+          expect(result.datasets[0].data.length).toBe(2);
+          expect(result.datasets[0].data[0]).toBe(1);
+          expect(result.datasets[0].data[1]).toBe(2);
+        }
+      );
+      httpBackend.flush();
+    });
+
+  });
+
 });
