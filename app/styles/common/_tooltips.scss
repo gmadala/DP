@@ -36,10 +36,15 @@
       }
     }
   }
+
+  h5 { // for tooltip titles
+    margin: 0 0 5px;
+  }
 }
 
 .tooltip-inner {
   @extend %small;
+  @extend %align-left;
   @include border-radius(0);
   color: $base-text-color;
   width: 250px;
