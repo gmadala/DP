@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Analytics', function ($q, $filter, api) {
+  .factory('Analytics', function ($q, $filter, api, moment) {
 
     return {
 
@@ -39,8 +39,6 @@ angular.module('nextgearWebApp')
           ]).then(
             function (responses) {
 
-              var monthAbbrevs = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
               var result = {};
 
               // Parse average turn time into a model suitable for charting
@@ -55,11 +53,11 @@ angular.module('nextgearWebApp')
                 ]
               };
               _.each(
-                responses[0],
+                _.sortBy(responses[0], 'EndOfMonthDate'),
                 function ( item ) {
-                  var month = parseInt(item.EndOfMonthDate.split('-')[1], 10);
-                  var monthStr = monthAbbrevs[month];
-                  result.averageTurn.labels.push(monthStr);
+                  var fmt, date = moment(item.EndOfMonthDate);
+                  fmt = date.month() === 0 ? 'MMM \'YY' : 'MMM';
+                  result.averageTurn.labels.push(date.format(fmt));
                   result.averageTurn.datasets[0].data.push(item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior);
                 }
               );
