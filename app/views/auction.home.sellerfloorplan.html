@@ -26,7 +26,9 @@
     <li class="table-list-row" ng-repeat="result in searchResults">
       <!-- TODO: remove placeholder data during MVC integration. -->
       <div class="cell selfloor-descr">
-        <p><span class="sch-label">VIN: </span>{{ title.vin }}1GTESDD99A8252817</p>
+        <p>
+          <span class="sch-label">VIN: </span>
+          <span ng-bind-html-unsafe="'12334445' | highlight:result.data.query"></span>
         <p>{{ title.description}}4D Hatchback 1.5L I-4 MPI SOHC VTEC</p>
       </div>
       <div class="cell selfloor-stat">{{ title.status }}Complete</div>
