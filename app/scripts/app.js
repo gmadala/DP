@@ -158,6 +158,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:redirectToLogin',
       function(){
+        User.reset();
         $dialog.closeAll();
         $location.path('/login');
       }
