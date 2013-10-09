@@ -28,7 +28,7 @@
           </li>
 
           <li class="table-list-row" ng-repeat="fee in paymentQueue.contents.fees">
-            <div class="cell fee-type"><p>{{ fee.type }}</p></div>
+            <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
             <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
             <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
             <div class="cell fee-amt">
