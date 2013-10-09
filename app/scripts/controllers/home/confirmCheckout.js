@@ -41,11 +41,11 @@ angular.module('nextgearWebApp')
     // no workflow currently specified for directly displaying these, but here they are in case we need them later
     $scope.receiptUrls = [];
     var url;
-    if (transactionInfo.FinancialTransactionId) {
+    if (transactionInfo && transactionInfo.FinancialTransactionId) {
       url = Receipts.getReceiptUrl(transactionInfo.FinancialTransactionId);
       $scope.receiptUrls.push(url);
     }
-    if (transactionInfo.UnappliedFundsTransactionId) {
+    if (transactionInfo && transactionInfo.UnappliedFundsTransactionId) {
       url = Receipts.getReceiptUrl(transactionInfo.UnappliedFundsTransactionId);
       $scope.receiptUrls.push(url);
     }
