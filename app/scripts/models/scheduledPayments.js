@@ -19,6 +19,7 @@ angular.module('nextgearWebApp')
               var item = results.SearchResults[i];
               searchResults.push({
                 floorplanId: item.FloorplanId,
+                webScheduledPaymentId: item.WebScheduledPaymentId,
                 financialTransactionId: item.FinancialTransactionId,
                 vin: item.Vin,
                 description: item.VehicleDescription,

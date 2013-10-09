@@ -15,6 +15,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     scope = $rootScope.$new();
     optionsMock = {
       payment: {
+        webScheduledPaymentId: 'schedId',
         vin: 'somevin',
         description: 'some description',
         stockNumber: 'stockNumber',
@@ -24,7 +25,7 @@ describe('Controller: CancelPaymentCtrl', function () {
         amountDue: 1000
       },
       title: 'some title',
-      onCancel: function() {}
+      onCancel: angular.noop
     };
     dialogMock = {
       close: angular.noop
@@ -70,10 +71,10 @@ describe('Controller: CancelPaymentCtrl', function () {
       expect(scope.submitInProgress).toBe(true);
     });
 
-    it('should call cancelScheduled in payments model with provided payment', function () {
+    it('should call cancelScheduled in payments model with web scheduled payment id of provided payment', function () {
       spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
       scope.handleYes();
-      expect(Payments.cancelScheduled).toHaveBeenCalledWith(optionsMock.payment);
+      expect(Payments.cancelScheduled).toHaveBeenCalledWith('schedId');
     });
 
     it('should set submitInProgress to false and close the dialog with true on success', function () {
@@ -85,13 +86,34 @@ describe('Controller: CancelPaymentCtrl', function () {
       expect(dialogMock.close).toHaveBeenCalledWith(true);
     });
 
+    it('should call the onCancel function, if defined, on success', function () {
+      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(optionsMock, 'onCancel');
+
+      scope.handleYes();
+      scope.$apply();
+      expect(optionsMock.onCancel).toHaveBeenCalled();
+    });
+
+    it('should not blow up on success if onCancel is not defined in the options', function () {
+      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      optionsMock.onCancel = undefined;
+
+      scope.handleYes();
+      expect(function () {
+        scope.$apply();
+      }).not.toThrow();
+    });
+
     it('should set submitInProgress to false on error and remain open', function () {
       spyOn(Payments, 'cancelScheduled').andReturn(q.reject('fail'));
       spyOn(dialogMock, 'close');
+      spyOn(optionsMock, 'onCancel');
       scope.handleYes();
       scope.$apply();
       expect(scope.submitInProgress).toBe(false);
       expect(dialogMock.close).not.toHaveBeenCalled();
+      expect(optionsMock.onCancel).not.toHaveBeenCalled();
     });
 
   });

@@ -94,6 +94,7 @@ angular.module('nextgearWebApp')
             options: function() {
               return {
                 payment: {
+                  webScheduledPaymentId: payment.webScheduledPaymentId,
                   vin: payment.vin,
                   description: payment.description,
                   stockNumber: payment.stockNumber,

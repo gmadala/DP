@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
 
     $scope.handleYes = function () {
       $scope.submitInProgress = true;
-      Payments.cancelScheduled(options.payment).then(
+      Payments.cancelScheduled(options.payment.webScheduledPaymentId).then(
         function (/*success*/) {
           $scope.submitInProgress = false;
           if (angular.isDefined(options.onCancel)) {
