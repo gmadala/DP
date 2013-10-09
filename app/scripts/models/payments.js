@@ -166,15 +166,8 @@ angular.module('nextgearWebApp')
       getAvailableUnappliedFunds: function () {
         return paymentQueue.unappliedFundsAvailable;
       },
-      cancelScheduled: function (payment) {
-        var data = {
-          FloorplanId: payment.FloorplanId
-        };
-        return api.request('POST', '/payment/cancelscheduledpayment', data).then(
-          function (/*success*/) {
-            return payment;
-          }
-        );
+      cancelScheduled: function (webScheduledPaymentId) {
+        return api.request('POST', '/payment/cancelscheduledpayment/' + webScheduledPaymentId);
       },
       fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);

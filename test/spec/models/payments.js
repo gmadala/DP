@@ -554,33 +554,41 @@ describe("Model: Payments", function () {
 
   describe('cancelScheduled function', function () {
 
-    var request;
+    var succeed = true;
 
     beforeEach(function () {
-      httpBackend.expectPOST('/payment/cancelscheduledpayment').respond(function(method, url, data) {
-        request = angular.fromJson(data);
+      httpBackend.expectPOST('/payment/cancelscheduledpayment/schId').respond(function(method, url, data) {
         return [200, {
-          "Success": true,
+          "Success": succeed,
           "Message": null
         }, {}];
       });
     });
 
-    it('should make the expected HTTP POST with the FloorplanId of the provided payment', function () {
-      payments.cancelScheduled({ FloorplanId: 'foo' });
+    it('should make the expected HTTP POST with the provided web scheduled payment ID', function () {
+      payments.cancelScheduled('schId');
       expect(httpBackend.flush).not.toThrow();
-      expect(request.FloorplanId).toBe('foo');
     });
 
-    it('should return a promise that resolves to the payment on success', function () {
-      var pmt = {
-        FloorplanId: 'foo',
-        Scheduled: true
-      };
-      payments.cancelScheduled(pmt).then(function (result) {
-        expect(result).toBe(pmt);
-      });
+    it('should return a promise for successful result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      payments.cancelScheduled('schId').then(success, failure);
       httpBackend.flush();
+      expect(success).toHaveBeenCalled();
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+    it('should return a promise for failure result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      succeed = false;
+      payments.cancelScheduled('schId').then(success, failure);
+      httpBackend.flush();
+      expect(success).not.toHaveBeenCalled();
+      expect(failure).toHaveBeenCalled();
     });
 
   });

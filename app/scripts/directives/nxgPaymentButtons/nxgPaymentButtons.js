@@ -11,23 +11,15 @@ angular.module('nextgearWebApp')
       },
       controller: function($scope, $dialog, Payments) {
 
-        var prv = {
-          cancelLocalScheduledPayment: function(p) {
-            p.Scheduled = false;
-            p.ScheduleSetupDate = p.ScheduledPaymentDate = null;
-            return p;
-          }
-        };
-
         // set internalType based on type and scheduled state
         $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
           var result = $scope.type;
 
           if ($scope.item.Scheduled) {
-            if ($scope.item.PayPayoffAmount) {
-              result += '-scheduledPayoff';
-            } else {
+            if ($scope.item.CurtailmentPaymentScheduled) {
               result += '-scheduledPayment';
+            } else {
+              result += '-scheduledPayoff';
             }
           }
 
@@ -76,17 +68,20 @@ angular.module('nextgearWebApp')
               options: function() {
                 return {
                   payment: {
-                    floorplanId: $scope.item.FloorplanId,
+                    webScheduledPaymentId: $scope.item.WebScheduledPaymentId,
                     vin: $scope.item.Vin,
                     description: $scope.item.UnitDescription,
                     stockNumber: $scope.item.StockNumber,
                     scheduledDate: $scope.item.ScheduledPaymentDate,
-                    isPayOff: $scope.item.PayPayoffAmount,
+                    isPayOff: !$scope.item.CurtailmentPaymentScheduled,
                     currentPayOff: $scope.item.CurrentPayoff,
                     amountDue: $scope.item.AmountDue
                   },
                   onCancel: function() {
-                    prv.cancelLocalScheduledPayment($scope.item);
+                    var p = $scope.item;
+                    p.Scheduled = false;
+                    p.ScheduleSetupDate = p.ScheduledPaymentDate = null;
+                    return p;
                   }
                 };
               }

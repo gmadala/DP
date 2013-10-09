@@ -24,8 +24,8 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": false,
                 "HasNsf": false,
-                "PayAmountDue": true,
-                "PayPayoffAmount": false,
+                "CurtailmentPaymentScheduled": false,
+                "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30"
@@ -48,8 +48,8 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": true,
                 "HasNsf": false,
-                "PayAmountDue": true,
-                "PayPayoffAmount": false,
+                "CurtailmentPaymentScheduled": true,
+                "WebScheduledPaymentId": "webScheduledPayment10235",
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30"
@@ -72,8 +72,8 @@
                 "ScheduleSetupDate": "2013-08-30",
                 "Scheduled": false,
                 "HasNsf": false,
-                "PayAmountDue": true,
-                "PayPayoffAmount": false,
+                "CurtailmentPaymentScheduled": false,
+                "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30"
