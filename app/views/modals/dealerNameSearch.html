@@ -47,37 +47,37 @@
     <table>
       <thead>
       <tr>
-        <th ng-click="sortBy('BusinessName')" class="sortable"
+        <th ng-click="sortBy('BusinessName')" class="bus-name sortable"
             ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
           Business Name
         </th>
-        <th ng-click="sortBy('BusinessLegalName')" class="sortable"
+        <th ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
             ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
           Legal Name
         </th>
-        <th ng-click="sortBy('BusinessNumber')" class="sortable"
+        <th ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
             ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
           Business&nbsp;#
         </th>
-        <th ng-click="sortBy('City')" class="sortable"
+        <th ng-click="sortBy('City')" class="bus-city sortable"
             ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
           City
         </th>
-        <th ng-click="sortBy('State')" class="sortable"
+        <th ng-click="sortBy('State')" class="bus-state sortable"
             ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
           State
         </th>
-        <th></th>
+        <th class="bus-select"></th>
       </tr>
       </thead>
       <tbody>
         <tr ng-repeat="business in data.results">
-            <td>{{ business.BusinessName }}</td>
-            <td>{{ business.BusinessLegalName }}</td>
-            <td>{{ business.BusinessNumber }}</td>
-            <td>{{ business.City }}</td>
-            <td>{{ business.State }}</td>
-            <td><a href class="btn btn-mini" ng-click="showCreditQuery(business)">Query</a></td>
+            <td class="bus-name">{{ business.BusinessName }}</td>
+            <td class="bus-legalName">{{ business.BusinessLegalName }}</td>
+            <td class="bus-num">{{ business.BusinessNumber }}</td>
+            <td class="bus-city">{{ business.City }}</td>
+            <td class="bus-state">{{ business.State }}</td>
+            <td class="bus-select"><a href class="btn btn-mini" ng-click="showCreditQuery(business)">Query</a></td>
         </tr>
       </tbody>
     </table>

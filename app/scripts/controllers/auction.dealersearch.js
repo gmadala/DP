@@ -75,7 +75,7 @@ angular.module('nextgearWebApp')
             backdropClick: true,
             templateUrl: 'views/modals/dealerNameSearch.html',
             controller: 'DealerNameSearchCtrl',
-            dialogClass: 'modal search-modal bus-search',
+            dialogClass: 'modal search-modal dealer-search-modal',
             resolve: {
               options: function() {
                 return {
