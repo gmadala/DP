@@ -291,8 +291,35 @@ describe('Directive: nxgPaymentButtons', function () {
       $rootScope.$digest();
     }));
 
-    it('should have an inert add payoff button', function() {
-      expect(element.find('#fakeTogglePayoff').attr('disabled')).toBeDefined();
+    it('should have a button that toggles payoff presence in the payment queue', function() {
+      spyOn(Payments, 'addPaymentToQueue');
+      spyOn(Payments, 'removePaymentFromQueue');
+
+      element.find('#togglePayoff2').click();
+
+      scope.$apply(function () {
+        scope.inQueue = 'payoff';
+      });
+
+      element.find('#togglePayoff2').click();
+
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
+        scope.myPayment.FloorplanId,
+        scope.myPayment.Vin,
+        scope.myPayment.StockNumber,
+        scope.myPayment.UnitDescription,
+        scope.myPayment.CurrentPayoff,
+        scope.myPayment.DueDate,
+        true);
+      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
+    });
+
+    it('payoff toggle button should be disabled if payment is already in queue', function() {
+      scope.$apply(function () {
+        scope.inQueue = 'payment';
+      });
+
+      expect(element.find('#togglePayoff2').attr('disabled')).toBeDefined();
     });
 
   });
