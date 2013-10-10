@@ -61,6 +61,7 @@
 
   .login-help {
     @extend %small;
+    @extend %center;
     line-height: 1.8;
     margin-bottom: 20px;
 
@@ -123,4 +124,34 @@
   font-size: 13px;
   line-height: $base-line-height;
   margin-bottom: 20px;
+}
+
+// Update Security Questions
+.update-sec {
+  .form-horizontal {
+    margin: 0;
+
+    .control-group.email {
+      margin-bottom: 30px;
+    }
+
+    .sec-ques {
+      .control-group {
+        margin: 0;
+      }
+
+      select {
+        width: 206px;
+        margin-bottom: 10px;
+      }
+
+      input {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .modal-footer {
+    margin: 10px 0 0 0;
+  }
 }
