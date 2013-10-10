@@ -55,7 +55,7 @@ angular.module('nextgearWebApp')
         if (enhancedRegEnabled) {
           req.EnhancedRegistrationPin = enhancedRegPin;
         }
-        return api.request('POST', '/api/userAccount/businessSettings', req);
+        return api.request('POST', '/UserAccount/businessSettings', req);
       }
     };
   });

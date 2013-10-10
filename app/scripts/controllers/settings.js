@@ -174,10 +174,31 @@ angular.module('nextgearWebApp')
           validate: function() {
             var business = $scope.business;
             business.validation = angular.copy($scope.busSettings);
-
             return business.validation.$valid;
+          },
+          confirmDisableEnhanced: function() {
+            var dialogOptions = {
+              backdrop: true,
+              keyboard: true,
+              backdropClick: true,
+              templateUrl: 'views/modals/confirmDisableEnhanced.html',
+              controller: 'ConfirmDisableCtrl',
+            };
+            $dialog.dialog(dialogOptions).open().then(function(result) {
+              if (result) {
+                $scope.business.dirtyData.enhancedRegistrationPin = null;
+                $scope.business.dirtyData.enhancedRegistrationEnabled = false;
+              } else {
+                $scope.business.dirtyData.enhancedRegistrationEnabled = true;
+              }
+            });
           }
         };
+        $scope.$watch('business.dirtyData.enhancedRegistrationEnabled', function(enabled) {
+          if ($scope.business.dirtyData && !enabled) {
+            $scope.business.confirmDisableEnhanced();
+          }
+        });
       },
       function(/*reason*/) {
         $scope.loading = false;
@@ -195,81 +216,6 @@ angular.module('nextgearWebApp')
       }
     };
     //////////////////////////////////
-
-    $scope.cancel = function() {
-      $scope.editable = false;
-    };
-
-    $scope.save = function() {
-      // TODO: update model with new data
-      $scope.editable = false;
-    };
-
-    $scope.business = {
-      email: 'dealername@company.com',
-      enhanced: true,
-      pin: ''
-    };
-
-    $scope.editable = false;
-
-    $scope.confirmDisableEnhanced = function() {
-      var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
-        templateUrl: 'views/modals/confirmDisableEnhanced.html',
-        controller: 'ConfirmDisableCtrl',
-      };
-
-      $dialog.dialog(dialogOptions).open().then(function(result) {
-        if (result) {
-          // TODO: Change variables on server
-          $scope.business.pin = '';
-          $scope.business.enhanced = false;
-        } else {
-          $scope.business.enhanced = true;
-        }
-      });
-    };
-
-    $scope.$watch('business.enhanced', function(newVal) {
-      if (newVal === false) {
-        $scope.confirmDisableEnhanced();
-      }
-    });
-
-    $scope.makeEditable = function() {
-      $scope.editable = true;
-    };
-
-    $scope.cancel = function() {
-      $scope.editable = false;
-    };
-
-    $scope.save = function() {
-      // TODO: update model with new data
-      $scope.editable = false;
-    };
-
-    $scope.title = {
-      address: '1234 Main St, Denver, CO',
-    };
-
-    $scope.editable = false;
-
-    $scope.makeEditable = function() {
-      $scope.editable = true;
-    };
-
-    $scope.cancel = function() {
-      $scope.editable = false;
-    };
-
-    $scope.save = function() {
-      // TODO: update model with new data
-      $scope.editable = false;
-    };
 
     $scope.notifications = [
       {
@@ -300,22 +246,6 @@ angular.module('nextgearWebApp')
         ]
       }
     ];
-
-    $scope.editable = false;
-
-    $scope.makeEditable = function() {
-      $scope.editable = true;
-    };
-
-    $scope.cancel = function() {
-      $scope.editable = false;
-    };
-
-    $scope.save = function() {
-      // TODO: update model with new data
-      $scope.editable = false;
-    };
-
   })
 
   .controller('ConfirmDisableCtrl', function($scope, dialog) {
