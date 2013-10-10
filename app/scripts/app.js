@@ -121,7 +121,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('auction_home.bulkflooring', {
         url: '/bulkflooring',
         templateUrl: 'views/auction.home.bulkflooring.html',
-        controller: 'AuctionBulkFlooringCtrl',
+        controller: 'FloorCarCtrl',
         isAuctionState: true
       })
       .state('auction_home.sellerfloorplan', {
