@@ -94,6 +94,12 @@ angular.module('nextgearWebApp')
 
     $scope.reset();
 
+    $scope.isValidSaleDate = function (date) {
+      // there might be no date if we're part of a validator chain
+      if (!date) { return false; }
+      return !moment().isBefore(date, 'day');
+    };
+
     $scope.mileageExit = function(modelCtrl) {
       var newMileage = $scope.data.UnitMileage;
       if (!$scope.data.$selectedVehicle || !modelCtrl.$valid ||
