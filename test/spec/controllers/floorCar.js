@@ -291,7 +291,7 @@ describe('Controller: FloorCarCtrl', function () {
         expect(dialogMock.dialog.mostRecentCall.args[0].controller).toBe('FloorCarConfirmCtrl');
       });
 
-      it('should provide the confirmation dialog with a way to resolve a copy of the form data', function () {
+      it('should provide the confirmation dialog with a way to resolve a copy of the form data & mode', function () {
         scope.form = {
           $valid: true
         };
@@ -303,6 +303,8 @@ describe('Controller: FloorCarCtrl', function () {
         var formData = dialogMock.dialog.mostRecentCall.args[0].resolve.formData();
         expect(angular.equals(formData, scope.data)).toBe(true);
         expect(formData).not.toBe(scope.data);
+
+        expect(dialogMock.dialog.mostRecentCall.args[0].resolve.isDealer()).toBe(userMock.isDealer());
       });
 
       it('should stop if dialog promise resolves to anything other than true', function () {
