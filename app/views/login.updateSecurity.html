@@ -1,1 +1,53 @@
-<p>Hi there, i'm a view</p>
+<div class="container-line update-sec">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="well span10 offset1">
+        <h4>Welcome</h4>
+
+        <div class="well-out">
+          <h3>Welcome to NextGear!</h3>
+          <p>Since this is your first login to NextGear Capital, please do the following:</p>
+
+          <ol>
+            <li>Enter the mail we have on file for you to verify your account.</li>
+            <li>Set your security questions before you enter the site.</li>
+          </ol>
+
+          <form class="form-horizontal" name="updateSecurity" novalidate>
+            <div class="control-group email">
+              <label class="control-label" for="email">Email</label>
+              <div class="controls">
+                <input type="email" name="email" id="email" required/>
+                  <label class="form-error" ng-show="">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
+              </div>
+            </div>
+
+            <!-- .sec-ques can be an ng-repeat for the questions/answers -->
+            <div class="sec-ques">
+              <div class="control-group">
+                <label class="control-label">Security Question #</label>
+                <div class="controls">
+                  <select>
+                    <option>-- Select a Question --</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group" ng-show="true">
+                <label class="control-label">Answer</label>
+                <div class="controls">
+                  <input type="text" required />
+                </div>
+              </div>
+            </div><!-- end .sec-ques repeatable div -->
+
+            <div class="footer modal-footer">
+              <button class="btn btn-secondary">Cancel</button>
+              <button class="btn btn-primary">Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
