@@ -55,7 +55,7 @@
                 <!-- Question Select -->
                 <div class="control-group">
                     <label class="control-label">Security Question {{$index + 1}}</label>
-                    <div class="static" ng-hide="editable"> {{ question.QuestionText }} </div>
+                    <div class="static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
                 </div>
             </div>
 
@@ -119,7 +119,7 @@
         <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{editable: editable }" name="busSettings">
+          <form class="settings-opts" ng-class="{business.editable: editable }" name="busSettings">
             <div class="control-group">
               <label class="control-label" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
@@ -175,26 +175,39 @@
       <!-- TITLE SETTINGS -->
       <section class="span8 well adjacent">
         <h4>Title Settings</h4>
-        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
-        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+        <button ng-hide="title.editable" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
+        <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ editable: editable }"name="titleSettings">
+          <form class="settings-opts" ng-class="{ title.editable: editable }"name="titleSettings">
             <div class="control-group">
-
               <label class="control-label" for="titleAddr">Address</label>
-              <div class="controls" nxg-input model="title.address" editable="editable">
-                <select ng-model="title.address" required>
-                  <option>foo</option>
+              <div class="controls" ng-show="title.editable">
+                <select ng-model="title.dirtyData.titleAddress"
+                        ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
+                        tooltip="{{ addr.ShortAddress }}"
+                        tooltip-placement="right"
+                        tooltip-popup-delay="700">
                 </select>
-
                 <button class="btn-help"
                   tooltip-placement="right"
                   tooltip-trigger="click"
                   tooltip-html="true"
                   tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555"
                   tooltip-animation="true">?</button>
+              </div>
+              <!-- Saved Address -->
+              <div class="static" ng-hide="title.editable">
+                  <div>{{title.data.titleAddress.Line1}}</div>
+                  <div ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}</div>
+                  <div>{{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}</div>
+              </div>
+              <!-- Current Address Selection-->
+              <div class="static" ng-show="title.editable">
+                  <div>{{title.dirtyData.titleAddress.Line1}}</div>
+                  <div ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}</div>
+                  <div>{{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</div>
               </div>
             </div>
           </form>
