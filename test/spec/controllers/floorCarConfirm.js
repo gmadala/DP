@@ -21,12 +21,17 @@ describe('Controller: FloorCarConfirmCtrl', function () {
     FloorCarConfirmCtrl = $controller('FloorCarConfirmCtrl', {
       $scope: scope,
       dialog: dialogMock,
-      formData: formDataMock
+      formData: formDataMock,
+      isDealer: true
     });
   }));
 
   it('should attach the form data to the scope', function () {
     expect(scope.formData).toBe(formDataMock);
+  });
+
+  it('should attach the mode to the scope', function () {
+    expect(scope.isDealer).toBe(true);
   });
 
   it('should provide a confirm function that closes the dialog with true result', function () {
