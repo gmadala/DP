@@ -193,6 +193,41 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.data.UnitTitleStateId).toBe(null);
     });
 
+    describe('isValidSaleDate function', function () {
+
+      var clock;
+
+      beforeEach(function () {
+        clock = sinon.useFakeTimers(moment([2013, 6, 2, 11, 15]).valueOf(), 'Date');
+      });
+
+      afterEach(function () {
+        clock.restore();
+      });
+
+      it('should return false if called without a date', function () {
+        expect(scope.isValidSaleDate()).toBe(false);
+        expect(scope.isValidSaleDate(null)).toBe(false);
+      });
+
+      it('should return false for any future date', function () {
+        expect(scope.isValidSaleDate(new Date(2013, 6, 3))).toBe(false);
+        expect(scope.isValidSaleDate(new Date(2013, 7, 3))).toBe(false);
+        expect(scope.isValidSaleDate(new Date(2020, 2, 1))).toBe(false);
+      });
+
+      it('should return true for today, any time', function () {
+        expect(scope.isValidSaleDate(new Date(2013, 6, 2))).toBe(true);
+        expect(scope.isValidSaleDate(new Date(2013, 6, 2, 17, 45))).toBe(true);
+      });
+
+      it('should return true for any past date', function () {
+        expect(scope.isValidSaleDate(new Date(2013, 6, 1))).toBe(true);
+        expect(scope.isValidSaleDate(new Date(2012, 0, 1, 17, 45))).toBe(true);
+      });
+
+    });
+
     describe('mileageExit function', function () {
 
       var fakeModelCtrl;
