@@ -1,7 +1,7 @@
 <div class="container-line">
   <div class="container-fluid settings">
     <div class="row-fluid two-col">
-
+      <!-- USER PROFILE -->
       <section class="span8 well adjacent">
         <h4>User Profile</h4>
         <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
@@ -111,7 +111,7 @@
         </div><!-- end .well-out -->
       </section><!-- end .span8.well.adjacent -->
 
-
+      <!-- BUSINESS SETTINGS -->
       <section class="span8 well adjacent" novalidate>
         <h4>Business Settings</h4>
         <button ng-hide="business.editable" class="btn edit-btn" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
@@ -146,7 +146,7 @@
               </div>
             </div>
 
-            <div class="control-group" ng-show="business.editable && business.dirtyData.enhancedRegistrationEnabled">
+            <div class="control-group" ng-show="business.editable">
               <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
               <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
               <p>Create your Enhanced Registration four digit PIN.</p>
@@ -154,7 +154,12 @@
               <label class="control-label">Enhanced Registration PIN</label>
 
               <div class="controls">
-                <input type="text" name="pin" ng-model="business.pin" ng-disable="business.enhanced" ng-pattern="/^\d{4}$/"required />
+                <input type="text"
+                       name="pin"
+                       ng-model="business.dirtyData.enhancedRegistrationPin"
+                       ng-disabled="!business.dirtyData.enhancedRegistrationEnabled"
+                       ng-pattern="/^\d{4}$/"
+                       ng-required="business.dirtyData.enhancedRegistrationEnabled"/>
                 <p class="form-error" ng-show="business.validation.pin.$invalid">
                     Your PIN must consist of four numbers, no letters or special characters.
                 </p>
@@ -167,6 +172,7 @@
     </div><!-- end .row-fluid.two-col -->
 
     <div class="row-fluid two-col">
+      <!-- TITLE SETTINGS -->
       <section class="span8 well adjacent">
         <h4>Title Settings</h4>
         <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
@@ -195,6 +201,7 @@
         </div><!-- end .well-out -->
       </section><!-- end .span8.well.adjacent -->
 
+      <!-- NOTIFICATIONS -->
       <section class="span8 well adjacent">
         <!-- SEE NOTE IN TICKETS #15 & #17 -->
         <h4>Notifications</h4>
