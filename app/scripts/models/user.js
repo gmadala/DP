@@ -13,7 +13,9 @@ angular.module('nextgearWebApp')
         return undefined;
       }
 
-      return info.IsBuyerDirectlyPayable && info.HasUCC;
+      return info.DealerAuctionStatusForGA === 'Dealer' &&
+        info.IsBuyerDirectlyPayable &&
+        info.HasUCC;
     };
 
     // Public API

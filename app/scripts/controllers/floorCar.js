@@ -1,7 +1,13 @@
 'use strict';
 
+/**
+ * WARNING: This controller is used for both dealer Floor a Car AND auction Bulk Flooring. Understand
+ * the ramifications to each view and test both when making any changes here!!
+ */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment) {
+
+    var isDealer = User.isDealer();
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -26,7 +32,7 @@ angular.module('nextgearWebApp')
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: false, // Boolean, default is no (DEALER ONLY)
+      SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string
@@ -49,15 +55,7 @@ angular.module('nextgearWebApp')
       $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
 
-    $scope.optionsHelper = OptionDefaultHelper.create([
-      {
-        scopeSrc: 'options().locations',
-        modelDest: 'PhysicalInventoryAddressId'
-      },
-      {
-        scopeSrc: 'options().linesOfCredit',
-        modelDest: 'LineOfCreditId'
-      },
+    var optionListsToDefault = [
       {
         scopeSrc: 'options().bankAccounts',
         modelDest: 'BankAccountId'
@@ -67,17 +65,17 @@ angular.module('nextgearWebApp')
         modelDest: 'PaySeller',
         useFirst: true
       }
-    ]);
-
-    // if canPayBuyer setting arrives after defaults have been applied, make sure it's enforced
-    var payBuyerUnwatch = $scope.$watch('canPayBuyer()', function(enablePayBuyer) {
-      if (enablePayBuyer === false && $scope.data) {
-        $scope.data.SaleTradeIn = false;
-      }
-      if (typeof enablePayBuyer === 'boolean') {
-        payBuyerUnwatch();
-      }
-    });
+    ];
+    if (isDealer) {
+      optionListsToDefault.push({
+        scopeSrc: 'options().locations',
+        modelDest: 'PhysicalInventoryAddressId'
+      }, {
+        scopeSrc: 'options().linesOfCredit',
+        modelDest: 'LineOfCreditId'
+      });
+    }
+    $scope.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
 
     // if user switches to a title location that does not allow title info, clear any info already entered
     $scope.$watch('data.TitleLocationId.TitleInfoEnabled', function (titleInfoEnabled) {
@@ -142,6 +140,7 @@ angular.module('nextgearWebApp')
           $scope.reallySubmit(protect);
         }
       });
+      return true;
     };
 
     $scope.reallySubmit = function (guard) {

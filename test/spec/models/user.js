@@ -415,7 +415,8 @@ describe('Model: User', function () {
       expect(user.canPayBuyer()).not.toBeDefined();
     });
 
-    it('should return true if IsBuyerDirectlyPayable and HasUCC are both true in user info', function () {
+    it('should return true if user is dealer and IsBuyerDirectlyPayable and HasUCC are both true', function () {
+      userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = true;
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
@@ -424,14 +425,25 @@ describe('Model: User', function () {
     });
 
     it('should return false if IsBuyerDirectlyPayable or HasUCC are false in user info', function () {
+      userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = false;
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(user.canPayBuyer()).toBe(false);
 
+      userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = true;
       userInfo.HasUCC = false;
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(user.canPayBuyer()).toBe(false);
+    });
+
+    it('should return false if user is an auction rather than a dealer', function () {
+      userInfo.DealerAuctionStatusForGA = 'Auction';
+      userInfo.IsBuyerDirectlyPayable = true;
+      userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(user.canPayBuyer()).toBe(false);
@@ -469,6 +481,7 @@ describe('Model: User', function () {
     });
 
     it('should return both options, false (pay buyer) first, if pay buyer is allowed', function () {
+      userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = true;
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
@@ -477,6 +490,7 @@ describe('Model: User', function () {
     });
 
     it('should return only true (force pay seller) if pay buyer is not allowed', function () {
+      userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = false;
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
