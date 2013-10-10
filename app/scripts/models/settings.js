@@ -19,11 +19,19 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/userAccount/settings').then(
           function(settings) {
             return User.getSecurityQuestions().then(function(questions) {
-              for (var i = 0; i < settings.SecurityQuestions.length; i++) {
+              var i;
+              for (i = 0; i < settings.SecurityQuestions.length; i++) {
                 var q = settings.SecurityQuestions[i];
                 q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
               }
               settings.AllSecurityQuestions = questions;
+
+              for (i = 0; i < settings.Addresses.length; i++) {
+                var addr = settings.Addresses[i];
+                if (addr.IsTitleReleaseAddress) {
+                  settings.CurrentTitleReleaseAddress = addr;
+                }
+              }
               return settings;
             });
           }
@@ -56,6 +64,12 @@ angular.module('nextgearWebApp')
           req.EnhancedRegistrationPin = enhancedRegPin;
         }
         return api.request('POST', '/UserAccount/businessSettings', req);
+      },
+      saveTitleAddress: function(addressId) {
+        var req = {
+          TitleReleaseAddressId: addressId
+        };
+        return api.request('POST', '/UserAccount/titleSettings', req);
       }
     };
   });

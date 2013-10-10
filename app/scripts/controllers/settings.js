@@ -15,6 +15,35 @@ angular.module('nextgearWebApp')
         lowercase: /(?=.*[a-z])/,
         uppercase: /(?=.*[A-Z])/,
         special: /(?=.*[!@#$%\^\&\*\(\)\-_\+={}\[\]\\\|;:'"<>,.\?\/`~])/
+      },
+      edit: function() {
+        this.dirtyData = angular.copy(this.data);
+        this.editable = true;
+        this.showError = false;
+      },
+      cancel: function() {
+        this.dirtyData = this.validation = null;
+        this.editable = false;
+      },
+      save: function() {
+        if (!this.validate()) {
+          return false;
+        }
+        if (!this.isDirty()) {
+          this.cancel();
+          return false;
+        }
+        return true;
+      },
+      saveSuccess: function() {
+        this.dirtyData = this.validation = null;
+        this.editable = false;
+        this.showError = false;
+      },
+      saveError: function(error) {
+        console.log(error.text);
+        this.showError = true;
+        this.errorMsg = error.text;
       }
     };
 
@@ -32,40 +61,20 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() {
-            this.dirtyData = angular.copy(this.data);
-            this.editable = true;
-            this.showError = false;
-          },
-          cancel: function() {
-            this.dirtyData = this.validation = null;
-            this.editable = false;
-          },
+          edit: function() { prv.edit.apply(this); },
+          cancel: function() { prv.cancel.apply(this); },
           save: function() {
-            if (!this.validate()) {
-              return false;
-            }
-            if (!this.isDirty()) {
-              this.cancel();
-              return false;
-            }
-            var d = this.data = this.dirtyData,
-              cleanPhone = d.phone.replace($scope.phonePattern, '$2$4$5$6$7'); // sanitize phone format
+            if (prv.save.apply(this)) {
+              var d = this.data = this.dirtyData,
+                cleanPhone = d.phone.replace($scope.phonePattern, '$2$4$5$6$7'); // sanitize phone format
 
-            this.updateQuestionText(d.questions);
+              this.updateQuestionText(d.questions);
 
-            Settings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
-              function(/*success*/) {
-                this.dirtyData = this.validation = null;
-                this.editable = false;
-                this.showError = false;
-              }.bind(this),
-              function(error) {
-                console.log(error.text);
-                this.showError = true;
-                this.errorMsg = error.text;
-              }.bind(this)
-            );
+              Settings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
+                prv.saveSuccess.bind(this),
+                prv.saveError.bind(this)
+              );
+            }
           },
           updateQuestionText: function(questions) {
             for (var i = 0; i < questions.length; i++) {
@@ -136,37 +145,17 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() {
-            this.dirtyData = angular.copy(this.data);
-            this.editable = true;
-            this.showError = false;
-          },
-          cancel: function() {
-            this.dirtyData = this.validation = null;
-            this.editable = false;
-          },
+          edit: function() { prv.edit.apply(this); },
+          cancel: function() { prv.cancel.apply(this); },
           save: function() {
-            if (!this.validate()) {
-              return false;
-            }
-            if (!this.isDirty()) {
-              this.cancel();
-              return false;
-            }
-            var d = this.data = this.dirtyData;
+            if (prv.save.apply(this)) {
+              var d = this.data = this.dirtyData;
 
-            Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
-              function(/*success*/) {
-                this.dirtyData = this.validation = null;
-                this.editable = false;
-                this.showError = false;
-              }.bind(this),
-              function(error) {
-                console.log(error.text);
-                this.showError = true;
-                this.errorMsg = error.text;
-              }.bind(this)
-            );
+              Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
+                prv.saveSuccess.bind(this),
+                prv.saveError.bind(this)
+              );
+            }
           },
           isDirty: function() {
             return $scope.busSettings.$dirty;
@@ -199,6 +188,52 @@ angular.module('nextgearWebApp')
             $scope.business.confirmDisableEnhanced();
           }
         });
+
+        /** TITLE SETTINGS **/
+        $scope.title = {
+          data: {
+            longFormatAddressText: results,
+            titleAddress: results.CurrentTitleReleaseAddress,
+            addresses: results.Addresses
+          },
+          dirtyData: null, // a copy of the data for editing (lazily built)
+          editable: false,
+          edit: function() {
+            prv.edit.apply(this);
+            this.updateAddressSelection();
+          },
+          cancel: function() { prv.cancel.apply(this); },
+          save: function() {
+            if (prv.save.apply(this)) {
+              this.updateAddressSelection();
+              var d = this.data = this.dirtyData;
+
+              Settings.saveTitleAddress(d.titleAddress.BusinessAddressId).then(
+                prv.saveSuccess.bind(this),
+                prv.saveError.bind(this)
+              );
+            }
+          },
+          isDirty: function() {
+            return $scope.titleSettings.$dirty;
+          },
+          validate: function() {
+            var title = $scope.title;
+            title.validation = angular.copy($scope.titleSettings);
+            return title.validation.$valid;
+          },
+          updateAddressSelection: function() {
+            var selectedId = this.dirtyData.titleAddress.BusinessAddressId;
+            for (var i = 0; i < this.dirtyData.addresses.length; i++) {
+              if (selectedId === this.dirtyData.addresses[i].BusinessAddressId) {
+                this.dirtyData.titleAddress = this.data.addresses[i];
+              }
+            }
+          },
+          toShortAddress: function(address) {
+            return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
+          }
+        };
       },
       function(/*reason*/) {
         $scope.loading = false;
