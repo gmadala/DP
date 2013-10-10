@@ -9,13 +9,21 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
-        allowAnonymous: true
+        allowAnonymous: true,
+        hideNavBar: true
       })
       .state('loginRecover', {
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
-        allowAnonymous: true
+        allowAnonymous: true,
+        hideNavBar: true
+      })
+      .state('loginUpdateSecurity', {
+        url: '/login/updateSecurity',
+        templateUrl: 'views/login.updateSecurity.html',
+        controller: 'LoginUpdateSecurityCtrl',
+        hideNavBar: true
       })
 
       /**

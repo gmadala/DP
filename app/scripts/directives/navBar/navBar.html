@@ -1,5 +1,5 @@
 <!-- NOT LOGGED IN HEADER -->
-<header class="login-head" ng-show="navState.current.allowAnonymous">
+<header class="login-head" ng-show="navState.current.hideNavBar">
   <div class="row-fluid">
     <div class="container-fluid nxg-logo">
     </div>
@@ -7,7 +7,7 @@
 </header>
 
 <!-- LOGGED IN HEADER -->
-<header ng-hide="navState.current.allowAnonymous">
+<header ng-hide="navState.current.hideNavBar">
   <div class="row-fluid">
     <div class="container-fluid app-header">
       <div class="span4 nxg-logo">
