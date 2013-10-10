@@ -3,51 +3,61 @@
     "Message": null,
     "Data": [
         {
+            "Year": "1869",
             "Make": "CHRYSLER",
             "Model": "TOWN & COUNTRY TOURING WAGON",
             "NinetyFifthPercentileTurnTime": 15.15
         },
         {
+            "Year": "1869",
             "Make": "CHRYSLER",
             "Model": "200",
             "NinetyFifthPercentileTurnTime": 54.45
         },
         {
+            "Year": "1869",
             "Make": "BUICK     ",
             "Model": "CENT CUST   ",
             "NinetyFifthPercentileTurnTime": 55.43
         },
         {
+            "Year": "1869",
             "Make": "CHEVROLET ",
             "Model": "AVEO LT 2LT ",
             "NinetyFifthPercentileTurnTime": 56.84
         },
         {
+            "Year": "1869",
             "Make": "DODGE",
             "Model": "JOURNEY",
             "NinetyFifthPercentileTurnTime": 59.92
         },
         {
+            "Year": "1869",
             "Make": "CHEVROLET ",
             "Model": "AVALAN      ",
             "NinetyFifthPercentileTurnTime": 62.51
         },
         {
+            "Year": "1869",
             "Make": "MERCURY   ",
             "Model": "GRAND M GS  ",
             "NinetyFifthPercentileTurnTime": 64.36
         },
         {
+            "Year": "1869",
             "Make": "BMW",
             "Model": "X5 XDRIVE35I",
             "NinetyFifthPercentileTurnTime": 65.11
         },
         {
+            "Year": "1869",
             "Make": "JEEP      ",
             "Model": "CHER OVL    ",
             "NinetyFifthPercentileTurnTime": 67.85
         },
         {
+            "Year": "1869",
             "Make": "CHEVROLET",
             "Model": "TRAVERSE",
             "NinetyFifthPercentileTurnTime": 68.95
