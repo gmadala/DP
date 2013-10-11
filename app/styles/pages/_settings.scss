@@ -1,5 +1,7 @@
 // SETTINGS
 
+$set-label-width: 40%;
+
 .settings {
   margin-top: 20px;
 
@@ -12,11 +14,26 @@
   @extend %full-width;
   @extend %small;
 
-  label {
+  p {
+    line-height: $base-line-height;
+    margin: 10px 0
+  }
+
+  .control-label {
     @extend %thin;
     @extend %float-l;
-    width: 35%;
+    display: block;
+    width: $set-label-width;
+    height: 100%;
     color: $base-text-color;
+
+    &.business {
+      margin:0;
+    }
+  }
+
+  .controls.static, .enhanced-info {
+    margin-left: $set-label-width;
   }
 
   .static {
@@ -33,7 +50,7 @@
       margin: 0 0 10px;
 
       &:first-child {
-        width: 35%;
+        width: $set-label-width;
       }
     }
   }
@@ -42,7 +59,7 @@
     .n-title {
       @extend %float-l;
       @extend %thin;
-      width: 35%;
+      width: $set-label-width;
       padding-right: 10px;
     }
 
