@@ -6,7 +6,8 @@ angular.module('nextgearWebApp')
     var info = null,
       statics = null,
       paySellerOptions = [],
-      securityQuestions = null;
+      securityQuestions = null,
+      showUserInitialization;
 
     var calculateCanPayBuyer = function() {
       if (!info) {
@@ -72,6 +73,7 @@ angular.module('nextgearWebApp')
           })
           .then(function(authResult) {
             api.setAuthToken(authResult.Token);
+            self.setShowUserInitialization(authResult.ShowUserInitialization);
             // fetch the dealer info & statics every time there's a new session (user could have changed)
             return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
               function () {
@@ -126,6 +128,14 @@ angular.module('nextgearWebApp')
 
       isDealer: function() {
         return info && info.DealerAuctionStatusForGA === 'Dealer';
+      },
+
+      setShowUserInitialization: function(bool) {
+        showUserInitialization = bool;
+      },
+
+      showInitialization: function() {
+        return showUserInitialization;
       },
 
       canPayBuyer: calculateCanPayBuyer,

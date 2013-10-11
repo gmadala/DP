@@ -22,13 +22,15 @@
               </div>
             </div>
 
-            <!-- .sec-ques can be an ng-repeat for the questions/answers -->
-            <div class="sec-ques">
+            <div class="sec-ques" ng-repeat="question in questions">
+              
               <div class="control-group">
-                <label class="control-label">Security Question #</label>
+                <label class="control-label">Security Question #{{$index+1}}</label>
                 <div class="controls">
-                  <select>
-                    <option>-- Select a Question --</option>
+                  <select
+                    ng-model="$parent[question.n]"
+                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)">
+                    <option value="">-- Select a Question --</option>
                   </select>
                 </div>
               </div>
@@ -39,7 +41,8 @@
                   <input type="text" required />
                 </div>
               </div>
-            </div><!-- end .sec-ques repeatable div -->
+
+            </div>
 
             <div class="footer modal-footer">
               <button class="btn btn-secondary">Cancel</button>
