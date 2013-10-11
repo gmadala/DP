@@ -150,17 +150,21 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        var isDealer = User.isDealer();
 
-        if (!User.isLoggedIn() && !toState.allowAnonymous) {
-          // not logged in, redirect to login screen
-          $location.path('/login');
-        }
-        if (User.infoLoaded()) {
-          if ((toState.isAuctionState && isDealer) || !(toState.isAuctionState || isDealer) || toState.url === '') {
+        if (!toState.allowAnonymous) {
+          // enforce rules about what states certain users can see
+          var isDealer = User.isDealer();
+          if (!User.isLoggedIn()) {
+            // not logged in; redirect to login screen
+            event.preventDefault();
+            $location.path('/login');
+          } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {
+            // user is trying to access a state that's not appropriate to their role; redirect to their home
+            event.preventDefault();
             $location.path(isDealer ? '/home' : '/act/home');
           }
         }
+
       }
     );
 
