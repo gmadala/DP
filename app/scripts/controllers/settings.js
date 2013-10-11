@@ -98,15 +98,17 @@ angular.module('nextgearWebApp')
             var profile = $scope.profile;
             profile.validation = angular.copy($scope.userSettings);
 
-            // check matching passwords
-            if (profile.dirtyData.password !== profile.dirtyData.passwordConfirm) {
-              profile.validation.setPassword.$error.nomatch = true;
-              profile.validation.$valid = false;
-            }
-            // check valid password pattern
-            else if (profile.validation.setPassword.$dirty && !this.validatePasswordPattern(profile.dirtyData.password)) {
-              profile.validation.setPassword.$error.pattern = true;
-              profile.validation.$valid = false;
+            if (profile.dirtyData.password && profile.dirtyData.passwordConfirm) {
+              // check matching passwords
+              if (profile.dirtyData.password !== profile.dirtyData.passwordConfirm) {
+                profile.validation.setPassword.$error.nomatch = true;
+                profile.validation.$valid = false;
+              }
+              // check valid password pattern
+              else if (profile.validation.setPassword.$dirty && !this.validatePasswordPattern(profile.dirtyData.password)) {
+                profile.validation.setPassword.$error.pattern = true;
+                profile.validation.$valid = false;
+              }
             }
             // check all questions have answers
             for (var i = 0; i < profile.dirtyData.questions.length; i++) {
