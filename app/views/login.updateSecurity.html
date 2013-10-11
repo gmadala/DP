@@ -17,13 +17,14 @@
             <div class="control-group email">
               <label class="control-label" for="email">Email</label>
               <div class="controls">
-                <input type="email" name="email" id="email" required/>
-                  <label class="form-error" ng-show="">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
+                <input type="email" name="email" id="email" ng-model="email" ui-event="{ blur : 'validateEmail(updateSecurity.email.$viewValue)' }" required/>
+                <label class="form-error" ng-show="updateSecurity.email.$error.correctEmail">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
+                <label class="form-error" ng-show="updateSecurity.email.$error.email">Please Enter a valid email address.</label>
               </div>
             </div>
 
             <div class="sec-ques" ng-repeat="question in questions">
-              
+
               <div class="control-group">
                 <label class="control-label">Security Question #{{$index+1}}</label>
                 <div class="controls">
@@ -35,7 +36,7 @@
                 </div>
               </div>
 
-              <div class="control-group" ng-show="true">
+              <div class="control-group" ng-show="$parent[question.n]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
                   <input type="text" required />
