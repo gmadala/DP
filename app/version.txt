@@ -1,1 +1,42 @@
-NextGear v0.1
+NextGear v0.2
+======================
+
+Tickets included in this release: 
+---------------------------------------
+1	Login --> Requirement
+19	Dashboard Layout --> Requirement
+31	Dashboard - Upcoming Week Calendar --> Requirement
+43	Dashboard - Upcoming Payments List --> Requirement
+49	Dashboard - Credit Chart --> Requirement
+55	Dashboard - Unapplied Funds --> Requirement
+67	Vehicle Details --> Requirement
+109	Infinite Scrolling --> Requirement
+115	Receipts --> Requirement
+121	Floor Plan --> Requirement
+133	View a Report --> Requirement
+151	Dealer Search --> Requirement
+163	Seller Floor Plan --> Requirement
+169	Auction - View a Report --> Requirement
+177	Dashboard - Upcoming Month Calendar --> Requirement
+196	Dashboard - Floorplan --> Requirement
+202	Dashboard - Receipts --> Requirement
+208	Unapplied Funds Payout --> Requirement
+225	Search Results Highlights --> Requirements
+231	Documents --> Requirements
+237	Auction Navigation and Tools --> Requirement
+243	Auction Dashboard - Layout --> Requirement
+249	Auction Dashboard - Disbursement Groups --> Requirement
+268	Auction Dashboard - Floorplan Groups --> Requirement
+274	Auction Dashboard - Floorplan Volume Graph --> Requirement
+280	Auction - View Documents --> Requirements
+286	Message Popup --> Requirement
+292	Busy Indicator --> Requirement
+298	Search Directive --> Requirement
+304	Business Search --> Requirement
+438	[m] Book Amount - Search Form --> Requirement
+533	Forgot Username-Password --> Requirement
+684	Feedback --> Requirement
+771	Login Enhancements --> Requirement
+773	Metrics --> Requirements
+848	Logout - Session Timed Out --> Requirement
+877	PDF Error Response --> Requirement
