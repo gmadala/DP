@@ -39,7 +39,7 @@
     <div class="well-out recent-disbursements">
       <table>
         <tbody>
-          <tr ng-repeat="dis in dashboardData.Disbursements | limitTo:5">
+          <tr ng-repeat="dis in dashboardData.Disbursements | orderBy:'DisbursementDate':true | limitTo:5">
             <td>{{ dis.DisbursementDate | moment }}</td>
             <td>#{{ dis.DisbursementNumber }}</td>
             <td><strong>{{ dis.DisbursementAmount | currency }}</strong></td>
