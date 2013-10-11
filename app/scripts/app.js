@@ -158,6 +158,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
             // not logged in; redirect to login screen
             event.preventDefault();
             $location.path('/login');
+          } else if (User.showInitialization()) {
+            // not initialized? lets update the security questions
+            $location.path('/login/updateSecurity');
           } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {
             // user is trying to access a state that's not appropriate to their role; redirect to their home
             event.preventDefault();
@@ -168,10 +171,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         //   $location.path('/login');
         // }
         // if (User.infoLoaded()) {
-        //   if (User.showInitialization()) {
-        //     // not initialized? lets update the security questions
-        //     $location.path('/login/updateSecurity');
-        //   }
         //   else {
         //     if ((toState.isAuctionState && isDealer) || !(toState.isAuctionState || isDealer) || toState.url === '') {
         //       $location.path(isDealer ? '/home' : '/act/home');
