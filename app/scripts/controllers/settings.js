@@ -183,11 +183,6 @@ angular.module('nextgearWebApp')
             });
           }
         };
-        $scope.$watch('business.dirtyData.enhancedRegistrationEnabled', function(enabled) {
-          if ($scope.business.dirtyData && !enabled) {
-            $scope.business.confirmDisableEnhanced();
-          }
-        });
 
         /** TITLE SETTINGS **/
         $scope.title = {

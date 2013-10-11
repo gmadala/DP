@@ -141,7 +141,7 @@
 
               <div class="controls form-inline nxg-radios" ng-show="business.editable">
                 <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
-                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false'/><label for="enhancedNo">No</label>
+                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/><label for="enhancedNo">No</label>
                 <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' /> <label for="enhancedYes">Yes</label>
               </div>
             </div>
