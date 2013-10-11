@@ -41,7 +41,7 @@
         <tbody>
           <tr ng-repeat="dis in dashboardData.Disbursements | limitTo:5">
             <td>{{ dis.DisbursementDate | moment }}</td>
-            <td>#{{ dis.StockNumber }}</td>
+            <td>#{{ dis.DisbursementNumber }}</td>
             <td><strong>{{ dis.DisbursementAmount | currency }}</strong></td>
           </tr>
         </tbody>

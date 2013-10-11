@@ -17,23 +17,23 @@
     "Disbursements": [
       {
         "DisbursementDate": "2013-09-27",
-        "StockNumber": 17,
+        "DisbursementNumber": 17,
         "DisbursementAmount": 5985.0000
       }, {
         "DisbursementDate": "2013-09-27",
-        "StockNumber": 16,
+        "DisbursementNumber": 16,
         "DisbursementAmount": 3860.0000
       }, {
         "DisbursementDate": "2013-09-27",
-        "StockNumber": 15,
+        "DisbursementNumber": 15,
         "DisbursementAmount": 4560.0000
       }, {
         "DisbursementDate": "2013-09-27",
-        "StockNumber": 10,
+        "DisbursementNumber": 10,
         "DisbursementAmount": 23350.0000
       }, {
         "DisbursementDate": "2013-09-27",
-        "StockNumber": 465,
+        "DisbursementNumber": 465,
         "DisbursementAmount": 27445.0000
       }
     ]
