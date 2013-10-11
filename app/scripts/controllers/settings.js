@@ -44,6 +44,53 @@ angular.module('nextgearWebApp')
         console.log(error.text);
         this.showError = true;
         this.errorMsg = error.text;
+      },
+      /**
+       * We get a notification object for every notification/delivery_method combination. This function
+       * bundles them up so we get a notification that has a list of delivery methods.
+       */
+      bundleNotifications: function(notifications) {
+
+        var hash = {},
+          bundled = [];
+
+        angular.forEach(notifications, function(n) {
+          var deliveryMethod = {
+            DeliveryMethodId: n.DeliveryMethodId,
+            DeliveryMethodName: n.DeliveryMethodName
+          };
+
+          if (hash[n.NotificationId]) {
+            hash[n.NotificationId].DeliveryMethods.push(deliveryMethod);
+          }
+          else {
+            bundled.push(
+              hash[n.NotificationId] = {
+                NotificationId: n.NotificationId,
+                NotificationName: n.NotificationName,
+                DeliveryMethods: [deliveryMethod]
+              }
+            );
+          }
+        });
+        return bundled;
+      },
+      /**
+       * This does the opposite of bundleNotifications. It flattens bundled notification
+       * objects to be consumed by the model.
+       */
+      flattenNotifications: function(notifications) {
+        var flatList = [];
+        angular.forEach(notifications, function(n) {
+          angular.forEach(n.DeliveryMethods, function(d) {
+            flatList.push({
+              NotificationId: n.NotificationId,
+              DeliveryMethodId: d.DeliveryMethodId,
+              Enabled: !!d.Enabled
+            });
+          });
+        });
+        return flatList;
       }
     };
 
@@ -61,8 +108,12 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() { prv.edit.apply(this); },
-          cancel: function() { prv.cancel.apply(this); },
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
               var d = this.data = this.dirtyData,
@@ -147,8 +198,12 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() { prv.edit.apply(this); },
-          cancel: function() { prv.cancel.apply(this); },
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
               var d = this.data = this.dirtyData;
@@ -199,7 +254,9 @@ angular.module('nextgearWebApp')
             prv.edit.apply(this);
             this.updateAddressSelection();
           },
-          cancel: function() { prv.cancel.apply(this); },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
               this.updateAddressSelection();
@@ -230,6 +287,32 @@ angular.module('nextgearWebApp')
           toShortAddress: function(address) {
             return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
           }
+        };
+
+        /** NOTIFICATIONS **/
+        $scope.notifications = {
+          data: {
+            selected: prv.bundleNotifications(results.Notifications),
+            available: results.AvailableNotifications
+          },
+          dirtyData: null, // a copy of the data for editing (lazily built)
+          editable: false,
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() { prv.cancel.apply(this); },
+          save: function() {
+            if (prv.save.apply(this)) {
+              Settings.saveNotifications(prv.flattenNotifications(this.dirtyData.available)).then(
+                prv.saveSuccess.bind(this),
+                prv.saveError.bind(this)
+              );
+            }
+          },
+          isDirty: function() {
+            return $scope.notificationSettings.$dirty;
+          },
+          validate: function() { return true; /*nothing can be invalid input*/ }
         };
       },
       function(/*reason*/) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Settings', function(api, User) {
+  .factory('Settings', function($q, api, User) {
 
     var prv = {
       getQuestionText: function(id, questions) {
@@ -16,26 +16,33 @@ angular.module('nextgearWebApp')
 
     return {
       get: function() {
-        return api.request('GET', '/userAccount/settings').then(
-          function(settings) {
-            return User.getSecurityQuestions().then(function(questions) {
-              var i;
-              for (i = 0; i < settings.SecurityQuestions.length; i++) {
-                var q = settings.SecurityQuestions[i];
-                q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
-              }
-              settings.AllSecurityQuestions = questions;
+        return $q.all([
+            api.request('GET', '/userAccount/settings'),
+            User.getSecurityQuestions(),
+            api.request('GET', '/userAccount/availableNotifications')
+          ]).then(function(responses) {
+            var settings = responses[0],
+              questions = responses[1],
+              i;
 
-              for (i = 0; i < settings.Addresses.length; i++) {
-                var addr = settings.Addresses[i];
-                if (addr.IsTitleReleaseAddress) {
-                  settings.CurrentTitleReleaseAddress = addr;
-                }
+            // add available notifications
+            settings.AvailableNotifications = responses[2];
+
+            // Fill in question data
+            for (i = 0; i < settings.SecurityQuestions.length; i++) {
+              var q = settings.SecurityQuestions[i];
+              q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
+            }
+            settings.AllSecurityQuestions = questions;
+
+            for (i = 0; i < settings.Addresses.length; i++) {
+              var addr = settings.Addresses[i];
+              if (addr.IsTitleReleaseAddress) {
+                settings.CurrentTitleReleaseAddress = addr;
               }
-              return settings;
-            });
-          }
-        );
+            }
+            return settings;
+          });
       },
       saveProfile: function(username, password, email, phone, securityAnswers) {
         var req = {
@@ -70,6 +77,10 @@ angular.module('nextgearWebApp')
           TitleReleaseAddressId: addressId
         };
         return api.request('POST', '/UserAccount/titleSettings', req);
+      },
+      saveNotifications: function(notifications) {
+        return api.request('POST', '/UserAccount/notificationSettings', notifications);
       }
     };
-  });
+  })
+;
