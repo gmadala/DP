@@ -676,7 +676,7 @@ describe("Model: Payments", function () {
           financialRecordId: 'two',
           type: 'Other Fee'
         }
-    };
+      };
 
       httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
         var expectedFees = [
@@ -706,18 +706,18 @@ describe("Model: Payments", function () {
           vin: "LL2469R6",
           isPayoff: true
         }
-    };
+      };
 
       httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
         var expectedPayments = [
           {
             FloorplanId: '2048',
-            ScheduledSetupDate: null,
+            ScheduledPaymentDate: null,
             IsPayoff: true
           },
           {
             FloorplanId: '2049',
-            ScheduledSetupDate: '2013-05-05',
+            ScheduledPaymentDate: '2013-05-05',
             IsPayoff: false
           }
         ];

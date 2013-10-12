@@ -192,7 +192,7 @@ angular.module('nextgearWebApp')
         angular.forEach(payments, function (payment) {
           shortPayments.push({
             FloorplanId: payment.floorplanId,
-            ScheduledSetupDate: api.toShortISODate(payment.scheduleDate) || null,
+            ScheduledPaymentDate: api.toShortISODate(payment.scheduleDate) || null,
             IsPayoff: payment.isPayoff
           });
         });
