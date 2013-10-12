@@ -76,22 +76,31 @@ label {
   width: 480px;
   margin-left: -240px;
 
+  &.modal {
+    top: 10%;
+  }
+
+  .modal-body {
+    max-height: 440px;
+  }
+
   .floor-confirmation {
     border: 1px solid $border;
 
     .detail-col {
+      @extend %full-width;
       border: 0;
 
-      &:first-child {
-        border-right: 1px solid $border;
+      table {
+        @extend %full-width;
+      }
 
-        .detail-label {
-          width: 30%;
-        }
+      .detail-label {
+        width: 40%;
+      }
 
-        .detail-value {
-          width: 70%;
-        }
+      .detail-value {
+        width: 60%;
       }
     }
   }

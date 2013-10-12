@@ -1,16 +1,46 @@
+<!-- WARNING: This view is used for both dealer Floor a Car and auction Bulk Flooring -->
+
 <div class="modal-header">
   Confirm Flooring Request
 </div>
 
-<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
+<div class="modal-close" ng-click="close()">
   <span class="glyphicon glyphicon-remove"></span>
 </div>
 
-<div class="modal-body row-fluid">
+<div class="modal-body">
   <p>
     Confirm the vehicle information to send the flooring request to NextGear. <br />Print this screen for your records.
   </p>
   <div class="row-fluid floor-confirmation">
+
+    <div class="detail-col" ng-hide="isDealer">
+      <h4 class="well-head">Buyer Information</h4>
+      <table>
+        <tbody>
+        <tr>
+          <td class="detail-label">Business Number</td>
+          <td class="detail-value">{{ formData.BusinessId.BusinessNumber }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Auction Access Number(s)</td>
+          <td class="detail-value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Business Name</td>
+          <td class="detail-value">{{ formData.BusinessId.BusinessName }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Address</td>
+          <td class="detail-value">
+            {{ formData.BusinessId.Address }}<br />
+            {{ formData.BusinessId.City }}, {{ formData.BusinessId.State }} {{ formData.BusinessId.PostalCode }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div><!-- end first .detail-col -->
+
     <div class="detail-col">
       <h4 class="well-head">Vehicle Information</h4>
       <table>
@@ -61,19 +91,23 @@
           </tr>
           <tr>
             <td class="detail-label">Send Payment To</td>
-            <td class="detail-value">{{ formData.PaySeller && 'Seller' || 'Buyer' }}</td>
+            <td class="detail-value">
+              <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' }}</span>
+              <span ng-hide="isDealer">{{ formData.BankAccountId.BankAccountName }}</span>
+            </td>
           </tr>
         </tbody>
       </table>
     </div><!-- end .detail-col -->
+
   </div>
 </div>
 
-<div class="floor-confirm-view-checklist">
+<div class="floor-confirm-view-checklist" ng-show="isDealer">
   <a href="/MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf" target="_blank">View Vehicle Verification Checklist</a>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>
+  <button ng-click="close()" class="btn btn-mini btn-secondary">Return to Form</button>
   <button ng-click="confirm()" class="btn btn-mini btn-primary">Submit Flooring Request</button>
 </div>
