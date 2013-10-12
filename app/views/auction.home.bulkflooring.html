@@ -88,7 +88,7 @@
         <label for="inputBuyer">Buyer</label>
         <input nxg-business-field="buyers" id="inputBuyer" class="input-xlarge"
                name="inputBuyer"
-               required
+               ng-required="true"
                selected-business="data.BusinessId" />
         <label for="inputBuyer" class="text-error"
                ng-show="validity.inputBuyer.$error.nxgRequires">
@@ -113,11 +113,16 @@
         </div>
 
         <label for="inputSaleDate">Sales Date</label>
-        <input id="inputSaleDate" name="inputSaleDate" nxg-date-field ng-model="data.UnitPurchaseDate"
-                required />
+        <input id="inputSaleDate" name="inputSaleDate" ng-model="data.UnitPurchaseDate"
+               nxg-date-field before-show-day="isValidSaleDate(date)"
+               required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)" />
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.required">
           Please enter the Sales Date
+        </label>
+        <label for="inputSaleDate" class="text-error"
+               ng-show="validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required">
+          Please enter a valid non-future date
         </label>
         <p class="scale-description">
           The actual sale date must be used when flooring a car.

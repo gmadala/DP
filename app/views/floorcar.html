@@ -128,11 +128,16 @@
             </div>
 
             <label for="inputPurchaseDate">Purchase Date</label>
-            <input id="inputPurchaseDate" name="inputPurchaseDate" nxg-date-field ng-model="data.UnitPurchaseDate"
-                    required />
+            <input id="inputPurchaseDate" name="inputPurchaseDate" ng-model="data.UnitPurchaseDate"
+                   nxg-date-field before-show-day="isValidSaleDate(date)"
+                   required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)" />
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.required">
               Please enter the Purchase Date
+            </label>
+            <label for="inputPurchaseDate" class="text-error"
+                   ng-show="validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required">
+              Please enter a valid non-future date
             </label>
 
             <label for="inputCreditLine">Line of Credit</label>
