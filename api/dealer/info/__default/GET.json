@@ -13,7 +13,7 @@
         "HasUCC": true,
         "MarketNumber": 195,
         "DealerAuctionStatusForGA": "Dealer",
-        "CurrentlyApprovedMinFlooringUnixDate": 1370304000,
+        "CurrentlyApprovedMinFlooringDate": "2013-01-01",
         "BusinessEmail": "tyates@tricolorauto.com",
         "BusinessContactEmail": "tyates@tricolorauto.com",
         "DealerBusinessAddresses": [
