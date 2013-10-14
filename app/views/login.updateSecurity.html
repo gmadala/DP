@@ -42,7 +42,7 @@
                 <label class="control-label">Answer</label>
                 <div class="controls">
                   <input type="text" ng-name="question.n+'_res'" ng-model="$parent.updateSecurity[question.n+'_res']" required />
-                  <label ng-for="question.n+_res" class="form-error" ng-show="$parent.updateSecurity[question.n+'_res'].$error.required">Please enter an answer to the selected security question. </label>
+                  <label ng-for="question.n+_res" class="form-error" ng-show="!$parent.updateSecurity[question.n+'_res']">Please enter an answer to the selected security question. </label>
                 </div>
               </div>
 

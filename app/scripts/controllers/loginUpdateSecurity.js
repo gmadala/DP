@@ -36,7 +36,6 @@ angular.module('nextgearWebApp')
           filteredQuestions = _.reject(securityQuestions, function(q) {
             return filters.indexOf(q.QuestionId) !== -1;
           });
-          console.log($scope.updateSecurity)
       return filteredQuestions;
     };
 
