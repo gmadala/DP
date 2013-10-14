@@ -9,7 +9,7 @@
           <p>Since this is your first login to NextGear Capital, please do the following:</p>
 
           <ol>
-            <li>Enter the mail we have on file for you to verify your account.</li>
+            <li>Enter the email we have on file for you to verify your account.</li>
             <li>Set your security questions before you enter the site.</li>
           </ol>
 
@@ -19,7 +19,7 @@
               <div class="controls">
                 <input type="email" name="email" id="email" ng-model="email" ui-event="{ blur : 'validateEmail(updateSecurity.email.$viewValue)' }" required/>
                 <label class="form-error" ng-show="updateSecurity.email.$error.correctEmail">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
-                <label class="form-error" ng-show="updateSecurity.email.$error.email">Please Enter a valid email address.</label>
+                <label class="form-error" ng-show="updateSecurity.email.$error.email">Please enter a valid email address.</label>
               </div>
             </div>
 
@@ -39,7 +39,8 @@
               <div class="control-group" ng-show="$parent[question.n]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
-                  <input type="text" required />
+                  <input type="text" ng-model="foo" id="foo" required />
+                  <label for="foo" class="form-error" ng-show="updateSecurity.foo.$error.required">Please enter an answer to the selected security question. </label>
                 </div>
               </div>
 

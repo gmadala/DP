@@ -141,7 +141,8 @@
       }
 
       select {
-        width: 206px;
+        width: auto;
+        min-width: 206px;
         margin-bottom: 10px;
       }
 
