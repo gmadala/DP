@@ -157,17 +157,3 @@ $set-label-width: 40%;
 .cancel-btn {
   right: 70px;
 }
-
-.btn-help {
-  @extend .btn-unstyle;
-  @extend %heavy;
-  @extend %small;
-  @include border-radius(50%);
-  position: relative;
-  width: 15px;
-  height: 15px;
-  background: $brand-text;
-  color: $white;
-  line-height: 1;
-  margin-left: 10px;
-}
