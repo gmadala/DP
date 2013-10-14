@@ -164,8 +164,9 @@ angular.module('nextgearWebApp')
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',
             buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
-          $dialog.messageBox(title, msg, buttons).open();
-          $scope.reset();
+          $dialog.messageBox(title, msg, buttons).open().then(function () {
+            $scope.reset();
+          });
         }, function (/*error*/) {
           $scope.submitInProgress = false;
         }
