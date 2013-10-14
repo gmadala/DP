@@ -13,7 +13,7 @@
             <li>Set your security questions before you enter the site.</li>
           </ol>
 
-          <form class="form-horizontal" name="updateSecurity" novalidate>
+          <form class="form-horizontal" name="updateSecurity" ng-submit="submitForm()" novalidate>
             <div class="control-group email">
               <label class="control-label" for="email">Email</label>
               <div class="controls">
@@ -29,26 +29,28 @@
                 <label class="control-label">Security Question #{{$index+1}}</label>
                 <div class="controls">
                   <select
-                    ng-model="$parent[question.n]"
-                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)">
+                    ng-model="$parent.updateSecurity[question.n]"
+                    ng-name="$parent.updateSecurity[question.n"
+                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)",
+                    nq-required="true">
                     <option value="">-- Select a Question --</option>
                   </select>
                 </div>
               </div>
 
-              <div class="control-group" ng-show="$parent[question.n]">
+              <div class="control-group" ng-show="$parent.updateSecurity[question.n]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
-                  <input type="text" ng-model="foo" id="foo" required />
-                  <label for="foo" class="form-error" ng-show="updateSecurity.foo.$error.required">Please enter an answer to the selected security question. </label>
+                  <input type="text" name="question.n+_res" ng-model="$parent.updateSecurity[question.n+'_res']" required />
+                  <label for="question.n+_res" class="form-error">Please enter an answer to the selected security question. </label>
                 </div>
               </div>
 
             </div>
 
             <div class="footer modal-footer">
-              <button class="btn btn-secondary">Cancel</button>
-              <button class="btn btn-primary">Continue</button>
+              <button class="btn btn-secondary" type="button" ng-click="cancel()">Cancel</button>
+              <button class="btn btn-primary" type="submit" ng-disabled="updateSecurity.$invalid">Continue</button>
             </div>
           </form>
         </div>

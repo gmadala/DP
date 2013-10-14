@@ -20,21 +20,27 @@ angular.module('nextgearWebApp')
     ];
 
     $scope.validateEmail = function(enteredEmail) {
-      if (_.isEmpty(enteredEmail)) { return; }
-      $scope.updateSecurity.email.$error.correctEmail = (existingEmail !== enteredEmail);
+      var valid = existingEmail === enteredEmail;
+      if (_.isEmpty(enteredEmail)) { return; } //do nothing if we're empty
+      $scope.updateSecurity.email.$setValidity('correctEmail', valid);
     };
 
     $scope.filteredQuestions = function(ignore) {
+          // build an array of fields based on scope.questions
       var fields = _.map($scope.questions, function(q) { return q.n; }),
+          // filter out the current 'ignore' value
           filteredFields = _.reject(fields, function(f){ return f === ignore; }),
-          filters = _.map(filteredFields, function(f) { return $scope[f]; }),
+          // grab the security question ids that are 'taken'
+          filters = _.map(filteredFields, function(f) { return $scope.updateSecurity[f]; }),
+          // reject all questions that have been selected
           filteredQuestions = _.reject(securityQuestions, function(q) {
             return filters.indexOf(q.QuestionId) !== -1;
           });
       return filteredQuestions;
     };
 
-    $scope.submit = function() {
+    $scope.submitForm = function() {
+      if ($scope.updateSecurity.$invalid) { return; }
       // submit the form
       // save data to user
       // go home
@@ -43,7 +49,7 @@ angular.module('nextgearWebApp')
 
     $scope.cancel = function() {
       // return to login
-      $rootScope.broadcast('event:redirectToLogin');
+      $rootScope.$broadcast('event:redirectToLogin');
     };
 
   });
