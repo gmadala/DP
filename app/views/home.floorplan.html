@@ -6,7 +6,7 @@
       prompt="Enter Stock #, VIN, Make, Model, or Year"
       filter-label="Filter List by Status"
       filter-options="filterOptions"
-      active-criteria="searchCriteria"
+      active-criteria="proposedSearchCriteria"
       on-search="search()"
       on-clear="resetSearch()">
     </div>
@@ -53,7 +53,9 @@
               <div class="cell fl-floorDate"><p> {{ item.FlooringDate | moment }} </p></div>
               <div class="cell fl-seller"><p> {{ item.SellerName }} </p></div>
               <div class="cell fl-lastPayDate"><p> {{ item.LastPaymentDate | moment }} </p></div>
-              <div class="cell fl-titleRelease"><p> {{ item.TitleReleaseDate | moment }} <br/>To {{ item.TitleReleaseLocation }}</p></div>
+              <div class="cell fl-titleRelease"><p> {{ item.TitleReleaseDate | moment }} <br/>
+                <span ng-show="item.TitleReleaseLocation">To </span>{{ item.TitleReleaseLocation }}</p>
+              </div>
               <div class="cell fl-title">
                 <a ng-show="item.TitleImageAvailable"
                    ng-href="{{ item.$titleURL }}"

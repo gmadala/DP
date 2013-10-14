@@ -71,6 +71,21 @@ describe('Controller: FloorplanCtrl', function () {
       expect(scope.data.results.length).toBe(0);
     });
 
+    it('should commit the proposedSearchCriteria (as a copy)', function () {
+      scope.proposedSearchCriteria = {
+        query: 'foo',
+        startDate: new Date(2013, 4, 4),
+        endDate: new Date(),
+        filter: 'something'
+      };
+      scope.search();
+      expect(angular.equals(scope.proposedSearchCriteria, scope.searchCriteria)).toBe(true);
+      expect(scope.searchCriteria).not.toBe(scope.proposedSearchCriteria);
+
+      scope.proposedSearchCriteria.startDate.setDate(5);
+      expect(scope.searchCriteria.startDate.getDate()).toBe(4);
+    });
+
     it('should call for data with no paginator to start at beginning', function () {
       expect(modelMock.search).toHaveBeenCalledWith(scope.searchCriteria, null);
     });
@@ -143,6 +158,36 @@ describe('Controller: FloorplanCtrl', function () {
 
   it('should attach a resetSearch function to the scope', function () {
     expect(typeof scope.resetSearch).toBe('function');
+  });
+
+  describe('resetSearch function', function () {
+
+    it('should set proposedSearchCriteria with empty search defaults', function () {
+      scope.proposedSearchCriteria = null;
+      scope.resetSearch();
+      expect(scope.proposedSearchCriteria.query).toBe(null);
+      expect(scope.proposedSearchCriteria.startDate).toBe(null);
+      expect(scope.proposedSearchCriteria.endDate).toBe(null);
+    });
+
+    it('should set proposedSearchCriteria filter to ALL if none is provided', function () {
+      scope.proposedSearchCriteria = null;
+      scope.resetSearch();
+      expect(scope.proposedSearchCriteria.filter).toBe(modelMock.filterValues.ALL);
+    });
+
+    it('should set proposedSearchCriteria filter to initial filter if one is provided', function () {
+      scope.proposedSearchCriteria = null;
+      scope.resetSearch('bar');
+      expect(scope.proposedSearchCriteria.filter).toBe('bar');
+    });
+
+    it('should initiate a search', function () {
+      spyOn(scope, 'search');
+      scope.resetSearch();
+      expect(scope.search).toHaveBeenCalled();
+    });
+
   });
 
   it('should automatically kick off a search with the filter passed to the state', function () {

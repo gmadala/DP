@@ -111,6 +111,21 @@ describe('Controller: PaymentsCtrl', function () {
       expect(scope.payments.results.length).toBe(0);
     });
 
+    it('should commit the proposedSearchCriteria (as a copy)', function () {
+      scope.payments.proposedSearchCriteria = {
+        query: 'foo',
+        startDate: new Date(2013, 4, 4),
+        endDate: new Date(),
+        filter: 'something'
+      };
+      scope.payments.search();
+      expect(angular.equals(scope.payments.proposedSearchCriteria, scope.payments.searchCriteria)).toBe(true);
+      expect(scope.payments.searchCriteria).not.toBe(scope.payments.proposedSearchCriteria);
+
+      scope.payments.proposedSearchCriteria.startDate.setDate(5);
+      expect(scope.payments.searchCriteria.startDate.getDate()).toBe(4);
+    });
+
     it('should call for data with no paginator to start at beginning', function () {
       expect(modelMock.search).toHaveBeenCalledWith(scope.payments.searchCriteria, null);
     });
@@ -183,6 +198,36 @@ describe('Controller: PaymentsCtrl', function () {
 
   it('should attach a resetSearch function to the scope', function () {
     expect(typeof scope.payments.resetSearch).toBe('function');
+  });
+
+  describe('resetSearch function', function () {
+
+    it('should set proposedSearchCriteria with empty search defaults', function () {
+      scope.payments.proposedSearchCriteria = null;
+      scope.payments.resetSearch();
+      expect(scope.payments.proposedSearchCriteria.query).toBe(null);
+      expect(scope.payments.proposedSearchCriteria.startDate).toBe(null);
+      expect(scope.payments.proposedSearchCriteria.endDate).toBe(null);
+    });
+
+    it('should set proposedSearchCriteria filter to ALL if none is provided', function () {
+      scope.payments.proposedSearchCriteria = null;
+      scope.payments.resetSearch();
+      expect(scope.payments.proposedSearchCriteria.filter).toBe(modelMock.filterValues.ALL);
+    });
+
+    it('should set proposedSearchCriteria filter to initial filter if one is provided', function () {
+      scope.payments.proposedSearchCriteria = null;
+      scope.payments.resetSearch('bar');
+      expect(scope.payments.proposedSearchCriteria.filter).toBe('bar');
+    });
+
+    it('should initiate a search', function () {
+      spyOn(scope.payments, 'search');
+      scope.payments.resetSearch();
+      expect(scope.payments.search).toHaveBeenCalled();
+    });
+
   });
 
   it('should automatically kick off a search with the filter passed to the state', function () {

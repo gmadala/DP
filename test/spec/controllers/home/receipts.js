@@ -105,6 +105,21 @@ describe('Controller: ReceiptsCtrl', function () {
       expect(scope.receipts.results.length).toBe(0);
     });
 
+    it('should commit the proposedSearchCriteria (as a copy)', function () {
+      scope.receipts.proposedSearchCriteria = {
+        query: 'foo',
+        startDate: new Date(2013, 4, 4),
+        endDate: new Date(),
+        filter: 'something'
+      };
+      scope.receipts.search();
+      expect(angular.equals(scope.receipts.proposedSearchCriteria, scope.receipts.searchCriteria)).toBe(true);
+      expect(scope.receipts.searchCriteria).not.toBe(scope.receipts.proposedSearchCriteria);
+
+      scope.receipts.proposedSearchCriteria.startDate.setDate(5);
+      expect(scope.receipts.searchCriteria.startDate.getDate()).toBe(4);
+    });
+
     it('should call for data with no paginator to start at beginning', function () {
       scope.receipts.search();
       expect(receipts.search).toHaveBeenCalledWith(scope.receipts.searchCriteria, null);
@@ -172,21 +187,21 @@ describe('Controller: ReceiptsCtrl', function () {
 
   describe('resetSearch function', function () {
 
-    it('should set up a receipts searchCriteria object on the scope', function () {
+    it('should set up a receipts proposedSearchCriteria object on the scope', function () {
       scope.receipts.resetSearch();
-      expect(scope.receipts.searchCriteria).toBeDefined();
+      expect(scope.receipts.proposedSearchCriteria).toBeDefined();
     });
 
     it('should set query, startDate and endDate to null', function () {
       scope.receipts.resetSearch();
-      expect(scope.receipts.searchCriteria.query).toBe(null);
-      expect(scope.receipts.searchCriteria.startDate).toBe(null);
-      expect(scope.receipts.searchCriteria.endDate).toBe(null);
+      expect(scope.receipts.proposedSearchCriteria.query).toBe(null);
+      expect(scope.receipts.proposedSearchCriteria.startDate).toBe(null);
+      expect(scope.receipts.proposedSearchCriteria.endDate).toBe(null);
     });
 
     it('should set filter to null if no filters are available', function () {
       scope.receipts.resetSearch();
-      expect(scope.receipts.searchCriteria.filter).toBe(null);
+      expect(scope.receipts.proposedSearchCriteria.filter).toBe(null);
     });
 
     it('should set filter to first item value if filters are available', function () {
@@ -201,7 +216,7 @@ describe('Controller: ReceiptsCtrl', function () {
         }
       ];
       scope.receipts.resetSearch();
-      expect(scope.receipts.searchCriteria.filter).toBe('foo');
+      expect(scope.receipts.proposedSearchCriteria.filter).toBe('foo');
     });
 
     it('should trigger a search', function () {

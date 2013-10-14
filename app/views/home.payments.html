@@ -6,8 +6,8 @@
              prompt="Enter Stock # or VIN"
              filter-label="Filter List by Due Date"
              filter-options="payments.filterOptions"
-             active-criteria="payments.searchCriteria"
-             show-date-range="payments.searchCriteria.filter == 'range'"
+             active-criteria="payments.proposedSearchCriteria"
+             show-date-range="payments.proposedSearchCriteria.filter == 'range'"
              on-search="payments.search()"
              on-clear="payments.resetSearch()">
         </div>

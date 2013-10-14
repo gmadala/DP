@@ -50,6 +50,10 @@ angular.module('nextgearWebApp')
       // search means "start from the beginning with current criteria"
       $scope.payments.paginator = null;
       $scope.payments.results.length = 0;
+
+      // commit the proposed search criteria
+      $scope.payments.searchCriteria = angular.copy($scope.payments.proposedSearchCriteria);
+
       $scope.payments.fetchNextResults();
     };
 
@@ -74,7 +78,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.resetSearch = function (initialFilter) {
-      $scope.payments.searchCriteria = {
+      $scope.payments.proposedSearchCriteria = {
         query: null,
         startDate: null,
         endDate: null,
