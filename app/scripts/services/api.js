@@ -38,17 +38,15 @@ angular.module('nextgearWebApp')
                 return response.data.Data;
               }
               else {
-                if(response.data.Message === "401") {
+                if(response.data.Message === '401') {
                   if (!timedOut) {
                     timedOut = true;
                     self.resetAuthToken();
                     $rootScope.$broadcast('event:redirectToLogin');
-                    console.log('else')
                     error = messages.add(expiredSessionError, debug + 'invalid API response: 401');
                   }
                 }
                 else {
-                  console.log('if')
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
                 }
                 return $q.reject(error);

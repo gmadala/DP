@@ -8,6 +8,7 @@ describe('Controller: PaymentsCtrl', function () {
   var PaymentsCtrl,
     stateParamsMock,
     modelMock,
+    userMock,
     searchResult = {
       data: {}
     },
@@ -39,14 +40,17 @@ describe('Controller: PaymentsCtrl', function () {
         return false;
       }
     };
-
+    userMock = {
+      isLoggedIn: function(){ return true; }
+    };
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
 
     PaymentsCtrl = $controller('PaymentsCtrl', {
       $scope: scope,
       $stateParams: stateParamsMock,
-      Payments: modelMock
+      Payments: modelMock,
+      User: userMock
     });
   }));
 
