@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $q, User, Settings) {
+  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $location, User, Settings) {
     var securityQuestions,
         existingEmail;
 
@@ -40,15 +40,19 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submitForm = function() {
-      if ($scope.updateSecurity.$invalid) { return; }
-      // submit the form
-      // save data to user
-      // go home
-      // $location.path('/home');
+      var securityQuestions = _.map($scope.questions, function(q) {
+        return {
+          SecurityQuestionId: $scope.updateSecurity[q.n],
+          Answer: $scope.updateSecurity[q.n + '_res']
+        };
+      });
+
+      Settings.saveSecurityAnswers(securityQuestions);
+      User.setShowUserInitialization(false);
+      $location.path('/home');
     };
 
     $scope.cancel = function() {
-      // return to login
       $rootScope.$broadcast('event:redirectToLogin');
     };
 

@@ -11,6 +11,16 @@ angular.module('nextgearWebApp')
           }
         }
         return '';
+      },
+      getSecurityAnswers: function(securityAnswers) {
+        var res = [];
+        for (var i = 0; i < securityAnswers.length; i++) {
+          res.push({
+            SecurityQuestionId: securityAnswers[i].SecurityQuestionId,
+            Answer: securityAnswers[i].Answer
+          });
+        }
+        return res;
       }
     };
 
@@ -44,19 +54,21 @@ angular.module('nextgearWebApp')
             return settings;
           });
       },
+      saveSecurityAnswers: function(securityAnswers) {
+        var req = {
+          SecurityAnswers: prv.getSecurityAnswers(securityAnswers)
+        };
+
+        return api.request('POST', '/UserAccount/usersettings', req);
+      },
       saveProfile: function(username, password, email, phone, securityAnswers) {
         var req = {
           Username: username,
           EmailAddress: email,
           Cellphone: phone,
-          SecurityAnswers: []
+          SecurityAnswers: prv.getSecurityAnswers(securityAnswers)
         };
-        for (var i = 0; i < securityAnswers.length; i++) {
-          req.SecurityAnswers.push({
-            SecurityQuestionId: securityAnswers[i].SecurityQuestionId,
-            Answer: securityAnswers[i].Answer
-          });
-        }
+
         if (password) {
           req.Password = password;
         }
