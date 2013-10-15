@@ -96,6 +96,14 @@ angular.module('nextgearWebApp')
         var displayId = User.getInfo().BusinessNumber + '-' + item.StockNumber;
         item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0'); // 0 = not first page only
         return item;
+      },
+      setTitleInfo: function (floorplanId, titleNumber, titleState) {
+        var data = {
+          FloorplanId: floorplanId,
+          TitleNumber: titleNumber,
+          TitleStateId: titleState.StateId
+        };
+        return api.request('POST', '/floorplan/EditTitleNumberAndState', data);
       }
     };
   });
