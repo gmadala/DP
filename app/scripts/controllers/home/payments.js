@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User) {
 
     $scope.isCollapsed = true;
 
@@ -105,6 +105,8 @@ angular.module('nextgearWebApp')
     );
 
     var refreshCanPayNow = function () {
+      if( !User.isLoggedIn() ) { return; }
+
       Payments.canPayNow().then(
         function (result) {
           $scope.canPayNow = result;
@@ -115,6 +117,7 @@ angular.module('nextgearWebApp')
           $scope.canPayNow = false;
           $scope.canPayNowLoaded = false;
         });
+
       $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
     refreshCanPayNow();
