@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('EditTitleCtrl', function ($scope, dialog, floorplan, Floorplan, User) {
+  .controller('EditTitleCtrl', function ($scope, dialog, floorplan, vehicleDescription, Floorplan, User) {
 
     $scope.states = User.getStatics().states;
+    $scope.floorplan = floorplan;
+    $scope.vehicleDescription = vehicleDescription;
 
     $scope.getStateObjForName = function (stateName) {
       // not ideal to resolve name => ID, but the API gives us a state name in floorplan search results

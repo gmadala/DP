@@ -142,6 +142,9 @@ angular.module('nextgearWebApp')
           resolve: {
             floorplan: function () {
               return floorplan;
+            },
+            vehicleDescription: function () {
+              return $scope.getVehicleDescription(floorplan);
             }
           }
         };

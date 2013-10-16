@@ -298,6 +298,18 @@ describe('Controller: FloorplanCtrl', function () {
         expect(resolved).toBe(floorplan);
       });
 
+      it('should provide the modal with a way to resolve the vehicle description', function () {
+        var floorplan = {},
+          resolved;
+
+        spyOn(scope, 'getVehicleDescription').andReturn('foo');
+
+        scope.openEditTitle(floorplan);
+
+        resolved = $dialog.dialog.mostRecentCall.args[0].resolve.vehicleDescription();
+        expect(resolved).toBe('foo');
+      });
+
     });
 
   });

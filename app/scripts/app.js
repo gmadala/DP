@@ -127,7 +127,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('auction_home.sellerfloorplan', {
         url: '/sellerfloorplan',
         templateUrl: 'views/auction.home.sellerfloorplan.html',
-        controller: 'AuctionSellerFloorplanCtrl',
+        controller: 'FloorplanCtrl',
         isAuctionState: true
       })
       .state('auction_reports', {

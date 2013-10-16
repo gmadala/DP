@@ -48,12 +48,21 @@ describe('Controller: EditTitleCtrl', function () {
     EditTitleCtrl = $controller('EditTitleCtrl', {
       $scope: scope,
       dialog: dialog,
-      floorplan: floorplan
+      floorplan: floorplan,
+      vehicleDescription: '2012 Pinto'
     });
   }));
 
   it('should attach the list of available states to the scope', function () {
     expect(scope.states).toBe(mockStateList);
+  });
+
+  it('should attach the floorplan object to the scope', function () {
+    expect(scope.floorplan).toBe(floorplan);
+  });
+
+  it('should attach the vehicle description to the scope', function () {
+    expect(scope.vehicleDescription).toBe('2012 Pinto');
   });
 
   describe('getStateObjForName function', function () {

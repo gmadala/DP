@@ -4,17 +4,26 @@
 <div class="modal-body">
 
   <form name="form">
-    <span><strong>VIN</strong>{{ title.vin }}</span>
-    <span>{{ title.vehicle }}</span>
+    <span><strong>VIN</strong> {{ floorplan.UnitVIN }}</span><br/>
+    <span>{{ vehicleDescription }}</span>
 
     <label for="titleNumber">Title Number</label>
-    <input id="titleNumber" name="titleNumber" type="text" ng-model="query">
+    <input id="titleNumber" name="titleNumber" type="text" ng-model="inputModel.titleNumber" required>
+    <label for="titleNumber" class="text-error"
+           ng-show="validity.titleNumber.$error.required">
+      Please enter the Title Number
+    </label>
 
     <label for="titleState">Title State</label>
-    <select name="titleState" id="titleState" placeholder="Select a State">
-      <option value="NY">NY</option>
-      <option value="CA">CA</option>
+    <select name="titleState" id="titleState" ng-model="inputModel.titleState"
+            ng-options="state.StateName for state in states"
+            required>
+      <option class="disabled" disabled="disabled" value="">Make Selection</option>
     </select>
+    <label for="titleState" class="text-error"
+           ng-show="validity.titleState.$error.required">
+      Please select the Title State
+    </label>
   </form>
 
 </div>
