@@ -29,8 +29,8 @@ $brand-gradient-top: #499EC6; // login page background
 $brand-gradient-bottom: #319FC7;
 
 // Indicators
-$error: #D90000;
-$error-dark: #B01100; // red
+$error: #D90000; // brighter red for overdue items/notices
+$error-dark: #B01100; // darker red for form errors
 
 // Calendar
 $upcoming: #8EBE31; // green

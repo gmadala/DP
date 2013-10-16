@@ -124,8 +124,9 @@ select, .nxg-date-field {
 
 .form-error {
   @extend %small;
+  line-height: $base-line-height;
   color: $error-dark;
-  margin: 5px 0;
+  margin: 10px 0 0;
 }
 
 .nxg-checkbox {
