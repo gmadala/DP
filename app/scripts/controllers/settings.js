@@ -42,7 +42,6 @@ angular.module('nextgearWebApp')
         this.showError = false;
       },
       saveError: function(error) {
-        console.log(error.text);
         this.showError = true;
         this.errorMsg = error.text;
       },
