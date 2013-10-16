@@ -11,7 +11,7 @@
 
         <div class="well-out">
 
-          <form class="settings-opts" ng-class="{ profile.editable: editable }" name="userSettings" novalidate>
+          <form class="settings-opts" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
             <span class="error" ng-show="profile.showError">{{ profile.errorMsg }}</span>
 
             <div class="control-group">
@@ -120,7 +120,7 @@
         <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{business.editable: editable }" name="busSettings">
+          <form class="settings-opts" ng-class="{ editable:business.editable }" name="busSettings">
             <div class="control-group">
               <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
@@ -183,7 +183,7 @@
         <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ title.editable: editable }"name="titleSettings">
+          <form class="settings-opts" ng-class="{ editable:title.editable }"name="titleSettings">
             <div class="control-group">
               <label class="control-label" for="titleAddr">Address</label>
               <div class="controls" ng-show="title.editable">
@@ -226,7 +226,7 @@
         <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ notifications.editable: editable }" name="notificationSettings">
+          <form class="settings-opts" ng-class="{ editable:notifications.editable }" name="notificationSettings">
             <div class="head-labels">
               <label>Notifications</label>
               <label ng-hide="notifications.editable">Delivery Type</label>

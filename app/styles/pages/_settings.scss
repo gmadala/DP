@@ -1,5 +1,6 @@
 // SETTINGS
 
+// so we can edit all the widths in one place
 $set-label-width: 40%;
 
 .settings {
@@ -39,6 +40,10 @@ $set-label-width: 40%;
   .static {
     font-weight: normal;
     color: $darker-text-color;
+
+    p, span {
+      line-height: 1.5;
+    }
   }
 
   .head-labels {
@@ -66,14 +71,30 @@ $set-label-width: 40%;
     .inner {
       @extend %float-l;
       margin: 0;
+
+      label {
+        margin: 0;
+      }
     }
 
     .read-only {
       line-height: $base-line-height;
       display: inline-block;
 
+      &:after {
+        content: ',';
+        margin-left: -3px;
+      }
+
+      &:last-child {
+        &:after {
+          content: '';
+          margin: 0;
+        }
+      }
+
       & + .read-only {
-        margin-left: 10px;
+        margin-left: 7px;
       }
     }
 
@@ -90,32 +111,24 @@ $set-label-width: 40%;
       margin-bottom: 10px;
     }
 
-    label {
-      width: auto;
-      float: none;
-      padding: 0;
-    }
-
     .nxg-radios label + p {
       margin-top: 10px;
     }
 
     .notifications {
       .n-title {
-        width: auto;
-      }
-
-      .n-title, .inner {
-        float: none;
-      }
-
-      .inner {
         padding: 5px 0;
-        margin-left: 20px;
+      }
+    }
 
-        label {
-          margin-top: 4px;
-        }
+    .read-only {
+      &:after {
+        content: '';
+        margin: 0;
+      }
+
+      & + .read-only {
+        margin-left: 20px;
       }
     }
   }
