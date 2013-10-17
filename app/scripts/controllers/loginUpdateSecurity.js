@@ -40,6 +40,16 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submitForm = function() {
+      // validate client-side
+      $scope.validity = angular.copy($scope.updateSecurity);
+
+      if ($scope.validity.$invalid) {
+        return;
+      }
+
+      // check if email matches
+      $scope.validateEmail($scope.updateSecurity.email.$viewValue);
+
       var securityQuestions = _.map($scope.questions, function(q) {
         return {
           SecurityQuestionId: $scope.updateSecurity[q.n],

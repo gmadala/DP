@@ -17,9 +17,9 @@
             <div class="control-group email">
               <label class="control-label" for="email">Email</label>
               <div class="controls">
-                <input type="email" name="email" id="email" ng-model="email" ui-event="{ blur : 'validateEmail(updateSecurity.email.$viewValue)' }" required/>
+                <input type="email" name="email" id="email" ng-model="email" required/>
                 <label class="form-error" ng-show="updateSecurity.email.$error.correctEmail">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
-                <label class="form-error" ng-show="updateSecurity.email.$error.email">Please enter a valid email address.</label>
+                <label class="form-error" ng-show="validity.email.$error.required || validity.email.$error.email">Please enter a valid email address.</label>
               </div>
             </div>
 
@@ -30,9 +30,9 @@
                 <div class="controls">
                   <select
                     ng-model="$parent.updateSecurity[question.n]"
-                    ng-name="$parent.updateSecurity[question.n"
-                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)",
-                    nq-required="true">
+                    name="$parent.updateSecurity[question.n]"
+                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)"
+                    required />
                     <option value="">-- Select a Question --</option>
                   </select>
                 </div>
@@ -50,7 +50,7 @@
 
             <div class="footer modal-footer">
               <button class="btn btn-secondary" type="button" ng-click="cancel()">Cancel</button>
-              <button class="btn btn-primary" type="submit" ng-disabled="updateSecurity.$invalid">Continue</button>
+              <button class="btn btn-primary" type="submit" ng-class="{ disabled: updateSecurity.$invalid }">Continue</button>
             </div>
           </form>
         </div>
