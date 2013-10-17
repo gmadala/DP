@@ -51,7 +51,10 @@
         <div class="cell selfloor-ticket-num">{{ item.ConsignerTicketNumber }}</div>
         <div class="cell selfloor-title-loc">{{ item.TitleLocation }}</div>
         <div class="cell selfloor-title">
-          <p ng-show="item.TitleState || item.TitleNumber">{{ item.TitleNumber }}<br/>{{ item.TitleState }}</p>
+          <p ng-show="item.TitleState || item.TitleNumber">
+            {{ item.TitleNumber }}<br ng-show="!!item.TitleNumber"/>
+            {{ item.TitleState }}
+          </p>
           <p>
             <a class="btn btn-mini" ng-show="item.TitleEditable" ng-click="openEditTitle(item)">Edit</a>
             <a ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}" target="_blank">View</a>

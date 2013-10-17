@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
 
     $scope.getVehicleDescription = function (floorplan) {
       return [
-        floorplan.UnitYear,
+        floorplan.UnitYear || null,
         floorplan.UnitMake,
         floorplan.UnitModel,
         floorplan.UnitStyle,
