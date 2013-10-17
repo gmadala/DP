@@ -2,32 +2,21 @@
 
 angular.module('nextgearWebApp')
   .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $location, User, Settings) {
-    var securityQuestions,
-        existingEmail;
+    var securityQuestions;
 
     User.getSecurityQuestions().then(function(questions){
       securityQuestions = questions;
     });
 
-    Settings.get().then(function(res) {
-      existingEmail = res.Email;
-    });
-
     $scope.questions = [
-      {n: 'q1'},
-      {n: 'q2'},
-      {n: 'q3'}
+      {name: 'q1', resName: 'q1_res'},
+      {name: 'q2', resName: 'q2_res'},
+      {name: 'q3', resName: 'q3_res'}
     ];
-
-    $scope.validateEmail = function(enteredEmail) {
-      var valid = existingEmail === enteredEmail;
-      if (_.isEmpty(enteredEmail)) { return; } //do nothing if we're empty
-      $scope.updateSecurity.email.$setValidity('correctEmail', valid);
-    };
 
     $scope.filteredQuestions = function(ignore) {
           // build an array of fields based on scope.questions
-      var fields = _.map($scope.questions, function(q) { return q.n; }),
+      var fields = _.map($scope.questions, function(q) { return q.name; }),
           // filter out the current 'ignore' value
           filteredFields = _.reject(fields, function(f){ return f === ignore; }),
           // grab the security question ids that are 'taken'
@@ -40,24 +29,27 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submitForm = function() {
+      var securityQuestions = [];
+
       // validate client-side
       $scope.validity = angular.copy($scope.updateSecurity);
+
+      _.each($scope.questions, function(q) {
+        if (!$scope.updateSecurity[q.name]) { $scope.validity[q.name] = {$error: {required: true}}; }
+        if ($scope.updateSecurity[q.name] && !$scope.updateSecurity[q.resName]) {
+          $scope.validity[q.resName] = {$error: {required: true}};
+        }
+        securityQuestions.push({
+          SecurityQuestionId: $scope.updateSecurity[q.name],
+          Answer: $scope.updateSecurity[q.resName]
+        });
+      });
 
       if ($scope.validity.$invalid) {
         return;
       }
 
-      // check if email matches
-      $scope.validateEmail($scope.updateSecurity.email.$viewValue);
-
-      var securityQuestions = _.map($scope.questions, function(q) {
-        return {
-          SecurityQuestionId: $scope.updateSecurity[q.n],
-          Answer: $scope.updateSecurity[q.n + '_res']
-        };
-      });
-
-      Settings.saveSecurityAnswers(securityQuestions);
+      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, securityQuestions);
       User.setShowUserInitialization(false);
       $location.path('/home');
     };

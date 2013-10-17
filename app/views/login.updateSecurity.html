@@ -29,20 +29,20 @@
                 <label class="control-label">Security Question #{{$index+1}}</label>
                 <div class="controls">
                   <select
-                    ng-model="$parent.updateSecurity[question.n]"
-                    name="$parent.updateSecurity[question.n]"
-                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.n)"
-                    required />
+                    ng-model="$parent.updateSecurity[question.name]"
+                    name="question.name"
+                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.name)"
+                    required >
                     <option value="">-- Select a Question --</option>
                   </select>
                 </div>
               </div>
 
-              <div class="control-group" ng-show="$parent.updateSecurity[question.n]">
+              <div class="control-group" ng-show="$parent.updateSecurity[question.name]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
-                  <input type="text" name="{{question.n}}_res" ng-model="$parent.updateSecurity[question.n+'_res']" required />
-                  <label for="{{question.n}}_res'" class="form-error" ng-show="!$parent.updateSecurity[question.n+'_res']">Please enter an answer to the selected security question. </label>
+                  <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" required />
+                  <label for="{{question.resName}}" class="form-error" ng-show="$parent.validity[question.resName].$error.required">Please enter an answer to the selected security question. </label>
                 </div>
               </div>
 
@@ -50,7 +50,7 @@
 
             <div class="footer modal-footer">
               <button class="btn btn-secondary" type="button" ng-click="cancel()">Cancel</button>
-              <button class="btn btn-primary" type="submit" ng-class="{ disabled: updateSecurity.$invalid }">Continue</button>
+              <button class="btn btn-primary" type="submit">Continue</button>
             </div>
           </form>
         </div>

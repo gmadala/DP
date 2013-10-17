@@ -4,13 +4,14 @@ describe('Model: Settings', function() {
 
   beforeEach(module('nextgearWebApp'));
 
-  var httpBackend, $q, settings, answersStub;
+  var httpBackend, $q, settings, emailStub, securityAnswersStub;
 
   beforeEach(inject(function ($httpBackend, _$q_, Settings) {
     httpBackend = $httpBackend;
     $q = _$q_;
     settings = Settings;
-    answersStub = [
+    emailStub = 'peanutbutter@jellytime.com';
+    securityAnswersStub = [
       {
         'SecurityQuestionId': 1,
         'Answer': 'The Matrix'
@@ -32,18 +33,18 @@ describe('Model: Settings', function() {
     });
   }));
 
-  describe('saveSecurityAnswers method', function() {
+  describe('saveSecurityAnswersAndEmail method', function() {
 
     it('should make the expected POST request', function () {
       httpBackend.expectPOST('/UserAccount/usersettings');
-      settings.saveSecurityAnswers(answersStub);
+      settings.saveSecurityAnswersAndEmail(emailStub, securityAnswersStub);
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should return a promise', function () {
       var res = null;
 
-      settings.saveSecurityAnswers(answersStub).then(function (result) {
+      settings.saveSecurityAnswersAndEmail(emailStub, securityAnswersStub).then(function (result) {
         res = result;
       })
       httpBackend.flush();

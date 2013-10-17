@@ -21,8 +21,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
           "SecurityQuestionId": 3,
           "Answer": "Imagínate"
         }
-      ],
-      Email: 'peanutbutter@jellytime.com'
+      ]
     };
 
     SettingsMock = {
@@ -33,7 +32,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
           }
         };
       },
-      saveSecurityAnswers: noop
+      saveSecurityAnswersAndEmail: noop
     };
 
     userData = [
@@ -85,6 +84,8 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       'q2_res': 'Harry Potter'
     };
 
+    scope.updateSecurity.email = {$modelValue: 'peanutbutter@jellytime.com'};
+
   }));
 
   describe('questions', function() {
@@ -95,25 +96,6 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
     it('should have 3 questions', function() {
       expect(scope.questions.length).toBe(3);
-    });
-
-  });
-
-  describe('validateEmail', function() {
-
-    it('should be defined', function() {
-      expect(scope.validateEmail).toBeDefined();
-    });
-
-    it('should call $setValidity with the proper args', function() {
-      spyOn(scope.updateSecurity.email, '$setValidity');
-
-      scope.validateEmail('');
-      expect(scope.updateSecurity.email.$setValidity).not.toHaveBeenCalled();
-      scope.validateEmail('bob@rankin.com');
-      expect(scope.updateSecurity.email.$setValidity).toHaveBeenCalledWith('correctEmail', false);
-      scope.validateEmail('peanutbutter@jellytime.com');
-      expect(scope.updateSecurity.email.$setValidity).toHaveBeenCalledWith('correctEmail', false);
     });
 
   });
@@ -150,11 +132,11 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     });
 
     it('should call methods with the correct params', function() {
-      spyOn(SettingsMock, 'saveSecurityAnswers');
+      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail');
       spyOn(UserMock, 'setShowUserInitialization');
 
       scope.submitForm();
-      expect(SettingsMock.saveSecurityAnswers).toHaveBeenCalledWith([
+      expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
         { SecurityQuestionId: 1, Answer: 'Blue Lagoon'},
         { SecurityQuestionId: 3, Answer: 'Harry Potter'},
         { SecurityQuestionId: undefined, Answer: undefined} // not really possible in the UI, but true to the mocked data
