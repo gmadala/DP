@@ -2,10 +2,10 @@
   "Success": true,
   "Message": null,
   "Data": {
-    "PaidAwaitingTitleDisbursments": 20,
+    "PaidAwaitingTitleDisbursement": 20,
     "PaidAwaitingTitleDisbursementTotal": 37800,
-    "PaidDisbursments": 430,
-    "PaidDisbursmentTotal": 1287456.34,
+    "PaidDisbursements": 430,
+    "PaidDisbursementTotal": 1287456.34,
     "PendingDisbursements": 8,
     "PendingDisbursementTotal": 23760,
     "ApprovedFloorplans": 15,
