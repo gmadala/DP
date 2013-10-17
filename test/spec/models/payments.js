@@ -98,7 +98,7 @@ describe("Model: Payments", function () {
       payments.search(defaultCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('DueDate');
-      expect(callParams.OrderDirection).toBe('ASC');
+      expect(callParams.OrderByDirection).toBe('ASC');
     });
 
     it('should provide a page size', function () {
