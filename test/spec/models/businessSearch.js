@@ -47,12 +47,12 @@ describe('Service: BusinessSearch', function () {
       bs.search(false, 'foo', 'BusinessName', false);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('BusinessName');
-      expect(callParams.OrderDirection).toBe('ASC');
+      expect(callParams.OrderByDirection).toBe('ASC');
 
       bs.search(false, 'foo', 'City', true);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('City');
-      expect(callParams.OrderDirection).toBe('DESC');
+      expect(callParams.OrderByDirection).toBe('DESC');
     });
 
     it('should provide a page size', function () {
