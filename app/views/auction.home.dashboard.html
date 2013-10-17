@@ -1,38 +1,42 @@
 <div class="row-fluid auction-dashboard-summaries">
-  <div class="span5 adjacent well">
+  <div class="span5 adjacent well item-list">
     <h4>Disbursement Groups</h4>
-    <ul class="well-out">
-      <li>
-        <span class="item-total">{{ dashboardData.PaidAwaitingTitleDisbursments }}</span>
-        <span>Paid Awaiting Title ({{ dashboardData.PaidAwaitingTitleDisbursementTotal | currency }})</span>
-      </li>
-      <li>
-        <span class="item-total">{{ dashboardData.PaidDisbursments }}</span>
-        <span>Paid ({{ dashboardData.PaidDisbursmentTotal | currency }})</span>
-      </li>
-      <li>
-        <span class="item-total">{{ dashboardData.PendingDisbursements }}</span>
-        <span>Pending ({{ dashboardData.PendingDisbursementTotal | currency }})</span>
-      </li>
-    </ul>
+    <div class="well-out">
+      <table>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.PaidAwaitingTitleDisbursments }}</span></td>
+          <td class="fl-label">Paid Awaiting Title ({{ dashboardData.PaidAwaitingTitleDisbursementTotal | currency }})</td>
+        </tr>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.PaidDisbursments }}</span></td>
+          <td class="fl-label">Paid ({{ dashboardData.PaidDisbursmentTotal | currency }})</td>
+        </tr>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.PendingDisbursements }}</span></td>
+          <td class="fl-label">Pending ({{ dashboardData.PendingDisbursementTotal | currency }})</td>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <div class="span6 adjacent well">
+  <div class="span6 adjacent well item-list">
     <h4>Floorplan</h4>
-    <ul class="well-out">
-      <li>
-        <span class="item-total">{{ dashboardData.ApprovedFloorplans }}</span>
-        <span>Approved ({{ dashboardData.ApprovedFloorplanOutstandingAmount | currency }})</span>
-      </li>
-      <li>
-        <span class="item-total">{{ dashboardData.FloorplansAwaitingTitle }}</span>
-        <span>Awaiting Titles ({{ dashboardData.FloorplansAwaitingTitleOutstandingAmount | currency }})</span>
-      </li>
-      <li>
-        <span class="item-total">{{ dashboardData.PendingFloorplans }}</span>
-        <span>Pending ({{ dashboardData.PendingFloorplansOutstandingAmount | currency }})</span>
-      </li>
-    </ul>
+    <div class="well-out">
+      <table>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.ApprovedFloorplans }}</span></td>
+          <td class="fl-label">Approved ({{ dashboardData.ApprovedFloorplanOutstandingAmount | currency }})</td>
+        </tr>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.FloorplansAwaitingTitle }}</span></td>
+          <td class="fl-label">Awaiting Titles ({{ dashboardData.FloorplansAwaitingTitleOutstandingAmount | currency }})</td>
+        </tr>
+        <tr>
+          <td><span class="item-total">{{ dashboardData.PendingFloorplans }}</span></td>
+          <td class="fl-label">Pending ({{ dashboardData.PendingFloorplansOutstandingAmount | currency }})</td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="span5 adjacent well">
     <h4>Most Recent Disbursements</h4>

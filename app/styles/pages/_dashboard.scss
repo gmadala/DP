@@ -110,13 +110,15 @@
   }
 }
 
-.floorplan {
-  ul {
+.item-list {
+  tr td {
     color: #555;
-    margin: 0;
+    vertical-align: middle;
+    padding-bottom: 5px;
 
-    li {
-      height: 28px;
+    &.fl-label {
+      line-height: 1.5;
+      padding: 3px 0 5px 10px;
     }
   }
 }
