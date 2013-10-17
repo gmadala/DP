@@ -1,18 +1,20 @@
 {
   "Success": true,
   "Message": null,
-  "Data": [
-    {
-      "QuestionId": 1,
-      "QuestionText": "What is the name of your favorite movie?"
-    },
-    {
-      "QuestionId": 2,
-      "QuestionText": "What is your favorite book?"
-    },
-    {
-      "QuestionId": 3,
-      "QuestionText": "What is your favorite song?"
-    }
-  ]
+  "Data": {
+    "List": [
+      {
+        "QuestionId": 1,
+        "QuestionText": "What is the name of your favorite movie?"
+      },
+      {
+        "QuestionId": 2,
+        "QuestionText": "What is your favorite book?"
+      },
+      {
+        "QuestionId": 3,
+        "QuestionText": "What is your favorite song?"
+      }
+    ]
+  }
 }

@@ -35,20 +35,22 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       saveSecurityAnswersAndEmail: noop
     };
 
-    userData = [
-      {
-        "QuestionId": 1,
-        "QuestionText": "What is the name of your favorite movie?"
-      },
-      {
-        "QuestionId": 2,
-        "QuestionText": "What is your favorite book?"
-      },
-      {
-        "QuestionId": 3,
-        "QuestionText": "What is your favorite song?"
-      }
-    ];
+    userData = {
+      "List": [
+        {
+          "QuestionId": 1,
+          "QuestionText": "What is the name of your favorite movie?"
+        },
+        {
+          "QuestionId": 2,
+          "QuestionText": "What is your favorite book?"
+        },
+        {
+          "QuestionId": 3,
+          "QuestionText": "What is your favorite song?"
+        }
+      ]
+    };
 
     UserMock = {
       getSecurityQuestions: function() {

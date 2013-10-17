@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
     var securityQuestions;
 
     User.getSecurityQuestions().then(function(questions){
-      securityQuestions = questions;
+      securityQuestions = questions.List;
     });
 
     $scope.questions = [
