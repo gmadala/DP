@@ -2,6 +2,13 @@
 
 angular.module('nextgearWebApp')
   .factory('Dashboard', function ($q, $filter, api) {
+
+    var prv = {
+      getReceiptURL: function (transactionId) {
+        return api.contentLink('/receipt/view/' + transactionId);
+      }
+    };
+
     return {
       fetchDealerDashboard: function (startDate, endDate) {
         startDate = api.toShortISODate(startDate);
@@ -25,6 +32,11 @@ angular.module('nextgearWebApp')
                 { color: '#54BD45', value: result.AvailableCredit }
               ]
             };
+
+            // inserting view receipt URLs
+            angular.forEach(result.Receipts, function(receipt) {
+              receipt.$receiptURL = prv.getReceiptURL(receipt.FinancialTransactionId);
+            });
 
             // calculate .paymentChartData
             var scheduledPaymentAmount = result.ScheduledPayments.reduce(function (prev, current) {

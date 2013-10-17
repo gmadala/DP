@@ -269,7 +269,7 @@
           <td>#{{ receipt.ReceiptNumber }}</td>
           <td> <strong>{{ receipt.ReceiptAmount | currency }} <strong></td>
           <td>
-            <a ng-href="#/home/receipts?search={{ receipt.ReceiptNumber }}">View</a>
+            <a ng-href="{{ receipt.$receiptURL }}" target="_blank">View</a>
           </td>
         </tr>
       </table>
