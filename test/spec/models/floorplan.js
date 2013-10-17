@@ -206,7 +206,7 @@ describe('Model: Floorplan', function () {
       floorplan.search(defaultCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('FlooringDate');
-      expect(callParams.OrderDirection).toBe('DESC');
+      expect(callParams.OrderByDirection).toBe('DESC');
     });
 
     it('should provide a page size', function () {

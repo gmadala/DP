@@ -75,7 +75,7 @@ angular.module('nextgearWebApp')
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,
             OrderBy: 'FlooringDate',
-            OrderDirection: 'DESC',
+            OrderByDirection: 'DESC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM
           };
