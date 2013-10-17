@@ -70,7 +70,7 @@ angular.module('nextgearWebApp')
             SearchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
             SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
             SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
-            SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
+            SearchHasNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
             // default values for un-set dates may need adjusted during API integration
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,

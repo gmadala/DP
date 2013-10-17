@@ -298,7 +298,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but pending + title + paid flags to false for PENDING filter', function () {
@@ -311,7 +311,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but denied + title + paid flags to false for DENIED filter', function () {
@@ -324,7 +324,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + paid filter flags to false for APPROVED filter', function () {
@@ -337,7 +337,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + paid flags to false for COMPLETED filter', function () {
@@ -350,7 +350,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but pending + title + not-paid flags to false for PENDING_NOT_PAID filter', function () {
@@ -363,7 +363,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but denied + title + not-paid flags to false for DENIED_NOT_PAID filter', function () {
@@ -376,7 +376,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + yes-paid flags to false for APPROVED_PAID filter', function () {
@@ -389,7 +389,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + not-paid flags to false for APPROVED_NOT_PAID filter', function () {
@@ -402,7 +402,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + yes-paid flags to false for COMPLETED_PAID filter', function () {
@@ -415,7 +415,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + not-paid flags to false for COMPLETED_NOT_PAID filter', function () {
@@ -428,7 +428,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set yes-title and not-paid flags to false for NO_TITLE_PAID filter', function () {
@@ -441,7 +441,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
   });
