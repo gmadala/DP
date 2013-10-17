@@ -9,9 +9,10 @@ select {
   font-size: 13px;
   -webkit-user-select: none;
 
-  &:focus {
+  &:focus, &:invalid, &:focus:invalid, &:focus:invalid:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     outline: 0;
+    color: $brand-light;
     border-color: $input-border;
   }
 }
