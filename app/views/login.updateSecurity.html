@@ -41,8 +41,8 @@
               <div class="control-group" ng-show="$parent.updateSecurity[question.n]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
-                  <input type="text" ng-name="question.n+'_res'" ng-model="$parent.updateSecurity[question.n+'_res']" required />
-                  <label ng-for="question.n+_res" class="form-error" ng-show="!$parent.updateSecurity[question.n+'_res']">Please enter an answer to the selected security question. </label>
+                  <input type="text" name="{{question.n}}_res" ng-model="$parent.updateSecurity[question.n+'_res']" required />
+                  <label for="{{question.n}}_res'" class="form-error" ng-show="!$parent.updateSecurity[question.n+'_res']">Please enter an answer to the selected security question. </label>
                 </div>
               </div>
 
