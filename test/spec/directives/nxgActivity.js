@@ -8,14 +8,17 @@ describe('Directive: nxgActivity', function () {
     status,
     httpBackend,
     http,
-    timeout;
+    timeout,
+    user;
 
-  beforeEach(inject(function ($rootScope, $compile, $http, $httpBackend, $timeout, _status_) {
+  beforeEach(inject(function ($rootScope, $compile, $http, $httpBackend, $timeout, _status_, User) {
     status = _status_;
     httpBackend = $httpBackend;
     http = $http;
     scope = $rootScope;
     timeout = $timeout;
+    user = User;
+    user.isLoggedIn = function(){ return true; };
 
     element = angular.element('<div nxg-activity></div>');
     element = $compile(element)($rootScope);
