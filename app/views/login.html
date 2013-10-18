@@ -14,10 +14,20 @@
         <div class="well-out">
           <form class="login-form" name="loginForm">
             <label for="credUsername">Username:</label>
-            <input type="text" ng-model="credentials.username" id="credUsername" name="credUsername" required />
+            <input type="text"
+                   ng-model="credentials.username"
+                   id="credUsername"
+                   name="credUsername"
+                   required
+                   nxg-enter="authenticate()" />
 
             <label for="credPassword">Password:</label>
-            <input type="password" ng-model="credentials.password" id="credPassword" name="credPassword" required />
+            <input type="password"
+                   ng-model="credentials.password"
+                   id="credPassword"
+                   name="credPassword"
+                   required
+                   nxg-enter="authenticate()" />
 
             <p class="form-error" ng-show="showLoginError">{{ errorMsg }}</p>
           </form>
