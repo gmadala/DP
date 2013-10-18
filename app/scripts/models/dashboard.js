@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Dashboard', function ($q, $filter, api) {
+  .factory('Dashboard', function ($q, $filter, api, moment) {
 
     var prv = {
       getReceiptURL: function (transactionId) {
@@ -133,6 +133,10 @@ angular.module('nextgearWebApp')
       },
 
       fetchFloorplanChartData: function (range) {
+        if (!angular.isNumber(range) || range < 0 || range > 2 || Math.floor(range) !== range) {
+          throw 'Invalid range for /floorplan/getChartData/, must be int in range 0-2';
+        }
+
         return api.request('GET', '/Floorplan/getChartData/' + range).then(
           function (response) {
 
@@ -149,10 +153,38 @@ angular.module('nextgearWebApp')
               ]
             };
 
+            // ensure data points are ordered along the X axis
+            var points = _.sortBy(response.Points, 'X');
+
+            // calculate the X axis label for each point
+            // input: [0, 1, 2] (X values are indices where highest value represents current month/week/day)
+            // result: ["2 units before now", "1 unit before now", "now"] (unit & format varies based on range)
+            var nowValue = points[points.length - 1].X,
+              now, stepUnit, fmt;
+
+            if (range === 0) {
+              stepUnit = 'day'; // days in week
+              fmt = 'ddd'; // Sun, Mon...
+            } else if (range === 1) {
+              stepUnit = 'week'; // weeks in month
+              fmt = 'MMM DD'; // Sep 29, Oct 6...
+            } else if (range === 2) {
+              stepUnit = 'month'; // months in year
+              fmt = 'MMM \'YY'; // Jan '13, Feb '13...
+            }
+
+            now = moment().startOf(stepUnit);
+
+            angular.forEach(points, function (point) {
+              var stepsBeforeNow = nowValue - point.X,
+                then = now.clone().subtract(stepUnit + 's', stepsBeforeNow);
+              point.$label = then.format(fmt);
+            });
+
             _.each(
-              response.Points,
+              points,
               function (point) {
-                  result.labels.push(point.X);
+                  result.labels.push(point.$label);
                   result.datasets[0].data.push(point.Y);
                 }
             );

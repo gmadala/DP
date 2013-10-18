@@ -256,39 +256,70 @@ describe('Model: dashboard', function () {
 
   describe('fetchFloorplanChartData method', function () {
 
+    var clock;
+
     beforeEach(function () {
       httpBackend.whenGET(/\/Floorplan\/getChartData\/\d$/).respond({
         Success: true,
         Message: null,
         Data: {
-          Range: 0,
+          Range: "Something",
           Points: [
             {
-              X: 'a',
-              Y: 1
+              X: 1,
+              Y: 4
             },
             {
-              X: 'b',
-              Y: 2
+              X: 0,
+              Y: 8
+            },
+            {
+              X: 2,
+              Y: 5
             }
           ]
         }
       });
+
+      clock = sinon.useFakeTimers(moment([2014, 2, 31, 22, 19]).valueOf(), 'Date'); // Mon, March 31, 2014
+    });
+
+    afterEach(function () {
+      clock.restore();
     });
 
     it('should call the expected endpoint with the provided range value', function () {
-      httpBackend.expectGET('/Floorplan/getChartData/8');
-      dashboard.fetchFloorplanChartData(8);
+      httpBackend.expectGET('/Floorplan/getChartData/2');
+      dashboard.fetchFloorplanChartData(2);
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should return a promise for the expected chart data format', function () {
+    it('should throw an error if an invalid range is provided', function () {
+      expect(function () {
+        dashboard.fetchFloorplanChartData(3);
+      }).toThrow();
+
+      expect(function () {
+        dashboard.fetchFloorplanChartData(-2);
+      }).toThrow();
+
+      expect(function () {
+        dashboard.fetchFloorplanChartData(2.145);
+      }).toThrow();
+
+      expect(function () {
+        dashboard.fetchFloorplanChartData();
+      }).toThrow();
+
+      expect(function () {
+        dashboard.fetchFloorplanChartData('foo');
+      }).toThrow();
+    });
+
+    it('should return a promise for the expected chart data structure', function () {
       dashboard.fetchFloorplanChartData(0).then(
         function (result) {
           expect(angular.isArray(result.labels)).toBe(true);
-          expect(result.labels.length).toBe(2);
-          expect(result.labels[0]).toBe('a');
-          expect(result.labels[1]).toBe('b');
 
           expect(angular.isArray(result.datasets)).toBe(true);
           expect(result.datasets.length).toBe(1);
@@ -296,9 +327,54 @@ describe('Model: dashboard', function () {
           expect(result.datasets[0].strokeColor).toBeDefined();
 
           expect(angular.isArray(result.datasets[0].data)).toBe(true);
-          expect(result.datasets[0].data.length).toBe(2);
-          expect(result.datasets[0].data[0]).toBe(1);
-          expect(result.datasets[0].data[1]).toBe(2);
+        }
+      );
+      httpBackend.flush();
+    });
+
+    it('should make the data items the Y values, sorted by X value', function () {
+      dashboard.fetchFloorplanChartData(0).then(
+        function (result) {
+          expect(result.datasets[0].data.length).toBe(3);
+          expect(result.datasets[0].data[0]).toBe(8);
+          expect(result.datasets[0].data[1]).toBe(4);
+          expect(result.datasets[0].data[2]).toBe(5);
+        }
+      );
+      httpBackend.flush();
+    });
+
+    it('should create labels as days up to the current day, in week mode', function () {
+      dashboard.fetchFloorplanChartData(0).then(
+        function (result) {
+          expect(result.labels.length).toBe(3);
+          expect(result.labels[0]).toBe('Sat');
+          expect(result.labels[1]).toBe('Sun');
+          expect(result.labels[2]).toBe('Mon');
+        }
+      );
+      httpBackend.flush();
+    });
+
+    it('should create labels as weeks (dated by Sundays) up to the current week, in month mode', function () {
+      dashboard.fetchFloorplanChartData(1).then(
+        function (result) {
+          expect(result.labels.length).toBe(3);
+          expect(result.labels[0]).toBe('Mar 16');
+          expect(result.labels[1]).toBe('Mar 23');
+          expect(result.labels[2]).toBe('Mar 30');
+        }
+      );
+      httpBackend.flush();
+    });
+
+    it('should create labels as months (with short year) up to the current month, in year mode', function () {
+      dashboard.fetchFloorplanChartData(2).then(
+        function (result) {
+          expect(result.labels.length).toBe(3);
+          expect(result.labels[0]).toBe('Jan \'14');
+          expect(result.labels[1]).toBe('Feb \'14');
+          expect(result.labels[2]).toBe('Mar \'14');
         }
       );
       httpBackend.flush();
