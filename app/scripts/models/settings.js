@@ -5,9 +5,9 @@ angular.module('nextgearWebApp')
 
     var prv = {
       getQuestionText: function(id, questions) {
-        for (var i = 0; i < questions.List.length; i++) {
-          if (questions.List[i].QuestionId === id) {
-            return questions.List[i].QuestionText;
+        for (var i = 0; i < questions.length; i++) {
+          if (questions[i].QuestionId === id) {
+            return questions[i].QuestionText;
           }
         }
         return '';
@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
               var q = settings.SecurityQuestions[i];
               q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
             }
-            settings.AllSecurityQuestions = settings.SecurityQuestions;
+            settings.AllSecurityQuestions = questions;
 
             for (i = 0; i < settings.Addresses.length; i++) {
               var addr = settings.Addresses[i];

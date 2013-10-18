@@ -46,7 +46,11 @@ angular.module('nextgearWebApp')
 
       getSecurityQuestions: function() {
         if (!securityQuestions) {
-          securityQuestions = api.request('GET', '/UserAccount/securityquestions');
+          securityQuestions = api.request('GET', '/UserAccount/securityquestions').then(
+            function(results) {
+              return results.List;
+            }
+          );
         }
         return securityQuestions;
       },
