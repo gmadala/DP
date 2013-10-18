@@ -248,6 +248,12 @@ input[type="radio"]:disabled {
   }
 }
 
+.nxg-fancy-radios .group-label {
+  padding-right: 15px;
+  vertical-align: bottom;
+  line-height: 11px;
+}
+
 #foo:checked::before,
 .nxg-fancy-radios input[type="radio"] {
     position:absolute;

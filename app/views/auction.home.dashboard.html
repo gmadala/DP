@@ -58,6 +58,7 @@
     <h4>Volume of Nextgear Floorplans</h4>
     <div class="well-out">
       <div class="row nxg-fancy-radios">
+        <label class="group-label">Past:</label>
 
         <input type="radio" class="first" name="year" id="year" value="year" ng-model="selectedFloorplanChart" placeholder="Ten Best Movers">
         <label for="year" id="year-label"></label>
@@ -79,7 +80,6 @@
               nxg-chart-data="chartData"
               nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }">
       </canvas>
-      <span class="scale-description-x">Months this year</span>
     </div>
   </div>
 </div>
