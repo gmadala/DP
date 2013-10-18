@@ -189,6 +189,7 @@ angular.module('nextgearWebApp')
           }
         };
 
+
         /** BUSINESS SETTINGS **/
         $scope.business = {
           data: {
