@@ -1,7 +1,7 @@
 <div class="container-line">
   <div class="container-fluid">
     <p class="message">
-        Do you have <a href="http://get.adobe.com/reader/">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
+        Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
     </p>
 
     <div class="row-fluid two-col">
@@ -13,13 +13,13 @@
                       <a ng-href="{{ feeScheduleUrl }}" target="_blank">Rates and Fees</a>
                   </li>
                   <li ng-repeat="doc in documents">
-                      <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
+                      <a ng-href="{{ doc.url }}" target="_blank">{{ doc.title }}</a>
                   </li>
               </ul>
               <h3 class="subtitle">Collateral Protection Program</h3>
               <ul class="unstyled">
                   <li ng-repeat="doc in collateralProtection">
-                      <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
+                      <a ng-href="{{ doc.url }}" target="_blank">{{ doc.title }}</a>
                   </li>
               </ul>
             </div>
@@ -29,7 +29,7 @@
             <h4>NextGear Mobile Apps</h4>
 
             <div class="well-out">
-              <p>Manage your business with NextGear on the go. Lorem ipsum dolors set amet.</p>
+              <p>Manage your business with NextGear on the go.</p>
               <a href="#">Download NextGear Unplugged Mobile iOS</a> <br/>
               <a href="#">Download NextGear Unplugged Mobile Android</a>
             </div>
