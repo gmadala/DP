@@ -457,11 +457,19 @@ describe('Model: Floorplan', function () {
       expect(out.$titleURL).not.toBeDefined();
     });
 
-    it('should add the expected property based on user business number and item stock number', function () {
+    it('should use the current user business number + item stock number if no buyer biz # present', function () {
       var out = floorplan.addTitleURL({
         StockNumber: 'foo'
       });
       expect(out.$titleURL).toBe('/floorplan/title/123-foo/0');
+    });
+
+    it('should use the buyer business number + item stock number if buyer biz # is present', function () {
+      var out = floorplan.addTitleURL({
+        StockNumber: 'foo',
+        BuyerBusinessNumber: '777'
+      });
+      expect(out.$titleURL).toBe('/floorplan/title/777-foo/0');
     });
 
   });
