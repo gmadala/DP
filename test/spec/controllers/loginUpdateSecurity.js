@@ -6,7 +6,8 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
   var settingsData, SettingsMock, scope, LoginUpdateSecurityCtrl, userData, UserMock, locationMock;
 
-  function noop() {}
+  function noop() {
+  }
 
   beforeEach(inject(function($rootScope, $controller) {
 
@@ -35,22 +36,20 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       saveSecurityAnswersAndEmail: noop
     };
 
-    userData = {
-      "List": [
-        {
-          "QuestionId": 1,
-          "QuestionText": "What is the name of your favorite movie?"
-        },
-        {
-          "QuestionId": 2,
-          "QuestionText": "What is your favorite book?"
-        },
-        {
-          "QuestionId": 3,
-          "QuestionText": "What is your favorite song?"
-        }
-      ]
-    };
+    userData = [
+      {
+        "QuestionId": 1,
+        "QuestionText": "What is the name of your favorite movie?"
+      },
+      {
+        "QuestionId": 2,
+        "QuestionText": "What is your favorite book?"
+      },
+      {
+        "QuestionId": 3,
+        "QuestionText": "What is your favorite song?"
+      }
+    ];
 
     UserMock = {
       getSecurityQuestions: function() {
@@ -92,7 +91,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
   describe('questions', function() {
 
-    it('it should be defined', function () {
+    it('it should be defined', function() {
       expect(scope.questions).toBeDefined();
     });
 
