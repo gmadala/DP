@@ -103,8 +103,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
   describe('Payout modal controller', function () {
 
-    var scope, payoutCtrl, paymentsMock, dialogMock,
-      flushPayoutRequestSuccess, flushPayoutRequestError;
+    var scope, payoutCtrl, paymentsMock, dialogMock, userMock, accts,
+      flushPayoutRequestSuccess, flushPayoutRequestError, initCtrl;
 
     beforeEach(inject(function ($rootScope, $controller) {
       paymentsMock = {
@@ -126,35 +126,44 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         close: angular.noop
       };
 
-      scope = $rootScope.$new();
-      payoutCtrl = $controller('PayoutModalCtrl', {
-        $scope: scope,
-        dialog: dialogMock,
-        funds: {
-          balance: 1,
-          available: 2
+      accts = [
+        {
+          BankAccountName: 'name1',
+          BankAccountId: 'id1'
         },
-        User: {
-          getStatics: function () {
-            return {
-              bankAccounts: {
-                id1: 'name1',
-                id2: 'name2'
-              }
-            };
-          }
-        },
-        Payments: paymentsMock
-      });
+        {
+          BankAccountName: 'name2',
+          BankAccountId: 'id2'
+        }
+      ];
+
+      userMock = {
+        getStatics: function () {
+          return {
+            bankAccounts: accts
+          };
+        }
+      };
+
+      initCtrl = function () {
+        scope = $rootScope.$new();
+        payoutCtrl = $controller('PayoutModalCtrl', {
+          $scope: scope,
+          dialog: dialogMock,
+          funds: {
+            balance: 1,
+            available: 2
+          },
+          User: userMock,
+          Payments: paymentsMock
+        });
+      };
+      initCtrl();
 
     }));
 
     it('should attach the user model to the scope', function () {
-      var accountMock = {
-        id1: 'name1',
-        id2: 'name2'
-      };
-      expect(angular.equals(scope.user.getStatics().bankAccounts, accountMock)).toBe(true);
+      expect(scope.user).toBe(userMock);
     });
 
     it('should attach the funds object to the scope', function () {
@@ -163,6 +172,31 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         available: 2
       };
       expect(angular.equals(scope.funds, fundsMock)).toBe(true);
+    });
+
+    it('should attach a selections model to the scope', function () {
+      expect(scope.selections).toBeDefined();
+      expect(scope.selections.amount).toBeDefined();
+      expect(scope.selections.account).toBeDefined();
+    });
+
+    it('should default amount to null', function () {
+      expect(scope.selections.amount).toBe(null);
+    });
+
+    it('should default account to null if there is more than one', function () {
+      expect(scope.selections.account).toBe(null);
+    });
+
+    it('should default account to the account if there is only one', function () {
+      var myOnlyAcct = {
+        BankAccountName: 'name2',
+        BankAccountId: 'id2'
+      };
+      accts = [ myOnlyAcct ];
+      initCtrl();
+      scope.$apply();
+      expect(scope.selections.account).toBe(myOnlyAcct);
     });
 
     describe('submit function', function () {
