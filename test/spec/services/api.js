@@ -6,10 +6,11 @@ describe('Service: api', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var api, http;
-  beforeEach(inject(function (_api_, $http) {
+  var api, http, rootScope;
+  beforeEach(inject(function (_api_, $http, $rootScope) {
     api = _api_;
     http = $http;
+    rootScope = $rootScope;
   }));
 
   describe('setAuthToken, resetAuthToken and hasAuthToken functions', function () {
@@ -120,6 +121,7 @@ describe('Service: api', function () {
         Data: {},
         Message: '401'
       });
+      spyOn(rootScope, '$broadcast').andReturn(true)
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.setAuthToken('foo');

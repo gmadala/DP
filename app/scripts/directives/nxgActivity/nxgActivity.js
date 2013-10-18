@@ -7,12 +7,12 @@ angular.module('nextgearWebApp')
       replace: true,
       restrict: 'A',
       scope: true,
-      controller: function ($scope, $http, $timeout, status, User) {
+      controller: function ($scope, $http, $timeout, status) {
         var showing,
           pendingShow;
 
         $scope.showIndicator = function () {
-          var canShow = status.isShown() && $http.pendingRequests.length > 0 && User.isLoggedIn();
+          var canShow = status.isShown() && $http.pendingRequests.length > 0;
 
           if (!showing && !pendingShow && canShow) {
             pendingShow = $timeout(function () {
