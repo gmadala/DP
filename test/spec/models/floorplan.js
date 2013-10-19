@@ -206,7 +206,7 @@ describe('Model: Floorplan', function () {
       floorplan.search(defaultCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('FlooringDate');
-      expect(callParams.OrderDirection).toBe('DESC');
+      expect(callParams.OrderByDirection).toBe('DESC');
     });
 
     it('should provide a page size', function () {
@@ -298,7 +298,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but pending + title + paid flags to false for PENDING filter', function () {
@@ -311,7 +311,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but denied + title + paid flags to false for DENIED filter', function () {
@@ -324,7 +324,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + paid filter flags to false for APPROVED filter', function () {
@@ -337,7 +337,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + paid flags to false for COMPLETED filter', function () {
@@ -350,7 +350,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but pending + title + not-paid flags to false for PENDING_NOT_PAID filter', function () {
@@ -363,7 +363,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but denied + title + not-paid flags to false for DENIED_NOT_PAID filter', function () {
@@ -376,7 +376,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + yes-paid flags to false for APPROVED_PAID filter', function () {
@@ -389,7 +389,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but approved + title + not-paid flags to false for APPROVED_NOT_PAID filter', function () {
@@ -402,7 +402,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + yes-paid flags to false for COMPLETED_PAID filter', function () {
@@ -415,7 +415,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set all but completed + title + not-paid flags to false for COMPLETED_NOT_PAID filter', function () {
@@ -428,7 +428,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).toBe('false');
       expect(callParams.SearchUnPaid).not.toBe('false');
       expect(callParams.SearchHasTitle).not.toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
     it('should set yes-title and not-paid flags to false for NO_TITLE_PAID filter', function () {
@@ -441,7 +441,7 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchPaid).not.toBe('false');
       expect(callParams.SearchUnPaid).toBe('false');
       expect(callParams.SearchHasTitle).toBe('false');
-      expect(callParams.SearchNoTitle).not.toBe('false');
+      expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
   });
@@ -457,11 +457,68 @@ describe('Model: Floorplan', function () {
       expect(out.$titleURL).not.toBeDefined();
     });
 
-    it('should add the expected property based on user business number and item stock number', function () {
+    it('should use the current user business number + item stock number if no buyer biz # present', function () {
       var out = floorplan.addTitleURL({
         StockNumber: 'foo'
       });
       expect(out.$titleURL).toBe('/floorplan/title/123-foo/0');
+    });
+
+    it('should use the buyer business number + item stock number if buyer biz # is present', function () {
+      var out = floorplan.addTitleURL({
+        StockNumber: 'foo',
+        BuyerBusinessNumber: '777'
+      });
+      expect(out.$titleURL).toBe('/floorplan/title/777-foo/0');
+    });
+
+  });
+
+  describe('setTitleInfo method', function () {
+
+    var sentData;
+
+    beforeEach(function () {
+      httpBackend.whenPOST('/floorplan/EditTitleNumberAndState')
+        .respond(function (method, url, data) {
+          // capture the request data that was sent for examination
+          sentData = angular.fromJson(data);
+          return [200, {Success: true, Data: 'OK'}, {}];
+        });
+    });
+
+    it('should POST to the correct endpoint', function () {
+      httpBackend.expectPOST('/floorplan/EditTitleNumberAndState');
+      floorplan.setTitleInfo('floorplanId', 'titleNum', {StateId: 'CO'});
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send the floorplan id', function () {
+      floorplan.setTitleInfo('floorplanId', 'titleNum', {StateId: 'CO'});
+      httpBackend.flush();
+      expect(sentData.FloorplanId).toBe('floorplanId');
+    });
+
+    it('should send the title number', function () {
+      floorplan.setTitleInfo('floorplanId', 'titleNum', {StateId: 'CO'});
+      httpBackend.flush();
+      expect(sentData.TitleNumber).toBe('titleNum');
+    });
+
+    it('should send the state id', function () {
+      floorplan.setTitleInfo('floorplanId', 'titleNum', {StateName: 'Colorado', StateId: 'CO'});
+      httpBackend.flush();
+      expect(sentData.TitleStateId).toBe('CO');
+    });
+
+    it('should return a promise for the result', function () {
+      var promise = floorplan.setTitleInfo('floorplanId', 'titleNum', {StateId: 'CO'}),
+        success = jasmine.createSpy('success');
+      expect(promise).toBeDefined();
+      expect(angular.isFunction(promise.then)).toBe(true);
+      promise.then(success);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalledWith('OK');
     });
 
   });

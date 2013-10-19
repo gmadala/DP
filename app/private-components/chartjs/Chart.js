@@ -5,6 +5,7 @@ Last commit at time of download was: July 11, 2013 - 9ed51fe353fbe77e407990554c6
 https://github.com/pksjce/Chart.js
 
 Slightly modified by Mikey McOrmond at Effective UI to adjust label alignment.
+And again by Alexandra Atzl at EUI to force graph axes
 
 */
 
@@ -1068,8 +1069,7 @@ window.Chart = function(context){
 
 				ctx.stroke();
         // "-5" is the right side padding needed for right justified text.
-				ctx.fillText(data.labels[j],yAxisPosX - 5,xAxisPosY - ((j+1) * valueHop - 22));
-
+				ctx.fillText(data.labels[j],yAxisPosX - 5,xAxisPosY - ((j+1) * valueHop) + ((data.datasets.length*barWidth)/2));
 			}
 
 			//Y axis
@@ -1092,10 +1092,10 @@ window.Chart = function(context){
 				ctx.moveTo(yAxisPosX + (i) * scaleHop, xAxisPosY);
 
 				//Check i isnt 0, so we dont go over the Y axis twice.
-					ctx.lineWidth = config.scaleGridLineWidth;
-					ctx.strokeStyle = config.scaleGridLineColor;
-          // "-20" is the top-padding needed to vertically center labels with bars.
-					ctx.lineTo(yAxisPosX + (i) * scaleHop, height - yAxisLength -20);
+				ctx.lineWidth = config.scaleGridLineWidth;
+				ctx.strokeStyle = config.scaleGridLineColor;
+
+				ctx.lineTo(yAxisPosX + (i) * scaleHop, height - yAxisLength);
 				ctx.stroke();
 			}
 
@@ -1107,7 +1107,7 @@ window.Chart = function(context){
 					ctx.fillStyle = data.datasets[i].fillColor;
 					ctx.strokeStyle = data.datasets[i].strokeColor;
 				for (var j=0; j<data.datasets[i].data.length; j++){
-					var barOffset = xAxisPosY -20 - (config.barValueSpacing + valueHop*j + barWidth*i + config.barDatasetSpacing*i + config.barStrokeWidth*i);
+					var barOffset = xAxisPosY - barWidth - (config.barValueSpacing + valueHop*j + barWidth*i + config.barDatasetSpacing*i + config.barStrokeWidth*i);
 
 					ctx.beginPath();
 					ctx.moveTo(yAxisPosX, barOffset);

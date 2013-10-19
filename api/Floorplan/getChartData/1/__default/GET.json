@@ -1,0 +1,25 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "Range": "Month",
+    "Points": [
+      {
+        "X": 0,
+        "Y": 8
+      },
+      {
+        "X": 1,
+        "Y": 46
+      },
+      {
+        "X": 2,
+        "Y": 22
+      },
+      {
+        "X": 3,
+        "Y": 17
+      }
+    ]
+  }
+}

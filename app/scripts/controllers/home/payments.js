@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User) {
 
     $scope.isCollapsed = true;
 
@@ -50,6 +50,10 @@ angular.module('nextgearWebApp')
       // search means "start from the beginning with current criteria"
       $scope.payments.paginator = null;
       $scope.payments.results.length = 0;
+
+      // commit the proposed search criteria
+      $scope.payments.searchCriteria = angular.copy($scope.payments.proposedSearchCriteria);
+
       $scope.payments.fetchNextResults();
     };
 
@@ -74,7 +78,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.resetSearch = function (initialFilter) {
-      $scope.payments.searchCriteria = {
+      $scope.payments.proposedSearchCriteria = {
         query: null,
         startDate: null,
         endDate: null,
@@ -101,6 +105,8 @@ angular.module('nextgearWebApp')
     );
 
     var refreshCanPayNow = function () {
+      if( !User.isLoggedIn() ) { return; }
+
       Payments.canPayNow().then(
         function (result) {
           $scope.canPayNow = result;
@@ -111,6 +117,7 @@ angular.module('nextgearWebApp')
           $scope.canPayNow = false;
           $scope.canPayNowLoaded = false;
         });
+
       $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
     refreshCanPayNow();

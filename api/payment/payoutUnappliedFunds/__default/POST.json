@@ -1,4 +1,10 @@
 {
   "Success": true,
-  "Message": "Another payout request is already pending. Please contact NextGear if you need to modify a prior request."
+  "Message": "",
+  "Data": {
+    "BalanceBefore": 7000,
+    "PayoutAmount": 1000,
+    "BalanceAfter": 6000,
+    "BankAccountId": "account123"
+  }
 }

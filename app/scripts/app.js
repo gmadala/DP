@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -127,7 +127,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('auction_home.sellerfloorplan', {
         url: '/sellerfloorplan',
         templateUrl: 'views/auction.home.sellerfloorplan.html',
-        controller: 'AuctionSellerFloorplanCtrl',
+        controller: 'FloorplanCtrl',
         isAuctionState: true
       })
       .state('auction_reports', {
@@ -142,6 +142,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'AuctionDocumentsCtrl',
         isAuctionState: true
       })
+      .state('auction_settings', {
+        url: '/act/settings',
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        isAuctionState: true
+      })
     ;
 
   })
@@ -150,25 +156,34 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-        var isDealer = User.isDealer();
 
-        if (!User.isLoggedIn() && !toState.allowAnonymous) {
-          // not logged in, redirect to login screen
-          $location.path('/login');
-        }
-        if (User.infoLoaded()) {
-          if ((toState.isAuctionState && isDealer) || !(toState.isAuctionState || isDealer) || toState.url === '') {
+        if (!toState.allowAnonymous) {
+          // enforce rules about what states certain users can see
+          var isDealer = User.isDealer();
+          if (!User.isLoggedIn()) {
+            // not logged in; redirect to login screen
+            event.preventDefault();
+            $location.path('/login');
+          } else if (User.showInitialization()) {
+            // not initialized? lets update the security questions
+            $location.path('/login/updateSecurity');
+          } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {
+            // user is trying to access a state that's not appropriate to their role; redirect to their home
+            event.preventDefault();
             $location.path(isDealer ? '/home' : '/act/home');
           }
         }
+
       }
     );
 
     $rootScope.$on('event:redirectToLogin',
       function(){
+        // Nice explicit User reset + dialog closing
         User.reset();
         $dialog.closeAll();
-        $location.path('/login');
+        // ... but really, this will clobber everything and redirect to the login page
+        window.location.reload();
       }
     );
 

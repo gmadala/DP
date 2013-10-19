@@ -32,7 +32,7 @@ angular.module('nextgearWebApp')
           countField = 'SellerCount';
           angular.extend(params, {
             SearchCriteria: query || undefined,
-            OrderDirection: sortDesc ? 'DESC' : 'ASC'
+            OrderByDirection: sortDesc ? 'DESC' : 'ASC'
           });
         }
 

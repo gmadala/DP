@@ -6,10 +6,11 @@ describe('Service: api', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var api, http;
-  beforeEach(inject(function (_api_, $http) {
+  var api, http, rootScope;
+  beforeEach(inject(function (_api_, $http, $rootScope) {
     api = _api_;
     http = $http;
+    rootScope = $rootScope;
   }));
 
   describe('setAuthToken, resetAuthToken and hasAuthToken functions', function () {
@@ -115,7 +116,12 @@ describe('Service: api', function () {
     });
 
     it('should reject the promise with a newly added message service object and reset the auth token on 401', function () {
-      httpBackend.whenGET('/foo').respond(401, 'unauthorized');
+      httpBackend.whenGET('/foo').respond({
+        Success: false,
+        Data: {},
+        Message: '401'
+      });
+      spyOn(rootScope, '$broadcast').andReturn(true)
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.setAuthToken('foo');

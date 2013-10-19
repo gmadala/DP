@@ -36,14 +36,61 @@ angular.module('nextgearWebApp')
         return true;
       },
       saveSuccess: function() {
+        this.data = this.dirtyData;
         this.dirtyData = this.validation = null;
         this.editable = false;
         this.showError = false;
       },
       saveError: function(error) {
-        console.log(error.text);
         this.showError = true;
         this.errorMsg = error.text;
+      },
+      /**
+       * We get a notification object for every notification/delivery_method combination. This function
+       * bundles them up so we get a notification that has a list of delivery methods.
+       */
+      bundleNotifications: function(notifications) {
+
+        var hash = {},
+          bundled = [];
+
+        angular.forEach(notifications, function(n) {
+          var deliveryMethod = {
+            DeliveryMethodId: n.DeliveryMethodId,
+            DeliveryMethodName: n.DeliveryMethodName
+          };
+
+          if (hash[n.NotificationId]) {
+            hash[n.NotificationId].DeliveryMethods.push(deliveryMethod);
+          }
+          else {
+            bundled.push(
+              hash[n.NotificationId] = {
+                NotificationId: n.NotificationId,
+                NotificationName: n.NotificationName,
+                DeliveryMethods: [deliveryMethod]
+              }
+            );
+          }
+        });
+        return bundled;
+      },
+      /**
+       * This does the opposite of bundleNotifications. It flattens bundled notification
+       * objects to be consumed by the model.
+       */
+      flattenNotifications: function(notifications) {
+        var flatList = [];
+        angular.forEach(notifications, function(n) {
+          angular.forEach(n.DeliveryMethods, function(d) {
+            flatList.push({
+              NotificationId: n.NotificationId,
+              DeliveryMethodId: d.DeliveryMethodId,
+              Enabled: !!d.Enabled
+            });
+          });
+        });
+        return flatList;
       }
     };
 
@@ -61,11 +108,15 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() { prv.edit.apply(this); },
-          cancel: function() { prv.cancel.apply(this); },
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
-              var d = this.data = this.dirtyData,
+              var d = this.dirtyData,
                 cleanPhone = d.phone.replace($scope.phonePattern, '$2$4$5$6$7'); // sanitize phone format
 
               this.updateQuestionText(d.questions);
@@ -98,15 +149,17 @@ angular.module('nextgearWebApp')
             var profile = $scope.profile;
             profile.validation = angular.copy($scope.userSettings);
 
-            // check matching passwords
-            if (profile.dirtyData.password !== profile.dirtyData.passwordConfirm) {
-              profile.validation.setPassword.$error.nomatch = true;
-              profile.validation.$valid = false;
-            }
-            // check valid password pattern
-            else if (profile.validation.setPassword.$dirty && !this.validatePasswordPattern(profile.dirtyData.password)) {
-              profile.validation.setPassword.$error.pattern = true;
-              profile.validation.$valid = false;
+            if (profile.dirtyData.password && profile.dirtyData.passwordConfirm) {
+              // check matching passwords
+              if (profile.dirtyData.password !== profile.dirtyData.passwordConfirm) {
+                profile.validation.setPassword.$error.nomatch = true;
+                profile.validation.$valid = false;
+              }
+              // check valid password pattern
+              else if (profile.validation.setPassword.$dirty && !this.validatePasswordPattern(profile.dirtyData.password)) {
+                profile.validation.setPassword.$error.pattern = true;
+                profile.validation.$valid = false;
+              }
             }
             // check all questions have answers
             for (var i = 0; i < profile.dirtyData.questions.length; i++) {
@@ -136,6 +189,7 @@ angular.module('nextgearWebApp')
           }
         };
 
+
         /** BUSINESS SETTINGS **/
         $scope.business = {
           data: {
@@ -145,11 +199,15 @@ angular.module('nextgearWebApp')
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function() { prv.edit.apply(this); },
-          cancel: function() { prv.cancel.apply(this); },
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
-              var d = this.data = this.dirtyData;
+              var d = this.dirtyData;
 
               Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
                 prv.saveSuccess.bind(this),
@@ -183,11 +241,6 @@ angular.module('nextgearWebApp')
             });
           }
         };
-        $scope.$watch('business.dirtyData.enhancedRegistrationEnabled', function(enabled) {
-          if ($scope.business.dirtyData && !enabled) {
-            $scope.business.confirmDisableEnhanced();
-          }
-        });
 
         /** TITLE SETTINGS **/
         $scope.title = {
@@ -202,11 +255,13 @@ angular.module('nextgearWebApp')
             prv.edit.apply(this);
             this.updateAddressSelection();
           },
-          cancel: function() { prv.cancel.apply(this); },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
           save: function() {
             if (prv.save.apply(this)) {
               this.updateAddressSelection();
-              var d = this.data = this.dirtyData;
+              var d = this.dirtyData;
 
               Settings.saveTitleAddress(d.titleAddress.BusinessAddressId).then(
                 prv.saveSuccess.bind(this),
@@ -234,6 +289,80 @@ angular.module('nextgearWebApp')
             return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
           }
         };
+
+        /** NOTIFICATIONS **/
+        $scope.notifications = {
+          data: {
+            selected: prv.bundleNotifications(results.Notifications),
+            available: results.AvailableNotifications
+          },
+          dirtyData: null, // a copy of the data for editing (lazily built)
+          editable: false,
+          edit: function() {
+            prv.edit.apply(this);
+            this.updateAvailableNotification(this.dirtyData);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
+          save: function() {
+            if (prv.save.apply(this)) {
+              this.updateSelectedNotifications(this.dirtyData);
+              Settings.saveNotifications(prv.flattenNotifications(this.dirtyData.available)).then(
+                prv.saveSuccess.bind(this),
+                prv.saveError.bind(this)
+              );
+            }
+          },
+          isDirty: function() {
+            return $scope.notificationSettings.$dirty;
+          },
+          validate: function() {
+            return true;
+            /*nothing can be invalid input*/
+          },
+          updateSelectedNotifications: function(data) {
+            if (data && data.available && data.selected) {
+              var selectedNotifications = [];
+              angular.forEach(data.available, function(notification) {
+                var selectedMethods = [];
+                angular.forEach(notification.DeliveryMethods, function(method) {
+                  if (method.Enabled) {
+                    selectedMethods.push({
+                      DeliveryMethodId: method.DeliveryMethodId,
+                      DeliveryMethodName: method.Name
+                    });
+                  }
+                });
+                if (selectedMethods.length > 0) {
+                  selectedNotifications.push({
+                    NotificationId: notification.NotificationId,
+                    NotificationName: notification.Name,
+                    DeliveryMethods: selectedMethods
+                  });
+                }
+              });
+              data.selected = selectedNotifications;
+            }
+          },
+          updateAvailableNotification: function(data) {
+            var selectionHash = {};
+            // to avoid a performance hit of O(n^4) we extract a hash of all the selected notifications/methods
+            angular.forEach(data.selected, function(selectedNotification) {
+              angular.forEach(selectedNotification.DeliveryMethods, function(selectedMethod) {
+                selectionHash[selectedNotification.NotificationId + '-' + selectedMethod.DeliveryMethodId] = true;
+              });
+            });
+
+            if (data && data.available && data.selected) {
+              angular.forEach(data.available, function(notification) {
+                angular.forEach(notification.DeliveryMethods, function(method) {
+                  method.Enabled = selectionHash[notification.NotificationId + '-' + method.DeliveryMethodId];
+                });
+              });
+            }
+          }
+        };
       },
       function(/*reason*/) {
         $scope.loading = false;
@@ -250,37 +379,6 @@ angular.module('nextgearWebApp')
         return '';
       }
     };
-    //////////////////////////////////
-
-    $scope.notifications = [
-      {
-        'title': 'Weekly Upcoming Payments Report',
-        'types': [
-          {
-            type: 'email',
-            on: true
-          },
-          {
-            type: 'text',
-            on: false
-          }
-        ]
-      },
-
-      {
-        'title': 'Another Notification',
-        'types': [
-          {
-            type: 'text',
-            on: true
-          },
-          {
-            type: 'phone call',
-            on: true
-          }
-        ]
-      }
-    ];
   })
 
   .controller('ConfirmDisableCtrl', function($scope, dialog) {

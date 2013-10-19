@@ -35,13 +35,13 @@ describe('Controller: AuctionDashboardCtrl', function() {
     scope.$apply();
   });
 
-  it('should default selectedFloorplanChart to month', function () {
-    expect(scope.selectedFloorplanChart).toBe('month');
+  it('should default selectedFloorplanChart to year', function () {
+    expect(scope.selectedFloorplanChart).toBe('year');
   });
 
-  it('should call for floorplan chart data by month', function () {
+  it('should call for floorplan chart data by year', function () {
     scope.$apply();
-    expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(1);
+    expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(2);
   });
 
   it('should attach a promise of floorplan chart data results to the scope', function () {
@@ -55,9 +55,9 @@ describe('Controller: AuctionDashboardCtrl', function() {
 
   it('should re-fetch chart data when selectedFloorplanChart changes', function () {
     dashboard.fetchFloorplanChartData.reset();
-    scope.selectedFloorplanChart = 'year';
+    scope.selectedFloorplanChart = 'month';
     scope.$apply();
-    expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(2);
+    expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(1);
 
     dashboard.fetchFloorplanChartData.reset();
     scope.selectedFloorplanChart = 'week';

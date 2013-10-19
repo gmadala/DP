@@ -54,13 +54,20 @@ angular.module('nextgearWebApp')
       );
     };
   })
-  .controller('PayoutModalCtrl', function($scope, $filter, dialog, funds, User, Payments) {
+  .controller('PayoutModalCtrl', function($scope, $filter, dialog, funds, User, Payments, OptionDefaultHelper) {
     $scope.funds = funds;
     $scope.user = User;
     $scope.selections = {
-      amount: undefined,
-      account: undefined
+      amount: null,
+      account: null
     };
+
+    OptionDefaultHelper.create([
+      {
+        scopeSrc: 'user.getStatics().bankAccounts',
+        modelDest: 'account'
+      }
+    ]).applyDefaults($scope, $scope.selections);
 
     $scope.submit = function () {
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display

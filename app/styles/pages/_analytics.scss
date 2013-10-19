@@ -69,6 +69,7 @@
 
   .well .well-out {
     @extend %small;
+    position: relative;
   }
 
   .business-summary {
@@ -103,28 +104,27 @@
     }
   }
 
-  .movers-container {
-    canvas {
-      margin: 1em 0 0 10.5em;
+  table.movers-list {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    width: calc(100% - 348px);
+    height: 320px;
+
+    .rank, .models {
+      @extend %float-l;
     }
 
-    .movers-chart {
-      position: relative;
+    .rank {
+      @extend %align-right;
+      width: 30px;
+      font-size: $large-font-size;
+      padding-right: 7px;
+      vertical-align: middle;
     }
 
-    table {
-      position: absolute;
-      top: 28px;
-      left: -7px;
-      height: 320px;
-
-      tr td:first-child {
-        @extend %align-right;
-        font-size: $large-font-size;
-        padding-right: 7px;
-      }
-    }
     .models {
+      width: calc(100% - 30px);
       font-size: $tiny-font-size;
       line-height: 1.25;
 
@@ -132,13 +132,21 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 104px;
+        width: 135px;
       }
 
       span:last-child {
         @extend %heavy;
       }
     }
+  }
+
+  .movers-chart {
+    position: absolute;
+    top: 58px;
+    right: 10px;
+    overflow: hidden;
+    width: 290px;
   }
 
   .top-auctions-container, .movers-container {

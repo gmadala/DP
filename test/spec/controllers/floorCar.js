@@ -36,7 +36,9 @@ describe('Controller: FloorCarCtrl', function () {
       },
       messageBox: function () {
         return {
-          open: angular.noop
+          open: function () {
+            return $q.when(null);
+          }
         };
       }
     };

@@ -9,9 +9,10 @@ select {
   font-size: 13px;
   -webkit-user-select: none;
 
-  &:focus {
+  &:focus, &:invalid, &:focus:invalid, &:focus:invalid:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     outline: 0;
+    color: $brand-light;
     border-color: $input-border;
   }
 }
@@ -124,8 +125,9 @@ select, .nxg-date-field {
 
 .form-error {
   @extend %small;
+  line-height: $base-line-height;
   color: $error-dark;
-  margin: 5px 0;
+  margin: 10px 0 0;
 }
 
 .nxg-checkbox {
@@ -244,6 +246,12 @@ input[type="radio"]:disabled {
   label {
     display: inline;
   }
+}
+
+.nxg-fancy-radios .group-label {
+  padding-right: 15px;
+  vertical-align: bottom;
+  line-height: 11px;
 }
 
 #foo:checked::before,

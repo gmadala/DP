@@ -1,0 +1,58 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": [
+    {
+      "NotificationId": "e4b6c079-3ae0-4ac4-84bc-0000d56bb2f5",
+      "Name": "Weekly Upcoming Payments",
+      "DeliveryMethods": [
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403d84",
+          "Name": "Email"
+        },
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403000",
+          "Name": "Text"
+        }
+      ]
+    },
+    {
+      "NotificationId": "e4b6c079-3ae0-4ac4-00bc-0474d56bb2f5",
+      "Name": "Overdue Payments",
+      "DeliveryMethods": [
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403d84",
+          "Name": "Email"
+        },
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403000",
+          "Name": "Text"
+        }
+      ]
+    },
+    {
+      "NotificationId": "e4b6c079-3ae0-4004-84bc-0474d56bb2f5",
+      "Name": "Disbursements",
+      "DeliveryMethods": [
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403d84",
+          "Name": "Email"
+        },
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403000",
+          "Name": "Text"
+        }
+      ]
+    },
+    {
+      "NotificationId": "e4b00009-3ae0-4ac4-84bc-0474d56bb2f5",
+      "Name": "Title Received",
+      "DeliveryMethods": [
+        {
+          "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403000",
+          "Name": "Text"
+        }
+      ]
+    }
+  ]
+}

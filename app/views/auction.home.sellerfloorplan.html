@@ -1,62 +1,66 @@
 <div nxg-search
-     title="Floorplan Search"
+     title="Floor Plan Search"
      class="search-form"
      prompt="Enter VIN"
      filter-label="Filter List by Status"
      filter-options="filterOptions"
-     active-criteria="searchCriteria"
+     active-criteria="proposedSearchCriteria"
      on-search="search()"
      on-clear="resetSearch()">
 </div>
 
-<section class="selfloor-list">
-  <ul class="unstyled">
-    <li class="table-list-head">
-      <div class="cell selfloor-descr">Description</div>
-      <div class="cell selfloor-stat">Status</div>
-      <div class="cell selfloor-dates">Dates</div>
-      <div class="cell selfloor-purch">Purchase Amount</div>
-      <div class="cell selfloor-title-st">Title State</div>
-      <div class="cell selfloor-title-loc">Title Location</div>
-      <div class="cell selfloor-buy">Buyer</div>
-      <div class="cell selfloor-id-nums">ID Numbers</div>
-      <div class="cell selfloor-actions">Title</div>
-    </li><!-- end .table-list-head -->
+<div ng-switch="data.results.length > 0 || data.loading">
+  <p class="no-results" ng-switch-when="false">
+    Sorry, no results found. Please try a new search.
+  </p>
+  <section class="selfloor-list"
+           ng-switch-when="true"
+           nxg-infinite-scroll="fetchNextResults()"
+           nxg-infinite-scroll-disabled="data.loading"
+           nxg-infinite-scroll-show-indicator="data.loading">
+    <ul class="unstyled">
+      <li class="table-list-head">
+        <div class="cell selfloor-descr">Vehicle</div>
+        <div class="cell selfloor-stat">Status</div>
+        <div class="cell selfloor-dates">Dates</div>
+        <div class="cell selfloor-purch">Purchase Amount</div>
+        <div class="cell selfloor-buy">Buyer</div>
+        <div class="cell selfloor-ticket-num">Ticket #</div>
+        <div class="cell selfloor-title-loc">Title Location</div>
+        <div class="cell selfloor-title">Title</div>
+      </li><!-- end .table-list-head -->
 
-    <li class="table-list-row" ng-repeat="result in searchResults">
-      <!-- TODO: remove placeholder data during MVC integration. -->
-      <div class="cell selfloor-descr">
-        <p>
-          <span class="sch-label">VIN: </span>
-          <span ng-bind-html-unsafe="'12334445' | highlight:result.data.query"></span>
-        <p>{{ title.description}}4D Hatchback 1.5L I-4 MPI SOHC VTEC</p>
-      </div>
-      <div class="cell selfloor-stat">{{ title.status }}Complete</div>
-      <div class="cell selfloor-dates">
-        <p>
-          <span class="sch-sub-label">Floored:</span><br/>{{ title.floorDate }}4/20/2013
-        </p>
-        <p>
-          <span class="sch-sub-label">Disbursement: </span><br/>{{ title.disbDate }}4/22/2013
-        </p>
-      </div>
-      <div class="cell selfloor-purch">{{ title.purchAmt }}$33,439.09</div>
-      <div class="cell selfloor-title-st">{{ title.state }}NY</div>
-      <div class="cell selfloor-title-loc">{{ title.loc }}Buyer</div>
-      <div class="cell selfloor-buy">{{ title.buyer }}Denver Auto Sales</div>
-      <div class="cell selfloor-id-nums">
-        <p>
-          <span class="sch-sub-label">Title #: </span>{{ title.titleNum }}90883294
-        </p>
-        <p>
-          <span class="sch-sub-label">Ticket #: </span>{{ title.ticketNumber }} 0932843908539853
-        </p>
-      </div>
-      <div class="cell selfloor-actions">
-        <!-- TODO: Add ng-show directives for when to show buttons, and add disabled value -->
-        <p><a>View</a></p>
-        <p><a class="btn btn-mini btn-block" ng-show="true" ng-click="openEditTitle()">Edit</a></p>
-      </div>
-    </li><!-- end .table-list-row -->
-  </ul>
-</section>
+      <li class="table-list-row" ng-repeat="item in data.results">
+        <div class="cell selfloor-descr">
+          <p>
+            <span class="sch-label">VIN: </span>
+            <span ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query"></span>
+          <p>{{ getVehicleDescription(item) }}</p>
+        </div>
+        <div class="cell selfloor-stat">{{ item.FloorplanStatusName }}</div>
+        <div class="cell selfloor-dates">
+          <p>
+            <span class="sch-sub-label">Floored:</span><br/>{{ (item.FlooringDate | moment) || 'n/a' }}
+          </p>
+          <p>
+            <span class="sch-sub-label">Disbursement: </span><br/>{{ (item.DisbursementDate | moment) || 'n/a' }}
+          </p>
+        </div>
+        <div class="cell selfloor-purch">{{ item.PurchaseAmount | currency }}</div>
+        <div class="cell selfloor-buy">{{ item.BuyerName }}</div>
+        <div class="cell selfloor-ticket-num">{{ item.ConsignerTicketNumber }}</div>
+        <div class="cell selfloor-title-loc">{{ item.TitleLocation }}</div>
+        <div class="cell selfloor-title">
+          <p ng-show="item.TitleState || item.TitleNumber">
+            {{ item.TitleNumber }}<br ng-show="!!item.TitleNumber"/>
+            {{ item.TitleState }}
+          </p>
+          <p>
+            <a class="btn btn-mini" ng-show="item.TitleEditable" ng-click="openEditTitle(item)">Edit</a>
+            <a ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}" target="_blank">View</a>
+          </p>
+        </div>
+      </li><!-- end .table-list-row -->
+    </ul>
+  </section>
+</div>

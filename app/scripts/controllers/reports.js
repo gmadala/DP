@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
           var startDate = api.toShortISODate($scope.data.stmtStartDate);
           var endDate = api.toShortISODate($scope.data.stmtEndDate);
 
-          var strUrl = 'report/dealerstatement/' + startDate + '/' + endDate;
+          var strUrl = '/report/dealerstatement/' + startDate + '/' + endDate;
 
           // append the vin filter string if one was provided, encoding it for safe transit in a GET query
           if ($scope.data.stmtVinFilter) {
@@ -48,7 +48,7 @@ angular.module('nextgearWebApp')
 
           var date = api.toShortISODate($scope.data.disDate);
           var strUrl = api.contentLink(
-            'report/disbursementdetail/' + date,
+            '/report/disbursementdetail/' + date,
             {}
           );
 
@@ -87,7 +87,7 @@ angular.module('nextgearWebApp')
           }
 
           var strUrl = api.contentLink(
-            'report/paidoffsummary',
+            '/report/paidoffsummary',
             params
           );
 
@@ -109,7 +109,7 @@ angular.module('nextgearWebApp')
 
           var date = api.toShortISODate($scope.data.curtailmentDate);
           var strUrl = api.contentLink(
-            'report/getupcomingcurtailmentpayments/' + date,
+            '/report/getupcomingcurtailmentpayments/' + date,
             {}
           );
 

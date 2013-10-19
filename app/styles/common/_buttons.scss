@@ -147,6 +147,32 @@
   margin-left: 10px;
 }
 
+.btn-help {
+  @extend .btn-unstyle;
+  @extend %heavy;
+  @extend %small;
+  @include border-radius(50%);
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: $brand-text;
+  color: $white;
+  line-height: 1;
+  margin-left: 10px;
+}
+
+.btn-help.inline {
+  margin-left: 5px;
+  margin-top: -2px;
+}
+
+// span version of help button for cases where we don't want it to be an actual button
+// (e.g. in forms where it will steal default button status from the submit button)
+span.btn-help {
+  cursor: pointer;
+  padding: 0px 4px;
+}
+
 // IE9-SPECIFIC
 // Because IE9 forces a particular text color on disabled buttons.
 .ie9 {

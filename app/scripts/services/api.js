@@ -2,11 +2,12 @@
 
 angular.module('nextgearWebApp')
   .factory('api', function($rootScope, $q, $http, $filter, nxgConfig, messages) {
-    var authToken = null;
+    var authToken = null, timedOut = false;
 
     return {
       setAuthToken: function(token) {
         authToken = token;
+        timedOut = false;
         // set a default Authorization header with the authentication token
         $http.defaults.headers.common.Authorization = 'CT ' + token;
       },
@@ -24,6 +25,7 @@ angular.module('nextgearWebApp')
         },
         self = this,
         defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
+        expiredSessionError = 'Your session expired due to inactivity. Please log in again.',
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
@@ -36,24 +38,27 @@ angular.module('nextgearWebApp')
                 return response.data.Data;
               }
               else {
-                error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+                if(response.data.Message === '401') {
+                  if (!timedOut) {
+                    timedOut = true;
+                    self.resetAuthToken();
+                    $rootScope.$broadcast('event:redirectToLogin');
+                    error = messages.add(expiredSessionError, debug + '401 error');
+                  }
+                }
+                else {
+                  error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+                }
                 return $q.reject(error);
               }
             }
             else {
               error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
-              return $q.reject(error); // Treat as unknown error 
+              return $q.reject(error); // Treat as unknown error
               //throw new Error('Invalid response'); // dev only
             }
           }, function (error) {
-            if (error.status === 401) {
-              self.resetAuthToken();
-              $rootScope.$broadcast('event:redirectToLogin');
-              error = messages.add(defaultError, debug + 'invalid API response: ' + error);
-            }
-            else {
-              error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
-            }
+            error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
             return $q.reject(error); // reject w/ appropriate error
           }
         );

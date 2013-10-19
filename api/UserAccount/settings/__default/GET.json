@@ -16,7 +16,7 @@
     "Email": "diana.guarin@manheim.com",
     "CellPhone": "2143301800",
     "BusinessEmail": "diana.guarin@manheim.com",
-    "EnhancedRegistrationEnabled": true,
+    "EnhancedRegistrationEnabled": false,
     "Addresses": [
       {
         "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
@@ -54,11 +54,16 @@
     ],
     "Notifications": [
       {
-        "NotificationId": "e4b6c079-3ae0-4ac4-84bc-0474d56bb2f5",
-        "NotificationName": "Some Notification",
+        "NotificationId": "e4b6c079-3ae0-4ac4-84bc-0000d56bb2f5",
+        "NotificationName": "Weekly Upcoming Payments",
         "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403d84",
-        "DeliveryMethodName": "Email",
-        "Enabled": false
+        "DeliveryMethodName": "Email"
+      },
+      {
+        "NotificationId": "e4b6c079-3ae0-4ac4-00bc-0474d56bb2f5",
+        "NotificationName": "Overdue Payments",
+        "DeliveryMethodId": "489191eb-3df6-4507-85c5-a9e8d4403000",
+        "DeliveryMethodName": "Text"
       }
     ]
   }

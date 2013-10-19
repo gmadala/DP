@@ -1,5 +1,8 @@
 // SETTINGS
 
+// so we can edit all the widths in one place
+$set-label-width: 40%;
+
 .settings {
   margin-top: 20px;
 
@@ -12,16 +15,35 @@
   @extend %full-width;
   @extend %small;
 
-  label {
+  p {
+    line-height: $base-line-height;
+    margin: 10px 0
+  }
+
+  .control-label {
     @extend %thin;
     @extend %float-l;
-    width: 35%;
+    display: block;
+    width: $set-label-width;
+    height: 100%;
     color: $base-text-color;
+
+    &.business {
+      margin:0;
+    }
+  }
+
+  .controls.static, .enhanced-info {
+    margin-left: $set-label-width;
   }
 
   .static {
     font-weight: normal;
     color: $darker-text-color;
+
+    p, span {
+      line-height: 1.5;
+    }
   }
 
   .head-labels {
@@ -33,7 +55,7 @@
       margin: 0 0 10px;
 
       &:first-child {
-        width: 35%;
+        width: $set-label-width;
       }
     }
   }
@@ -42,21 +64,37 @@
     .n-title {
       @extend %float-l;
       @extend %thin;
-      width: 35%;
+      width: $set-label-width;
       padding-right: 10px;
     }
 
     .inner {
       @extend %float-l;
       margin: 0;
+
+      label {
+        margin: 0;
+      }
     }
 
     .read-only {
       line-height: $base-line-height;
       display: inline-block;
 
+      &:after {
+        content: ',';
+        margin-left: -3px;
+      }
+
+      &:last-child {
+        &:after {
+          content: '';
+          margin: 0;
+        }
+      }
+
       & + .read-only {
-        margin-left: 10px;
+        margin-left: 7px;
       }
     }
 
@@ -73,32 +111,24 @@
       margin-bottom: 10px;
     }
 
-    label {
-      width: auto;
-      float: none;
-      padding: 0;
-    }
-
     .nxg-radios label + p {
       margin-top: 10px;
     }
 
     .notifications {
       .n-title {
-        width: auto;
-      }
-
-      .n-title, .inner {
-        float: none;
-      }
-
-      .inner {
         padding: 5px 0;
-        margin-left: 20px;
+      }
+    }
 
-        label {
-          margin-top: 4px;
-        }
+    .read-only {
+      &:after {
+        content: '';
+        margin: 0;
+      }
+
+      & + .read-only {
+        margin-left: 20px;
       }
     }
   }
@@ -139,18 +169,4 @@
 
 .cancel-btn {
   right: 70px;
-}
-
-.btn-help {
-  @extend .btn-unstyle;
-  @extend %heavy;
-  @extend %small;
-  @include border-radius(50%);
-  position: relative;
-  width: 15px;
-  height: 15px;
-  background: $brand-text;
-  color: $white;
-  line-height: 1;
-  margin-left: 10px;
 }

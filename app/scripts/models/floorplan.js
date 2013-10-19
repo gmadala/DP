@@ -70,12 +70,12 @@ angular.module('nextgearWebApp')
             SearchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
             SearchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
             SearchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
-            SearchNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
+            SearchHasNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
             // default values for un-set dates may need adjusted during API integration
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,
             OrderBy: 'FlooringDate',
-            OrderDirection: 'DESC',
+            OrderByDirection: 'DESC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM
           };
@@ -93,9 +93,18 @@ angular.module('nextgearWebApp')
       },
       addTitleURL: function (item) {
         if (!item.StockNumber) { return item; }
-        var displayId = User.getInfo().BusinessNumber + '-' + item.StockNumber;
+        var buyerBusinessNumber = item.BuyerBusinessNumber || User.getInfo().BusinessNumber;
+        var displayId = buyerBusinessNumber + '-' + item.StockNumber;
         item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0'); // 0 = not first page only
         return item;
+      },
+      setTitleInfo: function (floorplanId, titleNumber, titleState) {
+        var data = {
+          FloorplanId: floorplanId,
+          TitleNumber: titleNumber,
+          TitleStateId: titleState.StateId
+        };
+        return api.request('POST', '/floorplan/EditTitleNumberAndState', data);
       }
     };
   });

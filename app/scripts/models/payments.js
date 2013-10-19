@@ -74,7 +74,7 @@ angular.module('nextgearWebApp')
           DueDateStart: api.toShortISODate(criteria.startDate) || undefined,
           DueDateEnd: api.toShortISODate(criteria.endDate) || undefined,
           OrderBy: 'DueDate',
-          OrderDirection: 'ASC',
+          OrderByDirection: 'ASC',
           PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
           PageSize: Paginate.PAGE_SIZE_MEDIUM
         };
@@ -192,7 +192,7 @@ angular.module('nextgearWebApp')
         angular.forEach(payments, function (payment) {
           shortPayments.push({
             FloorplanId: payment.floorplanId,
-            ScheduledSetupDate: api.toShortISODate(payment.scheduleDate) || null,
+            ScheduledPaymentDate: api.toShortISODate(payment.scheduleDate) || null,
             IsPayoff: payment.isPayoff
           });
         });

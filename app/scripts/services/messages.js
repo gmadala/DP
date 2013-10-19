@@ -20,10 +20,6 @@ angular.module('nextgearWebApp')
           }
         };
 
-        if (debug && console && !window.describe) {
-          console.log(debug); // not doing anything else with this at the moment
-        }
-
         items.push(msg);
         return msg;
       },

@@ -4,7 +4,7 @@
       <div class="span6 adjacent well">
         <h4>Business Summary</h4>
         <ul class="well-out">
-          <h5>Approved Floorplans</h5>
+          <h5>Approved Floor Plans</h5>
           <span class="item-total">
           {{ businessSummary.ApprovedFloorplans }}
           </span>
@@ -73,7 +73,7 @@
       <div class="span6 adjacent well">
         <h4>&nbsp;</h4>
         <ul class="well-out">
-          <h5>Pending Floorplans</h5>
+          <h5>Pending Floor Plans</h5>
           <span class="item-total">
             {{ businessSummary.PendingFloorplans }}
           </span>
@@ -203,25 +203,24 @@
               <input type="radio" class="last" name="worst-movers" id="worst-movers"
                      ng-value="worstMovers" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
               <label for="worst-movers" id="worst-movers-label"></label>
-
             </div>
+
+            <table class="movers-list">
+              <tr ng-repeat="model in selectedMoverChart.models">
+                <td class="rank">
+                  {{ $index + 1 }}
+                </td>
+                <td class="models">
+                  <div>
+                    <span>({{ model.year }})</span>
+                    <span>{{ model.make }}</span>
+                  </div>
+                  <div>{{ model.model }}</div>
+                </td>
+              </tr>
+            </table>
+
             <div class="movers-chart">
-
-              <table>
-                <tr ng-repeat="model in selectedMoverChart.models">
-                  <td class="rank">
-                    {{ $index + 1 }}
-                  </td>
-                  <td class="models">
-                    <div>
-                      <span>({{ model.year }})</span>
-                      <span>{{ model.make }}</span>
-                    </div>
-                    <div>{{ model.model }}</div>
-                  </td>
-                </tr>
-              </table>
-
               <div>
                 <canvas width="290"
                         height="350"
@@ -246,7 +245,7 @@
               View All Auctions
             </a>
 
-            <canvas width="420"
+            <canvas width="450"
                       height="335"
                       nxg-chart
                       nxg-chart-type="Bar"

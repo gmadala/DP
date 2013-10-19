@@ -31,6 +31,12 @@
       right: 0;
     }
   }
+
+  .item-list {
+    tr td{
+      // padding-bottom: 5px;
+    }
+  }
 }
 
 .auction-dashboard-chart {
@@ -125,36 +131,6 @@
   }
 }
 
-.bulk-confirmation-modal {
-  width: 480px;
-  margin-left: -240px;
-
-  .bulk-confirmation {
-    border: 1px solid $border;
-
-    .detail-col {
-      @extend %full-width;
-      border: 0;
-
-      table {
-        @extend %full-width;
-      }
-
-      .detail-label {
-        width: 40%;
-      }
-
-      .detail-value {
-        width: 60%;
-      }
-    }
-  }
-
-  .floor-confirm-view-checklist {
-    margin: 10px 0;
-  }
-}
-
 // Seller Floorplan Search
 .selfloor-list {
   .cell {
@@ -165,16 +141,14 @@
       margin-bottom: 4px;
     }
 
-    &.selfloor-descr {  width: 18%; }
-    &.selfloor-stat { width: 9%; }
-    &.selfloor-dates { width: 12%; }
-    &.selfloor-purch { width: 10%; }
-    &.selfloor-title-st { width: 6%; }
-    &.selfloor-title-loc { width: 8%; }
-    &.selfloor-floored { width: 8%; }
-    &.selfloor-buy { width: 8%; }
-    &.selfloor-id-nums { width: 16%; }
-    &.selfloor-actions { width: 5%; }
+    &.selfloor-descr {  width: 19%; }
+    &.selfloor-stat { width: 10%; }
+    &.selfloor-dates { width: 10%; }
+    &.selfloor-purch { width: 11%; }
+    &.selfloor-buy { width: 12%; }
+    &.selfloor-ticket-num { width: 12%; }
+    &.selfloor-title-loc { width: 9%; }
+    &.selfloor-title { width: 17%; }
   }
 }
 

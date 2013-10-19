@@ -18,6 +18,23 @@
 .btn .glyphicon {
   margin-right: 2px;
 }
+
+/*
+ * 10/15/13 EDITS
+ * By Alexandra Atzl, EUI
+ * Use image for calendar icon because some browsers (ie. Safari 5.1)
+ * can't handle all the unicode for bootstrap 3's glyphicons
+ */
+.png-calendar {
+  @include box(20px);
+  @include opacity(50);
+  display: block;
+  background: url('../img/icons/glyphicons_045_calendar.png') no-repeat;
+  background-size: 100%;
+  margin-right: 2px;
+}
+/* end edit. */
+
 .glyphicon-asterisk:before {
   content: "\2a";
 }

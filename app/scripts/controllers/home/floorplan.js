@@ -1,13 +1,19 @@
 'use strict';
 
+/**
+ * WARNING: This controller is used for both dealer Floorplan AND auction Seller Floorplan. Understand
+ * the ramifications to each view and test both when making any changes here!!
+ */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User) {
 
     $scope.isCollapsed = true;
 
+    var isDealer = User.isDealer();
+
     $scope.getVehicleDescription = function (floorplan) {
       return [
-        floorplan.UnitYear,
+        floorplan.UnitYear || null,
         floorplan.UnitMake,
         floorplan.UnitModel,
         floorplan.UnitStyle,
@@ -15,28 +21,66 @@ angular.module('nextgearWebApp')
       ].join(' ');
     };
 
-    $scope.filterOptions = [
-      {
-        label: 'View All',
-        value: Floorplan.filterValues.ALL
-      },
-      {
-        label: 'Pending',
-        value: Floorplan.filterValues.PENDING
-      },
-      {
-        label: 'Denied',
-        value: Floorplan.filterValues.DENIED
-      },
-      {
-        label: 'Approved',
-        value: Floorplan.filterValues.APPROVED
-      },
-      {
-        label: 'Completed',
-        value: Floorplan.filterValues.COMPLETED
-      }
-    ];
+    if (isDealer) {
+      $scope.filterOptions = [
+        {
+          label: 'View All',
+          value: Floorplan.filterValues.ALL
+        },
+        {
+          label: 'Pending',
+          value: Floorplan.filterValues.PENDING
+        },
+        {
+          label: 'Denied',
+          value: Floorplan.filterValues.DENIED
+        },
+        {
+          label: 'Approved',
+          value: Floorplan.filterValues.APPROVED
+        },
+        {
+          label: 'Completed',
+          value: Floorplan.filterValues.COMPLETED
+        }
+      ];
+    } else {
+      // auction filters
+      $scope.filterOptions = [
+        {
+          label: 'View All',
+          value: Floorplan.filterValues.ALL
+        },
+        {
+          label: 'Pending/Not Paid',
+          value: Floorplan.filterValues.PENDING_NOT_PAID
+        },
+        {
+          label: 'Denied/Not Paid',
+          value: Floorplan.filterValues.DENIED_NOT_PAID
+        },
+        {
+          label: 'Approved/Paid',
+          value: Floorplan.filterValues.APPROVED_PAID
+        },
+        {
+          label: 'Approved/Not Paid',
+          value: Floorplan.filterValues.APPROVED_NOT_PAID
+        },
+        {
+          label: 'Completed/Paid',
+          value: Floorplan.filterValues.COMPLETED_PAID
+        },
+        {
+          label: 'Completed/Not Paid',
+          value: Floorplan.filterValues.COMPLETED_NOT_PAID
+        },
+        {
+          label: 'No Title/Paid',
+          value: Floorplan.filterValues.NO_TITLE_PAID
+        }
+      ];
+    }
 
     $scope.data = {
       results: [],
@@ -48,6 +92,10 @@ angular.module('nextgearWebApp')
       // search means "start from the beginning with current criteria"
       $scope.data.paginator = null;
       $scope.data.results.length = 0;
+
+      // commit the proposed search criteria
+      $scope.searchCriteria = angular.copy($scope.proposedSearchCriteria);
+
       $scope.fetchNextResults();
     };
 
@@ -72,7 +120,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.resetSearch = function (initialFilter) {
-      $scope.searchCriteria = {
+      $scope.proposedSearchCriteria = {
         query: null,
         startDate: null,
         endDate: null,
@@ -82,5 +130,26 @@ angular.module('nextgearWebApp')
     };
 
     $scope.resetSearch($stateParams.filter);
+
+    if (!isDealer) {
+      $scope.openEditTitle = function(floorplan) {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/editTitle.html',
+          controller: 'EditTitleCtrl',
+          resolve: {
+            floorplan: function () {
+              return floorplan;
+            },
+            vehicleDescription: function () {
+              return $scope.getVehicleDescription(floorplan);
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
+      };
+    }
 
   });

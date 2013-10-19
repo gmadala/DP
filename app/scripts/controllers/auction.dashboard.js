@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
 
-    $scope.selectedFloorplanChart = 'month';
+    $scope.selectedFloorplanChart = 'year';
 
     $scope.$watch('selectedFloorplanChart', function(newVal) {
 

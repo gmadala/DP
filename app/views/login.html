@@ -14,12 +14,22 @@
         <div class="well-out">
           <form class="login-form" name="loginForm">
             <label for="credUsername">Username:</label>
-            <input type="text" ng-model="credentials.username" id="credUsername" name="credUsername" required />
+            <input type="text"
+                   ng-model="credentials.username"
+                   id="credUsername"
+                   name="credUsername"
+                   required
+                   nxg-enter="authenticate()" />
 
             <label for="credPassword">Password:</label>
-            <input type="password" ng-model="credentials.password" id="credPassword" name="credPassword" required />
+            <input type="password"
+                   ng-model="credentials.password"
+                   id="credPassword"
+                   name="credPassword"
+                   required
+                   nxg-enter="authenticate()" />
 
-            <span class="error" ng-show="showLoginError">{{ errorMsg }}</span>
+            <p class="form-error" ng-show="showLoginError">{{ errorMsg }}</p>
           </form>
 
           <div class="footer modal-footer">
@@ -35,10 +45,10 @@
 
     <div class="row-fluid" ng-hide="forgot">
       <div class="span6 offset3 login-help">
-        <p class="headline">Do you have <a href="http://get.adobe.com/reader/">Adobe Acrobat Reader 8.1</a> or newer?</p>
+        <p class="headline">Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer?</p>
         <p>You will need it in order to view your reports.<br/>
-        Not sure? <a href="https://test.discoverdsc.com/MyDSC/Public/Test.pdf">Test your Adobe Reader installation.</a><br/>
-        If the document did not successfully display, please install <a href="http://get.adobe.com/reader/">Adobe Acrobat Reader</a></p>
+        Not sure? <a href="https://test.discoverdsc.com/MyDSC/Public/Test.pdf" target="_blank">Test your Adobe Reader installation.</a><br/>
+        If the document did not successfully display, please install <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader</a></p>
       </div><!-- end .help -->
     </div>
 

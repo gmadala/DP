@@ -29,29 +29,29 @@
     <table ng-class="{ 'show-access-num': data.searchBuyersMode }">
       <thead>
         <tr>
-          <th ng-click="sortBy('BusinessName')" class="bus-name sortable"
+          <th><div ng-click="sortBy('BusinessName')" class="bus-name sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
             Business Name
-          </th>
-          <th ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
+          </div></th>
+          <th><div ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
             Legal Name
-          </th>
-          <th ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
+          </div></th>
+          <th><div ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
             Business&nbsp;#
-          </th>
+          </div></th>
           <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
             Auction Access #
           </th>
-          <th ng-click="sortBy('City')" class="bus-city sortable"
+          <th><div ng-click="sortBy('City')" class="bus-city sortable"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
             City
-          </th>
-          <th ng-click="sortBy('State')" class="bus-state sortable"
+          </div></th>
+          <th><div ng-click="sortBy('State')" class="bus-state sortable"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
             State
-          </th>
+          </div></th>
           <th class="bus-select"></th>
         </tr>
       </thead>

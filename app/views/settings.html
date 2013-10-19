@@ -1,6 +1,7 @@
 <div class="container-line">
   <div class="container-fluid settings">
     <div class="row-fluid two-col">
+
       <!-- USER PROFILE -->
       <section class="span8 well adjacent">
         <h4>User Profile</h4>
@@ -10,7 +11,7 @@
 
         <div class="well-out">
 
-          <form class="settings-opts" ng-class="{ profile.editable: editable }" name="userSettings" novalidate>
+          <form class="settings-opts" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
             <span class="error" ng-show="profile.showError">{{ profile.errorMsg }}</span>
 
             <div class="control-group">
@@ -119,9 +120,9 @@
         <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{business.editable: editable }" name="busSettings">
+          <form class="settings-opts" ng-class="{ editable:business.editable }" name="busSettings">
             <div class="control-group">
-              <label class="control-label" for="businessEmail">Business Email</label>
+              <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
                 <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" required />
                 <div class="form-error" ng-show="business.validation.businessEmail.$invalid">
@@ -131,27 +132,29 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="enhanced">Enhanced Registration Enabled?</label>
+              <label class="control-label business" for="enhanced">Enhanced Registration Enabled?</label>
 
               <!-- Show "Yes" if enhanced registration is enabled.
               If it is not enabled, show nothing. -->
-              <div class="controls" ng-show="business.data.enhancedRegistrationEnabled && !business.editable">
-                Yes
-              </div>
+              <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
 
               <div class="controls form-inline nxg-radios" ng-show="business.editable">
                 <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
-                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false'/><label for="enhancedNo">No</label>
-                <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' /> <label for="enhancedYes">Yes</label>
+                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
+                <label for="enhancedNo">No</label>
+                <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
+                <label for="enhancedYes">Yes</label>
               </div>
             </div>
 
             <div class="control-group" ng-show="business.editable">
-              <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
-              <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
-              <p>Create your Enhanced Registration four digit PIN.</p>
+              <div class="enhanced-info">
+                <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
+                <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
+                <p>Create your Enhanced Registration four digit PIN.</p>
+              </div>
 
-              <label class="control-label">Enhanced Registration PIN</label>
+              <label class="control-label business">Enhanced Registration PIN</label>
 
               <div class="controls">
                 <input type="text"
@@ -180,7 +183,7 @@
         <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ title.editable: editable }"name="titleSettings">
+          <form class="settings-opts" ng-class="{ editable:title.editable }"name="titleSettings">
             <div class="control-group">
               <label class="control-label" for="titleAddr">Address</label>
               <div class="controls" ng-show="title.editable">
@@ -194,20 +197,20 @@
                   tooltip-placement="right"
                   tooltip-trigger="click"
                   tooltip-html="true"
-                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: (800) 555-5555"
+                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
                   tooltip-animation="true">?</button>
               </div>
               <!-- Saved Address -->
-              <div class="static" ng-hide="title.editable">
-                  <div>{{title.data.titleAddress.Line1}}</div>
-                  <div ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}</div>
-                  <div>{{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}</div>
+              <div class="controls static" ng-hide="title.editable">
+                  <p>{{title.data.titleAddress.Line1}}<br/>
+                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}<br/></span>
+                  {{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}</p>
               </div>
               <!-- Current Address Selection-->
-              <div class="static" ng-show="title.editable">
-                  <div>{{title.dirtyData.titleAddress.Line1}}</div>
-                  <div ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}</div>
-                  <div>{{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</div>
+              <div class="controls static" ng-show="title.editable">
+                  <p>{{title.dirtyData.titleAddress.Line1}}<br/>
+                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}<br/></span>
+                  {{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</p>
               </div>
             </div>
           </form>
@@ -218,31 +221,35 @@
       <section class="span8 well adjacent">
         <!-- SEE NOTE IN TICKETS #15 & #17 -->
         <h4>Notifications</h4>
-        <button ng-hide="editable" class="btn edit-btn" ng-click="makeEditable()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="editable" class="btn cancel-btn" ng-click="cancel()">Cancel</button>
-        <button ng-show="editable" class="btn save-btn" ng-click="save()">Save</button>
+        <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()">Cancel</button>
+        <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()">Save</button>
 
         <div class="well-out">
-          <form class="settings-opts" ng-class="{ editable: editable }" name="notificationSettings">
+          <form class="settings-opts" ng-class="{ editable:notifications.editable }" name="notificationSettings">
             <div class="head-labels">
               <label>Notifications</label>
-              <label ng-hide="editable">Delivery Type</label>
+              <label ng-hide="notifications.editable">Delivery Type</label>
             </div>
 
             <div class="control-group">
               <div class="controls notifications">
                 <ul class="unstyled">
-                  <li class="notification" ng-repeat="n in notifications">
-                    <div class="n-title">{{ n.title }}</div>
+                  <li class="notification" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable">
+                    <div class="n-title">{{ n.NotificationName }}</div>
                     <ul class="inner">
-                      <li class="read-only" ng-repeat="t in n.types" ng-show="!editable && t.on">
-                        {{ t.type }}
+                      <li class="read-only" ng-repeat="d in n.DeliveryMethods">
+                        {{ d.DeliveryMethodName }}
                       </li>
-
-                      <!-- TODO: Fix this as part of MVC Ticket -->
-                      <li ng-repeat="t in n.types" ng-show="editable">
-                        <input type="checkbox" name="{{ t.type }}" id="{{ t.type }}" ng-model="t.on" ng-value="t.on" />
-                        <label for="{{ t.type }}">{{ t.type }}</label>
+                    </ul>
+                  </li>
+                  <!-- Edit -->
+                  <li class="notification" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
+                    <div class="n-title">{{ n.Name }}</div>
+                    <ul class="inner">
+                      <li class="read-only" ng-repeat="d in n.DeliveryMethods">
+                        <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
+                        <label for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
                       </li>
                     </ul>
                   </li>
