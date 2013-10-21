@@ -42,8 +42,9 @@ angular.module('nextgearWebApp')
                   if (!timedOut) {
                     timedOut = true;
                     self.resetAuthToken();
-                    $rootScope.$broadcast('event:redirectToLogin');
-                    error = messages.add(expiredSessionError, debug + '401 error');
+                    error = messages.add(expiredSessionError, debug + '401 error', null, function() {
+                      $rootScope.$broadcast('event:redirectToLogin');
+                    });
                   }
                 }
                 else {
