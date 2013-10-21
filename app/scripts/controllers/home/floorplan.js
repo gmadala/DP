@@ -9,7 +9,8 @@ angular.module('nextgearWebApp')
 
     $scope.isCollapsed = true;
 
-    var isDealer = User.isDealer();
+    var isDealer = User.isDealer(),
+        opCount = 0;
 
     $scope.getVehicleDescription = function (floorplan) {
       return [
@@ -100,7 +101,9 @@ angular.module('nextgearWebApp')
     };
 
     $scope.fetchNextResults = function () {
-      var paginator = $scope.data.paginator;
+      var paginator = $scope.data.paginator,
+          curOpKey = ++opCount;
+
       if (paginator && !paginator.hasMore()) {
         return;
       }
@@ -109,14 +112,17 @@ angular.module('nextgearWebApp')
       $scope.data.loading = true;
       Floorplan.search($scope.searchCriteria, paginator).then(
         function (result) {
+          if (curOpKey !== opCount) { return; }
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           // fast concatenation of results into existing array
           Array.prototype.push.apply($scope.data.results, result.Floorplans);
         }, function (/*error*/) {
+          if (curOpKey !== opCount) { return; }
           $scope.data.loading = false;
         }
       );
+
     };
 
     $scope.resetSearch = function (initialFilter) {
