@@ -3,6 +3,8 @@
 angular.module('nextgearWebApp')
   .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode) {
 
+    var lastPromise;
+
     $scope.data = {
       searchBuyersMode: searchBuyersMode,
       proposedQuery: initialQuery,
@@ -29,24 +31,29 @@ angular.module('nextgearWebApp')
     };
 
     $scope.fetchNextResults = function() {
-      var paginator = $scope.data.paginator;
+      var paginator = $scope.data.paginator,
+          promise;
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       $scope.data.loading = true;
-      BusinessSearch.search(
-          $scope.data.searchBuyersMode,
-          $scope.data.query,
-          $scope.data.sortBy,
-          $scope.data.sortDescending,
-          paginator
-        ).then(
+      promise = lastPromise = BusinessSearch.search(
+        $scope.data.searchBuyersMode,
+        $scope.data.query,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      );
+
+      promise.then(
         function(result) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           Array.prototype.push.apply($scope.data.results, result.SearchResults);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
         }
       );
