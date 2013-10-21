@@ -3,6 +3,8 @@
 angular.module('nextgearWebApp')
   .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User) {
 
+    var lastPromise;
+
     $scope.isCollapsed = true;
 
     $scope.getReceiptStatus = function (receipt) {
@@ -31,20 +33,24 @@ angular.module('nextgearWebApp')
     };
 
     $scope.receipts.fetchNextResults = function () {
-      var paginator = $scope.receipts.paginator;
+      var paginator = $scope.receipts.paginator,
+          promise;
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       // get the next applicable batch of results
       $scope.receipts.loading = true;
-      Receipts.search($scope.receipts.searchCriteria, paginator).then(
+      promise = lastPromise = Receipts.search($scope.receipts.searchCriteria, paginator);
+      promise.then(
         function (result) {
+          if (promise !== lastPromise) { return; }
           $scope.receipts.loading = false;
           $scope.receipts.paginator = result.$paginator;
           // fast concatenation of results into existing array
           Array.prototype.push.apply($scope.receipts.results, result.Receipts);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.receipts.loading = false;
         }
       );
