@@ -8,18 +8,18 @@ angular.module('nextgearWebApp')
 
     // Public
     return {
-      add: function (text, debug, title, next) {
+      add: function (text, debug, title, onDismiss) {
         var msg = {
           title: title || 'Error',
           text: text,
           debug: debug,
           dismiss: function () {
             var index = items.indexOf(msg);
-            next = next || noop;
+            onDismiss = onDismiss || noop;
             if (index >= 0) {
               items.splice(index, 1);
             }
-            next();
+            onDismiss();
           }
         };
 
