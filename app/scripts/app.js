@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -151,7 +151,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, $dialog, User) {
+  .run(function($rootScope, $location, $dialog, User, segmentio, nxgConfig) {
+
+    segmentio.load(nxgConfig.segmentIoKey);
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
@@ -176,6 +178,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
       }
     );
+
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
+      if (fromState.name) {
+        segmentio.pageview($location.absUrl());
+      }
+    });
 
     $rootScope.$on('event:redirectToLogin',
       function(){

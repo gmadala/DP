@@ -15,4 +15,8 @@ describe('Service: nxgConfig', function () {
     expect(nxgConfig.apiBase).toBeDefined();
   });
 
+  it('should have a segmentIoKey', function () {
+    expect(nxgConfig.segmentIoKey).toBeDefined();
+  });
+
 });
