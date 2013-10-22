@@ -22,30 +22,30 @@
         <li>
           <span class="item-total overdue">{{dashboardData.OverduePayments}}</span>
           <span ng-pluralize
-                          count="dashboardData.OverduePayments"
-                          when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
+                count="dashboardData.OverduePayments"
+                when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
           <p class="overdue-amount">{{dashboardData.OverduePaymentAmount | currency}}</p>
         </li>
         <li>
           <span class="item-total due-today">{{dashboardData.PaymentsDueToday}}</span>
           <span ng-pluralize
-                          count="dashboardData.PaymentsDueToday"
-                          when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
+                count="dashboardData.PaymentsDueToday"
+                when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
           <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
         </li>
         <li>
           <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
           <span ng-pluralize
-                          count="dashboardData.UpcomingPayments"
-                          when="{'1': 'Payment', 'other': 'Payments'}"></span>
+                count="dashboardData.UpcomingPayments"
+                when="{'1': 'Payment', 'other': 'Payments'}"></span>
           <span>This {{ viewMode | lowercase }}</span>
           <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
         </li>
         <li>
           <span class="item-total">{{dashboardData.AccountFees}}</span>
           <span ng-pluralize
-                          count="dashboardData.AccountFees"
-                          when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
+                count="dashboardData.AccountFees"
+                when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
           <p>{{dashboardData.AccountFeeAmount | currency}}</p>
         </li>
         <a class="more btn btn-mini" href="#/home/payments">
@@ -57,7 +57,7 @@
   </div><!-- end .row-fluid -->
 
   <!-- More Details -->
-  <div collapse="isCollapsed" ng-init="isCollapsed = true" class="row-fluid dashboard-more-details">
+  <div collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }" class="row-fluid dashboard-more-details">
     <!-- Upcoming Payments -->
     <div class="span9 well upcoming-payments">
       <p>Upcoming Payments</p>
@@ -96,11 +96,11 @@
       </label>
 
       <canvas width="120"
-                    height="120"
-                    nxg-chart
-                    nxg-chart-type="Doughnut"
-                    nxg-chart-data="dashboardData.paymentChartData.chartData"
-                    nxg-chart-options="{percentageInnerCutout: 65}">
+              height="120"
+              nxg-chart
+              nxg-chart-type="Doughnut"
+              nxg-chart-data="dashboardData.paymentChartData.chartData"
+              nxg-chart-options="{percentageInnerCutout: 65}">
       </canvas>
 
       <table class="chart-summary-table">
@@ -134,11 +134,13 @@
     </div><!-- end .payments-chart -->
   </div><!-- end .dashboard-more-details -->
 
-  <span class="details-toggle-line">
-    <button ng-click="isCollapsed = !isCollapsed" class="details-toggle-btn">
-      <i class="glyphicon glyphicon-chevron-{{ isCollapsed && 'down' || 'up'}}"></i>
-      {{ isCollapsed && 'Show' || 'Close'}} Details</button>
-  </span>
+  <div class="details-toggle" ng-class="{ open: !isCollapsed }">
+    <div class="details-toggle-line">
+      <button ng-click="isCollapsed = !isCollapsed" class="details-toggle-btn">
+        <i class="glyphicon glyphicon-chevron-{{ isCollapsed && 'down' || 'up'}}"></i>
+        {{ isCollapsed && 'Show' || 'Close'}} Details</button>
+    </div>
+  </div>
 </section>
 
 <section class="row-fluid summaries">
