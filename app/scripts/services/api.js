@@ -1,13 +1,33 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($rootScope, $q, $http, $filter, nxgConfig, messages) {
-    var authToken = null, timedOut = false;
+  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages) {
+    var authToken = null,
+        sessionHasTimedOut = false,
+        sessionTimeout = null;
+
+    function onSessionTimeout(ob, debug) {
+      var expiredSessionError = 'Your session expired due to inactivity. Please log in again.';
+      sessionHasTimedOut = true;
+      ob.resetAuthToken();
+      return messages.add(expiredSessionError, debug + '401 error', null, function() {
+        $rootScope.$broadcast('event:redirectToLogin');
+      });
+    }
+
+    function resetSessionTimeout(ob, debug) {
+      var SESSION_TIMEOUT_INTERVAL = 900000; // 15 minutes
+      if (sessionTimeout) { $timeout.cancel(sessionTimeout); }
+      sessionTimeout = $timeout(function(){
+        $timeout.cancel(sessionTimeout);
+        if (ob.hasAuthToken()) { onSessionTimeout(ob, debug); }
+      }, SESSION_TIMEOUT_INTERVAL);
+    }
 
     return {
       setAuthToken: function(token) {
         authToken = token;
-        timedOut = false;
+        sessionHasTimedOut = false;
         // set a default Authorization header with the authentication token
         $http.defaults.headers.common.Authorization = 'CT ' + token;
       },
@@ -25,7 +45,6 @@ angular.module('nextgearWebApp')
         },
         self = this,
         defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
-        expiredSessionError = 'Your session expired due to inactivity. Please log in again.',
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
@@ -33,18 +52,15 @@ angular.module('nextgearWebApp')
         return $http(httpConfig).then(
           function (response) {
             var error;
+            resetSessionTimeout(self, debug);
             if (response.data && angular.isDefined(response.data.Success)) {
               if (response.data.Success) {
                 return response.data.Data;
               }
               else {
                 if(response.data.Message === '401') {
-                  if (!timedOut) {
-                    timedOut = true;
-                    self.resetAuthToken();
-                    error = messages.add(expiredSessionError, debug + '401 error', null, function() {
-                      $rootScope.$broadcast('event:redirectToLogin');
-                    });
+                  if (!sessionHasTimedOut) {
+                    error = onSessionTimeout(self, debug);
                   }
                 }
                 else {
@@ -59,6 +75,7 @@ angular.module('nextgearWebApp')
               //throw new Error('Invalid response'); // dev only
             }
           }, function (error) {
+            resetSessionTimeout(self, debug);
             error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
             return $q.reject(error); // reject w/ appropriate error
           }
