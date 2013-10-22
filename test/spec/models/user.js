@@ -167,7 +167,10 @@ describe('Model: User', function () {
 
       httpBackend.whenGET('/Dealer/Info').respond({
         Success: true,
-        Data: {}
+        Data: {
+          BusinessNumber: 1234,
+          BusinessName: 'Tricolor Auto'
+        }
       });
 
       httpBackend.whenGET('/Dealer/Static').respond({
@@ -212,8 +215,8 @@ describe('Model: User', function () {
     }));
 
     it('should refresh statics and info upon auth success', function () {
-      spyOn(user, 'refreshInfo').andReturn($q.when({}));
-      spyOn(user, 'refreshStatics').andReturn($q.when({}));
+      spyOn(user, 'refreshInfo').andCallThrough();
+      spyOn(user, 'refreshStatics').andCallThrough();
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(user.refreshInfo).toHaveBeenCalled();
