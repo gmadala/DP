@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
         },
         {
           label: 'Pending',
-          value: ScheduledPaymentsSearch.FILTER_BY_SCHEDULED
+          value: ScheduledPaymentsSearch.FILTER_BY_PENDING
         },
         {
           label: 'Processed',
