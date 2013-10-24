@@ -29,7 +29,7 @@
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
                 "ScheduledPaymentAmount": 14098.00,
-                "ScheduledPayoutAmount": 84022,
+                "PrincipalPayoff": 84022,
                 "SetupDate": "2013-08-01"
             },
             {
@@ -55,7 +55,7 @@
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
                 "ScheduledPaymentAmount": 3098.00,
-                "ScheduledPayoutAmount": 34022,
+                "PrincipalPayoff": 34022,
                 "SetupDate": "2013-06-06"
             },
             {
@@ -81,7 +81,7 @@
                 "CurtailmentPayment": true,
                 "CurtailmentDueDate": "2013-08-13",
                 "ScheduledPaymentAmount": 4098.00,
-                "ScheduledPayoutAmount": 52131.50,
+                "PrincipalPayoff": 52131.50,
                 "SetupDate": "2013-03-28"
             },
             {
@@ -107,7 +107,7 @@
               "CurtailmentPayment": true,
               "CurtailmentDueDate": null,
               "ScheduledPaymentAmount": 40498.00,
-              "ScheduledPayoutAmount": 131455.15,
+              "PrincipalPayoff": 131455.15,
               "SetupDate": "2013-03-28"
             }
         ]
