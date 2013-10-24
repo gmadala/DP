@@ -10,16 +10,28 @@
             <div class="well-out">
               <ul class="unstyled">
                   <li>
-                      <a ng-href="{{ feeScheduleUrl }}" target="_blank">Rates and Fees</a>
+                      <a ng-href="{{ feeScheduleUrl }}" target="_blank"
+                         nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+                         track-properties="{ documentName: 'Rates and Fees' }">
+                        Rates and Fees
+                      </a>
                   </li>
                   <li ng-repeat="doc in documents">
-                      <a ng-href="{{ doc.url }}" target="_blank">{{ doc.title }}</a>
+                      <a ng-href="{{ doc.url }}" target="_blank"
+                         nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+                         track-properties="{ documentName: doc.title }">
+                        {{ doc.title }}
+                      </a>
                   </li>
               </ul>
               <h3 class="subtitle">Collateral Protection Program</h3>
               <ul class="unstyled">
                   <li ng-repeat="doc in collateralProtection">
-                      <a ng-href="{{ doc.url }}" target="_blank">{{ doc.title }}</a>
+                      <a ng-href="{{ doc.url }}" target="_blank"
+                         nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+                         track-properties="{ documentName: doc.title }">
+                        {{ doc.title }}
+                      </a>
                   </li>
               </ul>
             </div>

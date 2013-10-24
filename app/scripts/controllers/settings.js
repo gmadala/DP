@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('SettingsCtrl', function($scope, $dialog, Settings) {
+  .controller('SettingsCtrl', function($scope, $dialog, Settings, segmentio, metric) {
+    segmentio.track(metric.VIEW_SETTINGS);
+
     $scope.loading = false;
 
     // Valid pattern examples: 5552301520, (555)230-1520, 555-230-1520, 1-555-230-1520
@@ -33,6 +35,7 @@ angular.module('nextgearWebApp')
           this.cancel();
           return false;
         }
+        segmentio.track(metric.CHANGE_SETTINGS);
         return true;
       },
       saveSuccess: function() {

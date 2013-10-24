@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, segmentio, metric) {
 
     var lastPromise;
 
@@ -21,12 +21,17 @@ angular.module('nextgearWebApp')
       $scope.data.paginator = null;
       $scope.data.results.length = 0;
 
+      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
+
       // commit the proposed query
       $scope.data.query = $scope.data.proposedQuery;
 
       if ($scope.data.query) {
         // a query is required for the search to be executed
         $scope.fetchNextResults();
+        if (isNewQuery) {
+          segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
+        }
       }
     };
 

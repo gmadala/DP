@@ -9,7 +9,11 @@
             <h4>Current Reports</h4>
             <ul class="well-out">
                 <li ng-repeat="doc in documents">
-                    <a target="_blank" ng-href="{{ doc.url }}">{{ doc.title }}</a>
+                    <a target="_blank" ng-href="{{ doc.url }}"
+                       nxg-track="{{ metric.VIEW_CURRENT_REPORT }}"
+                       track-properties="{ reportName: doc.title }">
+                      {{ doc.title }}
+                    </a>
                 </li>
             </ul>
         </div>

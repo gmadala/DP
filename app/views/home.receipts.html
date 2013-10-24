@@ -64,7 +64,10 @@
               <p>{{ receipt.AmountProvided | currency }}</p>
             </div>
             <div class="cell rec-view">
-              <a ng-href="{{ receipt.$receiptURL }}" target="_blank">View Receipt</a>
+              <a ng-href="{{ receipt.$receiptURL }}" target="_blank"
+                 nxg-track="{{ metric.VIEW_RECEIPT_DETAIL }}">
+                View Receipt
+              </a>
             </div>
           </li>
         </ul>

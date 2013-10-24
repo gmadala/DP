@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric) {
+
+    segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
     $scope.viewMode = 'week';
 

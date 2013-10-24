@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics) {
+  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric) {
+    segmentio.track(metric.VIEW_ANALYTICS_DASHBOARD);
 
     $scope.showDetails = false;
 
@@ -22,6 +23,7 @@ angular.module('nextgearWebApp')
         }
       };
       $dialog.dialog(dialogOptions).open();
+      segmentio.track(metric.VIEW_ALL_TOP_AUCTIONS);
     };
 
     $scope.toggleDetails = function() {

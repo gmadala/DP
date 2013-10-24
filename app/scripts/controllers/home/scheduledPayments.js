@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric) {
+    segmentio.track(metric.VIEW_SCHEDULED_PAYMENTS_LIST);
+
     var prv = {
         cancelLocalScheduledPayment: function(p) {
           p.isPending = p.isVoided = p.isProcessed = false;

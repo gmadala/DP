@@ -9,7 +9,11 @@
         <div class="well-out">
           <ul class="unstyled">
             <li ng-repeat="report in currentReports">
-              <a target="_blank" ng-href="{{ report.url }}">{{ report.title }}</a>
+              <a target="_blank" ng-href="{{ report.url }}"
+                 nxg-track="{{ metric.VIEW_CURRENT_REPORT }}"
+                 track-properties="{ reportName: report.title }">
+                {{ report.title }}
+              </a>
             </li>
           </ul>
 

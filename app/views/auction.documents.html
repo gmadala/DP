@@ -10,7 +10,12 @@
         <h4>NextGear Documents</h4>
         <ul class="well-out">
           <li ng-repeat="doc in documents">
-            <a ng-href="{{ doc.url }}">{{ doc.title }}</a>
+            <a ng-href="{{ doc.url }}"
+               target="_blank"
+               nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+               track-properties="{ documentName: doc.title }">
+              {{ doc.title }}
+            </a>
           </li>
         </ul>
       </div>

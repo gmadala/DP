@@ -5,7 +5,9 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User, metric) {
+
+    $scope.metric = metric; // make metric names available to templates
 
     $scope.isCollapsed = true;
 
