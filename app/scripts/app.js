@@ -151,9 +151,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, $dialog, User, segmentio, nxgConfig) {
+  .run(function($rootScope, $location, $dialog, User, segmentio/*, nxgConfig*/) {
 
-    segmentio.load(nxgConfig.segmentIoKey);
+    //segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
