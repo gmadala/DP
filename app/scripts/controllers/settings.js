@@ -152,7 +152,7 @@ angular.module('nextgearWebApp')
             var profile = $scope.profile;
             profile.validation = angular.copy($scope.userSettings);
 
-            if (profile.dirtyData.password && profile.dirtyData.passwordConfirm) {
+            if (profile.dirtyData.password || profile.dirtyData.passwordConfirm) {
               // check matching passwords
               if (profile.dirtyData.password !== profile.dirtyData.passwordConfirm) {
                 profile.validation.setPassword.$error.nomatch = true;
