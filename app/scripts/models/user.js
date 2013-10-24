@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages) {
+  .factory('User', function($q, api, Base64, messages, segmentio) {
     // Private
     var info = null,
       statics = null,
@@ -81,6 +81,7 @@ angular.module('nextgearWebApp')
             // fetch the dealer info & statics every time there's a new session (user could have changed)
             return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
               function () {
+                segmentio.identify(info.BusinessNumber, { name: info.BusinessName });
                 return {
                   showUserInit: authResult.ShowUserInitialization
                 };

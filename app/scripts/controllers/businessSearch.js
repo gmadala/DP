@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, segmentio, metric) {
+
+    var lastPromise;
 
     $scope.data = {
       searchBuyersMode: searchBuyersMode,
@@ -19,34 +21,44 @@ angular.module('nextgearWebApp')
       $scope.data.paginator = null;
       $scope.data.results.length = 0;
 
+      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
+
       // commit the proposed query
       $scope.data.query = $scope.data.proposedQuery;
 
       if ($scope.data.query) {
         // a query is required for the search to be executed
         $scope.fetchNextResults();
+        if (isNewQuery) {
+          segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
+        }
       }
     };
 
     $scope.fetchNextResults = function() {
-      var paginator = $scope.data.paginator;
+      var paginator = $scope.data.paginator,
+          promise;
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       $scope.data.loading = true;
-      BusinessSearch.search(
-          $scope.data.searchBuyersMode,
-          $scope.data.query,
-          $scope.data.sortBy,
-          $scope.data.sortDescending,
-          paginator
-        ).then(
+      promise = lastPromise = BusinessSearch.search(
+        $scope.data.searchBuyersMode,
+        $scope.data.query,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      );
+
+      promise.then(
         function(result) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           Array.prototype.push.apply($scope.data.results, result.SearchResults);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
         }
       );

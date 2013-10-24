@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User) {
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric) {
+
+    segmentio.track(metric.VIEW_RECEIPTS_LIST);
+    $scope.metric = metric; // make metric names available to template
+
+    var lastPromise;
 
     $scope.isCollapsed = true;
 
@@ -31,20 +36,24 @@ angular.module('nextgearWebApp')
     };
 
     $scope.receipts.fetchNextResults = function () {
-      var paginator = $scope.receipts.paginator;
+      var paginator = $scope.receipts.paginator,
+          promise;
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       // get the next applicable batch of results
       $scope.receipts.loading = true;
-      Receipts.search($scope.receipts.searchCriteria, paginator).then(
+      promise = lastPromise = Receipts.search($scope.receipts.searchCriteria, paginator);
+      promise.then(
         function (result) {
+          if (promise !== lastPromise) { return; }
           $scope.receipts.loading = false;
           $scope.receipts.paginator = result.$paginator;
           // fast concatenation of results into existing array
           Array.prototype.push.apply($scope.receipts.results, result.Receipts);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.receipts.loading = false;
         }
       );

@@ -254,6 +254,7 @@
     border-collapse: collapse;
     border-bottom: 1px solid $border;
   }
+
   td, th {
     padding: 0.25em 0 0.25em 1em;
     border-left: 1px solid $border;
@@ -277,20 +278,36 @@
   }
 }
 
+
+.dashboard-more-details {
+  margin: 5px 0 0 0;
+
+  &.open {
+    margin: 5px 0 15px;
+  }
+}
+
+.details-toggle {
+  border-bottom: 3px solid #DDD;
+  margin-bottom: 20px;
+
+  &.open {
+    border-top: 1px solid $border;
+  }
+}
+
 .details-toggle-line {
   @extend %full-width;
-  display: block;
-  border-top: 1px solid $border;
-  margin-bottom: 0.5em;
+  border-bottom: 1px solid #CCC;
 }
 
 .details-toggle-btn {
   @extend %heavy;
-  color: #777777;
+  color: #777;
   background-image: none;
   background-color: $white;
   border: none;
-  margin-top: 0.5em;
+  margin: 4px 0 3px;
 
   &:hover {
     color: #444;
@@ -298,5 +315,6 @@
 
   i {
     color: #3076A8;
+    top: 2px;
   }
 }

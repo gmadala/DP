@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api) {
+  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric) {
+
+    $scope.metric = metric; // make metric names available to templates
+
     $scope.documents = [
       {
         title: 'Welcome Packet (PDF)',

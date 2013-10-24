@@ -5,11 +5,14 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User, metric) {
+
+    $scope.metric = metric; // make metric names available to templates
 
     $scope.isCollapsed = true;
 
-    var isDealer = User.isDealer();
+    var isDealer = User.isDealer(),
+        lastPromise;
 
     $scope.getVehicleDescription = function (floorplan) {
       return [
@@ -100,23 +103,29 @@ angular.module('nextgearWebApp')
     };
 
     $scope.fetchNextResults = function () {
-      var paginator = $scope.data.paginator;
+      var paginator = $scope.data.paginator,
+          promise;
+
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       // get the next applicable batch of results
       $scope.data.loading = true;
-      Floorplan.search($scope.searchCriteria, paginator).then(
+      promise = lastPromise = Floorplan.search($scope.searchCriteria, paginator);
+      promise.then(
         function (result) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           // fast concatenation of results into existing array
           Array.prototype.push.apply($scope.data.results, result.Floorplans);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.data.loading = false;
         }
       );
+
     };
 
     $scope.resetSearch = function (initialFilter) {

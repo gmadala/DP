@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, Paginate, Floorplan) {
+  .factory('Payments', function($q, $filter, api, moment, Paginate, Floorplan, segmentio, metric) {
 
     // private global state:
 
@@ -111,6 +111,7 @@ angular.module('nextgearWebApp')
           isPayoff: asPayoff
         };
         paymentQueue.payments[floorplanId] = payment;
+        segmentio.track(metric.ADD_TO_BASKET);
       },
       addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
         var fee = {
@@ -122,6 +123,7 @@ angular.module('nextgearWebApp')
           dueDate: dueDate
         };
         paymentQueue.fees[financialRecordId] = fee;
+        segmentio.track(metric.ADD_TO_BASKET);
       },
       removePaymentFromQueue: function (id) {
         delete paymentQueue.payments[id];

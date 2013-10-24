@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard) {
+  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric) {
+
+    segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
 

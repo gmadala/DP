@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric) {
 
     $scope.today = new Date();
 
@@ -15,6 +15,7 @@ angular.module('nextgearWebApp')
         paymentsToday.push(payment);
       }
     });
+
     $scope.items = {
       fees: _.map(queue.fees),
       paymentsToday: paymentsToday,
@@ -37,6 +38,15 @@ angular.module('nextgearWebApp')
         return _.reduce($scope.items.paymentsToday, sumItems, total);
       }
     };
+
+
+    if (paymentsToday.length > 0 || $scope.items.fees.length > 0) {
+      segmentio.track(metric.MAKE_IMMEDIATE_PAYMENT); // TODO: Add revenue property
+    }
+
+    if (paymentsScheduled.length > 0) {
+      segmentio.track(metric.SCHEDULE_PAYMENT); // Server is responsible for tracking revenue when schedule occurs
+    }
 
     // no workflow currently specified for directly displaying these, but here they are in case we need them later
     $scope.receiptUrls = [];

@@ -1,67 +1,43 @@
-NextGear v0.3.1
+NextGear v0.4
 ======================
 
 Tickets included in this release: 
----------------------------------------
-13	Settings View --> Requirement
-61	Payments --> Requirement
-157	Bulk Flooring --> Requirement
-163	Seller Floor Plan --> Requirement
-237	Auction Navigation and Tools --> Requirement
-268	Auction Dashboard - Floorplan Groups --> Requirement
-408	[m] Top 10 Vehicles --> Requirement
-771	Login Enhancements --> Requirement
-848	Logout - Session Timed Out --> Requirement
-872	Home search screens - changing criteria can interfere with paging
-896	Settings - Revisit styles after all MVC is done to match design specs. 
-925	Overdue group in Mobile dashboard is not red
-1005	[m] Bug Fix - Lengthy model names overflow container on vehicle details page. 
-
+79	Scheduled Payments --> Requirement
+189	Dashboard  - Upcoming Payment Groups --> Requirement
 
 Defects fixed in this release: 
 ---------------------------------------
-858	Web: Security Questions 2 and 3 are missing from the User Profile section.
-882	Mobile - Unable to view PDF of Title in the mobile application.
-883	Mobile - Unable to login into application with valid details after first login.
-903	On Dashboard --> floorplan --> select completed link & unable to view all results
-905	Web: Login - Validation message styling issue.
-906	Web: Login - Unable to take input by hitting "Enter" key after filling login details.
-909	Web: Receipts - "401" Error pop up is getting displayed every time when dealer clicks on "Receipt" sub navigation option.
-914	Web: On Session out user is not getting logout of the application.
-915	Web: Auction - Resources - Document links are opening 404 Error message page(File not found).
-916	Web: Dealer - Resources - Document links are opening 404 Error message page(File not found).
-931	Web: Dealer - View A Report - Under "Current Reports", "View Report" button is displaying 404-File not found error page.
-932	Web: Dealer - View A Report - Under "Historical Reports", "View Report" button is displaying 404-File not found error page.
-933	Web: Safari-View A Report(Dealer)-Date Selection calender icon is not getting displayed properly.
-935	Web: Auction - View A Report - PDF for "Credit Availability Query History (PDF)" link is not getting displayed.
-936	Web: Safari-View A Report(Auction)-Date Selection calender icon is not getting displayed properly.
-937	Web: Auction User - View A Report - Under "Historical Reports", "View Report" button is displaying 404-File not found error page.
-938	Web:IE9 - Login- Error messages are not getting displayed.
-939	Web:IE9 - Validation Error messages are not getting displayed on Forgot Username or Password page.
-949	Web - Auction Dashboard - Under section 'Volume of Nextgear Floorplans' default should be set to 'Year' as per wireframe pdf document 'NextGear_Web_Wireframes_v.07.6' page 79.
-953	Web - Auction Dashboard - Under section 'Volume of Nextgear Floorplans' graph x-axis label should get changed as per the selection (Year, Month, Week). At present it is static to 'Months this year'.
-957	Web: Dashboard-Unapplied Funds - Bank Selection drop down list UI Issue.
-958	Web: Dashboard-FloorPlan - Alignment issue with text "Approved" , "Pending" , "Denied".
-960	Web: Auction user - Dashboard-FloorPlan - Alignment issue with text "Approved" , "Pending" , "Awaiting".
-962	Error Messages not appearing red
-964	Links (ex: adobe reader, test the reader, install the reader) should launch in new window(s)
-966	"Chat Now" should launch chat into a new window
-968	NextGear Logo should link back to Dashboard
-969	Privacy Statement & Contact Us should launch in new windows
-975	Floorplan --> results not sorting in correct order
-976	Web: Business Search overlay - Sorting indication arrow positioning issue in Firefox browser.
-979	Web: Message Pop Up - 401 error messages is not getting displayed in IE9 browser.
-980	Web: Layout issue in the tools section on the Home Screen with Dealer "36153Fs" on "IE9 and Safari" browsers.
-981	Web: Message pop up - Proper message title and message is not getting displayed in error.
-984	"Floorplan" must actually be "Floor Plan" or "floor plan" - related to #985 and #986
-985	"Floorplan" must actually be "Floor Plan" or "floor plan" - related to #984 and #986
-991	Mobile: NextGear - Login Screen is not fix - User is able to scroll the page vertically.
-992	Mobile: Auction User is able to log into the mobile application.
-993	Mobile: User is not exiting from the application when Device "Back" button is used. 
-997	Mobile: "Forgot Your Password?" form is getting close when user without filling the id taps on "Go" button.
-1000	Mobile: "User ID" recovery message pop up is getting close when user without filling details taps on "Go" button.
-1003	Mobile: BOS - Processing indication is getting displayed continuously when user comes back from Camera Screen.
-1004	Settings Page: Security Questions do not show up when form is not editable.
-995	Mobile: Device Back button is not working on any of the "General message dialog".
-987	Credit --> Utilized Amount --> web & mobile #'s do not match
-988	floor a vehicle - step #3 - purchase information should be sale information
+889	Dealer search - validate numeric values
+941	Processing popup shown after logging out
+945	Web - Floorplan Search : In a scenario, even after clicking on 'Clear Search Results' when the searching is in progress, system still displays the search data.
+998	Mobile: Forgot Your Password? - Identity Confirmation form is not getting displayed completely.
+1006	Mobile - Limit infinite-scrolling to load no more than 200 items
+1008	selecting/deselecting notifications --> receiving server error
+1009	Flooring a Vehicle --> Unable to Submit due to Missing Value for Seller
+1010	Notifications - when you select "All" --> somehow indicate all notifications are selected
+1016	Upcoming Payments --> Show Details --> Expand Button displayed incorrectly
+1017	Donut Charts --> leading is too much --> GLOBAL CHANGE
+1018	Counters --> no containers or text
+1024	Mobile: Floor a Vehicle - "Vin Search" button is not search result second time for same content.
+1025	Mobile: Floor a Vehicle - Header gets disappear for "Vin Search" result data for Nexus4.  
+1027	Mobile: Floor Plan-> Completed -> Title Vault lists are conflict on screen header for Nexus4. 
+1028	Mobile: Stale and aging Units -> Up arrow is not proper align for android.
+1033	[m] Bug Fix - Position of chevron is off for stale/aging unit list items.
+1034	Mobile - Payments view stuck on No Upcoming Payments
+1035	Logout Confirmation on Device Back button shows over other popups
+1036	Web: Edit Profile "Save" is not working when "Cell Phone" field is blank.
+1040	Mobile: "Seller" Search area is not editable.
+1043	Mobile: Floor a Vehicle -> Seller search results are not getting refresh when on result screen another search made.
+1044	Mobile: Floor a Vehicle -> Header is disappear in Step-2 while user back from Step-3 for nexus4.
+1046	Mobile: Floor a Vehicle -> Step-3 -> "Yes" and "No" text are not align with Radio button in "Trade-In" for Samsung Note2.
+1047	Mobile:  Floor a Vehicle -> Server Error message is displayed when set decimal value in "Mileage" field. 
+1048	Mobile: "Unhide All" text is disappear. 
+1050	Mobile: Floor a Vehicle -> "Clear This Step" button is not able to clear field data for step-2 & step-1 from when user get back from step - 3.
+1051	Web: Bulk Flooring - Proper validation message for "Purchase Amount" field is not getting displayed.
+1053	Web - Notification name overlaps the delivery type checkbox in Edit mode
+1054	Mobile - VIN search executes when re-visiting the Floor a Car view
+1055	[m] Bug Fix - title of Stale & Aging Units is inconsistent
+1056	[m] Bug Fix - VIN lookup failure prompt occurs again on step 3
+1060	Web: On Session out user is not getting any Notification message.
+1067	Web: User Profile - User is able to change password without entering "Confirm Password" field - Validation message is not getting displayed when confirmed password field is left blank.
+1071	Auction Resources - document links wired to bogus URLs

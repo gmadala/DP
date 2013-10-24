@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric) {
+
+    segmentio.track(metric.VIEW_PAYMENTS_LIST);
+    $scope.metric = metric; // make metric names available to template
 
     $scope.isCollapsed = true;
+
+    var lastPromise;
 
     $scope.getDueStatus = function (payment) {
       var due = moment(payment.DueDate),
@@ -58,20 +63,25 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.fetchNextResults = function () {
-      var paginator = $scope.payments.paginator;
+      var paginator = $scope.payments.paginator,
+          promise;
+
       if (paginator && !paginator.hasMore()) {
         return;
       }
 
       // get the next applicable batch of results
       $scope.payments.loading = true;
-      Payments.search($scope.payments.searchCriteria, paginator).then(
+      promise = lastPromise = Payments.search($scope.payments.searchCriteria, paginator);
+      promise.then(
         function (result) {
+          if (promise !== lastPromise) { return; }
           $scope.payments.loading = false;
           $scope.payments.paginator = result.$paginator;
           // fast concatenation of results into existing array
           Array.prototype.push.apply($scope.payments.results, result.SearchResults);
         }, function (/*error*/) {
+          if (promise !== lastPromise) { return; }
           $scope.payments.loading = false;
         }
       );

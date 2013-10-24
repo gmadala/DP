@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric) {
 
     var isDealer = User.isDealer();
 
@@ -160,6 +160,7 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (/*success*/) {
+          segmentio.track(isDealer ? metric.FLOOR_A_VEHICLE : metric.BULK_FLOOR_A_VEHICLE);
           $scope.submitInProgress = false;
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',

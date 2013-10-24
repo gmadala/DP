@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric) {
+    segmentio.track(metric.VIEW_SCHEDULED_PAYMENTS_LIST);
+
     var prv = {
-      cancelLocalScheduledPayment: function(p) {
-        p.isPending = p.isVoided = p.isProcessed = false;
-        p.isCancelled = true;
-        p.statusDate = moment().format('YYYY-MM-DD');
-        p.status = 'Cancelled';
-        return p;
-      }
-    };
+        cancelLocalScheduledPayment: function(p) {
+          p.isPending = p.isVoided = p.isProcessed = false;
+          p.isCancelled = true;
+          p.statusDate = moment().format('YYYY-MM-DD');
+          p.status = 'Cancelled';
+          return p;
+        }
+      },
+      lastPromise;
 
     $scope.isCollapsed = true;
 
@@ -24,7 +27,7 @@ angular.module('nextgearWebApp')
         },
         {
           label: 'Pending',
-          value: ScheduledPaymentsSearch.FILTER_BY_SCHEDULED
+          value: ScheduledPaymentsSearch.FILTER_BY_PENDING
         },
         {
           label: 'Processed',
@@ -51,18 +54,25 @@ angular.module('nextgearWebApp')
       },
 
       search: function() {
+        var promise;
         this.loading = true;
-        ScheduledPaymentsSearch.search(
+        promise = lastPromise = ScheduledPaymentsSearch.search(
             this.searchCriteria.query,
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
-            this.searchCriteria.filter)
-          .then(function(results) {
+            this.searchCriteria.filter);
+
+        promise.then(
+          function(results) {
+            if (promise !== lastPromise) { return; }
             this.loading = false;
             this.results = results;
-          }.bind(this), function (/*error*/) {
+          }.bind(this),
+          function (/*error*/) {
+            if (promise !== lastPromise) { return; }
             this.loading = false;
-          }.bind(this));
+          }.bind(this)
+        );
       },
 
       resetSearch: function() {

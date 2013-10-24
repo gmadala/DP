@@ -8,29 +8,31 @@
 
 <div class="modal-body search-controls">
   <div class="control-group shorten">
+    <label class="control-label">Business Name</label>
+    <div class="controls">
+      <input type="text" ng-model="proposedQuery.name">
+    </div>
+  </div>
+
+  <div class="control-group shorten">
     <label class="control-label">City</label>
     <div class="controls">
       <input type="text" ng-model="proposedQuery.city">
     </div>
   </div>
-  <div class="control-group shorten">
+
+  <div class="control-group">
     <label class="control-label">State</label>
     <div class="controls">
       <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
         <option value=""></option>
       </select>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label">Business Name</label>
-    <div class="controls">
-      <input type="text" ng-model="proposedQuery.name">
       <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
         <i class="glyphicon glyphicon-search"></i>
       </button>
     </div>
   </div>
+
 </div>
 
 <div ng-switch="data.results.length > 0 || data.loading">

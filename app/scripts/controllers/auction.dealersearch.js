@@ -2,6 +2,8 @@
 
 angular.module('nextgearWebApp')
   .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
+    $scope.onlyNumbersPattern = /^\d+$/;
+
     /*** Number Search ***/
     $scope.numberSearch = {
       dealerNumInactive: false,
@@ -21,16 +23,13 @@ angular.module('nextgearWebApp')
         this.noresults = {}; // reset the no result messages, we're doing a new search
 
         if (this.validate()) {
-          var dealerNumber = this.query.dealerNumber,
-            auctionAccessNumber = this.query.auctionAccessNumber;
-
-          if (dealerNumber) {
-            DealerNumberSearch.searchByDealerNumber(dealerNumber).then(
+          if (!this.dealerNumInactive) {
+            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
               prv.searchByNumberHandler
             );
           }
-          else if (auctionAccessNumber) {
-            DealerNumberSearch.searchByAuctionAccessNumber(auctionAccessNumber).then(
+          else {
+            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
               prv.searchByNumberHandler
             );
           }
@@ -38,19 +37,30 @@ angular.module('nextgearWebApp')
       },
       validate: function() {
         var isValid = false,
-          invalidDealerNum = !(this.query.dealerNumber || this.dealerNumInactive),
-          invalidAuctionAccessNum = !(this.query.auctionAccessNumber || this.auctionNumInactive);
+          dealerNumInput = $scope.numberSearchForm.dealerNum,
+          auctionAccessNumInput = $scope.numberSearchForm.auctionAccessNum,
+          missingRequiredDealerNum = !(this.dealerNumInactive || dealerNumInput.$viewValue),
+          missingRequiredAuctionAccessNum = !(this.auctionNumInactive || auctionAccessNumInput.$viewValue);
 
-        this.invalid = {};
+        this.invalid = {
+          required: {},
+          pattern: {}
+        };
 
-        if (invalidDealerNum && invalidAuctionAccessNum) {
-          this.invalid.dealerOrAccessNumber = true;
+        if (missingRequiredDealerNum && missingRequiredAuctionAccessNum) {
+          this.invalid.required.dealerOrAccessNumber = true;
         }
-        else if (invalidDealerNum) {
-          this.invalid.dealerNumber = true;
+        else if (missingRequiredDealerNum) {
+          this.invalid.required.dealerNumber = true;
         }
-        else if (invalidAuctionAccessNum) {
-          this.invalid.auctionAccessNumber = true;
+        else if (missingRequiredAuctionAccessNum) {
+          this.invalid.required.auctionAccessNumber = true;
+        }
+        else if (!this.dealerNumInactive && dealerNumInput.$error.pattern) {
+          this.invalid.pattern.dealerNumber = true;
+        }
+        else if (!this.auctionNumInactive && auctionAccessNumInput.$error.pattern) {
+          this.invalid.pattern.auctionAccessNumber = true;
         }
         else {
           isValid = true;

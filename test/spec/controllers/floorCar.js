@@ -30,7 +30,7 @@ describe('Controller: FloorCarCtrl', function () {
       dialog: function () {
         return {
           open: function () {
-            return $q.resolved(confirmResult);
+            return $q.when(confirmResult);
           }
         };
       },
@@ -44,12 +44,12 @@ describe('Controller: FloorCarCtrl', function () {
     };
     floorplanMock = {
       create: function () {
-        return $q.resolved(createResult);
+        return $q.when(createResult);
       }
     };
     blackbookMock = {
       fetchVehicleTypeInfoForVin: function () {
-        return $q.resolved(vinLookupResult);
+        return $q.when(vinLookupResult);
       }
     };
 
