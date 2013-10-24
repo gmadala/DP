@@ -23,16 +23,13 @@ angular.module('nextgearWebApp')
         this.noresults = {}; // reset the no result messages, we're doing a new search
 
         if (this.validate()) {
-          var dealerNumber = this.query.dealerNumber,
-            auctionAccessNumber = this.query.auctionAccessNumber;
-
-          if (dealerNumber) {
-            DealerNumberSearch.searchByDealerNumber(dealerNumber).then(
+          if (!this.dealerNumInactive) {
+            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
               prv.searchByNumberHandler
             );
           }
-          else if (auctionAccessNumber) {
-            DealerNumberSearch.searchByAuctionAccessNumber(auctionAccessNumber).then(
+          else {
+            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
               prv.searchByNumberHandler
             );
           }
