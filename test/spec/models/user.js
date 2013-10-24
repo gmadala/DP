@@ -155,7 +155,11 @@ describe('Model: User', function () {
 
   describe('Authenticate + isLoggedIn method', function () {
 
-    beforeEach(function () {
+    var segmentio;
+
+    beforeEach(inject(function (_segmentio_) {
+      segmentio = _segmentio_;
+
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
         Success: true,
         Message: null,
@@ -182,7 +186,7 @@ describe('Model: User', function () {
         Success: true,
         Data: {}
       });
-    });
+    }));
 
     it('should make the expected POST request', function () {
       httpBackend.expectPOST('/UserAccount/Authenticate');
@@ -221,6 +225,16 @@ describe('Model: User', function () {
       httpBackend.flush();
       expect(user.refreshInfo).toHaveBeenCalled();
       expect(user.refreshStatics).toHaveBeenCalled();
+    });
+
+    it('should identify the user for analytics upon success', function () {
+      spyOn(segmentio, 'identify');
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+      expect(segmentio.identify).toHaveBeenCalled();
+      expect(segmentio.identify.mostRecentCall.args[0]).toBe(1234);
+      expect(segmentio.identify.mostRecentCall.args[1]).toBeTruthy();
+      expect(segmentio.identify.mostRecentCall.args[1].name).toBe('Tricolor Auto');
     });
 
     it('should return a promise for authentication metadata including ShowUserInitialization', function () {

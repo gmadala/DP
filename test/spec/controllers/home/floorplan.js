@@ -22,7 +22,7 @@ describe('Controller: FloorplanCtrl', function () {
     };
     modelMock = {
       search: function () {
-        return $q.resolved(searchResult.data);
+        return $q.when(searchResult.data);
       },
       filterValues: Floorplan.filterValues
     };
