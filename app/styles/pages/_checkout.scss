@@ -11,6 +11,10 @@
     &.pay-due { width: 12%; }
     &.pay-status { width: 25%; }
     &.pay-pymt { width: 28%; }
+
+    .text-error {
+      padding-top: 5px;
+    }
   }
 
   .payments .pay-pymt .btn-block {

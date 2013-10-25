@@ -80,8 +80,8 @@
                         ng-disabled="payment.scheduleLoading">
                   {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
                 </button>
+                <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
               </div>
-            <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
           </li>
         </ul><!-- end Payments List -->
       </section>

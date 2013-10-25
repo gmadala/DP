@@ -80,8 +80,11 @@ angular.module('nextgearWebApp')
                   }
                   return result;
                 }, function (error) {
+                  if (error.dismiss) {
+                    error.dismiss();
+                  }
                   payment.scheduleLoading = false;
-                  payment.scheduleError = error || 'Error retrieving schedule information';
+                  payment.scheduleError = 'Error retrieving schedule information';
                   return $q.reject(error);
                 }
               );
