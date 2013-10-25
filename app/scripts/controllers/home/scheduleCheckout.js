@@ -36,8 +36,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.removeSchedule = function () {
-      payment.scheduleDate = null;
-      dialog.close();
+      $scope.finalize(null);
     };
 
     $scope.commit = function () {
@@ -46,8 +45,22 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      payment.scheduleDate = $scope.model.selectedDate;
-      dialog.close();
+      $scope.finalize($scope.model.selectedDate);
+    };
+
+    $scope.finalize = function (scheduleDate) {
+      $scope.submitInProgress = true;
+      // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
+      Payments.fetchPaymentAmountOnDate(payment.floorplanId, scheduleDate || new Date(), payment.isPayoff).then(
+        function (newAmount) {
+          $scope.submitInProgress = false;
+          payment.scheduleDate = scheduleDate;
+          payment.amount = newAmount;
+          dialog.close();
+        }, function (/*error*/) {
+          $scope.submitInProgress = false;
+        }
+      );
     };
 
     $scope.close = function() {

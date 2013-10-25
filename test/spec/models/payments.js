@@ -647,6 +647,48 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('fetchPaymentAmountOnDate function', function () {
+
+    var callParams;
+
+    beforeEach(function () {
+      httpBackend.whenGET(/\/payment\/calculatepaymentamount\?.*/).respond(function(method, url) {
+        callParams = urlParser.extractParams(url);
+        return [200, {
+          Success: true,
+          Data: {
+            FloorplanId: 'foo',
+            PaymentAmount: 345.67
+          }
+        }, {}];
+      });
+    });
+
+    it('should call the expected endpoint', function () {
+      httpBackend.expectGET(/\/payment\/calculatepaymentamount\?.*/);
+      payments.fetchPaymentAmountOnDate('foo', new Date(), false);
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should send the expected params', function () {
+      payments.fetchPaymentAmountOnDate('foo', new Date(2013, 9, 22), false);
+      httpBackend.flush();
+      expect(callParams.FloorplanId).toBe('foo');
+      expect(callParams.ScheduledDate).toBe('2013-10-22');
+      expect(callParams.IsCurtailment).toBe('true');
+    });
+
+    it('should return a promise for the resulting PaymentAmount', function () {
+      payments.fetchPaymentAmountOnDate('foo', new Date(2013, 11, 22), false).then(
+        function (result) {
+          expect(result).toBe(345.67);
+        }
+      );
+      httpBackend.flush();
+    });
+
+  });
+
   describe('checkout function', function () {
 
     var stubResponse;

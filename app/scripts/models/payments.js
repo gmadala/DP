@@ -188,6 +188,18 @@ angular.module('nextgearWebApp')
           }
         );
       },
+      fetchPaymentAmountOnDate: function (floorplanId, scheduledDate, isPayoff) {
+        var params = {
+          FloorplanId: floorplanId,
+          ScheduledDate: api.toShortISODate(scheduledDate),
+          IsCurtailment: !isPayoff
+        };
+        return api.request('GET', '/payment/calculatepaymentamount', params).then(
+          function (result) {
+            return result.PaymentAmount;
+          }
+        );
+      },
       checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
         var shortFees = [],
           shortPayments = [];

@@ -41,7 +41,11 @@
       </div>
     </div>
     <div class="control-group half pay-now">
-      or <button ng-click="removeSchedule()" class="btn btn-primary btn-inline" ng-disabled="!model.canPayNow">Pay Now</button>
+      or <button ng-click="removeSchedule()"
+                 class="btn btn-primary btn-inline"
+                 ng-disabled="!model.canPayNow || submitInProgress">
+           Pay Now
+         </button>
     </div>
   </form><!-- end .date-form -->
 
@@ -58,6 +62,6 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="commit()" class="btn btn-primary">OK</button>
-  <button ng-click="close()" class="btn btn-primary">Cancel</button>
+  <button ng-click="commit()" ng-disabled="submitInProgress" class="btn btn-primary">OK</button>
+  <button ng-click="close()" ng-disabled="submitInProgress" class="btn btn-primary">Cancel</button>
 </div>
