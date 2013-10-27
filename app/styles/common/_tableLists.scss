@@ -20,6 +20,7 @@
 }
 
 .table-list-head {
+  @extend %center;
   background-color: #666;
   color: $white;
   overflow: hidden;
@@ -27,6 +28,7 @@
    .cell {
     @extend %thin;
     @extend %small;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 
     & + .cell {
