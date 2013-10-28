@@ -49,6 +49,8 @@ angular.module('nextgearWebApp')
         return total + (payment.revenueToTrack || 0); // different than payment amount b/c principal is not revenue
       }, revenue);
 
+      revenue = Math.round(revenue * 100) / 100; // round to 2 decimal places
+
       segmentio.track(metric.MAKE_IMMEDIATE_PAYMENT, { revenue: revenue });
     }
 
