@@ -44,6 +44,7 @@ angular.module('nextgearWebApp')
       ],
 
       loadMoreData: function() {
+        if (!ScheduledPaymentsSearch.hasMoreRecords()) { return; }
         this.loading = true;
         ScheduledPaymentsSearch.loadMoreData().then(function(results) {
           this.loading = false;

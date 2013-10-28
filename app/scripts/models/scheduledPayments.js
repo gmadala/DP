@@ -5,7 +5,8 @@ angular.module('nextgearWebApp')
 
     var PAGE_SIZE = 15;
     var lastRequest = null;
-    var totalCount = 0;
+    var totalRowCount = 0;
+    var rowCount = 0;
 
     var prv = {
       request: function(request) {
@@ -13,7 +14,8 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/payment/searchscheduled', lastRequest).then(
           function(results) {
             var searchResults = [];
-            totalCount = results.PaymentRowCount;
+            totalRowCount = results.ScheduledPaymentRowCount;
+            rowCount += results.SearchResults.length;
 
             for (var i = 0; i < results.SearchResults.length; i++) {
               var item = results.SearchResults[i];
@@ -97,6 +99,10 @@ angular.module('nextgearWebApp')
       FILTER_BY_PROCESSED: 2,
       FILTER_BY_CANCELED: 3,
       FILTER_BY_VOIDED: 4,
+
+      hasMoreRecords: function() {
+        return totalRowCount > rowCount;
+      },
 
       search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
         query = query || '';
