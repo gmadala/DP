@@ -18,6 +18,9 @@ angular.module('nextgearWebApp')
         };
         var options = angular.extend({}, defaults, scope.options());
 
+        var canvasContext = element[0].getContext('2d');
+        var chartObj = new Chart(canvasContext);
+
         // Because the data is loaded asynchronously, we need to `$watch()`
         scope.$watch('data', function() {
           if (angular.isDefined(scope.data)) {
@@ -28,8 +31,7 @@ angular.module('nextgearWebApp')
               G_vmlCanvasManager.initElement(element[0]);
             }
 
-            var canvasContext = element[0].getContext('2d');
-            new Chart(canvasContext)[scope.type](scope.data, options);
+            chartObj[scope.type](scope.data, options);
           }
         });
       }
