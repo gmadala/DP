@@ -14,21 +14,16 @@ describe('Directive: nxgFocus', function () {
       scope.event = event;
     };
 
-    element = angular.element('<input type="text" nxg-focus="focusTasks($event, \'ok\')"></input>');
+    element = angular.element('<input id="test-focus" type="text" nxg-focus="focusTasks($event, \'ok\')"></input>');
     element = $compile(element)(scope);
     $rootScope.$digest();
   }));
 
   it('should execute the expression on focus in the context of the scope', function () {
-    // console.log(scope.foo);
-    // element.trigger('focus');
-    // console.log(scope.foo);
-    // expect(scope.foo).toBe('bar ok');
+    // because the focus event is finicky and won't get triggered
+    // via trigger('focus') or focus()
+    var ev = jQuery._data( element[0], "events" );
+    ev.focus[0].handler();
+    expect(scope.foo).toBe('bar ok');
   });
-
-  it('should expose the event object', function () {
-    // element.trigger('focus');
-    // expect(scope.event.preventDefault).toBeDefined();
-  });
-
 });
