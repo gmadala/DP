@@ -341,6 +341,7 @@ describe("Model: Payments", function () {
         UnitDescription: 'some description',
         CurrentPayoff: 5000,
         AmountDue: 1000,
+        PrincipalDue: 800,
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
@@ -351,7 +352,8 @@ describe("Model: Payments", function () {
         payment.UnitDescription,
         payment.AmountDue,
         payment.DueDate,
-        false
+        false,
+        payment.AmountDue - payment.PrincipalDue
       );
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payment');
     });
@@ -364,6 +366,7 @@ describe("Model: Payments", function () {
         UnitDescription: 'some description',
         CurrentPayoff: 5000,
         AmountDue: 1000,
+        PrincipalPayoff: 4600,
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
@@ -372,12 +375,28 @@ describe("Model: Payments", function () {
         payment.Vin,
         payment.StockNumber,
         payment.UnitDescription,
-        payment.AmountDue,
+        payment.CurrentPayoff,
         payment.DueDate,
-        true
+        true,
+        payment.CurrentPayoff - payment.PrincipalPayoff
       );
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payoff');
     });
+
+    it('should track payments/payoffs being added to the queue', inject(function (segmentio) {
+      spyOn(segmentio, 'track');
+      payments.addPaymentToQueue(
+        'id123',
+        'vin',
+        'stock',
+        'desc',
+        100,
+        '2013-01-01',
+        true,
+        80
+      );
+      expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
+    }));
 
   });
 
@@ -402,6 +421,18 @@ describe("Model: Payments", function () {
         fee.EffectiveDate);
       expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(true);
     });
+
+    it('should track fees being added to the queue', inject(function (segmentio) {
+      spyOn(segmentio, 'track');
+      payments.addFeeToQueue(
+        'id123',
+        'vin',
+        'type',
+        'desc',
+        1290,
+        '2013-01-02');
+      expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
+    }));
 
   });
 
@@ -503,7 +534,7 @@ describe("Model: Payments", function () {
       expect(content.payments).toBeDefined();
 
       // this is deliberately AFTER the queue content retrieval to test that we're getting "live" objects
-      payments.addPaymentToQueue('floorId1', 'vin', 'stock1', 'desc', 200, '2013-01-02', true);
+      payments.addPaymentToQueue('floorId1', 'vin', 'stock1', 'desc', 200, '2013-01-02', true, 150);
 
       var items = _.map(content.payments);
       expect(items.length).toBe(1);
@@ -515,6 +546,7 @@ describe("Model: Payments", function () {
       expect(pmt.amount).toBe(200);
       expect(pmt.dueDate).toBe('2013-01-02');
       expect(pmt.isPayoff).toBe(true);
+      expect(pmt.revenueToTrack).toBe(150);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {

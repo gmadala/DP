@@ -12,12 +12,17 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     transactionInfo,
     receipts,
     state,
+    segmentio,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $state, Receipts) {
+  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_) {
     receipts = Receipts;
     state = $state;
+    segmentio = _segmentio_;
+
+    spyOn(segmentio, 'track');
+
     scope = $rootScope.$new();
     dialog = {
       close: angular.noop
@@ -27,8 +32,8 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
         'fee1': { id: 'bar', amount: 1 }
       },
       payments: {
-        'pmt1': { id: 'baz', amount: 10 },
-        'pmt2': { id: 'biz', scheduleDate: new Date(), amount: 100 }
+        'pmt1': { id: 'baz', amount: 10, revenueToTrack: 8 },
+        'pmt2': { id: 'biz', scheduleDate: new Date(), amount: 100, revenueToTrack: 80 }
       }
     };
     transactionInfo = {
@@ -95,6 +100,23 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     it('should return the expected result when a mix of items were sent', function () {
       run();
       expect(scope.items.getStatus('submitted', 'scheduled')).toBe('submitted and scheduled');
+    });
+
+  });
+
+  describe('analytics logic', function () {
+
+    it('should track immediate payments (including fees), with a revenue total', function () {
+      expect(segmentio.track.calls.length).toBe(2);
+      expect(segmentio.track.calls[0].args[0]).toBe('Make Immediate Payment');
+      expect(segmentio.track.calls[0].args[1]).toBeDefined();
+      expect(segmentio.track.calls[0].args[1].revenue).toBe(9);
+    });
+
+    it('should track scheduled payments, leaving revenue for later tracking by server', function () {
+      expect(segmentio.track.calls.length).toBe(2);
+      expect(segmentio.track.mostRecentCall.args[0]).toBe('Schedule Payment');
+      expect(segmentio.track.mostRecentCall.args[1]).not.toBeDefined();
     });
 
   });
