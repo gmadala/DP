@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('ScheduledPaymentsSearch', function(api) {
+  .factory('ScheduledPaymentsSearch', function(api, nxgConfig, $q) {
 
     var PAGE_SIZE = 15;
     var lastRequest = null;
@@ -10,6 +10,12 @@ angular.module('nextgearWebApp')
 
     var prv = {
       request: function(request) {
+        if (request.PageNumber * request.PageSize > nxgConfig.infiniteScrollingMax) {
+          var deferred = $q.defer();
+          deferred.reject(false);
+          return deferred.promise;
+        }
+
         lastRequest = request;
         return api.request('GET', '/payment/searchscheduled', lastRequest).then(
           function(results) {

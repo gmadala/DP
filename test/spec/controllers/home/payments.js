@@ -113,6 +113,7 @@ describe('Controller: PaymentsCtrl', function () {
       scope.payments.results = ['foo', 'bar'];
       scope.payments.search();
       expect(scope.payments.results.length).toBe(0);
+      expect(scope.payments.hitInfiniteScrollMax).toBe(false);
     });
 
     it('should commit the proposedSearchCriteria (as a copy)', function () {
@@ -148,11 +149,15 @@ describe('Controller: PaymentsCtrl', function () {
       scope.payments.paginator = {
         hasMore: function () {
           return false;
+        },
+        hitMaximumLimit: function() {
+          return true;
         }
       };
 
       scope.payments.fetchNextResults();
       expect(modelMock.search.calls.length).toBe(originalCallCount);
+      expect(scope.payments.hitInfiniteScrollMax).toBe(true);
     });
 
     it('should set loading to true while waiting for results', function () {

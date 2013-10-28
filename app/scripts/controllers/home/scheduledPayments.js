@@ -16,6 +16,7 @@ angular.module('nextgearWebApp')
       lastPromise;
 
     $scope.isCollapsed = true;
+    $scope.hitInfiniteScrollMax = false;
 
     $scope.scheduledPayments = {
       loading: false,
@@ -49,7 +50,11 @@ angular.module('nextgearWebApp')
         ScheduledPaymentsSearch.loadMoreData().then(function(results) {
           this.loading = false;
           this.results = this.results.concat(results);
-        }.bind(this), function (/*error*/) {
+        }.bind(this), function (error) {
+          // No more results because of our infinite scrolling max
+          if (_.isBoolean(error) && error === false) {
+            $scope.hitInfiniteScrollMax = true;
+          }
           this.loading = false;
         }.bind(this));
       },
@@ -57,6 +62,7 @@ angular.module('nextgearWebApp')
       search: function() {
         var promise;
         this.loading = true;
+        $scope.hitInfiniteScrollMax = false;
         promise = lastPromise = ScheduledPaymentsSearch.search(
             this.searchCriteria.query,
             this.searchCriteria.startDate,

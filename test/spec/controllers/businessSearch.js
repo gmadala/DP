@@ -48,7 +48,8 @@ describe('Controller: BusinessSearchCtrl', function () {
       loading: true, // a load is started automatically
       paginator: null,
       sortBy: 'BusinessName',
-      sortDescending: false
+      sortDescending: false,
+      hitInfiniteScrollMax: false
     };
 
     expect(angular.equals(scope.data, expected)).toBe(true);
@@ -91,11 +92,15 @@ describe('Controller: BusinessSearchCtrl', function () {
       scope.data.paginator = {
         hasMore: function () {
           return false;
+        },
+        hitMaximumLimit: function() {
+          return true;
         }
       };
 
       scope.fetchNextResults();
       expect(model.search.calls.length).toBe(originalCallCount);
+      expect(scope.data.hitInfiniteScrollMax).toBe(true);
     });
 
     it('should call the search method with the expected parameters', function () {

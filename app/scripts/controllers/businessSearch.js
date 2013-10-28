@@ -13,12 +13,14 @@ angular.module('nextgearWebApp')
       loading: false,
       paginator: null,
       sortBy: 'BusinessName',
-      sortDescending: false
+      sortDescending: false,
+      hitInfiniteScrollMax: false
     };
 
     $scope.search = function() {
       // search means "start from the beginning with current criteria"
       $scope.data.paginator = null;
+      $scope.data.hitInfiniteScrollMax = false;
       $scope.data.results.length = 0;
 
       var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
@@ -39,6 +41,9 @@ angular.module('nextgearWebApp')
       var paginator = $scope.data.paginator,
           promise;
       if (paginator && !paginator.hasMore()) {
+        if (paginator.hitMaximumLimit()) {
+          $scope.data.hitInfiniteScrollMax = true;
+        }
         return;
       }
 

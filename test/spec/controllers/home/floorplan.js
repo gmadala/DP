@@ -70,6 +70,7 @@ describe('Controller: FloorplanCtrl', function () {
         scope.data.results = ['foo', 'bar'];
         scope.search();
         expect(scope.data.results.length).toBe(0);
+        expect(scope.data.hitInfiniteScrollMax).toBe(false);
       });
 
       it('should commit the proposedSearchCriteria (as a copy)', function () {
@@ -105,11 +106,15 @@ describe('Controller: FloorplanCtrl', function () {
         scope.data.paginator = {
           hasMore: function () {
             return false;
+          },
+          hitMaximumLimit: function() {
+            return true;
           }
         };
 
         scope.fetchNextResults();
         expect(modelMock.search.calls.length).toBe(originalCallCount);
+        expect(scope.data.hitInfiniteScrollMax).toBe(true);
       });
 
       it('should set loading to true while waiting for results', function () {
@@ -134,6 +139,9 @@ describe('Controller: FloorplanCtrl', function () {
         var p = {
           hasMore: function () {
             return true;
+          },
+          hitMaximumLimit: function() {
+            return false;
           }
         };
         searchResult.data = {

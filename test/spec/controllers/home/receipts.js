@@ -103,6 +103,7 @@ describe('Controller: ReceiptsCtrl', function () {
       scope.receipts.results = ['foo', 'bar'];
       scope.receipts.search();
       expect(scope.receipts.results.length).toBe(0);
+      expect(scope.receipts.hitInfiniteScrollMax).toBe(false);
     });
 
     it('should commit the proposedSearchCriteria (as a copy)', function () {
@@ -133,11 +134,15 @@ describe('Controller: ReceiptsCtrl', function () {
       scope.receipts.paginator = {
         hasMore: function () {
           return false;
+        },
+        hitMaximumLimit: function() {
+          return true;
         }
       };
 
       scope.receipts.fetchNextResults();
       expect(receipts.search).not.toHaveBeenCalled();
+      expect(scope.receipts.hitInfiniteScrollMax).toBe(true);
     });
 
     it('should set loading to true while waiting for results', function () {

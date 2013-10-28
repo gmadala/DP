@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Paginate', function () {
+  .factory('Paginate', function (nxgConfig) {
     var pageIndexStart = 1;
 
     return {
@@ -15,9 +15,13 @@ angular.module('nextgearWebApp')
       addPaginator: function (data, totalItems, currentPageNumber, pageSize) {
         return angular.extend(data, {
           $paginator: {
+            hitMaximumLimit: function() {
+              var offset = 1 - pageIndexStart;
+              return (currentPageNumber + offset) * pageSize >= nxgConfig.infiniteScrollingMax;
+            },
             hasMore: function () {
               var offset = 1 - pageIndexStart;
-              return (currentPageNumber + offset) * pageSize < totalItems;
+              return (currentPageNumber + offset) * pageSize < Math.min(nxgConfig.infiniteScrollingMax, totalItems);
             },
             nextPage: function () {
               return currentPageNumber + 1;
