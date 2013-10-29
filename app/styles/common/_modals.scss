@@ -89,11 +89,12 @@
   }
 
   th {
+    @extend %thin;
     @extend %align-left;
     vertical-align: middle;
     text-transform: uppercase;
     font-weight: normal;
-    padding: 6px 20px 6px 6px;
+    padding: 6px 18px 6px 6px;
   }
 
   td, th {
@@ -113,22 +114,22 @@
   &.search-modal-business, &.dealer-search-modal {
     td, th {
       &.bus-name, &.bus-legalName {
-        @extend %quarter-width;
+        width: 23%;
       }
-      &.bus-num { width: 15%; }
+      &.bus-num { width: 17%; }
       &.bus-city { width: 15%; }
-      &.bus-state {  width: 10%; }
+      &.bus-state {  width: 12%; }
       &.bus-select { width: 10%; }
     }
 
     .show-access-num td, .show-access-num th {
       &.bus-name { width: 20%; }
       &.bus-legalName { width: 18%;}
-      &.bus-num { width: 15%; }
-      &.bus-city { width: 14%; }
-      &.bus-state { width: 10%;}
+      &.bus-num { width: 16%; }
+      &.bus-city { width: 13%; }
+      &.bus-state { width: 11%;}
       &.bus-auctionNum { width: 13%; }
-      &.bus-select { width: 10%; }
+      &.bus-select { width: 9%; }
     }
   }
 }

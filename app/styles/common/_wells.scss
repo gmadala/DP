@@ -6,6 +6,7 @@
   border: 1px solid $well-border;
 
   h4 {
+    @extend %thin;
     margin-top: 0px;
     margin-bottom: 28px;
   }

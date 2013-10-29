@@ -232,6 +232,7 @@
 }
 
 .nxg-cal-header {
+  @extend %thin;
   top: 4px;
   left: 59px;
   position: absolute;
