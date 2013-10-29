@@ -1,43 +1,26 @@
-NextGear v0.4
+NextGear v0.5
 ======================
-
-Tickets included in this release: 
-79	Scheduled Payments --> Requirement
-189	Dashboard  - Upcoming Payment Groups --> Requirement
 
 Defects fixed in this release: 
 ---------------------------------------
-889	Dealer search - validate numeric values
-941	Processing popup shown after logging out
-945	Web - Floorplan Search : In a scenario, even after clicking on 'Clear Search Results' when the searching is in progress, system still displays the search data.
-998	Mobile: Forgot Your Password? - Identity Confirmation form is not getting displayed completely.
-1006	Mobile - Limit infinite-scrolling to load no more than 200 items
-1008	selecting/deselecting notifications --> receiving server error
-1009	Flooring a Vehicle --> Unable to Submit due to Missing Value for Seller
-1010	Notifications - when you select "All" --> somehow indicate all notifications are selected
-1016	Upcoming Payments --> Show Details --> Expand Button displayed incorrectly
-1017	Donut Charts --> leading is too much --> GLOBAL CHANGE
-1018	Counters --> no containers or text
-1024	Mobile: Floor a Vehicle - "Vin Search" button is not search result second time for same content.
-1025	Mobile: Floor a Vehicle - Header gets disappear for "Vin Search" result data for Nexus4.  
-1027	Mobile: Floor Plan-> Completed -> Title Vault lists are conflict on screen header for Nexus4. 
-1028	Mobile: Stale and aging Units -> Up arrow is not proper align for android.
-1033	[m] Bug Fix - Position of chevron is off for stale/aging unit list items.
-1034	Mobile - Payments view stuck on No Upcoming Payments
-1035	Logout Confirmation on Device Back button shows over other popups
-1036	Web: Edit Profile "Save" is not working when "Cell Phone" field is blank.
-1040	Mobile: "Seller" Search area is not editable.
-1043	Mobile: Floor a Vehicle -> Seller search results are not getting refresh when on result screen another search made.
-1044	Mobile: Floor a Vehicle -> Header is disappear in Step-2 while user back from Step-3 for nexus4.
-1046	Mobile: Floor a Vehicle -> Step-3 -> "Yes" and "No" text are not align with Radio button in "Trade-In" for Samsung Note2.
-1047	Mobile:  Floor a Vehicle -> Server Error message is displayed when set decimal value in "Mileage" field. 
-1048	Mobile: "Unhide All" text is disappear. 
-1050	Mobile: Floor a Vehicle -> "Clear This Step" button is not able to clear field data for step-2 & step-1 from when user get back from step - 3.
-1051	Web: Bulk Flooring - Proper validation message for "Purchase Amount" field is not getting displayed.
-1053	Web - Notification name overlaps the delivery type checkbox in Edit mode
-1054	Mobile - VIN search executes when re-visiting the Floor a Car view
-1055	[m] Bug Fix - title of Stale & Aging Units is inconsistent
-1056	[m] Bug Fix - VIN lookup failure prompt occurs again on step 3
-1060	Web: On Session out user is not getting any Notification message.
-1067	Web: User Profile - User is able to change password without entering "Confirm Password" field - Validation message is not getting displayed when confirmed password field is left blank.
-1071	Auction Resources - document links wired to bogus URLs
+885	Horizontal bar chart rendering/positioning issues
+888	Analytics - Increase width of best/worst mover labels 
+903	On Dashboard --> floorplan --> select completed link & unable to view all results
+964	Links (ex: adobe reader, test the reader, install the reader) should launch in new window(s)
+970	Settings --> Business Settings --> Enhanced Registration formatting = off
+971	Settings --> Notifications --> edit button = not working
+979	Web: Message Pop Up - 401 error messages is not getting displayed in IE9 browser.
+981	Web: Message pop up - Proper message title and message is not getting displayed in error.
+1007	Web - Limit infinite-scrolling to load no more than 500 items
+1014	Upcoming Payments - Week & Month Views --> UPDATED DESIGN
+1032	Mobile: Stale and Aging Units -> List should get display from the top whenever  user opens any groping tab. 
+1041	Web: Payments - Texting issue on "Your payment(s) have been submitted and scheduled." confirmation window.
+1045	Floor a Vehicle -> Clear text field option is not available in Search field as par the wireframe.
+1066	Mobile - Security question description is missing while password reset.
+1080	Mobile: User is able to select same payment again when he comes back to payment list through "Add Another Payment" button.
+1084	Scheduled payments - infinite scroll tries to load past end of list
+1102	Mobile: "Payments" - Bank accounts drop down issue.
+1013	Upcoming Payments - Today Button --> Make Link, not Toggle
+1063	Increase spacing on words / content in web app
+1012	Login Screen Type Justification
+1019	Center Data Grid Labels to the Column Width
