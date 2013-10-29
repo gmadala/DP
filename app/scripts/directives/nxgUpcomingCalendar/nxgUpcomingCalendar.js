@@ -56,7 +56,7 @@ angular.module('nextgearWebApp')
             //Inject month string into calendar header.
             if ($scope.options.defaultView !== 'basicWeek') {
               angular.element('.nxg-cal-month-name').remove();
-              angular.element('.fc-header-right').prepend('<h4 class=\"nxg-cal-month-name\">' + moment(view.start).format('MMMM') + '</h4>');
+              angular.element('.fc-header-right').prepend('<h4 class=\"nxg-cal-month-name\">' + moment(view.start).format('MMMM YYYY') + '</h4>');
             }
           },
           dayRender: function(date, cell) {
