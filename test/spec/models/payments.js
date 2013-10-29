@@ -148,7 +148,7 @@ describe("Model: Payments", function () {
       ];
       payments.search(defaultCriteria).then(function (results) { output = results; });
       httpBackend.flush();
-      expect(output.SearchResults[0].$titleURL).toBe('/floorplan/title/123-456/0');
+      expect(output.SearchResults[0].$titleURL).toBe('/floorplan/title/123-456/0/Title_456');
     });
 
     it('should NOT send a Keyword if search term is empty/null', function () {

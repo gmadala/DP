@@ -3,6 +3,11 @@
 angular.module('nextgearWebApp')
   .controller('AuctionReportsCtrl', function($scope, api, segmentio, metric) {
 
+    /***
+     * The last URI route param of the report endpoints is used so browsers can get it as a default filename
+     * when saving the report PDF.
+     */
+
     $scope.metric = metric; // make metric names available to template
 
     $scope.data = null;
@@ -10,11 +15,11 @@ angular.module('nextgearWebApp')
     $scope.documents = [
       {
         'title': 'Credit Availability Query History (PDF)',
-        'url': api.contentLink('/report/creditavailabilityqueryhistory', {})
+        'url': api.contentLink('/report/creditavailabilityqueryhistory/CreditAvailability', {})
       },
       {
         'title': 'Receivable Detail (PDF)',
-        'url': api.contentLink('/report/getReceivableDetail', {})
+        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
 
@@ -28,7 +33,7 @@ angular.module('nextgearWebApp')
       }
 
       var date = api.toShortISODate($scope.data.disDate);
-      var strUrl = api.contentLink('/report/disbursementdetail/' + date, {});
+      var strUrl = api.contentLink('/report/disbursementdetail/' + date + ('/Disbursements-' + date /*filename*/), {});
 
       window.open(
         strUrl,

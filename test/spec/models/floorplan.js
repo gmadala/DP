@@ -255,7 +255,7 @@ describe('Model: Floorplan', function () {
       ];
       floorplan.search(defaultCriteria).then(function (results) { output = results; });
       httpBackend.flush();
-      expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/0');
+      expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/0/Title_456');
       expect(output.Floorplans[1].$titleURL).not.toBeDefined();
     });
 
@@ -461,7 +461,7 @@ describe('Model: Floorplan', function () {
       var out = floorplan.addTitleURL({
         StockNumber: 'foo'
       });
-      expect(out.$titleURL).toBe('/floorplan/title/123-foo/0');
+      expect(out.$titleURL).toBe('/floorplan/title/123-foo/0/Title_foo');
     });
 
     it('should use the buyer business number + item stock number if buyer biz # is present', function () {
@@ -469,7 +469,7 @@ describe('Model: Floorplan', function () {
         StockNumber: 'foo',
         BuyerBusinessNumber: '777'
       });
-      expect(out.$titleURL).toBe('/floorplan/title/777-foo/0');
+      expect(out.$titleURL).toBe('/floorplan/title/777-foo/0/Title_foo');
     });
 
   });

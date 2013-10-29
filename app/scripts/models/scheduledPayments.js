@@ -55,7 +55,7 @@ angular.module('nextgearWebApp')
       },
 
       getReceiptURL: function(item) {
-        return api.contentLink('/receipt/view/' + item.FinancialTransactionId);
+        return api.contentLink('/receipt/view/' + item.FinancialTransactionId + '/Receipt');
       },
 
       isPending: function(item) {

@@ -26,7 +26,7 @@ angular.module('nextgearWebApp')
         );
       },
       getReceiptUrl: function (transactionId) {
-        return api.contentLink('/receipt/view/' + transactionId);
+        return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
       }
     };
   });

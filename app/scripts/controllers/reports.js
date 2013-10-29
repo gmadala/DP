@@ -3,6 +3,11 @@
 angular.module('nextgearWebApp')
   .controller('ReportsCtrl', function($scope, api, segmentio, metric) {
 
+    /***
+     * The last URI route param of the report endpoints is used so browsers can get it as a default filename
+     * when saving the report PDF.
+     */
+
     $scope.metric = metric; // make metric names available to template
 
     $scope.data = null;
@@ -10,7 +15,7 @@ angular.module('nextgearWebApp')
     $scope.currentReports = [
       {
         'title': 'Receivable Detail (PDF)',
-        'url': api.contentLink('/report/getReceivableDetail', {})
+        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
 
@@ -27,11 +32,15 @@ angular.module('nextgearWebApp')
       var endDate = api.toShortISODate($scope.data.stmtEndDate);
 
       var strUrl = '/report/dealerstatement/' + startDate + '/' + endDate;
+      var defaultFilename = '/DealerStatement_' + startDate + '_to_' + endDate;
 
       // append the vin filter string if one was provided, encoding it for safe transit in a GET query
       if ($scope.data.stmtVinFilter) {
-        strUrl += '/' + encodeURIComponent($scope.data.stmtVinFilter);
+        var encodedVin = encodeURIComponent($scope.data.stmtVinFilter);
+        strUrl += '/' + encodedVin;
+        defaultFilename += 'forVin_' + encodedVin;
       }
+      strUrl +=  defaultFilename;
 
       window.open(
         api.contentLink(strUrl, {}),
@@ -55,7 +64,7 @@ angular.module('nextgearWebApp')
 
       var date = api.toShortISODate($scope.data.disDate);
       var strUrl = api.contentLink(
-        '/report/disbursementdetail/' + date,
+        '/report/disbursementdetail/' + date + ('/Disbursements_' + date /*filename*/),
         {}
       );
 
@@ -82,20 +91,25 @@ angular.module('nextgearWebApp')
       var endDate = api.toShortISODate($scope.data.paidOffEndDate);
 
       var params = {};
+      var defaultFilename = '/PaidOff_' + startDate + '_to_' + endDate;
 
       if ($scope.data.paidOffVinFilter) {
-        params.VIN = encodeURIComponent($scope.data.paidOffVinFilter);
+        var encodedVin = encodeURIComponent($scope.data.paidOffVinFilter);
+        params.VIN = encodedVin;
+        defaultFilename += '_vin_' + encodedVin;
       }
 
       if ($scope.data.stockNos) {
         params.stockNumber = $scope.trimCommasAndWhitespace( $scope.data.stockNos );
+        defaultFilename += '_stockNumber_' + params.stockNumber;
       }
       else if ($scope.data.rangeStart || $scope.data.rangeEnd) {
         params.stockNumber = $scope.data.rangeStart + '-' + $scope.data.rangeEnd;
+        defaultFilename += '_stockNumbers_' + params.stockNumber;
       }
 
       var strUrl = api.contentLink(
-        '/report/paidoffsummary/' + startDate + '/' + endDate,
+        '/report/paidoffsummary/' + startDate + '/' + endDate + defaultFilename,
         params
       );
 
@@ -120,7 +134,7 @@ angular.module('nextgearWebApp')
 
       var date = api.toShortISODate($scope.data.curtailmentDate);
       var strUrl = api.contentLink(
-        '/report/getupcomingcurtailmentpayments/' + date,
+        '/report/getupcomingcurtailmentpayments/' + date + '/CurtailmentPaymentsUntil_' + date,
         {}
       );
 
