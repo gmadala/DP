@@ -29,7 +29,8 @@ angular.module('nextgearWebApp')
     $scope.payments = {
       results: [],
       loading: false,
-      paginator: null
+      paginator: null,
+      hitInfiniteScrollMax: false
     };
 
     $scope.payments.filterOptions = [
@@ -54,6 +55,7 @@ angular.module('nextgearWebApp')
     $scope.payments.search = function() {
       // search means "start from the beginning with current criteria"
       $scope.payments.paginator = null;
+      $scope.payments.hitInfiniteScrollMax = false;
       $scope.payments.results.length = 0;
 
       // commit the proposed search criteria
@@ -67,6 +69,9 @@ angular.module('nextgearWebApp')
           promise;
 
       if (paginator && !paginator.hasMore()) {
+        if (paginator.hitMaximumLimit()) {
+          $scope.payments.hitInfiniteScrollMax = true;
+        }
         return;
       }
 

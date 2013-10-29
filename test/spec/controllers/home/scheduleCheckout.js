@@ -19,6 +19,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       close: angular.noop
     };
     payment = {
+      floorplanId: 'floorplan123',
       dueDate: '2013-09-30'
     };
     possibleDates = {
@@ -114,16 +115,10 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
   describe('removeSchedule function', function () {
 
-    it('should set the payment scheduleDate to null', function () {
-      payment.scheduleDate = 'foo';
+    it('should invoke finalize with a null schedule date', function () {
+      spyOn(scope, 'finalize');
       scope.removeSchedule();
-      expect(payment.scheduleDate).toBe(null);
-    });
-
-    it('should close the dialog', function () {
-      spyOn(dialog, 'close');
-      scope.removeSchedule();
-      expect(dialog.close).toHaveBeenCalled();
+      expect(scope.finalize).toHaveBeenCalledWith(null);
     });
 
   });
@@ -132,7 +127,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     beforeEach(function () {
       scope.dateForm = {
-        $valid: true
+        $valid: false
       };
     });
 
@@ -143,16 +138,111 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     });
 
     it('should abort if form is invalid', function () {
-      scope.dateForm.$valid = false;
+      spyOn(scope, 'finalize');
       scope.commit();
-      expect(payment.scheduleDate).not.toBeDefined();
+      expect(scope.finalize).not.toHaveBeenCalled();
     });
 
-    it('should set schedule date and close if form is valid', function () {
-      spyOn(dialog, 'close');
+    it('should invoke finalize with selected date if form is valid', function () {
+      var date = new Date();
+      spyOn(scope, 'finalize');
+      scope.dateForm.$valid = true;
+      scope.model.selectedDate = date;
       scope.commit();
-      expect(payment.scheduleDate).toBe(scope.model.selectedDate);
+      expect(scope.finalize).toHaveBeenCalledWith(date);
+    });
+
+  });
+
+  describe('finalize function', function () {
+
+    var $q;
+
+    beforeEach(inject(function (_$q_) {
+      $q = _$q_;
+    }));
+
+    it('should set submitInProgress to true', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      scope.finalize();
+      expect(scope.submitInProgress).toBe(true);
+    });
+
+    it('should invoke the model method to get new payment amount based on date', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      scope.finalize();
+      expect(Payments.fetchPaymentAmountOnDate).toHaveBeenCalled();
+    });
+
+    it('should pass the floorplan Id', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      scope.finalize();
+      expect(Payments.fetchPaymentAmountOnDate.mostRecentCall.args[0]).toBe('floorplan123');
+    });
+
+    it('should pass the provided date if present', function () {
+      var date = new Date(2013, 1, 1);
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      scope.finalize(date);
+      expect(Payments.fetchPaymentAmountOnDate.mostRecentCall.args[1]).toBe(date);
+    });
+
+    it('should pass the current date if no date is provided', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      scope.finalize(null);
+      var date = Payments.fetchPaymentAmountOnDate.mostRecentCall.args[1];
+      expect(moment().isSame(date, 'day')).toBe(true);
+    });
+
+    it('should pass the isPayoff value of the payment', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      payment.isPayoff = true;
+      scope.finalize();
+      expect(Payments.fetchPaymentAmountOnDate.mostRecentCall.args[2]).toBe(true);
+
+      payment.isPayoff = false;
+      scope.finalize();
+      expect(Payments.fetchPaymentAmountOnDate.mostRecentCall.args[2]).toBe(false);
+    });
+
+    it('should set submitInProgress to false on failure and leave dialog open & payment unmodified', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.reject('whatever'));
+      spyOn(dialog, 'close');
+      payment.amount = 999;
+      payment.scheduleDate = new Date();
+      scope.finalize(null);
+      scope.$apply();
+      expect(scope.submitInProgress).toBe(false);
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(payment.amount).toBe(999);
+      expect(payment.scheduleDate).not.toBe(null);
+    });
+
+    it('should set submitInProgress to false on success and close dialog', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      spyOn(dialog, 'close');
+      scope.finalize(null);
+      scope.$apply();
+      expect(scope.submitInProgress).toBe(false);
       expect(dialog.close).toHaveBeenCalled();
+    });
+
+    it('should update payment scheduleDate to the provided value on success', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      spyOn(dialog, 'close');
+      payment.scheduleDate = new Date();
+      scope.finalize(null);
+      scope.$apply();
+      expect(payment.scheduleDate).toBe(null);
+    });
+
+    it('should update payment amount to the loaded value on success', function () {
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      spyOn(dialog, 'close');
+      payment.amount = 50;
+      scope.finalize(new Date());
+      scope.$apply();
+      expect(payment.amount).toBe(100);
     });
 
   });

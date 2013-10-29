@@ -95,7 +95,7 @@ angular.module('nextgearWebApp')
         if (!item.StockNumber) { return item; }
         var buyerBusinessNumber = item.BuyerBusinessNumber || User.getInfo().BusinessNumber;
         var displayId = buyerBusinessNumber + '-' + item.StockNumber;
-        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0'); // 0 = not first page only
+        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
         return item;
       },
       setTitleInfo: function (floorplanId, titleNumber, titleState) {

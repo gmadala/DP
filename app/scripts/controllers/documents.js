@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
     ];
 
     $scope.feeScheduleUrl = api.contentLink(
-        '/dealer/feeschedule',
+        '/dealer/feeschedule/FeeSchedule',
         {}
       );
   });

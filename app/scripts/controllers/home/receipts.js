@@ -21,12 +21,14 @@ angular.module('nextgearWebApp')
     $scope.receipts = {
       results: [],
       loading: false,
-      paginator: null
+      paginator: null,
+      hitInfiniteScrollMax: false
     };
 
     $scope.receipts.search = function() {
       // search means "start from the beginning with current criteria"
       $scope.receipts.paginator = null;
+      $scope.receipts.hitInfiniteScrollMax = false;
       $scope.receipts.results.length = 0;
 
       // commit the proposed search criteria
@@ -39,6 +41,9 @@ angular.module('nextgearWebApp')
       var paginator = $scope.receipts.paginator,
           promise;
       if (paginator && !paginator.hasMore()) {
+        if (paginator.hitMaximumLimit()) {
+          $scope.receipts.hitInfiniteScrollMax = true;
+        }
         return;
       }
 

@@ -118,6 +118,9 @@
               </li>
             </ul>
           </div><!-- end payments list -->
+          <p class="text-error notice-box" ng-show="payments.hitInfiniteScrollMax">
+            There are too many results to display, please refine your search further.
+          </p>
         </div>
       </section>
     <section class="span3 well" nxg-payment-summary></section>

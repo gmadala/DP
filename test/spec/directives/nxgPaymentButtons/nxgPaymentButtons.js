@@ -75,7 +75,9 @@ describe('Directive: nxgPaymentButtons', function () {
         UnitDescription: 'some description',
         StockNumber: 'stockNum',
         CurrentPayoff: 20000,
+        PrincipalPayoff: 18000,
         AmountDue: 1000,
+        PrincipalDue: 800,
         Scheduled: false,
         PayPayoffAmount: false,
         DueDate: '2013-01-01'
@@ -104,7 +106,8 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.UnitDescription,
         scope.myPayment.AmountDue,
         scope.myPayment.DueDate,
-        false);
+        false,
+        200);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -200,7 +203,9 @@ describe('Directive: nxgPaymentButtons', function () {
         Vin: 'vin',
         UnitDescription: 'some description',
         CurrentPayoff: 20000,
+        PrincipalPayoff: 18000,
         AmountDue: 1000,
+        PrincipalDue: 800,
         Scheduled: false,
         PayPayoffAmount: false,
         DueDate: '2013-02-03',
@@ -230,7 +235,8 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.UnitDescription,
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
-        true);
+        true,
+        2000);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -302,7 +308,17 @@ describe('Directive: nxgPaymentButtons', function () {
       scope = $rootScope.$new();
       scope.myPayment = {
         Scheduled: true,
-        CurtailmentPaymentScheduled: true
+        CurtailmentPaymentScheduled: true,
+        FloorplanId: 'floorplanId',
+        Vin: 'vin',
+        UnitDescription: 'some description',
+        CurrentPayoff: 20000,
+        PrincipalPayoff: 18000,
+        AmountDue: 1000,
+        PrincipalDue: 800,
+        PayPayoffAmount: false,
+        DueDate: '2013-02-03',
+        StockNumber: '1234'
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -328,7 +344,8 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.UnitDescription,
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
-        true);
+        true,
+        2000);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 

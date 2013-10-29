@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     var prv = {
       getReceiptURL: function (transactionId) {
-        return api.contentLink('/receipt/view/' + transactionId);
+        return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
       }
     };
 

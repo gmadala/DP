@@ -6,9 +6,12 @@ describe('Service: paginate', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var p;
-  beforeEach(inject(function (Paginate) {
+  var p,
+    config;
+
+  beforeEach(inject(function (Paginate, nxgConfig) {
     p = Paginate;
+    config = nxgConfig;
   }));
 
   it('should define a range of page sizes', function () {
@@ -39,22 +42,40 @@ describe('Service: paginate', function () {
     });
 
     it('should have a hasMore method that returns true until the next page would be empty', function () {
+      //(data, totalItems, currentPageNumber, pageSize
       var res = p.addPaginator({}, 100, 1, 10);
       expect(res.$paginator.hasMore()).toBe(true);
 
+      //(data, totalItems, currentPageNumber, pageSize
       res = p.addPaginator({}, 100, 2, 10);
       expect(res.$paginator.hasMore()).toBe(true);
 
+      //(data, totalItems, currentPageNumber, pageSize
       res = p.addPaginator({}, 100, 9, 10);
       expect(res.$paginator.hasMore()).toBe(true);
 
+      //(data, totalItems, currentPageNumber, pageSize
       res = p.addPaginator({}, 100, 10, 10);
       expect(res.$paginator.hasMore()).toBe(false);
 
+      //(data, totalItems, currentPageNumber, pageSize
       res = p.addPaginator({}, 95, 9, 10);
       expect(res.$paginator.hasMore()).toBe(true);
 
+      //(data, totalItems, currentPageNumber, pageSize
       res = p.addPaginator({}, 95, 10, 10);
+      expect(res.$paginator.hasMore()).toBe(false);
+    });
+
+    it('should respect the infinite scroll max', function() {
+      config.infiniteScrollingMax = 5;
+
+      //(data, totalItems, currentPageNumber, pageSize
+      var res = p.addPaginator({}, 5, 1, 4);
+      expect(res.$paginator.hasMore()).toBe(true);
+
+      //(data, totalItems, currentPageNumber, pageSize
+      res = p.addPaginator({}, 6, 2, 5);
       expect(res.$paginator.hasMore()).toBe(false);
     });
 

@@ -97,7 +97,7 @@ describe('Service: Receipts', function () {
       ];
       receipts.search(defaultCriteria).then(function (results) { output = results; });
       httpBackend.flush();
-      expect(output.Receipts[0].$receiptURL).toBe('/receipt/view/foo123');
+      expect(output.Receipts[0].$receiptURL).toBe('/receipt/view/foo123/Receipt');
     });
 
     it('should NOT send a Keyword if search term is empty/null', function () {
@@ -143,7 +143,7 @@ describe('Service: Receipts', function () {
 
     it('should append the provided transaction id to the correct path', function () {
       var result = receipts.getReceiptUrl('foo');
-      expect(result).toBe('/receipt/view/foo');
+      expect(result).toBe('/receipt/view/foo/Receipt');
     });
 
   });

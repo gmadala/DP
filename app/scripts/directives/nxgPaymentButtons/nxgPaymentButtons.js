@@ -42,16 +42,20 @@ angular.module('nextgearWebApp')
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
-          var p = $scope.item;
+          var p = $scope.item,
+            amount = asPayoff ? p.CurrentPayoff : p.AmountDue,
+            revenue = amount - (asPayoff ? p.PrincipalPayoff : p.PrincipalDue);
           if (!$scope.onQueue) {
             Payments.addPaymentToQueue(
               p.FloorplanId,
               p.Vin,
               p.StockNumber,
               p.UnitDescription,
-              asPayoff ? p.CurrentPayoff : p.AmountDue,
+              amount,
               p.DueDate,
-              asPayoff);
+              asPayoff,
+              revenue
+            );
           } else {
             Payments.removePaymentFromQueue(p.FloorplanId);
           }

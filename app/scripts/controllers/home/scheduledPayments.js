@@ -16,6 +16,7 @@ angular.module('nextgearWebApp')
       lastPromise;
 
     $scope.isCollapsed = true;
+    $scope.hitInfiniteScrollMax = false;
 
     $scope.scheduledPayments = {
       loading: false,
@@ -44,11 +45,16 @@ angular.module('nextgearWebApp')
       ],
 
       loadMoreData: function() {
+        if (!ScheduledPaymentsSearch.hasMoreRecords()) { return; }
         this.loading = true;
         ScheduledPaymentsSearch.loadMoreData().then(function(results) {
           this.loading = false;
           this.results = this.results.concat(results);
-        }.bind(this), function (/*error*/) {
+        }.bind(this), function (error) {
+          // No more results because of our infinite scrolling max
+          if (_.isBoolean(error) && error === false) {
+            $scope.hitInfiniteScrollMax = true;
+          }
           this.loading = false;
         }.bind(this));
       },
@@ -56,6 +62,7 @@ angular.module('nextgearWebApp')
       search: function() {
         var promise;
         this.loading = true;
+        $scope.hitInfiniteScrollMax = false;
         promise = lastPromise = ScheduledPaymentsSearch.search(
             this.searchCriteria.query,
             this.searchCriteria.startDate,
@@ -90,7 +97,16 @@ angular.module('nextgearWebApp')
       },
 
       payOff: function(p) {
-        Payments.addPaymentToQueue(p.floorplanId, p.vin, p.stockNumber, p.description, p.payoffAmount, true /*payoff*/);
+        Payments.addPaymentToQueue(
+          p.floorplanId,
+          p.vin,
+          p.stockNumber,
+          p.description,
+          p.payoffAmount,
+          p.curtailmentDueDate,
+          true, /*payoff*/
+          p.payoffAmount - p.principalPayoff // revenue = non-principal amount
+        );
       },
 
       cancelPayment: function(payment) {

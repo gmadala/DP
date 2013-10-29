@@ -1,19 +1,27 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('ScheduledPaymentsSearch', function(api) {
+  .factory('ScheduledPaymentsSearch', function(api, nxgConfig, $q) {
 
     var PAGE_SIZE = 15;
     var lastRequest = null;
-    var totalCount = 0;
+    var totalRowCount = 0;
+    var rowCount = 0;
 
     var prv = {
       request: function(request) {
+        if (request.PageNumber * request.PageSize > nxgConfig.infiniteScrollingMax) {
+          var deferred = $q.defer();
+          deferred.reject(false);
+          return deferred.promise;
+        }
+
         lastRequest = request;
         return api.request('GET', '/payment/searchscheduled', lastRequest).then(
           function(results) {
             var searchResults = [];
-            totalCount = results.PaymentRowCount;
+            totalRowCount = results.ScheduledPaymentRowCount;
+            rowCount += results.SearchResults.length;
 
             for (var i = 0; i < results.SearchResults.length; i++) {
               var item = results.SearchResults[i];
@@ -33,7 +41,9 @@ angular.module('nextgearWebApp')
                 isProcessed: item.Processed,
                 isCurtailment: item.CurtailmentPayment,
                 paymentAmount: item.ScheduledPaymentAmount,
-                payoffAmount: item.ScheduledPayoutAmount,
+                payoffAmount: item.CurrentPayoff,
+                principalPayoff: item.PrincipalPayoff,
+                curtailmentDueDate: item.CurtailmentDueDate,
                 scheduledBy: item.ScheduledByUserDisplayname,
                 receiptURL: prv.getReceiptURL(item),
                 data: {query: request.Keyword}
@@ -45,7 +55,7 @@ angular.module('nextgearWebApp')
       },
 
       getReceiptURL: function(item) {
-        return api.contentLink('/receipt/view/' + item.FinancialTransactionId);
+        return api.contentLink('/receipt/view/' + item.FinancialTransactionId + '/Receipt');
       },
 
       isPending: function(item) {
@@ -95,6 +105,10 @@ angular.module('nextgearWebApp')
       FILTER_BY_PROCESSED: 2,
       FILTER_BY_CANCELED: 3,
       FILTER_BY_VOIDED: 4,
+
+      hasMoreRecords: function() {
+        return totalRowCount > rowCount;
+      },
 
       search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
         query = query || '';

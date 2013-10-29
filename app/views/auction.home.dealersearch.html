@@ -11,14 +11,15 @@
           </p>
           <div class="control-group"
                ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
-               ng-click="numberSearch.setDealerNumActive()">
+               >
             <label for="dealer-num" class="control-label">Nextgear Dealer Number</label>
             <div class="controls">
               <input type="text"
                      id="dealer-num"
                      name="dealerNum"
                      ng-pattern="onlyNumbersPattern"
-                     ng-model="numberSearch.query.dealerNumber"></div>
+                     ng-model="numberSearch.query.dealerNumber"
+                     nxg-focus="numberSearch.setDealerNumActive()"></div>
               <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
                   No results found, please enter a valid dealer number.
               </label>
@@ -34,7 +35,7 @@
 
           <div class="control-group"
                ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
-               ng-click="numberSearch.setAuctionNumActive()">
+               >
             <label for="auction-access-num" class="control-label">Auction Access Number</label>
             <div class="controls">
               <input type="text"
@@ -42,7 +43,8 @@
                      name="auctionAccessNum"
                      ng-pattern="onlyNumbersPattern"
                      ng-model="numberSearch.query.auctionAccessNumber"
-                     ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive}"></div>
+                     ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive}"
+                     nxg-focus="numberSearch.setAuctionNumActive()"></div>
               <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
                   No results found, please enter a valid auction access number.
               </label>

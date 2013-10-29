@@ -20,6 +20,7 @@
 }
 
 .table-list-head {
+  @extend %center;
   background-color: #666;
   color: $white;
   overflow: hidden;
