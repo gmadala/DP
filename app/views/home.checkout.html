@@ -16,74 +16,79 @@
 
       <!-- When you have payments or fees in your cart -->
       <section ng-switch-when="false">
-        <h3 class="boxed">Fees</h3>
 
         <!-- Fees List -->
-        <ul class="unstyled fees">
-          <li class="table-list-head">
-            <div class="cell fee-type">Fee Type</div>
-            <div class="cell fee-desc">Description</div>
-            <div class="cell fee-due">Date Due</div>
-            <div class="cell fee-amt">Fee Amount</div>
-          </li>
+        <div ng-show="paymentQueue.sum.feeCount() > 0">
+          <h3 class="boxed">Fees</h3>
 
-          <li class="table-list-row" ng-repeat="fee in paymentQueue.contents.fees">
-            <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
-            <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
-            <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
-            <div class="cell fee-amt">
-              <p>{{ fee.amount | currency }}</p>
-              <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
-                Remove Fee
-              </button>
-            </div>
-          </li>
-        </ul><!-- end Fees List -->
+          <ul class="unstyled fees">
+            <li class="table-list-head">
+              <div class="cell fee-type">Fee Type</div>
+              <div class="cell fee-desc">Description</div>
+              <div class="cell fee-due">Date Due</div>
+              <div class="cell fee-amt">Fee Amount</div>
+            </li>
 
-        <h3 class="boxed">Payments</h3>
+            <li class="table-list-row" ng-repeat="fee in paymentQueue.contents.fees">
+              <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
+              <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
+              <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
+              <div class="cell fee-amt">
+                <p>{{ fee.amount | currency }}</p>
+                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
+                  Remove Fee
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div><!-- end Fees List -->
 
         <!-- Payments List -->
-        <ul class="unstyled payments">
-          <li class="table-list-head">
-            <div class="cell pay-desc">Description</div>
-            <div class="cell pay-due">Date Due</div>
-            <div class="cell pay-status">Status</div>
-            <div class="cell pay-pymt">Payment</div>
-          </li>
+        <div ng-show="paymentQueue.sum.paymentCount() > 0">
+          <h3 class="boxed">Payments</h3>
 
-          <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
-              <div class="cell pay-desc">
-                <p>
-                  <span class="sch-label">VIN: </span>
-                  {{ payment.vin }}<br/>
-                  <span class="sch-label">Stock #: </span>
-                  {{ payment.stockNum }}
-                </p>
-                <p>{{ payment.description }}</p>
-              </div>
-              <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
-              <div class="cell pay-status">
-                <p ng-show="!paymentQueue.canSchedule(payment)">
-                Unavailable to Schedule</p>
-                <p ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">Available to Schedule</p>
-                <p ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</p>
-              </div>
-              <div class="cell pay-pymt">
-                <p>{{ payment.amount | currency }}</p>
-                <button class="btn btn-mini btn-block"
-                        ng-click="paymentQueue.removePayment(payment.floorplanId)">
-                  Remove Payment
-                </button>
-                <button class="btn btn-mini btn-block"
-                        ng-click="paymentQueue.schedule(payment)"
-                        ng-show="paymentQueue.canSchedule(payment)"
-                        ng-disabled="payment.scheduleLoading">
-                  {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
-                </button>
-                <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
-              </div>
-          </li>
-        </ul><!-- end Payments List -->
+          <ul class="unstyled payments">
+            <li class="table-list-head">
+              <div class="cell pay-desc">Description</div>
+              <div class="cell pay-due">Date Due</div>
+              <div class="cell pay-status">Status</div>
+              <div class="cell pay-pymt">Payment</div>
+            </li>
+
+            <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
+                <div class="cell pay-desc">
+                  <p>
+                    <span class="sch-label">VIN: </span>
+                    {{ payment.vin }}<br/>
+                    <span class="sch-label">Stock #: </span>
+                    {{ payment.stockNum }}
+                  </p>
+                  <p>{{ payment.description }}</p>
+                </div>
+                <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
+                <div class="cell pay-status">
+                  <p ng-show="!paymentQueue.canSchedule(payment)">
+                  Unavailable to Schedule</p>
+                  <p ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">Available to Schedule</p>
+                  <p ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</p>
+                </div>
+                <div class="cell pay-pymt">
+                  <p>{{ payment.amount | currency }}</p>
+                  <button class="btn btn-mini btn-block"
+                          ng-click="paymentQueue.removePayment(payment.floorplanId)">
+                    Remove Payment
+                  </button>
+                  <button class="btn btn-mini btn-block"
+                          ng-click="paymentQueue.schedule(payment)"
+                          ng-show="paymentQueue.canSchedule(payment)"
+                          ng-disabled="payment.scheduleLoading">
+                    {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
+                  </button>
+                  <p class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</p>
+                </div>
+            </li>
+          </ul>
+        </div><!-- end Payments List -->
       </section>
     </div><!-- end .checkout-list -->
   </section><!-- end .span9 -->
@@ -133,7 +138,6 @@
                  nxg-max="unappliedFunds.max()"
                  ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
                  ng-required="unappliedFunds.useFunds">
-
           <p class="text-error" ng-show="validity.unappliedAmt.$error.required">
             Please enter the amount of unapplied funds to use.
           </p>
@@ -144,12 +148,12 @@
              ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
               Unapplied funds must be {{ unappliedFunds.min() | currency }} to {{ unappliedFunds.max() | currency }}
           </p>
-
-          <hr/>
-
-          <p class="chkout-label">Remaining Payment Balance</p>
-          <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}</p>
         </div>
+
+        <hr/>
+
+        <p class="chkout-label">Remaining Payment Balance</p>
+        <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}</p>
       </div><!-- end of Unapplied Funds -->
 
       <hr/>
@@ -185,5 +189,6 @@
           Submit Payments and Commit Scheduled Payments
         </button>
       </div>
+    </div><!-- end .well-out -->
   </form>
 </section>
