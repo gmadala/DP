@@ -42,26 +42,26 @@ describe('Model: dashboard', function () {
             {
               "DueDate": "2013-08-01",
               "Description": "Toyota Sequoia Limited Tan",
-              "PayoffDue": 0,
+              "PayoffDue": 40000,
               "PaymentDue": 2200.00
             },
             {
               "DueDate": "2013-08-01",
               "Description": "BMW 7-Series 750Li Black",
-              "PayoffDue": 0,
+              "PayoffDue": 40000,
               "PaymentDue": 2800.00
             },
             {
               "DueDate": "2013-08-07",
               "Description": "Toyota Sequoia Unlimited Red",
-              "PayoffDue": 0,
+              "PayoffDue": 40000,
               "PaymentDue": 8000.00
             },
             {
               "DueDate": "2013-08-07",
               "Description": "Toyota Sequoia Barbie Pink",
               "PayoffDue": 5000,
-              "PaymentDue": 0
+              "PaymentDue": 5000
             },
           ],
           "ScheduledPayments": [
