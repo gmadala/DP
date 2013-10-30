@@ -172,7 +172,9 @@
         <select name="bankAccount" id="bankAccount"
                 ng-model="bankAccounts.selectedAccount"
                 ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                required></select>
+                required>
+          <option value="">-- Select Bank --</option>
+        </select>
         <p class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</p>
       </div><!-- end Bank Account selection -->
 
