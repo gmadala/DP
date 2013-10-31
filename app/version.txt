@@ -1,26 +1,29 @@
-NextGear v0.5
+NextGear v0.6
 ======================
 
 Defects fixed in this release: 
 ---------------------------------------
-885	Horizontal bar chart rendering/positioning issues
-888	Analytics - Increase width of best/worst mover labels 
-903	On Dashboard --> floorplan --> select completed link & unable to view all results
-964	Links (ex: adobe reader, test the reader, install the reader) should launch in new window(s)
-970	Settings --> Business Settings --> Enhanced Registration formatting = off
-971	Settings --> Notifications --> edit button = not working
-979	Web: Message Pop Up - 401 error messages is not getting displayed in IE9 browser.
-981	Web: Message pop up - Proper message title and message is not getting displayed in error.
-1007	Web - Limit infinite-scrolling to load no more than 500 items
-1014	Upcoming Payments - Week & Month Views --> UPDATED DESIGN
-1032	Mobile: Stale and Aging Units -> List should get display from the top whenever  user opens any groping tab. 
-1041	Web: Payments - Texting issue on "Your payment(s) have been submitted and scheduled." confirmation window.
-1045	Floor a Vehicle -> Clear text field option is not available in Search field as par the wireframe.
-1066	Mobile - Security question description is missing while password reset.
-1080	Mobile: User is able to select same payment again when he comes back to payment list through "Add Another Payment" button.
-1084	Scheduled payments - infinite scroll tries to load past end of list
-1102	Mobile: "Payments" - Bank accounts drop down issue.
-1013	Upcoming Payments - Today Button --> Make Link, not Toggle
-1063	Increase spacing on words / content in web app
-1012	Login Screen Type Justification
-1019	Center Data Grid Labels to the Column Width
+1124	Mobile - Security question "Identity Confirmation Failure" message box dialog issue.
+1083	Mobile app's "Call Customer Service" link should take user to phone number for their CSC rep. 
+1085	Floor a Car - Purchase Date validation error on Android when a date was selected
+1089	Mobile: "Dashboard" icon is missing.
+1092	Mobile: Floor A Vehicle -> On Confirmation screen  "Floor" button is not working.
+1096	Mobile: Top ten vehicle -> Page title text not properly visible on page "Best & Worst Movers by Zipcode" and text is not according to wireframe(Next Gear Wireframe v0.PDF 60).
+1097	Mobile - Floor A Vehicle -> No Validation messages for numeric fields on Step1, 2 & 3. 
+1098	Web: Dashboard-Overlay is not getting displayed on hovering on "Floor Plan" details in IE9 - Text is overlapping.
+1099	Web: Payment Checkout Page - Page layout issue in IE9.
+1101	Web: Payments-Multiple bank accounts drop down issue.
+1103	Dashboard icon (alongside nav link) does not show up
+1106	Web: Login page footer text for Adobe Acrobat Installation Reminder is not properly aligned with login box.
+1111	Mobile: "Bill of Sale Picture" icon overlapping issue.
+1112	Mobile: "Payment" -> Total Payment calculation issue on checkout page.   
+1113	Mobile: "Payment" -> Cross is appear on both Amount type (Payoff Amount  and Amount Due) after checking "Payoff Amount".   
+1119	Primary Navigation State --> Missing
+1121	Web: "Login" button is getting displayed as active when login fields are blank.
+1107	Web: Favicon is not appearing on any of the supported browsers for NextGear portal.
+1117	Web: Floor Plan - Wrong tooltip is getting displayed on "Clear Search" link.
+934	Web: Auction - View A Report - PDF for "Receivable Detail (PDF)" link is not getting displayed.
+1026	Mobile: Title vault - Stock details - "Title (First page)" download the complete file and open all pages in viewer. 
+1061	Web: Scheduled Payments - VIN and Stock details are missing from the payments in the list.
+1065	Web: Forgot Username - User is not getting any email for username.
+1075	Web: Dealer Search - "NextGear Dealer Number" valid error message is not getting displayed.
