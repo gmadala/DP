@@ -7,14 +7,14 @@
     <span><strong>VIN</strong> {{ floorplan.UnitVIN }}</span><br/>
     <span>{{ vehicleDescription }}</span>
 
-    <label for="titleNumber">Title Number</label>
+    <label for="titleNumber" class="input-title">Title Number</label>
     <input id="titleNumber" name="titleNumber" type="text" ng-model="inputModel.titleNumber" required>
     <label for="titleNumber" class="text-error"
            ng-show="validity.titleNumber.$error.required">
       Please enter the Title Number
     </label>
 
-    <label for="titleState">Title State</label>
+    <label for="titleState" class="input-title">Title State</label>
     <select name="titleState" id="titleState" ng-model="inputModel.titleState"
             ng-options="state.StateName for state in states"
             required>

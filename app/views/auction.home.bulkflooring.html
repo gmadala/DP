@@ -5,7 +5,7 @@
 
        <div nxg-vin-details floor-model="data" validity="validity" form="form" nxg-autofocus="reset"></div>
 
-       <label for="inputColor">Color</label>
+       <label for="inputColor" class="input-title">Color</label>
        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
                ng-options="color.ColorName for color in options().colors" required>
         <option class="disabled" disabled="disabled" value="">Make Selection</option>
@@ -15,7 +15,7 @@
          Please select a Color
        </label>
 
-       <label for="inputMileage">Mileage</label>
+       <label for="inputMileage" class="input-title">Mileage</label>
        <input type="text" id="inputMileage" name="inputMileage" ng-model="data.UnitMileage"
               ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
               required
@@ -29,7 +29,7 @@
          Please enter a numeric value
        </label>
 
-       <label for="inputTitleHolder">Who has the Title?</label>
+       <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-options="location.Name for location in options().titleLocationOptions"
                required>
@@ -40,7 +40,7 @@
          Please select who has the title
        </label>
 
-       <label for="inputTitleState">Title State</label>
+       <label for="inputTitleState" class="input-title">Title State</label>
        <select id="inputTitleState" name="inputTitleState" ng-model="data.UnitTitleStateId"
                ng-options="state.StateName for state in options().states"
                ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
@@ -52,7 +52,7 @@
          Please select a Title State
        </label>
 
-       <label for="inputTitleNo">Title Number</label>
+       <label for="inputTitleNo" class="input-title">Title Number</label>
        <input type="text" id="inputTitleNo" name="inputTitleNo" ng-model="data.UnitTitleNumber"
               ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
               ng-required="data.TitleLocationId.TitleInfoRequired"
@@ -62,7 +62,7 @@
          Please enter the Title Number
        </label>
 
-        <label for="consignerTicket">Consigner Ticket Number</label>
+        <label for="consignerTicket" class="input-title">Consigner Ticket Number</label>
         <input type="text" id="consignerTicket" name="consignerTicket" ng-model="data.ConsignerTicketNumber"
                required/>
         <label for="consignerTicket" class="text-error"
@@ -70,7 +70,7 @@
           Please enter a Consigner Ticket Number
         </label>
 
-        <label for="inputLotNum">Lot Number</label>
+        <label for="inputLotNum" class="input-title">Lot Number</label>
         <input type="text" id="inputLotNum" name="inputLotNum" ng-model="data.LotNumber"
                required/>
         <label for="inputLotNum" class="text-error"
@@ -85,7 +85,7 @@
       <h4>Sale Information</h4>
       <div class="well-out">
 
-        <label for="inputBuyer">Buyer</label>
+        <label for="inputBuyer" class="input-title">Buyer</label>
         <input nxg-business-field="buyers" id="inputBuyer" class="input-xlarge"
                name="inputBuyer"
                ng-required="true"
@@ -95,7 +95,7 @@
           Please look up a Buyer
         </label>
 
-        <label for="inputPurchaseAmt">Purchase Amount</label>
+        <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
         <div class="input-prepend dollar">
           <span class="add-on">$</span>
           <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
@@ -112,7 +112,7 @@
           </label>
         </div>
 
-        <label for="inputSaleDate">Sales Date</label>
+        <label for="inputSaleDate" class="input-title">Sales Date</label>
         <input id="inputSaleDate" name="inputSaleDate" ng-model="data.UnitPurchaseDate"
                nxg-date-field before-show-day="isValidSaleDate(date)"
                required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)" />
@@ -133,7 +133,7 @@
                   tooltip-animation="true">?</span>
         </p>
 
-        <label for="inputDisburseAcct">Bank Account</label>
+        <label for="inputDisburseAcct" class="input-title">Bank Account</label>
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
                 ng-options="account.BankAccountName for account in options().bankAccounts"
                 required>

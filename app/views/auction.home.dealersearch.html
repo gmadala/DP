@@ -12,7 +12,7 @@
           <div class="control-group"
                ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
                >
-            <label for="dealer-num" class="control-label">Nextgear Dealer Number</label>
+            <label for="dealer-num" class="control-label input-title">Nextgear Dealer Number</label>
             <div class="controls">
               <input type="text"
                      id="dealer-num"
@@ -36,7 +36,7 @@
           <div class="control-group"
                ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
                >
-            <label for="auction-access-num" class="control-label">Auction Access Number</label>
+            <label for="auction-access-num" class="control-label input-title">Auction Access Number</label>
             <div class="controls">
               <input type="text"
                      id="auction-access-num"
@@ -69,7 +69,7 @@
             To look up a dealer in Dealer search, use a combination of their name and City or State.
           </p>
           <div class="control-group">
-            <label for="dealer-name" class="control-label">Dealer Name</label>
+            <label for="dealer-name" class="control-label input-title">Dealer Name</label>
             <div class="controls">
               <input type="text" id="dealer-name" ng-model="nameSearch.query.dealerName">
               <label for="city" class="text-error" ng-show="nameSearch.invalid.dealerName">
@@ -84,7 +84,7 @@
             Please enter a city or select a state.
           </p>
           <div class="control-group">
-            <label for="city" class="control-label">City</label>
+            <label for="city" class="control-label input-title">City</label>
             <div class="controls">
               <input type="text" id="city" ng-model="nameSearch.query.city">
             </div>
@@ -93,7 +93,7 @@
           <p class="form-separator">-OR-</p>
 
           <div class="control-group">
-            <label class="control-label" for="state">State</label>
+            <label class="control-label input-title" for="state">State</label>
             <div class="controls">
               <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
                 <option value=""></option>
