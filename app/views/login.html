@@ -28,7 +28,7 @@
           </form>
 
           <div class="footer modal-footer">
-            <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.credUsername.$pristine || loginForm.credPassword.$pristine">Log In</button>
+            <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.$invalid">Log In</button>
           </div>
 
           <div class="forgot-link">
