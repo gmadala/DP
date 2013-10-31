@@ -60,9 +60,15 @@
   }
 
   .login-help {
+    @extend .span12;
     @extend %small;
     line-height: 1.8;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
+
+    .login-help-inner {
+      width: 440px;
+      margin: 0 auto;
+    }
 
     a {
       color: $white;

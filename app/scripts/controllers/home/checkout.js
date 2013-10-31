@@ -43,6 +43,14 @@ angular.module('nextgearWebApp')
             }
             return accumulator;
           }, 0);
+        },
+        feeCount: function () {
+          var fees = $scope.paymentQueue.contents.fees;
+          return _.size(fees);
+        },
+        paymentCount: function () {
+          var payments = $scope.paymentQueue.contents.payments;
+          return _.size(payments);
         }
       },
       removePayment: Payments.removePaymentFromQueue,
@@ -261,5 +269,4 @@ angular.module('nextgearWebApp')
         }
       );
     };
-
   });

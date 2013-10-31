@@ -69,7 +69,7 @@ angular.module('nextgearWebApp')
               dateKey,
               list,
               sumPayments = function (accumulator, payment) {
-                return accumulator + (payment.ScheduledPaymentAmount || payment.PaymentDue || payment.PayoffDue);
+                return accumulator + (payment.ScheduledPaymentAmount || payment.PaymentDue);
               },
               addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
                 if (sourceList.length === 0) { return; }
@@ -89,7 +89,7 @@ angular.module('nextgearWebApp')
             dueRaw.forEach(function (payment) {
               dateKey = payment.DueDate;
               list = dateMap[dateKey] || (dateMap[dateKey] = { payments: [], payoffs: [] });
-              if (payment.PayoffDue) {
+              if (payment.PaymentDue === payment.PayoffDue) {
                 list.payoffs.push(payment);
               } else {
                 list.payments.push(payment);

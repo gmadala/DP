@@ -111,7 +111,7 @@ angular.module('nextgearWebApp')
             _.each(
               response,
               function ( item ) {
-                result.labels.push('');
+                result.labels.push('   '); // white space here is significant
                 result.models.push({
                   model: item.Model,
                   year: item.Year,

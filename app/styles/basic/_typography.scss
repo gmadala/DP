@@ -21,6 +21,11 @@ a {
   margin-bottom: 0;
 }
 
+// override Bootstrap; we don't need pointers on labels.
+label {
+  cursor: default;
+}
+
 // looks like h4s in .well, but isn't part of .well
 .well-head {
   @extend %thin;

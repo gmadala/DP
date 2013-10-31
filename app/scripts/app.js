@@ -151,9 +151,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, $dialog, User, segmentio/*, nxgConfig*/) {
+  .run(function($rootScope, $location, $dialog, User, $window, segmentio, nxgConfig) {
+    if (nxgConfig.showReloadWarning) {
+      // This prompts the user to confirm before the browser is closed, reloaded, or the user navigates away to another site. Fixes VO-212
+      $window.onbeforeunload = function () {return 'If you proceed, your session will end and your payment basket will be cleared.';};
+    }
 
-    //segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
+    segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',

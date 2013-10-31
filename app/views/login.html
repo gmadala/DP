@@ -1,11 +1,6 @@
 <div class="login container-line">
   <div class="container-fluid login-contents">
 
-    <!-- TODO: Check to see if there's a notice to show or not. -->
-    <p class="notice" ng-show="">
-      EXAMPLE: MyNextGear will be down for maintenance June 24, 2013 - June 25, 2013 from 10:00pm - 1:00am EST. Thanks for your patience!
-    </p>
-
     <!-- LOGIN VIEW -->
     <div class="row-fluid">
       <div class="well well-single span4 offset4">
@@ -33,7 +28,7 @@
           </form>
 
           <div class="footer modal-footer">
-            <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.credUsername.$pristine || loginForm.credPassword.$pristine">Log In</button>
+            <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.$invalid">Log In</button>
           </div>
 
           <div class="forgot-link">
@@ -44,11 +39,13 @@
     </div><!-- end .row-fluid -->
 
     <div class="row-fluid" ng-hide="forgot">
-      <div class="span6 offset3 login-help">
-        <p class="headline">Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer?</p>
-        <p>You will need it in order to view your reports.<br/>
-        Not sure? <a href="https://test.discoverdsc.com/MyDSC/Public/Test.pdf" target="_blank">Test your Adobe Reader installation.</a><br/>
-        If the document did not successfully display, please install <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader</a></p>
+      <div class="login-help">
+        <div class="login-help-inner">
+          <p class="headline">Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer?</p>
+          <p>You will need it in order to view your reports.<br/>
+          Not sure? <a href="https://test.discoverdsc.com/MyDSC/Public/Test.pdf" target="_blank">Test your Adobe Reader installation.</a><br/>
+          If the document did not successfully display, please install <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader</a></p>
+        </div>
       </div><!-- end .help -->
     </div>
 

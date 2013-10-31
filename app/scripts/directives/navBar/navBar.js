@@ -11,16 +11,16 @@ angular.module('nextgearWebApp')
 
   .controller('NavBarCtrl', function($rootScope, $scope, $state, User) {
     var dealerLinks = [
-        { name: 'Home', href: '#/home' },
-        { name: 'Floor a Car', href: '#/floorcar' },
-        { name: 'View a Report', href: '#/reports' },
-        { name: 'View Analytics', href: '#/analytics' },
-        { name: 'Resources', href: '#/documents' }
+        { name: 'Home', href: '#/home', activeWhen: 'home' },
+        { name: 'Floor a Car', href: '#/floorcar', activeWhen: 'floorcar' },
+        { name: 'View a Report', href: '#/reports', activeWhen: 'reports' },
+        { name: 'View Analytics', href: '#/analytics', activeWhen: 'analytics' },
+        { name: 'Resources', href: '#/documents', activeWhen: 'documents' }
       ],
       auctionLinks = [
-        { name: 'Home', href: '#/act/home' },
-        { name: 'View a Report', href: '#/act/reports' },
-        { name: 'Resources', href: '#/act/documents' }
+        { name: 'Home', href: '#/act/home', activeWhen: 'auction_home' },
+        { name: 'View a Report', href: '#/act/reports', activeWhen: 'auction_reports' },
+        { name: 'Resources', href: '#/act/documents', activeWhen: 'auction_documents' }
       ];
 
     $scope.user = {
@@ -34,6 +34,14 @@ angular.module('nextgearWebApp')
         return User.isDealer() ? dealerLinks : auctionLinks;
       }
     };
+
+    // If current state includes the activeWhen property for the given link,
+    // this will return true and the active class will be applied to style the nav
+    // link appropriately.
+    $scope.isActive = function(activeWhen) {
+      return $state.includes(activeWhen);
+    };
+
     $scope.showSettings = false;
     $scope.navState = $state;
   });

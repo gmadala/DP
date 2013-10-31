@@ -227,31 +227,49 @@
     <h4>Floor Plan</h4>
     <div class="well-out">
       <table>
-        <tr class="more" href="#/home/floorplan?filter=approved"
-            tooltip="This status applies to vehicles floored via NextGearCapital.com
-              or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-          <td><span class="item-total">{{ dashboardData.ApprovedFloorplans | alt }}</span></td>
-          <td class="fl-label">Approved</td>
+        <tr class="more" href="#/home/floorplan?filter=approved">
+          <td>
+            <span class="item-total">
+              {{ dashboardData.ApprovedFloorplans | alt }}
+            </span>
+          </td>
+          <td class="fl-label">
+            <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
+              tooltip-placement="right"
+              tooltip-popup-delay="700">
+                Approved
+            </span>
+          </td>
         </tr>
 
-        <tr class="more" href="#/home/floorplan?filter=pending"
-            tooltip="This status applies to vehicles floored via NextGearCapital.com
-              or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-          <td><span class="item-total">{{ dashboardData.PendingFloorplans | alt }}</span></td>
-          <td class="fl-label">Pending</td>
+        <tr class="more" href="#/home/floorplan?filter=pending">
+          <td>
+            <span class="item-total">
+              {{ dashboardData.PendingFloorplans | alt }}
+            </span>
+          </td>
+          <td class="fl-label">
+            <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
+              tooltip-placement="right"
+              tooltip-popup-delay="700">
+                Pending
+            </span>
+          </td>
         </tr>
 
-        <tr class="more" href="#/home/floorplan?filter=denied"
-            tooltip="This status applies to vehicles floored via NextGearCapital.com
-            that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
-            tooltip-placement="right"
-            tooltip-popup-delay="700">
-          <td><span class="item-total">{{ dashboardData.DeniedFloorplans | alt }}</span></td>
-          <td class="fl-label">Denied</td>
+        <tr class="more" href="#/home/floorplan?filter=denied">
+          <td>
+            <span class="item-total">
+              {{ dashboardData.DeniedFloorplans | alt }}
+            </span>
+          </td>
+          <td class="fl-label">
+            <span tooltip="This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
+              tooltip-placement="right"
+              tooltip-popup-delay="700">
+                Denied
+            </span>
+          </td>
         </tr>
       </table>
       <a class="more btn btn-mini" href="#/home/floorplan">

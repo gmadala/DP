@@ -93,6 +93,31 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.paymentQueue.sum.scheduledTotal()).toBe(577.5);
     });
 
+    it('should count and total fees and payments', function () {
+      fees.feeId1 = {
+        amount: 100
+      };
+      fees.feeId2 = {
+        amount: 43
+      };
+      payments.pmtId1 = {
+        scheduleDate: new Date(),
+        amount: 210.1
+      };
+      payments.pmtId2 = {
+        scheduleDate: new Date(),
+        amount: 367.4
+      };
+      payments.pmtId3 = {
+        scheduleDate: null,
+        amount: 85.22
+      };
+
+      run();
+      expect(scope.paymentQueue.sum.feeCount()).toBe(2);
+      expect(scope.paymentQueue.sum.paymentCount()).toBe(3);
+    });
+
   });
 
   it('should attach the remove functions to the scope', function () {
