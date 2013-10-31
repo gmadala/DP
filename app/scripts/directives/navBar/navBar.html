@@ -44,7 +44,7 @@
     <div class="container-fluid row-fluid">
       <nav role="navigation" class="span9">
         <span ng-repeat="link in user.navLinks()" >
-          <a href="{{link.href}}" class="navLink">{{link.name}}</a>
+          <a href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
         </span>
       </nav>
     </div>
