@@ -7,6 +7,10 @@
   line-height: $base-line-height;
   margin: 0 auto;
 
+  .unsupported & {
+    width: 100%;
+  }
+
   &:before {
     @include border-radius(50%);
     background-color: $error;

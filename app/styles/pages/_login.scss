@@ -13,7 +13,7 @@
   }
 }
 
-.login.container-line::after {
+.login.container-line::after, .unsupported.container-line::after {
   background-color: $brand-gradient-top; // IE fallback
   @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
   @extend %full-width;
@@ -47,12 +47,6 @@
   .forgot-link {
     @extend %center;
     margin: 10px auto;
-  }
-
-  .headline {
-    @extend %heavy;
-    font-size: $large-font-size;
-    margin-bottom: 0;
   }
 
   .notice, .login-help {
