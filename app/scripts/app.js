@@ -154,7 +154,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
   .run(function($rootScope, $location, $dialog, User, $window, segmentio, nxgConfig) {
     if (nxgConfig.showReloadWarning) {
       // This prompts the user to confirm before the browser is closed, reloaded, or the user navigates away to another site. Fixes VO-212
-      $window.onbeforeunload = function () {return 'If you proceed, your session will end and your payment basket will be cleared.';};
+      $window.onbeforeunload = function () {
+        if (User.isLoggedIn()) {
+          return 'If you proceed, your session will end and your payment basket will be cleared.';
+        }
+        else {
+          return;
+        }
+      };
     }
 
     segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
@@ -195,7 +202,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         User.reset();
         $dialog.closeAll();
         // ... but really, this will clobber everything and redirect to the login page
-        $window.onbeforeunload = null; // We are reloading the app in purpose, don't warn the user
         window.location.reload();
       }
     );
