@@ -43,6 +43,7 @@
                 <div class="controls">
                   <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" required />
                   <label for="{{question.resName}}" class="form-error" ng-show="$parent.validity[question.resName].$error.required">Please enter an answer to the selected security question. </label>
+                  <label for="{{question.resName}}" class="form-error" ng-show="$parent.validity[question.resName].$error.maxLength">Please enter an answer that is no more than 100 characters long. </label>
                 </div>
               </div>
 
