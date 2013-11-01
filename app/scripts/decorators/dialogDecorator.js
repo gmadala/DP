@@ -7,7 +7,8 @@ angular.module('nextgearWebApp')
   .config( function ($provide) {
     $provide.decorator('$dialog', function($delegate, $q) {
       var OriginalDialog = $delegate.dialog,
-          currentlyOpen = [];
+          currentlyOpen = [],
+          body = angular.element(document.body);
 
       return _.extend($delegate, {
 
@@ -29,12 +30,18 @@ angular.module('nextgearWebApp')
               }
             );
 
+            body.addClass('modal-open');
+
             return deferred.promise;
           };
 
           dialog.close = function () {
             currentlyOpen = _.reject(currentlyOpen, dialog);
             originalClose.apply(dialog, arguments);
+
+            if (currentlyOpen.length === 0) {
+              body.removeClass('modal-open');
+            }
           };
 
           return dialog;

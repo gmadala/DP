@@ -186,3 +186,41 @@
     }
   }
 }
+
+@media print {
+  /*
+   When printing, hide anything that's behind a modal, position the modal at the top left,
+   expand to full height of content, and add some misc. visual cleanup
+   */
+
+  .modal-open > * {
+    display: none;
+  }
+
+  body > .modal {
+    display: block;
+    top: 0.5in;
+    left: 0.5in;
+    margin: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    position: absolute;
+    background-color: #fff !important;
+
+    .glyphicon-remove {
+      display: none;
+    }
+
+    .modal-header {
+      background-color: #fff;
+      border-bottom: 1px solid #adadad;
+    }
+
+    .modal-body {
+      overflow-y: visible;
+      max-height: none;
+    }
+  }
+
+}
