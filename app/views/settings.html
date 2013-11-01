@@ -17,11 +17,15 @@
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
-                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" required/>
+                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="50" required/>
               </div>
               <div for="setUsername" class="form-error"
                      ng-show="profile.validation.setUsername.$error.required">
                   Please enter a User Name.
+              </div>
+              <div for="setUsername" class="form-error"
+                     ng-show="profile.validation.setUsername.$error.maxlength">
+                  Please enter a User Name that is 50 characters or less.
               </div>
             </div>
 
@@ -80,6 +84,9 @@
                     <div class="form-error" ng-show="question.$error.required">
                         Please enter an Answer.
                     </div>
+                    <div class="form-error" ng-show="question.$error.maxLength">
+                        Please enter an Answer that is a maximum of 100 characters.
+                    </div>
                 </div>
             </div>
 
@@ -123,7 +130,7 @@
             <div class="control-group">
               <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
-                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" required />
+                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" required />
                 <div class="form-error" ng-show="business.validation.businessEmail.$invalid">
                     Please enter a valid email address.
                 </div>
