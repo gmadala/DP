@@ -195,6 +195,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         User.reset();
         $dialog.closeAll();
         // ... but really, this will clobber everything and redirect to the login page
+        $window.onbeforeunload = null; // We are reloading the app in purpose, don't warn the user
         window.location.reload();
       }
     );
