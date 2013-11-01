@@ -1,6 +1,6 @@
 // LOGIN & FORGOT USERNAME/PASSWORD
 .login-head {
-  background-color: #eeeeee; // IE fallback
+  background-color: $gray-e; // IE fallback
   @include gradient-row();
   border-bottom: 2px solid $white;
 
@@ -69,8 +69,8 @@
       border-bottom: 1px solid $white;
 
       &:hover, &:active {
-        color: #EEE;
-        border-bottom: 1px solid #EEE;
+        color: $gray-e;
+        border-bottom: 1px solid $gray-e;
       }
     }
   }

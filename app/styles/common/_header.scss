@@ -35,7 +35,7 @@ header > .row-fluid {
   &.open {
     @include box-shadow(rgba(0,0,0,0.5) 0 4px 4px);
     background-color: $white;
-    border-color: #BBB;
+    border-color: $gray-b;
   }
 }
 
@@ -86,7 +86,7 @@ header > .row-fluid {
   }
 
   &:hover i:after {
-    border-top-color: #888;
+    border-top-color: $gray-8;
   }
 }
 

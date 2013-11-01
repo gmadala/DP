@@ -47,7 +47,7 @@ input[type="color"],
 
   &:focus:invalid {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    color: #555;
+    color: $gray-5;
     border: 1px solid $input-border;
   }
 }
@@ -188,7 +188,7 @@ input[type="radio"]:checked + label::before {
 
 input[type="radio"]:disabled {
   & + label {
-    color: #ccc;
+    color: $gray-c;
   }
   & + label::before {
     @include opacity(40);
@@ -265,7 +265,7 @@ input[type="radio"]:disabled {
 .nxg-fancy-radios input[type="radio"] + label::before {
   @extend .btn;
   @extend %small;
-  @include background(linear-gradient($white, #ddd));
+  @include background(linear-gradient($white, $gray-d));
   text-transform: uppercase;
   padding-right: 14px;
   padding-left: 14px;
@@ -319,7 +319,7 @@ label.input-title {
         content: '';
         @extend %heavy;
         position: absolute;
-        color: #AAA;
+        color: $gray-a;
         font-family: 'Lucida Sans Unicode';
         font-size: 16px;
         margin: 0 5px;
@@ -366,7 +366,7 @@ label.input-title {
     color: $brand-text;
 
     &.new, &.old {
-      color: #999;
+      color: $gray-9;
     }
   }
 

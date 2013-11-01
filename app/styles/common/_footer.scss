@@ -5,10 +5,10 @@ footer.row-fluid {
   @include box-shadow(rgba(black, 0.3) 0px 1px 1px);
   font-size: $tiny-font-size;
   color: $footer-text;
-  background-color: #eeeeee;
+  background-color: $gray-e;
   width: 100%;
   padding: 1.25em 0 1em 0;
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid $gray-d;
   margin: 0 0 -50px 0;
 }
 

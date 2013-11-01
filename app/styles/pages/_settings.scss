@@ -139,7 +139,7 @@ $set-label-width: 40%;
   @include background-image(linear-gradient($white, #F0F0F0));
 
   &:hover, &:active {
-    @include background-image(linear-gradient(#EEEEEE, #CFCFCF));
+    @include background-image(linear-gradient($gray-e, #CFCFCF));
   }
 }
 

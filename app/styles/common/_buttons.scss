@@ -115,7 +115,7 @@
   @include box-shadow(rgba(0,0,0,0) 0 0 0);
   @include border-radius(0);
   @include box(100%);
-  color: #999;
+  color: $gray-9;
   background: transparent;
   padding: 0;
   border: 0;
@@ -134,7 +134,7 @@
 .btn-unstyle {
   @extend %center;
   background: transparent;
-  color: #999;
+  color: $gray-9;
   padding: 0;
   border: 0;
 }
