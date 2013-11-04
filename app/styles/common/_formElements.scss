@@ -45,10 +45,11 @@ input[type="color"],
     border-color: $input-border;
   }
 
-  &:focus:invalid {
+  &:focus:invalid, &:invalid {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     color: $gray-5;
     border: 1px solid $input-border;
+    outline: none;
   }
 }
 
