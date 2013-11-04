@@ -19,11 +19,11 @@
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
                 <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="50" required/>
               </div>
-              <div for="setUsername" class="form-error"
+              <div for="setUsername" class="text-error"
                      ng-show="profile.validation.setUsername.$error.required">
                   Please enter a User Name.
               </div>
-              <div for="setUsername" class="form-error"
+              <div for="setUsername" class="text-error"
                      ng-show="profile.validation.setUsername.$error.maxlength">
                   Please enter a User Name that is 50 characters or less.
               </div>
@@ -41,7 +41,7 @@
                           tooltip-html-unsafe="<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
                           tooltip-animation="true">?</button>
               </div>
-              <div class="form-error" ng-show="profile.validation.setPassword.$error.pattern">
+              <div class="text-error" ng-show="profile.validation.setPassword.$error.pattern">
                   Please enter a valid password.
               </div>
             </div>
@@ -51,7 +51,7 @@
               <div class="controls">
                 <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm"/>
               </div>
-              <div class="form-error" ng-show="profile.validation.setPassword.$error.nomatch">
+              <div class="text-error" ng-show="profile.validation.setPassword.$error.nomatch">
                   The passwords do not match. Please re-enter the password.
               </div>
             </div>
@@ -81,10 +81,10 @@
                     <div class="controls">
                         <input type="text" name="secAnswer" ng-model="question.Answer" required/>
                     </div>
-                    <div class="form-error" ng-show="question.$error.required">
+                    <div class="text-error" ng-show="question.$error.required">
                         Please enter an Answer.
                     </div>
-                    <div class="form-error" ng-show="question.$error.maxLength">
+                    <div class="text-error" ng-show="question.$error.maxLength">
                         Please enter an Answer that is a maximum of 100 characters.
                     </div>
                 </div>
@@ -94,7 +94,7 @@
               <label class="control-label" for="email">Email</label>
               <div class="controls" nxg-input model="profile.data.email" editable="profile.editable">
                 <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" required/>
-                <div class="form-error" ng-show="profile.validation.email.$invalid">
+                <div class="text-error" ng-show="profile.validation.email.$invalid">
                   Please enter a valid email address.
                 </div>
               </div>
@@ -108,7 +108,7 @@
                        ng-model="profile.dirtyData.phone"
                        ng-pattern="phonePattern"
                        size="10"/>
-                  <div class="form-error" ng-show="profile.validation.phone.$error.pattern">
+                  <div class="text-error" ng-show="profile.validation.phone.$error.pattern">
                       Please enter a valid phone number.
                   </div>
               </div>
@@ -131,7 +131,7 @@
               <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
                 <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" required />
-                <div class="form-error" ng-show="business.validation.businessEmail.$invalid">
+                <div class="text-error" ng-show="business.validation.businessEmail.$invalid">
                     Please enter a valid email address.
                 </div>
               </div>
@@ -169,7 +169,7 @@
                        ng-disabled="!business.dirtyData.enhancedRegistrationEnabled"
                        ng-pattern="/^\d{4}$/"
                        ng-required="business.dirtyData.enhancedRegistrationEnabled"/>
-                <p class="form-error" ng-show="business.validation.pin.$invalid">
+                <p class="text-error" ng-show="business.validation.pin.$invalid">
                     Your PIN must consist of four numbers, no letters or special characters.
                 </p>
               </div>

@@ -6,7 +6,7 @@
           <p>
             If you have the NextGear dealer number or Auction Access Number, use the Dealer Number search.
           </p>
-          <p for="city" class="form-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
+          <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
               Please enter a dealer number or an auction access number.
           </p>
           <div class="control-group"
@@ -80,9 +80,7 @@
 
           <p class="form-separator">-AND-</p>
 
-          <p class="form-error" ng-show="nameSearch.invalid.CityOrState">
-            Please enter a city or select a state.
-          </p>
+
           <div class="control-group">
             <label for="city" class="control-label input-title">City</label>
             <div class="controls">
@@ -100,6 +98,10 @@
               </select>
             </div>
           </div><!-- end second .control-group -->
+
+           <label class="text-error" ng-show="nameSearch.invalid.CityOrState">
+            Please enter a city or select a state.
+          </label>
           <hr/>
           <div class="form-footer">
             <button class="btn btn-primary" type="submit" ng-click="nameSearch.search()">Search</button>

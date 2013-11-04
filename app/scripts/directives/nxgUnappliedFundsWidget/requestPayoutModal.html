@@ -26,11 +26,11 @@
                required
                autofocus="autofocus"/>
       </div>
-      <p class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a payout amount.</p>
-      <p class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter payout amount as a number.</p>
-      <p class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
+      <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a payout amount.</label>
+      <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter payout amount as a number.</label>
+      <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
         Payout amount must be $0.01 to {{ funds.available | currency }}
-      </p>
+      </label>
     </div>
     <label for="payoutBankAcct">Bank Account for Payout</label>
     <div ng-class="{invalid: validity.payoutBankAcct.$invalid}">
@@ -41,7 +41,7 @@
               required>
         <option class="disabled" disabled="disabled" value="">Make Selection</option>
       </select>
-      <p class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</p>
+      <label class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</label>
     </div>
   </div>
   <div class="modal-footer">

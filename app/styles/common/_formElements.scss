@@ -119,16 +119,15 @@ select, .nxg-date-field {
 }
 
 .text-error {
+  @extend %small;
+  color: $error-dark;
+  line-height: $base-line-height;
   display: block;
-  padding-left: 6px;
-  margin: 0;
+  margin: 5px 0 10px;
 }
 
-.form-error {
-  @extend %small;
-  line-height: $base-line-height;
-  color: $error-dark;
-  margin: 10px 0 0;
+label.text-error {
+  padding-left: 6px;
 }
 
 .nxg-checkbox {
