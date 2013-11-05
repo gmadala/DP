@@ -52,8 +52,12 @@
 
             <div class="cell rec-payInfo">
               <p ><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
-                <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span>
-                <span ng-bind-html-unsafe="receipt.CheckNumber | highlight:receipt.data.query"></span>
+                <div ng-switch on="!!reciept.CheckNumber">
+                  <div ng-switch-when="true">
+                    <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span>
+                    <span ng-bind-html-unsafe="receipt.CheckNumber | highlight:receipt.data.query"></span>
+                  </div>
+                </div>
               </p>
               <p ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</p>
             </div>

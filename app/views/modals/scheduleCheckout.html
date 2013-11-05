@@ -37,7 +37,8 @@
         <input id="inputScheduleDate" name="inputScheduleDate"
                nxg-date-field before-show-day="checkDate(date)"
                ng-model="model.selectedDate"
-               required nxg-requires="checkDate(model.selectedDate)" />
+               required nxg-requires="checkDate(model.selectedDate)"
+               ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.inputScheduleDate.$error.nxgRequires }" />
       </div>
     </div>
     <div class="control-group half pay-now">

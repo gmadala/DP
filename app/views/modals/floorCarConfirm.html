@@ -86,7 +86,8 @@
             <td class="detail-value">{{ formData.UnitPurchasePrice | currency }}</td>
           </tr>
           <tr>
-            <td class="detail-label">Purchase Date</td>
+            <td class="detail-label" ng-show="isDealer">Purchase Date</td>
+            <td class="detail-label" ng-hide="isDealer">Sales Date</td>
             <td class="detail-value">{{ formData.UnitPurchaseDate | momentUTC:'M/D/YYYY' }}</td>
           </tr>
           <tr>

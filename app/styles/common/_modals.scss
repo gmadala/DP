@@ -1,5 +1,5 @@
 .modal {
-  top: 20%;
+  top: 15%;
   width: 320px;
   margin-left: -160px;
 }
@@ -29,12 +29,16 @@
   line-height: 1;
   color: $brand-text;
   font-weight: normal;
-  background-color: #eeeeee;
+  background-color: $gray-e;
 
   h3 {
     @extend h4;
     line-height: 1;
   }
+}
+
+.modal-body {
+  max-height: 350px;
 }
 
 .modal-close {
@@ -183,6 +187,43 @@
         @extend .down-arrow;
         margin-top: 5px;
       }
+    }
+  }
+}
+
+@media print {
+  /*
+   When printing, hide anything that's behind a modal, position the modal at the top left,
+   expand to full height of content, and add some misc. visual cleanup
+   */
+
+  .modal-open > * {
+    display: none;
+  }
+
+  body > .modal {
+    display: block;
+    top: 0.5in;
+    left: 0.5in;
+    margin: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    position: absolute;
+    background-color: #fff !important;
+
+    .glyphicon-remove {
+      display: none;
+    }
+
+    .modal-header {
+      background-color: #fff;
+      border-bottom: 1px solid #adadad;
+    }
+
+    .modal-body {
+      overflow-y: visible;
+      max-height: none;
     }
   }
 }

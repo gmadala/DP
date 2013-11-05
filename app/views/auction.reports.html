@@ -22,8 +22,13 @@
             <div class="well-out">
               <h5>Disbursement Detail</h5>
               <form id="disForm" name="disForm">
-                <label for="disDate">Date Search</label>
-                <input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
+                <label for="disDate" class="input-title">Date Search</label>
+                <input id="disDate"
+                        name="disDate"
+                        nxg-date-field
+                        ng-model="data.disDate"
+                        ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }"
+                        required />
 
                 <button class="btn btn-mini" ng-click="viewDisbursementDetail()">View Report</button>
                 <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">

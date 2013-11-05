@@ -26,7 +26,7 @@
             <div class="control-group half">
               <label class="control-label" for="curtailmentDate">Date</label>
               <div class="controls">
-  							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate" required />
+  							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required }" required />
   		        </div>
               <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required">
                 Please select a Date
@@ -55,8 +55,7 @@
               <div class="control-group half">
                 <label class="control-label" for="stmtStart">Start Date</label>
                 <div class="controls">
-    							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate"
-    								required />
+    							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required }" required />
                 </div>
 
               </div><!-- end .control-group -->
@@ -64,7 +63,7 @@
               <div class="control-group half">
                 <label class="control-label" for="stmtEnd">End Date</label>
                 <div class="controls">
-    							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate"
+    							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required }"
     								required />
                 </div>
               </div>
@@ -104,7 +103,7 @@
             <div class="control-group half">
               <label class="control-label" for="disDate">Date</label>
               <div class="controls">
-      					<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" required />
+      					<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }" required />
               </div>
               <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
   	             Please select a Date
@@ -128,14 +127,14 @@
               <div class="control-group half">
                 <label class="control-label" for="paidOffStart">Start Date</label>
                 <div class="controls">
-                  <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" required />
+                  <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required }" required />
                 </div>
               </div><!-- end .control-group -->
 
               <div class="control-group half">
                 <label class="control-label" for="paidOffEnd">End Date</label>
                 <div class="controls">
-                  <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" required />
+                  <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required }" required />
                 </div>
               </div>
             </div><!-- end .range -->

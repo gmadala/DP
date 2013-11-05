@@ -177,7 +177,8 @@ module.exports = function(grunt) {
       options: {},
       dist: {
         files: {
-          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html'],
+          '<%= yeoman.dist %>/unsupported.html': ['<%= yeoman.dist %>/unsupported.html']
         }
       }
     },
@@ -287,6 +288,7 @@ module.exports = function(grunt) {
       dist: {
         files: [
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt' },
+          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/favicon.ico' },
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/', src: '<%= yeoman.app %>/img/*' },
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/icons/', src: '<%= yeoman.app %>/img/icons/*' },
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/fonts/', src: '<%= yeoman.app %>/fonts/**/*' },

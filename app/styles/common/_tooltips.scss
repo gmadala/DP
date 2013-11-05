@@ -25,7 +25,7 @@
 
     .tooltip-arrow {
       left: -4px;
-      border-right-color: #BBB;
+      border-right-color: $gray-b;
 
       &:before {
         top: 50%;
@@ -49,6 +49,6 @@
   color: $base-text-color;
   width: 250px;
   padding: 10px;
-  border: 1px solid #BBB;
+  border: 1px solid $gray-b;
   z-index: $zindexTooltip;
 }

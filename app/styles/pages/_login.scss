@@ -1,6 +1,6 @@
 // LOGIN & FORGOT USERNAME/PASSWORD
 .login-head {
-  background-color: #eeeeee; // IE fallback
+  background-color: $gray-e; // IE fallback
   @include gradient-row();
   border-bottom: 2px solid $white;
 
@@ -13,7 +13,7 @@
   }
 }
 
-.login.container-line::after {
+.login.container-line::after, .unsupported.container-line::after {
   background-color: $brand-gradient-top; // IE fallback
   @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
   @extend %full-width;
@@ -49,12 +49,6 @@
     margin: 10px auto;
   }
 
-  .headline {
-    @extend %heavy;
-    font-size: $large-font-size;
-    margin-bottom: 0;
-  }
-
   .notice, .login-help {
     color: $white;
   }
@@ -75,8 +69,8 @@
       border-bottom: 1px solid $white;
 
       &:hover, &:active {
-        color: #EEE;
-        border-bottom: 1px solid #EEE;
+        color: $gray-e;
+        border-bottom: 1px solid $gray-e;
       }
     }
   }

@@ -309,14 +309,6 @@ describe('Controller: LoginRecoverCtrl', function () {
         expect(angular.equals(scope.forgotPasswordValidity, scope.forgotPasswordForm)).toBe(true);
       });
 
-      it('should clone each sub-form controller on the question objects for validity display', function () {
-        scope.passwordRecovery.submitQuestions();
-        var q = scope.passwordRecovery.questions[0];
-        expect(angular.equals(q.$form, q.$validity)).toBe(true);
-        q = scope.passwordRecovery.questions[1];
-        expect(angular.equals(q.$form, q.$validity)).toBe(true);
-      });
-
       it('should skip the call if the form is invalid', function () {
         spyOn(user, 'resetPassword').andReturn($q.when('OK'));
         scope.passwordRecovery.submitQuestions();

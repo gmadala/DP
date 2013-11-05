@@ -35,7 +35,7 @@ angular.module('nextgearWebApp')
           },
           columnFormat: {
             month: '<b>ddd</b>',
-            week: '<b>ddd</b> <b>MMM d</b>'
+            week: '<b>ddd</b> <b>MMM d, yyyy</b>'
           },
           viewDisplay: function(view) {
             // prevent navigation into the past

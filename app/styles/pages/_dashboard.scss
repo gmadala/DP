@@ -57,7 +57,7 @@
 
 .summary.credit {
   .well-out {
-    padding-left: 10px;
+    padding-left: 5px;
   }
 }
 
@@ -65,7 +65,7 @@
   @extend %heavy;
   @extend %float-r;
   @extend %small;
-  line-height: 1.6666666667;
+  line-height: 1.4;
   width: 65%;
   margin-bottom: 3px;
 
@@ -74,6 +74,10 @@
       @extend %align-right;
       font-size: 13px;
     }
+  }
+
+  td.credit-label {
+    padding-left: 4px;
   }
 
   td.taller {
@@ -112,7 +116,7 @@
 
 .item-list {
   tr td {
-    color: #555;
+    color: $gray-5;
     vertical-align: middle;
     padding-bottom: 5px;
 
@@ -157,7 +161,7 @@
     div {
       @extend %heavy;
       padding: 0 0 4px 2px;
-      color: #174e8a;
+      color: $brand-darkest;
     }
   }
   #payoutAmt, #payoutBankAcct {
@@ -182,7 +186,7 @@
     line-height: 1;
 
     span:nth-child(n+2) {
-      color: #999;
+      color: $gray-9;
     }
   }
 
@@ -223,8 +227,8 @@
     position: absolute;
     top: -1px;
     left: -1px;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
+    border-left: 1px solid $gray-e;
+    border-right: 1px solid $gray-e;
   }
 
   p {
@@ -288,7 +292,7 @@
 }
 
 .details-toggle {
-  border-bottom: 3px solid #DDD;
+  border-bottom: 3px solid $gray-d;
   margin-bottom: 20px;
 
   &.open {
@@ -298,7 +302,7 @@
 
 .details-toggle-line {
   @extend %full-width;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid $gray-c;
 }
 
 .details-toggle-btn {
@@ -310,7 +314,7 @@
   margin: 4px 0 3px;
 
   &:hover {
-    color: #444;
+    color: $gray-4;
   }
 
   i {

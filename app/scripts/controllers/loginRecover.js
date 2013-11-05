@@ -65,7 +65,7 @@ angular.module('nextgearWebApp')
         // and the template publishes each (sub)form controller onto the
         // corresponding question object as $form, via ng-init directive
         angular.forEach($scope.passwordRecovery.questions, function (question) {
-          question.$validity = angular.copy(question.$form);
+          question.$invalid = question.Answer ? false : true;
         });
 
         if ($scope.forgotPasswordForm.$invalid) {

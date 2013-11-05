@@ -1,7 +1,7 @@
 // PAYMENTS
 
 .fees .table-list-head {
-  background-color: #AAA;
+  background-color: $gray-a;
 }
 
 .cell {
@@ -57,7 +57,7 @@
 
   &.in-queue {
     background-color: #878787; // IE fallback
-    @include background-image(linear-gradient(#878787, #555));
+    @include background-image(linear-gradient(#878787, $gray-5));
     color: $white;
   }
 }
@@ -191,7 +191,7 @@
 
       span {
         @extend .glyphicon-remove-circle;
-        color: #999;
+        color: $gray-9;
       }
 
       &:hover span {

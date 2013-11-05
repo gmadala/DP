@@ -1,0 +1,43 @@
+// Unsupported view
+
+.unsupported {
+  .span2 {
+    margin-bottom: 20px;
+  }
+
+  p, a {
+    @extend %center;
+    color: $white;
+    font-size: $large-font-size;
+    line-height: 1.4;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  a:hover, a:active {
+    color: $gray-e;
+  }
+
+  .subtitle {
+    display: block;
+    color: $white;
+    margin: 10px 0 5px;
+  }
+
+  a.browserbox {
+    width: 100px;
+    height: 100px;
+    border: 0;
+    margin: 0 auto 15px;
+
+    img {
+      height: 100px;
+    }
+  }
+
+  .old-site {
+    font-size: 22px;
+  }
+}

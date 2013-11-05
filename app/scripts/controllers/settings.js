@@ -164,11 +164,16 @@ angular.module('nextgearWebApp')
                 profile.validation.$valid = false;
               }
             }
-            // check all questions have answers
+            // check all questions have answers && are <= 100 chars long
             for (var i = 0; i < profile.dirtyData.questions.length; i++) {
               var q = profile.dirtyData.questions[i];
+              delete q.$error;
               if (!q.Answer) {
                 q.$error = { required: true };
+                profile.validation.$valid = false;
+              }
+              else if (q.Answer.length > 100) {
+                q.$error = { maxLength: true };
                 profile.validation.$valid = false;
               }
             }

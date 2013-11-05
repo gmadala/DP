@@ -1,7 +1,7 @@
 @import "compass/css3/border-radius";
 
 .nxg-dash-calendar-container {
-  background-color: #eeeeee;
+  background-color: $gray-e;
   position: relative;
 }
 
@@ -52,7 +52,7 @@
   @extend %small;
   @extend %align-right;
   color: #535353;
-  background-color: #fff;
+  background-color: $white;
   text-transform: uppercase;
   padding: 4px 10px;
 
@@ -65,7 +65,7 @@
 
 .nxg-upcoming-detail {
   position: absolute;
-  background-color: #eee;
+  background-color: $gray-e;
   border: 1px solid $black;
   @include border-radius();
   header {
@@ -106,7 +106,7 @@
   @extend %small;
   display: block;
   line-height: 1.166666667;
-  color: #999;
+  color: $gray-9;
 }
 
 .fc-event-subtitle {
@@ -174,7 +174,7 @@
     .fc-text-arrow {
       color: #9a9a9a;
     }
-    background-color: #eeeeee;
+    background-color: $gray-e;
     border: 0;
   }
 
@@ -199,12 +199,12 @@
   margin: 3px 0;
 
   &:hover {
-    color: #888;
+    color: $gray-8;
     cursor: pointer;
   }
 
   &.fc-state-disabled {
-    color: #888;
+    color: $gray-8;
     @include opacity(100);
   }
 }

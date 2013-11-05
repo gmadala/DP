@@ -31,12 +31,6 @@
       right: 0;
     }
   }
-
-  .item-list {
-    tr td{
-      // padding-bottom: 5px;
-    }
-  }
 }
 
 .auction-dashboard-chart {
@@ -143,9 +137,9 @@
 
     &.selfloor-descr {  width: 19%; }
     &.selfloor-stat { width: 10%; }
-    &.selfloor-dates { width: 10%; }
+    &.selfloor-dates { width: 12%; }
     &.selfloor-purch { width: 11%; }
-    &.selfloor-buy { width: 12%; }
+    &.selfloor-buy { width: 10%; }
     &.selfloor-ticket-num { width: 12%; }
     &.selfloor-title-loc { width: 9%; }
     &.selfloor-title { width: 17%; }

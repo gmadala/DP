@@ -75,10 +75,10 @@
             <td title="Due Date">{{ payment.DueDate | moment  }}</td>
             <td title="Description">{{ payment.Description }}</td>
             <td title="Payoff Due">
-              <span ng-show="payment.PayoffDue">{{ payment.PayoffDue | currency }}</span>
+              <span>{{ payment.PayoffDue | currency }}</span>
             </td>
             <td title="Payment Due">
-              <span ng-show="!payment.PayoffDue">{{ payment.PaymentDue | currency }}</span>
+              <span>{{ payment.PaymentDue | currency }}</span>
             </td>
           </tr>
         </table>
@@ -153,41 +153,41 @@
           <td>
             <i class="nxg-chart-legend-color nxg-chart-approved-credit"></i>
           </td>
-          <td class="no-bold">Line of Credit</td>
+          <td class="no-bold credit-label">Line of Credit</td>
           <td class="table-symbol"></td>
-          <td>{{ dashboardData.LineOfCredit | numeral:'$0,0' }}</td>
+          <td>{{ dashboardData.LineOfCredit | numeral:'$0,0.00' }}</td>
         </tr>
         <tr class="chart-summary-table-total-row">
           <td>
             <i class="nxg-chart-legend-color nxg-chart-temporary-credit"></i>
           </td>
-          <td class="no-bold">Temp Line of Credit</td>
+          <td class="no-bold credit-label">Temp Line of Credit</td>
           <td class="table-symbol">+</td>
-          <td>{{ dashboardData.TempLineOfCredit | numeral:'$0,0' }}</td>
+          <td>{{ dashboardData.TempLineOfCredit | numeral:'$0,0.00' }}</td>
         </tr>
         <tr>
           <td class="taller"></td>
-          <td class="taller">Total Credit</td>
+          <td class="taller credit-label">Total Credit</td>
           <td class="table-symbol">=</td>
           <td>
-            {{ dashboardData.LineOfCredit + dashboardData.TempLineOfCredit | numeral:'$0,0' }}
+            {{ dashboardData.LineOfCredit + dashboardData.TempLineOfCredit | numeral:'$0,0.00' }}
           </td>
         </tr>
         <tr class="chart-summary-table-total-row">
           <td>
             <i class="nxg-chart-legend-color nxg-chart-utilized-credit"></i>
           </td>
-          <td class="no-bold">Utilized Credit</td>
+          <td class="no-bold credit-label">Utilized Credit</td>
           <td class="table-symbol red">-</td>
-          <td>{{ dashboardData.UtilizedCredit | numeral:'$0,0' }}</td>
+          <td>{{ dashboardData.UtilizedCredit | numeral:'$0,0.00' }}</td>
         </tr>
         <tr>
           <td class="taller">
             <i class="nxg-chart-legend-color nxg-chart-available-credit"></i>
           </td>
-          <td class="taller">Available Credit</td>
+          <td class="taller credit-label">Available Credit</td>
           <td class="table-symbol">=</td>
-          <td>{{ dashboardData.AvailableCredit | numeral:'$0,0' }}</td>
+          <td>{{ dashboardData.AvailableCredit | numeral:'$0,0.00' }}</td>
         </tr>
       </table>
 

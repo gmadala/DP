@@ -29,17 +29,25 @@ angular.module('nextgearWebApp')
     };
 
     $scope.submitForm = function() {
-      var securityQuestions = [];
+      var questions = [];
 
       // validate client-side
       $scope.validity = angular.copy($scope.updateSecurity);
 
       _.each($scope.questions, function(q) {
-        if (!$scope.updateSecurity[q.name]) { $scope.validity[q.name] = {$error: {required: true}}; }
-        if ($scope.updateSecurity[q.name] && !$scope.updateSecurity[q.resName]) {
+        // no question selected
+        if (!$scope.updateSecurity[q.name]) {
+          $scope.validity[q.name] = {$error: {required: true}};
+        }
+        // no answer filled out for the question
+        else if (!$scope.updateSecurity[q.resName]) {
           $scope.validity[q.resName] = {$error: {required: true}};
         }
-        securityQuestions.push({
+        // answer needs to be <= 100 chars long
+        else if ($scope.updateSecurity[q.resName].length > 100) {
+          $scope.validity[q.resName] = {$error: {maxLength: true}};
+        }
+        questions.push({
           SecurityQuestionId: $scope.updateSecurity[q.name],
           Answer: $scope.updateSecurity[q.resName]
         });
@@ -49,7 +57,7 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, securityQuestions);
+      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions);
       User.setShowUserInitialization(false);
       $location.path('/home');
     };
