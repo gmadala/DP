@@ -22,7 +22,7 @@
   Please look up the VIN
 </label>
 <label for="inputVin" class="text-error"
-       ng-show="settings.vinMode == 'noMatch'">
+       ng-show="settings.vinMode == 'noMatch' && !data.VinAckLookupFailure">
   VIN was not located; please enter Make, Model, Year and Style
 </label>
 
