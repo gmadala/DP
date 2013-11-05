@@ -78,8 +78,7 @@
               </label>
               <input type="text" name="questionInput" id="{{ passwordRecovery.getInputId(question) }}"
                      ng-model="question.Answer" required />
-
-              <p class="text-error" ng-show="question.$validity.questionInput.$error.required">
+              <p class="text-error" ng-show="question.$invalid">
                 Please answer this question.
               </p>
 
