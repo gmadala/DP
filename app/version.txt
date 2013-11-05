@@ -1,29 +1,24 @@
-NextGear v0.6
+NextGear v0.7
 ======================
 
-Defects fixed in this release: 
----------------------------------------
-1124	Mobile - Security question "Identity Confirmation Failure" message box dialog issue.
-1083	Mobile app's "Call Customer Service" link should take user to phone number for their CSC rep. 
+Available in this release:
+---------------------------
+1145	Curtailment scheduled missing for all vehicles
+904	    Floor Car confirmation - print output garbled
+1010	Notifications - when you select "All" --> somehow indicate all notifications are selected
+1081	Web: User Profile Settings - No text limit validation on "User Name" field.
 1085	Floor a Car - Purchase Date validation error on Android when a date was selected
-1089	Mobile: "Dashboard" icon is missing.
-1092	Mobile: Floor A Vehicle -> On Confirmation screen  "Floor" button is not working.
-1096	Mobile: Top ten vehicle -> Page title text not properly visible on page "Best & Worst Movers by Zipcode" and text is not according to wireframe(Next Gear Wireframe v0.PDF 60).
-1097	Mobile - Floor A Vehicle -> No Validation messages for numeric fields on Step1, 2 & 3. 
-1098	Web: Dashboard-Overlay is not getting displayed on hovering on "Floor Plan" details in IE9 - Text is overlapping.
-1099	Web: Payment Checkout Page - Page layout issue in IE9.
-1101	Web: Payments-Multiple bank accounts drop down issue.
-1103	Dashboard icon (alongside nav link) does not show up
-1106	Web: Login page footer text for Adobe Acrobat Installation Reminder is not properly aligned with login box.
-1111	Mobile: "Bill of Sale Picture" icon overlapping issue.
-1112	Mobile: "Payment" -> Total Payment calculation issue on checkout page.   
-1113	Mobile: "Payment" -> Cross is appear on both Amount type (Payoff Amount  and Amount Due) after checking "Payoff Amount".   
-1119	Primary Navigation State --> Missing
-1121	Web: "Login" button is getting displayed as active when login fields are blank.
-1107	Web: Favicon is not appearing on any of the supported browsers for NextGear portal.
-1117	Web: Floor Plan - Wrong tooltip is getting displayed on "Clear Search" link.
-934	Web: Auction - View A Report - PDF for "Receivable Detail (PDF)" link is not getting displayed.
-1026	Mobile: Title vault - Stock details - "Title (First page)" download the complete file and open all pages in viewer. 
-1061	Web: Scheduled Payments - VIN and Stock details are missing from the payments in the list.
-1065	Web: Forgot Username - User is not getting any email for username.
-1075	Web: Dealer Search - "NextGear Dealer Number" valid error message is not getting displayed.
+1093	Mobile:  Floor A Vehicle ->  Step-3 -> Date wheel overlay is appearing 2 time for "Purchase Date" for Samsung Note2.
+1118	Upcoming Payments --> Adding Year to the Week View
+1131	Mobile: Home Icon is appear after selecting "VIN failure acknowledged" on "Floor A Vehicle" Screen.
+1138	Web: IE10 - View A Report - UI issue in the required fields of "Paid Off Summary" - "Range of Stock #'s".
+1139	Web: IE10 - View A Report - UI issue in the required fields of "Paid Off Summary" - "Specific Stock #'s".
+1141	Mobile: "Analytics"> "NextGear Book Amount"-> Under "By Make"/"By VIN" - validation message is not getting displayed when set decimal value and special character in "Mileage" field.
+1144	Invalid form fields should have a red border around them once user submits; currently they do not.
+1148	Web: * "Floor A Car" > Vin Error message is not close on click "Floor" button while enter valid data in "Make", "Model", "Year" and "Style" field
+1150	Web: * "Bulk Flooring" > Vin Error message is not close on click "Floor" button while enter valid data in "Make", "Model", "Year" and "Style" field
+1152	Web:  "Bulk Flooring" > Date field title is not same in "Sales Information" and "Confirm Flooring Request".
+1122	Web: Auction-Bulk Flooring - Field Selection area issue - User is able to select field by clicking out side of the field.
+1142	Mobile: In "Title Vault" search area, complete text is not getting displayed,  Its not exactly same as in wireframe NextGear Mobile Wireframes_v006.pdf: 36.
+1147	Mobile: In "Payments" search area, complete text is not getting displayed,  It's not exactly same as in wireframe NextGear Mobile Wireframes_v006.pdf: 49.
+1076	Web: Dealer Search - "Auction Access Number" Searching is not proper.
