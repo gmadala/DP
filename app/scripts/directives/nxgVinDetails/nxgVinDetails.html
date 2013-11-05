@@ -4,7 +4,8 @@
          required ng-minlength="6" ng-maxlength="17"
          nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
          ng-change="vinChange()" nxg-blur="vinExit()"
-         autofocus="autofocus"/>
+         autofocus="autofocus"
+         ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
   <a href class="btn btn-secondary nxg-search-btn" ng-click="lookupVin()">
     <i class="glyphicon glyphicon-search"></i>
   </a>
@@ -55,7 +56,7 @@
   <div id="nxg-vin-no-match-info" ng-switch-when="noMatch">
     <label for="inputMake">Make</label>
     <input type="text" id="inputMake" name="inputMake" ng-model="data.UnitMake"
-           required maxlength="50"/>
+           required maxlength="50" ng-class="{ 'nxg-invalid': validity.inputMake.$error.required }" />
     <label for="inputMake" class="text-error"
            ng-show="validity.inputMake.$error.required">
       Please enter a Make
@@ -63,7 +64,7 @@
 
     <label for="inputModel">Model</label>
     <input type="text" id="inputModel" name="inputModel" ng-model="data.UnitModel"
-           required maxlength="50"/>
+           required maxlength="50" ng-class="{ 'nxg-invalid': validity.inputModel.$error.required }" />
     <label for="inputModel" class="text-error"
            ng-show="validity.inputModel.$error.required">
       Please enter a Model
@@ -71,7 +72,7 @@
 
     <label for="inputYear">Year</label>
     <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear"
-           required ng-pattern="/^\d{4}$/" nxg-min="1900" nxg-max="settings.maxYear" />
+           required ng-pattern="/^\d{4}$/" nxg-min="1900" nxg-max="settings.maxYear" ng-class="{ 'nxg-invalid': validity.inputYear.$error.required || validity.inputYear.$error.pattern || validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax }" />
     <label for="inputYear" class="text-error"
            ng-show="validity.inputYear.$error.required">
       Please enter a Year
@@ -87,7 +88,7 @@
 
     <label for="inputStyle">Style</label>
     <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle"
-           required maxlength="50"/>
+           required maxlength="50" ng-class="{ 'nxg-invalid': validity.inputStyle.$error.required }" />
     <label for="inputStyle" class="text-error"
            ng-show="validity.inputStyle.$error.required">
       Please enter a Style

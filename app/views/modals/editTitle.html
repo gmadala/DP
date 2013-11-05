@@ -8,7 +8,10 @@
     <span>{{ vehicleDescription }}</span>
 
     <label for="titleNumber" class="input-title">Title Number</label>
-    <input id="titleNumber" name="titleNumber" type="text" ng-model="inputModel.titleNumber" required>
+    <input id="titleNumber" name="titleNumber" type="text"
+          ng-model="inputModel.titleNumber"
+          ng-class="{ 'nxg-invalid': validity.titleNumber.$error.required }"
+          required>
     <label for="titleNumber" class="text-error"
            ng-show="validity.titleNumber.$error.required">
       Please enter the Title Number
@@ -17,6 +20,7 @@
     <label for="titleState" class="input-title">Title State</label>
     <select name="titleState" id="titleState" ng-model="inputModel.titleState"
             ng-options="state.StateName for state in states"
+            ng-class="{ 'nxg-invalid': validity.titleState.$error.required }"
             required>
       <option class="disabled" disabled="disabled" value="">Make Selection</option>
     </select>

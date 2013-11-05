@@ -9,7 +9,7 @@ select {
   font-size: 13px;
   -webkit-user-select: none;
 
-  &:focus, &:invalid, &:focus:invalid, &:focus:invalid:focus {
+  &:focus, &:focus:invalid, &:focus:invalid:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     outline: 0;
     color: $brand-light;
@@ -49,7 +49,52 @@ input[type="color"],
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
     color: $gray-5;
     border: 1px solid $input-border;
-    outline: none;
+  }
+
+  // get rid of IE's default clear button
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  &.nxg-invalid {
+    border: 1px solid $error-dark;
+  }
+  &:focus:invalid, &:invalid {
+        outline: none;
+  }
+}
+
+select.nxg-invalid {
+  color: $error-dark;
+}
+
+// these fields are treated differently b/c the inputs are wrapped in a directive
+.nxg-date-field, .nxg-business-field {
+  &.nxg-invalid {
+    border: 0;
+
+    input {
+      border: 1px solid $error-dark;
+    }
+
   }
 }
 

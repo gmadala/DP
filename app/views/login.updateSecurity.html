@@ -17,7 +17,7 @@
             <div class="control-group email">
               <label class="control-label" for="email">Email</label>
               <div class="controls">
-                <input type="email" name="email" id="email" ng-model="email" required/>
+                <input type="email" name="email" id="email" ng-model="email" ng-class="{ 'nxg-invalid': validity.email.$error.required || validity.email.$error.email }" required/>
                 <label class="text-error" ng-show="updateSecurity.email.$error.correctEmail">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
                 <label class="text-error" ng-show="validity.email.$error.required || validity.email.$error.email">Please enter a valid email address.</label>
               </div>
@@ -41,7 +41,7 @@
               <div class="control-group" ng-show="$parent.updateSecurity[question.name]">
                 <label class="control-label">Answer</label>
                 <div class="controls">
-                  <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" required />
+                  <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.required">Please enter an answer to the selected security question. </label>
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.maxLength">Please enter an answer that is no more than 100 characters long. </label>
                 </div>

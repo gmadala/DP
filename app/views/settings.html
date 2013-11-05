@@ -17,7 +17,7 @@
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
-                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="50" required/>
+                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="50" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
               </div>
               <div for="setUsername" class="text-error"
                      ng-show="profile.validation.setUsername.$error.required">
@@ -33,7 +33,7 @@
               <label class="control-label" for="setPassword"><span ng-show="editable">New </span>Password</label>
               <div class="static" ng-hide="profile.editable">***********</div>
               <div class="controls" ng-show="profile.editable">
-                <input type="password" name="setPassword" ng-model="profile.dirtyData.password"/>
+                <input type="password" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                   <button class="btn-help"
                           tooltip-placement="right"
                           tooltip-trigger="click"
@@ -49,7 +49,7 @@
             <div class="control-group" ng-show="profile.editable">
               <label class="control-label" for="confirmPassword">Confirm Password</label>
               <div class="controls">
-                <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm"/>
+                <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
               </div>
               <div class="text-error" ng-show="profile.validation.setPassword.$error.nomatch">
                   The passwords do not match. Please re-enter the password.
@@ -79,7 +79,7 @@
                 <div class="control-group" ng-show="profile.editable">
                     <label class="control-label" for="secAnswer">Answer</label>
                     <div class="controls">
-                        <input type="text" name="secAnswer" ng-model="question.Answer" required/>
+                        <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
                     </div>
                     <div class="text-error" ng-show="question.$error.required">
                         Please enter an Answer.
@@ -93,7 +93,7 @@
             <div class="control-group">
               <label class="control-label" for="email">Email</label>
               <div class="controls" nxg-input model="profile.data.email" editable="profile.editable">
-                <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" required/>
+                <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
                 <div class="text-error" ng-show="profile.validation.email.$invalid">
                   Please enter a valid email address.
                 </div>
@@ -107,7 +107,8 @@
                        name="phone"
                        ng-model="profile.dirtyData.phone"
                        ng-pattern="phonePattern"
-                       size="10"/>
+                       size="10"
+                       ng-class="{ 'nxg-invalid': profile.validation.phone.$error.pattern }" />
                   <div class="text-error" ng-show="profile.validation.phone.$error.pattern">
                       Please enter a valid phone number.
                   </div>
@@ -130,7 +131,7 @@
             <div class="control-group">
               <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
-                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" required />
+                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
                 <div class="text-error" ng-show="business.validation.businessEmail.$invalid">
                     Please enter a valid email address.
                 </div>
@@ -168,7 +169,8 @@
                        ng-model="business.dirtyData.enhancedRegistrationPin"
                        ng-disabled="!business.dirtyData.enhancedRegistrationEnabled"
                        ng-pattern="/^\d{4}$/"
-                       ng-required="business.dirtyData.enhancedRegistrationEnabled"/>
+                       ng-required="business.dirtyData.enhancedRegistrationEnabled"
+                       ng-class="{ 'nxg-invalid': business.validation.pin.$invalid }" />
                 <p class="text-error" ng-show="business.validation.pin.$invalid">
                     Your PIN must consist of four numbers, no letters or special characters.
                 </p>
