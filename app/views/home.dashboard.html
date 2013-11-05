@@ -75,10 +75,10 @@
             <td title="Due Date">{{ payment.DueDate | moment  }}</td>
             <td title="Description">{{ payment.Description }}</td>
             <td title="Payoff Due">
-              <span ng-show="payment.PayoffDue == payment.PaymentDue">{{ payment.PayoffDue | currency }}</span>
+              <span>{{ payment.PayoffDue | currency }}</span>
             </td>
             <td title="Payment Due">
-              <span ng-show="payment.PayoffDue != payment.PaymentDue">{{ payment.PaymentDue | currency }}</span>
+              <span>{{ payment.PaymentDue | currency }}</span>
             </td>
           </tr>
         </table>
