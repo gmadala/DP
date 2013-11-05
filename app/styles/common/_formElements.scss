@@ -390,6 +390,7 @@ label.input-title {
     @include border-radius(0);
     @extend %thin;
     color: $brand-text;
+    letter-spacing: 0;
     font-size: $large-font-size;
   }
 

@@ -1,5 +1,5 @@
 .modal {
-  top: 20%;
+  top: 15%;
   width: 320px;
   margin-left: -160px;
 }
@@ -35,6 +35,10 @@
     @extend h4;
     line-height: 1;
   }
+}
+
+.modal-body {
+  max-height: 350px;
 }
 
 .modal-close {
@@ -222,5 +226,4 @@
       max-height: none;
     }
   }
-
 }
