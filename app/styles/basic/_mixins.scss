@@ -4,7 +4,8 @@
  * Used for header and nav backgrounds, footer, etc.
  */
 @mixin gradient-row() {
-  @include background-image(linear-gradient(#fff, #e4e4e4));
+  background: #FFF;
+  @include background-image(linear-gradient(#FFF, #e4e4e4));
 }
 
 /*
