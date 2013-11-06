@@ -76,6 +76,9 @@
             <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required">
               Please select an End Date
             </label>
+            <label class="text-error" ng-show="stmtFormValidity.dateRangeError">
+              Start Date should not be later than End Date
+            </label>
             <!-- end errors -->
 
             <div class="control-group">
@@ -142,6 +145,7 @@
             <!-- Paid Off Summary Date Range Errors -->
             <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required">Please select a Start Date</label>
             <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required">Please select an End Date</label>
+            <label class="text-error" ng-show="paidOffFormValidity.dateRangeError">Start Date should not be later than End Date</label>
             <!-- end errors -->
 
             <div class="control-group">
