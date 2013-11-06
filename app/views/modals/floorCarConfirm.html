@@ -88,7 +88,7 @@
           <tr>
             <td class="detail-label" ng-show="isDealer">Purchase Date</td>
             <td class="detail-label" ng-hide="isDealer">Sales Date</td>
-            <td class="detail-value">{{ formData.UnitPurchaseDate | momentUTC:'M/D/YYYY' }}</td>
+            <td class="detail-value">{{ formData.UnitPurchaseDate | moment }}</td>
           </tr>
           <tr>
             <td class="detail-label">Send Payment To</td>
