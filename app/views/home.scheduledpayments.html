@@ -22,7 +22,7 @@
         nxg-infinite-scroll-disabled="scheduledPayments.loading"
         nxg-infinite-scroll-show-indicator="scheduledPayments.loading">
 
-        <p class="text-error notice-box" ng-show="!canPayNow">
+        <p class="text-error notice-box" ng-show="canPayNowLoaded && !canPayNow">
           Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.<br/>
           Note: No payment may be scheduled on an overdue loan, or a loan due today.
         </p>
