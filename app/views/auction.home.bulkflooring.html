@@ -95,10 +95,12 @@
       <div class="well-out">
 
         <label for="inputBuyer" class="input-title">Buyer</label>
-        <input nxg-business-field="buyers" id="inputBuyer" class="input-xlarge"
-               name="inputBuyer"
-               ng-required="true"
-               selected-business="data.BusinessId" />
+        <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBuyer.$error.nxgRequires }">
+          <input nxg-business-field="buyers" id="inputBuyer" class="input-xlarge"
+                 name="inputBuyer"
+                 ng-required="true"
+                 selected-business="data.BusinessId" />
+        </span>
         <label for="inputBuyer" class="text-error"
                ng-show="validity.inputBuyer.$error.nxgRequires">
           Please look up a Buyer
