@@ -18,22 +18,29 @@ angular.module('nextgearWebApp')
     };
 
     $scope.search = function() {
+      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
+
+      if (isNewQuery) {
+        // commit the proposed query
+        $scope.data.query = $scope.data.proposedQuery;
+
+        if ($scope.data.query) {
+          // a query is required for the search to be executed
+          $scope.fetch();
+          segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
+        }
+      }
+    };
+
+    $scope.fetch = function() {
       // search means "start from the beginning with current criteria"
       $scope.data.paginator = null;
       $scope.data.hitInfiniteScrollMax = false;
       $scope.data.results.length = 0;
 
-      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
-
-      // commit the proposed query
-      $scope.data.query = $scope.data.proposedQuery;
-
       if ($scope.data.query) {
         // a query is required for the search to be executed
         $scope.fetchNextResults();
-        if (isNewQuery) {
-          segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
-        }
       }
     };
 
@@ -77,7 +84,7 @@ angular.module('nextgearWebApp')
         $scope.data.sortBy = fieldName;
         $scope.data.sortDescending = false;
       }
-      $scope.search();
+      $scope.fetch();
     };
 
     // Allow the dialog to close itself using the "Cancel" button.

@@ -59,6 +59,7 @@ describe('Controller: BusinessSearchCtrl', function () {
 
     it('should clear any prior results', function () {
       scope.data.results = ['foo', 'bar'];
+      scope.data.proposedQuery = 'foo';
       scope.search();
       expect(scope.data.results.length).toBe(0);
     });
@@ -183,9 +184,9 @@ describe('Controller: BusinessSearchCtrl', function () {
     });
 
     it('should restart the search', function () {
-      spyOn(scope, 'search');
+      spyOn(scope, 'fetch');
       scope.sortBy('foo');
-      expect(scope.search).toHaveBeenCalled();
+      expect(scope.fetch).toHaveBeenCalled();
     });
 
   });
