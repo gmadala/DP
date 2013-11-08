@@ -149,8 +149,12 @@
                    required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)"  ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) }"/>
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.required">
-              Please enter the Purchase Date
+              Please enter a Valid Purchase Date
             </label>
+            <label for="inputPurchaseDate" class="text-error"
+                   ng-show="validity.inputPurchaseDate.$error.date">
+              Please enter a Valid Purchase Date
+            </label>            
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required">
               Please enter a valid non-future date
