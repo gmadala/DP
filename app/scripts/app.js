@@ -198,10 +198,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:redirectToLogin',
       function(){
-        // Nice explicit User reset + dialog closing
-        User.reset();
-        $dialog.closeAll();
-        // ... but really, this will clobber everything and redirect to the login page
+        // this will clobber everything and redirect to the login page
         window.location.reload();
       }
     );

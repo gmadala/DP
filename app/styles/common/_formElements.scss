@@ -364,6 +364,7 @@ label.input-title {
         content: '';
         @extend %heavy;
         position: absolute;
+        top: 8px;
         color: $gray-a;
         font-family: 'Lucida Sans Unicode';
         font-size: 16px;

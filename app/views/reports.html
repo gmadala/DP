@@ -20,7 +20,7 @@
           <hr/>
 
           <!-- Curtailment Form -->
-          <form class="form-inline" name="curtailmentForm">
+          <form class="form-inline" name="curtailmentForm" novalidate>
             <h3 class="form-title">Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
             <div class="control-group half">
@@ -48,7 +48,7 @@
 
         <div class="well-out">
           <!-- Dealer Statement Form -->
-          <form class="form-inline" name="stmtForm">
+          <form class="form-inline" name="stmtForm" novalidate>
             <h3 class="form-title">Dealer Statement</h3>
 
             <div class="range">
@@ -76,6 +76,9 @@
             <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required">
               Please select an End Date
             </label>
+            <label class="text-error" ng-show="stmtFormValidity.dateRangeError">
+              Start Date should not be later than End Date
+            </label>
             <!-- end errors -->
 
             <div class="control-group">
@@ -97,7 +100,7 @@
           <hr/>
 
           <!-- Disbursement Form -->
-          <form class="form-inline" name="disForm">
+          <form class="form-inline" name="disForm" novalidate>
             <h3 class="form-title">Disbursement Detail</h3>
 
             <div class="control-group half">
@@ -120,7 +123,7 @@
           <hr/>
 
           <!-- Paid Off Form -->
-          <form class="form-inline" name="paidOffForm">
+          <form class="form-inline" name="paidOffForm" novalidate>
             <h3 class="form-title">Paid off Summary</h3>
 
             <div class="range">
@@ -142,6 +145,7 @@
             <!-- Paid Off Summary Date Range Errors -->
             <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required">Please select a Start Date</label>
             <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required">Please select an End Date</label>
+            <label class="text-error" ng-show="paidOffFormValidity.dateRangeError">Start Date should not be later than End Date</label>
             <!-- end errors -->
 
             <div class="control-group">

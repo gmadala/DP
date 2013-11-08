@@ -12,8 +12,6 @@
         <div class="well-out">
 
           <form class="settings-opts" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
-            <span class="error" ng-show="profile.showError">{{ profile.errorMsg }}</span>
-
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">

@@ -21,7 +21,6 @@ angular.module('nextgearWebApp')
       edit: function() {
         this.dirtyData = angular.copy(this.data);
         this.editable = true;
-        this.showError = false;
       },
       cancel: function() {
         this.dirtyData = this.validation = null;
@@ -42,11 +41,6 @@ angular.module('nextgearWebApp')
         this.data = this.dirtyData;
         this.dirtyData = this.validation = null;
         this.editable = false;
-        this.showError = false;
-      },
-      saveError: function(error) {
-        this.showError = true;
-        this.errorMsg = error.text;
       },
       /**
        * We get a notification object for every notification/delivery_method combination. This function
@@ -125,8 +119,7 @@ angular.module('nextgearWebApp')
               this.updateQuestionText(d.questions);
 
               Settings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
-                prv.saveSuccess.bind(this),
-                prv.saveError.bind(this)
+                prv.saveSuccess.bind(this)
               );
             }
           },
@@ -218,8 +211,7 @@ angular.module('nextgearWebApp')
               var d = this.dirtyData;
 
               Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
-                prv.saveSuccess.bind(this),
-                prv.saveError.bind(this)
+                prv.saveSuccess.bind(this)
               );
             }
           },
@@ -272,8 +264,7 @@ angular.module('nextgearWebApp')
               var d = this.dirtyData;
 
               Settings.saveTitleAddress(d.titleAddress.BusinessAddressId).then(
-                prv.saveSuccess.bind(this),
-                prv.saveError.bind(this)
+                prv.saveSuccess.bind(this)
               );
             }
           },
@@ -317,8 +308,7 @@ angular.module('nextgearWebApp')
             if (prv.save.apply(this)) {
               this.updateSelectedNotifications(this.dirtyData);
               Settings.saveNotifications(prv.flattenNotifications(this.dirtyData.available)).then(
-                prv.saveSuccess.bind(this),
-                prv.saveError.bind(this)
+                prv.saveSuccess.bind(this)
               );
             }
           },

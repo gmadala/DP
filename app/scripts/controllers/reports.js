@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, segmentio, metric) {
+  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -20,16 +20,22 @@ angular.module('nextgearWebApp')
     ];
 
     $scope.viewDealerStatement = function() {
+      var startDate = api.toShortISODate($scope.data.stmtStartDate);
+      var endDate = api.toShortISODate($scope.data.stmtEndDate);
 
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.stmtFormValidity = angular.copy($scope.stmtForm);
 
+      if (startDate && endDate && moment(startDate).isAfter(endDate)) {
+        $scope.stmtFormValidity.dateRangeError = true;
+        $scope.stmtForm.$valid = false;
+      }
+      else {
+        $scope.stmtFormValidity.dateRangeError = false;
+      }
       if (!$scope.stmtForm.$valid) {
         return false;
       }
-
-      var startDate = api.toShortISODate($scope.data.stmtStartDate);
-      var endDate = api.toShortISODate($scope.data.stmtEndDate);
 
       var strUrl = '/report/dealerstatement/' + startDate + '/' + endDate;
       var defaultFilename = '/DealerStatement_' + startDate + '_to_' + endDate;
@@ -79,16 +85,22 @@ angular.module('nextgearWebApp')
     };
 
     $scope.viewPaidOffSummary = function() {
+      var startDate = api.toShortISODate($scope.data.paidOffStartDate);
+      var endDate = api.toShortISODate($scope.data.paidOffEndDate);
 
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.paidOffFormValidity = angular.copy($scope.paidOffForm);
 
+      if (startDate && endDate && moment(startDate).isAfter(endDate)) {
+        $scope.paidOffFormValidity.dateRangeError = true;
+        $scope.paidOffForm.$valid = false;
+      }
+      else {
+        $scope.paidOffFormValidity.dateRangeError = false;
+      }
       if (!$scope.paidOffForm.$valid) {
         return false;
       }
-
-      var startDate = api.toShortISODate($scope.data.paidOffStartDate);
-      var endDate = api.toShortISODate($scope.data.paidOffEndDate);
 
       var params = {};
       var defaultFilename = '/PaidOff_' + startDate + '_to_' + endDate;

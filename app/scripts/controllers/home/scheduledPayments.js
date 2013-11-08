@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric, User) {
     segmentio.track(metric.VIEW_SCHEDULED_PAYMENTS_LIST);
 
     var prv = {
@@ -143,9 +143,22 @@ angular.module('nextgearWebApp')
     $scope.scheduledPayments.resetSearch();
 
     var refreshCanPayNow = function () {
-      $scope.canPayNow = Payments.canPayNow();
+      if( !User.isLoggedIn() ) { return; }
+
+      Payments.canPayNow().then(
+        function (result) {
+          $scope.canPayNow = result;
+          $scope.canPayNowLoaded = true;
+        }, function (error) {
+          // suppress error message display from this to avoid annoyance since it runs continually
+          error.dismiss();
+          $scope.canPayNow = false;
+          $scope.canPayNowLoaded = false;
+        });
+
       $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
     refreshCanPayNow();
+
   })
 ;

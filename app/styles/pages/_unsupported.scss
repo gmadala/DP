@@ -1,9 +1,12 @@
 // Unsupported view
+// This page has lots of tweaks because it has to work in all our
+// unsupported browsers, IE7 & IE8 in particular.
 
 .unsupported {
-  .span2 {
-    margin-bottom: 20px;
-  }
+  background-color: $brand-gradient-top;
+  top: 0;
+  width: 100%;
+  height: 100%;
 
   p, a {
     @extend %center;
@@ -16,8 +19,50 @@
     margin-bottom: 20px;
   }
 
-  a:hover, a:active {
-    color: $gray-e;
+  a {
+    &:hover, &:active {
+      color: $gray-e;
+    }
+
+    &.browserbox {
+      width: 100px;
+      height: 100px;
+      border: 0;
+      margin: 0 auto 15px;
+
+      img {
+        height: 100px;
+      }
+    }
+  }
+
+  .nxg-logo {
+    background-image: url(../img/nxg_logo_blue.png);
+  }
+
+  .span2 {
+    margin-bottom: 20px;
+  }
+
+  .notice {
+    @extend %center;
+    @include border-radius(50%);
+    background-color: $error;
+    width: 32px;
+    height: 32px;
+    color: $white;
+    font: bold 30px/1 'Times New Roman', serif;
+    border: 2px solid $white;
+    margin: 10px auto;
+
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      background: transparent;
+      border: 0;
+      margin: 0;
+    }
   }
 
   .subtitle {
@@ -26,18 +71,23 @@
     margin: 10px 0 5px;
   }
 
-  a.browserbox {
-    width: 100px;
-    height: 100px;
-    border: 0;
-    margin: 0 auto 15px;
-
-    img {
-      height: 100px;
-    }
-  }
-
   .old-site {
     font-size: 22px;
+  }
+
+  .footer {
+    @extend %center;
+    @include gradient-row();
+    @include box-shadow(rgba(black, 0.3) 0px 1px 1px);
+    width: 100%;
+    height: 50px;
+    padding: 14px 0 11px 0;
+    border-top: 1px solid $gray-d;
+    margin: 0 0 -50px 0;
+
+    &, p, a {
+      font-size: $tiny-font-size;
+      color: $footer-text;
+    }
   }
 }
