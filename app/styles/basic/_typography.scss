@@ -11,6 +11,15 @@ a {
   }
 }
 
+h4 {
+  font-weight: 300;
+  color: $brand-light;
+}
+
+ul {
+  list-style-type: none;
+}
+
 .boxed {
   @extend %thin;
   font-size: 20px;

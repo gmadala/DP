@@ -19,12 +19,12 @@
   @include border-radius(5px);
   @include box-shadow(rgba(0,0,0,0.1) 1px 2px 2px);
   background: $white;
-  border: 1px solid $border;
   position: fixed;
   top: 25px;
   left: 50%;
   width: 150px;
   padding: 10px 27px;
+  border: 1px solid $border;
   margin-left: -75px;
   z-index: 8000; /* make sure it's in front of modal backgrounds */
 

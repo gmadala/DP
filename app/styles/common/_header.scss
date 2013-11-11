@@ -41,12 +41,8 @@ header > .row-fluid {
 
 .nxg-settings.dropdown-menu {
   @extend %full-width;
-  @include border-radius(0);
-  @include box-shadow(0 0 0 rgba(0,0,0,0));
   position: relative;
-  float: none;
   min-width: 100%;
-  background: transparent;
   padding: 0;
   border: 0;
 
