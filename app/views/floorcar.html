@@ -145,6 +145,7 @@
 
             <label for="inputPurchaseDate" class="input-title">Purchase Date</label>
             <input id="inputPurchaseDate" name="inputPurchaseDate" ng-model="data.UnitPurchaseDate"
+                   ng-pattern="isYear"
                    nxg-date-field before-show-day="isValidSaleDate(date)"
                    required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)"  ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) }"/>
             <label for="inputPurchaseDate" class="text-error"
@@ -154,6 +155,10 @@
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.date">
               Please enter a Valid Purchase Date
+            </label> 
+           <label for="inputPurchaseDate" class="text-error"
+                   ng-show="validity.inputPurchaseDate.$error.pattern">
+              Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}
             </label>            
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required">

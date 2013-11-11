@@ -120,6 +120,15 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.maxValidModelYear = new Date().getFullYear() + 1;
+    $scope.minValidModelYear = 1900;
+    $scope.isYear = (function() {
+      var arr = $scope.maxValidModelYear.toString().split('').slice(2),
+          regStr = '(19[0-9][0-9]|200[0-9]|20[0-' +  arr[0] +'][0-' +  arr[1] +'])',
+          regEx = new RegExp(regStr);
+      return regEx;
+    })();
+
     $scope.submit = function () {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);

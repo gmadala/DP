@@ -20,9 +20,14 @@ angular.module('nextgearWebApp')
           element.find('input').attr('required', true);
         }
 
+        if(attrs.ngPattern) {
+          element.removeAttr('ng-pattern');
+          element.find('input').attr('ng-pattern', attrs.ngPattern);
+        }
+
         // link function
         return {
-          pre: function (scope, element, attrs,  formCtrl) {
+          pre: function (scope, element, attrs, formCtrl) {
             // a bit round-about, but passing ngModel here the data errs are not applied yet,
             // hence we do some digging and IF this field has a date error, reset the input to
             // reflect that bad data
