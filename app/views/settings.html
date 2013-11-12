@@ -15,7 +15,7 @@
             <div class="control-group">
               <label class="control-label" for="setUsername">User Name</label>
               <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
-                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="50" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
+                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
               </div>
               <div for="setUsername" class="text-error"
                      ng-show="profile.validation.setUsername.$error.required">
@@ -23,7 +23,7 @@
               </div>
               <div for="setUsername" class="text-error"
                      ng-show="profile.validation.setUsername.$error.maxlength">
-                  Please enter a User Name that is 50 characters or less.
+                  Please enter a User Name that is 40 characters or less.
               </div>
             </div>
 
