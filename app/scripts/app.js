@@ -192,7 +192,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
       if (fromState.name) {
-        segmentio.pageview($location.absUrl());
+        segmentio.page(null, null, {
+          path: $location.path(),
+          url: $location.absUrl()
+        });
       }
     });
 
