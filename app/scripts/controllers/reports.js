@@ -25,15 +25,9 @@ angular.module('nextgearWebApp')
 
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.stmtFormValidity = angular.copy($scope.stmtForm);
+      $scope.stmtFormValidity.dateRangeError = startDate && endDate && moment(startDate).isAfter(endDate);
 
-      if (startDate && endDate && moment(startDate).isAfter(endDate)) {
-        $scope.stmtFormValidity.dateRangeError = true;
-        $scope.stmtForm.$valid = false;
-      }
-      else {
-        $scope.stmtFormValidity.dateRangeError = false;
-      }
-      if (!$scope.stmtForm.$valid) {
+      if (!$scope.stmtForm.$valid || $scope.stmtFormValidity.dateRangeError) {
         return false;
       }
 
@@ -90,15 +84,9 @@ angular.module('nextgearWebApp')
 
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.paidOffFormValidity = angular.copy($scope.paidOffForm);
+      $scope.paidOffFormValidity.dateRangeError = startDate && endDate && moment(startDate).isAfter(endDate);
 
-      if (startDate && endDate && moment(startDate).isAfter(endDate)) {
-        $scope.paidOffFormValidity.dateRangeError = true;
-        $scope.paidOffForm.$valid = false;
-      }
-      else {
-        $scope.paidOffFormValidity.dateRangeError = false;
-      }
-      if (!$scope.paidOffForm.$valid) {
+      if (!$scope.paidOffForm.$valid || $scope.paidOffFormValidity.dateRangeError) {
         return false;
       }
 

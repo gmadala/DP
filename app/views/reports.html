@@ -29,7 +29,10 @@
   							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required }" required />
   		        </div>
               <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required">
-                Please select a Date
+                Please select a Valid Date
+              </label>
+              <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.date">
+                Please select a Valid Date
               </label>
   					</div><!-- end .control-group -->
 
@@ -71,10 +74,16 @@
 
             <!-- Dealer Statement Date Range Errors -->
             <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required">
-                  Please select a Start Date
+                Please select a Valid Start Date
+            </label>
+            <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.date">
+                Please select a Valid Start Date
             </label>
             <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required">
-              Please select an End Date
+              Please select a Valid End Date
+            </label>
+            <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.date">
+              Please select a Valid End Date
             </label>
             <label class="text-error" ng-show="stmtFormValidity.dateRangeError">
               Start Date should not be later than End Date
@@ -109,7 +118,10 @@
       					<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }" required />
               </div>
               <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
-  	             Please select a Date
+                 Please select a Valid Date
+              </label>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.date">
+  	             Please select a Valid Date
               </label>
   					</div><!-- end .control-group -->
 
@@ -143,8 +155,10 @@
             </div><!-- end .range -->
 
             <!-- Paid Off Summary Date Range Errors -->
-            <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required">Please select a Start Date</label>
-            <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required">Please select an End Date</label>
+            <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required">Please select a Valid Start Date</label>
+            <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.date">Please select a Valid Start Date</label>
+            <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required">Please select a Valid End Date</label>
+            <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.date">Please select a Valid End Date</label>
             <label class="text-error" ng-show="paidOffFormValidity.dateRangeError">Start Date should not be later than End Date</label>
             <!-- end errors -->
 

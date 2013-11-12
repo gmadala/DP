@@ -8,7 +8,7 @@
   margin: 0 auto;
 
   .unsupported & {
-    width: 100%;
+    @extend %full-width;
   }
 
   &:before {

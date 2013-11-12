@@ -5,6 +5,7 @@
  *
  * - Removed internal $viewContentLoaded = pageview assumption, as that seems to result in a lot of noise
  * - Fix jshint error
+ * - Update for API change replacing "pageview" method with "page"
  */
 angular.module('segmentio', ['ng'])
   .factory('segmentio', ['$rootScope', '$window', '$location', '$log', function ($rootScope, $window, $location, $log) {
@@ -29,7 +30,7 @@ angular.module('segmentio', ['ng'])
 
     // Loop through analytics.js' methods and generate a wrapper method for each.
     var methods = ['identify', 'track', 'trackLink', 'trackForm', 'trackClick',
-      'trackSubmit', 'pageview', 'ab', 'alias', 'ready', 'group'];
+      'trackSubmit', 'page', 'ab', 'alias', 'ready', 'group'];
     for (var i = 0; i < methods.length; i++) {
       service[methods[i]] = methodFactory(methods[i]);
     }

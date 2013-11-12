@@ -51,7 +51,7 @@ input[type="color"],
     border: 1px solid $input-border;
   }
 
-  // get rid of IE's default clear button
+  // get rid of IE10's default clear button
   &::-ms-clear {
     display: none;
   }
@@ -78,7 +78,7 @@ input[type="color"],
     border: 1px solid $error-dark;
   }
   &:focus:invalid, &:invalid {
-        outline: none;
+    outline: none;
   }
 }
 
@@ -147,11 +147,11 @@ select, .nxg-date-field {
   }
 
   .btn {
-    color: #9a9a9a;
-    @include opacity(50);
-    background: transparent;
     @include border-radius(0);
     @include box(28px);
+    @include opacity(50);
+    color: #9a9a9a;
+    background: transparent;
     font-size: $large-font-size;
     border: 0;
     margin: -1px 0 0 -28px;

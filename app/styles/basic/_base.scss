@@ -26,11 +26,6 @@ body, html {
   margin: 0 auto 30px;
 }
 
-h4 {
-  font-weight: 300;
-  color: $brand-light;
-}
-
 .nxg-fade {
   background-color: $white;
 
@@ -42,8 +37,4 @@ h4 {
 .row-item {
   display: inline-block;
   margin-right: 1px;
-}
-
-ul {
-  list-style-type: none;
 }

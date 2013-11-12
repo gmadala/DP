@@ -49,8 +49,11 @@
 </section>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
+  <button ng-click="close()" class="btn btn-mini" ng-class="{ 'btn-secondary': !business.creditQuery.requested, 'btn-primary': business.creditQuery.requested }" >
+    <span ng-show="business.creditQuery.requested">OK</span>
+    <span ng-hide="business.creditQuery.requested">Cancel</span>
+  </button>
   <button ng-click="business.creditQuery.get()"
           class="btn btn-mini btn-primary"
-          ng-disabled="business.creditQuery.requested">Query</button>
+        ng-show="!business.creditQuery.requested">Query</button>
 </div>

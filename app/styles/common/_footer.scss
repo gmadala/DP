@@ -1,11 +1,10 @@
 //absurdly long selector to overcome Bootstrap's specificity.
 footer.row-fluid {
   @extend %center;
+  @extend %full-width;
   @include gradient-row();
-  @include box-shadow(rgba(black, 0.3) 0px 1px 1px);
   font-size: $tiny-font-size;
   color: $footer-text;
-  width: 100%;
   padding: 14px 0 11px 0;
   border-top: 1px solid $gray-d;
   margin: 0 0 -50px 0;

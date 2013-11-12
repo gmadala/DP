@@ -142,7 +142,11 @@
                ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) }" />
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.required">
-          Please enter the Sales Date
+          Please enter a Valid Sales Date
+        </label>
+        <label for="inputSaleDate" class="text-error"
+               ng-show="validity.inputSaleDate.$error.date">
+          Please enter a Valid Sales Date
         </label>
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required">
