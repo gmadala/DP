@@ -1,23 +1,8 @@
-NextGear v0.9
+NextGear v0.9.3
 ======================
 
 Available in this release:
 ---------------------------
-1181	Floor Car Confirmation restore does not properly restore seller search field. 
-1097	Mobile - Floor A Vehicle -> No Validation messages for numeric fields on Step1, 2 & 3. 
-1126	Mobile: "Stale & Aging Units" numeric ordering is not same on Android & iOS.
-1180	Web: View A Report-View Report button is not working once date validation message gets displayed.
-1107	Web: Favicon is not appearing on any of the supported browsers for NextGear portal.
 1160	Web: View A Report-Validation errors for date fields are getting displayed when date fields already contains auto filled dates.
-1156	Web: * Settings > Username UI issue.
-1174	Mobile: Floor A Vehicle -> Step 3 - Tapping on "Purchase Amount" field Capture "BOS" screen is getting displayed.
 1176	Web: Floor A Car > Purchase Date > Date Picker - Some times "Year" selection is showing "undefined NaN" when very past dates are selected. 
-1182	Year value doesn't display for top vehicles.
-1184	Mobile: Floor A Vehicle -> In Step 3 - Under "Purchase Amount", on tapping device's "Go" button, displaying the "Seller Search" screen again.
-1187	Mobile: "Take a BOS Photo", on tapping "Cancel/Back" button error message is getting displayed.
-1191	Web: Year selection in any calender is not proper by entering date manually.
-1194	[m] Stale & Aging Units needs to show empty buckets with a disabled look
-1185	Mobile: Floor a Vehicle > Application is retaining the previously filled data in text fields.
 1190	Web: Issue in copy right text in old version of IE browser.
-1091	Mobile: - Notification > On the Information overlay we are able to scroll up & down on the background page.
-1192	Web: Receipts- Complete text is not visible in "Filter List by Payment Method" drop down.
