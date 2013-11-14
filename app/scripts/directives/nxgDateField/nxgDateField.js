@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgDateField', function ($parse, $strapConfig) {
+  .directive('nxgDateField', function ($parse, $strapConfig, moment) {
     return {
       templateUrl: 'scripts/directives/nxgDateField/nxgDateField.html',
       replace: true,
@@ -32,14 +32,23 @@ angular.module('nextgearWebApp')
             // hence we do some digging and IF this field has a date error, reset the input to
             // reflect that bad data
             element.on('change', function() {
-              var errs = formCtrl.$error.date;
+              var errs = formCtrl.$error.date,
+                  utcVal;
+
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
                   if (err.$name === inputName) {
-                    element.find('input').val(err.$viewValue);
+                    utcVal = moment(element.find('input').val()).toDate();
+                    formCtrl[inputName].$setViewValue(utcVal);
+                    formCtrl[inputName].$setValidity('date', true);
                   }
                 });
               }
+
+              if(!scope.$$phase) {
+                scope.$apply();
+              }
+
             });
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
