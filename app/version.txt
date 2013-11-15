@@ -1,8 +1,6 @@
-NextGear v0.9.3
+NextGear v0.9.4
 ======================
 
 Available in this release:
 ---------------------------
-1160	Web: View A Report-Validation errors for date fields are getting displayed when date fields already contains auto filled dates.
-1176	Web: Floor A Car > Purchase Date > Date Picker - Some times "Year" selection is showing "undefined NaN" when very past dates are selected. 
-1190	Web: Issue in copy right text in old version of IE browser.
+VO-180 Fixed malformed URI endpoint call for the dealer statement report.
