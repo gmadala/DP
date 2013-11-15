@@ -34,13 +34,13 @@ angular.module('nextgearWebApp')
       var strUrl = '/report/dealerstatement/' + startDate + '/' + endDate;
       var defaultFilename = '/DealerStatement_' + startDate + '_to_' + endDate;
 
+      strUrl +=  defaultFilename;
+
       // append the vin filter string if one was provided, encoding it for safe transit in a GET query
       if ($scope.data.stmtVinFilter) {
         var encodedVin = encodeURIComponent($scope.data.stmtVinFilter);
-        strUrl += '/' + encodedVin;
-        defaultFilename += 'forVin_' + encodedVin;
+        strUrl += 'forVin_' + encodedVin + '/' + encodedVin;
       }
-      strUrl +=  defaultFilename;
 
       window.open(
         api.contentLink(strUrl, {}),
