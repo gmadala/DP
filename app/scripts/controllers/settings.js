@@ -379,8 +379,7 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .
-  controller('ConfirmDisableCtrl', function($scope, dialog) {
+  .controller('ConfirmDisableCtrl', function($scope, dialog) {
     $scope.close = function(result) {
       dialog.close(result);
     };
