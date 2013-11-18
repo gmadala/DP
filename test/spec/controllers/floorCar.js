@@ -68,7 +68,7 @@ describe('Controller: FloorCarCtrl', function () {
         return undefined;
       },
       isDealer: function () { // redefine this for dealer & auction mode tests
-        return null;
+        return true;
       }
     };
 
@@ -114,10 +114,6 @@ describe('Controller: FloorCarCtrl', function () {
       today.setSeconds(0);
       today.setMilliseconds(0);
       expect(scope.defaultData.UnitPurchaseDate.toUTCString()).toBe(today.toUTCString());
-    });
-
-    it('should set FloorplanSourceId to 6', function () {
-      expect(scope.defaultData.FloorplanSourceId).toBe(6);
     });
 
     it('should default vin failure acknowledged and trade-in to false', function () {
@@ -425,6 +421,10 @@ describe('Controller: FloorCarCtrl', function () {
 
     registerCommonTests();
 
+    it('should set FloorplanSourceId to 6', function () {
+      expect(scope.defaultData.FloorplanSourceId).toBe(6);
+    });
+
     it('reset should default inventory location and line of credit options where only 1 exists', function () {
       optionSetMock = ['one'];
       scope.reset();
@@ -445,6 +445,10 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+    it('should set FloorplanSourceId to 7', function () {
+      expect(scope.defaultData.FloorplanSourceId).toBe(7);
+    });
 
     it('reset should NOT default inventory location and line of credit options where only 1 exists', function () {
       optionSetMock = ['one'];
