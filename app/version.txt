@@ -1,2 +1,6 @@
-NextGear Capital v1.0
-======================
+NextGear Capital v1.0.1 (test)
+=================================
+
+Fixed in this release:
+
+VO-422  Auction Bulk Flooring issues
