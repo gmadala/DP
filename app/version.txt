@@ -1,6 +1,6 @@
-NextGear v0.9.4
-======================
+NextGear Capital v1.0.1 (test)
+=================================
 
-Available in this release:
----------------------------
-VO-180 Fixed malformed URI endpoint call for the dealer statement report.
+Fixed in this release:
+
+VO-422  Auction Bulk Flooring issues
