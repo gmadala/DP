@@ -89,6 +89,11 @@ angular.module('nextgearWebApp')
         }
       },
       toInt: function (value) {
+        // remove commas from string number expression
+        if (typeof value === 'string') {
+          value = value.replace(/,/g, '');
+        }
+
         var intVal = parseInt(value, 10);
         if (isNaN(intVal)) {
           return null;
@@ -97,6 +102,11 @@ angular.module('nextgearWebApp')
         }
       },
       toFloat: function (value) {
+        // remove commas from string number expression
+        if (typeof value === 'string') {
+          value = value.replace(/,/g, '');
+        }
+
         var floatVal = parseFloat(value);
         if (isNaN(floatVal)) {
           return null;

@@ -208,6 +208,8 @@ describe('Service: api', function () {
       expect(api.toInt('-1')).toBe(-1);
       expect(api.toInt('1')).toBe(1);
       expect(api.toInt('1200')).toBe(1200);
+      expect(api.toInt('1,200')).toBe(1200);
+      expect(api.toInt('1,200,500')).toBe(1200500);
       expect(api.toInt('3.1415')).toBe(3);
       expect(api.toInt('-3.1415')).toBe(-3);
     });
@@ -236,6 +238,10 @@ describe('Service: api', function () {
       expect(api.toFloat('-1')).toBe(-1);
       expect(api.toFloat('1')).toBe(1);
       expect(api.toFloat('1200')).toBe(1200);
+      expect(api.toFloat('1200.15')).toBe(1200.15);
+      expect(api.toFloat('1,200.15')).toBe(1200.15);
+      expect(api.toFloat('1,200,500')).toBe(1200500);
+      expect(api.toFloat('1,200,500.23')).toBe(1200500.23);
       expect(api.toFloat('3.1415')).toBe(3.1415);
       expect(api.toFloat('-3.1415')).toBe(-3.1415);
     });
