@@ -2,9 +2,14 @@
 
 angular.module('nextgearWebApp')
   .value('nxgConfig', {
+    // Test
     apiBase: 'https://test.discoverdsc.com/MobileService/api',
-    //apiBase: 'https://customer.nextgearcapital.com/MobileService/api',  // Production
-    segmentIoKey: '9eaffv4cbe',
+    segmentIoKey: 'sb06a2jbvj',
+
+    // Production
+    //apiBase: 'https://customer.nextgearcapital.com/MobileService/api',
+    //segmentIoKey: '9eaffv4cbe',
+
     infiniteScrollingMax: 500,
     showReloadWarning: true
   });
