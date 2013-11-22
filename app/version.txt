@@ -1,6 +1,6 @@
-NextGear Capital v1.0.1 (test)
+NextGear Capital v1.0.2
 =================================
 
 Fixed in this release:
 
-VO-422  Auction Bulk Flooring issues
+VO-439  Issues parsing commas in dollar amounts.
