@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
 
     // load banner information
     $http.get('banner.txt').success(
-      function(data, status, headers, config) {
+      function(data, status) {
         if (data && status === 200) {
           $scope.bannerText = data;
           console.log('bannerText =' + data);
