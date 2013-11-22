@@ -4,3 +4,4 @@ NextGear Capital v1.0.2
 Fixed in this release:
 
 VO-439  Issues parsing commas in dollar amounts.
+VO-440 Added informational banner support.
