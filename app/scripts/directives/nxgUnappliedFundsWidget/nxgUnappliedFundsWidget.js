@@ -38,8 +38,8 @@ angular.module('nextgearWebApp')
       $dialog.dialog(dialogOptions).open().then(
         function (result) {
           if (result) {
-            // update balance
-            $scope.fundsAvail = result.newAvailableAmount;
+            // ** Per James Alexander, both available and total balance should get updated **
+            $scope.fundsAvail = $scope.fundsBalance = result.newAvailableAmount;
 
             // wireframes do not specify any kind of success display, so let's just do a simple one
             var title = 'Request submitted',
