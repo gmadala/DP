@@ -25,6 +25,7 @@
 
             <div class="controls">
               <select id="filterSelect" name="filterSelect"
+                      ng-change="search()"
                       ng-model="activeCriteria.filter"
                       ng-options="o.value as o.label for o in filterOptions"></select>
             </div>
