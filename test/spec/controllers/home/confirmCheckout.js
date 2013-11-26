@@ -142,16 +142,18 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(scope.receiptUrls.length).toBe(0);
   });
 
-  it('viewReceipts function should open the receipts in new windows and close modal', function () {
+  it('viewReceipts function should open the receipts in new windows, close modal and transition to the payments state', function () {
     spyOn(dialog, 'close');
     spyOn(_window, 'open');
+    spyOn(state, 'transitionTo');
     scope.viewReceipts();
     expect(dialog.close).toHaveBeenCalled();
     expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
     expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
+    expect(state.transitionTo).toHaveBeenCalledWith('home.payments');
   });
 
-  it('close function should transition to the receipts state and close modal', function () {
+  it('close function should transition to the payments state and close modal', function () {
     spyOn(dialog, 'close');
     spyOn(state, 'transitionTo');
     scope.close();

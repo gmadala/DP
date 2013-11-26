@@ -75,6 +75,7 @@ angular.module('nextgearWebApp')
       angular.forEach($scope.receiptUrls, function(url) {
         $window.open(url);
       });
+      $state.transitionTo('home.payments');
       dialog.close();
     };
 
