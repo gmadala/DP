@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric, $window) {
 
     $scope.today = new Date();
 
@@ -58,21 +58,23 @@ angular.module('nextgearWebApp')
       segmentio.track(metric.SCHEDULE_PAYMENT); // Server is responsible for tracking revenue when schedule occurs
     }
 
-    // no workflow currently specified for directly displaying these, but here they are in case we need them later
     $scope.receiptUrls = [];
     var url;
-    if (transactionInfo && transactionInfo.FinancialTransactionId) {
-      url = Receipts.getReceiptUrl(transactionInfo.FinancialTransactionId);
-      $scope.receiptUrls.push(url);
-    }
-    if (transactionInfo && transactionInfo.UnappliedFundsTransactionId) {
-      url = Receipts.getReceiptUrl(transactionInfo.UnappliedFundsTransactionId);
-      $scope.receiptUrls.push(url);
+    if (transactionInfo) {
+      if (transactionInfo.FinancialTransactionId) {
+        url = Receipts.getReceiptUrl(transactionInfo.FinancialTransactionId);
+        $scope.receiptUrls.push(url);
+      }
+      if (transactionInfo.UnappliedFundsTransactionId) {
+        url = Receipts.getReceiptUrl(transactionInfo.UnappliedFundsTransactionId);
+        $scope.receiptUrls.push(url);
+      }
     }
 
     $scope.viewReceipts = function () {
-      // for now, just send user to regular receipts view
-      $state.transitionTo('home.receipts');
+      angular.forEach($scope.receiptUrls, function(url) {
+        $window.open(url);
+      });
       dialog.close();
     };
 

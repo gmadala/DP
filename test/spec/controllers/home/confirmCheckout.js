@@ -13,13 +13,15 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     receipts,
     state,
     segmentio,
+    _window,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_) {
+  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_, $window) {
     receipts = Receipts;
     state = $state;
     segmentio = _segmentio_;
+    _window = $window;
 
     spyOn(segmentio, 'track');
 
@@ -140,12 +142,13 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(scope.receiptUrls.length).toBe(0);
   });
 
-  it('viewReceipts function should transition to the receipts state and close modal', function () {
+  it('viewReceipts function should open the receipts in new windows and close modal', function () {
     spyOn(dialog, 'close');
-    spyOn(state, 'transitionTo');
+    spyOn(_window, 'open');
     scope.viewReceipts();
     expect(dialog.close).toHaveBeenCalled();
-    expect(state.transitionTo).toHaveBeenCalledWith('home.receipts');
+    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
+    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
   });
 
   it('close function should transition to the receipts state and close modal', function () {
