@@ -276,50 +276,6 @@ describe('Controller: FloorplanCtrl', function () {
       expect(scope.filterOptions[6].value).toBe(floorplan.filterValues.COMPLETED_NOT_PAID);
     });
 
-    describe('openEditTitle function', function () {
-
-      var $dialog;
-
-      beforeEach(inject(function (_$dialog_, $q) {
-        $dialog = _$dialog_;
-        spyOn($dialog, 'dialog').andReturn({
-          open: function () {
-            return $q.when(undefined);
-          }
-        });
-      }));
-
-      it('should create the expected modal', function () {
-        scope.openEditTitle();
-        expect($dialog.dialog).toHaveBeenCalled();
-        expect($dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/editTitle.html');
-        expect($dialog.dialog.mostRecentCall.args[0].controller).toBe('EditTitleCtrl');
-      });
-
-      it('should provide the modal with a way to resolve the targeted floorplan', function () {
-        var floorplan = {},
-          resolved;
-
-        scope.openEditTitle(floorplan);
-
-        resolved = $dialog.dialog.mostRecentCall.args[0].resolve.floorplan();
-        expect(resolved).toBe(floorplan);
-      });
-
-      it('should provide the modal with a way to resolve the vehicle description', function () {
-        var floorplan = {},
-          resolved;
-
-        spyOn(scope, 'getVehicleDescription').andReturn('foo');
-
-        scope.openEditTitle(floorplan);
-
-        resolved = $dialog.dialog.mostRecentCall.args[0].resolve.vehicleDescription();
-        expect(resolved).toBe('foo');
-      });
-
-    });
-
   });
 
 });
