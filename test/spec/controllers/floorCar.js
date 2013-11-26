@@ -132,9 +132,7 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.defaultData.UnitMileage).toBe(null);
       expect(scope.defaultData.UnitModel).toBe(null);
       expect(scope.defaultData.UnitPurchasePrice).toBe(null);
-      expect(scope.defaultData.UnitStyle).toBe(null);
-      expect(scope.defaultData.UnitTitleNumber).toBe(null);
-      expect(scope.defaultData.UnitTitleStateId).toBe(null);
+      expect(scope.defaultData.UnitStyle).toBe(null);;
       expect(scope.defaultData.UnitVin).toBe(null);
       expect(scope.defaultData.UnitYear).toBe(null);
       expect(scope.defaultData.TitleLocationId).toBe(null);
@@ -173,22 +171,6 @@ describe('Controller: FloorCarCtrl', function () {
       scope.reset();
       scope.$apply();
       expect(scope.data.PaySeller).toBe(true);
-    });
-
-    it('should clear title information if title location is switched to one that disables title info', function () {
-      scope.data.TitleLocationId = {
-        TitleInfoEnabled: true
-      };
-      scope.$apply();
-      scope.data.UnitTitleNumber = 'foo';
-      scope.data.UnitTitleStateId = {};
-
-      scope.data.TitleLocationId = {
-        TitleInfoEnabled: false
-      };
-      scope.$apply();
-      expect(scope.data.UnitTitleNumber).toBe(null);
-      expect(scope.data.UnitTitleStateId).toBe(null);
     });
 
     describe('isValidSaleDate function', function () {

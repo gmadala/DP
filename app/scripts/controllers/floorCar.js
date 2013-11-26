@@ -41,8 +41,6 @@ angular.module('nextgearWebApp')
       UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
-      UnitTitleNumber: null, // string
-      UnitTitleStateId: null, // State object locally, flatten to string for API tx
       UnitVin: null, // string
       VinAckLookupFailure: false, // Boolean (whether vehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int
@@ -76,14 +74,6 @@ angular.module('nextgearWebApp')
       });
     }
     $scope.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
-
-    // if user switches to a title location that does not allow title info, clear any info already entered
-    $scope.$watch('data.TitleLocationId.TitleInfoEnabled', function (titleInfoEnabled) {
-      if (titleInfoEnabled === false) {
-        $scope.data.UnitTitleNumber = null;
-        $scope.data.UnitTitleStateId = null;
-      }
-    });
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
