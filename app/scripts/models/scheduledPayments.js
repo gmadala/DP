@@ -118,8 +118,8 @@ angular.module('nextgearWebApp')
         }
 
         lastRequest = {
-          OrderBy: 'UnitStatus',
-          OrderByDirection: 'ASC',
+          OrderBy: 'ScheduledForDate',
+          OrderByDirection: 'DESC',
           PageNumber: 1,
           PageSize: PAGE_SIZE,
           Keyword: query,
