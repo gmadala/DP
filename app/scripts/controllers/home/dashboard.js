@@ -1,11 +1,24 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric, moment) {
 
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
     $scope.viewMode = 'week';
+
+    $scope.getDueStatus = function (payment) {
+      var due = moment(payment.DueDate),
+        today = moment();
+
+      if (due.isBefore(today, 'day')) {
+        return 'overdue';
+      } else if (due.isSame(today, 'day')) {
+        return 'today';
+      } else {
+        return 'future';
+      }
+    };
 
     /**
      * Flow of control is a little weird here, because the calendar's current visible

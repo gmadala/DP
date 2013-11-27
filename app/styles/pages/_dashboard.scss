@@ -289,6 +289,22 @@
   &.open {
     margin: 5px 0 15px;
   }
+
+  table td.pay-due-date {
+    width: 180px;
+  }
+
+  .nxg-payment-due-status {
+    @extend %float-r;
+    @extend %align-right;
+    display: inline-block;
+    width: 80px;
+    margin: 0 10px;
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
 .details-toggle {

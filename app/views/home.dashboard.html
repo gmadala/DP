@@ -72,7 +72,15 @@
             </tr>
           </thead>
           <tr ng-repeat="payment in dashboardData.UpcomingPaymentsList">
-            <td title="Due Date">{{ payment.DueDate | moment  }}</td>
+            <td title="Due Date" class="pay-due-date">{{ payment.DueDate | moment  }}
+              <div class="nxg-payment-due-status"
+                 ng-class="getDueStatus(payment)"
+                 ng-switch="getDueStatus(payment)">
+                <p class="warning today" ng-switch-when="today"><span class="excl-today">!</span>Due Today</p>
+                <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
+              </div>
+
+            </td>
             <td title="Description">{{ payment.Description }}</td>
             <td title="Payoff Due">
               <span>{{ payment.PayoffDue | currency }}</span>
