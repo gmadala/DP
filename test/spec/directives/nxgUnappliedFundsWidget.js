@@ -74,7 +74,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(resolvedFunds.available).toBe(400);
     });
 
-    it('openRequestPayout() should show a success modal and update available balance on success', function () {
+    it('openRequestPayout() should show a success modal and update available and total balance on success', function () {
       spyOn(dialogMock, 'dialog').andReturn({
         open: function () {
           return $q.when({
@@ -96,7 +96,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         '$100.00 to your account "foo" has been successfully submitted.');
       expect(dialogMock.messageBox.mostRecentCall.args[2].length).toBe(1);
 
-      expect(scope.fundsAvail).toBe(80);
+      expect(scope.fundsAvail).toBe(300);
+      expect(scope.fundsBalance).toBe(400);
     });
 
   });
