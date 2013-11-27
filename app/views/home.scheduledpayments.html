@@ -14,7 +14,8 @@
     <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
 
       <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please try a new search.
+        Sorry, no results found. Please <a ng-click="scheduledPayments.resetSearch()" title="New Search">try a new search</a>
+.
       </p>
 
       <section ng-switch-when="true"

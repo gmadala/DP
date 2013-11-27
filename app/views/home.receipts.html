@@ -13,7 +13,7 @@
 
     <div ng-switch="receipts.results.length > 0 || receipts.loading">
       <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please try a new search.
+        Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
       </p>
 
       <section class="receipts-list" ng-switch-when="true"
