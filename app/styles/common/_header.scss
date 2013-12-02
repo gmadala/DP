@@ -11,7 +11,10 @@ header > .row-fluid {
 }
 
 .nxg-logo {
-  background-image: url(../img/nxg_logo_blue_2x.png);
+  background-image: url(../img/nxg_logo_blue.png);
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url(../img/nxg_logo_blue_2x.png);
+  }
   background-repeat: no-repeat;
   background-size: 220px 50px;
   background-position: 20px 0;
