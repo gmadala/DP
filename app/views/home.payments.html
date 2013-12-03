@@ -80,13 +80,11 @@
                     </div>
 
                     <div class="cell pay-desc">
-                      <p>
-                        <span class="sch-label">Stock #: </span>
-                        <span ng-bind-html-unsafe="payment.StockNumber | highlight:payment.data.query"></span><br/>
-                        <span class="sch-sub-label">VIN: </span>
-                        <span class="vin-small" ng-bind-html-unsafe="payment.Vin | highlight:payment.data.query"></span>
-                      </p>
                       <p>{{ payment.UnitDescription }}</p>
+                      <p>
+                        VIN: <span ng-bind-html-unsafe="payment.Vin | highlight:payment.data.query"></span><br/>
+                        Stock #: <span ng-bind-html-unsafe="payment.StockNumber | highlight:payment.data.query"></span>
+                      </p>
                     </div>
 
                     <div class="cell pay-due">
