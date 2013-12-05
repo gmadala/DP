@@ -39,21 +39,6 @@ angular.module('nextgearWebApp')
       }
     };
 
-    // analytics
-    if (paymentsToday.length > 0 || $scope.items.fees.length > 0) {
-      var revenue = _.reduce($scope.items.fees, function (total, fee) {
-        return total + fee.amount; // 100% of fee amount is revenue
-      }, 0);
-
-      revenue = _.reduce(paymentsToday, function (total, payment) {
-        return total + (payment.revenueToTrack || 0); // different than payment amount b/c principal is not revenue
-      }, revenue);
-
-      revenue = Math.round(revenue * 100) / 100; // round to 2 decimal places
-
-      segmentio.track(metric.MAKE_IMMEDIATE_PAYMENT, { revenue: revenue });
-    }
-
     if (paymentsScheduled.length > 0) {
       segmentio.track(metric.SCHEDULE_PAYMENT); // Server is responsible for tracking revenue when schedule occurs
     }

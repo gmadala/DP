@@ -108,17 +108,9 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
 
   describe('analytics logic', function () {
 
-    it('should track immediate payments (including fees), with a revenue total', function () {
-      expect(segmentio.track.calls.length).toBe(2);
-      expect(segmentio.track.calls[0].args[0]).toBe('Make Immediate Payment');
-      expect(segmentio.track.calls[0].args[1]).toBeDefined();
-      expect(segmentio.track.calls[0].args[1].revenue).toBe(9);
-    });
-
-    it('should track scheduled payments, leaving revenue for later tracking by server', function () {
-      expect(segmentio.track.calls.length).toBe(2);
+    it('should track scheduled payments', function () {
+      expect(segmentio.track.calls.length).toBe(1);
       expect(segmentio.track.mostRecentCall.args[0]).toBe('Schedule Payment');
-      expect(segmentio.track.mostRecentCall.args[1]).not.toBeDefined();
     });
 
   });
