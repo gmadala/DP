@@ -20,6 +20,30 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.isPast = function() {
+      var now = angular.element('.dash-calendar').fullCalendar('getDate');
+
+      if (now.getFullYear() > new Date().getFullYear() || now.getMonth() > new Date().getMonth()) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    $scope.onClickPrev = function() {
+      if (!$scope.isPast()) {
+        angular.element('.dash-calendar').fullCalendar('prev');
+      }
+    };
+
+    $scope.onClickNext = function() {
+      angular.element('.dash-calendar').fullCalendar('next');
+    };
+
+    $scope.onClickToday = function() {
+      angular.element('.dash-calendar').fullCalendar('today');
+    };
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a
