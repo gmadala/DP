@@ -5,3 +5,4 @@ Fixed in this release:
 
 VO-439  Fixed incorrect update of total and available amounts after payout request.
 VO-480  Update links to the mobile applications on the Web app.
+VO-439  Fixed issue when requesting a payout amount with commas (e.g. 1,000.00)
