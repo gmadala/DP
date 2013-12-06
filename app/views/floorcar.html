@@ -55,30 +55,6 @@
              Please select who has the title
            </label>
 
-           <label for="inputTitleState" class="input-title">Title State</label>
-           <select id="inputTitleState" name="inputTitleState" ng-model="data.UnitTitleStateId"
-                   ng-options="state.StateName for state in options().states"
-                   ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
-                   ng-class="{ 'nxg-invalid': validity.inputTitleState.$error.required }"
-                   ng-required="data.TitleLocationId.TitleInfoRequired">
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
-           </select>
-           <label for="inputTitleState" class="text-error"
-                  ng-show="validity.inputTitleState.$error.required">
-             Please select a Title State
-           </label>
-
-           <label for="inputTitleNo" class="input-title">Title Number</label>
-           <input type="text" id="inputTitleNo" name="inputTitleNo" ng-model="data.UnitTitleNumber"
-                  ng-disabled="!data.TitleLocationId.TitleInfoEnabled"
-                  ng-required="data.TitleLocationId.TitleInfoRequired"
-                  ng-class="{ 'nxg-invalid': validity.inputTitleNo.$error.required }"
-                  maxlength="50"/>
-           <label for="inputTitleNo" class="text-error"
-                  ng-show="validity.inputTitleNo.$error.required">
-             Please enter the Title Number
-           </label>
-
            <label for="inputInvLoc" class="input-title">Inventory Location</label>
            <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                    ng-options="location.LocationName for location in options().locations"

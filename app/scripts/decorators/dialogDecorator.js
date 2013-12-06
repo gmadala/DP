@@ -8,7 +8,8 @@ angular.module('nextgearWebApp')
     $provide.decorator('$dialog', function($delegate, $q) {
       var OriginalDialog = $delegate.dialog,
           currentlyOpen = [],
-          body = angular.element(document.body);
+          body = angular.element(document.body),
+          OriginalMessageBox = $delegate.messageBox;
 
       return _.extend($delegate, {
 
@@ -56,6 +57,13 @@ angular.module('nextgearWebApp')
 
         openDialogsCount: function() {
           return currentlyOpen.length;
+        },
+
+        messageBox: function(title, message, buttons) {
+          var msgBox = new OriginalMessageBox(title, message, buttons);
+
+          msgBox.modalEl.addClass('nxg-autofocus');
+          return msgBox;
         }
 
       });

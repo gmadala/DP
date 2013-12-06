@@ -13,13 +13,15 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     receipts,
     state,
     segmentio,
+    _window,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_) {
+  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_, $window) {
     receipts = Receipts;
     state = $state;
     segmentio = _segmentio_;
+    _window = $window;
 
     spyOn(segmentio, 'track');
 
@@ -106,17 +108,9 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
 
   describe('analytics logic', function () {
 
-    it('should track immediate payments (including fees), with a revenue total', function () {
-      expect(segmentio.track.calls.length).toBe(2);
-      expect(segmentio.track.calls[0].args[0]).toBe('Make Immediate Payment');
-      expect(segmentio.track.calls[0].args[1]).toBeDefined();
-      expect(segmentio.track.calls[0].args[1].revenue).toBe(9);
-    });
-
-    it('should track scheduled payments, leaving revenue for later tracking by server', function () {
-      expect(segmentio.track.calls.length).toBe(2);
+    it('should track scheduled payments', function () {
+      expect(segmentio.track.calls.length).toBe(1);
       expect(segmentio.track.mostRecentCall.args[0]).toBe('Schedule Payment');
-      expect(segmentio.track.mostRecentCall.args[1]).not.toBeDefined();
     });
 
   });
@@ -140,15 +134,18 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(scope.receiptUrls.length).toBe(0);
   });
 
-  it('viewReceipts function should transition to the receipts state and close modal', function () {
+  it('viewReceipts function should open the receipts in new windows, close modal and transition to the payments state', function () {
     spyOn(dialog, 'close');
+    spyOn(_window, 'open');
     spyOn(state, 'transitionTo');
     scope.viewReceipts();
     expect(dialog.close).toHaveBeenCalled();
-    expect(state.transitionTo).toHaveBeenCalledWith('home.receipts');
+    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
+    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
+    expect(state.transitionTo).toHaveBeenCalledWith('home.payments');
   });
 
-  it('close function should transition to the receipts state and close modal', function () {
+  it('close function should transition to the payments state and close modal', function () {
     spyOn(dialog, 'close');
     spyOn(state, 'transitionTo');
     scope.close();

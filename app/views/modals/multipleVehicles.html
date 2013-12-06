@@ -6,32 +6,32 @@
   <span class="glyphicon glyphicon-remove"></span>
 </div>
 
-<div class="modal-body">
-  <span>Multiple vehicles were found in our system matching the VIN entered.<br />
-Please select the intended vehicle from the list below.</span>
-</div>
+<div class="modal-body" nxg-autofocus>
+  <p>Multiple vehicles were found in our system matching the VIN entered.<br />
+Please select the intended vehicle from the list below.</p>
 
-<div class="modal-body search-results nxg-multiple-vehicles">
-  <table>
-    <thead>
-      <tr>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Style</th>
-        <th>Year</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="match in matches">
-        <td>{{ match.Make }}</td>
-        <td>{{ match.Model }}</td>
-        <td>{{ match.Style }}</td>
-        <td>{{ match.Year }}</td>
-        <td><a href class="btn btn-mini pull-right" ng-click="select(match)">Select</a></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="search-results nxg-multiple-vehicles" nxg-autofocus>
+    <table>
+      <thead>
+        <tr>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Style</th>
+          <th>Year</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="match in matches">
+          <td>{{ match.Make }}</td>
+          <td>{{ match.Model }}</td>
+          <td>{{ match.Style }}</td>
+          <td>{{ match.Year }}</td>
+          <td><button href class="btn btn-mini pull-right" ng-click="select(match)">Select</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-mini btn-secondary">Close</button>

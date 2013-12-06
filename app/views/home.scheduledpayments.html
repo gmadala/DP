@@ -14,7 +14,8 @@
     <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
 
       <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please try a new search.
+        Sorry, no results found. Please <a ng-click="scheduledPayments.resetSearch()" title="New Search">try a new search</a>
+.
       </p>
 
       <section ng-switch-when="true"
@@ -50,13 +51,11 @@
               </div>
 
               <div class="cell sch-desc">
-                <p>
-                  <span class="sch-label">VIN: </span>
-                  <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
-                  <span class="sch-label">Stock #: </span>
-                  <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
-                </p>
                 <p> {{ pay.description }} </p>
+                <p>
+                  VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
+                  Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
+                </p>
               </div>
 
               <div class="cell sch-status">

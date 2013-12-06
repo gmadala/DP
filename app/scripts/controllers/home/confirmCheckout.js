@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric, $window) {
 
     $scope.today = new Date();
 
@@ -39,40 +39,28 @@ angular.module('nextgearWebApp')
       }
     };
 
-    // analytics
-    if (paymentsToday.length > 0 || $scope.items.fees.length > 0) {
-      var revenue = _.reduce($scope.items.fees, function (total, fee) {
-        return total + fee.amount; // 100% of fee amount is revenue
-      }, 0);
-
-      revenue = _.reduce(paymentsToday, function (total, payment) {
-        return total + (payment.revenueToTrack || 0); // different than payment amount b/c principal is not revenue
-      }, revenue);
-
-      revenue = Math.round(revenue * 100) / 100; // round to 2 decimal places
-
-      segmentio.track(metric.MAKE_IMMEDIATE_PAYMENT, { revenue: revenue });
-    }
-
     if (paymentsScheduled.length > 0) {
       segmentio.track(metric.SCHEDULE_PAYMENT); // Server is responsible for tracking revenue when schedule occurs
     }
 
-    // no workflow currently specified for directly displaying these, but here they are in case we need them later
     $scope.receiptUrls = [];
     var url;
-    if (transactionInfo && transactionInfo.FinancialTransactionId) {
-      url = Receipts.getReceiptUrl(transactionInfo.FinancialTransactionId);
-      $scope.receiptUrls.push(url);
-    }
-    if (transactionInfo && transactionInfo.UnappliedFundsTransactionId) {
-      url = Receipts.getReceiptUrl(transactionInfo.UnappliedFundsTransactionId);
-      $scope.receiptUrls.push(url);
+    if (transactionInfo) {
+      if (transactionInfo.FinancialTransactionId) {
+        url = Receipts.getReceiptUrl(transactionInfo.FinancialTransactionId);
+        $scope.receiptUrls.push(url);
+      }
+      if (transactionInfo.UnappliedFundsTransactionId) {
+        url = Receipts.getReceiptUrl(transactionInfo.UnappliedFundsTransactionId);
+        $scope.receiptUrls.push(url);
+      }
     }
 
     $scope.viewReceipts = function () {
-      // for now, just send user to regular receipts view
-      $state.transitionTo('home.receipts');
+      angular.forEach($scope.receiptUrls, function(url) {
+        $window.open(url);
+      });
+      $state.transitionTo('home.payments');
       dialog.close();
     };
 

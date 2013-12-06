@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, $dialog, Floorplan, User, metric) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric) {
 
     $scope.metric = metric; // make metric names available to templates
 
@@ -145,25 +145,11 @@ angular.module('nextgearWebApp')
 
     $scope.resetSearch($stateParams.filter);
 
-    if (!isDealer) {
-      $scope.openEditTitle = function(floorplan) {
-        var dialogOptions = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
-          templateUrl: 'views/modals/editTitle.html',
-          controller: 'EditTitleCtrl',
-          resolve: {
-            floorplan: function () {
-              return floorplan;
-            },
-            vehicleDescription: function () {
-              return $scope.getVehicleDescription(floorplan);
-            }
-          }
-        };
-        $dialog.dialog(dialogOptions).open();
-      };
-    }
-
+    $scope.sellerHasTitle = function(floorplan, hasTitle) {
+      Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
+        function() {
+          floorplan.TitleLocation = hasTitle ? 'Seller' : 'Title Absent';
+        }
+      );
+    };
   });

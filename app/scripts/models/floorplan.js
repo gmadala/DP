@@ -98,13 +98,11 @@ angular.module('nextgearWebApp')
         item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
         return item;
       },
-      setTitleInfo: function (floorplanId, titleNumber, titleState) {
-        var data = {
+      sellerHasTitle: function(floorplanId, hasTitle) {
+        return api.request('POST', '/floorplan/SellerHasTitle', {
           FloorplanId: floorplanId,
-          TitleNumber: titleNumber,
-          TitleStateId: titleState.StateId
-        };
-        return api.request('POST', '/floorplan/EditTitleNumberAndState', data);
+          HasTitle: hasTitle
+        });
       }
     };
   });

@@ -11,41 +11,43 @@
 angular.module('nextgearWebApp')
   .directive('nxgAutofocus', function ($timeout) {
     return {
-      restrict: 'A',
+      restrict: 'AC',
       link: function (scope, element, attrs) {
         var elementName = element[0].tagName.toLowerCase(),
           target = null;
 
-        // find the first item that's an input or button
-        if (elementName === 'input' || elementName === 'button') {
-          target = element;
-        } else {
-          var focusable = element.find('input, button');
-          if (focusable.length > 0) {
-            target = angular.element(focusable[0]);
+        setTimeout(function(){
+          // find the first item that's an input or button
+          if (elementName === 'input' || elementName === 'button') {
+            target = element;
+          } else {
+            var focusable = element.find('input, button');
+            if (focusable.length > 0) {
+              target = angular.element(focusable[0]);
+            }
           }
-        }
 
-        if (!target) {
-          return;
-        }
+          if (!target) {
+            return;
+          }
 
-        angular.element(document).ready(function () {
-          target.focus(); // sometimes this one works...
-          $timeout(function () {
-            target.focus(); // ... and sometimes this one works
-          });
-        });
-
-        // listen for the designated re-focus events, if any
-        if (attrs.nxgAutofocus) {
-          var events = attrs.nxgAutofocus.split(',');
-          angular.forEach(events, function (event) {
-            scope.$on(event, function () {
-              target.focus();
+          angular.element(document).ready(function () {
+            target.focus(); // sometimes this one works...
+            $timeout(function () {
+              target.focus(); // ... and sometimes this one works
             });
           });
-        }
+
+          // listen for the designated re-focus events, if any
+          if (attrs.nxgAutofocus) {
+            var events = attrs.nxgAutofocus.split(',');
+            angular.forEach(events, function (event) {
+              scope.$on(event, function () {
+                target.focus();
+              });
+            });
+          }
+        }, 0);
       }
     };
   });

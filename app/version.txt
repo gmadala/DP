@@ -1,8 +1,18 @@
-NextGear Capital v1.0.4
+NextGear Capital v1.1.0
 =================================
 
 Fixed in this release:
 
-VO-439  Fixed incorrect update of total and available amounts after payout request.
-VO-480  Update links to the mobile applications on the Web app.
-VO-439  Fixed issue when requesting a payout amount with commas (e.g. 1,000.00)
+DTWO-2906 - Title State And Number
+DTWO-2911 - Add an Input Mechanism for Specifying "I Have It"
+VO-213 - Sort the upcoming payments By Due Date
+VO-214 - Payment Search Filter List By Due Date
+VO-215 - Sort Scheduled Payments Default View
+VO-389 - EUI Web Site - viewing a receipt after payment is made takes you to the receipt screen and not the receipt
+901 - mobile - color-code the # indicators for payment-related information on dashboard to match web site
+1015 - Upcoming Payments --> Month View Footer --> Missing Redundant Controls 
+1011 - Mobile - Payments Summary --> no easy way to get back to Payments Summary when no results returned
+912 - Web: Forgot Username/Password - Layout Issue
+1205 - Mobile - Break stale/aging units into 5 sections rather than 4, so that they match the desktop app.
+1206 - Mobile - Make the entire list items in the multiple VIN and Seller Search lists clickable; right now only the '>' character is clickable, so it's harder for users to tap.
+VO-467 - Logo on website - G is "weird"

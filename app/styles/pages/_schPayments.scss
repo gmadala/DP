@@ -11,6 +11,10 @@
   font-variant: small-caps;
 }
 
+.vin-small {
+  @extend %small;
+}
+
 .cell {
   &.sch-more { width: 4%; }
   &.sch-schDate { width: 18%; }
