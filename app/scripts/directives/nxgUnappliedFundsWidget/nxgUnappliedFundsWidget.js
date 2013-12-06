@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api) {
 
     $scope.openRequestPayout = function($event) {
       $event.preventDefault();
@@ -40,6 +40,7 @@ angular.module('nextgearWebApp')
           if (result) {
             // ** The endpoint returns a single updated balance but we got two
             // to update (total, available) so we update manually **
+            result.amount = api.toFloat(result.amount);
             $scope.fundsAvail -= Math.min(result.amount, $scope.fundsAvail);
             $scope.fundsBalance -= Math.min(result.amount, $scope.fundsBalance);
 
