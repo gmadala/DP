@@ -144,4 +144,12 @@ angular.module('nextgearWebApp')
     };
 
     $scope.resetSearch($stateParams.filter);
+
+    $scope.sellerHasTitle = function(floorplan, hasTitle) {
+      Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
+        function() {
+          floorplan.TitleLocation = hasTitle ? 'Seller' : 'Title Absent';
+        }
+      );
+    };
   });

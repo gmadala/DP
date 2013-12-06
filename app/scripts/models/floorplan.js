@@ -97,6 +97,12 @@ angular.module('nextgearWebApp')
         var displayId = buyerBusinessNumber + '-' + item.StockNumber;
         item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
         return item;
+      },
+      sellerHasTitle: function(floorplanId, hasTitle) {
+        return api.request('POST', '/floorplan/SellerHasTitle', {
+          FloorplanId: floorplanId,
+          HasTitle: hasTitle
+        });
       }
     };
   });
