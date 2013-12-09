@@ -27,8 +27,7 @@ angular.module('nextgearWebApp')
       isDealer: User.isDealer,
       info: User.getInfo,
       logout: function() {
-        User.logout();
-        $rootScope.$broadcast('event:redirectToLogin');
+        $state.transitionTo('login');
       },
       navLinks: function() {
         return User.isDealer() ? dealerLinks : auctionLinks;

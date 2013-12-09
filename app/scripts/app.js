@@ -3,7 +3,11 @@
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio'])
   .config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise(function($injector) {
+      var User = $injector.get('User');
+      return User.isDealer() ? '/home' : '/act/home';
+    });
+
     $stateProvider
       .state('login', {
         url: '/login',
@@ -151,7 +155,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, $dialog, User, $window, segmentio, nxgConfig) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout) {
+    Logout.watch();
+
     if (nxgConfig.showReloadWarning) {
       // This prompts the user to confirm before the browser is closed, reloaded, or the user navigates away to another site. Fixes VO-212
       $window.onbeforeunload = function () {
@@ -203,6 +209,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       function(){
         // this will clobber everything and redirect to the login page
         window.location.reload();
+      }
+    );
+
+    $rootScope.$on('event:redirectToHome',
+      function(){
+        $location.path(User.isDealer() ? '/home' : '/act/home');
       }
     );
 

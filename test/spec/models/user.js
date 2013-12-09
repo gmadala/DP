@@ -233,7 +233,10 @@ describe('Model: User', function () {
       httpBackend.flush();
       expect(segmentio.identify).toHaveBeenCalled();
       expect(segmentio.identify.mostRecentCall.args[0]).toBe(1234);
-      expect(segmentio.identify.mostRecentCall.args[1]).toBeTruthy();
+      expect(segmentio.identify.mostRecentCall.args[1]).toEqual({
+        name: 'Tricolor Auto',
+        username: 'test'
+      });
       expect(segmentio.identify.mostRecentCall.args[1].name).toBe('Tricolor Auto');
     });
 

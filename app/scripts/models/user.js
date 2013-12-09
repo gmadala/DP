@@ -81,7 +81,7 @@ angular.module('nextgearWebApp')
             // fetch the dealer info & statics every time there's a new session (user could have changed)
             return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
               function () {
-                segmentio.identify(info.BusinessNumber, { name: info.BusinessName });
+                segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
                 return {
                   showUserInit: authResult.ShowUserInitialization
                 };
