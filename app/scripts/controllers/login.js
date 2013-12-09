@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($scope, $location, User, $http) {
+  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http) {
 
     $scope.credentials = {
       username: '',
@@ -14,7 +14,7 @@ angular.module('nextgearWebApp')
       if ($scope.credentials.username && $scope.credentials.password) {
         User.authenticate($scope.credentials.username, $scope.credentials.password)
           .then(function(/*data*/) {
-            $location.path('/home');
+            $rootScope.$broadcast('event:redirectToHome');
           }, function(error) {
             error.dismiss();
             $scope.errorMsg = error.text;

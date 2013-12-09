@@ -5,7 +5,7 @@
  */
 angular.module('nextgearWebApp')
   .config( function ($provide) {
-    $provide.decorator('$dialog', function($delegate, $q) {
+    $provide.decorator('$dialog', function($delegate, $q, $timeout) {
       var OriginalDialog = $delegate.dialog,
           currentlyOpen = [],
           body = angular.element(document.body),
@@ -32,6 +32,7 @@ angular.module('nextgearWebApp')
             );
 
             body.addClass('modal-open');
+            $delegate.enforceFocus.call(this);
 
             return deferred.promise;
           };
@@ -59,10 +60,32 @@ angular.module('nextgearWebApp')
           return currentlyOpen.length;
         },
 
+        enforceFocus: function() {
+          // force tabbing to focus only on elements within modal while it is open.
+          var doc = angular.element(document);
+          var which = this;
+
+          doc.off('focusin')
+          .on('focusin', function (e) {
+
+            if (which.modalEl!== e.target && !which.modalEl.has(e.target).length) {
+              // focus on first focusable element inside modal
+              var focusable = which.modalEl.find('input, button, select, a.btn').first();
+
+              // sometimes one works, sometimes the other.
+              focusable[0].focus();
+              $timeout(function() {
+                focusable[0].focus();
+              }, 10);
+            }
+          });
+        },
+
         messageBox: function(title, message, buttons) {
           var msgBox = new OriginalMessageBox(title, message, buttons);
 
           msgBox.modalEl.addClass('nxg-autofocus');
+          $delegate.enforceFocus.call(msgBox);
           return msgBox;
         }
 
