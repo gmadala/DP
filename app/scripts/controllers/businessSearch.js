@@ -89,7 +89,13 @@ angular.module('nextgearWebApp')
 
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
-    var focusField = angular.element('#inputBuyer');
+    var focusField = null;
+
+    if ($scope.data.searchBuyersMode) {
+      focusField = angular.element('#inputBuyer');
+    } else {
+      focusField = angular.element('#inputSeller');
+    }
 
     $scope.close = function() {
       dialog.close();
