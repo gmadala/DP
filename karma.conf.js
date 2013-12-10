@@ -32,6 +32,7 @@ module.exports = function(karma) {
       'app/components/fullcalendar/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
+      'app/components/modernizr/modernizr.js',
 	    'app/private-components/chartjs/Chart.js',
 	    'app/private-components/angular-segmentio/angular-segmentio.js',
 	    'app/components/sinon/lib/sinon/util/fake_timers.js',
