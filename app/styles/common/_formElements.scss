@@ -146,9 +146,16 @@ select, .nxg-date-field {
   background: transparent;
 }
 
-.nxg-date-field {
-  input {
+.nxg-date-field.control-group {
+
+  border: 1px solid $input-border;
+
+  input, input[type="text"], input[type="text"]:focus {
     background-color: transparent;
+    border: 0px solid black;
+    width: 83px;
+    padding-right: 0;
+    font-size: 13px;
   }
 
   .btn {
@@ -159,8 +166,9 @@ select, .nxg-date-field {
     background: transparent;
     font-size: $large-font-size;
     border: 0;
-    margin: -1px 0 0 -28px;
-
+    margin: -1px -4px 0 -1px;
+    padding-left: 0;
+    
     &:active {
       border: none;
       @include box-shadow(none);
