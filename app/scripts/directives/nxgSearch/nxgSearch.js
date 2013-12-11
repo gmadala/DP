@@ -38,7 +38,10 @@ angular.module('nextgearWebApp')
 
     $scope.search = function () {
       $scope.validity = angular.copy($scope.searchForm);
-      if (!$scope.searchForm.$valid) {
+      $scope.validity.$error.invalidDateRange =
+        $scope.activeCriteria && !this.dateRangeValid($scope.activeCriteria.startDate, $scope.activeCriteria.endDate);
+
+      if (!$scope.searchForm.$valid || $scope.validity.$error.invalidDateRange) {
         return;
       }
       $scope.onSearch();

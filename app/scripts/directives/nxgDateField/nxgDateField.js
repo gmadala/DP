@@ -44,11 +44,6 @@ angular.module('nextgearWebApp')
                   }
                 });
               }
-
-              if(!scope.$$phase) {
-                scope.$apply();
-              }
-
             });
 
             // Make the current date get filled by default when you hit
