@@ -50,6 +50,20 @@ angular.module('nextgearWebApp')
               }
 
             });
+
+            // Make the current date get filled by default when you hit
+            // enter (keyCode 13) and there isn't already a value in the input.
+            element.children('input').on('keydown', function(event) {
+              if(event.keyCode === 13 && this.value === ''){
+                var $this = angular.element(this);
+                $this.datepicker('setValue', new Date());
+                $this.trigger({
+                  type: 'changeDate', // Send the 'changeDate' event
+                  date: new Date() //, passing in the current date
+                });
+              }
+            });
+
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
             if (angular.isDefined(attrs.beforeShowDay)) {
