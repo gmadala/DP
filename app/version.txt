@@ -1,8 +1,6 @@
-NextGear Capital v1.1.1
+NextGear Capital v1.1.2
 =================================
 
 Fixed in this release:
 
-VO-484 - Auction Bulk flooring issue - can only floor one unit at a time
-VO-228 - Back Button doesn't work once I'm on the dashboard
-VO-493 - Add username to analytics identity info
+VO-478 - Auction Access Error message displays the message Auction Access number instead of Auction Access Number
