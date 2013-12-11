@@ -92,15 +92,16 @@ select.nxg-invalid {
 }
 
 // these fields are treated differently b/c the inputs are wrapped in a directive
-.nxg-date-field, .nxg-business-field {
-  &.nxg-invalid {
-    border: 0;
+.nxg-business-field.nxg-invalid {
+  border: 0;
 
-    input {
-      border: 1px solid $error-dark;
-    }
-
+  input {
+    border: 1px solid $error-dark;
   }
+}
+
+.nxg-date-field.nxg-invalid {
+  border: 1px solid $error-dark !important;
 }
 
 select, .nxg-date-field {
@@ -168,7 +169,7 @@ select, .nxg-date-field {
     border: 0;
     margin: -1px -4px 0 -1px;
     padding-left: 0;
-    
+
     &:active {
       border: none;
       @include box-shadow(none);

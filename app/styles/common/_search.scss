@@ -23,6 +23,10 @@
     @extend %float-l;
   }
 
+  .search-date-range {
+    width: 230px;
+  }
+
   .keyword {
     padding-right: 10px;
     border-right: 1px solid $border;
