@@ -200,7 +200,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       if (fromState.name) {
         segmentio.page(null, null, {
           path: $location.path(),
-          url: $location.absUrl()
+          url: $location.absUrl(),
+          title: $location.path()
         });
       }
     });
