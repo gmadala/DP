@@ -31,6 +31,35 @@ describe('Directive: nxgDateField', function () {
     expect(scope.bar).toBe(value);
   });
 
+  describe('notFutureDates functionality', function () {
+    
+    it('should say the following dates are not in the future', function() {
+
+      // Today
+      expect(scope.notFutureDates(new Date())).toBeTruthy();
+
+      // Yesterday
+      var yesterday = new Date();
+      yesterday.setDate(yesterday.getDate()-1);
+      expect(scope.notFutureDates(yesterday)).toBeTruthy();
+
+      // Today at 11:59pm
+      var today = new Date();
+      today.setHours(23, 59, 59, 999);
+      expect(scope.notFutureDates(today)).toBeTruthy();
+
+    });
+
+    it('should say the following dates are in the future', function() {
+      
+      // Tomorrow
+      var tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate()+1);
+      expect(scope.notFutureDates(tomorrow)).toBeFalsy();
+    });
+
+  });
+
   describe('beforeShowDay support', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {

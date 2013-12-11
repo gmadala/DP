@@ -73,6 +73,18 @@ angular.module('nextgearWebApp')
               }
             });
 
+            scope.notFutureDates = function(date) {
+              var today = new Date();
+              var dupDate = new Date(date);
+
+              // This ensures that today is never considered in
+              // the past, depending on when the time of the passed
+              // date is relative to the current time
+              today.setHours(0,0,0,0);
+              dupDate.setHours(0,0,0,0);
+              return today >= dupDate;
+            };
+
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
             if (angular.isDefined(attrs.beforeShowDay)) {
