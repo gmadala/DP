@@ -64,6 +64,12 @@ angular.module('nextgearWebApp')
               }
             });
 
+            // When date changes, make sure focus remains on the input element.
+            // Without this, clicking on the date picker takes focus off input element
+            element.on('changeDate', function() {
+              element.children('input').focus();
+            });
+
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
             if (angular.isDefined(attrs.beforeShowDay)) {
