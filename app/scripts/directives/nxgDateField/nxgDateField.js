@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgDateField', function ($parse, $strapConfig, moment) {
+  .directive('nxgDateField', function ($parse, $strapConfig, moment, $timeout) {
     return {
       templateUrl: 'scripts/directives/nxgDateField/nxgDateField.html',
       replace: true,
@@ -59,10 +59,18 @@ angular.module('nextgearWebApp')
               }
             });
 
-            // When date changes, make sure focus remains on the input element.
-            // Without this, clicking on the date picker takes focus off input element
-            element.on('changeDate', function() {
-              element.children('input').focus();
+            // When date changes (esp with a click), make sure focus remains on the input element.
+            element.on('hide', function() {
+              var $input = element.children('input');
+              if(document.activeElement !== $input.get()[0]) {
+                $input.focus();
+
+                // In IE the focus() causes the datepicker to re-open,
+                // so it must be manually hidden (and its execution delayed slightly)
+                $timeout(function() {
+                  $input.datepicker('hide');
+                });
+              }
             });
 
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
