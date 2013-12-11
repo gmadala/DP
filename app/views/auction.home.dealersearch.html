@@ -7,7 +7,7 @@
             If you have the NextGear dealer number or Auction Access Number, use the Dealer Number search.
           </p>
           <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
-              Please enter a dealer number or an auction access number.
+              Please enter a dealer number or an Auction Access Number.
           </p>
           <div class="control-group"
                ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
@@ -47,10 +47,10 @@
                      ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
                      nxg-focus="numberSearch.setAuctionNumActive()"></div>
               <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
-                  No results found, please enter a valid Auction Access number.
+                  No results found, please enter a valid Auction Access Number.
               </label>
               <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
-                  Please enter an auction access number.
+                  Please enter an Auction Access Number.
               </label>
               <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
                   Please enter a numeric value.
