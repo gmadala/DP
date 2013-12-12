@@ -211,6 +211,16 @@ input[type="checkbox"]:checked + label::before {
     content: url('../img/checkbox-checked.gif');
 }
 
+input[type="checkbox"], input[type="checkbox"]:checked {
+  & + label::before {
+    @include opacity(70);
+  }
+
+  &:focus + label::before {
+    @include opacity(100);
+  }
+}
+
 .nxg-radios {
   label {
     margin: 0 0.5em 0 0.5em;
@@ -237,6 +247,16 @@ input[type="radio"] + label::before {
 
 input[type="radio"]:checked + label::before {
   content: url('../img/radio-checked.gif');
+}
+
+input[type="radio"], input[type="radio"]:checked {
+  & + label::before {
+    @include opacity(75);
+  }
+
+  &:focus + label::before {
+    @include opacity(100);
+  }
 }
 
 input[type="radio"]:disabled {
