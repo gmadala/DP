@@ -7,11 +7,9 @@ select {
   height: 28px;
   width: 200px;
   font-size: 13px;
-  outline: 0;
   -webkit-user-select: none;
 
   &:focus { // use important to guarantee that this style will override default invalid style
-    @include box-shadow(rgba(0,0,0,0.5) -2px 1px 0);
     border-color: darken($input-border, 20%) !important;
 
     &:invalid, &:invalid:focus {
@@ -46,7 +44,6 @@ input[type="color"],
 
   &:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    outline: 0;
     border-color: $input-border;
   }
 
@@ -81,9 +78,6 @@ input[type="color"],
 .uneditable-input {
   &.nxg-invalid {
     border: 1px solid $error-dark;
-  }
-  &:focus:invalid, &:invalid {
-    outline: none;
   }
 }
 
