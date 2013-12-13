@@ -14,6 +14,5 @@ angular.module('nextgearWebApp')
     //apiBase: 'https://customer.nextgearcapital.com/MobileService/api',
     //segmentIoKey: '9eaffv4cbe',
 
-    infiniteScrollingMax: 500,
-    showReloadWarning: true
+    infiniteScrollingMax: 500
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -155,20 +155,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout, $cookies) {
     Logout.watch();
-
-    if (nxgConfig.showReloadWarning) {
-      // This prompts the user to confirm before the browser is closed, reloaded, or the user navigates away to another site. Fixes VO-212
-      $window.onbeforeunload = function () {
-        if (User.isLoggedIn()) {
-          return 'If you proceed, your session will end and your payment basket will be cleared.';
-        }
-        else {
-          return;
-        }
-      };
-    }
 
     segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
 
@@ -178,7 +166,21 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
-          var isDealer = User.isDealer();
+          var isDealer = User.isDealer(),
+            authToken = $cookies.authToken;
+
+          if (!User.isLoggedIn() && authToken) {
+            // we're restoring session from saved auth token
+            event.preventDefault();
+            console.log('Loading saved session...');
+            User.reloadSession(authToken).then(
+              function() {
+                console.log('toState: ' + toState.name);
+                $location.path(toState.url);
+              }
+            );
+          }
+
           if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
