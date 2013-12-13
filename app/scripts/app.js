@@ -160,6 +160,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
 
+    // state whose transition was interrupted to ask the user to log in
+    var pendingState = null;
+
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
@@ -172,10 +175,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           if (!User.isLoggedIn() && authToken) {
             // we're restoring session from saved auth token
             event.preventDefault();
-            console.log('Loading saved session...');
             User.reloadSession(authToken).then(
               function() {
-                console.log('toState: ' + toState.name);
                 $location.path(toState.url);
               }
             );
@@ -184,6 +185,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
+            pendingState = toState; // save the original state destination to switch back when logged in
             $location.path('/login');
           } else if (User.showInitialization()) {
             // not initialized? lets update the security questions
@@ -208,6 +210,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       }
     });
 
+    $rootScope.$on('event:switchState',
+      function(event, state) {
+        $location.path(state.url);
+      }
+    );
+
     $rootScope.$on('event:redirectToLogin',
       function(){
         // this will clobber everything and redirect to the login page
@@ -215,9 +223,15 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       }
     );
 
-    $rootScope.$on('event:redirectToHome',
+    $rootScope.$on('event:userAuthenticated',
       function(){
-        $location.path(User.isDealer() ? '/home' : '/act/home');
+        if (pendingState) {
+          $location.path(pendingState.url); // resume transition to the original state destination
+          pendingState = null;
+        }
+        else {
+          $location.path(User.isDealer() ? '/home' : '/act/home');
+        }
       }
     );
 

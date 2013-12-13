@@ -14,7 +14,7 @@ angular.module('nextgearWebApp')
       if ($scope.credentials.username && $scope.credentials.password) {
         User.authenticate($scope.credentials.username, $scope.credentials.password)
           .then(function(/*data*/) {
-            $rootScope.$broadcast('event:redirectToHome');
+            $rootScope.$broadcast('event:userAuthenticated');
           }, function(error) {
             error.dismiss();
             $scope.errorMsg = error.text;
