@@ -111,6 +111,10 @@ angular.module('nextgearWebApp')
           this.invalid.CityOrState = true;
           valid = false;
         }
+        if (this.query.city && !this.query.city.match(/^[A-Za-z ]*$/)) {
+          this.invalid.cityFormat = true;
+          valid = false;
+        }
         return valid;
       }
     };
