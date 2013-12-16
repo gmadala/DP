@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {

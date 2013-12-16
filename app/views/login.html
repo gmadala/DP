@@ -16,7 +16,8 @@
                    id="credUsername"
                    name="credUsername"
                    required
-                   nxg-enter="authenticate()" />
+                   nxg-enter="authenticate()" 
+                   typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
 
             <label for="credPassword">Password:</label>
             <input type="password"
