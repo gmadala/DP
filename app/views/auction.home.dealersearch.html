@@ -1,68 +1,70 @@
 <div class="row-fluid two-col dealer-search">
   <form name="numberSearchForm" novalidate>
-      <div class="span8 well adjacent">
-        <h4>Dealer Number Search</h4>
-        <div class="well-out">
-          <p>
-            If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search.
-          </p>
-          <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
-              Please enter a Dealer Number or an Auction Access Number.
-          </p>
-          <div class="control-group"
-               ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
-               >
-            <label for="dealer-num" class="control-label input-title">NextGear Dealer Number</label>
-            <div class="controls">
-              <input type="text"
-                     id="dealer-num"
-                     name="dealerNum"
-                     ng-pattern="onlyNumbersPattern"
-                     ng-model="numberSearch.query.dealerNumber"
-                     nxg-focus="numberSearch.setDealerNumActive()"
-                     ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }"></div>
-              <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
-                  No results found, please enter a valid Dealer Number.
-              </label>
-              <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber">
-                  Please enter a Dealer Number.
-              </label>
-              <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber">
-                  Please enter a numeric value.
-              </label>
-          </div><!-- end first .control-group -->
+    <div class="span8 well adjacent">
+      <h4>Dealer Number Search</h4>
+      <div class="well-out">
+        <p>
+          If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search.
+        </p>
+        <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
+            Please enter a Dealer Number or an Auction Access Number.
+        </p>
+        <div class="control-group"
+             ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
+             >
+          <label for="dealer-num" class="control-label input-title">NextGear Dealer Number</label>
+          <div class="controls">
+            <input type="text"
+                   id="dealer-num"
+                   name="dealerNum"
+                   ng-pattern="onlyNumbersPattern"
+                   ng-model="numberSearch.query.dealerNumber"
+                   nxg-focus="numberSearch.setDealerNumActive()"
+                   ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }"></div>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
+                No results found, please enter a valid Dealer Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber">
+                Please enter a Dealer Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber">
+                Please enter a numeric value.
+            </label>
+        </div><!-- end first .control-group -->
 
-          <p class="form-separator">-OR-</p>
+        <p class="form-separator">-OR-</p>
 
-          <div class="control-group"
-               ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
-               >
-            <label for="auction-access-num" class="control-label input-title">Auction Access Number</label>
-            <div class="controls">
-              <input type="text"
-                     id="auction-access-num"
-                     name="auctionAccessNum"
-                     ng-pattern="onlyNumbersPattern"
-                     ng-model="numberSearch.query.auctionAccessNumber"
-                     ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
-                     nxg-focus="numberSearch.setAuctionNumActive()"></div>
-              <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
-                  No results found, please enter a valid Auction Access Number.
-              </label>
-              <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
-                  Please enter an Auction Access Number.
-              </label>
-              <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
-                  Please enter a numeric value.
-              </label>
-          </div><!-- end second .control-group -->
-          <hr/>
-          <div class="form-footer">
-            <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()">Search</button>
-          </div>
+        <div class="control-group"
+             ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
+             >
+          <label for="auction-access-num" class="control-label input-title">Auction Access Number</label>
+          <div class="controls">
+            <input type="text"
+                   id="auction-access-num"
+                   name="auctionAccessNum"
+                   ng-pattern="onlyNumbersPattern"
+                   ng-model="numberSearch.query.auctionAccessNumber"
+                   ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
+                   nxg-focus="numberSearch.setAuctionNumActive()"></div>
+            <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
+                No results found, please enter a valid Auction Access Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
+                Please enter an Auction Access Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
+                Please enter a numeric value.
+            </label>
+        </div><!-- end second .control-group -->
+        <hr/>
+        <div class="form-footer">
+          <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()">Search</button>
         </div>
-      </div><!-- end first well -->
+      </div>
+    </div><!-- end first well -->
+  </form>
 
+  <form name="nameSearchForm" novalidate>
       <div class="span8 well adjacent">
         <h4>Dealer Name Search</h4>
         <div class="well-out">
