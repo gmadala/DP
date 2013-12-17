@@ -458,3 +458,22 @@ label.input-title {
     }
   }
 }
+
+// autocomplete
+.typeahead.dropdown-menu {
+  padding: 0;
+  border-color: $border;
+
+  li {
+    &.active a {
+      @include background-image(none);
+      background-color: $brand-bright;
+      color: $white;
+    }
+
+    a {
+      color: $base-text-color;
+      border-color: $border;
+    }
+  }
+}
