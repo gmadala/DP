@@ -33,7 +33,7 @@ angular.module('nextgearWebApp')
       dialog.close(confirmed);
       if (confirmed) {
         User.logout();
-        $rootScope.$broadcast('event:redirectToLogin');
+        $rootScope.$broadcast('event:logout');
       }
     };
   });
