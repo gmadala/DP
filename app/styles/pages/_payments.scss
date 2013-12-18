@@ -26,6 +26,10 @@
   }
 }
 
+.payments ul, .schPayments-list ul {
+  margin: 0;
+}
+
 .payments .cell .btn-block,
 .payments .cell .btn-block:hover,
 .payments .cell .btn-block:active,

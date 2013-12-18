@@ -90,6 +90,11 @@ angular.module('nextgearWebApp')
           });
       },
 
+      reloadSession: function(sessionToken) {
+        api.setAuthToken(sessionToken);
+        return $q.all([this.refreshInfo(), this.refreshStatics()]);
+      },
+
       logout: function() {
         api.resetAuthToken();
         return api.request('GET', '/userAccount/logout');

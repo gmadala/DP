@@ -115,7 +115,7 @@
             <div class="control-group half">
               <label class="control-label" for="disDate">Date</label>
               <div class="controls">
-      					<input id="disDate" name="disDate" nxg-date-field ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }" required />
+      					<input id="disDate" name="disDate" nxg-date-field before-show-day="notFutureDates(date)" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }" required />
               </div>
               <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
                  Please select a Valid Date

@@ -7,7 +7,7 @@
     }
 
     input {
-      width: 107px;
+      width: 83px;
     }
   }
 
@@ -21,6 +21,10 @@
 
   .control-group {
     @extend %float-l;
+  }
+
+  .search-date-range {
+    width: 230px;
   }
 
   .keyword {

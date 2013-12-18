@@ -81,7 +81,8 @@ describe('Directive: nxgSearch', function () {
       it('should copy the form controller state to scope.validity', function () {
         scope.searchForm = {
           $valid: false,
-          foo: 'bar'
+          foo: 'bar',
+          $error: {}
         };
         scope.search();
         expect(scope.validity.$valid).toBe(false);
@@ -91,7 +92,8 @@ describe('Directive: nxgSearch', function () {
       it('should not call the onSearch function if searchForm is invalid', function () {
         scope.onSearch = jasmine.createSpy('onSearch');
         scope.searchForm = {
-          $valid: false
+          $valid: false,
+          $error: {}
         };
         scope.search();
         expect(scope.onSearch).not.toHaveBeenCalled();
@@ -100,7 +102,8 @@ describe('Directive: nxgSearch', function () {
       it('should call the onSearch function if searchForm is valid', function () {
         scope.onSearch = jasmine.createSpy('onSearch');
         scope.searchForm = {
-          $valid: true
+          $valid: true,
+          $error: {}
         };
         scope.search();
         expect(scope.onSearch).toHaveBeenCalled();

@@ -1,6 +1,26 @@
-NextGear Capital v1.1.4
+NextGear Capital v1.2.0
 =================================
 
 Fixes included in this release:
 
-VO-442 - Make the boxes for forgot user name and forgot password symmetrical. 
+VO-562 - User is not able to remove payment after click on "submit payment".
+VO-561 - IE9-Auction User > Bulk Flooring > Keyboard “Tab” Key is not proper tabbing when user looks up for “VIN”.
+VO-560 - Web: Browser Back Button doesn't work once user is on "Welcome" Page.
+VO-559 - Web: "Scheduled Payment” > Keyboard "Enter" key is not working on date range search.
+VO-556 - Web: Login Page > By-default Cursor should get display in "Username" Field.
+VO-557 - Web: Bulk Flooring > Mandatory fields - Validation message text, full-stop is missing from the end of the sentences.
+VO-554 - Web: Auction User > Dealer Search > "dealer name", "state" and "name" text should be "Dealer Name", "State" and "Name" in error message and content.
+VO-555 - Web: Auction User > Dealer Search > Dealer Name Search > "City" field should not accept numeric and special character value, some validation must be applied.
+VO-553 - Web: Auction User > Dealer Search > "dealer number" Should be "Dealer Number" in both error message and Content.
+VO-534 - Web: Date validation message is not getting displayed when "From" date is later than the "To" date under "Schedule Payments" , "Receipt" & "Floor Plan".
+VO-533 - Web: Calendar Button is not working in the date field when user clicks into the field a second time.
+VO-532 - Duplicate page names for web app in ChartBeat analytics
+VO-531 - Web: IE 9 - Date Fields - Place-Holder Text (MM/DD/YYYY) is not getting displayed as it is displayed on other browsers.
+VO-523 - Web: Dealer & Auction ==> View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker.
+VO-522 - Web: Tab View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker.
+VO-217 - Tabbing for Floor a Car using Invalid VIN
+VO-226 - EUI site doesn't remember where user was when login expires
+VO-542 - Maintain user session across browser refresh
+VO-535 - Web: Dealer Search > While searching for Dealer by name and hitting "Enter" - Focus is not proper.
+VO-506 - Assembla: Payments ==> Payment Summary = should be sticky & follow user as they scroll down page
+VO-380 - Bookmarking doesn't work with New Site

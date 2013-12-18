@@ -74,8 +74,8 @@ angular.module('nextgearWebApp')
             // default values for un-set dates may need adjusted during API integration
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,
-            OrderBy: 'FlooringDate',
-            OrderByDirection: 'DESC',
+            OrderBy: criteria.sortField || 'FlooringDate',
+            OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM
           };

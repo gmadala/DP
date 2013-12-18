@@ -20,12 +20,11 @@
 }
 
 .table-list-head {
-  @extend %center;
   background-color: $gray-6;
   color: $white;
   overflow: hidden;
 
-   .cell {
+  .cell {
     @extend %thin;
     @extend %small;
     text-transform: uppercase;
@@ -33,6 +32,10 @@
     & + .cell {
       border-left: 1px solid $white;
     }
+  }
+
+  .sortable::before, .sortable::after {
+    right: 6px;
   }
 }
 

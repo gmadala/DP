@@ -31,30 +31,31 @@
             </div>
           </div><!-- end .control-group -->
 
-          <div class="control-group half" ng-show="dateRangeShown">
-            <label class="control-label" for="startDate">Date Range</label>
+          <div class="control-group search-date-range" ng-show="dateRangeShown">
+            <div class="control-group half">
+              <label class="control-label" for="startDate">Date Range</label>
 
-            <div class="controls">
-              <input type="text" id="startDate" name="startDate"
-                    ng-model="activeCriteria.startDate"
-                    nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-            </div>
-          </div><!-- end .control-group -->
+              <div class="controls">
+                <input type="text" id="startDate" name="startDate"
+                      ng-model="activeCriteria.startDate"
+                      nxg-date-field
+                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+              </div>
+            </div><!-- end .control-group.half -->
 
-          <div class="control-group half" ng-show="dateRangeShown">
-
-            <label class="control-label" for="endDate">To</label>
-            <div class="controls">
-              <input type="text" id="endDate" name="endDate"
-                    ng-model="activeCriteria.endDate"
-                    nxg-date-field nxg-requires="dateRangeValid(activeCriteria.startDate, activeCriteria.endDate)">
-            </div><!-- end .controls -->
-          </div><!-- end .control-group -->
-                        <label for="endDate" class="text-error"
-                    ng-show="validity.endDate.$error.nxgRequires">Invalid date range</label>
+            <div class="control-group half">
+              <label class="control-label" for="endDate">To</label>
+              <div class="controls">
+                <input type="text" id="endDate" name="endDate"
+                      ng-model="activeCriteria.endDate"
+                      nxg-date-field
+                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+              </div><!-- end .controls -->
+            </div><!-- end .control-group.half -->
+             <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
+          </div><!-- end .control-group.search-date-range -->
         </div><!-- end .span7 -->
       </div><!-- end .row-fluid -->
     </form>
   </div>
-
 </div>

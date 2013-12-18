@@ -23,15 +23,41 @@
         <ul class="unstyled floor-list">
           <li class="table-list-head">
             <div class="cell fl-more"></div>
-            <div class="cell fl-desc">Description</div>
-            <div class="cell fl-vin">VIN</div>
-            <div class="cell fl-stock">Stock #</div>
-            <div class="cell fl-status">Status</div>
-            <div class="cell fl-purchaseDate">Purchased</div>
-            <div class="cell fl-floorDate">Floored</div>
-            <div class="cell fl-seller">Seller</div>
-            <div class="cell fl-lastPayDate">Last Payment</div>
-            <div class="cell fl-titleRelease">Title Release</div>
+            <div class="cell fl-desc sortable"
+                 ng-click="sortBy('UnitMake')"
+                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
+              Description
+            </div>
+            <div class="cell fl-vin">
+              VIN
+            </div>
+            <div class="cell fl-stock sortable"
+                 ng-click="sortBy('StockNumber')"
+                 ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
+              Stock #
+            </div>
+            <div class="cell fl-status">
+              Status
+            </div>
+            <div class="cell fl-purchaseDate">
+              Purchased
+            </div>
+            <div class="cell fl-floorDate sortable"
+                 ng-click="sortBy('FlooringDate')"
+                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
+              Floored
+            </div>
+            <div class="cell fl-seller sortable"
+                 ng-click="sortBy('SellerBusinessName')"
+                 ng-class="{ sorted : sortField == 'SellerBusinessName', desc : sortDescending }">
+              Seller
+            </div>
+            <div class="cell fl-lastPayDate">
+              Last Payment
+            </div>
+            <div class="cell fl-titleRelease">
+              Title Release
+            </div>
             <div class="cell fl-title">Title</div>
           </li><!-- end .table-list-head -->
 

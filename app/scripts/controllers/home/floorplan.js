@@ -104,6 +104,23 @@ angular.module('nextgearWebApp')
       $scope.fetchNextResults();
     };
 
+    $scope.sortField = 'FlooringDate';
+
+    $scope.sortBy = function (fieldName) {
+      if ($scope.sortField === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending = !$scope.sortDescending;
+      } else {
+        $scope.sortField = fieldName;
+        $scope.sortDescending = false;
+      }
+
+      $scope.proposedSearchCriteria.sortField = $scope.sortField;
+      $scope.proposedSearchCriteria.sortDesc = $scope.sortDescending;
+
+      $scope.search();
+    };
+
     $scope.fetchNextResults = function () {
       var paginator = $scope.data.paginator,
           promise;

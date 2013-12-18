@@ -21,6 +21,7 @@
         window.location.replace('unsupported.html');
       </script>
     <![endif]-->
+    <script src="components/modernizr/modernizr.js"></script>
   </head>
   <body ng-app="nextgearWebApp">
     <div class="nxg-main-container" nxg-messages>
@@ -50,6 +51,7 @@
     <script src="components/lodash/lodash.js"></script>
     <script src="components/numeral/numeral.js"></script>
     <script src="components/moment/moment.js"></script>
+    <script src="components/angular-local-storage/angular-local-storage.js"></script>
     <script src="private-components/chartjs/Chart.js"></script>
     <script src="private-components/angular-segmentio/angular-segmentio.js"></script>
     <!-- endbuild -->
@@ -152,14 +154,16 @@
     <script src="scripts/directives/nxgAutofocus.js"></script>
     <script src="scripts/directives/nxgEnter.js"></script>
     <script src="scripts/directives/nxgTrack.js"></script>
+    <script src="scripts/directives/placeholder.js"></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
 
+    <script src="scripts/directives/nxgSticky.js"></script>
     <!-- endbuild -->
 
     <!-- build:remove -->
     <script src="scripts/config/nxgConfig.mock.js"></script>
-    <script src="scripts/dev/autologin.js"></script>
+    <!--<script src="scripts/dev/autologin.js"></script>-->
     <!-- /build -->
 
   </body>

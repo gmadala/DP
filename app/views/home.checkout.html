@@ -35,7 +35,7 @@
               <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
               <div class="cell fee-amt">
                 <p>{{ fee.amount | currency }}</p>
-                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block">
+                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block" ng-disabled="submitInProgress">
                   Remove Fee
                 </button>
               </div>
@@ -75,13 +75,14 @@
                 <div class="cell pay-pymt">
                   <p>{{ payment.amount | currency }}</p>
                   <button class="btn btn-mini btn-block"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)">
+                          ng-click="paymentQueue.removePayment(payment.floorplanId)"  
+                          ng-disabled="submitInProgress">
                     Remove Payment
                   </button>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"
                           ng-show="paymentQueue.canSchedule(payment)"
-                          ng-disabled="payment.scheduleLoading">
+                          ng-disabled="payment.scheduleLoading || submitInProgress">
                     {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
                   </button>
                   <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>

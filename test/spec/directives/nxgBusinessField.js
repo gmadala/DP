@@ -78,19 +78,19 @@ describe('Directive: nxgBusinessField', function () {
     spyOn(iScope, 'openBusinessSearch');
 
     expect(element.find('input').attr('disabled')).toBeUndefined();
-    element.find('a').trigger('click');
+    element.find('button').trigger('click');
     expect(iScope.openBusinessSearch.calls.length).toBe(1);
 
     scope.$apply(function () {
       scope.model.disableMe = true;
     });
     expect(element.find('input').attr('disabled')).toBe('disabled');
-    element.find('a').trigger('click');
+    element.find('button').trigger('click');
     expect(iScope.openBusinessSearch.calls.length).toBe(1);
   });
 
   it('should update the selected-business on business selection', function () {
-    element.find('a').trigger('click');
+    element.find('button').trigger('click');
     expect(scope.model.bizness).toBe(fakeBiz);
   });
 

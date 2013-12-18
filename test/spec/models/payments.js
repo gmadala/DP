@@ -101,6 +101,24 @@ describe("Model: Payments", function () {
       expect(callParams.OrderByDirection).toBe('ASC');
     });
 
+    it('should ask for items sorted by latest due first if sortDesc is true', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = true;
+      payments.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('DueDate');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should ask for items sorted by arbitrary column if sortField is set', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortField = 'arbitraryField';
+      payments.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('arbitraryField');
+      expect(callParams.OrderByDirection).toBe('ASC');
+    });
+
     it('should provide a page size', function () {
       payments.search(defaultCriteria);
       httpBackend.flush();

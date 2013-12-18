@@ -79,4 +79,51 @@ describe('Controller: ScheduledCtrl', function () {
     expect(scope.isCollapsed).toBeDefined();
   });
 
+  describe('sortBy function', function(){
+    it('should have a sortBy function', function(){
+      expect(typeof scope.sortBy).toEqual('function');
+    });
+
+    it('should set sortField properly', function(){
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual('fieldA');
+
+      scope.sortBy('fieldB');
+      expect(scope.sortField).toEqual('fieldB');
+
+      scope.sortBy('fieldB');
+      expect(scope.sortField).toEqual('fieldB');
+
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual('fieldA');
+    });
+
+    it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeTruthy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldA');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldA');
+      expect(scope.sortDescending).toBeTruthy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+    });
+
+    it('should call search()', function(){
+      spyOn(scope.scheduledPayments, 'search');
+      scope.sortBy('fieldA');
+      expect(scope.scheduledPayments.search).toHaveBeenCalled();
+    });
+
+  });
+
 });

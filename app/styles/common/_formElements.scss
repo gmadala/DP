@@ -7,11 +7,9 @@ select {
   height: 28px;
   width: 200px;
   font-size: 13px;
-  outline: 0;
   -webkit-user-select: none;
 
   &:focus { // use important to guarantee that this style will override default invalid style
-    @include box-shadow(rgba(0,0,0,0.5) -2px 1px 0);
     border-color: darken($input-border, 20%) !important;
 
     &:invalid, &:invalid:focus {
@@ -46,7 +44,6 @@ input[type="color"],
 
   &:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    outline: 0;
     border-color: $input-border;
   }
 
@@ -82,9 +79,6 @@ input[type="color"],
   &.nxg-invalid {
     border: 1px solid $error-dark;
   }
-  &:focus:invalid, &:invalid {
-    outline: none;
-  }
 }
 
 select.nxg-invalid {
@@ -92,15 +86,16 @@ select.nxg-invalid {
 }
 
 // these fields are treated differently b/c the inputs are wrapped in a directive
-.nxg-date-field, .nxg-business-field {
-  &.nxg-invalid {
-    border: 0;
+.nxg-business-field.nxg-invalid {
+  border: 0;
 
-    input {
-      border: 1px solid $error-dark;
-    }
-
+  input {
+    border: 1px solid $error-dark;
   }
+}
+
+.nxg-date-field.nxg-invalid {
+  border: 1px solid $error-dark !important;
 }
 
 select, .nxg-date-field {
@@ -146,9 +141,16 @@ select, .nxg-date-field {
   background: transparent;
 }
 
-.nxg-date-field {
-  input {
+.nxg-date-field.control-group {
+
+  border: 1px solid $input-border;
+
+  input, input[type="text"], input[type="text"]:focus {
     background-color: transparent;
+    border: 0px solid black;
+    width: 83px;
+    padding-right: 0;
+    font-size: 13px;
   }
 
   .btn {
@@ -159,7 +161,8 @@ select, .nxg-date-field {
     background: transparent;
     font-size: $large-font-size;
     border: 0;
-    margin: -1px 0 0 -28px;
+    margin: -1px -4px 0 -1px;
+    padding-left: 0;
 
     &:active {
       border: none;
@@ -208,6 +211,16 @@ input[type="checkbox"]:checked + label::before {
     content: url('../img/checkbox-checked.gif');
 }
 
+input[type="checkbox"], input[type="checkbox"]:checked {
+  & + label::before {
+    @include opacity(70);
+  }
+
+  &:focus + label::before {
+    @include opacity(100);
+  }
+}
+
 .nxg-radios {
   label {
     margin: 0 0.5em 0 0.5em;
@@ -234,6 +247,16 @@ input[type="radio"] + label::before {
 
 input[type="radio"]:checked + label::before {
   content: url('../img/radio-checked.gif');
+}
+
+input[type="radio"], input[type="radio"]:checked {
+  & + label::before {
+    @include opacity(75);
+  }
+
+  &:focus + label::before {
+    @include opacity(100);
+  }
 }
 
 input[type="radio"]:disabled {
@@ -432,6 +455,25 @@ label.input-title {
 
     &:hover {
       background-color: darken($brand-text, 10%);
+    }
+  }
+}
+
+// autocomplete
+.typeahead.dropdown-menu {
+  padding: 0;
+  border-color: $border;
+
+  li {
+    &.active a {
+      @include background-image(none);
+      background-color: $brand-bright;
+      color: $white;
+    }
+
+    a {
+      color: $base-text-color;
+      border-color: $border;
     }
   }
 }

@@ -49,10 +49,35 @@ describe('Service: Receipts', function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should ask for items sorted by most recent first', function () {
+    it('should ask for items sorted by most recent first by default', function () {
       receipts.search(defaultCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('CreateDate');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should ask for items sorted by an arbitrary column if provided', function(){
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortField = 'arbitraryField';
+      receipts.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('arbitraryField');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should ask for items sorted ascending if sortDesc is false', function(){
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = false;
+      receipts.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderByDirection).toBe('ASC');
+    });
+
+    it('should ask for items sorted descending if sortDesc is true', function(){
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = true;
+      receipts.search(tempCriteria);
+      httpBackend.flush();
       expect(callParams.OrderByDirection).toBe('DESC');
     });
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgDateField', function ($parse, $strapConfig, moment) {
+  .directive('nxgDateField', function ($parse, $strapConfig, moment, $timeout) {
     return {
       templateUrl: 'scripts/directives/nxgDateField/nxgDateField.html',
       replace: true,
@@ -44,12 +44,47 @@ angular.module('nextgearWebApp')
                   }
                 });
               }
-
-              if(!scope.$$phase) {
-                scope.$apply();
-              }
-
             });
+
+            // Make the current date get filled by default when you hit
+            // enter (keyCode 13) and there isn't already a value in the input.
+            element.children('input').on('keydown', function(event) {
+              if(event.keyCode === 13 && this.value === ''){
+                var $this = angular.element(this);
+                $this.datepicker('setValue', new Date());
+                $this.trigger({
+                  type: 'changeDate', // Send the 'changeDate' event
+                  date: new Date() //, passing in the current date
+                });
+              }
+            });
+
+            // When date changes (esp with a click), make sure focus remains on the input element.
+            element.on('hide', function() {
+              var $input = element.children('input');
+              if(document.activeElement !== $input.get()[0]) {
+                $input.focus();
+
+                // In IE the focus() causes the datepicker to re-open,
+                // so it must be manually hidden (and its execution delayed slightly)
+                $timeout(function() {
+                  $input.datepicker('hide');
+                });
+              }
+            });
+
+            scope.notFutureDates = function(date) {
+              var today = new Date();
+              var dupDate = new Date(date);
+
+              // This ensures that today is never considered in
+              // the past, depending on when the time of the passed
+              // date is relative to the current time
+              today.setHours(0,0,0,0);
+              dupDate.setHours(0,0,0,0);
+              return today >= dupDate;
+            };
+
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
             if (angular.isDefined(attrs.beforeShowDay)) {

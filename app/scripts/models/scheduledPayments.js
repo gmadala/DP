@@ -110,16 +110,20 @@ angular.module('nextgearWebApp')
         return totalRowCount > rowCount;
       },
 
-      search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/) {
+      search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/, sortField, sortDesc) {
         query = query || '';
 
         if (filterBy === null || filterBy === undefined || filterBy === '') {
           filterBy = this.FILTER_BY_ALL;
         }
 
+        if (sortDesc === undefined) {
+          sortDesc = true;
+        }
+
         lastRequest = {
-          OrderBy: 'ScheduledForDate',
-          OrderByDirection: 'DESC',
+          OrderBy: sortField || 'ScheduledForDate',
+          OrderByDirection: sortDesc ? 'DESC' : 'ASC',
           PageNumber: 1,
           PageSize: PAGE_SIZE,
           Keyword: query,

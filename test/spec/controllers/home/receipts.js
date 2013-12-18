@@ -10,7 +10,7 @@ describe('Controller: ReceiptsCtrl', function () {
     $q,
     receipts,
     user,
-    searchResults;
+    searchResults, searchSpy;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$q_, Receipts, User) {
@@ -21,13 +21,13 @@ describe('Controller: ReceiptsCtrl', function () {
     searchResults = {
       Receipts: []
     };
-
-    spyOn(Receipts, 'search').andReturn($q.when(searchResults));
+    searchSpy = spyOn(Receipts, 'search').andReturn($q.when(searchResults));
 
     scope = $rootScope.$new();
     ReceiptsCtrl = $controller('ReceiptsCtrl', {
       $scope: scope
     });
+
   }));
 
   describe('getReceiptStatus function', function () {
@@ -128,6 +128,64 @@ describe('Controller: ReceiptsCtrl', function () {
 
   });
 
+  describe('sortBy function', function(){
+
+    it('should set sortField properly', function(){
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual('fieldA');
+
+      scope.sortBy('fieldB');
+      expect(scope.sortField).toEqual('fieldB');
+
+      scope.sortBy('fieldB');
+      expect(scope.sortField).toEqual('fieldB');
+
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual('fieldA');
+    });
+
+    it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeTruthy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldA');
+      expect(scope.sortDescending).toBeFalsy();
+
+      scope.sortBy('fieldA');
+      expect(scope.sortDescending).toBeTruthy();
+
+      scope.sortBy('fieldB');
+      expect(scope.sortDescending).toBeFalsy();
+    });
+
+    it('should call search()', function(){
+      spyOn(scope.receipts, 'search');
+      scope.sortBy('fieldA');
+      expect(scope.receipts.search).toHaveBeenCalled();
+    });
+
+    it('should set receipts.proposedSearchCriteria properties', function(){
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual(scope.receipts.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending).toEqual(scope.receipts.proposedSearchCriteria.sortDesc);
+
+      scope.sortBy('fieldA');
+      expect(scope.sortField).toEqual(scope.receipts.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending).toEqual(scope.receipts.proposedSearchCriteria.sortDesc);
+
+      scope.sortBy('fieldB');
+      expect(scope.sortField).toEqual(scope.receipts.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending).toEqual(scope.receipts.proposedSearchCriteria.sortDesc);
+    });
+
+  });
+
   describe('fetchNextResults function', function () {
 
     it('should not call for data if the paginator indicates it is already at the end', function () {
@@ -139,9 +197,9 @@ describe('Controller: ReceiptsCtrl', function () {
           return true;
         }
       };
-
+      var initialCallCount = searchSpy.callCount;
       scope.receipts.fetchNextResults();
-      expect(receipts.search).not.toHaveBeenCalled();
+      expect(searchSpy.callCount).toEqual(initialCallCount); //.not.toHaveBeenCalled()
       expect(scope.receipts.hitInfiniteScrollMax).toBe(true);
     });
 
@@ -181,6 +239,14 @@ describe('Controller: ReceiptsCtrl', function () {
     });
 
     it('should append new results to the results array', function () {
+
+      // beforeEach runs Receipts.search() when controller is initialized.
+      // This creates a promise which is run asynchronously.
+      // This scope.$apply() forces that promise to finish, while
+      // searchResults.Receipts == []. Otherwise, ['three', 'four']
+      // will be pushed onto scope.receipts.results twice in this test
+      scope.$apply();
+
       scope.receipts.results = ['one', 'two'];
       searchResults.Receipts = ['three', 'four'];
       scope.receipts.fetchNextResults();

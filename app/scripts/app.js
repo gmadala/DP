@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule'])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -30,10 +30,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         hideNavBar: true
       })
 
-      /**
-       * Home State - Parent of Dashboard, Payments, Scheduled Payments,
-       * Receipts and Floorplan states. Routing defaults to Home->Dashboard.
-       */
+    /**
+     * Home State - Parent of Dashboard, Payments, Scheduled Payments,
+     * Receipts and Floorplan states. Routing defaults to Home->Dashboard.
+     */
       .state('home', {
         url: '/home',
         abstract: true,
@@ -46,7 +46,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'DashboardCtrl'
       })
       .state('home.payments', {
-        url: '/payments?filter',
+        url: '/payments',
         templateUrl: 'views/home.payments.html',
         controller: 'PaymentsCtrl'
       })
@@ -61,12 +61,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'ScheduledCtrl'
       })
       .state('home.receipts', {
-        url: '/receipts?search',
+        url: '/receipts',
         templateUrl: 'views/home.receipts.html',
         controller: 'ReceiptsCtrl'
       })
       .state('home.floorplan', {
-        url: '/floorplan?filter',
+        url: '/floorplan',
         templateUrl: 'views/home.floorplan.html',
         controller: 'FloorplanCtrl'
       })
@@ -155,33 +155,36 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout, $cookies, $state) {
     Logout.watch();
 
-    if (nxgConfig.showReloadWarning) {
-      // This prompts the user to confirm before the browser is closed, reloaded, or the user navigates away to another site. Fixes VO-212
-      $window.onbeforeunload = function () {
-        if (User.isLoggedIn()) {
-          return 'If you proceed, your session will end and your payment basket will be cleared.';
-        }
-        else {
-          return;
-        }
-      };
-    }
-
     segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
+
+    // state whose transition was interrupted to ask the user to log in
+    var pendingState = null;
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
-
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
-          var isDealer = User.isDealer();
+          var isDealer = User.isDealer(),
+            authToken = $cookies.authToken;
+
+          if (!User.isLoggedIn() && authToken) {
+            // we're restoring session from saved auth token
+            event.preventDefault();
+            User.reloadSession(authToken).then(
+              function() {
+                $state.transitionTo(toState);
+              }
+            );
+          }
+
           if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
+            pendingState = toState; // save the original state destination to switch back when logged in
             $location.path('/login');
           } else if (User.showInitialization()) {
             // not initialized? lets update the security questions
@@ -200,21 +203,49 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       if (fromState.name) {
         segmentio.page(null, null, {
           path: $location.path(),
-          url: $location.absUrl()
+          url: $location.absUrl(),
+          title: $location.path()
         });
       }
     });
 
-    $rootScope.$on('event:redirectToLogin',
-      function(){
-        // this will clobber everything and redirect to the login page
+    $rootScope.$on('event:switchState',
+      function(event, state) {
+        $location.path(state.url);
+      }
+    );
+
+    $rootScope.$on('event:logout',
+      function() {
+        delete $cookies.authToken;
+        delete $cookies.lastState;
+        // clobber everything and redirect to the login page
         window.location.reload();
       }
     );
 
-    $rootScope.$on('event:redirectToHome',
+    $rootScope.$on('event:redirectToLogin',
       function(){
-        $location.path(User.isDealer() ? '/home' : '/act/home');
+        // save last visited state
+        $cookies.lastState = $state.current.name;
+        // this will clobber everything and redirect to the login page
+        $window.location.hash = '/login';
+      }
+    );
+
+    $rootScope.$on('event:userAuthenticated',
+      function(){
+        if (pendingState) {
+          $state.transitionTo(pendingState.name); // resume transition to the original state destination
+          pendingState = null;
+        }
+        else if ($cookies.lastState) {
+          $state.transitionTo($cookies.lastState); // go back to the last state visited
+          delete $cookies.lastState;
+        }
+        else {
+          $location.path(User.isDealer() ? '/home' : '/act/home');
+        }
       }
     );
 

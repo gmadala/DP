@@ -73,8 +73,8 @@ angular.module('nextgearWebApp')
           Keyword: criteria.query || undefined,
           DueDateStart: api.toShortISODate(criteria.startDate) || undefined,
           DueDateEnd: api.toShortISODate(criteria.endDate) || undefined,
-          OrderBy: 'DueDate',
-          OrderByDirection: 'ASC',
+          OrderBy: criteria.sortField || 'DueDate',
+          OrderByDirection: criteria.sortDesc ? 'DESC' : 'ASC',
           PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
           PageSize: Paginate.PAGE_SIZE_MEDIUM
         };
