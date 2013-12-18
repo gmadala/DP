@@ -64,6 +64,26 @@ angular.module('nextgearWebApp')
       $scope.payments.fetchNextResults();
     };
 
+    $scope.sortField = {};
+    $scope.sortField.fee = 'EffectiveDate'; // Default sort
+    $scope.sortField.payment = 'DueDate'; // Default sort
+    $scope.sortDescending = {};
+
+    $scope.sortBy = function (feeOrPayment, fieldName) {
+      if ($scope.sortField[feeOrPayment] === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending[feeOrPayment] = !$scope.sortDescending[feeOrPayment];
+      } else {
+        $scope.sortField[feeOrPayment] = fieldName;
+        $scope.sortDescending[feeOrPayment] = false;
+      }
+      if (feeOrPayment === 'payment') {
+        $scope.payments.proposedSearchCriteria.sortField = $scope.sortField.payment;
+        $scope.payments.proposedSearchCriteria.sortDesc = $scope.sortDescending.payment;
+        $scope.payments.search();
+      }
+    };
+
     $scope.payments.fetchNextResults = function () {
       var paginator = $scope.payments.paginator,
           promise;

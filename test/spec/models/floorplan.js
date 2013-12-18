@@ -202,10 +202,29 @@ describe('Model: Floorplan', function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should ask for items sorted by most recent first', function () {
+    it('should ask for items sorted by most recent FlooringDate first by default', function () {
       floorplan.search(defaultCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('FlooringDate');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should ask for items sorted by most recent last if sortDesc is set and is false', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = false;
+      floorplan.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('FlooringDate');
+      expect(callParams.OrderByDirection).toBe('ASC');
+    });
+
+    it('should ask for items sorted by an arbitrary column if that column is specified', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = true;
+      tempCriteria.sortField = 'anyGivenField';
+      floorplan.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('anyGivenField');
       expect(callParams.OrderByDirection).toBe('DESC');
     });
 

@@ -94,9 +94,68 @@ describe('Controller: FloorplanCtrl', function () {
 
     });
 
+    describe('sortBy function', function(){
+
+      it('should set sortField properly', function(){
+        scope.sortBy('fieldA');
+        expect(scope.sortField).toEqual('fieldA');
+
+        scope.sortBy('fieldB');
+        expect(scope.sortField).toEqual('fieldB');
+
+        scope.sortBy('fieldB');
+        expect(scope.sortField).toEqual('fieldB');
+
+        scope.sortBy('fieldA');
+        expect(scope.sortField).toEqual('fieldA');
+      });
+
+      it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
+        scope.sortBy('fieldB');
+        expect(scope.sortDescending).toBeFalsy();
+
+        scope.sortBy('fieldB');
+        expect(scope.sortDescending).toBeTruthy();
+
+        scope.sortBy('fieldB');
+        expect(scope.sortDescending).toBeFalsy();
+
+        scope.sortBy('fieldA');
+        expect(scope.sortDescending).toBeFalsy();
+
+        scope.sortBy('fieldA');
+        expect(scope.sortDescending).toBeTruthy();
+
+        scope.sortBy('fieldB');
+        expect(scope.sortDescending).toBeFalsy();
+      });
+
+      it('should call search()', function(){
+        spyOn(scope, 'search');
+        scope.sortBy('fieldA');
+        expect(scope.search).toHaveBeenCalled();
+      });
+
+      it('should set proposedSearchCriteria properties', function(){
+        scope.sortBy('fieldA');
+        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
+        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
+
+        scope.sortBy('fieldA');
+        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
+        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
+
+        scope.sortBy('fieldB');
+        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
+        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
+      });
+
+    });
+
     it('should attach a fetchNextResults function to the scope', function () {
       expect(typeof scope.fetchNextResults).toBe('function');
     });
+
 
     describe('fetchNextResults function', function () {
 

@@ -62,6 +62,10 @@ describe('Controller: PaymentsCtrl', function () {
     expect(typeof scope.getDueStatus).toBe('function');
   });
 
+  it('should attach a sortBy function to the scope', function () {
+    expect(typeof scope.sortBy).toBe('function');
+  });
+
   describe('getDueStatus function', function () {
 
     var clock;
@@ -133,6 +137,84 @@ describe('Controller: PaymentsCtrl', function () {
 
     it('should call for data with no paginator to start at beginning', function () {
       expect(modelMock.search).toHaveBeenCalledWith(scope.payments.searchCriteria, null);
+    });
+
+  });
+
+  describe('sortBy function', function(){
+
+    var testSortField = function(feeOrPayment){
+      it('should set sortField properly', function(){
+        scope.sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
+
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
+
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
+
+        scope.sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
+      });
+
+      it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
+
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
+        expect()
+        scope.sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+      });
+    };
+
+    testSortField('payment');
+    testSortField('fee');
+
+    it('should not have fee and payment sorting interfere', function(){
+      scope.sortBy('payment', 'fieldA');
+      expect(scope.sortField['payment']).toEqual('fieldA');
+
+      scope.sortBy('fee', 'fieldB');
+      expect(scope.sortField['fee']).toEqual('fieldB');
+      expect(scope.sortField['payment']).toEqual('fieldA');
+    });
+
+    it('should call search() for payment search', function(){
+      spyOn(scope.payments, 'search');
+      scope.sortBy('payment', 'fieldA');
+      expect(scope.payments.search).toHaveBeenCalled();
+    });
+
+    it('should not call search() for fee search', function(){
+      spyOn(scope.payments, 'search');
+      scope.sortBy('fee', 'fieldA');
+      expect(scope.payments.search).not.toHaveBeenCalled();
+    });
+
+    it('should set proposedSearchCriteria properties', function(){
+      scope.sortBy('payment', 'fieldA');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+
+      scope.sortBy('payment', 'fieldA');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+
+      scope.sortBy('payment', 'fieldB');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
     });
 
   });

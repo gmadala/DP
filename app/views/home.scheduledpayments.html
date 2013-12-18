@@ -31,10 +31,20 @@
         <ul class="unstyled">
           <li class="table-list-head">
             <div class="cell sch-more"></div>
-            <div class="cell sch-schDate">Scheduled On</div>
-            <div class="cell sch-desc">Description</div>
-            <div class="cell sch-status">Status</div>
-            <div class="cell sch-amount">Amount</div>
+            <div class="cell sch-schDate sortable"
+                 ng-click="sortBy('ScheduledForDate')"
+                 ng-class="{ sorted : sortField == 'ScheduledForDate', desc : sortDescending }">
+              Scheduled On
+            </div>
+            <div class="cell sch-desc">
+              Description
+            </div>
+            <div class="cell sch-status">
+              Status
+            </div>
+            <div class="cell sch-amount">
+              Amount
+            </div>
           </li><!-- end .table-list-head -->
 
           <li class="table-list-row" ng-repeat="pay in scheduledPayments.results">

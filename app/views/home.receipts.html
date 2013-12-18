@@ -23,13 +23,37 @@
 
         <ul class="unstyled">
           <li class="table-list-head">
-            <div class="cell rec-num">Receipt #</div>
-            <div class="cell rec-status">Status</div>
-            <div class="cell rec-payDate">Payment Date</div>
-            <div class="cell rec-payInfo">Payment Description</div>
-            <div class="cell rec-amtApplied">Amount Applied</div>
-            <div class="cell rec-amtProvided">Amount Provided</div>
-            <div class="cell rec-view">Receipt</div>
+            <div class="cell rec-num sortable"
+                 ng-click="sortBy('TransactionNumber')"
+                 ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
+              Receipt #
+            </div>
+            <div class="cell rec-status">
+              Status
+            </div>
+            <div class="cell rec-payDate sortable"
+                 ng-click="sortBy('CreateDate')"
+                 ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
+              Payment Date
+            </div>
+            <div class="cell rec-payInfo sortable"
+                 ng-click="sortBy('PaymentMethod')"
+                 ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
+              Payment Description
+            </div>
+            <div class="cell rec-amtApplied sortable"
+                 ng-click="sortBy('AmountApplied')"
+                 ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
+              Amount Applied
+            </div>
+            <div class="cell rec-amtProvided sortable"
+                 ng-click="sortBy('AmountProvided')"
+                 ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
+              Amount Provided
+            </div>
+            <div class="cell rec-view">
+              Receipt
+            </div>
           </li>
 
           <li class="table-list-row" ng-repeat="receipt in receipts.results">

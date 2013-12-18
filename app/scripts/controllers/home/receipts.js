@@ -64,6 +64,23 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.sortField = 'CreateDate'; // Default sort
+
+    $scope.sortBy = function (fieldName) {
+      if ($scope.sortField === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending = !$scope.sortDescending;
+      } else {
+        $scope.sortField = fieldName;
+        $scope.sortDescending = false;
+      }
+
+      $scope.receipts.proposedSearchCriteria.sortField = $scope.sortField;
+      $scope.receipts.proposedSearchCriteria.sortDesc = $scope.sortDescending;
+
+      $scope.receipts.search();
+    };
+
     $scope.receipts.resetSearch = function (initialKeyword) {
       $scope.receipts.proposedSearchCriteria = {
         query: initialKeyword || null,
@@ -73,6 +90,8 @@ angular.module('nextgearWebApp')
       };
       $scope.receipts.search();
     };
+
+    $scope.receipts.resetSearch($stateParams.search);
 
     // filters (by payment method) are data-driven - wait for them to be available post-login
     var unwatch = $scope.$watch(function () { return User.getStatics(); }, function (statics) {

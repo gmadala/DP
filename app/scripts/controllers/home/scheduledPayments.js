@@ -67,7 +67,9 @@ angular.module('nextgearWebApp')
             this.searchCriteria.query,
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
-            this.searchCriteria.filter);
+            this.searchCriteria.filter,
+            $scope.sortField,
+            $scope.sortDescending);
 
         promise.then(
           function(results) {
@@ -87,7 +89,9 @@ angular.module('nextgearWebApp')
           query: null,
           startDate: null,
           endDate: null,
-          filter: ScheduledPaymentsSearch.FILTER_BY_ALL
+          filter: ScheduledPaymentsSearch.FILTER_BY_ALL,
+          sortField: null,
+          sortDesc: true
         };
         this.search();
       },
@@ -138,6 +142,19 @@ angular.module('nextgearWebApp')
         };
         $dialog.dialog(dialogOptions).open();
       }
+    };
+
+    $scope.sortField = 'ScheduledForDate'; // Default sort
+
+    $scope.sortBy = function (fieldName) {
+      if ($scope.sortField === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending = !$scope.sortDescending;
+      } else {
+        $scope.sortField = fieldName;
+        $scope.sortDescending = false;
+      }
+      $scope.scheduledPayments.search();
     };
 
     $scope.scheduledPayments.resetSearch();
