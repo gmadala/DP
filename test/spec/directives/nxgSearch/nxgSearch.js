@@ -116,10 +116,9 @@ describe('Directive: nxgSearch', function () {
     });
 
     describe('clear function', function () {
-
       it('should call the onClear function', function () {
         scope.onClear = jasmine.createSpy('onClear');
-        scope.clear();
+        scope.clear({preventDefault: angular.noop});
         expect(scope.onClear).toHaveBeenCalled();
       });
 

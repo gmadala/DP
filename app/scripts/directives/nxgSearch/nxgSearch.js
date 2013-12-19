@@ -47,7 +47,8 @@ angular.module('nextgearWebApp')
       $scope.onSearch();
     };
 
-    $scope.clear = function () {
+    $scope.clear = function ($event) {
+      $event.preventDefault();
       $scope.onClear();
     };
 
