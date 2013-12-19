@@ -24,18 +24,18 @@ angular.module('nextgearWebApp')
           weekends: false,
           weekMode: 'liquid',
           header: {
-            left: 'prev',
-            center: '',
-            right: 'today, next'
+            left: 'prev, today',
+            center: 'title',
+            right: 'next'
           },
           contentHeight: 150,
           titleFormat: {
-            month: 'MMM yyyy',
-            week: ''
+            month: 'MMMM yyyy',
+            week: 'MMMM yyyy'
           },
           columnFormat: {
             month: '<b>ddd</b>',
-            week: '<b>ddd</b> <b>MMM d, yyyy</b>'
+            week: '<b>ddd</b>'
           },
           viewDisplay: function(view) {
             // prevent navigation into the past
@@ -53,11 +53,6 @@ angular.module('nextgearWebApp')
               var dayTitle = angular.element(value);
               dayTitle.html(dayTitle.text());
             });
-            //Inject month string into calendar header.
-            if ($scope.options.defaultView !== 'basicWeek') {
-              angular.element('.nxg-cal-month-name').remove();
-              angular.element('.fc-header-right').prepend('<h4 class=\"nxg-cal-month-name\">' + moment(view.start).format('MMMM YYYY') + '</h4>');
-            }
           },
           dayRender: function(date, cell) {
             var dateKey = angular.isString(date) ? date : $filter('date')(date, 'yyyy-MM-dd');
@@ -72,6 +67,13 @@ angular.module('nextgearWebApp')
               cell.addClass('has-events');
             } else {
               cell.removeClass('has-events');
+            }
+
+            // make sure week view gets date numbers and no cells get duplicates
+            if (angular.element(cell).find('.fc-day-number').length === 0) {
+              var d = moment(angular.element(cell).attr('data-date')).date();
+
+              angular.element(cell).find('div > .fc-day-content').before('<div class="fc-day-number">' + d + '</div>');
             }
           },
           eventRender: function(event, element/*, view*/) {

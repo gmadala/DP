@@ -2,48 +2,51 @@
 
   <div class="row-fluid">
     <!-- Calendar -->
-    <div class="span9 nxg-dash-calendar-container" >
-      <div class="nxg-dash-calendar-header">
-        <h4 class="nxg-cal-header">Upcoming Payments</h4>
-        <div class="nxg-fancy-radios">
-          <input type="radio" class="first" name="{{ 'h-' + viewMode }}" id="week" value="week" ng-model="viewMode" placeholder="This Week">
-          <label for="week" id="week-label"></label>
-          <input type="radio" class="last" name="{{ 'h-' + viewMode }}" id="month" value="month" ng-model="viewMode" placeholder="This Month">
-          <label for="month" id="month-label"></label>
-        </div>
-      </div>
-      <div nxg-upcoming-calendar display="viewMode" data="dashboardData.calendarData"></div>
-
-      <div class="nxg-dash-calendar-header" ng-show="viewMode == 'month'">
-        <div class="nxg-fancy-radios">
-          <input type="radio" class="first" name="{{ 'f-' + viewMode }}" id="week" value="week" ng-model="viewMode" placeholder="This Week">
-          <label for="week" id="week-label"></label>
-          <input type="radio" class="last" name="{{ 'f-' + viewMode }}" id="month" value="month" ng-model="viewMode" placeholder="This Month">
-          <label for="month" id="month-label"></label>
+    <div class="span9 nxg-dash-calendar-container well" >
+      <h4>Upcoming Payments</h4>
+      <div class="well-out">
+        <div class="nxg-dash-calendar-header">
+          <div class="nxg-fancy-radios">
+            <input type="radio" class="first" name="{{ 'h-' + viewMode }}" id="week" value="week" ng-model="viewMode" placeholder="This Week">
+            <label for="week" id="week-label"></label>
+            <input type="radio" class="last" name="{{ 'h-' + viewMode }}" id="month" value="month" ng-model="viewMode" placeholder="This Month">
+            <label for="month" id="month-label"></label>
+          </div>
         </div>
 
-        <!-- To add footer controls -->
-        <table class="fc-header" style="width:100%">
-          <tbody>
-            <tr>
-              <td class="fc-header-left">
-                <span class="fc-button fc-button-prev fc-state-default fc-corner-left fc-corner-right" ng-class="{ 'fc-state-disabled': isPast() }" unselectable="on" ng-click="onClickPrev()">
-                  <span class="fc-text-arrow">‹</span>
-                </span>
-              </td>
-              <td class="fc-header-center"></td>
-              <td class="fc-header-right">
-                <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right" ng-class="{ 'fc-state-disabled': isPast() }" ng-click="onClickToday()" unselectable="on">today</span>
-                <span class="fc-header-space"></span>
-                <span class="fc-button fc-button-next fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickNext()">
-                  <span class="fc-text-arrow">›</span>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- end footer controls -->
-      </div>
+        <div nxg-upcoming-calendar display="viewMode" data="dashboardData.calendarData"></div>
+
+        <div class="nxg-dash-calendar-header fc bottom" ng-show="viewMode == 'month'">
+          <div class="nxg-fancy-radios">
+            <input type="radio" class="first" name="{{ 'f-' + viewMode }}" id="f-week" value="week" ng-model="viewMode" placeholder="This Week">
+            <label for="f-week" id="week-label"></label>
+            <input type="radio" class="last" name="{{ 'f-' + viewMode }}" id="f-month" value="month" ng-model="viewMode" placeholder="This Month">
+            <label for="f-month" id="month-label"></label>
+          </div>
+
+          <!-- To add footer controls -->
+          <table class="fc-header" style="width:100%">
+            <tbody>
+              <tr>
+                <td class="fc-header-left">
+                  <span class="fc-button fc-button-prev fc-state-default fc-corner-left fc-corner-right" ng-class="{ 'fc-state-disabled': isPast() }" unselectable="on" ng-click="onClickPrev()">
+                    <span class="fc-text-arrow">‹</span>
+                  </span>
+                  <span class="fc-header-space"></span>
+                  <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right" ng-class="{ 'fc-state-disabled': isPast() }" ng-click="onClickToday()" unselectable="on">today</span>
+                </td>
+                <td class="fc-header-center"></td>
+                <td class="fc-header-right">
+                  <span class="fc-button fc-button-next fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickNext()">
+                    <span class="fc-text-arrow">›</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- end footer controls -->
+        </div>
+      </div><!-- end .well-out -->
     </div><!-- end .nxg-dash-calendar-container -->
 
     <!-- Payment Summary -->

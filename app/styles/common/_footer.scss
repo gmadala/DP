@@ -27,8 +27,8 @@ body {
 .nxg-main-container {
   min-height: 100%;
   overflow: hidden;
-  /* equal to footer height */
-  margin-bottom: -50px;
+  /* equal to footer height plus some extra spacing */
+  margin-bottom: -40px;
 }
 
 .nxg-main:after {
