@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric) {
+  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api) {
 
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
@@ -30,4 +30,17 @@ angular.module('nextgearWebApp')
       $scope.chartData = Dashboard.fetchFloorplanChartData(range);
 
     });
+
+    $scope.viewDisbursementDetail = function(date) {
+      var strUrl = api.contentLink('/report/disbursementdetail/' + date + ('/Disbursements-' + date /*filename*/), {});
+
+      window.open(
+        strUrl,
+        '_blank'  // open a new window every time
+      );
+
+      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
+        reportName: 'Disbursement Detail'
+      });
+    };
   });

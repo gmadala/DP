@@ -47,10 +47,11 @@
             <td>{{ dis.DisbursementDate | moment }}</td>
             <td>#{{ dis.DisbursementNumber }}</td>
             <td><strong>{{ dis.DisbursementAmount | currency }}</strong></td>
+            <td><a href="javascript:false;" ng-click="viewDisbursementDetail(dis.DisbursementDate)">View</a></td>
           </tr>
         </tbody>
       </table>
-      <a href="#/act/reports" class="btn btn-primary">View Disbursement Reports</a>
+      <a href="#/act/reports" class="btn btn-primary">Previous Reports</a>
     </div>
   </div>
 </div>
