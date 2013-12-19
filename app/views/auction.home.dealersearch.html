@@ -1,8 +1,8 @@
 <div class="row-fluid two-col dealer-search">
-  <form name="numberSearchForm" novalidate>
-    <div class="span8 well adjacent">
-      <h4>Dealer Number Search</h4>
-      <div class="well-out">
+  <div class="span8 well adjacent">
+    <h4>Dealer Number Search</h4>
+    <div class="well-out">
+      <form name="numberSearchForm" novalidate>
         <p>
           If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search.
         </p>
@@ -60,16 +60,16 @@
         <div class="form-footer">
           <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()">Search</button>
         </div>
-      </div>
-    </div><!-- end first well -->
-  </form>
+      </form>
+    </div>
+  </div><!-- end first well -->
 
-  <form name="nameSearchForm" novalidate>
-      <div class="span8 well adjacent">
-        <h4>Dealer Name Search</h4>
-        <div class="well-out">
+  <div class="span8 well adjacent">
+      <h4>Dealer Name Search</h4>
+      <div class="well-out">
+          <form name="nameSearchForm" novalidate>
           <p>
-            To look up a dealer in Dealer search, use a combination of their name and City or State.
+            To look up a dealer in Dealer search, use a combination of their Name and City or State.
           </p>
           <div class="control-group">
             <label for="dealer-name" class="control-label input-title">Dealer Name</label>
@@ -106,13 +106,13 @@
           </div><!-- end second .control-group -->
 
            <label class="text-error" ng-show="nameSearch.invalid.CityOrState">
-            Please enter a city or select a State.
+            Please enter a City or select a State.
           </label>
           <hr/>
           <div class="form-footer">
             <button class="btn btn-primary" type="submit" ng-click="nameSearch.search()">Search</button>
           </div>
-        </div>
-      </div><!-- end second well -->
-  </form>
+        </form>
+      </div>
+    </div><!-- end second well -->
 </div>
