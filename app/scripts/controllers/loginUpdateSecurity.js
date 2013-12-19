@@ -57,9 +57,27 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions);
-      User.setShowUserInitialization(false);
-      $location.path('/home');
+      if (!$scope.updateSecurity.email.$error) {
+        $scope.updateSecurity.email.$error = {};
+      }
+      $scope.updateSecurity.email.$error.correctEmail = false;
+
+      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions)
+        .then(function() {
+          //success
+          User.setShowUserInitialization(false);
+          $location.path('/home');
+        },
+        function(response) {
+          //failure
+          // If the error is NOT because of a connection issue, supress
+          // the popup and show the incorrect email message instead.
+          if (response.text.indexOf('Unable to communicate') === -1) {
+            response.dismiss();
+            $scope.updateSecurity.email.$error.correctEmail = true;
+          }
+        });
+
     };
 
     $scope.cancel = function() {

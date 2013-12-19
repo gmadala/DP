@@ -26,6 +26,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     };
 
     SettingsMock = {
+      toSucceed: true,
       get: function() {
         return {
           then: function(success) {
@@ -33,7 +34,23 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
           }
         };
       },
-      saveSecurityAnswersAndEmail: noop
+      saveSecurityAnswersAndEmail: function(){
+        var toSucceed = this.toSucceed;
+        return {
+          then: function(success, failure) {
+            if (toSucceed) {
+              success({});
+            } else {
+              failure({
+                debug: "POST url",
+                dismiss: function(){},
+                text: "Email Address entered does not match email address on file at NextGear for user",
+                title: "Error"
+              });
+            }
+          }
+        };
+      }
     };
 
     userData = [
@@ -133,10 +150,11 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     });
 
     it('should call methods with the correct params', function() {
-      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail');
+      SettingsMock.toSucceed = true; // tell the SettingsMock to succeed at submitting the form
+      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
       spyOn(UserMock, 'setShowUserInitialization');
-
       scope.submitForm();
+      scope.$apply();
       expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
         { SecurityQuestionId: 1, Answer: 'Blue Lagoon'},
         { SecurityQuestionId: 3, Answer: 'Harry Potter'},
@@ -144,6 +162,18 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       ]);
 
       expect(UserMock.setShowUserInitialization).toHaveBeenCalledWith(false);
+    });
+
+    it('should call methods and fail', function() {
+      SettingsMock.toSucceed = false; // tell the SettingsMock to fail at submitting the form
+      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
+      spyOn(UserMock, 'setShowUserInitialization');
+      scope.submitForm();
+      scope.$apply();
+      expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalled();
+
+      expect(UserMock.setShowUserInitialization).not.toHaveBeenCalled();
+      expect(scope.updateSecurity.email.$error.correctEmail).toEqual(true);
     });
 
   });
