@@ -12,7 +12,7 @@
        </select>
        <label for="inputColor" class="text-error"
               ng-show="validity.inputColor.$error.required">
-         Please select a Color
+         Please select a Color.
        </label>
 
        <label for="inputMileage" class="input-title">Mileage</label>
@@ -25,15 +25,15 @@
               nxg-deformat-number/>
        <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.required">
-          Please enter the Mileage
+          Please enter the Mileage.
        </label>
        <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.pattern">
-          Please enter a numeric value
+          Please enter a numeric value.
        </label>
        <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.maxlength">
-          Please enter a value less than 1,000,000 miles
+          Please enter a value less than 1,000,000 miles.
         </label>
 
        <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
@@ -45,7 +45,7 @@
        </select>
        <label for="inputTitleHolder" class="text-error"
               ng-show="validity.inputTitleHolder.$error.required">
-         Please select who has the title
+         Please select who has the title.
        </label>
 
        <label for="consignerTicket" class="input-title">Consigner Ticket Number</label>
@@ -55,7 +55,7 @@
               required/>
         <label for="consignerTicket" class="text-error"
                ng-show="validity.consignerTicket.$error.required">
-          Please enter a Consigner Ticket Number
+          Please enter a Consigner Ticket Number.
         </label>
 
         <label for="inputLotNum" class="input-title">Lot Number</label>
@@ -65,7 +65,7 @@
               required/>
         <label for="inputLotNum" class="text-error"
                ng-show="validity.inputLotNum.$error.required">
-          Please enter the Lot Number
+          Please enter the Lot Number.
         </label>
 
       </div>
@@ -84,7 +84,7 @@
         </span>
         <label for="inputBuyer" class="text-error"
                ng-show="validity.inputBuyer.$error.nxgRequires">
-          Please look up a Buyer
+          Please look up a Buyer.
         </label>
 
         <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
@@ -98,15 +98,15 @@
                  ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength }" />
           <label for="inputPurchaseAmt" class="text-error"
                  ng-show="validity.inputPurchaseAmt.$error.required">
-            Please enter the Purchase Amount
+            Please enter the Purchase Amount.
           </label>
           <label for="inputPurchaseAmt" class="text-error"
                  ng-show="validity.inputPurchaseAmt.$error.pattern">
-            Please enter a numeric value with no <br> special characters, such as a dollar sign
+            Please enter a numeric value with no <br> special characters, such as a dollar sign.
           </label>
             <label for="inputPurchaseAmt" class="text-error"
                  ng-show="validity.inputPurchaseAmt.$error.maxlength">
-                  Please enter a value less than $1,000,000,000,000
+                  Please enter a value less than $1,000,000,000,000.
           </label>
         </div>
 
@@ -118,15 +118,15 @@
                ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) }" />
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.required">
-          Please enter a Valid Sales Date
+          Please enter a Valid Sales Date.
         </label>
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.date">
-          Please enter a Valid Sales Date
+          Please enter a Valid Sales Date.
         </label>
         <label for="inputSaleDate" class="text-error"
                ng-show="validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required">
-          Please enter a valid non-future date
+          Please enter a valid non-future date.
         </label>
         <p class="scale-description">
           The actual sale date must be used when flooring a car
@@ -147,7 +147,7 @@
         </select>
         <label for="inputDisburseAcct" class="text-error"
                ng-show="validity.inputDisburseAcct.$error.required">
-          Please select a Bank Account for Disbursement
+          Please select a Bank Account for Disbursement.
         </label>
 
         <div class="footer modal-footer">
