@@ -115,13 +115,13 @@
             <div class="control-group half">
               <label class="control-label" for="disDate">Date</label>
               <div class="controls">
-      					<input id="disDate" name="disDate" nxg-date-field before-show-day="notFutureDates(date)" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required }" required />
+      					<input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past }" required />
               </div>
               <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
-                 Please select a Valid Date
+                 Please select a Valid Date.
               </label>
-              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.date">
-  	             Please select a Valid Date
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past">
+  	             Please select a Date in the past.
               </label>
   					</div><!-- end .control-group -->
 
