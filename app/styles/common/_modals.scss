@@ -194,6 +194,13 @@
   }
 }
 
+/*
+ When a modal is open, stop the body from being able to scroll
+ */
+body.modal-open {
+  overflow: hidden;
+}
+
 @media print {
   /*
    When printing, hide anything that's behind a modal, position the modal at the top left,
