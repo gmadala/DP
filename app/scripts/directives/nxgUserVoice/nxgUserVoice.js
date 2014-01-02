@@ -9,8 +9,14 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('UserVoiceCtrl', function($rootScope, $scope) {
-    var UserVoice = window.UserVoice || [];
+  .controller('UserVoiceCtrl', function($rootScope, $scope, User) {
+    var UserVoice = window.UserVoice || [],
+        isDealer = User.isDealer(),
+        // check user type, dealers and auctions will have different subdomains to go to
+        forumId = isDealer ? 233296 : 'xxxxxx',
+        customTemplateId = isDealer ? 21815 : 'xxxxxxx';
+
+
 
     $scope.showClassicWidget = function() {
       UserVoice.push(['showLightbox', 'classic_widget', {
@@ -18,8 +24,8 @@ angular.module('nextgearWebApp')
         'primary_color': '#135889', // $brand
         'link_color': '#1864A1', // $brand-text
         'default_mode': 'support',
-        'forum_id': 233296,
-        'custom_template_id': 21815, // custom stylesheet editable on nextgearcapital.uservoice.com/admin
+        'forum_id': forumId,
+        'custom_template_id': customTemplateId, // custom stylesheet editable on nextgearcapital.uservoice.com/admin
         'support_tab_name': 'Technical Support'
       }]);
     };
