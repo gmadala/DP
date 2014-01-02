@@ -11,6 +11,11 @@ angular.module('nextgearWebApp')
 
     return {
       fetchDealerDashboard: function (startDate, endDate) {
+
+        // When fetching a month it also grabs the first day of the next month.
+        // This line prevents that from happening.
+        endDate = moment(endDate).subtract('days', 1).toDate();
+
         startDate = api.toShortISODate(startDate);
         endDate = api.toShortISODate(endDate);
 
