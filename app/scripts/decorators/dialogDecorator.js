@@ -37,15 +37,15 @@ angular.module('nextgearWebApp')
             return deferred.promise;
           };
 
-          // dialog._addElementsToDom = function() {
-          //   body.append(this.backdropEl);
-          //   body.append(this.modalEl);
-          // };
+          dialog._addElementsToDom = function() {
+            body.append(this.backdropEl);
+            body.append(this.modalEl);
+          };
 
-          // dialog._removeElementsFromDom = function() {
-          //   this.modalEl.remove();
-          //   this.backdropEl.remove();
-          // };
+          dialog._removeElementsFromDom = function() {
+            this.modalEl.remove();
+            this.backdropEl.remove();
+          };
 
           dialog.close = function () {
             currentlyOpen = _.reject(currentlyOpen, dialog);
