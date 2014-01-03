@@ -31,7 +31,8 @@ angular.module('nextgearWebApp')
       },
       navLinks: function() {
         return User.isDealer() ? dealerLinks : auctionLinks;
-      }
+      },
+      homeLink: User.isDealer() ? '#/home' : '#/act/home'
     };
 
     // If current state includes the activeWhen property for the given link,
