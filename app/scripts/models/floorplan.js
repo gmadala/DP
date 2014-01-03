@@ -38,7 +38,7 @@ angular.module('nextgearWebApp')
           data.UnitStyle = null;
         }
 
-        return api.request('POST', '/floorplan/create', data);
+        return api.request('POST', '/floorplan/v1_1/create', data);
       },
       filterValues: {
         ALL: 'pending,approved,completed,denied,paidNo,paidYes,titleNo,titleYes',
