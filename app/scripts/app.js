@@ -192,7 +192,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {
             // user is trying to access a state that's not appropriate to their role; redirect to their home
             event.preventDefault();
-            $location.path(isDealer ? '/home' : '/act/home');
+            // If auction user, go to /act/home. On page load, isDealer is null, but assume
+            // that still means it's a dealer until API call corrects this.
+            $location.path(isDealer || isDealer === null ? '/home' : '/act/home');
           }
         }
 
