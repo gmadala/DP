@@ -96,6 +96,16 @@ angular.module('nextgearWebApp')
         messageBox: function(title, message, buttons) {
           var msgBox = new OriginalMessageBox(title, message, buttons);
 
+          msgBox._addElementsToDom = function() {
+            body.append(this.backdropEl);
+            body.append(this.modalEl);
+          };
+
+          msgBox._removeElementsFromDom = function() {
+            this.modalEl.remove();
+            this.backdropEl.remove();
+          };
+
           msgBox.modalEl.addClass('nxg-autofocus');
           $delegate.enforceFocus.call(msgBox);
           return msgBox;
