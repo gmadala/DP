@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService) {
+  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService, banner) {
 
     $scope.credentials = {
       username: '',
@@ -48,13 +48,11 @@ angular.module('nextgearWebApp')
     };
 
     // load banner information
-    $http.get('banner.txt').success(
-      function(data, status) {
-        if (data && status === 200) {
-          $scope.bannerText = data;
-          console.log('bannerText =' + data);
+    banner.fetch(function(text) {
+        if (text) {
+          $scope.bannerText = text;
         }
-        $scope.showBanner = !!data; // cast to bool
+        $scope.showBanner = !!text; // cast to bool
       }
     );
 
