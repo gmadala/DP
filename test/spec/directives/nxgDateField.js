@@ -10,7 +10,7 @@ describe('Directive: nxgDateField', function () {
     scope = $rootScope;
     scope.bar = new Date();
     element = angular.element('<form name="form">' +
-      '<input name="dateInput" id="foo" ng-model="bar" nxg-date-field />' +
+      '<input name="dateInput" id="foo" ng-model="bar" nxg-date-field required />' +
       '</form>');
     element = $compile(element)(scope);
     scope.$digest();
@@ -29,6 +29,24 @@ describe('Directive: nxgDateField', function () {
     var value = new Date(2013, 0, 1);
     scope.form.dateInput.$setViewValue(value);
     expect(scope.bar).toBe(value);
+  });
+
+  it('should transfer required attribute to input', function () {
+    expect(element.find('input').attr('required')).toBeDefined();
+  });
+
+  describe('edge case', function () {
+
+    it('should fill current date on keydown enter if empty', function () {
+      scope.bar = undefined;
+      var input = element.find('input');
+      input.val('');
+      input.trigger($.Event( "keydown", { keyCode: 13 } ));
+      scope.$digest();
+      expect(scope.bar).toBeDefined();
+      expect(moment(new Date()).diff(scope.bar, 'days')).toEqual(0);
+    });
+
   });
 
   describe('notFutureDates functionality', function () {
