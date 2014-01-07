@@ -36,10 +36,14 @@
                  ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
               Stock #
             </div>
-            <div class="cell fl-status">
+            <div class="cell fl-status sortable"
+                 ng-click="sortBy('Status')"
+                 ng-class="{ sorted : sortField == 'Status', desc : sortDescending }">
               Status
             </div>
-            <div class="cell fl-purchaseDate">
+            <div class="cell fl-purchaseDate sortable"
+                 ng-click="sortBy('PurchaseDate')"
+                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
               Purchased
             </div>
             <div class="cell fl-floorDate sortable"
@@ -52,7 +56,9 @@
                  ng-class="{ sorted : sortField == 'SellerBusinessName', desc : sortDescending }">
               Seller
             </div>
-            <div class="cell fl-lastPayDate">
+            <div class="cell fl-lastPayDate sortable"
+                 ng-click="sortBy('LastPaymentDate')"
+                 ng-class="{ sorted : sortField == 'LastPaymentDate', desc : sortDescending }">
               Last Payment
             </div>
             <div class="cell fl-titleRelease">
