@@ -34,8 +34,13 @@
     }
   }
 
-  .sortable::before, .sortable::after {
-    right: 6px;
+  .sortable {
+    &::before{
+      top: 3px;
+    }
+    &::after {
+      top: 11px;
+    }
   }
 }
 

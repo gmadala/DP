@@ -93,20 +93,30 @@ describe('Model: dashboard', function () {
         }
       });
 
-      httpBackend.whenGET(/^\/payment\/possiblePaymentDates\/.*$/).respond({
-        "Success": true,
-        "Message": null,
-        "Data": [
-          "2013-08-01",
-          "2013-08-05",
-          "2013-08-06",
-          "2013-08-07",
-          "2013-08-08",
-          "2013-08-09"
-        ]
+      httpBackend.whenGET(/^\/payment\/possiblePaymentDates\/.*$/).respond(function(method, url) {
+
+        var urlParts = url.split('/');
+        var startDate = moment(urlParts[urlParts.length-2]);
+        var endDate = moment(urlParts[urlParts.length-1]);
+
+        var data = [];
+        while(startDate.isBefore(endDate) || startDate.isSame(endDate)){
+          if(!(startDate.day() === 0 || startDate.day() === 6)) {
+            data.push(startDate.format('YYYY-MM-DD'));
+          }
+          startDate.add('days', 1);
+        }
+
+        return [
+          200, JSON.stringify({
+            "Success": true,
+            "Message": null,
+            "Data": data
+          }), {}
+        ];
       });
 
-      dashboard.fetchDealerDashboard(new Date(), new Date()).then(function (results) {
+      dashboard.fetchDealerDashboard(moment('2013-08-01').toDate(), moment('2013-08-10').toDate()).then(function (results) {
         resultData = results;
       }, function (error) {
         throw new Error('request failed');
@@ -215,11 +225,12 @@ describe('Model: dashboard', function () {
     it('should create the expected openDates on calendarData', function () {
       var expected = {
         '2013-08-01': true,
+        '2013-08-02': true,
         '2013-08-05': true,
         '2013-08-06': true,
         '2013-08-07': true,
         '2013-08-08': true,
-        '2013-08-09': true
+        '2013-08-09': true // Not including the last day in the range
       };
 
       expect(angular.equals(resultData.calendarData.openDates, expected)).toBe(true);

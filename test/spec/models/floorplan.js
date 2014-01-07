@@ -30,7 +30,7 @@ describe('Model: Floorplan', function () {
       };
 
     beforeEach(function () {
-      httpBackend.expectPOST('/floorplan/create')
+      httpBackend.expectPOST('/floorplan/v1_1/create')
         .respond(function (method, url, data) {
           // capture the request data that was sent for examination
           sentData = angular.fromJson(data);

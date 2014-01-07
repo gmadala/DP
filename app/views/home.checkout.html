@@ -75,7 +75,7 @@
                 <div class="cell pay-pymt">
                   <p>{{ payment.amount | currency }}</p>
                   <button class="btn btn-mini btn-block"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)"  
+                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
                           ng-disabled="submitInProgress">
                     Remove Payment
                   </button>
@@ -94,7 +94,7 @@
     </div><!-- end .checkout-list -->
   </section><!-- end .span9 -->
 
-  <form class="span3 well checkout-summary" name="paymentForm" novalidate>
+  <form class="span3 well checkout-summary sticky" name="paymentForm" novalidate nxg-sticky>
     <h4>Payment Summary</h4>
     <div class="well-out">
       <p>Review the Summary and submit your payments and scheduled payments.</p>

@@ -27,6 +27,12 @@
     width: 230px;
   }
 
+  &.payments, &.schPayments {
+    .search-date-range {
+      width: 221px;
+    }
+  }
+
   .keyword {
     padding-right: 10px;
     border-right: 1px solid $border;

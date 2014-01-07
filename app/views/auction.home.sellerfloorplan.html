@@ -1,7 +1,7 @@
 <div nxg-search
      title="Floor Plan Search"
      class="search-form"
-     prompt="Enter VIN"
+     prompt="Enter VIN, Make, Model, or Year"
      filter-label="Filter List by Status"
      filter-options="filterOptions"
      active-criteria="proposedSearchCriteria"
@@ -11,7 +11,7 @@
 
 <div ng-switch="data.results.length > 0 || data.loading">
   <p class="no-results" ng-switch-when="false">
-    Sorry, no results found. Please try a new search.
+    Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
   </p>
   <section class="selfloor-list"
            ng-switch-when="true"
@@ -53,8 +53,8 @@
         <div class="cell selfloor-title">
           <p>
             <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle" ng-model="item.$sellerHasTitle" />
-            <a class="btn btn-mini" ng-hide="!item.TitleEditable || item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, true)">I Have It</a>
-            <a class="btn btn-mini" ng-show="item.TitleEditable && item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, false)">I Don't Have It</a>
+            <button class="btn btn-mini" ng-hide="!item.TitleEditable || item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, true)">I Have It</button>
+            <button class="btn btn-mini" ng-show="item.TitleEditable && item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, false)">I Don't Have It</button>
             <a ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}"
                nxg-track="{{ metric.VIEW_TITLE }}"
                target="_blank">

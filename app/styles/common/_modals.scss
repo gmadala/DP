@@ -6,6 +6,7 @@
 
 .modal-backdrop {
   @include opacity(50);
+  z-index: 1050;
 }
 
 .modal {
@@ -100,7 +101,7 @@
     vertical-align: middle;
     text-transform: uppercase;
     font-weight: normal;
-    padding: 6px 18px 6px 6px;
+    padding: 6px 6px 6px 6px;
   }
 
   td, th {
@@ -141,57 +142,66 @@
   }
 }
 
-.up-arrow {
-  border-top: transparent;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-bottom: 6px solid white;
-}
-
-.down-arrow {
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 6px solid white;
-  border-bottom: transparent;
-}
-
 .sortable {
   position: relative;
   cursor: pointer;
 
-  &::before, &::after {
+  &::before {
     content: '';
+    display: block;
     @include box(0);
-    position: absolute;
-    right: -10px;
+    float: right;
+    position: relative;
+    top:0px;
+    left: 1px;
     border: 0;
-    margin: 3px 0 0;
+    margin: 0;
   }
 
-  &:hover {
-    &::before {
-      @extend .up-arrow;
-    }
+   &::after {
+    content: '';
+    display: block;
+    @include box(0);
+    float: right;
+    position: relative;
+    top: 7px;
+    left: 7px;
+    border: 0;
+    margin: 0;
+  }
+
+  &::before {
+    @include up-arrow(false);
+  }
+  &::after {
+    @include down-arrow(false);
   }
 
   &.sorted {
     &::before {
-      @extend .up-arrow;
+      @include up-arrow(true);
     }
     &::after {
-      border: 0;
+      @include down-arrow(false);
     }
+
 
     &.desc {
       &::before {
-        border: 0;
+        @include up-arrow(false);
       }
       &::after {
-        @extend .down-arrow;
-        margin-top: 5px;
+        @include down-arrow(true);
       }
     }
   }
+}
+
+/*
+ When a modal is open, stop the body from being able to scroll
+ */
+body.modal-open {
+  overflow: hidden;
 }
 
 @media print {

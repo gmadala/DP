@@ -37,6 +37,16 @@ angular.module('nextgearWebApp')
             return deferred.promise;
           };
 
+          dialog._addElementsToDom = function() {
+            body.append(this.backdropEl);
+            body.append(this.modalEl);
+          };
+
+          dialog._removeElementsFromDom = function() {
+            this.modalEl.remove();
+            this.backdropEl.remove();
+          };
+
           dialog.close = function () {
             currentlyOpen = _.reject(currentlyOpen, dialog);
             originalClose.apply(dialog, arguments);
@@ -70,19 +80,31 @@ angular.module('nextgearWebApp')
 
             if (which.modalEl!== e.target && !which.modalEl.has(e.target).length) {
               // focus on first focusable element inside modal
-              var focusable = which.modalEl.find('input, button, select, a.btn').first();
+              var focusable = which.modalEl.find('input, button, select, a:visible').first();
 
-              // sometimes one works, sometimes the other.
-              focusable[0].focus();
-              $timeout(function() {
+              if(focusable.length > 0){
+                // sometimes one works, sometimes the other.
                 focusable[0].focus();
-              }, 10);
+                $timeout(function() {
+                  focusable[0].focus();
+                }, 10);
+              }
             }
           });
         },
 
         messageBox: function(title, message, buttons) {
           var msgBox = new OriginalMessageBox(title, message, buttons);
+
+          msgBox._addElementsToDom = function() {
+            body.append(this.backdropEl);
+            body.append(this.modalEl);
+          };
+
+          msgBox._removeElementsFromDom = function() {
+            this.modalEl.remove();
+            this.backdropEl.remove();
+          };
 
           msgBox.modalEl.addClass('nxg-autofocus');
           $delegate.enforceFocus.call(msgBox);

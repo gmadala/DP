@@ -25,6 +25,14 @@ angular.module('nextgearWebApp')
           element.find('input').attr('ng-pattern', attrs.ngPattern);
         }
 
+        if(attrs.dateAllow === 'past') {
+          attrs.beforeShowDay = 'notFutureDates(date)';
+          element.attr('before-show-day', 'notFutureDates(date)');
+        } else if (attrs.dateAllow === 'future') {
+          attrs.beforeShowDay = 'notPastDates(date)';
+          element.attr('before-show-day', 'notPastDates(date)');
+        }
+
         // link function
         return {
           pre: function (scope, element, attrs, formCtrl) {
@@ -37,6 +45,7 @@ angular.module('nextgearWebApp')
 
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
+                  //for invalid format dates, parse with the moment library
                   if (err.$name === inputName) {
                     utcVal = moment(element.find('input').val()).toDate();
                     formCtrl[inputName].$setViewValue(utcVal);
@@ -73,16 +82,28 @@ angular.module('nextgearWebApp')
               }
             });
 
-            scope.notFutureDates = function(date) {
-              var today = new Date();
-              var dupDate = new Date(date);
+            if (attrs.dateAllow === 'past') {
+              scope.$watch(attrs.ngModel, function(newValue) {
+                formCtrl[inputName].$setValidity('past', scope.notFutureDates(newValue), formCtrl[inputName]);
+              });
+            } else if (attrs.dateAllow === 'future') {
+              scope.$watch(attrs.ngModel, function(newValue) {
+                formCtrl[inputName].$setValidity('future', scope.notPastDates(newValue), formCtrl[inputName]);
+              });
+            }
 
-              // This ensures that today is never considered in
-              // the past, depending on when the time of the passed
-              // date is relative to the current time
-              today.setHours(0,0,0,0);
-              dupDate.setHours(0,0,0,0);
-              return today >= dupDate;
+            scope.notFutureDates = function(date) {
+              if (date !== date || !date) { // Stop NaN or null from getting into the function
+                return true;
+              }
+              return !(moment().isBefore(moment(date), 'day'));
+            };
+
+            scope.notPastDates = function(date) {
+              if (date !== date || !date) { // Stop NaN or null from getting into the function
+                return true;
+              }
+              return !(moment().isAfter(moment(date), 'day'));
             };
 
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"

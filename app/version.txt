@@ -1,26 +1,34 @@
-NextGear Capital v1.2.0
+NextGear Capital v1.2.1
 =================================
 
 Fixes included in this release:
 
-VO-562 - User is not able to remove payment after click on "submit payment".
-VO-561 - IE9-Auction User > Bulk Flooring > Keyboard “Tab” Key is not proper tabbing when user looks up for “VIN”.
-VO-560 - Web: Browser Back Button doesn't work once user is on "Welcome" Page.
-VO-559 - Web: "Scheduled Payment” > Keyboard "Enter" key is not working on date range search.
-VO-556 - Web: Login Page > By-default Cursor should get display in "Username" Field.
-VO-557 - Web: Bulk Flooring > Mandatory fields - Validation message text, full-stop is missing from the end of the sentences.
-VO-554 - Web: Auction User > Dealer Search > "dealer name", "state" and "name" text should be "Dealer Name", "State" and "Name" in error message and content.
-VO-555 - Web: Auction User > Dealer Search > Dealer Name Search > "City" field should not accept numeric and special character value, some validation must be applied.
-VO-553 - Web: Auction User > Dealer Search > "dealer number" Should be "Dealer Number" in both error message and Content.
-VO-534 - Web: Date validation message is not getting displayed when "From" date is later than the "To" date under "Schedule Payments" , "Receipt" & "Floor Plan".
-VO-533 - Web: Calendar Button is not working in the date field when user clicks into the field a second time.
-VO-532 - Duplicate page names for web app in ChartBeat analytics
-VO-531 - Web: IE 9 - Date Fields - Place-Holder Text (MM/DD/YYYY) is not getting displayed as it is displayed on other browsers.
-VO-523 - Web: Dealer & Auction ==> View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker.
-VO-522 - Web: Tab View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker.
-VO-217 - Tabbing for Floor a Car using Invalid VIN
-VO-226 - EUI site doesn't remember where user was when login expires
-VO-542 - Maintain user session across browser refresh
-VO-535 - Web: Dealer Search > While searching for Dealer by name and hitting "Enter" - Focus is not proper.
-VO-506 - Assembla: Payments ==> Payment Summary = should be sticky & follow user as they scroll down page
-VO-380 - Bookmarking doesn't work with New Site
+VO-652	Dealer calendar month view has incorrect styles on the first day of next month
+VO-617	Web: "Home" > Resources > Tab Key is not highlighting all buttons and clickable area on the screen.
+VO-616	Web: "View Analytics" > Unable to select all options on View Analytics Page using "Tab" key.
+VO-615	Web: "View A Report" > Tab Key is not highlighting all buttons and clickable area on the screen in Safari Browser.
+VO-614	Web: Safari > Floor A Car > Unable to select all options on Floor Plan Page using "Tab" key.
+VO-612	Web: Browser Back button is not working on Home Screen once page is reloaded.
+VO-610	Web: "Welcome" Screen is getting displayed again and again for the same user.
+VO-609	Web: Login Screen > Username Suggestion box is not getting displayed properly.
+VO-608	Web: Safari > Tab Key is not working on "Login" Screen except for "Username" and "Password" field.
+VO-607	Web: "Home" > Schedule Payment > Tab Key is not highlighting all buttons and clickable area on the screen.
+VO-593	Seller Side Floor Plan Search says 'Enter Vin' when you can search by make and model
+VO-577	Mobile: Payments Checkout > Drop down arrow symbol is missing from "Select Bank" drop down.
+VO-568	Web: Auction User - "Bulk Flooring" - Buyer Search pop up - Close & Cancel buttons are not working.
+VO-567	Web: View Analytics - "Your Top Auctions" pop up window - user is able to scroll background inactive page.
+VO-566	Web: Confirm Flooring Request Pop Up - Hyperlink "View Vehicle Verification Checklist" is not getting highlighted/selected when "Tab" key is used.
+VO-565	Web: Dealer User - "Floor A Car" - Seller Search pop up - Close & Cancel buttons are not working.
+VO-564	Web: Auction User- "Bulk Flooring" Tooltip auto closing issue when another pop up is opened.
+VO-563	Web: Auction User- No Easy way to get back on "Floor Plan" Summary screen when no result found.
+VO-560	Web: Browser Back Button doesn't work once user is on "Welcome" Page. (Assembla #1217)
+VO-557	Web: Bulk Flooring > Mandatory fields - Validation message text, full-stop is missing from the end of the sentences. (Assembla #1223)
+VO-554	Web: Auction User > Dealer Search > "dealer name", "state" and "name" text should be "Dealer Name", "State" and "Name" in error message and content. (Assembla #1220)
+VO-525	Web: Upcoming Payments - Week & Month Views --> UPDATED DESIGN (Assembla #1204)
+VO-523	Web: Dealer & Auction ==> View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker. (Assembla #1155 & #1158)
+VO-522	Web: Tab View a Report>Disbursement Detail section: User is able to select the future dates from "Date Search" date picker. (Assembla #1155)
+VO-506	Assembla: Payments ==> Payment Summary = should be sticky & follow user as they scroll down page
+VO-482	EUI/V.O. Downtime Notification/MOTD Service
+VO-288	Wireframe Shows Disbursements on Auction Dashboard should have link to reports and a View Option
+VO-217	Tabbing for Floor a Car using Invalid VIN
+VO-189	Allow Browsers to Auto-Suggest User Name

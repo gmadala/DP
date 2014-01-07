@@ -14,7 +14,7 @@ describe('Controller: LoginCtrl', function () {
     scope = $rootScope.$new();
 
     var httpBackend = $injector.get('$httpBackend');
-    httpBackend.when('GET', 'banner.txt').respond('foo');
+    httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg').respond('foo');
 
     localStorageService = {
       value: {},

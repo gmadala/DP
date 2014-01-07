@@ -3,6 +3,22 @@
 .nxg-dash-calendar-container {
   background-color: $gray-e;
   position: relative;
+
+  &.well {
+    padding: 0;
+    border: 0;
+
+    h4 {
+      padding: 14px 0 0 14px;
+      margin: 0 0 14px;
+    }
+
+    .well-out {
+      margin: 0;
+      border: 0;
+      padding: 1px 0 0;
+    }
+  }
 }
 
 .fc-view {
@@ -14,12 +30,8 @@
   }
 }
 
-.fc-view-month {
-  .fc-day {
-    &.closed {
-      cursor: default;
-    }
-  }
+.fc-view-month .fc-day.closed {
+  cursor: default;
 }
 
 .fc-view {
@@ -30,6 +42,10 @@
 
 .fc-day {
   height: 179px;
+}
+
+.fc-grid {
+  border: 0;
 }
 
 .fc-grid .fc-day-number {
@@ -58,9 +74,7 @@
 
   b:first-child {
     @extend %float-l;
-    font-weight: normal;
   }
-  font-weight: normal;
 }
 
 .nxg-upcoming-detail {
@@ -147,19 +161,31 @@
   font-size: 38px;
 }
 
-.fc-header .fc-button.fc-button-prev {
-  padding: 0 15px 0 14px;
+.fc-header .fc-button{
+  &.fc-button-prev {
+    padding: 0 15px 0 14px;
 
-  &.fc-state-disabled {
-    margin: 0px 0px 0px 1px;
-    border-right: 1px solid $border;
-    @include box-shadow(white 1px 0 0);
+    &.fc-state-disabled {
+      margin: 0;
+      @include box-shadow(white 1px 0 0);
+    }
+  }
+
+  &.fc-button-next {
+    padding: 0 14px 0 15px;
+  }
+
+  &.fc-button-next, &.fc-button-next.fc-state-disabled,
+  &.fc-button-prev, &.fc-button-prev.fc-state-disabled {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 0;
+
+    .nxg-dash-calendar-header.bottom & {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
   }
 }
 
-.fc-button-next {
-  padding: 0 14px 0 15px;
-}
 
 .fc-header .fc-button {
   color: $brand-light;
@@ -196,7 +222,7 @@
   padding: 0;
   border: 0;
   border-bottom: 1px solid;
-  margin: 3px 0;
+  margin: 12px 0;
 
   &:hover {
     color: $gray-8;
@@ -212,6 +238,14 @@
 .nxg-dash-calendar-header {
   position: relative;
 
+  &.bottom {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+
+    td {
+      padding-top: 1px;
+    }
+  }
+
   label {
     display: inline-block;
     margin: 0;
@@ -219,11 +253,10 @@
   }
 
   .nxg-fancy-radios {
-    top: 6px;
-    left: 50%;
     position: absolute;
+    top: 8px;
+    right: 40px;
     width: 150px;
-    margin-left: -75px;
   }
 }
 
@@ -233,6 +266,15 @@
   position: absolute;
 }
 
+.fc-header-title h2 {
+  font-weight: 200;
+  color: $gray-8;
+  font-size: 17.5px;
+  line-height: 20px;
+  padding: 14px 0 0 14px;
+  margin: 0 0 14px;
+}
+
 .nxg-cal-header {
   @extend %thin;
   top: 4px;
@@ -240,19 +282,16 @@
   position: absolute;
 }
 
-.fc-button-today {
-  position: absolute;
-  top: 12px;
-  right: 59px;
-}
-
 #foo:checked,
-.nxg-fancy-radios input[type="radio"]#week + label::before {
+.nxg-fancy-radios input[type="radio"]#week + label::before,
+.nxg-fancy-radios input[type="radio"]#f-week + label::before
+ {
   content: 'Week';
 }
 
 #foo:checked,
-.nxg-fancy-radios input[type="radio"]#month + label::before {
+.nxg-fancy-radios input[type="radio"]#month + label::before,
+.nxg-fancy-radios input[type="radio"]#f-month + label::before {
   content: 'Month';
 }
 

@@ -26,7 +26,7 @@ describe('Model: Settings', function() {
       }
     ];
 
-    httpBackend.whenPOST('/UserAccount/usersettings').respond({
+    httpBackend.whenPOST('/UserAccount/setupNewUser').respond({
       Success: true,
       Message: null,
       Data: null
@@ -36,7 +36,7 @@ describe('Model: Settings', function() {
   describe('saveSecurityAnswersAndEmail method', function() {
 
     it('should make the expected POST request', function () {
-      httpBackend.expectPOST('/UserAccount/usersettings');
+      httpBackend.expectPOST('/UserAccount/setupNewUser');
       settings.saveSecurityAnswersAndEmail(emailStub, securityAnswersStub);
       expect(httpBackend.flush).not.toThrow();
     });

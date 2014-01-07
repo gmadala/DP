@@ -1,20 +1,20 @@
 // PAYMENTS
 
 .fees .table-list-head {
-  background-color: $gray-a;
+  background-color: #999;
 }
 
 .cell {
   &.fee-type { @extend %quarter-width; }
   &.fee-desc { @extend %quarter-width; }
-  &.fee-due { width: 13%; }
-  &.fee-posted { width: 15%; }
+  &.fee-due { width: 12%; }
+  &.fee-posted { width: 16%; }
   &.fee-amt { width: 22%; }
 
   &.pay-more { width: 4%; }
   &.pay-desc { width: 32%; }
-  &.pay-due { width: 12%; }
-  &.pay-status { width: 16%; }
+  &.pay-due { width: 13%; }
+  &.pay-status { width: 15%; }
   &.pay-payment-amt { width: 15%; }
   &.pay-payoff-amt { width: 15%; }
   &.pay-title { width: 6%; }
@@ -223,3 +223,9 @@
     }
   }
 }
+
+.sticky, .well.sticky {
+  margin-bottom: 0;
+}
+
+
