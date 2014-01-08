@@ -122,8 +122,8 @@
             <label for="inputPurchaseDate" class="input-title">Purchase Date</label>
             <input id="inputPurchaseDate" name="inputPurchaseDate" ng-model="data.UnitPurchaseDate"
                    ng-pattern="isYear"
-                   nxg-date-field before-show-day="isValidSaleDate(date)"
-                   required nxg-requires="isValidSaleDate(data.UnitPurchaseDate)"  ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) }"/>
+                   nxg-date-field date-allow="past"
+                   required ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) || validity.inputPurchaseDate.$error.past }"/>
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.required">
               Please enter a Valid Purchase Date.
@@ -131,14 +131,14 @@
             <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.date">
               Please enter a Valid Purchase Date.
-            </label> 
+            </label>
            <label for="inputPurchaseDate" class="text-error"
                    ng-show="validity.inputPurchaseDate.$error.pattern">
               Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
-            </label>            
+            </label>
             <label for="inputPurchaseDate" class="text-error"
-                   ng-show="validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required">
-              Please enter a valid non-future date.
+                   ng-show="validity.inputPurchaseDate.$error.past">
+              Please enter a Purchase Date in the past.
             </label>
 
             <label for="inputCreditLine" class="input-title">Line of Credit</label>
