@@ -7,9 +7,9 @@
 .cell {
   &.fee-type { @extend %quarter-width; }
   &.fee-desc { @extend %quarter-width; }
-  &.fee-due { width: 12%; }
+  &.fee-due { width: 13%; }
   &.fee-posted { width: 16%; }
-  &.fee-amt { width: 22%; }
+  &.fee-amt { width: 21%; }
 
   &.pay-more { width: 4%; }
   &.pay-desc { width: 32%; }

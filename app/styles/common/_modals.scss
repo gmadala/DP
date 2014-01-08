@@ -142,61 +142,6 @@
   }
 }
 
-.sortable {
-  position: relative;
-  cursor: pointer;
-
-  &::before {
-    content: '';
-    display: block;
-    @include box(0);
-    float: right;
-    position: relative;
-    top:0px;
-    left: 1px;
-    border: 0;
-    margin: 0;
-  }
-
-   &::after {
-    content: '';
-    display: block;
-    @include box(0);
-    float: right;
-    position: relative;
-    top: 7px;
-    left: 7px;
-    border: 0;
-    margin: 0;
-  }
-
-  &::before {
-    @include up-arrow(false);
-  }
-  &::after {
-    @include down-arrow(false);
-  }
-
-  &.sorted {
-    &::before {
-      @include up-arrow(true);
-    }
-    &::after {
-      @include down-arrow(false);
-    }
-
-
-    &.desc {
-      &::before {
-        @include up-arrow(false);
-      }
-      &::after {
-        @include down-arrow(true);
-      }
-    }
-  }
-}
-
 /*
  When a modal is open, stop the body from being able to scroll
  */
