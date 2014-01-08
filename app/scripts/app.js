@@ -231,7 +231,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         // save last visited state
         $cookies.lastState = $state.current.name;
         // this will clobber everything and redirect to the login page
-        $window.location.hash = '/login';
+        window.location.reload();
       }
     );
 
