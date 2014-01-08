@@ -25,17 +25,20 @@
 			  <input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" ng-required="isRange" ng-class="{ 'nxg-invalid': form.paidOffRangeEnd.$error.required }" />
 	    </div>
 		</div>
+
 	</div><!-- end range of stock numbers -->
 
   <!-- Stock Number Range Errors -->
-  <label for="paidOffRangeStart" class="text-error"
-    ng-show="form.paidOffRangeStart.$error.required">
-    Please enter a Start Stock Number
-  </label>
-  <label for="paidOffRangeEnd" class="text-error"
-  ng-show="form.paidOffRangeEnd.$error.required">
-    Please enter an End Stock Number
-  </label>
+  <div ng-show="isRange">
+    <label for="paidOffRangeStart" class="text-error"
+      ng-show="form.paidOffRangeStart.$error.required">
+      Please enter a Start Stock Number
+    </label>
+    <label for="paidOffRangeEnd" class="text-error"
+    ng-show="form.paidOffRangeEnd.$error.required">
+      Please enter an End Stock Number
+    </label>
+  </div>
   <!-- end errors -->
 
 	<!-- Specific stock number conditional field. -->
