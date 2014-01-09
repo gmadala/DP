@@ -16,12 +16,11 @@ angular.module('nextgearWebApp')
     }
 
     function resetSessionTimeout(ob, debug) {
-      var SESSION_TIMEOUT_INTERVAL = 900000; // 15 minutes
       if (sessionTimeout) { $timeout.cancel(sessionTimeout); }
       sessionTimeout = $timeout(function(){
         $timeout.cancel(sessionTimeout);
         if (ob.hasAuthToken()) { onSessionTimeout(ob, debug); }
-      }, SESSION_TIMEOUT_INTERVAL);
+      }, nxgConfig.sessionTimeoutMs);
     }
 
     return {

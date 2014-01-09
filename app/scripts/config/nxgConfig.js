@@ -19,6 +19,7 @@ angular.module('nextgearWebApp')
         apiBase: apiDomain + '/MobileService/api',
         apiDomain: apiDomain,
         segmentIoKey: segmentIoKey,
-        infiniteScrollingMax: 500
+        infiniteScrollingMax: 500,
+        sessionTimeoutMs: 900000 // 15 minutes
       };
   });
