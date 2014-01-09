@@ -58,9 +58,9 @@
         <div class="cell selfloor-title-loc">{{ item.TitleLocation }}</div>
         <div class="cell selfloor-title">
           <p>
-            <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle" ng-model="item.$sellerHasTitle" />
-            <button class="btn btn-mini" ng-hide="!item.TitleEditable || item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, true)">I Have It</button>
-            <button class="btn btn-mini" ng-show="item.TitleEditable && item.TitleLocation == 'Seller'" ng-click="sellerHasTitle(item, false)">I Don't Have It</button>
+            <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle" ng-model="item.$sellerHasTitle" ng-click="sellerHasTitle(item, item.$sellerHasTitle)"  ng-hide="item.TitleImageAvailable"/>
+            <label for="{{ item.FloorplanId }}"  ng-hide="item.TitleImageAvailable">I Have the Title</label>
+
             <a ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}"
                nxg-track="{{ metric.VIEW_TITLE }}"
                target="_blank">
