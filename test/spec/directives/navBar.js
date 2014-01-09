@@ -7,6 +7,7 @@ describe('Directive: navBar', function () {
 
   describe('controller', function () {
     var scope,
+      rootScope,
       state,
       userMock = {
         isDealer: function(){ return true; },
@@ -18,6 +19,7 @@ describe('Directive: navBar', function () {
       };
 
     beforeEach(inject(function ($rootScope, $controller, $state) {
+      rootScope = $rootScope;
       scope = $rootScope.$new();
       state = $state;
 
@@ -43,13 +45,13 @@ describe('Directive: navBar', function () {
         expect(typeof scope.user.info).toBe('function');
       });
 
-      it('should have a logout function that returns the user to the login page', function() {
-        spyOn(state, 'transitionTo').andCallThrough();
+      it('should have a logout function that dispatches a userRequestedLogout event', function() {
+        spyOn(rootScope, '$emit');
         expect(scope.user.logout).toBeDefined();
         expect(typeof scope.user.logout).toBe('function');
 
-        var res = scope.user.logout();
-        expect(state.transitionTo).toHaveBeenCalledWith('login');
+        scope.user.logout();
+        expect(rootScope.$emit).toHaveBeenCalledWith('event:userRequestedLogout');
       });
 
       it('should have a navLinks function that returns appropriate dealer or auction links', function() {

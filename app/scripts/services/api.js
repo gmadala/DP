@@ -7,11 +7,14 @@ angular.module('nextgearWebApp')
         sessionTimeout = null;
 
     function onSessionTimeout(ob, debug) {
+      if (sessionHasTimedOut) {
+        return null; // we've already handled this
+      }
+
       var expiredSessionError = 'Your session expired due to inactivity. Please log in again.';
       sessionHasTimedOut = true;
-      ob.resetAuthToken();
       return messages.add(expiredSessionError, debug + '401 error', null, function() {
-        $rootScope.$broadcast('event:redirectToLogin');
+        $rootScope.$emit('event:forceLogout');
       });
     }
 
@@ -64,9 +67,7 @@ angular.module('nextgearWebApp')
               }
               else {
                 if(response.data.Message === '401') {
-                  if (!sessionHasTimedOut) {
-                    error = onSessionTimeout(self, debug);
-                  }
+                  error = onSessionTimeout(self, debug);
                 }
                 else {
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);

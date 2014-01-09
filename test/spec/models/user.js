@@ -302,6 +302,16 @@ describe('Model: User', function () {
 
   });
 
+  describe('dropSession method', function () {
+    it('should reset the auth token immediately', function () {
+      api.setAuthToken('foo');
+
+      user.dropSession();
+      expect(user.isLoggedIn()).toBe(false);
+      expect(api.hasAuthToken()).toBe(false);
+    });
+  });
+
   describe('refreshStatics + getStatics methods', function () {
 
     var resultData;

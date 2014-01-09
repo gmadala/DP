@@ -1,14 +1,14 @@
 'use strict';
 
-/**
- * Watch for user logout attempts (either explicitly via Sign Out button, or implicitly e.g.
- * by hitting back button from first state after login), and hold them pending user confirmation
- */
 angular.module('nextgearWebApp')
-  .factory('Logout', function($rootScope, $dialog, $state, User) {
+  .factory('LogoutGuard', function($rootScope, $dialog, $state, User) {
 
     return {
-      watch: function() {
+      /**
+       * Watch for implicit user logout attempts (e.g. by hitting back button from first state after login)
+       * and convert them into a proper logout command that we can handle
+       */
+      watchForLogoutAttemptByURLState: function() {
         $rootScope.$on('$stateChangeStart',
           function(event, toState, toParams, fromState) {
             if (toState.name === 'login' && User.isLoggedIn()) {
@@ -20,27 +20,11 @@ angular.module('nextgearWebApp')
                * Newer versions of Angular provide with better ways to address this.
                */
               $state.transitionTo(fromState);
-              $dialog.closeAll();
-              $dialog.dialog({
-                templateUrl: 'views/modals/confirmLogout.html',
-                controller: 'ConfirmLogoutCtrl'
-              }).open();
+              $rootScope.$emit('event:userRequestedLogout');
             }
           }
         );
       }
     };
-  })
 
-  .controller('ConfirmLogoutCtrl', function($rootScope, $scope, dialog, User) {
-    $scope.close = function(confirmed) {
-      if (confirmed) {
-        User.logout().then(function () {
-          dialog.close(confirmed);
-          $rootScope.$broadcast('event:logout');
-        });
-      } else {
-        dialog.close(confirmed);
-      }
-    };
   });

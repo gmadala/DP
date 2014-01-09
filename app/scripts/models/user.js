@@ -96,14 +96,24 @@ angular.module('nextgearWebApp')
       },
 
       logout: function() {
+        var self = this;
         return api.request('GET', '/userAccount/logout').then(function (result) {
-          api.resetAuthToken();
+          self.dropSession();
           return result;
         }, function (/*error*/) {
           // ignore the error and proceed - we can still log out locally, the server is on its own
-          api.resetAuthToken();
+          self.dropSession();
           return null;
         });
+      },
+
+      /**
+       * This should only be used in cases where we know the session is already toast.
+       * Normally, you'd call logout() instead, which will try to clean it up server side
+       * and then call this function
+       */
+      dropSession: function() {
+        api.resetAuthToken();
       },
 
       refreshStatics: function() {

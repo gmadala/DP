@@ -155,8 +155,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout, $cookies, $state) {
-    Logout.watch();
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookies, $state, $dialog) {
+    LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
 
@@ -211,19 +211,31 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       }
     });
 
-    $rootScope.$on('event:logout',
+    $rootScope.$on('event:userRequestedLogout',
       function() {
-        delete $cookies.lastState;
-        // clobber everything and redirect to the login page
-        window.location.reload();
+        $dialog.closeAll();
+        $dialog.dialog({
+          keyboard: false,
+          backdropClick: false,
+          templateUrl: 'views/modals/confirmLogout.html',
+          controller: 'ConfirmLogoutCtrl'
+        }).open().then(function(confirmed) {
+          // dialog controller did User.logout() so it could block until that finished
+          if (confirmed) {
+            delete $cookies.lastState;
+            // clobber everything and start over at login page
+            window.location.reload();
+          }
+        });
       }
     );
 
-    $rootScope.$on('event:redirectToLogin',
+    $rootScope.$on('event:forceLogout',
       function(){
+        User.dropSession();
         // save last visited state
         $cookies.lastState = $state.current.name;
-        // this will clobber everything and redirect to the login page
+        // clobber everything and start over at login page
         $window.location.hash = '/login';
         window.location.reload();
       }

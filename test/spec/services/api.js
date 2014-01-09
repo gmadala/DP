@@ -135,13 +135,13 @@ describe('Service: api', function () {
       expect(success).not.toHaveBeenCalled();
     });
 
-    it('should reject the promise with a newly added message service object and reset the auth token on 401', function () {
+    it('should reject the promise on 401 with a message that emits a forceLogout event when dismissed', function () {
       httpBackend.whenGET('/foo').respond({
         Success: false,
         Data: {},
         Message: '401'
       });
-      spyOn(rootScope, '$broadcast').andReturn(true)
+      spyOn(rootScope, '$emit').andReturn(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.setAuthToken('foo');
@@ -150,8 +150,9 @@ describe('Service: api', function () {
       httpBackend.flush();
       expect(messages.list().length).toBe(1);
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
-      expect(api.hasAuthToken()).toBe(false);
       expect(success).not.toHaveBeenCalled();
+      messages.list()[0].dismiss();
+      expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
     });
 
     it('should reject the promise with a newly added message service object upon invalid response', function () {
