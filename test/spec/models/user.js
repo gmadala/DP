@@ -295,9 +295,9 @@ describe('Model: User', function () {
       httpBackend.flush();
       expect(user.isLoggedIn()).toBe(false);
       expect(api.hasAuthToken()).toBe(false);
-      expect(success).not.toHaveBeenCalled();
-      expect(failure).toHaveBeenCalled();
-      expect(failure.mostRecentCall.args[0].text).toBe('already logged out');
+      expect(success).toHaveBeenCalled();
+      expect(success.mostRecentCall.args[0]).toEqual(null);
+      expect(failure).not.toHaveBeenCalled();
     });
 
   });

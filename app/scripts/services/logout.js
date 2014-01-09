@@ -30,10 +30,13 @@ angular.module('nextgearWebApp')
 
   .controller('ConfirmLogoutCtrl', function($rootScope, $scope, dialog, User) {
     $scope.close = function(confirmed) {
-      dialog.close(confirmed);
       if (confirmed) {
-        User.logout();
-        $rootScope.$broadcast('event:logout');
+        User.logout().then(function () {
+          dialog.close(confirmed);
+          $rootScope.$broadcast('event:logout');
+        });
+      } else {
+        dialog.close(confirmed);
       }
     };
   });

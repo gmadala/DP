@@ -99,9 +99,10 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/userAccount/logout').then(function (result) {
           api.resetAuthToken();
           return result;
-        }, function (error) {
+        }, function (/*error*/) {
+          // ignore the error and proceed - we can still log out locally, the server is on its own
           api.resetAuthToken();
-          return $q.reject(error);
+          return null;
         });
       },
 
