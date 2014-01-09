@@ -96,8 +96,13 @@ angular.module('nextgearWebApp')
       },
 
       logout: function() {
-        api.resetAuthToken();
-        return api.request('GET', '/userAccount/logout');
+        return api.request('GET', '/userAccount/logout').then(function (result) {
+          api.resetAuthToken();
+          return result;
+        }, function (error) {
+          api.resetAuthToken();
+          return $q.reject(error);
+        });
       },
 
       refreshStatics: function() {
