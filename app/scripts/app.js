@@ -213,7 +213,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:logout',
       function() {
-        delete $cookies.authToken;
         delete $cookies.lastState;
         // clobber everything and redirect to the login page
         window.location.reload();
