@@ -6,14 +6,7 @@ angular.module('nextgearWebApp')
     return {
       fetch: function(callback) {
 
-        var domain = '';
-
-        // Only add 'http://' when calling API, not when using mock data
-        if(nxgConfig.apiDomain.length > 0){
-          domain = 'http://' + nxgConfig.apiDomain;
-        }
-
-        var bannerLocation = domain + '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg';
+        var bannerLocation = nxgConfig.apiDomain + '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg';
 
         var httpConfig = {
           method: 'GET',

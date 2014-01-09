@@ -1,21 +1,24 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .value('nxgConfig', {
+  .factory('nxgConfig', function(){
+
     // Test
-    apiBase: 'https://test.discoverdsc.com/MobileService/api',
-    apiDomain: 'test.discoverdsc.com',
-    segmentIoKey: 'sb06a2jbvj',
+    var apiDomain = 'https://test.discoverdsc.com';
+    var segmentIoKey = 'sb06a2jbvj';
 
     // Training (Hotfix Testbed)
-    //apiBase: 'https://training.discoverdsc.com/MobileService/api',
-    //apiDomain: 'training.discoverdsc.com',
-    //segmentIoKey: 'sb06a2jbvj',
+    //var apiDomain = 'https://training.discoverdsc.com';
+    //var segmentIoKey = 'sb06a2jbvj';
 
     // Production
-    //apiBase: 'https://customer.nextgearcapital.com/MobileService/api',
-    //apiDomain: 'customer.nextgearcapital.com',
-    //segmentIoKey: '9eaffv4cbe',
+    //var apiDomain = 'https://customer.nextgearcapital.com';
+    //var segmentIoKey = '9eaffv4cbe';
 
-    infiniteScrollingMax: 500
+    return {
+        apiBase: apiDomain + '/MobileService/api',
+        apiDomain: apiDomain,
+        segmentIoKey: segmentIoKey,
+        infiniteScrollingMax: 500
+      };
   });

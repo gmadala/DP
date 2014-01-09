@@ -20,11 +20,17 @@
            nxg-infinite-scroll-show-indicator="data.loading">
     <ul class="unstyled">
       <li class="table-list-head">
-        <div class="cell selfloor-descr">Vehicle</div>
+        <div class="cell selfloor-descr sortable"
+                 ng-click="sortBy('UnitMake')"
+                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">Vehicle</div>
         <div class="cell selfloor-stat">Status</div>
-        <div class="cell selfloor-dates">Dates</div>
+        <div class="cell selfloor-dates sortable"
+                 ng-click="sortBy('FlooringDate')"
+                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">Dates</div>
         <div class="cell selfloor-purch">Purchase Amount</div>
-        <div class="cell selfloor-buy">Buyer</div>
+        <div class="cell selfloor-buy sortable"
+                 ng-click="sortBy('BuyerBusinessName')"
+                 ng-class="{ sorted : sortField == 'BuyerBusinessName', desc : sortDescending }">Buyer</div>
         <div class="cell selfloor-ticket-num">Ticket #</div>
         <div class="cell selfloor-title-loc">Title Location</div>
         <div class="cell selfloor-title">Title</div>
