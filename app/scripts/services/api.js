@@ -37,6 +37,7 @@ angular.module('nextgearWebApp')
       resetAuthToken: function() {
         // clear saved token
         delete $cookies.authToken;
+        delete $http.defaults.headers.common.Authorization;
         authToken = null;
       },
       hasAuthToken: function() {
