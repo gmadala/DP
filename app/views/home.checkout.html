@@ -180,6 +180,7 @@
         <label for="bankAccount">Account</label>
         <select name="bankAccount" id="bankAccount"
                 ng-model="bankAccounts.selectedAccount"
+                ng-disabled="submitInProgress"
                 ng-options="account.BankAccountName for account in bankAccounts.getList()"
                 ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }"
                 required>
