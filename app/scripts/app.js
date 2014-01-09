@@ -158,7 +158,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
   .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, Logout, $cookies, $state) {
     Logout.watch();
 
-    segmentio.load(nxgConfig.segmentIoKey); // re-enable when ready to turn on analytics for everyone
+    segmentio.load(nxgConfig.segmentIoKey);
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
@@ -210,12 +210,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         });
       }
     });
-
-    $rootScope.$on('event:switchState',
-      function(event, state) {
-        $location.path(state.url);
-      }
-    );
 
     $rootScope.$on('event:logout',
       function() {
