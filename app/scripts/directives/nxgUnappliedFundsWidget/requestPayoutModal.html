@@ -48,14 +48,14 @@
   </div>
   <div class="modal-footer">
     <!-- not in wireframes, but user needs some way to back out that's more obvious than Esc key -->
-    <button class="btn btn-small btn-secondary left-align"
-            type="submit"
-            ng-disabled="submitInProgress"
-            ng-click="cancel()">Cancel</button>
-    <button class="btn btn-small btn-primary left-align"
+
+    <button class="btn btn-small btn-primary"
             ng-class="{'btn-primary': form.$valid}"
             type="submit"
             ng-disabled="submitInProgress"
             ng-click="submit()">Request Payout</button>
+    <button class="btn btn-small btn-secondary left-align"
+            ng-disabled="submitInProgress"
+            ng-click="cancel()">Cancel</button>
   </div>
 </form>

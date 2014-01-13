@@ -142,6 +142,14 @@ describe('Directive: nxgBusinessField', function () {
     expect(scope.myForm.fooInputName.$valid).toBe(true);
   });
 
+  it('should provide validity state based on minimum 3 characters', function () {
+    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    element.find('input').val('fo');
+    element.find('input').trigger('input');
+    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    expect(scope.myForm.fooInputName.$error.minlength).toBe(true);
+  });
+
   it('should update validity state when selected business changes', function () {
     expect(scope.myForm.fooInputName.$valid).toBe(false);
 

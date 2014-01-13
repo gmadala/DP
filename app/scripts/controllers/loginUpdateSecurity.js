@@ -81,7 +81,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.cancel = function() {
-      $rootScope.$broadcast('event:redirectToLogin');
+      $rootScope.$emit('event:forceLogout');
     };
 
   });

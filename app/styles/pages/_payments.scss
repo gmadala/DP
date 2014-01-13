@@ -7,9 +7,9 @@
 .cell {
   &.fee-type { @extend %quarter-width; }
   &.fee-desc { @extend %quarter-width; }
-  &.fee-due { width: 12%; }
+  &.fee-due { width: 13%; }
   &.fee-posted { width: 16%; }
-  &.fee-amt { width: 22%; }
+  &.fee-amt { width: 21%; }
 
   &.pay-more { width: 4%; }
   &.pay-desc { width: 32%; }
@@ -162,7 +162,6 @@
 
   .queue-items {
     border-top: 1px solid $border;
-    border-bottom: 1px solid $border;
 
     p:first-child {
       margin-top: 10px;
@@ -205,6 +204,14 @@
   }
 
   .pay-sum-footer {
+
+    padding: 6px 15px 15px 15px;
+    background: $well-out-bkgd;
+    margin: 15px -15px -15px -15px;
+    border-style: solid;
+    border-color: $well-out-border;
+    border-width: 0px 1px 1px 1px;
+
     .subtotal {
       font-size: 16px;
       color: $brand-text;

@@ -3,7 +3,7 @@
     <div nxg-search
        title="Receipt Search"
        class="search-form"
-       prompt="Enter Receipt #, Stock #, VIN, Check #"
+       prompt="Enter Receipt #, Stock #, VIN, Check #, Make, Model or Year"
        filter-label="Filter List by Payment Method"
        filter-options="filterOptions"
        active-criteria="receipts.proposedSearchCriteria"
@@ -23,36 +23,41 @@
 
         <ul class="unstyled">
           <li class="table-list-head">
-            <div class="cell rec-num sortable"
+            <div class="cell rec-num sortable-container"
                  ng-click="sortBy('TransactionNumber')"
                  ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-              Receipt #
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Receipt #</span>
             </div>
             <div class="cell rec-status">
-              Status
+              <span class="header-text">Status</span>
             </div>
-            <div class="cell rec-payDate sortable"
+            <div class="cell rec-payDate sortable-container"
                  ng-click="sortBy('CreateDate')"
                  ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-              Payment Date
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Payment Date</span>
             </div>
-            <div class="cell rec-payInfo sortable"
+            <div class="cell rec-payInfo sortable-container"
                  ng-click="sortBy('PaymentMethod')"
                  ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-              Payment Description
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Payment Description</span>
             </div>
-            <div class="cell rec-amtApplied sortable"
+            <div class="cell rec-amtApplied sortable-container"
                  ng-click="sortBy('AmountApplied')"
                  ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
-              Amount Applied
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Amount Applied</span>
             </div>
-            <div class="cell rec-amtProvided sortable"
+            <div class="cell rec-amtProvided sortable-container"
                  ng-click="sortBy('AmountProvided')"
                  ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-              Amount Provided
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Amount Provided</span>
             </div>
             <div class="cell rec-view">
-              Receipt
+              <span class="header-text">Receipt</span>
             </div>
           </li>
 

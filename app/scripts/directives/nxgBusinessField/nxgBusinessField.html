@@ -3,6 +3,7 @@
          ng-model="query"
          ng-disabled="disabled"
          ng-change="clearSelected()"
+         ng-minlength="3"
          nxg-requires="!isRequired() || selection"
          nxg-blur="handleExit($event)"/>
   <button href class="btn btn-secondary nxg-search-btn" ng-click="disabled || openBusinessSearch()"

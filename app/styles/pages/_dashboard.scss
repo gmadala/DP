@@ -167,6 +167,11 @@
   #payoutAmt, #payoutBankAcct {
     width: 260px;
   }
+
+  .modal-footer .btn-primary {
+    float: right;
+    margin-left: 1em;
+  }
 }
 
 .payment-summary {

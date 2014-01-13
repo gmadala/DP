@@ -23,42 +23,57 @@
         <ul class="unstyled floor-list">
           <li class="table-list-head">
             <div class="cell fl-more"></div>
-            <div class="cell fl-desc sortable"
+            <div class="cell fl-desc sortable-container"
                  ng-click="sortBy('UnitMake')"
                  ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
-              Description
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Description</span>
             </div>
             <div class="cell fl-vin">
-              VIN
+              <span class="header-text">VIN</span>
             </div>
-            <div class="cell fl-stock sortable"
+            <div class="cell fl-stock sortable-container"
                  ng-click="sortBy('StockNumber')"
                  ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
-              Stock #
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Stock #</span>
             </div>
-            <div class="cell fl-status">
-              Status
+            <div class="cell fl-status sortable-container"
+                 ng-click="sortBy('Status')"
+                 ng-class="{ sorted : sortField == 'Status', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Status</span>
             </div>
-            <div class="cell fl-purchaseDate">
-              Purchased
+            <div class="cell fl-purchaseDate sortable-container"
+                 ng-click="sortBy('PurchaseDate')"
+                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Purchased</span>
             </div>
-            <div class="cell fl-floorDate sortable"
+            <div class="cell fl-floorDate sortable-container"
                  ng-click="sortBy('FlooringDate')"
                  ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
-              Floored
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Floored</span>
             </div>
-            <div class="cell fl-seller sortable"
+            <div class="cell fl-seller sortable-container"
                  ng-click="sortBy('SellerBusinessName')"
                  ng-class="{ sorted : sortField == 'SellerBusinessName', desc : sortDescending }">
-              Seller
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Seller</span>
             </div>
-            <div class="cell fl-lastPayDate">
-              Last Payment
+            <div class="cell fl-lastPayDate sortable-container"
+                 ng-click="sortBy('LastPaymentDate')"
+                 ng-class="{ sorted : sortField == 'LastPaymentDate', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Last Payment</span>
             </div>
             <div class="cell fl-titleRelease">
               Title Release
             </div>
-            <div class="cell fl-title">Title</div>
+            <div class="cell fl-title">
+              Title
+            </div>
           </li><!-- end .table-list-head -->
 
           <li class="table-list-row" ng-repeat="item in data.results">

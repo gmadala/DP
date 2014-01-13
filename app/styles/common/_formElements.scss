@@ -216,11 +216,15 @@ input[type="checkbox"], input[type="checkbox"]:checked {
     @include opacity(80);
   }
 
-  &:focus + label::before {
+  & + label {
+    @include user-select(none);
+  }
+
+  &:focus + label::before, &:active + label::before {
     @include opacity(100);
   }
 
-  &:focus + label {
+  &:focus + label, & + label:active, &:active + label {
     font-weight: bold;
   }
 }

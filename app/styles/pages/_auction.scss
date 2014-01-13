@@ -142,7 +142,16 @@
     &.selfloor-buy { width: 10%; }
     &.selfloor-ticket-num { width: 12%; }
     &.selfloor-title-loc { width: 9%; }
-    &.selfloor-title { width: 17%; }
+    &.selfloor-title {
+      width: 17%;
+      p {
+        margin: 0 0 0 5px;
+      }
+
+      label {
+        margin: 0 0 0 5px;
+      }
+    }
   }
 }
 

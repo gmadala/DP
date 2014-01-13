@@ -42,7 +42,9 @@
             <div class="cell sch-status">
               Status
             </div>
-            <div class="cell sch-amount">
+            <div class="cell sch-amount sortable"
+                 ng-click="sortBy('paymentAmount')"
+                 ng-class="{ sorted : sortField == 'paymentAmount', desc : sortDescending }">
               Amount
             </div>
           </li><!-- end .table-list-head -->
@@ -107,5 +109,5 @@
     </div>
   </section>
 
-  <section class="span3 well sticky" nxg-payment-summary nxg-sticky></section>
+  <section class="span3 well sticky" nxg-payment-summary nxg-sticky footer=".pay-sum-footer"></section>
 </section>

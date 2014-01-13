@@ -6,17 +6,23 @@ describe('Service: api', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var api, http, rootScope;
-  beforeEach(inject(function (_api_, $http, $rootScope) {
+  var api, http, rootScope, cookies;
+  beforeEach(inject(function (_api_, $http, $rootScope, $cookies) {
     api = _api_;
     http = $http;
     rootScope = $rootScope;
+    cookies = $cookies;
   }));
 
-  describe('setAuthToken, resetAuthToken and hasAuthToken functions', function () {
+  describe('setAuthToken and hasAuthToken functions', function () {
     it('should set the correct http default Authorization header', function () {
       api.setAuthToken('foo');
       expect(http.defaults.headers.common.Authorization).toBe('CT foo');
+    });
+
+    it('should store the token in a cookie', function () {
+      api.setAuthToken('foo');
+      expect(cookies.authToken).toBe('foo');
     });
 
     it('should cause hasAuthToken to return true if a token was provided', function () {
@@ -31,11 +37,25 @@ describe('Service: api', function () {
       api.setAuthToken();
       expect(api.hasAuthToken()).toBe(false);
     });
+  });
 
-    it('should correctly reset the token', function() {
+  describe('resetAuthToken function', function () {
+    it('should cause hasAuthToken to return false', function() {
       api.setAuthToken('foo');
       api.resetAuthToken();
       expect(api.hasAuthToken()).toBe(false);
+    });
+
+    it('should remove the cookie containing the token', function() {
+      api.setAuthToken('foo');
+      api.resetAuthToken();
+      expect(cookies.authToken).not.toBeDefined();
+    });
+
+    it('should remove the HTTP authorization header', function() {
+      api.setAuthToken('foo');
+      api.resetAuthToken();
+      expect(http.defaults.headers.common.Authorization).not.toBeDefined();
     });
   });
 
@@ -115,13 +135,13 @@ describe('Service: api', function () {
       expect(success).not.toHaveBeenCalled();
     });
 
-    it('should reject the promise with a newly added message service object and reset the auth token on 401', function () {
+    it('should reject the promise on 401 with a message that emits a forceLogout event when dismissed', function () {
       httpBackend.whenGET('/foo').respond({
         Success: false,
         Data: {},
         Message: '401'
       });
-      spyOn(rootScope, '$broadcast').andReturn(true)
+      spyOn(rootScope, '$emit').andReturn(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       api.setAuthToken('foo');
@@ -130,8 +150,9 @@ describe('Service: api', function () {
       httpBackend.flush();
       expect(messages.list().length).toBe(1);
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
-      expect(api.hasAuthToken()).toBe(false);
       expect(success).not.toHaveBeenCalled();
+      messages.list()[0].dismiss();
+      expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
     });
 
     it('should reject the promise with a newly added message service object upon invalid response', function () {

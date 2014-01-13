@@ -153,9 +153,10 @@ describe('Model: User', function () {
 
   });
 
-  describe('Authenticate + isLoggedIn method', function () {
+  describe('Authenticate + isLoggedIn + logout method', function () {
 
-    var segmentio;
+    var segmentio,
+      logoutHttpHandler;
 
     beforeEach(inject(function (_segmentio_) {
       segmentio = _segmentio_;
@@ -182,7 +183,8 @@ describe('Model: User', function () {
         Data: {}
       });
 
-      httpBackend.whenGET('/userAccount/logout').respond({
+      logoutHttpHandler = httpBackend.whenGET('/userAccount/logout');
+      logoutHttpHandler.respond({
         Success: true,
         Data: {}
       });
@@ -253,15 +255,61 @@ describe('Model: User', function () {
       expect(out.showUserInit).toBe(true);
     });
 
-    it('should reset the auth token on logout', function() {
-      expect(user.isLoggedIn()).toBe(false);
+    it('should make the expected logout request to the server on logout', function () {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(user.isLoggedIn()).toBe(true);
+
+      httpBackend.expectGET('/userAccount/logout');
       user.logout();
-      expect(user.isLoggedIn()).toBe(false);
+      expect(httpBackend.flush).not.toThrow();
     });
 
+    it('should reset the auth token and isLoggedIn flag on logout call success', function() {
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+
+      var success = jasmine.createSpy('success');
+      var failure = jasmine.createSpy('failure');
+      user.logout().then(success, failure);
+      expect(user.isLoggedIn()).toBe(true);
+      httpBackend.flush();
+      expect(user.isLoggedIn()).toBe(false);
+      expect(api.hasAuthToken()).toBe(false);
+      expect(success).toHaveBeenCalled();
+      expect(success.mostRecentCall.args[0]).toEqual({});
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+    it('should reset the auth token and isLoggedIn flag on logout call error', function() {
+      user.authenticate('test', 'testpw');
+      httpBackend.flush();
+
+      logoutHttpHandler.respond({
+        Success: false,
+        Message: 'already logged out',
+        Data: null
+      });
+      var success = jasmine.createSpy('success');
+      var failure = jasmine.createSpy('failure');
+      user.logout().then(success, failure);
+      httpBackend.flush();
+      expect(user.isLoggedIn()).toBe(false);
+      expect(api.hasAuthToken()).toBe(false);
+      expect(success).toHaveBeenCalled();
+      expect(success.mostRecentCall.args[0]).toEqual(null);
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+  });
+
+  describe('dropSession method', function () {
+    it('should reset the auth token immediately', function () {
+      api.setAuthToken('foo');
+
+      user.dropSession();
+      expect(user.isLoggedIn()).toBe(false);
+      expect(api.hasAuthToken()).toBe(false);
+    });
   });
 
   describe('refreshStatics + getStatics methods', function () {

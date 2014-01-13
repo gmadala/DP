@@ -1,0 +1,114 @@
+// Sorting arrows are used in the business search modal and on the tableList
+// search pages for floorplan, receipts, payments, etc. The class
+// ".sortable" is used to display the sorting arrows with a single
+// container for the arrows and the text. The class ".sortable-container"
+// is designed for the following HTML structure:
+//
+//    <div class="sortable-container sorted desc">
+//      <div class="sorting-arrows"></div>
+//      <span class="header-text">Example Text</div>
+//    </div>
+//
+// which allows the text to wrap without destroying the arrow placement.
+
+.sortable, .sortable-container {
+  cursor: pointer;
+  @include user-select(none);
+}
+
+.sortable, .sortable-container .sorting-arrows {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    @include box(0);
+    float: right;
+    position: relative;
+    top: 0px;
+    left: 1px;
+    border: 0;
+    margin: 0;
+  }
+
+   &::after {
+    content: '';
+    display: block;
+    @include box(0);
+    float: right;
+    position: relative;
+    top: 7px;
+    left: 7px;
+    border: 0;
+    margin: 0;
+  }
+
+  &::before {
+    @include up-arrow(false);
+  }
+  &::after {
+    @include down-arrow(false);
+  }
+
+  &.sorted {
+    &::before {
+      @include up-arrow(true);
+    }
+    &::after {
+      @include down-arrow(false);
+    }
+
+
+    &.desc {
+      &::before {
+        @include up-arrow(false);
+      }
+      &::after {
+        @include down-arrow(true);
+      }
+    }
+  }
+}
+
+
+.sortable-container.sorted .sorting-arrows {
+  &::before {
+    @include up-arrow(true);
+  }
+  &::after {
+    @include down-arrow(false);
+  }
+}
+
+.sortable-container.sorted.desc .sorting-arrows {
+  &::before {
+    @include up-arrow(false);
+  }
+  &::after {
+    @include down-arrow(true);
+  }
+}
+
+.sortable-container {
+
+  .sorting-arrows {
+    position: relative;
+    top: 4px;
+
+    &::before {
+      top: -1px;
+    }
+  }
+
+  .header-text {
+  }
+}
+
+.table-list-head {
+
+  > .cell {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+}

@@ -24,7 +24,6 @@ module.exports = function(karma) {
 			'app/components/angular/angular.js',
 			'app/components/angular-mocks/angular-mocks.js',
 			'app/components/angular-ui-router/release/angular-ui-router.js',
-			'app/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'app/components/angular-ui-utils/modules/highlight/highlight.js',
       'app/components/angular-ui-utils/modules/event/event.js',
       'app/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
@@ -37,6 +36,11 @@ module.exports = function(karma) {
       'app/components/angular-local-storage/angular-local-storage.js',
 	    'app/private-components/chartjs/Chart.js',
 	    'app/private-components/angular-segmentio/angular-segmentio.js',
+
+      // Once ui-bootstrap is updated to version 0.6.0 or greater this
+      // reference should go back to the minified bower installed version
+      'app/private-components/angular-bootstrap/ui-bootstrap-tpls.js',
+
 	    'app/components/sinon/lib/sinon/util/fake_timers.js',
 	    'app/components/lodash/lodash.js',
 			'app/scripts/*.js',
