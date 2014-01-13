@@ -86,6 +86,11 @@ angular.module('nextgearWebApp')
               if (floorplan.TitleImageAvailable) {
                 self.addTitleURL(floorplan);
               }
+              if (floorplan.TitleLocation === 'Seller') {
+                floorplan.sellerHasTitle = true;
+              } else {
+                floorplan.sellerHasTitle = false;
+              }
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);
           }
