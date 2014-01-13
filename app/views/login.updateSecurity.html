@@ -29,12 +29,15 @@
                 <label class="control-label">Security Question #{{$index+1}}</label>
                 <div class="controls">
                   <select
+                    id="{{question.name}}"
                     ng-model="$parent.updateSecurity[question.name]"
                     name="question.name"
                     ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.name)"
+                    ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }"
                     required >
                     <option value="">-- Select a Question --</option>
                   </select>
+                  <label for="{{question.name}}" class="text-error" ng-show="$parent.validity[question.name].$error.required">Please select a security question to answer. </label>
                 </div>
               </div>
 
