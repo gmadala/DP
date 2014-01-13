@@ -92,8 +92,12 @@
                      selected-business="data.BusinessId" />
             </span>
             <label for="inputSeller" class="text-error"
-                   ng-show="validity.inputSeller.$error.nxgRequires">
+                   ng-show="validity.inputSeller.$error.nxgRequires && !validity.inputSeller.$error.minlength">
               Please look up a Seller.
+            </label>
+            <label for="inputSeller" class="text-error"
+                   ng-show="validity.inputSeller.$error.minlength">
+              Please enter at least 3 characters.
             </label>
 
             <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>

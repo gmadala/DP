@@ -92,9 +92,9 @@ angular.module('nextgearWebApp')
     var focusField = null;
 
     if ($scope.data.searchBuyersMode) {
-      focusField = angular.element('#inputBuyer');
+      focusField = angular.element('#inputBuyer').next('button');
     } else {
-      focusField = angular.element('#inputSeller');
+      focusField = angular.element('#inputSeller').next('button');
     }
 
     $scope.close = function() {
