@@ -1,10 +1,28 @@
-NextGear Capital v1.2.2
+NextGear Capital v1.2.3
 =================================
 
 Fixes included in this release:
 
-VO-682	Black Book Lookup Changes - Client
-VO-552	Black Book Lookup Changes
-VO-683	Whole week for past month is being displayed on Upcoming Payments month view
-VO-546	Mobile and Web Payment Dashboard Mismatches
-VO-560	Web: Browser Back Button doesn't work once user is on "Welcome" Page. (Assembla #1217)
+VO-642	Auction getting 'kicked out' when bulk flooring
+MOB-20	EUI Mobile Test - headers do not carry over to the basket
+VO-631	Redesign for I have it/Don't Have it title indication
+VO-695	Please list all available search parameters in the ALL keyword Search
+MOB-44	Specify "Keyboard Type" for Numeric Inputs
+VO-627	EUI Web site - Email address - Security questions answered are not saving for business 80100BR
+VO-592	Need to support more sort fields in search
+VO-699	Range of Stock #'s error messages don't go away in Historical Reports
+VO-701	When flooring a car, setting purchase date in future shows no error but form won't submit.
+VO-246	Sorting in Web app on Search Screens
+VO-704	When on "Payments Checkout", while payment is processing the Account used can be changed
+MOB-138	Pressing "enter" on text field in "Request Payout" popup causes form to cancel, not submit.
+VO-693	EUI Web site - version 1.2.0 - After timing out the user pop up clicking on OK to close the window another ERROR pop up displays with OK option
+VO-567	Web: View Analytics - "Your Top Auctions" pop up window - user is able to scroll background inactive page.
+VO-703	On the Update Security page, leaving a question unselected doesn't show an error.
+VO-288	Wireframe Shows Disbursements on Auction Dashboard should have link to reports and a View Option
+VO-521	Mobile: "Auction" user should not be able to use "Forgot UserID" and "Password" feature. Auction user should not able to reset your password and user id on mobile app. (Assembla #1133)
+VO-609	Web: Login Screen > Username Suggestion box is not getting displayed properly.
+VO-189	Allow Browsers to Auto-Suggest User Name
+VO-506	Assembla: Payments ==> Payment Summary = should be sticky & follow user as they scroll down page
+VO-568	Web: Auction User - "Bulk Flooring" - Buyer Search pop up - Close & Cancel buttons are not working.
+VO-565	Web: Dealer User - "Floor A Car" - Seller Search pop up - Close & Cancel buttons are not working.
+VO-717	EUI Web Site - Login and Log out behaviors
