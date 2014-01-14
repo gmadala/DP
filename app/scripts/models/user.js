@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, nxgConfig) {
     // Private
     var info = null,
       statics = null,
@@ -82,6 +82,9 @@ angular.module('nextgearWebApp')
             return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
               function () {
                 segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
+                UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
+                // todo: add SSO key from authentication response
+                // UserVoice.getAPI().push(["setSSO", 'XXXXXXXXXXXX']);
                 return {
                   showUserInit: authResult.ShowUserInitialization
                 };

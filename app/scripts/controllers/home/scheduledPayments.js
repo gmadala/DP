@@ -62,6 +62,7 @@ angular.module('nextgearWebApp')
       search: function() {
         var promise;
         this.loading = true;
+        $scope.scheduledPayments.results.length = 0;
         $scope.hitInfiniteScrollMax = false;
         promise = lastPromise = ScheduledPaymentsSearch.search(
             this.searchCriteria.query,
