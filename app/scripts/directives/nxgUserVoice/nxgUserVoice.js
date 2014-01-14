@@ -9,14 +9,15 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('UserVoiceCtrl', function($rootScope, $scope, User) {
+  .controller('UserVoiceCtrl', function($rootScope, $scope, User, nxgConfig) {
     var UserVoice = window.UserVoice || [];
 
     $scope.showClassicWidget = function() {
       var isDealer = User.isDealer(),
+        config = nxgConfig.userVoice,
         // check user type, dealers and auctions will have different subdomains to go to
-        forumId = isDealer ? 227793 : 229017,
-        customTemplateId = isDealer ? 21815 : 23042;
+        forumId = isDealer ? config.dealerForumId : config.auctionForumId,
+        customTemplateId = isDealer ? config.dealerCustomTemplateId : config.auctionCustomTemplateId;
 
       UserVoice.push(['showLightbox', 'classic_widget', {
         'mode': 'full',

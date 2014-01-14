@@ -16,10 +16,16 @@ angular.module('nextgearWebApp')
     //var segmentIoKey = '9eaffv4cbe';
 
     return {
-        apiBase: apiDomain + '/MobileService/api',
-        apiDomain: apiDomain,
-        segmentIoKey: segmentIoKey,
-        infiniteScrollingMax: 500,
-        sessionTimeoutMs: 900000 // 15 minutes
-      };
+      apiBase: apiDomain + '/MobileService/api',
+      apiDomain: apiDomain,
+      segmentIoKey: segmentIoKey,
+      userVoice: {
+        dealerForumId: 227793,
+        dealerCustomTemplateId: 21815,
+        auctionForumId: 229017,
+        auctionCustomTemplateId: 23042
+      },
+      infiniteScrollingMax: 500,
+      sessionTimeoutMs: 900000 // 15 minutes
+    };
   });
