@@ -58,7 +58,7 @@
         </div><!-- end second .control-group -->
         <hr/>
         <div class="form-footer">
-          <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()">Search</button>
+          <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
         </div>
       </form>
     </div>
@@ -74,9 +74,12 @@
           <div class="control-group">
             <label for="dealer-name" class="control-label input-title">Dealer Name</label>
             <div class="controls">
-              <input type="text" id="dealer-name" ng-model="nameSearch.query.dealerName" ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName }">
-              <label class="text-error" ng-show="nameSearch.invalid.dealerName">
+              <input type="text" id="dealer-name" ng-model="nameSearch.query.dealerName" ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName || nameSearch.invalid.minlength }">
+              <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.dealerName">
                   Please enter a Dealer Name.
+              </label>
+              <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.minlength">
+                  Please enter at least 3 characters.
               </label>
             </div>
           </div>

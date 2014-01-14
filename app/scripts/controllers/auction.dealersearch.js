@@ -8,6 +8,7 @@ angular.module('nextgearWebApp')
     $scope.numberSearch = {
       dealerNumInactive: false,
       auctionNumInactive: false,
+      searchInProgress: false,
       query: {},
       invalid: {},
       noresults: {},
@@ -21,17 +22,21 @@ angular.module('nextgearWebApp')
       },
       search: function() {
         this.noresults = {}; // reset the no result messages, we're doing a new search
+        var which = this;
 
         if (this.validate()) {
+          this.searchInProgress = true;
           if (!this.dealerNumInactive) {
-            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
-              prv.searchByNumberHandler
-            );
+            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then( function(business) {
+              which.searchInProgress = false;
+              prv.searchByNumberHandler(business);
+            });
           }
           else {
-            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
-              prv.searchByNumberHandler
-            );
+            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then( function(business) {
+              which.searchInProgress = false;
+              prv.searchByNumberHandler(business);
+            });
           }
         }
       },
@@ -106,7 +111,11 @@ angular.module('nextgearWebApp')
         if (!this.query.dealerName) {
           this.invalid.dealerName = true;
           valid = false;
+        } else if (this.query.dealerName.length < 3) {
+          this.invalid.minlength = true;
+          valid = false;
         }
+
         if (!this.query.city && !this.query.state) {
           this.invalid.CityOrState = true;
           valid = false;
