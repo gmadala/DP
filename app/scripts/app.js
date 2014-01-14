@@ -243,9 +243,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:userAuthenticated',
       function(){
-        // where XXXXXXXXXXXX === the sso token we get back as part of the User payload post-login
-        // UserVoice.push(["setSSO", 'XXXXXXXXXXXX']);
-
         if (pendingState) {
           $state.transitionTo(pendingState.name); // resume transition to the original state destination
           pendingState = null;
