@@ -15,8 +15,8 @@ angular.module('nextgearWebApp')
     $scope.showClassicWidget = function() {
       var isDealer = User.isDealer(),
         // check user type, dealers and auctions will have different subdomains to go to
-        forumId = isDealer ? 227793 : 'xxxxxx',
-        customTemplateId = isDealer ? 21815 : 'xxxxxxx';
+        forumId = isDealer ? 227793 : 229017,
+        customTemplateId = isDealer ? 21815 : 23042;
 
       UserVoice.push(['showLightbox', 'classic_widget', {
         'mode': 'full',
