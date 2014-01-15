@@ -155,7 +155,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookies, $state, $dialog) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog) {
     LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
@@ -169,12 +169,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer(),
-            authToken = $cookies.authToken;
+            savedAuth = $cookieStore.get('auth');
 
-          if (!User.isLoggedIn() && authToken) {
+          if (!User.isLoggedIn() && savedAuth) {
             // we're restoring session from saved auth token
             event.preventDefault();
-            User.reloadSession(authToken).then(
+            User.initSession(savedAuth.authToken, savedAuth.userVoiceToken).then(
               function() {
                 $state.transitionTo(toState);
               }
@@ -222,7 +222,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }).open().then(function(confirmed) {
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
-            delete $cookies.lastState;
+            $cookieStore.remove('uiState');
             // clobber everything and start over at login page
             window.location.reload();
           }
@@ -234,7 +234,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       function(){
         User.dropSession();
         // save last visited state
-        $cookies.lastState = $state.current.name;
+        $cookieStore.put('uiState', { lastState: $state.current.name });
         // clobber everything and start over at login page
         $window.location.hash = '/login';
         window.location.reload();
@@ -247,9 +247,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           $state.transitionTo(pendingState.name); // resume transition to the original state destination
           pendingState = null;
         }
-        else if ($cookies.lastState) {
-          $state.transitionTo($cookies.lastState); // go back to the last state visited
-          delete $cookies.lastState;
+        else if ($cookieStore.get('uiState')) {
+          $state.transitionTo($cookieStore.get('uiState').lastState); // go back to the last state visited
+          $cookieStore.remove('uiState');
         }
         else {
           $location.path(User.isDealer() ? '/home' : '/act/home');

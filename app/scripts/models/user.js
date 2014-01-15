@@ -76,26 +76,24 @@ angular.module('nextgearWebApp')
             Authorization: 'CT ' + Base64.encode(username + ':' + password)
           })
           .then(function(authResult) {
-            api.setAuthToken(authResult.Token);
             self.setShowUserInitialization(authResult.ShowUserInitialization);
-            // fetch the dealer info & statics every time there's a new session (user could have changed)
-            return $q.all([self.refreshInfo(), self.refreshStatics()]).then(
-              function () {
-                segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
-                UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
-                // todo: add SSO key from authentication response
-                // UserVoice.getAPI().push(["setSSO", 'XXXXXXXXXXXX']);
-                return {
-                  showUserInit: authResult.ShowUserInitialization
-                };
-              }
-            );
+            var uvToken = decodeURIComponent(authResult.UserVoiceToken);
+            return self.initSession(authResult.Token, uvToken).then(function () {
+              segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
+              return {
+                showUserInit: authResult.ShowUserInitialization
+              };
+            });
           });
       },
 
-      reloadSession: function(sessionToken) {
-        api.setAuthToken(sessionToken);
-        return $q.all([this.refreshInfo(), this.refreshStatics()]);
+      initSession: function(sessionToken, userVoiceToken) {
+        var self = this;
+        api.setAuthToken(sessionToken, userVoiceToken);
+        return $q.all([this.refreshInfo(), this.refreshStatics()]).then(function () {
+          UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
+          UserVoice.getAPI().push(['setSSO', userVoiceToken]);
+        });
       },
 
       logout: function() {

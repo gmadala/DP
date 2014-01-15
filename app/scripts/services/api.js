@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookies) {
+  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore) {
     var authToken = null,
         sessionHasTimedOut = false,
         sessionTimeout = null;
@@ -27,9 +27,12 @@ angular.module('nextgearWebApp')
     }
 
     return {
-      setAuthToken: function(token) {
+      setAuthToken: function(token, userVoiceToken) {
         // save authToken on cookies to allow us to restore in case of reload
-        $cookies.authToken = token;
+        $cookieStore.put('auth', {
+          authToken: token,
+          userVoiceToken: userVoiceToken
+        });
 
         authToken = token;
         sessionHasTimedOut = false;
@@ -38,7 +41,7 @@ angular.module('nextgearWebApp')
       },
       resetAuthToken: function() {
         // clear saved token
-        delete $cookies.authToken;
+        $cookieStore.remove('auth');
         delete $http.defaults.headers.common.Authorization;
         authToken = null;
       },

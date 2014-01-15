@@ -7,11 +7,11 @@ describe('Service: api', function () {
 
   // instantiate service
   var api, http, rootScope, cookies;
-  beforeEach(inject(function (_api_, $http, $rootScope, $cookies) {
+  beforeEach(inject(function (_api_, $http, $rootScope, $cookieStore) {
     api = _api_;
     http = $http;
     rootScope = $rootScope;
-    cookies = $cookies;
+    cookies = $cookieStore;
   }));
 
   describe('setAuthToken and hasAuthToken functions', function () {
@@ -20,9 +20,12 @@ describe('Service: api', function () {
       expect(http.defaults.headers.common.Authorization).toBe('CT foo');
     });
 
-    it('should store the token in a cookie', function () {
-      api.setAuthToken('foo');
-      expect(cookies.authToken).toBe('foo');
+    it('should store the tokens in a cookie', function () {
+      api.setAuthToken('foo', 'bar');
+      expect(cookies.get('auth')).toEqual({
+        authToken: 'foo',
+        userVoiceToken: 'bar'
+      });
     });
 
     it('should cause hasAuthToken to return true if a token was provided', function () {
@@ -49,7 +52,7 @@ describe('Service: api', function () {
     it('should remove the cookie containing the token', function() {
       api.setAuthToken('foo');
       api.resetAuthToken();
-      expect(cookies.authToken).not.toBeDefined();
+      expect(cookies.get('auth')).not.toBeDefined();
     });
 
     it('should remove the HTTP authorization header', function() {
