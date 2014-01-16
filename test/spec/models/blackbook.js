@@ -71,13 +71,13 @@ describe('Service: Blackbook', function () {
     });
 
     it('should make the expected http request without mileage', function () {
-      httpBackend.expectGET('/analytics/blackbook/SOMEVIN123').respond(resultSkeleton);
+      httpBackend.expectGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(resultSkeleton);
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123');
       httpBackend.flush();
     });
 
     it('should make the expected http request with mileage', function () {
-      httpBackend.expectGET('/analytics/blackbook/SOMEVIN123/123456').respond(resultSkeleton);
+      httpBackend.expectGET('/analytics/v1_2/blackbook/SOMEVIN123/123456').respond(resultSkeleton);
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', '123456');
       httpBackend.flush();
     });
@@ -85,7 +85,7 @@ describe('Service: Blackbook', function () {
     it('should reject its promise if there are no results', function () {
       var result = angular.extend({}, resultSkeleton);
       result.Data = null;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123').then(success, failure);
       httpBackend.flush();
@@ -94,7 +94,7 @@ describe('Service: Blackbook', function () {
     });
 
     it('should reject its promise if the result list is empty', function () {
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(resultSkeleton);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(resultSkeleton);
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123').then(success, failure);
       httpBackend.flush();
@@ -106,7 +106,7 @@ describe('Service: Blackbook', function () {
       var myItem = {};
       var result = angular.extend({}, resultSkeleton);
       result.Data = [myItem];
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
       spyOn(dialogMock, 'dialog');
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, true).then(success, failure);
@@ -130,7 +130,7 @@ describe('Service: Blackbook', function () {
       var myItems = [{}, {}];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
       spyOn(dialogMock, 'dialog');
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, false).then(success, failure);
@@ -143,7 +143,7 @@ describe('Service: Blackbook', function () {
       var myItems = [{}, {}];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
       spyOn(dialogMock, 'dialog').andCallThrough();
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, true).then(success, failure);
@@ -161,7 +161,7 @@ describe('Service: Blackbook', function () {
       var myItems = [uno, dos];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, true).then(success, failure);
       httpBackend.flush();
@@ -173,7 +173,7 @@ describe('Service: Blackbook', function () {
       var myItems = [{}, {}];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, true).then(success, failure);
       httpBackend.flush();
@@ -197,7 +197,7 @@ describe('Service: Blackbook', function () {
       var myItems = [one, two];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
       spyOn(dialogMock, 'dialog');
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, hint).then(success, failure);
@@ -228,7 +228,7 @@ describe('Service: Blackbook', function () {
       var myItems = [one, two];
       var result = angular.extend({}, resultSkeleton);
       result.Data = myItems;
-      httpBackend.whenGET('/analytics/blackbook/SOMEVIN123').respond(result);
+      httpBackend.whenGET('/analytics/v1_2/blackbook/SOMEVIN123').respond(result);
       spyOn(dialogMock, 'dialog').andCallThrough();
 
       Blackbook.fetchVehicleTypeInfoForVin('SOMEVIN123', null, hint).then(success, failure);
