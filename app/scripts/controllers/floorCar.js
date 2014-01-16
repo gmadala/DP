@@ -104,7 +104,7 @@ angular.module('nextgearWebApp')
       );
     };
 
-    $scope.maxValidModelYear = new Date().getFullYear() + 1;
+    $scope.maxValidModelYear = new Date().getFullYear();
     $scope.minValidModelYear = 1900;
     $scope.isYear = (function() {
       var arr = $scope.maxValidModelYear.toString().split('').slice(2),
