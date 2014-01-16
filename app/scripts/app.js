@@ -251,12 +251,16 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           $state.transitionTo(pendingState.name); // resume transition to the original state destination
           pendingState = null;
         }
-        else if ($cookieStore.get('uiState')) {
-          $state.transitionTo($cookieStore.get('uiState').lastState); // go back to the last state visited
-          $cookieStore.remove('uiState');
-        }
         else {
-          $location.path(User.isDealer() ? '/home' : '/act/home');
+          var uiState = $cookieStore.get('uiState');
+          // Make sure we got a valid last state to switch to. Fixes VO-804
+          if (uiState && uiState.lastState !== '') {
+            $state.transitionTo($cookieStore.get('uiState').lastState); // go back to the last state visited
+            $cookieStore.remove('uiState');
+          }
+          else {
+            $location.path(User.isDealer() ? '/home' : '/act/home');
+          }
         }
       }
     );
