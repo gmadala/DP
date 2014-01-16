@@ -43,6 +43,28 @@
             </div><!-- end .control-group -->
   		    </form><!-- end Curtailment Form -->
 
+          <hr/>
+
+          <!-- Exportable Inventory Form -->
+          <form class="form-inline" name="expInvForm" novalidate>
+            <h3 class="form-title">Exportable Inventory</h3>
+
+            <div class="control-group">
+              <label class="control-label" for="expInvStatus">Flooring Status</label>
+              <div class="controls">
+                <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
+              </div>
+            </div><!-- end .control-group -->
+
+            <hr/>
+
+            <div class="control-group right">
+              <div class="controls">
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewExpInv()">View Report</button>
+              </div>
+            </div><!-- end .control-group -->
+          </form><!-- end Exportable Inventory Form -->
+
         </div><!-- end .well-out -->
       </div><!-- end .well.adjacent.span8 -->
 
