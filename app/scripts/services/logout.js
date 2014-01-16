@@ -19,7 +19,7 @@ angular.module('nextgearWebApp')
                * but you can still see the URL change briefly. This is as best we can do with Angular v1.0.8.
                * Newer versions of Angular provide with better ways to address this.
                */
-              $state.transitionTo(fromState);
+              $rootScope.$broadcast('event:switchState', fromState);
               $rootScope.$emit('event:userRequestedLogout');
             }
           }

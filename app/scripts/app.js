@@ -211,6 +211,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       }
     });
 
+    $rootScope.$on('event:switchState', function(event, state) {
+      $location.path(state.url);
+    });
+
     $rootScope.$on('event:userRequestedLogout',
       function() {
         $dialog.closeAll();
