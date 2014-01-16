@@ -1,0 +1,42 @@
+/* EUI, 1/16/14 */
+/* Make sure in settings > general,
+ * primary color is #666 and
+ * link color is #0088cc
+*/
+.uvMasthead {
+position: relative;
+background: #eee; /* for older IE */
+background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e4e4e4));
+background-image: -webkit-linear-gradient(#fff, #e4e4e4);
+background-image: -moz-linear-gradient(#fff, #e4e4e4);
+background-image: -o-linear-gradient(#fff, #e4e4e4);
+background-image: linear-gradient(#fff, #e4e4e4);
+border-bottom: 1px solid #fff;
+}
+
+.uvMasthead:after {
+content: '';
+display: block;
+position: absolute;
+bottom: -6px;
+left: 0;
+width: 100%;
+height: 4px;
+background: #17659d;
+}
+
+.uvMastheadLogo {
+width: auto;
+height: 50px;
+}
+
+.uvModule-featuredForum, .uvModule-mainSidebar {
+background: #fff;
+border: 1px solid #e3e3e3;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}

@@ -1,0 +1,18 @@
+/* EUI, 1/16/14 */
+/* This is the custom css for the custom template used
+ * for our user voice widget (custom template id: 21815)
+ */
+body {
+font-family: Helvetica, Arial, sans-serif;
+}
+
+.uvStyle-button {
+background: #4078A0;
+color: #FFF;
+text-shadow: none;
+}
+
+.uvStyle-button:hover, .uvStyle-button:focus, .uvStyle-button:active {
+background: #295F8A;
+color: #E5E5E5;
+}
