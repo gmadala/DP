@@ -4,7 +4,7 @@
          required ng-minlength="6" ng-maxlength="17"
          nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
          ng-change="vinChange()" nxg-blur="vinExit()"
-         autofocus="autofocus"
+         nxg-autofocus
          ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
   <button href class="btn btn-secondary nxg-search-btn" ng-click="lookupVin()">
     <i class="glyphicon glyphicon-search"></i>
