@@ -1,7 +1,14 @@
-NextGear Capital v1.2.4
+NextGear Capital v1.2.5
 =================================
 
 Fixes included in this release:
 
-VO-721	Auction User -> Dealer Search -> Dealer Name field allows fewer than 3 characters
-VO-743	Scheduled Payments search doesn't show loading circle on search
+VO-797	Web Site and mobile are calling incorrect endpoint to search for VINs
+VO-772	Vin search returning several years of a model
+VO-454	New Report - Exportable Inventory Detail - Mobile Service
+VO-802	Ensure endpoints are updated on web and mobile to versioned endpoints
+VO-804	Logging in produces javascript error "Cannot transition to abstract state '' "
+VO-567	Web: View Analytics - "Your Top Auctions" pop up window - user is able to scroll background inactive page.
+VO-789	Web: When flooring a car, setting purchase date in future does not show proper information in error message.
+VO-787	Web: Update Security Question: Browser Back button doesn't work properly when some entries are filled.
+VO-790	Web: View Analytics: Unable to Select "Ten Worst Movers" tab using tab key under "View Analytics" section.
