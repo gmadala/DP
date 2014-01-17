@@ -155,7 +155,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, $route) {
     LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
@@ -226,9 +226,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }).open().then(function(confirmed) {
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
-            $cookieStore.remove('uiState');
+            LastState.clearUserState();
             // clobber everything and start over at login page
-            window.location.reload();
+            window.location.hash = '/login';
+            // LastState cookie modifications are asynchronous
+            // For IE9 support, must reload page within Angular
+            // digest cycle for cookie to be written/destroyed.
+            $route.reload();
           }
         });
       }
@@ -238,10 +242,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       function(){
         User.dropSession();
         // save last visited state
-        $cookieStore.put('uiState', { lastState: $state.current.name });
+        LastState.saveUserState();
+        // set location as login page before refreshing to stop pendingState from being set
+        window.location.hash = '/login';
         // clobber everything and start over at login page
-        $window.location.hash = '/login';
-        window.location.reload();
+        // LastState cookie modifications are asynchronous
+        // For IE9 support, must reload page within Angular
+        // digest cycle for cookie to be written/destroyed.
+        $route.reload();
       }
     );
 
@@ -252,11 +260,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           pendingState = null;
         }
         else {
-          var uiState = $cookieStore.get('uiState');
           // Make sure we got a valid last state to switch to. Fixes VO-804
-          if (uiState && uiState.lastState !== '') {
-            $state.transitionTo($cookieStore.get('uiState').lastState); // go back to the last state visited
-            $cookieStore.remove('uiState');
+          if (LastState.getUserState() && LastState.getUserState() !== '') {
+            $state.transitionTo(LastState.getUserState()); // go back to the last state visited
+            LastState.clearUserState();
           }
           else {
             $location.path(User.isDealer() ? '/home' : '/act/home');
