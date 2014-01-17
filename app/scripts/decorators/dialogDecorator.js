@@ -11,6 +11,13 @@ angular.module('nextgearWebApp')
           body = angular.element(document.body),
           OriginalMessageBox = $delegate.messageBox;
 
+      var preventScrollingOnBody = function(scrollEvent){
+        // Prevent default key action if using arrow keys
+        if(scrollEvent.keyCode >= 37 && scrollEvent.keyCode <= 40){
+          scrollEvent.preventDefault();
+        }
+      };
+
       return _.extend($delegate, {
 
         dialog: function(opts) {
@@ -31,7 +38,12 @@ angular.module('nextgearWebApp')
               }
             );
 
-            body.addClass('modal-open');
+            if (currentlyOpen.length === 1) {
+              body.addClass('modal-open');
+
+              // Disable scrolling
+              angular.element(document).on('keydown', preventScrollingOnBody);
+            }
             $delegate.enforceFocus.call(this);
 
             return deferred.promise;
@@ -53,6 +65,9 @@ angular.module('nextgearWebApp')
 
             if (currentlyOpen.length === 0) {
               body.removeClass('modal-open');
+
+              // Re-enable scrolling
+              angular.element(document).off('keydown', preventScrollingOnBody);
             }
           };
 

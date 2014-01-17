@@ -1,0 +1,35 @@
+<!-- this is the custom sidebar HTML for the NXG Template UV widget -->
+
+{% if widget.has_articles? %}
+  <div class="browseContentArticles">
+    <h2 class="uvCustomColor-color"> <a href="" class="elsewhere" target="_blank" rel="external"></a></h2>
+    <ol>
+      {% for article in widget.articles %}
+        {% render_article article %}
+      {% endfor %}
+    </ol>
+  </div>
+{% endif %}
+
+{% if widget.has_suggestions? %}
+  <div class="browseContentIdeas">
+    <h2 class="uvCustomColor-color"> <a href="" class="elsewhere" target="_blank" rel="external"></a></h2>
+    <ol>
+      {% for suggestion in widget.suggestions %}
+        {% render_suggestion suggestion %}
+      {% endfor %}
+    </ol>
+  </div>
+{% endif %}
+
+{% if widget.has_suggestions? == false and widget.has_articles? == false %}
+  {% if widget.show_suggestions? == true and widget.show_articles? == true %}
+    <h2 class="uvSidebarNoResults"></h2>
+  {% else %}
+    {% if widget.show_articles? %}
+      <h2 class="uvSidebarNoResults"></h2>
+    {% else %}
+      <h2 class="uvSidebarNoResults"></h2>
+    {% endif %}
+  {% endif %}
+{% endif %}

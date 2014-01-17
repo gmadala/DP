@@ -166,7 +166,8 @@ describe('Model: User', function () {
         Message: null,
         Data: {
           Token: '12345',
-          ShowUserInitialization: true
+          ShowUserInitialization: true,
+          UserVoiceToken: '54321'
         }
       });
 
@@ -200,7 +201,7 @@ describe('Model: User', function () {
       spyOn(api, 'setAuthToken');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(api.setAuthToken).toHaveBeenCalledWith('12345');
+      expect(api.setAuthToken).toHaveBeenCalledWith('12345', '54321');
     });
 
     it('should update the isLoggedIn function result', function () {

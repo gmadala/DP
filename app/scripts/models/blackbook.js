@@ -53,9 +53,9 @@ angular.module('nextgearWebApp')
         }
 
         if (!mileage) {
-          url = '/analytics/blackbook/' + vin;
+          url = '/analytics/v1_2/blackbook/' + vin;
         } else {
-          url = '/analytics/blackbook/' + vin + '/' + mileage;
+          url = '/analytics/v1_2/blackbook/' + vin + '/' + mileage;
         }
 
         return api.request('GET', url).then(

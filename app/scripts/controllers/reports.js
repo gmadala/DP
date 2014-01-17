@@ -12,6 +12,12 @@ angular.module('nextgearWebApp')
 
     $scope.data = null;
 
+    $scope.expInvStatus = {
+      'type': 'select',
+      'value': 'All',
+      'values': ['All', 'Approved', 'Completed', 'Denied', 'Voided']
+    };
+
     $scope.currentReports = [
       {
         'title': 'Receivable Detail (PDF)',
@@ -145,6 +151,24 @@ angular.module('nextgearWebApp')
 
       segmentio.track(metric.VIEW_CURRENT_REPORT, {
         reportName: 'Upcoming Curtailment / Payoff Quote (PDF)'
+      });
+    };
+
+    $scope.viewExpInv = function() {
+      // grab params, build url string and open window with report.
+      var stat = $scope.expInvStatus.value;
+      var strUrl = api.contentLink(
+        '/report/inventorydetail/' + stat + '/InventoryDetails_' + stat,
+        {}
+      );
+
+      window.open(
+        strUrl,
+        '_blank'  // open a new window every time
+      );
+
+      segmentio.track(metric.VIEW_CURRENT_REPORT, {
+        reportName: 'Exportable Inventory'
       });
     };
 
