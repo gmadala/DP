@@ -1,14 +1,9 @@
-NextGear Capital v1.2.5
+NextGear Capital v1.2.6
 =================================
 
 Fixes included in this release:
 
-VO-797	Web Site and mobile are calling incorrect endpoint to search for VINs
-VO-772	Vin search returning several years of a model
-VO-454	New Report - Exportable Inventory Detail - Mobile Service
-VO-802	Ensure endpoints are updated on web and mobile to versioned endpoints
-VO-804	Logging in produces javascript error "Cannot transition to abstract state '' "
-VO-567	Web: View Analytics - "Your Top Auctions" pop up window - user is able to scroll background inactive page.
-VO-789	Web: When flooring a car, setting purchase date in future does not show proper information in error message.
-VO-787	Web: Update Security Question: Browser Back button doesn't work properly when some entries are filled.
-VO-790	Web: View Analytics: Unable to Select "Ten Worst Movers" tab using tab key under "View Analytics" section.
+VO-485	Integrate uservoice for feedback into app(s)
+VO-791	Web: User gets logout of the application when "F5" is pressed when Logout confirmation popup is opened.
+VO-818	When logging in user is brought to last page visited by any user, not just them
+VO-858	User can bypass "Update Security" screen

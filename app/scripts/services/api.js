@@ -27,19 +27,16 @@ angular.module('nextgearWebApp')
     }
 
     return {
-      setAuthToken: function(token, userVoiceToken) {
-        // save authToken on cookies to allow us to restore in case of reload
-        $cookieStore.put('auth', {
-          authToken: token,
-          userVoiceToken: userVoiceToken
-        });
+      setAuth: function(authData) {
+        // save authData on cookies to allow us to restore in case of reload
+        $cookieStore.put('auth', authData);
 
-        authToken = token;
+        authToken = authData.Token;
         sessionHasTimedOut = false;
         // set a default Authorization header with the authentication token
-        $http.defaults.headers.common.Authorization = 'CT ' + token;
+        $http.defaults.headers.common.Authorization = 'CT ' + authToken;
       },
-      resetAuthToken: function() {
+      resetAuth: function() {
         // clear saved token
         $cookieStore.remove('auth');
         delete $http.defaults.headers.common.Authorization;
@@ -47,6 +44,21 @@ angular.module('nextgearWebApp')
       },
       hasAuthToken: function() {
         return !!authToken;
+      },
+      getAuthParam: function (paramName) {
+        var auth = $cookieStore.get('auth');
+        if (auth) {
+          return auth[paramName];
+        } else {
+          return undefined;
+        }
+      },
+      setAuthParam: function (paramName, value) {
+        var auth = $cookieStore.get('auth');
+        if (auth) {
+          auth[paramName] = value;
+          $cookieStore.put('auth', auth);
+        }
       },
       request: function(method, url, data, headers) {
         var httpConfig = {
