@@ -6,8 +6,7 @@ angular.module('nextgearWebApp')
     var info = null,
       statics = null,
       paySellerOptions = [],
-      securityQuestions = null,
-      showUserInitialization;
+      securityQuestions = null;
 
     var calculateCanPayBuyer = function() {
       if (!info) {
@@ -76,22 +75,25 @@ angular.module('nextgearWebApp')
             Authorization: 'CT ' + Base64.encode(username + ':' + password)
           })
           .then(function(authResult) {
-            self.setShowUserInitialization(authResult.ShowUserInitialization);
-            return self.initSession(authResult.Token, authResult.UserVoiceToken).then(function () {
-              segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
-              return {
-                showUserInit: authResult.ShowUserInitialization
-              };
-            });
+            return self.initSession(authResult).then(function () {
+                segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
+                return authResult;
+              });
           });
       },
 
-      initSession: function(sessionToken, userVoiceToken) {
+      /**
+       * Take authentication results (tokens, etc.) and turn them into a valid user session
+       */
+      initSession: function(authData) {
         var self = this;
-        api.setAuthToken(sessionToken, userVoiceToken);
+
+        api.setAuth(authData);
         return $q.all([this.refreshInfo(), this.refreshStatics()]).then(function () {
-          UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
-          UserVoice.getAPI().push(['setSSO', userVoiceToken]);
+          if (authData.UserVoiceToken) {
+            UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
+            UserVoice.getAPI().push(['setSSO', authData.UserVoiceToken]);
+          }
         });
       },
 
@@ -110,10 +112,10 @@ angular.module('nextgearWebApp')
       /**
        * This should only be used in cases where we know the session is already toast.
        * Normally, you'd call logout() instead, which will try to clean it up server side
-       * and then call this function
+       * and will then call this function
        */
       dropSession: function() {
-        api.resetAuthToken();
+        api.resetAuth();
       },
 
       refreshStatics: function() {
@@ -156,12 +158,12 @@ angular.module('nextgearWebApp')
         return info && info.DealerAuctionStatusForGA === 'Dealer';
       },
 
-      setShowUserInitialization: function(bool) {
-        showUserInitialization = bool;
+      isUserInitRequired: function() {
+        return !!(api.getAuthParam('ShowUserInitialization'));
       },
 
-      showInitialization: function() {
-        return showUserInitialization;
+      clearUserInitRequired: function() {
+        api.setAuthParam('ShowUserInitialization', false);
       },
 
       canPayBuyer: calculateCanPayBuyer,

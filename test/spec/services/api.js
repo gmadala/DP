@@ -14,52 +14,87 @@ describe('Service: api', function () {
     cookies = $cookieStore;
   }));
 
-  describe('setAuthToken and hasAuthToken functions', function () {
+  describe('setAuth and hasAuthToken functions', function () {
     it('should set the correct http default Authorization header', function () {
-      api.setAuthToken('foo');
+      api.setAuth({ Token: 'foo' });
       expect(http.defaults.headers.common.Authorization).toBe('CT foo');
     });
 
-    it('should store the tokens in a cookie', function () {
-      api.setAuthToken('foo', 'bar');
+    it('should store the auth data in a cookie', function () {
+      api.setAuth({ Token: 'foo', UserVoiceToken: 'bar' });
       expect(cookies.get('auth')).toEqual({
-        authToken: 'foo',
-        userVoiceToken: 'bar'
+        Token: 'foo',
+        UserVoiceToken: 'bar'
       });
     });
 
     it('should cause hasAuthToken to return true if a token was provided', function () {
-      api.setAuthToken('foo');
+      api.setAuth({ Token: 'foo' });
       expect(api.hasAuthToken()).toBe(true);
     });
 
     it('should cause hasAuthToken to return false if no token was provided', function () {
-      api.setAuthToken(null);
+      api.setAuth({});
       expect(api.hasAuthToken()).toBe(false);
 
-      api.setAuthToken();
+      api.setAuth({ Token: null });
       expect(api.hasAuthToken()).toBe(false);
     });
   });
 
-  describe('resetAuthToken function', function () {
+  describe('resetAuth function', function () {
     it('should cause hasAuthToken to return false', function() {
-      api.setAuthToken('foo');
-      api.resetAuthToken();
+      api.setAuth({ Token: 'foo' });
+      api.resetAuth();
       expect(api.hasAuthToken()).toBe(false);
     });
 
-    it('should remove the cookie containing the token', function() {
-      api.setAuthToken('foo');
-      api.resetAuthToken();
+    it('should remove the cookie containing the auth data', function() {
+      api.setAuth({ Token: 'foo' });
+      api.resetAuth();
       expect(cookies.get('auth')).not.toBeDefined();
     });
 
     it('should remove the HTTP authorization header', function() {
-      api.setAuthToken('foo');
-      api.resetAuthToken();
+      api.setAuth({ Token: 'foo' });
+      api.resetAuth();
       expect(http.defaults.headers.common.Authorization).not.toBeDefined();
     });
+  });
+
+  describe('getAuthParam function', function () {
+
+    it('should return undefined when no auth cookie is present', function () {
+      cookies.remove('auth');
+      expect(api.getAuthParam('foo')).not.toBeDefined();
+    });
+
+    it('should return undefined when no property of that name is present on auth cookie', function () {
+      cookies.put('auth', { foo: 'bar' });
+      expect(api.getAuthParam('bar')).not.toBeDefined();
+    });
+
+    it('should return the value when present on auth cookie', function () {
+      cookies.put('auth', { foo: 'bar' });
+      expect(api.getAuthParam('foo')).toBe('bar');
+    });
+
+  });
+
+  describe('setAuthParam function', function () {
+
+    it('should do nothing when no auth cookie is present', function () {
+      cookies.remove('auth');
+      api.setAuthParam('foo', 'bar');
+      expect(cookies.get('auth')).not.toBeDefined();
+    });
+
+    it('should set the property when auth cookie is present', function () {
+      cookies.put('auth', { foo: 'bar' });
+      api.setAuthParam('foo', 'bar2');
+      expect(cookies.get('auth').foo).toBe('bar2');
+    });
+
   });
 
   describe('request function', function () {
@@ -147,7 +182,7 @@ describe('Service: api', function () {
       spyOn(rootScope, '$emit').andReturn(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      api.setAuthToken('foo');
+      api.setAuth({ Token: 'foo' });
       expect(api.hasAuthToken()).toBe(true);
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
@@ -342,14 +377,14 @@ describe('Service: api', function () {
 
     it('should return the expected URL when user is logged in, and no params are provided', function () {
       spyOn(user, 'isLoggedIn').andReturn(true);
-      api.setAuthToken('SECRET');
+      api.setAuth({ Token: 'SECRET' });
       var url = api.contentLink('/foo/bar');
       expect(url).toBe('http://example.com/api/foo/bar?AuthToken=SECRET');
     });
 
     it('should return the expected URL when user is logged in, and any params are provided', function () {
       spyOn(user, 'isLoggedIn').andReturn(true);
-      api.setAuthToken('SECRET');
+      api.setAuth({ Token: 'SECRET' });
       var url = api.contentLink('/foo/bar', {param1: 'value1'});
       expect(url).toBe('http://example.com/api/foo/bar?param1=value1&AuthToken=SECRET');
     });

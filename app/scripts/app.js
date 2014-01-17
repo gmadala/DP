@@ -168,25 +168,26 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
+
           var isDealer = User.isDealer(),
             savedAuth = $cookieStore.get('auth');
 
           if (!User.isLoggedIn() && savedAuth) {
             // we're restoring session from saved auth token
             event.preventDefault();
-            User.initSession(savedAuth.authToken, savedAuth.userVoiceToken).then(
+            User.initSession(savedAuth).then(
               function() {
                 $state.transitionTo(toState);
               }
             );
           }
 
-          if (!User.isLoggedIn()) {
+          else if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
             pendingState = toState; // save the original state destination to switch back when logged in
             $location.path('/login');
-          } else if (User.showInitialization()) {
+          } else if (User.isUserInitRequired()) {
             // not initialized? lets update the security questions
             $location.path('/login/updateSecurity');
           } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {

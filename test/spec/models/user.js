@@ -198,10 +198,15 @@ describe('Model: User', function () {
     });
 
     it('should set the api auth token with the value from the response', function () {
-      spyOn(api, 'setAuthToken');
+      spyOn(api, 'setAuth');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(api.setAuthToken).toHaveBeenCalledWith('12345', '54321');
+      expect(api.setAuth).toHaveBeenCalled();
+      expect(api.setAuth.mostRecentCall.args[0]).toEqual({
+        Token: '12345',
+        ShowUserInitialization: true,
+        UserVoiceToken: '54321'
+      });
     });
 
     it('should update the isLoggedIn function result', function () {
@@ -243,7 +248,7 @@ describe('Model: User', function () {
       expect(segmentio.identify.mostRecentCall.args[1].name).toBe('Tricolor Auto');
     });
 
-    it('should return a promise for authentication metadata including ShowUserInitialization', function () {
+    it('should return a promise for authentication result data', function () {
       var out = null;
 
       user.authenticate('test', 'testpw').then(function (result) {
@@ -252,8 +257,11 @@ describe('Model: User', function () {
 
       httpBackend.flush();
 
-      expect(out).toBeDefined();
-      expect(out.showUserInit).toBe(true);
+      expect(out).toEqual({
+        Token: '12345',
+        ShowUserInitialization: true,
+        UserVoiceToken: '54321'
+      });
     });
 
     it('should make the expected logout request to the server on logout', function () {
@@ -305,7 +313,7 @@ describe('Model: User', function () {
 
   describe('dropSession method', function () {
     it('should reset the auth token immediately', function () {
-      api.setAuthToken('foo');
+      api.setAuth({ Token: 'foo' });
 
       user.dropSession();
       expect(user.isLoggedIn()).toBe(false);
@@ -451,6 +459,30 @@ describe('Model: User', function () {
       user.refreshInfo();
       httpBackend.flush();
       expect(user.isDealer()).toBe(false);
+    });
+
+  });
+
+  describe('isUserInitRequired + clearUserInitRequired methods', function () {
+
+    var $cookieStore;
+    beforeEach(inject(function (_$cookieStore_) {
+      $cookieStore = _$cookieStore_;
+    }));
+
+    it('should return false normally', function () {
+      expect(user.isUserInitRequired()).toBe(false);
+    });
+
+    it('should return true when flag is present in auth cookie', function () {
+      $cookieStore.put('auth', { ShowUserInitialization: true });
+      expect(user.isUserInitRequired()).toBe(true);
+    });
+
+    it('should return false once clear is called', function () {
+      $cookieStore.put('auth', { ShowUserInitialization: true });
+      user.clearUserInitRequired();
+      expect(user.isUserInitRequired()).toBe(false);
     });
 
   });

@@ -76,7 +76,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
           }
         };
       },
-      setShowUserInitialization: noop
+      clearUserInitRequired: noop
     };
 
     locationMock = {
@@ -152,7 +152,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     it('should call methods with the correct params', function() {
       SettingsMock.toSucceed = true; // tell the SettingsMock to succeed at submitting the form
       spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
-      spyOn(UserMock, 'setShowUserInitialization');
+      spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
       expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
@@ -161,18 +161,18 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
         { SecurityQuestionId: undefined, Answer: undefined} // not really possible in the UI, but true to the mocked data
       ]);
 
-      expect(UserMock.setShowUserInitialization).toHaveBeenCalledWith(false);
+      expect(UserMock.clearUserInitRequired).toHaveBeenCalled();
     });
 
     it('should call methods and fail', function() {
       SettingsMock.toSucceed = false; // tell the SettingsMock to fail at submitting the form
       spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
-      spyOn(UserMock, 'setShowUserInitialization');
+      spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
       expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalled();
 
-      expect(UserMock.setShowUserInitialization).not.toHaveBeenCalled();
+      expect(UserMock.clearUserInitRequired).not.toHaveBeenCalled();
       expect(scope.updateSecurity.email.$error.correctEmail).toEqual(true);
     });
 

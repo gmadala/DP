@@ -65,7 +65,7 @@ angular.module('nextgearWebApp')
       Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions)
         .then(function() {
           //success
-          User.setShowUserInitialization(false);
+          User.clearUserInitRequired();
           $location.path('/home');
         },
         function(response) {
