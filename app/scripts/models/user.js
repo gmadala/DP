@@ -77,8 +77,7 @@ angular.module('nextgearWebApp')
           })
           .then(function(authResult) {
             self.setShowUserInitialization(authResult.ShowUserInitialization);
-            var uvToken = decodeURIComponent(authResult.UserVoiceToken);
-            return self.initSession(authResult.Token, uvToken).then(function () {
+            return self.initSession(authResult.Token, authResult.UserVoiceToken).then(function () {
               segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
               return {
                 showUserInit: authResult.ShowUserInitialization
