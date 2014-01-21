@@ -229,7 +229,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           if (confirmed) {
             LastState.clearUserState();
             // clobber everything and start over at login page
-            window.location.hash = '/login';
+            $location.path('/login');
             // LastState cookie modifications are asynchronous
             // For IE9 support, must reload page within Angular
             // digest cycle for cookie to be written/destroyed.
@@ -245,7 +245,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         // save last visited state
         LastState.saveUserState();
         // set location as login page before refreshing to stop pendingState from being set
-        window.location.hash = '/login';
+        $location.path('/login');
         // clobber everything and start over at login page
         // LastState cookie modifications are asynchronous
         // For IE9 support, must reload page within Angular
