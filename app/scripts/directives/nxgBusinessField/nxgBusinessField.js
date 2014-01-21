@@ -27,7 +27,9 @@ angular.module('nextgearWebApp')
         mode: '@nxgBusinessField',
         disabled: '=ngDisabled',
         selection: '=selectedBusiness',
-        isRequired: '&ngRequired'
+        isRequired: '&ngRequired',
+        form: '=',
+        validity: '='
       },
       controller: 'BusinessFieldCtrl',
       compile: function (element, attrs) {
@@ -40,14 +42,31 @@ angular.module('nextgearWebApp')
   })
   .controller('BusinessFieldCtrl', function($scope, $element, $dialog) {
     var searchOpen = false;
-
     $scope.query = '';
+    var lengthAtSubmit = 0;
 
     $scope.clearSelected = function () {
       $scope.selection = null;
     };
 
+    $scope.isValidLength = function() {
+      return lengthAtSubmit >= 3;
+    };
+
     $scope.openBusinessSearch = function() {
+      lengthAtSubmit = $element.find('input').val().length;
+
+      $scope.validity = angular.extend($scope.validity || {}, {
+        inputBiz: { $error: {}}
+      });
+
+      if (!$scope.isValidLength()) {
+        $scope.validity = angular.extend($scope.validity || {}, {
+          inputBiz: angular.copy($scope.form.inputBiz)
+        });
+        return;
+      }
+
       var dialogOptions = {
         dialogClass: 'modal search-modal search-modal-business',
         backdrop: true,

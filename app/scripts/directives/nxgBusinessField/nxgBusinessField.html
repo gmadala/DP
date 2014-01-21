@@ -5,9 +5,22 @@
          ng-change="clearSelected()"
          ng-minlength="3"
          nxg-requires="!isRequired() || selection"
-         nxg-blur="handleExit($event)"/>
+         nxg-blur="handleExit($event)"
+         ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
   <button href class="btn btn-secondary nxg-search-btn" ng-click="disabled || openBusinessSearch()"
      ng-class="{disabled: disabled}">
     <i class="glyphicon glyphicon-search"></i>
   </button>
+  <div ng-switch on="mode">
+    <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires">
+      Please look up a Buyer.
+    </label>
+    <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires">
+      Please look up a Seller.
+    </label>
+  </div>
+  <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength">
+    Please enter at least 3 characters.
+  </label>
 </span>
+

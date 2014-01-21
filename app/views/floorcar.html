@@ -74,31 +74,23 @@
 
             <label>Trade in</label>
             <div class="form-inline nxg-radios">
-
               <input type="radio" id="yes" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn" ng-change="data.PaySeller = !data.SaleTradeIn" ng-disabled="!canPayBuyer()">
               <label for="yes">Yes</label>
 
               <input type="radio" id="no" name="inputTradeIn" ng-value="false" ng-model="data.SaleTradeIn" ng-disabled="!canPayBuyer()">
               <label for="no">No</label>
-
             </div>
 
-            <label for="inputSeller" class="input-title">Seller</label>
-            <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputSeller.$error.nxgRequires }">
-              <input nxg-business-field="sellers" id="inputSeller" class="input-xlarge"
-                     name="inputSeller"
+            <label for="inputBiz" class="input-title">Seller</label>
+            <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
+              <input nxg-business-field="sellers" id="inputBiz" class="input-xlarge"
+                     name="inputBiz"
                      ng-disabled="data.SaleTradeIn"
                      ng-required="!data.SaleTradeIn"
-                     selected-business="data.BusinessId" />
+                     selected-business="data.BusinessId"
+                     form="form"
+                     validity="validity" />
             </span>
-            <label for="inputSeller" class="text-error"
-                   ng-show="validity.inputSeller.$error.nxgRequires && !validity.inputSeller.$error.minlength">
-              Please look up a Seller.
-            </label>
-            <label for="inputSeller" class="text-error"
-                   ng-show="validity.inputSeller.$error.minlength">
-              Please enter at least 3 characters.
-            </label>
 
             <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
             <div class="input-prepend dollar">
