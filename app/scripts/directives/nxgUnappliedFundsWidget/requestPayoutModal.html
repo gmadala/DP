@@ -12,7 +12,7 @@
       <div>{{ funds.available | currency }}</div>
     </div>
     <label for="payoutAmt">Payout Amount</label>
-    <div ng-class="{invalid: validity.payoutAmt.$invalid}">
+    <div>
       <div class="input-prepend dollar">
         <span class="add-on">$</span>
         <input type="text"
@@ -34,7 +34,7 @@
       </label>
     </div>
     <label for="payoutBankAcct">Bank Account for Payout</label>
-    <div ng-class="{invalid: validity.payoutBankAcct.$invalid}">
+    <div ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$invalid}">
       <select id="payoutBankAcct"
               name="payoutBankAcct"
               ng-model="selections.account"
