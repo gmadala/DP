@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .factory('UserVoice', function ($window) {
 
     return {
-      init: function (apiKey) {
+      init: function (apiKey, BusinessNumber, BusinessName) {
         var api = this.getAPI();
         var uv=document.createElement('script');
         uv.type='text/javascript';
@@ -12,6 +12,15 @@ angular.module('nextgearWebApp')
         uv.src='//widget.uservoice.com/'+apiKey+'.js';
         var s=document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(uv,s);
+
+        // setup account traits
+        api.push(['identify', {
+          account: {
+            id: BusinessNumber,
+            name: BusinessName
+          }
+        }]);
+
         return api;
       },
       getAPI: function () {

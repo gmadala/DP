@@ -91,7 +91,10 @@ angular.module('nextgearWebApp')
         api.setAuth(authData);
         return $q.all([this.refreshInfo(), this.refreshStatics()]).then(function () {
           if (authData.UserVoiceToken) {
-            UserVoice.init(self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey);
+            var apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey,
+              info = self.getInfo();
+
+            UserVoice.init(apiKey, info.BusinessNumber, info.BusinessName);
             UserVoice.getAPI().push(['setSSO', authData.UserVoiceToken]);
           }
         });
