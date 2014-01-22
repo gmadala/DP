@@ -155,7 +155,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, $route) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState) {
     LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
@@ -228,12 +228,17 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
             LastState.clearUserState();
+
+            // For IE9 support, must run a digest cycle after setting the cookie
+            // and before reloading to make sure the cookie gets set before
+            // reload
+            $rootScope.$digest();
+
+            // set location as login page before refreshing to stop pendingState from being set
+            window.location.hash = '/login';
             // clobber everything and start over at login page
-            $location.path('/login');
             // LastState cookie modifications are asynchronous
-            // For IE9 support, must reload page within Angular
-            // digest cycle for cookie to be written/destroyed.
-            $route.reload();
+            window.location.reload(true);
           }
         });
       }
@@ -244,13 +249,17 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         User.dropSession();
         // save last visited state
         LastState.saveUserState();
+
+        // For IE9 support, must run a digest cycle after setting the cookie
+        // and before reloading to make sure the cookie gets set before
+        // reload
+        $rootScope.$digest();
+
         // set location as login page before refreshing to stop pendingState from being set
-        $location.path('/login');
+        window.location.hash = '/login';
         // clobber everything and start over at login page
         // LastState cookie modifications are asynchronous
-        // For IE9 support, must reload page within Angular
-        // digest cycle for cookie to be written/destroyed.
-        $route.reload();
+        window.location.reload(true);
       }
     );
 
