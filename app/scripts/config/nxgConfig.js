@@ -8,12 +8,12 @@ angular.module('nextgearWebApp')
     var segmentIoKey = 'sb06a2jbvj';
 
     // Training (Hotfix Testbed)
-    //var apiDomain = 'https://training.discoverdsc.com';
-    //var segmentIoKey = 'sb06a2jbvj';
+//    var apiDomain = 'https://training.discoverdsc.com';
+//    var segmentIoKey = 'sb06a2jbvj';
 
     // Production
-    //var apiDomain = 'https://customer.nextgearcapital.com';
-    //var segmentIoKey = '9eaffv4cbe';
+//    var apiDomain = 'https://customer.nextgearcapital.com';
+//    var segmentIoKey = '9eaffv4cbe';
 
     return {
       apiBase: apiDomain + '/MobileService/api',
