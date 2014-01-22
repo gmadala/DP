@@ -1,9 +1,6 @@
-NextGear Capital v1.2.6
+NextGear Capital v1.2.7
 =================================
 
 Fixes included in this release:
 
-VO-485	Integrate uservoice for feedback into app(s)
-VO-791	Web: User gets logout of the application when "F5" is pressed when Logout confirmation popup is opened.
-VO-818	When logging in user is brought to last page visited by any user, not just them
-VO-858	User can bypass "Update Security" screen
+VO-890	Business number and business name need to be added to the user voice integration and populated in UV as "account traits"
