@@ -46,6 +46,16 @@ describe('Controller: CancelPaymentCtrl', function () {
     expect(scope.title).toBe(optionsMock.title);
   });
 
+  it('should use a default title if none is provided', inject(function($controller) {
+    optionsMock.title = '';
+    CancelPaymentCtrl = $controller('CancelPaymentCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      options: optionsMock
+    });
+    expect(scope.title).toBe('Would you like to cancel your scheduled payment?');
+  }));
+
   describe('handleNo function', function () {
 
     it('should close the dialog with false', function () {

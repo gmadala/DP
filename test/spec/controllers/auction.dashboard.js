@@ -63,6 +63,24 @@ describe('Controller: AuctionDashboardCtrl', function() {
     scope.selectedFloorplanChart = 'week';
     scope.$apply();
     expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(0);
+
+    var testFn = function() {
+      dashboard.fetchFloorplanChartData.reset();
+      scope.selectedFloorplanChart = 'foo';
+      scope.$apply();
+    }
+    expect(testFn).toThrow(new Error('Unexpected value for filtering floorplan chart!'));
   });
 
+  describe('viewDisbursementDetail function', function() {
+    var d = '2013-11-24';
+
+    it('should create an api link and open the report in a new tab', function() {
+      spyOn(window, 'open').andReturn();
+
+      scope.viewDisbursementDetail(d);
+      var expectedStr = '/report/disbursementdetail/2013-11-24/Disbursements-2013-11-24';
+      expect(window.open).toHaveBeenCalledWith(expectedStr, '_blank');
+    });
+  });
 });
