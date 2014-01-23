@@ -136,6 +136,25 @@ describe('Model: DealerNumberSearch', function() {
       httpBackend.flush();
       expect(out).toBe(businessSearchResults.SearchResults[0]);
     });
+
+    it('should return null if there were no SearchResults returned', function() {
+      // Store old value of businessSearchResults so after the test we can put it back
+      var resultsStore = businessSearchResults;
+
+      businessSearchResults = {SearchResults: []};
+
+      var out = 'something defined';
+      dealerNumberSearch.searchByAuctionAccessNumber('1234').then(
+        function(result) {
+          out = result;
+        });
+      httpBackend.flush();
+      expect(out).toBe(null);
+
+      // Replace businessSearchResults
+      businessSearchResults = resultsStore;
+
+    });
   });
 
 });
