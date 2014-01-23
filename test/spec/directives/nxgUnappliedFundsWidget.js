@@ -100,6 +100,18 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       expect(scope.fundsBalance).toBe(400);
     });
 
+    it('openRequestPayout() should not do anything if not successful', function() {
+      spyOn(dialogMock, 'dialog').andReturn({
+        open: angular.noop
+
+      });
+
+      spyOn(dialogMock, 'messageBox').andCallThrough();
+      // scope.openRequestPayout({preventDefault: angular.noop});
+      scope.$apply();
+      expect(dialogMock.messageBox).not.toHaveBeenCalled();
+    })
+
   });
 
   describe('Payout modal controller', function () {
@@ -269,6 +281,20 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountName).toBe('foo');
       });
 
+    });
+
+    describe('cancel function', function() {
+      it('should exist', function() {
+        expect(scope.cancel).toBeDefined();
+        expect(typeof scope.cancel).toBe('function');
+      });
+
+      it('should close the dialog', function() {
+        spyOn(dialogMock, 'close');
+        scope.cancel();
+        scope.$apply();
+        expect(dialogMock.close).toHaveBeenCalled();
+      })
     });
 
   });
