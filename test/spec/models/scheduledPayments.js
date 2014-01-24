@@ -234,7 +234,7 @@ describe('Model: Scheduled Payments', function() {
       });
 
       it('should filter by cancelled', function() {
-        scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_CANCELED);
+        scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_CANCELLED);
         httpBackend.flush();
         expect(requestUrl.indexOf('SearchPending=false')).not.toBe(-1);
         expect(requestUrl.indexOf('SearchProcessed=false')).not.toBe(-1);
