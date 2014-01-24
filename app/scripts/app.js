@@ -227,12 +227,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }).open().then(function(confirmed) {
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
-            LastState.clearUserState();
-
-            // For IE9 support, must run a digest cycle after setting the cookie
-            // and before reloading to make sure the cookie gets set before
-            // reload
-            $rootScope.$digest();
+            // we don't need to clear the user state here, because it's
+            // done on userAuthentication (see below)
 
             // set location as login page before refreshing to stop pendingState from being set
             window.location.hash = '/login';
@@ -252,8 +248,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
         // For IE9 support, must run a digest cycle after setting the cookie
         // and before reloading to make sure the cookie gets set before
-        // reload
-        $rootScope.$digest();
+        // reload. Make sure not to disrupt a currently running digest.
+        if(!$rootScope.$$phase) {
+          $rootScope.$digest();
+        }
 
         // set location as login page before refreshing to stop pendingState from being set
         window.location.hash = '/login';
