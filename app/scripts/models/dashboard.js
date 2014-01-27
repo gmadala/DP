@@ -150,15 +150,7 @@ angular.module('nextgearWebApp')
 
             // Prepare a data model appropriate for charting from the points returned
             var result = {
-
-              labels: [],
-              datasets: [
-                {
-                  fillColor: 'rgba(0, 0, 0, 0)',
-                  strokeColor: '#009EFF',
-                  data: []
-                }
-              ]
+              data: []
             };
 
             // ensure data points are ordered along the X axis
@@ -192,8 +184,7 @@ angular.module('nextgearWebApp')
             _.each(
               points,
               function (point) {
-                  result.labels.push(point.$label);
-                  result.datasets[0].data.push(point.Y);
+                  result.data.push([point.$label, point.Y]);
                 }
             );
 

@@ -116,7 +116,6 @@ angular.module('nextgearWebApp')
           }
 
           element.highcharts(options);
-          console.log(options);
           initializeChart.initialized = true;
         };
 
