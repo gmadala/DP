@@ -80,14 +80,13 @@ angular.module('nextgearWebApp')
               result.allAuctions = _.sortBy(responses[2], 'NumVehiclesAnalyzed').reverse(); // sort descending
 
               // trim down to the top ten for chart
-              var top10 = result.allAuctions.slice(0, 10).reverse(); // horizontal bar chart renders items in reverse order
-              result.top10Auctions = { labels: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+              var top10 = result.allAuctions.slice(0, 10);
+              result.top10Auctions = [];
 
               _.each(
                 top10,
                 function ( item ) {
-                  result.top10Auctions.labels.push(item.SellerName);
-                  result.top10Auctions.datasets[0].data.push(item.NumVehiclesAnalyzed);
+                  result.top10Auctions.push([item.SellerName, item.NumVehiclesAnalyzed]);
                 }
               );
 
@@ -101,7 +100,7 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/analytics/makemodelanalysis/' + (isTop ? 'true' : 'false')).then(
           function (response) {
 
-            var result = { labels: [], models: [], datasets: [ { fillColor: '#009EFF', data: [] } ] };
+            var result = {labels: [], data: []};
 
             response = _.sortBy(response, 'NinetyFifthPercentileTurnTime');
             if (isTop) {
@@ -111,17 +110,14 @@ angular.module('nextgearWebApp')
             _.each(
               response,
               function ( item ) {
-                result.labels.push('   '); // white space here is significant
-                result.models.push({
+                result.labels.push({
                   model: item.Model,
                   year: item.Year,
                   make: item.Make
                 });
-                result.datasets[0].data.push(item.NinetyFifthPercentileTurnTime);
+                result.data.push([item.Make+' '+item.Model, item.NinetyFifthPercentileTurnTime]);
               }
             );
-
-            result.models.reverse(); // chart will flip the data set; do the same to data behind our custom labels
 
             return result;
           }

@@ -206,7 +206,7 @@
             </div>
 
             <table class="movers-list">
-              <tr ng-repeat="model in selectedMoverChart.models">
+              <tr ng-repeat="model in selectedMoverChart.labels">
                 <td class="rank">
                   {{ $index + 1 }}
                 </td>
@@ -220,17 +220,22 @@
               </tr>
             </table>
 
-            <div class="movers-chart">
+            <div class="movers-chart" style="width: 65%;margin: -5px;">
               <div>
                 <canvas width="290"
-                        height="350"
+                        height="350" style="display: none"
                         nxg-chart
                         nxg-chart-type="Bar"
-                        nxg-chart-data="selectedMoverChart"
+                        nxg-chart-data="selectedMoverChart.data"
                         nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
+                <div style="height: 365px; width: 100%"
+                     nxg-chart
+                     nxg-chart-type="bar"
+                     nxg-chart-data-name="Days to Turn"
+                     nxg-chart-description-x="Avg. # of Days to Turn"
+                     nxg-chart-data="selectedMoverChart.data"></div>
               </div>
             </div>
-              <p class="scale-description-x">Avg. # of Days to Turn</p>
           </div>
         </div>
 
@@ -245,13 +250,19 @@
               View All Auctions
             </a>
 
-            <canvas width="450"
+            <canvas width="450" style="display:none"
                       height="335"
                       nxg-chart
                       nxg-chart-type="Bar"
                       nxg-chart-data="analytics.top10Auctions"
                       nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-            <p class="scale-description-x"># of Cars Purchased</p>
+            <div style="height: 335px"
+                 nxg-chart
+                 nxg-chart-type="bar"
+                 nxg-chart-data-name="# Purchased"
+                 nxg-chart-description-x="# of Cars Purchased"
+                 nxg-chart-data="analytics.top10Auctions"
+                 nxg-chart-labels="true"></div>
           </div>
         </div>
     </section>
