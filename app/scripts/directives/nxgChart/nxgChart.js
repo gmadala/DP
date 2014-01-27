@@ -10,6 +10,8 @@ angular.module('nextgearWebApp')
         descriptionX: '@nxgChartDescriptionX', // dependent axis legend text
         dataName: '@nxgChartDataName', // Text next to value on tooltip
         tooltip: '@nxgChartTooltip', // true or false
+        size: '@nxgChartSize',
+        innerSize: '@nxgChartInnerSize',
         options: '&nxgChartOptions'
       },
       link: function(scope, element) {
@@ -29,6 +31,7 @@ angular.module('nextgearWebApp')
             legend: { enabled: false },
             chart:  { type   : scope.type, backgroundColor: 'transparent', spacing: [0,0,0,0] },
             title:  { text   : ''    },
+            credits:{ enabled: false },
             tooltip: {
               enabled: scope.tooltip !== 'false' ? true : false
             },
@@ -61,9 +64,14 @@ angular.module('nextgearWebApp')
           };
 
           if(scope.type === 'pie'){
-            options.series[0].size = '115%';
-            options.series[0].innerSize = '87%';
             options.series[0].states.hover.enabled = false;
+            if(scope.size && scope.size.indexOf('%') === -1){
+              options.series[0].size = parseInt(scope.size);
+              options.series[0].innerSize = parseInt(scope.innerSize);
+            }else{
+              options.series[0].size = scope.size || '115%';
+              options.series[0].innerSize = scope.innerSize || '87%';
+            }
           }
 
           element.highcharts(options);
@@ -91,6 +99,7 @@ angular.module('nextgearWebApp')
               element.highcharts().series[0].name = scope.dataName || 'Value'; // For tooltip
               if(scope.labels && scope.labels === 'true'){
                 // If categories are enabled, trim to 29 characters to keep them visible on the chart
+                // TODO Change this - the max length depends on width of chart.
                 element.highcharts().xAxis[0].setCategories(_.map(scope.data, function(item){
                   if(item[0].length > 29){
                     return item[0].substr(0,29-3)+"...";
