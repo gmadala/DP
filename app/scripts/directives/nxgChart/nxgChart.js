@@ -15,8 +15,6 @@ angular.module('nextgearWebApp')
         options: '&nxgChartOptions'
       },
       link: function(scope, element) {
-        if(element[0].tagName === 'CANVAS') return;
-
         // initialize chart with defaults and passed options
         var initializeChart = function(){
           var options = {
@@ -51,6 +49,10 @@ angular.module('nextgearWebApp')
               bar: {
                 pointWidth: 28,
                 pointPadding: 0
+              },
+              line: {
+                color: '#009EFF',
+                pointWidth: 45
               },
               pie: {
                 dataLabels: {
@@ -109,7 +111,12 @@ angular.module('nextgearWebApp')
             }
           }
 
+          if(scope.type === 'line') {
+            options.xAxis.type = 'category';
+          }
+
           element.highcharts(options);
+          console.log(options);
           initializeChart.initialized = true;
         };
 

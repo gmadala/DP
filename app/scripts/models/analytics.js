@@ -43,22 +43,15 @@ angular.module('nextgearWebApp')
 
               // Parse average turn time into a model suitable for charting
               result.averageTurn = {
-                labels: [],
-                datasets: [
-                  {
-                    fillColor: 'rgba(0, 0, 0, 0)',
-                    strokeColor: '#009EFF',
-                    data: []
-                  }
-                ]
+                data: []
               };
               _.each(
                 _.sortBy(responses[0], 'EndOfMonthDate'),
                 function ( item ) {
                   var fmt, date = moment(item.EndOfMonthDate);
                   fmt = date.month() === 0 ? 'MMM \'YY' : 'MMM';
-                  result.averageTurn.labels.push(date.format(fmt));
-                  result.averageTurn.datasets[0].data.push(item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior);
+                  result.averageTurn.data.push([date.format(fmt), item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior]
+                  );
                 }
               );
 

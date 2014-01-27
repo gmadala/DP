@@ -153,13 +153,14 @@
       <div class="span9 well average-turn-chart">
         <h4>Average Turn</h4>
         <div class="well-out">
-          <p>Average # of Days to Turn</p>
-          <canvas width="680"
-                  height="300"
-                  nxg-chart
-                  nxg-chart-type="Line"
-                  nxg-chart-data="analytics.averageTurn"
-                  nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }"></canvas>
+          <div class="chart-obj"
+              nxg-chart
+              nxg-chart-type="line"
+              nxg-chart-data-name="Days to Turn"
+              nxg-chart-description-x="Average # of Days to Turn"
+              nxg-chart-data="analytics.averageTurn.data"
+              nxg-chart-labels="true">
+          </div>
         </div>
       </div>
       <div class="span3 well aging-vehicles">
