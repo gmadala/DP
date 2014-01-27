@@ -220,15 +220,9 @@
               </tr>
             </table>
 
-            <div class="movers-chart" style="width: 65%;margin: -5px;">
+            <div class="movers-chart">
               <div>
-                <canvas width="290"
-                        height="350" style="display: none"
-                        nxg-chart
-                        nxg-chart-type="Bar"
-                        nxg-chart-data="selectedMoverChart.data"
-                        nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-                <div style="height: 365px; width: 100%"
+                <div class="chart-obj"
                      nxg-chart
                      nxg-chart-type="bar"
                      nxg-chart-data-name="Days to Turn"
@@ -249,20 +243,16 @@
             <a href class="btn btn-mini" ng-click="openTopAuctions()"> <i class="glyphicon glyphicon-eye-open"></i>
               View All Auctions
             </a>
-
-            <canvas width="450" style="display:none"
-                      height="335"
-                      nxg-chart
-                      nxg-chart-type="Bar"
-                      nxg-chart-data="analytics.top10Auctions"
-                      nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-            <div style="height: 335px"
-                 nxg-chart
-                 nxg-chart-type="bar"
-                 nxg-chart-data-name="# Purchased"
-                 nxg-chart-description-x="# of Cars Purchased"
-                 nxg-chart-data="analytics.top10Auctions"
-                 nxg-chart-labels="true"></div>
+            <div class="auctions-chart">
+              <div class="chart-obj"
+                   nxg-chart
+                   nxg-chart-type="bar"
+                   nxg-chart-data-name="# Purchased"
+                   nxg-chart-description-x="# of Cars Purchased"
+                   nxg-chart-data="analytics.top10Auctions"
+                   nxg-chart-labels="true">
+              </div>
+            </div>
           </div>
         </div>
     </section>

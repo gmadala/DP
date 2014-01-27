@@ -17,27 +17,38 @@ angular.module('nextgearWebApp')
       link: function(scope, element) {
         if(element[0].tagName === 'CANVAS') return;
 
-
-        // Default settings for all charts.
-        // Can be overridden by passing options via `nxg-chart-options` attribute.
-        var defaults = {
-          animation: false,
-          segmentShowStroke: false
-        };
-        var options = angular.extend({}, defaults, scope.options());
-
+        // initialize chart with defaults and passed options
         var initializeChart = function(){
           var options = {
             legend: { enabled: false },
-            chart:  { type   : scope.type, backgroundColor: 'transparent', spacing: [0,0,0,0] },
+            chart:  {
+              type   : scope.type,
+              backgroundColor: 'transparent',
+              style: {
+                fontFamily: 'Helvetica, Arial, sans-serif'
+              }
+            },
             title:  { text   : ''    },
-            credits:{ enabled: false },
+            credits: { enabled: false },
             tooltip: {
-              enabled: scope.tooltip !== 'false' ? true : false
+              enabled: scope.tooltip !== 'false' ? true : false,
+              backgroundColor: 'rgba(255,255,255,1)',
+              borderColor: '#eee',
+              borderRadius: 0,
+              style: {
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontSize: '12px'
+              }
+            },
+            labels: {
+              style: {
+                fontFamily: 'Helvetica, Arial, sans-serif'
+              }
             },
             plotOptions: {
               bar: {
-                pointWidth: 26 // Played around, this was best value for bar width
+                pointWidth: 28,
+                pointPadding: 0
               },
               pie: {
                 dataLabels: {
@@ -47,17 +58,39 @@ angular.module('nextgearWebApp')
               }
             },
             xAxis: {
+              lineColor: '#ccc',
+              lineWidth: 1,
+              tickWidth: 0,
               labels: {
                 enabled: scope.labels && scope.labels === 'true',
-                aligned: 'right'
+                aligned: 'right',
+                style: {
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  fontSize: '12px'
+                }
               }
             },
             yAxis: {
+              lineColor: '#ccc',
+              lineWidth: 1,
+              tickWidth: 1,
               gridLineColor: '#eee',
-              title: {text: scope.descriptionX || ''},
+              title: {
+                text: scope.descriptionX || '',
+                style: {
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  color: '#135889'
+                }
+              },
+              labels: {
+                style: {
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  fontSize: '12px'
+                }
+              }
             },
             series: [{
-              color: '#009eff',
+              color: '#009EFF',
               name: 'Value',
               states: {hover: {}}
             }]

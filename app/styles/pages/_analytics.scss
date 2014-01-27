@@ -145,17 +145,26 @@
 
   .movers-chart {
     position: absolute;
-    top: 58px;
+    top: 53px;
     right: 10px;
     overflow: hidden;
-    width: 290px;
+    width: 65%;
+
+    .chart-obj {
+      height: 385px;
+      width: 100%;
+    }
+  }
+
+  .auctions-chart .chart-obj {
+    height: 375px;
   }
 
   .top-auctions-container, .movers-container {
     position: relative;
 
     .well-out {
-      height: 430px;
+      height: 440px;
     }
   }
 }
