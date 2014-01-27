@@ -65,8 +65,12 @@
   border: 1px solid $border;
   margin-bottom: 10px;
 
-  canvas {
+  div {
     @include rotate(10deg);
+
+    text {
+      display: none;
+    }
   }
 
   table {
@@ -83,8 +87,8 @@
 }
 
 .credit-chart {
-  canvas {
-    @include scale(-1);
+  .highcharts-container {
+    @include rotate(180deg);
   }
 
   .nxg-doughnut-chart-label {

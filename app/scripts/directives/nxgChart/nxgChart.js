@@ -5,10 +5,11 @@ angular.module('nextgearWebApp')
     return {
       scope: {
         data: '=nxgChartData',
-        type: '@nxgChartType', // 'bar' or 'line'
+        type: '@nxgChartType', // 'bar' or 'line' or 'pie'
         labels: '@nxgChartLabels', // Array of labels on independent axis
         descriptionX: '@nxgChartDescriptionX', // dependent axis legend text
         dataName: '@nxgChartDataName', // Text next to value on tooltip
+        tooltip: '@nxgChartTooltip', // true or false
         options: '&nxgChartOptions'
       },
       link: function(scope, element) {
@@ -24,13 +25,22 @@ angular.module('nextgearWebApp')
         var options = angular.extend({}, defaults, scope.options());
 
         var initializeChart = function(){
-          element.highcharts({
+          var options = {
             legend: { enabled: false },
-            chart:  { type   : scope.type  },
+            chart:  { type   : scope.type, backgroundColor: 'transparent', spacing: [0,0,0,0] },
             title:  { text   : ''    },
+            tooltip: {
+              enabled: scope.tooltip !== 'false' ? true : false
+            },
             plotOptions: {
               bar: {
                 pointWidth: 26 // Played around, this was best value for bar width
+              },
+              pie: {
+                dataLabels: {
+                  enabled: false
+                },
+                borderWidth: 0
               }
             },
             xAxis: {
@@ -45,10 +55,18 @@ angular.module('nextgearWebApp')
             },
             series: [{
               color: '#009eff',
-              name: 'Value'
+              name: 'Value',
+              states: {hover: {}}
             }]
+          };
 
-          });
+          if(scope.type === 'pie'){
+            options.series[0].size = '115%';
+            options.series[0].innerSize = '87%';
+            options.series[0].states.hover.enabled = false;
+          }
+
+          element.highcharts(options);
           initializeChart.initialized = true;
         };
 
