@@ -140,14 +140,14 @@ describe('Model: dashboard', function () {
 
     it('should populate creditChartData outer with breakdown of credit by type', function () {
       expect(resultData.creditChartData.outer.length).toBe(2);
-      expect(resultData.creditChartData.outer[0].value).toBe(450000);
-      expect(resultData.creditChartData.outer[1].value).toBe(75000);
+      expect(resultData.creditChartData.outer[0].y).toBe(450000);
+      expect(resultData.creditChartData.outer[1].y).toBe(75000);
     });
 
     it('should populate creditChartData inner with breakdown of credit by utilization', function () {
       expect(resultData.creditChartData.inner.length).toBe(2);
-      expect(resultData.creditChartData.inner[0].value).toBe(474000);
-      expect(resultData.creditChartData.inner[1].value).toBe(50500);
+      expect(resultData.creditChartData.inner[0].y).toBe(474000);
+      expect(resultData.creditChartData.inner[1].y).toBe(50500);
     });
 
     it('should add a paymentChartData object with expected structure', function () {
@@ -176,9 +176,9 @@ describe('Model: dashboard', function () {
     });
 
     it('should wrap this data up into a chart-compatible format', function () {
-      expect(resultData.paymentChartData.chartData[0].value).toBe(resultData.paymentChartData.fees);
-      expect(resultData.paymentChartData.chartData[1].value).toBe(resultData.paymentChartData.payments);
-      expect(resultData.paymentChartData.chartData[2].value).toBe(resultData.paymentChartData.scheduledPayments);
+      expect(resultData.paymentChartData.chartData[0].y).toBe(resultData.paymentChartData.fees);
+      expect(resultData.paymentChartData.chartData[1].y).toBe(resultData.paymentChartData.payments);
+      expect(resultData.paymentChartData.chartData[2].y).toBe(resultData.paymentChartData.scheduledPayments);
     });
 
     it('should add a calendarData object with the expected properties', function () {
@@ -330,62 +330,55 @@ describe('Model: dashboard', function () {
     it('should return a promise for the expected chart data structure', function () {
       dashboard.fetchFloorplanChartData(0).then(
         function (result) {
-          expect(angular.isArray(result.labels)).toBe(true);
-
-          expect(angular.isArray(result.datasets)).toBe(true);
-          expect(result.datasets.length).toBe(1);
-          expect(result.datasets[0].fillColor).toBeDefined();
-          expect(result.datasets[0].strokeColor).toBeDefined();
-
-          expect(angular.isArray(result.datasets[0].data)).toBe(true);
+          expect(angular.isArray(result.data)).toBe(true);
         }
       );
       httpBackend.flush();
     });
 
-    it('should make the data items the Y values, sorted by X value', function () {
+    it('should put the Y values in the array and sort it by X value', function () {
       dashboard.fetchFloorplanChartData(0).then(
         function (result) {
-          expect(result.datasets[0].data.length).toBe(3);
-          expect(result.datasets[0].data[0]).toBe(8);
-          expect(result.datasets[0].data[1]).toBe(4);
-          expect(result.datasets[0].data[2]).toBe(5);
+          expect(result.data.length).toBe(3);
+          expect(result.data[0][1]).toBe(8);
+          expect(result.data[1][1]).toBe(4);
+          expect(result.data[2][1]).toBe(5);
         }
       );
       httpBackend.flush();
     });
 
-    it('should create labels as days up to the current day, in week mode', function () {
+    it('should add labels as days up to the current day, in week mode', function () {
       dashboard.fetchFloorplanChartData(0).then(
         function (result) {
-          expect(result.labels.length).toBe(3);
-          expect(result.labels[0]).toBe('Sat');
-          expect(result.labels[1]).toBe('Sun');
-          expect(result.labels[2]).toBe('Mon');
+          expect(result.data.length).toBe(3);
+          expect(result.data[0][0]).toBe('Sat');
+          expect(result.data[1][0]).toBe('Sun');
+          expect(result.data[2][0]).toBe('Mon');
         }
       );
       httpBackend.flush();
     });
 
-    it('should create labels as weeks (dated by Sundays) up to the current week, in month mode', function () {
+    it('should add labels as weeks (dated by Sundays) up to the current week, in month mode', function () {
       dashboard.fetchFloorplanChartData(1).then(
         function (result) {
-          expect(result.labels.length).toBe(3);
-          expect(result.labels[0]).toBe('Mar 16');
-          expect(result.labels[1]).toBe('Mar 23');
-          expect(result.labels[2]).toBe('Mar 30');
+          expect(result.data.length).toBe(3);
+          expect(result.data[0][0]).toBe('Mar 16');
+          expect(result.data[1][0]).toBe('Mar 23');
+          expect(result.data[2][0]).toBe('Mar 30');
         }
       );
       httpBackend.flush();
     });
 
-    it('should create labels as months (with short year) up to the current month, in year mode', function () {
+    it('should add labels as months (with short year) up to the current month, in year mode', function () {
       dashboard.fetchFloorplanChartData(2).then(
         function (result) {
-          expect(result.labels.length).toBe(3);
-          expect(result.labels[0]).toBe('Jan \'14');
-          expect(result.labels[1]).toBe('Feb \'14');
-          expect(result.labels[2]).toBe('Mar \'14');
+          expect(result.data.length).toBe(3);
+          expect(result.data[0][0]).toBe('Jan \'14');
+          expect(result.data[1][0]).toBe('Feb \'14');
+          expect(result.data[2][0]).toBe('Mar \'14');
         }
       );
       httpBackend.flush();
