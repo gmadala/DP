@@ -33,8 +33,10 @@ angular.module('nextgearWebApp')
             tooltip: {
               enabled: scope.tooltip !== 'false' ? true : false,
               backgroundColor: 'rgba(255,255,255,1)',
-              borderColor: '#eee',
+              borderColor: '#ccc',
               borderRadius: 0,
+              headerFormat: '<span>{point.key}</span><br/>',
+              shadow: false,
               style: {
                 fontFamily: 'Helvetica, Arial, sans-serif',
                 fontSize: '12px'
@@ -119,13 +121,15 @@ angular.module('nextgearWebApp')
             }
 
             if(initializeChart.initialized){
-              element.highcharts().yAxis[0].update({
-                min: _.min(scope.data, function(point){
+              var dataMin = _.min(scope.data, function(point){
                   return point[1];
-                })[1]-5,
+                })[1];
+              element.highcharts().yAxis[0].update({
+                // only subtract 5 if it won't give us a negative value
+                min: (dataMin >= 5) ? dataMin - 5 : dataMin,
                 max: _.max(scope.data, function(point){
                   return point[1];
-                })[1]+5
+                })[1] + 5
               });
 
               element.highcharts().series[0].setData(scope.data);
