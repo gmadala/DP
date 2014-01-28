@@ -343,9 +343,9 @@ describe('Controller: CheckoutCtrl', function () {
       expect(scope.unappliedFunds.useFunds).toBe(false);
     });
 
-    it('should default amount to 0', function () {
+    it('should default amount to \'\'', function () {
       run();
-      expect(scope.unappliedFunds.useAmount).toBe(0);
+      expect(scope.unappliedFunds.useAmount).toBe('');
     });
 
     it('should force unapplied funds use to false if last item is removed from today bucket', function () {
