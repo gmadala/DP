@@ -7,6 +7,7 @@ angular.module('nextgearWebApp')
         sessionTimeout = null;
 
     function onSessionTimeout(ob, debug) {
+      $rootScope.$emit('event:forceClearAuth');
       if (sessionHasTimedOut) {
         return null; // we've already handled this
       }

@@ -242,10 +242,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:forceLogout',
       function(){
-        User.dropSession();
-        // save last visited state
-        LastState.saveUserState();
-
         // For IE9 support, must run a digest cycle after setting the cookie
         // and before reloading to make sure the cookie gets set before
         // reload. Make sure not to disrupt a currently running digest.
@@ -258,6 +254,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         // clobber everything and start over at login page
         // LastState cookie modifications are asynchronous
         window.location.reload(true);
+      }
+    );
+
+    $rootScope.$on('event:forceClearAuth',
+      function(){
+        User.dropSession();
+        // save last visited state
+        LastState.saveUserState();
       }
     );
 
