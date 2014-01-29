@@ -91,11 +91,7 @@ angular.module('nextgearWebApp')
     // The current `dialog` is magically injected thanks to AngularUI.
     var focusField = null;
 
-    if ($scope.data.searchBuyersMode) {
-      focusField = angular.element('#inputBuyer').next('button');
-    } else {
-      focusField = angular.element('#inputSeller').next('button');
-    }
+    focusField = angular.element('#inputBiz').next('button');
 
     $scope.close = function() {
       dialog.close();
