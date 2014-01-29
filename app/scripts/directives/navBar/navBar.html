@@ -1,5 +1,5 @@
 <!-- NOT LOGGED IN HEADER -->
-<header class="login-head" ng-show="navState.current.hideNavBar">
+<header class="login-head" ng-hide="navState.current.showNavBar">
   <div class="row-fluid">
     <div class="container-fluid nxg-logo">
     </div>
@@ -7,7 +7,7 @@
 </header>
 
 <!-- LOGGED IN HEADER -->
-<header ng-hide="navState.current.hideNavBar">
+<header ng-show="navState.current.showNavBar">
   <div class="row-fluid">
     <div class="container-fluid app-header">
       <a ng-href="{{user.homeLink()}}" class="navLink ng-binding">
