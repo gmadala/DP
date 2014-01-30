@@ -12,7 +12,8 @@ angular.module('nextgearWebApp')
         tooltip: '@nxgChartTooltip', // true or false
         size: '@nxgChartSize',
         innerSize: '@nxgChartInnerSize',
-        options: '&nxgChartOptions'
+        options: '&nxgChartOptions',
+        truncateLabels: '@nxgChartTrimLabels' // true or false
       },
       link: function(scope, element) {
         // initialize chart with defaults and passed options
@@ -141,11 +142,11 @@ angular.module('nextgearWebApp')
               element.highcharts().series[0].setData(scope.data);
               element.highcharts().series[0].name = scope.dataName || 'Value'; // For tooltip
               if(scope.labels && scope.labels === 'true'){
-                // If categories are enabled, trim to 29 characters to keep them visible on the chart
-                // TODO Change this - the max length depends on width of chart.
+                // If categories are enabled, trim to 20 characters to keep them visible on the chart
                 element.highcharts().xAxis[0].setCategories(_.map(scope.data, function(item){
-                  if(item[0].length > 29){
-                    return item[0].substr(0,29-3)+"...";
+                  if(item[0].length > 20 && scope.truncateLabels){
+                    // cuts string to 20 characters including ellipsis, & no space before ellipsis
+                    return item[0].substr(0,20-3).trim()+"...";
                   }else{
                     return item[0];
                   }

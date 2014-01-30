@@ -281,9 +281,9 @@ describe('Model: Analytics', function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should have descending sorted datasets data when isTop is true', function () {
+    it('should have descending sorted datasets data when isTop is false', function () {
       var res;
-      analytics.fetchMovers(true).then(function(result) {
+      analytics.fetchMovers(false).then(function(result) {
         res = result;
       });
       httpBackend.flush();
@@ -297,9 +297,9 @@ describe('Model: Analytics', function () {
       ]);
     });
 
-    it('should have ascending sorted datasets data when isTop is false', function () {
+    it('should have ascending sorted datasets data when isTop is true', function () {
       var res;
-      analytics.fetchMovers(false).then(function(result) {
+      analytics.fetchMovers(true).then(function(result) {
         res = result;
       });
       httpBackend.flush();

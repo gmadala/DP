@@ -96,7 +96,7 @@ angular.module('nextgearWebApp')
             var result = {labels: [], data: []};
 
             response = _.sortBy(response, 'NinetyFifthPercentileTurnTime');
-            if (isTop) {
+            if (!isTop) {
               response.reverse();
             }
 
@@ -111,7 +111,6 @@ angular.module('nextgearWebApp')
                 result.data.push([item.Make+' '+item.Model, item.NinetyFifthPercentileTurnTime]);
               }
             );
-
             return result;
           }
         );
