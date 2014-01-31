@@ -4,35 +4,28 @@ describe('Directive: nxgChart', function () {
   beforeEach(module('nextgearWebApp'));
 
   var element,
-      scope;
+      scope,
+      outerScope;
 
-  it('should do something to the canvas element', inject(function ($rootScope, $compile) {
-    // Setup the directive
-    scope = $rootScope;
-    scope.chartData = {};
-    element = angular.element('<canvas nxg-chart nxg-chart-data="chartData" nxg-chart-type="Pie"></canvas>');
-    element = $compile(element)(scope);
-    scope.$digest();
+  beforeEach(inject(function($rootScope, $compile) {
+    outerScope = $rootScope.$new();
+    outerScope.mockData = [
+      ['label1', 10],
+      ['label2', 20],
+      ['label3', 30]
+    ];
+    element = angular.element('<div nxg-chart nxg-chart-data="mockData" nxg-chart-type="bar" nxg-chart-description-x="Foo Description" nxg-chart-data-name="Foo Data Name" nxg-chart-tooltip="true"></div>')
 
-    // Do some sanity checks
-    expect(element.attr('height')).toBe('150');
-    expect(element.attr('width')).toBe('300');
+    element = $compile(element)(outerScope);
+    $rootScope.$digest();
   }));
 
-  it('should use the IE8 polyfill if necessary', inject(function ($rootScope, $compile) {
-    // Mock for testing IE8 polyfill
-    window.G_vmlCanvasManager = {initElement: angular.noop};
-
-    // Setup the directive
-    scope = $rootScope;
-    scope.chartData = {};
-    element = angular.element('<canvas nxg-chart nxg-chart-data="chartData" nxg-chart-type="Pie"></canvas>');
-    element = $compile(element)(scope);
-    scope.$digest();
-
-    // Do some sanity checks
-    expect(element.attr('height')).toBe('150');
-    expect(element.attr('width')).toBe('300');
-  }));
-
+  it('should attach the given parameters to the scope', function (){
+    var iScope = element.scope();
+    expect(iScope.data).toBe(outerScope.mockData);
+    expect(iScope.type).toBe('bar');
+    expect(iScope.descriptionX).toBe('Foo Description');
+    expect(iScope.dataName).toBe('Foo Data Name');
+    expect(iScope.tooltip).toBe('true');
+  });
 });

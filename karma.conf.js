@@ -34,7 +34,7 @@ module.exports = function(karma) {
       'app/components/modernizr/modernizr.js',
       'app/components/angular-cookies/angular-cookies.js',
       'app/components/angular-local-storage/angular-local-storage.js',
-	    'app/private-components/chartjs/Chart.js',
+	    'app/components/highcharts.com/js/highcharts.src.js',
 	    'app/private-components/angular-segmentio/angular-segmentio.js',
 
       // Once ui-bootstrap is updated to version 0.6.0 or greater this

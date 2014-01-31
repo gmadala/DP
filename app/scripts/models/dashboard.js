@@ -29,12 +29,12 @@ angular.module('nextgearWebApp')
             // calculate .creditChartData
             result.creditChartData = {
               outer: [
-                { color: '#9F9F9F', value: result.LineOfCredit },
-                { color: '#575757', value: result.TempLineOfCredit }
+                { color: '#9F9F9F', y: result.LineOfCredit },
+                { color: '#575757', y: result.TempLineOfCredit }
               ],
               inner: [
-                { color: '#3D9AF4', value: result.UtilizedCredit },
-                { color: '#54BD45', value: result.AvailableCredit }
+                { color: '#3D9AF4', y: result.UtilizedCredit },
+                { color: '#54BD45', y: result.AvailableCredit }
               ]
             };
 
@@ -55,9 +55,12 @@ angular.module('nextgearWebApp')
               total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
               // @see http://www.chartjs.org/docs/#pieChart-dataStructure
               chartData: [
-                { color: '#444444', value: result.AccountFeeAmount },                               // Fees
-                { color: '#2286f5', value: result.UpcomingPaymentsAmount - scheduledPaymentAmount }, // Payments
-                { color: '#3fb232', value: scheduledPaymentAmount }                                 // Scheduled Payments
+                {name: 'Fees', color: '#444444', y: result.AccountFeeAmount},
+                {name: 'Payments', color: '#2286f5', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
+                {name: 'Scheduled Payments', color: '#3fb232', y: scheduledPaymentAmount}
+                // { color: '#444444', value: result.AccountFeeAmount },                               // Fees
+                // { color: '#2286f5', value: result.UpcomingPaymentsAmount - scheduledPaymentAmount }, // Payments
+                // { color: '#3fb232', value: scheduledPaymentAmount }                                 // Scheduled Payments
               ]
             };
 
@@ -147,15 +150,7 @@ angular.module('nextgearWebApp')
 
             // Prepare a data model appropriate for charting from the points returned
             var result = {
-
-              labels: [],
-              datasets: [
-                {
-                  fillColor: 'rgba(0, 0, 0, 0)',
-                  strokeColor: '#009EFF',
-                  data: []
-                }
-              ]
+              data: []
             };
 
             // ensure data points are ordered along the X axis
@@ -189,8 +184,7 @@ angular.module('nextgearWebApp')
             _.each(
               points,
               function (point) {
-                  result.labels.push(point.$label);
-                  result.datasets[0].data.push(point.Y);
+                  result.data.push([point.$label, point.Y]);
                 }
             );
 

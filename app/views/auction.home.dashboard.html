@@ -70,18 +70,16 @@
 
         <input type="radio" class="last" name="week" id="week" value="week" ng-model="selectedFloorplanChart" placeholder="Ten Worst Movers">
         <label for="week" id="week-label"></label>
-
       </div>
 
-      <span class="scale-description-y"># of Floored Vehicles</span>
-      <canvas width="940"
-              height="300"
-              ng-show="true"
-              nxg-chart
-              nxg-chart-type="Line"
-              nxg-chart-data="chartData"
-              nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }">
-      </canvas>
+      <div class="chart-obj"
+          nxg-chart
+          nxg-chart-type="line"
+          nxg-chart-data-name="Vehicles Floored"
+          nxg-chart-description-x="# of Floored Vehicles"
+          nxg-chart-data="chartData.data"
+          nxg-chart-labels="true">
+      </div>
     </div>
   </div>
 </div>

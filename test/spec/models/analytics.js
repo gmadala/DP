@@ -14,7 +14,6 @@ describe('Model: Analytics', function () {
   }));
 
   describe('fetchBusinessSummary method', function () {
-
     var response,
       messages;
 
@@ -42,7 +41,6 @@ describe('Model: Analytics', function () {
       };
 
       httpBackend.expectGET('/dealer/summary').respond(response);
-
     });
 
     it('should call to the expected endpoint', function() {
@@ -65,17 +63,13 @@ describe('Model: Analytics', function () {
       expect(response.Data.DerivedCapitalBook).toEqual(0);
       expect(response.Data.DerivedAmountOutstanding).toEqual(0);
       expect(response.Data.DerivedPendingBook).toEqual(0);
-
     });
-
   });
 
   describe('fetchAnalytics method', function () {
-
     var response;
 
     beforeEach(function () {
-
       httpBackend.expectGET('/analytics/averageturntime').respond({
         "Success": true,
         "Message": null,
@@ -205,7 +199,6 @@ describe('Model: Analytics', function () {
             }
         ]
       });
-
     });
 
     it('should get from the three api endpoints', function () {
@@ -220,9 +213,13 @@ describe('Model: Analytics', function () {
       });
       httpBackend.flush();
 
-      expect(res.averageTurn.labels).toEqual(['Oct', 'Nov', 'Dec', "Jan '13", 'Feb']);
-      expect(res.averageTurn.datasets[0].data).toEqual([15,15,15,13,0]);
-
+      expect(res.averageTurn.data).toEqual([
+        ['Oct', 15],
+        ['Nov', 15],
+        ['Dec', 15],
+        ["Jan '13", 13],
+        ['Feb',0]
+      ]);
     });
 
     it('should return aging data categorized into count categories', function () {
@@ -233,13 +230,10 @@ describe('Model: Analytics', function () {
       httpBackend.flush();
 
       expect(res.aging).toEqual([2,1,1,2,1]);
-
     });
-
   });
 
   describe('fetchMovers method', function () {
-
     beforeEach(function() {
       var response = {
         Success: true,
@@ -287,37 +281,36 @@ describe('Model: Analytics', function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should have whitespace labels', function () {
-      var res;
-      analytics.fetchMovers(true).then(function(result) {
-        res = result;
-      });
-      httpBackend.flush();
-
-      expect(res.labels).toEqual(['   ','   ','   ','   ','   ']);
-    });
-
-    it('should have descending sorted datasets data when isTop is true', function () {
-      var res;
-      analytics.fetchMovers(true).then(function(result) {
-        res = result;
-      });
-      httpBackend.flush();
-
-      expect(res.datasets[0].data).toEqual([30,25,15,15,10]);
-    });
-
-    it('should have ascending sorted datasets data when isTop is false', function () {
+    it('should have descending sorted datasets data when isTop is false', function () {
       var res;
       analytics.fetchMovers(false).then(function(result) {
         res = result;
       });
       httpBackend.flush();
 
-      expect(res.datasets[0].data).toEqual([10,15,15,25,30]);
+      expect(res.data).toEqual([
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 30],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 25],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 15],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 15],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 10]
+      ]);
     });
 
+    it('should have ascending sorted datasets data when isTop is true', function () {
+      var res;
+      analytics.fetchMovers(true).then(function(result) {
+        res = result;
+      });
+      httpBackend.flush();
 
+      expect(res.data).toEqual([
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 10],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 15],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 15],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 25],
+        ['CHRYSLER TOWN & COUNTRY TOURING WAGON', 30]
+      ]);
+    });
   });
-
 });
