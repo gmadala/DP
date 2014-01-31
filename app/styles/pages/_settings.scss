@@ -20,6 +20,10 @@ $set-label-width: 40%;
     margin: 10px 0
   }
 
+  & > .control-group {
+    @extend .clearfix;
+  }
+
   .control-label {
     @extend %thin;
     @extend %float-l;
