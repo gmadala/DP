@@ -50,22 +50,8 @@
   }
 
   .average-turn-chart {
-    p {
-      position: relative;
-      margin-left: 12px;
-
-      &:after {
-        content: ' ';
-        position: absolute;
-        top: 16px;
-        left: 5px;
-        width: 0;
-        height: 0;
-        border-top: 6px solid #535353;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        margin-top: 5px;
-      }
+    .chart-obj {
+      height: 330px;
     }
   }
 
@@ -145,17 +131,26 @@
 
   .movers-chart {
     position: absolute;
-    top: 58px;
+    top: 53px;
     right: 10px;
     overflow: hidden;
-    width: 290px;
+    width: 65%;
+
+    .chart-obj {
+      height: 385px;
+      width: 100%;
+    }
+  }
+
+  .auctions-chart .chart-obj {
+    height: 375px;
   }
 
   .top-auctions-container, .movers-container {
     position: relative;
 
     .well-out {
-      height: 430px;
+      height: 440px;
     }
   }
 }

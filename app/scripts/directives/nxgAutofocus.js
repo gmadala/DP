@@ -17,11 +17,11 @@ angular.module('nextgearWebApp')
           target = null;
 
         setTimeout(function(){
-          // find the first item that's an input or button
-          if (elementName === 'input' || elementName === 'button') {
+          // find the first item that's an input or button or a link
+          if (elementName === 'input' || elementName === 'button' || elementName === 'a') {
             target = element;
           } else {
-            var focusable = element.find('input, button');
+            var focusable = element.find('input, button, a:visible');
             if (focusable.length > 0) {
               target = angular.element(focusable[0]);
             }

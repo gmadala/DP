@@ -1,6 +1,17 @@
-NextGear Capital v1.2.7
+NextGear Capital v2.0.0
 =================================
 
 Fixes included in this release:
 
-VO-890	Business number and business name need to be added to the user voice integration and populated in UV as "account traits"
+VO-909	EUI WEB - Login as Seller -Bulk Floored the vehicles - Keeping the system idle more than 15 miutes not displaying the session time out
+VO-788	Web: Session Expired feature is not working properly in a scenario if user presses "Escape" Key when Session expired message is displayed.
+VO-794	Feedback & Support placement on the Web site for Dealers
+VO-982	Web: Settings page should not have gray bar across Business settings form.
+VO-983	Web: Payments Summary on checkout page causes weird slide effect.
+VO-864	Dealer Dashboard -> Show Details button doesn't change it's look when it has tab focus
+VO-838	Web: Auction User > "Bulk Flooring" > Buyer Search is not working properly if entered text in Buyer field is less than 3 characters (neither it is displaying any error).
+VO-787	Web: Update Security Question: Browser Back button doesn't work properly when some entries are filled.
+VO-784	Web: On Entering Values in text field on "Request Payout" popup as "1000000" - in this situation buttons on pop up are changing their position.
+VO-901	Auction Dashboard - Disbursement Group change of term
+VO-528	Web - Refactor the code for horizontal bar charts or find a different library
+VO-526	Add some kind of title or tooltip to show the actual numeric values represented on the horizontal bar charts.

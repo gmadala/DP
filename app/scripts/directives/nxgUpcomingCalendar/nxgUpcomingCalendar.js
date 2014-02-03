@@ -86,7 +86,7 @@ angular.module('nextgearWebApp')
 
             // make sure week view gets date numbers and no cells get duplicates
             if (angular.element(cell).find('.fc-day-number').length === 0) {
-              var d = moment(angular.element(cell).attr('data-date')).date();
+              var d = moment(dateKey).date();
 
               angular.element(cell).find('div > .fc-day-content').before('<div class="fc-day-number">' + d + '</div>');
             }

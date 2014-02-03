@@ -13,21 +13,18 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
-        allowAnonymous: true,
-        hideNavBar: true
+        allowAnonymous: true
       })
       .state('loginRecover', {
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
-        allowAnonymous: true,
-        hideNavBar: true
+        allowAnonymous: true
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',
         templateUrl: 'views/login.updateSecurity.html',
-        controller: 'LoginUpdateSecurityCtrl',
-        hideNavBar: true
+        controller: 'LoginUpdateSecurityCtrl'
       })
 
     /**
@@ -38,68 +35,81 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/home',
         abstract: true,
         templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        showNavBar: true
       })
       .state('home.dashboard', {
         url: '',
         templateUrl: 'views/home.dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
+        showNavBar: true
       })
       .state('home.payments', {
         url: '/payments',
         templateUrl: 'views/home.payments.html',
-        controller: 'PaymentsCtrl'
+        controller: 'PaymentsCtrl',
+        showNavBar: true
       })
       .state('home.checkout', {
         url: '/checkout',
         templateUrl: 'views/home.checkout.html',
-        controller: 'CheckoutCtrl'
+        controller: 'CheckoutCtrl',
+        showNavBar: true
       })
       .state('home.scheduledPayments', {
         url: '/scheduledPayments',
         templateUrl: 'views/home.scheduledpayments.html',
-        controller: 'ScheduledCtrl'
+        controller: 'ScheduledCtrl',
+        showNavBar: true
       })
       .state('home.receipts', {
         url: '/receipts',
         templateUrl: 'views/home.receipts.html',
-        controller: 'ReceiptsCtrl'
+        controller: 'ReceiptsCtrl',
+        showNavBar: true
       })
       .state('home.floorplan', {
         url: '/floorplan',
         templateUrl: 'views/home.floorplan.html',
-        controller: 'FloorplanCtrl'
+        controller: 'FloorplanCtrl',
+        showNavBar: true
       })
 
       .state('floorcar', {
         url: '/floorcar',
         templateUrl: 'views/floorcar.html',
-        controller: 'FloorCarCtrl'
+        controller: 'FloorCarCtrl',
+        showNavBar: true
       })
       .state('reports', {
         url: '/reports',
         templateUrl: 'views/reports.html',
-        controller: 'ReportsCtrl'
+        controller: 'ReportsCtrl',
+        showNavBar: true
       })
       .state('analytics', {
         url: '/analytics',
         templateUrl: 'views/analytics.html',
-        controller: 'AnalyticsCtrl'
+        controller: 'AnalyticsCtrl',
+        showNavBar: true
       })
       .state('documents', {
         url: '/documents',
         templateUrl: 'views/documents.html',
-        controller: 'DocumentsCtrl'
+        controller: 'DocumentsCtrl',
+        showNavBar: true
       })
       .state('feedback', {
         url: '/feedback',
         templateUrl: 'views/feedback.html',
-        controller: 'FeedbackCtrl'
+        controller: 'FeedbackCtrl',
+        showNavBar: true
       })
       .state('settings', {
         url: '/settings',
         templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl'
+        controller: 'SettingsCtrl',
+        showNavBar: true
       })
 
       // AUCTION STATES
@@ -108,54 +118,62 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         abstract: true,
         templateUrl: 'views/auction.home.html',
         controller: 'AuctionHomeCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_home.dashboard', {
         url: '',
         templateUrl: 'views/auction.home.dashboard.html',
         controller: 'AuctionDashboardCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_home.dealersearch', {
         url: '/dealersearch',
         templateUrl: 'views/auction.home.dealersearch.html',
         controller: 'AuctionDealerSearchCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_home.bulkflooring', {
         url: '/bulkflooring',
         templateUrl: 'views/auction.home.bulkflooring.html',
         controller: 'FloorCarCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_home.sellerfloorplan', {
         url: '/sellerfloorplan',
         templateUrl: 'views/auction.home.sellerfloorplan.html',
         controller: 'FloorplanCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_reports', {
         url: '/act/reports',
         templateUrl: 'views/auction.reports.html',
         controller: 'AuctionReportsCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_documents', {
         url: '/act/documents',
         templateUrl: 'views/auction.documents.html',
         controller: 'AuctionDocumentsCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
       .state('auction_settings', {
         url: '/act/settings',
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl',
-        isAuctionState: true
+        isAuctionState: true,
+        showNavBar: true
       })
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, $route) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState) {
     LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
@@ -227,13 +245,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }).open().then(function(confirmed) {
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
-            LastState.clearUserState();
-            // clobber everything and start over at login page
+            // we don't need to clear the user state here, because it's
+            // done on userAuthentication (see below)
+
+            // set location as login page before refreshing to stop pendingState from being set
             window.location.hash = '/login';
+            // clobber everything and start over at login page
             // LastState cookie modifications are asynchronous
-            // For IE9 support, must reload page within Angular
-            // digest cycle for cookie to be written/destroyed.
-            $route.reload();
+            window.location.reload(true);
           }
         });
       }
@@ -241,16 +260,26 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     $rootScope.$on('event:forceLogout',
       function(){
-        User.dropSession();
-        // save last visited state
-        LastState.saveUserState();
+        // For IE9 support, must run a digest cycle after setting the cookie
+        // and before reloading to make sure the cookie gets set before
+        // reload. Make sure not to disrupt a currently running digest.
+        if(!$rootScope.$$phase) {
+          $rootScope.$digest();
+        }
+
         // set location as login page before refreshing to stop pendingState from being set
         window.location.hash = '/login';
         // clobber everything and start over at login page
         // LastState cookie modifications are asynchronous
-        // For IE9 support, must reload page within Angular
-        // digest cycle for cookie to be written/destroyed.
-        $route.reload();
+        window.location.reload(true);
+      }
+    );
+
+    $rootScope.$on('event:forceClearAuth',
+      function(){
+        User.dropSession();
+        // save last visited state
+        LastState.saveUserState();
       }
     );
 

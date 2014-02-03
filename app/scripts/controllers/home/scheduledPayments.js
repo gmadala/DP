@@ -36,7 +36,7 @@ angular.module('nextgearWebApp')
         },
         {
           label: 'Cancelled',
-          value: ScheduledPaymentsSearch.FILTER_BY_CANCELED
+          value: ScheduledPaymentsSearch.FILTER_BY_CANCELLED
         },
         {
           label: 'Voided',

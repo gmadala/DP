@@ -103,7 +103,7 @@ angular.module('nextgearWebApp')
       FILTER_BY_ALL: 0,
       FILTER_BY_PENDING: 1,
       FILTER_BY_PROCESSED: 2,
-      FILTER_BY_CANCELED: 3,
+      FILTER_BY_CANCELLED: 3,
       FILTER_BY_VOIDED: 4,
 
       hasMoreRecords: function() {
@@ -142,7 +142,7 @@ angular.module('nextgearWebApp')
         case this.FILTER_BY_PROCESSED:
           lastRequest.SearchProcessed = true;
           break;
-        case this.FILTER_BY_CANCELED:
+        case this.FILTER_BY_CANCELLED:
           lastRequest.SearchCancelled = true;
           break;
         case this.FILTER_BY_VOIDED:

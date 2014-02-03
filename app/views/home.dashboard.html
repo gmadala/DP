@@ -124,7 +124,7 @@
             </td>
           </tr>
         </table>
-        <a class="more btn btn-mini" href="#/home/payments"> <i class="glyphicon glyphicon-eye-open"></i>
+        <a class="more btn btn-mini" tabindex="{{{true: '-1', false: ''}[isCollapsed]}}" href="#/home/payments"> <i class="glyphicon glyphicon-eye-open"></i>
           View All Payments
         </a>
       </div><!-- end .upcoming-payments-table -->
@@ -137,13 +137,15 @@
         <p class="nxg-doughnut-chart-label-secondary">Total</p>
       </label>
 
-      <canvas width="120"
-              height="120"
-              nxg-chart
-              nxg-chart-type="Doughnut"
-              nxg-chart-data="dashboardData.paymentChartData.chartData"
-              nxg-chart-options="{percentageInnerCutout: 65}">
-      </canvas>
+      <div class="chart-obj"
+          nxg-chart
+          nxg-chart-type="pie"
+          nxg-chart-tooltip="false"
+          nxg-chart-size="100"
+          nxg-chart-inner-size="67"
+          nxg-chart-data="dashboardData.paymentChartData.chartData"
+          nxg-chart-options="{percentageInnerCutout: 65}">
+      </div>
 
       <table class="chart-summary-table">
         <tr>
@@ -235,20 +237,20 @@
 
       <div class="nxg-doughnut-chart-nested">
         <div class="inner-nested">
-          <canvas width="110"
-                        height="110"
-                        class="nxg-doughnut-chart-outer"
-                        nxg-chart
-                        nxg-chart-type="Doughnut"
-                        nxg-chart-data="dashboardData.creditChartData.outer"
-                        nxg-chart-options="{percentageInnerCutout: 75}"></canvas>
-          <canvas width="94"
-                        height="94"
-                        class="nxg-doughnut-chart-inner"
-                        nxg-chart
-                        nxg-chart-type="Doughnut"
-                        nxg-chart-data="dashboardData.creditChartData.inner"
-                        nxg-chart-options="{percentageInnerCutout: 80}"></canvas>
+          <div  class="nxg-doughnut-chart-outer"
+                nxg-chart
+                nxg-chart-type="pie"
+                nxg-chart-tooltip="false"
+                nxg-chart-size="100"
+                nxg-chart-inner-size="83"
+                nxg-chart-data="dashboardData.creditChartData.outer"></div>
+          <div class="nxg-doughnut-chart-inner"
+                nxg-chart
+                nxg-chart-type="pie"
+                nxg-chart-tooltip="false"
+                nxg-chart-size="84"
+                nxg-chart-inner-size="67"
+                nxg-chart-data="dashboardData.creditChartData.inner"></div>
           <label class="nxg-doughnut-chart-label">
             <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.AvailableCredit | numeral:'(0.0a)' }}</p>
             <p class="nxg-doughnut-chart-label-secondary">available</p>

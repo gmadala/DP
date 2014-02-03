@@ -38,11 +38,15 @@ describe('Directive: nxgBusinessField', function () {
       disableMe: false,
       bizness: null
     };
+    scope.theForm = {
+      inputBiz: {}
+    };
+    scope.validity = {};
 
     element = angular.element('<form name="myForm">' +
       '<input id="fooInput" name="fooInputName" nxg-business-field="sellers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
-      'ng-required="model.requireMe">' +
+      'ng-required="model.requireMe" form="theForm" validity="validity">' +
       '</input></form>');
     element = $compile(element)(scope);
     $rootScope.$digest();
@@ -54,6 +58,7 @@ describe('Directive: nxgBusinessField', function () {
 
   it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($dialog) {
     spyOn($dialog, 'dialog').andCallThrough();
+    element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(false);
   }));
@@ -63,12 +68,13 @@ describe('Directive: nxgBusinessField', function () {
     element = angular.element('<form name="myForm">' +
       '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
-      'ng-required="model.requireMe">' +
+      'ng-required="model.requireMe" form="theForm" validity="validity">' +
       '</input></form>');
     element = $compile(element)(scope);
     $rootScope.$digest();
 
     spyOn($dialog, 'dialog').andCallThrough();
+    element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(true);
   }));
@@ -89,10 +95,27 @@ describe('Directive: nxgBusinessField', function () {
     expect(iScope.openBusinessSearch.calls.length).toBe(1);
   });
 
-  it('should update the selected-business on business selection', function () {
+  it('should only open business dialog if input is valid', inject(function($dialog, $compile, $rootScope) {
+    element = angular.element('<form name="myForm">' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
+      'ng-disabled="model.disableMe" selected-business="model.bizness"' +
+      'ng-required="model.requireMe" form="theForm" validity="validity">' +
+      '</input></form>');
+    element = $compile(element)(scope);
+    $rootScope.$digest();
+
+    spyOn($dialog, 'dialog').andCallThrough();
+    element.find('button').trigger('click');
+    expect($dialog.dialog).not.toHaveBeenCalled();
+
+    element.find('input').val('ab');
+    element.find('button').trigger('click');
+    expect($dialog.dialog).not.toHaveBeenCalled();
+
+    element.find('input').val(fakeBiz);
     element.find('button').trigger('click');
     expect(scope.model.bizness).toBe(fakeBiz);
-  });
+  }));
 
   it('should clear values when it becomes disabled', function () {
     element.find('input').val('blahblah');

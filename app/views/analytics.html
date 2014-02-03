@@ -145,21 +145,20 @@
           </table>
         </ul>
       </div>
-
     </section>
-
 
     <section class="row-fluid">
       <div class="span9 well average-turn-chart">
         <h4>Average Turn</h4>
         <div class="well-out">
-          <p>Average # of Days to Turn</p>
-          <canvas width="680"
-                  height="300"
-                  nxg-chart
-                  nxg-chart-type="Line"
-                  nxg-chart-data="analytics.averageTurn"
-                  nxg-chart-options="{ pointDot: false, datasetStrokeWidth: 4, bezierCurve: false }"></canvas>
+          <div class="chart-obj"
+              nxg-chart
+              nxg-chart-type="line"
+              nxg-chart-data-name="Days to Turn"
+              nxg-chart-description-x="Average # of Days to Turn"
+              nxg-chart-data="analytics.averageTurn.data"
+              nxg-chart-labels="true">
+          </div>
         </div>
       </div>
       <div class="span3 well aging-vehicles">
@@ -206,7 +205,7 @@
             </div>
 
             <table class="movers-list">
-              <tr ng-repeat="model in selectedMoverChart.models">
+              <tr ng-repeat="model in selectedMoverChart.labels">
                 <td class="rank">
                   {{ $index + 1 }}
                 </td>
@@ -222,15 +221,14 @@
 
             <div class="movers-chart">
               <div>
-                <canvas width="290"
-                        height="350"
-                        nxg-chart
-                        nxg-chart-type="Bar"
-                        nxg-chart-data="selectedMoverChart"
-                        nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
+                <div class="chart-obj"
+                     nxg-chart
+                     nxg-chart-type="bar"
+                     nxg-chart-data-name="Days to Turn"
+                     nxg-chart-description-x="Avg. # of Days to Turn"
+                     nxg-chart-data="selectedMoverChart.data"></div>
               </div>
             </div>
-              <p class="scale-description-x">Avg. # of Days to Turn</p>
           </div>
         </div>
 
@@ -244,14 +242,17 @@
             <a href class="btn btn-mini" ng-click="openTopAuctions()"> <i class="glyphicon glyphicon-eye-open"></i>
               View All Auctions
             </a>
-
-            <canvas width="450"
-                      height="335"
-                      nxg-chart
-                      nxg-chart-type="Bar"
-                      nxg-chart-data="analytics.top10Auctions"
-                      nxg-chart-options="{barValueSpacing: 1, align:'h'}"></canvas>
-            <p class="scale-description-x"># of Cars Purchased</p>
+            <div class="auctions-chart">
+              <div class="chart-obj"
+                   nxg-chart
+                   nxg-chart-type="bar"
+                   nxg-chart-data-name="# Purchased"
+                   nxg-chart-description-x="# of Cars Purchased"
+                   nxg-chart-data="analytics.top10Auctions"
+                   nxg-chart-labels="true"
+                   nxg-chart-trim-labels="true">
+              </div>
+            </div>
           </div>
         </div>
     </section>

@@ -15,7 +15,16 @@
   }
 }
 
+.nxg-doughnut-chart-outer {
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+}
+
 .nxg-doughnut-chart-inner {
+  display: inline-block;
+  width: 94px;
+  height: 94px;
   position: absolute;
   left: 8px;
   bottom: 14px;
@@ -56,7 +65,6 @@
 .nxg-chart-payments           { background-color: #2286f5 }
 .nxg-chart-scheduled-payments { background-color: #3fb232 }
 
-
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {
   @extend %center;
@@ -65,7 +73,13 @@
   border: 1px solid $border;
   margin-bottom: 10px;
 
-  canvas {
+  .chart-obj {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+  }
+
+  .highcharts-container {
     @include rotate(10deg);
   }
 
@@ -83,8 +97,8 @@
 }
 
 .credit-chart {
-  canvas {
-    @include scale(-1);
+  .highcharts-container {
+    @include rotate(180deg);
   }
 
   .nxg-doughnut-chart-label {

@@ -14,10 +14,10 @@
  */
 (function (window) {
   var ua = window.navigator.userAgent.toLowerCase(),
-    isIE10or11 = ua.indexOf('trident/6.0') >= 0 || ua.indexOf('trident/7.0') >= 0,
-    is64bit = ua.indexOf('win64') >= 0 || ua.indexOf('wow64') >= 0;
+    isIE10or11 = ua.indexOf('trident/6.0') >= 0 || ua.indexOf('trident/7.0') >= 0;
+    // is64bit = ua.indexOf('win64') >= 0 || ua.indexOf('wow64') >= 0;
 
-  if (isIE10or11 && is64bit) {
+  if (isIE10or11) {
     angular.module('nextgearWebApp')
       .directive('input', function () {
         var isEmpty = function(value) {

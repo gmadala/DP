@@ -12,10 +12,11 @@ describe('Controller: FloorplanCtrl', function () {
       data: {}
     },
     scope,
-    initController;
+    initController,
+    httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan) {
+  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan, $httpBackend) {
     scope = $rootScope.$new();
     stateParamsMock = {
       filter: 'fooFilter'
@@ -24,8 +25,10 @@ describe('Controller: FloorplanCtrl', function () {
       search: function () {
         return $q.when(searchResult.data);
       },
-      filterValues: Floorplan.filterValues
+      filterValues: Floorplan.filterValues,
+      sellerHasTitle: Floorplan.sellerHasTitle
     };
+    httpBackend = $httpBackend;
 
     spyOn(modelMock, 'search').andCallThrough();
 
@@ -256,6 +259,38 @@ describe('Controller: FloorplanCtrl', function () {
         expect(scope.search).toHaveBeenCalled();
       });
 
+    });
+
+    describe('sellerHasTitle function', function() {
+      var fl = {
+        TitleLocation: 'Buyer',
+        FloorplanId: 1234
+      };
+
+      beforeEach(function() {
+        spyOn(modelMock, 'sellerHasTitle').andCallThrough();
+
+        httpBackend.expectPOST('/floorplan/SellerHasTitle')
+          .respond({
+            Success: true,
+            Message: null,
+            Data: []
+          });
+      });
+
+      it('set title location to Seller if they have the title', function() {
+        scope.sellerHasTitle(fl, true);
+        httpBackend.flush();
+        expect(modelMock.sellerHasTitle).toHaveBeenCalled();
+        expect(fl.TitleLocation).toBe('Seller');
+      });
+
+      it('set title location to Title Absent if seller does not have the title', function() {
+        scope.sellerHasTitle(fl, false);
+        httpBackend.flush();
+        expect(modelMock.sellerHasTitle).toHaveBeenCalled();
+        expect(fl.TitleLocation).toBe('Title Absent');
+      });
     });
 
     it('should automatically kick off a search with the filter passed to the state', function () {

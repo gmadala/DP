@@ -19,6 +19,10 @@ angular.module('nextgearWebApp')
             };
             currentDialog = $dialog.dialog(dialogOptions);
             currentDialog.open().then(function () {
+              // Destructive array operation - work with copy of array
+              angular.forEach(messages.list().slice(), function (msg) {
+                msg.dismiss();
+              });
               currentDialog = null;
             });
           } else if (!hasMessages && currentDialog) {
@@ -50,8 +54,8 @@ angular.module('nextgearWebApp')
     }, true);
 
     $scope.close = function () {
-      var list = messages.list().slice();
-      angular.forEach(list, function (msg) {
+      // Destructive array operation - work with copy of array
+      angular.forEach(messages.list().slice(), function (msg) {
         msg.dismiss();
       });
       // parent directive will perform the actual close operation

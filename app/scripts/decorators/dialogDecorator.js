@@ -90,6 +90,38 @@ angular.module('nextgearWebApp')
           var doc = angular.element(document);
           var which = this;
 
+          // Add a hidden button at the end of modals that is still able to get focus.
+          // When it gets focus the listener below sends focus back to the first element
+          // in the modal, which prevents the URL from ever getting focus.
+          // This is for IE9, which shows an element as still having focus when the URL
+          // actually has focus.
+          var hiddenButton = angular.element('<button></button>')
+            .css({
+              position: 'fixed',
+              left: '-100px',
+              top: '-100px'
+            });
+
+          // modalEl is wiped and replaced with new content after this point, so
+          // the hiddenButton needs to be added asynchronously, after the other
+          // content is added.
+          // 10ms caused bugs, so 100ms is being used
+          $timeout(function () {
+            which.modalEl.append(hiddenButton);
+          }, 100);
+
+          hiddenButton.on('focusin', function () {
+            var focusable = which.modalEl.find('input, button, select, a:visible').first();
+
+            if(focusable.length > 0){
+              // sometimes one works, sometimes the other.
+              focusable[0].focus();
+              $timeout(function() {
+                focusable[0].focus();
+              }, 10);
+            }
+          });
+
           doc.off('focusin')
           .on('focusin', function (e) {
 

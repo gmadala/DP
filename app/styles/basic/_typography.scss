@@ -32,7 +32,14 @@ ul {
 
 // override Bootstrap; we don't need pointers on labels.
 label {
+  @extend %small;
   cursor: default;
+  line-height: 1.5;
+  margin: 14px 0 0 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 // looks like h4s in .well, but isn't part of .well

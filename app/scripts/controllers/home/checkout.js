@@ -128,7 +128,7 @@ angular.module('nextgearWebApp')
         return Math.min($scope.unappliedFunds.available, $scope.paymentQueue.sum.todayTotal());
       },
       useFunds: false,
-      useAmount: 0
+      useAmount: ''
     };
 
     // if todayTotal becomes 0 later on, force unapplied funds to OFF (template should disable)
