@@ -12,12 +12,15 @@ angular.module('nextgearWebApp')
         activeCriteria: '=', // object with properties: query, startDate, endDate, filter
         showDateRange: '&',
         onSearch: '&',
-        onClear: '&'
+        onClear: '&',
+        helpText: '@'
       },
       controller: 'NxgSearchCtrl'
     };
   })
   .controller('NxgSearchCtrl', function ($scope, $attrs) {
+
+    $scope.showHelpText = ($attrs.helpText) ? true : false;
 
     $scope.dateRangeShown = true;
     if (angular.isDefined($attrs.showDateRange)) {

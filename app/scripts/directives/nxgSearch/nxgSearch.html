@@ -20,40 +20,44 @@
         </div><!-- end .span5 -->
 
         <div class="span7">
-          <div class="control-group filters">
-            <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
-
-            <div class="controls">
-              <select id="filterSelect" name="filterSelect"
-                      ng-change="search()"
-                      ng-model="activeCriteria.filter"
-                      ng-options="o.value as o.label for o in filterOptions"></select>
-            </div>
-          </div><!-- end .control-group -->
-
-          <div class="control-group search-date-range" ng-show="dateRangeShown">
-            <div class="control-group half">
-              <label class="control-label" for="startDate">Date Range</label>
+          <div class="clearfix">
+            <div class="control-group filters">
+              <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
 
               <div class="controls">
-                <input type="text" id="startDate" name="startDate"
-                      ng-model="activeCriteria.startDate"
-                      nxg-date-field
-                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+                <select id="filterSelect" name="filterSelect"
+                        ng-change="search()"
+                        ng-model="activeCriteria.filter"
+                        ng-options="o.value as o.label for o in filterOptions"></select>
               </div>
-            </div><!-- end .control-group.half -->
+            </div><!-- end .control-group -->
 
-            <div class="control-group half">
-              <label class="control-label" for="endDate">To</label>
-              <div class="controls">
-                <input type="text" id="endDate" name="endDate"
-                      ng-model="activeCriteria.endDate"
-                      nxg-date-field
-                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
-              </div><!-- end .controls -->
-            </div><!-- end .control-group.half -->
-             <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
-          </div><!-- end .control-group.search-date-range -->
+            <div class="control-group search-date-range clearfix" ng-show="dateRangeShown">
+              <div class="control-group half">
+                <label class="control-label" for="startDate">Date Range<span ng-show="showHelpText"> *</span></label>
+
+                <div class="controls">
+                  <input type="text" id="startDate" name="startDate"
+                        ng-model="activeCriteria.startDate"
+                        nxg-date-field
+                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+                </div>
+              </div><!-- end .control-group.half -->
+
+              <div class="control-group half">
+                <label class="control-label" for="endDate">To</label>
+                <div class="controls">
+                  <input type="text" id="endDate" name="endDate"
+                        ng-model="activeCriteria.endDate"
+                        nxg-date-field
+                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+                </div><!-- end .controls -->
+              </div><!-- end .control-group.half -->
+               <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
+
+            </div><!-- end .control-group.search-date-range -->
+          </div>
+          <p class="tip" ng-show="showHelpText">* {{ helpText }}</p>
         </div><!-- end .span7 -->
       </div><!-- end .row-fluid -->
     </form>
