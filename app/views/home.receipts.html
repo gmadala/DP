@@ -20,9 +20,12 @@
                nxg-infinite-scroll="receipts.fetchNextResults()"
                nxg-infinite-scroll-disabled="receipts.loading"
                nxg-infinite-scroll-show-indicator="receipts.loading">
-
+        <p class="notice-box">Note: You may select a maximum of 20 receipts to print at a time.</p>
         <ul class="unstyled">
           <li class="table-list-head">
+            <div class="cell rec-print">
+              <button class="btn btn-small" ng-click="">Export</button>
+            </div>
             <div class="cell rec-num sortable-container"
                  ng-click="sortBy('TransactionNumber')"
                  ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
@@ -62,6 +65,11 @@
           </li>
 
           <li class="table-list-row" ng-repeat="receipt in receipts.results">
+            <div class="cell rec-print">
+               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint"
+                      ng-click="" />
+              <label for="{{ receipt.TransactionNumber }}"></label>
+            </div>
             <div class="cell rec-num">
               <p>
                 <span ng-bind-html-unsafe="receipt.TransactionNumber | highlight:receipt.data.query"></span>
