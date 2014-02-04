@@ -24,7 +24,7 @@
         <ul class="unstyled">
           <li class="table-list-head">
             <div class="cell rec-print">
-              <button class="btn btn-small" ng-click="">Export</button>
+              <button class="btn btn-small" ng-click="onExport()">Export</button>
             </div>
             <div class="cell rec-num sortable-container"
                  ng-click="sortBy('TransactionNumber')"
@@ -66,8 +66,7 @@
 
           <li class="table-list-row" ng-repeat="receipt in receipts.results">
             <div class="cell rec-print">
-               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint"
-                      ng-click="" />
+               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]" ng-model="selectedReceipts[$index]" />
               <label for="{{ receipt.TransactionNumber }}"></label>
             </div>
             <div class="cell rec-num">

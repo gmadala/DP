@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric) {
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric, api) {
 
     segmentio.track(metric.VIEW_RECEIPTS_LIST);
     $scope.metric = metric; // make metric names available to template
 
     var lastPromise;
+    var maxReceipts = 20;
 
     $scope.isCollapsed = true;
 
@@ -17,6 +18,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.filterOptions = []; // loaded below from User data
+    $scope.selectedReceipts = []; // to hold selected receipts to print/export
 
     $scope.receipts = {
       results: [],
@@ -61,6 +63,50 @@ angular.module('nextgearWebApp')
           if (promise !== lastPromise) { return; }
           $scope.receipts.loading = false;
         }
+      );
+    };
+
+    $scope.count = function() {
+      var x = _.reduce($scope.selectedReceipts, function(count, checked) {
+        if (checked) {
+          return count + 1;
+        } else {
+          return count;
+        }
+      }, 0);
+
+      return x;
+    };
+
+    $scope.tooMany = function() {
+      if ($scope.count() >= maxReceipts) {
+        return true;
+      }
+      return false;
+    };
+
+    $scope.onExport = function() {
+      if($scope.count() === 0) {
+        return;
+      }
+
+      var ids = '';
+
+      for(var i = 0; i < $scope.selectedReceipts.length; i++) {
+        if ($scope.selectedReceipts[i]) {
+          ids = ids + $scope.receipts.results[i].FinancialTransactionId +  ',';
+        }
+      }
+
+      // remove extra comma at end
+      ids = ids.slice(0,-1);
+
+      // build query string
+      var strUrl = api.contentLink('/receipt/ViewMultiple/' + ids + '/MultipleReceipts', {});
+
+      window.open(
+        strUrl,
+        '_blank' // open in new window
       );
     };
 

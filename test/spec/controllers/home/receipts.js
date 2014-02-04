@@ -256,6 +256,49 @@ describe('Controller: ReceiptsCtrl', function () {
 
   });
 
+  describe('count function', function() {
+    it('should return a count of currently selected receipts to export', function() {
+      scope.receipts.results = ['one', 'two'];
+      scope.selectedReceipts = [false, true];
+      expect(scope.count()).toBe(1);
+    });
+  });
+
+  describe('tooMany function', function() {
+    it('should return true if the number of selected receipts exceeds the maximum', function() {
+      scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four', 'one'];
+      scope.selectedReceipts = [false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+      expect(scope.tooMany()).toBe(true);
+    });
+
+    it('should return false if the number of selected receipts is less than the maximum', function() {
+    scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four'];
+      scope.selectedReceipts = [false, true, true, true, true, true, true, true];
+      expect(scope.tooMany()).toBe(false);
+    });
+  });
+
+  describe('onExport function', function() {
+    it('should do nothing if no receipts are selected', function() {
+      spyOn(window, 'open').andReturn();
+      scope.onExport();
+      expect(window.open).not.toHaveBeenCalled();
+    });
+
+    it('should build a link based on the selected receipts and open it in a new window', function() {
+      scope.receipts.results = [
+        { transactionNumer: 1234, FinancialTransactionId: 5656 },
+        { transactionNumber: 5678, FinancialTransactionId: 3434 },
+        { transactionNumber: 910, FinancialTransactionId: 1212 }
+      ];
+
+      scope.selectedReceipts = [true, false, true];
+      spyOn(window, 'open');
+      scope.onExport();
+      expect(window.open).toHaveBeenCalledWith('/receipt/ViewMultiple/5656,1212/MultipleReceipts', '_blank');
+    });
+  });
+
   describe('resetSearch function', function () {
 
     it('should set up a receipts proposedSearchCriteria object on the scope', function () {
