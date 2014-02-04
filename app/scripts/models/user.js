@@ -94,8 +94,7 @@ angular.module('nextgearWebApp')
             var apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey,
               info = self.getInfo();
 
-            UserVoice.init(apiKey, info.BusinessNumber, info.BusinessName);
-            UserVoice.getAPI().push(['setSSO', authData.UserVoiceToken]);
+            UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
           }
         });
       },
