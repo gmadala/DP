@@ -1,7 +1,7 @@
 <label for="inputVin" class="input-title">VIN</label>
 <span>
   <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
-         required ng-minlength="6" ng-maxlength="17"
+         required ng-minlength="17" ng-maxlength="17"
          nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
          ng-change="vinChange()" nxg-blur="vinExit()"
          nxg-autofocus
@@ -16,7 +16,7 @@
 </label>
 <label for="inputVin" class="text-error"
        ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength">
-  VIN should be from 6 to 17 characters.
+  VIN should be 17 characters.
 </label>
 <label for="inputVin" class="text-error"
        ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires">
