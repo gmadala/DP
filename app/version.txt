@@ -1,6 +1,6 @@
-NextGear Capital v1.2.7
+NextGear Capital v1.2.8
 =================================
 
 Fixes included in this release:
 
-VO-890	Business number and business name need to be added to the user voice integration and populated in UV as "account traits"
+- Updated link to Walkthrough Video.
