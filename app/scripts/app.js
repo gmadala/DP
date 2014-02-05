@@ -278,8 +278,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     );
 
     $rootScope.$on('event:userAuthenticated',
-      function(){
-        if (pendingState) {
+      function(event, authData){
+        if(authData.ShowUserInitialization) {
+          $location.path('/login/updateSecurity');
+        } else if (pendingState) {
           $state.transitionTo(pendingState.name); // resume transition to the original state destination
           pendingState = null;
         }

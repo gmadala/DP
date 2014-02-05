@@ -46,7 +46,7 @@ describe('app.js', function () {
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'transitionTo');
 
-      rootScope.$broadcast('event:userAuthenticated');
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState.calls.length).toEqual(3);
       expect(lastState.clearUserState.calls.length).toEqual(1);
       expect(state.transitionTo).toHaveBeenCalledWith('userstate');
@@ -60,7 +60,7 @@ describe('app.js', function () {
       spyOn(location, 'path');
       dealer = true;
 
-      rootScope.$broadcast('event:userAuthenticated');
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState).toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
       expect(location.path).toHaveBeenCalledWith('/home');
@@ -74,7 +74,7 @@ describe('app.js', function () {
       spyOn(location, 'path');
       dealer = false;
 
-      rootScope.$broadcast('event:userAuthenticated');
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState).toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
       expect(location.path).toHaveBeenCalledWith('/act/home');
@@ -93,11 +93,24 @@ describe('app.js', function () {
       expect(location.path).toHaveBeenCalledWith('/login');
 
       spyOn(state, 'transitionTo');
-      rootScope.$broadcast('event:userAuthenticated');
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(state.transitionTo).toHaveBeenCalledWith(toStateObject.name);
 
     });
 
+    it('should show updateSecurity page', function() {
+
+      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'clearUserState');
+      spyOn(location, 'path');
+      dealer = true;
+
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: true});
+      expect(lastState.getUserState).not.toHaveBeenCalled();
+      expect(lastState.clearUserState).not.toHaveBeenCalled();
+      expect(location.path).toHaveBeenCalledWith('/login/updateSecurity');
+
+    });
 
   });
 
