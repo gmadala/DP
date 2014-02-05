@@ -15,3 +15,4 @@ VO-784	Web: On Entering Values in text field on "Request Payout" popup as "10000
 VO-901	Auction Dashboard - Disbursement Group change of term
 VO-528	Web - Refactor the code for horizontal bar charts or find a different library
 VO-526	Add some kind of title or tooltip to show the actual numeric values represented on the horizontal bar charts.
+
