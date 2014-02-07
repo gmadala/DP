@@ -168,6 +168,19 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
   })
   .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState) {
+
+    var prv = {
+      reloadPending: false,
+      resetToLogin: function() {
+        prv.reloadPending = true;
+        // set location as login page before refreshing to stop pendingState from being set
+        window.location.hash = '/login';
+        // clobber everything and start over at login page
+        // LastState cookie modifications are asynchronous
+        window.location.reload(true);
+      }
+    };
+
     LogoutGuard.watchForLogoutAttemptByURLState();
 
     segmentio.load(nxgConfig.segmentIoKey);
@@ -178,6 +191,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
       function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
+        if (prv.reloadPending) {
+          // prevent state change since we're reloading anyway
+          event.preventDefault();
+          return;
+        }
+
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
 
@@ -241,12 +260,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           if (confirmed) {
             // we don't need to clear the user state here, because it's
             // done on userAuthentication (see below)
-
-            // set location as login page before refreshing to stop pendingState from being set
-            window.location.hash = '/login';
-            // clobber everything and start over at login page
-            // LastState cookie modifications are asynchronous
-            window.location.reload(true);
+            prv.resetToLogin();
           }
         });
       }
@@ -260,12 +274,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         if(!$rootScope.$$phase) {
           $rootScope.$digest();
         }
-
-        // set location as login page before refreshing to stop pendingState from being set
-        window.location.hash = '/login';
-        // clobber everything and start over at login page
-        // LastState cookie modifications are asynchronous
-        window.location.reload(true);
+        prv.resetToLogin();
       }
     );
 
@@ -297,5 +306,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         }
       }
     );
+
+
 
   });
