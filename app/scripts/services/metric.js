@@ -31,5 +31,7 @@ angular.module('nextgearWebApp')
     VIEW_SCHEDULED_PAYMENTS_LIST: 'View Scheduled Payments List',
     // Receipts
     VIEW_RECEIPTS_LIST: 'View Receipts List',
-    VIEW_RECEIPT_DETAIL: 'View Receipt Detail'
+    VIEW_RECEIPT_DETAIL: 'View Receipt Detail',
+    // Download Mobile App Links - App Stores
+    DOWNLOAD_MOBILE_APP: 'Download Mobile App'
   });

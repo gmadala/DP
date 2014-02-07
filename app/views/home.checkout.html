@@ -34,10 +34,19 @@
               <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
               <div class="cell fee-due"><p>{{ fee.dueDate | moment }}</p></div>
               <div class="cell fee-amt">
-                <p>{{ fee.amount | currency }}</p>
-                <button ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="btn btn-mini btn-block" ng-disabled="submitInProgress">
-                  Remove Fee
-                </button>
+                <p>
+                  {{ fee.amount | currency }}
+                  <a ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="remove" ng-disabled="submitInProgress">
+                    Remove Fee
+                  </a>
+                </p>
+                <!-- need to add button functionality, with VO-933 -->
+                      <button class="btn btn-mini btn-block"
+                          ng-click=""
+                          ng-show="true"
+                          ng-disabled="false">
+                    {{ !payment.scheduleDate && 'Schedule Fee' || 'Edit Scheduled Fee' }}
+                  </button>
               </div>
             </li>
           </ul>
@@ -73,12 +82,17 @@
                   <p ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</p>
                 </div>
                 <div class="cell pay-pymt">
-                  <p>{{ payment.amount | currency }}</p>
-                  <button class="btn btn-mini btn-block"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
-                          ng-disabled="submitInProgress">
-                    Remove Payment
-                  </button>
+                  <p>
+                    <strong>{{ payment.amount | currency }}</strong>
+                    <a class="remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
+                      Remove Payment
+                    </a>
+                  </p>
+                  <p><!-- Need to update during MVC Integration, VO-927 -->
+                    Principal: $598.72<br/>
+                    Interest: $55.72<br/>
+                    Fees: $75.00
+                  </p>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"
                           ng-show="paymentQueue.canSchedule(payment)"

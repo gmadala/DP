@@ -19,6 +19,15 @@
     }
   }
 
+  .pay-pymt p {
+    line-height: 1.3;
+  }
+  .remove {
+    font-size: $tiny-font-size;
+    border: 0;
+    margin-left: 5px;
+  }
+
   .payments .pay-pymt .btn-block {
     margin: 10px 0 0;
   }

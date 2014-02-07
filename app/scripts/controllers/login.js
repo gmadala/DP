@@ -13,8 +13,8 @@ angular.module('nextgearWebApp')
     $scope.authenticate = function() {
       if ($scope.credentials.username && $scope.credentials.password) {
         User.authenticate($scope.credentials.username, $scope.credentials.password)
-          .then(function(/*data*/) {
-            $rootScope.$broadcast('event:userAuthenticated');
+          .then(function(data) {
+            $rootScope.$broadcast('event:userAuthenticated', data);
             $scope.saveAutocompleteUsername($scope.credentials.username);
           }, function(error) {
             error.dismiss();
