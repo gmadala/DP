@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: nxgDeformatNumber', function () {
+describe('Directive: nxgValidateInt', function () {
   beforeEach(module('nextgearWebApp'));
 
   var element,
@@ -16,7 +16,7 @@ describe('Directive: nxgDeformatNumber', function () {
     element = angular.element(
       '<form name="form">' +
         '<input type="text" name="input" ng-model="model.data" ' +
-        'ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\\.[0-9]{2})?$/" nxg-deformat-number></input>' +
+        'ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\\.[0-9]{2})?$/" nxg-validate-int=6 ></input>' +
       '</form>'
     );
     element = $compile(element)(scope);
@@ -34,6 +34,11 @@ describe('Directive: nxgDeformatNumber', function () {
     form.input.$setViewValue('123,234');
     expect(scope.model.data).toBe('123234');
   });
+
+  it('should set the input to invalid if the length exceeds the max', function() {
+    form.input.$setViewValue('123,123,123');
+    expect(form.input.$error.maxlength).toBe(true);
+  })
 
   it('should defer to earlier, and likely more sensitive, validators', function () {
     form.input.$setViewValue('1pq3');

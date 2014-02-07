@@ -19,20 +19,19 @@
        <input type="text" id="inputMileage" name="inputMileage"
               ng-model="data.UnitMileage"
               ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength }"
-              ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
+              ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
               required
-              ng-maxlength=6
-              nxg-deformat-number/>
+              nxg-validate-int=6 />
        <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.required">
           Please enter the Mileage.
        </label>
        <label for="inputMileage" class="text-error"
-              ng-show="validity.inputMileage.$error.pattern">
-          Please enter a numeric value. Round mileage to the nearest 2 decimal places.
+              ng-show="!validity.inputMileage.$error.required && validity.inputMileage.$error.pattern">
+          Please enter a positive integer value with no decimals.
        </label>
        <label for="inputMileage" class="text-error"
-              ng-show="validity.inputMileage.$error.maxlength">
+              ng-show="!validity.inputMileage.$error.required && validity.inputMileage.$error.maxlength">
           Please enter a value less than 1,000,000 miles.
         </label>
 
@@ -91,9 +90,9 @@
           <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
                  ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
                  required
-                 nxg-deformat-number
-                 ng-maxlength=12
-                 ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength }" />
+                 nxg-input-currency=1000000000000
+                 ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength }"
+                 nxg-blur="mileageExit(form.inputMileage)" />
           <label for="inputPurchaseAmt" class="text-error"
                  ng-show="validity.inputPurchaseAmt.$error.required">
             Please enter the Purchase Amount.
@@ -103,7 +102,7 @@
             Please enter a numeric value with no <br> special characters, such as a dollar sign.
           </label>
             <label for="inputPurchaseAmt" class="text-error"
-                 ng-show="validity.inputPurchaseAmt.$error.maxlength">
+                 ng-show="!validity.inputPurchaseAmt.$error.pattern && validity.inputPurchaseAmt.$error.max">
                   Please enter a value less than $1,000,000,000,000.
           </label>
         </div>
