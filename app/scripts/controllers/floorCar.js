@@ -86,9 +86,17 @@ angular.module('nextgearWebApp')
 
     $scope.mileageExit = function(modelCtrl) {
       var newMileage = $scope.data.UnitMileage;
-      if (!$scope.data.$selectedVehicle || !modelCtrl.$valid ||
-          newMileage === $scope.data.$blackbookMileage) {
+      if (!$scope.data.$selectedVehicle || newMileage === $scope.data.$blackbookMileage) {
         return;
+      }
+
+      $scope.validity = {
+        inputMileage: {}
+      };
+
+      $scope.validity.inputMileage = angular.copy(modelCtrl);
+      if(!modelCtrl.$valid) {
+        return false;
       }
 
       Blackbook.fetchVehicleTypeInfoForVin(
