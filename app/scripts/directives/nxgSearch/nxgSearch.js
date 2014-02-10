@@ -13,7 +13,8 @@ angular.module('nextgearWebApp')
         showDateRange: '&',
         onSearch: '&',
         onClear: '&',
-        helpText: '@'
+        helpText: '@',
+        info: '@'
       },
       controller: 'NxgSearchCtrl'
     };
