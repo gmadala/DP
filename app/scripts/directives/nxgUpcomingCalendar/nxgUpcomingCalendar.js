@@ -53,21 +53,6 @@ angular.module('nextgearWebApp')
               var dayTitle = angular.element(value);
               dayTitle.html(dayTitle.text());
             });
-
-            // Hide first and/or last week if they don't include any days for the current month.
-            var $firstRow = element.find('tbody tr.fc-week.fc-first');
-            if($firstRow.children('.fc-other-month').length === 5){
-              $firstRow.addClass('hide');
-              // Apply first row styles to the next row
-              element.find('tbody tr.fc-week').eq(1).addClass('fc-first');
-            }
-            var $lastRow = element.find('tbody tr.fc-week.fc-last');
-            if($lastRow.children('.fc-other-month').length === 5){
-              $lastRow.addClass('hide');
-              // Apply last row styles to the second to last row
-              element.find('tbody tr.fc-week').eq(-2).addClass('fc-last');
-            }
-
           },
           dayRender: function(date, cell) {
             var dateKey = angular.isString(date) ? date : $filter('date')(date, 'yyyy-MM-dd');
