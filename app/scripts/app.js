@@ -197,6 +197,11 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           return;
         }
 
+        if ($dialog.openDialogsCount() > 0) {
+          // if a dialog is open, close it before navigating to new state
+          $dialog.closeAll();
+        }
+
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
 
