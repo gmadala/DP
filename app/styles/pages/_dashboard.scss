@@ -56,6 +56,9 @@
 }
 
 .summary.credit {
+  &.span6.adjacent {
+    width: 36.5%;
+  }
   .well-out {
     padding-left: 5px;
   }
@@ -212,7 +215,7 @@
 }
 
 .span3.adjacent.summary.floorplan {
-  width: 15%;
+  width: 16%;
 }
 .span4.adjacent.summary.receipts {
   width: 28.75%;
