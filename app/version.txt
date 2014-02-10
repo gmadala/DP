@@ -1,6 +1,6 @@
-NextGear Capital v1.2.8
+NextGear Capital v1.2.9
 =================================
 
 Fixes included in this release:
 
-- Updated link to Walkthrough Video.
+VO-1018	Upcoming payments calendar for month is blank
