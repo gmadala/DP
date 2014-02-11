@@ -57,7 +57,7 @@
               <span class="header-text">Amount Provided</span>
             </div>
             <div class="cell rec-view">
-              <button class="btn btn-small" ng-click="onExport()">View Selected Receipts</button>
+              <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0">View Selected Receipts</button>
             </div>
           </li>
 
