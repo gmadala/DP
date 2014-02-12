@@ -32,6 +32,11 @@
     & + .cell {
       border-left: 1px solid $white;
     }
+
+    .btn {
+      text-transform: none;
+      letter-spacing: 0;
+    }
   }
 
   .sortable {
