@@ -262,12 +262,12 @@
 
   table {
     @extend %full-width;
-    @extend %align-left;
     border-collapse: collapse;
     border-bottom: 1px solid $border;
   }
 
   td, th {
+    @extend %align-left;
     padding: 0.25em 0 0.25em 1em;
     border-left: 1px solid $border;
     border-right: 1px solid $border;
