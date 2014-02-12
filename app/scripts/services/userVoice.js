@@ -5,13 +5,21 @@ angular.module('nextgearWebApp')
 
     return {
       init: function (apiKey, ssoToken, isDealer, BusinessNumber, BusinessName) {
-        var api = this.getAPI();
         var uv=document.createElement('script');
         uv.type='text/javascript';
         uv.async=true;
         uv.src='//widget.uservoice.com/'+apiKey+'.js';
         var s=document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(uv,s);
+
+        /**
+         * IE will execute the above script as soon as it finds it,
+         * so if it is cached, it will be run before we push our info into the api object,
+         * which prevents the UV tab and widget from being created.
+         *
+         * To fix, we create the api variable here, AFTER the script tag is inserted.
+         */
+        var api = this.getAPI();
 
         var config = nxgConfig.userVoice,
         // check user type, dealers and auctions will have different subdomains to go to
