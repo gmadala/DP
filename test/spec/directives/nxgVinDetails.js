@@ -47,6 +47,8 @@ describe('Directive: nxgVinDetails', function () {
         $scope: scope,
         Blackbook: blackbookMock
       });
+
+      scope.form = {};
     }));
 
     it('should attach the expected default settings to the scope', function () {
@@ -116,10 +118,21 @@ describe('Directive: nxgVinDetails', function () {
         expect(scope.settings.vinMode).toBe('none');
       });
 
+      it('should do nothing if the vinMode == "none"', function() {
+        scope.data = {
+          $selectedVehicle: {
+            foo: 'bar'
+          }
+        };
+        scope.settings.vinMode = 'none';
+
+        scope.vinChange();
+        expect(scope.data.$selectedVehicle).toEqual({ foo: 'bar' });
+        expect(scope.settings.vinMode).toBe('none');
+      });
     });
 
     describe('vinExit scope function', function () {
-
       beforeEach(function () {
         scope.form = {
           inputVin: {
@@ -155,8 +168,28 @@ describe('Directive: nxgVinDetails', function () {
 
     });
 
-    describe('lookupVin scope function', function () {
+    describe('checkVinMode scope function', function() {
+      it('should return a boolean to use in our nxg-requires attribute', function() {
+        scope.settings.vinMode = 'none';
+        var x = scope.checkVinMode();
+        expect(x).toBe(false);
 
+        scope.settings.vinMode = 'noMatch';
+        x = scope.checkVinMode();
+        expect(x).toBe(true);
+      });
+    });
+
+    describe('noVin scope function', function() {
+      it('should update the vinMode', function() {
+        scope.form = { inputVin: { $error: {} }}
+        scope.settings.vinMode = 'noMatch';
+        scope.noVin();
+        expect(scope.settings.vinMode).toBe('noVin');
+      });
+    });
+
+    describe('lookupVin scope function', function () {
       beforeEach(function () {
         scope.form = {
           inputVin: {

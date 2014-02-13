@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
     var s = $scope.settings = {
       // next year is the highest valid year
       maxYear: moment().add('years', 1).year(),
-      vinMode: 'none', // none|noMatch|matched
+      vinMode: 'none', // none|noMatch|matched|noVin
       vinLookupPending: false
     };
 
@@ -35,11 +35,28 @@ angular.module('nextgearWebApp')
         !errorObj.maxlength);
     };
 
+    $scope.checkVinMode = function() {
+      // This will return a value we can use to set our nxg-requires attribute on the vin input
+      if ($scope.settings.vinMode === 'matched' || $scope.settings.vinMode === 'noMatch' || $scope.settings.vinMode === 'noVin') {
+        return true;
+      }
+      return false;
+    };
+
     $scope.vinChange = function () {
       if (s.vinMode !== 'none') {
         // if the VIN changes after lookup, clear any match state
         $scope.data.$selectedVehicle = null;
         s.vinMode = 'none';
+      }
+    };
+
+    $scope.noVin = function() {
+      // There is no VIN for this vehicle, display make/model/year/style inputs
+      s.vinMode = 'noVin';
+
+      if ($scope.form.inputVin.$error.required) {
+        $scope.form.inputVin.$error.required = false;
       }
     };
 
