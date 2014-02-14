@@ -125,7 +125,7 @@ angular.module('nextgearWebApp')
           doc.off('focusin')
           .on('focusin', function (e) {
 
-            if (which.modalEl!== e.target && !which.modalEl.has(e.target).length) {
+            if (which.modalEl[0]!== e.target && !which.modalEl.has(e.target).length) {
               // focus on first focusable element inside modal
               var focusable = which.modalEl.find('input, button, select, a:visible').first();
 
