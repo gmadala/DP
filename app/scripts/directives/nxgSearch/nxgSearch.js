@@ -53,6 +53,7 @@ angular.module('nextgearWebApp')
 
     $scope.clear = function ($event) {
       $event.preventDefault();
+      $scope.validity = {}; // reset form errors
       $scope.onClear();
     };
 
