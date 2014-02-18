@@ -197,8 +197,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           return;
         }
 
-        if ($dialog.openDialogsCount() > 0) {
-          // if a dialog is open, close it before navigating to new state
+        if ($dialog.openDialogsCount() > 0 && toState.name !=='login') {
+          /**
+           * if a dialog is open, close it before navigating to new state
+           * but not for login, because the logout function already closes
+           * all dialogs.
+           */
           $dialog.closeAll();
         }
 
