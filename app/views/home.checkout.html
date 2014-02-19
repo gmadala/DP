@@ -36,9 +36,9 @@
               <div class="cell fee-amt">
                 <p>
                   {{ fee.amount | currency }}
-                  <a ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="remove" ng-disabled="submitInProgress">
+                  <button class="btn-unstyle btn-link remove" ng-click="paymentQueue.removeFee(fee.financialRecordId)" ng-disabled="submitInProgress">
                     Remove Fee
-                  </a>
+                  </button>
                 </p>
                 <!-- need to add button functionality, with VO-933 -->
                       <button class="btn btn-mini btn-block"
@@ -84,9 +84,9 @@
                 <div class="cell pay-pymt">
                   <p>
                     <strong>{{ payment.amount | currency }}</strong>
-                    <a class="remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
+                    <button class="btn-unstyle btn-link remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
                       Remove Payment
-                    </a>
+                    </button>
                   </p>
                   <p><!-- Need to update during MVC Integration, VO-927 -->
                     Principal: $598.72<br/>

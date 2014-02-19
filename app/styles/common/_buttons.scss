@@ -139,6 +139,19 @@
   border: 0;
 }
 
+.btn-link {
+  color: #08C;
+  cursor: pointer;
+
+  &:hover, &:disabled, &:disabled:hover {
+    color: $gray-8;
+  }
+
+  &:disabled, &:disabled:hover {
+    cursor: auto;
+  }
+}
+
 .btn-x {
   font-size: 16px;
 }
