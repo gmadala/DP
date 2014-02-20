@@ -32,6 +32,16 @@
   float: right;
 }
 
+%clear {
+  &:before, &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 %heavy {
   font-weight: bold;
 }

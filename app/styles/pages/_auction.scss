@@ -96,8 +96,12 @@
     }
   }
 
+  .search-controls {
+    @extend %clear;
+  }
+
   &.search-modal .modal-footer {
-    border-top: 1px solid #EAEAEA;
+    border: 0;
     margin-top: 12px;
   }
 }

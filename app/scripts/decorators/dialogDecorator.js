@@ -97,9 +97,14 @@ angular.module('nextgearWebApp')
           // actually has focus.
           var hiddenButton = angular.element('<button></button>')
             .css({
-              position: 'fixed',
-              left: '-100px',
-              top: '-100px'
+              position: 'absolute',
+              overflow: 'hidden',
+              clip: 'rect(0 0 0 0)',
+              width: '1px',
+              height: '1px',
+              margin: '-1px',
+              padding: '0',
+              border: '0'
             });
 
           // modalEl is wiped and replaced with new content after this point, so
