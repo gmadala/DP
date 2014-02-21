@@ -42,10 +42,10 @@
                 </p>
                 <!-- need to add button functionality, with VO-933 -->
                       <button class="btn btn-mini btn-block"
-                          ng-click=""
-                          ng-show="true"
-                          ng-disabled="false">
-                    {{ !payment.scheduleDate && 'Schedule Fee' || 'Edit Scheduled Fee' }}
+                          ng-click="paymentQueue.schedule(fee)"
+                          ng-show="paymentQueue.canSchedule(fee)"
+                          ng-disabled="fee.scheduleLoading || submitInProgress">
+                    {{ !fee.scheduleDate && 'Schedule Fee' || 'Edit Scheduled Fee' }}
                   </button>
               </div>
             </li>

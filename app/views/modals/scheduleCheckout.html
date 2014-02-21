@@ -2,8 +2,8 @@
   <h3>Select the Schedule Date</h3>
 </div>
 <div class="modal-body sch-checkout">
-  <section class="row-fluid">
-    <div class="detail-col">
+  <section class="row-fluid" ng-switch on="type">
+    <div class="detail-col" ng-switch-when="payment">
       <h4 class="well-head">Vehicle Information</h4>
       <table>
         <tr>
@@ -25,6 +25,28 @@
         <tr>
           <td class="detail-label">Payment</td>
           <td class="detail-value">{{ model.payment.amount | currency }}</td>
+        </tr>
+      </table>
+    </div><!-- end .detail-col -->
+    <div class="detail-col" ng-switch-when="fee">
+      <h4 class="well-head">Fee Information</h4>
+      <table>
+
+        <tr>
+          <td class="detail-label">Fee Type</td>
+          <td class="detail-value">{{ model.fee.type }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Description</td>
+          <td class="detail-value">{{ model.fee.description }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Due</td>
+          <td class="detail-value">{{ model.fee.dueDate | moment }}</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Fee</td>
+          <td class="detail-value">{{ model.fee.amount | currency }}</td>
         </tr>
       </table>
     </div><!-- end .detail-col -->
