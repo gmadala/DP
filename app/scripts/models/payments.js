@@ -102,6 +102,8 @@ angular.module('nextgearWebApp')
       },
       addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, revenue) {
         var payment = {
+          isPayment: true,
+          isFee: false,
           floorplanId: floorplanId,
           vin: vin,
           stockNum: stockNum,
@@ -116,6 +118,8 @@ angular.module('nextgearWebApp')
       },
       addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
         var fee = {
+          isPayment: false,
+          isFee: true,
           financialRecordId: financialRecordId,
           type: type,
           vin: vin,
@@ -131,6 +135,13 @@ angular.module('nextgearWebApp')
       },
       removeFeeFromQueue: function (id) {
         delete paymentQueue.fees[id];
+      },
+      removeFromQueue: function (item) {
+        if(item.isPayment) {
+          this.removePaymentFromQueue(item.floorplanId);
+        } else {
+          this.removeFeeFromQueue(item.financialRecordId);
+        }
       },
       isPaymentOnQueue: function (id) {
         var queueItem = paymentQueue.payments[id];
