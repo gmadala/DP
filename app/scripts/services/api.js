@@ -149,13 +149,13 @@ angular.module('nextgearWebApp')
 
         var queryParts = [];
 
-        angular.forEach(params, function(value, key) {
-          queryParts.push(key + '=' + value);
-        });
-
         if (authToken) {
           queryParts.push('AuthToken=' + authToken);
         }
+
+        angular.forEach(params, function(value, key) {
+          queryParts.push(key + '=' + value);
+        });
 
         if (queryParts.length > 0) {
           return nxgConfig.apiBase + path + '?' + queryParts.join('&');

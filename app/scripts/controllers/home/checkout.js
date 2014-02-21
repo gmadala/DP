@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api) {
 
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
@@ -268,5 +268,31 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
         }
       );
+    };
+
+    $scope.exportPaymentSummary = function() {
+      console.log('export payment summary');
+      var feeIds = [],
+        paymentIds = [],
+        params = {};
+
+      angular.forEach($scope.paymentQueue.contents.fees, function(fee) {
+        feeIds.push(fee.financialRecordId);
+      });
+      angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
+        paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+      });
+
+      if (feeIds.length > 0) {
+        params.accountFees = feeIds.join(',');
+      }
+      if (paymentIds.length > 0) {
+        params.floorplans = paymentIds.join(',');
+      }
+
+      // build query string
+      var strUrl = api.contentLink('/payment/summary', params);
+
+      window.open(strUrl, '_blank' /*open in a new window*/);
     };
   });
