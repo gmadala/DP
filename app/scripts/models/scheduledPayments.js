@@ -157,7 +157,9 @@ angular.module('nextgearWebApp')
         }
         return prv.request(lastRequest);
       },
-
+      fetchFees: function(businessId) {
+        return api.request('GET', '/payment/scheduledAccountFees/' + businessId);
+      },
       loadMoreData: function() {
         if (lastRequest === null) {
           return this.search();

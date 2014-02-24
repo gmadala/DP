@@ -1,0 +1,25 @@
+<div class="modal-header">
+  {{title}}
+</div>
+
+<div class="modal-body">
+  <div>
+    {{ fee.description }}
+  </div>
+  <div>
+    <strong>Scheduled </strong>{{ fee.scheduledDate | moment }}
+  </div>
+  <div>
+    <strong>Fee Type </strong> {{ fee.feeType }}
+  </div>
+  <div>
+    <strong>Fee Amount</strong>
+    {{ fee.balance | currency }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="handleYes()" class="btn" ng-disabled="submitInProgress">Yes</button>
+  <button ng-click="handleNo()" class="btn btn-primary" ng-disabled="submitInProgress">No</button>
+</div>
+

@@ -172,6 +172,9 @@ angular.module('nextgearWebApp')
       cancelScheduled: function (webScheduledPaymentId) {
         return api.request('POST', '/payment/cancelscheduledpayment/' + webScheduledPaymentId);
       },
+      cancelScheduledFee: function (webScheduledAccountFeeId) {
+        return api.request('POST', '/payment/cancelscheduledaccountfeepayment/' + webScheduledAccountFeeId);
+      },
       fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);
         endDate = api.toShortISODate(endDate);

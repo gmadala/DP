@@ -58,6 +58,19 @@ describe('Controller: ScheduledCtrl', function () {
       },
       hasMoreRecords: function() {
         return false;
+      },
+      fetchFees: function() {
+        return {
+          then: function(success) {
+            success([{
+              WebScheduledAccountFeeId: '',
+              Description: '',
+              ScheduledDate: '',
+              Balance: '',
+              FeeType: ''
+            }]);
+          }
+        };
       }
     },
     paymentsMock = {
@@ -92,6 +105,11 @@ describe('Controller: ScheduledCtrl', function () {
     userMock = {
       isLoggedIn: function() {
         return true;
+      },
+      getInfo: function() {
+        return {
+          businessId: "12345"
+        }
       }
     };
 
@@ -109,8 +127,9 @@ describe('Controller: ScheduledCtrl', function () {
     });
   }));
 
-  it('should attach scheduledPayments.results to the scope', function () {
+  it('should attach scheduledPayments.results and fees.results to the scope', function () {
     expect(scope.scheduledPayments.results).toBeDefined();
+    expect(scope.fees.results).toBeDefined();
   });
 
   it('should attach scheduledPayments.searchCriteria to the scope', function () {
@@ -271,6 +290,15 @@ describe('Controller: ScheduledCtrl', function () {
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
     scope.scheduledPayments.cancelPayment();
+    expect(dialog.dialog).toHaveBeenCalled();
+  });
+
+  it('should have a cancelFee function that opens a dialog', function() {
+    expect(scope.scheduledPayments.cancelFee).toBeDefined();
+    expect(typeof scope.scheduledPayments.cancelFee).toBe('function');
+
+    spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+    scope.scheduledPayments.cancelFee();
     expect(dialog.dialog).toHaveBeenCalled();
   });
 });

@@ -11,6 +11,12 @@ angular.module('nextgearWebApp')
           p.statusDate = moment().format('YYYY-MM-DD');
           p.status = 'Cancelled';
           return p;
+        },
+        cancelLocalScheduledFee: function(f) {
+          $scope.fees.results = _.filter($scope.fees.results, function(fee) {
+            return fee.WebScheduledAccountFeeId !== f.WebScheduledAccountFeeId;
+          });
+          return f;
         }
       },
       lastPromise;
@@ -142,6 +148,34 @@ angular.module('nextgearWebApp')
           }
         };
         $dialog.dialog(dialogOptions).open();
+      },
+
+      cancelFee: function(fee) {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/cancelFee.html',
+          controller: 'CancelFeeCtrl',
+          resolve: {
+            options: function() {
+              return {
+                fee: {
+                  webScheduledAccountFeeId: fee.WebScheduledAccountFeeId,
+                  financialRecordId: fee.FinancialRecordId,
+                  feeType: fee.FeeType,
+                  description: fee.Description,
+                  scheduledDate: fee.ScheduledDate,
+                  balance: fee.Balance
+                },
+                onCancel: function() {
+                  prv.cancelLocalScheduledFee(fee);
+                }
+              };
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
       }
     };
 
@@ -159,6 +193,22 @@ angular.module('nextgearWebApp')
     };
 
     $scope.scheduledPayments.resetSearch();
+
+    $scope.fees = {
+      results: [],
+      loading: false
+    };
+
+    $scope.fees.loading = true;
+
+    ScheduledPaymentsSearch.fetchFees(User.getInfo().BusinessId).then(
+      function (result) {
+        $scope.fees.loading = false;
+        $scope.fees.results = result;
+      }, function (/*error*/) {
+        $scope.fees.loading = false;
+      }
+    );
 
     var refreshCanPayNow = function () {
       if( !User.isLoggedIn() ) { return; }
