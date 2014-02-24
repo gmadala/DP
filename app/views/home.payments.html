@@ -12,10 +12,7 @@
              on-clear="payments.resetSearch()">
         </div>
 
-        <h3 class="boxed">Fees</h3>
-        <p class="text-error notice-box" ng-show="canPayNowLoaded && !canPayNow">
-          Account Fees cannot be paid as part of a scheduled web payment.
-        </p>
+        <h3 class="boxed">Account Fees</h3>
         <p class="notice-box" ng-show="canPayNow">
           Account fees paid online will need to be paid by 8pm EST.
         </p>
@@ -68,7 +65,7 @@
              nxg-infinite-scroll-disabled="payments.loading"
              nxg-infinite-scroll-show-indicator="payments.loading">
 
-          <h3 class="boxed">Payments</h3>
+          <h3 class="boxed">Vehicle Payments</h3>
 
           <div class="payments" ng-switch="payments.results.length > 0 || payments.loading">
             <p class="no-results" ng-switch-when="false">

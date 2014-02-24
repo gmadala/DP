@@ -21,8 +21,13 @@
   &.sch-desc { width: 34%; }
   &.sch-status { width: 20%; }
   &.sch-amount { width: 24%; }
+
+  &.schFee-date { width: 25%; }
+  &.schFee-desc { width: 35%; }
+  &.schFee-type { width: 20%; }
+  &.schFee-amt { width: 20%; }
 }
 
-.sch-amount button {
+.sch-amount button, .schFee-amt button {
   margin-top: 5px;
 }

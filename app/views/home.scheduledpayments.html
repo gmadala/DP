@@ -11,7 +11,53 @@
       on-clear="scheduledPayments.resetSearch()">
     </div>
 
+    <h3 class="boxed">Scheduled Account Fees</h3>
+
+    <!-- needs to be updated with MVC integration task, VO-975 -->
+    <div class="sch-fees" ng-switch="true || fees.results.length > 0 || fees.loading">
+      <p class="notice-box" ng-switch-when="false">
+        There are no fees associated with this account.
+      </p>
+
+      <ul class="unstyled" ng-switch-when="true">
+        <li class="table-list-head">
+          <div class="cell schFee-date"
+               ng-click="sortBy('fee', 'schFeeDate')"
+               ng-class="{ sorted : sortField.fee == 'schFeeDate', desc : sortDescending.fee }">
+            Scheduled On
+          </div>
+          <div class="cell schFee-desc">
+            Description</div>
+          <div class="cell schFee-type sortable"
+               ng-click="sortBy('fee', 'schFeeType')"
+               ng-class="{ sorted : sortField.fee == 'schFeeType', desc : sortDescending.fee }">
+            Fee Type</div>
+          <div class="cell schFee-amt sortable"
+               ng-click="sortBy('fee', 'schFeeAmt')"
+               ng-class="{ sorted : sortField.fee == 'schFeeAmt', desc : sortDescending.fee }">
+            Fee Amount</div>
+        </li>
+
+        <li class="table-list-row"><!-- ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">-->
+            <div class="cell schFee-date"><p>2/20/14</p></div>
+            <div class="cell schFee-desc"><p>This is a fee description</p></div>
+            <div class="cell schFee-type"><p>a type of fee</p></div>
+            <div class="cell schFee-amt"><p>$5678.00</p>
+            <!-- TODO: Add button to cancel fee. -->
+              <button class="btn btn-small" >
+                    <span>Payoff Now</span>
+                </button>
+                <button class="btn btn-small" >
+                    <span>Cancel</span>
+                </button>
+            </div>
+        </li>
+      </ul>
+    </div><!-- end .sch-fees -->
+
+
     <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
+      <h3 class="boxed">Scheduled Vehicle Payments</h3>
 
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="scheduledPayments.resetSearch()" title="New Search">try a new search</a>.
