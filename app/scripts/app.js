@@ -102,7 +102,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('settings', {
         url: '/settings',
         templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl',
+        controller: 'ProfileSettingsCtrl',
+        showNavBar: true
+      })
+      .state('account_management', {
+        url: '/account_management',
+        templateUrl: 'views/account_management.html',
+        controller: 'AccountManagementCtrl',
         showNavBar: true
       })
 
@@ -159,7 +165,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       })
       .state('auction_settings', {
         url: '/act/settings',
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/auction.settings.html',
         controller: 'SettingsCtrl',
         isAuctionState: true,
         showNavBar: true
