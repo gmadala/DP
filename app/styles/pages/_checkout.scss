@@ -33,6 +33,11 @@
   }
 }
 
+.exp-pymt {
+  @extend %float-r;
+  margin-top: -3px;
+}
+
 .checkout-summary {
   hr {
     margin: 10px 0;
