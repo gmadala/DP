@@ -118,7 +118,7 @@
       </section><!-- end .span8.well.adjacent -->
 
       <!-- BUSINESS SETTINGS -->
-      <section class="span8 well adjacent" novalidate>
+      <section class="span8 well adjacent" novalidate ng-controller="AccountManagementCtrl">
         <h4>Business Settings</h4>
         <button ng-hide="business.editable" class="btn edit-btn" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="business.editable" class="btn cancel-btn" ng-click="business.cancel()">Cancel</button>
@@ -182,7 +182,7 @@
 
     <div class="row-fluid two-col">
       <!-- TITLE SETTINGS -->
-      <section class="span8 well adjacent">
+      <section class="span8 well adjacent" ng-controller="AccountManagementCtrl">
         <h4>Title Settings</h4>
         <button ng-hide="title.editable" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
