@@ -3,7 +3,7 @@
     <div class="row-fluid two-col">
 
       <!-- USER PROFILE -->
-      <section class="span8 well adjacent">
+      <section class="span8 well adjacent" ng-controller="ProfileSettingsCtrl">
         <h4>User Profile</h4>
         <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()">Cancel</button>
@@ -224,7 +224,7 @@
       </section><!-- end .span8.well.adjacent -->
 
       <!-- NOTIFICATIONS -->
-      <section class="span8 well adjacent">
+      <section class="span8 well adjacent" ng-controller="ProfileSettingsCtrl">
         <!-- SEE NOTE IN TICKETS #15 & #17 -->
         <h4>Notifications</h4>
         <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
