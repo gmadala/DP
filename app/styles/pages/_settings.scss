@@ -1,4 +1,4 @@
-// SETTINGS
+// PROFILE SETTINGS
 
 // so we can edit all the widths in one place
 $set-label-width: 40%;
@@ -9,6 +9,10 @@ $set-label-width: 40%;
   .well {
     position: relative;
   }
+
+  ul {
+    margin: 0;
+  }
 }
 
 .settings-opts {
@@ -17,7 +21,10 @@ $set-label-width: 40%;
 
   p {
     line-height: $base-line-height;
-    margin: 10px 0
+  }
+
+  select {
+    margin-bottom: 10px;
   }
 
   & > .control-group {
@@ -167,4 +174,13 @@ $set-label-width: 40%;
 
 .cancel-btn {
   right: 70px;
+}
+
+// ACCOUNT MANAGEMENT
+.settings.account .col-wells {
+  .col {
+    .well.self-service .well-out {
+      @extend %clear;
+    }
+  }
 }

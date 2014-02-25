@@ -130,7 +130,9 @@ angular.module('nextgearWebApp')
           data: {
             longFormatAddressText: results,
             titleAddress: results.CurrentTitleReleaseAddress,
-            addresses: results.Addresses
+            addresses: _.filter(results.Addresses, function(addr) {
+              return addr.isTitleReleaseAddress === false;
+            })
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,

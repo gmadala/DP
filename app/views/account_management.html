@@ -72,7 +72,7 @@
           <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
 
           <div class="well-out">
-            <form class="settings-opts" ng-class="{ editable:title.editable }"name="titleSettings">
+            <form class="settings-opts" ng-class="{ editable:title.editable }" name="titleSettings">
               <div class="control-group">
                 <label class="control-label" for="titleAddr">Default Address:</label>
                 <div class="controls" ng-show="title.editable">
@@ -103,10 +103,16 @@
                 </div>
               </div>
 
-              <div class="control-group">
+              <div class="control-group" ng-show="title.data.addresses">
                 <label class="control-label">Additional Addresses:</label>
                 <div class="controls static" ng-hide="title.editable">
-                  <p>1234 Main Street,<br/>Anytown, NY 01234</p>
+                  <ul>
+                    <li ng-repeat="addr in title.data.addresses">
+                      {{ addr.Line1 }}<br/>
+                      {{ addr.Line2 }}<br/>
+                      {{ addr.City }}, {{ addr.State }} {{ addr.Zip }}
+                    </li>
+                  </ul>
                 </div>
             </form>
           </div><!-- end .well-out -->
@@ -115,9 +121,6 @@
         <!-- SELF-SERVICE LINKS -->
         <section class="well adjacent self-service">
           <h4>Self-Service Links</h4>
-          <button class="btn edit-btn"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-          <button class="btn cancel-btn">Cancel</button>
-          <button class="btn save-btn">Save</button>
 
           <div class="well-out">
             <div class="half">
@@ -138,53 +141,49 @@
         <!-- FINANCIAL ACCOUNTS -->
         <section class="well adjacent">
           <h4>Financial Accounts</h4>
-          <button class="btn edit-btn"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-          <button class="btn cancel-btn">Cancel</button>
-          <button class="btn save-btn">Save</button>
+          <!-- <button ng-hide="financial.editable" class="btn edit-btn" ng-click="financial.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button> -->
+   <!--        <button ng-show="financial.editable" class="btn cancel-btn" ng-click="financial.cancel()">Cancel</button>
+          <button ng-show="financial.editable" class="btn save-btn" ng-click="financial.save()">Save</button> -->
 
           <div class="well-out">
             <form class="settings-opts" name="financialSettings" novalidate>
               <div class="control-group">
                 <label class="control-label" for="setBankAcct">Bank Account(s):</label>
-                <div class="controls">
+                <div class="controls static">
                   <ul>
-                    <li>Bank Account 1</li>
+                    <li ng-repeat="acct in financial.data.bankAccounts">{{ acct.BankAccountName }}</li>
                   </ul>
-                  <!-- <select ng-model=""
-                            ng-options="" >
-                    </select>-->
                 </div>
-                <!-- add validation errors here -->
               </div>
 
               <div class="control-group">
                 <label class="control-label">Available Credit:</label>
-                <div class="static">{{ 1234.50 | currency }}</div>
+                <div class="controls static">{{ financial.data.availableCredit | currency }}</div>
               </div>
 
               <div class="control-group">
                 <label class="control-label">Reserve Funds:</label>
-                <div class="static">{{ 100 | currency }}</div>
+                <div class="controls static">{{ financial.data.reserveFunds || 0 | currency }}</div>
               </div>
 
               <div class="control-group">
                 <label class="control-label">Last Payment:</label>
-                <div class="static">{{ 1500 | currency }}</div>
+                <div class="controls static">{{ financial.data.lastPayment.amount | currency }}</div>
               </div>
 
               <div class="control-group">
                 <label class="control-label">Last Payment Date:</label>
-                <div class="static">2/25/14</div>
+                <div class="controls static">{{ financial.data.lastPayment.date | moment }}</div>
               </div>
 
               <div class="control-group">
                 <label class="control-label">Unapplied Funds:</label>
-                <div class="static">{{ 420 | currency }}</div>
+                <div class="controls static">{{ financial.data.unappliedFunds | currency }}</div>
               </div>
 
               <div class="control-group">
                 <label class="control-label">Total Available:</label>
-                <div class="static">{{ 58345 | currency }}</div>
+                <div class="controls static">{{ financial.data.totalAvailable | currency }}</div>
               </div>
 
             </form>
