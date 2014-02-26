@@ -146,7 +146,9 @@ angular.module('nextgearWebApp')
         },
 
         messageBox: function(title, message, buttons) {
-          var msgBox = new OriginalMessageBox(title, message, buttons);
+          var msgBox = new OriginalMessageBox(title, message, buttons),
+              originalOpen = msgBox.open,
+              originalClose = msgBox.close;
 
           msgBox._addElementsToDom = function() {
             body.append(this.backdropEl);
@@ -158,8 +160,40 @@ angular.module('nextgearWebApp')
             this.backdropEl.remove();
           };
 
+          msgBox.open = function () {
+            var deferred = $q.defer();
+
+            currentlyOpen.push(msgBox);
+            originalOpen.apply(msgBox, arguments).then(
+              function(response) {
+                deferred.resolve(response);
+              }
+            );
+
+            if (currentlyOpen.length === 1) {
+              body.addClass('modal-open');
+
+              // Disable scrolling
+              angular.element(document).on('keydown', preventScrollingOnBody);
+            }
+            $delegate.enforceFocus.call(msgBox);
+
+            return deferred.promise;
+          };
+
+          msgBox.close = function () {
+            currentlyOpen = _.reject(currentlyOpen, msgBox);
+            originalClose.apply(msgBox, arguments);
+
+            if (currentlyOpen.length === 0) {
+              body.removeClass('modal-open');
+
+              // Re-enable scrolling
+              angular.element(document).off('keydown', preventScrollingOnBody);
+            }
+          };
+
           msgBox.modalEl.addClass('nxg-autofocus');
-          $delegate.enforceFocus.call(msgBox);
           return msgBox;
         }
 
