@@ -59,26 +59,26 @@ describe('Model: AccountManagement', function() {
     });
 
 
+    httpBackend.expectGET('/dealer/summary').respond({
+      Success: true,
+      Message: null,
+      Data: {
+        ReserveFunds: 234253,
+        LastPayment: 2343,
+        LastPaymentDate: '2013-12-13'
+      }
+    });
+
+
     httpBackend.expectGET(/\/dealer\/buyer\/dashboard\/[0-9-]{10}\/[0-9-]{10}/).respond({
       Success: true,
       Message: null,
       Data: {
-        "AvailableCredit": 50500,
-        "UtilizedCredit": 474000,
-        "TempLineOfCredit": 75000,
-        "LineOfCredit": 450000,
         "UnappliedFundsTotal": 2222,
         "TotalAvailableUnappliedFunds": 1111,
-        "Receipts": [
-          {
-            "FinancialTransactionId": "abc123",
-            "ReceiptDate": "2013-09-01",
-            "ReceiptNumber": 456,
-            "ReceiptAmount": 480.34
-          }
-        ]
       }
     });
+
 
     spyOn(user, 'getStatics').andReturn({
       BankAccounts: []

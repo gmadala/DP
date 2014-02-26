@@ -11,10 +11,12 @@ angular.module('nextgearWebApp')
 
         return $q.all([
           api.request('GET', '/userAccount/settings'),
+          api.request('GET', '/dealer/summary'),
           api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate)
         ]).then(function(responses) {
             var settings = responses[0];
-            var dashboardInfo = responses[1];
+            var summary = responses[1];
+            var dashboardInfo = responses[2];
 
             for (var i = 0; i < settings.Addresses.length; i++) {
               var addr = settings.Addresses[i];
@@ -25,10 +27,10 @@ angular.module('nextgearWebApp')
 
             // Any Financial Account data tranformations made here
             settings.BankAccounts = User.getStatics().bankAccounts;
-            settings.AvailableCredit = dashboardInfo.AvailableCredit;
-            // settings.ReserveFunds = ; // unclear at this moment what this field is
-            settings.LastPayment = dashboardInfo.Receipts[0].ReceiptAmount;
-            settings.LastPaymentDate = dashboardInfo.Receipts[0].ReceiptDate;
+            settings.AvailableCredit = summary.TotalAvailableCredit;
+            settings.ReserveFunds = summary.ReserveFundsBalance;
+            settings.LastPayment = summary.LastPaymentAmount;
+            settings.LastPaymentDate = summary.LastPaymentDate;
             settings.UnappliedFunds = dashboardInfo.UnappliedFundsTotal;
             settings.TotalAvailable = dashboardInfo.TotalAvailableUnappliedFunds;
 
