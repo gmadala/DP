@@ -113,17 +113,13 @@
                nxg-date-field date-allow="past"
                required
                ng-pattern="isYear"
-               ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) || validity.inputSaleDate.$error.past || validity.inputSaleDate.$error.pattern}" />
+               ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) || validity.inputSaleDate.$error.past || validity.inputSaleDate.$error.pattern || validity.inputSaleDate.$error.date }" />
         <label for="inputSaleDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.required">
-          Please enter a Valid Sales Date.
-        </label>
-        <label for="inputSaleDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.date">
+               ng-show="validity.inputSaleDate.$error.required || validity.inputSaleDate.$error.date">
           Please enter a Valid Sales Date.
         </label>
         <label for="inputPurchaseDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.pattern">
+               ng-show="validity.inputSaleDate.$error.pattern && !validity.inputSaleDate.$error.date">
             Please enter a Valid Sales Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
           </label>
         <label for="inputSaleDate" class="text-error"

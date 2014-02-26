@@ -36,6 +36,8 @@ angular.module('nextgearWebApp')
         // link function
         return {
           pre: function (scope, element, attrs, formCtrl) {
+            scope.isDate = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+
             // a bit round-about, but passing ngModel here the data errs are not applied yet,
             // hence we do some digging and IF this field has a date error, reset the input to
             // reflect that bad data
@@ -65,6 +67,14 @@ angular.module('nextgearWebApp')
                   type: 'changeDate', // Send the 'changeDate' event
                   date: new Date() //, passing in the current date
                 });
+              }
+            });
+
+            element.children('input').on('blur', function() {
+              if(!this.value.match(scope.isDate) && this.value !== '') {
+                formCtrl[inputName].$setValidity('date', false);
+              } else {
+                formCtrl[inputName].$setValidity('date', true);
               }
             });
 

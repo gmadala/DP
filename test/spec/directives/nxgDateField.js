@@ -47,6 +47,15 @@ describe('Directive: nxgDateField', function () {
       expect(moment(new Date()).diff(scope.bar, 'days')).toEqual(0);
     });
 
+    it('should set invalid if non-date is entered into field on blur', function () {
+      scope.bar = new Date(2013, 0, 1);
+      scope.$digest();
+      var input = element.find('input');
+      input.val('foofers');
+      input.trigger('blur')
+      expect(scope.form.$error.date).toBeTruthy();
+    });
+
   });
 
   describe('notFutureDates functionality', function () {

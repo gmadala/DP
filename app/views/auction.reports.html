@@ -28,11 +28,11 @@
                         nxg-date-field
                         ng-model="data.disDate"
                         date-allow="past"
-                        ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past }"
+                        ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past || disFormValidity.disDate.$error.date }"
                         required />
 
                 <button class="btn btn-mini" ng-click="viewDisbursementDetail()">View Report</button>
-                <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required">
+                <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date">
                  Please select a Valid Date.
                 </label>
                 <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past">
