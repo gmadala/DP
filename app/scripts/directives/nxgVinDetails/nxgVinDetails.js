@@ -54,6 +54,7 @@ angular.module('nextgearWebApp')
     $scope.noVin = function() {
       // There is no VIN for this vehicle, display make/model/year/style inputs
       s.vinMode = 'noVin';
+      $scope.data.VinAckLookupFailure = true;
 
       if ($scope.form.inputVin.$error.required) {
         $scope.form.inputVin.$error.required = false;

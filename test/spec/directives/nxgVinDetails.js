@@ -10,7 +10,9 @@ describe('Directive: nxgVinDetails', function () {
     outerScope = $rootScope.$new();
     outerScope.theForm = {};
     outerScope.validation = {};
-    outerScope.aModel = {};
+    outerScope.aModel = {
+      VinAckLookupFailure: false
+    };
 
     element = angular.element('<div nxg-vin-details floor-model="aModel" validity="validation" form="theForm"></div>');
     element = $compile(element)(outerScope);
@@ -33,7 +35,7 @@ describe('Directive: nxgVinDetails', function () {
       vinLookupResult;
 
     beforeEach(inject(function ($controller, $rootScope, Blackbook, $q) {
-      scope = $rootScope.$new();
+      scope = element.scope();
       blackbookMock = {
         fetchVehicleTypeInfoForVin: function () {
           var def = $q.defer();
@@ -181,11 +183,12 @@ describe('Directive: nxgVinDetails', function () {
     });
 
     describe('noVin scope function', function() {
-      it('should update the vinMode', function() {
+      it('should update the vinMode and set VinAckLookupFailure to true', function() {
         scope.form = { inputVin: { $error: {} }}
         scope.settings.vinMode = 'noMatch';
         scope.noVin();
         expect(scope.settings.vinMode).toBe('noVin');
+        expect(scope.data.VinAckLookupFailure).toBe(true);
       });
     });
 
