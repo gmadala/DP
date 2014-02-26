@@ -3,6 +3,8 @@
 angular.module('nextgearWebApp')
   .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api) {
 
+    $scope.isCollapsed = true;
+
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
       sum: {
