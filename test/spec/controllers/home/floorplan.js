@@ -276,6 +276,12 @@ describe('Controller: FloorplanCtrl', function () {
             Message: null,
             Data: []
           });
+
+        spyOn(angular, 'element').andReturn({
+          scope: function() {
+            return { tt_isOpen: '' };
+          }
+        });
       });
 
       it('set title location to Seller if they have the title', function() {
