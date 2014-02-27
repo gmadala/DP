@@ -28,7 +28,8 @@
                 "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "Extendable": true
             },
             {
                 "FloorplanId": "2048",
@@ -52,7 +53,8 @@
                 "WebScheduledPaymentId": "webScheduledPayment10235",
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "Extendable": false
             },
             {
                 "FloorplanId": "2047",
@@ -76,7 +78,8 @@
                 "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "Extendable": true
             }
         ]
     }
