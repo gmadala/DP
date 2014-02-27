@@ -1,11 +1,9 @@
-NextGear Capital v2.0.1
+NextGear Capital v2.0.3
 =================================
 
 Fixes included in this release:
 
-VO-485	Integrate uservoice for feedback into app(s)
-VO-981	add verbiage to seller floorplan screen to indicate date search is for floorplan date OR disbursement date
-VO-787	Web: Update Security Question: Browser Back button doesn't work properly when some entries are filled.
-VO-1005	Web: Feedback & Support: Login page displayed on Feedback dialog box.
-VO-794	Feedback & Support placement on the Web site for Dealers
-VO-1018	Upcoming payments calendar for month is blank
+VO-1120	Issue with bulk flooring on website for auction
+VO-860	Auctions Want Verification When "I Have Title" Is Selected
+VO-987	Website is allowing user to attempt to floor a car without a full VIN
+VO-1056	Dashboard layout issues with narrow browser window
