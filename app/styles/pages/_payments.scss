@@ -20,6 +20,10 @@
   &.pay-title { width: 6%; }
 }
 
+.cell.pay-more {
+  vertical-align: middle;
+}
+
 .pay-due {
   .warning {
     margin-top: 20px;
@@ -89,7 +93,6 @@
 .detail-col {
   @extend %float-l;
   @extend %half-width;
-  padding-bottom: 10px;
 
   & + .detail-col {
     border-left: 1px solid $border;
@@ -97,10 +100,14 @@
 
   .vehicle-info & {
     width: 33%;
-    height: 330px;
+    height: 360px;
 
-    &:first-child {
-      width: 34%;
+    &:first-child + .detail-col {
+      width: 35%;
+    }
+
+    &:last-child {
+      width: 32%;
     }
   }
 }
@@ -120,6 +127,7 @@
 
 .detail-value {
   color: $darker-text-color;
+  padding-top: 6px;
 }
 
 .curtail-sch {

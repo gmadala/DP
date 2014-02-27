@@ -84,6 +84,14 @@
         <td class="detail-label">Seller</td>
         <td class="detail-value">{{ vehicleDetails.seller }}</td>
       </tr>
+      <tr>
+        <td class="detail-label">Seller Address</td>
+        <td class="detail-value">
+          {{ vehicleDetails.sellerAddressLine1 }}<br/>
+          {{ vehicleDetails.sellerAddressLine2 }}<br/>
+          {{ vehicleDetails.sellerAddressCity + ',' }} {{ vehicleDetails.sellerAddressState }} {{ vehicleDetails.sellerAddressZip }}
+        </td>
+      </tr>
     </table>
   </div>
 

@@ -11,6 +11,11 @@
         "StockNumber": 2463,
         "BuyerBusinessNumber" : 92383,
         "SellerName": "Steve Zissou",
+        "SellerAddressLine1": "123 Main St",
+        "SellerAddressLine2": "2nd line",
+        "SellerAddressCity": "Rochester",
+        "SellerAddressState": "NY",
+        "SellerAddressZip": "00000",
         "TitleLocation": "TitleLocation",
         "TitleType": "TitleType",
         "Salvage": false,
@@ -47,7 +52,7 @@
                 "Cpp": 21.12,
                 "Fees": 8.95,
                 "TotalPayment": 472.32,
-                "HighlineFeeApplied": true 
+                "HighlineFeeApplied": true
             },
             {
                 "StartDate": "2013-09-15",
@@ -58,7 +63,7 @@
                 "Cpp": 21.12,
                 "Fees": 8.95,
                 "TotalPayment": 472.32,
-                "HighlineFeeApplied": false 
+                "HighlineFeeApplied": false
             }
         ]
     }
