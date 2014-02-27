@@ -108,6 +108,9 @@ angular.module('nextgearWebApp')
           FloorplanId: floorplanId,
           HasTitle: hasTitle
         });
+      },
+      getExtensionPreview: function(floorplanId) {
+        return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);
       }
     };
   });

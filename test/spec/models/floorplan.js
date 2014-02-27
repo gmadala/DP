@@ -493,4 +493,20 @@ describe('Model: Floorplan', function () {
 
   });
 
+  describe('getExtensionPreview method', function() {
+    beforeEach(function() {
+      httpBackend.whenGET('/floorplan/extensionPreview/1234').respond({
+        "Success": true,
+        "Data": {
+          foo: 'bar'
+        }
+      });
+    });
+
+    it('should get the extension preview information based on floorplanid', function() {
+      httpBackend.expectGET('/floorplan/extensionPreview/1234');
+      floorplan.getExtensionPreview(1234);
+      expect(httpBackend.flush).not.toThrow();
+    });
+  });
 });

@@ -189,11 +189,22 @@ angular.module('nextgearWebApp')
     };
     refreshCanPayNow();
 
-  }).controller('ExtensionRequestCtrl', function ($scope, dialog, confirmRequest) {
-
+  }).controller('ExtensionRequestCtrl', function ($scope, dialog, payment, confirmRequest, Floorplan) {
+    $scope.payment = payment;
     $scope.closeDialog = dialog.close;
 
+    Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
+      $scope.extPrev = result;
+
+      var feeTotal = _.reduce($scope.extPrev.Fees, function(sum, fee) {
+        return sum + fee.Amount;
+      }, 0);
+
+      $scope.subtotal = $scope.extPrev.PrincipalAmount + $scope.extPrev.InterestAmount + feeTotal + $scope.extPrev.CollateralProtectionAmount;
+    });
+
     $scope.confirmRequest = function() {
+      console.log('confirm');
       confirmRequest().then(function() {
         dialog.close();
       });
