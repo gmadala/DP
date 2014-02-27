@@ -9,7 +9,7 @@
 <div class="modal-body">
   <div class="search-controls">
     <label>Business Name or Number</label>
-    <input type="text" ng-model="data.proposedQuery" nxg-autofocus>
+    <input type="text" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()">
     <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
       <i class="glyphicon glyphicon-search"></i>
     </button>
