@@ -113,33 +113,32 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.extension = function (payment) {
-      var templateUrl;
-
-      if(payment.Extendable) {
-        templateUrl = 'views/modals/paymentExtensionAvailable.html';
-      } else {
-        templateUrl = 'views/modals/paymentExtensionRequest.html';
-      }
 
       $dialog.dialog({
           backdrop: true,
           keyboard: true,
           backdropClick: true,
           controller: 'ExtensionRequestCtrl',
-          templateUrl: templateUrl,
+          templateUrl: 'views/modals/paymentExtension.html',
+          dialogClass: 'modal extension-modal',
           resolve: {
+            payment: function() {
+              return payment;
+            },
             confirmRequest: function() {
-              if(payment.Extendable) {
-                return Payments.requestExtension(payment.FloorplanId).then(function() {
-                  // Reload data since which payments can be extended has now changed
-                  // If user extends a payment not on the first page it will un-load previously
-                  // loaded payments and kick them to the top of the list.
-                  $scope.payments.search();
-                });
-              } else {
-                // shouldn't be calling this method
-                return $q.reject();
-              }
+              return function() {
+                if(payment.Extendable) {
+                  return Payments.requestExtension(payment.FloorplanId).then(function() {
+                    // Reload data since which payments can be extended has now changed
+                    // If user extends a payment not on the first page it will un-load previously
+                    // loaded payments and kick them to the top of the list.
+                    $scope.payments.search();
+                  });
+                } else {
+                  // shouldn't be calling this method
+                  return $q.reject();
+                }
+              };
             }
           }
         }).open();

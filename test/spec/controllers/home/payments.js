@@ -372,22 +372,6 @@ describe('Controller: PaymentsCtrl', function () {
   });
 
   describe('request extension', function() {
-
-    it('should set a different template depending on the Extendable attribute', function() {
-      var payment1 = {
-          Extendable: true
-        },
-        payment2 = {
-          Extendable: false
-        };
-      spyOn(dialog, 'dialog').andReturn({
-        open: angular.noop
-      });
-      scope.payments.extension(payment1);
-      scope.payments.extension(payment2);
-      expect(dialog.dialog.calls[0].args[0].templateUrl).not.toEqual(dialog.dialog.calls[1].args[0].templateUrl);
-    });
-
     it('should make API call to submit request if Extendable is true', function() {
       var payment = {
         Extendable: true
@@ -398,10 +382,71 @@ describe('Controller: PaymentsCtrl', function () {
       spyOn(modelMock, 'requestExtension').andCallThrough();
       scope.payments.extension(payment);
       expect(dialog.dialog).toHaveBeenCalled();
-      dialog.dialog.mostRecentCall.args[0].resolve.confirmRequest();
+      var testConfirm = dialog.dialog.mostRecentCall.args[0].resolve.confirmRequest();
+      testConfirm();
       expect(modelMock.requestExtension).toHaveBeenCalled();
     });
 
   });
 
+});
+
+describe('Controller: ExtensionRequestCtrl', function() {
+  // load the controller's module
+  beforeEach(module('nextgearWebApp'));
+
+  var ExtensionRequestCtrl,
+    paymentMock = {
+      Extendable: true,
+      FloorplanId: 1234
+    },
+    confirm,
+    dialog,
+    scope,
+    floorplan,
+    prevMock;
+
+  beforeEach(inject(function($controller, $rootScope, $q) {
+    scope = $rootScope.$new();
+    // dialog = $dialog;
+    floorplan = {
+      getExtensionPreview: function() {
+        return $q.when(prevMock);
+      }
+    };
+    dialog = {
+      close: angular.noop
+    };
+    confirm = function() {
+      return $q.when(true);
+    };
+
+    prevMock = {
+      PrincipalAmount: 12,
+      InterestAmount: 34,
+      Fees: [
+        { Type: 'fee1', Amount: 56 },
+        { Type: 'fee2', Amount: 78 },
+      ],
+      CollateralProtectionAmount: 91,
+    };
+
+    ExtensionRequestCtrl = $controller('ExtensionRequestCtrl', {
+      $scope: scope,
+      dialog: dialog, // current open instance of dialog
+      payment: paymentMock,
+      confirmRequest: confirm,
+      Floorplan: floorplan
+    });
+  }));
+
+  describe('controller', function() {
+    it('should attach the payment object to the scope', function() {
+      expect(scope.payment).toBe(paymentMock);
+    });
+
+    it('should have a confirm request function that will close the dialog and confirm request with api', function() {
+      expect(scope.confirmRequest).toBeDefined();
+    });
+  });
 });

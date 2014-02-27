@@ -121,12 +121,17 @@
 
                     <div class="cell pay-due">
                       <p>{{ payment.DueDate | moment }}</p>
+                      <div class="extension">
+                        <a ng-show="payment.Extendable" ng-click="payments.extension(payment)" href="javascript:void(0)">Extension Available</a>
+                        <a ng-hide="payment.Extendable" ng-click="payments.extension(payment)" href="javascript:void(0)">Request Extension</a>
+                      </div>
                       <div class="nxg-payment-due-status"
                          ng-class="getDueStatus(payment)"
                          ng-switch="getDueStatus(payment)">
                         <p class="warning today" ng-switch-when="today"><span class="excl-today">!</span>Due Today</p>
                         <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
                       </div>
+
                     </div>
                     <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
                     <div class="cell pay-payment-amt">

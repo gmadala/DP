@@ -34,6 +34,68 @@
   margin: 0;
 }
 
+.extension-modal {
+  width: 400px;
+  margin-left: -200px;
+
+  .detail-col {
+    @extend %full-width;
+    float: none;
+    padding: 14px;
+    border: 1px solid $border;
+
+    .well-head {
+      padding: 7px 10px;
+      margin: -14px -14px 10px;
+    }
+
+    & + p {
+      line-height: $base-line-height;
+      margin: 15px 10px;
+    }
+  }
+
+  table {
+    width: 80%;
+
+    tr.subtotal {
+      border-top: 1px solid $border;
+
+      td {
+        padding-top: 10px;
+
+        &:first-child {
+          @extend %heavy;
+        }
+      }
+    }
+
+    td {
+      line-height: 1.1;
+      padding: 0 0 8px;
+
+      &:first-child {
+        width: 60%;
+      }
+    }
+  }
+
+  .modal-footer {
+    border: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.payments .extension {
+  margin-top: 5px;
+
+  a {
+    font-size: $tiny-font-size;
+    line-height: $base-line-height;
+  }
+}
+
 .payments .cell .btn-block,
 .payments .cell .btn-block:hover,
 .payments .cell .btn-block:active,

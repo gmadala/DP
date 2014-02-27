@@ -54,3 +54,8 @@
 %small {
   font-size: $small-font-size;
 }
+
+.highlight {
+  @extend %heavy;
+  color: $brand-text;
+}
