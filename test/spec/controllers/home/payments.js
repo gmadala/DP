@@ -9,6 +9,8 @@ describe('Controller: PaymentsCtrl', function () {
     stateParamsMock,
     modelMock,
     userMock,
+    dialog,
+    payments,
     searchResult = {
       data: {}
     },
@@ -18,7 +20,7 @@ describe('Controller: PaymentsCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q) {
+  beforeEach(inject(function ($controller, $rootScope, $q, $dialog) {
     scope = $rootScope.$new();
     stateParamsMock = {
       filter: 'fooFilter'
@@ -38,11 +40,15 @@ describe('Controller: PaymentsCtrl', function () {
       },
       isPaymentOnQueue: function () {
         return false;
+      },
+      requestExtension: function () {
+        return $q.when(true);
       }
     };
     userMock = {
       isLoggedIn: function(){ return true; }
     };
+    dialog = $dialog;
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
 
@@ -363,6 +369,39 @@ describe('Controller: PaymentsCtrl', function () {
   it('should attach a value for canPayNow to the scope', function () {
     scope.$apply();
     expect(scope.canPayNow).toBe(true);
+  });
+
+  describe('request extension', function() {
+
+    it('should set a different template depending on the Extendable attribute', function() {
+      var payment1 = {
+          Extendable: true
+        },
+        payment2 = {
+          Extendable: false
+        };
+      spyOn(dialog, 'dialog').andReturn({
+        open: angular.noop
+      });
+      scope.payments.extension(payment1);
+      scope.payments.extension(payment2);
+      expect(dialog.dialog.calls[0].args[0].templateUrl).not.toEqual(dialog.dialog.calls[1].args[0].templateUrl);
+    });
+
+    it('should make API call to submit request if Extendable is true', function() {
+      var payment = {
+        Extendable: true
+      };
+      spyOn(dialog, 'dialog').andReturn({
+        open: angular.noop
+      });
+      spyOn(modelMock, 'requestExtension').andCallThrough();
+      scope.payments.extension(payment);
+      expect(dialog.dialog).toHaveBeenCalled();
+      dialog.dialog.mostRecentCall.args[0].resolve.confirmRequest();
+      expect(modelMock.requestExtension).toHaveBeenCalled();
+    });
+
   });
 
 });

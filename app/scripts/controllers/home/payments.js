@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, $q) {
 
     segmentio.track(metric.VIEW_PAYMENTS_LIST);
     $scope.metric = metric; // make metric names available to template
@@ -112,6 +112,39 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.payments.extension = function (payment) {
+      var templateUrl;
+
+      if(payment.Extendable) {
+        templateUrl = 'views/modals/paymentExtensionAvailable.html';
+      } else {
+        templateUrl = 'views/modals/paymentExtensionRequest.html';
+      }
+
+      $dialog.dialog({
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          controller: 'ExtensionRequestCtrl',
+          templateUrl: templateUrl,
+          resolve: {
+            confirmRequest: function() {
+              if(payment.Extendable) {
+                return Payments.requestExtension(payment.FloorplanId).then(function() {
+                  // Reload data since which payments can be extended has now changed
+                  // If user extends a payment not on the first page it will un-load previously
+                  // loaded payments and kick them to the top of the list.
+                  $scope.payments.search();
+                });
+              } else {
+                // shouldn't be calling this method
+                return $q.reject();
+              }
+            }
+          }
+        }).open();
+    };
+
     $scope.payments.resetSearch = function (initialFilter) {
       $scope.payments.proposedSearchCriteria = {
         query: null,
@@ -156,5 +189,15 @@ angular.module('nextgearWebApp')
       $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
     refreshCanPayNow();
+
+  }).controller('ExtensionRequestCtrl', function ($scope, dialog, confirmRequest) {
+
+    $scope.closeDialog = dialog.close;
+
+    $scope.confirmRequest = function() {
+      confirmRequest().then(function() {
+        dialog.close();
+      });
+    };
 
   });

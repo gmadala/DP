@@ -242,6 +242,9 @@ angular.module('nextgearWebApp')
         // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
         //return api.request('POST', '/payment/2_0/make', data);
         return api.request('POST', '/payment/make', data);
+      },
+      requestExtension: function (floorplanId) {
+        return api.request('POST', '/Floorplan/requestextension/' + floorplanId);
       }
     };
   });

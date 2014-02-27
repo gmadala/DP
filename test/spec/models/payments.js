@@ -861,4 +861,22 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('requestExtension', function() {
+
+    it('should make api request', function() {
+      var floorplanId = 5;
+      httpBackend.expectPOST('/Floorplan/requestextension/' + floorplanId).respond({
+        Success: true,
+        Message: null,
+        Data: null
+      });
+
+      payments.requestExtension(floorplanId);
+
+      expect(httpBackend.flush).not.toThrow();
+
+    });
+
+  });
+
 });
