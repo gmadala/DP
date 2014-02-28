@@ -29,6 +29,8 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
+                "FeesTotal": 11,
+                "InterestTotal": 12,
                 "Extendable": true
             },
             {
@@ -54,6 +56,8 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
+                "FeesTotal": 14,
+                "InterestTotal": 15,
                 "Extendable": false
             },
             {
@@ -79,6 +83,8 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
+                "FeesTotal": 16,
+                "InterestTotal": 17,
                 "Extendable": true
             }
         ]
