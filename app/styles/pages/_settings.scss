@@ -177,10 +177,16 @@ $set-label-width: 40%;
 }
 
 // ACCOUNT MANAGEMENT
-.settings.account .col-wells {
-  .col {
-    .well.self-service .well-out {
-      @extend %clear;
+.settings.account .well.self-service .well-out {
+  @extend %clear;
+}
+
+.settings.account {
+  .row-fluid {
+    border-bottom: 0;
+    margin-bottom: 0;
+    &:last-child {
+      border-bottom: 1px solid $border;
     }
   }
 }
