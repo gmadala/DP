@@ -102,6 +102,11 @@ angular.module('nextgearWebApp')
               });
             }
 
+            // When navigating to another state, hide all datepickers
+            element.bind('$destroy', function() {
+              element.children('input').datepicker('hide');
+            });
+
             scope.notFutureDates = function(date) {
               if (date !== date || !date) { // Stop NaN or null from getting into the function
                 return true;
