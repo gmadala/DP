@@ -280,7 +280,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.exportPaymentSummary = function() {
-      console.log('export payment summary');
       var feeIds = [],
         paymentIds = [],
         params = {};

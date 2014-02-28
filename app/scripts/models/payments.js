@@ -100,7 +100,7 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, revenue) {
+      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, revenue, interestTotal, feesTotal) {
         var payment = {
           isPayment: true,
           isFee: false,
@@ -111,7 +111,9 @@ angular.module('nextgearWebApp')
           amount: amount,
           dueDate: dueDate,
           isPayoff: asPayoff,
-          revenueToTrack: revenue
+          revenueToTrack: revenue,
+          interestTotal: interestTotal,
+          feesTotal: feesTotal
         };
         paymentQueue.payments[floorplanId] = payment;
         segmentio.track(metric.ADD_TO_BASKET);
