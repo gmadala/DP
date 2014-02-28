@@ -102,9 +102,9 @@
                     </button>
                   </p>
                   <p><!-- Need to update during MVC Integration, VO-927 -->
-                    Principal: <br/>
-                    Interest: <br/>
-                    Fees: 
+                    Principal: {{payment.revenueToTrack | currency}} <br/>
+                    Interest: {{payment.interestTotal | currency}} <br/>
+                    Fees: {{payment.feesTotal | currency}}
                   </p>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"
