@@ -38,5 +38,5 @@
 
 <div class="modal-footer">
   <button ng-show="payment.Extendable" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
-  <button ng-click="closeDialog()" class="btn btn-primary">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
+  <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
 </div>
