@@ -99,9 +99,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'DocumentsCtrl',
         showNavBar: true
       })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'views/settings.html',
+      .state('profile_settings', {
+        url: '/profile_settings',
+        templateUrl: 'views/profileSettings.html',
         controller: 'ProfileSettingsCtrl',
         showNavBar: true
       })

@@ -28,7 +28,8 @@
             <div class="nxg-settings dropdown-menu">
               <ul class="unstyled">
                 <li>
-                  <a ng-href="{{ user.isDealer() && '#/settings' || '#/act/settings' }}">Profile Settings</a>
+                  <a href="#/act/settings" ng-show="!user.isDealer()">Settings</a>
+                  <a href="#/profile_settings" ng-show="user.isDealer()">Profile Settings</a>
                 </li>
                 <li>
                   <a ng-href="#/account_management" ng-show="user.isDealer()">Account Management</a>
@@ -47,7 +48,7 @@
     <div class="container-fluid row-fluid">
       <nav role="navigation" class="span9">
         <span ng-repeat="link in user.navLinks()" >
-          <a href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+          <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
         </span>
       </nav>
     </div>
