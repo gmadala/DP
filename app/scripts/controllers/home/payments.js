@@ -112,6 +112,10 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.showExtendLink = function(payment) {
+      return payment.AmountDue === payment.CurrentPayoff;
+    };
+
     $scope.payments.extension = function (payment) {
 
       $dialog.dialog({

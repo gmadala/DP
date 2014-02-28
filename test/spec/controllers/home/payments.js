@@ -371,6 +371,13 @@ describe('Controller: PaymentsCtrl', function () {
     expect(scope.canPayNow).toBe(true);
   });
 
+  it('should only allow payment extensions if payment is in its final curtailment', function() {
+    var canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 100 });
+    expect(canShow).toBe(true);
+    canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 60 });
+    expect(canShow).toBe(false);
+  });
+
   describe('request extension', function() {
     it('should make API call to submit request if Extendable is true', function() {
       var payment = {
