@@ -1,7 +1,7 @@
 <label for="inputVin" class="input-title">VIN</label>
 <span>
   <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
-         required nxg-requires="checkVinMode()"
+         ng-required="vinRequired()" nxg-requires="checkVinMode()"
          ng-change="vinChange()" nxg-blur="vinExit()"
          nxg-autofocus
          ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />

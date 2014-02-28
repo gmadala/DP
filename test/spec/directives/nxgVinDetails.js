@@ -11,7 +11,8 @@ describe('Directive: nxgVinDetails', function () {
     outerScope.theForm = {};
     outerScope.validation = {};
     outerScope.aModel = {
-      VinAckLookupFailure: false
+      VinAckLookupFailure: false,
+      UnitVin: 'abc'
     };
 
     element = angular.element('<div nxg-vin-details floor-model="aModel" validity="validation" form="theForm"></div>');

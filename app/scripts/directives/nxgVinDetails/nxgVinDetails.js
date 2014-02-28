@@ -22,6 +22,10 @@ angular.module('nextgearWebApp')
       vinLookupPending: false
     };
 
+    $scope.vinRequired = function() {
+      return s.vinMode !== 'noVin';
+    };
+
     $scope.$on('reset', function () {
       s.vinMode = 'none';
     });
@@ -55,15 +59,11 @@ angular.module('nextgearWebApp')
       // There is no VIN for this vehicle, display make/model/year/style inputs
       s.vinMode = 'noVin';
       $scope.data.VinAckLookupFailure = true;
-
-      if ($scope.form.inputVin.$error.required) {
-        $scope.form.inputVin.$error.required = false;
-      }
     };
 
     $scope.vinExit = function () {
       // on leaving VIN field, if it has a syntactically valid value that has not yet been looked up, do it now
-      if ($scope.vinIsSyntacticallyValid($scope.form.inputVin.$error) && s.vinMode === 'none') {
+      if ($scope.vinIsSyntacticallyValid($scope.form.inputVin.$error) && s.vinMode === 'none' && $scope.data.UnitVin) {
         $scope.lookupVin();
       }
     };
