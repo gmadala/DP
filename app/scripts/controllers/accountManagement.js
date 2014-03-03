@@ -109,12 +109,6 @@ angular.module('nextgearWebApp')
           cancel: function() {
             prv.cancel.apply(this);
           },
-          // save: function() {
-          //   if (prv.save.apply(this)) {
-          //     var d = this.dirtyData;
-          //     // Save with model method
-          //   }
-          // },
           isDirty: function() {
             return $scope.financialSettings.$dirty;
           },
@@ -131,8 +125,9 @@ angular.module('nextgearWebApp')
             longFormatAddressText: results,
             titleAddress: results.CurrentTitleReleaseAddress,
             addresses: _.filter(results.Addresses, function(addr) {
-              return addr.isTitleReleaseAddress === false;
-            })
+              return (addr.IsTitleReleaseAddress === false);
+            }),
+            extraAddresses: results.Addresses.length > 4 ? results.Addresses.length - 4 : 0
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -177,7 +172,6 @@ angular.module('nextgearWebApp')
       function(/*reason*/) {
         $scope.loading = false;
       });
-
   })
 
   .controller('ConfirmDisableCtrl', function($scope, dialog) {

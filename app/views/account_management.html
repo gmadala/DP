@@ -103,15 +103,16 @@
                 </div>
               </div>
 
-              <div class="control-group" ng-show="title.data.addresses">
+              <div class="control-group" ng-show="title.data.addresses && !title.editable">
                 <label class="control-label">Additional Addresses:</label>
                 <div class="controls static" ng-hide="title.editable">
                   <ul>
-                    <li ng-repeat="addr in title.data.addresses">
-                      {{ addr.Line1 }}<br/>
-                      {{ addr.Line2 }}<br/>
-                      {{ addr.City }}, {{ addr.State }} {{ addr.Zip }}
+                    <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
+                      <span ng-show="addr.Line1">{{ addr.Line1 }}<br/></span>
+                      <span ng-show="addr.Line2">{{ addr.Line2 }}<br/></span>
+                      <span ng-show="addr.City">{{ addr.City }},</span> {{ addr.State }} {{ addr.Zip }}
                     </li>
+                    <li ng-show="title.data.extraAddresses">And {{ title.data.extraAddresses }} additional addresses...</li>
                   </ul>
                 </div>
             </form>
