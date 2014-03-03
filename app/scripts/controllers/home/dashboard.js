@@ -44,6 +44,28 @@ angular.module('nextgearWebApp')
       angular.element('.dash-calendar').fullCalendar('today');
     };
 
+    $scope.onRequestCredIncr = function() {
+      var dialogOptions = {
+        dialogClass: 'modal request-credit-increase',
+        backdrop: true,
+        keyboard: false,
+        backdropClick: false,
+        templateUrl: 'views/modals/requestCreditIncrease.html' //,
+        // controller: 'RequestCreditIncreaseCtrl'
+      };
+
+      $dialog.dialog(dialogOptions).open().then(
+        function (result) {
+          if (result) {
+            var title = 'Request a Credit Increase',
+              msg = 'Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.',
+              buttons = [{label: 'Close Window', cssClass: 'btn-primary'}];
+            $dialog.messageBox(title, msg, buttons).open();
+          }
+        }
+      );
+    };
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a

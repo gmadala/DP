@@ -1,0 +1,61 @@
+<div class="modal-header">
+  Request a Credit Increase
+</div>
+
+<div class="modal-body">
+  <div class="detail-col" ng-init="credLines=[ { name: 'line1', type: 'type', amount: 1234 } , { name: 'line2', type: 'type2', amount: 5678 } ]">
+    <h4 class="well-head">
+      Which line of credit would you like to extend?
+    </h4>
+
+    <div class="inner">
+      <ul>
+        <li class="credit-line nxg-radios" ng-repeat="line in credLines">
+          <input type="radio" name="credLine" id="credLine" ng-value="line.name" />
+          <label for="credLine">
+              <span class="line-name">{{ line.name }}</span> <br/>
+              {{ line.type }} – {{ line.amount | currency }}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-col">
+    <h4 class="well-head">
+      Do you want this increase to be temporary or permanent?
+    </h4>
+    <div class="inner nxg-radios">
+      <input type="radio" name="tempOrPerm" value="temporary" />
+      <label for="tempOrPerm">
+          <strong>Temporary: </strong>
+          <span class="note">This request will be reviewed for a term up to 45 days.</span>
+      </label>
+
+      <input type="radio" name="tempOrPerm" value="temporary" />
+      <label for="tempOrPerm">
+          <strong>Permanent: </strong>
+          <span class="note">This request will be submitted for review and may require additional information. Please contact your NextGear Representative with any questions.</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="detail-col">
+    <h4 class="well-head">
+      How much would you like to increase it by?
+    </h4>
+    <div class="inner">
+      <input name="increaseAmt" id="increaseAmt" />
+      <label class="note">
+        Credit requests typically take 3-5 business days to process. You will be notified by email as soon as your request has been processed.
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
+  <button ng-click="close()" class="btn">Cancel Request</button>
+</div>
+
+

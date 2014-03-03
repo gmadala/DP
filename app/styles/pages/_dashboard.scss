@@ -43,7 +43,7 @@
 
 .summaries {
   .well-out {
-    height: 14em;
+    height: 180px;
     position: relative;
 
     .btn {
@@ -177,16 +177,79 @@
   }
 }
 
+.modal.request-credit-increase {
+  width: 500px;
+  margin-left: -250px;
+
+  .detail-col {
+    @extend %full-width;
+    border: 1px solid $border;
+    margin-bottom: 10px;
+
+    .inner {
+      // top: -10px;
+      padding: 0 10px 10px 20px;
+    }
+  }
+
+  label, .well-head {
+    font-size: $base-font-size;
+  }
+
+  label {
+    display: block;
+    // position: relative;
+    line-height: $base-line-height;
+    // background: lightyellow;
+    // padding-left: 25px;
+
+    &:before {
+      // background: pink;
+    }
+  }
+
+  .nxg-radios input[type="radio"] + label, .nxg-radios input[type="radio"]:checked + label {
+    padding-left: 25px;
+    // &:before {
+    //   left: -25px;
+    // }
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  // .label-inner {
+  //   display: inline-block;
+  //   padding-left: 25px;
+  // }
+
+  .credit-line {
+    margin-bottom: 20px;
+  }
+
+  li:last-child .credit-line {
+    margin-bottom: 0;
+  }
+
+
+  .line-name {
+    @extend %heavy;
+  }
+
+  .note {
+    font-size: $small-font-size;
+    line-height: $base-line-height;
+  }
+}
+
 .payment-summary {
   .well-out {
     height: 17.5em;
     position: relative;
 
     .btn {
-      position: absolute;
-      margin: 1em;
-      bottom: 0;
-      right: 0;
+      margin-top: 0;
     }
   }
 
