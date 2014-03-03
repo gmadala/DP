@@ -37,6 +37,13 @@ angular.module('nextgearWebApp')
         return {
           pre: function (scope, element, attrs, formCtrl) {
             scope.isDate = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+            var showCode = $parse(attrs.beforeShowDay),
+                $input = element.children('input'),
+                datepickerIsOpen = false;
+
+            element.on('show', function() {
+              datepickerIsOpen = true;
+            });
 
             // a bit round-about, but passing ngModel here the data errs are not applied yet,
             // hence we do some digging and IF this field has a date error, reset the input to
@@ -59,18 +66,27 @@ angular.module('nextgearWebApp')
 
             // Make the current date get filled by default when you hit
             // enter (keyCode 13) and there isn't already a value in the input.
-            element.children('input').on('keydown', function(event) {
-              if(event.keyCode === 13 && this.value === ''){
-                var $this = angular.element(this);
-                $this.datepicker('setValue', new Date());
-                $this.trigger({
-                  type: 'changeDate', // Send the 'changeDate' event
-                  date: new Date() //, passing in the current date
-                });
+            $input.on('keydown', function(event) {
+              if(event.keyCode === 13 && datepickerIsOpen){
+                if(false === showCode(scope, {date: new Date(this.value)})){
+                  // The date selected is invalid
+
+                  // stops other handlers from firing and closing the datepicker
+                  event.stopImmediatePropagation();
+                  // stops form from submitting (and showing red validation errors)
+                  event.preventDefault();
+                } else if(this.value === ''){
+                  var $this = angular.element(this);
+                  $this.datepicker('setValue', new Date());
+                  $this.trigger({
+                    type: 'changeDate', // Send the 'changeDate' event
+                    date: new Date() //, passing in the current date
+                  });
+                }
               }
             });
 
-            element.children('input').on('blur', function() {
+            $input.on('blur', function() {
               if(!this.value.match(scope.isDate) && this.value !== '') {
                 formCtrl[inputName].$setValidity('date', false);
               } else {
@@ -80,7 +96,12 @@ angular.module('nextgearWebApp')
 
             // When date changes (esp with a click), make sure focus remains on the input element.
             element.on('hide', function() {
-              var $input = element.children('input');
+              datepickerIsOpen = false;
+
+              if(false === showCode(scope, {date: new Date(this.value)})) {
+                $input.val('');
+              }
+
               if(document.activeElement !== $input.get()[0]) {
                 $input.focus();
 
@@ -104,7 +125,7 @@ angular.module('nextgearWebApp')
 
             // When navigating to another state, hide all datepickers
             element.bind('$destroy', function() {
-              element.children('input').datepicker('hide');
+              $input.datepicker('hide');
             });
 
             scope.notFutureDates = function(date) {
@@ -124,7 +145,6 @@ angular.module('nextgearWebApp')
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
             // see https://github.com/eternicode/bootstrap-datepicker#beforeshowday for allowed return values
             if (angular.isDefined(attrs.beforeShowDay)) {
-              var showCode = $parse(attrs.beforeShowDay);
               $strapConfig.datepicker.beforeShowDay = function (date) {
                 return showCode(scope, {date: date});
               };

@@ -60,7 +60,9 @@
                nxg-date-field before-show-day="checkDate(date)"
                ng-model="model.selectedDate"
                required nxg-requires="checkDate(model.selectedDate)"
-               ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.inputScheduleDate.$error.nxgRequires }" />
+               ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
+        <!-- put submit button first inside form so "enter" in input clicks this one instead of removeSchedule() -->
+        <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
       </div>
     </div>
     <div class="control-group half pay-now">
@@ -78,13 +80,13 @@
         Please select a schedule date
     </label>
     <label for="inputScheduleDate" class="text-error"
-           ng-show="validity.inputScheduleDate.$error.nxgRequires">
+           ng-show="validity.$error.nxgRequires">
         Please select a valid banking date no earlier than tomorrow and no later than the payment due date
     </label>
   </div>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="commit()" ng-disabled="submitInProgress" class="btn btn-primary">OK</button>
+  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" class="btn btn-primary">OK</button>
   <button ng-click="close()" ng-disabled="submitInProgress" class="btn btn-primary">Cancel</button>
 </div>

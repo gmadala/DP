@@ -38,8 +38,11 @@ describe('Directive: nxgDateField', function () {
   describe('edge case', function () {
 
     it('should fill current date on keydown enter if empty', function () {
+
       scope.bar = undefined;
       var input = element.find('input');
+      element.children().trigger($.Event('show'));
+      scope.$digest();
       input.val('');
       input.trigger($.Event( "keydown", { keyCode: 13 } ));
       scope.$digest();
