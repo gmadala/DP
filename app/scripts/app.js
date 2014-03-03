@@ -166,7 +166,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('auction_settings', {
         url: '/act/settings',
         templateUrl: 'views/auction.settings.html',
-        controller: 'SettingsCtrl',
+        controller: 'AuctionSettingsCtrl',
         isAuctionState: true,
         showNavBar: true
       })

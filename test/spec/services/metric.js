@@ -12,8 +12,12 @@ describe('Service: metric', function () {
   }));
 
   it('should contain the expected metric names', function () {
-    expect(typeof metric.VIEW_SETTINGS).toBe('string');
-    expect(typeof metric.CHANGE_SETTINGS).toBe('string');
+    expect(typeof metric.VIEW_AUCTION_SETTINGS).toBe('string');
+    expect(typeof metric.CHANGE_AUCTION_SETTINGS).toBe('string');
+    expect(typeof metric.VIEW_PROFILE_SETTINGS).toBe('string');
+    expect(typeof metric.CHANGE_PROFILE_SETTINGS).toBe('string');
+    expect(typeof metric.VIEW_ACCOUNT_MANAGEMENT).toBe('string');
+    expect(typeof metric.CHANGE_ACCOUNT_MANAGEMENT).toBe('string');
 
     expect(typeof metric.VIEW_ANALYTICS_DASHBOARD).toBe('string');
     expect(typeof metric.VIEW_ALL_TOP_AUCTIONS).toBe('string');

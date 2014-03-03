@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric) {
-    segmentio.track(metric.VIEW_SETTINGS);
-
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User) {
+    if(User.isDealer()) {
+      segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
+    }
     $scope.loading = false;
 
     var prv = {
@@ -23,7 +24,11 @@ angular.module('nextgearWebApp')
           this.cancel();
           return false;
         }
-        segmentio.track(metric.CHANGE_SETTINGS);
+        if(User.isDealer()) {
+          segmentio.track(metric.CHANGE_ACCOUNT_MANAGEMENT);
+        } else {
+          segmentio.track(metric.CHANGE_AUCTION_SETTINGS);
+        }
         return true;
       },
       saveSuccess: function() {
