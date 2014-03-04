@@ -8,7 +8,6 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/dealer/ActiveLinesOfCredit').then(function(response) {
           return _.map(response, function(line) {
             return {
-              name: 'name-to-replace',
               id: line.LineOfCreditId,
               type: line.CreditTypeName,
               amount: line.Limit
