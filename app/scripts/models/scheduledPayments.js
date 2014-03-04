@@ -45,6 +45,8 @@ angular.module('nextgearWebApp')
                 principalPayoff: item.PrincipalPayoff,
                 curtailmentDueDate: item.CurtailmentDueDate,
                 scheduledBy: item.ScheduledByUserDisplayname,
+                flooringDate: item.FlooringDate,
+                daysOnFloorplan: item.DaysOnFloorplan,
                 receiptURL: prv.getReceiptURL(item),
                 data: {query: request.Keyword}
               });
