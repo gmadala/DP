@@ -50,20 +50,11 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'views/modals/requestCreditIncrease.html' //,
-        // controller: 'RequestCreditIncreaseCtrl'
+        templateUrl: 'views/modals/requestCreditIncrease.html',
+        controller: 'RequestCreditIncreaseCtrl'
       };
 
-      $dialog.dialog(dialogOptions).open().then(
-        function (result) {
-          if (result) {
-            var title = 'Request a Credit Increase',
-              msg = 'Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.',
-              buttons = [{label: 'Close Window', cssClass: 'btn-primary'}];
-            $dialog.messageBox(title, msg, buttons).open();
-          }
-        }
-      );
+      $dialog.dialog(dialogOptions).open();
     };
 
     /**
