@@ -80,6 +80,11 @@
             <div class="cell sch-desc">
               Description
             </div>
+            <div class="cell sch-floorDate sortable"
+                 ng-click="sortBy('floorDate')"
+                 ng-class="{ sorted : sortField == 'floorDate', desc : sortDescending }">
+              Floor Date
+            </div>
             <div class="cell sch-status">
               Status
             </div>
@@ -109,6 +114,11 @@
                   VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
                   Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
                 </p>
+              </div>
+
+              <div class="cell sch-floorDate">
+                <p>{{ pay.flooringDate | moment }}</p>
+                <p>Days Floored: {{ pay.daysOnFloorplan }}</p>
               </div>
 
               <div class="cell sch-status">
