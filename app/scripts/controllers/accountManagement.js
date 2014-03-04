@@ -104,7 +104,8 @@ angular.module('nextgearWebApp')
               date: results.LastPaymentDate
             },
             unappliedFunds: results.UnappliedFunds,
-            totalAvailable: results.TotalAvailable
+            totalAvailable: results.TotalAvailable,
+            autoDisburseUnappliedFunds: results.AutoDisburseUnappliedFundsDaily
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -173,12 +174,6 @@ angular.module('nextgearWebApp')
             return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
           }
         };
-
-        /** SELF SERVICE SETTINGS **/
-        $scope.selfService = {
-          autoDisburseUnappliedFunds: results.AutoDisburseUnappliedFundsDaily
-        };
-
       },
       function(/*reason*/) {
         $scope.loading = false;

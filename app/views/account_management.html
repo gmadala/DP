@@ -124,10 +124,6 @@
         <!-- FINANCIAL ACCOUNTS -->
         <section class="well adjacent">
           <h4>Financial Accounts</h4>
-          <!-- <button ng-hide="financial.editable" class="btn edit-btn" ng-click="financial.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button> -->
-   <!--        <button ng-show="financial.editable" class="btn cancel-btn" ng-click="financial.cancel()">Cancel</button>
-          <button ng-show="financial.editable" class="btn save-btn" ng-click="financial.save()">Save</button> -->
-
           <div class="well-out">
             <form class="settings-opts" name="financialSettings" novalidate>
               <div class="control-group">
@@ -169,6 +165,10 @@
                 <div class="controls static">{{ financial.data.totalAvailable | currency }}</div>
               </div>
 
+              <div ng-show="financial.data.autoDisburseUnappliedFunds" class="control-group">
+                <label class="control-label">Auto-Disburse Unapplied Funds:</label>
+                <div class="controls static">{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}</div>
+              </div>
             </form>
           </div><!-- end .well-out -->
         </section><!-- end .well.adjacent -->
