@@ -96,6 +96,26 @@
   </div>
 
   <div class="detail-col">
+    <h4 class="well-head">Interest & Fees</h4>
+    <table>
+      <tr>
+        <td class="detail-label">Interest Accrued</td>
+        <td class="detail-value">{{ vehicleDetails.interestAccrued | currency }}</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Interest Paid</td>
+        <td class="detail-value">{{ vehicleDetails.interestApplied | currency }}</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Fees Accrued</td>
+        <td class="detail-value">{{ vehicleDetails.feesAccrued | currency }}</td>
+      </tr>
+      <tr>
+        <td class="detail-label">Fees Paid</td>
+        <td class="detail-value">{{ vehicleDetails.feesApplied | currency }}</td>
+      </tr>
+    </table>
+
     <h4 class="well-head">Title Information</h4>
     <table>
       <tr>

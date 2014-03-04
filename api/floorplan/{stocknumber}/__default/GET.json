@@ -42,6 +42,10 @@
         "TrackingNumber": "Z123456",
         "LineOfCredit": "LineOfCredit",
         "TermPlanName": "TermPlanName",
+        "interestAccrued": 1234.34,
+        "interestApplied": 567,
+        "feesAccrued": 897.23,
+        "feesApplied": 876.87,
         "Curtailments" : [
             {
                 "StartDate": "2013-08-15",
