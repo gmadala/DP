@@ -11,12 +11,17 @@
       {
         "SecurityQuestionId": 3,
         "Answer": "Imagínate"
+      },
+      {
+        "SecurityQuestionId": 2,
+        "Answer": "Other Answer"
       }
     ],
     "Email": "diana.guarin@manheim.com",
     "CellPhone": "2143301800",
     "BusinessEmail": "diana.guarin@manheim.com",
     "EnhancedRegistrationEnabled": false,
+    "AutoDisburseUnappliedFundsDaily": false,
     "Addresses": [
       {
         "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
