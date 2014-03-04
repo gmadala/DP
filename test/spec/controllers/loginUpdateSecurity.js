@@ -4,7 +4,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
   beforeEach(module('nextgearWebApp'));
 
-  var settingsData, SettingsMock, scope, LoginUpdateSecurityCtrl, userData, UserMock, locationMock;
+  var settingsData, ProfileSettingsMock, scope, LoginUpdateSecurityCtrl, userData, UserMock, locationMock;
 
   function noop() {
   }
@@ -25,7 +25,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       ]
     };
 
-    SettingsMock = {
+    ProfileSettingsMock = {
       toSucceed: true,
       get: function() {
         return {
@@ -88,7 +88,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       $rootScope: $rootScope,
       $scope: scope,
       $location: locationMock,
-      Settings: SettingsMock,
+      ProfileSettings: ProfileSettingsMock,
       User: UserMock
     });
 
@@ -150,12 +150,12 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     });
 
     it('should call methods with the correct params', function() {
-      SettingsMock.toSucceed = true; // tell the SettingsMock to succeed at submitting the form
-      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
+      ProfileSettingsMock.toSucceed = true; // tell the ProfileSettingsMock to succeed at submitting the form
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
-      expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
+      expect(ProfileSettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
         { SecurityQuestionId: 1, Answer: 'Blue Lagoon'},
         { SecurityQuestionId: 3, Answer: 'Harry Potter'},
         { SecurityQuestionId: undefined, Answer: undefined} // not really possible in the UI, but true to the mocked data
@@ -165,12 +165,12 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     });
 
     it('should call methods and fail', function() {
-      SettingsMock.toSucceed = false; // tell the SettingsMock to fail at submitting the form
-      spyOn(SettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
+      ProfileSettingsMock.toSucceed = false; // tell the ProfileSettingsMock to fail at submitting the form
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
-      expect(SettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalled();
+      expect(ProfileSettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalled();
 
       expect(UserMock.clearUserInitRequired).not.toHaveBeenCalled();
       expect(scope.updateSecurity.email.$error.correctEmail).toEqual(true);

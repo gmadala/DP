@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $location, User, Settings) {
+  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $location, User, ProfileSettings) {
     var securityQuestions;
 
     User.getSecurityQuestions().then(function(questions){
@@ -62,7 +62,7 @@ angular.module('nextgearWebApp')
       }
       $scope.updateSecurity.email.$error.correctEmail = false;
 
-      Settings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions)
+      ProfileSettings.saveSecurityAnswersAndEmail($scope.updateSecurity.email.$modelValue, questions)
         .then(function() {
           //success
           User.clearUserInitRequired();
