@@ -84,6 +84,11 @@
                        ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
                     Date Due
                   </div>
+                  <div class="cell pay-floorDate sortable"
+                        ng-click="sortBy('payment', 'FlooringDate')"
+                        ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
+                    Floor Date
+                  </div>
                   <div class="cell pay-status sortable"
                        ng-click="sortBy('payment', 'UnitStatus')"
                        ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
@@ -132,6 +137,10 @@
                         <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
                       </div>
 
+                    </div>
+                    <div class="cell pay-floorDate">
+                      <p>{{ payment.FlooringDate | moment }}</p>
+                      <p>Days floored: {{ payment.DaysOnFloorplan }}</p>
                     </div>
                     <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
                     <div class="cell pay-payment-amt">
