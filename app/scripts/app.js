@@ -74,6 +74,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'FloorplanCtrl',
         showNavBar: true
       })
+      .state('home.titlereleases', {
+        url: '/titlereleases',
+        templateUrl: 'views/home.titlereleases.html',
+        // controller: 'TitleReleasesCtrl',
+        showNavBar: true
+      })
 
       .state('floorcar', {
         url: '/floorcar',
