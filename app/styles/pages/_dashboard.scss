@@ -181,65 +181,68 @@
   width: 500px;
   margin-left: -250px;
 
-  .detail-col {
-    @extend %full-width;
-    border: 1px solid $border;
-    margin-bottom: 10px;
-
-    .inner {
-      // top: -10px;
-      padding: 0 10px 10px 20px;
-    }
+  label {
+    display: block;
+    line-height: $base-line-height;
   }
 
   label, .well-head {
     font-size: $base-font-size;
   }
 
-  label {
-    display: block;
-    // position: relative;
-    line-height: $base-line-height;
-    // background: lightyellow;
-    // padding-left: 25px;
+  ul {
+    margin: 0;
 
-    &:before {
-      // background: pink;
+    li + li {
+      margin-top: 5px;
     }
   }
 
-  .nxg-radios input[type="radio"] + label, .nxg-radios input[type="radio"]:checked + label {
-    padding-left: 25px;
-    // &:before {
-    //   left: -25px;
-    // }
+  .detail-col {
+    @extend %full-width;
+    border: 1px solid $border;
+    margin-bottom: 15px;
+
+    .inner {
+      padding: 10px 10px 15px 20px;
+    }
   }
-
-  ul {
-    margin: 0;
-  }
-
-  // .label-inner {
-  //   display: inline-block;
-  //   padding-left: 25px;
-  // }
-
-  .credit-line {
-    margin-bottom: 20px;
-  }
-
-  li:last-child .credit-line {
-    margin-bottom: 0;
-  }
-
 
   .line-name {
     @extend %heavy;
   }
 
   .note {
+    display: block;
     font-size: $small-font-size;
-    line-height: $base-line-height;
+    line-height: 1.3;
+  }
+
+  p.note {
+    margin: 2px 0 0 25px;
+  }
+
+  .incr-amt {
+    input {
+      position: absolute;
+      margin-top: 10px;
+      width: 120px;
+    }
+
+    .note {
+      @extend %float-r;
+      width: 68%;
+      margin-top: 3px;
+    }
+  }
+
+  .error-container {
+    clear: both;
+    padding: 1px 0 0;
+  }
+
+  .text-error {
+    margin: 15px 0 0;
   }
 }
 
