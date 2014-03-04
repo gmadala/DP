@@ -173,6 +173,12 @@ angular.module('nextgearWebApp')
             return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
           }
         };
+
+        /** SELF SERVICE SETTINGS **/
+        $scope.selfService = {
+          autoDisburseUnappliedFunds: results.AutoDisburseUnappliedFundsDaily
+        };
+
       },
       function(/*reason*/) {
         $scope.loading = false;
