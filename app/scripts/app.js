@@ -77,7 +77,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       .state('home.titlereleases', {
         url: '/titlereleases',
         templateUrl: 'views/home.titlereleases.html',
-        // controller: 'TitleReleasesCtrl',
+        controller: 'TitleReleasesCtrl',
         showNavBar: true
       })
       .state('home.titleReleaseCheckout', {

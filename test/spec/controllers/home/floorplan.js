@@ -45,18 +45,6 @@ describe('Controller: FloorplanCtrl', function () {
   // shared tests that need to be run for both dealer and auction mode
   var registerCommonTests = function () {
 
-    it('should attach a getVehicleDescription function to the scope that concatenates vehicle info', function () {
-      expect(typeof scope.getVehicleDescription).toBe('function');
-      var floorplan = {
-        UnitMake: 'Ford',
-        UnitModel: 'Pinto',
-        UnitYear: 1970,
-        UnitStyle: 'Turbo',
-        Color: 'Green'
-      };
-      expect(scope.getVehicleDescription(floorplan)).toBe('1970 Ford Pinto Turbo Green');
-    });
-
     it('should attach a data object to the scope with expected properties', function () {
       expect(scope.data).toBeDefined();
       expect(angular.isArray(scope.data.results)).toBe(true);

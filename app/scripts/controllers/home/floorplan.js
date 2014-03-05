@@ -14,15 +14,7 @@ angular.module('nextgearWebApp')
     var isDealer = User.isDealer(),
         lastPromise;
 
-    $scope.getVehicleDescription = function (floorplan) {
-      return [
-        floorplan.UnitYear || null,
-        floorplan.UnitMake,
-        floorplan.UnitModel,
-        floorplan.UnitStyle,
-        floorplan.Color
-      ].join(' ');
-    };
+    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
     if (isDealer) {
       $scope.filterOptions = [

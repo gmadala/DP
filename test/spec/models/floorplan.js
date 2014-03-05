@@ -16,6 +16,18 @@ describe('Model: Floorplan', function () {
     urlParser = URLParser;
   }));
 
+  it('should have a getVehicleDescription function that concatenates vehicle info', function () {
+    expect(typeof floorplan.getVehicleDescription).toBe('function');
+    var plan = {
+      UnitMake: 'Ford',
+      UnitModel: 'Pinto',
+      UnitYear: 1970,
+      UnitStyle: 'Turbo',
+      Color: 'Green'
+    };
+    expect(floorplan.getVehicleDescription(plan)).toBe('1970 Ford Pinto Turbo Green');
+  });
+
   describe('create method', function () {
 
     var sentData,
