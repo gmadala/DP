@@ -13,6 +13,7 @@ angular.module('nextgearWebApp')
         showDateRange: '&',
         onSearch: '&',
         onClear: '&',
+        filterable: '=',
         helpText: '@',
         info: '@'
       },
