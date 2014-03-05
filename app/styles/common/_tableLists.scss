@@ -62,6 +62,10 @@
     background-color: #F9F9F9;
   }
 
+  &.error-row {
+    border: 2px solid $error-dark;
+  }
+
   .cell {
     font-size: 13px;
     line-height: $base-line-height;

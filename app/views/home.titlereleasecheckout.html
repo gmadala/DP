@@ -34,6 +34,21 @@
               <div class="cell title-desc">
                 <p>2003 Dodge Ram 2400 Laramie Quad Cab 4WD 5.9L i-6FI DSL T/C White</p>
                 <p>{{ payment.description }}</p>
+                <p>
+                  Send To:
+                  <select id="" name="">
+                    <option class="disabled" disabled="disabled" value="">Make Selection</option>
+                    <option>Address 1</option>
+                    <option>Address 2</option>
+                  </select>
+                   <button class="btn-help"
+                          tooltip-placement="right"
+                          tooltip-trigger="click"
+                          tooltip-html="true"
+                          tooltip-html-unsafe="<h5>Alternate Title Address</h5><p>Something to go here</p>"
+                          tooltip-animation="true">?
+                  </button>
+                </p>
               </div>
               <div class="cell title-vin"><p>...5RP4G2</p></div>
               <div class="cell title-stock">
@@ -53,17 +68,17 @@
   <div class="span3 well request-summary sticky" nxg-sticky>
     <h4>Title Release Summary</h4>
     <div class="well-out">
-      <p><span>1</span> Title Requested</p>
+      <p><span class="emphasis">1</span> Title Requested</p>
 
       <hr/>
 
       <p>Title Release Limits for this Account:<br/>
-      <strong>4</strong> out of <strong>6</strong> title releases available.</p>
+      <span class="emphasis">4</span> out of <span class="emphasis">6</span> title releases available.</p>
 
       <hr/>
 
       <div class="submit">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" ng-click="onConfirmRequest()">
           Confirm Requests for Titles
         </button>
       </div>
