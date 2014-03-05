@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api) {
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
@@ -178,6 +178,24 @@ angular.module('nextgearWebApp')
       function(/*reason*/) {
         $scope.loading = false;
       });
+
+    $scope.onRequestCredIncr = function() {
+      var dialogOptions = {
+        dialogClass: 'modal request-credit-increase',
+        backdrop: true,
+        keyboard: false,
+        backdropClick: false,
+        templateUrl: 'views/modals/requestCreditIncrease.html',
+        controller: 'RequestCreditIncreaseCtrl'
+      };
+
+      $dialog.dialog(dialogOptions).open();
+    };
+
+    $scope.feeScheduleUrl = api.contentLink(
+      '/dealer/feeschedule/FeeSchedule',
+      {}
+    );
   })
 
   .controller('ConfirmDisableCtrl', function($scope, dialog) {

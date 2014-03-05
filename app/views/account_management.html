@@ -179,12 +179,16 @@
 
           <div class="well-out">
             <div class="half-width-col">
-              <p><a>Request a Credit Increase</a><br/>
+              <p><a href="javascript:void(0)" ng-click="onRequestCredIncr()">Request a Credit Increase</a><br/>
               explanation here</p>
             </div>
 
             <div class="half-width-col">
-                <p><a>Rates &amp; Terms</a><br/>
+                <p><a ng-href="{{ feeScheduleUrl }}" target="_blank"
+                 nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+                 track-properties="{ documentName: 'Rates and Fees' }">
+                Rates and Fees
+              </a><br/>
               another explanation here</p>
             </div>
           </div><!-- end .well-out -->
