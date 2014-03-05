@@ -1,1 +1,72 @@
-Title Release Checkout
+<section class="row-fluid">
+  <section class="span9">
+    <div class="well">
+      <h4>Title Release Confirmation</h4>
+
+      <div class="well-out">
+        <p>Please confirm your title release request(s) below.</p>
+        <p>All titles will be sent to the following address: <strong>123 Elm Street, Rochester, NY 14623</strong></p>
+      </div>
+    </div><!-- end .well -->
+
+    <div class="title-checkout-list" ng-switch="false">
+      <!-- When there are no payments or fees -->
+     <!--  <p class="notice-box" ng-switch-when="true">
+        You have not selected any titles. Please visit the
+        <a href="#/home/titlereleases">Title Releases list</a> to select some.
+      </p>
+ -->
+      <!-- When you have payments or fees in your cart -->
+      <section ng-switch-when="false">
+
+        <div>
+          <h3 class="boxed">Title Release Requests</h3>
+
+          <ul class="unstyled title-list" ng-init="titles=[ {foo: 'bar'}]">
+            <li class="table-list-head">
+              <div class="cell title-desc">Description</div>
+              <div class="cell title-vin">VIN</div>
+              <div class="cell title-stock">Stock #</div>
+              <div class="cell title-status">Status</div>
+            </li>
+
+            <li class="table-list-row" ng-repeat="title in titles">
+              <div class="cell title-desc">
+                <p>2003 Dodge Ram 2400 Laramie Quad Cab 4WD 5.9L i-6FI DSL T/C White</p>
+                <p>{{ payment.description }}</p>
+              </div>
+              <div class="cell title-vin"><p>...5RP4G2</p></div>
+              <div class="cell title-stock">
+               1293
+              </div>
+              <div class="cell title-status">
+                <p>Title Requested</p>
+                <p><a class="">Remove Title</a></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div><!-- end .title-checkout-list -->
+  </section><!-- end .span9 -->
+
+  <div class="span3 well request-summary sticky" nxg-sticky>
+    <h4>Title Release Summary</h4>
+    <div class="well-out">
+      <p><span>1</span> Title Requested</p>
+
+      <hr/>
+
+      <p>Title Release Limits for this Account:<br/>
+      <strong>4</strong> out of <strong>6</strong> title releases available.</p>
+
+      <hr/>
+
+      <div class="submit">
+        <button class="btn btn-primary">
+          Confirm Requests for Titles
+        </button>
+      </div>
+    </div><!-- end .well-out -->
+  </div>
+</section>
