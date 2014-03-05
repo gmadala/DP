@@ -75,8 +75,8 @@ angular.module('nextgearWebApp')
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
             this.searchCriteria.filter,
-            $scope.sortField,
-            $scope.sortDescending);
+            $scope.sortField.payment,
+            $scope.sortDescending.payment);
 
         promise.then(
           function(results) {
@@ -179,17 +179,28 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.sortField = 'ScheduledForDate'; // Default sort
+    $scope.sortField = {};
+    $scope.sortField.fee = 'EffectiveDate'; // Default sort
+    $scope.sortField.payment = 'ScheduledForDate'; // Default sort
+    $scope.sortDescending = {};
 
-    $scope.sortBy = function (fieldName) {
-      if ($scope.sortField === fieldName) {
-        // already sorting by this field, just flip the direction
-        $scope.sortDescending = !$scope.sortDescending;
-      } else {
-        $scope.sortField = fieldName;
-        $scope.sortDescending = false;
-      }
+    $scope.sortFeesBy = function(fieldName) {
+      $scope.__sortBy('fee', fieldName);
+    };
+
+    $scope.sortPaymentsBy = function(fieldName) {
+      $scope.__sortBy('payment', fieldName);
       $scope.scheduledPayments.search();
+    };
+
+    $scope.__sortBy = function (feeOrPayment, fieldName) {
+      if ($scope.sortField[feeOrPayment] === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending[feeOrPayment] = !$scope.sortDescending[feeOrPayment];
+      } else {
+        $scope.sortField[feeOrPayment] = fieldName;
+        $scope.sortDescending[feeOrPayment] = false;
+      }
     };
 
     $scope.scheduledPayments.resetSearch();

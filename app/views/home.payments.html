@@ -26,22 +26,22 @@
           <ul class="unstyled" ng-switch-when="true">
             <li class="table-list-head">
               <div class="cell fee-type sortable"
-                   ng-click="sortBy('fee', 'FeeType')"
+                   ng-click="sortFeesBy('FeeType')"
                    ng-class="{ sorted : sortField.fee == 'FeeType', desc : sortDescending.fee }">
                 Fee Type
               </div>
               <div class="cell fee-desc">
                 Description</div>
               <div class="cell fee-due sortable"
-                   ng-click="sortBy('fee', 'EffectiveDate')"
+                   ng-click="sortFeesBy('EffectiveDate')"
                    ng-class="{ sorted : sortField.fee == 'EffectiveDate', desc : sortDescending.fee }">
                 Date Due</div>
               <div class="cell fee-posted sortable"
-                   ng-click="sortBy('fee', 'Posted')"
+                   ng-click="sortFeesBy('Posted')"
                    ng-class="{ sorted : sortField.fee == 'Posted', desc : sortDescending.fee }">
                 Date Posted</div>
               <div class="cell fee-amt sortable"
-                   ng-click="sortBy('fee', 'Balance')"
+                   ng-click="sortFeesBy('Balance')"
                    ng-class="{ sorted : sortField.fee == 'Balance', desc : sortDescending.fee }">
                 Fee Amount</div>
             </li>
@@ -81,27 +81,27 @@
                     Description
                   </div>
                   <div class="cell pay-due sortable"
-                       ng-click="sortBy('payment', 'DueDate')"
+                       ng-click="sortPaymentsBy('DueDate')"
                        ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
                     Date Due
                   </div>
                   <div class="cell pay-floorDate sortable"
-                        ng-click="sortBy('payment', 'FlooringDate')"
+                        ng-click="sortPaymentsBy('FlooringDate')"
                         ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
                     Floor Date
                   </div>
                   <div class="cell pay-status sortable"
-                       ng-click="sortBy('payment', 'UnitStatus')"
+                       ng-click="sortPaymentsBy('UnitStatus')"
                        ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
                     Status
                   </div>
                   <div class="cell pay-payment-amt sortable"
-                       ng-click="sortBy('payment', 'AmountDue')"
+                       ng-click="sortPaymentsBy('AmountDue')"
                        ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
                     Payment
                   </div>
                   <div class="cell pay-payoff-amt sortable"
-                       ng-click="sortBy('payment', 'CurrentPayoff')"
+                       ng-click="sortPaymentsBy('CurrentPayoff')"
                        ng-class="{ sorted : sortField.payment == 'CurrentPayoff', desc : sortDescending.payment }">
                     Pay Off
                   </div>

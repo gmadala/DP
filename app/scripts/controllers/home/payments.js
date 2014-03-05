@@ -69,18 +69,24 @@ angular.module('nextgearWebApp')
     $scope.sortField.payment = 'DueDate'; // Default sort
     $scope.sortDescending = {};
 
-    $scope.sortBy = function (feeOrPayment, fieldName) {
+    $scope.sortFeesBy = function(fieldName) {
+      $scope.__sortBy('fee', fieldName);
+    };
+
+    $scope.sortPaymentsBy = function(fieldName) {
+      $scope.__sortBy('payment', fieldName);
+      $scope.payments.proposedSearchCriteria.sortField = $scope.sortField.payment;
+      $scope.payments.proposedSearchCriteria.sortDesc = $scope.sortDescending.payment;
+      $scope.payments.search();
+    };
+
+    $scope.__sortBy = function (feeOrPayment, fieldName) {
       if ($scope.sortField[feeOrPayment] === fieldName) {
         // already sorting by this field, just flip the direction
         $scope.sortDescending[feeOrPayment] = !$scope.sortDescending[feeOrPayment];
       } else {
         $scope.sortField[feeOrPayment] = fieldName;
         $scope.sortDescending[feeOrPayment] = false;
-      }
-      if (feeOrPayment === 'payment') {
-        $scope.payments.proposedSearchCriteria.sortField = $scope.sortField.payment;
-        $scope.payments.proposedSearchCriteria.sortDesc = $scope.sortDescending.payment;
-        $scope.payments.search();
       }
     };
 
