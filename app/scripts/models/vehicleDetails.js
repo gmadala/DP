@@ -35,7 +35,6 @@ angular.module('nextgearWebApp')
             titleState: r.TitleState,
             trackingNumber: r.TrackingNumber,
             disbursementDate: r.DisbursementDate,
-            curtailments: r.Curtailments,
             interestAccrued: r.interestAccrued,
             interestApplied: r.interestApplied,
             feesAccrued: r.feesAccrued,

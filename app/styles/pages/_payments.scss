@@ -142,7 +142,7 @@
   @extend %center;
   @extend %full-width;
   clear: both;
-  margin: 0 auto 10px;
+  margin: 5px auto;
 
   button {
     @extend .btn-unstyle;
@@ -163,7 +163,7 @@
 
   .vehicle-info & {
     width: 33%;
-    height: 330px;
+    height: 370px;
 
     &:first-child + .detail-col {
       width: 35%;
@@ -195,31 +195,6 @@
 .detail-value {
   color: $darker-text-color;
   padding-top: 6px;
-}
-
-.curtail-sch {
-  @extend %small;
-
-  table {
-    @extend %full-width;
-    margin-bottom: 20px;
-  }
-
-  th {
-    @extend %align-left;
-    vertical-align: bottom;
-    color: $base-text-color;
-    font-weight: normal;
-    line-height: $base-line-height;
-    padding: 5px 10px;
-    border-bottom: 1px solid $border;
-  }
-
-  td {
-    color: $darker-text-color;
-    color: $darker-text-color;
-    padding: 5px 10px 0;
-  }
 }
 
 // Payments Summary
