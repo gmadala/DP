@@ -1,0 +1,69 @@
+// TITLE RELEASES
+
+.cell {
+  &.title-more { width: 4%; }
+  &.title-desc { width: 22%; }
+  &.title-vin { width: 10%; }
+  &.title-stock { width: 12%; }
+  &.title-status { width: 15%; }
+  &.title-floorDate { width: 12%; }
+  &.title-actions {
+    width: 25%;
+    padding: 8px 10px;
+  }
+}
+
+#toggleRequest {
+  position: relative;
+  padding-left: 26px;
+  width: 130px;
+  margin: 10px auto 5px;
+
+  span:before {
+    content: '';
+    @include background-image(url('../img/icons/twocolor_chkbx.png'));
+    display: block;
+    position: absolute;
+    left: 5px;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0;
+  }
+
+  &.requested span:before {
+    width: 17px;
+    @include background-image(url('../img/icons/twocolor_chkbx_checked.png'));
+  }
+
+  &.requested {
+    background-color: #878787; // IE fallback
+    @include background-image(linear-gradient(#878787, $gray-5));
+    color: $white;
+  }
+}
+
+// REQUESTS SUMMARY
+.request-queue {
+  .well-out {
+    border-bottom :0;
+  }
+
+  .queue-items {
+    border-bottom: 1px solid $border;
+  }
+}
+
+.request-sum-footer {
+  padding: 6px 15px 15px 15px;
+  background: $well-out-bkgd;
+  margin: 15px -15px -15px -15px;
+  border-style: solid;
+  border-color: $well-out-border;
+  border-width: 0px 1px 1px 1px;
+
+  .btn-checkout {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+  }
+}

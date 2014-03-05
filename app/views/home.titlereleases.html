@@ -1,1 +1,105 @@
-Title Releases
+<section class="row-fluid">
+  <section class="span9">
+    <div nxg-search
+      title="Title Release Search"
+      class="search-form"
+      prompt="Enter Stock #, VIN, Make, Model, or Year"
+      on-search="search()"
+      on-clear="resetSearch()"
+      filterable="false">
+    </div>
+
+    <div ng-init="data.results=[ { foo: 'bar' }]" ng-switch="data.results.length > 0 || data.loading">
+      <p class="no-results" ng-switch-when="false">
+        Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+      </p>
+
+      <section ng-switch-when="true"
+               nxg-infinite-scroll="fetchNextResults()"
+               nxg-infinite-scroll-disabled="data.loading"
+               nxg-infinite-scroll-show-indicator="data.loading">
+        <h3 class="boxed">Floor Plan</h3>
+        <ul class="unstyled title-list">
+          <li class="table-list-head">
+            <div class="cell title-more"></div>
+            <div class="cell title-desc sortable-container"
+                 ng-click="sortBy('UnitMake')"
+                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Description</span>
+            </div>
+            <div class="cell title-vin">
+              <span class="header-text">VIN</span>
+            </div>
+            <div class="cell title-stock sortable-container"
+                 ng-click="sortBy('StockNumber')"
+                 ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Stock #</span>
+            </div>
+            <div class="cell title-status sortable-container"
+                 ng-click="sortBy('Status')"
+                 ng-class="{ sorted : sortField == 'Status', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Status</span>
+            </div>
+            <div class="cell title-floorDate sortable-container"
+                 ng-click="sortBy('FlooringDate')"
+                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Floored</span>
+            </div>
+            <div class="cell title-actions sortable-container" >
+              <span class="header-text">Actions</span>
+            </div>
+          </li><!-- end .table-list-head -->
+
+          <li class="table-list-row" ng-repeat="item in data.results">
+            <div class="main-info">
+              <div class="cell title-more">
+                <button class="btn btn-more"
+                        ng-click="isCollapsed = !isCollapsed"
+                        class="more btn btn-mini">
+                  <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
+                </button>
+              </div>
+
+              <div class="cell title-desc">
+                <p>2010 Toyota Camry LE Blue</p>
+                <!-- <p ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></p> -->
+              </div>
+              <div class="cell title-vin">
+                ...063363
+                <!-- <p ng-bind-html-unsafe="item.UnitVIN | shortenVIN  | highlight:item.data.query"></p> -->
+              </div>
+              <div class="cell title-stock">
+                2417
+                <!-- <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p> -->
+              </div>
+              <div class="cell title-status">
+                <p> Status Name </p>
+              </div>
+              <div class="cell title-floorDate">
+                <p> 2/21/2014 </p>
+              </div>
+              <div class="cell title-actions">
+                <p>Pay off this vehicle or return the title to remove from your limit.</p>
+                <button type="button" id="toggleRequest" class="btn btn-mini btn-block" >
+                  <span> {{ {true: 'Title Requested', false: 'Request Title'}[true] }}</span>
+                </button>
+              </div>
+            </div><!-- end .main-info -->
+
+            <div collapse="isCollapsed" class="vehicle-details">
+              <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
+            </div><!-- end .vehicle-details div -->
+
+          </li><!-- end .table-list-row -->
+        </ul><!-- end .floor-list -->
+        <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+          There are too many results to display, please refine your search further.
+        </p>
+      </section>
+    </div>
+  </section><!-- end .span12 -->
+  <section class="span3 well sticky" nxg-requests-summary nxg-sticky></section></section><!-- end .row-fluid -->

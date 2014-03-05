@@ -223,7 +223,7 @@
 }
 
 // Payments Summary
-.pay-queue {
+.pay-queue, .request-queue {
   p, li {
     @extend %thin;
     font-size: 13px;
