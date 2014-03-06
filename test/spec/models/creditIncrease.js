@@ -19,23 +19,25 @@ describe('Service: CreditIncrease', function () {
     getResponse = {
       Success: true,
       Message: null,
-      Data: [
-        {
-          LineOfCreditId: 'id1',
-          CreditTypeName: 'name1',
-          Limit: 123
-        },
-        {
-          LineOfCreditId: 'id2',
-          CreditTypeName: 'name2',
-          Limit: 456
-        },
-        {
-          LineOfCreditId: 'id3',
-          CreditTypeName: 'name3',
-          Limit: 789
-        }
-      ]
+      Data: {
+        LinesOfCredit: [
+          {
+            LineOfCreditId: 'id1',
+            CreditTypeName: 'name1',
+            Limit: 123
+          },
+          {
+            LineOfCreditId: 'id2',
+            CreditTypeName: 'name2',
+            Limit: 456
+          },
+          {
+            LineOfCreditId: 'id3',
+            CreditTypeName: 'name3',
+            Limit: 789
+          }
+        ]
+      }
     };
     getData = [
       {

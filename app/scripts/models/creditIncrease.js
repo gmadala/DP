@@ -6,7 +6,7 @@ angular.module('nextgearWebApp')
     return {
       getActiveLinesOfCredit: function() {
         return api.request('GET', '/dealer/ActiveLinesOfCredit').then(function(response) {
-          return _.map(response, function(line) {
+          return _.map(response.LinesOfCredit, function(line) {
             return {
               id: line.LineOfCreditId,
               type: line.CreditTypeName,

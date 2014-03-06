@@ -214,7 +214,6 @@ angular.module('nextgearWebApp')
     });
 
     $scope.confirmRequest = function() {
-      console.log('confirm');
       confirmRequest().then(function() {
         dialog.close();
       });
