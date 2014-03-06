@@ -1,0 +1,16 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "TitleReleaseResults": [
+      {
+        "FloorplanId": "abc123",
+        "ReleaseSuccessful": false
+      },
+      {
+        "FloorplanId": "abc125",
+        "ReleaseSuccessful": true
+      }
+    ]
+  }
+}
