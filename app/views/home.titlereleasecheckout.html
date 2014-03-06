@@ -9,20 +9,20 @@
       </div>
     </div><!-- end .well -->
 
-    <div class="title-checkout-list" ng-switch="false">
+    <div class="title-checkout-list" ng-switch="titleQueue.contents.length">
       <!-- When there are no payments or fees -->
-     <!--  <p class="notice-box" ng-switch-when="true">
+     <p class="notice-box" ng-switch-when="0">
         You have not selected any titles. Please visit the
         <a href="#/home/titlereleases">Title Releases list</a> to select some.
       </p>
- -->
+
       <!-- When you have payments or fees in your cart -->
-      <section ng-switch-when="false">
+      <section ng-switch-default>
 
         <div>
           <h3 class="boxed">Title Release Requests</h3>
 
-          <ul class="unstyled title-list" ng-init="titles=[ {foo: 'bar'}]">
+          <ul class="unstyled title-list">
             <li class="table-list-head">
               <div class="cell title-desc">Description</div>
               <div class="cell title-vin">VIN</div>
@@ -30,10 +30,9 @@
               <div class="cell title-status">Status</div>
             </li>
 
-            <li class="table-list-row" ng-repeat="title in titles">
+            <li class="table-list-row" ng-repeat="item in titleQueue.contents">
               <div class="cell title-desc">
-                <p>2003 Dodge Ram 2400 Laramie Quad Cab 4WD 5.9L i-6FI DSL T/C White</p>
-                <p>{{ payment.description }}</p>
+                <p>{{ getVehicleDescription(item) }}</p>
                 <p>
                   Send To:
                   <select id="" name="">
@@ -50,13 +49,13 @@
                   </button>
                 </p>
               </div>
-              <div class="cell title-vin"><p>...5RP4G2</p></div>
+              <div class="cell title-vin"><p>{{ item.UnitVIN | shortenVIN }}</p></div>
               <div class="cell title-stock">
-               1293
+               {{ item.StockNumber }}
               </div>
               <div class="cell title-status">
-                <p>Title Requested</p>
-                <p><a class="">Remove Title</a></p>
+                <p>{{ item.FloorplanStatusName }}</p>
+                <p><a ng-click="$parent.titleQueue.removeFromQueue(item)">Remove Title</a></p>
               </div>
             </li>
           </ul>
@@ -68,7 +67,7 @@
   <div class="span3 well request-summary sticky" nxg-sticky>
     <h4>Title Release Summary</h4>
     <div class="well-out">
-      <p><span class="emphasis">1</span> Title Requested</p>
+      <p><span class="emphasis">{{ titleQueue.contents.length }}</span> Title{{ {false: 's'}[titleQueue.contents.length == 1] }} Requested</p>
 
       <hr/>
 
@@ -78,7 +77,7 @@
       <hr/>
 
       <div class="submit">
-        <button class="btn btn-primary" ng-click="onConfirmRequest()">
+        <button class="btn btn-primary" ng-click="onConfirmRequest()" ng-disabled="titleQueue.contents.length == 0">
           Confirm Requests for Titles
         </button>
       </div>
