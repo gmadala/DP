@@ -10,10 +10,7 @@ describe('Directive: nxgVinDetails', function () {
     outerScope = $rootScope.$new();
     outerScope.theForm = {};
     outerScope.validation = {};
-    outerScope.aModel = {
-      VinAckLookupFailure: false,
-      UnitVin: 'abc'
-    };
+    outerScope.aModel = {};
 
     element = angular.element('<div nxg-vin-details floor-model="aModel" validity="validation" form="theForm"></div>');
     element = $compile(element)(outerScope);
@@ -36,7 +33,7 @@ describe('Directive: nxgVinDetails', function () {
       vinLookupResult;
 
     beforeEach(inject(function ($controller, $rootScope, Blackbook, $q) {
-      scope = element.scope();
+      scope = $rootScope.$new();
       blackbookMock = {
         fetchVehicleTypeInfoForVin: function () {
           var def = $q.defer();
@@ -50,8 +47,6 @@ describe('Directive: nxgVinDetails', function () {
         $scope: scope,
         Blackbook: blackbookMock
       });
-
-      scope.form = {};
     }));
 
     it('should attach the expected default settings to the scope', function () {
@@ -121,21 +116,10 @@ describe('Directive: nxgVinDetails', function () {
         expect(scope.settings.vinMode).toBe('none');
       });
 
-      it('should do nothing if the vinMode == "none"', function() {
-        scope.data = {
-          $selectedVehicle: {
-            foo: 'bar'
-          }
-        };
-        scope.settings.vinMode = 'none';
-
-        scope.vinChange();
-        expect(scope.data.$selectedVehicle).toEqual({ foo: 'bar' });
-        expect(scope.settings.vinMode).toBe('none');
-      });
     });
 
     describe('vinExit scope function', function () {
+
       beforeEach(function () {
         scope.form = {
           inputVin: {
@@ -171,29 +155,8 @@ describe('Directive: nxgVinDetails', function () {
 
     });
 
-    describe('checkVinMode scope function', function() {
-      it('should return a boolean to use in our nxg-requires attribute', function() {
-        scope.settings.vinMode = 'none';
-        var x = scope.checkVinMode();
-        expect(x).toBe(false);
-
-        scope.settings.vinMode = 'noMatch';
-        x = scope.checkVinMode();
-        expect(x).toBe(true);
-      });
-    });
-
-    describe('noVin scope function', function() {
-      it('should update the vinMode and set VinAckLookupFailure to true', function() {
-        scope.form = { inputVin: { $error: {} }}
-        scope.settings.vinMode = 'noMatch';
-        scope.noVin();
-        expect(scope.settings.vinMode).toBe('noVin');
-        expect(scope.data.VinAckLookupFailure).toBe(true);
-      });
-    });
-
     describe('lookupVin scope function', function () {
+
       beforeEach(function () {
         scope.form = {
           inputVin: {
