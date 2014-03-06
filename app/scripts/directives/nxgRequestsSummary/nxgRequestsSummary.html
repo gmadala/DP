@@ -3,24 +3,24 @@
 
   <div class="well-out">
     <p>Title Release Limits for this Account:<br/>
-      <strong>4</strong> out of <strong>6</strong> title releases available.</p>
+      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed }}</span> title releases available.</p>
 
     <div class="queue-items">
       <!-- <p ng-show="">You have not requested any titles.</p> -->
 
-      <ul ng-init="requests=[ { foo: 'bar' }]" >
-        <li ng-repeat="req in requests">
-          <button class="btn-unstyle btn-x"><span class="glyphicon"></span></button>
+      <ul>
+        <li ng-repeat="item in titleQueue.contents">
+          <button class="btn-unstyle btn-x" ng-click="titleQueue.removeFromQueue(item)"><span class="glyphicon"></span></button>
           Title Request <br/>
-          2010 Toyota Camry LE Blue<br/>
-          <span>VIN: R4FHEO63363</span>
+          {{ getVehicleDescription(item) }}<br/>
+          <span>VIN: {{ item.UnitVIN }}</span>
         </li>
       </ul>
     </div>
   </div>
 
   <div class="request-sum-footer">
-    <button class="btn btn-primary btn-checkout" ng-click="navigate('home.titleReleaseCheckout')" >
+    <button class="btn btn-primary btn-checkout" ng-click="navigate('home.titleReleaseCheckout')" ng-disabled="titleQueue.contents.length == 0" >
       <span class="ie-text">Continue to Checkout</span>
     </button>
   </div>

@@ -14,6 +14,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
+    $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
 
     $scope.titleReleaseAddress = {
       potentialAddresses: null, // PUT SOMETHING HERE TO GRAB THEM

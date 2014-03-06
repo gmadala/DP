@@ -9,7 +9,16 @@ angular.module('nextgearWebApp')
       controller: 'RequestsSummaryCtrl'
     };
   })
-  .controller('RequestsSummaryCtrl', function ($scope, $state) {
+  .controller('RequestsSummaryCtrl', function ($scope, $state, TitleReleases, Floorplan) {
+
+    $scope.titleQueue = {
+      contents: TitleReleases.getQueue(),
+      removeFromQueue: TitleReleases.removeFromQueue
+    };
+
+    $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
+
+    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
     $scope.navigate = $state.transitionTo;
   });

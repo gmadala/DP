@@ -72,7 +72,7 @@
       <hr/>
 
       <p>Title Release Limits for this Account:<br/>
-      <span class="emphasis">4</span> out of <span class="emphasis">6</span> title releases available.</p>
+      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed }}</span> title releases available.</p>
 
       <hr/>
 
