@@ -53,6 +53,13 @@
     <script src="components/angular-local-storage/angular-local-storage.js"></script>
     <script src="components/highcharts.com/js/highcharts.src.js"></script>
 
+    <!-- Bypass to Clicky's eventqueue cookie issue  -->
+    <script type="text/javascript">
+        var clicky_custom = clicky_custom || {};
+        clicky_custom.queue_disable = 1;
+    </script>
+    <!-- End Bypass to Clicky's eventqueue cookie issue  -->
+
     <!-- move back to components once upgraded to 0.6.0 or later -->
     <script src="private-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="private-components/angular-segmentio/angular-segmentio.js"></script>
