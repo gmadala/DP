@@ -1,9 +1,12 @@
-NextGear Capital v2.0.3
+NextGear Capital v2.0.4
 =================================
 
 Fixes included in this release:
 
-VO-1120	Issue with bulk flooring on website for auction
-VO-860	Auctions Want Verification When "I Have Title" Is Selected
-VO-987	Website is allowing user to attempt to floor a car without a full VIN
-VO-1056	Dashboard layout issues with narrow browser window
+VO-811	Show Fees, Interest on Vehicle on the Vehicle Details view and Floor Date & # of Days Floored on the Payments and Scheduled Payments view.
+VO-1307	Metrics tracking updates for Profile Settings, Account Management and auction's Settings
+VO-1385	Auto Disbursement Setting - API Integration
+VO-985	High # of "Events" Being Generated Since Last Release (Viewed Through Clicky)
+VO-1068	Remove the Original Curtailment Schedule from the web site
+VO-763	Dealer Self-Service - Display Auto Disbursement of Unapplied funds Setting
+VO-1370	EUI web site - Clicking on Scheduling Payment link displays " "unable to communicate with the NG system. Clicked OK."
