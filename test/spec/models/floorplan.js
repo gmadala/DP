@@ -521,4 +521,36 @@ describe('Model: Floorplan', function () {
       expect(httpBackend.flush).not.toThrow();
     });
   });
+
+  describe('overrideCompletionAddress method', function() {
+    var request;
+
+    beforeEach(function() {
+      httpBackend.whenPOST('/floorplan/overrideCompletionAddress').respond(function(method, path, data){
+        request = angular.fromJson(data);
+        return {
+          "Success": true,
+          "Data": null,
+          "Message": null
+        };
+      });
+    });
+
+    it('should make an api request', function() {
+      floorplan.overrideCompletionAddress([
+        {
+          floorplanId: 123,
+          overrideAddress:  {
+            BusinessAddressId: 143
+          }
+        }
+      ]);
+
+      httpBackend.flush();
+      expect(request).toEqual([{
+        FloorplanId: 123,
+        TitleAddressId: 143
+      }]);
+    });
+  });
 });

@@ -109,6 +109,17 @@ angular.module('nextgearWebApp')
           HasTitle: hasTitle
         });
       },
+      overrideCompletionAddress: function(payments) {
+        var data = [];
+        _.each(payments, function(p) {
+          data.push({
+            FloorplanId: p.floorplanId,
+            TitleAddressId: p.overrideAddress.BusinessAddressId
+          });
+        });
+
+        return api.request('POST', '/floorplan/overrideCompletionAddress', data);
+      },
       getExtensionPreview: function(floorplanId) {
         return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);
       },
