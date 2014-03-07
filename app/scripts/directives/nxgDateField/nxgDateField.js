@@ -67,21 +67,28 @@ angular.module('nextgearWebApp')
             // Make the current date get filled by default when you hit
             // enter (keyCode 13) and there isn't already a value in the input.
             $input.on('keydown', function(event) {
-              if(event.keyCode === 13 && datepickerIsOpen){
-                if(false === showCode(scope, {date: new Date(this.value)})){
-                  // The date selected is invalid
+              if(event.keyCode === 13){
+                if(datepickerIsOpen) {
+                  if(false === showCode(scope, {date: new Date(this.value)})){
+                    // The date selected is invalid
 
-                  // stops other handlers from firing and closing the datepicker
-                  event.stopImmediatePropagation();
-                  // stops form from submitting (and showing red validation errors)
-                  event.preventDefault();
-                } else if(this.value === ''){
-                  var $this = angular.element(this);
-                  $this.datepicker('setValue', new Date());
-                  $this.trigger({
-                    type: 'changeDate', // Send the 'changeDate' event
-                    date: new Date() //, passing in the current date
-                  });
+                    // stops other handlers from firing and closing the datepicker
+                    event.stopImmediatePropagation();
+                    // stops form from submitting (and showing red validation errors)
+                    event.preventDefault();
+                  } else if(this.value === ''){
+                    var $this = angular.element(this);
+                    $this.datepicker('setValue', new Date());
+                    $this.trigger({
+                      type: 'changeDate', // Send the 'changeDate' event
+                      date: new Date() //, passing in the current date
+                    });
+                  }
+                } else {
+                  // Datepicker not open, ensure valid date
+                  if(!$input.val().match(scope.isDate)) {
+                    formCtrl[inputName].$setValidity('date', false);
+                  }
                 }
               }
             });
