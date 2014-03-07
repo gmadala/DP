@@ -3,44 +3,66 @@
 </div>
 <div class="modal-body">
   <!-- Scheduled Payments -->
-  <section ng-show="items.paymentsScheduled.length > 0">
+  <section ng-show="items.paymentsScheduled.length > 0 || items.feesScheduled.length > 0">
     <h4 class="boxed">Scheduled Payment(s)</h4>
 
-    <ul class="unstyled scheduled-payments">
-      <li class="table-list-head">
-        <div class="cell sch-desc">Description</div>
-        <div class="cell sch-date">Scheduled</div>
-        <div class="cell sch-amt">Amount</div>
-      </li>
+    <div ng-show="items.feesScheduled.length > 0">
+      <p class="notice-box">Fees</p>
+      <ul class="unstyled scheduled-fees">
+        <li class="table-list-head">
+          <div class="cell fee-type">Fee Type</div>
+          <div class="cell fee-desc">Description</div>
+          <div class="cell fee-date">Paid</div>
+          <div class="cell fee-amt">Amount</div>
+        </li>
 
-      <li class="table-list-row" ng-repeat="payment in items.paymentsScheduled">
-        <div class="cell sch-desc">
-          <p>
-            <span class="sch-label">VIN: </span>
-            {{ payment.vin }}<br/>
-            <span class="sch-label">Stock #: </span>
-            {{ payment.stockNum }}
-          </p>
-          <p>{{ payment.description }}</p>
-        </div>
-        <div class="cell sch-date">
-          <p>{{ payment.scheduleDate | moment }}</p>
-        </div>
-        <div class="cell sch-amt">
-          <p>{{ payment.amount | currency }}</p>
-        </div>
-      </li>
-    </ul>
+        <li class="table-list-row" ng-repeat="fee in items.feesScheduled">
+          <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
+          <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
+          <div class="cell fee-date"><p>{{ today | moment }}</p></div>
+          <div class="cell fee-amt"><p>{{ fee.amount | currency }}</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div ng-show="items.paymentsScheduled.length > 0">
+      <p class="notice-box">Payments</p>
+      <ul class="unstyled scheduled-payments">
+        <li class="table-list-head">
+          <div class="cell sch-desc">Description</div>
+          <div class="cell sch-date">Scheduled</div>
+          <div class="cell sch-amt">Amount</div>
+        </li>
+
+        <li class="table-list-row" ng-repeat="payment in items.paymentsScheduled">
+          <div class="cell sch-desc">
+            <p>
+              <span class="sch-label">VIN: </span>
+              {{ payment.vin }}<br/>
+              <span class="sch-label">Stock #: </span>
+              {{ payment.stockNum }}
+            </p>
+            <p>{{ payment.description }}</p>
+          </div>
+          <div class="cell sch-date">
+            <p>{{ payment.scheduleDate | moment }}</p>
+          </div>
+          <div class="cell sch-amt">
+            <p>{{ payment.amount | currency }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section><!-- end Scheduled Payments -->
 
   <!-- Submitted Payments -->
-  <section ng-show="items.fees.length > 0 || items.paymentsToday.length > 0">
+  <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
     <h4 class="boxed">
       Submitted Payment(s): {{ items.todayTotal() | currency }}
     </h4>
 
     <!-- Submitted Fees -->
-    <div ng-show="items.fees.length > 0">
+    <div ng-show="items.feesToday.length > 0">
       <p class="notice-box">Fees</p>
       <ul class="unstyled submitted-fees">
         <li class="table-list-head">
@@ -50,7 +72,7 @@
           <div class="cell fee-amt">Amount</div>
         </li>
 
-        <li class="table-list-row" ng-repeat="fee in items.fees">
+        <li class="table-list-row" ng-repeat="fee in items.feesToday">
           <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
           <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
           <div class="cell fee-date"><p>{{ today | moment }}</p></div>

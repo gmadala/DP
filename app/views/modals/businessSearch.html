@@ -6,79 +6,80 @@
   <span class="glyphicon glyphicon-remove"></span>
 </div>
 
-<div class="modal-body search-controls">
+<div class="modal-body">
+  <div class="search-controls">
     <label>Business Name or Number</label>
-    <input type="text" ng-model="data.proposedQuery" nxg-autofocus>
+    <input type="text" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()">
     <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
       <i class="glyphicon glyphicon-search"></i>
     </button>
-</div>
-
-
-<div ng-switch="data.results.length > 0 || data.loading">
-  <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
-    <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
-    <span ng-switch-when="true">Please enter a business name or number to search.</span>
-  </p>
-
-  <div class="modal-body search-results" ng-switch-when="true"
-       nxg-infinite-scroll="fetchNextResults()"
-       nxg-infinite-scroll-disabled="data.loading"
-       nxg-infinite-scroll-show-indicator="data.loading"
-       nxg-scroll-container>
-    <table ng-class="{ 'show-access-num': data.searchBuyersMode }">
-      <thead>
-        <tr>
-          <th><div ng-click="sortBy('BusinessName')" class="bus-name sortable"
-              ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-            Business Name
-          </div></th>
-          <th><div ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
-              ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-            Legal Name
-          </div></th>
-          <th><div ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
-              ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-            Business&nbsp;#
-          </div></th>
-          <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
-            Auction Access #
-          </th>
-          <th><div ng-click="sortBy('City')" class="bus-city sortable"
-              ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-            City
-          </div></th>
-          <th><div ng-click="sortBy('State')" class="bus-state sortable"
-              ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-            State
-          </div></th>
-          <th class="bus-select"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="result in data.results">
-          <td class="bus-name" ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
-          <td class="bus-legalName" ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
-          <td class="bus-num" ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
-          <td class="bus-auctionNum" ng-show="data.searchBuyersMode">
-            <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
-                  tooltip-placement="right"
-                  tooltip-popup-delay="700"
-                  tooltip-append-to-body="true">
-              {{ result.AuctionAccessDealershipNumbers | list }}
-            </span>
-          </td>
-          <td class="bus-city" ng-bind-html-unsafe="result.City | highlight:data.query"></td>
-          <td class="bus-state" ng-bind-html-unsafe="result.State | highlight:data.query"></td>
-          <td class="bus-select"><button href class="btn btn-mini" ng-click="select(result)">Select</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
-      There are too many results to display, please refine your search further.
-    </p>
   </div>
-</div>
+
+  <div ng-switch="data.results.length > 0 || data.loading">
+    <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
+      <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
+      <span ng-switch-when="true">Please enter a business name or number to search.</span>
+    </p>
+
+    <div class="search-results" ng-switch-when="true"
+         nxg-infinite-scroll="fetchNextResults()"
+         nxg-infinite-scroll-disabled="data.loading"
+         nxg-infinite-scroll-show-indicator="data.loading"
+         nxg-scroll-container>
+      <table ng-class="{ 'show-access-num': data.searchBuyersMode }">
+        <thead>
+          <tr>
+            <th><div ng-click="sortBy('BusinessName')" class="bus-name sortable"
+                ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+              Business Name
+            </div></th>
+            <th><div ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
+                ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+              Legal Name
+            </div></th>
+            <th><div ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
+                ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+              Business&nbsp;#
+            </div></th>
+            <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
+              Auction Access #
+            </th>
+            <th><div ng-click="sortBy('City')" class="bus-city sortable"
+                ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+              City
+            </div></th>
+            <th><div ng-click="sortBy('State')" class="bus-state sortable"
+                ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+              State
+            </div></th>
+            <th class="bus-select"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="result in data.results">
+            <td class="bus-name" ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
+            <td class="bus-legalName" ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
+            <td class="bus-num" ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
+            <td class="bus-auctionNum" ng-show="data.searchBuyersMode">
+              <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
+                    tooltip-placement="right"
+                    tooltip-popup-delay="700"
+                    tooltip-append-to-body="true">
+                {{ result.AuctionAccessDealershipNumbers | list }}
+              </span>
+            </td>
+            <td class="bus-city" ng-bind-html-unsafe="result.City | highlight:data.query"></td>
+            <td class="bus-state" ng-bind-html-unsafe="result.State | highlight:data.query"></td>
+            <td class="bus-select"><button href class="btn btn-mini" ng-click="select(result)">Select</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+        There are too many results to display, please refine your search further.
+      </p>
+    </div>
+  </div>
+</div><!-- end .modal-body -->
 
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>

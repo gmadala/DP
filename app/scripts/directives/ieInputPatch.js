@@ -30,8 +30,18 @@
           priority: -10,
           link: function(scope, element, attr, ctrl) {
             if (ctrl && angular.lowercase(attr.type) === 'text') {
+              var renderFn;
+
+              if (ctrl.$render) {
+                renderFn = ctrl.$render;
+              }
+
               ctrl.$render = function() {
                 element.val(isEmpty(ctrl.$viewValue) ? ' ' : ctrl.$viewValue);
+
+                if (renderFn) {
+                  renderFn();
+                }
               };
             }
           }

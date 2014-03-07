@@ -16,6 +16,18 @@ describe('Model: Floorplan', function () {
     urlParser = URLParser;
   }));
 
+  it('should have a getVehicleDescription function that concatenates vehicle info', function () {
+    expect(typeof floorplan.getVehicleDescription).toBe('function');
+    var plan = {
+      UnitMake: 'Ford',
+      UnitModel: 'Pinto',
+      UnitYear: 1970,
+      UnitStyle: 'Turbo',
+      Color: 'Green'
+    };
+    expect(floorplan.getVehicleDescription(plan)).toBe('1970 Ford Pinto Turbo Green');
+  });
+
   describe('create method', function () {
 
     var sentData,
@@ -493,4 +505,20 @@ describe('Model: Floorplan', function () {
 
   });
 
+  describe('getExtensionPreview method', function() {
+    beforeEach(function() {
+      httpBackend.whenGET('/floorplan/extensionPreview/1234').respond({
+        "Success": true,
+        "Data": {
+          foo: 'bar'
+        }
+      });
+    });
+
+    it('should get the extension preview information based on floorplanid', function() {
+      httpBackend.expectGET('/floorplan/extensionPreview/1234');
+      floorplan.getExtensionPreview(1234);
+      expect(httpBackend.flush).not.toThrow();
+    });
+  });
 });

@@ -24,11 +24,8 @@ angular.module('nextgearWebApp')
         // commit the proposed query
         $scope.data.query = $scope.data.proposedQuery;
 
-        if ($scope.data.query) {
-          // a query is required for the search to be executed
-          $scope.fetch();
-          segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
-        }
+        $scope.fetch();
+        segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
       }
     };
 

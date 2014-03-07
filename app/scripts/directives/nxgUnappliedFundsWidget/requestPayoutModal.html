@@ -27,10 +27,10 @@
                ng-class="{ 'nxg-invalid': validity.payoutAmt.$error.required || validity.payoutAmt.$error.pattern || validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax }"
                nxg-autofocus/>
       </div>
-      <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a payout amount.</label>
-      <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter payout amount as a number.</label>
+      <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a Payout Amount.</label>
+      <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
       <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
-        Payout amount must be $0.01 to {{ funds.available | currency }}
+        Payout Amount must be $0.01 to {{ funds.available | currency }}
       </label>
     </div>
     <label for="payoutBankAcct">Bank Account for Payout</label>

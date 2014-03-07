@@ -32,6 +32,11 @@
     & + .cell {
       border-left: 1px solid $white;
     }
+
+    .btn {
+      text-transform: none;
+      letter-spacing: 0;
+    }
   }
 
   .sortable {
@@ -55,6 +60,10 @@
 
   &:nth-child(2n + 1) {
     background-color: #F9F9F9;
+  }
+
+  &.error-row {
+    border: 2px solid $error-dark;
   }
 
   .cell {

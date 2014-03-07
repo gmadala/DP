@@ -7,7 +7,10 @@ angular.module('nextgearWebApp')
 
     // split the payments queue into immediate and scheduled
     var paymentsToday = [],
-      paymentsScheduled = [];
+        paymentsScheduled = [],
+        feesToday = [],
+        feesScheduled = [];
+
     angular.forEach(queue.payments, function (payment) {
       if (payment.scheduleDate) {
         paymentsScheduled.push(payment);
@@ -16,16 +19,25 @@ angular.module('nextgearWebApp')
       }
     });
 
+    angular.forEach(queue.fees, function (fee) {
+      if (fee.scheduleDate) {
+        feesScheduled.push(fee);
+      } else {
+        feesToday.push(fee);
+      }
+    });
+
     $scope.items = {
-      fees: _.map(queue.fees),
+      feesToday: feesToday,
+      feesScheduled: feesScheduled,
       paymentsToday: paymentsToday,
       paymentsScheduled: paymentsScheduled,
       getStatus: function (todayText, scheduledText) {
         var statuses = [];
-        if ($scope.items.fees.length > 0 || $scope.items.paymentsToday.length > 0) {
+        if ($scope.items.feesToday.length > 0 || $scope.items.paymentsToday.length > 0) {
           statuses.push(todayText);
         }
-        if ($scope.items.paymentsScheduled.length > 0) {
+        if ($scope.items.feesScheduled.length > 0 || $scope.items.paymentsScheduled.length > 0) {
           statuses.push(scheduledText);
         }
         return statuses.join(' and ');
@@ -34,7 +46,7 @@ angular.module('nextgearWebApp')
         var sumItems = function (subTotal, item) {
           return subTotal + item.amount;
         };
-        var total = _.reduce($scope.items.fees, sumItems, 0);
+        var total = _.reduce($scope.items.feesToday, sumItems, 0);
         return _.reduce($scope.items.paymentsToday, sumItems, total);
       }
     };

@@ -7,6 +7,7 @@
 
   h4 {
     @extend %thin;
+    letter-spacing: 0.03em;
     margin-top: 0px;
     margin-bottom: 28px;
   }
@@ -87,4 +88,45 @@
       }
     }
   }
+}
+
+.col-wells {
+  border: 1px solid $well-out-border;
+  border-top: 0;
+
+  .col {
+    &:first-child {
+      margin-right: -1px;
+    }
+
+    &:first-child .well.adjacent .well-out {
+      border-left: 0;
+    }
+
+    &:last-child .well.adjacent .well-out {
+      border-right: 0;
+    }
+
+    & + .col {
+      .well.adjacent {
+        &:first-child {
+          border-left: 1px solid $white;
+        }
+      }
+    }
+
+    .well.adjacent {
+      border: 1px solid $well-border;
+      margin-bottom: 0;
+
+      .well-out {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+.half-width-col {
+  width: 50%;
+  float: left;
 }

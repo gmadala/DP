@@ -11,6 +11,12 @@ angular.module('nextgearWebApp')
           p.statusDate = moment().format('YYYY-MM-DD');
           p.status = 'Cancelled';
           return p;
+        },
+        cancelLocalScheduledFee: function(f) {
+          $scope.fees.results = _.filter($scope.fees.results, function(fee) {
+            return fee.WebScheduledAccountFeeId !== f.WebScheduledAccountFeeId;
+          });
+          return f;
         }
       },
       lastPromise;
@@ -69,8 +75,8 @@ angular.module('nextgearWebApp')
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
             this.searchCriteria.filter,
-            $scope.sortField,
-            $scope.sortDescending);
+            $scope.sortField.payment,
+            $scope.sortDescending.payment);
 
         promise.then(
           function(results) {
@@ -142,23 +148,78 @@ angular.module('nextgearWebApp')
           }
         };
         $dialog.dialog(dialogOptions).open();
+      },
+
+      cancelFee: function(fee) {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/cancelFee.html',
+          controller: 'CancelFeeCtrl',
+          resolve: {
+            options: function() {
+              return {
+                fee: {
+                  webScheduledAccountFeeId: fee.WebScheduledAccountFeeId,
+                  financialRecordId: fee.FinancialRecordId,
+                  feeType: fee.FeeType,
+                  description: fee.Description,
+                  scheduledDate: fee.ScheduledDate,
+                  balance: fee.Balance
+                },
+                onCancel: function() {
+                  prv.cancelLocalScheduledFee(fee);
+                }
+              };
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
       }
     };
 
-    $scope.sortField = 'ScheduledForDate'; // Default sort
+    $scope.sortField = {};
+    $scope.sortField.fee = 'EffectiveDate'; // Default sort
+    $scope.sortField.payment = 'ScheduledForDate'; // Default sort
+    $scope.sortDescending = {};
 
-    $scope.sortBy = function (fieldName) {
-      if ($scope.sortField === fieldName) {
-        // already sorting by this field, just flip the direction
-        $scope.sortDescending = !$scope.sortDescending;
-      } else {
-        $scope.sortField = fieldName;
-        $scope.sortDescending = false;
-      }
+    $scope.sortFeesBy = function(fieldName) {
+      $scope.__sortBy('fee', fieldName);
+    };
+
+    $scope.sortPaymentsBy = function(fieldName) {
+      $scope.__sortBy('payment', fieldName);
       $scope.scheduledPayments.search();
     };
 
+    $scope.__sortBy = function (feeOrPayment, fieldName) {
+      if ($scope.sortField[feeOrPayment] === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.sortDescending[feeOrPayment] = !$scope.sortDescending[feeOrPayment];
+      } else {
+        $scope.sortField[feeOrPayment] = fieldName;
+        $scope.sortDescending[feeOrPayment] = false;
+      }
+    };
+
     $scope.scheduledPayments.resetSearch();
+
+    $scope.fees = {
+      results: [],
+      loading: false
+    };
+
+    $scope.fees.loading = true;
+
+    ScheduledPaymentsSearch.fetchFees(User.getInfo().BusinessId).then(
+      function (result) {
+        $scope.fees.loading = false;
+        $scope.fees.results = result;
+      }, function (/*error*/) {
+        $scope.fees.loading = false;
+      }
+    );
 
     var refreshCanPayNow = function () {
       if( !User.isLoggedIn() ) { return; }

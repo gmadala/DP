@@ -9,6 +9,8 @@ describe('Controller: PaymentsCtrl', function () {
     stateParamsMock,
     modelMock,
     userMock,
+    dialog,
+    payments,
     searchResult = {
       data: {}
     },
@@ -18,7 +20,7 @@ describe('Controller: PaymentsCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q) {
+  beforeEach(inject(function ($controller, $rootScope, $q, $dialog) {
     scope = $rootScope.$new();
     stateParamsMock = {
       filter: 'fooFilter'
@@ -38,11 +40,15 @@ describe('Controller: PaymentsCtrl', function () {
       },
       isPaymentOnQueue: function () {
         return false;
+      },
+      requestExtension: function () {
+        return $q.when(true);
       }
     };
     userMock = {
       isLoggedIn: function(){ return true; }
     };
+    dialog = $dialog;
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
 
@@ -62,8 +68,12 @@ describe('Controller: PaymentsCtrl', function () {
     expect(typeof scope.getDueStatus).toBe('function');
   });
 
-  it('should attach a sortBy function to the scope', function () {
-    expect(typeof scope.sortBy).toBe('function');
+  it('should attach a sortPaymentsBy function to the scope', function () {
+    expect(typeof scope.sortPaymentsBy).toBe('function');
+  });
+
+  it('should attach a sortFeesBy function to the scope', function () {
+    expect(typeof scope.sortFeesBy).toBe('function');
   });
 
   describe('getDueStatus function', function () {
@@ -141,82 +151,94 @@ describe('Controller: PaymentsCtrl', function () {
 
   });
 
-  describe('sortBy function', function(){
-
+  describe('__sortBy function', function(){
     var testSortField = function(feeOrPayment){
       it('should set sortField properly', function(){
-        scope.sortBy(feeOrPayment, 'fieldA');
+        scope.__sortBy(feeOrPayment, 'fieldA');
         expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
 
-        scope.sortBy(feeOrPayment, 'fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
 
-        scope.sortBy(feeOrPayment, 'fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
 
-        scope.sortBy(feeOrPayment, 'fieldA');
+        scope.__sortBy(feeOrPayment, 'fieldA');
         expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
       });
 
-      it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
-        scope.sortBy(feeOrPayment, 'fieldB');
+      it('should set sortDescending true only if __sortBy is called consecutively with the same field name', function(){
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
 
-        scope.sortBy(feeOrPayment, 'fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
 
-        scope.sortBy(feeOrPayment, 'fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
 
-        scope.sortBy(feeOrPayment, 'fieldA');
+        scope.__sortBy(feeOrPayment, 'fieldA');
         expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
 
-        scope.sortBy(feeOrPayment, 'fieldA');
+        scope.__sortBy(feeOrPayment, 'fieldA');
         expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
-        expect()
-        scope.sortBy(feeOrPayment, 'fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
         expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
       });
     };
-
     testSortField('payment');
     testSortField('fee');
 
     it('should not have fee and payment sorting interfere', function(){
-      scope.sortBy('payment', 'fieldA');
+      scope.__sortBy('payment', 'fieldA');
       expect(scope.sortField['payment']).toEqual('fieldA');
 
-      scope.sortBy('fee', 'fieldB');
+      scope.__sortBy('fee', 'fieldB');
       expect(scope.sortField['fee']).toEqual('fieldB');
       expect(scope.sortField['payment']).toEqual('fieldA');
     });
+  });
 
+  describe('sortPaymentsBy function', function(){
     it('should call search() for payment search', function(){
       spyOn(scope.payments, 'search');
-      scope.sortBy('payment', 'fieldA');
+      scope.sortPaymentsBy('fieldA');
       expect(scope.payments.search).toHaveBeenCalled();
     });
 
+    it('should set proposedSearchCriteria properties', function(){
+      scope.sortPaymentsBy('fieldA');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+
+      scope.sortPaymentsBy('fieldA');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+
+      scope.sortPaymentsBy('fieldB');
+      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
+      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+    });
+
+    it('should call __sortBy with a "payment" argument', function() {
+      spyOn(scope, '__sortBy').andCallThrough();
+      scope.sortPaymentsBy('fieldA');
+      expect(scope.__sortBy).toHaveBeenCalledWith('payment', 'fieldA');
+    });
+  });
+
+  describe('sortFeesBy function', function(){
     it('should not call search() for fee search', function(){
       spyOn(scope.payments, 'search');
-      scope.sortBy('fee', 'fieldA');
+      scope.sortFeesBy('fieldA');
       expect(scope.payments.search).not.toHaveBeenCalled();
     });
 
-    it('should set proposedSearchCriteria properties', function(){
-      scope.sortBy('payment', 'fieldA');
-      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
-      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
-
-      scope.sortBy('payment', 'fieldA');
-      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
-      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
-
-      scope.sortBy('payment', 'fieldB');
-      expect(scope.sortField.payment).toEqual(scope.payments.proposedSearchCriteria.sortField);
-      expect(scope.sortDescending.payment).toEqual(scope.payments.proposedSearchCriteria.sortDesc);
+    it('should call __sortBy with a "fee" argument', function() {
+      spyOn(scope, '__sortBy').andCallThrough();
+      scope.sortFeesBy('fieldA');
+      expect(scope.__sortBy).toHaveBeenCalledWith('fee', 'fieldA');
     });
-
   });
 
   it('should attach a fetchNextResults function to the scope', function () {
@@ -365,4 +387,89 @@ describe('Controller: PaymentsCtrl', function () {
     expect(scope.canPayNow).toBe(true);
   });
 
+  it('should only allow payment extensions if payment is in its final curtailment', function() {
+    var canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 100 });
+    expect(canShow).toBe(true);
+    canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 60 });
+    expect(canShow).toBe(false);
+  });
+
+  describe('request extension', function() {
+    it('should make API call to submit request if Extendable is true', function() {
+      var payment = {
+        Extendable: true
+      };
+      spyOn(dialog, 'dialog').andReturn({
+        open: angular.noop
+      });
+      spyOn(modelMock, 'requestExtension').andCallThrough();
+      scope.payments.extension(payment);
+      expect(dialog.dialog).toHaveBeenCalled();
+      var testConfirm = dialog.dialog.mostRecentCall.args[0].resolve.confirmRequest();
+      testConfirm();
+      expect(modelMock.requestExtension).toHaveBeenCalled();
+    });
+
+  });
+
+});
+
+describe('Controller: ExtensionRequestCtrl', function() {
+  // load the controller's module
+  beforeEach(module('nextgearWebApp'));
+
+  var ExtensionRequestCtrl,
+    paymentMock = {
+      Extendable: true,
+      FloorplanId: 1234
+    },
+    confirm,
+    dialog,
+    scope,
+    floorplan,
+    prevMock;
+
+  beforeEach(inject(function($controller, $rootScope, $q) {
+    scope = $rootScope.$new();
+    // dialog = $dialog;
+    floorplan = {
+      getExtensionPreview: function() {
+        return $q.when(prevMock);
+      }
+    };
+    dialog = {
+      close: angular.noop
+    };
+    confirm = function() {
+      return $q.when(true);
+    };
+
+    prevMock = {
+      PrincipalAmount: 12,
+      InterestAmount: 34,
+      Fees: [
+        { Type: 'fee1', Amount: 56 },
+        { Type: 'fee2', Amount: 78 },
+      ],
+      CollateralProtectionAmount: 91,
+    };
+
+    ExtensionRequestCtrl = $controller('ExtensionRequestCtrl', {
+      $scope: scope,
+      dialog: dialog, // current open instance of dialog
+      payment: paymentMock,
+      confirmRequest: confirm,
+      Floorplan: floorplan
+    });
+  }));
+
+  describe('controller', function() {
+    it('should attach the payment object to the scope', function() {
+      expect(scope.payment).toBe(paymentMock);
+    });
+
+    it('should have a confirm request function that will close the dialog and confirm request with api', function() {
+      expect(scope.confirmRequest).toBeDefined();
+    });
+  });
 });

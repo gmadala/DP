@@ -54,7 +54,9 @@ angular.module('nextgearWebApp')
               amount,
               p.DueDate,
               asPayoff,
-              revenue
+              revenue,
+              p.InterestTotal,
+              p.FeesTotal
             );
           } else {
             Payments.removePaymentFromQueue(p.FloorplanId);

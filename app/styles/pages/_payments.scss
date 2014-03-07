@@ -1,6 +1,6 @@
 // PAYMENTS
 
-.fees .table-list-head {
+.fees .table-list-head, .sch-fees .table-list-head {
   background-color: #999;
 }
 
@@ -12,12 +12,17 @@
   &.fee-amt { width: 21%; }
 
   &.pay-more { width: 4%; }
-  &.pay-desc { width: 32%; }
+  &.pay-desc { width: 22%; }
   &.pay-due { width: 13%; }
-  &.pay-status { width: 15%; }
-  &.pay-payment-amt { width: 15%; }
-  &.pay-payoff-amt { width: 15%; }
+  &.pay-floorDate { width: 15%; }
+  &.pay-status { width: 12%; }
+  &.pay-payment-amt { width: 14%; }
+  &.pay-payoff-amt { width: 13%; }
   &.pay-title { width: 6%; }
+}
+
+.cell.pay-more {
+  vertical-align: middle;
 }
 
 .pay-due {
@@ -28,6 +33,68 @@
 
 .payments ul, .schPayments-list ul {
   margin: 0;
+}
+
+.extension-modal {
+  width: 400px;
+  margin-left: -200px;
+
+  .detail-col {
+    @extend %full-width;
+    float: none;
+    padding: 14px;
+    border: 1px solid $border;
+
+    .well-head {
+      padding: 7px 10px;
+      margin: -14px -14px 10px;
+    }
+
+    & + p {
+      line-height: $base-line-height;
+      margin: 15px 10px;
+    }
+  }
+
+  table {
+    width: 80%;
+
+    tr.subtotal {
+      border-top: 1px solid $border;
+
+      td {
+        padding-top: 10px;
+
+        &:first-child {
+          @extend %heavy;
+        }
+      }
+    }
+
+    td {
+      line-height: 1.1;
+      padding: 0 0 8px;
+
+      &:first-child {
+        width: 60%;
+      }
+    }
+  }
+
+  .modal-footer {
+    border: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.payments .extension {
+  margin-top: 5px;
+
+  a {
+    font-size: $tiny-font-size;
+    line-height: $base-line-height;
+  }
 }
 
 .payments .cell .btn-block,
@@ -75,7 +142,7 @@
   @extend %center;
   @extend %full-width;
   clear: both;
-  margin: 0 auto 10px;
+  margin: 5px auto;
 
   button {
     @extend .btn-unstyle;
@@ -89,7 +156,6 @@
 .detail-col {
   @extend %float-l;
   @extend %half-width;
-  padding-bottom: 10px;
 
   & + .detail-col {
     border-left: 1px solid $border;
@@ -97,11 +163,19 @@
 
   .vehicle-info & {
     width: 33%;
-    height: 290px;
+    height: 370px;
 
-    &:first-child {
-      width: 34%;
+    &:first-child + .detail-col {
+      width: 35%;
     }
+
+    &:last-child {
+      width: 32%;
+    }
+  }
+
+  table {
+    margin-bottom: 20px;
   }
 }
 
@@ -120,35 +194,11 @@
 
 .detail-value {
   color: $darker-text-color;
-}
-
-.curtail-sch {
-  @extend %small;
-
-  table {
-    @extend %full-width;
-    margin-bottom: 20px;
-  }
-
-  th {
-    @extend %align-left;
-    vertical-align: bottom;
-    color: $base-text-color;
-    font-weight: normal;
-    line-height: $base-line-height;
-    padding: 5px 10px;
-    border-bottom: 1px solid $border;
-  }
-
-  td {
-    color: $darker-text-color;
-    color: $darker-text-color;
-    padding: 0 10px;
-  }
+  padding-top: 6px;
 }
 
 // Payments Summary
-.pay-queue {
+.pay-queue, .request-queue {
   p, li {
     @extend %thin;
     font-size: 13px;

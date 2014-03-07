@@ -64,7 +64,15 @@
                       ng-model="item.sellerHasTitle"
                       ng-click="sellerHasTitle(item, item.sellerHasTitle)"
                       ng-hide="item.TitleImageAvailable"/>
-              <label for="{{ item.FloorplanId }}"  ng-hide="item.TitleImageAvailable">I Have the Title</label>
+              <label for="{{ item.FloorplanId }}"
+                      ng-hide="item.TitleImageAvailable"
+                      tooltip-placement="top"
+                      tooltip-trigger="click"
+                      tooltip-html="true"
+                      tooltip-html-unsafe="NextGear has been notified of this change and will be sending funding soon."
+                      tooltip-animation="true">
+                I Have the Title
+              </label>
             </div>
             <a ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}"
                nxg-track="{{ metric.VIEW_TITLE }}"

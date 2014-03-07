@@ -108,6 +108,18 @@ angular.module('nextgearWebApp')
           FloorplanId: floorplanId,
           HasTitle: hasTitle
         });
+      },
+      getExtensionPreview: function(floorplanId) {
+        return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);
+      },
+      getVehicleDescription: function (floorplan) {
+        return [
+          floorplan.UnitYear || null,
+          floorplan.UnitMake,
+          floorplan.UnitModel,
+          floorplan.UnitStyle,
+          floorplan.Color
+        ].join(' ');
       }
     };
   });

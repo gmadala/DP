@@ -1,14 +1,18 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, possibleDates, Payments) {
+  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, fee, possibleDates, Payments) {
 
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
+    var item = payment ? payment : fee;
+
+    $scope.type = payment ? 'payment' : 'fee';
 
     $scope.model = {
       payment: payment,
-      selectedDate: payment.scheduleDate || moment(orderedDates[0]).toDate(), // next available date
+      fee: fee,
+      selectedDate: item.scheduleDate || moment(orderedDates[0]).toDate(), // next available date
       possibleDates: possibleDates,
       canPayNow: false
     };
@@ -26,7 +30,7 @@ angular.module('nextgearWebApp')
 
       // can't schedule any earlier than tomorrow or later than the payment due date
       var tomorrow = moment().add(1, 'day');
-      if (date.isBefore(tomorrow, 'day') || date.isAfter(payment.dueDate, 'day')) {
+      if (date.isBefore(tomorrow, 'day') || date.isAfter(item.dueDate, 'day')) {
         return false;
       }
 
@@ -49,18 +53,23 @@ angular.module('nextgearWebApp')
     };
 
     $scope.finalize = function (scheduleDate) {
-      $scope.submitInProgress = true;
-      // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
-      Payments.fetchPaymentAmountOnDate(payment.floorplanId, scheduleDate || new Date(), payment.isPayoff).then(
-        function (newAmount) {
-          $scope.submitInProgress = false;
-          payment.scheduleDate = scheduleDate;
-          payment.amount = newAmount;
-          dialog.close();
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
-        }
-      );
+      if(item.isPayment) {
+        $scope.submitInProgress = true;
+        // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
+        Payments.fetchPaymentAmountOnDate(item.floorplanId, scheduleDate || new Date(), item.isPayoff).then(
+          function (newAmount) {
+            $scope.submitInProgress = false;
+            item.scheduleDate = scheduleDate;
+            item.amount = newAmount;
+            dialog.close();
+          }, function (/*error*/) {
+            $scope.submitInProgress = false;
+          }
+        );
+      } else {
+        item.scheduleDate = scheduleDate;
+        dialog.close();
+      }
     };
 
     $scope.close = function() {

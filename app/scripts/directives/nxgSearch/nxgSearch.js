@@ -13,7 +13,9 @@ angular.module('nextgearWebApp')
         showDateRange: '&',
         onSearch: '&',
         onClear: '&',
-        helpText: '@'
+        filterable: '=',
+        helpText: '@',
+        info: '@'
       },
       controller: 'NxgSearchCtrl'
     };
@@ -52,6 +54,7 @@ angular.module('nextgearWebApp')
 
     $scope.clear = function ($event) {
       $event.preventDefault();
+      $scope.validity = {}; // reset form errors
       $scope.onClear();
     };
 

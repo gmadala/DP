@@ -8,10 +8,53 @@
       filter-options="scheduledPayments.filterOptions"
       active-criteria="scheduledPayments.searchCriteria"
       on-search="scheduledPayments.search()"
-      on-clear="scheduledPayments.resetSearch()">
+      on-clear="scheduledPayments.resetSearch()"
+      filterable="true">
     </div>
 
+    <h3 class="boxed">Scheduled Account Fees</h3>
+
+    <!-- needs to be updated with MVC integration task, VO-975 -->
+    <div class="sch-fees" ng-switch="true || fees.results.length > 0 || fees.loading">
+      <p class="notice-box" ng-switch-when="false">
+        There are no fees associated with this account.
+      </p>
+
+      <ul class="unstyled" ng-switch-when="true">
+        <li class="table-list-head">
+          <div class="cell schFee-date"
+               ng-click="sortFeesBy('schFeeDate')"
+               ng-class="{ sorted : sortField.fee == 'schFeeDate', desc : sortDescending.fee }">
+            Scheduled On
+          </div>
+          <div class="cell schFee-desc">
+            Description</div>
+          <div class="cell schFee-type sortable"
+               ng-click="sortFeesBy('schFeeType')"
+               ng-class="{ sorted : sortField.fee == 'schFeeType', desc : sortDescending.fee }">
+            Fee Type</div>
+          <div class="cell schFee-amt sortable"
+               ng-click="sortFeesBy('schFeeAmt')"
+               ng-class="{ sorted : sortField.fee == 'schFeeAmt', desc : sortDescending.fee }">
+            Fee Amount</div>
+        </li>
+
+        <li class="table-list-row" ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
+            <div class="cell schFee-date"><p>{{ fee.ScheduledDate | moment }}</p></div>
+            <div class="cell schFee-desc"><p>{{ fee.Description }}</p></div>
+            <div class="cell schFee-type"><p>{{ fee.FeeType }}</p></div>
+            <div class="cell schFee-amt"><p>{{ fee.Balance | currency }}</p>
+              <button class="btn btn-small" ng-click="scheduledPayments.cancelFee(fee)">
+                  <span>Cancel</span>
+              </button>
+            </div>
+        </li>
+      </ul>
+    </div><!-- end .sch-fees -->
+
+
     <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
+      <h3 class="boxed">Scheduled Vehicle Payments</h3>
 
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="scheduledPayments.resetSearch()" title="New Search">try a new search</a>.
@@ -31,18 +74,23 @@
           <li class="table-list-head">
             <div class="cell sch-more"></div>
             <div class="cell sch-schDate sortable"
-                 ng-click="sortBy('ScheduledForDate')"
+                 ng-click="sortPaymentsBy('ScheduledForDate')"
                  ng-class="{ sorted : sortField == 'ScheduledForDate', desc : sortDescending }">
               Scheduled On
             </div>
             <div class="cell sch-desc">
               Description
             </div>
+            <div class="cell sch-floorDate sortable"
+                 ng-click="sortPaymentsBy('flooringDate')"
+                 ng-class="{ sorted : sortField == 'flooringDate', desc : sortDescending }">
+              Floor Date
+            </div>
             <div class="cell sch-status">
               Status
             </div>
             <div class="cell sch-amount sortable"
-                 ng-click="sortBy('paymentAmount')"
+                 ng-click="sortPaymentsBy('paymentAmount')"
                  ng-class="{ sorted : sortField == 'paymentAmount', desc : sortDescending }">
               Amount
             </div>
@@ -67,6 +115,11 @@
                   VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
                   Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
                 </p>
+              </div>
+
+              <div class="cell sch-floorDate">
+                <p>{{ pay.flooringDate | moment }}</p>
+                <p>Days Floored: {{ pay.daysOnFloorplan }}</p>
               </div>
 
               <div class="cell sch-status">

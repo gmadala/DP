@@ -1,15 +1,19 @@
 // CHECKOUT
 
 .checkout-list {
+  li {
+    position: relative;
+  }
   .cell {
     &.fee-type { width: 27%; }
     &.fee-desc { width: 30%; }
     &.fee-due { width: 17%; }
     &.fee-amt { width: 26%; }
 
-    &.pay-desc { width: 35%; }
+    &.pay-more { width: 4%; }
+    &.pay-desc { width: 32%; }
     &.pay-due { width: 12%; }
-    &.pay-status { width: 25%; }
+    &.pay-status { width: 24%; }
     &.pay-pymt { width: 28%; }
 
     &.pay-status p { margin-top: 0; }
@@ -22,15 +26,20 @@
   .pay-pymt p {
     line-height: 1.3;
   }
+
   .remove {
     font-size: $tiny-font-size;
-    border: 0;
-    margin-left: 5px;
+    margin: -3px 0 0 5px;
   }
 
   .payments .pay-pymt .btn-block {
     margin: 10px 0 0;
   }
+}
+
+.exp-pymt {
+  @extend %float-r;
+  margin-top: -3px;
 }
 
 .checkout-summary {

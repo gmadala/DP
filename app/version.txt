@@ -1,10 +1,12 @@
-NextGear Capital v2.0.1
+NextGear Capital v2.0.4
 =================================
 
 Fixes included in this release:
 
-VO-485	Integrate uservoice for feedback into app(s)
-VO-981	add verbiage to seller floorplan screen to indicate date search is for floorplan date OR disbursement date
-VO-787	Web: Update Security Question: Browser Back button doesn't work properly when some entries are filled.
-VO-1005	Web: Feedback & Support: Login page displayed on Feedback dialog box.
-VO-794	Feedback & Support placement on the Web site for Dealers
+VO-811	Show Fees, Interest on Vehicle on the Vehicle Details view and Floor Date & # of Days Floored on the Payments and Scheduled Payments view.
+VO-1307	Metrics tracking updates for Profile Settings, Account Management and auction's Settings
+VO-1385	Auto Disbursement Setting - API Integration
+VO-985	High # of "Events" Being Generated Since Last Release (Viewed Through Clicky)
+VO-1068	Remove the Original Curtailment Schedule from the web site
+VO-763	Dealer Self-Service - Display Auto Disbursement of Unapplied funds Setting
+VO-1370	EUI web site - Clicking on Scheduling Payment link displays " "unable to communicate with the NG system. Clicked OK."

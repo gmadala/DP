@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h3>Payment Extension {{ { true: 'Available', false: 'Request' }[payment.Extendable] }}</h3>
+</div>
+<div class="modal-body">
+  <section class="row-fluid">
+    <div class="detail-col">
+      <h4 class="well-head">Payment Summary</h4>
+      <p>This is a general explanation of how extensions work, to be provided by NextGear. </p>
+      <p><strong>VIN: {{ payment.Vin }} - {{ payment.UnitDescription }}</strong></p>
+
+      <table>
+        <tr>
+          <td>Principal:</td>
+          <td class="highlight">{{ extPrev.PrincipalAmount | currency }}</td>
+        </tr>
+        <tr>
+          <td>Interest:</td>
+          <td class="highlight">{{ extPrev.InterestAmount | currency }}</td>
+        </tr>
+        <tr ng-repeat="fee in extPrev.Fees">
+          <td>{{ fee.Type }}</td>
+          <td class="highlight">{{ fee.Amount | currency }}</td>
+        </tr>
+        <tr>
+          <td>Collateral Protection</td>
+          <td class="highlight">{{ extPrev.CollateralProtectionAmount | currency }}</td>
+        </tr>
+        <tr class="subtotal">
+          <td>Subtotal:</td>
+          <td class="highlight">{{ subtotal | currency }}</td>
+      </table>
+    </div><!-- end .detail-col -->
+    <p ng-hide="payment.Extendable" class="highlight">
+      This payment extension cannot be completed online. Please contact customer service for further assistance.
+    </p>
+  </section><!-- end .row-fluid -->
+</div>
+
+<div class="modal-footer">
+  <button ng-show="payment.Extendable" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
+  <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
+</div>

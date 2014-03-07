@@ -190,8 +190,8 @@ describe('Controller: CheckoutCtrl', function () {
       expect(payment.scheduleLoading).toBe(true);
     });
 
-    it('should invoke the schedule modal', function () {
-      var payment = {dueDate: '2013-01-10'};
+    it('should invoke the schedule modal with a payment', function () {
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       expect(dialog.dialog).toHaveBeenCalled();
       expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
@@ -200,9 +200,40 @@ describe('Controller: CheckoutCtrl', function () {
     });
 
     it('should pass the payment to be scheduled', function () {
-      var payment = {dueDate: '2013-01-10'};
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
+    });
+
+    it('should invoke the schedule modal with a fee', function () {
+      var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
+      scope.paymentQueue.schedule(fee);
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
+      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('ScheduleCheckoutCtrl');
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.fee()).toBe(fee);
+    });
+
+    it('should pass the fee to be scheduled', function () {
+      var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
+      scope.paymentQueue.schedule(fee);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.fee()).toBe(fee);
+    });
+
+    it('should set payment to the item when it is a payment', function () {
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
+      scope.paymentQueue.schedule(payment);
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBe(payment);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.fee()).toBeFalsy();
+    });
+
+    it('should set fee to the item when it is a fee', function () {
+      var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
+      scope.paymentQueue.schedule(fee);
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.fee()).toBe(fee);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toBeFalsy();
     });
 
     it('should pass a promise for a map of possible payment dates from tomorrow to the payment due date', function () {
@@ -212,7 +243,7 @@ describe('Controller: CheckoutCtrl', function () {
       };
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(possibleDates));
 
-      var payment = {dueDate: '2013-01-10'};
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
 
       dialog.dialog.mostRecentCall.args[0].resolve.possibleDates().then(
@@ -233,7 +264,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should reject the promise of possible dates (to suppress modal display) if none are returned', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({}));
-      var payment = {dueDate: '2013-01-10'},
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false },
         success = jasmine.createSpy('success'),
         failure = jasmine.createSpy('failure');
       scope.paymentQueue.schedule(payment);
@@ -245,7 +276,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should set scheduleError & scheduleBlocked, and clear scheduleDate, if there are no avail. dates', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({}));
-      var payment = {dueDate: '2013-01-10', scheduleDate: new Date()};
+      var payment = {dueDate: '2013-01-10', scheduleDate: new Date(), isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
       scope.$apply();
@@ -257,7 +288,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should reject the promise of possible dates (to suppress modal display) if the load fails', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('server died'));
-      var payment = {dueDate: '2013-01-10'},
+      var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false },
         success = jasmine.createSpy('success'),
         failure = jasmine.createSpy('failure');
       scope.paymentQueue.schedule(payment);
@@ -269,7 +300,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should set scheduleError if the load fails (but leave schedule date & allow retry)', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('oof'));
-      var payment = {dueDate: '2013-01-10', scheduleDate: new Date()};
+      var payment = {dueDate: '2013-01-10', scheduleDate: new Date(), isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
       scope.$apply();
@@ -281,7 +312,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should clear the scheduleLoading flag when the possible dates promise is resolved', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when({ '2013-01-01': true }));
-      var payment = { dueDate: '2013-01-10'};
+      var payment = { dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       dialog.dialog.mostRecentCall.args[0].resolve.possibleDates();
       scope.$apply();
@@ -722,6 +753,31 @@ describe('Controller: CheckoutCtrl', function () {
       expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('two');
     });
 
+    it('should remove overdue fees from the queue', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
+      Payments.addFeeToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-01'
+      );
+      Payments.addFeeToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-03'
+      );
+      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
+      scope.handleAfterHoursViolation();
+      scope.$apply();
+      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
+      expect(_.map(scope.paymentQueue.contents.fees)[0].financialRecordId).toBe('two');
+    });
+
     it('should remove payments that are due before the next available schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
       Payments.addPaymentToQueue(
@@ -747,6 +803,31 @@ describe('Controller: CheckoutCtrl', function () {
       scope.$apply();
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('one');
+    });
+
+    it('should remove fees that are due before the next available schedule date', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
+      Payments.addFeeToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-08'
+      );
+      Payments.addFeeToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-04'
+      );
+      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
+      scope.handleAfterHoursViolation();
+      scope.$apply();
+      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
+      expect(_.map(scope.paymentQueue.contents.fees)[0].financialRecordId).toBe('one');
     });
 
     it('should schedule payments that have not been scheduled already for the next avail date', function () {
@@ -781,10 +862,40 @@ describe('Controller: CheckoutCtrl', function () {
       expect(expectedScheduleDate.isSame(newQueue[1].scheduleDate, 'day')).toBe(true);
     });
 
+    it('should schedule fees that have not been scheduled already for the next avail date', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
+      var priorSchedule = new Date();
+      Payments.addFeeToQueue(
+        'one',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-10'
+      );
+      Payments.addFeeToQueue(
+        'two',
+        'ch123',
+        's123',
+        'desc123',
+        123,
+        '2013-01-10'
+      );
+      Payments.getPaymentQueue().fees['one'].scheduleDate = priorSchedule;
+      scope.handleAfterHoursViolation();
+      scope.$apply();
+      var newQueue = _.map(scope.paymentQueue.contents.fees);
+      newQueue = _.sortBy(newQueue, 'financialRecordId');
+      var expectedScheduleDate = moment([2013, 0, 4]);
+      expect(newQueue.length).toBe(2);
+      expect(newQueue[0].scheduleDate).toBe(priorSchedule);
+      expect(expectedScheduleDate.isSame(newQueue[1].scheduleDate, 'day')).toBe(true);
+    });
+
     it('should invoke the after hours notice modal with ejected items and the auto schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
 
-      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-04');
+      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-03');
       Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
       Payments.addPaymentToQueue('scheduled', 'v2', 's2', 'd2', 2, '2013-01-10', false);
       Payments.getPaymentQueue().payments['scheduled'].scheduleDate = new Date();
@@ -797,6 +908,27 @@ describe('Controller: CheckoutCtrl', function () {
       expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('AfterHoursCheckoutCtrl');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees().length).toBe(1);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees()[0].financialRecordId).toBe('fee1');
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments().length).toBe(1);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0].floorplanId).toBe('overdue');
+      var date = dialog.dialog.mostRecentCall.args[0].resolve.autoScheduleDate();
+      expect(moment([2013, 0, 4]).isSame(date, 'day')).toBe(true);
+    });
+
+    it('should invoke the after hours notice modal with ejected items and the auto schedule date for fees', function () {
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
+
+      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-10');
+      Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
+      Payments.addPaymentToQueue('scheduled', 'v2', 's2', 'd2', 2, '2013-01-10', false);
+      Payments.getPaymentQueue().payments['scheduled'].scheduleDate = new Date();
+      Payments.addPaymentToQueue('regular', 'v3', 's3', 'd3', 3, '2013-01-10', false);
+
+      scope.handleAfterHoursViolation();
+      scope.$apply();
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/afterHoursCheckout.html');
+      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('AfterHoursCheckoutCtrl');
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees().length).toBe(0);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments().length).toBe(1);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0].floorplanId).toBe('overdue');
       var date = dialog.dialog.mostRecentCall.args[0].resolve.autoScheduleDate();

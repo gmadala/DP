@@ -1,5 +1,5 @@
 <div class="container-line">
-  <div class="container-fluid settings">
+  <div class="container-fluid settings profile">
     <div class="row-fluid two-col">
 
       <!-- USER PROFILE -->
@@ -117,115 +117,8 @@
         </div><!-- end .well-out -->
       </section><!-- end .span8.well.adjacent -->
 
-      <!-- BUSINESS SETTINGS -->
-      <section class="span8 well adjacent" novalidate>
-        <h4>Business Settings</h4>
-        <button ng-hide="business.editable" class="btn edit-btn" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="business.editable" class="btn cancel-btn" ng-click="business.cancel()">Cancel</button>
-        <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
-
-        <div class="well-out">
-          <form class="settings-opts" ng-class="{ editable:business.editable }" name="busSettings">
-            <div class="control-group">
-              <label class="control-label business" for="businessEmail">Business Email</label>
-              <div class="controls" nxg-input model="business.data.email" editable="business.editable">
-                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
-                <div class="text-error" ng-show="business.validation.businessEmail.$invalid">
-                    Please enter a valid email address.
-                </div>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label business" for="enhanced">Enhanced Registration Enabled?</label>
-
-              <!-- Show "Yes" if enhanced registration is enabled.
-              If it is not enabled, show nothing. -->
-              <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
-
-              <div class="controls form-inline nxg-radios" ng-show="business.editable">
-                <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
-                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
-                <label for="enhancedNo">No</label>
-                <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
-                <label for="enhancedYes">Yes</label>
-              </div>
-            </div>
-
-            <div class="control-group" ng-show="business.editable">
-              <div class="enhanced-info">
-                <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
-                <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
-                <p>Create your Enhanced Registration four digit PIN.</p>
-              </div>
-
-              <label class="control-label business">Enhanced Registration PIN</label>
-
-              <div class="controls">
-                <input type="text"
-                       name="pin"
-                       ng-model="business.dirtyData.enhancedRegistrationPin"
-                       ng-disabled="!business.dirtyData.enhancedRegistrationEnabled"
-                       ng-pattern="/^\d{4}$/"
-                       ng-required="business.dirtyData.enhancedRegistrationEnabled"
-                       ng-class="{ 'nxg-invalid': business.validation.pin.$invalid }" />
-                <p class="text-error" ng-show="business.validation.pin.$invalid">
-                    Your PIN must consist of four numbers, no letters or special characters.
-                </p>
-              </div>
-            </div>
-
-          </form>
-        </div><!-- end .well-out -->
-      </section><!-- end .span8.well.adjacent -->
-    </div><!-- end .row-fluid.two-col -->
-
-    <div class="row-fluid two-col">
-      <!-- TITLE SETTINGS -->
-      <section class="span8 well adjacent">
-        <h4>Title Settings</h4>
-        <button ng-hide="title.editable" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-        <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
-        <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
-
-        <div class="well-out">
-          <form class="settings-opts" ng-class="{ editable:title.editable }"name="titleSettings">
-            <div class="control-group">
-              <label class="control-label" for="titleAddr">Address</label>
-              <div class="controls" ng-show="title.editable">
-                <select ng-model="title.dirtyData.titleAddress"
-                        ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
-                        tooltip="{{ addr.ShortAddress }}"
-                        tooltip-placement="right"
-                        tooltip-popup-delay="700">
-                </select>
-                <button class="btn-help"
-                  tooltip-placement="right"
-                  tooltip-trigger="click"
-                  tooltip-html="true"
-                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
-                  tooltip-animation="true">?</button>
-              </div>
-              <!-- Saved Address -->
-              <div class="controls static" ng-hide="title.editable">
-                  <p>{{title.data.titleAddress.Line1}}<br/>
-                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}<br/></span>
-                  {{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}</p>
-              </div>
-              <!-- Current Address Selection-->
-              <div class="controls static" ng-show="title.editable">
-                  <p>{{title.dirtyData.titleAddress.Line1}}<br/>
-                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}<br/></span>
-                  {{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</p>
-              </div>
-            </div>
-          </form>
-        </div><!-- end .well-out -->
-      </section><!-- end .span8.well.adjacent -->
-
       <!-- NOTIFICATIONS -->
       <section class="span8 well adjacent">
-        <!-- SEE NOTE IN TICKETS #15 & #17 -->
         <h4>Notifications</h4>
         <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
         <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()">Cancel</button>

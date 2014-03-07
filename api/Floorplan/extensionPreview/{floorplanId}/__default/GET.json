@@ -1,0 +1,19 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "PrincipalAmount": 1234.56,
+    "InterestAmount": 15.78,
+    "Fees": [
+      {
+        "Type": "Curtailment Extension",
+        "Amount": 96.25
+      },
+      {
+        "Type": "Floorplan/Curtailment Fee",
+        "Amount": 458.21
+      }
+    ],
+    "CollateralProtectionAmount": 45.02
+  }
+}

@@ -9,6 +9,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     scope,
     dialog,
     payment,
+    fee,
     possibleDates,
     Payments,
     run;
@@ -20,8 +21,18 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     };
     payment = {
       floorplanId: 'floorplan123',
-      dueDate: '2013-09-30'
+      dueDate: '2013-09-30',
+      isPayment: true,
+      isFee: false
     };
+
+    fee = {
+      financialRecordId: 'feeId',
+      dueDate: '2013-09-29',
+      isFee: true,
+      isPayment: false
+    };
+
     possibleDates = {
       '2013-09-30': true,
       '2013-09-29': true,
@@ -32,22 +43,32 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     spyOn(Payments, 'canPayNow').andReturn($q.when(true));
 
-    run = function () {
+    // Some tests change items and reinject into controller (overriding first time this is run)
+    run = function (type) {
       scope = $rootScope.$new();
 
       ScheduleCheckoutCtrl = $controller('ScheduleCheckoutCtrl', {
         $scope: scope,
         dialog: dialog,
-        payment: payment,
+        payment: type === 'payment' && payment,
+        fee: type === 'fee' && fee,
         possibleDates: possibleDates
       });
     };
 
-    run();
+    run('payment');
   }));
 
   it('should attach the payment being scheduled to the scope', function () {
+    run('payment')
     expect(scope.model.payment).toBe(payment);
+    expect(scope.model.fee).toBeFalsy();
+  });
+
+  it('should attach the payment being scheduled to the scope', function () {
+    run('fee');
+    expect(scope.model.fee).toBe(fee);
+    expect(scope.model.pay).toBeFalsy();
   });
 
   it('should default selected date to the next available date if none is currently set', function () {
@@ -56,7 +77,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
   it('should default selected date to the current scheduled date for the payment if set', function () {
     payment.scheduleDate = new Date(2013, 0, 4);
-    run();
+    run('payment');
     expect(scope.model.selectedDate.toString()).toBe(new Date(2013, 0, 4).toString());
   });
 

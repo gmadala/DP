@@ -37,7 +37,8 @@ describe('Controller: FloorCarCtrl', function () {
     };
 
     mockForm = {
-      $valid: true
+      $valid: true,
+      inputMileage: {}
     };
 
     initController = function(type) {

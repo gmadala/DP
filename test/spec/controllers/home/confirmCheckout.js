@@ -31,7 +31,8 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     };
     queue = {
       fees: {
-        'fee1': { id: 'bar', amount: 1 }
+        'fee1': { id: 'bar1', amount: 1 },
+        'fee2': { id: 'bar2', amount: 1, scheduleDate: new Date() }
       },
       payments: {
         'pmt1': { id: 'baz', amount: 10, revenueToTrack: 8 },
@@ -58,9 +59,14 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(moment().isSame(scope.today, 'day')).toBe(true);
   });
 
-  it('should attach array of fees to the scope', function () {
-    expect(scope.items.fees.length).toBe(1);
-    expect(scope.items.fees[0].id).toBe('bar');
+  it('should attach array of today fees to the scope', function () {
+    expect(scope.items.feesToday.length).toBe(1);
+    expect(scope.items.feesToday[0].id).toBe('bar1');
+  });
+
+  it('should attach array of scheduled fees to the scope', function () {
+    expect(scope.items.feesScheduled.length).toBe(1);
+    expect(scope.items.feesScheduled[0].id).toBe('bar2');
   });
 
   it('should attach array of today payments to the scope', function () {
@@ -79,10 +85,24 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
 
   describe('items.getStatus function', function () {
 
-    it('should return the expected result when only fees were sent', function () {
+    it('should return the expected result when only same-day fees were sent', function () {
       queue.payments = {};
+      delete queue.fees.fee2;
       run();
       expect(scope.items.getStatus('submitted', 'scheduled')).toBe('submitted');
+    });
+
+    it('should return the expected result when only scheduled fees were sent', function () {
+      queue.payments = {};
+      delete queue.fees.fee1;
+      run();
+      expect(scope.items.getStatus('submitted', 'scheduled')).toBe('scheduled');
+    });
+
+    it('should return the expected result when a mix of fees were sent', function () {
+      queue.payments = {};
+      run();
+      expect(scope.items.getStatus('submitted', 'scheduled')).toBe('submitted and scheduled');
     });
 
     it('should return the expected result when only same-day payments were sent', function () {

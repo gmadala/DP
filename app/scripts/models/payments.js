@@ -100,8 +100,10 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, revenue) {
+      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, revenue, interestTotal, feesTotal) {
         var payment = {
+          isPayment: true,
+          isFee: false,
           floorplanId: floorplanId,
           vin: vin,
           stockNum: stockNum,
@@ -109,13 +111,17 @@ angular.module('nextgearWebApp')
           amount: amount,
           dueDate: dueDate,
           isPayoff: asPayoff,
-          revenueToTrack: revenue
+          revenueToTrack: revenue,
+          interestTotal: interestTotal,
+          feesTotal: feesTotal
         };
         paymentQueue.payments[floorplanId] = payment;
         segmentio.track(metric.ADD_TO_BASKET);
       },
       addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
         var fee = {
+          isPayment: false,
+          isFee: true,
           financialRecordId: financialRecordId,
           type: type,
           vin: vin,
@@ -131,6 +137,13 @@ angular.module('nextgearWebApp')
       },
       removeFeeFromQueue: function (id) {
         delete paymentQueue.fees[id];
+      },
+      removeFromQueue: function (item) {
+        if(item.isPayment) {
+          this.removePaymentFromQueue(item.floorplanId);
+        } else {
+          this.removeFeeFromQueue(item.financialRecordId);
+        }
       },
       isPaymentOnQueue: function (id) {
         var queueItem = paymentQueue.payments[id];
@@ -171,6 +184,9 @@ angular.module('nextgearWebApp')
       },
       cancelScheduled: function (webScheduledPaymentId) {
         return api.request('POST', '/payment/cancelscheduledpayment/' + webScheduledPaymentId);
+      },
+      cancelScheduledFee: function (webScheduledAccountFeeId) {
+        return api.request('POST', '/payment/cancelscheduledaccountfeepayment/' + webScheduledAccountFeeId);
       },
       fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);
@@ -213,7 +229,9 @@ angular.module('nextgearWebApp')
         });
         angular.forEach(fees, function (fee) {
           shortFees.push({
-            FinancialRecordId: fee.financialRecordId
+            FinancialRecordId: fee.financialRecordId//,
+          //  ScheduledPaymentDate: api.toShortISODate(fee.scheduleDate) || null,
+          // TODO: When /payment/2_0/make endpoint is available, remove the comments in the above 2 lines
           });
         });
 
@@ -223,7 +241,12 @@ angular.module('nextgearWebApp')
           BankAccountId: bankAccount.BankAccountId,
           UnappliedFundsAmount: api.toFloat(unappliedFundsAmt )|| 0
         };
+        // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
+        //return api.request('POST', '/payment/2_0/make', data);
         return api.request('POST', '/payment/make', data);
+      },
+      requestExtension: function (floorplanId) {
+        return api.request('POST', '/Floorplan/requestextension/' + floorplanId);
       }
     };
   });

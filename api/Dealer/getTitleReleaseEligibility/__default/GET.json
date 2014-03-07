@@ -1,0 +1,10 @@
+{
+  "Success": true,
+  "Message": false,
+  "Data": {
+    "DealerIsEligibleToReleaseTitles": true,
+    "TotalReleasesAllowed": 4,
+    "RemainingReleasesAvailable": 2,
+    "ReleaseBalanceAvailable": 58300.00
+  }
+}

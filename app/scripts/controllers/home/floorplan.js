@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric, $timeout) {
 
     $scope.metric = metric; // make metric names available to templates
 
@@ -14,15 +14,7 @@ angular.module('nextgearWebApp')
     var isDealer = User.isDealer(),
         lastPromise;
 
-    $scope.getVehicleDescription = function (floorplan) {
-      return [
-        floorplan.UnitYear || null,
-        floorplan.UnitMake,
-        floorplan.UnitModel,
-        floorplan.UnitStyle,
-        floorplan.Color
-      ].join(' ');
-    };
+    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
     if (isDealer) {
       $scope.filterOptions = [
@@ -165,6 +157,16 @@ angular.module('nextgearWebApp')
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
+          /*jshint camelcase: false */
+          if (hasTitle) { // show the tooltip for 5 seconds, then fade
+            $timeout(function() {
+              angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
+            }, 5000);
+          } else { // make sure tooltip doesn't show if auction user doesn't have title
+            angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
+          }
+
+          // real purpose of this function
           floorplan.TitleLocation = hasTitle ? 'Seller' : 'Title Absent';
         }
       );

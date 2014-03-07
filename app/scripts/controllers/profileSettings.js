@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('SettingsCtrl', function($scope, $dialog, Settings, segmentio, metric) {
-    segmentio.track(metric.VIEW_SETTINGS);
+  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings, segmentio, metric, User) {
+    if(User.isDealer()) {
+      segmentio.track(metric.VIEW_PROFILE_SETTINGS);
+    }
 
     $scope.loading = false;
 
@@ -34,7 +36,11 @@ angular.module('nextgearWebApp')
           this.cancel();
           return false;
         }
-        segmentio.track(metric.CHANGE_SETTINGS);
+        if(User.isDealer()) {
+          segmentio.track(metric.CHANGE_PROFILE_SETTINGS);
+        } else {
+          segmentio.track(metric.CHANGE_AUCTION_SETTINGS);
+        }
         return true;
       },
       saveSuccess: function() {
@@ -91,7 +97,7 @@ angular.module('nextgearWebApp')
       }
     };
 
-    Settings.get().then(function(results) {
+    ProfileSettings.get().then(function(results) {
         $scope.loading = true;
 
         /** PROFILE **/
@@ -118,7 +124,7 @@ angular.module('nextgearWebApp')
 
               this.updateQuestionText(d.questions);
 
-              Settings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
+              ProfileSettings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
                 prv.saveSuccess.bind(this)
               );
             }
@@ -191,104 +197,6 @@ angular.module('nextgearWebApp')
         };
 
 
-        /** BUSINESS SETTINGS **/
-        $scope.business = {
-          data: {
-            email: results.BusinessEmail,
-            enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
-            enhancedRegistrationPin: null
-          },
-          dirtyData: null, // a copy of the data for editing (lazily built)
-          editable: false,
-          edit: function() {
-            prv.edit.apply(this);
-          },
-          cancel: function() {
-            prv.cancel.apply(this);
-          },
-          save: function() {
-            if (prv.save.apply(this)) {
-              var d = this.dirtyData;
-
-              Settings.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
-                prv.saveSuccess.bind(this)
-              );
-            }
-          },
-          isDirty: function() {
-            return $scope.busSettings.$dirty;
-          },
-          validate: function() {
-            var business = $scope.business;
-            business.validation = angular.copy($scope.busSettings);
-            return business.validation.$valid;
-          },
-          confirmDisableEnhanced: function() {
-            var dialogOptions = {
-              backdrop: true,
-              keyboard: true,
-              backdropClick: true,
-              templateUrl: 'views/modals/confirmDisableEnhanced.html',
-              controller: 'ConfirmDisableCtrl',
-            };
-            $dialog.dialog(dialogOptions).open().then(function(result) {
-              if (result) {
-                $scope.business.dirtyData.enhancedRegistrationPin = null;
-                $scope.business.dirtyData.enhancedRegistrationEnabled = false;
-              } else {
-                $scope.business.dirtyData.enhancedRegistrationEnabled = true;
-              }
-            });
-          }
-        };
-
-        /** TITLE SETTINGS **/
-        $scope.title = {
-          data: {
-            longFormatAddressText: results,
-            titleAddress: results.CurrentTitleReleaseAddress,
-            addresses: results.Addresses
-          },
-          dirtyData: null, // a copy of the data for editing (lazily built)
-          editable: false,
-          edit: function() {
-            prv.edit.apply(this);
-            this.updateAddressSelection();
-          },
-          cancel: function() {
-            prv.cancel.apply(this);
-          },
-          save: function() {
-            if (prv.save.apply(this)) {
-              this.updateAddressSelection();
-              var d = this.dirtyData;
-
-              Settings.saveTitleAddress(d.titleAddress.BusinessAddressId).then(
-                prv.saveSuccess.bind(this)
-              );
-            }
-          },
-          isDirty: function() {
-            return $scope.titleSettings.$dirty;
-          },
-          validate: function() {
-            var title = $scope.title;
-            title.validation = angular.copy($scope.titleSettings);
-            return title.validation.$valid;
-          },
-          updateAddressSelection: function() {
-            var selectedId = this.dirtyData.titleAddress.BusinessAddressId;
-            for (var i = 0; i < this.dirtyData.addresses.length; i++) {
-              if (selectedId === this.dirtyData.addresses[i].BusinessAddressId) {
-                this.dirtyData.titleAddress = this.data.addresses[i];
-              }
-            }
-          },
-          toShortAddress: function(address) {
-            return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
-          }
-        };
-
         /** NOTIFICATIONS **/
         $scope.notifications = {
           data: {
@@ -307,7 +215,7 @@ angular.module('nextgearWebApp')
           save: function() {
             if (prv.save.apply(this)) {
               this.updateSelectedNotifications(this.dirtyData);
-              Settings.saveNotifications(prv.flattenNotifications(this.dirtyData.available)).then(
+              ProfileSettings.saveNotifications(prv.flattenNotifications(this.dirtyData.available)).then(
                 prv.saveSuccess.bind(this)
               );
             }
@@ -376,11 +284,5 @@ angular.module('nextgearWebApp')
       else {
         return '';
       }
-    };
-  })
-
-  .controller('ConfirmDisableCtrl', function($scope, dialog) {
-    $scope.close = function(result) {
-      dialog.close(result);
     };
   });

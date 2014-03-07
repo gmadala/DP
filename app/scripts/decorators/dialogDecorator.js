@@ -97,9 +97,14 @@ angular.module('nextgearWebApp')
           // actually has focus.
           var hiddenButton = angular.element('<button></button>')
             .css({
-              position: 'fixed',
-              left: '-100px',
-              top: '-100px'
+              position: 'absolute',
+              overflow: 'hidden',
+              clip: 'rect(0 0 0 0)',
+              width: '1px',
+              height: '1px',
+              margin: '-1px',
+              padding: '0',
+              border: '0'
             });
 
           // modalEl is wiped and replaced with new content after this point, so
@@ -125,7 +130,7 @@ angular.module('nextgearWebApp')
           doc.off('focusin')
           .on('focusin', function (e) {
 
-            if (which.modalEl!== e.target && !which.modalEl.has(e.target).length) {
+            if (which.modalEl[0]!== e.target && !which.modalEl.has(e.target).length) {
               // focus on first focusable element inside modal
               var focusable = which.modalEl.find('input, button, select, a:visible').first();
 
@@ -141,7 +146,9 @@ angular.module('nextgearWebApp')
         },
 
         messageBox: function(title, message, buttons) {
-          var msgBox = new OriginalMessageBox(title, message, buttons);
+          var msgBox = new OriginalMessageBox(title, message, buttons),
+              originalOpen = msgBox.open,
+              originalClose = msgBox.close;
 
           msgBox._addElementsToDom = function() {
             body.append(this.backdropEl);
@@ -153,8 +160,40 @@ angular.module('nextgearWebApp')
             this.backdropEl.remove();
           };
 
+          msgBox.open = function () {
+            var deferred = $q.defer();
+
+            currentlyOpen.push(msgBox);
+            originalOpen.apply(msgBox, arguments).then(
+              function(response) {
+                deferred.resolve(response);
+              }
+            );
+
+            if (currentlyOpen.length === 1) {
+              body.addClass('modal-open');
+
+              // Disable scrolling
+              angular.element(document).on('keydown', preventScrollingOnBody);
+            }
+            $delegate.enforceFocus.call(msgBox);
+
+            return deferred.promise;
+          };
+
+          msgBox.close = function () {
+            currentlyOpen = _.reject(currentlyOpen, msgBox);
+            originalClose.apply(msgBox, arguments);
+
+            if (currentlyOpen.length === 0) {
+              body.removeClass('modal-open');
+
+              // Re-enable scrolling
+              angular.element(document).off('keydown', preventScrollingOnBody);
+            }
+          };
+
           msgBox.modalEl.addClass('nxg-autofocus');
-          $delegate.enforceFocus.call(msgBox);
           return msgBox;
         }
 

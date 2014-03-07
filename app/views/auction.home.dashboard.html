@@ -27,10 +27,27 @@
           <td><span class="item-total">{{ dashboardData.ApprovedFloorplans }}</span></td>
           <td class="fl-label">Approved ({{ dashboardData.ApprovedFloorplanOutstandingAmount | currency }})</td>
         </tr>
+        <!-- VO-1230:
+          Remove Awaiting Titles row and replace with commented out portion.
+        -->
         <tr>
           <td><span class="item-total">{{ dashboardData.FloorplansAwaitingTitle }}</span></td>
           <td class="fl-label">Awaiting Titles ({{ dashboardData.FloorplansAwaitingTitleOutstandingAmount | currency }})</td>
         </tr>
+        <!-- TO BE ADDED WITH VO-1230:
+          <tr>
+            <td><span class="item-total ">{{ dashboardData.AwaitingTitleZeroToFifteenDays }}</span></td>
+            <td class="fl-label">Awaiting Titles 0-15 Days ({{ dashboardData.AwaitingTitleZeroToFifteenDaysAmount | currency }})</td>
+          </tr>
+          <tr>
+            <td><span class="item-total due-soon">{{ dashboardData.AwaitingTitleSixteenToThirtyDays }}</span></td>
+            <td class="fl-label">Awaiting Titles 16-30 Days ({{ dashboardData.AwaitingTitleSixteenToThirtyDaysAmount | currency }})</td>
+          </tr>
+          <tr>
+            <td><span class="item-total overdue">{{ dashboardData.AwaitingTitleOverThirtyDays }}</span></td>
+            <td class="fl-label">Awaiting Titles 30+ Days ({{ dashboardData.AwaitingTitleOverThirtyDaysAmount | currency }})</td>
+          </tr>
+        -->
         <tr>
           <td><span class="item-total">{{ dashboardData.PendingFloorplans }}</span></td>
           <td class="fl-label">Pending ({{ dashboardData.PendingFloorplansOutstandingAmount | currency }})</td>

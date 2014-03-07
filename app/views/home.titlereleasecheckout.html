@@ -1,0 +1,86 @@
+<section class="row-fluid">
+  <section class="span9">
+    <div class="well">
+      <h4>Title Release Confirmation</h4>
+
+      <div class="well-out">
+        <p>Please confirm your title release request(s) below.</p>
+        <p>All titles will be sent to the following address: <strong>123 Elm Street, Rochester, NY 14623</strong></p>
+      </div>
+    </div><!-- end .well -->
+
+    <div class="title-checkout-list" ng-switch="titleQueue.contents.length">
+      <!-- When there are no payments or fees -->
+     <p class="notice-box" ng-switch-when="0">
+        You have not selected any titles. Please visit the
+        <a href="#/home/titlereleases">Title Releases list</a> to select some.
+      </p>
+
+      <!-- When you have payments or fees in your cart -->
+      <section ng-switch-default>
+
+        <div>
+          <h3 class="boxed">Title Release Requests</h3>
+
+          <ul class="unstyled title-list">
+            <li class="table-list-head">
+              <div class="cell title-desc">Description</div>
+              <div class="cell title-vin">VIN</div>
+              <div class="cell title-stock">Stock #</div>
+              <div class="cell title-status">Status</div>
+            </li>
+
+            <li class="table-list-row" ng-repeat="item in titleQueue.contents">
+              <div class="cell title-desc">
+                <p>{{ getVehicleDescription(item) }}</p>
+                <p>
+                  Send To:
+                  <select id="" name="">
+                    <option class="disabled" disabled="disabled" value="">Make Selection</option>
+                    <option>Address 1</option>
+                    <option>Address 2</option>
+                  </select>
+                   <button class="btn-help"
+                          tooltip-placement="right"
+                          tooltip-trigger="click"
+                          tooltip-html="true"
+                          tooltip-html-unsafe="<h5>Alternate Title Address</h5><p>Something to go here</p>"
+                          tooltip-animation="true">?
+                  </button>
+                </p>
+              </div>
+              <div class="cell title-vin"><p>{{ item.UnitVIN | shortenVIN }}</p></div>
+              <div class="cell title-stock">
+               {{ item.StockNumber }}
+              </div>
+              <div class="cell title-status">
+                <p>{{ item.FloorplanStatusName }}</p>
+                <p><a ng-click="$parent.titleQueue.removeFromQueue(item)">Remove Title</a></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div><!-- end .title-checkout-list -->
+  </section><!-- end .span9 -->
+
+  <div class="span3 well request-summary sticky" nxg-sticky>
+    <h4>Title Release Summary</h4>
+    <div class="well-out">
+      <p><span class="emphasis">{{ titleQueue.contents.length }}</span> Title{{ {false: 's'}[titleQueue.contents.length == 1] }} Requested</p>
+
+      <hr/>
+
+      <p>Title Release Limits for this Account:<br/>
+      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed }}</span> title releases available.</p>
+
+      <hr/>
+
+      <div class="submit">
+        <button class="btn btn-primary" ng-click="onConfirmRequest()" ng-disabled="titleQueue.contents.length == 0">
+          Confirm Requests for Titles
+        </button>
+      </div>
+    </div><!-- end .well-out -->
+  </div>
+</section>

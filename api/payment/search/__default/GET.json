@@ -11,7 +11,7 @@
                 "BuyerBusinessId": "346",
                 "Vin": "CH224157",
                 "StockNumber": "34075",
-                "DaysOnFloorplan": "34",
+                "DaysOnFloorplan": 34,
                 "UnitDescription": "2008 Toyota Sequoia Limited Tan",
                 "UnitColor": "Purple",
                 "UnitStatus": "In Stock",
@@ -28,14 +28,17 @@
                 "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "FeesTotal": 11,
+                "InterestTotal": 12,
+                "Extendable": true
             },
             {
                 "FloorplanId": "2048",
                 "BuyerBusinessId": "346",
                 "Vin": "LL2469R6",
                 "StockNumber": "34076",
-                "DaysOnFloorplan": "34",
+                "DaysOnFloorplan": 34,
                 "UnitDescription": "2007 BMW 7-Series 750Li Black",
                 "UnitColor": "Purple",
                 "UnitStatus": "In Stock",
@@ -52,7 +55,10 @@
                 "WebScheduledPaymentId": "webScheduledPayment10235",
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "FeesTotal": 14,
+                "InterestTotal": 15,
+                "Extendable": false
             },
             {
                 "FloorplanId": "2047",
@@ -76,7 +82,10 @@
                 "WebScheduledPaymentId": null,
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
-                "FlooringDate": "2013-08-30"
+                "FlooringDate": "2013-08-30",
+                "FeesTotal": 16,
+                "InterestTotal": 17,
+                "Extendable": true
             }
         ]
     }

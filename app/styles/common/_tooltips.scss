@@ -37,6 +37,26 @@
     }
   }
 
+  &.top {
+    // more of a top tooltip with the arrow at the left side
+    margin: -6px 0 10px;
+
+    .tooltip-arrow {
+      left: 30px;
+      bottom: -4px;
+      border-top-color: $gray-b;
+
+      &:before {
+        left: 50%;
+        bottom: 1px;
+        margin-top: -$tooltipArrowWidth;
+        margin-left: -$tooltipArrowWidth;
+        border-width: $tooltipArrowWidth $tooltipArrowWidth 0 $tooltipArrowWidth;
+        border-top-color: $white;
+      }
+    }
+  }
+
   h5 { // for tooltip titles
     margin: 0 0 5px;
   }

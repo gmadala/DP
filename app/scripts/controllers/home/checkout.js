@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api) {
+
+    $scope.isCollapsed = true;
 
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
@@ -17,8 +19,9 @@ angular.module('nextgearWebApp')
           }, 0);
         },
         scheduledCount: function () {
-          var payments = $scope.paymentQueue.contents.payments; // fees are never scheduled
-          return _.reduce(payments, function (accumulator, value) {
+          var content = $scope.paymentQueue.contents,
+            merged = angular.extend({}, content.fees, content.payments);
+          return _.reduce(merged, function (accumulator, value) {
             if (value.scheduleDate) {
               accumulator += 1;
             }
@@ -36,8 +39,9 @@ angular.module('nextgearWebApp')
           }, 0);
         },
         scheduledTotal: function () {
-          var payments = $scope.paymentQueue.contents.payments; // fees are never scheduled
-          return _.reduce(payments, function (accumulator, value) {
+          var content = $scope.paymentQueue.contents,
+            merged = angular.extend({}, content.fees, content.payments);
+          return _.reduce(merged, function (accumulator, value) {
             if (value.scheduleDate) {
               accumulator += value.amount;
             }
@@ -61,9 +65,9 @@ angular.module('nextgearWebApp')
           !moment(payment.dueDate).isSame(moment(), 'day') &&
           !payment.scheduleBlocked;
       },
-      schedule: function (payment) {
-        payment.scheduleError = false;
-        payment.scheduleLoading = true;
+      schedule: function (item) {
+        item.scheduleError = false;
+        item.scheduleLoading = true;
 
         var dialogOptions = {
           backdrop: true,
@@ -72,18 +76,19 @@ angular.module('nextgearWebApp')
           templateUrl: 'views/modals/scheduleCheckout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
-            payment: function () { return payment; },
+            payment: function () { return item.isPayment && item; },
+            fee: function () { return item.isFee && item; },
             possibleDates: function () {
               var tomorrow = moment().add(1, 'day').toDate(),
-                dueDate = moment(payment.dueDate).toDate();
+                dueDate = moment(item.dueDate).toDate();
               return Payments.fetchPossiblePaymentDates(tomorrow, dueDate, true).then(
                 function (result) {
-                  payment.scheduleLoading = false;
+                  item.scheduleLoading = false;
                   if (!_.find(result)) {
-                    // no possible schedule dates for this payment (edge case, but could happen)
-                    payment.scheduleError = 'This payment cannot be scheduled';
-                    payment.scheduleBlocked = true;
-                    payment.scheduleDate = null;
+                    // no possible schedule dates for this item (edge case, but could happen)
+                    item.scheduleError = 'This ' + (item.isPayment ? 'payment' : 'fee') + ' cannot be scheduled';
+                    item.scheduleBlocked = true;
+                    item.scheduleDate = null;
                     return $q.reject();
                   }
                   return result;
@@ -91,8 +96,8 @@ angular.module('nextgearWebApp')
                   if (error.dismiss) {
                     error.dismiss();
                   }
-                  payment.scheduleLoading = false;
-                  payment.scheduleError = 'Error retrieving schedule information';
+                  item.scheduleLoading = false;
+                  item.scheduleError = 'Error retrieving schedule information';
                   return $q.reject(error);
                 }
               );
@@ -237,17 +242,21 @@ angular.module('nextgearWebApp')
             ejectedFees = [],
             ejectedPayments = [];
           // eject all fees since they cannot be scheduled
-          angular.forEach($scope.paymentQueue.contents.fees, function (fee) {
-            Payments.removeFeeFromQueue(fee.financialRecordId);
-            ejectedFees.push(fee);
-          });
+          // angular.forEach($scope.paymentQueue.contents.fees, function (fee) {
+          //   Payments.removeFeeFromQueue(fee.financialRecordId);
+          //   ejectedFees.push(fee);
+          // });
           // eject payments that can't be scheduled; auto-schedule any others not already scheduled
-          angular.forEach($scope.paymentQueue.contents.payments, function (payment) {
-            if (!$scope.paymentQueue.canSchedule(payment) || moment(payment.dueDate).isBefore(nextAvail, 'day')) {
-              Payments.removePaymentFromQueue(payment.floorplanId);
-              ejectedPayments.push(payment);
-            } else if (!payment.scheduleDate) {
-              payment.scheduleDate = nextAvail;
+          angular.forEach(angular.extend({}, $scope.paymentQueue.contents.payments, $scope.paymentQueue.contents.fees), function (item) {
+            if (!$scope.paymentQueue.canSchedule(item) || moment(item.dueDate).isBefore(nextAvail, 'day')) {
+              Payments.removeFromQueue(item);
+              if (item.isPayment) {
+                ejectedPayments.push(item);
+              } else {
+                ejectedFees.push(item);
+              }
+            } else if (!item.scheduleDate) {
+              item.scheduleDate = nextAvail;
             }
           });
           // tell the user what we did
@@ -268,5 +277,30 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
         }
       );
+    };
+
+    $scope.exportPaymentSummary = function() {
+      var feeIds = [],
+        paymentIds = [],
+        params = {};
+
+      angular.forEach($scope.paymentQueue.contents.fees, function(fee) {
+        feeIds.push(fee.financialRecordId);
+      });
+      angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
+        paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+      });
+
+      if (feeIds.length > 0) {
+        params.accountFees = feeIds.join(',');
+      }
+      if (paymentIds.length > 0) {
+        params.floorplans = paymentIds.join(',');
+      }
+
+      // build query string
+      var strUrl = api.contentLink('/report/payment/summary', params);
+
+      window.open(strUrl, '_blank' /*open in a new window*/);
     };
   });

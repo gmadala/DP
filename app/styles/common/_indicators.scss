@@ -65,7 +65,7 @@
     border: 1px solid $overdue;
   }
 
-  &.due-today {
+  &.due-today, &.due-soon {
     background-color: $today;
     border: 1px solid $today;
   }

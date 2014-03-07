@@ -1,7 +1,13 @@
 <section class="row-fluid">
   <section class="span9">
     <div class="well">
-      <h4>Payments Checkout</h4>
+      <h4>
+        Payments Checkout
+        <button class="btn btn-primary exp-pymt" ng-click="exportPaymentSummary()">
+          Export Payment Summary
+        </button>
+      </h4>
+
       <div class="well-out">
         <p>If you would like to schedule any of the payments, click the Schedule Payment Button to select date.</p>
       </div>
@@ -19,7 +25,7 @@
 
         <!-- Fees List -->
         <div ng-show="paymentQueue.sum.feeCount() > 0">
-          <h3 class="boxed">Fees</h3>
+          <h3 class="boxed">Account Fees</h3>
 
           <ul class="unstyled fees">
             <li class="table-list-head">
@@ -36,16 +42,16 @@
               <div class="cell fee-amt">
                 <p>
                   {{ fee.amount | currency }}
-                  <a ng-click="paymentQueue.removeFee(fee.financialRecordId)" class="remove" ng-disabled="submitInProgress">
+                  <button class="btn-unstyle btn-link remove" ng-click="paymentQueue.removeFee(fee.financialRecordId)" ng-disabled="submitInProgress">
                     Remove Fee
-                  </a>
+                  </button>
                 </p>
                 <!-- need to add button functionality, with VO-933 -->
                       <button class="btn btn-mini btn-block"
-                          ng-click=""
-                          ng-show="true"
-                          ng-disabled="false">
-                    {{ !payment.scheduleDate && 'Schedule Fee' || 'Edit Scheduled Fee' }}
+                          ng-click="paymentQueue.schedule(fee)"
+                          ng-show="paymentQueue.canSchedule(fee)"
+                          ng-disabled="fee.scheduleLoading || submitInProgress">
+                    {{ !fee.scheduleDate && 'Schedule Fee' || 'Edit Scheduled Fee' }}
                   </button>
               </div>
             </li>
@@ -54,10 +60,11 @@
 
         <!-- Payments List -->
         <div ng-show="paymentQueue.sum.paymentCount() > 0">
-          <h3 class="boxed">Payments</h3>
+          <h3 class="boxed">Vehicle Payments</h3>
 
           <ul class="unstyled payments">
             <li class="table-list-head">
+              <div class="cell pay-more"></div>
               <div class="cell pay-desc">Description</div>
               <div class="cell pay-due">Date Due</div>
               <div class="cell pay-status">Status</div>
@@ -65,6 +72,12 @@
             </li>
 
             <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
+              <div class="main-info">
+                <div class="cell pay-more">
+                  <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed">
+                    <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
+                  </button>
+                </div>
                 <div class="cell pay-desc">
                   <p>
                     <span class="sch-label">VIN: </span>
@@ -84,14 +97,14 @@
                 <div class="cell pay-pymt">
                   <p>
                     <strong>{{ payment.amount | currency }}</strong>
-                    <a class="remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
+                    <button class="btn-unstyle btn-link remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
                       Remove Payment
-                    </a>
+                    </button>
                   </p>
                   <p><!-- Need to update during MVC Integration, VO-927 -->
-                    Principal: $598.72<br/>
-                    Interest: $55.72<br/>
-                    Fees: $75.00
+                    Principal: {{payment.revenueToTrack | currency}} <br/>
+                    Interest: {{payment.interestTotal | currency}} <br/>
+                    Fees: {{payment.feesTotal | currency}}
                   </p>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"
@@ -101,6 +114,10 @@
                   </button>
                   <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>
                 </div>
+              </div><!-- end .main-info -->
+              <div collapse="isCollapsed" class="vehicle-details">
+                <div vehicle-details collapse="isCollapsed" stock-number="payment.stockNum"></div>
+              </div><!-- end .more-details -->
             </li>
           </ul>
         </div><!-- end Payments List -->
@@ -136,11 +153,11 @@
           <p class="chkout-label">Apply funds to payment?</p>
           <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
                  ng-value="false" ng-model="unappliedFunds.useFunds"
-                 ng-disabled="paymentQueue.sum.todayTotal() == 0">
+                 ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
           <label for="unappliedNo">No</label>
           <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
                  ng-value="true" ng-model="unappliedFunds.useFunds"
-                 ng-disabled="paymentQueue.sum.todayTotal() == 0">
+                 ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
           <label for="unappliedYes">Yes</label>
         </div>
 
@@ -155,6 +172,7 @@
                    nxg-max="unappliedFunds.max()"
                    ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?$/"
                    ng-required="unappliedFunds.useFunds"
+                   ng-disabled="submitInProgress"
                    ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
           </span>
           <label class="text-error" ng-show="validity.unappliedAmt.$error.required">

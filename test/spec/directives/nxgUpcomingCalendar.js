@@ -82,48 +82,6 @@ describe('Directive: nxgUpcomingCalendar', function () {
       expect(element.find('th').first().html()).toEqual('<b>Title1</b>');
       expect(element.find('th').last().html()).toEqual('<i>Title2</i>');
     });
-
-    it('should hide first row if all weekdays are in previous month', function() {
-      var viewMock = {
-        start: moment(),
-        end: moment()
-      },
-      scope = element.scope();
-      element = angular.element('<div><table><tbody><tr class="fc-week fc-first">'+
-                                '<td class="fc-other-month">Monday</td>'+
-                                '<td class="fc-other-month">Tuesday</td>'+
-                                '<td class="fc-other-month">Wednesday</td>'+
-                                '<td class="fc-other-month">Thursday</td>'+
-                                '<td class="fc-other-month">Friday</td>'+
-                                '</tr>'+
-                                '<tr class="fc-week">'+
-                                '</tr></tbody></table></div>');
-      scope.options.viewRender(viewMock, element);
-
-      expect(element.find('tr').first().hasClass('hide')).toBeTruthy();
-      expect(element.find('tr').last().hasClass('fc-first')).toBeTruthy();
-    });
-
-    it('should hide last row if all weekdays are in next month', function() {
-      var viewMock = {
-        start: moment(),
-        end: moment()
-      },
-      scope = element.scope();
-      element = angular.element('<div><table><tbody><tr class="fc-week"></tr>'+
-                                '<tr class="fc-week fc-last">'+
-                                '<td class="fc-other-month">Monday</td>'+
-                                '<td class="fc-other-month">Tuesday</td>'+
-                                '<td class="fc-other-month">Wednesday</td>'+
-                                '<td class="fc-other-month">Thursday</td>'+
-                                '<td class="fc-other-month">Friday</td>'+
-                                '</tr></tbody></table></div>');
-      scope.options.viewRender(viewMock, element);
-
-      expect(element.find('tr').last().hasClass('hide')).toBeTruthy();
-      expect(element.find('tr').first().hasClass('fc-last')).toBeTruthy();
-    });
-
   });
 
   describe('dayRender()', function () {

@@ -6,35 +6,34 @@
   <span class="glyphicon glyphicon-remove"></span>
 </div>
 
-<div class="modal-body search-controls">
-  <p>Your Top Auctions is a list of auctions and dealers that you have purchased at least two vehicles from in the past 12 months. For each auction, a breakdown is given which allows you to analyze which auctions or sellers are providing you with the best value on vehicle purchases.</p>
-</div>
+<div class="modal-body">
+  <p class="search-info">Your Top Auctions is a list of auctions and dealers that you have purchased at least two vehicles from in the past 12 months. For each auction, a breakdown is given which allows you to analyze which auctions or sellers are providing you with the best value on vehicle purchases.</p>
 
-<div class="modal-body search-results">
-
-  <div class="auction-title" ng-repeat="datum in data">
-    <h4>{{ datum.SellerName }}</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>Purchased</th>
-          <th>Avg Purchase Price</th>
-          <th>Avg NextGear Capital Book Value</th>
-          <th>Savings Per Purchase</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ datum.NumVehiclesAnalyzed }}</td>
-          <td>{{ datum.AvgPurchasePrice | currency }}</td>
-          <td>{{ datum.AvgBookValue | currency }}</td>
-          <td>{{ datum.AvgMarginBelowBookValue | currency }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="search-results">
+    <div class="auction-title" ng-repeat="datum in data">
+      <h4>{{ datum.SellerName }}</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Purchased</th>
+            <th>Avg Purchase Price</th>
+            <th>Avg NextGear Capital Book Value</th>
+            <th>Savings Per Purchase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ datum.NumVehiclesAnalyzed }}</td>
+            <td>{{ datum.AvgPurchasePrice | currency }}</td>
+            <td>{{ datum.AvgBookValue | currency }}</td>
+            <td>{{ datum.AvgMarginBelowBookValue | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <!-- -->
-</div>
+</div><!-- end .modal-body -->
+
 <div class="modal-footer">
   <button ng-click="close()" class="btn btn-mini btn-primary" >Close</button>
 </div>

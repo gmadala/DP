@@ -40,12 +40,9 @@
 
 .search-modal.search-modal-business {
   .modal-body {
-    padding: 12px;
     margin: 12px 12px 0 12px;
-    border: 1px solid #eaeaea;
 
     &.search-results {
-      height: 400px;
       border-bottom: 1px solid #eaeaea;
       margin: -1px 12px 12px 12px;
     }
@@ -64,14 +61,6 @@
 .floor-confirmation-modal {
   width: 480px;
   margin-left: -240px;
-
-  &.modal {
-    top: 10%;
-  }
-
-  .modal-body {
-    max-height: 440px;
-  }
 
   .floor-confirmation {
     border: 1px solid $border;

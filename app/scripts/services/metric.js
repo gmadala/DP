@@ -3,8 +3,12 @@
 angular.module('nextgearWebApp')
   .value('metric', {
     // Account/Support
-    VIEW_SETTINGS: 'View Settings',
-    CHANGE_SETTINGS: 'Change Settings',
+    VIEW_PROFILE_SETTINGS: 'View Profile Settings',
+    CHANGE_PROFILE_SETTINGS: 'Change Profile Settings',
+    VIEW_ACCOUNT_MANAGEMENT: 'View Account Management',
+    CHANGE_ACCOUNT_MANAGEMENT: 'Change Account Management',
+    VIEW_AUCTION_SETTINGS: 'View Auction Settings',
+    CHANGE_AUCTION_SETTINGS: 'Change Auction Settings',
     // Analytics & Reports
     VIEW_ANALYTICS_DASHBOARD: 'View Analytics Dashboard',
     VIEW_ALL_TOP_AUCTIONS: 'View All Top Auctions',

@@ -44,6 +44,19 @@ angular.module('nextgearWebApp')
       angular.element('.dash-calendar').fullCalendar('today');
     };
 
+    $scope.onRequestCredIncr = function() {
+      var dialogOptions = {
+        dialogClass: 'modal request-credit-increase',
+        backdrop: true,
+        keyboard: false,
+        backdropClick: false,
+        templateUrl: 'views/modals/requestCreditIncrease.html',
+        controller: 'RequestCreditIncreaseCtrl'
+      };
+
+      $dialog.dialog(dialogOptions).open();
+    };
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a

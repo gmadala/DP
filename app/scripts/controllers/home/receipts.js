@@ -37,6 +37,7 @@ angular.module('nextgearWebApp')
       $scope.receipts.searchCriteria = angular.copy($scope.receipts.proposedSearchCriteria);
 
       $scope.receipts.fetchNextResults();
+      $scope.selectedReceipts = []; // reset selected receipts array
     };
 
     $scope.receipts.fetchNextResults = function () {

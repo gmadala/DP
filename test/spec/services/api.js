@@ -386,7 +386,7 @@ describe('Service: api', function () {
       spyOn(user, 'isLoggedIn').andReturn(true);
       api.setAuth({ Token: 'SECRET' });
       var url = api.contentLink('/foo/bar', {param1: 'value1'});
-      expect(url).toBe('http://example.com/api/foo/bar?param1=value1&AuthToken=SECRET');
+      expect(url).toBe('http://example.com/api/foo/bar?AuthToken=SECRET&param1=value1');
     });
   });
 

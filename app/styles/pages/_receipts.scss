@@ -1,17 +1,16 @@
 // Receipts
 
 .cell {
-  &.rec-print { width: 7%; }
   &.rec-num { width: 10%; }
   &.rec-status { width: 9%; }
   &.rec-payDate { width: 14%; }
-  &.rec-payInfo { width: 19%; }
+  &.rec-payInfo { width: 18%; }
   &.rec-amtApplied { width: 15%; }
   &.rec-amtProvided { width: 15%; }
-  &.rec-view { width: 10%; }
+  &.rec-view { width: 18%; }
 }
 
-.rec-print {
+.rec-view {
   text-align: center;
 
   input + label {

@@ -34,6 +34,13 @@
         <a href="http://www.nextgearcapital.com/privacy_policy.php" target="_blank">Privacy Statement</a> | <a href="http://www.nextgearcapital.com/contact.php" target="_blank">Contact Us</a>
     </footer>
 
+    <!-- Bypass to Clicky's eventqueue cookie issue  -->
+    <script type="text/javascript">
+        var clicky_custom = clicky_custom || {};
+        clicky_custom.queue_disable = 1;
+    </script>
+    <!-- End Bypass to Clicky's eventqueue cookie issue  -->
+
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
     <script src="components/jquery/jquery.js"></script>
@@ -97,7 +104,10 @@
     <script src="scripts/models/dealerNameSearch.js"></script>
     <script src="scripts/models/dealerNumberSearch.js"></script>
     <script src="scripts/models/creditQuery.js"></script>
-    <script src="scripts/models/settings.js"></script>
+    <script src="scripts/models/profileSettings.js"></script>
+    <script src="scripts/models/accountManagement.js"></script>
+    <script src="scripts/models/creditIncrease.js"></script>
+    <script src="scripts/models/titleReleases.js"></script>
 
     <script src="scripts/controllers/analytics.js"></script>
     <script src="scripts/controllers/documents.js"></script>
@@ -109,11 +119,14 @@
     <script src="scripts/controllers/home/scheduledPayments.js"></script>
     <script src="scripts/controllers/home/receipts.js"></script>
     <script src="scripts/controllers/home/floorplan.js"></script>
+    <script src="scripts/controllers/home/titleReleases.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/loginRecover.js"></script>
     <script src="scripts/controllers/loginUpdateSecurity.js"></script>
     <script src="scripts/controllers/reports.js"></script>
-    <script src="scripts/controllers/settings.js"></script>
+    <script src="scripts/controllers/auctionSettings.js"></script>
+    <script src="scripts/controllers/profileSettings.js"></script>
+    <script src="scripts/controllers/accountManagement.js"></script>
     <script src="scripts/controllers/businessSearch.js"></script>
     <script src="scripts/controllers/topAuctions.js"></script>
     <script src="scripts/controllers/auction.dashboard.js"></script>
@@ -126,11 +139,15 @@
     <script src="scripts/controllers/home/checkout.js"></script>
     <script src="scripts/controllers/home/confirmCheckout.js"></script>
     <script src="scripts/controllers/home/scheduleCheckout.js"></script>
+    <script src="scripts/controllers/home/titleReleaseCheckout.js"></script>
+    <script src="scripts/controllers/home/confirmTitleReleaseCheckout.js"></script>
     <script src="scripts/controllers/cancelPayment.js"></script>
+    <script src="scripts/controllers/cancelFee.js"></script>
     <script src="scripts/controllers/afterHoursCheckout.js"></script>
     <script src="scripts/controllers/dealerNameSearch.js"></script>
     <script src="scripts/controllers/creditQuery.js"></script>
     <script src="scripts/controllers/confirmLogout.js"></script>
+    <script src="scripts/controllers/requestCreditIncrease.js"></script>
 
     <script src="scripts/directives/navBar/navBar.js"></script>
     <script src="scripts/directives/tooltip.js"></script>
@@ -140,7 +157,9 @@
     <script src="scripts/directives/nxgBlur.js"></script>
     <script src="scripts/directives/nxgFocus.js"></script>
     <script src="scripts/directives/nxgRequires.js"></script>
-    <script src="scripts/directives/nxgDeformatNumber.js"></script>
+    <script src="scripts/directives/nxgValidateInt.js"></script>
+    <script src="scripts/directives/nxgGreaterThan.js"></script>
+    <script src="scripts/directives/nxgInputCurrency.js"></script>
     <script src="scripts/directives/nxgDateField/nxgDateField.js"></script>
     <script src="scripts/directives/nxgUpcomingCalendar/nxgUpcomingCalendar.js"></script>
     <script src="scripts/directives/nxgChart/nxgChart.js"></script>
@@ -154,6 +173,7 @@
     <script src="scripts/directives/nxgFillHeight.js"></script>
     <script src="scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js"></script>
     <script src="scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js"></script>
+    <script src="scripts/directives/nxgRequestsSummary/nxgRequestsSummary.js"></script>
     <script src="scripts/directives/nxgActivity/nxgActivity.js"></script>
     <script src="scripts/directives/nxgMessages/nxgMessages.js"></script>
     <script src="scripts/directives/nxgAutofocus.js"></script>

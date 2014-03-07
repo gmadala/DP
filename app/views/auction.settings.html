@@ -1,0 +1,269 @@
+<div class="container-line">
+  <div class="container-fluid settings profile">
+    <div class="row-fluid two-col">
+
+      <!-- USER PROFILE -->
+      <section class="span8 well adjacent" ng-controller="ProfileSettingsCtrl">
+        <h4>User Profile</h4>
+        <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()">Cancel</button>
+        <button ng-show="profile.editable" class="btn save-btn" ng-click="profile.save()">Save</button>
+
+        <div class="well-out">
+
+          <form class="settings-opts" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
+            <div class="control-group">
+              <label class="control-label" for="setUsername">User Name</label>
+              <div class="controls" nxg-input model="profile.data.username" editable="profile.editable">
+                <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
+              </div>
+              <div for="setUsername" class="text-error"
+                     ng-show="profile.validation.setUsername.$error.required">
+                  Please enter a User Name.
+              </div>
+              <div for="setUsername" class="text-error"
+                     ng-show="profile.validation.setUsername.$error.maxlength">
+                  Please enter a User Name that is 40 characters or less.
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="setPassword"><span ng-show="editable">New </span>Password</label>
+              <div class="static" ng-hide="profile.editable">***********</div>
+              <div class="controls" ng-show="profile.editable">
+                <input type="password" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
+                  <button class="btn-help"
+                          tooltip-placement="right"
+                          tooltip-trigger="click"
+                          tooltip-html="true"
+                          tooltip-html-unsafe="<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
+                          tooltip-animation="true">?</button>
+              </div>
+              <div class="text-error" ng-show="profile.validation.setPassword.$error.pattern">
+                  Please enter a valid password.
+              </div>
+            </div>
+
+            <div class="control-group" ng-show="profile.editable">
+              <label class="control-label" for="confirmPassword">Confirm Password</label>
+              <div class="controls">
+                <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
+              </div>
+              <div class="text-error" ng-show="profile.validation.setPassword.$error.nomatch">
+                  The passwords do not match. Please re-enter the password.
+              </div>
+            </div>
+
+            <div ng-repeat="question in profile.data.questions" ng-hide="profile.editable">
+                <!-- Question Select -->
+                <div class="control-group">
+                    <label class="control-label">Security Question {{$index + 1}}</label>
+                    <div class="static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
+                </div>
+            </div>
+
+            <div ng-repeat="question in profile.dirtyData.questions" ng-show="profile.editable">
+                <!-- Question Select -->
+                <div class="control-group">
+                  <label class="control-label">Security Question {{$index + 1}}</label>
+                    <select ng-model="question.SecurityQuestionId"
+                            ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
+                            tooltip="{{ question.QuestionText }}"
+                            tooltip-placement="right"
+                            tooltip-popup-delay="700">
+                    </select>
+                </div>
+                <!-- Answer -->
+                <div class="control-group" ng-show="profile.editable">
+                    <label class="control-label" for="secAnswer">Answer</label>
+                    <div class="controls">
+                        <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
+                    </div>
+                    <div class="text-error" ng-show="question.$error.required">
+                        Please enter an Answer.
+                    </div>
+                    <div class="text-error" ng-show="question.$error.maxLength">
+                        Please enter an Answer that is a maximum of 100 characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="email">Email</label>
+              <div class="controls" nxg-input model="profile.data.email" editable="profile.editable">
+                <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
+                <div class="text-error" ng-show="profile.validation.email.$invalid">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="phone">Phone</label>
+              <div class="controls" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
+                <input type="tel"
+                       name="phone"
+                       ng-model="profile.dirtyData.phone"
+                       ng-pattern="phonePattern"
+                       size="10"
+                       ng-class="{ 'nxg-invalid': profile.validation.phone.$error.pattern }" />
+                  <div class="text-error" ng-show="profile.validation.phone.$error.pattern">
+                      Please enter a valid phone number.
+                  </div>
+              </div>
+            </div>
+
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
+
+      <!-- BUSINESS SETTINGS -->
+      <section class="span8 well adjacent" novalidate ng-controller="AccountManagementCtrl">
+        <h4>Business Settings</h4>
+        <button ng-hide="business.editable" class="btn edit-btn" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="business.editable" class="btn cancel-btn" ng-click="business.cancel()">Cancel</button>
+        <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable:business.editable }" name="busSettings">
+            <div class="control-group">
+              <label class="control-label business" for="businessEmail">Business Email</label>
+              <div class="controls" nxg-input model="business.data.email" editable="business.editable">
+                <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
+                <div class="text-error" ng-show="business.validation.businessEmail.$invalid">
+                    Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label business" for="enhanced">Enhanced Registration Enabled?</label>
+
+              <!-- Show "Yes" if enhanced registration is enabled.
+              If it is not enabled, show nothing. -->
+              <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+
+              <div class="controls form-inline nxg-radios" ng-show="business.editable">
+                <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
+                <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
+                <label for="enhancedNo">No</label>
+                <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
+                <label for="enhancedYes">Yes</label>
+              </div>
+            </div>
+
+            <div class="control-group" ng-show="business.editable">
+              <div class="enhanced-info">
+                <p>Enhanced Registration will result in all account access being restricted to users with a PIN.</p>
+                <p>All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
+                <p>Create your Enhanced Registration four digit PIN.</p>
+              </div>
+
+              <label class="control-label business">Enhanced Registration PIN</label>
+
+              <div class="controls">
+                <input type="text"
+                       name="pin"
+                       ng-model="business.dirtyData.enhancedRegistrationPin"
+                       ng-disabled="!business.dirtyData.enhancedRegistrationEnabled"
+                       ng-pattern="/^\d{4}$/"
+                       ng-required="business.dirtyData.enhancedRegistrationEnabled"
+                       ng-class="{ 'nxg-invalid': business.validation.pin.$invalid }" />
+                <p class="text-error" ng-show="business.validation.pin.$invalid">
+                    Your PIN must consist of four numbers, no letters or special characters.
+                </p>
+              </div>
+            </div>
+
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
+    </div><!-- end .row-fluid.two-col -->
+
+    <div class="row-fluid two-col">
+      <!-- TITLE SETTINGS -->
+      <section class="span8 well adjacent" ng-controller="AccountManagementCtrl">
+        <h4>Title Settings</h4>
+        <button ng-hide="title.editable" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
+        <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable:title.editable }"name="titleSettings">
+            <div class="control-group">
+              <label class="control-label" for="titleAddr">Address</label>
+              <div class="controls" ng-show="title.editable">
+                <select ng-model="title.dirtyData.titleAddress"
+                        ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
+                        tooltip="{{ addr.ShortAddress }}"
+                        tooltip-placement="right"
+                        tooltip-popup-delay="700">
+                </select>
+                <button class="btn-help"
+                  tooltip-placement="right"
+                  tooltip-trigger="click"
+                  tooltip-html="true"
+                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
+                  tooltip-animation="true">?</button>
+              </div>
+              <!-- Saved Address -->
+              <div class="controls static" ng-hide="title.editable">
+                  <p>{{title.data.titleAddress.Line1}}<br/>
+                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}<br/></span>
+                  {{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}</p>
+              </div>
+              <!-- Current Address Selection-->
+              <div class="controls static" ng-show="title.editable">
+                  <p>{{title.dirtyData.titleAddress.Line1}}<br/>
+                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}<br/></span>
+                  {{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</p>
+              </div>
+            </div>
+          </form>
+        </div><!-- end .well-out -->
+      </section><!-- end .span8.well.adjacent -->
+
+      <!-- NOTIFICATIONS -->
+      <section class="span8 well adjacent" ng-controller="ProfileSettingsCtrl">
+        <h4>Notifications</h4>
+        <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+        <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()">Cancel</button>
+        <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()">Save</button>
+
+        <div class="well-out">
+          <form class="settings-opts" ng-class="{ editable:notifications.editable }" name="notificationSettings">
+            <div class="head-labels">
+              <label>Notifications</label>
+              <label ng-hide="notifications.editable">Delivery Type</label>
+            </div>
+
+            <div class="control-group">
+              <div class="controls notifications">
+                <ul class="unstyled">
+                  <li class="notification" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable">
+                    <div class="n-title">{{ n.NotificationName }}</div>
+                    <ul class="inner">
+                      <li class="read-only" ng-repeat="d in n.DeliveryMethods">
+                        {{ d.DeliveryMethodName }}
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Edit -->
+                  <li class="notification" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
+                    <div class="n-title">{{ n.Name }}</div>
+                    <ul class="inner">
+                      <li class="read-only" ng-repeat="d in n.DeliveryMethods">
+                        <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
+                        <label for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section><!-- end .span8.well.adjacent -->
+    </div><!-- end .row-fluid.two-col -->
+  </div><!-- end .container-fluid.settings -->
+</div><!-- end .container-line -->

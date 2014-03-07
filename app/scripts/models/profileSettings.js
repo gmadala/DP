@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Settings', function($q, api, User) {
+  .factory('ProfileSettings', function($q, api, User) {
 
     var prv = {
       getQuestionText: function(id, questions) {
@@ -35,6 +35,8 @@ angular.module('nextgearWebApp')
               questions = responses[1],
               i;
 
+            settings.BusinessEmail = undefined;
+
             // add available notifications
             settings.AvailableNotifications = responses[2];
 
@@ -45,12 +47,6 @@ angular.module('nextgearWebApp')
             }
             settings.AllSecurityQuestions = questions;
 
-            for (i = 0; i < settings.Addresses.length; i++) {
-              var addr = settings.Addresses[i];
-              if (addr.IsTitleReleaseAddress) {
-                settings.CurrentTitleReleaseAddress = addr;
-              }
-            }
             return settings;
           });
       },
@@ -74,22 +70,6 @@ angular.module('nextgearWebApp')
           req.Password = password;
         }
         return api.request('POST', '/UserAccount/usersettings', req);
-      },
-      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
-        var req = {
-          BusinessEmailAddress: email,
-          EnhancedRegistrationEnabled: enhancedRegEnabled
-        };
-        if (enhancedRegEnabled) {
-          req.EnhancedRegistrationPin = enhancedRegPin;
-        }
-        return api.request('POST', '/UserAccount/businessSettings', req);
-      },
-      saveTitleAddress: function(addressId) {
-        var req = {
-          TitleReleaseAddressId: addressId
-        };
-        return api.request('POST', '/UserAccount/titleSettings', req);
       },
       saveNotifications: function(notifications) {
         return api.request('POST', '/UserAccount/notificationSettings', notifications);

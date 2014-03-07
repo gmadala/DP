@@ -58,6 +58,19 @@ describe('Controller: ScheduledCtrl', function () {
       },
       hasMoreRecords: function() {
         return false;
+      },
+      fetchFees: function() {
+        return {
+          then: function(success) {
+            success([{
+              WebScheduledAccountFeeId: '',
+              Description: '',
+              ScheduledDate: '',
+              Balance: '',
+              FeeType: ''
+            }]);
+          }
+        };
       }
     },
     paymentsMock = {
@@ -92,6 +105,11 @@ describe('Controller: ScheduledCtrl', function () {
     userMock = {
       isLoggedIn: function() {
         return true;
+      },
+      getInfo: function() {
+        return {
+          businessId: "12345"
+        }
       }
     };
 
@@ -109,8 +127,9 @@ describe('Controller: ScheduledCtrl', function () {
     });
   }));
 
-  it('should attach scheduledPayments.results to the scope', function () {
+  it('should attach scheduledPayments.results and fees.results to the scope', function () {
     expect(scope.scheduledPayments.results).toBeDefined();
+    expect(scope.fees.results).toBeDefined();
   });
 
   it('should attach scheduledPayments.searchCriteria to the scope', function () {
@@ -125,51 +144,74 @@ describe('Controller: ScheduledCtrl', function () {
     expect(scope.isCollapsed).toBeDefined();
   });
 
-  describe('sortBy function', function(){
-    it('should have a sortBy function', function(){
-      expect(typeof scope.sortBy).toEqual('function');
+  describe('__sortBy function', function(){
+    it('should have a __sortBy function', function(){
+      expect(typeof scope.__sortBy).toEqual('function');
     });
 
-    it('should set sortField properly', function(){
-      scope.sortBy('fieldA');
-      expect(scope.sortField).toEqual('fieldA');
+    var testSortField = function(feeOrPayment){
+      it('should set sortField properly', function(){
+        scope.__sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
 
-      scope.sortBy('fieldB');
-      expect(scope.sortField).toEqual('fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
 
-      scope.sortBy('fieldB');
-      expect(scope.sortField).toEqual('fieldB');
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldB');
 
-      scope.sortBy('fieldA');
-      expect(scope.sortField).toEqual('fieldA');
+        scope.__sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortField[feeOrPayment]).toEqual('fieldA');
+      });
+
+      it('should set sortDescending true only if __sortBy is called consecutively with the same field name', function(){
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
+
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.__sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+
+        scope.__sortBy(feeOrPayment, 'fieldA');
+        expect(scope.sortDescending[feeOrPayment]).toBeTruthy();
+        scope.__sortBy(feeOrPayment, 'fieldB');
+        expect(scope.sortDescending[feeOrPayment]).toBeFalsy();
+      });
+    };
+    testSortField('payment');
+    testSortField('fee');
+  });
+
+  describe('sortFeesBy function', function(){
+    it('should not call search() for fee search', function(){
+      spyOn(scope.scheduledPayments, 'search');
+      scope.sortFeesBy('fieldA');
+      expect(scope.scheduledPayments.search).not.toHaveBeenCalled();
     });
 
-    it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
-      scope.sortBy('fieldB');
-      expect(scope.sortDescending).toBeFalsy();
-
-      scope.sortBy('fieldB');
-      expect(scope.sortDescending).toBeTruthy();
-
-      scope.sortBy('fieldB');
-      expect(scope.sortDescending).toBeFalsy();
-
-      scope.sortBy('fieldA');
-      expect(scope.sortDescending).toBeFalsy();
-
-      scope.sortBy('fieldA');
-      expect(scope.sortDescending).toBeTruthy();
-
-      scope.sortBy('fieldB');
-      expect(scope.sortDescending).toBeFalsy();
+    it('should call __sortBy with a "fee" argument', function() {
+      spyOn(scope, '__sortBy').andCallThrough();
+      scope.sortFeesBy('fieldA');
+      expect(scope.__sortBy).toHaveBeenCalledWith('fee', 'fieldA');
     });
-
+  });
+  describe('sortPaymentsBy function', function(){
     it('should call search()', function(){
       spyOn(scope.scheduledPayments, 'search');
-      scope.sortBy('fieldA');
+      scope.sortPaymentsBy('fieldA');
       expect(scope.scheduledPayments.search).toHaveBeenCalled();
     });
 
+    it('should call __sortBy with a "payment" argument', function() {
+      spyOn(scope, '__sortBy').andCallThrough();
+      scope.sortPaymentsBy('fieldA');
+      expect(scope.__sortBy).toHaveBeenCalledWith('payment', 'fieldA');
+    });
   });
 
   describe('loadMoreData function', function() {
@@ -271,6 +313,15 @@ describe('Controller: ScheduledCtrl', function () {
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
     scope.scheduledPayments.cancelPayment();
+    expect(dialog.dialog).toHaveBeenCalled();
+  });
+
+  it('should have a cancelFee function that opens a dialog', function() {
+    expect(scope.scheduledPayments.cancelFee).toBeDefined();
+    expect(typeof scope.scheduledPayments.cancelFee).toBe('function');
+
+    spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
+    scope.scheduledPayments.cancelFee();
     expect(dialog.dialog).toHaveBeenCalled();
   });
 });

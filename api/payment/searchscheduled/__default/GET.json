@@ -31,7 +31,9 @@
         "ScheduledPaymentAmount": 14098.00,
         "CurrentPayoff": 23211.98,
         "PrincipalPayoff": 84022,
-        "SetupDate": "2013-08-01"
+        "SetupDate": "2013-08-01",
+        "FlooringDate": "2013-09-31",
+        "DaysOnFloorplan": 28
       },
       {
         "WebScheduledPaymentId": "1004",
@@ -58,7 +60,9 @@
         "ScheduledPaymentAmount": 3098.00,
         "CurrentPayoff": 54551.98,
         "PrincipalPayoff": 34022,
-        "SetupDate": "2013-06-06"
+        "SetupDate": "2013-06-06",
+        "FlooringDate": "2013-08-30",
+        "DaysOnFloorplan": 30
       },
       {
         "WebScheduledPaymentId": "1005",
@@ -85,7 +89,9 @@
         "ScheduledPaymentAmount": 4098.00,
         "CurrentPayoff": 188211.98,
         "PrincipalPayoff": 52131.50,
-        "SetupDate": "2013-03-28"
+        "SetupDate": "2013-03-28",
+        "FlooringDate": "2013-09-03",
+        "DaysOnFloorplan": 26
       },
       {
         "WebScheduledPaymentId": "1006",
@@ -112,7 +118,9 @@
         "ScheduledPaymentAmount": 40498.00,
         "CurrentPayoff": 84545.00,
         "PrincipalPayoff": 131455.15,
-        "SetupDate": "2013-03-28"
+        "SetupDate": "2013-03-28",
+        "FlooringDate": "2013-09-08",
+        "DaysOnFloorplan": 22
       }
     ]
   }

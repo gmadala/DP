@@ -26,11 +26,19 @@ angular.module('nextgearWebApp')
             termPlanName: r.TermPlanName,
             productType: r.ProductType,
             seller: r.SellerName,
+            sellerAddressLine1: r.SellerAddressLine1,
+            sellerAddressLine2: r.SellerAddressLine2,
+            sellerAddressCity: r.SellerAddressCity,
+            sellerAddressState: r.SellerAddressState,
+            sellerAddressZip: r.SellerAddressZip,
             titleLocation: r.TitleLocation,
             titleState: r.TitleState,
             trackingNumber: r.TrackingNumber,
             disbursementDate: r.DisbursementDate,
-            curtailments: r.Curtailments
+            interestAccrued: r.interestAccrued,
+            interestApplied: r.interestApplied,
+            feesAccrued: r.feesAccrued,
+            feesApplied: r.feesApplied
           };
         });
       }

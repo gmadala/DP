@@ -45,6 +45,8 @@ angular.module('nextgearWebApp')
                 principalPayoff: item.PrincipalPayoff,
                 curtailmentDueDate: item.CurtailmentDueDate,
                 scheduledBy: item.ScheduledByUserDisplayname,
+                flooringDate: item.FlooringDate,
+                daysOnFloorplan: item.DaysOnFloorplan,
                 receiptURL: prv.getReceiptURL(item),
                 data: {query: request.Keyword}
               });
@@ -157,7 +159,9 @@ angular.module('nextgearWebApp')
         }
         return prv.request(lastRequest);
       },
-
+      fetchFees: function() {
+        return api.request('GET', '/payment/scheduledAccountFees/');
+      },
       loadMoreData: function() {
         if (lastRequest === null) {
           return this.search();

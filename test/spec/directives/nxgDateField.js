@@ -38,13 +38,25 @@ describe('Directive: nxgDateField', function () {
   describe('edge case', function () {
 
     it('should fill current date on keydown enter if empty', function () {
+
       scope.bar = undefined;
       var input = element.find('input');
+      element.children().trigger($.Event('show'));
+      scope.$digest();
       input.val('');
       input.trigger($.Event( "keydown", { keyCode: 13 } ));
       scope.$digest();
       expect(scope.bar).toBeDefined();
       expect(moment(new Date()).diff(scope.bar, 'days')).toEqual(0);
+    });
+
+    it('should set invalid if non-date is entered into field on blur', function () {
+      scope.bar = new Date(2013, 0, 1);
+      scope.$digest();
+      var input = element.find('input');
+      input.val('foofers');
+      input.trigger('blur')
+      expect(scope.form.$error.date).toBeTruthy();
     });
 
   });

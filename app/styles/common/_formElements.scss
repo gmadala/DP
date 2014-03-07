@@ -454,6 +454,14 @@ label.input-title {
     }
   }
 
+  table tr td.active:hover,
+  table tr td.active,
+  table tr td.disabled.active:hover,
+  table tr td.disabled.active,
+  table tr td.active.disabled.active,
+  table tr td.active:active,
+  table tr td.active:hover:active,
+
   table tr td.day.active,
   table tr td span.month.active,
   table tr td span.year.active {
