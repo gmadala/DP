@@ -86,6 +86,7 @@
                     {{ payment.stockNum }}
                   </p>
                   <p>{{ payment.description }}</p>
+                  <div nxg-alternate-address="payment"></div>
                 </div>
                 <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
                 <div class="cell pay-status">
@@ -101,7 +102,7 @@
                       Remove Payment
                     </button>
                   </p>
-                  <p><!-- Need to update during MVC Integration, VO-927 -->
+                  <p>
                     Principal: {{payment.revenueToTrack | currency}} <br/>
                     Interest: {{payment.interestTotal | currency}} <br/>
                     Fees: {{payment.feesTotal | currency}}

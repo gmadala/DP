@@ -113,7 +113,8 @@ angular.module('nextgearWebApp')
           isPayoff: asPayoff,
           revenueToTrack: revenue,
           interestTotal: interestTotal,
-          feesTotal: feesTotal
+          feesTotal: feesTotal,
+          overrideAddress: null
         };
         paymentQueue.payments[floorplanId] = payment;
         segmentio.track(metric.ADD_TO_BASKET);

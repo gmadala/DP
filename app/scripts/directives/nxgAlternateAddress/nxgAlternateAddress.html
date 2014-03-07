@@ -1,0 +1,6 @@
+<div class="nxg-alt-addr" ng-show="canChangeTitleAddress() && addrLoaded">
+  <a ng-hide="showSelectMenu" class="alt-addr-link" ng-click="onClickAddress()" href="javascript:void(0)">Send Title to a Different Address?</a>
+  <select ng-show="showSelectMenu"
+  ng-model="selectedAddress"
+  ng-options="toShortAddress(addr) for addr in addrList"></select>
+</div>

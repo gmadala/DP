@@ -254,7 +254,6 @@
   }
 
   .pay-sum-footer {
-
     padding: 6px 15px 15px 15px;
     background: $well-out-bkgd;
     margin: 15px -15px -15px -15px;
@@ -285,4 +284,15 @@
   margin-bottom: 0;
 }
 
+.alt-addr-link {
+  font-size: $tiny-font-size;
+  display: block;
+  clear: both;
+  border: 0;
+  padding: 5px 0;
+}
 
+.nxg-alt-addr select {
+  @extend %full-width;
+  margin: 10px 0 5px;
+}
