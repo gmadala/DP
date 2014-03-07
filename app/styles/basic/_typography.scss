@@ -40,6 +40,12 @@ label {
   &:first-child {
     margin-top: 0;
   }
+
+  // but allow pointers on labels if we explicitly want them
+  &.pointer {
+    cursor: pointer;
+  }
+
 }
 
 // looks like h4s in .well, but isn't part of .well
