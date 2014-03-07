@@ -3,7 +3,12 @@
 angular.module('nextgearWebApp')
   .factory('TitleReleases', function(api) {
 
-    var eligibility = api.request('GET', '/dealer/getTitleReleaseEligibility');
+    var eligibility;
+
+    var cacheEligibility = function() {
+      eligibility = api.request('GET', '/dealer/getTitleReleaseEligibility');
+    };
+    cacheEligibility();
 
     var queue = [];
 
@@ -55,7 +60,13 @@ angular.module('nextgearWebApp')
           TitleReleaseFloorplans: floorplans
         };
 
-        return api.request('POST', '/Floorplan/RequestTitleRelease', data);
+        return api.request('POST', '/Floorplan/RequestTitleRelease', data).then(function(response) {
+
+          // Re-run the eligibility request
+          cacheEligibility();
+
+          return response;
+        });
       }
 
     };
