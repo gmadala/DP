@@ -158,8 +158,12 @@ angular.module('nextgearWebApp')
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
           /*jshint camelcase: false */
+
           if (hasTitle) { // show the tooltip for 5 seconds, then fade
-            $timeout(function() {
+            if ($scope.sellerTimeout) {
+              $timeout.cancel($scope.sellerTimeout);
+            }
+            $scope.sellerTimeout = $timeout(function() {
               angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
             }, 5000);
           } else { // make sure tooltip doesn't show if auction user doesn't have title
