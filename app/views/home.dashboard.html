@@ -72,7 +72,7 @@
           <span ng-pluralize
                 count="dashboardData.UpcomingPayments"
                 when="{'1': 'Payment', 'other': 'Payments'}"></span>
-          <span>This {{ viewMode | lowercase }}</span>
+          <span>This {{ viewMode | capitalize }}</span>
           <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
         </li>
         <li>
