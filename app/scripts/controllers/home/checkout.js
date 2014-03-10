@@ -184,16 +184,7 @@ angular.module('nextgearWebApp')
         }
       });
 
-      var overridePromise;
-      if (paymentsToOverride.length > 0) {
-        // grab the promise for the api call
-        overridePromise = Floorplan.overrideCompletionAddress(paymentsToOverride);
-      } else {
-        // if we don't need to override any addresses, set equal to pre-resolved promise
-        overridePromise = $q.when(true);
-      }
-
-      overridePromise.then(function() {
+      Floorplan.overrideCompletionAddress(paymentsToOverride).then(function() {
         Payments.checkout(fees, payments, bankAccount, unapplied).then(
           function (result) {
             $scope.submitInProgress = false;

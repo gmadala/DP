@@ -602,21 +602,6 @@ describe('Controller: CheckoutCtrl', function () {
       expect(Floorplan.overrideCompletionAddress).toHaveBeenCalled();
     });
 
-    it('should not send an overrideCompletionAddress request if no address were changed', function() {
-      scope.paymentQueue = {
-        contents: {
-          payments: [
-            { overrideAddress: null,
-              isPayoff: false
-            }
-          ]
-        }
-      };
-      spyOn(Payments, 'checkout').andReturn($q.when('OK'));
-      scope.reallySubmit(guard);
-      expect(Floorplan.overrideCompletionAddress).not.toHaveBeenCalled();
-    })
-
     it('should open the confirmation dialog on success, with the payment queue & result transaction info', function () {
       var txInfo = {};
       spyOn(Payments, 'checkout').andReturn($q.when(txInfo));

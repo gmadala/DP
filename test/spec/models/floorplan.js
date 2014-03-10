@@ -547,10 +547,38 @@ describe('Model: Floorplan', function () {
       ]);
 
       httpBackend.flush();
-      expect(request).toEqual([{
+      expect(request).toEqual({OverrideCompletionAddressInformation: [{
         FloorplanId: 123,
         TitleAddressId: 143
-      }]);
+      }]});
     });
+
+    it('should return a promise', function() {
+      var returnVal = floorplan.overrideCompletionAddress([
+        {
+          floorplanId: 123,
+          overrideAddress:  {
+            BusinessAddressId: 143
+          }
+        }
+      ]);
+
+      httpBackend.flush();
+      expect(typeof returnVal.then).toEqual('function');
+    });
+
+    it('should not make an API request if empty array passed', function() {
+      floorplan.overrideCompletionAddress([]);
+
+      expect(httpBackend.flush).toThrow();
+    });
+
+    it('should return a promise even if no API request made', function() {
+            var returnVal = floorplan.overrideCompletionAddress([]);
+
+      expect(httpBackend.flush).toThrow()
+      expect(typeof returnVal.then).toEqual('function');
+    });
+
   });
 });
