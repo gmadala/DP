@@ -24,8 +24,6 @@
         "TitleReleaseDate": "2013-05-15",
         "TitleReleaseLocation": "Chase bank",
         "SellerName": "MAFS Pennsylvania",
-        "CanBeReleased": true,
-        "AmountFinanced": 980.59,
 
         "$__SECTION 3__": "----- Auction-specific data -----",
         "DisbursementDate": "2013-05-12",
@@ -57,8 +55,6 @@
         "TitleReleaseDate": "2013-06-15",
         "TitleReleaseLocation": "Buyer",
         "SellerName": "MAFS Pennsylvania",
-        "CanBeReleased": false,
-        "AmountFinanced": 245.25,
 
         "$__SECTION 3__": "----- Auction-specific data -----",
         "DisbursementDate": null,
@@ -90,8 +86,6 @@
         "TitleReleaseDate": "2013-07-15",
         "TitleReleaseLocation": "Seller",
         "SellerName": "MAFS Pennsylvania",
-        "CanBeReleased": true,
-        "AmountFinanced": 185.88,
 
         "$__SECTION 3__": "----- Auction-specific data -----",
         "DisbursementDate": null,
@@ -123,8 +117,6 @@
         "TitleReleaseDate": "2013-08-15",
         "TitleReleaseLocation": "Seller",
         "SellerName": "MAFS Pennsylvania",
-        "CanBeReleased": true,
-        "AmountFinanced": 155,
 
         "$__SECTION 3__": "----- Auction-specific data -----",
         "DisbursementDate": "2013-06-12",
