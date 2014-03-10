@@ -11,12 +11,16 @@ describe('Model: TitleReleases', function () {
     rootScope,
     data,
     TitleAddresses,
+    floorplan,
+    urlParser,
     $q;
 
-  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_) {
+  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_, Floorplan, URLParser) {
     httpBackend = $httpBackend;
     TitleAddresses = _TitleAddresses_;
     $q = _$q_;
+    floorplan = Floorplan;
+    urlParser = URLParser;
 
     data = {
       DealerIsEligibleToReleaseTitles: true,
@@ -25,7 +29,7 @@ describe('Model: TitleReleases', function () {
       ReleaseBalanceAvailable: 1000
     };
 
-    httpBackend.expectGET('/dealer/getTitleReleaseEligibility').respond({
+    httpBackend.expectGET('/titleRelease/getTitleReleaseEligibility').respond({
       Success: true,
       Message: null,
       Data: data
@@ -108,7 +112,7 @@ describe('Model: TitleReleases', function () {
       FloorplanId: '11',
       overrideAddress: {BusinessAddressId: 2}
     });
-    httpBackend.expectPOST('/Floorplan/RequestTitleRelease').respond(function(method, path, data) {
+    httpBackend.expectPOST('/titleRelease/RequestTitleRelease').respond(function(method, path, data) {
       request = angular.fromJson(data);
       return {
         Success: true,
@@ -140,7 +144,7 @@ describe('Model: TitleReleases', function () {
       FloorplanId: '11',
       overrideAddress: {BusinessAddressId: 2}
     });
-    httpBackend.expectPOST('/Floorplan/RequestTitleRelease').respond(function(method, path, data) {
+    httpBackend.expectPOST('/titleRelease/RequestTitleRelease').respond(function(method, path, data) {
       request = angular.fromJson(data);
       return {
         Success: true,
@@ -158,6 +162,120 @@ describe('Model: TitleReleases', function () {
         {FloorplanId: '11', ReleaseAddressId: 2}
       ]
     });
+  });
+
+  describe('search method', function () {
+
+    var paginate,
+      defaultCriteria = {
+        query: '',
+        startDate: null,
+        endDate: null,
+        filter: ''
+      },
+      searchResults = [],
+      callParams,
+      respondFnc = function(method, url) {
+        callParams = urlParser.extractParams(url);
+        return [200, {
+          Success: true,
+          Data: {
+            FloorplanRowCount: 20,
+            Floorplans: searchResults
+          }
+        }, {}];
+      };
+
+    beforeEach(inject(function (Paginate, User) {
+      paginate = Paginate;
+      httpBackend.whenGET(/\/titleRelease\/search.*/).respond(respondFnc);
+      defaultCriteria.filter = floorplan.filterValues.ALL;
+      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+    }));
+
+    it('should call the expected API path', function () {
+      httpBackend.expectGET(/\/titleRelease\/search.*/);
+      titleReleases.search(defaultCriteria);
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should ask for items sorted by most recent FlooringDate first by default', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('FlooringDate');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should ask for items sorted by most recent last if sortDesc is set and is false', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = false;
+      titleReleases.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('FlooringDate');
+      expect(callParams.OrderByDirection).toBe('ASC');
+    });
+
+    it('should ask for items sorted by an arbitrary column if that column is specified', function () {
+      var tempCriteria = angular.copy(defaultCriteria);
+      tempCriteria.sortDesc = true;
+      tempCriteria.sortField = 'anyGivenField';
+      titleReleases.search(tempCriteria);
+      httpBackend.flush();
+      expect(callParams.OrderBy).toBe('anyGivenField');
+      expect(callParams.OrderByDirection).toBe('DESC');
+    });
+
+    it('should provide a page size', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(isNaN(parseInt(callParams.PageSize, 10))).toBe(false);
+    });
+
+    it('should start on the first page if a paginator is not provided', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.PageNumber).toBe(paginate.firstPage().toString());
+    });
+
+    it('should start on the next page if a paginator is provided', function () {
+      titleReleases.search(defaultCriteria, {
+        nextPage: function () {
+          return 11;
+        }
+      });
+      httpBackend.flush();
+      expect(callParams.PageNumber).toBe('11');
+    });
+
+    it('should add a paginator to the results', function () {
+      var output = {};
+      titleReleases.search(defaultCriteria).then(function (results) {
+        output = results;
+      });
+      httpBackend.flush();
+      expect(output.$paginator).toBeDefined();
+      expect(output.$paginator.nextPage()).toBe(2);
+    });
+
+    it('should NOT send a Keyword if search term is empty/null', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.Keyword).not.toBeDefined();
+    });
+
+    it('should send the search term as Keyword, if present', function () {
+      titleReleases.search(angular.extend({}, defaultCriteria, {query: 'foo'}));
+      httpBackend.flush();
+      expect(callParams.Keyword).toBe('foo');
+    });
+
+    it('should not send startDate and endDate if not provided', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.StartDate).not.toBeDefined();
+      expect(callParams.EndDate).not.toBeDefined();
+    });
+
   });
 
 });

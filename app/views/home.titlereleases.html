@@ -80,15 +80,15 @@
               <div class="cell title-floorDate">
                 <p>{{item.FlooringDate | moment}}</p>
               </div>
-              <div class="cell title-actions" ng-switch="item.CanBeReleased">
-                <div ng-switch-when="true" ng-switch="false">
-                  <p ng-switch-when="true">Pay off this vehicle or return the title to remove from your limit.</p>
-                  <button ng-switch-when="false" type="button" id="toggleRequest" class="btn btn-mini btn-block" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{requested: isFloorplanOnQueue(item)}" ng-disabled="!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength()">
+              <div class="cell title-actions" ng-switch="item.actionTypeAvailable">
+                <p ng-switch-when="alreadyReleased">Pay off this vehicle or return the title to remove from your limit.</p>
+                <div ng-switch-when="canBeReleased">
+                  <button type="button" id="toggleRequest" class="btn btn-mini btn-block" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{requested: isFloorplanOnQueue(item)}" ng-disabled="!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength()">
                     <span ng-switch-when="true">Title Requested</span>
                     <span ng-switch-default>Request Title</span>
                   </button>
                 </div>
-                <div ng-switch-default>
+                <div ng-switch-when="unavailable">
                   <a ng-click="titleReleaseUnavailable()">Title Release Unavailable</a>
                 </div>
               </div>

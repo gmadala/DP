@@ -74,7 +74,7 @@ angular.module('nextgearWebApp')
 
       // get the next applicable batch of results
       $scope.data.loading = true;
-      promise = lastPromise = Floorplan.search($scope.searchCriteria, paginator);
+      promise = lastPromise = TitleReleases.search($scope.searchCriteria, paginator);
       promise.then(
         function (result) {
           if (promise !== lastPromise) { return; }
