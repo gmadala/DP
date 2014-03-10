@@ -9,10 +9,14 @@ describe('Model: TitleReleases', function () {
   var titleReleases,
     httpBackend,
     rootScope,
-    data;
+    data,
+    TitleAddresses,
+    $q;
 
-  beforeEach(inject(function ($httpBackend) {
+  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_) {
     httpBackend = $httpBackend;
+    TitleAddresses = _TitleAddresses_;
+    $q = _$q_;
 
     data = {
       DealerIsEligibleToReleaseTitles: true,
@@ -98,11 +102,11 @@ describe('Model: TitleReleases', function () {
 
     titleReleases.addToQueue({
       FloorplanId: '10',
-      other: 'value'
+      overrideAddress: {BusinessAddressId: 1}
     });
     titleReleases.addToQueue({
       FloorplanId: '11',
-      other: 'value'
+      overrideAddress: {BusinessAddressId: 2}
     });
     httpBackend.expectPOST('/Floorplan/RequestTitleRelease').respond(function(method, path, data) {
       request = angular.fromJson(data);
@@ -113,12 +117,45 @@ describe('Model: TitleReleases', function () {
       };
     });
     titleReleases.makeRequest();
+    rootScope.$apply();
     expect(httpBackend.flush).not.toThrow();
     expect(request).toEqual({
-      ReleaseAddressId: '5',
-      TitleReleaseFloorplans: [
-        {FloorplanId: '10'},
-        {FloorplanId: '11'}
+      TitleReleases: [
+        {FloorplanId: '10', ReleaseAddressId: 1},
+        {FloorplanId: '11', ReleaseAddressId: 2}
+      ]
+    });
+  });
+
+  it('should fetch the default address if one or more floorplans does not have an override address', function() {
+
+    var request;
+
+    spyOn(TitleAddresses, 'getDefaultAddress').andReturn($q.when({BusinessAddressId: 12}));
+
+    titleReleases.addToQueue({
+      FloorplanId: '10'
+    });
+    titleReleases.addToQueue({
+      FloorplanId: '11',
+      overrideAddress: {BusinessAddressId: 2}
+    });
+    httpBackend.expectPOST('/Floorplan/RequestTitleRelease').respond(function(method, path, data) {
+      request = angular.fromJson(data);
+      return {
+        Success: true,
+        Message: null,
+        Data: null
+      };
+    });
+    titleReleases.makeRequest();
+    rootScope.$apply();
+    expect(TitleAddresses.getDefaultAddress).toHaveBeenCalled();
+    expect(httpBackend.flush).not.toThrow();
+    expect(request).toEqual({
+      TitleReleases: [
+        {FloorplanId: '10', ReleaseAddressId: 12},
+        {FloorplanId: '11', ReleaseAddressId: 2}
       ]
     });
   });

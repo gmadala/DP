@@ -8,7 +8,8 @@ angular.module('nextgearWebApp')
       replace: true,
       scope: {
         payment: '=nxgAlternateAddress',
-        showTooltip: '=showTooltip'
+        showTooltip: '=showTooltip',
+        enabled: '=enabled'
       },
       controller: function($scope, $attrs, TitleAddresses) {
         $scope.selectedAddress = null;
@@ -38,7 +39,7 @@ angular.module('nextgearWebApp')
         );
 
         $scope.canChangeTitleAddress = function() {
-          return $scope.payment.isPayoff && $scope.addrLoaded && $scope.addrList.length > 1;
+          return ($scope.enabled || $scope.enabled === undefined) && $scope.addrLoaded && $scope.addrList.length > 1;
         };
 
         $scope.onClickAddress = function() {

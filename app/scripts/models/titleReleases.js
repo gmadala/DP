@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('TitleReleases', function(api) {
+  .factory('TitleReleases', function(api, TitleAddresses, $q) {
 
     var eligibility;
 
@@ -50,21 +50,32 @@ angular.module('nextgearWebApp')
 
       makeRequest: function() {
 
-        var floorplans = _.map(queue, function(floorplan) {
-          return {
-            FloorplanId: floorplan.FloorplanId
-          };
+        // Get the default address to send with non-overridden floorplans
+        var needDefaultAddress = !_.every(queue, function(floorplan) {
+          return floorplan.overrideAddress;
         });
-        var data = {
-          ReleaseAddressId: '5', /* TODO Add address here */
-          TitleReleaseFloorplans: floorplans
-        };
+        var getDefaultAddress;
+        if(needDefaultAddress){
+          getDefaultAddress = TitleAddresses.getDefaultAddress();
+        } else {
+          getDefaultAddress = $q.when(true);
+        }
 
-        return api.request('POST', '/Floorplan/RequestTitleRelease', data).then(function(response) {
-
+        // Get the default address (if needed) and make the API request
+        return getDefaultAddress.then(function(defaultAddress) {
+          var floorplans = _.map(queue, function(floorplan) {
+            return {
+              FloorplanId: floorplan.FloorplanId,
+              ReleaseAddressId: floorplan.overrideAddress ? floorplan.overrideAddress.BusinessAddressId : defaultAddress.BusinessAddressId
+            };
+          });
+          var data = {
+            TitleReleases: floorplans
+          };
+          return api.request('POST', '/Floorplan/RequestTitleRelease', data);
+        }).then(function(response) {
           // Re-run the eligibility request
           cacheEligibility();
-
           return response;
         });
       }

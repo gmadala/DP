@@ -16,11 +16,6 @@ angular.module('nextgearWebApp')
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
 
-    $scope.titleReleaseAddress = {
-      potentialAddresses: null, // PUT SOMETHING HERE TO GRAB THEM
-      selected: null // PUT DEFAULT HERE
-    };
-
     $scope.onConfirmRequest = function() {
       TitleReleases.makeRequest().then(function(response) {
         var dialogOptions = {
