@@ -287,12 +287,29 @@
 .alt-addr-link {
   font-size: $tiny-font-size;
   display: block;
-  clear: both;
   border: 0;
   padding: 5px 0;
 }
 
-.nxg-alt-addr select {
-  @extend %full-width;
-  margin: 10px 0 5px;
+.nxg-alt-addr {
+  position: relative;
+  clear: both;
+
+  select {
+    width: 85%;
+    white-space: no-wrap;
+    margin: 10px 0 5px;
+
+    &.wide {
+      @extend %full-width;
+    }
+  }
+
+  .btn-help {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 86%;
+    line-height: 1.3;
+  }
 }

@@ -7,7 +7,8 @@ angular.module('nextgearWebApp')
       restrict: 'A',
       replace: true,
       scope: {
-        payment: '=nxgAlternateAddress'
+        payment: '=nxgAlternateAddress',
+        showTooltip: '=showTooltip'
       },
       controller: function($scope, $attrs, TitleAddresses) {
         $scope.selectedAddress = null;

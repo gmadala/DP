@@ -24,17 +24,21 @@
   position: relative;
   padding-left: 26px;
   width: 130px;
-  margin: 10px auto 5px;
+  margin: 5px 0 5px;
 
-  span:before {
-    content: '';
-    @include background-image(url('../img/icons/twocolor_chkbx.png'));
+  span {
     display: block;
-    position: absolute;
-    left: 5px;
-    width: 16px;
-    height: 16px;
-    margin: 2px 0;
+
+    &:before {
+      content: '';
+      @include background-image(url('../img/icons/twocolor_chkbx.png'));
+      display: block;
+      position: absolute;
+      left: 5px;
+      width: 16px;
+      height: 16px;
+      margin: 2px 0;
+    }
   }
 
   &.requested span:before {
