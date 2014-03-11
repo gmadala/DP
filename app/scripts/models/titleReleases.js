@@ -3,10 +3,14 @@
 angular.module('nextgearWebApp')
   .factory('TitleReleases', function(api, TitleAddresses, $q, Paginate) {
 
-    var eligibility;
+    var eligibility, eligibilityLoading;
 
     var cacheEligibility = function() {
-      eligibility = api.request('GET', '/titleRelease/getTitleReleaseEligibility');
+      eligibilityLoading = true;
+      eligibility = api.request('GET', '/titleRelease/getTitleReleaseEligibility').then(function(res) {
+        eligibilityLoading = false;
+        return res;
+      });
     };
     cacheEligibility();
 
@@ -22,6 +26,10 @@ angular.module('nextgearWebApp')
 
       getTitleReleaseEligibility: function() {
         return eligibility;
+      },
+
+      getEligibilityLoading: function() {
+        return eligibilityLoading;
       },
 
       getQueue: function() {
