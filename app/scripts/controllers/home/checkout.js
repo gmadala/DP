@@ -311,7 +311,7 @@ angular.module('nextgearWebApp')
       }
 
       // build query string
-      var strUrl = api.contentLink('/report/payment/summary', params);
+      var strUrl = api.contentLink('/report/payment/summary/paymentsSummary', params);
 
       window.open(strUrl, '_blank' /*open in a new window*/);
     };
