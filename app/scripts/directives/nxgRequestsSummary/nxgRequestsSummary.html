@@ -3,9 +3,9 @@
 
   <div class="well-out">
     <p>Title Release Limits for this Account:<br/>
-      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed }}</span> title releases available.</p>
+      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed || 0 }}</span> title releases available.</p>
 
-    <div class="queue-items">
+    <div class="queue-items" ng-show="titleQueue.contents.length > 0">
       <!-- <p ng-show="">You have not requested any titles.</p> -->
 
       <ul>
