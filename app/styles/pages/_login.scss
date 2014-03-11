@@ -143,6 +143,7 @@
 
     .sec-ques {
       margin-bottom: 20px;
+
       .control-group {
         margin: 0;
       }
@@ -158,4 +159,16 @@
   .modal-footer {
     margin: 10px 0 0 0;
   }
+}
+
+.create-password {
+  p:first-child {
+    font-style: italic;
+    margin: 0 10px 10px
+  }
+
+  form {
+    padding: 10px 20px 0;
+  }
+
 }

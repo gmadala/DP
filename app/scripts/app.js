@@ -26,6 +26,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.updateSecurity.html',
         controller: 'LoginUpdateSecurityCtrl'
       })
+      .state('loginCreatePassword', {
+        url: '/login/createPassword',
+        templateUrl: 'views/login.createPassword.html'
+      })
 
     /**
      * Home State - Parent of Dashboard, Payments, Scheduled Payments,
