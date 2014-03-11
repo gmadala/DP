@@ -3,7 +3,9 @@
   "Message": null,
   "Data":{
     "Token": "Mzc2ZWI4NmEtZGYxYS00MGRjLWIwYjUtYTI1MTIxMzk3YTNl",
-    "ShowUserInitialization": false
+    "ShowUserInitialization": false,
+    "UserVoiceToken": "foo",
+    "TemporaryPasswordUsed": true
   }
 }
 

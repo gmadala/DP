@@ -27,27 +27,18 @@
           <td><span class="item-total">{{ dashboardData.ApprovedFloorplans }}</span></td>
           <td class="fl-label">Approved ({{ dashboardData.ApprovedFloorplanOutstandingAmount | currency }})</td>
         </tr>
-        <!-- VO-1230:
-          Remove Awaiting Titles row and replace with commented out portion.
-        -->
         <tr>
-          <td><span class="item-total">{{ dashboardData.FloorplansAwaitingTitle }}</span></td>
-          <td class="fl-label">Awaiting Titles ({{ dashboardData.FloorplansAwaitingTitleOutstandingAmount | currency }})</td>
+          <td><span class="item-total ">{{ dashboardData.AwaitingTitleZeroToFifteenDays }}</span></td>
+          <td class="fl-label">Awaiting Titles 0-15 Days ({{ dashboardData.AwaitingTitleZeroToFifteenDaysAmount | currency }})</td>
         </tr>
-        <!-- TO BE ADDED WITH VO-1230:
-          <tr>
-            <td><span class="item-total ">{{ dashboardData.AwaitingTitleZeroToFifteenDays }}</span></td>
-            <td class="fl-label">Awaiting Titles 0-15 Days ({{ dashboardData.AwaitingTitleZeroToFifteenDaysAmount | currency }})</td>
-          </tr>
-          <tr>
-            <td><span class="item-total due-soon">{{ dashboardData.AwaitingTitleSixteenToThirtyDays }}</span></td>
-            <td class="fl-label">Awaiting Titles 16-30 Days ({{ dashboardData.AwaitingTitleSixteenToThirtyDaysAmount | currency }})</td>
-          </tr>
-          <tr>
-            <td><span class="item-total overdue">{{ dashboardData.AwaitingTitleOverThirtyDays }}</span></td>
-            <td class="fl-label">Awaiting Titles 30+ Days ({{ dashboardData.AwaitingTitleOverThirtyDaysAmount | currency }})</td>
-          </tr>
-        -->
+        <tr>
+          <td><span class="item-total due-soon">{{ dashboardData.AwaitingTitleSixteenToThirtyDays }}</span></td>
+          <td class="fl-label">Awaiting Titles 16-30 Days ({{ dashboardData.AwaitingTitleSixteenToThirtyDaysAmount | currency }})</td>
+        </tr>
+        <tr>
+          <td><span class="item-total overdue">{{ dashboardData.AwaitingTitleOverThirtyDays }}</span></td>
+          <td class="fl-label">Awaiting Titles 30+ Days ({{ dashboardData.AwaitingTitleOverThirtyDaysAmount | currency }})</td>
+        </tr>
         <tr>
           <td><span class="item-total">{{ dashboardData.PendingFloorplans }}</span></td>
           <td class="fl-label">Pending ({{ dashboardData.PendingFloorplansOutstandingAmount | currency }})</td>
@@ -80,13 +71,13 @@
         <label class="group-label">Past:</label>
 
         <input type="radio" class="first" name="year" id="year" value="year" ng-model="selectedFloorplanChart" placeholder="Ten Best Movers">
-        <label for="year" id="year-label"></label>
+        <label class="pointer" for="year" id="year-label"></label>
 
         <input type="radio" name="month" id="month" value="month" ng-model="selectedFloorplanChart" placeholder="Ten Best Movers">
-        <label for="month" id="month-label"></label>
+        <label class="pointer" for="month" id="month-label"></label>
 
         <input type="radio" class="last" name="week" id="week" value="week" ng-model="selectedFloorplanChart" placeholder="Ten Worst Movers">
-        <label for="week" id="week-label"></label>
+        <label class="pointer" for="week" id="week-label"></label>
       </div>
 
       <div class="chart-obj"

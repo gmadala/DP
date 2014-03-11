@@ -13,28 +13,39 @@
   }
 }
 
-.title-checkout-list .cell {
-  &.title-desc { width: 45%; }
-  &.title-vin { width: 15%; }
-  &.title-stock { width: 15%; }
-  &.title-status { width: 25%; }
+.title-checkout-list {
+
+  .remove {
+    font-size: 13px;
+  }
+
+  .cell {
+    &.title-desc { width: 45%; }
+    &.title-vin { width: 15%; }
+    &.title-stock { width: 15%; }
+    &.title-status { width: 25%; }
+  }
 }
 
 #toggleRequest {
   position: relative;
   padding-left: 26px;
   width: 130px;
-  margin: 10px auto 5px;
+  margin: 5px 0 5px;
 
-  span:before {
-    content: '';
-    @include background-image(url('../img/icons/twocolor_chkbx.png'));
+  span {
     display: block;
-    position: absolute;
-    left: 5px;
-    width: 16px;
-    height: 16px;
-    margin: 2px 0;
+
+    &:before {
+      content: '';
+      @include background-image(url('../img/icons/twocolor_chkbx.png'));
+      display: block;
+      position: absolute;
+      left: 5px;
+      width: 16px;
+      height: 16px;
+      margin: 2px 0;
+    }
   }
 
   &.requested span:before {
@@ -92,4 +103,9 @@
 .confirm-title-request {
   width: 500px;
   margin-left: -250px;
+
+  .cell {
+    &.title-desc { @extend %half-width; }
+    &.title-vin, &.title-stock { @extend %quarter-width; }
+  }
 }

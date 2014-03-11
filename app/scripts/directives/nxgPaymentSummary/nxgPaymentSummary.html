@@ -21,6 +21,7 @@
           {{ payment.description }}<br/>
           <span class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</span>
           <span class="amount">{{ payment.amount | currency }}</span>
+          <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
         </li>
       </ul>
     </div>

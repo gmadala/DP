@@ -26,6 +26,10 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.updateSecurity.html',
         controller: 'LoginUpdateSecurityCtrl'
       })
+      .state('loginCreatePassword', {
+        url: '/login/createPassword',
+        templateUrl: 'views/login.createPassword.html'
+      })
 
     /**
      * Home State - Parent of Dashboard, Payments, Scheduled Payments,
@@ -185,7 +189,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api) {
 
     var prv = {
       reloadPending: false,
@@ -215,7 +219,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
           return;
         }
 
-        if ($dialog.openDialogsCount() > 0 && toState.name !=='login') {
+        // If there are dialogs open and we aren't going to login state to popup the login "are you sure?" modal
+        if ($dialog.openDialogsCount() > 0 && !(toState.name ==='login' && api.hasAuthToken())) {
           /**
            * if a dialog is open, close it before navigating to new state
            * but not for login, because the logout function already closes

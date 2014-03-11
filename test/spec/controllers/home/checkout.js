@@ -10,15 +10,17 @@ describe('Controller: CheckoutCtrl', function () {
     dialog,
     protect,
     User,
-    Payments;
+    Payments,
+    Floorplan;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $dialog, _protect_, _User_, _Payments_) {
+  beforeEach(inject(function ($controller, $rootScope, $dialog, _protect_, _User_, _Payments_, _Floorplan_) {
     scope = $rootScope.$new();
     dialog = $dialog;
     protect = _protect_;
     User = _User_;
     Payments = _Payments_;
+    Floorplan = _Floorplan_;
     run = function () {
       $controller('CheckoutCtrl', { $scope: scope });
     };
@@ -509,13 +511,36 @@ describe('Controller: CheckoutCtrl', function () {
   describe('reallySubmit function', function () {
 
     var guard,
-      $q;
+      $q,
+      overrideSucceed = true;
 
     beforeEach(inject(function (_$q_, protect) {
       guard = protect;
       $q = _$q_;
       run();
+      scope.paymentQueue = {
+        contents: {
+          payments: [
+            { overrideAddress: null,
+              isPayoff: false
+            },
+            {
+              overrideAddress: 'new address',
+              isPayoff: true
+            }
+          ]
+        }
+      };
       spyOn(dialog, 'dialog').andReturn({ open: function () { return $q.when('done'); } });
+      spyOn(Floorplan, 'overrideCompletionAddress').andReturn({
+        then: function(result) {
+          if (overrideSucceed) {
+            result(true);
+          } else {
+            result(false);
+          }
+        }
+      });
     }));
 
     it('should throw an error if called without the protect object', function () {
@@ -545,6 +570,7 @@ describe('Controller: CheckoutCtrl', function () {
     it('should pass the fees, payments, and selected bank account to the model', function () {
       scope.bankAccounts.selectedAccount = {};
       spyOn(Payments, 'checkout').andReturn($q.when('OK'));
+
       scope.reallySubmit(guard);
       expect(Payments.checkout).toHaveBeenCalledWith(
         scope.paymentQueue.contents.fees,
@@ -568,6 +594,12 @@ describe('Controller: CheckoutCtrl', function () {
       spyOn(Payments, 'checkout').andReturn($q.when('OK'));
       scope.reallySubmit(guard);
       expect(Payments.checkout.mostRecentCall.args[3]).toBe(0);
+    });
+
+    it('should send an overrideCompletionAddress request if any addresses were changed', function() {
+      spyOn(Payments, 'checkout').andReturn($q.when('OK'));
+      scope.reallySubmit(guard);
+      expect(Floorplan.overrideCompletionAddress).toHaveBeenCalled();
     });
 
     it('should open the confirmation dialog on success, with the payment queue & result transaction info', function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan) {
 
     $scope.isCollapsed = true;
 
@@ -174,29 +174,41 @@ angular.module('nextgearWebApp')
         unapplied = $scope.unappliedFunds.useFunds ? $scope.unappliedFunds.useAmount : 0;
 
       $scope.submitInProgress = true;
-      Payments.checkout(fees, payments, bankAccount, unapplied).then(
-        function (result) {
-          $scope.submitInProgress = false;
-          // confirmation dialog
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/confirmCheckout.html',
-            controller: 'ConfirmCheckoutCtrl',
-            dialogClass: 'modal confirm-checkout',
-            resolve: {
-              queue: function () { return $scope.paymentQueue.contents; },
-              transactionInfo: function () { return result; }
-            }
-          };
-          $dialog.dialog(dialogOptions).open().then(function () {
-            Payments.clearPaymentQueue();
-          });
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
+
+      // if any addresses are overridden, handle those requests first now.
+      // Grab payments to override addresses for
+      var paymentsToOverride = [];
+      _.each(payments, function(p) {
+        if (p.isPayoff && p.overrideAddress && p.overrideAddress !== null) {
+          paymentsToOverride.push(p);
         }
-      );
+      });
+
+      Floorplan.overrideCompletionAddress(paymentsToOverride).then(function() {
+        Payments.checkout(fees, payments, bankAccount, unapplied).then(
+          function (result) {
+            $scope.submitInProgress = false;
+            // confirmation dialog
+            var dialogOptions = {
+              backdrop: true,
+              keyboard: true,
+              backdropClick: true,
+              templateUrl: 'views/modals/confirmCheckout.html',
+              controller: 'ConfirmCheckoutCtrl',
+              dialogClass: 'modal confirm-checkout',
+              resolve: {
+                queue: function () { return $scope.paymentQueue.contents; },
+                transactionInfo: function () { return result; }
+              }
+            };
+            $dialog.dialog(dialogOptions).open().then(function () {
+              Payments.clearPaymentQueue();
+            });
+          }, function (/*error*/) {
+            $scope.submitInProgress = false;
+          }
+        );
+      });
     };
 
     $scope.validateBusinessHours = function () {
@@ -299,7 +311,7 @@ angular.module('nextgearWebApp')
       }
 
       // build query string
-      var strUrl = api.contentLink('/report/payment/summary', params);
+      var strUrl = api.contentLink('/report/payment/summary/paymentsSummary', params);
 
       window.open(strUrl, '_blank' /*open in a new window*/);
     };

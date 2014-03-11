@@ -116,6 +116,11 @@ angular.module('nextgearWebApp')
           },
           cancel: function() {
             prv.cancel.apply(this);
+            // make sure to close any tooltips left open
+            angular.forEach(angular.element('.btn-help'), function(elem) {
+              /*jshint camelcase: false */
+              angular.element(elem).scope().tt_isOpen = false;
+            });
           },
           save: function() {
             if (prv.save.apply(this)) {
@@ -285,4 +290,5 @@ angular.module('nextgearWebApp')
         return '';
       }
     };
+
   });

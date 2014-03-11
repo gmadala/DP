@@ -8,9 +8,9 @@
         <div class="nxg-dash-calendar-header">
           <div class="nxg-fancy-radios">
             <input type="radio" class="first" name="{{ 'h-' + viewMode }}" id="week" value="week" ng-model="viewMode" placeholder="This Week">
-            <label for="week" id="week-label"></label>
+            <label class="pointer" for="week" id="week-label"></label>
             <input type="radio" class="last" name="{{ 'h-' + viewMode }}" id="month" value="month" ng-model="viewMode" placeholder="This Month">
-            <label for="month" id="month-label"></label>
+            <label class="pointer" for="month" id="month-label"></label>
           </div>
         </div>
 
@@ -19,9 +19,9 @@
         <div class="nxg-dash-calendar-header fc bottom" ng-show="viewMode == 'month'">
           <div class="nxg-fancy-radios">
             <input type="radio" class="first" name="{{ 'f-' + viewMode }}" id="f-week" value="week" ng-model="viewMode" placeholder="This Week">
-            <label for="f-week" id="week-label"></label>
+            <label class="pointer" for="f-week" id="week-label"></label>
             <input type="radio" class="last" name="{{ 'f-' + viewMode }}" id="f-month" value="month" ng-model="viewMode" placeholder="This Month">
-            <label for="f-month" id="month-label"></label>
+            <label class="pointer" for="f-month" id="month-label"></label>
           </div>
 
           <!-- To add footer controls -->
@@ -72,7 +72,7 @@
           <span ng-pluralize
                 count="dashboardData.UpcomingPayments"
                 when="{'1': 'Payment', 'other': 'Payments'}"></span>
-          <span>This {{ viewMode | lowercase }}</span>
+          <span>This {{ viewMode | capitalize }}</span>
           <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
         </li>
         <li>

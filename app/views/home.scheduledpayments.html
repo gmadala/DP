@@ -15,9 +15,9 @@
     <h3 class="boxed">Scheduled Account Fees</h3>
 
     <!-- needs to be updated with MVC integration task, VO-975 -->
-    <div class="sch-fees" ng-switch="true || fees.results.length > 0 || fees.loading">
+    <div class="sch-fees" ng-switch="fees.results.length > 0 || fees.loading">
       <p class="notice-box" ng-switch-when="false">
-        There are no fees associated with this account.
+        There are no fees currently scheduled with this account.
       </p>
 
       <ul class="unstyled" ng-switch-when="true">

@@ -33,21 +33,7 @@
             <li class="table-list-row" ng-repeat="item in titleQueue.contents">
               <div class="cell title-desc">
                 <p>{{ getVehicleDescription(item) }}</p>
-                <p>
-                  Send To:
-                  <select id="" name="">
-                    <option class="disabled" disabled="disabled" value="">Make Selection</option>
-                    <option>Address 1</option>
-                    <option>Address 2</option>
-                  </select>
-                   <button class="btn-help"
-                          tooltip-placement="right"
-                          tooltip-trigger="click"
-                          tooltip-html="true"
-                          tooltip-html-unsafe="<h5>Alternate Title Address</h5><p>Something to go here</p>"
-                          tooltip-animation="true">?
-                  </button>
-                </p>
+                <div nxg-alternate-address="item" enabled="true" show-tooltip="true"></div>
               </div>
               <div class="cell title-vin"><p>{{ item.UnitVIN | shortenVIN }}</p></div>
               <div class="cell title-stock">
@@ -55,7 +41,7 @@
               </div>
               <div class="cell title-status">
                 <p>{{ item.FloorplanStatusName }}</p>
-                <p><a ng-click="$parent.titleQueue.removeFromQueue(item)">Remove Title</a></p>
+                <p><button class="btn-unstyle btn-link remove" ng-click="$parent.titleQueue.removeFromQueue(item)" ng-disabled="$parent.submitting">Remove Title</button></p>
               </div>
             </li>
           </ul>
@@ -77,7 +63,7 @@
       <hr/>
 
       <div class="submit">
-        <button class="btn btn-primary" ng-click="onConfirmRequest()" ng-disabled="titleQueue.contents.length == 0">
+        <button class="btn btn-primary" ng-click="onConfirmRequest()" ng-disabled="titleQueue.contents.length == 0 || submitting">
           Confirm Requests for Titles
         </button>
       </div>

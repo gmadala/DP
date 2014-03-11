@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Floorplan', function(api, Paginate, User) {
+  .factory('Floorplan', function(api, Paginate, User, $q) {
     return {
       create: function(data) {
         // transform data types as needed for API
@@ -108,6 +108,21 @@ angular.module('nextgearWebApp')
           FloorplanId: floorplanId,
           HasTitle: hasTitle
         });
+      },
+      overrideCompletionAddress: function(payments) {
+        if(payments && payments.length && payments.length > 0) {
+          var data = [];
+          _.each(payments, function(p) {
+            data.push({
+              FloorplanId: p.floorplanId,
+              TitleAddressId: p.overrideAddress.BusinessAddressId
+            });
+          });
+
+          return api.request('POST', '/floorplan/overrideCompletionAddress', {OverrideCompletionAddressInformation: data} );
+        } else {
+          return $q.when(true);
+        }
       },
       getExtensionPreview: function(floorplanId) {
         return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);

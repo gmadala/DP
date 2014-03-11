@@ -86,6 +86,7 @@
                     {{ payment.stockNum }}
                   </p>
                   <p>{{ payment.description }}</p>
+                  <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true"></div>
                 </div>
                 <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
                 <div class="cell pay-status">
@@ -101,7 +102,7 @@
                       Remove Payment
                     </button>
                   </p>
-                  <p><!-- Need to update during MVC Integration, VO-927 -->
+                  <p>
                     Principal: {{payment.revenueToTrack | currency}} <br/>
                     Interest: {{payment.interestTotal | currency}} <br/>
                     Fees: {{payment.feesTotal | currency}}
@@ -179,7 +180,7 @@
             Please enter the amount of unapplied funds to use.
           </label>
           <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern">
-            Please enter the amount of unapplied funds as a number.
+            Please enter the amount of unapplied funds as a number with no more than 2 decimals.
           </label>
           <label class="text-error"
              ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">

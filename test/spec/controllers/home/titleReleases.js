@@ -23,12 +23,12 @@ describe('Controller: TitleReleasesCtrl', function () {
       addToQueue: angular.noop,
       removeFromQueue: angular.noop,
       getTitleReleaseEligibility: angular.noop,
-      isFloorplanOnQueue: angular.noop
-    };
-    floorplanMock = {
+      isFloorplanOnQueue: angular.noop,
       search: function(){
         return $q.when(searchResult.data);
-      },
+      }
+    };
+    floorplanMock = {
       filterValues: Floorplan.filterValues
     };
 
@@ -82,9 +82,9 @@ describe('Controller: TitleReleasesCtrl', function () {
     });
 
     it('should call for data with no paginator to start at beginning', function () {
-      spyOn(floorplanMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').andCallThrough();
       scope.search();
-      expect(floorplanMock.search).toHaveBeenCalledWith(scope.searchCriteria, null);
+      expect(titleReleasesMock.search).toHaveBeenCalledWith(scope.searchCriteria, null);
     });
   });
 
@@ -154,7 +154,7 @@ describe('Controller: TitleReleasesCtrl', function () {
   describe('fetchNextResults function', function () {
 
     it('should not call for data if the paginator indicates it is already at the end', function () {
-      spyOn(floorplanMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').andCallThrough();
 
       scope.data.paginator = {
         hasMore: function () {
@@ -166,7 +166,7 @@ describe('Controller: TitleReleasesCtrl', function () {
       };
 
       scope.fetchNextResults();
-      expect(floorplanMock.search).not.toHaveBeenCalled();
+      expect(titleReleasesMock.search).not.toHaveBeenCalled();
       expect(scope.data.hitInfiniteScrollMax).toBe(true);
     });
 
@@ -189,7 +189,7 @@ describe('Controller: TitleReleasesCtrl', function () {
     }));
 
     it('should pass back the paginator from previous calls on subsequent ones', function () {
-      spyOn(floorplanMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').andCallThrough();
       var p = {
         hasMore: function () {
           return true;
@@ -204,7 +204,7 @@ describe('Controller: TitleReleasesCtrl', function () {
       scope.fetchNextResults();
       scope.$apply();
       scope.fetchNextResults();
-      expect(floorplanMock.search.mostRecentCall.args[1]).toBe(p);
+      expect(titleReleasesMock.search.mostRecentCall.args[1]).toBe(p);
     });
 
     it('should append new results to the results array', function () {

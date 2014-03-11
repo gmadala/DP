@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, TitleReleases, Floorplan) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -16,13 +16,10 @@ angular.module('nextgearWebApp')
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
 
-    $scope.titleReleaseAddress = {
-      potentialAddresses: null, // PUT SOMETHING HERE TO GRAB THEM
-      selected: null // PUT DEFAULT HERE
-    };
-
     $scope.onConfirmRequest = function() {
+      $scope.submitting = true;
       TitleReleases.makeRequest().then(function(response) {
+        $scope.submitting = false;
         var dialogOptions = {
           resolve: {
             response: function() {return response;}
@@ -35,7 +32,11 @@ angular.module('nextgearWebApp')
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open();
+        $dialog.dialog(dialogOptions).open().then(function() {
+          TitleReleases.clearQueue();
+
+          $state.transitionTo('home.titlereleases');
+        });
       });
     };
   });

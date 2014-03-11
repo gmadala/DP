@@ -1,13 +1,13 @@
 <div class="modal-header">
-  <h3>Your title request(s) have been submitted.</h3>
-<!--   <h3>Your title request(s) can not be processed at this time.</h3>
-  <h3>Some title request(s) can not be processed at this time.</h3> -->
+  <h3 ng-show="counts.failed == 0 && counts.total > 0">Your title request(s) have been submitted.</h3>
+  <h3 ng-show="counts.failed == counts.total">Your title request(s) can not be processed at this time.</h3>
+  <h3 ng-show="counts.failed > 0 && counts.total > counts.failed">Some title request(s) can not be processed at this time.</h3>
 </div>
 <div class="modal-body">
 
   <section>
     <h4 class="boxed">
-      Title Request(s): 2
+      Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}
     </h4>
 
     <div>
@@ -18,33 +18,23 @@
           <div class="cell title-stock">Stock #</div>
         </li>
 
-        <li class="table-list-row">
+        <li class="table-list-row" ng-class="{'error-row': !item.ReleaseSuccessful}" ng-repeat="item in results">
           <div class="cell title-desc">
-            <p>2008 Chevy Cavalier LT Black</p>
+            <p>{{ item.description }}</p>
           </div>
           <div class="cell title-vin">
-            <p>112111</p>
+            <p>{{ item.UnitVIN | shortenVIN }}</p>
           </div>
           <div class="cell title-stock">
-            <p>1263</p>
+            <p>{{ item.StockNumber }}</p>
           </div>
         </li>
-        <li class="table-list-row error-row">
-          <div class="cell title-desc">
-            <p>2008 Chevy Cavalier LT Black</p>
-          </div>
-          <div class="cell title-vin">
-            <p>112111</p>
-          </div>
-          <div class="cell title-stock">
-            <p>1263</p>
-          </div>
-        </li>
+
       </ul>
     </div>
   </section>
-  <p>Your title request(s) have been submitted. Please allow 3-5 business days for processing. If you have any questions regarding your request, please call Customer Service at <span class="highlight">888.989.3721.</span></p>
-  <p>We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight">888.989.3721.</span></p>
+  <p ng-show="counts.failed < counts.total">Your title request(s) have been submitted. Please allow 3-5 business days for processing. If you have any questions regarding your request, please call Customer Service at <span class="highlight">888.989.3721.</span></p>
+  <p ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight">888.989.3721.</span></p>
   <p>
 </div>
 

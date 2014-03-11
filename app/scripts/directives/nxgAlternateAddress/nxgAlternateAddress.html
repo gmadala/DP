@@ -1,0 +1,13 @@
+<div class="nxg-alt-addr" ng-show="canChangeTitleAddress() && addrLoaded">
+  <a ng-hide="showSelectMenu" class="alt-addr-link" ng-click="onClickAddress()" href="javascript:void(0)">Send Title to a Different Address?</a>
+  <select ng-show="showSelectMenu"
+  ng-model="selectedAddress"
+  ng-options="toShortAddress(addr) for addr in addrList"
+  ng-class="{ wide: !showTooltip }"></select>
+  <span ng-show="showTooltip && showSelectMenu" class="btn-help"
+     tooltip-placement="right"
+     tooltip-trigger="click"
+     tooltip-delay="300"
+     tooltip="You may select an already approved address on file with NextGear."
+     tooltip-animation="true">?</span>
+</div>
