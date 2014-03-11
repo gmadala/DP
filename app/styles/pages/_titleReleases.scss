@@ -96,4 +96,9 @@
 .confirm-title-request {
   width: 500px;
   margin-left: -250px;
+
+  .cell {
+    &.title-desc { @extend %half-width; }
+    &.title-vin, &.title-stock { @extend %quarter-width; }
+  }
 }
