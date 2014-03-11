@@ -36,6 +36,10 @@ angular.module('nextgearWebApp')
         return queue;
       },
 
+      clearQueue: function() {
+        queue.length = 0;
+      },
+
       addToQueue: function(floorplan) {
         queue.push(floorplan);
       },

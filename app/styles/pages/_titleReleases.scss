@@ -13,11 +13,18 @@
   }
 }
 
-.title-checkout-list .cell {
-  &.title-desc { width: 45%; }
-  &.title-vin { width: 15%; }
-  &.title-stock { width: 15%; }
-  &.title-status { width: 25%; }
+.title-checkout-list {
+
+  .remove {
+    font-size: 13px;
+  }
+
+  .cell {
+    &.title-desc { width: 45%; }
+    &.title-vin { width: 15%; }
+    &.title-stock { width: 15%; }
+    &.title-status { width: 25%; }
+  }
 }
 
 #toggleRequest {
