@@ -6,6 +6,8 @@ angular.module('nextgearWebApp')
       var TIMEOUT_IN_MS = 4000,
         original = $delegate;
 
+      console.warn('Network requests are being throttled.');
+
       // Api calls use $http() instead of $http[method] so we only need to catch that case
       return _.extend(
         function() {

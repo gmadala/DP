@@ -239,7 +239,8 @@ module.exports = function(grunt) {
               'views/**/*.html',
               'scripts/directives/**/*.html',
               '!scripts/config/nxgConfig.mock.js',
-              '!scripts/dev/autologin.js'
+              '!scripts/dev/autologin.js',
+              '!scripts/dev/throttle.js'
             ],
             dest: '<%= yeoman.dist %>'
           }
