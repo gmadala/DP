@@ -19,16 +19,20 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
-        allowAnonymous: true
+        allowAnonymous: true,
+        noDirectAccess: true
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',
         templateUrl: 'views/login.updateSecurity.html',
-        controller: 'LoginUpdateSecurityCtrl'
+        controller: 'LoginUpdateSecurityCtrl',
+        noDirectAccess: true
       })
       .state('loginCreatePassword', {
         url: '/login/createPassword',
-        templateUrl: 'views/login.createPassword.html'
+        templateUrl: 'views/login.createPassword.html',
+        controller: 'LoginCreatePasswordCtrl',
+        noDirectAccess: true
       })
 
     /**
@@ -193,6 +197,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     var prv = {
       reloadPending: false,
+
       resetToLogin: function() {
         prv.reloadPending = true;
         // set location as login page before refreshing to stop pendingState from being set
@@ -200,6 +205,27 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         // clobber everything and start over at login page
         // LastState cookie modifications are asynchronous
         window.location.reload(true);
+      },
+
+      continuePostLoginTransition: function() {
+        if (pendingState) {
+          $state.transitionTo(pendingState.name); // resume transition to the original state destination
+          pendingState = null;
+        }
+        else {
+          // Make sure we got a valid last state to switch to. Fixes VO-804
+          if (LastState.getUserState() && LastState.getUserState() !== '') {
+            $state.transitionTo(LastState.getUserState()); // go back to the last state visited
+            LastState.clearUserState();
+          }
+          else {
+            $location.path(User.isDealer() ? '/home' : '/act/home');
+          }
+        }
+      },
+
+      isStateInappropriateForRole: function(state, isDealer) {
+        return (state.isAuctionState && isDealer) || (!state.isAuctionState && !isDealer);
       }
     };
 
@@ -231,7 +257,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
         if (!toState.allowAnonymous) {
           // enforce rules about what states certain users can see
-
           var isDealer = User.isDealer(),
             savedAuth = $cookieStore.get('auth');
 
@@ -244,16 +269,22 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
               }
             );
           }
-
           else if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
             pendingState = toState; // save the original state destination to switch back when logged in
             $location.path('/login');
+          } else if (User.isPasswordChangeRequired()) {
+            // temporary password? user needs to change it before it can proceed
+            if (toState.name !== 'loginCreatePassword'){
+              $location.path('/login/createPassword');
+            }
           } else if (User.isUserInitRequired()) {
             // not initialized? lets update the security questions
-            $location.path('/login/updateSecurity');
-          } else if ((toState.isAuctionState && isDealer) || (!toState.isAuctionState && !isDealer)) {
+            if (toState.name !== 'loginUpdateSecurity') {
+              $location.path('/login/updateSecurity');
+            }
+          } else if (prv.isStateInappropriateForRole(toState, isDealer) || toState.noDirectAccess) {
             // user is trying to access a state that's not appropriate to their role; redirect to their home
             event.preventDefault();
             // If auction user, go to /act/home. On page load, isDealer is null, but assume
@@ -319,22 +350,26 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     );
 
     $rootScope.$on('event:userAuthenticated',
-      function(event, authData){
-        if(authData.ShowUserInitialization) {
+      function(){
+        if (User.isPasswordChangeRequired()) {
+          // temporary password? user needs to change it before it can proceed
+          $location.path('/login/createPassword');
+        }
+        else if (User.isUserInitRequired()) {
           $location.path('/login/updateSecurity');
-        } else if (pendingState) {
-          $state.transitionTo(pendingState.name); // resume transition to the original state destination
-          pendingState = null;
         }
         else {
-          // Make sure we got a valid last state to switch to. Fixes VO-804
-          if (LastState.getUserState() && LastState.getUserState() !== '') {
-            $state.transitionTo(LastState.getUserState()); // go back to the last state visited
-            LastState.clearUserState();
-          }
-          else {
-            $location.path(User.isDealer() ? '/home' : '/act/home');
-          }
+          prv.continuePostLoginTransition();
+        }
+      }
+    );
+    $rootScope.$on('event:temporaryPasswordChanged',
+      function() {
+        if (User.isUserInitRequired()) {
+          $location.path('/login/updateSecurity');
+        }
+        else {
+          prv.continuePostLoginTransition();
         }
       }
     );
