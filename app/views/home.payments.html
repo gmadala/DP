@@ -128,8 +128,7 @@
                     <div class="cell pay-due">
                       <p>{{ payment.DueDate | moment }}</p>
                       <div class="extension" ng-show="showExtendLink(payment)">
-                        <a ng-show="payment.Extendable" ng-click="payments.extension(payment)" href="javascript:void(0)">Extension Available</a>
-                        <a ng-hide="payment.Extendable" ng-click="payments.extension(payment)" href="javascript:void(0)">Request Extension</a>
+                        <a ng-click="payments.extension(payment)" href="javascript:void(0)">Request Extension</a>
                       </div>
                       <div class="nxg-payment-due-status"
                          ng-class="getDueStatus(payment)"

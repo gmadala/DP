@@ -16,7 +16,7 @@
                 "UnitColor": "Purple",
                 "UnitStatus": "In Stock",
                 "CreditType": "VISA",
-                "CurrentPayoff": 34098.00,
+                "CurrentPayoff": 2409.00,
                 "AmountDue": 2409.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
@@ -70,8 +70,8 @@
                 "UnitColor": "Purple",
                 "UnitStatus": "In Stock",
                 "CreditType": "VISA",
-                "CurrentPayoff": 34098.00,
-                "AmountDue": 2409.00,
+                "CurrentPayoff": 543.00,
+                "AmountDue": 543.00,
                 "PrincipalPayoff": 3498.00,
                 "PrincipalDue": 3408.00,
                 "DueDate": "2013-09-30",
@@ -85,7 +85,7 @@
                 "FlooringDate": "2013-08-30",
                 "FeesTotal": 16,
                 "InterestTotal": 17,
-                "Extendable": true
+                "Extendable": false
             }
         ]
     }
