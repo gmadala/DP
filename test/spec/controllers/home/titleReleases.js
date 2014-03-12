@@ -22,11 +22,14 @@ describe('Controller: TitleReleasesCtrl', function () {
     titleReleasesMock = {
       addToQueue: angular.noop,
       removeFromQueue: angular.noop,
-      getTitleReleaseEligibility: angular.noop,
+      getTitleReleaseEligibility: function() {
+        return $q.when({});
+      },
       isFloorplanOnQueue: angular.noop,
       search: function(){
         return $q.when(searchResult.data);
-      }
+      },
+      getQueueFinanced: angular.noop
     };
     floorplanMock = {
       filterValues: Floorplan.filterValues
@@ -48,6 +51,8 @@ describe('Controller: TitleReleasesCtrl', function () {
       Floorplan: floorplanMock,
       $dialog: dialogMock
     });
+
+    scope.$digest();
 
   }));
 
@@ -220,12 +225,17 @@ describe('Controller: TitleReleasesCtrl', function () {
   });
 
   it('should properly toggle titleRequested property', function() {
-    var floorplan = {};
+    var floorplan = {AmountFinanced: 100};
     var inQueue = false;
-
+    scope.eligibility = {
+      ReleaseBalanceAvailable: 200
+    };
     spyOn(titleReleasesMock, 'isFloorplanOnQueue').andCallFake(function(){
       return inQueue;
     });
+
+
+    spyOn(titleReleasesMock, 'getQueueFinanced').andReturn(0);
 
     spyOn(titleReleasesMock, 'addToQueue');
     spyOn(titleReleasesMock, 'removeFromQueue');
@@ -238,6 +248,27 @@ describe('Controller: TitleReleasesCtrl', function () {
 
     scope.toggleSelected(floorplan);
     expect(titleReleasesMock.removeFromQueue).toHaveBeenCalled();
+
+  });
+
+  it('should not toggle if ReleaseBalanceAvailable is too low to add that floorplan', function() {
+    var floorplan = {AmountFinanced: 100};
+    var inQueue = false;
+    scope.eligibility = {
+      ReleaseBalanceAvailable: 200
+    };
+    spyOn(titleReleasesMock, 'getQueueFinanced').andReturn(110);
+
+    spyOn(scope, 'titleReleaseLimitReached');
+    spyOn(titleReleasesMock, 'isFloorplanOnQueue').andReturn(inQueue);
+    spyOn(titleReleasesMock, 'addToQueue');
+    spyOn(titleReleasesMock, 'removeFromQueue');
+
+    scope.toggleSelected(floorplan);
+    expect(titleReleasesMock.addToQueue).not.toHaveBeenCalled();
+    expect(titleReleasesMock.removeFromQueue).not.toHaveBeenCalled();
+    expect(scope.titleReleaseLimitReached).toHaveBeenCalled();
+
 
   });
 

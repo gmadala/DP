@@ -44,6 +44,12 @@ angular.module('nextgearWebApp')
         queue.push(floorplan);
       },
 
+      getQueueFinanced: function() {
+        return _.reduce(queue, function(sum, item) {
+          return sum + item.AmountFinanced;
+        }, 0);
+      },
+
       removeFromQueue: function(floorplan) {
         var indexOf = _.findIndex(queue, function(item) {
           return item.FloorplanId === floorplan.FloorplanId;
