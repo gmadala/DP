@@ -16,6 +16,7 @@
         "CurrentlyApprovedMinFlooringDate": "2013-01-01",
         "BusinessEmail": "tyates@tricolorauto.com",
         "BusinessContactEmail": "tyates@tricolorauto.com",
+        "DisplayTitleReleaseProgram": true,
         "DealerBusinessAddresses": [
             {
                 "Line1": "545 JOHN W CARPENTER FWY",

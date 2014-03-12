@@ -393,7 +393,7 @@ describe('Model: User', function () {
 
   });
 
-  describe('refreshInfo + getInfo methods', function () {
+  describe('refreshInfo + getInfo + infoPromise methods', function () {
 
     var resultData;
 
@@ -428,6 +428,13 @@ describe('Model: User', function () {
       });
       httpBackend.flush();
     });
+
+    it('should return the same promise from infoPromise and refreshInfo', function() {
+      var refreshInfo = user.refreshInfo();
+      expect(user.infoPromise()).toBe(refreshInfo);
+    });
+
+
 
   });
 
