@@ -1,21 +1,23 @@
 {
   "Success": true,
   "Message": null,
-  "Data": [
-    {
-      "LineOfCreditId": "23452",
-      "CreditTypeName": "Retail",
-      "Limit": 245233.44
-    },
-    {
-      "LineOfCreditId": "23453",
-      "CreditTypeName": "Approved",
-      "Limit": 1837743.18
-    },
-    {
-      "LineOfCreditId": "23454",
-      "CreditTypeName": "Current",
-      "Limit": 43005.00
-    }
-  ]
+  "Data": {
+    "LinesOfCredit": [
+      {
+        "LineOfCreditId": "23452",
+        "CreditTypeName": "Retail",
+        "Limit": 245233.44
+      },
+      {
+        "LineOfCreditId": "23453",
+        "CreditTypeName": "Approved",
+        "Limit": 1837743.18
+      },
+      {
+        "LineOfCreditId": "23454",
+        "CreditTypeName": "Current",
+        "Limit": 43005.00
+      }
+    ]
+  }
 }

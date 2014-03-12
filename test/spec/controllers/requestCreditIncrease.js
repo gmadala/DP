@@ -66,13 +66,9 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     });
   }));
 
-  it('should fetch the active lines of credit', function () {
-    var result;
-    scope.selector.linesOfCredit.then(function(res){
-      result = res;
-    });
+  it('should fetch the active lines of credit automatically', function () {
     rootScope.$digest();
-    expect(result).toEqual(linesOfCredit);
+    expect(scope.selector.linesOfCredit).toEqual(linesOfCredit);
   });
 
   it('should not submit the request if the form is invalid', function () {
@@ -97,7 +93,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     expect(creditIncreaseMock.requestCreditIncrease).toHaveBeenCalled();
   });
 
-  it('should set loading properly', function () {
+  it('should set loading properly on submit', function () {
     scope.requestCreditIncreaseForm = {
       $invalid: false,
       $valid: true
@@ -106,6 +102,12 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     scope.confirmRequest();
     expect(scope.loading).toBeTruthy();
     cb();
+    expect(scope.loading).toBeFalsy();
+  });
+
+  it('should set loading properly while waiting for lines of credit to load', function () {
+    expect(scope.loading).toBeTruthy();
+    rootScope.$digest();
     expect(scope.loading).toBeFalsy();
   });
 
