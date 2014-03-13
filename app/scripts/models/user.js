@@ -68,6 +68,10 @@ angular.module('nextgearWebApp')
         return api.request('POST', '/userAccount/resetpassword', data);
       },
 
+      changePassword: function(newPassword) {
+        return api.request('POST', '/UserAccount/usersettings', { Password: newPassword });
+      },
+
       authenticate: function(username, password) {
         var self = this;
         return api.request(
@@ -169,6 +173,14 @@ angular.module('nextgearWebApp')
 
       isDealer: function() {
         return info && info.DealerAuctionStatusForGA === 'Dealer';
+      },
+
+      isPasswordChangeRequired: function() {
+        return !!(api.getAuthParam('TemporaryPasswordUsed'));
+      },
+
+      clearPasswordChangeRequired: function() {
+        api.setAuthParam('TemporaryPasswordUsed', false);
       },
 
       isUserInitRequired: function() {

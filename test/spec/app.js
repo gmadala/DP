@@ -8,7 +8,7 @@ describe('app.js', function () {
   var dealer, user, state, lastState;
 
   // instantiate service
-  var api, http, rootScope, location, cookieStore;
+  var api, http, rootScope, location, cookieStore, userInitRequired, passwordChangeRequired;
   beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location) {
     rootScope = $rootScope;
     user = User;
@@ -16,6 +16,9 @@ describe('app.js', function () {
     lastState = LastState;
     location = $location;
     cookieStore = $cookieStore;
+    passwordChangeRequired = false;
+    userInitRequired = false;
+
     User.isDealer = function(){
       return dealer;
     };
@@ -34,7 +37,15 @@ describe('app.js', function () {
           callback();
         }
       };
-    }
+    };
+
+    User.isUserInitRequired = function(){
+      return userInitRequired;
+    };
+
+    User.isPasswordChangeRequired = function(){
+      return passwordChangeRequired;
+    };
 
   }));
 
@@ -98,17 +109,35 @@ describe('app.js', function () {
 
     });
 
-    it('should show updateSecurity page', function() {
+    it('should show updateSecurity page when User.isUserInitRequired() is true', function() {
 
       spyOn(lastState, 'getUserState').andReturn('');
       spyOn(lastState, 'clearUserState');
       spyOn(location, 'path');
       dealer = true;
+      passwordChangeRequired = false;
+      userInitRequired = true;
 
-      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: true});
+      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: true, TemporaryPasswordUsed: false});
       expect(lastState.getUserState).not.toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
       expect(location.path).toHaveBeenCalledWith('/login/updateSecurity');
+
+    });
+
+    it('should show createPassword page when User.isPasswordChangeRequired() is true', function() {
+
+      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'clearUserState');
+      spyOn(location, 'path');
+      dealer = true;
+      passwordChangeRequired = true;
+      userInitRequired = false;
+
+      rootScope.$broadcast('event:userAuthenticated');
+      expect(lastState.getUserState).not.toHaveBeenCalled();
+      expect(lastState.clearUserState).not.toHaveBeenCalled();
+      expect(location.path).toHaveBeenCalledWith('/login/createPassword');
 
     });
 
