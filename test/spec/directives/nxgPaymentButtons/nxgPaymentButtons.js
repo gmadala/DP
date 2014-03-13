@@ -109,7 +109,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.AmountDue,
         scope.myPayment.DueDate,
         false,
-        200,
+        scope.myPayment.PrincipalDue,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
@@ -244,7 +244,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
         true,
-        2000,
+        scope.myPayment.PrincipalPayoff,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
@@ -357,7 +357,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
         true,
-        2000,
+        scope.myPayment.PrincipalPayoff,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);

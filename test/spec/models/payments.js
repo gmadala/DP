@@ -564,7 +564,7 @@ describe("Model: Payments", function () {
       expect(pmt.amount).toBe(200);
       expect(pmt.dueDate).toBe('2013-01-02');
       expect(pmt.isPayoff).toBe(true);
-      expect(pmt.revenueToTrack).toBe(150);
+      expect(pmt.principal).toBe(150);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {
