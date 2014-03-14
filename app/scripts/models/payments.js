@@ -212,11 +212,7 @@ angular.module('nextgearWebApp')
           ScheduledDate: api.toShortISODate(scheduledDate),
           IsCurtailment: !isPayoff
         };
-        return api.request('GET', '/payment/calculatepaymentamount', params).then(
-          function (result) {
-            return result.PaymentAmount;
-          }
-        );
+        return api.request('GET', '/payment/calculatepaymentamount', params);
       },
       checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
         var shortFees = [],

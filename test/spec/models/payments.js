@@ -708,7 +708,11 @@ describe("Model: Payments", function () {
           Success: true,
           Data: {
             FloorplanId: 'foo',
-            PaymentAmount: 345.67
+            PaymentAmount: 345.67,
+            PrincipalAmount: 100,
+            InterestAmount: 200,
+            FeeAmount: 50,
+            CollateralProtectionAmount: 11
           }
         }, {}];
       });
@@ -731,7 +735,11 @@ describe("Model: Payments", function () {
     it('should return a promise for the resulting PaymentAmount', function () {
       payments.fetchPaymentAmountOnDate('foo', new Date(2013, 11, 22), false).then(
         function (result) {
-          expect(result).toBe(345.67);
+          expect(result.PaymentAmount).toBe(345.67);
+          expect(result.PrincipalAmount).toBe(100);
+          expect(result.InterestAmount).toBe(200);
+          expect(result.FeeAmount).toBe(50);
+          expect(result.CollateralProtectionAmount).toBe(11);
         }
       );
       httpBackend.flush();

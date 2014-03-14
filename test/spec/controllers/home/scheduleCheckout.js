@@ -258,12 +258,23 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     });
 
     it('should update payment amount to the loaded value on success', function () {
-      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when(100));
+      spyOn(Payments, 'fetchPaymentAmountOnDate').andReturn($q.when({
+        PaymentAmount: 100,
+        PrincipalAmount: 200,
+        InterestAmount: 300,
+        FeeAmount: 400
+      }));
       spyOn(dialog, 'close');
       payment.amount = 50;
+      payment.feesTotal = 50;
+      payment.interestTotal = 50;
+      payment.principal = 50;
       scope.finalize(new Date());
       scope.$apply();
       expect(payment.amount).toBe(100);
+      expect(payment.feesTotal).toBe(400);
+      expect(payment.interestTotal).toBe(300);
+      expect(payment.principal).toBe(200);
     });
 
   });
