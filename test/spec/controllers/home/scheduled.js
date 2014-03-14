@@ -62,13 +62,15 @@ describe('Controller: ScheduledCtrl', function () {
       fetchFees: function() {
         return {
           then: function(success) {
-            success([{
-              WebScheduledAccountFeeId: '',
-              Description: '',
-              ScheduledDate: '',
-              Balance: '',
-              FeeType: ''
-            }]);
+            success({
+              ScheduledAccountFees: {
+                WebScheduledAccountFeeId: '',
+                Description: '',
+                ScheduledDate: '',
+                Balance: '',
+                FeeType: ''
+              }
+            });
           }
         };
       }

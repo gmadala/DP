@@ -226,9 +226,9 @@ angular.module('nextgearWebApp')
         });
         angular.forEach(fees, function (fee) {
           shortFees.push({
-            FinancialRecordId: fee.financialRecordId//,
-          //  ScheduledPaymentDate: api.toShortISODate(fee.scheduleDate) || null,
-          // TODO: When /payment/2_0/make endpoint is available, remove the comments in the above 2 lines
+            FinancialRecordId: fee.financialRecordId,
+            ScheduledPaymentDate: api.toShortISODate(fee.scheduleDate) || null,
+
           });
         });
 
@@ -238,9 +238,7 @@ angular.module('nextgearWebApp')
           BankAccountId: bankAccount.BankAccountId,
           UnappliedFundsAmount: api.toFloat(unappliedFundsAmt )|| 0
         };
-        // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-        //return api.request('POST', '/payment/2_0/make', data);
-        return api.request('POST', '/payment/make', data);
+        return api.request('POST', '/payment/2_0/make', data);
       },
       requestExtension: function (floorplanId) {
         return api.request('POST', '/Floorplan/requestextension/' + floorplanId);

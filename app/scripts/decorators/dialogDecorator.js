@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
 
       var preventScrollingOnBody = function(scrollEvent){
         // Prevent default key action if using arrow keys
-       if(document.activeElement.tagName.toLowerCase() !== 'input' && scrollEvent.keyCode >= 37 && scrollEvent.keyCode <= 40){
+        if(document.activeElement.tagName.toLowerCase() !== 'input' && scrollEvent.keyCode >= 37 && scrollEvent.keyCode <= 40){
           scrollEvent.preventDefault();
         }
       };
