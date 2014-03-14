@@ -54,13 +54,6 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
-    it('button should be disabled if we are outside business hours', function() {
-      scope.$apply(function () {
-        scope.isOpen = false;
-      });
-      expect(element.find('#toggleFee').attr('disabled')).toBeDefined();
-    });
-
   });
 
   describe('payment mode', function () {

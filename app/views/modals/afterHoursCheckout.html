@@ -13,7 +13,7 @@
 
   <ul ng-show="ejectedFees.length > 0 || ejectedPayments.length > 0">
     <li ng-show="ejectedFees.length > 0">
-      {{ ejectedFees.length }} Account Fee(s)
+      {{ ejectedFees.length }} Account Fee(s) due before next available schedule date
     </li>
     <li ng-show="ejectedPayments.length > 0">
       {{ ejectedPayments.length }} Payment(s) due before next available schedule date
@@ -22,7 +22,7 @@
 
   <p>
     Any <span ng-show="ejectedFees.length > 0 || ejectedPayments.length > 0">other</span>
-    payments that were not scheduled have been scheduled for the next available
+    payments or fees that were not scheduled have been scheduled for the next available
     business day ({{ autoScheduleDate | moment }}).
   </p>
   <p>

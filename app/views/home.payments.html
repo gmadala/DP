@@ -54,8 +54,7 @@
                 <div class="cell fee-amt"><p>{{ fee.Balance | currency }}</p>
                   <div nxg-payment-buttons="fee"
                                  item="fee"
-                                 on-queue="isFeeOnQueue(fee.FinancialRecordId)"
-                                 can-pay-now="canPayNow">
+                                 on-queue="isFeeOnQueue(fee.FinancialRecordId)">
                   </div>
                 </div>
             </li>
