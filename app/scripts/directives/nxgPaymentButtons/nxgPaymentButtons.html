@@ -5,7 +5,6 @@
           id="toggleFee"
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue}"
-          ng-disabled="!canPayNow"
           ng-click="toggleFeeInQueue()"
           tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"

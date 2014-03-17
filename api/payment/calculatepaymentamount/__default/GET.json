@@ -3,6 +3,10 @@
     "Message": null,
     "Data": {
         "FloorplanId": "254",
-        "PaymentAmount": 2222.88
+        "PaymentAmount": 2222.88,
+        "PrincipalAmount": 1680.22,
+        "InterestAmount": 330.05,
+        "FeeAmount": 95.25,
+        "CollateralProtectionAmount": 23.00
     }
 }

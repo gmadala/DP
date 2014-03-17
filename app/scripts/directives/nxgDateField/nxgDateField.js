@@ -39,10 +39,25 @@ angular.module('nextgearWebApp')
             scope.isDate = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
             var showCode = $parse(attrs.beforeShowDay),
                 $input = element.children('input'),
-                datepickerIsOpen = false;
+                datepickerIsOpen = false,
+                datepickerPopup;
 
             element.on('show', function() {
               datepickerIsOpen = true;
+
+
+              // In IE10, date wasn't getting selected without double-clicking. The "click"
+              // event wasn't getting triggered on click, so this adds a mousedown listener
+              // that in turn triggers a click event. If removing or changing this, ensure
+              // that single-clicks can still select a date in IE (specifically IE10).
+              // Relates to VO-1099.
+              if(!datepickerPopup) {
+                datepickerPopup = angular.element('.datepicker');
+                datepickerPopup.find('td').on('mousedown', function(){
+                  angular.element(this).trigger('click');
+                });
+              }
+
             });
 
             // a bit round-about, but passing ngModel here the data errs are not applied yet,
@@ -104,6 +119,16 @@ angular.module('nextgearWebApp')
             // When date changes (esp with a click), make sure focus remains on the input element.
             element.on('hide', function() {
               datepickerIsOpen = false;
+
+              // In IE10, date wasn't getting selected without double-clicking. The "click"
+              // event wasn't getting triggered on click, so this adds a mousedown listener
+              // that in turn triggers a click event. If removing or changing this, ensure
+              // that single-clicks can still select a date in IE (specifically IE10).
+              // Relates to VO-1099.
+              if(datepickerPopup) {
+                datepickerPopup.find('td').off('mousedown');
+                datepickerPopup = null;
+              }
 
               if(false === showCode(scope, {date: new Date(this.value)})) {
                 $input.val('');

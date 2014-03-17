@@ -44,7 +44,7 @@ angular.module('nextgearWebApp')
         $scope.togglePaymentInQueue = function (asPayoff) {
           var p = $scope.item,
             amount = asPayoff ? p.CurrentPayoff : p.AmountDue,
-            revenue = amount - (asPayoff ? p.PrincipalPayoff : p.PrincipalDue);
+            principal = asPayoff ? p.PrincipalPayoff : p.PrincipalDue;
           if (!$scope.onQueue) {
             Payments.addPaymentToQueue(
               p.FloorplanId,
@@ -54,7 +54,7 @@ angular.module('nextgearWebApp')
               amount,
               p.DueDate,
               asPayoff,
-              revenue,
+              principal,
               p.InterestTotal,
               p.FeesTotal
             );

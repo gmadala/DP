@@ -22,7 +22,7 @@
               <a href="#/home/floorplan" >Floor Plan</a>
             </li>
 
-            <li ng-class="{ 'active': $state.includes('home.titlereleases') }">
+            <li ng-show="showTitleReleases" ng-class="{ 'active': $state.includes('home.titlereleases') }">
               <a href="#/home/titlereleases" >Title Releases</a>
             </li>
         </ul>

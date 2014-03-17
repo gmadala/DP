@@ -75,8 +75,8 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
-  <button ng-click="close()" class="btn">Cancel Request</button>
+  <button ng-disabled="loading" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
+  <button ng-disabled="loading" ng-click="close()" class="btn">Cancel Request</button>
 </div>
 
 

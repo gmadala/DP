@@ -6,11 +6,18 @@ angular.module('nextgearWebApp')
     $scope.twoDecimalRegex = /^(\d)*(.(\d){0,2})?$/;
 
     $scope.selector = {
-      linesOfCredit: CreditIncrease.getActiveLinesOfCredit(),
       selectedLineOfCredit: null,
       isTemporary: null,
       amount: null
     };
+
+    $scope.loading = true;
+
+    CreditIncrease.getActiveLinesOfCredit().then(function(lines) {
+      $scope.loading = false;
+      $scope.selector.linesOfCredit = lines;
+    });
+
 
     $scope.confirmRequest = function() {
 

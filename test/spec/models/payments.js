@@ -564,7 +564,7 @@ describe("Model: Payments", function () {
       expect(pmt.amount).toBe(200);
       expect(pmt.dueDate).toBe('2013-01-02');
       expect(pmt.isPayoff).toBe(true);
-      expect(pmt.revenueToTrack).toBe(150);
+      expect(pmt.principal).toBe(150);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {
@@ -708,7 +708,11 @@ describe("Model: Payments", function () {
           Success: true,
           Data: {
             FloorplanId: 'foo',
-            PaymentAmount: 345.67
+            PaymentAmount: 345.67,
+            PrincipalAmount: 100,
+            InterestAmount: 200,
+            FeeAmount: 50,
+            CollateralProtectionAmount: 11
           }
         }, {}];
       });
@@ -731,7 +735,11 @@ describe("Model: Payments", function () {
     it('should return a promise for the resulting PaymentAmount', function () {
       payments.fetchPaymentAmountOnDate('foo', new Date(2013, 11, 22), false).then(
         function (result) {
-          expect(result).toBe(345.67);
+          expect(result.PaymentAmount).toBe(345.67);
+          expect(result.PrincipalAmount).toBe(100);
+          expect(result.InterestAmount).toBe(200);
+          expect(result.FeeAmount).toBe(50);
+          expect(result.CollateralProtectionAmount).toBe(11);
         }
       );
       httpBackend.flush();
@@ -753,9 +761,7 @@ describe("Model: Payments", function () {
     });
 
     it('should make the expected API endpoint call', function () {
-      // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-      httpBackend.expectPOST('/payment/make').respond(stubResponse);
-      //httpBackend.expectPOST('/payment/2_0/make').respond(stubResponse);
+      httpBackend.expectPOST('/payment/2_0/make').respond(stubResponse);
       payments.checkout({}, {}, 'bank1');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -772,18 +778,11 @@ describe("Model: Payments", function () {
         }
       };
 
-      // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
-      //httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
+      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
 
-      // Also swap the expectedFees!
-        // var expectedFees = [
-        //   { FinancialRecordId: 'one', ScheduledPaymentDate: null },
-        //   { FinancialRecordId: 'two', ScheduledPaymentDate: null }
-        // ];
-         var expectedFees = [
-          { FinancialRecordId: 'one' },
-          { FinancialRecordId: 'two' }
+        var expectedFees = [
+          { FinancialRecordId: 'one', ScheduledPaymentDate: null },
+          { FinancialRecordId: 'two', ScheduledPaymentDate: null }
         ];
         data = angular.fromJson(data);
         data = _.sortBy(data.AccountFees, 'FinancialRecordId');
@@ -810,9 +809,7 @@ describe("Model: Payments", function () {
         }
       };
 
-      // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
-      //httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
+      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
         var expectedPayments = [
           {
             FloorplanId: '2048',
@@ -836,9 +833,7 @@ describe("Model: Payments", function () {
     });
 
     it('should send the bank account id', function () {
-      // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
-      //httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
+      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
         data = angular.fromJson(data);
         expect(data.BankAccountId).toBe('bank1');
         return [200, stubResponse, {}];
@@ -848,9 +843,7 @@ describe("Model: Payments", function () {
     });
 
     it('should send the unapplied funds amount as a number', function () {
-      // TODO: When /payment/2_0/make endpoint is available, swap out the next 2 lines
-      httpBackend.whenPOST('/payment/make').respond(function (method, url, data) {
-      //httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
+      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
         data = angular.fromJson(data);
         expect(data.UnappliedFundsAmount).toBe(180.45);
         return [200, stubResponse, {}];

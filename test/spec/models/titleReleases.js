@@ -98,6 +98,13 @@ describe('Model: TitleReleases', function () {
 
     });
 
+    it('should have a getQueueFinanced method that sums the value of floorplans in queue', function() {
+      titleReleases.getQueue().push({AmountFinanced: 100});
+      titleReleases.getQueue().push({AmountFinanced: 500});
+      titleReleases.getQueue().push({AmountFinanced: 150});
+      expect(titleReleases.getQueueFinanced()).toBe(750);
+    });
+
   });
 
   it('should make request for title releases', function() {

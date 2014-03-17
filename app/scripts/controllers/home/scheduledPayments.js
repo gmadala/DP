@@ -215,7 +215,7 @@ angular.module('nextgearWebApp')
     ScheduledPaymentsSearch.fetchFees(User.getInfo().BusinessId).then(
       function (result) {
         $scope.fees.loading = false;
-        $scope.fees.results = result;
+        $scope.fees.results = result.ScheduledAccountFees;
       }, function (/*error*/) {
         $scope.fees.loading = false;
       }

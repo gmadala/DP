@@ -6,7 +6,8 @@ angular.module('nextgearWebApp')
     var info = null,
       statics = null,
       paySellerOptions = [],
-      securityQuestions = null;
+      securityQuestions = null,
+      infoRequest = null;
 
     var calculateCanPayBuyer = function() {
       if (!info) {
@@ -65,6 +66,10 @@ angular.module('nextgearWebApp')
           })
         };
         return api.request('POST', '/userAccount/resetpassword', data);
+      },
+
+      changePassword: function(newPassword) {
+        return api.request('POST', '/UserAccount/usersettings', { Password: newPassword });
       },
 
       authenticate: function(username, password) {
@@ -142,10 +147,12 @@ angular.module('nextgearWebApp')
       },
 
       refreshInfo: function() {
-        return api.request('GET', '/Dealer/Info').then(function(data) {
+        infoRequest = api.request('GET', '/Dealer/Info').then(function(data) {
           info = data;
           return info;
         });
+
+        return infoRequest;
       },
 
       getInfo: function() {
@@ -156,8 +163,24 @@ angular.module('nextgearWebApp')
         return info !== null;
       },
 
+      infoPromise: function() {
+        if(infoRequest === null) {
+          this.refreshInfo();
+        }
+
+        return infoRequest;
+      },
+
       isDealer: function() {
         return info && info.DealerAuctionStatusForGA === 'Dealer';
+      },
+
+      isPasswordChangeRequired: function() {
+        return !!(api.getAuthParam('TemporaryPasswordUsed'));
+      },
+
+      clearPasswordChangeRequired: function() {
+        api.setAuthParam('TemporaryPasswordUsed', false);
       },
 
       isUserInitRequired: function() {

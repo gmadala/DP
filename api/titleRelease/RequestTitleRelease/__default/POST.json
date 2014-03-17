@@ -4,11 +4,11 @@
   "Data": {
     "TitleReleaseResults": [
       {
-        "FloorplanId": "abc123",
+        "FloorplanId": "abc125",
         "ReleaseSuccessful": false
       },
       {
-        "FloorplanId": "abc125",
+        "FloorplanId": "abc126",
         "ReleaseSuccessful": true
       }
     ]

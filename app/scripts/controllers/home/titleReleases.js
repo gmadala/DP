@@ -9,7 +9,9 @@ angular.module('nextgearWebApp')
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.isFloorplanOnQueue = TitleReleases.isFloorplanOnQueue;
-    $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
+    TitleReleases.getTitleReleaseEligibility().then(function(eligibility) {
+      $scope.eligibility = eligibility;
+    });
     $scope.eligibilityLoading = TitleReleases.getEligibilityLoading;
 
 
@@ -108,8 +110,11 @@ angular.module('nextgearWebApp')
     $scope.toggleSelected = function (floorplan) {
       if(TitleReleases.isFloorplanOnQueue(floorplan)) {
         TitleReleases.removeFromQueue(floorplan);
-      } else {
+      } else if(TitleReleases.getQueueFinanced() + floorplan.AmountFinanced <= $scope.eligibility.ReleaseBalanceAvailable) {
         TitleReleases.addToQueue(floorplan);
+      } else {
+        // Not enough credit to request title
+        $scope.titleReleaseLimitReached();
       }
     };
 
@@ -123,7 +128,7 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseLimitReached = function() {
       var title = 'Title Release Limit Reached',
-          message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account. If you have any questionsregarding this limit, please call Dealer Services at 888.989.3721.',
+          message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account.',
           buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();

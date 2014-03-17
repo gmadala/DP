@@ -54,13 +54,6 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
-    it('button should be disabled if we are outside business hours', function() {
-      scope.$apply(function () {
-        scope.isOpen = false;
-      });
-      expect(element.find('#toggleFee').attr('disabled')).toBeDefined();
-    });
-
   });
 
   describe('payment mode', function () {
@@ -109,7 +102,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.AmountDue,
         scope.myPayment.DueDate,
         false,
-        200,
+        scope.myPayment.PrincipalDue,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
@@ -244,7 +237,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
         true,
-        2000,
+        scope.myPayment.PrincipalPayoff,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
@@ -357,7 +350,7 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.CurrentPayoff,
         scope.myPayment.DueDate,
         true,
-        2000,
+        scope.myPayment.PrincipalPayoff,
         40,
         20);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);

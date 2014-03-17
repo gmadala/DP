@@ -208,6 +208,8 @@ angular.module('nextgearWebApp')
             $scope.submitInProgress = false;
           }
         );
+      }, function (/*error*/) {
+        $scope.submitInProgress = false;
       });
     };
 

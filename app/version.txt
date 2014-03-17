@@ -1,16 +1,8 @@
-NextGear Capital v2.0.5
+NextGear Capital v2.0.6
 =================================
 
 Fixes included in this release:
 
-VO-1094	Please post the email address for dealers who are having issues logging in to the web site on the log in page
-VO-1388	Web – View Analytics: Semi colon(:) is missing after the content under "Approved Floor Plans" section.
-VO-1333	Web – Login Page: Session expired message is not getting closed when user clicks on “Browser Back” button.
-VO-1309	Add text description under "Request a Credit Increase" link.
+VO-1502	Web –Dealer Search-Business Search: User is not able to navigate or move the cursor within “Business Name” text field using “Keyboard arrow keys”.
+VO-1514	Web–Dashboard-Request Payout: Suggestion List for “Payout Amount” text field is not getting displayed at correct position.
 VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
-VO-1391	Web–Welcome to NextGear: Error message “Please Enter a valid email address” is getting displayed when Auction users logs in.
-VO-1392	Web – Welcome to NextGear: “Cancel” button is not working.
-VO-1393	Web – Account Management: “Default Address field” Info popover is not getting closed when user clicks on “Cancel” or “Save” button under “Title Settings” section.
-VO-800	Allow User to Select alternate, approved Title Release Address during vehicle payoff
-VO-903	Auction Dashboard - Floor Plan Section rework
-VO-850	Web: On "Dashboard" - if Month View is selected on "Payments Summary" - Text "Payments This month" should be "Payments This Month".
