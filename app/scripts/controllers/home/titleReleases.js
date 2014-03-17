@@ -128,7 +128,7 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseLimitReached = function() {
       var title = 'Title Release Limit Reached',
-          message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account. If you have any questions regarding this limit, please call Dealer Services at 888.989.3721.',
+          message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account.',
           buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();
