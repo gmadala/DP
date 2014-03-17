@@ -1,12 +1,8 @@
-NextGear Capital v2.0.4
+NextGear Capital v2.0.6
 =================================
 
 Fixes included in this release:
 
-VO-811	Show Fees, Interest on Vehicle on the Vehicle Details view and Floor Date & # of Days Floored on the Payments and Scheduled Payments view.
-VO-1307	Metrics tracking updates for Profile Settings, Account Management and auction's Settings
-VO-1385	Auto Disbursement Setting - API Integration
-VO-985	High # of "Events" Being Generated Since Last Release (Viewed Through Clicky)
-VO-1068	Remove the Original Curtailment Schedule from the web site
-VO-763	Dealer Self-Service - Display Auto Disbursement of Unapplied funds Setting
-VO-1370	EUI web site - Clicking on Scheduling Payment link displays " "unable to communicate with the NG system. Clicked OK."
+VO-1502	Web –Dealer Search-Business Search: User is not able to navigate or move the cursor within “Business Name” text field using “Keyboard arrow keys”.
+VO-1514	Web–Dashboard-Request Payout: Suggestion List for “Payout Amount” text field is not getting displayed at correct position.
+VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
