@@ -29,8 +29,12 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
-                "FeesTotal": 11,
-                "InterestTotal": 12,
+                "FeesPaymentTotal": 11,
+                "FeesPayoffTotal": 13,
+                "InterestPaymentTotal": 12,
+                "InterestPayoffTotal": 12,
+                "CollateralProtectionPaymentTotal": 52.1800,
+                "CollateralProtectionPayoffTotal": 52.1800
                 "Extendable": true
             },
             {
@@ -56,8 +60,12 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
-                "FeesTotal": 14,
-                "InterestTotal": 15,
+                "FeesPaymentTotal": 14,
+                "FeesPayoffTotal": 13,
+                "InterestPaymentTotal": 15,
+                "InterestPayoffTotal": 15,
+                "CollateralProtectionPaymentTotal": 52.1800,
+                "CollateralProtectionPayoffTotal": 52.1800,
                 "Extendable": false
             },
             {
@@ -83,8 +91,12 @@
                 "TitleLocationName": "NextGear",
                 "ScheduledPaymentDate": "2013-08-30",
                 "FlooringDate": "2013-08-30",
-                "FeesTotal": 16,
-                "InterestTotal": 17,
+                "FeesPaymentTotal": 16,
+                "FeesPayoffTotal": 13,
+                "InterestPaymentTotal": 17,
+                "InterestPayoffTotal": 17,
+                "CollateralProtectionPaymentTotal": 52.1800,
+                "CollateralProtectionPayoffTotal": 52.1800
                 "Extendable": false
             }
         ]
