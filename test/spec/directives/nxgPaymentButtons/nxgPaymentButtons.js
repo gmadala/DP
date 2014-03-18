@@ -113,8 +113,12 @@ describe('Directive: nxgPaymentButtons', function () {
         Scheduled: false,
         PayPayoffAmount: false,
         DueDate: '2013-01-01',
-        FeesTotal: 20,
-        InterestTotal: 40
+        FeesPaymentTotal: 20,
+        FeesPayoffTotal: 25,
+        InterestPaymentTotal: 40,
+        InterestPayoffTotal: 45,
+        CollateralProtectionPayoffTotal: 85,
+        CollateralProtectionPaymentTotal: 90
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -143,7 +147,8 @@ describe('Directive: nxgPaymentButtons', function () {
         false,
         scope.myPayment.PrincipalDue,
         40,
-        20);
+        20,
+        90);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -176,8 +181,12 @@ describe('Directive: nxgPaymentButtons', function () {
         CurtailmentPaymentScheduled: true,
         CurrentPayoff: 5000,
         AmountDue: 1000,
-        FeesTotal: 20,
-        InterestTotal: 40
+        FeesPaymentTotal: 20,
+        FeesPayoffTotal: 25,
+        InterestPaymentTotal: 40,
+        InterestPayoffTotal: 45,
+        CollateralProtectionPayoffTotal: 85,
+        CollateralProtectionPaymentTotal: 90
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -248,8 +257,12 @@ describe('Directive: nxgPaymentButtons', function () {
         PayPayoffAmount: false,
         DueDate: '2013-02-03',
         StockNumber: '1234',
-        FeesTotal: 20,
-        InterestTotal: 40
+        FeesPaymentTotal: 20,
+        FeesPayoffTotal: 25,
+        InterestPaymentTotal: 40,
+        InterestPayoffTotal: 45,
+        CollateralProtectionPayoffTotal: 85,
+        CollateralProtectionPaymentTotal: 90
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -277,8 +290,9 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.DueDate,
         true,
         scope.myPayment.PrincipalPayoff,
-        40,
-        20);
+        45,
+        25,
+        85);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -361,8 +375,12 @@ describe('Directive: nxgPaymentButtons', function () {
         PayPayoffAmount: false,
         DueDate: '2013-02-03',
         StockNumber: '1234',
-        FeesTotal: 20,
-        InterestTotal: 40
+        FeesPaymentTotal: 20,
+        FeesPayoffTotal: 25,
+        InterestPaymentTotal: 40,
+        InterestPayoffTotal: 45,
+        CollateralProtectionPayoffTotal: 85,
+        CollateralProtectionPaymentTotal: 90
       };
       scope.inQueue = false;
       $compile(element)(scope);
@@ -390,8 +408,9 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.myPayment.DueDate,
         true,
         scope.myPayment.PrincipalPayoff,
-        40,
-        20);
+        45,
+        25,
+        85);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 

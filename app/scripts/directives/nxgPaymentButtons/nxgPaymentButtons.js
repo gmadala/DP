@@ -45,8 +45,23 @@ angular.module('nextgearWebApp')
 
         $scope.togglePaymentInQueue = function (asPayoff) {
           var p = $scope.item,
-            amount = asPayoff ? p.CurrentPayoff : p.AmountDue,
-            principal = asPayoff ? p.PrincipalPayoff : p.PrincipalDue;
+            amount, principal, fees, interest, collateralProtectionPmt;
+
+          if (asPayoff) {
+            amount = p.CurrentPayoff;
+            principal = p.PrincipalPayoff;
+            fees = p.FeesPayoffTotal;
+            interest = p.InterestPayoffTotal;
+            collateralProtectionPmt = p.CollateralProtectionPayoffTotal;
+          }
+          else {
+            amount = p.AmountDue;
+            principal = p.PrincipalDue;
+            fees = p.FeesPaymentTotal;
+            interest = p.InterestPaymentTotal;
+            collateralProtectionPmt = p.CollateralProtectionPaymentTotal;
+          }
+
           if (!$scope.onQueue) {
             Payments.addPaymentToQueue(
               p.FloorplanId,
@@ -57,8 +72,9 @@ angular.module('nextgearWebApp')
               p.DueDate,
               asPayoff,
               principal,
-              p.InterestTotal,
-              p.FeesTotal
+              interest,
+              fees,
+              collateralProtectionPmt
             );
           } else {
             Payments.removePaymentFromQueue(p.FloorplanId);
