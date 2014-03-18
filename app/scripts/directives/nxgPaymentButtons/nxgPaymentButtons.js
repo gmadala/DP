@@ -15,12 +15,14 @@ angular.module('nextgearWebApp')
         $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
           var result = $scope.type;
 
-          if ($scope.item.Scheduled) {
+          if ($scope.item.Scheduled && $scope.type !== 'fee') {
             if ($scope.item.CurtailmentPaymentScheduled) {
               result += '-scheduledPayment';
             } else {
               result += '-scheduledPayoff';
             }
+          } else if ($scope.item.Scheduled && $scope.type === 'fee') {
+            result += '-scheduledFee';
           }
 
           $scope.internalType = result;
@@ -63,7 +65,7 @@ angular.module('nextgearWebApp')
           }
         };
 
-        $scope.cancelScheduled = function () {
+        $scope.cancelScheduledPayment = function () {
           var dialogOptions = {
             backdrop: true,
             keyboard: true,
@@ -96,6 +98,36 @@ angular.module('nextgearWebApp')
           $dialog.dialog(dialogOptions).open();
         };
 
+        $scope.cancelScheduledFee = function () {
+          var dialogOptions = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            templateUrl: 'views/modals/cancelFee.html',
+            controller: 'CancelFeeCtrl',
+            resolve: {
+              options: function() {
+                return {
+                  fee: {
+                    webScheduledAccountFeeId: $scope.item.WebScheduledAccountFeeId,
+                    financialRecordId: $scope.item.FinancialRecordId,
+                    feeType: $scope.item.FeeType,
+                    description: $scope.item.Description,
+                    scheduledDate: $scope.item.ScheduledDate,
+                    balance: $scope.item.Balance
+                  },
+                  onCancel: function() {
+                    var f = $scope.item;
+                    f.Scheduled = false;
+                    f.ScheduledDate = null;
+                    return f;
+                  }
+                };
+              }
+            }
+          };
+          $dialog.dialog(dialogOptions).open();
+        };
       },
       templateUrl: 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html',
       replace: true

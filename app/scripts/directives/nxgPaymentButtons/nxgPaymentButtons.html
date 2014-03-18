@@ -12,6 +12,14 @@
     <span>{{!onQueue && 'Add' || 'Remove'}}</span>
   </button>
 
+  <button ng-switch-when="fee-scheduledFee"
+          type="button"
+          id="cancelScheduledFee"
+          class="btn btn-mini btn-block"
+          ng-click="cancelScheduledFee()">
+    <span>Unschedule</span>
+  </button>
+
   <button ng-switch-when="payment"
           type="button"
           id="togglePayment"
@@ -29,7 +37,7 @@
           type="button"
           id="cancelScheduledPayment"
           class="btn btn-mini btn-block"
-          ng-click="cancelScheduled()">
+          ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>
 
@@ -71,7 +79,7 @@
           type="button"
           id="cancelScheduledPayoff"
           class="btn btn-mini btn-block"
-          ng-click="cancelScheduled()">
+          ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>
 </div>

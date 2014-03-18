@@ -54,6 +54,45 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
+    describe('fee mode (fee previously scheduled)', function() {
+      var dialog;
+
+      beforeEach(inject(function ($rootScope, $compile, $dialog) {
+        dialog = $dialog;
+        element = angular.element('<div nxg-payment-buttons="fee" ' +
+          'item="myFee" on-queue="inQueue"></div>');
+        scope = $rootScope.$new();
+        scope.myFee = {
+          FeeType: 'FeeType',
+          Description: 'FeeDescription',
+          Balance: 1500,
+          ScheduledDate: '2013-01-01',
+          Scheduled: true,
+          WebScheduledAccountFeeId: 'webFee1'
+        };
+        scope.inQueue = false;
+        $compile(element)(scope);
+        $rootScope.$digest();
+      }));
+
+      it('should have a cancel scheduled fee button that invokes the cancel scheduled fee modal', function() {
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+
+        element.find('#cancelScheduledFee').click();
+
+        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/cancelFee.html');
+        expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('CancelFeeCtrl');
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('webFee1');
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.feeType).toBe('FeeType');
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.description).toBe('FeeDescription');
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.scheduledDate).toBe('2013-01-01');
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.balance).toBe(1500);
+      });
+
+    });
   });
 
   describe('payment mode', function () {
