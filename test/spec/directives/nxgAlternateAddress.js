@@ -5,13 +5,17 @@ describe('Directive: nxgAlternateAddress', function () {
 
   var element,
       scope,
+      rootScope,
       dScope,
       titleAddressesMock,
       addrResponseMock,
+      compile,
       defaultAddrResponseMock;
 
   beforeEach(inject(function ($rootScope, $compile, TitleAddresses) {
     scope = $rootScope.$new();
+    compile = $compile;
+    rootScope = $rootScope;
     scope.payment = {
       floorplanId: 123,
       overrideAddressId: false,
@@ -107,5 +111,25 @@ describe('Directive: nxgAlternateAddress', function () {
       dScope.onClickAddress();
       expect(dScope.showSelectMenu).toBe(true);
     });
+  });
+
+  it('should set the default showSelectMenu if attribute is set', function() {
+    var scope = rootScope.$new();
+    scope.payment = {
+      floorplanId: 123,
+      overrideAddressId: false,
+      isPayoff: true
+    };
+
+    element = angular.element(
+      '<div nxg-alternate-address="payment" show-select-menu></div>');
+    element = compile(element)(scope);
+    rootScope.$digest();
+
+    dScope = element.scope();
+
+    expect(dScope.showSelectMenu).toBe(true);
+
+
   });
 });
