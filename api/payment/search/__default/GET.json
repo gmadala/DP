@@ -34,7 +34,7 @@
                 "InterestPaymentTotal": 12,
                 "InterestPayoffTotal": 12,
                 "CollateralProtectionPaymentTotal": 52.1800,
-                "CollateralProtectionPayoffTotal": 52.1800
+                "CollateralProtectionPayoffTotal": 52.1800,
                 "Extendable": true
             },
             {
@@ -96,7 +96,7 @@
                 "InterestPaymentTotal": 17,
                 "InterestPayoffTotal": 17,
                 "CollateralProtectionPaymentTotal": 52.1800,
-                "CollateralProtectionPayoffTotal": 52.1800
+                "CollateralProtectionPayoffTotal": 52.1800,
                 "Extendable": false
             }
         ]
