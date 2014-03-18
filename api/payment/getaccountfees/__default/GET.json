@@ -7,24 +7,45 @@
             "FinancialRecordId": "24625",
             "FinancialRecordTypeId": 13,
             "Balance": 340.00,
-            "EffectiveDate": "2013-09-08",
+            "EffectiveDate": "2014-06-08",
             "Description": "Description of whatever this is for.",
             "FloorplanId": "2490",
             "StockNumber": "3490",
             "Vin": "SDLKGHOWRIHGGHKLJ",
-            "Posted": "2013-09-01"
+            "Posted": "2013-09-01",
+            "Scheduled": true,
+            "ScheduledDate": "2014-03-31",
+            "WebScheduledAccountFeeId": "accountFeeId12345"
         },
         {
             "FeeType": "Overdue Payment Fee",
             "FinancialRecordId": "24626",
             "FinancialRecordTypeId": 14,
             "Balance": 290.00,
-            "EffectiveDate": "2013-09-13",
+            "EffectiveDate": "2014-06-24",
             "Description": "Description of whatever this is for.",
             "FloorplanId": "2490",
             "StockNumber": "3490",
             "Vin": "SDLKGHOWRIHGGHKLP",
-            "Posted": "2013-09-13"
+            "Posted": "2013-09-13",
+            "Scheduled": false,
+            "ScheduledDate": null,
+            "WebScheduledAccountFeeId": null
+        },
+        {
+            "FeeType": "A Fee",
+            "FinancialRecordId": "573234",
+            "FinancialRecordTypeId": 13,
+            "Balance": 240.00,
+            "EffectiveDate": "2014-05-13",
+            "Description": "Description of whatever this is for.",
+            "FloorplanId": "7445",
+            "StockNumber": "3371",
+            "Vin": "SDLKGHOWRIHGGHKLP",
+            "Posted": "2013-09-13",
+            "Scheduled": false,
+            "ScheduledDate": null,
+            "WebScheduledAccountFeeId": null
         }
     ]
 }
