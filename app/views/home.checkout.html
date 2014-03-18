@@ -105,7 +105,8 @@
                   <p>
                     Principal: {{payment.principal | currency}} <br/>
                     Interest: {{payment.interestTotal | currency}} <br/>
-                    Fees: {{payment.feesTotal | currency}}
+                    Fee(s): {{payment.feesTotal | currency}} <br/>
+                    Collateral: {{payment.collateralTotal | currency}}
                   </p>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"
