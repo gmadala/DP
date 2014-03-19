@@ -155,19 +155,22 @@ angular.module('nextgearWebApp')
     $scope.resetSearch($stateParams.filter);
 
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
+      /*jshint camelcase: false */
+      // prevent flash of tooltip when i have title is unchecked
+      angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
+
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
-          /*jshint camelcase: false */
-
           if (hasTitle) { // show the tooltip for 5 seconds, then fade
+            angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = true;
+
             if ($scope.sellerTimeout) {
               $timeout.cancel($scope.sellerTimeout);
             }
+
             $scope.sellerTimeout = $timeout(function() {
               angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
             }, 5000);
-          } else { // make sure tooltip doesn't show if auction user doesn't have title
-            angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
           }
 
           // real purpose of this function
