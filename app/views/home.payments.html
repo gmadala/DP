@@ -53,8 +53,8 @@
                 <div class="cell fee-posted"><p>{{ fee.Posted | moment }}</p></div>
                 <div class="cell fee-amt"><p>{{ fee.Balance | currency }}</p>
                   <div nxg-payment-buttons="fee"
-                                 item="fee"
-                                 on-queue="isFeeOnQueue(fee.FinancialRecordId)">
+                       item="fee"
+                       on-queue="isFeeOnQueue(fee.FinancialRecordId)">
                   </div>
                 </div>
             </li>
@@ -166,5 +166,5 @@
           </p>
         </div>
       </section>
-    <section class="span3 well sticky" nxg-payment-summary nxg-sticky footer=".pay-sum-footer"></section>
+    <section class="span3 well sticky pay-queue" nxg-payment-summary nxg-sticky footer=".pay-sum-footer"></section>
 </section>

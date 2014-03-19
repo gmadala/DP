@@ -12,8 +12,9 @@ angular.module('nextgearWebApp')
         enabled: '=enabled'
       },
       controller: function($scope, $attrs, TitleAddresses) {
+        var showSelectMenuAttr = !($attrs.showSelectMenu === undefined || $attrs.showSelectMenu === 'false');
         $scope.selectedAddress = null;
-        $scope.showSelectMenu = $scope.payment.overrideAddress ? true : false;
+        $scope.showSelectMenu = $scope.payment.overrideAddress || showSelectMenuAttr ? true : false;
         $scope.addrList = null;
         $scope.addrLoaded = false;
         $scope.defaultAddress = null;

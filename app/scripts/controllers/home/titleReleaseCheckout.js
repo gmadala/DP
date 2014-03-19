@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, TitleAddresses) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -11,6 +11,11 @@ angular.module('nextgearWebApp')
         }, 0);
       },
       removeFromQueue: TitleReleases.removeFromQueue
+    };
+
+    $scope.addresses = TitleAddresses.getAddresses();
+    $scope.toShortAddress = function(addressObj) {
+      return addressObj ? addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State : '';
     };
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;

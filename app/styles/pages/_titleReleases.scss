@@ -13,8 +13,11 @@
   }
 }
 
-.title-checkout-list {
+.title-list {
+  margin: 0;
+}
 
+.title-checkout-list {
   .remove {
     font-size: 13px;
   }
@@ -24,6 +27,22 @@
     &.title-vin { width: 15%; }
     &.title-stock { width: 15%; }
     &.title-status { width: 25%; }
+  }
+}
+
+.title-checkout-list {
+  .send-to-label {
+    display: block;
+    float: left;
+    margin: 15px 10px 10px 0;
+  }
+
+  .nxg-alt-addr {
+    clear: none;
+
+    select {
+      width: 70%;
+    }
   }
 }
 
@@ -61,16 +80,6 @@
 }
 
 // REQUESTS SUMMARY
-.request-queue {
-  .well-out {
-    border-bottom :0;
-  }
-
-  .queue-items {
-    border-bottom: 1px solid $border;
-  }
-}
-
 .request-summary {
   .submit button {
     @extend %full-width;
@@ -82,21 +91,6 @@
   color: darken($base-text-color, 10%);
   font-size: 1.3em;
   margin: 0 2px;
-}
-
-.request-sum-footer {
-  padding: 6px 15px 15px 15px;
-  background: $well-out-bkgd;
-  margin: 15px -15px -15px -15px;
-  border-style: solid;
-  border-color: $well-out-border;
-  border-width: 0px 1px 1px 1px;
-
-  .btn-checkout {
-    display: block;
-    width: 150px;
-    margin: 0 auto;
-  }
 }
 
 // CONFIRMATION MODAL

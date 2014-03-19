@@ -28,16 +28,23 @@ angular.module('nextgearWebApp')
 
       // For disabling inputs while sending request
       $scope.loading = true;
-      CreditIncrease.requestCreditIncrease($scope.selector.selectedLineOfCredit.id, $scope.selector.isTemporary === 'true', parseFloat($scope.selector.amount)).then(function() {
-        $scope.loading = false;
-        return dialog.close();
-      }).then(function(){
-        var title = 'Request a Credit Increase',
+      CreditIncrease.requestCreditIncrease($scope.selector.selectedLineOfCredit.id, $scope.selector.isTemporary === 'true', parseFloat($scope.selector.amount)).then(
+        // success
+        function() {
+          $scope.loading = false;
+          dialog.close(); // close request dialog
+
+          // show success dialog
+          var title = 'Request a Credit Increase',
             message = 'Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.',
             buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
-
-        return $dialog.messageBox(title, message, buttons).open();
-      });
+          return $dialog.messageBox(title, message, buttons).open();
+        },
+        // failure
+        function() {
+          $scope.loading = false;
+        }
+      );
     };
 
     $scope.close = dialog.close;

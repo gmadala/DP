@@ -100,7 +100,7 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, principal, interestTotal, feesTotal) {
+      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, principal, interestTotal, feesTotal, collateralTotal) {
         var payment = {
           isPayment: true,
           isFee: false,
@@ -114,6 +114,7 @@ angular.module('nextgearWebApp')
           principal: principal,
           interestTotal: interestTotal,
           feesTotal: feesTotal,
+          collateralTotal: collateralTotal,
           overrideAddress: null
         };
         paymentQueue.payments[floorplanId] = payment;

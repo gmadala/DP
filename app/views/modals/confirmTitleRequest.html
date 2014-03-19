@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 ng-show="counts.failed == 0 && counts.total > 0">Your title request(s) have been submitted.</h3>
+  <h3 ng-show="counts.failed == 0 && counts.total > 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been submitted.</h3>
   <h3 ng-show="counts.failed == counts.total">Your title request(s) can not be processed at this time.</h3>
   <h3 ng-show="counts.failed > 0 && counts.total > counts.failed">Some title request(s) can not be processed at this time.</h3>
 </div>
@@ -33,7 +33,12 @@
       </ul>
     </div>
   </section>
-  <p ng-show="counts.failed < counts.total">Your title request(s) have been submitted. Please allow 3-5 business days for processing. If you have any questions regarding your request, please call Customer Service at <span class="highlight">888.989.3721.</span></p>
+  <section ng-show="counts.failed === 0">
+    <p>Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been approved. An email will be sent to you shortly with a tracking number.</p>
+    <p>Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement ("Note")) and initiate a Required Payment (as such term is defined in your ACH Authorizaiton and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Captital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form.</p>
+    <p class="text-center">NextGear Capital, Inc. Attn: Records Department<br />1320 City Center Dr. Suite # 100A&nbsp;&nbsp;&nbsp;Carmel, IN 46032</p>
+  </section>
+
   <p ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight">888.989.3721.</span></p>
   <p>
 </div>

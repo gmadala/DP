@@ -64,6 +64,7 @@ angular.module('nextgearWebApp')
             item.feesTotal = newAmounts.FeeAmount;
             item.interestTotal = newAmounts.InterestAmount;
             item.principal = newAmounts.PrincipalAmount;
+            item.collateralTotal = newAmounts.CollateralProtectionAmount;
             dialog.close();
           }, function (/*error*/) {
             $scope.submitInProgress = false;

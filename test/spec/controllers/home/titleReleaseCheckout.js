@@ -2,7 +2,7 @@
 
 describe('Controller: TitleReleaseCheckoutCtrl', function () {
 
-  /*// load the controller's module
+  // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
   var TitleReleaseCheckoutCtrl,
@@ -13,11 +13,14 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     scope,
     floorplanMock,
     dialogMock,
+    titleAddressesMock,
+    state,
     queue = [];
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan) {
+  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan, $state) {
     scope = $rootScope.$new();
+    state = $state;
     titleReleasesMock = {
       removeFromQueue: function(){},
       getQueue: function(){
@@ -29,6 +32,17 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
             callback();
           }
         };
+      },
+      clearQueue: angular.noop,
+      getTitleReleaseEligibility: angular.noop
+    };
+    titleAddressesMock = {
+      getAddresses: function(){
+        return {
+          then: function(callback) {
+            callback([{Address: 1}, {Address:2}]);
+          }
+        };
       }
     };
     floorplanMock = {
@@ -38,7 +52,13 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     dialogMock = {
       dialog: function() {
         return {
-          open: angular.noop
+          open: function(){
+            return {
+              then: function(cb) {
+                cb();
+              }
+            };
+          }
         };
       }
     };
@@ -47,7 +67,8 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       $scope: scope,
       TitleReleases: titleReleasesMock,
       Floorplan: floorplanMock,
-      $dialog: dialogMock
+      $dialog: dialogMock,
+      TitleAddresses: titleAddressesMock
     });
 
   }));
@@ -77,13 +98,25 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
 
   });
 
-  it('should set getVehicleDescription to point to the Floorplan method', function() {
-    expect(scope.getVehicleDescription).toBe(floorplanMock.getVehicleDescription);
+  it('should get title release addresses in a promise', function() {
+    expect(typeof scope.addresses.then).toBe('function');
   });
 
-  it('should initialize titleReleaseAddress', function() {
-    // TODO: HASN'T BEEN DONE YET, SHOULD BE DONE
-    expect(scope.titleReleaseAddress).toBeDefined();
+  describe('toShortAddress', function() {
+    it('should join address into string', function() {
+      var address = {
+        Line1: 'line 1',
+        Line2: 'line 2',
+        City: 'city',
+        State: 'state'
+      };
+
+      expect(scope.toShortAddress(address)).toEqual('line 1 line 2 / city state');
+    });
+  });
+
+  it('should set getVehicleDescription to point to the Floorplan method', function() {
+    expect(scope.getVehicleDescription).toBe(floorplanMock.getVehicleDescription);
   });
 
   describe('onConfirmRequest method', function() {
@@ -100,7 +133,15 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       expect(dialogMock.dialog).toHaveBeenCalled();
     });
 
+    it('should clear queue and redirect to search once dialog closes', function() {
+      spyOn(titleReleasesMock, 'clearQueue');
+      spyOn(state, 'transitionTo');
+      scope.onConfirmRequest();
+      expect(titleReleasesMock.clearQueue).toHaveBeenCalled();
+      expect(state.transitionTo).toHaveBeenCalledWith('home.titlereleases');
+    });
+
   });
-*/
+
 
 });

@@ -13,8 +13,8 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     linesOfCredit,
     rootScope,
     q,
-    cb,
-    cb1;
+    successCallback,
+    failureCallback;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q) {
@@ -32,13 +32,9 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       },
       requestCreditIncrease: function() {
         return {
-          then: function(callback){
-            cb = callback;
-            return {
-              then: function(callback){
-                cb1 = callback;
-              }
-            };
+          then: function(success, failure){
+            successCallback = success;
+            failureCallback = failure;
           }
         };
       }
@@ -101,7 +97,18 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
     scope.confirmRequest();
     expect(scope.loading).toBeTruthy();
-    cb();
+    successCallback();
+    expect(scope.loading).toBeFalsy();
+  });
+
+  it('should reset loading properly on failure', function() {
+    scope.requestCreditIncreaseForm = {
+      $invalid: false,
+      $valid: true
+    };
+    scope.selector.selectedLineOfCredit = linesOfCredit[0];
+    scope.confirmRequest();
+    failureCallback();
     expect(scope.loading).toBeFalsy();
   });
 
@@ -119,7 +126,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
     spyOn(dialogMock, 'close');
     scope.confirmRequest();
-    cb();
+    successCallback();
     expect(dialogMock.close).toHaveBeenCalled();
   });
 
@@ -131,8 +138,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
     spyOn($dialogMock, 'messageBox').andCallThrough();
     scope.confirmRequest();
-    cb();
-    cb1();
+    successCallback();
     expect($dialogMock.messageBox).toHaveBeenCalled();
   });
 });
