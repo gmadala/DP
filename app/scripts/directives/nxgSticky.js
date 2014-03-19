@@ -14,7 +14,7 @@ angular.module('nextgearWebApp')
             bottomSpacing = 15, // amount of space we want at bottom of element
             bottomElMargin = 20, // bottom margin for when we're at the bottom of the page
             footerHeight = 50, // size of footer that we need to account for in our calculations
-            heightOfElementHeader = 47, // Grey background header height
+            heightOfElementHeader = 50, // Grey background header height
             heightOfElementFooter = 0; // Subtotal box height
 
         if($attrs.footer){

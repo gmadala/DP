@@ -214,6 +214,20 @@
     margin: 0;
   }
 
+  &.well {
+    border: 0;
+    padding: 0;
+
+    h4 {
+      padding: 15px;
+      margin-bottom: 0;
+    }
+    .well-out {
+      border-color: $well-out-border;
+      margin: 0;
+    }
+  }
+
   .queue-items {
     border-top: 1px solid $border;
 
@@ -257,17 +271,17 @@
     }
   }
 
-  .pay-sum-footer {
-    padding: 6px 15px 15px 15px;
+  .pay-sum-footer, .request-sum-footer {
+    padding: 15px 15px 15px 15px;
     background: $well-out-bkgd;
-    margin: 15px -15px -15px -15px;
+    border-width: 0 1px 1px;
     border-style: solid;
     border-color: $well-out-border;
-    border-width: 0px 1px 1px 1px;
 
     .subtotal {
       font-size: 16px;
       color: $brand-text;
+      padding: 0;
       margin: 10px 0 20px;
     }
 
