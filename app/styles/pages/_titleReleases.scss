@@ -27,6 +27,22 @@
   }
 }
 
+.title-checkout-list {
+  .send-to-label {
+    display: block;
+    float: left;
+    margin: 15px 10px 10px 0;
+  }
+
+  .nxg-alt-addr {
+    clear: none;
+
+    select {
+      width: 70%;
+    }
+  }
+}
+
 #toggleRequest {
   position: relative;
   padding-left: 26px;
