@@ -27,16 +27,30 @@ angular.module('nextgearWebApp')
         if (this.validate()) {
           this.searchInProgress = true;
           if (!this.dealerNumInactive) {
-            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then( function(business) {
-              which.searchInProgress = false;
-              prv.searchByNumberHandler(business);
-            });
+            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
+              // success
+              function(business) {
+                which.searchInProgress = false;
+                prv.searchByNumberHandler(business);
+              },
+              // failure
+              function() {
+                which.searchInProgress = false;
+              }
+            );
           }
           else {
-            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then( function(business) {
-              which.searchInProgress = false;
-              prv.searchByNumberHandler(business);
-            });
+            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
+              // success
+              function(business) {
+                which.searchInProgress = false;
+                prv.searchByNumberHandler(business);
+              },
+              // failure
+              function() {
+                which.searchInProgress = false;
+              }
+            );
           }
         }
       },
