@@ -3,8 +3,8 @@
   "Message": false,
   "Data": {
     "DealerIsEligibleToReleaseTitles": true,
-    "TotalReleasesAllowed": 4,
-    "RemainingReleasesAvailable": 2,
-    "ReleaseBalanceAvailable": 500.00
+    "TotalReleasesAllowed": 10,
+    "RemainingReleasesAvailable": 10,
+    "ReleaseBalanceAvailable": 50000.00
   }
 }
