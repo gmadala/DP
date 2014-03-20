@@ -199,14 +199,21 @@ describe('Model: Floorplan', function () {
             Floorplans: searchResults
           }
         }, {}];
-      };
+      },
+      clock;
 
     beforeEach(inject(function (Paginate, User) {
       paginate = Paginate;
       httpBackend.whenGET(/\/floorplan\/search.*/).respond(respondFnc);
       defaultCriteria.filter = floorplan.filterValues.ALL;
       spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+
+      clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
+
+    afterEach(function () {
+      clock.restore();
+    })
 
     it('should call the expected API path', function () {
       httpBackend.expectGET(/\/floorplan\/search.*/);
@@ -288,6 +295,21 @@ describe('Model: Floorplan', function () {
       httpBackend.flush();
       expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/0/Title_456');
       expect(output.Floorplans[1].$titleURL).not.toBeDefined();
+    });
+
+    it('should create a daysFloored property if a FlooringDate value is set', function() {
+      var output;
+      searchResults = [
+        { FlooringDate: '2014-03-18' },
+        { FlooringDate: null }
+      ];
+
+      floorplan.search(defaultCriteria).then(function(results) {
+        output = results;
+      });
+      httpBackend.flush();
+      expect(output.Floorplans[0].DaysFloored).toBe(2);
+      expect(output.Floorplans[1].DaysFloored).not.toBeDefined();
     });
 
     it('should NOT send a Keyword if search term is empty/null', function () {
