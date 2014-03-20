@@ -71,8 +71,13 @@
               <div class="cell title-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
               </div>
-              <div class="cell title-status">
-                <p>{{item.FloorplanStatusName}}</p>
+              <div class="cell title-status" ng-switch="item.actionTypeAvailable">
+                <div ng-switch-when="alreadyReleased">
+                    <p>Title Released</p>
+                    <p>{{item.TitleReleaseDate}}</p>
+                </div>
+                <p ng-switch-when="canBeReleased">Eligible for Title Release</p>
+                <p ng-switch-when="unavailable">Not Eligible for Title Release</p>
               </div>
               <div class="cell title-floorDate">
                 <p>{{item.FlooringDate | moment}}</p>
