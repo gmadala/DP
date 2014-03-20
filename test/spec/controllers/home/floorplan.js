@@ -267,7 +267,17 @@ describe('Controller: FloorplanCtrl', function () {
 
         spyOn(angular, 'element').andReturn({
           scope: function() {
-            return { tt_isOpen: '' };
+            return {
+              tt_isOpen: ''
+            };
+          },
+          next: function() {
+            return {
+              hasClass: function() {
+                return true;
+              },
+              css: angular.noop
+            };
           }
         });
       });

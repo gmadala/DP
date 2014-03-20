@@ -158,20 +158,35 @@ angular.module('nextgearWebApp')
 
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
       /*jshint camelcase: false */
-      // prevent flash of tooltip when i have title is unchecked
-      angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
+      var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
+
+      var toggleTooltip = function(possibleTT, hide) {
+        if(possibleTT.hasClass('tooltip')) {
+          // the tooltip div exists, so we need to make sure its
+          // completely gone or properly brought back
+          var displayVal = hide ? 'none' : '';
+          possibleTT.css('display', displayVal);
+        }
+      };
+
+      // prevent flash of tooltip when "i have title" is unchecked
+      curFloorplan.scope().tt_isOpen = false;
+      toggleTooltip(curFloorplan.next(), true);
 
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
           if (hasTitle) { // show the tooltip for 5 seconds, then fade
-            angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = true;
+            curFloorplan.scope().tt_isOpen = true;
+            toggleTooltip(curFloorplan.next(), false);
 
             if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
+              // cancel any previous timeouts before setting a new one.
               $timeout.cancel($scope.sellerTimeouts[floorplan.FloorplanId]);
             }
 
             $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
-              angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
+              curFloorplan.scope().tt_isOpen = false;
+              toggleTooltip(curFloorplan.next(), true);
             }, 5000);
           }
 
