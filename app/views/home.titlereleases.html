@@ -29,9 +29,6 @@
               <div class="sorting-arrows"></div>
               <span class="header-text">Description</span>
             </div>
-            <div class="cell title-vin">
-              <span class="header-text">VIN</span>
-            </div>
             <div class="cell title-stock sortable-container"
                  ng-click="sortBy('StockNumber')"
                  ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
@@ -41,13 +38,19 @@
             <div class="cell title-status">
               <span class="header-text">Status</span>
             </div>
+            <div class="cell title-purchaseDate sortable-container"
+                 ng-click="sortBy('UnitPurchaseDate')"
+                 ng-class="{ sorted : sortField == 'UnitPurchaseDate', desc : sortDescending }">
+              <div class="sorting-arrows"></div>
+              <span class="header-text">Purchased</span>
+            </div>
             <div class="cell title-floorDate sortable-container"
                  ng-click="sortBy('FlooringDate')"
                  ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
               <div class="sorting-arrows"></div>
               <span class="header-text">Floored</span>
             </div>
-            <div class="cell title-actions sortable-container" >
+            <div class="cell title-actions" >
               <span class="header-text">Actions</span>
             </div>
           </li><!-- end .table-list-head -->
@@ -64,9 +67,7 @@
 
               <div class="cell title-desc">
                 <p ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></p>
-              </div>
-              <div class="cell title-vin">
-                <p ng-bind-html-unsafe="item.UnitVIN | shortenVIN  | highlight:item.data.query"></p>
+                <p>VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query"></span></p>
               </div>
               <div class="cell title-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
@@ -79,8 +80,14 @@
                 <p ng-switch-when="canBeReleased">Eligible for Title Release</p>
                 <p ng-switch-when="unavailable">Not Eligible for Title Release</p>
               </div>
+               <div class="cell title-purchaseDate">
+                <p>{{item.UnitPurchaseDate | moment}}</p>
+              </div>
               <div class="cell title-floorDate">
                 <p>{{item.FlooringDate | moment}}</p>
+                <p ng-show="item.DaysFloored > 0">
+                  Days Floored: {{ item.DaysFloored }}
+                </p>
               </div>
               <div class="cell title-actions" ng-switch="item.actionTypeAvailable">
                 <p ng-switch-when="alreadyReleased">Pay off this vehicle or return the title to remove from your limit.</p>

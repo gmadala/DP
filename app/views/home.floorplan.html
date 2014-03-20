@@ -83,7 +83,7 @@
 
               <div class="cell fl-desc">
                 <p><span ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></span></p>
-                  VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query"></span>
+                <p>VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query"></span></p>
               </div>
               <div class="cell fl-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
@@ -96,7 +96,7 @@
               </div>
               <div class="cell fl-floorDate">
                 <p> {{ item.FlooringDate | moment }} </p>
-                <span ng-show="item.DaysFloored > 0">Days Floored: {{ item.DaysFloored }}</span>
+                <p ng-show="item.DaysFloored > 0">Days Floored: {{ item.DaysFloored }}</p>
               </div>
               <div class="cell fl-seller">
                 <p> {{ item.SellerName }} </p>

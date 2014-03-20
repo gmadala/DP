@@ -213,7 +213,7 @@ describe('Model: Floorplan', function () {
 
     afterEach(function () {
       clock.restore();
-    })
+    });
 
     it('should call the expected API path', function () {
       httpBackend.expectGET(/\/floorplan\/search.*/);

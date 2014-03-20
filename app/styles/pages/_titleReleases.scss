@@ -3,18 +3,27 @@
 .cell {
   &.title-more { width: 4%; }
   &.title-desc { width: 22%; }
-  &.title-vin { width: 10%; }
   &.title-stock { width: 12%; }
-  &.title-status { width: 15%; }
-  &.title-floorDate { width: 12%; }
+  &.title-status { width: 11%; }
+  &.title-purchaseDate {
+    width: 14%;
+    padding-right: 3px;
+  }
+  &.title-floorDate { width: 15%; }
   &.title-actions {
-    width: 25%;
-    padding: 8px 10px;
+    width: 22%;
+    a {
+      line-height: 1.5;
+    }
   }
 }
 
 .title-list {
   margin: 0;
+}
+
+.table-list-row .cell.title-actions {
+  padding: 8px 10px;
 }
 
 .title-checkout-list {
@@ -24,8 +33,8 @@
 
   .cell {
     &.title-desc { width: 45%; }
-    &.title-vin { width: 15%; }
-    &.title-stock { width: 15%; }
+    &.title-stock { width: 12%; }
+    &.title-floorDate { width: 18%; }
     &.title-status { width: 25%; }
   }
 }

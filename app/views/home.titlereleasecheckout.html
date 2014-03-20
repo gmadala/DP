@@ -31,19 +31,28 @@
           <ul class="unstyled title-list">
             <li class="table-list-head">
               <div class="cell title-desc">Description</div>
-              <div class="cell title-vin">VIN</div>
               <div class="cell title-stock">Stock #</div>
+              <div class="cell title-floorDate">Floored</div>
               <div class="cell title-status">Status</div>
             </li>
 
             <li class="table-list-row" ng-repeat="item in titleQueue.contents">
               <div class="cell title-desc">
                 <p>{{ getVehicleDescription(item) }}</p>
-                <span class="send-to-label">Send To: </span><div nxg-alternate-address="item" enabled="true" show-tooltip="true" show-select-menu></div>
+                <p>VIN: {{ item.UnitVIN }}</p>
+                <span class="send-to-label">Send To: </span>
+                <div nxg-alternate-address="item" enabled="true" show-tooltip="true" show-select-menu>
+                </div>
               </div>
-              <div class="cell title-vin"><p>{{ item.UnitVIN | shortenVIN }}</p></div>
+
               <div class="cell title-stock">
                {{ item.StockNumber }}
+              </div>
+              <div class="cell title-floorDate">
+                <p>{{ item.FlooringDate | moment }}</p>
+                <span ng-show="item.DaysFloored > 0">
+                  Days Floored: {{ item.DaysFloored }}
+                </span>
               </div>
               <div class="cell title-status">
                 <p>{{ item.FloorplanStatusName }}</p>

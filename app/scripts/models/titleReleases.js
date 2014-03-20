@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('TitleReleases', function(api, TitleAddresses, $q, Paginate) {
+  .factory('TitleReleases', function(api, TitleAddresses, $q, Paginate, moment) {
 
     var eligibility, eligibilityLoading;
 
@@ -115,6 +115,11 @@ angular.module('nextgearWebApp')
                 floorplan.actionTypeAvailable = 'canBeReleased';
               } else {
                 floorplan.actionTypeAvailable = 'unavailable';
+              }
+              if (floorplan.FlooringDate && floorplan.FlooringDate !== null) {
+                var today = moment();
+                var floored = moment(floorplan.FlooringDate);
+                floorplan.DaysFloored = today.diff(floored, 'days');
               }
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);

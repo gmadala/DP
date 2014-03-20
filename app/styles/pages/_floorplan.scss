@@ -2,18 +2,12 @@
 
 .cell {
   &.fl-more { width: 3%; }
-  &.fl-desc { width: 20%; }
-  &.fl-stock { width: 9%; }
-  &.fl-status { width: 8%; }
+  &.fl-desc { width: 18%; }
+  &.fl-stock { width: 8%; }
+  &.fl-status { width: 11%; }
   &.fl-purchaseDate { width: 11%; }
   &.fl-floorDate { width: 12%; }
   &.fl-seller { width: 18%; }
   &.fl-lastPayDate { width: 14%; }
   &.fl-title { width: 5%; }
-}
-
-.fl-desc, .fl-floorDate {
-  p {
-    margin-bottom: 8px;
-  }
 }
