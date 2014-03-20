@@ -154,6 +154,8 @@ angular.module('nextgearWebApp')
 
     $scope.resetSearch($stateParams.filter);
 
+    $scope.sellerTimeouts = {};
+
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
       /*jshint camelcase: false */
       // prevent flash of tooltip when i have title is unchecked
@@ -164,11 +166,11 @@ angular.module('nextgearWebApp')
           if (hasTitle) { // show the tooltip for 5 seconds, then fade
             angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = true;
 
-            if ($scope.sellerTimeout) {
-              $timeout.cancel($scope.sellerTimeout);
+            if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
+              $timeout.cancel($scope.sellerTimeouts[floorplan.FloorplanId]);
             }
 
-            $scope.sellerTimeout = $timeout(function() {
+            $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
               angular.element('#' + floorplan.FloorplanId + '+ label').scope().tt_isOpen = false;
             }, 5000);
           }
