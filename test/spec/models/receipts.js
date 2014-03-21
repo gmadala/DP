@@ -113,18 +113,6 @@ describe('Service: Receipts', function () {
       expect(output.$paginator.nextPage()).toBe(2);
     });
 
-    it('should add the appropriate $receiptURL to receipts', function () {
-      var output = {};
-      searchResults = [
-        {
-          FinancialTransactionId: 'foo123'
-        }
-      ];
-      receipts.search(defaultCriteria).then(function (results) { output = results; });
-      httpBackend.flush();
-      expect(output.Receipts[0].$receiptURL).toBe('/receipt/view/foo123/Receipt');
-    });
-
     it('should NOT send a Keyword if search term is empty/null', function () {
       receipts.search(defaultCriteria);
       httpBackend.flush();

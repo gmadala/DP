@@ -295,7 +295,7 @@ describe('Controller: ReceiptsCtrl', function () {
       scope.selectedReceipts = [true, false, true];
       spyOn(window, 'open');
       scope.onExport();
-      expect(window.open).toHaveBeenCalledWith('/receipt/ViewMultiple/5656,1212/MultipleReceipts', '_blank');
+      expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656,1212', '_blank');
     });
   });
 
