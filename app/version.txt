@@ -1,13 +1,15 @@
-NextGear Capital v2.0.7
+NextGear Capital v2.0.8
 =================================
 
 Fixes included in this release:
 
-VO-1499	Payment Details for Scheduled Payments
-VO-760	Allow User to Print a Batch of Receipts all at One Time
-VO-1558	Web–Seller Floor Pan Search: Info popover “Next gear has been notified of this change and will be sending funding soon” is getting displayed when user uncheck “I Have the Title” checkbox.
-VO-1035	Allow dealer to generate Payment Summary Report and view seller address via vehicle details (Hertz)
-VO-1531	Requests Summary extends beyond page
-VO-1575	Web-Dealer Search: “Search” button under “Dealer Number search” stops working.
-VO-1578	Web-Request Credit Increase: Application hangs when user “Request a Credit Increase” with invalid entry in “Credit Amount” text field.
-VO-764	Dealer Self-Service - Request Extension on Loan
+VO-1607	Add Tool Tip to Title Release page
+VO-1081	Dealer Self-Service Module
+VO-1604	Web-Floor a Car-Business Search: No validation is present in “Business Name” text field when user enters less than 3 characters in “Business name” field.
+VO-811	Show Fees, Interest on Vehicle on the Vehicle Details view and Floor Date & # of Days Floored on the Payments and Scheduled Payments view.
+VO-756	Checkout - Payment Breakdown
+VO-1573	Web-Request a Credit Increase: No validation for the special characters in “Credit Amount” text field.
+VO-1577	Web-Seller Floor Plan Search: Info popover “NextGear has been notified of this change and will be sending funding soon.” is not getting closed.
+VO-1610	Modify the temp increase description to use 60 days
+VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
+VO-1564	Scheduling Fees - Payments Page - Unschedule Fee - API Integration
