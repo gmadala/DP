@@ -48,7 +48,10 @@ angular.module('nextgearWebApp')
                 flooringDate: item.FlooringDate,
                 daysOnFloorplan: item.DaysOnFloorplan,
                 receiptURL: prv.getReceiptURL(item),
-                data: {query: request.Keyword}
+                data: {query: request.Keyword},
+                InterestPayoffTotal: item.InterestPayoffTotal,
+                CollateralProtectionPayoffTotal: item.CollateralProtectionPayoffTotal,
+                FeesPayoffTotal: item.FeesPayoffTotal
               });
             }
             return searchResults;

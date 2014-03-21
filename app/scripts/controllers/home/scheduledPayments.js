@@ -116,7 +116,10 @@ angular.module('nextgearWebApp')
           p.payoffAmount,
           p.curtailmentDueDate,
           true, /*payoff*/
-          p.payoffAmount - p.principalPayoff // revenue = non-principal amount
+          p.principalPayoff,
+          p.InterestPayoffTotal,
+          p.FeesPayoffTotal,
+          p.CollateralProtectionPayoffTotal
         );
       },
 
