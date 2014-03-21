@@ -1,15 +1,33 @@
 <section class="row-fluid">
   <section class="span9">
-    <div nxg-search
-      title="Title Release Search"
-      class="search-form"
-      prompt="Enter Stock #, VIN, Make, Model, or Year"
-      active-criteria="searchParams.proposedSearchCriteria"
-      on-search="search()"
-      on-clear="resetSearch()"
-      filterable="false">
-    </div>
+    <div  class="search-form">
+      <div class="well">
+          <h4>Title Release Search</h4>
 
+          <div class="well-out">
+              <form name="searchForm" class="search payments" novalidate>
+                  <div class="row-fluid">
+                      <div class="span5 keyword">
+                          <div class="control-group">
+                              <label class="control-label" for="keyword">Keyword</label>
+
+                              <div class="controls">
+                                  <input type="text" id="keyword" name="keyword" placeholder="Enter Stock #, VIN, Make, Model, or Year" ng-model="searchParams.proposedSearchCriteria.query"/>
+                              </div>
+                          </div>
+
+                          <div class="control-group search-clear-btns">
+                              <a href="#" ng-click="$event.preventDefault();resetSearch()" title="Clear Search">Clear Search</a>
+                              <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
+                          </div>
+                      </div>
+                      <p class="span7 tip">We just launched our new title release program! Via the website, you now can request titles BEFORE they are paid off. You have up to 7 days to either payoff the unit(s) or return the title. You asked… We listened!</p>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+      
     <div ng-switch="data.results.length > 0 || data.loading">
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
