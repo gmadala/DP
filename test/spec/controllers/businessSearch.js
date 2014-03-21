@@ -83,6 +83,36 @@ describe('Controller: BusinessSearchCtrl', function () {
       expect(model.search).not.toHaveBeenCalled();
     });
 
+    it('should only run search if input is valid', function() {
+      scope.searchControls = {
+        $invalid: false
+      };
+
+      scope.data.proposedQuery = 'abc';
+      scope.search();
+      expect(model.search).toHaveBeenCalled();
+    });
+
+    it('should not run search if input is not valid, and should clear previous results', function() {
+      model.search.reset(); // clears previous spyOn calls since one is done on controller initialization
+      spyOn(scope, 'fetch');
+      scope.searchControls = {
+        $invalid: true
+      };
+      scope.data = {
+        results: {
+          length: 13
+        }
+      };
+
+      expect(model.search).not.toHaveBeenCalled();
+      scope.data.proposedQuery = 'ab';
+      scope.search();
+      expect(scope.fetch).not.toHaveBeenCalled();
+      expect(model.search).not.toHaveBeenCalled();
+      expect(scope.data.results.length).toBe(0);
+    });
+
   });
 
   describe('fetchNextResults function', function () {

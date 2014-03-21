@@ -7,13 +7,18 @@
 </div>
 
 <div class="modal-body">
-  <div class="search-controls">
+  <form class="search-controls" name="searchControls">
     <label>Business Name or Number</label>
-    <input type="text" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()">
+    <!-- using nxgRequires instead of required, ng-required, and/or ng-minlength because :invalid
+         pseudoclass is messing with styles onfocus when input is empty -->
+    <input type="text" id="businessSearchModalInput" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()" nxg-requires="data.proposedQuery.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }">
     <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
       <i class="glyphicon glyphicon-search"></i>
     </button>
-  </div>
+    <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires">
+      Please enter at least 3 characters.
+    </label>
+  </form>
 
   <div ng-switch="data.results.length > 0 || data.loading">
     <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
