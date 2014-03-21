@@ -35,10 +35,10 @@ angular.module('nextgearWebApp')
             titleState: r.TitleState,
             trackingNumber: r.TrackingNumber,
             disbursementDate: r.DisbursementDate,
-            interestAccrued: r.interestAccrued,
-            interestApplied: r.interestApplied,
-            feesAccrued: r.feesAccrued,
-            feesApplied: r.feesApplied
+            interestAccrued: r.InterestAccrued,
+            interestApplied: r.InterestApplied,
+            feesAccrued: r.FeesAccrued,
+            feesApplied: r.FeesApplied
           };
         });
       }
