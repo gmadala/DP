@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api, $q) {
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
@@ -38,7 +38,17 @@ angular.module('nextgearWebApp')
       }
     };
 
-    AccountManagement.get().then(function(results) {
+    var getData;
+    if(User.isDealer()) {
+      getData = $q.all([AccountManagement.get(), AccountManagement.getFinancialAccountData()])
+      .then(function(data) {
+        return angular.extend({}, data[0], data[1]);
+      });
+    } else {
+      getData = AccountManagement.get();
+    }
+
+    getData.then(function(results) {
         $scope.loading = true;
 
 

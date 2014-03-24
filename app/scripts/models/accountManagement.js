@@ -1,29 +1,24 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('AccountManagement', function($q, api, User, moment) {
+  .factory('AccountManagement', function(api, User) {
 
     return {
       get: function() {
-
-        var startDate = api.toShortISODate(moment(new Date()).subtract('days', 1).toDate());
-        var endDate = api.toShortISODate(new Date());
-
-        return $q.all([
-          api.request('GET', '/userAccount/settings'),
-          api.request('GET', '/dealer/summary'),
-          api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate)
-        ]).then(function(responses) {
-            var settings = responses[0];
-            var summary = responses[1];
-            var dashboardInfo = responses[2];
-
-            for (var i = 0; i < settings.Addresses.length; i++) {
-              var addr = settings.Addresses[i];
-              if (addr.IsTitleReleaseAddress) {
-                settings.CurrentTitleReleaseAddress = addr;
-              }
+        return api.request('GET', '/userAccount/settings').then(function(settings) {
+          for (var i = 0; i < settings.Addresses.length; i++) {
+            var addr = settings.Addresses[i];
+            if (addr.IsTitleReleaseAddress) {
+              settings.CurrentTitleReleaseAddress = addr;
             }
+          }
+          return settings;
+        });
+
+      },
+      getFinancialAccountData: function() {
+        return api.request('GET', '/dealer/summary').then(function(summary) {
+            var settings = {};
 
             // Any Financial Account data tranformations made here
             settings.BankAccounts = User.getStatics().bankAccounts;
@@ -31,8 +26,8 @@ angular.module('nextgearWebApp')
             settings.ReserveFunds = summary.ReserveFundsBalance;
             settings.LastPayment = summary.LastPaymentAmount;
             settings.LastPaymentDate = summary.LastPaymentDate;
-            settings.UnappliedFunds = dashboardInfo.UnappliedFundsTotal;
-            settings.TotalAvailable = dashboardInfo.TotalAvailableUnappliedFunds;
+            settings.UnappliedFunds = summary.UnappliedFundsTotal;
+            settings.TotalAvailable = summary.TotalAvailableUnappliedFunds;
 
             return settings;
           });
