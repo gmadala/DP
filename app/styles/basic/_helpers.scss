@@ -60,6 +60,11 @@
   color: $brand-text;
 }
 
+.highlight-dark {
+  @extend .highlight;
+  color: $darker-text-color;
+}
+
 /* As found via http://kenneth.io/blog/2012/03/04/word-wrapping-hypernation-using-css/ */
 .break-word {
   -ms-word-break: break-all;
