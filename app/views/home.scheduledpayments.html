@@ -112,7 +112,7 @@
               <div class="cell sch-desc">
                 <p> {{ pay.description }} </p>
                 <p>
-                  VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
+                  VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query" class="break-word"></span><br/>
                   Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
                 </p>
               </div>

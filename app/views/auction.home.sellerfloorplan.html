@@ -41,7 +41,7 @@
         <div class="cell selfloor-descr">
           <p>
             <span class="sch-label">VIN: </span>
-            <span ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query"></span>
+            <span ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query" class="break-word"></span>
           <p>{{ getVehicleDescription(item) }}</p>
         </div>
         <div class="cell selfloor-stat">{{ item.FloorplanStatusName }}</div>
