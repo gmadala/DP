@@ -12,14 +12,14 @@
         <li class="table-list-head">
           <div class="cell fee-type">Fee Type</div>
           <div class="cell fee-desc">Description</div>
-          <div class="cell fee-date">Paid</div>
+          <div class="cell fee-date">Scheduled</div>
           <div class="cell fee-amt">Amount</div>
         </li>
 
         <li class="table-list-row" ng-repeat="fee in items.feesScheduled">
           <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
           <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
-          <div class="cell fee-date"><p>{{ today | moment }}</p></div>
+          <div class="cell fee-date"><p>{{ fee.scheduleDate | moment }}</p></div>
           <div class="cell fee-amt"><p>{{ fee.amount | currency }}</p></div>
         </li>
       </ul>
