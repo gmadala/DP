@@ -18,6 +18,13 @@ angular.module('nextgearWebApp')
     };
 
     $scope.search = function() {
+      $scope.validity = angular.copy($scope.searchControls);
+
+      if($scope.validity && $scope.validity.$invalid) {
+        $scope.data.results.length = 0;
+        return;
+      }
+
       var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
 
       if (isNewQuery) {

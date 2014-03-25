@@ -30,9 +30,6 @@
               <div class="sorting-arrows"></div>
               <span class="header-text">Description</span>
             </div>
-            <div class="cell fl-vin">
-              <span class="header-text">VIN</span>
-            </div>
             <div class="cell fl-stock sortable-container"
                  ng-click="sortBy('StockNumber')"
                  ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
@@ -69,9 +66,6 @@
               <div class="sorting-arrows"></div>
               <span class="header-text">Last Payment</span>
             </div>
-            <div class="cell fl-titleRelease">
-              Title Release
-            </div>
             <div class="cell fl-title">
               Title
             </div>
@@ -87,16 +81,28 @@
                 </button>
               </div>
 
-              <div class="cell fl-desc"><p ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></p></div>
-              <div class="cell fl-vin"><p ng-bind-html-unsafe="item.UnitVIN | shortenVIN  | highlight:item.data.query"></p></div>
-              <div class="cell fl-stock"><p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p></div>
-              <div class="cell fl-status"><p> {{ item.FloorplanStatusName }} </p></div>
-              <div class="cell fl-purchaseDate"><p> {{ item.UnitPurchaseDate | moment }} </p></div>
-              <div class="cell fl-floorDate"><p> {{ item.FlooringDate | moment }} </p></div>
-              <div class="cell fl-seller"><p> {{ item.SellerName }} </p></div>
-              <div class="cell fl-lastPayDate"><p> {{ item.LastPaymentDate | moment }} </p></div>
-              <div class="cell fl-titleRelease"><p> {{ item.TitleReleaseDate | moment }} <br/>
-                <span ng-show="item.TitleReleaseLocation">To </span>{{ item.TitleReleaseLocation }}</p>
+              <div class="cell fl-desc">
+                <p><span ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></span></p>
+                <p>VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query"></span></p>
+              </div>
+              <div class="cell fl-stock">
+                <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
+              </div>
+              <div class="cell fl-status">
+                <p> {{ item.FloorplanStatusName }} </p>
+              </div>
+              <div class="cell fl-purchaseDate">
+                <p> {{ item.UnitPurchaseDate | moment }} </p>
+              </div>
+              <div class="cell fl-floorDate">
+                <p> {{ item.FlooringDate | moment }} </p>
+                <p ng-show="item.DaysFloored > 0">Days Floored: {{ item.DaysFloored }}</p>
+              </div>
+              <div class="cell fl-seller">
+                <p> {{ item.SellerName }} </p>
+              </div>
+              <div class="cell fl-lastPayDate">
+                <p> {{ item.LastPaymentDate | moment }} </p>
               </div>
               <div class="cell fl-title">
                 <a ng-show="item.TitleImageAvailable"

@@ -103,12 +103,14 @@ angular.module('nextgearWebApp')
       ids = ids.slice(0,-1);
 
       // build query string
-      var strUrl = api.contentLink('/receipt/ViewMultiple/' + ids + '/MultipleReceipts', {});
+      var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: ids });
 
       window.open(
         strUrl,
         '_blank' // open in new window
       );
+      // reset selection
+      $scope.selectedReceipts = [];
     };
 
     $scope.sortField = 'CreateDate'; // Default sort

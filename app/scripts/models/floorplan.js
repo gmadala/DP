@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Floorplan', function(api, Paginate, User, $q) {
+  .factory('Floorplan', function(api, Paginate, User, $q, moment) {
     return {
       create: function(data) {
         // transform data types as needed for API
@@ -90,6 +90,11 @@ angular.module('nextgearWebApp')
                 floorplan.sellerHasTitle = true;
               } else {
                 floorplan.sellerHasTitle = false;
+              }
+              if (floorplan.FlooringDate && floorplan.FlooringDate !== null) {
+                var today = moment();
+                var floored = moment(floorplan.FlooringDate);
+                floorplan.DaysFloored = today.diff(floored, 'days');
               }
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);
