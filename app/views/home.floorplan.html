@@ -83,7 +83,7 @@
 
               <div class="cell fl-desc">
                 <p><span ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></span></p>
-                <p>VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query" class="break-word"></span></p>
+                <p><span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query" class="break-word"></span></p>
               </div>
               <div class="cell fl-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
