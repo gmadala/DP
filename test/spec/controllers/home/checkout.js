@@ -748,18 +748,19 @@ describe('Controller: CheckoutCtrl', function () {
       expect(messages.list().length).toBe(1);
     }));
 
-    it('should remove all fees from the queue', function () {
+    it('should remove all fees from the queue not schedulable', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
       Payments.addFeeToQueue('fee1', 'ch123', 'type', 'fee desc', 120, '2013-01-01');
-      Payments.addFeeToQueue('fee2', 'ch124', 'type', 'fee desc 2', 130, '2013-01-02');
+      Payments.addFeeToQueue('fee2', 'ch124', 'type', 'fee desc 2', 130, '2013-01-03');
       expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(0);
+      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
     });
 
     it('should remove overdue payments from the queue', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
       Payments.addPaymentToQueue(
         'one',
         'ch123',
@@ -781,6 +782,7 @@ describe('Controller: CheckoutCtrl', function () {
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('two');
     });
@@ -812,6 +814,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should remove payments that are due before the next available schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
       Payments.addPaymentToQueue(
         'one',
         'ch123',
@@ -833,12 +836,14 @@ describe('Controller: CheckoutCtrl', function () {
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('one');
     });
 
     it('should remove fees that are due before the next available schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
       Payments.addFeeToQueue(
         'one',
         'ch123',
@@ -858,12 +863,14 @@ describe('Controller: CheckoutCtrl', function () {
       expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
       scope.handleAfterHoursViolation();
       scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(0);
       expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
       expect(_.map(scope.paymentQueue.contents.fees)[0].financialRecordId).toBe('one');
     });
 
     it('should schedule payments that have not been scheduled already for the next avail date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
       var priorSchedule = new Date();
       Payments.addPaymentToQueue(
         'one',
@@ -886,6 +893,7 @@ describe('Controller: CheckoutCtrl', function () {
       Payments.getPaymentQueue().payments['one'].scheduleDate = priorSchedule;
       scope.handleAfterHoursViolation();
       scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
       var newQueue = _.map(scope.paymentQueue.contents.payments);
       newQueue = _.sortBy(newQueue, 'floorplanId');
       var expectedScheduleDate = moment([2013, 0, 4]);
@@ -896,6 +904,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should schedule fees that have not been scheduled already for the next avail date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
       var priorSchedule = new Date();
       Payments.addFeeToQueue(
         'one',
@@ -916,6 +925,7 @@ describe('Controller: CheckoutCtrl', function () {
       Payments.getPaymentQueue().fees['one'].scheduleDate = priorSchedule;
       scope.handleAfterHoursViolation();
       scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
       var newQueue = _.map(scope.paymentQueue.contents.fees);
       newQueue = _.sortBy(newQueue, 'financialRecordId');
       var expectedScheduleDate = moment([2013, 0, 4]);
@@ -926,6 +936,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should invoke the after hours notice modal with ejected items and the auto schedule date', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
 
       Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-03');
       Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
@@ -948,6 +959,8 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should invoke the after hours notice modal with ejected items and the auto schedule date for fees', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
+
 
       Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-10');
       Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
