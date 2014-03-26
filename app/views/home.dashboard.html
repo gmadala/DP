@@ -54,14 +54,14 @@
       <h4>Payments Summary</h4>
       <ul class="well-out">
         <li>
-          <span class="item-total overdue">{{dashboardData.OverduePayments}}</span>
+          <span class="item-total" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
           <span ng-pluralize
                 count="dashboardData.OverduePayments"
                 when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
-          <p class="overdue-amount">{{dashboardData.OverduePaymentAmount | currency}}</p>
+          <p ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</p>
         </li>
         <li>
-          <span class="item-total due-today">{{dashboardData.PaymentsDueToday}}</span>
+          <span class="item-total" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
           <span ng-pluralize
                 count="dashboardData.PaymentsDueToday"
                 when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
