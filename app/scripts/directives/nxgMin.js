@@ -16,6 +16,9 @@ angular.module('nextgearWebApp')
       link: function postLink(scope, element, attrs, ctrl) {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
         var numberize = function (value) {
+          if(value && value.replace) {
+            value = value.replace(',', '');
+          }
           if (/^\-?([0-9]+(\.[0-9]+)?)$/.test(value)) {
             return Number(value);
           }

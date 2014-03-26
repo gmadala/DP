@@ -18,17 +18,18 @@
        <label for="inputMileage" class="input-title">Mileage</label>
        <input type="text" id="inputMileage" name="inputMileage"
               ng-model="data.UnitMileage"
-              ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength }"
+              ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
               ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
               required
-              nxg-validate-int=6
+              nxg-min="1"
+              nxg-validate-int="6"
               nxg-blur="mileageExit(form.inputMileage)" />
        <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.required">
           Please enter the Mileage.
        </label>
        <label for="inputMileage" class="text-error"
-              ng-show="!validity.inputMileage.$error.required && validity.inputMileage.$error.pattern">
+              ng-show="!validity.inputMileage.$error.required && (validity.inputMileage.$error.pattern || validity.inputMileage.$error.nxgMin)">
           Please enter a positive integer value with no decimals.
        </label>
        <label for="inputMileage" class="text-error"
