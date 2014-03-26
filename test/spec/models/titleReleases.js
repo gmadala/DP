@@ -29,7 +29,7 @@ describe('Model: TitleReleases', function () {
       ReleaseBalanceAvailable: 1000
     };
 
-    httpBackend.expectGET('/titleRelease/getTitleReleaseEligibility').respond({
+    httpBackend.whenGET('/titleRelease/getTitleReleaseEligibility').respond({
       Success: true,
       Message: null,
       Data: data
@@ -40,26 +40,15 @@ describe('Model: TitleReleases', function () {
   beforeEach(inject(function ($rootScope, TitleReleases) {
     titleReleases = TitleReleases;
     rootScope = $rootScope;
-
-    expect(httpBackend.flush).not.toThrow();
-
   }));
-
-  it('should return isEligible properly', function() {
-    var result;
-    titleReleases.isEligible().then(function(res){
-      result = res;
-    });
-    rootScope.$digest();
-    expect(result).toBe(true);
-  });
 
   it('should return the title release eligibility', function() {
     var result;
+    httpBackend.expectGET('/titleRelease/getTitleReleaseEligibility');
     titleReleases.getTitleReleaseEligibility().then(function(res){
       result = res;
     });
-    rootScope.$digest();
+    expect(httpBackend.flush).not.toThrow();
     expect(result).toEqual(data);
   });
 

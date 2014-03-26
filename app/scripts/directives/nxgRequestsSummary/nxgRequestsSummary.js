@@ -5,7 +5,9 @@ angular.module('nextgearWebApp')
     return {
       templateUrl: 'scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html',
       restrict: 'A',
-      scope: {},
+      scope: {
+        eligibility: '='
+      },
       controller: 'RequestsSummaryCtrl'
     };
   })
@@ -15,8 +17,6 @@ angular.module('nextgearWebApp')
       contents: TitleReleases.getQueue(),
       removeFromQueue: TitleReleases.removeFromQueue
     };
-
-    $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
