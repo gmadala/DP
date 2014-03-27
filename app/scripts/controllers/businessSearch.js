@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, segmentio, metric) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, closeNow, segmentio, metric) {
 
     var lastPromise;
 
@@ -16,6 +16,17 @@ angular.module('nextgearWebApp')
       sortDescending: false,
       hitInfiniteScrollMax: false
     };
+
+    $scope.$watch(
+      function() {
+        return closeNow();
+      },
+      function(newVal) {
+        if(newVal) {
+          dialog.close();
+        }
+      }
+    );
 
     $scope.search = function() {
       $scope.validity = angular.copy($scope.searchControls);

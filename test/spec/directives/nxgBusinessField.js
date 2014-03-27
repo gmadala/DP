@@ -2,7 +2,8 @@
 
 describe('Directive: nxgBusinessField', function () {
 
-  var fakeBiz = {};
+  var fakeBiz = {},
+      timeout;
 
   // mock $dialog service (stand-in for actual business search modal)
   // that will instantly return the fakeBiz object above as its result
@@ -23,6 +24,20 @@ describe('Directive: nxgBusinessField', function () {
           }
         };
       });
+
+      timeout = jasmine.createSpy().andReturn({
+        then: function(callback) {
+          return callback();
+        }
+      });
+
+      $provide.provider('$timeout', function() {
+        this.$get = function() {
+          return timeout;
+        };
+
+      });
+
     });
   });
 
@@ -38,6 +53,7 @@ describe('Directive: nxgBusinessField', function () {
       disableMe: false,
       bizness: null
     };
+
     scope.theForm = {
       inputBiz: {}
     };
@@ -61,6 +77,13 @@ describe('Directive: nxgBusinessField', function () {
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(false);
+  }));
+
+  it('should wait for 200ms before opening dialog to let click event finish', inject(function ($dialog) {
+    spyOn($dialog, 'dialog').andCallThrough();
+    element.find('input').val('fooBiz');
+    element.find('input').scope().openBusinessSearch();
+    expect(timeout).toHaveBeenCalledWith(angular.noop, 200);
   }));
 
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',

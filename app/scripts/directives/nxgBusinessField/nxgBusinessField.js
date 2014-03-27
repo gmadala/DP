@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
       }
     };
   })
-  .controller('BusinessFieldCtrl', function($scope, $element, $dialog) {
+  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout) {
     var searchOpen = false;
     $scope.query = '';
     var lengthAtSubmit = 0;
@@ -80,11 +80,21 @@ angular.module('nextgearWebApp')
           },
           searchBuyersMode: function () {
             return $scope.mode === 'buyers';
+          },
+          closeNow: function () {
+            return function() {
+              return $scope.disabled;
+            };
           }
         }
       };
       searchOpen = true;
-      $dialog.dialog(dialogOptions).open().then(function (selectedBusiness) {
+
+      // Delay by 200ms (almost unnoticeable) so the user's click event has time to complete
+      // before the popup opens, potentially cancelling the popup.
+      $timeout(angular.noop, 200).then(function() {
+        return $dialog.dialog(dialogOptions).open();
+      }).then(function (selectedBusiness) {
         if (selectedBusiness) {
           // replace any existing query text with the selected business name
           $scope.query = selectedBusiness.BusinessName;
