@@ -75,7 +75,7 @@
             <div class="cell sch-more"></div>
             <div class="cell sch-schDate sortable"
                  ng-click="sortPaymentsBy('ScheduledForDate')"
-                 ng-class="{ sorted : sortField == 'ScheduledForDate', desc : sortDescending }">
+                 ng-class="{ sorted : sortField.payment == 'ScheduledForDate', desc : sortDescending.payment }">
               Scheduled On
             </div>
             <div class="cell sch-desc">
@@ -83,7 +83,7 @@
             </div>
             <div class="cell sch-floorDate sortable"
                  ng-click="sortPaymentsBy('flooringDate')"
-                 ng-class="{ sorted : sortField == 'flooringDate', desc : sortDescending }">
+                 ng-class="{ sorted : sortField.payment == 'flooringDate', desc : sortDescending.payment }">
               Floored
             </div>
             <div class="cell sch-status">
@@ -91,7 +91,7 @@
             </div>
             <div class="cell sch-amount sortable"
                  ng-click="sortPaymentsBy('paymentAmount')"
-                 ng-class="{ sorted : sortField == 'paymentAmount', desc : sortDescending }">
+                 ng-class="{ sorted : sortField.payment == 'paymentAmount', desc : sortDescending.payment }">
               Amount
             </div>
           </li><!-- end .table-list-head -->
