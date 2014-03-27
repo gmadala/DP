@@ -86,6 +86,23 @@ describe('Directive: nxgBusinessField', function () {
     expect(timeout).toHaveBeenCalledWith(angular.noop, 200);
   }));
 
+  it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($dialog) {
+    spyOn($dialog, 'dialog').andReturn({
+      open: function () {
+        return {
+          then: function (success) {
+            // Don't call callback, since that simulates closing the modal,
+            // which we don't want immediately in this test
+          }
+        };
+      }
+    });
+    element.find('input').val('fooBiz');
+    element.find('input').scope().openBusinessSearch();
+    element.find('input').scope().openBusinessSearch();
+    expect(timeout.calls.length).toBe(1);
+  }));
+
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',
     inject(function ($dialog, $compile, $rootScope) {
     element = angular.element('<form name="myForm">' +

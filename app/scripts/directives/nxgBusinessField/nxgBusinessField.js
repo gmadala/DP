@@ -67,41 +67,43 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      var dialogOptions = {
-        dialogClass: 'modal search-modal search-modal-business',
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
-        templateUrl: 'views/modals/businessSearch.html',
-        controller: 'BusinessSearchCtrl',
-        resolve: {
-          initialQuery: function () {
-            return $scope.query;
-          },
-          searchBuyersMode: function () {
-            return $scope.mode === 'buyers';
-          },
-          closeNow: function () {
-            return function() {
-              return $scope.disabled;
-            };
+      if(!searchOpen) {
+        var dialogOptions = {
+          dialogClass: 'modal search-modal search-modal-business',
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/businessSearch.html',
+          controller: 'BusinessSearchCtrl',
+          resolve: {
+            initialQuery: function () {
+              return $scope.query;
+            },
+            searchBuyersMode: function () {
+              return $scope.mode === 'buyers';
+            },
+            closeNow: function () {
+              return function() {
+                return $scope.disabled;
+              };
+            }
           }
-        }
-      };
-      searchOpen = true;
+        };
+        searchOpen = true;
 
-      // Delay by 200ms (almost unnoticeable) so the user's click event has time to complete
-      // before the popup opens, potentially cancelling the popup.
-      $timeout(angular.noop, 200).then(function() {
-        return $dialog.dialog(dialogOptions).open();
-      }).then(function (selectedBusiness) {
-        if (selectedBusiness) {
-          // replace any existing query text with the selected business name
-          $scope.query = selectedBusiness.BusinessName;
-          $scope.selection = selectedBusiness;
-        }
-        searchOpen = false;
-      });
+        // Delay by 200ms (almost unnoticeable) so the user's click event has time to complete
+        // before the popup opens, potentially cancelling the popup.
+        $timeout(angular.noop, 200).then(function() {
+          return $dialog.dialog(dialogOptions).open();
+        }).then(function (selectedBusiness) {
+          if (selectedBusiness) {
+            // replace any existing query text with the selected business name
+            $scope.query = selectedBusiness.BusinessName;
+            $scope.selection = selectedBusiness;
+          }
+          searchOpen = false;
+        });
+      }
     };
 
     // clear any existing data when field becomes disabled
