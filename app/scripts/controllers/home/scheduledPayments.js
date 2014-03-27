@@ -182,6 +182,8 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.paymentInProgress = Payments.paymentInProgress;
+
     $scope.sortField = {};
     $scope.sortField.fee = 'EffectiveDate'; // Default sort
     $scope.sortField.payment = 'ScheduledForDate'; // Default sort

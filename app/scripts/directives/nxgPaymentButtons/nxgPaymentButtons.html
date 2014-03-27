@@ -6,6 +6,7 @@
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue}"
           ng-click="toggleFeeInQueue()"
+          ng-disabled="paymentInProgress()"
           tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
@@ -16,6 +17,7 @@
           type="button"
           id="cancelScheduledFee"
           class="btn btn-mini btn-block"
+          ng-disabled="paymentInProgress()"
           ng-click="cancelScheduledFee()">
     <span>Unschedule</span>
   </button>
@@ -25,7 +27,7 @@
           id="togglePayment"
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue == 'payment'}"
-          ng-disabled="onQueue == 'payoff'"
+          ng-disabled="onQueue == 'payoff' || paymentInProgress()"
           ng-click="togglePaymentInQueue(false)"
           tooltip="{{ onQueue != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -37,6 +39,7 @@
           type="button"
           id="cancelScheduledPayment"
           class="btn btn-mini btn-block"
+          ng-disabled="paymentInProgress()"
           ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>
@@ -54,7 +57,7 @@
           id="togglePayoff"
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue == 'payoff'}"
-          ng-disabled="onQueue == 'payment'"
+          ng-disabled="onQueue == 'payment' || paymentInProgress()"
           ng-click="togglePaymentInQueue(true)"
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -67,7 +70,7 @@
           id="togglePayoff2"
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue == 'payoff'}"
-          ng-disabled="onQueue == 'payment'"
+          ng-disabled="onQueue == 'payment' || paymentInProgress()"
           ng-click="togglePaymentInQueue(true)"
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -79,6 +82,7 @@
           type="button"
           id="cancelScheduledPayoff"
           class="btn btn-mini btn-block"
+          ng-disabled="paymentInProgress()"
           ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>

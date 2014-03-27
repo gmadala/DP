@@ -5,6 +5,20 @@ angular.module('nextgearWebApp')
 
     $scope.isCollapsed = true;
 
+    $scope.submitInProgress = false;
+
+    // Digest cycle wasn't noticing it change when simply assigning
+    // submitInProgress to the watch method. This forces it to
+    // rerun every digest cycle.
+    $scope.$watch(
+      function() {
+        return Payments.paymentInProgress();
+      },
+      function(newValue) {
+        $scope.submitInProgress = newValue;
+      }
+    );
+
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
       sum: {
@@ -173,8 +187,6 @@ angular.module('nextgearWebApp')
         bankAccount = $scope.bankAccounts.selectedAccount,
         unapplied = $scope.unappliedFunds.useFunds ? $scope.unappliedFunds.useAmount : 0;
 
-      $scope.submitInProgress = true;
-
       // if any addresses are overridden, handle those requests first now.
       // Grab payments to override addresses for
       var paymentsToOverride = [];
@@ -187,7 +199,6 @@ angular.module('nextgearWebApp')
       Floorplan.overrideCompletionAddress(paymentsToOverride).then(function() {
         Payments.checkout(fees, payments, bankAccount, unapplied).then(
           function (result) {
-            $scope.submitInProgress = false;
             // confirmation dialog
             var dialogOptions = {
               backdrop: true,
@@ -204,12 +215,8 @@ angular.module('nextgearWebApp')
             $dialog.dialog(dialogOptions).open().then(function () {
               Payments.clearPaymentQueue();
             });
-          }, function (/*error*/) {
-            $scope.submitInProgress = false;
           }
         );
-      }, function (/*error*/) {
-        $scope.submitInProgress = false;
       });
     };
 

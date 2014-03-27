@@ -864,6 +864,16 @@ describe("Model: Payments", function () {
       httpBackend.flush();
     });
 
+    it('should set paymentInProgress properly', function() {
+      httpBackend.expectPOST('/payment/2_0/make').respond(function () {
+        return [200, stubResponse, {}];
+      });
+      payments.checkout({}, {}, {BankAccountId: 'bank1'});
+      expect(payments.paymentInProgress()).toBe(true);
+      httpBackend.flush();
+      expect(payments.paymentInProgress()).toBe(false);
+    })
+
   });
 
   describe('requestExtension', function() {

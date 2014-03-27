@@ -2,6 +2,8 @@
 
 angular.module('nextgearWebApp')
   .factory('Floorplan', function(api, Paginate, User, $q, moment) {
+    var overrideInProgress = false;
+
     return {
       create: function(data) {
         // transform data types as needed for API
@@ -124,10 +126,22 @@ angular.module('nextgearWebApp')
             });
           });
 
-          return api.request('POST', '/floorplan/overrideCompletionAddress', {OverrideCompletionAddressInformation: data} );
+          overrideInProgress = true;
+          return api.request('POST', '/floorplan/overrideCompletionAddress', {OverrideCompletionAddressInformation: data} ).then(function(response) {
+            overrideInProgress = false;
+            return response;
+          }, function(error) {
+            overrideInProgress = false;
+            // Rethrow error. Doing it this way propagates the rejection
+            // Without an exception being throw at the end of the promise chain
+            return $q.reject(error);
+          });
         } else {
           return $q.when(true);
         }
+      },
+      overrideInProgress: function() {
+        return overrideInProgress;
       },
       getExtensionPreview: function(floorplanId) {
         return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);

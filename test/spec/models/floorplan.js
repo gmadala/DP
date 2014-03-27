@@ -544,6 +544,10 @@ describe('Model: Floorplan', function () {
     });
   });
 
+  it('should have an overrideInProgress method', function() {
+    expect(typeof floorplan.overrideInProgress).toBe('function');
+  });
+
   describe('overrideCompletionAddress method', function() {
     var request;
 
@@ -601,6 +605,22 @@ describe('Model: Floorplan', function () {
       expect(httpBackend.flush).toThrow()
       expect(typeof returnVal.then).toEqual('function');
     });
+
+    it('should set overrideInProgress', function() {
+      floorplan.overrideCompletionAddress([
+        {
+          floorplanId: 123,
+          overrideAddress:  {
+            BusinessAddressId: 143
+          }
+        }
+      ]);
+
+      expect(floorplan.overrideInProgress()).toBe(true);
+
+      httpBackend.flush();
+      expect(floorplan.overrideInProgress()).toBe(false);
+    })
 
   });
 });

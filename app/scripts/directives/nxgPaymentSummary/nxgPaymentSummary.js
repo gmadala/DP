@@ -15,6 +15,8 @@ angular.module('nextgearWebApp')
 
     $scope.paymentQueue = Payments.getPaymentQueue();
 
+    $scope.paymentInProgress = Payments.paymentInProgress;
+
     $scope.removeFee = function (fee) {
       Payments.removeFeeFromQueue(fee.financialRecordId);
     };

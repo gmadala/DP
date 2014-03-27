@@ -135,7 +135,7 @@
 
                 <button class="btn btn-small"
                         ng-show="pay.isPending"
-                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay)"
+                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()"
                         ng-click="scheduledPayments.payOff(pay)">
                     <span>Payoff Now</span>
                 </button>

@@ -11,6 +11,10 @@ angular.module('nextgearWebApp')
       },
       controller: function($scope, $dialog, Payments) {
 
+        $scope.paymentInProgress = function() {
+          return Payments.paymentInProgress();
+        };
+
         // set internalType based on type and scheduled state
         $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
           var result = $scope.type;
