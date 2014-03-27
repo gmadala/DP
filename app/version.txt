@@ -1,15 +1,30 @@
-NextGear Capital v2.0.8
+NextGear Capital v2.0.9
 =================================
 
 Fixes included in this release:
 
-VO-1607	Add Tool Tip to Title Release page
-VO-1081	Dealer Self-Service Module
-VO-1604	Web-Floor a Car-Business Search: No validation is present in “Business Name” text field when user enters less than 3 characters in “Business name” field.
-VO-811	Show Fees, Interest on Vehicle on the Vehicle Details view and Floor Date & # of Days Floored on the Payments and Scheduled Payments view.
-VO-756	Checkout - Payment Breakdown
-VO-1573	Web-Request a Credit Increase: No validation for the special characters in “Credit Amount” text field.
-VO-1577	Web-Seller Floor Plan Search: Info popover “NextGear has been notified of this change and will be sending funding soon.” is not getting closed.
-VO-1610	Modify the temp increase description to use 60 days
-VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
-VO-1564	Scheduling Fees - Payments Page - Unschedule Fee - API Integration
+VO-1673	Web–Floor A Car: Error “For Trade-in Payments, payments must be sent to the buyer” is getting displayed even when user have selected Send Payment to “Buyer” option before submitting Flooring Request.
+VO-1753	Web-Checkout Able to remove payments frome queue while payment in progress
+VO-1555	Web–Settings: Error message “Timeout expired. The timeout period elapsed prior to completion of the operation or the server is not responding.” is getting displayed.
+VO-1402	Web–Profile settings: “Help info” text is overlapping with the “Session expired” message when session expires.
+VO-1643	Checkout confirmation showing "Paid" column for scheduled fees
+VO-1619	Web–Title Releases: Send to “Address” is missing in “Description” field under “Title Release Requests” section.
+VO-1443	Web–Floor a Car: Error message “Mileage must be greater than 0” is getting displayed after flooring a car when user enters Mileage = “0”.
+VO-1410	Final extension text for the confirmation modal
+VO-758	Allow for Account Fees to be scheduled along with all other payments at any time
+VO-1363	Web–Account Management: “Request a Credit Increase” link is not working.
+VO-1598	Web-Dashboard: User is able to click on “Feedback & Support” button when “Logout” popup is displayed.
+VO-1406	Web–Profile Settings: “Edit” button is not working under “Title Settings” section.
+VO-1608	Add language to Title Release page 8 Tool Tip
+VO-1026	Web/Mobile: Dashboard - Mismatch between "Payments Summary" section on web version & mobile version on Dashboard.
+VO-1400	Web–Profile Settings: “Edit” button is not working under “Business Settings” section.
+VO-849	Web: On "Dashboard" - if Week View is selected on "Payments Summary" - Text "Payments This week" should be "Payments This Week".
+VO-1652	Web-Payments: “Overdue” Indication sign is not getting displayed for Overdue “Account fees”.
+VO-1644	Payment breakdown on checkout page not updating outside business hours
+VO-1440	Web–Payment: Date Picker of “Schedule for” field on “Select for Schedule date” popup is overlapping the “Session Expire” popup.
+VO-1240	Payment Extension Modal - API Integration
+VO-1653	Web-Payments: Amount under “Remaining Payment Balance” field is not getting refreshed when user clicks on “NO” radio button under “Apply Funds to Payment?” field.
+VO-1539	Modify the floorplan screen grid to be consistent with other grids
+VO-1437	Update final text for confirmation windows based on NextGear feedback
+VO-1668	Title Release Program number of titles available not refreshing
+VO-1106	Web: "Payments Submitted" modal shouldn't force user back to payments page.
