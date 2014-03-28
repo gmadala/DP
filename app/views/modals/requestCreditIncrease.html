@@ -12,7 +12,7 @@
 
       <div class="inner">
         <ul>
-          <li class="credit-line nxg-radios" ng-repeat="line in selector.linesOfCredit">
+          <li class="credit-line nxg-radios" ng-repeat="line in selector.linesOfCredit" nxg-autofocus>
             <input type="radio" name="lineOfCredit" ng-model="$parent.selector.selectedLineOfCredit" id="lineOfCredit{{$index}}" ng-value="line" ng-disabled="loading" required />
             <label for="lineOfCredit{{$index}}">
               <strong>{{ line.type }}</strong> – {{ line.amount | currency }}
