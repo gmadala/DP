@@ -53,7 +53,7 @@
         How much would you like to increase it by?
       </h4>
       <div class="inner incr-amt clearfix">
-        <input type="text" name="increaseAmt" id="increaseAmt" ng-model="selector.amount" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/" nxg-min="1" ng-disabled="loading" ng-class="{ 'nxg-invalid':formValidation.increaseAmt.$error.required || formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin }" required />
+        <input type="text" name="increaseAmt" id="increaseAmt" ng-model="selector.amount" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/" nxg-min="1" nxg-input-currency="1000000000000" ng-disabled="loading" ng-class="{ 'nxg-invalid':formValidation.increaseAmt.$error.required || formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin || formValidation.increaseAmt.$error.max }" required />
         <label class="note" for="increaseAmt">
           Credit requests typically take 3-5 business days to process. You will be notified by email as soon as your request has been processed.
         </label>
@@ -65,7 +65,7 @@
           <span class="text-error" ng-show="formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin">
             Please enter a positive numeric value with no more than 2 decimal places.
           </span>
-           <span class="text-error" ng-show="formValidation.increaseAmt.$error.nxgMax">
+           <span class="text-error" ng-show="formValidation.increaseAmt.$error.max">
             Please enter value less than $1,000,000,000,000.00.
           </span>
         </div>
