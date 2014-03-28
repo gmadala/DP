@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric, moment) {
+  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric, moment, $filter) {
 
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
@@ -55,6 +55,18 @@ angular.module('nextgearWebApp')
       };
 
       $dialog.dialog(dialogOptions).open();
+    };
+
+    // Determines if the length of the rendered number is too long
+    // to fit inside the pie charts on the dashboard.
+    // This method is a terrible separation of view/controller, but
+    // it's necessary to shrink numbers that don't fit.
+    $scope.tooLong = function(number, format) {
+      if($filter('numeral')(number, format).length >= 7) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
     /**

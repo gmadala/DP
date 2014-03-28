@@ -34,6 +34,14 @@
   cursor: default;
   position: absolute;
   margin-top: 20px;
+
+  &.smaller {
+    margin-top: 25px;
+  }
+  &.smaller .nxg-doughnut-chart-label-primary {
+    font-size: $base-font-size;
+  }
+
 }
 
 .nxg-doughnut-chart-label-primary,
@@ -90,7 +98,7 @@
 
   .nxg-doughnut-chart-label {
     width: 120px;
-    top: 55px;
+    top: 35px;
     left: 50%;
     margin-left: -60px;
   }
