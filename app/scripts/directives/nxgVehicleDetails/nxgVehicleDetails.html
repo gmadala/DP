@@ -89,7 +89,7 @@
         <td class="detail-value">
           <span ng-show="vehicleDetails.sellerAddressLine1">{{ vehicleDetails.sellerAddressLine1 }}<br/></span>
           <span ng-show="vehicleDetails.sellerAddressLine2">{{ vehicleDetails.sellerAddressLine2 }}<br/></span>
-          {{ vehicleDetails.sellerAddressCity + ',' }} {{ vehicleDetails.sellerAddressState }} {{ vehicleDetails.sellerAddressZip }}
+          <span ng-show="vehicleDetails.sellerAddressCity">{{ vehicleDetails.sellerAddressCity + ',' }}</span> <span ng-show="vehicleDetails.sellerAddressState">{{ vehicleDetails.sellerAddressState }}</span> <span ng-show="vehicleDetails.sellerAddressZip">{{ vehicleDetails.sellerAddressZip }}</span>
         </td>
       </tr>
     </table>
