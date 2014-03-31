@@ -98,18 +98,19 @@
               <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
                      ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
                      required
-                     nxg-input-currency=1000000000000
-                     ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength }" />
+                     nxg-input-currency="1000000000000"
+                     nxg-min="1"
+                     ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
               <label for="inputPurchaseAmt" class="text-error"
                      ng-show="validity.inputPurchaseAmt.$error.required">
                 Please enter the Purchase Amount.
               </label>
               <label for="inputPurchaseAmt" class="text-error"
-                     ng-show="validity.inputPurchaseAmt.$error.pattern">
-                  Please enter a numeric value with no <br> special characters, such as a dollar sign.
+                     ng-show="validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin">
+                  Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
               </label>
                <label for="inputPurchaseAmt" class="text-error"
-                     ng-show="validity.inputPurchaseAmt.$error.max">
+                     ng-show="!validity.inputPurchaseAmt.$error.required && !validity.inputPurchaseAmt.$error.pattern && validity.inputPurchaseAmt.$error.max">
                   Please enter a value less than $1,000,000,000,000.
               </label>
             </div>

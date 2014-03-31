@@ -32,6 +32,7 @@ module.exports = function(karma) {
       'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
       'app/components/modernizr/modernizr.js',
+      'app/components/numeral/numeral.js',
       'app/components/angular-cookies/angular-cookies.js',
       'app/components/angular-local-storage/angular-local-storage.js',
 	    'app/components/highcharts.com/js/highcharts.src.js',

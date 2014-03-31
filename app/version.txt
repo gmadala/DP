@@ -1,30 +1,24 @@
-NextGear Capital v2.0.9
+NextGear Capital v2.0.10
 =================================
 
 Fixes included in this release:
 
-VO-1673	Web–Floor A Car: Error “For Trade-in Payments, payments must be sent to the buyer” is getting displayed even when user have selected Send Payment to “Buyer” option before submitting Flooring Request.
-VO-1753	Web-Checkout Able to remove payments frome queue while payment in progress
-VO-1555	Web–Settings: Error message “Timeout expired. The timeout period elapsed prior to completion of the operation or the server is not responding.” is getting displayed.
-VO-1402	Web–Profile settings: “Help info” text is overlapping with the “Session expired” message when session expires.
-VO-1643	Checkout confirmation showing "Paid" column for scheduled fees
-VO-1619	Web–Title Releases: Send to “Address” is missing in “Description” field under “Title Release Requests” section.
-VO-1443	Web–Floor a Car: Error message “Mileage must be greater than 0” is getting displayed after flooring a car when user enters Mileage = “0”.
-VO-1410	Final extension text for the confirmation modal
-VO-758	Allow for Account Fees to be scheduled along with all other payments at any time
-VO-1363	Web–Account Management: “Request a Credit Increase” link is not working.
-VO-1598	Web-Dashboard: User is able to click on “Feedback & Support” button when “Logout” popup is displayed.
-VO-1406	Web–Profile Settings: “Edit” button is not working under “Title Settings” section.
-VO-1608	Add language to Title Release page 8 Tool Tip
-VO-1026	Web/Mobile: Dashboard - Mismatch between "Payments Summary" section on web version & mobile version on Dashboard.
-VO-1400	Web–Profile Settings: “Edit” button is not working under “Business Settings” section.
-VO-849	Web: On "Dashboard" - if Week View is selected on "Payments Summary" - Text "Payments This week" should be "Payments This Week".
-VO-1652	Web-Payments: “Overdue” Indication sign is not getting displayed for Overdue “Account fees”.
-VO-1644	Payment breakdown on checkout page not updating outside business hours
-VO-1440	Web–Payment: Date Picker of “Schedule for” field on “Select for Schedule date” popup is overlapping the “Session Expire” popup.
-VO-1240	Payment Extension Modal - API Integration
-VO-1653	Web-Payments: Amount under “Remaining Payment Balance” field is not getting refreshed when user clicks on “NO” radio button under “Apply Funds to Payment?” field.
-VO-1539	Modify the floorplan screen grid to be consistent with other grids
-VO-1437	Update final text for confirmation windows based on NextGear feedback
-VO-1668	Title Release Program number of titles available not refreshing
-VO-1106	Web: "Payments Submitted" modal shouldn't force user back to payments page.
+VO-1825	Web-Payment:"Export Payment Summary" button should be disabled when all the payments are removed.
+VO-1787	Web (IE 9&10)–Floor a Car: User is able to floor a Car without entering date in “Purchase Date” field.
+VO-1665	Format high chart value as dollars with decimals
+VO-1820	Request Extension Modal: Collateral Protection should not display if its value is $0.
+VO-1528	Sorting columns doesn't display on Scheduled Payments
+VO-1442	Web–Floor a Car: Seller Business Search popup is not getting closed on selection of a “Seller” for 1st time.
+VO-1441	Web–Dashboard-Request Credit Increase: No error message is displayed when user clicks on “Confirm Request” button after entering Credit Request = “0”.
+VO-1458	Web–Title Releases: Error message “Unable to communicate with NextGear system” is displayed when user clicks on “Title Release” Navigation option.
+VO-1794	Web: Seller Floorplan Search - No "I have it" checkbox
+VO-1785	Web–Title Releases: “Floor Plan” list disappears when user clicks on “Purchased” sorting button.
+VO-1495	Web –Payment-Request Extension: Blank details are getting displayed for “Principal”, ”Interest”, ”Collateral Protection” and “Subtotal” on “Payment Extension Request” popup.
+VO-1821	Display fees, principal, and interest every time for payment breakdown and extension modal
+VO-1439	Web–Payment: Full Stop is missing in the error message “Please select a valid banking date no earlier than tomorrow and no later than the payment due date” on the Schedule Payment popup.
+VO-1674	Web–Request Credit Increase: "Credit Amount" text field is not validated for large value in “Credit Amount” text field.
+VO-1444	Web–Floor a Car: Error message “Purchase Amount must be greater than 0” is getting displayed after flooring a car when user enter Purchase Amount = “0”.
+VO-1637	Payment Detail for Scheduled Payment not reporting correctly on Payment Summary Detail
+VO-1675	Web–Floor Plan: “null,” is getting displayed in the “Seller address” field in the “Vehicle Detail” view.
+VO-1445	Web–Dashboard-Request Credit Increase: Background color turns black when user presses “Keyboard Enter” button.
+VO-1791	Web-Scheduled Payments Payoff Now button still moves when disabled

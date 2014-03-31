@@ -128,13 +128,13 @@
           <form class="settings-opts" ng-class="{ editable:notifications.editable }" name="notificationSettings">
             <div class="head-labels">
               <label>Notifications</label>
-              <label ng-hide="notifications.editable">Delivery Type</label>
+              <label ng-hide="notifications.editable || notifications.data.selected.length == 0">Delivery Type</label>
             </div>
 
             <div class="control-group">
               <div class="controls notifications">
                 <ul class="unstyled">
-                  <li class="notification" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable">
+                  <li class="notification" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
                     <div class="n-title">{{ n.NotificationName }}</div>
                     <ul class="inner">
                       <li class="read-only" ng-repeat="d in n.DeliveryMethods">
@@ -142,6 +142,8 @@
                       </li>
                     </ul>
                   </li>
+                  <li class="notification" ng-show="notifications.data.selected.length == 0 && !notifications.editable">No notifications are currently enabled.</li>
+
                   <!-- Edit -->
                   <li class="notification" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
                     <div class="n-title">{{ n.Name }}</div>

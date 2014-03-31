@@ -3,7 +3,7 @@
     <div class="well">
       <h4>
         Payments Checkout
-        <button class="btn btn-primary exp-pymt" ng-click="exportPaymentSummary()">
+        <button class="btn btn-primary exp-pymt" ng-click="exportPaymentSummary()" ng-disabled="paymentQueue.sum.todayCount() == 0">
           Export Payment Summary
         </button>
       </h4>
@@ -104,7 +104,7 @@
                     Principal: {{payment.principal | currency}} <br/>
                     Interest: {{payment.interestTotal | currency}} <br/>
                     Fee(s): {{payment.feesTotal | currency}} <br/>
-                    Collateral Protection: {{payment.collateralTotal | currency}}
+                    <span ng-show="payment.collateralTotal > 0">Collateral Protection: {{payment.collateralTotal | currency}}</span>
                   </p>
                   <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(payment)"

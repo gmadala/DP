@@ -20,13 +20,14 @@
           <td>{{ fee.Type }}</td>
           <td class="highlight">{{ fee.Amount | currency }}</td>
         </tr>
-        <tr>
+        <tr ng-show="extPrev.CollateralProtectionAmount > 0">
           <td>Collateral Protection: </td>
           <td class="highlight">{{ extPrev.CollateralProtectionAmount | currency }}</td>
         </tr>
         <tr class="subtotal">
           <td>Subtotal:</td>
           <td class="highlight">{{ subtotal | currency }}</td>
+        </tr>
       </table>
     </div><!-- end .detail-col -->
     <p ng-show="payment.Extendable" class="highlight-dark">

@@ -34,7 +34,12 @@
 
   .info {
     @extend .tip;
-    width: 60%;
+    font-size: $small-font-size;
+    line-height: 1.5;
+  }
+
+  .filterable .info {
+    width: 70%;
   }
 
   &.payments, &.schPayments {

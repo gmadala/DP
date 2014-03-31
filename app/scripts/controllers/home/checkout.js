@@ -314,7 +314,9 @@ angular.module('nextgearWebApp')
         feeIds.push(fee.financialRecordId);
       });
       angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
-        paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+        if(!payment.scheduleDate) {
+          paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+        }
       });
 
       if (feeIds.length > 0) {

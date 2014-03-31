@@ -21,7 +21,10 @@
                               <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
                           </div>
                       </div>
-                      <p class="span7 tip">Thank you for your suggestions! NextGear Capital has launched the Title Release Program that allows you to request a title prior to payoff. This program requires that the title be returned to NextGear or the unit paid off within seven days.</p>
+
+                      <div class="span7">
+                        <p class="info">Thank you for your suggestions! Next Gear Capital has launched the Title Release Program that allows you to request a title prior to payoff. This program requires that the title be returned to Next Gear or unit paid off within seven days.</p>
+                      </div>
                   </div>
               </form>
           </div>
@@ -57,8 +60,8 @@
               <span class="header-text">Status</span>
             </div>
             <div class="cell title-purchaseDate sortable-container"
-                 ng-click="sortBy('UnitPurchaseDate')"
-                 ng-class="{ sorted : sortField == 'UnitPurchaseDate', desc : sortDescending }">
+                 ng-click="sortBy('PurchaseDate')"
+                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
               <div class="sorting-arrows"></div>
               <span class="header-text">Purchased</span>
             </div>
