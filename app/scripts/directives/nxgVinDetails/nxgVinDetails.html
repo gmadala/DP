@@ -72,7 +72,7 @@
 
     <label for="inputYear">Year</label>
     <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear"
-           required ng-pattern="/^\d{4}$/" nxg-min="1900" nxg-max="settings.maxYear" ng-class="{ 'nxg-invalid': validity.inputYear.$error.required || validity.inputYear.$error.pattern || validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax }" />
+           required ng-pattern="/^\d{4}$/" nxg-min="1901" nxg-max="settings.maxYear" ng-class="{ 'nxg-invalid': validity.inputYear.$error.required || validity.inputYear.$error.pattern || validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax }" />
     <label for="inputYear" class="text-error"
            ng-show="validity.inputYear.$error.required">
       Please enter a Year.
@@ -83,7 +83,7 @@
     </label>
     <label for="inputYear" class="text-error"
            ng-show="validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax">
-      Please enter a Year between 1900 and {{ settings.maxYear }}.
+      Please enter a Year between 1901 and {{ settings.maxYear }}.
     </label>
 
     <label for="inputStyle">Style</label>
