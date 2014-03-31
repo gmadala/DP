@@ -111,8 +111,7 @@
 
               <div class="cell sch-desc">
                 <p> {{ pay.description }} </p>
-                <p>
-                  VIN: <span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query"></span><br/>
+                <p><span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query" class="break-word"></span><br/>
                   Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
                 </p>
               </div>
@@ -136,7 +135,7 @@
 
                 <button class="btn btn-small"
                         ng-show="pay.isPending"
-                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay)"
+                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()"
                         ng-click="scheduledPayments.payOff(pay)">
                     <span>Payoff Now</span>
                 </button>

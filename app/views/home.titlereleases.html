@@ -21,7 +21,7 @@
                               <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
                           </div>
                       </div>
-                      <p class="span7 tip">We just launched our new title release program! Via the website, you now can request titles BEFORE they are paid off. You have up to 7 days to either payoff the unit(s) or return the title. You asked… We listened!</p>
+                      <p class="span7 tip">Thank you for your suggestions! NextGear Capital has launched the Title Release Program that allows you to request a title prior to payoff. This program requires that the title be returned to NextGear or the unit paid off within seven days.</p>
                   </div>
               </form>
           </div>
@@ -85,7 +85,7 @@
 
               <div class="cell title-desc">
                 <p ng-bind-html-unsafe="getVehicleDescription(item) | highlight:item.data.query"></p>
-                <p>VIN: <span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query"></span></p>
+                <p><span ng-bind-html-unsafe="item.UnitVIN | highlight:item.data.query" class="break-word"></span></p>
               </div>
               <div class="cell title-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
@@ -133,4 +133,4 @@
       </section>
     </div>
   </section><!-- end .span12 -->
-  <section class="span3 well request-queue sticky" nxg-requests-summary nxg-sticky footer=".request-sum-footer"></section></section><!-- end .row-fluid -->
+  <section class="span3 well request-queue sticky" nxg-requests-summary eligibility="eligibility" nxg-sticky footer=".request-sum-footer"></section></section><!-- end .row-fluid -->

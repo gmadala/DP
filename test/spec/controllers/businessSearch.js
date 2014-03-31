@@ -9,7 +9,8 @@ describe('Controller: BusinessSearchCtrl', function () {
     scope,
     model,
     searchResult,
-    dialog;
+    dialog,
+    closeNow;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, BusinessSearch, $q) {
@@ -30,12 +31,17 @@ describe('Controller: BusinessSearchCtrl', function () {
       close: angular.noop
     };
 
+    var closeNowFunction = function() {
+      return closeNow;
+    }
+
     scope = $rootScope.$new();
     BusinessSearchCtrl = $controller('BusinessSearchCtrl', {
       $scope: scope,
       dialog: dialog,
       initialQuery: 'x',
-      searchBuyersMode: false
+      searchBuyersMode: false,
+      closeNow: closeNowFunction
     });
   }));
 

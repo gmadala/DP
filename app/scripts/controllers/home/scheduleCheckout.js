@@ -56,15 +56,10 @@ angular.module('nextgearWebApp')
       if(item.isPayment) {
         $scope.submitInProgress = true;
         // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
-        Payments.fetchPaymentAmountOnDate(item.floorplanId, scheduleDate || new Date(), item.isPayoff).then(
-          function (newAmounts) {
+        Payments.updatePaymentAmountOnDate(item, scheduleDate || new Date(), item.isPayoff).then(
+          function () {
             $scope.submitInProgress = false;
             item.scheduleDate = scheduleDate;
-            item.amount = newAmounts.PaymentAmount;
-            item.feesTotal = newAmounts.FeeAmount;
-            item.interestTotal = newAmounts.InterestAmount;
-            item.principal = newAmounts.PrincipalAmount;
-            item.collateralTotal = newAmounts.CollateralProtectionAmount;
             dialog.close();
           }, function (/*error*/) {
             $scope.submitInProgress = false;

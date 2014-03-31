@@ -1,13 +1,23 @@
 .modal-backdrop {
   @include opacity(50);
   z-index: 1050;
+
+  /*
+   * We need to ensure the session timeout modal appears above
+   * the datepicker, but we also need datepickers within modals
+   * to be above those modals. Since modals and datepickers are
+   * both appended to the end of the <body>, if we select the
+   * .modal-backdrop after a datepicker, we can ensure it will
+   * cover the datepicker.
+   */
+  .datepicker + & {
+    z-index: 1090;
+  }
 }
 
 .modal {
   @extend %small;
   @include border-radius(0);
-  @include translateY(-50%);
-  top: 50%;
   width: 320px;
   max-height: 95%;
   overflow-y: auto;
@@ -16,6 +26,10 @@
 
   form {
     margin: 0;
+  }
+
+  &.topmost {
+    z-index: 2000;
   }
 }
 

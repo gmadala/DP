@@ -79,10 +79,8 @@
                   </button>
                 </div>
                 <div class="cell pay-desc">
-                  <p>
-                    <span class="sch-label">VIN: </span>
-                    {{ payment.vin }}<br/>
-                    <span class="sch-label">Stock #: </span>
+                  <p><span class="break-word">{{ payment.vin }}</span><br/>
+                    <span>Stock #: </span>
                     {{ payment.stockNum }}
                   </p>
                   <p>{{ payment.description }}</p>
@@ -192,7 +190,7 @@
         <hr/>
 
         <p class="chkout-label">Remaining Payment Balance</p>
-        <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency }}</p>
+        <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - {'true': unappliedFunds.useAmount, 'false': 0}[unappliedFunds.useFunds] | currency }}</p>
       </div><!-- end of Unapplied Funds -->
 
       <hr/>

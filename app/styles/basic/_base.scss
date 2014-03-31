@@ -40,3 +40,8 @@ body, html {
   display: inline-block;
   margin-right: 1px;
 }
+
+// so that our feedback tab displays beneath the modal backdrop.
+#uvTab {
+  z-index: 1000 !important;
+}

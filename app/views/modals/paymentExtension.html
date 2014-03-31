@@ -5,7 +5,6 @@
   <section class="row-fluid">
     <div class="detail-col">
       <h4 class="well-head">Payment Summary</h4>
-      <p>This is a general explanation of how extensions work, to be provided by NextGear. </p>
       <p><strong>VIN: {{ payment.Vin }} - {{ payment.UnitDescription }}</strong></p>
 
       <table>
@@ -22,7 +21,7 @@
           <td class="highlight">{{ fee.Amount | currency }}</td>
         </tr>
         <tr>
-          <td>Collateral Protection</td>
+          <td>Collateral Protection: </td>
           <td class="highlight">{{ extPrev.CollateralProtectionAmount | currency }}</td>
         </tr>
         <tr class="subtotal">
@@ -30,13 +29,21 @@
           <td class="highlight">{{ subtotal | currency }}</td>
       </table>
     </div><!-- end .detail-col -->
-    <p ng-hide="payment.Extendable" class="highlight">
+    <p ng-show="payment.Extendable" class="highlight-dark">
+      To extend this unit an additional period please click below.
+    </p>
+    <p ng-show="!payment.Extendable" class="highlight-dark">
       This extension request cannot be completed online. Please <a href="https://home-c4.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0a63c698-c417-4ade-8e0d-55cccf2b0d85&bu=4592556" target="_blank">chat with us</a> or contact customer service for further assistance.
     </p>
   </section><!-- end .row-fluid -->
 </div>
 
 <div class="modal-footer">
-  <button ng-show="payment.Extendable" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
-  <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
+  <div class="btn-container">
+    <button ng-show="payment.Extendable" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
+    <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
+  </div>
+  <div class="disclaimer">
+    <p>Please note this quote is effective for today only and amounts are subject to change. </p>
+  </div>
 </div>

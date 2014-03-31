@@ -7,7 +7,8 @@
      active-criteria="proposedSearchCriteria"
      on-search="search()"
      on-clear="resetSearch()"
-     help-text="Date range based on floorplan date OR disbursement date.">
+     help-text="Date range based on floorplan date OR disbursement date."
+     filterable="true">
 </div>
 
 <div ng-switch="data.results.length > 0 || data.loading">
@@ -39,10 +40,8 @@
 
       <li class="table-list-row" ng-repeat="item in data.results">
         <div class="cell selfloor-descr">
-          <p>
-            <span class="sch-label">VIN: </span>
-            <span ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query"></span>
           <p>{{ getVehicleDescription(item) }}</p>
+          <p ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query" class="break-word"></p>
         </div>
         <div class="cell selfloor-stat">{{ item.FloorplanStatusName }}</div>
         <div class="cell selfloor-dates">

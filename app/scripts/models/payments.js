@@ -35,6 +35,8 @@ angular.module('nextgearWebApp')
       }
     };
 
+    var paymentInProgress = false;
+
     // public api:
 
     return {
@@ -207,13 +209,20 @@ angular.module('nextgearWebApp')
           }
         );
       },
-      fetchPaymentAmountOnDate: function (floorplanId, scheduledDate, isPayoff) {
+      updatePaymentAmountOnDate: function (payment, scheduledDate, isPayoff) {
         var params = {
-          FloorplanId: floorplanId,
+          FloorplanId: payment.floorplanId,
           ScheduledDate: api.toShortISODate(scheduledDate),
           IsCurtailment: !isPayoff
         };
-        return api.request('GET', '/payment/calculatepaymentamount', params);
+        return api.request('GET', '/payment/calculatepaymentamount', params).then(function(result) {
+          payment.amount = result.PaymentAmount;
+          payment.feesTotal = result.FeeAmount;
+          payment.interestTotal = result.InterestAmount;
+          payment.principal = result.PrincipalAmount;
+          payment.collateralTotal = result.CollateralProtectionAmount;
+          return result;
+        });
       },
       checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
         var shortFees = [],
@@ -239,7 +248,19 @@ angular.module('nextgearWebApp')
           BankAccountId: bankAccount.BankAccountId,
           UnappliedFundsAmount: api.toFloat(unappliedFundsAmt )|| 0
         };
-        return api.request('POST', '/payment/2_0/make', data);
+        paymentInProgress = true;
+        return api.request('POST', '/payment/2_0/make', data).then(function(response) {
+          paymentInProgress = false;
+          return response;
+        }, function(error) {
+          paymentInProgress = false;
+          // Rethrow error. Doing it this way propagates the rejection
+          // Without an exception being throw at the end of the promise chain
+          return $q.reject(error);
+        });
+      },
+      paymentInProgress: function() {
+        return paymentInProgress || Floorplan.overrideInProgress();
       },
       requestExtension: function (floorplanId) {
         return api.request('POST', '/Floorplan/requestextension/' + floorplanId);

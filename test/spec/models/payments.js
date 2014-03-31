@@ -697,7 +697,7 @@ describe("Model: Payments", function () {
 
   });
 
-  describe('fetchPaymentAmountOnDate function', function () {
+  describe('updatePaymentAmountOnDate function', function () {
 
     var callParams;
 
@@ -720,12 +720,12 @@ describe("Model: Payments", function () {
 
     it('should call the expected endpoint', function () {
       httpBackend.expectGET(/\/payment\/calculatepaymentamount\?.*/);
-      payments.fetchPaymentAmountOnDate('foo', new Date(), false);
+      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(), false);
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should send the expected params', function () {
-      payments.fetchPaymentAmountOnDate('foo', new Date(2013, 9, 22), false);
+      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(2013, 9, 22), false);
       httpBackend.flush();
       expect(callParams.FloorplanId).toBe('foo');
       expect(callParams.ScheduledDate).toBe('2013-10-22');
@@ -733,7 +733,7 @@ describe("Model: Payments", function () {
     });
 
     it('should return a promise for the resulting PaymentAmount', function () {
-      payments.fetchPaymentAmountOnDate('foo', new Date(2013, 11, 22), false).then(
+      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(2013, 11, 22), false).then(
         function (result) {
           expect(result.PaymentAmount).toBe(345.67);
           expect(result.PrincipalAmount).toBe(100);
@@ -743,6 +743,18 @@ describe("Model: Payments", function () {
         }
       );
       httpBackend.flush();
+    });
+
+    it('should update the floorplan\'s original values with those returned from the API', function () {
+      var floorplan = {floorplanId: 'foo'};
+      payments.updatePaymentAmountOnDate(floorplan, new Date(2013, 11, 22), false);
+      httpBackend.flush();
+
+      expect(floorplan.amount).toBe(345.67);
+      expect(floorplan.principal).toBe(100);
+      expect(floorplan.interestTotal).toBe(200);
+      expect(floorplan.feesTotal).toBe(50);
+      expect(floorplan.collateralTotal).toBe(11);
     });
 
   });
@@ -851,6 +863,16 @@ describe("Model: Payments", function () {
       payments.checkout([], [], {BankAccountId: 'bank1'}, '180.45');
       httpBackend.flush();
     });
+
+    it('should set paymentInProgress properly', function() {
+      httpBackend.expectPOST('/payment/2_0/make').respond(function () {
+        return [200, stubResponse, {}];
+      });
+      payments.checkout({}, {}, {BankAccountId: 'bank1'});
+      expect(payments.paymentInProgress()).toBe(true);
+      httpBackend.flush();
+      expect(payments.paymentInProgress()).toBe(false);
+    })
 
   });
 

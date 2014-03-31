@@ -90,18 +90,24 @@ describe('Controller: PaymentsCtrl', function () {
       clock.restore();
     });
 
-    it('should return overdue for past due dates', function () {
-      var result = scope.getDueStatus({DueDate: '2012-12-31'});
+    it('should return overdue for past due dates for fees or payments', function () {
+      var result = scope.getDueStatus({DueDate: '2012-12-31'}, true);
+      expect(result).toBe('overdue');
+      result = scope.getDueStatus({EffectiveDate: '2012-12-31'}, false);
       expect(result).toBe('overdue');
     });
 
     it('should return today for same-day due dates', function () {
-      var result = scope.getDueStatus({DueDate: '2013-01-01'});
+      var result = scope.getDueStatus({DueDate: '2013-01-01'}, true);
+      expect(result).toBe('today');
+      result = scope.getDueStatus({EffectiveDateDate: '2013-01-01'}, false);
       expect(result).toBe('today');
     });
 
     it('should return future for future due dates', function () {
-      var result = scope.getDueStatus({DueDate: '2013-01-02'});
+      var result = scope.getDueStatus({DueDate: '2013-01-02'}, true);
+      expect(result).toBe('future');
+      result = scope.getDueStatus({EffectiveDate: '2013-01-02'}, false);
       expect(result).toBe('future');
     });
 

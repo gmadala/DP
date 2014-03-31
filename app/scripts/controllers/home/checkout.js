@@ -5,6 +5,20 @@ angular.module('nextgearWebApp')
 
     $scope.isCollapsed = true;
 
+    $scope.submitInProgress = false;
+
+    // Digest cycle wasn't noticing it change when simply assigning
+    // submitInProgress to the watch method. This forces it to
+    // rerun every digest cycle.
+    $scope.$watch(
+      function() {
+        return Payments.paymentInProgress();
+      },
+      function(newValue) {
+        $scope.submitInProgress = newValue;
+      }
+    );
+
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
       sum: {
@@ -173,8 +187,6 @@ angular.module('nextgearWebApp')
         bankAccount = $scope.bankAccounts.selectedAccount,
         unapplied = $scope.unappliedFunds.useFunds ? $scope.unappliedFunds.useAmount : 0;
 
-      $scope.submitInProgress = true;
-
       // if any addresses are overridden, handle those requests first now.
       // Grab payments to override addresses for
       var paymentsToOverride = [];
@@ -187,7 +199,6 @@ angular.module('nextgearWebApp')
       Floorplan.overrideCompletionAddress(paymentsToOverride).then(function() {
         Payments.checkout(fees, payments, bankAccount, unapplied).then(
           function (result) {
-            $scope.submitInProgress = false;
             // confirmation dialog
             var dialogOptions = {
               backdrop: true,
@@ -204,12 +215,8 @@ angular.module('nextgearWebApp')
             $dialog.dialog(dialogOptions).open().then(function () {
               Payments.clearPaymentQueue();
             });
-          }, function (/*error*/) {
-            $scope.submitInProgress = false;
           }
         );
-      }, function (/*error*/) {
-        $scope.submitInProgress = false;
       });
     };
 
@@ -246,7 +253,6 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Payments.fetchPossiblePaymentDates(tomorrow, later).then(
         function (result) {
-          $scope.submitInProgress = false;
           if (!result.length) {
             // no possible payments dates in the next month were found; cannot check out
             messages.add(defaultCheckoutError, 'no suitable dates in next month for scheduling after-hours payments');
@@ -254,13 +260,10 @@ angular.module('nextgearWebApp')
           }
           var nextAvail = moment(result.sort()[0]).toDate(),
             ejectedFees = [],
-            ejectedPayments = [];
-          // eject all fees since they cannot be scheduled
-          // angular.forEach($scope.paymentQueue.contents.fees, function (fee) {
-          //   Payments.removeFeeFromQueue(fee.financialRecordId);
-          //   ejectedFees.push(fee);
-          // });
-          // eject payments that can't be scheduled; auto-schedule any others not already scheduled
+            ejectedPayments = [],
+            paymentSummaryUpdates = [];
+
+          // eject payments and fees that can't be scheduled; auto-schedule any others not already scheduled
           angular.forEach(angular.extend({}, $scope.paymentQueue.contents.payments, $scope.paymentQueue.contents.fees), function (item) {
             if (!$scope.paymentQueue.canSchedule(item) || moment(item.dueDate).isBefore(nextAvail, 'day')) {
               Payments.removeFromQueue(item);
@@ -271,6 +274,9 @@ angular.module('nextgearWebApp')
               }
             } else if (!item.scheduleDate) {
               item.scheduleDate = nextAvail;
+              if(item.isPayment) {
+                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff));
+              }
             }
           });
           // tell the user what we did
@@ -286,7 +292,13 @@ angular.module('nextgearWebApp')
               autoScheduleDate: function () { return nextAvail; }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+
+          return $q.all(paymentSummaryUpdates).then(function() {
+            $scope.submitInProgress = false;
+            return $dialog.dialog(dialogOptions).open();
+          });
+
+
         }, function (/*error*/) {
           $scope.submitInProgress = false;
         }

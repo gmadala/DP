@@ -3,29 +3,18 @@
 angular.module('nextgearWebApp')
   .factory('TitleReleases', function(api, TitleAddresses, $q, Paginate, moment) {
 
-    var eligibility, eligibilityLoading;
-
-    var cacheEligibility = function() {
-      eligibilityLoading = true;
-      eligibility = api.request('GET', '/titleRelease/getTitleReleaseEligibility').then(function(res) {
-        eligibilityLoading = false;
-        return res;
-      });
-    };
-    cacheEligibility();
+    var eligibilityLoading = false;
 
     var queue = [];
 
     return {
 
-      isEligible: function() {
-        return eligibility.then(function(result) {
-          return result.DealerIsEligibleToReleaseTitles;
-        });
-      },
-
       getTitleReleaseEligibility: function() {
-        return eligibility;
+        eligibilityLoading = true;
+        return api.request('GET', '/titleRelease/getTitleReleaseEligibility').then(function(res) {
+          eligibilityLoading = false;
+          return res;
+        });
       },
 
       getEligibilityLoading: function() {
@@ -91,10 +80,6 @@ angular.module('nextgearWebApp')
             TitleReleases: floorplans
           };
           return api.request('POST', '/titleRelease/RequestTitleRelease', data);
-        }).then(function(response) {
-          // Re-run the eligibility request
-          cacheEligibility();
-          return response;
         });
       },
       search: function (criteria, paginator) {

@@ -10,8 +10,8 @@ angular.module('nextgearWebApp')
 
     var lastPromise;
 
-    $scope.getDueStatus = function (payment) {
-      var due = moment(payment.DueDate),
+    $scope.getDueStatus = function (item, isPayment) {
+      var due = isPayment ? moment(item.DueDate) : moment(item.EffectiveDate),
         today = moment();
 
       if (due.isBefore(today, 'day')) {

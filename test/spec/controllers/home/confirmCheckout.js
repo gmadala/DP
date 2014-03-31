@@ -165,12 +165,25 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(state.transitionTo).toHaveBeenCalledWith('home.payments');
   });
 
-  it('close function should transition to the payments state and close modal', function () {
+  it('close function should close modal', function () {
     spyOn(dialog, 'close');
-    spyOn(state, 'transitionTo');
+    state.current = { name: 'home.checkout' };
     scope.close();
     expect(dialog.close).toHaveBeenCalled();
+  });
+
+  it('close function should send user to payments page if they remained on checkout during payment submission', function() {
+    state.current = { name: 'home.checkout' };
+    spyOn(state, 'transitionTo');
+    scope.close();
     expect(state.transitionTo).toHaveBeenCalledWith('home.payments');
   });
+
+  it('close function should not redirect user to payments page if they already navigated elsewhere', function() {
+    state.current = { name: 'home.receipts' };
+    spyOn(state, 'transitionTo');
+    scope.close();
+    expect(state.transitionTo).not.toHaveBeenCalled();
+  })
 
 });

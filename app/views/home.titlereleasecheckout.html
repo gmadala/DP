@@ -39,8 +39,8 @@
             <li class="table-list-row" ng-repeat="item in titleQueue.contents">
               <div class="cell title-desc">
                 <p>{{ getVehicleDescription(item) }}</p>
-                <p>VIN: {{ item.UnitVIN }}</p>
-                <span class="send-to-label">Send To: </span>
+                <p><span class="break-word">{{ item.UnitVIN }}</span></p>
+                <span ng-hide="1 == addresses.length" class="send-to-label">Send To: </span>
                 <div nxg-alternate-address="item" enabled="true" show-tooltip="true" show-select-menu>
                 </div>
               </div>

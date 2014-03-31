@@ -77,7 +77,12 @@ angular.module('nextgearWebApp')
     };
 
     $scope.close = function () {
-      $state.transitionTo('home.payments');
+      if ($state.current.name === 'home.checkout') {
+        // If user hasn't navigated away, from checkout, go back to payments.
+        $state.transitionTo('home.payments');
+      }
+
+      // If user has navigated away, just close the dialog and let them stay here.
       dialog.close();
     };
 

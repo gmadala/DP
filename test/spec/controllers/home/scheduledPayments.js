@@ -93,7 +93,8 @@ describe('Controller: ScheduledCtrl', function () {
         }
         return true;
       },
-      addPaymentToQueue: angular.noop
+      addPaymentToQueue: angular.noop,
+      paymentInProgress: angular.noop
     },
     mockPayment = {
       floorplanID: 123,
@@ -326,4 +327,9 @@ describe('Controller: ScheduledCtrl', function () {
     scope.scheduledPayments.cancelFee();
     expect(dialog.dialog).toHaveBeenCalled();
   });
+
+  it('should have a paymentInProgress method', function() {
+    expect(scope.paymentInProgress).toBe(paymentsMock.paymentInProgress);
+  });
+
 });

@@ -16,6 +16,9 @@
 }
 
 .tooltip {
+  .modal ~ & {
+    z-index: 2000;
+  }
   &.in {
     @include opacity(100);
   }
