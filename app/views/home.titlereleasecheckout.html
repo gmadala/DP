@@ -5,7 +5,7 @@
 
       <div class="well-out" ng-show="1 == addresses.length">
         <p>Please confirm your title release request(s) below.</p>
-        <p>All titles will be sent to the following address: <strong>{{ toShortAddress(addresses[0]) }}</strong></p>
+        <p>All titles will be sent to the following address: <strong><span ng-bind=" toShortAddress(addresses[0])"></span></strong></p>
       </div>
 
       <div class="well-out" ng-hide="1 == addresses.length">
@@ -68,12 +68,15 @@
   <div class="span3 well request-summary sticky" nxg-sticky>
     <h4>Title Release Summary</h4>
     <div class="well-out">
-      <p><span class="emphasis">{{ titleQueue.contents.length }}</span> Title{{ {false: 's'}[titleQueue.contents.length == 1] }} Requested</p>
+      <p>
+        <span class="emphasis" ng-bind="titleQueue.contents.length"></span>
+        <span ng-bind="titleLabel"></span>
+      </p>
 
       <hr/>
 
       <p>Title Release Limits for this Account:<br/>
-      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed }}</span> title releases available.</p>
+      <span class="emphasis" ng-bind="eligibility.RemainingReleasesAvailable - titleQueue.contents.length">0</span> out of <span class="emphasis" ng-bind="eligibility.TotalReleasesAllowed">0</span> title releases available.</p>
 
       <hr/>
 
