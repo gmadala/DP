@@ -1,24 +1,13 @@
-NextGear Capital v2.0.10
+NextGear Capital v2.0.101
 =================================
 
 Fixes included in this release:
 
-VO-1825	Web-Payment:"Export Payment Summary" button should be disabled when all the payments are removed.
-VO-1787	Web (IE 9&10)–Floor a Car: User is able to floor a Car without entering date in “Purchase Date” field.
-VO-1665	Format high chart value as dollars with decimals
-VO-1820	Request Extension Modal: Collateral Protection should not display if its value is $0.
-VO-1528	Sorting columns doesn't display on Scheduled Payments
-VO-1442	Web–Floor a Car: Seller Business Search popup is not getting closed on selection of a “Seller” for 1st time.
-VO-1441	Web–Dashboard-Request Credit Increase: No error message is displayed when user clicks on “Confirm Request” button after entering Credit Request = “0”.
-VO-1458	Web–Title Releases: Error message “Unable to communicate with NextGear system” is displayed when user clicks on “Title Release” Navigation option.
-VO-1794	Web: Seller Floorplan Search - No "I have it" checkbox
-VO-1785	Web–Title Releases: “Floor Plan” list disappears when user clicks on “Purchased” sorting button.
-VO-1495	Web –Payment-Request Extension: Blank details are getting displayed for “Principal”, ”Interest”, ”Collateral Protection” and “Subtotal” on “Payment Extension Request” popup.
-VO-1821	Display fees, principal, and interest every time for payment breakdown and extension modal
-VO-1439	Web–Payment: Full Stop is missing in the error message “Please select a valid banking date no earlier than tomorrow and no later than the payment due date” on the Schedule Payment popup.
-VO-1674	Web–Request Credit Increase: "Credit Amount" text field is not validated for large value in “Credit Amount” text field.
-VO-1444	Web–Floor a Car: Error message “Purchase Amount must be greater than 0” is getting displayed after flooring a car when user enter Purchase Amount = “0”.
-VO-1637	Payment Detail for Scheduled Payment not reporting correctly on Payment Summary Detail
-VO-1675	Web–Floor Plan: “null,” is getting displayed in the “Seller address” field in the “Vehicle Detail” view.
-VO-1445	Web–Dashboard-Request Credit Increase: Background color turns black when user presses “Keyboard Enter” button.
-VO-1791	Web-Scheduled Payments Payoff Now button still moves when disabled
+VO-1640	Web–Schedule Payments: Wrong content is getting displayed under “Payment Summary” section.
+VO-1579	Web-Payments: Flickering effect on Payments Summary area is getting displayed when user clicks on “Checkout” button.
+VO-1670	Change Floorplan view to use calculated DaysOnFloorplan from floorplan/search
+VO-1187	Web – Floor a Vehicle: Error message “Unit Year is invalid” is displayed after flooring and submit car when user enters “1900” in Year field.
+VO-1793	Settings (Notifications): When a user has not selected any notifications, they get no indication this is the case.
+VO-1765	Editing a Default Address with only 1 address on file displaying empty dropdown
+VO-1451	Web –Dashboard-Request Credit Increase: “Temporary” radio button text is rendering in new line when user clicks on “Temporary” radio button.
+VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
