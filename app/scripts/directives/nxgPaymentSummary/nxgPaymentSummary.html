@@ -6,7 +6,7 @@
 
     <div class="queue-items">
       <p ng-show="paymentQueue.isEmpty()">You have not selected a payment.</p>
-      <p ng-show="paymentQueue.isEmpty()">Click the Add button to add a payoff or a payment.</p>
+      <p ng-show="paymentQueue.isEmpty()">{{ emptyMessage }}</p>
       <ul ng-hide="paymentQueue.isEmpty()">
         <li ng-repeat="fee in paymentQueue.fees">
           <button class="btn-unstyle btn-x" ng-click="removeFee(fee)" ng-disabled="paymentInProgress()" ng-class="{disabled: paymentInProgress()}"><span class="glyphicon"></span></button>
