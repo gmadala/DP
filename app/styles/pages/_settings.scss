@@ -180,6 +180,24 @@ $set-label-width: 40%;
   right: 70px;
 }
 
+
+// Tooltip in title settings when only 1 address available
+.title-settings {
+
+  .btn-help {
+    margin-top: -10px;
+  }
+
+  .static .btn-help {
+    float: left;
+    margin: 2px 20px;
+  }
+
+  .static p {
+    float: left;
+  }
+}
+
 // ACCOUNT MANAGEMENT
 .settings.account .well.self-service .well-out {
   @extend %clear;

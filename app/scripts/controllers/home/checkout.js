@@ -2,9 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan) {
-
     $scope.isCollapsed = true;
-
     $scope.submitInProgress = false;
 
     // Digest cycle wasn't noticing it change when simply assigning

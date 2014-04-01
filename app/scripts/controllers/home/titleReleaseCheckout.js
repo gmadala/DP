@@ -20,6 +20,7 @@ angular.module('nextgearWebApp')
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
+    $scope.titleLabel = $scope.titleQueue.contents.length === 1 ? 'Title Requested' : 'Titles Requested';
 
     $scope.onConfirmRequest = function() {
       $scope.submitting = true;

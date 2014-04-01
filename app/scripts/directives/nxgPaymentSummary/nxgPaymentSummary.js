@@ -5,7 +5,9 @@ angular.module('nextgearWebApp')
     return {
       templateUrl: 'scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html',
       restrict: 'A',
-      scope: {},
+      scope: {
+        emptyMessage: '@'
+      },
       controller: 'PaymentSummaryCtrl'
     };
   })

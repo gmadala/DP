@@ -46,7 +46,6 @@
                     Remove Fee
                   </button>
                 </p>
-                <!-- need to add button functionality, with VO-933 -->
                       <button class="btn btn-mini btn-block"
                           ng-click="paymentQueue.schedule(fee)"
                           ng-show="paymentQueue.canSchedule(fee)"
@@ -135,19 +134,23 @@
       <!-- Payments -->
       <div class="today-items">
         <h4>
-          <span class="count">{{ paymentQueue.sum.todayCount() }}</span>
+          <span class="count"><span ng-bind="paymentQueue.sum.todayCount()"</span>
           <span class="count-label" ng-show="paymentQueue.sum.todayCount() == 1">Payment</span>
           <span class="count-label" ng-hide="paymentQueue.sum.todayCount() == 1">Payments</span>
         </h4>
         <p class="chkout-label">Total </p>
-        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.todayTotal > 0}">{{ paymentQueue.sum.todayTotal() | currency }}</p>
+        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.todayTotal > 0}">
+          <span ng-bind="paymentQueue.sum.todayTotal() | currency"></span></p>
       </div><!-- end Payments -->
 
       <!-- If User has Unapplied Funds -->
-      <div class="unapplied-funds-section" ng-show="unappliedFunds.available > 0">
+      <!-- We add an inline style (display: none) here to avoid the flash
+      of our ng-show content before the page finishes compiling and knows
+      the ng-show expression should evaluate to false. -->
+      <div class="unapplied-funds-section" style="display:none;" ng-show="unappliedFunds.available > 0">
         <hr/>
         <p class="chkout-label">Available Unapplied Funds</p>
-        <p class="chkout-value">{{ unappliedFunds.available | currency }}</p>
+        <p class="chkout-value"><span ng-bind="unappliedFunds.available | currency"></span></p>
 
         <div class="form-inline nxg-radios">
           <p class="chkout-label">Apply funds to payment?</p>
@@ -181,28 +184,28 @@
           <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern">
             Please enter the amount of unapplied funds as a number with no more than 2 decimals.
           </label>
-          <label class="text-error"
-             ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
-              Unapplied funds must be {{ unappliedFunds.min() | currency }} to {{ unappliedFunds.max() | currency }}
+          <label class="text-error" ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax">
+              Unapplied funds must be <span ng-bind="unappliedFunds.min() | currency"></span> to <span ng-bind="unappliedFunds.max() | currency"></span>
           </label>
         </div>
 
         <hr/>
 
         <p class="chkout-label">Remaining Payment Balance</p>
-        <p class="chkout-value">{{ paymentQueue.sum.todayTotal() - {'true': unappliedFunds.useAmount, 'false': 0}[unappliedFunds.useFunds] | currency }}</p>
+        <p class="chkout-value"><span ng-bind="paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency"></span></p>
       </div><!-- end of Unapplied Funds -->
 
       <hr/>
 
       <!-- Scheduled Payments -->
       <div class="scheduled-items">
-        <h4><span class="count">{{ paymentQueue.sum.scheduledCount() }}</span>
+        <h4><span class="count" ng-bind="paymentQueue.sum.scheduledCount()"></span>
           <span class="count-label" ng-show="paymentQueue.sum.scheduledCount() == 1">Scheduled Payment</span>
           <span class="count-label" ng-hide="paymentQueue.sum.scheduledCount() == 1">Scheduled Payments</span>
         </h4>
         <p class="chkout-label">Scheduled Total</p>
-        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.scheduledTotal > 0 }">{{ paymentQueue.sum.scheduledTotal() | currency }}</p>
+        <p class="chkout-value" ng-class="{ highlight: paymentQueue.sum.scheduledTotal > 0 }">
+          <span ng-bind="paymentQueue.sum.scheduledTotal() | currency"></span></p>
       </div><!-- end Scheduled Payments -->
 
       <hr/>
@@ -218,7 +221,10 @@
                 required>
           <option value="">-- Select Bank --</option>
         </select>
-        <label class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</label>
+        <!-- We add an inline style (display: none) here to avoid the flash
+        of our ng-show content before the page finishes compiling and knows
+        the ng-show expression should evaluate to false. -->
+        <label style="display:none" class="text-error" ng-show="validity.bankAccount.$error.required">Please select a bank account for payment.</label>
       </div><!-- end Bank Account selection -->
 
       <hr/>
