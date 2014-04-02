@@ -4,7 +4,7 @@
 /app/coverage
 .tmp
 .sass-cache
-/.idea/workspace.xml
+/.idea
 .DS_Store
 test/coverage
 libpeerconnection.log
