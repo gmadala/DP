@@ -67,7 +67,7 @@
         <!-- TITLE SETTINGS -->
         <section class="well adjacent">
           <h4>Title Settings</h4>
-          <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
+          <button ng-show="!title.editable && title.data.addressCount > 1" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
           <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
           <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
 
