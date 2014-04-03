@@ -1,13 +1,7 @@
-NextGear Capital v2.0.11
+NextGear Capital v2.0.12
 =================================
 
 Fixes included in this release:
 
-VO-1640	Web–Schedule Payments: Wrong content is getting displayed under “Payment Summary” section.
-VO-1579	Web-Payments: Flickering effect on Payments Summary area is getting displayed when user clicks on “Checkout” button.
-VO-1670	Change Floorplan view to use calculated DaysOnFloorplan from floorplan/search
-VO-1187	Web – Floor a Vehicle: Error message “Unit Year is invalid” is displayed after flooring and submit car when user enters “1900” in Year field.
-VO-1793	Settings (Notifications): When a user has not selected any notifications, they get no indication this is the case.
-VO-1765	Editing a Default Address with only 1 address on file displaying empty dropdown
-VO-1451	Web –Dashboard-Request Credit Increase: “Temporary” radio button text is rendering in new line when user clicks on “Temporary” radio button.
-VO-715	Title Release Program Project ==> UI for Allowing Dealers to Request a Title Release
+VO-1901	Web:Title Release Confirmation Page: Postal code is missing on address. Default Address and “Title Release Confirmation” page address is not getting same.
+VO-1900	Web:Account Management: Title Settings: “Edit” button is not getting displayed when more than one address is available in “Title Settings”.
