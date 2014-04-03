@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Directive: placeholder', function () {
+describe('Directive: placeholder', function () {
   beforeEach(module('nextgearWebApp'));
 
   var element,

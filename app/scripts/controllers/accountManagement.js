@@ -143,7 +143,8 @@ angular.module('nextgearWebApp')
             addresses: _.filter(results.Addresses, function(addr) {
               return (addr.IsTitleReleaseAddress === false);
             }),
-            extraAddresses: results.Addresses.length > 4 ? results.Addresses.length - 4 : 0 // show 3, but '>4' to account for selected address
+            extraAddresses: results.Addresses.length > 4 ? results.Addresses.length - 4 : 0, // show 3, but '>4' to account for selected address
+            addressCount: results.Addresses.length
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,

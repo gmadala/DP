@@ -108,10 +108,11 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
         Line1: 'line 1',
         Line2: 'line 2',
         City: 'city',
-        State: 'state'
+        State: 'state',
+        Zip: 'zip'
       };
 
-      expect(scope.toShortAddress(address)).toEqual('line 1 line 2 / city state');
+      expect(scope.toShortAddress(address)).toEqual('line 1 line 2 / city state zip');
     });
   });
 
