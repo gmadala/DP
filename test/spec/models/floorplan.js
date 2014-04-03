@@ -297,21 +297,6 @@ describe('Model: Floorplan', function () {
       expect(output.Floorplans[1].$titleURL).not.toBeDefined();
     });
 
-    it('should create a daysFloored property if a FlooringDate value is set', function() {
-      var output;
-      searchResults = [
-        { FlooringDate: '2014-03-18' },
-        { FlooringDate: null }
-      ];
-
-      floorplan.search(defaultCriteria).then(function(results) {
-        output = results;
-      });
-      httpBackend.flush();
-      expect(output.Floorplans[0].DaysFloored).toBe(2);
-      expect(output.Floorplans[1].DaysFloored).not.toBeDefined();
-    });
-
     it('should NOT send a Keyword if search term is empty/null', function () {
       floorplan.search(defaultCriteria);
       httpBackend.flush();
