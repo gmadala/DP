@@ -15,7 +15,11 @@ angular.module('nextgearWebApp')
 
     $scope.addresses = TitleAddresses.getAddresses();
     $scope.toShortAddress = function(addressObj) {
-      return addressObj ? addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State : '';
+      if(addressObj) {
+        return addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State + ' ' + addressObj.Zip;
+      } else {
+        return '';
+      }
     };
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
