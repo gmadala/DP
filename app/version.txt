@@ -1,7 +1,6 @@
-NextGear Capital v2.0.12
+NextGear Capital v2.0.13
 =================================
 
 Fixes included in this release:
 
-VO-1901	Web:Title Release Confirmation Page: Postal code is missing on address. Default Address and “Title Release Confirmation” page address is not getting same.
-VO-1900	Web:Account Management: Title Settings: “Edit” button is not getting displayed when more than one address is available in “Title Settings”.
+VO-1914	NextGear is spelled wrong on title release page
