@@ -1,6 +1,6 @@
-NextGear Capital v2.0.13
+NextGear Capital v2.0.14
 =================================
 
 Fixes included in this release:
 
-VO-1914	NextGear is spelled wrong on title release page
+VO-1926	Text Addition, Title Release Program Confirmation
