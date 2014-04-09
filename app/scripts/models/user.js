@@ -100,7 +100,7 @@ angular.module('nextgearWebApp')
               info = self.getInfo();
 
             UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
-            QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, self.isDealer());
+            QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, self.isDealer(), info.BusinessNumber, info.BusinessName);
           }
         });
       },
