@@ -50,9 +50,8 @@ angular.module('nextgearWebApp')
             return settings;
           });
       },
-      saveSecurityAnswersAndEmail: function(email, securityAnswers) {
+      saveSecurityAnswers: function(securityAnswers) {
         var req = {
-          EmailAddress: email,
           SecurityAnswers: prv.getSecurityAnswers(securityAnswers)
         };
 

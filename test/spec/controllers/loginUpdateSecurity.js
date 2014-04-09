@@ -34,19 +34,12 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
           }
         };
       },
-      saveSecurityAnswersAndEmail: function(){
+      saveSecurityAnswers: function(){
         var toSucceed = this.toSucceed;
         return {
           then: function(success, failure) {
             if (toSucceed) {
               success({});
-            } else {
-              failure({
-                debug: "POST url",
-                dismiss: function(){},
-                text: "Email Address entered does not match email address on file at NextGear for user",
-                title: "Error"
-              });
             }
           }
         };
@@ -93,16 +86,11 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
     });
 
     scope.updateSecurity = {
-      email: {
-        $setValidity: noop
-      },
       'q1': 1,
       'q1_res': 'Blue Lagoon',
       'q2': 3,
       'q2_res': 'Harry Potter'
     };
-
-    scope.updateSecurity.email = {$modelValue: 'peanutbutter@jellytime.com'};
 
   }));
 
@@ -151,11 +139,11 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
     it('should call methods with the correct params', function() {
       ProfileSettingsMock.toSucceed = true; // tell the ProfileSettingsMock to succeed at submitting the form
-      spyOn(ProfileSettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').andCallThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
-      expect(ProfileSettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalledWith('peanutbutter@jellytime.com', [
+      expect(ProfileSettingsMock.saveSecurityAnswers).toHaveBeenCalledWith([
         { SecurityQuestionId: 1, Answer: 'Blue Lagoon'},
         { SecurityQuestionId: 3, Answer: 'Harry Potter'},
         { SecurityQuestionId: undefined, Answer: undefined} // not really possible in the UI, but true to the mocked data
@@ -166,14 +154,13 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
     it('should call methods and fail', function() {
       ProfileSettingsMock.toSucceed = false; // tell the ProfileSettingsMock to fail at submitting the form
-      spyOn(ProfileSettingsMock, 'saveSecurityAnswersAndEmail').andCallThrough();
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').andCallThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
-      expect(ProfileSettingsMock.saveSecurityAnswersAndEmail).toHaveBeenCalled();
+      expect(ProfileSettingsMock.saveSecurityAnswers).toHaveBeenCalled();
 
       expect(UserMock.clearUserInitRequired).not.toHaveBeenCalled();
-      expect(scope.updateSecurity.email.$error.correctEmail).toEqual(true);
     });
 
   });
