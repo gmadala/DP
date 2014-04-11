@@ -46,6 +46,7 @@
         "InterestApplied": 567,
         "FeesAccrued": 897.23,
         "FeesApplied": 876.87,
+        "InventoryLocationDescription": "123 Goodman St. Rochester NY, 14612",
         "Curtailments" : [
             {
                 "StartDate": "2013-08-15",
