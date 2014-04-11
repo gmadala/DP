@@ -38,7 +38,8 @@ angular.module('nextgearWebApp')
             interestAccrued: r.InterestAccrued,
             interestApplied: r.InterestApplied,
             feesAccrued: r.FeesAccrued,
-            feesApplied: r.FeesApplied
+            feesApplied: r.FeesApplied,
+            inventoryLocation: r.InventoryLocationDescription
           };
         });
       }
