@@ -25,7 +25,7 @@
                 "BusinessAddressId": "aaaaa2",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442331"
+                "Phone": "5854442331",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -36,7 +36,7 @@
                 "BusinessAddressId": "aaaaa3",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442322"
+                "Phone": "5854442322",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": "STE 1900",
                 "City": "IRVING",
@@ -47,7 +47,7 @@
                 "BusinessAddressId": "aaaaa4",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442333"
+                "Phone": "5854442333",
                 "Line1": "8301 BEACHNUT ST",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -58,7 +58,7 @@
                 "BusinessAddressId": "aaaaa5",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442344"
+                "Phone": "5854442344",
                 "Line1": "1300 JACKSBORO HWY",
                 "Line2": null,
                 "City": "FT WORTH",
@@ -69,7 +69,7 @@
                 "BusinessAddressId": "aaaaa6",
                 "IsActive": true,
                 "IsTitleReleaseAddress": true,
-                "Phone": "5854442355"
+                "Phone": "5854442355",
                 "Line1": "12812 GULF FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -80,7 +80,7 @@
                 "BusinessAddressId": "aaaaa7",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442366"
+                "Phone": "5854442366",
                 "Line1": "5219 NORTH FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -91,7 +91,7 @@
                 "BusinessAddressId": "aaaaa8",
                 "IsActive": false,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442377"
+                "Phone": "5854442377",
                 "Line1": "3312 MARVIN D LOVE FWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -102,7 +102,7 @@
                 "BusinessAddressId": "aaaaa9",
                 "IsActive": false,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442388"
+                "Phone": "5854442388",
                 "Line1": "8655 Hwy 6 South",
                 "Line2": null,
                 "City": "Houston",
@@ -113,7 +113,7 @@
                 "BusinessAddressId": "aaaaa10",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442399"
+                "Phone": "5854442399",
                 "Line1": "551 S BUCKNER BLVD",
                 "Line2": null,
                 "City": "DALLAS",
@@ -124,7 +124,7 @@
                 "BusinessAddressId": "aaaaa11",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442310"
+                "Phone": "5854442310",
                 "Line1": "911 SW 59TH ST",
                 "Line2": null,
                 "City": "OKLAHOMA CITY",
@@ -135,7 +135,7 @@
                 "BusinessAddressId": "aaaaa12",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442311"
+                "Phone": "5854442311",
                 "Line1": "3363 W NW HWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -146,7 +146,7 @@
                 "BusinessAddressId": "aaaaa13",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442312"
+                "Phone": "5854442312",
                 "Line1": "7417 N I35",
                 "Line2": null,
                 "City": "AUSTIN",
@@ -157,7 +157,7 @@
                 "BusinessAddressId": "aaaaa14",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442313"
+                "Phone": "5854442313",
                 "Line1": "4500 SOUTH FREEWAY",
                 "Line2": null,
                 "City": "FORT WORTH",
@@ -168,7 +168,7 @@
                 "BusinessAddressId": "aaaaa15",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442314"
+                "Phone": "5854442314",
                 "Line1": "12000 E NORTHWEST HWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -179,7 +179,7 @@
                 "BusinessAddressId": "aaaaa16",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442315"
+                "Phone": "5854442315",
                 "Line1": "612 N COLLINS ST",
                 "Line2": null,
                 "City": "ARLINGTON",
@@ -190,7 +190,7 @@
                 "BusinessAddressId": "aaaaa17",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442316"
+                "Phone": "5854442316",
                 "Line1": "2751 SW Military Dr",
                 "Line2": null,
                 "City": "San Antonio",
@@ -201,7 +201,7 @@
                 "BusinessAddressId": "aaaaa18",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442317"
+                "Phone": "5854442317",
                 "Line1": "6730 GULF FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -212,7 +212,7 @@
                 "BusinessAddressId": "aaaaa19",
                 "IsActive": true,
                 "IsTitleReleaseAddress": false,
-                "Phone": "5854442318"
+                "Phone": "5854442318",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": "Suite 925",
                 "City": "IRVING",
