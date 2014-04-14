@@ -98,7 +98,8 @@ angular.module('nextgearWebApp')
           endDate: null,
           filter: ScheduledPaymentsSearch.FILTER_BY_ALL,
           sortField: null,
-          sortDesc: true
+          sortDesc: true,
+          inventoryLocation: undefined
         };
         this.search();
       },

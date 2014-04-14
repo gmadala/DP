@@ -159,7 +159,8 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: initialFilter || Payments.filterValues.ALL
+        filter: initialFilter || Payments.filterValues.ALL,
+        inventoryLocation: undefined
       };
       $scope.payments.search();
     };

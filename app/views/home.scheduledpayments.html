@@ -9,12 +9,12 @@
       active-criteria="scheduledPayments.searchCriteria"
       on-search="scheduledPayments.search()"
       on-clear="scheduledPayments.resetSearch()"
-      filterable="true">
+      filterable="true"
+      show-location-filter="true">
     </div>
 
     <h3 class="boxed">Scheduled Account Fees</h3>
 
-    <!-- needs to be updated with MVC integration task, VO-975 -->
     <div class="sch-fees" ng-switch="fees.results.length > 0 || fees.loading">
       <p class="notice-box" ng-switch-when="false">
         There are no fees currently scheduled with this account.
