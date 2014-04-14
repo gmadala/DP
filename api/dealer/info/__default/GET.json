@@ -20,7 +20,7 @@
         "BusinessContactUserName": "2135mock01",
         "Phone": "8004567890",
         "CellPhone": "5859229222",
-        "FlooredBusinessAddress": [
+        "FlooredBusinessAddresses": [
             {
                 "BusinessAddressId": "aaaaa2",
                 "IsActive": true,
