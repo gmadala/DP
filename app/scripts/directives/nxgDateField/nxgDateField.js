@@ -108,6 +108,13 @@ angular.module('nextgearWebApp')
               }
             });
 
+            // On instances with no form validation, every keypress triggers an input event,
+            // which parses a (obviously incomplete) date prematurely. This stops that from
+            // happening before blur or hitting "enter".
+            $input.on('input', function(event) {
+              event.stopImmediatePropagation();
+            });
+
             $input.on('blur', function() {
               if(!this.value.match(scope.isDate) && this.value !== '') {
                 formCtrl[inputName].$setValidity('date', false);
