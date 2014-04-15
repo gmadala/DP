@@ -15,11 +15,29 @@ angular.module('nextgearWebApp')
         var api = this.getAPI();
 
         // Send user type as custom property to allow for the survey to be shown conditionally by user type
-        api.push(['set', { 'user_is_dealer': isDealer ? 'yes' : 'no'}]);
+        api.push(['set', {'user_is_dealer': isDealer ? 'yes' : 'no'}]);
 
         // Identify the user
         api.push(['identify', BusinessNumber + ' - ' + BusinessName]);
 
+        // Set the users current location in the app whenever a survey answer is submitted
+        api.push(['eventHandler', 'submit', this.setSurveyLocation.bind(this)]);
+
+      },
+      /**
+       * Sets the user's current location as a custom property on Qualaroo.
+       *
+       * We resort to this since Qualaroo presumes a regular website with multiple pages (not a Single Page
+       * Application) and records the current Page (URL) when it loads its script. The problem is that after
+       * the Qualaroo script gets loaded the user can navigate elsewhere without loading a new page so the Qualaroo
+       * script is never reloaded and thus maintains a stale page location.
+       *
+       * There are methods in the Qualaroo script that we could use to reset the page location to the current URL but
+       * since these are not documented API methods we run the risk of the Qualaroo script changing and thus breaking
+       * our app. -- JOrtiz 4/15/2014
+       */
+      setSurveyLocation: function() {
+        this.getAPI().push(['set', {'Location': $window.location.href}]);
       },
       getAPI: function() {
         $window._kiq = $window._kiq || [];
