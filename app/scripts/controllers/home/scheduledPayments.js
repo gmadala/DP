@@ -75,6 +75,7 @@ angular.module('nextgearWebApp')
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
             this.searchCriteria.filter,
+            this.searchCriteria.inventoryLocation,
             $scope.sortField.payment,
             $scope.sortDescending.payment);
 

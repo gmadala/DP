@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
         prompt: '@',
         filterLabel: '@',
         filterOptions: '=', // array of objects with properties label, value
-        activeCriteria: '=', // object with properties: query, startDate, endDate, filter, invLoc
+        activeCriteria: '=', // object with properties: query, startDate, endDate, filter, inventoryLocation
         showDateRange: '&',
         onSearch: '&',
         onClear: '&',
