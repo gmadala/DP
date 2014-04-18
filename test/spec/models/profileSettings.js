@@ -34,7 +34,7 @@ describe('Model: ProfileSettings', function() {
       Data: null
     };
 
-    httpBackend.whenPOST('/UserAccount/setupNewUser').respond(success);
+    httpBackend.whenPOST('/UserAccount/V2_2/setupNewUser').respond(success);
 
     httpBackend.whenPOST('/UserAccount/usersettings').respond(success);
   }));
@@ -42,7 +42,7 @@ describe('Model: ProfileSettings', function() {
   describe('saveSecurityAnswers method', function() {
 
     it('should make the expected POST request', function () {
-      httpBackend.expectPOST('/UserAccount/setupNewUser');
+      httpBackend.expectPOST('/UserAccount/V2_2/setupNewUser');
       profileSettings.saveSecurityAnswers(securityAnswersStub);
       expect(httpBackend.flush).not.toThrow();
     });

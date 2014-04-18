@@ -55,7 +55,7 @@ angular.module('nextgearWebApp')
           SecurityAnswers: prv.getSecurityAnswers(securityAnswers)
         };
 
-        return api.request('POST', '/UserAccount/setupNewUser', req);
+        return api.request('POST', '/UserAccount/V2_2/setupNewUser', req);
       },
       saveProfile: function(username, password, email, phone, securityAnswers) {
         var req = {
