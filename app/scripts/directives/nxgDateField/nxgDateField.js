@@ -147,6 +147,20 @@ angular.module('nextgearWebApp')
                 $input.val('');
               }
 
+              // If value is outside allowed date range element.val() will be the invalid date
+              // but $input.val() will show the minimum valid date. When they don't match, clear
+              // the input.
+              var displayDate = moment($input.val(), 'MM/DD/YYYY');
+              var memoryDate = moment(element.val());
+              if(!displayDate || !displayDate.isValid() || !memoryDate || !memoryDate.isValid() || !displayDate.isSame(memoryDate, 'day')) {
+                $input.val('');
+                $input.trigger({
+                  type: 'changeDate', // Send the 'changeDate' event
+                  date: null
+                });
+
+              }
+
               if(document.activeElement !== $input.get()[0]) {
                 $input.focus();
 
