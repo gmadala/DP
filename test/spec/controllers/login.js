@@ -6,7 +6,10 @@ describe('Controller: LoginCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var LoginCtrl,
-    scope, localStorageService;
+    scope,
+    localStorageService,
+    user,
+    shouldPassAuthentication;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $injector) {
@@ -15,6 +18,20 @@ describe('Controller: LoginCtrl', function () {
 
     var httpBackend = $injector.get('$httpBackend');
     httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg').respond('foo');
+
+    user = {};
+    user.authenticate = jasmine.createSpy('authenticate').andReturn({
+      then: function(success, error) {
+        if(shouldPassAuthentication) {
+          success({});
+        } else {
+          error({
+            dismiss: angular.noop,
+            text: 'Error text'
+          });
+        }
+      }
+    });
 
     localStorageService = {
       value: {},
@@ -29,7 +46,8 @@ describe('Controller: LoginCtrl', function () {
     LoginCtrl = $controller('LoginCtrl', {
       $scope: scope,
       $httpBackend: httpBackend,
-      localStorageService: localStorageService
+      localStorageService: localStorageService,
+      User: user
     });
 
   }));
@@ -72,6 +90,36 @@ describe('Controller: LoginCtrl', function () {
       expect(localStorageService.get('autocompleteUsernames').length).toEqual(2);
     });
 
+
+  });
+
+  describe('authenticate method', function() {
+    it('should pass authentication', function() {
+      scope.credentials.username = "thisUsername";
+      scope.credentials.password = "thisPassword";
+      spyOn(scope, 'saveAutocompleteUsername');
+      shouldPassAuthentication = true;
+      scope.authenticate();
+
+      expect(user.authenticate).toHaveBeenCalledWith('thisUsername', 'thisPassword');
+      expect(scope.saveAutocompleteUsername).toHaveBeenCalled();
+    });
+
+    it('should fail authentication', function() {
+      scope.credentials.username = "thisUsername";
+      scope.credentials.password = "thisPassword";
+      spyOn(scope, 'saveAutocompleteUsername');
+      expect(scope.showLoginError).toBeFalsy();
+      expect(scope.errorMsg).toBeFalsy();
+      shouldPassAuthentication = false;
+      scope.authenticate();
+
+      expect(user.authenticate).toHaveBeenCalledWith('thisUsername', 'thisPassword');
+      expect(scope.saveAutocompleteUsername).not.toHaveBeenCalled();
+      expect(scope.credentials.password).toBe('');
+      expect(scope.errorMsg).toBe('Error text');
+      expect(scope.showLoginError).toBe(true);
+    });
 
   });
 

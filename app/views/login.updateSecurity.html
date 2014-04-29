@@ -6,22 +6,9 @@
 
         <div class="well-out">
           <h3>Welcome to NextGear!</h3>
-          <p>Since this is your first login to NextGear Capital, please do the following:</p>
-
-          <ol>
-            <li>Enter the email we have on file for you to verify your account.</li>
-            <li>Set your security questions before you enter the site.</li>
-          </ol>
+          <p>Since this is your first login to NextGear Capital, please set your security questions before you enter the site.</p>
 
           <form class="form-horizontal" name="updateSecurity" ng-submit="submitForm()" novalidate>
-            <div class="control-group email">
-              <label class="control-label" for="email">Email</label>
-              <div class="controls">
-                <input type="email" name="email" id="email" ng-model="email" ng-class="{ 'nxg-invalid': validity.email.$error.required || validity.email.$error.email }" required/>
-                <label class="text-error" ng-show="updateSecurity.email.$error.correctEmail">We were unable to locate an account associated with this email address.<br/>If you need assistance, please call NextGear Capital Support at (888) 969-3721.</label>
-                <label class="text-error" ng-show="validity.email.$error.required || validity.email.$error.email">Please enter a valid email address.</label>
-              </div>
-            </div>
 
             <div class="sec-ques" ng-repeat="question in questions">
 

@@ -1,6 +1,8 @@
-NextGear Capital v2.0.14
+NextGear Capital v2.1.0
 =================================
 
 Fixes included in this release:
 
-VO-1926	Text Addition, Title Release Program Confirmation
+VO-1895	Display inventory location for each floored unit
+VO-1523	Prompt dealer with in-app survey regarding their current experience
+VO-1811	Allow dealer to filter floored units by inventory location

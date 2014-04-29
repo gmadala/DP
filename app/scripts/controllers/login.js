@@ -20,6 +20,7 @@ angular.module('nextgearWebApp')
             error.dismiss();
             $scope.errorMsg = error.text;
             $scope.showLoginError = true;
+            $scope.credentials.password = '';
           });
       }
     };

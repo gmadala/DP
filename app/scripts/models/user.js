@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, nxgConfig) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig) {
     // Private
     var info = null,
       statics = null,
@@ -100,6 +100,7 @@ angular.module('nextgearWebApp')
               info = self.getInfo();
 
             UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
+            QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, self.isDealer(), info.BusinessNumber, info.BusinessName);
           }
         });
       },

@@ -17,8 +17,15 @@
         "BusinessEmail": "tyates@tricolorauto.com",
         "BusinessContactEmail": "tyates@tricolorauto.com",
         "DisplayTitleReleaseProgram": true,
-        "DealerBusinessAddresses": [
+        "BusinessContactUserName": "2135mock01",
+        "Phone": "8004567890",
+        "CellPhone": "5859229222",
+        "FlooredBusinessAddresses": [
             {
+                "BusinessAddressId": "aaaaa2",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442331",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -26,6 +33,10 @@
                 "Zip": "75062"
             },
             {
+                "BusinessAddressId": "aaaaa3",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442322",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": "STE 1900",
                 "City": "IRVING",
@@ -33,6 +44,10 @@
                 "Zip": "75062"
             },
             {
+                "BusinessAddressId": "aaaaa4",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442333",
                 "Line1": "8301 BEACHNUT ST",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -40,6 +55,10 @@
                 "Zip": "77036"
             },
             {
+                "BusinessAddressId": "aaaaa5",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442344",
                 "Line1": "1300 JACKSBORO HWY",
                 "Line2": null,
                 "City": "FT WORTH",
@@ -47,6 +66,10 @@
                 "Zip": "76114"
             },
             {
+                "BusinessAddressId": "aaaaa6",
+                "IsActive": true,
+                "IsTitleReleaseAddress": true,
+                "Phone": "5854442355",
                 "Line1": "12812 GULF FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -54,6 +77,10 @@
                 "Zip": "77034"
             },
             {
+                "BusinessAddressId": "aaaaa7",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442366",
                 "Line1": "5219 NORTH FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -61,6 +88,10 @@
                 "Zip": "77022"
             },
             {
+                "BusinessAddressId": "aaaaa8",
+                "IsActive": false,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442377",
                 "Line1": "3312 MARVIN D LOVE FWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -68,6 +99,10 @@
                 "Zip": "75220"
             },
             {
+                "BusinessAddressId": "aaaaa9",
+                "IsActive": false,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442388",
                 "Line1": "8655 Hwy 6 South",
                 "Line2": null,
                 "City": "Houston",
@@ -75,6 +110,10 @@
                 "Zip": "77083"
             },
             {
+                "BusinessAddressId": "aaaaa10",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442399",
                 "Line1": "551 S BUCKNER BLVD",
                 "Line2": null,
                 "City": "DALLAS",
@@ -82,6 +121,10 @@
                 "Zip": "75217"
             },
             {
+                "BusinessAddressId": "aaaaa11",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442310",
                 "Line1": "911 SW 59TH ST",
                 "Line2": null,
                 "City": "OKLAHOMA CITY",
@@ -89,6 +132,10 @@
                 "Zip": "73109"
             },
             {
+                "BusinessAddressId": "aaaaa12",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442311",
                 "Line1": "3363 W NW HWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -96,6 +143,10 @@
                 "Zip": "75220"
             },
             {
+                "BusinessAddressId": "aaaaa13",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442312",
                 "Line1": "7417 N I35",
                 "Line2": null,
                 "City": "AUSTIN",
@@ -103,6 +154,10 @@
                 "Zip": "78752"
             },
             {
+                "BusinessAddressId": "aaaaa14",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442313",
                 "Line1": "4500 SOUTH FREEWAY",
                 "Line2": null,
                 "City": "FORT WORTH",
@@ -110,6 +165,10 @@
                 "Zip": "76115"
             },
             {
+                "BusinessAddressId": "aaaaa15",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442314",
                 "Line1": "12000 E NORTHWEST HWY",
                 "Line2": null,
                 "City": "DALLAS",
@@ -117,6 +176,10 @@
                 "Zip": "75218"
             },
             {
+                "BusinessAddressId": "aaaaa16",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442315",
                 "Line1": "612 N COLLINS ST",
                 "Line2": null,
                 "City": "ARLINGTON",
@@ -124,6 +187,10 @@
                 "Zip": "76011"
             },
             {
+                "BusinessAddressId": "aaaaa17",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442316",
                 "Line1": "2751 SW Military Dr",
                 "Line2": null,
                 "City": "San Antonio",
@@ -131,6 +198,10 @@
                 "Zip": "78224"
             },
             {
+                "BusinessAddressId": "aaaaa18",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442317",
                 "Line1": "6730 GULF FWY",
                 "Line2": null,
                 "City": "HOUSTON",
@@ -138,6 +209,10 @@
                 "Zip": "77087"
             },
             {
+                "BusinessAddressId": "aaaaa19",
+                "IsActive": true,
+                "IsTitleReleaseAddress": false,
+                "Phone": "5854442318",
                 "Line1": "545 JOHN W CARPENTER FWY",
                 "Line2": "Suite 925",
                 "City": "IRVING",

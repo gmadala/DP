@@ -75,6 +75,7 @@ angular.module('nextgearWebApp')
             this.searchCriteria.startDate,
             this.searchCriteria.endDate,
             this.searchCriteria.filter,
+            this.searchCriteria.inventoryLocation,
             $scope.sortField.payment,
             $scope.sortDescending.payment);
 
@@ -98,7 +99,8 @@ angular.module('nextgearWebApp')
           endDate: null,
           filter: ScheduledPaymentsSearch.FILTER_BY_ALL,
           sortField: null,
-          sortDesc: true
+          sortDesc: true,
+          inventoryLocation: undefined
         };
         this.search();
       },

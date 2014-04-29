@@ -147,7 +147,8 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: initialFilter || Floorplan.filterValues.ALL
+        filter: initialFilter || Floorplan.filterValues.ALL,
+        inventoryLocation: undefined
       };
       $scope.search();
     };

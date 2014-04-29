@@ -34,23 +34,23 @@ describe('Model: ProfileSettings', function() {
       Data: null
     };
 
-    httpBackend.whenPOST('/UserAccount/setupNewUser').respond(success);
+    httpBackend.whenPOST('/UserAccount/V2_2/setupNewUser').respond(success);
 
     httpBackend.whenPOST('/UserAccount/usersettings').respond(success);
   }));
 
-  describe('saveSecurityAnswersAndEmail method', function() {
+  describe('saveSecurityAnswers method', function() {
 
     it('should make the expected POST request', function () {
-      httpBackend.expectPOST('/UserAccount/setupNewUser');
-      profileSettings.saveSecurityAnswersAndEmail(emailStub, securityAnswersStub);
+      httpBackend.expectPOST('/UserAccount/V2_2/setupNewUser');
+      profileSettings.saveSecurityAnswers(securityAnswersStub);
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should return a promise', function () {
       var res = null;
 
-      profileSettings.saveSecurityAnswersAndEmail(emailStub, securityAnswersStub).then(function (result) {
+      profileSettings.saveSecurityAnswers(securityAnswersStub).then(function (result) {
         res = result;
       })
       httpBackend.flush();

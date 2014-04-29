@@ -30,6 +30,9 @@ angular.module('nextgearWebApp')
         auctionForumId: 229017,
         auctionCustomTemplateId: 23042
       },
+      qualarooSurvey: {
+        apiKey: 52803
+      },
       infiniteScrollingMax: 500,
       sessionTimeoutMs: timeoutMs
     };
