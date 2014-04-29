@@ -4,11 +4,11 @@ angular.module('nextgearWebApp')
   .factory('QualarooSurvey', function ($window) {
 
     return {
-      init: function(apiKey, isDealer, BusinessNumber, BusinessName) {
+      init: function(apiKey, domainCode, isDealer, BusinessNumber, BusinessName) {
         var q = document.createElement('script');
         q.type = 'text/javascript';
         q.async = true;
-        q.src = '//s3.amazonaws.com/ki.js/' + apiKey + '/boa.js';
+        q.src = '//s3.amazonaws.com/ki.js/' + apiKey + '/' + domainCode + '.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(q, s);
 
