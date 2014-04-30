@@ -1,6 +1,6 @@
-NextGear Capital v2.0.14
+NextGear Capital v2.1.2
 =================================
 
 Fixes included in this release:
 
-VO-1926	Text Addition, Title Release Program Confirmation
+VO-1523	Fixed two issues that prevented the survey from showing on the Test server.

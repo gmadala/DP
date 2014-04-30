@@ -8,16 +8,37 @@ describe('Directive: nxgSearch', function () {
 
     var ctrl,
       scope,
-      attrs;
+      attrs,
+      userMock;
 
-    beforeEach(inject(function ($rootScope, $controller) {
+    beforeEach(inject(function ($rootScope, $controller, User) {
       scope = $rootScope.$new();
 
       attrs = {};
+      userMock = {
+        getInfo: function() {
+          return {
+            FlooredBusinessAddresses: [
+              {
+                Line1: '123 Main St',
+                Line2: 'Apt 4',
+                City: 'Anytown',
+                State: 'NY'
+              },
+              {
+                Line1: '34 Elm St',
+                City: 'Anytown',
+                State: 'NY'
+              }
+            ]
+          }
+        }
+      };
 
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs
+        $attrs: attrs,
+        User: userMock
       });
     }));
 
@@ -33,7 +54,8 @@ describe('Directive: nxgSearch', function () {
       };
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs
+        $attrs: attrs,
+        User: userMock
       });
 
       scope.$apply();

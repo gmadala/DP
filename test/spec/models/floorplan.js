@@ -482,6 +482,20 @@ describe('Model: Floorplan', function () {
       expect(callParams.SearchHasNoTitle).not.toBe('false');
     });
 
+    it('should set inventory location', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {
+        inventoryLocation: {BusinessAddressId: 'businessID'}
+      }));
+      httpBackend.flush();
+      expect(callParams.PhysicalInventoryAddressId).toBe('businessID');
+    });
+
+    it('should not set inventory location', function () {
+      floorplan.search(angular.extend({}, defaultCriteria, {}));
+      httpBackend.flush();
+      expect(callParams.PhysicalInventoryAddressId).not.toBeDefined();
+    });
+
   });
 
   describe('addTitleURL method', function () {

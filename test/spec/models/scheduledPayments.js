@@ -262,6 +262,21 @@ describe('Model: Scheduled Payments', function() {
 
     });
 
+    describe('PhysicalInventoryId filtering', function() {
+      it('should filter by PhysicalInventoryAddressId', function() {
+        scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_ALL, {BusinessAddressId: 'testBusinessId'});
+        httpBackend.flush();
+        expect(requestUrl.indexOf('PhysicalInventoryAddressId=testBusinessId')).not.toBe(-1);
+      });
+
+      it('should not filter by PhysicalInventoryAddressId', function() {
+        scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_ALL);
+        httpBackend.flush();
+        expect(requestUrl.indexOf('PhysicalInventoryAddressId=testBusinessId')).toBe(-1);
+      });
+
+    });
+
     describe('isPending, toStatus, and getStatusDate', function() {
 
       it('should set isPending correctly', function() {

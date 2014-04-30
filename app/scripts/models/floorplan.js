@@ -79,7 +79,8 @@ angular.module('nextgearWebApp')
             OrderBy: criteria.sortField || 'FlooringDate',
             OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-            PageSize: Paginate.PAGE_SIZE_MEDIUM
+            PageSize: Paginate.PAGE_SIZE_MEDIUM,
+            PhysicalInventoryAddressId: criteria.inventoryLocation && criteria.inventoryLocation.BusinessAddressId
           };
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {

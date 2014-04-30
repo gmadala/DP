@@ -115,7 +115,7 @@ angular.module('nextgearWebApp')
         return totalRowCount > rowCount;
       },
 
-      search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/, sortField, sortDesc) {
+      search: function(query, dateStart, dateEnd, filterBy /*FILTER_BY_XXXX*/, inventoryLocationFilter, sortField, sortDesc) {
         query = query || '';
 
         if (filterBy === null || filterBy === undefined || filterBy === '') {
@@ -137,7 +137,8 @@ angular.module('nextgearWebApp')
           SearchCancelled: false,
           SearchPending: false,
           SearchProcessed: false,
-          SearchVoided: false
+          SearchVoided: false,
+          PhysicalInventoryAddressId: inventoryLocationFilter && inventoryLocationFilter.BusinessAddressId
         };
         // set up filters
         switch (filterBy) {
