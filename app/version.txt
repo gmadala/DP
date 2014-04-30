@@ -1,6 +1,6 @@
-NextGear Capital v2.1.1
+NextGear Capital v2.1.2
 =================================
 
 Fixes included in this release:
 
-VO-1523	Prompt dealer with in-app survey regarding their current experience
+VO-1523	Fixed two issues that prevented the survey from showing on the Test server.
