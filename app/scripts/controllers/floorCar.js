@@ -84,34 +84,6 @@ angular.module('nextgearWebApp')
 
     $scope.reset();
 
-    $scope.mileageExit = function(modelCtrl) {
-      var newMileage = $scope.data.UnitMileage;
-      if (!$scope.data.$selectedVehicle || newMileage === $scope.data.$blackbookMileage) {
-        return;
-      }
-
-      $scope.validity = {
-        inputMileage: {}
-      };
-
-      $scope.validity.inputMileage = angular.copy(modelCtrl);
-      if(!modelCtrl.$valid) {
-        return false;
-      }
-
-      Blackbook.fetchVehicleTypeInfoForVin(
-          $scope.data.UnitVin,
-          newMileage,
-          $scope.data.$selectedVehicle).then(
-        function (result) {
-          $scope.data.$selectedVehicle = result;
-          $scope.data.$blackbookMileage = newMileage;
-        }, function (/*error*/) {
-          $scope.data.$blackbookMileage = null;
-        }
-      );
-    };
-
     $scope.maxValidModelYear = new Date().getFullYear();
     $scope.minValidModelYear = 1900;
     $scope.isYear = (function() {

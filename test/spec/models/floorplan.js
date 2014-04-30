@@ -34,7 +34,6 @@ describe('Model: Floorplan', function () {
       dummyFormData = {
         UnitColorId: {ColorId: 'col1'},
         TitleLocationId: {ResultingTitleLocationId: 'titleLoc1', ResultingTitleTypeId: 'titleType1'},
-        UnitTitleStateId: {StateId: 'state1'},
         PhysicalInventoryAddressId: {LocationId: 'loc1'},
         LineOfCreditId: {LineOfCreditId: 'line1'},
         BankAccountId: {BankAccountId: 'account1'},
@@ -89,7 +88,6 @@ describe('Model: Floorplan', function () {
       expect(sentData.UnitColorId).toBe('col1');
       expect(sentData.TitleLocationId).toBe('titleLoc1');
       expect(sentData.TitleTypeId).toBe('titleType1');
-      expect(sentData.UnitTitleStateId).toBe('state1');
       expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
       expect(sentData.LineOfCreditId).toBe('line1');
       expect(sentData.BankAccountId).toBe('account1');
