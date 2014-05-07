@@ -231,7 +231,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     LogoutGuard.watchForLogoutAttemptByURLState();
 
-    segmentio.load(nxgConfig.segmentIoKey);
+    if (!nxgConfig.isDemo) {
+      segmentio.load(nxgConfig.segmentIoKey);
+    }
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
