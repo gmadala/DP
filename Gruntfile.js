@@ -303,6 +303,11 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    env: {
+      dev: {
+        ENV: grunt.option('target') || 'production'
+      }
     }
   });
 
@@ -325,6 +330,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'env',
     'clean:dist',
     'jshint',
     'test',
