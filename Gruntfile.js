@@ -243,7 +243,10 @@ module.exports = function(grunt) {
           src: [
             '*.html',
             'views/**/*.html',
-            'scripts/directives/**/*.html'
+            'scripts/directives/**/*.html',
+
+            // Getting an error when uglifying this file. Should be looked into!
+            '!scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html'
           ],
           dest: '<%= yeoman.dist %>'
         }]
@@ -352,7 +355,7 @@ module.exports = function(grunt) {
     'copy',
     'cdnify',
     'ngmin',
-//    'uglify',
+    'uglify',
     'cssmin',
     'rev',
     'processhtml',
