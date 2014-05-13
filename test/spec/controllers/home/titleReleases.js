@@ -29,7 +29,13 @@ describe('Controller: TitleReleasesCtrl', function () {
       search: function(){
         return $q.when(searchResult.data);
       },
-      getQueueFinanced: angular.noop
+      getQueueFinanced: angular.noop,
+      filterValues: {
+        ALL: 'all',
+        OUTSTANDING: 'outstanding',
+        ELIGIBLE: 'eligible',
+        NOT_ELIGIBLE: 'not_eligible'
+      }
     };
     floorplanMock = {
       filterValues: Floorplan.filterValues
@@ -60,6 +66,14 @@ describe('Controller: TitleReleasesCtrl', function () {
     expect(scope.data).toBeDefined();
     expect(angular.isArray(scope.data.results)).toBe(true);
     expect(typeof scope.data.loading).toBe('boolean');
+  });
+
+  it('should attach filter options to the scope', function () {
+    expect(scope.filterOptions).toBeDefined();
+    expect(scope.filterOptions[0]).toEqual({label: 'View All', value: titleReleasesMock.filterValues.ALL});
+    expect(scope.filterOptions[1]).toEqual({label: 'Outstanding Dealer Requested Title Releases', value: titleReleasesMock.filterValues.OUTSTANDING});
+    expect(scope.filterOptions[2]).toEqual({label: 'Eligible for Title Release', value: titleReleasesMock.filterValues.ELIGIBLE});
+    expect(scope.filterOptions[3]).toEqual({label: 'Not Eligible for Title Release', value: titleReleasesMock.filterValues.NOT_ELIGIBLE});
   });
 
   it('should attach a search function to the scope', function () {
@@ -270,6 +284,20 @@ describe('Controller: TitleReleasesCtrl', function () {
     expect(scope.titleReleaseLimitReached).toHaveBeenCalled();
 
 
+  });
+
+
+  it('should reset search properly', function() {
+    var object = {};
+    scope.searchParams.proposedSearchCriteria = object;
+
+    scope.resetSearch();
+
+    expect(scope.searchParams.proposedSearchCriteria).not.toBe(object);
+    expect(scope.searchParams.proposedSearchCriteria.query).toBe(null);
+    expect(scope.searchParams.proposedSearchCriteria.startDate).toBe(null);
+    expect(scope.searchParams.proposedSearchCriteria.endDate).toBe(null);
+    expect(scope.searchParams.proposedSearchCriteria.filter).toBe(titleReleasesMock.filterValues.ALL)
   });
 
   it('should display message box when release is unavailable', function() {

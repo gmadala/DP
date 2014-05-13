@@ -9,6 +9,12 @@ angular.module('nextgearWebApp')
 
     return {
 
+      filterValues: {
+        ALL: 'all',
+        OUTSTANDING: 'outstanding',
+        ELIGIBLE: 'eligible',
+        NOT_ELIGIBLE: 'not_eligible'
+      },
       getTitleReleaseEligibility: function() {
         eligibilityLoading = true;
         return api.request('GET', '/titleRelease/getTitleReleaseEligibility').then(function(res) {
@@ -88,19 +94,17 @@ angular.module('nextgearWebApp')
             OrderBy: criteria.sortField || 'FlooringDate',
             OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-            PageSize: Paginate.PAGE_SIZE_MEDIUM
+            PageSize: Paginate.PAGE_SIZE_MEDIUM,
+            StartDate: api.toShortISODate(criteria.startDate) || undefined,
+            EndDate: api.toShortISODate(criteria.endDate) || undefined,
+            SearchOutstandingTitleReleaseProgramRelease: criteria.filter === this.filterValues.OUTSTANDING || criteria.filter === this.filterValues.ALL,
+            SearchEligibleForRelease: criteria.filter === this.filterValues.ELIGIBLE || criteria.filter === this.filterValues.ALL,
+            SearchNotEligibleForRelease: criteria.filter === this.filterValues.NOT_ELIGIBLE || criteria.filter === this.filterValues.ALL
           };
         return api.request('GET', '/titleRelease/search', params).then(
           function (results) {
             angular.forEach(results.Floorplans, function (floorplan) {
               floorplan.data = {query: criteria.query};
-              if(floorplan.OutstandingTitleReleaseProgramRelease) {
-                floorplan.actionTypeAvailable = 'alreadyReleased';
-              } else if (floorplan.CanBeReleased) {
-                floorplan.actionTypeAvailable = 'canBeReleased';
-              } else {
-                floorplan.actionTypeAvailable = 'unavailable';
-              }
               if (floorplan.FlooringDate && floorplan.FlooringDate !== null) {
                 var today = moment();
                 var floored = moment(floorplan.FlooringDate);

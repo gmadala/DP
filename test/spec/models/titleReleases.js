@@ -11,15 +11,13 @@ describe('Model: TitleReleases', function () {
     rootScope,
     data,
     TitleAddresses,
-    floorplan,
     urlParser,
     $q;
 
-  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_, Floorplan, URLParser) {
+  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_, URLParser) {
     httpBackend = $httpBackend;
     TitleAddresses = _TitleAddresses_;
     $q = _$q_;
-    floorplan = Floorplan;
     urlParser = URLParser;
 
     data = {
@@ -41,6 +39,14 @@ describe('Model: TitleReleases', function () {
     titleReleases = TitleReleases;
     rootScope = $rootScope;
   }));
+
+  it('should define filterValues', function() {
+    expect(typeof titleReleases.filterValues).toBe('object');
+    expect(titleReleases.filterValues.ALL).toBe('all');
+    expect(titleReleases.filterValues.OUTSTANDING).toBe('outstanding');
+    expect(titleReleases.filterValues.ELIGIBLE).toBe('eligible');
+    expect(titleReleases.filterValues.NOT_ELIGIBLE).toBe('not_eligible');
+  });
 
   it('should return the title release eligibility', function() {
     var result;
@@ -163,12 +169,7 @@ describe('Model: TitleReleases', function () {
   describe('search method', function () {
 
     var paginate,
-      defaultCriteria = {
-        query: '',
-        startDate: null,
-        endDate: null,
-        filter: ''
-      },
+      defaultCriteria,
       searchResults = [],
       callParams,
       respondFnc = function(method, url) {
@@ -185,8 +186,14 @@ describe('Model: TitleReleases', function () {
 
     beforeEach(inject(function (Paginate, User) {
       paginate = Paginate;
+      defaultCriteria = {
+        query: '',
+        startDate: null,
+        endDate: null,
+        filter: titleReleases.filterValues.ALL
+      };
       httpBackend.whenGET(/\/titleRelease\/search.*/).respond(respondFnc);
-      defaultCriteria.filter = floorplan.filterValues.ALL;
+      defaultCriteria.filter = titleReleases.filterValues.ALL;
       spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
       clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
@@ -227,20 +234,6 @@ describe('Model: TitleReleases', function () {
       expect(callParams.OrderByDirection).toBe('DESC');
     });
 
-    it('should create a daysFloored property if a FlooringDate value is set', function() {
-      var output;
-      searchResults = [
-        { FlooringDate: '2014-03-18' },
-        { FlooringDate: null }
-      ];
-
-      titleReleases.search(defaultCriteria).then(function(results) {
-        output = results;
-      });
-      httpBackend.flush();
-      expect(output.Floorplans[0].DaysFloored).toBe(2);
-      expect(output.Floorplans[1].DaysFloored).not.toBeDefined();
-    });
 
     it('should provide a page size', function () {
       titleReleases.search(defaultCriteria);
@@ -291,6 +284,83 @@ describe('Model: TitleReleases', function () {
       httpBackend.flush();
       expect(callParams.StartDate).not.toBeDefined();
       expect(callParams.EndDate).not.toBeDefined();
+    });
+
+    it('should send startDate and endDate if provided', function () {
+      var startDate = moment('2012-01-01', 'YYYY-MM-DD').toDate();
+      var endDate = moment('2013-04-01', 'YYYY-MM-DD').toDate();
+
+      titleReleases.search(angular.extend(defaultCriteria, {startDate: startDate, endDate: endDate}));
+      httpBackend.flush();
+      expect(callParams.StartDate).toBe('2012-01-01');
+      expect(callParams.EndDate).toBe('2013-04-01');
+    });
+
+    it('should set all filter booleans to true if ALL provided', function () {
+      titleReleases.search(defaultCriteria);
+      httpBackend.flush();
+      expect(callParams.SearchOutstandingTitleReleaseProgramRelease).toBe('true');
+      expect(callParams.SearchEligibleForRelease).toBe('true');
+      expect(callParams.SearchNotEligibleForRelease).toBe('true');
+    });
+
+    it('should set only outstanding filter boolean to true if provided', function () {
+      titleReleases.search(angular.extend(defaultCriteria, {filter: titleReleases.filterValues.OUTSTANDING}));
+      httpBackend.flush();
+      expect(callParams.SearchOutstandingTitleReleaseProgramRelease).toBe('true');
+      expect(callParams.SearchEligibleForRelease).toBe('false');
+      expect(callParams.SearchNotEligibleForRelease).toBe('false');
+    });
+
+    it('should set only eligible filter boolean to true if provided', function () {
+      titleReleases.search(angular.extend(defaultCriteria, {filter: titleReleases.filterValues.ELIGIBLE}));
+      httpBackend.flush();
+      expect(callParams.SearchOutstandingTitleReleaseProgramRelease).toBe('false');
+      expect(callParams.SearchEligibleForRelease).toBe('true');
+      expect(callParams.SearchNotEligibleForRelease).toBe('false');
+    });
+
+    it('should set only not eligible filter boolean to true if provided', function () {
+      titleReleases.search(angular.extend(defaultCriteria, {filter: titleReleases.filterValues.NOT_ELIGIBLE}));
+      httpBackend.flush();
+      expect(callParams.SearchOutstandingTitleReleaseProgramRelease).toBe('false');
+      expect(callParams.SearchEligibleForRelease).toBe('false');
+      expect(callParams.SearchNotEligibleForRelease).toBe('true');
+    });
+
+    describe('search results', function() {
+      var result;
+
+      beforeEach(function() {
+        searchResults.push({
+          FlooringDate: '2013-03-20'
+        });
+        searchResults.push({
+          FlooringDate: '2014-03-20'
+        });
+        searchResults.push({});
+
+        titleReleases.search(defaultCriteria).then(function(res) {
+          result = res;
+        });
+        httpBackend.flush();
+      });
+
+      it('should return proper results', function() {
+        expect(result.Floorplans.length).toBe(3);
+        var today = moment();
+        expect(result.Floorplans[0].FlooringDate).toBe('2013-03-20');
+        expect(result.Floorplans[0].DaysFloored).toBe(today.diff(moment('2013-03-20', 'YYYY-MM-DD'), 'days'));
+
+        expect(result.Floorplans[1].FlooringDate).toBe('2014-03-20');
+        expect(result.Floorplans[1].DaysFloored).toBe(today.diff(moment('2014-03-20', 'YYYY-MM-DD'), 'days'));
+
+        expect(result.Floorplans[2].FlooringDate).not.toBeDefined();
+        expect(result.Floorplans[2].DaysFloored).not.toBeDefined();
+
+
+      });
+
     });
 
   });

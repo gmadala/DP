@@ -26,7 +26,7 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: Floorplan.filterValues.ALL
+        filter: TitleReleases.filterValues.ALL
       }
     };
 
@@ -36,6 +36,25 @@ angular.module('nextgearWebApp')
       paginator: null,
       hitInfiniteScrollMax: false
     };
+
+    $scope.filterOptions = [
+      {
+        label: 'View All',
+        value: TitleReleases.filterValues.ALL
+      },
+      {
+        label: 'Outstanding Dealer Requested Title Releases',
+        value: TitleReleases.filterValues.OUTSTANDING
+      },
+      {
+        label: 'Eligible for Title Release',
+        value: TitleReleases.filterValues.ELIGIBLE
+      },
+      {
+        label: 'Not Eligible for Title Release',
+        value: TitleReleases.filterValues.NOT_ELIGIBLE
+      }
+    ];
 
     $scope.search = function() {
       // search means "start from the beginning with current criteria"
@@ -95,12 +114,12 @@ angular.module('nextgearWebApp')
 
     };
 
-    $scope.resetSearch = function (initialFilter) {
+    $scope.resetSearch = function () {
       $scope.searchParams.proposedSearchCriteria = {
         query: null,
         startDate: null,
         endDate: null,
-        filter: initialFilter || Floorplan.filterValues.ALL
+        filter: TitleReleases.filterValues.ALL
       };
       $scope.search();
     };
