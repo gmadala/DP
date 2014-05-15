@@ -59,20 +59,4 @@ angular.module('nextgearWebApp')
     };
 
     return prv.getConfig(prv.profile.DEMO);
-
-    // Demo
-//    return generateConfig('https://test.discoverdsc.com', null, null, 900000 /*15 minutes*/, true /*isDemo*/);
-
-    // Test
-//    return generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
-
-    // Local
-//    return generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
-
-    // Training (Hotfix Testbed)
-//    return generateConfig('https://training.discoverdsc.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
-
-    // Production
-//    return generateConfig('https://customer.nextgearcapital.com', '9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);
-
   });
