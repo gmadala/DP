@@ -43,15 +43,15 @@ angular.module('nextgearWebApp')
         value: TitleReleases.filterValues.ALL
       },
       {
-        label: 'Outstanding Dealer Requested Title Releases',
+        label: 'Outstanding',
         value: TitleReleases.filterValues.OUTSTANDING
       },
       {
-        label: 'Eligible for Title Release',
+        label: 'Eligible',
         value: TitleReleases.filterValues.ELIGIBLE
       },
       {
-        label: 'Not Eligible for Title Release',
+        label: 'Not Eligible',
         value: TitleReleases.filterValues.NOT_ELIGIBLE
       }
     ];

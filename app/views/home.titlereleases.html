@@ -4,7 +4,7 @@
              title="Title Release Search"
              class="search-form"
              prompt="Enter Stock #, VIN, Make, Model, or Year"
-             filter-label="Filter List by Status"
+             filter-label="Filter by Status"
              filter-options="filterOptions"
              active-criteria="searchParams.proposedSearchCriteria"
              show-date-range="true"
@@ -80,8 +80,8 @@
                     <p>Title Released</p>
                     <p>{{item.TitleReleaseDate | moment}}</p>
                 </div>
-                <p ng-switch-when="EligibleForRelease">Eligible for Title Release</p>
-                <p ng-switch-when="NotEligibleForRelease">Not Eligible for Title Release</p>
+                <p ng-switch-when="EligibleForRelease">Eligible</p>
+                <p ng-switch-when="NotEligibleForRelease">Not Eligible</p>
               </div>
                <div class="cell title-purchaseDate">
                 <p>{{item.UnitPurchaseDate | moment}}</p>

@@ -70,10 +70,10 @@ describe('Controller: TitleReleasesCtrl', function () {
 
   it('should attach filter options to the scope', function () {
     expect(scope.filterOptions).toBeDefined();
-    expect(scope.filterOptions[0]).toEqual({label: 'View All', value: titleReleasesMock.filterValues.ALL});
-    expect(scope.filterOptions[1]).toEqual({label: 'Outstanding Dealer Requested Title Releases', value: titleReleasesMock.filterValues.OUTSTANDING});
-    expect(scope.filterOptions[2]).toEqual({label: 'Eligible for Title Release', value: titleReleasesMock.filterValues.ELIGIBLE});
-    expect(scope.filterOptions[3]).toEqual({label: 'Not Eligible for Title Release', value: titleReleasesMock.filterValues.NOT_ELIGIBLE});
+    expect(scope.filterOptions[0].value).toEqual(titleReleasesMock.filterValues.ALL);
+    expect(scope.filterOptions[1].value).toEqual(titleReleasesMock.filterValues.OUTSTANDING);
+    expect(scope.filterOptions[2].value).toEqual(titleReleasesMock.filterValues.ELIGIBLE);
+    expect(scope.filterOptions[3].value).toEqual(titleReleasesMock.filterValues.NOT_ELIGIBLE);
   });
 
   it('should attach a search function to the scope', function () {
