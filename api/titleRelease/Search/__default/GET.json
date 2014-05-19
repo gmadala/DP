@@ -22,8 +22,7 @@
         "TitleImageAvailable": true,
         "TitleReleaseDate": "2013-05-15",
         "TitleReleaseLocation": "Chase bank",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "OutstandingTitleReleaseProgramRelease"
       },
       {
         "FloorplanId": "abc124",
@@ -43,8 +42,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2013-06-15",
         "TitleReleaseLocation": "Buyer",
-        "CanBeReleased": false,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "EligibleForRelease"
       },
       {
         "FloorplanId": "abc129",
@@ -64,8 +62,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2013-06-15",
         "TitleReleaseLocation": "Buyer",
-        "CanBeReleased": false,
-        "OutstandingTitleReleaseProgramRelease": true
+        "TitleReleaseProgramStatus": "EligibleForRelease"
       },
       {
         "FloorplanId": "abc125",
@@ -85,8 +82,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2013-07-15",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "EligibleForRelease"
       },
       {
         "FloorplanId": "abc126",
@@ -106,8 +102,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2013-08-15",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "OutstandingTitleReleaseProgramRelease"
       },
       {
         "FloorplanId": "abc127",
@@ -127,8 +122,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2013-08-15",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "EligibleForRelease"
       },
       {
         "FloorplanId": "abc128",
@@ -148,8 +142,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2014-03-08",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "EligibleForRelease"
       },
       {
         "FloorplanId": "abc130",
@@ -169,8 +162,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2014-02-24",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": false,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "NotEligibleForRelease"
       },
       {
         "FloorplanId": "abc133",
@@ -190,8 +182,7 @@
         "TitleImageAvailable": false,
         "TitleReleaseDate": "2014-01-26",
         "TitleReleaseLocation": "Seller",
-        "CanBeReleased": true,
-        "OutstandingTitleReleaseProgramRelease": false
+        "TitleReleaseProgramStatus": "NotEligibleForRelease"
       }
     ]
   }

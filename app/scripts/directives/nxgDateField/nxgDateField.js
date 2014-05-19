@@ -67,6 +67,12 @@ angular.module('nextgearWebApp')
               var errs = formCtrl.$error.date,
                   utcVal;
 
+              // IE9 has an issue with timezones - if date isn't set at midnight,
+              // then the date will be wrong for timezones west of GMT. Correct for this
+              if(this.value && this.value.getHours() !== 0) {
+                this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
+              }
+
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
                   //for invalid format dates, parse with the moment library
@@ -108,6 +114,13 @@ angular.module('nextgearWebApp')
               }
             });
 
+            // On instances with no form validation, every keypress triggers an input event,
+            // which parses a (obviously incomplete) date prematurely. This stops that from
+            // happening before blur or hitting "enter".
+            $input.on('input', function(event) {
+              event.stopImmediatePropagation();
+            });
+
             $input.on('blur', function() {
               if(!this.value.match(scope.isDate) && this.value !== '') {
                 formCtrl[inputName].$setValidity('date', false);
@@ -132,6 +145,20 @@ angular.module('nextgearWebApp')
 
               if(false === showCode(scope, {date: new Date(this.value)})) {
                 $input.val('');
+              }
+
+              // If value is outside allowed date range element.val() will be the invalid date
+              // but $input.val() will show the minimum valid date. When they don't match, clear
+              // the input.
+              var displayDate = moment($input.val(), 'MM/DD/YYYY');
+              var memoryDate = moment(element.val());
+              if(!displayDate || !displayDate.isValid() || !memoryDate || !memoryDate.isValid() || !displayDate.isSame(memoryDate, 'day')) {
+                $input.val('');
+                $input.trigger({
+                  type: 'changeDate', // Send the 'changeDate' event
+                  date: null
+                });
+
               }
 
               if(document.activeElement !== $input.get()[0]) {

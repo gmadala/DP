@@ -1,35 +1,17 @@
 <section class="row-fluid">
   <section class="span9">
-    <div  class="search-form">
-      <div class="well">
-          <h4>Title Release Search</h4>
-
-          <div class="well-out">
-              <form name="searchForm" class="search payments" novalidate>
-                  <div class="row-fluid">
-                      <div class="span5 keyword">
-                          <div class="control-group">
-                              <label class="control-label" for="keyword">Keyword</label>
-
-                              <div class="controls">
-                                  <input type="text" id="keyword" name="keyword" placeholder="Enter Stock #, VIN, Make, Model, or Year" ng-model="searchParams.proposedSearchCriteria.query"/>
-                              </div>
-                          </div>
-
-                          <div class="control-group search-clear-btns">
-                              <a href="#" ng-click="$event.preventDefault();resetSearch()" title="Clear Search">Clear Search</a>
-                              <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
-                          </div>
-                      </div>
-
-                      <div class="span7">
-                        <p class="info">Thank you for your suggestions! NextGear Capital has launched the Title Release Program that allows you to request a title prior to payoff. This program requires that the title be returned to NextGear or unit paid off within seven days.</p>
-                      </div>
-                  </div>
-              </form>
-          </div>
-      </div>
-    </div>
+    <div nxg-search
+             title="Title Release Search"
+             class="search-form"
+             prompt="Enter Stock #, VIN, Make, Model, or Year"
+             filter-label="Filter by Status"
+             filter-options="filterOptions"
+             active-criteria="searchParams.proposedSearchCriteria"
+             show-date-range="true"
+             on-search="search()"
+             on-clear="resetSearch()"
+             filterable="true">
+        </div>
 
     <div ng-switch="data.results.length > 0 || data.loading">
       <p class="no-results" ng-switch-when="false">
@@ -93,13 +75,13 @@
               <div class="cell title-stock">
                 <p ng-bind-html-unsafe="item.StockNumber  | highlight:item.data.query"></p>
               </div>
-              <div class="cell title-status" ng-switch="item.actionTypeAvailable">
-                <div ng-switch-when="alreadyReleased">
+              <div class="cell title-status" ng-switch="item.TitleReleaseProgramStatus">
+                <div ng-switch-when="OutstandingTitleReleaseProgramRelease">
                     <p>Title Released</p>
                     <p>{{item.TitleReleaseDate | moment}}</p>
                 </div>
-                <p ng-switch-when="canBeReleased">Eligible for Title Release</p>
-                <p ng-switch-when="unavailable">Not Eligible for Title Release</p>
+                <p ng-switch-when="EligibleForRelease">Eligible</p>
+                <p ng-switch-when="NotEligibleForRelease">Not Eligible</p>
               </div>
                <div class="cell title-purchaseDate">
                 <p>{{item.UnitPurchaseDate | moment}}</p>
@@ -110,15 +92,15 @@
                   Days Floored: {{ item.DaysFloored }}
                 </p>
               </div>
-              <div class="cell title-actions" ng-switch="item.actionTypeAvailable">
-                <p ng-switch-when="alreadyReleased">Pay off this vehicle or return the title to remove from your limit.</p>
-                <div ng-switch-when="canBeReleased">
+              <div class="cell title-actions" ng-switch="item.TitleReleaseProgramStatus">
+                <p ng-switch-when="OutstandingTitleReleaseProgramRelease">Pay off this vehicle or return the title to remove from your limit.</p>
+                <div ng-switch-when="EligibleForRelease">
                   <button type="button" id="toggleRequest" class="btn btn-mini btn-block" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{requested: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
                     <span ng-switch-when="true">Title Requested</span>
                     <span ng-switch-default>Request Title</span>
                   </button>
                 </div>
-                <div ng-switch-when="unavailable">
+                <div ng-switch-when="NotEligibleForRelease">
                   <a ng-click="titleReleaseUnavailable()">Title Release Unavailable</a>
                 </div>
               </div>

@@ -22,7 +22,6 @@ angular.module('nextgearWebApp')
           UnitColorId:  data.UnitColorId ? data.UnitColorId.ColorId : null,
           TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId: null,
           TitleTypeId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleTypeId : null,
-          UnitTitleStateId: data.UnitTitleStateId ? data.UnitTitleStateId.StateId : null,
           PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.LocationId : null,
           LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
           BankAccountId: data.BankAccountId ? data.BankAccountId.BankAccountId : null,
@@ -38,6 +37,10 @@ angular.module('nextgearWebApp')
           data.UnitModel = null;
           data.UnitYear = null;
           data.UnitStyle = null;
+
+          // clean up data that's not part of the request object API
+          delete data.$blackbookMileage;
+          delete data.$selectedVehicle;
         }
 
         return api.request('POST', '/floorplan/v1_1/create', data);
