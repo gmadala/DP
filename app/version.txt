@@ -1,6 +1,12 @@
-NextGear Capital v2.1.2
+NextGear Capital v3.0.0
 =================================
 
 Fixes included in this release:
 
-VO-1523	Fixed two issues that prevented the survey from showing on the Test server.
+VO-1774	Title Release Program - filtering status column functionality
+VO-805	Remove "Book Amount" display from Floor a Car screen
+VO-2127	Web: Flooring Financed Amount Error
+VO-2114	Web - Receipts - unable to enter a date other than today
+VO-988	Allow user to key in date instead of only use calendar picker
+VO-1203	Web – Login Page: Password field is not getting cleared on click of Login button after we have entered wrong password.
+VO-2098	Web–View a Report-Paid off summary: User is able to select future date in the "End date" field" under "Paid off Summary” section.
