@@ -3,45 +3,60 @@
 angular.module('nextgearWebApp')
   .factory('nxgConfig', function(){
 
-
-    // Test
-    var apiDomain = 'https://test.discoverdsc.com';
-    var segmentIoKey = 'sb06a2jbvj';
-    var timeoutMs = 3600000; // 60 minutes
-    var qualarooDomainCode = 'brC';
-
-    // Local
-//    var qualarooDomainCode = 'boa'; // for the survey shown for localhost
-
-    // Training (Hotfix Testbed)
-//    var apiDomain = 'https://training.discoverdsc.com';
-//    var segmentIoKey = 'sb06a2jbvj';
-//    var timeoutMs = 900000; // 15 minutes
-//    var qualarooDomainCode = 'brC';
-
-    // Production
-//    var apiDomain = 'https://customer.nextgearcapital.com';
-//    var segmentIoKey = '9eaffv4cbe';
-//    var timeoutMs = 900000; // 15 minutes
-//    var qualarooDomainCode = 'bmV';
-
-    return {
-      apiBase: apiDomain + '/MobileService/api',
-      apiDomain: apiDomain,
-      segmentIoKey: segmentIoKey,
-      userVoice: {
-        dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
-        dealerForumId: 227793,
-        dealerCustomTemplateId: 21815,
-        auctionApiKey: 'WqAjMXsGO7Fj57N6sQ4Cw',
-        auctionForumId: 229017,
-        auctionCustomTemplateId: 23042
+    var prv = {
+      generateConfig: function (apiDomain, segmentIoKey, qualarooDomainCode, timeoutMs, isDemo) {
+        return {
+          apiBase: apiDomain + '/MobileService/api',
+          apiDomain: apiDomain,
+          segmentIoKey: segmentIoKey,
+          userVoice: {
+            dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
+            dealerForumId: 227793,
+            dealerCustomTemplateId: 21815,
+            auctionApiKey: 'WqAjMXsGO7Fj57N6sQ4Cw',
+            auctionForumId: 229017,
+            auctionCustomTemplateId: 23042
+          },
+          qualarooSurvey: {
+            apiKey: 52803,
+            domainCode: qualarooDomainCode
+          },
+          infiniteScrollingMax: 500,
+          sessionTimeoutMs: timeoutMs,
+          isDemo: isDemo || false // default to false
+        };
       },
-      qualarooSurvey: {
-        apiKey: 52803,
-        domainCode: qualarooDomainCode
+      profile: {
+        DEMO: 'demo',
+        TEST: 'test',
+        LOCAL: 'local',
+        TRAINING: 'training',
+        PRODUCTION: 'production'
       },
-      infiniteScrollingMax: 500,
-      sessionTimeoutMs: timeoutMs
+      getConfig: function(profile) {
+        var config;
+        switch (profile) {
+        case prv.profile.DEMO:
+          config = prv.generateConfig('https://test.discoverdsc.com', null, null, 900000 /*15 minutes*/, true /*isDemo*/);
+          break;
+        case prv.profile.TEST:
+          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
+          break;
+        case prv.profile.LOCAL:
+          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
+          break;
+        case prv.profile.TRAINING:
+          config = prv.generateConfig('https://training.discoverdsc.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
+          break;
+        case prv.profile.PRODUCTION:
+          config = prv.generateConfig('https://customer.nextgearcapital.com', '9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);
+          break;
+        default:
+          throw 'nxgConfig profile \'' + profile + '\' not found!';
+        }
+        return config;
+      }
     };
+
+    return prv.getConfig(prv.profile.DEMO);
   });
