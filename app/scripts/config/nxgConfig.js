@@ -58,5 +58,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-    return prv.getConfig(prv.profile.DEMO);
+    return prv.getConfig(prv.profile.TEST);
   });

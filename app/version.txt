@@ -1,6 +1,11 @@
-NextGear Capital v2.1.2
+NextGear Capital v3.0.1
 =================================
 
 Fixes included in this release:
 
-VO-1523	Fixed two issues that prevented the survey from showing on the Test server.
+VO-1774	Title Release Program - filtering status column functionality
+VO-2064	Datepicker - Entering invalid date allows invalid report to be requested
+VO-2065	Datepicker - Date of report is one day before requested day
+VO-2125	Web –Dashboard: “Page not found” error message is getting displayed on the page when use clicks on “Privacy Statement” link located at the footer of the page.
+VO-2166	Web–Title Releases: Mismatch between Filter by status option “Outstanding” and status (Title Released) displayed in the table.
+VO-2167	Web- Feedback & Support: “Feedback & Support” icon is not getting displayed on the screen.

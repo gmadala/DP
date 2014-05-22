@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
         value: TitleReleases.filterValues.ALL
       },
       {
-        label: 'Outstanding',
+        label: 'Released',
         value: TitleReleases.filterValues.OUTSTANDING
       },
       {
