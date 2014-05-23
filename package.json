@@ -39,6 +39,7 @@
     "grunt-google-cdn": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-processhtml": "~0.2.0",
+    "grunt-preprocess": "~4.0.0",
     "grunt-env": "~0.4.1"
   },
   "engines": {

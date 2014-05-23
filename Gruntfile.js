@@ -317,6 +317,17 @@ module.exports = function(grunt) {
         ENV: grunt.option('target') || 'production'
       }
     },
+    preprocess: {
+      inline : {
+        src : [ '<%= yeoman.dist %>/scripts/scripts.js' ],
+        options: {
+          inline : true,
+          context : {
+            DEBUG: false
+          }
+        }
+      }
+    },
     autoprefixer: {
       options: {
         browsers: ['ie >= 9', 'firefox >= 3.5', 'chrome >= 25', 'safari >= 5.1']
@@ -354,6 +365,7 @@ module.exports = function(grunt) {
     'useminPrepare',
     'imagemin',
     'concat',
+    'preprocess',
     'autoprefixer',
     'copy',
     'cdnify',
