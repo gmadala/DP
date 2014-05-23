@@ -29,19 +29,17 @@ angular.module('nextgearWebApp')
     );
 
     $scope.search = function() {
+      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
+      // commit the proposed query
+      $scope.data.query = $scope.data.proposedQuery;
+
       $scope.validity = angular.copy($scope.searchControls);
 
       if($scope.validity && $scope.validity.$invalid) {
         $scope.data.results.length = 0;
         return;
       }
-
-      var isNewQuery =  $scope.data.query !== $scope.data.proposedQuery;
-
       if (isNewQuery) {
-        // commit the proposed query
-        $scope.data.query = $scope.data.proposedQuery;
-
         $scope.fetch();
         segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
       }
