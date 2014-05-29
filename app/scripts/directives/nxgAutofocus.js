@@ -43,7 +43,19 @@ angular.module('nextgearWebApp')
             var events = attrs.nxgAutofocus.split(',');
             angular.forEach(events, function (event) {
               scope.$on(event, function () {
+
+                // Focus, blur, and refocus.
+                // This is a workaround for a bug in firefox,
+                // https://bugzilla.mozilla.org/show_bug.cgi?id=598819
+                // It doesn't affect any other browser
                 target.focus();
+                $timeout(function() {
+                  target.blur();
+                  $timeout(function() {
+                    target.focus();
+                  });
+                });
+
               });
             });
           }
