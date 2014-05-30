@@ -1,11 +1,9 @@
-NextGear Capital v3.0.1
+NextGear Capital v3.0.2
 =================================
 
 Fixes included in this release:
 
-VO-1774	Title Release Program - filtering status column functionality
-VO-2064	Datepicker - Entering invalid date allows invalid report to be requested
-VO-2065	Datepicker - Date of report is one day before requested day
-VO-2125	Web –Dashboard: “Page not found” error message is getting displayed on the page when use clicks on “Privacy Statement” link located at the footer of the page.
-VO-2166	Web–Title Releases: Mismatch between Filter by status option “Outstanding” and status (Title Released) displayed in the table.
-VO-2167	Web- Feedback & Support: “Feedback & Support” icon is not getting displayed on the screen.
+VO-2118	Web (Firefox)-Floor a Car: Previously entered “VIN” is getting displayed in “VIN” input fields when user press Keyboard “Escape” button.
+VO-2194	Web–Floor a car-Business Search: User is unable to lookup Seller.
+VO-2249	Update documents used in Resources from DSC to NG
+VO-1624	Allow dealer to link to make a payment from the dashboard
