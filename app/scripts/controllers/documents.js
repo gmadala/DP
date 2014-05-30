@@ -8,15 +8,15 @@ angular.module('nextgearWebApp')
     $scope.documents = [
       {
         title: 'Welcome Packet (PDF)',
-        url: 'documents/DSC%20Welcome%20Packet.pdf'
+        url: 'documents/NextGear%20Capital%20Welcome%20Packet.pdf'
       },
       {
         title: 'Vehicle Verification Checklist (PDF)',
-        url: 'documents/DSC%20Vehicle%20Verification%20Checklist.pdf'
+        url: 'documents/NextGear%20Capital%20Vehicle%20Verification%20Checklist.pdf'
       },
       {
         title: 'Instructions for Buyers (PDF)',
-        url: 'documents/DSC%20Website%20Guide%20-%20Buyers.pdf'
+        url: 'documents/NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf'
       }
     ];
 
