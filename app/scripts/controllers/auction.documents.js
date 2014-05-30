@@ -7,11 +7,11 @@ angular.module('nextgearWebApp')
     $scope.documents = [
       {
         title: 'Welcome Packet (PDF)',
-        url: 'documents/DSC%20Welcome%20Packet.pdf'
+        url: 'documents/NextGear%20Capital%20Welcome%20Packet.pdf'
       },
       {
         title: 'Instructions for Sellers (PDF)',
-        url: 'documents/DSC%20Website%20Guide%20-%20Sellers.pdf'
+        url: 'documents/NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf'
       }
     ];
   });

@@ -183,8 +183,13 @@ angular.module('nextgearWebApp')
             for (var i = 0; i < this.dirtyData.addresses.length; i++) {
               if (selectedId === this.dirtyData.addresses[i].BusinessAddressId) {
                 this.dirtyData.titleAddress = this.data.addresses[i];
+
               }
             }
+            //need to refresh dirtyData.addresses
+            this.dirtyData.addresses = _.filter(results.Addresses, function(addr) {
+              return (addr.BusinessAddressId !== selectedId);
+            });
           },
           toShortAddress: function(address) {
             return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';

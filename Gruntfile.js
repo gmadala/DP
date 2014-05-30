@@ -173,12 +173,16 @@ module.exports = function(grunt) {
         }
       }
     },
+    // grunt-usemin has a bug regarding build:remove blocks, so
+    // processhtml is just used to remove that block. Changing
+    // the commentMarker to tell them apart
     processhtml: {
-      options: {},
+      options: {
+        commentMarker: 'processhtml'
+      },
       dist: {
         files: {
-          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html'],
-          '<%= yeoman.dist %>/unsupported.html': ['<%= yeoman.dist %>/unsupported.html']
+          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
         }
       }
     },
@@ -209,42 +213,43 @@ module.exports = function(grunt) {
     },
     cssmin: {
       dist: {
-        files: {
-          '<%= yeoman.dist %>/styles/main.css': [
-            '<%= yeoman.dist %>/styles/main.css'
-          ]
-        }
+        options: {
+          keepSpecialComments: 0
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist %>',
+            src: '404.html',
+            dest: '<%= yeoman.dist %>'
+          }
+        ]
       }
     },
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
-           // https://github.com/yeoman/grunt-usemin/issues/44
-           //collapseWhitespace: true,
-           collapseBooleanAttributes: true,
-           removeAttributeQuotes: true,
-           removeRedundantAttributes: true,
-           useShortDoctype: true,
-           removeEmptyAttributes: true,
-           removeOptionalTags: true*/
+          collapseBooleanAttributes:      true,
+          collapseWhitespace:             true,
+          removeAttributeQuotes:          true,
+          removeComments:                 true, // Only if you don't use comment directives!
+          removeEmptyAttributes:          true,
+          removeScriptTypeAttributes:     true,
+          removeStyleLinkTypeAttributes:  true
         },
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: [
-              '*.html',
-              'index.html',
-              'views/**/*.html',
-              'scripts/directives/**/*.html',
-              '!scripts/config/nxgConfig.mock.js',
-              '!scripts/dev/autologin.js',
-              '!scripts/dev/throttle.js'
-            ],
-            dest: '<%= yeoman.dist %>'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.dist %>',
+          src: [
+            '*.html',
+            'views/**/*.html',
+            'scripts/directives/**/*.html',
+
+            // Getting an error when uglifying this file. Should be looked into!
+            '!scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html'
+          ],
+          dest: '<%= yeoman.dist %>'
+        }]
       }
     },
     cdnify: {
@@ -299,9 +304,36 @@ module.exports = function(grunt) {
             dot: true,
             cwd: '<%= yeoman.app %>',
             dest: '<%= yeoman.dist %>/',
-            src: '**/*.html'
+            src: [
+              '**/*.html',
+              '!components/**/*.html'
+            ]
           }
         ]
+      }
+    },
+    env: {
+      dev: {
+        ENV: grunt.option('target') || 'production'
+      }
+    },
+    preprocess: {
+      inline : {
+        src : [ '<%= yeoman.dist %>/scripts/scripts.js' ],
+        options: {
+          inline : true,
+          context : {
+            DEBUG: false
+          }
+        }
+      }
+    },
+    autoprefixer: {
+      options: {
+        browsers: ['ie >= 9', 'firefox >= 3.5', 'chrome >= 25', 'safari >= 5.1']
+      },
+      'no_dest': {
+        src: '<%= yeoman.dist %>/styles/*.css'
       }
     }
   });
@@ -325,22 +357,25 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'env',
     'clean:dist',
     'jshint',
     'test',
     'compass:dist',
     'useminPrepare',
     'imagemin',
-    'htmlmin',
     'concat',
+    'preprocess',
+    'autoprefixer',
     'copy',
     'cdnify',
     'ngmin',
-//    'uglify',
-    'rev',
-    'usemin',
+    'uglify',
     'cssmin',
-    'processhtml'
+    'rev',
+    'processhtml',
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', ['build']);

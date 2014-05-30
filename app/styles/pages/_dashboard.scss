@@ -35,6 +35,13 @@
   .item-total {
     @extend %float-l;
   }
+
+}
+
+.payment-summary, .upcoming {
+  .link {
+    cursor: pointer;
+  }
 }
 
 .summaries .well-out, .payment-summary .well-out {

@@ -138,6 +138,16 @@
         <td class="detail-label">Disbursement Date</td>
         <td class="detail-value">{{ vehicleDetails.disbursementDate | moment }}</td>
       </tr>
+      <tr>
+        <td colspan="2" class="detail-value detail-link">
+          <a target="_blank"
+             ng-href="{{historyReportUrl}}"
+             nxg-track="{{metric.VIEW_HISTORICAL_REPORT}}"
+             track-properties="{ reportName: 'Vehicle History Detail'}">
+              View the Vehicle History Detail Report
+          </a>
+        </td>
+      </tr>
     </table>
   </div>
 </div>

@@ -58,5 +58,28 @@ angular.module('nextgearWebApp')
       }
     };
 
-    return prv.getConfig(prv.profile.TEST);
+    var profile;
+
+    // @if ENV='demo'
+    profile = prv.profile.DEMO;
+    // @endif
+
+    // @if ENV='training'
+    profile = prv.profile.TRAINING;
+    // @endif
+
+    // @if ENV='production'
+    profile = prv.profile.PRODUCTION;
+    // @endif
+
+    /**
+     * The Test entry needs to happen at the end because when we run locally we
+     * don't do a full build and we don't evaluate the conditional ENV statements.
+     * So the last assignment when running locally should be test so it defaults to it.
+     */
+    // @if ENV='test'
+    profile = prv.profile.TEST;
+    // @endif
+
+    return prv.getConfig(profile);
   });

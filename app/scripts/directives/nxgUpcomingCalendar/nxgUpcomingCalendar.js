@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgUpcomingCalendar', function (moment) {
+  .directive('nxgUpcomingCalendar', function (moment, $state) {
     return {
       template: '<div class="dash-calendar" ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
       restrict: 'AC',
@@ -92,7 +92,22 @@ angular.module('nextgearWebApp')
             if (moment().isAfter(event.start, 'day')) {
               element.addClass('overdue');
             }
-            element.find('.fc-event-inner').append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
+
+            var inner = element.find('.fc-event-inner');
+
+            inner.append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
+            inner.addClass('link');
+
+            // Wasn't able to add event the angular way, so doing it the vanilla javascript way
+            inner[0].addEventListener('click', (function(date) {
+              return function() {
+                $scope.$apply(function() {
+                  $state.transitionTo('home.payments', {filter: moment(date).format('YYYY-MM-DD')});
+                });
+              };
+            })(event.start), false);
+
+
             return element;
           }
         };

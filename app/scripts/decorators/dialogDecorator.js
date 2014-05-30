@@ -5,7 +5,7 @@
  */
 angular.module('nextgearWebApp')
   .config( function ($provide) {
-    $provide.decorator('$dialog', function($delegate, $q, $timeout) {
+    $provide.decorator('$dialog', ['$delegate', '$q', '$timeout', function($delegate, $q, $timeout) {
       var OriginalDialog = $delegate.dialog,
           currentlyOpen = [],
           body = angular.element(document.body),
@@ -198,5 +198,5 @@ angular.module('nextgearWebApp')
         }
 
       });
-    });
+    }]);
   });

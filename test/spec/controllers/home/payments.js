@@ -11,6 +11,7 @@ describe('Controller: PaymentsCtrl', function () {
     userMock,
     dialog,
     payments,
+    instantiateController,
     searchResult = {
       data: {}
     },
@@ -22,15 +23,15 @@ describe('Controller: PaymentsCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q, $dialog) {
     scope = $rootScope.$new();
-    stateParamsMock = {
-      filter: 'fooFilter'
-    };
     modelMock = {
       search: function () {
         return $q.when(searchResult.data);
       },
       filterValues: {
-        ALL: 'all'
+        ALL: 'all_mock',
+        TODAY: 'today_mock',
+        RANGE: 'range_mock',
+        THIS_WEEK: 'this_week_mock'
       },
       fetchFees: function () {
         return $q.when(searchResult.data);
@@ -45,6 +46,9 @@ describe('Controller: PaymentsCtrl', function () {
         return $q.when(true);
       }
     };
+    stateParamsMock = {
+      filter: modelMock.filterValues.TODAY
+    };
     userMock = {
       isLoggedIn: function(){ return true; }
     };
@@ -52,12 +56,15 @@ describe('Controller: PaymentsCtrl', function () {
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
 
-    PaymentsCtrl = $controller('PaymentsCtrl', {
-      $scope: scope,
-      $stateParams: stateParamsMock,
-      Payments: modelMock,
-      User: userMock
-    });
+    instantiateController = function() {
+      PaymentsCtrl = $controller('PaymentsCtrl', {
+        $scope: scope,
+        $stateParams: stateParamsMock,
+        Payments: modelMock,
+        User: userMock
+      });
+    };
+    instantiateController();
   }));
 
   it('should attach the isPaymentOnQueue function to the scope', function () {
@@ -349,9 +356,38 @@ describe('Controller: PaymentsCtrl', function () {
 
   });
 
-  it('should automatically kick off a search with the filter passed to the state', function () {
-    expect(scope.payments.searchCriteria.filter).toBe('fooFilter');
-    expect(modelMock.search).toHaveBeenCalled();
+  describe('page load filters', function() {
+    it('should filter today', function () {
+      stateParamsMock.filter = 'today';
+      instantiateController();
+      expect(scope.payments.proposedSearchCriteria.filter).toBe(modelMock.filterValues.TODAY);
+      expect(scope.payments.proposedSearchCriteria.startDate).toBe(null);
+      expect(scope.payments.proposedSearchCriteria.endDate).toBe(null);
+    });
+
+    it('should filter overdue', function () {
+      stateParamsMock.filter = 'overdue';
+      instantiateController();
+      expect(scope.payments.proposedSearchCriteria.filter).toBe(modelMock.filterValues.RANGE);
+      expect(scope.payments.proposedSearchCriteria.startDate).toBe(null);
+      expect(moment(scope.payments.proposedSearchCriteria.endDate).isSame(moment().subtract(1, 'days'), 'day')).toBeTruthy();
+    });
+
+    it('should filter this-week', function () {
+      stateParamsMock.filter = 'this-week';
+      instantiateController();
+      expect(scope.payments.proposedSearchCriteria.filter).toBe(modelMock.filterValues.THIS_WEEK);
+      expect(scope.payments.proposedSearchCriteria.startDate).toBe(null);
+      expect(scope.payments.proposedSearchCriteria.endDate).toBe(null);
+    });
+
+    it('should filter specific date', function () {
+      stateParamsMock.filter = '2015-10-19';
+      instantiateController();
+      expect(scope.payments.proposedSearchCriteria.filter).toBe(modelMock.filterValues.RANGE);
+      expect(moment(scope.payments.proposedSearchCriteria.startDate).isSame(moment('2015-10-19', 'YYYY-MM-DD'), 'day')).toBeTruthy();
+      expect(moment(scope.payments.proposedSearchCriteria.endDate).isSame(moment('2015-10-19', 'YYYY-MM-DD'), 'day')).toBeTruthy();
+    });
   });
 
   describe('fees retrieval logic', function () {

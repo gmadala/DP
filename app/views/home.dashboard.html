@@ -53,21 +53,21 @@
     <div class="span3 well payment-summary">
       <h4>Payments Summary</h4>
       <ul class="well-out">
-        <li>
+        <li class="link" ng-click="filterPayments('overdue')">
           <span class="item-total" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
           <span ng-pluralize
                 count="dashboardData.OverduePayments"
                 when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
           <p ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</p>
         </li>
-        <li>
+        <li class="link" ng-click="filterPayments('today')">
           <span class="item-total" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
           <span ng-pluralize
                 count="dashboardData.PaymentsDueToday"
                 when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
           <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
         </li>
-        <li>
+        <li class="link" ng-click="filterPayments('this-week')">
           <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
           <span ng-pluralize
                 count="dashboardData.UpcomingPayments"
@@ -75,7 +75,7 @@
           <span>This {{ viewMode | capitalize }}</span>
           <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
         </li>
-        <li>
+        <li class="link" ng-click="filterPayments()">
           <span class="item-total">{{dashboardData.AccountFees}}</span>
           <span ng-pluralize
                 count="dashboardData.AccountFees"

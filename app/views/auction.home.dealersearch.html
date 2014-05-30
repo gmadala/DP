@@ -20,6 +20,7 @@
                    ng-pattern="onlyNumbersPattern"
                    ng-model="numberSearch.query.dealerNumber"
                    nxg-focus="numberSearch.setDealerNumActive()"
+                   nxg-requires="data.proposedQuery.length >= 3"
                    ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }"></div>
             <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
                 No results found, please enter a valid Dealer Number.
