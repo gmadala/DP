@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
         stockNumber: '=',
         collapse: '='
       },
-      controller: function($scope, VehicleDetails, segmentio, metric) {
+      controller: function($scope, api, VehicleDetails, segmentio, metric) {
 
         // Watch for the directive to be uncollapsed, then, if the data hasn't
         // yet been lazy-loaded, load it via a promise so it can be rendered into
@@ -24,6 +24,8 @@ angular.module('nextgearWebApp')
             segmentio.track(metric.VIEW_FLOOR_PLAN_DETAILS);
           }
         });
+        $scope.metric = metric;
+        $scope.historyReportUrl = api.contentLink('/vehiclehistoryreport/' + $scope.stockNumber + '/VehicleHistory');
       }
     };
   });
