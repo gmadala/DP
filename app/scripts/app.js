@@ -53,7 +53,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         showNavBar: true
       })
       .state('home.payments', {
-        url: '/payments',
+        url: '/payments?filter',
         templateUrl: 'views/home.payments.html',
         controller: 'PaymentsCtrl',
         showNavBar: true
@@ -240,7 +240,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
-      function(event, toState /*, toStateParams, fromState, fromStateParams*/) {
+      function(event, toState , toStateParams/*, fromState, fromStateParams*/) {
         if (prv.reloadPending) {
           // prevent state change since we're reloading anyway
           event.preventDefault();
@@ -267,7 +267,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
             event.preventDefault();
             User.initSession(savedAuth).then(
               function() {
-                $state.transitionTo(toState);
+                $state.transitionTo(toState, toStateParams);
               }
             );
           }

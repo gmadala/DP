@@ -8,15 +8,20 @@ describe('Controller: DashboardCtrl', function () {
   var DashboardCtrl,
     scope,
     dashboard,
+    mockState,
     $q;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, Dashboard, _$q_) {
     scope = $rootScope.$new();
     $q = _$q_;
+    mockState = {
+      transitionTo: jasmine.createSpy()
+    }
     dashboard = Dashboard;
     DashboardCtrl = $controller('DashboardCtrl', {
-      $scope: scope
+      $scope: scope,
+      $state: mockState
     });
   }));
 
@@ -61,6 +66,12 @@ describe('Controller: DashboardCtrl', function () {
     expect(dashboard.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
     scope.$apply();
     expect(scope.dashboardData).toBe(data);
+  });
+
+  it('should have a filterPayments method that goes to payments page with initial filter', function() {
+    expect(typeof scope.filterPayments).toBe('function');
+    scope.filterPayments('foofers');
+    expect(mockState.transitionTo).toHaveBeenCalledWith('home.payments', {filter: 'foofers'});
   });
 
 });

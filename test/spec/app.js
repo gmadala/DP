@@ -170,7 +170,7 @@ describe('app.js', function () {
       rootScope.$broadcast('$stateChangeStart', toState);
 
       expect(user.initSession).toHaveBeenCalledWith('savedAuthString');
-      expect(state.transitionTo).toHaveBeenCalledWith(toState)
+      expect(state.transitionTo).toHaveBeenCalledWith(toState, undefined)
     });
 
     it('should redirect to login if user not logged in', function() {

@@ -154,18 +154,42 @@ angular.module('nextgearWebApp')
         }).open();
     };
 
-    $scope.payments.resetSearch = function (initialFilter) {
+    $scope.payments.resetSearch = function (initialFilter, initialStartDate, initialEndDate) {
       $scope.payments.proposedSearchCriteria = {
         query: null,
-        startDate: null,
-        endDate: null,
+        startDate: initialStartDate || null,
+        endDate: initialEndDate || null,
         filter: initialFilter || Payments.filterValues.ALL,
         inventoryLocation: undefined
       };
       $scope.payments.search();
     };
 
-    $scope.payments.resetSearch($stateParams.filter);
+
+
+    // Set up page-load filtering based on $stateParams
+    var filterParam = null,
+        startDate = null,
+        endDate = null;
+    switch($stateParams.filter) {
+    case 'today':
+      filterParam = Payments.filterValues.TODAY;
+      break;
+    case 'overdue':
+      filterParam = Payments.filterValues.RANGE;
+      endDate = moment().subtract(1, 'days').toDate();
+      break;
+    case 'this-week':
+      filterParam = Payments.filterValues.THIS_WEEK;
+      break;
+    }
+    if($stateParams.filter && !filterParam) {
+      // it's a date filter
+      filterParam = Payments.filterValues.RANGE;
+      startDate = moment($stateParams.filter, 'YYYY-MM-DD').toDate();
+      endDate = moment($stateParams.filter, 'YYYY-MM-DD').toDate();
+    }
+    $scope.payments.resetSearch(filterParam, startDate, endDate);
 
     $scope.fees = {
       results: [],

@@ -160,11 +160,11 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.scope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span></table></div>');
+      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
-      expect(element.find('span').first().html()).toEqual('<b>Title1</b>');
-      expect(element.find('span').last().html()).toEqual('<i>Title2</i>');
+      expect(element.find('span.fc-event-title').first().html()).toEqual('<b>Title1</b>');
+      expect(element.find('span.fc-event-title').last().html()).toEqual('<i>Title2</i>');
     });
 
     it('should add class for events today', function () {
@@ -173,7 +173,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.scope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span></table></div>');
+      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
       expect(element.hasClass('today')).toBeTruthy();
@@ -186,7 +186,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.scope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span></table></div>');
+      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
       expect(element.hasClass('overdue')).toBeTruthy();

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $dialog, $log, Dashboard, segmentio, metric, moment, $filter) {
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, segmentio, metric, moment, $filter) {
 
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
@@ -67,6 +67,14 @@ angular.module('nextgearWebApp')
       } else {
         return false;
       }
+    };
+
+    $scope.filterPayments = function(filter) {
+      var param;
+      if(filter) {
+        param = {filter: filter};
+      }
+      $state.transitionTo('home.payments', param);
     };
 
     /**
