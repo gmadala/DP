@@ -142,6 +142,7 @@
               <!-- Show "Yes" if enhanced registration is enabled.
               If it is not enabled, show nothing. -->
               <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+              <div class="" ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
 
               <div class="controls form-inline nxg-radios" ng-show="business.editable">
                 <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
