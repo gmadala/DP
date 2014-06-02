@@ -42,6 +42,6 @@ body, html {
 }
 
 // so that our feedback tab displays beneath the modal backdrop.
-#uvTab {
+#uvTab, #ki_container{
   z-index: 1000 !important;
 }
