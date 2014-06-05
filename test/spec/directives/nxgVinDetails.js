@@ -236,13 +236,22 @@ describe('Directive: nxgVinDetails', function () {
 
       it('should switch to noMatch mode if lookup fails', inject(function ($q) {
         vinLookupResult = $q.reject([]);
-
+        scope.data = angular.extend(scope.data, {
+          UnitMake: 'foo',
+          UnitModel: 'foo',
+          UnitYear: 'foo',
+          UnitStyle: 'foo'
+        });
         scope.lookupVin();
         expect(scope.settings.vinLookupPending).toBe(true);
 
         scope.$apply(); // apply the promise resolution ($q is integrated with the angular digest cycle)
         expect(scope.settings.vinMode).toBe('noMatch');
         expect(scope.settings.vinLookupPending).toBe(false);
+        expect(scope.data.UnitMake).toBe('');
+        expect(scope.data.UnitModel).toBe('');
+        expect(scope.data.UnitStyle).toBe('');
+        expect(scope.data.UnitYear).toBe('');
       }));
 
       it('should suppress API errors if lookup failed at the API level', inject(function ($q, messages) {

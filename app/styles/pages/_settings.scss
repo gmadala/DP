@@ -31,6 +31,10 @@ $set-label-width: 40%;
     @extend .clearfix;
   }
 
+  .control-group {
+    overflow: auto;
+  }
+
   .control-label {
     @extend %thin;
     @extend %float-l;
@@ -41,6 +45,11 @@ $set-label-width: 40%;
 
     &.business {
       margin:0;
+    }
+
+    +.static {
+      width: 100% - $set-label-width;
+      float: right;
     }
   }
 

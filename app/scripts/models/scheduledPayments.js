@@ -138,7 +138,7 @@ angular.module('nextgearWebApp')
           SearchPending: false,
           SearchProcessed: false,
           SearchVoided: false,
-          PhysicalInventoryAddressId: inventoryLocationFilter && inventoryLocationFilter.BusinessAddressId
+          PhysicalInventoryAddressIds: inventoryLocationFilter && inventoryLocationFilter.BusinessAddressId
         };
         // set up filters
         switch (filterBy) {

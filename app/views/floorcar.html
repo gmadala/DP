@@ -91,11 +91,10 @@
             <div class="input-prepend dollar">
               <span class="add-on">$</span>
               <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
-                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
                      required
                      nxg-input-currency="1000000000000"
                      nxg-min="1"
-                     ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
+                     ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
               <label for="inputPurchaseAmt" class="text-error"
                      ng-show="validity.inputPurchaseAmt.$error.required">
                 Please enter the Purchase Amount.

@@ -92,6 +92,13 @@ angular.module('nextgearWebApp')
           if (!Blackbook.wasUserCancelled(error)) {
             s.vinMode = 'noMatch';
             $scope.data.VinAckLookupFailure = false; // make sure user HAS to check this; no pre-checking
+
+            // Clear the existing values when searching for a new not-found VIN
+            $scope.data.UnitMake = '';
+            $scope.data.UnitModel = '';
+            $scope.data.UnitYear = '';
+            $scope.data.UnitStyle = '';
+
           }
           // if the user cancelled lookup, stay in the current mode
         }

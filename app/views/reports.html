@@ -108,6 +108,9 @@
               <div class="controls">
                 <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" />
               </div>
+              <label class="text-error" ng-show="stmtFormValidity.validationError">
+                    Invalid character in VIN
+              </label>
             </div><!-- end .control-group -->
 
             <hr/>

@@ -68,7 +68,7 @@ describe('Model: Floorplan', function () {
 
     it('should coerce int properties', function () {
       floorplan.create(angular.extend({}, dummyFormData, {
-        UnitYear: '2004',
+        UnitYear: '2004'
       }));
       httpBackend.flush();
       expect(sentData.UnitYear).toBe(2004);
@@ -485,13 +485,13 @@ describe('Model: Floorplan', function () {
         inventoryLocation: {BusinessAddressId: 'businessID'}
       }));
       httpBackend.flush();
-      expect(callParams.PhysicalInventoryAddressId).toBe('businessID');
+      expect(callParams.PhysicalInventoryAddressIds).toBe('businessID');
     });
 
     it('should not set inventory location', function () {
       floorplan.search(angular.extend({}, defaultCriteria, {}));
       httpBackend.flush();
-      expect(callParams.PhysicalInventoryAddressId).not.toBeDefined();
+      expect(callParams.PhysicalInventoryAddressIds).not.toBeDefined();
     });
 
   });

@@ -11,19 +11,28 @@ angular.module('nextgearWebApp')
 
             formatViewValue = function(value) {
               if( typeof value === 'string') {
-                return validformats.test(value) ? parseFloat(value.replace(removeSymbols, ''), 10) : value;
+                return parseFloat(value.replace(removeSymbols, ''), 10);
               } else {
                 return value;
               }
             };
 
         ctrl.$parsers.unshift(function(viewValue) {
-          var newVal = formatViewValue(viewValue);
-          var valid = newVal < attrs.nxgInputCurrency;
-
-          // check if our value is greater than the max
-          ctrl.$setValidity('max', valid);
-          return newVal;
+          //if the validation pattern is wrong, set the pattern validity to false here rather than as part of the
+          //ng-pattern validation. This allows us to control the case where the input value is so large that the validation
+          //fails in ng-pattern but not when checked here.
+          if(validformats.test(viewValue)){
+            ctrl.$setValidity('pattern', true);
+            var newVal = formatViewValue(viewValue);
+            var valid = newVal < attrs.nxgInputCurrency;
+            // check if our value is greater than the max
+            ctrl.$setValidity('max', valid);
+            return newVal;
+          }
+          else{
+            ctrl.$setValidity('pattern', false);
+            return viewValue;
+          }
         });
       }
     };
