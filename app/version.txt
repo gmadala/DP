@@ -1,9 +1,17 @@
-NextGear Capital v3.0.2
+NextGear Capital v3.0.3
 =================================
 
 Fixes included in this release:
 
-VO-2118	Web (Firefox)-Floor a Car: Previously entered “VIN” is getting displayed in “VIN” input fields when user press Keyboard “Escape” button.
-VO-2194	Web–Floor a car-Business Search: User is unable to lookup Seller.
-VO-2249	Update documents used in Resources from DSC to NG
-VO-1624	Allow dealer to link to make a payment from the dashboard
+VO-2117	Web-Floor a Car: “Make”, “Model”, “Year” and “Style” fields are not getting auto cleared after user lookup a new “VIN”.
+VO-2111	Web (In-App Survey): User is able to enter data in In-App survey input field while “Session Expire” message is getting displayed.
+VO-2246	Web-Account Management-Title Settings: Info popover is not getting closed on the click of “Save” button.
+VO-2335	Web-Title Releases-Vehicle Flooring Detail View: Error message “404 – File or directory not found” is getting displayed when user clicks on “View the Vehicle History Detail Report” link
+VO-2261	Web- Bulk Flooring: Wrong error message is getting displayed when user enters large values in “Purchase Amount” field.
+VO-2293	Notify the user to contact customer service for state work title releases
+VO-2113	Web-Settings-User Profile: Rendered text is getting displayed at incorrect position.
+VO-2237	Web–Dealer Search-Business Search: Error message “Invalid Search criteria” popup is getting displayed when user enters less than 3 characters in the “Business name” field.
+VO-2258	Web-View a Report-Historical Reports: Error “404-File or directory not found” is getting displayed when user Views report.
+VO-2259	Web-Floor a Car: Wrong error message is getting displayed when user enters large values in “Purchase Amount” field.
+VO-2112	Web- Settings-Business Settings: No information text is getting displayed for “Enhanced Registration Enabled” field when “Enhanced Registration Enabled?” is set to “No”.
+VO-2252	Display Go Financial link within the web app
