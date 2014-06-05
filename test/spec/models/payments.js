@@ -237,14 +237,14 @@ describe("Model: Payments", function () {
         inventoryLocation: {BusinessAddressId: 'businessID'}
       }));
       httpBackend.flush();
-      expect(callParams.PhysicalInventoryAddressId).toBe('businessID');
+      expect(callParams.PhysicalInventoryAddressIds).toBe('businessID');
     });
 
     it('should not include inventory location', function () {
       payments.search(angular.extend({}, defaultCriteria, {
       }));
       httpBackend.flush();
-      expect(callParams.PhysicalInventoryAddressId).not.toBeDefined();
+      expect(callParams.PhysicalInventoryAddressIds).not.toBeDefined();
     });
 
   });

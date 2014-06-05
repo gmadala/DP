@@ -263,16 +263,16 @@ describe('Model: Scheduled Payments', function() {
     });
 
     describe('PhysicalInventoryId filtering', function() {
-      it('should filter by PhysicalInventoryAddressId', function() {
+      it('should filter by PhysicalInventoryAddressIds', function() {
         scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_ALL, {BusinessAddressId: 'testBusinessId'});
         httpBackend.flush();
-        expect(requestUrl.indexOf('PhysicalInventoryAddressId=testBusinessId')).not.toBe(-1);
+        expect(requestUrl.indexOf('PhysicalInventoryAddressIds=testBusinessId')).not.toBe(-1);
       });
 
-      it('should not filter by PhysicalInventoryAddressId', function() {
+      it('should not filter by PhysicalInventoryAddressIds', function() {
         scheduledPayments.search('', new Date(), new Date(), scheduledPayments.FILTER_BY_ALL);
         httpBackend.flush();
-        expect(requestUrl.indexOf('PhysicalInventoryAddressId=testBusinessId')).toBe(-1);
+        expect(requestUrl.indexOf('PhysicalInventoryAddressIds=testBusinessId')).toBe(-1);
       });
 
     });
