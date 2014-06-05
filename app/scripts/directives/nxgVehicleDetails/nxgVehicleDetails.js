@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
           }
         });
         $scope.metric = metric;
-        $scope.historyReportUrl = api.contentLink('/vehiclehistoryreport/' + $scope.stockNumber + '/VehicleHistory');
+        $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $scope.stockNumber + '/VehicleHistory');
       }
     };
   });
