@@ -25,9 +25,10 @@
               <div class="control-group">
                 <label class="control-label business" for="enhanced">Enhanced Registration Enabled?</label>
 
-                <!-- Show "Yes" if enhanced registration is enabled.
-                If it is not enabled, show nothing. -->
+
                 <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+                <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
+                <div class="" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable"> No </div>
 
                 <div class="controls form-inline nxg-radios" ng-show="business.editable">
                   <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
