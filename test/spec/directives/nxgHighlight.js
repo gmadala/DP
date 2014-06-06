@@ -86,27 +86,6 @@ describe('Directive: nxgHighlight', function () {
       expect(element.html).toHaveBeenCalledWith('this &gt; that');
     });
 
-    it('should sanitize single quotes', function() {
-      scope.text = 'this \' that';
-      scope.search = '';
-      scope.$digest();
-      expect(element.html).toHaveBeenCalledWith('this &#x27; that');
-    });
-
-    it('should sanitize double quotes', function() {
-      scope.text = 'this " that';
-      scope.search = '';
-      scope.$digest();
-      expect(element.html).toHaveBeenCalledWith('this &quot; that');
-    });
-
-    it('should sanitize slash', function() {
-      scope.text = 'this / that';
-      scope.search = '';
-      scope.$digest();
-      expect(element.html).toHaveBeenCalledWith('this &#x2F; that');
-    });
-
   });
 
 });

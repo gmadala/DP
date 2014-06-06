@@ -41,7 +41,7 @@
       <li class="table-list-row" ng-repeat="item in data.results">
         <div class="cell selfloor-descr">
           <p>{{ getVehicleDescription(item) }}</p>
-          <p ng-bind-html-unsafe="item.UnitVIN | highlight:searchCriteria.query" class="break-word"></p>
+          <p nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></p>
         </div>
         <div class="cell selfloor-stat">{{ item.FloorplanStatusName }}</div>
         <div class="cell selfloor-dates">

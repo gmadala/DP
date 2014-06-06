@@ -62,9 +62,9 @@
         </thead>
         <tbody>
           <tr ng-repeat="result in data.results">
-            <td class="bus-name" ng-bind-html-unsafe="result.BusinessName | highlight:data.query"></td>
-            <td class="bus-legalName" ng-bind-html-unsafe="result.BusinessLegalName | highlight:data.query"></td>
-            <td class="bus-num" ng-bind-html-unsafe="result.BusinessNumber | highlight:data.query"></td>
+            <td class="bus-name" nxg-highlight="result.BusinessName" highlight="data.query"></td>
+            <td class="bus-legalName" nxg-highlight="result.BusinessLegalName" highlight="data.query"></td>
+            <td class="bus-num" nxg-highlight="result.BusinessNumber" highlight="data.query"></td>
             <td class="bus-auctionNum" ng-show="data.searchBuyersMode">
               <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
                     tooltip-placement="right"
@@ -73,8 +73,8 @@
                 {{ result.AuctionAccessDealershipNumbers | list }}
               </span>
             </td>
-            <td class="bus-city" ng-bind-html-unsafe="result.City | highlight:data.query"></td>
-            <td class="bus-state" ng-bind-html-unsafe="result.State | highlight:data.query"></td>
+            <td class="bus-city" nxg-highlight="result.City" highlight="data.query"></td>
+            <td class="bus-state" nxg-highlight="result.State" highlight="data.query"></td>
             <td class="bus-select"><button href class="btn btn-mini" ng-click="select(result)">Select</button></td>
           </tr>
         </tbody>

@@ -19,27 +19,14 @@ angular.module('nextgearWebApp')
 
         var sanitizeAndHighlight = function sanitizeAndHighlight() {
 
-          // Sanitize
-          var stringToSanitize = scope.nxgHighlight;
-          if(typeof stringToSanitize !== 'string') {
-            stringToSanitize = stringToSanitize.toString();
-          }
-          var entities = {
-            '&amp;' : /&/g,
-            '&lt;'  : /</g,
-            '&gt;'  : />/g,
-            '&quot;': /"/g,
-            '&#x27;': /'/g,
-            '&#x2F;': /\//g
-          };
-
-          stringToSanitize = _.reduce(entities, function(str, dangerousVal, safeVal) {
-            return str.replace(dangerousVal, safeVal);
-          }, stringToSanitize);
-
+          // Sanitize - set element text content, then get innerHTML
+          // Same way jQuery.text() works, and how AngularJS sanitizes bound values
+          var memory = document.createElement('div');
+          memory.textContent = scope.nxgHighlight;
+          var sanitizedString = memory.innerHTML;
 
           // Highlight
-          var highlightedString = $filter('highlight')(stringToSanitize, scope.highlight);
+          var highlightedString = $filter('highlight')(sanitizedString, scope.highlight);
 
           // Throw into DOM
           element.html(highlightedString);
