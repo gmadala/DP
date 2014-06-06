@@ -9,7 +9,8 @@ angular.module('nextgearWebApp')
       scope: {
         payment: '=nxgAlternateAddress',
         showTooltip: '=showTooltip',
-        enabled: '=enabled'
+        enabled: '=enabled',
+        ngDisabled: '='
       },
       controller: function($scope, $attrs, TitleAddresses) {
         var showSelectMenuAttr = !($attrs.showSelectMenu === undefined || $attrs.showSelectMenu === 'false');

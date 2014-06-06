@@ -71,8 +71,10 @@ describe('Directive: nxgAlternateAddress', function () {
 
     titleAddressesMock = TitleAddresses;
 
+    scope.disabled = false;
+
     element = angular.element(
-      '<div nxg-alternate-address="payment"></div>');
+      '<div nxg-alternate-address="payment" ng-disabled="disabled"></div>');
     element = $compile(element)(scope);
     $rootScope.$digest();
 
@@ -129,7 +131,15 @@ describe('Directive: nxgAlternateAddress', function () {
     dScope = element.scope();
 
     expect(dScope.showSelectMenu).toBe(true);
+  });
 
-
+  it('should be disabled when disabled is true', function() {
+    expect(element.find('button').attr('disabled')).toBeFalsy();
+    expect(element.find('select').attr('disabled')).toBeFalsy();
+    scope.$apply(function() {
+      scope.disabled = true;
+    });
+    expect(element.find('button').attr('disabled')).toBeTruthy();
+    expect(element.find('select').attr('disabled')).toBeTruthy();
   });
 });
