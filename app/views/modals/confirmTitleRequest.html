@@ -37,7 +37,7 @@
   <p ng-show="counts.failed == 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been approved. An email will be sent to you shortly with a tracking number.</p>
 
   <!-- Some Title Release Requests Failed -->
-  <p ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight">888.989.3721.</span></p>
+  <p ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight"><nxg-customer-support-phone /></span></p>
 
   <!-- Some Title Release Requests Succeed -->
   <section ng-show="counts.failed < counts.total">
