@@ -25,6 +25,14 @@ angular.module('nextgearWebApp')
               originalOpen = dialog.open,
               originalClose = dialog.close;
 
+          if(opts.topmost && opts.topmostClass) {
+            var classes = opts.topmostClass.split(' ');
+            classes.forEach(function(className) {
+              dialog.modalEl.addClass(className);
+              dialog.backdropEl.addClass(className);
+            });
+          }
+
           dialog.open = function () {
             var deferred = $q.defer();
 
