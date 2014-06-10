@@ -30,7 +30,7 @@
                 <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
                 <div class="" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable"> No </div>
 
-                <div class="controls form-inline nxg-radios" ng-show="business.editable">
+                <div class="controls form-inline nxg-radios contain" ng-show="business.editable">
                   <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
                   <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
                   <label for="enhancedNo">No</label>
