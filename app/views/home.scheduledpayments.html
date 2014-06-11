@@ -111,8 +111,8 @@
 
               <div class="cell sch-desc">
                 <p> {{ pay.description }} </p>
-                <p><span ng-bind-html-unsafe="pay.vin | highlight:pay.data.query" class="break-word"></span><br/>
-                  Stock #: <span ng-bind-html-unsafe="pay.stockNumber | highlight:pay.data.query"></span>
+                <p><span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span><br/>
+                  Stock #: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span>
                 </p>
               </div>
 

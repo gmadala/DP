@@ -65,7 +65,7 @@
           <li class="table-list-row" ng-repeat="receipt in receipts.results">
             <div class="cell rec-num">
               <p>
-                <span ng-bind-html-unsafe="receipt.TransactionNumber | highlight:receipt.data.query"></span>
+                <span nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></span>
               </p>
             </div>
             <div class="cell rec-status">
@@ -85,7 +85,7 @@
                 <div ng-switch on="!!reciept.CheckNumber">
                   <div ng-switch-when="true">
                     <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span>
-                    <span ng-bind-html-unsafe="receipt.CheckNumber | highlight:receipt.data.query"></span>
+                    <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
                   </div>
                 </div>
               </p>

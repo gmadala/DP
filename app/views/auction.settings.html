@@ -144,7 +144,7 @@
               <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
               <div class="" ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
 
-              <div class="controls form-inline nxg-radios" ng-show="business.editable">
+              <div class="controls form-inline nxg-radios contain" ng-show="business.editable">
                 <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
                 <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
                 <label for="enhancedNo">No</label>
@@ -204,7 +204,7 @@
                   tooltip-placement="right"
                   tooltip-trigger="click"
                   tooltip-html="true"
-                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
+                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
                   tooltip-animation="true">?</button>
               </div>
               <!-- Saved Address -->
@@ -218,7 +218,7 @@
                     tooltip-placement="right"
                     tooltip-trigger="click"
                     tooltip-html="true"
-                    tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
+                    tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
                     tooltip-animation="true">?</button>
               </div>
               <!-- Current Address Selection-->

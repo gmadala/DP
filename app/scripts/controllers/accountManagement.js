@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api, $q) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api, $q, customerSupportPhone) {
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
+
+    $scope.customerSupportPhone = customerSupportPhone;
 
     var prv = {
       edit: function() {

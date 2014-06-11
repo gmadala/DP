@@ -25,11 +25,12 @@
               <div class="control-group">
                 <label class="control-label business" for="enhanced">Enhanced Registration Enabled?</label>
 
-                <!-- Show "Yes" if enhanced registration is enabled.
-                If it is not enabled, show nothing. -->
-                <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
 
-                <div class="controls form-inline nxg-radios" ng-show="business.editable">
+                <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+                <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
+                <div class="" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable"> No </div>
+
+                <div class="controls form-inline nxg-radios contain" ng-show="business.editable">
                   <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
                   <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
                   <label for="enhancedNo">No</label>
@@ -86,7 +87,7 @@
                     tooltip-placement="right"
                     tooltip-trigger="focus"
                     tooltip-html="true"
-                    tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
+                    tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
                     tooltip-animation="true">?</button>
                 </div>
                 <!-- Saved Address -->
@@ -100,7 +101,7 @@
                       tooltip-placement="right"
                       tooltip-trigger="focus"
                       tooltip-html="true"
-                      tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear at: 888-969-3721"
+                      tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
                       tooltip-animation="true">?</button>
                 </div>
                 <!-- Current Address Selection-->

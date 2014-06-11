@@ -126,8 +126,8 @@
 
                     <div class="cell pay-desc">
                       <p>{{ payment.UnitDescription }}</p>
-                      <p><span ng-bind-html-unsafe="payment.Vin | highlight:payment.data.query" class="break-word"></span><br/>
-                        Stock #: <span ng-bind-html-unsafe="payment.StockNumber | highlight:payment.data.query"></span>
+                      <p><span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span><br/>
+                        Stock #: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span>
                       </p>
                     </div>
 

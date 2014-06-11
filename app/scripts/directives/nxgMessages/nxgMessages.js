@@ -16,7 +16,9 @@ angular.module('nextgearWebApp')
               backdropClick: false,
               templateUrl: 'scripts/directives/nxgMessages/nxgMessagesModal.html',
               controller: 'MessagesModalCtrl',
-              dialogClass: 'modal topmost'
+              dialogClass: 'modal',
+              topmost: true,
+              topmostClass: 'topmost'
             };
             currentDialog = $dialog.dialog(dialogOptions);
             currentDialog.open().then(function () {

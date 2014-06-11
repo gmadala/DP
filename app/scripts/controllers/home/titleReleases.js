@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog) {
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, customerSupportPhone) {
 
     $scope.metric = metric; // make metric names available to templates
 
@@ -139,7 +139,7 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseUnavailable = function() {
       var title = 'Title Release Unavailable',
-          message = 'We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at 888.989.3721.',
+          message = 'We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at ' + customerSupportPhone +'.',
           buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();

@@ -26,12 +26,19 @@ angular.module('nextgearWebApp')
 
     $scope.search = function() {
       // search means "start from the beginning with current criteria"
+
+      $scope.validity = angular.copy($scope.dealerNameSearch);
+
       $scope.data.paginator = null;
       $scope.data.hitInfiniteScrollMax = false;
       $scope.data.results.length = 0;
 
       // commit the proposed query
       $scope.data.query = angular.copy($scope.proposedQuery);
+
+      if($scope.validity && $scope.validity.$invalid) {
+        return;
+      }
 
       if ($scope.isQueryValid($scope.data.query)) {
         // name + either city or state is required
