@@ -169,6 +169,10 @@ select, .nxg-date-field {
       @include box-shadow(none);
     }
   }
+
+  & + .btn-mini {
+    margin-left: 5px;
+  }
 }
 
 .text-error {
