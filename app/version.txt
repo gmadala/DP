@@ -1,13 +1,8 @@
-NextGear Capital v3.0.4
+NextGear Capital v3.0.5
 =================================
 
 Fixes included in this release:
 
-VO-2237	Web–Dealer Search-Business Search: Error message “Invalid Search criteria” popup is getting displayed when user enters less than 3 characters in the “Business name” field.
-VO-2112	Web- Settings-Business Settings: No information text is getting displayed for “Enhanced Registration Enabled” field when “Enhanced Registration Enabled?” is set to “No”.
-VO-2068	HTML encode/sanitize search results before highlighting
-VO-2193	Web–Schedule Payments: “Address” drop down field remain active while process of submission of payments is taking place.
-VO-2356	VO: Title Release Tab > Title Release Unavailable Hyperlink
-VO-2377	Web–Settings: Unwanted scroll bar is getting displayed against “Enhanced Registration Enabled?” radio buttons.
-VO-2328	Displaying "NextGear" as opposed to "NextGear Capital"
-VO-2316	Web-Floor a Car-Business Search: User has to click on “Select” button twice in order to select a Seller.
+VO-2317	Web-View a Report: UI issue (Inappropriate gap between “Date” field and “View Report” button & Coloring issue of “View Report” button) under “Disbursement Detail” section.
+VO-2293	Notify the user to contact customer service for state work title releases
+VO-2421	Web-Dashboard: “Privacy Statement” and “Contact us” link are missing from the footer.
