@@ -4,9 +4,12 @@ angular.module('nextgearWebApp')
   .factory('nxgConfig', function(){
 
     var prv = {
-      generateConfig: function (apiDomain, segmentIoKey, qualarooDomainCode, timeoutMs, isDemo) {
+      generateConfig: function (apiDomain, segmentIoKey, qualarooDomainCode, timeoutMs, isDemo, serviceName) {
+        if (!serviceName) {
+          serviceName = 'MobileService';
+        }
         return {
-          apiBase: apiDomain + '/MobileService/api',
+          apiBase: apiDomain + '/' + serviceName + '/api',
           apiDomain: apiDomain,
           segmentIoKey: segmentIoKey,
           userVoice: {
@@ -31,6 +34,7 @@ angular.module('nextgearWebApp')
         TEST: 'test',
         LOCAL: 'local',
         TRAINING: 'training',
+        RUBY_DAL_TEST: 'ruby_dal',
         PRODUCTION: 'production'
       },
       getConfig: function(profile) {
@@ -41,6 +45,9 @@ angular.module('nextgearWebApp')
           break;
         case prv.profile.TEST:
           config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
+          break;
+        case prv.profile.RUBY_DAL_TEST:
+          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
           break;
         case prv.profile.LOCAL:
           config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
@@ -70,6 +77,10 @@ angular.module('nextgearWebApp')
 
     // @if ENV='production'
     profile = prv.profile.PRODUCTION;
+    // @endif
+
+    // @if ENV='rubydal'
+    profile = prv.profile.RUBY_DAL_TEST;
     // @endif
 
     /**
