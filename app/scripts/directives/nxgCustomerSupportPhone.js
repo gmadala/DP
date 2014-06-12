@@ -11,6 +11,6 @@ angular.module('nextgearWebApp')
     return {
       restrict: 'E',
       replace: true,
-      template: '<span>' + customerSupportPhone + '</span>'
+      template: '<span class="nxg-phone">' + customerSupportPhone + '</span>'
     };
   });
