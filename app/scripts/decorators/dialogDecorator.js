@@ -54,6 +54,16 @@ angular.module('nextgearWebApp')
             }
             $delegate.enforceFocus.call(this);
 
+            /*
+             * Each modal's html should include an element with the
+             * 'nxg-autofocus' directive applied to it (as attribute
+             * or class). We could apply the directive to the modal
+             * element itself here, but then there's no guarantee
+             * which element will get focus when the modal first opens.
+             *
+             * [alexandra.atzl] - 6/12/14
+             */
+
             return deferred.promise;
           };
 
