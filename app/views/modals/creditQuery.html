@@ -2,7 +2,7 @@
     <h3>Buyer Business Line of Credit Query</h3>
 </div>
 
-<section class="modal-body">
+<section class="modal-body" nxg-autofocus>
   <p class="modal-subtitle">Buyer Information</p>
 
   <table class="buyer-info">
@@ -53,7 +53,7 @@
     <span ng-show="business.creditQuery.requested">OK</span>
     <span ng-hide="business.creditQuery.requested">Cancel</span>
   </button>
-  <button ng-click="business.creditQuery.get()"
+  <button nxg-autofocus ng-click="business.creditQuery.get()"
           class="btn btn-mini btn-primary"
         ng-show="!business.creditQuery.requested">Query</button>
 </div>

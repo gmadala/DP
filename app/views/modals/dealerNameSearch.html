@@ -11,7 +11,7 @@
     <div class="control-group shorten">
       <label class="control-label">Business Name</label>
       <div class="controls">
-        <input type="text" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }">
+        <input type="text" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
         <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires">
       Please enter at least 3 characters.
     </label>
@@ -94,5 +94,5 @@
 </div><!-- end .modal-body -->
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary" >Cancel</button>
+  <button ng-click="close()" class="btn btn-mini btn-secondary">Cancel</button>
 </div>

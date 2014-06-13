@@ -25,6 +25,8 @@ angular.module('nextgearWebApp')
       }
     ];
 
+    $scope.vinRegexp = /^[A-Za-z0-9]*$/;
+
     $scope.viewDealerStatement = function() {
       var startDate = api.toShortISODate($scope.data.stmtStartDate);
       var endDate = api.toShortISODate($scope.data.stmtEndDate);
@@ -44,11 +46,6 @@ angular.module('nextgearWebApp')
 
       // append the vin filter string if one was provided, encoding it for safe transit in a GET query
       if ($scope.data.stmtVinFilter) {
-        //Validate no '/' exists since this messes up api call.
-        if($scope.data.stmtVinFilter.indexOf('/') !== 0){
-          $scope.stmtFormValidity.validationError = true;
-          return false;
-        }
         var encodedVin = encodeURIComponent($scope.data.stmtVinFilter);
         strUrl += 'forVin_' + encodedVin + '/' + encodedVin;
       }

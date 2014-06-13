@@ -106,9 +106,9 @@
             <div class="control-group">
               <label class="control-label" for="stmtVinFilter">Filter for VIN (optional)</label>
               <div class="controls">
-                <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" />
+                <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" ng-pattern="vinRegexp" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtVinFilter.$error.pattern }" />
               </div>
-              <label class="text-error" ng-show="stmtFormValidity.validationError">
+              <label class="text-error" ng-show="stmtFormValidity.stmtVinFilter.$error.pattern">
                     Invalid character in VIN
               </label>
             </div><!-- end .control-group -->

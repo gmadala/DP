@@ -42,7 +42,7 @@
 <div class="modal-footer">
   <div class="btn-container">
     <button ng-show="payment.Extendable" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
-    <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }">{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
+    <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !payment.Extendable }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[payment.Extendable] }}</button>
   </div>
   <div class="disclaimer">
     <p>Please note this quote is effective for today only and amounts are subject to change. </p>
