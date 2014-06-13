@@ -1,8 +1,8 @@
-NextGear Capital v3.0.5
+NextGear Capital v3.0.6
 =================================
 
 Fixes included in this release:
 
-VO-2317	Web-View a Report: UI issue (Inappropriate gap between “Date” field and “View Report” button & Coloring issue of “View Report” button) under “Disbursement Detail” section.
-VO-2293	Notify the user to contact customer service for state work title releases
-VO-2421	Web-Dashboard: “Privacy Statement” and “Contact us” link are missing from the footer.
+VO-2258	Web-View a Report-Historical Reports: Error “404-File or directory not found” is getting displayed when user Views report.
+VO-2450	Remove the "Enter" word from all of the search prompts
+VO-2315	Web (Firefox)-Dealer Search-Dealer number Search: Background is turning black when user presses “Enter” button while “Buyer Business Line of Credit Query” popup is getting displayed.
