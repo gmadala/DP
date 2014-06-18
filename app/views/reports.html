@@ -179,7 +179,10 @@
             <div class="control-group">
               <label class="control-label" for="paidOffVinFilter">Filter for VIN (optional)</label>
               <div class="controls">
-                <input type="text" id="paidOffVinFilter" ng-model="data.paidOffVinFilter" />
+                <input type="text" name="paidOffVinFilter" id="paidOffVinFilter" ng-pattern="vinRegexp" ng-model="data.paidOffVinFilter" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffVinFilter.$error.pattern }" />
+                <label class="text-error" ng-show="paidOffFormValidity.paidOffVinFilter.$error.pattern">
+                    Invalid character in VIN
+                </label>
               </div>
             </div><!-- end .control-group -->
 
