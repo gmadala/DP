@@ -136,7 +136,7 @@
       </tr>
       <tr>
         <td class="detail-label">Disbursement Date</td>
-        <td class="detail-value">{{ vehicleDetails.disbursementDate | moment }}</td>
+        <td class="detail-value">{{ (vehicleDetails.disbursementDate | moment) || 'n/a' }}</td>
       </tr>
       <tr>
         <td colspan="2" class="detail-value detail-link">
