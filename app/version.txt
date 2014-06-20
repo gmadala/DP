@@ -1,8 +1,11 @@
-NextGear Capital v3.0.6
+NextGear Capital v3.0.7
 =================================
 
 Fixes included in this release:
 
-VO-2258	Web-View a Report-Historical Reports: Error “404-File or directory not found” is getting displayed when user Views report.
-VO-2450	Remove the "Enter" word from all of the search prompts
-VO-2315	Web (Firefox)-Dealer Search-Dealer number Search: Background is turning black when user presses “Enter” button while “Buyer Business Line of Credit Query” popup is getting displayed.
+VO-2486	Web-View a Report (Paid of Summary): No error/validation message is getting displayed when user enters invalid values in “Filter for VIN (optional)” field.
+VO-2478	Web-Dashboard: Separation line between toggle buttons is not properly displayed.
+VO-2445	Web: Forgot Your User Name or Password? - Boxes "Forgot Your User Name?" and "Forgot Your Password?" are not aligned once error messages are displayed.
+VO-2317	Web-View a Report: UI issue (Inappropriate gap between “Date” field and “View Report” button & Coloring issue of “View Report” button) under “Disbursement Detail” section.
+VO-2479	Web Dashboard - "Credit" section layout messes up with narrow page width
+VO-2442	Web: Dealer: Settings: Account Management: Text Alignment issue under "Financial Accounts" section.
