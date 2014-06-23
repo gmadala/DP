@@ -128,7 +128,10 @@
     &.selfloor-stat { width: 10%; }
     &.selfloor-dates { width: 12%; }
     &.selfloor-purch { width: 11%; }
-    &.selfloor-buy { width: 10%; }
+    &.selfloor-buy {
+      width: 10%;
+      word-break: break-word;
+    }
     &.selfloor-ticket-num { width: 12%; }
     &.selfloor-title-loc { width: 9%; }
     &.selfloor-title {
