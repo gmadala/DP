@@ -6,7 +6,7 @@
          ng-change="vinChange()" nxg-blur="vinExit()"
          nxg-autofocus
          ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
-  <button href class="btn btn-secondary nxg-search-btn" ng-click="lookupVin()">
+  <button type="button" href class="btn btn-secondary nxg-search-btn" ng-click="lookupVin()">
     <i class="glyphicon glyphicon-search"></i>
   </button>
 </span>
