@@ -75,6 +75,10 @@
   }
 }
 
+.modal.request-credit-increase .modal-body {
+  max-height: none;
+}
+
 .modal.search-modal {
   width: 720px;
   margin-left: -360px;
