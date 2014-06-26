@@ -91,7 +91,7 @@
           <div class="control-group">
             <label for="city" class="control-label input-title">City</label>
             <div class="controls">
-              <input type="text" id="city" ng-model="nameSearch.query.city">
+              <input type="text" id="city" ng-model="nameSearch.query.city" ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
               <label class="text-error" ng-show="nameSearch.invalid.cityFormat">
                   City names must only have letters and spaces.
               </label>
