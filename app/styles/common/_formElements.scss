@@ -204,14 +204,14 @@ input[type="checkbox"] {
 #foo:checked,
 input[type="checkbox"] + label::before {
     position: relative;
-    top: 3px;
+    top: 4px;
     left: -6px;
     content: url('../img/checkbox.gif');
 }
 
 input[type="checkbox"]:checked + label::before {
     position: relative;
-    top: 3px;
+    top: 4px;
     left: -6px;
     content: url('../img/checkbox-checked.gif');
 }
@@ -223,6 +223,8 @@ input[type="checkbox"], input[type="checkbox"]:checked {
 
   & + label {
     @include user-select(none);
+    position: relative;
+    top: -4px;
   }
 
   &:focus + label::before, &:active + label::before {
