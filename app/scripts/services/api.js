@@ -15,7 +15,25 @@ angular.module('nextgearWebApp')
       var expiredSessionError = 'Your session expired due to inactivity. Please log in again.';
       sessionHasTimedOut = true;
       return messages.add(expiredSessionError, debug + '401 error', null, function() {
-        $rootScope.$emit('event:forceLogout');
+
+        // Once force logout popup closes, the "escape" key cancels refresh.
+        // Since the body element has focus at this point, it is the element
+        // that needs to be bound to to stop it from propagating to the document/window
+        // which cancels refresh.
+        angular.element('body').bind('keydown', function(e) {
+          if(e.keyCode === 27) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+
+        // Without this timeout the forceLogout calls window.location.reload()
+        // before the event listener cancelling the second "escape" press gets bound.
+        // This delays it until that event listener is bound, so a second "escape"
+        // press can be supressed.
+        $timeout(function() {
+          $rootScope.$emit('event:forceLogout');
+        });
       });
     }
 
