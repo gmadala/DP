@@ -57,6 +57,123 @@ describe('Directive: nxgHighlight', function () {
 
   });
 
+  describe('escaping regex characters', function() {
+
+    it('should find a -', function() {
+      scope.text = 'This is the text to - search';
+      scope.search = '-';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+
+    it('should find a [', function() {
+      scope.text = 'This is the text to [ search';
+      scope.search = '[';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ]', function() {
+      scope.text = 'This is the text to ] search';
+      scope.search = ']';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a /', function() {
+      scope.text = 'This is the text to / search';
+      scope.search = '/';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a {', function() {
+      scope.text = 'This is the text to { search';
+      scope.search = '{';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a }', function() {
+      scope.text = 'This is the text to } search';
+      scope.search = '}';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a (', function() {
+      scope.text = 'This is the text to ( search';
+      scope.search = '(';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a )', function() {
+      scope.text = 'This is the text to ) search';
+      scope.search = ')';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a *', function() {
+      scope.text = 'This is the text to * search';
+      scope.search = '*';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a +', function() {
+      scope.text = 'This is the text to + search';
+      scope.search = '+';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ?', function() {
+      scope.text = 'This is the text to ? search';
+      scope.search = '?';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a .', function() {
+      scope.text = 'This is the text to . search';
+      scope.search = '.';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a \\', function() {
+      scope.text = 'This is the text to \\ search';
+      scope.search = '\\';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ^', function() {
+      scope.text = 'This is the text to ^ search';
+      scope.search = '^';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a $', function() {
+      scope.text = 'This is the text to $ search';
+      scope.search = '$';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a |', function() {
+      scope.text = 'This is the text to | search';
+      scope.search = '|';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+  });
+
   describe('sanitization', function() {
 
     // For some escaped values asking for it back unescapes (like quotes and slashes)
