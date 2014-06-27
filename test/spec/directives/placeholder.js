@@ -4,12 +4,14 @@ describe('Directive: placeholder', function () {
   beforeEach(module('nextgearWebApp'));
 
   var element,
-      scope;
+      scope,
+      timeout;
 
-  beforeEach(inject(function($rootScope, $compile) {
+  beforeEach(inject(function($rootScope, $compile, $timeout) {
     Modernizr.input.placeholder = false; // simulate no placeholder support
     scope = $rootScope.$new();
     scope.foo = 'bar';
+    timeout = $timeout;
 
     element = angular.element('<input type="text" ng-model="foo" placeholder="1234"></input>');
     element = $compile(element)(scope);
@@ -20,6 +22,7 @@ describe('Directive: placeholder', function () {
     element.val('');
     element.trigger('blur');
     scope.$apply();
+    timeout.flush();
     expect(element.val()).toBe('1234');
   });
 });

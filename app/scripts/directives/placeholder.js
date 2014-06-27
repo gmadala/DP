@@ -3,7 +3,7 @@
 /*global Modernizr:true*/
 
 angular.module('nextgearWebApp')
-  .directive('placeholder', function () {
+  .directive('placeholder', function ($timeout) {
     // check for placeholder support first
     if (Modernizr.input.placeholder === true) {
       return {};
@@ -13,14 +13,16 @@ angular.module('nextgearWebApp')
       link: function postLink(scope, element, attrs) {
         var elem = angular.element(element); // raw DOM element
 
-        elem.val( attrs.placeholder ).focus(function() {
-          if (elem.val() === elem.attr('placeholder' )) {
-            elem.val('');
-          }
-        }).blur( function() {
-          if (elem.val() === '') {
-            elem.val(elem.attr('placeholder'));
-          }
+        $timeout(function() {
+          elem.val( attrs.placeholder ).focus(function() {
+            if (elem.val() === elem.attr('placeholder' )) {
+              elem.val('');
+            }
+          }).blur( function() {
+            if (elem.val() === '') {
+              elem.val(elem.attr('placeholder'));
+            }
+          });
         });
       }
     };
