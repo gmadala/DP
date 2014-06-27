@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
 
           // Sanitize highlighting string - it's treated like a regex, so regex special
           // characters need to be escaped
-          var highlightString = scope.highlight.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+          var highlightString = scope.highlight && scope.highlight.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 
           // Highlight
           var highlightedString = $filter('highlight')(sanitizedString, highlightString);
