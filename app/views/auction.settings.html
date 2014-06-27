@@ -33,6 +33,7 @@
               <div class="controls" ng-show="profile.editable">
                 <input type="password" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                   <button class="btn-help"
+                          id="password-help-tooltip"
                           tooltip-placement="right"
                           tooltip-trigger="click"
                           tooltip-html="true"
