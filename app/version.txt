@@ -1,7 +1,6 @@
-NextGear Capital v3.0.9
+NextGear Capital v3.0.10
 =================================
 
 Fixes included in this release:
 
-VO-2478	Web-Dashboard: Separation line between toggle buttons is not properly displayed.
-VO-2445	Web: Forgot Your User Name or Password? - Boxes "Forgot Your User Name?" and "Forgot Your Password?" are not aligned once error messages are displayed.
+VO-2445	  Web: Forgot Your User Name or Password? - Boxes "Forgot Your User Name?" and "Forgot Your Password?" are not aligned once error messages are displayed.
