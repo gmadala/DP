@@ -1,4 +1,4 @@
-NextGear Capital v3.0.8
+NextGear Capital v3.0.9
 =================================
 
 Fixes included in this release:

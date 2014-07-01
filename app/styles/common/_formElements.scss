@@ -340,24 +340,38 @@ input[type="radio"]:disabled {
   line-height: 11px;
 }
 
+/*
+ * #foo doesn't refer to a particular element; it's there to prevent
+ * browsers from implementing later selectors if it doesn't understand
+ * this one. See http://css-tricks.com/snippets/css/custom-radio-buttons
+ */
 #foo:checked::before,
 .nxg-fancy-radios input[type="radio"] {
     position:absolute;
     clip: rect(0,0,0,0);
     clip: rect(0 0 0 0);
+    margin: 0;
 }
 
 #foo:checked,
 .nxg-fancy-radios input[type="radio"] + label::before {
-  @extend .btn;
+  // @extend .btn;
   @extend %small;
+  @extend %heavy;
+  @include border-radius(3px);
+  display: inline-block;
+  float: left;
+  background-color: $btn-active-bkgd;
   @include background(linear-gradient($white, $gray-d));
+  color: $btn-active-text;
+  line-height: 20px;
+  text-shadow: none;
   text-transform: uppercase;
-  padding-right: 14px;
-  padding-left: 14px;
-  margin-right: -4px;
+  padding:2px 14px;
+  border: 0;
+  border-bottom: 1px solid $btn-active-stroke;
+  // margin-right: -4px;
 }
-
 
 #foo:checked,
 .nxg-fancy-radios input[type="radio"].first + label::before {
@@ -374,12 +388,14 @@ input[type="radio"]:disabled {
   @include border-radius(0 3px 3px 0);
 }
 
+#foo:checked,
 .nxg-fancy-radios input[type="radio"]:checked + label::before {
-  @extend .btn:active;
   @include background(linear-gradient(#eaeaea, #c4c4c4));
   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+  color: $btn-hover-text;
 }
 
+#foo:checked,
 .nxg-fancy-radios input[type="radio"].last:checked + label::before {
   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
 }
