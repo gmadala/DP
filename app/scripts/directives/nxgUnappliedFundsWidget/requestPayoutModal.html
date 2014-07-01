@@ -41,7 +41,7 @@
               ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
               ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$error.required }"
               required>
-        <option class="disabled" disabled="disabled" value="">Make Selection</option>
+        <option value="">Make Selection</option>
       </select>
       <label class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</label>
     </div>

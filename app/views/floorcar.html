@@ -1,6 +1,6 @@
 <div class="container-line">
   <div class="container-fluid">
-    <!-- TODO: Add error messaging -->
+
     <form class="row-fluid two-col floorcar" name="form" novalidate>
        <fieldset class="span8 well adjacent first">
           <h4>1. Vehicle Information</h4>
@@ -11,7 +11,7 @@
            <label for="inputColor" class="input-title">Color</label>
            <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
                    ng-options="color.ColorName for color in options().colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
-            <option class="disabled" disabled="disabled" value="">Make Selection</option>
+            <option value="">Make Selection</option>
            </select>
            <label for="inputColor" class="text-error"
                   ng-show="validity.inputColor.$error.required">
@@ -43,7 +43,7 @@
            <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
                    ng-options="location.Name for location in options().titleLocationOptions"
                    required ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }" >
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
            </select>
            <label for="inputTitleHolder" class="text-error"
                   ng-show="validity.inputTitleHolder.$error.required">
@@ -54,7 +54,7 @@
            <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                    ng-options="location.LocationName for location in options().locations"
                    ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }" required>
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
            </select>
            <label for="inputInvLoc" class="text-error"
                   ng-show="validity.inputInvLoc.$error.required">
@@ -131,7 +131,7 @@
             <select id="inputCreditLine" name="inputCreditLine" ng-model="data.LineOfCreditId"
                     ng-options="line.LineOfCreditName for line in options().linesOfCredit"
                     ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }" required>
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
             </select>
             <label for="inputCreditLine" class="text-error"
                    ng-show="validity.inputCreditLine.$error.required">
@@ -143,7 +143,7 @@
                     ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions()"
                     ng-change="data.BankAccountId = null"
                     ng-disabled="data.SaleTradeIn">
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
             </select>
 
             <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
@@ -152,7 +152,7 @@
                     ng-required="!data.PaySeller"
                     ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
                     ng-options="account.BankAccountName for account in options().bankAccounts">
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
             </select>
             <label for="inputDisburseAcct" class="text-error"
                    ng-show="validity.inputDisburseAcct.$error.required">
