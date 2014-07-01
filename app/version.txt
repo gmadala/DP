@@ -1,7 +1,6 @@
-NextGear Capital v3.0.9
+NextGear Capital v3.0.10
 =================================
 
 Fixes included in this release:
 
-VO-2505	Web- Seller Floor Plan Search: Column dividing line of an entry in the list is not correctly aligned with the Column Dividing line of the table header.
-VO-2496	Web- Bulk flooring: Fields (Make, Model, Year and Style) are getting cleared when user press Keyboard Enter button after entering value in “Buyer” field.
+VO-2445	  Web: Forgot Your User Name or Password? - Boxes "Forgot Your User Name?" and "Forgot Your Password?" are not aligned once error messages are displayed.
