@@ -102,20 +102,6 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     expect(typeof scope.addresses.then).toBe('function');
   });
 
-  describe('toShortAddress', function() {
-    it('should join address into string', function() {
-      var address = {
-        Line1: 'line 1',
-        Line2: 'line 2',
-        City: 'city',
-        State: 'state',
-        Zip: 'zip'
-      };
-
-      expect(scope.toShortAddress(address)).toEqual('line 1 line 2 / city state zip');
-    });
-  });
-
   it('should set getVehicleDescription to point to the Floorplan method', function() {
     expect(scope.getVehicleDescription).toBe(floorplanMock.getVehicleDescription);
   });

@@ -14,13 +14,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.addresses = TitleAddresses.getAddresses();
-    $scope.toShortAddress = function(addressObj) {
-      if(addressObj) {
-        return addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State + ' ' + addressObj.Zip;
-      } else {
-        return '';
-      }
-    };
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();

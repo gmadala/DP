@@ -49,10 +49,6 @@ angular.module('nextgearWebApp')
           $scope.showSelectMenu = true;
         };
 
-        $scope.toShortAddress = function(addressObj) {
-          return addressObj ? addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State : '';
-        };
-
         $scope.$watch('selectedAddress', function(newVal, oldVal) {
           if (newVal !== oldVal) {
             // if user changes the address back to the default, set id value back to null

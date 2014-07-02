@@ -2,7 +2,7 @@
   <button ng-disabled="ngDisabled" ng-hide="showSelectMenu" class="btn-unstyle btn-link alt-addr-link" ng-click="onClickAddress()">Send Title to a Different Address?</button>
   <select ng-disabled="ngDisabled" ng-show="showSelectMenu"
   ng-model="selectedAddress"
-  ng-options="toShortAddress(addr) for addr in addrList"
+  ng-options="(addr | address) for addr in addrList"
   ng-class="{ wide: !showTooltip }"></select>
   <span ng-show="showTooltip && showSelectMenu" class="btn-help"
      tooltip-placement="right"

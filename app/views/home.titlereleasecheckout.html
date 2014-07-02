@@ -5,7 +5,7 @@
 
       <div class="well-out">
         <p>Please confirm your title release request(s) below. Titles released here are required to be returned within 7 days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</p>
-        <p ng-show="1 == addresses.length">The title(s) will be sent to the following address: <strong><span ng-bind=" toShortAddress(addresses[0])"></span></strong></p>
+        <p ng-show="1 == addresses.length">The title(s) will be sent to the following address: <strong><span>{{addresses[0] | address}}</span></strong></p>
         <p ng-show="addresses.length > 1">Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles.</p>
       </div>
 
