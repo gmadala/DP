@@ -15,8 +15,11 @@ angular.module('nextgearWebApp')
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options().foo
-    $scope.options = User.getStatics;
+    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
+    $scope.$watch(function() { return User.getStatics();}, function(statics) {
+      $scope.options = statics;
+      $scope.options.locations = _.filter($scope.options.locations, 'IsActive');
+    });
 
     // pay seller vs. buyer options are derived separately
     $scope.paySellerOptions = User.getPaySellerOptions;
@@ -55,7 +58,7 @@ angular.module('nextgearWebApp')
 
     var optionListsToDefault = [
       {
-        scopeSrc: 'options().bankAccounts',
+        scopeSrc: 'options.bankAccounts',
         modelDest: 'BankAccountId'
       },
       {
@@ -66,10 +69,10 @@ angular.module('nextgearWebApp')
     ];
     if (isDealer) {
       optionListsToDefault.push({
-        scopeSrc: 'options().locations',
+        scopeSrc: 'options.locations',
         modelDest: 'PhysicalInventoryAddressId'
       }, {
-        scopeSrc: 'options().linesOfCredit',
+        scopeSrc: 'options.linesOfCredit',
         modelDest: 'LineOfCreditId'
       });
     }

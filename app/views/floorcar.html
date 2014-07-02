@@ -10,7 +10,7 @@
 
            <label for="inputColor" class="input-title">Color</label>
            <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-                   ng-options="color.ColorName for color in options().colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+                   ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
             <option value="">Make Selection</option>
            </select>
            <label for="inputColor" class="text-error"
@@ -41,7 +41,7 @@
 
            <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
            <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
-                   ng-options="location.Name for location in options().titleLocationOptions"
+                   ng-options="location.Name for location in options.titleLocationOptions"
                    required ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }" >
              <option value="">Make Selection</option>
            </select>
@@ -52,7 +52,7 @@
 
            <label for="inputInvLoc" class="input-title">Inventory Location</label>
            <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
-                   ng-options="location.LocationName for location in options().locations"
+                   ng-options="(location | address) for location in options.locations"
                    ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }" required>
              <option value="">Make Selection</option>
            </select>
@@ -129,7 +129,7 @@
 
             <label for="inputCreditLine" class="input-title">Line of Credit</label>
             <select id="inputCreditLine" name="inputCreditLine" ng-model="data.LineOfCreditId"
-                    ng-options="line.LineOfCreditName for line in options().linesOfCredit"
+                    ng-options="line.LineOfCreditName for line in options.linesOfCredit"
                     ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }" required>
              <option value="">Make Selection</option>
             </select>
@@ -151,7 +151,7 @@
                     ng-disabled="data.PaySeller"
                     ng-required="!data.PaySeller"
                     ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
-                    ng-options="account.BankAccountName for account in options().bankAccounts">
+                    ng-options="account.BankAccountName for account in options.bankAccounts">
              <option value="">Make Selection</option>
             </select>
             <label for="inputDisburseAcct" class="text-error"
