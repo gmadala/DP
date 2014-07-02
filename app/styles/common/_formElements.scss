@@ -331,8 +331,14 @@ input[type="radio"]:disabled {
 
 .nxg-fancy-radios {
   margin-left: 7px;
+
   label {
+    cursor: pointer;
     display: inline;
+
+    &::before {
+      cursor: pointer;
+    }
   }
 }
 
