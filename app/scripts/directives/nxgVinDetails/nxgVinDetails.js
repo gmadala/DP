@@ -8,13 +8,13 @@ angular.module('nextgearWebApp')
       scope: {
         data: '=floorModel',
         validity: '=',
-        form: '='
+        form: '=',
+        errorFlag: '='
       },
       controller: 'VinDetailsCtrl'
     };
   })
   .controller('VinDetailsCtrl', function ($scope, moment, Blackbook) {
-
     var s = $scope.settings = {
       // next year is the highest valid year
       maxYear: moment().add('years', 1).year(),
@@ -39,6 +39,7 @@ angular.module('nextgearWebApp')
       if (s.vinMode !== 'none') {
         // if the VIN changes after lookup, clear any match state
         $scope.data.$selectedVehicle = null;
+        $scope.errorFlag = false;
         s.vinMode = 'none';
       }
     };
@@ -52,6 +53,7 @@ angular.module('nextgearWebApp')
 
     $scope.lookupVin = function () {
       var mileage = null;
+
       // disable this while a lookup is already running
       if (s.vinLookupPending) {
         return;

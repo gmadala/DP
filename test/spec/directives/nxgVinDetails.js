@@ -11,6 +11,7 @@ describe('Directive: nxgVinDetails', function () {
     outerScope.theForm = {};
     outerScope.validation = {};
     outerScope.aModel = {};
+    outerScope.errorFlag = false;
 
     element = angular.element('<div nxg-vin-details floor-model="aModel" validity="validation" form="theForm"></div>');
     element = $compile(element)(outerScope);
@@ -23,6 +24,7 @@ describe('Directive: nxgVinDetails', function () {
     expect(iScope.data).toBe(outerScope.aModel);
     expect(iScope.validity).toBe(outerScope.validation);
     expect(iScope.form).toBe(outerScope.theForm);
+    expect(iScope.errorFlag).toBeFalsy();
   });
 
   describe('controller', function () {
@@ -114,6 +116,7 @@ describe('Directive: nxgVinDetails', function () {
         scope.vinChange();
         expect(scope.data.$selectedVehicle).toBe(null);
         expect(scope.settings.vinMode).toBe('none');
+        expect(scope.errorFlag).toBe(false);
       });
 
     });

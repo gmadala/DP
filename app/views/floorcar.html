@@ -6,7 +6,7 @@
           <h4>1. Vehicle Information</h4>
           <div class="well-out">
 
-           <div nxg-vin-details floor-model="data" validity="validity" form="form" nxg-autofocus="reset"></div>
+           <div nxg-vin-details floor-model="data" validity="validity" form="form" error-flag="vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
            <label for="inputColor" class="input-title">Color</label>
            <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
@@ -100,7 +100,7 @@
                 Please enter the Purchase Amount.
               </label>
               <label for="inputPurchaseAmt" class="text-error"
-                     ng-show="validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin">
+                     ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)">
                   Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
               </label>
                <label for="inputPurchaseAmt" class="text-error"

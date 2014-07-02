@@ -65,6 +65,7 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.optionsHelper).toBeDefined();
 
       expect(scope.defaultData).toBeDefined();
+      expect(scope.vinDetailsErrorFlag).toBe(false);
     });
 
     describe('reset function', function() {
@@ -116,10 +117,12 @@ describe('Controller: FloorCarCtrl', function () {
         expect(typeof scope.submit).toBe('function');
       });
 
-      it('should create the validity object', function() {
+      it('should create the validity object and update the error flag', function() {
         expect(scope.validity).not.toBeDefined();
+        expect(scope.vinDetailsErrorFlag).toBe(false);
         scope.submit();
         expect(scope.validity).toBeDefined();
+        expect(scope.vinDetailsErrorFlag).toBe(true);
       });
 
       it('should do nothing if the form is invalid', function() {

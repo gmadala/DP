@@ -28,6 +28,9 @@ angular.module('nextgearWebApp')
     // form data model holds values filled into form
     $scope.data = null;
 
+    // flag to determine when to display form errors for vin detail fields.
+    $scope.vinDetailsErrorFlag = false;
+
     // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
@@ -99,6 +102,8 @@ angular.module('nextgearWebApp')
     $scope.submit = function () {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
+
+      $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
         return false;
       }
