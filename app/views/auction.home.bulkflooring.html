@@ -7,7 +7,7 @@
 
        <label for="inputColor" class="input-title">Color</label>
        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in options().colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+               ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
         <option value="">Make Selection</option>
        </select>
        <label for="inputColor" class="text-error"
@@ -40,7 +40,7 @@
        <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }"
-               ng-options="location.Name for location in options().titleLocationOptions"
+               ng-options="location.Name for location in options.titleLocationOptions"
                required>
          <option value="">Make Selection</option>
        </select>
@@ -139,7 +139,7 @@
 
         <label for="inputDisburseAcct" class="input-title">Bank Account</label>
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
-                ng-options="account.BankAccountName for account in options().bankAccounts"
+                ng-options="account.BankAccountName for account in options.bankAccounts"
                 ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
                 required>
          <option value="">Make Selection</option>
