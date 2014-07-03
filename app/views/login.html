@@ -19,6 +19,7 @@
                    nxg-autofocus
                    nxg-enter="authenticate()" 
                    typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
+            <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required">Please enter a username.</p>
 
             <label for="credPassword">Password:</label>
             <input type="password"
@@ -26,14 +27,16 @@
                    id="credPassword"
                    name="credPassword"
                    required
+                   nxg-auto-fill-sync
                    nxg-enter="authenticate()" />
+            <p for="credPassword" class="text-error" ng-show="validity.credPassword.$error.required">Please enter a password.</p>
 
             <p class="text-error" ng-show="showLoginError">{{ errorMsg }}</p>
             <p class="text-error" ng-show="showLoginError">If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact <a href="mailto:dealertickets@nextgearcapital.com" target="_blank">dealertickets@nextgearcapital.com</a>.</p>
           </form>
 
           <div class="footer modal-footer">
-            <button class="btn btn-small btn-primary" ng-click="authenticate()" ng-disabled="loginForm.$invalid">Log In</button>
+            <button class="btn btn-small btn-primary" ng-click="authenticate()">Log In</button>
           </div>
 
           <div class="login-help-link">

@@ -16,6 +16,12 @@ describe('Controller: LoginCtrl', function () {
 
     scope = $rootScope.$new();
 
+    // Mock the login form. Method authenticate checks on it to workaround autofill issue.
+    scope.loginForm = {
+      credUsername: { $setViewValue: function() {} },
+      credPassword: { $setViewValue: function() {} }
+    };
+
     var httpBackend = $injector.get('$httpBackend');
     httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg').respond('foo');
 
