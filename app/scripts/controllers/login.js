@@ -8,9 +8,20 @@ angular.module('nextgearWebApp')
       password: ''
     };
 
+    $scope.validity = {};
+
     $scope.showLoginError = false;
 
     $scope.authenticate = function() {
+      // VO-2579 - Set view value to the username and password fields in case the login credentials
+      // were auto filled by the browser or an extension. This is a known Angular issue.
+      //
+      // source: https://github.com/angular/angular.js/issues/1460
+      $scope.loginForm.credUsername.$setViewValue(angular.element('#credUsername').val());
+      $scope.loginForm.credPassword.$setViewValue(angular.element('#credPassword').val());
+
+      $scope.validity = $scope.validity = angular.copy($scope.loginForm);
+
       if ($scope.credentials.username && $scope.credentials.password) {
         User.authenticate($scope.credentials.username, $scope.credentials.password)
           .then(function(data) {
