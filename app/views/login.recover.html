@@ -40,7 +40,8 @@
             <button class="btn btn-small btn-primary"
                     ng-class="{disabled: !!forgotPasswordForm.userName.$viewValue || submitInProgress }"
                     ng-disabled="!!forgotPasswordForm.userName.$viewValue || submitInProgress"
-                    ng-click="userNameRecovery.submit()">
+                    ng-click="userNameRecovery.submit()"
+                    nxg-track="{{metric.CLICK_LOGIN_USERNAME_RECOVERY_SUBMIT_BUTTON}}">
               Submit
             </button>
           </div>
@@ -97,7 +98,8 @@
             <button class="btn btn-small btn-primary"
                     ng-class="{disabled: !!forgotUserNameForm.email.$viewValue || submitInProgress }"
                     ng-disabled="!!forgotUserNameForm.email.$viewValue || submitInProgress"
-                    ng-click="passwordRecovery.submit()">Submit</button>
+                    ng-click="passwordRecovery.submit()"
+                    nxg-track="{{metric.CLICK_LOGIN_PASSWORD_RECOVERY_SUBMIT_BUTTON}}">Submit</button>
           </div>
         </div><!-- end .well-out -->
       </div>
