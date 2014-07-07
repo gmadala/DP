@@ -1,6 +1,6 @@
-NextGear Capital v3.0.10
+NextGear Capital v3.0.11
 =================================
 
 Fixes included in this release:
 
-VO-2445	  Web: Forgot Your User Name or Password? - Boxes "Forgot Your User Name?" and "Forgot Your Password?" are not aligned once error messages are displayed.
+VO-2579	  VO: Login - Unresponsive Login Button
