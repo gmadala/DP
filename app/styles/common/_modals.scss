@@ -13,13 +13,19 @@
   @extend %small;
   @include border-radius(0);
   width: 320px;
-  max-height: 95%;
+  height: auto;
+  max-height: 90%;
   overflow-y: auto;
   margin-left: -160px;
   border: 1px solid #adadad;
 
   form {
     margin: 0;
+  }
+
+  .search-results { // Uses infinite scroll, so we need overflow:auto and a max height to get it to work.
+    overflow-y: auto;
+    max-height: 350px;
   }
 
   // Modal to go over all other modals
@@ -30,6 +36,10 @@
 
 .modal-subtitle {
   @extend %heavy;
+}
+
+.modal-body {
+  max-height: none;
 }
 
 .modal-header {
