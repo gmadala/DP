@@ -48,30 +48,36 @@ angular.module('nextgearWebApp')
     CLICK_LOGIN_PASSWORD_RECOVERY_SUBMIT_BUTTON: 'Click Login PW Recovery Submit Button',//x
     CLICK_LOGIN_SIGNUP_LINK: 'Click Login SignUp Link',//x
 
-    //Navigational Events
-    CLICK_HOME_LINK: 'Click Home Link',
-    CLICK_FLOOR_A_CAR_LINK: 'Click Floor A Car Link',
-    CLICK_VIEW_A_REPORT_LINK: 'Click View A Report Link',
-    CLICK_VIEW_ANALYTICS_LINK: 'Click View Analytics Link',
-    CLICK_RESOURCES_LINK: 'Click Resources Link',
-    CLICK_DASHBOARD_LINK: 'Click Dashboard Link',
-    CLICK_PAYMENTS_LINK: 'Click Payments Link',
-    CLICK_SCHEDULED_PAYMENTS_LINK: 'Click Scheduled Payments Link',
-    CLICK_RECEIPTS_LINK: 'Click Receipts Link',
-    CLICK_FLOORPLAN_LINK: 'Click Floor Plan Link',
-    CLICK_TITLE_RELEASE_LINK: 'Click Title Release Link',
+    //Navigational Events (see: navBar.js)
+    CLICK_HOME_LINK: 'Click Home Link',//x
+    CLICK_AUCTION_HOME_LINK: 'Click Auction Home Link',//x
+    CLICK_FLOOR_A_CAR_LINK: 'Click Floor A Car Link',//x
+    CLICK_VIEW_A_REPORT_LINK: 'Click View A Report Link',//x
+    CLICK_VIEW_ANALYTICS_LINK: 'Click View Analytics Link',//x
+    CLICK_RESOURCES_LINK: 'Click Resources Link',//x
+    CLICK_AUCTION_RESOURCES_LINK: 'Click Auction Resources Link',//x
+    CLICK_AUCTION_REPORTS_LINK: 'Click Auction Reports Link',//x
+    //2nd tier nav
+    CLICK_DASHBOARD_LINK: 'Click Dashboard Link',//x
+    CLICK_PAYMENTS_LINK: 'Click Payments Link',//x
+    CLICK_SCHEDULED_PAYMENTS_LINK: 'Click Scheduled Payments Link',//x
+    CLICK_RECEIPTS_LINK: 'Click Receipts Link',//x
+    CLICK_FLOORPLAN_LINK: 'Click Floor Plan Link',//x
+    CLICK_TITLE_RELEASE_LINK: 'Click Title Release Link',//x
 
     //Global Events
-    CLICK_NEXTGEAR_LOGO: 'Click NextGear Logo',
-    CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',
-    CLICK_PROFILE_SETTINGS_LINK: 'Click Profile Settings Link',
-    CLICK_ACCOUNT_MANAGEMENT_LINK: 'Click Account Management Link',
-    CLICK_TAKE_BOS_PHOTO: 'Click Take a BOS Photo',
-    CLICK_PRIVACY_STATEMENT_LINK: 'Click Privacy Statement Link',
-    CLICK_CONTACT_US_LINK: 'Click Contact Us Link',
+    CLICK_NEXTGEAR_LOGO: 'Click NextGear Logo',//x
+    CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
+    //Dropdown
+    CLICK_SETTINGS_LINK: 'Click Settings Link',//x
+    CLICK_PROFILE_SETTINGS_LINK: 'Click Profile Settings Link',//x
+    CLICK_ACCOUNT_MANAGEMENT_LINK: 'Click Account Management Link',//x
+    CLICK_LOGOUT_LINK: 'Click Logout Link',//x
+    //Footer
+    CLICK_PRIVACY_STATEMENT_LINK: 'Click Privacy Statement Link',//x
+    CLICK_CONTACT_US_LINK: 'Click Contact Us Link',//x
 
     //Dashboard Events
-    VIEW_DASHBOARD: 'View Dashboard',
     CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',
     CLICK_DASHBOARD_CALENDAR_WEEK_BUTTON: 'Click Dashboard Calendar Week Button',
     CLICK_DASHBOARD_CALENDAR_MONTH_BUTTON: 'Click Dashboard Calendar Month Button',
