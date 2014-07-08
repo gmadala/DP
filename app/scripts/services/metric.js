@@ -116,16 +116,14 @@ angular.module('nextgearWebApp')
     CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF: 'Click Payments Vehicle Unschedule Payoff',//x
 
     //Scheduled Payments Events
-    VIEW_SCHEDULED_PAYMENTS_PAGE: 'View Scheduled Payments Page',
-    CLICK_SCHEDULED_PAYMENTS_SEARCH_INPUT: 'Click Scheduled Payments Search Input',
     CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Scheduled Payments Clear Search Link',//x
     CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON: 'Click Scheduled Payments Search Button',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_BY_PAYMENT_STATUS: 'Click Scheduled Payments Filter By Payment Status',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_BY_INVENTORY_LOCATION: 'Click Scheduled Payments Filter By Inventory Location',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Scheduled Payments Filter From Date Input',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Scheduled Payments Filter To Date Input',//x
-    CLICK_SCHEDULED_PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Scheduled Payments Vehicle Expand Information',
-    CLICK_SCHEDULED_PAYMENTS_VEHICLE_DETAILED_REPORT: 'Click Scheduled Payments Vehicle Detailed Report',
+    CLICK_SCHEDULED_PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Scheduled Payments Vehicle Expand Information',//x
+    CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON: 'Click Scheduled Payments Vehicle Cancel Fee Button',
 
     //Checkout Events
     CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Checkout Panel Continue to Checkout Button',
