@@ -10,12 +10,12 @@
 <header ng-show="navState.current.showNavBar">
   <div class="row-fluid">
     <div class="container-fluid app-header">
-      <a ng-href="{{user.homeLink()}}" class="navLink ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="navLink ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
         <div class="span4 nxg-logo"></div>
       </a>
 
       <div class="span2 offset3 chat">
-        <a ng-show="user.isDealer()" nxg-chat-with-us><i class="glyphicon glyphicon-comment"></i>Chat Now!</a>
+        <a ng-show="user.isDealer()" nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"><i class="glyphicon glyphicon-comment"></i>Chat Now!</a>
       </div>
       <div class="span3 pull-right dealer-info">
         <div class="row-fluid">
@@ -28,14 +28,14 @@
             <div class="nxg-settings dropdown-menu">
               <ul class="unstyled">
                 <li>
-                  <a href="#/act/settings" ng-show="!user.isDealer()">Settings</a>
-                  <a href="#/profile_settings" ng-show="user.isDealer()">Profile Settings</a>
+                  <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}">Settings</a>
+                  <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}">Profile Settings</a>
                 </li>
                 <li>
-                  <a ng-href="#/account_management" ng-show="user.isDealer()">Account Management</a>
+                  <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}">Account Management</a>
                 </li>
                 <li>
-                  <button class="btn btn-mini btn-secondary" ng-click="user.logout()">Sign Out</button>
+                  <button class="btn btn-mini btn-secondary" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</button>
                 </li>
               </ul>
             </div>
@@ -48,7 +48,7 @@
     <div class="container-fluid row-fluid">
       <nav role="navigation" class="span9">
         <span ng-repeat="link in user.navLinks()" >
-          <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+          <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
         </span>
       </nav>
     </div>

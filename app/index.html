@@ -31,7 +31,7 @@
 
     <footer class="row-fluid">
         &copy; 2013 NextGear Capital, Inc. All Rights Reserved. 1320 City Center Drive, Suite 100 Carmel, IN 46032 <nxg-customer-support-phone></nxg-customer-support-phone>
-        <a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank">Privacy Statement</a> | <a href="http://www.nextgearcapital.com/contact.php" target="_blank">Contact Us</a>
+        <a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}">Privacy Statement</a> | <a href="http://www.nextgearcapital.com/contact.php" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}">Contact Us</a>
     </footer>
 
     <!-- Bypass to Clicky's eventqueue cookie issue  -->
@@ -196,8 +196,10 @@
     <!-- endbuild -->
 
     <!-- processhtml:remove -->
-    <!--<script src="scripts/config/nxgConfig.mock.js"></script>-->
-    <!--<script src="scripts/dev/autologin.js"></script>-->
+    <!-- -->
+    <script src="scripts/config/nxgConfig.mock.js"></script>
+    <!-- -->
+    <script src="scripts/dev/autologin.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
 
     <!-- /processhtml -->
