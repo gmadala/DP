@@ -96,7 +96,6 @@ angular.module('nextgearWebApp')
     CLICK_DASHBOARD_VIEW_RECEIPTS: 'Click Dashboard View Receipts',//x
 
     //Payments Events
-    VIEW_PAYMENTS_PAGE: 'View Payments Page',
     CLICK_PAYMENTS_SEARCH_INPUT: 'Click Payments Search Input',
     CLICK_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Payments Clear Search Link',//x
     CLICK_PAYMENTS_SEARCH_BUTTON: 'Click Payments Search Button',//x

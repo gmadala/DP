@@ -53,21 +53,21 @@
     <div class="span3 well payment-summary">
       <h4>Payments Summary</h4>
       <ul class="well-out">
-        <li class="link" ng-click="filterPayments('overdue')">
+        <li class="link" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
           <span class="item-total" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
           <span ng-pluralize
                 count="dashboardData.OverduePayments"
                 when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
           <p ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</p>
         </li>
-        <li class="link" ng-click="filterPayments('today')">
+        <li class="link" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
           <span class="item-total" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
           <span ng-pluralize
                 count="dashboardData.PaymentsDueToday"
                 when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
           <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
         </li>
-        <li class="link" ng-click="filterPayments('this-week')">
+        <li class="link" ng-click="filterPayments('this-week')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
           <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
           <span ng-pluralize
                 count="dashboardData.UpcomingPayments"
@@ -75,14 +75,14 @@
           <span>This {{ viewMode | capitalize }}</span>
           <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
         </li>
-        <li class="link" ng-click="filterPayments()">
+        <li class="link" ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
           <span class="item-total">{{dashboardData.AccountFees}}</span>
           <span ng-pluralize
                 count="dashboardData.AccountFees"
                 when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
           <p>{{dashboardData.AccountFeeAmount | currency}}</p>
         </li>
-        <a class="more btn btn-mini" href="#/home/payments">
+        <a class="more btn btn-mini" href="#/home/payments" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
           <span class="glyphicon glyphicon-eye-open"></span>
           View All Payments
         </a>
@@ -257,7 +257,7 @@
         </div>
       </div>
 
-      <a class="more btn btn-mini" href="javascript:void(0)" ng-click="onRequestCredIncr()">
+      <a class="more btn btn-mini" href="javascript:void(0)" ng-click="onRequestCredIncr()" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON}}">
         Request Credit Increase
       </a>
     </div>
@@ -319,7 +319,7 @@
           </td>
         </tr>
       </table>
-      <a class="more btn btn-mini" href="#/home/floorplan">
+      <a class="more btn btn-mini" href="#/home/floorplan" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
         <span class="glyphicon glyphicon-eye-open"></span>
         View Floor Plan
       </a>
@@ -336,11 +336,11 @@
           <td>#{{ receipt.ReceiptNumber }}</td>
           <td> <strong>{{ receipt.ReceiptAmount | currency }} <strong></td>
           <td>
-            <a ng-href="{{ receipt.$receiptURL }}" target="_blank">View</a>
+            <a ng-href="{{ receipt.$receiptURL }}" target="_blank" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_RECEIPTS}}">View</a>
           </td>
         </tr>
       </table>
-      <a class="more btn btn-mini" href="#/home/receipts">
+      <a class="more btn btn-mini" href="#/home/receipts" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
         <span class="glyphicon glyphicon-eye-open"></span>
         View All Receipts
       </a>
