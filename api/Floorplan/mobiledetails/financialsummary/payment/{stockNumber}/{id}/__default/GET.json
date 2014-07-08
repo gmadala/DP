@@ -1,0 +1,38 @@
+{
+  "Success": true,
+  "Message": "sample string 2",
+  "Data": {
+    "FloorplanId" :"fe1738f8-8baba-442c-8bfa-d6f33acb24fa",
+    "StockNumber": 33,
+    "FloorplanStatusName": "Approved",
+    "Description": "2008 Toyota Tacoma 4X4 Blue",
+    "EffectiveDate": "2014-04-01",
+    "ReceiptNumber": 2908472,
+    "PaymentDate": "2014-04-05",
+    "PaymentMethod": "ACH",
+    "Account": "Capital Bank – 9231",
+    "InterestPaid": 44.66,
+    "PrincipalPaid": 270.50,
+    "CollateralProtectionPaid": 0.0,
+    "PaymentItems": [
+      {
+        "ItemName": "Interest",
+        "ItemAmount": 44.66
+      },
+      {
+        "ItemName": "Principal",
+        "ItemAmount": 270.50
+      },
+      {
+        "ItemName": "Fee - Floorplan/Curtailment",
+        "ItemAmount": 85.00
+      },
+      {
+        "ItemName": "Fee - Record Services",
+        "ItemAmount": 18.00
+      }
+    ],
+    "TotalPaymentAmount": 423.50,
+    "ReceiptTotal": 500.25
+  }
+}

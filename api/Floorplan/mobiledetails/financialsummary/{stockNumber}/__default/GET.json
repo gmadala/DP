@@ -1,0 +1,37 @@
+{
+  "Success": true,
+  "Message": "sample string 2",
+  "Data": {
+    "FloorplanId": "fe1738f8-8baba-442c-8bfa-d6f33acb24fa",
+    "StockNumber": 33,
+    "FloorplanStatusName": "Approved",
+    "Description": "2008 Toyota Tacoma 4X4 Blue",
+    "FloorplanTotal": 14254.30,
+    "TotalPaid": 11409.77,
+    "TotalOutstanding": 9000.00,
+    "InterestPaid": 1000.00,
+    "PrincipalPaid": 1000.00,
+    "CollateralProtectionPaid": 1000.00,
+    "FeesPaid": 1000.00,
+    "InterestOutstanding": 1000.00,
+    "PrincipalOutstanding": 1000.00,
+    "CollateralProtectionOutstanding": 1000.00,
+    "FeesOutstanding": 1000.00,
+    "FloorplanActivity": [
+      {
+        "ActivityId":"fe1738f8-8baba-442c-8bfa-d6f33acb24fa",
+        "IsPayment": true,
+        "IsFee": false,
+        "ActivityDate": "2014-04-01",
+        "ActivityAmount": -586.38
+      },
+      {
+        "ActivityId":"fe1228f8-8baba-442c-8bfa-d6f33acb24fa",
+        "IsPayment": false,
+        "IsFee": true,
+        "ActivityDate": "2014-03-23",
+        "ActivityAmount": 77.00
+      }
+    ]
+  }
+}
