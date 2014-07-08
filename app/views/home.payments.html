@@ -6,6 +6,10 @@
              prompt="Stock # or VIN"
              metric-search="{{metric.CLICK_PAYMENTS_SEARCH_BUTTON}}"
              metric-clear-search="{{metric.CLICK_PAYMENTS_CLEAR_SEARCH_LINK}}"
+             metric-filter-by-input="{{metric.CLICK_PAYMENTS_FILTER_BY_DUE_DATE}}"
+             metric-filter-from-date="{{metric.CLICK_PAYMENTS_FILTER_FROM_DATE_INPUT}}"
+             metric-filter-to-date="{{metric.CLICK_PAYMENTS_FILTER_TO_DATE_INPUT}}"
+             metric-filter-by-inventory-location="{{metric.CLICK_PAYMENTS_FILTER_BY_INVENTORY_LOCATION}}"
              filter-label="Filter by Due Date"
              filter-options="payments.filterOptions"
              active-criteria="payments.proposedSearchCriteria"
@@ -122,7 +126,7 @@
                 <li class="table-list-row" ng-repeat="payment in payments.results">
                   <div class="main-info">
                     <div class="cell pay-more">
-                      <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed">
+                      <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed" nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_EXPAND_INFORMATION}}">
                         <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span></button>
                     </div>
 
@@ -136,7 +140,7 @@
                     <div class="cell pay-due">
                       <p>{{ payment.DueDate | moment }}</p>
                       <div class="extension" ng-show="showExtendLink(payment)">
-                        <a ng-click="payments.extension(payment)" href="javascript:void(0)">Request Extension</a>
+                        <a ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}">Request Extension</a>
                       </div>
                       <div class="nxg-payment-due-status"
                          ng-class="getDueStatus(payment, true)"
