@@ -84,15 +84,16 @@ angular.module('nextgearWebApp')
 //    CLICK_DASHBOARD_CALENDAR_BACK_BUTTON: 'Click Dashboard Calendar Back Button',//can't find
 //    CLICK_DASHBOARD_CALENDAR_FORWARD_BUTTON: 'Click Dashboard Calendar Forward Button',//can't find
     CLICK_DASHBOARD_CALENDAR_PAYMENT_LINK: 'Click Dashboard Calendar Payment Link',
-    CLICK_DASHBOARD_PAYMENTS_OVERDUE: 'Click Dashboard Payments Overdue',
-    CLICK_DASHBOARD_PAYMENTS_DUE_TODAY: 'Click Dashboard Payments Due Today',
-    CLICK_DASHBOARD_PAYMENTS_WEEK: 'Click Dashboard Payments Week',
-    CLICK_DASHBOARD_PAYMENTS_FEES: 'Click Dashboard Payments Fees',
-    CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON: 'Click Dashboard Request Credit Increase Button',
-    CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON: 'Click Dashboard Request Payout Button',
-    CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON: 'Click Dashboard View Floor Plan Button',
-    CLICK_DASHBOARD_VIEW_ALL_RECEIPTS: 'Click Dashboard View All Receipts',
-    CLICK_DASHBOARD_VIEW_RECEIPTS: 'Click Dashboard View Receipts',
+    CLICK_DASHBOARD_PAYMENTS_OVERDUE: 'Click Dashboard Payments Overdue',//x
+    CLICK_DASHBOARD_PAYMENTS_DUE_TODAY: 'Click Dashboard Payments Due Today',//x
+    CLICK_DASHBOARD_PAYMENTS_WEEK: 'Click Dashboard Payments Week',//x
+    CLICK_DASHBOARD_PAYMENTS_FEES: 'Click Dashboard Payments Fees',//x
+    CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON: 'Click Dashboard Payments View All Payments Button',//x
+    CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON: 'Click Dashboard Request Credit Increase Button',//x
+    CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON: 'Click Dashboard Request Payout Button',//x
+    CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON: 'Click Dashboard View Floor Plan Button',//x
+    CLICK_DASHBOARD_VIEW_ALL_RECEIPTS: 'Click Dashboard View All Receipts',//x
+    CLICK_DASHBOARD_VIEW_RECEIPTS: 'Click Dashboard View Receipts',//x
 
     //Payments Events
     VIEW_PAYMENTS_PAGE: 'View Payments Page',
