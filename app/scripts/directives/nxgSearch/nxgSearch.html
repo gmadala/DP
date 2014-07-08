@@ -14,8 +14,8 @@
           </div><!-- end .control-group -->
 
           <div class="control-group search-clear-btns">
-            <a href="#" ng-click="clear($event)" title="Clear Search">Clear Search</a>
-            <button class="btn btn-small" type="submit" ng-click="search()">Search</button>
+            <a href="#" ng-click="clear($event)" title="Clear Search" nxg-track="{{metricClearSearch}}">Clear Search</a>
+            <button class="btn btn-small" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">Search</button>
           </div>
         </div><!-- end .span5 -->
 

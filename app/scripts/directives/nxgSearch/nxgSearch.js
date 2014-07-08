@@ -7,6 +7,8 @@ angular.module('nextgearWebApp')
       scope: {
         title: '@',
         prompt: '@',
+        metricSearch: '@',
+        metricClearSearch: '@',
         filterLabel: '@',
         filterOptions: '=', // array of objects with properties label, value
         activeCriteria: '=', // object with properties: query, startDate, endDate, filter, inventoryLocation
