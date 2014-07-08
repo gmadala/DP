@@ -78,11 +78,11 @@ angular.module('nextgearWebApp')
     CLICK_CONTACT_US_LINK: 'Click Contact Us Link',//x
 
     //Dashboard Events
-    CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',
-    CLICK_DASHBOARD_CALENDAR_WEEK_BUTTON: 'Click Dashboard Calendar Week Button',
-    CLICK_DASHBOARD_CALENDAR_MONTH_BUTTON: 'Click Dashboard Calendar Month Button',
-    CLICK_DASHBOARD_CALENDAR_BACK_BUTTON: 'Click Dashboard Calendar Back Button',
-    CLICK_DASHBOARD_CALENDAR_FORWARD_BUTTON: 'Click Dashboard Calendar Forward Button',
+//    CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',//can't find
+    CLICK_DASHBOARD_CALENDAR_WEEK_BUTTON: 'Click Dashboard Calendar Week Button',//x
+    CLICK_DASHBOARD_CALENDAR_MONTH_BUTTON: 'Click Dashboard Calendar Month Button',//x
+//    CLICK_DASHBOARD_CALENDAR_BACK_BUTTON: 'Click Dashboard Calendar Back Button',//can't find
+//    CLICK_DASHBOARD_CALENDAR_FORWARD_BUTTON: 'Click Dashboard Calendar Forward Button',//can't find
     CLICK_DASHBOARD_CALENDAR_PAYMENT_LINK: 'Click Dashboard Calendar Payment Link',
     CLICK_DASHBOARD_PAYMENTS_OVERDUE: 'Click Dashboard Payments Overdue',
     CLICK_DASHBOARD_PAYMENTS_DUE_TODAY: 'Click Dashboard Payments Due Today',
@@ -97,18 +97,18 @@ angular.module('nextgearWebApp')
     //Payments Events
     VIEW_PAYMENTS_PAGE: 'View Payments Page',
     CLICK_PAYMENTS_SEARCH_INPUT: 'Click Payments Search Input',
-    CLICK_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Payments Clear Search Link',
-    CLICK__PAYMENTS_SEARCH_BUTTON: 'Click Payments Search Button',
-    CLICK__PAYMENTS_FILTER_BY_INPUT: 'Click Payments Filter By Input',
-    CLICK__PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Payments Filter From Date Input',
-    CLICK__PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Payments Filter To Date Input',
-    CLICK__PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Payments Vehicle Expand Information',
-    CLICK__PAYMENTS_VEHICLE_DETAILED_REPORT: 'Click Payments Vehicle Detailed Report',
-    CLICK__PAYMENTS_VEHICLE_ADD_PAYMENT: 'Click Payments Vehicle Add Payment',
-    CLICK__PAYMENTS_VEHICLE_ADD_PAYOFF: 'Click Payments Vehicle Add Payoff',
-    CLICK__PAYMENTS_VEHICLE_REMOVE_PAYMENT: 'Click Payments Vehicle Remove Payment',
+    CLICK_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Payments Clear Search Link',//x
+    CLICK_PAYMENTS_SEARCH_BUTTON: 'Click Payments Search Button',//x
+    CLICK_PAYMENTS_FILTER_BY_INPUT: 'Click Payments Filter By Input',
+    CLICK_PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Payments Filter From Date Input',
+    CLICK_PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Payments Filter To Date Input',
+    CLICK_PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Payments Vehicle Expand Information',
+    CLICK_PAYMENTS_VEHICLE_DETAILED_REPORT: 'Click Payments Vehicle Detailed Report',
+    CLICK_PAYMENTS_VEHICLE_ADD_PAYMENT: 'Click Payments Vehicle Add Payment',
+    CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF: 'Click Payments Vehicle Add Payoff',
+    CLICK_PAYMENTS_VEHICLE_REMOVE_PAYMENT: 'Click Payments Vehicle Remove Payment',
     CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF: 'Click Payments Vehicle Remove Payoff',
-    CLICK__PAYMENTS_VEHICLE_VIEW_TITLE: 'Click Payments Vehicle View Title',
+    CLICK_PAYMENTS_VEHICLE_VIEW_TITLE: 'Click Payments Vehicle View Title',
     CLICK_PAYMENTS_ACCOUNT_FEES: 'Click Account Fees: Payment',
 
     //Checkout Events
@@ -126,8 +126,8 @@ angular.module('nextgearWebApp')
      //Scheduled Payments Events
     VIEW_SCHEDULED_PAYMENTS_PAGE: 'View Scheduled Payments Page',
     CLICK_SCHEDULED_PAYMENTS_SEARCH_INPUT: 'Click Scheduled Payments Search Input',
-    CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Scheduled Payments Clear Search Link',
-    CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON: 'Click Scheduled Payments Search Button',
+    CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Scheduled Payments Clear Search Link',//x
+    CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON: 'Click Scheduled Payments Search Button',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_BY_INPUT: 'Click Scheduled Payments Filter By Input',
     CLICK_SCHEDULED_PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Scheduled Payments Filter From Date Input',
     CLICK_SCHEDULED_PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Scheduled Payments Filter To Date Input',
