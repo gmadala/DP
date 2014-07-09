@@ -137,27 +137,21 @@ angular.module('nextgearWebApp')
     //Receipts Events
     CLICK_RECEIPTS_CLEAR_SEARCH_LINK: 'Click Receipts Clear Search Link',//x
     CLICK_RECEIPTS_SEARCH_BUTTON: 'Click Receipts Search Button',//x
-    CLICK_RECEIPTS_FILTER_BY_INPUT: 'Click Receipts Filter By Input',//x
+    CLICK_RECEIPTS_FILTER_BY_INPUT: 'Click Receipts Filter By Payment Method',//x
     CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT: 'Click Receipts Filter From Date Input',//x
     CLICK_RECEIPTS_FILTER_TO_DATE_INPUT: 'Click Receipts Filter To Date Input',//x
     CLICK_RECEIPTS_VIEW_RECEIPT_INPUT: 'Click Receipts View Receipt Input',//x
     CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON: 'Click Receipts View Selected Receipts Button',//x
 
     //FloorPlan Events
-    VIEW_FLOORPLAN_PAGE: 'View FloorPlan Page',
-    CLICK_FLOORPLAN_FILTER_RESULTS_INPUT: 'Click FloorPlan Filter Results Input',
-    CLICK_FLOORPLAN_APPROVED: 'Click Floorplan Approved',
-    CLICK_FLOORPLAN_PENDING: 'Click Floorplan Pending',
-    CLICK_FLOORPLAN_DENIED: 'Click Floorplan Denied',
-    CLICK_FLOORPLAN_COMPLETED: 'Click Floorplan Completed',
-    CLICK_FLOORPLAN_SEARCH_FIELD: 'Click Floorplan Search Field',
-    CLICK_FLOORPLAN_SEARCH_BUTTON: 'Click Floorplan Search Button',
-    CLICK_FLOORPLAN_FILTER_FROM_DATE_INPUT: 'Click Floorplan Filter From Date Input',
-    CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT: 'Click Floorplan Filter To Date Input',
-    FLOORPLAN_SEARCH_TERM: 'Floorplan Search Term',
-    CLICK_FLOORPLAN_VEHICLE_EXPAND_INFORMATION: 'Click Floorplan Vehicle Expand Information',
-    CLICK_FLOORPLAN_VEHICLE_DETAILED_REPORT: 'Click Floorplan Vehicle Detailed Report',
-    CLICK_FLOORPLAN_VEHICLE_VIEW_TITLE: 'Click Floorplan Vehicle View Title',
+    VIEW_FLOORPLAN_PAGE: 'View FloorPlan Page',//x
+    CLICK_FLOORPLAN_SEARCH_BUTTON: 'Click Floorplan Search Button',//x
+    CLICK_FLOORPLAN_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Floorplan Clear Search Link',//x
+    CLICK_FLOORPLAN_FILTER_BY_INPUT: 'Click Floorplan Filter By Flooring Status',//x
+    CLICK_FLOORPLAN_FILTER_FROM_DATE_INPUT: 'Click Floorplan Filter From Date Input',//x
+    CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT: 'Click Floorplan Filter To Date Input',//x
+    CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION: 'Click Floorplan Filter by Inventory Location',//x
+    CLICK_FLOORPLAN_VEHICLE_EXPAND_INFORMATION: 'Click Floorplan Vehicle Expand Information',//x
 
     //Title Release Events
     VIEW_TITLE_RELEASE_PAGE: 'View Title Release Page',
