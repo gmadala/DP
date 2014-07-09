@@ -1,11 +1,9 @@
 <div class="container-line">
   <div class="container-fluid">
+    <div class="row-fluid">
+      <h1>{{ flooringInfo.Description }}</h1>
+    </div>
     <section class="row-fluid">
-      <div class="span12">
-        <!-- Year Make Model Style Color -->
-        <h1>{{ flooringInfo.Description }}</h1>
-      </div>
-
       <section class="span9 first">
         <!-- Flooring Information -->
         <div class="well row-fluid">
@@ -210,7 +208,7 @@
                   <td class="value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</td>
                 </tr>
                 <tr>
-                  <td class="" ng-show="dealerCanRequestTitles()"><button href="" ng-disabled="titleRequestDisabled()">Request the Title</button></td>
+                  <td class="" ng-show="dealerCanRequestTitles()"><button href="" ng-disabled="titleRequestDisabled()" ng-click="requestTitle()">Request the Title</button></td>
                 </tr>
               </table>
             </div>
@@ -220,7 +218,7 @@
 
         <!-- Floor Plan Value Estimates -->
         <div class="well row-fluid">
-          <h4>Floor Plan Value Estimates <span>Zip Code – [zipcode]</span></h4>
+          <h4>Floor Plan Value Estimates <span>Static Blurb</span></h4>
           <div class="row-fluid">
             <div class="span5">
               <table>

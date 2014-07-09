@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, VehicleDetails, User, TitleReleases, api) { //, segmentio, metric) {
-    // segmentio.track();
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, VehicleDetails, User, TitleReleases, api) {
 
     $scope.stockNo = $stateParams.stockNumber;
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
@@ -12,15 +11,54 @@ angular.module('nextgearWebApp')
     $scope.flooringInfo = {};
     $scope.valueInfo = {};
     $scope.financialSummary = {};
+    $scope.landing = {};
 
     VehicleDetails.getVehicleInfo($scope.stockNo).then(function(info) {
       $scope.vehicleInfo = info;
 
-
+      titleForCheckout.UnitMake = info.Make;
+      titleForCheckout.UnitModel = info.Model;
+      titleForCheckout.UnitStyle = info.Style;
+      titleForCheckout.UnitVin = info.UnitVin;
+      titleForCheckout.UnitYear = info.Year;
+      titleForCheckout.Color = info.Color;
+      titleForCheckout.StockNumber = info.StockNumber;
     });
+
+    // We'll populate this title object as api calls are finished, for use if the user requests the title
+    var titleForCheckout = {
+      AmountFinanced: null,
+      Color: null,
+      DaysOnFloorplan: null,
+      FlooringDate: null,
+      FloorplanId: null,
+      FloorplanStatusName: null,
+      SellerName: null,
+      StockNumber: $scope.stockNo,
+      TitleImageAvailable: null,
+      TitleReleaseDate: null,
+      TitleReleaseLocation: null,
+      TitleReleaseProgramStatus: null,
+      UnitMake: null,
+      UnitModel: null,
+      UnitStyle: null,
+      UnitVin: null,
+      UnitYear: null
+    };
+
+    var paymentForCheckout;
 
     VehicleDetails.getTitleInfo($scope.stockNo).then(function(info) {
       $scope.titleInfo = info;
+
+      titleForCheckout.AmountFinanced = info.AmountFinanced;
+      titleForCheckout.FloorplanId = info.FloorplanId;
+      titleForCheckout.FloorplanStatusName = info.FloorplanStatusName;
+      titleForCheckout.TitleReleaseProgramStatus = info.TitleReleaseProgramStatus;
+      titleForCheckout.TitleImageAvailable = info.TitleImageAvailable;
+      titleForCheckout.TitleReleaseDate = info.TitleReleaseDate;
+      titleForCheckout.TitleReleaseLocation = info.TitleReleaseLocation;
+      titleForCheckout.TitleImageAvailable = info.TitleImageAvailable;
 
       var displayId =  User.getInfo().BusinessNumber + '-' + $scope.titleInfo.StockNumber;
       $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + $scope.titleInfo.StockNumber); // 0 = not first page only
@@ -60,7 +98,8 @@ angular.module('nextgearWebApp')
     };
 
     $scope.requestTitle = function() {
-
+      TitleReleases.addToQueue(titleForCheckout);
+      $state.transitionTo('home.titleReleaseCheckout');
     };
 
     VehicleDetails.getFlooringInfo($scope.stockNo).then(function(info) {
@@ -79,6 +118,10 @@ angular.module('nextgearWebApp')
         State: info.InventoryAddressState,
         Zip: info.InventoryAddressZip
       };
+
+      titleForCheckout.FlooringDate = info.FlooringDate;
+      titleForCheckout.DaysOnFloorplan = info.TotalDaysFloored;
+      titleForCheckout.SellerName = info.SellerName;
 
       $scope.flooringInfo = info;
       $scope.currentLocation = info.inventoryAddress;
