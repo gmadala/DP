@@ -126,17 +126,13 @@
                 <li class="table-list-row" ng-repeat="payment in payments.results">
                   <div class="main-info">
                     <div class="cell pay-more">
-                      <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed" nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_EXPAND_INFORMATION}}">
-                        <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span></button>
                     </div>
-
                     <div class="cell pay-desc">
                       <p>{{ payment.UnitDescription }}</p>
                       <p><span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span><br/>
                         Stock #: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span>
                       </p>
-                      <a href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">Temp Link to Vehicle Details</a>
-
+                      <br/><a href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">Temp Link to Vehicle Details</a>
                     </div>
 
                     <div class="cell pay-due">
@@ -168,10 +164,6 @@
                       <a ng-href="{{ payment.$titleURL }}" nxg-track="{{ metric.VIEW_TITLE }}" target="_blank">View</a>
                     </div>
                   </div><!-- end .main-info div -->
-
-                <div collapse="isCollapsed" class="vehicle-details">
-                    <div vehicle-details collapse="isCollapsed" stock-number="payment.StockNumber"></div>
-                </div><!-- end more-details div -->
               </li>
             </ul>
           </div><!-- end payments list -->

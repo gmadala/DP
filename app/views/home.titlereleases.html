@@ -62,16 +62,11 @@
           <li class="table-list-row" ng-repeat="item in data.results">
             <div class="main-info">
               <div class="cell title-more">
-                <button class="btn btn-more"
-                        ng-click="isCollapsed = !isCollapsed"
-                        class="more btn btn-mini">
-                  <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
-                </button>
               </div>
-
               <div class="cell title-desc">
                 <p nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></p>
                 <p><span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+                <br/><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">Temp Link to Vehicle Details</a>
               </div>
               <div class="cell title-stock">
                 <p nxg-highlight="item.StockNumber" highlight="item.data.query"></p>
@@ -106,11 +101,6 @@
                 </div>
               </div>
             </div><!-- end .main-info -->
-
-            <div collapse="isCollapsed" class="vehicle-details">
-              <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
-            </div><!-- end .vehicle-details div -->
-
           </li><!-- end .table-list-row -->
         </ul><!-- end .floor-list -->
         <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
