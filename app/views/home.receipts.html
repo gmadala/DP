@@ -3,6 +3,11 @@
     <div nxg-search
        title="Receipt Search"
        class="search-form"
+       metric-search="{{metric.CLICK_RECEIPTS_SEARCH_BUTTON}}"
+       metric-clear-search="{{metric.CLICK_RECEIPTS_CLEAR_SEARCH_LINK}}"
+       metric-filter-by-input="{{metric.CLICK_RECEIPTS_FILTER_BY_INPUT}}"
+       metric-filter-from-date="{{metric.CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT}}"
+       metric-filter-to-date="{{metric.CLICK_RECEIPTS_FILTER_TO_DATE_INPUT}}"
        prompt="Receipt #, Stock #, VIN, Check #, Make, Model or Year"
        filter-label="Filter by Payment Method"
        filter-options="filterOptions"
@@ -58,7 +63,7 @@
               <span class="header-text">Amount Provided</span>
             </div>
             <div class="cell rec-view">
-              <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0">View Selected Receipts</button>
+              <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">View Selected Receipts</button>
             </div>
           </li>
 
@@ -98,7 +103,9 @@
               <p>{{ receipt.AmountProvided | currency }}</p>
             </div>
             <div class="cell rec-view">
-               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]" ng-model="selectedReceipts[$index]" />
+               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]"
+                      ng-model="selectedReceipts[$index]"
+                      nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
               <label for="{{ receipt.TransactionNumber }}"></label>
             </div>
           </li>
