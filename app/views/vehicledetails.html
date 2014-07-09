@@ -1,0 +1,267 @@
+<div class="container-line">
+  <div class="container-fluid">
+    <section class="row-fluid">
+      <div class="span12">
+        <!-- Year Make Model Style Color -->
+        <h1>{{ flooringInfo.Description }}</h1>
+      </div>
+
+      <section class="span9 first">
+        <!-- Flooring Information -->
+        <div class="well row-fluid">
+          <h4>Flooring Information</h4>
+          <div class="span5 first">
+            <table>
+               <tr>
+                <td class="">Total Days Floored</td>
+                <td class="value">{{ flooringInfo.TotalDaysFloored }} (of {{ flooringInfo.TotalTermPlanLength }} days)</td>
+              </tr>
+              <tr>
+                <td class="">Original Term</td>
+                <td class="value">{{ flooringInfo.OriginalTermDaysFloored }} (of {{ flooringInfo.OriginalTermPlanLength }} days)</td>
+              </tr>
+              <tr>
+                <td class="">Extended Term</td>
+                <td class="value">{{ flooringInfo.ExtendedTermDaysFloored }} (of {{ flooringInfo.ExtendedTermPlanLength }} days)</td>
+              </tr>
+              <tr>
+                <td class="">Status</td>
+                <td class="value">{{ flooringInfo.FloorplanStatusName }}</td>
+              </tr>
+              <tr>
+                <td class="">Stock Number</td>
+                <td class="value">{{ flooringInfo.StockNumber }}</td>
+              </tr>
+              <tr>
+                <td class="">Purchase Date</td>
+                <td class="value">{{ flooringInfo.PurchaseDate | moment }}</td>
+              </tr>
+              <tr>
+                <td class="">Date Submitted</td>
+                <td class="value">{{ flooringInfo.SubmittedDate | moment }}</td>
+              </tr>
+              <tr>
+                <td class="">Floor Date</td>
+                <td class="value">{{ flooringInfo.FlooringDate | moment }}</td>
+              </tr>
+              <tr>
+                <td class="">Finance Amount</td>
+                <td class="value">{{ flooringInfo.FinanceAmount | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">Purchase Amount</td>
+                <td class="value">{{ flooringInfo.PurchaseAmount | currency }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="span7 last">
+            <table>
+              <tr>
+                <td class="">Line of Credit</td>
+                <td class="value">{{ flooringInfo.LineOfCredit }}</td>
+              </tr>
+              <tr>
+                <td class="">Term Plan Name</td>
+                <td class="value">{{ flooringInfo.TermPlanName }}</td>
+              </tr>
+              <tr>
+                <td class="">Product Type</td>
+                <td class="value">{{ flooringInfo.ProductType }}</td>
+              </tr>
+              <tr>
+                <td class="">Seller</td>
+                <td class="value">{{ flooringInfo.SellerName }}</td>
+              </tr>
+              <tr>
+                <td class="">Seller Address</td>
+                <td class="value">{{ flooringInfo.sellerAddress | address }}</td>
+              </tr>
+              <tr>
+                <td class="">Inventory Location</td>
+                <td class="value" ng-hide="showEditInventoryLocation">
+                  {{ flooringInfo.inventoryAddress | address }}
+                  <span ng-show="showChangeLink"><br/>
+                    <a href="" ng-click="showInventorySelect()">Change Inventory Location</a>
+                  </span>
+                </td>
+                <td class="value" ng-show="showEditInventoryLocation">
+                  Select Below:
+                </td>
+              </tr>
+              <tr ng-show="showEditInventoryLocation">
+                <td>
+                  <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
+                  <div>
+                    <button class="" ng-click="cancelInventoryChanges()">Cancel Changes</button>
+                    <button class="" ng-click="saveInventoryChanges()">Save Location</button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- end Flooring Information -->
+
+        <!-- Payment Activity -->
+        <div class="well row-fluid">
+          <h4>Payment Activity <a ng-href="{{ historyReportUrl }}">View the Vehicle History Report</a></h4>
+          <div class="span7">
+            This is where Paid & Outstanding Charts and their legends will go.
+          </div>
+          <div class="span5">
+            <table>
+              <tr>
+                <td class="heavy">Payment Breakdown</td>
+              </tr>
+              <tr>
+                <td class="">Finance Amount</td>
+                <td class="value">{{ financialSummary.breakdown.financeAmount | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">{{ financialSummary.breakdown.interestFeesLabel }}</td>
+                <td class="value">{{ financialSummary.breakdown.interestFeesCPP | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">Floor Plan Total</td>
+                <td class="value">{{ financialSummary.FloorplanTotal | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">Total Paid</td>
+                <td class="value">{{ financialSummary.TotalPaid | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">Total Outstanding</td>
+                <td class="value">{{ financialSummary.TotalOutstanding | currency }}</td>
+              </tr>
+              <tr>
+                <td class="">
+                  <a ng-href="">Interest-only payment ({{ financialSummary.InterestOutstanding | currency }})</a></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- pull-down button for payment activity goes here -->
+        <!-- end Payment Activity -->
+
+        <div class="row-fluid">
+          <!-- Vehicle Information -->
+          <div class="well span6">
+            <h4>Vehicle Information <span>Stock #{{ stockNo }}</span></h4>
+            <div class="row-fluid">
+              <table>
+                <tr>
+                  <td class="">VIN</td>
+                  <td class="value">{{ vehicleInfo.UnitVin }}</td>
+                </tr>
+                <tr>
+                  <td class="">Make</td>
+                  <td class="value">{{ vehicleInfo.Make }}</td>
+                </tr>
+                <tr>
+                  <td class="">Model</td>
+                  <td class="value">{{ vehicleInfo.Model }}</td>
+                </tr>
+                <tr>
+                  <td class="">Style</td>
+                  <td class="value">{{ vehicleInfo.Style }}</td>
+                </tr>
+                <tr>
+                  <td class="">Color</td>
+                  <td class="value">{{ vehicleInfo.Color }}</td>
+                </tr>
+                <tr>
+                  <td class="">Year</td>
+                  <td class="value">{{ vehicleInfo.Year }}</td>
+                </tr>
+                <tr>
+                  <td class="">Current Mileage</td>
+                  <td class="value">{{ vehicleInfo.CurrentMileage }}</td>
+                </tr>
+                <tr>
+                  <td class="">Salvage</td>
+                  <td class="value">{{ {true: 'Yes', false: 'No'}[!!vehicleInfo.Salvage] }}</td>
+                </tr>
+              </table>
+
+            </div>
+          </div>
+          <!-- end Vehicle Information -->
+
+          <!-- Title Information -->
+          <div class="well span6">
+            <h4>Title Information <a ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h4>
+            <div class="row-fluid">
+              <table>
+                <tr>
+                  <td class="">Title Location</td>
+                  <td class="value">{{ titleInfo.TitleLocation }}</td>
+                </tr>
+                <tr>
+                  <td class="">Title State</td>
+                  <td class="value">{{ titleInfo.TitleState }}</td>
+                </tr>
+                <tr>
+                  <td class="">Tracking Number</td>
+                  <td class="value">{{ titleInfo.TitleTrackingNumber }}</td>
+                </tr>
+                <tr>
+                  <td class="">Disbursement Date</td>
+                  <td class="value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</td>
+                </tr>
+                <tr>
+                  <td class="" ng-show="dealerCanRequestTitles()"><button href="" ng-disabled="titleRequestDisabled()">Request the Title</button></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- end Title Information -->
+        </div>
+
+        <!-- Floor Plan Value Estimates -->
+        <div class="well row-fluid">
+          <h4>Floor Plan Value Estimates</h4>
+          <div class="row-fluid">
+            <div class="span5">
+              <table>
+                <tr>
+                  <td class="">Extra Clean</td>
+                  <td class="value">{{ valueInfo.ExtraCleanValue | currency }}</td>
+                </tr>
+                <tr>
+                  <td class="">Clean</td>
+                  <td class="value">{{ valueInfo.CleanValue | currency }}</td>
+                </tr>
+                <tr>
+                  <td class="">Average</td>
+                  <td class="value">{{ valueInfo.AverageValue | currency }}</td>
+                </tr>
+                <tr>
+                  <td class="">Rough</td>
+                  <td class="value">{{ valueInfo.RoughValue | currency }}</td>
+                </tr>
+              </table>
+            </div>
+            <div class="span7">
+
+              <table>
+                <tr>
+                  <td>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}<br/>Minimum</td>
+                  <td>{{ valueInfo.NextGearRegionalAveragePurchasePrice | currency }}<br/>Average</td>
+                  <td>{{ valueInfo.NextGearRegionalMaxPurchasePrice | currency }}<br/>Maximum</td>
+                </tr>
+              </table>
+              <p>NextGear Regional Values are based on the first 3 digits of your zip code.</p>
+            </div>
+          </div>
+        </div>
+        <!-- end Floor Plan Value Estimates -->
+
+      </section>
+
+      <section class="span3 last">
+
+      </section>
+    </section>
+  </div>
+</div>

@@ -95,6 +95,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         showNavBar: true
       })
 
+      .state('vehicledetails', {
+        url: '/vehicledetails?stockNumber',
+        templateUrl: 'views/vehicledetails.html',
+        controller: 'VehicleDetailsCtrl',
+        showNavBar: true
+      })
       .state('floorcar', {
         url: '/floorcar',
         templateUrl: 'views/floorcar.html',

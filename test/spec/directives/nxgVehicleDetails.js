@@ -19,41 +19,41 @@ describe('Directive: nxgVehicleDetails', function () {
     $rootScope.$digest();
   }));
 
-  it('should expose stock number and collapse variables on isolate scope', function() {
-    var iScope = element.scope();
+  // it('should expose stock number and collapse variables on isolate scope', function() {
+  //   var iScope = element.scope();
 
-    expect(iScope.stockNumber).toBe(stockMock);
-    expect(iScope.collapse).toBe(true);
-  })
+  //   expect(iScope.stockNumber).toBe(stockMock);
+  //   expect(iScope.collapse).toBe(true);
+  // })
 
-  describe('controller', function() {
-    var ctrl,
-    scope,
-    detailsMock;
+  // describe('controller', function() {
+  //   var ctrl,
+  //   scope,
+  //   detailsMock;
 
-    beforeEach(inject(function ($controller, $rootScope, $compile, VehicleDetails) {
-      scope = element.scope();
-      elem = $compile(element)(scope);
+  //   beforeEach(inject(function ($controller, $rootScope, $compile, VehicleDetails) {
+  //     scope = element.scope();
+  //     elem = $compile(element)(scope);
 
-      VehicleDetails.getDetails = function(stock) {
-        return {
-          then: function(success) {
-            success({ foo: 'hey', bar: 'there' });
-          }
-        };
-      };
+  //     VehicleDetails.getDetails = function(stock) {
+  //       return {
+  //         then: function(success) {
+  //           success({ foo: 'hey', bar: 'there' });
+  //         }
+  //       };
+  //     };
 
-      detailsMock = VehicleDetails;
-    }));
+  //     detailsMock = VehicleDetails;
+  //   }));
 
-    it('should load the vehicle detail info when uncollapsed', function() {
-      spyOn(detailsMock, 'getDetails').andCallThrough();
-      expect(scope.vehicleDetails).not.toBeDefined();
-      scope.collapse = false;
-      scope.$apply();
+  //   it('should load the vehicle detail info when uncollapsed', function() {
+  //     spyOn(detailsMock, 'getDetails').andCallThrough();
+  //     expect(scope.vehicleDetails).not.toBeDefined();
+  //     scope.collapse = false;
+  //     scope.$apply();
 
-      expect(detailsMock.getDetails).toHaveBeenCalled();
-      expect(scope.vehicleDetails).toEqual({ foo: 'hey', bar: 'there' });
-    });
-  });
+  //     expect(detailsMock.getDetails).toHaveBeenCalled();
+  //     expect(scope.vehicleDetails).toEqual({ foo: 'hey', bar: 'there' });
+  //   });
+  // });
 });
