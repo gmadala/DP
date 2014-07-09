@@ -135,17 +135,13 @@ angular.module('nextgearWebApp')
     CLICK_CHECKOUT_SELECT_ACCOUNT: 'Click Checkout Select Account',//x
 
     //Receipts Events
-    VIEW_RECEIPTS_PAGE: 'View Receipts Page',
-    CLICK_RECEIPTS_SEARCH_INPUT: 'Click Receipts Search Input',
-    CLICK_RECEIPTS_CLEAR_SEARCH_LINK: 'Click Receipts Clear Search Link',
-    CLICK_RECEIPTS_SEARCH_BUTTON: 'Click Receipts Search Button',
-    CLICK_RECEIPTS_FILTER_BY_INPUT: 'Click Receipts Filter By Input',
-    CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT: 'Click Receipts Filter From Date Input',
-    CLICK_RECEIPTS_FILTER_TO_DATE_INPUT: 'Click Receipts Filter To Date Input',
-    CLICK_RECEIPTS_VEHICLE_EXPAND_INFORMATION: 'Click Receipts Vehicle Expand Information',
-    CLICK_RECEIPTS_VEHICLE_DETAILED_REPORT: 'Click Receipts Vehicle Detailed Report',
-    CLICK_RECEIPTS_VIEW_RECEIPT_INPUT: 'Click Receipts View Receipt Input',
-    CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON: 'Click Receipts View Selected Receipts Button',
+    CLICK_RECEIPTS_CLEAR_SEARCH_LINK: 'Click Receipts Clear Search Link',//x
+    CLICK_RECEIPTS_SEARCH_BUTTON: 'Click Receipts Search Button',//x
+    CLICK_RECEIPTS_FILTER_BY_INPUT: 'Click Receipts Filter By Input',//x
+    CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT: 'Click Receipts Filter From Date Input',//x
+    CLICK_RECEIPTS_FILTER_TO_DATE_INPUT: 'Click Receipts Filter To Date Input',//x
+    CLICK_RECEIPTS_VIEW_RECEIPT_INPUT: 'Click Receipts View Receipt Input',//x
+    CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON: 'Click Receipts View Selected Receipts Button',//x
 
     //FloorPlan Events
     VIEW_FLOORPLAN_PAGE: 'View FloorPlan Page',
