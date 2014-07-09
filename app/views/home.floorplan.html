@@ -4,6 +4,12 @@
       title="Floor Plan Search"
       class="search-form"
       prompt="Stock #, VIN, Make, Model, or Year"
+      metric-search="{{metric.CLICK_FLOORPLAN_SEARCH_BUTTON}}"
+      metric-clear-search="{{metric.CLICK_FLOORPLAN_PAYMENTS_CLEAR_SEARCH_LINK}}"
+      metric-filter-by-input="{{metric.CLICK_FLOORPLAN_FILTER_BY_INPUT}}"
+      metric-filter-from-date="{{metric.CLICK_FLOORPLAN_FILTER_FROM_DATE_INPUT}}"
+      metric-filter-to-date="{{metric.CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT}}"
+      metric-filter-by-inventory-location="{{metric.CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION}}"
       filter-label="Filter by Flooring Status"
       filter-options="filterOptions"
       active-criteria="proposedSearchCriteria"
@@ -77,6 +83,7 @@
               <div class="cell fl-more">
                 <button class="btn btn-more"
                         ng-click="isCollapsed = !isCollapsed"
+                        nxg-track="{{metric.CLICK_FLOORPLAN_VEHICLE_EXPAND_INFORMATION}}"
                         class="more btn btn-mini">
                   <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
                 </button>
