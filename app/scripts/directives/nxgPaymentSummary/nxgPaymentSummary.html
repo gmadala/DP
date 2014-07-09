@@ -31,7 +31,8 @@
     <h4 class="subtotal">Subtotal: <span class="value">{{ getSubtotal() | currency }}</span></h4>
     <button class="btn btn-primary btn-checkout"
             ng-disabled="paymentQueue.isEmpty()"
-            ng-click="navigate('home.checkout')">
+            ng-click="navigate('home.checkout')"
+            nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
       <span class="ie-text">Continue to Checkout</span>
     </button>
   </div>

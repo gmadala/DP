@@ -103,7 +103,6 @@ angular.module('nextgearWebApp')
     CLICK_PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Payments Filter From Date Input',//x
     CLICK_PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Payments Filter To Date Input',//x
     CLICK_PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Payments Vehicle Expand Information',//x
-//    CLICK_PAYMENTS_VEHICLE_DETAILED_REPORT: 'Click Payments Vehicle Detailed Report',//can't find
     CLICK_PAYMENTS_REQUEST_EXTENSION: 'Click Payments Request Extension',//x
     CLICK_PAYMENTS_VEHICLE_ADD_FEE: 'Click Payments Vehicle Add Fee',//x
     CLICK_PAYMENTS_VEHICLE_ADD_PAYMENT: 'Click Payments Vehicle Add Payment',//x
@@ -123,19 +122,17 @@ angular.module('nextgearWebApp')
     CLICK_SCHEDULED_PAYMENTS_FILTER_FROM_DATE_INPUT: 'Click Scheduled Payments Filter From Date Input',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_TO_DATE_INPUT: 'Click Scheduled Payments Filter To Date Input',//x
     CLICK_SCHEDULED_PAYMENTS_VEHICLE_EXPAND_INFORMATION: 'Click Scheduled Payments Vehicle Expand Information',//x
-    CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON: 'Click Scheduled Payments Vehicle Cancel Fee Button',
+    CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON: 'Click Scheduled Payments Vehicle Cancel Fee Button',//x
 
     //Checkout Events
-    CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Checkout Panel Continue to Checkout Button',
-    CLICK_CHECKOUT_PANEL_REMOVE_PAYMENT: 'Click Checkout Panel Remove Payment',
-    CLICK_CHECKOUT_EXPOERT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',
-    CLICK_CHECKOUT_VEHICLE_EXPAND_INFORMATION: 'Click Checkout Vehicle Expand Information',
-    CLICK_CHECKOUT_VEHICLE_DETAILED_REPORT: 'Click Checkout Vehicle Detailed Report',
-    CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON: 'Click Checkout Submit Payments Button',
-    CLICK_CHECKOUT_REMOVE_PAYMENT_LINK: 'Click Checkout Remove Payment Link',
-    CLICK_CHECKOUT_APPLY_FUNDS_YES: 'Click Checkout Apply Funds Yes',
-    CLICK_CHECKOUT_SELECT_ACCOUNT: 'Click Checkout Select Account',
-    CLICK_CHECKOUT_ACCOUNT_FEES: 'Click Account Fees: Checkout',
+    CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Checkout Panel Continue to Checkout Button',//x
+//    CLICK_CHECKOUT_PANEL_REMOVE_PAYMENT: 'Click Checkout Panel Remove Payment',//can't find (only find the 'link')
+    CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',//x
+    CLICK_CHECKOUT_VEHICLE_EXPAND_INFORMATION: 'Click Checkout Vehicle Expand Information',//x
+    CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON: 'Click Checkout Submit Payments Button',//x
+    CLICK_CHECKOUT_REMOVE_PAYMENT_LINK: 'Click Checkout Remove Payment Link',//x
+    CLICK_CHECKOUT_APPLY_FUNDS_YES: 'Click Checkout Apply Funds Yes',//x
+    CLICK_CHECKOUT_SELECT_ACCOUNT: 'Click Checkout Select Account',//x
 
     //Receipts Events
     VIEW_RECEIPTS_PAGE: 'View Receipts Page',
