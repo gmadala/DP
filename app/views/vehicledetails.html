@@ -9,7 +9,7 @@
       <section class="span9 first">
         <!-- Flooring Information -->
         <div class="well row-fluid">
-          <h4>Flooring Information</h4>
+          <h4>Flooring Information <span>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h4>
           <div class="span5 first">
             <table>
                <tr>
@@ -104,17 +104,17 @@
 
         <!-- Payment Activity -->
         <div class="well row-fluid">
-          <h4>Payment Activity <a ng-href="{{ historyReportUrl }}">View the Vehicle History Report</a></h4>
+          <h4>Payment Activity <a ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h4>
           <div class="span7">
             This is where Paid & Outstanding Charts and their legends will go.
           </div>
           <div class="span5">
             <table>
               <tr>
-                <td class="heavy">Payment Breakdown</td>
+                <td class="heavy">Payment Summary</td>
               </tr>
               <tr>
-                <td class="">Finance Amount</td>
+                <td class="">Financed Amount</td>
                 <td class="value">{{ financialSummary.breakdown.financeAmount | currency }}</td>
               </tr>
               <tr>
@@ -220,7 +220,7 @@
 
         <!-- Floor Plan Value Estimates -->
         <div class="well row-fluid">
-          <h4>Floor Plan Value Estimates</h4>
+          <h4>Floor Plan Value Estimates <span>Zip Code – [zipcode]</span></h4>
           <div class="row-fluid">
             <div class="span5">
               <table>
@@ -242,8 +242,8 @@
                 </tr>
               </table>
             </div>
-            <div class="span7">
 
+            <div class="span7">
               <table>
                 <tr>
                   <td>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}<br/>Minimum</td>
