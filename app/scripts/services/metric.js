@@ -154,19 +154,17 @@ angular.module('nextgearWebApp')
     CLICK_FLOORPLAN_VEHICLE_EXPAND_INFORMATION: 'Click Floorplan Vehicle Expand Information',//x
 
     //Title Release Events
-    VIEW_TITLE_RELEASE_PAGE: 'View Title Release Page',
-    CLICK_TITLE_RELEASE_SEARCH_FIELD: 'Click Title Release Search Field',
-    CLICK_TITLE_RELEASE_SEARCH_BUTTON: 'Click Title Release Search Button',
-    CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT: 'Click Title Release Filter From Date Input',
-    CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT: 'Click Title Release Filter To Date Input',
-    CLICK_TITLE_RELEASE_FILTER_RESULTS_INPUT: 'Click Title Release Filter Results Input',
-    CLICK_TITLE_RELEASE_RELEASED: 'Click Title Release Released',
-    CLICK_TITLE_RELEASE_ELIGIBLE: 'Click Title Release Eligible',
-    CLICK_TITLE_RELEASE_NOT_ELIGIBLE: 'Click Title Release Not Eligible',
-    CLICK_TITLE_RELEASE_REQUEST_TITLE_BUTTON: 'Click Title Release Request Title Button',
-    CLICK_TITLE_RELEASE_VEHICLE_EXPAND_INFORMATION: 'Click Title Release Vehicle Expand Information',
-    CLICK_TITLE_RELEASE_VEHICLE_DETAILED_REPORT: 'Click Title Release Vehicle Detailed Report',
-    CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Title Release Continue to Checkout Button',
+    VIEW_TITLE_RELEASE_PAGE: 'View Title Release Page',//x
+    CLICK_TITLE_RELEASE_SEARCH_BUTTON: 'Click Title Release Search Button',//x
+    CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK: 'Click Title Release Clear Search Link',//x
+    CLICK_TITLE_RELEASE_FILTER_BY_INPUT: 'Click Title Release Filter By Title Release Status',//x
+    CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT: 'Click Title Release Filter From Date Input',//x
+    CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT: 'Click Title Release Filter To Date Input',//x
+    CLICK_TITLE_RELEASE_UNAVAILABLE: 'Click Title Release Unavailable',//x
+    CLICK_TITLE_RELEASE_VEHICLE_DETAILS: 'Click Title Release Vehicle Details',//x
+    CLICK_TITLE_RELEASE_TITLE_REQUESTED: 'Click Title Release Title Requested',//x
+    CLICK_TITLE_RELEASE_REQUEST_TITLE: 'Click Title Release Request Title',//x
+    CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Title Release Continue to Checkout Button',//x
 
     //Title Release Checkout Events
     VIEW_TITLE_RELEASE_CHECKOUT_PAGE: 'View Title Release Checkout Page',
