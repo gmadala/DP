@@ -76,22 +76,22 @@
               </tr>
               <tr>
                 <td class="">Inventory Location</td>
-                <td class="value" ng-hide="showEditInventoryLocation">
+                <td class="value" ng-hide="flooringInfo.showEditInventoryLocation">
                   {{ flooringInfo.inventoryAddress | address }}
-                  <span ng-show="showChangeLink"><br/>
-                    <a href="" ng-click="showInventorySelect()">Change Inventory Location</a>
+                  <span ng-show="flooringInfo.showChangeLink"><br/>
+                    <a href="" ng-click="flooringInfo.showInventorySelect()">Change Inventory Location</a>
                   </span>
                 </td>
-                <td class="value" ng-show="showEditInventoryLocation">
+                <td class="value" ng-show="flooringInfo.showEditInventoryLocation">
                   Select Below:
                 </td>
               </tr>
-              <tr ng-show="showEditInventoryLocation">
+              <tr ng-show="flooringInfo.showEditInventoryLocation">
                 <td>
                   <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
                   <div>
-                    <button class="" ng-click="cancelInventoryChanges()">Cancel Changes</button>
-                    <button class="" ng-click="saveInventoryChanges()">Save Location</button>
+                    <button class="" ng-click="flooringInfo.cancelInventoryChanges()">Cancel Changes</button>
+                    <button class="" ng-click="flooringInfo.saveInventoryChanges()">Save Location</button>
                   </div>
                 </td>
               </tr>
@@ -208,7 +208,7 @@
                   <td class="value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</td>
                 </tr>
                 <tr>
-                  <td class="" ng-show="dealerCanRequestTitles()"><button href="" ng-disabled="titleRequestDisabled()" ng-click="requestTitle()">Request the Title</button></td>
+                  <td class="" ng-show="titleInfo.dealerCanRequestTitles()"><button href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()">Request the Title</button></td>
                 </tr>
               </table>
             </div>

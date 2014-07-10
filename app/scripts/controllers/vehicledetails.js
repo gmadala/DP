@@ -1,108 +1,86 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, VehicleDetails, User, TitleReleases, api) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, VehicleDetails, User, TitleReleases, api) {
 
     $scope.stockNo = $stateParams.stockNumber;
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
 
+    // Create object for each major section
+    $scope.landing = {};
     $scope.vehicleInfo = {};
     $scope.titleInfo = {};
     $scope.flooringInfo = {};
     $scope.valueInfo = {};
     $scope.financialSummary = {};
-    $scope.landing = {};
 
-    VehicleDetails.getVehicleInfo($scope.stockNo).then(function(info) {
-      $scope.vehicleInfo = info;
+    // We'll populate these objects as api calls are finished
+    var titleForCheckout = {};
+        // paymentForCheckout = {},
+        // payoffForCheckout = {};
 
-      titleForCheckout.UnitMake = info.Make;
-      titleForCheckout.UnitModel = info.Model;
-      titleForCheckout.UnitStyle = info.Style;
-      titleForCheckout.UnitVin = info.UnitVin;
-      titleForCheckout.UnitYear = info.Year;
-      titleForCheckout.Color = info.Color;
-      titleForCheckout.StockNumber = info.StockNumber;
+    // Create promises for each object to grab its data as its api call finishes.
+    var promises = {};
+    promises.landing = VehicleDetails.getLanding($scope.stockNo);
+    promises.vehicleInfo = VehicleDetails.getVehicleInfo($scope.stockNo);
+    promises.titleInfo = VehicleDetails.getTitleInfo($scope.stockNo);
+    promises.flooringInfo = VehicleDetails.getFlooringInfo($scope.stockNo);
+    promises.valueInfo = VehicleDetails.getValueInfo($scope.stockNo);
+    promises.financialSummary = VehicleDetails.getFinancialSummary($scope.stockNo);
+
+    // Grab landing info
+    promises.landing.then(function(info) {
+      $scope.landing = info;
     });
 
-    // We'll populate this title object as api calls are finished, for use if the user requests the title
-    var titleForCheckout = {
-      AmountFinanced: null,
-      Color: null,
-      DaysOnFloorplan: null,
-      FlooringDate: null,
-      FloorplanId: null,
-      FloorplanStatusName: null,
-      SellerName: null,
-      StockNumber: $scope.stockNo,
-      TitleImageAvailable: null,
-      TitleReleaseDate: null,
-      TitleReleaseLocation: null,
-      TitleReleaseProgramStatus: null,
-      UnitMake: null,
-      UnitModel: null,
-      UnitStyle: null,
-      UnitVin: null,
-      UnitYear: null
-    };
+    // Grab vehicle info
+    promises.vehicleInfo.then(function(info) {
+      $scope.vehicleInfo = info;
+    });
 
-    var paymentForCheckout;
-
-    VehicleDetails.getTitleInfo($scope.stockNo).then(function(info) {
+    // Grab title info and define functions/variables we need to show/hide/disable the Request Title button
+    promises.titleInfo.then(function(info) {
       $scope.titleInfo = info;
-
-      titleForCheckout.AmountFinanced = info.AmountFinanced;
-      titleForCheckout.FloorplanId = info.FloorplanId;
-      titleForCheckout.FloorplanStatusName = info.FloorplanStatusName;
-      titleForCheckout.TitleReleaseProgramStatus = info.TitleReleaseProgramStatus;
-      titleForCheckout.TitleImageAvailable = info.TitleImageAvailable;
-      titleForCheckout.TitleReleaseDate = info.TitleReleaseDate;
-      titleForCheckout.TitleReleaseLocation = info.TitleReleaseLocation;
-      titleForCheckout.TitleImageAvailable = info.TitleImageAvailable;
 
       var displayId =  User.getInfo().BusinessNumber + '-' + $scope.titleInfo.StockNumber;
       $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + $scope.titleInfo.StockNumber); // 0 = not first page only
+
+      // Title-specific functions
+      $scope.titleInfo.dealerCanRequestTitles = function() {
+        return $scope.titleInfo.DealerIsEligibleToReleaseTitles;
+      };
+
+      $scope.titleInfo.titleRequestDisabled = function() {
+        if($scope.titleInfo.TitleReleaseProgramStatus !== 'EligibleForRelease') {
+          return true;
+        }
+
+        if(TitleReleases.isFloorplanOnQueue($scope.titleInfo)) {
+          return false;
+        }
+
+        // By count
+        var countInQueue = TitleReleases.getQueue().length;
+        if(countInQueue >= $scope.titleInfo.RemainingReleasesAvailable) {
+          return true;
+        }
+
+        // By financed
+        var financedInQueue = TitleReleases.getQueueFinanced();
+        if(financedInQueue + $scope.titleInfo.AmountFinanced > $scope.titleInfo.ReleaseBalanceAvailable) {
+          return true;
+        }
+        return false;
+      };
+
+      $scope.titleInfo.requestTitle = function() {
+        TitleReleases.addToQueue(titleForCheckout);
+        $state.transitionTo('home.titleReleaseCheckout');
+      };
     });
 
-    $scope.dealerCanRequestTitles = function() {
-      return $scope.titleInfo.DealerIsEligibleToReleaseTitles;
-    };
-
-    $scope.titleRequestDisabled = function() {
-      if($scope.titleInfo.TitleReleaseProgramStatus !== 'EligibleForRelease') {
-        console.log('not eligible for release');
-        return true;
-      }
-
-      if(TitleReleases.isFloorplanOnQueue($scope.titleInfo)) {
-        console.log('already on queue, so its fine');
-        return false;
-      }
-
-      // By count
-      var countInQueue = TitleReleases.getQueue().length;
-      if(countInQueue >= $scope.titleInfo.RemainingReleasesAvailable) {
-        console.log('we reached max # requests, none left to use');
-        return true;
-      }
-
-      // By financed
-      var financedInQueue = TitleReleases.getQueueFinanced();
-      if(financedInQueue + $scope.titleInfo.AmountFinanced > $scope.titleInfo.ReleaseBalanceAvailable) {
-        console.log('we reached monetary limit, no money left to finance');
-        return true;
-      }
-
-      return false;
-
-    };
-
-    $scope.requestTitle = function() {
-      TitleReleases.addToQueue(titleForCheckout);
-      $state.transitionTo('home.titleReleaseCheckout');
-    };
-
-    VehicleDetails.getFlooringInfo($scope.stockNo).then(function(info) {
+    // Grab flooring info and build address objects, and define functions/variables we need to save/edit inventory location
+    promises.flooringInfo.then(function(info) {
       info.sellerAddress = {
         Line1: info.SellerAddressLine1,
         Line2: info.SellerAddressLine2,
@@ -119,10 +97,6 @@ angular.module('nextgearWebApp')
         Zip: info.InventoryAddressZip
       };
 
-      titleForCheckout.FlooringDate = info.FlooringDate;
-      titleForCheckout.DaysOnFloorplan = info.TotalDaysFloored;
-      titleForCheckout.SellerName = info.SellerName;
-
       $scope.flooringInfo = info;
       $scope.currentLocation = info.inventoryAddress;
 
@@ -131,38 +105,42 @@ angular.module('nextgearWebApp')
 
       // users should only be able to change inventory location if they have more than one,
       // and the Floorplan's status is either "Approved" or "pening"
-      $scope.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
+      $scope.flooringInfo.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
+
+      // Update Inventory Location
+      var tempAddress;
+
+      // on load, inventory location select menu should be hidden
+      $scope.flooringInfo.showEditInventoryLocation = false;
+
+      $scope.flooringInfo.cancelInventoryChanges = function() {
+        $scope.flooringInfo.inventoryAddress = tempAddress;
+        $scope.flooringInfo.showEditInventoryLocation = false;
+      };
+
+      $scope.flooringInfo.saveInventoryChanges = function() {
+        // check to see if current location was re-selected; if so, no api call
+
+        // make api call to save change
+
+        $scope.flooringInfo.showEditInventoryLocation = false;
+      };
+
+      // Show the select menu if the user has clicked "Change Address"
+      $scope.flooringInfo.showInventorySelect = function() {
+        // grab current inventory location value
+        tempAddress = $scope.flooringInfo.inventoryAddress;
+        $scope.flooringInfo.showEditInventoryLocation = true;
+      };
     });
 
-    // Update Inventory Location
-    var tempAddress; // to hold current address in case user cancels change
-    $scope.showEditInventoryLocation = false; // on load, inventory location select menu should be hidden
-
-    $scope.cancelInventoryChanges = function() {
-      $scope.flooringInfo.inventoryAddress = tempAddress;
-      $scope.showEditInventoryLocation = false;
-    };
-
-    $scope.saveInventoryChanges = function() {
-      // check to see if current location was re-selected; if so, no api call
-
-      // make api call to save change
-
-      $scope.showEditInventoryLocation = false;
-    };
-
-    // Show the select menu if the user has clicked "Change Address"
-    $scope.showInventorySelect = function() {
-      // grab current inventory location value
-      tempAddress = $scope.flooringInfo.inventoryAddress;
-      $scope.showEditInventoryLocation = true;
-    };
-
-    VehicleDetails.getValueInfo($scope.stockNo).then(function(info) {
+    // Grab the value info
+    promises.valueInfo.then(function(info) {
       $scope.valueInfo = info;
     });
 
-    VehicleDetails.getFinancialSummary($scope.stockNo).then(function(info) {
+    // Grab the financial summary data and calculate the additional fields we need.
+    promises.financialSummary.then(function(info) {
       $scope.financialSummary = info;
 
       // we need to calculate some of the values for our breakdown.
@@ -173,5 +151,48 @@ angular.module('nextgearWebApp')
         interestFeesLabel: includeCPP ? 'Interest, Fees & CPP' : 'Interest & Fees',
         interestFeesCPP: info.InterestPaid + info.InterestOutstanding + info.FeesPaid + info.FeesOutstanding + info.CollateralProtectionPaid + info.CollateralProtectionOutstanding
       };
+    });
+
+    // Once all api calls have finished, we can populate the objects needed
+    // for requesting a title and making and payment or payoff.
+    $q.all([
+      promises.landing,
+      promises.vehicleInfo,
+      promises.titleInfo,
+      promises.flooringInfo,
+      promises.valueInfo,
+      promises.financialSummary
+    ]).then(function(info){
+      var //landing = info[0],
+          vehicleInfo = info[1],
+          titleInfo = info[2],
+          flooringInfo = info[3];
+          // valueInfo = info[4],
+          // financialSummary = info[5];
+
+      // build out title object for if user wants to request it
+      titleForCheckout = {
+        UnitMake: vehicleInfo.Make,
+        UnitModel: vehicleInfo.Model,
+        UnitStyle: vehicleInfo.Style,
+        UnitVin: vehicleInfo.UnitVin,
+        UnitYear: vehicleInfo.Year,
+        Color: vehicleInfo.Color,
+        StockNumber: $scope.StockNo,
+        AmountFinanced: titleInfo.AmountFinanced,
+        FloorplanId: titleInfo.FloorplanId,
+        FloorplanStatusName: titleInfo.FloorplanStatusName,
+        TitleReleaseProgramStatus: titleInfo.TitleReleaseProgramStatus,
+        TitleImageAvailable: titleInfo.TitleImageAvailable,
+        TitleReleaseDate: titleInfo.TitleReleaseDate,
+        TitleReleaseLocation: titleInfo.TitleReleaseLocation,
+        FlooringDate: flooringInfo.FlooringDate,
+        DaysOnFloorplan: flooringInfo.TotalDaysFloored,
+        SellerName: flooringInfo.SellerName
+      };
+
+      // build out payment/payoff objects for if user wants to make a payment.
+
+
     });
   });
