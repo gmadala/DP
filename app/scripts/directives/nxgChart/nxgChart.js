@@ -10,22 +10,23 @@ angular.module('nextgearWebApp')
         descriptionX: '@nxgChartDescriptionX', // dependent axis legend text
         dataName: '@nxgChartDataName', // Text next to value on tooltip
         tooltip: '@nxgChartTooltip', // true or false
-        size: '@nxgChartSize',
-        innerSize: '@nxgChartInnerSize',
-        options: '&nxgChartOptions',
-        truncateLabels: '@nxgChartTrimLabels' // true or false
+        size: '=nxgChartSize',
+        options: '&nxgChartOptions', // any overall options.
+        truncateLabels: '@nxgChartTrimLabels', // true or false
+        showLegend: '=nxgShowLegend', // true or false
+        donutOptions: '=nxgDonutOptions' // options specific to donut charts
+
       },
       link: function(scope, element) {
         // initialize chart with defaults and passed options
         var initializeChart = function(){
           var options = {
-            legend: { enabled: false },
             chart:  {
               type   : scope.type,
               backgroundColor: 'transparent',
               style: {
                 fontFamily: 'Helvetica, Arial, sans-serif'
-              }
+              },
             },
             title:  { text   : ''    },
             credits: { enabled: false },
@@ -46,6 +47,27 @@ angular.module('nextgearWebApp')
                 fontFamily: 'Helvetica, Arial, sans-serif'
               }
             },
+            legend: {
+              borderWidth: 0,
+              enabled: scope.showLegend || false,
+              floating: true,
+              labelFormatter: function() { // formats label to two lines; adds '$', decimal, comma, etc.
+                return '<div class="chart-legend">' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
+              },
+              itemStyle: {
+                fontFamily: 'Helvetica, Arial, sans-serif',
+              },
+              itemHoverStyle: {
+                color: '#274B6D' // same as non-hover color
+              },
+              itemMarginTop: 2,
+              itemMarginBottom: 2,
+              layout: 'vertical',
+              margin: 0,
+              symbolRadius: 0,
+              symbolWidth: 20,
+              useHTML: true,
+            },
             plotOptions: {
               bar: {
                 pointWidth: 28,
@@ -56,8 +78,21 @@ angular.module('nextgearWebApp')
                 pointWidth: 45
               },
               pie: {
+                size: (scope.donutOptions && scope.donutOptions.size) || '100%',
+                innerSize: (scope.donutOptions && scope.donutOptions.innerSize) || '87%',
+                startAngle: (scope.donutOptions && scope.donutOptions.semiCircle) ? -90 : 0,
+                endAngle: (scope.donutOptions && scope.donutOptions.semiCircle) ? 90 : null,
                 dataLabels: {
                   enabled: false
+                },
+                showInLegend: scope.showLegend || false,
+                center: ['50%','50%'],
+                point: {
+                  events: {
+                    legendItemClick: function() {
+                      return false;
+                    }
+                  }
                 },
                 borderWidth: 0
               }
@@ -103,13 +138,20 @@ angular.module('nextgearWebApp')
 
           if(scope.type === 'pie'){
             options.series[0].states.hover.enabled = false;
-            if(scope.size && scope.size.indexOf('%') === -1){
-              options.series[0].size = parseInt(scope.size);
-              options.series[0].innerSize = parseInt(scope.innerSize);
-            }else{
-              options.series[0].size = scope.size || '115%';
-              options.series[0].innerSize = scope.innerSize || '87%';
-            }
+          }
+
+          if (scope.size) {
+            options.chart.width = scope.size.width;
+            options.chart.height = scope.size.height;
+          }
+
+          // set donut options if any have been passed in
+          if (scope.donutOptions) {
+            var pie = options.plotOptions.pie;
+            pie.borderWidth = scope.donutOptions.border ? 1 : options.plotOptions.pie.borderWidth;
+            pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor: '#FFFFFF';
+            pie.size = scope.donutOptions.size ? scope.donutOptions.size : options.plotOptions.pie.size;
+            pie.innerSize = scope.donutOptions.innerSize ? scope.donutOptions.innerSize : options.plotOptions.pie.innerSize;
           }
 
           if(scope.type === 'line') {

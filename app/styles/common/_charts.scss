@@ -5,29 +5,29 @@
 }
 
 .nxg-doughnut-chart-nested {
-  display: inline-block;
-  width: 35%;
+  float: left;
 
   .inner-nested {
-    position: relative;
-    width: 110px;
-    margin: 0 auto;
+    margin: 15px auto;
   }
 }
 
+.temp-activity-chart {
+  width: 100%;
+}
+
 .nxg-doughnut-chart-outer {
-  display: inline-block;
+  position: absolute;
+  top: -12px;
+  left: -13px;
   width: 110px;
   height: 110px;
 }
 
 .nxg-doughnut-chart-inner {
-  display: inline-block;
-  width: 94px;
-  height: 94px;
   position: absolute;
-  left: 8px;
-  bottom: 14px;
+  left: 0;
+  top: 0;
 }
 .nxg-doughnut-chart-label {
   @extend %center;
@@ -41,7 +41,6 @@
   &.smaller .nxg-doughnut-chart-label-primary {
     font-size: $base-font-size;
   }
-
 }
 
 .nxg-doughnut-chart-label-primary,
@@ -82,13 +81,10 @@
   margin-bottom: 10px;
 
   .chart-obj {
+    display: inline-block;
+    top: -20px;
     width: 120px;
     height: 120px;
-    display: inline-block;
-  }
-
-  .highcharts-container {
-    @include rotate(10deg);
   }
 
   table {

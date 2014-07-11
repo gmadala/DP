@@ -53,15 +53,14 @@ angular.module('nextgearWebApp')
               payments: result.UpcomingPaymentsAmount - scheduledPaymentAmount, // we just want UN-scheduled payments
               scheduledPayments: scheduledPaymentAmount,
               total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
-              // @see http://www.chartjs.org/docs/#pieChart-dataStructure
               chartData: [
                 {name: 'Fees', color: '#444444', y: result.AccountFeeAmount},
                 {name: 'Payments', color: '#2286f5', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
                 {name: 'Scheduled Payments', color: '#3fb232', y: scheduledPaymentAmount}
-                // { color: '#444444', value: result.AccountFeeAmount },                               // Fees
+                // { color: '#444444', value: result.AccountFeeAmount },        // Fees
                 // { color: '#2286f5', value: result.UpcomingPaymentsAmount - scheduledPaymentAmount }, // Payments
-                // { color: '#3fb232', value: scheduledPaymentAmount }                                 // Scheduled Payments
-              ]
+                // { color: '#3fb232', value: scheduledPaymentAmount }        // Scheduled Payments
+              ],
             };
 
             // calculate .calendarData

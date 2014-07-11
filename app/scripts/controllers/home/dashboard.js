@@ -77,6 +77,23 @@ angular.module('nextgearWebApp')
       $state.transitionTo('home.payments', param);
     };
 
+    $scope.dashChartOptions =  {
+      donutOptions: {
+        size: '100%',
+        innerSize: '93%',
+        border: false,
+        semiCircle: false
+      },
+      size: {
+        height: '150',
+        width: '150'
+      },
+      innerSize: {
+        height: '125',
+        width: '125'
+      }
+    };
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a

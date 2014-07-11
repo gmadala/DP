@@ -136,10 +136,9 @@
           nxg-chart
           nxg-chart-type="pie"
           nxg-chart-tooltip="false"
-          nxg-chart-size="100"
-          nxg-chart-inner-size="67"
+          nxg-chart-size="dashChartOptions.size"
           nxg-chart-data="dashboardData.paymentChartData.chartData"
-          nxg-chart-options="{percentageInnerCutout: 65}">
+          nxg-donut-options="dashChartOptions.donutOptions">
       </div>
       <label class="nxg-doughnut-chart-label"  style="z-index:1000" ng-class="{smaller: tooLong(dashboardData.paymentChartData.total, '$0[.]00a')}">
         <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.paymentChartData.total | numeral:'($0[.]00a)' }}</p>
@@ -236,20 +235,20 @@
 
       <div class="nxg-doughnut-chart-nested">
         <div class="inner-nested">
-          <div  class="nxg-doughnut-chart-outer"
+          <div class="nxg-doughnut-chart-outer"
                 nxg-chart
                 nxg-chart-type="pie"
                 nxg-chart-tooltip="false"
-                nxg-chart-size="100"
-                nxg-chart-inner-size="83"
-                nxg-chart-data="dashboardData.creditChartData.outer"></div>
+                nxg-chart-size="dashChartOptions.size"
+                nxg-chart-data="dashboardData.creditChartData.outer"
+                nxg-donut-options="dashChartOptions.donutOptions"></div>
           <div class="nxg-doughnut-chart-inner"
                 nxg-chart
                 nxg-chart-type="pie"
                 nxg-chart-tooltip="false"
-                nxg-chart-size="84"
-                nxg-chart-inner-size="67"
-                nxg-chart-data="dashboardData.creditChartData.inner"></div>
+                nxg-chart-size="dashChartOptions.innerSize"
+                nxg-chart-data="dashboardData.creditChartData.inner"
+                nxg-donut-options="dashChartOptions.donutOptions"></div>
           <label class="nxg-doughnut-chart-label" ng-class="{smaller: tooLong(dashboardData.AvailableCredit, '$0[.]00a')}">
             <p class="nxg-doughnut-chart-label-primary">{{ dashboardData.AvailableCredit | numeral:'($0[.]00a)' }}</p>
             <p class="nxg-doughnut-chart-label-secondary">available</p>

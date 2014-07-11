@@ -154,6 +154,69 @@ angular.module('nextgearWebApp')
         interestFeesCPP: info.InterestPaid + info.InterestOutstanding + info.FeesPaid + info.FeesOutstanding + info.CollateralProtectionPaid + info.CollateralProtectionOutstanding
       };
 
+      $scope.financialSummary.paidChart = [
+        {
+          name: 'Principal',
+          y: info.PrincipalPaid,
+          color: '#1B7ABA'
+        },
+        {
+          name: 'Interest',
+          y: info.InterestPaid,
+          color: '#104968'
+        },
+        {
+          name: 'Fees',
+          y: info.FeesPaid,
+          color: '#A6A8AB'
+        }
+      ];
+
+      $scope.financialSummary.outstandingChart = [
+        {
+          name: 'Principal',
+          y: info.PrincipalOutstanding,
+          color: '#1B7ABA'
+        },
+        {
+          name: 'Interest',
+          y: info.InterestOutstanding,
+          color: '#104968'
+        },
+        {
+          name: 'Fees',
+          y: info.FeesOutstanding,
+          color: '#A6A8AB'
+        }
+      ];
+
+      if(info.CollateralProtectionPaid === 0 && info.CollateralProtectionOutstanding === 0) {
+        $scope.financialSummary.paidChart.push({
+          name: 'CPP',
+          y: info.CollateralProtectionPaid,
+          color: '#6D6E70'
+        });
+
+        $scope.financialSummary.outstandingChart.push({
+          name: 'CPP',
+          y: info.CollateralProtectionOutstanding,
+          color: '#6D6E70'
+        });
+      }
+
+      $scope.financialSummary.chart = {
+        donutOptions: {
+          size: '110%',
+          innerSize: '85%',
+          border: false,
+          semiCircle: true
+        },
+        size: {
+          height: '180',
+          width: '200',
+        }
+      };
+
       $scope.financialSummary.getActivityDetails = function(activity) {
         var promise, template, ctrl;
         if (activity.IsPayment) {

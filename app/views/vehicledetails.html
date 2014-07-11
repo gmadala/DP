@@ -104,7 +104,38 @@
         <div class="well row-fluid">
           <h4>Payment Activity <a ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h4>
           <div class="span7">
-            This is where Paid & Outstanding Charts and their legends will go.
+            <div class="row-fluid">
+              <div class="span6">
+                <div class="temp-donut-chart"
+                    nxg-chart
+                    nxg-chart-size="financialSummary.chart.size"
+                    nxg-chart-type="pie"
+                    nxg-chart-tooltip="false"
+                    nxg-chart-data="financialSummary.paidChart"
+                    nxg-donut-options="financialSummary.chart.donutOptions"
+                    nxg-show-legend="true">
+                </div>
+                <label class="nxg-doughnut-chart-label"  style="z-index:1000">
+                  <p class="nxg-doughnut-chart-label-secondary">Total Paid</p>
+                  <p class="nxg-doughnut-chart-label-primary">{{ financialSummary.TotalPaid | numeral:'($0[.]00a)' }}</p>
+                </label>
+              </div>
+              <div class="span6">
+                <div class="chart-obj"
+                  nxg-chart
+                  nxg-chart-size="financialSummary.chart.size"
+                  nxg-chart-type="pie"
+                  nxg-chart-tooltip="false"
+                  nxg-chart-data="financialSummary.outstandingChart"
+                  nxg-donut-options="financialSummary.chart.donutOptions"
+                  nxg-show-legend="true">
+                </div>
+                <label class="nxg-doughnut-chart-label"  style="z-index:1000">
+                  <p class="nxg-doughnut-chart-label-secondary">Total Outstanding</p>
+                  <p class="nxg-doughnut-chart-label-primary">{{ financialSummary.TotalOutstanding | numeral:'($0[.]00a)' }}</p>
+                </label>
+              </div>
+            </div>
           </div>
           <div class="span5">
             <table class="table">
@@ -278,7 +309,24 @@
       </section>
 
       <section class="span3 last">
+        <h4>Payment Options</h4>
+        <div>
+          A payment is due today.
+          <br/><a href="">Request an extension?</a>
+        </div>
+        <div>
 
+                   <!--    <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+                    </div>
+                    <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
+                      <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+                    </div> -->
+
+
+
+
+
+        </div>
       </section>
     </section>
   </div>
