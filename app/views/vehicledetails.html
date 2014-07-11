@@ -9,7 +9,7 @@
         <div class="well row-fluid">
           <h4>Flooring Information <span>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h4>
           <div class="span5 first">
-            <table>
+            <table class="table">
                <tr>
                 <td class="">Total Days Floored</td>
                 <td class="value">{{ flooringInfo.TotalDaysFloored }} (of {{ flooringInfo.TotalTermPlanLength }} days)</td>
@@ -53,7 +53,7 @@
             </table>
           </div>
           <div class="span7 last">
-            <table>
+            <table class="table">
               <tr>
                 <td class="">Line of Credit</td>
                 <td class="value">{{ flooringInfo.LineOfCredit }}</td>
@@ -107,7 +107,7 @@
             This is where Paid & Outstanding Charts and their legends will go.
           </div>
           <div class="span5">
-            <table>
+            <table class="table">
               <tr>
                 <td class="heavy">Payment Summary</td>
               </tr>
@@ -140,6 +140,26 @@
         </div>
 
         <!-- pull-down button for payment activity goes here -->
+        <button ng-click="isCollapsed = !isCollapsed">
+          <span ng-show="isCollapsed">Show Payment Activity</span>
+          <span ng-hide="isCollapsed">Hide Payment Activity</span>
+        </button>
+        <div collapse="isCollapsed">
+          <table class="table table-striped">
+            <tr>
+              <th>Activity Date</th>
+              <th>Transaction Details</th>
+              <th>Effective Date</th>
+              <th>Recipt No.</th>
+            </tr>
+            <tr ng-repeat="activity in financialSummary.FloorplanActivity">
+              <td>{{ activity.ActivityDate | moment }}</td>
+              <td><a href="" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} of {{ activity.ActivityAmount | currency }}</a></td>
+              <td>???</td>
+              <td>???</td>
+            </tr>
+          </table>
+        </div>
         <!-- end Payment Activity -->
 
         <div class="row-fluid">
@@ -147,7 +167,7 @@
           <div class="well span6">
             <h4>Vehicle Information <span>Stock #{{ stockNo }}</span></h4>
             <div class="row-fluid">
-              <table>
+              <table class="table">
                 <tr>
                   <td class="">VIN</td>
                   <td class="value">{{ vehicleInfo.UnitVin }}</td>
@@ -190,7 +210,7 @@
           <div class="well span6">
             <h4>Title Information <a ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h4>
             <div class="row-fluid">
-              <table>
+              <table class="table">
                 <tr>
                   <td class="">Title Location</td>
                   <td class="value">{{ titleInfo.TitleLocation }}</td>
@@ -221,7 +241,7 @@
           <h4>Floor Plan Value Estimates <span>Static Blurb</span></h4>
           <div class="row-fluid">
             <div class="span5">
-              <table>
+              <table class="table">
                 <tr>
                   <td class="">Extra Clean</td>
                   <td class="value">{{ valueInfo.ExtraCleanValue | currency }}</td>
@@ -242,7 +262,7 @@
             </div>
 
             <div class="span7">
-              <table>
+              <table class="table">
                 <tr>
                   <td>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}<br/>Minimum</td>
                   <td>{{ valueInfo.NextGearRegionalAveragePurchasePrice | currency }}<br/>Average</td>

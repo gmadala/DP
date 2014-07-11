@@ -1,0 +1,34 @@
+<div class="modal-header">
+  Fee Details
+</div>
+
+<div class="modal-close" ng-click="close()">
+  <span class="glyphicon glyphicon-remove"></span>
+</div>
+
+<div class="modal-body">
+  <table class="table">
+    <tr>
+      <td class="">Posted Date</td>
+      <td class="">{{ fee.PostedDate | moment }}</td>
+    </tr>
+    <tr>
+      <td class="">Effective Date</td>
+      <td class="">{{ fee.EffectiveDate | moment }}</td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td class="">Fee – {{ fee.FeeName }}</td>
+      <td class="">{{ fee.FeeAmount | currency }}</td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td class="">Total</td>
+      <td class="">{{ fee.FeeTotal | currency }}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="close()" class="btn btn-mini btn-secondary">Return to Vehicle Details</button>
+</div>

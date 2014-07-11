@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, VehicleDetails, User, TitleReleases, api) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, VehicleDetails, User, TitleReleases, api) {
 
     $scope.stockNo = $stateParams.stockNumber;
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
@@ -13,6 +13,8 @@ angular.module('nextgearWebApp')
     $scope.flooringInfo = {};
     $scope.valueInfo = {};
     $scope.financialSummary = {};
+
+    $scope.isCollapsed = true;
 
     // We'll populate these objects as api calls are finished
     var titleForCheckout = {};
@@ -151,6 +153,37 @@ angular.module('nextgearWebApp')
         interestFeesLabel: includeCPP ? 'Interest, Fees & CPP' : 'Interest & Fees',
         interestFeesCPP: info.InterestPaid + info.InterestOutstanding + info.FeesPaid + info.FeesOutstanding + info.CollateralProtectionPaid + info.CollateralProtectionOutstanding
       };
+
+      $scope.financialSummary.getActivityDetails = function(activity) {
+        var promise, template, ctrl;
+        if (activity.IsPayment) {
+          promise = VehicleDetails.getPaymentDetails($scope.stockNo, activity.ActivityId);
+          template = 'paymentDetails.html';
+          ctrl = 'PaymentDetailsCtrl';
+        }
+
+        if (activity.IsFee) {
+          promise = VehicleDetails.getFeeDetails($scope.stockNo, activity.ActivityId);
+          template = 'feeDetails.html';
+          ctrl = 'FeeDetailsCtrl';
+        }
+
+        promise.then(function(data) {
+          $dialog.dialog({
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            controller: ctrl,
+            templateUrl: 'views/modals/' + template,
+            dialogClass: 'modal',
+            resolve: {
+              activity: function() {
+                return data;
+              }
+            }
+          }).open();
+        });
+      };
     });
 
     // Once all api calls have finished, we can populate the objects needed
@@ -192,7 +225,5 @@ angular.module('nextgearWebApp')
       };
 
       // build out payment/payoff objects for if user wants to make a payment.
-
-
     });
   });
