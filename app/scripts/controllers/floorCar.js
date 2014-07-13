@@ -9,6 +9,8 @@ angular.module('nextgearWebApp')
 
     var isDealer = User.isDealer();
 
+    segmentio.track(metric.VIEW_FLOOR_A_VEHICLE_PAGE);
+
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
