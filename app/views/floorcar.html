@@ -163,12 +163,14 @@
               <button class="btn btn-small btn-primary"
                       ng-disabled="submitInProgress"
                       type="submit"
-                      ng-click="submit()">
+                      ng-click="submit()"
+                      nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_FLOOR_BUTTON}}">
                 Floor
               </button>
               <button class="btn btn-small btn-secondary"
                       ng-disabled="submitInProgress"
-                      ng-click="cancel()">
+                      ng-click="cancel()"
+                      nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_CANCEL_BUTTON}}">
                 Cancel
               </button>
             </div>

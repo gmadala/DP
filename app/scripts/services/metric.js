@@ -173,16 +173,11 @@ angular.module('nextgearWebApp')
     CLICK_TITLE_RELEASE_CHECKOUT_CONFIRM_REQUEST_BUTTON: 'Click Title Release Checkout Confirm Request Button',//x
 
     //Floor a Vehicle Events
-    VIEW_FLOOR_A_VEHICLE_PAGE: 'View Floor a Vehicle Page',
-    CLICK_FLOOR_A_VEHICLE_SELLER_LOOKUP_BUTTON: 'Click Floor a Vehicle  Seller Lookup Button',
-    CLICK_FLOOR_A_VEHICLE_BY_VIN_FIELD: 'Click Floor a Vehicle by VIN Field',
-    CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON: 'Click Floor a Vehicle by VIN Look Up Button',
-    CLICK_FLOOR_A_VEHICLE_COLOR_FIELD: 'Click Floor a Vehicle Color Field',
-    CLICK_FLOOR_A_VEHICLE_MILEAGE_FIELD: 'Click Floor a Vehicle Mileage Field',
-    CLICK_FLOOR_A_VEHICLE_WHO_HAS_THE_TITLE_FIELD: 'Click Floor a Vehicle Who has the Title Field',
-    CLICK_FLOOR_A_VEHICLE_INVENTORY_LOCATION_FIELD: 'Click Floor a Vehicle Inventory Location Field',
-    CLICK_FLOOR_A_VEHICLE_CANCEL_BUTTON: 'Click Floor a Vehicle Cancel Button',
-    CLICK_FLOOR_A_VEHICLE_FLOOR_BUTTON: 'Click Floor a Vehicle Floor Button',
+    VIEW_FLOOR_A_VEHICLE_PAGE: 'View Floor a Vehicle Page',//x
+    CLICK_FLOOR_A_VEHICLE_SELLER_LOOKUP_BUTTON: 'Click Floor a Vehicle Seller Lookup Button',//x
+    CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON: 'Click Floor a Vehicle by VIN Look Up Button',//x
+    CLICK_FLOOR_A_VEHICLE_CANCEL_BUTTON: 'Click Floor a Vehicle Cancel Button',//x
+    CLICK_FLOOR_A_VEHICLE_FLOOR_BUTTON: 'Click Floor a Vehicle Floor Button',//x
 
     //View a Report Events
     VIEW_VIEW_A_REPORT_PAGE: 'View View a Report Page',
