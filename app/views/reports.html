@@ -26,7 +26,7 @@
             <div class="control-group half">
               <label class="control-label" for="curtailmentDate">Date</label>
               <div class="controls">
-  							<input id="curtailmentDate" name="curtailmentDate" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
+  							<input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
   		        </div>
               <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date">
                 Please select a Valid Date.
@@ -35,7 +35,7 @@
 
             <div class="control-group inline-submit">
               <div class="controls">
-                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewCurtailment()">View Report</button>
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}">View Report</button>
               </div>
             </div><!-- end .control-group -->
   		    </form><!-- end Curtailment Form -->
@@ -57,7 +57,7 @@
 
             <div class="control-group right">
               <div class="controls">
-                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewExpInv()">View Report</button>
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewExpInv()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON}}">View Report</button>
               </div>
             </div><!-- end .control-group -->
           </form><!-- end Exportable Inventory Form -->
@@ -117,7 +117,7 @@
 
             <div class="control-group right">
               <div class="controls">
-                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewDealerStatement()">View Report</button>
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewDealerStatement()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON}}">View Report</button>
               </div>
             </div><!-- end .control-group -->
   				</form><!-- end Dealer Statement Form -->
@@ -143,7 +143,7 @@
 
             <div class="control-group inline-submit">
               <div class="controls">
-                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewDisbursementDetail()">View Report</button>
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}">View Report</button>
               </div>
             </div>
           </form><!-- end Disbursement Form -->
@@ -192,7 +192,7 @@
 
             <div class="control-group right">
               <div class="controls">
-                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewPaidOffSummary()">View Report</button>
+                <button type="submit" class="btn btn-mini btn-primary" ng-click="viewPaidOffSummary()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT}}">View Report</button>
               </div>
             </div><!-- end .control-group -->
   				</form><!-- end Paid Off Form -->
