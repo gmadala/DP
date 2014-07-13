@@ -167,10 +167,10 @@ angular.module('nextgearWebApp')
     CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Title Release Continue to Checkout Button',//x
 
     //Title Release Checkout Events
-    VIEW_TITLE_RELEASE_CHECKOUT_PAGE: 'View Title Release Checkout Page',
-    CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON: 'Click Title Release Checkout Remove Request Button',
-    CLICK_TITLE_RELEASE_CHECKOUT_SEND_TO_ADDRESS_FIELD: 'Click Title Release Checkout Send To Address Field',
-    CLICK_TITLE_RELEASE_CHECKOUT_CONFIRM_REQUEST_BUTTON: 'Click Title Release Checkout Confirm Request Button',
+    VIEW_TITLE_RELEASE_CHECKOUT_PAGE: 'View Title Release Checkout Page',//x
+    CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON: 'Click Title Release Checkout Remove Request Button',//x
+    CLICK_TITLE_RELEASE_CHECKOUT_SEND_TO_ADDRESS_FIELD: 'Click Title Release Checkout Send To Address Field',//x
+    CLICK_TITLE_RELEASE_CHECKOUT_CONFIRM_REQUEST_BUTTON: 'Click Title Release Checkout Confirm Request Button',//x
 
     //Floor a Vehicle Events
     VIEW_FLOOR_A_VEHICLE_PAGE: 'View Floor a Vehicle Page',
