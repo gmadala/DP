@@ -180,12 +180,13 @@ angular.module('nextgearWebApp')
     CLICK_FLOOR_A_VEHICLE_FLOOR_BUTTON: 'Click Floor a Vehicle Floor Button',//x
 
     //View a Report Events
-    VIEW_VIEW_A_REPORT_PAGE: 'View View a Report Page',
-    CLICK_VIEW_A_REPORT_RECEIVABLE_DETAIL_LINK: 'Click View a Report Receivable Detail Link',
-    CLICK_VIEW_A_REPORT_DATE_INPUT: 'Click View a Report Date Input',
-    CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON: 'Click View a Report Exportable Inventory Button',
-    CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON: 'Click View a Report Dealer Statement Button',
-    CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT: 'Click View a Report Paid Off Summary View Report',
+    VIEW_VIEW_A_REPORT_PAGE: 'View View a Report Page',//x
+    CLICK_VIEW_A_REPORT_DATE_INPUT: 'Click View a Report Date Input',//x
+    CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON: 'Click View a Report Upcoming Curtailment/Payoff Quote Button',//x
+    CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON: 'Click View a Report Exportable Inventory Button',//x
+    CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON: 'Click View a Report Dealer Statement Button',//x
+    CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON: 'Click View a Report Disbursement Detail Button',//x
+    CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT: 'Click View a Report Paid Off Summary View Report',//x
 
     //View Analytics Events
     VIEW_ANALYTICS_PAGE: 'View Analytics Page',
