@@ -2,12 +2,24 @@
 // Variables
 // ===============
 
+// Updated variables for refactor
+// Primary Colors
+$primary: #3399CC; // light blue for main interaction buttons (ctas) and primary accent
+$highlight: #0067AC; // blue (exact corporate blue) for interaction or highlight text
+$secondary: #91969D; // silver used for secondary interactions, buttons and checkboxes.
+$accent: #666666; // medium gray used to create divisions between sections
+$text: #404040; // primary text color
+
+
+// end updated variables
+
+
 // TYPOGRAPHY
 // Fonts
 $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-size: 14px;
 $base-line-height: 1.2;
-$base-text-color: #666;
+$base-text-color: #404040;
 $darker-text-color: #434343;
 
 // Type Sizes

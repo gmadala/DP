@@ -18,6 +18,15 @@ body, html {
   color: $base-text-color;
 }
 
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+
+
+
 .container-fluid {
   position: relative;
   width: 100%;
