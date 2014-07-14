@@ -44,16 +44,16 @@ angular.module('nextgearWebApp')
     promises.titleInfo.then(function(info) {
       $scope.titleInfo = info;
 
-      var displayId =  User.getInfo().BusinessNumber + '-' + $scope.titleInfo.StockNumber;
-      $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + $scope.titleInfo.StockNumber); // 0 = not first page only
+      var displayId =  User.getInfo().BusinessNumber + '-' + info.StockNumber;
+      $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + info.StockNumber); // 0 = not first page only
 
       // Title-specific functions
       $scope.titleInfo.dealerCanRequestTitles = function() {
-        return $scope.titleInfo.DealerIsEligibleToReleaseTitles;
+        return info.DealerIsEligibleToReleaseTitles;
       };
 
       $scope.titleInfo.titleRequestDisabled = function() {
-        if($scope.titleInfo.TitleReleaseProgramStatus !== 'EligibleForRelease') {
+        if(info.TitleReleaseProgramStatus !== 'EligibleForRelease') {
           return true;
         }
 
@@ -63,13 +63,13 @@ angular.module('nextgearWebApp')
 
         // By count
         var countInQueue = TitleReleases.getQueue().length;
-        if(countInQueue >= $scope.titleInfo.RemainingReleasesAvailable) {
+        if(countInQueue >= info.RemainingReleasesAvailable) {
           return true;
         }
 
         // By financed
         var financedInQueue = TitleReleases.getQueueFinanced();
-        if(financedInQueue + $scope.titleInfo.AmountFinanced > $scope.titleInfo.ReleaseBalanceAvailable) {
+        if(financedInQueue + info.AmountFinanced > info.ReleaseBalanceAvailable) {
           return true;
         }
         return false;
@@ -106,7 +106,7 @@ angular.module('nextgearWebApp')
       $scope.inventoryLocations = User.getStatics().locations;
 
       // users should only be able to change inventory location if they have more than one,
-      // and the Floorplan's status is either "Approved" or "pening"
+      // and the Floorplan's status is either "Approved" or "Pending"
       $scope.flooringInfo.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
 
       // Update Inventory Location
@@ -259,12 +259,9 @@ angular.module('nextgearWebApp')
       promises.valueInfo,
       promises.financialSummary
     ]).then(function(info){
-      var //landing = info[0],
-          vehicleInfo = info[1],
+      var vehicleInfo = info[1],
           titleInfo = info[2],
           flooringInfo = info[3];
-          // valueInfo = info[4],
-          // financialSummary = info[5];
 
       // build out title object for if user wants to request it
       titleForCheckout = {
