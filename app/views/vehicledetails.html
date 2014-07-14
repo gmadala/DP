@@ -175,21 +175,33 @@
           <span ng-show="isCollapsed">Show Payment Activity</span>
           <span ng-hide="isCollapsed">Hide Payment Activity</span>
         </button>
-        <div collapse="isCollapsed">
-          <table class="table table-striped">
-            <tr>
-              <th>Activity Date</th>
-              <th>Transaction Details</th>
-              <th>Effective Date</th>
-              <th>Recipt No.</th>
-            </tr>
-            <tr ng-repeat="activity in financialSummary.FloorplanActivity">
-              <td>{{ activity.ActivityDate | moment }}</td>
-              <td><a href="" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} of {{ activity.ActivityAmount | currency }}</a></td>
-              <td>???</td>
-              <td>???</td>
-            </tr>
-          </table>
+        <div collapse="isCollapsed" class="row-fluid">
+          <div class="span7">
+            <table class="table table-striped">
+              <tr>
+                <th>Activity Date</th>
+                <th>Transaction Details</th>
+              </tr>
+              <tr ng-repeat="activity in financialSummary.FloorplanActivity">
+                <td>{{ activity.ActivityDate | moment }}</td>
+                <td><a href="" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} of {{ activity.ActivityAmount | currency }}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="span5">
+            <div class="chart-obj"
+              nxg-chart
+              nxg-chart-size="flooringInfo.chart.size"
+              nxg-chart-type="pie"
+              nxg-chart-tooltip="false"
+              nxg-chart-data="flooringInfo.chart.data"
+              nxg-donut-options="flooringInfo.chart.donutOptions"
+              nxg-chart-title="flooringInfo.chart.title">
+            </div>
+            <label class="nxg-doughnut-chart-label">
+              Days Floored
+            </label>
+          </div>
         </div>
         <!-- end Payment Activity -->
 

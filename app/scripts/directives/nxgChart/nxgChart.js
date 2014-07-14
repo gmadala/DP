@@ -14,21 +14,32 @@ angular.module('nextgearWebApp')
         options: '&nxgChartOptions', // any overall options.
         truncateLabels: '@nxgChartTrimLabels', // true or false
         showLegend: '=nxgShowLegend', // true or false
-        donutOptions: '=nxgDonutOptions' // options specific to donut charts
+        donutOptions: '=nxgDonutOptions', // options specific to donut charts
+        title: '=nxgChartTitle' // title object that highcharts accepts
 
       },
       link: function(scope, element) {
+        var defaultFontFamily = 'Helvetica, Arial, sans-serif';
         // initialize chart with defaults and passed options
         var initializeChart = function(){
           var options = {
-            chart:  {
-              type   : scope.type,
+            chart: {
+              type: scope.type,
               backgroundColor: 'transparent',
               style: {
-                fontFamily: 'Helvetica, Arial, sans-serif'
+                fontFamily: defaultFontFamily
               },
             },
-            title:  { text   : ''    },
+            title: {
+              text:'',
+              floating: false, //whether label will affect chart position or not; default is false
+              style: {
+                fontFamily: defaultFontFamily,
+                fontSize: '14px',
+                fontWeight: 'bold'
+              },
+              y: 15 // vertical position of title within chart; default is 15
+            },
             credits: { enabled: false },
             tooltip: {
               enabled: scope.tooltip !== 'false' ? true : false,
@@ -38,13 +49,13 @@ angular.module('nextgearWebApp')
               headerFormat: '<span>{point.key}</span><br/>',
               shadow: false,
               style: {
-                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontFamily: defaultFontFamily,
                 fontSize: '12px'
               }
             },
             labels: {
               style: {
-                fontFamily: 'Helvetica, Arial, sans-serif'
+                fontFamily: defaultFontFamily
               }
             },
             legend: {
@@ -55,7 +66,7 @@ angular.module('nextgearWebApp')
                 return '<div class="chart-legend">' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
               },
               itemStyle: {
-                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontFamily: defaultFontFamily,
               },
               itemHoverStyle: {
                 color: '#274B6D' // same as non-hover color
@@ -105,7 +116,7 @@ angular.module('nextgearWebApp')
                 enabled: scope.labels && scope.labels === 'true',
                 aligned: 'right',
                 style: {
-                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  fontFamily: defaultFontFamily,
                   fontSize: '12px'
                 }
               }
@@ -118,13 +129,13 @@ angular.module('nextgearWebApp')
               title: {
                 text: scope.descriptionX || '',
                 style: {
-                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  fontFamily: defaultFontFamily,
                   color: '#135889'
                 }
               },
               labels: {
                 style: {
-                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  fontFamily: defaultFontFamily,
                   fontSize: '12px'
                 }
               }
@@ -152,6 +163,17 @@ angular.module('nextgearWebApp')
             pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor: '#FFFFFF';
             pie.size = scope.donutOptions.size ? scope.donutOptions.size : options.plotOptions.pie.size;
             pie.innerSize = scope.donutOptions.innerSize ? scope.donutOptions.innerSize : options.plotOptions.pie.innerSize;
+          }
+
+          // set title options if any have been passed in.
+          if (scope.title) {
+            options.title.text = (scope.title.text) ? scope.title.text : options.title.text;
+            options.title.floating = (scope.title.floating) ? scope.title.floating : options.title.floating;
+            if (scope.title.style) {
+              options.title.style.fontSize = (scope.title.style.fontSize) ? scope.title.style.fontSize : options.title.style.fontSize;
+              options.title.style.fontWeight = (scope.title.style.fontWeight) ? scope.title.style.fontWeight : options.title.style.fontWeight;
+            }
+            options.title.y = (scope.title.y) ? scope.title.y : options.title.y;
           }
 
           if(scope.type === 'line') {

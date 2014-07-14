@@ -102,6 +102,43 @@ angular.module('nextgearWebApp')
       $scope.flooringInfo = info;
       $scope.currentLocation = info.inventoryAddress;
 
+      $scope.flooringInfo.chart = {
+        data: [
+          {
+            name: 'OriginalDaysFloored',
+            y: $scope.flooringInfo.OriginalTermDaysFloored,
+            color: '#104968'
+          },
+          {
+            name: 'ExtendedDaysFloored',
+            y: $scope.flooringInfo.ExtendedTermPlanDaysFloored|| 0,
+            color: '#1B7ABA'
+          },
+          {
+            name: 'DaysRemaining',
+            y: ($scope.flooringInfo.OriginalTermPlanLength + $scope.flooringInfo.ExtendedTermPlanLength) - ($scope.flooringInfo.OriginalTermDaysFloored + $scope.flooringInfo.ExtendedTermDaysFloored),
+            color: '#A6A8AB'
+          }
+        ],
+        size: {
+          height: '160',
+          width: '160'
+        },
+        donutOptions: {
+          size: '100%',
+          innerSize: '80%',
+          border: false
+        },
+        title: {
+          text: $scope.flooringInfo.TotalDaysFloored,
+          style: {
+            fontSize: '28px'
+          },
+          floating: true,
+          y: 75
+        }
+      };
+
       // Grab all possible inventory locations
       $scope.inventoryLocations = User.getStatics().locations;
 
