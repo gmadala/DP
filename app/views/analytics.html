@@ -61,7 +61,7 @@
           </li>
           <!-- end conditional <li>s -->
           <li>
-            <button ng-click="toggleDetails()" class="details-toggle-btn">
+            <button ng-click="toggleDetails()" class="details-toggle-btn" nxg-track="{{showDetails && metric.CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK || ''}}">
               <!-- activates above conditional <li>
               s --> <i class="glyphicon glyphicon-chevron-{{ showDetails && 'up' || 'down'}}"></i>
               {{ showDetails && 'Close' || 'Show'}} Details
@@ -195,11 +195,11 @@
           <div class="well-out">
             <div class="nxg-fancy-radios">
 
-              <input type="radio" class="first" name="movers" id="best-movers"
+              <input type="radio" class="first" name="movers" id="best-movers" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_BEST_MOVERS_BUTTON}}"
                      ng-value="bestMovers" ng-model="selectedMoverChart" placeholder="Ten Best Movers">
               <label for="best-movers" id="best-movers-label"></label>
 
-              <input type="radio" class="last" name="movers" id="worst-movers"
+              <input type="radio" class="last" name="movers" id="worst-movers" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_WORST_MOVERS_BUTTON}}"
                      ng-value="worstMovers" ng-model="selectedMoverChart" placeholder="Ten Worst Movers">
               <label for="worst-movers" id="worst-movers-label"></label>
             </div>
@@ -239,7 +239,7 @@
 
             <p>Number of Cars Purchased Per-Auction (in the last 12 months)</p>
 
-            <a href class="btn btn-mini" ng-click="openTopAuctions()"> <i class="glyphicon glyphicon-eye-open"></i>
+            <a href class="btn btn-mini" ng-click="openTopAuctions()" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON}}"> <i class="glyphicon glyphicon-eye-open"></i>
               View All Auctions
             </a>
             <div class="auctions-chart">

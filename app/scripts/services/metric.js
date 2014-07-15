@@ -189,11 +189,13 @@ angular.module('nextgearWebApp')
     CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT: 'Click View a Report Paid Off Summary View Report',//x
 
     //View Analytics Events
-    VIEW_ANALYTICS_PAGE: 'View Analytics Page',
-    CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK: 'Click View Analytics Show Details Link',
-    CLICK_VIEW_ANALYTICS_VIEW_ALL_ACUTIONS_BUTTON: 'Click View Analytics View All Auctions Button',
+    VIEW_ANALYTICS_PAGE: 'View Analytics Page',//x
+    CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK: 'Click View Analytics Show Details Link',//x
+    CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON: 'Click View Analytics View All Auctions Button',//x
+    CLICK_VIEW_ANALYTICS_BEST_MOVERS_BUTTON: 'Click View Analytics Best Movers Button',//x
+    CLICK_VIEW_ANALYTICS_WORST_MOVERS_BUTTON: 'Click View Analytics Worst Movers Button',//x
 
     //Resources Events
-    VIEW_RESOURCES_PAGE: 'View Resources Page'
+    VIEW_RESOURCES_PAGE: 'View Resources Page'//x
 
   });
