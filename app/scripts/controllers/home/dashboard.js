@@ -77,20 +77,21 @@ angular.module('nextgearWebApp')
       $state.transitionTo('home.payments', param);
     };
 
-    $scope.dashChartOptions =  {
+    $scope.chartData = {};
+    $scope.chartOptions =  {
       donutOptions: {
-        size: '100%',
-        innerSize: '93%',
+        size: '110%',
+        innerSize: '104%',
         border: false,
         semiCircle: false
       },
       size: {
-        height: '150',
-        width: '150'
+        height: '160',
+        width: '160'
       },
       innerSize: {
-        height: '125',
-        width: '125'
+        height: '138',
+        width: '138'
       }
     };
 
@@ -108,6 +109,17 @@ angular.module('nextgearWebApp')
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
           $scope.dashboardData = result;
+
+          $scope.chartData = {
+            credit: result.creditChartData,
+            payments: result.paymentsChartData,
+            creditTitle: {
+              useHTML: true,
+              floating: true,
+              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(result.AvailableCredit, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
+              y: 70
+            },
+          };
         }
       );
     });

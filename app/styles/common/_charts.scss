@@ -4,8 +4,8 @@
   line-height: 1.25;
 }
 
-.nxg-doughnut-chart-nested {
-  float: left;
+.donut-nested {
+  position: relative;
 
   .inner-nested {
     margin: 15px auto;
@@ -16,47 +16,26 @@
   width: 100%;
 }
 
-.nxg-doughnut-chart-outer {
+.donut-outer {
   position: absolute;
-  top: -12px;
-  left: -13px;
+  top: 0;
+  left: 0;
   width: 110px;
   height: 110px;
 }
 
-.nxg-doughnut-chart-inner {
+.donut-inner {
   position: absolute;
-  left: 0;
-  top: 0;
-}
-.nxg-doughnut-chart-label {
-  @extend %center;
-  cursor: default;
-  position: absolute;
-  margin-top: 20px;
-
-  &.smaller {
-    margin-top: 25px;
-  }
-  &.smaller .nxg-doughnut-chart-label-primary {
-    font-size: $base-font-size;
-  }
+  left: 11px;
+  top: 11px;
 }
 
-// .nxg-doughnut-chart-label-primary,
-// .nxg-doughnut-chart-label-secondary {
-//   line-height: 1;
-//   margin: 0;
-// }
-// .nxg-doughnut-chart-label-primary {
-//   font-size: $large-font-size;
-//   color: #53BF42;
-// }
-// .nxg-doughnut-chart-label-secondary {
-//   font-size: $tiny-font-size;
-// }
-.nxg-chart-legend-color {
-  @include box(10px);
+.chart-legend {
+  margin: 0 8px 20px 0;
+}
+.chart-legend-color {
+  @include box(15px);
+  @include border-radius(2px);
   display: block;
 }
 /**
@@ -64,10 +43,10 @@
  * So if you need change these hex colors, you need to do that in both places.
  * @see app/scripts/models/dashboard.js
  */
-.nxg-chart-approved-credit    { background-color: #9F9F9F }
-.nxg-chart-temporary-credit   { background-color: #575757 }
-.nxg-chart-utilized-credit    { background-color: #3D9AF4 }
-.nxg-chart-available-credit   { background-color: #54BD45 }
+// .nxg-chart-approved-credit    { background-color: #9F9F9F }
+// .nxg-chart-temporary-credit   { background-color: #575757 }
+.nxg-chart-utilized-credit    { background-color: $primary; }
+.nxg-chart-available-credit   { background-color: $success; }
 .nxg-chart-fees               { background-color: #444444 }
 .nxg-chart-payments           { background-color: #2286f5 }
 .nxg-chart-scheduled-payments { background-color: #3fb232 }
@@ -100,29 +79,12 @@
   }
 }
 
-.credit-chart {
-  .highcharts-container {
-    @include rotate(180deg);
-  }
-
-  .nxg-doughnut-chart-label {
-    top: 20px;
-    width: 100px;
-    left: 50%;
-    margin-left: -50px;
-
-    .nxg-chart-legend-color {
-      margin-right: 5px;
-    }
-  }
-}
-
 // Vehicle Details semicircle charts.
-
 .chart-label-primary, .chart-label-secondary {
   color: $text;
   text-align: center;
   margin: 0;
+  line-height: 1;
 }
 
 .chart-obj .highcharts-container {

@@ -1,20 +1,19 @@
-<div class="span3 summary unapplied-funds well adjacent">
-    <h4>Unapplied Funds</h4>
-    <div class="well-out">
-      <ul class="unstyled">
-        <li>
-          <p class="fund-label">Unapplied Funds</p>
-          <p class="fund-amount">{{ fundsBalance | currency | alt }}</p>
-        </li>
-        <li>
-          <p class="fund-label">Total Available</p>
-          <p class="fund-amount">{{ fundsAvail | currency | alt }}</p>
-        </li>
-      </ul>
-      <button class="more btn btn-mini" href="#"
-         ng-show="fundsAvail > 0"
-         ng-click="openRequestPayout($event)" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON}}">
-          Request Payout
-      </button>
-    </div>
+<div class="span3 well">
+  <h2 class="well-title">Unapplied Funds</h2>
+
+  <div class="lockup">
+    <h1 class="lockup-major">{{ fundsBalance | currency | alt }}</h1>
+    <p class="lockup-minor">Unapplied Funds</p>
+  </div>
+
+  <div class="lockup">
+    <h1 class="lockup-major color-success">{{ fundsAvail | currency | alt }}</h1>
+    <p class="lockup-minor">Total Available</p>
+  </div>
+
+  <button class="btn-cta cta-full cta-secondary" href="#"
+     ng-show="fundsAvail > 0"
+     ng-click="openRequestPayout($event)" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON}}">
+      Request Payout
+  </button>
 </div>

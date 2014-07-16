@@ -320,7 +320,6 @@ span.btn-help {
 }
   .cta-half {
     @extend %float-l;
-    // display: block;
     width: 48%;
     margin: 10px 0;
 
@@ -330,8 +329,9 @@ span.btn-help {
   }
 
   .cta-full {
+    @include border-top-radius(0);
     @extend %full-width;
-    margin: 5px 0 10px;
+    margin: 0;
   }
 
   .cta-primary {
@@ -344,6 +344,10 @@ span.btn-help {
     background: $cta-secondary-bkgd;
     color: $cta-secondary-text;
     border: 1px solid $border;
+
+    &.cta-full {
+      border-width: 1px 0 0;
+    }
   }
 
 /*

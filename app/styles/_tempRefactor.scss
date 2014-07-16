@@ -104,6 +104,10 @@
   color: $success !important;
 }
 
+
+.push-down {
+  padding-top: 20px;
+}
 // overly-specific....should really refactor somehow.
 .payment-activity {
   [class*="span"] {
@@ -127,12 +131,4 @@
 .floor-chart-title {
   position: relative;
   top: -15px;
-}
-
-.push-down {
-  padding-top: 20px;
-}
-
-.equal-height {
-
 }
