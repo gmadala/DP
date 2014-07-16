@@ -4,6 +4,7 @@
 
 @import "compass/css3";
 
+@import "basic/variables";
 @import "../components/sass-bootstrap/lib/bootstrap";
 /*
  * TODO: import only parts of bootstrap we know we'll need:
@@ -24,7 +25,7 @@
  * @import "../components/sass-bootstrap/lib/utilities";
  */
 
-@import "basic/variables"; // we can override bootstrap variables here as well.
+ // we can override bootstrap variables here as well.
 
 @import "basic/mixins";
 @import "basic/adjacent-grid";

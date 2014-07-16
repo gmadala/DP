@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, VehicleDetails, User, TitleReleases, api) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, api) {
 
     $scope.stockNo = $stateParams.stockNumber;
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
@@ -111,31 +111,31 @@ angular.module('nextgearWebApp')
           },
           {
             name: 'ExtendedDaysFloored',
-            y: $scope.flooringInfo.ExtendedTermPlanDaysFloored|| 0,
+            y: $scope.flooringInfo.ExtendedTermDaysFloored|| 0,
             color: '#1B7ABA'
           },
           {
             name: 'DaysRemaining',
             y: ($scope.flooringInfo.OriginalTermPlanLength + $scope.flooringInfo.ExtendedTermPlanLength) - ($scope.flooringInfo.OriginalTermDaysFloored + $scope.flooringInfo.ExtendedTermDaysFloored),
-            color: '#A6A8AB'
+            color: '#E6E6E6'
           }
         ],
         size: {
-          height: '160',
-          width: '160'
+          height: '180',
+          width: '180'
         },
         donutOptions: {
-          size: '100%',
-          innerSize: '80%',
-          border: false
+          size: '110%',
+          innerSize: '90%',
+          border: true
         },
         title: {
           text: $scope.flooringInfo.TotalDaysFloored,
           style: {
-            fontSize: '28px'
+            fontSize: '40px'
           },
           floating: true,
-          y: 75
+          y: 100
         }
       };
 
@@ -191,50 +191,66 @@ angular.module('nextgearWebApp')
         interestFeesCPP: info.InterestPaid + info.InterestOutstanding + info.FeesPaid + info.FeesOutstanding + info.CollateralProtectionPaid + info.CollateralProtectionOutstanding
       };
 
-      $scope.financialSummary.paidChart = [
-        {
-          name: 'Principal',
-          y: info.PrincipalPaid,
-          color: '#1B7ABA'
+      $scope.financialSummary.paidChart = {
+        title: {
+          useHTML: true,
+          floating: true,
+          text: '<h5 class="chart-label-secondary">Total Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
+          y: 70
         },
-        {
-          name: 'Interest',
-          y: info.InterestPaid,
-          color: '#104968'
-        },
-        {
-          name: 'Fees',
-          y: info.FeesPaid,
-          color: '#A6A8AB'
-        }
-      ];
+        data: [
+          {
+            name: 'Principal',
+            y: info.PrincipalPaid,
+            color: '#1B7ABA'
+          },
+          {
+            name: 'Interest',
+            y: info.InterestPaid,
+            color: '#104968'
+          },
+          {
+            name: 'Fees',
+            y: info.FeesPaid,
+            color: '#A6A8AB'
+          }
+        ]
+      };
 
-      $scope.financialSummary.outstandingChart = [
-        {
-          name: 'Principal',
-          y: info.PrincipalOutstanding,
-          color: '#1B7ABA'
+      $scope.financialSummary.outstandingChart = {
+        title: {
+          useHTML: true,
+          floating: true,
+          text: '<h5 class="chart-label-secondary">Outstanding</h5> <h3 class="chart-label-primary color-danger">' + $filter('currency')($scope.financialSummary.TotalOutstanding) + '</h3>',
+          y: 70
         },
-        {
-          name: 'Interest',
-          y: info.InterestOutstanding,
-          color: '#104968'
-        },
-        {
-          name: 'Fees',
-          y: info.FeesOutstanding,
-          color: '#A6A8AB'
-        }
-      ];
+        data: [
+          {
+            name: 'Principal',
+            y: info.PrincipalOutstanding,
+            color: '#1B7ABA'
+          },
+          {
+            name: 'Interest',
+            y: info.InterestOutstanding,
+            color: '#104968'
+          },
+          {
+            name: 'Fees',
+            y: info.FeesOutstanding,
+            color: '#A6A8AB'
+          }
+        ]
+      };
 
       if(info.CollateralProtectionPaid === 0 && info.CollateralProtectionOutstanding === 0) {
-        $scope.financialSummary.paidChart.push({
+        $scope.financialSummary.paidChart.data.push({
           name: 'CPP',
           y: info.CollateralProtectionPaid,
           color: '#6D6E70'
         });
 
-        $scope.financialSummary.outstandingChart.push({
+        $scope.financialSummary.outstandingChart.data.push({
           name: 'CPP',
           y: info.CollateralProtectionOutstanding,
           color: '#6D6E70'
@@ -244,13 +260,13 @@ angular.module('nextgearWebApp')
       $scope.financialSummary.chart = {
         donutOptions: {
           size: '110%',
-          innerSize: '85%',
+          innerSize: '90%',
           border: false,
           semiCircle: true
         },
         size: {
-          height: '180',
-          width: '200',
+          height: '220',
+          width: '220',
         }
       };
 

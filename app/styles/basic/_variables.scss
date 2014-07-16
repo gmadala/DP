@@ -10,9 +10,53 @@ $secondary: #91969D; // silver used for secondary interactions, buttons and chec
 $accent: #666666; // medium gray used to create divisions between sections
 $text: #404040; // primary text color
 
+// override bootstrap
+$baseFontSize: 12px;
+$baseLineHeight: 1.2;
+$tableBackground: #FFFFFF;
+$tableBackgroundAccent: #F2F2F2;
+$tableBorder: #BBBBBB;
+// end bootstrap overrides
+
+$dataTableBorder: #BBBBBB;
+
+// Color Indicators
+$danger: #c43926;
+// $warning: ;
+// $info: ;
+$success: #54bd45;
+
+$white: #FFFFFF;
+$borderRadius: 5px;
+
+// Buttons
+$btn-bkgd: $white;
+$btn-text: $highlight;
+$btn-bkgd-active: #CCCCCC;
+$btn-text-active: $highlight;
+$btn-bkgd-disabled: #FFFFFF;
+$btn-text-disabled: #B7B7B7;
+$btn-bkgd-selected: #585858;
+$btn-text-selected: #FFFFFF;
+
+$toggle-color: #1B769D;
+$toggle-slider-color: #FFFFFF;
+
+// CTA
+$cta-1-height: 45px;
+$cta-2-height: 30px;
+
+$cta-primary-text: #FFFFFF;
+$cta-primary-bkgd: $primary;
+$cta-primary-text-active: #FFFFFF;
+$cta-primary-bkgd-active: $highlight;
+
+$cta-secondary-text: $primary;
+$cta-secondary-bkgd: #FFFFFF;
+$cta-secondary-text-active: $highlight;
 
 // end updated variables
-
+/////////////////////////////////////////////////////////////
 
 // TYPOGRAPHY
 // Fonts
@@ -134,3 +178,6 @@ $well-out-bkgd: $white;
 $well-out-border: #D5D5D5;
 $well-twocol-border: #CCC;
 $well-adj-border: #EEE;
+
+$wellBackground: #f8f8f8;
+$wellBorder: #bbbcbe;

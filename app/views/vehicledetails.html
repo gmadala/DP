@@ -4,276 +4,287 @@
       <h1>{{ flooringInfo.Description }}</h1>
     </div>
     <section class="row-fluid">
-      <section class="span9 first">
+      <section class="span10">
         <!-- Flooring Information -->
-        <div class="well row-fluid">
-          <h4>Flooring Information <span>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h4>
-          <div class="span5 first">
-            <table class="table">
-               <tr>
-                <td class="">Total Days Floored</td>
-                <td class="value">{{ flooringInfo.TotalDaysFloored }} (of {{ flooringInfo.TotalTermPlanLength }} days)</td>
-              </tr>
-              <tr>
-                <td class="">Original Term</td>
-                <td class="value">{{ flooringInfo.OriginalTermDaysFloored }} (of {{ flooringInfo.OriginalTermPlanLength }} days)</td>
-              </tr>
-              <tr>
-                <td class="">Extended Term</td>
-                <td class="value">{{ flooringInfo.ExtendedTermDaysFloored }} (of {{ flooringInfo.ExtendedTermPlanLength }} days)</td>
-              </tr>
-              <tr>
-                <td class="">Status</td>
-                <td class="value">{{ flooringInfo.FloorplanStatusName }}</td>
-              </tr>
-              <tr>
-                <td class="">Stock Number</td>
-                <td class="value">{{ flooringInfo.StockNumber }}</td>
-              </tr>
-              <tr>
-                <td class="">Purchase Date</td>
-                <td class="value">{{ flooringInfo.PurchaseDate | moment }}</td>
-              </tr>
-              <tr>
-                <td class="">Date Submitted</td>
-                <td class="value">{{ flooringInfo.SubmittedDate | moment }}</td>
-              </tr>
-              <tr>
-                <td class="">Floor Date</td>
-                <td class="value">{{ flooringInfo.FlooringDate | moment }}</td>
-              </tr>
-              <tr>
-                <td class="">Finance Amount</td>
-                <td class="value">{{ flooringInfo.FinanceAmount | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">Purchase Amount</td>
-                <td class="value">{{ flooringInfo.PurchaseAmount | currency }}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="span7 last">
-            <table class="table">
-              <tr>
-                <td class="">Line of Credit</td>
-                <td class="value">{{ flooringInfo.LineOfCredit }}</td>
-              </tr>
-              <tr>
-                <td class="">Term Plan Name</td>
-                <td class="value">{{ flooringInfo.TermPlanName }}</td>
-              </tr>
-              <tr>
-                <td class="">Product Type</td>
-                <td class="value">{{ flooringInfo.ProductType }}</td>
-              </tr>
-              <tr>
-                <td class="">Seller</td>
-                <td class="value">{{ flooringInfo.SellerName }}</td>
-              </tr>
-              <tr>
-                <td class="">Seller Address</td>
-                <td class="value">{{ flooringInfo.sellerAddress | address }}</td>
-              </tr>
-              <tr>
-                <td class="">Inventory Location</td>
-                <td class="value" ng-hide="flooringInfo.showEditInventoryLocation">
-                  {{ flooringInfo.inventoryAddress | address }}
-                  <span ng-show="flooringInfo.showChangeLink"><br/>
-                    <a href="" ng-click="flooringInfo.showInventorySelect()">Change Inventory Location</a>
-                  </span>
-                </td>
-                <td class="value" ng-show="flooringInfo.showEditInventoryLocation">
-                  Select Below:
-                </td>
-              </tr>
-              <tr ng-show="flooringInfo.showEditInventoryLocation">
-                <td>
-                  <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
-                  <div>
-                    <button class="" ng-click="flooringInfo.cancelInventoryChanges()">Cancel Changes</button>
-                    <button class="" ng-click="flooringInfo.saveInventoryChanges()">Save Location</button>
+        <div class="well">
+          <h2 class="well-title">Flooring Information <span class="well-sub-title">Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h2>
+          <div class="row-fluid col-bordered">
+            <div class="span5 first">
+              <ul class="list-table">
+                <li class="list-table-row">
+                  <p class="span6">Total Days Floored</p>
+                  <p class="span6 value">{{ flooringInfo.TotalDaysFloored }} <span class="value-note">(of {{ flooringInfo.TotalTermPlanLength }} days)</span></p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Original Term</p>
+                  <p class="span6 value">{{ flooringInfo.OriginalTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.OriginalTermPlanLength }} days)</span></p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Extended Term</p>
+                  <p class="span6 value">{{ flooringInfo.ExtendedTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.ExtendedTermPlanLength }} days)</span></p>
+                </li>
+                <li class="list-table-spacer"></li>
+                <li class="list-table-row">
+                  <p class="span6">Status</p>
+                  <p class="span6 value">{{ flooringInfo.FloorplanStatusName }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Stock Number</p>
+                  <p class="span6 value">{{ flooringInfo.StockNumber }}</p>
+                </li>
+                <li class="list-table-spacer"></li>
+                <li class="list-table-row">
+                  <p class="span6">Purchase Date</p>
+                  <p class="span6 value">{{ flooringInfo.PurchaseDate | moment }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Date Submitted</p>
+                  <p class="span6 value">{{ flooringInfo.SubmittedDate | moment }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Floor Date</p>
+                  <p class="span6 value">{{ flooringInfo.FlooringDate | moment }}</p>
+                </li>
+                <li class="list-table-spacer"></li>
+                <li class="list-table-row">
+                  <p class="span6">Finance Amount</p>
+                  <p class="span6 value">{{ flooringInfo.FinanceAmount | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Purchase Amount</p>
+                  <p class="span6 value">{{ flooringInfo.PurchaseAmount | currency }}</p>
+                </li>
+              </ul>
+            </div>
+            <div class="span7 last">
+              <ul class="list-table">
+                <li class="list-table-row">
+                  <p class="span5">Line of Credit</p>
+                  <p class="span7 value">{{ flooringInfo.LineOfCredit }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span5">Term Plan Name</p>
+                  <p class="span7 value">{{ flooringInfo.TermPlanName }}</p>
+                </li>
+                <li class="list-table-spacer"></li>
+                <li class="list-table-row">
+                  <p class="span5">Product Type</p>
+                  <p class="span7 value">{{ flooringInfo.ProductType }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span5">Seller</p>
+                  <p class="span7 value">{{ flooringInfo.SellerName }}</p>
+                </li>
+                <li class="list-table-spacer"></li>
+                <li class="list-table-row">
+                  <p class="span5">Seller Address</p>
+                  <p class="span7 value">{{ flooringInfo.sellerAddress | address:'twoLine' }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span5">Inventory Location</p>
+                  <p class="span7 value" ng-hide="flooringInfo.showEditInventoryLocation">
+                    {{ flooringInfo.inventoryAddress | address:'twoLine' }}
+                    <span ng-show="flooringInfo.showChangeLink"><br/><br/>
+                      <a class="value-note" href="" ng-click="flooringInfo.showInventorySelect()">Change Inventory Location</a>
+                    </span>
+                  </p>
+                  <p class="span7 value" ng-show="flooringInfo.showEditInventoryLocation">
+                    Select Below:
+                  </p>
+                </li>
+                <li class="list-table-row" ng-show="flooringInfo.showEditInventoryLocation">
+                  <div class="offset5 span7">
+                    <div class="style-select">
+                      <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
+                    </div>
+                    <div class="button-group">
+                      <button type="button" class="btn-cta cta-secondary" ng-click="flooringInfo.cancelInventoryChanges()">Cancel Changes</button>
+                      <button type="submit" class="btn-cta cta-primary" ng-click="flooringInfo.saveInventoryChanges()">Save Location</button>
+                    </div>
                   </div>
-                </td>
-              </tr>
-            </table>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <!-- end Flooring Information -->
 
         <!-- Payment Activity -->
-        <div class="well row-fluid">
-          <h4>Payment Activity <a ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h4>
-          <div class="span7">
-            <div class="row-fluid">
-              <div class="span6">
-                <div class="temp-donut-chart"
+        <div class="well">
+          <h2 class="well-title">Financial Activity <a class="well-sub-title featured" ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h2>
+          <div class="row-fluid col-bordered">
+            <div class="span7">
+              <div class="row-fluid">
+                <div class="span6 semi-donut">
+                  <div class="chart-obj"
+                      nxg-chart
+                      nxg-chart-size="financialSummary.chart.size"
+                      nxg-chart-type="pie"
+                      nxg-chart-tooltip="false"
+                      nxg-chart-data="financialSummary.paidChart.data"
+                      nxg-donut-options="financialSummary.chart.donutOptions"
+                      nxg-show-legend="true"
+                      nxg-chart-title="financialSummary.paidChart.title">
+                  </div>
+                </div>
+                <div class="span6 semi-donut">
+                  <div class="chart-obj"
                     nxg-chart
                     nxg-chart-size="financialSummary.chart.size"
                     nxg-chart-type="pie"
                     nxg-chart-tooltip="false"
-                    nxg-chart-data="financialSummary.paidChart"
+                    nxg-chart-data="financialSummary.outstandingChart.data"
                     nxg-donut-options="financialSummary.chart.donutOptions"
-                    nxg-show-legend="true">
+                    nxg-show-legend="true"
+                    nxg-chart-title="financialSummary.outstandingChart.title">
+                  </div>
                 </div>
-                <label class="nxg-doughnut-chart-label"  style="z-index:1000">
-                  <p class="nxg-doughnut-chart-label-secondary">Total Paid</p>
-                  <p class="nxg-doughnut-chart-label-primary">{{ financialSummary.TotalPaid | numeral:'($0[.]00a)' }}</p>
-                </label>
-              </div>
-              <div class="span6">
-                <div class="chart-obj"
-                  nxg-chart
-                  nxg-chart-size="financialSummary.chart.size"
-                  nxg-chart-type="pie"
-                  nxg-chart-tooltip="false"
-                  nxg-chart-data="financialSummary.outstandingChart"
-                  nxg-donut-options="financialSummary.chart.donutOptions"
-                  nxg-show-legend="true">
-                </div>
-                <label class="nxg-doughnut-chart-label"  style="z-index:1000">
-                  <p class="nxg-doughnut-chart-label-secondary">Total Outstanding</p>
-                  <p class="nxg-doughnut-chart-label-primary">{{ financialSummary.TotalOutstanding | numeral:'($0[.]00a)' }}</p>
-                </label>
               </div>
             </div>
-          </div>
-          <div class="span5">
-            <table class="table">
-              <tr>
-                <td class="heavy">Payment Summary</td>
-              </tr>
-              <tr>
-                <td class="">Financed Amount</td>
-                <td class="value">{{ financialSummary.breakdown.financeAmount | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">{{ financialSummary.breakdown.interestFeesLabel }}</td>
-                <td class="value">{{ financialSummary.breakdown.interestFeesCPP | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">Floor Plan Total</td>
-                <td class="value">{{ financialSummary.FloorplanTotal | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">Total Paid</td>
-                <td class="value">{{ financialSummary.TotalPaid | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">Total Outstanding</td>
-                <td class="value">{{ financialSummary.TotalOutstanding | currency }}</td>
-              </tr>
-              <tr>
-                <td class="">
-                  <a ng-href="">Interest-only payment ({{ financialSummary.InterestOutstanding | currency }})</a></td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-        <!-- pull-down button for payment activity goes here -->
-        <button ng-click="isCollapsed = !isCollapsed">
-          <span ng-show="isCollapsed">Show Payment Activity</span>
-          <span ng-hide="isCollapsed">Hide Payment Activity</span>
-        </button>
-        <div collapse="isCollapsed" class="row-fluid">
-          <div class="span7">
-            <table class="table table-striped">
-              <tr>
-                <th>Activity Date</th>
-                <th>Transaction Details</th>
-              </tr>
-              <tr ng-repeat="activity in financialSummary.FloorplanActivity">
-                <td>{{ activity.ActivityDate | moment }}</td>
-                <td><a href="" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} of {{ activity.ActivityAmount | currency }}</a></td>
-              </tr>
-            </table>
-          </div>
-          <div class="span5">
-            <div class="chart-obj"
-              nxg-chart
-              nxg-chart-size="flooringInfo.chart.size"
-              nxg-chart-type="pie"
-              nxg-chart-tooltip="false"
-              nxg-chart-data="flooringInfo.chart.data"
-              nxg-donut-options="flooringInfo.chart.donutOptions"
-              nxg-chart-title="flooringInfo.chart.title">
+            <div class="span5">
+              <ul class="list-table">
+                <li class="list-table-row list-table-emphasis">
+                  <p class="">Payment Summary</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Financed Amount</p>
+                  <p class="span5 value">{{ financialSummary.breakdown.financeAmount | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">{{ financialSummary.breakdown.interestFeesLabel }}</p>
+                  <p class="span5 value">{{ financialSummary.breakdown.interestFeesCPP | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Floor Plan Total</p>
+                  <p class="span5 value">{{ financialSummary.FloorplanTotal | currency }}</p>
+                </li>
+                <li class="list-table-hr"></li>
+                <li class="list-table-row">
+                  <p class="span7">Total Paid</p>
+                  <p class="span5 value">{{ financialSummary.TotalPaid | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Total Outstanding</p>
+                  <p class="span5 value">{{ financialSummary.TotalOutstanding | currency }}</p>
+                </li>
+                <li class="list-table-spacer">
+                <li class="list-table-row">
+                  <div class="span12">
+                    <a ng-href="">Interest-only payment ({{ financialSummary.InterestOutstanding | currency }})</a></div>
+                </li>
+              </ul>
             </div>
-            <label class="nxg-doughnut-chart-label">
-              Days Floored
-            </label>
           </div>
-        </div>
-        <!-- end Payment Activity -->
-
-        <div class="row-fluid">
-          <!-- Vehicle Information -->
-          <div class="well span6">
-            <h4>Vehicle Information <span>Stock #{{ stockNo }}</span></h4>
-            <div class="row-fluid">
-              <table class="table">
-                <tr>
-                  <td class="">VIN</td>
-                  <td class="value">{{ vehicleInfo.UnitVin }}</td>
-                </tr>
-                <tr>
-                  <td class="">Make</td>
-                  <td class="value">{{ vehicleInfo.Make }}</td>
-                </tr>
-                <tr>
-                  <td class="">Model</td>
-                  <td class="value">{{ vehicleInfo.Model }}</td>
-                </tr>
-                <tr>
-                  <td class="">Style</td>
-                  <td class="value">{{ vehicleInfo.Style }}</td>
-                </tr>
-                <tr>
-                  <td class="">Color</td>
-                  <td class="value">{{ vehicleInfo.Color }}</td>
-                </tr>
-                <tr>
-                  <td class="">Year</td>
-                  <td class="value">{{ vehicleInfo.Year }}</td>
-                </tr>
-                <tr>
-                  <td class="">Current Mileage</td>
-                  <td class="value">{{ vehicleInfo.CurrentMileage }}</td>
-                </tr>
-                <tr>
-                  <td class="">Salvage</td>
-                  <td class="value">{{ {true: 'Yes', false: 'No'}[!!vehicleInfo.Salvage] }}</td>
+          <!-- Hidden by default; Hide & disable button if there is no payment activity to show. -->
+          <div collapse="isCollapsed" ng-show="financialSummary.FloorplanActivity.length > 0" class="row-fluid aside payment-activity">
+            <div class="span7">
+              <table class="table table-striped table-secondary">
+                <thead>
+                  <th>Activity Date</th>
+                  <th>Transaction Details</th>
+                </thead>
+                <tr ng-repeat="activity in financialSummary.FloorplanActivity">
+                  <td class="center">{{ activity.ActivityDate | moment }}</td>
+                  <td><a href="" class="primary" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | currency }}</a></td>
                 </tr>
               </table>
+            </div>
+            <div class="span5 last">
+              <div class="chart-obj chart-daysFloored"
+                nxg-chart
+                nxg-chart-size="flooringInfo.chart.size"
+                nxg-chart-type="pie"
+                nxg-chart-tooltip="false"
+                nxg-chart-data="flooringInfo.chart.data"
+                nxg-donut-options="flooringInfo.chart.donutOptions"
+                nxg-chart-title="flooringInfo.chart.title">
+              </div>
+              <h3 class="center floor-chart-title">
+                Days Floored
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
+        <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+          <span ng-show="financialSummary.FloorplanActivity.length > 0">{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity
+          </span>
+         <span ng-hide="financialSummary.FloorplanActivity.length > 0">
+          No Payment Activity Available
+        </span>
+        </button>
+        <!-- end Payment Activity -->
+
+        <div class="row-fluid contain-wells">
+          <!-- Vehicle Information -->
+          <div class="well span6 equal-height">
+            <h2 class="well-title">Vehicle Information <span class="well-sub-title">Stock #{{ stockNo }}</span></h2>
+            <div class="row-fluid">
+              <ul class="list-table padded">
+                <li class="list-table-row">
+                  <p class="span6">VIN</p>
+                  <p class="span6 value">{{ vehicleInfo.UnitVin }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Make</p>
+                  <p class="span6 value">{{ vehicleInfo.Make }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Model</p>
+                  <p class="span6 value">{{ vehicleInfo.Model }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Style</p>
+                  <p class="span6 value">{{ vehicleInfo.Style }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Color</p>
+                  <p class="span6 value">{{ vehicleInfo.Color }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Year</p>
+                  <p class="span6 value">{{ vehicleInfo.Year }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Current Mileage</p>
+                  <p class="span6 value">{{ vehicleInfo.CurrentMileage }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Salvage</p>
+                  <p class="span6 value">{{ {true: 'Yes', false: 'No'}[!!vehicleInfo.Salvage] }}</p>
+                </li>
+              </ul>
 
             </div>
           </div>
           <!-- end Vehicle Information -->
 
           <!-- Title Information -->
-          <div class="well span6">
-            <h4>Title Information <a ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h4>
+          <div class="well span6 equal-height">
+            <h2 class="well-title">Title Information <a class="well-sub-title featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h2>
             <div class="row-fluid">
-              <table class="table">
-                <tr>
-                  <td class="">Title Location</td>
-                  <td class="value">{{ titleInfo.TitleLocation }}</td>
-                </tr>
-                <tr>
-                  <td class="">Title State</td>
-                  <td class="value">{{ titleInfo.TitleState }}</td>
-                </tr>
-                <tr>
-                  <td class="">Tracking Number</td>
-                  <td class="value">{{ titleInfo.TitleTrackingNumber }}</td>
-                </tr>
-                <tr>
-                  <td class="">Disbursement Date</td>
-                  <td class="value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</td>
-                </tr>
-                <tr>
-                  <td class="" ng-show="titleInfo.dealerCanRequestTitles()"><button href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()">Request the Title</button></td>
-                </tr>
-              </table>
+              <ul class="list-table padded">
+                <li class="list-table-row">
+                  <p class="span6">Title Location</p>
+                  <p class="span6 value">{{ titleInfo.TitleLocation }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Title State</p>
+                  <p class="span6 value">{{ titleInfo.TitleState }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Tracking Number</p>
+                  <p class="span6 value">{{ titleInfo.TitleTrackingNumber }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6">Disbursement Date</p>
+                  <p class="span6 value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span6" ng-show="titleInfo.dealerCanRequestTitles()"><button class="btn-link" href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()">Request the Title</button></p>
+                </li>
+              </ul>
             </div>
           </div>
           <!-- end Title Information -->
@@ -281,38 +292,47 @@
 
         <!-- Floor Plan Value Estimates -->
         <div class="well row-fluid">
-          <h4>Floor Plan Value Estimates <span>NextGear Black Book Valuation</span></h4>
-          <div class="row-fluid">
+          <h2 class="well-title">Floor Plan Value Estimates <span class="well-sub-title">NextGear Black Book Valuation</span></h2>
+          <div class="row-fluid col-bordered">
             <div class="span5">
-              <table class="table">
-                <tr>
-                  <td class="">Extra Clean</td>
-                  <td class="value">{{ valueInfo.ExtraCleanValue | currency }}</td>
-                </tr>
-                <tr>
-                  <td class="">Clean</td>
-                  <td class="value">{{ valueInfo.CleanValue | currency }}</td>
-                </tr>
-                <tr>
-                  <td class="">Average</td>
-                  <td class="value">{{ valueInfo.AverageValue | currency }}</td>
-                </tr>
-                <tr>
-                  <td class="">Rough</td>
-                  <td class="value">{{ valueInfo.RoughValue | currency }}</td>
-                </tr>
-              </table>
+              <ul class="list-table">
+                <li class="list-table-row">
+                  <p class="span7">Extra Clean</p>
+                  <p class="span5 value">{{ valueInfo.ExtraCleanValue | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Clean</p>
+                  <p class="span5 value">{{ valueInfo.CleanValue | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Average</p>
+                  <p class="span5 value">{{ valueInfo.AverageValue | currency }}</p>
+                </li>
+                <li class="list-table-row">
+                  <p class="span7">Rough</p>
+                  <p class="span5 value">{{ valueInfo.RoughValue | currency }}</p>
+                </li>
+              </ul>
             </div>
 
             <div class="span7">
-              <table class="table">
-                <tr>
-                  <td>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}<br/>Minimum</td>
-                  <td>{{ valueInfo.NextGearRegionalAveragePurchasePrice | currency }}<br/>Average</td>
-                  <td>{{ valueInfo.NextGearRegionalMaxPurchasePrice | currency }}<br/>Maximum</td>
-                </tr>
-              </table>
-              <p>NextGear Regional Values are based on the first 3 digits of your zip code.</p>
+              <div class="row-fluid col-bordered center push-down">
+                <div class="span4 cell">
+                  <h4>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}</h4>
+                  <p>Minimum</p>
+                </div>
+                <div class="span4 cell">
+                  <h4>{{ valueInfo.NextGearRegionalAveragePurchasePrice | currency }}</h4>
+                  <p>Average</p>
+                </div>
+                <div class="span4 cell">
+                  <h4>{{ valueInfo.NextGearRegionalMaxPurchasePrice | currency }}</h4>
+                  <p>Maximum</p>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <p class="center paragraph">NextGear Regional Values are based on the first 3 digits of your zip code.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -320,7 +340,7 @@
 
       </section>
 
-      <section class="span3 last">
+      <section class="span2 last">
         <h4>Payment Options</h4>
         <div>
           A payment is due today.

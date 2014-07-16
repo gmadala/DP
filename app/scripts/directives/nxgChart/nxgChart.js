@@ -29,6 +29,7 @@ angular.module('nextgearWebApp')
               style: {
                 fontFamily: defaultFontFamily
               },
+              spacingBottom: 0
             },
             title: {
               text:'',
@@ -71,13 +72,14 @@ angular.module('nextgearWebApp')
               itemHoverStyle: {
                 color: '#274B6D' // same as non-hover color
               },
-              itemMarginTop: 2,
-              itemMarginBottom: 2,
+              itemMarginTop: 3,
+              itemMarginBottom: 3,
               layout: 'vertical',
               margin: 0,
               symbolRadius: 0,
               symbolWidth: 20,
               useHTML: true,
+              y: -20
             },
             plotOptions: {
               bar: {
@@ -160,7 +162,7 @@ angular.module('nextgearWebApp')
           if (scope.donutOptions) {
             var pie = options.plotOptions.pie;
             pie.borderWidth = scope.donutOptions.border ? 1 : options.plotOptions.pie.borderWidth;
-            pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor: '#FFFFFF';
+            pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor: '#BBBBBB';
             pie.size = scope.donutOptions.size ? scope.donutOptions.size : options.plotOptions.pie.size;
             pie.innerSize = scope.donutOptions.innerSize ? scope.donutOptions.innerSize : options.plotOptions.pie.innerSize;
           }
@@ -169,6 +171,7 @@ angular.module('nextgearWebApp')
           if (scope.title) {
             options.title.text = (scope.title.text) ? scope.title.text : options.title.text;
             options.title.floating = (scope.title.floating) ? scope.title.floating : options.title.floating;
+            options.title.useHTML = (scope.title.useHTML) ? scope.title.useHTML : false;
             if (scope.title.style) {
               options.title.style.fontSize = (scope.title.style.fontSize) ? scope.title.style.fontSize : options.title.style.fontSize;
               options.title.style.fontWeight = (scope.title.style.fontWeight) ? scope.title.style.fontWeight : options.title.style.fontWeight;

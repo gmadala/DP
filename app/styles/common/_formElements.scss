@@ -522,3 +522,58 @@ label.input-title {
     }
   }
 }
+
+// New/Refactored code for v2.23
+/*
+ * CUSTOM SELECT MENU
+ * Overrides default browser styles to use a custom select menu style,
+ * complete with custom arrows.
+ */
+.style-select {
+  @include border-radius($borderRadius);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid $highlight;
+  margin: 5px 0;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    height: 0;
+    width: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid $highlight;
+  }
+
+  &.disabled {
+    border-color: $border;
+
+    &:after {
+      border-color: $border transparent transparent;
+    }
+  }
+
+  select {
+    // @extend .truncate;
+    @include border-radius($borderRadius);
+    width: 100%;
+    background: $white;
+    -webkit-gradient: none;
+    -webkit-appearance: none;
+    padding: 5px 15% 5px 9px;
+    border: 0;
+    margin: 0;
+
+    &:active {
+      background-color: #CCCCCC;
+    }
+
+    &:disabled {
+      color: #B7B7B7;
+    }
+  }
+}

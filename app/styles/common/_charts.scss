@@ -43,18 +43,18 @@
   }
 }
 
-.nxg-doughnut-chart-label-primary,
-.nxg-doughnut-chart-label-secondary {
-  line-height: 1;
-  margin: 0;
-}
-.nxg-doughnut-chart-label-primary {
-  font-size: $large-font-size;
-  color: #53BF42;
-}
-.nxg-doughnut-chart-label-secondary {
-  font-size: $tiny-font-size;
-}
+// .nxg-doughnut-chart-label-primary,
+// .nxg-doughnut-chart-label-secondary {
+//   line-height: 1;
+//   margin: 0;
+// }
+// .nxg-doughnut-chart-label-primary {
+//   font-size: $large-font-size;
+//   color: #53BF42;
+// }
+// .nxg-doughnut-chart-label-secondary {
+//   font-size: $tiny-font-size;
+// }
 .nxg-chart-legend-color {
   @include box(10px);
   display: block;
@@ -115,4 +115,20 @@
       margin-right: 5px;
     }
   }
+}
+
+// Vehicle Details semicircle charts.
+
+.chart-label-primary, .chart-label-secondary {
+  color: $text;
+  text-align: center;
+  margin: 0;
+}
+
+.chart-obj .highcharts-container {
+  margin: 0 auto;
+}
+
+.chart-label-primary {
+  font-weight: bold;
 }
