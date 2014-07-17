@@ -1,50 +1,49 @@
-<div class="modal-header">
+<h3 class="modal-header">
   Payment Details
-</div>
-
-<div class="modal-close" ng-click="close()">
-  <span class="glyphicon glyphicon-remove"></span>
-</div>
+</h3>
 
 <div class="modal-body">
-  <table class="table">
-    <tr>
-      <td class="">Receipt No.</td>
-      <td class="">{{ payment.ReceiptNumber }}</td>
-    </tr>
-    <tr>
-      <td class="">Payment Made</td>
-      <td class="">{{ payment.PaymentDate | moment }}</td>
-    </tr>
-    <tr>
-      <td class="">Effective Date</td>
-      <td class="">{{ payment.EffectiveDate | moment }}</td>
-    </tr>
-    <tr>
-      <td class="">Payment Method</td>
-      <td class="">{{ payment.PaymentMethod }}</td>
-    </tr>
-    <tr>
-      <td class="">Account</td>
-      <td class="">{{ payment.Account }}</td>
-    </tr>
-    <tr></tr>
-    <tr ng-repeat="item in payment.PaymentItems">
-      <td class="">{{ item.ItemName }}</td>
-      <td class="">{{ item.ItemAmount | currency }}</td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td class="">Total</td>
-      <td class="">{{ payment.TotalPaymentAmount | currency }}</td>
-    </tr>
-    <tr>
-      <td class="">Receipt Total</td>
-      <td class="">{{ payment.ReceiptTotal | currency }}</td>
-    </tr>
-  </table>
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Receipt No.</p>
+      <p class="span6 value">{{ payment.ReceiptNumber }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Payment Made</p>
+      <p class="span6 value">{{ payment.PaymentDate | moment }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Effective Date</p>
+      <p class="span6 value">{{ payment.EffectiveDate | moment }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Payment Method</p>
+      <p class="span6 value">{{ payment.PaymentMethod }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Account</p>
+      <p class="span6 value">{{ payment.Account }}</p>
+    </li>
+  </ul>
+
+  <ul class="list-table aside">
+    <li class="list-table-row"></li>
+    <li class="list-table-row" ng-repeat="item in payment.PaymentItems">
+      <p class="span6">{{ item.ItemName }}</p>
+      <p class="span6 value numeric">{{ item.ItemAmount | currency }}</p>
+    </li>
+    <li class="list-table-hr"></li>
+    <li class="list-table-row">
+      <p class="span6">Total</p>
+      <p class="span6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Receipt Total</p>
+      <p class="span6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
+    </li>
+  </ul>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary">Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
 </div>

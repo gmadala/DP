@@ -340,7 +340,7 @@
 
       </section>
 
-      <section class="span3 well last">
+      <section class="span3 well sidebar last">
         <h2 class="well-title">Payment Options</h2>
 
         <div class="row-fluid notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
@@ -367,7 +367,7 @@
 
             <!-- Payments aren't due soon, but can request extension -->
             <div ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue">
-              <p><a href="" ng-click="landing.requestExtension()">Request an extension?</a></p>
+              <p><a class="primary" href="" ng-click="landing.requestExtension()">Request an extension?</a></p>
             </div>
           </div>
         </div>
@@ -376,7 +376,6 @@
         <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
           <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
         </div> -->
-        </div>
       </section>
     </section>
   </div>

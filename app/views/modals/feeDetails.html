@@ -1,34 +1,32 @@
-<div class="modal-header">
+<h3 class="modal-header">
   Fee Details
-</div>
-
-<div class="modal-close" ng-click="close()">
-  <span class="glyphicon glyphicon-remove"></span>
-</div>
+</h3>
 
 <div class="modal-body">
-  <table class="table">
-    <tr>
-      <td class="">Posted Date</td>
-      <td class="">{{ fee.PostedDate | moment }}</td>
-    </tr>
-    <tr>
-      <td class="">Effective Date</td>
-      <td class="">{{ fee.EffectiveDate | moment }}</td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td class="">Fee – {{ fee.FeeName }}</td>
-      <td class="">{{ fee.FeeAmount | currency }}</td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td class="">Total</td>
-      <td class="">{{ fee.FeeTotal | currency }}</td>
-    </tr>
-  </table>
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Posted Date</p>
+      <p class="span6 value ">{{ fee.PostedDate | moment }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Effective Date</p>
+      <p class="span6 value ">{{ fee.EffectiveDate | moment }}</p>
+    </li>
+  </ul>
+
+  <ul class="list-table aside">
+    <li class="list-table-row">
+      <p class="span6">Fee – {{ fee.FeeName }}</p>
+      <p class="span6 value numeric">{{ fee.FeeAmount | currency }}</p>
+    </li>
+    <li class="list-table-hr"></li>
+    <li class="list-table-row">
+      <p class="span6">Total</p>
+      <p class="span6 value numeric">{{ fee.FeeTotal | currency }}</p>
+    </li>
+  </ul>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary">Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
 </div>

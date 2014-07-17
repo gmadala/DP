@@ -109,6 +109,14 @@
   padding-top: 20px;
 }
 
+.notice-bar {
+  padding: 10px;
+}
+
+.sidebar {
+  background: #EBEBEB;
+}
+
 // dashboard
 .dash-lockup {
   @extend .lockup;

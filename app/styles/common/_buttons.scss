@@ -312,12 +312,9 @@ span.btn-help {
  * with white text; secondary is white background with darker blue text.
  */
 .cta {
-  height: $cta-1-height;
+  height: 35px;
 }
 
-.cta-short {
-  height: $cta-2-height;
-}
   .cta-half {
     @extend %float-l;
     width: 48%;
@@ -331,6 +328,7 @@ span.btn-help {
   .cta-full {
     @include border-top-radius(0);
     @extend %full-width;
+    height: 40px;
     margin: 0;
   }
 
@@ -360,6 +358,7 @@ span.btn-help {
   font-family: $baseFontFamily;
   font-size: 13px;
   font-weight: bold;
+  padding: 10px 20px;
 
   &.cta-primary {
     &:hover {
