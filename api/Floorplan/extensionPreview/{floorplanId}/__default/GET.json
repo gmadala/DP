@@ -2,6 +2,7 @@
   "Success": true,
   "Message": null,
   "Data": {
+    "CanExtend": true,
     "PrincipalAmount": 1234.56,
     "InterestAmount": 15.78,
     "Fees": [
