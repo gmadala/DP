@@ -9,14 +9,19 @@ angular.module('nextgearWebApp')
 
     var isDealer = User.isDealer();
 
+    segmentio.track(metric.VIEW_FLOOR_A_VEHICLE_PAGE);
+
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options().foo
-    $scope.options = User.getStatics;
+    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
+    $scope.$watch(function() { return User.getStatics();}, function(statics) {
+      $scope.options = statics;
+      $scope.options.locations = _.filter($scope.options.locations, 'IsActive');
+    });
 
     // pay seller vs. buyer options are derived separately
     $scope.paySellerOptions = User.getPaySellerOptions;
@@ -24,6 +29,9 @@ angular.module('nextgearWebApp')
 
     // form data model holds values filled into form
     $scope.data = null;
+
+    // flag to determine when to display form errors for vin detail fields.
+    $scope.vinDetailsErrorFlag = false;
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     $scope.defaultData = {
@@ -55,7 +63,7 @@ angular.module('nextgearWebApp')
 
     var optionListsToDefault = [
       {
-        scopeSrc: 'options().bankAccounts',
+        scopeSrc: 'options.bankAccounts',
         modelDest: 'BankAccountId'
       },
       {
@@ -66,10 +74,10 @@ angular.module('nextgearWebApp')
     ];
     if (isDealer) {
       optionListsToDefault.push({
-        scopeSrc: 'options().locations',
+        scopeSrc: 'options.locations',
         modelDest: 'PhysicalInventoryAddressId'
       }, {
-        scopeSrc: 'options().linesOfCredit',
+        scopeSrc: 'options.linesOfCredit',
         modelDest: 'LineOfCreditId'
       });
     }
@@ -96,6 +104,8 @@ angular.module('nextgearWebApp')
     $scope.submit = function () {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
+
+      $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
         return false;
       }

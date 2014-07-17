@@ -1,0 +1,32 @@
+<h3 class="modal-header">
+  Fee Details
+</h3>
+
+<div class="modal-body">
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Posted Date</p>
+      <p class="span6 value ">{{ fee.PostedDate | moment }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Effective Date</p>
+      <p class="span6 value ">{{ fee.EffectiveDate | moment }}</p>
+    </li>
+  </ul>
+
+  <ul class="list-table aside">
+    <li class="list-table-row">
+      <p class="span6">Fee – {{ fee.FeeName }}</p>
+      <p class="span6 value numeric">{{ fee.FeeAmount | currency }}</p>
+    </li>
+    <li class="list-table-hr"></li>
+    <li class="list-table-row">
+      <p class="span6">Total</p>
+      <p class="span6 value numeric">{{ fee.FeeTotal | currency }}</p>
+    </li>
+  </ul>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
+</div>

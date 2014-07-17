@@ -16,6 +16,11 @@ angular.module('nextgearWebApp')
     CreditIncrease.getActiveLinesOfCredit().then(function(lines) {
       $scope.loading = false;
       $scope.selector.linesOfCredit = lines;
+
+      // If there is only one line of credit, auto-select that one.
+      if ($scope.selector.linesOfCredit.length === 1) {
+        $scope.selector.selectedLineOfCredit = $scope.selector.linesOfCredit[0];
+      }
     });
 
 

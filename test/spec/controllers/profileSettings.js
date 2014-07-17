@@ -8,10 +8,14 @@ describe('Controller: ProfileSettingsCtrl', function () {
   var ProfileSettingsCtrl,
     scope,
     settingsData,
-    ProfileSettingsMock;
+    ProfileSettingsMock,
+    $rootScope,
+    $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, _$rootScope_, _$q_) {
+
+    $q = _$q_;
 
     settingsData = {
       Username: '10264DG',
@@ -65,7 +69,8 @@ describe('Controller: ProfileSettingsCtrl', function () {
       }
     }
 
-    scope = $rootScope.$new();
+    $rootScope = _$rootScope_;
+    scope = _$rootScope_.$new();
     ProfileSettingsCtrl = $controller('ProfileSettingsCtrl', {
       $scope: scope,
       ProfileSettings: ProfileSettingsMock
@@ -118,15 +123,14 @@ describe('Controller: ProfileSettingsCtrl', function () {
             cleanPhone: cleanPhone,
             questions: questions
           };
-          return {
-            then: function(callback){callback()}
-          };
+          return $q.when();
         };
         scope.profile.edit();
       });
 
       it('should define dirtyData and set editable to false', function() {
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(scope.profile.dirtyData).toBeDefined();
         expect(scope.profile.editable).toBe(false);
@@ -135,6 +139,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
       it('should format a phone number correctly', function() {
         scope.profile.dirtyData.phone = '(123)456-7890'
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(savingProfile.cleanPhone).toEqual('1234567890');
         expect(scope.profile.editable).toBe(false);
@@ -147,6 +152,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
 
         scope.profile.dirtyData.questions[0].SecurityQuestionId = 2;
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(scope.profile.data.questions[0].QuestionText).toBe('What is your favorite book?');
       });
@@ -154,6 +160,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
       it('should have an empty string for question text if invalid question ID is selected', function() {
         scope.profile.dirtyData.questions[0].SecurityQuestionId = 100;
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(scope.profile.data.questions[0].QuestionText).toBe('');
       });
@@ -165,6 +172,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
 
         scope.profile.dirtyData.questions[0].SecurityQuestionId = 2;
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(scope.profile.data.questions[0].QuestionText).toBe('What is your favorite book?');
       });
@@ -175,6 +183,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
         spyOn(ProfileSettingsMock, 'saveProfile');
 
         scope.profile.save();
+        $rootScope.$digest();
 
         expect(ProfileSettingsMock.saveProfile).not.toHaveBeenCalled();
       });

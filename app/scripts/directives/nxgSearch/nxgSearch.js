@@ -7,6 +7,12 @@ angular.module('nextgearWebApp')
       scope: {
         title: '@',
         prompt: '@',
+        metricSearch: '@',
+        metricClearSearch: '@',
+        metricFilterByInput: '@',
+        metricFilterByInventoryLocation: '@',
+        metricFilterFromDate: '@',
+        metricFilterToDate: '@',
         filterLabel: '@',
         filterOptions: '=', // array of objects with properties label, value
         activeCriteria: '=', // object with properties: query, startDate, endDate, filter, inventoryLocation
@@ -21,7 +27,7 @@ angular.module('nextgearWebApp')
       controller: 'NxgSearchCtrl'
     };
   })
-  .controller('NxgSearchCtrl', function ($scope, $attrs, User) {
+  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, User) {
     $scope.showHelpText = ($attrs.helpText) ? true : false;
     $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? $attrs.showLocationFilter : false;
 
@@ -63,7 +69,7 @@ angular.module('nextgearWebApp')
     // Populate inventory location options in proper format (label & value)
     angular.forEach(locs, function(value) {
       var obj = {
-        label: value ? value.Line1 + (value.Line2 ? ' ' + value.Line2 : '') + ' / ' + value.City + ' ' + value.State : '',
+        label: $filter('address')(value),
         value: value
       };
       $scope.inventoryLocations.push(obj);

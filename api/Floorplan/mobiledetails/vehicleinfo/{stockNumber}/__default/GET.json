@@ -1,0 +1,18 @@
+{
+  "Success": true,
+  "Message": "sample string 2",
+  "Data": {
+    "FloorplanId" :"fe1738f8-8baba-442c-8bfa-d6f33acb24fa",
+    "StockNumber": 2463,
+    "FloorplanStatusName": "Approved",
+    "UnitVin": "1GCGC13U66F20221",
+    "Description": "2008 Toyota Tacoma 4X4 Blue",
+    "Make": "Toyota",
+    "Model": "Tacoma 4X4",
+    "Style": "Truck",
+    "Color": "Silver",
+    "Year": 2008,
+    "CurrentMileage": 60000,
+    "Salvage": true
+  }
+}

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric) {
-
+  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio) {
+    segmentio.track(metric.VIEW_RESOURCES_PAGE);
     $scope.metric = metric; // make metric names available to templates
 
     $scope.documents = [

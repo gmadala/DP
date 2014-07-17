@@ -77,6 +77,24 @@ angular.module('nextgearWebApp')
       $state.transitionTo('home.payments', param);
     };
 
+    $scope.chartData = {};
+    $scope.chartOptions =  {
+      donutOptions: {
+        size: '110%',
+        innerSize: '104%',
+        border: false,
+        semiCircle: false
+      },
+      size: {
+        height: '160',
+        width: '160'
+      },
+      innerSize: {
+        height: '138',
+        width: '138'
+      }
+    };
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a
@@ -91,6 +109,17 @@ angular.module('nextgearWebApp')
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
           $scope.dashboardData = result;
+
+          $scope.chartData = {
+            credit: result.creditChartData,
+            payments: result.paymentsChartData,
+            creditTitle: {
+              useHTML: true,
+              floating: true,
+              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(result.AvailableCredit, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
+              y: 70
+            },
+          };
         }
       );
     });

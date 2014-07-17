@@ -47,26 +47,33 @@
   }
 }
 
-.item-total {
-  @extend %heavy;
-  @extend %center;
-  @extend %float-l;
-  @include border-radius(5px);
-  line-height: 1.33333333;
-  min-width: 20px;
-  min-height: 18px;
-  padding: 0 5px;
-  margin-right: 7px;
-  border: 1px solid $gray-c;
+
+/*
+ * COUNTER
+ * Number with a rounded box, and variable background color
+ */
+.counter {
+  @extend .heavy;
+  @extend .center;
+  @include border-radius(2px);
+  display: inline-block;
+  color: #666666;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+  min-width: 35px;
+  background: $white;
+  padding: 5px 10px;
+  margin: 6px 15px 6px 15px;
+  border: 1px solid #808080;
 
   &.overdue {
     color: $white;
-    background-color: $overdue;
-    border: 1px solid $overdue;
+    background: $danger !important;
   }
 
-  &.due-today, &.due-soon {
-    background-color: $today;
-    border: 1px solid $today;
+  &.due-today {
+    color: $white;
+    background: $warning !important;
   }
 }

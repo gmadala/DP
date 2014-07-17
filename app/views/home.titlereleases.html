@@ -4,6 +4,11 @@
              title="Title Release Search"
              class="search-form"
              prompt="Stock #, VIN, Make, Model, or Year"
+             metric-search="{{metric.CLICK_TITLE_RELEASE_SEARCH_BUTTON}}"
+             metric-clear-search="{{metric.CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK}}"
+             metric-filter-by-input="{{metric.CLICK_TITLE_RELEASE_FILTER_BY_INPUT}}"
+             metric-filter-from-date="{{metric.CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT}}"
+             metric-filter-to-date="{{metric.CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT}}"
              filter-label="Filter by Title Release Status"
              filter-options="filterOptions"
              active-criteria="searchParams.proposedSearchCriteria"
@@ -62,16 +67,11 @@
           <li class="table-list-row" ng-repeat="item in data.results">
             <div class="main-info">
               <div class="cell title-more">
-                <button class="btn btn-more"
-                        ng-click="isCollapsed = !isCollapsed"
-                        class="more btn btn-mini">
-                  <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
-                </button>
               </div>
-
               <div class="cell title-desc">
                 <p nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></p>
                 <p><span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+                <br/><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}">Temp Link to Vehicle Details</a>
               </div>
               <div class="cell title-stock">
                 <p nxg-highlight="item.StockNumber" highlight="item.data.query"></p>
@@ -97,20 +97,15 @@
                 <p ng-switch-when="OutstandingTitleReleaseProgramRelease">Pay off this vehicle or return the title to remove from your limit.</p>
                 <div ng-switch-when="EligibleForRelease">
                   <button type="button" id="toggleRequest" class="btn btn-mini btn-block" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{requested: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
-                    <span ng-switch-when="true">Title Requested</span>
-                    <span ng-switch-default>Request Title</span>
+                    <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">Title Requested</span>
+                    <span ng-switch-default nxg-track="{{metric.CLICK_TITLE_RELEASE_REQUEST_TITLE}}">Request Title</span>
                   </button>
                 </div>
                 <div ng-switch-when="NotEligibleForRelease">
-                  <a ng-click="titleReleaseUnavailable()">Title Release Unavailable</a>
+                  <a ng-click="titleReleaseUnavailable()" nxg-track="{{metric.CLICK_TITLE_RELEASE_UNAVAILABLE}}">Title Release Unavailable</a>
                 </div>
               </div>
             </div><!-- end .main-info -->
-
-            <div collapse="isCollapsed" class="vehicle-details">
-              <div vehicle-details collapse="isCollapsed" stock-number="item.StockNumber"></div>
-            </div><!-- end .vehicle-details div -->
-
           </li><!-- end .table-list-row -->
         </ul><!-- end .floor-list -->
         <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">

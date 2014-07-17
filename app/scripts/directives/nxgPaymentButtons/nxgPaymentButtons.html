@@ -6,6 +6,7 @@
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue}"
           ng-click="toggleFeeInQueue()"
+          nxg-track="{{onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_FEE || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_FEE}}"
           ng-disabled="paymentInProgress()"
           tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -17,6 +18,7 @@
           type="button"
           id="cancelScheduledFee"
           class="btn btn-mini btn-block"
+          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE}}"
           ng-disabled="paymentInProgress()"
           ng-click="cancelScheduledFee()">
     <span>Unschedule</span>
@@ -28,6 +30,7 @@
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue == 'payment'}"
           ng-disabled="onQueue == 'payoff' || paymentInProgress()"
+          nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYMENT || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYMENT}}"
           ng-click="togglePaymentInQueue(false)"
           tooltip="{{ onQueue != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -40,6 +43,7 @@
           id="cancelScheduledPayment"
           class="btn btn-mini btn-block"
           ng-disabled="paymentInProgress()"
+          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
           ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>
@@ -48,6 +52,7 @@
           type="button"
           id="fakeTogglePayment"
           class="btn btn-mini btn-block"
+          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF}}"
           disabled>
     <span>Add</span>
   </button>
@@ -58,6 +63,7 @@
           class="btn btn-mini btn-block"
           ng-class="{'in-queue': onQueue == 'payoff'}"
           ng-disabled="onQueue == 'payment' || paymentInProgress()"
+          nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
           ng-click="togglePaymentInQueue(true)"
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
@@ -69,6 +75,7 @@
           type="button"
           id="togglePayoff2"
           class="btn btn-mini btn-block"
+          nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
           ng-class="{'in-queue': onQueue == 'payoff'}"
           ng-disabled="onQueue == 'payment' || paymentInProgress()"
           ng-click="togglePaymentInQueue(true)"
@@ -83,6 +90,7 @@
           id="cancelScheduledPayoff"
           class="btn btn-mini btn-block"
           ng-disabled="paymentInProgress()"
+          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
           ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
   </button>

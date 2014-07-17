@@ -1,41 +1,41 @@
-.btn {
-  @extend %heavy;
-  @include box-sizing(border-box);
-  @include border-radius(3px);
-  background-color: $btn-active-bkgd;
-  @include background(linear-gradient($btn-active-grad-1, $btn-active-grad-2));
-  color: $btn-active-text;
-  text-shadow: none;
-  padding: 2px 8px 1px;
-  border: 0;
-  border-bottom: 1px solid $btn-active-stroke;
+// .btn {
+//   @extend %heavy;
+//   @include box-sizing(border-box);
+//   @include border-radius(3px);
+//   background-color: $btn-active-bkgd;
+//   @include background(linear-gradient($btn-active-grad-1, $btn-active-grad-2));
+//   color: $btn-active-text;
+//   text-shadow: none;
+//   padding: 2px 8px 1px;
+//   border: 0;
+//   border-bottom: 1px solid $btn-active-stroke;
 
-  &:hover, &:focus {
-    color: $btn-hover-text;
-    background-color: $btn-hover-bkgd;
-    @include background(linear-gradient($btn-hover-grad-1, $btn-hover-grad-2));
-    background-position: 0;
-    outline: 0;
-  }
-  &:active, &.active {
-    color: $btn-hover-text;
-    border-color: transparent;
-  }
-  &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {
-    @include opacity(65);
-    color: $btn-disabled-text;
-    background: $btn-disabled-bkgd;
+//   &:hover, &:focus {
+//     color: $btn-hover-text;
+//     background-color: $btn-hover-bkgd;
+//     @include background(linear-gradient($btn-hover-grad-1, $btn-hover-grad-2));
+//     background-position: 0;
+//     outline: 0;
+//   }
+//   &:active, &.active {
+//     color: $btn-hover-text;
+//     border-color: transparent;
+//   }
+//   &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {
+//     @include opacity(65);
+//     color: $btn-disabled-text;
+//     background: $btn-disabled-bkgd;
 
-    &:active {
-      border-bottom: 1px solid $btn-active-stroke;
-      margin-top: 0px;
-    }
-  }
-}
+//     &:active {
+//       border-bottom: 1px solid $btn-active-stroke;
+//       margin-top: 0px;
+//     }
+//   }
+// }
 
-.btn, .btn-mini {
-  @extend %small;
-}
+// .btn, .btn-mini {
+//   @extend %small;
+// }
 
 .btn-secondary {
   color: $btn2-active-text;
@@ -140,10 +140,18 @@
 }
 
 .btn-link {
-  color: #08C;
+  font-size: 14px;
+  color: $highlight;
   cursor: pointer;
+  padding: 0;
+  border: 0;
+  margin: 10px 0;
 
-  &:hover, &:disabled, &:disabled:hover {
+  &:hover {
+    color: darken($highlight, 10%);
+  }
+
+  &:disabled, &:disabled:hover {
     color: $gray-8;
   }
 
@@ -197,5 +205,185 @@ span.btn-help {
   .btn-secondary.disabled {
     color: $btn-disabled-text;
     background-color: $btn-disabled-bkgd;
+  }
+}
+
+
+// Refresh/Refactored Code for v2.23
+.accordion-button {
+  @include border-bottom-radius($borderRadius);
+  display: block;
+  background: $white;
+  font-size: 14px;
+  font-weight: bold;
+  color: $primary;
+  height: 30px;
+  width: 300px;
+  position: relative;
+  top: -21px; // same size as well bottom margin, plus 1 for border.
+  padding: 5px 10px;
+  border: 1px solid #BBB;
+  margin: 0 auto;
+
+  &:hover {
+    color: lighten($primary, 20%);
+  }
+
+  &.expanded {
+    background: #CCCCCC;
+    color: $highlight;
+
+    &:hover {
+      color: darken($primary, 10%);
+    }
+  }
+}
+
+/*
+ * BUTTON CLASS
+ * Used to style any and all buttons within the desktop app.
+ * We're not using .btn here, because then we'd have to override
+ * Bootstrap's .btn styles, which are are numerous.
+ */
+.button {
+  @include border-radius($borderRadius);
+  // display: block;
+  background: $btn-bkgd;
+  font-size: 11px;
+  font-weight: bold;
+  color: $btn-text;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid $border;
+  margin: 5px 10px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active, &:hover, &.selected:active, &.selected:hover {
+    color: $btn-text-active;
+    background: $btn-bkgd-active;
+    text-decoration: none;
+  }
+
+  &:focus, &:active, &:hover {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+  &:disabled, &.ng-disabled {
+    background: $btn-bkgd-disabled;
+    color: $btn-text-disabled;
+    border: 1px solid $border;
+  }
+
+  &.selected {
+    background: $btn-bkgd-selected;
+    color: $btn-text-selected;
+  }
+
+  // &.right {
+  //   @extend %float-r;
+  //   margin-right: 0;
+  // }
+
+  // &.icon-right {
+  //   position: relative;
+  //   padding-right: 30px;
+  // }
+}
+
+.button-group {
+  padding: 0;
+  margin: 10px 0;
+
+  .button {
+    margin: 0;
+
+    & + .button {
+      margin-left: 10px;
+    }
+  }
+}
+
+/*
+ * CTA STYLES
+ * CTAs are more important call-outs. Primary coloring is light blue background
+ * with white text; secondary is white background with darker blue text.
+ */
+.cta {
+  height: 35px;
+}
+
+  .cta-half {
+    @extend %float-l;
+    width: 48%;
+    margin: 10px 0;
+
+    & + .cta-half {
+      @extend %float-r;
+    }
+  }
+
+  .cta-full {
+    @include border-top-radius(0);
+    @extend %full-width;
+    height: 40px;
+    margin: 0;
+  }
+
+  .cta-primary {
+    color: $cta-primary-text;
+    background: $cta-primary-bkgd;
+    border: 0;
+  }
+
+  .cta-secondary {
+    background: $cta-secondary-bkgd;
+    color: $cta-secondary-text;
+    border: 1px solid $border;
+
+    &.cta-full {
+      border-width: 1px 0 0;
+    }
+  }
+
+/*
+ * CTA BUTTON
+ * Used for call-out buttons; can have primary or secondary styles.
+ */
+.btn-cta {
+  @extend .button;
+  @extend .cta;
+  font-family: $baseFontFamily;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 10px 20px;
+
+  &.cta-primary {
+    &:hover {
+      color: $cta-primary-text-active;
+      background: $cta-primary-bkgd-active;
+    }
+    &:active {
+      background: darken($cta-primary-bkgd-active, 10%);
+    }
+  }
+
+  &.cta-secondary {
+    &:hover {
+      color: $cta-secondary-text-active;
+    }
+    &:active {
+      background: darken($btn-bkgd-active, 10%);
+    }
+  }
+
+  &.cta-primary, &.cta-secondary {
+    &:disabled, &.ng-disabled {
+      background: $btn-bkgd-disabled;
+      color: $btn-text-disabled;
+      border: 1px solid $border;
+    }
   }
 }

@@ -27,7 +27,9 @@ describe('Controller: FloorCarCtrl', function () {
       isDealer: function() {
         return type = 'Dealer';
       },
-      getStatics: angular.noop,
+      getStatics: function() {
+        return 123; // magic number to compare against
+      },
       canPayBuyer: function() {
         return true;
       },
@@ -55,13 +57,15 @@ describe('Controller: FloorCarCtrl', function () {
 
   var registerCommonTests = function() {
     it('should attach necessary objects to the scope', function () {
-      expect(scope.options).toBeDefined();
-      expect(scope.options).toBe(userMock.getStatics);
+      expect(scope.options).not.toBeDefined();
+      scope.$digest();
+      expect(scope.options).toBe(userMock.getStatics());
       expect(scope.paySellerOptions).toBe(userMock.getPaySellerOptions);
       expect(scope.canPayBuyer).toBe(userMock.canPayBuyer);
       expect(scope.optionsHelper).toBeDefined();
 
       expect(scope.defaultData).toBeDefined();
+      expect(scope.vinDetailsErrorFlag).toBe(false);
     });
 
     describe('reset function', function() {
@@ -113,10 +117,12 @@ describe('Controller: FloorCarCtrl', function () {
         expect(typeof scope.submit).toBe('function');
       });
 
-      it('should create the validity object', function() {
+      it('should create the validity object and update the error flag', function() {
         expect(scope.validity).not.toBeDefined();
+        expect(scope.vinDetailsErrorFlag).toBe(false);
         scope.submit();
         expect(scope.validity).toBeDefined();
+        expect(scope.vinDetailsErrorFlag).toBe(true);
       });
 
       it('should do nothing if the form is invalid', function() {

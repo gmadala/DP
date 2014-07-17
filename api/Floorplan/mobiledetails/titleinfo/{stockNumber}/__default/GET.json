@@ -1,0 +1,21 @@
+{
+  "Success": true,
+  "Message": "sample string 2",
+  "Data": {
+    "FloorplanId": "fe1738f8-8baba-442c-8bfa-d6f33acb24fa",
+    "StockNumber": 2463,
+    "FloorplanStatusName": "Approved",
+    "Description": "2008 Toyota Tacoma 4X4 Blue",
+    "TitleLocation": "NextGear",
+    "TitleState": "Texas",
+    "TitleTrackingNumber": "29872",
+    "AmountFinanced": 1090.00,
+    "TitleReleaseProgramStatus": "EligibleForRelease",
+    "DisbursementDate": "2014-01-10",
+    "TitleImageAvailable": true,
+    "DealerIsEligibleToReleaseTitles": true,
+    "TotalReleasesAllowed": 5,
+    "RemainingReleasesAvailable": 2,
+    "ReleaseBalanceAvailable": 15000.00
+   }
+}

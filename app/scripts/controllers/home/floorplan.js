@@ -5,9 +5,10 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric, $timeout) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric, $timeout, segmentio) {
 
     $scope.metric = metric; // make metric names available to templates
+    segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
 
     $scope.isCollapsed = true;
 

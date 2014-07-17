@@ -131,7 +131,12 @@ angular.module('nextgearWebApp')
 
               ProfileSettings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
                 prv.saveSuccess.bind(this)
-              );
+              ).then(function() {
+                angular.forEach(angular.element('.btn-help'), function(elem) {
+                  /*jshint camelcase: false */
+                  angular.element(elem).scope().tt_isOpen = false;
+                });
+              });
             }
           },
           updateQuestionText: function(questions) {

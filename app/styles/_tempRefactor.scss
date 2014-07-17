@@ -1,0 +1,158 @@
+// Temporary while refactoring occurs piecemeal across the site
+
+/*
+ * DATA TABLE COMPONENT
+ * Table meant to display side by side data,
+ * with the assumption of 2 columns.
+ */
+.list-table {
+  @extend %full-width;
+  padding: 10px 20px;
+  margin: 0;
+
+  &.padded {
+    padding: 20px;
+  }
+}
+  .list-table-row {
+    @extend .clearfix;
+    @extend .row-fluid;
+    padding: 0 0 0;
+    margin: 0;
+
+    [class*="span"] {
+      min-height: 0;
+    }
+
+    p, a {
+      font-size: 14px;
+    }
+
+    p {
+      margin: 0 0 5px;
+    }
+  }
+
+  .list-table-emphasis > * {
+    font-weight: bold;
+  }
+
+  .list-table-spacer {
+    height: 20px;
+  }
+
+  .value {
+    color: $text;
+    font-weight: bold;
+
+    .highlight & {
+      color: $highlight;
+    }
+
+    .value-note {
+      font-weight: normal;
+    }
+  }
+
+  .list-table-hr {
+    border-top: 1px solid $dataTableBorder;
+    padding-top: 10px;
+    margin-top: 5px;
+  }
+
+
+.col-bordered {
+  padding: 20px 0;
+
+  & > [class*="span"] {
+    border-right: 1px solid #BBBBBB;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  .col-bordered {
+    padding-bottom: 0;
+  }
+}
+
+.aside {
+  background: $white;
+  border-top: 1px solid #BBB;
+
+  .well & {
+    @include border-bottom-radius($borderRadius);
+  }
+}
+
+.cell {
+  padding: 5px;
+}
+
+.contain-wells {
+  & > .well {
+    height: 100%;
+  }
+}
+
+.color-danger {
+  color: $danger !important;
+}
+
+.color-success {
+  color: $success !important;
+}
+
+
+.push-down {
+  padding-top: 20px;
+}
+
+.notice-bar {
+  padding: 10px;
+}
+
+.sidebar {
+  background: #EBEBEB;
+}
+
+// dashboard
+.dash-lockup {
+  @extend .lockup;
+  float: right;
+  text-align: right;
+  height: 30px;
+  padding: 6px 10px;
+  margin: 0;
+}
+
+  .dash-major {
+    font-size: 16px;
+    color: $highlight;
+  }
+
+// overly-specific....should really refactor somehow.
+.payment-activity {
+  [class*="span"] {
+    height: 250px;
+    margin: 0;
+  }
+
+  .span7 {
+    overflow-y: scroll;
+    border-right: 1px solid #BBBBBB;
+  }
+
+  h3 {
+    color: $text;
+  }
+}
+.chart-daysFloored .highcharts-container {
+  margin: 10px auto 0;
+}
+
+.floor-chart-title {
+  position: relative;
+  top: -15px;
+}

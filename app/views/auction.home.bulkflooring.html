@@ -3,12 +3,12 @@
       <h4>Vehicle Information</h4>
       <div class="well-out">
 
-       <div nxg-vin-details floor-model="data" validity="validity" form="form" nxg-autofocus="reset"></div>
+       <div nxg-vin-details floor-model="data" validity="validity" error-flag="vinDetailsErrorFlag" form="form" nxg-autofocus="reset"></div>
 
        <label for="inputColor" class="input-title">Color</label>
        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in options().colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
-        <option class="disabled" disabled="disabled" value="">Make Selection</option>
+               ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+        <option value="">Make Selection</option>
        </select>
        <label for="inputColor" class="text-error"
               ng-show="validity.inputColor.$error.required">
@@ -40,9 +40,9 @@
        <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }"
-               ng-options="location.Name for location in options().titleLocationOptions"
+               ng-options="location.Name for location in options.titleLocationOptions"
                required>
-         <option class="disabled" disabled="disabled" value="">Make Selection</option>
+         <option value="">Make Selection</option>
        </select>
        <label for="inputTitleHolder" class="text-error"
               ng-show="validity.inputTitleHolder.$error.required">
@@ -99,7 +99,7 @@
             Please enter the Purchase Amount.
           </label>
           <label for="inputPurchaseAmt" class="text-error"
-                 ng-show="validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin">
+                 ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)">
             Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
           </label>
             <label for="inputPurchaseAmt" class="text-error"
@@ -139,10 +139,10 @@
 
         <label for="inputDisburseAcct" class="input-title">Bank Account</label>
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
-                ng-options="account.BankAccountName for account in options().bankAccounts"
+                ng-options="account.BankAccountName for account in options.bankAccounts"
                 ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
                 required>
-         <option class="disabled" disabled="disabled" value="">Make Selection</option>
+         <option value="">Make Selection</option>
         </select>
         <label for="inputDisburseAcct" class="text-error"
                ng-show="validity.inputDisburseAcct.$error.required">

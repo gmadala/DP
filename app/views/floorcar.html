@@ -1,17 +1,17 @@
 <div class="container-line">
   <div class="container-fluid">
-    <!-- TODO: Add error messaging -->
+
     <form class="row-fluid two-col floorcar" name="form" novalidate>
        <fieldset class="span8 well adjacent first">
           <h4>1. Vehicle Information</h4>
           <div class="well-out">
 
-           <div nxg-vin-details floor-model="data" validity="validity" form="form" nxg-autofocus="reset"></div>
+           <div nxg-vin-details floor-model="data" validity="validity" form="form" error-flag="vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
            <label for="inputColor" class="input-title">Color</label>
            <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-                   ng-options="color.ColorName for color in options().colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
-            <option class="disabled" disabled="disabled" value="">Make Selection</option>
+                   ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+            <option value="">Make Selection</option>
            </select>
            <label for="inputColor" class="text-error"
                   ng-show="validity.inputColor.$error.required">
@@ -41,9 +41,9 @@
 
            <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
            <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
-                   ng-options="location.Name for location in options().titleLocationOptions"
+                   ng-options="location.Name for location in options.titleLocationOptions"
                    required ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }" >
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
            </select>
            <label for="inputTitleHolder" class="text-error"
                   ng-show="validity.inputTitleHolder.$error.required">
@@ -52,9 +52,9 @@
 
            <label for="inputInvLoc" class="input-title">Inventory Location</label>
            <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
-                   ng-options="location.LocationName for location in options().locations"
+                   ng-options="(location | address) for location in options.locations"
                    ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }" required>
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
            </select>
            <label for="inputInvLoc" class="text-error"
                   ng-show="validity.inputInvLoc.$error.required">
@@ -100,7 +100,7 @@
                 Please enter the Purchase Amount.
               </label>
               <label for="inputPurchaseAmt" class="text-error"
-                     ng-show="validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin">
+                     ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)">
                   Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
               </label>
                <label for="inputPurchaseAmt" class="text-error"
@@ -129,9 +129,9 @@
 
             <label for="inputCreditLine" class="input-title">Line of Credit</label>
             <select id="inputCreditLine" name="inputCreditLine" ng-model="data.LineOfCreditId"
-                    ng-options="line.LineOfCreditName for line in options().linesOfCredit"
+                    ng-options="line.LineOfCreditName for line in options.linesOfCredit"
                     ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }" required>
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
             </select>
             <label for="inputCreditLine" class="text-error"
                    ng-show="validity.inputCreditLine.$error.required">
@@ -143,7 +143,7 @@
                     ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions()"
                     ng-change="data.BankAccountId = null"
                     ng-disabled="data.SaleTradeIn">
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+             <option value="">Make Selection</option>
             </select>
 
             <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
@@ -151,8 +151,8 @@
                     ng-disabled="data.PaySeller"
                     ng-required="!data.PaySeller"
                     ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
-                    ng-options="account.BankAccountName for account in options().bankAccounts">
-             <option class="disabled" disabled="disabled" value="">Make Selection</option>
+                    ng-options="account.BankAccountName for account in options.bankAccounts">
+             <option value="">Make Selection</option>
             </select>
             <label for="inputDisburseAcct" class="text-error"
                    ng-show="validity.inputDisburseAcct.$error.required">
@@ -163,12 +163,14 @@
               <button class="btn btn-small btn-primary"
                       ng-disabled="submitInProgress"
                       type="submit"
-                      ng-click="submit()">
+                      ng-click="submit()"
+                      nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_FLOOR_BUTTON}}">
                 Floor
               </button>
               <button class="btn btn-small btn-secondary"
                       ng-disabled="submitInProgress"
-                      ng-click="cancel()">
+                      ng-click="cancel()"
+                      nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_CANCEL_BUTTON}}">
                 Cancel
               </button>
             </div>

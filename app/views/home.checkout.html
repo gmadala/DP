@@ -3,7 +3,10 @@
     <div class="well">
       <h4>
         Payments Checkout
-        <button class="btn btn-primary exp-pymt" ng-click="exportPaymentSummary()" ng-disabled="paymentQueue.sum.todayCount() == 0">
+        <button class="btn btn-primary exp-pymt"
+                ng-click="exportPaymentSummary()"
+                ng-disabled="paymentQueue.sum.todayCount() == 0"
+                nxg-track="{{metric.CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON}}">
           Export Payment Summary
         </button>
       </h4>
@@ -73,9 +76,6 @@
             <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
               <div class="main-info">
                 <div class="cell pay-more">
-                  <button class="btn btn-more" ng-click="isCollapsed = !isCollapsed">
-                    <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed }"></span>
-                  </button>
                 </div>
                 <div class="cell pay-desc">
                   <p><span class="break-word">{{ payment.vin }}</span><br/>
@@ -83,6 +83,7 @@
                     {{ payment.stockNum }}
                   </p>
                   <p>{{ payment.description }}</p>
+                  <br/><a href="#/vehicledetails?stockNumber={{ payment.stockNum }}">Temp Link to Vehicle Details</a>
                   <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
                 </div>
                 <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
@@ -95,7 +96,10 @@
                 <div class="cell pay-pymt">
                   <p>
                     <strong>{{ payment.amount | currency }}</strong>
-                    <button class="btn-unstyle btn-link remove" ng-click="paymentQueue.removePayment(payment.floorplanId)" ng-disabled="submitInProgress">
+                    <button class="btn-unstyle btn-link remove"
+                            ng-click="paymentQueue.removePayment(payment.floorplanId)"
+                            ng-disabled="submitInProgress"
+                            nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}">
                       Remove Payment
                     </button>
                   </p>
@@ -114,9 +118,6 @@
                   <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>
                 </div>
               </div><!-- end .main-info -->
-              <div collapse="isCollapsed" class="vehicle-details">
-                <div vehicle-details collapse="isCollapsed" stock-number="payment.stockNum"></div>
-              </div><!-- end .more-details -->
             </li>
           </ul>
         </div><!-- end Payments List -->
@@ -160,6 +161,7 @@
           <label for="unappliedNo">No</label>
           <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
                  ng-value="true" ng-model="unappliedFunds.useFunds"
+                 nxg-track="{{metric.CLICK_CHECKOUT_APPLY_FUNDS_YES}}"
                  ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
           <label for="unappliedYes">Yes</label>
         </div>
@@ -218,6 +220,7 @@
                 ng-disabled="submitInProgress"
                 ng-options="account.BankAccountName for account in bankAccounts.getList()"
                 ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }"
+                nxg-track="{{metric.CLICK_CHECKOUT_SELECT_ACCOUNT}}"
                 required>
           <option value="">-- Select Bank --</option>
         </select>
@@ -230,7 +233,10 @@
       <hr/>
 
       <div class="submit">
-        <button class="btn btn-primary" ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress" ng-click="submit()">
+        <button class="btn btn-primary"
+                ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+                ng-click="submit()"
+                nxg-track="{{metric.CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON}}">
           Submit Payments and Commit Scheduled Payments
         </button>
       </div>

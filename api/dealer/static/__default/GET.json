@@ -282,16 +282,31 @@
         ],
         "Locations": [
           {
-            "LocationName": "Rochester",
-            "LocationId": "a1"
+            "LocationId": "a1",
+            "Line1": "4 South Ave",
+            "Line2": "",
+            "City": "Rochester",
+            "State": "NY",
+            "Zip": "14555",
+            "IsActive": true
           },
           {
-            "LocationName": "Canandaigua",
-            "LocationId": "b2"
+            "LocationId": "b2",
+            "Line1": "123 Main St.",
+            "Line2": "",
+            "City": "Canandaigua",
+            "State": "NY",
+            "Zip": "14555",
+            "IsActive": false
           },
           {
-            "LocationName": "Victor",
-            "LocationId": "b3"
+            "LocationId": "b3",
+            "Line1": "999 Smith Blvd",
+            "Line2": "",
+            "City": "Victor",
+            "State": "NY",
+            "Zip": "14555",
+            "IsActive": true
           }
         ],
         "BankAccounts": [

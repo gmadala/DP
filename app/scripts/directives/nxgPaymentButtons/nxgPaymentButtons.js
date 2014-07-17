@@ -9,7 +9,9 @@ angular.module('nextgearWebApp')
         onQueue:    '=',
         canPayNow:  '='
       },
-      controller: function($scope, $dialog, Payments) {
+      controller: function($scope, $dialog, Payments, metric) {
+        //set on $rootScope, but for some reason, not available unless explicitly set here
+        $scope.metric = metric;
 
         $scope.paymentInProgress = function() {
           return Payments.paymentInProgress();

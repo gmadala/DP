@@ -9,6 +9,7 @@ angular.module('nextgearWebApp')
      */
 
     $scope.metric = metric; // make metric names available to template
+    segmentio.track(metric.VIEW_VIEW_A_REPORT_PAGE);
 
     $scope.data = null;
 

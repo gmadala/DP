@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, TitleAddresses) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, TitleAddresses, segmentio, metric) {
+
+    segmentio.track(metric.VIEW_TITLE_RELEASE_CHECKOUT_PAGE);
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -14,13 +16,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.addresses = TitleAddresses.getAddresses();
-    $scope.toShortAddress = function(addressObj) {
-      if(addressObj) {
-        return addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State + ' ' + addressObj.Zip;
-      } else {
-        return '';
-      }
-    };
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();

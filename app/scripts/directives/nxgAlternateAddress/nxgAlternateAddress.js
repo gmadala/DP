@@ -12,8 +12,9 @@ angular.module('nextgearWebApp')
         enabled: '=enabled',
         ngDisabled: '='
       },
-      controller: function($scope, $attrs, TitleAddresses) {
+      controller: function($scope, $attrs, TitleAddresses, metric) {
         var showSelectMenuAttr = !($attrs.showSelectMenu === undefined || $attrs.showSelectMenu === 'false');
+        $scope.metric = metric;
         $scope.selectedAddress = null;
         $scope.showSelectMenu = $scope.payment.overrideAddress || showSelectMenuAttr ? true : false;
         $scope.addrList = null;
@@ -47,10 +48,6 @@ angular.module('nextgearWebApp')
         $scope.onClickAddress = function() {
           // display the select menu
           $scope.showSelectMenu = true;
-        };
-
-        $scope.toShortAddress = function(addressObj) {
-          return addressObj ? addressObj.Line1 + (addressObj.Line2 ? ' ' + addressObj.Line2 : '') + ' / ' + addressObj.City + ' ' + addressObj.State : '';
         };
 
         $scope.$watch('selectedAddress', function(newVal, oldVal) {

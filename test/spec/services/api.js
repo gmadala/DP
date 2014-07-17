@@ -6,12 +6,18 @@ describe('Service: api', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var api, http, rootScope, cookies;
-  beforeEach(inject(function (_api_, $http, $rootScope, $cookieStore) {
+  var api,
+    http,
+    rootScope,
+    cookies,
+    $timeout;
+
+  beforeEach(inject(function (_api_, $http, $rootScope, $cookieStore, _$timeout_) {
     api = _api_;
     http = $http;
     rootScope = $rootScope;
     cookies = $cookieStore;
+    $timeout = _$timeout_;
   }));
 
   describe('setAuth and hasAuthToken functions', function () {
@@ -182,14 +188,35 @@ describe('Service: api', function () {
       spyOn(rootScope, '$emit').andReturn(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
+      var bind = jasmine.createSpy('bind');
+      spyOn(angular, 'element').andReturn({
+        bind: bind
+      });
+
       api.setAuth({ Token: 'foo' });
       expect(api.hasAuthToken()).toBe(true);
+
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
       expect(messages.list().length).toBe(1);
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
       expect(success).not.toHaveBeenCalled();
       messages.list()[0].dismiss();
+
+      expect(angular.element).toHaveBeenCalledWith('body');
+      expect(bind).toHaveBeenCalled();
+      expect(bind.calls[0].args[0]).toBe('keydown');
+      var preventDefault = jasmine.createSpy('preventDefault');
+      var stopPropagation = jasmine.createSpy('stopPropagation');
+      bind.calls[0].args[1].call(this, {
+        preventDefault: preventDefault,
+        stopPropagation: stopPropagation,
+        keyCode: 27
+      });
+      expect(preventDefault).toHaveBeenCalled();
+      expect(stopPropagation).toHaveBeenCalled();
+
+      $timeout.flush();
       expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
     });
 

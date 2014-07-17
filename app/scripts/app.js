@@ -95,6 +95,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         showNavBar: true
       })
 
+      .state('vehicledetails', {
+        url: '/vehicledetails?stockNumber',
+        templateUrl: 'views/vehicledetails.html',
+        controller: 'VehicleDetailsCtrl',
+        showNavBar: true
+      })
       .state('floorcar', {
         url: '/floorcar',
         templateUrl: 'views/floorcar.html',
@@ -193,7 +199,9 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api, metric) {
+    //set metric constants on root scope so they are always available
+    $rootScope.metric = metric;
 
     var prv = {
       reloadPending: false,

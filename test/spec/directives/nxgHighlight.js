@@ -31,6 +31,13 @@ describe('Directive: nxgHighlight', function () {
     expect(element.find('span').first().text()).toBe('to search');
   });
 
+  it('should not complain with no search value', function() {
+    scope.text = 'This is the text to search';
+    scope.search = undefined;
+    scope.$digest();
+    expect(element.find('span').length).toBe(0);
+  });
+
   describe('change search text', function() {
 
     it('should not find the search value due to search change', function() {
@@ -53,6 +60,123 @@ describe('Directive: nxgHighlight', function () {
       scope.text = 'Change the main text';
       scope.$digest();
       expect(element.find('span').length).toBe(0);
+    });
+
+  });
+
+  describe('escaping regex characters', function() {
+
+    it('should find a -', function() {
+      scope.text = 'This is the text to - search';
+      scope.search = '-';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+
+    it('should find a [', function() {
+      scope.text = 'This is the text to [ search';
+      scope.search = '[';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ]', function() {
+      scope.text = 'This is the text to ] search';
+      scope.search = ']';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a /', function() {
+      scope.text = 'This is the text to / search';
+      scope.search = '/';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a {', function() {
+      scope.text = 'This is the text to { search';
+      scope.search = '{';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a }', function() {
+      scope.text = 'This is the text to } search';
+      scope.search = '}';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a (', function() {
+      scope.text = 'This is the text to ( search';
+      scope.search = '(';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a )', function() {
+      scope.text = 'This is the text to ) search';
+      scope.search = ')';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a *', function() {
+      scope.text = 'This is the text to * search';
+      scope.search = '*';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a +', function() {
+      scope.text = 'This is the text to + search';
+      scope.search = '+';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ?', function() {
+      scope.text = 'This is the text to ? search';
+      scope.search = '?';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a .', function() {
+      scope.text = 'This is the text to . search';
+      scope.search = '.';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a \\', function() {
+      scope.text = 'This is the text to \\ search';
+      scope.search = '\\';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a ^', function() {
+      scope.text = 'This is the text to ^ search';
+      scope.search = '^';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a $', function() {
+      scope.text = 'This is the text to $ search';
+      scope.search = '$';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
+    });
+
+    it('should find a |', function() {
+      scope.text = 'This is the text to | search';
+      scope.search = '|';
+      scope.$digest();
+      expect(element.find('span').length).toBe(1);
     });
 
   });

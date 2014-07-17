@@ -17,7 +17,7 @@
  * @param ng-required="expr" - condition under which to validate that a business is selected ($error key is nxgRequires)
  */
 angular.module('nextgearWebApp')
-  .directive('nxgBusinessField', function () {
+  .directive('nxgBusinessField', function() {
     return {
       restrict: 'A',
       templateUrl: 'scripts/directives/nxgBusinessField/nxgBusinessField.html',
@@ -32,7 +32,7 @@ angular.module('nextgearWebApp')
         validity: '='
       },
       controller: 'BusinessFieldCtrl',
-      compile: function (element, attrs) {
+      compile: function(element, attrs) {
         // apply original name onto the new input so it will publish ngModelController to its parent form controller
         element.find('input').attr('name', attrs.name);
         // remove some duplicate & unneeded attributes on the root element
@@ -40,17 +40,32 @@ angular.module('nextgearWebApp')
       }
     };
   })
-  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout) {
+  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout, metric) {
     var searchOpen = false;
+    $scope.metric = metric;
     $scope.query = '';
     var lengthAtSubmit = 0;
 
-    $scope.clearSelected = function () {
+    $scope.clearSelected = function() {
       $scope.selection = null;
     };
 
     $scope.isValidLength = function() {
       return lengthAtSubmit >= 3;
+    };
+
+    //using ng-switch in html messes up Lookup Button alignment for some reason.
+    //Just as easy to do the switch here in the controller.
+    $scope.metricByMode = function() {
+      var _metric = '';
+      var fieldMode = $scope.mode;
+      switch( fieldMode){
+      case 'sellers':
+        _metric = metric.CLICK_FLOOR_A_VEHICLE_SELLER_LOOKUP_BUTTON;
+        break;
+      }
+
+      return _metric;
     };
 
     $scope.openBusinessSearch = function() {
@@ -67,7 +82,7 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      if(!searchOpen) {
+      if (!searchOpen) {
         var dialogOptions = {
           dialogClass: 'modal search-modal search-modal-business',
           backdrop: true,
@@ -76,13 +91,13 @@ angular.module('nextgearWebApp')
           templateUrl: 'views/modals/businessSearch.html',
           controller: 'BusinessSearchCtrl',
           resolve: {
-            initialQuery: function () {
+            initialQuery: function() {
               return $scope.query;
             },
-            searchBuyersMode: function () {
+            searchBuyersMode: function() {
               return $scope.mode === 'buyers';
             },
-            closeNow: function () {
+            closeNow: function() {
               return function() {
                 return $scope.disabled;
               };
@@ -95,7 +110,7 @@ angular.module('nextgearWebApp')
         // before the popup opens, potentially cancelling the popup.
         $timeout(angular.noop, 200).then(function() {
           return $dialog.dialog(dialogOptions).open();
-        }).then(function (selectedBusiness) {
+        }).then(function(selectedBusiness) {
           if (selectedBusiness) {
             // replace any existing query text with the selected business name
             $scope.query = selectedBusiness.BusinessName;
@@ -107,7 +122,7 @@ angular.module('nextgearWebApp')
     };
 
     // clear any existing data when field becomes disabled
-    $scope.$watch('disabled', function (isDisabled) {
+    $scope.$watch('disabled', function(isDisabled) {
       if (isDisabled) {
         $scope.query = null;
         $scope.clearSelected();
@@ -121,7 +136,7 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.$on('reset', function () {
+    $scope.$on('reset', function() {
       $scope.query = '';
     });
 

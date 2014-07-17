@@ -12,14 +12,21 @@
 .modal {
   @extend %small;
   @include border-radius(0);
-  width: 320px;
-  max-height: 95%;
+  width: 400px;
+  height: auto;
+  max-height: 90%;
+  background: #F2F2F2;
   overflow-y: auto;
-  margin-left: -160px;
-  border: 1px solid #adadad;
+  border: 0;
+  margin-left: -200px;
 
   form {
     margin: 0;
+  }
+
+  .search-results { // Uses infinite scroll, so we need overflow:auto and a max height to get it to work.
+    overflow-y: auto;
+    max-height: 350px;
   }
 
   // Modal to go over all other modals
@@ -32,20 +39,22 @@
   @extend %heavy;
 }
 
-.modal-header {
-  margin: 0;
-  padding: 9px;
-  border: none;
-  font-size: 16px;
-  line-height: 1;
-  color: $brand-text;
-  font-weight: normal;
-  background-color: $gray-e;
+.modal-body {
+  max-height: none;
+  border: 1px solid $border;
+  padding: 20px 0 0;
 
-  h3 {
-    @extend h4;
-    line-height: 1;
+  .list-table {
+    padding: 10px 50px 10px 30px;
   }
+}
+
+.modal-header {
+  background: $modalHeader;
+  color: $white;
+  padding: 12px 20px;
+  border: none;
+  margin: 0;
 }
 
 .modal-close {
@@ -66,13 +75,16 @@
 }
 
 .modal-footer {
-  background-color: $white;
-  padding: 12px 0 0 0;
-  margin: 12px;
+  padding: 10px;
+  // margin: 12px;
 
   .btn {
     margin-left: 5px;
   }
+}
+
+.modal.request-credit-increase .modal-body {
+  max-height: none;
 }
 
 .modal.search-modal {

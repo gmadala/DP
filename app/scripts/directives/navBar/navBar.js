@@ -9,18 +9,18 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($rootScope, $scope, $state, User) {
+  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric) {
     var dealerLinks = [
-        { name: 'Home', href: '#/home', activeWhen: 'home' },
-        { name: 'Floor a Car', href: '#/floorcar', activeWhen: 'floorcar' },
-        { name: 'View a Report', href: '#/reports', activeWhen: 'reports' },
-        { name: 'View Analytics', href: '#/analytics', activeWhen: 'analytics' },
-        { name: 'Resources', href: '#/documents', activeWhen: 'documents' }
+        { name: 'Home', href: '#/home', activeWhen: 'home', metric: metric.CLICK_HOME_LINK },
+        { name: 'Floor a Car', href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK },
+        { name: 'View a Report', href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK },
+        { name: 'View Analytics', href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK },
+        { name: 'Resources', href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
       ],
       auctionLinks = [
-        { name: 'Home', href: '#/act/home', activeWhen: 'auction_home' },
-        { name: 'View a Report', href: '#/act/reports', activeWhen: 'auction_reports' },
-        { name: 'Resources', href: '#/act/documents', activeWhen: 'auction_documents' }
+        { name: 'Home', href: '#/act/home', activeWhen: 'auction_home', metric: metric.CLICK_AUCTION_HOME_LINK },
+        { name: 'View a Report', href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK },
+        { name: 'Resources', href: '#/act/documents', activeWhen: 'auction_documents', metric: metric.CLICK_AUCTION_RESOURCES_LINK }
       ];
 
     $scope.user = {
