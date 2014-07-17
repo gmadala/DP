@@ -108,6 +108,22 @@
 .push-down {
   padding-top: 20px;
 }
+
+// dashboard
+.dash-lockup {
+  @extend .lockup;
+  float: right;
+  text-align: right;
+  height: 30px;
+  padding: 6px 10px;
+  margin: 0;
+}
+
+  .dash-major {
+    font-size: 16px;
+    color: $highlight;
+  }
+
 // overly-specific....should really refactor somehow.
 .payment-activity {
   [class*="span"] {

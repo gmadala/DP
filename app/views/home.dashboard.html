@@ -45,46 +45,55 @@
         </table>
         <!-- end footer controls -->
       </div>
-    </div><!-- end .nxg-dash-calendar-container -->
+    </div>
 
     <!-- Payment Summary -->
     <div class="span3 well payment-summary">
       <h2 class="well-title">Payments Summary</h2>
       <ul>
         <li class="link" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
-          <span class="item-total" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
-          <span ng-pluralize
+          <span class="counter" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
+          <div class="dash-lockup">
+            <p class="dash-minor" ng-pluralize
                 count="dashboardData.OverduePayments"
-                when="{'1': 'Overdue', 'other': 'Overdue'}"></span>
-          <p ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</p>
+                when="{'1': 'Overdue', 'other': 'Overdue'}"></p>
+            <h4 class="dash-major" ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</h4>
+          </div>
         </li>
         <li class="link" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
-          <span class="item-total" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
-          <span ng-pluralize
+          <span class="counter" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
+          <div class="dash-lockup">
+            <p class="dash-minor" ng-pluralize
                 count="dashboardData.PaymentsDueToday"
-                when="{'1': 'Due Today', 'other': 'Due Today'}"></span>
-          <p>{{dashboardData.PaymentsDueTodayAmount | currency}}</p>
+                when="{'1': 'Due Today', 'other': 'Due Today'}"></p>
+            <h4 class="dash-major">{{dashboardData.PaymentsDueTodayAmount | currency}}</h4>
+          </div>
         </li>
         <li class="link" ng-click="filterPayments('this-week')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
-          <span class="item-total">{{dashboardData.UpcomingPayments}}</span>
-          <span ng-pluralize
-                count="dashboardData.UpcomingPayments"
-                when="{'1': 'Payment', 'other': 'Payments'}"></span>
-          <span>This {{ viewMode | capitalize }}</span>
-          <p>{{dashboardData.UpcomingPaymentsAmount | currency}}</p>
+          <span class="counter">{{dashboardData.UpcomingPayments}}</span>
+
+          <div class="dash-lockup">
+            <span class="lockup-minor" ng-pluralize
+                  count="dashboardData.UpcomingPayments"
+                  when="{'1': 'Payment', 'other': 'Payments'}"></span>
+            <span>This {{ viewMode | capitalize }}</span>
+            <h4 class="dash-major">{{dashboardData.UpcomingPaymentsAmount | currency}}</h4>
+          </div>
         </li>
         <li class="link" ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
-          <span class="item-total">{{dashboardData.AccountFees}}</span>
-          <span ng-pluralize
-                count="dashboardData.AccountFees"
-                when="{'1': 'Account Fee', 'other': 'Account Fees'}"></span>
-          <p>{{dashboardData.AccountFeeAmount | currency}}</p>
+          <span class="counter">{{dashboardData.AccountFees}}</span>
+          <div class="dash-lockup">
+            <p class="dash-minor" ng-pluralize
+               count="dashboardData.AccountFees"
+               when="{'1': 'Account Fee', 'other': 'Account Fees'}"></p>
+            <h4 class="dash-major">{{dashboardData.AccountFeeAmount | currency}}</h4>
+          </div>
         </li>
-        <a class="more btn btn-mini" href="#/home/payments" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
-          <span class="glyphicon glyphicon-eye-open"></span>
+              </ul>
+        <button class="btn-cta cta-full cta-primary" href="#/home/payments" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
           View All Payments
-        </a>
-      </ul>
+        </button>
+
     </div>
   </div>
 
@@ -279,7 +288,7 @@
     <table>
       <tr class="more" href="#/home/floorplan?filter=approved">
         <td>
-          <span class="item-total">
+          <span class="counter">
             {{ dashboardData.ApprovedFloorplans | alt }}
           </span>
         </td>
@@ -294,7 +303,7 @@
 
       <tr class="more" href="#/home/floorplan?filter=pending">
         <td>
-          <span class="item-total">
+          <span class="counter">
             {{ dashboardData.PendingFloorplans | alt }}
           </span>
         </td>
@@ -309,7 +318,7 @@
 
       <tr class="more" href="#/home/floorplan?filter=denied">
         <td>
-          <span class="item-total">
+          <span class="counter">
             {{ dashboardData.DeniedFloorplans | alt }}
           </span>
         </td>
