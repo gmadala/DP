@@ -64,7 +64,7 @@ angular.module('nextgearWebApp')
               enabled: scope.showLegend || false,
               floating: true,
               labelFormatter: function() { // formats label to two lines; adds '$', decimal, comma, etc.
-                return '<div class="chart-legend">' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
+                return '<div>' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
               },
               itemStyle: {
                 fontFamily: defaultFontFamily,
