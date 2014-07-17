@@ -4,7 +4,7 @@
       <h1>{{ flooringInfo.Description }}</h1>
     </div>
     <section class="row-fluid">
-      <section class="span10">
+      <section class="span9">
         <!-- Flooring Information -->
         <div class="well">
           <h2 class="well-title">Flooring Information <span class="well-sub-title">Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h2>
@@ -340,24 +340,42 @@
 
       </section>
 
-      <section class="span2 last">
-        <h4>Payment Options</h4>
-        <div>
-          A payment is due today.
-          <br/><a href="">Request an extension?</a>
+      <section class="span3 well last">
+        <h2 class="well-title">Payment Options</h2>
+
+        <div class="row-fluid notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
+          <div class="span2">
+
+          </div>
+          <div class="span10">
+            <!-- Overdue Payment -->
+            <div ng-show="landing.paymentOverdue">
+              <p>A payment is overdue. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension? </a>
+              <!-- if we get updated endpoints, add link to make a payment here as well -->
+              </p>
+            </div>
+
+            <!-- Payment Due Today -->
+            <div ng-show="landing.paymentDueToday">
+              <p>A payment is due today. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            </div>
+
+            <!-- Payment Due Soon (This Week) -->
+            <div ng-show="landing.paymentDueSoon">
+              <p>A payment is due this week. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            </div>
+
+            <!-- Payments aren't due soon, but can request extension -->
+            <div ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue">
+              <p><a href="" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            </div>
+          </div>
         </div>
-        <div>
-
-                   <!--    <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
-                    </div>
-                    <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
-                      <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
-                    </div> -->
-
-
-
-
-
+        <!--    <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+        </div>
+        <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
+          <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+        </div> -->
         </div>
       </section>
     </section>

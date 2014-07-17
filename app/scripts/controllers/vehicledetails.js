@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, api) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Payments, api, moment) {
 
     $scope.stockNo = $stateParams.stockNumber;
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
@@ -32,6 +32,17 @@ angular.module('nextgearWebApp')
 
     // Grab landing info
     promises.landing.then(function(info) {
+
+      // Due today/soon?
+      info.NextPaymentDueDate = moment(info.NextPaymentDueDate);
+      if(moment.isMoment(info.NextPaymentDueDate)){
+        info.paymentOverdue = info.NextPaymentDueDate.isBefore(moment(), 'day');
+        // Due today/soon?
+        info.paymentDueToday = info.NextPaymentDueDate.isSame(moment(), 'day');
+        // Due soon?
+        info.paymentDueSoon = info.NextPaymentDueDate.diff(moment(), 'days') < 7 && !info.paymentDueToday && !info.paymentOverdue;
+      }
+
       $scope.landing = info;
     });
 
@@ -312,7 +323,8 @@ angular.module('nextgearWebApp')
       promises.valueInfo,
       promises.financialSummary
     ]).then(function(info){
-      var vehicleInfo = info[1],
+      var landingInfo = info[0],
+          vehicleInfo = info[1],
           titleInfo = info[2],
           flooringInfo = info[3];
 
@@ -335,6 +347,44 @@ angular.module('nextgearWebApp')
         FlooringDate: flooringInfo.FlooringDate,
         DaysOnFloorplan: flooringInfo.TotalDaysFloored,
         SellerName: flooringInfo.SellerName
+      };
+
+      // we need data from getLanding & getFinancialSummary for requesting an extension
+      $scope.landing.showExtendLink = function() {
+        return !!landingInfo.NextPaymentAmount && landingInfo.NextPaymentAmount === landingInfo.TotalOutstandingAmount;
+      };
+
+      $scope.landing.requestExtension = function() {
+        // We need a payment object, but we only need the FloorplanId & Vin.
+        var payment = {
+          FloorplanId: landingInfo.FloorplanId,
+          Vin: landingInfo.UnitVin,
+          UnitDescription: landingInfo.Description
+        };
+
+        $dialog.dialog({
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            controller: 'ExtensionRequestCtrl',
+            templateUrl: 'views/modals/paymentExtension.html',
+            dialogClass: 'modal extension-modal',
+            resolve: {
+              payment: function() {
+                return payment;
+              },
+              confirmRequest: function() {
+                return function() {
+                  if(payment.Extendable) {
+                    return Payments.requestExtension(payment.FloorplanId);
+                  } else {
+                    // shouldn't be calling this method
+                    return $q.reject();
+                  }
+                };
+              }
+            }
+          }).open();
       };
 
       // build out payment/payoff objects for if user wants to make a payment.
