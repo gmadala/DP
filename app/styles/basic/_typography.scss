@@ -80,6 +80,7 @@ a, a:visited {
   }
 
   th, td {
+    vertical-align: middle;
     padding: 8px 15px;
 
     &:first-child {
@@ -96,7 +97,7 @@ a, a:visited {
     border-width: 0 1px;
     border-color: $tableBorder;
 
-    &:first-child, &.center {
+    .center {
       text-align: center;
     }
   }

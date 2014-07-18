@@ -111,7 +111,14 @@
 
         <!-- Payment Activity -->
         <div class="well">
-          <h2 class="well-title">Financial Activity <a class="well-sub-title featured" ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h2>
+          <h2 class="well-title">Financial Activity
+            <div class="paired paired-reversed well-sub-title">
+              <a class="featured" ng-href="{{ historyReportUrl }}">
+                <span class="paired-body">View the Vehicle History Detail Report</span>
+                <span class="paired-media icon-primary" nxg-icon="icon-car"></span>
+              </a>
+            </div>
+          </h2>
           <div class="row-fluid col-bordered">
             <div class="span7">
               <div class="row-fluid">
@@ -184,7 +191,13 @@
                   <th>Transaction Details</th>
                 </thead>
                 <tr ng-repeat="activity in financialSummary.FloorplanActivity">
-                  <td class="center">{{ activity.ActivityDate | moment }}</td>
+                  <td class="center">
+                    <div class="paired">
+                      <span class="paired-media" nxg-icon="icon-downArrow" ng-show="activity.IsPayment && !activity.IsFee"></span>
+                      <span class="paired-media" nxg-icon="icon-upArrow" ng-show="activity.IsFee && !activity.IsPayment"></span>
+                      <span class="paired-body">{{ activity.ActivityDate | moment }}</span>
+                    </div>
+                  </td>
                   <td><a href="" class="primary" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | currency }}</a></td>
                 </tr>
               </table>
@@ -262,7 +275,14 @@
 
           <!-- Title Information -->
           <div class="well span6 equal-height">
-            <h2 class="well-title">Title Information <a class="well-sub-title featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h2>
+            <h2 class="well-title">Title Information
+              <div class="well-sub-title paired-reversed">
+                <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">
+                  <span class="paired-body">View the Title</span>
+                  <span class="paired-media icon-primary" nxg-icon="icon-title"></span>
+                </a>
+              </div>
+            </h2>
             <div class="row-fluid">
               <ul class="list-table padded">
                 <li class="list-table-row">
@@ -342,12 +362,14 @@
 
       <section class="span3 well sidebar last">
         <h2 class="well-title">Payment Options</h2>
-
-        <div class="row-fluid notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
-          <div class="span2">
-
+        <div class="notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
+          <div class="paired-media">
+            <span ng-show="landing.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
+            <span ng-show="landing.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
+            <span ng-show="landing.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
+            <span ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue" nxg-icon="icon-info" class="icon-large"></span>
           </div>
-          <div class="span10">
+          <div class="paired-body">
             <!-- Overdue Payment -->
             <div ng-show="landing.paymentOverdue">
               <p>A payment is overdue. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension? </a>

@@ -1,0 +1,180 @@
+/* ===== ICONS ===== */
+
+// override bootstrap
+[class^="icon-"], [class*=" icon-"] {
+  background: transparent;
+  margin-top: 0;
+}
+.svg-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+
+  &.icon-small {
+    height: 15px;
+    width: 15px;
+  }
+
+  &.icon-large {
+    width: 25px;
+    height: 25px;
+  }
+
+  &.icon-x-large {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.icon-double {
+    width: 50px;
+    height: 20px;
+    padding: 0 2px;
+  }
+
+  &.icon-primary svg {
+    fill: $primary;
+  }
+}
+
+  .notice-icon, .notice-icon + p {
+    display: inline-block;
+  }
+
+  .notice-icon {
+    margin-right: 5px;
+  }
+
+.icon-label {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 90%;
+}
+
+// INTERACTIVE ICONS
+.btn {
+  .svg-icon svg {
+    fill: $highlight;
+  }
+
+  &:active .svg-icon svg,
+  &:hover .svg-icon svg,
+  &.selected:active .svg-icon svg {
+    fill: $highlight;
+  }
+
+  &.selected .svg-icon svg {
+    fill: $white;
+  }
+
+  &.btn-icon .svg-icon {
+    margin-top: -2px;
+  }
+}
+
+// all disabled buttons have the same coloring
+.btn:disabled .svg-icon svg,
+.btn.ng-disabled .svg-icon svg,
+.btn:disabled:active .svg-icon svg,
+.btn.ng-disabled:active .svg-icon svg ,
+.btn:disabled:hover .svg-icon svg,
+.btn.ng-disabled:hover .svg-icon svg {
+  fill: #B7B7B7;
+}
+
+.cta-primary {
+  .svg-icon svg {
+    fill: $white;
+  }
+
+  &:active .svg-icon svg, &:hover .svg-icon svg {
+    fill: $white;
+  }
+}
+
+.cta-secondary {
+  .svg-icon svg {
+    fill: $primary;
+  }
+
+  &:active .svg-icon svg, &:hover .svg-icon svg {
+    fill: $highlight;
+  }
+}
+
+.remove {
+  @include rotate(45deg);
+}
+
+// STATIC ICONS
+.icon-alert {
+  fill: $red;
+}
+
+.icon-failure {
+  fill: $red;
+}
+
+.icon-warning {
+  fill: $yellow;
+}
+
+.icon-info {
+  fill: $primary;
+}
+
+.icon-success {
+  fill: $green;
+}
+
+.icon-chevron {
+  fill: none;
+  stroke: $secondary;
+  margin-left: 5px;
+
+  &.icon-large {
+    height: 25px;
+    width: 15px;
+  }
+}
+
+.icon-cancel {
+  &.svg-icon svg {
+    fill: #CCCCCC;
+  }
+
+  .clear:hover &.svg-icon svg {
+    fill: #B7B7B7;
+  }
+}
+
+.icon-downArrow { // green
+  fill: $success;
+}
+
+.icon-upArrow { // red
+  fill: $danger;
+}
+
+// .icon-plus, .icon-minus {
+//   width: 10px;
+// }
+
+.icon-sortArrows  {
+  display: none;
+  width: 18px;
+  height: 16px;
+
+  .selected & {
+    // @include scale(1,-1);
+    display: inline-block;
+    top: 0;
+    left: 0;
+  }
+
+  .selected.ascending & {
+    // @include scale(1,1);
+  }
+}
+
+

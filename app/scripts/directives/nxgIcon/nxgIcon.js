@@ -16,7 +16,7 @@ angular.module('nextgearWebApp')
          * overwrite all the others.
          */
         // var mySvg = element.find('svg');
-        element.addClass('nxg-'+attrs.nxgIcon);
+        element.addClass(attrs.nxgIcon);
         element.find('use').attr('xlink:href', '#'+attrs.nxgIcon);
       }
     };

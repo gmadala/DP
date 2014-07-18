@@ -117,6 +117,40 @@
   background: #EBEBEB;
 }
 
+/*
+ * PAIRED MEDIA
+ * Allows for media such as an image or icon
+ * to line up with associated text.
+ *
+ * Used within many buttons, as well as in list items with icons.
+ */
+.paired {
+  overflow: hidden;
+
+  td & {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+  .paired-media, .paired-body {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .paired-media {
+    margin: 0 5px 0 3px;
+
+    .paired-reversed & {
+      margin: 0 3px 0 5px;
+    }
+  }
+
+  .paired-contain {
+    max-width: 80%;
+    text-align: left;
+  }
+
+
 // dashboard
 .dash-lockup {
   @extend .lockup;
