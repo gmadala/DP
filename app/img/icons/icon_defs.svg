@@ -431,4 +431,8 @@
       </g>
     </g>
   </symbol>
+
+  <symbol id="icon-triangle" viewBox="0 0 4.68 9.129">
+    <polygon points="0,9.129 0,0 4.68,4.564 "/>
+  </symbol>
 </svg>

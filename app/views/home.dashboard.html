@@ -1,5 +1,4 @@
 <section class="row-fluid upcoming">
-
   <div class="row-fluid">
     <!-- Calendar -->
     <div class="span9 nxg-dash-calendar-container well" >
@@ -91,7 +90,8 @@
         </li>
               </ul>
         <button class="btn-cta cta-full cta-primary" href="#/home/payments" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
-          View All Payments
+          <span class="paired-body">View All Payments</span>
+          <span class="paired-media" nxg-icon="icon-eye"></span>
         </button>
 
     </div>
@@ -249,7 +249,8 @@
       </div>
 
       <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON}}">
-        Request Credit Increase
+        <span class="paired-body">Request Credit Increase</span>
+        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
       </button>
     </div>
   </div>
@@ -270,7 +271,8 @@
       </tr>
     </table>
     <button class="btn-cta cta-full cta-secondary" href="#/home/receipts" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
-      View All Receipts
+      <span class="paired-body">View All Receipts</span>
+      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
   </div>
 
@@ -285,9 +287,56 @@
   <!-- Floor Plan Summary -->
   <div class="span2 well ">
     <h2 class="well-title">Floor Plan</h2>
+    <ul>
+      <li class="row-fluid">
+        <div class="span6">
+          <span class="counter">
+            {{ dashboardData.ApprovedFloorplans | alt }}
+          </span>
+        </div>
+        <div class="span6 counter-label">
+          <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+              Approved
+          </span>
+        </div>
+      </li>
+
+      <li class="row-fluid">
+        <div class="span6">
+          <span class="counter">
+            {{ dashboardData.PendingFloorplans | alt }}
+          </span>
+        </div>
+        <div class="span6 counter-label">
+          <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+              Pending
+          </span>
+        </div>
+      </li>
+
+      <li class="row-fluid">
+        <div class="span6">
+          <span class="counter">
+            {{ dashboardData.DeniedFloorplans | alt }}
+          </span>
+        </div>
+        <div class="span6 counter-label">
+          <span tooltip="This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
+            tooltip-placement="right"
+            tooltip-popup-delay="700">
+              Denied
+          </span>
+        </div>
+      </li>
+    </ul>
+
     <table>
       <tr class="more" href="#/home/floorplan?filter=approved">
-        <td>
+        <!-- <td>
           <span class="counter">
             {{ dashboardData.ApprovedFloorplans | alt }}
           </span>
@@ -298,11 +347,11 @@
             tooltip-popup-delay="700">
               Approved
           </span>
-        </td>
+        </td> -->
       </tr>
 
       <tr class="more" href="#/home/floorplan?filter=pending">
-        <td>
+       <!--  <td>
           <span class="counter">
             {{ dashboardData.PendingFloorplans | alt }}
           </span>
@@ -313,11 +362,11 @@
             tooltip-popup-delay="700">
               Pending
           </span>
-        </td>
+        </td> -->
       </tr>
 
       <tr class="more" href="#/home/floorplan?filter=denied">
-        <td>
+        <!-- <td>
           <span class="counter">
             {{ dashboardData.DeniedFloorplans | alt }}
           </span>
@@ -328,13 +377,13 @@
             tooltip-popup-delay="700">
               Denied
           </span>
-        </td>
+        </td> -->
       </tr>
     </table>
-    <a class="more btn btn-mini" href="#/home/floorplan" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
-      <span class="glyphicon glyphicon-eye-open"></span>
-      View Floor Plan
-    </a>
+    <button class="btn-cta cta-full cta-secondary" href="#/home/floorplan" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
+      <span class="paired-body">View Floorplan</span>
+      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+    </button>
   </div><!-- end .summary.floorplan -->
 
   <div class="span10 well">
