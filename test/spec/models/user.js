@@ -4,13 +4,14 @@ describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend, api, $q;
+  var user, httpBackend, api, $q, $rootScope;
 
-  beforeEach(inject(function ($httpBackend, _$q_, User, _api_) {
+  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_) {
     user = User;
     api = _api_;
     httpBackend = $httpBackend;
     $q = _$q_;
+    $rootScope = _$rootScope_;
   }));
 
   describe('recoverUserName method', function () {
@@ -95,6 +96,38 @@ describe('Model: User', function () {
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
     });
 
+  });
+
+  describe('initSession', function() {
+    it('should call appropriate methods', function() {
+      spyOn(api, 'setAuth');
+      spyOn(user, 'refreshInfo').andReturn('a');
+      spyOn(user, 'refreshStatics').andReturn('b');
+      spyOn($q, 'all').andReturn($q.when(true));
+      var auth = {};
+      user.initSession(auth);
+      expect(api.setAuth).toHaveBeenCalled();
+      expect(api.setAuth.calls[0].args[0]).toBe(auth);
+      expect(user.refreshInfo).toHaveBeenCalled();
+      expect(user.refreshStatics).toHaveBeenCalled();
+      expect($q.all).toHaveBeenCalledWith(['a', 'b']);
+    });
+
+    it('should resolve (not reject) even if one of the other promises rejects', function() {
+      spyOn(api, 'setAuth');
+      spyOn(user, 'refreshInfo').andReturn($q.reject(true));
+      spyOn(user, 'refreshStatics').andReturn($q.when(true));
+      var promise = user.initSession();
+      var resolved = false, rejected = false;
+      promise.then(function() {
+        resolved = true;
+      }, function() {
+        rejected = true;
+      });
+      $rootScope.$digest();
+      expect(resolved).toBe(true);
+      expect(rejected).toBe(false);
+    });
   });
 
   describe('resetPassword method', function () {
