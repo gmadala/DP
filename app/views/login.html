@@ -18,7 +18,7 @@
                    required
                    nxg-autofocus
                    nxg-enter="authenticate()"
-                   typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
+                   nxg-typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
             <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required">Please enter a username.</p>
 
             <label for="credPassword">Password:</label>

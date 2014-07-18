@@ -17,8 +17,13 @@ angular.module('nextgearWebApp')
       // were auto filled by the browser or an extension. This is a known Angular issue.
       //
       // source: https://github.com/angular/angular.js/issues/1460
-      $scope.loginForm.credUsername.$setViewValue(angular.element('#credUsername').val());
       $scope.loginForm.credPassword.$setViewValue(angular.element('#credPassword').val());
+      // Only update username if the value is actually different. Prevents typeahead
+      // picker from opening on authenticate()
+      var eleVal = angular.element('#credUsername').val();
+      if($scope.credentials.username !== eleVal) {
+        $scope.loginForm.credUsername.$setViewValue(eleVal);
+      }
 
       $scope.validity = $scope.validity = angular.copy($scope.loginForm);
 
