@@ -141,6 +141,14 @@
     height: 25px;
     width: 15px;
   }
+
+  &.point-up {
+    @include rotate(-90deg);
+  }
+
+  &.point-down {
+    @include rotate(90deg);
+  }
 }
 
 .icon-cancel {

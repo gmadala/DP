@@ -7,6 +7,16 @@ angular.module('nextgearWebApp')
 
     $scope.viewMode = 'week';
 
+    $scope.today = moment().format('MMMM D, YYYY');
+
+    $scope.changeViewMode = function(mode) {
+      $scope.viewMode = mode;
+    };
+
+    $scope.isWeekMode = function() {
+      return $scope.viewMode === 'week';
+    };
+
     $scope.getDueStatus = function (payment) {
       var due = moment(payment.DueDate),
         today = moment();
@@ -112,13 +122,19 @@ angular.module('nextgearWebApp')
 
           $scope.chartData = {
             credit: result.creditChartData,
-            payments: result.paymentsChartData,
+            payments: result.paymentChartData.chartData,
             creditTitle: {
               useHTML: true,
               floating: true,
               text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(result.AvailableCredit, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
               y: 70
             },
+            paymentsTitle: {
+              useHTML: true,
+              floating: true,
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">this ' + $scope.viewMode + '</p>',
+              y: 75
+            }
           };
         }
       );

@@ -74,6 +74,10 @@ a, a:visited {
   border: 1px solid $tableBorder;
   border-width: 0 0 1px 0;
 
+  &.table-border {
+    border: 1px solid $tableBorder;
+  }
+
   thead th {
     text-align: center;
     border: 1px solid $tableBorder;
@@ -128,7 +132,8 @@ a, a:visited {
   font-weight: bold;
 }
 
-.table-numeric, .table .table-numeric, .numeric {
+.table-numeric, .table .table-numeric,
+.numeric, .table .numeric {
   text-align: right;
 }
 

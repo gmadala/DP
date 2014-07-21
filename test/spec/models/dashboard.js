@@ -191,9 +191,9 @@ describe('Model: dashboard', function () {
 
     it('should create the expected dueEvents on calendarData', function () {
       var expected = [
-        {title: '<span class="nxg-calendar-count">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-        {title: '<span class="nxg-calendar-count">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
-        {title: '<span class="nxg-calendar-count">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
+        {title: '<span class="counter">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
+        {title: '<span class="counter">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
+        {title: '<span class="counter">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
       ];
 
       expect(angular.equals(resultData.calendarData.dueEvents, expected)).toBe(true);
@@ -201,7 +201,7 @@ describe('Model: dashboard', function () {
 
     it('should create the expected scheduledEvents on calendarData', function () {
       var expected = [
-        {title: '<span class="nxg-calendar-count">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+        {title: '<span class="counter">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
       ];
 
       expect(angular.equals(resultData.calendarData.scheduledEvents, expected)).toBe(true);
@@ -210,12 +210,12 @@ describe('Model: dashboard', function () {
     it('should create the expected eventsByDate on calendarData', function () {
       var expected = {
         '2013-08-01': [
-          {title: '<span class="nxg-calendar-count">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-          {title: '<span class="nxg-calendar-count">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+          {title: '<span class="counter">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
+          {title: '<span class="counter">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
         ],
         '2013-08-07': [
-          {title: '<span class="nxg-calendar-count">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
-          {title: '<span class="nxg-calendar-count">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
+          {title: '<span class="counter">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
+          {title: '<span class="counter">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
         ]
       };
 

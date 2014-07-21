@@ -48,35 +48,22 @@
 // .nxg-chart-temporary-credit   { background-color: #575757 }
 .nxg-chart-utilized-credit    { background-color: $primary; }
 .nxg-chart-available-credit   { background-color: $success; }
-.nxg-chart-fees               { background-color: #444444 }
-.nxg-chart-payments           { background-color: #2286f5 }
-.nxg-chart-scheduled-payments { background-color: #3fb232 }
+.nxg-chart-fees               { background-color: #9F9F9F; }
+.nxg-chart-payments           { background-color: #3399CC; }
+.nxg-chart-scheduled-payments { background-color: #1864A1; }
 
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {
   @extend %center;
   position: relative;
-  padding: 10px;
-  border: 1px solid $border;
-  margin-bottom: 10px;
+  top: -20px;
+  padding: 0 20px 10px;
 
-  .chart-obj {
-    display: inline-block;
-    top: -20px;
-    width: 120px;
-    height: 120px;
+  .chart-label-primary {
+    margin-bottom: 0;
   }
-
-  table {
-    @extend %full-width;
-    @extend %align-left;
-  }
-
-  .nxg-doughnut-chart-label {
-    width: 120px;
-    top: 35px;
-    left: 50%;
-    margin-left: -60px;
+  .chart-label-primary, .chart-label-secondary {
+    font-weight: normal;
   }
 }
 

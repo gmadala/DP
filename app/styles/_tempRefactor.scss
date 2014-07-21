@@ -128,7 +128,7 @@
   overflow: hidden;
 
   td & {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
   }
 }
@@ -167,6 +167,10 @@
   }
 
 // overly-specific....should really refactor somehow.
+.upcoming-payments {
+  height: 250px;
+  border-top: 2px solid $border;
+}
 .payment-activity {
   [class*="span"] {
     height: 250px;

@@ -245,7 +245,8 @@ span.btn-help {
  * We're not using .btn here, because then we'd have to override
  * Bootstrap's .btn styles, which are are numerous.
  */
-.button {
+.button, .btn {
+  @include box-shadow(none);
   @include border-radius($borderRadius);
   // display: block;
   background: $btn-bkgd;
@@ -257,7 +258,8 @@ span.btn-help {
   border: 1px solid $border;
   margin: 5px 10px;
 
-  &:focus {
+  &:focus, &:hover, &:active {
+    @include box-shadow(none);
     outline: none;
   }
 
@@ -384,6 +386,62 @@ span.btn-help {
       background: $btn-bkgd-disabled;
       color: $btn-text-disabled;
       border: 1px solid $border;
+    }
+  }
+}
+
+/* TOGGLE BUTTON
+ * A group of two buttons with a sliding div beneath,
+ * to show which is selected.
+ */
+.btn-toggle {
+  @extend .clearfix;
+  @include border-radius($borderRadius);
+  background: #E6E7E8;
+  position: relative;
+  width: 200px;
+  height: 24px;
+  margin: 10px auto;
+  border: 1px solid $toggle-color;
+  z-index: 0;
+
+  .btn {
+    @extend %float-l;
+    background: transparent;
+    width: 50%;
+    height: 24px;
+    position: relative;
+    color: $toggle-color;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px;
+    border: 0;
+    margin: 0;
+    z-index: 2
+  }
+
+  .btn-slider {
+    @include border-radius($borderRadius);
+    position: absolute;
+    background: $toggle-slider-color;
+    top: 0;
+    height: 24px;
+    width: 50%;
+    border: 1px solid $toggle-color;
+    margin: -1px;
+    z-index: 1;
+
+    @include transition-duration(400ms);
+    @include transition-timing-function(ease);
+
+    &.active-left {
+      @include transition-property(left);
+      left: 0;
+    }
+
+    &.active-right {
+      @include transition-property(right);
+      right: 0;
     }
   }
 }

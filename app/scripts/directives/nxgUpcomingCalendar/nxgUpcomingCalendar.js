@@ -24,9 +24,9 @@ angular.module('nextgearWebApp')
           weekends: false,
           weekMode: 'liquid',
           header: {
-            left: 'prev, today',
-            center: 'title',
-            right: 'next'
+            left: '',
+            center: 'prev, title, next',
+            right: ''
           },
           contentHeight: 150,
           titleFormat: {
@@ -34,8 +34,8 @@ angular.module('nextgearWebApp')
             week: 'MMMM yyyy'
           },
           columnFormat: {
-            month: '<b>ddd</b>',
-            week: '<b>ddd</b>'
+            month: 'ddd',
+            week: 'ddd'
           },
           viewDisplay: function(view) {
             // prevent navigation into the past

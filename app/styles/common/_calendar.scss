@@ -1,35 +1,127 @@
-@import "compass/css3/border-radius";
 
 .nxg-dash-calendar-container {
+  @extend .clearfix;
   background-color: $gray-e;
   position: relative;
+  margin-bottom: 0;
 
   &.well {
     padding: 0;
     border: 0;
-
-    h4 {
-      padding: 14px 0 0 14px;
-      margin: 0 0 14px;
-    }
-
-    .well-out {
-      margin: 0;
-      border: 0;
-      padding: 1px 0 0;
-    }
   }
 }
+
+// Calendar header/footer
+.dash-calendar-header, .dash-calendar-footer {
+  @extend %full-width;
+  position: absolute;
+  top: 0;
+
+  h5 {
+    float: left;
+    margin: 12px 20px 10px;
+  }
+
+  .btn-toggle {
+    float: right;
+    margin: 10px 20px 10px 10px;
+  }
+
+  h5, .btn-toggle {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.dash-calendar-footer {
+  position: relative;
+
+  .fc-header {
+    @include border-radius(0);
+    position: absolute;
+    top: 100%;
+  }
+}
+
+.fc-header {
+  @extend %full-width;
+  @include border-top-radius($borderRadius);
+  background: $white;
+  border: 1px solid $wellBorder;
+  border-width: 1px 1px 0;
+
+  .fc-header-right, .fc-header-left, .fc-header-center {
+    padding: 5px 10px;
+  }
+
+  .fc-button {
+    margin-bottom: 5px;
+  }
+
+  .primary, .today-btn, .today-btn.primary {
+    font-size: 14px;
+  }
+}
+
+  .fc-header-title h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666666;
+  }
+
+  .today-btn {
+    line-height: 1.5;
+    padding: 0;
+    border: 0;
+
+    &:hover {
+      color: darken($primary, 10%);
+      cursor: pointer;
+    }
+
+    &.disabled, &.featured.disabled {
+      cursor: default;
+      color: $btn-text-disabled;
+
+      &:hover {
+        color: $btn-text-disabled;
+      }
+    }
+  }
+
+  .fc-button-prev, .fc-button-next {
+    @extend .btn-unstyle;
+    @include box-shadow(none);
+    border: 0;
+    margin: 5px;
+
+    &.fc-state-disabled {
+      border: 0;
+      margin: 5px;
+
+      .fc-text-arrow {
+        color: #BBB;
+        font-weight: normal;
+      }
+    }
+
+    .fc-text-arrow {
+      color: $primary;
+    }
+  }
 
 .fc-view {
   .closed {
     background-color: $white;
   }
-  .has-events {
-    @extend %heavy;
-  }
+  // .has-events {
+    // @extend %heavy;
+  // }
 }
 
+.fc-day {
+  height: 170px;
+}
 .fc-view-month .fc-day.closed {
   cursor: default;
 }
@@ -40,262 +132,89 @@
   }
 }
 
-.fc-day {
-  height: 179px;
-}
 
 .fc-grid {
   border: 0;
 }
 
 .fc-grid .fc-day-number {
+  @extend %heavy;
   padding-right: 6px;
   padding-top: 3px;
 }
 
 .fc-grid .fc-day-content {
-  padding: 5px 2px 4px;
+  padding: 5px;
 }
 
 .fc-day.closed {
   background-color: #eaeaea;
+
   .fc-day-number {
-    @include opacity(30);
+    @include opacity(40);
   }
 }
 
+
+.fc-week {
+  height: 170px;
+}
+
+.fc-border-separate td {
+  border-color: $dataTableBorder;
+}
+
+// Week name and day number headers.
 .fc-widget-header.fc-day-header, .fc-widget-content {
-  @extend %small;
-  @extend %align-right;
-  color: #535353;
+  font-size: 14px;
+  color: #666;
   background-color: $white;
   text-transform: uppercase;
   padding: 4px 10px;
-
-  b:first-child {
-    @extend %float-l;
-  }
 }
 
-.nxg-upcoming-detail {
-  position: absolute;
-  background-color: $gray-e;
-  border: 1px solid $black;
-  @include border-radius();
-  header {
-    @extend %center;
-    padding: 0 20px;
-  }
-  footer {
-    height: 5px;
-  }
-  .close {
-    position: absolute;
-    right: 5px;
-    top: 10px;
-  }
-  div {
-    background-color: $white;
-    padding: 5px 20px 5px 30px;
-  }
-  p {
-    margin-bottom: 0;
-  }
+.fc-widget-header.fc-day-header {
+  @extend %align-left;
+}
+.fc-widget-content {
+  @extend %align-right;
 }
 
+// Individual Events with Counters
 .fc-event {
   @extend %align-right;
+  // height: 170px;
   display: block;
   padding: 6px 6px 0;
   color: $base-text-color;
   border: none;
   background-color: transparent;
 
-  .nxg-calendar-count {
-    @extend %float-l;
+  .counter {
+    float: left;
+    padding-top: 7px;
+    margin: 0 5px 5px;
   }
 }
 
-.fc-event-title {
-  @extend %small;
-  display: block;
-  line-height: 1.166666667;
-  color: $gray-9;
-}
-
-.fc-event-subtitle {
-  @extend %heavy;
-  font-size: 13px;
-  color: $base-text-color;
-  line-height: 1.23;
-}
-
-.nxg-calendar-count {
-  @extend %heavy;
-  @extend %center;
-  @extend %float-l;
-  @include border-radius(6px);
-  line-height: 1.25;
-  width: 24px;
-  color: $white;
-  background-color: $upcoming;
-  border: 1px solid $upcoming;
-}
-
-.today .nxg-calendar-count {
-  color: $base-text-color;
-  background-color: $today;
-  border: 1px solid $today;
-}
-
-.overdue .nxg-calendar-count {
-  background-color: $overdue;
-  border: 1px solid $overdue;
-}
-
-.fc-text-arrow {
-  //to style unchangable caret character as close to designs as possible.
-  font-family: 'Lucida Sans Unicode';
-  margin: 9px 0 0 0;
-  display: block;
-  font-size: 38px;
-}
-
-.fc-header .fc-button{
-  &.fc-button-prev {
-    padding: 0 15px 0 14px;
-
-    &.fc-state-disabled {
-      margin: 0;
-      @include box-shadow(white 1px 0 0);
-    }
+  .today .counter {
+    color: $white;
+    background-color: $warning;
   }
 
-  &.fc-button-next {
-    padding: 0 14px 0 15px;
+  .overdue .counter {
+    color: $white;
+    background-color: $danger;
   }
 
-  &.fc-button-next, &.fc-button-next.fc-state-disabled,
-  &.fc-button-prev, &.fc-button-prev.fc-state-disabled {
-    border: 1px solid rgba(0,0,0,0.1);
-    border-bottom: 0;
-
-    .nxg-dash-calendar-header.bottom & {
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-  }
-}
-
-
-.fc-header .fc-button {
-  color: $brand-light;
-  border-bottom: none;
-  background-color: $white;
-  @include background-image(none);
-  @include border-radius(0);
-  height: 48px;
-  margin: 0;
-
-  &.fc-state-disabled {
-    .fc-text-arrow {
-      color: #9a9a9a;
-    }
-    background-color: $gray-e;
-    border: 0;
+  .fc-event-title {
+    font-size: 12px;
+    line-height: 1.1;
+    color: #666666;
   }
 
-  &:hover {
-    color: #56a4e6;
-    @include box-shadow(none);
+  .fc-event-subtitle {
+    font-weight: bold;
+    color: $highlight;
+    font-size: 16px;
   }
-}
-
-.fc-header .fc-button.fc-button-today {
-  @extend %small;
-  @extend %heavy;
-  @include box-shadow(none);
-  background-color: transparent;
-  color: $brand-text;
-  line-height: 1.5;
-  text-transform: uppercase;
-  height: auto;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid;
-  margin: 12px 0;
-
-  &:hover {
-    color: $gray-8;
-    cursor: pointer;
-  }
-
-  &.fc-state-disabled {
-    color: $gray-8;
-    @include opacity(100);
-  }
-}
-
-.nxg-dash-calendar-header {
-  position: relative;
-
-  &.bottom {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-
-    td {
-      padding-top: 1px;
-    }
-  }
-
-  label {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nxg-fancy-radios {
-    position: absolute;
-    top: 5px;
-    right: 40px;
-    width: 150px;
-  }
-}
-
-.nxg-cal-month-name {
-  top: 4px;
-  right: 144px;
-  position: absolute;
-}
-
-.fc-header-title h2 {
-  font-weight: 200;
-  color: $gray-8;
-  font-size: 17.5px;
-  line-height: 20px;
-  padding: 14px 0 0 14px;
-  margin: 0 0 14px;
-}
-
-.nxg-cal-header {
-  @extend %thin;
-  top: 4px;
-  left: 59px;
-  position: absolute;
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]#week + label::before,
-.nxg-fancy-radios input[type="radio"]#f-week + label::before
- {
-  content: 'Week';
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]#month + label::before,
-.nxg-fancy-radios input[type="radio"]#f-month + label::before {
-  content: 'Month';
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]#year + label::before {
-  content: 'Year';
-}

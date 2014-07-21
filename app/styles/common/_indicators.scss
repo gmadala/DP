@@ -55,7 +55,7 @@
 .counter {
   @extend .heavy;
   @extend .center;
-  @include border-radius(2px);
+  @include border-radius(4px);
   display: inline-block;
   color: #666666;
   font-size: 14px;

@@ -59,7 +59,12 @@ describe('Controller: DashboardCtrl', function () {
   it('should call for data on a setDateRange event and attach the result to the scope', function() {
     var start = new Date(),
       end = new Date(),
-      data = {};
+      data = {
+        creditChartData: {},
+        paymentChartData: {
+          chartData: {}
+        }
+      };
 
     spyOn(dashboard, 'fetchDealerDashboard').andReturn($q.when(data));
     scope.$emit('setDateRange', start, end);
