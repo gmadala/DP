@@ -3,14 +3,39 @@
 angular.module('nextgearWebApp')
   .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService, banner) {
 
+    var savedUsername = localStorageService.get('rememberUsername');
+
     $scope.credentials = {
-      username: '',
-      password: ''
+      username: savedUsername || '',
+      password: '',
+      remember: !!savedUsername
     };
 
     $scope.validity = {};
 
     $scope.showLoginError = false;
+
+    $scope.saveAutocompleteUsername = function(username){
+
+      // If username already is saved remove it so it can be
+      // re-added to the end of the array.
+      var index = $scope.autocompleteUsernames.indexOf(username);
+      if(index !== -1){
+        $scope.autocompleteUsernames.splice(index, 1);
+      }
+      $scope.autocompleteUsernames.push(username);
+
+
+      if($scope.autocompleteUsernames.length > 10){
+        $scope.autocompleteUsernames.splice(0,1);
+      }
+      localStorageService.set('autocompleteUsernames', $scope.autocompleteUsernames);
+
+    };
+
+    $scope.saveUsername = function() {
+      localStorageService.set('rememberUsername', $scope.credentials.remember ? $scope.credentials.username : '');
+    };
 
     $scope.authenticate = function() {
       // VO-2579 - Set view value to the username and password fields in case the login credentials
@@ -32,6 +57,7 @@ angular.module('nextgearWebApp')
           .then(function(data) {
             $rootScope.$broadcast('event:userAuthenticated', data);
             $scope.saveAutocompleteUsername($scope.credentials.username);
+            $scope.saveUsername();
           }, function(error) {
             error.dismiss();
             $scope.errorMsg = error.text;
@@ -45,24 +71,6 @@ angular.module('nextgearWebApp')
       localStorageService.set('autocompleteUsernames', []);
     }
     $scope.autocompleteUsernames = localStorageService.get('autocompleteUsernames');
-
-    $scope.saveAutocompleteUsername = function(username){
-
-      // If username already is saved remove it so it can be
-      // re-added to the end of the array.
-      var index = $scope.autocompleteUsernames.indexOf(username);
-      if(index !== -1){
-        $scope.autocompleteUsernames.splice(index, 1);
-      }
-      $scope.autocompleteUsernames.push(username);
-
-
-      if($scope.autocompleteUsernames.length > 10){
-        $scope.autocompleteUsernames.splice(0,1);
-      }
-      localStorageService.set('autocompleteUsernames', $scope.autocompleteUsernames);
-
-    };
 
     // load banner information
     banner.fetch(function(text) {

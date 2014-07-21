@@ -99,6 +99,34 @@ describe('Controller: LoginCtrl', function () {
 
   });
 
+  describe('save username', function() {
+    beforeEach(function() {
+      localStorageService.value = {};
+    });
+
+    it('should set username to empty and remember to false initially', function() {
+      expect(scope.credentials.remember).toBe(false);
+      expect(scope.credentials.username).toBe('');
+    });
+
+    it('should save username when remember checkbox is checked', function() {
+      scope.credentials.remember = true;
+      scope.credentials.username = "123username";
+      scope.saveUsername();
+      expect(localStorageService.value.rememberUsername).toBe('123username');
+    });
+
+    it('should unsave password if checkbox is unchecked', function() {
+      scope.credentials.remember = true;
+      scope.credentials.username = '123username';
+      scope.saveUsername();
+      scope.credentials.remember = false;
+      scope.credentials.username = 'otherUsername';
+      scope.saveUsername();
+      expect(localStorageService.value.rememberUsername).toBe('')
+    });
+  });
+
   describe('authenticate method', function() {
     it('should pass authentication', function() {
       scope.credentials.username = "thisUsername";

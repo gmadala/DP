@@ -36,6 +36,8 @@
           </form>
 
           <div class="footer modal-footer">
+            <input type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" />
+            <label for="rememberUsername">Remember Username</label>
             <button class="btn btn-small btn-primary" ng-click="authenticate()">Log In</button>
           </div>
 
