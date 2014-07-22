@@ -171,14 +171,25 @@
   height: 250px;
   border-top: 2px solid $border;
 }
+
+.table-holder {
+  overflow-y: scroll;
+  border: 1px solid #BBBBBB;
+
+  .table, .table-border {
+    border-left: 0;
+    border-right: 1px solid #BBBBBB;
+  }
+}
+
 .payment-activity {
   [class*="span"] {
     height: 250px;
     margin: 0;
   }
 
-  .span7 {
-    overflow-y: scroll;
+  .table-holder {
+    border: 0;
     border-right: 1px solid #BBBBBB;
   }
 
@@ -193,4 +204,30 @@
 .floor-chart-title {
   position: relative;
   top: -15px;
+}
+
+.nxg-dash-calendar-container {
+  background: $white;
+}
+
+.page-break {
+  @extend %full-width;
+  height: 0;
+  border-bottom: 3px dotted $border;
+  margin-bottom: 20px;
+}
+
+.dash-well {
+  position: relative;
+  height: 270px;
+
+  &.nxg-dash-calendar-container {
+    height: auto;
+    min-height: 270px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
 }

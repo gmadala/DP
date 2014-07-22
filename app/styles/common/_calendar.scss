@@ -3,7 +3,6 @@
   @extend .clearfix;
   background-color: $gray-e;
   position: relative;
-  margin-bottom: 0;
 
   &.well {
     padding: 0;
@@ -16,6 +15,16 @@
   @extend %full-width;
   position: absolute;
   top: 0;
+
+  .fc-header {
+    @include border-radius(0);
+  }
+
+  .fc-header-center {
+    position: relative;
+    height: 42px;
+    z-index: 5;
+  }
 
   h5 {
     float: left;
@@ -34,12 +43,22 @@
 }
 
 .dash-calendar-footer {
+  @extend .clearfix;
   position: relative;
 
   .fc-header {
-    @include border-radius(0);
+    // @include border-bottom-radius($borderRadius);
+    border-width: 0px 1px 1px;
     position: absolute;
-    top: 100%;
+    top: 0;
+  }
+
+  & + .collapse {
+    top: -1px;
+  }
+
+  & + .collapse.expanded + .accordion-button {
+    top: -2px;
   }
 }
 
@@ -155,13 +174,14 @@
   }
 }
 
-
 .fc-week {
   height: 170px;
 }
 
-.fc-border-separate td {
-  border-color: $dataTableBorder;
+.fc-border-separate {
+  td, th {
+    border-color: $dataTableBorder;
+  }
 }
 
 // Week name and day number headers.
@@ -183,7 +203,6 @@
 // Individual Events with Counters
 .fc-event {
   @extend %align-right;
-  // height: 170px;
   display: block;
   padding: 6px 6px 0;
   color: $base-text-color;
@@ -192,8 +211,7 @@
 
   .counter {
     float: left;
-    padding-top: 7px;
-    margin: 0 5px 5px;
+    margin: 0 5px 5px 0;
   }
 }
 

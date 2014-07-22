@@ -237,6 +237,10 @@ span.btn-help {
       color: darken($primary, 10%);
     }
   }
+
+  .well & {
+    top: -1px; // we don't need to account for the well's margin because we're inside it.
+  }
 }
 
 /*
@@ -360,7 +364,7 @@ span.btn-help {
   font-family: $baseFontFamily;
   font-size: 13px;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px;
 
   &.cta-primary {
     &:hover {

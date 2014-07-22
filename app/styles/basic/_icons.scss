@@ -149,6 +149,10 @@
   &.point-down {
     @include rotate(90deg);
   }
+
+  &.point-up, &.point-down {
+    stroke: $primary;
+  }
 }
 
 .icon-cancel {
