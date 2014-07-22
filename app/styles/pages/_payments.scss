@@ -302,7 +302,7 @@
       }
 
       &.disabled:hover span, span {
-        @extend .glyphicon-remove-circle;
+        // @extend .glyphicon-remove-circle;
         color: $gray-9;
       }
 
