@@ -40,6 +40,11 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.getCalendarTitle = function() {
+      var now = angular.element('.dash-calendar').fullCalendar('getDate');
+      return moment(now).format('MMMM YYYY');
+    };
+
     $scope.onClickPrev = function() {
       if (!$scope.isPast()) {
         angular.element('.dash-calendar').fullCalendar('prev');

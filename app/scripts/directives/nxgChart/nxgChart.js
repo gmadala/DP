@@ -219,6 +219,11 @@ angular.module('nextgearWebApp')
                   }
                 }));
               }
+
+              // Update title as well, if there is one.
+              if(scope.title) {
+                element.highcharts().setTitle(scope.title);
+              }
             }
           }
         });
