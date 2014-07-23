@@ -1,11 +1,10 @@
-<div class="row-fluid two-col dealer-search">
-  <div class="span8 well adjacent">
-    <h4>Dealer Number Search</h4>
-    <div class="well-out">
+<div class="row-fluid dealer-search">
+  <div class="span6 well dash-well">
+    <h2 class="well-title">Dealer Number Search</h2>
+      <div class="row-fluid clearfix">
+      <p> If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search. </p>
       <form name="numberSearchForm" novalidate>
-        <p>
-          If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search.
-        </p>
+
         <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
             Please enter a Dealer Number or an Auction Access Number.
         </p>
@@ -61,17 +60,14 @@
         <div class="form-footer">
           <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
         </div>
+      </div>
       </form>
-    </div>
   </div><!-- end first well -->
 
-  <div class="span8 well adjacent">
-      <h4>Dealer Name Search</h4>
-      <div class="well-out">
+  <div class="span6 well dash-well">
+      <h2 class="well-title">Dealer Name Search</h2>
           <form name="nameSearchForm" novalidate>
-          <p>
-            To look up a dealer in Dealer search, use a combination of their Name and City or State.
-          </p>
+          <p> To look up a dealer in Dealer search, use a combination of their Name and City or State. </p>
           <div class="control-group">
             <label for="dealer-name" class="control-label input-title">Dealer Name</label>
             <div class="controls">
@@ -117,6 +113,5 @@
             <button class="btn btn-primary" type="submit" ng-click="nameSearch.search()">Search</button>
           </div>
         </form>
-      </div>
     </div><!-- end second well -->
 </div>
