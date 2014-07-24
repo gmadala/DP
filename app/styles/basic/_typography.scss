@@ -72,6 +72,46 @@ a, a:visited {
   }
 }
 
+.table-primary {
+  @include border-bottom-radius($borderRadius);
+  border: 0;
+
+  thead th, thead td {
+    background: #666666;
+    height: 35px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: $white;
+    padding: 10px;
+    border: 1px solid $tableBorder;
+  }
+
+  th, td {
+    height: 75px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid $tableBorder;
+
+    &.numeric {
+      text-align: right;
+    }
+  }
+
+  th:first-child, td:first-child {
+    border-left: 0;
+  }
+
+  th:last-child, td:last-child {
+    border-right: 0;
+  }
+
+  tr:last-child, tr:last-child td {
+    @include border-bottom-radius($borderRadius);
+    border-bottom: 0;
+  }
+}
+
 .table-secondary {
   border: 1px solid $tableBorder;
   border-width: 0 0 1px 0;

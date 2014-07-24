@@ -183,21 +183,21 @@
 //   width: 10px;
 // }
 
-.icon-sortArrows  {
-  display: none;
-  width: 18px;
-  height: 16px;
+// .icon-sortArrows  {
+//   display: none;
+//   width: 18px;
+//   height: 16px;
 
-  .selected & {
-    // @include scale(1,-1);
-    display: inline-block;
-    top: 0;
-    left: 0;
-  }
+//   .sorted & {
+//     @include scale(1,1);
+//     display: inline-block;
+//     top: 0;
+//     left: 0;
+//   }
 
-  .selected.ascending & {
-    // @include scale(1,1);
-  }
-}
+//   .selected.desc & {
+//     @include scale(1,-1);
+//   }
+// }
 
 

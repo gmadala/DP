@@ -62,6 +62,10 @@ $modalHeader: #58595b;
 $radioSize: 18px;
 $form-border: $accent;
 
+// Sorting
+$selected-color: white;
+$not-selected-color: #B3B3B3;
+
 // end updated variables
 /////////////////////////////////////////////////////////////
 
@@ -94,10 +98,6 @@ $brand-gradient-bottom: #319FC7;
 // Indicators
 $error: #D90000; // brighter red for overdue items/notices
 $error-dark: #B01100; // darker red for form errors
-
-// Sorting
-$selected-color: white;
-$not-selected-color: #bbb;
 
 // Calendar
 $upcoming: #8EBE31; // green

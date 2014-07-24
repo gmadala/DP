@@ -24,9 +24,9 @@
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   @if $selected {
-    border-bottom: 6px solid $selected-color;
+    border-bottom: 5px solid $selected-color;
   } @else {
-    border-bottom: 6px solid $not-selected-color;
+    border-bottom: 5px solid $not-selected-color;
   }
 }
 
@@ -34,9 +34,9 @@
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   @if $selected {
-    border-top: 6px solid $selected-color;
+    border-top: 5px solid $selected-color;
   } @else {
-    border-top: 6px solid $not-selected-color;
+    border-top: 5px solid $not-selected-color;
   }
   border-bottom: transparent;
 }
