@@ -1,10 +1,8 @@
-<section class="well dash-well">
+<section class="well well-default">
   <h2 class="well-title">Payment Summary</h2>
 
     <div class="well-content">
     <p>Choose to make payments today or schedule your payments when you checkout.</p>
-
-
       <div class="queue-items">
       <p ng-show="paymentQueue.isEmpty()">You have not selected a payment.</p>
       <p ng-show="paymentQueue.isEmpty()">{{ emptyMessage }}</p>
@@ -27,7 +25,6 @@
       </ul>
     </div>
 
-  <div class="pay-sum-footer">
     <h4 class="subtotal">Subtotal: <span class="value">{{ getSubtotal() | currency }}</span></h4>
     <button class="btn btn-primary btn-checkout"
             ng-disabled="paymentQueue.isEmpty()"
@@ -36,5 +33,4 @@
       <span class="ie-text">Continue to Checkout</span>
     </button>
   </div>
-    </div>
 </section>
