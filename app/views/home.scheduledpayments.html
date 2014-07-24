@@ -50,9 +50,9 @@
             <div class="cell schFee-desc"><p>{{ fee.Description }}</p></div>
             <div class="cell schFee-type"><p>{{ fee.FeeType }}</p></div>
             <div class="cell schFee-amt"><p>{{ fee.Balance | currency }}</p>
-              <button class="btn btn-small" ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
+              <a ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
                   <span>Cancel</span>
-              </button>
+              </a>
             </div>
         </li>
       </ul>
@@ -137,17 +137,13 @@
                 <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
                   {{ pay.paymentAmount | currency }} </p>
 
-                <button class="btn btn-small"
-                        ng-show="pay.isPending"
-                        ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()"
-                        ng-click="scheduledPayments.payOff(pay)">
+                <a ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()" ng-click="scheduledPayments.payOff(pay)">
                     <span>Payoff Now</span>
-                </button>
-                <button class="btn btn-small"
-                        ng-show="pay.isPending"
-                        ng-click="scheduledPayments.cancelPayment(pay)">
+                </a>
+
+                <a ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">
                     <span>Cancel</span>
-                </button>
+                </a>
               </div>
             </div><!-- end .main-info -->
           </li>

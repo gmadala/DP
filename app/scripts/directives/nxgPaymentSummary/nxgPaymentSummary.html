@@ -51,7 +51,7 @@
                     ng-click="navigate('home.checkout')"
                     nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
               <span class="ie-text">Checkout </span>
-                <span class="value">{{ getSubtotal() | currency }}</span>
+                <span class="value"> ( {{ getSubtotal() | currency }} ) </span>
             </button>
         </div>
     </div>
