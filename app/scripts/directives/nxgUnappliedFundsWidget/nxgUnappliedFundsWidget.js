@@ -50,7 +50,7 @@ angular.module('nextgearWebApp')
                 $filter('currency')(result.amount) +
                 ' to your account "' + result.account.BankAccountName +
                 '" has been successfully submitted.',
-              buttons = [{label: 'OK', cssClass: 'btn-primary'}];
+              buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
             $dialog.messageBox(title, msg, buttons).open();
           }
         }

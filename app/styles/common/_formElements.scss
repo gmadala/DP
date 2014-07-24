@@ -5,7 +5,7 @@ select {
   color: $brand-light;
   border: 1px solid $input-border;
   height: 28px;
-  width: 200px;
+  // width: 200px;
   font-size: 13px;
   -webkit-user-select: none;
 
@@ -20,66 +20,66 @@ select {
   }
 }
 
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  @include border-radius(0px);
-  @include box-shadow(none);
-  border: 1px solid $input-border;
-  height: 28px;
-  margin: 0;
+// textarea,
+// input[type="text"],
+// input[type="password"],
+// input[type="datetime"],
+// input[type="datetime-local"],
+// input[type="date"],
+// input[type="month"],
+// input[type="time"],
+// input[type="week"],
+// input[type="number"],
+// input[type="email"],
+// input[type="url"],
+// input[type="search"],
+// input[type="tel"],
+// input[type="color"],
+// .uneditable-input {
+//   @include border-radius(0px);
+//   @include box-shadow(none);
+//   border: 1px solid $input-border;
+//   height: 28px;
+//   margin: 0;
 
-  &:focus {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    border-color: $input-border;
-  }
+//   &:focus {
+//     @include box-shadow(rgba(0,0,0,0) 0 0 0);
+//     border-color: $input-border;
+//   }
 
-  &:focus:invalid, &:invalid {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    color: $gray-5;
-    border: 1px solid $input-border;
-  }
+//   &:focus:invalid, &:invalid {
+//     @include box-shadow(rgba(0,0,0,0) 0 0 0);
+//     color: $gray-5;
+//     border: 1px solid $input-border;
+//   }
 
-  // get rid of IE10's default clear button
-  &::-ms-clear {
-    display: none;
-  }
-}
+//   // get rid of IE10's default clear button
+//   &::-ms-clear {
+//     display: none;
+//   }
+// }
 
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  &.nxg-invalid {
-    border: 1px solid $error-dark;
-  }
-}
+// select,
+// textarea,
+// input[type="text"],
+// input[type="password"],
+// input[type="datetime"],
+// input[type="datetime-local"],
+// input[type="date"],
+// input[type="month"],
+// input[type="time"],
+// input[type="week"],
+// input[type="number"],
+// input[type="email"],
+// input[type="url"],
+// input[type="search"],
+// input[type="tel"],
+// input[type="color"],
+// .uneditable-input {
+//   &.nxg-invalid {
+//     border: 1px solid $error-dark;
+//   }
+// }
 
 select.nxg-invalid {
   color: $error-dark;
@@ -142,7 +142,6 @@ select, .nxg-date-field {
 }
 
 .nxg-date-field.control-group {
-
   border: 1px solid $input-border;
 
   input, input[type="text"], input[type="text"]:focus {
@@ -236,57 +235,57 @@ input[type="checkbox"], input[type="checkbox"]:checked {
   }
 }
 
-.nxg-radios {
-  label {
-    margin: 0 0.5em 0 0.5em;
-  }
-}
+// .nxg-radios {
+//   label {
+//     margin: 0 0.5em 0 0.5em;
+//   }
+// }
 
-#foo:checked::before,
-input[type="radio"] {
-  position:absolute;
-  clip: rect(0,0,0,0);
-  clip: rect(0 0 0 0);
-}
+// #foo:checked::before,
+// input[type="radio"] {
+//   position:absolute;
+//   clip: rect(0,0,0,0);
+//   clip: rect(0 0 0 0);
+// }
 
-input[type="radio"] + label::before,
-input[type="radio"]:checked + label::before {
-  position: relative;
-  top: 6px;
-  left: -6px;
-}
+// input[type="radio"] + label::before,
+// input[type="radio"]:checked + label::before {
+//   position: relative;
+//   top: 6px;
+//   left: -6px;
+// }
 
-input[type="radio"] + label::before {
-  content: url('../img/radio.gif');
-}
+// input[type="radio"] + label::before {
+//   content: url('../img/radio.gif');
+// }
 
-input[type="radio"]:checked + label::before {
-  content: url('../img/radio-checked.gif');
-}
+// input[type="radio"]:checked + label::before {
+//   content: url('../img/radio-checked.gif');
+// }
 
-input[type="radio"], input[type="radio"]:checked {
-  & + label::before {
-    @include opacity(75);
-  }
+// input[type="radio"], input[type="radio"]:checked {
+//   & + label::before {
+//     @include opacity(75);
+//   }
 
-  &:focus + label::before {
-    @include opacity(100);
-  }
-}
+//   &:focus + label::before {
+//     @include opacity(100);
+//   }
+// }
 
-input[type="radio"]:disabled {
-  & + label {
-    color: $gray-c;
-  }
-  & + label::before {
-    @include opacity(40);
-  }
-}
+// input[type="radio"]:disabled {
+//   & + label {
+//     color: $gray-c;
+//   }
+//   & + label::before {
+//     @include opacity(40);
+//   }
+// }
 
-.form-title {
-  @extend .subtitle;
-  margin: 0 0 10px 0;
-}
+// .form-title {
+//   @extend .subtitle;
+//   margin: 0 0 10px 0;
+// }
 
 .control-group.half {
   @extend %float-l;
@@ -329,84 +328,84 @@ input[type="radio"]:disabled {
   @extend %center;
 }
 
-.nxg-fancy-radios {
-  margin-left: 7px;
+// .nxg-fancy-radios {
+//   margin-left: 7px;
 
-  label {
-    cursor: pointer;
-    display: inline;
+//   label {
+//     cursor: pointer;
+//     display: inline;
 
-    &::before {
-      cursor: pointer;
-    }
-  }
-}
+//     &::before {
+//       cursor: pointer;
+//     }
+//   }
+// }
 
-.nxg-fancy-radios .group-label {
-  padding-right: 15px;
-  vertical-align: bottom;
-  line-height: 11px;
-}
+// .nxg-fancy-radios .group-label {
+//   padding-right: 15px;
+//   vertical-align: bottom;
+//   line-height: 11px;
+// }
 
 /*
  * #foo doesn't refer to a particular element; it's there to prevent
  * browsers from implementing later selectors if it doesn't understand
  * this one. See http://css-tricks.com/snippets/css/custom-radio-buttons
  */
-#foo:checked::before,
-.nxg-fancy-radios input[type="radio"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
-    margin: 0;
-}
+// #foo:checked::before,
+// .nxg-fancy-radios input[type="radio"] {
+//     position:absolute;
+//     clip: rect(0,0,0,0);
+//     clip: rect(0 0 0 0);
+//     margin: 0;
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"] + label::before {
-  // @extend .btn;
-  @extend %small;
-  @extend %heavy;
-  @include border-radius(3px);
-  display: inline-block;
-  float: left;
-  background-color: $btn-active-bkgd;
-  @include background(linear-gradient($white, $gray-d));
-  color: $btn-active-text;
-  line-height: 20px;
-  text-shadow: none;
-  text-transform: uppercase;
-  padding:2px 14px;
-  border: 0;
-  border-bottom: 1px solid $btn-active-stroke;
-  // margin-right: -4px;
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"] + label::before {
+//   // @extend .btn;
+//   @extend %small;
+//   @extend %heavy;
+//   @include border-radius(3px);
+//   display: inline-block;
+//   float: left;
+//   background-color: $btn-active-bkgd;
+//   @include background(linear-gradient($white, $gray-d));
+//   color: $btn-active-text;
+//   line-height: 20px;
+//   text-shadow: none;
+//   text-transform: uppercase;
+//   padding:2px 14px;
+//   border: 0;
+//   border-bottom: 1px solid $btn-active-stroke;
+//   // margin-right: -4px;
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].first + label::before {
-  @include border-radius(3px 0 0 3px);
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"].first + label::before {
+//   @include border-radius(3px 0 0 3px);
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"] + label::before {
-  @include border-radius(0);
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"] + label::before {
+//   @include border-radius(0);
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].last + label::before {
-  @include border-radius(0 3px 3px 0);
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"].last + label::before {
+//   @include border-radius(0 3px 3px 0);
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]:checked + label::before {
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-  color: $btn-hover-text;
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"]:checked + label::before {
+//   @include background(linear-gradient(#eaeaea, #c4c4c4));
+//   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+//   color: $btn-hover-text;
+// }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].last:checked + label::before {
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-}
+// #foo:checked,
+// .nxg-fancy-radios input[type="radio"].last:checked + label::before {
+//   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
+// }
 
 label.input-title {
   max-width: 200px;
@@ -524,6 +523,106 @@ label.input-title {
 }
 
 // New/Refactored code for v2.23
+// =====================================================================
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+.form-block {
+  padding: 5px 10px;
+
+  .text-error {
+    display: block;
+    margin: 10px 0 0;
+  }
+}
+
+// Basic form element styling.
+fieldset {}
+legend {}
+label {
+  @extend .heavy;
+  display: block;
+  font-size: 14px;
+
+  &.inline {
+    display: inline;
+  }
+}
+
+label {
+  -webkit-user-select: none;
+}
+
+input, select, textarea {
+  color: $text;
+  height: $cta-2-height;
+  padding: 5px 9px;
+  margin: 5px 0;
+}
+
+input,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  @include border-radius($borderRadius);
+  @include box-shadow(none);
+  color: $text;
+  background: $white;
+  border: 1px solid $form-border;
+
+  &:focus {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    color: $text;
+    border-color: $highlight;
+    outline: none;
+  }
+
+  &:disabled, &.disabled {
+    border-color: $border;
+  }
+
+  &:focus:invalid, &:invalid {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    color: $text;
+    border: 1px solid $form-border;
+  }
+
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:focus {
+      border: 1px solid $highlight;
+    }
+  }
+
+  // placeholder text
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &::-ms-input-placeholder {
+    font-weight: normal;
+    color: #B7B7B7;
+  }
+
+  // get rid of IE10's default clear button
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+
 /*
  * CUSTOM SELECT MENU
  * Overrides default browser styles to use a custom select menu style,
@@ -562,7 +661,7 @@ label.input-title {
   }
 
   select {
-    // @extend .truncate;
+    @extend .truncate;
     @include border-radius($borderRadius);
     width: 100%;
     background: $white;
@@ -579,5 +678,124 @@ label.input-title {
     &:disabled {
       color: #B7B7B7;
     }
+  }
+}
+
+.radio-list {
+  margin-left: 15px;
+
+  li {
+    margin-bottom: 5px;
+  }
+}
+
+/*
+ * CUSTOM RADIO BUTTONS
+ * Our radio buttons use custom icons rather than default browser-rendered
+ * radio buttons. To work properly, the HTML for radio buttons should resemble:
+ * <label class="cr-label" for="foo">
+ *    Actual label contents
+ * </label>
+ * <input type="radio" id="foo"/>
+ * <label class="radio-img" for="foo"></label>
+ */
+input[type="radio"] {
+  position:absolute;
+  clip: rect(0,0,0,0);
+  clip: rect(0 0 0 0);
+  background: url('../img/icons/radio.svg');
+  z-index: 20;
+
+  &:active, &:focus, &:hover {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+  &:checked + .radio-img {
+    background-image: url('../img/icons/radio_selected.svg');
+  }
+
+  &:checked:disabled + .radio-img {
+    background-image: url('../img/icons/radio_disabled_selected.svg');
+  }
+
+  &:disabled + .radio-img {
+    background-image: url('../img/icons/radio_disabled.svg');
+  }
+
+  &:focus + .radio-img {
+    background-image: url('../img/icons/radio_focus.svg');
+  }
+
+  &:focus:checked + .radio-img {
+    background-image: url('../img/icons/radio_selected_focus.svg');
+  }
+}
+
+/*
+ * FULL-WIDTH CHECKBOX/RADIO BUTTON AND LABEL PAIRS
+ * Pairs the label and checkbox/radio button together in a full-width
+ * block, both vertically centered.
+ *
+ * Used for notifications & filters.
+ */
+.cr-label {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 40px 0 10px; // to account for checkbox or radio button
+}
+
+.checkbox-img, .radio-img {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+}
+
+.checkbox-img {
+  top: 10px;
+  height: 24px;
+  width: 24px;
+  background: url('../img/icons/checkbox.svg');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
+.radio-img {
+  top: 7px;
+  height: $radioSize;
+  width: $radioSize;
+  background: url('../img/icons/radio.svg');
+  background-size: $radioSize $radioSize;
+  background-repeat: no-repeat;
+  margin: 3px 0 0 5px;
+}
+
+/*
+ * INLINE CHECKBOXES AND RADIO BUTTONS
+ * Checkboxes/radio buttons that appear side by side, or
+ * appear in a non-full-width context.
+ *
+ * Used on login page & floor a car form.
+ */
+.cr-inline {
+  position: relative;
+  display: table;
+  margin-bottom: 5px;
+
+  .cr-label {
+    padding: 0 10px;
+  }
+
+  .checkbox-img, .radio-img {
+    position: relative;
+    left: 0;
+  }
+
+  .radio-img {
+    top: 0;
+  }
+
+  .checkbox-img {
+    top: 4px;
   }
 }

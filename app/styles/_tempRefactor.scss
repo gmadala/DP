@@ -166,6 +166,11 @@
     color: $highlight;
   }
 
+.note {
+  font-size: 11px;
+  padding-top: 3px;
+}
+
 // overly-specific....should really refactor somehow.
 .upcoming-payments {
   height: 250px;

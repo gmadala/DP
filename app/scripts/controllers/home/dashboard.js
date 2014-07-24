@@ -6,7 +6,6 @@ angular.module('nextgearWebApp')
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
     $scope.viewMode = 'week';
-
     $scope.today = moment().format('MMMM D, YYYY');
 
     $scope.changeViewMode = function(mode) {
@@ -70,6 +69,10 @@ angular.module('nextgearWebApp')
       };
 
       $dialog.dialog(dialogOptions).open();
+    };
+
+    $scope.onClickButtonLink = function(newState) {
+      $state.transitionTo(newState);
     };
 
     // Determines if the length of the rendered number is too long

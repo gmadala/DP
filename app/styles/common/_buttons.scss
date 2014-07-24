@@ -367,7 +367,7 @@ span.btn-help {
   padding: 10px;
 
   &.cta-primary {
-    &:hover {
+    &:hover, &:focus {
       color: $cta-primary-text-active;
       background: $cta-primary-bkgd-active;
     }
@@ -377,7 +377,7 @@ span.btn-help {
   }
 
   &.cta-secondary {
-    &:hover {
+    &:hover, &:focus {
       color: $cta-secondary-text-active;
     }
     &:active {
@@ -391,6 +391,10 @@ span.btn-help {
       color: $btn-text-disabled;
       border: 1px solid $border;
     }
+  }
+
+  &.cta-full {
+    padding: 10px 5px;
   }
 }
 

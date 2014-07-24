@@ -13,7 +13,7 @@
   .well-title {
     @include border-top-radius($borderRadius);
     background: $white;
-    padding: 5px 20px;
+    padding: 5px 18px;
     border-bottom: 1px solid $wellBorder;
   }
 
@@ -36,14 +36,14 @@
   // }
 
 
-.well-out {
-  display: block;
-  background-color: $well-out-bkgd;
-  padding: 14px;
-  border: 1px solid $well-out-border;
-  border-top: 0;
-  margin: -15px;
-}
+// .well-out {
+//   display: block;
+//   background-color: $well-out-bkgd;
+//   padding: 14px;
+//   border: 1px solid $well-out-border;
+//   border-top: 0;
+//   margin: -15px;
+// }
 
 .well-single {
   width: 300px;
