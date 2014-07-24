@@ -562,14 +562,29 @@ input, select, textarea {
   margin: 5px 0;
 }
 
-input, input[type="date"], input[type="number"] {
+input,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
   @include border-radius($borderRadius);
-  // @extend .full-width;
+  @include box-shadow(none);
   color: $text;
   background: $white;
   border: 1px solid $form-border;
 
   &:focus {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
     color: $text;
     border-color: $highlight;
     outline: none;
@@ -577,6 +592,33 @@ input, input[type="date"], input[type="number"] {
 
   &:disabled, &.disabled {
     border-color: $border;
+  }
+
+  &:focus:invalid, &:invalid {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    color: $text;
+    border: 1px solid $form-border;
+  }
+
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:focus {
+      border: 1px solid $highlight;
+    }
+  }
+
+  // placeholder text
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &::-ms-input-placeholder {
+    font-weight: normal;
+    color: #B7B7B7;
+  }
+
+  // get rid of IE10's default clear button
+  &::-ms-clear {
+    display: none;
   }
 }
 

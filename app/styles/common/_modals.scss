@@ -63,6 +63,12 @@
   padding: 12px 20px;
   border: none;
   margin: 0;
+
+  // message boxes have the h3 inside a div.modal-header,
+  // so we need to apply the styles for text more specifically.
+  h3 {
+    color: $white;
+  }
 }
 
 .modal-close {

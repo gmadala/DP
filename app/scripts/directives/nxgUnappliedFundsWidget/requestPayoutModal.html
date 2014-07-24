@@ -1,60 +1,64 @@
 <h3 class="modal-header">Request Unapplied Funds Payout</h3>
-<div class="modal-close" ng-disabled="submitInProgress" ng-click="cancel()">
-  <span class="glyphicon glyphicon-remove"></span>
+
+<div class="modal-body">
+  <form name="form" novalidate autocomplete="off">
+    <div class="form-row">
+      <h5 class="lockup-minor">Unapplied Funds</h5>
+      <h1 class="lockup-major form-block">{{ funds.balance | currency }}</h1>
+    </div>
+    <div class="form-row">
+      <h5 class="lockup-minor">Total Available</h5>
+      <h1 class="lockup-major form-block color-success">{{ funds.available | currency }}</h1>
+    </div>
+
+    <h5>Payout Amount</h5>
+    <div class="form-block">
+      <input type="text"
+             id="payoutAmt"
+             name="payoutAmt"
+             class="input-medium"
+             placeholder="0.00"
+             ng-model="selections.amount"
+             nxg-min="0.01"
+             nxg-max="funds.available"
+             ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
+             required
+             ng-class="{ 'nxg-invalid': validity.payoutAmt.$error.required || validity.payoutAmt.$error.pattern || validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax }"
+             nxg-autofocus/>
+    </div>
+    <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a Payout Amount.</label>
+    <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
+    <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
+      Payout Amount must be $0.01 to {{ funds.available | currency }}
+    </label>
+
+
+
+    <h5>Bank Account for Payout</h5>
+    <div class=" form-block">
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$invalid}">
+        <select id="payoutBankAcct"
+                name="payoutBankAcct"
+                ng-model="selections.account"
+                ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
+                ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$error.required }"
+                required>
+          <option value="">Make Selection</option>
+        </select>
+      </div>
+    </div>
+      <label class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</label>
+  </form>
 </div>
 
-<form name="form" novalidate autocomplete="off">
-  <div class="modal-body request-unapplied-funds-modal">
-    <div class="amounts">
-      <label>Unapplied Funds</label>
-      <div>{{ funds.balance | currency }}</div>
-      <label>Total Available</label>
-      <div>{{ funds.available | currency }}</div>
-    </div>
-    <label for="payoutAmt">Payout Amount</label>
-    <div>
-      <div class="input-prepend dollar">
-        <span class="add-on">$</span>
-        <input type="text"
-               id="payoutAmt"
-               name="payoutAmt"
-               placeholder="0.00"
-               ng-model="selections.amount"
-               nxg-min="0.01"
-               nxg-max="funds.available"
-               ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
-               required
-               ng-class="{ 'nxg-invalid': validity.payoutAmt.$error.required || validity.payoutAmt.$error.pattern || validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax }"
-               nxg-autofocus/>
-      </div>
-      <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a Payout Amount.</label>
-      <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
-      <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
-        Payout Amount must be $0.01 to {{ funds.available | currency }}
-      </label>
-    </div>
-    <label for="payoutBankAcct">Bank Account for Payout</label>
-    <div ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$invalid}">
-      <select id="payoutBankAcct"
-              name="payoutBankAcct"
-              ng-model="selections.account"
-              ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
-              ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$error.required }"
-              required>
-        <option value="">Make Selection</option>
-      </select>
-      <label class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</label>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <!-- not in wireframes, but user needs some way to back out that's more obvious than Esc key -->
+<div class="modal-footer">
+  <button class="btn-cta cta-secondary"
+          type="button"
+          ng-disabled="submitInProgress"
+          ng-click="cancel()">Cancel</button>
+  <button class="btn-cta cta-primary"
+          type="submit"
+          ng-disabled="submitInProgress"
+          ng-click="submit()">Request Payout</button>
+</div>
 
-    <button class="btn btn-small btn-primary"
-            type="submit"
-            ng-disabled="submitInProgress"
-            ng-click="submit()">Request Payout</button>
-    <button class="btn btn-small btn-secondary left-align"
-            ng-disabled="submitInProgress"
-            ng-click="cancel()">Cancel</button>
-  </div>
-</form>
