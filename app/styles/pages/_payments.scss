@@ -190,31 +190,31 @@
   border-bottom: 1px solid $border;
 }
 
-.detail-col {
-  @extend %float-l;
-  @extend %half-width;
+// .detail-col {
+//   @extend %float-l;
+//   @extend %half-width;
 
-  & + .detail-col {
-    border-left: 1px solid $border;
-  }
+//   & + .detail-col {
+//     border-left: 1px solid $border;
+//   }
 
-  .vehicle-info & {
-    width: 33%;
-    height: 370px;
+//   .vehicle-info & {
+//     width: 33%;
+//     height: 370px;
 
-    &:first-child + .detail-col {
-      width: 35%;
-    }
+//     &:first-child + .detail-col {
+//       width: 35%;
+//     }
 
-    &:last-child {
-      width: 32%;
-    }
-  }
+//     &:last-child {
+//       width: 32%;
+//     }
+//   }
 
-  table {
-    margin-bottom: 20px;
-  }
-}
+//   table {
+//     margin-bottom: 20px;
+//   }
+// }
 
 .detail-label, .detail-value {
   font-size: $tiny-font-size;

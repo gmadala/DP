@@ -12,7 +12,7 @@
 .modal {
   @extend %small;
   @include border-radius(0);
-  width: 400px;
+  width: 450px;
   height: auto;
   max-height: 90%;
   background: #F2F2F2;
@@ -39,10 +39,18 @@
   @extend %heavy;
 }
 
+/* Some modals require things to go right to the edge,
+ * like payment or fee details. Use the extra "to-edge"
+ * class for these modals.
+ */
 .modal-body {
   max-height: none;
   border: 1px solid $border;
-  padding: 20px 0 0;
+  padding: 20px;
+
+  &.to-edge {
+    padding: 20px 0 0;
+  }
 
   .list-table {
     padding: 10px 50px 10px 30px;
@@ -75,8 +83,9 @@
 }
 
 .modal-footer {
+  @include box-shadow(none);
   padding: 10px;
-  // margin: 12px;
+  border: 0;
 
   .btn {
     margin-left: 5px;
