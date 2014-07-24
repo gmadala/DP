@@ -1,12 +1,12 @@
 select {
-  @extend %heavy;
-  @include border-radius(0);
-  background: $white;
-  color: $brand-light;
-  border: 1px solid $input-border;
-  height: 28px;
+  // @extend %heavy;
+  // @include border-radius(0);
+  // background: $white;
+  // color: $brand-light;
+  // border: 1px solid $input-border;
+  // height: 28px;
   // width: 200px;
-  font-size: 13px;
+  // font-size: 13px;
   -webkit-user-select: none;
 
   &:focus { // use important to guarantee that this style will override default invalid style
@@ -81,9 +81,9 @@ select {
 //   }
 // }
 
-select.nxg-invalid {
-  color: $error-dark;
-}
+// select.nxg-invalid {
+//   color: $error-dark;
+// }
 
 // these fields are treated differently b/c the inputs are wrapped in a directive
 .nxg-business-field.nxg-invalid {
@@ -94,13 +94,13 @@ select.nxg-invalid {
   }
 }
 
-.nxg-date-field.nxg-invalid {
-  border: 1px solid $error-dark !important;
-}
+// .nxg-date-field.nxg-invalid {
+//   border: 1px solid $error-dark !important;
+// }
 
-select, .nxg-date-field {
-  margin-bottom: 0;
-}
+// select, .nxg-date-field {
+//   margin-bottom: 0;
+// }
 
 .input-prepend.dollar {
   margin-bottom: 0;
@@ -141,38 +141,38 @@ select, .nxg-date-field {
   background: transparent;
 }
 
-.nxg-date-field.control-group {
-  border: 1px solid $input-border;
+// .nxg-date-field.control-group {
+//   border: 1px solid $input-border;
 
-  input, input[type="text"], input[type="text"]:focus {
-    background-color: transparent;
-    border: 0px solid black;
-    width: 83px;
-    padding-right: 0;
-    font-size: 13px;
-  }
+//   input, input[type="text"], input[type="text"]:focus {
+//     background-color: transparent;
+//     border: 0px solid black;
+//     width: 83px;
+//     padding-right: 0;
+//     font-size: 13px;
+//   }
 
-  .btn {
-    @include border-radius(0);
-    @include box(28px);
-    @include opacity(50);
-    color: #9a9a9a;
-    background: transparent;
-    font-size: $large-font-size;
-    border: 0;
-    margin: -1px -4px 0 -1px;
-    padding-left: 0;
+//   .btn {
+//     @include border-radius(0);
+//     @include box(28px);
+//     @include opacity(50);
+//     color: #9a9a9a;
+//     background: transparent;
+//     font-size: $large-font-size;
+//     border: 0;
+//     margin: -1px -4px 0 -1px;
+//     padding-left: 0;
 
-    &:active {
-      border: none;
-      @include box-shadow(none);
-    }
-  }
+//     &:active {
+//       border: none;
+//       @include box-shadow(none);
+//     }
+//   }
 
-  & + .btn-mini {
-    margin-left: 5px;
-  }
-}
+//   & + .btn-mini {
+//     margin-left: 5px;
+//   }
+// }
 
 .text-error {
   @extend %small;
@@ -544,7 +544,6 @@ legend {}
 label {
   @extend .heavy;
   display: block;
-  font-size: 14px;
 
   &.inline {
     display: inline;
@@ -553,9 +552,11 @@ label {
 
 label {
   -webkit-user-select: none;
+  font-size: 12px;
 }
 
 input, select, textarea {
+  font-size: $inputFontSize;
   color: $text;
   height: $cta-2-height;
   padding: 5px 9px;
@@ -580,6 +581,7 @@ input[type="color"] {
   @include border-radius($borderRadius);
   @include box-shadow(none);
   color: $text;
+  font-size: $inputFontSize;
   background: $white;
   border: 1px solid $form-border;
 
@@ -664,12 +666,21 @@ input[type="color"] {
     @extend .truncate;
     @include border-radius($borderRadius);
     width: 100%;
+    height: 28px; // to account for outer div border
+    font-size: $inputFontSize;
+    font-weight: normal;
     background: $white;
     -webkit-gradient: none;
     -webkit-appearance: none;
-    padding: 5px 15% 5px 9px;
+    padding: 4px 15% 4px 9px;
     border: 0;
     margin: 0;
+
+    &:focus {
+      @include box-shadow(none);
+      color: $highlight;
+      outline: none;
+    }
 
     &:active {
       background-color: #CCCCCC;
@@ -797,5 +808,118 @@ input[type="radio"] {
 
   .checkbox-img {
     top: 4px;
+  }
+}
+
+.clear-search {
+  float: right;
+}
+
+/*
+ * CUSTOM STYLED INPUT
+ * An input with special styling, which may or may not have a
+ * button attached to it on the right.
+ *
+ * Typical HTML:
+ * <div class="styled-input with-btn">
+ *   <input type="text"/>
+ *   <button class="btn btn-input" type="submit">
+ *     <span nxg-icon="icon-search"></span>
+ *   </button>
+ * </div>
+ */
+.styled-input {
+  position: relative;
+  width: 100%;
+  margin: 5px 0;
+
+  input, input[type="text"] {
+    width: 85%;
+    margin: 0;
+
+    &:focus + .btn-input {
+      background: $highlight;
+
+      &:active, &:hover {
+        background: darken($accent, 10%);
+      }
+    }
+  }
+
+  &.with-btn input,
+  &.with-btn input[type="text"] {
+    @include border-right-radius(0);
+    float: left;
+  }
+}
+
+  /*
+   * BUTTON INPUT
+   * Button specifically designed to be paired with an input,
+   * and positioned exactly at the right edge of the input.
+   */
+  .btn-input {
+    @include border-left-radius(0);
+    width: 15%;
+    background: $accent;
+    display: block;
+    float: left;
+    height: $cta-2-height;
+    padding: 0;
+    border: 0;
+    margin: 0 0 0 -1px;
+
+    &:focus {
+      background: $highlight;
+    }
+
+    &:active, &:hover {
+      background: darken($accent, 10%);
+
+      .svg-icon svg {
+        fill: $white;
+      }
+    }
+
+    .svg-icon svg {
+      fill: $white;
+    }
+  }
+
+/*
+ * DATE FIELD
+ */
+.date-field {
+  position: relative;
+  width: 100px;
+
+  input, input[type="text"] {
+    width: 100%;
+    padding-right: 26px; // to account for icon
+  }
+
+  .btn-unstyle {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    margin: 0;
+  }
+
+  .btn-unstyle:hover, .btn-unstyle:focus {
+    .icon-calendar svg {
+      fill: $highlight;
+    }
+  }
+}
+
+.range {
+  position: relative;
+
+  .start-date, .end-date {
+    float: left;
+  }
+
+  .end-date {
+    margin-left: 5px;
   }
 }

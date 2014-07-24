@@ -1,8 +1,5 @@
 
 
-
-
-
 .well {
   @include border-radius($borderRadius);
   @include box-shadow(none);
@@ -10,11 +7,18 @@
   border: 1px solid $wellBorder;
 }
 
-  .well-title {
+  .well-title { // typically h2
     @include border-top-radius($borderRadius);
     background: $white;
     padding: 5px 18px;
     border-bottom: 1px solid $wellBorder;
+  }
+
+  .well-title-secondary {
+    @extend .well-title;
+    background: #E6E6E6;
+    font-size: 16px;
+    padding: 8px 18px;
   }
 
   .well-sub-title {
@@ -22,6 +26,11 @@
     float: right;
     margin: 5px 0 0;
   }
+
+
+
+
+
 
   // h4 {
   //   @extend %thin;

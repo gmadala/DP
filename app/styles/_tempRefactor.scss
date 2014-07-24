@@ -240,3 +240,14 @@
 .details-well {
   height: 260px;
 }
+
+.search {
+  padding: 20px 10px;
+
+  & > [class*="span"] {
+    & + [class*="span"] {
+      padding-left: 20px;
+      border-left: 1px solid $border;
+    }
+  }
+}

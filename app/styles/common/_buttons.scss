@@ -359,7 +359,7 @@ span.btn-help {
  * Used for call-out buttons; can have primary or secondary styles.
  */
 .btn-cta {
-  @extend .button;
+  @extend .btn;
   @extend .cta;
   font-family: $baseFontFamily;
   font-size: 13px;
