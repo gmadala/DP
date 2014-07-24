@@ -27,13 +27,38 @@
     margin: 5px 0 0;
   }
 
-.well-content {
+
+
+/*
+* This is used in the 'Payment Summary' well
+* inherits the well class,
+* removes excess margin at the bottom of wells,
+* sets the default background to white.
+*/
+.well-default {
+  @extend .well;
+  background-color: #fff;
+  margin-bottom: 0;
+}
+
+/* helper class for default well */
+.well-content .well-item {
   padding: 10px;
 }
 
-.well-default {
-  background-color: #fff;
+.well-footer {
+  border-top: 1px solid $wellBorder;
+  margin-top:15px;
+  .btn-checkout {
+    border: 0;
+    background: #fff;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
 }
+
+
 
 
   // h4 {
