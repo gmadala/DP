@@ -126,6 +126,7 @@
  */
 .paired {
   overflow: hidden;
+  width: 100%;
 
   td & {
     width: 80%;
@@ -137,17 +138,16 @@
     vertical-align: middle;
   }
 
+  // .paired-body {
+  //   margin: 0;
+  // }
+
   .paired-media {
     margin: 0 5px 0 3px;
 
     .paired-reversed & {
       margin: 0 3px 0 5px;
     }
-  }
-
-  .paired-contain {
-    max-width: 80%;
-    text-align: left;
   }
 
 
@@ -169,6 +169,10 @@
 .note {
   font-size: 11px;
   padding-top: 3px;
+}
+
+.caps {
+  text-transform: uppercase;
 }
 
 // overly-specific....should really refactor somehow.
@@ -250,4 +254,12 @@
       border-left: 1px solid $border;
     }
   }
+}
+
+.vin, .stock {
+  display: inline-block;
+}
+
+.stock {
+  margin-left: 10px;
 }

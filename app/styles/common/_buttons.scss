@@ -111,25 +111,25 @@
   top: 20px;
 }
 
-.btn-more, .btn-more:hover, .btn-more:active, .btn-more:focus {
-  @include box-shadow(rgba(0,0,0,0) 0 0 0);
-  @include border-radius(0);
-  @include box(100%);
-  color: $gray-9;
-  background: transparent;
-  padding: 0;
-  border: 0;
-  margin: 0;
+// .btn-more, .btn-more:hover, .btn-more:active, .btn-more:focus {
+//   @include box-shadow(rgba(0,0,0,0) 0 0 0);
+//   @include border-radius(0);
+//   @include box(100%);
+//   color: $gray-9;
+//   background: transparent;
+//   padding: 0;
+//   border: 0;
+//   margin: 0;
 
-  &:hover {
-    color: $base-text-color;
-  }
-}
+//   &:hover {
+//     color: $base-text-color;
+//   }
+// }
 
-.fees .btn-block,
-.payments .btn-block {
-  width: auto;
-}
+// .fees .btn-block,
+// .payments .btn-block {
+//   width: auto;
+// }
 
 .btn-unstyle {
   @extend %center;
@@ -160,13 +160,13 @@
   }
 }
 
-.btn-x {
-  font-size: 16px;
-}
+// .btn-x {
+//   font-size: 16px;
+// }
 
-.btn-inline {
-  margin-left: 10px;
-}
+// .btn-inline {
+//   margin-left: 10px;
+// }
 
 .btn-help {
   @extend .btn-unstyle;
@@ -252,7 +252,7 @@ span.btn-help {
 .button, .btn {
   @include box-shadow(none);
   @include border-radius($borderRadius);
-  // display: block;
+  @include text-shadow(none);
   background: $btn-bkgd;
   font-size: 11px;
   font-weight: bold;
@@ -288,15 +288,10 @@ span.btn-help {
     color: $btn-text-selected;
   }
 
-  // &.right {
-  //   @extend %float-r;
-  //   margin-right: 0;
-  // }
-
-  // &.icon-right {
-  //   position: relative;
-  //   padding-right: 30px;
-  // }
+  &.right {
+    @extend %float-r;
+    margin-right: 0;
+  }
 }
 
 .button-group {

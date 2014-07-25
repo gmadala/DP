@@ -1,39 +1,39 @@
 // PAYMENTS
 
-.fees .table-list-head, .sch-fees .table-list-head {
-  background-color: #999;
-}
+// .fees .table-list-head, .sch-fees .table-list-head {
+//   background-color: #999;
+// }
 
-.cell {
-  &.fee-type { @extend %quarter-width; }
-  &.fee-desc { @extend %quarter-width; }
-  &.fee-due { width: 13%; }
-  &.fee-posted { width: 16%; }
-  &.fee-amt { width: 21%; }
+// .cell {
+//   &.fee-type { @extend %quarter-width; }
+//   &.fee-desc { @extend %quarter-width; }
+//   &.fee-due { width: 13%; }
+//   &.fee-posted { width: 16%; }
+//   &.fee-amt { width: 21%; }
 
-  &.pay-more { width: 4%; }
-  &.pay-desc { width: 22%; }
-  &.pay-due { width: 13%; }
-  &.pay-floorDate { width: 15%; }
-  &.pay-status { width: 12%; }
-  &.pay-payment-amt { width: 14%; }
-  &.pay-payoff-amt { width: 13%; }
-  &.pay-title { width: 6%; }
-}
+//   &.pay-more { width: 4%; }
+//   &.pay-desc { width: 22%; }
+//   &.pay-due { width: 13%; }
+//   &.pay-floorDate { width: 15%; }
+//   &.pay-status { width: 12%; }
+//   &.pay-payment-amt { width: 14%; }
+//   &.pay-payoff-amt { width: 13%; }
+//   &.pay-title { width: 6%; }
+// }
 
-.cell.pay-more {
-  vertical-align: middle;
-}
+// .cell.pay-more {
+//   vertical-align: middle;
+// }
 
-.pay-due, .fee-due {
-  .warning {
-    margin-top: 20px;
-  }
-}
+// .pay-due, .fee-due {
+//   .warning {
+//     margin-top: 20px;
+//   }
+// }
 
-.payments ul, .schPayments-list ul {
-  margin: 0;
-}
+// .payments ul, .schPayments-list ul {
+//   margin: 0;
+// }
 
 .extension-modal {
   width: 400px;
@@ -121,14 +121,14 @@
   }
 }
 
-.payments .extension {
-  margin-top: 5px;
+// .payments .extension {
+//   margin-top: 5px;
 
-  a {
-    font-size: $tiny-font-size;
-    line-height: $base-line-height;
-  }
-}
+//   a {
+//     font-size: $tiny-font-size;
+//     line-height: $base-line-height;
+//   }
+// }
 
 /* To prevent disabled buttons from moving when active. */
 .schPayments-list .cell .btn-small,
@@ -145,50 +145,50 @@
 
 #togglePayoff, #togglePayoff2, #togglePayment, #toggleFee {
   position: relative;
-  padding-left: 26px;
+  // padding-left: 26px;
 
-  span:before {
-    content: '';
-    @include background-image(url('../img/icons/twocolor_chkbx.png'));
-    display: block;
-    position: absolute;
-    left: 5px;
-    width: 16px;
-    height: 16px;
-    margin: 2px 0;
-  }
+  // span:before {
+  //   content: '';
+  //   @include background-image(url('../img/icons/twocolor_chkbx.png'));
+  //   display: block;
+  //   position: absolute;
+  //   left: 5px;
+  //   width: 16px;
+  //   height: 16px;
+  //   margin: 2px 0;
+  // }
 
-  &.in-queue span:before {
-    width: 17px;
-    @include background-image(url('../img/icons/twocolor_chkbx_checked.png'));
-  }
+  // &.in-queue span:before {
+  //   width: 17px;
+  //   @include background-image(url('../img/icons/twocolor_chkbx_checked.png'));
+  // }
 
   &.in-queue {
     background-color: #878787; // IE fallback
-    @include background-image(linear-gradient(#878787, $gray-5));
+    // @include background-image(linear-gradient(#878787, $gray-5));
     color: $white;
   }
 }
 
 // Vehicle Details
-.vehicle-details {
-  clear: both;
-}
+// .vehicle-details {
+//   clear: both;
+// }
 
-.btn-close {
-  @extend %center;
-  @extend %full-width;
-  clear: both;
-  margin: 5px auto;
+// .btn-close {
+//   @extend %center;
+//   @extend %full-width;
+//   clear: both;
+//   margin: 5px auto;
 
-  button {
-    @extend .btn-unstyle;
-  }
-}
+//   button {
+//     @extend .btn-unstyle;
+//   }
+// }
 
-.vehicle-info {
-  border-bottom: 1px solid $border;
-}
+// .vehicle-info {
+//   border-bottom: 1px solid $border;
+// }
 
 // .detail-col {
 //   @extend %float-l;
@@ -216,27 +216,27 @@
 //   }
 // }
 
-.detail-label, .detail-value {
-  font-size: $tiny-font-size;
-  line-height: $base-line-height;
-  vertical-align: top;
-  padding: 5px 10px 2px;
-}
+// .detail-label, .detail-value {
+//   font-size: $tiny-font-size;
+//   line-height: $base-line-height;
+//   vertical-align: top;
+//   padding: 5px 10px 2px;
+// }
 
-.detail-label {
-  @extend %thin;
-  @extend %half-width;
-  color: $base-text-color;
-}
+// .detail-label {
+//   @extend %thin;
+//   @extend %half-width;
+//   color: $base-text-color;
+// }
 
-.detail-value {
-  color: $darker-text-color;
-  padding-top: 6px;
-}
+// .detail-value {
+//   color: $darker-text-color;
+//   padding-top: 6px;
+// }
 
-.detail-link {
-  padding-top: 20px;
-}
+// .detail-link {
+//   padding-top: 20px;
+// }
 
 // Payments Summary
 .pay-queue, .request-queue {

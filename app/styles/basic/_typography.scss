@@ -88,13 +88,24 @@ a, a:visited {
   }
 
   th, td {
+    color: #4d4d4d;
     height: 75px;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: top;
+    padding: 10px 15px;
     border: 1px solid $tableBorder;
 
     &.numeric {
       text-align: right;
+    }
+
+    &.paired {
+      min-width: 120px;
+      padding: 10px;
+
+      .paired-media, .paired-body {
+        vertical-align: top;
+      }
     }
   }
 
@@ -109,6 +120,22 @@ a, a:visited {
   tr:last-child, tr:last-child td {
     @include border-bottom-radius($borderRadius);
     border-bottom: 0;
+  }
+
+  p {
+    color: #4D4D4D;
+  }
+
+  // Classes for data types within table cells
+  .lockup-major {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .lockup-minor {
+    font-size: 12px;
   }
 }
 
