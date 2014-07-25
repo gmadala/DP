@@ -3,37 +3,42 @@
     <h2 class="well-title">Payment Summary</h2>
 
     <div class="well-content">
-        <div class="well-item">
-            <p>Choose to make payments today or schedule your payments when you checkout.</p>
-        </div>
-        <hr/>
-        <div class="well-item">
-            <p ng-show="paymentQueue.isEmpty()">You have not selected a payment.</p>
-            <br/>
-            <p ng-show="paymentQueue.isEmpty()">{{ emptyMessage }}</p>
+        <table class="table table-striped table-primary">
+            <tr>
+                <td>
+                    <p>Choose to make payments today or schedule your payments when you checkout.</p>
+                </td>
+            </tr>
+            <tr>
+                <td ng-show="paymentQueue.isEmpty()">
+                    <p >You have not selected a payment.</p>
+                    <br/>
+                    <p>{{ emptyMessage }}</p>
+                </td>
+            </tr>
+            <tr ng-repeat="fee in paymentQueue.fees">
+            <td>
+                <button class="btn-unstyle btn-x"
+                ng-click="removeFee(fee)"
+                ng-disabled="paymentInProgress()"
+                ng-class="{disabled: paymentInProgress()}">
+                <span class="glyphicon"></span>
+                </button>
 
-            <ul ng-hide="paymentQueue.isEmpty()">
-                <li ng-repeat="fee in paymentQueue.fees">
+                Account Fee <br/>
+                {{ fee.description }}<br/>
+                <span class="queued-as">Payment</span>
+                <span class="amount">{{ fee.amount | currency }}</span>
+            </td>
+            </tr>
 
+            <tr ng-repeat="payment in paymentQueue.payments">
+                <td>
                     <button class="btn-unstyle btn-x"
-                            ng-click="removeFee(fee)"
-                            ng-disabled="paymentInProgress()"
-                            ng-class="{disabled: paymentInProgress()}">
-                        <span class="glyphicon"></span>
-                    </button>
-
-                    Account Fee <br/>
-                    {{ fee.description }}<br/>
-                    <span class="queued-as">Payment</span>
-                    <span class="amount">{{ fee.amount | currency }}</span>
-                </li>
-                <li ng-repeat="payment in paymentQueue.payments">
-
-                    <button class="btn-unstyle btn-x"
-                            ng-click="removePayment(payment)"
-                            ng-disabled="paymentInProgress()"
-                            ng-class="{disabled: paymentInProgress()}">
-                        <span class="glyphicon"></span>
+                    ng-click="removePayment(payment)"
+                    ng-disabled="paymentInProgress()"
+                    ng-class="{disabled: paymentInProgress()}">
+                    <span class="glyphicon"></span>
                     </button>
 
                     VIN: {{ payment.vin }} <br/>
@@ -41,9 +46,11 @@
                     <span class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</span>
                     <span class="amount">{{ payment.amount | currency }}</span>
                     <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
-                </li>
-            </ul>
-        </div>
+                </td>
+            </tr>
+        </table>
+
+
 
         <div class="well-footer">
             <button class="btn-checkout"
