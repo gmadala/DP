@@ -126,7 +126,6 @@
  */
 .paired {
   overflow: hidden;
-  width: 100%;
 
   td & {
     width: 80%;
@@ -138,10 +137,6 @@
     vertical-align: middle;
   }
 
-  // .paired-body {
-  //   margin: 0;
-  // }
-
   .paired-media {
     margin: 0 5px 0 3px;
 
@@ -150,6 +145,23 @@
     }
   }
 
+// notification
+.info-block {
+  @extend %full-width;
+  @extend .clearfix;
+  height: 45px;
+
+  .info-block-image, .info-block-text {
+    float: left;
+    height: 100%;
+  }
+  .info-block-image {
+    margin: 3px 0;
+  }
+  .info-block-text {
+    padding: 8px 10px;
+  }
+}
 
 // dashboard
 .dash-lockup {
