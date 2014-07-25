@@ -12,7 +12,7 @@ angular.module('nextgearWebApp')
   .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric) {
     var dealerLinks = [
         { name: 'Home', href: '#/home', activeWhen: 'home', metric: metric.CLICK_HOME_LINK },
-        { name: 'Floor a Car', href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK },
+        { name: 'Floor a Vehicle', href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK },
         { name: 'View a Report', href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK },
         { name: 'View Analytics', href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK },
         { name: 'Resources', href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
