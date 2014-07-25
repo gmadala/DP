@@ -10,7 +10,7 @@
 
       <ul>
         <li ng-repeat="item in titleQueue.contents">
-          <button class="btn-unstyle btn-x" nxg-track="{{metric.}}" ng-click="titleQueue.removeFromQueue(item)"><span class="glyphicon"></span></button>
+          <button class="btn-unstyle btn-x" nxg-track="{{metric.CLICK_TITLE_RELEASE_REMOVE_TITLE_BUTTON}}" ng-click="titleQueue.removeFromQueue(item)"><span class="glyphicon"></span></button>
           Title Request <br/>
           {{ getVehicleDescription(item) }}<br/>
           <span>VIN: {{ item.UnitVIN }}</span>

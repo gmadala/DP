@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric, api) {
 
-    segmentio.track(metric.VIEW_RECEIPTS_LIST);
+    segmentio.track(metric.VIEW_RECEIPTS_PAGE);
     $scope.metric = metric; // make metric names available to template
 
     var lastPromise;

@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, $q) {
 
-    segmentio.track(metric.VIEW_PAYMENTS_LIST);
+    segmentio.track(metric.VIEW_PAYMENTS_PAGE);
     $scope.metric = metric; // make metric names available to template
 
     $scope.isCollapsed = true;
