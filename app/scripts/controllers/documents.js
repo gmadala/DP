@@ -11,8 +11,8 @@ angular.module('nextgearWebApp')
         url: 'documents/NextGear%20Capital%20Welcome%20Packet.pdf'
       },
       {
-        title: 'Vehicle Verification Checklist (PDF)',
-        url: 'documents/NextGear%20Capital%20Vehicle%20Verification%20Checklist.pdf'
+        title: 'Dealer Funding Checklist (PDF)',
+        url: 'documents/Dealer%20Funding%20Checklist.pdf'
       },
       {
         title: 'Instructions for Buyers (PDF)',
