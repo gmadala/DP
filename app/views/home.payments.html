@@ -75,8 +75,8 @@
                 {{ fee.Posted | moment }}
               </td>
               <td class="numeric">
-                <p>{{ fee.Balance | currency }}</p>
-                <div nxg-payment-buttons="fee"
+                  <p>{{ fee.Balance | currency }}</p>
+                  <div nxg-payment-buttons="fee"
                      item="fee"
                      on-queue="isFeeOnQueue(fee.FinancialRecordId)">
                 </div>
