@@ -13,12 +13,29 @@
   &.padded {
     padding: 20px;
   }
+
+  &.mini {
+    padding: 0;
+  }
 }
   .list-table-row {
     @extend .clearfix;
     @extend .row-fluid;
     padding: 0 0 0;
     margin: 0;
+
+    .mini & {
+      padding: 0;
+
+      p, a {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      p:first-child {
+        padding-right: 10px;
+      }
+    }
 
     [class*="span"] {
       min-height: 0;

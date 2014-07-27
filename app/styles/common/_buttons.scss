@@ -170,21 +170,9 @@
 
 .btn-help {
   @extend .btn-unstyle;
-  @extend %heavy;
-  @extend %small;
-  @include border-radius(50%);
-  position: relative;
-  width: 15px;
-  height: 15px;
-  background: $brand-text;
-  color: $white;
-  line-height: 1;
-  margin-left: 10px;
-}
-
-.btn-help.inline {
+  position: absolute;
+  top: 10px;
   margin-left: 5px;
-  margin-top: -2px;
 }
 
 // span version of help button for cases where we don't want it to be an actual button
@@ -244,10 +232,8 @@ span.btn-help {
 }
 
 /*
- * BUTTON CLASS
+ * BTN CLASS
  * Used to style any and all buttons within the desktop app.
- * We're not using .btn here, because then we'd have to override
- * Bootstrap's .btn styles, which are are numerous.
  */
 .button, .btn {
   @include box-shadow(none);

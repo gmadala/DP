@@ -87,6 +87,14 @@ a, a:visited {
     border: 1px solid $tableBorder;
   }
 
+  .separated {
+    border-bottom: 3px solid $tableBorder;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
   th, td {
     color: #4d4d4d;
     height: 75px;
@@ -105,6 +113,18 @@ a, a:visited {
 
       .paired-media, .paired-body {
         vertical-align: top;
+      }
+    }
+
+    &.split {
+      padding: 0;
+
+      .split-cell {
+        padding: 10px;
+
+        & + .split-cell {
+          border-top: 1px solid $border;
+        }
       }
     }
   }
@@ -131,7 +151,11 @@ a, a:visited {
     font-weight: bold;
     font-size: 14px;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+
+    a {
+      color: $highlight;
+    }
   }
 
   .lockup-minor {

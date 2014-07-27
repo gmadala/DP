@@ -40,10 +40,10 @@
 //                                                |
 //  Must be this explicit to override margin:0   \|/
 //                                                v
-.exp-pymt:enabled, .exp-pymt:disabled, .exp-pymt.btn:disabled:active {
-  @extend %float-r;
-  margin-top: -3px;
-}
+// .exp-pymt:enabled, .exp-pymt:disabled, .exp-pymt.btn:disabled:active {
+//   @extend %float-r;
+//   margin-top: -3px;
+// }
 
 // .checkout-summary {
 //   hr {

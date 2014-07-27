@@ -16,9 +16,6 @@
           If you would like to schedule any payments, click the Schedule Payment links below.
         </p>
       </div>
-      <!-- <div class="span4"> -->
-
-      <!-- </div> -->
     </div>
 
 
@@ -42,7 +39,7 @@
               <th>Fee Amount</th>
             </thead>
 
-            <tr ng-repeat="fee in paymentQueue.contents.fees">
+            <tr class="separated" ng-repeat="fee in paymentQueue.contents.fees">
               <td class="paired paired-reversed">
                  <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(fee)" ng-switch="paymentQueue.getDueStatus(fee)">
                   <span ng-switch-when="today" nxg-icon="icon-warning"></span>
@@ -75,69 +72,80 @@
         </div>
 
         <!-- Payments List -->
-        <div ng-show="paymentQueue.sum.paymentCount() > 0">
-          <h3 class="boxed">Vehicle Payments</h3>
+        <div class="well" ng-show="paymentQueue.sum.paymentCount() > 0">
+          <h2 class="well-title">Vehicle Payments</h2>
 
-          <ul class="unstyled payments">
-            <li class="table-list-head">
-              <div class="cell pay-more"></div>
-              <div class="cell pay-desc">Description</div>
-              <div class="cell pay-due">Date Due</div>
-              <div class="cell pay-status">Status</div>
-              <div class="cell pay-pymt">Payment</div>
-            </li>
+          <table class="table table-striped table-primary">
+            <thead>
+              <th>Due Date</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Payment Amount</th>
+            </thead>
 
-            <li class="table-list-row" ng-repeat="payment in paymentQueue.contents.payments">
-              <div class="main-info">
-                <div class="cell pay-more">
+            <tr class="separated" ng-repeat="payment in paymentQueue.contents.payments">
+              <td class="paired paired-reversed">
+                <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(payment)" ng-switch="paymentQueue.getDueStatus(payment)">
+                  <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                  <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                </span>
+                <div class="paired-body">
+                  <p class="lockup-major" ng-class="{ 'color-danger': paymentQueue.getDueStatus(payment) == 'overdue' }">{{ payment.dueDate | moment }}</p>
                 </div>
-                <div class="cell pay-desc">
-                  <p><span class="break-word">{{ payment.vin }}</span><br/>
-                    <span>Stock #: </span>
-                    {{ payment.stockNum }}
-                  </p>
-                  <p>{{ payment.description }}</p>
-                  <br/><a href="#/vehicledetails?stockNumber={{ payment.stockNum }}">Temp Link to Vehicle Details</a>
-                  <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
-                </div>
-                <div class="cell pay-due"><p>{{ payment.dueDate | moment }}</p></div>
-                <div class="cell pay-status">
-                  <p ng-show="!paymentQueue.canSchedule(payment)">
-                  Unavailable to Schedule</p>
-                  <p ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">Available to Schedule</p>
-                  <p ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</p>
-                </div>
-                <div class="cell pay-pymt">
-                  <p>
-                    <strong>{{ payment.amount | currency }}</strong>
-                    <button class="btn-unstyle btn-link remove"
-                            ng-click="paymentQueue.removePayment(payment.floorplanId)"
-                            ng-disabled="submitInProgress"
-                            nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}">
-                      Remove Payment
-                    </button>
-                  </p>
-                  <p>
-                    Principal: {{payment.principal | currency}} <br/>
-                    Interest: {{payment.interestTotal | currency}} <br/>
-                    Fee(s): {{payment.feesTotal | currency}} <br/>
-                    <span ng-show="payment.collateralTotal > 0">Collateral Protection: {{payment.collateralTotal | currency}}</span>
-                  </p>
-                  <button class="btn btn-mini btn-block"
-                          ng-click="paymentQueue.schedule(payment)"
-                          ng-show="paymentQueue.canSchedule(payment)"
-                          ng-disabled="payment.scheduleLoading || submitInProgress">
-                    {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
+              </td>
+              <td>
+              <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a>
+                <p class="lockup-minor caps vin">VIN: {{ payment.vin }}</p>
+                <p class="lockup-minor caps stock">STK: {{ payment.stockNum }}</p>
+
+                <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
+              </td>
+              <td>
+                <h5 ng-show="!paymentQueue.canSchedule(payment)">
+                  Unavailable to Schedule</h5>
+                <h5 ng-show="paymentQueue.canSchedule(payment) && !payment.scheduleDate">Available to Schedule</h5>
+                <h5 ng-show="paymentQueue.canSchedule(payment) && !!payment.scheduleDate">Scheduled for {{ payment.scheduleDate | moment }}</h5>
+                <button class="btn-unstyle btn-link"
+                        ng-click="paymentQueue.schedule(payment)"
+                        ng-show="paymentQueue.canSchedule(payment)"
+                        ng-disabled="payment.scheduleLoading || submitInProgress">
+                  {{ !payment.scheduleDate && 'Schedule Payment' || 'Edit Scheduled Payment' }}
+                </button>
+              </td>
+              <td class="numeric split">
+                <div class="split-cell">
+                  <p class="lockup-major">{{ payment.amount | currency }}</p>
+                  <button class="btn-unstyle btn-link right"
+                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
+                          ng-disabled="submitInProgress"
+                          nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}">
+                    Remove Payment
                   </button>
-                  <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>
                 </div>
-              </div><!-- end .main-info -->
-            </li>
-          </ul>
-        </div><!-- end Payments List -->
+                <div class="split-cell">
+                  <ul class="list-table mini">
+                    <li class="list-table-row">
+                      <p class="span6">Principal:</p><p class="span6 numeric">{{payment.principal | currency}}</p>
+                    </li>
+                    <li class="list-table-row">
+                      <p class="span6">Interest:</p><p class="span6 numeric">{{payment.interestTotal | currency}}</p>
+                    </li>
+                    <li class="list-table-row">
+                      <p class="span6">Fee(s):</p><p class="span6 numeric">{{payment.feesTotal | currency}}</p>
+                    </li>
+                    <li class="list-table-row" ng-show="payment.collateralTotal > 0">
+                      <p class="span6">CPP:</p><p class="span6 numeric">{{payment.collateralTotal | currency}}</p>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label> -->
+              </td>
+            </tr>
+          </table>
+        </div>
       </section>
-    </div><!-- end .checkout-list -->
-  </section><!-- end .span9 -->
+    </div>
+  </section>
 
   <form class="span3 well checkout-summary sticky" name="paymentForm" novalidate nxg-sticky>
     <h4>Payment Summary</h4>
