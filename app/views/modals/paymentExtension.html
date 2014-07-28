@@ -1,50 +1,43 @@
-<div class="modal-header">
-  <h3>Request Extension</h3>
-</div>
-<div class="modal-body">
-  <section class="row-fluid">
-    <div class="detail-col">
-      <h4 class="well-head">Payment Summary</h4>
-      <p><strong>VIN: {{ payment.Vin }} - {{ payment.UnitDescription }}</strong></p>
+<h3 class="modal-header">Request Extension</h3>
 
-      <table>
-        <tr>
-          <td>Principal:</td>
-          <td class="highlight">{{ extPrev.PrincipalAmount | currency }}</td>
-        </tr>
-        <tr>
-          <td>Interest:</td>
-          <td class="highlight">{{ extPrev.InterestAmount | currency }}</td>
-        </tr>
-        <tr ng-repeat="fee in extPrev.Fees">
-          <td>{{ fee.Type }}</td>
-          <td class="highlight">{{ fee.Amount | currency }}</td>
-        </tr>
-        <tr ng-show="extPrev.CollateralProtectionAmount > 0">
-          <td>Collateral Protection: </td>
-          <td class="highlight">{{ extPrev.CollateralProtectionAmount | currency }}</td>
-        </tr>
-        <tr class="subtotal">
-          <td>Subtotal:</td>
-          <td class="highlight">{{ subtotal | currency }}</td>
-        </tr>
-      </table>
-    </div><!-- end .detail-col -->
-    <p ng-show="extPrev.CanExtend" class="highlight-dark">
-      To extend this unit an additional period please click below.
-    </p>
-    <p ng-show="!extPrev.CanExtend" class="highlight-dark">
-      This extension request cannot be completed online. Please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.
-    </p>
-  </section><!-- end .row-fluid -->
+<div class="modal-body">
+
+  <h3>Payment Summary</h3>
+  <h4>VIN: {{ payment.Vin }} - {{ payment.UnitDescription }}</h4>
+
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Principal:</p>
+      <p class="span6 value numeric">{{ extPrev.PrincipalAmount | currency }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Interest:</p>
+      <p class="span6 value numeric">{{ extPrev.InterestAmount | currency }}</p>
+    </li>
+    <li class="list-table-row" ng-repeat="fee in extPrev.Fees">
+      <p class="span6">{{ fee.Type }}</p>
+      <p class="span6 value numeric">{{ fee.Amount | currency }}</p>
+    </li>
+    <li class="list-table-row" ng-show="extPrev.CollateralProtectionAmount > 0">
+      <p class="span6">Collateral Protection: </p>
+      <p class="span6 value numeric">{{ extPrev.CollateralProtectionAmount | currency }}</p>
+    </li>
+    <li class="list-table-hr"></li>
+    <li class="list-table-row list-table-emphasis">
+      <p class="span6">Subtotal:</p>
+      <p class="span6 value">{{ subtotal | currency }}</p>
+    </li>
+  </ul>
+  <p ng-show="extPrev.CanExtend">
+    To extend this unit an additional period please click below.
+  </p>
+  <p ng-show="!extPrev.CanExtend">
+    This extension request cannot be completed online. Please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.
+  </p>
+  <p class="disclaimer">Please note this quote is effective for today only and amounts are subject to change.</p>
 </div>
 
 <div class="modal-footer">
-  <div class="btn-container">
-    <button ng-show="extPrev.CanExtend" ng-click="confirmRequest()" class="btn btn-primary">Confirm Request</button>
-    <button ng-click="closeDialog()" class="btn" ng-class="{ 'btn-primary': !extPrev.CanExtend }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[extPrev.CanExtend] }}</button>
-  </div>
-  <div class="disclaimer">
-    <p>Please note this quote is effective for today only and amounts are subject to change. </p>
-  </div>
+  <button type="button" ng-click="closeDialog()" class="btn-cta" ng-class="{ 'cta-primary': !extPrev.CanExtend , 'cta-secondary': extPrev.CanExtend }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[extPrev.CanExtend] }}</button>
+  <button type="submit" ng-show="extPrev.CanExtend" ng-click="confirmRequest()" class="btn-cta cta-primary">Confirm Request</button>
 </div>

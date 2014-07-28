@@ -33,7 +33,14 @@
   &.topmost {
     z-index: 2000;
   }
+
+  // modal widths
+  &.modal-medium {
+    width: 500px;
+    margin-left: -250px;
+  }
 }
+
 
 .modal-subtitle {
   @extend %heavy;
@@ -54,6 +61,18 @@
 
   .list-table {
     padding: 10px 50px 10px 30px;
+  }
+
+  .table-secondary {
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin: 0 0 5px 0;
+  }
+
+  h4 {
+    margin: 0 0 5px;
   }
 }
 
@@ -94,7 +113,11 @@
   border: 0;
 
   .btn {
-    margin-left: 5px;
+    margin: 5px 10px;
+
+    & + .btn {
+      margin: 5px 10px 5px 0;
+    }
   }
 }
 

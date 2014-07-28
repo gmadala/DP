@@ -51,7 +51,7 @@ p {
 }
 
 a, a:visited {
-  font-size: 12px;
+  // font-size: 12px;
   color: $highlight;
 
   &:hover {
@@ -198,6 +198,10 @@ a, a:visited {
       text-align: center;
     }
   }
+
+  .modal & {
+    border-width: 1px;
+  }
 }
 
 .table-unstyle {
@@ -208,10 +212,6 @@ a, a:visited {
     padding: 8px 4px;
     border: 0;
   }
-}
-
-.table-label {
-
 }
 
 .table-symbol, .table td.table-symbol {

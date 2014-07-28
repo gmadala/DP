@@ -130,7 +130,7 @@ angular.module('nextgearWebApp')
           backdropClick: true,
           controller: 'ExtensionRequestCtrl',
           templateUrl: 'views/modals/paymentExtension.html',
-          dialogClass: 'modal extension-modal',
+          dialogClass: 'modal modal-medium',
           resolve: {
             payment: function() {
               return payment;

@@ -1,92 +1,85 @@
-<div class="modal-header">
-  <h3>Select the Schedule Date</h3>
-</div>
-<div class="modal-body sch-checkout">
-  <section class="row-fluid" ng-switch on="type">
-    <div class="detail-col" ng-switch-when="payment">
-      <h4 class="well-head">Vehicle Information</h4>
-      <table>
-        <tr>
-          <td class="detail-label">VIN</td>
-          <td class="detail-value">{{ model.payment.vin }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Stock #</td>
-          <td class="detail-value">{{ model.payment.stockNum }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Description</td>
-          <td class="detail-value">{{ model.payment.description }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Due</td>
-          <td class="detail-value">{{ model.payment.dueDate | moment }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Payment</td>
-          <td class="detail-value">{{ model.payment.amount | currency }}</td>
-        </tr>
-      </table>
-    </div><!-- end .detail-col -->
-    <div class="detail-col" ng-switch-when="fee">
-      <h4 class="well-head">Fee Information</h4>
-      <table>
+<h3 class="modal-header">Select the Schedule Date</h3>
 
-        <tr>
-          <td class="detail-label">Fee Type</td>
-          <td class="detail-value">{{ model.fee.type }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Description</td>
-          <td class="detail-value">{{ model.fee.description }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Due</td>
-          <td class="detail-value">{{ model.fee.dueDate | moment }}</td>
-        </tr>
-        <tr>
-          <td class="detail-label">Fee</td>
-          <td class="detail-value">{{ model.fee.amount | currency }}</td>
-        </tr>
-      </table>
-    </div><!-- end .detail-col -->
-  </section><!-- end .sch-checkout -->
+<div class="modal-body">
+  <div ng-switch on="type">
+    <div ng-switch-when="payment">
+      <h3>Vehicle Information</h3>
 
-  <form name="dateForm" class="date-form">
-    <div class="control-group half">
-      <label class="control-label" for="inputScheduleDate">Schedule For</label>
-      <div class="controls">
-        <input id="inputScheduleDate" name="inputScheduleDate"
-               nxg-date-field before-show-day="checkDate(date)"
-               ng-model="model.selectedDate"
-               required nxg-requires="checkDate(model.selectedDate)"
-               ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
-        <!-- put submit button first inside form so "enter" in input clicks this one instead of removeSchedule() -->
-        <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
-      </div>
+      <ul class="list-table">
+        <li class="list-table-row">
+          <p class="span4">VIN</p>
+          <p class="span8 value">{{ model.payment.vin }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Stock #</p>
+          <p class="span8 value">{{ model.payment.stockNum }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Description</p>
+          <p class="span8 value">{{ model.payment.description }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Due</p>
+          <p class="span8 value">{{ model.payment.dueDate | moment }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Payment</p>
+          <p class="span8 value">{{ model.payment.amount | currency }}</p>
+        </li>
+      </ul>
     </div>
-    <div class="control-group half pay-now">
-      or <button ng-click="removeSchedule()"
-                 class="btn btn-primary btn-inline"
-                 ng-disabled="!model.canPayNow || submitInProgress">
-           Pay Now
-         </button>
-    </div>
-  </form><!-- end .date-form -->
 
-  <div class="label-container">
-    <label for="inputScheduleDate" class="text-error"
-             ng-show="validity.inputScheduleDate.$error.required">
-        Please select a schedule date.
-    </label>
-    <label for="inputScheduleDate" class="text-error"
-           ng-show="validity.$error.nxgRequires">
-        Please select a valid banking date no earlier than tomorrow and no later than the payment due date.
-    </label>
+    <div ng-switch-when="fee">
+      <h4>Fee Information</h4>
+
+      <ul class="list-table">
+        <li class="list-table-row">
+          <p class="span4">Fee Type</p>
+          <p class="span8 value">{{ model.fee.type }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Description</p>
+          <p class="span8 value">{{ model.fee.description }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Due</p>
+          <p class="span8 value">{{ model.fee.dueDate | moment }}</p>
+        </li>
+        <li class="list-table-row">
+          <p class="span4">Fee</p>
+          <p class="span8 value numeric">{{ model.fee.amount | currency }}</p>
+        </li>
+      </ul>
+    </div>
   </div>
+
+  <hr/>
+
+  <form name="dateForm" class="row-fluid">
+    <label for="inputScheduleDate">Schedule For</label>
+    <input id="inputScheduleDate" name="inputScheduleDate"
+    class="date-inline"
+           nxg-date-field before-show-day="checkDate(date)"
+           ng-model="model.selectedDate"
+           required nxg-requires="checkDate(model.selectedDate)"
+           ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
+    <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
+    or <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress">Pay Now</button>
+
+    <div class="row-fluid">
+      <label for="inputScheduleDate" class="text-error"
+            ng-show="validity.inputScheduleDate.$error.required">
+        Please select a schedule date.
+      </label>
+      <label for="inputScheduleDate" class="text-error"
+             ng-show="validity.$error.nxgRequires">
+        Please select a valid banking date no earlier than tomorrow and no later than the payment due date.
+      </label>
+    </div>
+  </form>
 </div>
 
 <div class="modal-footer">
-  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" nxg-autofocus class="btn btn-primary">OK</button>
-  <button ng-click="close()" ng-disabled="submitInProgress" class="btn btn-primary">Cancel</button>
+  <button type="button" ng-click="close()" ng-disabled="submitInProgress" class="btn-cta cta-secondary">Cancel</button>
+  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" nxg-autofocus class="btn-cta cta-primary">Confirm</button>
 </div>

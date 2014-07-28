@@ -1,90 +1,14 @@
 // PAYMENTS
 
-.extension-modal {
-  width: 400px;
-  margin-left: -200px;
-
-  .detail-col {
-    @extend %full-width;
-    float: none;
-    padding: 14px;
-    border: 1px solid $border;
-
-    .well-head {
-      padding: 7px 10px;
-      margin: -14px -14px 10px;
-    }
-
-    & + p {
-      margin: 15px 0;
-    }
-
-    table {
-      margin-bottom: 0;
-    }
-  }
-
-  table {
-    width: 80%;
-
-    tr.subtotal {
-      border-top: 1px solid $border;
-
-      td {
-        padding-top: 10px;
-
-        &:first-child {
-          @extend %heavy;
-        }
-      }
-    }
-
-    td {
-      line-height: 1.1;
-      padding: 0 0 8px;
-
-      &:first-child {
-        width: 60%;
-      }
-    }
-  }
-
-  .highlight {
-    margin-top: 10px;
-  }
-
-  .highlight-dark {
-    padding: 0 5px;
-  }
-
-  .btn-container {
-    margin: 0 10px 15px;
-  }
-
   .disclaimer {
-    background: #F1F1F1;
-    color: $base-text-color;
-    padding: 15px;
-    margin-top: 10px;
-
-    p {
-      font-style: italic;
-      line-height: $base-line-height;
-      margin: 0;
-    }
-  }
-
-  .modal-body {
-    padding-bottom: 0;
-  }
-
-  .modal-footer {
+    color: $text;
     text-align: left;
-    border: 0;
-    margin: 0;
-    padding: 0;
+    font-size: 11px;
+    font-style: italic;
+    line-height: $base-line-height;
+    margin: 5px 0 0;
   }
-}
+
 
 /* To prevent disabled buttons from moving when active. */
 .schPayments-list .cell .btn-small,
