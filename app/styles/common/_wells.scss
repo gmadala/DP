@@ -41,7 +41,6 @@
   margin-bottom: 0;
 }
 
-/* helper class for default well */
 .well-item {
   @extend .clearfix;
   padding: 10px;
@@ -60,6 +59,7 @@
 
 .well-footer {
   border-top: 1px solid $wellBorder;
+
   .btn-checkout {
     border: 0;
     background: #fff;
@@ -70,27 +70,10 @@
 }
 
 
-  // h4 {
-  //   @extend %thin;
-  //   letter-spacing: 0.03em;
-  //   margin-top: 0px;
-  //   margin-bottom: 28px;
-  // }
-
-  // legend {
-  //   @extend h4;
-  //   border: none;
-  // }
 
 
-// .well-out {
-//   display: block;
-//   background-color: $well-out-bkgd;
-//   padding: 14px;
-//   border: 1px solid $well-out-border;
-//   border-top: 0;
-//   margin: -15px;
-// }
+
+
 
 .well-single {
   width: 300px;

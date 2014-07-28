@@ -216,7 +216,7 @@ angular.module('nextgearWebApp')
               backdropClick: true,
               templateUrl: 'views/modals/confirmCheckout.html',
               controller: 'ConfirmCheckoutCtrl',
-              dialogClass: 'modal confirm-checkout',
+              dialogClass: 'modal modal-medium',
               resolve: {
                 queue: function () { return $scope.paymentQueue.contents; },
                 transactionInfo: function () { return result; }
