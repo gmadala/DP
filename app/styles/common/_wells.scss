@@ -9,9 +9,16 @@
 
   .well-title { // typically h2
     @include border-top-radius($borderRadius);
+    position: relative;
     background: $white;
     padding: 5px 18px;
     border-bottom: 1px solid $wellBorder;
+
+    .btn {
+      position: absolute;
+      top: 0;
+      right: 10px;
+    }
   }
 
   .well-title-secondary {

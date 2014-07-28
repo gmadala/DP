@@ -1,14 +1,14 @@
 <div class="well">
-  <h2 class="well-title-secondary">{{ title }}</h2>
+  <h2 class="well-title-secondary">
+    {{ title }}
+    <button class="btn-cta cta-secondary" ng-click="clear($event)" nxg-track="{{metricClearSearch}}">Clear Search</button>
+  </h2>
 
   <form name="searchForm" class="row-fluid search" novalidate>
       <div class="span5 form-block">
-        <div class="">
-          <label class="control-label" for="keyword">
-            Find a Floor Plan
-            <a href="#" class="primary clear-search" ng-click="clear($event)" title="Clear Search" nxg-track="{{metricClearSearch}}">Clear Search</a>
-          </label>
-        </div>
+        <label for="keyword">
+          Find a Floor Plan
+        </label>
 
         <div class="form-row">
           <div class="styled-input with-btn">
@@ -23,7 +23,7 @@
       <div ng-show="filterable" class="span7 form-block">
         <div class="row-fluid form-row">
           <div class="span5">
-            <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
+            <label for="filterSelect">{{ filterLabel }}</label>
             <div class="style-select">
               <select id="filterSelect" name="filterSelect"
                       nxg-track="{{metricFilterByInput}}"
@@ -55,10 +55,22 @@
             </div>
             <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
           </div>
+
+          <div ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2" class="span7">
+          <label for="invLocSelect">Filter by Inventory Location</label>
+
+          <div class="style-select input-large">
+            <select id="invLocSelect" name="invLocSelect"
+              ng-change="search()"
+              nxg-track="{{metricFilterByInventoryLocation}}"
+              ng-model="activeCriteria.inventoryLocation"
+              ng-options="i.value as i.label for i in inventoryLocations"></select>
+          </div>
+        </div>
         </div>
 
-        <div ng-show="showInventoryLocation && inventoryLocations.length > 2" class="control-group filters inv-loc">
-          <label class="control-label" for="invLocSelect">Filter by Inventory Location</label>
+        <div ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
+          <label for="invLocSelect">Filter by Inventory Location</label>
 
           <div class="style-select input-large">
             <select id="invLocSelect" name="invLocSelect"
