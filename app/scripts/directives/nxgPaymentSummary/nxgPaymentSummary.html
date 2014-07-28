@@ -3,7 +3,7 @@
     <h2 class="well-title">Payment Summary</h2>
 
     <div class="well-content">
-        <table class="table table-striped table-primary">
+        <table class="table table-striped table-primary pay-sum-table">
             <tr>
                 <td>
                     <p>Choose to make payments today or schedule your payments when you checkout.</p>
@@ -22,7 +22,7 @@
                 ng-click="removeFee(fee)"
                 ng-disabled="paymentInProgress()"
                 ng-class="{disabled: paymentInProgress()}">
-                <span class="glyphicon"></span>
+                    <i class="icon-remove-sign"></i>
                 </button>
 
                 Account Fee <br/>
@@ -34,17 +34,21 @@
 
             <tr ng-repeat="payment in paymentQueue.payments">
                 <td>
-                    <button class="btn-unstyle btn-x"
+                    <button class="btn-x"
                     ng-click="removePayment(payment)"
                     ng-disabled="paymentInProgress()"
                     ng-class="{disabled: paymentInProgress()}">
                     <span class="glyphicon"></span>
                     </button>
 
-                    VIN: {{ payment.vin }} <br/>
-                    {{ payment.description }}<br/>
-                    <span class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</span>
-                    <span class="amount">{{ payment.amount | currency }}</span>
+
+
+                   <h3>{{ payment.description }}</h3>
+                    <br/>
+                   <p>VIN: {{ payment.vin }} </p>
+                    <br/>
+                    <p class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</p>
+                    <p class="amount pull-right">{{ payment.amount | currency }}</p>
                     <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
                 </td>
             </tr>
