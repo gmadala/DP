@@ -42,11 +42,11 @@
 * removes excess margin at the bottom of wells,
 * sets the default background to white.
 */
-.well-default {
-  @extend .well;
-  background-color: #fff;
-  margin-bottom: 0;
-}
+// .well-default {
+//   @extend .well;
+//   background-color: #fff;
+//   margin-bottom: 0;
+// }
 
 .well-item {
   @extend .clearfix;

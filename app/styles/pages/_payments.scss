@@ -53,77 +53,77 @@
 
 // Payments Summary
 .pay-queue, .request-queue {
-  p, li {
-    @extend %thin;
-    font-size: 13px;
-    line-height: 1.4;
-    color: $base-text-color;
-  }
+  // p, li {
+  //   @extend %thin;
+  //   font-size: 13px;
+  //   line-height: 1.4;
+  //   color: $base-text-color;
+  // }
 
-  ul {
-    margin: 0;
-  }
+  // ul {
+  //   margin: 0;
+  // }
 
-  &.well {
-    border: 0;
-    padding: 0;
+  // &.well {
+  //   border: 0;
+  //   padding: 0;
 
-    h4 {
-      padding: 15px;
-      margin-bottom: 0;
-    }
-    .well-out {
-      border-color: $well-out-border;
-      margin: 0;
-    }
-  }
+  //   h4 {
+  //     padding: 15px;
+  //     margin-bottom: 0;
+  //   }
+  //   .well-out {
+  //     border-color: $well-out-border;
+  //     margin: 0;
+  //   }
+  // }
 
-  .queue-items {
-    border-top: 1px solid $border;
+  // .queue-items {
+  //   border-top: 1px solid $border;
 
-    p:first-child {
-      margin-top: 10px;
-    }
+    // p:first-child {
+    //   margin-top: 10px;
+    // }
 
-    li {
-      overflow: hidden;
-      padding: 5px 0;
+    // li {
+    //   overflow: hidden;
+    //   padding: 5px 0;
 
-      .queued-as {
-        @extend %float-l;
-        text-transform: lowercase;
-        font-variant: small-caps;
-        font-size: 16px;
-      }
+    //   .queued-as {
+    //     @extend %float-l;
+    //     text-transform: lowercase;
+    //     font-variant: small-caps;
+    //     font-size: 16px;
+    //   }
 
-      .amount {
-        @extend %float-r;
-        @extend %heavy;
-        line-height: 22px; // to match .queued-as height
-      }
+    //   .amount {
+    //     @extend %float-r;
+    //     @extend %heavy;
+    //     line-height: 22px; // to match .queued-as height
+    //   }
 
-      & + li {
-        border-top: 1px solid $border;
-      }
-    }
+    //   & + li {
+    //     border-top: 1px solid $border;
+    //   }
+    // }
 
-    .btn-x {
-      @extend %float-r;
+  //   .btn-x {
+  //     @extend %float-r;
 
-      &.disabled {
-        cursor: default;
-      }
+  //     &.disabled {
+  //       cursor: default;
+  //     }
 
-      &.disabled:hover span, span {
-        // @extend .glyphicon-remove-circle;
-        color: $gray-9;
-      }
+  //     &.disabled:hover span, span {
+  //       // @extend .glyphicon-remove-circle;
+  //       color: $gray-9;
+  //     }
 
-      &:hover span {
-        color: $base-text-color;
-      }
-    }
-  }
+  //     &:hover span {
+  //       color: $base-text-color;
+  //     }
+  //   }
+  // }
 
  /* .pay-sum-footer, .request-sum-footer {
     padding: 15px 15px 15px 15px;
