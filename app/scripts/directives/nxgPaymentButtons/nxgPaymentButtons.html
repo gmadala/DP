@@ -11,7 +11,8 @@
           tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    <span>{{!onQueue && 'Add' || 'Remove'}}</span>
+    <!--<span>{{!onQueue && 'Add' || 'Remove'}}</span>-->
+      <span>{{ item.Balance | currency }}</span>
   </button>
 
   <button ng-switch-when="fee-scheduledFee"
@@ -35,7 +36,7 @@
           tooltip="{{ onQueue != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    <span>{{ (onQueue != 'payment') && 'Add' || 'Remove' }}</span>
+        <span>{{ item.AmountDue | currency }}</span>
   </button>
 
   <button ng-switch-when="payment-scheduledPayment"
@@ -68,7 +69,7 @@
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
+      <span>{{ item.CurrentPayoff | currency }}</span>
 
   </button>
 

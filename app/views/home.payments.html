@@ -77,7 +77,6 @@
                 <p class="lockup-major">{{ fee.Posted | moment }}</p>
               </td>
               <td class="numeric">
-                  <p class="lockup-major">{{ fee.Balance | currency }}</p>
                   <div nxg-payment-buttons="fee"
                      item="fee"
                      on-queue="isFeeOnQueue(fee.FinancialRecordId)">
@@ -151,12 +150,10 @@
                 </td>
 
                 <td><!-- Vehicle Payments: payment column -->
-                      <p>{{ payment.AmountDue | currency }}</p>
                       <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                 </td>
 
                 <td>  <!-- Vehicle Payments: payoff column -->
-                      <p>{{ payment.CurrentPayoff | currency }}</p>
                       <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                 </td>
 
