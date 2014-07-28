@@ -1,15 +1,7 @@
 select {
-  // @extend %heavy;
-  // @include border-radius(0);
-  // background: $white;
-  // color: $brand-light;
-  // border: 1px solid $input-border;
-  // height: 28px;
-  // width: 200px;
-  // font-size: 13px;
   -webkit-user-select: none;
 
-  &:focus { // use important to guarantee that this style will override default invalid style
+  &:focus {
     border-color: darken($input-border, 20%) !important;
 
     &:invalid, &:invalid:focus {
@@ -20,71 +12,6 @@ select {
   }
 }
 
-// textarea,
-// input[type="text"],
-// input[type="password"],
-// input[type="datetime"],
-// input[type="datetime-local"],
-// input[type="date"],
-// input[type="month"],
-// input[type="time"],
-// input[type="week"],
-// input[type="number"],
-// input[type="email"],
-// input[type="url"],
-// input[type="search"],
-// input[type="tel"],
-// input[type="color"],
-// .uneditable-input {
-//   @include border-radius(0px);
-//   @include box-shadow(none);
-//   border: 1px solid $input-border;
-//   height: 28px;
-//   margin: 0;
-
-//   &:focus {
-//     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-//     border-color: $input-border;
-//   }
-
-//   &:focus:invalid, &:invalid {
-//     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-//     color: $gray-5;
-//     border: 1px solid $input-border;
-//   }
-
-//   // get rid of IE10's default clear button
-//   &::-ms-clear {
-//     display: none;
-//   }
-// }
-
-// select,
-// textarea,
-// input[type="text"],
-// input[type="password"],
-// input[type="datetime"],
-// input[type="datetime-local"],
-// input[type="date"],
-// input[type="month"],
-// input[type="time"],
-// input[type="week"],
-// input[type="number"],
-// input[type="email"],
-// input[type="url"],
-// input[type="search"],
-// input[type="tel"],
-// input[type="color"],
-// .uneditable-input {
-//   &.nxg-invalid {
-//     border: 1px solid $error-dark;
-//   }
-// }
-
-// select.nxg-invalid {
-//   color: $error-dark;
-// }
-
 // these fields are treated differently b/c the inputs are wrapped in a directive
 .nxg-business-field.nxg-invalid {
   border: 0;
@@ -94,85 +21,13 @@ select {
   }
 }
 
-// .nxg-date-field.nxg-invalid {
-//   border: 1px solid $error-dark !important;
-// }
-
-// select, .nxg-date-field {
-//   margin-bottom: 0;
-// }
-
-.input-prepend.dollar {
-  margin-bottom: 0;
-}
-
 .input-prepend.dollar .add-on{
-  padding-top: 5px;
-  background-color: $white;
+  position: relative;
+  top: 7px;
+  font-size: 14px;
+  background-color: transparent;
   border: none;
-  margin-right: -16px;
 }
-
-.input-prepend.dollar .add-on, .input-prepend.dollar .add-on:first-child, .input-prepend.dollar .btn:first-child {
-  padding: 4px 0 0 4px;
-  color: #9a9a9a;
-  @include border-radius(0);
-}
-
-.input-prepend.dollar select,
-.input-prepend.dollar textarea,
-.input-prepend.dollar input[type="text"],
-.input-prepend.dollar input[type="password"],
-.input-prepend.dollar input[type="datetime"],
-.input-prepend.dollar input[type="datetime-local"],
-.input-prepend.dollar input[type="date"],
-.input-prepend.dollar input[type="month"],
-.input-prepend.dollar input[type="time"],
-.input-prepend.dollar input[type="week"],
-.input-prepend.dollar input[type="number"],
-.input-prepend.dollar input[type="email"],
-.input-prepend.dollar input[type="url"],
-.input-prepend.dollar input[type="search"],
-.input-prepend.dollar input[type="tel"],
-.input-prepend.dollar input[type="color"],
-.input-prepend.dollar
-.uneditable-input {
-  padding-left: 16px;
-  background: transparent;
-}
-
-// .nxg-date-field.control-group {
-//   border: 1px solid $input-border;
-
-//   input, input[type="text"], input[type="text"]:focus {
-//     background-color: transparent;
-//     border: 0px solid black;
-//     width: 83px;
-//     padding-right: 0;
-//     font-size: 13px;
-//   }
-
-//   .btn {
-//     @include border-radius(0);
-//     @include box(28px);
-//     @include opacity(50);
-//     color: #9a9a9a;
-//     background: transparent;
-//     font-size: $large-font-size;
-//     border: 0;
-//     margin: -1px -4px 0 -1px;
-//     padding-left: 0;
-
-//     &:active {
-//       border: none;
-//       @include box-shadow(none);
-//     }
-//   }
-
-//   & + .btn-mini {
-//     margin-left: 5px;
-//   }
-// }
 
 .text-error {
   @extend %small;
@@ -234,58 +89,6 @@ input[type="checkbox"], input[type="checkbox"]:checked {
     font-weight: bold;
   }
 }
-
-// .nxg-radios {
-//   label {
-//     margin: 0 0.5em 0 0.5em;
-//   }
-// }
-
-// #foo:checked::before,
-// input[type="radio"] {
-//   position:absolute;
-//   clip: rect(0,0,0,0);
-//   clip: rect(0 0 0 0);
-// }
-
-// input[type="radio"] + label::before,
-// input[type="radio"]:checked + label::before {
-//   position: relative;
-//   top: 6px;
-//   left: -6px;
-// }
-
-// input[type="radio"] + label::before {
-//   content: url('../img/radio.gif');
-// }
-
-// input[type="radio"]:checked + label::before {
-//   content: url('../img/radio-checked.gif');
-// }
-
-// input[type="radio"], input[type="radio"]:checked {
-//   & + label::before {
-//     @include opacity(75);
-//   }
-
-//   &:focus + label::before {
-//     @include opacity(100);
-//   }
-// }
-
-// input[type="radio"]:disabled {
-//   & + label {
-//     color: $gray-c;
-//   }
-//   & + label::before {
-//     @include opacity(40);
-//   }
-// }
-
-// .form-title {
-//   @extend .subtitle;
-//   margin: 0 0 10px 0;
-// }
 
 .control-group.half {
   @extend %float-l;
@@ -797,6 +600,7 @@ input[type="radio"] {
 
   .cr-label {
     display: inline-block;
+    max-width: 90%;
     padding: 0 15px 0 0;
     margin: 0;
 

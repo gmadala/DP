@@ -166,6 +166,7 @@
 .info-block {
   @extend %full-width;
   @extend .clearfix;
+  position: relative;
   height: 45px;
 
   .info-block-image, .info-block-text {
@@ -177,6 +178,13 @@
   }
   .info-block-text {
     padding: 8px 10px;
+
+    .btn {
+      position: absolute;
+      top: -7px;
+      right: 0;
+      margin-right: 0;
+    }
   }
 }
 
