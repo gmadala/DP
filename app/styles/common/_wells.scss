@@ -42,10 +42,21 @@
 }
 
 /* helper class for default well */
-.well-content .well-item {
+.well-item {
+  @extend .clearfix;
   padding: 10px;
-}
 
+  & + .well-item {
+    border-top: 1px solid $wellBorder;
+  }
+}
+  .well-light {
+    background: #ffffff;
+  }
+
+  .well-dark {
+    background: #ececec;
+  }
 
 .well-footer {
   border-top: 1px solid $wellBorder;
@@ -57,8 +68,6 @@
     text-align: center;
   }
 }
-
-
 
 
   // h4 {

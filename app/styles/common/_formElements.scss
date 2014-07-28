@@ -785,30 +785,33 @@ input[type="radio"] {
  * INLINE CHECKBOXES AND RADIO BUTTONS
  * Checkboxes/radio buttons that appear side by side, or
  * appear in a non-full-width context.
- *
- * Used on login page & floor a car form.
  */
 .cr-inline {
   position: relative;
-  display: table;
   margin-bottom: 5px;
-
-  .cr-label {
-    padding: 0 10px;
-  }
 
   .checkbox-img, .radio-img {
     position: relative;
-    left: 0;
+    top: 5px;
+  }
+
+  .cr-label {
+    display: inline-block;
+    padding: 0 15px 0 0;
+    margin: 0;
+
+    &:last-child {
+      padding: 0;
+    }
   }
 
   .radio-img {
-    top: 0;
+    right: 4px;
   }
 
-  .checkbox-img {
-    top: 4px;
-  }
+  // .checkbox-img {
+  //   top: 4px;
+  // }
 }
 
 .clear-search {
@@ -892,6 +895,11 @@ input[type="radio"] {
 .date-field {
   position: relative;
   width: 100px;
+
+  &.date-inline {
+    display: inline-block;
+    margin-right: 15px;
+  }
 
   input, input[type="text"] {
     width: 100%;

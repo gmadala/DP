@@ -103,6 +103,12 @@
 //   }
 // }
 
+.count {
+  font-size: 16px;
+  font-weight: bold;
+  color: $text;
+}
+
 // Modals
 .sch-checkout .detail-col,
 .confirm-checkout .detail-col {

@@ -183,9 +183,10 @@
 // dashboard
 .dash-lockup {
   @extend .lockup;
+  @extend .clearfix;
   float: right;
   text-align: right;
-  height: 30px;
+  // height: 30px;
   padding: 6px 10px;
   margin: 0;
 }
@@ -311,4 +312,10 @@
 .pay-sum-table .amount {
   display: inline-block;
   font-weight: bold;
+}
+
+hr {
+  border-top: 1px solid $border;
+  border-bottom: 0;
+  margin-bottom: 20px;
 }

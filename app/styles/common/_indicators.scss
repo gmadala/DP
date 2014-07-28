@@ -82,3 +82,18 @@
   height: 30px;
   padding: 12px 0;
 }
+
+.counter-list {
+  li {
+    @extend .clearfix;
+  }
+
+  .counter {
+    float: left;
+    margin: 4px 15px;
+  }
+
+  .dash-lockup {
+    padding: 4px 10px;
+  }
+}
