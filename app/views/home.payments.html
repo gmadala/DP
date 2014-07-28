@@ -123,37 +123,43 @@
                   Payoff<span class="sortArrows"></span>
                 </th>
               </thead>
-
+              <!-- Vehicle Payments: table body -->
               <tr ng-repeat="payment in payments.results">
-                <td class="paired paired-reversed">
-                  <span class="paired-media svg-icon" ng-class="getDueStatus(payment,true)" ng-switch="getDueStatus(payment, true)">
-                    <span ng-switch-when="today" nxg-icon="icon-warning"></span>
-                    <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
-                  </span>
-                  <div class="paired-body">
-                    <p class="lockup-major" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">{{ payment.DueDate | moment }}</p>
-                    <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}">Request<br/>Extension</a>
-                  </div>
+
+                 <td class="paired paired-reversed"> <!-- Vehicle Payments: due date column -->
+                      <span class="paired-media svg-icon" ng-class="getDueStatus(payment,true)" ng-switch="getDueStatus(payment, true)">
+                        <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                        <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                      </span>
+                      <div class="paired-body">
+                        <p class="lockup-major" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">{{ payment.DueDate | moment }}</p>
+                        <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}">Request<br/>Extension</a>
+                      </div>
                 </td>
-                <td>
-                  <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.UnitDescription }}</a>
-                  <div class="row-fluid">
-                    <p class="lockup-minor caps vin">VIN: <span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span></p>
-                    <p class="lockup-minor caps stock">STK: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
-                  </div>
+
+                <td> <!-- Vehicle Payments: description column -->
+                      <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.UnitDescription }}</a>
+                      <div class="row-fluid">
+                        <p class="lockup-minor caps vin">VIN: <span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span></p>
+                        <p class="lockup-minor caps stock">STK: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
+                      </div>
                 </td>
-                <td>
-                  <p class="lockup-major">{{ payment.FlooringDate | moment }}</p>
-                  <p class="lockup-minor">{{ payment.DaysOnFloorplan }} days</p>
+
+                <td> <!-- Vehicle Payments: floored column -->
+                      <p class="lockup-major">{{ payment.FlooringDate | moment }}</p>
+                      <p class="lockup-minor">{{ payment.DaysOnFloorplan }} days</p>
                 </td>
-                <td>
-                  <p>{{ payment.AmountDue | currency }}</p>
-                  <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
+
+                <td><!-- Vehicle Payments: payment column -->
+                      <p>{{ payment.AmountDue | currency }}</p>
+                      <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                 </td>
-                <td>
-                  <p>{{ payment.CurrentPayoff | currency }}</p>
-                  <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
+
+                <td>  <!-- Vehicle Payments: payoff column -->
+                      <p>{{ payment.CurrentPayoff | currency }}</p>
+                      <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                 </td>
+
               </tr>
             </table>
           </div>
