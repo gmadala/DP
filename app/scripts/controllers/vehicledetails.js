@@ -384,7 +384,7 @@ angular.module('nextgearWebApp')
       };
 
       $scope.requestExtension = function() {
-        // We need a payment object, but we only need the FloorplanId & Vin.
+        // We need a payment object, but we only need the FloorplanId, Vin, Description, & Extendable property.
         var payment = {
           FloorplanId: $scope.vehicleInfo.FloorplanId,
           Vin: $scope.vehicleInfo.UnitVin,
@@ -401,17 +401,17 @@ angular.module('nextgearWebApp')
           resolve: {
             payment: function() {
               return payment;
-            },
-            confirmRequest: function() {
-              return function() {
-                if(payment.Extendable) {
-                  return Payments.requestExtension(payment.FloorplanId);
-                } else {
-                  // shouldn't be calling this method
-                  return $q.reject();
-                }
-              };
-            }
+            }//,
+            // confirmRequest: function() {
+            //   return function() {
+            //     if(payment.Extendable) {
+            //       return Payments.requestExtension(payment.FloorplanId);
+            //     } else {
+            //       // shouldn't be calling this method
+            //       return $q.reject();
+            //     }
+            //   };
+            // }
           }
         }).open();
       };

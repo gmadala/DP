@@ -13,6 +13,14 @@ describe('Model: VehicleDetails', function () {
     api = _api_;
   }));
 
+  it('should getDetails', function() {
+    var returnVal = {};
+    spyOn(api, 'request').andReturn(returnVal);
+    var result = vehicleDetails.getDetails(1234);
+    expect(result).toBe(returnVal);
+    expect(api.request).toHaveBeenCalledWith('GET', '/floorplan/expandeddetail/1234');
+  });
+
   it('should getPaymentDetails', function() {
     var returnVal = {};
     spyOn(api, 'request').andReturn(returnVal);
