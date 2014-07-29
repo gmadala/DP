@@ -8,7 +8,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
   beforeEach(module('nextgearWebApp', 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'));
 
-  beforeEach(inject(function (_Payments_) {
+  beforeEach(inject(function (_Payments_, $httpBackend) {
+    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
     Payments = _Payments_;
   }));
 
