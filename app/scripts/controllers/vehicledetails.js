@@ -74,37 +74,6 @@ angular.module('nextgearWebApp')
         Scheduled: details.FinancialSummaryInfo.Scheduled
       };
 
-      $scope.cancelScheduledPayment = function() {
-        // var dialogOptions = {
-        //   backdrop: true,
-        //   keyboard: true,
-        //   backdropClick: true,
-        //   templateUrl: 'views/modals/cancelPayment.html',
-        //   controller: 'CancelPaymentCtrl',
-        //   resolve: {
-        //     options: function() {
-        //       return {
-        //         payment: {
-        //           webScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-        //           vin: details.VehicleInfo.UnitVin,
-        //           description: details.FinancialSummaryInfo.Description,
-        //           stockNumber: $stateParams.stockNumber,
-        //           scheduledDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
-        //           isPayOff: !details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
-        //           currentPayOff: details.FinancialSummaryInfo.TotalOutstanding,
-        //           amountDue: null // don't know this yet (7/29/14)
-        //         },
-        //         onCancel: function() {
-        //           // we don't have anything to clean up here...?
-        //         }
-        //       };
-        //     }
-        //   }
-        // };
-        // $dialog.dialog(dialogOptions).open();
-      },
-
-
       // Grab data for title info section
       // ================================
       $scope.titleInfo = details.TitleInfo;
@@ -368,6 +337,39 @@ angular.module('nextgearWebApp')
             }
           }).open();
         });
+      };
+
+      // For VO-2190, Amount is either NextPaymentAmount or TotalOutstanding
+      $scope.financialSummary.scheduledAmount = details.FinancialSummaryInfo.CurtailmentPaymentScheduled ? details.FinancialSummaryInfo.NextPaymentAmount : details.FinancialSummaryInfo.TotalOutstanding;
+
+      $scope.cancelScheduledPayment = function() {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/cancelPayment.html',
+          controller: 'CancelPaymentCtrl',
+          resolve: {
+            options: function() {
+              return {
+                payment: {
+                  webScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
+                  vin: details.VehicleInfo.UnitVin,
+                  description: details.FinancialSummaryInfo.Description,
+                  stockNumber: $stateParams.stockNumber,
+                  scheduledDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+                  isPayOff: !details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
+                  currentPayOff: details.FinancialSummaryInfo.TotalOutstanding,
+                  amountDue: $scope.financialSummary.scheduledAmount
+                },
+                onCancel: function() {
+                  // refresh page so that it no longer looks like a payment is scheduled.
+                }
+              };
+            }
+          }
+        };
+        $dialog.dialog(dialogOptions).open();
       };
 
       // Grab data for value info section

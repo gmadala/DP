@@ -329,10 +329,6 @@ span.btn-help {
     background: $cta-secondary-bkgd;
     color: $cta-secondary-text;
     border: 1px solid $border;
-
-    &.cta-full {
-      border-width: 1px 0 0;
-    }
   }
 
 /*
@@ -367,6 +363,11 @@ span.btn-help {
   }
 
   &.cta-primary, &.cta-secondary {
+
+    &.cta-full, &.cta-full:disabled, &.cta-full.ng-disabled {
+      border-width: 1px 0 0;
+    }
+
     &:disabled, &.ng-disabled {
       background: $btn-bkgd-disabled;
       color: $btn-text-disabled;

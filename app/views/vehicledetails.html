@@ -114,8 +114,7 @@
           <h2 class="well-title">Financial Activity
             <div class="paired paired-reversed well-sub-title">
               <a class="featured" ng-href="{{ historyReportUrl }}">
-                <span class="paired-body">View the Vehicle History Detail Report</span>
-                <span class="paired-media icon-primary" nxg-icon="icon-car"></span>
+                <span class="paired-body">View the Vehicle History Detail Report</span><span class="paired-media" nxg-icon="icon-car"></span>
               </a>
             </div>
           </h2>
@@ -278,8 +277,7 @@
             <h2 class="well-title">Title Information
               <div class="well-sub-title paired-reversed">
                 <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">
-                  <span class="paired-body">View the Title</span>
-                  <span class="paired-media icon-primary" nxg-icon="icon-title"></span>
+                  <span class="paired-body">View the Title</span><span class="paired-media" nxg-icon="icon-title"></span>
                 </a>
               </div>
             </h2>
@@ -393,11 +391,25 @@
             </div>
           </div>
         </div>
-        <!--    <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+        <p class="well-item">Next payment due <strong>{{ financialSummary.NextPaymentDueDate | moment }}</strong></p>
+        <div class="well-item" ng-switch="financialSummary.Scheduled">
+          <div ng-switch-when="false">
+            Payoff: <div nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+            Payment: <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+          </div>
+
+          <div ng-switch-when="true">
+            <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
+              <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
+            </p>
+          </div>
         </div>
-        <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
-          <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
-        </div> -->
+
+        <button class="btn-cta cta-primary cta-full" ng-disabled="paymentQueue.isEmpty()"
+            ng-click="goToCheckout()">
+          <span class="paired-body">Checkout <span ng-show="paymentQueue.getQueueCount() > 0">({{ paymentQueue.getQueueCount() }})</span></span>
+          <span class="paired-media" nxg-icon="icon-cart"></span>
+        </button>
       </section>
     </section>
   </div>

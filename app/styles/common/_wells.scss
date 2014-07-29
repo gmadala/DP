@@ -52,7 +52,7 @@
   @extend .clearfix;
   padding: 10px;
 
-  & + .well-item {
+  &.bordered {
     border-top: 1px solid $wellBorder;
   }
 }

@@ -51,23 +51,38 @@ p {
 }
 
 a, a:visited {
-  // font-size: 12px;
   color: $highlight;
 
   &:hover {
     color: darken($highlight, 10%);
+
+    &:hover .svg-icon svg {
+      fill: darken($highlight, 10%);
+    }
   }
 
   &.primary, &.featured {
     font-weight: bold;
   }
 
+  .svg-icon svg {
+    fill: $highlight;
+  }
+
   &.featured {
     font-size: 14px;
     color: $primary;
 
+    .svg-icon svg {
+      fill: $primary;
+    }
+
     &:hover {
       color: darken($primary, 10%);
+
+      &:hover .svg-icon svg {
+        fill: darken($primary, 10%);
+      }
     }
   }
 }
