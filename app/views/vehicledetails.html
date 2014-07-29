@@ -232,7 +232,7 @@
         <div class="row-fluid">
           <!-- Vehicle Information -->
           <div class="well span6 details-well">
-            <h2 class="well-title">Vehicle Information <span class="well-sub-title">Stock #{{ stockNo }}</span></h2>
+            <h2 class="well-title">Vehicle Information <span class="well-sub-title">Stock #{{ vehicleInfo.StockNumber }}</span></h2>
             <div class="row-fluid">
               <ul class="list-table padded">
                 <li class="list-table-row">
@@ -362,34 +362,34 @@
 
       <section class="span3 well sidebar last">
         <h2 class="well-title">Payment Options</h2>
-        <div class="notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
+        <div class="notice-bar" ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
           <div class="paired-media">
-            <span ng-show="landing.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
-            <span ng-show="landing.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
-            <span ng-show="landing.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
-            <span ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue" nxg-icon="icon-info" class="icon-large"></span>
+            <span ng-show="financialSummary.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
+            <span ng-show="financialSummary.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
+            <span ng-show="financialSummary.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
+            <span ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue" nxg-icon="icon-info" class="icon-large"></span>
           </div>
           <div class="paired-body">
             <!-- Overdue Payment -->
-            <div ng-show="landing.paymentOverdue">
-              <p>A payment is overdue. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension? </a>
+            <div ng-show="financialSummary.paymentOverdue">
+              <p>A payment is overdue. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension? </a>
               <!-- if we get updated endpoints, add link to make a payment here as well -->
               </p>
             </div>
 
             <!-- Payment Due Today -->
-            <div ng-show="landing.paymentDueToday">
-              <p>A payment is due today. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="financialSummary.paymentDueToday">
+              <p>A payment is due today. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
 
             <!-- Payment Due Soon (This Week) -->
-            <div ng-show="landing.paymentDueSoon">
-              <p>A payment is due this week. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="financialSummary.paymentDueSoon">
+              <p>A payment is due this week. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
 
             <!-- Payments aren't due soon, but can request extension -->
-            <div ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue">
-              <p><a class="primary" href="" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue">
+              <p><a class="primary" href="" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
           </div>
         </div>

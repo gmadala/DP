@@ -3,68 +3,122 @@
 angular.module('nextgearWebApp')
   .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Payments, api, moment) {
 
-    $scope.stockNo = $stateParams.stockNumber;
-    $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
-
-    // Create object for each major section
-    $scope.landing = {};
     $scope.vehicleInfo = {};
     $scope.titleInfo = {};
     $scope.flooringInfo = {};
     $scope.valueInfo = {};
     $scope.financialSummary = {};
 
+    $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;
 
-    // We'll populate these objects as api calls are finished
-    var titleForCheckout = {};
-        // paymentForCheckout = {},
-        // payoffForCheckout = {};
+    $scope.goToCheckout = function() {
+      $state.transitionTo('home.checkout');
+    };
 
-    // Create promises for each object to grab its data as its api call finishes.
-    var promises = {};
-    promises.landing = VehicleDetails.getLanding($scope.stockNo);
-    promises.vehicleInfo = VehicleDetails.getVehicleInfo($scope.stockNo);
-    promises.titleInfo = VehicleDetails.getTitleInfo($scope.stockNo);
-    promises.flooringInfo = VehicleDetails.getFlooringInfo($scope.stockNo);
-    promises.valueInfo = VehicleDetails.getValueInfo($scope.stockNo);
-    promises.financialSummary = VehicleDetails.getFinancialSummary($scope.stockNo);
+    VehicleDetails.getDetails($stateParams.stockNumber).then(function(details) {
+      $scope.paymentQueue = Payments.getPaymentQueue();
+      $scope.paymentQueue.getQueueCount = function() {
+        return _.size(Payments.getPaymentQueue().payments);
+      };
 
-    // Grab landing info
-    promises.landing.then(function(info) {
+      // Set up variables to use for checkout (payments or titles)
+      var titleForCheckout = {
+        UnitMake: details.VehicleInfo.Make,
+        UnitModel: details.VehicleInfo.Model,
+        UnitStyle: details.VehicleInfo.Style,
+        UnitVin: details.VehicleInfo.UnitVin,
+        UnitYear: details.VehicleInfo.Year,
+        Color: details.VehicleInfo.Color,
+        StockNumber: $stateParams.stockNumber,
+        AmountFinanced: details.TitleInfo.AmountFinanced,
+        FloorplanId: details.TitleInfo.FloorplanId,
+        FloorplanStatusName: details.TitleInfo.FloorplanStatusName,
+        TitleReleaseProgramStatus: details.TitleInfo.TitleReleaseProgramStatus,
+        TitleImageAvailable: details.TitleInfo.TitleImageAvailable,
+        DisbursementDate: details.TitleInfo.DisbursementDate,
+        TitleLocation: details.TitleInfo.TitleLocation,
+        FlooringDate: details.FloorplanInfo.FlooringDate,
+        DaysOnFloorplan: details.FloorplanInfo.TotalDaysFloored,
+        SellerName: details.FloorplanInfo.SellerName
+      };
 
-      // Due today/soon?
-      info.NextPaymentDueDate = moment(info.NextPaymentDueDate);
-      if(moment.isMoment(info.NextPaymentDueDate)){
-        info.paymentOverdue = info.NextPaymentDueDate.isBefore(moment(), 'day');
-        // Due today/soon?
-        info.paymentDueToday = info.NextPaymentDueDate.isSame(moment(), 'day');
-        // Due soon?
-        info.paymentDueSoon = info.NextPaymentDueDate.diff(moment(), 'days') < 7 && !info.paymentDueToday && !info.paymentOverdue;
-      }
+      // we need to build the payment/payoff objects to add things to the queue.
+      $scope.paymentForCheckout = {
+        FloorplanId: details.FinancialSummaryInfo.FloorplanId,
+        Vin: details.VehicleInfo.UnitVin,
+        StockNumber: $stateParams.stockNumber,
+        UnitDescription: details.FinancialSummaryInfo.Description,
+        AmountDue: details.FinancialSummaryInfo.NextPaymentAmount,
+        DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
+        isPayoff: false,
+        PrincipalDue: details.FinancialSummaryInfo.PrincipalDue,
+        InterestPaymentTotal: details.FinancialSummaryInfo.InterestPaymentTotal,
+        FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
+        CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
+        Scheduled: details.FinancialSummaryInfo.Scheduled
+      };
 
-      $scope.landing = info;
-    });
+      $scope.payoffForCheckout = {
+        FloorplanId: details.FinancialSummaryInfo.FloorplanId,
+        Vin: details.VehicleInfo.UnitVin,
+        StockNumber: $stateParams.stockNumber,
+        UnitDescription: details.FinancialSummaryInfo.Description,
+        CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
+        DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
+        isPayoff: true,
+        PrincipalPayoff: details.FinancialSummaryInfo.PrincipalDue,
+        InterestPayoffTotal: details.FinancialSummaryInfo.InterestPayoffTotal,
+        FeesPayoffTotal: details.FinancialSummaryInfo.FeesPayoffTotal,
+        CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionPayoffTotal,
+        Scheduled: details.FinancialSummaryInfo.Scheduled
+      };
 
-    // Grab vehicle info
-    promises.vehicleInfo.then(function(info) {
-      $scope.vehicleInfo = info;
-    });
+      $scope.cancelScheduledPayment = function() {
+        // var dialogOptions = {
+        //   backdrop: true,
+        //   keyboard: true,
+        //   backdropClick: true,
+        //   templateUrl: 'views/modals/cancelPayment.html',
+        //   controller: 'CancelPaymentCtrl',
+        //   resolve: {
+        //     options: function() {
+        //       return {
+        //         payment: {
+        //           webScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
+        //           vin: details.VehicleInfo.UnitVin,
+        //           description: details.FinancialSummaryInfo.Description,
+        //           stockNumber: $stateParams.stockNumber,
+        //           scheduledDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+        //           isPayOff: !details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
+        //           currentPayOff: details.FinancialSummaryInfo.TotalOutstanding,
+        //           amountDue: null // don't know this yet (7/29/14)
+        //         },
+        //         onCancel: function() {
+        //           // we don't have anything to clean up here...?
+        //         }
+        //       };
+        //     }
+        //   }
+        // };
+        // $dialog.dialog(dialogOptions).open();
+      },
 
-    // Grab title info and define functions/variables we need to show/hide/disable the Request Title button
-    promises.titleInfo.then(function(info) {
-      $scope.titleInfo = info;
 
-      var displayId =  User.getInfo().BusinessNumber + '-' + info.StockNumber;
-      $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + info.StockNumber); // 0 = not first page only
+      // Grab data for title info section
+      // ================================
+      $scope.titleInfo = details.TitleInfo;
+
+      var displayId =  User.getInfo().BusinessNumber + '-' + details.TitleInfo.StockNumber;
+      $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + details.TitleInfo.StockNumber); // 0 = not first page only
 
       // Title-specific functions
       $scope.titleInfo.dealerCanRequestTitles = function() {
-        return info.DealerIsEligibleToReleaseTitles;
+        return details.TitleInfo.DealerIsEligibleToReleaseTitles;
       };
 
       $scope.titleInfo.titleRequestDisabled = function() {
-        if(info.TitleReleaseProgramStatus !== 'EligibleForRelease') {
+        if(details.TitleInfo.TitleReleaseProgramStatus !== 'EligibleForRelease') {
           return true;
         }
 
@@ -74,13 +128,13 @@ angular.module('nextgearWebApp')
 
         // By count
         var countInQueue = TitleReleases.getQueue().length;
-        if(countInQueue >= info.RemainingReleasesAvailable) {
+        if(countInQueue >= details.TitleInfo.RemainingReleasesAvailable) {
           return true;
         }
 
         // By financed
         var financedInQueue = TitleReleases.getQueueFinanced();
-        if(financedInQueue + info.AmountFinanced > info.ReleaseBalanceAvailable) {
+        if(financedInQueue + details.TitleInfo.AmountFinanced > details.TitleInfo.ReleaseBalanceAvailable) {
           return true;
         }
         return false;
@@ -90,28 +144,27 @@ angular.module('nextgearWebApp')
         TitleReleases.addToQueue(titleForCheckout);
         $state.transitionTo('home.titleReleaseCheckout');
       };
-    });
 
-    // Grab flooring info and build address objects, and define functions/variables we need to save/edit inventory location
-    promises.flooringInfo.then(function(info) {
-      info.sellerAddress = {
-        Line1: info.SellerAddressLine1,
-        Line2: info.SellerAddressLine2,
-        City: info.SellerAddressCity,
-        State: info.SellerAddressState,
-        Zip: info.SellerAddressZip
+      // Grab data for flooring info section
+      // ===================================
+      details.FloorplanInfo.sellerAddress = {
+        Line1: details.FloorplanInfo.SellerAddressLine1,
+        Line2: details.FloorplanInfo.SellerAddressLine2,
+        City: details.FloorplanInfo.SellerAddressCity,
+        State: details.FloorplanInfo.SellerAddressState,
+        Zip: details.FloorplanInfo.SellerAddressZip
       };
 
-      info.inventoryAddress = {
-        Line1: info.InventoryAddressLine1,
-        Line2: info.InventoryAddressLine2,
-        City: info.InventoryAddressCity,
-        State: info.InventoryAddressState,
-        Zip: info.InventoryAddressZip
+      details.FloorplanInfo.inventoryAddress = {
+        Line1: details.FloorplanInfo.InventoryAddressLine1,
+        Line2: details.FloorplanInfo.InventoryAddressLine2,
+        City: details.FloorplanInfo.InventoryAddressCity,
+        State: details.FloorplanInfo.InventoryAddressState,
+        Zip: details.FloorplanInfo.InventoryAddressZip
       };
 
-      $scope.flooringInfo = info;
-      $scope.currentLocation = info.inventoryAddress;
+      $scope.flooringInfo = details.FloorplanInfo;
+      $scope.currentLocation = details.FloorplanInfo.inventoryAddress;
 
       $scope.flooringInfo.chart = {
         data: [
@@ -150,10 +203,10 @@ angular.module('nextgearWebApp')
         }
       };
 
-      // Grab all possible inventory locations
+      //Grab all possible inventory locations
       $scope.inventoryLocations = User.getStatics().locations;
 
-      // users should only be able to change inventory location if they have more than one,
+      // Users should only be able to change inventory location if they have more than one,
       // and the Floorplan's status is either "Approved" or "Pending"
       $scope.flooringInfo.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
 
@@ -182,24 +235,29 @@ angular.module('nextgearWebApp')
         tempAddress = $scope.flooringInfo.inventoryAddress;
         $scope.flooringInfo.showEditInventoryLocation = true;
       };
-    });
 
-    // Grab the value info
-    promises.valueInfo.then(function(info) {
-      $scope.valueInfo = info;
-    });
+      // Grab data for financial summary section
+      // =======================================
 
-    // Grab the financial summary data and calculate the additional fields we need.
-    promises.financialSummary.then(function(info) {
-      $scope.financialSummary = info;
+      // Due today/soon?
+      details.FinancialSummaryInfo.NextPaymentDueDate = moment(details.FinancialSummaryInfo.NextPaymentDueDate);
+      if(moment.isMoment(details.FinancialSummaryInfo.NextPaymentDueDate)){
+        details.FinancialSummaryInfo.paymentOverdue = details.FinancialSummaryInfo.NextPaymentDueDate.isBefore(moment(), 'day');
+        // Due today/soon?
+        details.FinancialSummaryInfo.paymentDueToday = details.FinancialSummaryInfo.NextPaymentDueDate.isSame(moment(), 'day');
+        // Due soon?
+        details.FinancialSummaryInfo.paymentDueSoon = details.FinancialSummaryInfo.NextPaymentDueDate.diff(moment(), 'days') < 7 && !details.FinancialSummaryInfo.paymentDueToday && !details.FinancialSummaryInfo.paymentOverdue;
+      }
+
+      $scope.financialSummary = details.FinancialSummaryInfo;
 
       // we need to calculate some of the values for our breakdown.
-      var includeCPP = (info.CollateralProtectionPaid === 0 && info.CollateralProtectionOutstanding === 0) ? false : true;
+      var includeCPP = (details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0) ? false : true;
 
       $scope.financialSummary.breakdown = {
-        financeAmount: info.PrincipalPaid + info.PrincipalOutstanding,
+        financeAmount: details.FinancialSummaryInfo.PrincipalPaid + details.FinancialSummaryInfo.PrincipalOutstanding,
         interestFeesLabel: includeCPP ? 'Interest, Fees & CPP' : 'Interest & Fees',
-        interestFeesCPP: info.InterestPaid + info.InterestOutstanding + info.FeesPaid + info.FeesOutstanding + info.CollateralProtectionPaid + info.CollateralProtectionOutstanding
+        interestFeesCPP: details.FinancialSummaryInfo.InterestPaid + details.FinancialSummaryInfo.InterestOutstanding + details.FinancialSummaryInfo.FeesPaid + details.FinancialSummaryInfo.FeesOutstanding + details.FinancialSummaryInfo.CollateralProtectionPaid + details.FinancialSummaryInfo.CollateralProtectionOutstanding
       };
 
       $scope.financialSummary.paidChart = {
@@ -212,17 +270,17 @@ angular.module('nextgearWebApp')
         data: [
           {
             name: 'Principal',
-            y: info.PrincipalPaid,
+            y: details.FinancialSummaryInfo.PrincipalPaid,
             color: '#1B7ABA'
           },
           {
             name: 'Interest',
-            y: info.InterestPaid,
+            y: details.FinancialSummaryInfo.InterestPaid,
             color: '#104968'
           },
           {
             name: 'Fees',
-            y: info.FeesPaid,
+            y: details.FinancialSummaryInfo.FeesPaid,
             color: '#A6A8AB'
           }
         ]
@@ -238,32 +296,32 @@ angular.module('nextgearWebApp')
         data: [
           {
             name: 'Principal',
-            y: info.PrincipalOutstanding,
+            y: details.FinancialSummaryInfo.PrincipalOutstanding,
             color: '#1B7ABA'
           },
           {
             name: 'Interest',
-            y: info.InterestOutstanding,
+            y: details.FinancialSummaryInfo.InterestOutstanding,
             color: '#104968'
           },
           {
             name: 'Fees',
-            y: info.FeesOutstanding,
+            y: details.FinancialSummaryInfo.FeesOutstanding,
             color: '#A6A8AB'
           }
         ]
       };
 
-      if(info.CollateralProtectionPaid === 0 && info.CollateralProtectionOutstanding === 0) {
+      if(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0) {
         $scope.financialSummary.paidChart.data.push({
           name: 'CPP',
-          y: info.CollateralProtectionPaid,
+          y: details.FinancialSummaryInfo.CollateralProtectionPaid,
           color: '#6D6E70'
         });
 
         $scope.financialSummary.outstandingChart.data.push({
           name: 'CPP',
-          y: info.CollateralProtectionOutstanding,
+          y: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
           color: '#6D6E70'
         });
       }
@@ -284,13 +342,13 @@ angular.module('nextgearWebApp')
       $scope.financialSummary.getActivityDetails = function(activity) {
         var promise, template, ctrl;
         if (activity.IsPayment) {
-          promise = VehicleDetails.getPaymentDetails($scope.stockNo, activity.ActivityId);
+          promise = VehicleDetails.getPaymentDetails($stateParams.stockNumber, activity.ActivityId);
           template = 'paymentDetails.html';
           ctrl = 'PaymentDetailsCtrl';
         }
 
         if (activity.IsFee) {
-          promise = VehicleDetails.getFeeDetails($scope.stockNo, activity.ActivityId);
+          promise = VehicleDetails.getFeeDetails($stateParams.stockNumber, activity.ActivityId);
           template = 'feeDetails.html';
           ctrl = 'FeeDetailsCtrl';
         }
@@ -311,82 +369,51 @@ angular.module('nextgearWebApp')
           }).open();
         });
       };
-    });
 
-    // Once all api calls have finished, we can populate the objects needed
-    // for requesting a title and making and payment or payoff.
-    $q.all([
-      promises.landing,
-      promises.vehicleInfo,
-      promises.titleInfo,
-      promises.flooringInfo,
-      promises.valueInfo,
-      promises.financialSummary
-    ]).then(function(info){
-      var landingInfo = info[0],
-          vehicleInfo = info[1],
-          titleInfo = info[2],
-          flooringInfo = info[3];
+      // Grab data for value info section
+      // ================================
+      $scope.valueInfo = details.ValueInfo;
 
-      // build out title object for if user wants to request it
-      titleForCheckout = {
-        UnitMake: vehicleInfo.Make,
-        UnitModel: vehicleInfo.Model,
-        UnitStyle: vehicleInfo.Style,
-        UnitVin: vehicleInfo.UnitVin,
-        UnitYear: vehicleInfo.Year,
-        Color: vehicleInfo.Color,
-        StockNumber: $scope.StockNo,
-        AmountFinanced: titleInfo.AmountFinanced,
-        FloorplanId: titleInfo.FloorplanId,
-        FloorplanStatusName: titleInfo.FloorplanStatusName,
-        TitleReleaseProgramStatus: titleInfo.TitleReleaseProgramStatus,
-        TitleImageAvailable: titleInfo.TitleImageAvailable,
-        TitleReleaseDate: titleInfo.TitleReleaseDate,
-        TitleReleaseLocation: titleInfo.TitleReleaseLocation,
-        FlooringDate: flooringInfo.FlooringDate,
-        DaysOnFloorplan: flooringInfo.TotalDaysFloored,
-        SellerName: flooringInfo.SellerName
+      // Grab data for vehicle info section
+      // ==================================
+      $scope.vehicleInfo = details.VehicleInfo;
+
+      // Handle payment extension requests
+      $scope.showExtendLink = function() {
+        return !!$scope.financialSummary.NextPaymentAmount && $scope.financialSummary.NextPaymentAmount === $scope.financialSummary.TotalOutstanding;
       };
 
-      // we need data from getLanding & getFinancialSummary for requesting an extension
-      $scope.landing.showExtendLink = function() {
-        return !!landingInfo.NextPaymentAmount && landingInfo.NextPaymentAmount === landingInfo.TotalOutstandingAmount;
-      };
-
-      $scope.landing.requestExtension = function() {
+      $scope.requestExtension = function() {
         // We need a payment object, but we only need the FloorplanId & Vin.
         var payment = {
-          FloorplanId: landingInfo.FloorplanId,
-          Vin: landingInfo.UnitVin,
-          UnitDescription: landingInfo.Description
+          FloorplanId: $scope.vehicleInfo.FloorplanId,
+          Vin: $scope.vehicleInfo.UnitVin,
+          UnitDescription: $scope.vehicleInfo.Description
         };
 
         $dialog.dialog({
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            controller: 'ExtensionRequestCtrl',
-            templateUrl: 'views/modals/paymentExtension.html',
-            dialogClass: 'modal extension-modal',
-            resolve: {
-              payment: function() {
-                return payment;
-              },
-              confirmRequest: function() {
-                return function() {
-                  if(payment.Extendable) {
-                    return Payments.requestExtension(payment.FloorplanId);
-                  } else {
-                    // shouldn't be calling this method
-                    return $q.reject();
-                  }
-                };
-              }
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          controller: 'ExtensionRequestCtrl',
+          templateUrl: 'views/modals/paymentExtension.html',
+          dialogClass: 'modal modal-medium',
+          resolve: {
+            payment: function() {
+              return payment;
+            },
+            confirmRequest: function() {
+              return function() {
+                if(payment.Extendable) {
+                  return Payments.requestExtension(payment.FloorplanId);
+                } else {
+                  // shouldn't be calling this method
+                  return $q.reject();
+                }
+              };
             }
-          }).open();
+          }
+        }).open();
       };
-
-      // build out payment/payoff objects for if user wants to make a payment.
     });
   });
