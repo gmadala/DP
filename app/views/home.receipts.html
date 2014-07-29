@@ -1,5 +1,5 @@
 <section class="row-fluid">
-  <section class="span12">
+  <section class="span9">
     <div nxg-search
        title="Receipt Search"
        class="search-form"
@@ -14,107 +14,102 @@
        active-criteria="receipts.proposedSearchCriteria"
        on-search="receipts.search()"
        on-clear="receipts.resetSearch()"
-       info="You can combine up to 20 receipts into a single pdf by selecting each receipt checkbox and clicking 'View Selected Receipts'."
        filterable="true" >
     </div>
 
-    <div ng-switch="receipts.results.length > 0 || receipts.loading">
-      <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
-      </p>
-
-      <section class="receipts-list" ng-switch-when="true"
-               nxg-infinite-scroll="receipts.fetchNextResults()"
-               nxg-infinite-scroll-disabled="receipts.loading"
-               nxg-infinite-scroll-show-indicator="receipts.loading">
-        <ul class="unstyled">
-          <li class="table-list-head">
-            <div class="cell rec-num sortable-container"
-                 ng-click="sortBy('TransactionNumber')"
-                 ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Receipt #</span>
-            </div>
-            <div class="cell rec-status">
-              <span class="header-text">Status</span>
-            </div>
-            <div class="cell rec-payDate sortable-container"
-                 ng-click="sortBy('CreateDate')"
-                 ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Payment Date</span>
-            </div>
-            <div class="cell rec-payInfo sortable-container"
-                 ng-click="sortBy('PaymentMethod')"
-                 ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Payment Description</span>
-            </div>
-            <div class="cell rec-amtApplied sortable-container"
-                 ng-click="sortBy('AmountApplied')"
-                 ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Amount Applied</span>
-            </div>
-            <div class="cell rec-amtProvided sortable-container"
-                 ng-click="sortBy('AmountProvided')"
-                 ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Amount Provided</span>
-            </div>
-            <div class="cell rec-view">
-              <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">View Selected Receipts</button>
-            </div>
-          </li>
-
-          <li class="table-list-row" ng-repeat="receipt in receipts.results">
-            <div class="cell rec-num">
-              <p>
-                <span nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></span>
-              </p>
-            </div>
-            <div class="cell rec-status">
-              <p ng-switch="getReceiptStatus(receipt)">
-                <span ng-switch-when="nsf">Insufficient Funds</span>
-                <span ng-switch-when="void">Voided</span>
-                <span ng-switch-when="normal">Processed</span>
-              </p>
-            </div>
-
-            <div class="cell rec-payDate">
-              <p>{{ receipt.CreateDate | moment }}</p>
-            </div>
-
-            <div class="cell rec-payInfo">
-              <p ><span class="sch-sub-label">Payment:</span> {{ receipt.PaymentMethod }}<br/>
-                <div ng-switch on="!!reciept.CheckNumber">
-                  <div ng-switch-when="true">
-                    <span class="sch-sub-label" ng-show="receipt.CheckNumber">Check #:</span>
-                    <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
-                  </div>
-                </div>
-              </p>
-              <p ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</p>
-            </div>
-            <div class="cell rec-amtApplied">
-              <p>{{ receipt.AmountApplied | currency }}</p>
-            </div>
-            <div class="cell rec-amtProvided">
-              <p>{{ receipt.AmountProvided | currency }}</p>
-            </div>
-            <div class="cell rec-view">
-               <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]"
-                      ng-model="selectedReceipts[$index]"
-                      nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
-              <label for="{{ receipt.TransactionNumber }}"></label>
-            </div>
-          </li>
-        </ul>
-        <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax">
-          There are too many results to display, please refine your search further.
+    <div class="well">
+      <h2 class="well-title">Receipts</h2>
+      <div ng-switch="receipts.results.length > 0 || receipts.loading">
+        <p class="no-results" ng-switch-when="false">
+          Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
         </p>
-      </section>
-    </div>
 
+        <div ng-switch-when="true"
+             nxg-infinite-scroll="receipts.fetchNextResults()"
+             nxg-infinite-scroll-disabled="receipts.loading"
+             nxg-infinite-scroll-show-indicator="receipts.loading">
+          <table class="table table-striped table-primary">
+            <thead>
+              <th class="sortable"
+                  ng-click="sortBy('CreateDate')"
+                  ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
+                Payment Date<span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortBy('TransactionNumber')"
+                  ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
+                Receipt No.<span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortBy('PaymentMethod')"
+                  ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
+                Payment Description<span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortBy('AmountApplied')"
+                  ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
+                Applied<span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortBy('AmountProvided')"
+                  ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
+                Provided<span class="sortArrows"></span>
+              </th>
+              <th>Export Receipts(s)</th>
+            </thead>
+            <tr ng-repeat="receipt in receipts.results">
+              <td >
+                <h4 class="lockup-major">{{ receipt.CreateDate | moment }}</h4>
+                <p class="lockup-minor" ng-switch="getReceiptStatus(receipt)">
+                  <span ng-switch-when="nsf">Insufficient Funds</span>
+                  <span ng-switch-when="void">Voided</span>
+                  <span ng-switch-when="normal">Processed</span>
+                </p>
+              </td>
+              <td>
+                <h4 class="lockup-major" nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></h4>
+              </td>
+              <td>
+                <p>Payment: {{ receipt.PaymentMethod }}<br/>
+                  <span ng-switch on="!!reciept.CheckNumber">
+                    <span ng-switch-when="true">
+                      <span ng-show="receipt.CheckNumber">Check #:</span>
+                      <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
+                    </span>
+                  </span>
+                <span ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</span></p>
+              </td>
+              <td>
+                <h4 class="lockup-major">{{ receipt.AmountApplied | currency }}</h4>
+              </td>
+              <td>
+                <h4 class="lockup-major">{{ receipt.AmountProvided | currency }}</h4>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+
+
+  <!--
+              <div class="cell rec-view">
+                <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">View Selected Receipts</button>
+              </div>
+           <div class="cell rec-view">
+                 <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]"
+                        ng-model="selectedReceipts[$index]"
+                        nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
+                <label for="{{ receipt.TransactionNumber }}"></label>
+              </div> -->
+
+
+          <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax">
+            There are too many results to display, please refine your search further.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="span3 well">
+    You can combine up to 20 receipts into a single pdf by selecting each receipt checkbox and clicking 'View Selected Receipts'.
   </section>
 </section>
