@@ -23,7 +23,7 @@
 
         Account Fee <br/>
         {{ fee.description }}<br/>
-        <span class="queued-as">Payment</span>
+        <span class="queued-as">PAYOFF:</span>
         <span class="amount">{{ fee.amount | currency }}</span>
     </td>
     </tr>
@@ -37,7 +37,7 @@
             <span class="glyphicon"></span>
             </button>
 
-           <h3>{{ payment.description }}</h3>
+           <h3 class="lockup-major truncate">{{ payment.description }}</h3>
            <p>VIN: {{ payment.vin }} </p>
             <p class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</p>
             <p class="amount pull-right">{{ payment.amount | currency }}</p>
