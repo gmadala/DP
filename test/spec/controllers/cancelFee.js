@@ -51,7 +51,7 @@ describe('Controller: CancelFeeCtrl', function () {
       dialog: dialogMock,
       options: optionsMock
     });
-    expect(scope.title).toBe('Would you like to cancel your scheduled fee?');
+    expect(scope.title).toBe('Cancel Fee');
   }));
 
   describe('handleNo function', function () {

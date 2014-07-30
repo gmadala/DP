@@ -408,7 +408,7 @@
               <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
                 <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
               </p>
-              <div class="btn-text-group">
+              <div class="btn-text-group" ng-show="financialSummary.Scheduled && financialSummary.CurtailmentPaymentScheduled">
                 <h6 class="btn-text">Payoff:</h6>
                 <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
               </div>
