@@ -1,5 +1,5 @@
 <section class="row-fluid">
-  <section class="span9">
+  <!-- <section class="span9"> -->
     <div nxg-search
        title="Receipt Search"
        class="search-form"
@@ -55,7 +55,10 @@
                   ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
                 Provided<span class="sortArrows"></span>
               </th>
-              <th>Export Receipts(s)</th>
+              <th>
+                <button class="btn" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">Export Receipt(s)
+                </button>
+              </th>
             </thead>
             <tr ng-repeat="receipt in receipts.results">
               <td >
@@ -85,22 +88,16 @@
               <td>
                 <h4 class="lockup-major">{{ receipt.AmountProvided | currency }}</h4>
               </td>
-              <td></td>
+              <td class="">
+                <input type="checkbox" id="{{ receipt.TransactionNumber }}"
+                       name="toPrint"
+                       ng-disabled="tooMany() && !selectedReceipts[$index]"
+                       ng-model="selectedReceipts[$index]"
+                       nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
+                <label class="checkbox-img" for="{{ receipt.TransactionNumber }}"></label>
+              </td>
             </tr>
           </table>
-
-
-  <!--
-              <div class="cell rec-view">
-                <button class="btn btn-small" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">View Selected Receipts</button>
-              </div>
-           <div class="cell rec-view">
-                 <input type="checkbox" id="{{ receipt.TransactionNumber }}" name="toPrint" ng-disabled="tooMany() && !selectedReceipts[$index]"
-                        ng-model="selectedReceipts[$index]"
-                        nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
-                <label for="{{ receipt.TransactionNumber }}"></label>
-              </div> -->
-
 
           <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax">
             There are too many results to display, please refine your search further.
@@ -108,8 +105,9 @@
         </div>
       </div>
     </div>
-  </section>
-  <section class="span3 well">
+  <!-- </section> -->
+ <!--  <section class="span3 well">
+ <!-- To be completed with VO-2731 -->
     You can combine up to 20 receipts into a single pdf by selecting each receipt checkbox and clicking 'View Selected Receipts'.
-  </section>
+  </section> -->
 </section>

@@ -100,6 +100,10 @@ a, a:visited {
     color: $white;
     padding: 10px;
     border: 1px solid $tableBorder;
+
+    button {
+      margin: 0 auto;
+    }
   }
 
   .separated {
@@ -115,6 +119,7 @@ a, a:visited {
     height: 75px;
     text-align: left;
     vertical-align: top;
+    position: relative;
     padding: 10px 15px;
     border: 1px solid $tableBorder;
 
