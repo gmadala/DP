@@ -98,8 +98,8 @@
                       <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
                     </div>
                     <div class="button-group">
-                      <button type="button" class="btn-cta cta-secondary" ng-click="flooringInfo.cancelInventoryChanges()">Cancel Changes</button>
-                      <button type="submit" class="btn-cta cta-primary" ng-click="flooringInfo.saveInventoryChanges()">Save Location</button>
+                      <button type="button" class="btn-unstyle btn-link" ng-click="flooringInfo.cancelInventoryChanges()">Cancel</button>
+                      <button type="submit" class="btn-cta cta-secondary" ng-click="flooringInfo.saveInventoryChanges()">Save Changes</button>
                     </div>
                   </div>
                 </li>
@@ -371,7 +371,6 @@
             <!-- Overdue Payment -->
             <div ng-show="financialSummary.paymentOverdue">
               <p>A payment is overdue. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension? </a>
-              <!-- if we get updated endpoints, add link to make a payment here as well -->
               </p>
             </div>
 
