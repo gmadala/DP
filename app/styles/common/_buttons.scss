@@ -435,3 +435,16 @@ span.btn-help {
     }
   }
 }
+
+.btn-text-group {
+  @extend .clearfix;
+  padding: 0 10px;
+
+  .btn-text {
+    float: left;
+    padding: 15px 0;
+  }
+  .btn-btn {
+    float: right;
+  }
+}

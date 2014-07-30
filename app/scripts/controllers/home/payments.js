@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, $q) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog) {
 
     segmentio.track(metric.VIEW_PAYMENTS_LIST);
     $scope.metric = metric; // make metric names available to template
@@ -123,35 +123,27 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.extension = function (payment) {
-
       $dialog.dialog({
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
-          controller: 'ExtensionRequestCtrl',
-          templateUrl: 'views/modals/paymentExtension.html',
-          dialogClass: 'modal modal-medium',
-          resolve: {
-            payment: function() {
-              return payment;
-            },
-            confirmRequest: function() {
-              return function() {
-                if(payment.Extendable) {
-                  return Payments.requestExtension(payment.FloorplanId).then(function() {
-                    // Reload data since which payments can be extended has now changed
-                    // If user extends a payment not on the first page it will un-load previously
-                    // loaded payments and kick them to the top of the list.
-                    $scope.payments.search();
-                  });
-                } else {
-                  // shouldn't be calling this method
-                  return $q.reject();
-                }
-              };
-            }
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        controller: 'ExtensionRequestCtrl',
+        templateUrl: 'views/modals/paymentExtension.html',
+        dialogClass: 'modal modal-medium',
+        resolve: {
+          payment: function() {
+            return payment;
+          },
+          onConfirm: function() {
+            return function() {
+               // Reload data since which payments can be extended has now changed
+              // If user extends a payment not on the first page it will un-load previously
+              // loaded payments and kick them to the top of the list.
+              $scope.payments.search();
+            };
           }
-        }).open();
+        }
+      }).open();
     };
 
     $scope.payments.resetSearch = function (initialFilter, initialStartDate, initialEndDate) {
@@ -224,7 +216,7 @@ angular.module('nextgearWebApp')
     };
     refreshCanPayNow();
 
-  }).controller('ExtensionRequestCtrl', function ($scope, dialog, payment, confirmRequest, Floorplan) {
+  }).controller('ExtensionRequestCtrl', function ($scope, dialog, payment, onConfirm, Payments, Floorplan) {
     $scope.payment = payment;
     $scope.closeDialog = dialog.close;
 
@@ -238,10 +230,18 @@ angular.module('nextgearWebApp')
       $scope.subtotal = $scope.extPrev.PrincipalAmount + $scope.extPrev.InterestAmount + feeTotal + $scope.extPrev.CollateralProtectionAmount;
     });
 
-    $scope.confirmRequest = function() {
-      confirmRequest().then(function() {
-        dialog.close();
-      });
+    $scope.onConfirm = function() {
+      onConfirm();
+      dialog.close();
     };
 
+    $scope.confirmRequest = function() {
+      if($scope.extPrev.CanExtend) {
+        Payments.requestExtension(payment.FloorplanId).then(function() {
+          $scope.onConfirm();
+        });
+      } else {
+        dialog.close();
+      }
+    };
   });

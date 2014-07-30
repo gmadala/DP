@@ -194,20 +194,61 @@ describe('Controller: VehicleDetailsCtrl', function () {
       expect(scope.paymentQueue.getQueueCount()).toBe(4);
     });
 
-    it('should have a cancelScheduledPayment function', function() {
-      expect(typeof scope.cancelScheduledPayment).toBe('function');
-    });
-
     it('should have a showExtendLink function that controls display of the request extension link', function() {
       expect(scope.showExtendLink()).toBe(false);
       detailsMock.FinancialSummaryInfo.NextPaymentAmount = detailsMock.FinancialSummaryInfo.TotalOutstanding = 500;
       expect(scope.showExtendLink()).toBe(true);
     });
 
+    describe('cancel scheduled payment function', function() {
+      it('should exist', function() {
+        expect(typeof scope.cancelScheduledPayment).toBe('function');
+      });
+
+      it('should launch a modal dialog with the scheduled payment information', inject(function($rootScope) {
+        detailsMock.FinancialSummaryInfo.CurtailmentPaymentScheduled = true;
+        $rootScope.$digest();
+
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+        scope.cancelScheduledPayment();
+        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment).toBeDefined();
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBeDefined();
+      }));
+
+      it('should use the NextPaymentAmount if the scheduled payment is a curtailment', function() {
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+        scope.cancelScheduledPayment();
+        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(detailsMock.FinancialSummaryInfo.NextPaymentAmount);
+      });
+
+      it('should use the TotalOutstanding value if the scheduled payment is a payoff', inject(function($rootScope) {
+        detailsMock.FinancialSummaryInfo.CurtailmentPaymentScheduled = false;
+        $rootScope.$digest();
+
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+        scope.cancelScheduledPayment();
+        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(detailsMock.FinancialSummaryInfo.TotalOutstanding);
+      }));
+    });
+
     describe('request extension function', function() {
-      it('should exist and launch a modal dialog', function() {
-        spyOn(dialog, 'dialog').andCallThrough();
+      it('should exist', function() {
         expect(scope.requestExtension).toBeDefined();
+      });
+
+      it('should launch a modal dialog', function() {
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
         scope.requestExtension();
         expect(dialog.dialog).toHaveBeenCalled();
         expect(dialog.dialog.mostRecentCall.args[0].resolve.payment()).toEqual({
@@ -215,6 +256,17 @@ describe('Controller: VehicleDetailsCtrl', function () {
           Vin: detailsMock.VehicleInfo.UnitVin,
           UnitDescription: detailsMock.VehicleInfo.Description
         });
+      });
+
+      it('should force the page to grab new data after an extension request is confirmed', function() {
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+        spyOn(vehicleDetailsMock, 'getDetails').andCallThrough();
+        scope.requestExtension();
+        // expect(dialog.dialog).toHaveBeenCalled();
+        // dialog.dialog.mostRecentCall.args[0].resolve.onConfirm();
+        // expect(vehicleDetailsMock.getDetails).toHaveBeenCalled();
       });
     });
   });

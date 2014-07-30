@@ -391,17 +391,29 @@
             </div>
           </div>
         </div>
-        <p class="well-item">Next payment due <strong>{{ financialSummary.NextPaymentDueDate | moment }}</strong></p>
-        <div class="well-item" ng-switch="financialSummary.Scheduled">
-          <div ng-switch-when="false">
-            Payoff: <div nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
-            Payment: <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
-          </div>
+        <div class="well-item">
+          <h5>Next payment due <strong>{{ financialSummary.NextPaymentDueDate | moment }}</strong></h5>
+          <div ng-switch="financialSummary.Scheduled">
+            <div ng-switch-when="false">
+              <div class="btn-text-group">
+                <h6 class="btn-text">Payoff:</h6>
+                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+              <div class="btn-text-group">
+                <h6 class="btn-text">Payment: </h6>
+                <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+            </div>
 
-          <div ng-switch-when="true">
-            <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
-              <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
-            </p>
+            <div ng-switch-when="true">
+              <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
+                <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
+              </p>
+              <div class="btn-text-group">
+                <h6 class="btn-text">Payoff:</h6>
+                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+            </div>
           </div>
         </div>
 
