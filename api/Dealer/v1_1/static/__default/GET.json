@@ -280,18 +280,62 @@
             "StateId": "WY"
           }
         ],
-        "Locations": [
+        "DealerAddresses": [
           {
-            "LocationId": "a1",
-            "LocationName": "4 South Ave / Rochester NY"
+            "AddressId": "d8c60d7c-1330-4458-9599-1bce92b5dcb0",
+            "Line1": "380 NEVADA SW",
+            "Line2": null,
+            "City": "HURON",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "0000000000",
+            "Fax": "0000000000",
+            "IsActive": true,
+            "IsPhysicalInventory": false,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": false
           },
           {
-            "LocationId": "b2",
-            "LocationName": "123 Main St. / Canandaigua NY"
+            "AddressId": "428848e7-c3b4-4ec5-8ba5-83339aadb765",
+            "Line1": "PO Box 1274",
+            "Line2": null,
+            "City": "Huron",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": false,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": true
           },
           {
-            "LocationId": "b3",
-            "LocationName": "999 Smith Blvd / Victor NY"
+            "AddressId": "47161e63-5fca-4522-920f-91ffb863dd92",
+            "Line1": "22095 392nd Ave.",
+            "Line2": null,
+            "City": "Alpena",
+            "State": "SD",
+            "Zip": "57312",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": true,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": false
+          },
+          {
+            "AddressId": "6d2f9e38-9bbb-472a-9785-bbdb31b498b0",
+            "Line1": "1794 1/2 E. Hwy 14",
+            "Line2": null,
+            "City": "Huron",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": true,
+            "IsTitleReleaseAddress": true,
+            "IsMailingAddress": false
           }
         ],
         "BankAccounts": [
@@ -349,28 +393,28 @@
         ],
         "PaymentMethods": [
           {
-            "PaymentMethodId": 0,
-            "PaymentMethodName": "Auction Check"
+            "Id": 0,
+            "Name": "Auction Check"
           },
           {
-            "PaymentMethodId": 1,
-            "PaymentMethodName": "Certified Funds"
+            "Id": 1,
+            "Name": "Certified Funds"
           },
           {
-            "PaymentMethodId": 2,
-            "PaymentMethodName": "Check"
+            "Id": 2,
+            "Name": "Check"
           },
           {
-            "PaymentMethodId": 3,
-            "PaymentMethodName": "CPP Claim"
+            "Id": 3,
+            "Name": "CPP Claim"
           },
           {
-            "PaymentMethodId": 4,
-            "PaymentMethodName": "Non Dealer Check"
+            "Id": 4,
+            "Name": "Non Dealer Check"
           },
           {
-            "PaymentMethodId": 5,
-            "PaymentMethodName": "Proceeds"
+            "Id": 5,
+            "Name": "Proceeds"
           }
         ]
     }
