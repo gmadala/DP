@@ -153,6 +153,9 @@ angular.module('nextgearWebApp')
           floorplan.UnitStyle,
           floorplan.Color
         ].join(' ');
+      },
+      editInventoryAddress: function(address) {
+        return api.request('POST', '/floorplan/EditInventoryAddress', address);
       }
     };
   });

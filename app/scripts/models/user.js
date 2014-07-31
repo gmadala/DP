@@ -138,13 +138,13 @@ angular.module('nextgearWebApp')
       },
 
       refreshStatics: function() {
-        return api.request('GET', '/Dealer/Static').then(function(data) {
+        return api.request('GET', '/Dealer/v1_1/Static').then(function(data) {
           statics = {
             // API translation layer -- add transformation logic here as needed
             productTypes: data.ProductType || [],
             colors: data.Colors || [],
             states: data.States || [],
-            locations: data.Locations || [],
+            dealerAddresses: data.DealerAddresses || [],
             bankAccounts: data.BankAccounts || [],
             linesOfCredit: data.LinesOfCredit || [],
             titleLocationOptions: data.TitleLocationOptions || [],

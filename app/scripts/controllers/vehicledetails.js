@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Payments, api, moment) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, api, moment) {
 
     $scope.vehicleInfo = {};
     $scope.titleInfo = {};
@@ -178,7 +178,9 @@ angular.module('nextgearWebApp')
         };
 
         //Grab all possible inventory locations
-        $scope.inventoryLocations = User.getStatics().locations;
+        $scope.inventoryLocations = _.filter(User.getStatics().dealerAddresses, function(addr) {
+          return addr.IsActive && addr.IsPhysicalInventory;
+        });
 
         // Users should only be able to change inventory location if they have more than one,
         // and the Floorplan's status is either "Approved" or "Pending"
@@ -186,8 +188,6 @@ angular.module('nextgearWebApp')
 
         // Update Inventory Location
         var tempAddress;
-
-        // on load, inventory location select menu should be hidden
         $scope.flooringInfo.showEditInventoryLocation = false;
 
         $scope.flooringInfo.cancelInventoryChanges = function() {
@@ -196,9 +196,12 @@ angular.module('nextgearWebApp')
         };
 
         $scope.flooringInfo.saveInventoryChanges = function() {
-          // check to see if current location was re-selected; if so, no api call
-
-          // make api call to save change
+          Floorplan.editInventoryAddress({
+            FloorplanId: $scope.flooringInfo.FloorplanId,
+            PhysicalInventoryAddressId: $scope.flooringInfo.inventoryAddress.AddressId
+          }).then(function() {}, function(/* error */) {
+            $scope.flooringInfo.inventoryAddress = tempAddress;
+          });
 
           $scope.flooringInfo.showEditInventoryLocation = false;
         };
