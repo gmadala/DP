@@ -245,7 +245,8 @@ span.btn-help {
   color: $btn-text;
   height: 30px;
   border: 1px solid $border;
-  margin: 5px 10px;
+  padding: 0 10px;
+  margin: 7px 10px;
 
   &:focus, &:hover, &:active {
     @include box-shadow(none);
