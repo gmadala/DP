@@ -212,7 +212,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });
@@ -360,7 +360,7 @@ describe('Model: User', function () {
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: resultData
       });
@@ -371,7 +371,7 @@ describe('Model: User', function () {
     });
 
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/Static');
+      httpBackend.expectGET('/Dealer/v1_1/Static');
       user.refreshStatics();
       expect(httpBackend.flush).not.toThrow();
     });
@@ -382,7 +382,7 @@ describe('Model: User', function () {
         expect(angular.isArray(result.productTypes)).toBe(true);
         expect(angular.isArray(result.colors)).toBe(true);
         expect(angular.isArray(result.states)).toBe(true);
-        expect(angular.isArray(result.locations)).toBe(true);
+        expect(angular.isArray(result.dealerAddresses)).toBe(true);
         expect(angular.isArray(result.bankAccounts)).toBe(true);
         expect(angular.isArray(result.linesOfCredit)).toBe(true);
         expect(angular.isArray(result.titleLocationOptions)).toBe(true);
@@ -403,7 +403,7 @@ describe('Model: User', function () {
         ProductType: [],
         Colors: [],
         States: [],
-        Locations: [],
+        DealerADdresses: [],
         BankAccounts: [],
         LinesOfCredit: [],
         TitleLocationOptions: [],
@@ -417,7 +417,7 @@ describe('Model: User', function () {
       expect(statics.productTypes).toBe(resultData.ProductType);
       expect(statics.colors).toBe(resultData.Colors);
       expect(statics.states).toBe(resultData.States);
-      expect(statics.locations).toBe(resultData.Locations);
+      expect(statics.locations).toBe(resultData.DealerAddresses);
       expect(statics.bankAccounts).toBe(resultData.BankAccounts);
       expect(statics.linesOfCredit).toBe(resultData.LinesOfCredit);
       expect(statics.titleLocationOptions).toBe(resultData.TitleLocationOptions);
@@ -546,7 +546,7 @@ describe('Model: User', function () {
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });
@@ -611,7 +611,7 @@ describe('Model: User', function () {
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });

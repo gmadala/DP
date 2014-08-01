@@ -17,6 +17,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
       userMock,
       titleReleasesMock,
       paymentsMock,
+      floorplanMock,
       initialize;
 
   beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, $q, $dialog, _api_) {
@@ -54,6 +55,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         ReleaseBalanceAvailable: 2000
       },
       FloorplanInfo: {
+        FloorplanId: '1234',
         SellerAddressLine1: '123 Main Street',
         SellerAddressLine2: null,
         SellerAddressCity: 'Rochester',
@@ -110,9 +112,17 @@ describe('Controller: VehicleDetailsCtrl', function () {
       },
       getStatics: function() {
         return {
-          locations: [
-            { locationLine1: 'foo' },
-            { locationLine1: 'bar' }
+          dealerAddresses: [
+            {
+              IsActive: true,
+              IsPhysicalInventory: true,
+              AddressId: '1234'
+            },
+            {
+              IsActive: true,
+              IsPhysicalInventory: true,
+              AddressId: '1234'
+            }
           ]
         };
       }
@@ -142,6 +152,10 @@ describe('Controller: VehicleDetailsCtrl', function () {
       requestExtension: angular.noop
     };
 
+    floorplanMock = {
+      editInventoryAddress: angular.noop
+    };
+
     dialog = $dialog;
 
     initialize = function() {
@@ -153,7 +167,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
         VehicleDetails: vehicleDetailsMock,
         TitleReleases: titleReleasesMock,
         User: userMock,
-        Payments: paymentsMock
+        Payments: paymentsMock,
+        Floorplan: floorplanMock
       });
     };
 
@@ -369,8 +384,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       it('should be false if there is only one inventory location', inject(function($rootScope) {
         spyOn(userMock, 'getStatics').andReturn({
-          locations: [
-            { AddressLine1: 'foo' }
+          dealerAddresses: [
+            { Line1: 'foo' }
           ]
         });
         detailsMock.FloorplanInfo.FloorplanStatusName = 'Approved';
@@ -419,10 +434,19 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     describe('saveInventoryChanges function', function() {
       it('should make the api call to update the inventory address and update the showEditInventoryLocation flag', function() {
-        // test that api call is made here.
+        spyOn(floorplanMock, 'editInventoryAddress').andReturn({
+          then: function(callback) {
+            callback();
+          }
+        });
+
         scope.flooringInfo.showInventorySelect();
+        scope.flooringInfo.inventoryAddress = { Line1: 'foo', AddressId: 'addr123' };
+
         expect(scope.flooringInfo.showEditInventoryLocation).toBe(true);
         scope.flooringInfo.saveInventoryChanges();
+
+        expect(floorplanMock.editInventoryAddress).toHaveBeenCalled();
         expect(scope.flooringInfo.showEditInventoryLocation).toBe(false);
       });
     });

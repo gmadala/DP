@@ -20,7 +20,7 @@ angular.module('nextgearWebApp')
     // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
     $scope.$watch(function() { return User.getStatics();}, function(statics) {
       $scope.options = statics;
-      $scope.options.locations = _.filter($scope.options.locations, 'IsActive');
+      $scope.options.locations = _.filter($scope.options.dealerAddresses, 'IsActive');
     });
 
     // pay seller vs. buyer options are derived separately

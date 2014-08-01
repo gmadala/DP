@@ -52,7 +52,7 @@
 
            <label for="inputInvLoc" class="input-title">Inventory Location</label>
            <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
-                   ng-options="(location | address) for location in options.locations"
+                   ng-options="(location | address:'oneLineSelect') for location in options.locations"
                    ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }" required>
              <option value="">Make Selection</option>
            </select>
