@@ -1,117 +1,102 @@
 <section class="row-fluid">
   <section class="span9">
     <div nxg-search
-             title="Title Release Search"
-             class="search-form"
-             prompt="Stock #, VIN, Make, Model, or Year"
-             metric-search="{{metric.CLICK_TITLE_RELEASE_SEARCH_BUTTON}}"
-             metric-clear-search="{{metric.CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK}}"
-             metric-filter-by-input="{{metric.CLICK_TITLE_RELEASE_FILTER_BY_INPUT}}"
-             metric-filter-from-date="{{metric.CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT}}"
-             metric-filter-to-date="{{metric.CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT}}"
-             filter-label="Filter by Title Release Status"
-             filter-options="filterOptions"
-             active-criteria="searchParams.proposedSearchCriteria"
-             show-date-range="true"
-             on-search="search()"
-             on-clear="resetSearch()"
-             filterable="true">
-        </div>
+         title="Title Release Search"
+         class="search-form"
+         prompt="Stock #, VIN, Make, Model, or Year"
+         metric-search="{{metric.CLICK_TITLE_RELEASE_SEARCH_BUTTON}}"
+         metric-clear-search="{{metric.CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK}}"
+         metric-filter-by-input="{{metric.CLICK_TITLE_RELEASE_FILTER_BY_INPUT}}"
+         metric-filter-from-date="{{metric.CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT}}"
+         metric-filter-to-date="{{metric.CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT}}"
+         filter-label="Filter by Status"
+         filter-options="filterOptions"
+         active-criteria="searchParams.proposedSearchCriteria"
+         show-date-range="true"
+         on-search="search()"
+         on-clear="resetSearch()"
+         filterable="true">
+    </div>
 
-    <div ng-switch="data.results.length > 0 || data.loading">
+    <div class="well" ng-switch="data.results.length > 0 || data.loading">
+      <h2 class="well-title">Title Release Requests</h2>
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
       </p>
+      <!-- <p class="notice-box"><b>Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</b></p> -->
+      <div ng-switch-when="true"
+           nxg-infinite-scroll="fetchNextResults()"
+           nxg-infinite-scroll-disabled="data.loading"
+           nxg-infinite-scroll-show-indicator="data.loading">
+        <table class="table table-striped table-primary">
+          <thead>
+            <th class="sortable"
+                ng-click="sortBy('FlooringDate')"
+                ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
+              Floored<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="sortBy('UnitMake')"
+                ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
+              Description<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="sortBy('PurchaseDate')"
+                ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
+              Purchased<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="sortBy('TitleReleaseProgramStatus')"
+                ng-class="{ sorted : sortField == 'TitleReleaseProgramStatus', desc : sortDescending }">
+              Release Status<span class="sortArrows"></span>
+            </th>
+            <th>Actions</th>
+          </thead>
+          <tr ng-repeat="item in data.results">
 
-      <section ng-switch-when="true"
-               nxg-infinite-scroll="fetchNextResults()"
-               nxg-infinite-scroll-disabled="data.loading"
-               nxg-infinite-scroll-show-indicator="data.loading">
-        <h3 class="boxed">Floor Plan</h3>
-        <p class="notice-box"><b>Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</b></p>
-        <ul class="unstyled title-list">
-          <li class="table-list-head">
-            <div class="cell title-more"></div>
-            <div class="cell title-desc sortable-container"
-                 ng-click="sortBy('UnitMake')"
-                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Description</span>
-            </div>
-            <div class="cell title-stock sortable-container"
-                 ng-click="sortBy('StockNumber')"
-                 ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Stock #</span>
-            </div>
-            <div class="cell title-status">
-              <span class="header-text">Status</span>
-            </div>
-            <div class="cell title-purchaseDate sortable-container"
-                 ng-click="sortBy('PurchaseDate')"
-                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Purchased</span>
-            </div>
-            <div class="cell title-floorDate sortable-container"
-                 ng-click="sortBy('FlooringDate')"
-                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Floored</span>
-            </div>
-            <div class="cell title-actions" >
-              <span class="header-text">Actions</span>
-            </div>
-          </li><!-- end .table-list-head -->
+            <td>
+              <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
+              <p class="lockup=minor">{{ item.DaysFloored }} days</p>
+            </td>
+            <td class="description">
+              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></a>
+              <div class="row-fluid">
+                <p class="lockup-minor caps vin">VIN: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+                <p class="lockup-minor caps stock">STK: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span></p>
+              </div>
+            </td>
+            <td class="date">
+              <p>{{item.UnitPurchaseDate | moment}}</p>
+            </td>
+            <td ng-switch="item.TitleReleaseProgramStatus">
+              <p ng-switch-when="OutstandingTitleReleaseProgramRelease">Title Released on {{item.TitleReleaseDate | moment}}</p>
+              <p ng-switch-when="EligibleForRelease">Eligible for Title Release</p>
+              <p ng-switch-when="NotEligibleForRelease">Not Eligible for Title Release</p>
+            </td>
+            <td class="actions" ng-switch="item.TitleReleaseProgramStatus">
+              <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease">Pay off this vehicle or return the title to remove from your limit.</h6>
+              <div ng-switch-when="EligibleForRelease">
+                <button type="button" class="btn btn-icon" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{selected: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
+                  <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">
+                    Title Requested<span nxg-icon="icon-minus" class="icon-small"></span>
+                  </span>
+                  <span ng-switch-default nxg-track="{{metric.CLICK_TITLE_RELEASE_REQUEST_TITLE}}">
+                    Request Title<span nxg-icon="icon-plus" class="icon-small"></span>
+                  </span>
+                </button>
+              </div>
+              <a ng-switch-when="NotEligibleForRelease" ng-click="titleReleaseUnavailable()" nxg-track="{{metric.CLICK_TITLE_RELEASE_UNAVAILABLE}}">
+                Title Release Unavailable
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-          <li class="table-list-row" ng-repeat="item in data.results">
-            <div class="main-info">
-              <div class="cell title-more">
-              </div>
-              <div class="cell title-desc">
-                <p nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></p>
-                <p><span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
-                <br/><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}">Temp Link to Vehicle Details</a>
-              </div>
-              <div class="cell title-stock">
-                <p nxg-highlight="item.StockNumber" highlight="item.data.query"></p>
-              </div>
-              <div class="cell title-status" ng-switch="item.TitleReleaseProgramStatus">
-                <div ng-switch-when="OutstandingTitleReleaseProgramRelease">
-                    <p>Title Released</p>
-                    <p>{{item.TitleReleaseDate | moment}}</p>
-                </div>
-                <p ng-switch-when="EligibleForRelease">Eligible</p>
-                <p ng-switch-when="NotEligibleForRelease">Not Eligible</p>
-              </div>
-               <div class="cell title-purchaseDate">
-                <p>{{item.UnitPurchaseDate | moment}}</p>
-              </div>
-              <div class="cell title-floorDate">
-                <p>{{item.FlooringDate | moment}}</p>
-                <p ng-show="item.DaysFloored > 0">
-                  Days Floored: {{ item.DaysFloored }}
-                </p>
-              </div>
-              <div class="cell title-actions" ng-switch="item.TitleReleaseProgramStatus">
-                <p ng-switch-when="OutstandingTitleReleaseProgramRelease">Pay off this vehicle or return the title to remove from your limit.</p>
-                <div ng-switch-when="EligibleForRelease">
-                  <button type="button" id="toggleRequest" class="btn btn-mini btn-block" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{requested: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
-                    <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">Title Requested</span>
-                    <span ng-switch-default nxg-track="{{metric.CLICK_TITLE_RELEASE_REQUEST_TITLE}}">Request Title</span>
-                  </button>
-                </div>
-                <div ng-switch-when="NotEligibleForRelease">
-                  <a ng-click="titleReleaseUnavailable()" nxg-track="{{metric.CLICK_TITLE_RELEASE_UNAVAILABLE}}">Title Release Unavailable</a>
-                </div>
-              </div>
-            </div><!-- end .main-info -->
-          </li><!-- end .table-list-row -->
-        </ul><!-- end .floor-list -->
-        <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
-          There are too many results to display, please refine your search further.
-        </p>
-      </section>
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+        There are too many results to display, please refine your search further.
+      </p>
     </div>
-  </section><!-- end .span12 -->
-  <section class="span3 well request-queue sticky" nxg-requests-summary eligibility="eligibility" nxg-sticky footer=".request-sum-footer"></section></section><!-- end .row-fluid -->
+  </section>
+  <section class="span3 well request-queue sticky" nxg-requests-summary eligibility="eligibility" nxg-sticky></section>
+</section>

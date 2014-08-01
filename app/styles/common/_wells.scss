@@ -16,6 +16,7 @@
 
     .btn {
       position: absolute;
+      height: 30px;
       top: 0;
       right: 10px;
     }
@@ -34,8 +35,38 @@
     margin: 5px 0 0;
   }
 
+// Queue lists
+.queue-list {
+  border-top: 1px solid $wellBorder;
+  border-bottom: 1px solid $wellBorder;
+  margin: 0 0 -1px 0;
+}
+  .queue-item {
+    padding: 10px;
+    background: #ffffff;
 
+    &:nth-child(2n) {
+      background: #ececec;
+    }
 
+    & + .queue-item {
+      border-top: 1px solid $wellBorder;
+    }
+
+    h6 {
+      text-transform: uppercase;
+      color: $highlight;
+      margin: 0;
+    }
+
+    p, h6 {
+      margin-bottom: 3px;
+    }
+
+    .icon-cancel svg {
+      fill: #666666;
+    }
+  }
 /*
 * This is used in the 'Payment Summary' Well
 * inherits the well class,

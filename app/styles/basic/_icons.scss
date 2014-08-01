@@ -3,8 +3,6 @@
 // override bootstrap
 [class^="icon-"], [class*=" icon-"] {
   background: transparent;
-  // background-repeat: no-repeat;
-  // background-size: 100% 100%;
   margin-top: 0;
 }
 .svg-icon {
@@ -102,6 +100,16 @@
 
   &:active .svg-icon svg, &:hover .svg-icon svg {
     fill: $highlight;
+  }
+}
+
+.btn-icon {
+  .svg-icon svg {
+    fill: #0067ac;
+  }
+
+  &.selected:active .svg-icon svg {
+    fill: $white;
   }
 }
 

@@ -147,6 +147,19 @@ a, a:visited {
         }
       }
     }
+
+    &.actions {
+      min-width: 150px;
+      max-width: 200px;
+    }
+
+    &.date {
+      min-width: 100px;
+    }
+
+    &.description {
+      min-width: 225px;
+    }
   }
 
   th:first-child, td:first-child {
