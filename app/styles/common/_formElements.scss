@@ -565,8 +565,8 @@ input[type="radio"] {
 }
 
 .checkbox-img, .radio-img {
-  // display: inline-block;
-  // position: absolute;
+  display: inline-block;
+  position: absolute;
 }
 
 .checkbox-img {
@@ -579,8 +579,6 @@ input[type="radio"] {
 }
 
 .radio-img {
-  display: inline-block;
-  position: absolute;
   top: 7px;
   right: 10px;
   height: $radioSize;
@@ -620,9 +618,10 @@ input[type="radio"] {
     right: 4px;
   }
 
-  // .checkbox-img {
-  //   top: 4px;
-  // }
+  .checkbox-img {
+    top: 10px;
+    margin-right: 5px;
+  }
 }
 
 .clear-search {

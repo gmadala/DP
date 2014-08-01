@@ -31,7 +31,6 @@
 
   label {
     font-size: $base-font-size;
-    color: $base-text-color;
     margin-bottom: 2px;
   }
 
@@ -50,6 +49,10 @@
   }
 
   .notice, .login-help {
+    color: $white;
+  }
+
+  .login-help h2, .login-help p {
     color: $white;
   }
 
