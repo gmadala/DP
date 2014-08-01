@@ -271,6 +271,10 @@ span.btn-help {
 
   th &, td & {
     margin: 0;
+
+    &.btn-square {
+      margin: 0 auto;
+    }
   }
 }
 
@@ -381,6 +385,22 @@ span.btn-help {
 
   &.cta-full {
     padding: 10px 5px;
+  }
+}
+
+/*
+ * SQUARE BUTTON
+ * For buttons with no text, just icon.
+ */
+.btn-square {
+  @extend .btn;
+  display: block;
+  width: 40px;
+  height: 40px;
+
+  .svg-icon {
+    fill: $primary;
+    margin: 10px 0;
   }
 }
 
