@@ -85,6 +85,7 @@ angular.module('nextgearWebApp')
           } else {
             Payments.removePaymentFromQueue(p.FloorplanId);
           }
+          console.log(asPayoff);
         };
 
         $scope.cancelScheduledPayment = function () {
