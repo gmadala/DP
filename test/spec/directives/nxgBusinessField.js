@@ -46,7 +46,9 @@ describe('Directive: nxgBusinessField', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope, $compile) {
+  beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
+    $httpBackend.whenGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>')
+
     scope = $rootScope.$new();
     scope.model = {
       requireMe: true,

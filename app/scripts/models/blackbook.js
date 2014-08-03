@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        dialogClass: 'modal search-modal',
+        dialogClass: 'modal modal-large',
         templateUrl: 'views/modals/multipleVehicles.html',
         controller: 'MultipleVehiclesCtrl',
         resolve: {

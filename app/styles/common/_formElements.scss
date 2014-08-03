@@ -395,6 +395,7 @@ input[type="color"] {
   @include border-radius($borderRadius);
   position: relative;
   overflow: hidden;
+  width: 206px;
   border: 1px solid $highlight;
   margin: 5px 0;
 
@@ -642,9 +643,10 @@ input[type="radio"] {
  * </div>
  */
 .styled-input {
+  @extend .clearfix;
   position: relative;
   width: 100%;
-  margin: 5px 0;
+  margin: 5px 0 10px;
 
   input, input[type="text"] {
     width: 85%;

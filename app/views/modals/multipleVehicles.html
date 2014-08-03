@@ -1,38 +1,34 @@
-<div class="modal-header">
+<h3 class="modal-header">
   Multiple Vehicles Found
-</div>
+</h3>
 
-<div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
+<!-- <div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
   <span class="glyphicon glyphicon-remove"></span>
-</div>
+</div> -->
 
 <div class="modal-body" nxg-autofocus>
   <p>Multiple vehicles were found in our system matching the VIN entered.<br />
 Please select the intended vehicle from the list below.</p>
 
-  <div class="search-results nxg-multiple-vehicles" nxg-autofocus>
-    <table>
+  <!-- <div class="search-results nxg-multiple-vehicles" nxg-autofocus> -->
+    <table class="table table-striped table-secondary">
       <thead>
-        <tr>
-          <th>Make</th>
-          <th>Model</th>
-          <th>Style</th>
-          <th>Year</th>
-          <th>&nbsp;</th>
-        </tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Style</th>
+        <th>Year</th>
+        <th>&nbsp;</th>
       </thead>
-      <tbody>
-        <tr ng-repeat="match in matches">
-          <td>{{ match.Make }}</td>
-          <td>{{ match.Model }}</td>
-          <td>{{ match.Style }}</td>
-          <td>{{ match.Year }}</td>
-          <td><button href class="btn btn-mini pull-right" ng-click="select(match)">Select</button></td>
-        </tr>
-      </tbody>
+      <tr ng-repeat="match in matches">
+        <td><p>{{ match.Make }}</p></td>
+        <td><p>{{ match.Model }}</p></td>
+        <td><p>{{ match.Style }}</p></td>
+        <td><p>{{ match.Year }}</p></td>
+        <td><button href class="btn" ng-click="select(match)">Select</button></td>
+      </tr>
     </table>
-  </div>
+  <!-- </div> -->
 </div>
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary">Close</button>
+  <button ng-click="close()" class="btn-cta cta-secondary">Close</button>
 </div>

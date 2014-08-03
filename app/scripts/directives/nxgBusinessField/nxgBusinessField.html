@@ -1,17 +1,19 @@
-<span class="nxg-business-field">
-  <input type="text" id="{{ inputId }}"
-         ng-model="query"
-         ng-disabled="disabled"
-         ng-change="clearSelected()"
-         ng-minlength="3"
-         nxg-requires="!isRequired() || selection"
-         nxg-blur="handleExit($event)"
-         ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
-
-  <button  href class="btn btn-secondary nxg-search-btn" ng-click="disabled || openBusinessSearch()"
+<div class="nxg-business-field form-row">
+  <div class="styled-input with-btn">
+    <input type="text" id="{{ inputId }}"
+           ng-model="query"
+           ng-disabled="disabled"
+           ng-change="clearSelected()"
+           ng-minlength="3"
+           nxg-requires="!isRequired() || selection"
+           nxg-blur="handleExit($event)"
+           ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
+    <button href class="btn btn-input" ng-click="disabled || openBusinessSearch()"
      ng-class="{disabled: disabled}" type="button" nxg-track="{{metricByMode()}}">
-    <i class="glyphicon glyphicon-search"></i>
-  </button>
+      <span nxg-icon="icon-search"></span>
+    </button>
+  </div>
+
   <div ng-switch on="mode">
     <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires">
       Please look up a Buyer.
@@ -23,5 +25,5 @@
   <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength">
     Please enter at least 3 characters.
   </label>
-</span>
+</div>
 
