@@ -113,36 +113,39 @@
           </thead><!-- end .table-list-head -->
 
           <tr ng-repeat="pay in scheduledPayments.results">
-            <div class="main-info">
+
               <td>
-                <p> {{ pay.scheduledDate | moment }} </p>
-                <p><span class="sch-label">Scheduled By: </span> {{ pay.scheduledBy }} </p>
+                <p class="lockup-major"> {{ pay.scheduledDate | moment }} </p>
+                <p>Scheduled By:</p>
+                <p>{{ pay.scheduledBy }}</p>
+              </td>
+
+              <td class="description">
+                <a class="lockup-major" href="#/vehicledetails?stockNumber={{ pay.stockNumber }}"> {{ pay.description }} </a>
+                <div class="row-fluid">
+                  <p class="lockup-minor caps vin">VIN: <span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span></p>
+                  <p class="lockup-minor caps stock">STK: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span></p>
+                </div>
               </td>
 
               <td>
-                <p> {{ pay.description }} </p>
-                <p><span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span><br/>
-                  Stock #: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span>
-                  <br/><a href="#/vehicledetails?stockNumber={{ pay.stockNumber }}">Temp Link to Vehicle Details</a>
-                </p>
+                <p class="lockup-major">{{ pay.flooringDate | moment }}</p>
+                <p class="lockup-minor">{{ pay.daysOnFloorplan }} Days</p>
               </td>
 
               <td>
-                <p>{{ pay.flooringDate | moment }}</p>
-                <p>Days Floored: {{ pay.daysOnFloorplan }}</p>
-              </td>
-
-              <td>
-                <p><span class="sch-label"> {{ pay.status }} </span><br/>
-                  <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
+                <p>
+                  <span class="sch-label"> {{ pay.status }} </span><br/>
+                  <span ng-show="pay.statusDate">as of:</span>
                    {{ pay.statusDate | moment }}
                 </p>
-                <a class="receipt-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
+                <a class="receipt-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">View Receipt</a>
               </td>
 
               <td>
-                <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
-                  {{ pay.paymentAmount | currency }} </p>
+                <p class="lockup-major">{{ pay.paymentAmount | currency }} </p>
+                <p class="lockup-minor">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </p>
+
 
                 <a ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()" ng-click="scheduledPayments.payOff(pay)">
                     <span>Payoff Now</span>
@@ -152,7 +155,6 @@
                     <span>Cancel</span>
                 </a>
               </td>
-            </div><!-- end .main-info -->
           </tr>
         </table>
 
