@@ -19,54 +19,60 @@
       show-location-filter="true">
     </div>
 
-    <h3 class="boxed">Scheduled Account Fees</h3>
+    <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
+    <h2 class="well-title">Scheduled Account Fees</h2>
 
-    <div class="sch-fees" ng-switch="fees.results.length > 0 || fees.loading">
       <p class="notice-box" ng-switch-when="false">
         There are no fees currently scheduled with this account.
       </p>
 
-      <ul class="unstyled" ng-switch-when="true">
-        <li class="table-list-head">
-          <div class="cell schFee-date"
+      <table class="table table-striped table-primary" ng-switch-when="true">
+        <thead>
+          <th class="sortable"
                ng-click="sortFeesBy('schFeeDate')"
                ng-class="{ sorted : sortField.fee == 'schFeeDate', desc : sortDescending.fee }">
             Scheduled On
-          </div>
-          <div class="cell schFee-desc">
-            Description</div>
-          <div class="cell schFee-type sortable"
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable">
+            Description
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable"
                ng-click="sortFeesBy('schFeeType')"
                ng-class="{ sorted : sortField.fee == 'schFeeType', desc : sortDescending.fee }">
-            Fee Type</div>
-          <div class="cell schFee-amt sortable"
+            Fee Type
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable"
                ng-click="sortFeesBy('schFeeAmt')"
                ng-class="{ sorted : sortField.fee == 'schFeeAmt', desc : sortDescending.fee }">
-            Fee Amount</div>
-        </li>
+            Fee Amount
+            <span class="sortArrows"></span>
+          </th>
+        </thead>
 
-        <li class="table-list-row" ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
-            <div class="cell schFee-date"><p>{{ fee.ScheduledDate | moment }}</p></div>
-            <div class="cell schFee-desc"><p>{{ fee.Description }}</p></div>
-            <div class="cell schFee-type"><p>{{ fee.FeeType }}</p></div>
-            <div class="cell schFee-amt"><p>{{ fee.Balance | currency }}</p>
+        <tr ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
+            <td><p>{{ fee.ScheduledDate | moment }}</p></td>
+            <td><h5>{{ fee.Description }}</h5></td>
+            <td><p>{{ fee.FeeType }}</p></td>
+            <td><p>{{ fee.Balance | currency }}</p>
               <a ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
                   <span>Cancel</span>
               </a>
-            </div>
-        </li>
-      </ul>
+            </td>
+        </tr>
+      </table>
     </div><!-- end .sch-fees -->
 
-
-    <div class="schPayments-list" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
-      <h3 class="boxed">Scheduled Vehicle Payments</h3>
+    <div class="well" ng-switch="scheduledPayments.results.length > 0 || scheduledPayments.loading">
+      <h2 class="well-title">Scheduled Vehicle Payments</h2>
 
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="scheduledPayments.resetSearch()" title="New Search">try a new search</a>.
       </p>
 
-      <section ng-switch-when="true"
+      <div ng-switch-when="true"
         nxg-infinite-scroll="scheduledPayments.loadMoreData()"
         nxg-infinite-scroll-disabled="scheduledPayments.loading"
         nxg-infinite-scroll-show-indicator="scheduledPayments.loading">
@@ -76,64 +82,65 @@
           Note: No payment may be scheduled on an overdue loan, or a loan due today.
         </p>
 
-        <ul class="unstyled">
-          <li class="table-list-head">
-            <div class="cell sch-more"></div>
-            <div class="cell sch-schDate sortable"
+        <table class="table table-striped table-primary">
+          <thead>
+            <th class="sortable"
                  ng-click="sortPaymentsBy('ScheduledForDate')"
                  ng-class="{ sorted : sortField.payment == 'ScheduledForDate', desc : sortDescending.payment }">
               Scheduled On
-            </div>
-            <div class="cell sch-desc">
+              <span class="sortArrows"></span>
+            </th>
+            <th class="sortable">
               Description
-            </div>
-            <div class="cell sch-floorDate sortable"
+              <span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
                  ng-click="sortPaymentsBy('flooringDate')"
                  ng-class="{ sorted : sortField.payment == 'flooringDate', desc : sortDescending.payment }">
               Floored
-            </div>
-            <div class="cell sch-status">
+              <span class="sortArrows"></span>
+            </th>
+            <th class="sortable">
               Status
-            </div>
-            <div class="cell sch-amount sortable"
+              <span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
                  ng-click="sortPaymentsBy('paymentAmount')"
                  ng-class="{ sorted : sortField.payment == 'paymentAmount', desc : sortDescending.payment }">
               Amount
-            </div>
-          </li><!-- end .table-list-head -->
+              <span class="sortArrows"></span>
+            </th>
+          </thead><!-- end .table-list-head -->
 
-          <li class="table-list-row" ng-repeat="pay in scheduledPayments.results">
+          <tr ng-repeat="pay in scheduledPayments.results">
             <div class="main-info">
-              <div class="cell sch-more">
-              </div>
-
-              <div class="cell sch-schDate">
+              <td>
                 <p> {{ pay.scheduledDate | moment }} </p>
                 <p><span class="sch-label">Scheduled By: </span> {{ pay.scheduledBy }} </p>
-              </div>
+              </td>
 
-              <div class="cell sch-desc">
+              <td>
                 <p> {{ pay.description }} </p>
                 <p><span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span><br/>
                   Stock #: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span>
                   <br/><a href="#/vehicledetails?stockNumber={{ pay.stockNumber }}">Temp Link to Vehicle Details</a>
                 </p>
-              </div>
+              </td>
 
-              <div class="cell sch-floorDate">
+              <td>
                 <p>{{ pay.flooringDate | moment }}</p>
                 <p>Days Floored: {{ pay.daysOnFloorplan }}</p>
-              </div>
+              </td>
 
-              <div class="cell sch-status">
+              <td>
                 <p><span class="sch-label"> {{ pay.status }} </span><br/>
                   <span class="sch-sub-label" ng-show="pay.statusDate">As Of:</span>
                    {{ pay.statusDate | moment }}
                 </p>
                 <a class="receipt-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">Receipt</a>
-              </div>
+              </td>
 
-              <div class="cell sch-amount">
+              <td>
                 <p><span class="sch-label">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </span><br/>
                   {{ pay.paymentAmount | currency }} </p>
 
@@ -144,15 +151,15 @@
                 <a ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">
                     <span>Cancel</span>
                 </a>
-              </div>
+              </td>
             </div><!-- end .main-info -->
-          </li>
-        </ul>
+          </tr>
+        </table>
 
         <p class="text-error notice-box" ng-show="hitInfiniteScrollMax">
           There are too many results to display, please refine your search further.
         </p>
-      </section>
+      </div>
     </div>
   </section>
 
