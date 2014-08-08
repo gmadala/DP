@@ -412,6 +412,10 @@ input[type="color"] {
     border-top: 10px solid $highlight;
   }
 
+  &.auto{
+    width: auto;
+  }
+
   &.space {
     margin: 8px;
   }
