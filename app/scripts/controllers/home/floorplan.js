@@ -5,15 +5,14 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, User, metric, $timeout, segmentio) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio) {
 
     $scope.metric = metric; // make metric names available to templates
     segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
 
     $scope.isCollapsed = true;
 
-    var isDealer = User.isDealer(),
-        lastPromise;
+    var isDealer = User.isDealer();
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
@@ -78,86 +77,13 @@ angular.module('nextgearWebApp')
       ];
     }
 
-    $scope.data = {
-      results: [],
-      loading: false,
-      paginator: null,
-      hitInfiniteScrollMax: false
-    };
+    // FloorplanUtil handles all search/fetch/reset functionality.
+    $scope.floorplanData = new FloorplanUtil('FlooringDate', $scope.filtersObj);
 
-    $scope.search = function() {
-      // search means "start from the beginning with current criteria"
-      $scope.data.paginator = null;
-      $scope.data.hitInfiniteScrollMax = false;
-      $scope.data.results.length = 0;
-
-      // commit the proposed search criteria
-      $scope.searchCriteria = angular.copy($scope.proposedSearchCriteria);
-
-      $scope.fetchNextResults();
-    };
-
-    $scope.sortField = 'FlooringDate';
-
-    $scope.sortBy = function (fieldName) {
-      if ($scope.sortField === fieldName) {
-        // already sorting by this field, just flip the direction
-        $scope.sortDescending = !$scope.sortDescending;
-      } else {
-        $scope.sortField = fieldName;
-        $scope.sortDescending = false;
-      }
-
-      $scope.proposedSearchCriteria.sortField = $scope.sortField;
-      $scope.proposedSearchCriteria.sortDesc = $scope.sortDescending;
-
-      $scope.search();
-    };
-
-    $scope.fetchNextResults = function () {
-      var paginator = $scope.data.paginator,
-          promise;
-
-      if (paginator && !paginator.hasMore()) {
-        if (paginator.hitMaximumLimit()) {
-          $scope.data.hitInfiniteScrollMax = true;
-        }
-        return;
-      }
-
-      // get the next applicable batch of results
-      $scope.data.loading = true;
-      promise = lastPromise = Floorplan.search($scope.searchCriteria, paginator);
-      promise.then(
-        function (result) {
-          if (promise !== lastPromise) { return; }
-          $scope.data.loading = false;
-          $scope.data.paginator = result.$paginator;
-          // fast concatenation of results into existing array
-          Array.prototype.push.apply($scope.data.results, result.Floorplans);
-        }, function (/*error*/) {
-          if (promise !== lastPromise) { return; }
-          $scope.data.loading = false;
-        }
-      );
-
-    };
-
-    $scope.resetSearch = function (initialFilter) {
-      $scope.proposedSearchCriteria = {
-        query: null,
-        startDate: null,
-        endDate: null,
-        filter: initialFilter || Floorplan.filterValues.ALL,
-        inventoryLocation: undefined
-      };
-      $scope.search();
-    };
-
-    $scope.resetSearch($stateParams.filter);
+    // initial search
+    $scope.floorplanData.resetSearch($stateParams.filter);
 
     $scope.sellerTimeouts = {};
-
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
       /*jshint camelcase: false */
       var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
