@@ -9,7 +9,6 @@ angular.module('nextgearWebApp')
 
     $scope.metric = metric; // make metric names available to templates
     segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
-
     $scope.isCollapsed = true;
 
     var isDealer = User.isDealer();
@@ -78,7 +77,7 @@ angular.module('nextgearWebApp')
     }
 
     // FloorplanUtil handles all search/fetch/reset functionality.
-    $scope.floorplanData = new FloorplanUtil('FlooringDate', $scope.filtersObj);
+    $scope.floorplanData = new FloorplanUtil('FlooringDate');
 
     // initial search
     $scope.floorplanData.resetSearch($stateParams.filter);

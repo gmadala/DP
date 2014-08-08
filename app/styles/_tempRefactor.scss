@@ -285,6 +285,10 @@
   height: 260px;
 }
 
+.infinite {
+  overflow-y: scroll;
+}
+
 .search {
   padding: 20px 10px;
 
@@ -330,8 +334,6 @@ hr {
   border-bottom: 0;
   margin-bottom: 20px;
 }
-
-
 
 /*
  * TOGGLE PAYMENTS BUTTONS

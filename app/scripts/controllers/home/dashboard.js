@@ -1,12 +1,19 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, segmentio, metric, moment, $filter) {
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter) {
 
     segmentio.track(metric.VIEW_MAIN_DASHBOARD);
 
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
+
+    // FloorplanUtil handles all search/fetch/reset functionality.
+    $scope.floorplanData = new FloorplanUtil('FlooringDate');
+    // initial search
+    $scope.floorplanData.resetSearch();
+
+    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
