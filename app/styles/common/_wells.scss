@@ -57,31 +57,27 @@
       border-top: 1px solid $wellBorder;
     }
 
-    h6 {
-      text-transform: uppercase;
-      color: $highlight;
-      margin: 0;
-    }
-
     p, h6 {
       margin-bottom: 3px;
+    }
+
+    .row-fluid {
+      margin-top: 10px;
+
+      .span6:last-child {
+        text-align: right;
+      }
     }
 
     .icon-cancel svg {
       fill: #666666;
     }
+
+    .lockup-major {
+      @extend .highlight;
+    }
   }
-/*
-* This is used in the 'Payment Summary' Well
-* inherits the well class,
-* removes excess margin at the bottom of wells,
-* sets the default background to white.
-*/
-// .well-default {
-//   @extend .well;
-//   background-color: #fff;
-//   margin-bottom: 0;
-// }
+
 
 .well-item {
   @extend .clearfix;

@@ -14,11 +14,8 @@ angular.module('nextgearWebApp')
   .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric) {
     //not showing up in html even though it's on rootScope. Adding here.
     $scope.metric = metric;
-
     $scope.navigate = $state.transitionTo;
-
     $scope.paymentQueue = Payments.getPaymentQueue();
-
     $scope.paymentInProgress = Payments.paymentInProgress;
 
     $scope.removeFee = function (fee) {
@@ -27,6 +24,21 @@ angular.module('nextgearWebApp')
 
     $scope.removePayment = function (payment) {
       Payments.removePaymentFromQueue(payment.floorplanId);
+    };
+
+    $scope.getCount = function () {
+      var count = 0,
+          queue = $scope.paymentQueue;
+
+      angular.forEach(queue.fees, function() {
+        count++;
+      });
+
+      angular.forEach(queue.payments, function() {
+        count++;
+      });
+
+      return count;
     };
 
     $scope.getSubtotal = function () {

@@ -21,6 +21,7 @@ h3 {
   font-weight: normal;
   line-height: $baseLineHeight;
   color: $highlight;
+  margin: 0;
 }
 
 h4 {
@@ -137,6 +138,7 @@ a, a:visited {
     }
 
     &.split {
+      @extend .clearfix;
       padding: 0;
 
       .split-cell {

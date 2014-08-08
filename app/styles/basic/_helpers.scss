@@ -69,8 +69,7 @@
 }
 
 .highlight {
-  @extend %heavy;
-  color: $brand-text;
+  color: $highlight;
 }
 
 .highlight-dark {

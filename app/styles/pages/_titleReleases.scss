@@ -1,30 +1,30 @@
 // TITLE RELEASES
 
-.cell {
-  &.title-more { width: 4%; }
-  &.title-desc { width: 22%; }
-  &.title-stock { width: 12%; }
-  &.title-status { width: 11%; }
-  &.title-purchaseDate {
-    width: 14%;
-    padding-right: 3px;
-  }
-  &.title-floorDate { width: 15%; }
-  &.title-actions {
-    width: 22%;
-    a {
-      line-height: 1.5;
-    }
-  }
-}
+// .cell {
+//   &.title-more { width: 4%; }
+//   &.title-desc { width: 22%; }
+//   &.title-stock { width: 12%; }
+//   &.title-status { width: 11%; }
+//   &.title-purchaseDate {
+//     width: 14%;
+//     padding-right: 3px;
+//   }
+//   &.title-floorDate { width: 15%; }
+//   &.title-actions {
+//     width: 22%;
+//     a {
+//       line-height: 1.5;
+//     }
+//   }
+// }
 
-.title-list {
-  margin: 0;
-}
+// .title-list {
+//   margin: 0;
+// }
 
-.table-list-row .cell.title-actions {
-  padding: 8px 10px;
-}
+// .table-list-row .cell.title-actions {
+//   padding: 8px 10px;
+// }
 
 .title-checkout-list {
   .remove {
@@ -47,8 +47,6 @@
   }
 
   .nxg-alt-addr {
-    clear: none;
-
     select {
       width: 70%;
     }
@@ -89,18 +87,18 @@
 }
 
 // REQUESTS SUMMARY
-.request-summary {
-  .submit button {
-    @extend %full-width;
-  }
-}
+// .request-summary {
+//   .submit button {
+//     @extend %full-width;
+//   }
+// }
 
-.emphasis {
-  @extend %heavy;
-  color: darken($base-text-color, 10%);
-  font-size: 1.3em;
-  margin: 0 2px;
-}
+// .emphasis {
+//   @extend %heavy;
+//   color: darken($base-text-color, 10%);
+//   font-size: 1.3em;
+//   margin: 0 2px;
+// }
 
 // CONFIRMATION MODAL
 .confirm-title-request {
