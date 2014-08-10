@@ -340,5 +340,18 @@ hr {
     background-color: #4d4e4e;
     color: $white;
   }
+
 }
 
+.btn-switch {
+  @extend .btn-cta;
+  &:active {
+    background-color: inherit;
+  }
+  &:hover {
+    background-color: inherit;
+  }
+  &:focus {
+    background-color: inherit;
+  }
+}
