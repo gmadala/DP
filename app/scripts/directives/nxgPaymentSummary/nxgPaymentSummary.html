@@ -30,7 +30,7 @@
 
     <tr ng-repeat="payment in paymentQueue.payments">
         <td>
-            <button class="paired-media svg-icon btn-unstyle btn-x"
+            <button class="paired-media svg-icon btn-x"
             nxg-icon="icon-cancel"
             ng-click="removePayment(payment)"
             ng-disabled="paymentInProgress()"
@@ -52,7 +52,7 @@
             ng-click="navigate('home.checkout')"
             nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
       <span class="ie-text">Checkout </span>
-        <span class="value"> ( {{ getSubtotal() | currency }} ) </span>
-       <span class="paired-media svg-icon" nxg-icon="icon-cart"> </span>
+        <span class="value"> ( {{getSubtotal() | currency}} ) </span>
+      <span class="paired-media svg-icon" nxg-icon="icon-cart"> </span>
     </button>
 </div>
