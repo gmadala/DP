@@ -322,7 +322,7 @@ hr {
  */
 
 #togglePayoff, #togglePayoff2,
-#togglePayment, #toggleFee {
+#togglePayment, #toggleFee, #togglePayment2 {
    position: relative;
    color: #1b679d;
 
@@ -353,5 +353,15 @@ hr {
   }
   &:focus {
     background-color: inherit;
+  }
+}
+
+.scheduled-payoff, .scheduled-payment {
+  padding-right: 15px;
+  p {
+    text-align: right;
+  }
+  .btn-link {
+    float: right;
   }
 }

@@ -11,21 +11,24 @@
           tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    <!--<span>{{!onQueue && 'Add' || 'Remove'}}</span>-->
       <span>{{ item.Balance | currency }}</span>
+      <span ng-show="!onQueue" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
+      <span ng-show="onQueue" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
   </button>
 
-  <button ng-switch-when="fee-scheduledFee"
-          type="button"
-          id="cancelScheduledFee"
-          class="btn-unstyle btn-link"
-          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE}}"
-          ng-disabled="paymentInProgress()"
-          ng-click="cancelScheduledFee()">
-    <span>Unschedule</span>
-  </button>
+  <div ng-switch-when="fee-scheduledFee">
+    <p class="lockup-major">Scheduled</p>
+    <p class="lockup-minor">for {{item.ScheduledDate}}</p>
+    <button type="button"
+            id="cancelScheduledFee"
+            class="btn-unstyle btn-link"
+            nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE}}"
+            ng-disabled="paymentInProgress()"
+            ng-click="cancelScheduledFee()">
+      <span>Unschedule</span>
+    </button>
+  </div>
 
-  <!-- REMOVING: ng-disabled="onQueue == 'payoff' || paymentInProgress()" -->
   <button ng-switch-when="payment"
           type="button"
           id="togglePayment"
@@ -44,31 +47,39 @@
         </span>
   </button>
 
-
-  <button ng-switch-when="payment-scheduledPayment"
-          type="button"
-          id="cancelScheduledPayment"
-          class="btn-unstyle btn-link"
-          ng-disabled="paymentInProgress()"
-          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
-          ng-click="cancelScheduledPayment()">
+  <div ng-switch-when="payment-scheduledPayment" class="scheduled-payment">
     <p class="lockup-major">Scheduled</p>
     <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
-    <span>Unschedule</span>
-    <p>_payment-scheduledPayment</p>
-  </button>
+    <button type="button"
+            id="cancelScheduledPayment"
+            class="btn-unstyle btn-link"
+            ng-disabled="paymentInProgress()"
+            nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
+            ng-click="cancelScheduledPayment()">
+      <span>Unschedule</span>
+    </button>
+  </div>
 
   <button ng-switch-when="payment-scheduledPayoff"
           type="button"
-          id="fakeTogglePayment"
-          class="btn-unstyle btn-link"
-          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF}}"
-          disabled>
-    <span>Add</span>
-    <p>_payment-scheduledPayoff</p>
+          id="togglePayoff2"
+          class="btn-switch"
+          nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
+          ng-click="togglePaymentInQueue(true)"
+          tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip-placement="right"
+          tooltip-popup-delay="700">
+    <span>{{ item.AmountDue | currency }}</span>
+    <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
+    <span ng-switch="onQueue">
+        <span ng-switch-when="payment" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
+        <span ng-switch-when="payoff" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
+      </span>
+    <!-- TODO: confirm the functionality of 'Remove' with @Ryan
+      <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
+    -->
   </button>
 
-  <!-- REMOVING:  ng-disabled="onQueue == 'payment' || paymentInProgress()" -->
   <button ng-switch-when="payoff"
           type="button"
           id="togglePayoff"
@@ -89,8 +100,8 @@
 
   <button ng-switch-when="payoff-scheduledPayment"
           type="button"
-          id="togglePayoff2"
-          class="btn-unstyle btn-link"
+          id="togglePayment2"
+          class="btn-switch"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
           ng-class="{'in-queue': onQueue == 'payoff'}"
           ng-disabled="onQueue == 'payment' || paymentInProgress()"
@@ -98,18 +109,27 @@
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
-    <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
-    <p>_payoff-scheduledPayment</p>
+    <span>{{ item.CurrentPayoff | currency }}</span>
+    <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
+    <span ng-switch="onQueue">
+        <span ng-switch-when="payment" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
+        <span ng-switch-when="payoff" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
+      </span>
+      <!-- TODO: confirm the functionality of 'Remove' with @Ryan
+        <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
+      -->
   </button>
 
-  <button ng-switch-when="payoff-scheduledPayoff"
-          type="button"
-          id="cancelScheduledPayoff"
-          class="btn-unstyle btn-link"
-          ng-disabled="paymentInProgress()"
-          nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
-          ng-click="cancelScheduledPayment()">
-    <span>Unschedule</span>
-    <p>_payoff-scheduledPayoff</p>
-  </button>
+  <div ng-switch-when="payoff-scheduledPayoff" class="scheduled-payoff">
+    <p class="lockup-major">Scheduled</p>
+    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
+    <button type="button"
+            id="cancelScheduledPayoff"
+            class="btn-unstyle btn-link"
+            ng-disabled="paymentInProgress()"
+            nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
+            ng-click="cancelScheduledPayment()">
+      <span>Unschedule</span>
+    </button>
+  </div>
 </div>
