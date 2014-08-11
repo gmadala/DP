@@ -1,85 +1,103 @@
 <div nxg-search
-     title="Floor Plan Search"
+     title="Find a Floor Plan"
      class="search-form"
      prompt="VIN, Make, Model, or Year"
      filter-label="Filter by Status"
      filter-options="filterOptions"
-     active-criteria="proposedSearchCriteria"
-     on-search="search()"
-     on-clear="resetSearch()"
-     help-text="Date range based on floorplan date OR disbursement date."
+     active-criteria="floorplanData.searchCriteria"
+     on-search="floorplanData.search(floorplanData.searchCriteria)"
+     on-clear="floorplanData.resetSearch(filterOptions)"
+     help-text="Date range based on Date Floored OR Disbursement Date."
      filterable="true">
 </div>
 
-<div ng-switch="data.results.length > 0 || data.loading">
+<div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
+  <h2 class="well-title">Floor Plan</h2>
   <p class="no-results" ng-switch-when="false">
     Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
   </p>
-  <section class="selfloor-list"
-           ng-switch-when="true"
-           nxg-infinite-scroll="fetchNextResults()"
-           nxg-infinite-scroll-disabled="data.loading"
-           nxg-infinite-scroll-show-indicator="data.loading">
-    <ul class="unstyled">
-      <li class="table-list-head">
-        <div class="cell selfloor-descr sortable"
-                 ng-click="sortBy('UnitMake')"
-                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">Description</div>
-        <div class="cell selfloor-stat">Status</div>
-        <div class="cell selfloor-dates sortable"
-                 ng-click="sortBy('FlooringDate')"
-                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">Dates</div>
-        <div class="cell selfloor-purch">Purchase Amount</div>
-        <div class="cell selfloor-buy sortable"
-                 ng-click="sortBy('BuyerBusinessName')"
-                 ng-class="{ sorted : sortField == 'BuyerBusinessName', desc : sortDescending }">Buyer</div>
-        <div class="cell selfloor-ticket-num">Ticket #</div>
-        <div class="cell selfloor-title-loc">Title Location</div>
-        <div class="cell selfloor-title">Title</div>
-      </li><!-- end .table-list-head -->
+  <section ng-switch-when="true"
+           nxg-infinite-scroll="floorplanData.fetchNextResults()"
+           nxg-infinite-scroll-disabled="floorplanData.loading"
+           nxg-infinite-scroll-show-indicator="floorplanData.loading">
 
-      <li class="table-list-row" ng-repeat="item in data.results">
-        <div class="cell selfloor-descr">
-          <p>{{ getVehicleDescription(item) }}</p>
-          <p nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></p>
-        </div>
-        <div class="cell selfloor-stat">{{ item.FloorplanStatusName }}</div>
-        <div class="cell selfloor-dates">
-          <p>
-            <span class="sch-sub-label">Floored:</span><br/>{{ (item.FlooringDate | moment) || 'n/a' }}
-          </p>
-          <p>
-            <span class="sch-sub-label">Disbursement: </span><br/>{{ (item.DisbursementDate | moment) || 'n/a' }}
-          </p>
-        </div>
-        <div class="cell selfloor-purch">{{ item.PurchaseAmount | currency }}</div>
-        <div class="cell selfloor-buy">{{ item.BuyerName }}</div>
-        <div class="cell selfloor-ticket-num">{{ item.ConsignerTicketNumber }}</div>
-        <div class="cell selfloor-title-loc">{{ item.TitleLocation }}</div>
-        <div class="cell selfloor-title">
-          <p>
+    <table class="table table-striped table-primary">
+      <thead>
+        <th class="sortable"
+            ng-click="floorplanData.sortBy('FlooringDate')"
+            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
+            Dates <span class="sortArrows"></span>
+        </th>
+        <th class="sortable"
+            ng-click="floorplanData.sortBy('UnitMake')"
+            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
+          Description <span class="sortArrows"></span>
+        </th>
+        <th>Status</th>
+        <th>Purchased For</th>
+        <th class="sortable"
+            ng-click="floorplanData.sortBy('BuyerBusinessName')"
+            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'BuyerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
+          Buyer<span class="sortArrows"></span>
+        </th>
+        <th>Ticket No.</th>
+        <th>Title Location</th>
+        <th>Title</th>
+      </thead>
 
-            <a class="view-title-link" ng-show="item.TitleImageAvailable" ng-href="{{ item.$titleURL }}"
-               nxg-track="{{ metric.VIEW_TITLE }}"
-               target="_blank">
-              View
-            </a>
-            <div class="seller-has-title-box" ng-show="item.TitleEditable">
-              <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
-                      ng-model="item.sellerHasTitle"
-                      ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
-              <label for="{{ item.FloorplanId }}"
-                      tooltip-placement="top"
-                      tooltip-trigger="click"
-                      tooltip-html="true"
-                      tooltip-html-unsafe="NextGear has been notified of this change and will be sending funding soon."
-                      tooltip-animation="true">
-                I Have the Title
-              </label>
-            </div>
+      <tr ng-repeat="item in floorplanData.results">
+        <td class="date">
+          <h4>{{ (item.FlooringDate | moment) || 'n/a'}}</h4>
+          <p>Floored</p>
+          <br/>
+          <h4>{{ (item.DisbursementDate | moment) || 'n/a' }}</h4>
+          <p>Disbursement</p>
+        </td>
+        <td class="description">
+          <p class="lockup-major" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></p>
+          <p class="lockup-minor caps">
+            VIN: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
           </p>
-        </div>
-      </li><!-- end .table-list-row -->
-    </ul>
+        </td>
+        <td>
+          <h5>{{ item.FloorplanStatusName }}</h5>
+        </td>
+        <td class="numeric">
+          <h4>{{ item.PurchaseAmount | currency }}</h4>
+        </td>
+        <td>
+          <h5>{{ item.BuyerName }}</h5>
+        </td>
+        <td>
+          <h4>{{ item.ConsignerTicketNumber }}</h4>
+        </td>
+        <td>
+          <h5>{{ item.TitleLocation }}</h5>
+          <div class="seller-has-title-box cr-inline" ng-show="item.TitleEditable">
+            <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
+                    ng-model="item.sellerHasTitle"
+                    ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
+            <label class="checkbox-img small" for="{{ item.FloorplanId }}"></label>
+            <label for="{{ item.FloorplanId }}"
+                    class="cr-label"
+                    tooltip-placement="top"
+                    tooltip-trigger="click"
+                    tooltip-html="true"
+                    tooltip-html-unsafe="NextGear has been notified of this change and will be sending funding soon."
+                    tooltip-animation="true">
+              I Have the Title
+            </label>
+          </div>
+        </td>
+        <td>
+          <a class="btn btn-square" ng-show="item.TitleImageAvailable"
+            ng-href="{{ item.$titleURL }}"
+            nxg-track="{{ metric.VIEW_TITLE }}"
+            target="_blank">
+            <span nxg-icon="icon-title"></span>
+          </a>
+        </td>
+      </tr>
+    </table>
   </section>
 </div>

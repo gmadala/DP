@@ -581,6 +581,14 @@ input[type="radio"] {
   background-size: 24px 24px;
   background-repeat: no-repeat;
   margin: 0;
+
+  &.small {
+    height: 18px;
+    width: 18px;
+    background: url('../img/icons/checkbox.svg');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+  }
 }
 
 .radio-img {
@@ -626,6 +634,10 @@ input[type="radio"] {
   .checkbox-img {
     top: 10px;
     margin-right: 5px;
+
+    &.small {
+      top: 6px;
+    }
   }
 }
 
