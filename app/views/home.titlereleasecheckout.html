@@ -1,92 +1,102 @@
 <section class="row-fluid">
   <section class="span9">
     <div class="well">
-      <h4>Title Release Confirmation</h4>
+      <h2 class="well-title-secondary">Title Releases Confirmation</h2>
 
-      <div class="well-out">
-        <p>Please confirm your title release request(s) below. Titles released here are required to be returned within 7 days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</p>
-        <p ng-show="1 == addresses.length">The title(s) will be sent to the following address: <strong><span>{{addresses[0] | address}}</span></strong></p>
-        <p ng-show="addresses.length > 1">Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles.</p>
-      </div>
+      <p class="well-item">
+        Please confirm your title release request(s) below. Titles released here are required to be returned within 7 days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.
+      </p>
+      <p class="well-item" ng-show="1 == addresses.length">
+        The title(s) will be sent to the following address: <strong>{{addresses[0] | address}}</strong>
+      </p>
+      <p class="well-item" ng-show="addresses.length > 1">
+        Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles.
+      </p>
+    </div>
 
-    </div><!-- end .well -->
-
-    <div class="title-checkout-list" ng-switch="titleQueue.contents.length">
-      <!-- When there are no payments or fees -->
-     <p class="notice-box" ng-switch-when="0">
+    <div ng-switch="titleQueue.contents.length">
+      <p class="notice-box" ng-switch-when="0">
         You have not selected any titles. Please visit the
         <a href="#/home/titlereleases">Title Releases list</a> to select some.
       </p>
 
-      <!-- When you have payments or fees in your cart -->
-      <section ng-switch-default>
+      <div class="well" ng-switch-default>
+        <h2 class="well-title">Title Release Requests</h2>
 
-        <div>
-          <h3 class="boxed">Title Release Requests</h3>
+        <table class="table table-striped table-primary">
+          <thead>
+            <th>Floored</th>
+            <th>Description</th>
+            <th>Purchased</th>
+            <th>Release Status</th>
+          </thead>
+          <tr ng-repeat="item in titleQueue.contents">
+            <td>
+              <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
+              <p class="lockup-minor">{{ item.DaysFloored }} days</p>
+            </td>
 
-          <ul class="unstyled title-list">
-            <li class="table-list-head">
-              <div class="cell title-desc">Description</div>
-              <div class="cell title-stock">Stock #</div>
-              <div class="cell title-floorDate">Floored</div>
-              <div class="cell title-status">Status</div>
-            </li>
-
-            <li class="table-list-row" ng-repeat="item in titleQueue.contents">
-              <div class="cell title-desc">
-                <p>{{ getVehicleDescription(item) }}</p>
-                <p><span class="break-word">{{ item.UnitVIN }}</span></p>
-                <span ng-hide="1 == addresses.length" class="send-to-label">Send To: </span>
-                <div  nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_SEND_TO_ADDRESS_FIELD}}" nxg-alternate-address="item" enabled="true" show-tooltip="true" show-select-menu>
-                </div>
+            <td class="description">
+              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></a>
+              <div class="row-fluid">
+                <p class="lockup-minor caps vin">VIN: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+                <p class="lockup-minor caps stock">STK: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span></p>
               </div>
 
-              <div class="cell title-stock">
-               {{ item.StockNumber }}
+              <div ng-hide="1 == addresses.length" class="send-to-label">Send To: </div>
+              <div nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_SEND_TO_ADDRESS_FIELD}}" nxg-alternate-address="item" enabled="true" show-tooltip="true" show-select-menu>
               </div>
-              <div class="cell title-floorDate">
-                <p>{{ item.FlooringDate | moment }}</p>
-                <span ng-show="item.DaysFloored > 0">
-                  Days Floored: {{ item.DaysFloored }}
-                </span>
-              </div>
-              <div class="cell title-status">
-                <p>Eligible for Title Release</p>
-                <p><button class="btn-unstyle btn-link remove"
-                           ng-click="$parent.titleQueue.removeFromQueue(item)"
-                           nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON}}"
-                           ng-disabled="$parent.submitting">Remove Title</button></p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div><!-- end .title-checkout-list -->
-  </section><!-- end .span9 -->
+            </td>
 
-  <div class="span3 well request-summary sticky" nxg-sticky>
-    <h4>Title Release Summary</h4>
-    <div class="well-out">
-      <p>
-        <span class="emphasis" ng-bind="titleQueue.contents.length"></span>
-        <span ng-bind="titleLabel"></span>
-      </p>
+            <td class="date">
+              <p>{{item.UnitPurchaseDate | moment}}</p>
+            </td>
 
-      <hr/>
-
-      <p>Title Release Limits for this Account:<br/>
-      <span class="emphasis" ng-bind="eligibility.RemainingReleasesAvailable - titleQueue.contents.length">0</span> out of <span class="emphasis" ng-bind="eligibility.TotalReleasesAllowed">0</span> title releases available.</p>
-
-      <hr/>
-
-      <div class="submit">
-        <button class="btn btn-primary"
-                ng-click="onConfirmRequest()"
-                nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_CONFIRM_REQUEST_BUTTON}}"
-                ng-disabled="titleQueue.contents.length == 0 || submitting">
-          Confirm Requests for Titles
-        </button>
+            <td class="numeric">
+              <h6>Title Requested<br/>
+                <button class="btn-unstyle btn-link"
+                        ng-click="$parent.titleQueue.removeFromQueue(item)"
+                        nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON}}"
+                        ng-disabled="$parent.submitting">Remove Title
+                </button>
+              </h6>
+            </td>
+          </tr>
+        </table>
       </div>
-    </div><!-- end .well-out -->
+    </div>
+  </section>
+
+  <div class="span3 well sticky" nxg-sticky>
+    <h2 class="well-title">Requests Summary</h2>
+    <div class="well-item well-dark bordered">
+      <p>Review the following and submit your title release requests.</p>
+    </div>
+    <div class="well-item bordered">
+      <div class="dash-lockup">
+        <p class="dash-minor">
+           Titles Requested
+         </p>
+
+        <h4 class="dash-major" ng-bind="titleQueue.contents.length"></h4>
+      </div>
+
+      <div class="dash-lockup">
+        <p class="dash-minor">
+          Titles Available After This Request
+        </p>
+        <h5>
+           <span class="count highlight dash-major" ng-bind="eligibility.RemainingReleasesAvailable - titleQueue.contents.length">0</span> out of <span class="count highlight dash-major" ng-bind="eligibility.TotalReleasesAllowed">0</span>
+        </h5>
+      </div>
+    </div>
+
+    <button class="btn-cta cta-primary cta-full"
+            ng-click="onConfirmRequest()"
+            nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_CONFIRM_REQUEST_BUTTON}}"
+            ng-disabled="titleQueue.contents.length == 0 || submitting">
+      Submit Requests
+      <span nxg-icon="icon-title"></span>
+    </button>
   </div>
 </section>

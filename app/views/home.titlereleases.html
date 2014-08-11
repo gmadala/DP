@@ -23,7 +23,7 @@
       <p class="no-results" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
       </p>
-      <!-- <p class="notice-box"><b>Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</b></p> -->
+
       <div ng-switch-when="true"
            nxg-infinite-scroll="fetchNextResults()"
            nxg-infinite-scroll-disabled="data.loading"
@@ -56,7 +56,7 @@
 
             <td>
               <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
-              <p class="lockup=minor">{{ item.DaysFloored }} days</p>
+              <p class="lockup-minor">{{ item.DaysFloored }} days</p>
             </td>
             <td class="description">
               <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></a>

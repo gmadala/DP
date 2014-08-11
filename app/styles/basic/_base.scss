@@ -11,7 +11,7 @@
 }
 
 //drop a span with this ID anywhere you use checkboxes.
-#checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
+// #checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
 
 body, html {
   min-width: 1020px;
@@ -24,9 +24,6 @@ body {
   line-height: $base-line-height;
 }
 
-
-
-
 .container-fluid {
   position: relative;
   width: 100%;
@@ -35,7 +32,6 @@ body {
   padding: 0 40px;
   margin: 0 auto 30px;
 }
-
 
 .nxg-fade {
   background-color: $white;
