@@ -195,6 +195,10 @@ span.btn-help {
     outline: none;
   }
 
+  &:focus {
+    color: $btn-text-active;
+  }
+
   &:hover {
     color: $btn-text-active;
     background: $btn-bkgd-active;

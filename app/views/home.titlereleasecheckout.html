@@ -53,13 +53,13 @@
             </td>
 
             <td class="numeric">
-              <h6>Title Requested<br/>
-                <button class="btn-unstyle btn-link"
-                        ng-click="$parent.titleQueue.removeFromQueue(item)"
-                        nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON}}"
-                        ng-disabled="$parent.submitting">Remove Title
-                </button>
-              </h6>
+              <h4>Title Requested</h4>
+              <button class="btn-unstyle btn-link"
+                      ng-click="$parent.titleQueue.removeFromQueue(item)"
+                      nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON}}"
+                      ng-disabled="$parent.submitting">
+                Remove Title
+              </button>
             </td>
           </tr>
         </table>
