@@ -32,8 +32,19 @@ angular.module('nextgearWebApp')
 
     $scope.bestMovers = Analytics.fetchMovers(true);
     $scope.worstMovers = Analytics.fetchMovers(false);
-
     $scope.selectedMoverChart = $scope.bestMovers;
+
+    $scope.changeMoverChart = function(chartName) {
+      if (chartName === 'best'){
+        $scope.selectedMoverChart = $scope.bestMovers;
+      } else if (chartName === 'worst') {
+        $scope.selectedMoverChart = $scope.worstMovers;
+      }
+    };
+
+    $scope.showBest = function() {
+      return $scope.selectedMoverChart === $scope.bestMovers;
+    };
 
     $scope.businessSummary = Analytics.fetchBusinessSummary();
     $scope.analytics = Analytics.fetchAnalytics();

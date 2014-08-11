@@ -21,7 +21,7 @@
                    nxg-focus="numberSearch.setDealerNumActive()"
                    nxg-requires="data.proposedQuery.length >= 3"
                    ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }"></div>
-            <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
+            <button class="btn" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
             <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
                 No results found, please enter a valid Dealer Number.
             </label>
@@ -48,7 +48,7 @@
                    ng-model="numberSearch.query.auctionAccessNumber"
                    ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
                    nxg-focus="numberSearch.setAuctionNumActive()"></div>
-            <button class="btn btn-primary" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
+            <button class="btn" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
             <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
                 No results found, please enter a valid Auction Access Number.
             </label>
@@ -94,7 +94,7 @@
 
           <div class="control-group span6">
             <label class="control-label input-title" for="state">State</label>
-            <div class="controls">
+            <div class="style-select">
               <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
                 <option value=""></option>
               </select>
@@ -108,7 +108,7 @@
           </div>
           <hr/>
           <div class="form-footer">
-            <button class="btn btn-primary pull-left" type="submit" ng-click="nameSearch.search()">Search</button>
+            <button class="btn pull-left" type="submit" ng-click="nameSearch.search()">Search</button>
           </div>
         </form>
       </div>

@@ -23,20 +23,20 @@ $set-label-width: 40%;
     line-height: $base-line-height;
   }
 
-  select {
-    margin-bottom: 10px;
-  }
+  // select {
+  //   margin-bottom: 10px;
+  // }
 
-  & > .control-group {
-    @extend .clearfix;
-  }
+  // & > .control-group {
+  //   @extend .clearfix;
+  // }
 
-  .control-group {
-    overflow: auto;
-  }
+  // .control-group {
+  //   overflow: auto;
+  // }
 
   .control-label {
-    @extend %thin;
+    // @extend %thin;
     @extend %float-l;
     display: block;
     width: $set-label-width;
@@ -87,7 +87,7 @@ $set-label-width: 40%;
   .notifications {
     .n-title {
       @extend %float-l;
-      @extend %thin;
+      // @extend %thin;
       width: $set-label-width;
       padding-right: 10px;
     }

@@ -31,7 +31,7 @@ select {
 
 .text-error {
   @extend %small;
-  color: $error-dark;
+  color: $danger;
   line-height: $base-line-height;
   display: block;
   margin: 5px 0 10px;
