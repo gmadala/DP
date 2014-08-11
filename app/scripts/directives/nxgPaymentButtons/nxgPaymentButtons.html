@@ -52,7 +52,10 @@
           ng-disabled="paymentInProgress()"
           nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
           ng-click="cancelScheduledPayment()">
+    <p class="lockup-major">Scheduled</p>
+    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
     <span>Unschedule</span>
+    <p>_payment-scheduledPayment</p>
   </button>
 
   <button ng-switch-when="payment-scheduledPayoff"
@@ -62,6 +65,7 @@
           nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF}}"
           disabled>
     <span>Add</span>
+    <p>_payment-scheduledPayoff</p>
   </button>
 
   <!-- REMOVING:  ng-disabled="onQueue == 'payment' || paymentInProgress()" -->
@@ -95,6 +99,7 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
+    <p>_payoff-scheduledPayment</p>
   </button>
 
   <button ng-switch-when="payoff-scheduledPayoff"
@@ -105,5 +110,6 @@
           nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
           ng-click="cancelScheduledPayment()">
     <span>Unschedule</span>
+    <p>_payoff-scheduledPayoff</p>
   </button>
 </div>
