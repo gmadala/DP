@@ -18,7 +18,7 @@
 
   <div ng-switch-when="fee-scheduledFee">
     <p class="lockup-major">Scheduled</p>
-    <p class="lockup-minor">for {{item.ScheduledDate}}</p>
+    <p class="lockup-minor">for {{ item.ScheduledDate | moment }}</p>
     <button type="button"
             id="cancelScheduledFee"
             class="btn-unstyle btn-link"

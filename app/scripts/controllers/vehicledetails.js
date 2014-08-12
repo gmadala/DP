@@ -242,7 +242,7 @@ angular.module('nextgearWebApp')
             useHTML: true,
             floating: true,
             text: '<h5 class="chart-label-secondary">Total Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
-            y: 70
+            y: 80
           },
           data: [
             {
@@ -268,7 +268,7 @@ angular.module('nextgearWebApp')
             useHTML: true,
             floating: true,
             text: '<h5 class="chart-label-secondary">Outstanding</h5> <h3 class="chart-label-primary color-danger">' + $filter('currency')($scope.financialSummary.TotalOutstanding) + '</h3>',
-            y: 70
+            y: 80
           },
           data: [
             {
@@ -305,14 +305,14 @@ angular.module('nextgearWebApp')
 
         $scope.financialSummary.chart = {
           donutOptions: {
-            size: '110%',
-            innerSize: '90%',
+            size: '125%',
+            innerSize: '100%',
             border: false,
             semiCircle: true
           },
           size: {
             height: '220',
-            width: '220',
+            width: '190',
           }
         };
 
