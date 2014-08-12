@@ -1,290 +1,6 @@
-select {
-  -webkit-user-select: none;
-
-  &:focus {
-    border-color: darken($input-border, 20%) !important;
-
-    &:invalid, &:invalid:focus {
-      @include box-shadow(rgba(0,0,0,0) 0 0 0);
-      color: $brand-light;
-      border-color: $input-border;
-    }
-  }
-}
-
-// these fields are treated differently b/c the inputs are wrapped in a directive
-.nxg-business-field.nxg-invalid {
-  border: 0;
-
-  input {
-    border: 1px solid $error-dark;
-  }
-}
-
-.input-prepend.dollar .add-on{
-  position: relative;
-  top: 7px;
-  font-size: 14px;
-  background-color: transparent;
-  border: none;
-}
-
-.text-error {
-  @extend %small;
-  color: $danger;
-  line-height: $base-line-height;
-  display: block;
-  margin: 5px 0 10px;
-}
-
-label.text-error {
-  padding-left: 6px;
-  margin: 5px 0 10px;
-}
-
-.nxg-checkbox {
-  label {
-    margin: 0.5em 0 1em 0.5em;
-  }
-}
-
-.control-group.half {
-  @extend %float-l;
-  position: relative;
-
-  & + .half {
-    margin-left: 10px;
-  }
-
-  input {
-    width: 110px;
-  }
-}
-
-.range {
-  overflow: hidden;
-  margin-bottom: 10px;
-
-  .half {
-    @extend %float-l;
-    margin-bottom: 0;
-  }
-}
-
-.inline-submit {
-  margin: 0;
-  padding: 20px 0 0 120px;
-
-  button, button:active, button:focus, button:hover {
-    margin: 3px 0;
-    z-index: 100;
-  }
-}
-
-.form-footer {
-  @extend %align-right;
-}
-
-.form-separator {
-  @extend %center;
-}
-
-// .nxg-fancy-radios {
-//   margin-left: 7px;
-
-//   label {
-//     cursor: pointer;
-//     display: inline;
-
-//     &::before {
-//       cursor: pointer;
-//     }
-//   }
-// }
-
-// .nxg-fancy-radios .group-label {
-//   padding-right: 15px;
-//   vertical-align: bottom;
-//   line-height: 11px;
-// }
-
-/*
- * #foo doesn't refer to a particular element; it's there to prevent
- * browsers from implementing later selectors if it doesn't understand
- * this one. See http://css-tricks.com/snippets/css/custom-radio-buttons
- */
-// #foo:checked::before,
-// .nxg-fancy-radios input[type="radio"] {
-//     position:absolute;
-//     clip: rect(0,0,0,0);
-//     clip: rect(0 0 0 0);
-//     margin: 0;
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"] + label::before {
-//   // @extend .btn;
-//   @extend %small;
-//   @extend %heavy;
-//   @include border-radius(3px);
-//   display: inline-block;
-//   float: left;
-//   background-color: $btn-active-bkgd;
-//   @include background(linear-gradient($white, $gray-d));
-//   color: $btn-active-text;
-//   line-height: 20px;
-//   text-shadow: none;
-//   text-transform: uppercase;
-//   padding:2px 14px;
-//   border: 0;
-//   border-bottom: 1px solid $btn-active-stroke;
-//   // margin-right: -4px;
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"].first + label::before {
-//   @include border-radius(3px 0 0 3px);
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"] + label::before {
-//   @include border-radius(0);
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"].last + label::before {
-//   @include border-radius(0 3px 3px 0);
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"]:checked + label::before {
-//   @include background(linear-gradient(#eaeaea, #c4c4c4));
-//   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-//   color: $btn-hover-text;
-// }
-
-// #foo:checked,
-// .nxg-fancy-radios input[type="radio"].last:checked + label::before {
-//   @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-// }
-
-label.input-title {
-  max-width: 200px;
-}
-
-// Datepicker
-.datepicker {
-  &.datepicker-dropdown {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    @include border-radius(0);
-    padding: 5px 7px;
-  }
-
-  .datepicker-days, .datepicker-months, .datepicker-years {
-    .prev, .next {
-      font-size: 0;
-      width: 27px;
-
-      &:before {
-        content: '';
-        @extend %heavy;
-        position: absolute;
-        top: 8px;
-        color: $gray-a;
-        font-family: 'Lucida Sans Unicode';
-        font-size: 16px;
-        margin: 0 5px;
-      }
-
-      &:hover {
-        border-radius: 0;
-      }
-    }
-
-    .prev:before {
-      content: '<';
-      left: 7px;
-    }
-
-    .next:before {
-      content: '>';
-      right: 7px;
-    }
-  }
-
-  .datepicker-switch {
-    @include border-radius(0);
-    @extend %thin;
-    color: $brand-text;
-    letter-spacing: 0;
-    font-size: $large-font-size;
-  }
-
-  thead tr:first-child {
-    border-bottom: 1px solid $border;
-  }
-
-  .day, .dow, .month {
-    @extend %small;
-  }
-
-  .dow {
-    color: $base-text-color;
-  }
-
-  .day, .month, .year {
-    @extend %thin;
-    @include border-radius(0);
-    color: $brand-text;
-
-    &.new, &.old {
-      color: $gray-9;
-    }
-  }
-
-  table tr td.active:hover,
-  table tr td.active,
-  table tr td.disabled.active:hover,
-  table tr td.disabled.active,
-  table tr td.active.disabled.active,
-  table tr td.active:active,
-  table tr td.active:hover:active,
-
-  table tr td.day.active,
-  table tr td span.month.active,
-  table tr td span.year.active {
-    @include border-radius(0);
-    @include background-image(none);
-    color: $white;
-    background-color: $brand-text;
-
-    &:hover {
-      background-color: darken($brand-text, 10%);
-    }
-  }
-}
-
-// autocomplete
-.typeahead.dropdown-menu {
-  padding: 0;
-  border-color: $border;
-
-  li {
-    &.active a {
-      @include background-image(none);
-      background-color: $brand-bright;
-      color: $white;
-    }
-
-    a {
-      color: $base-text-color;
-      border-color: $border;
-    }
-  }
-}
-
-// New/Refactored code for v2.23
-// =====================================================================
+// ===============
+//  FORM ELEMENTS
+// ===============
 
 .form-row {
   margin-bottom: 10px;
@@ -297,6 +13,14 @@ label.input-title {
     display: block;
     margin: 10px 0 0;
   }
+}
+
+.text-error {
+  @extend %small;
+  color: $danger;
+  line-height: $baseLineHeight;
+  display: block;
+  margin: 0 0 10px;
 }
 
 // Basic form element styling.
@@ -385,11 +109,51 @@ input[type="color"] {
   }
 }
 
+// Overriding Bootstrap's input-prepend class to make it work for us.
+.input-prepend.dollar .add-on{
+  position: relative;
+  top: 7px;
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+}
+
+.input-prepend input {
+  margin-bottom: 5px;
+}
+
+// For custom inputs that are wrapped in a directive, we need to manually
+// ensure the error border is applied.
+.nxg-business-field.nxg-invalid, .date-field.nxg-invalid {
+  border: 0;
+
+  input {
+    border: 1px solid $error;
+  }
+}
+
+select {
+  -webkit-user-select: none;
+
+  &:focus {
+    border-color: darken($border, 20%) !important;
+
+    &:invalid, &:invalid:focus {
+      @include box-shadow(rgba(0,0,0,0) 0 0 0);
+      color: $highlight;
+      border-color: $border;
+    }
+  }
+}
 
 /*
  * CUSTOM SELECT MENU
  * Overrides default browser styles to use a custom select menu style,
  * complete with custom arrows.
+ *
+ * Note, because the border is on the containing div, any
+ * ng-class attributes to apply invalid styling should be
+ * placed on the .style-select element, not the select itself.
  */
 .style-select {
   @include border-radius($borderRadius);
@@ -425,6 +189,14 @@ input[type="color"] {
 
     &:after {
       border-color: $border transparent transparent;
+    }
+  }
+
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:after {
+      border-color: $danger transparent transparent;
     }
   }
 
@@ -662,7 +434,7 @@ input[type="radio"] {
   @extend .clearfix;
   position: relative;
   width: 100%;
-  margin: 5px 0 10px;
+  margin: 5px 0;
 
   input, input[type="text"] {
     width: 85%;
@@ -718,6 +490,27 @@ input[type="radio"] {
   }
 
 /*
+ * RANGE INPUTS
+ */
+.range {
+  @extend .clearfix;
+  position: relative;
+
+  .range-start, .range-end {
+    @extend %float-l;
+    width: 100px;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .range-end {
+    margin-left: 5px;
+  }
+}
+
+/*
  * DATE FIELD
  */
 .date-field {
@@ -748,14 +541,117 @@ input[type="radio"] {
   }
 }
 
-.range {
-  position: relative;
-
-  .start-date, .end-date {
-    float: left;
+/*
+ * DATEPICKER GRID
+ * We need to use the classes bootstrap's datepicker uses,
+ * and override those styles; hence the specificity.
+ */
+.datepicker {
+  &.datepicker-dropdown {
+    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    @include border-radius(0);
+    padding: 5px 7px;
   }
 
-  .end-date {
-    margin-left: 5px;
+  .datepicker-days, .datepicker-months, .datepicker-years {
+    .prev, .next {
+      font-size: 0;
+      width: 27px;
+
+      &:before {
+        content: '';
+        @extend %heavy;
+        position: absolute;
+        top: 8px;
+        color: $gray-a;
+        font-family: 'Lucida Sans Unicode';
+        font-size: 16px;
+        margin: 0 5px;
+      }
+
+      &:hover {
+        border-radius: 0;
+      }
+    }
+
+    .prev:before {
+      content: '<';
+      left: 7px;
+    }
+
+    .next:before {
+      content: '>';
+      right: 7px;
+    }
+  }
+
+  .datepicker-switch {
+    @include border-radius(0);
+    color: $highlight;
+    letter-spacing: 0;
+    font-size: $large-font-size;
+  }
+
+  thead tr:first-child {
+    border-bottom: 1px solid $border;
+  }
+
+  .day, .dow, .month {
+    @extend %small;
+  }
+
+  .dow {
+    color: $text;
+  }
+
+  .day, .month, .year {
+    @include border-radius(0);
+    color: $highlight;
+
+    &.new, &.old {
+      color: $gray-9;
+    }
+  }
+
+  table tr td.active:hover,
+  table tr td.active,
+  table tr td.disabled.active:hover,
+  table tr td.disabled.active,
+  table tr td.active.disabled.active,
+  table tr td.active:active,
+  table tr td.active:hover:active,
+
+  table tr td.day.active,
+  table tr td span.month.active,
+  table tr td span.year.active {
+    @include border-radius(0);
+    @include background-image(none);
+    color: $white;
+    background-color: $highlight;
+
+    &:hover {
+      background-color: darken($highlight, 10%);
+    }
+  }
+}
+
+/*
+ * AUTOCOMPLETE
+ */
+.typeahead.dropdown-menu {
+  padding: 0;
+  border-color: $border;
+
+  li {
+    &.active a {
+      @include background-image(none);
+      background-color: $primary;
+      color: $white;
+    }
+
+    a {
+      color: $text;
+      border-color: $border;
+    }
   }
 }

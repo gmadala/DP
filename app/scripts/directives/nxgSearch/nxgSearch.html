@@ -35,7 +35,7 @@
 
           <div class="span7" ng-show="dateRangeShown">
             <div class="row-fluid range">
-              <div class="start-date">
+              <div class="range-start">
                 <label for="startDate">Start Date<span ng-show="showHelpText"> *</span></label>
                 <input type="text" id="startDate" name="startDate"
                       ng-model="activeCriteria.startDate"
@@ -44,7 +44,7 @@
                       ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
               </div>
 
-              <div class="end-date">
+              <div class="range-end">
                 <label for="endDate">End Date</label>
                 <input type="text" id="endDate" name="endDate"
                       ng-model="activeCriteria.endDate"

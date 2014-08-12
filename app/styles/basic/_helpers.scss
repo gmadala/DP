@@ -74,7 +74,7 @@
 
 .highlight-dark {
   @extend .highlight;
-  color: $darker-text-color;
+  color: darken($highlight, 10%);
 }
 
 .truncate {

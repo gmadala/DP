@@ -9,9 +9,9 @@
         <div nxg-vin-details floor-model="data" validity="validity" form="form" error-flag="vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
         <label for="inputColor" class="input-title">Color</label>
-        <div class="style-select">
+        <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }">
           <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-                   ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+                   ng-options="color.ColorName for color in options.colors" required>
             <option value="">Make Selection</option>
           </select>
         </div>
@@ -47,11 +47,11 @@
           </label>
 
           <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
-          <div class="style-select">
+          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
             <select id="inputTitleHolder"
                     name="inputTitleHolder" ng-model="data.TitleLocationId"
                     ng-options="location.Name for location in options.titleLocationOptions"
-                    required ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }" >
+                    required >
               <option value="">Make Selection</option>
             </select>
           </div>
@@ -62,10 +62,10 @@
           </label>
 
           <label for="inputInvLoc" class="input-title">Inventory Location</label>
-          <div class="style-select">
+          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }">
             <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                    ng-options="(location | address:'oneLineSelect') for location in options.locations"
-                   ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }" required>
+                   required>
               <option value="">Make Selection</option>
             </select>
           </div>
@@ -151,12 +151,12 @@
           </label>
 
           <label for="inputCreditLine" class="input-title">Line of Credit</label>
-          <div class="style-select">
+          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }">
             <select id="inputCreditLine"
                     name="inputCreditLine"
                     ng-model="data.LineOfCreditId"
                     ng-options="line.LineOfCreditName for line in options.linesOfCredit"
-                    ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }" required>
+                    required>
               <option value="">Make Selection</option>
             </select>
           </div>
@@ -176,13 +176,12 @@
           </div>
 
           <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-          <div class="style-select">
+          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
             <select id="inputDisburseAcct"
                     name="inputDisburseAcct"
                     ng-model="data.BankAccountId"
                     ng-disabled="data.PaySeller"
                     ng-required="!data.PaySeller"
-                    ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
                     ng-options="account.BankAccountName for account in options.bankAccounts">
               <option value="">Make Selection</option>
             </select>
@@ -212,4 +211,3 @@
     </form>
   </div>
 </div>
-<!-- <span id="checkbox-image-preloader"></span> -->

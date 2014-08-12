@@ -96,7 +96,7 @@
 }
 
 .modal-close {
-  font-size: $base-font-size;
+  font-size: $baseFontSize;
   position: absolute;
   top: 8px;
   right: 11px;
@@ -174,7 +174,7 @@
   }
 
   td, th {
-    line-height: $base-line-height;
+    line-height: $baseLineHeight;
     border: 1px solid #eaeaea;
     border-top: none;
   }

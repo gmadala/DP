@@ -63,12 +63,12 @@
             <h3 class="form-title">Dealer Statement</h3>
 
             <div class="form-row range">
-              <div class="start-date">
+              <div class="range-start">
                 <label for="stmtStart">Start Date</label>
   							<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}" required />
               </div>
 
-              <div class="end-date">
+              <div class="range-end">
                 <label for="stmtEnd">End Date</label>
   							<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
               </div>
@@ -127,12 +127,12 @@
             <h3 class="form-title">Paid off Summary</h3>
 
             <div class="form-row range">
-              <div class="start-date">
+              <div class="range-start">
                 <label for="paidOffStart">Start Date</label>
                 <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" date-allow="past" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required />
               </div>
 
-              <div class="end-date">
+              <div class="range-end">
                 <label for="paidOffEnd">End Date</label>
                 <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" date-allow="past" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date }" required />
               </div>

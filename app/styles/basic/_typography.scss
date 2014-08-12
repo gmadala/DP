@@ -5,14 +5,14 @@ h1 {
   font-size: 24px;
   font-weight: bold;
   line-height: $baseLineHeight;
-  color: $base-text-color;
+  color: $text;
 }
 
 h2 {
   font-size: 20px;
   font-weight: normal;
   line-height: $baseLineHeight * 1.5;
-  color: $base-text-color;
+  color: $text;
   margin: 0;
 }
 
@@ -27,7 +27,7 @@ h3 {
 h4 {
   font-size: 14px;
   font-weight: bold;
-  color: $base-text-color;
+  color: $text;
   margin: 0;
 }
 
@@ -41,13 +41,13 @@ h5 {
 h6 {
   font-size: 12px;
   font-weight: bold;
-  color: $base-text-color;
+  color: $text;
   margin: 0 0 5px;
 }
 
 p {
   font-size: 12px;
-  color: $base-text-color;
+  color: $text;
   margin: 0;
 }
 
@@ -288,24 +288,6 @@ a, a:visited {
 
 
 
-
-
-// a {
-//   text-decoration: none;
-//   border-bottom: 1px solid;
-//   cursor: pointer;
-
-//   &:hover {
-//     text-decoration: none;
-//     color: $gray-8;
-//   }
-// }
-
-// h4 {
-//   font-weight: 300;
-//   color: $brand-light;
-// }
-
 ul {
   list-style-type: none;
 }
@@ -314,7 +296,7 @@ ul {
   @extend %thin;
   font-size: 20px;
   line-height: 1;
-  color: $base-text-color;
+  color: $text;
   padding: 10px 10px 12px;
   border: 1px solid #ddd;
   margin-bottom: 0;
@@ -342,16 +324,16 @@ label {
   @extend %thin;
   background: #F1F1F1;
   font-size: 1em;
-  line-height: $base-line-height;
-  color: $base-text-color;
+  line-height: $baseLineHeight;
+  color: $text;
   padding: 5px 10px;
   margin: 0;
 }
 
 .subtitle {
   @extend %heavy;
-  color: $base-text-color;
-  font-size: $base-font-size;
+  color: $text;
+  font-size: $baseFontSize;
   line-height: 1;
   margin: 20px 0 10px 0;
 }

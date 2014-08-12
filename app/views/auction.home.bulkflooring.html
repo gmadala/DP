@@ -1,14 +1,14 @@
 <form class="row-fluid floorcar" name="form" novalidate>
   <div class="span6 well">
-          <h2 class="well-title">Vehicle Information</h2>
+    <h2 class="well-title">Vehicle Information</h2>
 
     <fieldset class="well-item">
       <div nxg-vin-details floor-model="data" validity="validity" error-flag="vinDetailsErrorFlag" form="form" nxg-autofocus="reset"></div>
 
       <label for="inputColor" class="input-title">Color</label>
-      <div class="style-select">
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" >
         <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
+               ng-options="color.ColorName for color in options.colors" required>
           <option value="">Make Selection</option>
          </select>
       </div>
@@ -40,9 +40,8 @@
       </label>
 
       <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
-      <div class="style-select">
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
         <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
-               ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }"
                ng-options="location.Name for location in options.titleLocationOptions"
                required>
           <option value="">Make Selection</option>
@@ -141,10 +140,9 @@
       </p>
 
       <label for="inputDisburseAcct" class="input-title">Bank Account</label>
-      <div class="style-select">
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
               ng-options="account.BankAccountName for account in options.bankAccounts"
-              ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
               required>
          <option value="">Make Selection</option>
         </select>

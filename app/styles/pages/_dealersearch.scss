@@ -8,7 +8,7 @@
 
   th, td {
     @extend %align-left;
-    line-height: $base-line-height;
+    line-height: $baseLineHeight;
     padding: 3px 0;
   }
 

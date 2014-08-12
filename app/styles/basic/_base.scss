@@ -15,13 +15,13 @@
 
 body, html {
   min-width: 1020px;
-  color: $base-text-color;
+  color: $text;
 }
 
 body {
   font-family: $base-font-family;
   font-size: $baseFontSize;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
 }
 
 .container-fluid {

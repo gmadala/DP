@@ -67,17 +67,20 @@
   <div class="span16 adjacent well">
     <h4>Volume of NextGear Floor Plans</h4>
     <div class="well-out">
-      <div class="row nxg-fancy-radios">
+      <div class="cr-inline">
         <label class="group-label">Past:</label>
 
         <input type="radio" class="first" name="year" id="year" value="year" ng-model="selectedFloorplanChart" placeholder="Ten Best Movers">
-        <label class="pointer" for="year" id="year-label"></label>
+        <label class="radio-img" for="year"></label>
+        <label class="cr-label" for="year">Year</label>
 
         <input type="radio" name="month" id="month" value="month" ng-model="selectedFloorplanChart" placeholder="Ten Best Movers">
-        <label class="pointer" for="month" id="month-label"></label>
+        <label class="radio-img" for="month"></label>
+        <label class="cr-label" for="month">Month</label>
 
         <input type="radio" class="last" name="week" id="week" value="week" ng-model="selectedFloorplanChart" placeholder="Ten Worst Movers">
-        <label class="pointer" for="week" id="week-label"></label>
+        <label class="radio-img" for="week"></label>
+        <label class="cr-label" for="week">Week</label>
       </div>
 
       <div class="chart-obj"

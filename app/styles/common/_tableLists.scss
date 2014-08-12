@@ -52,7 +52,7 @@
 .table-list-row {
   background-color: $white;
   border: 1px solid $gray-d;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
 
   & + .table-list-row {
     border-top: 0;
@@ -62,13 +62,13 @@
     background-color: #F9F9F9;
   }
 
-  &.error-row {
-    border: 2px solid $error-dark;
-  }
+  // &.error-row {
+  //   border: 2px solid $error-dark;
+  // }
 
   .cell {
     font-size: 13px;
-    line-height: $base-line-height;
+    line-height: $baseLineHeight;
 
     & + .cell {
       border-left: 1px solid $gray-d;
@@ -86,7 +86,7 @@
 .no-results {
   @extend %center;
   font-size: $large-font-size;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
   color: $gray-a;
   margin: 20px 0;
 }
