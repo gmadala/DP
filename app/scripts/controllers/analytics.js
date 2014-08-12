@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric) {
-    segmentio.track(metric.VIEW_ANALYTICS_DASHBOARD);
+    segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE);
 
     $scope.showDetails = false;
 

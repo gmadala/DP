@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api) {
 
-    segmentio.track(metric.VIEW_MAIN_DASHBOARD);
+    segmentio.track(metric.VIEW_DASHBOARD);
 
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
 

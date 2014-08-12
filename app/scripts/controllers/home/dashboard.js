@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter) {
 
-    segmentio.track(metric.VIEW_MAIN_DASHBOARD);
+    segmentio.track(metric.VIEW_DASHBOARD);
 
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
