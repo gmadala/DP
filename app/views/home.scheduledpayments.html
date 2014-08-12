@@ -1,8 +1,8 @@
 <section class="row-fluid">
   <section class="span9">
     <div nxg-search
-      title="Scheduled Payment Search"
-      class="search-form schPayments"
+      title="Find a Scheduled Payment"
+      class="search-form"
       prompt="Stock # or VIN"
       metric-search="{{metric.CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON}}"
       metric-clear-search="{{metric.CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK}}"
@@ -53,14 +53,14 @@
         </thead>
 
         <tr ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
-            <td><p>{{ fee.ScheduledDate | moment }}</p></td>
-            <td><h5>{{ fee.Description }}</h5></td>
-            <td><p>{{ fee.FeeType }}</p></td>
-            <td><p>{{ fee.Balance | currency }}</p>
-              <a ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
-                  <span>Cancel</span>
-              </a>
-            </td>
+          <td><p>{{ fee.ScheduledDate | moment }}</p></td>
+          <td><h5>{{ fee.Description }}</h5></td>
+          <td><p>{{ fee.FeeType }}</p></td>
+          <td class="numeric"><h4>{{ fee.Balance | currency }}</h4>
+            <button class="btn-unstyle btn-link" ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
+                Cancel Payment
+            </button>
+          </td>
         </tr>
       </table>
     </div><!-- end .sch-fees -->
@@ -110,51 +110,48 @@
               Amount
               <span class="sortArrows"></span>
             </th>
-          </thead><!-- end .table-list-head -->
+          </thead>
 
           <tr ng-repeat="pay in scheduledPayments.results">
+            <td>
+              <p class="lockup-major"> {{ pay.scheduledDate | moment }} </p>
+              <p>Scheduled By:</p>
+              <p>{{ pay.scheduledBy }}</p>
+            </td>
 
-              <td>
-                <p class="lockup-major"> {{ pay.scheduledDate | moment }} </p>
-                <p>Scheduled By:</p>
-                <p>{{ pay.scheduledBy }}</p>
-              </td>
+            <td class="description">
+              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ pay.stockNumber }}"> {{ pay.description }} </a>
+              <div class="row-fluid">
+                <p class="lockup-minor caps vin">VIN: <span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span></p>
+                <p class="lockup-minor caps stock">STK: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span></p>
+              </div>
+            </td>
 
-              <td class="description">
-                <a class="lockup-major" href="#/vehicledetails?stockNumber={{ pay.stockNumber }}"> {{ pay.description }} </a>
-                <div class="row-fluid">
-                  <p class="lockup-minor caps vin">VIN: <span nxg-highlight="pay.vin" highlight="pay.data.query" class="break-word"></span></p>
-                  <p class="lockup-minor caps stock">STK: <span nxg-highlight="pay.stockNumber" highlight="pay.data.query"></span></p>
-                </div>
-              </td>
+            <td>
+              <p class="lockup-major">{{ pay.flooringDate | moment }}</p>
+              <p class="lockup-minor">{{ pay.daysOnFloorplan }} Days</p>
+            </td>
 
-              <td>
-                <p class="lockup-major">{{ pay.flooringDate | moment }}</p>
-                <p class="lockup-minor">{{ pay.daysOnFloorplan }} Days</p>
-              </td>
+            <td>
+              <p>
+                <p class="lockup-major">{{ pay.status }}</p>
+                <p ng-show="pay.statusDate">as of: {{ pay.statusDate | moment }}</p>
+              </p>
+              <button class="btn-unstyle btn-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">View Receipt</button>
+              <button class="btn-unstyle btn-link" ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">Cancel Payment
+              </button>
+            </td>
 
-              <td>
-                <p>
-                  <span class="sch-label"> {{ pay.status }} </span><br/>
-                  <span ng-show="pay.statusDate">as of:</span>
-                   {{ pay.statusDate | moment }}
-                </p>
-                <a class="receipt-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">View Receipt</a>
-              </td>
-
-              <td>
-                <p class="lockup-major">{{ pay.paymentAmount | currency }} </p>
-                <p class="lockup-minor">{{(pay.isCurtailment && 'Curtailment' || Payoff)}} </p>
-
-
-                <a ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()" ng-click="scheduledPayments.payOff(pay)">
-                    <span>Payoff Now</span>
-                </a>
-
-                <!--<a ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">
-                    <span>Cancel</span>
-                </a>-->
-              </td>
+            <td class="numeric">
+              <p class="lockup-major">{{ pay.paymentAmount | currency }} </p>
+              <p class="lockup-minor">
+                <span ng-show="pay.isCurtailment">Curtailment</span>
+                <span ng-hide="pay.isCurtailment">Payoff</span>
+              </p>
+              <button class="btn-unstyle btn-link" ng-show="pay.isPending" ng-disabled="scheduledPayments.isOnPaymentQueue(pay) || paymentInProgress()" ng-click="scheduledPayments.payOff(pay)">
+                  Payoff Now
+              </button>
+            </td>
           </tr>
         </table>
 
