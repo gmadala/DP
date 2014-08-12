@@ -40,8 +40,8 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
         <span>{{ item.AmountDue | currency }}</span>
-        <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch="onQueue">
+          <span ng-switch-when="false" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
           <span ng-switch-when="payoff" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
           <span ng-switch-when="payment" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
         </span>
@@ -70,8 +70,8 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span>{{ item.AmountDue | currency }}</span>
-    <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
     <span ng-switch="onQueue">
+        <span ng-switch-when="false" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payment" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payoff" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
       </span>
@@ -91,8 +91,8 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
       <span>{{ item.CurrentPayoff | currency }}</span>
-      <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
       <span ng-switch="onQueue">
+        <span ng-switch-when="false" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payment" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payoff" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
       </span>
@@ -110,8 +110,8 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span>{{ item.CurrentPayoff | currency }}</span>
-    <span ng-show="onQueue != 'payment' && onQueue != 'payoff'" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
     <span ng-switch="onQueue">
+        <span ng-switch-when="false" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payment" class="paired-media svg-icon icon-plus" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payoff" class="paired-media svg-icon icon-minus" nxg-icon="icon-minus"></span>
       </span>
