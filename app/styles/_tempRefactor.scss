@@ -217,6 +217,7 @@
 
 // overly-specific....should really refactor somehow.
 .upcoming-payments {
+  background: $white;
   height: 250px;
   border-top: 2px solid $border;
 }
@@ -250,13 +251,8 @@
   margin: 10px auto 0;
 }
 
-.floor-chart-title {
-  position: relative;
-  top: -15px;
-}
-
 .nxg-dash-calendar-container {
-  background: $white;
+  background: transparent;
 }
 
 .page-break {

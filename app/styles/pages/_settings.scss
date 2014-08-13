@@ -165,10 +165,10 @@ $set-label-width: 40%;
 }
 
 .edit-btn, .cancel-btn {
-  @include background-image(linear-gradient($white, #F0F0F0));
+  // @include background-image(linear-gradient($white, #F0F0F0));
 
   &:hover, &:active {
-    @include background-image(linear-gradient($gray-e, #CFCFCF));
+    // @include background-image(linear-gradient($gray-e, #CFCFCF));
   }
 }
 
@@ -179,15 +179,15 @@ $set-label-width: 40%;
 .edit-btn {
   padding-left: 24px;
 
-  i {
-   position: absolute;
-   top: 5px;
-   left: 8px;
-  }
+  // i {
+  //  position: absolute;
+  //  top: 5px;
+  //  left: 8px;
+  // }
 }
 
 .save-btn {
-  @extend .btn-primary;
+  // @extend .btn-primary;
 }
 
 .cancel-btn {
