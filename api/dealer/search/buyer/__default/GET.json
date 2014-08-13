@@ -14,7 +14,19 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "c8925401-0548-4486-a743-27e25e4ab4bd",
+            "Line1": "11700 Space Center Blvd.",
+            "Line2": null,
+            "City": "Houston",
+            "State": "TX",
+            "Zip": "77059",
+            "Phone": "2819241322",
+            "Fax": "2814708001"
+          }
+        ]
       },
       {
         "BusinessId": "1addd16e-0e12-40a5-85aa-350555555049",
@@ -26,7 +38,19 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "b81836f2-52b5-47fb-ba9d-55d0cb71b005",
+            "Line1": "9174 North Freeway",
+            "Line2": null,
+            "City": "Houston",
+            "State": "TX",
+            "Zip": "77037",
+            "Phone": "2812720083",
+            "Fax": "2812720039"
+          }
+        ]
       },
       {
         "BusinessId": "1addd16e-3001-40a5-8558-0101014c9049",
@@ -50,7 +74,30 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "86e16707-a39e-4aa2-a752-c4f40f5e2be5",
+            "Line1": "7240 W Goodhope Road",
+            "Line2": null,
+            "City": "Milwaukee",
+            "State": "WI",
+            "Zip": "53223",
+            "Phone": "4142641000",
+            "Fax": null
+          },
+          {
+            "AddressId": "a3a8d1b6-f13c-4e04-b86f-68e59f56ead0",
+            "Line1": "4087 N. Green Bay Ave",
+            "Line2": null,
+            "City": "Milwaukee",
+            "State": "WI",
+            "Zip": "53209",
+            "Phone": "4142641000",
+            "Fax": "4142641001"
+          }
+        ]
+
       },
       {
         "BusinessId": "1addd16e-0e12-40a5-8558-3b926b4c9049",
@@ -62,7 +109,29 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "86e16707-a39e-4aa2-a752-c4f40f5e2be5",
+            "Line1": "7240 W Goodhope Road",
+            "Line2": null,
+            "City": "Milwaukee",
+            "State": "WI",
+            "Zip": "53223",
+            "Phone": "4142641000",
+            "Fax": null
+          },
+          {
+            "AddressId": "a3a8d1b6-f13c-4e04-b86f-68e59f56ead0",
+            "Line1": "4087 N. Green Bay Ave",
+            "Line2": null,
+            "City": "Milwaukee",
+            "State": "WI",
+            "Zip": "53209",
+            "Phone": "4142641000",
+            "Fax": "4142641001"
+          }
+        ]
       },
       {
         "BusinessId": "1addd16e-0e12-40a5-85aa-350555555049",
@@ -74,7 +143,19 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "b81836f2-52b5-47fb-ba9d-55d0cb71b005",
+            "Line1": "9174 North Freeway",
+            "Line2": null,
+            "City": "Houston",
+            "State": "TX",
+            "Zip": "77037",
+            "Phone": "2812720083",
+            "Fax": "2812720039"
+          }
+        ]
       },
       {
         "BusinessId": "1addd16e-3001-40a5-8558-0101014c9049",
@@ -86,7 +167,19 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "b81836f2-52b5-47fb-ba9d-55d0cb71b005",
+            "Line1": "9174 North Freeway",
+            "Line2": null,
+            "City": "Houston",
+            "State": "TX",
+            "Zip": "77037",
+            "Phone": "2812720083",
+            "Fax": "2812720039"
+          }
+        ]
       },
       {
         "BusinessId": "1add0101-0e12-40a5-8001-3bs2fb4dd049",
@@ -98,7 +191,19 @@
         "City": "Rochester",
         "State": "New York",
         "PostalCode": "14623",
-        "IsBuyer": true
+        "IsBuyer": true,
+        "ActivePhysicalInventoryLocations": [
+          {
+            "AddressId": "b81836f2-52b5-47fb-ba9d-55d0cb71b005",
+            "Line1": "9174 North Freeway",
+            "Line2": null,
+            "City": "Houston",
+            "State": "TX",
+            "Zip": "77037",
+            "Phone": "2812720083",
+            "Fax": "2812720039"
+          }
+        ]
       }
     ]
   }
