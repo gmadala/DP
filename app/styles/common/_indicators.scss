@@ -55,7 +55,7 @@
 .counter {
   @extend .heavy;
   @extend .center;
-  @include border-radius(2px);
+  @include border-radius(4px);
   display: inline-block;
   color: #666666;
   font-size: 14px;
@@ -63,7 +63,7 @@
   height: 30px;
   min-width: 35px;
   background: $white;
-  padding: 5px 10px;
+  padding: 7px 10px;
   margin: 6px 15px 6px 15px;
   border: 1px solid #808080;
 
@@ -75,5 +75,25 @@
   &.due-today {
     color: $white;
     background: $warning !important;
+  }
+}
+
+.counter-label {
+  height: 30px;
+  padding: 12px 0;
+}
+
+.counter-list {
+  li {
+    @extend .clearfix;
+  }
+
+  .counter {
+    float: left;
+    margin: 4px 15px;
+  }
+
+  .dash-lockup {
+    padding: 4px 10px;
   }
 }

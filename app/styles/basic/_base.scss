@@ -11,21 +11,18 @@
 }
 
 //drop a span with this ID anywhere you use checkboxes.
-#checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
+// #checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
 
 body, html {
   min-width: 1020px;
-  color: $base-text-color;
+  color: $text;
 }
 
 body {
   font-family: $base-font-family;
   font-size: $baseFontSize;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
 }
-
-
-
 
 .container-fluid {
   position: relative;
@@ -35,7 +32,6 @@ body {
   padding: 0 40px;
   margin: 0 auto 30px;
 }
-
 
 .nxg-fade {
   background-color: $white;

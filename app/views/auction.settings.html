@@ -67,12 +67,14 @@
                 <!-- Question Select -->
                 <div class="control-group">
                   <label class="control-label">Security Question {{$index + 1}}</label>
+                  <div class="style-select">
                     <select ng-model="question.SecurityQuestionId"
                             ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
                             tooltip="{{ question.QuestionText }}"
                             tooltip-placement="right"
                             tooltip-popup-delay="700">
                     </select>
+                  </div>
                 </div>
                 <!-- Answer -->
                 <div class="control-group" ng-show="profile.editable">
@@ -145,12 +147,13 @@
               <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
               <div class="" ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
 
-              <div class="controls form-inline nxg-radios contain" ng-show="business.editable">
-                <!-- TODO: Add modal if enhanced registration is turned off in the form. -->
+              <div class="cr-inline" ng-show="business.editable">
                 <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
-                <label for="enhancedNo">No</label>
+                <label class="radio-img" for="enhancedNo"></label>
+                <label class="cr-label" for="enhancedNo">No</label>
                 <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
-                <label for="enhancedYes">Yes</label>
+                <label class="radio-img" for="enhancedYes"></label>
+                <label class="cr-label" for="enhancedYes">Yes</label>
               </div>
             </div>
 
@@ -194,20 +197,20 @@
           <form class="settings-opts title-settings" ng-class="{ editable:title.editable }" name="titleSettings">
             <div class="control-group">
               <label class="control-label" for="titleAddr">Default Address:</label>
-              <div class="controls" ng-show="title.editable">
+              <div class="style-select" ng-show="title.editable">
                 <select ng-model="title.dirtyData.titleAddress"
                         ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
                         tooltip="{{ addr.ShortAddress }}"
                         tooltip-placement="right"
                         tooltip-popup-delay="700">
                 </select>
-                <button class="btn-help"
-                  tooltip-placement="right"
-                  tooltip-trigger="click"
-                  tooltip-html="true"
-                  tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
-                  tooltip-animation="true">?</button>
               </div>
+              <button class="btn-help"
+                tooltip-placement="right"
+                tooltip-trigger="click"
+                tooltip-html="true"
+                tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
+                  tooltip-animation="true">?</button>
               <!-- Saved Address -->
               <div class="controls static clearfix" ng-hide="title.editable">
                   <p>
@@ -280,9 +283,10 @@
                   <li class="notification" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
                     <div class="n-title">{{ n.Name }}</div>
                     <ul class="inner">
-                      <li class="read-only" ng-repeat="d in n.DeliveryMethods">
+                      <li class="read-only cr-inline" ng-repeat="d in n.DeliveryMethods">
                         <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
-                        <label for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                        <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
+                        <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
                       </li>
                     </ul>
                   </li>

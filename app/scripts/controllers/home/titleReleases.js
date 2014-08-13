@@ -142,7 +142,7 @@ angular.module('nextgearWebApp')
     $scope.titleReleaseUnavailable = function() {
       var title = 'Title Release Unavailable',
           message = 'We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at ' + customerSupportPhone +'.',
-          buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
+          buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();
     };
@@ -150,7 +150,7 @@ angular.module('nextgearWebApp')
     $scope.titleReleaseLimitReached = function() {
       var title = 'Title Release Limit Reached',
           message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account.',
-          buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
+          buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();
     };

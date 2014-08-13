@@ -1,12 +1,12 @@
 <!-- WARNING: This view is used for both dealer Floor a Car and auction Bulk Flooring -->
 
-<div class="modal-header">
+<h3 class="modal-header">
   Confirm Flooring Request
-</div>
+</h3>
 
-<div class="modal-close" ng-click="close()">
+<!-- <div class="modal-close" ng-click="close()">
   <span class="glyphicon glyphicon-remove"></span>
-</div>
+</div> -->
 
 <div class="modal-body">
   <p>
@@ -15,7 +15,7 @@
   <div class="row-fluid floor-confirmation">
 
     <div class="detail-col" ng-hide="isDealer">
-      <h4 class="well-head">Buyer Information</h4>
+      <h4>Buyer Information</h4>
       <table>
         <tbody>
         <tr>
@@ -42,7 +42,7 @@
     </div><!-- end first .detail-col -->
 
     <div class="detail-col">
-      <h4 class="well-head">Vehicle Information</h4>
+      <h4>Vehicle Information</h4>
       <table>
         <tbody>
           <tr>
@@ -78,7 +78,7 @@
     </div><!-- end .detail-col -->
 
     <div class="detail-col">
-      <h4 class="well-head">Flooring Information</h4>
+      <h4>Flooring Information</h4>
       <table>
         <tbody>
           <tr>
@@ -99,7 +99,7 @@
           </tr>
         </tbody>
       </table>
-    </div><!-- end .detail-col -->
+    </div>
 
   </div>
 </div>
@@ -109,6 +109,6 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini btn-secondary">Return to Form</button>
-  <button ng-click="confirm()" nxg-autofocus class="btn btn-mini btn-primary">Submit Flooring Request</button>
+  <button ng-click="close()" type="button" class="btn-cta cta-secondary">Return to Form</button>
+  <button ng-click="confirm()" type="submit" nxg-autofocus class="btn-cta cta-primary">Submit Flooring Request</button>
 </div>

@@ -13,12 +13,29 @@
   &.padded {
     padding: 20px;
   }
+
+  &.mini {
+    padding: 0;
+  }
 }
   .list-table-row {
     @extend .clearfix;
     @extend .row-fluid;
     padding: 0 0 0;
     margin: 0;
+
+    .mini & {
+      padding: 0;
+
+      p, a {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      p:first-child {
+        padding-right: 10px;
+      }
+    }
 
     [class*="span"] {
       min-height: 0;
@@ -110,19 +127,76 @@
 }
 
 .notice-bar {
+  background: #F8F8F8;
   padding: 10px;
+  border-bottom: 1px solid $wellBorder;
+  margin-bottom: 5px;
 }
 
 .sidebar {
   background: #EBEBEB;
 }
 
+/*
+ * PAIRED MEDIA
+ * Allows for media such as an image or icon
+ * to line up with associated text.
+ *
+ * Used within many buttons, as well as in list items with icons.
+ */
+.paired {
+  overflow: hidden;
+
+  td & {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+  .paired-media, .paired-body {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .paired-media {
+    margin: 0 5px 0 3px;
+
+    .paired-reversed & {
+      margin: 0 3px 0 5px;
+    }
+  }
+
+// notification
+.info-block {
+  @extend %full-width;
+  @extend .clearfix;
+  position: relative;
+  height: 45px;
+
+  .info-block-image, .info-block-text {
+    float: left;
+    height: 100%;
+  }
+  .info-block-image {
+    margin: 3px 0;
+  }
+  .info-block-text {
+    padding: 8px 10px;
+
+    .btn {
+      position: absolute;
+      top: -7px;
+      right: 0;
+      margin-right: 0;
+    }
+  }
+}
+
 // dashboard
 .dash-lockup {
   @extend .lockup;
+  @extend .clearfix;
   float: right;
   text-align: right;
-  height: 30px;
   padding: 6px 10px;
   margin: 0;
 }
@@ -132,15 +206,39 @@
     color: $highlight;
   }
 
+.note {
+  font-size: 11px;
+  padding-top: 3px;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
 // overly-specific....should really refactor somehow.
+.upcoming-payments {
+  height: 250px;
+  border-top: 2px solid $border;
+}
+
+.table-holder {
+  overflow-y: scroll;
+  border: 1px solid #BBBBBB;
+
+  .table, .table-border {
+    border-left: 0;
+    border-right: 1px solid #BBBBBB;
+  }
+}
+
 .payment-activity {
   [class*="span"] {
     height: 250px;
     margin: 0;
   }
 
-  .span7 {
-    overflow-y: scroll;
+  .table-holder {
+    border: 0;
     border-right: 1px solid #BBBBBB;
   }
 
@@ -156,3 +254,114 @@
   position: relative;
   top: -15px;
 }
+
+.nxg-dash-calendar-container {
+  background: $white;
+}
+
+.page-break {
+  @extend %full-width;
+  height: 0;
+  border-bottom: 3px dotted $border;
+  margin-bottom: 20px;
+}
+
+.dash-well {
+  position: relative;
+  height: 270px;
+
+  &.nxg-dash-calendar-container {
+    height: auto;
+    min-height: 270px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.details-well {
+  height: 260px;
+}
+
+.infinite {
+  overflow-y: scroll;
+}
+
+.search {
+  padding: 20px 10px;
+
+  & > [class*="span"] {
+    & + [class*="span"] {
+      padding-left: 20px;
+      border-left: 1px solid $border;
+    }
+  }
+}
+
+.vin, .stock {
+  display: inline-block;
+}
+
+.vin {
+  margin-right: 10px;
+}
+
+
+hr {
+  border-top: 1px solid $border;
+  border-bottom: 0;
+  margin-bottom: 20px;
+}
+
+/*
+ * TOGGLE PAYMENTS BUTTONS
+ * displayed in the tables for
+ * payments & scheduled payments views
+ */
+
+#togglePayoff, #togglePayoff2,
+#togglePayment, #toggleFee, #togglePayment2 {
+   position: relative;
+   color: #1b679d;
+
+  .paired-media {
+    width: 13px;
+    height: 13px;
+  }
+  .icon-plus svg {
+    fill: #1b679d;
+  }
+  .icon-minus svg {
+    fill: #fff;
+  }
+  &.in-queue {
+    background-color: #4d4e4e;
+    color: $white;
+  }
+
+}
+
+.btn-switch {
+  @extend .btn-cta;
+  &:active {
+    background-color: inherit;
+  }
+  &:hover {
+    background-color: inherit;
+  }
+  &:focus {
+    background-color: inherit;
+  }
+}
+
+// .scheduled-payoff, .scheduled-payment {
+//   padding-right: 15px;
+//   p {
+//     text-align: right;
+//   }
+//   .btn-link {
+//     float: right;
+//   }
+// }

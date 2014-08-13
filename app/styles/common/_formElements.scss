@@ -1,26 +1,54 @@
-select {
-  @extend %heavy;
-  @include border-radius(0);
-  background: $white;
-  color: $brand-light;
-  border: 1px solid $input-border;
-  height: 28px;
-  width: 200px;
-  font-size: 13px;
-  -webkit-user-select: none;
+// ===============
+//  FORM ELEMENTS
+// ===============
 
-  &:focus { // use important to guarantee that this style will override default invalid style
-    border-color: darken($input-border, 20%) !important;
+.form-row {
+  margin-bottom: 10px;
+}
 
-    &:invalid, &:invalid:focus {
-      @include box-shadow(rgba(0,0,0,0) 0 0 0);
-      color: $brand-light;
-      border-color: $input-border;
-    }
+.form-block {
+  padding: 5px 10px;
+
+  .text-error {
+    display: block;
+    margin: 10px 0 0;
   }
 }
 
-textarea,
+.text-error {
+  @extend %small;
+  color: $danger;
+  line-height: $baseLineHeight;
+  display: block;
+  margin: 0 0 10px;
+}
+
+// Basic form element styling.
+fieldset {}
+legend {}
+label {
+  @extend .heavy;
+  display: block;
+
+  &.inline {
+    display: inline;
+  }
+}
+
+label {
+  -webkit-user-select: none;
+  font-size: 12px;
+}
+
+input, select, textarea {
+  font-size: $inputFontSize;
+  color: $text;
+  height: $cta-2-height;
+  padding: 5px 9px;
+  margin: 5px 0;
+}
+
+input,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -34,23 +62,45 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  @include border-radius(0px);
+input[type="color"] {
+  @include border-radius($borderRadius);
   @include box-shadow(none);
-  border: 1px solid $input-border;
-  height: 28px;
-  margin: 0;
+  color: $text;
+  font-size: $inputFontSize;
+  background: $white;
+  border: 1px solid $form-border;
 
   &:focus {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    border-color: $input-border;
+    color: $text;
+    border-color: $highlight;
+    outline: none;
+  }
+
+  &:disabled, &.disabled {
+    border-color: $border;
   }
 
   &:focus:invalid, &:invalid {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
-    color: $gray-5;
-    border: 1px solid $input-border;
+    color: $text;
+    border: 1px solid $form-border;
+  }
+
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:focus {
+      border: 1px solid $highlight;
+    }
+  }
+
+  // placeholder text
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &::-ms-input-placeholder {
+    font-weight: normal;
+    color: #B7B7B7;
   }
 
   // get rid of IE10's default clear button
@@ -59,360 +109,443 @@ input[type="color"],
   }
 }
 
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  &.nxg-invalid {
-    border: 1px solid $error-dark;
-  }
+// Overriding Bootstrap's input-prepend class to make it work for us.
+.input-prepend.dollar .add-on{
+  position: relative;
+  top: 7px;
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
 }
 
-select.nxg-invalid {
-  color: $error-dark;
+.input-prepend input {
+  margin-bottom: 5px;
 }
 
-// these fields are treated differently b/c the inputs are wrapped in a directive
-.nxg-business-field.nxg-invalid {
+// For custom inputs that are wrapped in a directive, we need to manually
+// ensure the error border is applied.
+.nxg-business-field.nxg-invalid, .date-field.nxg-invalid {
   border: 0;
 
   input {
-    border: 1px solid $error-dark;
+    border: 1px solid $error;
   }
 }
 
-.nxg-date-field.nxg-invalid {
-  border: 1px solid $error-dark !important;
+select {
+  -webkit-user-select: none;
+
+  &:focus {
+    border-color: darken($border, 20%) !important;
+
+    &:invalid, &:invalid:focus {
+      @include box-shadow(rgba(0,0,0,0) 0 0 0);
+      color: $highlight;
+      border-color: $border;
+    }
+  }
 }
 
-select, .nxg-date-field {
-  margin-bottom: 0;
-}
+/*
+ * CUSTOM SELECT MENU
+ * Overrides default browser styles to use a custom select menu style,
+ * complete with custom arrows.
+ *
+ * Note, because the border is on the containing div, any
+ * ng-class attributes to apply invalid styling should be
+ * placed on the .style-select element, not the select itself.
+ */
+.style-select {
+  @include border-radius($borderRadius);
+  position: relative;
+  overflow: hidden;
+  width: 206px;
+  border: 1px solid $highlight;
+  margin: 5px 0;
 
-.input-prepend.dollar {
-  margin-bottom: 0;
-}
-
-.input-prepend.dollar .add-on{
-  padding-top: 5px;
-  background-color: $white;
-  border: none;
-  margin-right: -16px;
-}
-
-.input-prepend.dollar .add-on, .input-prepend.dollar .add-on:first-child, .input-prepend.dollar .btn:first-child {
-  padding: 4px 0 0 4px;
-  color: #9a9a9a;
-  @include border-radius(0);
-}
-
-.input-prepend.dollar select,
-.input-prepend.dollar textarea,
-.input-prepend.dollar input[type="text"],
-.input-prepend.dollar input[type="password"],
-.input-prepend.dollar input[type="datetime"],
-.input-prepend.dollar input[type="datetime-local"],
-.input-prepend.dollar input[type="date"],
-.input-prepend.dollar input[type="month"],
-.input-prepend.dollar input[type="time"],
-.input-prepend.dollar input[type="week"],
-.input-prepend.dollar input[type="number"],
-.input-prepend.dollar input[type="email"],
-.input-prepend.dollar input[type="url"],
-.input-prepend.dollar input[type="search"],
-.input-prepend.dollar input[type="tel"],
-.input-prepend.dollar input[type="color"],
-.input-prepend.dollar
-.uneditable-input {
-  padding-left: 16px;
-  background: transparent;
-}
-
-.nxg-date-field.control-group {
-
-  border: 1px solid $input-border;
-
-  input, input[type="text"], input[type="text"]:focus {
-    background-color: transparent;
-    border: 0px solid black;
-    width: 83px;
-    padding-right: 0;
-    font-size: 13px;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    height: 0;
+    width: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid $highlight;
   }
 
-  .btn {
-    @include border-radius(0);
-    @include box(28px);
-    @include opacity(50);
-    color: #9a9a9a;
-    background: transparent;
-    font-size: $large-font-size;
-    border: 0;
-    margin: -1px -4px 0 -1px;
-    padding-left: 0;
+  &.auto{
+    width: auto;
+  }
 
-    &:active {
-      border: none;
-      @include box-shadow(none);
+  &.space {
+    margin: 8px;
+  }
+
+  &.disabled {
+    border-color: $border;
+
+    &:after {
+      border-color: $border transparent transparent;
     }
   }
 
-  & + .btn-mini {
-    margin-left: 5px;
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:after {
+      border-color: $danger transparent transparent;
+    }
+  }
+
+  select {
+    @extend .truncate;
+    @include border-radius($borderRadius);
+    width: 100%;
+    height: 28px; // to account for outer div border
+    font-size: $inputFontSize;
+    font-weight: normal;
+    background: $white;
+    -webkit-gradient: none;
+    -webkit-appearance: none;
+    padding: 4px 15% 4px 9px;
+    border: 0;
+    margin: 0;
+
+    &:focus {
+      @include box-shadow(none);
+      color: $highlight;
+      outline: none;
+    }
+
+    &:active {
+      background-color: #CCCCCC;
+    }
+
+    &:disabled {
+      color: #B7B7B7;
+    }
   }
 }
 
-.text-error {
-  @extend %small;
-  color: $error-dark;
-  line-height: $base-line-height;
-  display: block;
-  margin: 5px 0 10px;
-}
+.radio-list {
+  margin-left: 15px;
 
-label.text-error {
-  padding-left: 6px;
-  margin: 5px 0 10px;
-}
-
-.nxg-checkbox {
-  label {
-    margin: 0.5em 0 1em 0.5em;
+  li {
+    margin-bottom: 5px;
   }
 }
 
-#foo:checked::before,
+/*
+ * CUSTOM CHECKBOXES
+ * Our checkboxes use custom icons rather than default browser-rendered
+ * checkboxes. To work properly, the HTML for checkboxes should resemble:
+ * <label class="cr-label" for="foo">
+ *    Actual label contents
+ * </label>
+ * <input type="checkbox" id="foo"/>
+ * <label class="checkbox-img" for="foo"></label>
+ *
+ */
 input[type="checkbox"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
-}
+  position:absolute;
+  clip: rect(0,0,0,0);
+  clip: rect(0 0 0 0);
+  background: url('../img/icons/checkbox.svg');
+  z-index: 20;
 
-#foo:checked,
-input[type="checkbox"] + label::before {
-    position: relative;
-    top: 4px;
-    left: -6px;
-    content: url('../img/checkbox.gif');
-}
-
-input[type="checkbox"]:checked + label::before {
-    position: relative;
-    top: 4px;
-    left: -6px;
-    content: url('../img/checkbox-checked.gif');
-}
-
-input[type="checkbox"], input[type="checkbox"]:checked {
-  & + label::before {
-    @include opacity(80);
+  &:active, &:focus, &:hover {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  & + label {
-    @include user-select(none);
-    position: relative;
-    top: -4px;
+  &:checked + .checkbox-img {
+    background-image: url('../img/icons/checkbox_checked.svg');
   }
 
-  &:focus + label::before, &:active + label::before {
-    @include opacity(100);
+  &:checked:disabled + .checkbox-img {
+    background-image: url('../img/icons/checkbox_disabled_checked.svg');
   }
 
-  &:focus + label, & + label:active, &:active + label {
-    font-weight: bold;
+  &:disabled + .checkbox-img {
+    background-image: url('../img/icons/checkbox_disabled.svg');
+  }
+
+  &:focus + .checkbox-img {
+    background-image: url('../img/icons/checkbox_focus.svg');
+  }
+
+  &:focus:checked + .checkbox-img {
+    background-image: url('../img/icons/checkbox_checked_focus.svg');
+  }
+
+  td & {
+    display: block;
+    margin: 0 auto;
   }
 }
 
-.nxg-radios {
-  label {
-    margin: 0 0.5em 0 0.5em;
-  }
-}
-
-#foo:checked::before,
+/*
+ * CUSTOM RADIO BUTTONS
+ * Our radio buttons use custom icons rather than default browser-rendered
+ * radio buttons. To work properly, the HTML for radio buttons should resemble:
+ * <label class="cr-label" for="foo">
+ *    Actual label contents
+ * </label>
+ * <input type="radio" id="foo"/>
+ * <label class="radio-img" for="foo"></label>
+ */
 input[type="radio"] {
   position:absolute;
   clip: rect(0,0,0,0);
   clip: rect(0 0 0 0);
-}
+  background: url('../img/icons/radio.svg');
+  z-index: 20;
 
-input[type="radio"] + label::before,
-input[type="radio"]:checked + label::before {
-  position: relative;
-  top: 6px;
-  left: -6px;
-}
-
-input[type="radio"] + label::before {
-  content: url('../img/radio.gif');
-}
-
-input[type="radio"]:checked + label::before {
-  content: url('../img/radio-checked.gif');
-}
-
-input[type="radio"], input[type="radio"]:checked {
-  & + label::before {
-    @include opacity(75);
+  &:active, &:focus, &:hover {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  &:focus + label::before {
-    @include opacity(100);
+  &:checked + .radio-img {
+    background-image: url('../img/icons/radio_selected.svg');
   }
-}
 
-input[type="radio"]:disabled {
-  & + label {
-    color: $gray-c;
+  &:checked:disabled + .radio-img {
+    background-image: url('../img/icons/radio_disabled_selected.svg');
   }
-  & + label::before {
-    @include opacity(40);
+
+  &:disabled + .radio-img {
+    background-image: url('../img/icons/radio_disabled.svg');
+  }
+
+  &:focus + .radio-img {
+    background-image: url('../img/icons/radio_focus.svg');
+  }
+
+  &:focus:checked + .radio-img {
+    background-image: url('../img/icons/radio_selected_focus.svg');
   }
 }
 
-.form-title {
-  @extend .subtitle;
-  margin: 0 0 10px 0;
+/*
+ * FULL-WIDTH CHECKBOX/RADIO BUTTON AND LABEL PAIRS
+ * Pairs the label and checkbox/radio button together in a full-width
+ * block, both vertically centered.
+ *
+ * Used for notifications & filters.
+ */
+.cr-label {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 40px 0 10px; // to account for checkbox or radio button
 }
 
-.control-group.half {
-  @extend %float-l;
-  position: relative;
-
-  & + .half {
-    margin-left: 10px;
-  }
-
-  input {
-    width: 110px;
-  }
+.checkbox-img, .radio-img {
+  display: inline-block;
+  position: absolute;
 }
 
-.range {
-  overflow: hidden;
-  margin-bottom: 10px;
-
-  .half {
-    @extend %float-l;
-    margin-bottom: 0;
-  }
-}
-
-.inline-submit {
+.checkbox-img {
+  height: 24px;
+  width: 24px;
+  background: url('../img/icons/checkbox.svg');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
   margin: 0;
-  padding: 20px 0 0 120px;
 
-  button, button:active, button:focus, button:hover {
-    margin: 3px 0;
-    z-index: 100;
+  &.small {
+    height: 18px;
+    width: 18px;
+    background: url('../img/icons/checkbox.svg');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
   }
 }
 
-.form-footer {
-  @extend %align-right;
+.radio-img {
+  top: 7px;
+  right: 10px;
+  height: $radioSize;
+  width: $radioSize;
+  background: url('../img/icons/radio.svg');
+  background-size: $radioSize $radioSize;
+  background-repeat: no-repeat;
+  margin: 3px 0 0 5px;
 }
 
-.form-separator {
-  @extend %center;
-}
+/*
+ * INLINE CHECKBOXES AND RADIO BUTTONS
+ * Checkboxes/radio buttons that appear side by side, or
+ * appear in a non-full-width context.
+ */
+.cr-inline {
+  position: relative;
+  margin-bottom: 5px;
 
-.nxg-fancy-radios {
-  margin-left: 7px;
+  .checkbox-img, .radio-img {
+    position: relative;
+    top: 5px;
+  }
 
-  label {
-    cursor: pointer;
-    display: inline;
+  .cr-label {
+    display: inline-block;
+    max-width: 90%;
+    padding: 0 15px 0 0;
+    margin: 0;
 
-    &::before {
-      cursor: pointer;
+    &:last-child {
+      padding: 0;
+    }
+  }
+
+  .radio-img {
+    right: 4px;
+  }
+
+  .checkbox-img {
+    top: 10px;
+    margin-right: 5px;
+
+    &.small {
+      top: 6px;
     }
   }
 }
 
-.nxg-fancy-radios .group-label {
-  padding-right: 15px;
-  vertical-align: bottom;
-  line-height: 11px;
+.clear-search {
+  float: right;
 }
 
 /*
- * #foo doesn't refer to a particular element; it's there to prevent
- * browsers from implementing later selectors if it doesn't understand
- * this one. See http://css-tricks.com/snippets/css/custom-radio-buttons
+ * CUSTOM STYLED INPUT
+ * An input with special styling, which may or may not have a
+ * button attached to it on the right.
+ *
+ * Typical HTML:
+ * <div class="styled-input with-btn">
+ *   <input type="text"/>
+ *   <button class="btn btn-input" type="submit">
+ *     <span nxg-icon="icon-search"></span>
+ *   </button>
+ * </div>
  */
-#foo:checked::before,
-.nxg-fancy-radios input[type="radio"] {
-    position:absolute;
-    clip: rect(0,0,0,0);
-    clip: rect(0 0 0 0);
+.styled-input {
+  @extend .clearfix;
+  position: relative;
+  width: 100%;
+  margin: 5px 0;
+
+  input, input[type="text"] {
+    width: 85%;
     margin: 0;
+
+    &:focus + .btn-input {
+      background: $highlight;
+
+      &:active, &:hover {
+        background: darken($accent, 10%);
+      }
+    }
+  }
+
+  &.with-btn input,
+  &.with-btn input[type="text"] {
+    @include border-right-radius(0);
+    float: left;
+  }
 }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"] + label::before {
-  // @extend .btn;
-  @extend %small;
-  @extend %heavy;
-  @include border-radius(3px);
-  display: inline-block;
-  float: left;
-  background-color: $btn-active-bkgd;
-  @include background(linear-gradient($white, $gray-d));
-  color: $btn-active-text;
-  line-height: 20px;
-  text-shadow: none;
-  text-transform: uppercase;
-  padding:2px 14px;
-  border: 0;
-  border-bottom: 1px solid $btn-active-stroke;
-  // margin-right: -4px;
+  /*
+   * BUTTON INPUT
+   * Button specifically designed to be paired with an input,
+   * and positioned exactly at the right edge of the input.
+   */
+  .btn-input {
+    @include border-left-radius(0);
+    width: 15%;
+    background: $accent;
+    display: block;
+    float: left;
+    height: $cta-2-height;
+    padding: 0;
+    border: 0;
+    margin: 0 0 0 -1px;
+
+    &:focus {
+      background: $highlight;
+    }
+
+    &:active, &:hover {
+      background: darken($accent, 10%);
+
+      .svg-icon svg {
+        fill: $white;
+      }
+    }
+
+    .svg-icon svg {
+      fill: $white;
+    }
+  }
+
+/*
+ * RANGE INPUTS
+ */
+.range {
+  @extend .clearfix;
+  position: relative;
+
+  .range-start, .range-end {
+    @extend %float-l;
+    width: 100px;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .range-end {
+    margin-left: 5px;
+  }
 }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].first + label::before {
-  @include border-radius(3px 0 0 3px);
+/*
+ * DATE FIELD
+ */
+.date-field {
+  position: relative;
+  width: 100px;
+
+  &.date-inline {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  input, input[type="text"] {
+    width: 100%;
+    padding-right: 26px; // to account for icon
+  }
+
+  .btn-unstyle {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    margin: 0;
+  }
+
+  .btn-unstyle:hover, .btn-unstyle:focus {
+    .icon-calendar svg {
+      fill: $highlight;
+    }
+  }
 }
 
-#foo:checked,
-.nxg-fancy-radios input[type="radio"] + label::before {
-  @include border-radius(0);
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].last + label::before {
-  @include border-radius(0 3px 3px 0);
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]:checked + label::before {
-  @include background(linear-gradient(#eaeaea, #c4c4c4));
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-  color: $btn-hover-text;
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"].last:checked + label::before {
-  @include box-shadow(inset 0 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(0,0,0,0.4));
-}
-
-label.input-title {
-  max-width: 200px;
-}
-
-// Datepicker
+/*
+ * DATEPICKER GRID
+ * We need to use the classes bootstrap's datepicker uses,
+ * and override those styles; hence the specificity.
+ */
 .datepicker {
   &.datepicker-dropdown {
     @include box-shadow(rgba(0,0,0,0) 0 0 0);
@@ -454,8 +587,7 @@ label.input-title {
 
   .datepicker-switch {
     @include border-radius(0);
-    @extend %thin;
-    color: $brand-text;
+    color: $highlight;
     letter-spacing: 0;
     font-size: $large-font-size;
   }
@@ -469,13 +601,12 @@ label.input-title {
   }
 
   .dow {
-    color: $base-text-color;
+    color: $text;
   }
 
   .day, .month, .year {
-    @extend %thin;
     @include border-radius(0);
-    color: $brand-text;
+    color: $highlight;
 
     &.new, &.old {
       color: $gray-9;
@@ -496,15 +627,17 @@ label.input-title {
     @include border-radius(0);
     @include background-image(none);
     color: $white;
-    background-color: $brand-text;
+    background-color: $highlight;
 
     &:hover {
-      background-color: darken($brand-text, 10%);
+      background-color: darken($highlight, 10%);
     }
   }
 }
 
-// autocomplete
+/*
+ * AUTOCOMPLETE
+ */
 .typeahead.dropdown-menu {
   padding: 0;
   border-color: $border;
@@ -512,72 +645,13 @@ label.input-title {
   li {
     &.active a {
       @include background-image(none);
-      background-color: $brand-bright;
+      background-color: $primary;
       color: $white;
     }
 
     a {
-      color: $base-text-color;
+      color: $text;
       border-color: $border;
-    }
-  }
-}
-
-// New/Refactored code for v2.23
-/*
- * CUSTOM SELECT MENU
- * Overrides default browser styles to use a custom select menu style,
- * complete with custom arrows.
- */
-.style-select {
-  @include border-radius($borderRadius);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid $highlight;
-  margin: 5px 0;
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 9px;
-    height: 0;
-    width: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid $highlight;
-  }
-
-  &.space {
-    margin: 8px;
-  }
-
-  &.disabled {
-    border-color: $border;
-
-    &:after {
-      border-color: $border transparent transparent;
-    }
-  }
-
-  select {
-    // @extend .truncate;
-    @include border-radius($borderRadius);
-    width: 100%;
-    background: $white;
-    -webkit-gradient: none;
-    -webkit-appearance: none;
-    padding: 5px 15% 5px 9px;
-    border: 0;
-    margin: 0;
-
-    &:active {
-      background-color: #CCCCCC;
-    }
-
-    &:disabled {
-      color: #B7B7B7;
     }
   }
 }

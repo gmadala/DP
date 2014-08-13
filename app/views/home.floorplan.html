@@ -1,7 +1,7 @@
 <section class="row-fluid">
   <section class="span12">
     <div nxg-search
-      title="Floor Plan Search"
+      title="Find a Floor Plan"
       class="search-form"
       prompt="Stock #, VIN, Make, Model, or Year"
       metric-search="{{metric.CLICK_FLOORPLAN_SEARCH_BUTTON}}"
@@ -12,115 +12,98 @@
       metric-filter-by-inventory-location="{{metric.CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION}}"
       filter-label="Filter by Flooring Status"
       filter-options="filterOptions"
-      active-criteria="proposedSearchCriteria"
-      on-search="search()"
-      on-clear="resetSearch()"
+      active-criteria="floorplanData.searchCriteria"
+      on-search="floorplanData.search(floorplanData.searchCriteria)"
+      on-clear="floorplanData.resetSearch(filterOptions)"
       filterable="true"
       show-location-filter="true">
     </div>
 
-    <div ng-switch="data.results.length > 0 || data.loading">
+    <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
+      <h2 class="well-title">Floor Plan</h2>
       <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+        Sorry, no results found. Please <a ng-click="floorplanData.resetSearch(filterOptions)" title="New Search">try a new search</a>.
       </p>
-      <section ng-switch-when="true"
-               nxg-infinite-scroll="fetchNextResults()"
-               nxg-infinite-scroll-disabled="data.loading"
-               nxg-infinite-scroll-show-indicator="data.loading">
 
-        <ul class="unstyled floor-list">
-          <li class="table-list-head">
-            <div class="cell fl-more"></div>
-            <div class="cell fl-desc sortable-container"
-                 ng-click="sortBy('UnitMake')"
-                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Description</span>
-            </div>
-            <div class="cell fl-stock sortable-container"
-                 ng-click="sortBy('StockNumber')"
-                 ng-class="{ sorted : sortField == 'StockNumber', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Stock #</span>
-            </div>
-            <div class="cell fl-status sortable-container"
-                 ng-click="sortBy('Status')"
-                 ng-class="{ sorted : sortField == 'Status', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Status</span>
-            </div>
-            <div class="cell fl-purchaseDate sortable-container"
-                 ng-click="sortBy('PurchaseDate')"
-                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Purchased</span>
-            </div>
-            <div class="cell fl-floorDate sortable-container"
-                 ng-click="sortBy('FlooringDate')"
-                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Floored</span>
-            </div>
-            <div class="cell fl-seller sortable-container"
-                 ng-click="sortBy('SellerBusinessName')"
-                 ng-class="{ sorted : sortField == 'SellerBusinessName', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Seller</span>
-            </div>
-            <div class="cell fl-lastPayDate sortable-container"
-                 ng-click="sortBy('LastPaymentDate')"
-                 ng-class="{ sorted : sortField == 'LastPaymentDate', desc : sortDescending }">
-              <div class="sorting-arrows"></div>
-              <span class="header-text">Last Payment</span>
-            </div>
-            <div class="cell fl-title">
-              Title
-            </div>
-          </li><!-- end .table-list-head -->
+      <div ng-switch-when="true"
+           nxg-infinite-scroll="floorplanData.fetchNextResults()"
+           nxg-infinite-scroll-disabled="floorplanData.loading"
+           nxg-infinite-scroll-show-indicator="floorplanData.loading">
+        <table class="table table-striped table-primary">
+          <thead>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('FlooringDate')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
+              Floored<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('UnitMake')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
+              Description<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('Status')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'Status', desc : floorplanData.searchCriteria.sortDescending }">
+              Status<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('PurchaseDate')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'PurchaseDate', desc : floorplanData.searchCriteria.sortDescending }">
+              Purchased<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('SellerBusinessName')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'SellerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
+              Seller<span class="sortArrows"></span>
+            </th>
+            <th class="sortable"
+                ng-click="floorplanData.sortBy('LastPaymentDate')"
+                ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'LastPaymentDate', desc : floorplanData.searchCriteria.sortDescending }">
+              Last Payment<span class="sortArrows"></span>
+            </th>
+            <th>Title</th>
+          </thead>
 
-          <li class="table-list-row" ng-repeat="item in data.results">
-            <div class="main-info">
-              <div class="cell fl-more">
+          <tr ng-repeat="item in floorplanData.results">
+            <td>
+              <p class="lockup-major"> {{ item.FlooringDate | moment }} </p>
+              <p class="lockup-minor">{{ item.DaysOnFloorplan }} days</p>
+            </td>
+            <td>
+              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></a>
+
+              <div class="row-fluid">
+                <p class="lockup-minor caps vin">VIN: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+                <p class="lockup-minor caps stock">STK: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span></p>
               </div>
-              <div class="cell fl-desc">
-                <p><span nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span></p>
-                <p><span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
-                <br/><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">Temp Link to Vehicle Details</a>
-              </div>
-              <div class="cell fl-stock">
-                <p nxg-highlight="item.StockNumber" highlight="item.data.query"></p>
-              </div>
-              <div class="cell fl-status">
-                <p> {{ item.FloorplanStatusName }} </p>
-              </div>
-              <div class="cell fl-purchaseDate">
-                <p> {{ item.UnitPurchaseDate | moment }} </p>
-              </div>
-              <div class="cell fl-floorDate">
-                <p> {{ item.FlooringDate | moment }} </p>
-                <p ng-show="item.DaysOnFloorplan > 0">Days Floored: {{ item.DaysOnFloorplan }}</p>
-              </div>
-              <div class="cell fl-seller">
-                <p> {{ item.SellerName }} </p>
-              </div>
-              <div class="cell fl-lastPayDate">
-                <p> {{ item.LastPaymentDate | moment }} </p>
-              </div>
-              <div class="cell fl-title">
-                <a ng-show="item.TitleImageAvailable"
-                   ng-href="{{ item.$titleURL }}"
-                   nxg-track="{{ metric.VIEW_TITLE }}"
-                   target="_blank">
-                  View
+            </td>
+            <td>
+              <p> {{ item.FloorplanStatusName }} </p>
+            </td>
+            <td>
+              <p> {{ item.UnitPurchaseDate | moment }} </p>
+            </td>
+            <td>
+              <p> {{ item.SellerName }} </p>
+            </td>
+            <td>
+              <p class="lockup-major">{{ item.LastPaymentDate | moment }}</p>
+             </td>
+            <td>
+               <a class="btn btn-square" ng-show="item.TitleImageAvailable"
+                  ng-href="{{ item.$titleURL }}"
+                  nxg-track="{{ metric.VIEW_TITLE }}"
+                  target="_blank">
+                  <span nxg-icon="icon-title"></span>
                 </a>
-              </div>
-            </div><!-- end .main-info -->
-          </li><!-- end .table-list-row -->
-        </ul><!-- end .floor-list -->
-        <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+            </td>
+          </tr>
+        </table>
+
+        <p class="text-error notice-box" ng-show="floorplanData.hitInfiniteScrollMax">
           There are too many results to display, please refine your search further.
         </p>
-      </section>
+      </div>
     </div>
-  </section><!-- end .span12 -->
-</section><!-- end .row-fluid -->
+  </section>
+</section>

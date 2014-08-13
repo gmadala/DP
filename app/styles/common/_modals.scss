@@ -12,7 +12,7 @@
 .modal {
   @extend %small;
   @include border-radius(0);
-  width: 400px;
+  width: 450px;
   height: auto;
   max-height: 90%;
   background: #F2F2F2;
@@ -33,19 +33,51 @@
   &.topmost {
     z-index: 2000;
   }
+
+  // modal widths
+  &.modal-medium {
+    width: 500px;
+    margin-left: -250px;
+  }
+
+  &.modal-large {
+    width: 700px;
+    margin-left: -350px;
+  }
 }
+
 
 .modal-subtitle {
   @extend %heavy;
 }
 
+/* Some modals require things to go right to the edge,
+ * like payment or fee details. Use the extra "to-edge"
+ * class for these modals.
+ */
 .modal-body {
   max-height: none;
   border: 1px solid $border;
-  padding: 20px 0 0;
+  padding: 20px;
+
+  &.to-edge {
+    padding: 20px 0 0;
+  }
 
   .list-table {
     padding: 10px 50px 10px 30px;
+  }
+
+  .table-secondary {
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin: 0 0 5px 0;
+  }
+
+  h4 {
+    margin: 0 0 5px;
   }
 }
 
@@ -55,10 +87,16 @@
   padding: 12px 20px;
   border: none;
   margin: 0;
+
+  // message boxes have the h3 inside a div.modal-header,
+  // so we need to apply the styles for text more specifically.
+  h3 {
+    color: $white;
+  }
 }
 
 .modal-close {
-  font-size: $base-font-size;
+  font-size: $baseFontSize;
   position: absolute;
   top: 8px;
   right: 11px;
@@ -75,11 +113,16 @@
 }
 
 .modal-footer {
+  @include box-shadow(none);
   padding: 10px;
-  // margin: 12px;
+  border: 0;
 
   .btn {
-    margin-left: 5px;
+    margin: 5px 10px;
+
+    & + .btn {
+      margin: 5px 10px 5px 0;
+    }
   }
 }
 
@@ -131,7 +174,7 @@
   }
 
   td, th {
-    line-height: $base-line-height;
+    line-height: $baseLineHeight;
     border: 1px solid #eaeaea;
     border-top: none;
   }

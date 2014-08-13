@@ -1,22 +1,24 @@
-<form class="row-fluid two-col floorcar" name="form" novalidate>
-   <fieldset class="span8 well adjacent first">
-      <h4>Vehicle Information</h4>
-      <div class="well-out">
+<form class="row-fluid floorcar" name="form" novalidate>
+  <div class="span6 well">
+    <h2 class="well-title">Vehicle Information</h2>
 
-       <div nxg-vin-details floor-model="data" validity="validity" error-flag="vinDetailsErrorFlag" form="form" nxg-autofocus="reset"></div>
+    <fieldset class="well-item">
+      <div nxg-vin-details floor-model="data" validity="validity" error-flag="vinDetailsErrorFlag" form="form" nxg-autofocus="reset"></div>
 
-       <label for="inputColor" class="input-title">Color</label>
-       <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
-               ng-options="color.ColorName for color in options.colors" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" required>
-        <option value="">Make Selection</option>
-       </select>
-       <label for="inputColor" class="text-error"
+      <label for="inputColor" class="input-title">Color</label>
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" >
+        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
+               ng-options="color.ColorName for color in options.colors" required>
+          <option value="">Make Selection</option>
+         </select>
+      </div>
+      <label for="inputColor" class="text-error"
               ng-show="validity.inputColor.$error.required">
          Please select a Color.
-       </label>
+      </label>
 
-       <label for="inputMileage" class="input-title">Mileage</label>
-       <input type="text" id="inputMileage" name="inputMileage"
+      <label for="inputMileage" class="input-title">Mileage</label>
+      <input type="text" id="inputMileage" name="inputMileage"
               ng-model="data.UnitMileage"
               ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
               ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
@@ -24,145 +26,160 @@
               nxg-min="1"
               nxg-validate-int="6"
               nxg-blur="mileageExit(form.inputMileage)" />
-       <label for="inputMileage" class="text-error"
+      <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.required">
           Please enter the Mileage.
-       </label>
-       <label for="inputMileage" class="text-error"
+      </label>
+      <label for="inputMileage" class="text-error"
               ng-show="!validity.inputMileage.$error.required && (validity.inputMileage.$error.pattern || validity.inputMileage.$error.nxgMin)">
           Please enter a positive integer value with no decimals.
-       </label>
-       <label for="inputMileage" class="text-error"
+      </label>
+      <label for="inputMileage" class="text-error"
               ng-show="!validity.inputMileage.$error.required && validity.inputMileage.$error.maxlength">
           Please enter a value less than 1,000,000 miles.
-        </label>
+      </label>
 
-       <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
-       <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
-               ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }"
+      <label for="inputTitleHolder" class="input-title">Who has the Title?</label>
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
+        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-options="location.Name for location in options.titleLocationOptions"
                required>
-         <option value="">Make Selection</option>
-       </select>
-       <label for="inputTitleHolder" class="text-error"
+          <option value="">Make Selection</option>
+        </select>
+      </div>
+      <label for="inputTitleHolder" class="text-error"
               ng-show="validity.inputTitleHolder.$error.required">
          Please select who has the title.
-       </label>
+      </label>
 
-       <label for="consignerTicket" class="input-title">Consigner Ticket Number</label>
-        <input type="text" id="consignerTicket" name="consignerTicket"
-              ng-model="data.ConsignerTicketNumber"
-              ng-class="{ 'nxg-invalid': validity.consignerTicket.$error.required }"
-              required/>
-        <label for="consignerTicket" class="text-error"
-               ng-show="validity.consignerTicket.$error.required">
-          Please enter a Consigner Ticket Number.
-        </label>
+      <label for="consignerTicket" class="input-title">Consigner Ticket Number</label>
+      <input type="text" id="consignerTicket" name="consignerTicket"
+            ng-model="data.ConsignerTicketNumber"
+            ng-class="{ 'nxg-invalid': validity.consignerTicket.$error.required }"
+            required/>
+      <label for="consignerTicket" class="text-error"
+             ng-show="validity.consignerTicket.$error.required">
+        Please enter a Consigner Ticket Number.
+      </label>
 
-        <label for="inputLotNum" class="input-title">Lot Number</label>
-        <input type="text" id="inputLotNum" name="inputLotNum"
-              ng-model="data.LotNumber"
-              ng-class="{ 'nxg-invalid': validity.inputLotNum.$error.required }"
-              required/>
-        <label for="inputLotNum" class="text-error"
-               ng-show="validity.inputLotNum.$error.required">
-          Please enter the Lot Number.
-        </label>
+      <label for="inputLotNum" class="input-title">Lot Number</label>
+      <input type="text" id="inputLotNum" name="inputLotNum"
+            ng-model="data.LotNumber"
+            ng-class="{ 'nxg-invalid': validity.inputLotNum.$error.required }"
+            required/>
+      <label for="inputLotNum" class="text-error"
+             ng-show="validity.inputLotNum.$error.required">
+        Please enter the Lot Number.
+      </label>
+    </fieldset>
+  </div>
 
+  <div class="span6 well">
+    <h2 class="well-title">Sale Information</h2>
+
+    <fieldset class="well-item">
+      <label for="inputBiz" class="input-title">Buyer</label>
+      <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires }">
+        <input nxg-business-field="buyers" id="inputBiz" class="input-xlarge"
+               name="inputBiz"
+               ng-required="true"
+               selected-business="data.BusinessId"
+               validity="validity"
+               form="form" />
+      </span>
+
+      <label for="inventoryAddress" class="input-title">Inventory Address</label>
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocations.length <= 1 }">
+        <select id="inventoryAddress"
+               name="inventoryAddress"
+               ng-model="data.PhysicalInventoryAddressId"
+               ng-options="(location | address:'oneLineSelect') for location in sellerLocations"
+               ng-disabled="sellerLocations.length <= 1"
+               required>
+          <option value="">Make Selection</option>
+        </select>
       </div>
-   </fieldset>
+      <label for="inputAddress" class="text-error" ng-show="validity.inventoryAddress.$error.required">
+        Please select an Inventory Location.
+      </label>
 
-    <fieldset class="span8 well adjacent last-adjacent">
-      <h4>Sale Information</h4>
-      <div class="well-out">
-
-        <label for="inputBiz" class="input-title">Buyer</label>
-        <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires }">
-          <input nxg-business-field="buyers" id="inputBiz" class="input-xlarge"
-                 name="inputBiz"
-                 ng-required="true"
-                 selected-business="data.BusinessId"
-                 validity="validity"
-                 form="form" />
-        </span>
-
-        <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
-        <div class="input-prepend dollar">
-          <span class="add-on">$</span>
-          <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
-                 nxg-min="1"
-                 required
-                 nxg-input-currency="1000000000000"
-                 ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
-          <label for="inputPurchaseAmt" class="text-error"
-                 ng-show="validity.inputPurchaseAmt.$error.required">
-            Please enter the Purchase Amount.
-          </label>
-          <label for="inputPurchaseAmt" class="text-error"
-                 ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)">
-            Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
-          </label>
-            <label for="inputPurchaseAmt" class="text-error"
-                 ng-show="!validity.inputPurchaseAmt.$error.pattern && !validity.inputPurchaseAmt.$error.required && validity.inputPurchaseAmt.$error.max">
-                  Please enter a value less than $1,000,000,000,000.
-          </label>
-        </div>
-
-        <label for="inputSaleDate" class="input-title">Sales Date</label>
-
-        <input id="inputSaleDate" name="inputSaleDate" ng-model="data.UnitPurchaseDate"
-               nxg-date-field date-allow="past"
+      <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
+      <div class="input-prepend dollar">
+        <span class="add-on">$</span>
+        <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
+               nxg-min="1"
                required
-               ng-pattern="isYear"
-               ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) || validity.inputSaleDate.$error.past || validity.inputSaleDate.$error.pattern || validity.inputSaleDate.$error.date }" />
-        <label for="inputSaleDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.required || validity.inputSaleDate.$error.date">
-          Please enter a Valid Sales Date.
+               nxg-input-currency="1000000000000"
+               ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="validity.inputPurchaseAmt.$error.required">
+          Please enter the Purchase Amount.
         </label>
-        <label for="inputPurchaseDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.pattern && !validity.inputSaleDate.$error.date">
-            Please enter a Valid Sales Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
-          </label>
-        <label for="inputSaleDate" class="text-error"
-               ng-show="validity.inputSaleDate.$error.past">
-          Please enter a Sales Date in the past.
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)">
+          Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
         </label>
-        <p class="scale-description">
-          The actual sale date must be used when flooring a car
-          <span class="btn-help inline"
-                  tooltip-placement="right"
-                  tooltip-popup-trigger="hover"
-                  tooltip-popup-delay="300"
-                  tooltip="Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct."
-                  tooltip-animation="true">?</span>
-        </p>
+          <label for="inputPurchaseAmt" class="text-error"
+               ng-show="!validity.inputPurchaseAmt.$error.pattern && !validity.inputPurchaseAmt.$error.required && validity.inputPurchaseAmt.$error.max">
+                Please enter a value less than $1,000,000,000,000.
+        </label>
+      </div>
 
-        <label for="inputDisburseAcct" class="input-title">Bank Account</label>
+      <label for="inputSaleDate" class="input-title">Sales Date</label>
+
+      <input id="inputSaleDate" name="inputSaleDate" ng-model="data.UnitPurchaseDate"
+             nxg-date-field date-allow="past"
+             required
+             ng-pattern="isYear"
+             ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) || validity.inputSaleDate.$error.past || validity.inputSaleDate.$error.pattern || validity.inputSaleDate.$error.date }" />
+      <label for="inputSaleDate" class="text-error"
+             ng-show="validity.inputSaleDate.$error.required || validity.inputSaleDate.$error.date">
+        Please enter a Valid Sales Date.
+      </label>
+      <label for="inputPurchaseDate" class="text-error"
+             ng-show="validity.inputSaleDate.$error.pattern && !validity.inputSaleDate.$error.date">
+          Please enter a Valid Sales Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
+        </label>
+      <label for="inputSaleDate" class="text-error"
+             ng-show="validity.inputSaleDate.$error.past">
+        Please enter a Sales Date in the past.
+      </label>
+      <p class="scale-description">
+        The actual sale date must be used when flooring a car
+        <span class="btn-help inline"
+                tooltip-placement="right"
+                tooltip-popup-trigger="hover"
+                tooltip-popup-delay="300"
+                tooltip="Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct."
+                tooltip-animation="true">?</span>
+      </p>
+
+      <label for="inputDisburseAcct" class="input-title">Bank Account</label>
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
-                ng-options="account.BankAccountName for account in options.bankAccounts"
-                ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }"
-                required>
+              ng-options="account.BankAccountName for account in options.bankAccounts"
+              required>
          <option value="">Make Selection</option>
         </select>
-        <label for="inputDisburseAcct" class="text-error"
-               ng-show="validity.inputDisburseAcct.$error.required">
-          Please select a Bank Account for Disbursement.
-        </label>
+      </div>
+      <label for="inputDisburseAcct" class="text-error"
+             ng-show="validity.inputDisburseAcct.$error.required">
+        Please select a Bank Account for Disbursement.
+      </label>
 
-        <div class="footer modal-footer">
-          <button class="btn btn-small btn-primary"
-                  ng-disabled="submitInProgress"
-                  type="submit"
-                  ng-click="submit()">
-            Floor
-          </button>
-          <button class="btn btn-small btn-secondary"
-                  ng-disabled="submitInProgress"
-                  ng-click="cancel()">
-            Cancel
-          </button>
-        </div>
+      <div class="form-footer button-group">
+        <button class="btn-cta cta-secondary"
+                ng-disabled="submitInProgress"
+                ng-click="cancel()">
+          Cancel
+        </button>
+        <button class="btn-cta cta-primary"
+                ng-disabled="submitInProgress"
+                type="submit"
+                ng-click="submit()">
+          Floor
+        </button>
       </div>
     </fieldset>
+  </div>
 </form>
-<span id="checkbox-image-preloader"></span>

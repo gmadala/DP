@@ -1,105 +1,15 @@
 // TITLE RELEASES
 
-.cell {
-  &.title-more { width: 4%; }
-  &.title-desc { width: 22%; }
-  &.title-stock { width: 12%; }
-  &.title-status { width: 11%; }
-  &.title-purchaseDate {
-    width: 14%;
-    padding-right: 3px;
-  }
-  &.title-floorDate { width: 15%; }
-  &.title-actions {
-    width: 22%;
-    a {
-      line-height: 1.5;
-    }
-  }
-}
+.send-to-label {
+  display: block;
+  float: left;
+  width: 20%;
+  margin: 15px 0 10px 0;
 
-.title-list {
-  margin: 0;
-}
-
-.table-list-row .cell.title-actions {
-  padding: 8px 10px;
-}
-
-.title-checkout-list {
-  .remove {
-    font-size: 13px;
-  }
-
-  .cell {
-    &.title-desc { width: 45%; }
-    &.title-stock { width: 12%; }
-    &.title-floorDate { width: 18%; }
-    &.title-status { width: 25%; }
-  }
-}
-
-.title-checkout-list {
-  .send-to-label {
-    display: block;
+  & + .nxg-alt-addr {
     float: left;
-    margin: 15px 10px 10px 0;
+    width: 80%;
   }
-
-  .nxg-alt-addr {
-    clear: none;
-
-    select {
-      width: 70%;
-    }
-  }
-}
-
-#toggleRequest {
-  position: relative;
-  padding-left: 26px;
-  width: 130px;
-  margin: 5px 0 5px;
-
-  span {
-    display: block;
-
-    &:before {
-      content: '';
-      @include background-image(url('../img/icons/twocolor_chkbx.png'));
-      display: block;
-      position: absolute;
-      left: 5px;
-      width: 16px;
-      height: 16px;
-      margin: 2px 0;
-    }
-  }
-
-  &.requested span:before {
-    width: 17px;
-    @include background-image(url('../img/icons/twocolor_chkbx_checked.png'));
-  }
-
-  &.requested {
-    background-color: #878787; // IE fallback
-    @include background-image(linear-gradient(#878787, $gray-5));
-    color: $white;
-  }
-}
-
-// REQUESTS SUMMARY
-.request-summary {
-  .submit button {
-    @extend %full-width;
-  }
-}
-
-.emphasis {
-  @extend %heavy;
-  color: darken($base-text-color, 10%);
-  font-size: 1.3em;
-  margin: 0 2px;
 }
 
 // CONFIRMATION MODAL

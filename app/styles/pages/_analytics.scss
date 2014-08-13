@@ -10,7 +10,7 @@
   thead {
     @extend %thin;
     font-size: $tiny-font-size;
-    color: $base-text-color;
+    color: $text;
     background-color: #eaeaea;
   }
 
@@ -33,62 +33,13 @@
     bottom: 0px;
   }
 
-  .details-toggle-btn {
-    padding-left: 0;
-    display: block;
-  }
-
-  .aging-vehicles, .average-turn-chart {
-    .well-out {
-      height: 360px;
-    }
-  }
-
-  .aging-vehicles {
-    .well-out {
-      @extend %align-right;
-    }
-
-    li {
-      margin-bottom: 10px;
-
-      .item-total {
-        margin: 2px 0;
-      }
-    }
-  }
-
   .average-turn-chart {
     .chart-obj {
       height: 330px;
     }
   }
 
-  .well .well-out {
-    @extend %small;
-    position: relative;
-  }
-
   .business-summary {
-    padding: 0;
-    margin: 0;
-
-    h5 {
-      margin-top: 0;
-    }
-
-    li {
-      font-size: $tiny-font-size;
-    }
-
-    &.collapsed .well-out {
-      height: 180px;
-    }
-
-    &.expanded .well-out{
-      height: 290px;
-    }
-
     table {
       @extend %full-width;
       font-size: $tiny-font-size;
@@ -103,7 +54,7 @@
 
   table.movers-list {
     position: absolute;
-    top: 70px;
+    top: 120px;
     left: 10px;
     width: calc(100% - 348px);
     height: 320px;
@@ -140,7 +91,7 @@
 
   .movers-chart {
     position: absolute;
-    top: 53px;
+    top: 100px;
     right: 10px;
     overflow: hidden;
     width: 65%;
@@ -157,20 +108,6 @@
 
   .top-auctions-container, .movers-container {
     position: relative;
-
-    .well-out {
-      height: 440px;
-    }
+    height: 500px;
   }
-}
-
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]#best-movers + label::before {
-  content: 'Ten Best Movers';
-}
-
-#foo:checked,
-.nxg-fancy-radios input[type="radio"]#worst-movers + label::before {
-  content: 'Ten Worst Movers';
 }

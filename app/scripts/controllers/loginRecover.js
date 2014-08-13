@@ -99,7 +99,7 @@ angular.module('nextgearWebApp')
     $scope.showSuccessMessage = function () {
       var title = 'Success',
         msg = 'Thank you, check your email for the requested account information.',
-        buttons = [{label: 'OK', cssClass: 'btn-primary'}];
+        buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
       $dialog.messageBox(title, msg, buttons).open().then(
         function () {
           $state.transitionTo('login');

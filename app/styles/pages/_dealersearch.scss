@@ -1,0 +1,79 @@
+
+// Dealer Search
+.credit-query {
+  &.modal {
+    width: 500px;
+    margin-left: -250px;
+  }
+
+  th, td {
+    @extend %align-left;
+    line-height: $baseLineHeight;
+    padding: 3px 0;
+  }
+
+  .buyer-info {
+    @extend %full-width;
+
+    th {
+      @extend %thin;
+      width: 35%;
+      vertical-align: top;
+    }
+  }
+
+  .credit-values {
+    @extend %full-width;
+
+    td:first-child {
+      width: 35%;
+    }
+  }
+}
+
+.dealer-search-modal {
+  .control-group {
+    @extend %float-l;
+    width: 48%;
+    margin-left: 10px;
+
+    &.shorten {
+      width: 20%;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      input, select {
+        @extend %full-width;
+      }
+    }
+  }
+
+  .search-controls {
+    @extend %clear;
+  }
+
+  &.search-modal .modal-footer {
+    border: 0;
+    margin-top: 12px;
+  }
+}
+
+.dealer-search .well-content {
+  padding: 20px;
+}
+
+.dealer-search .dash-well {
+  height: auto;
+}
+
+.well-content {
+    // h4 {
+    //   margin: 25px 0;
+    // }
+  .form-description {
+    margin-bottom: 24px;
+  }
+
+}

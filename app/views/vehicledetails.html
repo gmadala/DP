@@ -98,8 +98,8 @@
                       <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address) for addr in inventoryLocations"></select>
                     </div>
                     <div class="button-group">
-                      <button type="button" class="btn-cta cta-secondary" ng-click="flooringInfo.cancelInventoryChanges()">Cancel Changes</button>
-                      <button type="submit" class="btn-cta cta-primary" ng-click="flooringInfo.saveInventoryChanges()">Save Location</button>
+                      <button type="button" class="btn-unstyle btn-link" ng-click="flooringInfo.cancelInventoryChanges()">Cancel</button>
+                      <button type="submit" class="btn-cta cta-secondary" ng-click="flooringInfo.saveInventoryChanges()">Save Changes</button>
                     </div>
                   </div>
                 </li>
@@ -111,7 +111,13 @@
 
         <!-- Payment Activity -->
         <div class="well">
-          <h2 class="well-title">Financial Activity <a class="well-sub-title featured" ng-href="{{ historyReportUrl }}">View the Vehicle History Detail Report</a></h2>
+          <h2 class="well-title">Financial Activity
+            <div class="paired paired-reversed well-sub-title">
+              <a class="featured" ng-href="{{ historyReportUrl }}">
+                <span class="paired-body">View the Vehicle History Detail Report</span><span class="paired-media" nxg-icon="icon-car"></span>
+              </a>
+            </div>
+          </h2>
           <div class="row-fluid col-bordered">
             <div class="span7">
               <div class="row-fluid">
@@ -177,14 +183,20 @@
           </div>
           <!-- Hidden by default; Hide & disable button if there is no payment activity to show. -->
           <div collapse="isCollapsed" ng-show="financialSummary.FloorplanActivity.length > 0" class="row-fluid aside payment-activity">
-            <div class="span7">
+            <div class="span7 table-holder">
               <table class="table table-striped table-secondary">
                 <thead>
                   <th>Activity Date</th>
                   <th>Transaction Details</th>
                 </thead>
                 <tr ng-repeat="activity in financialSummary.FloorplanActivity">
-                  <td class="center">{{ activity.ActivityDate | moment }}</td>
+                  <td class="center">
+                    <div class="paired">
+                      <span class="paired-media" nxg-icon="icon-downArrow" ng-show="activity.IsPayment && !activity.IsFee"></span>
+                      <span class="paired-media" nxg-icon="icon-upArrow" ng-show="activity.IsFee && !activity.IsPayment"></span>
+                      <span class="paired-body">{{ activity.ActivityDate | moment }}</span>
+                    </div>
+                  </td>
                   <td><a href="" class="primary" ng-click="financialSummary.getActivityDetails(activity)">{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | currency }}</a></td>
                 </tr>
               </table>
@@ -216,10 +228,10 @@
         </button>
         <!-- end Payment Activity -->
 
-        <div class="row-fluid contain-wells">
+        <div class="row-fluid">
           <!-- Vehicle Information -->
-          <div class="well span6 equal-height">
-            <h2 class="well-title">Vehicle Information <span class="well-sub-title">Stock #{{ stockNo }}</span></h2>
+          <div class="well span6 details-well">
+            <h2 class="well-title">Vehicle Information <span class="well-sub-title">Stock #{{ vehicleInfo.StockNumber }}</span></h2>
             <div class="row-fluid">
               <ul class="list-table padded">
                 <li class="list-table-row">
@@ -261,8 +273,14 @@
           <!-- end Vehicle Information -->
 
           <!-- Title Information -->
-          <div class="well span6 equal-height">
-            <h2 class="well-title">Title Information <a class="well-sub-title featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">View the Title</a></h2>
+          <div class="well span6 details-well">
+            <h2 class="well-title">Title Information
+              <div class="well-sub-title paired-reversed">
+                <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">
+                  <span class="paired-body">View the Title</span><span class="paired-media" nxg-icon="icon-title"></span>
+                </a>
+              </div>
+            </h2>
             <div class="row-fluid">
               <ul class="list-table padded">
                 <li class="list-table-row">
@@ -342,40 +360,67 @@
 
       <section class="span3 well sidebar last">
         <h2 class="well-title">Payment Options</h2>
-
-        <div class="row-fluid notice-bar" ng-show="landing.showExtendLink() || landing.paymentOverdue || landing.paymentDueToday || landing.paymentDueSoon">
-          <div class="span2">
-
+        <div class="notice-bar" ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
+          <div class="paired-media">
+            <span ng-show="financialSummary.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
+            <span ng-show="financialSummary.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
+            <span ng-show="financialSummary.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
+            <span ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue" nxg-icon="icon-info" class="icon-large"></span>
           </div>
-          <div class="span10">
+          <div class="paired-body">
             <!-- Overdue Payment -->
-            <div ng-show="landing.paymentOverdue">
-              <p>A payment is overdue. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension? </a>
-              <!-- if we get updated endpoints, add link to make a payment here as well -->
+            <div ng-show="financialSummary.paymentOverdue">
+              <p>A payment is overdue. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension? </a>
               </p>
             </div>
 
             <!-- Payment Due Today -->
-            <div ng-show="landing.paymentDueToday">
-              <p>A payment is due today. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="financialSummary.paymentDueToday">
+              <p>A payment is due today. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
 
             <!-- Payment Due Soon (This Week) -->
-            <div ng-show="landing.paymentDueSoon">
-              <p>A payment is due this week. <br/><a class="primary" href="" ng-show="landing.showExtendLink()" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="financialSummary.paymentDueSoon">
+              <p>A payment is due this week. <br/><a class="primary" href="" ng-show="showExtendLink()" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
 
             <!-- Payments aren't due soon, but can request extension -->
-            <div ng-show="landing.showExtendLink() && !landing.paymentDueSoon && !landing.paymentDueToday && !landing.paymentOverdue">
-              <p><a class="primary" href="" ng-click="landing.requestExtension()">Request an extension?</a></p>
+            <div ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue">
+              <p><a class="primary" href="" ng-click="requestExtension()">Request an extension?</a></p>
             </div>
           </div>
         </div>
-        <!--    <div nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
+        <div class="well-item">
+          <h5>Next payment due <strong>{{ financialSummary.NextPaymentDueDate | moment }}</strong></h5>
+          <div ng-switch="financialSummary.Scheduled">
+            <div ng-switch-when="false">
+              <div class="btn-text-group">
+                <h6 class="btn-text">Payoff:</h6>
+                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+              <div class="btn-text-group">
+                <h6 class="btn-text">Payment: </h6>
+                <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+            </div>
+
+            <div ng-switch-when="true">
+              <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
+                <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
+              </p>
+              <div class="btn-text-group" ng-show="financialSummary.Scheduled && financialSummary.CurtailmentPaymentScheduled">
+                <h6 class="btn-text">Payoff:</h6>
+                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
-          <div nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(landing.FloorplanId)"></div>
-        </div> -->
+
+        <button class="btn-cta cta-primary cta-full" ng-disabled="paymentQueue.isEmpty()"
+            ng-click="goToCheckout()">
+          <span class="paired-body">Checkout <span ng-show="paymentQueue.getQueueCount() > 0">({{ paymentQueue.getQueueCount() }})</span></span>
+          <span class="paired-media" nxg-icon="icon-cart"></span>
+        </button>
       </section>
     </section>
   </div>

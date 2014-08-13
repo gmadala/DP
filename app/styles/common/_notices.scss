@@ -4,7 +4,7 @@
   @extend %center;
   width: 75%;
   font-size: $large-font-size;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
   margin: 0 auto;
 
   .unsupported & {
@@ -26,9 +26,9 @@
 }
 
 .notice-box {
-  color: $base-text-color;
+  color: $text;
   font-size: $tiny-font-size;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
   padding: 10px 15px;
   border: 1px solid #ddd;
   margin: 0;
@@ -38,7 +38,7 @@
   }
 
   &.text-error {
-    color: $error-dark;
+    color: $error;
     padding: 10px 15px;
   }
 }
@@ -46,7 +46,7 @@
 .message {
   @extend %thin;
   @extend %small;
-  line-height: $base-line-height;
+  line-height: $baseLineHeight;
   padding: 5px 10px 10px;
   margin: 10px 0
 }

@@ -1,39 +1,71 @@
-<section>
-  <h4>Payment Summary</h4>
+<h2 class="well-title">Payment Summary</h2>
 
-  <div class="well-out">
-    <p>Choose to make payments today or schedule your payments when you checkout.</p>
+<div class="well-item">
+  <p>Make payments today or schedule your payments when you checkout.</p>
+  <p ng-show="paymentQueue.isEmpty()">
+    <br/>
+    You have not selected a payment. {{ emptyMessage }}</p>
+</div>
 
-    <div class="queue-items">
-      <p ng-show="paymentQueue.isEmpty()">You have not selected a payment.</p>
-      <p ng-show="paymentQueue.isEmpty()">{{ emptyMessage }}</p>
-      <ul ng-hide="paymentQueue.isEmpty()">
-        <li ng-repeat="fee in paymentQueue.fees">
-          <button class="btn-unstyle btn-x" ng-click="removeFee(fee)" ng-disabled="paymentInProgress()" ng-class="{disabled: paymentInProgress()}"><span class="glyphicon"></span></button>
-          Account Fee <br/>
-          {{ fee.description }}<br/>
-          <span class="queued-as">Payment</span>
-          <span class="amount">{{ fee.amount | currency }}</span>
-        </li>
-        <li ng-repeat="payment in paymentQueue.payments">
-          <button class="btn-unstyle btn-x" ng-click="removePayment(payment)" ng-disabled="paymentInProgress()" ng-class="{disabled: paymentInProgress()}"><span class="glyphicon"></span></button>
-          VIN: {{ payment.vin }} <br/>
-          {{ payment.description }}<br/>
-          <span class="queued-as">{{ payment.isPayOff && 'Payoff' || 'Payment' }}</span>
-          <span class="amount">{{ payment.amount | currency }}</span>
-          <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
-        </li>
-      </ul>
-    </div>
+<div ng-hide="paymentQueue.isEmpty()">
+  <ul class="queue-list">
+    <li class="queue-item bordered" ng-repeat="fee in paymentQueue.fees">
+      <button class="btn-unstyle right"
+              ng-click="removeFee(fee)"
+              ng-disabled="paymentInProgress()"
+              ng-class="{disabled: paymentInProgress()}">
+        <span nxg-icon="icon-cancel" class="icon-small"></span>
+      </button>
+
+      <h6>{{ fee.description }}</h6>
+      <div class="row-fluid">
+        <div class="span6">
+          <h6 class="caps">Amount:</h6>
+        </div>
+        <div class="span6">
+          <h6 >{{ fee.amount | currency }}</h6>
+        </div>
+      </div>
+    </li>
+
+    <li class="queue-item bordered" ng-repeat="payment in paymentQueue.payments">
+      <button class="btn-unstyle right"
+              ng-click="removePayment(payment)"
+              ng-disabled="paymentInProgress()"
+              ng-class="{disabled: paymentInProgress()}">
+        <span nxg-icon="icon-cancel" class="icon-small"></span>
+      </button>
+
+      <h6 class="lockup-major caps truncate">{{ payment.description }}</h6>
+      <p>VIN: {{ payment.vin }} </p>
+
+      <div class="row-fluid">
+        <h6 class="span6 caps">
+          <span ng-show="payment.isPayoff">Payoff</span>
+          <span ng-show="!payment.isPayoff">Payment</span>
+        </h6>
+        <h6 class="span6">{{ payment.amount | currency }}</h6>
+      </div>
+      <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
+    </li>
+  </ul>
+</div>
+
+<div class="well-item row-fluid">
+  <div class="span4">
+    <h4 class="subtotal">Subtotal:</h4>
   </div>
-
-  <div class="pay-sum-footer">
-    <h4 class="subtotal">Subtotal: <span class="value">{{ getSubtotal() | currency }}</span></h4>
-    <button class="btn btn-primary btn-checkout"
-            ng-disabled="paymentQueue.isEmpty()"
-            ng-click="navigate('home.checkout')"
-            nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
-      <span class="ie-text">Continue to Checkout</span>
-    </button>
+  <div class="span8">
+    <h3 class="numeric"><strong>{{ getSubtotal() | currency }}</strong></h3>
   </div>
-</section>
+</div>
+
+<div class="well-footer">
+  <button class="btn-cta cta-primary cta-full"
+          ng-disabled="paymentQueue.isEmpty()"
+          ng-click="navigate('home.checkout')"
+          nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
+    Checkout ({{ getCount() }})
+    <span nxg-icon="icon-cart"></span>
+  </button>
+</div>

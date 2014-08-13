@@ -83,7 +83,42 @@ angular.module('nextgearWebApp')
               collateralProtectionPmt
             );
           } else {
+            var onQueueAs = Payments.isPaymentOnQueue(p.FloorplanId);
+
+            // Regardless, we still want to remove the original payment.
             Payments.removePaymentFromQueue(p.FloorplanId);
+
+            if(onQueueAs === 'payment' && asPayoff) {
+              // we want to switch from payment to payoff
+              Payments.addPaymentToQueue(
+                p.FloorplanId,
+                p.Vin,
+                p.StockNumber,
+                p.UnitDescription,
+                amount,
+                p.DueDate,
+                true, // this is the asPayoff flag
+                principal,
+                interest,
+                fees,
+                collateralProtectionPmt
+              );
+            } else if (onQueueAs === 'payoff' && !asPayoff) {
+              // we want to switch from payoff to payment
+              Payments.addPaymentToQueue(
+                p.FloorplanId,
+                p.Vin,
+                p.StockNumber,
+                p.UnitDescription,
+                amount,
+                p.DueDate,
+                false, // this is the asPayoff flag
+                principal,
+                interest,
+                fees,
+                collateralProtectionPmt
+              );
+            }
           }
         };
 

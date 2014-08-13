@@ -1,0 +1,421 @@
+{
+    "Success": true,
+    "Message": "Error retrieving dealer info.",
+    "Data": {
+        "ProductType": [
+          {
+            "productName": "foo",
+            "productId": "bar"
+          },
+          {
+            "productName": "foz",
+            "productId": "baz"
+          }
+        ],
+        "Colors": [
+          {
+            "ColorName": "Black",
+            "ColorId": "bk"
+          },
+          {
+            "ColorName": "Blue",
+            "ColorId": "bl"
+          },
+          {
+            "ColorName": "Bronze",
+            "ColorId": "bz"
+          },
+          {
+            "ColorName": "Brown",
+            "ColorId": "bn"
+          },
+          {
+            "ColorName": "Cream",
+            "ColorId": "cm"
+          },
+          {
+            "ColorName": "Gold",
+            "ColorId": "au"
+          },
+          {
+            "ColorName": "Gray",
+            "ColorId": "gr"
+          },
+          {
+            "ColorName": "Green",
+            "ColorId": "gn"
+          },
+          {
+            "ColorName": "Maroon",
+            "ColorId": "ik"
+          },
+          {
+            "ColorName": "Orange",
+            "ColorId": "og"
+          },
+          {
+            "ColorName": "Purple",
+            "ColorId": "pl"
+          },
+          {
+            "ColorName": "Red",
+            "ColorId": "rd"
+          },
+          {
+            "ColorName": "Silver",
+            "ColorId": "ag"
+          },
+          {
+            "ColorName": "Tan",
+            "ColorId": "tn"
+          },
+          {
+            "ColorName": "White",
+            "ColorId": "wh"
+          },
+          {
+            "ColorName": "Yellow",
+            "ColorId": "yl"
+          }
+        ],
+        "States": [
+          {
+            "StateName": "Alabama",
+            "StateId": "AL"
+          },
+          {
+            "StateName": "Alaska",
+            "StateId": "AK"
+          },
+          {
+            "StateName": "Arizona",
+            "StateId": "AZ"
+          },
+          {
+            "StateName": "Arkansas",
+            "StateId": "AR"
+          },
+          {
+            "StateName": "California",
+            "StateId": "CA"
+          },
+          {
+            "StateName": "Colorado",
+            "StateId": "CO"
+          },
+          {
+            "StateName": "Connecticut",
+            "StateId": "CT"
+          },
+          {
+            "StateName": "Delaware",
+            "StateId": "DE"
+          },
+          {
+            "StateName": "Florida",
+            "StateId": "FL"
+          },
+          {
+            "StateName": "Georgia",
+            "StateId": "GA"
+          },
+          {
+            "StateName": "Hawaii",
+            "StateId": "HI"
+          },
+          {
+            "StateName": "Idaho",
+            "StateId": "ID"
+          },
+          {
+            "StateName": "Illinois",
+            "StateId": "IL"
+          },
+          {
+            "StateName": "Indiana",
+            "StateId": "IN"
+          },
+          {
+            "StateName": "Iowa",
+            "StateId": "IA"
+          },
+          {
+            "StateName": "Kansas",
+            "StateId": "KS"
+          },
+          {
+            "StateName": "Kentucky",
+            "StateId": "KY"
+          },
+          {
+            "StateName": "Louisiana",
+            "StateId": "LA"
+          },
+          {
+            "StateName": "Maine",
+            "StateId": "ME"
+          },
+          {
+            "StateName": "Maryland",
+            "StateId": "MD"
+          },
+          {
+            "StateName": "Massachusetts",
+            "StateId": "MA"
+          },
+          {
+            "StateName": "Michigan",
+            "StateId": "MI"
+          },
+          {
+            "StateName": "Minnesota",
+            "StateId": "MN"
+          },
+          {
+            "StateName": "Mississippi",
+            "StateId": "MS"
+          },
+          {
+            "StateName": "Missouri",
+            "StateId": "MO"
+          },
+          {
+            "StateName": "Montana",
+            "StateId": "MT"
+          },
+          {
+            "StateName": "Nebraska",
+            "StateId": "NE"
+          },
+          {
+            "StateName": "Nevada",
+            "StateId": "NV"
+          },
+          {
+            "StateName": "New Hampshire",
+            "StateId": "NH"
+          },
+          {
+            "StateName": "New Jersey",
+            "StateId": "NJ"
+          },
+          {
+            "StateName": "New Mexico",
+            "StateId": "NM"
+          },
+          {
+            "StateName": "New York",
+            "StateId": "NY"
+          },
+          {
+            "StateName": "North Carolina",
+            "StateId": "NC"
+          },
+          {
+            "StateName": "North Dakota",
+            "StateId": "ND"
+          },
+          {
+            "StateName": "Ohio",
+            "StateId": "OH"
+          },
+          {
+            "StateName": "Oklahoma",
+            "StateId": "OK"
+          },
+          {
+            "StateName": "Oregon",
+            "StateId": "OR"
+          },
+          {
+            "StateName": "Pennsylvania",
+            "StateId": "PA"
+          },
+          {
+            "StateName": "Rhode Island",
+            "StateId": "RI"
+          },
+          {
+            "StateName": "South Carolina",
+            "StateId": "SC"
+          },
+          {
+            "StateName": "South Dakota",
+            "StateId": "SD"
+          },
+          {
+            "StateName": "Tennessee",
+            "StateId": "TN"
+          },
+          {
+            "StateName": "Texas",
+            "StateId": "TX"
+          },
+          {
+            "StateName": "Utah",
+            "StateId": "UT"
+          },
+          {
+            "StateName": "Vermont",
+            "StateId": "VT"
+          },
+          {
+            "StateName": "Virginia",
+            "StateId": "VA"
+          },
+          {
+            "StateName": "Washington",
+            "StateId": "WA"
+          },
+          {
+            "StateName": "West Virginia",
+            "StateId": "WV"
+          },
+          {
+            "StateName": "Wisconsin",
+            "StateId": "WI"
+          },
+          {
+            "StateName": "Wyoming",
+            "StateId": "WY"
+          }
+        ],
+        "DealerAddresses": [
+          {
+            "AddressId": "d8c60d7c-1330-4458-9599-1bce92b5dcb0",
+            "Line1": "380 NEVADA SW",
+            "Line2": null,
+            "City": "HURON",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "0000000000",
+            "Fax": "0000000000",
+            "IsActive": true,
+            "IsPhysicalInventory": false,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": false
+          },
+          {
+            "AddressId": "428848e7-c3b4-4ec5-8ba5-83339aadb765",
+            "Line1": "PO Box 1274",
+            "Line2": null,
+            "City": "Huron",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": false,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": true
+          },
+          {
+            "AddressId": "47161e63-5fca-4522-920f-91ffb863dd92",
+            "Line1": "22095 392nd Ave.",
+            "Line2": null,
+            "City": "Alpena",
+            "State": "SD",
+            "Zip": "57312",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": true,
+            "IsTitleReleaseAddress": false,
+            "IsMailingAddress": false
+          },
+          {
+            "AddressId": "6d2f9e38-9bbb-472a-9785-bbdb31b498b0",
+            "Line1": "1794 1/2 E. Hwy 14",
+            "Line2": null,
+            "City": "Huron",
+            "State": "SD",
+            "Zip": "57350",
+            "Phone": "6053521637",
+            "Fax": "6053524528",
+            "IsActive": true,
+            "IsPhysicalInventory": true,
+            "IsTitleReleaseAddress": true,
+            "IsMailingAddress": false
+          }
+        ],
+        "BankAccounts": [
+          {
+            "BankAccountName": "PNC Bank - Main St.",
+            "BankAccountId": "id123"
+          },
+          {
+            "BankAccountName": "Wells Fargo - XXX234",
+            "BankAccountId": "id456"
+          },
+          {
+            "BankAccountName": "ESL Credit Union - XXX213",
+            "BankAccountId": "id789"
+          }
+        ],
+        "LinesOfCredit": [
+          {
+            "LineOfCreditName": "Main Line",
+            "LineOfCreditId": "cr01"
+          },
+          {
+            "LineOfCreditName": "Temp Extension",
+            "LineOfCreditId": "tx02"
+          }
+        ],
+        "TitleLocationOptions": [
+          {
+            "id": 1,
+            "Name": "I have it",
+            "ResultingTitleLocationId": 111,
+            "ResultingTitleTypeId": 112,
+            "TitleInfoEnabled": true,
+            "TitleInfoRequired": true,
+            "DisplayOrder": 1
+          },
+          {
+            "id": 2,
+            "Name": "Unknown/TA(Title Absent)",
+            "ResultingTitleLocationId": 222,
+            "ResultingTitleTypeId": 223,
+            "TitleInfoEnabled": true,
+            "TitleInfoRequired": false,
+            "DisplayOrder": 2
+          },
+          {
+            "id": 3,
+            "Name": "No Title Needed",
+            "ResultingTitleLocationId": 333,
+            "ResultingTitleTypeId": 334,
+            "TitleInfoEnabled": false,
+            "TitleInfoRequired": false,
+            "DisplayOrder": 3
+          }
+        ],
+        "PaymentMethods": [
+          {
+            "Id": 0,
+            "Name": "Auction Check"
+          },
+          {
+            "Id": 1,
+            "Name": "Certified Funds"
+          },
+          {
+            "Id": 2,
+            "Name": "Check"
+          },
+          {
+            "Id": 3,
+            "Name": "CPP Claim"
+          },
+          {
+            "Id": 4,
+            "Name": "Non Dealer Check"
+          },
+          {
+            "Id": 5,
+            "Name": "Proceeds"
+          }
+        ]
+    }
+}

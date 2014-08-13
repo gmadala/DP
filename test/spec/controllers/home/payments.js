@@ -435,25 +435,6 @@ describe('Controller: PaymentsCtrl', function () {
     canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 60 });
     expect(canShow).toBe(false);
   });
-
-  describe('request extension', function() {
-    it('should make API call to submit request if Extendable is true', function() {
-      var payment = {
-        Extendable: true
-      };
-      spyOn(dialog, 'dialog').andReturn({
-        open: angular.noop
-      });
-      spyOn(modelMock, 'requestExtension').andCallThrough();
-      scope.payments.extension(payment);
-      expect(dialog.dialog).toHaveBeenCalled();
-      var testConfirm = dialog.dialog.mostRecentCall.args[0].resolve.confirmRequest();
-      testConfirm();
-      expect(modelMock.requestExtension).toHaveBeenCalled();
-    });
-
-  });
-
 });
 
 describe('Controller: ExtensionRequestCtrl', function() {
@@ -461,10 +442,8 @@ describe('Controller: ExtensionRequestCtrl', function() {
   beforeEach(module('nextgearWebApp'));
 
   var ExtensionRequestCtrl,
-    paymentMock = {
-      Extendable: true,
-      FloorplanId: 1234
-    },
+    paymentsMock,
+    payMock,
     confirm,
     dialog,
     scope,
@@ -473,17 +452,22 @@ describe('Controller: ExtensionRequestCtrl', function() {
 
   beforeEach(inject(function($controller, $rootScope, $q) {
     scope = $rootScope.$new();
-    // dialog = $dialog;
-    floorplan = {
-      getExtensionPreview: function() {
-        return $q.when(prevMock);
+
+    paymentsMock = { // mock for Payments service
+      requestExtension: function() {
+        return {
+          then: function(callback) {
+            callback();
+          }
+        };
       }
     };
-    dialog = {
-      close: angular.noop
-    };
-    confirm = function() {
-      return $q.when(true);
+
+    payMock = { // mock for the payment sent in when the dialog is launched
+      Vin: 'vin',
+      FloorplanId: '1234',
+      UnitDescription: 'Description',
+      CanExtend: true
     };
 
     prevMock = {
@@ -494,24 +478,61 @@ describe('Controller: ExtensionRequestCtrl', function() {
         { Type: 'fee2', Amount: 78 },
       ],
       CollateralProtectionAmount: 91,
+      CanExtend: true
+    };
+
+    floorplan = {
+      getExtensionPreview: function() {
+        return $q.when(prevMock);
+      },
+    };
+
+    dialog = {
+      close: angular.noop
+    };
+
+    confirm = function() {
+      return function() {
+        return 'fake function';
+      };
     };
 
     ExtensionRequestCtrl = $controller('ExtensionRequestCtrl', {
       $scope: scope,
       dialog: dialog, // current open instance of dialog
-      payment: paymentMock,
-      confirmRequest: confirm,
+      Payments: paymentsMock,
+      payment: payMock,
+      onConfirm: confirm,
       Floorplan: floorplan
     });
+
+    spyOn(paymentsMock, 'requestExtension').andCallThrough();
+    spyOn(scope, 'onConfirm').andCallThrough();
   }));
 
   describe('controller', function() {
     it('should attach the payment object to the scope', function() {
-      expect(scope.payment).toBe(paymentMock);
+      expect(scope.payment).toBe(payMock);
     });
 
-    it('should have a confirm request function that will close the dialog and confirm request with api', function() {
-      expect(scope.confirmRequest).toBeDefined();
+    it('should have an onConfirm function that will close the dialog and confirm request with api', function() {
+      expect(scope.onConfirm).toBeDefined();
     });
+
+    it('should make API call to submit request if CanExtend is true', inject(function($rootScope) {
+      $rootScope.$digest();
+
+      scope.confirmRequest();
+      expect(paymentsMock.requestExtension).toHaveBeenCalled();
+      expect(scope.onConfirm).toHaveBeenCalled();
+    }));
+
+    it('should NOT make API call to submit request if CanExtend is false', inject(function($rootScope) {
+      prevMock.CanExtend = false;
+      $rootScope.$digest();
+
+      scope.confirmRequest();
+      expect(paymentsMock.requestExtension).not.toHaveBeenCalled();
+    }));
   });
 });

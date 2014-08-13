@@ -1,4 +1,4 @@
-<div class="span3 well">
+<div class="span3 well dash-well">
   <h2 class="well-title">Unapplied Funds</h2>
 
   <div class="lockup">
@@ -14,6 +14,7 @@
   <button class="btn-cta cta-full cta-secondary" href="#"
      ng-show="fundsAvail > 0"
      ng-click="openRequestPayout($event)" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON}}">
-      Request Payout
+      <span class="paired-body">Request Payout</span>
+      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
   </button>
 </div>

@@ -20,7 +20,8 @@ angular.module('nextgearWebApp')
     // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
     $scope.$watch(function() { return User.getStatics();}, function(statics) {
       $scope.options = statics;
-      $scope.options.locations = _.filter($scope.options.locations, 'IsActive');
+      $scope.options.locations = _.filter($scope.options.dealerAddresses, 'IsActive');
+      // TODO: make sure this filters properly for both dealer and auction sides (VO-2473, VO-2551)
     });
 
     // pay seller vs. buyer options are derived separately
@@ -72,6 +73,7 @@ angular.module('nextgearWebApp')
         useFirst: true
       }
     ];
+
     if (isDealer) {
       optionListsToDefault.push({
         scopeSrc: 'options.locations',
@@ -81,6 +83,7 @@ angular.module('nextgearWebApp')
         modelDest: 'LineOfCreditId'
       });
     }
+
     $scope.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
 
     $scope.reset = function () {
@@ -91,6 +94,21 @@ angular.module('nextgearWebApp')
     };
 
     $scope.reset();
+
+    // Handle setting the seller location options based on selected business (seller)
+    $scope.sellerLocations = null;
+    if (!isDealer) { // If we are an auction user...
+      $scope.$watch('data.BusinessId', function(biz) {
+        if(biz) { // And a business has been selected...
+          $scope.sellerLocations = biz.ActivePhysicalInventoryLocations;
+
+          if(_.size(biz.ActivePhysicalInventoryLocations) === 1) {
+            // If there's only 1 location, auto-select it (and we disable the field in the HTML)
+            $scope.data.PhysicalInventoryAddressId = $scope.sellerLocations[0];
+          }
+        }
+      });
+    }
 
     $scope.maxValidModelYear = new Date().getFullYear();
     $scope.minValidModelYear = 1900;

@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
           // show success dialog
           var title = 'Request a Credit Increase',
             message = 'Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.',
-            buttons = [{label: 'Close Window', cssClass: 'btn btn-mini btn-primary'}];
+            buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-secondary'}];
           return $dialog.messageBox(title, message, buttons).open();
         },
         // failure

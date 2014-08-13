@@ -45,105 +45,11 @@
   }
 }
 
-// Dealer Search
-.credit-query {
-  &.modal {
-    width: 500px;
-    margin-left: -250px;
-  }
-
-  th, td {
-    @extend %align-left;
-    line-height: $base-line-height;
-    padding: 3px 0;
-  }
-
-  .buyer-info {
-    @extend %full-width;
-
-    th {
-      @extend %thin;
-      width: 35%;
-      vertical-align: top;
-    }
-  }
-
-  .credit-values {
-    @extend %full-width;
-
-    td:first-child {
-      width: 35%;
-    }
-  }
-}
-
-.dealer-search-modal {
-  .control-group {
-    @extend %float-l;
-    width: 48%;
-    margin-left: 10px;
-
-    &.shorten {
-      width: 20%;
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      input, select {
-        @extend %full-width;
-      }
-    }
-  }
-
-  .search-controls {
-    @extend %clear;
-  }
-
-  &.search-modal .modal-footer {
-    border: 0;
-    margin-top: 12px;
-  }
-}
-
 // Bulk Flooring
 .bulkflooring {
   .btn-primary {
     @extend %float-r;
     margin-left: 1em;
-  }
-}
-
-// Seller Floorplan Search
-.selfloor-list {
-  .cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    p {
-      margin-bottom: 4px;
-    }
-
-    &.selfloor-descr {  width: 19%; }
-    &.selfloor-stat { width: 10%; }
-    &.selfloor-dates { width: 12%; }
-    &.selfloor-purch { width: 11%; }
-    &.selfloor-buy {
-      width: 10%;
-      word-break: break-word;
-    }
-    &.selfloor-ticket-num { width: 12%; }
-    &.selfloor-title-loc { width: 9%; }
-    &.selfloor-title {
-      width: 17%;
-      p {
-        margin: 0 0 0 5px;
-      }
-
-      label {
-        margin: 0 0 0 5px;
-      }
-    }
   }
 }
 

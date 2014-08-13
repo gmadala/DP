@@ -1,10 +1,10 @@
-<div class="modal-header">
-  <h3 ng-show="counts.failed == 0 && counts.total > 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been submitted.</h3>
-  <h3 ng-show="counts.failed == counts.total">Your title request(s) can not be processed at this time.</h3>
-  <h3 ng-show="counts.failed > 0 && counts.total > counts.failed">Some title request(s) can not be processed at this time.</h3>
-</div>
-<div class="modal-body">
+<h3 class="modal-header">
+  <span ng-show="counts.failed == 0 && counts.total > 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been submitted.</span>
+  <span ng-show="counts.failed == counts.total">Your title request(s) can not be processed at this time.</span>
+  <span ng-show="counts.failed > 0 && counts.total > counts.failed">Some title request(s) can not be processed at this time.</span>
+</h3>
 
+<div class="modal-body">
   <section>
     <h4 class="boxed">
       Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}
@@ -51,5 +51,5 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-primary" nxg-autofocus>Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-primary" nxg-autofocus>Close Window</button>
 </div>

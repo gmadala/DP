@@ -1,15 +1,19 @@
 <label for="inputVin" class="input-title">VIN</label>
-<span>
-  <input type="text" id="inputVin" name="inputVin" ng-model="data.UnitVin"
-         required ng-minlength="17" ng-maxlength="17"
-         nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
-         ng-change="vinChange()" nxg-blur="vinExit()"
-         nxg-autofocus
-         ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
-  <button type="button" href class="btn btn-secondary nxg-search-btn" nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON}}" ng-click="lookupVin()">
-    <i class="glyphicon glyphicon-search"></i>
+<div class="styled-input with-btn">
+  <input type="text" id="inputVin"
+        name="inputVin"
+        ng-model="data.UnitVin" required
+        ng-minlength="17"
+        ng-maxlength="17"
+        nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
+        ng-change="vinChange()" nxg-blur="vinExit()"
+        nxg-autofocus
+        ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
+  <button type="button" href class="btn btn-input" nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON}}" ng-click="lookupVin()">
+    <span nxg-icon="icon-search"></span>
   </button>
-</span>
+</div>
+
 <label for="inputVin" class="text-error"
        ng-show="validity.inputVin.$error.required">
   Please enter a VIN.
@@ -27,30 +31,32 @@
   VIN was not located; please enter Make, Model, Year and Style.
 </label>
 
-<span class="form-inline nxg-checkbox" ng-show="settings.vinMode == 'noMatch'">
-  <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure"
-         ng-required="settings.vinMode == 'noMatch'" />
-  <label for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+<div ng-show="settings.vinMode == 'noMatch'">
+  <div class="cr-inline">
+    <input type="checkbox" id="vinFailure" name="vinFailure" ng-model="data.VinAckLookupFailure" ng-required="settings.vinMode == 'noMatch'" />
+    <label class="checkbox-img" for="vinFailure"></label>
+    <label class="cr-label" for="vinFailure">Acknowledge VIN Look-Up Failure</label>
+  </div>
   <label for="vinFailure" class="text-error"
          ng-show="validity.vinFailure.$error.required && errorFlag">
     Please acknowledge VIN look-up failure.
   </label>
-</span>
+</div>
 
 <div ng-switch="settings.vinMode">
 
   <div class="nxg-vin-match-info nxg-static" ng-switch-when="matched">
     <label for="outputMake">Make</label>
-    <span id="outputMake">{{ data.$selectedVehicle.Make }}</span>
+    <input id="outputMake" ng-model="data.$selectedVehicle.Make" disabled />
 
     <label for="outputModel">Model</label>
-    <span id="outputModel">{{ data.$selectedVehicle.Model }}</span>
+    <input id="outputModel" ng-model="data.$selectedVehicle.Model" disabled />
 
     <label for="outputYear">Year</label>
-    <span id="outputYear">{{ data.$selectedVehicle.Year }}</span>
+    <input id="outputYear" ng-model="data.$selectedVehicle.Year" disabled />
 
     <label for="outputStyle">Style</label>
-    <span id="outputStyle">{{ data.$selectedVehicle.Style }}</span>
+    <input id="outputStyle" ng-model="data.$selectedVehicle.Style" disabled />
   </div>
 
   <div id="nxg-vin-no-match-info" ng-switch-when="noMatch">

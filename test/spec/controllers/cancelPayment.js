@@ -53,7 +53,7 @@ describe('Controller: CancelPaymentCtrl', function () {
       dialog: dialogMock,
       options: optionsMock
     });
-    expect(scope.title).toBe('Would you like to cancel your scheduled payment?');
+    expect(scope.title).toBe('Cancel Payment');
   }));
 
   describe('handleNo function', function () {

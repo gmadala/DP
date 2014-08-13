@@ -6,7 +6,9 @@ describe('Directive: nxgDateField', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope, $compile) {
+  beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
+    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
+
     scope = $rootScope;
     scope.bar = new Date();
     element = angular.element('<form name="form">' +

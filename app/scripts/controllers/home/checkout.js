@@ -71,11 +71,23 @@ angular.module('nextgearWebApp')
       },
       removePayment: Payments.removePaymentFromQueue,
       removeFee: Payments.removeFeeFromQueue,
-      canSchedule: function (payment) {
+      canSchedule: function (item) {
         // false for overdue payments, payments due today, and payments that we've noticed have no available dates
-        return !moment(payment.dueDate).isBefore(moment(), 'day') &&
-          !moment(payment.dueDate).isSame(moment(), 'day') &&
-          !payment.scheduleBlocked;
+        return !moment(item.dueDate).isBefore(moment(), 'day') &&
+          !moment(item.dueDate).isSame(moment(), 'day') &&
+          !item.scheduleBlocked;
+      },
+      getDueStatus: function (item) {
+        var status;
+
+        if (moment(item.dueDate).isBefore(moment(), 'day')) {
+          status = 'overdue';
+        } else if (moment(item.dueDate).isSame(moment(), 'day')) {
+          status = 'today';
+        } else {
+          status = 'future';
+        }
+        return status;
       },
       schedule: function (item) {
         item.scheduleError = false;
@@ -204,7 +216,7 @@ angular.module('nextgearWebApp')
               backdropClick: true,
               templateUrl: 'views/modals/confirmCheckout.html',
               controller: 'ConfirmCheckoutCtrl',
-              dialogClass: 'modal confirm-checkout',
+              dialogClass: 'modal modal-medium',
               resolve: {
                 queue: function () { return $scope.paymentQueue.contents; },
                 transactionInfo: function () { return result; }

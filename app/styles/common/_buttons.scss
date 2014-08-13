@@ -1,85 +1,46 @@
-// .btn {
-//   @extend %heavy;
-//   @include box-sizing(border-box);
-//   @include border-radius(3px);
-//   background-color: $btn-active-bkgd;
-//   @include background(linear-gradient($btn-active-grad-1, $btn-active-grad-2));
-//   color: $btn-active-text;
-//   text-shadow: none;
-//   padding: 2px 8px 1px;
-//   border: 0;
-//   border-bottom: 1px solid $btn-active-stroke;
+// .btn-secondary {
+//   color: $btn2-active-text;
+//   background-color: $btn2-active-bkgd;
+//   @include background(linear-gradient($btn2-active-grad-1, $btn2-active-grad-2));
 
 //   &:hover, &:focus {
-//     color: $btn-hover-text;
-//     background-color: $btn-hover-bkgd;
-//     @include background(linear-gradient($btn-hover-grad-1, $btn-hover-grad-2));
-//     background-position: 0;
-//     outline: 0;
+//     color: $btn2-hover-text;
+//     background-color: $btn2-hover-bkgd;
+//     @include background(linear-gradient($btn2-hover-grad-1, $btn2-hover-grad-2));
 //   }
+
 //   &:active, &.active {
-//     color: $btn-hover-text;
-//     border-color: transparent;
-//   }
-//   &.disabled, &.disabled:hover, &:disabled, &:disabled:hover {
-//     @include opacity(65);
-//     color: $btn-disabled-text;
-//     background: $btn-disabled-bkgd;
-
-//     &:active {
-//       border-bottom: 1px solid $btn-active-stroke;
-//       margin-top: 0px;
-//     }
+//     color: $btn2-hover-text;
 //   }
 // }
 
-// .btn, .btn-mini {
-//   @extend %small;
+// .btn-primary {
+//   -webkit-font-smoothing: antialiased;
+//   color: $btn1-active-text;
+//   border-bottom: 1px solid $btn1-active-stroke;
+//   background-color: $btn1-active-bkgd;
+//   @include background-image(linear-gradient($btn1-active-grad-1, $btn1-active-grad-2));
+
+//   &:hover, &:focus {
+//     color: $btn1-hover-text;
+//     background-color: $btn1-hover-bkgd;
+//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
+//   }
+
+//   &:active, &.active {
+//     color: $btn1-hover-text;
+//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
+//   }
+
+//   &:disabled, &.disabled,
+//   &:disabled:hover, &.disabled:hover,
+//   &:disabled:focus, &.disabled:focus,
+//   &:disabled:active, &.disabled:active {
+//     color: $btn1-disabled-text;
+//     background-color: $btn1-disabled-bkgd;
+//     @include background-image(linear-gradient($btn1-disabled-grad-1, $btn1-disabled-grad-2));
+//   }
 // }
-
-.btn-secondary {
-  color: $btn2-active-text;
-  background-color: $btn2-active-bkgd;
-  @include background(linear-gradient($btn2-active-grad-1, $btn2-active-grad-2));
-
-  &:hover, &:focus {
-    color: $btn2-hover-text;
-    background-color: $btn2-hover-bkgd;
-    @include background(linear-gradient($btn2-hover-grad-1, $btn2-hover-grad-2));
-  }
-
-  &:active, &.active {
-    color: $btn2-hover-text;
-  }
-}
-
-.btn-primary {
-  -webkit-font-smoothing: antialiased;
-  color: $btn1-active-text;
-  border-bottom: 1px solid $btn1-active-stroke;
-  background-color: $btn1-active-bkgd;
-  @include background-image(linear-gradient($btn1-active-grad-1, $btn1-active-grad-2));
-
-  &:hover, &:focus {
-    color: $btn1-hover-text;
-    background-color: $btn1-hover-bkgd;
-    @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-  }
-
-  &:active, &.active {
-    color: $btn1-hover-text;
-    @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-  }
-
-  &:disabled, &.disabled,
-  &:disabled:hover, &.disabled:hover,
-  &:disabled:focus, &.disabled:focus,
-  &:disabled:active, &.disabled:active {
-    color: $btn1-disabled-text;
-    background-color: $btn1-disabled-bkgd;
-    @include background-image(linear-gradient($btn1-disabled-grad-1, $btn1-disabled-grad-2));
-  }
-}
 
 .nxg-search-btn {
   @extend %align-left;
@@ -111,41 +72,25 @@
   top: 20px;
 }
 
-.btn-more, .btn-more:hover, .btn-more:active, .btn-more:focus {
-  @include box-shadow(rgba(0,0,0,0) 0 0 0);
-  @include border-radius(0);
-  @include box(100%);
-  color: $gray-9;
-  background: transparent;
-  padding: 0;
-  border: 0;
-  margin: 0;
-
-  &:hover {
-    color: $base-text-color;
-  }
-}
-
-.fees .btn-block,
-.payments .btn-block {
-  width: auto;
-}
-
 .btn-unstyle {
   @extend %center;
   background: transparent;
   color: $gray-9;
   padding: 0;
   border: 0;
+
+  &.right {
+    float: right;
+  }
 }
 
 .btn-link {
-  font-size: 14px;
+  font-size: 12px;
   color: $highlight;
   cursor: pointer;
   padding: 0;
   border: 0;
-  margin: 10px 0;
+  margin: 0 0 1px 0;
 
   &:hover {
     color: darken($highlight, 10%);
@@ -160,31 +105,11 @@
   }
 }
 
-.btn-x {
-  font-size: 16px;
-}
-
-.btn-inline {
-  margin-left: 10px;
-}
-
 .btn-help {
   @extend .btn-unstyle;
-  @extend %heavy;
-  @extend %small;
-  @include border-radius(50%);
-  position: relative;
-  width: 15px;
-  height: 15px;
-  background: $brand-text;
-  color: $white;
-  line-height: 1;
-  margin-left: 10px;
-}
-
-.btn-help.inline {
+  position: absolute;
+  top: 10px;
   margin-left: 5px;
-  margin-top: -2px;
 }
 
 // span version of help button for cases where we don't want it to be an actual button
@@ -203,8 +128,8 @@ span.btn-help {
   .btn-primary.disabled,
   .btn-secondary:disabled,
   .btn-secondary.disabled {
-    color: $btn-disabled-text;
-    background-color: $btn-disabled-bkgd;
+    color: $btn-text-disabled;
+    background-color: $btn-bkgd-disabled;
   }
 }
 
@@ -237,34 +162,51 @@ span.btn-help {
       color: darken($primary, 10%);
     }
   }
+
+  .well & {
+    top: -1px; // we don't need to account for the well's margin because we're inside it.
+  }
 }
 
 /*
- * BUTTON CLASS
+ * BTN CLASS
  * Used to style any and all buttons within the desktop app.
- * We're not using .btn here, because then we'd have to override
- * Bootstrap's .btn styles, which are are numerous.
  */
-.button {
+.button, .btn {
+  @include box-shadow(none);
   @include border-radius($borderRadius);
-  // display: block;
+  @include text-shadow(none);
   background: $btn-bkgd;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   color: $btn-text;
-  height: 30px;
-  padding: 10px;
+  height: 35px;
   border: 1px solid $border;
-  margin: 5px 10px;
+  padding: 0 10px;
+  margin: 7px 10px;
 
-  &:focus {
+  &:active {
+    @include box-shadow(none);
+    color: $btn-text;
+  }
+
+  &:focus, &:hover {
+    @include box-shadow(none);
     outline: none;
   }
 
-  &:active, &:hover, &.selected:active, &.selected:hover {
+  &:focus {
+    color: $btn-text-active;
+  }
+
+  &:hover {
     color: $btn-text-active;
     background: $btn-bkgd-active;
     text-decoration: none;
+  }
+
+  &:focus, &:active {
+    border: 1px solid darken($border, 10%);
   }
 
   &:focus, &:active, &:hover {
@@ -280,17 +222,25 @@ span.btn-help {
   &.selected {
     background: $btn-bkgd-selected;
     color: $btn-text-selected;
+
+    &:hover {
+      background: lighten($btn-bkgd-selected, 10%);
+      color: $white;
+    }
   }
 
-  // &.right {
-  //   @extend %float-r;
-  //   margin-right: 0;
-  // }
+  &.right {
+    @extend %float-r;
+    margin-right: 0;
+  }
 
-  // &.icon-right {
-  //   position: relative;
-  //   padding-right: 30px;
-  // }
+  th &, td & {
+    margin: 0;
+
+    &.btn-square {
+      margin: 0 auto;
+    }
+  }
 }
 
 .button-group {
@@ -303,6 +253,16 @@ span.btn-help {
     & + .button {
       margin-left: 10px;
     }
+  }
+}
+
+/*
+ * BTN-ICON CLASS
+ * For non-cta buttons with an icon (ie. checkout toggle buttons)
+ */
+.btn-icon {
+  .svg-icon {
+    margin-left: 5px;
   }
 }
 
@@ -342,10 +302,6 @@ span.btn-help {
     background: $cta-secondary-bkgd;
     color: $cta-secondary-text;
     border: 1px solid $border;
-
-    &.cta-full {
-      border-width: 1px 0 0;
-    }
   }
 
 /*
@@ -353,15 +309,15 @@ span.btn-help {
  * Used for call-out buttons; can have primary or secondary styles.
  */
 .btn-cta {
-  @extend .button;
+  @extend .btn;
   @extend .cta;
   font-family: $baseFontFamily;
   font-size: 13px;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px;
 
   &.cta-primary {
-    &:hover {
+    &:hover, &:focus {
       color: $cta-primary-text-active;
       background: $cta-primary-bkgd-active;
     }
@@ -371,7 +327,7 @@ span.btn-help {
   }
 
   &.cta-secondary {
-    &:hover {
+    &:hover, &:focus {
       color: $cta-secondary-text-active;
     }
     &:active {
@@ -380,10 +336,104 @@ span.btn-help {
   }
 
   &.cta-primary, &.cta-secondary {
+
+    &.cta-full, &.cta-full:disabled, &.cta-full.ng-disabled {
+      border-width: 1px 0 0;
+    }
+
     &:disabled, &.ng-disabled {
       background: $btn-bkgd-disabled;
       color: $btn-text-disabled;
       border: 1px solid $border;
     }
+  }
+
+  &.cta-full {
+    padding: 10px 5px;
+  }
+}
+
+/*
+ * SQUARE BUTTON
+ * For buttons with no text, just icon.
+ */
+.btn-square {
+  @extend .btn;
+  display: block;
+  width: 40px;
+  height: 40px;
+
+  .svg-icon {
+    fill: $primary;
+    margin: 10px 0;
+  }
+}
+
+/* TOGGLE BUTTON
+ * A group of two buttons with a sliding div beneath,
+ * to show which is selected.
+ */
+.btn-toggle {
+  @extend .clearfix;
+  @include border-radius($borderRadius);
+  background: #E6E7E8;
+  position: relative;
+  width: 200px;
+  height: 24px;
+  margin: 10px auto;
+  border: 1px solid $toggle-color;
+  z-index: 0;
+
+  .btn {
+    @extend %float-l;
+    background: transparent;
+    width: 50%;
+    height: 24px;
+    position: relative;
+    color: $toggle-color;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px;
+    border: 0;
+    margin: 0;
+    z-index: 2
+  }
+
+  .btn-slider {
+    @include border-radius($borderRadius);
+    position: absolute;
+    background: $toggle-slider-color;
+    top: 0;
+    height: 24px;
+    width: 50%;
+    border: 1px solid $toggle-color;
+    margin: -1px;
+    z-index: 1;
+
+    @include transition-duration(400ms);
+    @include transition-timing-function(ease);
+
+    &.active-left {
+      @include transition-property(left);
+      left: 0;
+    }
+
+    &.active-right {
+      @include transition-property(right);
+      right: 0;
+    }
+  }
+}
+
+.btn-text-group {
+  @extend .clearfix;
+  padding: 0 10px;
+
+  .btn-text {
+    float: left;
+    padding: 15px 0;
+  }
+  .btn-btn {
+    float: right;
   }
 }

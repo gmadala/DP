@@ -9,8 +9,8 @@ angular.module('nextgearWebApp')
     CHANGE_ACCOUNT_MANAGEMENT: 'Change Account Management',
     VIEW_AUCTION_SETTINGS: 'View Auction Settings',
     CHANGE_AUCTION_SETTINGS: 'Change Auction Settings',
-    // Analytics & Reports
-    VIEW_ANALYTICS_DASHBOARD: 'View Analytics Dashboard',
+//    // Analytics & Reports
+//    VIEW_ANALYTICS_DASHBOARD: 'View Analytics Dashboard',
     VIEW_ALL_TOP_AUCTIONS: 'View All Top Auctions',
     VIEW_CURRENT_REPORT: 'View Current Report', // reportName
     VIEW_HISTORICAL_REPORT: 'View Historical Report', // reportName
@@ -19,24 +19,24 @@ angular.module('nextgearWebApp')
     BULK_FLOOR_A_VEHICLE: 'Bulk Floor a Vehicle',
     SEARCH_FOR_SELLER: 'Search for Seller',
     SEARCH_FOR_BUYER: 'Search for Buyer',
-    // Floorplan
-    VIEW_FLOOR_PLAN_DETAILS: 'View Floor Plan Details',
-    VIEW_TITLE: 'View Title',
-    // General
-    VIEW_MAIN_DASHBOARD: 'View Main Dashboard',
+//    // Floorplan
+//    VIEW_FLOOR_PLAN_DETAILS: 'View Floor Plan Details',
+//    VIEW_TITLE: 'View Title',
+//    // General
+//    VIEW_MAIN_DASHBOARD: 'View Main Dashboard',
     VIEW_RESOURCE_DOCUMENT: 'View Resource Document', // documentName
     QUERY_BUYER_LINE_OF_CREDIT: 'Query Buyer Line of Credit',
     REQUEST_UNAPPLIED_FUNDS_PAYOUT: 'Request Unapplied Funds Payout',
-    // Payments
-    VIEW_PAYMENTS_LIST: 'View Payments List',
+//    // Payments
+//    VIEW_PAYMENTS_LIST: 'View Payments List',
     SCHEDULE_PAYMENT: 'Schedule Payment',
     MAKE_IMMEDIATE_PAYMENT: 'Make Immediate Payment', // revenue => NOT IMPLEMENTED: this was removed by client's request
     ADD_TO_BASKET: 'Add to Basket',
-    VIEW_SCHEDULED_PAYMENTS_LIST: 'View Scheduled Payments List',
-    // Receipts
-    VIEW_RECEIPTS_LIST: 'View Receipts List',
-    VIEW_RECEIPT_DETAIL: 'View Receipt Detail',//NOT IMPLEMENTED
-    // Download Mobile App Links - App Stores
+//    VIEW_SCHEDULED_PAYMENTS_LIST: 'View Scheduled Payments List',
+//    // Receipts
+//    VIEW_RECEIPTS_LIST: 'View Receipts List',
+//    VIEW_RECEIPT_DETAIL: 'View Receipt Detail',//NOT IMPLEMENTED
+//    // Download Mobile App Links - App Stores
     DOWNLOAD_MOBILE_APP: 'Download Mobile App',
 
     //*****************NEW EVENTS TRACKED*******************
@@ -78,6 +78,7 @@ angular.module('nextgearWebApp')
     CLICK_CONTACT_US_LINK: 'Click Contact Us Link',//x
 
     //Dashboard Events
+    VIEW_DASHBOARD: 'View Dashboard',
 //    CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',//can't find
     CLICK_DASHBOARD_CALENDAR_WEEK_BUTTON: 'Click Dashboard Calendar Week Button',//x
     CLICK_DASHBOARD_CALENDAR_MONTH_BUTTON: 'Click Dashboard Calendar Month Button',//x
@@ -96,6 +97,7 @@ angular.module('nextgearWebApp')
     CLICK_DASHBOARD_VIEW_RECEIPTS: 'Click Dashboard View Receipts',//x
 
     //Payments Events
+    VIEW_PAYMENTS_PAGE: 'View Payments Page',
     CLICK_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Payments Clear Search Link',//x
     CLICK_PAYMENTS_SEARCH_BUTTON: 'Click Payments Search Button',//x
     CLICK_PAYMENTS_FILTER_BY_DUE_DATE: 'Click Payments Filter By Due Date',//x
@@ -113,8 +115,10 @@ angular.module('nextgearWebApp')
     CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE: 'Click Payments Vehicle Unschedule Fee',//x
     CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT: 'Click Payments Vehicle Unschedule Payment',//x
     CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF: 'Click Payments Vehicle Unschedule Payoff',//x
+    CLICK_PAYMENTS_VEHICLE_VIEW_TITLE: 'Click Payments Vehicle View Title',//x
 
     //Scheduled Payments Events
+    VIEW_SCHEDULED_PAYMENTS_PAGE: 'View Scheduled Payments Page',
     CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK: 'Click Scheduled Payments Clear Search Link',//x
     CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON: 'Click Scheduled Payments Search Button',//x
     CLICK_SCHEDULED_PAYMENTS_FILTER_BY_PAYMENT_STATUS: 'Click Scheduled Payments Filter By Payment Status',//x
@@ -135,6 +139,7 @@ angular.module('nextgearWebApp')
     CLICK_CHECKOUT_SELECT_ACCOUNT: 'Click Checkout Select Account',//x
 
     //Receipts Events
+    VIEW_RECEIPTS_PAGE: 'View Receipts Page',
     CLICK_RECEIPTS_CLEAR_SEARCH_LINK: 'Click Receipts Clear Search Link',//x
     CLICK_RECEIPTS_SEARCH_BUTTON: 'Click Receipts Search Button',//x
     CLICK_RECEIPTS_FILTER_BY_INPUT: 'Click Receipts Filter By Payment Method',//x
@@ -152,6 +157,9 @@ angular.module('nextgearWebApp')
     CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT: 'Click Floorplan Filter To Date Input',//x
     CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION: 'Click Floorplan Filter by Inventory Location',//x
     CLICK_FLOORPLAN_VEHICLE_EXPAND_INFORMATION: 'Click Floorplan Vehicle Expand Information',//x
+    CLICK_FLOORPLAN_VEHICLE_DETAILED_REPORT: 'Click Floorplan Vehicle Detailed Report',
+    CLICK_FLOORPLAN_VEHICLE_VIEW_TITLE: 'Click Floorplan Vehicle View Title',
+    CLICK_FLOORPLAN_AUCTION_VEHICLE_VIEW_TITLE: 'Click Floorplan Auction Vehicle View Title',
 
     //Title Release Events
     VIEW_TITLE_RELEASE_PAGE: 'View Title Release Page',//x
@@ -165,6 +173,7 @@ angular.module('nextgearWebApp')
     CLICK_TITLE_RELEASE_TITLE_REQUESTED: 'Click Title Release Title Requested',//x
     CLICK_TITLE_RELEASE_REQUEST_TITLE: 'Click Title Release Request Title',//x
     CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Title Release Continue to Checkout Button',//x
+    CLICK_TITLE_RELEASE_REMOVE_TITLE_BUTTON: 'Click Title Release Remove Title Button',//x
 
     //Title Release Checkout Events
     VIEW_TITLE_RELEASE_CHECKOUT_PAGE: 'View Title Release Checkout Page',//x
@@ -189,7 +198,7 @@ angular.module('nextgearWebApp')
     CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT: 'Click View a Report Paid Off Summary View Report',//x
 
     //View Analytics Events
-    VIEW_ANALYTICS_PAGE: 'View Analytics Page',//x
+    VIEW_VIEW_ANALYTICS_PAGE: 'View View Analytics Page',//x
     CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK: 'Click View Analytics Show Details Link',//x
     CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON: 'Click View Analytics View All Auctions Button',//x
     CLICK_VIEW_ANALYTICS_BEST_MOVERS_BUTTON: 'Click View Analytics Best Movers Button',//x

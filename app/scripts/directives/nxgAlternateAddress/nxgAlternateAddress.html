@@ -1,13 +1,15 @@
-<div class="nxg-alt-addr" ng-show="canChangeTitleAddress() && addrLoaded">
+<div class="nxg-alt-addr clearfix" ng-show="canChangeTitleAddress() && addrLoaded">
   <button ng-disabled="ngDisabled" ng-hide="showSelectMenu" class="btn-unstyle btn-link alt-addr-link" ng-click="onClickAddress()">Send Title to a Different Address?</button>
-  <select ng-disabled="ngDisabled" ng-show="showSelectMenu"
-  ng-model="selectedAddress"
-  ng-options="(addr | address) for addr in addrList"
-  ng-class="{ wide: !showTooltip }"></select>
+  <div class="style-select" ng-show="showSelectMenu">
+    <select ng-disabled="ngDisabled"
+    ng-model="selectedAddress"
+    ng-options="(addr | address) for addr in addrList"
+    ng-class="{ wide: !showTooltip }"></select>
+  </div>
   <span ng-show="showTooltip && showSelectMenu" class="btn-help"
-     tooltip-placement="right"
-     tooltip-trigger="click"
-     tooltip-delay="300"
-     tooltip="You may select an already approved address on file with NextGear."
-     tooltip-animation="true">?</span>
+   tooltip-placement="right"
+   tooltip-trigger="click"
+   tooltip-delay="300"
+   tooltip="You may select an already approved address on file with NextGear."
+   tooltip-animation="true"><span nxg-icon="icon-help"></span></span>
 </div>

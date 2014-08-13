@@ -1,254 +1,52 @@
 'use strict';
 
 describe('Controller: FloorplanCtrl', function () {
-
-  // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
   var FloorplanCtrl,
     stateParamsMock,
+    floorplan,
     modelMock,
-    searchResult = {
-      data: {}
-    },
+    floorplanUtil,
     scope,
+    searchSpy,
+    shouldSucceed = true,
     initController,
-    httpBackend;
+    httpBackend,
+    myPlan;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan, $httpBackend) {
+  beforeEach(inject(function ($controller, $rootScope, $q, Floorplan, FloorplanUtil, $httpBackend) {
     scope = $rootScope.$new();
     stateParamsMock = {
       filter: 'fooFilter'
     };
-    modelMock = {
-      search: function () {
-        return $q.when(searchResult.data);
-      },
-      filterValues: Floorplan.filterValues,
-      sellerHasTitle: Floorplan.sellerHasTitle
-    };
+    floorplan = Floorplan;
+    floorplanUtil = FloorplanUtil;
     httpBackend = $httpBackend;
 
-    spyOn(modelMock, 'search').andCallThrough();
+    searchSpy = spyOn(Floorplan, 'search').andCallFake(function() {
+      if(shouldSucceed) {
+        return $q.when({ Floorplans: ['one', 'two'] });
+      } else {
+        return $q.reject(false);
+      }
+    });
 
     initController = function () {
       FloorplanCtrl = $controller('FloorplanCtrl', {
         $scope: scope,
         $stateParams: stateParamsMock,
-        Floorplan: modelMock
+        Floorplan: floorplan,
+        FloorplanUtil: floorplanUtil
       });
-    };
 
+      myPlan = new FloorplanUtil('FlooringDate', stateParamsMock.filter);
+    };
   }));
 
   // shared tests that need to be run for both dealer and auction mode
   var registerCommonTests = function () {
-
-    it('should attach a data object to the scope with expected properties', function () {
-      expect(scope.data).toBeDefined();
-      expect(angular.isArray(scope.data.results)).toBe(true);
-      expect(typeof scope.data.loading).toBe('boolean');
-    });
-
-    it('should attach a search function to the scope', function () {
-      expect(typeof scope.search).toBe('function');
-    });
-
-    describe('search function', function () {
-
-      it('should clear any prior results', function () {
-        scope.data.results = ['foo', 'bar'];
-        scope.search();
-        expect(scope.data.results.length).toBe(0);
-        expect(scope.data.hitInfiniteScrollMax).toBe(false);
-      });
-
-      it('should commit the proposedSearchCriteria (as a copy)', function () {
-        scope.proposedSearchCriteria = {
-          query: 'foo',
-          startDate: new Date(2013, 4, 4),
-          endDate: new Date(),
-          filter: 'something'
-        };
-        scope.search();
-        expect(angular.equals(scope.proposedSearchCriteria, scope.searchCriteria)).toBe(true);
-        expect(scope.searchCriteria).not.toBe(scope.proposedSearchCriteria);
-
-        scope.proposedSearchCriteria.startDate.setDate(5);
-        expect(scope.searchCriteria.startDate.getDate()).toBe(4);
-      });
-
-      it('should call for data with no paginator to start at beginning', function () {
-        expect(modelMock.search).toHaveBeenCalledWith(scope.searchCriteria, null);
-      });
-
-    });
-
-    describe('sortBy function', function(){
-
-      it('should set sortField properly', function(){
-        scope.sortBy('fieldA');
-        expect(scope.sortField).toEqual('fieldA');
-
-        scope.sortBy('fieldB');
-        expect(scope.sortField).toEqual('fieldB');
-
-        scope.sortBy('fieldB');
-        expect(scope.sortField).toEqual('fieldB');
-
-        scope.sortBy('fieldA');
-        expect(scope.sortField).toEqual('fieldA');
-      });
-
-      it('should set sortDescending true only if sortBy is called consecutively with the same field name', function(){
-        scope.sortBy('fieldB');
-        expect(scope.sortDescending).toBeFalsy();
-
-        scope.sortBy('fieldB');
-        expect(scope.sortDescending).toBeTruthy();
-
-        scope.sortBy('fieldB');
-        expect(scope.sortDescending).toBeFalsy();
-
-        scope.sortBy('fieldA');
-        expect(scope.sortDescending).toBeFalsy();
-
-        scope.sortBy('fieldA');
-        expect(scope.sortDescending).toBeTruthy();
-
-        scope.sortBy('fieldB');
-        expect(scope.sortDescending).toBeFalsy();
-      });
-
-      it('should call search()', function(){
-        spyOn(scope, 'search');
-        scope.sortBy('fieldA');
-        expect(scope.search).toHaveBeenCalled();
-      });
-
-      it('should set proposedSearchCriteria properties', function(){
-        scope.sortBy('fieldA');
-        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
-        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
-
-        scope.sortBy('fieldA');
-        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
-        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
-
-        scope.sortBy('fieldB');
-        expect(scope.sortField).toEqual(scope.proposedSearchCriteria.sortField);
-        expect(scope.sortDescending).toEqual(scope.proposedSearchCriteria.sortDesc);
-      });
-
-    });
-
-    it('should attach a fetchNextResults function to the scope', function () {
-      expect(typeof scope.fetchNextResults).toBe('function');
-    });
-
-
-    describe('fetchNextResults function', function () {
-
-      it('should not call for data if the paginator indicates it is already at the end', function () {
-        var originalCallCount = modelMock.search.calls.length;
-
-        scope.data.paginator = {
-          hasMore: function () {
-            return false;
-          },
-          hitMaximumLimit: function() {
-            return true;
-          }
-        };
-
-        scope.fetchNextResults();
-        expect(modelMock.search.calls.length).toBe(originalCallCount);
-        expect(scope.data.hitInfiniteScrollMax).toBe(true);
-      });
-
-      it('should set loading to true while waiting for results', function () {
-        scope.fetchNextResults();
-        expect(scope.data.loading).toBe(true);
-      });
-
-      it('should set loading to false on success', function () {
-        scope.fetchNextResults();
-        scope.$apply();
-        expect(scope.data.loading).toBe(false);
-      });
-
-      it('should set loading to false on error', inject(function ($q) {
-        searchResult.data = $q.reject('oops!');
-        scope.fetchNextResults();
-        scope.$apply();
-        expect(scope.data.loading).toBe(false);
-      }));
-
-      it('should pass back the paginator from previous calls on subsequent ones', function () {
-        var p = {
-          hasMore: function () {
-            return true;
-          },
-          hitMaximumLimit: function() {
-            return false;
-          }
-        };
-        searchResult.data = {
-          $paginator: p
-        };
-        scope.fetchNextResults();
-        scope.$apply();
-        scope.fetchNextResults();
-        expect(modelMock.search.mostRecentCall.args[1]).toBe(p);
-      });
-
-      it('should append new results to the results array', function () {
-        scope.data.results = ['one', 'two'];
-        searchResult.data = {
-          Floorplans: ['three', 'four']
-        };
-        scope.fetchNextResults();
-        scope.$apply();
-        expect(angular.equals(scope.data.results, ['one', 'two', 'three', 'four'])).toBe(true);
-      });
-
-    });
-
-    it('should attach a resetSearch function to the scope', function () {
-      expect(typeof scope.resetSearch).toBe('function');
-    });
-
-    describe('resetSearch function', function () {
-
-      it('should set proposedSearchCriteria with empty search defaults', function () {
-        scope.proposedSearchCriteria = null;
-        scope.resetSearch();
-        expect(scope.proposedSearchCriteria.query).toBe(null);
-        expect(scope.proposedSearchCriteria.startDate).toBe(null);
-        expect(scope.proposedSearchCriteria.endDate).toBe(null);
-      });
-
-      it('should set proposedSearchCriteria filter to ALL if none is provided', function () {
-        scope.proposedSearchCriteria = null;
-        scope.resetSearch();
-        expect(scope.proposedSearchCriteria.filter).toBe(modelMock.filterValues.ALL);
-      });
-
-      it('should set proposedSearchCriteria filter to initial filter if one is provided', function () {
-        scope.proposedSearchCriteria = null;
-        scope.resetSearch('bar');
-        expect(scope.proposedSearchCriteria.filter).toBe('bar');
-      });
-
-      it('should initiate a search', function () {
-        spyOn(scope, 'search');
-        scope.resetSearch();
-        expect(scope.search).toHaveBeenCalled();
-      });
-
-    });
-
     describe('sellerHasTitle function', function() {
       var fl = {
         TitleLocation: 'Buyer',
@@ -256,7 +54,7 @@ describe('Controller: FloorplanCtrl', function () {
       };
 
       beforeEach(function() {
-        spyOn(modelMock, 'sellerHasTitle').andCallThrough();
+        spyOn(floorplan, 'sellerHasTitle').andCallThrough();
 
         httpBackend.expectPOST('/floorplan/SellerHasTitle')
           .respond({
@@ -285,32 +83,26 @@ describe('Controller: FloorplanCtrl', function () {
       it('set title location to Seller if they have the title', function() {
         scope.sellerHasTitle(fl, true);
         httpBackend.flush();
-        expect(modelMock.sellerHasTitle).toHaveBeenCalled();
+        expect(floorplan.sellerHasTitle).toHaveBeenCalled();
         expect(fl.TitleLocation).toBe('Seller');
       });
 
       it('set title location to Title Absent if seller does not have the title', function() {
         scope.sellerHasTitle(fl, false);
         httpBackend.flush();
-        expect(modelMock.sellerHasTitle).toHaveBeenCalled();
+        expect(floorplan.sellerHasTitle).toHaveBeenCalled();
         expect(fl.TitleLocation).toBe('Title Absent');
       });
     });
-
-    it('should automatically kick off a search with the filter passed to the state', function () {
-      expect(scope.searchCriteria.filter).toBe('fooFilter');
-      expect(modelMock.search).toHaveBeenCalled();
-    });
-
   };
 
   describe('(in dealer mode)', function () {
+    var floorplan, floorplanUtil;
 
-    var floorplan;
-
-    beforeEach(inject(function (User, Floorplan) {
+    beforeEach(inject(function (User, Floorplan, FloorplanUtil) {
       spyOn(User, 'isDealer').andReturn(true);
       floorplan = Floorplan;
+      floorplanUtil = FloorplanUtil;
       initController();
     }));
 
@@ -339,7 +131,7 @@ describe('Controller: FloorplanCtrl', function () {
 
   describe('(in auction seller floorplan mode)', function () {
 
-    var floorplan;
+    var floorplan, floorplanUtil;
 
     beforeEach(inject(function (User, Floorplan) {
       spyOn(User, 'isDealer').andReturn(false);
@@ -373,7 +165,5 @@ describe('Controller: FloorplanCtrl', function () {
       expect(scope.filterOptions[6].label).toBe('Completed/Not Paid');
       expect(scope.filterOptions[6].value).toBe(floorplan.filterValues.COMPLETED_NOT_PAID);
     });
-
   });
-
 });

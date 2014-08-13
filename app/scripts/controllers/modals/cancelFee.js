@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('CancelFeeCtrl', function ($scope, $injector, dialog, options, Payments) {
     $scope.fee = options.fee;
-    $scope.title = options.title ? options.title : 'Would you like to cancel your scheduled fee?';
+    $scope.title = options.title ? options.title : 'Cancel Fee';
 
     $scope.handleNo = function () {
       dialog.close(false);

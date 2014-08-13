@@ -1,25 +1,29 @@
-<div class="modal-header">
+<h3 class="modal-header">
   {{title}}
-</div>
+</h3>
 
 <div class="modal-body">
-  <div>
-    {{ fee.description }}
-  </div>
-  <div>
-    <strong>Scheduled </strong>{{ fee.scheduledDate | moment }}
-  </div>
-  <div>
-    <strong>Fee Type </strong> {{ fee.feeType }}
-  </div>
-  <div>
-    <strong>Fee Amount</strong>
-    {{ fee.balance | currency }}
-  </div>
+  <h3>Would you like to cancel your scheduled fee?</h3>
+  <h4>{{ fee.description }}</h4>
+
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Scheduled</p>
+      <p class="span6 value">{{ fee.scheduledDate | moment }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Fee Type</p>
+      <p class="span6 value">{{ fee.feeType }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Fee Amount</p>
+      <p class="span6 value"> {{ fee.balance | currency }}</p>
+    </li>
+  </ul>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="handleYes()" class="btn" ng-disabled="submitInProgress">Yes</button>
-  <button ng-click="handleNo()" class="btn btn-primary" ng-disabled="submitInProgress" nxg-autofocus>No</button>
+  <button ng-click="handleNo()" class="btn-cta cta-primary" ng-disabled="submitInProgress" nxg-autofocus>No</button>
+  <button ng-click="handleYes()" class="btn-cta cta-secondary" ng-disabled="submitInProgress">Yes</button>
 </div>
 

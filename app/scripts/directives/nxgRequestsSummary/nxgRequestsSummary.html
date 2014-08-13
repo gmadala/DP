@@ -1,27 +1,26 @@
 <section>
-  <h4>Requests Summary</h4>
+  <h2 class="well-title">Requests Summary</h2>
 
-  <div class="well-out">
-    <p>Title Release Limits for this Account:<br/>
-      <span class="emphasis">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="emphasis">{{ eligibility.TotalReleasesAllowed || 0 }}</span> title releases available.</p>
-
-    <div class="queue-items" ng-show="titleQueue.contents.length > 0">
-      <!-- <p ng-show="">You have not requested any titles.</p> -->
-
-      <ul>
-        <li ng-repeat="item in titleQueue.contents">
-          <button class="btn-unstyle btn-x" nxg-track="{{metric.}}" ng-click="titleQueue.removeFromQueue(item)"><span class="glyphicon"></span></button>
-          Title Request <br/>
-          {{ getVehicleDescription(item) }}<br/>
-          <span>VIN: {{ item.UnitVIN }}</span>
-        </li>
-      </ul>
-    </div>
+  <div class="well-item">
+    <h5>Title Release Limits for this Account:<br/>
+      You have <span class="count">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="count">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available.</h5>
   </div>
 
-  <div class="request-sum-footer">
-    <button class="btn btn-primary btn-checkout" nxg-track="{{metric.CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON}}" ng-click="navigate('home.titleReleaseCheckout')" ng-disabled="titleQueue.contents.length == 0" >
-      <span class="ie-text">Continue to Checkout</span>
-    </button>
+  <div class="" ng-show="titleQueue.contents.length > 0">
+    <ul class="queue-list">
+      <li class="queue-item bordered" ng-repeat="item in titleQueue.contents">
+        <button class="btn-unstyle right" nxg-track="{{metric.}}" ng-click="titleQueue.removeFromQueue(item)">
+          <span nxg-icon="icon-cancel" class="icon-small"></span>
+        </button>
+        <p>Title Request</p>
+        <h6 class="highlight caps">{{ getVehicleDescription(item) }}</h6>
+        <p>VIN: {{ item.UnitVIN }}</p>
+      </li>
+    </ul>
   </div>
+
+  <button class="btn-cta cta-primary cta-full" nxg-track="{{metric.CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON}}" ng-click="navigate('home.titleReleaseCheckout')" ng-disabled="titleQueue.contents.length == 0" >
+    <span class="paired-body">Confirm Requests</span>
+    <span class="paired media" nxg-icon="icon-title"></span>
+  </button>
 </section>

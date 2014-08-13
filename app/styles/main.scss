@@ -32,10 +32,11 @@
 @import "basic/base";
 @import "basic/helpers";
 @import "basic/typography";
+@import "basic/icons";
 @import "common/buttons";
 @import "common/header";
 @import "common/footer";
-@import "common/tableLists";
+// @import "common/tableLists";
 @import "common/calendar";
 @import "common/charts";
 @import "common/indicators";
@@ -44,9 +45,8 @@
 @import "common/modals";
 @import "common/notices";
 @import "common/formElements";
-@import "basic/glyphicons";
+// @import "basic/glyphicons";
 @import "common/tooltips";
-@import "common/search";
 @import "common/sortable";
 
 // Individual page styles.
@@ -54,16 +54,15 @@
 @import "pages/unsupported";
 @import "pages/settings";
 @import "pages/floorcar";
-@import "pages/dashboard";
 @import "pages/payments";
-@import "pages/schPayments";
+// @import "pages/schPayments";
 @import "pages/checkout";
 @import "pages/reports";
-@import "pages/floorplan";
+// @import "pages/floorplan";
 @import "pages/titleReleases";
-@import "pages/receipts";
 @import "pages/resources";
 @import "pages/analytics";
 @import "pages/auction";
+@import "pages/dealersearch";
 
 @import "tempRefactor";

@@ -1,117 +1,98 @@
-<div class="modal-header">
-  <h3>Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}.</h3>
-</div>
+<h3 class="modal-header">Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}.</h3>
+
 <div class="modal-body">
-  <!-- Scheduled Payments -->
   <section ng-show="items.paymentsScheduled.length > 0 || items.feesScheduled.length > 0">
-    <h4 class="boxed">Scheduled Payment(s)</h4>
+    <h3>Scheduled Payment(s)</h3>
 
     <div ng-show="items.feesScheduled.length > 0">
-      <p class="notice-box">Fees</p>
-      <ul class="unstyled scheduled-fees">
-        <li class="table-list-head">
-          <div class="cell fee-type">Fee Type</div>
-          <div class="cell fee-desc">Description</div>
-          <div class="cell fee-date">Scheduled</div>
-          <div class="cell fee-amt">Amount</div>
-        </li>
-
-        <li class="table-list-row" ng-repeat="fee in items.feesScheduled">
-          <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
-          <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
-          <div class="cell fee-date"><p>{{ fee.scheduleDate | moment }}</p></div>
-          <div class="cell fee-amt"><p>{{ fee.amount | currency }}</p></div>
-        </li>
-      </ul>
+      <h4>Fees</h4>
+      <table class="table table-striped table-secondary">
+        <thead>
+          <th>Fee Type</th>
+          <th>Description</th>
+          <th>Scheduled</th>
+          <th>Amount</th>
+        </thead>
+        <tr ng-repeat="fee in items.feesScheduled">
+          <td>{{ fee.type || 'N/A' }}</td>
+          <td>{{ fee.description }}</td>
+          <td>{{ fee.scheduleDate | moment }}</td>
+          <td><p class="numeric">{{ fee.amount | currency }}</p></td>
+        </tr>
+      </table>
     </div>
 
     <div ng-show="items.paymentsScheduled.length > 0">
-      <p class="notice-box">Payments</p>
-      <ul class="unstyled scheduled-payments">
-        <li class="table-list-head">
-          <div class="cell sch-desc">Description</div>
-          <div class="cell sch-date">Scheduled</div>
-          <div class="cell sch-amt">Amount</div>
-        </li>
+      <h4>Payments</h4>
 
-        <li class="table-list-row" ng-repeat="payment in items.paymentsScheduled">
-          <div class="cell sch-desc">
-            <p>
-              <span class="sch-label">VIN: </span>
-              {{ payment.vin }}<br/>
-              <span class="sch-label">Stock #: </span>
-              {{ payment.stockNum }}
-            </p>
-            <p>{{ payment.description }}</p>
-          </div>
-          <div class="cell sch-date">
-            <p>{{ payment.scheduleDate | moment }}</p>
-          </div>
-          <div class="cell sch-amt">
-            <p>{{ payment.amount | currency }}</p>
-          </div>
-        </li>
-      </ul>
+      <table class="table table-striped table-secondary">
+        <thead>
+          <th>Description</th>
+          <th>Scheduled</th>
+          <th>Amount</th>
+        </thead>
+        <tr ng-repeat="payment in items.paymentsScheduled">
+          <td>
+            <a class="" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+            <p class="caps vin">VIN: {{ payment.vin }}</p>
+            <p class="caps stock">STK: {{ payment.stockNum }}</p>
+          </td>
+          <td><p class="">{{ payment.scheduleDate | moment }}</p></td>
+          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+        </tr>
+      </table>
     </div>
-  </section><!-- end Scheduled Payments -->
+  </section>
 
-  <!-- Submitted Payments -->
   <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
-    <h4 class="boxed">
-      Submitted Payment(s): {{ items.todayTotal() | currency }}
-    </h4>
+    <h3>Submitted Payment(s): {{ items.todayTotal() | currency }}</h3>
 
-    <!-- Submitted Fees -->
     <div ng-show="items.feesToday.length > 0">
-      <p class="notice-box">Fees</p>
-      <ul class="unstyled submitted-fees">
-        <li class="table-list-head">
-          <div class="cell fee-type">Fee Type</div>
-          <div class="cell fee-desc">Description</div>
-          <div class="cell fee-date">Paid</div>
-          <div class="cell fee-amt">Amount</div>
-        </li>
+      <h4>Fees</h4>
 
-        <li class="table-list-row" ng-repeat="fee in items.feesToday">
-          <div class="cell fee-type"><p>{{ fee.type || 'N/A' }}</p></div>
-          <div class="cell fee-desc"><p>{{ fee.description }}</p></div>
-          <div class="cell fee-date"><p>{{ today | moment }}</p></div>
-          <div class="cell fee-amt"><p>{{ fee.amount | currency }}</p></div>
-        </li>
-      </ul>
-    </div><!-- end Submitted Fees -->
+      <table class="table table-striped table-secondary">
+        <thead>
+          <th>Fee Type</th>
+          <th>Description</th>
+          <th>Paid</th>
+          <th>Amount</th>
+        </thead>
+        <tr ng-repeat="fee in items.feesToday">
+          <td>{{ fee.type || 'N/A' }}</td>
+          <td>{{ fee.description }}</td>
+          <td>{{ today | moment }}</td>
+          <td><p class="numeric">{{ fee.amount | currency }}</p></td>
+        </tr>
+      </table>
+    </div>
 
-    <!-- Submitted Payments -->
     <div ng-show="items.paymentsToday.length > 0">
-      <p class="notice-box">Payments</p>
-      <ul class="unstyled submitted-payments">
-        <li class="table-list-head">
-          <div class="cell pay-desc">Description</div>
-          <div class="cell pay-date">Paid</div>
-          <div class="cell pay-amt">Amount</div>
-        </li>
+      <h4>Payments</h4>
 
-        <li class="table-list-row" ng-repeat="payment in items.paymentsToday">
-          <div class="cell pay-desc">
-            <p><span class="sch-label">VIN: </span>
-            {{ payment.vin }}<br/>
-            <span class="sch-label">Stock #: </span>
-            {{ payment.stockNum }}</p>
-            <p>{{ payment.description }}</p></div>
-          <div class="cell pay-date"><p>{{ today | moment }}</p></div>
-          <div class="cell pay-amt">
-            <p>{{ payment.amount | currency }}</p>
-          </div>
-        </li>
-      </ul>
-    </div><!-- end Submitted Payments -->
-  </section><!-- end Submitted Payments & Fees -->
+      <table class="table table-striped table-secondary">
+        <thead>
+          <th>Description</th>
+          <th>Scheduled</th>
+          <th>Amount</th>
+        </thead>
+        <tr ng-repeat="payment in items.paymentsToday">
+          <td>
+            <a class="" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+            <p class="caps vin">VIN: {{ payment.vin }}</p>
+            <p class="caps stock">STK: {{ payment.stockNum }}</p>
+          </td>
+          <td>{{ today | moment }}</td>
+          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+        </tr>
+      </table>
+    </div>
+  </section>
 </div>
 
 <div class="modal-footer" ng-show="!!receiptUrls.length">
-  <button ng-click="viewReceipts()" class="btn btn-primary" nxg-autofocus>View Receipts</button>
-  <button ng-click="close()" class="btn btn-primary">Close</button>
+  <button type="button" ng-click="viewReceipts()" class="btn-cta cta-secondary" nxg-autofocus>View Receipts</button>
+  <button type="submit" ng-click="close()" class="btn-cta cta-primary">Close</button>
 </div>
 <div class="modal-footer" ng-hide="!!receiptUrls.length">
-  <button ng-click="close()" class="btn btn-primary" nxg-autofocus>OK</button>
+  <button type="submit" ng-click="close()" class="btn-cta cta-primary" nxg-autofocus>OK</button>
 </div>

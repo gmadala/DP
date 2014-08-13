@@ -1,8 +1,5 @@
 
 
-
-
-
 .well {
   @include border-radius($borderRadius);
   @include box-shadow(none);
@@ -10,40 +7,111 @@
   border: 1px solid $wellBorder;
 }
 
-  .well-title {
+  .well-title { // typically h2
     @include border-top-radius($borderRadius);
+    position: relative;
     background: $white;
-    padding: 5px 20px;
+    padding: 5px 18px;
     border-bottom: 1px solid $wellBorder;
+
+    .btn {
+      position: absolute;
+      height: 30px;
+      top: 0;
+      right: 10px;
+    }
+  }
+
+  .well-title-secondary {
+    @extend .well-title;
+    background: #E6E6E6;
+    font-size: 16px;
+    padding: 8px 18px;
   }
 
   .well-sub-title {
     font-size: 14px;
     float: right;
-    margin: 10px 0 0;
+    margin: 5px 0 0;
   }
 
-  // h4 {
-  //   @extend %thin;
-  //   letter-spacing: 0.03em;
-  //   margin-top: 0px;
-  //   margin-bottom: 28px;
-  // }
+  .well-form {
+    padding: 20px;
+  }
 
-  // legend {
-  //   @extend h4;
-  //   border: none;
-  // }
-
-
-.well-out {
-  display: block;
-  background-color: $well-out-bkgd;
-  padding: 14px;
-  border: 1px solid $well-out-border;
-  border-top: 0;
-  margin: -15px;
+// Queue lists
+.queue-list {
+  border-top: 1px solid $wellBorder;
+  border-bottom: 1px solid $wellBorder;
+  margin: 0 0 -1px 0;
 }
+  .queue-item {
+    padding: 10px;
+    background: #ffffff;
+
+    &:nth-child(2n) {
+      background: #ececec;
+    }
+
+    & + .queue-item {
+      border-top: 1px solid $wellBorder;
+    }
+
+    p, h6 {
+      margin-bottom: 3px;
+    }
+
+    .row-fluid {
+      margin-top: 10px;
+
+      .span6:last-child {
+        text-align: right;
+      }
+    }
+
+    .icon-cancel svg {
+      fill: #666666;
+    }
+
+    .lockup-major {
+      @extend .highlight;
+    }
+  }
+
+
+.well-item {
+  @extend .clearfix;
+  padding: 10px;
+
+  &.bordered {
+    border-top: 1px solid $wellBorder;
+  }
+}
+  .well-light {
+    background: #ffffff;
+  }
+
+  .well-dark {
+    background: #ececec;
+  }
+
+.well-footer {
+  border-top: 1px solid $wellBorder;
+
+  .btn-checkout {
+    border: 0;
+    background: #fff;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
+}
+
+
+
+
+
+
 
 .well-single {
   width: 300px;

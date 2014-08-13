@@ -24,9 +24,9 @@ angular.module('nextgearWebApp')
           weekends: false,
           weekMode: 'liquid',
           header: {
-            left: 'prev, today',
-            center: 'title',
-            right: 'next'
+            left: '',
+            center: 'prev, title, next',
+            right: ''
           },
           contentHeight: 150,
           titleFormat: {
@@ -34,8 +34,8 @@ angular.module('nextgearWebApp')
             week: 'MMMM yyyy'
           },
           columnFormat: {
-            month: '<b>ddd</b>',
-            week: '<b>ddd</b>'
+            month: 'ddd',
+            week: 'ddd'
           },
           viewDisplay: function(view) {
             // prevent navigation into the past
@@ -116,6 +116,7 @@ angular.module('nextgearWebApp')
           if (newValue === oldValue) {
             return;
           }
+
           // unfortunately fullCalendar does not have live option setter support, see
           // https://code.google.com/p/fullcalendar/issues/detail?id=293
           $scope.cal.fullCalendar('destroy');
@@ -128,10 +129,12 @@ angular.module('nextgearWebApp')
           if (!newValue) {
             return;
           }
+
           $scope.openDates = newValue.openDates;
           $scope.eventsByDate = newValue.eventsByDate;
           $scope.eventSources.length = 0;
           $scope.eventSources.push(newValue.dueEvents, newValue.scheduledEvents);
+
           // hack: force the dayRender logic to run again for each day now that we have data
           $element.find('.fc-day').each(function (index, day) {
             day = angular.element(day);

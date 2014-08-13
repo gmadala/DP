@@ -3008,6 +3008,18 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
         scope.$destroy();
       });
 
+      // Added for ticket VO-2621 by Josh Kramer
+      if(attrs.typeaheadOpen) {
+        var openProperty = $parse(attrs.typeaheadOpen);
+        scope.$watch('matches.length', function(newLength) {
+          if(newLength === 0) {
+            openProperty.assign(originalScope, false);
+          } else {
+            openProperty.assign(originalScope, true);
+          }
+        });
+      }
+
       var resetMatches = function() {
         scope.matches = [];
         scope.activeIdx = -1;

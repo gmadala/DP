@@ -1,11 +1,27 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, segmentio, metric, moment, $filter) {
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter) {
 
-    segmentio.track(metric.VIEW_MAIN_DASHBOARD);
+    segmentio.track(metric.VIEW_DASHBOARD);
 
     $scope.viewMode = 'week';
+    $scope.today = moment().format('MMMM D, YYYY');
+
+    // FloorplanUtil handles all search/fetch/reset functionality.
+    $scope.floorplanData = new FloorplanUtil('FlooringDate');
+    // initial search
+    $scope.floorplanData.resetSearch();
+
+    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
+
+    $scope.changeViewMode = function(mode) {
+      $scope.viewMode = mode;
+    };
+
+    $scope.isWeekMode = function() {
+      return $scope.viewMode === 'week';
+    };
 
     $scope.getDueStatus = function (payment) {
       var due = moment(payment.DueDate),
@@ -28,6 +44,11 @@ angular.module('nextgearWebApp')
       } else {
         return true;
       }
+    };
+
+    $scope.getCalendarTitle = function() {
+      var now = angular.element('.dash-calendar').fullCalendar('getDate');
+      return moment(now).format('MMMM YYYY');
     };
 
     $scope.onClickPrev = function() {
@@ -55,6 +76,10 @@ angular.module('nextgearWebApp')
       };
 
       $dialog.dialog(dialogOptions).open();
+    };
+
+    $scope.onClickButtonLink = function(newState) {
+      $state.transitionTo(newState);
     };
 
     // Determines if the length of the rendered number is too long
@@ -112,13 +137,19 @@ angular.module('nextgearWebApp')
 
           $scope.chartData = {
             credit: result.creditChartData,
-            payments: result.paymentsChartData,
+            payments: result.paymentChartData.chartData,
             creditTitle: {
               useHTML: true,
               floating: true,
               text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(result.AvailableCredit, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
               y: 70
             },
+            paymentsTitle: {
+              useHTML: true,
+              floating: true,
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">this ' + $scope.viewMode + '</p>',
+              y: 75
+            }
           };
         }
       );

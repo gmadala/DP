@@ -69,13 +69,18 @@
 }
 
 .highlight {
-  @extend %heavy;
-  color: $brand-text;
+  color: $highlight;
 }
 
 .highlight-dark {
   @extend .highlight;
-  color: $darker-text-color;
+  color: darken($highlight, 10%);
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* As found via http://kenneth.io/blog/2012/03/04/word-wrapping-hypernation-using-css/ */

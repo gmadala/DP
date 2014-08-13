@@ -14,7 +14,8 @@ angular.module('nextgearWebApp')
     return function (input, selectedTemplate) {
       var templates = {
         oneLine: '{{Line1}} {{Line2 && Line2+\' \'}}/ {{City}} {{State}} {{Zip}}',
-        twoLine: '{{Line1 + \', \'}}{{Line2 && Line2 + \', \'}}{{City && City + \', \'}}{{State}} {{Zip}}'
+        twoLine: '{{Line1 + \', \'}}{{Line2 && Line2 + \', \'}}{{City && City + \', \'}}{{State}} {{Zip}}',
+        oneLineSelect: '{{Line1}} / {{City}} {{State}}'
       };
 
       if (input === null || !angular.isDefined(input)) {

@@ -12,7 +12,8 @@ describe('Directive: nxgAlternateAddress', function () {
       compile,
       defaultAddrResponseMock;
 
-  beforeEach(inject(function ($rootScope, $compile, TitleAddresses) {
+  beforeEach(inject(function ($rootScope, $compile, TitleAddresses, $httpBackend) {
+    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
     scope = $rootScope.$new();
     compile = $compile;
     rootScope = $rootScope;

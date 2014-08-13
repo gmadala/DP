@@ -1,6 +1,6 @@
-<div class="modal-header">
-    <h3>Buyer Business Line of Credit Query</h3>
-</div>
+<h3 class="modal-header">
+  Buyer Business Line of Credit Query
+</h3>
 
 <section class="modal-body" nxg-autofocus>
   <p class="modal-subtitle">Buyer Information</p>
@@ -49,11 +49,12 @@
 </section>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn btn-mini" ng-class="{ 'btn-secondary': !business.creditQuery.requested, 'btn-primary': business.creditQuery.requested }" >
+  <button ng-click="close()" class="btn-cta" ng-class="{ 'cta-secondary': !business.creditQuery.requested, 'cta-primary': business.creditQuery.requested }" >
     <span ng-show="business.creditQuery.requested">OK</span>
     <span ng-hide="business.creditQuery.requested">Cancel</span>
   </button>
   <button nxg-autofocus ng-click="business.creditQuery.get()"
-          class="btn btn-mini btn-primary"
-        ng-show="!business.creditQuery.requested">Query</button>
+          type="submit"
+          class="btn-cta cta-primary"
+          ng-show="!business.creditQuery.requested">Query</button>
 </div>

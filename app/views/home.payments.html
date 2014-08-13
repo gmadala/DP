@@ -2,8 +2,7 @@
     <section class="span9">
         <div nxg-search
              title="Payment Search"
-             class="search-form payments"
-             prompt="Stock # or VIN"
+             prompt="By Stock #, VIN, or Description"
              metric-search="{{metric.CLICK_PAYMENTS_SEARCH_BUTTON}}"
              metric-clear-search="{{metric.CLICK_PAYMENTS_CLEAR_SEARCH_LINK}}"
              metric-filter-by-input="{{metric.CLICK_PAYMENTS_FILTER_BY_DUE_DATE}}"
@@ -20,157 +19,151 @@
              show-location-filter="true">
         </div>
 
-        <h3 class="boxed">Account Fees</h3>
-        <p class="notice-box" ng-show="canPayNow">
-          Account fees paid online will need to be paid by 8pm EST.
-        </p>
-
-        <div class="fees" ng-switch="fees.results.length > 0 || fees.loading">
+        <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
+          <h2 class="well-title">Account Fees</h2>
           <p class="notice-box" ng-switch-when="false">
             There are no fees associated with this account.
           </p>
-
-          <ul class="unstyled" ng-switch-when="true">
-            <li class="table-list-head">
-              <div class="cell fee-type sortable"
-                   ng-click="sortFeesBy('FeeType')"
-                   ng-class="{ sorted : sortField.fee == 'FeeType', desc : sortDescending.fee }">
+          <table class="table table-striped table-primary" ng-switch-when="true">
+            <thead>
+              <th class="sortable"
+                  ng-click="sortFeesBy('EffectiveDate')"
+                  ng-class="{ sorted : sortField.fee == 'EffectiveDate', desc : sortDescending.fee }">
+                Due Date
+                <span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortFeesBy('FeeType')"
+                  ng-class="{ sorted : sortField.fee == 'FeeType', desc : sortDescending.fee }">
                 Fee Type
-              </div>
-              <div class="cell fee-desc">
-                Description</div>
-              <div class="cell fee-due sortable"
-                   ng-click="sortFeesBy('EffectiveDate')"
-                   ng-class="{ sorted : sortField.fee == 'EffectiveDate', desc : sortDescending.fee }">
-                Date Due</div>
-              <div class="cell fee-posted sortable"
-                   ng-click="sortFeesBy('Posted')"
-                   ng-class="{ sorted : sortField.fee == 'Posted', desc : sortDescending.fee }">
-                Date Posted</div>
-              <div class="cell fee-amt sortable"
-                   ng-click="sortFeesBy('Balance')"
-                   ng-class="{ sorted : sortField.fee == 'Balance', desc : sortDescending.fee }">
-                Fee Amount</div>
-            </li>
-
-            <li class="table-list-row" ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
-                <div class="cell fee-type"><p>{{ fee.FeeType || 'N/A' }}</p></div>
-                <div class="cell fee-desc"><p>{{ fee.Description }}</p></div>
-                <div class="cell fee-due">
-                  <p>{{ fee.EffectiveDate | moment }}</p>
-                    <div class="nxg-payment-due-status" ng-class="getDueStatus(fee, false)" ng-switch="getDueStatus(fee, false)">
-                    <p class="warning today" ng-switch-when="today"><span class="excl-today">!</span>Due Today</p>
-                    <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
-                  </div>
-
+                <span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortFeesBy('Description')"
+                  ng-class="{ sorted : sortField.fee == 'Description', desc : sortDescending.fee }">
+                Description
+                <span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortFeesBy('Posted')"
+                  ng-class="{ sorted : sortField.fee == 'Posted', desc : sortDescending.fee }">
+                Posted
+                <span class="sortArrows"></span>
+              </th>
+              <th class="sortable"
+                  ng-click="sortFeesBy('Balance')"
+                  ng-class="{ sorted : sortField.fee == 'Balance', desc : sortDescending.fee }">
+                Fee Amount
+                <span class="sortArrows"></span>
+              </th>
+            </thead>
+            <tr ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
+              <td class="paired paired-reversed">
+                <span class="paired-media svg-icon" ng-class="getDueStatus(fee, false)" ng-switch="getDueStatus(fee, false)">
+                  <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                  <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                </span>
+                <div class="paired-body">
+                  <p class="lockup-major" ng-class="{ 'color-danger': getDueStatus(fee, false) == 'overdue' }">{{ fee.EffectiveDate | moment }}</p>
                 </div>
-                <div class="cell fee-posted"><p>{{ fee.Posted | moment }}</p></div>
-                <div class="cell fee-amt"><p>{{ fee.Balance | currency }}</p>
+              </td>
+              <td>
+                <p class="lockup-major">{{ fee.FeeType || 'N/A' }}</p>
+              </td>
+              <td class="description">
+                <h5>{{ fee.Description }}</h5>
+              </td>
+              <td>
+                <p class="lockup-major">{{ fee.Posted | moment }}</p>
+              </td>
+              <td class="numeric has-btns">
                   <div nxg-payment-buttons="fee"
-                       item="fee"
-                       on-queue="isFeeOnQueue(fee.FinancialRecordId)">
-                  </div>
+                     item="fee"
+                     on-queue="isFeeOnQueue(fee.FinancialRecordId)">
                 </div>
-            </li>
-          </ul>
-        </div><!-- end fees list -->
+              </td>
+            </tr>
+          </table>
+        </div>
 
-        <div nxg-infinite-scroll="payments.fetchNextResults()"
+        <div class="well" ng-switch="payments.results.length > 0 || payments.loading">
+          <h2 class="well-title">Vehicle Payments</h2>
+          <p class="no-results" ng-switch-when="false">
+            Sorry, no results found. Please <a ng-click="payments.resetSearch()" title="New Search">try a new search</a>.
+          </p>
+          <div ng-switch-when="true" nxg-infinite-scroll="payments.fetchNextResults()"
              nxg-infinite-scroll-disabled="payments.loading"
              nxg-infinite-scroll-show-indicator="payments.loading">
+            <table class="table table-striped table-primary">
+              <thead>
+                <th class="sortable"
+                    ng-click="sortPaymentsBy('DueDate')"
+                    ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
+                  Due Date<span class="sortArrows"></span>
+                </th>
+                <th class="sortable"
+                    ng-click="sortPaymentsBy('UnitDescription')"
+                    ng-class="{ sorted : sortField.payment == 'UnitDescription', desc : sortDescending.payment }">
+                  Description<span class="sortArrows"></span>
+                </th>
+                <th class="sortable"
+                    ng-click="sortPaymentsBy('FlooringDate')"
+                    ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
+                  Floored<span class="sortArrows"></span>
+                </th>
+                <th class="sortable"
+                    ng-click="sortPaymentsBy('AmountDue')"
+                    ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
+                  Payment<span class="sortArrows"></span>
+                </th>
+                <th class="sortable"
+                    ng-click="sortPaymentsBy('CurrentPayoff')"
+                    ng-class="{ sorted : sortField.payment == 'CurrentPayoff', desc : sortDescending.payment }">
+                  Payoff<span class="sortArrows"></span>
+                </th>
+              </thead>
+              <!-- Vehicle Payments: table body -->
+              <tr ng-repeat="payment in payments.results">
 
-          <h3 class="boxed">Vehicle Payments</h3>
+                <td class="paired paired-reversed"> <!-- Vehicle Payments: due date column -->
+                  <span class="paired-media svg-icon" ng-class="getDueStatus(payment,true)" ng-switch="getDueStatus(payment, true)">
+                    <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                    <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                  </span>
+                  <div class="paired-body">
+                    <p class="lockup-major" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">{{ payment.DueDate | moment }}</p>
+                    <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}">Request<br/>Extension</a>
+                  </div>
+                </td>
 
-          <div class="payments" ng-switch="payments.results.length > 0 || payments.loading">
-            <p class="no-results" ng-switch-when="false">
-              Sorry, no results found. Please <a ng-click="payments.resetSearch()" title="New Search">try a new search</a>.
-            </p>
+                <td class="description"> <!-- Vehicle Payments: description column -->
+                  <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.UnitDescription }}</a>
+                  <div class="row-fluid">
+                    <p class="lockup-minor caps vin">VIN: <span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span></p>
+                    <p class="lockup-minor caps stock">STK: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
+                  </div>
+                </td>
 
-            <ul class="unstyled" ng-switch-when="true">
-                <li class="table-list-head">
-                  <div class="cell pay-more">
-                  </div>
-                  <div class="cell pay-desc">
-                    Description
-                  </div>
-                  <div class="cell pay-due sortable"
-                       ng-click="sortPaymentsBy('DueDate')"
-                       ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
-                    Date Due
-                  </div>
-                  <div class="cell pay-floorDate sortable"
-                        ng-click="sortPaymentsBy('FlooringDate')"
-                        ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
-                    Floored
-                  </div>
-                  <div class="cell pay-status sortable"
-                       ng-click="sortPaymentsBy('UnitStatus')"
-                       ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
-                    Status
-                  </div>
-                  <div class="cell pay-payment-amt sortable"
-                       ng-click="sortPaymentsBy('AmountDue')"
-                       ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
-                    Payment
-                  </div>
-                  <div class="cell pay-payoff-amt sortable"
-                       ng-click="sortPaymentsBy('CurrentPayoff')"
-                       ng-class="{ sorted : sortField.payment == 'CurrentPayoff', desc : sortDescending.payment }">
-                    Pay Off
-                  </div>
-                  <div class="cell pay-title">
-                    Title
-                  </div>
-                </li><!-- end .table-list-head -->
+                <td> <!-- Vehicle Payments: floored column -->
+                  <p class="lockup-major">{{ payment.FlooringDate | moment }}</p>
+                  <p class="lockup-minor">{{ payment.DaysOnFloorplan }} days</p>
+                </td>
 
-                <li class="table-list-row" ng-repeat="payment in payments.results">
-                  <div class="main-info">
-                    <div class="cell pay-more">
-                    </div>
-                    <div class="cell pay-desc">
-                      <p>{{ payment.UnitDescription }}</p>
-                      <p><span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span><br/>
-                        Stock #: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span>
-                      </p>
-                      <br/><a href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">Temp Link to Vehicle Details</a>
-                    </div>
+                <td class="numeric has-btns"><!-- Vehicle Payments: payment column -->
+                  <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
+                </td>
 
-                    <div class="cell pay-due">
-                      <p>{{ payment.DueDate | moment }}</p>
-                      <div class="extension" ng-show="showExtendLink(payment)">
-                        <a ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}">Request Extension</a>
-                      </div>
-                      <div class="nxg-payment-due-status"
-                         ng-class="getDueStatus(payment, true)"
-                         ng-switch="getDueStatus(payment, true)">
-                        <p class="warning today" ng-switch-when="today"><span class="excl-today">!</span>Due Today</p>
-                        <p class="warning overdue" ng-switch-when="overdue"><span class="excl-overdue">!</span>Overdue</p>
-                      </div>
-                    </div>
-                    <div class="cell pay-floorDate">
-                      <p>{{ payment.FlooringDate | moment }}</p>
-                      <p>Days floored: {{ payment.DaysOnFloorplan }}</p>
-                    </div>
-                    <div class="cell pay-status"><p>{{ payment.UnitStatus }}</p></div>
-                    <div class="cell pay-payment-amt">
-                      <p>{{ payment.AmountDue | currency }}</p>
-                      <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
-                    </div>
-                    <div class="cell pay-payoff-amt"><p>{{ payment.CurrentPayoff | currency }}</p>
-                      <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
-                    </div>
+                <td class="numeric has-btns">  <!-- Vehicle Payments: payoff column -->
+                  <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
+                </td>
 
-                    <div class="cell pay-title">
-                      <a ng-href="{{ payment.$titleURL }}" nxg-track="{{ metric.VIEW_TITLE }}" target="_blank">View</a>
-                    </div>
-                  </div><!-- end .main-info div -->
-              </li>
-            </ul>
-          </div><!-- end payments list -->
-          <p class="text-error notice-box" ng-show="payments.hitInfiniteScrollMax">
-            There are too many results to display, please refine your search further.
-          </p>
+              </tr>
+            </table>
+          </div>
         </div>
+        <p class="text-error notice-box" ng-show="payments.hitInfiniteScrollMax">
+          There are too many results to display, please refine your search further.
+        </p>
       </section>
-    <section class="span3 well sticky pay-queue" nxg-payment-summary nxg-sticky footer=".pay-sum-footer" empty-message="Click the Add button to add a payoff or a payment."></section>
+    <section class="span3 well sticky" nxg-payment-summary nxg-sticky empty-message="Click the Add button to add a payoff or a payment."></section>
 </section>

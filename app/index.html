@@ -23,6 +23,12 @@
     <![endif]-->
   </head>
   <body ng-app="nextgearWebApp">
+    <!-- htmlmin:ignore -->
+      <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
+        This will pull in the content of our svg file for use across the app.
+      <!-- /processhtml -->
+    <!-- htmlmin:ignore -->
+
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
       <div class="nxg-main-view" ui-view></div>
@@ -84,6 +90,7 @@
     <script src="scripts/services/lastState.js"></script>
     <script src="scripts/services/userVoice.js"></script>
     <script src="scripts/services/qualarooSurvey.js"></script>
+    <script src="scripts/services/floorplanUtil.js"></script>
 
     <script src="scripts/filters/alt.js"></script>
     <script src="scripts/filters/numeral.js"></script>
@@ -184,12 +191,14 @@
     <script src="scripts/directives/nxgAlternateAddress/nxgAlternateAddress.js"></script>
     <script src="scripts/directives/nxgActivity/nxgActivity.js"></script>
     <script src="scripts/directives/nxgMessages/nxgMessages.js"></script>
+    <script src="scripts/directives/nxgIcon/nxgIcon.js"></script>
     <script src="scripts/directives/nxgAutofocus.js"></script>
     <script src="scripts/directives/nxgHighlight.js"></script>
     <script src="scripts/directives/nxgEnter.js"></script>
     <script src="scripts/directives/nxgChatWithUs.js"></script>
     <script src="scripts/directives/nxgCustomerSupportPhone.js"></script>
     <script src="scripts/directives/nxgTrack.js"></script>
+    <script src="scripts/directives/nxgTypeahead.js"></script>
     <script src="scripts/directives/placeholder.js"></script>
     <script src="scripts/directives/ieInputPatch.js"></script>
 
@@ -198,11 +207,9 @@
     <script src="scripts/directives/nxgSticky.js"></script>
     <!-- endbuild -->
 
-    <!-- processhtml:remove -->
-    <!-- -->
-    <script src="scripts/config/nxgConfig.mock.js"></script>
-    <!-- -->
-    <script src="scripts/dev/autologin.js"></script>
+    <!-- processhtml:remove:dist -->
+    <!--<script src="scripts/config/nxgConfig.mock.js"></script>-->
+    <!--<script src="scripts/dev/autologin.js"></script>-->
     <!--<script src="scripts/dev/throttle.js"></script>-->
 
     <!-- /processhtml -->

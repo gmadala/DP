@@ -104,6 +104,15 @@ angular.module('nextgearWebApp')
               QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
             }
           }
+        }, function(/*error*/) {
+          // This is the case when a 401 error is returned - user has been timed out.
+          // If this failed promise isn't caught, the newly loaded page will remain open
+          // and display a popup saying that the user has been timed out.
+          // This is ok if the user already was on the page, but this method only runs on pageload.
+          // Catching this error and returning nothing supresses the error, which causes the no-longer
+          // valid token to be cleared and the page to instantly reload and go to the login screen.
+          //
+          // VO-2566
         });
       },
 
@@ -129,19 +138,54 @@ angular.module('nextgearWebApp')
       },
 
       refreshStatics: function() {
-        return api.request('GET', '/Dealer/Static').then(function(data) {
+        return api.request('GET', '/Dealer/v1_1/Static').then(function(data) {
           statics = {
             // API translation layer -- add transformation logic here as needed
             productTypes: data.ProductType || [],
             colors: data.Colors || [],
             states: data.States || [],
-            locations: data.Locations || [],
+            dealerAddresses: data.DealerAddresses || [],
             bankAccounts: data.BankAccounts || [],
             linesOfCredit: data.LinesOfCredit || [],
             titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
           return statics;
+        },
+        function() {
+          // Fail gracefully. If dealer/info fails we will be very constrained but it shouldn't
+          // cause any JavaScript errors. There is code that assumes that statics has been
+          // populated. Set up the basic structure to avoid 'accessing property of undefined'
+          // errors.
+          statics = {
+            BusinessId: '',
+            BusinessNumber: 0,
+            BusinessName: '',
+            MarketName: '',
+            MarketPhoneNumber: '',
+            CSCPhoneNumber: '',
+            MarketEMail: '',
+            IsBuyerDirectlyPayable: false,
+            HasUCC: false,
+            MarketNumber: 0,
+            DealerAuctionStatusForGA: '',
+            CurrentlyApprovedMinFlooringDate: '',
+            BusinessEmail: '',
+            BusinessContactEmail: '',
+            DisplayTitleReleaseProgram: false,
+            BusinessContactUserName: '',
+            Phone: '',
+            CellPhone: '',
+            FlooredBusinessAddresses: [],
+            productTypes: [],
+            colors: [],
+            states: [],
+            dealerAddresses: [],
+            bankAccounts: [],
+            linesOfCredit: [],
+            titleLocationOptions: [],
+            paymentMethods: []
+          };
         });
       },
 

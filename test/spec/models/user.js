@@ -4,13 +4,14 @@ describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend, api, $q;
+  var user, httpBackend, api, $q, $rootScope;
 
-  beforeEach(inject(function ($httpBackend, _$q_, User, _api_) {
+  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_) {
     user = User;
     api = _api_;
     httpBackend = $httpBackend;
     $q = _$q_;
+    $rootScope = _$rootScope_;
   }));
 
   describe('recoverUserName method', function () {
@@ -97,6 +98,38 @@ describe('Model: User', function () {
 
   });
 
+  describe('initSession', function() {
+    it('should call appropriate methods', function() {
+      spyOn(api, 'setAuth');
+      spyOn(user, 'refreshInfo').andReturn('a');
+      spyOn(user, 'refreshStatics').andReturn('b');
+      spyOn($q, 'all').andReturn($q.when(true));
+      var auth = {};
+      user.initSession(auth);
+      expect(api.setAuth).toHaveBeenCalled();
+      expect(api.setAuth.calls[0].args[0]).toBe(auth);
+      expect(user.refreshInfo).toHaveBeenCalled();
+      expect(user.refreshStatics).toHaveBeenCalled();
+      expect($q.all).toHaveBeenCalledWith(['a', 'b']);
+    });
+
+    it('should resolve (not reject) even if one of the other promises rejects', function() {
+      spyOn(api, 'setAuth');
+      spyOn(user, 'refreshInfo').andReturn($q.reject(true));
+      spyOn(user, 'refreshStatics').andReturn($q.when(true));
+      var promise = user.initSession();
+      var resolved = false, rejected = false;
+      promise.then(function() {
+        resolved = true;
+      }, function() {
+        rejected = true;
+      });
+      $rootScope.$digest();
+      expect(resolved).toBe(true);
+      expect(rejected).toBe(false);
+    });
+  });
+
   describe('resetPassword method', function () {
 
     var response;
@@ -179,7 +212,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });
@@ -327,7 +360,7 @@ describe('Model: User', function () {
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: resultData
       });
@@ -338,7 +371,7 @@ describe('Model: User', function () {
     });
 
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/Static');
+      httpBackend.expectGET('/Dealer/v1_1/Static');
       user.refreshStatics();
       expect(httpBackend.flush).not.toThrow();
     });
@@ -349,7 +382,7 @@ describe('Model: User', function () {
         expect(angular.isArray(result.productTypes)).toBe(true);
         expect(angular.isArray(result.colors)).toBe(true);
         expect(angular.isArray(result.states)).toBe(true);
-        expect(angular.isArray(result.locations)).toBe(true);
+        expect(angular.isArray(result.dealerAddresses)).toBe(true);
         expect(angular.isArray(result.bankAccounts)).toBe(true);
         expect(angular.isArray(result.linesOfCredit)).toBe(true);
         expect(angular.isArray(result.titleLocationOptions)).toBe(true);
@@ -370,7 +403,7 @@ describe('Model: User', function () {
         ProductType: [],
         Colors: [],
         States: [],
-        Locations: [],
+        DealerADdresses: [],
         BankAccounts: [],
         LinesOfCredit: [],
         TitleLocationOptions: [],
@@ -384,7 +417,7 @@ describe('Model: User', function () {
       expect(statics.productTypes).toBe(resultData.ProductType);
       expect(statics.colors).toBe(resultData.Colors);
       expect(statics.states).toBe(resultData.States);
-      expect(statics.locations).toBe(resultData.Locations);
+      expect(statics.locations).toBe(resultData.DealerAddresses);
       expect(statics.bankAccounts).toBe(resultData.BankAccounts);
       expect(statics.linesOfCredit).toBe(resultData.LinesOfCredit);
       expect(statics.titleLocationOptions).toBe(resultData.TitleLocationOptions);
@@ -513,7 +546,7 @@ describe('Model: User', function () {
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });
@@ -578,7 +611,7 @@ describe('Model: User', function () {
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
         Success: true,
         Data: {}
       });

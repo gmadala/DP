@@ -20,28 +20,28 @@ $set-label-width: 40%;
   @extend %small;
 
   p {
-    line-height: $base-line-height;
+    line-height: $baseLineHeight;
   }
 
-  select {
-    margin-bottom: 10px;
-  }
+  // select {
+  //   margin-bottom: 10px;
+  // }
 
-  & > .control-group {
-    @extend .clearfix;
-  }
+  // & > .control-group {
+  //   @extend .clearfix;
+  // }
 
-  .control-group {
-    overflow: auto;
-  }
+  // .control-group {
+  //   overflow: auto;
+  // }
 
   .control-label {
-    @extend %thin;
+    // @extend %thin;
     @extend %float-l;
     display: block;
     width: $set-label-width;
     height: 100%;
-    color: $base-text-color;
+    color: $text;
 
     &.business {
       margin:0;
@@ -59,7 +59,7 @@ $set-label-width: 40%;
 
   .static {
     font-weight: normal;
-    color: $darker-text-color;
+    color: $text;
 
     p, span {
       line-height: 1.5;
@@ -87,7 +87,7 @@ $set-label-width: 40%;
   .notifications {
     .n-title {
       @extend %float-l;
-      @extend %thin;
+      // @extend %thin;
       width: $set-label-width;
       padding-right: 10px;
     }
@@ -102,7 +102,7 @@ $set-label-width: 40%;
     }
 
     .read-only {
-      line-height: $base-line-height;
+      line-height: $baseLineHeight;
       display: inline-block;
 
       &:after {
@@ -123,7 +123,7 @@ $set-label-width: 40%;
     }
 
     .notification {
-      line-height: $base-line-height;
+      line-height: $baseLineHeight;
       overflow: hidden;
       margin-bottom: 10px;
     }

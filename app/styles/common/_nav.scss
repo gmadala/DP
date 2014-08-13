@@ -39,11 +39,11 @@
     border-bottom: 0;
 
     &.active {
-      color: $brand-text;
+      color: $highlight;
     }
 
     &:hover, &:focus, &:active {
-      color: $brand-text;
+      color: $highlight;
       text-decoration: none;
     }
   }
@@ -75,8 +75,8 @@
       inset rgba(black, 0.5) 0px 0px 2px
      );
     background-image: url('../img/secondaryNavBgActive.gif');
-    border-left: 1px solid $brand-dull;
-    border-right: 1px solid $brand-dull;
+    border-left: 1px solid darken($highlight, 5%);
+    border-right: 1px solid darken($highlight, 5%);
     margin: 0 -1px;
 
     &:hover {

@@ -1,81 +1,87 @@
 <div class="well">
-  <h4>{{ title }}</h4>
+  <h2 class="well-title-secondary">
+    {{ title }}
+    <button class="btn right" ng-click="clear($event)" nxg-track="{{metricClearSearch}}">Clear Search</button>
+  </h2>
 
-  <div class="well-out">
-    <form name="searchForm" class="search payments" novalidate>
-      <div class="row-fluid">
-        <div class="span5 keyword">
-          <div class="control-group">
-            <label class="control-label" for="keyword">Keyword</label>
+  <form name="searchForm" class="row-fluid search" novalidate>
+      <div class="span5 form-block">
+        <label for="keyword">
+          Find a Floor Plan
+        </label>
 
-            <div class="controls">
-              <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
+        <div class="form-row">
+          <div class="styled-input with-btn">
+            <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
+            <button class="btn btn-input" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">
+              <span nxg-icon="icon-search"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="filterable" class="span7 form-block">
+        <div class="row-fluid form-row">
+          <div class="span5">
+            <label for="filterSelect">{{ filterLabel }}</label>
+            <div class="style-select auto">
+              <select id="filterSelect" name="filterSelect"
+                      nxg-track="{{metricFilterByInput}}"
+                      ng-change="search()"
+                      ng-model="activeCriteria.filter"
+                      ng-options="o.value as o.label for o in filterOptions"></select>
             </div>
-          </div><!-- end .control-group -->
-
-          <div class="control-group search-clear-btns">
-            <a href="#" ng-click="clear($event)" title="Clear Search" nxg-track="{{metricClearSearch}}">Clear Search</a>
-            <button class="btn btn-small" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">Search</button>
           </div>
-        </div><!-- end .span5 -->
 
-        <div ng-show="filterable" class="span7 filterable">
-          <div class="clearfix">
-            <div class="control-group filters">
-              <label class="control-label" for="filterSelect">{{ filterLabel }}</label>
-
-              <div class="controls">
-                <select id="filterSelect" name="filterSelect"
-                        nxg-track="{{metricFilterByInput}}"
-                        ng-change="search()"
-                        ng-model="activeCriteria.filter"
-                        ng-options="o.value as o.label for o in filterOptions"></select>
+          <div class="span7" ng-show="dateRangeShown">
+            <div class="row-fluid range">
+              <div class="range-start">
+                <label for="startDate">Start Date<span ng-show="showHelpText"> *</span></label>
+                <input type="text" id="startDate" name="startDate"
+                      ng-model="activeCriteria.startDate"
+                      nxg-track="{{metricFilterFromDate}}"
+                      nxg-date-field
+                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
               </div>
-            </div><!-- end .control-group -->
 
-            <div class="control-group search-date-range clearfix" ng-show="dateRangeShown">
-              <div class="control-group half">
-                <label class="control-label" for="startDate">Date Range<span ng-show="showHelpText"> *</span></label>
-
-                <div class="controls">
-                  <input type="text" id="startDate" name="startDate"
-                        ng-model="activeCriteria.startDate"
-                        nxg-track="{{metricFilterFromDate}}"
-                        nxg-date-field
-                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
-                </div>
-              </div><!-- end .control-group.half -->
-
-              <div class="control-group half">
-                <label class="control-label" for="endDate">To</label>
-                <div class="controls">
-                  <input type="text" id="endDate" name="endDate"
-                        ng-model="activeCriteria.endDate"
-                        nxg-track="{{metricFilterToDate}}"
-                        nxg-date-field
-                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
-                </div><!-- end .controls -->
-              </div><!-- end .control-group.half -->
-               <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
-
-            </div><!-- end .control-group.search-date-range -->
-
-            <div ng-show="showInventoryLocation && inventoryLocations.length > 2" class="control-group filters inv-loc">
-              <label class="control-label" for="invLocSelect">Filter by Inventory Location</label>
-
-              <div class="controls">
-                <select id="invLocSelect" name="invLocSelect"
-                ng-change="search()"
-                nxg-track="{{metricFilterByInventoryLocation}}"
-                ng-model="activeCriteria.inventoryLocation"
-                ng-options="i.value as i.label for i in inventoryLocations"></select>
+              <div class="range-end">
+                <label for="endDate">End Date</label>
+                <input type="text" id="endDate" name="endDate"
+                      ng-model="activeCriteria.endDate"
+                      nxg-track="{{metricFilterToDate}}"
+                      nxg-date-field
+                      ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
               </div>
-            </div><!-- end .control-group -->
+            </div>
+            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange">Invalid date range</label>
           </div>
-          <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
-          <p class="tip info" ng-show="info">{{ info }}</p>
-        </div><!-- end .span7 -->
-      </div><!-- end .row-fluid -->
-    </form>
-  </div>
+
+          <div ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2" class="span7">
+          <label for="invLocSelect">Filter by Inventory Location</label>
+
+          <div class="style-select input-large">
+            <select id="invLocSelect" name="invLocSelect"
+              ng-change="search()"
+              nxg-track="{{metricFilterByInventoryLocation}}"
+              ng-model="activeCriteria.inventoryLocation"
+              ng-options="i.value as i.label for i in inventoryLocations"></select>
+          </div>
+        </div>
+        </div>
+
+        <div ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
+          <label for="invLocSelect">Filter by Inventory Location</label>
+
+          <div class="style-select input-large">
+            <select id="invLocSelect" name="invLocSelect"
+              ng-change="search()"
+              nxg-track="{{metricFilterByInventoryLocation}}"
+              ng-model="activeCriteria.inventoryLocation"
+              ng-options="i.value as i.label for i in inventoryLocations"></select>
+          </div>
+        </div>
+        <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
+        <p class="tip info" ng-show="info">{{ info }}</p>
+      </div>
+  </form>
 </div>

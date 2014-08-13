@@ -26,14 +26,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/**/*.coffee'],
-        tasks: ['coffee:test']
-      },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass']
@@ -41,12 +33,18 @@ module.exports = function(grunt) {
       livereload: {
         files: [
           '<%= yeoman.app %>/**/*.html',
+          '!<%= yeoman.app %>/index.html',
+          '.tmp/index.html',
           '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
           '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
           '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['livereload']
+      },
+      html: {
+        files: ['{.tmp,<%= yeoman.app %>}/index.html'],
+        tasks: ['processhtml:server']
       }
     },
     connect: {
@@ -93,6 +91,7 @@ module.exports = function(grunt) {
             src: [
               '.tmp',
               '<%= yeoman.dist %>/*',
+              '<%= yeoman.app %>/styles/main.css',
               '!<%= yeoman.dist %>/.git*'
             ]
           }
@@ -118,30 +117,6 @@ module.exports = function(grunt) {
         singleRun: true
       }
     },
-    coffee: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>/scripts',
-            src: '**/*.coffee',
-            dest: '.tmp/scripts',
-            ext: '.js'
-          }
-        ]
-      },
-      test: {
-        files: [
-          {
-            expand: true,
-            cwd: 'test/spec',
-            src: '**/*.coffee',
-            dest: '.tmp/spec',
-            ext: '.js'
-          }
-        ]
-      }
-    },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -154,7 +129,9 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          cssDir: '<%= yeoman.app %>/styles'
+          sassDir: '<%= yeoman.app %>/styles',
+          cssDir: '<%= yeoman.app %>/styles',
+          force: true
         }
       },
       server: {
@@ -163,24 +140,25 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '.tmp/scripts/**/*.js',
-            '<%= yeoman.app %>/scripts/**/*.js'
-          ]
-        }
-      }
-    },
     // grunt-usemin has a bug regarding build:remove blocks, so
     // processhtml is just used to remove that block. Changing
     // the commentMarker to tell them apart
     processhtml: {
       options: {
-        commentMarker: 'processhtml'
+        commentMarker: 'processhtml',
+        recursive: true, // for files included via processhtml (aka our svg icons)
       },
       dist: {
+        files: {
+          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+        }
+      },
+      server: { // to pull svg in without overriding index file
+        files: {
+          '.tmp/index.html': ['<%= yeoman.app %>/index.html']
+        }
+      },
+      svgDist: { // SVG for build
         files: {
           '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
         }
@@ -195,8 +173,13 @@ module.exports = function(grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'],
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
+      js: ['<%= yeoman.dist %>/scripts/**/*.js'],
       options: {
-        dirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>'],
+        patterns: {
+          js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
+          css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
+        }
       }
     },
     imagemin: {
@@ -262,20 +245,11 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= yeoman.dist %>/scripts',
+            cwd: '.tmp/concat/scripts',
             src: '*.js',
-            dest: '<%= yeoman.dist %>/scripts'
+            dest: '.tmp/concat/scripts'
           }
         ]
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
       }
     },
     rev: {
@@ -284,7 +258,7 @@ module.exports = function(grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/**/*.js',
             '<%= yeoman.dist %>/styles/**/*.css',
-            '<%= yeoman.dist %>/img/**/*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/img/**/*.{png,jpg,jpeg,gif,webp}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -342,6 +316,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server', [
     'clean:server',
+    'processhtml:server',
     'compass:server',
     'livereload-start',
     'connect:livereload',
@@ -350,7 +325,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'coffee',
     'compass',
     'connect:test',
     'karma'
@@ -361,19 +335,20 @@ module.exports = function(grunt) {
     'clean:dist',
     'jshint',
     'test',
-    'compass:dist',
     'useminPrepare',
-    'imagemin',
+    'compass:dist',
     'concat',
     'preprocess',
-    'autoprefixer',
     'copy',
     'cdnify',
     'ngmin',
     'uglify',
     'cssmin',
+    'autoprefixer',
     'rev',
-    'processhtml',
+    'processhtml:dist',
+    'processhtml:svgDist',
+    'imagemin',
     'usemin',
     'htmlmin'
   ]);
