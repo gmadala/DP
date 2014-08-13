@@ -122,8 +122,6 @@ angular.module('nextgearWebApp')
           }
         };
 
-        console.log($scope.item);
-
         $scope.cancelScheduledPayment = function () {
           var dialogOptions = {
             backdrop: true,
