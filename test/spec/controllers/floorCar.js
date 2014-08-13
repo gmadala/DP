@@ -269,5 +269,31 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+    it('should populate the inventory address options based on the selected business', function() {
+      var biz1 = {
+        BusinessId: '123id',
+        ActivePhysicalInventoryLocations: [
+          { AddressId: 'addr1' },
+          { AddressId: 'addr2' }
+        ]
+      },
+      biz2 = {
+        BusinessId: '456id',
+        ActivePhysicalInventoryLocations: [
+          { AddressId: 'addr3' }
+        ]
+      };
+
+      expect(scope.sellerLocations).toBe(null);
+      scope.data.BusinessId = biz1;
+      scope.$digest();
+      expect(scope.sellerLocations).toBe(biz1.ActivePhysicalInventoryLocations);
+
+      scope.data.BusinessId = biz2;
+      scope.$digest();
+      expect(scope.sellerLocations).toBe(biz2.ActivePhysicalInventoryLocations);
+      expect(scope.data.PhysicalInventoryAddressId).toBe(biz2.ActivePhysicalInventoryLocations[0]);
+    });
   })
 });

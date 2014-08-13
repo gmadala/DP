@@ -34,7 +34,7 @@ describe('Model: Floorplan', function () {
       dummyFormData = {
         UnitColorId: {ColorId: 'col1'},
         TitleLocationId: {ResultingTitleLocationId: 'titleLoc1', ResultingTitleTypeId: 'titleType1'},
-        PhysicalInventoryAddressId: {LocationId: 'loc1'},
+        PhysicalInventoryAddressId: {AddressId: 'loc1'},
         LineOfCreditId: {LineOfCreditId: 'line1'},
         BankAccountId: {BankAccountId: 'account1'},
         BusinessId: {BusinessId: 'seller1'}

@@ -22,7 +22,7 @@ angular.module('nextgearWebApp')
           UnitColorId:  data.UnitColorId ? data.UnitColorId.ColorId : null,
           TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId: null,
           TitleTypeId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleTypeId : null,
-          PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.LocationId : null,
+          PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.AddressId : null,
           LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
           BankAccountId: data.BankAccountId ? data.BankAccountId.BankAccountId : null,
           BusinessId: data.BusinessId ? data.BusinessId.BusinessId : null
