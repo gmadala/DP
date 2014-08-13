@@ -287,6 +287,26 @@ a, a:visited {
     margin: 0;
   }
 
+.alt-lockup {
+  @extend %align-right;
+  padding: 7px 0;
+
+  .lockup-minor {
+    color: #808080;
+  }
+
+  .lockup-major {
+    @extend %heavy;
+    color: $highlight;
+  }
+}
+
+.subtitle {
+  @extend %heavy;
+  color: $text;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
 
 
 // end design refactor (new stuff)
@@ -335,13 +355,6 @@ label {
   margin: 0;
 }
 
-.subtitle {
-  @extend %heavy;
-  color: $text;
-  font-size: $baseFontSize;
-  line-height: 1;
-  margin: 20px 0 10px 0;
-}
 
 .headline {
   @extend %heavy;

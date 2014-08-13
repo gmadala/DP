@@ -6,13 +6,6 @@
       </div>
       <p class="info-block-text">
         If you would like to schedule any payments, click the Schedule Payment links below.
-        <button type="button"
-              class="btn-cta cta-secondary"
-              ng-click="exportPaymentSummary()"
-              ng-disabled="paymentQueue.sum.todayCount() == 0"
-              nxg-track="{{metric.CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON}}">
-          Export Payment Summary <span nxg-icon="icon-document" class="icon-small"></span>
-        </button>
       </p>
     </div>
 
@@ -148,19 +141,27 @@
   <form class="span3 well sticky" name="paymentForm" novalidate nxg-sticky>
     <h2 class="well-title">Payment Summary</h2>
       <section class="well-item well-dark">
-        <h5>Review the following and submit your payments and scheduled payments.</h5>
+        <p>Please review the following and submit your payments below.</p>
+        <button type="button"
+                class="btn-cta cta-secondary btn-squeeze"
+                ng-click="exportPaymentSummary()"
+                ng-disabled="paymentQueue.sum.todayCount() == 0"
+                nxg-track="{{metric.CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON}}">
+          Export Payment Summary <span nxg-icon="icon-document" class="icon-small"></span>
+        </button>
       </section>
 
       <section class="well-item well-light bordered">
         <!-- Payments -->
-        <div class="dash-lockup">
-          <p class="dash-minor">
-            <span class="count" ng-bind="paymentQueue.sum.todayCount()"></span>
+        <div class="alt-lockup">
+          <h2 class="subtitle">{{ paymentQueue.sum.todayCount() }}
             <span ng-show="paymentQueue.sum.todayCount() == 1">Payment</span>
             <span ng-hide="paymentQueue.sum.todayCount() == 1">Payments</span>
-            to be Made Today for
-          </p>
-          <h4 class="dash-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h4>
+            Today
+          </h2>
+
+          <p class="lockup-minor">In the Amount of</p>
+          <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h3>
         </div>
 
         <!-- If User has Unapplied Funds -->
@@ -168,31 +169,31 @@
         of our ng-show content before the page finishes compiling and knows
         the ng-show expression should evaluate to false. -->
         <div ng-show="unappliedFunds.available > 0">
-          <div class="dash-lockup">
-            <p class="dash-minor">Available Unapplied Funds</p>
-            <h4 class="dash-major" ng-bind="unappliedFunds.available | currency"></h4>
+          <div class="alt-lockup">
+            <p class="lockup-minor">Available Unapplied Funds</p>
+            <h3 class="lockup-major" ng-bind="unappliedFunds.available | currency"></h3>
           </div>
 
-          <div class="dash-lockup">
-            <p class="dash-minor">Apply these Funds to Payment?</p>
+          <div class="alt-lockup">
+            <p class="lockup-minor">Apply these Funds to Payment?</p>
             <div class="cr-inline float-r">
-              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
-                     ng-value="false" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
-              <label class="radio-img" for="unappliedNo"></label>
-              <label class="cr-label" for="unappliedNo">No</label>
-
               <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
                      ng-value="true" ng-model="unappliedFunds.useFunds"
                      nxg-track="{{metric.CLICK_CHECKOUT_APPLY_FUNDS_YES}}"
                      ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
               <label class="radio-img" for="unappliedYes"></label>
               <label class="cr-label" for="unappliedYes">Yes</label>
+
+              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
+                     ng-value="false" ng-model="unappliedFunds.useFunds"
+                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
+              <label class="radio-img" for="unappliedNo"></label>
+              <label class="cr-label" for="unappliedNo">No</label>
             </div>
           </div>
 
-          <div class="dash-lockup align-right" ng-show="unappliedFunds.useFunds">
-            <label for="unappliedAmt">Unapplied Funds to Use</label>
+          <div class="alt-lockup align-right" ng-show="unappliedFunds.useFunds">
+            <label class="lockup-minor" for="unappliedAmt">Unapplied Funds to Use</label>
             <span class="input-prepend dollar">
               <span class="add-on">$</span>
               <input id="unappliedAmt" name="unappliedAmt"
@@ -218,26 +219,25 @@
             </label>
           </div>
 
-          <div class="dash-lockup" ng-show="unappliedFunds.useFunds">
-            <p class="dash-minor">Remaining Payment Balance</p>
-            <h4 class="dash-major" ng-bind="paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency"></h4>
+          <div class="alt-lockup" ng-show="unappliedFunds.useFunds">
+            <p class="lockup-minor">Remaining Payment Balance</p>
+            <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() - unappliedFunds.useAmount | currency"></h3>
           </div>
         </div>
       </section>
 
-      <section class="well-item well-light">
-        <div class="dash-lockup">
-          <p class="dash-minor">
-            <span class="count" ng-bind="paymentQueue.sum.scheduledCount()"></span>
+      <section class="well-item well-light bordered">
+        <div class="alt-lockup">
+          <h2 class="subtitle">{{ paymentQueue.sum.scheduledCount() }} Future
             <span ng-show="paymentQueue.sum.scheduledCount() == 1">Payment</span>
             <span ng-hide="paymentQueue.sum.scheduledCount() == 1">Payments</span>
-            Scheduled for
-          </p>
-          <h4 class="dash-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h4>
+          </h2>
+          <p class="lockup-minor">In the Amount of</p>
+          <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
         </div>
       </section>
 
-      <section class="well-item bordered">
+      <section class="well-item well-dark bordered">
         <!-- Bank Account -->
         <label for="bankAccount">Bank Account</label>
         <div class="style-select">
