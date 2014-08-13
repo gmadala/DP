@@ -151,6 +151,41 @@ angular.module('nextgearWebApp')
             paymentMethods: data.PaymentMethods || []
           };
           return statics;
+        },
+        function() {
+          // Fail gracefully. If dealer/info fails we will be very constrained but it shouldn't
+          // cause any JavaScript errors. There is code that assumes that statics has been
+          // populated. Set up the basic structure to avoid 'accessing property of undefined'
+          // errors.
+          statics = {
+            BusinessId: '',
+            BusinessNumber: 0,
+            BusinessName: '',
+            MarketName: '',
+            MarketPhoneNumber: '',
+            CSCPhoneNumber: '',
+            MarketEMail: '',
+            IsBuyerDirectlyPayable: false,
+            HasUCC: false,
+            MarketNumber: 0,
+            DealerAuctionStatusForGA: '',
+            CurrentlyApprovedMinFlooringDate: '',
+            BusinessEmail: '',
+            BusinessContactEmail: '',
+            DisplayTitleReleaseProgram: false,
+            BusinessContactUserName: '',
+            Phone: '',
+            CellPhone: '',
+            FlooredBusinessAddresses: [],
+            productTypes: [],
+            colors: [],
+            states: [],
+            dealerAddresses: [],
+            bankAccounts: [],
+            linesOfCredit: [],
+            titleLocationOptions: [],
+            paymentMethods: []
+          };
         });
       },
 
