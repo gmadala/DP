@@ -88,6 +88,20 @@
                form="form" />
       </span>
 
+      <label for="inventoryAddress" class="input-title">Inventory Address</label>
+      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required }">
+        <select id="inventoryAddress"
+               name="inventoryAddress"
+               ng-model="data.PhysicalInventoryAddressId"
+               ng-options="(location | address:'oneLineSelect') for location in options.locations"
+               required>
+          <option value="">Make Selection</option>
+        </select>
+      </div>
+      <label for="inputAddress" class="text-error" ng-show="validity.inventoryAddress.$error.required">
+        Please select an Inventory Location.
+      </label>
+
       <label for="inputPurchaseAmt" class="input-title">Purchase Amount</label>
       <div class="input-prepend dollar">
         <span class="add-on">$</span>
