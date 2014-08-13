@@ -1,21 +1,14 @@
-NextGear Capital v4.0.0
+NextGear Capital v4.0.1
 =================================
 
 Fixes included in this release:
 
-VO-2548	Web-Bulk Flooring: Blank details under fields (Business Name, Legal name, Business#, Auction Access#, City & State) is getting displayed when user Lookup buyer.
-VO-1405	Web– Profile Settings: “Daily ACH Disbursement Report” content is not properly aligned with “Email check box” under “Notifications” section.
-VO-2228	Web–Settings-User Profile: Password field Info popover is not getting closed on the click of “Save” button.
-VO-2406	Web-Session Expire: User is not logged out of application when user presses “Escape” button twice after “Session Expire” message is displayed.
-VO-2494	Web (IE 9)- Payments: Placeholder text “Stock# or VIN” is not getting displayed in the Keyword/Search field.
-VO-2574	Web-Floor a Car: Error message for “Make”, “Model”, “Year” and “Style” field is not getting cleared when user Look Up new VIN.
-VO-2244	Web-Dealer Search-Business Search: No validation/error message is displayed when user enter numeric values in the “City” field.
-VO-2547	Web-Floor Plan: Blank Details are getting displayed under “Description” & “Stock#” field.
-VO-1457	Web–Dashboard-Request Credit Increase: Popup size changes when user hover cursor over the “Request a Credit Increase” popup.
-VO-2532	Web-Floor a Car: Error “VIN is not valid and failure has not been acknowledged.” is displayed when user floor a car.
-VO-2495	Web (IE 9) - Floor a Car: Place holder text “Make Selection” in “Who has the title” & “Color” field is getting displayed in “Grey” font in IE 9.
-VO-2630	EUI - web version 3.0.11 MOB 3.0.12 Flooring a vehicle displays error
-VO-2580	Web-Request Credit Increase: “Retail” radio button under “Which line of Credit Selection...” section should be selected by default as there is only one option under the “Which line of Credit Selection...” section.
-VO-2533	Web/Mobile- Wrong copyright text “© 2013 NextGear Capital, Inc.” is getting displayed in the footer.
-VO-2559	Web-View Analytics: Hand Tool is not getting displayed when user hovers over “Ten Best Movers” toggle button and “Ten worst Movers” toggle button.
-VO-1453	Web –Dashboard-Request Payout: Cursor is not getting active in “Payout Amount” field when user clicks in “Payout Amount” text field.
+VO-2723	NextGear Demo App Web (View Analytics): Hand Tool is not getting displayed when user hovers over â€œTen Best Moversâ€ toggle button and â€œTen worst Moversâ€ toggle button.
+VO-1953 Add "Remember User Name" checkbox to login page
+VO-2533 Web/Mobile- Wrong copyright text â€œÂ© 2013 NextGear Capital, Inc.â€ is getting displayed in the footer.
+VO-2712 NextGear Demo App Web (Payments): Mismatch of placeholder text for â€œkeywordâ€ field between mobile and web demo application.
+VO-2583 Web-Payments: Incomplete Placeholder text is getting displayed for keyword field.
+VO-2622 Web (Login Page) - Full stop is missing after the content â€œIf the document did not successfully display, please install Adobe Acrobat Readerâ€.
+VO-2746 Auction - Volume of NextGear Floor Plans toggle label placement is wrong
+VO-2566 Application timing out when page is closed shows error message
+VO-2621 Web (Login Page): Validation message for password field is getting displayed when user selects username from suggestion box for â€œUsernameâ€ field.
