@@ -15,7 +15,4 @@ angular.module('nextgearWebApp')
     $scope.close = function () {
       dialog.close(false);
     };
-
-    // note: no controller services for opening "View Vehicle Verification Checklist" link -- it's just a static link
-    // to /MyDSC/documents/DSC%20Vehicle%20Verification%20Checklist.pdf with a _blank target
   });
