@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan) {
+  .controller('CheckoutCtrl', function ($scope, $q, $dialog, $timeout, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan) {
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -132,6 +132,8 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.todayDate = moment().toDate();
+
     $scope.bankAccounts = {
       getList: function () {
         var statics = User.getStatics();
@@ -167,10 +169,9 @@ angular.module('nextgearWebApp')
 
     // ----- begin uber-complex submit logic -----
 
-    var defaultCheckoutError = 'Unable to complete checkout. Please contact NextGear for assistance.';
+    // var defaultCheckoutError = 'Unable to complete checkout. Please contact NextGear for assistance.';
 
     $scope.submit = function () {
-
       // validate user selections for payment
       $scope.validity = angular.copy($scope.paymentForm);
       var accountInvalid = $scope.paymentForm.bankAccount.$invalid,
@@ -179,12 +180,7 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      // validate that we aren't transgressing any business-hours payment rules
-      $scope.validateBusinessHours().then(function (result) {
-        if (result) {
-          $scope.reallySubmit(protect);
-        }
-      });
+      $scope.reallySubmit(protect);
     };
 
     $scope.reallySubmit = function (guard) {
@@ -230,90 +226,55 @@ angular.module('nextgearWebApp')
       });
     };
 
-    $scope.validateBusinessHours = function () {
-      $scope.submitInProgress = true;
-      return Payments.canPayNow().then(
+    var refreshCanPayNow = function () {
+      if( !User.isLoggedIn() ) { return; }
+
+      Payments.canPayNow().then(
         function (result) {
-          $scope.submitInProgress = false;
-          if (result === true) {
-            // same-day payments are OK
-            return true;
-          } else {
-            // same-day payments not possible; we are outside business hours
-            if ($scope.paymentQueue.sum.todayCount() > 0) {
-              // same-day payments are being attempted; block this
-              $scope.handleAfterHoursViolation();
-              return false;
-            } else {
-              // no same-day payments are being attempted, so we're OK
-              return true;
-            }
-          }
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
-          return false;
-        }
-      );
-    };
+          $scope.canPayNow = result;
 
-    $scope.handleAfterHoursViolation = function () {
-      // find the next possible payment date
-      var tomorrow = moment().add('days', 1).toDate(),
-        later = moment().add('months', 1).toDate();
-      $scope.submitInProgress = true;
-      Payments.fetchPossiblePaymentDates(tomorrow, later).then(
-        function (result) {
-          if (!result.length) {
-            // no possible payments dates in the next month were found; cannot check out
-            messages.add(defaultCheckoutError, 'no suitable dates in next month for scheduling after-hours payments');
-            return;
-          }
-          var nextAvail = moment(result.sort()[0]).toDate(),
-            ejectedFees = [],
-            ejectedPayments = [],
-            paymentSummaryUpdates = [];
+          if(!$scope.canPayNow) {
+            // we need to explicitly auto-schedule all payments/fees for the next available business day.
+            var tomorrow = moment().add('days', 1).toDate(),
+                later = moment().add('months', 1).toDate();
 
-          // eject payments and fees that can't be scheduled; auto-schedule any others not already scheduled
-          angular.forEach(angular.extend({}, $scope.paymentQueue.contents.payments, $scope.paymentQueue.contents.fees), function (item) {
-            if (!$scope.paymentQueue.canSchedule(item) || moment(item.dueDate).isBefore(nextAvail, 'day')) {
-              Payments.removeFromQueue(item);
-              if (item.isPayment) {
-                ejectedPayments.push(item);
-              } else {
-                ejectedFees.push(item);
+            Payments.fetchPossiblePaymentDates(tomorrow, later).then(
+              function (result) {
+                if (!result.length) {
+                  // no possible payment dates...what do we do here?
+                }
+
+                var nextAvail = moment(result.sort()[0]).toDate(),
+                paymentSummaryUpdates = [];
+
+                angular.forEach($scope.paymentQueue.contents.payments, function (item) {
+                  if (!item.scheduleDate) { // if it isn't already scheduled...
+                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff));
+
+                    // set the scheduled date to the next available business day.
+                    item.scheduleDate = nextAvail;
+                  }
+                });
+
+                angular.forEach($scope.paymentQueue.contents.fees, function (item) {
+                  if (!item.scheduleDate) {
+                    item.scheduleDate = nextAvail;
+                  }
+                });
               }
-            } else if (!item.scheduleDate) {
-              item.scheduleDate = nextAvail;
-              if(item.isPayment) {
-                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff));
-              }
-            }
-          });
-          // tell the user what we did
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/afterHoursCheckout.html',
-            controller: 'AfterHoursCheckoutCtrl',
-            resolve: {
-              ejectedFees: function () { return ejectedFees; },
-              ejectedPayments: function () { return ejectedPayments; },
-              autoScheduleDate: function () { return nextAvail; }
-            }
-          };
+            );
+          }
+          $scope.canPayNowLoaded = true;
+        }, function (error) {
+          // suppress error message display from this to avoid annoyance since it runs continually
+          error.dismiss();
+          $scope.canPayNow = false;
+          $scope.canPayNowLoaded = false;
+        });
 
-          return $q.all(paymentSummaryUpdates).then(function() {
-            $scope.submitInProgress = false;
-            return $dialog.dialog(dialogOptions).open();
-          });
-
-
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
-        }
-      );
+      $timeout(refreshCanPayNow, 60000); // repeat once a minute
     };
+    refreshCanPayNow();
 
     $scope.exportPaymentSummary = function() {
       var feeIds = [],

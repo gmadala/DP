@@ -157,7 +157,26 @@ angular.module('nextgearWebApp')
       $scope.payments.search();
     };
 
-
+    var nextBusinessDay = null;
+    $scope.todayDate = moment().toDate();
+    $scope.getNextBusinessDate = function() {
+      // find the next possible payment date
+      var tomorrow = moment().add('days', 1).toDate(),
+        later = moment().add('months', 1).toDate();
+      if(nextBusinessDay) {
+        return nextBusinessDay;
+      } else {
+        Payments.fetchPossiblePaymentDates(tomorrow, later).then(
+          function (result) {
+            nextBusinessDay = {
+              date: moment(result.sort()[0]).toDate(),
+              isTomorrow: moment(result.sort()[0]).isSame(tomorrow, 'day')
+            };
+            return nextBusinessDay;
+          }
+        );
+      }
+    };
 
     // Set up page-load filtering based on $stateParams
     var filterParam = null,
