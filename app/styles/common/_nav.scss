@@ -94,7 +94,7 @@
   background-image: url('../img/secondaryNavBg.gif');
   @include box-shadow(inset rgba(black, 0.25) 0px 2px 5px, inset rgba(white, 0.2) 0px -2px 0px);
   border-bottom: 1px solid #1b447d;
-  margin-bottom: 1em;
+  margin-bottom: 20px;
 
   .container-fluid {
     margin-bottom: 0;
