@@ -13,8 +13,6 @@ angular.module('nextgearWebApp')
     // initial search
     $scope.floorplanData.resetSearch();
 
-    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
-
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
     };

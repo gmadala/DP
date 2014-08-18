@@ -362,7 +362,7 @@
           </thead>
           <tr ng-repeat="item in floorplanData.results">
             <td class="center">{{ item.FlooringDate | moment }}</td>
-            <td class="table-value"><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ getVehicleDescription(item) }}</a></td>
+            <td class="table-value"><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
             <td>{{ item.LineOfCredit }}</td>
             <td>{{ item.FloorplanStatusName }}</td>
           </tr>
