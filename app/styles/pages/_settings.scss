@@ -23,18 +23,6 @@ $set-label-width: 40%;
     line-height: $baseLineHeight;
   }
 
-  // select {
-  //   margin-bottom: 10px;
-  // }
-
-  // & > .control-group {
-  //   @extend .clearfix;
-  // }
-
-  // .control-group {
-  //   overflow: auto;
-  // }
-
   .control-label {
     // @extend %thin;
     @extend %float-l;
@@ -156,44 +144,6 @@ $set-label-width: 40%;
   }
 
 }
-
-// Settings Form Buttons
-.edit-btn, .save-btn, .cancel-btn {
-  @extend .btn-small;
-  position: absolute;
-  top: 10px;
-}
-
-.edit-btn, .cancel-btn {
-  // @include background-image(linear-gradient($white, #F0F0F0));
-
-  &:hover, &:active {
-    // @include background-image(linear-gradient($gray-e, #CFCFCF));
-  }
-}
-
-.edit-btn, .save-btn {
-  right: 10px;
-}
-
-.edit-btn {
-  padding-left: 24px;
-
-  // i {
-  //  position: absolute;
-  //  top: 5px;
-  //  left: 8px;
-  // }
-}
-
-.save-btn {
-  // @extend .btn-primary;
-}
-
-.cancel-btn {
-  right: 70px;
-}
-
 
 // Tooltip in title settings when only 1 address available
 .title-settings {

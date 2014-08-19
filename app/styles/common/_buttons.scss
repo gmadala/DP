@@ -3,50 +3,6 @@
 //  BUTTONS
 // =========
 
-// .btn-secondary {
-//   color: $btn2-active-text;
-//   background-color: $btn2-active-bkgd;
-//   @include background(linear-gradient($btn2-active-grad-1, $btn2-active-grad-2));
-
-//   &:hover, &:focus {
-//     color: $btn2-hover-text;
-//     background-color: $btn2-hover-bkgd;
-//     @include background(linear-gradient($btn2-hover-grad-1, $btn2-hover-grad-2));
-//   }
-
-//   &:active, &.active {
-//     color: $btn2-hover-text;
-//   }
-// }
-
-// .btn-primary {
-//   -webkit-font-smoothing: antialiased;
-//   color: $btn1-active-text;
-//   border-bottom: 1px solid $btn1-active-stroke;
-//   background-color: $btn1-active-bkgd;
-//   @include background-image(linear-gradient($btn1-active-grad-1, $btn1-active-grad-2));
-
-//   &:hover, &:focus {
-//     color: $btn1-hover-text;
-//     background-color: $btn1-hover-bkgd;
-//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-//   }
-
-//   &:active, &.active {
-//     color: $btn1-hover-text;
-//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-//   }
-
-//   &:disabled, &.disabled,
-//   &:disabled:hover, &.disabled:hover,
-//   &:disabled:focus, &.disabled:focus,
-//   &:disabled:active, &.disabled:active {
-//     color: $btn1-disabled-text;
-//     background-color: $btn1-disabled-bkgd;
-//     @include background-image(linear-gradient($btn1-disabled-grad-1, $btn1-disabled-grad-2));
-//   }
-// }
-
 .nxg-search-btn {
   @extend %align-left;
   position: relative;
@@ -80,10 +36,10 @@
 .btn-unstyle {
   @extend %center;
   background: transparent;
-  color: $gray-9;
+  color: $primary;
   padding: 0;
   border: 0;
-
+  font-size: 14px;
   &.right {
     float: right;
   }
@@ -149,7 +105,9 @@ span.btn-help {
 
 
 
-// Refresh/Refactored Code for v2.23 ***
+/*
+* Updated for v2.23
+*/
 .accordion-button {
   @include border-bottom-radius($borderRadius);
   display: block;
