@@ -1,5 +1,8 @@
 
 
+/*
+* TODO: well-title does not support multiple inline buttons (e.g. account management view)
+*/
 .well {
   @include border-radius($borderRadius);
   @include box-shadow(none);
