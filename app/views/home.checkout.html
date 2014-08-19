@@ -145,7 +145,7 @@
 
                 <button class="btn-unstyle btn-link"
                         ng-click="paymentQueue.schedule(payment)"
-                        ng-show="paymentQueue.canSchedule(payment) && !canPayNow"
+                        ng-show="paymentQueue.canSchedule(payment)"
                         ng-disabled="payment.scheduleLoading || submitInProgress">
                   Change Payment Date
                 </button>
