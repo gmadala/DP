@@ -10,42 +10,57 @@
     "UpcomingPaymentsAmount": 13367.22,
     "AccountFees": 1,
     "AccountFeeAmount": 400,
-    "AvailableCredit": 50500,
-    "UtilizedCredit": 474000,
-    "TempLineOfCredit": 75000,
-    "LineOfCredit": 450000,
+    "LinesOfCredit": [
+      {
+        "CreditTypeName": "Heavy Trucks",
+        "LineOfCreditId": "59750fc5-c0f6-4170-8dec-8d16834ab484",
+        "LineOfCreditAmount": 20000,
+        "TempLineOfCreditAmount": 1000,
+        "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
+        "AvailableCreditAmount": 20550
+      },
+      {
+        "CreditTypeName": "Retail",
+        "LineOfCreditId": "e5e8f773-df57-4f1d-a676-c1100fea356d",
+        "LineOfCreditAmount": 150000,
+        "TempLineOfCreditAmount": 0,
+        "TempLineOfCreditExpiration": null,
+        "AvailableCreditAmount": 149139
+      }
+    ],
     "UnappliedFundsTotal": 2222,
     "TotalAvailableUnappliedFunds": 1111,
     "ApprovedFloorplans": 820,
     "PendingFloorplans": 12,
     "DeniedFloorplans": 5,
+    "CompletedFloorplans": 105,
     "UpcomingPaymentsList": [
       {
-        "DueDate": "2014-07-26",
+        "DueDate": "2013-09-06",
         "Description": "Toyota Sequoia Limited Tan",
         "PayoffDue": 0,
         "PaymentDue": 2490
       },
       {
-        "DueDate": "2014-07-24",
+        "DueDate": "2013-09-09",
         "Description": "BMW 7-Series 750Li Black",
         "PayoffDue": 0,
         "PaymentDue": 3860
       },
       {
-        "DueDate": "2014-08-10",
+        "DueDate": "2013-09-11",
         "Description": "Toyota Sequoia Unlimited Red",
         "PayoffDue": 4980,
         "PaymentDue": 0
       },
       {
-        "DueDate": "2014-08-13",
+        "DueDate": "2013-09-19",
         "Description": "A Car Being Paid For",
         "PayoffDue": 0,
         "PaymentDue": 3333
       },
       {
-        "DueDate": "2014-08-21",
+        "DueDate": "2013-09-19",
         "Description": "A Car Being Paid Off",
         "PayoffDue": 2222,
         "PaymentDue": 0
@@ -53,19 +68,19 @@
     ],
     "ScheduledPayments": [
       {
-        "ScheduledDate": "2014-07-22",
+        "ScheduledDate": "2013-09-06",
         "ScheduledPaymentAmount": 2490
       },
       {
-        "ScheduledDate": "2014-08-01",
+        "ScheduledDate": "2013-09-09",
         "ScheduledPaymentAmount": 3860
       },
       {
-        "ScheduledDate": "2014-07-25",
+        "ScheduledDate": "2013-09-09",
         "ScheduledPaymentAmount": 4980
       },
       {
-        "ScheduledDate": "2014-07-29",
+        "ScheduledDate": "2013-09-19",
         "ScheduledPaymentAmount": 180
       }
     ],
