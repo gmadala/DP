@@ -55,8 +55,6 @@ angular.module('nextgearWebApp')
               })
             };
 
-
-
             // inserting view receipt URLs
             angular.forEach(result.Receipts, function(receipt) {
               receipt.$receiptURL = prv.getReceiptURL(receipt.FinancialTransactionId);

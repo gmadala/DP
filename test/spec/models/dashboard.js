@@ -158,38 +158,46 @@ describe('Model: dashboard', function () {
 
     });
 
-    /*
+
     it('should pass through the standard dashboard info', function () {
       expect(resultData).not.toBe(null);
       expect(resultData.PaymentsDueToday).toBe(3);
-      expect(resultData.UnappliedFundTotal).toBe(2222);
-      expect(resultData.UpcomingPaymentsList.length).toBe(4);
+      expect(resultData.UnappliedFundsTotal).toBe(2222);
+      expect(resultData.UpcomingPaymentsList.length).toBe(5);
     });
-    */
 
-    /*
+
+
     it('should add a creditChartData object with expected structure', function () {
-      expect(resultData.creditChartData).toBeDefined();
-      expect(angular.isArray(resultData.creditChartData.outer)).toBe(true);
-      expect(angular.isArray(resultData.creditChartData.inner)).toBe(true);
+      expect(resultData.credit).toBeDefined();
+      expect(angular.isArray(resultData.credit.linesOfCredit[0].CreditChartData.outer)).toBe(true);
+      expect(angular.isArray(resultData.credit.linesOfCredit[1].CreditChartData.outer)).toBe(true);
+      expect(angular.isArray(resultData.credit.linesOfCredit[0].CreditChartData.inner)).toBe(true);
+      expect(angular.isArray(resultData.credit.linesOfCredit[1].CreditChartData.outer)).toBe(true);
     });
-    */
 
-    /*
+
+
     it('should populate creditChartData outer with breakdown of credit by type', function () {
-      expect(resultData.creditChartData.outer.length).toBe(2);
-      expect(resultData.creditChartData.outer[0].y).toBe(450000);
-      expect(resultData.creditChartData.outer[1].y).toBe(75000);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer.length).toBe(2);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer.length).toBe(2);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer[0].y).toBe(20000);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer[1].y).toBe(1000);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer[0].y).toBe(150000);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer[1].y).toBe(0);
     });
-    */
 
-    /*
+
+
     it('should populate creditChartData inner with breakdown of credit by utilization', function () {
-      expect(resultData.creditChartData.inner.length).toBe(2);
-      expect(resultData.creditChartData.inner[0].y).toBe(474000);
-      expect(resultData.creditChartData.inner[1].y).toBe(50500);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner.length).toBe(2);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner.length).toBe(2);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner[0].y).toBe(450);
+      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner[1].y).toBe(20550);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner[0].y).toBe(861);
+      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner[1].y).toBe(149139);
     });
-    */
+
 
     it('should add a paymentChartData object with expected structure', function () {
       expect(resultData.paymentChartData).toBeDefined();
@@ -204,19 +212,19 @@ describe('Model: dashboard', function () {
       expect(resultData.paymentChartData.fees).toBe(400);
     });
 
-    /*
+
     it('should populate paymentChartData payments with upcoming minus scheduled payments', function () {
-      expect(resultData.paymentChartData.payments.toPrecision(6)).toBe('3367.22');
+      expect(resultData.paymentChartData.payments.toPrecision(6)).toBe('1857.22');
     });
-    */
 
-   /* it('should populate paymentChartData scheduledPayments with total of all scheduled payments', function () {
-      expect(resultData.paymentChartData.scheduledPayments).toBe(5000);
-    });*/
 
-    /*it('should populate paymentChartData total with fees plus upcoming payments', function () {
-      expect(resultData.paymentChartData.total).toBe(8767.22);
-    });*/
+   it('should populate paymentChartData scheduledPayments with total of all scheduled payments', function () {
+      expect(resultData.paymentChartData.scheduledPayments).toBe(11510);
+    });
+
+    it('should populate paymentChartData total with fees plus upcoming payments', function () {
+      expect(resultData.paymentChartData.total).toBe(13767.22);
+    });
 
     it('should wrap this data up into a chart-compatible format', function () {
       expect(resultData.paymentChartData.chartData[0].y).toBe(resultData.paymentChartData.fees);
@@ -232,37 +240,51 @@ describe('Model: dashboard', function () {
       expect(resultData.calendarData.openDates).toBeDefined();
     });
 
-   /* it('should create the expected dueEvents on calendarData', function () {
+    it('should create the expected dueEvents on calendarData', function () {
       var expected = [
-        {title: '<span class="counter">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-        {title: '<span class="counter">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
-        {title: '<span class="counter">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
+        {title: '<span class="counter">1</span> Payment Due', subTitle: '$2,490.00', start: '2013-09-06'},
+        {title: '<span class="counter">1</span> Payment Due', subTitle: '$3,860.00', start: '2013-09-09'},
+        {title: '<span class="counter">1</span> Payment Due', subTitle: '$0.00', start: '2013-09-11'},
+        {title: '<span class="counter">2</span> Payments Due', subTitle: '$3,333.00', start: '2013-09-19'}
       ];
 
       expect(angular.equals(resultData.calendarData.dueEvents, expected)).toBe(true);
-    });*/
+    });
 
     it('should create the expected scheduledEvents on calendarData', function () {
       var expected = [
-        {title: '<span class="counter">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+        {title: '<span class="counter">1</span> Scheduled', subTitle: '$2,490.00', start: '2013-09-06'}, // year, month, date
+        {title: '<span class="counter">2</span> Scheduled', subTitle: '$8,840.00', start: '2013-09-09'}, // sept. 09 2013
+        {title: '<span class="counter">1</span> Scheduled', subTitle: '$180.00', start: '2013-09-19'} // sept. 09 2013
       ];
 
-//      expect(angular.equals(resultData.calendarData.scheduledEvents, expected)).toBe(true);
+      expect(angular.equals(resultData.calendarData.scheduledEvents, expected)).toBe(true);
+
     });
 
     it('should create the expected eventsByDate on calendarData', function () {
       var expected = {
-        '2013-08-01': [
-          {title: '<span class="counter">2</span> Payments Due', subTitle: '$5,000.00', start: '2013-08-01'},
-          {title: '<span class="counter">1</span> Scheduled', subTitle: '$5,000.00', start: '2013-08-01'}
+        '2013-09-19': [
+          {title: '<span class="counter">1</span> Scheduled', subTitle: '$180.00', start: '2013-09-19'},
+          {title: '<span class="counter">2</span> Payments Due', subTitle: '$3,333.00', start: '2013-09-19'}
         ],
-        '2013-08-07': [
-          {title: '<span class="counter">1</span> Payment Due', subTitle: '$8,000.00', start: '2013-08-07'},
-          {title: '<span class="counter">1</span> Payoff Due', subTitle: '$5,000.00', start: '2013-08-07'}
+        '2013-09-11': [
+          {title: '<span class="counter">1</span> Payments Due', subTitle: '$0.00', start: '2013-09-11'}
+        ],
+        '2013-09-09': [
+          {title: '<span class="counter">2</span> Scheduled', subTitle: '$8,840.00', start: '2013-09-09'},
+          {title: '<span class="counter">1</span> Payment Due', subTitle: '$3,860.00', start: '2013-09-09'}
+        ],
+        '2013-09-06': [
+          {title: '<span class="counter">1</span> Scheduled', subTitle: '$2,490.00', start: '2013-09-06'},
+          {title: '<span class="counter">2</span> Payments Due', subTitle: '$2,490.00', start: '2013-09-06'}
         ]
       };
 
-//      expect(angular.equals(resultData.calendarData.eventsByDate, expected)).toBe(true);
+    /* TODO: fix broken test. "Expected false to be true"; the data above is not valid
+     expect(angular.equals(resultData.calendarData.eventsByDate, expected)).toBe(true);
+     */
+
     });
 
     it('should create the expected openDates on calendarData', function () {
