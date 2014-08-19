@@ -1,117 +1,154 @@
 <div class="row-fluid dealer-search">
+
   <div class="span6 well dash-well">
     <h2 class="well-title">Dealer Number Search</h2>
-      <div class="row-fluid well-content">
-      <p class="form-description"> If you have the NextGear Dealer Number or Auction Access Number, use the Dealer Number search. </p>
-      <form name="numberSearchForm" novalidate>
 
-        <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
-            Please enter a Dealer Number or an Auction Access Number.
-        </p>
-        <div class="control-group"
-             ng-class="{'nxg-fade' : numberSearch.dealerNumInactive}"
-             >
-          <label for="dealer-num" class="control-label input-title">NextGear Dealer Number</label>
-          <div class="controls input-append">
-            <input type="text"
-                   id="dealer-num"
-                   name="dealerNum"
-                   ng-pattern="onlyNumbersPattern"
-                   ng-model="numberSearch.query.dealerNumber"
-                   nxg-focus="numberSearch.setDealerNumActive()"
-                   nxg-requires="data.proposedQuery.length >= 3"
-                   ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }"></div>
-            <button class="btn" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
-            <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
-                No results found, please enter a valid Dealer Number.
-            </label>
-            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber">
-                Please enter a Dealer Number.
-            </label>
-            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber">
-                Please enter a numeric value.
-            </label>
+    <div class="row-fluid well-content">
+      <p class="form-description"> If you have the NextGear Dealer Number or Auction Access Number, use the Dealer
+        Number search. </p>
 
-        </div><!-- end first .control-group -->
+      <form name="numberSearchForm" class="row-fluid search" novalidate>
+        <div class="row-fluid">
+          <div class="span7 form-block">
+            <p for="city" class="text-error" ng-show="numberSearch.invalid.required.dealerOrAccessNumber">
+              Please enter a Dealer Number or an Auction Access Number.
+            </p>
 
-        <h4>- OR -</h4>
+            <label for="dealer-num">NextGear Dealer Number</label>
 
-        <div class="control-group"
-             ng-class="{'nxg-fade' : numberSearch.auctionNumInactive}"
-             >
-          <label for="auction-access-num" class="control-label input-title">Auction Access Number</label>
-          <div class="controls input-append">
-            <input type="text"
-                   id="auction-access-num"
-                   name="auctionAccessNum"
-                   ng-pattern="onlyNumbersPattern"
-                   ng-model="numberSearch.query.auctionAccessNumber"
-                   ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
-                   nxg-focus="numberSearch.setAuctionNumActive()"></div>
-            <button class="btn" type="submit" ng-click="numberSearch.search()" ng-disabled="numberSearch.searchInProgress">Search</button>
-            <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
-                No results found, please enter a valid Auction Access Number.
-            </label>
-            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
-                Please enter an Auction Access Number.
-            </label>
-            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
-                Please enter a numeric value.
-            </label>
-        </div><!-- end second .control-group -->
-          </form>
-      </div>
-  </div><!-- end first well -->
-
-  <div class="span6 well dash-well">
-      <h2 class="well-title">Dealer Name Search</h2>
-      <div class="row-fluid well-content">
-      <p class="form-description"> To look up a dealer in Dealer search, use a combination of their Name and City or State. </p>
-      <form name="nameSearchForm" novalidate>
-          <div class="control-group">
-            <label for="dealer-name" class="control-label input-title">Dealer Name</label>
-            <div class="controls">
-              <input type="text" id="dealer-name" ng-model="nameSearch.query.dealerName" ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName || nameSearch.invalid.minlength }">
-              <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.dealerName">
-                  Please enter a Dealer Name.
-              </label>
-              <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.minlength">
-                  Please enter at least 3 characters.
-              </label>
+            <div class="styled-input with-btn">
+              <input type="text"
+                     id="dealer-num"
+                     name="dealerNum"
+                     ng-pattern="onlyNumbersPattern"
+                     ng-model="numberSearch.query.dealerNumber"
+                     nxg-focus="numberSearch.setDealerNumActive()"
+                     nxg-requires="data.proposedQuery.length >= 3"
+                     ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }">
+              <button class="btn btn-input" type="submit" ng-click="numberSearch.search()"
+                      ng-disabled="numberSearch.searchInProgress">
+                <span nxg-icon="icon-search"></span>
+              </button>
             </div>
           </div>
-          <h4>please enter a city or state:</h4>
-          <div class="row-fluid">
-          <div class="control-group span6">
-            <label for="city" class="control-label input-title">City</label>
-            <div class="controls">
-              <input type="text" id="city" ng-model="nameSearch.query.city" ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
-              <label class="text-error" ng-show="nameSearch.invalid.cityFormat">
-                  City names must only have letters and spaces.
-              </label>
-            </div>
-          </div><!-- end second .control-group -->
 
-          <div class="control-group span6">
+          <div class="span5 form-block error-block">
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
+              No results found, please enter a valid Dealer Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber">
+              Please enter a Dealer Number.
+            </label>
+            <label for="dealer-num" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber">
+              Please enter a numeric value.
+            </label>
+          </div>
+        </div>
+
+        <h2> OR </h2>
+
+        <div class="row-fluid">
+          <div class="span7 form-block">
+            <label for="auction-access-num">Auction Access Number</label>
+            <div class="styled-input with-btn">
+              <input type="text"
+                     id="auction-access-num"
+                     name="auctionAccessNum"
+                     ng-pattern="onlyNumbersPattern"
+                     ng-model="numberSearch.query.auctionAccessNumber"
+                     ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
+                     nxg-focus="numberSearch.setAuctionNumActive()">
+             <button class="btn btn-input" type="submit" ng-click="numberSearch.search()"
+                      ng-disabled="numberSearch.searchInProgress">
+                <span nxg-icon="icon-search"></span>
+             </button>
+            </div>
+          </div>
+          <div class="span5 form-block error-block">
+          <label for="auction-access-num" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
+            No results found, please enter a valid Auction Access Number.
+          </label>
+          <label for="auction-access-num" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
+            Please enter an Auction Access Number.
+          </label>
+          <label for="auction-access-num" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
+            Please enter a numeric value.
+          </label>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <!-- end first well -->
+
+  <div class="span6 well dash-well">
+    <h2 class="well-title">Dealer Name Search</h2>
+
+    <div class="well-content">
+      <p class="form-description"> To look up a dealer in Dealer search, use a combination of their Name and City or
+        State. </p>
+
+      <form name="nameSearchForm" class="search" novalidate>
+        <div class="row-fluid">
+          <div class="span8">
+            <label for="dealer-name" class="control-label input-title">Dealer Name</label>
+
+            <div class="styled-input with-btn">
+              <input type="text"
+                     id="dealer-name"
+                     ng-model="nameSearch.query.dealerName"
+                     ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName || nameSearch.invalid.minlength }">
+              <button class="btn btn-input" type="submit" ng-click="nameSearch.search()">
+                <span nxg-icon="icon-search"></span>
+              </button>
+            </div>
+            <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.dealerName">
+              Please enter a Dealer Name.
+            </label>
+            <label for="dealer-name" class="text-error" ng-show="nameSearch.invalid.minlength">
+              Please enter at least 3 characters.
+            </label>
+          </div>
+        </div>
+
+        <h2>OR</h2>
+
+        <div class="row-fluid">
+          <div class="span6">
+            <label for="city">City</label>
+
+            <div class="styled-input with-btn">
+              <input type="text"
+                     id="city"
+                     ng-model="nameSearch.query.city"
+                     ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
+              <button class="btn btn-input" type="submit" ng-click="nameSearch.search()">
+                <span nxg-icon="icon-search"></span>
+              </button>
+            </div>
+
+            <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat">
+              City names must only have letters and spaces.
+            </label>
+
+            <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
+              Please enter a City or select a State.
+            </label>
+          </div>
+
+          <div class="span6">
             <label class="control-label input-title" for="state">State</label>
             <div class="style-select">
               <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
                 <option value=""></option>
               </select>
             </div>
-          </div><!-- end second .control-group -->
-
-
-           <label class="text-error" ng-show="nameSearch.invalid.CityOrState">
-            Please enter a City or select a State.
-          </label>
           </div>
-          <hr/>
-          <div class="form-footer">
-            <button class="btn pull-left" type="submit" ng-click="nameSearch.search()">Search</button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
+    </div>
 
-    </div><!-- end second well -->
+  </div>
+  <!-- end second well -->
 </div>
