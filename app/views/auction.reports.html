@@ -22,6 +22,17 @@
             <div class="well-out">
               <h5>Disbursement Detail</h5>
               <form id="disForm" name="disForm">
+                <div class="form-row" ng-show="subsidiaries.length > 0">
+                  <label for="subsidiary">Subsidiary Manufacturer</label>
+                  <div class="style-select">
+                      <select id="subsidiary"
+                              name="subsidiary"
+                              ng-model="selectedSubsidiary"
+                              ng-options="o.BusinessName for o in subsidiaries"
+                              ng-required="subsidiary.length > 0">
+                      </select>
+                  </div>
+                </div>
                 <label for="disDate" class="input-title">Date Search</label>
                 <input id="disDate"
                         name="disDate"
