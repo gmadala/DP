@@ -3,7 +3,7 @@
     <div nxg-search
       title="Find a Scheduled Payment"
       class="search-form"
-      prompt="Stock # or VIN"
+      prompt="By Stock #, VIN, or Description"
       metric-search="{{metric.CLICK_SCHEDULED_PAYMENTS_SEARCH_BUTTON}}"
       metric-clear-search="{{metric.CLICK_SCHEDULED_PAYMENTS_CLEAR_SEARCH_LINK}}"
       metric-filter-by-input="{{metric.CLICK_SCHEDULED_PAYMENTS_FILTER_BY_PAYMENT_STATUS}}"
@@ -53,9 +53,17 @@
         </thead>
 
         <tr ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
-          <td><p>{{ fee.ScheduledDate | moment }}</p></td>
-          <td><h5>{{ fee.Description }}</h5></td>
-          <td><p>{{ fee.FeeType }}</p></td>
+          <td>
+            <p class="lockup-major">{{ fee.ScheduledDate | moment }}</p>
+          </td>
+
+          <td class="description">
+            <h4>{{ fee.Description }}</h4>
+          </td>
+
+          <td>
+            <p class="lockup-minor">{{ fee.FeeType }}</p>
+          </td>
           <td class="numeric"><h4>{{ fee.Balance | currency }}</h4>
             <button class="btn-unstyle btn-link" ng-click="scheduledPayments.cancelFee(fee)" nxg-track="{{metric.CLICK_SCHEDULED_PAYMENTS_VEHICLE_CANCEL_FEE_BUTTON}}">
                 Cancel Payment
