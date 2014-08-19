@@ -26,17 +26,36 @@ angular.module('nextgearWebApp')
             // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
             var result = responses[0];
 
-            // calculate .creditChartData
-            result.creditChartData = {
-              outer: [
-                { color: '#9F9F9F', y: result.LineOfCredit },
-                { color: '#575757', y: result.TempLineOfCredit }
-              ],
-              inner: [
-                { color: '#3D9AF4', y: result.UtilizedCredit },
-                { color: '#54BD45', y: result.AvailableCredit }
-              ]
+            result.credit = {
+              totalAvailable : _.reduce(result.LinesOfCredit, function(sum, loc){
+                return sum + loc.AvailableCreditAmount;
+              }, 0),
+              totalUtilized : _.reduce(result.LinesOfCredit, function(sum, loc){
+                var utilized = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
+                return sum + utilized;
+
+              }, 0),
+
+              linesOfCredit : _.map(result.LinesOfCredit, function(loc){
+                // refactor
+                var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
+                return _.extend(loc, {
+                  UtilizedCreditAmount: utilizedAmount,
+                  CreditChartData :{
+                    outer: [
+                      { color: '#9F9F9F', y: loc.LineOfCreditAmount },
+                      { color: '#575757', y: loc.TempLineOfCreditAmount }
+                    ],
+                    inner: [
+                      { color: '#3D9AF4', y: utilizedAmount },
+                      { color: '#54BD45', y: loc.AvailableCreditAmount }
+                    ]
+                  }
+                });
+              })
             };
+
+
 
             // inserting view receipt URLs
             angular.forEach(result.Receipts, function(receipt) {
