@@ -1,14 +1,13 @@
-NextGear Capital v4.0.1
+NextGear Capital v4.0.2
 =================================
 
 Fixes included in this release:
 
-VO-2723	NextGear Demo App Web (View Analytics): Hand Tool is not getting displayed when user hovers over “Ten Best Movers” toggle button and “Ten worst Movers” toggle button.
-VO-1953 Add "Remember User Name" checkbox to login page
-VO-2533 Web/Mobile- Wrong copyright text “© 2013 NextGear Capital, Inc.” is getting displayed in the footer.
-VO-2712 NextGear Demo App Web (Payments): Mismatch of placeholder text for “keyword” field between mobile and web demo application.
-VO-2583 Web-Payments: Incomplete Placeholder text is getting displayed for keyword field.
-VO-2622 Web (Login Page) - Full stop is missing after the content “If the document did not successfully display, please install Adobe Acrobat Reader”.
-VO-2746 Auction - Volume of NextGear Floor Plans toggle label placement is wrong
-VO-2566 Application timing out when page is closed shows error message
-VO-2621 Web (Login Page): Validation message for password field is getting displayed when user selects username from suggestion box for “Username” field.
+VO-2253	Allow parent manufacturer to view subsidiary activity
+VO-2190	Design and define new vehicle details view
+VO-2684	Web (Settings – Account Management): Period is missing from the end of the info popup text.
+VO-2734	NextGear Web Hotfix (Floor a Car–Confirm Flooring Request): Link “View Vehicle Verification Checklist” is getting displayed instead of updated link “View Dealer Funding Checklist”.
+VO-1754	Auto-schedule payments for valid business day if logged in during off hours
+VO-2806	Floor a Vehicle - Cancel button triggered when hitting Enter on VIN Search
+VO-2473	Auction - Allow inventory location selection during floor plan request
+VO-1489	Display most recently floored vehicles to the dealer so flooring information can be reviewed
