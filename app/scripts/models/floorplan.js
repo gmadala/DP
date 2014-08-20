@@ -97,6 +97,7 @@ angular.module('nextgearWebApp')
               } else {
                 floorplan.sellerHasTitle = false;
               }
+              floorplan.Description = self.getVehicleDescription(floorplan);
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);
           }

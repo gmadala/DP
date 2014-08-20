@@ -42,4 +42,9 @@
     width: 85%;
     @extend %float-l;
   }
+
+  .btn-help {
+    position: absolute;
+    top: 10px;
+  }
 }

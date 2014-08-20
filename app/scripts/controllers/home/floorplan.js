@@ -13,8 +13,6 @@ angular.module('nextgearWebApp')
 
     var isDealer = User.isDealer();
 
-    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
-
     if (isDealer) {
       $scope.filterOptions = [
         {

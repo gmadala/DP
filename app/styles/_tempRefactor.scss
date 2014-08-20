@@ -168,26 +168,18 @@
 // notification
 .info-block {
   @extend %full-width;
-  @extend .clearfix;
-  position: relative;
+  display: table;
   height: 45px;
+  margin-bottom: 10px;
 
   .info-block-image, .info-block-text {
-    float: left;
+    display: table-cell;
+    vertical-align: middle;
     height: 100%;
   }
-  .info-block-image {
-    margin: 3px 0;
-  }
-  .info-block-text {
-    padding: 8px 10px;
 
-    .btn {
-      position: absolute;
-      top: -7px;
-      right: 0;
-      margin-right: 0;
-    }
+  .info-block-text {
+    padding: 8px 10px 8px 10px;
   }
 }
 
@@ -217,6 +209,7 @@
 
 // overly-specific....should really refactor somehow.
 .upcoming-payments {
+  background: $white;
   height: 250px;
   border-top: 2px solid $border;
 }
@@ -250,13 +243,8 @@
   margin: 10px auto 0;
 }
 
-.floor-chart-title {
-  position: relative;
-  top: -15px;
-}
-
 .nxg-dash-calendar-container {
-  background: $white;
+  background: transparent;
 }
 
 .page-break {
@@ -300,6 +288,8 @@
   }
 }
 
+// used for the vehicle description block
+// on payments, receipts, title releases, floorplans, sch. payments, etc.
 .vin, .stock {
   display: inline-block;
 }
@@ -315,53 +305,7 @@ hr {
   margin-bottom: 20px;
 }
 
-/*
- * TOGGLE PAYMENTS BUTTONS
- * displayed in the tables for
- * payments & scheduled payments views
- */
-
-#togglePayoff, #togglePayoff2,
-#togglePayment, #toggleFee, #togglePayment2 {
-   position: relative;
-   color: #1b679d;
-
-  .paired-media {
-    width: 13px;
-    height: 13px;
-  }
-  .icon-plus svg {
-    fill: #1b679d;
-  }
-  .icon-minus svg {
-    fill: #fff;
-  }
-  &.in-queue {
-    background-color: #4d4e4e;
-    color: $white;
-  }
-
+// Provides our highlightable search text
+.ui-match {
+  background: yellow;
 }
-
-.btn-switch {
-  @extend .btn-cta;
-  &:active {
-    background-color: inherit;
-  }
-  &:hover {
-    background-color: inherit;
-  }
-  &:focus {
-    background-color: inherit;
-  }
-}
-
-// .scheduled-payoff, .scheduled-payment {
-//   padding-right: 15px;
-//   p {
-//     text-align: right;
-//   }
-//   .btn-link {
-//     float: right;
-//   }
-// }

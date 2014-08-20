@@ -219,6 +219,29 @@
                 "State": "TX",
                 "Zip": "75062"
             }
+        ],
+        "ManufacturerSubsidiaries": [
+            {
+              "BusinessId": "d02e0fd9-a590-4700-86a5-65a4563edf5c",
+              "BusinessNumber": 31856,
+              "BusinessName": "X POWER MOTORSPORTS",
+              "Line1": "2727 US HWY 411 S",
+              "City": "MARYVILLE",
+              "State": "TN",
+              "Zip": "37801",
+              "Phone": "3055930681"
+            },
+            {
+              "BusinessId": "1fa1091d-a064-4747-8cbe-716c7e4b0021",
+              "BusinessNumber": 80019,
+              "BusinessName": "Hy-Line",
+              "Line1": "21674 Beck Drive",
+              "City": "Elkhart",
+              "State": "IN",
+              "Zip": "46516",
+              "Phone": "5742941112"
+            }
         ]
+
     }
 }

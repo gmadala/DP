@@ -10,17 +10,42 @@ describe('Controller: CheckoutCtrl', function () {
     dialog,
     protect,
     User,
+    loggedIn,
     Payments,
-    Floorplan;
+    Floorplan,
+    $q,
+    api,
+    afterHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $dialog, _protect_, _User_, _Payments_, _Floorplan_) {
+  beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_) {
     scope = $rootScope.$new();
     dialog = $dialog;
+    $q = _$q_;
     protect = _protect_;
     User = _User_;
     Payments = _Payments_;
     Floorplan = _Floorplan_;
+    api = _api_;
+    afterHours = false;
+    loggedIn = true;
+
+    spyOn(User, 'isLoggedIn').andCallFake(function() {
+      if(loggedIn) {
+        return $q.when(true);
+      } else {
+        return $q.when(false);
+      }
+    });
+
+    spyOn(Payments, 'canPayNow').andCallFake(function() {
+      if(!afterHours) {
+        return $q.when(true);
+      } else {
+        return $q.when(false);
+      }
+    });
+
     run = function () {
       $controller('CheckoutCtrl', { $scope: scope });
     };
@@ -129,11 +154,10 @@ describe('Controller: CheckoutCtrl', function () {
   });
 
   describe('canSchedule function', function () {
-
     var clock;
 
     beforeEach(function () {
-      clock = sinon.useFakeTimers(moment([2013, 0, 2, 11, 15]).valueOf(), 'Date');
+      clock=sinon.useFakeTimers(moment('2013-01-01T08:30:00Z').valueOf(), 'Date');
       run();
     });
 
@@ -143,14 +167,14 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should return false if the payment due date is in the past (overdue)', function () {
       var result = scope.paymentQueue.canSchedule({
-        dueDate: '2013-01-01'
+        dueDate: '2012-12-31'
       });
       expect(result).toBe(false);
     });
 
     it('should return false if the payment has the scheduleBlocked flag set', function () {
       var result = scope.paymentQueue.canSchedule({
-        dueDate: '2013-01-03',
+        dueDate: '2013-01-04',
         scheduleBlocked: true
       });
       expect(result).toBe(false);
@@ -158,7 +182,7 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should return false if the payment due date is today', function () {
       var result = scope.paymentQueue.canSchedule({
-        dueDate: '2013-01-02'
+        dueDate: '2013-01-01'
       });
       expect(result).toBe(false);
     });
@@ -169,7 +193,34 @@ describe('Controller: CheckoutCtrl', function () {
       });
       expect(result).toBe(true);
     });
+  });
 
+  describe('getDueStatus method', function(){
+    var item = { dueDate: "2012-12-31"},
+        clock;
+
+    beforeEach(function () {
+      clock=sinon.useFakeTimers(moment('2013-01-01T08:30:00Z').valueOf(), 'Date');
+      run();
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should return "overdue" if today is past the due date', function() {
+      expect(scope.paymentQueue.getDueStatus(item)).toBe('overdue');
+    });
+
+    it('should return "today" if today is the due date', function() {
+      item.dueDate = "2013-01-01";
+      expect(scope.paymentQueue.getDueStatus(item)).toBe('today');
+    });
+
+    it('should return "future" if today is in the future', function() {
+      item.dueDate = "2014-08-02";
+      expect(scope.paymentQueue.getDueStatus(item)).toBe('future');
+    });
   });
 
   describe('schedule function', function () {
@@ -457,38 +508,25 @@ describe('Controller: CheckoutCtrl', function () {
     });
 
     it('should not proceed to business hours validation or commit if bank account is invalid', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
       spyOn(scope, 'reallySubmit');
       scope.paymentForm.$valid = false;
       scope.paymentForm.bankAccount.$invalid = true;
       scope.submit();
       scope.$apply(); // apply promise resolutions
-      expect(scope.validateBusinessHours).not.toHaveBeenCalled();
       expect(scope.reallySubmit).not.toHaveBeenCalled();
     });
 
     it('should not proceed if unapplied funds are enabled, and unapplied funds amount is invalid', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
       spyOn(scope, 'reallySubmit');
       scope.unappliedFunds.useFunds = true;
       scope.paymentForm.$valid = false;
       scope.paymentForm.unappliedAmt.$invalid = true;
       scope.submit();
       scope.$apply(); // apply promise resolutions
-      expect(scope.validateBusinessHours).not.toHaveBeenCalled();
-      expect(scope.reallySubmit).not.toHaveBeenCalled();
-    });
-
-    it('should not proceed to commit if form is valid but there is a business hours problem', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(false));
-      spyOn(scope, 'reallySubmit');
-      scope.submit();
-      scope.$apply(); // apply promise resolutions
       expect(scope.reallySubmit).not.toHaveBeenCalled();
     });
 
     it('should proceed to commit if everything is valid', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(true));
       spyOn(scope, 'reallySubmit');
       scope.submit();
       scope.$apply(); // apply promise resolutions
@@ -496,7 +534,6 @@ describe('Controller: CheckoutCtrl', function () {
     });
 
     it('should proceed to commit if unapplied funds are disabled, & ONLY unapplied funds amt is invalid', function () {
-      spyOn(scope, 'validateBusinessHours').andReturn($q.when(true));
       spyOn(scope, 'reallySubmit');
       scope.unappliedFunds.useFunds = false;
       scope.paymentForm.$valid = false;
@@ -604,366 +641,95 @@ describe('Controller: CheckoutCtrl', function () {
 
   });
 
-  describe('validateBusinessHours function', function () {
-
-    var $q;
-
-    beforeEach(inject(function (_$q_) {
-      $q = _$q_;
-      run();
-    }));
-
-    it('should set submitInProgress to true', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(true));
-      scope.validateBusinessHours();
-      expect(scope.submitInProgress).toBe(true);
-    });
-
-    it('should set submitInProgress back to false on completion', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(false));
-      scope.validateBusinessHours();
-      scope.$apply();
-      expect(scope.submitInProgress).toBe(false);
-    });
-
-    it('should set submitInProgress back to false and resolve to false on error', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.reject('oops'));
-      scope.validateBusinessHours().then(function (result) {
-        expect(result).toBe(false);
-      });
-      scope.$apply();
-      expect(scope.submitInProgress).toBe(false);
-    });
-
-    it('should resolve to true if user can pay now (during business hours)', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(true));
-      scope.validateBusinessHours().then(function (result) {
-        expect(result).toBe(true);
-      });
-      scope.$apply();
-    });
-
-    it('should resolve to true if after hours, but the queue contains no same-day payments', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(false));
-      spyOn(scope.paymentQueue.sum, 'todayCount').andReturn(0);
-      scope.validateBusinessHours().then(function (result) {
-        expect(result).toBe(true);
-      });
-      scope.$apply();
-    });
-
-    it('should resolve to false if after hours and the queue contains same-day payments', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(false));
-      spyOn(scope.paymentQueue.sum, 'todayCount').andReturn(1);
-      spyOn(scope, 'handleAfterHoursViolation');
-      scope.validateBusinessHours().then(function (result) {
-        expect(result).toBe(false);
-      });
-      scope.$apply();
-    });
-
-    it('should invoke handleAfterHoursViolation if the situation is invalid', function () {
-      spyOn(Payments, 'canPayNow').andReturn($q.when(false));
-      spyOn(scope.paymentQueue.sum, 'todayCount').andReturn(1);
-      spyOn(scope, 'handleAfterHoursViolation');
-      scope.validateBusinessHours();
-      scope.$apply();
-      expect(scope.handleAfterHoursViolation).toHaveBeenCalled();
-    });
-
-  });
-
-  describe('handleAfterHoursViolation function', function () {
-
+  describe('after hours payment logic', function() {
     var $q,
-      clock;
+        $timeout,
+        mockQueue;
 
-    beforeEach(inject(function (_$q_) {
+    beforeEach(inject(function(_$q_, _$timeout_) {
       $q = _$q_;
-      spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-      clock = sinon.useFakeTimers(moment([2013, 0, 2]).valueOf(), 'Date');
-      run();
+      $timeout = _$timeout_;
+
+      mockQueue = {
+        fees: [{
+          isPayment: false,
+          isFee: true,
+          financialRecordId: 'fee1',
+          type: 'type',
+          vin: 'ch123',
+          description: 'fee desc',
+          amount: 120,
+          dueDate: '2013-01-20'
+        }],
+        payments: [{
+          isPayment: true,
+          isFee: false,
+          floorplanId: 'one',
+          vin: 'vin123',
+          stockNum: 'stock123',
+          description: 'desc123',
+          amount: 456,
+          dueDate: '2013-01-20',
+          isPayoff: false
+        }]
+      };
+
+      spyOn(Payments, 'getPaymentQueue').andReturn(mockQueue);
+      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-10']));
     }));
 
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('should set submitInProgress to true', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      scope.handleAfterHoursViolation();
-      expect(scope.submitInProgress).toBe(true);
-    });
-
-    it('should set submitInProgress back to false on completion', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      scope.handleAfterHoursViolation();
+    it('should set scope.canPayNow', function() {
+      run();
+      expect(Payments.canPayNow).toHaveBeenCalled();
       scope.$apply();
-      expect(scope.submitInProgress).toBe(false);
+      expect(scope.canPayNow).toBe(true);
     });
 
-    it('should set submitInProgress back to false on error', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.reject('no scheduling for you'));
-      scope.handleAfterHoursViolation();
+    it('should not auto-schedule if we are within business hours', function() {
+      run();
+      expect(Payments.canPayNow).toHaveBeenCalled();
       scope.$apply();
-      expect(scope.submitInProgress).toBe(false);
+      expect(Payments.fetchPossiblePaymentDates).not.toHaveBeenCalled();
+      expect(scope.paymentQueue.contents.payments[0].scheduleDate).not.toBeDefined();
+      expect(scope.paymentQueue.contents.fees[0].scheduleDate).not.toBeDefined();
     });
 
-    it('should search for possible payments dates between tomorrow and some time out', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      scope.handleAfterHoursViolation();
+    it('should auto-schedule for the next available business day if we are outside of business hours', function() {
+      spyOn(Payments, 'updatePaymentAmountOnDate').andCallFake(function() {
+        return { };
+      });
+
+      afterHours = true;
+      run();
+
+      scope.$apply();
+      expect(scope.canPayNow).toBe(false);
 
       expect(Payments.fetchPossiblePaymentDates).toHaveBeenCalled();
-      var startDate = Payments.fetchPossiblePaymentDates.mostRecentCall.args[0];
-      expect(moment().add('days', 1).isSame(startDate, 'day')).toBe(true);
-      var endDate = Payments.fetchPossiblePaymentDates.mostRecentCall.args[1];
-      expect(moment(endDate).diff(moment(), 'days') > 10).toBe(true);
+      expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
+      scope.$apply();
+      expect(scope.paymentQueue.contents.payments[0].scheduleDate).toEqual(moment('2013-01-10').toDate());
+      expect(scope.paymentQueue.contents.fees[0].scheduleDate).toEqual(moment('2013-01-10').toDate());
     });
 
-    it('should stop and create an error message if no possible date was found', inject(function (messages) {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when([]));
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(dialog.dialog).not.toHaveBeenCalled();
-      expect(messages.list().length).toBe(1);
-    }));
+    it('should not auto-schedule a previously scheduled payment or fee', function() {
+      spyOn(Payments, 'updatePaymentAmountOnDate').andCallFake(function() {
+        return { };
+      });
+      mockQueue.payments[0].scheduleDate = '2013-03-04';
+      mockQueue.fees[0].scheduleDate = '2013-03-05';
+      afterHours = true;
+      run();
 
-    it('should remove all fees from the queue not schedulable', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'fee desc', 120, '2013-01-01');
-      Payments.addFeeToQueue('fee2', 'ch124', 'type', 'fee desc 2', 130, '2013-01-03');
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
-    });
-
-    it('should remove overdue payments from the queue', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-      Payments.addPaymentToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-01',
-        false
-      );
-      Payments.addPaymentToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-03',
-        false
-      );
-      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('two');
-    });
-
-    it('should remove overdue fees from the queue', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-01']));
-      Payments.addFeeToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-01'
-      );
-      Payments.addFeeToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-03'
-      );
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.fees)[0].financialRecordId).toBe('two');
-    });
-
-    it('should remove payments that are due before the next available schedule date', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-      Payments.addPaymentToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-08',
-        false
-      );
-      Payments.addPaymentToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-04',
-        false
-      );
-      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(2);
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.payments).length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.payments)[0].floorplanId).toBe('one');
-    });
-
-    it('should remove fees that are due before the next available schedule date', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-05', '2013-01-06']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-      Payments.addFeeToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-08'
-      );
-      Payments.addFeeToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-04'
-      );
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(2);
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(0);
-      expect(_.map(scope.paymentQueue.contents.fees).length).toBe(1);
-      expect(_.map(scope.paymentQueue.contents.fees)[0].financialRecordId).toBe('one');
-    });
-
-    it('should schedule payments that have not been scheduled already for the next avail date', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-      var priorSchedule = new Date();
-      Payments.addPaymentToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-10',
-        false
-      );
-      Payments.addPaymentToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-10',
-        false
-      );
-      Payments.getPaymentQueue().payments['one'].scheduleDate = priorSchedule;
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(Payments.updatePaymentAmountOnDate.calls.length).toBe(1);
-      var newQueue = _.map(scope.paymentQueue.contents.payments);
-      newQueue = _.sortBy(newQueue, 'floorplanId');
-      var expectedScheduleDate = moment([2013, 0, 4]);
-      expect(newQueue.length).toBe(2);
-      expect(newQueue[0].scheduleDate).toBe(priorSchedule);
-      expect(expectedScheduleDate.isSame(newQueue[1].scheduleDate, 'day')).toBe(true);
-    });
-
-    it('should schedule fees that have not been scheduled already for the next avail date', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-06', '2013-01-04']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-      var priorSchedule = new Date();
-      Payments.addFeeToQueue(
-        'one',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-10'
-      );
-      Payments.addFeeToQueue(
-        'two',
-        'ch123',
-        's123',
-        'desc123',
-        123,
-        '2013-01-10'
-      );
-      Payments.getPaymentQueue().fees['one'].scheduleDate = priorSchedule;
-      scope.handleAfterHoursViolation();
       scope.$apply();
       expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
-      var newQueue = _.map(scope.paymentQueue.contents.fees);
-      newQueue = _.sortBy(newQueue, 'financialRecordId');
-      var expectedScheduleDate = moment([2013, 0, 4]);
-      expect(newQueue.length).toBe(2);
-      expect(newQueue[0].scheduleDate).toBe(priorSchedule);
-      expect(expectedScheduleDate.isSame(newQueue[1].scheduleDate, 'day')).toBe(true);
+      expect(scope.paymentQueue.contents.payments[0].scheduleDate).toEqual('2013-03-04');
+      expect(scope.paymentQueue.contents.fees[0].scheduleDate).toEqual('2013-03-05');
     });
-
-    it('should invoke the after hours notice modal with ejected items and the auto schedule date', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-
-      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-03');
-      Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
-      Payments.addPaymentToQueue('scheduled', 'v2', 's2', 'd2', 2, '2013-01-10', false);
-      Payments.getPaymentQueue().payments['scheduled'].scheduleDate = new Date();
-      Payments.addPaymentToQueue('regular', 'v3', 's3', 'd3', 3, '2013-01-10', false);
-
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/afterHoursCheckout.html');
-      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('AfterHoursCheckoutCtrl');
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees().length).toBe(1);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees()[0].financialRecordId).toBe('fee1');
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments().length).toBe(1);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0].floorplanId).toBe('overdue');
-      var date = dialog.dialog.mostRecentCall.args[0].resolve.autoScheduleDate();
-      expect(moment([2013, 0, 4]).isSame(date, 'day')).toBe(true);
-    });
-
-    it('should invoke the after hours notice modal with ejected items and the auto schedule date for fees', function () {
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-04']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(true));
-
-
-      Payments.addFeeToQueue('fee1', 'ch123', 'type', 'desc', 123, '2013-01-10');
-      Payments.addPaymentToQueue('overdue', 'v1', 's1', 'd1', 1, '2013-01-01', true);
-      Payments.addPaymentToQueue('scheduled', 'v2', 's2', 'd2', 2, '2013-01-10', false);
-      Payments.getPaymentQueue().payments['scheduled'].scheduleDate = new Date();
-      Payments.addPaymentToQueue('regular', 'v3', 's3', 'd3', 3, '2013-01-10', false);
-
-      scope.handleAfterHoursViolation();
-      scope.$apply();
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/afterHoursCheckout.html');
-      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('AfterHoursCheckoutCtrl');
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedFees().length).toBe(0);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments().length).toBe(1);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.ejectedPayments()[0].floorplanId).toBe('overdue');
-      var date = dialog.dialog.mostRecentCall.args[0].resolve.autoScheduleDate();
-      expect(moment([2013, 0, 4]).isSame(date, 'day')).toBe(true);
-    });
-
   });
 
-  describe('paymentInProgress watch', function() {
 
+  describe('paymentInProgress watch', function() {
     var paymentInProgress;
 
     beforeEach(function() {

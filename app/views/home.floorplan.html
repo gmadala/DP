@@ -70,7 +70,9 @@
               <p class="lockup-minor">{{ item.DaysOnFloorplan }} days</p>
             </td>
             <td>
-              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></a>
+              <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">
+                <span nxg-highlight="item.Description" highlight="item.data.query" class="break-word"></span>
+              </a>
 
               <div class="row-fluid">
                 <p class="lockup-minor caps vin">VIN: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>

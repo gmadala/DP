@@ -5,6 +5,9 @@ angular.module('nextgearWebApp')
 
     segmentio.track(metric.VIEW_DASHBOARD);
 
+
+
+
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
 
@@ -12,8 +15,6 @@ angular.module('nextgearWebApp')
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
     // initial search
     $scope.floorplanData.resetSearch();
-
-    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
@@ -119,6 +120,16 @@ angular.module('nextgearWebApp')
         width: '138'
       }
     };
+    /**
+     * Watch changes to the 'Line of Credit' select dropdown.
+     * update the nxg-chart based on changes.
+     */
+    $scope.$watch('dashboardData.selectedLineOfCredit', function(newValue, oldValue){
+      if (newValue !== oldValue) {
+        $scope.chartData.credit = newValue.CreditChartData;
+        $scope.chartData.creditTitle.text = '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>' ;
+      }
+    });
 
     /**
      * Flow of control is a little weird here, because the calendar's current visible
@@ -134,14 +145,15 @@ angular.module('nextgearWebApp')
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
           $scope.dashboardData = result;
+          $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
 
           $scope.chartData = {
-            credit: result.creditChartData,
+            credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
             payments: result.paymentChartData.chartData,
             creditTitle: {
               useHTML: true,
               floating: true,
-              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(result.AvailableCredit, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
+              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')($scope.dashboardData.selectedLineOfCredit.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
               y: 70
             },
             paymentsTitle: {

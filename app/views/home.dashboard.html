@@ -220,7 +220,7 @@
 
       <div class="span7">
         <div class="style-select space">
-          <select></select>
+          <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit" ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
         </div>
 
         <table class="table table-unstyle chart-legend">
@@ -229,7 +229,7 @@
             <td class="table-label">Total Credit</td>
             <td class="table-symbol">=</td>
             <td class="table-value table-numeric">
-              {{ dashboardData.LineOfCredit + dashboardData.TempLineOfCredit | numeral:'$0,0.00' }}
+              {{ dashboardData.selectedLineOfCredit.LineOfCreditAmount | numeral:'$0,0.00' }}
             </td>
           </tr>
           <tr>
@@ -238,7 +238,7 @@
             </td>
             <td class="table-label">Utilized Credit</td>
             <td class="table-symbol color-danger">–</td>
-            <td class="table-value table-numeric">{{ dashboardData.UtilizedCredit | numeral:'$0,0.00' }}</td>
+            <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.UtilizedCreditAmount | numeral:'$0,0.00' }}</td>
           </tr>
           <tr>
             <td>
@@ -246,7 +246,7 @@
             </td>
             <td class="table-label">Available Credit</td>
             <td class="table-symbol">=</td>
-            <td class="table-value table-numeric">{{ dashboardData.AvailableCredit | numeral:'$0,0.00' }}</td>
+            <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
           </tr>
         </table>
       </div>
@@ -362,7 +362,7 @@
           </thead>
           <tr ng-repeat="item in floorplanData.results">
             <td class="center">{{ item.FlooringDate | moment }}</td>
-            <td class="table-value"><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ getVehicleDescription(item) }}</a></td>
+            <td class="table-value"><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
             <td>{{ item.LineOfCredit }}</td>
             <td>{{ item.FloorplanStatusName }}</td>
           </tr>

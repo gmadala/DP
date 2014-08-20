@@ -1,3 +1,8 @@
+
+// =========
+//  BUTTONS
+// =========
+
 // .btn-secondary {
 //   color: $btn2-active-text;
 //   background-color: $btn2-active-bkgd;
@@ -107,8 +112,7 @@
 
 .btn-help {
   @extend .btn-unstyle;
-  position: absolute;
-  top: 10px;
+  display: inline-block;
   margin-left: 5px;
 }
 
@@ -134,7 +138,18 @@ span.btn-help {
 }
 
 
-// Refresh/Refactored Code for v2.23
+
+
+
+
+
+
+
+
+
+
+
+// Refresh/Refactored Code for v2.23 ***
 .accordion-button {
   @include border-bottom-radius($borderRadius);
   display: block;
@@ -241,6 +256,11 @@ span.btn-help {
       margin: 0 auto;
     }
   }
+}
+
+.btn-center, .btn-cta.btn-center {
+  display: block;
+  margin: 10px auto;
 }
 
 .button-group {
@@ -437,3 +457,15 @@ span.btn-help {
     float: right;
   }
 }
+
+// responsive buttons for narrower table columns
+.btn-adapts .paired-media {
+  margin: 0 0 0 2px;
+}
+
+  @media only screen and (max-width: 1100px) {
+    .btn-adapts {
+      padding: 0 5px 0 10px;
+      font-size: 11px;
+    }
+  }
