@@ -160,15 +160,18 @@ angular.module('nextgearWebApp')
           $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
           $scope.creditLineOpts = [viewAllCredit];
 
-          //TODO: use this for loop to show all lines of credit
+          //TODO: inject this data into the the lines of credit dropdown
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
-//             console.log($scope.dashboardData.LinesOfCredit[i]);
-             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+           $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+           viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
+           viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
+           viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
           }
 
-          console.log($scope.creditLineOpts);
+          console.log(viewAllCredit);
 
-
+//          $scope.dashboardData.LinesOfCredit.push(viewAllCredit);
+          $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit);
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
