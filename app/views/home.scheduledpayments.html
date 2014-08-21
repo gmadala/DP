@@ -9,14 +9,12 @@
       metric-filter-by-input="{{metric.CLICK_SCHEDULED_PAYMENTS_FILTER_BY_PAYMENT_STATUS}}"
       metric-filter-from-date="{{metric.CLICK_SCHEDULED_PAYMENTS_FILTER_FROM_DATE_INPUT}}"
       metric-filter-to-date="{{metric.CLICK_SCHEDULED_PAYMENTS_FILTER_TO_DATE_INPUT}}"
-      metric-filter-by-inventory-location="{{metric.CLICK_PAYMENTS_FILTER_BY_INVENTORY_LOCATION}}"
       filter-label="Filter by Payment Status"
       filter-options="scheduledPayments.filterOptions"
       active-criteria="scheduledPayments.searchCriteria"
       on-search="scheduledPayments.search()"
       on-clear="scheduledPayments.resetSearch()"
-      filterable="true"
-      show-location-filter="true">
+      filterable="true">
     </div>
 
     <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
