@@ -170,7 +170,7 @@ angular.module('nextgearWebApp')
 
           console.log(viewAllCredit);
 
-//          $scope.dashboardData.LinesOfCredit.push(viewAllCredit);
+          // adds viewAllCredit to the beginning of LinesOfCredit array.
           $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit);
 
           $scope.chartData = {
