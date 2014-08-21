@@ -120,6 +120,8 @@ angular.module('nextgearWebApp')
         width: '138'
       }
     };
+
+
     /**
      * Watch changes to the 'Line of Credit' select dropdown.
      * update the nxg-chart based on changes.
@@ -144,8 +146,29 @@ angular.module('nextgearWebApp')
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
+
+          var viewAllCredit = {
+            "CreditTypeName": "View All",
+            "LineOfCreditId": "0",
+            "LineOfCreditAmount": 0,
+            "TempLineOfCreditAmount": 0,
+            "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
+            "AvailableCreditAmount": 0
+          };
+
           $scope.dashboardData = result;
           $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
+          $scope.creditLineOpts = [viewAllCredit];
+
+          //TODO: use this for loop to show all lines of credit
+          for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
+//             console.log($scope.dashboardData.LinesOfCredit[i]);
+             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+          }
+
+          console.log($scope.creditLineOpts);
+
+
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
@@ -168,3 +191,21 @@ angular.module('nextgearWebApp')
     });
 
   });
+
+
+/*
+
+var viewAll = {
+ "CreditTypeName": "View All",
+ "LineOfCreditId": "0",
+ "LineOfCreditAmount": 0,
+ "TempLineOfCreditAmount": 0,
+ "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
+ "AvailableCreditAmount": 0
+ }
+$scope.creditLineOpts = [ viewAll ];
+for (var i = 0; i < creditlines.length; i++) {
+  $scope.creditLineOpts.push(creditLines[i]);
+  viewAll.LineOfCreditAmount += creditLines[i].LineOfCreditAmount;
+....
+}*/
