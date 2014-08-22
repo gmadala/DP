@@ -159,19 +159,15 @@ angular.module('nextgearWebApp')
           $scope.dashboardData = result;
           $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
           $scope.creditLineOpts = [viewAllCredit];
+          $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
-          //TODO: inject this data into the the lines of credit dropdown
+          // Create the properties of the ViewAllCredit object by pushing array values
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
-           $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
-           viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
-           viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
-           viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
+             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+             viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
+             viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
+             viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
           }
-
-          console.log(viewAllCredit);
-
-          // adds viewAllCredit to the beginning of LinesOfCredit array.
-          $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit);
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
@@ -194,21 +190,3 @@ angular.module('nextgearWebApp')
     });
 
   });
-
-
-/*
-
-var viewAll = {
- "CreditTypeName": "View All",
- "LineOfCreditId": "0",
- "LineOfCreditAmount": 0,
- "TempLineOfCreditAmount": 0,
- "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
- "AvailableCreditAmount": 0
- }
-$scope.creditLineOpts = [ viewAll ];
-for (var i = 0; i < creditlines.length; i++) {
-  $scope.creditLineOpts.push(creditLines[i]);
-  viewAll.LineOfCreditAmount += creditLines[i].LineOfCreditAmount;
-....
-}*/
