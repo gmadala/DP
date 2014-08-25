@@ -146,12 +146,12 @@
       </label>
       <p class="scale-description">
         The actual sale date must be used when flooring a car
-        <span class="btn-help inline"
+        <button class="btn-help inline"
                 tooltip-placement="right"
                 tooltip-popup-trigger="hover"
                 tooltip-popup-delay="300"
                 tooltip="Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct."
-                tooltip-animation="true">?</span>
+                tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
       </p>
 
       <label for="inputDisburseAcct" class="input-title">Bank Account</label>
@@ -169,6 +169,7 @@
 
       <div class="form-footer button-group">
         <button class="btn-cta cta-secondary"
+                type="button"
                 ng-disabled="submitInProgress"
                 ng-click="cancel()">
           Cancel
