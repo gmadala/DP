@@ -148,12 +148,12 @@ angular.module('nextgearWebApp')
         function (result) {
 
           var viewAllCredit = {
-            "CreditTypeName": "View All",
-            "LineOfCreditId": "0",
-            "LineOfCreditAmount": 0,
-            "TempLineOfCreditAmount": 0,
-            "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
-            "AvailableCreditAmount": 0
+            'CreditTypeName': 'View All',
+            'LineOfCreditId': '0',
+            'LineOfCreditAmount': 0,
+            'TempLineOfCreditAmount': 0,
+            'TempLineOfCreditExpiration': '2014-09-16T23:59:00',
+            'AvailableCreditAmount': 0
           };
 
           $scope.dashboardData = result;
@@ -163,10 +163,10 @@ angular.module('nextgearWebApp')
 
           // Create the properties of the ViewAllCredit object by pushing array values
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
-             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
-             viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
-             viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
-             viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
+            $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+            viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
+            viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
+            viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
           }
 
           $scope.chartData = {
