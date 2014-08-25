@@ -60,6 +60,11 @@
                   <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
+                <!-- is already set to be scheduled -->
+                <h4 class="lockup-major" ng-show="fee.scheduleDate">
+                  <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
+                </h4>
+
                 <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
                   Unable to Schedule
                   <button class="btn-help"
@@ -131,6 +136,11 @@
 
                 <!-- can schedule, and hasn't been scheduled yet (outside business hours; should have already been set to have a scheduled date.) -->
                 <h4 class="lockup-major" ng-show="!canPayNow && paymentQueue.canSchedule(payment)">
+                  <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
+                </h4>
+
+                <!-- is already set to be scheduled -->
+                <h4 class="lockup-major" ng-show="payment.scheduleDate">
                   <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 

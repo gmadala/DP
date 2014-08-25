@@ -50,6 +50,7 @@ angular.module('nextgearWebApp')
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
+
           var p = $scope.item,
             amount, principal, fees, interest, collateralProtectionPmt;
 
@@ -68,7 +69,14 @@ angular.module('nextgearWebApp')
             collateralProtectionPmt = p.CollateralProtectionPaymentTotal;
           }
 
-          if (!$scope.onQueue) {
+          if (!$scope.onQueue) { // if it's not on the queue
+
+            if(p.Scheduled && p.ScheduledPaymentDate) {
+              // if it's already scheduled as a payment or payoff, we want to auto-cancel
+              // the scheduled payment and add the new payment or payoff.
+              $scope.cancelScheduledPayment();
+            }
+
             Payments.addPaymentToQueue(
               p.FloorplanId,
               p.Vin,
