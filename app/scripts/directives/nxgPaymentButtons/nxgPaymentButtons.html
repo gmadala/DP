@@ -17,7 +17,7 @@
   </button>
 
   <div ng-switch-when="fee-scheduledFee">
-    <p class="lockup-major">Scheduled</p>
+    <h4 class="lockup-major">Scheduled</h4>
     <p class="lockup-minor">for {{ item.ScheduledDate | moment }}</p>
     <button type="button"
             id="cancelScheduledFee"
@@ -47,8 +47,8 @@
         </span>
   </button>
 
-  <div ng-switch-when="payment-scheduledPayment" class="scheduled-payment">
-    <p class="lockup-major">Scheduled</p>
+  <div ng-switch-when="payment-scheduledPayment">
+    <h4 class="lockup-major">Scheduled</h4>
     <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
             id="cancelScheduledPayment"
@@ -75,9 +75,6 @@
         <span ng-switch-when="payment" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
         <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
       </span>
-    <!-- TODO: confirm the functionality of 'Remove' with @Ryan
-      <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
-    -->
   </button>
 
   <button ng-switch-when="payoff"

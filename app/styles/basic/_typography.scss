@@ -197,7 +197,6 @@ a, a:visited {
     font-size: 14px;
     color: $text;
     display: block;
-    margin-bottom: 3px;
 
     a {
       color: $highlight;
@@ -286,7 +285,7 @@ a, a:visited {
 }
   .lockup-major {
     color: #666666;
-    margin: 0;
+    margin-bottom: 3px;
   }
 
   .lockup-minor {

@@ -125,14 +125,14 @@
               <div class="row-fluid">
                 <div class="span6 semi-donut">
                   <div class="chart-obj"
-                      nxg-chart
-                      nxg-chart-size="financialSummary.chart.size"
-                      nxg-chart-type="pie"
-                      nxg-chart-tooltip="false"
-                      nxg-chart-data="financialSummary.paidChart.data"
-                      nxg-donut-options="financialSummary.chart.donutOptions"
-                      nxg-show-legend="true"
-                      nxg-chart-title="financialSummary.paidChart.title">
+                    nxg-chart
+                    nxg-chart-size="financialSummary.chart.size"
+                    nxg-chart-type="pie"
+                    nxg-chart-tooltip="false"
+                    nxg-chart-data="financialSummary.paidChart.data"
+                    nxg-donut-options="financialSummary.chart.donutOptions"
+                    nxg-show-legend="true"
+                    nxg-chart-title="financialSummary.paidChart.title">
                   </div>
                 </div>
                 <div class="span6 semi-donut">
@@ -156,24 +156,24 @@
                 </li>
                 <li class="list-table-row">
                   <p class="span7">Financed Amount</p>
-                  <p class="span5 value">{{ financialSummary.breakdown.financeAmount | currency }}</p>
+                  <p class="span5 value numeric">{{ financialSummary.breakdown.financeAmount | currency }}</p>
                 </li>
                 <li class="list-table-row">
                   <p class="span7">{{ financialSummary.breakdown.interestFeesLabel }}</p>
-                  <p class="span5 value">{{ financialSummary.breakdown.interestFeesCPP | currency }}</p>
+                  <p class="span5 value numeric"><span class="table-symbol">+</span>{{ financialSummary.breakdown.interestFeesCPP | currency }}</p>
                 </li>
                 <li class="list-table-row">
                   <p class="span7">Floor Plan Total</p>
-                  <p class="span5 value">{{ financialSummary.FloorplanTotal | currency }}</p>
+                  <p class="span5 value numeric"><span class="table-symbol">=</span>{{ financialSummary.FloorplanTotal | currency }}</p>
                 </li>
                 <li class="list-table-hr"></li>
                 <li class="list-table-row">
                   <p class="span7">Total Paid</p>
-                  <p class="span5 value">{{ financialSummary.TotalPaid | currency }}</p>
+                  <p class="span5 value  numeric color-success">{{ financialSummary.TotalPaid | currency }}</p>
                 </li>
                 <li class="list-table-row">
                   <p class="span7">Total Outstanding</p>
-                  <p class="span5 value">{{ financialSummary.TotalOutstanding | currency }}</p>
+                  <p class="span5 value  numeric color-danger">{{ financialSummary.TotalOutstanding | currency }}</p>
                 </li>
                 <li class="list-table-spacer">
                 <li class="list-table-row">
@@ -222,11 +222,13 @@
 
         <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
         <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
-          <span ng-show="financialSummary.FloorplanActivity.length > 0">{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity
+          <span ng-show="financialSummary.FloorplanActivity.length > 0">
+            <span class="paired-body">{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity</span>
+            <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }" nxg-icon="icon-chevron"></span>
           </span>
-         <span ng-hide="financialSummary.FloorplanActivity.length > 0">
-          No Payment Activity Available
-        </span>
+          <span ng-hide="financialSummary.FloorplanActivity.length > 0">
+            No Payment Activity Available
+          </span>
         </button>
         <!-- end Payment Activity -->
 
@@ -394,26 +396,14 @@
         </div>
         <div class="well-item">
           <h5>Next payment due <strong>{{ financialSummary.NextPaymentDueDate | moment }}</strong></h5>
-          <div ng-switch="financialSummary.Scheduled">
-            <div ng-switch-when="false">
-              <div class="btn-text-group">
-                <h6 class="btn-text">Payoff:</h6>
-                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
-              </div>
-              <div class="btn-text-group">
-                <h6 class="btn-text">Payment: </h6>
-                <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
-              </div>
+          <div class="payment-btn-block" ng-show="dataLoaded">
+            <div class="btn-text-group">
+              <h6 class="btn-text">Payment:</h6>
+              <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
             </div>
-
-            <div ng-switch-when="true">
-              <p>Your next payment has been scheduled to be made on <strong>{{ financialSummary.ScheduledPaymentDate | moment }}</strong> for <strong>{{ financialSummary.scheduledAmount | currency }}</strong><br/>
-                <button class="btn-unstyle btn-link" ng-click="cancelScheduledPayment()">Cancel Payment</button>
-              </p>
-              <div class="btn-text-group" ng-show="financialSummary.Scheduled && financialSummary.CurtailmentPaymentScheduled">
-                <h6 class="btn-text">Payoff:</h6>
-                <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"></div>
-              </div>
+            <div class="btn-text-group">
+              <h6 class="btn-text">Payoff:</h6>
+              <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
             </div>
           </div>
         </div>

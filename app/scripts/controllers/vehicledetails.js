@@ -17,6 +17,10 @@ angular.module('nextgearWebApp')
       $state.transitionTo('home.checkout');
     };
 
+    $scope.onCancelScheduled = function() {
+      getData();
+    };
+
     // we wrap the api call in a function so that we can call it initially
     // as well as after an extension has been requested.
     var getData = function() {
@@ -61,6 +65,8 @@ angular.module('nextgearWebApp')
           FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
           CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
           Scheduled: details.FinancialSummaryInfo.Scheduled,
+          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
@@ -70,6 +76,7 @@ angular.module('nextgearWebApp')
           StockNumber: $stateParams.stockNumber,
           UnitDescription: details.FinancialSummaryInfo.Description,
           CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
+          AmountDue: details.FinancialSummaryInfo.TotalOutstanding,
           DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
           isPayoff: true,
           PrincipalPayoff: details.FinancialSummaryInfo.PrincipalDue,
@@ -77,6 +84,8 @@ angular.module('nextgearWebApp')
           FeesPayoffTotal: details.FinancialSummaryInfo.FeesPayoffTotal,
           CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionPayoffTotal,
           Scheduled: details.FinancialSummaryInfo.Scheduled,
+          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
@@ -348,37 +357,8 @@ angular.module('nextgearWebApp')
           });
         };
 
-        // For VO-2190, Amount is either NextPaymentAmount or TotalOutstanding
-        $scope.financialSummary.scheduledAmount = details.FinancialSummaryInfo.CurtailmentPaymentScheduled ? details.FinancialSummaryInfo.NextPaymentAmount : details.FinancialSummaryInfo.TotalOutstanding;
-
-        $scope.cancelScheduledPayment = function() {
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/cancelPayment.html',
-            controller: 'CancelPaymentCtrl',
-            resolve: {
-              options: function() {
-                return {
-                  payment: {
-                    webScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-                    vin: details.VehicleInfo.UnitVin,
-                    description: details.FinancialSummaryInfo.Description,
-                    stockNumber: $stateParams.stockNumber,
-                    scheduledDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
-                    isPayOff: !details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
-                    currentPayOff: details.FinancialSummaryInfo.TotalOutstanding,
-                    amountDue: $scope.financialSummary.scheduledAmount
-                  },
-                  onCancel: function() {
-                    // refresh page so that it no longer looks like a payment is scheduled.
-                  }
-                };
-              }
-            }
-          };
-          $dialog.dialog(dialogOptions).open();
+        $scope.isPaymentOnQueue = function(id) {
+          return Payments.isPaymentOnQueue(id);
         };
 
         // Grab data for value info section

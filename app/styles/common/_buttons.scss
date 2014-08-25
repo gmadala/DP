@@ -410,9 +410,19 @@ span.btn-help {
   .btn-text {
     float: left;
     padding: 15px 0;
+    width: 40%;
   }
+
   .btn-btn {
-    float: right;
+    margin-left: 0;
+
+    p, h4 {
+      color: $text;
+    }
+
+    .btn {
+      margin-left: 0;
+    }
   }
 }
 
