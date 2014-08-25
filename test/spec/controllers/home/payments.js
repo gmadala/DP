@@ -44,6 +44,13 @@ describe('Controller: PaymentsCtrl', function () {
       },
       requestExtension: function () {
         return $q.when(true);
+      },
+      fetchPossiblePaymentDates: function() {
+        return {
+          then: function() {
+            return [ new Date() ];
+          }
+        };
       }
     };
     stateParamsMock = {
