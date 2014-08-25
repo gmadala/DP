@@ -2,6 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, api, moment) {
+    $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
     $scope.titleInfo = {};
@@ -420,6 +421,8 @@ angular.module('nextgearWebApp')
             }
           }).open();
         };
+
+        $scope.dataLoaded = true;
       });
     };
 

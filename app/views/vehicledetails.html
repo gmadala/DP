@@ -73,12 +73,14 @@
                 </li>
                 <li class="list-table-row">
                   <p class="span5">Seller</p>
-                  <p class="span7 value">{{ flooringInfo.SellerName }}</p>
+                  <p ng-show="flooringInfo.SellerName != null" class="span7 value">{{ flooringInfo.SellerName }}</p>
+                  <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value">Trade-in</p>
                 </li>
                 <li class="list-table-spacer"></li>
                 <li class="list-table-row">
                   <p class="span5">Seller Address</p>
-                  <p class="span7 value">{{ flooringInfo.sellerAddress | address:'twoLine' }}</p>
+                  <p ng-show="flooringInfo.SellerName != null" class="span7 value">{{ flooringInfo.sellerAddress | address:'twoLine' }}</p>
+                  <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value">none</p>
                 </li>
                 <li class="list-table-row">
                   <p class="span5">Inventory Location</p>
