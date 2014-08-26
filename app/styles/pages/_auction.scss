@@ -1,57 +1,57 @@
 // AUCTION
 
 // Dashboard
-.auction-dashboard-summaries {
-  margin-top: 7px;
+// .auction-dashboard-summaries {
+//   margin-top: 7px;
 
-  li {
-    margin-bottom: 3px;
-  }
+//   li {
+//     margin-bottom: 3px;
+//   }
 
-  .well-out {
-    @extend %small;
-    height: 170px;
-  }
+//   .well-out {
+//     @extend %small;
+//     height: 170px;
+//   }
 
-  .recent-disbursements {
-    position: relative;
+//   .recent-disbursements {
+//     position: relative;
 
-    table {
-      @extend %full-width;
+//     table {
+//       @extend %full-width;
 
-      td:last-child, td:nth-child(3) {
-        @extend %align-right;
-      }
-    }
+//       td:last-child, td:nth-child(3) {
+//         @extend %align-right;
+//       }
+//     }
 
-    .btn {
-      margin: 14px;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-  }
-}
+//     .btn {
+//       margin: 14px;
+//       position: absolute;
+//       bottom: 0;
+//       right: 0;
+//     }
+//   }
+// }
 
-.auction-dashboard-chart {
-  position: relative;
+// .auction-dashboard-chart {
+//   position: relative;
 
-  .nxg-fancy-radios {
-    margin-bottom: 1em;
-  }
+//   .nxg-fancy-radios {
+//     margin-bottom: 1em;
+//   }
 
-  .chart-obj {
-    height: 300px;
-  }
-}
+//   .chart-obj {
+//     height: 300px;
+//   }
+// }
 
 // Bulk Flooring
-.bulkflooring {
-  .btn-primary {
-    @extend %float-r;
-    margin-left: 1em;
-  }
-}
+// .bulkflooring {
+//   .btn-primary {
+//     @extend %float-r;
+//     margin-left: 1em;
+//   }
+// }
 
 // Reports & Resources/Documents
 .auction-documents, .auction-reports {
@@ -69,8 +69,8 @@
   }
 }
 
-.auction-documents {
-  .well-out {
-    padding-bottom: 21px;
-  }
-}
+// .auction-documents {
+//   .well-out {
+//     padding-bottom: 21px;
+//   }
+// }
