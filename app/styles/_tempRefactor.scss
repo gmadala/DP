@@ -275,6 +275,20 @@
   }
 }
 
+.auction-well {
+  position: relative;
+  height: 270px;
+
+  .counter-list {
+    padding: 0 10px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
 .details-well {
   height: 260px;
 }
