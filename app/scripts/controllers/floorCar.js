@@ -132,7 +132,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        dialogClass: 'modal floor-confirmation-modal',
+        dialogClass: 'modal modal-medium',
         templateUrl: 'views/modals/floorCarConfirm.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
@@ -165,7 +165,7 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',
-            buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
+            buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
           $dialog.messageBox(title, msg, buttons).open().then(function () {
             $scope.reset();
           });
@@ -179,9 +179,9 @@ angular.module('nextgearWebApp')
       var title = 'Cancel',
         msg = 'What would you like to do?',
         buttons = [
-          {label: 'Go Home', result:'home', cssClass: 'btn-danger'},
-          {label: 'Start Over', result: 'reset', cssClass: 'btn-danger'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-primary'}
+          {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary'},
+          {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary'},
+          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary'}
         ];
       $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
         if (choice === 'home') {

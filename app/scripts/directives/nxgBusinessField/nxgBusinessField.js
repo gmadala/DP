@@ -84,7 +84,7 @@ angular.module('nextgearWebApp')
 
       if (!searchOpen) {
         var dialogOptions = {
-          dialogClass: 'modal search-modal search-modal-business',
+          dialogClass: 'modal modal-x-large',
           backdrop: true,
           keyboard: true,
           backdropClick: true,

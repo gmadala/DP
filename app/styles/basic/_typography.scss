@@ -222,6 +222,7 @@ a, a:visited {
   }
 
   th, td {
+    min-width: 100px;
     vertical-align: middle;
     padding: 8px 15px;
 
@@ -346,10 +347,6 @@ label {
   @extend %small;
   cursor: default;
   margin: 14px 0 0 0;
-
-  &:first-child {
-    margin-top: 0;
-  }
 
   // but allow pointers on labels if we explicitly want them
   &.pointer {

@@ -1,17 +1,19 @@
-<label for="inputVin" class="input-title">VIN</label>
-<div class="styled-input with-btn">
-  <input type="text" id="inputVin"
-        name="inputVin"
-        ng-model="data.UnitVin" required
-        ng-minlength="17"
-        ng-maxlength="17"
-        nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
-        ng-change="vinChange()" nxg-blur="vinExit()"
-        nxg-autofocus
-        ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
-  <button type="button" href class="btn btn-input" nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON}}" ng-click="lookupVin()">
-    <span nxg-icon="icon-search"></span>
-  </button>
+<div class="input-xlarge">
+  <label for="inputVin" class="input-title">VIN</label>
+  <div class="styled-input with-btn">
+    <input type="text" id="inputVin"
+          name="inputVin"
+          ng-model="data.UnitVin" required
+          ng-minlength="17"
+          ng-maxlength="17"
+          nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
+          ng-change="vinChange()" nxg-blur="vinExit()"
+          nxg-autofocus
+          ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires) }" />
+    <button type="button" href class="btn btn-input" nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_BY_VIN_LOOKUP_BUTTON}}" ng-click="lookupVin()">
+      <span nxg-icon="icon-search"></span>
+    </button>
+  </div>
 </div>
 
 <label for="inputVin" class="text-error"
@@ -43,9 +45,8 @@
   </label>
 </div>
 
-<div ng-switch="settings.vinMode">
-
-  <div class="nxg-vin-match-info nxg-static" ng-switch-when="matched">
+<div class="row-fluid" ng-switch="settings.vinMode">
+  <div class="nxg-static" ng-switch-when="matched">
     <label for="outputMake">Make</label>
     <input id="outputMake" ng-model="data.$selectedVehicle.Make" disabled />
 
