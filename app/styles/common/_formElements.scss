@@ -15,6 +15,10 @@
   }
 }
 
+.form-footer {
+  text-align: right;
+}
+
 .text-error {
   @extend %small;
   color: $danger;
@@ -660,6 +664,7 @@ input[type="radio"] {
 /* Temp styles for auction dealer search view
 */
 
-.error-block {
-  margin-top: 20px;
+
+.form-description {
+  margin-bottom: 20px;
 }
