@@ -1,58 +1,5 @@
 // AUCTION
 
-// Dashboard
-// .auction-dashboard-summaries {
-//   margin-top: 7px;
-
-//   li {
-//     margin-bottom: 3px;
-//   }
-
-//   .well-out {
-//     @extend %small;
-//     height: 170px;
-//   }
-
-//   .recent-disbursements {
-//     position: relative;
-
-//     table {
-//       @extend %full-width;
-
-//       td:last-child, td:nth-child(3) {
-//         @extend %align-right;
-//       }
-//     }
-
-//     .btn {
-//       margin: 14px;
-//       position: absolute;
-//       bottom: 0;
-//       right: 0;
-//     }
-//   }
-// }
-
-// .auction-dashboard-chart {
-//   position: relative;
-
-//   .nxg-fancy-radios {
-//     margin-bottom: 1em;
-//   }
-
-//   .chart-obj {
-//     height: 300px;
-//   }
-// }
-
-// Bulk Flooring
-// .bulkflooring {
-//   .btn-primary {
-//     @extend %float-r;
-//     margin-left: 1em;
-//   }
-// }
-
 // Reports & Resources/Documents
 .auction-documents, .auction-reports {
   p {
@@ -68,9 +15,3 @@
     margin-bottom: 24px;
   }
 }
-
-// .auction-documents {
-//   .well-out {
-//     padding-bottom: 21px;
-//   }
-// }

@@ -2,41 +2,36 @@
   Business Search
 </h3>
 
-<!-- <div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
-  <span class="glyphicon glyphicon-remove"></span>
-</div> -->
-
 <div class="modal-body">
-  <form class="search-controls" name="dealerNameSearch">
-    <div class="control-group shorten">
-      <label class="control-label">Business Name</label>
-      <div class="controls">
-        <input type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
-        <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires">
-          Please enter at least 3 characters.
-        </label>
-      </div>
+  <form class="row-fluid form-block" name="dealerNameSearch">
+
+    <div class="span4">
+      <label>Business Name</label>
+      <input type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
+      <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires">
+        Please enter at least 3 characters.
+      </label>
     </div>
 
-    <div class="control-group shorten">
-      <label class="control-label">City</label>
-      <div class="controls">
-        <input type="text" id="businessSearchModalCity" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
-        <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern">City names must only have letters and spaces.</label>
-
-      </div>
+    <div class="span3">
+      <label>City</label>
+      <input type="text" id="businessSearchModalCity" class="input-medium" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
+      <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern">City names must only have letters and spaces.</label>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">State</label>
-      <div class="controls">
+    <div class="span3">
+      <label>State</label>
+      <div class="style-select auto">
         <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
           <option value=""></option>
         </select>
-        <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
-          <i class="glyphicon glyphicon-search"></i>
-        </button>
       </div>
+    </div>
+
+    <div class="span2">
+      <button class="btn float-r" ng-click="search()">
+        Search
+      </button>
     </div>
   </form>
 
@@ -51,40 +46,50 @@
        nxg-infinite-scroll-disabled="data.loading"
        nxg-infinite-scroll-show-indicator="data.loading"
        nxg-scroll-container>
-      <table>
+      <table class="table table-secondary table-striped">
         <thead>
-        <tr>
-          <th><div ng-click="sortBy('BusinessName')" class="bus-name sortable"
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessName')"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
             Business Name
-          </div></th>
-          <th><div ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessLegalName')"
               ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
             Legal Name
-          </div></th>
-          <th><div ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessNumber')"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-            Business&nbsp;#
-          </div></th>
-          <th><div ng-click="sortBy('City')" class="bus-city sortable"
+            Business
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('City')"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
             City
-          </div></th>
-          <th><div ng-click="sortBy('State')" class="bus-state sortable"
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('State')"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
             State
-          </div></th>
-          <th class="bus-select"></th>
-        </tr>
+            <span class="sortArrows"></span>
+          </th>
         </thead>
         <tbody>
           <tr ng-repeat="business in data.results">
-            <td class="bus-name" nxg-highlight="business.BusinessName" highlight="business.data.query"></td>
-            <td class="bus-legalName">{{ business.BusinessLegalName }}</td>
-            <td class="bus-num">{{ business.BusinessNumber }}</td>
-            <td class="bus-city">{{ business.City }}</td>
-            <td class="bus-state">{{ business.State }}</td>
-            <td class="bus-select"><a href class="btn btn-mini" ng-click="showCreditQuery(business)">Query</a></td>
+            <td class="value">
+              <a href ng-click="showCreditQuery(business)">
+                <span nxg-highlight="business.BusinessName" highlight="business.data.query"></span>
+              </a>
+            </td>
+            <td>{{ business.BusinessLegalName }}</td>
+            <td>{{ business.BusinessNumber }}</td>
+            <td>{{ business.City }}</td>
+            <td>{{ business.State }}</td>
           </tr>
         </tbody>
       </table>

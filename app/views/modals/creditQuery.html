@@ -3,48 +3,43 @@
 </h3>
 
 <section class="modal-body" nxg-autofocus>
-  <p class="modal-subtitle">Buyer Information</p>
+  <h3>Buyer Information</h3>
 
-  <table class="buyer-info">
-    <tr>
-      <th>Business Number</th>
-      <td>{{ business.number }}</td>
-    </tr>
-    <tr>
-      <th>Auction Access Number(s)</th>
-      <td>{{ business.auctionAccessNumbers }}</td>
-    </tr>
-    <tr>
-      <th>Business Name</th>
-      <td>{{ business.name }}</td>
-    </tr>
-    <tr>
-      <th>Address</th>
-      <td>
+  <ul class="list-table">
+    <li class="list-table-row">
+      <p class="span6">Business Number</p>
+      <p class="span6 value">{{ business.number }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Auction Access Number(s)</p>
+      <p class="span6 value">{{ business.auctionAccessNumbers }}</p>
+    </li>
+        <li class="list-table-row">
+      <p class="span6">Business Name</p>
+      <p class="span6 value">{{ business.name }}</p>
+    </li>
+    <li class="list-table-row">
+      <p class="span6">Address</p>
+      <p class="span6 value">
         {{ business.address }} <br/>
         {{ business.city }}, {{ business.state }} {{ business.zipCode }}
-      </td>
-    </tr>
-  </table>
+      </p>
+    </li>
+  </ul>
 
   <hr ng-show="business.creditQuery.retrieved" />
 
-  <table class="credit-values" ng-show="business.creditQuery.retrieved">
+  <p class="text-error" ng-show="business.creditQuery.error">{{ business.creditQuery.error }}</p>
+
+  <table class="table table-striped table-secondary" ng-show="business.creditQuery.retrieved">
     <thead>
-      <tr>
-          <th>Credit Type</th>
-          <th>Available Credit</th>
-      </tr>
+      <th>Credit Type</th>
+      <th>Available Credit</th>
     </thead>
-    <tbody>
-    <tr ng-show="business.creditQuery.error">
-        <td class="text-error">{{ business.creditQuery.error }}</td>
-    </tr>
     <tr ng-repeat="credit in business.creditQuery.results">
-        <td>{{ credit.CreditType }}</td>
-        <td>{{ credit.CreditAvailable | currency }}</td>
+      <td class="table-label center">{{ credit.CreditType }}</td>
+      <td class="table-value table-numeric">{{ credit.CreditAvailable | currency }}</td>
     </tr>
-    </tbody>
   </table>
 </section>
 
