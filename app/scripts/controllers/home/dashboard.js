@@ -6,8 +6,6 @@ angular.module('nextgearWebApp')
     segmentio.track(metric.VIEW_DASHBOARD);
 
 
-
-
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
 
