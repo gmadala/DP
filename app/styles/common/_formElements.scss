@@ -113,6 +113,11 @@ input[type="color"] {
   }
 }
 
+// inputs that are the full-width of parent
+.input-full {
+  width: 100%;
+}
+
 // Overriding Bootstrap's input-prepend class to make it work for us.
 .input-prepend.dollar .add-on{
   position: relative;

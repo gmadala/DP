@@ -37,7 +37,8 @@
         </div>
       </div>
 
-        <h2 class="form-separator center">or</h2>
+        <h2 class="span12
+        ">- OR -</h2>
 
       <div class="row-fluid">
         <div class="span8 form-block">
@@ -99,35 +100,35 @@
 
           <input type="text"
                  id="city"
+                 class="input-full"
                  ng-model="nameSearch.query.city"
                  ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
-
-          <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat">
-            City names must only have letters and spaces.
-          </label>
-
-          <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
-            Please enter a City or select a State.
-          </label>
         </div>
 
         <div class="span2">
-          <h2 class="form-separator center">or</h2>
+          <h2 class="form-separator center">- OR -</h2>
         </div>
 
-        <div class="span5">
+        <div class="span4">
           <label for="state">State</label>
-          <div class="style-select">
-            <select id="state" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
+          <div class="style-select auto">
+            <select id="state" class="input-medium" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
               <option value=""></option>
             </select>
           </div>
         </div>
       </div>
+      <div class="span12">
+        <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat">
+          City names must only have letters and spaces.
+        </label>
 
-      <div class="form-footer">
-        <button class="btn-cta cta-primary" type="submit" ng-click="nameSearch.search()">Search Dealers</button>
+        <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
+          Please enter a City or select a State.
+        </label>
       </div>
+
+      <button class="btn-cta cta-primary" type="submit" ng-click="nameSearch.search()">Search Dealers</button>
     </form>
   </div>
 </div>

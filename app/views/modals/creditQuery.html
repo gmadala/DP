@@ -45,7 +45,7 @@
 
 <div class="modal-footer">
   <button ng-click="close()" class="btn-cta" ng-class="{ 'cta-secondary': !business.creditQuery.requested, 'cta-primary': business.creditQuery.requested }" >
-    <span ng-show="business.creditQuery.requested">OK</span>
+    <span ng-show="business.creditQuery.requested">Close Window</span>
     <span ng-hide="business.creditQuery.requested">Cancel</span>
   </button>
   <button nxg-autofocus ng-click="business.creditQuery.get()"

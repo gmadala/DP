@@ -319,9 +319,12 @@ a, a:visited {
   font-weight: normal;
 }
 
+.text-list {
+  list-style-type: disc;
+  margin: 10px 10px 10px 30px;
+}
 
 // end design refactor (new stuff)
-
 
 
 ul {
@@ -356,15 +359,15 @@ label {
 }
 
 // looks like h4s in .well, but isn't part of .well
-.well-head {
-  @extend %thin;
-  background: #F1F1F1;
-  font-size: 1em;
-  line-height: $baseLineHeight;
-  color: $text;
-  padding: 5px 10px;
-  margin: 0;
-}
+// .well-head {
+//   @extend %thin;
+//   background: #F1F1F1;
+//   font-size: 1em;
+//   line-height: $baseLineHeight;
+//   color: $text;
+//   padding: 5px 10px;
+//   margin: 0;
+// }
 
 
 .headline {

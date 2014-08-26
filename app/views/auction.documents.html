@@ -1,24 +1,27 @@
 <div class="container-line">
-  <div class="container-fluid auction-documents">
+  <div class="container-fluid">
 
-    <p class="text-info">
-      Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
-    </p>
-
-    <div class="row-fluid">
-      <div class="span12 well">
-        <h4>NextGear Capital Documents</h4>
-        <ul class="well-out">
-          <li ng-repeat="doc in documents">
-            <a ng-href="{{ doc.url }}"
-               target="_blank"
-               nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
-               track-properties="{ documentName: doc.title }">
-              {{ doc.title }}
-            </a>
-          </li>
-        </ul>
+    <div class="info-block">
+      <div class="info-block-image">
+        <span nxg-icon="icon-info"></span>
       </div>
+      <p class="info-block-text">
+        Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
+      </p>
+    </div>
+
+    <div class="well">
+      <h2 class="well-title">NextGear Capital Documents</h2>
+      <ul class="text-list">
+        <li ng-repeat="doc in documents">
+          <a ng-href="{{ doc.url }}"
+             target="_blank"
+             nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
+             track-properties="{ documentName: doc.title }">
+            {{ doc.title }}
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

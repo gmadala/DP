@@ -4,7 +4,6 @@
 
 <div class="modal-body">
   <form class="row-fluid form-block" name="dealerNameSearch">
-
     <div class="span4">
       <label>Business Name</label>
       <input type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
@@ -29,11 +28,15 @@
     </div>
 
     <div class="span2">
-      <button class="btn float-r" ng-click="search()">
+      <button class="btn inline-submit" ng-click="search()">
         Search
       </button>
     </div>
   </form>
+
+  <div class="form-block">
+    <p class="paragraph">Select a business name below to query the account.</p>
+  </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
     <p class="no-results" ng-switch-when="false" ng-switch="!isQueryValid(data.query)">
@@ -101,5 +104,5 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-primary">Cancel</button>
+  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
 </div>
