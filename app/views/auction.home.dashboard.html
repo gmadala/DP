@@ -114,27 +114,16 @@
     </button>
   </div>
 </div>
-<div class="row-fluid auction-dashboard-chart">
+<div class="row-fluid">
   <div class="well">
     <h2 class="well-title">Volume of Past NextGear Floorplans</h2>
 
-    <div class="form-row cr-inline">
-      <label class="inline">Past:</label>
-
-      <input type="radio" class="first" name="year" id="year" value="year" ng-model="selectedFloorplanChart"/>
-      <label class="radio-img" for="year"></label>
-      <label class="cr-label" for="year">Year</label>
-
-      <input type="radio" name="month" id="month" value="month" ng-model="selectedFloorplanChart"/>
-      <label class="radio-img" for="month"></label>
-      <label class="cr-label" for="month">Month</label>
-
-      <input type="radio" class="last" name="week" id="week" value="week" ng-model="selectedFloorplanChart"/>
-      <label class="radio-img" for="week"></label>
-      <label class="cr-label" for="week">Week</label>
-
+    <div class="cta btn-toggle toggle-three">
+      <div class="btn-slider" ng-class="{ 'active-left': isYearMode(), 'active-center': isMonthMode(), 'active-right': isWeekMode() }"></div>
+      <button class="btn" ng-click="changeFloorplanChart('year')">Year</button>
+      <button class="btn" ng-click="changeFloorplanChart('month')">Month</button>
+      <button class="btn" ng-click="changeFloorplanChart('week')">Week</button>
     </div>
-
     <div class="chart-obj"
          nxg-chart
          nxg-chart-type="line"

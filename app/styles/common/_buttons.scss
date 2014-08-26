@@ -350,6 +350,8 @@ span.btn-help {
 /* TOGGLE BUTTON
  * A group of two buttons with a sliding div beneath,
  * to show which is selected.
+ * use .toggle-three in addition to .btn-toggle
+ * to build a three-option toggle element
  */
 .btn-toggle {
   @extend .clearfix;
@@ -390,15 +392,30 @@ span.btn-help {
 
     @include transition-duration(400ms);
     @include transition-timing-function(ease);
+    @include transition-property(left);
 
     &.active-left {
-      @include transition-property(left);
       left: 0;
     }
 
     &.active-right {
-      @include transition-property(right);
-      right: 0;
+      left: 68%;
+    }
+  }
+
+  &.toggle-three {
+    width: 300px;
+
+    .btn {
+      width: 33%;
+    }
+
+    .btn-slider {
+      width: 33%;
+
+      &.active-center {
+        left: 34%;
+      }
     }
   }
 }
