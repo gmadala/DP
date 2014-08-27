@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
       controller: 'NxgSearchCtrl'
     };
   })
-  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, User) {
+  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses) {
     $scope.showHelpText = ($attrs.helpText) ? true : false;
     $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? $attrs.showLocationFilter : false;
 
@@ -61,7 +61,7 @@ angular.module('nextgearWebApp')
 
     // if we have inventory locations to filter, set them here.
     $scope.inventoryLocations = [];
-    var locs = User.getInfo().FlooredBusinessAddresses || [];
+    var locs = Addresses.getFlooredBusinessAddresses();
 
     // Add default 'view all' options
     $scope.inventoryLocations.push({ label: 'View All', value: undefined });

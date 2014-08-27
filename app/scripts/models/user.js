@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses) {
     // Private
     var info = null,
       statics = null,
@@ -150,6 +150,7 @@ angular.module('nextgearWebApp')
             titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
+          Addresses.init(data.DealerAddresses || []);
           return statics;
         },
         function() {
@@ -186,6 +187,7 @@ angular.module('nextgearWebApp')
             titleLocationOptions: [],
             paymentMethods: []
           };
+          Addresses.init([]);
         });
       },
 
@@ -196,7 +198,11 @@ angular.module('nextgearWebApp')
       refreshInfo: function() {
         infoRequest = api.request('GET', '/Dealer/Info').then(function(data) {
           info = data;
+          Addresses.initFlooredBusinessAddresses(info.FlooredBusinessAddresses);
           return info;
+        },
+        function() {
+          Addresses.initFlooredBusinessAddresses([]);
         });
 
         return infoRequest;

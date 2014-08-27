@@ -9,36 +9,34 @@ describe('Directive: nxgSearch', function () {
     var ctrl,
       scope,
       attrs,
-      userMock;
+      AddressesMock;
 
     beforeEach(inject(function ($rootScope, $controller, User) {
       scope = $rootScope.$new();
 
       attrs = {};
-      userMock = {
-        getInfo: function() {
-          return {
-            FlooredBusinessAddresses: [
-              {
-                Line1: '123 Main St',
-                Line2: 'Apt 4',
-                City: 'Anytown',
-                State: 'NY'
-              },
-              {
-                Line1: '34 Elm St',
-                City: 'Anytown',
-                State: 'NY'
-              }
-            ]
-          }
+      AddressesMock = {
+        getFlooredBusinessAddresses: function() {
+          return [
+            {
+              Line1: '123 Main St',
+              Line2: 'Apt 4',
+              City: 'Anytown',
+              State: 'NY'
+            },
+            {
+              Line1: '34 Elm St',
+              City: 'Anytown',
+              State: 'NY'
+            }
+          ];
         }
       };
 
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
         $attrs: attrs,
-        User: userMock
+        User: AddressesMock
       });
     }));
 
@@ -55,7 +53,7 @@ describe('Directive: nxgSearch', function () {
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
         $attrs: attrs,
-        User: userMock
+        User: AddressesMock
       });
 
       scope.$apply();
