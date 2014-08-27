@@ -29,7 +29,7 @@ angular.module('nextgearWebApp')
           resolve: {
             response: function() {return response;}
           },
-          dialogClass: 'modal confirm-title-request',
+          dialogClass: 'modal modal-medium',
           backdrop: true,
           keyboard: false,
           backdropClick: false,

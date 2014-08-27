@@ -221,6 +221,10 @@ a, a:visited {
     border: 1px solid $tableBorder;
   }
 
+  .error-row {
+    border: 2px solid $danger;
+  }
+
   th, td {
     min-width: 100px;
     vertical-align: middle;
