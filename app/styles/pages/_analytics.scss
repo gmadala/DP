@@ -1,33 +1,33 @@
 
 
-/* Your Top Auctions Modal
-* views/modals/topAuctions.html
-*/
-.modal.top-auctions-modal {
-  width: 640px;
-  margin-left: -320px;
+// /* Your Top Auctions Modal
+// * views/modals/topAuctions.html
+// */
+// .modal.top-auctions-modal {
+//   width: 640px;
+//   margin-left: -320px;
 
-  h4 {
-    @extend %thin;
-    margin-left: 3px;
-  }
+//   h4 {
+//     @extend %thin;
+//     margin-left: 3px;
+//   }
 
-  thead {
-    @extend %thin;
-    font-size: $tiny-font-size;
-    color: $text;
-    background-color: #eaeaea;
-  }
+//   thead {
+//     @extend %thin;
+//     font-size: $tiny-font-size;
+//     color: $text;
+//     background-color: #eaeaea;
+//   }
 
-  .search-info {
-    padding-right: 10px;
-    margin-bottom: 20px;
-  }
+//   .search-info {
+//     padding-right: 10px;
+//     margin-bottom: 20px;
+//   }
 
-  .search-results {
-    padding-bottom: 1px;
-  }
-}
+//   .search-results {
+//     padding-bottom: 1px;
+//   }
+// }
 
 
 
