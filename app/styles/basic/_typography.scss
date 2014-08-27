@@ -198,7 +198,7 @@ a, a:link, a:visited {
     color: $text;
     display: block;
 
-    a {
+    a, a:link, a:visited {
       color: $highlight;
     }
   }
@@ -217,6 +217,7 @@ a, a:link, a:visited {
   }
 
   thead th {
+    vertical-align: middle;
     text-align: center;
     border: 1px solid $tableBorder;
   }

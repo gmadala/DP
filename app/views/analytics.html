@@ -39,10 +39,6 @@
             <p ng-show="showDetails">
               Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book
             </p>
-
-            <button ng-click="toggleDetails()" class="btn" nxg-track="{{showDetails && metric.CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK || ''}}">
-              {{ showDetails && 'Close' || 'Show'}} Details
-            </button>
           </div>
 
           <div class="span4 well-item">
@@ -90,9 +86,16 @@
         </div>
       </div>
     </section>
+    <button class="accordion-button paired-reversed" ng-click="toggleDetails()" ng-class="{ 'expanded': showDetails }" nxg-track="{{showDetails && metric.CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK || ''}}">
+      <span class="paired-body">
+        {{  {true:'Close ', false:'Show ' }[showDetails] }} Details
+      </span>
+      <span class="paired-media" ng-class="{ 'point-up':showDetails, 'point-down':!showDetails }" nxg-icon="icon-chevron">
+      </span>
+    </button>
 
     <section class="row-fluid">
-      <div class="span9 well average-turn-chart">
+      <div class="span9 well analytics-well average-turn-chart">
         <h2 class="well-title">Average Turn</h2>
 
         <div class="well-item">
@@ -107,7 +110,7 @@
         </div>
       </div>
 
-      <div class="span3 well aging-vehicles">
+      <div class="span3 well analytics-well">
         <h2 class="well-title">Stale & Aging Vehicles</h2>
 
         <div class="well-item">
@@ -199,21 +202,23 @@
 
       <div class="span6 well top-auctions-container">
         <h2 class="well-title">Your Top 10 Auctions</h2>
-        <p>Number of Cars Purchased Per-Auction (in the last 12 months)</p>
+        <div class="well-item">
+          <h4>Number of Cars Purchased Per-Auction (in the last 12 months)</h4>
 
-        <button href class="btn" ng-click="openTopAuctions()" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON}}">
-          <span nxg-icon="icon-eye"></span>
-          View All Auctions
-        </button>
-        <div class="auctions-chart">
-          <div class="chart-obj"
-               nxg-chart
-               nxg-chart-type="bar"
-               nxg-chart-data-name="# Purchased"
-               nxg-chart-description-x="# of Cars Purchased"
-               nxg-chart-data="analytics.top10Auctions"
-               nxg-chart-labels="true"
-               nxg-chart-trim-labels="true">
+          <button href class="btn" ng-click="openTopAuctions()" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON}}">
+            <span nxg-icon="icon-eye"></span>
+            View All Auctions
+          </button>
+          <div class="auctions-chart">
+            <div class="chart-obj"
+                 nxg-chart
+                 nxg-chart-type="bar"
+                 nxg-chart-data-name="# Purchased"
+                 nxg-chart-description-x="# of Cars Purchased"
+                 nxg-chart-data="analytics.top10Auctions"
+                 nxg-chart-labels="true"
+                 nxg-chart-trim-labels="true">
+            </div>
           </div>
         </div>
       </div>

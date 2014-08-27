@@ -1,36 +1,4 @@
-
-
-// /* Your Top Auctions Modal
-// * views/modals/topAuctions.html
-// */
-// .modal.top-auctions-modal {
-//   width: 640px;
-//   margin-left: -320px;
-
-//   h4 {
-//     @extend %thin;
-//     margin-left: 3px;
-//   }
-
-//   thead {
-//     @extend %thin;
-//     font-size: $tiny-font-size;
-//     color: $text;
-//     background-color: #eaeaea;
-//   }
-
-//   .search-info {
-//     padding-right: 10px;
-//     margin-bottom: 20px;
-//   }
-
-//   .search-results {
-//     padding-bottom: 1px;
-//   }
-// }
-
-
-
+// ANALYTICS
 
 .nxg-analytics {
   .scale-description-x {
@@ -47,21 +15,10 @@
     }
   }
 
-  .business-summary {
-    table {
-      @extend %full-width;
-      font-size: $tiny-font-size;
-      margin: 0.3em 0 1em;
-
-      tr td:last-child {
-        @extend %align-right;
-        @extend %heavy;
-      }
-    }
-  }
-
-  table.movers-list {
+// highly specific because we're basically making our own legend to work with highcharts.
+  .movers-list {
     position: absolute;
+    background: transparent;
     top: 120px;
     left: 10px;
     width: calc(100% - 348px);
