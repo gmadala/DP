@@ -192,15 +192,15 @@ a, a:link, a:visited {
   }
 
   // Classes for data types within table cells
-  .lockup-major {
+  .lockup-major,  {
     font-weight: bold;
     font-size: 14px;
     color: $text;
     display: block;
+  }
 
-    a, a:link, a:visited {
-      color: $highlight;
-    }
+  a.lockup-major, a.lockup-major:visited {
+    color: $highlight;
   }
 
   .lockup-minor {
