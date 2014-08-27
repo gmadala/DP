@@ -193,7 +193,6 @@ a, a:link, a:visited {
 
   // Classes for data types within table cells
   .lockup-major,  {
-    font-weight: bold;
     font-size: 14px;
     color: $text;
     display: block;
@@ -290,6 +289,7 @@ a, a:link, a:visited {
   margin: 20px 0;
 }
   .lockup-major {
+    font-weight: bold;
     color: #666666;
     margin-bottom: 3px;
   }
@@ -330,21 +330,21 @@ a, a:link, a:visited {
   margin: 10px 10px 10px 30px;
 }
 
-// end design refactor (new stuff)
+
+.headline { // only used on login page
+  @extend %heavy;
+  font-size: $large-font-size;
+  margin-bottom: 0;
+}
+
+.tip { // only used in search directive
+  font-size: $tiny-font-size;
+  line-height: 1.1;
+}
 
 
 ul {
   list-style-type: none;
-}
-
-.boxed {
-  @extend %thin;
-  font-size: 20px;
-  line-height: 1;
-  color: $text;
-  padding: 10px 10px 12px;
-  border: 1px solid #ddd;
-  margin-bottom: 0;
 }
 
 // override Bootstrap; we don't need pointers on labels.
@@ -358,27 +358,4 @@ label {
     cursor: pointer;
   }
 
-}
-
-// looks like h4s in .well, but isn't part of .well
-// .well-head {
-//   @extend %thin;
-//   background: #F1F1F1;
-//   font-size: 1em;
-//   line-height: $baseLineHeight;
-//   color: $text;
-//   padding: 5px 10px;
-//   margin: 0;
-// }
-
-
-.headline {
-  @extend %heavy;
-  font-size: $large-font-size;
-  margin-bottom: 0;
-}
-
-.tip {
-  font-size: $tiny-font-size;
-  line-height: 1.1;
 }
