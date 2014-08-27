@@ -397,7 +397,7 @@ span.btn-help {
     }
 
     &.active-right {
-      left: 68%;
+      left: 51%;
     }
   }
 
@@ -413,6 +413,10 @@ span.btn-help {
 
       &.active-center {
         left: 34%;
+      }
+
+      &.active-right {
+        left: 68%;
       }
     }
   }
