@@ -179,7 +179,7 @@ angular.module('nextgearWebApp')
             paymentsTitle: {
               useHTML: true,
               floating: true,
-              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">this ' + $scope.viewMode + '</p>',
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">This ' + $filter('capitalize')($scope.viewMode) + '</p>',
               y: 75
             }
           };
