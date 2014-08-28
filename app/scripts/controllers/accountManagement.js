@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, segmentio, metric, User, api, $q, customerSupportPhone) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, segmentio, metric, User, api, $q, customerSupportPhone) {
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
@@ -137,16 +137,18 @@ angular.module('nextgearWebApp')
           },
         };
 
+        var titleAddresses = Addresses.getTitleAddresses();
         /** TITLE SETTINGS **/
         $scope.title = {
           data: {
-            longFormatAddressText: results,
-            titleAddress: results.CurrentTitleReleaseAddress,
-            addresses: _.filter(results.Addresses, function(addr) {
+            titleAddress: _.filter(titleAddresses, function(addr) {
+              return (addr.IsTitleReleaseAddress === true);
+            })[0],
+            addresses: _.filter(titleAddresses, function(addr) {
               return (addr.IsTitleReleaseAddress === false);
             }),
-            extraAddresses: results.Addresses.length > 4 ? results.Addresses.length - 4 : 0, // show 3, but '>4' to account for selected address
-            addressCount: results.Addresses.length
+            extraAddresses: titleAddresses.length > 4 ? titleAddresses.length - 4 : 0, // show 3, but '>4' to account for selected address
+            addressCount: titleAddresses.length
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -167,7 +169,7 @@ angular.module('nextgearWebApp')
               this.updateAddressSelection();
               var d = this.dirtyData;
 
-              AccountManagement.saveTitleAddress(d.titleAddress.BusinessAddressId).then(
+              AccountManagement.saveTitleAddress(d.titleAddress.AddressId).then(
                 prv.saveSuccess.bind(this)
               );
             }
@@ -181,20 +183,16 @@ angular.module('nextgearWebApp')
             return title.validation.$valid;
           },
           updateAddressSelection: function() {
-            var selectedId = this.dirtyData.titleAddress.BusinessAddressId;
+            var selectedId = this.dirtyData.titleAddress.AddressId;
             for (var i = 0; i < this.dirtyData.addresses.length; i++) {
-              if (selectedId === this.dirtyData.addresses[i].BusinessAddressId) {
+              if (selectedId === this.dirtyData.addresses[i].AddressId) {
                 this.dirtyData.titleAddress = this.data.addresses[i];
-
               }
             }
             //need to refresh dirtyData.addresses
-            this.dirtyData.addresses = _.filter(results.Addresses, function(addr) {
-              return (addr.BusinessAddressId !== selectedId);
+            this.dirtyData.addresses = _.filter(titleAddresses, function(addr) {
+              return (addr.AddressId !== selectedId);
             });
-          },
-          toShortAddress: function(address) {
-            return address ? address.Line1 + (address.Line2 ? ' ' + address.Line2 : '') + ' / ' + address.City + ' ' + address.State : '';
           }
         };
       },

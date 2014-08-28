@@ -80,8 +80,8 @@
               <div class="controls" ng-show="title.editable">
                 <div class="style-select">
                   <select ng-model="title.dirtyData.titleAddress"
-                          ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
-                          tooltip="{{ addr.ShortAddress }}"
+                          ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
+                          tooltip="{{ addr | address:'oneLine' }}"
                           tooltip-placement="right"
                           tooltip-popup-delay="700">
                   </select>

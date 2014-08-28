@@ -199,11 +199,11 @@
               <label class="control-label" for="titleAddr">Default Address:</label>
               <div class="style-select" ng-show="title.editable">
                 <select ng-model="title.dirtyData.titleAddress"
-                        ng-options="title.toShortAddress(addr) for addr in title.data.addresses"
-                        tooltip="{{ addr.ShortAddress }}"
                         tooltip-placement="right"
                         tooltip-popup-delay="700">
                 </select>
+                            ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
+                            tooltip="{{ addr | address:'oneLine' }}"
               </div>
               <button class="btn-help"
                 tooltip-placement="right"

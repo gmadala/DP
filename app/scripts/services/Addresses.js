@@ -22,6 +22,7 @@ angular.module('nextgearWebApp')
         addresses = addr;
       },
       getAddresses: function(active, physical, titleRelease) {
+        // Returns addresses filtered by any or all of these possible params.
         return addresses.filter(function(item) {
           return (isNullOrUndefined(physical) || item.IsPhysicalInventory === physical) &&
             (isNullOrUndefined(active) || item.IsActive === active) &&
@@ -29,9 +30,11 @@ angular.module('nextgearWebApp')
         });
       },
       getActivePhysical: function() {
+        // Returns addresses that are active and physical
         return this.getAddresses(true /*active*/, true /*physical*/, null);
       },
       getTitleAddresses: function() {
+        // returns addresses that are active and physical, but filters out PO boxes
         return this.getActivePhysical().filter(function(item) {
           return !PO_BOX_REGEX.test(item.Line1.toLowerCase());
         });
