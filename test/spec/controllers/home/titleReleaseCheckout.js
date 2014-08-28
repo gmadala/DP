@@ -13,7 +13,7 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     scope,
     floorplanMock,
     dialogMock,
-    titleAddressesMock,
+    AddressesMock,
     state,
     queue = [];
 
@@ -36,12 +36,16 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       clearQueue: angular.noop,
       getTitleReleaseEligibility: angular.noop
     };
-    titleAddressesMock = {
-      getAddresses: function(){
+    AddressesMock = {
+      getTitleAddresses: function(){
+        return [
+          { AddressId: '1' },
+          { AddressId: '2' }
+        ];
+      },
+      getDefaultTitleAddress: function() {
         return {
-          then: function(callback) {
-            callback([{Address: 1}, {Address:2}]);
-          }
+          AddressId: 'foo'
         };
       }
     };
@@ -68,7 +72,7 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       TitleReleases: titleReleasesMock,
       Floorplan: floorplanMock,
       $dialog: dialogMock,
-      TitleAddresses: titleAddressesMock
+      Addresses: AddressesMock
     });
 
   }));
@@ -98,8 +102,8 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
 
   });
 
-  it('should get title release addresses in a promise', function() {
-    expect(typeof scope.addresses.then).toBe('function');
+  it('should get title release addresses', function() {
+    expect(scope.addresses).toBeDefined();
   });
 
   it('should set getVehicleDescription to point to the Floorplan method', function() {
