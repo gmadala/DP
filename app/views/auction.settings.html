@@ -30,7 +30,7 @@
             <label class="span4 " for="setPassword"><span ng-show="editable">New </span>Password</label>
             <div class="span8">
               <div class="static" ng-hide="profile.editable">***********</div>
-              <div class="controls" ng-show="profile.editable">
+              <div ng-show="profile.editable">
                 <input type="password" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                   <button class="btn-help"
                           id="password-help-tooltip"
@@ -48,7 +48,7 @@
 
           <div class="row-fluid" ng-show="profile.editable">
             <label class="span4 " for="confirmPassword">Confirm Password</label>
-            <div class="span8 controls">
+            <div class="span8">
               <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
               <label class="text-error" ng-show="profile.validation.setPassword.$error.nomatch">
                 The passwords do not match. Please re-enter the password.
@@ -81,7 +81,7 @@
             <!-- Answer -->
             <div class="row-fluid" ng-show="profile.editable">
               <label class="span4 " for="secAnswer">Answer</label>
-              <div class="span8 controls">
+              <div class="span8">
                 <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
                 <label class="text-error" ng-show="question.$error.required">
                   Please enter an Answer.
@@ -95,7 +95,7 @@
 
           <div class="row-fluid">
             <label class="span4 " for="email">Email</label>
-            <div class="span8 controls" nxg-input model="profile.data.email" editable="profile.editable">
+            <div class="span8" nxg-input model="profile.data.email" editable="profile.editable">
               <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
               <label class="text-error" ng-show="profile.validation.email.$invalid">
                 Please enter a valid email address.
@@ -105,7 +105,7 @@
 
           <div class="row-fluid">
             <label class="span4 " for="phone">Phone</label>
-            <div class="span8 controls" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
+            <div class="span8" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
               <input type="tel"
                      name="phone"
                      ng-model="profile.dirtyData.phone"
@@ -131,7 +131,7 @@
         <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
           <div class="row-fluid">
             <label class="span4" for="businessEmail">Business Email</label>
-            <div class="span8 controls" nxg-input model="business.data.email" editable="business.editable">
+            <div class="span8" nxg-input model="business.data.email" editable="business.editable">
               <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
               <label class="text-error" ng-show="business.validation.businessEmail.$invalid">
                   Please enter a valid email address.
@@ -144,8 +144,8 @@
             <div class="span8">
               <!-- Show "Yes" if enhanced registration is enabled.
               If it is not enabled, show nothing. -->
-              <div class="" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
-              <div class="" ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
+              <div ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+              <div ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
 
               <div class="cr-inline" ng-show="business.editable">
                 <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
@@ -167,7 +167,7 @@
 
           <div class="row-fluid" ng-show="business.editable">
             <label class="span4">Enhanced Registration PIN</label>
-            <div class="span8 controls">
+            <div class="span8">
               <input type="text"
                      id="pin"
                      name="pin"
@@ -281,7 +281,7 @@
 
               <div class="span8">
                 <p>
-                  <span class="" ng-repeat="d in n.DeliveryMethods">
+                  <span ng-repeat="d in n.DeliveryMethods">
                   {{ d.DeliveryMethodName }}<span ng-show="$index < n.DeliveryMethods.length - 1">, </span>
                   </span>
                 </p>
@@ -292,19 +292,17 @@
             <!-- Edit -->
             <li class="row-fluid" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
               <div class="span4">{{ n.Name }}</div>
-              <div class="span8">
-                <div class="cr-inline">
-                  <span ng-repeat="d in n.DeliveryMethods">
-                    <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
-                    <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
-                    <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
-                  </span>
-                </div>
+              <div class="span8 cr-inline">
+                <span ng-repeat="d in n.DeliveryMethods">
+                  <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
+                  <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
+                  <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                </span>
               </div>
             </li>
           </ul>
         </form>
       </section>
     </div>
-  </div><!-- end .container-fluid.settings -->
+  </div><!-- end .container-fluid -->
 </div><!-- end .container-line -->
