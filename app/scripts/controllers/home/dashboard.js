@@ -151,7 +151,17 @@ angular.module('nextgearWebApp')
             'LineOfCreditAmount': 0,
             'TempLineOfCreditAmount': 0,
             'TempLineOfCreditExpiration': '2014-09-16T23:59:00',
-            'AvailableCreditAmount': 0
+            'AvailableCreditAmount': 0,
+            'CreditChartData' :{
+              outer: [
+                { color: '#9F9F9F', y: 5 },
+                { color: '#575757', y: 5 }
+              ],
+              inner: [
+                { color: '#3D9AF4', y: 4 },
+                { color: '#54BD45', y: 4 }
+              ]
+            }
           };
 
           $scope.dashboardData = result;
