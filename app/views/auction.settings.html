@@ -226,10 +226,8 @@
                     tooltip-animation="true">?</button>
               </div>
               <!-- Current Address Selection-->
-              <div class="controls static" ng-show="title.editable">
-                  <p>{{title.dirtyData.titleAddress.Line1}}<br/>
-                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}<br/></span>
-                  {{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</p>
+              <div class="static" ng-show="title.editable">
+                <div nxg-address="title.dirtyData.titleAddress"></div>
               </div>
 
               <div class="control-group" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
@@ -237,9 +235,6 @@
                 <div class="controls static" ng-hide="title.editable">
                   <ul ng-show="title.data.addresses.length > 0">
                     <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
-                      <span ng-show="addr.Line1">{{ addr.Line1 }}<br/></span>
-                      <span ng-show="addr.Line2">{{ addr.Line2 }}<br/></span>
-                      <span ng-show="addr.City">{{ addr.City }},</span> {{ addr.State }} {{ addr.Zip }}
                     </li>
                     <li ng-show="title.data.extraAddresses">And {{ title.data.extraAddresses }} additional addresses...</li>
                   </ul>
@@ -248,6 +243,7 @@
                   </p>
                 </div>
               </div>
+                  <div nxg-address="addr"></div>
             </div>
           </form>
         </div><!-- end .well-out -->

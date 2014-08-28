@@ -96,11 +96,7 @@
 
               <!-- Saved Address -->
               <div class="controls static clearfix" ng-hide="title.editable">
-                  <p>
-                    {{title.data.titleAddress.Line1}}<br/>
-                    <span ng-show="title.dirtyData.titleAddress.Line2">{{title.data.titleAddress.Line2}}<br/></span>
-                    {{title.data.titleAddress.City}}, {{title.data.titleAddress.State}} {{title.data.titleAddress.Zip}}
-                  </p>
+                  <div nxg-address="title.data.titleAddress"></div>
                   <button class="btn-help" ng-show="title.data.addresses.length == 0"
                     tooltip-placement="right"
                     tooltip-trigger="focus"
@@ -110,9 +106,7 @@
               </div>
               <!-- Current Address Selection-->
               <div class="controls static pushed" ng-show="title.editable">
-                  <p>{{title.dirtyData.titleAddress.Line1}}<br/>
-                  <span ng-show="title.dirtyData.titleAddress.Line2">{{title.dirtyData.titleAddress.Line2}}<br/></span>
-                  {{title.dirtyData.titleAddress.City}}, {{title.dirtyData.titleAddress.State}} {{title.dirtyData.titleAddress.Zip}}</p>
+                <div nxg-address="title.dirtyData.titleAddress"></div>
               </div>
             </div>
 
@@ -121,9 +115,7 @@
               <div class="controls static" ng-hide="title.editable">
                 <ul>
                   <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
-                    <span ng-show="addr.Line1">{{ addr.Line1 }}<br/></span>
-                    <span ng-show="addr.Line2">{{ addr.Line2 }}<br/></span>
-                    <span ng-show="addr.City">{{ addr.City }},</span> {{ addr.State }} {{ addr.Zip }}
+                    <div nxg-address="addr"></div
                   </li>
                   <li ng-show="title.data.extraAddresses">And {{ title.data.extraAddresses }} additional addresses...</li>
                 </ul>
