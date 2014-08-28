@@ -141,9 +141,7 @@ angular.module('nextgearWebApp')
         /** TITLE SETTINGS **/
         $scope.title = {
           data: {
-            titleAddress: _.filter(titleAddresses, function(addr) {
-              return (addr.IsTitleReleaseAddress === true);
-            })[0],
+            titleAddress: Addresses.getDefaultTitleAddress(),
             addresses: _.filter(titleAddresses, function(addr) {
               return (addr.IsTitleReleaseAddress === false);
             }),

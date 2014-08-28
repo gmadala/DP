@@ -176,7 +176,7 @@
           </div>
 
           <label for="inputDisburseAcct">Bank Account for Disbursement (when applicable)</label>
-          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
+          <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
             <select id="inputDisburseAcct"
                     name="inputDisburseAcct"
                     ng-model="data.BankAccountId"

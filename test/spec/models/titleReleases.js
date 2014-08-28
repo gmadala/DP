@@ -10,13 +10,13 @@ describe('Model: TitleReleases', function () {
     httpBackend,
     rootScope,
     data,
-    TitleAddresses,
+    Addresses,
     urlParser,
     $q;
 
-  beforeEach(inject(function ($httpBackend, _TitleAddresses_, _$q_, URLParser) {
+  beforeEach(inject(function ($httpBackend, _Addresses_, _$q_, URLParser) {
     httpBackend = $httpBackend;
-    TitleAddresses = _TitleAddresses_;
+    Addresses = _Addresses_;
     $q = _$q_;
     urlParser = URLParser;
 
@@ -108,11 +108,11 @@ describe('Model: TitleReleases', function () {
 
     titleReleases.addToQueue({
       FloorplanId: '10',
-      overrideAddress: {BusinessAddressId: 1}
+      overrideAddress: {AddressId: 1}
     });
     titleReleases.addToQueue({
       FloorplanId: '11',
-      overrideAddress: {BusinessAddressId: 2}
+      overrideAddress: {AddressId: 2}
     });
     httpBackend.expectPOST('/titleRelease/RequestTitleRelease').respond(function(method, path, data) {
       request = angular.fromJson(data);
@@ -134,17 +134,16 @@ describe('Model: TitleReleases', function () {
   });
 
   it('should fetch the default address if one or more floorplans does not have an override address', function() {
-
     var request;
 
-    spyOn(TitleAddresses, 'getDefaultAddress').andReturn($q.when({BusinessAddressId: 12}));
+    spyOn(Addresses, 'getDefaultTitleAddress').andReturn({AddressId: 12});
 
     titleReleases.addToQueue({
       FloorplanId: '10'
     });
     titleReleases.addToQueue({
       FloorplanId: '11',
-      overrideAddress: {BusinessAddressId: 2}
+      overrideAddress: {AddressId: 2}
     });
     httpBackend.expectPOST('/titleRelease/RequestTitleRelease').respond(function(method, path, data) {
       request = angular.fromJson(data);
@@ -156,7 +155,7 @@ describe('Model: TitleReleases', function () {
     });
     titleReleases.makeRequest();
     rootScope.$apply();
-    expect(TitleAddresses.getDefaultAddress).toHaveBeenCalled();
+    expect(Addresses.getDefaultTitleAddress).toHaveBeenCalled();
     expect(httpBackend.flush).not.toThrow();
     expect(request).toEqual({
       TitleReleases: [
@@ -167,7 +166,6 @@ describe('Model: TitleReleases', function () {
   });
 
   describe('search method', function () {
-
     var paginate,
       defaultCriteria,
       searchResults = [],
@@ -357,12 +355,7 @@ describe('Model: TitleReleases', function () {
 
         expect(result.Floorplans[2].FlooringDate).not.toBeDefined();
         expect(result.Floorplans[2].DaysFloored).not.toBeDefined();
-
-
       });
-
     });
-
   });
-
 });

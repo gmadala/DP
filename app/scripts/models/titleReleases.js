@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('TitleReleases', function(api, TitleAddresses, $q, Paginate, moment) {
+  .factory('TitleReleases', function(api, Addresses, $q, Paginate, moment) {
 
     var eligibilityLoading = false;
 
@@ -62,31 +62,29 @@ angular.module('nextgearWebApp')
       },
 
       makeRequest: function() {
-
         // Get the default address to send with non-overridden floorplans
         var needDefaultAddress = !_.every(queue, function(floorplan) {
           return floorplan.overrideAddress;
         });
-        var getDefaultAddress;
-        if(needDefaultAddress){
-          getDefaultAddress = TitleAddresses.getDefaultAddress();
-        } else {
-          getDefaultAddress = $q.when(true);
-        }
 
         // Get the default address (if needed) and make the API request
-        return getDefaultAddress.then(function(defaultAddress) {
-          var floorplans = _.map(queue, function(floorplan) {
-            return {
-              FloorplanId: floorplan.FloorplanId,
-              ReleaseAddressId: floorplan.overrideAddress ? floorplan.overrideAddress.BusinessAddressId : defaultAddress.BusinessAddressId
-            };
-          });
-          var data = {
-            TitleReleases: floorplans
+        var defaultAddress;
+        if(needDefaultAddress){
+          defaultAddress = Addresses.getDefaultTitleAddress();
+        }
+
+        var floorplans = _.map(queue, function(floorplan) {
+          return {
+            FloorplanId: floorplan.FloorplanId,
+            ReleaseAddressId: floorplan.overrideAddress ? floorplan.overrideAddress.AddressId : defaultAddress.AddressId
           };
-          return api.request('POST', '/titleRelease/RequestTitleRelease', data);
         });
+
+        var data = {
+          TitleReleases: floorplans
+        };
+
+        return api.request('POST', '/titleRelease/RequestTitleRelease', data);
       },
       search: function (criteria, paginator) {
         var params = {

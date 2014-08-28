@@ -38,6 +38,12 @@ angular.module('nextgearWebApp')
         return this.getActivePhysical().filter(function(item) {
           return !PO_BOX_REGEX.test(item.Line1.toLowerCase());
         });
+      },
+      getDefaultTitleAddress: function() {
+        // returns the default title release address (there is only ever 1 address with IsTitleReleaseAddress == true
+        return this.getTitleAddresses().filter(function(item) {
+          return item.IsTitleReleaseAddress;
+        })[0];
       }
     };
   });

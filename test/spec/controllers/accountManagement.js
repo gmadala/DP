@@ -47,6 +47,19 @@ describe('Controller: AccountManagementCtrl', function () {
             Phone: '2143301800'
           }
         ];
+      },
+      getDefaultTitleAddress: function() {
+        return {
+          BusinessAddressId: 'be9b22cb-5896-4356-86a0-e932293faa6a',
+            City: 'Dallas',
+          Fax: '2143399361',
+          IsTitleReleaseAddress: true,
+          Line1: '5333 West Kiest Blvd',
+          Line2: null,
+          State: 'TX',
+          Zip: '75236',
+          Phone: '2143301800'
+        }
       }
     };
 

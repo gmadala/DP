@@ -173,8 +173,8 @@ angular.module('nextgearWebApp')
           $scope.creditLineOpts = [viewAllCredit];
           $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
-          if ($scope.dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null ) {
-              $scope.dashboardData.selectedLineOfCredit.CreditTypeName = $scope.dashboardData.selectedLineOfCredit.CreditTypeName + ' ( temp )';
+          if ($scope.dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration !== null ) {
+            $scope.dashboardData.selectedLineOfCredit.CreditTypeName = $scope.dashboardData.selectedLineOfCredit.CreditTypeName + ' ( temp )';
           }
 
           /* Loop through all of the Lines of Credit */
