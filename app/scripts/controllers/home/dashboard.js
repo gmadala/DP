@@ -190,11 +190,11 @@ angular.module('nextgearWebApp')
             viewAllCredit.CreditChartData.inner[0].y += allCreditUtilized;
             viewAllCredit.CreditChartData.inner[1].y += selectedViewAll.AvailableCreditAmount;
 
+            /* set calculated values for View All select option */
             viewAllCredit.LineOfCreditAmount += selectedViewAll.LineOfCreditAmount;
             viewAllCredit.TempLineOfCreditAmount += selectedViewAll.TempLineOfCreditAmount;
             viewAllCredit.AvailableCreditAmount += selectedViewAll.AvailableCreditAmount;
             viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
-
           }
 
           $scope.chartData = {
