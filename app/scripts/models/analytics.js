@@ -56,16 +56,17 @@ angular.module('nextgearWebApp')
               );
 
               // Parse aging data into a segmented counts
-              result.aging = [0, 0, 0, 0, 0];
+              result.aging = [0, 0, 0, 0, 0, 0];
               _.each(
                 responses[1],
                 function ( item ) {
                   var age = item.DaysOnFloor;
-                  if (age >= 100)                  {  result.aging[4]++; }
-                  else if (age >= 75 && age <= 99) {  result.aging[3]++; }
+                  if (age >= 100)                  {  result.aging[5]++; }
+                  else if (age >= 75 && age <= 99) {  result.aging[4]++; }
                   else if (age >= 50 && age <= 74) {  result.aging[2]++; }
-                  else if (age >= 25 && age <= 49) {  result.aging[1]++; }
-                  else if (age <= 24)              {  result.aging[0]++; }
+                  else if (age >= 25 && age <= 49) {  result.aging[2]++; }
+                  else if (age >= 1 && age <= 24)  {  result.aging[1]++; }
+                  else if (age >= 0)               {  result.aging[0]++; }
                 }
               );
 
