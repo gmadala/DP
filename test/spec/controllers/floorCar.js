@@ -13,6 +13,7 @@ describe('Controller: FloorCarCtrl', function () {
     dialog,
     location,
     blackbook,
+    AddressesMock,
     mockForm;
 
   // Initialize the controller and a mock scope
@@ -38,6 +39,12 @@ describe('Controller: FloorCarCtrl', function () {
       }
     };
 
+    AddressesMock = {
+      getActivePhysical: function() {
+        return [];
+      }
+    }
+
     mockForm = {
       $valid: true,
       inputMileage: {}
@@ -51,6 +58,7 @@ describe('Controller: FloorCarCtrl', function () {
         $dialog: dialog,
         $location: location,
         Blackbook: blackbook,
+        Addresses: AddressesMock
       });
     }
   }));
