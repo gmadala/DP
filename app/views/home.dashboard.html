@@ -250,7 +250,7 @@
             </tr>
           </table>
         </div>
-        <p>This line of credit expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}</p>
+        <p ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null">This line of credit expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}</p>
       </div>
     </div>
     <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON}}">

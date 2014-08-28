@@ -85,6 +85,7 @@ angular.module('nextgearWebApp')
     // to fit inside the pie charts on the dashboard.
     // This method is a terrible separation of view/controller, but
     // it's necessary to shrink numbers that don't fit.
+    // TODO: how can we make this work currently?
     $scope.tooLong = function(number, format) {
       if($filter('numeral')(number, format).length >= 7) {
         return true;
@@ -131,6 +132,8 @@ angular.module('nextgearWebApp')
       }
     });
 
+
+
     /**
      * Flow of control is a little weird here, because the calendar's current visible
      * date range controls what displays in several dashboard elements (and is a
@@ -150,8 +153,9 @@ angular.module('nextgearWebApp')
             'LineOfCreditId': '0',
             'LineOfCreditAmount': 0,
             'TempLineOfCreditAmount': 0,
-            'TempLineOfCreditExpiration': '2014-09-16T23:59:00',
+            'TempLineOfCreditExpiration': null,
             'AvailableCreditAmount': 0,
+            'UtilizedCreditAmount': 0,
             'CreditChartData' :{
               outer: [
                 { color: '#9F9F9F', y: 0 },
@@ -169,17 +173,28 @@ angular.module('nextgearWebApp')
           $scope.creditLineOpts = [viewAllCredit];
           $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
-          // Create the properties of the ViewAllCredit object by pushing array values
+          if ($scope.dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null ) {
+              $scope.dashboardData.selectedLineOfCredit.CreditTypeName = $scope.dashboardData.selectedLineOfCredit.CreditTypeName + ' ( temp )';
+          }
+
+          /* Loop through all of the Lines of Credit */
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
+            var selectedViewAll = $scope.dashboardData.LinesOfCredit[i];
+            var allCreditUtilized = (selectedViewAll.LineOfCreditAmount + selectedViewAll.TempLineOfCreditAmount) - selectedViewAll.AvailableCreditAmount;
+
             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
-            var allCreditUtilized = ($scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount + $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount) - $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
-            viewAllCredit.CreditChartData.outer[0].y +=  $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
-            viewAllCredit.CreditChartData.outer[1].y +=  $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
+
+            /* set the Chart values for View All select option */
+            viewAllCredit.CreditChartData.outer[0].y +=  selectedViewAll.LineOfCreditAmount;
+            viewAllCredit.CreditChartData.outer[1].y +=  selectedViewAll.TempLineOfCreditAmount;
             viewAllCredit.CreditChartData.inner[0].y += allCreditUtilized;
-            viewAllCredit.CreditChartData.inner[1].y += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
-            viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
-            viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
-            viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
+            viewAllCredit.CreditChartData.inner[1].y += selectedViewAll.AvailableCreditAmount;
+
+            viewAllCredit.LineOfCreditAmount += selectedViewAll.LineOfCreditAmount;
+            viewAllCredit.TempLineOfCreditAmount += selectedViewAll.TempLineOfCreditAmount;
+            viewAllCredit.AvailableCreditAmount += selectedViewAll.AvailableCreditAmount;
+            viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
+
           }
 
           $scope.chartData = {
