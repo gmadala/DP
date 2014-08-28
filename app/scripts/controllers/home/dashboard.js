@@ -128,7 +128,7 @@ angular.module('nextgearWebApp')
     $scope.$watch('dashboardData.selectedLineOfCredit', function(newValue, oldValue){
       if (newValue !== oldValue) {
         $scope.chartData.credit = newValue.CreditChartData;
-        $scope.chartData.creditTitle.text = '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>' ;
+        $scope.chartData.creditTitle.text = '<h2 class="chart-label-primary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h2> <p class="chart-label-primary">available</p>' ;
       }
     });
 
