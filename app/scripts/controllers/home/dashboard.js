@@ -154,12 +154,12 @@ angular.module('nextgearWebApp')
             'AvailableCreditAmount': 0,
             'CreditChartData' :{
               outer: [
-                { color: '#9F9F9F', y: 5 },
-                { color: '#575757', y: 5 }
+                { color: '#9F9F9F', y: 0 },
+                { color: '#575757', y: 0 }
               ],
               inner: [
-                { color: '#3D9AF4', y: 4 },
-                { color: '#54BD45', y: 4 }
+                { color: '#3D9AF4', y: 0 },
+                { color: '#54BD45', y: 0 }
               ]
             }
           };
@@ -172,6 +172,11 @@ angular.module('nextgearWebApp')
           // Create the properties of the ViewAllCredit object by pushing array values
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
             $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
+            var allCreditUtilized = ($scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount + $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount) - $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
+            viewAllCredit.CreditChartData.outer[0].y +=  $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
+            viewAllCredit.CreditChartData.outer[1].y +=  $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
+            viewAllCredit.CreditChartData.inner[0].y += allCreditUtilized;
+            viewAllCredit.CreditChartData.inner[1].y += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
             viewAllCredit.LineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].LineOfCreditAmount;
             viewAllCredit.TempLineOfCreditAmount += $scope.dashboardData.LinesOfCredit[i].TempLineOfCreditAmount;
             viewAllCredit.AvailableCreditAmount += $scope.dashboardData.LinesOfCredit[i].AvailableCreditAmount;
