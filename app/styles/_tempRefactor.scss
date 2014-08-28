@@ -298,6 +298,14 @@
   }
 }
 
+.settings-well {
+  padding-bottom: 20px;
+
+  [class*="span"] {
+    position: relative;
+  }
+}
+
 .details-well {
   height: 260px;
 }

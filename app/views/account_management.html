@@ -1,5 +1,5 @@
 <div class="container-line">
-  <div class="container-fluid settings account">
+  <div class="container-fluid">
     <div class="row-fluid">
 
       <section class="span6">
@@ -11,7 +11,8 @@
             <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.cancel()">Cancel</button>
             <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.save()">Save</button>
           </h2>
-          <form class="settings-opts well-item" ng-class="{ editable:business.editable }" name="busSettings">
+
+          <form class="well-item" ng-class="{ editable:business.editable }" name="busSettings">
             <div class="control-group">
               <label class="control-label business" for="businessEmail">Business Email</label>
               <div class="controls" nxg-input model="business.data.email" editable="business.editable">
