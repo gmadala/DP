@@ -99,7 +99,7 @@ angular.module('nextgearWebApp')
       if(filter) {
         param = {filter: filter};
       }
-      $state.transitionTo('home.payments', param);
+      $state.transitionTo('payments', param);
     };
 
     $scope.chartData = {};

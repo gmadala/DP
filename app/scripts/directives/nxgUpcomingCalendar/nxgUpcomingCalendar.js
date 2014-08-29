@@ -102,7 +102,7 @@ angular.module('nextgearWebApp')
             inner[0].addEventListener('click', (function(date) {
               return function() {
                 $scope.$apply(function() {
-                  $state.transitionTo('home.payments', {filter: moment(date).format('YYYY-MM-DD')});
+                  $state.transitionTo('payments', {filter: moment(date).format('YYYY-MM-DD')});
                 });
               };
             })(event.start), false);

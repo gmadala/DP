@@ -53,7 +53,7 @@ describe('Controller: DashboardCtrl', function () {
   });
 
   it('should have an onClickButtonLink method to move to a new state', function() {
-    scope.onClickButtonLink('home.payments');
+    scope.onClickButtonLink('payments');
     expect(mockState.transitionTo).toHaveBeenCalled();
   })
 
@@ -149,7 +149,7 @@ describe('Controller: DashboardCtrl', function () {
   it('should have a filterPayments method that goes to payments page with initial filter', function() {
     expect(typeof scope.filterPayments).toBe('function');
     scope.filterPayments('foofers');
-    expect(mockState.transitionTo).toHaveBeenCalledWith('home.payments', {filter: 'foofers'});
+    expect(mockState.transitionTo).toHaveBeenCalledWith('payments', {filter: 'foofers'});
   });
 
 });

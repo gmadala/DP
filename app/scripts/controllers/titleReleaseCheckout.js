@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
         $dialog.dialog(dialogOptions).open().then(function() {
           TitleReleases.clearQueue();
 
-          $state.transitionTo('home.titlereleases');
+          $state.transitionTo('titlereleases');
         });
       });
     };

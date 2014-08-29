@@ -304,7 +304,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         DaysOnFloorplan: detailsMock.FloorplanInfo.TotalDaysFloored,
         SellerName: detailsMock.FloorplanInfo.SellerName
       });
-      expect(state.transitionTo).toHaveBeenCalledWith('home.titleReleaseCheckout');
+      expect(state.transitionTo).toHaveBeenCalledWith('titleReleaseCheckout');
 
     });
   });

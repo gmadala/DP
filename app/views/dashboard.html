@@ -153,7 +153,7 @@
         </div>
       </li>
             </ul>
-      <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('home.payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
+      <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
         <span class="paired-body">View All Payments</span>
         <span class="paired-media" nxg-icon="icon-eye"></span>
       </button>
@@ -274,7 +274,7 @@
         <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
       </tr>
     </table>
-    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('home.receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
+    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
       <span class="paired-body">View All Receipts</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
@@ -302,7 +302,7 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=approved">Approved</a>
+              <a href="#/floorplan?filter=approved">Approved</a>
           </span>
         </div>
       </li>
@@ -317,7 +317,7 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=pending">Pending</a>
+              <a href="#/floorplan?filter=pending">Pending</a>
           </span>
         </div>
       </li>
@@ -332,13 +332,13 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=denied">Denied</a>
+              <a href="#/floorplan?filter=denied">Denied</a>
           </span>
         </div>
       </li>
     </ul>
 
-    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('home.floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
+    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
       <span class="paired-body">View Floorplans</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>

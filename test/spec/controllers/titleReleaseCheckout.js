@@ -129,7 +129,7 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       spyOn(state, 'transitionTo');
       scope.onConfirmRequest();
       expect(titleReleasesMock.clearQueue).toHaveBeenCalled();
-      expect(state.transitionTo).toHaveBeenCalledWith('home.titlereleases');
+      expect(state.transitionTo).toHaveBeenCalledWith('titlereleases');
     });
 
   });

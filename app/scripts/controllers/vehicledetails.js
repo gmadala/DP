@@ -14,7 +14,7 @@ angular.module('nextgearWebApp')
     $scope.isCollapsed = true;
 
     $scope.goToCheckout = function() {
-      $state.transitionTo('home.checkout');
+      $state.transitionTo('checkout');
     };
 
     $scope.onCancelScheduled = function() {
@@ -126,7 +126,7 @@ angular.module('nextgearWebApp')
 
         $scope.titleInfo.requestTitle = function() {
           TitleReleases.addToQueue(titleForCheckout);
-          $state.transitionTo('home.titleReleaseCheckout');
+          $state.transitionTo('titleReleaseCheckout');
         };
 
         // Grab data for flooring info section
