@@ -38,12 +38,18 @@ describe('Directive: navBar', function () {
         },
         infoPromise: function() {
           return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP })
+        },
+        isLoggedIn: function() {
+          return true;
         }
       };
       aMock = {
         isDealer: function(){ return false; },
         infoPromise: function() {
           return $q.when({ DisplayTitleReleaseProgram: false })
+        },
+        isLoggedIn: function() {
+          return true;
         }
       };
 

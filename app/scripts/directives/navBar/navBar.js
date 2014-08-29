@@ -27,27 +27,28 @@ angular.module('nextgearWebApp')
     },
     auctionLinks = {
       primary: [
-        { name: 'Dashboard', href: '#/act/home', activeWhen: 'auction_home.dashboard', metric: '' },
-        { name: 'Dealer Search', href: '#/act/home/dealersearch', activeWhen: 'auction_home.dealersearch', metric: '' },
-        { name: 'Floor a Vehicle', href: '#/act/home/bulkflooring', activeWhen: 'auction_home.bulkflooring', metric: '' },
-        { name: 'Seller Floor Plan Search', href: '#/act/home/sellerfloorplan', activeWhen: 'auction_home.sellerfloorplan', metric: '' },
+        { name: 'Dashboard', href: '#/act/home', activeWhen: 'auction_dashboard', metric: '' },
+        { name: 'Dealer Search', href: '#/act/dealersearch', activeWhen: 'auction_dealersearch', metric: '' },
+        { name: 'Floor a Vehicle', href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring', metric: '' },
+        { name: 'Seller Floor Plan Search', href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: '' },
         { name: 'View a Report', href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK },
         { name: 'Resources', href: '#/act/documents', activeWhen: 'auction_documents', metric: metric.CLICK_AUCTION_RESOURCES_LINK }
       ]
     };
 
     // Only show Title Release link if API says we should for this user
-    User.infoPromise().then(function(info) {
-      if(info.DisplayTitleReleaseProgram) {
-        dealerLinks.primary.splice(4, 0, {
-          name: 'Title Releases',
-          href: '#/titlereleases',
-          activeWhen: 'titlereleases',
-          metric: metric.CLICK_TITLE_RELEASE_LINK
-        });
-      }
-
-    });
+    if(User.isLoggedIn()) {
+      User.infoPromise().then(function(info) {
+        if(info.DisplayTitleReleaseProgram) {
+          dealerLinks.primary.splice(4, 0, {
+            name: 'Title Releases',
+            href: '#/titlereleases',
+            activeWhen: 'titlereleases',
+            metric: metric.CLICK_TITLE_RELEASE_LINK
+          });
+        }
+      });
+    }
 
     $scope.user = {
       isDealer: User.isDealer,

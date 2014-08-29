@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api) {
+  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api, $state) {
 
     segmentio.track(metric.VIEW_DASHBOARD);
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
@@ -41,6 +41,10 @@ angular.module('nextgearWebApp')
 
     $scope.isWeekMode = function() {
       return $scope.selectedFloorplanChart === 'week';
+    };
+
+    $scope.onClickButtonLink = function(state) {
+      $state.transitionTo(state);
     };
 
     $scope.viewDisbursementDetail = function(date) {
