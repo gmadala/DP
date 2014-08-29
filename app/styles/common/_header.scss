@@ -2,13 +2,22 @@
 // Header
 // ===============
 
-header > .row-fluid {
+.app-header {
+  @extend .row-fluid;
   background: $white;
-  padding-bottom: 10px;
+  margin-bottom: 20px;
+
+  &.login {
+    margin: 0;
+  }
 }
 
-.app-header {
-  margin: 10px auto 7px;
+.header {
+  @extend .row-fluid;
+
+  .span6 {
+    text-align: center;
+  }
 }
 
 .nxg-logo {
@@ -17,113 +26,114 @@ header > .row-fluid {
     background-image: url(../img/nxg_logo_blue_2x.png);
   }
   background-repeat: no-repeat;
-  background-size: 220px 50px;
+  background-size: 200px auto;
   background-position: 20px 0;
   height: 50px;
-  top: 0;
+  position: relative;
+  top: 10px;
   padding-top: 1px;
   z-index: 5;
 }
 
-.nxg-settings-drop {
-  @extend %small;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  color: $highlight;
-  padding: 10px;
-  border: 1px solid transparent;
-  z-index: 1;
+.nxg-dropdown {
+  @extend %align-right;
+  position: relative; // required for bootstrap's dropdown classes to work
+  padding: 10px 20px 10px 10px;
+
+  .dropdown-toggle:hover {
+    text-decoration: none;
+  }
+
+  // for the arrow.
+  &:after {
+    content: '';
+    @include box(0);
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid $highlight;
+  }
 
   &.open {
-    @include box-shadow(rgba(0,0,0,0.5) 0 4px 4px);
     background-color: $white;
-    border-color: $gray-b;
+  }
+
+  .dropdown-menu {
+    @include border-radius(0);
+    right: 0;
+    left: auto;
+    padding: 10px;
+
+    .btn {
+      margin: 10px 0 0;
+    }
   }
 }
 
-.nxg-settings.dropdown-menu {
-  @extend %full-width;
+.nav-primary, .nav-secondary {
+  @extend .inline-list;
+  margin: 0;
+
+  li a {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.nav-primary {
+  padding: 10px 0;
+
+  li {
+    padding: 0 10px;
+
+    a {
+      color: $white;
+      display: inline-block;
+      padding: 8px 10px 9px;
+
+      &.active {
+        border-bottom: 4px solid $primary;
+      }
+    }
+  }
+}
+
+.nav-secondary {
+  @include border-bottom-radius($borderRadius);
+  display: inline-block;
+  background-color: #ECECEC;
+  height: 40px;
+  width: auto;
   position: relative;
-  min-width: 100%;
-  padding: 0;
-  border: 0;
+  top: -1px;
+  border: 1px solid $border;
+  margin: 0 auto;
 
-  // these are to override bootstrap's default dropdown styling
-  @include border-radius(0);
-  @include box-shadow(0 0 0 rgba(0,0,0,0));
-  float: none;
-  background: transparent;
+  li {
+    padding: 5px 20px;
+    margin: 7px 0;
 
-  ul {
-    padding: 10px 10px 5px 5px;
-    margin: 0;
-  }
-
-  button {
-    margin-top: 10px;
-  }
-}
-
-.account-btn {
-  display: block;
-  position: absolute;
-  right: 20px;
-  height: 33px;
-  color: $highlight;
-  padding: 0 5px;
-  border: 0;
-
-  i {
-    font-size: 1.75em;
-
-    &:after {
-      content: '';
-      @include box(0);
-      display: block;
-      position: absolute;
-      right: -15px;
-      top: 10px;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid $highlight;
-    }
-  }
-
-  &:hover i:after {
-    border-top-color: $gray-8;
-  }
-}
-
-.chat {
-  @extend %align-right;
-  margin-top: 8px;
-
-  a {
-    @extend %small;
-    color: $highlight;
-    border: 0;
-
-    &:hover, &:active {
-      text-decoration: underline;
+    & + li {
+      border-left: 1px solid $border;
     }
 
-    i {
-      color: $highlight;
-      font-size: 15px;
-      margin-right: 4px;
+    a {
+      color: $accent;
+      font-size: 11px;
+
+      &:hover {
+        color: $text;
+      }
     }
   }
 }
 
-.dealer-info {
-  position: relative;
-
-  p, h6 {
-    @extend %align-right;
-    line-height: 1.35;
-    padding-right: 45px;
-    margin: 0;
-  }
+.nav-bkgd {
+  @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
+  height: 48px;
+  background-color: $highlight;
+  border-bottom: 3px solid $primary;
 }

@@ -77,10 +77,14 @@ describe('Directive: navBar', function () {
         expect(typeof scope.user.navLinks).toBe('function');
 
         var myLinks = scope.user.navLinks();
-        expect(myLinks.length).toBe(5); // dealers have 5 nav links
+        // dealers have 8 primary links and 2 secondary links
+        expect(myLinks.primary.length).toBe(8);
+        expect(myLinks.secondary.length).toBe(2);
 
         myLinks = aScope.user.navLinks();
-        expect(myLinks.length).toBe(3); // auctions have 3 nav links
+        // auctions have 6 primary links and no secondary links
+        expect(myLinks.primary.length).toBe(6);
+        expect(myLinks.secondary).not.toBeDefined();
       });
 
       it('should change the homelink based on user type', function() {

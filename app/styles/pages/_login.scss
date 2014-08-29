@@ -1,17 +1,4 @@
 // LOGIN & FORGOT USERNAME/PASSWORD
-.login-head {
-  background-color: $gray-e; // IE fallback
-  @include gradient-row();
-  border-bottom: 2px solid $white;
-
-  .row-fluid {
-    margin: 0;
-  }
-
-  .container-fluid {
-    margin: 20px auto;
-  }
-}
 
 .login.container-line::after, .unsupported.container-line::after {
   background-color: $brand-gradient-top; // IE fallback

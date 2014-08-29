@@ -1,31 +1,28 @@
-<!-- NOT LOGGED IN HEADER -->
-<header class="login-head" ng-hide="navState.current.showNavBar">
-  <div class="row-fluid">
-    <div class="container-fluid nxg-logo">
-    </div>
-  </div>
-</header>
-
-<!-- LOGGED IN HEADER -->
-<header ng-show="navState.current.showNavBar">
-  <div class="row-fluid">
-    <div class="container-fluid app-header">
-      <a ng-href="{{user.homeLink()}}" class="navLink ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
-        <div class="span4 nxg-logo"></div>
+<header class="app-header" ng-class="{ login: !navState.current.showNavBar }">
+  <div class="container-fluid">
+    <div class="header">
+      <a ng-href="{{user.homeLink()}}" class="span3 ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
+        <div class="nxg-logo"></div>
       </a>
 
-      <div class="span2 offset3 chat">
-        <a ng-show="user.isDealer()" nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"><i class="glyphicon glyphicon-comment"></i>Chat Now!</a>
+      <div class="span6" ng-show="navState.current.showNavBar">
+        <ul class="nav-secondary" ng-show="user.isDealer()">
+          <li ng-repeat="link in user.navLinks().secondary">
+            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+          </li>
+          <li>
+            <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}">Chat Now</a>
+          </li>
+        </ul>
       </div>
-      <div class="span3 pull-right dealer-info">
-        <div class="row-fluid">
-          <div class="nxg-settings-drop">
 
-            <a href="javascript:void(0)" class="account-btn dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
-            <h6>{{ user.info().BusinessName }}</h6>
-            <p class="small" ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
+      <div class="span3" ng-show="navState.current.showNavBar">
+        <div class="nxg-dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle block">
+            <p>{{ user.info().BusinessName }}</p>
+            <p ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
 
-            <div class="nxg-settings dropdown-menu">
+            <div class="dropdown-menu">
               <ul class="unstyled">
                 <li>
                   <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}">Settings</a>
@@ -35,22 +32,25 @@
                   <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}">Account Management</a>
                 </li>
                 <li>
-                  <button class="btn btn-mini btn-secondary" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</button>
+                  <button class="btn" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</button>
                 </li>
               </ul>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <div class="nav-bg">
-    <div class="container-fluid row-fluid">
-      <nav role="navigation" class="span9">
-        <span ng-repeat="link in user.navLinks()" >
-          <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
-        </span>
-      </nav>
+
+  <div class="nav-bkgd" ng-show="navState.current.showNavBar">
+    <div class="container-fluid">
+      <div class="header">
+        <ul class="nav-primary">
+          <li ng-repeat="link in user.navLinks().primary">
+            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
