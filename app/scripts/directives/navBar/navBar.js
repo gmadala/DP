@@ -67,7 +67,6 @@ angular.module('nextgearWebApp')
     // this will return true and the active class will be applied to style the nav
     // link appropriately.
     $scope.isActive = function(activeWhen) {
-      console.log('in isActive', activeWhen);
       return $state.includes(activeWhen);
     };
 

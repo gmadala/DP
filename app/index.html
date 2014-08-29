@@ -31,7 +31,9 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" ui-view></div>
+      <div class="nxg-main-view" nxg-fluid-container>
+        <div ui-view></div>
+      </div>
       <div nxg-activity></div>
     </div>
 
@@ -200,6 +202,7 @@
     <script src="scripts/directives/nxgTypeahead.js"></script>
     <script src="scripts/directives/placeholder.js"></script>
     <script src="scripts/directives/ieInputPatch.js"></script>
+    <script src="scripts/directives/nxgFluidContainer.js"></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
 
