@@ -13,6 +13,12 @@
           <li>
             <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}">Chat Now</a>
           </li>
+          <li class="cart">
+            <a href="javascript:void()" ng-click="onCartClicked">
+              {{ getQueueCount() }}
+              <span nxg-icon="icon-cart" class="icon-small"></span>
+            </a>
+          </li>
         </ul>
       </div>
 

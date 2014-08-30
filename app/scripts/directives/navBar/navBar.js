@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric) {
+  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric, Payments) {
     var dealerLinks = {
       primary: [
         { name: 'Dashboard', href: '#', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK },
@@ -49,6 +49,22 @@ angular.module('nextgearWebApp')
         }
       });
     }
+
+    $scope.getQueueCount = function () {
+      var queue = Payments.getPaymentQueue(),
+          count = 0;
+
+      angular.forEach(queue.fees, function() {
+        count++;
+      });
+
+      angular.forEach(queue.payments, function() {
+        count++;
+      });
+
+      console.log(count);
+      return count;
+    };
 
     $scope.user = {
       isDealer: User.isDealer,

@@ -87,12 +87,12 @@
   padding: 10px 0;
 
   li {
-    padding: 0 10px;
+    padding: 0 8px;
 
     a {
       color: $white;
       display: inline-block;
-      padding: 8px 10px 9px;
+      padding: 8px 8px 9px;
 
       &.active {
         border-bottom: 4px solid $primary;
@@ -113,19 +113,45 @@
   margin: 0 auto;
 
   li {
-    padding: 5px 20px;
-    margin: 7px 0;
+    height: 40px;
+    padding: 6px 0;
 
-    & + li {
+    & + li a {
       border-left: 1px solid $border;
     }
 
     a {
       color: $accent;
       font-size: 11px;
+      display: block;
+      padding: 5px 20px;
 
       &:hover {
         color: $text;
+      }
+    }
+
+    &.cart {
+      @include border-bottom-right-radius($borderRadius);
+      background-color: $primary;
+      height: 39px; // to account for gray border on bottom
+      border: 0;
+      margin: 0;
+
+      a {
+        color: $white;
+        font-size: 13px;
+        padding: 5px 15px;
+        border: 0;
+
+        &:hover {
+
+        }
+
+        .svg-icon svg {
+          fill: $white;
+          margin-left: 2px;
+        }
       }
     }
   }
