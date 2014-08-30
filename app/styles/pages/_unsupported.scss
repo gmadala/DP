@@ -3,14 +3,12 @@
 // unsupported browsers, IE7 & IE8 in particular.
 
 .unsupported {
-  background-color: $brand-gradient-top;
   top: 0;
   width: 100%;
   height: 100%;
 
   p, a {
-    font-weight: 200;
-    font-size: $large-font-size;
+    font-size: 16px;
     line-height: 1.4;
   }
 
@@ -22,8 +20,8 @@
     font-weight: bold;
   }
 
-  .well-out {
-    padding: 20px;
+  .well-item {
+    padding: 20px 30px;
   }
 
   .browsers {

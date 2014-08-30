@@ -1,16 +1,5 @@
 // LOGIN & FORGOT USERNAME/PASSWORD
 
-.login.container-line::after, .unsupported.container-line::after {
-  background-color: $brand-gradient-top; // IE fallback
-  @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
-  @extend %full-width;
-  content: '';
-  position: fixed;
-  top: 0;
-  height: 100%;
-  z-index: -5;
-}
-
 .login-contents {
   .login-form {
     padding: 10px 20px 0;
