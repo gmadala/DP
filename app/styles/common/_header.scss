@@ -14,6 +14,7 @@
 
 .header {
   @extend .row-fluid;
+  position: relative;
 
   .span6 {
     text-align: center;
@@ -37,38 +38,74 @@
 
 .nxg-dropdown {
   @extend %align-right;
-  position: relative; // required for bootstrap's dropdown classes to work
-  padding: 10px 20px 10px 10px;
+  @include border-bottom-radius($borderRadius);
+  background-color: $white;
+  position: absolute;
+  top: -1px;
+  right: 0;
+  padding: 10px 20px;
+  border: 1px solid $border;
+  z-index: 100;
+  max-width: 23.40426%; // same as span3, which is the width of the parent element
 
-  .dropdown-toggle:hover {
-    text-decoration: none;
+  &.expanded {
+    @include box-shadow(rgba(0,0,0,0.25) 0 3px 3px);
+
+    .user-info:after {
+      border-top: transparent;
+      border-bottom: 8px solid $highlight;
+    }
   }
 
-  // for the arrow.
-  &:after {
-    content: '';
-    @include box(0);
+  ul {
+    margin: 0;
+
+    li {
+      margin-bottom: 12px;
+
+      &:first-child {
+        margin-top: 15px;
+      }
+
+      a {
+        color: $accent;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #999;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .user-info {
     display: block;
-    position: absolute;
-    right: 0;
-    top: 20px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 8px solid $highlight;
-  }
+    position: relative;
+    font-weight: bold;
+    padding-right: 20px;
 
-  &.open {
-    background-color: $white;
-  }
+    &:hover {
+      text-decoration: none;
+    }
 
-  .dropdown-menu {
-    @include border-radius(0);
-    right: 0;
-    left: auto;
-    padding: 10px;
+    // for the arrow.
+    &:after {
+      content: '';
+      @include box(0);
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 10px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid $highlight;
+    }
 
-    .btn {
-      margin: 10px 0 0;
+    p {
+      @extend .truncate;
     }
   }
 }
@@ -80,6 +117,9 @@
   li a {
     font-weight: bold;
     text-transform: uppercase;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -97,6 +137,10 @@
       &.active {
         border-bottom: 4px solid $primary;
       }
+
+      &:hover {
+        color: #CCCCCC;
+      }
     }
   }
 }
@@ -110,48 +154,80 @@
   position: relative;
   top: -1px;
   border: 1px solid $border;
-  margin: 0 auto;
 
-  li {
+  ul {
+    float: left;
     height: 40px;
-    padding: 6px 0;
+    padding: 8px 0 8px;
+    margin: 0 auto;
 
-    & + li a {
-      border-left: 1px solid $border;
-    }
+    li {
+      padding: 5px 15px 7px;
 
-    a {
-      color: $accent;
-      font-size: 11px;
-      display: block;
-      padding: 5px 20px;
-
-      &:hover {
-        color: $text;
-      }
-    }
-
-    &.cart {
-      @include border-bottom-right-radius($borderRadius);
-      background-color: $primary;
-      height: 39px; // to account for gray border on bottom
-      border: 0;
-      margin: 0;
+      // & + li {
+        border-right: 1px solid $border;
+      // }
 
       a {
-        color: $white;
-        font-size: 13px;
-        padding: 5px 15px;
-        border: 0;
+        color: $accent;
+        font-size: 11px;
+        display: inline-block;
+        position: relative;
 
         &:hover {
-
+          color: #999;
         }
+
+        &.active:after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -11px;
+          left: -5%;
+          width: 110%;
+          margin: 0 auto;
+          height: 4px;
+          background-color: #91969D;
+        }
+      }
+    }
+  }
+
+  .cart-btn {
+    @include border-bottom-right-radius($borderRadius);
+    display: block;
+    float: right;
+    height: 39px; // to account for gray border on bottom
+    background-color: transparent;
+    color: $accent;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 15px 10px;
+    border: 0;
+    margin: 0 0 0 -1px;
+
+    .svg-icon svg {
+      fill: $accent;
+      position: relative;
+      top: -2px;
+      margin-left: 2px;
+    }
+
+    &.has-items {
+      color: $white;
+      background: $primary;
+
+      &:hover {
+        text-decoration: none;
+        background-color: $highlight;
 
         .svg-icon svg {
           fill: $white;
-          margin-left: 2px;
         }
+      }
+
+      .svg-icon svg {
+        fill: $white;
       }
     }
   }

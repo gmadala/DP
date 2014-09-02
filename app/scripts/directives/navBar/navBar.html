@@ -6,43 +6,41 @@
       </a>
 
       <div class="span6" ng-show="navState.current.showNavBar">
-        <ul class="nav-secondary" ng-show="user.isDealer()">
-          <li ng-repeat="link in user.navLinks().secondary">
-            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
-          </li>
-          <li>
-            <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}">Chat Now</a>
-          </li>
-          <li class="cart">
-            <a href="javascript:void()" ng-click="onCartClicked">
-              {{ getQueueCount() }}
-              <span nxg-icon="icon-cart" class="icon-small"></span>
-            </a>
-          </li>
-        </ul>
+        <div class="nav-secondary" ng-show="user.isDealer()">
+          <ul>
+            <li ng-repeat="link in user.navLinks().secondary">
+              <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+            </li>
+            <li>
+              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}">Chat Now</a>
+            </li>
+          </ul>
+          <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
+            {{ getQueueCount() }}
+            <span nxg-icon="icon-cart" class="icon-small"></span>
+          </button>
+        </div>
       </div>
 
       <div class="span3" ng-show="navState.current.showNavBar">
-        <div class="nxg-dropdown">
-          <a href="javascript:void(0)" class="dropdown-toggle block">
+        <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
+          <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.info().BusinessName }}</p>
             <p ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
-
-            <div class="dropdown-menu">
-              <ul class="unstyled">
-                <li>
-                  <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}">Settings</a>
-                  <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}">Profile Settings</a>
-                </li>
-                <li>
-                  <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}">Account Management</a>
-                </li>
-                <li>
-                  <button class="btn" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</button>
-                </li>
-              </ul>
-            </div>
           </a>
+
+          <ul class="unstyled" collapse="isCollapsed">
+            <li>
+              <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}">Settings</a>
+              <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}">Profile Settings</a>
+            </li>
+            <li>
+              <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}">Account Management</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

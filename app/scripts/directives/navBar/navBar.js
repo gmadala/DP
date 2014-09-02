@@ -62,7 +62,6 @@ angular.module('nextgearWebApp')
         count++;
       });
 
-      console.log(count);
       return count;
     };
 
@@ -80,6 +79,10 @@ angular.module('nextgearWebApp')
       }
     };
 
+    $scope.onCartClicked = function() {
+      $state.transitionTo('checkout');
+    };
+
     // If current state includes the activeWhen property for the given link,
     // this will return true and the active class will be applied to style the nav
     // link appropriately.
@@ -87,6 +90,6 @@ angular.module('nextgearWebApp')
       return $state.includes(activeWhen);
     };
 
-    $scope.showSettings = false;
+    $scope.isCollapsed = true;
     $scope.navState = $state;
   });
