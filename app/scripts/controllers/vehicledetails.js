@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, api, moment) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, Addresses, api, moment) {
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -188,9 +188,7 @@ angular.module('nextgearWebApp')
         };
 
         //Grab all possible inventory locations
-        $scope.inventoryLocations = _.filter(User.getStatics().dealerAddresses, function(addr) {
-          return addr.IsActive && addr.IsPhysicalInventory;
-        });
+        $scope.inventoryLocations = Addresses.getActivePhysical();
 
         // Users should only be able to change inventory location if they have more than one,
         // and the Floorplan's status is either "Approved" or "Pending"

@@ -18,7 +18,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
       titleReleasesMock,
       paymentsMock,
       floorplanMock,
-      initialize;
+      initialize,
+      addressesMock;
 
   beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, $q, $dialog, _api_) {
     rootScope = $rootScope;
@@ -90,6 +91,15 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     feeDetailsMock = {
       FloorplanId: '456id'
+    };
+
+    addressesMock = {
+      getActivePhysical: function() {
+        return [
+          { AddressId: '1' },
+          { AddressId: '2' }
+        ]
+      }
     };
 
     vehicleDetailsMock = {
@@ -168,7 +178,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
         TitleReleases: titleReleasesMock,
         User: userMock,
         Payments: paymentsMock,
-        Floorplan: floorplanMock
+        Floorplan: floorplanMock,
+        Addresses: addressesMock
       });
     };
 
@@ -332,11 +343,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
       }));
 
       it('should be false if there is only one inventory location', inject(function($rootScope) {
-        spyOn(userMock, 'getStatics').andReturn({
-          dealerAddresses: [
+        spyOn(addressesMock, 'getActivePhysical').andReturn([
             { Line1: 'foo' }
-          ]
-        });
+        ]);
         detailsMock.FloorplanInfo.FloorplanStatusName = 'Approved';
         initialize();
         $rootScope.$digest();
