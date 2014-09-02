@@ -81,19 +81,6 @@ angular.module('nextgearWebApp')
       $state.transitionTo(newState);
     };
 
-    // Determines if the length of the rendered number is too long
-    // to fit inside the pie charts on the dashboard.
-    // This method is a terrible separation of view/controller, but
-    // it's necessary to shrink numbers that don't fit.
-    // TODO: how can we make this work currently?
-    $scope.tooLong = function(number, format) {
-      if($filter('numeral')(number, format).length >= 7) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
     $scope.filterPayments = function(filter) {
       var param;
       if(filter) {
