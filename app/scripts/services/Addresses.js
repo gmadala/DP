@@ -35,7 +35,7 @@ angular.module('nextgearWebApp')
       },
       getTitleAddresses: function() {
         // returns addresses that are active and physical, but filters out PO boxes
-        return this.getActivePhysical().filter(function(item) {
+        return this.getAddresses(true, null, null).filter(function(item) {
           return !PO_BOX_REGEX.test(item.Line1.toLowerCase());
         });
       },
