@@ -148,54 +148,24 @@ angular.module('nextgearWebApp')
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
 
-          var viewAllCredit = {
-            'CreditTypeName': 'View All',
-            'LineOfCreditId': '0',
-            'LineOfCreditAmount': 0,
-            'TempLineOfCreditAmount': 0,
-            'TempLineOfCreditExpiration': null,
-            'AvailableCreditAmount': 0,
-            'UtilizedCreditAmount': 0,
-            'CreditChartData' :{
-              outer: [
-                { color: '#9F9F9F', y: 0 },
-                { color: '#575757', y: 0 }
-              ],
-              inner: [
-                { color: '#3D9AF4', y: 0 },
-                { color: '#54BD45', y: 0 }
-              ]
-            }
-          };
+          var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
 
           $scope.dashboardData = result;
-          $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
-          $scope.creditLineOpts = [viewAllCredit];
+          $scope.dashboardData.selectedLineOfCredit = viewAllCredit;
           $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
-
-          if ($scope.dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration !== null ) {
-            $scope.dashboardData.selectedLineOfCredit.CreditTypeName = $scope.dashboardData.selectedLineOfCredit.CreditTypeName + ' ( temp )';
-          }
 
           /* Loop through all of the Lines of Credit */
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
-            var selectedViewAll = $scope.dashboardData.LinesOfCredit[i];
-            var allCreditUtilized = (selectedViewAll.LineOfCreditAmount + selectedViewAll.TempLineOfCreditAmount) - selectedViewAll.AvailableCreditAmount;
-
-            $scope.creditLineOpts.push($scope.dashboardData.LinesOfCredit[i]);
-
-            /* set the Chart values for View All select option */
-            viewAllCredit.CreditChartData.outer[0].y +=  selectedViewAll.LineOfCreditAmount;
-            viewAllCredit.CreditChartData.outer[1].y +=  selectedViewAll.TempLineOfCreditAmount;
-            viewAllCredit.CreditChartData.inner[0].y += allCreditUtilized;
-            viewAllCredit.CreditChartData.inner[1].y += selectedViewAll.AvailableCreditAmount;
+            var lineOfCredit = $scope.dashboardData.LinesOfCredit[i];
+            var allCreditUtilized = (lineOfCredit.LineOfCreditAmount + lineOfCredit.TempLineOfCreditAmount) - lineOfCredit.AvailableCreditAmount;
 
             /* set calculated values for View All select option */
-            viewAllCredit.LineOfCreditAmount += selectedViewAll.LineOfCreditAmount;
-            viewAllCredit.TempLineOfCreditAmount += selectedViewAll.TempLineOfCreditAmount;
-            viewAllCredit.AvailableCreditAmount += selectedViewAll.AvailableCreditAmount;
+            viewAllCredit.LineOfCreditAmount += lineOfCredit.LineOfCreditAmount;
+            viewAllCredit.TempLineOfCreditAmount += lineOfCredit.TempLineOfCreditAmount;
+            viewAllCredit.AvailableCreditAmount += lineOfCredit.AvailableCreditAmount;
             viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
           }
+          viewAllCredit.updateChartData();
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
