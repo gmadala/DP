@@ -9,7 +9,9 @@ angular.module('nextgearWebApp')
       securityQuestions = null,
       infoRequest = null;
 
-    var calculateCanPayBuyer = function() {
+
+
+    function calculateCanPayBuyer() {
       if (!info) {
         return undefined;
       }
@@ -17,7 +19,13 @@ angular.module('nextgearWebApp')
       return info.DealerAuctionStatusForGA === 'Dealer' &&
         info.IsBuyerDirectlyPayable &&
         info.HasUCC;
-    };
+    }
+
+    function filterByBusinessName(subsidiaries) {
+      return _.sortBy(subsidiaries, function(s) {
+        return s.BusinessName;
+      });
+    }
 
     // Public API
     return {
@@ -198,6 +206,7 @@ angular.module('nextgearWebApp')
       refreshInfo: function() {
         infoRequest = api.request('GET', '/Dealer/Info').then(function(data) {
           info = data;
+          info.ManufacturerSubsidiaries = filterByBusinessName(info.ManufacturerSubsidiaries);
           Addresses.initFlooredBusinessAddresses(info.FlooredBusinessAddresses);
           return info;
         },
