@@ -371,3 +371,13 @@ hr {
 .form-separator {
   padding-top: 10px;
 }
+
+
+// used for multiple buttons inside a well title area
+.well-title .btn-edit {
+  @extend .right;
+  margin: 10px 15px;
+}
+.well-title .edit-cancel {
+  color: #1B769D;
+}

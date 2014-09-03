@@ -4,9 +4,9 @@
   <section class="span6 well settings-well" novalidate>
     <h2 class="well-title">
       Business Settings
-      <button ng-hide="business.editable" class="btn cta-secondary" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.cancel()">Cancel</button>
-      <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.save()">Save</button>
+      <button ng-hide="business.editable" class="btn-unstyle btn-edit" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit Settings</button>
+      <button ng-show="business.editable" class="btn-unstyle btn-edit" ng-click="business.save()">Save Settings</button>
+      <button ng-show="business.editable" class="btn-unstyle btn-edit edit-cancel" ng-click="business.cancel()">Cancel Changes</button>
     </h2>
 
     <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
@@ -71,9 +71,9 @@
   <section class="span6 well settings-well">
     <h2 class="well-title">
       Title Settings
-      <button ng-show="!title.editable && title.data.addressCount > 1" class="btn cta-secondary" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="title.editable" class="btn cta-secondary" ng-click="title.cancel()">Cancel</button>
-      <button ng-show="title.editable" class="btn cta-secondary" ng-click="title.save()">Save</button>
+      <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle btn-edit" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit Settings</button>
+      <button ng-show="title.editable" class="btn-unstyle btn-edit" ng-click="title.save()">Save Settings</button>
+      <button ng-show="title.editable" class="btn-unstyle btn-edit edit-cancel" ng-click="title.cancel()">Cancel Changes</button>
     </h2>
 
     <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
@@ -109,11 +109,11 @@
               <div nxg-address="title.data.titleAddress"></div>
             </div>
             <div class="span6">
-              <button class="btn-help" ng-show="title.data.addresses.length == 0"
+              <button class="btn-help"
                 tooltip-placement="right"
                 tooltip-trigger="focus"
                 tooltip-html="true"
-                tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}"
+                tooltip-html-unsafe="To update or add a Title Settings address, please contact NextGear Capital at: {{customerSupportPhone}}."
                 tooltip-animation="true">
                 <span nxg-icon="icon-help"></span>
               </button>
