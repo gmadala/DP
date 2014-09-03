@@ -235,10 +235,10 @@ angular.module('nextgearWebApp')
 
           if(!$scope.canPayNow) {
             // we need to explicitly auto-schedule all payments/fees for the next available business day.
-            var tomorrow = moment().add('days', 1).toDate(),
+            var now = moment().toDate(),
                 later = moment().add('months', 1).toDate();
 
-            Payments.fetchPossiblePaymentDates(tomorrow, later).then(
+            Payments.fetchPossiblePaymentDates(now, later).then(
               function (result) {
                 if (!result.length) {
                   // no possible payment dates...what do we do here?

@@ -40,28 +40,13 @@
                 <p class="lockup-major">{{ fee.type || 'N/A' }}</p>
               </td>
               <td>
-                <!-- cannot schedule (overdue or due today), and WITHIN business hours -->
-                <h4 class="lockup-major" ng-show="canPayNow && !paymentQueue.canSchedule(fee)">
+                <!-- is not scheduled or is scheduled for today -->
+                <h4 class="lockup-major" ng-show="!fee.scheduleDate || fee.scheduleDate == todayDate">
                   <span class="sub-label">Today: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- cannot schedule (overdue or due today), and OUTSIDE business hours -->
-                <h4 class="lockup-major" ng-show="!canPayNow && !paymentQueue.canSchedule(fee)">
-                  <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (within business hours) -->
-                <h4 class="lockup-major" ng-show="canPayNow && paymentQueue.canSchedule(fee) && !fee.scheduleDate">
-                  <span class="sub-label">Today: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (outside business hours; should have already been set to have a scheduled date.) -->
-                <h4 class="lockup-major" ng-show="!canPayNow && paymentQueue.canSchedule(fee)">
-                  <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
                 <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="fee.scheduleDate">
+                <h4 class="lockup-major" ng-show="fee.scheduleDate && fee.scheduleDate != todayDate">
                   <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
@@ -119,28 +104,13 @@
                 <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
               </td>
               <td>
-                <!-- cannot schedule (overdue or due today), and WITHIN business hours -->
-                <h4 class="lockup-major" ng-show="canPayNow && !paymentQueue.canSchedule(payment)">
+                <!-- is not scheduled or is scheduled for today -->
+                <h4 class="lockup-major" ng-show="!payment.scheduleDate || payment.scheduleDate == todayDate">
                   <span class="sub-label">Today: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- cannot schedule (overdue or due today), and OUTSIDE business hours -->
-                <h4 class="lockup-major" ng-show="!canPayNow && !paymentQueue.canSchedule(payment)">
-                  <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (within business hours) -->
-                <h4 class="lockup-major" ng-show="canPayNow && paymentQueue.canSchedule(payment) && !payment.scheduleDate">
-                  <span class="sub-label">Today: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (outside business hours; should have already been set to have a scheduled date.) -->
-                <h4 class="lockup-major" ng-show="!canPayNow && paymentQueue.canSchedule(payment)">
-                  <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 
                 <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="payment.scheduleDate">
+                <h4 class="lockup-major" ng-show="payment.scheduleDate && payment.scheduleDate != todayDate">
                   <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 

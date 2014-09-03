@@ -659,16 +659,42 @@ describe("Model: Payments", function () {
   });
 
   describe('fetchPossiblePaymentDates function', function () {
+    var clock;
 
-    it('should make the expected API call', function () {
-      var start = new Date(2013, 0, 1),
-        end = new Date(2013, 0, 31);
-      httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31').respond({
+    beforeEach(function () {
+      // mock the system clock so we have a predictable current date & time for testing
+      // see http://sinonjs.org/docs/#clock
+      clock = sinon.useFakeTimers(moment('2013-01-01T08:30:00Z').valueOf(), 'Date');
+
+      httpBackend.whenGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31').respond({
         Success: true,
-        Data: []
+        Data: [
+          "2013-01-05", "2013-01-06", "2013-01-07"
+        ]
       });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should make the expected API call if we have no cached data', function () {
+      var start = moment("2013-01-01").toDate(),
+        end = moment("2013-01-31").toDate();
+      httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31');
       payments.fetchPossiblePaymentDates(start, end);
       expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should used cached data on subsequent requests on the same day', function () {
+      var start = moment("2013-01-01").toDate(),
+        end = moment("2013-01-31").toDate();
+
+      payments.fetchPossiblePaymentDates(start, end);
+      httpBackend.flush();
+
+      payments.fetchPossiblePaymentDates(start, end);
+      expect(httpBackend.verifyNoOutstandingRequest).not.toThrow();
     });
 
     it('should transform results into a map of booleans by date, if requested', function () {
