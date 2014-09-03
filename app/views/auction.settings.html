@@ -3,9 +3,11 @@
   <!-- USER PROFILE -->
   <section class="span6 well settings-well" ng-controller="ProfileSettingsCtrl">
     <h2 class="well-title">User Profile
-      <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()">Cancel</button>
-      <button ng-show="profile.editable" class="btn save-btn" ng-click="profile.save()">Save</button>
+      <div class="well-sub-title">
+        <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()">Edit Settings</button>
+        <button ng-show="profile.editable" class="btn-unstyle" ng-click="profile.save()">Save Settings</button>
+        <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
@@ -121,9 +123,11 @@
   <!-- BUSINESS SETTINGS -->
   <section class="span6 well settings-well" novalidate ng-controller="AccountManagementCtrl">
     <h2 class="well-title">Business Settings
-      <button ng-hide="business.editable" class="btn edit-btn" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="business.editable" class="btn cancel-btn" ng-click="business.cancel()">Cancel</button>
-      <button ng-show="business.editable" class="btn save-btn" ng-click="business.save()">Save</button>
+      <div class="well-sub-title">
+        <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()">Edit Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()">Save Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
@@ -187,9 +191,11 @@
   <!-- TITLE SETTINGS -->
   <section class="span6 well settings-well" ng-controller="AccountManagementCtrl">
     <h2 class="well-title">Title Settings
-      <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn edit-btn" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="title.editable" class="btn cancel-btn" ng-click="title.cancel()">Cancel</button>
-      <button ng-show="title.editable" class="btn save-btn" ng-click="title.save()">Save</button>
+      <div class="well-sub-title">
+        <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn-unstyle" ng-click="title.edit()">Edit Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()">Save Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
@@ -262,9 +268,11 @@
   <!-- NOTIFICATIONS -->
   <section class="span6 well settings-well" ng-controller="ProfileSettingsCtrl">
     <h2 class="well-title">Notifications
-      <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()">Cancel</button>
-      <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()">Save</button>
+      <div class="well-sub-title">
+        <button ng-hide="notifications.editable" class="btn-unstyle" ng-click="notifications.edit()">Edit Settings</button>
+        <button ng-show="notifications.editable" class="btn-unstyle" ng-click="notifications.save()">Save Settings</button>
+        <button ng-show="notifications.editable" class="btn-unstyle cancel" ng-click="notifications.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">

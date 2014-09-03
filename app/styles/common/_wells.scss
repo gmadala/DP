@@ -35,6 +35,24 @@
     font-size: 14px;
     float: right;
     margin: 5px 0 0;
+
+    .btn-unstyle {
+      @extend %float-r;
+      font-weight: bold;
+      margin: 5px 0;
+
+      & + .btn-unstyle {
+        margin-left: 15px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.cancel {
+        color: #1B769D;
+      }
+    }
   }
 
   .well-form {

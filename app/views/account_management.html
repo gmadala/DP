@@ -4,9 +4,11 @@
   <section class="span6 well settings-well" novalidate>
     <h2 class="well-title">
       Business Settings
-      <button ng-hide="business.editable" class="btn-unstyle btn-edit" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit Settings</button>
-      <button ng-show="business.editable" class="btn-unstyle btn-edit" ng-click="business.save()">Save Settings</button>
-      <button ng-show="business.editable" class="btn-unstyle btn-edit edit-cancel" ng-click="business.cancel()">Cancel Changes</button>
+      <div class="well-sub-title">
+        <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()">Edit Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()">Save Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
@@ -71,9 +73,11 @@
   <section class="span6 well settings-well">
     <h2 class="well-title">
       Title Settings
-      <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle btn-edit" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit Settings</button>
-      <button ng-show="title.editable" class="btn-unstyle btn-edit" ng-click="title.save()">Save Settings</button>
-      <button ng-show="title.editable" class="btn-unstyle btn-edit edit-cancel" ng-click="title.cancel()">Cancel Changes</button>
+      <div class="well-sub-title">
+        <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle" ng-click="title.edit()">Edit Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()">Save Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()">Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
