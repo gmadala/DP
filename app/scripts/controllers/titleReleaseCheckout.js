@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, TitleAddresses, segmentio, metric) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, segmentio, metric) {
 
     segmentio.track(metric.VIEW_TITLE_RELEASE_CHECKOUT_PAGE);
 
@@ -15,7 +15,7 @@ angular.module('nextgearWebApp')
       removeFromQueue: TitleReleases.removeFromQueue
     };
 
-    $scope.addresses = TitleAddresses.getAddresses();
+    $scope.addresses = Addresses.getTitleAddresses();
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
@@ -29,7 +29,7 @@ angular.module('nextgearWebApp')
           resolve: {
             response: function() {return response;}
           },
-          dialogClass: 'modal confirm-title-request',
+          dialogClass: 'modal modal-medium',
           backdrop: true,
           keyboard: false,
           backdropClick: false,
@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
         $dialog.dialog(dialogOptions).open().then(function() {
           TitleReleases.clearQueue();
 
-          $state.transitionTo('home.titlereleases');
+          $state.transitionTo('titlereleases');
         });
       });
     };

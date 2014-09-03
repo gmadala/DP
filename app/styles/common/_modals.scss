@@ -1,3 +1,7 @@
+// ========
+//  MODALS
+// ========
+
 .modal-backdrop {
   @include opacity(50);
   z-index: 1050;
@@ -26,7 +30,7 @@
 
   .search-results { // Uses infinite scroll, so we need overflow:auto and a max height to get it to work.
     overflow-y: auto;
-    max-height: 350px;
+    max-height: 400px;
   }
 
   // Modal to go over all other modals
@@ -44,8 +48,12 @@
     width: 700px;
     margin-left: -350px;
   }
-}
 
+  &.modal-x-large {
+    width: 800px;
+    margin-left: -400px;
+  }
+}
 
 .modal-subtitle {
   @extend %heavy;
@@ -122,91 +130,6 @@
 
     & + .btn {
       margin: 5px 10px 5px 0;
-    }
-  }
-}
-
-.modal.request-credit-increase .modal-body {
-  max-height: none;
-}
-
-.modal.search-modal {
-  width: 720px;
-  margin-left: -360px;
-
-  .nxg-search-btn {
-    i {
-      top: 0;
-    }
-  }
-
-  .modal-body {
-    padding: 0;
-    margin: 12px 12px 0 12px;
-  }
-
-  .search-results {
-    padding: 0;
-    border: none;
-  }
-
-  .search-controls {
-    padding: 12px;
-    border: 1px solid #eaeaea;
-  }
-
-  table {
-    @extend %full-width;
-  }
-
-  thead {
-    background-color: #535353;
-    color: $white;
-  }
-
-  th {
-    @extend %thin;
-    @extend %align-left;
-    vertical-align: middle;
-    text-transform: uppercase;
-    font-weight: normal;
-    padding: 6px 6px 6px 6px;
-  }
-
-  td, th {
-    line-height: $baseLineHeight;
-    border: 1px solid #eaeaea;
-    border-top: none;
-  }
-
-  td {
-    vertical-align: top;
-    padding: 6px;
-  }
-
-  .modal-footer {
-    border: none;
-  }
-
-  &.search-modal-business, &.dealer-search-modal {
-    td, th {
-      &.bus-name, &.bus-legalName {
-        width: 23%;
-      }
-      &.bus-num { width: 17%; }
-      &.bus-city { width: 15%; }
-      &.bus-state {  width: 12%; }
-      &.bus-select { width: 10%; }
-    }
-
-    .show-access-num td, .show-access-num th {
-      &.bus-name { width: 20%; }
-      &.bus-legalName { width: 18%;}
-      &.bus-num { width: 16%; }
-      &.bus-city { width: 13%; }
-      &.bus-state { width: 11%;}
-      &.bus-auctionNum { width: 13%; }
-      &.bus-select { width: 9%; }
     }
   }
 }

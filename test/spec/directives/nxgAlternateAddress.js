@@ -7,12 +7,12 @@ describe('Directive: nxgAlternateAddress', function () {
       scope,
       rootScope,
       dScope,
-      titleAddressesMock,
+      addressesMock,
       addrResponseMock,
       compile,
       defaultAddrResponseMock;
 
-  beforeEach(inject(function ($rootScope, $compile, TitleAddresses, $httpBackend) {
+  beforeEach(inject(function ($rootScope, $compile, Addresses, $httpBackend) {
     $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
     scope = $rootScope.$new();
     compile = $compile;
@@ -25,14 +25,14 @@ describe('Directive: nxgAlternateAddress', function () {
 
     addrResponseMock =[
       {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
+        "AddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
         "City": "Dallas",
         "IsTitleReleaseAddress": false,
         "Line1": "5333 West Kiest Blvd",
         "State": "TX",
       },
       {
-        "BusinessAddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
+        "AddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
         "City": "Rochester",
         "IsTitleReleaseAddress": true,
         "Line1": "123 Elm St.",
@@ -40,37 +40,31 @@ describe('Directive: nxgAlternateAddress', function () {
         "State": "NY",
       },
       {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e93rwrfaa6a",
+        "AddressId": "be9b22cb-5896-4356-86a0-e93rwrfaa6a",
         "City": "Beverly Hills",
         "IsTitleReleaseAddress": false,
         "Line1": "184 Dollar Ave.",
         "State": "CA",
       }
     ];
+
     defaultAddrResponseMock = {
-      "BusinessAddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
+      "AddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
       "City": "Rochester",
       "IsTitleReleaseAddress": true,
       "Line1": "123 Elm St.",
       "State": "NY",
     };
 
-    TitleAddresses.getAddresses = function() {
-      return {
-        then: function(success) {
-          success(addrResponseMock);
-        }
-      };
-    };
-    TitleAddresses.getDefaultAddress = function() {
-      return {
-        then: function(success) {
-          success(defaultAddrResponseMock);
-        }
-      };
+    Addresses.getTitleAddresses = function() {
+      return addrResponseMock;
     };
 
-    titleAddressesMock = TitleAddresses;
+    Addresses.getDefaultTitleAddress = function() {
+      return defaultAddrResponseMock;
+    };
+
+    addressesMock = Addresses;
 
     scope.disabled = false;
 

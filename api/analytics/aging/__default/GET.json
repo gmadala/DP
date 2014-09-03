@@ -9,7 +9,7 @@
             "UnitMake": "Nissan",
             "UnitModel": "Titan LE",
             "UnitYear": "2010",
-            "DaysOnFloor": 57
+            "DaysOnFloor": 0
         },
         {
             "FloorplanId": "4fa9f333-8fdf-4b45-a6dd-c2deb29fb4d5",
@@ -18,7 +18,7 @@
             "UnitMake": "Dodge",
             "UnitModel": "Ram 1500 ST",
             "UnitYear": "2010",
-            "DaysOnFloor": 57
+            "DaysOnFloor": 2
         },
         {
             "FloorplanId": "0c64a2f7-e1cd-4775-8195-ce53ce758bd6",

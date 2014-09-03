@@ -35,62 +35,51 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         noDirectAccess: true
       })
 
-    /**
-     * Home State - Parent of Dashboard, Payments, Scheduled Payments,
-     * Receipts and Floorplan states. Routing defaults to Home->Dashboard.
-     */
-      .state('home', {
+      .state('dashboard', {
         url: '/home',
-        abstract: true,
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl',
-        showNavBar: true
-      })
-      .state('home.dashboard', {
-        url: '',
-        templateUrl: 'views/home.dashboard.html',
+        templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
         showNavBar: true
       })
-      .state('home.payments', {
+      .state('payments', {
         url: '/payments?filter',
-        templateUrl: 'views/home.payments.html',
+        templateUrl: 'views/payments.html',
         controller: 'PaymentsCtrl',
         showNavBar: true
       })
-      .state('home.checkout', {
+      .state('checkout', {
         url: '/checkout',
-        templateUrl: 'views/home.checkout.html',
+        templateUrl: 'views/checkout.html',
         controller: 'CheckoutCtrl',
         showNavBar: true
       })
-      .state('home.scheduledPayments', {
+      .state('scheduledPayments', {
         url: '/scheduledPayments',
-        templateUrl: 'views/home.scheduledpayments.html',
+        templateUrl: 'views/scheduledpayments.html',
         controller: 'ScheduledCtrl',
         showNavBar: true
       })
-      .state('home.receipts', {
+      .state('receipts', {
         url: '/receipts',
-        templateUrl: 'views/home.receipts.html',
+        templateUrl: 'views/receipts.html',
         controller: 'ReceiptsCtrl',
         showNavBar: true
       })
-      .state('home.floorplan', {
+      .state('floorplan', {
         url: '/floorplan',
-        templateUrl: 'views/home.floorplan.html',
+        templateUrl: 'views/floorplan.html',
         controller: 'FloorplanCtrl',
         showNavBar: true
       })
-      .state('home.titlereleases', {
+      .state('titlereleases', {
         url: '/titlereleases',
-        templateUrl: 'views/home.titlereleases.html',
+        templateUrl: 'views/titlereleases.html',
         controller: 'TitleReleasesCtrl',
         showNavBar: true
       })
-      .state('home.titleReleaseCheckout', {
+      .state('titleReleaseCheckout', {
         url: '/titlereleasecheckout',
-        templateUrl: 'views/home.titlereleasecheckout.html',
+        templateUrl: 'views/titlereleasecheckout.html',
         controller: 'TitleReleaseCheckoutCtrl',
         showNavBar: true
       })
@@ -139,38 +128,30 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       })
 
       // AUCTION STATES
-      .state('auction_home', {
+      .state('auction_dashboard', {
         url: '/act/home',
-        abstract: true,
-        templateUrl: 'views/auction.home.html',
-        controller: 'AuctionHomeCtrl',
-        isAuctionState: true,
-        showNavBar: true
-      })
-      .state('auction_home.dashboard', {
-        url: '',
-        templateUrl: 'views/auction.home.dashboard.html',
+        templateUrl: 'views/auction.dashboard.html',
         controller: 'AuctionDashboardCtrl',
         isAuctionState: true,
         showNavBar: true
       })
-      .state('auction_home.dealersearch', {
-        url: '/dealersearch',
-        templateUrl: 'views/auction.home.dealersearch.html',
+      .state('auction_dealersearch', {
+        url: '/act/dealersearch',
+        templateUrl: 'views/auction.dealersearch.html',
         controller: 'AuctionDealerSearchCtrl',
         isAuctionState: true,
         showNavBar: true
       })
-      .state('auction_home.bulkflooring', {
-        url: '/bulkflooring',
-        templateUrl: 'views/auction.home.bulkflooring.html',
+      .state('auction_bulkflooring', {
+        url: '/act/bulkflooring',
+        templateUrl: 'views/auction.bulkflooring.html',
         controller: 'FloorCarCtrl',
         isAuctionState: true,
         showNavBar: true
       })
-      .state('auction_home.sellerfloorplan', {
-        url: '/sellerfloorplan',
-        templateUrl: 'views/auction.home.sellerfloorplan.html',
+      .state('auction_sellerfloorplan', {
+        url: '/act/sellerfloorplan',
+        templateUrl: 'views/auction.sellerfloorplan.html',
         controller: 'FloorplanCtrl',
         isAuctionState: true,
         showNavBar: true

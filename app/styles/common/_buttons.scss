@@ -1,51 +1,6 @@
-
 // =========
 //  BUTTONS
 // =========
-
-// .btn-secondary {
-//   color: $btn2-active-text;
-//   background-color: $btn2-active-bkgd;
-//   @include background(linear-gradient($btn2-active-grad-1, $btn2-active-grad-2));
-
-//   &:hover, &:focus {
-//     color: $btn2-hover-text;
-//     background-color: $btn2-hover-bkgd;
-//     @include background(linear-gradient($btn2-hover-grad-1, $btn2-hover-grad-2));
-//   }
-
-//   &:active, &.active {
-//     color: $btn2-hover-text;
-//   }
-// }
-
-// .btn-primary {
-//   -webkit-font-smoothing: antialiased;
-//   color: $btn1-active-text;
-//   border-bottom: 1px solid $btn1-active-stroke;
-//   background-color: $btn1-active-bkgd;
-//   @include background-image(linear-gradient($btn1-active-grad-1, $btn1-active-grad-2));
-
-//   &:hover, &:focus {
-//     color: $btn1-hover-text;
-//     background-color: $btn1-hover-bkgd;
-//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-//   }
-
-//   &:active, &.active {
-//     color: $btn1-hover-text;
-//     @include background-image(linear-gradient($btn1-hover-grad-1, $btn1-hover-grad-2));
-//   }
-
-//   &:disabled, &.disabled,
-//   &:disabled:hover, &.disabled:hover,
-//   &:disabled:focus, &.disabled:focus,
-//   &:disabled:active, &.disabled:active {
-//     color: $btn1-disabled-text;
-//     background-color: $btn1-disabled-bkgd;
-//     @include background-image(linear-gradient($btn1-disabled-grad-1, $btn1-disabled-grad-2));
-//   }
-// }
 
 .nxg-search-btn {
   @extend %align-left;
@@ -80,10 +35,10 @@
 .btn-unstyle {
   @extend %center;
   background: transparent;
-  color: $gray-9;
+  color: $primary;
   padding: 0;
   border: 0;
-
+  font-size: 14px;
   &.right {
     float: right;
   }
@@ -102,7 +57,7 @@
   }
 
   &:disabled, &:disabled:hover {
-    color: $gray-8;
+    color: #999;
   }
 
   &:disabled, &:disabled:hover {
@@ -138,18 +93,18 @@ span.btn-help {
 }
 
 
+.btn.inline-submit {
+  height: 32px;
+  margin: 32px 10px 0;
+}
 
 
 
 
 
-
-
-
-
-
-
-// Refresh/Refactored Code for v2.23 ***
+/*
+* Updated for v2.23
+*/
 .accordion-button {
   @include border-bottom-radius($borderRadius);
   display: block;
@@ -267,10 +222,10 @@ span.btn-help {
   padding: 0;
   margin: 10px 0;
 
-  .button {
+  .btn {
     margin: 0;
 
-    & + .button {
+    & + .btn {
       margin-left: 10px;
     }
   }
@@ -392,6 +347,8 @@ span.btn-help {
 /* TOGGLE BUTTON
  * A group of two buttons with a sliding div beneath,
  * to show which is selected.
+ * use .toggle-three in addition to .btn-toggle
+ * to build a three-option toggle element
  */
 .btn-toggle {
   @extend .clearfix;
@@ -432,15 +389,34 @@ span.btn-help {
 
     @include transition-duration(400ms);
     @include transition-timing-function(ease);
+    @include transition-property(left);
 
     &.active-left {
-      @include transition-property(left);
       left: 0;
     }
 
     &.active-right {
-      @include transition-property(right);
-      right: 0;
+      left: 51%;
+    }
+  }
+
+  &.toggle-three {
+    width: 300px;
+
+    .btn {
+      width: 33%;
+    }
+
+    .btn-slider {
+      width: 33%;
+
+      &.active-center {
+        left: 34%;
+      }
+
+      &.active-right {
+        left: 68%;
+      }
     }
   }
 }
@@ -452,11 +428,22 @@ span.btn-help {
   .btn-text {
     float: left;
     padding: 15px 0;
+    width: 40%;
   }
+
   .btn-btn {
-    float: right;
+    margin-left: 0;
+
+    p, h4 {
+      color: $text;
+    }
+
+    .btn {
+      margin-left: 0;
+    }
   }
 }
+
 
 // responsive buttons for narrower table columns
 .btn-adapts .paired-media {

@@ -11,8 +11,11 @@
 
   .text-error {
     display: block;
-    margin: 10px 0 0;
   }
+}
+
+.form-footer {
+  text-align: right;
 }
 
 .text-error {
@@ -107,6 +110,20 @@ input[type="color"] {
   &::-ms-clear {
     display: none;
   }
+}
+
+.inline-input {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  & + .btn.inline-submit {
+    margin: 4px 10px 0;
+  }
+}
+
+// inputs that are the full-width of parent
+.input-full {
+  width: 100%;
 }
 
 // Overriding Bootstrap's input-prepend class to make it work for us.
@@ -563,7 +580,7 @@ input[type="radio"] {
         @extend %heavy;
         position: absolute;
         top: 8px;
-        color: $gray-a;
+        color: #999;
         font-family: 'Lucida Sans Unicode';
         font-size: 16px;
         margin: 0 5px;
@@ -609,7 +626,7 @@ input[type="radio"] {
     color: $highlight;
 
     &.new, &.old {
-      color: $gray-9;
+      color: #999;
     }
   }
 
@@ -654,4 +671,13 @@ input[type="radio"] {
       border-color: $border;
     }
   }
+}
+
+
+/* Temp styles for auction dealer search view
+*/
+
+
+.form-description {
+  margin-bottom: 20px;
 }

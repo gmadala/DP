@@ -3,13 +3,53 @@
 angular.module('nextgearWebApp')
   .factory('Dashboard', function ($q, $filter, api, moment) {
 
-    var prv = {
-      getReceiptURL: function (transactionId) {
-        return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
+    function getReceiptURL(transactionId) {
+      return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
+    }
+
+    function updateChartData(loc) {
+      loc.CreditChartData = {
+        outer: [
+          { color: '#9F9F9F', y: loc.LineOfCreditAmount },
+          { color: '#575757', y: loc.TempLineOfCreditAmount }
+        ],
+        inner: [
+          { color: '#3D9AF4', y: loc.UtilizedCreditAmount },
+          { color: '#54BD45', y: loc.AvailableCreditAmount }
+        ]
+      };
+    }
+
+    function extendLineOfCreditObject(loc, utilizedAmount) {
+      _.extend(loc, {
+        UtilizedCreditAmount: utilizedAmount,
+        CreditChartData :{
+          outer: [],
+          inner: []
+        },
+        updateChartData: function() {
+          updateChartData(this);
+        }
+      });
+      loc.updateChartData();
+      if (loc.TempLineOfCreditExpiration !== null) {
+        loc.CreditTypeName += '( temp )';
       }
-    };
+      return loc;
+    }
 
     return {
+      createLineOfCreditObject: function(name) {
+        return extendLineOfCreditObject({
+          CreditTypeName: name,
+          LineOfCreditId: '0',
+          LineOfCreditAmount: 0,
+          TempLineOfCreditAmount: 0,
+          TempLineOfCreditExpiration: null,
+          AvailableCreditAmount: 0
+        });
+      },
+      extendLineOfCreditObject: extendLineOfCreditObject,
       fetchDealerDashboard: function (startDate, endDate) {
 
         // When fetching a month it also grabs the first day of the next month.
@@ -33,31 +73,16 @@ angular.module('nextgearWebApp')
               totalUtilized : _.reduce(result.LinesOfCredit, function(sum, loc){
                 var utilized = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
                 return sum + utilized;
-
               }, 0),
-
               linesOfCredit : _.map(result.LinesOfCredit, function(loc){
-                // refactor
                 var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
-                return _.extend(loc, {
-                  UtilizedCreditAmount: utilizedAmount,
-                  CreditChartData :{
-                    outer: [
-                      { color: '#9F9F9F', y: loc.LineOfCreditAmount },
-                      { color: '#575757', y: loc.TempLineOfCreditAmount }
-                    ],
-                    inner: [
-                      { color: '#3D9AF4', y: utilizedAmount },
-                      { color: '#54BD45', y: loc.AvailableCreditAmount }
-                    ]
-                  }
-                });
+                return extendLineOfCreditObject(loc, utilizedAmount);
               })
             };
 
             // inserting view receipt URLs
             angular.forEach(result.Receipts, function(receipt) {
-              receipt.$receiptURL = prv.getReceiptURL(receipt.FinancialTransactionId);
+              receipt.$receiptURL = getReceiptURL(receipt.FinancialTransactionId);
             });
 
             // calculate .paymentChartData

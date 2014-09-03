@@ -13,6 +13,7 @@ describe('Controller: FloorCarCtrl', function () {
     dialog,
     location,
     blackbook,
+    AddressesMock,
     mockForm;
 
   // Initialize the controller and a mock scope
@@ -38,6 +39,12 @@ describe('Controller: FloorCarCtrl', function () {
       }
     };
 
+    AddressesMock = {
+      getActivePhysical: function() {
+        return [];
+      }
+    }
+
     mockForm = {
       $valid: true,
       inputMileage: {}
@@ -51,6 +58,7 @@ describe('Controller: FloorCarCtrl', function () {
         $dialog: dialog,
         $location: location,
         Blackbook: blackbook,
+        Addresses: AddressesMock
       });
     }
   }));
@@ -204,7 +212,7 @@ describe('Controller: FloorCarCtrl', function () {
         expect(dialog.messageBox).toHaveBeenCalledWith(
           'Flooring Request Submitted',
           'Your flooring request has been submitted to NextGear Capital.',
-          [{ label: 'OK', cssClass: 'btn btn-mini btn-primary'}]
+          [{ label: 'OK', cssClass: 'btn-cta cta-primary'}]
         );
       });
 
@@ -247,8 +255,8 @@ describe('Controller: FloorCarCtrl', function () {
         spyOn(dialog, 'messageBox').andCallThrough();
         scope.cancel();
         expect(dialog.messageBox).toHaveBeenCalledWith('Cancel',
-        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-danger'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-danger'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-primary'} ]);
+        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary'},
+          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary'} ]);
       });
     });
   };

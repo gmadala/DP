@@ -1,13 +1,18 @@
-NextGear Capital v4.0.2
+NextGear Capital v4.0.3
 =================================
 
 Fixes included in this release:
 
+VO-2869	Modify "NextGear" to be "NextGear Capital" on auction dealer search
 VO-2253	Allow parent manufacturer to view subsidiary activity
-VO-2190	Design and define new vehicle details view
+VO-2866	Modify footer to include new address and updated phone formatting
+VO-1950	Show credit availability per line of credit on Dashboard
+VO-2868	Modify "NextGear" to be "NextGear Capital" on auction dashboard
+VO-1667	Display disclaimer for interest calculations at time of payment
 VO-2684	Web (Settings – Account Management): Period is missing from the end of the info popup text.
-VO-2734	NextGear Web Hotfix (Floor a Car–Confirm Flooring Request): Link “View Vehicle Verification Checklist” is getting displayed instead of updated link “View Dealer Funding Checklist”.
-VO-1754	Auto-schedule payments for valid business day if logged in during off hours
+VO-2214	Refactor navigation to allow easier access to primary actions (make payment, title release, etc...)
 VO-2806	Floor a Vehicle - Cancel button triggered when hitting Enter on VIN Search
-VO-2473	Auction - Allow inventory location selection during floor plan request
-VO-1489	Display most recently floored vehicles to the dealer so flooring information can be reviewed
+VO-2870	Modify "NextGear" to be "NextGear Capital" on auction resources
+VO-2129	Design consistency throughout the app
+VO-2867	Modify "NextGear" to be "NextGear Capital" on dealer resources
+VO-2190	Design and define new vehicle details view

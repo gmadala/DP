@@ -9,7 +9,7 @@
         </div>
         <p class="info-block-text">
           You have no payments selected for checkout. Please visit the
-          <a href="#/home/payments">Payments list</a> to select some.
+          <a href="#/payments">Payments list</a> to select some.
         </p>
       </div>
 
@@ -60,12 +60,17 @@
                   <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
+                <!-- is already set to be scheduled -->
+                <h4 class="lockup-major" ng-show="fee.scheduleDate">
+                  <span class="sub-label">Future: </span>{{ fee.scheduleDate | moment }}
+                </h4>
+
                 <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
                   Unable to Schedule
                   <button class="btn-help"
                       tooltip-placement="right"
                       tooltip="Payments are unable to be scheduled for loans that are overdue or due today."
-                      tooltip-popup-delay=300>
+                      tooltip-delay="300">
                     <span nxg-icon="icon-help"></span>
                   </button>
                 </p>
@@ -134,13 +139,17 @@
                   <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 
+                <!-- is already set to be scheduled -->
+                <h4 class="lockup-major" ng-show="payment.scheduleDate">
+                  <span class="sub-label">Future: </span>{{ payment.scheduleDate | moment }}
+                </h4>
+
                 <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(payment) && canPayNow">
                   Unable to Schedule
                   <button class="btn-help inline"
                       tooltip-placement="right"
-                      tooltip-trigger="hover"
                       tooltip="Payments are unable to be scheduled for loans that are overdue or due today."
-                      tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
+                      tooltip-delay="300"><span nxg-icon="icon-help"></span></button>
                 </p>
 
                 <button class="btn-unstyle btn-link"

@@ -5,48 +5,37 @@
 </h3>
 
 <div class="modal-body">
-  <section>
-    <h4 class="boxed">
-      Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}
-    </h4>
+  <h3>
+    Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}
+  </h3>
 
-    <div>
-      <ul class="unstyled">
-        <li class="table-list-head">
-          <div class="cell title-desc">Description</div>
-          <div class="cell title-vin">Vin</div>
-          <div class="cell title-stock">Stock #</div>
-        </li>
+  <table class="table table-striped table-secondary">
+    <thead>
+      <th>Description</th>
+      <th>VIN</th>
+      <th>Stock No.</th>
+    </thead>
+    <tr ng-repeat="item in results" ng-class="{ 'error-row': !item.ReleaseSuccessful }">
+      <td>{{ item.description }}</td>
+      <td>{{ item.UnitVIN }}</td>
+      <td>{{ item.StockNumber }}</td>
+    </tr>
+  </table>
 
-        <li class="table-list-row" ng-class="{'error-row': !item.ReleaseSuccessful}" ng-repeat="item in results">
-          <div class="cell title-desc">
-            <p>{{ item.description }}</p>
-          </div>
-          <div class="cell title-vin">
-            <p>{{ item.UnitVIN | shortenVIN }}</p>
-          </div>
-          <div class="cell title-stock">
-            <p>{{ item.StockNumber }}</p>
-          </div>
-        </li>
-
-      </ul>
-    </div>
-  </section>
   <!-- All Title Release Requests Succeed -->
-  <p ng-show="counts.failed == 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been approved. An email will be sent to you shortly with a tracking number.</p>
+  <p  class="paragraph" ng-show="counts.failed == 0">Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been approved. An email will be sent to you shortly with a tracking number.</p>
 
   <!-- Some Title Release Requests Failed -->
-  <p ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight"><nxg-customer-support-phone /></span></p>
+  <p  class="paragraph" ng-show="counts.failed > 0">We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class="highlight"><nxg-customer-support-phone /></span></p>
 
   <!-- Some Title Release Requests Succeed -->
   <section ng-show="counts.failed < counts.total">
     <!-- Some succeed but not ALL (Email message is already included in the ALL success case) -->
-    <p ng-show="counts.failed != 0">An email will be sent to you shortly with a tracking number.</p>
+    <p  class="paragraph" ng-show="counts.failed != 0">An email will be sent to you shortly with a tracking number.</p>
 
-    <p>Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement ("Note")) and initiate a Required Payment (as such term is defined in your ACH Authorizaiton and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Captital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form.</p>
-    <p class="text-center">NextGear Capital, Inc. Attn: Records Department<br />1320 City Center Dr. Suite # 100A&nbsp;&nbsp;&nbsp;Carmel, IN 46032</p>
-    <p>Additional fees may apply. Please check your Rates and Fees schedule.</p>
+    <p class="paragraph" >Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement ("Note")) and initiate a Required Payment (as such term is defined in your ACH Authorizaiton and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Captital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form.</p>
+    <p class="paragraph center">NextGear Capital, Inc. Attn: Records Department<br />1320 City Center Dr. Suite # 100A&nbsp;&nbsp;&nbsp;Carmel, IN 46032</p>
+    <p class="paragraph">Additional fees may apply. Please check your Rates and Fees schedule.</p>
   </section>
 </div>
 

@@ -1,6 +1,7 @@
-// TYPOGRAPHY
+// ============
+//  TYPOGRAPHY
+// ============
 
-// Beginning of design updates/refactor. 7/14/14.
 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -55,7 +56,7 @@ p {
   margin: 0;
 }
 
-a, a:visited {
+a, a:link, a:visited {
   color: $highlight;
 
   &:hover {
@@ -192,16 +193,14 @@ a, a:visited {
   }
 
   // Classes for data types within table cells
-  .lockup-major {
-    font-weight: bold;
+  .lockup-major,  {
     font-size: 14px;
     color: $text;
     display: block;
-    margin-bottom: 3px;
+  }
 
-    a {
-      color: $highlight;
-    }
+  a.lockup-major, a.lockup-major:visited {
+    color: $highlight;
   }
 
   .lockup-minor {
@@ -218,11 +217,17 @@ a, a:visited {
   }
 
   thead th {
+    vertical-align: middle;
     text-align: center;
     border: 1px solid $tableBorder;
   }
 
+  .error-row {
+    border: 2px solid $danger;
+  }
+
   th, td {
+    min-width: 100px;
     vertical-align: middle;
     padding: 8px 15px;
 
@@ -285,8 +290,9 @@ a, a:visited {
   margin: 20px 0;
 }
   .lockup-major {
+    font-weight: bold;
     color: #666666;
-    margin: 0;
+    margin-bottom: 3px;
   }
 
   .lockup-minor {
@@ -320,24 +326,35 @@ a, a:visited {
   font-weight: normal;
 }
 
+.text-list {
+  list-style-type: disc;
+  margin: 10px 10px 10px 30px;
+}
 
-// end design refactor (new stuff)
+.headline { // only used on login page
+  @extend %heavy;
+  font-size: $large-font-size;
+  margin-bottom: 0;
+}
 
+.tip { // only used in search directive
+  font-size: $tiny-font-size;
+  line-height: 1.1;
+}
 
 
 ul {
   list-style-type: none;
 }
 
-.boxed {
-  @extend %thin;
-  font-size: 20px;
-  line-height: 1;
-  color: $text;
-  padding: 10px 10px 12px;
-  border: 1px solid #ddd;
-  margin-bottom: 0;
+.inline-list {
+
+  li {
+    display: inline-block;
+    padding: 10px 20px;
+  }
 }
+
 
 // override Bootstrap; we don't need pointers on labels.
 label {
@@ -345,36 +362,9 @@ label {
   cursor: default;
   margin: 14px 0 0 0;
 
-  &:first-child {
-    margin-top: 0;
-  }
-
   // but allow pointers on labels if we explicitly want them
   &.pointer {
     cursor: pointer;
   }
 
-}
-
-// looks like h4s in .well, but isn't part of .well
-.well-head {
-  @extend %thin;
-  background: #F1F1F1;
-  font-size: 1em;
-  line-height: $baseLineHeight;
-  color: $text;
-  padding: 5px 10px;
-  margin: 0;
-}
-
-
-.headline {
-  @extend %heavy;
-  font-size: $large-font-size;
-  margin-bottom: 0;
-}
-
-.tip {
-  font-size: $tiny-font-size;
-  line-height: 1.1;
 }

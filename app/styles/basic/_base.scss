@@ -1,6 +1,6 @@
-// ===============
-// Base Styles
-// ===============
+// =============
+//  BASE STYLES
+// =============
 
 * {
   @include box-sizing(border-box);
@@ -10,16 +10,13 @@
   }
 }
 
-//drop a span with this ID anywhere you use checkboxes.
-// #checkbox-image-preloader { background: url(../img/checkbox-checked.gif) no-repeat -9999px -9999px; }
-
 body, html {
   min-width: 1020px;
   color: $text;
 }
 
 body {
-  font-family: $base-font-family;
+  font-family: $baseFontFamily;
   font-size: $baseFontSize;
   line-height: $baseLineHeight;
   background: url(../img/backgroundNoise.png) repeat;
@@ -55,6 +52,23 @@ body {
 .row-item {
   display: inline-block;
   margin-right: 1px;
+}
+
+// we're on a public page, we need a blue background
+.container-public {
+  padding-top: 30px;
+  border-top: 3px solid $highlight;
+  position: relative;
+
+  &::after {
+  background-color: $primary;
+  @extend %full-width;
+  content: '';
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: -5;
+}
 }
 
 // so that our feedback tab displays beneath the modal backdrop.

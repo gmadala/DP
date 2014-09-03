@@ -122,7 +122,7 @@ angular.module('nextgearWebApp')
           _.each(payments, function(p) {
             data.push({
               FloorplanId: p.floorplanId,
-              TitleAddressId: p.overrideAddress.BusinessAddressId
+              TitleAddressId: p.overrideAddress.AddressId
             });
           });
 

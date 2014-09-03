@@ -33,19 +33,4 @@ describe('Filter: address', function () {
       expect(address(data)).toBe('123 Main St / Rochester NY 14623');
     });
   });
-
-  describe('two line template', function() {
-    it('should format date based on two line template', function() {
-      var data = {
-        Line1: '123 Main St',
-        City: 'Rochester',
-        State: 'NY',
-        Zip: '14623'
-      };
-      // var template = '{{Line1}} in {{City}}, {{State}} ({{Zip}})';
-      expect(address(data, 'twoLine')).toBe('123 Main St, Rochester, NY 14623');
-    });
-  });
-
-
 });

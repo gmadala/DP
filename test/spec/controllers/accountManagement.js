@@ -8,6 +8,7 @@ describe('Controller: AccountManagementCtrl', function () {
   var AccountManagementCtrl,
     scope,
     settingsData,
+    AddressesMock,
     AccountManagementMock;
 
   // Initialize the controller and a mock scope
@@ -18,20 +19,7 @@ describe('Controller: AccountManagementCtrl', function () {
       Email: 'diana.guarin@manheim.com',
       CellPhone: '2143301800',
       BusinessEmail: 'diana.guarin@manheim.com',
-      EnhancedRegistrationEnabled: false,
-      Addresses: [
-        {
-          BusinessAddressId: 'be9b22cb-5896-4356-86a0-e932293faa6a',
-          City: 'Dallas',
-          Fax: '2143399361',
-          IsTitleReleaseAddress: true,
-          Line1: '5333 West Kiest Blvd',
-          Line2: null,
-          State: 'TX',
-          Zip: '75236',
-          Phone: '2143301800'
-        }
-      ],
+      EnhancedRegistrationEnabled: false
     };
 
     AccountManagementMock = {
@@ -44,10 +32,42 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     }
 
+    AddressesMock = {
+      getTitleAddresses: function() {
+        return [
+          {
+            BusinessAddressId: 'be9b22cb-5896-4356-86a0-e932293faa6a',
+            City: 'Dallas',
+            Fax: '2143399361',
+            IsTitleReleaseAddress: true,
+            Line1: '5333 West Kiest Blvd',
+            Line2: null,
+            State: 'TX',
+            Zip: '75236',
+            Phone: '2143301800'
+          }
+        ];
+      },
+      getDefaultTitleAddress: function() {
+        return {
+          BusinessAddressId: 'be9b22cb-5896-4356-86a0-e932293faa6a',
+            City: 'Dallas',
+          Fax: '2143399361',
+          IsTitleReleaseAddress: true,
+          Line1: '5333 West Kiest Blvd',
+          Line2: null,
+          State: 'TX',
+          Zip: '75236',
+          Phone: '2143301800'
+        }
+      }
+    };
+
     scope = $rootScope.$new();
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
-      AccountManagement: AccountManagementMock
+      AccountManagement: AccountManagementMock,
+      Addresses: AddressesMock
     });
   }));
 

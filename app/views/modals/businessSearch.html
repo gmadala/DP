@@ -2,23 +2,27 @@
   Business Search
 </h3>
 
-<!-- <div class="modal-close" ng-disabled="submitInProgress" ng-click="close()">
-  <span class="glyphicon glyphicon-remove"></span>
-</div> -->
-
 <div class="modal-body">
-  <form class="search-controls" name="searchControls">
-    <label>Business Name or Number</label>
-    <!-- using nxgRequires instead of required, ng-required, and/or ng-minlength because :invalid
-         pseudoclass is messing with styles onfocus when input is empty -->
-    <input type="text" id="businessSearchModalInput" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()" nxg-requires="data.proposedQuery.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }">
-    <button class="btn btn-secondary nxg-search-btn" ng-click="search()">
-      <i class="glyphicon glyphicon-search"></i>
-    </button>
-    <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires">
+  <form class="row-fluid form-block" name="searchControls">
+    <div class="span4">
+      <label>Business Name or Number</label>
+
+      <!-- using nxgRequires instead of required, ng-required, and/or ng-minlength because :invalid
+           pseudoclass is messing with styles onfocus when input is empty -->
+      <input type="text" id="businessSearchModalInput" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()" nxg-requires="data.proposedQuery.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }">
+        <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires">
       Please enter at least 3 characters.
     </label>
+    </div>
+    <button class="btn inline-submit" ng-click="search()">
+      Search
+    </button>
+
   </form>
+
+  <div class="form-block" ng-show="data.results.length > 0">
+    <p class="paragraph">Select a business name below.</p>
+  </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
     <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
@@ -31,41 +35,51 @@
          nxg-infinite-scroll-disabled="data.loading"
          nxg-infinite-scroll-show-indicator="data.loading"
          nxg-scroll-container>
-      <table ng-class="{ 'show-access-num': data.searchBuyersMode }">
+      <table class="table table-secondary table-striped">
         <thead>
-          <tr>
-            <th><div ng-click="sortBy('BusinessName')" class="bus-name sortable"
-                ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-              Business Name
-            </div></th>
-            <th><div ng-click="sortBy('BusinessLegalName')" class="bus-legalName sortable"
-                ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-              Legal Name
-            </div></th>
-            <th><div ng-click="sortBy('BusinessNumber')" class="bus-num sortable"
-                ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-              Business&nbsp;#
-            </div></th>
-            <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
-              Auction Access #
-            </th>
-            <th><div ng-click="sortBy('City')" class="bus-city sortable"
-                ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-              City
-            </div></th>
-            <th><div ng-click="sortBy('State')" class="bus-state sortable"
-                ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-              State
-            </div></th>
-            <th class="bus-select"></th>
-          </tr>
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessName')"
+              ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+            Business Name
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessLegalName')"
+              ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+            Legal Name
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('BusinessNumber')"
+              ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+            Business
+            <span class="sortArrows"></span>
+          </th>
+          <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
+            Auction Access #
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('City')"
+              ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+            City
+            <span class="sortArrows"></span>
+          </th>
+          <th class="sortable-secondary"
+              ng-click="sortBy('State')"
+              ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+            State
+            <span class="sortArrows"></span>
+          </th>
         </thead>
         <tbody>
           <tr ng-repeat="result in data.results">
-            <td class="bus-name" nxg-highlight="result.BusinessName" highlight="data.query"></td>
-            <td class="bus-legalName" nxg-highlight="result.BusinessLegalName" highlight="data.query"></td>
-            <td class="bus-num" nxg-highlight="result.BusinessNumber" highlight="data.query"></td>
-            <td class="bus-auctionNum" ng-show="data.searchBuyersMode">
+            <td class="value">
+              <a href="javascript:void()" ng-click="select(result)">
+                <span nxg-highlight="result.BusinessName" highlight="data.query"></span>
+              </a>
+            </td>
+            <td><span nxg-highlight="result.BusinessLegalName" highlight="data.query"></span></td>
+            <td><span nxg-highlight="result.BusinessNumber" highlight="data.query"></span></td>
+            <td ng-show="data.searchBuyersMode">
               <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
                     tooltip-placement="right"
                     tooltip-popup-delay="700"
@@ -73,9 +87,8 @@
                 {{ result.AuctionAccessDealershipNumbers | list }}
               </span>
             </td>
-            <td class="bus-city" nxg-highlight="result.City" highlight="data.query"></td>
-            <td class="bus-state" nxg-highlight="result.State" highlight="data.query"></td>
-            <td class="bus-select"><button href class="btn btn-mini" ng-click="select(result)">Select</button></td>
+            <td><span nxg-highlight="result.City" highlight="data.query"></span></td>
+            <td><span nxg-highlight="result.State" highlight="data.query"></span></td>
           </tr>
         </tbody>
       </table>
@@ -84,8 +97,8 @@
       </p>
     </div>
   </div>
-</div><!-- end .modal-body -->
+</div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-secondary">Cancel</button>
+  <button ng-click="close()" class="btn-cta cta-secondary">Close Window</button>
 </div>

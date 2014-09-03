@@ -29,7 +29,7 @@ angular.module('nextgearWebApp')
               style: {
                 fontFamily: defaultFontFamily
               },
-              spacingBottom: 0
+              spacingBottom: 5
             },
             title: {
               text:'',

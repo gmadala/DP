@@ -1,12 +1,6 @@
-// MIXINS
-
-/*
- * Used for header and nav backgrounds, footer, etc.
- */
-@mixin gradient-row() {
-  background: #FFF;
-  @include background-image(linear-gradient(#FFF, #e4e4e4));
-}
+// ========
+//  MIXINS
+// ========
 
 /*
  * Used for counter icons, square boxes, etc.

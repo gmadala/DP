@@ -1,28 +1,6 @@
-// LOGIN & FORGOT USERNAME/PASSWORD
-.login-head {
-  background-color: $gray-e; // IE fallback
-  @include gradient-row();
-  border-bottom: 2px solid $white;
-
-  .row-fluid {
-    margin: 0;
-  }
-
-  .container-fluid {
-    margin: 20px auto;
-  }
-}
-
-.login.container-line::after, .unsupported.container-line::after {
-  background-color: $brand-gradient-top; // IE fallback
-  @include background-image(linear-gradient($brand-gradient-top, $brand-gradient-bottom));
-  @extend %full-width;
-  content: '';
-  position: fixed;
-  top: 0;
-  height: 100%;
-  z-index: -5;
-}
+// ===============
+//  LOGIN-RELATED
+// ===============
 
 .login-contents {
   .login-form {
@@ -32,10 +10,6 @@
   label {
     font-size: $baseFontSize;
     margin-bottom: 2px;
-  }
-
-  input {
-    @extend %full-width;
   }
 
   .modal-footer {
@@ -72,8 +46,8 @@
       border-bottom: 1px solid $white;
 
       &:hover, &:active {
-        color: $gray-e;
-        border-bottom: 1px solid $gray-e;
+        color: #EEE;
+        border-bottom: 1px solid $border;
       }
     }
   }

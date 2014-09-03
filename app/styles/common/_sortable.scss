@@ -1,12 +1,11 @@
+// =========
+//  SORTING
+// =========
+
 // Sorting arrows are used in the business search modal and on the tableList
 // search pages for floorplan, receipts, payments, etc. The class
 // ".sortable" is used to display the sorting arrows with a single
-// container for the arrows and the text. The class ".sortable-container"
-// is designed for the following HTML structure:
-//
-//    << INSERT HERE >>
-//
-// which allows the text to wrap without destroying the arrow placement.
+// container for the arrows and the text.
 
 .sortable {
   cursor: pointer;
@@ -65,33 +64,10 @@
   }
 }
 
+.sortable-secondary {
+  @extend .sortable;
 
-// .sortable-container.sorted .sorting-arrows {
-//   &::before {
-//     @include up-arrow(true);
-//   }
-//   &::after {
-//     @include down-arrow(false);
-//   }
-// }
-
-// .sortable-container.sorted.desc .sorting-arrows {
-//   &::before {
-//     @include up-arrow(false);
-//   }
-//   &::after {
-//     @include down-arrow(true);
-//   }
-// }
-
-// .sortable-container {
-
-//   .sorting-arrows {
-//     position: relative;
-//     top: 4px;
-
-//     &::before {
-//       top: -1px;
-//     }
-//   }
-// }
+  &.sorted {
+    background-color: darken($white, 15%);
+  }
+}

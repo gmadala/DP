@@ -72,14 +72,14 @@ angular.module('nextgearWebApp')
       angular.forEach($scope.receiptUrls, function(url) {
         $window.open(url);
       });
-      $state.transitionTo('home.payments');
+      $state.transitionTo('payments');
       dialog.close();
     };
 
     $scope.close = function () {
-      if ($state.current.name === 'home.checkout') {
+      if ($state.current.name === 'checkout') {
         // If user hasn't navigated away, from checkout, go back to payments.
-        $state.transitionTo('home.payments');
+        $state.transitionTo('payments');
       }
 
       // If user has navigated away, just close the dialog and let them stay here.

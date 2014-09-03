@@ -1,3 +1,7 @@
+// ============
+//  INDICATORS
+// ============
+
 .loading {
   @include box(16px);
   display: inline-block;
@@ -34,7 +38,7 @@
 
   p {
     @extend %small;
-    color: $gray-8;
+    color: #999;
     margin-bottom: 0;
   }
 

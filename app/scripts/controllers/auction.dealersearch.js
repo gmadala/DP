@@ -104,7 +104,7 @@ angular.module('nextgearWebApp')
             backdropClick: true,
             templateUrl: 'views/modals/dealerNameSearch.html',
             controller: 'DealerNameSearchCtrl',
-            dialogClass: 'modal search-modal dealer-search-modal',
+            dialogClass: 'modal modal-large',
             resolve: {
               options: function() {
                 return {
@@ -155,7 +155,7 @@ angular.module('nextgearWebApp')
             backdropClick: true,
             templateUrl: 'views/modals/creditQuery.html',
             controller: 'CreditQueryCtrl',
-            dialogClass: 'modal credit-query',
+            dialogClass: 'modal modal-medium',
             resolve: {
               options: function() {
                 return {

@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric) {
 
     var isDealer = User.isDealer();
 
@@ -20,8 +20,7 @@ angular.module('nextgearWebApp')
     // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
     $scope.$watch(function() { return User.getStatics();}, function(statics) {
       $scope.options = statics;
-      $scope.options.locations = _.filter($scope.options.dealerAddresses, 'IsActive');
-      // TODO: make sure this filters properly for both dealer and auction sides (VO-2473, VO-2551)
+      $scope.options.locations = Addresses.getActivePhysical();
     });
 
     // pay seller vs. buyer options are derived separately
@@ -132,7 +131,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        dialogClass: 'modal floor-confirmation-modal',
+        dialogClass: 'modal modal-medium',
         templateUrl: 'views/modals/floorCarConfirm.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
@@ -165,7 +164,7 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
           var title = 'Flooring Request Submitted',
             msg = 'Your flooring request has been submitted to NextGear Capital.',
-            buttons = [{label: 'OK', cssClass: 'btn btn-mini btn-primary'}];
+            buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
           $dialog.messageBox(title, msg, buttons).open().then(function () {
             $scope.reset();
           });
@@ -179,9 +178,9 @@ angular.module('nextgearWebApp')
       var title = 'Cancel',
         msg = 'What would you like to do?',
         buttons = [
-          {label: 'Go Home', result:'home', cssClass: 'btn-danger'},
-          {label: 'Start Over', result: 'reset', cssClass: 'btn-danger'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-primary'}
+          {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary'},
+          {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary'},
+          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary'}
         ];
       $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
         if (choice === 'home') {

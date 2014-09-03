@@ -153,7 +153,7 @@
         </div>
       </li>
             </ul>
-      <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('home.payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
+      <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
         <span class="paired-body">View All Payments</span>
         <span class="paired-media" nxg-icon="icon-eye"></span>
       </button>
@@ -222,33 +222,35 @@
         <div class="style-select space">
           <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit" ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
         </div>
-
-        <table class="table table-unstyle chart-legend">
-          <tr>
-            <td></td>
-            <td class="table-label">Total Credit</td>
-            <td class="table-symbol">=</td>
-            <td class="table-value table-numeric">
-              {{ dashboardData.selectedLineOfCredit.LineOfCreditAmount | numeral:'$0,0.00' }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <i class="chart-legend-color nxg-chart-utilized-credit"></i>
-            </td>
-            <td class="table-label">Utilized Credit</td>
-            <td class="table-symbol color-danger">–</td>
-            <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.UtilizedCreditAmount | numeral:'$0,0.00' }}</td>
-          </tr>
-          <tr>
-            <td>
-              <i class="chart-legend-color nxg-chart-available-credit"></i>
-            </td>
-            <td class="table-label">Available Credit</td>
-            <td class="table-symbol">=</td>
-            <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
-          </tr>
-        </table>
+        <div class="chart-legend">
+          <table class="table table-unstyle">
+            <tr>
+              <td><i class="chart-legend-color nxg-chart-total-credit"></i></td>
+              <td class="table-label">Total</td>
+              <td class="table-symbol">=</td>
+              <td class="table-value table-numeric">
+                {{ dashboardData.selectedLineOfCredit.LineOfCreditAmount | numeral:'$0,0.00' }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <i class="chart-legend-color nxg-chart-utilized-credit"></i>
+              </td>
+              <td class="table-label">Utilized</td>
+              <td class="table-symbol color-danger">–</td>
+              <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.UtilizedCreditAmount | numeral:'$0,0.00' }}</td>
+            </tr>
+            <tr>
+              <td>
+                <i class="chart-legend-color nxg-chart-available-credit"></i>
+              </td>
+              <td class="table-label">Available</td>
+              <td class="table-symbol">=</td>
+              <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
+            </tr>
+          </table>
+        </div>
+        <p ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null">This line of credit expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}</p>
       </div>
     </div>
     <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_CREDIT_INCREASE_BUTTON}}">
@@ -272,7 +274,7 @@
         <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
       </tr>
     </table>
-    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('home.receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
+    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
       <span class="paired-body">View All Receipts</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
@@ -300,7 +302,7 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=approved">Approved</a>
+              <a href="#/floorplan?filter=approved">Approved</a>
           </span>
         </div>
       </li>
@@ -315,7 +317,7 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=pending">Pending</a>
+              <a href="#/floorplan?filter=pending">Pending</a>
           </span>
         </div>
       </li>
@@ -330,13 +332,13 @@
           <span tooltip="This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/home/floorplan?filter=denied">Denied</a>
+              <a href="#/floorplan?filter=denied">Denied</a>
           </span>
         </div>
       </li>
     </ul>
 
-    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('home.floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
+    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
       <span class="paired-body">View Floorplans</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>

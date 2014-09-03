@@ -53,7 +53,7 @@ describe('Controller: DashboardCtrl', function () {
   });
 
   it('should have an onClickButtonLink method to move to a new state', function() {
-    scope.onClickButtonLink('home.payments');
+    scope.onClickButtonLink('payments');
     expect(mockState.transitionTo).toHaveBeenCalled();
   })
 
@@ -99,34 +99,6 @@ describe('Controller: DashboardCtrl', function () {
     }));
   });
 
-  describe('tooLong method', function() {
-
-    it('should work for a small displayed number', function () {
-      expect(scope.tooLong(5, '$0[.]00a')).toBeFalsy();
-    });
-
-    it('should work for a small displayed number', function () {
-      expect(scope.tooLong(50, '$0[.]00a')).toBeFalsy();
-    });
-
-    it('should work for a small displayed number', function () {
-      expect(scope.tooLong(50000, '$0[.]00a')).toBeFalsy();
-    });
-
-    it('should work for a large displayed number', function () {
-      expect(scope.tooLong(569.45, '$0[.]00a')).toBeTruthy();
-    });
-
-    it('should work for a large displayed number', function () {
-      expect(scope.tooLong(56945, '$0[.]00a')).toBeTruthy();
-    });
-
-    it('should work for a large displayed number', function () {
-      expect(scope.tooLong(569454, '$0[.]00a')).toBeTruthy();
-    });
-  });
-
-
   it('should call for data on a setDateRange event and attach the result to the scope', function() {
     var start = new Date(),
       end = new Date(),
@@ -149,7 +121,7 @@ describe('Controller: DashboardCtrl', function () {
   it('should have a filterPayments method that goes to payments page with initial filter', function() {
     expect(typeof scope.filterPayments).toBe('function');
     scope.filterPayments('foofers');
-    expect(mockState.transitionTo).toHaveBeenCalledWith('home.payments', {filter: 'foofers'});
+    expect(mockState.transitionTo).toHaveBeenCalledWith('payments', {filter: 'foofers'});
   });
 
 });

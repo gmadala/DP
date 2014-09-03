@@ -12,34 +12,25 @@ angular.module('nextgearWebApp')
         enabled: '=enabled',
         ngDisabled: '='
       },
-      controller: function($scope, $attrs, TitleAddresses, metric) {
+      controller: function($scope, $attrs, Addresses, metric) {
         var showSelectMenuAttr = !($attrs.showSelectMenu === undefined || $attrs.showSelectMenu === 'false');
         $scope.metric = metric;
         $scope.selectedAddress = null;
         $scope.showSelectMenu = $scope.payment.overrideAddress || showSelectMenuAttr ? true : false;
-        $scope.addrList = null;
         $scope.addrLoaded = false;
-        $scope.defaultAddress = null;
 
-        // Get the title addresses and the default address
-        TitleAddresses.getAddresses().then(
-          function(result) {
-            $scope.addrList = result;
-            $scope.addrLoaded = true;
+        $scope.addrList = Addresses.getTitleAddresses();
+        $scope.addrLoaded = true;
 
-            TitleAddresses.getDefaultAddress().then(function(defaultAddress) {
-              $scope.defaultAddress = defaultAddress;
+        $scope.defaultAddress = Addresses.getDefaultTitleAddress();
 
-              // If address for this payment has not been overridden,
-              // make sure model for the menu is set to the default
-              if (!$scope.payment.overrideAddress) {
-                $scope.selectedAddress = $scope.defaultAddress;
-              } else {
-                $scope.selectedAddress = $scope.payment.overrideAddress;
-              }
-            });
-          }
-        );
+        // If address for this payment has not been overridden,
+        // make sure model for the menu is set to the default
+        if (!$scope.payment.overrideAddress) {
+          $scope.selectedAddress = $scope.defaultAddress;
+        } else {
+          $scope.selectedAddress = $scope.payment.overrideAddress;
+        }
 
         $scope.canChangeTitleAddress = function() {
           return ($scope.enabled || $scope.enabled === undefined) && $scope.addrLoaded && $scope.addrList.length > 1;

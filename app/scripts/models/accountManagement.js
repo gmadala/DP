@@ -6,12 +6,6 @@ angular.module('nextgearWebApp')
     return {
       get: function() {
         return api.request('GET', '/userAccount/settings').then(function(settings) {
-          for (var i = 0; i < settings.Addresses.length; i++) {
-            var addr = settings.Addresses[i];
-            if (addr.IsTitleReleaseAddress) {
-              settings.CurrentTitleReleaseAddress = addr;
-            }
-          }
           return settings;
         });
 

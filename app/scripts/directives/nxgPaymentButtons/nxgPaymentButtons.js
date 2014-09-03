@@ -7,7 +7,8 @@ angular.module('nextgearWebApp')
         type:       '@nxgPaymentButtons', // fee | payment | payoff
         item:       '=',
         onQueue:    '=',
-        canPayNow:  '='
+        canPayNow:  '=',
+        onCancelScheduledPayment: '&'
       },
       controller: function($scope, $dialog, Payments, metric) {
         //set on $rootScope, but for some reason, not available unless explicitly set here
@@ -19,6 +20,10 @@ angular.module('nextgearWebApp')
 
         // set internalType based on type and scheduled state
         $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
+          if(!$scope.item) {
+            return;
+          }
+
           var result = $scope.type;
 
           if ($scope.item.Scheduled && $scope.type !== 'fee') {
@@ -50,6 +55,7 @@ angular.module('nextgearWebApp')
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
+
           var p = $scope.item,
             amount, principal, fees, interest, collateralProtectionPmt;
 
@@ -68,7 +74,14 @@ angular.module('nextgearWebApp')
             collateralProtectionPmt = p.CollateralProtectionPaymentTotal;
           }
 
-          if (!$scope.onQueue) {
+          if (!$scope.onQueue) { // if it's not on the queue
+
+            if(p.Scheduled && p.ScheduledPaymentDate) {
+              // if it's already scheduled as a payment or payoff, we want to auto-cancel
+              // the scheduled payment and add the new payment or payoff.
+              $scope.cancelScheduledPayment();
+            }
+
             Payments.addPaymentToQueue(
               p.FloorplanId,
               p.Vin,
@@ -143,10 +156,15 @@ angular.module('nextgearWebApp')
                     amountDue: $scope.item.AmountDue
                   },
                   onCancel: function() {
-                    var p = $scope.item;
-                    p.Scheduled = false;
-                    p.ScheduleSetupDate = p.ScheduledPaymentDate = null;
-                    return p;
+                    if(angular.isDefined($scope.onCancelScheduledPayment)) {
+                      // we have a custom function we want to run onCancel.
+                      $scope.onCancelScheduledPayment();
+                    } else { // default onCancel function (payments page, scheduled payments page)
+                      var f = $scope.item;
+                      f.Scheduled = false;
+                      f.ScheduledDate = null;
+                      return f;
+                    }
                   }
                 };
               }

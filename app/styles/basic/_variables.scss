@@ -1,8 +1,7 @@
-// ===============
-// Variables
-// ===============
+// ===========
+//  VARIABLES
+// ===========
 
-// Updated variables for refactor
 // Primary Colors
 $primary: #3399CC; // light blue for main interaction buttons (ctas) and primary accent
 $highlight: #0067AC; // blue (exact corporate blue) for interaction or highlight text
@@ -11,15 +10,23 @@ $accent: #666666; // medium gray used to create divisions between sections
 $text: #404040; // primary text color
 
 // override bootstrap
+$baseFontFamily: Helvetica, Arial, sans-serif;
 $baseFontSize: 12px;
 $baseLineHeight: 1.2;
 $tableBackground: #FFFFFF;
 $tableBackgroundAccent: #F2F2F2;
 $tableBorder: #BBBBBB;
+$tooltipArrowWidth: 10px;
+$tooltipArrowColor: #FFF;
+$tooltipBackground: #FFF;
+$wellBackground: #f8f8f8;
 // end bootstrap overrides
 
+// Borders
 $dataTableBorder: #BBBBBB;
+$wellBorder: #bbbcbe;
 $border: #BBBBBB;
+$borderRadius: 5px;
 
 // Color Indicators
 $danger: #be1e2d; // red
@@ -32,8 +39,11 @@ $today: $warning;
 $upcoming: $success;
 
 $white: #FFFFFF;
-$borderRadius: 5px;
-$inputFontSize: 11px;
+
+// Type Sizes
+$tiny-font-size: 11px;
+$small-font-size: 12px;
+$large-font-size: 18px;
 
 // Buttons
 $btn-bkgd: $white;
@@ -66,58 +76,8 @@ $modalHeader: #58595b;
 // UI Elements
 $radioSize: 18px;
 $form-border: $accent;
+$inputFontSize: 11px;
 
 // Sorting
 $selected-color: white;
 $not-selected-color: #B3B3B3;
-
-// end updated variables
-/////////////////////////////////////////////////////////////
-
-// TYPOGRAPHY
-// Fonts
-$base-font-family: Helvetica, Arial, sans-serif;
-
-// Type Sizes
-$tiny-font-size: 11px;
-$small-font-size: 12px;
-$large-font-size: 18px;
-
-// COLORS
-// Branding
-$brand-gradient-top: #499EC6; // login page background
-$brand-gradient-bottom: #319FC7;
-
-// Footer
-$footer-text: #0088CC;
-
-// Grays
-$gray-4: #444;
-$gray-5: #555;
-$gray-6: #666;
-$gray-8: #888;
-$gray-9: #999;
-$gray-a: #AAA;
-$gray-b: #BBB;
-$gray-c: #CCC;
-$gray-d: #DDD;
-$gray-e: #EEE; // lightest
-
-// Other Neutrals
-$black: #000;
-
-// TOOLTIPS
-$tooltipArrowWidth: 10px;
-$tooltipArrowColor: #FFF;
-$tooltipBackground: #FFF;
-
-// WELLS
-$well-bkgd: #EEE;
-$well-border: #EEE;
-$well-out-bkgd: $white;
-$well-out-border: #D5D5D5;
-$well-twocol-border: #CCC;
-$well-adj-border: #EEE;
-
-$wellBackground: #f8f8f8;
-$wellBorder: #bbbcbe;

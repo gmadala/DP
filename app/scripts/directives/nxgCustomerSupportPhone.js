@@ -6,7 +6,7 @@
 // This does NOT replace the value in unsupported.html (which runs in older browsers and can't rely on
 // AngularJS working)
 angular.module('nextgearWebApp')
-  .value('customerSupportPhone', '(888) 969-3721')
+  .value('customerSupportPhone', '888.969.3721')
   .directive('nxgCustomerSupportPhone', function(customerSupportPhone) {
     return {
       restrict: 'E',

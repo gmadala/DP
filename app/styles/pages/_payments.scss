@@ -9,20 +9,6 @@
     margin: 5px 0 0;
   }
 
-
-/* To prevent disabled buttons from moving when active. */
-.schPayments-list .cell .btn-small,
-.schPayments-list .cell .btn-small:hover,
-.schPayments-list .cell .btn-small:active,
-        .payments .cell .btn-block,
-        .payments .cell .btn-block:hover,
-        .payments .cell .btn-block:active,
-            .fees .cell .btn-block,
-            .fees .cell .btn-block:hover,
-            .fees .cell .btn-block:active {
-    margin-top: 15px;
-}
-
 .sticky, .well.sticky {
   margin-bottom: 0;
 }
@@ -47,4 +33,10 @@
     position: absolute;
     top: 10px;
   }
+}
+
+.count {
+  font-size: 16px;
+  font-weight: bold;
+  color: $text;
 }

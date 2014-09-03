@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        dialogClass: 'modal search-modal top-auctions-modal',
+        dialogClass: 'modal modal-x-large',
         templateUrl: 'views/modals/topAuctions.html',
         controller: 'TopAuctionsCtrl',
         resolve: {

@@ -31,12 +31,14 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" ui-view></div>
+      <div class="nxg-main-view" nxg-fluid-container>
+        <div ui-view></div>
+      </div>
       <div nxg-activity></div>
     </div>
 
     <footer class="row-fluid">
-        &copy; 2013-2014 NextGear Capital, Inc. All Rights Reserved. 1320 City Center Drive, Suite 100 Carmel, IN 46032 <nxg-customer-support-phone></nxg-customer-support-phone>
+        &copy; 2013-2014 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032 <nxg-customer-support-phone></nxg-customer-support-phone>
         <a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}">Privacy Statement</a> | <a href="http://www.nextgearcapital.com/contact.php" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}">Contact Us</a>
     </footer>
 
@@ -91,6 +93,7 @@
     <script src="scripts/services/userVoice.js"></script>
     <script src="scripts/services/qualarooSurvey.js"></script>
     <script src="scripts/services/floorplanUtil.js"></script>
+    <script src="scripts/services/Addresses.js"></script>
 
     <script src="scripts/filters/alt.js"></script>
     <script src="scripts/filters/numeral.js"></script>
@@ -116,22 +119,20 @@
     <script src="scripts/models/creditQuery.js"></script>
     <script src="scripts/models/profileSettings.js"></script>
     <script src="scripts/models/accountManagement.js"></script>
-    <script src="scripts/models/titleAddresses.js"></script>
     <script src="scripts/models/creditIncrease.js"></script>
     <script src="scripts/models/titleReleases.js"></script>
 
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/home/dashboard.js"></script>
-    <script src="scripts/controllers/home/payments.js"></script>
-    <script src="scripts/controllers/home/scheduledPayments.js"></script>
-    <script src="scripts/controllers/home/receipts.js"></script>
-    <script src="scripts/controllers/home/floorplan.js"></script>
-    <script src="scripts/controllers/home/titleReleases.js"></script>
-    <script src="scripts/controllers/home/checkout.js"></script>
-    <script src="scripts/controllers/home/confirmCheckout.js"></script>
-    <script src="scripts/controllers/home/scheduleCheckout.js"></script>
-    <script src="scripts/controllers/home/titleReleaseCheckout.js"></script>
-    <script src="scripts/controllers/home/confirmTitleReleaseCheckout.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
+    <script src="scripts/controllers/payments.js"></script>
+    <script src="scripts/controllers/scheduledPayments.js"></script>
+    <script src="scripts/controllers/receipts.js"></script>
+    <script src="scripts/controllers/floorplan.js"></script>
+    <script src="scripts/controllers/titleReleases.js"></script>
+    <script src="scripts/controllers/checkout.js"></script>
+    <script src="scripts/controllers/confirmCheckout.js"></script>
+    <script src="scripts/controllers/scheduleCheckout.js"></script>
+    <script src="scripts/controllers/titleReleaseCheckout.js"></script>
+    <script src="scripts/controllers/confirmTitleReleaseCheckout.js"></script>
     <script src="scripts/controllers/analytics.js"></script>
     <script src="scripts/controllers/documents.js"></script>
     <script src="scripts/controllers/floorCar.js"></script>
@@ -149,7 +150,6 @@
     <script src="scripts/controllers/auction.reports.js"></script>
     <script src="scripts/controllers/loginCreatePassword.js"></script>
     <script src="scripts/controllers/vehicledetails.js"></script>
-    <script src="scripts/controllers/modals/afterHoursCheckout.js"></script>
     <script src="scripts/controllers/modals/businessSearch.js"></script>
     <script src="scripts/controllers/modals/cancelFee.js"></script>
     <script src="scripts/controllers/modals/cancelPayment.js"></script>
@@ -189,6 +189,7 @@
     <script src="scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js"></script>
     <script src="scripts/directives/nxgRequestsSummary/nxgRequestsSummary.js"></script>
     <script src="scripts/directives/nxgAlternateAddress/nxgAlternateAddress.js"></script>
+    <script src="scripts/directives/nxgAddress.js"></script>
     <script src="scripts/directives/nxgActivity/nxgActivity.js"></script>
     <script src="scripts/directives/nxgMessages/nxgMessages.js"></script>
     <script src="scripts/directives/nxgIcon/nxgIcon.js"></script>
@@ -201,6 +202,7 @@
     <script src="scripts/directives/nxgTypeahead.js"></script>
     <script src="scripts/directives/placeholder.js"></script>
     <script src="scripts/directives/ieInputPatch.js"></script>
+    <script src="scripts/directives/nxgFluidContainer.js"></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
 

@@ -10,7 +10,16 @@ describe('Directive: navBar', function () {
       aScope,
       rootScope,
       state,
-      stateMock = {
+      stateMock,
+      shouldShowTRP,
+      dMock,
+      aMock;
+
+    beforeEach(inject(function ($rootScope, $controller, $state, $q) {
+      rootScope = $rootScope;
+      scope = $rootScope.$new();
+
+       stateMock = {
         current: 'floorcar',
         transitionTo: function(newState) {
           stateMock.current = newState;
@@ -18,22 +27,31 @@ describe('Directive: navBar', function () {
         includes: function(param) {
           return stateMock.current.indexOf(param) != -1;
         }
-      },
+      };
+      shouldShowTRP = false;
       dMock = {
         isDealer: function(){ return true; },
         getInfo: function(){
           return {
             thing: 'this',
           };
+        },
+        infoPromise: function() {
+          return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP })
+        },
+        isLoggedIn: function() {
+          return true;
         }
-      },
-      aMock = {
-        isDealer: function(){ return false; }
       };
-
-    beforeEach(inject(function ($rootScope, $controller, $state) {
-      rootScope = $rootScope;
-      scope = $rootScope.$new();
+      aMock = {
+        isDealer: function(){ return false; },
+        infoPromise: function() {
+          return $q.when({ DisplayTitleReleaseProgram: false })
+        },
+        isLoggedIn: function() {
+          return true;
+        }
+      };
 
       $controller('NavBarCtrl', {
         $scope: scope,
@@ -77,11 +95,28 @@ describe('Directive: navBar', function () {
         expect(typeof scope.user.navLinks).toBe('function');
 
         var myLinks = scope.user.navLinks();
-        expect(myLinks.length).toBe(5); // dealers have 5 nav links
+
+        // dealers have 7 primary links and 2 secondary links (excluding conditional TRP link)
+        expect(myLinks.primary.length).toBe(7);
+        expect(myLinks.secondary.length).toBe(2);
 
         myLinks = aScope.user.navLinks();
-        expect(myLinks.length).toBe(3); // auctions have 3 nav links
+        // auctions have 6 primary links and no secondary links
+        expect(myLinks.primary.length).toBe(6);
+        expect(myLinks.secondary).not.toBeDefined();
       });
+
+      it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', inject(function($rootScope, $controller) {
+        shouldShowTRP = true;
+
+        $controller('NavBarCtrl', {
+          $scope: scope,
+          $state: stateMock,
+          User: dMock
+        });
+        scope.$apply();
+        expect(scope.user.navLinks().primary.length).toBe(8);
+      }));
 
       it('should change the homelink based on user type', function() {
         expect(scope.user.homeLink).toBeDefined();

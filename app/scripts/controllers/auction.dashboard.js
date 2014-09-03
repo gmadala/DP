@@ -1,16 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api) {
+  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api, $state) {
 
     segmentio.track(metric.VIEW_DASHBOARD);
-
     $scope.dashboardData = Dashboard.fetchAuctionDashboard();
 
     $scope.selectedFloorplanChart = 'year';
 
     $scope.$watch('selectedFloorplanChart', function(newVal) {
-
       var range = -1;  // See API for full definition, 0 = week, 1 = month, 2 = year
 
       switch(newVal) {
@@ -26,10 +24,28 @@ angular.module('nextgearWebApp')
       default:
         throw 'Unexpected value for filtering floorplan chart!';
       }
-
       $scope.chartData = Dashboard.fetchFloorplanChartData(range);
-
     });
+
+    $scope.changeFloorplanChart = function(mode) {
+      $scope.selectedFloorplanChart = mode;
+    };
+
+    $scope.isYearMode = function() {
+      return $scope.selectedFloorplanChart === 'year';
+    };
+
+    $scope.isMonthMode = function() {
+      return $scope.selectedFloorplanChart === 'month';
+    };
+
+    $scope.isWeekMode = function() {
+      return $scope.selectedFloorplanChart === 'week';
+    };
+
+    $scope.onClickButtonLink = function(state) {
+      $state.transitionTo(state);
+    };
 
     $scope.viewDisbursementDetail = function(date) {
       var strUrl = api.contentLink('/report/disbursementdetail/' + date + ('/Disbursements-' + date /*filename*/), {});

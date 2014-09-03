@@ -6,8 +6,6 @@ angular.module('nextgearWebApp')
     segmentio.track(metric.VIEW_DASHBOARD);
 
 
-
-
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
 
@@ -83,24 +81,12 @@ angular.module('nextgearWebApp')
       $state.transitionTo(newState);
     };
 
-    // Determines if the length of the rendered number is too long
-    // to fit inside the pie charts on the dashboard.
-    // This method is a terrible separation of view/controller, but
-    // it's necessary to shrink numbers that don't fit.
-    $scope.tooLong = function(number, format) {
-      if($filter('numeral')(number, format).length >= 7) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
     $scope.filterPayments = function(filter) {
       var param;
       if(filter) {
         param = {filter: filter};
       }
-      $state.transitionTo('home.payments', param);
+      $state.transitionTo('payments', param);
     };
 
     $scope.chartData = {};
@@ -120,6 +106,8 @@ angular.module('nextgearWebApp')
         width: '138'
       }
     };
+
+
     /**
      * Watch changes to the 'Line of Credit' select dropdown.
      * update the nxg-chart based on changes.
@@ -127,9 +115,11 @@ angular.module('nextgearWebApp')
     $scope.$watch('dashboardData.selectedLineOfCredit', function(newValue, oldValue){
       if (newValue !== oldValue) {
         $scope.chartData.credit = newValue.CreditChartData;
-        $scope.chartData.creditTitle.text = '<h1 class="chart-label-secondary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>' ;
+        $scope.chartData.creditTitle.text = '<h2 class="chart-label-primary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h2> <p class="chart-label-primary">available</p>' ;
       }
     });
+
+
 
     /**
      * Flow of control is a little weird here, because the calendar's current visible
@@ -144,8 +134,25 @@ angular.module('nextgearWebApp')
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
+
+          var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
+
           $scope.dashboardData = result;
-          $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
+          $scope.dashboardData.selectedLineOfCredit = viewAllCredit;
+          $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
+
+          /* Loop through all of the Lines of Credit */
+          for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
+            var lineOfCredit = $scope.dashboardData.LinesOfCredit[i];
+            var allCreditUtilized = (lineOfCredit.LineOfCreditAmount + lineOfCredit.TempLineOfCreditAmount) - lineOfCredit.AvailableCreditAmount;
+
+            /* set calculated values for View All select option */
+            viewAllCredit.LineOfCreditAmount += lineOfCredit.LineOfCreditAmount;
+            viewAllCredit.TempLineOfCreditAmount += lineOfCredit.TempLineOfCreditAmount;
+            viewAllCredit.AvailableCreditAmount += lineOfCredit.AvailableCreditAmount;
+            viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
+          }
+          viewAllCredit.updateChartData();
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,
@@ -159,7 +166,7 @@ angular.module('nextgearWebApp')
             paymentsTitle: {
               useHTML: true,
               floating: true,
-              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">this ' + $scope.viewMode + '</p>',
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">This ' + $filter('capitalize')($scope.viewMode) + '</p>',
               y: 75
             }
           };

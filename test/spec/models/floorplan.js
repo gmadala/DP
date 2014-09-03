@@ -564,7 +564,7 @@ describe('Model: Floorplan', function () {
         {
           floorplanId: 123,
           overrideAddress:  {
-            BusinessAddressId: 143
+            AddressId: 143
           }
         }
       ]);

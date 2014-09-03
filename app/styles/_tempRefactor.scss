@@ -24,6 +24,12 @@
     padding: 0 0 0;
     margin: 0;
 
+    .table-symbol {
+      @extend %float-l;
+      line-height: 1;
+      padding: 0;
+    }
+
     .mini & {
       padding: 0;
 
@@ -178,6 +184,10 @@
     height: 100%;
   }
 
+  .info-block-image {
+    width: 20px;
+  }
+
   .info-block-text {
     padding: 8px 10px 8px 10px;
   }
@@ -269,6 +279,33 @@
   }
 }
 
+.analytics-well {
+  position: relative;
+  height: 400px;
+}
+
+.auction-well {
+  position: relative;
+  height: 270px;
+
+  .counter-list {
+    padding: 0 10px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.settings-well {
+  padding-bottom: 20px;
+
+  [class*="span"] {
+    position: relative;
+  }
+}
+
 .details-well {
   height: 260px;
 }
@@ -299,6 +336,15 @@
 }
 
 
+// for payment buttons on the vehicle details page.
+.payment-btn-block {
+  padding-top: 10px;
+
+  .button {
+    float: right;
+  }
+}
+
 hr {
   border-top: 1px solid $border;
   border-bottom: 0;
@@ -308,4 +354,20 @@ hr {
 // Provides our highlightable search text
 .ui-match {
   background: yellow;
+}
+
+
+// used for scheduled payments and payments view
+.clear-search {
+  margin-top: 10px;
+}
+
+// volume of floorplans (auction side) chart
+.auction-dashboard-chart {
+  padding-bottom: 20px;
+}
+
+// for 'or' in dealer search forms
+.form-separator {
+  padding-top: 10px;
 }

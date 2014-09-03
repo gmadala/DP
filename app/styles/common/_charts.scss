@@ -1,3 +1,7 @@
+// ========
+//  CHARTS
+// ========
+
 .scale-description {
   @extend %heavy;
   font-size: $tiny-font-size;
@@ -31,7 +35,7 @@
 }
 
 .chart-legend {
-  margin: 0 8px 20px 0;
+  margin: 0 20px 20px 5px;
 }
 
 .chart-legend-color {
@@ -44,13 +48,13 @@
  * So if you need change these hex colors, you need to do that in both places.
  * @see app/scripts/models/dashboard.js
  */
-// .nxg-chart-approved-credit    { background-color: #9F9F9F }
-// .nxg-chart-temporary-credit   { background-color: #575757 }
+
 .nxg-chart-utilized-credit    { background-color: $primary; }
 .nxg-chart-available-credit   { background-color: $success; }
 .nxg-chart-fees               { background-color: #9F9F9F; }
 .nxg-chart-payments           { background-color: #3399CC; }
 .nxg-chart-scheduled-payments { background-color: #1864A1; }
+.nxg-chart-total-credit { background-color: #9F9F9F; }
 
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {

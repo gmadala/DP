@@ -1,4 +1,6 @@
-/* ===== ICONS ===== */
+// =======
+//  ICONS
+// =======
 
 // override bootstrap
 [class^="icon-"], [class*=" icon-"] {
@@ -188,22 +190,3 @@
 .icon-plus, .icon-minus {
   width: 13px;
 }
-
-// .icon-sortArrows  {
-//   display: none;
-//   width: 18px;
-//   height: 16px;
-
-//   .sorted & {
-//     @include scale(1,1);
-//     display: inline-block;
-//     top: 0;
-//     left: 0;
-//   }
-
-//   .selected.desc & {
-//     @include scale(1,-1);
-//   }
-// }
-
-

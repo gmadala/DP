@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, api, moment) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, Addresses, api, moment) {
+    $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
     $scope.titleInfo = {};
@@ -13,7 +14,11 @@ angular.module('nextgearWebApp')
     $scope.isCollapsed = true;
 
     $scope.goToCheckout = function() {
-      $state.transitionTo('home.checkout');
+      $state.transitionTo('checkout');
+    };
+
+    $scope.onCancelScheduled = function() {
+      getData();
     };
 
     // we wrap the api call in a function so that we can call it initially
@@ -60,6 +65,8 @@ angular.module('nextgearWebApp')
           FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
           CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
           Scheduled: details.FinancialSummaryInfo.Scheduled,
+          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
@@ -69,6 +76,7 @@ angular.module('nextgearWebApp')
           StockNumber: $stateParams.stockNumber,
           UnitDescription: details.FinancialSummaryInfo.Description,
           CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
+          AmountDue: details.FinancialSummaryInfo.TotalOutstanding,
           DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
           isPayoff: true,
           PrincipalPayoff: details.FinancialSummaryInfo.PrincipalDue,
@@ -76,6 +84,8 @@ angular.module('nextgearWebApp')
           FeesPayoffTotal: details.FinancialSummaryInfo.FeesPayoffTotal,
           CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionPayoffTotal,
           Scheduled: details.FinancialSummaryInfo.Scheduled,
+          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
@@ -116,7 +126,7 @@ angular.module('nextgearWebApp')
 
         $scope.titleInfo.requestTitle = function() {
           TitleReleases.addToQueue(titleForCheckout);
-          $state.transitionTo('home.titleReleaseCheckout');
+          $state.transitionTo('titleReleaseCheckout');
         };
 
         // Grab data for flooring info section
@@ -178,9 +188,7 @@ angular.module('nextgearWebApp')
         };
 
         //Grab all possible inventory locations
-        $scope.inventoryLocations = _.filter(User.getStatics().dealerAddresses, function(addr) {
-          return addr.IsActive && addr.IsPhysicalInventory;
-        });
+        $scope.inventoryLocations = Addresses.getActivePhysical();
 
         // Users should only be able to change inventory location if they have more than one,
         // and the Floorplan's status is either "Approved" or "Pending"
@@ -347,37 +355,8 @@ angular.module('nextgearWebApp')
           });
         };
 
-        // For VO-2190, Amount is either NextPaymentAmount or TotalOutstanding
-        $scope.financialSummary.scheduledAmount = details.FinancialSummaryInfo.CurtailmentPaymentScheduled ? details.FinancialSummaryInfo.NextPaymentAmount : details.FinancialSummaryInfo.TotalOutstanding;
-
-        $scope.cancelScheduledPayment = function() {
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/cancelPayment.html',
-            controller: 'CancelPaymentCtrl',
-            resolve: {
-              options: function() {
-                return {
-                  payment: {
-                    webScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-                    vin: details.VehicleInfo.UnitVin,
-                    description: details.FinancialSummaryInfo.Description,
-                    stockNumber: $stateParams.stockNumber,
-                    scheduledDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
-                    isPayOff: !details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
-                    currentPayOff: details.FinancialSummaryInfo.TotalOutstanding,
-                    amountDue: $scope.financialSummary.scheduledAmount
-                  },
-                  onCancel: function() {
-                    // refresh page so that it no longer looks like a payment is scheduled.
-                  }
-                };
-              }
-            }
-          };
-          $dialog.dialog(dialogOptions).open();
+        $scope.isPaymentOnQueue = function(id) {
+          return Payments.isPaymentOnQueue(id);
         };
 
         // Grab data for value info section
@@ -420,6 +399,8 @@ angular.module('nextgearWebApp')
             }
           }).open();
         };
+
+        $scope.dataLoaded = true;
       });
     };
 

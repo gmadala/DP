@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses) {
     // Private
     var info = null,
       statics = null,
@@ -9,7 +9,9 @@ angular.module('nextgearWebApp')
       securityQuestions = null,
       infoRequest = null;
 
-    var calculateCanPayBuyer = function() {
+
+
+    function calculateCanPayBuyer() {
       if (!info) {
         return undefined;
       }
@@ -17,7 +19,13 @@ angular.module('nextgearWebApp')
       return info.DealerAuctionStatusForGA === 'Dealer' &&
         info.IsBuyerDirectlyPayable &&
         info.HasUCC;
-    };
+    }
+
+    function filterByBusinessName(subsidiaries) {
+      return _.sortBy(subsidiaries, function(s) {
+        return s.BusinessName;
+      });
+    }
 
     // Public API
     return {
@@ -150,6 +158,7 @@ angular.module('nextgearWebApp')
             titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
+          Addresses.init(data.DealerAddresses || []);
           return statics;
         },
         function() {
@@ -186,6 +195,7 @@ angular.module('nextgearWebApp')
             titleLocationOptions: [],
             paymentMethods: []
           };
+          Addresses.init([]);
         });
       },
 
@@ -196,7 +206,12 @@ angular.module('nextgearWebApp')
       refreshInfo: function() {
         infoRequest = api.request('GET', '/Dealer/Info').then(function(data) {
           info = data;
+          info.ManufacturerSubsidiaries = filterByBusinessName(info.ManufacturerSubsidiaries);
+          Addresses.initFlooredBusinessAddresses(info.FlooredBusinessAddresses);
           return info;
+        },
+        function() {
+          Addresses.initFlooredBusinessAddresses([]);
         });
 
         return infoRequest;

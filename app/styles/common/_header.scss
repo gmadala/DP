@@ -1,14 +1,24 @@
-// ===============
-// Header
-// ===============
-
-header > .row-fluid {
-  background: $white;
-  padding-bottom: 10px;
-}
+// ========
+//  HEADER
+// ========
 
 .app-header {
-  margin: 10px auto 7px;
+  @extend .row-fluid;
+  background: $white;
+  margin-bottom: 20px;
+
+  &.login {
+    margin: 0;
+  }
+}
+
+.header {
+  @extend .row-fluid;
+  position: relative;
+
+  .span6 {
+    text-align: center;
+  }
 }
 
 .nxg-logo {
@@ -17,113 +27,215 @@ header > .row-fluid {
     background-image: url(../img/nxg_logo_blue_2x.png);
   }
   background-repeat: no-repeat;
-  background-size: 220px 50px;
+  background-size: 200px auto;
   background-position: 20px 0;
   height: 50px;
-  top: 0;
+  position: relative;
+  top: 10px;
   padding-top: 1px;
   z-index: 5;
 }
 
-.nxg-settings-drop {
-  @extend %small;
+.nxg-dropdown {
+  @extend %align-right;
+  @include border-bottom-radius($borderRadius);
+  background-color: $white;
   position: absolute;
-  top: 0;
+  top: -1px;
   right: 0;
-  background: transparent;
-  color: $highlight;
-  padding: 10px;
-  border: 1px solid transparent;
-  z-index: 1;
+  padding: 10px 20px;
+  border: 1px solid $border;
+  z-index: 100;
+  max-width: 23.40426%; // same as span3, which is the width of the parent element
 
-  &.open {
-    @include box-shadow(rgba(0,0,0,0.5) 0 4px 4px);
-    background-color: $white;
-    border-color: $gray-b;
+  &.expanded {
+    @include box-shadow(rgba(0,0,0,0.25) 0 3px 3px);
+
+    .user-info:after {
+      border-top: transparent;
+      border-bottom: 8px solid $highlight;
+    }
   }
-}
-
-.nxg-settings.dropdown-menu {
-  @extend %full-width;
-  position: relative;
-  min-width: 100%;
-  padding: 0;
-  border: 0;
-
-  // these are to override bootstrap's default dropdown styling
-  @include border-radius(0);
-  @include box-shadow(0 0 0 rgba(0,0,0,0));
-  float: none;
-  background: transparent;
 
   ul {
-    padding: 10px 10px 5px 5px;
     margin: 0;
+
+    li {
+      margin-bottom: 12px;
+
+      &:first-child {
+        margin-top: 15px;
+      }
+
+      a {
+        color: $accent;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #999;
+          text-decoration: none;
+        }
+      }
+    }
   }
 
-  button {
-    margin-top: 10px;
-  }
-}
+  .user-info {
+    display: block;
+    position: relative;
+    font-weight: bold;
+    padding-right: 20px;
 
-.account-btn {
-  display: block;
-  position: absolute;
-  right: 20px;
-  height: 33px;
-  color: $highlight;
-  padding: 0 5px;
-  border: 0;
+    &:hover {
+      text-decoration: none;
+    }
 
-  i {
-    font-size: 1.75em;
-
+    // for the arrow.
     &:after {
       content: '';
       @include box(0);
       display: block;
       position: absolute;
-      right: -15px;
+      right: 0;
       top: 10px;
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-top: 5px solid $highlight;
-    }
-  }
-
-  &:hover i:after {
-    border-top-color: $gray-8;
-  }
-}
-
-.chat {
-  @extend %align-right;
-  margin-top: 8px;
-
-  a {
-    @extend %small;
-    color: $highlight;
-    border: 0;
-
-    &:hover, &:active {
-      text-decoration: underline;
+      border-top: 8px solid $highlight;
     }
 
-    i {
-      color: $highlight;
-      font-size: 15px;
-      margin-right: 4px;
+    p {
+      @extend .truncate;
     }
   }
 }
 
-.dealer-info {
+.nav-primary, .nav-secondary {
+  @extend .inline-list;
+  margin: 0;
+
+  li a {
+    font-weight: bold;
+    text-transform: uppercase;
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.nav-primary {
+  padding: 10px 0;
+
+  li {
+    padding: 0 8px;
+
+    a {
+      color: $white;
+      display: inline-block;
+      padding: 8px 8px 9px;
+
+      &.active {
+        border-bottom: 4px solid $primary;
+      }
+
+      &:hover {
+        color: #CCCCCC;
+      }
+    }
+  }
+}
+
+.nav-secondary {
+  @include border-bottom-radius($borderRadius);
+  display: inline-block;
+  background-color: #ECECEC;
+  height: 40px;
+  width: auto;
   position: relative;
+  top: -1px;
+  border: 1px solid $border;
 
-  p, h6 {
-    @extend %align-right;
-    line-height: 1.35;
-    padding-right: 45px;
-    margin: 0;
+  ul {
+    float: left;
+    height: 40px;
+    padding: 8px 0 8px;
+    margin: 0 auto;
+
+    li {
+      padding: 5px 15px 7px;
+
+      // & + li {
+        border-right: 1px solid $border;
+      // }
+
+      a {
+        color: $accent;
+        font-size: 11px;
+        display: inline-block;
+        position: relative;
+
+        &:hover {
+          color: #999;
+        }
+
+        &.active:after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -11px;
+          left: -5%;
+          width: 110%;
+          margin: 0 auto;
+          height: 4px;
+          background-color: #91969D;
+        }
+      }
+    }
   }
+
+  .cart-btn {
+    @include border-bottom-right-radius($borderRadius);
+    display: block;
+    float: right;
+    height: 39px; // to account for gray border on bottom
+    background-color: transparent;
+    color: $accent;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 15px 10px;
+    border: 0;
+    margin: 0 0 0 -1px;
+
+    .svg-icon svg {
+      fill: $accent;
+      position: relative;
+      top: -2px;
+      margin-left: 2px;
+    }
+
+    &.has-items {
+      color: $white;
+      background: $primary;
+
+      &:hover {
+        text-decoration: none;
+        background-color: $highlight;
+
+        .svg-icon svg {
+          fill: $white;
+        }
+      }
+
+      .svg-icon svg {
+        fill: $white;
+      }
+    }
+  }
+}
+
+.nav-bkgd {
+  @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
+  height: 48px;
+  background-color: $highlight;
+  border-bottom: 3px solid $primary;
 }
