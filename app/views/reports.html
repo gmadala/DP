@@ -10,7 +10,6 @@
 <div class="row-fluid">
   <div class="span6 well">
     <h2 class="well-title">Current Reports</h2>
-
     <div class="well-item">
       <ul class="unstyled">
         <li ng-repeat="report in currentReports">
@@ -29,10 +28,11 @@
         <h3 class="form-title">Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
         <div class="form-row">
-          <label for="curtailmentDate">Date</label>
-					<input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
-
-          <button type="submit" class="btn" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}">View Report</button>
+          <div class="inline-input">
+            <label for="curtailmentDate">Date</label>
+  					<input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
+          </div>
+          <button type="submit" class="btn inline-submit" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}">View Report</button>
         </div>
 
         <div class="form-row">
@@ -49,9 +49,11 @@
         <h3 class="form-title">Exportable Inventory</h3>
 
         <div class="form-row">
-          <label for="expInvStatus">Flooring Status</label>
-          <div class="style-select">
-            <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
+          <div class="inline-input">
+            <label for="expInvStatus">Flooring Status</label>
+            <div class="style-select">
+              <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
+            </div>
           </div>
           <button type="submit" class="btn" ng-click="viewExpInv()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON}}">View Report</button>
         </div>
@@ -99,7 +101,7 @@
           </label>
         </div>
 
-        <div class="form-row">
+        <div class="form-row button-group">
           <button type="submit" class="btn" ng-click="viewDealerStatement()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON}}">View Report</button>
         </div>
 			</form>
@@ -111,9 +113,11 @@
         <h3 class="form-title">Disbursement Detail</h3>
 
         <div class="form-row">
-          <label for="disDate">Date</label>
-					<input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }" required />
-          <button type="submit" class="btn" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}">View Report</button>
+          <div class="inline-input">
+            <label for="disDate">Date</label>
+  					<input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }" required />
+          </div>
+          <button type="submit" class="btn inline-submit" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}">View Report</button>
         </div>
         <div class="form-row">
           <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date">
@@ -161,7 +165,7 @@
 
 				<div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
 
-        <div class="form-row">
+        <div class="form-row button-group">
           <button type="submit" class="btn" ng-click="viewPaidOffSummary()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT}}">View Report</button>
         </div>
 

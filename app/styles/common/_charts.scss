@@ -1,3 +1,7 @@
+// ========
+//  CHARTS
+// ========
+
 .scale-description {
   @extend %heavy;
   font-size: $tiny-font-size;
@@ -51,7 +55,6 @@
 .nxg-chart-payments           { background-color: #3399CC; }
 .nxg-chart-scheduled-payments { background-color: #1864A1; }
 .nxg-chart-total-credit { background-color: #9F9F9F; }
-//TODO: make a new for Total Credit grab color from scripts/models/dashboard.js
 
 //Dashboard charts rules. Container and table rules are in _dashboard.scss
 .payments-chart {

@@ -11,7 +11,6 @@
 
   .text-error {
     display: block;
-    // margin: 10px 0 0;
   }
 }
 
@@ -110,6 +109,15 @@ input[type="color"] {
   // get rid of IE10's default clear button
   &::-ms-clear {
     display: none;
+  }
+}
+
+.inline-input {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  & + .btn.inline-submit {
+    margin: 4px 10px 0;
   }
 }
 
@@ -572,7 +580,7 @@ input[type="radio"] {
         @extend %heavy;
         position: absolute;
         top: 8px;
-        color: $gray-a;
+        color: #999;
         font-family: 'Lucida Sans Unicode';
         font-size: 16px;
         margin: 0 5px;
@@ -618,7 +626,7 @@ input[type="radio"] {
     color: $highlight;
 
     &.new, &.old {
-      color: $gray-9;
+      color: #999;
     }
   }
 

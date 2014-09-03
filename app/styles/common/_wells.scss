@@ -1,8 +1,7 @@
+// =======
+//  WELLS
+// =======
 
-
-/*
-* TODO: well-title does not support multiple inline buttons (e.g. account management view)
-*/
 .well {
   @include border-radius($borderRadius);
   @include box-shadow(none);
@@ -81,7 +80,6 @@
     }
   }
 
-
 .well-item {
   @extend .clearfix;
   padding: 10px;
@@ -108,114 +106,4 @@
     margin: 10px auto;
     text-align: center;
   }
-}
-
-
-
-
-
-
-
-.well-single {
-  width: 300px;
-  margin: 25px auto;
-}
-
-.well-double {
-  margin: 25px 0;
-}
-
-.well-single, .well-double {
-  @include box-shadow(rgba(0,0,0,0.35) 0 0 6px);
-}
-
-.well.adjacent {
-  border: none;
-  border-left: 1px solid white;
-
-  &:first-child {
-    border-left: 1px solid $well-adj-border;
-  }
-
-  &:last-child {
-    border-right: 1px solid $well-adj-border;
-  }
-}
-
-.two-col {
-  position: relative;
-  border: 1px solid $well-twocol-border;
-  border-top: 0;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: -1px;
-    content: '';
-    border-left: 1px solid $well-adj-border;
-    border-right: 1px solid $well-adj-border;
-    height: 47px;
-    width: 100%;
-  }
-
-  .well {
-    @extend .span8;
-    padding-bottom: 0;
-    margin-bottom: 0;
-
-    .well-out {
-      border-bottom: none;
-      border-right: none;
-    }
-
-    &:first-child {
-      .well-out {
-        border-left: none;
-        border-right: 1px solid $well-twocol-border;
-      }
-    }
-  }
-}
-
-.col-wells {
-  border: 1px solid $well-out-border;
-  border-top: 0;
-
-  .col {
-    &:first-child {
-      margin-right: -1px;
-    }
-
-    &:first-child .well.adjacent .well-out {
-      border-left: 0;
-    }
-
-    &:last-child .well.adjacent .well-out {
-      border-right: 0;
-    }
-
-    & + .col {
-      .well.adjacent {
-        &:first-child {
-          border-left: 1px solid $white;
-        }
-      }
-    }
-
-    .well.adjacent {
-      border: 1px solid $well-border;
-      margin-bottom: 0;
-
-      .well-out {
-        border-bottom: 0;
-      }
-    }
-  }
-}
-
-.half-width-col {
-  width: 50%;
-  float: left;
 }

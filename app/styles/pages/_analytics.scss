@@ -1,4 +1,6 @@
-// ANALYTICS
+// ===========
+//  ANALYTICS
+// ===========
 
 .nxg-analytics {
   .scale-description-x {
@@ -15,7 +17,7 @@
     }
   }
 
-// highly specific because we're basically making our own legend to work with highcharts.
+  // highly specific because we're basically making our own legend to work with highcharts.
   .movers-list {
     position: absolute;
     background: transparent;

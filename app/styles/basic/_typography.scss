@@ -1,6 +1,7 @@
-// TYPOGRAPHY
+// ============
+//  TYPOGRAPHY
+// ============
 
-// Beginning of design updates/refactor. 7/14/14.
 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -329,7 +330,6 @@ a, a:link, a:visited {
   list-style-type: disc;
   margin: 10px 10px 10px 30px;
 }
-
 
 .headline { // only used on login page
   @extend %heavy;

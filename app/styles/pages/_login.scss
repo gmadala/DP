@@ -1,4 +1,6 @@
-// LOGIN & FORGOT USERNAME/PASSWORD
+// ===============
+//  LOGIN-RELATED
+// ===============
 
 .login-contents {
   .login-form {
@@ -8,10 +10,6 @@
   label {
     font-size: $baseFontSize;
     margin-bottom: 2px;
-  }
-
-  input {
-    @extend %full-width;
   }
 
   .modal-footer {
@@ -48,8 +46,8 @@
       border-bottom: 1px solid $white;
 
       &:hover, &:active {
-        color: $gray-e;
-        border-bottom: 1px solid $gray-e;
+        color: #EEE;
+        border-bottom: 1px solid $border;
       }
     }
   }

@@ -1,5 +1,7 @@
+// ==========
+//  TOOLTIPS
+// ==========
 
-// Tooltips
 .tooltip .tooltip-arrow {
   z-index: $zindexTooltip + 100;
 
@@ -28,7 +30,7 @@
 
     .tooltip-arrow {
       left: -4px;
-      border-right-color: $gray-b;
+      border-right-color: #BBB;
 
       &:before {
         top: 50%;
@@ -47,7 +49,7 @@
     .tooltip-arrow {
       left: 30px;
       bottom: -4px;
-      border-top-color: $gray-b;
+      border-top-color: #BBB;
 
       &:before {
         left: 50%;
@@ -72,6 +74,6 @@
   color: $text;
   width: 250px;
   padding: 10px;
-  border: 1px solid $gray-b;
+  border: 1px solid #BBB;
   z-index: $zindexTooltip;
 }
