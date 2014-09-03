@@ -90,6 +90,9 @@ angular.module('nextgearWebApp')
       return $state.includes(activeWhen);
     };
 
-    $scope.isCollapsed = true;
+    $rootScope.$on('$stateChangeSuccess', function () {
+      $scope.isCollapsed = true;
+    });
+
     $scope.navState = $state;
   });
