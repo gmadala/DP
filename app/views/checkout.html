@@ -140,22 +140,11 @@
                   </button>
                 </div>
                 <div class="split-cell">
-                  <ul class="list-table mini">
-                    <li class="list-table-row">
-                      <p class="span6">Principal:</p><p class="span6 numeric">{{payment.principal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6">Interest:</p><p class="span6 numeric">{{payment.interestTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6">Fee(s):</p><p class="span6 numeric">{{payment.feesTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row" ng-show="payment.collateralTotal > 0">
-                      <p class="span6">CPP:</p><p class="span6 numeric">{{payment.collateralTotal | currency}}</p>
-                    </li>
-                  </ul>
+                  <button class="btn-unstyle btn-link" ng-click="launchPaymentOptions(payment)">
+                    Payment Options <br/> & Breakdown
+                  </button>
                 </div>
-                <!-- <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label> -->
+                <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
               </td>
             </tr>
           </table>

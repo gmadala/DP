@@ -276,6 +276,24 @@ angular.module('nextgearWebApp')
     };
     refreshCanPayNow();
 
+    $scope.launchPaymentOptions = function(payment) {
+      var dialogOptions = {
+        dialogClass: 'modal modal-medium',
+        backdrop: true,
+        keyboard: false,
+        backdropClick: false,
+        templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+        controller: 'PaymentOptionsBreakdownCtrl',
+        resolve: {
+          payment: function() {
+            return payment;
+          }
+        }
+      };
+
+      $dialog.dialog(dialogOptions).open();
+    };
+
     $scope.exportPaymentSummary = function() {
       var feeIds = [],
         paymentIds = [],
