@@ -434,8 +434,17 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should force unapplied funds use to false if last item is removed from today bucket', function () {
       var queue = Payments.getPaymentQueue();
-      Payments.addPaymentToQueue('id', 'vin', 's#', 'desc', 100, '2013-01-01', false);
+      var mockPayment = {
+        Vin: 'vin',
+        FloorplanId: 'id',
+        StockNumber: 's#',
+        UnitDescription: 'desc',
+        AmountDue: 100,
+        DueDate: '2013-01-01'
+      }
+      Payments.addPaymentToQueue(mockPayment, false/* isFee */);
       run();
+
       scope.unappliedFunds.useFunds = true;
       queue.payments['id'].scheduleDate = new Date();
       scope.$apply();

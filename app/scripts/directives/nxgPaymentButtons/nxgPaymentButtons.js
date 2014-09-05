@@ -49,95 +49,31 @@ angular.module('nextgearWebApp')
         $scope.toggleFeeInQueue = function () {
           var f = $scope.item;
           if (!$scope.onQueue) {
-            Payments.addFeeToQueue(
-              f.FinancialRecordId,
-              f.Vin,
-              f.FeeType,
-              f.Description,
-              f.Balance,
-              f.EffectiveDate);
+            Payments.addFeeToQueue(f, true);
           } else {
             Payments.removeFeeFromQueue(f.FinancialRecordId);
           }
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
+          var p = $scope.item;
 
-          var p = $scope.item,
-            amount, principal, fees, interest, collateralProtectionPmt;
-
-          if (asPayoff) {
-            amount = p.CurrentPayoff;
-            principal = p.PrincipalPayoff;
-            fees = p.FeesPayoffTotal;
-            interest = p.InterestPayoffTotal;
-            collateralProtectionPmt = p.CollateralProtectionPayoffTotal;
-          }
-          else {
-            amount = p.AmountDue;
-            principal = p.PrincipalDue;
-            fees = p.FeesPaymentTotal;
-            interest = p.InterestPaymentTotal;
-            collateralProtectionPmt = p.CollateralProtectionPaymentTotal;
-          }
-
-          if (!$scope.onQueue) { // if it's not on the queue
-
-            if(p.Scheduled && p.ScheduledPaymentDate) {
+          if ($scope.onQueue === false) { // if it's not on the queue
+            if(p.Scheduled) {
               // if it's already scheduled as a payment or payoff, we want to auto-cancel
               // the scheduled payment and add the new payment or payoff.
               $scope.cancelScheduledPayment();
             }
 
-            Payments.addPaymentToQueue(
-              p.FloorplanId,
-              p.Vin,
-              p.StockNumber,
-              p.UnitDescription,
-              amount,
-              p.DueDate,
-              asPayoff,
-              principal,
-              interest,
-              fees,
-              collateralProtectionPmt
-            );
+            Payments.addPaymentToQueue(p, asPayoff);
           } else {
-            var onQueueAs = Payments.isPaymentOnQueue(p.FloorplanId);
-
             // Regardless, we still want to remove the original payment.
             Payments.removePaymentFromQueue(p.FloorplanId);
 
-            if(onQueueAs === 'payment' && asPayoff) {
-              // we want to switch from payment to payoff
-              Payments.addPaymentToQueue(
-                p.FloorplanId,
-                p.Vin,
-                p.StockNumber,
-                p.UnitDescription,
-                amount,
-                p.DueDate,
-                true, // this is the asPayoff flag
-                principal,
-                interest,
-                fees,
-                collateralProtectionPmt
-              );
-            } else if (onQueueAs === 'payoff' && !asPayoff) {
-              // we want to switch from payoff to payment
-              Payments.addPaymentToQueue(
-                p.FloorplanId,
-                p.Vin,
-                p.StockNumber,
-                p.UnitDescription,
-                amount,
-                p.DueDate,
-                false, // this is the asPayoff flag
-                principal,
-                interest,
-                fees,
-                collateralProtectionPmt
-              );
+            if($scope.onQueue === 'payment' && asPayoff) {
+              Payments.addPaymentToQueue(p, true/* isPayoff */);
+            } else if ($scope.onQueue === 'payoff' && !asPayoff) {
+              Payments.addPaymentToQueue(p, false/* isPayoff */);
             }
           }
         };

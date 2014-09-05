@@ -107,14 +107,11 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
-      <span ng-switch="onQueue">
-        <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
-        <span ng-switch-when="payment" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
-        <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
-      </span>
-      <!-- TODO: confirm the functionality of 'Remove' with @Ryan
-        <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
-      -->
+    <span ng-switch="onQueue">
+      <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
+      <span ng-switch-when="payment" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
+      <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
+    </span>
   </button>
 
   <div ng-switch-when="payoff-scheduledPayoff" class="scheduled-payoff">

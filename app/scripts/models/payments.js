@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, Paginate, Floorplan, segmentio, metric) {
+  .factory('Payments', function($q, $filter, api, moment, queueObject, Paginate, Floorplan, segmentio, metric) {
 
     // private global state:
 
@@ -124,38 +124,17 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, principal, interestTotal, feesTotal, collateralTotal) {
-        var payment = {
-          isPayment: true,
-          isFee: false,
-          floorplanId: floorplanId,
-          vin: vin,
-          stockNum: stockNum,
-          description: description,
-          amount: amount,
-          dueDate: dueDate,
-          isPayoff: asPayoff,
-          principal: principal,
-          interestTotal: interestTotal,
-          feesTotal: feesTotal,
-          collateralTotal: collateralTotal,
-          overrideAddress: null
-        };
-        paymentQueue.payments[floorplanId] = payment;
+      addPaymentToQueue: function (payment, asPayoff) {
+        // incoming object will have a FloorplanId; the new queueObject will just have id.
+        var p = queueObject(payment, false/* isFee */, asPayoff);
+
+        paymentQueue.payments[p.id] = p;
         segmentio.track(metric.ADD_TO_BASKET);
       },
-      addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
-        var fee = {
-          isPayment: false,
-          isFee: true,
-          financialRecordId: financialRecordId,
-          type: type,
-          vin: vin,
-          description: description,
-          amount: amount,
-          dueDate: dueDate
-        };
-        paymentQueue.fees[financialRecordId] = fee;
+      addFeeToQueue: function (fee) {
+        var f = queueObject(fee, true/* isFee */);
+
+        paymentQueue.fees[f.financialRecordId] = f;
         segmentio.track(metric.ADD_TO_BASKET);
       },
       removePaymentFromQueue: function (id) {
@@ -165,10 +144,11 @@ angular.module('nextgearWebApp')
         delete paymentQueue.fees[id];
       },
       removeFromQueue: function (item) {
-        if(item.isPayment) {
-          this.removePaymentFromQueue(item.floorplanId);
-        } else {
+
+        if(item.isFee) {
           this.removeFeeFromQueue(item.financialRecordId);
+        } else {
+          this.removePaymentFromQueue(item.id);
         }
       },
       isPaymentOnQueue: function (id) {
@@ -179,7 +159,7 @@ angular.module('nextgearWebApp')
         }
         else {
           // payment is on queue, return whether it is a payoff or payment
-          return (queueItem.isPayoff ? 'payoff' : 'payment');
+          return (queueItem.isPayoff ? 'payoff' : 'payment'); // in this case, 'payment' = 'curtailment'
         }
       },
       isFeeOnQueue: function (id) {
@@ -233,7 +213,7 @@ angular.module('nextgearWebApp')
       },
       updatePaymentAmountOnDate: function (payment, scheduledDate, isPayoff) {
         var params = {
-          FloorplanId: payment.floorplanId,
+          FloorplanId: payment.id,
           ScheduledDate: api.toShortISODate(scheduledDate),
           IsCurtailment: !isPayoff
         };
@@ -251,7 +231,7 @@ angular.module('nextgearWebApp')
           shortPayments = [];
         angular.forEach(payments, function (payment) {
           shortPayments.push({
-            FloorplanId: payment.floorplanId,
+            FloorplanId: payment.id,
             ScheduledPaymentDate: api.toShortISODate(payment.scheduleDate) || null,
             IsPayoff: payment.isPayoff
           });
