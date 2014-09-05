@@ -10,6 +10,13 @@ angular.module('nextgearWebApp')
         canPayNow:  '=',
         onCancelScheduledPayment: '&'
       },
+      link: function(scope, element, attrs) {
+        if (!attrs.onCancelScheduledPayment) {
+          // To make sure that if no function is passed in, this value
+          // is undefined.
+          scope.onCancelScheduledPayment = null;
+        }
+      },
       controller: function($scope, $dialog, Payments, metric) {
         //set on $rootScope, but for some reason, not available unless explicitly set here
         $scope.metric = metric;
@@ -156,10 +163,11 @@ angular.module('nextgearWebApp')
                     amountDue: $scope.item.AmountDue
                   },
                   onCancel: function() {
-                    if(angular.isDefined($scope.onCancelScheduledPayment)) {
+                    if($scope.onCancelScheduledPayment !== null) {
                       // we have a custom function we want to run onCancel.
                       $scope.onCancelScheduledPayment();
-                    } else { // default onCancel function (payments page, scheduled payments page)
+                    } else {
+                      // default onCancel function (payments page)
                       var f = $scope.item;
                       f.Scheduled = false;
                       f.ScheduledDate = null;
