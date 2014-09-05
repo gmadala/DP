@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
 
     $scope.chartSize = { height: 320 };
 
-      $scope.openTopAuctions = function() {
+    $scope.openTopAuctions = function() {
       var dialogOptions = {
         backdrop: true,
         keyboard: true,
