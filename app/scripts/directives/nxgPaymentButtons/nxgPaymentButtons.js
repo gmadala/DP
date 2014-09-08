@@ -102,13 +102,12 @@ angular.module('nextgearWebApp')
                     if($scope.onCancelScheduledPayment !== null) {
                       // we have a custom function we want to run onCancel.
                       $scope.onCancelScheduledPayment();
-                    } else {
-                      // default onCancel function (payments page)
-                      var f = $scope.item;
-                      f.Scheduled = false;
-                      f.ScheduledDate = null;
-                      return f;
                     }
+                    // default onCancel function (payments page)
+                    var f = $scope.item;
+                    f.Scheduled = false;
+                    f.ScheduledDate = null;
+                    return f;
                   }
                 };
               }

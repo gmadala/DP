@@ -58,31 +58,21 @@ angular.module('nextgearWebApp')
           StockNumber: $stateParams.stockNumber,
           UnitDescription: details.FinancialSummaryInfo.Description,
           AmountDue: details.FinancialSummaryInfo.NextPaymentAmount,
-          DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
-          isPayoff: false,
-          PrincipalDue: details.FinancialSummaryInfo.PrincipalDue,
-          InterestPaymentTotal: details.FinancialSummaryInfo.InterestPaymentTotal,
-          FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
-          CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
-          Scheduled: details.FinancialSummaryInfo.Scheduled,
-          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
-          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
-        };
-
-        $scope.payoffForCheckout = {
-          FloorplanId: details.FinancialSummaryInfo.FloorplanId,
-          Vin: details.VehicleInfo.UnitVin,
-          StockNumber: $stateParams.stockNumber,
-          UnitDescription: details.FinancialSummaryInfo.Description,
           CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
-          AmountDue: details.FinancialSummaryInfo.TotalOutstanding,
           DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
-          isPayoff: true,
-          PrincipalPayoff: details.FinancialSummaryInfo.PrincipalDue,
-          InterestPayoffTotal: details.FinancialSummaryInfo.InterestPayoffTotal,
-          FeesPayoffTotal: details.FinancialSummaryInfo.FeesPayoffTotal,
-          CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionPayoffTotal,
+
+          PrincipalDue: details.FinancialSummaryInfo.PrincipalDue,
+          PrincipalPayoff: details.FinancialSummaryInfo.PrincipalOutstanding,
+
+          InterestPaymentTotal: details.FinancialSummaryInfo.InterestPaymentTotal,
+          InterestPayoffTotal: details.FinancialSummaryInfo.InterestOutstanding,
+
+          FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
+          FeesPayoffTotal: details.FinancialSummaryInfo.FeesOutstanding,
+
+          CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
+          CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
+
           Scheduled: details.FinancialSummaryInfo.Scheduled,
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,

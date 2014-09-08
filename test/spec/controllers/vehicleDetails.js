@@ -196,7 +196,6 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     expect(scope.paymentQueue).toBeDefined();
     expect(scope.paymentForCheckout).toBeDefined();
-    expect(scope.payoffForCheckout).toBeDefined();
   });
 
   it('should attach the necessary variables to the overall scope', function() {

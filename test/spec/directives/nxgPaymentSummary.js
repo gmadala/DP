@@ -43,12 +43,12 @@ describe('Directive: nxgPaymentSummary', function () {
 
     it('should attach a removePayment function to the scope that calls the corresponding model method', function () {
       var pmt = {
-        floorplanId: 'someid'
+        id: 'someid'
       };
       spyOn(payments, 'removePaymentFromQueue');
       expect(typeof scope.removePayment).toBe('function');
       scope.removePayment(pmt);
-      expect(payments.removePaymentFromQueue).toHaveBeenCalledWith(pmt.floorplanId);
+      expect(payments.removePaymentFromQueue).toHaveBeenCalledWith(pmt.id);
     });
 
     it('should attach a removeFee function to the scope that calls the corresponding model method', function () {

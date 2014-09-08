@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.removePayment = function (payment) {
-      Payments.removePaymentFromQueue(payment.floorplanId);
+      Payments.removePaymentFromQueue(payment.id);
     };
 
     $scope.getCount = function () {

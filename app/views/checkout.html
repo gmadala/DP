@@ -133,15 +133,15 @@
                 <div class="split-cell">
                   <p class="lockup-major">{{ payment.amount | currency }}</p>
                   <button class="btn-unstyle btn-link right"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
+                          ng-click="paymentQueue.removePayment(payment.id)"
                           ng-disabled="submitInProgress"
                           nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}">
                     Remove
                   </button>
                 </div>
                 <div class="split-cell">
-                  <button class="btn-unstyle btn-link" ng-click="launchPaymentOptions(payment)">
-                    Payment Options <br/> & Breakdown
+                  <button class="btn-unstyle btn-link numeric" ng-click="launchPaymentOptions(payment)">
+                    Payment Options<br/> & Breakdown
                   </button>
                 </div>
                 <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
