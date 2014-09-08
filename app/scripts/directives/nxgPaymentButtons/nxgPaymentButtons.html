@@ -65,7 +65,7 @@
           id="togglePayoff2"
           class="btn btn-adapts"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
-          ng-click="togglePaymentInQueue(true)"
+          ng-click="togglePaymentInQueue(false)"
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">

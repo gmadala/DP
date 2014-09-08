@@ -135,7 +135,7 @@ describe('Directive: nxgPaymentButtons', function () {
       scope = $rootScope.$new();
 
       scope.myPayment = myPayment;
-      scope.myFunc = function() { return 'foo'; }
+      scope.myFunc = angular.noop
       scope.inQueue = false;
 
       $compile(element)(scope);
@@ -182,7 +182,6 @@ describe('Directive: nxgPaymentButtons', function () {
       spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayment').click();
-
       expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
         scope.myPayment,
         false /* isPayoff */
@@ -193,7 +192,6 @@ describe('Directive: nxgPaymentButtons', function () {
       });
 
       element.find('#togglePayment').click();
-
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
@@ -212,7 +210,6 @@ describe('Directive: nxgPaymentButtons', function () {
   });
 
   describe('payment mode (payment previously scheduled)', function () {
-
     var dialog;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
@@ -283,11 +280,16 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should auto-cancel the previously scheduled payoff when a payment is added', function() {
       spyOn(dialog, 'dialog').andReturn({
-        open: angular.noop
+         open: function() {
+          return {
+            then: function(wasCancelled) {
+              return true;
+            }
+          };
+        }
       });
 
       element.find('#togglePayoff2').click();
-
       expect(dialog.dialog).toHaveBeenCalled();
     });
   });
@@ -327,13 +329,11 @@ describe('Directive: nxgPaymentButtons', function () {
       spyOn(Payments, 'removePaymentFromQueue');
 
       element.find('#togglePayoff').click();
-
       scope.$apply(function () {
         scope.inQueue = 'payoff';
       });
 
       element.find('#togglePayoff').click();
-
       expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
         scope.myPayment,
         true /* isPayoff */
@@ -356,7 +356,6 @@ describe('Directive: nxgPaymentButtons', function () {
   });
 
   describe('payoff mode (payoff previously scheduled)', function () {
-
     var dialog;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
@@ -403,7 +402,6 @@ describe('Directive: nxgPaymentButtons', function () {
   });
 
   describe('payoff mode (payment previously scheduled)', function () {
-
     var dialog;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
@@ -438,13 +436,17 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should auto-cancel the previously scheduled payment when a payoff is added', function() {
       spyOn(dialog, 'dialog').andReturn({
-        open: angular.noop
+         open: function() {
+          return {
+            then: function(wasCancelled) {
+              return true;
+            }
+          };
+        }
       });
 
       element.find('#togglePayment2').click();
-
       expect(dialog.dialog).toHaveBeenCalled();
     });
   });
-
 });

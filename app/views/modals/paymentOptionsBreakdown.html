@@ -2,47 +2,75 @@
   Payment Options & Breakdown
 </h3>
 
-<div class="modal-body" nxg-autofocus>
-  <h3>Payment Options</h3>
-
+<div class="modal-body to-edge" nxg-autofocus>
   <form class="modal-inner" name="paymentOptionsForm">
+    <h3>Payment Options</h3>
+
     <p class="paragraph">Select a payment from the options below:</p>
-    <!-- <div class="form-row"> -->
 
     <ul class="form-block">
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payoff" id="paymentOptionPayoff" required />
         <label class="radio-img" for="paymentOptionPayoff"></label>
         <label class="cr-label" for="paymentOptionPayoff">
-          <strong>__AMOUNT__</strong> – Payoff this vehicle
+          <strong>{{ payment.amounts.CurrentPayoff | currency }}</strong> – Payoff this vehicle
         </label>
       </li>
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="curtailment" id="paymentOptionCurtailment" required />
         <label class="radio-img" for="paymentOptionCurtailment"></label>
         <label class="cr-label" for="paymentOptionCurtailment">
-          <strong>__AMOUNT__</strong> – Curtailment Payment
+          <strong>{{ payment.amounts.AmountDue | currency }}</strong> – Curtailment Payment
         </label>
         <div class="form-row" ng-show="selector.paymentOption == 'curtailment'">
           <div class="input-prepend dollar">
               <span class="add-on">$</span>
-              <input type="text" class="input-small" name="increaseAmt" id="increaseAmt" ng-model="selector.amount" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/" nxg-min="1" nxg-input-currency="1000000000000" ng-disabled="loading" ng-class="{ 'nxg-invalid':formValidation.increaseAmt.$error.required || formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin || formValidation.increaseAmt.$error.max }" required />
+              <input type="text" class="input-small" name="increaseAmt" id="increaseAmt" ng-model="selector.amount" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/" nxg-min="0.01" nxg-max="{{ maxAdditional }}" nxg-input-currency="1000000000000" ng-disabled="loading" ng-class="{ 'nxg-invalid':formValidation.increaseAmt.$error.required || formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin || formValidation.increaseAmt.$error.max }" required /> – Additional Principal Payment
             </div>
         </div>
       </li>
-<!--       <li class="cr-inline">
+      <!--
+      <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="interest" id="paymentOptionInterest" required />
         <label class="radio-img" for="paymentOptionInterest"></label>
         <label class="cr-label" for="paymentOptionInterest">
           <strong>__AMOUNT__</strong> – Interest-Only Payment
         </label>
-      </li> -->
+      </li>
+      -->
     </ul>
-
-    <!-- </div> -->
   </form>
+  <div class="aside modal-inner">
+    <h3>Payment Breakdown</h3>
 
-
+    <ul class="list-table">
+      <li class="list-table-row">
+        <p class="span6">Principal:</p>
+        <p class="span6 value numeric">{{ paymentBreakdown.principal | currency }}</p>
+      </li>
+      <li class="list-table-row" ng-show="selector.amount > 0">
+        <p class="span6">Additional Principal:</p>
+        <p class="span6 value numeric">{{ selector.amount | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span6">Interest:</p>
+        <p class="span6 value numeric">{{ paymentBreakdown.interest | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span6">Fee(s):</p>
+        <p class="span6 value numeric">{{ paymentBreakdown.fees | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span6">CPP:</p>
+        <p class="span6 value numeric">{{ paymentBreakdown.collateralProtection | currency }}</p>
+      </li>
+      <li class="list-table-hr"></li>
+      <li class="list-table-row">
+        <p class="span6">Payment Total:</p>
+        <p class="span6 value numeric">{{ total | currency }}</p>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="modal-footer">

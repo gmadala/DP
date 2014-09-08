@@ -42,6 +42,21 @@ angular.module('nextgearWebApp')
         queueObj.collateralProtection = item.CollateralProtectionPaymentTotal;
       }
 
+      // we still need amount info for the non-chosen option,
+      // so we include that data here too.
+      queueObj.amounts = {
+        AmountDue: item.AmountDue,
+        PrincipalDue: item.PrincipalDue,
+        FeesPaymentTotal: item.FeesPaymentTotal,
+        InterestPaymentTotal: item.InterestPaymentTotal,
+        CollateralProtectionPaymentTotal: item.CollateralProtectionPaymentTotal,
+        CurrentPayoff: item.CurrentPayoff,
+        PrincipalPayoff: item.PrincipalPayoff,
+        FeesPayoffTotal: item.FeesPayoffTotal,
+        InterestPayoffTotal: item.InterestPayoffTotal,
+        CollateralProtectionPayoffTotal: item.CollateralProtectionPayoffTotal
+      };
+
       if (item.Scheduled) {
         queueObj.scheduleDate = item.ScheduledPaymentDate;
       }

@@ -62,10 +62,14 @@ angular.module('nextgearWebApp')
             if(p.Scheduled) {
               // if it's already scheduled as a payment or payoff, we want to auto-cancel
               // the scheduled payment and add the new payment or payoff.
-              $scope.cancelScheduledPayment();
+              $scope.cancelScheduledPayment().then(function(wasCancelled) {
+                if(wasCancelled) {
+                  Payments.addPaymentToQueue(p, asPayoff);
+                }
+              });
+            } else {
+              Payments.addPaymentToQueue(p, asPayoff);
             }
-
-            Payments.addPaymentToQueue(p, asPayoff);
           } else {
             // Regardless, we still want to remove the original payment.
             Payments.removePaymentFromQueue(p.FloorplanId);
@@ -113,7 +117,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          return $dialog.dialog(dialogOptions).open();
         };
 
         $scope.cancelScheduledFee = function () {
