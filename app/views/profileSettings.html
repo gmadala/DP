@@ -2,29 +2,29 @@
 
   <!-- USER PROFILE -->
   <section class="span6 well settings-well">
-    <h2 class="well-title">User Profile
-      <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()">Cancel</button>
-      <button ng-show="profile.editable" class="btn save-btn" ng-click="profile.save()">Save</button>
+    <h2 class="well-title"><span translate>User Profile</span>
+      <button ng-hide="profile.editable" class="btn edit-btn" ng-click="profile.edit()"><i class="glyphicon glyphicon-pencil"></i><span translate>Edit</span></button>
+      <button ng-show="profile.editable" class="btn cancel-btn" ng-click="profile.cancel()" translate>Cancel</button>
+      <button ng-show="profile.editable" class="btn save-btn" ng-click="profile.save()" translate>Save</button>
     </h2>
     <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
       <div class="row-fluid">
-        <label class="span4" for="setUsername">User Name</label>
+        <label class="span4" for="setUsername" translate>User Name</label>
         <div class="span8" nxg-input model="profile.data.username" editable="profile.editable">
           <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
           <label for="setUsername" class="text-error"
-                 ng-show="profile.validation.setUsername.$error.required">
+                 ng-show="profile.validation.setUsername.$error.required" translate>
             Please enter a User Name.
           </label>
           <label for="setUsername" class="text-error"
-                 ng-show="profile.validation.setUsername.$error.maxlength">
+                 ng-show="profile.validation.setUsername.$error.maxlength" translate>
             Please enter a User Name that is 40 characters or less.
           </label>
         </div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4" for="setPassword"><span ng-show="editable">New </span>Password</label>
+        <label class="span4" for="setPassword"><span ng-show="editable" translate>New </span>Password</label>
         <div class="span8">
           <div class="static" ng-hide="profile.editable">***********</div>
           <div ng-show="profile.editable">
@@ -37,17 +37,17 @@
                       tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
           </div>
 
-          <label for="setPassword" class="text-error" ng-show="profile.validation.setPassword.$error.pattern">
+          <label for="setPassword" class="text-error" ng-show="profile.validation.setPassword.$error.pattern" translate>
             Please enter a valid password.
           </label>
         </div>
       </div>
 
       <div class="row-fluid" ng-show="profile.editable">
-        <label class="span4" for="confirmPassword">Confirm Password</label>
+        <label class="span4" for="confirmPassword" translate>Confirm Password</label>
         <div class="span8">
           <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
-          <label for="confirmPassword" class="text-error" ng-show="profile.validation.setPassword.$error.nomatch">
+          <label for="confirmPassword" class="text-error" ng-show="profile.validation.setPassword.$error.nomatch" translate>
             The passwords do not match. Please re-enter the password.
           </label>
         </div>
@@ -56,7 +56,7 @@
       <div ng-repeat="question in profile.data.questions" ng-hide="profile.editable">
         <!-- Question Select -->
         <div class="row-fluid">
-          <label class="span4">Security Question {{$index + 1}}</label>
+          <label class="span4" translate>Security Question {{$index + 1}}</label>
           <div class="span8 static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
       <div ng-repeat="question in profile.dirtyData.questions" ng-show="profile.editable">
         <!-- Question Select -->
         <div class="row-fluid">
-          <label class="span4">Security Question {{$index + 1}}</label>
+          <label class="span4" translate>Security Question {{$index + 1}}</label>
           <div class="span8 style-select">
             <select ng-model="question.SecurityQuestionId"
                     ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
@@ -77,14 +77,14 @@
 
         <!-- Answer -->
         <div class="row-fluid" ng-show="profile.editable">
-          <label class="span4" for="secAnswer">Answer</label>
+          <label class="span4" for="secAnswer" translate>Answer</label>
           <div class="span8">
             <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
 
-            <label class="text-error" ng-show="question.$error.required">
+            <label class="text-error" ng-show="question.$error.required" translate>
               Please enter an Answer.
             </label>
-            <label class="text-error" ng-show="question.$error.maxLength">
+            <label class="text-error" ng-show="question.$error.maxLength" translate>
               Please enter an Answer that is a maximum of 100 characters.
             </label>
           </div>
@@ -92,17 +92,17 @@
       </div>
 
       <div class="row-fluid">
-        <label class="span4" for="email">Email</label>
+        <label class="span4" for="email" translate>Email</label>
         <div class="span8" nxg-input model="profile.data.email" editable="profile.editable">
           <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
-          <label class="text-error" ng-show="profile.validation.email.$invalid">
+          <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
             Please enter a valid email address.
           </label>
         </div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4" for="phone">Phone</label>
+        <label class="span4" for="phone" translate>Phone</label>
         <div class="span8" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
           <input type="tel"
                  name="phone"
@@ -110,7 +110,7 @@
                  ng-pattern="phonePattern"
                  size="10"
                  ng-class="{ 'nxg-invalid': profile.validation.phone.$error.pattern }" />
-            <label class="text-error" ng-show="profile.validation.phone.$error.pattern">
+            <label class="text-error" ng-show="profile.validation.phone.$error.pattern" translate>
                 Please enter a valid phone number.
             </label>
         </div>
@@ -120,16 +120,16 @@
 
   <!-- NOTIFICATIONS -->
   <section class="span6 well settings-well">
-    <h2 class="well-title">Notifications
-      <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i>Edit</button>
-      <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()">Cancel</button>
-      <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()">Save</button>
+    <h2 class="well-title"><span translate>Notifications</span>
+      <button ng-hide="notifications.editable" class="btn edit-btn" ng-click="notifications.edit()"><i class="glyphicon glyphicon-pencil"></i><span translate>Edit</span></button>
+      <button ng-show="notifications.editable" class="btn cancel-btn" ng-click="notifications.cancel()" translate>Cancel</button>
+      <button ng-show="notifications.editable" class="btn save-btn" ng-click="notifications.save()" translate>Save</button>
     </h2>
 
     <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">
       <div class="row-fluid">
-        <h6 class="span6">Notifications</h6>
-        <h6 class="span6" ng-hide="notifications.editable || notifications.data.selected.length == 0">Delivery Type</h6>
+        <h6 class="span6" translate>Notifications</h6>
+        <h6 class="span6" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</h6>
       </div>
 
       <ul>
@@ -143,7 +143,7 @@
             </p>
           </div>
         </li>
-        <li ng-show="notifications.data.selected.length == 0 && !notifications.editable">No notifications are currently enabled.</li>
+        <li ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</li>
 
         <!-- Edit -->
         <li class="row-fluid" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">

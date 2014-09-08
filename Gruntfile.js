@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-angular-gettext');
 
   // configurable paths
   var yeomanConfig = {
@@ -308,6 +309,13 @@ module.exports = function(grunt) {
       },
       'no_dest': {
         src: '<%= yeoman.dist %>/styles/*.css'
+      }
+    },
+    nggettext_extract: {
+      pot: {
+        files: {
+          'po/untranslated.pot': ['<%= yeoman.app %>/views/**/*.html']
+        }
       }
     }
   });

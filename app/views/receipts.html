@@ -18,9 +18,9 @@
     </div>
 
     <div class="well">
-      <h2 class="well-title">Receipts</h2>
+      <h2 class="well-title" translate>Receipts</h2>
       <div ng-switch="receipts.results.length > 0 || receipts.loading">
-        <p class="no-results" ng-switch-when="false">
+        <p class="no-results" ng-switch-when="false" translate>
           Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
         </p>
 
@@ -33,30 +33,30 @@
               <th class="sortable"
                   ng-click="sortBy('CreateDate')"
                   ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-                Payment Date<span class="sortArrows"></span>
+                <span translate>Payment Date</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('TransactionNumber')"
                   ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-                Receipt No.<span class="sortArrows"></span>
+                <span translate>Receipt No.</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('PaymentMethod')"
                   ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-                Payment Description<span class="sortArrows"></span>
+                <span translate>Payment Description</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('AmountApplied')"
                   ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
-                Applied<span class="sortArrows"></span>
+                <span translate>Applied</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('AmountProvided')"
                   ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-                Provided<span class="sortArrows"></span>
+                <span translate>Provided</span><span class="sortArrows"></span>
               </th>
               <th>
-                <button class="btn btn-cta" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">Export Receipt(s)
+                <button class="btn btn-cta" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}" translate>Export Receipt(s)
                 </button>
               </th>
             </thead>
@@ -64,19 +64,19 @@
               <td >
                 <h4 class="lockup-major">{{ receipt.CreateDate | moment }}</h4>
                 <p class="lockup-minor" ng-switch="getReceiptStatus(receipt)">
-                  <span ng-switch-when="nsf">Insufficient Funds</span>
-                  <span ng-switch-when="void">Voided</span>
-                  <span ng-switch-when="normal">Processed</span>
+                  <span ng-switch-when="nsf" translate>Insufficient Funds</span>
+                  <span ng-switch-when="void" translate>Voided</span>
+                  <span ng-switch-when="normal" translate>Processed</span>
                 </p>
               </td>
               <td>
                 <h4 class="lockup-major" nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></h4>
               </td>
               <td>
-                <p>Payment: {{ receipt.PaymentMethod }}<br/>
+                <p><span translate>Payment: {{ receipt.PaymentMethod }}</span><br/>
                   <span ng-switch on="!!reciept.CheckNumber">
                     <span ng-switch-when="true">
-                      <span ng-show="receipt.CheckNumber">Check #:</span>
+                      <span ng-show="receipt.CheckNumber"><span translate>Check #</span>:</span>
                       <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
                     </span>
                   </span>
@@ -99,7 +99,7 @@
             </tr>
           </table>
 
-          <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax">
+          <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax" translate>
             There are too many results to display, please refine your search further.
           </p>
         </div>

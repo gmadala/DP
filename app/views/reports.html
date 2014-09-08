@@ -2,14 +2,14 @@
   <div class="info-block-image">
     <span nxg-icon="icon-info"></span>
   </div>
-  <p class="info-block-text">
+  <p class="info-block-text" translate>
     Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
   </p>
 </div>
 
 <div class="row-fluid">
   <div class="span6 well">
-    <h2 class="well-title">Current Reports</h2>
+    <h2 class="well-title" translate>Current Reports</h2>
 
     <div class="well-item">
       <ul class="unstyled">
@@ -26,146 +26,146 @@
 
       <!-- Curtailment Form -->
       <form class="form-inline" name="curtailmentForm" novalidate>
-        <h3 class="form-title">Upcoming Curtailment / Payoff Quote (PDF)</h3>
+        <h3 class="form-title" translate>Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
         <div class="form-row">
-          <label for="curtailmentDate">Date</label>
-					<input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
+          <label for="curtailmentDate" translate>Date</label>
+          <input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
 
-          <button type="submit" class="btn" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}">View Report</button>
+          <button type="submit" class="btn" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}" translate>View Report</button>
         </div>
 
         <div class="form-row">
-          <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date">
+          <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date" translate>
             Please select a Valid Date.
           </label>
-				</div>
-	    </form>
+        </div>
+      </form>
 
       <hr/>
 
       <!-- Exportable Inventory Form -->
       <form class="form-inline" name="expInvForm" novalidate>
-        <h3 class="form-title">Exportable Inventory</h3>
+        <h3 class="form-title" translate>Exportable Inventory</h3>
 
         <div class="form-row">
-          <label for="expInvStatus">Flooring Status</label>
+          <label for="expInvStatus" translate>Flooring Status</label>
           <div class="style-select">
             <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
           </div>
-          <button type="submit" class="btn" ng-click="viewExpInv()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON}}">View Report</button>
+          <button type="submit" class="btn" ng-click="viewExpInv()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON}}" translate>View Report</button>
         </div>
       </form>
     </div>
   </div>
 
   <div class="span6 well">
-    <h2 class="well-title">Historical Reports</h2>
+    <h2 class="well-title" translate>Historical Reports</h2>
 
     <div class="well-item">
       <!-- Dealer Statement Form -->
       <form class="form-inline" name="stmtForm" novalidate>
-        <h3 class="form-title">Dealer Statement</h3>
+        <h3 class="form-title" translate>Dealer Statement</h3>
 
         <div class="form-row range">
           <div class="range-start">
-            <label for="stmtStart">Start Date</label>
-						<input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}" required />
+            <label for="stmtStart" translate>Start Date</label>
+            <input id="stmtStart" name="stmtStart" nxg-date-field ng-model="data.stmtStartDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}" required />
           </div>
 
           <div class="range-end">
-            <label for="stmtEnd">End Date</label>
-						<input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
+            <label for="stmtEnd" translate>End Date</label>
+            <input id="stmtEnd" name="stmtEnd" nxg-date-field ng-model="data.stmtEndDate" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
           </div>
         </div>
 
-        <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date">
+        <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date" translate>
             Please select a Valid Start Date.
         </label>
-        <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date">
+        <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date" translate>
           Please select a Valid End Date.
         </label>
-        <label class="text-error" ng-show="stmtFormValidity.dateRangeError">
+        <label class="text-error" ng-show="stmtFormValidity.dateRangeError" translate>
           Start Date should not be later than End Date.
         </label>
 
         <div class="form-row">
-          <label for="stmtVinFilter">Filter for VIN (optional)</label>
+          <label for="stmtVinFilter" translate>Filter for VIN (optional)</label>
           <div>
             <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" ng-pattern="vinRegexp" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtVinFilter.$error.pattern }" />
           </div>
-          <label class="text-error" ng-show="stmtFormValidity.stmtVinFilter.$error.pattern">
+          <label class="text-error" ng-show="stmtFormValidity.stmtVinFilter.$error.pattern" translate>
             Invalid character in VIN
           </label>
         </div>
 
         <div class="form-row">
-          <button type="submit" class="btn" ng-click="viewDealerStatement()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON}}">View Report</button>
+          <button type="submit" class="btn" ng-click="viewDealerStatement()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON}}" translate>View Report</button>
         </div>
-			</form>
+      </form>
 
       <hr/>
 
       <!-- Disbursement Form -->
       <form class="form-inline" name="disForm" novalidate>
-        <h3 class="form-title">Disbursement Detail</h3>
+        <h3 class="form-title" translate>Disbursement Detail</h3>
 
         <div class="form-row">
-          <label for="disDate">Date</label>
-					<input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }" required />
-          <button type="submit" class="btn" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}">View Report</button>
+          <label for="disDate" translate>Date</label>
+          <input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }" required />
+          <button type="submit" class="btn" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}" translate>View Report</button>
         </div>
         <div class="form-row">
-          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date">
+          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date" translate>
              Please select a Valid Date.
           </label>
-          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past">
+          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
              Please select a Date in the past.
           </label>
-				</div>
+        </div>
       </form>
 
       <hr/>
 
       <!-- Paid Off Form -->
       <form class="form-inline" name="paidOffForm" novalidate>
-        <h3 class="form-title">Paid off Summary</h3>
+        <h3 class="form-title" translate>Paid off Summary</h3>
 
         <div class="form-row range">
           <div class="range-start">
-            <label for="paidOffStart">Start Date</label>
+            <label for="paidOffStart" translate>Start Date</label>
             <input type="date" id="paidOffStart" name="paidOffStart" nxg-date-field ng-model="data.paidOffStartDate" date-allow="past" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required />
           </div>
 
           <div class="range-end">
-            <label for="paidOffEnd">End Date</label>
+            <label for="paidOffEnd" translate>End Date</label>
             <input type="date" id="paidOffEnd" name="paidOffEnd" nxg-date-field ng-model="data.paidOffEndDate" date-allow="past" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date }" required />
           </div>
         </div>
 
         <div class="form-row">
-          <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date">Please select a Valid Start Date.</label>
-          <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date">Please select a Valid End Date.</label>
-          <label class="text-error" ng-show="paidOffFormValidity.dateRangeError">Start Date should not be later than End Date.</label>
+          <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date" translate>Please select a Valid Start Date.</label>
+          <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date" translate>Please select a Valid End Date.</label>
+          <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>Start Date should not be later than End Date.</label>
         </div>
 
         <div class="form-row">
-          <label for="paidOffVinFilter">Filter for VIN (optional)</label>
+          <label for="paidOffVinFilter" translate>Filter for VIN (optional)</label>
           <div>
             <input type="text" name="paidOffVinFilter" id="paidOffVinFilter" ng-pattern="vinRegexp" ng-model="data.paidOffVinFilter" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffVinFilter.$error.pattern }" />
-            <label class="text-error" ng-show="paidOffFormValidity.paidOffVinFilter.$error.pattern">
+            <label class="text-error" ng-show="paidOffFormValidity.paidOffVinFilter.$error.pattern" translate>
               Invalid character in VIN
             </label>
           </div>
         </div>
 
-				<div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
+        <div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
 
         <div class="form-row">
-          <button type="submit" class="btn" ng-click="viewPaidOffSummary()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT}}">View Report</button>
+          <button type="submit" class="btn" ng-click="viewPaidOffSummary()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT}}" translate>View Report</button>
         </div>
 
-			</form>
+      </form>
     </div>
   </div>
 </div>

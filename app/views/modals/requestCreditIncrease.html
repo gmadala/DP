@@ -1,11 +1,11 @@
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Request a Credit Increase
 </h3>
 
 <div class="modal-body">
   <form class="modal-inner" name="requestCreditIncreaseForm">
     <div class="form-row">
-      <h5 class="field-title">1. Which line of credit would you like to extend?</h5>
+      <h5 class="field-title" translate>1. Which line of credit would you like to extend?</h5>
       <ul class="form-block">
         <li class="cr-inline" ng-repeat="line in selector.linesOfCredit" nxg-autofocus>
           <input type="radio" name="lineOfCredit" ng-model="$parent.selector.selectedLineOfCredit" id="lineOfCredit{{$index}}" ng-value="line" ng-disabled="loading" required />
@@ -14,37 +14,37 @@
             <strong>{{ line.type }}</strong> – {{ line.amount | currency }}
           </label>
         </li>
-        <span class="text-error" ng-show="formValidation.lineOfCredit.$error.required">
+        <span class="text-error" ng-show="formValidation.lineOfCredit.$error.required" translate>
           Please choose a line of credit.
         </span>
       </ul>
     </div>
 
     <div class="form-row">
-      <h5 class="field-title"> 2. Do you want this increase to be temporary or permanent?</h5>
+      <h5 class="field-title" translate> 2. Do you want this increase to be temporary or permanent?</h5>
       <ul class="form-block">
         <li class="cr-inline">
           <input type="radio" ng-model="selector.isTemporary" name="isTemporary" value="true" id="isTemporary" ng-disabled="loading" required/>
           <label class="radio-img" for="isTemporary"></label>
-          <label class="cr-label" for="isTemporary">
+          <label class="cr-label" for="isTemporary" translate>
             <strong>Temporary</strong> – This request will be reviewed for a term up to 60 days.
           </label>
         </li>
         <li class="cr-inline">
           <input type="radio" ng-model="selector.isTemporary" name="isTemporary" value="false" id="isNotTemporary" ng-disabled="loading" required />
           <label class="radio-img" for="isNotTemporary"></label>
-          <label class="cr-label" for="isNotTemporary">
+          <label class="cr-label" for="isNotTemporary" translate>
             <strong>Permanent</strong> – This request will be submitted for review and may require additional information. Please contact your NextGear Representative with any questions.
           </label>
         </li>
-        <span class="text-error" ng-show="formValidation.isTemporary.$error.required">
+        <span class="text-error" ng-show="formValidation.isTemporary.$error.required" translate>
           Please select either "Temporary" or "Permanent".
         </span>
       </ul>
     </div>
 
     <div class="form-row">
-      <h5 class="field-title">3. How much would you like to increase it by?</h5>
+      <h5 class="field-title" translate>3. How much would you like to increase it by?</h5>
       <div class="form-block">
         <div class="row-fluid">
           <div class="span4">
@@ -54,19 +54,19 @@
             </div>
           </div>
           <div class="span8">
-            <p class="note">
+            <p class="note" translate>
               Credit requests typically take 3-5 business days to process. You will be notified by email as soon as your request has been processed.
             </p>
           </div>
         </div>
 
-        <span class="text-error" ng-show="formValidation.increaseAmt.$error.required">
+        <span class="text-error" ng-show="formValidation.increaseAmt.$error.required" translate>
           Please enter an increase amount.
         </span>
-        <span class="text-error" ng-show="formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin">
+        <span class="text-error" ng-show="formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin" translate>
           Please enter a positive numeric value with no more than 2 decimal places.
         </span>
-         <span class="text-error" ng-show="formValidation.increaseAmt.$error.max">
+         <span class="text-error" ng-show="formValidation.increaseAmt.$error.max" translate>
           Please enter value less than $1,000,000,000,000.00.
         </span>
       </div>
@@ -75,8 +75,8 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary">Cancel Request</button>
-  <button type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary">Confirm Request</button>
+  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>Cancel Request</button>
+  <button type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>Confirm Request</button>
 </div>
 
 

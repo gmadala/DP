@@ -1,82 +1,82 @@
 <section class="row-fluid business-summary {{ showDetails && 'expanded' || 'collapsed'}}">
   <div class="span12 well">
-    <h2 class="well-title">Business Summary</h2>
+    <h2 class="well-title" translate>Business Summary</h2>
 
     <div class="row-fluid">
       <div class="span5 well-item">
-        <h3>Approved Floor Plans</h3>
+        <h3 translate>Approved Floor Plans</h3>
 
-        <span class="counter"> {{ businessSummary.ApprovedFloorplans }} </span> Approved
+        <span class="counter"> {{ businessSummary.ApprovedFloorplans }} </span> <span translate>Approved</span>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="span8">Total NextGear Capital Book Value:</p>
+            <p class="span8"><span translate>Total NextGear Capital Book Value</span>:</p>
             <p class="span4 value numeric">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Total Financed Amount: </p>
+            <p class="span8"> <span translate>Total Financed Amount</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Total Outstanding: </p>
+            <p class="span8"> <span translate>Total Outstanding</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="span8"> Average Purchase Price: </p>
+            <p class="span8"> <span translate>Average Purchase Price</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="span8"> Total Purchase Price: </p>
+            <p class="span8"> <span translate>Total Purchase Price</span>: </p>
             <p class="span4 value numeric">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
           </li>
         </ul>
 
-        <p ng-show="showDetails">
+        <p ng-show="showDetails" translate>
           NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price
         </p>
-        <p ng-show="showDetails">
+        <p ng-show="showDetails" translate>
           Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book
         </p>
       </div>
 
       <div class="span4 well-item">
-        <h3>Pending Floor Plans</h3>
-        <span class="counter"> {{ businessSummary.PendingFloorplans }} </span> Pending
+        <h3 translate>Pending Floor Plans</h3>
+        <span class="counter"> {{ businessSummary.PendingFloorplans }} </span> <span translate>Pending</span>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="span8"> Total Purchase Price: </p>
+            <p class="span8"> <span translate>Total Purchase Price</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Total NextGear Capital Book Value: </p>
+            <p class="span8"> <span translate>Total NextGear Capital Book Value</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
           </li>
         </ul>
 
-        <p ng-show="showDetails">
+        <p ng-show="showDetails" translate>
           NextGear Capital Book is {{ businessSummary.DerivedPendingBook | number:2 }}% of the Purchase Price.
         </p>
       </div>
 
       <div class="span3 well-item">
-        <h3>Credits and Payments</h3>
+        <h3 translate>Credits and Payments</h3>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="span8"> Available Credit: </p>
+            <p class="span8"> <span translate>Available Credit</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalAvailableCredit | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Reserve Funds: </p>
+            <p class="span8"> <span translate>Reserve Funds</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.ReserveFundsBalance | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Last Payment: </p>
+            <p class="span8"> <span translate>Last Payment</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.LastPaymentAmount | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> Last Payment Date: </p>
+            <p class="span8"> <span translate>Last Payment Date</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.LastPaymentDate | moment }}</p>
           </li>
         </ul>
@@ -85,7 +85,7 @@
   </div>
 </section>
 <button class="accordion-button paired-reversed" ng-click="toggleDetails()" ng-class="{ 'expanded': showDetails }" nxg-track="{{showDetails && metric.CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK || ''}}">
-  <span class="paired-body">
+  <span class="paired-body" translate>
     {{  {true:'Close ', false:'Show ' }[showDetails] }} Details
   </span>
   <span class="paired-media" ng-class="{ 'point-up':showDetails, 'point-down':!showDetails }" nxg-icon="icon-chevron">
@@ -94,7 +94,7 @@
 
 <section class="row-fluid">
   <div class="span9 well analytics-well average-turn-chart">
-    <h2 class="well-title">Average Turn</h2>
+    <h2 class="well-title" translate>Average Turn</h2>
 
     <div class="well-item">
       <div class="chart-obj"
@@ -110,7 +110,7 @@
   </div>
 
   <div class="span3 well analytics-well">
-    <h2 class="well-title">Stale & Aging Vehicles</h2>
+    <h2 class="well-title" translate>Stale & Aging Vehicles</h2>
 
     <div class="well-item">
       <ul class="list-table">
@@ -118,7 +118,7 @@
           <p class="span4">
             <span class="counter overdue">{{ analytics.aging[5] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>100+</strong> Days
           </p>
         </li>
@@ -126,7 +126,7 @@
           <p class="span4">
             <span class="counter">{{ analytics.aging[4] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>75-99</strong> Days
           </p>
         </li>
@@ -134,7 +134,7 @@
           <p class="span4">
             <span class="counter">{{ analytics.aging[3] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>50-74</strong> Days
           </p>
         </li>
@@ -142,7 +142,7 @@
           <p class="span4">
             <span class="counter">{{ analytics.aging[2] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>25-49</strong> Days
           </p>
         </li>
@@ -150,7 +150,7 @@
           <p class="span4">
             <span class="counter">{{ analytics.aging[1] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>1-24</strong> Days
           </p>
         </li>
@@ -158,7 +158,7 @@
           <p class="span4">
             <span class="counter">{{ analytics.aging[0] }}</span>
           </p>
-          <p class="span8 numeric counter-label">
+          <p class="span8 numeric counter-label" translate>
             <strong>0</strong> Days
           </p>
         </li>
@@ -169,13 +169,13 @@
 
 <section class="row-fluid">
   <div class="span6 well movers-container">
-    <h2 class="well-title">Best and Worst Movers by Zipcode</h2>
+    <h2 class="well-title" translate>Best and Worst Movers by Zipcode</h2>
     <div class="well-item">
 
       <div class="cta btn-toggle">
         <div class="btn-slider" ng-class="{ 'active-left':showBest(), 'active-right':!showBest() }"></div>
-        <button class="btn" ng-click="changeMoverChart('best')">Best Movers</button>
-        <button class="btn" ng-click="changeMoverChart('worst')">Worst Movers</button>
+        <button class="btn" ng-click="changeMoverChart('best')" translate>Best Movers</button>
+        <button class="btn" ng-click="changeMoverChart('worst')" translate>Worst Movers</button>
       </div>
 
       <table class="movers-list">
@@ -208,13 +208,13 @@
 
 
   <div class="span6 well top-auctions-container">
-    <h2 class="well-title">Your Top 10 Auctions</h2>
+    <h2 class="well-title" translate>Your Top 10 Auctions</h2>
     <div class="well-item">
-      <h4>Number of Cars Purchased Per-Auction (in the last 12 months)</h4>
+      <h4 translate>Number of Cars Purchased Per-Auction (in the last 12 months)</h4>
 
       <button href class="btn" ng-click="openTopAuctions()" nxg-track="{{metric.CLICK_VIEW_ANALYTICS_VIEW_ALL_AUCTIONS_BUTTON}}">
         <span nxg-icon="icon-eye"></span>
-        View All Auctions
+        <span translate>View All Auctions</span>
       </button>
       <div class="auctions-chart">
         <div class="chart-obj"

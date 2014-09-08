@@ -1,29 +1,29 @@
-<h3 class="modal-header">Select the Schedule Date</h3>
+<h3 class="modal-header" translate>Select the Schedule Date</h3>
 
 <div class="modal-body">
   <div ng-switch on="type">
     <div ng-switch-when="payment">
-      <h3>Vehicle Information</h3>
+      <h3 translate>Vehicle Information</h3>
 
       <ul class="list-table">
         <li class="list-table-row">
-          <p class="span4">VIN</p>
+          <p class="span4" translate>VIN</p>
           <p class="span8 value">{{ model.payment.vin }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Stock #</p>
+          <p class="span4" translate>Stock #</p>
           <p class="span8 value">{{ model.payment.stockNum }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Description</p>
+          <p class="span4" translate>Description</p>
           <p class="span8 value">{{ model.payment.description }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Due</p>
+          <p class="span4" translate>Due</p>
           <p class="span8 value">{{ model.payment.dueDate | moment }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Payment</p>
+          <p class="span4" translate>Payment</p>
           <p class="span8 value">{{ model.payment.amount | currency }}</p>
         </li>
       </ul>
@@ -34,19 +34,19 @@
 
       <ul class="list-table">
         <li class="list-table-row">
-          <p class="span4">Fee Type</p>
+          <p class="span4" translate>Fee Type</p>
           <p class="span8 value">{{ model.fee.type }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Description</p>
+          <p class="span4" translate>Description</p>
           <p class="span8 value">{{ model.fee.description }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Due</p>
+          <p class="span4" translate>Due</p>
           <p class="span8 value">{{ model.fee.dueDate | moment }}</p>
         </li>
         <li class="list-table-row">
-          <p class="span4">Fee</p>
+          <p class="span4" translate>Fee</p>
           <p class="span8 value numeric">{{ model.fee.amount | currency }}</p>
         </li>
       </ul>
@@ -56,7 +56,7 @@
   <hr/>
 
   <form name="dateForm" class="row-fluid">
-    <label for="inputScheduleDate">Schedule For</label>
+    <label for="inputScheduleDate" translate>Schedule For</label>
     <input id="inputScheduleDate" name="inputScheduleDate"
     class="date-inline"
            nxg-date-field before-show-day="checkDate(date)"
@@ -64,23 +64,23 @@
            required nxg-requires="checkDate(model.selectedDate)"
            ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
     <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
-    or <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress">Pay Now</button>
+    <span translate>or <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress">Pay Now</button></span>
 
     <div class="row-fluid">
       <label for="inputScheduleDate" class="text-error"
-            ng-show="validity.inputScheduleDate.$error.required">
+            ng-show="validity.inputScheduleDate.$error.required" translate>
         Please select a schedule date.
       </label>
       <label for="inputScheduleDate" class="text-error"
-             ng-show="validity.$error.nxgRequires">
+             ng-show="validity.$error.nxgRequires" translate>
         Please select a valid banking date no earlier than tomorrow and no later than the payment due date.
       </label>
     </div>
   </form>
-  <p>Scheduled payments are not made until the scheduled date selected. <br/> Fees and/or other charges may continue to accrue between now and your scheduled payment date that would need to be addressed separately.</p>
+  <p translate>Scheduled payments are not made until the scheduled date selected. <br/> Fees and/or other charges may continue to accrue between now and your scheduled payment date that would need to be addressed separately.</p>
 </div>
 
 <div class="modal-footer">
-  <button type="button" ng-click="close()" ng-disabled="submitInProgress" class="btn-cta cta-secondary">Cancel</button>
-  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" nxg-autofocus class="btn-cta cta-primary">Confirm</button>
+  <button type="button" ng-click="close()" ng-disabled="submitInProgress" class="btn-cta cta-secondary" translate>Cancel</button>
+  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" nxg-autofocus class="btn-cta cta-primary" translate>Confirm</button>
 </div>

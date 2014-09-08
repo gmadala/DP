@@ -2,16 +2,16 @@
 
 <div class="modal-body">
 
-  <h3>Payment Summary</h3>
-  <h4>VIN: {{ payment.Vin }} - {{ payment.UnitDescription }}</h4>
+  <h3 translate>Payment Summary</h3>
+  <h4><span translate>VIN</span>: {{ payment.Vin }} - {{ payment.UnitDescription }}</h4>
 
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6">Principal:</p>
+      <p class="span6"><span translate>Principal</span>:</p>
       <p class="span6 value numeric">{{ extPrev.PrincipalAmount | currency }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Interest:</p>
+      <p class="span6"><span translate>Interest</span>:</p>
       <p class="span6 value numeric">{{ extPrev.InterestAmount | currency }}</p>
     </li>
     <li class="list-table-row" ng-repeat="fee in extPrev.Fees">
@@ -19,25 +19,25 @@
       <p class="span6 value numeric">{{ fee.Amount | currency }}</p>
     </li>
     <li class="list-table-row" ng-show="extPrev.CollateralProtectionAmount > 0">
-      <p class="span6">Collateral Protection: </p>
+      <p class="span6"><span translate>Collateral Protection</span>: </p>
       <p class="span6 value numeric">{{ extPrev.CollateralProtectionAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row list-table-emphasis">
-      <p class="span6">Subtotal:</p>
+      <p class="span6"><span translate>Subtotal</span>:</p>
       <p class="span6 value numeric">{{ subtotal | currency }}</p>
     </li>
   </ul>
-  <p ng-show="extPrev.CanExtend">
+  <p ng-show="extPrev.CanExtend" translate>
     To extend this unit an additional period please click below.
   </p>
-  <p ng-show="!extPrev.CanExtend">
+  <p ng-show="!extPrev.CanExtend" translate>
     This extension request cannot be completed online. Please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.
   </p>
-  <p class="disclaimer">Please note this quote is effective for today only and amounts are subject to change.</p>
+  <p class="disclaimer" translate>Please note this quote is effective for today only and amounts are subject to change.</p>
 </div>
 
 <div class="modal-footer">
   <button type="button" ng-click="closeDialog()" class="btn-cta" ng-class="{ 'cta-primary': !extPrev.CanExtend , 'cta-secondary': extPrev.CanExtend }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[extPrev.CanExtend] }}</button>
-  <button type="submit" ng-show="extPrev.CanExtend" ng-click="confirmRequest()" class="btn-cta cta-primary">Confirm Request</button>
+  <button type="submit" ng-show="extPrev.CanExtend" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>Confirm Request</button>
 </div>

@@ -3,27 +3,27 @@
 </h3>
 
 <div class="modal-body">
-  <h3>Would you like to cancel your scheduled fee?</h3>
+  <h3 translate>Would you like to cancel your scheduled fee?</h3>
   <h4>{{ fee.description }}</h4>
 
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6">Scheduled</p>
+      <p class="span6" translate>Scheduled</p>
       <p class="span6 value">{{ fee.scheduledDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Fee Type</p>
+      <p class="span6" translate>Fee Type</p>
       <p class="span6 value">{{ fee.feeType }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Fee Amount</p>
+      <p class="span6" translate>Fee Amount</p>
       <p class="span6 value"> {{ fee.balance | currency }}</p>
     </li>
   </ul>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="handleNo()" class="btn-cta cta-primary" ng-disabled="submitInProgress" nxg-autofocus>No</button>
-  <button ng-click="handleYes()" class="btn-cta cta-secondary" ng-disabled="submitInProgress">Yes</button>
+  <button ng-click="handleNo()" class="btn-cta cta-primary" ng-disabled="submitInProgress" nxg-autofocus translate>No</button>
+  <button ng-click="handleYes()" class="btn-cta cta-secondary" ng-disabled="submitInProgress" translate>Yes</button>
 </div>
 

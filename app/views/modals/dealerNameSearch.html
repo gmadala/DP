@@ -1,25 +1,25 @@
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Business Search
 </h3>
 
 <div class="modal-body">
   <form class="row-fluid form-block" name="dealerNameSearch">
     <div class="span4">
-      <label>Business Name</label>
+      <label translate>Business Name</label>
       <input type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
-      <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires">
+      <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires" translate>
         Please enter at least 3 characters.
       </label>
     </div>
 
     <div class="span3">
-      <label>City</label>
+      <label translate>City</label>
       <input type="text" id="businessSearchModalCity" class="input-medium" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
-      <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern">City names must only have letters and spaces.</label>
+      <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern" translate>City names must only have letters and spaces.</label>
     </div>
 
     <div class="span3">
-      <label>State</label>
+      <label translate>State</label>
       <div class="style-select auto">
         <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
           <option value=""></option>
@@ -28,20 +28,20 @@
     </div>
 
     <div class="span2">
-      <button class="btn inline-submit" ng-click="search()">
+      <button class="btn inline-submit" ng-click="search()" translate>
         Search
       </button>
     </div>
   </form>
 
   <div class="form-block" ng-show="data.results.length > 0">
-    <p class="paragraph">Select a business name below to query the account.</p>
+    <p class="paragraph" translate>Select a business name below to query the account.</p>
   </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
     <p class="no-results" ng-switch-when="false" ng-switch="!isQueryValid(data.query)">
-      <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
-      <span ng-switch-when="true">Please enter a name, and city or state, to search.</span>
+      <span ng-switch-when="false" translate>Sorry, no results found. Please try a new search.</span>
+      <span ng-switch-when="true" translate>Please enter a name, and city or state, to search.</span>
     </p>
 
     <div class="search-results" ng-switch-when="true"
@@ -54,31 +54,31 @@
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessName')"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-            Business Name
+            <span translate>Business Name</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessLegalName')"
               ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-            Legal Name
+            <span translate>Legal Name</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessNumber')"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-            Business
+            <span translate>Business</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('City')"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-            City
+            <span translate>City</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('State')"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-            State
+            <span translate>State</span>
             <span class="sortArrows"></span>
           </th>
         </thead>
@@ -96,7 +96,7 @@
           </tr>
         </tbody>
       </table>
-      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
         There are too many results to display, please refine your search further.
       </p>
     </div>
@@ -104,5 +104,5 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-primary" translate>Close Window</button>
 </div>
