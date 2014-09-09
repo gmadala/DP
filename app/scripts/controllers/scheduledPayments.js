@@ -109,19 +109,7 @@ angular.module('nextgearWebApp')
       },
 
       payOff: function(p) {
-        Payments.addPaymentToQueue(
-          p.floorplanId,
-          p.vin,
-          p.stockNumber,
-          p.description,
-          p.payoffAmount,
-          p.curtailmentDueDate,
-          true, /*payoff*/
-          p.principalPayoff,
-          p.InterestPayoffTotal,
-          p.FeesPayoffTotal,
-          p.CollateralProtectionPayoffTotal
-        );
+        Payments.addPaymentToQueue(p, true/* asPayoff*/);
       },
 
       cancelPayment: function(payment) {

@@ -24,7 +24,7 @@
         </li>
         <li class="list-table-row">
           <p class="span4">Payment</p>
-          <p class="span8 value">{{ model.payment.amount | currency }}</p>
+          <p class="span8 value">{{ model.payment.getCheckoutAmount() | currency }}</p>
         </li>
       </ul>
     </div>

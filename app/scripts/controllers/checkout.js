@@ -45,7 +45,7 @@ angular.module('nextgearWebApp')
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
             if (!value.scheduleDate) {
-              accumulator += value.amount;
+              accumulator += value.getCheckoutAmount();
             }
             return accumulator;
           }, 0);
@@ -55,7 +55,7 @@ angular.module('nextgearWebApp')
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
             if (value.scheduleDate) {
-              accumulator += value.amount;
+              accumulator += value.getCheckoutAmount();
             }
             return accumulator;
           }, 0);
@@ -100,7 +100,7 @@ angular.module('nextgearWebApp')
           templateUrl: 'views/modals/scheduleCheckout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
-            payment: function () { return item.isPayment && item; },
+            payment: function () { return !item.isFee && item; },
             fee: function () { return item.isFee && item; },
             possibleDates: function () {
               var tomorrow = moment().add(1, 'day').toDate(),
@@ -110,7 +110,7 @@ angular.module('nextgearWebApp')
                   item.scheduleLoading = false;
                   if (!_.find(result)) {
                     // no possible schedule dates for this item (edge case, but could happen)
-                    item.scheduleError = 'This ' + (item.isPayment ? 'payment' : 'fee') + ' cannot be scheduled';
+                    item.scheduleError = 'This ' + (item.isFee ? 'fee' : 'payment') + ' cannot be scheduled';
                     item.scheduleBlocked = true;
                     item.scheduleDate = null;
                     return $q.reject();
@@ -285,7 +285,7 @@ angular.module('nextgearWebApp')
         templateUrl: 'views/modals/paymentOptionsBreakdown.html',
         controller: 'PaymentOptionsBreakdownCtrl',
         resolve: {
-          payment: function() {
+          cartItem: function() {
             return payment;
           }
         }

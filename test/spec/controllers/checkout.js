@@ -81,18 +81,26 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total fees plus unscheduled payments for today', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
       run();
       expect(scope.paymentQueue.sum.todayCount()).toBe(3);
@@ -101,19 +109,27 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total scheduled payments', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
         scheduleDate: new Date(),
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
       run();
       expect(scope.paymentQueue.sum.scheduledCount()).toBe(2);
@@ -122,22 +138,32 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total fees and payments', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       fees.feeId2 = {
-        amount: 43
+        getCheckoutAmount: function() {
+          return 43;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
         scheduleDate: new Date(),
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
 
       run();
@@ -659,27 +685,32 @@ describe('Controller: CheckoutCtrl', function () {
       $q = _$q_;
       $timeout = _$timeout_;
 
+      // mocked cartItem objects
       mockQueue = {
         fees: [{
-          isPayment: false,
           isFee: true,
           financialRecordId: 'fee1',
-          type: 'type',
+          feeType: 'type',
           vin: 'ch123',
           description: 'fee desc',
           amount: 120,
-          dueDate: '2013-01-20'
+          dueDate: '2013-01-20',
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
         }],
         payments: [{
-          isPayment: true,
           isFee: false,
-          floorplanId: 'one',
+          id: 'one',
           vin: 'vin123',
           stockNum: 'stock123',
           description: 'desc123',
           amount: 456,
           dueDate: '2013-01-20',
-          isPayoff: false
+          isPayoff: false,
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
         }]
       };
 

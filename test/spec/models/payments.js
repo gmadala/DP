@@ -493,13 +493,6 @@ describe("Model: Payments", function () {
 
       var items = _.map(content.fees);
       expect(items.length).toBe(1);
-      // var fee = items[0];
-      // expect(fee.financialRecordId).toBe('finId1');
-      // expect(fee.vin).toBe('vin');
-      // expect(fee.type).toBe('type');
-      // expect(fee.description).toBe('desc');
-      // expect(fee.amount).toBe(100);
-      // expect(fee.dueDate).toBe('2013-01-01');
     });
 
     it('should include the payments hash table with expected payment data', function () {
@@ -511,15 +504,6 @@ describe("Model: Payments", function () {
 
       var items = _.map(content.payments);
       expect(items.length).toBe(1);
-      // var pmt = items[0];
-      // expect(pmt.floorplanId).toBe('floorId1');
-      // expect(pmt.vin).toBe('vin');
-      // expect(pmt.stockNum).toBe('stock1');
-      // expect(pmt.description).toBe('desc');
-      // expect(pmt.amount).toBe(200);
-      // expect(pmt.dueDate).toBe('2013-01-02');
-      // expect(pmt.isPayoff).toBe(true);
-      // expect(pmt.principal).toBe(150);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {

@@ -5,7 +5,6 @@
 <div class="modal-body to-edge" nxg-autofocus>
   <form class="modal-inner" name="paymentOptionsForm">
     <h3>Payment Options</h3>
-
     <p class="paragraph">Select a payment from the options below:</p>
 
     <ul class="form-block">
@@ -13,20 +12,37 @@
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payoff" id="paymentOptionPayoff" required />
         <label class="radio-img" for="paymentOptionPayoff"></label>
         <label class="cr-label" for="paymentOptionPayoff">
-          <strong>{{ payment.amounts.CurrentPayoff | currency }}</strong> – Payoff this vehicle
+          <strong>{{ cartItem.payoff.amount | currency }}</strong> – Payoff this vehicle
         </label>
       </li>
       <li class="cr-inline">
-        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="curtailment" id="paymentOptionCurtailment" required />
+        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payment" id="paymentOptionCurtailment" required />
         <label class="radio-img" for="paymentOptionCurtailment"></label>
         <label class="cr-label" for="paymentOptionCurtailment">
-          <strong>{{ payment.amounts.AmountDue | currency }}</strong> – Curtailment Payment
+          <strong>{{ cartItem.payment.amount | currency }}</strong> – Curtailment Payment
         </label>
-        <div class="form-row" ng-show="selector.paymentOption == 'curtailment'">
+        <div class="form-row" ng-show="selector.paymentOption == 'payment' && (maxAdditional > 0.01)">
           <div class="input-prepend dollar">
-              <span class="add-on">$</span>
-              <input type="text" class="input-small" name="increaseAmt" id="increaseAmt" ng-model="selector.amount" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/" nxg-min="0.01" nxg-max="{{ maxAdditional }}" nxg-input-currency="1000000000000" ng-disabled="loading" ng-class="{ 'nxg-invalid':formValidation.increaseAmt.$error.required || formValidation.increaseAmt.$error.pattern || formValidation.increaseAmt.$error.nxgMin || formValidation.increaseAmt.$error.max }" required /> – Additional Principal Payment
-            </div>
+            <span class="add-on">$</span>
+            <input type="text"
+            class="input-small"
+            name="additionalAmount"
+            id="additionalAmount"
+            ng-model="selector.additionalAmount"
+            placeholder="0.00"
+            ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
+            nxg-min="0.01"
+            nxg-max="{{ maxAdditional }}"
+            nxg-input-currency="{{ maxAdditional }}"
+
+            ng-class="{ 'nxg-invalid':validity.additionalAmount.$error.pattern || validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.max }" />
+          </div> – Additional Principal Payment
+        </div>
+        <div class="form-row">
+          <label class="text-error" ng-show="validity.additionalAmount.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
+          <label class="text-error" ng-show="validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax">
+            Payout Amount must be $0.01 to {{ maxAdditional | currency }}
+          </label>
         </div>
       </li>
       <!--
@@ -48,9 +64,9 @@
         <p class="span6">Principal:</p>
         <p class="span6 value numeric">{{ paymentBreakdown.principal | currency }}</p>
       </li>
-      <li class="list-table-row" ng-show="selector.amount > 0">
+      <li class="list-table-row" ng-show="selector.paymentOption == 'payment' && selector.additionalAmount">
         <p class="span6">Additional Principal:</p>
-        <p class="span6 value numeric">{{ selector.amount | currency }}</p>
+        <p class="span6 value numeric">{{ selector.additionalAmount | currency }}</p>
       </li>
       <li class="list-table-row">
         <p class="span6">Interest:</p>
@@ -62,7 +78,7 @@
       </li>
       <li class="list-table-row">
         <p class="span6">CPP:</p>
-        <p class="span6 value numeric">{{ paymentBreakdown.collateralProtection | currency }}</p>
+        <p class="span6 value numeric">{{ paymentBreakdown.cpp | currency }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">

@@ -65,13 +65,19 @@ describe('Directive: nxgPaymentSummary', function () {
       expect(scope.getSubtotal()).toBe(0);
 
       mockPaymentQueue.fees.fee1 = {
-        amount: 111
+        getCheckoutAmount: function() {
+          return 111;
+        }
       };
       mockPaymentQueue.payments.payment1 = {
-        amount: 222
+        getCheckoutAmount: function() {
+          return 222;
+        }
       };
       mockPaymentQueue.payments.payment2 = {
-        amount: 555.55
+        getCheckoutAmount: function() {
+          return 555.55;
+        }
       };
 
       expect(scope.getSubtotal()).toBe(888.55);

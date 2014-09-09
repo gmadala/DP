@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, queueObject, Paginate, Floorplan, segmentio, metric) {
+  .factory('Payments', function($q, $filter, api, moment, CartItem, Paginate, Floorplan, segmentio, metric) {
 
     // private global state:
 
@@ -125,15 +125,14 @@ angular.module('nextgearWebApp')
         });
       },
       addPaymentToQueue: function (payment, asPayoff) {
-        // incoming object will have a FloorplanId; the new queueObject will just have id.
-        var p = queueObject(payment, false/* isFee */, asPayoff);
+        // incoming object will have a FloorplanId; the new CartItem will just have id.
+        var p = new CartItem(payment, false/* isFee */, asPayoff);
 
         paymentQueue.payments[p.id] = p;
         segmentio.track(metric.ADD_TO_BASKET);
       },
       addFeeToQueue: function (fee) {
-        var f = queueObject(fee, true/* isFee */);
-
+        var f = new CartItem(fee, true/* isFee */);
         paymentQueue.fees[f.financialRecordId] = f;
         segmentio.track(metric.ADD_TO_BASKET);
       },
@@ -229,6 +228,8 @@ angular.module('nextgearWebApp')
       checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
         var shortFees = [],
           shortPayments = [];
+
+          // TODO: update to handle interest-only or additional principal payments.
         angular.forEach(payments, function (payment) {
           shortPayments.push({
             FloorplanId: payment.id,
