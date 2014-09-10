@@ -431,6 +431,32 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('removeFromQueue', function() {
+    it('should call removeFeeFromQueue if item to remove is a fee', function() {
+      var fee = {
+        FinancialRecordId: 'fee123'
+      };
+
+      spyOn(payments, 'removeFeeFromQueue').andReturn({});
+
+      payments.addFeeToQueue(fee);
+      payments.removeFromQueue(payments.getPaymentQueue().fees.fee123);
+      expect(payments.removeFeeFromQueue).toHaveBeenCalled();
+    });
+
+    it('should call removePaymentFromQueue if item to remove is a payment', function() {
+      var payment = {
+        FloorplanId: 'payment123'
+      };
+
+      spyOn(payments, 'removePaymentFromQueue').andReturn({});
+
+      payments.addPaymentToQueue(payment);
+      payments.removeFromQueue(payments.getPaymentQueue().payments.payment123);
+      expect(payments.removePaymentFromQueue).toHaveBeenCalled();
+    });
+  })
+
   describe('removePaymentFromQueue', function () {
 
     it('should remove payments from the queue', function () {
@@ -486,7 +512,7 @@ describe("Model: Payments", function () {
   describe('getPaymentQueue function', function () {
 
     it('should include the fees hash table with expected fee data', function () {
-      payments.addFeeToQueue('finId1', 'vin', 'type', 'desc', 100, '2013-01-01');
+      payments.addFeeToQueue({ FinancialRecordId: 'finId1' });
 
       var content = payments.getPaymentQueue();
       expect(content.fees).toBeDefined();
@@ -500,7 +526,7 @@ describe("Model: Payments", function () {
       expect(content.payments).toBeDefined();
 
       // this is deliberately AFTER the queue content retrieval to test that we're getting "live" objects
-      payments.addPaymentToQueue('floorId1', 'vin', 'stock1', 'desc', 200, '2013-01-02', true, 150);
+      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, false);
 
       var items = _.map(content.payments);
       expect(items.length).toBe(1);
@@ -539,7 +565,6 @@ describe("Model: Payments", function () {
   });
 
   describe('cancelScheduled function', function () {
-
     var succeed = true;
 
     beforeEach(function () {
@@ -572,6 +597,45 @@ describe("Model: Payments", function () {
 
       succeed = false;
       payments.cancelScheduled('schId').then(success, failure);
+      httpBackend.flush();
+      expect(success).not.toHaveBeenCalled();
+      expect(failure).toHaveBeenCalled();
+    });
+  });
+
+  describe('cancelScheduledFee function', function () {
+    var succeed = true;
+
+    beforeEach(function () {
+      httpBackend.expectPOST('/payment/cancelscheduledaccountfeepayment/schId').respond(function(method, url, data) {
+        return [200, {
+          "Success": succeed,
+          "Message": null
+        }, {}];
+      });
+    });
+
+    it('should make the expected HTTP POST with the provided scheduled fee payment ID', function () {
+      payments.cancelScheduledFee('schId');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for successful result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      payments.cancelScheduledFee('schId').then(success, failure);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalled();
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+    it('should return a promise for failure result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      succeed = false;
+      payments.cancelScheduledFee('schId').then(success, failure);
       httpBackend.flush();
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
@@ -722,7 +786,6 @@ describe("Model: Payments", function () {
   });
 
   describe('checkout function', function () {
-
     var stubResponse;
 
     beforeEach(function () {
@@ -834,12 +897,10 @@ describe("Model: Payments", function () {
       expect(payments.paymentInProgress()).toBe(true);
       httpBackend.flush();
       expect(payments.paymentInProgress()).toBe(false);
-    })
-
+    });
   });
 
   describe('requestExtension', function() {
-
     it('should make api request', function() {
       var floorplanId = 5;
       httpBackend.expectPOST('/Floorplan/requestextension/' + floorplanId).respond({
@@ -849,11 +910,7 @@ describe("Model: Payments", function () {
       });
 
       payments.requestExtension(floorplanId);
-
       expect(httpBackend.flush).not.toThrow();
-
     });
-
   });
-
 });

@@ -24,7 +24,6 @@ angular.module('nextgearWebApp')
       this.dueDate = item.EffectiveDate;
       this.amount = item.Balance;
       this.scheduled = item.Scheduled;
-      this.scheduleDate = item.ScheduledDate;
     };
 
     // FeeCartItem & VehicleCartItem should have the same functions for getting item type, getting checkout amount, etc.
@@ -53,9 +52,6 @@ angular.module('nextgearWebApp')
 
       this.dueDate = item.DueDate;
       this.scheduled = item.Scheduled;
-      this.scheduleDate = item.ScheduledPaymentDate || null;
-      this.scheduleType = item.CurtailmentPaymentScheduled || null;
-      this.scheduleId = item.WebScheduledPaymentId || null;
       this.overrideAddress = null;
 
       this.payoff = {

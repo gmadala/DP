@@ -83,6 +83,10 @@ describe('Directive: nxgPaymentSummary', function () {
       expect(scope.getSubtotal()).toBe(888.55);
     });
 
+    it('should attach a getCount function to the scope that counts the items in the queue', function() {
+      expect(scope.getCount()).toBe(3);
+    })
+
   });
 
 });
