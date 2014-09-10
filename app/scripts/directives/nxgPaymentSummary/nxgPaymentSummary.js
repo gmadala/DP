@@ -53,7 +53,7 @@ angular.module('nextgearWebApp')
       });
 
       angular.forEach(queue.payments, function (payment) {
-        total += payment.getCheckoutAmount(true);
+        total += payment.getCheckoutAmount();
       });
       return total;
     };
