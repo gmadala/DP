@@ -14,7 +14,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesScheduled">
-          <td>{{ fee.type || 'N/A' }}</td>
+          <td>{{ fee.feeType || 'N/A' }}</td>
           <td>{{ fee.description }}</td>
           <td>{{ fee.scheduleDate | moment }}</td>
           <td><p class="numeric">{{ fee.amount | currency }}</p></td>
@@ -38,7 +38,7 @@
             <p class="caps stock">STK: {{ payment.stockNum }}</p>
           </td>
           <td><p class="">{{ payment.scheduleDate | moment }}</p></td>
-          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+          <td><p class="numeric">{{ payment.getCheckoutAmount() | currency }}</p></td>
         </tr>
       </table>
     </div>
@@ -58,7 +58,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesToday">
-          <td>{{ fee.type || 'N/A' }}</td>
+          <td>{{ fee.feeType || 'N/A' }}</td>
           <td>{{ fee.description }}</td>
           <td>{{ today | moment }}</td>
           <td><p class="numeric">{{ fee.amount | currency }}</p></td>
@@ -82,7 +82,7 @@
             <p class="caps stock">STK: {{ payment.stockNum }}</p>
           </td>
           <td>{{ today | moment }}</td>
-          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+          <td><p class="numeric">{{ payment.getCheckoutAmount() | currency }}</p></td>
         </tr>
       </table>
     </div>
