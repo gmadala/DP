@@ -1,0 +1,2319 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#: app/views/auction.bulkflooring.html app/views/checkout.html
+#: app/views/floorcar.html
+msgid "$"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "- OR -"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "-- Select Bank --"
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "1. Vehicle Information"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "1. Which line of credit would you like to extend?"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "2. Do you want this increase to be temporary or permanent?"
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "2. Sale Information"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "3. How much would you like to increase it by?"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"<span class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length\">0</span> out of "
+"<span class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"TotalReleasesAllowed\">0</span>"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>0</strong> Days"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>1-24</strong> Days"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>100+</strong> Days"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>25-49</strong> Days"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>50-74</strong> Days"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "<strong>75-99</strong> Days"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"<strong>Permanent</strong> – This request will be submitted for review and "
+"may require additional information. Please contact your NextGear "
+"Representative with any questions."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"<strong>Temporary</strong> – This request will be reviewed for a term up to "
+"60 days."
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is due this week. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
+"a>"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is due today. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
+"a>"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is overdue. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </"
+"a>"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Access your GO Financial account directly from here."
+msgstr ""
+
+#: app/views/modals/paymentDetails.html
+msgid "Account"
+msgstr ""
+
+#: app/views/checkout.html app/views/payments.html
+msgid "Account Fees"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Actions"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Activity Date"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Additional Addresses"
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Additional fees may apply. Please check your Rates and Fees schedule."
+msgstr ""
+
+#: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
+msgid "Address"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/dashboard.html
+#: app/views/modals/confirmCheckout.html app/views/scheduledpayments.html
+msgid "Amount"
+msgstr ""
+
+#: app/views/analytics.html
+msgid ""
+"Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | "
+"number:2 }}% of the NextGear Capital Book"
+msgstr ""
+
+#: app/views/payments.html
+msgid ""
+"Amounts shown are valid through 8pm EST\n"
+"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</"
+"span>\n"
+"          <span ng-show=\"!canPayNow\">{{ { true:'tomorrow', false: ''}"
+"[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "An email will be sent to you shortly with a tracking number."
+msgstr ""
+
+#: app/views/auction.settings.html
+msgid "And {{ title.data.extraAddresses }} additional addresses..."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.updateSecurity.html
+#: app/views/profileSettings.html
+msgid "Answer"
+msgstr ""
+
+#: app/views/payments.html
+msgid ""
+"Any payments made will be scheduled to be applied on the next available "
+"business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Applied"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Apply these Funds to Payment?"
+msgstr ""
+
+#: app/views/analytics.html app/views/auction.dashboard.html
+#: app/views/dashboard.html
+msgid "Approved"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Approved Floor Plans"
+msgstr ""
+
+#: app/views/modals/confirmLogout.html
+msgid "Are you sure you want to logout?"
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+msgid "Auction Access #"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Auction Access Number"
+msgstr ""
+
+#: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
+msgid "Auction Access Number(s)"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Auto-Disburse Unapplied Funds"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Available"
+msgstr ""
+
+#: app/views/account_management.html app/views/analytics.html
+#: app/views/modals/creditQuery.html
+msgid "Available Credit"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Available Unapplied Funds"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Average"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Average Purchase Price"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Average Turn"
+msgstr ""
+
+#: app/views/modals/topAuctions.html
+msgid "Avg NextGear Capital Book Value"
+msgstr ""
+
+#: app/views/modals/topAuctions.html
+msgid "Avg Purchase Price"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Awaiting Disbursement"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Awaiting Titles 0-15 Days"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Awaiting Titles 16-30 Days"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Awaiting Titles 30+ Days"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/checkout.html
+msgid "Bank Account"
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "Bank Account for Disbursement (when applicable)"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Bank Account(s)"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Best Movers"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Best and Worst Movers by Zipcode"
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "Business"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Business Email"
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/creditQuery.html
+#: app/views/modals/dealerNameSearch.html
+#: app/views/modals/floorCarConfirm.html
+msgid "Business Name"
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+msgid "Business Name or Number"
+msgstr ""
+
+#: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
+msgid "Business Number"
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "Business Search"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Business Settings"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Business Summary"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/auction.sellerfloorplan.html
+msgid "Buyer"
+msgstr ""
+
+#: app/views/modals/creditQuery.html
+msgid "Buyer Business Line of Credit Query"
+msgstr ""
+
+#: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
+msgid "Buyer Information"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "CPP"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.bulkflooring.html
+#: app/views/auction.settings.html app/views/floorcar.html
+#: app/views/login.createPassword.html app/views/login.updateSecurity.html
+#: app/views/modals/creditQuery.html app/views/modals/scheduleCheckout.html
+#: app/views/profileSettings.html app/views/vehicledetails.html
+msgid "Cancel"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Cancel Payment"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "Cancel Request"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Change Inventory Location"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Change Payment Date"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Check #"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Checkout"
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "City"
+msgstr ""
+
+#: app/views/auction.dealersearch.html app/views/modals/dealerNameSearch.html
+msgid "City names must only have letters and spaces."
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Clean"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Close"
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+#: app/views/modals/confirmTitleRequest.html app/views/modals/creditQuery.html
+#: app/views/modals/dealerNameSearch.html app/views/modals/feeDetails.html
+#: app/views/modals/multipleVehicles.html app/views/modals/paymentDetails.html
+#: app/views/modals/topAuctions.html
+msgid "Close Window"
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid "Collateral Protection"
+msgstr ""
+
+#: app/views/documents.html
+msgid "Collateral Protection Program"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/views/vehicledetails.html
+msgid "Color"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Confirm"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html
+msgid "Confirm Flooring Request"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.createPassword.html
+#: app/views/profileSettings.html
+msgid "Confirm Password"
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+#: app/views/modals/requestCreditIncrease.html
+msgid "Confirm Request"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html
+msgid ""
+"Confirm the vehicle information to send the flooring request to NextGear. "
+"<br>Print this screen for your records."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Consigner Ticket Number"
+msgstr ""
+
+#: app/views/login.createPassword.html app/views/login.updateSecurity.html
+msgid "Continue"
+msgstr ""
+
+#: app/views/login.createPassword.html
+msgid "Create a New Password"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Create your Enhanced Registration four digit PIN."
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Credit Information"
+msgstr "en_Credit Informations"
+
+#: app/views/modals/creditQuery.html
+msgid "Credit Type"
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"Credit requests typically take 3-5 business days to process. You will be "
+"notified by email as soon as your request has been processed."
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Credits and Payments"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Current Mileage"
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Current Reports"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Curtailment"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/reports.html
+msgid "Date"
+msgstr ""
+
+#: app/views/auction.reports.html
+msgid "Date Search"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Date Submitted"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Dates"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Days Floored"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Name"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Name Search"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Number Search"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Dealer Statement"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Default Address"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Delivery Type"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Denied"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/checkout.html
+#: app/views/dashboard.html app/views/floorplan.html
+#: app/views/modals/confirmCheckout.html
+#: app/views/modals/confirmTitleRequest.html
+#: app/views/modals/scheduleCheckout.html app/views/payments.html
+#: app/views/scheduledpayments.html app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Description"
+msgstr ""
+
+#: app/views/modals/confirmDisableEnhanced.html
+msgid ""
+"Disabling the Enhanced Registration Program will delete any current PINs "
+"associated with this business."
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Disbursement"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Disbursement Date"
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Disbursement Detail"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Disbursement Groups"
+msgstr ""
+
+#: app/views/login.html
+msgid ""
+"Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> or newer?"
+msgstr ""
+
+#: app/views/auction.documents.html app/views/auction.reports.html
+#: app/views/documents.html app/views/reports.html
+msgid ""
+"Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat "
+"Reader."
+msgstr ""
+
+#: app/views/documents.html
+msgid "Download NextGear Capital Mobile Android"
+msgstr ""
+
+#: app/views/documents.html
+msgid "Download NextGear Capital Mobile iOS"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Due"
+msgstr ""
+
+#: app/views/checkout.html app/views/dashboard.html app/views/payments.html
+msgid "Due Date"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Edit"
+msgstr ""
+
+#: app/views/modals/feeDetails.html app/views/modals/paymentDetails.html
+msgid "Effective Date"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Eligible for Title Release"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Email"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Email Address"
+msgstr ""
+
+#: app/views/reports.html
+msgid "End Date"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Enhanced Registration Enabled?"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Enhanced Registration PIN"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid ""
+"Enhanced Registration will result in all account access being restricted to "
+"users with a PIN. All guarantors will be asked to set up their PIN when "
+"logging in to MyNextGear."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"Enter the email address associated with your account to receive your "
+"username via email."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Enter your username to receive a new password via email."
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Export Receipt(s)"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Export Summary"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Exportable Inventory"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Extended Term"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Extra Clean"
+msgstr ""
+
+#: app/views/modals/feeDetails.html app/views/modals/scheduleCheckout.html
+msgid "Fee"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/cancelFee.html
+#: app/views/payments.html app/views/scheduledpayments.html
+msgid "Fee Amount"
+msgstr ""
+
+#: app/views/modals/feeDetails.html
+msgid "Fee Details"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/cancelFee.html
+#: app/views/modals/confirmCheckout.html
+#: app/views/modals/scheduleCheckout.html app/views/payments.html
+#: app/views/scheduledpayments.html
+msgid "Fee Type"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Fee(s)"
+msgstr ""
+
+#: app/views/dashboard.html app/views/modals/confirmCheckout.html
+#: app/scripts/models/dashboard.js
+msgid "Fees"
+msgstr "en_Fees"
+
+#: app/views/reports.html
+msgid "Filter for VIN (optional)"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Finance Amount"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Financed Amount"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Financial Accounts"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Financial Activity"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Floor"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Floor Date"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/auction.sellerfloorplan.html
+#: app/views/dashboard.html app/views/floorplan.html
+msgid "Floor Plan"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Floor Plan Total"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Floor Plan Value Estimates"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/floorplan.html
+#: app/views/payments.html app/views/scheduledpayments.html
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Floored"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Floored On"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Floored on {{ flooringInfo.FlooringDate | moment }}"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
+msgid "Flooring Information"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Flooring Status"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Forgot Your Password?"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Forgot Your User Name or Password?"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Forgot Your User Name?"
+msgstr ""
+
+#: app/views/login.html
+msgid "Forgot your username or password?"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Future"
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Historical Reports"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "I Have the Title"
+msgstr ""
+
+#: app/views/login.html
+msgid ""
+"If you are experiencing an issue logging in, click \"Forgot your username or "
+"password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital."
+"com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid ""
+"If you have the NextGear Capital Dealer Number or Auction Access Number, use "
+"the Dealer Number search."
+msgstr ""
+
+#: app/views/checkout.html
+msgid "In the Amount of"
+msgstr ""
+
+#: app/views/account_management.html
+msgid ""
+"Initiate your request for a permanent or temporary increase to your current "
+"line of credit."
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Insufficient Funds"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/paymentExtension.html
+msgid "Interest"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Interest-only payment"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Invalid character in VIN"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Inventory Address"
+msgstr ""
+
+#: app/views/floorcar.html app/views/vehicledetails.html
+msgid "Inventory Location"
+msgstr ""
+
+#: app/views/account_management.html app/views/analytics.html
+msgid "Last Payment"
+msgstr ""
+
+#: app/views/account_management.html app/views/analytics.html
+msgid "Last Payment Date"
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "Legal Name"
+msgstr ""
+
+#: app/views/dashboard.html app/views/floorcar.html
+#: app/views/vehicledetails.html
+msgid "Line of Credit"
+msgstr ""
+
+#: app/views/login.html
+msgid "Log In"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Login to GO Financial"
+msgstr ""
+
+#: app/views/modals/confirmLogout.html
+msgid "Logout"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Lot Number"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
+msgid "Make"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Make Selection"
+msgstr ""
+
+#: app/views/documents.html
+msgid "Manage your business with NextGear Capital on the go."
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Maximum"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Mileage"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Minimum"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
+msgid "Model"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/dashboard.html
+msgid "Month"
+msgstr ""
+
+#: app/views/modals/multipleVehicles.html
+msgid "Multiple Vehicles Found"
+msgstr ""
+
+#: app/views/modals/multipleVehicles.html
+msgid ""
+"Multiple vehicles were found in our system matching the VIN entered.<br>\n"
+"    Please select the intended vehicle from the list below."
+msgstr ""
+
+#: app/views/profileSettings.html
+msgid "New"
+msgstr ""
+
+#: app/views/auction.settings.html
+msgid "New Password"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "NextGear Black Book Valuation"
+msgstr ""
+
+#: app/views/analytics.html
+msgid ""
+"NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | "
+"number:2 }}% of the Purchase Price"
+msgstr ""
+
+#: app/views/analytics.html
+msgid ""
+"NextGear Capital Book is {{ businessSummary.DerivedPendingBook | "
+"number:2 }}% of the Purchase Price."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "NextGear Capital Dealer Number"
+msgstr ""
+
+#: app/views/auction.documents.html app/views/documents.html
+msgid "NextGear Capital Documents"
+msgstr ""
+
+#: app/views/documents.html
+msgid "NextGear Capital Mobile Apps"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"NextGear Regional Values are based on the first 3 digits of your zip code."
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/checkout.html app/views/floorcar.html
+#: app/views/modals/cancelFee.html app/views/modals/cancelPayment.html
+msgid "No"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "No Payment Activity Available"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "No notifications are currently enabled."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "No results found, please enter a valid Auction Access Number."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "No results found, please enter a valid Dealer Number."
+msgstr ""
+
+#: app/views/modals/confirmDisableEnhanced.html
+#: app/views/modals/confirmLogout.html
+msgid "No, Thanks"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "No."
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "None"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Not Eligible for Title Release"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid ""
+"Note: Payoff and due amounts may change. Interest and/or fees may continue "
+"to accrue between now and your scheduled payment.<br>\n"
+"          Note: No payment may be scheduled on an overdue loan, or a loan "
+"due today."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Notifications"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Number of Cars Purchased Per-Auction (in the last 12 months)"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "OK"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Original Term"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/modals/confirmCheckout.html
+msgid "Paid"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Paid Awaiting Title"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Paid off Summary"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.createPassword.html
+#: app/views/login.html
+msgid "Password"
+msgstr ""
+
+#: app/views/login.createPassword.html
+msgid "Passwords do not match."
+msgstr ""
+
+#: app/views/login.createPassword.html
+msgid ""
+"Passwords must consist of a minimum of 8 characters. Passwords must contain "
+"3 of the 4 following types of characters: uppercase, lowercase, number, or "
+"special character."
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Pay off this vehicle or return the title to remove from your limit."
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/scheduleCheckout.html
+#: app/views/payments.html app/views/vehicledetails.html
+msgid "Payment"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/cancelPayment.html
+msgid "Payment Amount"
+msgstr ""
+
+#: app/views/checkout.html app/views/receipts.html
+msgid "Payment Date"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Payment Description"
+msgstr ""
+
+#: app/views/modals/paymentDetails.html
+msgid "Payment Details"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Payment Due"
+msgstr ""
+
+#: app/views/modals/paymentDetails.html
+msgid "Payment Made"
+msgstr ""
+
+#: app/views/modals/paymentDetails.html
+msgid "Payment Method"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Payment Options"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/paymentExtension.html
+#: app/views/vehicledetails.html
+msgid "Payment Summary"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Payment: {{ receipt.PaymentMethod }}"
+msgstr ""
+
+#: app/views/checkout.html app/views/dashboard.html
+#: app/views/modals/confirmCheckout.html app/scripts/models/dashboard.js
+msgid "Payments"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Payments Summary"
+msgstr ""
+
+#: app/views/payments.html app/views/scheduledpayments.html
+#: app/views/vehicledetails.html
+msgid "Payoff"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Payoff Due"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Payoff Now"
+msgstr ""
+
+#: app/views/analytics.html app/views/auction.dashboard.html
+#: app/views/dashboard.html
+msgid "Pending"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Pending Floor Plans"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Phone"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Please answer this question."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Please be advised that such title(s) must be returned to NextGear Capital, "
+"at the address listed below, by close of business on the seventh (7th) day "
+"after the date of NextGear Capital's release of such title(s) to you. You "
+"understand and agree that NextGear Capital will declare a Maturity Event (as "
+"such term is defined in your Demand Promissory Note and Loan and Security "
+"Agreement (\"Note\")) and initiate a Required Payment (as such term is "
+"defined in your ACH Authorizaiton and Request Form) for all Liabilities (as "
+"defined in your Note) related to any title(s) not returned to NextGear "
+"Captital within such time frame. You agree that each Required Payment made "
+"pursuant to this request shall be deemed an Authorized Debit under your ACH "
+"Form."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "Please choose a line of credit."
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"Please confirm your title release request(s) below. Titles released here are "
+"required to be returned within 7 days. If you are requesting a title for "
+"state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact "
+"customer service for further assistance."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Please enter a City or select a State."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Please enter a Consigner Ticket Number."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Please enter a Dealer Name."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Please enter a Dealer Number."
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "Please enter a Purchase Date in the past."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Please enter a Sales Date in the past."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Please enter a User Name that is 40 characters or less."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Please enter a User Name."
+msgstr ""
+
+#: app/views/floorcar.html
+msgid ""
+"Please enter a Valid Purchase Date Year between {{minValidModelYear}} and "
+"{{maxValidModelYear}}."
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "Please enter a Valid Purchase Date."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid ""
+"Please enter a Valid Sales Date Year between {{minValidModelYear}} and "
+"{{maxValidModelYear}}."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Please enter a Valid Sales Date."
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+msgid "Please enter a business name or number to search."
+msgstr ""
+
+#: app/views/modals/dealerNameSearch.html
+msgid "Please enter a name, and city or state, to search."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Please enter a numeric value."
+msgstr ""
+
+#: app/views/login.html
+msgid "Please enter a password."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please enter a positive integer value with no decimals."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid ""
+"Please enter a positive numeric value with no <br> special characters, such "
+"as a dollar sign."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"Please enter a positive numeric value with no more than 2 decimal places."
+msgstr ""
+
+#: app/views/login.html
+msgid "Please enter a username."
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.createPassword.html
+#: app/views/profileSettings.html
+msgid "Please enter a valid password."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Please enter a valid phone number."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please enter a value less than $1,000,000,000,000."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Please enter a value less than 1,000,000 miles."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Please enter an Answer that is a maximum of 100 characters."
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Please enter an Answer."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Please enter an Auction Access Number."
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Please enter an answer that is no more than 100 characters long."
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Please enter an answer to the selected security question."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "Please enter an increase amount."
+msgstr ""
+
+#: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html
+msgid "Please enter at least 3 characters."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Please enter the Lot Number."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please enter the Mileage."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please enter the Purchase Amount."
+msgstr ""
+
+#: app/views/checkout.html
+msgid ""
+"Please enter the amount of unapplied funds as a number with no more than 2 "
+"decimals."
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Please enter the amount of unapplied funds to use."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "Please enter value less than $1,000,000,000,000.00."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"Please enter your email address. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"Please enter your user name. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid ""
+"Please note this quote is effective for today only and amounts are subject "
+"to change."
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Please review the following and submit your payments below."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please select a Bank Account for Disbursement."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please select a Color."
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Please select a Date in the past."
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "Please select a Line of Credit."
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Please select a Valid Date."
+msgstr ""
+
+#: app/views/reports.html
+msgid "Please select a Valid End Date."
+msgstr ""
+
+#: app/views/reports.html
+msgid "Please select a Valid Start Date."
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Please select a bank account for payment."
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Please select a schedule date."
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Please select a security question to answer."
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid ""
+"Please select a valid banking date no earlier than tomorrow and no later "
+"than the payment due date."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please select an Inventory Location."
+msgstr ""
+
+#: app/views/modals/requestCreditIncrease.html
+msgid "Please select either \"Temporary\" or \"Permanent\"."
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid "Please select who has the title."
+msgstr ""
+
+#: app/views/payments.html
+msgid "Posted"
+msgstr ""
+
+#: app/views/modals/feeDetails.html
+msgid "Posted Date"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Previous Disbursements"
+msgstr ""
+
+#: app/views/checkout.html app/views/modals/paymentExtension.html
+msgid "Principal"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Processed"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Product Type"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Provided"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
+msgid "Purchase Amount"
+msgstr ""
+
+#: app/views/floorcar.html app/views/modals/floorCarConfirm.html
+#: app/views/vehicledetails.html
+msgid "Purchase Date"
+msgstr ""
+
+#: app/views/floorplan.html app/views/modals/topAuctions.html
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Purchased"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Purchased For"
+msgstr ""
+
+#: app/views/modals/creditQuery.html
+msgid "Query"
+msgstr ""
+
+#: app/views/documents.html
+msgid "Rates and Fees"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Receipt Date"
+msgstr ""
+
+#: app/views/dashboard.html app/views/modals/paymentDetails.html
+#: app/views/receipts.html
+msgid "Receipt No."
+msgstr ""
+
+#: app/views/modals/paymentDetails.html
+msgid "Receipt Total"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Receipts"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Recent Receipts"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Recently Floored Vehicles"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Release Status"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Remaining Payment Balance"
+msgstr ""
+
+#: app/views/login.html
+msgid "Remember Username"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Remove"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Remove Title"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Request Credit Increase"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Request Title"
+msgstr ""
+
+#: app/views/account_management.html
+#: app/views/modals/requestCreditIncrease.html
+msgid "Request a Credit Increase"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Request an extension?"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Request the Title"
+msgstr ""
+
+#: app/views/payments.html
+msgid "Request<br>Extension"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Requests Summary"
+msgstr ""
+
+#: app/views/account_management.html app/views/analytics.html
+msgid "Reserve Funds"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html
+msgid "Return to Form"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Review the following and submit your title release requests."
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Rough"
+msgstr ""
+
+#: app/views/checkout.html app/views/floorplan.html
+#: app/views/modals/confirmCheckout.html app/views/payments.html
+#: app/views/scheduledpayments.html app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "STK"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Sale Information"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/modals/floorCarConfirm.html
+msgid "Sales Date"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Salvage"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Save"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Save Changes"
+msgstr ""
+
+#: app/views/modals/topAuctions.html
+msgid "Savings Per Purchase"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Schedule For"
+msgstr ""
+
+#: app/views/dashboard.html app/views/modals/cancelFee.html
+#: app/views/modals/cancelPayment.html app/views/modals/confirmCheckout.html
+msgid "Scheduled"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Scheduled Account Fees"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Scheduled By"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Scheduled On"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Scheduled Payment(s)"
+msgstr ""
+
+#: app/scripts/models/dashboard.js
+msgid "Scheduled Payments"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Scheduled Vehicle Payments"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid ""
+"Scheduled payments are not made until the scheduled date selected. <br> Fees "
+"and/or other charges may continue to accrue between now and your scheduled "
+"payment date that would need to be addressed separately."
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "Search"
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid "Search Dealers"
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Security Question #{{$index+1}}"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Security Question Answer"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.recover.html
+#: app/views/profileSettings.html
+msgid "Security Question {{$index + 1}}"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Select Below"
+msgstr ""
+
+#: app/views/modals/dealerNameSearch.html
+msgid "Select a business name below to query the account."
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+msgid "Select a business name below."
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Select the Schedule Date"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Self-Service Links"
+msgstr ""
+
+#: app/views/floorcar.html app/views/floorplan.html
+#: app/views/modals/topAuctions.html app/views/vehicledetails.html
+msgid "Seller"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Seller Address"
+msgstr ""
+
+#: app/views/floorcar.html app/views/modals/floorCarConfirm.html
+msgid "Send Payment To"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Send To"
+msgstr ""
+
+#: app/views/login.html
+msgid "Sign In"
+msgstr ""
+
+#: app/views/login.html
+msgid "Sign Up"
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid ""
+"Since this is your first login to NextGear Capital, please set your security "
+"questions before you enter the site."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Some title request(s) can not be processed at this time."
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Sorry, no results found."
+msgstr ""
+
+#: app/views/floorplan.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"floorplanData."
+"resetSearch(filterOptions)\" title=\"New Search\">try a new search</a>."
+msgstr ""
+
+#: app/views/payments.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title="
+"\"New Search\">try a new search</a>."
+msgstr ""
+
+#: app/views/receipts.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"receipts.resetSearch()\" title="
+"\"New Search\">try a new search</a>."
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/titlereleases.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"resetSearch()\" title=\"New "
+"Search\">try a new search</a>."
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"scheduledPayments."
+"resetSearch()\" title=\"New Search\">try a new search</a>."
+msgstr ""
+
+#: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
+msgid "Sorry, no results found. Please try a new search."
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Stale & Aging Vehicles"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Start Date"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Start Date should not be later than End Date."
+msgstr ""
+
+#: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html
+msgid "State"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/dashboard.html
+#: app/views/floorplan.html app/views/scheduledpayments.html
+#: app/views/vehicledetails.html
+msgid "Status"
+msgstr ""
+
+#: app/views/modals/cancelPayment.html app/views/modals/scheduleCheckout.html
+msgid "Stock #"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Stock #{{ vehicleInfo.StockNumber }}"
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Stock No."
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Stock Number"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
+msgid "Style"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "Submit"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html
+msgid "Submit Flooring Request"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Submit Payments"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Submit Requests"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Submitted Payment(s): {{ items.todayTotal() | currency }}"
+msgstr ""
+
+#: app/views/auction.reports.html
+msgid "Subsidiary Manufacturer"
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid "Subtotal"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Term Plan Name"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "The actual sale date must be used when flooring a car"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "The passwords do not match. Please re-enter the password."
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"The title(s) will be sent to the following address: <strong>{{addresses[0] | "
+"address}}</strong>"
+msgstr ""
+
+#: app/views/payments.html
+msgid "There are no fees associated with this account."
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "There are no fees currently scheduled with this account."
+msgstr ""
+
+#: app/views/floorplan.html app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html app/views/payments.html
+#: app/views/receipts.html app/views/scheduledpayments.html
+#: app/views/titlereleases.html
+msgid ""
+"There are too many results to display, please refine your search further."
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid ""
+"This extension request cannot be completed online. Please <a nxg-chat-with-"
+"us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr ""
+
+#: app/views/dashboard.html
+msgid ""
+"This line of credit expires on: {{dashboardData.selectedLineOfCredit."
+"TempLineOfCreditExpiration | moment}}"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "This {{ viewMode | capitalize }}"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Ticket No."
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/floorplan.html
+msgid "Title"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Title Information"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/vehicledetails.html
+msgid "Title Location"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Title Release Requests"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Title Release Unavailable"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Title Released on {{item.TitleReleaseDate | moment}}"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Title Releases Confirmation"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Title Requested"
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Title Settings"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Title State"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Titles Available After This Request"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid "Titles Requested"
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"Titles can only be released to an address on file. Please select the address "
+"where you would like to receive each of your requested titles."
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid "To extend this unit an additional period please click below."
+msgstr ""
+
+#: app/views/auction.dealersearch.html
+msgid ""
+"To look up a dealer in Dealer search, use a combination of their Name and "
+"City or State."
+msgstr ""
+
+#: app/views/checkout.html app/views/dashboard.html
+msgid "Today"
+msgstr ""
+
+#: app/views/dashboard.html app/views/modals/feeDetails.html
+#: app/views/modals/paymentDetails.html
+msgid "Total"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Total Available"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Total Days Floored"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Total Financed Amount"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Total NextGear Capital Book Value"
+msgstr ""
+
+#: app/views/analytics.html app/views/vehicledetails.html
+msgid "Total Outstanding"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Total Paid"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Total Purchase Price"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Tracking Number"
+msgstr ""
+
+#: app/views/floorcar.html
+msgid "Trade in"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Trade-in"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Transaction Details"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Unable to Schedule"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Unapplied Funds"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Unapplied Funds to Use"
+msgstr ""
+
+#: app/views/checkout.html
+msgid ""
+"Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></"
+"span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
+msgstr ""
+
+#: app/views/reports.html
+msgid "Upcoming Curtailment / Payoff Quote (PDF)"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/login.recover.html
+#: app/views/profileSettings.html
+msgid "User Name"
+msgstr ""
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "User Profile"
+msgstr ""
+
+#: app/views/login.html
+msgid "Username"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Utilized"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html app/views/checkout.html
+#: app/views/floorplan.html app/views/modals/cancelPayment.html
+#: app/views/modals/confirmCheckout.html
+#: app/views/modals/confirmTitleRequest.html
+#: app/views/modals/floorCarConfirm.html
+#: app/views/modals/paymentExtension.html
+#: app/views/modals/scheduleCheckout.html app/views/payments.html
+#: app/views/scheduledpayments.html app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html app/views/vehicledetails.html
+msgid "VIN"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html app/views/modals/floorCarConfirm.html
+#: app/views/modals/scheduleCheckout.html app/views/vehicledetails.html
+msgid "Vehicle Information"
+msgstr ""
+
+#: app/views/checkout.html app/views/payments.html
+msgid "Vehicle Payments"
+msgstr ""
+
+#: app/views/documents.html
+msgid "Video Walkthrough"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "View All Auctions"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "View All Payments"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "View All Receipts"
+msgstr ""
+
+#: app/views/modals/floorCarConfirm.html
+msgid "View Dealer Funding Checklist (PDF)"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "View Floorplans"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "View Receipt"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "View Receipts"
+msgstr ""
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "View Report"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "View the Title"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "View the Vehicle History Detail Report"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Voided"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Volume of Past NextGear Capital Floorplans"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable to locate this email address. If you need assistance, please "
+"call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable to locate this username. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable verify one or more of your answers. If you need assistance, "
+"please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"We're sorry, the highlighted title(s) listed above cannot be processed at "
+"this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
+"customer-support-phone></nxg-customer-support-phone></span>"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/dashboard.html
+msgid "Week"
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Welcome"
+msgstr ""
+
+#: app/views/login.updateSecurity.html
+msgid "Welcome to NextGear!"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+msgid "Who has the Title?"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Worst Movers"
+msgstr ""
+
+#: app/views/modals/cancelFee.html
+msgid "Would you like to cancel your scheduled fee?"
+msgstr ""
+
+#: app/views/modals/cancelPayment.html
+msgid "Would you like to cancel your scheduled payment?"
+msgstr ""
+
+#: app/views/modals/confirmDisableEnhanced.html
+msgid "Would you like to disable Enhanced Registration?"
+msgstr ""
+
+#: app/views/auction.dashboard.html app/views/modals/floorCarConfirm.html
+#: app/views/vehicledetails.html
+msgid "Year"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/checkout.html app/views/floorcar.html
+#: app/views/modals/cancelFee.html app/views/modals/cancelPayment.html
+#: app/views/modals/confirmDisableEnhanced.html
+#: app/views/modals/confirmLogout.html
+msgid "Yes"
+msgstr ""
+
+#: app/views/checkout.html
+msgid ""
+"You have no payments selected for checkout. Please visit the\n"
+"          <a href=\"#/payments\">Payments list</a> to select some."
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"You have not selected any titles. Please visit the\n"
+"        <a href=\"#/titlereleases\">Title Releases list</a> to select some."
+msgstr ""
+
+#: app/views/login.html
+msgid ""
+"You will need it in order to view your reports.<br>\n"
+"          Not sure? <a href=\"https://test.discoverdsc.com/MyDSC/Public/Test."
+"pdf\" target=\"_blank\">Test your Adobe Reader installation.</a><br>\n"
+"          If the document did not successfully display, please install <a "
+"href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader."
+"</a>"
+msgstr ""
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid ""
+"Your PIN must consist of four numbers, no letters or special characters."
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Your Top 10 Auctions"
+msgstr ""
+
+#: app/views/modals/topAuctions.html
+msgid "Your Top Auctions"
+msgstr ""
+
+#: app/views/modals/topAuctions.html
+msgid ""
+"Your Top Auctions is a list of auctions and dealers that you have purchased "
+"at least two vehicles from in the past 12 months. For each auction, a "
+"breakdown is given which allows you to analyze which auctions or sellers are "
+"providing you with the best value on vehicle purchases."
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid ""
+"Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Your title request(s) can not be processed at this time."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Your title {{ {true: 'requests have', false: 'request has'}[counts.total-"
+"counts.failed > 1] }} been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgstr ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Your title {{ {true: 'requests have', false: 'request has'}[counts.total-"
+"counts.failed > 1] }} been submitted."
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "as of: {{ pay.statusDate | moment }}"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "none"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid ""
+"or <button ng-click=\"removeSchedule()\" class=\"btn-unstyle btn-link\" ng-"
+"disabled=\"!model.canPayNow || submitInProgress\">Pay Now</button>"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "{{  {true:'Close ', false:'Show ' }[showDetails] }} Details"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Details"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.ExtendedTermPlanLength }} days)</span>"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.OriginalTermDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.OriginalTermPlanLength }} days)</span>"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "{{ flooringInfo.StockNumber }}"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.TotalDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.TotalTermPlanLength }} days)</span>"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid ""
+"{{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. "
+"If you need assistance,\n"
+"            please call NextGear Capital Support at: <nxg-customer-support-"
+"phone></nxg-customer-support-phone>."
+msgstr ""
+
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "{{ item.DaysFloored }} days"
+msgstr ""
+
+#: app/views/floorplan.html
+msgid "{{ item.DaysOnFloorplan }} days"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "{{ pay.daysOnFloorplan }} Days"
+msgstr ""
+
+#: app/views/payments.html
+msgid "{{ payment.DaysOnFloorplan }} days"
+msgstr ""
+
+#: app/views/checkout.html
+msgid ""
+"{{ paymentQueue.sum.scheduledCount() }} Future\n"
+"            <span ng-show=\"paymentQueue.sum.scheduledCount() == "
+"1\">Payment</span>\n"
+"            <span ng-hide=\"paymentQueue.sum.scheduledCount() == "
+"1\">Payments</span>"
+msgstr ""
+
+#: app/views/login.recover.html
+msgid "{{ question.QuestionText }}"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee "
+"Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | "
+"currency }}"
+msgstr ""

@@ -314,10 +314,17 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'po/untranslated.pot': ['<%= yeoman.app %>/views/**/*.html']
+          'po/untranslated.po': ['<%= yeoman.app %>/views/**/*.html', '<%= yeoman.app %>/scripts/models/**/*.js']
         }
       }
-    }
+    },
+      nggettext_compile: {
+          all: {
+              files: {
+                  '<%= yeoman.app %>/scripts/translations.js': ['po/translated/*.po']
+              }
+          }
+      }
   });
 
   grunt.renameTask('regarde', 'watch');
@@ -362,5 +369,5 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('translate', ['nggettext_extract']);
+  grunt.registerTask('translate', ['nggettext_extract', 'nggettext_compile']);
 };

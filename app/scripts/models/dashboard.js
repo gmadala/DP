@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Dashboard', function ($q, $filter, api, moment) {
+  .factory('Dashboard', function ($q, $filter, api, moment, gettextCatalog) {
 
     function getReceiptURL(transactionId) {
       return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
@@ -96,9 +96,9 @@ angular.module('nextgearWebApp')
               scheduledPayments: scheduledPaymentAmount,
               total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
               chartData: [
-                {name: 'Fees', color: '#9F9F9F', y: result.AccountFeeAmount},
-                {name: 'Payments', color: '#3399CC', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
-                {name: 'Scheduled Payments', color: '#1864A1', y: scheduledPaymentAmount}
+                {name: gettextCatalog.getString('Fees'), color: '#9F9F9F', y: result.AccountFeeAmount},
+                {name: gettextCatalog.getString('Payments'), color: '#3399CC', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
+                {name: gettextCatalog.getString('Scheduled Payments'), color: '#1864A1', y: scheduledPaymentAmount}
               ],
             };
 
