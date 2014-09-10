@@ -362,4 +362,5 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('default', ['build']);
+  grunt.registerTask('translate', ['nggettext_extract']);
 };
