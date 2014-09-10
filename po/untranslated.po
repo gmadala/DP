@@ -98,6 +98,14 @@ msgstr ""
 msgid "Account Fees"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Account Management"
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Acknowledge VIN Look-Up Failure"
+msgstr ""
+
 #: app/views/titlereleases.html
 msgid "Actions"
 msgstr ""
@@ -120,6 +128,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/auction.dashboard.html
 #: app/views/dashboard.html
 #: app/views/modals/confirmCheckout.html
@@ -254,6 +263,10 @@ msgstr ""
 msgid "Bank Account for Disbursement (when applicable)"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Bank Account for Payout"
+msgstr ""
+
 #: app/views/account_management.html
 msgid "Bank Account(s)"
 msgstr ""
@@ -324,6 +337,7 @@ msgstr ""
 msgid "CPP"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/account_management.html
 #: app/views/auction.bulkflooring.html
 #: app/views/auction.settings.html
@@ -353,10 +367,15 @@ msgstr ""
 msgid "Change Payment Date"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Chat Now"
+msgstr ""
+
 #: app/views/receipts.html
 msgid "Check #"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/vehicledetails.html
 msgid "Checkout"
 msgstr ""
@@ -373,6 +392,10 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Clean"
+msgstr ""
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Clear Search"
 msgstr ""
 
 #: app/views/modals/confirmCheckout.html
@@ -421,6 +444,10 @@ msgstr ""
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/requestCreditIncrease.html
 msgid "Confirm Request"
+msgstr ""
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid "Confirm Requests"
 msgstr ""
 
 #: app/views/modals/floorCarConfirm.html
@@ -613,6 +640,7 @@ msgstr ""
 msgid "Email Address"
 msgstr ""
 
+#: app/scripts/directives/nxgSearch/nxgSearch.html
 #: app/views/reports.html
 msgid "End Date"
 msgstr ""
@@ -629,6 +657,10 @@ msgstr ""
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 msgid "Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to MyNextGear."
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Enter Stock #'s separated by a comma."
 msgstr ""
 
 #: app/views/login.recover.html
@@ -688,10 +720,14 @@ msgstr ""
 msgid "Fee(s)"
 msgstr ""
 
+#: app/scripts/models/dashboard.js
 #: app/views/dashboard.html
 #: app/views/modals/confirmCheckout.html
-#: app/scripts/models/dashboard.js
 msgid "Fees"
+msgstr ""
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Filter by Inventory Location"
 msgstr ""
 
 #: app/views/reports.html
@@ -712,6 +748,10 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Financial Activity"
+msgstr ""
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Find a Floor Plan"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -826,6 +866,10 @@ msgstr ""
 msgid "Invalid character in VIN"
 msgstr ""
 
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Invalid date range"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 msgid "Inventory Address"
 msgstr ""
@@ -872,14 +916,20 @@ msgstr ""
 msgid "Lot Number"
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/vehicledetails.html
 msgid "Make"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
 msgid "Make Selection"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "Make payments today or schedule your payments when you checkout."
 msgstr ""
 
 #: app/views/documents.html
@@ -899,6 +949,7 @@ msgstr ""
 msgid "Minimum"
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/vehicledetails.html
 msgid "Model"
@@ -1019,6 +1070,7 @@ msgstr ""
 msgid "Number of Cars Purchased Per-Auction (in the last 12 months)"
 msgstr ""
 
+#: app/scripts/directives/nxgMessages/nxgMessagesModal.html
 #: app/views/modals/confirmCheckout.html
 msgid "OK"
 msgstr ""
@@ -1058,6 +1110,7 @@ msgstr ""
 msgid "Pay off this vehicle or return the title to remove from your limit."
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/checkout.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
@@ -1099,6 +1152,7 @@ msgstr ""
 msgid "Payment Options"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/checkout.html
 #: app/views/modals/paymentExtension.html
 #: app/views/vehicledetails.html
@@ -1109,10 +1163,10 @@ msgstr ""
 msgid "Payment: {{ receipt.PaymentMethod }}"
 msgstr ""
 
+#: app/scripts/models/dashboard.js
 #: app/views/checkout.html
 #: app/views/dashboard.html
 #: app/views/modals/confirmCheckout.html
-#: app/scripts/models/dashboard.js
 msgid "Payments"
 msgstr ""
 
@@ -1120,6 +1174,7 @@ msgstr ""
 msgid "Payments Summary"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/payments.html
 #: app/views/scheduledpayments.html
 #: app/views/vehicledetails.html
@@ -1132,6 +1187,14 @@ msgstr ""
 
 #: app/views/scheduledpayments.html
 msgid "Payoff Now"
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Payout Amount"
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Payout Amount must be $0.01 to {{ funds.available | currency }}"
 msgstr ""
 
 #: app/views/analytics.html
@@ -1147,6 +1210,10 @@ msgstr ""
 #: app/views/auction.settings.html
 #: app/views/profileSettings.html
 msgid "Phone"
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please acknowledge VIN look-up failure."
 msgstr ""
 
 #: app/views/login.recover.html
@@ -1181,12 +1248,32 @@ msgstr ""
 msgid "Please enter a Dealer Number."
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Make."
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Model."
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please enter a Payout Amount."
+msgstr ""
+
 #: app/views/floorcar.html
 msgid "Please enter a Purchase Date in the past."
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
 msgid "Please enter a Sales Date in the past."
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a Start Stock Number"
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Style."
 msgstr ""
 
 #: app/views/auction.settings.html
@@ -1197,6 +1284,10 @@ msgstr ""
 #: app/views/auction.settings.html
 #: app/views/profileSettings.html
 msgid "Please enter a User Name."
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a VIN."
 msgstr ""
 
 #: app/views/floorcar.html
@@ -1215,12 +1306,28 @@ msgstr ""
 msgid "Please enter a Valid Sales Date."
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Year between 1901 and {{ settings.maxYear }}."
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Year."
+msgstr ""
+
 #: app/views/modals/businessSearch.html
 msgid "Please enter a business name or number to search."
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a four-digit Year."
+msgstr ""
+
 #: app/views/modals/dealerNameSearch.html
 msgid "Please enter a name, and city or state, to search."
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please enter a numeric value with no more than 2 decimal places."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -1247,6 +1354,14 @@ msgstr ""
 
 #: app/views/login.html
 msgid "Please enter a username."
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a valid End Stock Number"
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a valid Start Stock Number"
 msgstr ""
 
 #: app/views/account_management.html
@@ -1289,6 +1404,14 @@ msgstr ""
 msgid "Please enter an Auction Access Number."
 msgstr ""
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter an End Stock Number"
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter an End Stock Number that is greater than the Start Stock Number"
+msgstr ""
+
 #: app/views/login.updateSecurity.html
 msgid "Please enter an answer that is no more than 100 characters long."
 msgstr ""
@@ -1301,10 +1424,15 @@ msgstr ""
 msgid "Please enter an increase amount."
 msgstr ""
 
+#: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
 #: app/views/auction.dealersearch.html
 #: app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "Please enter at least 3 characters."
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter one or more Stock Numbers"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -1345,8 +1473,24 @@ msgid ""
 "            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>."
 msgstr ""
 
+#: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
+msgid "Please look up a Buyer."
+msgstr ""
+
+#: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
+msgid "Please look up a Seller."
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please look up the VIN."
+msgstr ""
+
 #: app/views/modals/paymentExtension.html
 msgid "Please note this quote is effective for today only and amounts are subject to change."
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please only enter numbers, commas, or spaces in this field."
 msgstr ""
 
 #: app/views/checkout.html
@@ -1387,6 +1531,10 @@ msgstr ""
 
 #: app/views/checkout.html
 msgid "Please select a bank account for payment."
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please select a bank account for payout."
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
@@ -1436,8 +1584,16 @@ msgstr ""
 msgid "Processed"
 msgstr ""
 
+#: app/scripts/directives/nxgActivity/nxgActivity.html
+msgid "Processing..."
+msgstr ""
+
 #: app/views/vehicledetails.html
 msgid "Product Type"
+msgstr ""
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Profile Settings"
 msgstr ""
 
 #: app/views/receipts.html
@@ -1527,8 +1683,17 @@ msgstr ""
 msgid "Request Credit Increase"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Request Payout"
+msgstr ""
+
 #: app/views/titlereleases.html
 msgid "Request Title"
+msgstr ""
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Request Unapplied Funds Payout"
 msgstr ""
 
 #: app/views/account_management.html
@@ -1548,6 +1713,7 @@ msgstr ""
 msgid "Request<br>Extension"
 msgstr ""
 
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 #: app/views/titlereleasecheckout.html
 msgid "Requests Summary"
 msgstr ""
@@ -1610,6 +1776,7 @@ msgstr ""
 msgid "Schedule For"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 #: app/views/dashboard.html
 #: app/views/modals/cancelFee.html
 #: app/views/modals/cancelPayment.html
@@ -1704,12 +1871,24 @@ msgstr ""
 msgid "Send Payment To"
 msgstr ""
 
+#: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
+msgid "Send Title to a Different Address?"
+msgstr ""
+
 #: app/views/titlereleasecheckout.html
 msgid "Send To"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Settings"
+msgstr ""
+
 #: app/views/login.html
 msgid "Sign In"
+msgstr ""
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Sign Out"
 msgstr ""
 
 #: app/views/login.html
@@ -1758,6 +1937,7 @@ msgstr ""
 msgid "Stale & Aging Vehicles"
 msgstr ""
 
+#: app/scripts/directives/nxgSearch/nxgSearch.html
 #: app/views/reports.html
 msgid "Start Date"
 msgstr ""
@@ -1785,6 +1965,14 @@ msgstr ""
 msgid "Stock #"
 msgstr ""
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock # Range End"
+msgstr ""
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock # Range Start"
+msgstr ""
+
 #: app/views/vehicledetails.html
 msgid "Stock #{{ vehicleInfo.StockNumber }}"
 msgstr ""
@@ -1797,6 +1985,11 @@ msgstr ""
 msgid "Stock Number"
 msgstr ""
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock Number Filter (optional)"
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/vehicledetails.html
 msgid "Style"
@@ -1826,6 +2019,7 @@ msgstr ""
 msgid "Subsidiary Manufacturer"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/modals/paymentExtension.html
 msgid "Subtotal"
 msgstr ""
@@ -1895,6 +2089,12 @@ msgstr ""
 msgid "Title Location"
 msgstr ""
 
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits for this Account:<br>\n"
+"      You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+msgstr ""
+
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "Title Release Requests"
@@ -1910,6 +2110,10 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
+msgstr ""
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid "Title Request"
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
@@ -1961,6 +2165,8 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/account_management.html
 msgid "Total Available"
 msgstr ""
@@ -2010,6 +2216,8 @@ msgstr ""
 msgid "Unable to Schedule"
 msgstr ""
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/account_management.html
 msgid "Unapplied Funds"
 msgstr ""
@@ -2020,6 +2228,10 @@ msgstr ""
 
 #: app/views/checkout.html
 msgid "Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "Unschedule"
 msgstr ""
 
 #: app/views/reports.html
@@ -2045,6 +2257,8 @@ msgstr ""
 msgid "Utilized"
 msgstr ""
 
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/auction.sellerfloorplan.html
 #: app/views/checkout.html
 #: app/views/floorplan.html
@@ -2060,6 +2274,14 @@ msgstr ""
 #: app/views/titlereleases.html
 #: app/views/vehicledetails.html
 msgid "VIN"
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN should be 17 characters."
+msgstr ""
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN was not located; please enter Make, Model, Year and Style."
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -2182,6 +2404,7 @@ msgstr ""
 msgid "Would you like to disable Enhanced Registration?"
 msgstr ""
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/auction.dashboard.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/vehicledetails.html
@@ -2203,6 +2426,10 @@ msgstr ""
 msgid ""
 "You have no payments selected for checkout. Please visit the\n"
 "          <a href=\"#/payments\">Payments list</a> to select some."
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "You have not selected a payment."
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
@@ -2253,6 +2480,18 @@ msgstr ""
 
 #: app/views/scheduledpayments.html
 msgid "as of: {{ pay.statusDate | moment }}"
+msgstr ""
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "dealer # {{ user.info().BusinessNumber }}"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "for {{ item.ScheduledDate | moment }}"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr ""
 
 #: app/views/vehicledetails.html

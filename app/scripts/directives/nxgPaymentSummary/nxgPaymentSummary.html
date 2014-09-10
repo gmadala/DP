@@ -1,10 +1,10 @@
-<h2 class="well-title">Payment Summary</h2>
+<h2 class="well-title" translate>Payment Summary</h2>
 
 <div class="well-item">
-  <p>Make payments today or schedule your payments when you checkout.</p>
+  <p translate>Make payments today or schedule your payments when you checkout.</p>
   <p ng-show="paymentQueue.isEmpty()">
     <br/>
-    You have not selected a payment. {{ emptyMessage }}</p>
+    <span translate>You have not selected a payment.</span> {{ emptyMessage }}</p>
 </div>
 
 <div ng-hide="paymentQueue.isEmpty()">
@@ -20,7 +20,7 @@
       <h6>{{ fee.description }}</h6>
       <div class="row-fluid">
         <div class="span6">
-          <h6 class="caps">Amount:</h6>
+          <h6 class="caps"><span translate>Amount</span>:</h6>
         </div>
         <div class="span6">
           <h6 >{{ fee.amount | currency }}</h6>
@@ -41,8 +41,8 @@
 
       <div class="row-fluid">
         <h6 class="span6 caps">
-          <span ng-show="payment.isPayoff">Payoff</span>
-          <span ng-show="!payment.isPayoff">Payment</span>
+          <span ng-show="payment.isPayoff" translate>Payoff</span>
+          <span ng-show="!payment.isPayoff" translate>Payment</span>
         </h6>
         <h6 class="span6">{{ payment.amount | currency }}</h6>
       </div>
@@ -53,7 +53,7 @@
 
 <div class="well-item row-fluid">
   <div class="span4">
-    <h4 class="subtotal">Subtotal:</h4>
+    <h4 class="subtotal"><span translate>Subtotal</span>:</h4>
   </div>
   <div class="span8">
     <h3 class="numeric"><strong>{{ getSubtotal() | currency }}</strong></h3>
@@ -65,7 +65,7 @@
           ng-disabled="paymentQueue.isEmpty()"
           ng-click="navigate('checkout')"
           nxg-track="{{metric.CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON}}">
-    Checkout ({{ getCount() }})
+    <span translate>Checkout</span> ({{ getCount() }})
     <span nxg-icon="icon-cart"></span>
   </button>
 </div>

@@ -17,15 +17,15 @@
   </button>
 
   <div ng-switch-when="fee-scheduledFee">
-    <h4 class="lockup-major">Scheduled</h4>
-    <p class="lockup-minor">for {{ item.ScheduledDate | moment }}</p>
+    <h4 class="lockup-major" translate>Scheduled</h4>
+    <p class="lockup-minor" translate>for {{ item.ScheduledDate | moment }}</p>
     <button type="button"
             id="cancelScheduledFee"
             class="btn-unstyle btn-link"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE}}"
             ng-disabled="paymentInProgress()"
             ng-click="cancelScheduledFee()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 
@@ -48,15 +48,15 @@
   </button>
 
   <div ng-switch-when="payment-scheduledPayment">
-    <h4 class="lockup-major">Scheduled</h4>
-    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
+    <h4 class="lockup-major" translate>Scheduled</h4>
+    <p class="lockup-minor" translate> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
             id="cancelScheduledPayment"
             class="btn-unstyle btn-link"
             ng-disabled="paymentInProgress()"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
             ng-click="cancelScheduledPayment()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 
@@ -118,15 +118,15 @@
   </button>
 
   <div ng-switch-when="payoff-scheduledPayoff" class="scheduled-payoff">
-    <p class="lockup-major">Scheduled</p>
-    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
+    <p class="lockup-major" translate>Scheduled</p>
+    <p class="lockup-minor" translate> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
             id="cancelScheduledPayoff"
             class="btn-unstyle btn-link"
             ng-disabled="paymentInProgress()"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
             ng-click="cancelScheduledPayment()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 </div>

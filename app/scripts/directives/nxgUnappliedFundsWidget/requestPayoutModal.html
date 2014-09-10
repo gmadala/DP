@@ -1,17 +1,17 @@
-<h3 class="modal-header">Request Unapplied Funds Payout</h3>
+<h3 class="modal-header" translate>Request Unapplied Funds Payout</h3>
 
 <div class="modal-body">
   <form name="form" novalidate autocomplete="off">
     <div class="form-row">
-      <h5 class="lockup-minor">Unapplied Funds</h5>
+      <h5 class="lockup-minor" translate>Unapplied Funds</h5>
       <h1 class="lockup-major form-block">{{ funds.balance | currency }}</h1>
     </div>
     <div class="form-row">
-      <h5 class="lockup-minor">Total Available</h5>
+      <h5 class="lockup-minor" translate>Total Available</h5>
       <h1 class="lockup-major form-block color-success">{{ funds.available | currency }}</h1>
     </div>
 
-    <h5>Payout Amount</h5>
+    <h5 translate>Payout Amount</h5>
     <div class="form-block">
       <input type="text"
              id="payoutAmt"
@@ -26,15 +26,15 @@
              ng-class="{ 'nxg-invalid': validity.payoutAmt.$error.required || validity.payoutAmt.$error.pattern || validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax }"
              nxg-autofocus/>
     </div>
-    <label class="text-error" ng-show="validity.payoutAmt.$error.required">Please enter a Payout Amount.</label>
-    <label class="text-error" ng-show="validity.payoutAmt.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
-    <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax">
+    <label class="text-error" ng-show="validity.payoutAmt.$error.required" translate>Please enter a Payout Amount.</label>
+    <label class="text-error" ng-show="validity.payoutAmt.$error.pattern" translate>Please enter a numeric value with no more than 2 decimal places.</label>
+    <label class="text-error" ng-show="validity.payoutAmt.$error.nxgMin || validity.payoutAmt.$error.nxgMax" translate>
       Payout Amount must be $0.01 to {{ funds.available | currency }}
     </label>
 
 
 
-    <h5>Bank Account for Payout</h5>
+    <h5 translate>Bank Account for Payout</h5>
     <div class=" form-block">
       <div class="style-select" ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$invalid}">
         <select id="payoutBankAcct"
@@ -43,11 +43,11 @@
                 ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
                 ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$error.required }"
                 required>
-          <option value="">Make Selection</option>
+          <option value="" translate>Make Selection</option>
         </select>
       </div>
     </div>
-      <label class="text-error" ng-show="validity.payoutBankAcct.$error.required">Please select a bank account for payout.</label>
+      <label class="text-error" ng-show="validity.payoutBankAcct.$error.required" translate>Please select a bank account for payout.</label>
   </form>
 </div>
 
@@ -55,10 +55,10 @@
   <button class="btn-cta cta-secondary"
           type="button"
           ng-disabled="submitInProgress"
-          ng-click="cancel()">Cancel</button>
+          ng-click="cancel()" translate>Cancel</button>
   <button class="btn-cta cta-primary"
           type="submit"
           ng-disabled="submitInProgress"
-          ng-click="submit()">Request Payout</button>
+          ng-click="submit()" translate>Request Payout</button>
 </div>
 

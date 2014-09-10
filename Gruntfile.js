@@ -314,7 +314,11 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'po/untranslated.po': ['<%= yeoman.app %>/views/**/*.html', '<%= yeoman.app %>/scripts/models/**/*.js']
+          'po/untranslated.po': [
+              '<%= yeoman.app %>/scripts/**/*.html',
+              '<%= yeoman.app %>/scripts/**/*.js',
+              '<%= yeoman.app %>/views/**/*.html'
+          ]
         }
       }
     },
