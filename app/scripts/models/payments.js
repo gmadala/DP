@@ -217,11 +217,7 @@ angular.module('nextgearWebApp')
           IsCurtailment: !isPayoff
         };
         return api.request('GET', '/payment/calculatepaymentamount', params).then(function(result) {
-          payment.amount = result.PaymentAmount;
-          payment.feesTotal = result.FeeAmount;
-          payment.interestTotal = result.InterestAmount;
-          payment.principal = result.PrincipalAmount;
-          payment.collateralTotal = result.CollateralProtectionAmount;
+          payment.updateAmountsOnDate(result);
           return result;
         });
       },
@@ -229,20 +225,11 @@ angular.module('nextgearWebApp')
         var shortFees = [],
           shortPayments = [];
 
-          // TODO: update to handle interest-only or additional principal payments.
         angular.forEach(payments, function (payment) {
-          shortPayments.push({
-            FloorplanId: payment.id,
-            ScheduledPaymentDate: api.toShortISODate(payment.scheduleDate) || null,
-            IsPayoff: payment.isPayoff
-          });
+          shortPayments.push(payment.getApiRequestObject());
         });
         angular.forEach(fees, function (fee) {
-          shortFees.push({
-            FinancialRecordId: fee.financialRecordId,
-            ScheduledPaymentDate: api.toShortISODate(fee.scheduleDate) || null,
-
-          });
+          shortFees.push(fee.getApiRequestObject());
         });
 
         var data = {

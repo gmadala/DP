@@ -724,10 +724,14 @@ describe("Model: Payments", function () {
   });
 
   describe('updatePaymentAmountOnDate function', function () {
-
-    var callParams;
+    var callParams,
+        mockPaymentItem;
 
     beforeEach(function () {
+      mockPaymentItem = {
+        id: 'foo',
+        updateAmountsOnDate: angular.noop
+      };
       httpBackend.whenGET(/\/payment\/calculatepaymentamount\?.*/).respond(function(method, url) {
         callParams = urlParser.extractParams(url);
         return [200, {
@@ -746,12 +750,12 @@ describe("Model: Payments", function () {
 
     it('should call the expected endpoint', function () {
       httpBackend.expectGET(/\/payment\/calculatepaymentamount\?.*/);
-      payments.updatePaymentAmountOnDate({id: 'foo'}, new Date(), false);
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(), false);
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should send the expected params', function () {
-      payments.updatePaymentAmountOnDate({id: 'foo'}, new Date(2013, 9, 22), false);
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(2013, 9, 22), false);
       httpBackend.flush();
       expect(callParams.FloorplanId).toBe('foo');
       expect(callParams.ScheduledDate).toBe('2013-10-22');
@@ -759,7 +763,7 @@ describe("Model: Payments", function () {
     });
 
     it('should return a promise for the resulting PaymentAmount', function () {
-      payments.updatePaymentAmountOnDate({id: 'foo'}, new Date(2013, 11, 22), false).then(
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(2013, 11, 22), false).then(
         function (result) {
           expect(result.PaymentAmount).toBe(345.67);
           expect(result.PrincipalAmount).toBe(100);
@@ -770,19 +774,6 @@ describe("Model: Payments", function () {
       );
       httpBackend.flush();
     });
-
-    it('should update the floorplan\'s original values with those returned from the API', function () {
-      var floorplan = {floorplanId: 'foo'};
-      payments.updatePaymentAmountOnDate(floorplan, new Date(2013, 11, 22), false);
-      httpBackend.flush();
-
-      expect(floorplan.amount).toBe(345.67);
-      expect(floorplan.principal).toBe(100);
-      expect(floorplan.interestTotal).toBe(200);
-      expect(floorplan.feesTotal).toBe(50);
-      expect(floorplan.collateralTotal).toBe(11);
-    });
-
   });
 
   describe('checkout function', function () {
@@ -803,71 +794,8 @@ describe("Model: Payments", function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should send fees in the expected format', function () {
-      var fees = {
-        one: {
-          financialRecordId: 'one',
-          type: 'Membership Dues'
-        },
-        two: {
-          financialRecordId: 'two',
-          type: 'Other Fee'
-        }
-      };
 
-      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
 
-        var expectedFees = [
-          { FinancialRecordId: 'one', ScheduledPaymentDate: null },
-          { FinancialRecordId: 'two', ScheduledPaymentDate: null }
-        ];
-        data = angular.fromJson(data);
-        data = _.sortBy(data.AccountFees, 'FinancialRecordId');
-        expect(data).toEqual(expectedFees);
-        return [200, stubResponse, {}];
-      });
-
-      payments.checkout(fees, {}, 'bank1');
-      httpBackend.flush();
-    });
-
-    it('should send payments in the expected format', function () {
-      var paymentsData = {
-        2049: {
-          id: "2049",
-          vin: "CH224157",
-          scheduleDate: new Date(2013, 4, 5),
-          isPayoff: false
-        },
-        2048: {
-          id: "2048",
-          vin: "LL2469R6",
-          isPayoff: true
-        }
-      };
-
-      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
-        var expectedPayments = [
-          {
-            FloorplanId: '2048',
-            ScheduledPaymentDate: null,
-            IsPayoff: true
-          },
-          {
-            FloorplanId: '2049',
-            ScheduledPaymentDate: '2013-05-05',
-            IsPayoff: false
-          }
-        ];
-        data = angular.fromJson(data);
-        data = _.sortBy(data.SelectedFloorplans, 'FloorplanId');
-        expect(angular.equals(data, expectedPayments)).toBe(true);
-        return [200, stubResponse, {}];
-      });
-
-      payments.checkout({}, paymentsData, 'bank1');
-      httpBackend.flush();
-    });
 
     it('should send the bank account id', function () {
       httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {

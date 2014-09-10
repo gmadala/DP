@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
 
     return CartItem;
   })
-  .factory('FeeCartItem', function() {
+  .factory('FeeCartItem', function(api) {
 
     var FeeCartItem = function(item) {
       this.isFee = true;
@@ -26,7 +26,7 @@ angular.module('nextgearWebApp')
       this.scheduled = item.Scheduled;
     };
 
-    // FeeCartItem & VehicleCartItem should have the same functions for getting item type, getting checkout amount, etc.
+    // FeeCartItem & VehicleCartItem should have the same functions for getting item type, checkout amount, request object, etc.
     FeeCartItem.prototype = {
       getItemType: function() {
         return 'fee';
@@ -35,13 +35,16 @@ angular.module('nextgearWebApp')
         return this.amount;
       },
       getApiRequestObject: function() {
-
+        return {
+          FinancialRecordId: this.financialRecordId,
+          ScheduledPaymentDate: api.toShortISODate(this.scheduleDate) || null
+        };
       }
     };
 
     return FeeCartItem;
   })
-  .factory('VehicleCartItem', function() {
+  .factory('VehicleCartItem', function(api) {
     var VehicleCartItem = function(item, isPayoff) {
       this.id = item.FloorplanId;
       this.vin = item.Vin;
@@ -101,23 +104,28 @@ angular.module('nextgearWebApp')
           return 'payment';
         }
       },
-      // updateAmountsOnDate: function(amts) {
-      //   if(isPayoff) {
-      //     this.payoff.amount = amts.PaymentAmount;
-      //     this.payoff.principal = amts.PrincipalAmount;
-      //     this.payoff.fees = amts.FeeAmount;
-      //     this.payoff.interest = amts.InterestAmount;
-      //     this.payoff.cpp = amts.CollateralProtectionAmount;
-      //   } else {
-      //     this.payment.amount = amts.PaymentAmount;
-      //     this.payment.principal = amts.PrincipalAmount;
-      //     this.payment.fees = amts.FeeAmount;
-      //     this.payment.interest = amts.InterestAmount;
-      //     this.payment.cpp = amts.CollateralProtectionAmount;
-      //   }
-      // },
+      updateAmountsOnDate: function(amts) {
+        if(this.isPayoff) {
+          this.payoff.amount = amts.PaymentAmount;
+          this.payoff.principal = amts.PrincipalAmount;
+          this.payoff.fees = amts.FeeAmount;
+          this.payoff.interest = amts.InterestAmount;
+          this.payoff.cpp = amts.CollateralProtectionAmount;
+        } else {
+          this.payment.amount = amts.PaymentAmount;
+          this.payment.principal = amts.PrincipalAmount;
+          this.payment.fees = amts.FeeAmount;
+          this.payment.interest = amts.InterestAmount;
+          this.payment.cpp = amts.CollateralProtectionAmount;
+        }
+      },
       getApiRequestObject: function() {
-
+        return {
+          FloorplanId: this.id,
+          ScheduledPaymentDate: api.toShortISODate(this.scheduleDate) || null,
+          IsPayoff: this.isPayoff,
+          AdditionalPrincipalAmount: !this.isPayoff ? this.payment.additionalPrincipal : 0
+        };
       }
     };
 

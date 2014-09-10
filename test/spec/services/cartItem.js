@@ -76,6 +76,18 @@ describe('Value: cartItem', function () {
       expect(typeof result.getCheckoutAmount).toBe('function');
       expect(result.getCheckoutAmount()).toBe(500);
     });
+
+    describe('getApiRequestObject function', function() {
+      it('should return a properly formatted object that can be sent to the api', function() {
+        result.scheduled = true;
+        result.scheduleDate = moment('2014-10-12');
+
+        expect(result.getApiRequestObject()).toEqual({
+          FinancialRecordId: 'id2',
+          ScheduledPaymentDate: '2014-10-12'
+        });
+      });
+    });
   });
 
   describe('VehicleCartItem object', function() {
@@ -169,5 +181,59 @@ describe('Value: cartItem', function () {
         expect(result.getExtraPrincipal()).toBe(45);
       });
     });
+
+    describe('getApiRequestObject function', function() {
+      it('should return a properly formatted object that can be sent to the api', function() {
+        var result = new CartItem(mockPayment, false, true);
+        result.scheduled = true;
+        result.scheduleDate = moment('2014-10-15');
+
+        expect(result.getApiRequestObject()).toEqual({
+          FloorplanId: 'id1',
+          ScheduledPaymentDate: '2014-10-15',
+          IsPayoff: true,
+          AdditionalPrincipalAmount: 0
+        });
+
+        var resultTwo = new CartItem(mockPayment, false, false);
+        resultTwo.payment.additionalPrincipal = 500;
+        expect(resultTwo.getApiRequestObject()).toEqual({
+          FloorplanId: 'id1',
+          ScheduledPaymentDate: null,
+          IsPayoff: false,
+          AdditionalPrincipalAmount: 500
+        });
+      });
+    });
+
+    describe('updateAmountsOnDate function', function() {
+      var amts = {
+        PaymentAmount: 100,
+        PrincipalAmount: 40,
+        FeeAmount: 20,
+        InterestAmount: 20,
+        CollateralProtectionAmount: 20
+      };
+
+      it('should set the payoff amounts to the given amounts if item is a payoff', function() {
+        var result = new CartItem(mockPayment, false, true);
+        result.updateAmountsOnDate(amts);
+        expect(result.payoff.amount).toBe(100);
+        expect(result.payoff.principal).toBe(40);
+        expect(result.payoff.fees).toBe(20);
+        expect(result.payoff.interest).toBe(20);
+        expect(result.payoff.cpp).toBe(20);
+      });
+
+      it('should set the payment amounts to the given amounts if item is a curtailment payment', function() {
+        var result = new CartItem(mockPayment, false, false);
+        result.updateAmountsOnDate(amts);
+        expect(result.payment.amount).toBe(100);
+        expect(result.payment.principal).toBe(40);
+        expect(result.payment.fees).toBe(20);
+        expect(result.payment.interest).toBe(20);
+        expect(result.payment.cpp).toBe(20);
+      });
+    })
   });
 });
