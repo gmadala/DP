@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric, api) {
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric, api, gettextCatalog) {
 
     segmentio.track(metric.VIEW_RECEIPTS_PAGE);
     $scope.metric = metric; // make metric names available to template
@@ -156,7 +156,7 @@ angular.module('nextgearWebApp')
         });
         // special View All filter is simply a list of all payment method ids
         filters.unshift({
-          label: 'View All',
+          label: gettextCatalog.getString('View All'),
           value: allIds.join(',')
         });
         $scope.filterOptions = filters;

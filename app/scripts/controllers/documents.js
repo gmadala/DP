@@ -1,40 +1,40 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio) {
+  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog) {
     segmentio.track(metric.VIEW_RESOURCES_PAGE);
     $scope.metric = metric; // make metric names available to templates
 
     $scope.documents = [
       {
-        title: 'Welcome Packet (PDF)',
+        title: gettextCatalog.getString('Welcome Packet (PDF)'),
         url: 'documents/NextGear%20Capital%20Welcome%20Packet.pdf'
       },
       {
-        title: 'Dealer Funding Checklist (PDF)',
+        title: gettextCatalog.getString('Dealer Funding Checklist (PDF)'),
         url: 'documents/Dealer%20Funding%20Checklist.pdf'
       },
       {
-        title: 'Instructions for Buyers (PDF)',
+        title: gettextCatalog.getString('Instructions for Buyers (PDF)'),
         url: 'documents/NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf'
       }
     ];
 
     $scope.collateralProtection = [
       {
-        title: 'Welcome Letter (Word Doc)',
+        title: gettextCatalog.getString('Welcome Letter (Word Doc)'),
         url: 'documents/WelcomeLetter.doc'
       },
       {
-        title: 'Guidelines (PDF)',
+        title: gettextCatalog.getString('Guidelines (PDF)'),
         url: 'documents/InsuranceGuidelines.pdf'
       },
       {
-        title: 'Information Sheet (PDF)',
+        title: gettextCatalog.getString('Information Sheet (PDF)'),
         url: 'documents/InformationSheet.pdf'
       },
       {
-        title: 'Claim Form (Word Doc)',
+        title: gettextCatalog.getString('Claim Form (Word Doc)'),
         url: 'documents/ClaimForm.doc'
       }
     ];

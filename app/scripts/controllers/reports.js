@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
 
     $scope.currentReports = [
       {
-        'title': 'Receivable Detail (PDF)',
+        'title': gettextCatalog.getString('Receivable Detail (PDF)'),
         'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];

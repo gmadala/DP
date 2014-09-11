@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('messages', function () {
+  .factory('messages', function (gettextCatalog) {
     // Private
     var items = [],
         noop = function () {};
@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
     return {
       add: function (text, debug, title, onDismiss) {
         var msg = {
-          title: title || 'Error',
+          title: title || gettextCatalog.getString('Error'),
           text: text,
           debug: debug,
           dismiss: function () {

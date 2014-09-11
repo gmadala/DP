@@ -24,7 +24,7 @@
       </div>
 
       <div class="row-fluid">
-        <label class="span4" for="setPassword"><span ng-show="editable" translate>New </span>Password</label>
+        <label class="span4" for="setPassword"><span ng-show="editable" translate>New Password</span><span ng-show="!editable" translate>Password</span></label>
         <div class="span8">
           <div class="static" ng-hide="profile.editable">***********</div>
           <div ng-show="profile.editable">
@@ -33,7 +33,7 @@
                       tooltip-placement="right"
                       tooltip-trigger="click"
                       tooltip-html="true"
-                      tooltip-html-unsafe="<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
+                      tooltip-html-unsafe="{{ '<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>' | translate }}"
                       tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
           </div>
 

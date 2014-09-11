@@ -100,8 +100,8 @@
       <div class="chart-obj"
           nxg-chart
           nxg-chart-type="line"
-          nxg-chart-data-name="Days to Turn"
-          nxg-chart-description-x="Average # of Days to Turn"
+          nxg-chart-data-name="{{ 'Days to Turn' | translate }}"
+          nxg-chart-description-x="{{ 'Average # of Days to Turn' | translate }}"
           nxg-chart-data="analytics.averageTurn.data"
           nxg-chart-labels="true"
           nxg-chart-size="{ height: 320 }">
@@ -198,8 +198,8 @@
           <div class="chart-obj"
                nxg-chart
                nxg-chart-type="bar"
-               nxg-chart-data-name="Days to Turn"
-               nxg-chart-description-x="Avg. # of Days to Turn"
+               nxg-chart-data-name="{{ 'Days to Turn' | translate }}"
+               nxg-chart-description-x="{{ 'Avg. # of Days to Turn' | translate }}"
                nxg-chart-data="selectedMoverChart.data"></div>
         </div>
       </div>
@@ -220,8 +220,8 @@
         <div class="chart-obj"
              nxg-chart
              nxg-chart-type="bar"
-             nxg-chart-data-name="# Purchased"
-             nxg-chart-description-x="# of Cars Purchased"
+             nxg-chart-data-name="{{ '# Purchased' | translate }}"
+             nxg-chart-description-x="{{ '# of Cars Purchased' | translate }}"
              nxg-chart-data="analytics.top10Auctions"
              nxg-chart-labels="true"
              nxg-chart-trim-labels="true">

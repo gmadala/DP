@@ -3,6 +3,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: app/views/analytics.html
+msgid "# Purchased"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "# of Cars Purchased"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "# of Floored Vehicles"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 #: app/views/checkout.html
 #: app/views/floorcar.html
@@ -35,6 +47,11 @@ msgstr ""
 
 #: app/views/modals/requestCreditIncrease.html
 msgid "3. How much would you like to increase it by?"
+msgstr ""
+
+#: app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>"
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
@@ -256,6 +273,10 @@ msgid "Average"
 msgstr ""
 
 #: app/views/analytics.html
+msgid "Average # of Days to Turn"
+msgstr ""
+
+#: app/views/analytics.html
 msgid "Average Purchase Price"
 msgstr ""
 
@@ -269,6 +290,10 @@ msgstr ""
 
 #: app/views/modals/topAuctions.html
 msgid "Avg Purchase Price"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Avg. # of Days to Turn"
 msgstr ""
 
 #: app/views/auction.dashboard.html
@@ -440,6 +465,10 @@ msgstr ""
 msgid "City names must only have letters and spaces."
 msgstr ""
 
+#: app/scripts/controllers/documents.js
+msgid "Claim Form (Word Doc)"
+msgstr ""
+
 #: app/views/vehicledetails.html
 msgid "Clean"
 msgstr ""
@@ -537,6 +566,10 @@ msgstr ""
 msgid "Create your Enhanced Registration four digit PIN."
 msgstr ""
 
+#: app/scripts/controllers/auction.reports.js
+msgid "Credit Availability Query History (PDF)"
+msgstr ""
+
 #: app/views/dashboard.html
 msgid "Credit Information"
 msgstr ""
@@ -597,6 +630,14 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Days Floored"
+msgstr ""
+
+#: app/views/analytics.html
+msgid "Days to Turn"
+msgstr ""
+
+#: app/scripts/controllers/documents.js
+msgid "Dealer Funding Checklist (PDF)"
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -771,6 +812,10 @@ msgstr ""
 
 #: app/views/login.recover.html
 msgid "Enter your username to receive a new password via email."
+msgstr ""
+
+#: app/scripts/services/messages.js
+msgid "Error"
 msgstr ""
 
 #: app/scripts/controllers/checkout.js
@@ -975,6 +1020,10 @@ msgstr ""
 msgid "Go Home"
 msgstr ""
 
+#: app/scripts/controllers/documents.js
+msgid "Guidelines (PDF)"
+msgstr ""
+
 #: app/views/auction.reports.html
 #: app/views/reports.html
 msgid "Historical Reports"
@@ -996,8 +1045,20 @@ msgstr ""
 msgid "In the Amount of"
 msgstr ""
 
+#: app/scripts/controllers/documents.js
+msgid "Information Sheet (PDF)"
+msgstr ""
+
 #: app/views/account_management.html
 msgid "Initiate your request for a permanent or temporary increase to your current line of credit."
+msgstr ""
+
+#: app/scripts/controllers/documents.js
+msgid "Instructions for Buyers (PDF)"
+msgstr ""
+
+#: app/scripts/controllers/auction.documents.js
+msgid "Instructions for Sellers (PDF)"
 msgstr ""
 
 #: app/views/receipts.html
@@ -1134,11 +1195,8 @@ msgid ""
 "    Please select the intended vehicle from the list below."
 msgstr ""
 
-#: app/views/profileSettings.html
-msgid "New"
-msgstr ""
-
 #: app/views/auction.settings.html
+#: app/views/profileSettings.html
 msgid "New Password"
 msgstr ""
 
@@ -1173,6 +1231,10 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "NextGear Regional Values are based on the first 3 digits of your zip code."
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "NextGear has been notified of this change and will be sending funding soon."
 msgstr ""
 
 #: app/scripts/filters/yesno.js
@@ -1281,6 +1343,7 @@ msgstr ""
 #: app/views/auction.settings.html
 #: app/views/login.createPassword.html
 #: app/views/login.html
+#: app/views/profileSettings.html
 msgid "Password"
 msgstr ""
 
@@ -1882,6 +1945,11 @@ msgstr ""
 msgid "Receipts"
 msgstr ""
 
+#: app/scripts/controllers/auction.reports.js
+#: app/scripts/controllers/reports.js
+msgid "Receivable Detail (PDF)"
+msgstr ""
+
 #: app/views/dashboard.html
 msgid "Recent Receipts"
 msgstr ""
@@ -2476,6 +2544,10 @@ msgstr ""
 msgid "To look up a dealer in Dealer search, use a combination of their Name and City or State."
 msgstr ""
 
+#: app/views/account_management.html
+msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
+msgstr ""
+
 #: app/views/checkout.html
 #: app/views/dashboard.html
 msgid "Today"
@@ -2628,12 +2700,17 @@ msgstr ""
 msgid "Vehicle Payments"
 msgstr ""
 
+#: app/views/auction.dashboard.html
+msgid "Vehicles Floored"
+msgstr ""
+
 #: app/views/documents.html
 msgid "Video Walkthrough"
 msgstr ""
 
 #: app/scripts/controllers/floorplan.js
 #: app/scripts/controllers/payments.js
+#: app/scripts/controllers/receipts.js
 #: app/scripts/controllers/scheduledPayments.js
 #: app/scripts/controllers/titleReleases.js
 #: app/scripts/directives/nxgSearch/nxgSearch.js
@@ -2731,6 +2808,15 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
+#: app/scripts/controllers/documents.js
+msgid "Welcome Letter (Word Doc)"
+msgstr ""
+
+#: app/scripts/controllers/auction.documents.js
+#: app/scripts/controllers/documents.js
+msgid "Welcome Packet (PDF)"
+msgstr ""
+
 #: app/views/login.updateSecurity.html
 msgid "Welcome to NextGear!"
 msgstr ""
@@ -2740,6 +2826,7 @@ msgid "What would you like to do?"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
 msgid "Who has the Title?"
 msgstr ""
 
@@ -2927,6 +3014,10 @@ msgstr ""
 
 #: app/views/floorplan.html
 msgid "{{ item.DaysOnFloorplan }} days"
+msgstr ""
+
+#: app/views/floorplan.html
+msgid "{{ item.FloorplanStatusName }}"
 msgstr ""
 
 #: app/views/scheduledpayments.html
