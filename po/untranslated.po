@@ -366,6 +366,11 @@ msgstr ""
 msgid "Buyer Information"
 msgstr ""
 
+#: app/views/payments.html
+#: app/views/scheduledpayments.html
+msgid "By Stock #, VIN, or Description"
+msgstr ""
+
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/checkout.html
 msgid "CPP"
@@ -580,6 +585,10 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Date Submitted"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Date range based on Date Floored OR Disbursement Date."
 msgstr ""
 
 #: app/views/auction.sellerfloorplan.html
@@ -832,12 +841,25 @@ msgstr ""
 msgid "Filter by Due Date"
 msgstr ""
 
+#: app/views/floorplan.html
+msgid "Filter by Flooring Status"
+msgstr ""
+
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Filter by Inventory Location"
 msgstr ""
 
 #: app/views/receipts.html
 msgid "Filter by Payment Method"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Filter by Payment Status"
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+#: app/views/titlereleases.html
+msgid "Filter by Status"
 msgstr ""
 
 #: app/views/reports.html
@@ -861,7 +883,13 @@ msgid "Financial Activity"
 msgstr ""
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
+#: app/views/auction.sellerfloorplan.html
+#: app/views/floorplan.html
 msgid "Find a Floor Plan"
+msgstr ""
+
+#: app/views/scheduledpayments.html
+msgid "Find a Scheduled Payment"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -2214,6 +2242,11 @@ msgstr ""
 msgid "Stock # Range Start"
 msgstr ""
 
+#: app/views/floorplan.html
+#: app/views/titlereleases.html
+msgid "Stock #, VIN, Make, Model, or Year"
+msgstr ""
+
 #: app/views/modals/confirmTitleRequest.html
 msgid "Stock No."
 msgstr ""
@@ -2376,6 +2409,10 @@ msgstr ""
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "Title Release Requests"
+msgstr ""
+
+#: app/views/titlereleases.html
+msgid "Title Release Search"
 msgstr ""
 
 #: app/scripts/controllers/titleReleases.js
@@ -2573,6 +2610,10 @@ msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "VIN was not located; please enter Make, Model, Year and Style."
+msgstr ""
+
+#: app/views/auction.sellerfloorplan.html
+msgid "VIN, Make, Model, or Year"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html

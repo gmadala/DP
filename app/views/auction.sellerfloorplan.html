@@ -1,13 +1,13 @@
 <div nxg-search
-     title="Find a Floor Plan"
+     title="{{ 'Find a Floor Plan' | translate }}"
      class="search-form"
-     prompt="VIN, Make, Model, or Year"
-     filter-label="Filter by Status"
+     prompt="{{ 'VIN, Make, Model, or Year' | translate }}"
+     filter-label="{{ 'Filter by Status' | translate }}"
      filter-options="filterOptions"
      active-criteria="floorplanData.searchCriteria"
      on-search="floorplanData.search(floorplanData.searchCriteria)"
      on-clear="floorplanData.resetSearch(filterOptions)"
-     help-text="Date range based on Date Floored OR Disbursement Date."
+     help-text="{{ 'Date range based on Date Floored OR Disbursement Date.' | translate }}"
      filterable="true">
 </div>
 

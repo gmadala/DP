@@ -1,16 +1,16 @@
 <section class="row-fluid">
   <section class="span12">
     <div nxg-search
-      title="Find a Floor Plan"
+      title="{{ 'Find a Floor Plan' | translate }}"
       class="search-form"
-      prompt="Stock #, VIN, Make, Model, or Year"
+      prompt="{{ 'Stock #, VIN, Make, Model, or Year' | translate }}"
       metric-search="{{metric.CLICK_FLOORPLAN_SEARCH_BUTTON}}"
       metric-clear-search="{{metric.CLICK_FLOORPLAN_PAYMENTS_CLEAR_SEARCH_LINK}}"
       metric-filter-by-input="{{metric.CLICK_FLOORPLAN_FILTER_BY_INPUT}}"
       metric-filter-from-date="{{metric.CLICK_FLOORPLAN_FILTER_FROM_DATE_INPUT}}"
       metric-filter-to-date="{{metric.CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT}}"
       metric-filter-by-inventory-location="{{metric.CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION}}"
-      filter-label="Filter by Flooring Status"
+      filter-label="{{ 'Filter by Flooring Status' | translate }}"
       filter-options="filterOptions"
       active-criteria="floorplanData.searchCriteria"
       on-search="floorplanData.search(floorplanData.searchCriteria)"

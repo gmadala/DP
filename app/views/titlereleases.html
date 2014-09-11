@@ -1,15 +1,15 @@
 <section class="row-fluid">
   <section class="span9">
     <div nxg-search
-         title="Title Release Search"
+         title="{{ 'Title Release Search' | translate }}"
          class="search-form"
-         prompt="Stock #, VIN, Make, Model, or Year"
+         prompt="{{ 'Stock #, VIN, Make, Model, or Year' | translate }}"
          metric-search="{{metric.CLICK_TITLE_RELEASE_SEARCH_BUTTON}}"
          metric-clear-search="{{metric.CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK}}"
          metric-filter-by-input="{{metric.CLICK_TITLE_RELEASE_FILTER_BY_INPUT}}"
          metric-filter-from-date="{{metric.CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT}}"
          metric-filter-to-date="{{metric.CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT}}"
-         filter-label="Filter by Status"
+         filter-label="{{ 'Filter by Status' | translate }}"
          filter-options="filterOptions"
          active-criteria="searchParams.proposedSearchCriteria"
          show-date-range="true"
