@@ -93,7 +93,7 @@ angular.module('nextgearWebApp')
 
         $scope.launchPaymentOptions = function() {
           var onQueue = Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId);
-          // console.log(onQueue);
+
           var dialogOptions = {
             dialogClass: 'modal modal-medium',
             backdrop: true,
