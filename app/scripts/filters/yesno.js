@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .filter('yesno', function () {
+  .filter('yesno', function (gettextCatalog) {
     return function(yesno) {
-      return yesno ? 'Yes' : 'No';
+      return yesno ? gettextCatalog.getString('Yes') : gettextCatalog.getString('No');
     };
   });

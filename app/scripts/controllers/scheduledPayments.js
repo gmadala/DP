@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric, User) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric, User, gettextCatalog) {
     segmentio.track(metric.VIEW_SCHEDULED_PAYMENTS_PAGE);
 
     var prv = {
@@ -29,23 +29,23 @@ angular.module('nextgearWebApp')
       results: [],
       filterOptions: [
         {
-          label: 'View All',
+          label: gettextCatalog.getString('View All'),
           value: ScheduledPaymentsSearch.FILTER_BY_ALL
         },
         {
-          label: 'Pending',
+          label: gettextCatalog.getString('Pending'),
           value: ScheduledPaymentsSearch.FILTER_BY_PENDING
         },
         {
-          label: 'Processed',
+          label: gettextCatalog.getString('Processed'),
           value: ScheduledPaymentsSearch.FILTER_BY_PROCESSED
         },
         {
-          label: 'Cancelled',
+          label: gettextCatalog.getString('Cancelled'),
           value: ScheduledPaymentsSearch.FILTER_BY_CANCELLED
         },
         {
-          label: 'Voided',
+          label: gettextCatalog.getString('Voided'),
           value: ScheduledPaymentsSearch.FILTER_BY_VOIDED
         }
       ],

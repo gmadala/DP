@@ -449,7 +449,7 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "Credit Information"
-msgstr "en_Credit Informations"
+msgstr ""
 
 #: app/views/modals/creditQuery.html
 msgid "Credit Type"
@@ -684,7 +684,7 @@ msgstr ""
 #: app/views/dashboard.html app/views/modals/confirmCheckout.html
 #: app/scripts/models/dashboard.js
 msgid "Fees"
-msgstr "en_Fees"
+msgstr ""
 
 #: app/views/reports.html
 msgid "Filter for VIN (optional)"

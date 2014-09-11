@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio, gettextCatalog) {
 
     $scope.metric = metric; // make metric names available to templates
     segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
@@ -16,23 +16,23 @@ angular.module('nextgearWebApp')
     if (isDealer) {
       $scope.filterOptions = [
         {
-          label: 'View All',
+          label: gettextCatalog.getString('View All'),
           value: Floorplan.filterValues.ALL
         },
         {
-          label: 'Pending',
+          label: gettextCatalog.getString('Pending'),
           value: Floorplan.filterValues.PENDING
         },
         {
-          label: 'Denied',
+          label: gettextCatalog.getString('Denied'),
           value: Floorplan.filterValues.DENIED
         },
         {
-          label: 'Approved',
+          label: gettextCatalog.getString('Approved'),
           value: Floorplan.filterValues.APPROVED
         },
         {
-          label: 'Completed',
+          label: gettextCatalog.getString('Completed'),
           value: Floorplan.filterValues.COMPLETED
         }
       ];
@@ -40,35 +40,35 @@ angular.module('nextgearWebApp')
       // auction filters
       $scope.filterOptions = [
         {
-          label: 'View All',
+          label: gettextCatalog.getString('View All'),
           value: Floorplan.filterValues.ALL
         },
         {
-          label: 'Pending/Not Paid',
+          label: gettextCatalog.getString('Pending/Not Paid'),
           value: Floorplan.filterValues.PENDING_NOT_PAID
         },
         {
-          label: 'Denied/Not Paid',
+          label: gettextCatalog.getString('Denied/Not Paid'),
           value: Floorplan.filterValues.DENIED_NOT_PAID
         },
         {
-          label: 'Approved/Paid',
+          label: gettextCatalog.getString('Approved/Paid'),
           value: Floorplan.filterValues.APPROVED_PAID
         },
         {
-          label: 'Approved/Not Paid',
+          label: gettextCatalog.getString('Approved/Not Paid'),
           value: Floorplan.filterValues.APPROVED_NOT_PAID
         },
         {
-          label: 'Completed/Paid',
+          label: gettextCatalog.getString('Completed/Paid'),
           value: Floorplan.filterValues.COMPLETED_PAID
         },
         {
-          label: 'Completed/Not Paid',
+          label: gettextCatalog.getString('Completed/Not Paid'),
           value: Floorplan.filterValues.COMPLETED_NOT_PAID
         },
         {
-          label: 'No Title/Paid',
+          label: gettextCatalog.getString('No Title/Paid'),
           value: Floorplan.filterValues.NO_TITLE_PAID
         }
       ];
@@ -116,7 +116,7 @@ angular.module('nextgearWebApp')
           }
 
           // real purpose of this function
-          floorplan.TitleLocation = hasTitle ? 'Seller' : 'Title Absent';
+          floorplan.TitleLocation = hasTitle ? gettextCatalog.getString('Seller') : gettextCatalog.getString('Title Absent');
         }
       );
     };

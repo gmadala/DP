@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric, gettextCatalog) {
 
     var isDealer = User.isDealer();
 
@@ -162,8 +162,8 @@ angular.module('nextgearWebApp')
         function (/*success*/) {
           segmentio.track(isDealer ? metric.FLOOR_A_VEHICLE : metric.BULK_FLOOR_A_VEHICLE);
           $scope.submitInProgress = false;
-          var title = 'Flooring Request Submitted',
-            msg = 'Your flooring request has been submitted to NextGear Capital.',
+          var title = gettextCatalog.getString('Flooring Request Submitted'),
+            msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),
             buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
           $dialog.messageBox(title, msg, buttons).open().then(function () {
             $scope.reset();
@@ -175,12 +175,12 @@ angular.module('nextgearWebApp')
     };
 
     $scope.cancel = function () {
-      var title = 'Cancel',
-        msg = 'What would you like to do?',
+      var title = gettextCatalog.getString('Cancel'),
+        msg = gettextCatalog.getString('What would you like to do?'),
         buttons = [
-          {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary'},
-          {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary'}
+          {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary'},
+          {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary'},
+          {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary'}
         ];
       $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
         if (choice === 'home') {

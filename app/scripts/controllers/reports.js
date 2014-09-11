@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment) {
+  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -15,8 +15,14 @@ angular.module('nextgearWebApp')
 
     $scope.expInvStatus = {
       'type': 'select',
-      'value': 'All',
-      'values': ['All', 'Approved', 'Completed', 'Denied', 'Voided']
+      'value': gettextCatalog.getString('All'),
+      'values': [
+        gettextCatalog.getString('All'),
+        gettextCatalog.getString('Approved'),
+        gettextCatalog.getString('Completed'),
+        gettextCatalog.getString('Denied'),
+        gettextCatalog.getString('Voided')
+      ]
     };
 
     $scope.currentReports = [

@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
         validity: '=',
 				form: '=form',
       },
-      controller: function($scope) {
+      controller: function($scope, gettextCatalog) {
 
 				if (!$scope.data) {
 					$scope.data = {};
@@ -24,8 +24,12 @@ angular.module('nextgearWebApp')
 
 				$scope.data.selectData = {
 					'type' : 'select',
-					'value' : 'None',
-					'values' : [ 'None', 'Range of Stock #\'s', 'Specific Stock #\'s']
+					'value' : gettextCatalog.getString('None'),
+					'values' : [
+            gettextCatalog.getString('None'),
+            gettextCatalog.getString('Range of Stock #\'s'),
+            gettextCatalog.getString('Specific Stock #\'s')
+          ]
 				};
 
 				/* Handle changing the stock number filter select */

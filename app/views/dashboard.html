@@ -117,18 +117,18 @@
       <li ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" ng-pluralize
-              count="dashboardData.OverduePayments"
-              when="{'1': 'Overdue', 'other': 'Overdue'}"></p>
+          <p class="dash-minor" translate
+              translate-n="dashboardData.OverduePayments"
+              translate-plural="Overdue">Overdue</p>
           <h4 class="dash-major" ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" ng-pluralize
-              count="dashboardData.PaymentsDueToday"
-              when="{'1': 'Due Today', 'other': 'Due Today'}"></p>
+          <p class="dash-minor" translate
+             translate-n="dashboardData.PaymentsDueToday"
+             translate-plural="Due Today">Due Today</p>
           <h4 class="dash-major">{{dashboardData.PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
@@ -136,19 +136,18 @@
         <span class="counter">{{dashboardData.UpcomingPayments}}</span>
 
         <div class="dash-lockup">
-          <span class="lockup-minor" ng-pluralize
-                count="dashboardData.UpcomingPayments"
-                when="{'1': 'Payment', 'other': 'Payments'}"></span>
-          <span translate>This {{ viewMode | capitalize }}</span>
+          <span class="lockup-minor" translate
+                translate-n="dashboardData.UpcomingPayments"
+                translate-plural="Payments This {{ viewMode | capitalize }}">Payment This {{ viewMode | capitalize }}</span>
           <h4 class="dash-major">{{dashboardData.UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>
       <li ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
         <span class="counter">{{dashboardData.AccountFees}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" ng-pluralize
-             count="dashboardData.AccountFees"
-             when="{'1': 'Account Fee', 'other': 'Account Fees'}"></p>
+          <p class="dash-minor" translate
+             translate-n="dashboardData.AccountFees"
+             translate-plural="Account Fees">Account Fee</p>
           <h4 class="dash-major">{{dashboardData.AccountFeeAmount | currency}}</h4>
         </div>
       </li>
@@ -299,7 +298,7 @@
           </span>
         </div>
         <div class="span6 counter-label">
-          <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
+          <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
               <a href="#/floorplan?filter=approved" translate>Approved</a>
@@ -314,7 +313,7 @@
           </span>
         </div>
         <div class="span6 counter-label">
-          <span tooltip="This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have not yet been approved by a NextGear employee."
+          <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
               <a href="#/floorplan?filter=pending" translate>Pending</a>
@@ -329,7 +328,7 @@
           </span>
         </div>
         <div class="span6 counter-label">
-          <span tooltip="This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
+          <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
               <a href="#/floorplan?filter=denied" translate>Denied</a>

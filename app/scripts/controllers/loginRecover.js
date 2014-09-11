@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User) {
+  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog) {
 
     $scope.userNameRecovery = {
       // forgotUserNameForm
@@ -97,9 +97,9 @@ angular.module('nextgearWebApp')
     };
 
     $scope.showSuccessMessage = function () {
-      var title = 'Success',
-        msg = 'Thank you, check your email for the requested account information.',
-        buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
+      var title = gettextCatalog.getString('Success'),
+        msg = gettextCatalog.getString('Thank you, check your email for the requested account information.'),
+        buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
       $dialog.messageBox(title, msg, buttons).open().then(
         function () {
           $state.transitionTo('login');

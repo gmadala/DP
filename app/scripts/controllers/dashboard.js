@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter) {
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter, gettextCatalog) {
 
     segmentio.track(metric.VIEW_DASHBOARD);
 
@@ -115,7 +115,7 @@ angular.module('nextgearWebApp')
     $scope.$watch('dashboardData.selectedLineOfCredit', function(newValue, oldValue){
       if (newValue !== oldValue) {
         $scope.chartData.credit = newValue.CreditChartData;
-        $scope.chartData.creditTitle.text = '<h2 class="chart-label-primary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h2> <p class="chart-label-primary">available</p>' ;
+        $scope.chartData.creditTitle.text = '<h2 class="chart-label-primary color-success">' + $filter('numeral')(newValue.AvailableCreditAmount, '($0[.]0a)') + '</h2> <p class="chart-label-primary">' + gettextCatalog.getString('available') + '</p>' ;
       }
     });
 
@@ -160,13 +160,13 @@ angular.module('nextgearWebApp')
             creditTitle: {
               useHTML: true,
               floating: true,
-              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')($scope.dashboardData.selectedLineOfCredit.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">available</p>',
+              text: '<h1 class="chart-label-secondary color-success">' + $filter('numeral')($scope.dashboardData.selectedLineOfCredit.AvailableCreditAmount, '($0[.]0a)') + '</h1> <p class="chart-label-primary">' + gettextCatalog.getString('available') + '</p>',
               y: 70
             },
             paymentsTitle: {
               useHTML: true,
               floating: true,
-              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">This ' + $filter('capitalize')($scope.viewMode) + '</p>',
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">' + gettextCatalog.getString('This {{ dateType }}', { dateType: $filter('capitalize')($scope.viewMode)}) + '</p>',
               y: 75
             }
           };

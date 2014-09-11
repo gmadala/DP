@@ -1,4 +1,4 @@
-<h3 class="modal-header">Request Extension</h3>
+<h3 class="modal-header" translate>Request Extension</h3>
 
 <div class="modal-body">
 
@@ -38,6 +38,6 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" ng-click="closeDialog()" class="btn-cta" ng-class="{ 'cta-primary': !extPrev.CanExtend , 'cta-secondary': extPrev.CanExtend }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[extPrev.CanExtend] }}</button>
+  <button type="button" ng-click="closeDialog()" class="btn-cta" ng-class="{ 'cta-primary': !extPrev.CanExtend , 'cta-secondary': extPrev.CanExtend }" nxg-autofocus>{{ { true: 'Cancel Request', false: 'Close Window'}[extPrev.CanExtend] | translate }}</button>
   <button type="submit" ng-show="extPrev.CanExtend" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>Confirm Request</button>
 </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $dialog, CreditIncrease) {
+  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $dialog, CreditIncrease, gettextCatalog) {
     $scope.loading = false;
     $scope.twoDecimalRegex = /^(\d)*(.(\d){0,2})?$/;
 
@@ -40,9 +40,9 @@ angular.module('nextgearWebApp')
           dialog.close(); // close request dialog
 
           // show success dialog
-          var title = 'Request a Credit Increase',
-            message = 'Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.',
-            buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-secondary'}];
+          var title = gettextCatalog.getString('Request a Credit Increase'),
+            message = gettextCatalog.getString('Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.'),
+            buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
           return $dialog.messageBox(title, message, buttons).open();
         },
         // failure

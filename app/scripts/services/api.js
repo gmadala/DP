@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore) {
+  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore, gettextCatalog) {
     var authToken = null,
         sessionHasTimedOut = false,
         sessionTimeout = null;
@@ -12,7 +12,7 @@ angular.module('nextgearWebApp')
         return null; // we've already handled this
       }
 
-      var expiredSessionError = 'Your session expired due to inactivity. Please log in again.';
+      var expiredSessionError = gettextCatalog.getString('Your session expired due to inactivity. Please log in again.');
       sessionHasTimedOut = true;
       return messages.add(expiredSessionError, debug + '401 error', null, function() {
 
@@ -86,7 +86,7 @@ angular.module('nextgearWebApp')
           headers: headers
         },
         self = this,
-        defaultError = 'Unable to communicate with the NextGear system. Please try again later.',
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.'),
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;

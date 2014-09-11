@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('ScheduledPaymentsSearch', function(api, nxgConfig, $q) {
+  .factory('ScheduledPaymentsSearch', function(api, nxgConfig, $q, gettextCatalog) {
 
     var PAGE_SIZE = 15;
     var lastRequest = null;
@@ -71,16 +71,16 @@ angular.module('nextgearWebApp')
         var status;
 
         if (item.Processed) {
-          status = 'Processed';
+          status = gettextCatalog.getString('Processed');
         }
         else if (item.Cancelled) {
-          status = 'Cancelled';
+          status = gettextCatalog.getString('Cancelled');
         }
         else if (item.Voided) {
-          status = 'Voided';
+          status = gettextCatalog.getString('Voided');
         }
         else {
-          status = 'Pending';
+          status = gettextCatalog.getString('Pending');
         }
         return status;
       },
