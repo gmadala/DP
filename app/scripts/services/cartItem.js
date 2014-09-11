@@ -1,20 +1,41 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('CartItem', function(VehicleCartItem, FeeCartItem) {
+  .service('CartItem', function(VehicleCartItem, FeeCartItem) {
 
-    var CartItem = function(item, isFee, isPayoff) {
-      if (isFee) {
-        return new FeeCartItem(item);
-      } else {
-        return new VehicleCartItem(item, isPayoff);
+    var CartItem = {
+      fromPayment: function(p, isPayoff) {
+        return new VehicleCartItem(p, isPayoff);
+      },
+      fromScheduledPayment: function(sp) {
+        var scheduledPayment = {
+          FloorplanId: sp.floorplanId,
+          StockNumber: sp.stockNumber,
+          Vin: sp.vin,
+          UnitDescription: sp.description,
+          DueDate: sp.curtailmentDueDate,
+          Scheduled: true,
+          ScheduledPaymentDate: sp.scheduledDate,
+          CurrentPayoff: sp.payoffAmount,
+          PrincipalPayoff: sp.principalPayoff,
+          FeesPayoffTotal: sp.FeesPayoffTotal,
+          InterestPayoffTotal: sp.InterestPayoffTotal,
+          CollateralProtectionPayoffTotal: sp.CollateralProtectionPayoffTotal,
+          // what about curtailment payment #s???
+        };
+
+        // console.log('this is the pseudopayment', scheduledPayment)
+
+        return new VehicleCartItem(scheduledPayment, true/* isPayoff */); // has to be a payoff (?)
+      },
+      fromFee: function(f) {
+        return new FeeCartItem(f);
       }
     };
 
     return CartItem;
   })
   .factory('FeeCartItem', function(api) {
-
     var FeeCartItem = function(item) {
       this.isFee = true;
       this.financialRecordId = item.FinancialRecordId;
@@ -46,6 +67,7 @@ angular.module('nextgearWebApp')
   })
   .factory('VehicleCartItem', function(api) {
     var VehicleCartItem = function(item, isPayoff) {
+
       this.id = item.FloorplanId;
       this.vin = item.Vin;
       this.description = item.UnitDescription;
@@ -73,6 +95,8 @@ angular.module('nextgearWebApp')
         additionalPrincipal: 0
       };
     };
+
+
 
     VehicleCartItem.prototype = {
       getCheckoutAmount: function(noAdditionalPrincipal) { // if true, exclude additionalPrincipal

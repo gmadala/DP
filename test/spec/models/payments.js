@@ -6,12 +6,14 @@ describe("Model: Payments", function () {
 
   var payments,
     httpBackend,
-    urlParser;
+    urlParser,
+    cartItem;
 
-  beforeEach(inject(function ($httpBackend, Payments, URLParser) {
+  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem) {
     payments = Payments;
     httpBackend = $httpBackend;
     urlParser = URLParser;
+    cartItem = CartItem;
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
@@ -364,7 +366,6 @@ describe("Model: Payments", function () {
   });
 
   describe('addPaymentToQueue function + isPaymentOnQueue', function () {
-
     it('should add payments to the queue', function () {
       var payment = {
         FloorplanId: 'floorplan1',
@@ -548,6 +549,16 @@ describe("Model: Payments", function () {
       expect(queue.isEmpty()).toBe(true);
     });
 
+  });
+
+  describe('getPaymentFromQueue function', function() {
+    it('should return the cartItem object for that floorplan id', function() {
+      var queue = payments.getPaymentQueue();
+
+      payments.addPaymentToQueue({ FloorplanId: 'testId' }, false);
+      var result = payments.getPaymentFromQueue('testId');
+      expect(result.getItemType).toBeDefined();
+    });
   });
 
   describe('clearPaymentQueue function', function () {

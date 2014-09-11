@@ -97,7 +97,7 @@ describe('Controller: ScheduledCtrl', function () {
       paymentInProgress: angular.noop
     },
     mockPayment = {
-      floorplanID: 123,
+      floorplanId: 123,
       vin: '',
       stockNumber: 123,
       description: '',

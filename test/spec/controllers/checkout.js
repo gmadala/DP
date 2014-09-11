@@ -466,8 +466,9 @@ describe('Controller: CheckoutCtrl', function () {
         StockNumber: 's#',
         UnitDescription: 'desc',
         AmountDue: 100,
-        DueDate: '2013-01-01'
-      }
+        DueDate: '2013-01-01',
+        Scheduled: false
+      };
       Payments.addPaymentToQueue(mockPayment, false/* isFee */);
       run();
 
