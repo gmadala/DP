@@ -3,6 +3,9 @@
 </h3>
 
 <div class="modal-body to-edge" nxg-autofocus>
+  <div class="well-item aside">
+    <p class="truncate">Description: <span class="highlight">{{ paymentObject.description }}</span></p>
+  </div>
   <form class="modal-inner" name="paymentOptionsForm">
     <h3>Payment Options</h3>
     <p class="paragraph">Select a payment from the options below:</p>
@@ -12,14 +15,14 @@
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payoff" id="paymentOptionPayoff" required />
         <label class="radio-img" for="paymentOptionPayoff"></label>
         <label class="cr-label" for="paymentOptionPayoff">
-          <strong>{{ cartItem.payoff.amount | currency }}</strong> – Payoff this vehicle
+          <strong>{{ paymentObject.payoff.amount | currency }}</strong> – Payoff this vehicle
         </label>
       </li>
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payment" id="paymentOptionCurtailment" required />
         <label class="radio-img" for="paymentOptionCurtailment"></label>
         <label class="cr-label" for="paymentOptionCurtailment">
-          <strong>{{ cartItem.payment.amount | currency }}</strong> – Curtailment Payment
+          <strong>{{ paymentObject.payment.amount | currency }}</strong> – Curtailment Payment
         </label>
         <div class="form-row" ng-show="selector.paymentOption == 'payment' && (maxAdditional > 0.01)">
           <div class="input-prepend dollar">
@@ -62,7 +65,7 @@
     <ul class="list-table">
       <li class="list-table-row">
         <p class="span6">Principal:</p>
-        <p class="span6 value numeric">{{ paymentBreakdown.principal | currency }}</p>
+        <p class="span6 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="selector.paymentOption == 'payment' && selector.additionalAmount">
         <p class="span6">Additional Principal:</p>
@@ -70,20 +73,20 @@
       </li>
       <li class="list-table-row">
         <p class="span6">Interest:</p>
-        <p class="span6 value numeric">{{ paymentBreakdown.interest | currency }}</p>
+        <p class="span6 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row">
         <p class="span6">Fee(s):</p>
-        <p class="span6 value numeric">{{ paymentBreakdown.fees | currency }}</p>
+        <p class="span6 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
       </li>
-      <li class="list-table-row">
+      <li class="list-table-row" ng-show="paymentObject.payment.cpp">
         <p class="span6">CPP:</p>
-        <p class="span6 value numeric">{{ paymentBreakdown.cpp | currency }}</p>
+        <p class="span6 value numeric">{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
         <p class="span6">Payment Total:</p>
-        <p class="span6 value numeric">{{ total | currency }}</p>
+        <p class="span6 value numeric">{{ (total | currency) || 'n/a' }}</p>
       </li>
     </ul>
   </div>

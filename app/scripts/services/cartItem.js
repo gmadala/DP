@@ -92,11 +92,9 @@ angular.module('nextgearWebApp')
         fees: item.FeesPaymentTotal,
         interest: item.InterestPaymentTotal,
         cpp: item.CollateralProtectionPaymentTotal,
-        additionalPrincipal: 0
+        additionalPrincipal: item.AdditionaPrincipal || 0
       };
     };
-
-
 
     VehicleCartItem.prototype = {
       getCheckoutAmount: function(noAdditionalPrincipal) { // if true, exclude additionalPrincipal

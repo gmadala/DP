@@ -101,6 +101,10 @@
   &.bordered {
     border-top: 1px solid $wellBorder;
   }
+
+  &.inset {
+    padding: 10px 20px;
+  }
 }
   .well-light {
     background: #ffffff;

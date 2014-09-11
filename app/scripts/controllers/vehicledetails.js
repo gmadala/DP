@@ -79,6 +79,41 @@ angular.module('nextgearWebApp')
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
+        $scope.getAdditionalPrincipal = function() {
+          if(!Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId)) {
+            return 0;
+          } else {
+            return Payments.getPaymentFromQueue($scope.vehicleInfo.FloorplanId).payment.additionalPrincipal;
+          }
+        };
+
+        $scope.showAddPrincipalLink = function() {
+          return Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId) === 'payment';
+        };
+
+        $scope.launchPaymentOptions = function() {
+          var onQueue = Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId);
+          // console.log(onQueue);
+          var dialogOptions = {
+            dialogClass: 'modal modal-medium',
+            backdrop: true,
+            keyboard: false,
+            backdropClick: false,
+            templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+            controller: 'PaymentOptionsBreakdownCtrl',
+            resolve: {
+              object: function() {
+                return onQueue ? Payments.getPaymentFromQueue($scope.vehicleInfo.FloorplanId) : $scope.paymentForCheckout;
+              },
+              isOnQueue: function() {
+                return onQueue;
+              }
+            }
+          };
+
+          $dialog.dialog(dialogOptions).open();
+        };
+
         // Grab data for title info section
         // ================================
         $scope.titleInfo = details.TitleInfo;

@@ -285,8 +285,11 @@ angular.module('nextgearWebApp')
         templateUrl: 'views/modals/paymentOptionsBreakdown.html',
         controller: 'PaymentOptionsBreakdownCtrl',
         resolve: {
-          cartItem: function() {
+          object: function() {
             return payment;
+          },
+          isOnQueue: function() {
+            return true; // already on queue.
           }
         }
       };
