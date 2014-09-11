@@ -102,8 +102,9 @@
     </div>
 
     <button class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
-      <span class="paired-body" translate>
-        {{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Details
+      <span class="paired-body">
+        <span ng-show="isCollapsed" translate>Show Payment Details</span>
+        <span ng-show="!isCollapsed" translate>Hide Payment Details</span>
       </span>
       <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }" nxg-icon="icon-chevron">
       </span>

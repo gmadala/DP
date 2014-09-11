@@ -425,6 +425,7 @@ msgstr ""
 msgid "Cancel Payment"
 msgstr ""
 
+#: app/views/modals/paymentExtension.html
 #: app/views/modals/requestCreditIncrease.html
 msgid "Cancel Request"
 msgstr ""
@@ -481,6 +482,10 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: app/views/analytics.html
+msgid "Close Details"
+msgstr ""
+
 #: app/scripts/controllers/modals/requestCreditIncrease.js
 #: app/scripts/controllers/titleReleases.js
 #: app/views/modals/businessSearch.html
@@ -490,6 +495,7 @@ msgstr ""
 #: app/views/modals/feeDetails.html
 #: app/views/modals/multipleVehicles.html
 #: app/views/modals/paymentDetails.html
+#: app/views/modals/paymentExtension.html
 #: app/views/modals/topAuctions.html
 msgid "Close Window"
 msgstr ""
@@ -694,6 +700,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: app/views/account_management.html
+msgid "Disabled"
+msgstr ""
+
 #: app/views/modals/confirmDisableEnhanced.html
 msgid "Disabling the Enhanced Registration Program will delete any current PINs associated with this business."
 msgstr ""
@@ -783,6 +793,10 @@ msgstr ""
 msgid "Email Address"
 msgstr ""
 
+#: app/views/account_management.html
+msgid "Enabled"
+msgstr ""
+
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 #: app/views/reports.html
 msgid "End Date"
@@ -852,6 +866,10 @@ msgstr ""
 #: app/views/payments.html
 #: app/views/scheduledpayments.html
 msgid "Fee Amount"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Fee Assessed for {{ activity.ActivityAmount | currency }}"
 msgstr ""
 
 #: app/views/modals/feeDetails.html
@@ -1022,6 +1040,14 @@ msgstr ""
 
 #: app/scripts/controllers/documents.js
 msgid "Guidelines (PDF)"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Hide Payment Activity"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Hide Payment Details"
 msgstr ""
 
 #: app/views/auction.reports.html
@@ -1393,6 +1419,10 @@ msgstr ""
 
 #: app/views/modals/paymentDetails.html
 msgid "Payment Made"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Payment Made for {{ activity.ActivityAmount | currency }}"
 msgstr ""
 
 #: app/views/modals/paymentDetails.html
@@ -2211,6 +2241,18 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: app/views/analytics.html
+msgid "Show Details"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Show Payment Activity"
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "Show Payment Details"
+msgstr ""
+
 #: app/views/login.html
 msgid "Sign In"
 msgstr ""
@@ -2977,18 +3019,6 @@ msgstr ""
 msgid "or <button ng-click=\"removeSchedule()\" class=\"btn-unstyle btn-link\" ng-disabled=\"!model.canPayNow || submitInProgress\">Pay Now</button>"
 msgstr ""
 
-#: app/views/analytics.html
-msgid "{{  {true:'Close ', false:'Show ' }[showDetails] }} Details"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity"
-msgstr ""
-
-#: app/views/dashboard.html
-msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Details"
-msgstr ""
-
 #: app/views/vehicledetails.html
 msgid "{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(of {{ flooringInfo.ExtendedTermPlanLength }} days)</span>"
 msgstr ""
@@ -3033,11 +3063,3 @@ msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
 msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
 msgstr[0] ""
 msgstr[1] ""
-
-#: app/views/account_management.html
-msgid "{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | currency }}"
-msgstr ""

@@ -192,7 +192,10 @@
 
       <div ng-show="financial.data.autoDisburseUnappliedFunds" class="row-fluid">
         <label class="span4"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
-        <div class="span8 static" translate>{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}</div>
+        <div class="span8 static">
+          <span ng-show="financial.data.autoDisburseUnappliedFunds" translate>Enabled</span>
+          <span ng-show="!financial.data.autoDisburseUnappliedFunds" translate>Disabled</span>
+        </div>
       </div>
     </form>
   </section>

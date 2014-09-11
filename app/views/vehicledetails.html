@@ -199,7 +199,10 @@
                   <span class="paired-body">{{ activity.ActivityDate | moment }}</span>
                 </div>
               </td>
-              <td><a href="" class="primary" ng-click="financialSummary.getActivityDetails(activity)" translate>{{ {true: 'Payment Made', false:''}[activity.IsPayment]  }} {{ {true: 'Fee Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | currency }}</a></td>
+              <td><a href="" class="primary" ng-click="financialSummary.getActivityDetails(activity)">
+                <span ng-show="activity.IsPayment" translate>Payment Made for {{ activity.ActivityAmount | currency }}</span>
+                <span ng-show="activity.IsFee" translate>Fee Assessed for {{ activity.ActivityAmount | currency }}</span>
+              </a></td>
             </tr>
           </table>
         </div>
@@ -223,7 +226,10 @@
     <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
     <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
       <span ng-show="financialSummary.FloorplanActivity.length > 0">
-        <span class="paired-body" translate>{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity</span>
+        <span class="paired-body">
+          <span ng-show="isCollapsed" translate>Show Payment Activity</span>
+          <span ng-show="!isCollapsed" translate>Hide Payment Activity</span>
+        </span>
         <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }" nxg-icon="icon-chevron"></span>
       </span>
       <span ng-hide="financialSummary.FloorplanActivity.length > 0" translate>

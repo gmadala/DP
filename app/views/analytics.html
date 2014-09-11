@@ -85,8 +85,9 @@
   </div>
 </section>
 <button class="accordion-button paired-reversed" ng-click="toggleDetails()" ng-class="{ 'expanded': showDetails }" nxg-track="{{showDetails && metric.CLICK_VIEW_ANALYTICS_SHOW_DETAILS_LINK || ''}}">
-  <span class="paired-body" translate>
-    {{  {true:'Close ', false:'Show ' }[showDetails] }} Details
+  <span class="paired-body">
+    <span ng-show="showDetails" translate>Close Details</span>
+    <span ng-show="!showDetails" translate>Show Details</span>
   </span>
   <span class="paired-media" ng-class="{ 'point-up':showDetails, 'point-down':!showDetails }" nxg-icon="icon-chevron">
   </span>
