@@ -110,7 +110,8 @@ angular.module('nextgearWebApp')
                   item.scheduleLoading = false;
                   if (!_.find(result)) {
                     // no possible schedule dates for this item (edge case, but could happen)
-                    item.scheduleError = gettextCatalog.getString('This ' + (item.isPayment ? 'payment' : 'fee') + ' cannot be scheduled');
+                    /// paymentType = payment OR fee
+                    item.scheduleError = gettextCatalog.getString('This {{ paymentType }} cannot be scheduled', { paymentType: (item.isPayment ? 'payment' : 'fee') });
                     item.scheduleBlocked = true;
                     item.scheduleDate = null;
                     return $q.reject();

@@ -134,7 +134,7 @@
             <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
               <div nxg-address="addr"></div>
             </li>
-            <li ng-show="title.data.extraAddresses">And {{ title.data.extraAddresses }} additional addresses...</li>
+            <li ng-show="title.data.extraAddresses" translate>And {{ title.data.extraAddresses }} additional addresses...</li>
           </ul>
           <p ng-show="title.data.addresses.length == 0" translate>
             None
@@ -192,7 +192,7 @@
 
       <div ng-show="financial.data.autoDisburseUnappliedFunds" class="row-fluid">
         <label class="span4"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
-        <div class="span8 static">{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}</div>
+        <div class="span8 static" translate>{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}</div>
       </div>
     </form>
   </section>

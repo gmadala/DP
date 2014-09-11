@@ -141,7 +141,7 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseUnavailable = function() {
       var title = gettextCatalog.getString('Title Release Unavailable'),
-          message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at ' + customerSupportPhone + '.'),
+          message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}.', { phoneNumber: customerSupportPhone }),
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();

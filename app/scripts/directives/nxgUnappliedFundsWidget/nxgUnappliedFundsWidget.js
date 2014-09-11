@@ -46,10 +46,10 @@ angular.module('nextgearWebApp')
 
             // wireframes do not specify any kind of success display, so let's just do a simple one
             var title = gettextCatalog.getString('Request submitted'),
-              msg = gettextCatalog.getString('Your request for a payout in the amount of ' +
-                $filter('currency')(result.amount) +
-                ' to your account "' + result.account.BankAccountName +
-                '" has been successfully submitted.'),
+              msg = gettextCatalog.getString('Your request for a payout in the amount of {{ amount }} to your account "{{ bankAccountName }}" has been successfully submitted.', {
+                amount: $filter('currency')(result.amount),
+                bankAccountName: result.account.BankAccountName
+              }),
               buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
             $dialog.messageBox(title, msg, buttons).open();
           }

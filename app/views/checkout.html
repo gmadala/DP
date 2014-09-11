@@ -284,11 +284,8 @@
 
       <section class="well-item well-light bordered">
         <div class="alt-lockup">
-          <h2 class="subtitle" translate>{{ paymentQueue.sum.scheduledCount() }} Future
-            <span ng-show="paymentQueue.sum.scheduledCount() == 1">Payment</span>
-            <span ng-hide="paymentQueue.sum.scheduledCount() == 1">Payments</span>
-          </h2>
-          <p class="lockup-minor">In the Amount of</p>
+          <h2 class="subtitle" translate translate-n="paymentQueue.sum.scheduledCount()" translate-plural="{{ paymentQueue.sum.scheduledCount() }} Future Payments">{{ paymentQueue.sum.scheduledCount() }} Future Payment</h2>
+          <p class="lockup-minor" translate>In the Amount of</p>
           <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
         </div>
       </section>

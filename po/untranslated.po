@@ -41,6 +41,10 @@ msgstr ""
 msgid "<span class=\"count highlight dash-major\" ng-bind=\"eligibility.RemainingReleasesAvailable - titleQueue.contents.length\">0</span> out of <span class=\"count highlight dash-major\" ng-bind=\"eligibility.TotalReleasesAllowed\">0</span>"
 msgstr ""
 
+#: app/views/modals/confirmTitleRequest.html
+msgid "<span translate=\"\" translate-n=\"counts.total-counts.failed\" translate-plural=\"Your title requests have been submitted.\">Your title request has been submitted.</span>"
+msgstr ""
+
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr ""
@@ -169,6 +173,7 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
+#: app/views/account_management.html
 #: app/views/auction.settings.html
 msgid "And {{ title.data.extraAddresses }} additional addresses..."
 msgstr ""
@@ -831,6 +836,10 @@ msgstr ""
 msgid "Filter by Inventory Location"
 msgstr ""
 
+#: app/views/receipts.html
+msgid "Filter by Payment Method"
+msgstr ""
+
 #: app/views/reports.html
 msgid "Filter for VIN (optional)"
 msgstr ""
@@ -1263,6 +1272,7 @@ msgstr ""
 #: app/views/checkout.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
+#: app/views/receipts.html
 #: app/views/vehicledetails.html
 msgid "Payment"
 msgstr ""
@@ -1313,15 +1323,12 @@ msgstr ""
 msgid "Payment Summary"
 msgstr ""
 
+#. Payment This [Month, Year]
 #: app/views/dashboard.html
 msgid "Payment This {{ viewMode | capitalize }}"
 msgid_plural "Payments This {{ viewMode | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
-
-#: app/views/receipts.html
-msgid "Payment: {{ receipt.PaymentMethod }}"
-msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
 #: app/scripts/models/dashboard.js
@@ -1402,7 +1409,7 @@ msgid "Please answer this question."
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
-msgid "Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement (\"Note\")) and initiate a Required Payment (as such term is defined in your ACH Authorizaiton and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Captital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form."
+msgid "Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement (\"Note\")) and initiate a Required Payment (as such term is defined in your ACH Authorization and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Capital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form."
 msgstr ""
 
 #: app/views/modals/requestCreditIncrease.html
@@ -1820,6 +1827,10 @@ msgstr ""
 msgid "Rates and Fees"
 msgstr ""
 
+#: app/views/receipts.html
+msgid "Receipt #, Stock #, VIN, Check #, Make, Model or Year"
+msgstr ""
+
 #: app/views/dashboard.html
 msgid "Receipt Date"
 msgstr ""
@@ -1828,6 +1839,10 @@ msgstr ""
 #: app/views/modals/paymentDetails.html
 #: app/views/receipts.html
 msgid "Receipt No."
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Receipt Search"
 msgstr ""
 
 #: app/views/modals/paymentDetails.html
@@ -2187,6 +2202,7 @@ msgstr ""
 
 #: app/views/modals/cancelPayment.html
 #: app/views/modals/scheduleCheckout.html
+#: app/views/vehicledetails.html
 msgid "Stock #"
 msgstr ""
 
@@ -2196,10 +2212,6 @@ msgstr ""
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Stock # Range Start"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "Stock #{{ vehicleInfo.StockNumber }}"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -2237,7 +2249,7 @@ msgid "Submit Requests"
 msgstr ""
 
 #: app/views/modals/confirmCheckout.html
-msgid "Submitted Payment(s): {{ items.todayTotal() | currency }}"
+msgid "Submitted Payment(s)"
 msgstr ""
 
 #: app/views/auction.reports.html
@@ -2300,10 +2312,6 @@ msgstr ""
 msgid "There are too many results to display, please refine your search further."
 msgstr ""
 
-#: app/scripts/controllers/checkout.js
-msgid "This  cannot be scheduled"
-msgstr ""
-
 #: app/views/modals/paymentExtension.html
 msgid "This extension request cannot be completed online. Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr ""
@@ -2326,6 +2334,11 @@ msgstr ""
 
 #: app/scripts/controllers/dashboard.js
 msgid "This {{ dateType }}"
+msgstr ""
+
+#. paymentType = payment OR fee
+#: app/scripts/controllers/checkout.js
+msgid "This {{ paymentType }} cannot be scheduled"
 msgstr ""
 
 #: app/views/auction.sellerfloorplan.html
@@ -2383,8 +2396,11 @@ msgid "Title Releases Confirmation"
 msgstr ""
 
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+#: app/views/modals/confirmTitleRequest.html
 msgid "Title Request"
-msgstr ""
+msgid_plural "Title Requests"
+msgstr[0] ""
+msgstr[1] ""
 
 #: app/scripts/controllers/titleReleaseCheckout.js
 #: app/views/titlereleasecheckout.html
@@ -2393,10 +2409,6 @@ msgid "Title Requested"
 msgid_plural "Titles Requested"
 msgstr[0] ""
 msgstr[1] ""
-
-#: app/views/modals/confirmTitleRequest.html
-msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
-msgstr ""
 
 #: app/views/account_management.html
 #: app/views/auction.settings.html
@@ -2666,7 +2678,7 @@ msgid "We're sorry, the highlighted title(s) listed above cannot be processed at
 msgstr ""
 
 #: app/scripts/controllers/titleReleases.js
-msgid "We're sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at ."
+msgid "We're sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}."
 msgstr ""
 
 #: app/views/auction.dashboard.html
@@ -2782,7 +2794,7 @@ msgid "Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}
 msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
-msgid "Your request for a payout in the amount of  to your account \"\" has been successfully submitted."
+msgid "Your request for a payout in the amount of {{ amount }} to your account \"{{ bankAccountName }}\" has been successfully submitted."
 msgstr ""
 
 #: app/scripts/controllers/modals/requestCreditIncrease.js
@@ -2794,15 +2806,19 @@ msgid "Your session expired due to inactivity. Please log in again."
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
+msgid "Your title request has been approved. An email will be sent to you shortly with a tracking number."
+msgid_plural "Your title requests have been approved. An email will be sent to you shortly with a tracking number."
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Your title request has been submitted."
+msgid_plural "Your title requests have been submitted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
-msgstr ""
-
-#: app/views/modals/confirmTitleRequest.html
-msgid "Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been approved. An email will be sent to you shortly with a tracking number."
-msgstr ""
-
-#: app/views/modals/confirmTitleRequest.html
-msgid "Your title {{ {true: 'requests have', false: 'request has'}[counts.total-counts.failed > 1] }} been submitted."
 msgstr ""
 
 #: app/views/scheduledpayments.html
@@ -2854,10 +2870,6 @@ msgid "{{ flooringInfo.OriginalTermDaysFloored }} <span class=\"value-note\">(of
 msgstr ""
 
 #: app/views/vehicledetails.html
-msgid "{{ flooringInfo.StockNumber }}"
-msgstr ""
-
-#: app/views/vehicledetails.html
 msgid "{{ flooringInfo.TotalDaysFloored }} <span class=\"value-note\">(of {{ flooringInfo.TotalTermPlanLength }} days)</span>"
 msgstr ""
 
@@ -2885,14 +2897,13 @@ msgid "{{ payment.DaysOnFloorplan }} days"
 msgstr ""
 
 #: app/views/checkout.html
-msgid ""
-"{{ paymentQueue.sum.scheduledCount() }} Future\n"
-"            <span ng-show=\"paymentQueue.sum.scheduledCount() == 1\">Payment</span>\n"
-"            <span ng-hide=\"paymentQueue.sum.scheduledCount() == 1\">Payments</span>"
-msgstr ""
+msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
+msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
+msgstr[0] ""
+msgstr[1] ""
 
-#: app/views/login.recover.html
-msgid "{{ question.QuestionText }}"
+#: app/views/account_management.html
+msgid "{{ { true: 'Enabled', false: 'Disabled' }[financial.data.autoDisburseUnappliedFunds] }}"
 msgstr ""
 
 #: app/views/vehicledetails.html

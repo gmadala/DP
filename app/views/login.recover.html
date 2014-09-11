@@ -75,7 +75,7 @@
                ng-repeat="question in passwordRecovery.questions"
                ng-init="question.$form = questionForm">
             <label translate>Security Question {{$index + 1}}</label>
-            <p class="security-question" translate>{{ question.QuestionText }}</p>
+            <p class="security-question">{{ question.QuestionText }}</p>
             <label class="answer-label" for="{{ passwordRecovery.getInputId(question) }}" translate>
               Security Question Answer
             </label>

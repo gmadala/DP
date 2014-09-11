@@ -45,7 +45,7 @@
   </section>
 
   <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
-    <h3 translate>Submitted Payment(s): {{ items.todayTotal() | currency }}</h3>
+    <h3><span translate>Submitted Payment(s)</span>: {{ items.todayTotal() | currency }}</h3>
 
     <div ng-show="items.feesToday.length > 0">
       <h4 translate>Fees</h4>
