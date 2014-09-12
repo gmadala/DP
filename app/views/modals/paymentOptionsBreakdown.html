@@ -64,29 +64,29 @@
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span6">Principal:</p>
-        <p class="span6 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
+        <p class="span8">Principal:</p>
+        <p class="span4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="selector.paymentOption == 'payment' && selector.additionalAmount">
-        <p class="span6">Additional Principal:</p>
-        <p class="span6 value numeric">{{ selector.additionalAmount | currency }}</p>
+        <p class="span8">Additional Principal:</p>
+        <p class="span4 value numeric">{{ selector.additionalAmount | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6">Interest:</p>
-        <p class="span6 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
+        <p class="span8">Interest:</p>
+        <p class="span4 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6">Fee(s):</p>
-        <p class="span6 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
+        <p class="span8">Fee(s):</p>
+        <p class="span4 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="paymentObject.payment.cpp">
-        <p class="span6">CPP:</p>
-        <p class="span6 value numeric">{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
+        <p class="span8">CPP:</p>
+        <p class="span4 value numeric"><span class="table-symbol">+</span>{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="span6">Payment Total:</p>
-        <p class="span6 value numeric">{{ (total | currency) || 'n/a' }}</p>
+        <p class="span8">Payment Total:</p>
+        <p class="span4 value numeric">{{ (total | currency) || 'n/a' }}</p>
       </li>
     </ul>
   </div>
