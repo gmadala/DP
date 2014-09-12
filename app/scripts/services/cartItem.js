@@ -22,9 +22,12 @@ angular.module('nextgearWebApp')
           InterestPayoffTotal: sp.InterestPayoffTotal,
           CollateralProtectionPayoffTotal: sp.CollateralProtectionPayoffTotal,
           // what about curtailment payment #s???
+          // AmountDue:
+          // PrincipalPayment:
+          // FeesPaymentTotal: sp.FeesPayoffTotal,
+          // InterestPaymentTotal: sp.InterestPayoffTotal,
+          // CollateralProtectionPaymentTotal: sp.CollateralProtectionPayoffTotal
         };
-
-        // console.log('this is the pseudopayment', scheduledPayment)
 
         return new VehicleCartItem(scheduledPayment, true/* isPayoff */); // has to be a payoff (?)
       },

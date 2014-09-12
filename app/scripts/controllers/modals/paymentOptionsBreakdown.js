@@ -60,6 +60,19 @@ angular.module('nextgearWebApp')
       if(!Payments.isPaymentOnQueue($scope.paymentObject.id)) {
         // If it's not on the queue yet, add it. Then set our local paymentObject on the
         // scope to the newly created cart item, so we can access the items we need to update.
+
+        if($scope.paymentObject.scheduled) {
+          // auto-cancel previously scheduled payment; this mirrors what happens if you
+          // add a payment via the normal payment buttons when one was already scheduled.
+          // since we include the original object when opening this modal from vehicle
+          // details, we use that to get the necessary WebScheduledPaymentId.
+          Payments.cancelScheduled($scope.paymentObject.originalObject.WebScheduledPaymentId);
+          // need to update local data for vehicle details page.
+          $scope.paymentObject.originalObject.WebScheduledPaymentId = null;
+          $scope.paymentObject.originalObject.Scheduled = false;
+          $scope.paymentObject.originalObject.ScheduledPaymentDate = null;
+        }
+
         Payments.addPaymentToQueue($scope.paymentObject.originalObject, $scope.selector.paymentOption === 'payoff');
         $scope.paymentObject = Payments.getPaymentFromQueue($scope.paymentObject.id);
       }
@@ -94,6 +107,8 @@ angular.module('nextgearWebApp')
           description: object.UnitDescription,
           isOnQueue: false,
           paymentOption: null,
+          scheduled: object.Scheduled,
+
           payoff: {
             amount: object.CurrentPayoff,
             principal: object.PrincipalPayoff,

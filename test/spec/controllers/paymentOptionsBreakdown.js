@@ -178,6 +178,26 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       expect(Payments.getPaymentFromQueue).toHaveBeenCalled();
     });
 
+    it('should auto-cancel a previously scheduled payment if we are adding a payment to the queue', function() {
+      spyOn(Payments, 'cancelScheduled').andReturn();
+      fromVehicleDetailsMock.Scheduled = true;
+      fromVehicleDetailsMock.WebScheduledPaymentId = 'abc123';
+      fromVehicleDetailsMock.ScheduledPaymentDate = '2014-09-05';
+      shouldBeOnQueue = false;
+      isOnQueueMock = false;
+
+      run(fromVehicleDetailsMock);
+      scope.selector.paymentOption = 'payoff';
+      scope.$digest();
+
+      scope.paymentOptionsForm = {
+        $valid: true
+      };
+
+      scope.confirm();
+      expect(Payments.cancelScheduled).toHaveBeenCalledWith('abc123');
+    });
+
     it('should not add the payment to the queue if it is already on there', function() {
       shouldBeOnQueue = true;
       isOnQueueMock = true;
