@@ -124,13 +124,12 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (payment, asPayoff, isScheduled) {
+      addPaymentToQueue: function (payment, paymentType, isScheduled) {
         // if incoming object is already scheduled (ie. a scheduled payment),
         // call CartItem.fromScheduledPayment. Otherwise, CartItem.fromPayment.
         // if isScheduled flag is truthy, it's scheduled. Otherwise, normal payment.
         isScheduled = isScheduled ? isScheduled : false;
-        var p = isScheduled ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, asPayoff);
-
+        var p = isScheduled ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, paymentType);
         paymentQueue.payments[p.id] = p; // incoming object will have a FloorplanId; the new CartItem(p) will just have id.
         segmentio.track(metric.ADD_TO_BASKET);
       },
@@ -154,14 +153,16 @@ angular.module('nextgearWebApp')
         }
       },
       isPaymentOnQueue: function (id) {
+        // console.log('in isPaymentOnQueue fn', paymentQueue.payments[id]);
         var queueItem = paymentQueue.payments[id];
 
         if (!queueItem) {
           return false; // not in queue
         }
         else {
-          // payment is on queue, return whether it is a payoff or payment
-          return (queueItem.isPayoff ? 'payoff' : 'payment'); // in this case, 'payment' = 'curtailment'
+          // console.log('payment type?', queueItem);
+          // payment is on queue, return the payment type.
+          return queueItem.paymentOption; // in this case, 'payment' = 'curtailment'
         }
       },
       isFeeOnQueue: function (id) {

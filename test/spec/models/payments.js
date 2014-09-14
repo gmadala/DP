@@ -378,7 +378,7 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(payment, false);
+      payments.addPaymentToQueue(payment, 'payment');
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payment');
     });
 
@@ -394,7 +394,7 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(payment, true)
+      payments.addPaymentToQueue(payment, 'payoff')
 
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payoff');
     });
@@ -470,7 +470,7 @@ describe("Model: Payments", function () {
         AmountDue: 1000,
         DueDate: '2013-01-01'
       };
-      payments.addPaymentToQueue(payment, false);
+      payments.addPaymentToQueue(payment, 'payment');
       payments.removePaymentFromQueue(payment.FloorplanId);
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
@@ -485,7 +485,7 @@ describe("Model: Payments", function () {
         AmountDue: 1000,
         DueDate: '2013-01-01'
       };
-      payments.addPaymentToQueue(payment, true);
+      payments.addPaymentToQueue(payment, 'payoff');
       payments.removePaymentFromQueue(payment.FloorplanId);
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
@@ -542,7 +542,7 @@ describe("Model: Payments", function () {
       expect(queue.isEmpty()).toBe(false);
 
       payments.removeFeeFromQueue('finId1');
-      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, false);
+      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, 'payment');
       expect(queue.isEmpty()).toBe(false);
 
       payments.removePaymentFromQueue('floorId1');
@@ -567,8 +567,8 @@ describe("Model: Payments", function () {
       var queue = payments.getPaymentQueue();
       payments.addFeeToQueue({ FinancialRecordId: 'id1' });
       payments.addFeeToQueue({ FinancialRecordId: 'id1' });
-      payments.addPaymentToQueue({ FloorplanId: 'id3' }, false);
-      payments.addPaymentToQueue({ FloorplanId: 'id4' }, true);
+      payments.addPaymentToQueue({ FloorplanId: 'id3' }, 'payment');
+      payments.addPaymentToQueue({ FloorplanId: 'id4' }, 'payoff');
       payments.clearPaymentQueue();
       expect(queue.isEmpty()).toBe(true);
     });

@@ -48,15 +48,15 @@
           </label>
         </div>
       </li>
-      <!--
+
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="interest" id="paymentOptionInterest" required />
         <label class="radio-img" for="paymentOptionInterest"></label>
         <label class="cr-label" for="paymentOptionInterest">
-          <strong>__AMOUNT__</strong> – Interest-Only Payment
+          <strong>{{ paymentObject.interest.amount | currency }}</strong> – Interest-Only Payment
         </label>
       </li>
-      -->
+
     </ul>
   </form>
   <div class="aside modal-inner">

@@ -197,7 +197,7 @@ angular.module('nextgearWebApp')
       // Grab payments to override addresses for
       var paymentsToOverride = [];
       _.each(payments, function(p) {
-        if (p.isPayoff && p.overrideAddress && p.overrideAddress !== null) {
+        if (p.paymentOption === 'payoff' && p.overrideAddress && p.overrideAddress !== null) {
           paymentsToOverride.push(p);
         }
       });
@@ -249,7 +249,7 @@ angular.module('nextgearWebApp')
 
                 angular.forEach($scope.paymentQueue.contents.payments, function (item) {
                   if (!item.scheduleDate) { // if it isn't already scheduled...
-                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff));
+                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.paymentOptions === 'payoff'));
 
                     // set the scheduled date to the next available business day.
                     item.scheduleDate = nextAvail;
@@ -307,7 +307,7 @@ angular.module('nextgearWebApp')
       });
       angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
         if(!payment.scheduleDate) {
-          paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+          paymentIds.push(payment.stockNum + '|' + (payment.paymentOptions === 'payoff' ? '1' : '0'));
         }
       });
 

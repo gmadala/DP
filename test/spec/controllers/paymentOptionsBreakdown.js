@@ -147,7 +147,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       spyOn(Payments, 'isPaymentOnQueue').andCallFake(function() {
           return shouldBeOnQueue;
         });
-      spyOn(Payments, 'getPaymentFromQueue').andReturn({});
+      spyOn(Payments, 'getPaymentFromQueue').andReturn(fromCartItemMock);
       spyOn(Payments, 'addPaymentToQueue').andReturn();
     }));
 
@@ -212,7 +212,6 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       scope.confirm();
       expect(Payments.isPaymentOnQueue).toHaveBeenCalled();
       expect(Payments.addPaymentToQueue).not.toHaveBeenCalled();
-      expect(Payments.getPaymentFromQueue).not.toHaveBeenCalled();
     });
 
     it('should add any additional principal amount to the payment object if it is a payment', function() {

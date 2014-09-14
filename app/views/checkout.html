@@ -101,7 +101,7 @@
                 <p class="lockup-minor caps vin">VIN: {{ payment.vin }}</p>
                 <p class="lockup-minor caps stock">STK: {{ payment.stockNum }}</p>
 
-                <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                <div nxg-alternate-address="payment" enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
               </td>
               <td>
                 <!-- is not scheduled or is scheduled for today -->
@@ -132,7 +132,7 @@
               <td class="numeric split">
                 <div class="split-cell">
                   <p class="lockup-major"><span class="sub-label">{{ payment.getItemType() | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
-                  <p class="emphasis" ng-show="!payment.isPayoff && payment.getExtraPrincipal()">Curtailment + Principal</p>
+                  <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
                           ng-click="paymentQueue.removePayment(payment.id)"
                           ng-disabled="submitInProgress"

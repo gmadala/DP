@@ -56,7 +56,8 @@ angular.module('nextgearWebApp')
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
-          var p = $scope.item;
+          var p = $scope.item,
+            paymentType = asPayoff ? 'payoff' : 'payment';
 
           if ($scope.onQueue === false) { // if it's not on the queue
             if(p.Scheduled) {
@@ -64,20 +65,20 @@ angular.module('nextgearWebApp')
               // the scheduled payment and add the new payment or payoff.
               $scope.cancelScheduledPayment().then(function(wasCancelled) {
                 if(wasCancelled) {
-                  Payments.addPaymentToQueue(p, asPayoff);
+                  Payments.addPaymentToQueue(p, paymentType);
                 }
               });
             } else {
-              Payments.addPaymentToQueue(p, asPayoff);
+              Payments.addPaymentToQueue(p, paymentType);
             }
           } else {
             // Regardless, we still want to remove the original payment.
             Payments.removePaymentFromQueue(p.FloorplanId);
 
             if($scope.onQueue === 'payment' && asPayoff) {
-              Payments.addPaymentToQueue(p, true/* isPayoff */);
+              Payments.addPaymentToQueue(p, paymentType);
             } else if ($scope.onQueue === 'payoff' && !asPayoff) {
-              Payments.addPaymentToQueue(p, false/* isPayoff */);
+              Payments.addPaymentToQueue(p, paymentType);
             }
           }
         };

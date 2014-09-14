@@ -1,15 +1,17 @@
 'use strict';
 
 /*
- * This controller expects an object with payment information (either a
- * cartItem object or a payment object from vehicle details) and an isOnQueue
- * flag to determine which function the paymentOptionsHelper service should use.
- * PaymentOptionsHelper then builds a new object in a format the controller can
+ * This controller expects an object with payment information
+ * (either a cartItem object or a payment object from vehicle
+ * details) and an isOnQueue flag to determine which function the
+ * paymentOptionsHelper service should use. PaymentOptionsHelper
+ * then builds a new object in a format the controller can
  * properly consume.
  *
- * Upon submission, if we started with a cartItem, we just update that existing
- * object. If we started with a vehicle details payment object, we add it to the
- * queue first, and then edit its properties according to the form inputs.
+ * Upon submission, if we started with a cartItem, we just
+ * update that existing object. If we started with a vehicle details
+ * payment object, we add it to the queue first, and then edit its
+ * properties according to the form inputs.
  *
 */
 angular.module('nextgearWebApp')
@@ -31,6 +33,8 @@ angular.module('nextgearWebApp')
         $scope.paymentBreakdown = $scope.paymentObject.payoff;
       } else if (newVal === 'payment') {
         $scope.paymentBreakdown = $scope.paymentObject.payment;
+      } else if (newVal === 'interest') {
+        $scope.paymentBreakdown = $scope.paymentObject.interest;
       }
       $scope.total = $scope.paymentBreakdown.principal + $scope.paymentBreakdown.interest + $scope.paymentBreakdown.fees + $scope.paymentBreakdown.cpp;
     });
@@ -58,14 +62,18 @@ angular.module('nextgearWebApp')
       }
 
       if(!Payments.isPaymentOnQueue($scope.paymentObject.id)) {
-        // If it's not on the queue yet, add it. Then set our local paymentObject on the
-        // scope to the newly created cart item, so we can access the items we need to update.
+        // If it's not on the queue yet, add it. Then set
+        // our local paymentObject on the scope to the newly
+        // created cart item, so we can access the items
+        // we need to update.
 
         if($scope.paymentObject.scheduled) {
-          // auto-cancel previously scheduled payment; this mirrors what happens if you
-          // add a payment via the normal payment buttons when one was already scheduled.
-          // since we include the original object when opening this modal from vehicle
-          // details, we use that to get the necessary WebScheduledPaymentId.
+          // auto-cancel previously scheduled payment; this mirrors
+          // what happens if you add a payment via the normal payment
+          // buttons when one was already scheduled.
+          // since we include the original object when opening this
+          // modal from vehicle details, we use that to get the
+          // necessary WebScheduledPaymentId.
           Payments.cancelScheduled($scope.paymentObject.originalObject.WebScheduledPaymentId);
           // need to update local data for vehicle details page.
           $scope.paymentObject.originalObject.WebScheduledPaymentId = null;
@@ -73,13 +81,15 @@ angular.module('nextgearWebApp')
           $scope.paymentObject.originalObject.ScheduledPaymentDate = null;
         }
 
-        Payments.addPaymentToQueue($scope.paymentObject.originalObject, $scope.selector.paymentOption === 'payoff');
-        $scope.paymentObject = Payments.getPaymentFromQueue($scope.paymentObject.id);
+        Payments.addPaymentToQueue($scope.paymentObject.originalObject, $scope.selector.paymentOption);
       }
 
-      $scope.paymentObject.isPayoff = $scope.selector.paymentOption === 'payoff' ? true : false;
+      // grab the original cartItem object, so that our changes are saved.
+      $scope.paymentObject = Payments.getPaymentFromQueue($scope.paymentObject.id);
 
-      if(!$scope.paymentObject.isPayoff) {
+      $scope.paymentObject.paymentOption = $scope.selector.paymentOption;
+
+      if($scope.paymentObject.paymentOption === 'payment') {
         $scope.paymentObject.payment.additionalPrincipal = parseFloat($scope.selector.additionalAmount);
       }
 
@@ -94,9 +104,10 @@ angular.module('nextgearWebApp')
             id: cartItem.id,
             description: cartItem.description,
             isOnQueue: true,
-            paymentOption: cartItem.isPayoff ? 'payoff' : 'payment',
+            paymentOption: cartItem.paymentOption,
             payoff: cartItem.payoff,
-            payment: cartItem.payment
+            payment: cartItem.payment,
+            interest: cartItem.interest
           };
 
         return ret;
@@ -123,6 +134,13 @@ angular.module('nextgearWebApp')
             interest: object.InterestPaymentTotal,
             cpp: object.CollateralProtectionPaymentTotal,
             additionalPrincipal:0
+          },
+          interest: {
+            amount: object.InterestPaymentTotal,
+            principal: 0,
+            fees: 0,
+            interest: 0,
+            cpp: 0
           },
           originalObject: object // to store the original payment object that we'll need in order to add it to the queue properly.
         };

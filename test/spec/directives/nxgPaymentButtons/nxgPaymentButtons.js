@@ -184,7 +184,7 @@ describe('Directive: nxgPaymentButtons', function () {
       element.find('#togglePayment').click();
       expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
         scope.myPayment,
-        false /* isPayoff */
+        'payment'
       );
 
       scope.$apply(function () {
@@ -205,7 +205,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayment').click();
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, false);
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, 'payment');
     });
   });
 
@@ -336,7 +336,7 @@ describe('Directive: nxgPaymentButtons', function () {
       element.find('#togglePayoff').click();
       expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
         scope.myPayment,
-        true /* isPayoff */
+        'payoff'
       );
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
@@ -351,7 +351,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       element.find('#togglePayoff').click();
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, true);
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, 'payoff');
     });
   });
 

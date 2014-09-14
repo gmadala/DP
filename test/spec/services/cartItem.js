@@ -118,7 +118,7 @@ describe('Service: cartItem', function () {
       expect(result.stockNum).toBe('stock1');
 
       expect(result.isFee).toBe(false);
-      expect(result.isPayoff).toBe(false);
+      // expect(result.isPayoff).toBe(false);
 
       expect(result.dueDate).toBe('2014-08-01');
       expect(result.scheduled).toBe(false);
@@ -142,13 +142,13 @@ describe('Service: cartItem', function () {
 
     describe('getItemType function', function() {
       it('should return "payoff" if the item is a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, true);
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
 
         expect(result.getItemType()).toBe('payoff');
       });
 
       it('should return "payment" if the item is a curtailment payment', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
 
         expect(result.getItemType()).toBe('payment');
       });
@@ -156,13 +156,13 @@ describe('Service: cartItem', function () {
 
     describe('getCheckoutAmount function', function() {
       it('should return the payoff.amount value for a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, true);
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
 
         expect(result.getCheckoutAmount()).toBe(5000);
       });
 
       it('should return payment.amount + payment.additionalPrincipal for a curtailment payment (with no params)', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
 
         expect(result.getCheckoutAmount()).toBe(550);
         result.payment.additionalPrincipal = 50;
@@ -170,7 +170,7 @@ describe('Service: cartItem', function () {
       });
 
       it('should return only payment.amount (no principal) for a curtailment payment (with noAdditionalPrincipal flag set to true)', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
 
         result.payment.additionalPrincipal = 50;
         expect(result.getCheckoutAmount()).toBe(600);
@@ -180,17 +180,17 @@ describe('Service: cartItem', function () {
 
     describe('getExtraPrincipal function', function() {
       it('should return a falsy value if this is a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, true);
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
         expect(result.getExtraPrincipal()).toBeFalsy();
       });
 
       it('should return 0 if this is a payment but we have no additionalPrincipal added', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
         expect(result.getExtraPrincipal()).toBe(0);
       });
 
       it('should return our extra principal value if any has been added', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
         result.payment.additionalPrincipal = 45;
         expect(result.getExtraPrincipal()).toBe(45);
       });
@@ -198,7 +198,7 @@ describe('Service: cartItem', function () {
 
     describe('getApiRequestObject function', function() {
       it('should return a properly formatted object that can be sent to the api', function() {
-        var result = CartItem.fromPayment(mockPayment, true);
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
         result.scheduled = true;
         result.scheduleDate = moment('2014-10-15');
 
@@ -206,15 +206,17 @@ describe('Service: cartItem', function () {
           FloorplanId: 'id1',
           ScheduledPaymentDate: '2014-10-15',
           IsPayoff: true,
+          IsInterestOnly: false,
           AdditionalPrincipalAmount: 0
         });
 
-        var resultTwo = CartItem.fromPayment(mockPayment, false);
+        var resultTwo = CartItem.fromPayment(mockPayment, 'payment');
         resultTwo.payment.additionalPrincipal = 500;
         expect(resultTwo.getApiRequestObject()).toEqual({
           FloorplanId: 'id1',
           ScheduledPaymentDate: null,
           IsPayoff: false,
+          IsInterestOnly: false,
           AdditionalPrincipalAmount: 500
         });
       });
@@ -230,7 +232,7 @@ describe('Service: cartItem', function () {
       };
 
       it('should set the payoff amounts to the given amounts if item is a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, true);
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
         result.updateAmountsOnDate(amts);
         expect(result.payoff.amount).toBe(100);
         expect(result.payoff.principal).toBe(40);
@@ -240,7 +242,7 @@ describe('Service: cartItem', function () {
       });
 
       it('should set the payment amounts to the given amounts if item is a curtailment payment', function() {
-        var result = CartItem.fromPayment(mockPayment, false);
+        var result = CartItem.fromPayment(mockPayment, 'payment');
         result.updateAmountsOnDate(amts);
         expect(result.payment.amount).toBe(100);
         expect(result.payment.principal).toBe(40);
