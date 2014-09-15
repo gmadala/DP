@@ -22,10 +22,7 @@
 }
 
 .nxg-logo {
-  background-image: url(../img/nxg_logo_blue.png);
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-    background-image: url(../img/nxg_logo_blue_2x.png);
-  }
+  background-image: url(../img/nxg_logo_blue.svg);
   background-repeat: no-repeat;
   background-size: 200px auto;
   background-position: 20px 0;
