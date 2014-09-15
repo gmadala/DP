@@ -6,14 +6,6 @@
   width: 100%;
 }
 
-%half-width {
-  width: 50%;
-}
-
-%quarter-width {
-  width: 25%;
-}
-
 %center, .center {
   text-align: center;
 }
@@ -32,16 +24,6 @@
 
 %float-r {
   float: right;
-}
-
-%clear {
-  &:before, &:after {
-    content: '';
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
 }
 
 .clearfix {

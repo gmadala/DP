@@ -27,7 +27,7 @@
   }
 
   .browsers {
-    @extend %clear;
+    @extend .clearfix;
     margin: 0 auto 20px;
 
     img {

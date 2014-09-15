@@ -2,6 +2,11 @@
 //  WELLS
 // =======
 
+/*
+ * Well
+ * A containing element to hold content, with a
+ * particular header style, background, and rounded corners.
+ */
 .well {
   @include border-radius($borderRadius);
   @include box-shadow(none);
@@ -24,6 +29,7 @@
     }
   }
 
+  // For additional text in the title bar at the top
   .well-title-secondary {
     @extend .well-title;
     background: #E6E6E6;
@@ -31,6 +37,7 @@
     padding: 8px 18px;
   }
 
+  // For important text within the modal body.
   .well-sub-title {
     font-size: 14px;
     float: right;
@@ -55,11 +62,12 @@
     }
   }
 
+  // for forms within wells.
   .well-form {
     padding: 20px;
   }
 
-// Queue lists
+// Queue lists; used for payment and title request summaries.
 .queue-list {
   border-top: 1px solid $wellBorder;
   border-bottom: 1px solid $wellBorder;
@@ -67,7 +75,7 @@
 }
   .queue-item {
     padding: 10px;
-    background: #ffffff;
+    background: $white;
 
     &:nth-child(2n) {
       background: #ececec;
@@ -85,7 +93,7 @@
       margin-top: 10px;
 
       .span6:last-child {
-        text-align: right;
+        @extend %align-right;
       }
     }
 
@@ -98,6 +106,8 @@
     }
   }
 
+// A block of content within a well. Can be
+// bordered, and have a lighter or darker background.
 .well-item {
   @extend .clearfix;
   padding: 10px;
@@ -114,6 +124,7 @@
     background: #ececec;
   }
 
+// Well footer
 .well-footer {
   border-top: 1px solid $wellBorder;
 
