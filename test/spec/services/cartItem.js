@@ -101,6 +101,16 @@ describe('Service: cartItem', function () {
           ScheduledPaymentDate: '2014-10-12'
         });
       });
+
+      it('should return null if the fee is not scheduled', function() {
+        result.scheduled = false;
+        result.scheduleDate = null;
+
+        expect(result.getApiRequestObject()).toEqual({
+          FinancialRecordId: 'id2',
+          ScheduledPaymentDate: null
+        });
+      });
     });
   });
 
@@ -118,7 +128,6 @@ describe('Service: cartItem', function () {
       expect(result.stockNum).toBe('stock1');
 
       expect(result.isFee).toBe(false);
-      // expect(result.isPayoff).toBe(false);
 
       expect(result.dueDate).toBe('2014-08-01');
       expect(result.scheduled).toBe(false);
@@ -140,6 +149,22 @@ describe('Service: cartItem', function () {
       expect(result.payoff.cpp).toBe(250);
     });
 
+    describe('isPayoff function', function() {
+      it('should return true if the payment is a payoff', function() {
+        var result = CartItem.fromPayment(mockPayment, 'payoff');
+
+        expect(result.isPayoff()).toBe(true);
+      });
+
+      it('should return false if the payment is a curtailment or interest-only payment', function() {
+        var result = CartItem.fromPayment(mockPayment, 'payment');
+        expect(result.isPayoff()).toBe(false);
+
+        result = CartItem.fromPayment(mockPayment, 'interest');
+        expect(result.isPayoff()).toBe(false);
+      });
+    });
+
     describe('getItemType function', function() {
       it('should return "payoff" if the item is a payoff', function() {
         var result = CartItem.fromPayment(mockPayment, 'payoff');
@@ -152,6 +177,12 @@ describe('Service: cartItem', function () {
 
         expect(result.getItemType()).toBe('payment');
       });
+
+      it('should return "interest only" if the item is an interest only payment', function() {
+        var result = CartItem.fromPayment(mockPayment, 'interest');
+
+        expect(result.getItemType()).toBe('interest only');
+      });
     });
 
     describe('getCheckoutAmount function', function() {
@@ -159,6 +190,12 @@ describe('Service: cartItem', function () {
         var result = CartItem.fromPayment(mockPayment, 'payoff');
 
         expect(result.getCheckoutAmount()).toBe(5000);
+      });
+
+      it('should return the interest amount value for an interest-only payment', function() {
+        var result = CartItem.fromPayment(mockPayment, 'interest');
+
+        expect(result.getCheckoutAmount()).toBe(50);
       });
 
       it('should return payment.amount + payment.additionalPrincipal for a curtailment payment (with no params)', function() {
@@ -249,6 +286,16 @@ describe('Service: cartItem', function () {
         expect(result.payment.fees).toBe(20);
         expect(result.payment.interest).toBe(20);
         expect(result.payment.cpp).toBe(20);
+      });
+
+      it('should set the interest-only amounts to the given amounts if item is an interest-only payment', function() {
+        var result = CartItem.fromPayment(mockPayment, 'interest');
+        result.updateAmountsOnDate(amts);
+        expect(result.interest.amount).toBe(20);
+        expect(result.interest.principal).toBe(0);
+        expect(result.interest.fees).toBe(0);
+        expect(result.interest.interest).toBe(20);
+        expect(result.interest.cpp).toBe(0);
       });
     })
   });

@@ -405,6 +405,29 @@ describe("Model: Payments", function () {
       expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
     }));
 
+    it('should add scheduled payments to the queue', function() {
+      var schPayment = {
+        floorplanId: 'floorplan1',
+        vin: 'someVin',
+        stockNumber: 's123',
+        description: 'some description',
+        scheduledDate: '2013-01-08',
+        paymentAmount: 1000,
+        payoffAmount: 6000,
+        principalPayoff: 4000,
+        FeesPayoffTotal: 1000,
+        InterestPayoffTotal: 800,
+        CollateralProtectionPayoffTotal: 200,
+        curtailmentDueDate: '2013-01-01',
+      };
+      spyOn(cartItem, 'fromScheduledPayment').andCallThrough();
+
+      expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe(false);
+      payments.addPaymentToQueue(schPayment, 'payoff', true/*isScheduled*/);
+      expect(cartItem.fromScheduledPayment).toHaveBeenCalled();
+      expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe('payoff');
+    });
+
   });
 
   describe('addFeeToQueue function + isFeeOnQueue', function () {
@@ -805,9 +828,6 @@ describe("Model: Payments", function () {
       expect(httpBackend.flush).not.toThrow();
     });
 
-
-
-
     it('should send the bank account id', function () {
       httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
         data = angular.fromJson(data);
@@ -837,6 +857,22 @@ describe("Model: Payments", function () {
       httpBackend.flush();
       expect(payments.paymentInProgress()).toBe(false);
     });
+
+    it('should grab the api request objects for each cart item', function() {
+      httpBackend.expectPOST('/payment/2_0/make').respond(function () {
+        return [200, stubResponse, {}];
+      });
+      var f = { financialRecordId: 'fee1', getApiRequestObject: angular.noop },
+        p = { id: 'floorplan1', getApiRequestObject: angular.noop };
+
+      spyOn(f, 'getApiRequestObject');
+      spyOn(p, 'getApiRequestObject');
+      payments.checkout([f], [p], {BankAccountId: 'bank1'});
+
+      httpBackend.flush();
+      expect(f.getApiRequestObject).toHaveBeenCalled();
+      expect(p.getApiRequestObject).toHaveBeenCalled();
+    })
   });
 
   describe('requestExtension', function() {

@@ -35,6 +35,13 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
         interest: 1000,
         fees: 1000,
         cpp: 0
+      },
+      interest: {
+        amount: 100,
+        principal: 0,
+        interest: 100,
+        fees: 0,
+        cpp: 0
       }
     };
     paymentOptionsHelper = _paymentOptionsHelper_;
@@ -112,13 +119,22 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       expect(scope.total).toBe(500);
     });
 
-    it('should be set to equal the paymentObject\'s payoff values if the chose option is payoff', function() {
+    it('should be set to equal the paymentObject\'s payoff values if the chosen option is payoff', function() {
       expect(scope.paymentBreakdown).toEqual({});
 
       scope.selector.paymentOption = 'payoff';
       scope.$digest();
       expect(scope.paymentBreakdown).toBe(fromCartItemMock.payoff);
       expect(scope.total).toBe(5000);
+    });
+
+    it('should be set to equal the paymentObject\'s interest-only values if the chosen option is interest-only payment', function() {
+      expect(scope.paymentBreakdown).toEqual({});
+
+      scope.selector.paymentOption = 'interest';
+      scope.$digest();
+      expect(scope.paymentBreakdown).toBe(fromCartItemMock.interest);
+      expect(scope.total).toBe(100);
     });
   });
 

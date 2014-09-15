@@ -153,14 +153,12 @@ angular.module('nextgearWebApp')
         }
       },
       isPaymentOnQueue: function (id) {
-        // console.log('in isPaymentOnQueue fn', paymentQueue.payments[id]);
         var queueItem = paymentQueue.payments[id];
 
         if (!queueItem) {
           return false; // not in queue
         }
         else {
-          // console.log('payment type?', queueItem);
           // payment is on queue, return the payment type.
           return queueItem.paymentOption; // in this case, 'payment' = 'curtailment'
         }
@@ -231,7 +229,6 @@ angular.module('nextgearWebApp')
       checkout: function (fees, payments, bankAccount, unappliedFundsAmt) {
         var shortFees = [],
           shortPayments = [];
-
         angular.forEach(payments, function (payment) {
           shortPayments.push(payment.getApiRequestObject());
         });
