@@ -348,13 +348,24 @@ ul {
 }
 
 .inline-list {
-
   li {
     display: inline-block;
     padding: 10px 20px;
   }
 }
 
+.horizontal-list {
+  margin: 5px 0;
+
+  li {
+    display: inline-block;
+    padding: 0 6px;
+
+    & + li {
+      border-left: 1px solid $highlight;
+    }
+  }
+}
 
 // override Bootstrap; we don't need pointers on labels.
 label {
