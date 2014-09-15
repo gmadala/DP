@@ -191,6 +191,7 @@ select {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 10px solid $highlight;
+    pointer-events: none; // allows select menu to be clickable through arrow
   }
 
   &.auto{
@@ -217,6 +218,8 @@ select {
     }
   }
 
+
+
   select {
     @extend .truncate;
     @include border-radius($borderRadius);
@@ -226,10 +229,17 @@ select {
     font-weight: normal;
     background: $white;
     -webkit-gradient: none;
+    appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
     padding: 4px 15% 4px 9px;
     border: 0;
     margin: 0;
+
+    &::-ms-expand {
+      display: none;
+    }
 
     &:focus {
       @include box-shadow(none);
@@ -680,4 +690,24 @@ input[type="radio"] {
 
 .form-description {
   margin-bottom: 20px;
+}
+
+
+// IE9-SPECIFIC
+.ie9 .style-select {
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    height: 100%;
+    width: 24px;
+    background: $white;
+  }
+
+
+  select { // in ie9, padding on the left pushes the arrow over.
+    padding: 4px 9px;
+  }
 }
