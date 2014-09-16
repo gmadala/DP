@@ -84,7 +84,7 @@
     font-weight: bold;
     padding-right: 20px;
 
-    &:hover {
+    &:hover, &:focus {
       text-decoration: none;
     }
 

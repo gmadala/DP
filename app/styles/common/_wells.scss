@@ -74,11 +74,19 @@
   margin: 0 0 -1px 0;
 }
   .queue-item {
-    padding: 10px;
+    padding: 15px;
     background: $white;
 
     &:nth-child(2n) {
       background: #ececec;
+    }
+
+    .reversed & {
+      background: #ececec;
+
+      &:nth-child(2n) {
+        background: $white;
+      }
     }
 
     & + .queue-item {
@@ -87,6 +95,10 @@
 
     p, h6 {
       margin-bottom: 3px;
+    }
+
+    h5 {
+      margin: 0;
     }
 
     .row-fluid {
@@ -110,7 +122,7 @@
 // bordered, and have a lighter or darker background.
 .well-item {
   @extend .clearfix;
-  padding: 10px;
+  padding: 10px 15px;
 
   &.bordered {
     border-top: 1px solid $wellBorder;
