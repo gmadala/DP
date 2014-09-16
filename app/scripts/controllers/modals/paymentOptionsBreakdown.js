@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
 
     $scope.selector = {
       paymentOption: $scope.paymentObject.paymentOption,
-      additionalAmount: $scope.paymentObject.payment.additionalPrincipal || null
+      additionalAmount: $scope.paymentObject.payment.additionalPrincipal || 0
     };
 
     $scope.$watch('selector.paymentOption', function(newVal) {
