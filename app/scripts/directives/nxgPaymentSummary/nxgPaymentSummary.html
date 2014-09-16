@@ -36,7 +36,9 @@
         <span nxg-icon="icon-cancel" class="icon-small"></span>
       </button>
 
-      <h6 class="lockup-major caps truncate">{{ payment.description }}</h6>
+      <h6 class="lockup-major caps">
+        <a class="truncate" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a>
+      </h6>
       <p>VIN: {{ payment.vin }} </p>
 
       <div class="row-fluid">

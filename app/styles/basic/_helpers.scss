@@ -39,7 +39,7 @@
   }
 }
 
-%heavy {
+%heavy, .heavy {
   font-weight: bold;
 }
 
@@ -62,6 +62,7 @@
 }
 
 .truncate {
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

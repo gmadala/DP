@@ -13,7 +13,8 @@
           <span nxg-icon="icon-cancel" class="icon-small"></span>
         </button>
         <p>Title Request</p>
-        <h6 class="highlight caps">{{ getVehicleDescription(item) }}</h6>
+        <h6 class="highlight caps">
+          <a class="truncate" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ getVehicleDescription(item) }}</a></h6>
         <p>VIN: {{ item.UnitVIN }}</p>
       </li>
     </ul>
