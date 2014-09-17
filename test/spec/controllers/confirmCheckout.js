@@ -31,12 +31,38 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     };
     queue = {
       fees: {
-        'fee1': { id: 'bar1', amount: 1 },
-        'fee2': { id: 'bar2', amount: 1, scheduleDate: new Date() }
+        'fee1': {
+          id: 'bar1',
+          getCheckoutAmount: function() {
+            return 500;
+          },
+          amount: 1
+        },
+        'fee2': {
+          id: 'bar2',
+          getCheckoutAmount: function() {
+            return 60;
+          },
+          amount: 1,
+         scheduleDate: new Date()
+       }
       },
       payments: {
-        'pmt1': { id: 'baz', amount: 10, revenueToTrack: 8 },
-        'pmt2': { id: 'biz', scheduleDate: new Date(), amount: 100, revenueToTrack: 80 }
+        'pmt1': {
+          id: 'baz',
+          getCheckoutAmount: function() {
+            return 1000;
+          },
+          revenueToTrack: 8
+        },
+        'pmt2': {
+          id: 'biz',
+          scheduleDate: new Date(),
+          getCheckoutAmount: function() {
+            return 4000;
+          },
+          revenueToTrack: 80
+        }
       }
     };
     transactionInfo = {
@@ -79,8 +105,18 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     expect(scope.items.paymentsScheduled[0].id).toBe('biz');
   });
 
-  it('should have a function that calculates the total of items paid today', function () {
-    expect(scope.items.todayTotal()).toBe(11);
+  describe('items.getTotals function', function() {
+    it('should exist', function() {
+      expect(scope.items.getTotals).toBeDefined();
+    });
+
+    it('should return an object with totals for payments/fees today and payments/fees that are scheduled', function() {
+      var result = scope.items.getTotals();
+      expect(result.feesToday).toBe(500);
+      expect(result.feesScheduled).toBe(60);
+      expect(result.paymentsToday).toBe(1000);
+      expect(result.paymentsScheduled).toBe(4000);
+    });
   });
 
   describe('items.getStatus function', function () {
@@ -135,55 +171,58 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
 
   });
 
-  it('should attach receipt URLs to the scope if present', function () {
-    expect(scope.receiptUrls.length).toBe(2);
-    expect(scope.receiptUrls[0]).toBe(receipts.getReceiptUrl('abc123'));
-    expect(scope.receiptUrls[1]).toBe(receipts.getReceiptUrl('def456'));
+  describe('receipts logic', function() {
+    it('should attach receipt URLs to the scope if present', function () {
+      expect(scope.receiptUrls.length).toBe(2);
+      expect(scope.receiptUrls[0]).toBe(receipts.getReceiptUrl('abc123'));
+      expect(scope.receiptUrls[1]).toBe(receipts.getReceiptUrl('def456'));
+    });
+
+    it('should not add receipt URLs to the scope if not present', function () {
+      transactionInfo.FinancialTransactionId = null;
+      transactionInfo.UnappliedFundsTransactionId = '';
+      run();
+      expect(scope.receiptUrls.length).toBe(0);
+    });
+
+    it('should not add receipt URLs to the scope if parent object is null', function () {
+      transactionInfo = null;
+      run();
+      expect(scope.receiptUrls.length).toBe(0);
+    });
+
+    it('viewReceipts function should open the receipts in new windows, close modal and transition to the payments state', function () {
+      spyOn(dialog, 'close');
+      spyOn(_window, 'open');
+      spyOn(state, 'transitionTo');
+      scope.viewReceipts();
+      expect(dialog.close).toHaveBeenCalled();
+      expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
+      expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
+      expect(state.transitionTo).toHaveBeenCalledWith('payments');
+    });
   });
 
-  it('should not add receipt URLs to the scope if not present', function () {
-    transactionInfo.FinancialTransactionId = null;
-    transactionInfo.UnappliedFundsTransactionId = '';
-    run();
-    expect(scope.receiptUrls.length).toBe(0);
+  describe('close function', function() {
+    it('close function should close modal', function () {
+      spyOn(dialog, 'close');
+      state.current = { name: 'checkout' };
+      scope.close();
+      expect(dialog.close).toHaveBeenCalled();
+    });
+
+    it('close function should send user to payments page if they remained on checkout during payment submission', function() {
+      state.current = { name: 'checkout' };
+      spyOn(state, 'transitionTo');
+      scope.close();
+      expect(state.transitionTo).toHaveBeenCalledWith('payments');
+    });
+
+    it('close function should not redirect user to payments page if they already navigated elsewhere', function() {
+      state.current = { name: 'receipts' };
+      spyOn(state, 'transitionTo');
+      scope.close();
+      expect(state.transitionTo).not.toHaveBeenCalled();
+    });
   });
-
-  it('should not add receipt URLs to the scope if parent object is null', function () {
-    transactionInfo = null;
-    run();
-    expect(scope.receiptUrls.length).toBe(0);
-  });
-
-  it('viewReceipts function should open the receipts in new windows, close modal and transition to the payments state', function () {
-    spyOn(dialog, 'close');
-    spyOn(_window, 'open');
-    spyOn(state, 'transitionTo');
-    scope.viewReceipts();
-    expect(dialog.close).toHaveBeenCalled();
-    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
-    expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
-    expect(state.transitionTo).toHaveBeenCalledWith('payments');
-  });
-
-  it('close function should close modal', function () {
-    spyOn(dialog, 'close');
-    state.current = { name: 'checkout' };
-    scope.close();
-    expect(dialog.close).toHaveBeenCalled();
-  });
-
-  it('close function should send user to payments page if they remained on checkout during payment submission', function() {
-    state.current = { name: 'checkout' };
-    spyOn(state, 'transitionTo');
-    scope.close();
-    expect(state.transitionTo).toHaveBeenCalledWith('payments');
-  });
-
-  it('close function should not redirect user to payments page if they already navigated elsewhere', function() {
-    state.current = { name: 'receipts' };
-    spyOn(state, 'transitionTo');
-    scope.close();
-    expect(state.transitionTo).not.toHaveBeenCalled();
-  })
-
 });

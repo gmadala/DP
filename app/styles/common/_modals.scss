@@ -59,6 +59,10 @@
   @extend %heavy;
 }
 
+.modal-body-subtitle {
+  color: $text;
+}
+
 /* Some modals require things to go right to the edge,
  * like payment or fee details. Use the extra "to-edge"
  * class for these modals.
@@ -81,7 +85,7 @@
   }
 
   .table-secondary {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   h3 {
