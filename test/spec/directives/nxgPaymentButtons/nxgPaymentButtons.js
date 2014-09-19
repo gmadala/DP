@@ -5,16 +5,18 @@ describe('Directive: nxgPaymentButtons', function () {
   var element,
     scope,
     Payments,
+    PaymentOptions,
     httpBackend;
 
   beforeEach(module('nextgearWebApp', 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'));
 
-  beforeEach(inject(function (_Payments_, $httpBackend) {
+  beforeEach(inject(function (_Payments_, _PaymentOptions_, $httpBackend) {
     httpBackend = $httpBackend;
     httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
     httpBackend.expectGET('views/modals/cancelPayment.html').respond('<div></div>');
 
     Payments = _Payments_;
+    PaymentOptions = _PaymentOptions_;
   }));
 
   describe('fee mode', function () {
@@ -225,21 +227,9 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a button that toggles payment presence in the payment queue', function() {
-      spyOn(Payments, 'addPaymentToQueue');
-      spyOn(Payments, 'removePaymentFromQueue');
-
+      expect(Payments.isPaymentOnQueue(scope.myPayment.FloorplanId)).toBeFalsy();
       iScope.togglePaymentInQueue(false);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
-        scope.myPayment,
-        'payment'
-      );
-
-      scope.$apply(function () {
-        scope.inQueue = 'payment';
-      });
-
-      iScope.togglePaymentInQueue(false);
-      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
+      expect(Payments.isPaymentOnQueue(scope.myPayment.FloorplanId)).toEqual(PaymentOptions.TYPE_PAYMENT);
     });
 
     it('should auto-remove a vehicle payoff from the queue if adding a curtailment payment for that vehicle instead', function() {
@@ -252,7 +242,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       iScope.togglePaymentInQueue(false);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, 'payment');
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, false);
     });
   });
 
@@ -350,12 +340,12 @@ describe('Directive: nxgPaymentButtons', function () {
     it('should add the payment if the user ends up cancelling the scheduled payment', inject(function($q, $rootScope) {
       spyOn(iScope, 'cancelScheduledPayment').andReturn($q.when(true));
 
-      spyOn(Payments, 'addPaymentToQueue').andCallThrough();
+      spyOn(Payments, 'addPaymentTypeToQueue').andCallThrough();
       iScope.togglePaymentInQueue(false);
       $rootScope.$digest();
 
       expect(iScope.cancelScheduledPayment).toHaveBeenCalled();
-      expect(Payments.addPaymentToQueue).toHaveBeenCalled();
+      expect(Payments.addPaymentTypeToQueue).toHaveBeenCalled();
     }));
 
     it('should not add the payment if the user does not cancel the previously scheduled payment (ie. clicks No)', inject(function($q, $rootScope) {
@@ -403,7 +393,6 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a button that toggles payoff presence in the payment queue', function() {
-      spyOn(Payments, 'addPaymentToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
       iScope.togglePaymentInQueue(true);
@@ -412,15 +401,11 @@ describe('Directive: nxgPaymentButtons', function () {
       });
 
       iScope.togglePaymentInQueue(true);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
-        scope.myPayment,
-        'payoff'
-      );
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
     it('should auto-remove a vehicle curtailment payment from the queue if adding a payoff for that vehicle instead', function() {
-      spyOn(Payments, 'addPaymentToQueue');
+      spyOn(Payments, 'addPayoffToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
       scope.$apply(function() {
@@ -429,7 +414,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       iScope.togglePaymentInQueue(true);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, 'payoff');
+      expect(Payments.addPayoffToQueue).toHaveBeenCalledWith(scope.myPayment, false);
     });
   });
 

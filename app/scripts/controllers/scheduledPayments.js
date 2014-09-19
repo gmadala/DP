@@ -109,7 +109,7 @@ angular.module('nextgearWebApp')
       },
 
       payOff: function(p) {
-        Payments.addPaymentToQueue(p, true/* asPayoff*/, true/* isScheduled */);
+        Payments.addPayoffToQueue(p, true /* isScheduled */);
       },
 
       cancelPayment: function(payment) {

@@ -7,13 +7,15 @@ describe("Model: Payments", function () {
   var payments,
     httpBackend,
     urlParser,
-    cartItem;
+    cartItem,
+    PaymentOptions;
 
-  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem) {
+  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem, _PaymentOptions_) {
     payments = Payments;
     httpBackend = $httpBackend;
     urlParser = URLParser;
     cartItem = CartItem;
+    PaymentOptions = _PaymentOptions_;
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
@@ -378,8 +380,8 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(payment, 'payment');
-      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payment');
+      payments.addPaymentToQueue(payment, false);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(PaymentOptions.TYPE_PAYMENT);
     });
 
     it('should add payoffs to the queue', function () {
@@ -394,9 +396,9 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(payment, 'payoff')
+      payments.addPayoffToQueue(payment, false);
 
-      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payoff');
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(PaymentOptions.TYPE_PAYOFF);
     });
 
     it('should track payments/payoffs being added to the queue', inject(function (segmentio) {
@@ -565,7 +567,7 @@ describe("Model: Payments", function () {
       expect(queue.isEmpty()).toBe(false);
 
       payments.removeFeeFromQueue('finId1');
-      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, 'payment');
+      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, false);
       expect(queue.isEmpty()).toBe(false);
 
       payments.removePaymentFromQueue('floorId1');
@@ -576,11 +578,9 @@ describe("Model: Payments", function () {
 
   describe('getPaymentFromQueue function', function() {
     it('should return the cartItem object for that floorplan id', function() {
-      var queue = payments.getPaymentQueue();
-
       payments.addPaymentToQueue({ FloorplanId: 'testId' }, false);
       var result = payments.getPaymentFromQueue('testId');
-      expect(result.getItemType).toBeDefined();
+      expect(result).toBeDefined();
     });
   });
 

@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, $timeout, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan) {
+  .controller('CheckoutCtrl',
+  function ($scope, $q, $dialog, $timeout, protect, moment,
+            messages, User, Payments, OptionDefaultHelper,
+            api, Floorplan, PaymentOptions) {
+
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -197,7 +201,7 @@ angular.module('nextgearWebApp')
       // Grab payments to override addresses for
       var paymentsToOverride = [];
       _.each(payments, function(p) {
-        if (p.paymentOption === 'payoff' && p.overrideAddress && p.overrideAddress !== null) {
+        if (p.isPayoff() && p.overrideAddress && p.overrideAddress !== null) {
           paymentsToOverride.push(p);
         }
       });
@@ -249,7 +253,7 @@ angular.module('nextgearWebApp')
 
                 angular.forEach($scope.paymentQueue.contents.payments, function (item) {
                   if (!item.scheduleDate) { // if it isn't already scheduled...
-                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.paymentOptions === 'payoff'));
+                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
 
                     // set the scheduled date to the next available business day.
                     item.scheduleDate = nextAvail;
@@ -307,7 +311,7 @@ angular.module('nextgearWebApp')
       });
       angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
         if(!payment.scheduleDate) {
-          paymentIds.push(payment.stockNum + '|' + (payment.paymentOptions === 'payoff' ? '1' : '0'));
+          paymentIds.push(payment.stockNum + '|' + (payment.isPayoff() ? '1' : '0'));
         }
       });
 
@@ -322,5 +326,24 @@ angular.module('nextgearWebApp')
       var strUrl = api.contentLink('/report/payment/summary/paymentsSummary', params);
 
       window.open(strUrl, '_blank' /*open in a new window*/);
+    };
+
+    $scope.getPaymentTypeText = function(payment) {
+      var text;
+
+      switch(payment.paymentOption) {
+      case PaymentOptions.TYPE_PAYMENT:
+        text = 'payment';
+        break;
+      case PaymentOptions.TYPE_PAYOFF:
+        text = 'payoff';
+        break;
+      case PaymentOptions.TYPE_INTEREST:
+        text = 'interest only';
+        break;
+      default:
+        text = '_invalid payment type_';
+      }
+      return text;
     };
   });

@@ -164,7 +164,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
           return shouldBeOnQueue;
         });
       spyOn(Payments, 'getPaymentFromQueue').andReturn(fromCartItemMock);
-      spyOn(Payments, 'addPaymentToQueue').andReturn();
+      spyOn(Payments, 'addPaymentTypeToQueue').andReturn();
     }));
 
     it('should do nothing if the form is invalid', function() {
@@ -190,7 +190,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
       scope.confirm();
       expect(Payments.isPaymentOnQueue).toHaveBeenCalled();
-      expect(Payments.addPaymentToQueue).toHaveBeenCalled();
+      expect(Payments.addPaymentTypeToQueue).toHaveBeenCalled();
       expect(Payments.getPaymentFromQueue).toHaveBeenCalled();
     });
 
@@ -227,7 +227,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
       scope.confirm();
       expect(Payments.isPaymentOnQueue).toHaveBeenCalled();
-      expect(Payments.addPaymentToQueue).not.toHaveBeenCalled();
+      expect(Payments.addPaymentTypeToQueue).not.toHaveBeenCalled();
     });
 
     it('should add any additional principal amount to the payment object if it is a payment', function() {

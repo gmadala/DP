@@ -41,7 +41,7 @@
 
       <div class="item-summary">
         <div class="row-fluid">
-          <h6 class="span6 caps">{{ payment.getItemType() | capitalize }}: </h6>
+          <h6 class="span6 caps">{{ getPaymentType(payment) | capitalize }}: </h6>
           <h6 class="span6 numeric">{{ payment.getCheckoutAmount(true) | currency }}
           </h6>
         </div>

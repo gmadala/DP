@@ -94,6 +94,7 @@ describe('Controller: ScheduledCtrl', function () {
         return true;
       },
       addPaymentToQueue: angular.noop,
+      addPayoffToQueue: angular.noop,
       paymentInProgress: angular.noop
     },
     mockPayment = {
@@ -305,9 +306,9 @@ describe('Controller: ScheduledCtrl', function () {
   });
 
   it('should have a payOff function to add a payoff to the payment queue', function() {
-    spyOn(paymentsMock, 'addPaymentToQueue').andReturn();
+    spyOn(paymentsMock, 'addPayoffToQueue').andReturn();
     scope.scheduledPayments.payOff(mockPayment);
-    expect(paymentsMock.addPaymentToQueue).toHaveBeenCalled();
+    expect(paymentsMock.addPayoffToQueue).toHaveBeenCalled();
   });
 
   it('should have a cancelPayment function that opens a dialog', function() {

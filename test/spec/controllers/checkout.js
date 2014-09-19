@@ -595,11 +595,11 @@ describe('Controller: CheckoutCtrl', function () {
         contents: {
           payments: [
             { overrideAddress: null,
-              isPayoff: false
+              isPayoff: function() { return false; }
             },
             {
               overrideAddress: 'new address',
-              isPayoff: true
+              isPayoff: function() { return true; }
             }
           ]
         }
@@ -708,7 +708,7 @@ describe('Controller: CheckoutCtrl', function () {
           description: 'desc123',
           amount: 456,
           dueDate: '2013-01-20',
-          isPayoff: false,
+          isPayoff: function() { return false; },
           getCheckoutAmount: function() {
             return this.amount;
           }

@@ -131,7 +131,7 @@
               </td>
               <td class="numeric split">
                 <div class="split-cell">
-                  <p class="lockup-major"><span class="sub-label">{{ payment.getItemType() | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
+                  <p class="lockup-major"><span class="sub-label">{{ getPaymentTypeText(payment) | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
                   <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
                           ng-click="paymentQueue.removePayment(payment.id)"

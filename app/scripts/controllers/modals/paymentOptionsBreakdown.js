@@ -15,7 +15,8 @@
  *
 */
 angular.module('nextgearWebApp')
-  .controller('PaymentOptionsBreakdownCtrl', function ($scope, dialog, paymentOptionsHelper, Payments, object, isOnQueue) {
+  .controller('PaymentOptionsBreakdownCtrl', function ($scope, dialog, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue) {
+    $scope.PaymentOptions = PaymentOptions;
 
     $scope.paymentObject = isOnQueue ? paymentOptionsHelper.fromCartItem(object) : paymentOptionsHelper.fromVehicleDetails(object);
 
@@ -29,12 +30,16 @@ angular.module('nextgearWebApp')
     };
 
     $scope.$watch('selector.paymentOption', function(newVal) {
-      if(newVal === 'payoff') {
+      switch (newVal) {
+      case PaymentOptions.TYPE_PAYOFF:
         $scope.paymentBreakdown = $scope.paymentObject.payoff;
-      } else if (newVal === 'payment') {
+        break;
+      case PaymentOptions.TYPE_PAYMENT:
         $scope.paymentBreakdown = $scope.paymentObject.payment;
-      } else if (newVal === 'interest') {
+        break;
+      case PaymentOptions.TYPE_INTEREST:
         $scope.paymentBreakdown = $scope.paymentObject.interest;
+        break;
       }
       $scope.total = $scope.paymentBreakdown.principal + $scope.paymentBreakdown.interest + $scope.paymentBreakdown.fees + $scope.paymentBreakdown.cpp;
     });
@@ -80,8 +85,7 @@ angular.module('nextgearWebApp')
           $scope.paymentObject.originalObject.Scheduled = false;
           $scope.paymentObject.originalObject.ScheduledPaymentDate = null;
         }
-
-        Payments.addPaymentToQueue($scope.paymentObject.originalObject, $scope.selector.paymentOption);
+        Payments.addPaymentTypeToQueue($scope.paymentObject.originalObject, $scope.selector.paymentOption);
       }
 
       // grab the original cartItem object, so that our changes are saved.

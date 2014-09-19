@@ -81,11 +81,6 @@ describe('Service: cartItem', function () {
       expect(result.scheduleDate).not.toBeDefined();
     });
 
-    it('should have a getItemType function that returns "fee"', function() {
-      expect(typeof result.getItemType).toBe('function');
-      expect(result.getItemType()).toBe('fee');
-    });
-
     it('should have a getCheckoutAmount function that returns the fee balance', function() {
       expect(typeof result.getCheckoutAmount).toBe('function');
       expect(result.getCheckoutAmount()).toBe(500);
@@ -162,26 +157,6 @@ describe('Service: cartItem', function () {
 
         result = CartItem.fromPayment(mockPayment, 'interest');
         expect(result.isPayoff()).toBe(false);
-      });
-    });
-
-    describe('getItemType function', function() {
-      it('should return "payoff" if the item is a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, 'payoff');
-
-        expect(result.getItemType()).toBe('payoff');
-      });
-
-      it('should return "payment" if the item is a curtailment payment', function() {
-        var result = CartItem.fromPayment(mockPayment, 'payment');
-
-        expect(result.getItemType()).toBe('payment');
-      });
-
-      it('should return "interest only" if the item is an interest only payment', function() {
-        var result = CartItem.fromPayment(mockPayment, 'interest');
-
-        expect(result.getItemType()).toBe('interest only');
       });
     });
 

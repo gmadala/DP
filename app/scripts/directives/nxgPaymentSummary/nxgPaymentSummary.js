@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric) {
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions) {
     //not showing up in html even though it's on rootScope. Adding here.
     $scope.metric = metric;
     $scope.navigate = $state.transitionTo;
@@ -56,6 +56,25 @@ angular.module('nextgearWebApp')
         total += payment.getCheckoutAmount();
       });
       return total;
+    };
+
+    $scope.getPaymentType = function(payment) {
+      var text;
+
+      switch(payment.paymentOption) {
+      case PaymentOptions.TYPE_PAYMENT:
+        text = 'payment';
+        break;
+      case PaymentOptions.TYPE_PAYOFF:
+        text = 'payoff';
+        break;
+      case PaymentOptions.TYPE_INTEREST:
+        text = 'interest only';
+        break;
+      default:
+        text = '_invalid payment type_';
+      }
+      return text;
     };
 
   });

@@ -12,19 +12,19 @@
 
     <ul class="form-block">
       <li class="cr-inline">
-        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payoff" id="paymentOptionPayoff" required />
+        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYOFF" id="paymentOptionPayoff" required />
         <label class="radio-img" for="paymentOptionPayoff"></label>
         <label class="cr-label" for="paymentOptionPayoff">
           <strong>{{ paymentObject.payoff.amount | currency }}</strong> – Payoff this vehicle
         </label>
       </li>
       <li class="cr-inline">
-        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="payment" id="paymentOptionCurtailment" required />
+        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYMENT" id="paymentOptionCurtailment" required />
         <label class="radio-img" for="paymentOptionCurtailment"></label>
         <label class="cr-label" for="paymentOptionCurtailment">
           <strong>{{ paymentObject.payment.amount | currency }}</strong> – Curtailment Payment
         </label>
-        <div class="form-row" ng-show="selector.paymentOption == 'payment' && (maxAdditional > 0.01)">
+        <div class="form-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
           <div class="input-prepend dollar">
             <span class="add-on">$</span>
             <input type="text"
@@ -50,7 +50,7 @@
       </li>
 
       <li class="cr-inline">
-        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" value="interest" id="paymentOptionInterest" required />
+        <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_INTEREST" id="paymentOptionInterest" required />
         <label class="radio-img" for="paymentOptionInterest"></label>
         <label class="cr-label" for="paymentOptionInterest">
           <strong>{{ paymentObject.interest.amount | currency }}</strong> – Interest-Only Payment
@@ -67,7 +67,7 @@
         <p class="span8">Principal:</p>
         <p class="span4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
-      <li class="list-table-row" ng-show="selector.paymentOption == 'payment' && selector.additionalAmount">
+      <li class="list-table-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && selector.additionalAmount">
         <p class="span8">Additional Principal:</p>
         <p class="span4 value numeric">{{ selector.additionalAmount | currency }}</p>
       </li>

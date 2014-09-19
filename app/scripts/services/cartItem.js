@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .service('CartItem', function(VehicleCartItem, FeeCartItem) {
+  .service('CartItem', function(VehicleCartItem, FeeCartItem, PaymentOptions) {
 
     var CartItem = {
       fromPayment: function(p, paymentType) {
@@ -21,15 +21,14 @@ angular.module('nextgearWebApp')
           FeesPayoffTotal: sp.FeesPayoffTotal,
           InterestPayoffTotal: sp.InterestPayoffTotal,
           CollateralProtectionPayoffTotal: sp.CollateralProtectionPayoffTotal,
-          // what about curtailment payment #s???
+          // TODO: Waiting on Leaf to provide spec update
           // AmountDue:
           // PrincipalPayment:
           // FeesPaymentTotal: sp.FeesPayoffTotal,
           // InterestPaymentTotal: sp.InterestPayoffTotal,
           // CollateralProtectionPaymentTotal: sp.CollateralProtectionPayoffTotal
         };
-
-        return new VehicleCartItem(scheduledPayment, 'payoff'); // has to be a payoff (?)
+        return new VehicleCartItem(scheduledPayment, PaymentOptions.TYPE_PAYOFF); // has to be a payoff (?)
       },
       fromFee: function(f) {
         return new FeeCartItem(f);
@@ -52,9 +51,6 @@ angular.module('nextgearWebApp')
 
     // FeeCartItem & VehicleCartItem should have the same functions for getting item type, checkout amount, request object, etc.
     FeeCartItem.prototype = {
-      getItemType: function() {
-        return 'fee';
-      },
       getCheckoutAmount: function() {
         return this.amount;
       },
@@ -68,7 +64,7 @@ angular.module('nextgearWebApp')
 
     return FeeCartItem;
   })
-  .factory('VehicleCartItem', function(api) {
+  .factory('VehicleCartItem', function(api, PaymentOptions) {
     // payment type can be 'payment' (curtailment), 'payoff', or 'interest'
     var VehicleCartItem = function(item, paymentType) {
 
@@ -114,9 +110,9 @@ angular.module('nextgearWebApp')
       getCheckoutAmount: function(noAdditionalPrincipal) { // if true, exclude additionalPrincipal
         var amt;
 
-        if (this.paymentOption === 'payoff') {
+        if (this.paymentOption === PaymentOptions.TYPE_PAYOFF) {
           amt = this.payoff.amount;
-        } else if (this.paymentOption === 'interest') {
+        } else if (this.paymentOption === PaymentOptions.TYPE_INTEREST) {
           amt = this.interest.interest;
         } else {
           if (noAdditionalPrincipal) {
@@ -129,30 +125,23 @@ angular.module('nextgearWebApp')
         return amt;
       },
       getExtraPrincipal: function() {
-        if(this.paymentOption !== 'payment') {//this.isPayoff || this.isInterestOnly || this.payment.additionalPrincipal === 0) {
+        if(this.paymentOption !== PaymentOptions.TYPE_PAYMENT) {//this.isPayoff || this.isInterestOnly || this.payment.additionalPrincipal === 0) {
           return 0;
         } else {
           return this.payment.additionalPrincipal;
         }
       },
-      getItemType: function() {
-        if (this.paymentOption === 'interest') {
-          return 'interest only';
-        } else {
-          return this.paymentOption;
-        }
-      },
       isPayoff: function() {
-        return this.paymentOption === 'payoff';
+        return this.paymentOption === PaymentOptions.TYPE_PAYOFF;
       },
       updateAmountsOnDate: function(amts) {
-        if(this.paymentOption === 'payoff') {
+        if(this.paymentOption === PaymentOptions.TYPE_PAYOFF) {
           this.payoff.amount = amts.PaymentAmount;
           this.payoff.principal = amts.PrincipalAmount;
           this.payoff.fees = amts.FeeAmount;
           this.payoff.interest = amts.InterestAmount;
           this.payoff.cpp = amts.CollateralProtectionAmount;
-        } else if (this.paymentOption === 'interest') {
+        } else if (this.paymentOption === PaymentOptions.TYPE_INTEREST) {
           this.interest.amount = amts.InterestAmount;
           this.interest.principal = 0;
           this.interest.fees = 0;
@@ -170,9 +159,9 @@ angular.module('nextgearWebApp')
         return {
           FloorplanId: this.id,
           ScheduledPaymentDate: api.toShortISODate(this.scheduleDate) || null,
-          IsPayoff: this.paymentOption === 'payoff',
-          IsInterestOnly: this.paymentOption === 'interest',
-          AdditionalPrincipalAmount: this.paymentOption === 'payment' ? this.payment.additionalPrincipal : 0
+          IsPayoff: this.paymentOption === PaymentOptions.TYPE_PAYOFF,
+          IsInterestOnly: this.paymentOption === PaymentOptions.TYPE_INTEREST,
+          AdditionalPrincipalAmount: this.paymentOption === PaymentOptions.TYPE_PAYMENT ? this.payment.additionalPrincipal : 0
         };
       }
     };

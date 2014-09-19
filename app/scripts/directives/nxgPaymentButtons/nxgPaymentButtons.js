@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
           scope.onCancelScheduledPayment = null;
         }
       },
-      controller: function($scope, $dialog, Payments, metric) {
+      controller: function($scope, $dialog, Payments, metric, PaymentOptions) {
         //set on $rootScope, but for some reason, not available unless explicitly set here
         $scope.metric = metric;
 
@@ -57,29 +57,32 @@ angular.module('nextgearWebApp')
 
         $scope.togglePaymentInQueue = function (asPayoff) {
           var p = $scope.item,
-            paymentType = asPayoff ? 'payoff' : 'payment';
+            paymentType = asPayoff ? PaymentOptions.TYPE_PAYOFF : PaymentOptions.TYPE_PAYMENT;
 
-          if ($scope.onQueue === false) { // if it's not on the queue
-            if(p.Scheduled) {
-              // if it's already scheduled as a payment or payoff, we want to auto-cancel
-              // the scheduled payment and add the new payment or payoff.
-              $scope.cancelScheduledPayment().then(function(wasCancelled) {
-                if(wasCancelled) {
-                  Payments.addPaymentToQueue(p, paymentType);
-                }
-              });
-            } else {
-              Payments.addPaymentToQueue(p, paymentType);
-            }
-          } else {
-            // Regardless, we still want to remove the original payment.
+          // onQueue can be: payment, payoff or false
+          if ($scope.onQueue) {
             Payments.removePaymentFromQueue(p.FloorplanId);
 
-            if($scope.onQueue === 'payment' && asPayoff) {
-              Payments.addPaymentToQueue(p, paymentType);
-            } else if ($scope.onQueue === 'payoff' && !asPayoff) {
-              Payments.addPaymentToQueue(p, paymentType);
+            if (asPayoff) {
+              if ($scope.onQueue === PaymentOptions.TYPE_PAYMENT) {
+                Payments.addPayoffToQueue(p, false /* not a scheduled payment object */);
+              }
             }
+            else if ($scope.onQueue === PaymentOptions.TYPE_PAYOFF) {
+              Payments.addPaymentToQueue(p, false /* not a scheduled payment object */);
+            }
+          }
+          else if (p.Scheduled) {
+            // if it's already scheduled as a payment or payoff, we want to auto-cancel
+            // the scheduled payment and add the new payment or payoff.
+            $scope.cancelScheduledPayment().then(function(wasCancelled) {
+              if (wasCancelled) {
+                Payments.addPaymentTypeToQueue(p, paymentType);
+              }
+            });
+          }
+          else {
+            Payments.addPaymentTypeToQueue(p, paymentType);
           }
         };
 
