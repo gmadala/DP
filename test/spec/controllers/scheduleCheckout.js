@@ -185,7 +185,6 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     it('should set submitInProgress to true', function () {
       spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
-      debugger;
       scope.finalize();
       expect(scope.submitInProgress).toBe(true);
     });
