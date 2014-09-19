@@ -315,8 +315,27 @@ describe('Controller: ScheduledCtrl', function () {
     expect(typeof scope.scheduledPayments.cancelPayment).toBe('function');
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-    scope.scheduledPayments.cancelPayment();
+
+    scope.scheduledPayments.cancelPayment({
+      webScheduledPaymentId: '1234',
+      vin: 'vin1',
+      description: 'description',
+      stockNumber: 's#',
+      scheduledDate: '2014-10-02',
+      isCurtailment: true,
+      payoffAmount: 1000,
+      paymentAmount: 100
+    });
     expect(dialog.dialog).toHaveBeenCalled();
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.webScheduledPaymentId).toBe('1234');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.vin).toBe('vin1');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.description).toBe('description');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.stockNumber).toBe('s#');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2014-10-02');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(false);
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(1000);
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(100);
+    expect(typeof dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBe('function');
   });
 
   it('should have a cancelFee function that opens a dialog', function() {
@@ -324,8 +343,22 @@ describe('Controller: ScheduledCtrl', function () {
     expect(typeof scope.scheduledPayments.cancelFee).toBe('function');
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-    scope.scheduledPayments.cancelFee();
+    scope.scheduledPayments.cancelFee({
+      WebScheduledAccountFeeId: '1234',
+      FinancialRecordId: 'fId',
+      FeeType: 'a type of fee',
+      Description: 'description',
+      ScheduledDate: '2014-10-02',
+      Balance: 100
+    });
     expect(dialog.dialog).toHaveBeenCalled();
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('1234');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.financialRecordId).toBe('fId');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.feeType).toBe('a type of fee');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.description).toBe('description');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.scheduledDate).toBe('2014-10-02');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.balance).toBe(100);
+    expect(typeof dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBe('function');
   });
 
   it('should have a paymentInProgress method', function() {
