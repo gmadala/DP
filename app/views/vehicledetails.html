@@ -394,7 +394,7 @@
         </div>
       </div>
     </div>
-    <div class="well-item">
+    <div class="well-item inset">
       <h4>Next payment due {{ financialSummary.NextPaymentDueDate | moment }}</h4>
       <div class="payment-btn-block" ng-show="dataLoaded">
         <div class="btn-text-group">
@@ -403,11 +403,24 @@
         </div>
         <div class="btn-text-group">
           <h6 class="btn-text">Payoff:</h6>
-          <div class="btn-btn" nxg-payment-buttons="payoff" item="payoffForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
+          <div class="btn-btn" nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
         </div>
       </div>
+      <div class="row-fluid" ng-show="getAdditionalPrincipal() > 0">
+        <h6 class="span8">Additional Principal</h6>
+        <h6 class="span4 numeric">{{ getAdditionalPrincipal() | currency }}</h6>
+        <br/>
+      </div>
+      <button class="btn-unstyle btn-link right" ng-show="showAddPrincipalLink()" ng-click="launchPaymentOptions()">
+        {{ (getAdditionalPrincipal() > 0) && 'Edit Additional Principal' || 'Add Additional Principal?' }}
+      </button>
     </div>
 
+    <div class="well-item aside" ng-show="dataLoaded">
+      <a class="featured block" href="javascript:void(0)" ng-click="launchPaymentOptions()">
+        Payment Options &amp; Breakdown
+      </a>
+    </div>
     <button class="btn-cta cta-primary cta-full" ng-disabled="paymentQueue.isEmpty()"
         ng-click="goToCheckout()">
       <span class="paired-body">Checkout <span ng-show="paymentQueue.getQueueCount() > 0">({{ paymentQueue.getQueueCount() }})</span></span>

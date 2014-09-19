@@ -20,17 +20,17 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       close: angular.noop
     };
     payment = {
-      floorplanId: 'floorplan123',
+      id: 'floorplan123',
       dueDate: '2013-09-30',
-      isPayment: true,
-      isFee: false
+      isFee: false,
+      updateAmountsOnDate: angular.noop
     };
 
     fee = {
       financialRecordId: 'feeId',
       dueDate: '2013-09-29',
       isFee: true,
-      isPayment: false
+      updateAmountsOnDate: angular.noop
     };
 
     possibleDates = {
@@ -198,7 +198,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     it('should pass the floorplan Id', function () {
       spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
       scope.finalize();
-      expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[0].floorplanId).toBe('floorplan123');
+      expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[0].id).toBe('floorplan123');
     });
 
     it('should pass the provided date if present', function () {

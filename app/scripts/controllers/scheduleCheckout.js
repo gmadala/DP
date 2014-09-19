@@ -53,7 +53,10 @@ angular.module('nextgearWebApp')
     };
 
     $scope.finalize = function (scheduleDate) {
-      if(item.isPayment) {
+      if (item.isFee){
+        item.scheduleDate = scheduleDate;
+        dialog.close();
+      } else {
         $scope.submitInProgress = true;
         // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
         Payments.updatePaymentAmountOnDate(item, scheduleDate || new Date(), item.isPayoff).then(
@@ -65,9 +68,6 @@ angular.module('nextgearWebApp')
             $scope.submitInProgress = false;
           }
         );
-      } else {
-        item.scheduleDate = scheduleDate;
-        dialog.close();
       }
     };
 

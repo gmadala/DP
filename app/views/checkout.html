@@ -101,7 +101,7 @@
                 <p class="lockup-minor caps vin">VIN: {{ payment.vin }}</p>
                 <p class="lockup-minor caps stock">STK: {{ payment.stockNum }}</p>
 
-                <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                <div nxg-alternate-address="payment" enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
               </td>
               <td>
                 <!-- is not scheduled or is scheduled for today -->
@@ -131,31 +131,21 @@
               </td>
               <td class="numeric split">
                 <div class="split-cell">
-                  <p class="lockup-major">{{ payment.amount | currency }}</p>
+                  <p class="lockup-major"><span class="sub-label">{{ getPaymentTypeText(payment) | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
+                  <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
+                          ng-click="paymentQueue.removePayment(payment.id)"
                           ng-disabled="submitInProgress"
                           nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}">
                     Remove
                   </button>
                 </div>
                 <div class="split-cell">
-                  <ul class="list-table mini">
-                    <li class="list-table-row">
-                      <p class="span6">Principal:</p><p class="span6 numeric">{{payment.principal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6">Interest:</p><p class="span6 numeric">{{payment.interestTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6">Fee(s):</p><p class="span6 numeric">{{payment.feesTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row" ng-show="payment.collateralTotal > 0">
-                      <p class="span6">CPP:</p><p class="span6 numeric">{{payment.collateralTotal | currency}}</p>
-                    </li>
-                  </ul>
+                  <button class="btn-unstyle btn-link numeric" ng-click="launchPaymentOptions(payment)">
+                    Payment Options<br/> & Breakdown
+                  </button>
                 </div>
-                <!-- <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label> -->
+                <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
               </td>
             </tr>
           </table>

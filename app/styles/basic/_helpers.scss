@@ -52,6 +52,11 @@
   font-size: $small-font-size;
 }
 
+.emphasis {
+  font-style: italic;
+  margin-bottom: 3px;
+}
+
 .highlight {
   color: $highlight;
 }
