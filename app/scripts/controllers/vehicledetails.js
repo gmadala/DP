@@ -387,7 +387,9 @@ angular.module('nextgearWebApp')
         // Grab data for value info section
         // ================================
         $scope.valueInfo = details.ValueInfo;
-        $scope.showMMR = true; // TODO: Determine what needs to be true in order to show MMR. (VO-2808)
+
+        // If any MMR value is 0, don't show MMR values.
+        $scope.showMMR = (details.ValueInfo.MmrExcellentValue > 0) && (details.ValueInfo.MmrGoodValue > 0) && (details.ValueInfo.MmrAverageValue > 0) && (details.ValueInfo.MmrFairValue > 0);
 
         // Grab data for vehicle info section
         // ==================================
