@@ -18,7 +18,7 @@
       </button>
 
       <h6>{{ fee.description }}</h6>
-      <div class="row-fluid">
+      <div class="row-fluid item-summary">
         <div class="span6">
           <h6 class="caps">Amount:</h6>
         </div>
@@ -36,15 +36,21 @@
         <span nxg-icon="icon-cancel" class="icon-small"></span>
       </button>
 
-      <h6 class="lockup-major caps truncate">{{ payment.description }}</h6>
+      <h6 class="lockup-major caps">
+        <a class="truncate" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a>
+      </h6>
       <p>VIN: {{ payment.vin }} </p>
 
-      <div class="row-fluid">
-        <h6 class="span6 caps">
-          <span ng-show="payment.isPayoff">Payoff</span>
-          <span ng-show="!payment.isPayoff">Payment</span>
-        </h6>
-        <h6 class="span6">{{ payment.amount | currency }}</h6>
+      <div class="item-summary">
+        <div class="row-fluid">
+          <h6 class="span6 caps">{{ getPaymentType(payment) | capitalize }}: </h6>
+          <h6 class="span6 numeric">{{ payment.getCheckoutAmount(true) | currency }}
+          </h6>
+        </div>
+        <div class="row-fluid" ng-show="payment.getExtraPrincipal() > 0">
+          <p class="span8 caps">ADDITIONAL PRINCIPAL: </p>
+          <p class="span4 numeric">{{ payment.getExtraPrincipal() | currency }}</p>
+        </div>
       </div>
       <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
     </li>

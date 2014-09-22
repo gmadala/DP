@@ -159,6 +159,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
           isEmpty: angular.noop
         }
       },
+      getPaymentFromQueue: angular.noop,
+      isPaymentOnQueue: angular.noop,
       requestExtension: angular.noop
     };
 
@@ -196,7 +198,6 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     expect(scope.paymentQueue).toBeDefined();
     expect(scope.paymentForCheckout).toBeDefined();
-    expect(scope.payoffForCheckout).toBeDefined();
   });
 
   it('should attach the necessary variables to the overall scope', function() {
@@ -213,6 +214,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
   describe('controller-wide functions', function() {
     beforeEach(inject(function($httpBackend) {
       $httpBackend.whenGET('views/modals/paymentExtension.html').respond('<div></div>');
+      $httpBackend.whenGET('views/modals/paymentOptionsBreakdown.html').respond('<div></div>');
     }));
 
     it('should have a paymentQueue.getQueueCount function to return the length of the queue', function() {
@@ -242,6 +244,73 @@ describe('Controller: VehicleDetailsCtrl', function () {
           Vin: detailsMock.VehicleInfo.UnitVin,
           UnitDescription: detailsMock.VehicleInfo.Description
         });
+      });
+    });
+
+    it('should have a showAddPrincipalLink function that controls the display of the additional principal link', function() {
+      expect(scope.showAddPrincipalLink()).toBe(false);
+      spyOn(paymentsMock, 'isPaymentOnQueue').andCallFake(function() {
+        return 'payment';
+      });
+      expect(scope.showAddPrincipalLink()).toBe(true);
+    });
+
+    describe('getAdditionalPrincipal function', function() {
+      it('should return 0 if the payment is not on the queue', function() {
+        spyOn(paymentsMock, 'isPaymentOnQueue').andReturn(false);
+        expect(scope.getAdditionalPrincipal()).toBe(0);
+      });
+
+      it('should return the additionalPrincipal value if the payment is on the queue', function() {
+        spyOn(paymentsMock, 'isPaymentOnQueue').andReturn('payment');
+        spyOn(paymentsMock, 'getPaymentFromQueue').andCallFake(function(){
+          return {
+            payment: {
+              additionalPrincipal: 55
+            }
+          };
+        });
+        expect(scope.getAdditionalPrincipal()).toBe(55);
+      });
+    });
+
+    describe('launchPaymentOptions function', function() {
+      beforeEach(function() {
+        spyOn(dialog, 'dialog').andReturn({
+          open: angular.noop
+        });
+
+        spyOn(paymentsMock, 'getPaymentFromQueue').andReturn();
+      });
+
+      it('should exist', function() {
+        expect(scope.launchPaymentOptions).toBeDefined();
+      });
+
+      it('should launch a modal dialog', function() {
+        scope.launchPaymentOptions();
+        expect(dialog.dialog).toHaveBeenCalled();
+      });
+
+      it('should send an onQueue flag (as isOnQueue function) to the dialog', function() {
+        var myOnQueue = false;
+        spyOn(paymentsMock, 'isPaymentOnQueue').andReturn(myOnQueue);
+        scope.launchPaymentOptions();
+        expect(dialog.dialog.mostRecentCall.args[0].resolve.isOnQueue()).toBe(myOnQueue);
+      });
+
+      it('should send a cartItem object if payment is already on the queue', function() {
+        spyOn(paymentsMock, 'isPaymentOnQueue').andReturn(true);
+        scope.launchPaymentOptions();
+        dialog.dialog.mostRecentCall.args[0].resolve.object()
+        expect(paymentsMock.getPaymentFromQueue).toHaveBeenCalled();
+      });
+
+      it('should send the payment object from vehicle details if the payment is not on the queue', function() {
+        spyOn(paymentsMock, 'isPaymentOnQueue').andReturn(false);
+        scope.launchPaymentOptions();
+        dialog.dialog.mostRecentCall.args[0].resolve.object()
+        expect(paymentsMock.getPaymentFromQueue).not.toHaveBeenCalled();
       });
     });
   });

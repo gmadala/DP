@@ -338,10 +338,21 @@
 
 // for payment buttons on the vehicle details page.
 .payment-btn-block {
-  padding-top: 10px;
+  padding: 10px 0;
 
-  .button {
-    float: right;
+  .btn-text-group {
+    padding: 0;
+  }
+
+  .btn-btn {
+    button {
+      float: right;
+      margin-right: 0;
+    }
+  }
+
+  .scheduled-payoff, .scheduled-payment {
+    text-align: right;
   }
 }
 

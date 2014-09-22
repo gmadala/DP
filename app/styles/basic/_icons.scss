@@ -7,6 +7,8 @@
   background: transparent;
   margin-top: 0;
 }
+
+// basic icon styling, with classes for alternate sizes.
 .svg-icon {
   display: inline-block;
   vertical-align: middle;
@@ -85,6 +87,7 @@
   fill: #B7B7B7;
 }
 
+// CTA buttons need specific coloring
 .cta-primary {
   .svg-icon svg {
     fill: $white;
@@ -120,25 +123,10 @@
 }
 
 // STATIC ICONS
-.icon-alert {
-  fill: $red;
-}
-
-.icon-failure {
-  fill: $red;
-}
-
-.icon-warning {
-  fill: $yellow;
-}
-
-.icon-info {
-  fill: $primary;
-}
-
-.icon-success {
-  fill: $green;
-}
+.icon-alert, .icon-failure {  fill: $red; }
+.icon-warning { fill: $yellow; }
+.icon-info { fill: $primary; }
+.icon-success { fill: $green; }
 
 .icon-chevron {
   fill: none;

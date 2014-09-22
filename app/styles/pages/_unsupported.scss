@@ -27,7 +27,7 @@
   }
 
   .browsers {
-    @extend %clear;
+    @extend .clearfix;
     margin: 0 auto 20px;
 
     img {
@@ -42,7 +42,7 @@
   }
 
   .nxg-logo {
-    background-image: url(../img/nxg_logo_blue.png);
+    background-image: url(../img/nxg_logo_blue.svg);
   }
 
   .span2 {

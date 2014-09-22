@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, Paginate, Floorplan, segmentio, metric) {
+  .factory('Payments', function($q, $filter, api, moment, CartItem, PaymentOptions, Paginate, Floorplan, segmentio, metric) {
 
     // private global state:
 
@@ -22,6 +22,27 @@ angular.module('nextgearWebApp')
           );
         } else {
           return $q.when(businessHours.data);
+        }
+      }
+    };
+
+    // provides caching so that we only have to request possible payment date data once per day.
+    var possiblePaymentDates = {
+      data: null,
+      cacheDate: null,
+      promise: function(startDate, endDate) {
+        if(!possiblePaymentDates.cacheDate || !moment().isSame(possiblePaymentDates.cacheDate, 'day')) {
+          // we dont have possible payment dates cached for the current date; fetch them now
+          return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
+            function(result) {
+              possiblePaymentDates.data = result;
+              possiblePaymentDates.cacheDate = moment();
+
+              return result;
+            }
+          );
+        } else {
+          return $q.when(possiblePaymentDates.data);
         }
       }
     };
@@ -103,38 +124,26 @@ angular.module('nextgearWebApp')
           return (now.isAfter(open) && now.isBefore(close));
         });
       },
-      addPaymentToQueue: function (floorplanId, vin, stockNum, description, amount, dueDate, asPayoff, principal, interestTotal, feesTotal, collateralTotal) {
-        var payment = {
-          isPayment: true,
-          isFee: false,
-          floorplanId: floorplanId,
-          vin: vin,
-          stockNum: stockNum,
-          description: description,
-          amount: amount,
-          dueDate: dueDate,
-          isPayoff: asPayoff,
-          principal: principal,
-          interestTotal: interestTotal,
-          feesTotal: feesTotal,
-          collateralTotal: collateralTotal,
-          overrideAddress: null
-        };
-        paymentQueue.payments[floorplanId] = payment;
+      addPaymentTypeToQueue: function(payment, paymentType, isScheduledPaymentObject) {
+        // if incoming object is already scheduled (ie. a scheduled payment),
+        // call CartItem.fromScheduledPayment. Otherwise, CartItem.fromPayment.
+        // if isScheduled flag is truthy, it's scheduled. Otherwise, normal payment.
+        var p = isScheduledPaymentObject ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, paymentType);
+        paymentQueue.payments[p.id] = p; // incoming object will have a FloorplanId; the new CartItem(p) will just have id.
         segmentio.track(metric.ADD_TO_BASKET);
       },
-      addFeeToQueue: function (financialRecordId, vin, type, description, amount, dueDate) {
-        var fee = {
-          isPayment: false,
-          isFee: true,
-          financialRecordId: financialRecordId,
-          type: type,
-          vin: vin,
-          description: description,
-          amount: amount,
-          dueDate: dueDate
-        };
-        paymentQueue.fees[financialRecordId] = fee;
+      addInterestPaymentToQueue: function(payment, isScheduledPaymentObject) {
+        this.addPaymentTypeToQueue(payment, PaymentOptions.TYPE_INTEREST, isScheduledPaymentObject);
+      },
+      addPaymentToQueue: function(payment, isScheduledPaymentObject) {
+        this.addPaymentTypeToQueue(payment, PaymentOptions.TYPE_PAYMENT, isScheduledPaymentObject);
+      },
+      addPayoffToQueue: function(payment, isScheduledPaymentObject) {
+        this.addPaymentTypeToQueue(payment, PaymentOptions.TYPE_PAYOFF, isScheduledPaymentObject);
+      },
+      addFeeToQueue: function (fee) {
+        var f = CartItem.fromFee(fee);
+        paymentQueue.fees[f.financialRecordId] = f;
         segmentio.track(metric.ADD_TO_BASKET);
       },
       removePaymentFromQueue: function (id) {
@@ -144,10 +153,11 @@ angular.module('nextgearWebApp')
         delete paymentQueue.fees[id];
       },
       removeFromQueue: function (item) {
-        if(item.isPayment) {
-          this.removePaymentFromQueue(item.floorplanId);
-        } else {
+
+        if(item.isFee) {
           this.removeFeeFromQueue(item.financialRecordId);
+        } else {
+          this.removePaymentFromQueue(item.id);
         }
       },
       isPaymentOnQueue: function (id) {
@@ -157,8 +167,8 @@ angular.module('nextgearWebApp')
           return false; // not in queue
         }
         else {
-          // payment is on queue, return whether it is a payoff or payment
-          return (queueItem.isPayoff ? 'payoff' : 'payment');
+          // payment is on queue, return the payment type.
+          return queueItem.paymentOption; // in this case, 'payment' = 'curtailment'
         }
       },
       isFeeOnQueue: function (id) {
@@ -170,6 +180,9 @@ angular.module('nextgearWebApp')
           payments: paymentQueue.payments,
           isEmpty: paymentQueue.isEmpty
         };
+      },
+      getPaymentFromQueue: function(id) {
+        return this.getPaymentQueue().payments[id];
       },
       clearPaymentQueue: function () {
         angular.forEach(paymentQueue.fees, function (value, key) {
@@ -196,8 +209,8 @@ angular.module('nextgearWebApp')
       fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);
         endDate = api.toShortISODate(endDate);
-        return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
-          function (result) {
+        return possiblePaymentDates.promise(startDate, endDate).then(
+          function(result) {
             if (!asMap) {
               return result;
             }
@@ -212,16 +225,12 @@ angular.module('nextgearWebApp')
       },
       updatePaymentAmountOnDate: function (payment, scheduledDate, isPayoff) {
         var params = {
-          FloorplanId: payment.floorplanId,
+          FloorplanId: payment.id,
           ScheduledDate: api.toShortISODate(scheduledDate),
           IsCurtailment: !isPayoff
         };
         return api.request('GET', '/payment/calculatepaymentamount', params).then(function(result) {
-          payment.amount = result.PaymentAmount;
-          payment.feesTotal = result.FeeAmount;
-          payment.interestTotal = result.InterestAmount;
-          payment.principal = result.PrincipalAmount;
-          payment.collateralTotal = result.CollateralProtectionAmount;
+          payment.updateAmountsOnDate(result);
           return result;
         });
       },
@@ -229,18 +238,10 @@ angular.module('nextgearWebApp')
         var shortFees = [],
           shortPayments = [];
         angular.forEach(payments, function (payment) {
-          shortPayments.push({
-            FloorplanId: payment.floorplanId,
-            ScheduledPaymentDate: api.toShortISODate(payment.scheduleDate) || null,
-            IsPayoff: payment.isPayoff
-          });
+          shortPayments.push(payment.getApiRequestObject());
         });
         angular.forEach(fees, function (fee) {
-          shortFees.push({
-            FinancialRecordId: fee.financialRecordId,
-            ScheduledPaymentDate: api.toShortISODate(fee.scheduleDate) || null,
-
-          });
+          shortFees.push(fee.getApiRequestObject());
         });
 
         var data = {

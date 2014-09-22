@@ -143,7 +143,7 @@
                 <p class="lockup-major">{{ pay.status }}</p>
                 <p ng-show="pay.statusDate">as of: {{ pay.statusDate | moment }}</p>
               </p>
-              <button class="btn-unstyle btn-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">View Receipt</button>
+              <a class="btn-unstyle btn-link" ng-show="pay.isProcessed" ng-href="{{ pay.receiptURL }}" target="_blank">View Receipt</a>
               <button class="btn-unstyle btn-link" ng-show="pay.isPending" ng-click="scheduledPayments.cancelPayment(pay)">Cancel Payment
               </button>
             </td>

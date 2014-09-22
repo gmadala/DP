@@ -17,15 +17,12 @@
   position: relative;
 
   .span6 {
-    text-align: center;
+    @extend %center;
   }
 }
 
 .nxg-logo {
-  background-image: url(../img/nxg_logo_blue.png);
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-    background-image: url(../img/nxg_logo_blue_2x.png);
-  }
+  background-image: url(../img/nxg_logo_blue.svg);
   background-repeat: no-repeat;
   background-size: 200px auto;
   background-position: 20px 0;
@@ -87,7 +84,7 @@
     font-weight: bold;
     padding-right: 20px;
 
-    &:hover {
+    &:hover, &:focus {
       text-decoration: none;
     }
 
@@ -163,10 +160,7 @@
 
     li {
       padding: 5px 15px 7px;
-
-      // & + li {
-        border-right: 1px solid $border;
-      // }
+      border-right: 1px solid $border;
 
       a {
         color: $accent;

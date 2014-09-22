@@ -6,12 +6,16 @@ describe("Model: Payments", function () {
 
   var payments,
     httpBackend,
-    urlParser;
+    urlParser,
+    cartItem,
+    PaymentOptions;
 
-  beforeEach(inject(function ($httpBackend, Payments, URLParser) {
+  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem, _PaymentOptions_) {
     payments = Payments;
     httpBackend = $httpBackend;
     urlParser = URLParser;
+    cartItem = CartItem;
+    PaymentOptions = _PaymentOptions_;
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
@@ -279,7 +283,6 @@ describe("Model: Payments", function () {
   });
 
   describe('canPayNow function', function () {
-
     var clock;
 
     beforeEach(function () {
@@ -365,7 +368,6 @@ describe("Model: Payments", function () {
   });
 
   describe('addPaymentToQueue function + isPaymentOnQueue', function () {
-
     it('should add payments to the queue', function () {
       var payment = {
         FloorplanId: 'floorplan1',
@@ -378,17 +380,8 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(
-        payment.FloorplanId,
-        payment.Vin,
-        payment.StockNumber,
-        payment.UnitDescription,
-        payment.AmountDue,
-        payment.DueDate,
-        false,
-        payment.AmountDue - payment.PrincipalDue
-      );
-      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payment');
+      payments.addPaymentToQueue(payment, false);
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(PaymentOptions.TYPE_PAYMENT);
     });
 
     it('should add payoffs to the queue', function () {
@@ -403,33 +396,39 @@ describe("Model: Payments", function () {
         DueDate: '2013-01-01'
       };
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
-      payments.addPaymentToQueue(
-        payment.FloorplanId,
-        payment.Vin,
-        payment.StockNumber,
-        payment.UnitDescription,
-        payment.CurrentPayoff,
-        payment.DueDate,
-        true,
-        payment.CurrentPayoff - payment.PrincipalPayoff
-      );
-      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe('payoff');
+      payments.addPayoffToQueue(payment, false);
+
+      expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(PaymentOptions.TYPE_PAYOFF);
     });
 
     it('should track payments/payoffs being added to the queue', inject(function (segmentio) {
       spyOn(segmentio, 'track');
-      payments.addPaymentToQueue(
-        'id123',
-        'vin',
-        'stock',
-        'desc',
-        100,
-        '2013-01-01',
-        true,
-        80
-      );
+      payments.addPaymentToQueue({});
       expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
     }));
+
+    it('should add scheduled payments to the queue', function() {
+      var schPayment = {
+        floorplanId: 'floorplan1',
+        vin: 'someVin',
+        stockNumber: 's123',
+        description: 'some description',
+        scheduledDate: '2013-01-08',
+        paymentAmount: 1000,
+        payoffAmount: 6000,
+        principalPayoff: 4000,
+        FeesPayoffTotal: 1000,
+        InterestPayoffTotal: 800,
+        CollateralProtectionPayoffTotal: 200,
+        curtailmentDueDate: '2013-01-01',
+      };
+      spyOn(cartItem, 'fromScheduledPayment').andCallThrough();
+
+      expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe(false);
+      payments.addPaymentToQueue(schPayment, 'payoff', true/*isScheduled*/);
+      expect(cartItem.fromScheduledPayment).toHaveBeenCalled();
+      expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe('payoff');
+    });
 
   });
 
@@ -445,29 +444,44 @@ describe("Model: Payments", function () {
         EffectiveDate: '2013-01-02'
       };
       expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(false);
-      payments.addFeeToQueue(
-        fee.FinancialRecordId,
-        fee.Vin,
-        fee.FeeType,
-        fee.Description,
-        fee.Balance,
-        fee.EffectiveDate);
+      payments.addFeeToQueue(fee);
       expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(true);
     });
 
     it('should track fees being added to the queue', inject(function (segmentio) {
       spyOn(segmentio, 'track');
-      payments.addFeeToQueue(
-        'id123',
-        'vin',
-        'type',
-        'desc',
-        1290,
-        '2013-01-02');
+      payments.addFeeToQueue({});
+
       expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
     }));
 
   });
+
+  describe('removeFromQueue', function() {
+    it('should call removeFeeFromQueue if item to remove is a fee', function() {
+      var fee = {
+        FinancialRecordId: 'fee123'
+      };
+
+      spyOn(payments, 'removeFeeFromQueue').andReturn({});
+
+      payments.addFeeToQueue(fee);
+      payments.removeFromQueue(payments.getPaymentQueue().fees.fee123);
+      expect(payments.removeFeeFromQueue).toHaveBeenCalled();
+    });
+
+    it('should call removePaymentFromQueue if item to remove is a payment', function() {
+      var payment = {
+        FloorplanId: 'payment123'
+      };
+
+      spyOn(payments, 'removePaymentFromQueue').andReturn({});
+
+      payments.addPaymentToQueue(payment);
+      payments.removeFromQueue(payments.getPaymentQueue().payments.payment123);
+      expect(payments.removePaymentFromQueue).toHaveBeenCalled();
+    });
+  })
 
   describe('removePaymentFromQueue', function () {
 
@@ -481,15 +495,7 @@ describe("Model: Payments", function () {
         AmountDue: 1000,
         DueDate: '2013-01-01'
       };
-      payments.addPaymentToQueue(
-        payment.FloorplanId,
-        payment.Vin,
-        payment.StockNumber,
-        payment.UnitDescription,
-        payment.AmountDue,
-        payment.DueDate,
-        false
-      );
+      payments.addPaymentToQueue(payment, 'payment');
       payments.removePaymentFromQueue(payment.FloorplanId);
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
@@ -504,15 +510,7 @@ describe("Model: Payments", function () {
         AmountDue: 1000,
         DueDate: '2013-01-01'
       };
-      payments.addPaymentToQueue(
-        payment.FloorplanId,
-        payment.Vin,
-        payment.StockNumber,
-        payment.UnitDescription,
-        payment.AmountDue,
-        payment.DueDate,
-        true
-      );
+      payments.addPaymentToQueue(payment, 'payoff');
       payments.removePaymentFromQueue(payment.FloorplanId);
       expect(payments.isPaymentOnQueue(payment.FloorplanId)).toBe(false);
     });
@@ -530,13 +528,7 @@ describe("Model: Payments", function () {
         FeeType: 'foo',
         EffectiveDate: '2013-01-02'
       };
-      payments.addFeeToQueue(
-        fee.FinancialRecordId,
-        fee.Vin,
-        fee.FeeType,
-        fee.Description,
-        fee.Balance,
-        fee.EffectiveDate);
+      payments.addFeeToQueue(fee);
       payments.removeFeeFromQueue(fee.FinancialRecordId);
       expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(false);
     });
@@ -546,20 +538,13 @@ describe("Model: Payments", function () {
   describe('getPaymentQueue function', function () {
 
     it('should include the fees hash table with expected fee data', function () {
-      payments.addFeeToQueue('finId1', 'vin', 'type', 'desc', 100, '2013-01-01');
+      payments.addFeeToQueue({ FinancialRecordId: 'finId1' });
 
       var content = payments.getPaymentQueue();
       expect(content.fees).toBeDefined();
 
       var items = _.map(content.fees);
       expect(items.length).toBe(1);
-      var fee = items[0];
-      expect(fee.financialRecordId).toBe('finId1');
-      expect(fee.vin).toBe('vin');
-      expect(fee.type).toBe('type');
-      expect(fee.description).toBe('desc');
-      expect(fee.amount).toBe(100);
-      expect(fee.dueDate).toBe('2013-01-01');
     });
 
     it('should include the payments hash table with expected payment data', function () {
@@ -567,19 +552,10 @@ describe("Model: Payments", function () {
       expect(content.payments).toBeDefined();
 
       // this is deliberately AFTER the queue content retrieval to test that we're getting "live" objects
-      payments.addPaymentToQueue('floorId1', 'vin', 'stock1', 'desc', 200, '2013-01-02', true, 150);
+      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, false);
 
       var items = _.map(content.payments);
       expect(items.length).toBe(1);
-      var pmt = items[0];
-      expect(pmt.floorplanId).toBe('floorId1');
-      expect(pmt.vin).toBe('vin');
-      expect(pmt.stockNum).toBe('stock1');
-      expect(pmt.description).toBe('desc');
-      expect(pmt.amount).toBe(200);
-      expect(pmt.dueDate).toBe('2013-01-02');
-      expect(pmt.isPayoff).toBe(true);
-      expect(pmt.principal).toBe(150);
     });
 
     it('should expose an isEmpty function that calculates whether the queue is empty', function () {
@@ -587,14 +563,11 @@ describe("Model: Payments", function () {
 
       expect(queue.isEmpty()).toBe(true);
 
-      payments.addFeeToQueue('finId1', 'vin', 'type', 'desc', 100, '2013-01-01');
-
+      payments.addFeeToQueue({ FinancialRecordId: 'finId1'});
       expect(queue.isEmpty()).toBe(false);
 
       payments.removeFeeFromQueue('finId1');
-
-      payments.addPaymentToQueue('floorId1', 'vin', 'stock1', 'desc', 200, '2013-01-02', false);
-
+      payments.addPaymentToQueue({ FloorplanId: 'floorId1' }, false);
       expect(queue.isEmpty()).toBe(false);
 
       payments.removePaymentFromQueue('floorId1');
@@ -603,14 +576,22 @@ describe("Model: Payments", function () {
 
   });
 
+  describe('getPaymentFromQueue function', function() {
+    it('should return the cartItem object for that floorplan id', function() {
+      payments.addPaymentToQueue({ FloorplanId: 'testId' }, false);
+      var result = payments.getPaymentFromQueue('testId');
+      expect(result).toBeDefined();
+    });
+  });
+
   describe('clearPaymentQueue function', function () {
 
     it('should remove fees and payments from the queue', function () {
       var queue = payments.getPaymentQueue();
-      payments.addFeeToQueue('id1', 'vin', 'type', 'desc', 1, '2013-01-01');
-      payments.addFeeToQueue('id2', 'vin', 'type', 'desc', 1, '2013-01-01');
-      payments.addPaymentToQueue('id3', 'vin', 's1', 'desc', 3, '2013-01-02', false);
-      payments.addPaymentToQueue('id4', 'vin', 's1', 'desc', 3, '2013-01-02', true);
+      payments.addFeeToQueue({ FinancialRecordId: 'id1' });
+      payments.addFeeToQueue({ FinancialRecordId: 'id1' });
+      payments.addPaymentToQueue({ FloorplanId: 'id3' }, 'payment');
+      payments.addPaymentToQueue({ FloorplanId: 'id4' }, 'payoff');
       payments.clearPaymentQueue();
       expect(queue.isEmpty()).toBe(true);
     });
@@ -618,7 +599,6 @@ describe("Model: Payments", function () {
   });
 
   describe('cancelScheduled function', function () {
-
     var succeed = true;
 
     beforeEach(function () {
@@ -655,20 +635,85 @@ describe("Model: Payments", function () {
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
     });
+  });
+
+  describe('cancelScheduledFee function', function () {
+    var succeed = true;
+
+    beforeEach(function () {
+      httpBackend.expectPOST('/payment/cancelscheduledaccountfeepayment/schId').respond(function(method, url, data) {
+        return [200, {
+          "Success": succeed,
+          "Message": null
+        }, {}];
+      });
+    });
+
+    it('should make the expected HTTP POST with the provided scheduled fee payment ID', function () {
+      payments.cancelScheduledFee('schId');
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return a promise for successful result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      payments.cancelScheduledFee('schId').then(success, failure);
+      httpBackend.flush();
+      expect(success).toHaveBeenCalled();
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+    it('should return a promise for failure result', function () {
+      var success = jasmine.createSpy('success'),
+        failure = jasmine.createSpy('failure');
+
+      succeed = false;
+      payments.cancelScheduledFee('schId').then(success, failure);
+      httpBackend.flush();
+      expect(success).not.toHaveBeenCalled();
+      expect(failure).toHaveBeenCalled();
+    });
 
   });
 
   describe('fetchPossiblePaymentDates function', function () {
+    var clock;
 
-    it('should make the expected API call', function () {
-      var start = new Date(2013, 0, 1),
-        end = new Date(2013, 0, 31);
-      httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31').respond({
+    beforeEach(function () {
+      // mock the system clock so we have a predictable current date & time for testing
+      // see http://sinonjs.org/docs/#clock
+      clock = sinon.useFakeTimers(moment('2013-01-01T08:30:00Z').valueOf(), 'Date');
+
+      httpBackend.whenGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31').respond({
         Success: true,
-        Data: []
+        Data: [
+          "2013-01-05", "2013-01-06", "2013-01-07"
+        ]
       });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
+    it('should make the expected API call if we have no cached data', function () {
+      var start = moment("2013-01-01").toDate(),
+        end = moment("2013-01-31").toDate();
+      httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31');
       payments.fetchPossiblePaymentDates(start, end);
       expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should used cached data on subsequent requests on the same day', function () {
+      var start = moment("2013-01-01").toDate(),
+        end = moment("2013-01-31").toDate();
+
+      payments.fetchPossiblePaymentDates(start, end);
+      httpBackend.flush();
+
+      payments.fetchPossiblePaymentDates(start, end);
+      expect(httpBackend.verifyNoOutstandingRequest).not.toThrow();
     });
 
     it('should transform results into a map of booleans by date, if requested', function () {
@@ -713,10 +758,14 @@ describe("Model: Payments", function () {
   });
 
   describe('updatePaymentAmountOnDate function', function () {
-
-    var callParams;
+    var callParams,
+        mockPaymentItem;
 
     beforeEach(function () {
+      mockPaymentItem = {
+        id: 'foo',
+        updateAmountsOnDate: angular.noop
+      };
       httpBackend.whenGET(/\/payment\/calculatepaymentamount\?.*/).respond(function(method, url) {
         callParams = urlParser.extractParams(url);
         return [200, {
@@ -735,12 +784,12 @@ describe("Model: Payments", function () {
 
     it('should call the expected endpoint', function () {
       httpBackend.expectGET(/\/payment\/calculatepaymentamount\?.*/);
-      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(), false);
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(), false);
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should send the expected params', function () {
-      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(2013, 9, 22), false);
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(2013, 9, 22), false);
       httpBackend.flush();
       expect(callParams.FloorplanId).toBe('foo');
       expect(callParams.ScheduledDate).toBe('2013-10-22');
@@ -748,7 +797,7 @@ describe("Model: Payments", function () {
     });
 
     it('should return a promise for the resulting PaymentAmount', function () {
-      payments.updatePaymentAmountOnDate({floorplanId: 'foo'}, new Date(2013, 11, 22), false).then(
+      payments.updatePaymentAmountOnDate(mockPaymentItem, new Date(2013, 11, 22), false).then(
         function (result) {
           expect(result.PaymentAmount).toBe(345.67);
           expect(result.PrincipalAmount).toBe(100);
@@ -759,23 +808,9 @@ describe("Model: Payments", function () {
       );
       httpBackend.flush();
     });
-
-    it('should update the floorplan\'s original values with those returned from the API', function () {
-      var floorplan = {floorplanId: 'foo'};
-      payments.updatePaymentAmountOnDate(floorplan, new Date(2013, 11, 22), false);
-      httpBackend.flush();
-
-      expect(floorplan.amount).toBe(345.67);
-      expect(floorplan.principal).toBe(100);
-      expect(floorplan.interestTotal).toBe(200);
-      expect(floorplan.feesTotal).toBe(50);
-      expect(floorplan.collateralTotal).toBe(11);
-    });
-
   });
 
   describe('checkout function', function () {
-
     var stubResponse;
 
     beforeEach(function () {
@@ -791,72 +826,6 @@ describe("Model: Payments", function () {
       httpBackend.expectPOST('/payment/2_0/make').respond(stubResponse);
       payments.checkout({}, {}, 'bank1');
       expect(httpBackend.flush).not.toThrow();
-    });
-
-    it('should send fees in the expected format', function () {
-      var fees = {
-        one: {
-          financialRecordId: 'one',
-          type: 'Membership Dues'
-        },
-        two: {
-          financialRecordId: 'two',
-          type: 'Other Fee'
-        }
-      };
-
-      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
-
-        var expectedFees = [
-          { FinancialRecordId: 'one', ScheduledPaymentDate: null },
-          { FinancialRecordId: 'two', ScheduledPaymentDate: null }
-        ];
-        data = angular.fromJson(data);
-        data = _.sortBy(data.AccountFees, 'FinancialRecordId');
-        expect(data).toEqual(expectedFees);
-        return [200, stubResponse, {}];
-      });
-
-      payments.checkout(fees, {}, 'bank1');
-      httpBackend.flush();
-    });
-
-    it('should send payments in the expected format', function () {
-      var paymentsData = {
-        2049: {
-          floorplanId: "2049",
-          vin: "CH224157",
-          scheduleDate: new Date(2013, 4, 5),
-          isPayoff: false
-        },
-        2048: {
-          floorplanId: "2048",
-          vin: "LL2469R6",
-          isPayoff: true
-        }
-      };
-
-      httpBackend.whenPOST('/payment/2_0/make').respond(function (method, url, data) {
-        var expectedPayments = [
-          {
-            FloorplanId: '2048',
-            ScheduledPaymentDate: null,
-            IsPayoff: true
-          },
-          {
-            FloorplanId: '2049',
-            ScheduledPaymentDate: '2013-05-05',
-            IsPayoff: false
-          }
-        ];
-        data = angular.fromJson(data);
-        data = _.sortBy(data.SelectedFloorplans, 'FloorplanId');
-        expect(angular.equals(data, expectedPayments)).toBe(true);
-        return [200, stubResponse, {}];
-      });
-
-      payments.checkout({}, paymentsData, 'bank1');
-      httpBackend.flush();
     });
 
     it('should send the bank account id', function () {
@@ -887,12 +856,26 @@ describe("Model: Payments", function () {
       expect(payments.paymentInProgress()).toBe(true);
       httpBackend.flush();
       expect(payments.paymentInProgress()).toBe(false);
-    })
+    });
 
+    it('should grab the api request objects for each cart item', function() {
+      httpBackend.expectPOST('/payment/2_0/make').respond(function () {
+        return [200, stubResponse, {}];
+      });
+      var f = { financialRecordId: 'fee1', getApiRequestObject: angular.noop },
+        p = { id: 'floorplan1', getApiRequestObject: angular.noop };
+
+      spyOn(f, 'getApiRequestObject');
+      spyOn(p, 'getApiRequestObject');
+      payments.checkout([f], [p], {BankAccountId: 'bank1'});
+
+      httpBackend.flush();
+      expect(f.getApiRequestObject).toHaveBeenCalled();
+      expect(p.getApiRequestObject).toHaveBeenCalled();
+    })
   });
 
   describe('requestExtension', function() {
-
     it('should make api request', function() {
       var floorplanId = 5;
       httpBackend.expectPOST('/Floorplan/requestextension/' + floorplanId).respond({
@@ -902,11 +885,7 @@ describe("Model: Payments", function () {
       });
 
       payments.requestExtension(floorplanId);
-
       expect(httpBackend.flush).not.toThrow();
-
     });
-
   });
-
 });

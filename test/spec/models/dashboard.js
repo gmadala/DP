@@ -168,34 +168,33 @@ describe('Model: dashboard', function () {
 
 
 
-    it('should add a creditChartData object with expected structure', function () {
-      expect(resultData.credit).toBeDefined();
-      expect(angular.isArray(resultData.credit.linesOfCredit[0].CreditChartData.outer)).toBe(true);
-      expect(angular.isArray(resultData.credit.linesOfCredit[1].CreditChartData.outer)).toBe(true);
-      expect(angular.isArray(resultData.credit.linesOfCredit[0].CreditChartData.inner)).toBe(true);
-      expect(angular.isArray(resultData.credit.linesOfCredit[1].CreditChartData.outer)).toBe(true);
+    it('should extend the LinesOfCredit objects with the expected structure', function () {
+      expect(angular.isArray(resultData.LinesOfCredit[0].CreditChartData.outer)).toBe(true);
+      expect(angular.isArray(resultData.LinesOfCredit[1].CreditChartData.outer)).toBe(true);
+      expect(angular.isArray(resultData.LinesOfCredit[0].CreditChartData.inner)).toBe(true);
+      expect(angular.isArray(resultData.LinesOfCredit[1].CreditChartData.outer)).toBe(true);
     });
 
 
 
     it('should populate creditChartData outer with breakdown of credit by type', function () {
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer.length).toBe(2);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer.length).toBe(2);
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer[0].y).toBe(20000);
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.outer[1].y).toBe(1000);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer[0].y).toBe(150000);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.outer[1].y).toBe(0);
+      expect(resultData.LinesOfCredit[0].CreditChartData.outer.length).toBe(2);
+      expect(resultData.LinesOfCredit[1].CreditChartData.outer.length).toBe(2);
+      expect(resultData.LinesOfCredit[0].CreditChartData.outer[0].y).toBe(20000);
+      expect(resultData.LinesOfCredit[0].CreditChartData.outer[1].y).toBe(1000);
+      expect(resultData.LinesOfCredit[1].CreditChartData.outer[0].y).toBe(150000);
+      expect(resultData.LinesOfCredit[1].CreditChartData.outer[1].y).toBe(0);
     });
 
 
 
     it('should populate creditChartData inner with breakdown of credit by utilization', function () {
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner.length).toBe(2);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner.length).toBe(2);
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner[0].y).toBe(450);
-      expect(resultData.credit.linesOfCredit[0].CreditChartData.inner[1].y).toBe(20550);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner[0].y).toBe(861);
-      expect(resultData.credit.linesOfCredit[1].CreditChartData.inner[1].y).toBe(149139);
+      expect(resultData.LinesOfCredit[0].CreditChartData.inner.length).toBe(2);
+      expect(resultData.LinesOfCredit[1].CreditChartData.inner.length).toBe(2);
+      expect(resultData.LinesOfCredit[0].CreditChartData.inner[0].y).toBe(450);
+      expect(resultData.LinesOfCredit[0].CreditChartData.inner[1].y).toBe(20550);
+      expect(resultData.LinesOfCredit[1].CreditChartData.inner[0].y).toBe(861);
+      expect(resultData.LinesOfCredit[1].CreditChartData.inner[1].y).toBe(149139);
     });
 
 

@@ -47,7 +47,7 @@ angular.module('nextgearWebApp')
           TempLineOfCreditAmount: 0,
           TempLineOfCreditExpiration: null,
           AvailableCreditAmount: 0
-        });
+        }, 0);
       },
       extendLineOfCreditObject: extendLineOfCreditObject,
       fetchDealerDashboard: function (startDate, endDate) {
@@ -66,19 +66,10 @@ angular.module('nextgearWebApp')
             // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
             var result = responses[0];
 
-            result.credit = {
-              totalAvailable : _.reduce(result.LinesOfCredit, function(sum, loc){
-                return sum + loc.AvailableCreditAmount;
-              }, 0),
-              totalUtilized : _.reduce(result.LinesOfCredit, function(sum, loc){
-                var utilized = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
-                return sum + utilized;
-              }, 0),
-              linesOfCredit : _.map(result.LinesOfCredit, function(loc){
-                var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
-                return extendLineOfCreditObject(loc, utilizedAmount);
-              })
-            };
+            result.LinesOfCredit = _.map(result.LinesOfCredit, function(loc) {
+              var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
+              return extendLineOfCreditObject(loc, utilizedAmount);
+            });
 
             // inserting view receipt URLs
             angular.forEach(result.Receipts, function(receipt) {

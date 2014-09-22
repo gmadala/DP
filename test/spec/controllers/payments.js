@@ -12,17 +12,22 @@ describe('Controller: PaymentsCtrl', function () {
     dialog,
     payments,
     instantiateController,
+    shouldSucceed,
     searchResult = {
       data: {}
     },
     canPayResult = {
       data: true
     },
+    $q,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, $dialog) {
+  beforeEach(inject(function ($controller, $rootScope, _$q_, $dialog) {
     scope = $rootScope.$new();
+    shouldSucceed = true;
+    $q = _$q_;
+
     modelMock = {
       search: function () {
         return $q.when(searchResult.data);
@@ -37,7 +42,10 @@ describe('Controller: PaymentsCtrl', function () {
         return $q.when(searchResult.data);
       },
       canPayNow: function () {
-        return $q.when(true);
+        if (shouldSucceed) {
+          return $q.when(true);
+        }
+        return $q.when(false);
       },
       isPaymentOnQueue: function () {
         return false;
@@ -431,9 +439,25 @@ describe('Controller: PaymentsCtrl', function () {
 
   });
 
-  it('should attach a value for canPayNow to the scope', function () {
-    scope.$apply();
-    expect(scope.canPayNow).toBe(true);
+  describe('canPayNow logic', function () {
+    var isLoggedIn;
+
+    beforeEach(function() {
+      isLoggedIn = true;
+      spyOn(userMock, 'isLoggedIn').andReturn($q.when(isLoggedIn));
+    });
+
+    it('should attach a value for canPayNow to the scope', function () {
+      scope.$apply();
+      expect(scope.canPayNow).toBe(true);
+    });
+
+    it('should not call canPayNow if user is not logged in', function() {
+      isLoggedIn = false;
+      spyOn(modelMock, 'canPayNow').andReturn();
+      scope.$apply();
+      expect(modelMock.canPayNow).not.toHaveBeenCalled();
+    });
   });
 
   it('should only allow payment extensions if payment is in its final curtailment', function() {

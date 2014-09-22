@@ -51,7 +51,6 @@
   }
 }
 
-
 /*
  * COUNTER
  * Number with a rounded box, and variable background color
@@ -63,7 +62,6 @@
   display: inline-block;
   color: #666666;
   font-size: 14px;
-  font-weight: bold;
   height: 30px;
   min-width: 35px;
   background: $white;
@@ -93,7 +91,7 @@
   }
 
   .counter {
-    float: left;
+    @extend %float-l;
     margin: 4px 15px;
   }
 

@@ -12,26 +12,39 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     fee,
     possibleDates,
     Payments,
+    PaymentOptions,
+    CartItem,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, _Payments_) {
+  beforeEach(inject(function ($controller, $rootScope, $q, _Payments_, _PaymentOptions_, _CartItem_) {
     dialog = {
       close: angular.noop
     };
-    payment = {
-      floorplanId: 'floorplan123',
-      dueDate: '2013-09-30',
-      isPayment: true,
-      isFee: false
-    };
 
-    fee = {
-      financialRecordId: 'feeId',
-      dueDate: '2013-09-29',
-      isFee: true,
-      isPayment: false
-    };
+    PaymentOptions = _PaymentOptions_;
+    CartItem = _CartItem_;
+    payment = CartItem.fromPayment({
+      FloorplanId: 'floorplan123',
+      DueDate: '2013-09-30',
+      CurrentPayoff: 10000,
+      PrincipalPayoff: 8000,
+      FeesPayoffTotal: 800,
+      InterestPayoffTotal: 900,
+      CollateralProtectionPayoffTotal: 300,
+      AmountDue: 1000,
+      PrincipalDue: 800,
+      FeesPaymentTotal: 80,
+      InterestPaymentTotal: 90,
+      CollateralProtectionPaymentTotal: 30
+    }, PaymentOptions.TYPE_PAYMENT);
+
+    fee = CartItem.fromFee({
+      FinancialRecordId: 'feeId',
+      EffectiveDate: '2013-09-29',
+      FeeType: 'type of fee',
+      Balance: 100
+    });
 
     possibleDates = {
       '2013-09-30': true,
@@ -39,6 +52,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       '2013-09-28': true,
       '2013-09-27': true
     };
+
     Payments = _Payments_;
 
     spyOn(Payments, 'canPayNow').andReturn($q.when(true));
@@ -59,17 +73,26 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     run('payment');
   }));
 
-  it('should attach the payment being scheduled to the scope', function () {
+  it('should attach A COPY OF the payment being scheduled to the scope', function () {
     run('payment')
-    expect(scope.model.payment).toBe(payment);
+    expect(scope.model.payment).toBeDefined();
+    expect(scope.model.payment).not.toBe(CartItem.fromPayment(payment, PaymentOptions.TYPE_PAYMENT));
     expect(scope.model.fee).toBeFalsy();
   });
 
   it('should attach the payment being scheduled to the scope', function () {
     run('fee');
-    expect(scope.model.fee).toBe(fee);
+    expect(scope.model.fee).toBeDefined();
     expect(scope.model.pay).toBeFalsy();
   });
+
+  it('should attach an isPayment flag to the scope', function() {
+    run('payment');
+    expect(scope.isPayment).toBe(true);
+
+    run('fee');
+    expect(scope.isPayment).toBe(false);
+  })
 
   it('should default selected date to the next available date if none is currently set', function () {
     expect(scope.model.selectedDate.toString()).toBe(new Date(2013, 8, 27).toString());
@@ -89,17 +112,127 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     expect(scope.model.canPayNow).toBe(false);
   });
 
-  it('should call to determine if we are within business hours', function () {
-    expect(Payments.canPayNow).toHaveBeenCalled();
-  });
+  describe('selectedDate watch functionality', function() {
+    var $q,
+        $httpBackend,
+        clock,
+        shouldSucceed;
 
-  it('should update canPayNow with results of call', function () {
-    scope.$apply();
-    expect(scope.model.canPayNow).toBe(true);
+    beforeEach(inject(function(_$q_, _$httpBackend_) {
+      $q = _$q_;
+      $httpBackend = _$httpBackend_;
+      clock = sinon.useFakeTimers(moment([2013, 8, 1, 11, 18]).valueOf(), 'Date');
+      shouldSucceed = true;
+
+      spyOn(Payments, 'updatePaymentAmountOnDate').andCallFake(function() {
+        if (shouldSucceed) {
+          return $q.when({
+            PaymentAmount: 64,
+            PrincipalAmount: 36,
+            FeeAmount: 16,
+            InterestAmount: 8,
+            CollateralProtectionAmount: 4
+          });
+        } else {
+          return $q.reject(false);
+        }
+      });
+    }));
+
+    afterEach(function () {
+      clock.restore();
+    })
+
+    it('should do nothing if the item we are scheduling is a fee', function() {
+      run('fee');
+
+      scope.model.selectedDate = new Date(2013, 8, 28);
+      scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if the new date is the same as the old date', function() {
+      run('payment');
+
+      scope.model.selectedDate = new Date(2013, 8, 27);
+      scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if the new date is not valid', function() {
+      run('payment');
+      scope.model.selectedDate = '2013-06-05';
+      scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
+    });
+
+    it('should call the updatePaymentAmountOnDate function if the date is valid', function() {
+      run('payment');
+      scope.$apply();
+
+      expect(scope.model.breakdown.amount).toBe(1000);
+      expect(scope.model.breakdown.principal).toBe(800);
+      expect(scope.model.breakdown.fees).toBe(80);
+      expect(scope.model.breakdown.interest).toBe(90);
+      expect(scope.model.breakdown.cpp).toBe(30);
+
+      scope.model.selectedDate = new Date(2013, 8, 29);
+      scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
+      expect(scope.model.breakdown.amount).toBe(64);
+      expect(scope.model.breakdown.principal).toBe(36);
+      expect(scope.model.breakdown.fees).toBe(16);
+      expect(scope.model.breakdown.interest).toBe(8);
+      expect(scope.model.breakdown.cpp).toBe(4);
+    });
+
+    it('should properly update return payment amounts if interest-only', function() {
+      run('payment');
+      scope.model.payment.paymentOption = PaymentOptions.TYPE_INTEREST;
+      scope.$apply();
+
+      expect(scope.model.breakdown.amount).toBe(1000);
+      expect(scope.model.breakdown.principal).toBe(800);
+      expect(scope.model.breakdown.fees).toBe(80);
+      expect(scope.model.breakdown.interest).toBe(90);
+      expect(scope.model.breakdown.cpp).toBe(30);
+
+      scope.model.selectedDate = new Date(2013, 8, 29);
+      scope.$apply();
+      expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
+      expect(scope.model.breakdown.amount).toBe(8);
+      expect(scope.model.breakdown.principal).toBe(0);
+      expect(scope.model.breakdown.fees).toBe(0);
+      expect(scope.model.breakdown.interest).toBe(8);
+      expect(scope.model.breakdown.cpp).toBe(0);
+    });
+
+    it('should set updateInProgress to false on failure', function () {
+      // spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.reject('whatever'));
+      shouldSucceed = false;
+
+      run('payment');
+      scope.$apply();
+      scope.model.selectedDate = new Date(2013, 8, 29);
+
+      scope.$apply();
+
+      expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
+      expect(scope.updateInProgress).toBe(false);
+
+    });
+
+    // it('should set updateInProgress to false on success', function () {
+      // spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
+      // spyOn(dialog, 'close');
+      // scope.finalize(null);
+      // scope.$apply();
+      // expect(scope.submitInProgress).toBe(false);
+      // expect(dialog.close).toHaveBeenCalled();
+    // });
   });
 
   describe('checkDate function', function () {
-
     var clock;
 
     beforeEach(function () {
@@ -134,15 +267,6 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
   });
 
-  describe('removeSchedule function', function () {
-
-    it('should invoke finalize with a null schedule date', function () {
-      spyOn(scope, 'finalize');
-      scope.removeSchedule();
-      expect(scope.finalize).toHaveBeenCalledWith(null);
-    });
-
-  });
 
   describe('commit function', function () {
 
@@ -176,7 +300,6 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
   });
 
   describe('finalize function', function () {
-
     var $q;
 
     beforeEach(inject(function (_$q_) {
@@ -195,10 +318,17 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
     });
 
+    it('should not invoke the model method if it is a fee', function() {
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
+      run('fee');
+      scope.finalize();
+      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
+    })
+
     it('should pass the floorplan Id', function () {
       spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
       scope.finalize();
-      expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[0].floorplanId).toBe('floorplan123');
+      expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[0].id).toBe('floorplan123');
     });
 
     it('should pass the provided date if present', function () {
@@ -217,11 +347,15 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     it('should pass the isPayoff value of the payment', function () {
       spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when(100));
-      payment.isPayoff = true;
+
+      var myIsPayoff = true;
+      spyOn(payment, 'isPayoff').andCallFake(function() {
+        return myIsPayoff;
+      });
       scope.finalize();
       expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[2]).toBe(true);
 
-      payment.isPayoff = false;
+      myIsPayoff = false;
       scope.finalize();
       expect(Payments.updatePaymentAmountOnDate.mostRecentCall.args[2]).toBe(false);
     });
