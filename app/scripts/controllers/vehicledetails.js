@@ -387,6 +387,7 @@ angular.module('nextgearWebApp')
         // Grab data for value info section
         // ================================
         $scope.valueInfo = details.ValueInfo;
+        $scope.showMMR = true; // TODO: Determine what needs to be true in order to show MMR. (VO-2808)
 
         // Grab data for vehicle info section
         // ==================================
