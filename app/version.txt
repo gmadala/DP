@@ -1,18 +1,16 @@
-NextGear Capital v4.0.3
+NextGear Capital v4.0.4
 =================================
 
 Fixes included in this release:
 
-VO-2869	Modify "NextGear" to be "NextGear Capital" on auction dealer search
-VO-2253	Allow parent manufacturer to view subsidiary activity
-VO-2866	Modify footer to include new address and updated phone formatting
 VO-1950	Show credit availability per line of credit on Dashboard
-VO-2868	Modify "NextGear" to be "NextGear Capital" on auction dashboard
-VO-1667	Display disclaimer for interest calculations at time of payment
-VO-2684	Web (Settings – Account Management): Period is missing from the end of the info popup text.
-VO-2214	Refactor navigation to allow easier access to primary actions (make payment, title release, etc...)
-VO-2806	Floor a Vehicle - Cancel button triggered when hitting Enter on VIN Search
-VO-2870	Modify "NextGear" to be "NextGear Capital" on auction resources
-VO-2129	Design consistency throughout the app
-VO-2867	Modify "NextGear" to be "NextGear Capital" on dealer resources
-VO-2190	Design and define new vehicle details view
+VO-2953	Modify footer to include | for spacing
+VO-2982	Web app counts/groups "Stale & Aging Units" incorrectly.
+VO-2731	Revised Receipts Batch Export Layout
+VO-2716	NextGear Demo App Web (Request Credit Increase): “Request credit Increase” page auto scrolls when user click on “Lease” radio button.
+VO-1754	Auto-schedule payments for valid business day if logged in during off hours
+VO-2816	Modify NGC logo
+VO-2576	Web-Dealer Search (Dealer Number Search)- No error message is displayed when user clicks on “Search” button after filling entries in both (Next Gear Dealer Number and Auction Access Number) fields at once.
+VO-2879	NGC Test Web (Dashboard): Incorrect content “this week/this month” is getting displayed on the page.
+VO-2733	Refactor schedule payment modal to reflect payment amount of actual day selected
+VO-2747	Refactor payment confirmation modal
