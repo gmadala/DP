@@ -13,7 +13,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesToday">
-          <td class="heavy">{{ fee.feeType || 'N/A' }}</td>
+          <td class="description heavy">{{ fee.feeType || 'N/A' }}</td>
           <td class="center">{{ today | moment }}</td>
           <td class="numeric">{{ fee.amount | currency }}</td>
         </tr>
@@ -31,7 +31,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsToday">
-          <td>
+          <td class="description">
             <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
             <p class="caps vin">VIN: {{ payment.vin }}</p>
             <p class="caps stock">STK: {{ payment.stockNum }}</p>
@@ -53,7 +53,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesScheduled">
-          <td class="heavy">{{ fee.feeType || 'N/A' }}</td>
+          <td class="description heavy">{{ fee.feeType || 'N/A' }}</td>
           <td class="center">{{ fee.scheduleDate | moment }}</td>
           <td class="numeric">{{ fee.amount | currency }}</td>
         </tr>
@@ -70,7 +70,7 @@
           <th>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsScheduled">
-          <td>
+          <td class="description">
             <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
             <p class="caps vin">VIN: {{ payment.vin }}</p>
             <p class="caps stock">STK: {{ payment.stockNum }}</p>
