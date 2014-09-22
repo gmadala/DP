@@ -448,7 +448,6 @@ describe('Controller: PaymentsCtrl', function () {
     });
 
     it('should attach a value for canPayNow to the scope', function () {
-      console.log(shouldSucceed);
       scope.$apply();
       expect(scope.canPayNow).toBe(true);
     });

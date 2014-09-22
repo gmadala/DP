@@ -1,62 +1,14 @@
 <h3 class="modal-header">Select the Schedule Date</h3>
 
-<div class="modal-body">
-  <div ng-switch on="type">
-    <div ng-switch-when="payment">
-      <h3>Vehicle Information</h3>
-
-      <ul class="list-table">
-        <li class="list-table-row">
-          <p class="span4">VIN</p>
-          <p class="span8 value">{{ model.payment.vin }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Stock #</p>
-          <p class="span8 value">{{ model.payment.stockNum }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Description</p>
-          <p class="span8 value">{{ model.payment.description }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Due</p>
-          <p class="span8 value">{{ model.payment.dueDate | moment }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Payment</p>
-          <p class="span8 value">{{ model.payment.getCheckoutAmount() | currency }}</p>
-        </li>
-      </ul>
-    </div>
-
-    <div ng-switch-when="fee">
-      <h4>Fee Information</h4>
-
-      <ul class="list-table">
-        <li class="list-table-row">
-          <p class="span4">Fee Type</p>
-          <p class="span8 value">{{ model.fee.type }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Description</p>
-          <p class="span8 value">{{ model.fee.description }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Due</p>
-          <p class="span8 value">{{ model.fee.dueDate | moment }}</p>
-        </li>
-        <li class="list-table-row">
-          <p class="span4">Fee</p>
-          <p class="span8 value numeric">{{ model.fee.amount | currency }}</p>
-        </li>
-      </ul>
-    </div>
+<div class="modal-body to-edge">
+  <div class="well-item aside" ng-switch on="type">
+    <p class="truncate" ng-switch-when="payment">Description: <span class="highlight heavy">{{ model.payment.description }}</span></p>
+    <p class="truncate" ng-switch-when="fee">Fee Type: <span class="highlight heavy">{{ model.fee.feeType }}</span></p>
   </div>
 
-  <hr/>
-
-  <form name="dateForm" class="row-fluid">
-    <label for="inputScheduleDate">Schedule For</label>
+  <form name="dateForm" class="modal-inner">
+    <h3>Schedule Date</h3>
+    <p>Select a date from the picker below:</p>
     <input id="inputScheduleDate" name="inputScheduleDate"
     class="date-inline"
            nxg-date-field before-show-day="checkDate(date)"
@@ -64,7 +16,6 @@
            required nxg-requires="checkDate(model.selectedDate)"
            ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
     <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
-    or <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress">Pay Now</button>
 
     <div class="row-fluid">
       <label for="inputScheduleDate" class="text-error"
@@ -76,11 +27,40 @@
         Please select a valid banking date no earlier than tomorrow and no later than the payment due date.
       </label>
     </div>
+    <p class="paragraph">Scheduled payments are not made until the scheduled date. <br/> Interest and/or fees may continue to accrue between now and your scheduled payment date.</p>
   </form>
-  <p>Scheduled payments are not made until the scheduled date selected. <br/> Fees and/or other charges may continue to accrue between now and your scheduled payment date that would need to be addressed separately.</p>
+
+  <div class="modal-inner aside" ng-show="isPayment">
+    <h3>Payment Breakdown</h3>
+
+    <ul class="list-table">
+      <li class="list-table-row">
+        <p class="span4">Principal</p>
+        <p class="span8 value numeric">{{ model.breakdown.principal | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span4">Interest</p>
+        <p class="span8 value numeric">{{ model.breakdown.interest | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span4">Fee(s)</p>
+        <p class="span8 value numeric">{{ model.breakdown.fees | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="span4">CPP</p>
+        <p class="span8 value numeric">{{ model.breakdown.cpp | currency }}</p>
+      </li>
+      <li class="list-table-hr"></li>
+      <li class="list-table-row">
+        <p class="span4">Payment Total</p>
+        <p class="span8 value numeric">{{ model.breakdown.amount | currency }}</p>
+      </li>
+    </ul>
+  </div>
 </div>
 
+
 <div class="modal-footer">
-  <button type="button" ng-click="close()" ng-disabled="submitInProgress" class="btn-cta cta-secondary">Cancel</button>
-  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress" nxg-autofocus class="btn-cta cta-primary">Confirm</button>
+  <button type="button" ng-click="close()" ng-disabled="submitInProgress || updateInProgress" class="btn-cta cta-secondary">Cancel</button>
+  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress || updateInProgress" nxg-autofocus class="btn-cta cta-primary">Confirm</button>
 </div>

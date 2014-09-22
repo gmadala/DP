@@ -74,8 +74,6 @@ angular.module('nextgearWebApp')
       this.stockNum = item.StockNumber;
       this.isFee = false;
 
-      // this.isPayoff = paymentType === 'payoff' ? true : false;
-      // this.isInterestOnly = paymentType === 'interestOnly' ? true : false;
       this.paymentOption = paymentType;
 
       this.dueDate = item.DueDate;
@@ -163,6 +161,25 @@ angular.module('nextgearWebApp')
           IsInterestOnly: this.paymentOption === PaymentOptions.TYPE_INTEREST,
           AdditionalPrincipalAmount: this.paymentOption === PaymentOptions.TYPE_PAYMENT ? this.payment.additionalPrincipal : 0
         };
+      },
+      getBreakdown: function() {
+        var breakdown;
+
+        switch(this.paymentOption) {
+        case PaymentOptions.TYPE_PAYMENT:
+          breakdown = this.payment;
+          break;
+        case PaymentOptions.TYPE_PAYOFF:
+          breakdown = this.payoff;
+          break;
+        case PaymentOptions.TYPE_INTEREST:
+          breakdown = this.interest;
+          break;
+        default:
+          breakdown = '_unable to get breakdown_';
+        }
+
+        return breakdown;
       }
     };
 
