@@ -1,0 +1,22 @@
+{
+  "Success": true,
+  "Message": "",
+  "Data": [
+    {
+      "Mid": "201005555654358",
+      "MakeId": "055",
+      "Make": "Toyota",
+      "ModelId": "1234",
+      "Model": "Corolla",
+      "YearId": "2013",
+      "Year": "2013",
+      "BodyId": "4358",
+      "Body": "4D SEDAN LE",
+      "Display": "2013 TOYOTA COROLLA 4D SEDAN LE",
+      "ExcellentWholesale": 16000,
+      "GoodWholesale": 8000,
+      "FairWholesale": 4000,
+      "AverageWholesale": 8000,
+    },
+  ]
+}
