@@ -22,6 +22,7 @@ angular.module('nextgearWebApp')
       ],
       secondary: [
         { name: 'Floor a Vehicle', href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK },
+        { name: 'Value Lookup', href: '#/valueLookup', activeWhen: 'valueLookup', metric: '' },
         { name: 'Resources', href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
       ]
     },
