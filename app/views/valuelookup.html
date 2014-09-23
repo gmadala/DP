@@ -1,15 +1,60 @@
 <section class="row-fluid">
   <section class="span5">
     <div class="well">
-      <h2 class="well-title">VIN Lookup: NextGear Book &amp; MMR</h2>
+      <h4 class="well-title">VIN Lookup: <span class="subtle">NextGear Book &amp; MMR</span></h4>
       <div class="well-item">
-        <form class="form-block">
+        <form name="vinLookupForm" novalidate>
+          <div class="form-block">
+            <label for="vin" class="input-title">VIN</label>
+            <input type="text" id="vin"
+              name="vin"
+              ng-model="vinLookup.vin"
+              ng-minlength="17"
+              ng-maxlength="17"
+              required
+              nxg-autofocus
+              ng-class="{ 'nxg-invalid': vinLookup.validity.vin.$error.required || vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength }" />
+            <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.required">
+              Please enter a VIN.
+            </label>
+            <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength">
+              VIN should be 17 characters.
+            </label>
+          <!-- </div> -->
+
+          <!-- <div class="form-block"> -->
+            <label for="vinMileage" class="input-title">Mileage</label>
+            <input type="text" id="vinMileage"
+              name="vinMileage"
+              ng-model="vinLookup.mileage"
+              ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
+              nxg-min="1"
+              required
+              nxg-validate-int="6"
+              ng-class="{ 'nxg-invalid': vinLookup.validity.vinMileage.$error.required || vinLookup.validity.vinMileage.$error.pattern || vinLookup.validity.vinMileage.$error.maxlength || vinLookup.validity.vinMileage.$error.nxgMin }"
+              />
+              <label for="vinMileage" class="text-error"
+                ng-show="vinLookup.validity.vinMileage.$error.required">
+                Please enter the Mileage.
+              </label>
+              <label for="vinMileage"
+                class="text-error"
+                ng-show="vinLookup.validity.vinMileage.$error.pattern || vinLookup.validity.vinMileage.$error.nxgMin">
+                Please enter a positive integer value with no decimals.
+              </label>
+              <label for="vinMileage"
+                class="text-error"
+                ng-show="vinLookup.validity.vinMileage.$error.maxlength">
+                Please enter a value less than 1,000,000 miles.
+              </label>
+            </div>
+          <button class="btn-cta cta-primary" ng-click="vinLookup.lookup()">Lookup Values</button>
         </form>
       </div>
     </div>
 
     <div class="well">
-      <h2 class="well-title">Manual Lookup: NextGear Book or MMR</h2>
+      <h4 class="well-title">Manual Lookup: <span class="subtle">NextGear Book or MMR</span></h4>
       <div class="well-item">
         <form class="form-block">
         </form>

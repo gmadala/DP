@@ -18,6 +18,7 @@
     @include border-top-radius($borderRadius);
     position: relative;
     background: $white;
+    line-height: 1.8;
     padding: 5px 18px;
     border-bottom: 1px solid $wellBorder;
 
@@ -26,6 +27,10 @@
       height: 30px;
       top: 0;
       right: 10px;
+    }
+
+    .subtle {
+      font-weight: normal;
     }
   }
 
