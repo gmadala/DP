@@ -4,11 +4,11 @@
   "Data": [
     {
       "Id": "018",
-      "Name": "Hyundai",
+      "Name": "Hyundai"
     },
     {
       "Id": "076",
-      "Name": "Toyota",
-    },
+      "Name": "Toyota"
+    }
   ]
 }
