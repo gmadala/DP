@@ -29,6 +29,22 @@ angular.module('nextgearWebApp')
     };
 
     return {
+      lookupVin: function(vin, mileage) {
+        if(!vin) {
+          throw new Error('Missing vin');
+        }
+
+        return api.request('GET', '/analytics/v1_2/blackbook/' + vin + (mileage ? '/' + mileage : '')).then(function(results) {
+          // if there was a failure
+          if(!results || results.length === 0) {
+            return $q.reject(results);
+          }
+
+          return results;
+        }, function(error) {
+          return error;
+        });
+      },
       /**
        * Fetch the blackbook data for the type of vehicle indicated by a VIN
        *
@@ -58,6 +74,9 @@ angular.module('nextgearWebApp')
           url = '/analytics/v1_2/blackbook/' + vin + '/' + mileage;
         }
 
+        // TODO: This should be refactored; we don't use the multipleResolutions
+        // flag anywhere; remove it, and move the selection of a single match
+        // to the appropriate controllers; it does not belong in the model.
         return api.request('GET', url).then(
           function (result) {
             // no results = failure

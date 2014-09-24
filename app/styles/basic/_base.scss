@@ -38,13 +38,13 @@ body {
   /*
    * There is an opacity bug in IE where child elements will not inherit
    * the parent element's opacity unless the parent has a non-static
-   * position. So, .nxg-fade has a relative position, and the two immediate
+   * position. So, .nxg-fade has a relative position, and any immediate
    * children have the decreased opacity.
    *
    * See: http://www.jacklmoore.com/notes/ie-opacity-inheritance/
    */
 
-  .well-out, h4 {
+  & > * {
     @include opacity(40);
   }
 }

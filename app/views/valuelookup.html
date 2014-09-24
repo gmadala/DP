@@ -1,7 +1,11 @@
 <section class="row-fluid">
   <section class="span5">
     <div class="well">
-      <h4 class="well-title">VIN Lookup: <span class="subtle">NextGear Book &amp; MMR</span></h4>
+      <h4 class="well-title">
+        VIN Lookup:
+        <span class="subtle">NextGear Book &amp; MMR</span>
+        <button class="btn-unstyle reset" ng-click="vinLookup.resetSearch()"><strong>Reset Values</strong></button>
+      </h4>
       <div class="well-item">
         <form name="vinLookupForm" novalidate>
           <div class="form-block">
@@ -20,9 +24,7 @@
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength">
               VIN should be 17 characters.
             </label>
-          <!-- </div> -->
 
-          <!-- <div class="form-block"> -->
             <label for="vinMileage" class="input-title">Mileage</label>
             <input type="text" id="vinMileage"
               name="vinMileage"
@@ -63,7 +65,7 @@
   </section>
 
   <section class="span7">
-    <div class="info-block">
+    <div class="info-block" ng-hide="vinLookup.multipleBlackbook || vinLookup.multipleMmr || vinLookup.searchComplete">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
       </div>
@@ -71,12 +73,86 @@
         Values below will update based on successful VIN or Manual Lookup
       </p>
     </div>
+    <div class="info-block" ng-show="vinLookup.multipleBlackbook || vinLookup.multipleMmr">
+      <div class="info-block-image">
+        <span nxg-icon="icon-warning"></span>
+      </div>
+      <p class="info-block-text">
+        There are multiple vehicle styles for this VIN. Please select the appropriate style below.
+      </p>
+    </div>
+
+    <div ng-show="vinLookup.searchComplete && (!vinLookup.noBlackbookMatch || !vinLookup.noMmrMatch)">
+      <h4>Vehicle Description</h4>
+      <div class="valuation-description">
+        <h2>{{ results.description }}</h2>
+        <h4>VIN: {{ results.vin }}</h4>
+        <p>{{ results.blackbook.Style }}</p>
+        <p>{{ results.mileage | numeral:'0,0' }} miles</p>
+      </div>
+    </div>
 
     <h4>NextGear Book Values</h4>
-    something here
+    <p class="text-error" ng-show="vinLookup.noBlackbookMatch">We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
+    <div ng-show="vinLookup.multipleBlackbook">
+      <label>Style</label>
+      <div class="style-select">
+        <select id="blackbookSelectSingle"
+                name="blackbookSelectSingle"
+                ng-model="results.blackbook"
+                ng-options="result.Style for result in vinLookup.multipleBlackbook">
+        </select>
+      </div>
+    </div>
+    <div class="valuation-table row-fluid" ng-class="{ 'nxg-fade':vinLookup.noBlackbookMatch }">
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.blackbook.ExtraCleanValue | currency) || '$' }}</h3>
+        <h5>Extra Clean</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.blackbook.CleanValue | currency) || '$' }}</h3>
+        <h5>Clean</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.blackbook.AverageValue | currency) || '$' }}</h3>
+        <h5>Average</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.blackbook.RoughValue | currency) || '$' }}</h3>
+        <h5>Rough</h5>
+      </div>
+    </div>
 
     <h4>MMR Values</h4>
-    something else here
+    <p class="text-error" ng-show="vinLookup.noMmrMatch">We are sorry, but we are unable to provide MMR Values at this time.</p>
+    <div ng-show="vinLookup.multipleMmr">
+      <label>Style</label>
+      <div class="style-select">
+        <select id="mmrSelectSingle"
+                name="mmrSelectSingle"
+                ng-model="results.mmr"
+                ng-options="result.Body for result in vinLookup.multipleMmr">
+        </select>
+      </div>
+    </div>
+    <div class="valuation-table row-fluid" ng-class="{ 'nxg-fade':vinLookup.noMmrMatch }">
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.mmr.ExcellentWholesale | currency) || '$' }}</h3>
+        <h5>Excellent</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.mmr.GoodWholesale | currency) || '$' }}</h3>
+        <h5>Good</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.mmr.AverageWholesale | currency) || '$' }}</h3>
+        <h5>Average</h5>
+      </div>
+      <div class="span3 center">
+        <h3 class="highlight heavy">{{ (results.mmr.FairWholesale | currency) || '$' }}</h3>
+        <h5>Fair</h5>
+      </div>
+    </div>
 
   </section>
 </section>

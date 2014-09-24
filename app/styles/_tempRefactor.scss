@@ -382,3 +382,44 @@ hr {
 .form-separator {
   padding-top: 10px;
 }
+
+// value look-up table
+.valuation-table {
+  @extend .clearfix;
+  @extend .col-bordered;
+  @include border-radius($borderRadius);
+  background-color: $white;
+  border: 1px solid $border;
+  padding: 10px 20px;
+  margin: 10px 0 20px;
+
+   & > [class*="span"] {
+    padding: 10px;
+    border-right: 1px solid #BBBBBB;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.reset {
+  @extend %float-r;
+  @extend .heavy;
+  font-size: 12px;
+  margin: 6px 0
+}
+
+.valuation-description {
+  @include border-radius($borderRadius);
+  background-color: $white;
+  border: 1px solid $border;
+  padding: 15px 20px;
+  margin: 10px 0 20px;
+
+  h2 {
+    @extend .heavy;
+    @extend .caps;
+    line-height: 1.2;
+  }
+}
