@@ -4,7 +4,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-09-25 11:12-0700\n"
+"PO-Revision-Date: 2014-09-25 17:27-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -174,7 +174,7 @@ msgid ""
 "number:2 }}% of the NextGear Capital Book"
 msgstr ""
 "La cantidad pendiente es {{ businessSummary.DerivedAmountOutstanding | "
-"número:2 }}% del Libro de NextGear Capital."
+"number:2 }}% del Libro de NextGear Capital."
 
 #: app/views/payments.html
 msgid ""
@@ -185,9 +185,9 @@ msgid ""
 "[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
 msgstr ""
 "Las cantidades que se muestran son válidas hasta las 8pm EST/n <span ng-show="
-"\"canPayNow\">today ({{ todayDate | moment }}) </span\n"
-" <span ng-show=\"!canPayNow\">{{ { true:´mañana´, false: \"}{nextBusinessDay."
-"isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
+"\"canPayNow\">today ({{ todayDate | moment }}) </span>\n"
+" <span ng-show=\"!canPayNow\">{{ { true: 'mañana', false: ''}"
+"[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "An email will be sent to you shortly with a tracking number."
@@ -1638,7 +1638,7 @@ msgstr "Solicitar el título"
 
 #: app/views/payments.html
 msgid "Request<br>Extension"
-msgstr "Solicitar ampliación<br>"
+msgstr "Solicitar<br>ampliación"
 
 #: app/views/titlereleasecheckout.html
 msgid "Requests Summary"
@@ -1820,8 +1820,8 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"floorplanData."
 "resetSearch(filterOptions)\" title=\"New Search\">try a new search</a>."
 msgstr ""
-"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng- click="
-"\"floorplanData.resetSearch(filterOptions)\" title= \"Nueva búsqueda"
+"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"floorplanData.resetSearch(filterOptions)\" title=\"Nueva búsqueda"
 "\">realice una nueva búsqueda</a>."
 
 #: app/views/payments.html
@@ -1829,8 +1829,8 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title="
 "\"New Search\">try a new search</a>."
 msgstr ""
-"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng- click="
-"\"payments.resetSearch()\" title= \"Nueva búsqueda\">realice una nueva "
+"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"payments.resetSearch()\" title=\"Nueva búsqueda\">realice una nueva "
 "búsqueda</a>."
 
 #: app/views/receipts.html
@@ -1838,8 +1838,8 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"receipts.resetSearch()\" title="
 "\"New Search\">try a new search</a>."
 msgstr ""
-"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng- click="
-"\"receipts.resetSearch()\" title= \"Nueva búsqueda\">realice una nueva "
+"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"receipts.resetSearch()\" title=\"Nueva búsqueda\">realice una nueva "
 "búsqueda</a>."
 
 #: app/views/auction.sellerfloorplan.html app/views/titlereleases.html
@@ -1847,16 +1847,16 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"resetSearch()\" title=\"New "
 "Search\">try a new search</a>."
 msgstr ""
-"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng- click="
-"\"resetSearch()\" title= \"Nueva búsqueda\">realice una nueva búsqueda</a>."
+"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"resetSearch()\" title=\"Nueva búsqueda\">realice una nueva búsqueda</a>."
 
 #: app/views/scheduledpayments.html
 msgid ""
 "Sorry, no results found. Please <a ng-click=\"scheduledPayments."
 "resetSearch()\" title=\"New Search\">try a new search</a>."
 msgstr ""
-"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng- click="
-"\"scheduledPayments.resetSearch()\" title= \"Nueva búsqueda\">realice una "
+"Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"scheduledPayments.resetSearch()\" title=\"Nueva búsqueda\">realice una "
 "nueva búsqueda</a>."
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
@@ -1926,7 +1926,7 @@ msgstr "Enviar solicitudes"
 
 #: app/views/modals/confirmCheckout.html
 msgid "Submitted Payment(s): {{ items.todayTotal() | currency }}"
-msgstr "Pago(s) enviado(s): {{ items.todayTotal() | divisa }}"
+msgstr "Pago(s) enviado(s): {{ items.todayTotal() | currency }}"
 
 #: app/views/auction.reports.html
 msgid "Subsidiary Manufacturer"
@@ -1956,8 +1956,8 @@ msgid ""
 "The title(s) will be sent to the following address: <strong>{{addresses[0] | "
 "address}}</strong>"
 msgstr ""
-"El (los) título(s) se enviarán a la siguiente dirección: <strong> "
-"{{addresses[0] | address}}</strong>"
+"El (los) título(s) se enviarán a la siguiente dirección: "
+"<strong>{{addresses[0] | address}}</strong>"
 
 #: app/views/payments.html
 msgid "There are no fees associated with this account."
@@ -2037,7 +2037,7 @@ msgstr "Título solicitado"
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
 msgstr ""
-"Solicitud de título{{ {falso: 's'}[counts.total == 1] }}: {{ counts.total }}"
+"Solicitud de título{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Title Settings"
@@ -2147,7 +2147,7 @@ msgid ""
 "Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></"
 "span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
 msgstr ""
-"Los fondos no aplicados deben ser <span ng- bind=\"unappliedFunds.min() | "
+"Los fondos no aplicados deben ser <span ng-bind=\"unappliedFunds.min() | "
 "currency\"></span> a <span ng-bind=\"unappliedFunds.max() | currency\"></"
 "span>"
 
@@ -2253,8 +2253,9 @@ msgid ""
 "customer-support-phone>."
 msgstr ""
 "No encontramos esta dirección de correo electrónico. Si necesita ayuda, por "
-"favor llame\a Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>."
+"favor llame\n"
+" Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
+"support-phone>."
 
 #: app/views/login.recover.html
 msgid ""
@@ -2262,8 +2263,8 @@ msgid ""
 "            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
 "customer-support-phone>."
 msgstr ""
-"No encontramos este nombre de usuario. Si necesita ayuda, por favor llame\a "
-"Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
+"No encontramos este nombre de usuario. Si necesita ayuda, por favor llame\n"
+" Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
 "support-phone>."
 
 #: app/views/login.recover.html
@@ -2274,8 +2275,9 @@ msgid ""
 "customer-support-phone>."
 msgstr ""
 "No pudimos verificar algunas de sus respuestas. Si necesita ayuda, por favor "
-"llame\a Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>."
+"llame\n"
+" Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
+"support-phone>."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
@@ -2361,7 +2363,7 @@ msgid ""
 msgstr ""
 "Lo necesitará para ver sus reportes. <br>\n"
 " ¿No está seguro(a)? <a href=\"https://test.discoverdsc.com/MyDSC/Public/"
-"Test.pdf \"target=\"_blank\">Compruebe su instalación de Adobe Reader. </"
+"Test.pdf\" \"target=\"_blank\">Compruebe su instalación de Adobe Reader. </"
 "a><br>\n"
 " en caso de que el documento no se vea bien, por favor, instale <a href="
 "\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader. </a>"
@@ -2396,7 +2398,7 @@ msgstr ""
 #: app/views/modals/confirmCheckout.html
 msgid ""
 "Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}."
-msgstr "Su(s) pago(s) se han {{ items.getStatus(enviado\", 'programado') }}."
+msgstr "Su(s) pago(s) se han {{ items.getStatus('enviado', 'programado') }}."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
@@ -2438,17 +2440,17 @@ msgstr ""
 
 #: app/views/analytics.html
 msgid "{{  {true:'Close ', false:'Show ' }[showDetails] }} Details"
-msgstr "{{ {true:'Cerrar\", false:'Mostrar' } [showDetails] }} Detalles"
+msgstr "{{ {true:'Cerrar', false:'Mostrar' } [showDetails] }} Detalles"
 
 #: app/views/vehicledetails.html
 msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Activity"
 msgstr ""
-"{{ {true:'Mostrar\", false:'Ocultar' } [isCollapsed] }} Actividad de Pago"
+"{{ {true:'Mostrar', false:'Ocultar' } [isCollapsed] }} Actividad de Pago"
 
 #: app/views/dashboard.html
 msgid "{{  {true:'Show ', false:'Hide ' }[isCollapsed] }} Payment Details"
 msgstr ""
-"{{ {true:'Mostrar\", false:'Ocultar' } [isCollapsed] }} Detalles de Pago"
+"{{ {true:'Mostrar', false:'Ocultar' } [isCollapsed] }} Detalles de Pago"
 
 #: app/views/vehicledetails.html
 msgid ""
@@ -2516,7 +2518,7 @@ msgid ""
 msgstr ""
 "{{ paymentQueue.sum.scheduledCount()  }} Future\n"
 " <span ng-show=\"paymentQueue.sum.scheduledCount() == 1\">Payment</span>\n"
-" <span ng- hide=\"paymentQueue.sum.scheduledCount() == 1\">Payments</span>"
+" <span ng-hide=\"paymentQueue.sum.scheduledCount() == 1\">Payments</span>"
 
 #: app/views/login.recover.html
 msgid "{{ question.QuestionText }}"
@@ -2528,6 +2530,6 @@ msgid ""
 "Assessed', false:''}[activity.IsFee]}} for {{ activity.ActivityAmount | "
 "currency }}"
 msgstr ""
-"{{ {true: 'Pago Realizado', false:\"}[activity.IsPayment]}} {{true: 'Cargo "
-"Evaluado', false:\"}[activity.IsFee]}} para {{ activity.ActivityAmount | "
-"divisa }} "
+"{{ {true: 'Pago Realizado', false:''}[activity.IsPayment]}} {{true: 'Cargo "
+"Evaluado', false:''}[activity.IsFee]}} para {{ activity.ActivityAmount | "
+"currency }} "

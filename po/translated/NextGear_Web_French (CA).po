@@ -4,7 +4,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-09-25 09:53-0700\n"
+"PO-Revision-Date: 2014-09-25 17:50-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -2025,7 +2025,7 @@ msgstr "Titre demandé"
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
 msgstr ""
-"Demande de titre {{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
+"Demande de titre{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Title Settings"
@@ -2385,8 +2385,7 @@ msgstr ""
 #: app/views/modals/confirmCheckout.html
 msgid ""
 "Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}."
-msgstr ""
-"Vos paiements ont été {{ items.getStatus(' soumis', ' programmés') }}. "
+msgstr "Vos paiements ont été {{ items.getStatus('soumis', 'programmés') }}. "
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
@@ -2398,8 +2397,8 @@ msgid ""
 "counts.failed > 1] }} been approved. An email will be sent to you shortly "
 "with a tracking number."
 msgstr ""
-"{{ {true: 'Vos demandes de titres ont été', false: ' Votre demande de titre "
-"a été'}[counts.total-counts.failed > 1] }} approuvée ou approuvées. Un "
+"{{ {true: 'Vos demandes de titres ont été', false: 'Votre demande de titre a "
+"été'}[counts.total-counts.failed > 1] }} approuvée ou approuvées. Un "
 "courriel contenant un numéro de suivi vous sera envoyé sous peu."
 
 #: app/views/modals/confirmTitleRequest.html
@@ -2407,8 +2406,8 @@ msgid ""
 "Your title {{ {true: 'requests have', false: 'request has'}[counts.total-"
 "counts.failed > 1] }} been submitted."
 msgstr ""
-"{{ {true: 'Vos demandes de titres ont été', false: ' Votre demande de titre "
-"a été'}[counts.total-counts.failed > 1] }}soumise ou soumises."
+"{{ {true: 'Vos demandes de titres ont été', false: 'Votre demande de titre a "
+"été'}[counts.total-counts.failed > 1] }}soumise ou soumises."
 
 #: app/views/scheduledpayments.html
 msgid "as of: {{ pay.statusDate | moment }}"
