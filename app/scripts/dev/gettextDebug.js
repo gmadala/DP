@@ -28,7 +28,7 @@ angular.module('nextgearWebApp')
 
       angular.element('head').append('\
       <style>\
-        #translationDebugger { position: fixed; top: 150px; left: 10px; background: #eee; border-radius: 4px; border: solid 1px #aaa; padding: .5em; opacity: .7 }\
+        #translationDebugger { position: fixed; top: 150px; left: 10px; background: #eee; border-radius: 4px; border: solid 1px #aaa; padding: .5em; opacity: .7; z-index: 5000 }\
         #translationDebugger strong { display: block; text-align: center }\
         #translationDebugger ul { margin: .5em 0 0 0 }\
         #translationDebugger ul li { margin: 0 0 .5em 0 }\
