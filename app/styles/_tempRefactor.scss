@@ -390,13 +390,16 @@ hr {
   @include border-radius($borderRadius);
   background-color: $white;
   border: 1px solid $border;
-  padding: 10px 20px;
+  padding: 10px 0;
   margin: 10px 0 20px;
 
    & > [class*="span"] {
     padding: 10px;
     border-right: 1px solid #BBBBBB;
 
+    & + [class*="span"] {
+      padding-left: 0;
+    }
     &:last-child {
       border-right: 0;
     }
@@ -410,6 +413,11 @@ hr {
   margin: 6px 0
 }
 
+.value-form {
+
+
+}
+
 .valuation-description {
   @include border-radius($borderRadius);
   background-color: $white;
@@ -421,5 +429,12 @@ hr {
     @extend .heavy;
     @extend .caps;
     line-height: 1.2;
+  }
+}
+
+.body-style {
+  margin: 0 10px;
+  .body-style-label {
+    margin: 10px 0 2px;
   }
 }
