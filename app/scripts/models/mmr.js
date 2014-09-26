@@ -70,6 +70,9 @@ angular.module('nextgearWebApp')
         };
 
         return api.request('GET', '/mmr/getVehicleValueByOptions', requestObj).then(function(vehicles) {
+          if(!vehicles || vehicles.length === 0) {
+            return $q.reject(false);
+          }
           return vehicles;
         });
       },

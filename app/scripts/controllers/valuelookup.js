@@ -4,7 +4,6 @@ angular.module('nextgearWebApp')
   .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook) {
     $scope.results = {};
     $scope.searchInProgress = false;
-    $scope.searchComplete = false;
 
     var buildDescription = function(obj) {
       return obj.Year + ' ' + obj.Make + ' ' + obj.Model;
@@ -26,21 +25,54 @@ angular.module('nextgearWebApp')
         mileage: null,
         description: null
       };
+
+      $scope.manualLookup.searchComplete = false;
+      $scope.vinLookup.searchComplete = false;
     };
 
-    resetResults(); // To get everything set up
+    var resetOptions = function(field, isMmr) {
+      // clear out all the following options when a field is updated.
+      var object = isMmr ? $scope.manualLookup.mmr : $scope.manualLookup.blackbook,
+          fields = object.fields,
+          index = fields.indexOf(field);
+
+      for(var i = fields.length-1; i >= index; --i) {
+        object[fields[i]].selected = null;
+        object[fields[i]].list = [];
+      }
+    };
+
+
+    $scope.hideMmrAll = function() {
+      return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data);
+    };
+
+    $scope.hideBlackbookAll = function() {
+      return ($scope.manualLookup.searchComplete && !$scope.results.blackbook.data);
+    };
+
+    $scope.showMultiplesWarning = function() {
+      return $scope.results.blackbook.multiple || $scope.results.mmr.multiple;
+    };
+
+    $scope.showDescription = function() {
+      return ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete) && !($scope.results.blackbook.noMatch || $scope.results.mmr.noMatch);
+    };
 
     $scope.vinLookup = {
       vin: null,
       mileage: null,
       validity: {},
+      searchComplete: false,
       resetSearch: function() {
         this.vin = null;
         this.mileage = null;
         resetResults();
-        $scope.searchComplete = false;
       },
       lookup: function() {
+        // make sure we reset the other search, in case we had already run that one.
+        $scope.manualLookup.resetSearch();
+
         var which = this;
 
         if (this.validate()) {
@@ -80,7 +112,7 @@ angular.module('nextgearWebApp')
             $scope.results.mmr.noMatch = true;
           });
 
-          $scope.searchComplete = true;
+          this.searchComplete = true;
         }
         $scope.searchInProgress = false;
       },
@@ -94,24 +126,21 @@ angular.module('nextgearWebApp')
       }
     };
 
+
     $scope.manualLookup = {
       showBlackbook: true,
+      searchComplete: false,
       blackbook: {
+        fields: ['makes', 'models', 'years', 'styles'],
         makes: {
           selected: null,
           list: [],
           fill: function() {
-            var bb = $scope.manualLookup.blackbook;
+            resetOptions('makes');
 
             Blackbook.getMakes().then(function(makes) {
               bb.makes.list = makes;
               bb.makes.selected = null;
-              bb.models.list = [];
-              bb.models.selected = null;
-              bb.years.list = [];
-              bb.years.selected = null;
-              bb.styles.list = [];
-              bb.styles.selected = null;
             });
           }
         },
@@ -119,13 +148,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            var bb = $scope.manualLookup.blackbook;
-            bb.models.list = [];
-            bb.models.selected = null;
-            bb.years.list = [];
-            bb.years.selected = null;
-            bb.styles.list = [];
-            bb.styles.selected = null;
+            resetOptions('models');
 
             if(bb.makes.selected) {
               Blackbook.getModels(bb.makes.selected).then(function(models) {
@@ -143,11 +166,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            var bb = $scope.manualLookup.blackbook;
-            bb.years.list = [];
-            bb.years.selected = null;
-            bb.styles.list = [];
-            bb.styles.selected = null;
+            resetOptions('years');
 
             if(bb.models.selected) {
               Blackbook.getYears(bb.makes.selected, bb.models.selected).then(function(years) {
@@ -165,9 +184,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            var bb = $scope.manualLookup.blackbook;
-            bb.styles.list = [];
-            bb.styles.selected = null;
+            resetOptions('styles');
 
             if(bb.years.selected) {
               Blackbook.getStyles(bb.makes.selected, bb.models.selected, bb.years.selected).then(function(styles) {
@@ -181,10 +198,11 @@ angular.module('nextgearWebApp')
           }
         },
         mileage: null,
-        multiple: null,
-        noMatch: false,
         validity: {},
         lookup: function() {
+          // make sure we reset the other search, in case we've already run it.
+          $scope.vinLookup.resetSearch();
+
           var which = this;
 
           if(which.validate()) {
@@ -194,13 +212,15 @@ angular.module('nextgearWebApp')
             $scope.results.mileage = which.mileage;
 
             Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage).then(function(vehicles) {
-
-              $scope.results.blackbook = vehicles;
+              // Blackbook will only ever return one result based
+              // on all 5 params; it'll always be the only item in the result array
+              $scope.results.blackbook.data = vehicles[0];
+              $scope.results.description = buildDescription(vehicles[0]);
             });
           }
 
           $scope.searchInProgress = false;
-          $scope.searchComplete = true;
+          $scope.manualLookup.searchComplete = true;
         },
         validate: function() {
           this.validity = angular.copy($scope.manualLookupForm);
@@ -212,21 +232,16 @@ angular.module('nextgearWebApp')
         }
       },
       mmr: {
+        fields: ['years', 'makes', 'models', 'styles'],
         years: {
           selected: null,
           list: [],
           fill: function() {
-            var mm = $scope.manualLookup.mmr;
+            resetOptions('years', true);
 
             Mmr.getYears().then(function(years) {
               mm.years.list = years;
               mm.years.selected = null;
-              mm.makes.list = [];
-              mm.makes.selected = null;
-              mm.models.list = [];
-              mm.models.selected = null;
-              mm.styles.list = [];
-              mm.styles.selected = null;
             });
           }
         },
@@ -234,28 +249,25 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            var mm = $scope.manualLookup.mmr;
-            mm.makes.list = [];
-            mm.makes.selected = null;
-            mm.models.list = [];
-            mm.models.selected = null;
-            mm.styles.list = [];
-            mm.styles.selected = null;
+            resetOptions('makes', true);
 
-            Mmr.getMakes(mm.years.selected).then(function(makes) {
-              mm.makes.list = makes;
+            if(mm.years.selected) {
+              Mmr.getMakes(mm.years.selected).then(function(makes) {
+                mm.makes.list = makes;
 
-              if(makes.length === 1) {
-                mm.makes.selected = makes[0];
-                mm.models.fill();
-              }
-            });
+                if(makes.length === 1) {
+                  mm.makes.selected = makes[0];
+                  mm.models.fill();
+                }
+              });
+            }
           }
         },
         models: {
           selected: null,
           list: [],
           fill: function() {
+
             var mm = $scope.manualLookup.mmr;
             mm.models.list = [];
             mm.models.selected = null;
@@ -290,12 +302,12 @@ angular.module('nextgearWebApp')
           }
         },
         mileage: null,
-        // multiple: null,
-        // noMatch: false,
         validity: {},
         lookup: function() {
+          // make sure we reset the other search, in case we've already run it.
+          $scope.vinLookup.resetSearch();
+
           var which = this;
-          // console.log($scope.manualLookup.mmr.mileage, this.mileage, which.mileage);
 
           if(which.validate()) {
             $scope.searchInProgress = true;
@@ -303,20 +315,17 @@ angular.module('nextgearWebApp')
             $scope.results.mileage = which.mileage;
 
             Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
-              console.log(vehicles);
-              if(vehicles.length === 1) {
-                $scope.results.mmr = vehicles[0];
-              } else { // we have multiple results
-                $scope.manualLookup.mmr.multiple = vehicles;
-                $scope.results.mmr = vehicles[0]; // as a default
-              }
-
+              // MMR will almost always return only one result based
+              // on all 5 params, and if there are multiples, the
+              // values will likely be the same anyway. So, we
+              // assume there is only item in the array
+              $scope.results.mmr.data = vehicles[0];
               $scope.results.description = buildDescription(vehicles[0]);
             });
           }
 
           $scope.searchInProgress = false;
-          $scope.searchComplete = true;
+          $scope.manualLookup.searchComplete = true;
         },
         validate: function() {
           this.validity = angular.copy($scope.manualLookupForm);
@@ -331,23 +340,26 @@ angular.module('nextgearWebApp')
         this.showBlackbook = shouldShowBlackbook;
       },
       resetSearch: function() {
-        this.blackbook.makes.selected = null;
-        this.blackbook.models.list = [];
-        this.blackbook.models.selected = null;
-        this.blackbook.years.list = [];
-        this.blackbook.years.selected = null;
-        this.blackbook.styles.list = [];
-        this.blackbook.styles.selected = null;
-        this.blackbook.mileage = null;
+        bb.makes.selected = null;
+        bb.models.list = [];
+        bb.models.selected = null;
+        bb.years.list = [];
+        bb.years.selected = null;
+        bb.styles.list = [];
+        bb.styles.selected = null;
+        bb.mileage = null;
 
-        this.mmr.years.list = [];
-        this.mmr.years.selected = null;
-        this.mmr.makes.selected = null;
-        this.mmr.models.list = [];
-        this.mmr.models.selected = null;
-        this.mmr.styles.list = [];
-        this.mmr.styles.selected = null;
-        this.mmr.mileage = null;
+        // this.mmr.years.list = [];
+        mm.years.selected = null;
+        mm.makes.list = [];
+        mm.makes.selected = null;
+        mm.models.list = [];
+        mm.models.selected = null;
+        mm.styles.list = [];
+        mm.styles.selected = null;
+        mm.mileage = null;
+
+        resetResults();
       },
       lookup: function() {
         if (this.showBlackbook) {
@@ -358,6 +370,11 @@ angular.module('nextgearWebApp')
       }
     };
 
+    // Utility objects for easier reference
+    var bb = $scope.manualLookup.blackbook;
+    var mm = $scope.manualLookup.mmr;
+
+    resetResults(); // To get everything set up
     $scope.manualLookup.blackbook.makes.fill(); // Default Blackbook
     $scope.manualLookup.mmr.years.fill(); // Default MMR
   });
