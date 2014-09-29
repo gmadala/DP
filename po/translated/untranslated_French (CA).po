@@ -225,10 +225,6 @@ msgstr "Meilleurs et pires taux de roulement par code postal"
 msgid "Bill of Sale Picture"
 msgstr "Photo de l'acte de vente"
 
-#: app/scripts/app.js
-msgid "BookAmountResultsCtrl"
-msgstr "BookAmountResultsCtrl"
-
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Breakdown at a Glance"
 msgstr "Aperçu de la ventilation"
@@ -509,10 +505,6 @@ msgstr "Résultats du filtre"
 #: app/views/dialogs/filterError.html
 msgid "Filters must have at least one selected option."
 msgstr "Les filtres doivent avoir au moins une option sélectionnée."
-
-#: app/scripts/app.js
-msgid "FiltersCtrl"
-msgstr "FiltersCtrl"
 
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Finance Amount"
@@ -1123,9 +1115,9 @@ msgid ""
 msgstr ""
 "Veuillez confirmer ci-dessous vos demandes d’émission de titres. Les titres "
 "ici émis doivent être retournés dans les 7 jours. Si vous faites la demande "
-"d’un titre pour un engagement de travail, veuillez communiquer avec le "
-"service à la clientèle pour obtenir plus d’aide au <a nxg-customer-support-"
-"phone=\"\"></a>."
+"d’un titre pour un contrat avec un organisme gouvernemental, veuillez "
+"communiquer avec le service à la clientèle pour obtenir plus d’aide au <a "
+"nxg-customer-support-phone=\"\"></a>."
 
 #: app/views/dialogs/formError.html
 msgid ""
@@ -1378,7 +1370,7 @@ msgstr "No de stock"
 
 #: app/scripts/controllers/vehicleDetails/vehicleDetails.js
 msgid "Stock #{{ num }} Detail"
-msgstr "Informations sur le stock No {{ num }}"
+msgstr "Informations sur le stock No{{ num }}"
 
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Stock Number"
@@ -1508,9 +1500,9 @@ msgid ""
 "nxg-customer-support-phone=\"\"></a> for further assistance."
 msgstr ""
 "Les titres ici émis doivent être retournés dans les sept jours. Si vous "
-"demander un titre pour un engagement de travail, veuillez communiquer avec "
-"le service à la clientèle au <a nxg-customer-support-phone=\"\"></a> pour "
-"obtenir de l’aide."
+"demander un titre pour un contrat avec un organisme gouvernemental, veuillez "
+"communiquer avec le service à la clientèle au <a nxg-customer-support-phone="
+"\"\"></a> pour obtenir de l’aide."
 
 #: app/views/dialogs/topAuctionsInfo.html
 msgid "Top Auctions"

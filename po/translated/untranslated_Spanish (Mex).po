@@ -224,10 +224,6 @@ msgstr "Las de mejor y peor movimiento por código postal"
 msgid "Bill of Sale Picture"
 msgstr "Fotografía de la nota de venta"
 
-#: app/scripts/app.js
-msgid "BookAmountResultsCtrl"
-msgstr "BookAmountResultsCtrl"
-
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Breakdown at a Glance"
 msgstr "Desglose rápido"
@@ -510,10 +506,6 @@ msgstr "Resultados del filtro"
 #: app/views/dialogs/filterError.html
 msgid "Filters must have at least one selected option."
 msgstr "Los filtros deben tener por lo menos una opción seleccionada."
-
-#: app/scripts/app.js
-msgid "FiltersCtrl"
-msgstr "FiltersCtrl"
 
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Finance Amount"
