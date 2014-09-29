@@ -48,15 +48,15 @@ angular.module('nextgearWebApp')
     };
 
     $scope.hideBlackbookAll = function() {
-      return ($scope.manualLookup.searchComplete && !$scope.results.blackbook.data);
+      return ($scope.manualLookup.searchComplete && !$scope.results.blackbook.data && !$scope.results.blackbook.noMatch);
     };
 
     $scope.showMultiplesWarning = function() {
-      return $scope.results.blackbook.multiple || $scope.results.mmr.multiple;
+      return !!$scope.results.blackbook.multiple || !!$scope.results.mmr.multiple;
     };
 
     $scope.showDescription = function() {
-      return ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete) && !($scope.results.blackbook.noMatch || $scope.results.mmr.noMatch);
+      return !($scope.results.blackbook.noMatch || $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
     };
 
     $scope.vinLookup = {
@@ -167,7 +167,6 @@ angular.module('nextgearWebApp')
           list: [],
           fill: function() {
             resetOptions('years');
-
             if(bb.models.selected) {
               Blackbook.getYears(bb.makes.selected, bb.models.selected).then(function(years) {
                 bb.years.list = years;
@@ -216,6 +215,9 @@ angular.module('nextgearWebApp')
               // on all 5 params; it'll always be the only item in the result array
               $scope.results.blackbook.data = vehicles[0];
               $scope.results.description = buildDescription(vehicles[0]);
+            }, function() {
+              // no results
+              $scope.results.blackbook.noMatch = true;
             });
           }
 
@@ -267,38 +269,35 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
+            resetOptions('models', true);
 
-            var mm = $scope.manualLookup.mmr;
-            mm.models.list = [];
-            mm.models.selected = null;
-            mm.styles.list = [];
-            mm.styles.selected = null;
+            if(mm.makes.selected) {
+              Mmr.getModels(mm.years.selected, mm.makes.selected).then(function(models) {
+                mm.models.list = models;
 
-            Mmr.getModels(mm.years.selected, mm.makes.selected).then(function(models) {
-              mm.models.list = models;
-
-              if(models.length === 1) {
-                mm.models.selected = models[0];
-                mm.styles.fill();
-              }
-            });
+                if(models.length === 1) {
+                  mm.models.selected = models[0];
+                  mm.styles.fill();
+                }
+              });
+            }
           }
         },
         styles: {
           selected: null,
           list: [],
           fill: function() {
-            var mm = $scope.manualLookup.mmr;
-            mm.styles.list = [];
-            mm.styles.selected = null;
+            resetOptions('styles', true);
 
-            Mmr.getBodyStyles(mm.years.selected, mm.makes.selected, mm.models.selected).then(function(bodyStyles) {
-              mm.styles.list = bodyStyles;
+            if(mm.models.selected) {
+              Mmr.getBodyStyles(mm.years.selected, mm.makes.selected, mm.models.selected).then(function(bodyStyles) {
+                mm.styles.list = bodyStyles;
 
-              if (bodyStyles.length === 1) {
-                mm.styles.selected = bodyStyles[0];
-              }
-            });
+                if (bodyStyles.length === 1) {
+                  mm.styles.selected = bodyStyles[0];
+                }
+              });
+            }
           }
         },
         mileage: null,
@@ -321,6 +320,9 @@ angular.module('nextgearWebApp')
               // assume there is only item in the array
               $scope.results.mmr.data = vehicles[0];
               $scope.results.description = buildDescription(vehicles[0]);
+            }, function() {
+              // no results
+              $scope.results.mmr.noMatch = true;
             });
           }
 
@@ -349,7 +351,6 @@ angular.module('nextgearWebApp')
         bb.styles.selected = null;
         bb.mileage = null;
 
-        // this.mmr.years.list = [];
         mm.years.selected = null;
         mm.makes.list = [];
         mm.makes.selected = null;

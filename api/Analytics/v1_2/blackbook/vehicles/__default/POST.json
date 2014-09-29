@@ -20,25 +20,6 @@
       "DSCRegionalAveragePurchasePrice":1775.0000,
       "DSCRegionalMaxPurchasePrice":1775.0000,
       "DSCRegionalMinPurchasePrice":1775.0000
-    },
-    {
-      "VinPos1To8":"19UYA315",
-      "VinYearCode":"X",
-      "Make":"Acura",
-      "Model":"CL",
-      "Style":"2D Coupe 2.3 2.3L I-4 EFI",
-      "Year":1999,
-      "RoughValue":500,
-      "AverageValue":600,
-      "CleanValue":700,
-      "ExtraCleanValue":800,
-      "BlackBookImportId":"043b55af-2590-4188-808f-37e2dda2cc99",
-      "GroupNumber":"4185",
-      "MakeNumber":"020",
-      "UVc":"041",
-      "DSCRegionalAveragePurchasePrice":1775.0000,
-      "DSCRegionalMaxPurchasePrice":1775.0000,
-      "DSCRegionalMinPurchasePrice":1775.0000
     }
   ]
 }
