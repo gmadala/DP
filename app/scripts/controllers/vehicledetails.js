@@ -274,7 +274,7 @@ angular.module('nextgearWebApp')
           title: {
             useHTML: true,
             floating: true,
-            text: '<h5 class="chart-label-secondary">Total Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
+            text: '<h5 class="chart-label-secondary">Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
             y: 80
           },
           data: [
