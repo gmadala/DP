@@ -531,7 +531,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
         scope.manualLookup.mmr.models.fill();
         $httpBackend.flush();
-        expect(mmr.getModels).toHaveBeenCalledWith(mock.mmr.years.Data[0], mock.mmr.makes.Data[0]);
+        expect(mmr.getModels).toHaveBeenCalledWith(mock.mmr.makes.Data[0], mock.mmr.years.Data[0]);
         expect(scope.manualLookup.mmr.models.list.length).toBe(2);
       });
 
@@ -543,7 +543,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.manualLookup.mmr.models.selected = mock.mmr.models.Data[0];
         scope.manualLookup.mmr.styles.fill();
         $httpBackend.flush();
-        expect(mmr.getBodyStyles).toHaveBeenCalledWith(mock.mmr.years.Data[0], mock.mmr.makes.Data[0], mock.mmr.models.Data[0]);
+        expect(mmr.getBodyStyles).toHaveBeenCalledWith(mock.mmr.makes.Data[0], mock.mmr.years.Data[0], mock.mmr.models.Data[0]);
         expect(scope.manualLookup.mmr.styles.list.length).toBe(2);
       });
 

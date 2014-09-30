@@ -270,9 +270,8 @@ angular.module('nextgearWebApp')
           list: [],
           fill: function() {
             resetOptions('models', true);
-
             if(mm.makes.selected) {
-              Mmr.getModels(mm.years.selected, mm.makes.selected).then(function(models) {
+              Mmr.getModels(mm.makes.selected, mm.years.selected).then(function(models) {
                 mm.models.list = models;
 
                 if(models.length === 1) {
@@ -290,7 +289,7 @@ angular.module('nextgearWebApp')
             resetOptions('styles', true);
 
             if(mm.models.selected) {
-              Mmr.getBodyStyles(mm.years.selected, mm.makes.selected, mm.models.selected).then(function(bodyStyles) {
+              Mmr.getBodyStyles(mm.makes.selected, mm.years.selected, mm.models.selected).then(function(bodyStyles) {
                 mm.styles.list = bodyStyles;
 
                 if (bodyStyles.length === 1) {
