@@ -98,7 +98,7 @@ describe('Directive: navBar', function () {
 
         // dealers have 7 primary links and 2 secondary links (excluding conditional TRP link)
         expect(myLinks.primary.length).toBe(7);
-        expect(myLinks.secondary.length).toBe(2);
+        expect(myLinks.secondary.length).toBe(3);
 
         myLinks = aScope.user.navLinks();
         // auctions have 6 primary links and no secondary links

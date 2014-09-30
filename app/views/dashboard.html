@@ -88,7 +88,11 @@
             </td>
 
             <td>
-              <a class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>
+              <!-- api/dealer/buyer/dashboard/{startDate}/{endDate} doesn't return stock# with the Upcoming Payments
+                list. Commenting out the link until the endpoint is updated to return that information. -- JOrtiz 9/29/14
+              -->
+              <!--<a class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>-->
+              {{ payment.Description }}
             </td>
             <td class="numeric">
               <span>{{ payment.PayoffDue | currency }}</span>
@@ -339,7 +343,7 @@
     </ul>
 
     <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
-      <span class="paired-body">View Floorplans</span>
+      <span class="paired-body">View Floor Plans</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
   </div><!-- end .summary.floorplan -->

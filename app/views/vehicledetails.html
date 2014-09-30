@@ -314,52 +314,55 @@
 
     <!-- Floor Plan Value Estimates -->
     <div class="well row-fluid">
-      <h2 class="well-title">Floor Plan Value Estimates <span class="well-sub-title">NextGear Black Book Valuation</span></h2>
-      <div class="row-fluid col-bordered">
-        <div class="span5">
+      <h2 class="well-title">Floor Plan Value Estimates <span class="well-sub-title">NextGear &amp; MMR Valuation</span></h2>
+      <div class="row-fluid">
+        <div class="well-item span6">
+          <h4>NextGear Book Values</h4>
           <ul class="list-table">
             <li class="list-table-row">
               <p class="span7">Extra Clean</p>
-              <p class="span5 value">{{ valueInfo.ExtraCleanValue | currency }}</p>
+              <p class="span5 value numeric">{{ valueInfo.ExtraCleanValue | currency }}</p>
             </li>
             <li class="list-table-row">
               <p class="span7">Clean</p>
-              <p class="span5 value">{{ valueInfo.CleanValue | currency }}</p>
+              <p class="span5 value numeric">{{ valueInfo.CleanValue | currency }}</p>
             </li>
             <li class="list-table-row">
               <p class="span7">Average</p>
-              <p class="span5 value">{{ valueInfo.AverageValue | currency }}</p>
+              <p class="span5 value numeric">{{ valueInfo.AverageValue | currency }}</p>
             </li>
             <li class="list-table-row">
               <p class="span7">Rough</p>
-              <p class="span5 value">{{ valueInfo.RoughValue | currency }}</p>
+              <p class="span5 value numeric">{{ valueInfo.RoughValue | currency }}</p>
             </li>
           </ul>
         </div>
 
-        <div class="span7">
-          <div class="row-fluid col-bordered center push-down">
-            <div class="span4 cell">
-              <h4>{{ valueInfo.NextGearRegionalMinPurchasePrice | currency }}</h4>
-              <p>Minimum</p>
-            </div>
-            <div class="span4 cell">
-              <h4>{{ valueInfo.NextGearRegionalAveragePurchasePrice | currency }}</h4>
-              <p>Average</p>
-            </div>
-            <div class="span4 cell">
-              <h4>{{ valueInfo.NextGearRegionalMaxPurchasePrice | currency }}</h4>
-              <p>Maximum</p>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <p class="center paragraph">NextGear Regional Values are based on the first 3 digits of your zip code.</p>
-          </div>
+        <div class="well-item span6">
+          <h4>MMR Values</h4>
+          <p class="well-item" ng-hide="showMMR">MMR Values not found on record for this vehicle.</p>
+          <ul class="list-table" ng-show="showMMR">
+            <li class="list-table-row">
+              <p class="span7">Excellent</p>
+              <p class="span5 value numeric">{{ valueInfo.MmrExcellentValue | currency }}</p>
+            </li>
+            <li class="list-table-row">
+              <p class="span7">Good</p>
+              <p class="span5 value numeric">{{ valueInfo.MmrGoodValue | currency }}</p>
+            </li>
+            <li class="list-table-row">
+              <p class="span7">Average</p>
+              <p class="span5 value numeric">{{ valueInfo.MmrAverageValue | currency }}</p>
+            </li>
+            <li class="list-table-row">
+              <p class="span7">Fair</p>
+              <p class="span5 value numeric">{{ valueInfo.MmrFairValue | currency }}</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
     <!-- end Floor Plan Value Estimates -->
-
   </section>
 
   <section class="span3 well sidebar last">

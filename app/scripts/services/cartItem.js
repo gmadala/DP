@@ -21,14 +21,15 @@ angular.module('nextgearWebApp')
           FeesPayoffTotal: sp.FeesPayoffTotal,
           InterestPayoffTotal: sp.InterestPayoffTotal,
           CollateralProtectionPayoffTotal: sp.CollateralProtectionPayoffTotal,
-          // TODO: Waiting on Leaf to provide spec update
-          // AmountDue:
-          // PrincipalPayment:
-          // FeesPaymentTotal: sp.FeesPayoffTotal,
-          // InterestPaymentTotal: sp.InterestPayoffTotal,
-          // CollateralProtectionPaymentTotal: sp.CollateralProtectionPayoffTotal
+          AmountDue: sp.PrincipalDue + sp.FeesPayoffTotal + sp.InterestPayoffTotal + sp.CollateralProtectionPayoffTotal,
+          PrincipalDue: sp.PrincipalDue,
+          FeesPaymentTotal: sp.FeesPayoffTotal,
+          InterestPaymentTotal: sp.InterestPayoffTotal,
+          CollateralProtectionPaymentTotal: sp.CollateralProtectionPayoffTotal
         };
-        return new VehicleCartItem(scheduledPayment, PaymentOptions.TYPE_PAYOFF); // has to be a payoff (?)
+        // Has to be a payoff initially, because when we add a payment
+        // from the scheduled payments page it is via the "Payoff Now" button.
+        return new VehicleCartItem(scheduledPayment, PaymentOptions.TYPE_PAYOFF);
       },
       fromFee: function(f) {
         return new FeeCartItem(f);

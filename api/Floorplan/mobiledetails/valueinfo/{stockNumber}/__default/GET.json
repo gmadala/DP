@@ -14,6 +14,10 @@
     "RoughValue": 11000.00,
     "NextGearRegionalAveragePurchasePrice": 11459.50,
     "NextGearRegionalMaxPurchasePrice": 13459.50,
-    "NextGearRegionalMinPurchasePrice": 10459.50
+    "NextGearRegionalMinPurchasePrice": 10459.50,
+    "MmrExcellentValue": 3000,
+    "MmrGoodValue": 2425,
+    "MmrAverageValue": 1625,
+    "MmrFairValue": 600
   }
 }

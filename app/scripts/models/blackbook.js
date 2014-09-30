@@ -28,7 +28,97 @@ angular.module('nextgearWebApp')
       });
     };
 
+    var formatResults = function(results) {
+      return results[0].Results;
+    };
+
     return {
+      getMakes: function() {
+        return api.request('GET', '/analytics/blackbook/vehicles/').then(function(makes) {
+          return formatResults(makes);
+        });
+      },
+      getModels: function(make) {
+        if(!make) {
+          throw new Error('Missing make');
+        }
+        return api.request('GET', '/analytics/blackbook/vehicles/' + make).then(function(models) {
+          return formatResults(models);
+        });
+      },
+      getYears: function(make, model) {
+        if(!make) {
+          throw new Error('Missing make');
+        }
+        if(!model) {
+          throw new Error('Missing model');
+        }
+
+        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model).then(function(years) {
+          return formatResults(years);
+        });
+      },
+      getStyles: function(make, model, year) {
+        if(!make) {
+          throw new Error('Missing make');
+        }
+        if(!model) {
+          throw new Error('Missing model');
+        }
+        if(!year) {
+          throw new Error('Missing year');
+        }
+
+        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model + '/' + year).then(function(styles) {
+          return formatResults(styles);
+        });
+      },
+      lookupByOptions: function(make, model, year, style, mileage) {
+        if(!make) {
+          throw new Error('Missing make');
+        }
+        if(!model) {
+          throw new Error('Missing model');
+        }
+        if(!year) {
+          throw new Error('Missing year');
+        }
+        if(!style) {
+          throw new Error('Missing style');
+        }
+        if(!mileage) {
+          throw new Error('Missing mileage');
+        }
+
+        var requestObj = {
+          'Make': make,
+          'Model': model,
+          'Year': year,
+          'Miles': mileage,
+          'Style': style
+        };
+
+        return api.request('POST', '/analytics/v1_2/blackbook/vehicles', requestObj).then(function(vehicles) {
+          if(!vehicles || vehicles.length === 0) {
+            return $q.reject(false);
+          }
+          return vehicles;
+        });
+      },
+      lookupByVin: function(vin, mileage) {
+        if(!vin) {
+          throw new Error('Missing vin');
+        }
+
+        return api.request('GET', '/analytics/v1_2/blackbook/' + vin + (mileage ? '/' + mileage : '')).then(function(results) {
+          // if there was a failure
+          if(!results || results.length === 0) {
+            return $q.reject(false);
+          }
+
+          return results;
+        });
+      },
       /**
        * Fetch the blackbook data for the type of vehicle indicated by a VIN
        *
@@ -58,6 +148,9 @@ angular.module('nextgearWebApp')
           url = '/analytics/v1_2/blackbook/' + vin + '/' + mileage;
         }
 
+        // TODO: This should be refactored; we don't use the multipleResolutions
+        // flag anywhere; remove it, and move the selection of a single match
+        // to the appropriate controllers; it does not belong in the model.
         return api.request('GET', url).then(
           function (result) {
             // no results = failure

@@ -1,0 +1,22 @@
+{
+  "Success": true,
+  "Message": "",
+  "Data": [
+    {
+      "Mid": "201005555654358",
+      "MakeId": "055",
+      "Make": "NISSAN",
+      "ModelId": "5565",
+      "Model": "MURANO FWD",
+      "YearId": "2010",
+      "Year": "2010",
+      "BodyId": "4358",
+      "Body": "4D SUV LE",
+      "Display": "2010 NISSAN MURANO FWD 4D SUV LE",
+      "ExcellentWholesale": 13000,
+      "GoodWholesale": 11000,
+      "FairWholesale": 9000,
+      "AverageWholesale": 11000
+    }
+  ]
+}

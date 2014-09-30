@@ -274,7 +274,7 @@ angular.module('nextgearWebApp')
           title: {
             useHTML: true,
             floating: true,
-            text: '<h5 class="chart-label-secondary">Total Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
+            text: '<h5 class="chart-label-secondary">Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
             y: 80
           },
           data: [
@@ -387,6 +387,9 @@ angular.module('nextgearWebApp')
         // Grab data for value info section
         // ================================
         $scope.valueInfo = details.ValueInfo;
+
+        // If any MMR value is 0, don't show MMR values.
+        $scope.showMMR = (details.ValueInfo.MmrExcellentValue > 0) && (details.ValueInfo.MmrGoodValue > 0) && (details.ValueInfo.MmrAverageValue > 0) && (details.ValueInfo.MmrFairValue > 0);
 
         // Grab data for vehicle info section
         // ==================================
