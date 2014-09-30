@@ -49,7 +49,7 @@
         </div>
       </li>
 
-      <li class="cr-inline">
+      <li class="cr-inline" ng-show="paymentObject.interest.amount > 0">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_INTEREST" id="paymentOptionInterest" required />
         <label class="radio-img" for="paymentOptionInterest"></label>
         <label class="cr-label" for="paymentOptionInterest">
