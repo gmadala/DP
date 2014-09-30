@@ -49,6 +49,7 @@ angular.module('nextgearWebApp')
                 daysOnFloorplan: item.DaysOnFloorplan,
                 receiptURL: prv.getReceiptURL(item),
                 data: {query: request.Keyword},
+                PrincipalDue: item.PrincipalDue,
                 InterestPayoffTotal: item.InterestPayoffTotal,
                 CollateralProtectionPayoffTotal: item.CollateralProtectionPayoffTotal,
                 FeesPayoffTotal: item.FeesPayoffTotal

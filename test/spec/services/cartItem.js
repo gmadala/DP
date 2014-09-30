@@ -55,6 +55,7 @@ describe('Service: cartItem', function () {
       curtailmentDueDate: '2014-08-27',
       payoffAmount: 5000,
       principalPayoff: 4000,
+      PrincipalDue: 2000,
       FeesPayoffTotal: 500,
       InterestPayoffTotal: 250,
       CollateralProtectionPayoffTotal: 250,
@@ -281,7 +282,7 @@ describe('Service: cartItem', function () {
       var result = CartItem.fromScheduledPayment(mockScheduled);
 
       expect(result.id).toBe('id2');
-      expect(result.payment.amount).not.toBeDefined();
+      expect(result.payment).toBeDefined();
       expect(result.payoff).toBeDefined();
     });
   });
