@@ -439,6 +439,40 @@ describe('Service: Blackbook', function () {
         $httpBackend.flush();
       });
 
+      it('should remove any results from the array that have null valuation properties', function() {
+        var responseWithNulls = {
+          VinPos1To8: "JHMGE872",
+          VinYearCode: "9",
+          Make: "Honda",
+          Model: "Fit",
+          Style: "4D Hatchback 1.5L I-4 MPI SOHC VTEC",
+          Year: 2009,
+          RoughValue: null,
+          AverageValue: null,
+          CleanValue: null,
+          ExtraCleanValue: null,
+          GroupNumber: "4109",
+          MakeNumber: "360",
+          UVc: "140",
+          DSCRegionalAveragePurchasePrice: null,
+          DSCRegionalMaxPurchasePrice: null,
+          DSCRegionalMinPurchasePrice: null
+        };
+
+        $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin/4567').respond(function() {
+          return [200, {
+            Success: true,
+            Data: [responseWithNulls, response]
+          }];
+        });
+
+        Blackbook.lookupByVin('someVin', 4567).then(function(result) {
+          expect(result[0]).toBe(response);
+        });
+        $httpBackend.flush();
+
+      });
+
       it('should reject the promise if there are no results', function() {
         $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin').respond(function() {
           return [200, {

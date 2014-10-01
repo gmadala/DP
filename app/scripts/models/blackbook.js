@@ -32,6 +32,14 @@ angular.module('nextgearWebApp')
       return results[0].Results;
     };
 
+    // remove any results that have null for all pertinent value properties
+    // (ExtraClean, Clean, Average, Rough)
+    var removeNulls = function(results) {
+      return _.filter(results, function(r) {
+        return !!r.ExtraCleanValue && !!r.CleanValue && !!r.AverageValue && !!r.RoughValue;
+      });
+    };
+
     return {
       getMakes: function() {
         return api.request('GET', '/analytics/blackbook/vehicles/').then(function(makes) {
@@ -102,7 +110,7 @@ angular.module('nextgearWebApp')
           if(!vehicles || vehicles.length === 0) {
             return $q.reject(false);
           }
-          return vehicles;
+          return removeNulls(vehicles);
         });
       },
       lookupByVin: function(vin, mileage) {
@@ -116,7 +124,7 @@ angular.module('nextgearWebApp')
             return $q.reject(false);
           }
 
-          return results;
+          return removeNulls(results);
         });
       },
       /**
