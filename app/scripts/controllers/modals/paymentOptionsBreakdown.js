@@ -41,7 +41,9 @@ angular.module('nextgearWebApp')
         $scope.paymentBreakdown = $scope.paymentObject.interest;
         break;
       }
-      $scope.total = $scope.paymentBreakdown.principal + $scope.paymentBreakdown.interest + $scope.paymentBreakdown.fees + $scope.paymentBreakdown.cpp;
+
+      var additional = (newVal === PaymentOptions.TYPE_PAYMENT) ? $scope.selector.additionalAmount : 0;
+      $scope.total = $scope.paymentBreakdown.principal + additional + $scope.paymentBreakdown.interest + $scope.paymentBreakdown.fees + $scope.paymentBreakdown.cpp;
     });
 
     $scope.$watch('selector.additionalAmount', function(newVal) {

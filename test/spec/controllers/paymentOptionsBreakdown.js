@@ -144,9 +144,27 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       scope.selector.paymentOption = 'payment';
       scope.$digest();
 
-      // expect(scope.selector.additionalAmount).toBe(0);
       expect(scope.total).toBe(500);
       scope.selector.additionalAmount = 200;
+      scope.$digest();
+      expect(scope.total).toBe(700);
+    });
+
+    it('should be retained if the user switches to a different payment option and then returns to \'payment\'', function() {
+      run(fromCartItemMock);
+      scope.selector.paymentOption = 'payment';
+      scope.$digest();
+
+      expect(scope.total).toBe(500);
+      scope.selector.additionalAmount = 200;
+      scope.$digest();
+      expect(scope.total).toBe(700);
+
+      scope.selector.paymentOption = 'interest';
+      scope.$digest();
+      expect(scope.total).toBe(100);
+
+      scope.selector.paymentOption = 'payment';
       scope.$digest();
       expect(scope.total).toBe(700);
     });

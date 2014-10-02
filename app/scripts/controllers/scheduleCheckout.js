@@ -20,7 +20,10 @@ angular.module('nextgearWebApp')
       selectedDate: item.scheduleDate || moment(orderedDates[0]).toDate(), // next available date
       possibleDates: possibleDates,
       canPayNow: false,
-      breakdown: fee ? null : angular.copy(payment.getBreakdown())
+      breakdown: fee ? null : angular.copy(payment.getBreakdown()),
+      getPaymentTotal: function() {
+        return $scope.model.breakdown.principal + $scope.model.breakdown.additionalPrincipal + $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
+      }
     };
 
     Payments.canPayNow().then(function (result) {
