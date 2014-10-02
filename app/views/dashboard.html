@@ -88,11 +88,7 @@
             </td>
 
             <td>
-              <!-- api/dealer/buyer/dashboard/{startDate}/{endDate} doesn't return stock# with the Upcoming Payments
-                list. Commenting out the link until the endpoint is updated to return that information. -- JOrtiz 9/29/14
-              -->
-              <!--<a class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>-->
-              {{ payment.Description }}
+              <a class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>
             </td>
             <td class="numeric">
               <span>{{ payment.PayoffDue | currency }}</span>
