@@ -1,10 +1,11 @@
-NextGear Capital v4.0.5
+NextGear Capital v4.0.6
 =================================
 
 Fixes included in this release:
 
-VO-2255	Allow dealer to make interest only payment
-VO-2952	Modify "Floorplans" to be "Floor Plans"
-VO-3013	Web: Vehicle Details: Text 'Total Paid' should be changed to 'Paid' in 'Financial Activity' chart.
-VO-3015	Web: Vehicle Details: 'Floor Plan Total' Calculation issue on 'Payment Summary' Section.
-VO-3098	Selecting vehicle link from dashboard returns system error
+VO-2472	MMR - Add value lookup to web
+VO-2992 Update brand colors
+VO-3098 Selecting vehicle link from dashboard returns system error
+VO-3108 Checkout - Change Payment Date popup doesn't include Additional Principal
+VO-3109 Payment Options and Breakdown - inaccurate Payment Total
+VO-3122 Title Release Program does not show up on first page load.
