@@ -14,8 +14,8 @@ angular.module('nextgearWebApp')
           { color: '#575757', y: loc.TempLineOfCreditAmount }
         ],
         inner: [
-          { color: '#3D9AF4', y: loc.UtilizedCreditAmount },
-          { color: '#54BD45', y: loc.AvailableCreditAmount }
+          { color: '#006699', y: loc.UtilizedCreditAmount },
+          { color: '#1AAF5D', y: loc.AvailableCreditAmount }
         ]
       };
     }

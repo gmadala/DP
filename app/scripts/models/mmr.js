@@ -2,6 +2,15 @@
 
 angular.module('nextgearWebApp')
   .factory('Mmr', function(api, $q) {
+
+    // remove any results that have null for all pertinent value properties
+    // (Excellent, Good, Average, Fair)
+    var removeNulls = function(results) {
+      return _.filter(results, function(r) {
+        return !!r.ExcellentWholesale && !!r.GoodWholesale && !!r.AverageWholesale && !!r.FairWholesale;
+      });
+    };
+
     return {
       getYears: function() {
         return api.request('GET', '/mmr/years/').then(function(years) {
@@ -73,7 +82,7 @@ angular.module('nextgearWebApp')
           if(!vehicles || vehicles.length === 0) {
             return $q.reject(false);
           }
-          return vehicles;
+          return removeNulls(vehicles);
         });
       },
       lookupByVin: function(vin, mileage) {
@@ -86,7 +95,7 @@ angular.module('nextgearWebApp')
           if(!results || results.length === 0) {
             return $q.reject(false);
           } else {
-            return results;
+            return removeNulls(results);
           }
         });
       }

@@ -110,7 +110,7 @@
 
 .btn-icon {
   .svg-icon svg {
-    fill: #0067ac;
+    fill: $highlight;
   }
 
   &.selected:active .svg-icon svg {

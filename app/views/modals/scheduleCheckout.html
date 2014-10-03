@@ -35,25 +35,29 @@
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span4">Principal</p>
-        <p class="span8 value numeric">{{ model.breakdown.principal | currency }}</p>
+        <p class="span5">Principal</p>
+        <p class="span7 value numeric">{{ model.breakdown.principal | currency }}</p>
+      </li>
+      <li class="list-table-row" ng-show="model.breakdown.additionalPrincipal">
+        <p class="span5">Additional Principal</p>
+        <p class="span7 value numeric">{{ model.breakdown.additionalPrincipal | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span4">Interest</p>
-        <p class="span8 value numeric">{{ model.breakdown.interest | currency }}</p>
+        <p class="span5">Interest</p>
+        <p class="span7 value numeric">{{ model.breakdown.interest | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span4">Fee(s)</p>
-        <p class="span8 value numeric">{{ model.breakdown.fees | currency }}</p>
+        <p class="span5">Fee(s)</p>
+        <p class="span7 value numeric">{{ model.breakdown.fees | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span4">CPP</p>
-        <p class="span8 value numeric">{{ model.breakdown.cpp | currency }}</p>
+        <p class="span5">CPP</p>
+        <p class="span7 value numeric">{{ model.breakdown.cpp | currency }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="span4">Payment Total</p>
-        <p class="span8 value numeric">{{ model.breakdown.amount | currency }}</p>
+        <p class="span5">Payment Total</p>
+        <p class="span7 value numeric">{{ model.getPaymentTotal() | currency }}</p>
       </li>
     </ul>
   </div>

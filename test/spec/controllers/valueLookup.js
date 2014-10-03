@@ -193,6 +193,15 @@ describe('Controller: ValueLookupCtrl', function () {
       it('should return false if we have not run a search yet', function() {
         expect(scope.showDescription()).toBe(false);
       });
+
+      it('should return false if we have no match for blackbook or mmr', function() {
+        scope.results.mmr.data = null;
+        scope.results.blackbook.data = null;
+        scope.results.mmr.noMatch = true;
+        scope.results.blackbook.noMatch = true;
+        scope.vinLookup.searchComplete = true;
+        expect(scope.showDescription()).toBe(false);
+      });
     });
   });
 
@@ -252,7 +261,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should look up the blackbook values', function() {
         scope.vinLookup.lookup();
-        expect(blackbook.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888);
+        expect(blackbook.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888, true);
         $httpBackend.flush();
         expect(scope.results.blackbook.data).toBe(bbResult.Data[0]);
         expect(scope.results.blackbook.noMatch).toBe(false);

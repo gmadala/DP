@@ -92,7 +92,13 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     run('fee');
     expect(scope.isPayment).toBe(false);
-  })
+  });
+
+  it('should attach a getPaymentTotal function to the scope', function() {
+    run('payment');
+    expect(scope.model.getPaymentTotal).toBeDefined();
+    expect(scope.model.getPaymentTotal()).toBe(1000);
+  });
 
   it('should default selected date to the next available date if none is currently set', function () {
     expect(scope.model.selectedDate.toString()).toBe(new Date(2013, 8, 27).toString());

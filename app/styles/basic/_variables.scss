@@ -4,8 +4,8 @@
 
 // Primary Colors
 $primary: #3399CC; // light blue for main interaction buttons (ctas) and primary accent
-$highlight: #0067AC; // blue (exact corporate blue) for interaction or highlight text
-$secondary: #91969D; // silver used for secondary interactions, buttons and checkboxes.
+$highlight: #006699; // blue (exact corporate blue) for interaction or highlight text
+$secondary: #999999; // silver used for secondary interactions, buttons and checkboxes.
 $accent: #666666; // medium gray used to create divisions between sections
 $text: #404040; // primary text color
 
@@ -29,10 +29,10 @@ $border: #BBBBBB;
 $borderRadius: 5px;
 
 // Color Indicators
-$danger: #be1e2d; // red
+$danger: #C43926; // red
 $error: $danger;
-$warning: #faaf40; // yellow
-$success: #54bd45; // green
+$warning: #F59C00; // yellow
+$success: #1AAF5D; // green
 
 $overdue: $danger;
 $today: $warning;

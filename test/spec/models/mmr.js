@@ -73,15 +73,15 @@ describe('Service: Mmr', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/mmr/models/yr1/make1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/models/make1/yr1').respond(responseStub);
 
-        expect(angular.isFunction(Mmr.getModels(mock.year, mock.make).then)).toBe(true);
+        expect(angular.isFunction(Mmr.getModels(mock.make, mock.year).then)).toBe(true);
       });
 
       it('should return an array of model objects', function() {
-        $httpBackend.whenGET('/mmr/models/yr1/make1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/models/make1/yr1').respond(responseStub);
 
-        Mmr.getModels(mock.year, mock.make).then(function(results) {
+        Mmr.getModels(mock.make, mock.year).then(function(results) {
           expect(angular.isArray(results)).toBe(true);
           expect(results[0].Id).toBe('thing1');
         });
@@ -93,28 +93,28 @@ describe('Service: Mmr', function () {
         expect(function() { Mmr.getBodyStyles(); }).toThrow();
         expect(function() { Mmr.getBodyStyles([]); }).toThrow();
         expect(function() { Mmr.getBodyStyles(''); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, []); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, ''); }).toThrow();
-        expect(function() { Mmr.getBodyStyles([], mock.make); }).toThrow();
-        expect(function() { Mmr.getBodyStyles('', mock.make); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, mock.make, []); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, mock.make, ''); }).toThrow();
-        expect(function() { Mmr.getBodyStyles([], mock.make, mock.model); }).toThrow();
-        expect(function() { Mmr.getBodyStyles('', mock.make, mock.model); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, [], mock.model); }).toThrow();
-        expect(function() { Mmr.getBodyStyles(mock.year, '', mock.model); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, []); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, ''); }).toThrow();
+        expect(function() { Mmr.getBodyStyles([], mock.year); }).toThrow();
+        expect(function() { Mmr.getBodyStyles('', mock.year); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, mock.year, []); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, mock.year, ''); }).toThrow();
+        expect(function() { Mmr.getBodyStyles([], mock.year, mock.model); }).toThrow();
+        expect(function() { Mmr.getBodyStyles('', mock.year, mock.model); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, [], mock.model); }).toThrow();
+        expect(function() { Mmr.getBodyStyles(mock.make, '', mock.model); }).toThrow();
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/mmr/bodystyles/yr1/make1/model1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/bodystyles/make1/yr1/model1').respond(responseStub);
 
-        expect(angular.isFunction(Mmr.getBodyStyles(mock.year, mock.make, mock.model).then)).toBe(true);
+        expect(angular.isFunction(Mmr.getBodyStyles(mock.make, mock.year, mock.model).then)).toBe(true);
       });
 
       it('should return an array of bodyStyle objects', function() {
-        $httpBackend.whenGET('/mmr/bodystyles/yr1/make1/model1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/bodystyles/make1/yr1/model1').respond(responseStub);
 
-        Mmr.getBodyStyles(mock.year, mock.make, mock.model).then(function(results) {
+        Mmr.getBodyStyles(mock.make, mock.year, mock.model).then(function(results) {
           expect(angular.isArray(results)).toBe(true);
           expect(results[0].Id).toBe('thing1');
         });
@@ -128,7 +128,6 @@ describe('Service: Mmr', function () {
 
     beforeEach(inject(function(_api_) {
       api = _api_;
-      spyOn(api, 'request').andCallThrough();
 
       vehicleResponse = {
         "Success": true,
@@ -157,26 +156,26 @@ describe('Service: Mmr', function () {
       it('should throw an error when param(s) are missing', function() {
         expect(function() { Mmr.lookupByOptions(); }).toThrow();
         expect(function() { Mmr.lookupByOptions(mock.year); }).toThrow();
-        expect(function() { Mmr.lookupByOptions(mock.year, mock.make); }).toThrow();
-        expect(function() { Mmr.lookupByOptions(mock.year, mock.make, mock.model); }).toThrow();
-        expect(function() { Mmr.lookupByOptions(mock.year, mock.make, mock.model, mock.style); }).toThrow();
+        expect(function() { Mmr.lookupByOptions(mock.make, mock.year); }).toThrow();
+        expect(function() { Mmr.lookupByOptions(mock.make, mock.year, mock.model); }).toThrow();
+        expect(function() { Mmr.lookupByOptions(mock.make, mock.year, mock.model, mock.style); }).toThrow();
       });
 
       it('should make the api request with the proper request object', function() {
-        $httpBackend.whenGET('/mmr/getVehicleValueByOptions/').respond(vehicleResponse);
+        spyOn(api, 'request').andCallThrough();
+        $httpBackend.whenGET('/mmr/getVehicleValueByOptions?bodyId=style1&makeId=make1&mileage=1234&modelId=model1&yearId=yr1').respond(vehicleResponse);
 
-        // Mmr.lookupByOptions(mock.year, mock.make, mock.model, mock.style, 1234).then(function(results) {
-        //   expect(results[0]).toBe(vehicleResponse.Data);
-          // expect(api.request.mostRecentCall.args[2]).toEqual({
-          //   "yearId": mock.year.Id,
-          //   "makeId": mock.make.Id,
-          //   "modelId": mock.model.Id,
-          //   "mileage": 1234,
-          //   "bodyId": mock.style.Id
-          // });
-        // });
+        Mmr.lookupByOptions(mock.year, mock.make, mock.model, mock.style, 1234).then(function(results) {
+          expect(api.request.mostRecentCall.args[2]).toEqual({
+            "yearId": mock.year.Id,
+            "makeId": mock.make.Id,
+            "modelId": mock.model.Id,
+            "mileage": 1234,
+            "bodyId": mock.style.Id
+          });
+        });
 
-        // $httpBackend.flush();
+        $httpBackend.flush();
       });
     });
 

@@ -42,7 +42,6 @@ angular.module('nextgearWebApp')
       }
     };
 
-
     $scope.hideMmrAll = function() {
       return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data);
     };
@@ -56,7 +55,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.showDescription = function() {
-      return !($scope.results.blackbook.noMatch || $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
+      return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
     };
 
     $scope.vinLookup = {
@@ -82,7 +81,7 @@ angular.module('nextgearWebApp')
           $scope.results.mileage = which.mileage;
 
           // search blackbook
-          Blackbook.lookupByVin(this.vin, this.mileage).then(function(results) {
+          Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
             if(results.length === 1) {
               $scope.results.blackbook.data = results[0];
             } else { // we have multiple results
@@ -125,7 +124,6 @@ angular.module('nextgearWebApp')
         return true;
       }
     };
-
 
     $scope.manualLookup = {
       showBlackbook: true,
