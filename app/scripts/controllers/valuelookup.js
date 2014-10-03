@@ -81,7 +81,7 @@ angular.module('nextgearWebApp')
           $scope.results.mileage = which.mileage;
 
           // search blackbook
-          Blackbook.lookupByVin(this.vin, this.mileage).then(function(results) {
+          Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
             if(results.length === 1) {
               $scope.results.blackbook.data = results[0];
             } else { // we have multiple results
