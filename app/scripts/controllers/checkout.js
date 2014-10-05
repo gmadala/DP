@@ -233,16 +233,16 @@ angular.module('nextgearWebApp')
     var bizHours = function() {
       BusinessHours.insideBusinessHours().then(function(result) {
         $scope.canPayNow = result;
-
         // If we are oustide of business hours, we need to grab
         // the next available date so we can auto-schedule.
         if(!$scope.canPayNow) {
           BusinessHours.nextBusinessDay().then(function(nextBizDay) {
-            var paymentSummaryUpdates = [];
+            var paymentSummaryUpdates = [],
+                nextAvail = moment(nextBizDay); // updatePaymentAmountOnDate requires a date object for the scheduleDate param
 
             angular.forEach($scope.paymentQueue.contents.payments, function(item) {
               if(!item.scheduleDate) {
-                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextBizDay, item.isPayoff()));
+                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
 
                 // set scheduled date to next available business day.
                 item.scheduleDate = nextBizDay;
