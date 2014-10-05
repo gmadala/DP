@@ -55,8 +55,6 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     Payments = _Payments_;
 
-    spyOn(Payments, 'canPayNow').andReturn($q.when(true));
-
     // Some tests change items and reinject into controller (overriding first time this is run)
     run = function (type) {
       scope = $rootScope.$new();
@@ -112,10 +110,6 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
   it('should store possible dates on the scope', function () {
     expect(scope.model.possibleDates).toBe(possibleDates);
-  });
-
-  it('should default canPayNow to false', function () {
-    expect(scope.model.canPayNow).toBe(false);
   });
 
   describe('selectedDate watch functionality', function() {
