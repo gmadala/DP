@@ -101,7 +101,8 @@ angular.module('nextgearWebApp')
             if(nextBusinessDay) {
               return; // Already found
             }
-            if((hoursArray[index].start.isBefore(now) && hoursArray[index].end.isAfter(now)) || hoursArray[index].end.isBefore(now)) {
+
+            if(hoursArray[index].start.isBefore(now)) {
               // Inside this business hour set - get next set's day and return that
               // OR it is after business hours but before the next day.
               // Assume last item in array will never be the business hours we're inside
