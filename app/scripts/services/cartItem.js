@@ -160,7 +160,8 @@ angular.module('nextgearWebApp')
           ScheduledPaymentDate: api.toShortISODate(this.scheduleDate) || null,
           IsPayoff: this.paymentOption === PaymentOptions.TYPE_PAYOFF,
           IsInterestOnly: this.paymentOption === PaymentOptions.TYPE_INTEREST,
-          AdditionalPrincipalAmount: this.paymentOption === PaymentOptions.TYPE_PAYMENT ? this.payment.additionalPrincipal : 0
+          AdditionalPrincipalAmount: this.paymentOption === PaymentOptions.TYPE_PAYMENT ? this.payment.additionalPrincipal : 0,
+          QuotedInterestAmount: this.paymentOption === PaymentOptions.TYPE_INTEREST ? this.payment.interest : 0
         };
       },
       getBreakdown: function() {

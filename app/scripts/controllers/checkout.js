@@ -245,13 +245,13 @@ angular.module('nextgearWebApp')
                 paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
 
                 // set scheduled date to next available business day.
-                item.scheduleDate = nextBizDay;
+                item.scheduleDate = nextAvail.toDate();
               }
             });
 
             angular.forEach($scope.paymentQueue.contents.fees, function(item) {
               if(!item.scheduleDate) {
-                item.scheduleDate = nextBizDay;
+                item.scheduleDate = nextAvail.toDate();
               }
             });
           });

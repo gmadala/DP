@@ -785,9 +785,9 @@ describe('Controller: CheckoutCtrl', function () {
       inBizHours = false;
       $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
       scope.$apply();
-      expect(mockQueue.payments[0].scheduleDate).toBe('2013-01-04');
+      expect(mockQueue.payments[0].scheduleDate).toEqual(moment('2013-01-04').toDate());
       expect(mockQueue.payments[1].scheduleDate).toBe('2013-01-19');
-      expect(mockQueue.fees[0].scheduleDate).toBe('2013-01-04');
+      expect(mockQueue.fees[0].scheduleDate).toEqual(moment('2013-01-04').toDate());
       expect(mockQueue.fees[1].scheduleDate).toBe('2013-01-16');
     });
   });

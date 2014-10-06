@@ -6,8 +6,8 @@ angular.module('nextgearWebApp')
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
     var item = payment ? payment : fee;
-    $scope.updateInProgress = false;
 
+    $scope.updateInProgress = false;
     $scope.type = payment ? 'payment' : 'fee';
     $scope.isPayment = !!payment;
 
@@ -21,19 +21,16 @@ angular.module('nextgearWebApp')
       possibleDates: possibleDates,
       breakdown: fee ? null : angular.copy(payment.getBreakdown()),
       getPaymentTotal: function() {
-        return $scope.model.breakdown.principal + $scope.model.breakdown.additionalPrincipal + $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
+        return fee ? fee.Balance : $scope.model.breakdown.principal + $scope.model.breakdown.additionalPrincipal + $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
       }
     };
 
-    // update breakdown based on date.
-    $scope.$watch('model.selectedDate', function(newVal, oldVal) {
-      if (!$scope.isPayment) { // it's a fee and won't have a breakdown; nothing to update
-        return;
-      }
+    var prv = {
+      handleNewDate: function(newVal) {
+        if(!$scope.isPayment) {
+          return;
+        }
 
-      if (newVal === oldVal || !$scope.checkDate(newVal)) {
-        return; // our value is old or invalid; don't update breakdown
-      } else {
         var isPayoff = item.isPayoff();
         $scope.updateInProgress = true;
 
@@ -54,6 +51,22 @@ angular.module('nextgearWebApp')
         }, function(/*error*/) {
           $scope.updateInProgress = false;
         });
+      }
+    };
+
+    // initial amounts
+    // prv.handleNewDate($scope.model.selectedDate);
+
+    // update breakdown based on date.
+    $scope.$watch('model.selectedDate', function(newVal, oldVal) {
+      if (!$scope.isPayment) { // it's a fee and won't have a breakdown; nothing to update
+        return;
+      }
+
+      if (newVal === oldVal || !$scope.checkDate(newVal)) {
+        return; // our value is old or invalid; don't update breakdown
+      } else {
+        prv.handleNewDate(newVal);
       }
     });
 
