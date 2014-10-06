@@ -103,7 +103,7 @@
     <div class="well" ng-switch="payments.results.length > 0 || payments.loading">
       <h2 class="well-title">
         Vehicle Payments
-        <span class="well-sub-title">Amounts shown are valid through 8pm EST
+        <span class="well-sub-title">Amounts shown are valid through 8pm eastern time
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
