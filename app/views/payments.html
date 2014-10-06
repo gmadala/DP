@@ -5,7 +5,7 @@
         <span nxg-icon="icon-info"></span>
       </div>
       <h6 class="info-block-text">
-        Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}, due to our 8pm EST cutoff.
+        Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}, due to our 8pm eastern time cutoff.
       </h6>
     </div>
     <div nxg-search
@@ -30,7 +30,7 @@
     <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
       <h2 class="well-title">
         Account Fees
-        <span class="well-sub-title">Amounts shown are valid through 8pm EST
+        <span class="well-sub-title">Amounts shown are valid through 8pm eastern time
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
