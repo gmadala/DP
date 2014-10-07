@@ -17,6 +17,21 @@
     "PrincipalOutstanding": 1000.00,
     "CollateralProtectionOutstanding": 1000.00,
     "FeesOutstanding": 1000.00,
+
+
+    "CollateralProtectionPaymentTotal": 0.0,
+    "CurtailmentPaymentScheduled": false,
+    "FeesPaymentTotal": 0.0,
+    "InterestPaymentTotal": 110.90,
+    "NextPaymentAmount": 2967.5,
+    "NextPaymentDueDate": "2014-08-20",
+    "PrincipalDue": 2856.60,
+    "Scheduled": false,
+    "ScheduledPaymentDate": null,
+    "ScheduledPaymentAmount": 0,
+    "WebScheduledPaymentId": null,
+
+
     "FloorplanActivity": [
       {
         "ActivityId":"fe1738f8-8baba-442c-8bfa-d6f33acb24fa",

@@ -18,7 +18,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.filterOptions = []; // loaded below from User data
-    $scope.selectedReceipts = []; // to hold selected receipts to print/export
 
     $scope.receipts = {
       results: [],
@@ -67,27 +66,39 @@ angular.module('nextgearWebApp')
       );
     };
 
-    $scope.count = function() {
-      var x = _.reduce($scope.selectedReceipts, function(count, checked) {
-        if (checked) {
-          return count + 1;
-        } else {
-          return count;
-        }
-      }, 0);
-
-      return x;
-    };
-
     $scope.tooMany = function() {
-      if ($scope.count() >= maxReceipts) {
+      if ($scope.selectedReceipts.length >= maxReceipts) {
         return true;
       }
       return false;
     };
 
+    $scope.selectedReceipts = []; // to hold selected receipts to print/export
+
+    $scope.toggleInQueue = function(receipt) {
+      if (!$scope.isSelected(receipt)) {
+        $scope.selectedReceipts.push(receipt);
+      } else {
+        $scope.removeReceipt(receipt);
+      }
+    };
+
+    $scope.removeReceipt = function(receipt) {
+      $scope.selectedReceipts.splice($scope.selectedReceipts.indexOf(receipt), 1);
+    };
+
+    $scope.isSelected = function(receipt) {
+      return $scope.selectedReceipts.indexOf(receipt) !== -1;
+    };
+
+    $scope.viewReceipt = function(receipt) {
+      var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: receipt.FinancialTransactionId.toString() });
+
+      window.open(strUrl, '_blank');
+    };
+
     $scope.onExport = function() {
-      if($scope.count() === 0) {
+      if($scope.selectedReceipts.length < 1) {
         return;
       }
 

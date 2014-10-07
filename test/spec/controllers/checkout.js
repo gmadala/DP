@@ -15,10 +15,11 @@ describe('Controller: CheckoutCtrl', function () {
     Floorplan,
     $q,
     api,
-    afterHours;
+    BusinessHours,
+    inBizHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_) {
+  beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_, _BusinessHours_) {
     scope = $rootScope.$new();
     dialog = $dialog;
     $q = _$q_;
@@ -27,7 +28,8 @@ describe('Controller: CheckoutCtrl', function () {
     Payments = _Payments_;
     Floorplan = _Floorplan_;
     api = _api_;
-    afterHours = false;
+    BusinessHours = _BusinessHours_;
+    inBizHours = true;
     loggedIn = true;
 
     spyOn(User, 'isLoggedIn').andCallFake(function() {
@@ -38,13 +40,13 @@ describe('Controller: CheckoutCtrl', function () {
       }
     });
 
-    spyOn(Payments, 'canPayNow').andCallFake(function() {
-      if(!afterHours) {
+    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+      if(inBizHours) {
         return $q.when(true);
-      } else {
-        return $q.when(false);
       }
+      return $q.when(false);
     });
+
 
     run = function () {
       $controller('CheckoutCtrl', { $scope: scope });
@@ -81,18 +83,26 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total fees plus unscheduled payments for today', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
       run();
       expect(scope.paymentQueue.sum.todayCount()).toBe(3);
@@ -101,19 +111,27 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total scheduled payments', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
         scheduleDate: new Date(),
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
       run();
       expect(scope.paymentQueue.sum.scheduledCount()).toBe(2);
@@ -122,22 +140,32 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should count and total fees and payments', function () {
       fees.feeId1 = {
-        amount: 100
+        getCheckoutAmount: function() {
+          return 100;
+        }
       };
       fees.feeId2 = {
-        amount: 43
+        getCheckoutAmount: function() {
+          return 43;
+        }
       };
       payments.pmtId1 = {
         scheduleDate: new Date(),
-        amount: 210.1
+        getCheckoutAmount: function() {
+          return 210.1;
+        }
       };
       payments.pmtId2 = {
         scheduleDate: new Date(),
-        amount: 367.4
+        getCheckoutAmount: function() {
+          return 367.4;
+        }
       };
       payments.pmtId3 = {
         scheduleDate: null,
-        amount: 85.22
+        getCheckoutAmount: function() {
+          return 85.22;
+        }
       };
 
       run();
@@ -434,8 +462,18 @@ describe('Controller: CheckoutCtrl', function () {
 
     it('should force unapplied funds use to false if last item is removed from today bucket', function () {
       var queue = Payments.getPaymentQueue();
-      Payments.addPaymentToQueue('id', 'vin', 's#', 'desc', 100, '2013-01-01', false);
+      var mockPayment = {
+        Vin: 'vin',
+        FloorplanId: 'id',
+        StockNumber: 's#',
+        UnitDescription: 'desc',
+        AmountDue: 100,
+        DueDate: '2013-01-01',
+        Scheduled: false
+      };
+      Payments.addPaymentToQueue(mockPayment, false/* isFee */);
       run();
+
       scope.unappliedFunds.useFunds = true;
       queue.payments['id'].scheduleDate = new Date();
       scope.$apply();
@@ -559,11 +597,11 @@ describe('Controller: CheckoutCtrl', function () {
         contents: {
           payments: [
             { overrideAddress: null,
-              isPayoff: false
+              isPayoff: function() { return false; }
             },
             {
               overrideAddress: 'new address',
-              isPayoff: true
+              isPayoff: function() { return true; }
             }
           ]
         }
@@ -644,87 +682,113 @@ describe('Controller: CheckoutCtrl', function () {
   describe('after hours payment logic', function() {
     var $q,
         $timeout,
+        $rootScope,
         mockQueue;
 
-    beforeEach(inject(function(_$q_, _$timeout_) {
+    beforeEach(inject(function(_$q_, _$timeout_, _$rootScope_) {
       $q = _$q_;
       $timeout = _$timeout_;
+      $rootScope = _$rootScope_;
 
+      spyOn(BusinessHours, 'nextBusinessDay').andReturn($q.when('2013-01-04'));
+
+      // mocked cartItem objects
       mockQueue = {
         fees: [{
-          isPayment: false,
           isFee: true,
           financialRecordId: 'fee1',
-          type: 'type',
+          feeType: 'type',
           vin: 'ch123',
           description: 'fee desc',
           amount: 120,
-          dueDate: '2013-01-20'
+          dueDate: '2013-01-20',
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
+        },
+        {
+          isFee: true,
+          financialRecordId: 'fee2',
+          feeType: 'type',
+          vin: 'ch123',
+          description: 'fee desc',
+          amount: 120,
+          dueDate: '2013-01-20',
+          scheduled: true,
+          scheduleDate: '2013-01-16',
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
         }],
         payments: [{
-          isPayment: true,
           isFee: false,
-          floorplanId: 'one',
+          id: 'one',
           vin: 'vin123',
           stockNum: 'stock123',
           description: 'desc123',
           amount: 456,
           dueDate: '2013-01-20',
-          isPayoff: false
+          isPayoff: function() { return false; },
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
+        },
+        {
+          isFee: false,
+          id: 'two',
+          vin: 'vin456',
+          stockNum: 'stock456',
+          description: 'desc456',
+          amount: 456,
+          scheduled: true,
+          scheduleDate: '2013-01-19',
+          dueDate: '2013-01-20',
+          isPayoff: function() { return false; },
+          getCheckoutAmount: function() {
+            return this.amount;
+          }
         }]
       };
 
       spyOn(Payments, 'getPaymentQueue').andReturn(mockQueue);
-      spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-10']));
+      // spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-10']));
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn({});
+      run();
     }));
 
-    it('should set scope.canPayNow', function() {
-      run();
-      expect(Payments.canPayNow).toHaveBeenCalled();
+    it('should check if we are in business hours on load', function() {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
       scope.$apply();
       expect(scope.canPayNow).toBe(true);
     });
 
+    it('should check if we are in business hours any time the business hours change event fires', function() {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+      scope.$apply();
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+    });
+
     it('should not auto-schedule if we are within business hours', function() {
-      run();
-      expect(Payments.canPayNow).toHaveBeenCalled();
       scope.$apply();
-      expect(Payments.fetchPossiblePaymentDates).not.toHaveBeenCalled();
-      expect(scope.paymentQueue.contents.payments[0].scheduleDate).not.toBeDefined();
-      expect(scope.paymentQueue.contents.fees[0].scheduleDate).not.toBeDefined();
+      expect(BusinessHours.nextBusinessDay).not.toHaveBeenCalled();
     });
 
-    it('should auto-schedule for the next available business day if we are outside of business hours', function() {
-      spyOn(Payments, 'updatePaymentAmountOnDate').andCallFake(function() {
-        return { };
-      });
-
-      afterHours = true;
-      run();
-
+    it('should auto-schedule if we are outside of business hours', function() {
+      inBizHours = false;
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
       scope.$apply();
-      expect(scope.canPayNow).toBe(false);
-
-      expect(Payments.fetchPossiblePaymentDates).toHaveBeenCalled();
-      expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
-      scope.$apply();
-      expect(scope.paymentQueue.contents.payments[0].scheduleDate).toEqual(moment('2013-01-10').toDate());
-      expect(scope.paymentQueue.contents.fees[0].scheduleDate).toEqual(moment('2013-01-10').toDate());
+      expect(BusinessHours.nextBusinessDay).toHaveBeenCalled();
     });
 
-    it('should not auto-schedule a previously scheduled payment or fee', function() {
-      spyOn(Payments, 'updatePaymentAmountOnDate').andCallFake(function() {
-        return { };
-      });
-      mockQueue.payments[0].scheduleDate = '2013-03-04';
-      mockQueue.fees[0].scheduleDate = '2013-03-05';
-      afterHours = true;
-      run();
-
+    it('should only auto-schedule payments that were not already scheduled', function() {
+      inBizHours = false;
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
       scope.$apply();
-      expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
-      expect(scope.paymentQueue.contents.payments[0].scheduleDate).toEqual('2013-03-04');
-      expect(scope.paymentQueue.contents.fees[0].scheduleDate).toEqual('2013-03-05');
+      expect(mockQueue.payments[0].scheduleDate).toEqual(moment('2013-01-04').toDate());
+      expect(mockQueue.payments[1].scheduleDate).toBe('2013-01-19');
+      expect(mockQueue.fees[0].scheduleDate).toEqual(moment('2013-01-04').toDate());
+      expect(mockQueue.fees[1].scheduleDate).toBe('2013-01-16');
     });
   });
 

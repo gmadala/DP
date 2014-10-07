@@ -1,88 +1,82 @@
-<h3 class="modal-header" translate>Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}.</h3>
+<h3 class="modal-header" translate>Your Payments Have Been Submitted.</h3>
 
-<div class="modal-body">
-  <section ng-show="items.paymentsScheduled.length > 0 || items.feesScheduled.length > 0">
-    <h3 translate>Scheduled Payment(s)</h3>
+<div class="modal-body aside">
+  <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
+    <!-- Today's Fees -->
+    <div ng-show="items.feesToday.length > 0">
+      <h5 class="modal-body-subtitle"><span translate>Today's Fees</span>: <span class="heavy color-success">{{ items.getTotals().feesToday | currency }}</span></h5>
 
-    <div ng-show="items.feesScheduled.length > 0">
-      <h4 translate>Fees</h4>
       <table class="table table-striped table-secondary">
         <thead>
           <th translate>Fee Type</th>
-          <th translate>Description</th>
-          <th translate>Scheduled</th>
+          <th translate>Payment Date</th>
           <th translate>Amount</th>
         </thead>
-        <tr ng-repeat="fee in items.feesScheduled">
-          <td>{{ fee.type || 'N/A' }}</td>
-          <td>{{ fee.description }}</td>
-          <td>{{ fee.scheduleDate | moment }}</td>
-          <td><p class="numeric">{{ fee.amount | currency }}</p></td>
+        <tr ng-repeat="fee in items.feesToday">
+          <td class="description heavy">{{ fee.feeType || 'N/A' }}</td>
+          <td class="center">{{ today | moment }}</td>
+          <td class="numeric">{{ fee.amount | currency }}</td>
         </tr>
       </table>
     </div>
 
-    <div ng-show="items.paymentsScheduled.length > 0">
-      <h4 translate>Payments</h4>
+    <!-- Today's Payments -->
+    <div ng-show="items.paymentsToday.length > 0">
+      <h5 class="modal-body-subtitle"><span translate>Today's Payments</span>: <span class="heavy color-success">{{ items.getTotals().paymentsToday | currency }}</span></h5>
 
       <table class="table table-striped table-secondary">
         <thead>
           <th translate>Description</th>
-          <th translate>Scheduled</th>
+          <th translate>Payment Date</th>
           <th translate>Amount</th>
         </thead>
-        <tr ng-repeat="payment in items.paymentsScheduled">
-          <td>
-            <a class="" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+        <tr ng-repeat="payment in items.paymentsToday">
+          <td class="description">
+            <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
           </td>
-          <td><p class="">{{ payment.scheduleDate | moment }}</p></td>
-          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+          <td class="center">{{ today | moment }}</td>
+          <td class="numeric">{{ payment.getCheckoutAmount() | currency }}</td>
         </tr>
       </table>
     </div>
   </section>
-
-  <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
-    <h3><span translate>Submitted Payment(s)</span>: {{ items.todayTotal() | currency }}</h3>
-
-    <div ng-show="items.feesToday.length > 0">
-      <h4 translate>Fees</h4>
-
+  <section ng-show="items.paymentsScheduled.length > 0 || items.feesScheduled.length > 0">
+    <!-- Scheduled Fees -->
+    <div ng-show="items.feesScheduled.length > 0">
+      <h5 class="modal-body-subtitle"><span translate>Future Fees</span>: <span class="heavy color-success">{{ items.getTotals().feesScheduled | currency }}</span></h5>
       <table class="table table-striped table-secondary">
         <thead>
           <th translate>Fee Type</th>
-          <th translate>Description</th>
-          <th translate>Paid</th>
+          <th translate>Payment Date</th>
           <th translate>Amount</th>
         </thead>
-        <tr ng-repeat="fee in items.feesToday">
-          <td>{{ fee.type || 'N/A' }}</td>
-          <td>{{ fee.description }}</td>
-          <td>{{ today | moment }}</td>
-          <td><p class="numeric">{{ fee.amount | currency }}</p></td>
+        <tr ng-repeat="fee in items.feesScheduled">
+          <td class="description heavy">{{ fee.feeType || 'N/A' }}</td>
+          <td class="center">{{ fee.scheduleDate | moment }}</td>
+          <td class="numeric">{{ fee.amount | currency }}</td>
         </tr>
       </table>
     </div>
 
-    <div ng-show="items.paymentsToday.length > 0">
-      <h4 translate>Payments</h4>
-
+    <!-- Scheduled Payments -->
+    <div ng-show="items.paymentsScheduled.length > 0">
+      <h5 class="modal-body-subtitle"><span translate>Future Payments</span>: <span class="heavy color-success">{{ items.getTotals().paymentsScheduled | currency }}</span></h5>
       <table class="table table-striped table-secondary">
         <thead>
           <th translate>Description</th>
-          <th translate>Scheduled</th>
+          <th translate>Payment Date</th>
           <th translate>Amount</th>
         </thead>
-        <tr ng-repeat="payment in items.paymentsToday">
-          <td>
-            <a class="" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+        <tr ng-repeat="payment in items.paymentsScheduled">
+          <td class="description">
+            <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
           </td>
-          <td>{{ today | moment }}</td>
-          <td><p class="numeric">{{ payment.amount | currency }}</p></td>
+          <td class="center">{{ payment.scheduleDate | moment }}</td>
+          <td class="numeric">{{ payment.getCheckoutAmount() | currency }}</td>
         </tr>
       </table>
     </div>

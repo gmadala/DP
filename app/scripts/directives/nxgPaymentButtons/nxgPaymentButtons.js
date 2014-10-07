@@ -10,7 +10,14 @@ angular.module('nextgearWebApp')
         canPayNow:  '=',
         onCancelScheduledPayment: '&'
       },
-      controller: function($scope, $dialog, Payments, metric) {
+      link: function(scope, element, attrs) {
+        if (!attrs.onCancelScheduledPayment) {
+          // To make sure that if no function is passed in, this value
+          // is undefined.
+          scope.onCancelScheduledPayment = null;
+        }
+      },
+      controller: function($scope, $dialog, Payments, metric, PaymentOptions) {
         //set on $rootScope, but for some reason, not available unless explicitly set here
         $scope.metric = metric;
 
@@ -42,96 +49,40 @@ angular.module('nextgearWebApp')
         $scope.toggleFeeInQueue = function () {
           var f = $scope.item;
           if (!$scope.onQueue) {
-            Payments.addFeeToQueue(
-              f.FinancialRecordId,
-              f.Vin,
-              f.FeeType,
-              f.Description,
-              f.Balance,
-              f.EffectiveDate);
+            Payments.addFeeToQueue(f, true);
           } else {
             Payments.removeFeeFromQueue(f.FinancialRecordId);
           }
         };
 
         $scope.togglePaymentInQueue = function (asPayoff) {
-
           var p = $scope.item,
-            amount, principal, fees, interest, collateralProtectionPmt;
+            paymentType = asPayoff ? PaymentOptions.TYPE_PAYOFF : PaymentOptions.TYPE_PAYMENT;
 
-          if (asPayoff) {
-            amount = p.CurrentPayoff;
-            principal = p.PrincipalPayoff;
-            fees = p.FeesPayoffTotal;
-            interest = p.InterestPayoffTotal;
-            collateralProtectionPmt = p.CollateralProtectionPayoffTotal;
-          }
-          else {
-            amount = p.AmountDue;
-            principal = p.PrincipalDue;
-            fees = p.FeesPaymentTotal;
-            interest = p.InterestPaymentTotal;
-            collateralProtectionPmt = p.CollateralProtectionPaymentTotal;
-          }
-
-          if (!$scope.onQueue) { // if it's not on the queue
-
-            if(p.Scheduled && p.ScheduledPaymentDate) {
-              // if it's already scheduled as a payment or payoff, we want to auto-cancel
-              // the scheduled payment and add the new payment or payoff.
-              $scope.cancelScheduledPayment();
-            }
-
-            Payments.addPaymentToQueue(
-              p.FloorplanId,
-              p.Vin,
-              p.StockNumber,
-              p.UnitDescription,
-              amount,
-              p.DueDate,
-              asPayoff,
-              principal,
-              interest,
-              fees,
-              collateralProtectionPmt
-            );
-          } else {
-            var onQueueAs = Payments.isPaymentOnQueue(p.FloorplanId);
-
-            // Regardless, we still want to remove the original payment.
+          // onQueue can be: payment, payoff or false
+          if ($scope.onQueue) {
             Payments.removePaymentFromQueue(p.FloorplanId);
 
-            if(onQueueAs === 'payment' && asPayoff) {
-              // we want to switch from payment to payoff
-              Payments.addPaymentToQueue(
-                p.FloorplanId,
-                p.Vin,
-                p.StockNumber,
-                p.UnitDescription,
-                amount,
-                p.DueDate,
-                true, // this is the asPayoff flag
-                principal,
-                interest,
-                fees,
-                collateralProtectionPmt
-              );
-            } else if (onQueueAs === 'payoff' && !asPayoff) {
-              // we want to switch from payoff to payment
-              Payments.addPaymentToQueue(
-                p.FloorplanId,
-                p.Vin,
-                p.StockNumber,
-                p.UnitDescription,
-                amount,
-                p.DueDate,
-                false, // this is the asPayoff flag
-                principal,
-                interest,
-                fees,
-                collateralProtectionPmt
-              );
+            if (asPayoff) {
+              if ($scope.onQueue === PaymentOptions.TYPE_PAYMENT) {
+                Payments.addPayoffToQueue(p, false /* not a scheduled payment object */);
+              }
             }
+            else if ($scope.onQueue === PaymentOptions.TYPE_PAYOFF) {
+              Payments.addPaymentToQueue(p, false /* not a scheduled payment object */);
+            }
+          }
+          else if (p.Scheduled) {
+            // if it's already scheduled as a payment or payoff, we want to auto-cancel
+            // the scheduled payment and add the new payment or payoff.
+            $scope.cancelScheduledPayment().then(function(wasCancelled) {
+              if (wasCancelled) {
+                Payments.addPaymentTypeToQueue(p, paymentType);
+              }
+            });
+          }
+          else {
+            Payments.addPaymentTypeToQueue(p, paymentType);
           }
         };
 
@@ -153,24 +104,24 @@ angular.module('nextgearWebApp')
                     scheduledDate: $scope.item.ScheduledPaymentDate,
                     isPayOff: !$scope.item.CurtailmentPaymentScheduled,
                     currentPayOff: $scope.item.CurrentPayoff,
-                    amountDue: $scope.item.AmountDue
+                    amountDue: $scope.item.ScheduledPaymentAmount
                   },
                   onCancel: function() {
-                    if(angular.isDefined($scope.onCancelScheduledPayment)) {
+                    if($scope.onCancelScheduledPayment !== null) {
                       // we have a custom function we want to run onCancel.
                       $scope.onCancelScheduledPayment();
-                    } else { // default onCancel function (payments page, scheduled payments page)
-                      var f = $scope.item;
-                      f.Scheduled = false;
-                      f.ScheduledDate = null;
-                      return f;
                     }
+                    // default onCancel function (payments page)
+                    var f = $scope.item;
+                    f.Scheduled = false;
+                    f.ScheduledDate = null;
+                    return f;
                   }
                 };
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          return $dialog.dialog(dialogOptions).open();
         };
 
         $scope.cancelScheduledFee = function () {

@@ -1,0 +1,14 @@
+{
+  "Success": true,
+  "Message": "",
+  "Data": [
+    {
+      "Id": "0643",
+      "Name": "Coupe"
+    },
+    {
+      "Id": "1287",
+      "Name": "Sedan"
+    }
+  ]
+}

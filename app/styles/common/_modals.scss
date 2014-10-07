@@ -1,3 +1,7 @@
+// ========
+//  MODALS
+// ========
+
 .modal-backdrop {
   @include opacity(50);
   z-index: 1050;
@@ -55,6 +59,10 @@
   @extend %heavy;
 }
 
+.modal-body-subtitle {
+  color: $text;
+}
+
 /* Some modals require things to go right to the edge,
  * like payment or fee details. Use the extra "to-edge"
  * class for these modals.
@@ -65,7 +73,11 @@
   padding: 20px;
 
   &.to-edge {
-    padding: 20px 0 0;
+    padding: 0;
+  }
+
+  .modal-inner {
+    padding: 20px;
   }
 
   .list-table {
@@ -73,7 +85,7 @@
   }
 
   .table-secondary {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   h3 {

@@ -1,10 +1,14 @@
-/* ===== ICONS ===== */
+// =======
+//  ICONS
+// =======
 
 // override bootstrap
 [class^="icon-"], [class*=" icon-"] {
   background: transparent;
   margin-top: 0;
 }
+
+// basic icon styling, with classes for alternate sizes.
 .svg-icon {
   display: inline-block;
   vertical-align: middle;
@@ -83,6 +87,7 @@
   fill: #B7B7B7;
 }
 
+// CTA buttons need specific coloring
 .cta-primary {
   .svg-icon svg {
     fill: $white;
@@ -105,7 +110,7 @@
 
 .btn-icon {
   .svg-icon svg {
-    fill: #0067ac;
+    fill: $highlight;
   }
 
   &.selected:active .svg-icon svg {
@@ -118,25 +123,10 @@
 }
 
 // STATIC ICONS
-.icon-alert {
-  fill: $red;
-}
-
-.icon-failure {
-  fill: $red;
-}
-
-.icon-warning {
-  fill: $yellow;
-}
-
-.icon-info {
-  fill: $primary;
-}
-
-.icon-success {
-  fill: $green;
-}
+.icon-alert, .icon-failure {  fill: $red; }
+.icon-warning { fill: $yellow; }
+.icon-info { fill: $primary; }
+.icon-success { fill: $green; }
 
 .icon-chevron {
   fill: none;
@@ -188,22 +178,3 @@
 .icon-plus, .icon-minus {
   width: 13px;
 }
-
-// .icon-sortArrows  {
-//   display: none;
-//   width: 18px;
-//   height: 16px;
-
-//   .sorted & {
-//     @include scale(1,1);
-//     display: inline-block;
-//     top: 0;
-//     left: 0;
-//   }
-
-//   .selected.desc & {
-//     @include scale(1,-1);
-//   }
-// }
-
-

@@ -4,9 +4,11 @@
   <section class="span6 well settings-well" novalidate>
     <h2 class="well-title">
       <span translate>Business Settings</span>
-      <button ng-hide="business.editable" class="btn cta-secondary" ng-click="business.edit()"><i class="glyphicon glyphicon-pencil"></i><span translate>Edit</span></button>
-      <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.cancel()" translate>Cancel</button>
-      <button ng-show="business.editable" class="btn cta-secondary" ng-click="business.save()" translate>Save</button>
+      <div class="well-sub-title">
+        <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()" translate>Edit Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()" translate>Save Settings</button>
+        <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
@@ -71,9 +73,11 @@
   <section class="span6 well settings-well">
     <h2 class="well-title">
       <span translate>Title Settings</span>
-      <button ng-show="!title.editable && title.data.addressCount > 1" class="btn cta-secondary" ng-click="title.edit()"><i class="glyphicon glyphicon-pencil"></i><span translate>Edit</span></button>
-      <button ng-show="title.editable" class="btn cta-secondary" ng-click="title.cancel()" translate>Cancel</button>
-      <button ng-show="title.editable" class="btn cta-secondary" ng-click="title.save()" translate>Save</button>
+      <div class="well-sub-title">
+        <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()" translate>Save Settings</button>
+        <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()" trasnlate>Cancel Changes</button>
+      </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
@@ -109,7 +113,7 @@
               <div nxg-address="title.data.titleAddress"></div>
             </div>
             <div class="span6">
-              <button class="btn-help" ng-show="title.data.addresses.length == 0"
+              <button class="btn-help"
                 tooltip-placement="right"
                 tooltip-trigger="focus"
                 tooltip-html="true"

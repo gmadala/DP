@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl', function ($scope, $q, $dialog, $timeout, protect, moment, messages, User, Payments, OptionDefaultHelper, api, Floorplan, gettextCatalog) {
+  .controller('CheckoutCtrl',
+  function ($scope, $q, $dialog, $timeout, protect, moment,
+            messages, User, Payments, OptionDefaultHelper,
+            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog) {
+
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -45,7 +49,7 @@ angular.module('nextgearWebApp')
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
             if (!value.scheduleDate) {
-              accumulator += value.amount;
+              accumulator += value.getCheckoutAmount();
             }
             return accumulator;
           }, 0);
@@ -55,7 +59,7 @@ angular.module('nextgearWebApp')
             merged = angular.extend({}, content.fees, content.payments);
           return _.reduce(merged, function (accumulator, value) {
             if (value.scheduleDate) {
-              accumulator += value.amount;
+              accumulator += value.getCheckoutAmount();
             }
             return accumulator;
           }, 0);
@@ -100,7 +104,7 @@ angular.module('nextgearWebApp')
           templateUrl: 'views/modals/scheduleCheckout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
-            payment: function () { return item.isPayment && item; },
+            payment: function () { return !item.isFee && item; },
             fee: function () { return item.isFee && item; },
             possibleDates: function () {
               var tomorrow = moment().add(1, 'day').toDate(),
@@ -110,8 +114,8 @@ angular.module('nextgearWebApp')
                   item.scheduleLoading = false;
                   if (!_.find(result)) {
                     // no possible schedule dates for this item (edge case, but could happen)
-                    /// paymentType = payment OR fee
-                    item.scheduleError = gettextCatalog.getString('This {{ paymentType }} cannot be scheduled', { paymentType: (item.isPayment ? 'payment' : 'fee') });
+
+                    item.scheduleError = gettextCatalog.getString('This {{ paymentType }} cannot be scheduled', { paymentType: (item.isFee ? 'fee' : 'payment') });
                     item.scheduleBlocked = true;
                     item.scheduleDate = null;
                     return $q.reject();
@@ -132,8 +136,6 @@ angular.module('nextgearWebApp')
         $dialog.dialog(dialogOptions).open();
       }
     };
-
-    $scope.todayDate = moment().toDate();
 
     $scope.bankAccounts = {
       getList: function () {
@@ -198,7 +200,7 @@ angular.module('nextgearWebApp')
       // Grab payments to override addresses for
       var paymentsToOverride = [];
       _.each(payments, function(p) {
-        if (p.isPayoff && p.overrideAddress && p.overrideAddress !== null) {
+        if (p.isPayoff() && p.overrideAddress && p.overrideAddress !== null) {
           paymentsToOverride.push(p);
         }
       });
@@ -227,55 +229,71 @@ angular.module('nextgearWebApp')
       });
     };
 
-    var refreshCanPayNow = function () {
-      if( !User.isLoggedIn() ) { return; }
+    $scope.todayDate = moment().toDate();
 
-      Payments.canPayNow().then(
-        function (result) {
-          $scope.canPayNow = result;
+    var bizHours = function() {
+      BusinessHours.insideBusinessHours().then(function(result) {
+        $scope.canPayNow = result;
+        // If we are oustide of business hours, we need to grab
+        // the next available date so we can auto-schedule.
+        if(!$scope.canPayNow) {
+          BusinessHours.nextBusinessDay().then(function(nextBizDay) {
+            var paymentSummaryUpdates = [],
+                nextAvail = moment(nextBizDay); // updatePaymentAmountOnDate requires a date object for the scheduleDate param
 
-          if(!$scope.canPayNow) {
-            // we need to explicitly auto-schedule all payments/fees for the next available business day.
-            var tomorrow = moment().add('days', 1).toDate(),
-                later = moment().add('months', 1).toDate();
+            angular.forEach($scope.paymentQueue.contents.payments, function(item) {
+              if(!item.scheduleDate) {
+                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
 
-            Payments.fetchPossiblePaymentDates(tomorrow, later).then(
-              function (result) {
-                if (!result.length) {
-                  // no possible payment dates...what do we do here?
-                }
-
-                var nextAvail = moment(result.sort()[0]).toDate(),
-                paymentSummaryUpdates = [];
-
-                angular.forEach($scope.paymentQueue.contents.payments, function (item) {
-                  if (!item.scheduleDate) { // if it isn't already scheduled...
-                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff));
-
-                    // set the scheduled date to the next available business day.
-                    item.scheduleDate = nextAvail;
-                  }
-                });
-
-                angular.forEach($scope.paymentQueue.contents.fees, function (item) {
-                  if (!item.scheduleDate) {
-                    item.scheduleDate = nextAvail;
-                  }
-                });
+                // set scheduled date to next available business day.
+                item.scheduleDate = nextAvail.toDate();
               }
-            );
-          }
-          $scope.canPayNowLoaded = true;
-        }, function (error) {
-          // suppress error message display from this to avoid annoyance since it runs continually
-          error.dismiss();
-          $scope.canPayNow = false;
-          $scope.canPayNowLoaded = false;
-        });
+            });
 
-      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+            angular.forEach($scope.paymentQueue.contents.fees, function(item) {
+              if(!item.scheduleDate) {
+                item.scheduleDate = nextAvail.toDate();
+              }
+            });
+          });
+        }
+
+        $scope.canPayNowLoaded = true;
+      }, function(error) {
+        error.dismiss();
+        $scope.canPayNow = false;
+        $scope.canPayNowoaded = false;
+      });
     };
-    refreshCanPayNow();
+
+    // initial check
+    bizHours();
+
+    // when business hours change, update
+    $scope.$on(BusinessHours.CHANGE_EVENT, function() {
+      bizHours();
+    });
+
+    $scope.launchPaymentOptions = function(payment) {
+      var dialogOptions = {
+        dialogClass: 'modal modal-medium',
+        backdrop: true,
+        keyboard: false,
+        backdropClick: false,
+        templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+        controller: 'PaymentOptionsBreakdownCtrl',
+        resolve: {
+          object: function() {
+            return payment;
+          },
+          isOnQueue: function() {
+            return true; // already on queue.
+          }
+        }
+      };
+
+      $dialog.dialog(dialogOptions).open();
+    };
 
     $scope.exportPaymentSummary = function() {
       var feeIds = [],
@@ -287,7 +305,7 @@ angular.module('nextgearWebApp')
       });
       angular.forEach($scope.paymentQueue.contents.payments, function(payment) {
         if(!payment.scheduleDate) {
-          paymentIds.push(payment.stockNum + '|' + (payment.isPayoff ? '1' : '0'));
+          paymentIds.push(payment.stockNum + '|' + (payment.isPayoff() ? '1' : '0'));
         }
       });
 
@@ -302,5 +320,24 @@ angular.module('nextgearWebApp')
       var strUrl = api.contentLink('/report/payment/summary/paymentsSummary', params);
 
       window.open(strUrl, '_blank' /*open in a new window*/);
+    };
+
+    $scope.getPaymentTypeText = function(payment) {
+      var text;
+
+      switch(payment.paymentOption) {
+      case PaymentOptions.TYPE_PAYMENT:
+        text = 'payment';
+        break;
+      case PaymentOptions.TYPE_PAYOFF:
+        text = 'payoff';
+        break;
+      case PaymentOptions.TYPE_INTEREST:
+        text = 'interest only';
+        break;
+      default:
+        text = '_invalid payment type_';
+      }
+      return text;
     };
   });

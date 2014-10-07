@@ -75,6 +75,10 @@
       "NextGearRegionalAveragePurchasePrice": 7552.5,
       "NextGearRegionalMaxPurchasePrice": 7670,
       "NextGearRegionalMinPurchasePrice": 7435,
+      "MmrExcellentValue": 3000,
+      "MmrGoodValue": 2425,
+      "MmrAverageValue": 1625,
+      "MmrFairValue": 600,
       "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
       "StockNumber": 801,
       "FloorplanStatusName": "Approved",
@@ -101,6 +105,7 @@
       "Scheduled": true,
       "WebScheduledPaymentId": "foo",
       "ScheduledPaymentDate": "2014-07-31",
+      "ScheduledPaymentAmount": 5000,
       "CurtailmentPaymentScheduled": false,
       "FloorplanActivity": [
         {

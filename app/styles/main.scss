@@ -28,12 +28,12 @@
  // we can override bootstrap variables here as well.
 
 @import "basic/mixins";
-@import "basic/adjacent-grid";
 @import "basic/base";
 @import "basic/helpers";
 @import "basic/typography";
 @import "basic/icons";
 @import "common/buttons";
+@import "common/tables";
 @import "common/header";
 @import "common/footer";
 @import "common/calendar";
@@ -43,7 +43,6 @@
 @import "common/modals";
 @import "common/notices";
 @import "common/formElements";
-// @import "basic/glyphicons";
 @import "common/tooltips";
 @import "common/sortable";
 
@@ -52,8 +51,6 @@
 @import "pages/unsupported";
 @import "pages/settings";
 @import "pages/payments";
-@import "pages/checkout";
-@import "pages/reports";
 @import "pages/titleReleases";
 @import "pages/resources";
 @import "pages/analytics";

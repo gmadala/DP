@@ -11,7 +11,6 @@
 
   .text-error {
     display: block;
-    // margin: 10px 0 0;
   }
 }
 
@@ -40,8 +39,15 @@ label {
 }
 
 label {
+  @extend %small;
   -webkit-user-select: none;
-  font-size: 12px;
+  cursor: default; // override Bootstrap; we don't need pointers on labels.
+  margin: 14px 0 0 0;
+
+  // but allow pointers on labels if we explicitly want them
+  &.pointer {
+    cursor: pointer;
+  }
 }
 
 input, select, textarea {
@@ -113,9 +119,18 @@ input[type="color"] {
   }
 }
 
+.inline-input {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  & + .btn.inline-submit {
+    margin: 4px 10px 0;
+  }
+}
+
 // inputs that are the full-width of parent
 .input-full {
-  width: 100%;
+  @extend %full-width;
 }
 
 // Overriding Bootstrap's input-prepend class to make it work for us.
@@ -183,6 +198,7 @@ select {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 10px solid $highlight;
+    pointer-events: none; // allows select menu to be clickable through arrow
   }
 
   &.auto{
@@ -218,10 +234,17 @@ select {
     font-weight: normal;
     background: $white;
     -webkit-gradient: none;
+    appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
     padding: 4px 15% 4px 9px;
     border: 0;
     margin: 0;
+
+    &::-ms-expand {
+      display: none;
+    }
 
     &:focus {
       @include box-shadow(none);
@@ -236,14 +259,6 @@ select {
     &:disabled {
       color: #B7B7B7;
     }
-  }
-}
-
-.radio-list {
-  margin-left: 15px;
-
-  li {
-    margin-bottom: 5px;
   }
 }
 
@@ -334,6 +349,14 @@ input[type="radio"] {
 
   &:focus:checked + .radio-img {
     background-image: url('../img/icons/radio_selected_focus.svg');
+  }
+}
+
+.radio-list {
+  margin-left: 15px;
+
+  li {
+    margin-bottom: 5px;
   }
 }
 
@@ -499,7 +522,7 @@ input[type="radio"] {
   }
 
 /*
- * RANGE INPUTS
+ * RANGE INPUT
  */
 .range {
   @extend .clearfix;
@@ -572,7 +595,7 @@ input[type="radio"] {
         @extend %heavy;
         position: absolute;
         top: 8px;
-        color: $gray-a;
+        color: #999;
         font-family: 'Lucida Sans Unicode';
         font-size: 16px;
         margin: 0 5px;
@@ -618,7 +641,7 @@ input[type="radio"] {
     color: $highlight;
 
     &.new, &.old {
-      color: $gray-9;
+      color: #999;
     }
   }
 
@@ -665,11 +688,22 @@ input[type="radio"] {
   }
 }
 
+/*
+ * IE9-SPECIFIC STYLES
+ */
+.ie9 .style-select {
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    height: 100%;
+    width: 24px;
+    background: $white;
+  }
 
-/* Temp styles for auction dealer search view
-*/
-
-
-.form-description {
-  margin-bottom: 20px;
+  select { // in ie9, padding on the left pushes the arrow over.
+    padding: 4px 9px;
+  }
 }

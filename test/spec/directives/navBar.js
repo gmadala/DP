@@ -8,15 +8,17 @@ describe('Directive: navBar', function () {
   describe('controller', function () {
     var scope,
       aScope,
-      rootScope,
+      $rootScope,
+      $controller,
       state,
       stateMock,
       shouldShowTRP,
       dMock,
       aMock;
 
-    beforeEach(inject(function ($rootScope, $controller, $state, $q) {
-      rootScope = $rootScope;
+    beforeEach(inject(function (_$rootScope_, _$controller_, $state, $q) {
+      $controller = _$controller_;
+      $rootScope = _$rootScope_;
       scope = $rootScope.$new();
 
        stateMock = {
@@ -82,12 +84,12 @@ describe('Directive: navBar', function () {
       });
 
       it('should have a logout function that dispatches a userRequestedLogout event', function() {
-        spyOn(rootScope, '$emit');
+        spyOn($rootScope, '$emit');
         expect(scope.user.logout).toBeDefined();
         expect(typeof scope.user.logout).toBe('function');
 
         scope.user.logout();
-        expect(rootScope.$emit).toHaveBeenCalledWith('event:userRequestedLogout');
+        expect($rootScope.$emit).toHaveBeenCalledWith('event:userRequestedLogout');
       });
 
       it('should have a navLinks function that returns appropriate dealer or auction links', function() {
@@ -98,7 +100,7 @@ describe('Directive: navBar', function () {
 
         // dealers have 7 primary links and 2 secondary links (excluding conditional TRP link)
         expect(myLinks.primary.length).toBe(7);
-        expect(myLinks.secondary.length).toBe(2);
+        expect(myLinks.secondary.length).toBe(3);
 
         myLinks = aScope.user.navLinks();
         // auctions have 6 primary links and no secondary links
@@ -106,7 +108,7 @@ describe('Directive: navBar', function () {
         expect(myLinks.secondary).not.toBeDefined();
       });
 
-      it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', inject(function($rootScope, $controller) {
+      it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {
         shouldShowTRP = true;
 
         $controller('NavBarCtrl', {
@@ -116,7 +118,24 @@ describe('Directive: navBar', function () {
         });
         scope.$apply();
         expect(scope.user.navLinks().primary.length).toBe(8);
-      }));
+      });
+
+      it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
+        var loggedIn = false;
+        spyOn(dMock, 'isLoggedIn').andCallFake(function(){ return loggedIn; });
+        shouldShowTRP = true;
+
+        $controller('NavBarCtrl', {
+          $scope: scope,
+          $state: stateMock,
+          User: dMock
+        });
+        $rootScope.$digest();
+        expect(scope.user.navLinks().primary.length).toBe(7);
+        loggedIn = true;
+        $rootScope.$digest();
+        expect(scope.user.navLinks().primary.length).toBe(8);
+      });
 
       it('should change the homelink based on user type', function() {
         expect(scope.user.homeLink).toBeDefined();
@@ -128,6 +147,7 @@ describe('Directive: navBar', function () {
         ret = aScope.user.homeLink();
         expect(ret).toBe('#/act/home');
       });
+
     });
 
     describe('isActive function', function() {

@@ -21,6 +21,7 @@
     "ExtendedTermPlanLength": 30,
     "DateFloored": "2014-03-01",
     "TitleImageAvailable": true,
-    "TitleLocation": "NextGear"
+    "TitleLocation": "NextGear",
+    "ScheduledPaymentAmount": 0
   }
 }

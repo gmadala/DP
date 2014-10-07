@@ -1,0 +1,217 @@
+// ========
+//  TABLES
+// ========
+
+/*
+ * PRIMARY TABLE
+ * Used to style large lists of data, such as payments, fees, floorplans,
+ * title releases, receipts, etc.
+ */
+.table-primary {
+  @include border-bottom-radius($borderRadius);
+  border: 0;
+
+  thead th, thead td {
+    @extend .heavy;
+    @extend .center;
+    background: #666666;
+    height: 35px;
+    font-size: 12px;
+    color: $white;
+    padding: 10px;
+    border: 1px solid $tableBorder;
+
+    button {
+      margin: 0 auto;
+    }
+  }
+
+  .separated { // On the checkout pages we use thicker borders to separate items.
+    border-bottom: 3px solid $tableBorder;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  th, td {
+    color: #4d4d4d;
+    height: 75px;
+    text-align: left;
+    vertical-align: top;
+    position: relative;
+    padding: 10px 15px;
+    border: 1px solid $tableBorder;
+
+    &.numeric {
+      text-align: right;
+    }
+
+    &.paired {
+      min-width: 120px;
+      padding: 10px;
+
+      .paired-media, .paired-body {
+        vertical-align: top;
+      }
+    }
+
+    &.split {
+      @extend .clearfix;
+      padding: 0;
+
+      .split-cell {
+        @extend .clearfix;
+        padding: 10px;
+
+        & + .split-cell {
+          border-top: 1px solid $border;
+        }
+      }
+    }
+  }
+
+  th:first-child, td:first-child {
+    border-left: 0;
+  }
+
+  th:last-child, td:last-child {
+    border-right: 0;
+  }
+
+  tr:last-child, tr:last-child td {
+    @include border-bottom-radius($borderRadius);
+    border-bottom: 0;
+  }
+
+  p {
+    color: #4D4D4D;
+  }
+
+  // Classes for data types within table cells
+  .lockup-major,  {
+    font-size: 14px;
+    color: $text;
+    display: block;
+  }
+
+  a.lockup-major, a.lockup-major:visited {
+    color: $highlight;
+  }
+
+  .lockup-minor {
+    font-size: 12px;
+  }
+}
+
+/*
+ * SECONDARY TABLE
+ * Used to style smaller lists of data, such as payment activity
+ * or dashboard payment details. Also used for tabular data within
+ * modal dialogs.
+ */
+.table-secondary {
+  border: 1px solid $tableBorder;
+  border-width: 0 0 1px 0;
+
+  &.table-border {
+    border: 1px solid $tableBorder;
+  }
+
+  thead th {
+    @extend .center;
+    vertical-align: middle;
+    border: 1px solid $tableBorder;
+  }
+
+  .error-row {
+    border: 2px solid $danger;
+  }
+
+  th, td {
+    min-width: 100px;
+    vertical-align: middle;
+    padding: 8px 15px;
+
+    &:first-child {
+      border-left: 0;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  td {
+    border-style: solid;
+    border-width: 0 1px;
+    border-color: $tableBorder;
+
+    &.center, .center {
+      text-align: center;
+    }
+  }
+
+  .modal & {
+    border-width: 1px;
+  }
+}
+
+.table td,
+.table th {
+   // Some columns need to be a certain
+    // width to prevent unwanted text-wrapping.
+    &.actions {
+      min-width: 150px;
+      max-width: 200px;
+    }
+
+    &.date {
+      min-width: 100px;
+    }
+
+    &.description {
+      min-width: 225px;
+      max-width: 300px;
+    }
+
+    &.description-no-vin {
+      max-width: 210px;
+    }
+
+    &.has-btns {
+      padding: 10px;
+      min-width: 120px;
+    }
+}
+
+/*
+ * For tabular content with no styling.
+ */
+.table-unstyle {
+  background: transparent;
+  border: 0;
+
+  td, th, tr td, tr th {
+    padding: 8px 4px;
+    border: 0;
+  }
+}
+
+// Table-specific type classes. To override bootstrap,
+// we have to be extra-specific.
+.table-symbol, .table td.table-symbol {
+  @extend .heavy;
+  font-size: 16px;
+  line-height: 1.3;
+  padding: 4px;
+}
+
+.table-value, .table .table-value {
+  @extend .heavy;
+}
+
+.table-numeric, .table .table-numeric,
+.numeric, .table .numeric {
+  @extend %align-right;
+}

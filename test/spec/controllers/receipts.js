@@ -256,25 +256,67 @@ describe('Controller: ReceiptsCtrl', function () {
 
   });
 
-  describe('count function', function() {
-    it('should return a count of currently selected receipts to export', function() {
-      scope.receipts.results = ['one', 'two'];
-      scope.selectedReceipts = [false, true];
-      expect(scope.count()).toBe(1);
-    });
-  });
-
   describe('tooMany function', function() {
     it('should return true if the number of selected receipts exceeds the maximum', function() {
       scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four', 'one'];
-      scope.selectedReceipts = [false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+      scope.selectedReceipts = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four', 'one'];
       expect(scope.tooMany()).toBe(true);
     });
 
     it('should return false if the number of selected receipts is less than the maximum', function() {
-    scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four'];
-      scope.selectedReceipts = [false, true, true, true, true, true, true, true];
+      scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four'];
+      scope.selectedReceipts = ['one', 'two', 'three', 'four'];
       expect(scope.tooMany()).toBe(false);
+    });
+  });
+
+  describe('selectedReceipts', function() {
+    var mockReceipt1,
+        mockReceipt2;
+
+    beforeEach(function() {
+      mockReceipt1 = {
+        TransactionNumber: 1234,
+        FinancialTransactionId: 'id123'
+      };
+      mockReceipt2 = {
+        TransactionNumber: 5678,
+        FinancialTransactionId: 'id456'
+      };
+    });
+
+    describe('toggleInQueue function', function() {
+      beforeEach(function() {
+        // spyOn(scope, 'isSelected');
+        spyOn(scope, 'removeReceipt').andCallThrough();
+      });
+
+      it('should add a receipt to the list if it is not already on there', function() {
+        expect(scope.selectedReceipts.length).toBe(0);
+        scope.toggleInQueue(mockReceipt1);
+        expect(scope.selectedReceipts[0]).toBe(mockReceipt1);
+      });
+
+      it('should remove a receipt from the list if it is already on there', function() {
+        scope.toggleInQueue(mockReceipt1);
+        expect(scope.selectedReceipts[0]).toBe(mockReceipt1);
+        scope.toggleInQueue(mockReceipt1);
+        expect(scope.removeReceipt).toHaveBeenCalled();
+      });
+    });
+
+    describe('viewReceipt function', function() {
+      it('should exist', function() {
+        expect(scope.viewReceipt).toBeDefined();
+      });
+
+      it('should open a new tab with a pdf of the selected receipts', function() {
+        var receipt = { transactionNumber: 1234, FinancialTransactionId: 5656 };
+
+        spyOn(window, 'open');
+        scope.viewReceipt(receipt);
+        expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656', '_blank');
+      });
     });
   });
 
@@ -287,7 +329,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
     it('should build a link based on the selected receipts and open it in a new window', function() {
       scope.receipts.results = [
-        { transactionNumer: 1234, FinancialTransactionId: 5656 },
+        { transactionNumber: 1234, FinancialTransactionId: 5656 },
         { transactionNumber: 5678, FinancialTransactionId: 3434 },
         { transactionNumber: 910, FinancialTransactionId: 1212 }
       ];

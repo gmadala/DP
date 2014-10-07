@@ -1,12 +1,16 @@
-//absurdly long selector to overcome Bootstrap's specificity.
+// ========
+//  FOOTER
+// ========
+
 footer.row-fluid {
   @extend %center;
   @extend %full-width;
-  @include gradient-row();
+  background: #FFF;
+  @include background-image(linear-gradient(#FFF, #e4e4e4));
   font-size: $tiny-font-size;
-  color: $footer-text;
+  color: $highlight;
   padding: 14px 0 11px 0;
-  border-top: 1px solid $gray-d;
+  border-top: 1px solid $border;
   margin: 10px 0 -50px 0;
 }
 

@@ -1,5 +1,5 @@
 <section class="row-fluid">
-  <!-- <section class="span9"> -->
+  <section class="span9">
     <div nxg-search
        title="{{ 'Receipt Search' | translate }}"
        class="search-form"
@@ -46,18 +46,12 @@
                 <span translate>Payment Description</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
-                  ng-click="sortBy('AmountApplied')"
-                  ng-class="{ sorted : sortField == 'AmountApplied', desc : sortDescending }">
-                <span translate>Applied</span><span class="sortArrows"></span>
-              </th>
-              <th class="sortable"
                   ng-click="sortBy('AmountProvided')"
                   ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-                <span translate>Provided</span><span class="sortArrows"></span>
+                <span translate>Amount Paid</span><span class="sortArrows"></span>
               </th>
-              <th>
-                <button class="btn btn-cta" ng-click="onExport()" ng-disabled="count() == 0" nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}" translate>Export Receipt(s)
-                </button>
+              <th translate>
+                Export Receipt(s)
               </th>
             </thead>
             <tr ng-repeat="receipt in receipts.results">
@@ -70,31 +64,41 @@
                 </p>
               </td>
               <td>
-                <h4 class="lockup-major" nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></h4>
+                <a class="lockup-major" href="javascript:void(0)" ng-click="viewReceipt(receipt)">
+                  <span nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></span>
+                </a>
               </td>
-              <td>
-                <p><span translate>Payment</span>: {{ receipt.PaymentMethod }}<br/>
-                  <span ng-switch on="!!reciept.CheckNumber">
+              <td class="description-no-vin">
+                <p>
+                  <span translate>Payment</span>: {{ receipt.PaymentMethod }}<br/>
+                  <span ng-switch on="!!receipt.CheckNumber">
                     <span ng-switch-when="true">
                       <span ng-show="receipt.CheckNumber"><span translate>Check #</span>:</span>
                       <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
                     </span>
                   </span>
-                <span ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</span></p>
+                  <span ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</span></p>
               </td>
               <td>
-                <h4 class="lockup-major">{{ receipt.AmountApplied | currency }}</h4>
+                <h4 class="lockup-major numeric">{{ receipt.AmountProvided | currency }}</h4>
               </td>
-              <td>
-                <h4 class="lockup-major">{{ receipt.AmountProvided | currency }}</h4>
-              </td>
-              <td class="">
-                <input type="checkbox" id="{{ receipt.TransactionNumber }}"
-                       name="toPrint"
-                       ng-disabled="tooMany() && !selectedReceipts[$index]"
-                       ng-model="selectedReceipts[$index]"
-                       nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"/>
-                <label class="checkbox-img" for="{{ receipt.TransactionNumber }}"></label>
+              <td class="actions">
+                <button class="btn btn-adapts right"
+                        type="button"
+                        ng-class="{'selected': isSelected(receipt)}"
+                        ng-disabled="tooMany() && !isSelected(receipt)"
+                        ng-click="toggleInQueue(receipt)"
+                        nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"
+                        >
+                  <span class="paired-body">
+                    <span ng-show="isSelected(receipt)" translate>Remove Receipt</span>
+                    <span ng-show="isSelected(receipt)" translate>Add Receipt</span>
+                  </span>
+                  <span ng-switch="isSelected(receipt)">
+                    <span ng-switch-when="false" nxg-icon="icon-plus" class="paired-media icon-small"></span>
+                    <span ng-switch-when="true" nxg-icon="icon-minus" class="paired-media icon-small"></span>
+                  </span>
+                </button>
               </td>
             </tr>
           </table>
@@ -105,10 +109,42 @@
         </div>
       </div>
     </div>
-  <!-- </section> -->
+  </section>
 
- <!--  <section class="span3 well">
+  <section class="span3 well stick" nxg-sticky>
+    <h2 class="well-title" translate>Export Receipts</h2>
+    <div class="well-item">
+      <p translate>You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below.</p>
+    </div>
 
-    You can combine up to 20 receipts into a single pdf by selecting each receipt checkbox and clicking 'View Selected Receipts'.
-  </section> -->
+    <div class="well-item well-light bordered">
+      <div class="alt-lockup">
+        <p class="lockup-minor" translate>Receipts Selected</p>
+        <h3 class="lockup-major" translate>{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
+      </div>
+    </div>
+
+    <div ng-show="selectedReceipts.length > 0">
+      <ul class="queue-list reversed">
+        <li class="queue-item bordered" ng-repeat="receipt in selectedReceipts">
+          <button class="btn-unstyle right"
+              ng-click="removeReceipt(receipt)">
+            <span nxg-icon="icon-cancel" class="icon-small"></span>
+          </button>
+          <h5><span translate>Receipt No.</span> <a class="heavy" href="javascript:void(0)" ng-click="viewReceipt(receipt)">{{ receipt.TransactionNumber }}</a></h5>
+        </li>
+      </ul>
+    </div>
+
+    <div class="well-footer">
+      <button class="btn-cta cta-primary cta-full"
+              type="submit"
+              ng-click="onExport()"
+              ng-disabled="selectedReceipts.length < 1"
+              nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">
+        <span translate>Export Receipt(s)</span>
+        <span nxg-icon="icon-document" class="icon-small"></span>
+      </button>
+    </div>
+  </section>
 </section>

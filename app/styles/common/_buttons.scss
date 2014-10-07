@@ -1,111 +1,7 @@
-
 // =========
 //  BUTTONS
 // =========
 
-.nxg-search-btn {
-  @extend %align-left;
-  position: relative;
-  display: inline-block;
-  font-size: $large-font-size;
-  height: 28px;
-  width: 90px;
-  padding-top: 3px;
-  margin-left: 0.3em;
-
-  &:active {
-    margin-top: -1px;
-  }
-
-  &:after {
-    @extend %small;
-    position: absolute;
-    top: 4px;
-    right: 6px;
-    width: 50px;
-    content: 'Look Up';
-  }
-}
-
-.btn-cal {
-  position: absolute;
-  right: 0;
-  top: 20px;
-}
-
-.btn-unstyle {
-  @extend %center;
-  background: transparent;
-  color: $primary;
-  padding: 0;
-  border: 0;
-  font-size: 14px;
-  &.right {
-    float: right;
-  }
-}
-
-.btn-link {
-  font-size: 12px;
-  color: $highlight;
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  margin: 0 0 1px 0;
-
-  &:hover {
-    color: darken($highlight, 10%);
-  }
-
-  &:disabled, &:disabled:hover {
-    color: $gray-8;
-  }
-
-  &:disabled, &:disabled:hover {
-    cursor: auto;
-  }
-}
-
-.btn-help {
-  @extend .btn-unstyle;
-  display: inline-block;
-  margin-left: 5px;
-}
-
-// span version of help button for cases where we don't want it to be an actual button
-// (e.g. in forms where it will steal default button status from the submit button)
-span.btn-help {
-  cursor: pointer;
-  padding: 0px 4px;
-}
-
-// IE9-SPECIFIC
-// Because IE9 forces a particular text color on disabled buttons.
-.ie9 {
-  .btn:disabled,
-  .btn.disabled,
-  .btn-primary:disabled,
-  .btn-primary.disabled,
-  .btn-secondary:disabled,
-  .btn-secondary.disabled {
-    color: $btn-text-disabled;
-    background-color: $btn-bkgd-disabled;
-  }
-}
-
-
-.btn.inline-submit {
-  height: 32px;
-  margin: 32px 10px 0;
-}
-
-
-
-
-
-/*
-* Updated for v2.23
-*/
 .accordion-button {
   @include border-bottom-radius($borderRadius);
   display: block;
@@ -144,12 +40,12 @@ span.btn-help {
  * Used to style any and all buttons within the desktop app.
  */
 .button, .btn {
+  @extend %small;
+  @extend %heavy;
   @include box-shadow(none);
   @include border-radius($borderRadius);
   @include text-shadow(none);
   background: $btn-bkgd;
-  font-size: 12px;
-  font-weight: bold;
   color: $btn-text;
   height: 35px;
   border: 1px solid $border;
@@ -205,6 +101,11 @@ span.btn-help {
     margin-right: 0;
   }
 
+  &.inline-submit {
+    height: 32px;
+    margin: 32px 10px 0;
+  }
+
   th &, td & {
     margin: 0;
 
@@ -219,14 +120,15 @@ span.btn-help {
   margin: 10px auto;
 }
 
+// group of buttons (usually 2)
 .button-group {
   padding: 0;
   margin: 10px 0;
 
-  .button {
+  .btn {
     margin: 0;
 
-    & + .button {
+    & + .btn {
       margin-left: 10px;
     }
   }
@@ -287,9 +189,9 @@ span.btn-help {
 .btn-cta {
   @extend .btn;
   @extend .cta;
+  @extend .heavy;
   font-family: $baseFontFamily;
   font-size: 13px;
-  font-weight: bold;
   padding: 10px;
 
   &.cta-primary {
@@ -364,13 +266,13 @@ span.btn-help {
 
   .btn {
     @extend %float-l;
+    @extend %heavy;
+    @extend %small;
     background: transparent;
     width: 50%;
     height: 24px;
     position: relative;
     color: $toggle-color;
-    font-weight: bold;
-    font-size: 12px;
     padding: 2px;
     border: 0;
     margin: 0;
@@ -427,7 +329,7 @@ span.btn-help {
   padding: 0 10px;
 
   .btn-text {
-    float: left;
+    @extend %float-l;
     padding: 15px 0;
     width: 40%;
   }
@@ -445,6 +347,46 @@ span.btn-help {
   }
 }
 
+.btn-unstyle {
+  @extend %center;
+  background: transparent;
+  color: $primary;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+
+  &.right {
+    @extend %float-r;
+  }
+}
+
+.btn-link {
+  @extend %small;
+  color: $highlight;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  margin: 0 0 1px 0;
+
+  &:hover {
+    color: darken($highlight, 10%);
+  }
+
+  &:disabled, &:disabled:hover {
+    color: #999;
+  }
+
+  &:disabled, &:disabled:hover {
+    cursor: auto;
+  }
+}
+
+// help button commonly used for tooltips
+.btn-help {
+  @extend .btn-unstyle;
+  display: inline-block;
+  margin-left: 5px;
+}
 
 // responsive buttons for narrower table columns
 .btn-adapts .paired-media {
@@ -457,3 +399,19 @@ span.btn-help {
       font-size: 11px;
     }
   }
+
+
+// IE9-SPECIFIC
+// Because IE9 forces a particular text color on disabled buttons.
+.ie9 {
+  .btn:disabled,
+  .btn.disabled,
+  .btn-primary:disabled,
+  .btn-primary.disabled,
+  .btn-secondary:disabled,
+  .btn-secondary.disabled {
+    color: $btn-text-disabled;
+    background-color: $btn-bkgd-disabled;
+  }
+}
+

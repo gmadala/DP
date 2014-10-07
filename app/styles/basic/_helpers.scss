@@ -1,15 +1,9 @@
-// HELPER CLASSES
+// ================
+//  HELPER CLASSES
+// ================
 
 %full-width {
   width: 100%;
-}
-
-%half-width {
-  width: 50%;
-}
-
-%quarter-width {
-  width: 25%;
 }
 
 %center, .center {
@@ -32,16 +26,6 @@
   float: right;
 }
 
-%clear {
-  &:before, &:after {
-    content: '';
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-}
-
 .clearfix {
   *zoom:1;
 
@@ -55,7 +39,7 @@
   }
 }
 
-%heavy {
+%heavy, .heavy {
   font-weight: bold;
 }
 
@@ -68,6 +52,11 @@
   font-size: $small-font-size;
 }
 
+.emphasis {
+  font-style: italic;
+  margin-bottom: 3px;
+}
+
 .highlight {
   color: $highlight;
 }
@@ -78,6 +67,7 @@
 }
 
 .truncate {
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

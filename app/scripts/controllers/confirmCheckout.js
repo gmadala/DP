@@ -42,12 +42,19 @@ angular.module('nextgearWebApp')
         }
         return statuses.join(' and ');
       },
-      todayTotal: function () {
+      getTotals: function() {
         var sumItems = function (subTotal, item) {
-          return subTotal + item.amount;
+          return subTotal + item.getCheckoutAmount();
         };
-        var total = _.reduce($scope.items.feesToday, sumItems, 0);
-        return _.reduce($scope.items.paymentsToday, sumItems, total);
+
+        var totals = {
+          feesToday: _.reduce($scope.items.feesToday, sumItems, 0),
+          paymentsToday: _.reduce($scope.items.paymentsToday, sumItems, 0),
+          feesScheduled: _.reduce($scope.items.feesScheduled, sumItems, 0),
+          paymentsScheduled: _.reduce($scope.items.paymentsScheduled, sumItems, 0)
+        };
+
+        return totals;
       }
     };
 

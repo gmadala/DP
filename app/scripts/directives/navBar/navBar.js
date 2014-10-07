@@ -22,6 +22,7 @@ angular.module('nextgearWebApp')
       ],
       secondary: [
         { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK },
+        { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup', metric: '' },
         { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
       ]
     },
@@ -37,18 +38,23 @@ angular.module('nextgearWebApp')
     };
 
     // Only show Title Release link if API says we should for this user
-    if(User.isLoggedIn()) {
-      User.infoPromise().then(function(info) {
-        if(info.DisplayTitleReleaseProgram) {
-          dealerLinks.primary.splice(4, 0, {
-            name: gettextCatalog.getString('Title Releases'),
-            href: '#/titlereleases',
-            activeWhen: 'titlereleases',
-            metric: metric.CLICK_TITLE_RELEASE_LINK
-          });
-        }
-      });
-    }
+    // WARNING
+    // This will break if, at any time in the future, we don't refresh when logging a user out.
+    // If you log out without a refresh and log back in, it'll put a duplicate item into the nav.
+    $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
+      if(isLoggedIn) {
+        User.infoPromise().then(function(info) {
+          if(info.DisplayTitleReleaseProgram) {
+            dealerLinks.primary.splice(4, 0, {
+              name: gettextCatalog.getString('Title Releases'),
+              href: '#/titlereleases',
+              activeWhen: 'titlereleases',
+              metric: metric.CLICK_TITLE_RELEASE_LINK
+            });
+          }
+        });
+      }
+    });
 
     $scope.getQueueCount = function () {
       var queue = Payments.getPaymentQueue(),
@@ -90,6 +96,9 @@ angular.module('nextgearWebApp')
       return $state.includes(activeWhen);
     };
 
-    $scope.isCollapsed = true;
+    $rootScope.$on('$stateChangeSuccess', function () {
+      $scope.isCollapsed = true;
+    });
+
     $scope.navState = $state;
   });

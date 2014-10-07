@@ -1,24 +1,73 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, fee, possibleDates, Payments) {
+  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
 
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
     var item = payment ? payment : fee;
 
+    $scope.updateInProgress = false;
     $scope.type = payment ? 'payment' : 'fee';
+    $scope.isPayment = !!payment;
 
     $scope.model = {
-      payment: payment,
+      // we use a copy of the original payment/breakdown, so that if we change
+      // the date and then cancel, our original payment object won't
+      // retain those changes.
+      payment: angular.copy(payment),
       fee: fee,
       selectedDate: item.scheduleDate || moment(orderedDates[0]).toDate(), // next available date
       possibleDates: possibleDates,
-      canPayNow: false
+      breakdown: fee ? null : angular.copy(payment.getBreakdown()),
+      getPaymentTotal: function() {
+        return fee ? fee.Balance : $scope.model.breakdown.principal + $scope.model.breakdown.additionalPrincipal + $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
+      }
     };
 
-    Payments.canPayNow().then(function (result) {
-      $scope.model.canPayNow = result;
+    var prv = {
+      handleNewDate: function(newVal) {
+        if(!$scope.isPayment) {
+          return;
+        }
+
+        var isPayoff = item.isPayoff();
+        $scope.updateInProgress = true;
+
+        Payments.updatePaymentAmountOnDate($scope.model.payment, newVal, isPayoff).then(function(result) {
+          $scope.updateInProgress = false;
+          $scope.model.breakdown.amount = result.PaymentAmount;
+          $scope.model.breakdown.principal = result.PrincipalAmount;
+          $scope.model.breakdown.fees = result.FeeAmount;
+          $scope.model.breakdown.interest = result.InterestAmount;
+          $scope.model.breakdown.cpp = result.CollateralProtectionAmount;
+
+          if($scope.model.payment.paymentOption === PaymentOptions.TYPE_INTEREST) {
+            $scope.model.breakdown.principal = 0;
+            $scope.model.breakdown.fees = 0;
+            $scope.model.breakdown.cpp = 0;
+            $scope.model.breakdown.amount = $scope.model.breakdown.interest;
+          }
+        }, function(/*error*/) {
+          $scope.updateInProgress = false;
+        });
+      }
+    };
+
+    // initial amounts
+    // prv.handleNewDate($scope.model.selectedDate);
+
+    // update breakdown based on date.
+    $scope.$watch('model.selectedDate', function(newVal, oldVal) {
+      if (!$scope.isPayment) { // it's a fee and won't have a breakdown; nothing to update
+        return;
+      }
+
+      if (newVal === oldVal || !$scope.checkDate(newVal)) {
+        return; // our value is old or invalid; don't update breakdown
+      } else {
+        prv.handleNewDate(newVal);
+      }
     });
 
     $scope.checkDate = function (date) {
@@ -39,10 +88,6 @@ angular.module('nextgearWebApp')
       return !!$scope.model.possibleDates[key];
     };
 
-    $scope.removeSchedule = function () {
-      $scope.finalize(null);
-    };
-
     $scope.commit = function () {
       $scope.validity = angular.copy($scope.dateForm);
       if (!$scope.dateForm.$valid) {
@@ -53,10 +98,13 @@ angular.module('nextgearWebApp')
     };
 
     $scope.finalize = function (scheduleDate) {
-      if(item.isPayment) {
+      if (item.isFee){
+        item.scheduleDate = scheduleDate;
+        dialog.close();
+      } else {
         $scope.submitInProgress = true;
         // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
-        Payments.updatePaymentAmountOnDate(item, scheduleDate || new Date(), item.isPayoff).then(
+        Payments.updatePaymentAmountOnDate(item, scheduleDate || new Date(), item.isPayoff()).then(
           function () {
             $scope.submitInProgress = false;
             item.scheduleDate = scheduleDate;
@@ -65,14 +113,10 @@ angular.module('nextgearWebApp')
             $scope.submitInProgress = false;
           }
         );
-      } else {
-        item.scheduleDate = scheduleDate;
-        dialog.close();
       }
     };
 
     $scope.close = function() {
       dialog.close();
     };
-
   });

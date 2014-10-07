@@ -40,28 +40,13 @@
                 <p class="lockup-major">{{ fee.type || 'N/A' }}</p>
               </td>
               <td>
-                <!-- cannot schedule (overdue or due today), and WITHIN business hours -->
-                <h4 class="lockup-major" ng-show="canPayNow && !paymentQueue.canSchedule(fee)">
+                <!-- is not scheduled or is scheduled for today -->
+                <h4 class="lockup-major" ng-show="!fee.scheduleDate || fee.scheduleDate == todayDate">
                   <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- cannot schedule (overdue or due today), and OUTSIDE business hours -->
-                <h4 class="lockup-major" ng-show="!canPayNow && !paymentQueue.canSchedule(fee)">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ fee.scheduleDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (within business hours) -->
-                <h4 class="lockup-major" ng-show="canPayNow && paymentQueue.canSchedule(fee) && !fee.scheduleDate">
-                  <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (outside business hours; should have already been set to have a scheduled date.) -->
-                <h4 class="lockup-major" ng-show="!canPayNow && paymentQueue.canSchedule(fee)">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
                 <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="fee.scheduleDate">
+                <h4 class="lockup-major" ng-show="fee.scheduleDate && fee.scheduleDate != todayDate">
                   <span class="sub-label"><span translate>Future</span>: </span>{{ fee.scheduleDate | moment }}
                 </h4>
 
@@ -116,31 +101,16 @@
                 <p class="lockup-minor caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
                 <p class="lockup-minor caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
 
-                <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                <div nxg-alternate-address="payment" enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
               </td>
               <td>
-                <!-- cannot schedule (overdue or due today), and WITHIN business hours -->
-                <h4 class="lockup-major" ng-show="canPayNow && !paymentQueue.canSchedule(payment)">
+                <!-- is not scheduled or is scheduled for today -->
+                <h4 class="lockup-major" ng-show="!payment.scheduleDate || payment.scheduleDate == todayDate">
                   <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- cannot schedule (overdue or due today), and OUTSIDE business hours -->
-                <h4 class="lockup-major" ng-show="!canPayNow && !paymentQueue.canSchedule(payment)">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ payment.scheduleDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (within business hours) -->
-                <h4 class="lockup-major" ng-show="canPayNow && paymentQueue.canSchedule(payment) && !payment.scheduleDate">
-                  <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
-
-                <!-- can schedule, and hasn't been scheduled yet (outside business hours; should have already been set to have a scheduled date.) -->
-                <h4 class="lockup-major" ng-show="!canPayNow && paymentQueue.canSchedule(payment)">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 
                 <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="payment.scheduleDate">
+                <h4 class="lockup-major" ng-show="payment.scheduleDate && payment.scheduleDate != todayDate">
                   <span class="sub-label"><span translate>Future</span>: </span>{{ payment.scheduleDate | moment }}
                 </h4>
 
@@ -161,31 +131,21 @@
               </td>
               <td class="numeric split">
                 <div class="split-cell">
-                  <p class="lockup-major">{{ payment.amount | currency }}</p>
+                  <p class="lockup-major"><span class="sub-label">{{ getPaymentTypeText(payment) | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
+                  <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
-                          ng-click="paymentQueue.removePayment(payment.floorplanId)"
+                          ng-click="paymentQueue.removePayment(payment.id)"
                           ng-disabled="submitInProgress"
                           nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}" translate>
                     Remove
                   </button>
                 </div>
                 <div class="split-cell">
-                  <ul class="list-table mini">
-                    <li class="list-table-row">
-                      <p class="span6"><span translate>Principal</span>:</p><p class="span6 numeric">{{payment.principal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6"><span translate>Interest</span>:</p><p class="span6 numeric">{{payment.interestTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row">
-                      <p class="span6"><span translate>Fee(s)</span>:</p><p class="span6 numeric">{{payment.feesTotal | currency}}</p>
-                    </li>
-                    <li class="list-table-row" ng-show="payment.collateralTotal > 0">
-                      <p class="span6"><span translate>CPP</span>:</p><p class="span6 numeric">{{payment.collateralTotal | currency}}</p>
-                    </li>
-                  </ul>
+                  <button class="btn-unstyle btn-link numeric" ng-click="launchPaymentOptions(payment)" translate>
+                    Payment Options<br/> & Breakdown
+                  </button>
                 </div>
-                <!-- <label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label> -->
+                <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
               </td>
             </tr>
           </table>

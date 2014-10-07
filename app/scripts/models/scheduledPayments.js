@@ -35,6 +35,7 @@ angular.module('nextgearWebApp')
                 status: prv.toStatus(item),
                 statusDate: prv.getStatusDate(item),
                 scheduledDate: item.ScheduledForDate,
+                scheduledPaymentAmount: item.ScheduledPaymentAmount,
                 isPending: prv.isPending(item),
                 isCancelled: item.Cancelled,
                 isVoided: item.Voided,
@@ -49,6 +50,7 @@ angular.module('nextgearWebApp')
                 daysOnFloorplan: item.DaysOnFloorplan,
                 receiptURL: prv.getReceiptURL(item),
                 data: {query: request.Keyword},
+                PrincipalDue: item.PrincipalDue,
                 InterestPayoffTotal: item.InterestPayoffTotal,
                 CollateralProtectionPayoffTotal: item.CollateralProtectionPayoffTotal,
                 FeesPayoffTotal: item.FeesPayoffTotal

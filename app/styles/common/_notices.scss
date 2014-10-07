@@ -1,4 +1,6 @@
-// Notices/Alerts
+// =========
+//  NOTICES
+// =========
 
 .notice {
   @extend %center;
@@ -57,7 +59,7 @@
   z-index: 0;
 
   &.today {
-    color: $gray-8;
+    color: #999;
   }
 
   &.overdue {

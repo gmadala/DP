@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, gettextCatalog) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours, gettextCatalog) {
 
     segmentio.track(metric.VIEW_PAYMENTS_PAGE);
     $scope.metric = metric; // make metric names available to template
@@ -9,24 +9,6 @@ angular.module('nextgearWebApp')
     $scope.isCollapsed = true;
 
     var lastPromise;
-
-    function getNextBusinessDate(scope) {
-      // find the next possible payment date
-      var tomorrow = moment().add('days', 1).toDate(),
-        later = moment().add('months', 1).toDate();
-      if(scope.nextBusinessDay) {
-        return scope.nextBusinessDay;
-      } else {
-        Payments.fetchPossiblePaymentDates(tomorrow, later).then(
-          function (result) {
-            scope.nextBusinessDay = {
-              date: moment(result.sort()[0]).toDate(),
-              isTomorrow: moment(result.sort()[0]).isSame(tomorrow, 'day')
-            };
-          }
-        );
-      }
-    }
 
     $scope.getDueStatus = function (item, isPayment) {
       var due = isPayment ? moment(item.DueDate) : moment(item.EffectiveDate),
@@ -175,10 +157,6 @@ angular.module('nextgearWebApp')
       $scope.payments.search();
     };
 
-    $scope.todayDate = moment().toDate();
-    $scope.nextBusinessDay = null;
-    $scope.nextBusinessDay = getNextBusinessDate($scope);
-
     // Set up page-load filtering based on $stateParams
     var filterParam = null,
         startDate = null,
@@ -218,23 +196,34 @@ angular.module('nextgearWebApp')
       }
     );
 
-    var refreshCanPayNow = function () {
-      if( !User.isLoggedIn() ) { return; }
+    $scope.todayDate = moment().toDate();
+    $scope.nextBusinessDay = null;
 
-      Payments.canPayNow().then(
-        function (result) {
-          $scope.canPayNow = result;
-          $scope.canPayNowLoaded = true;
-        }, function (error) {
-          // suppress error message display from this to avoid annoyance since it runs continually
-          error.dismiss();
-          $scope.canPayNow = false;
-          $scope.canPayNowLoaded = false;
-        });
+    var bizHours = function() {
+      BusinessHours.insideBusinessHours().then(function(result) {
+        $scope.canPayNow = result;
 
-      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+        if(!$scope.canPayNow) {
+          BusinessHours.nextBusinessDay().then(function(nextBizDay) {
+            $scope.nextBusinessDay = nextBizDay;
+          });
+        }
+
+        $scope.canPayNowLoaded = true;
+      }, function(error) {
+        error.dismiss();
+        $scope.canPayNow = false;
+        $scope.canPayNowLoaded = false;
+      });
     };
-    refreshCanPayNow();
+
+    // initial check
+    bizHours();
+
+    // when business hours change, update
+    $scope.$on(BusinessHours.CHANGE_EVENT, function() {
+      bizHours();
+    });
 
   }).controller('ExtensionRequestCtrl', function ($scope, dialog, payment, onConfirm, Payments, Floorplan) {
     $scope.payment = payment;

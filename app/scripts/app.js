@@ -132,6 +132,12 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'AccountManagementCtrl',
         showNavBar: true
       })
+      .state('valueLookup', {
+        url: '/valueLookup',
+        templateUrl: 'views/valuelookup.html',
+        controller: 'ValueLookupCtrl',
+        showNavBar: true
+      })
 
       // AUCTION STATES
       .state('auction_dashboard', {

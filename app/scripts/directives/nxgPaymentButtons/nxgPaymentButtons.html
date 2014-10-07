@@ -47,7 +47,7 @@
         </span>
   </button>
 
-  <div ng-switch-when="payment-scheduledPayment">
+  <div ng-switch-when="payment-scheduledPayment" class="scheduled-payment">
     <h4 class="lockup-major" translate>Scheduled</h4>
     <p class="lockup-minor" translate> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
@@ -65,7 +65,7 @@
           id="togglePayoff2"
           class="btn btn-adapts"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
-          ng-click="togglePaymentInQueue(true)"
+          ng-click="togglePaymentInQueue(false)"
           tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null | translate }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
@@ -107,14 +107,11 @@
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
-      <span ng-switch="onQueue">
-        <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
-        <span ng-switch-when="payment" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
-        <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
-      </span>
-      <!-- TODO: confirm the functionality of 'Remove' with @Ryan
-        <span>{{ (onQueue != 'payoff') && 'Add' || 'Remove' }}</span>
-      -->
+    <span ng-switch="onQueue">
+      <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
+      <span ng-switch-when="payment" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
+      <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
+    </span>
   </button>
 
   <div ng-switch-when="payoff-scheduledPayoff" class="scheduled-payoff">

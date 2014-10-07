@@ -1,13 +1,11 @@
-NextGear Capital v4.0.2
+NextGear Capital v4.0.6
 =================================
 
 Fixes included in this release:
 
-VO-2253	Allow parent manufacturer to view subsidiary activity
-VO-2190	Design and define new vehicle details view
-VO-2684	Web (Settings – Account Management): Period is missing from the end of the info popup text.
-VO-2734	NextGear Web Hotfix (Floor a Car–Confirm Flooring Request): Link “View Vehicle Verification Checklist” is getting displayed instead of updated link “View Dealer Funding Checklist”.
-VO-1754	Auto-schedule payments for valid business day if logged in during off hours
-VO-2806	Floor a Vehicle - Cancel button triggered when hitting Enter on VIN Search
-VO-2473	Auction - Allow inventory location selection during floor plan request
-VO-1489	Display most recently floored vehicles to the dealer so flooring information can be reviewed
+VO-2472	MMR - Add value lookup to web
+VO-2992 Update brand colors
+VO-3098 Selecting vehicle link from dashboard returns system error
+VO-3108 Checkout - Change Payment Date popup doesn't include Additional Principal
+VO-3109 Payment Options and Breakdown - inaccurate Payment Total
+VO-3122 Title Release Program does not show up on first page load.

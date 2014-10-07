@@ -4,16 +4,23 @@ describe('Directive: nxgPaymentButtons', function () {
 
   var element,
     scope,
-    Payments;
+    Payments,
+    PaymentOptions,
+    httpBackend;
 
   beforeEach(module('nextgearWebApp', 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html'));
 
-  beforeEach(inject(function (_Payments_, $httpBackend) {
-    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
+  beforeEach(inject(function (_Payments_, _PaymentOptions_, $httpBackend) {
+    httpBackend = $httpBackend;
+    httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
+    httpBackend.expectGET('views/modals/cancelPayment.html').respond('<div></div>');
+
     Payments = _Payments_;
+    PaymentOptions = _PaymentOptions_;
   }));
 
   describe('fee mode', function () {
+    var iScope;
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="fee" ' +
@@ -31,32 +38,31 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.isOpen = true;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope();
     }));
 
     it('should have a button that toggles fee presence in the payment queue', function() {
       spyOn(Payments, 'addFeeToQueue');
       spyOn(Payments, 'removeFeeFromQueue');
 
-      element.find('#toggleFee').click();
-
+      iScope.toggleFeeInQueue();
       scope.$apply(function () {
         scope.inQueue = true;
       });
 
-      element.find('#toggleFee').click();
+      iScope.toggleFeeInQueue();
 
       expect(Payments.addFeeToQueue).toHaveBeenCalledWith(
-        scope.myFee.FinancialRecordId,
-        scope.myFee.Vin,
-        scope.myFee.FeeType,
-        scope.myFee.Description,
-        scope.myFee.Balance,
-        scope.myFee.EffectiveDate);
+        scope.myFee,
+        true /* isFee */
+      );
       expect(Payments.removeFeeFromQueue).toHaveBeenCalledWith(scope.myFee.FinancialRecordId);
     });
 
     describe('fee mode (fee previously scheduled)', function() {
-      var dialog;
+      var dialog,
+          iScope;
 
       beforeEach(inject(function ($rootScope, $compile, $dialog) {
         dialog = $dialog;
@@ -74,6 +80,8 @@ describe('Directive: nxgPaymentButtons', function () {
         scope.inQueue = false;
         $compile(element)(scope);
         $rootScope.$digest();
+
+        iScope = element.scope();
       }));
 
       it('should have a cancel scheduled fee button that invokes the cancel scheduled fee modal', function() {
@@ -81,7 +89,7 @@ describe('Directive: nxgPaymentButtons', function () {
           open: angular.noop
         });
 
-        element.find('#cancelScheduledFee').click();
+        iScope.cancelScheduledFee();
 
         expect(dialog.dialog).toHaveBeenCalled();
         expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/cancelFee.html');
@@ -91,12 +99,102 @@ describe('Directive: nxgPaymentButtons', function () {
         expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.description).toBe('FeeDescription');
         expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.scheduledDate).toBe('2013-01-01');
         expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.balance).toBe(1500);
-      });
 
+        dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel();
+        expect(scope.myFee.Scheduled).toBe(false);
+        expect(scope.myFee.ScheduledDate).toBe(null);
+      });
     });
   });
 
+  describe('cancel scheduled payment', function() {
+    var myPayment,
+        dialog,
+        shouldBeCancelled;
+
+    beforeEach(inject(function ($dialog) {
+      dialog = $dialog;
+      myPayment = {
+        FloorplanId: 'floorplanId',
+        Vin: 'vin',
+        UnitDescription: 'some description',
+        StockNumber: 'stockNum',
+        CurrentPayoff: 20000,
+        PrincipalPayoff: 18000,
+        AmountDue: 1000,
+        PrincipalDue: 800,
+        Scheduled: true,
+        ScheduledPaymentDate: '2013-10-10',
+        CurtailmentPaymentScheduled: true,
+        PayPayoffAmount: false,
+        DueDate: '2013-01-01',
+        FeesPaymentTotal: 20,
+        FeesPayoffTotal: 25,
+        InterestPaymentTotal: 40,
+        InterestPayoffTotal: 45,
+        CollateralProtectionPayoffTotal: 85,
+        CollateralProtectionPaymentTotal: 90
+      };
+
+      shouldBeCancelled = true;
+
+      spyOn(dialog, 'dialog').andCallFake(function() {
+        return {
+          open: function() {
+            return {
+              then: function() {
+                return shouldBeCancelled;
+              }
+            };
+          }
+        };
+      });
+    }));
+
+    it('should use an onCancel function if one is provided', inject(function($rootScope, $compile) {
+      element = angular.element('<div nxg-payment-buttons="payment" ' +
+        'item="myPayment" on-queue="inQueue" ng-click="togglePaymentInQueue(false)" on-cancel-scheduled-payment="myFunc()"></div>');
+      scope = $rootScope.$new();
+
+      scope.myPayment = myPayment;
+      scope.myFunc = function() {
+        return 'foo';
+      };
+      spyOn(scope, 'myFunc').andCallThrough();
+      scope.inQueue = false;
+
+      $compile(element)(scope);
+      $rootScope.$digest();
+      var iScope = element.scope();
+
+      iScope.cancelScheduledPayment();
+
+      expect(dialog.dialog).toHaveBeenCalled();
+      dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel();
+      expect(scope.myFunc).toHaveBeenCalled();
+    }));
+
+    it('should run properly without an onCancel function', inject(function($rootScope, $compile) {
+      element = angular.element('<div nxg-payment-buttons="payment" ' +
+        'item="myPayment" on-queue="inQueue" ng-click="togglePaymentInQueue(false)"></div>');
+      scope = $rootScope.$new();
+
+      scope.myPayment = myPayment;
+      scope.inQueue = false;
+
+      $compile(element)(scope);
+      $rootScope.$digest();
+      var iScope = element.scope();
+
+      iScope.cancelScheduledPayment();
+      expect(iScope.onCancelScheduledPayment).toBe(null);
+
+      expect(dialog.dialog).toHaveBeenCalled();
+    }));
+  });
+
   describe('payment mode', function () {
+    var iScope;
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="payment" ' +
@@ -124,48 +222,33 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope();
     }));
 
     it('should have a button that toggles payment presence in the payment queue', function() {
+      expect(Payments.isPaymentOnQueue(scope.myPayment.FloorplanId)).toBeFalsy();
+      iScope.togglePaymentInQueue(false);
+      expect(Payments.isPaymentOnQueue(scope.myPayment.FloorplanId)).toEqual(PaymentOptions.TYPE_PAYMENT);
+    });
+
+    it('should auto-remove a vehicle payoff from the queue if adding a curtailment payment for that vehicle instead', function() {
       spyOn(Payments, 'addPaymentToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
-      element.find('#togglePayment').click();
-
-      scope.$apply(function () {
-        scope.inQueue = 'payment';
-      });
-
-      element.find('#togglePayment').click();
-
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
-        scope.myPayment.FloorplanId,
-        scope.myPayment.Vin,
-        scope.myPayment.StockNumber,
-        scope.myPayment.UnitDescription,
-        scope.myPayment.AmountDue,
-        scope.myPayment.DueDate,
-        false,
-        scope.myPayment.PrincipalDue,
-        40,
-        20,
-        90);
-      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-    });
-
-    it('payment toggle button should be disabled if payment is already in queue as payoff', function() {
-      scope.$apply(function () {
+      scope.$apply(function() {
         scope.inQueue = 'payoff';
       });
 
-//      expect(element.find('#togglePayment').attr('disabled')).toBeDefined();
+      iScope.togglePaymentInQueue(false);
+      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
+      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(scope.myPayment, false);
     });
-
   });
 
   describe('payment mode (payment previously scheduled)', function () {
-
-    var dialog;
+    var dialog,
+    iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
@@ -180,6 +263,7 @@ describe('Directive: nxgPaymentButtons', function () {
         WebScheduledPaymentId: 'webPay1',
         ScheduledPaymentDate: '2013-10-10',
         CurtailmentPaymentScheduled: true,
+        ScheduledPaymentAmount: 1400,
         CurrentPayoff: 5000,
         AmountDue: 1000,
         FeesPaymentTotal: 20,
@@ -192,6 +276,8 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope();
     }));
 
     it('should have a cancel scheduled payment button that invokes the cancel scheduled payment modal', function() {
@@ -199,8 +285,7 @@ describe('Directive: nxgPaymentButtons', function () {
         open: angular.noop
       });
 
-      element.find('#cancelScheduledPayment').click();
-
+      iScope.cancelScheduledPayment();
       expect(dialog.dialog).toHaveBeenCalled();
       expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/cancelPayment.html');
       expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('CancelPaymentCtrl');
@@ -211,14 +296,14 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(false);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(5000);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1000);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1400);
     });
 
   });
 
   describe('payment mode (payoff previously scheduled)', function () {
-
-    var dialog;
+    var dialog,
+    iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
@@ -232,15 +317,51 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope()
+
     }));
 
-    it('should have an inert add payment button', function() {
-//      expect(element.find('#TogglePayment2').attr('disabled')).toBeDefined();
+    it('should auto-cancel the previously scheduled payoff when a payment is added', function() {
+      spyOn(dialog, 'dialog').andReturn({
+         open: function() {
+          return {
+            then: function(wasCancelled) {
+              return true;
+            }
+          };
+        }
+      });
+
+      iScope.togglePaymentInQueue(false);
+      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('CancelPaymentCtrl');
     });
 
+    it('should add the payment if the user ends up cancelling the scheduled payment', inject(function($q, $rootScope) {
+      spyOn(iScope, 'cancelScheduledPayment').andReturn($q.when(true));
+
+      spyOn(Payments, 'addPaymentTypeToQueue').andCallThrough();
+      iScope.togglePaymentInQueue(false);
+      $rootScope.$digest();
+
+      expect(iScope.cancelScheduledPayment).toHaveBeenCalled();
+      expect(Payments.addPaymentTypeToQueue).toHaveBeenCalled();
+    }));
+
+    it('should not add the payment if the user does not cancel the previously scheduled payment (ie. clicks No)', inject(function($q, $rootScope) {
+      spyOn(iScope, 'cancelScheduledPayment').andReturn($q.when(false));
+
+      spyOn(Payments, 'addPaymentToQueue').andCallThrough();
+      iScope.togglePaymentInQueue(false);
+      $rootScope.$digest();
+
+      expect(Payments.addPaymentToQueue).not.toHaveBeenCalled();
+    }));
   });
 
   describe('payoff mode', function () {
+    var iScope;
 
     beforeEach(inject(function ($rootScope, $compile) {
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
@@ -268,48 +389,39 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope();
     }));
 
     it('should have a button that toggles payoff presence in the payment queue', function() {
-      spyOn(Payments, 'addPaymentToQueue');
       spyOn(Payments, 'removePaymentFromQueue');
 
-      element.find('#togglePayoff').click();
-
+      iScope.togglePaymentInQueue(true);
       scope.$apply(function () {
         scope.inQueue = 'payoff';
       });
 
-      element.find('#togglePayoff').click();
-
-      expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
-        scope.myPayment.FloorplanId,
-        scope.myPayment.Vin,
-        scope.myPayment.StockNumber,
-        scope.myPayment.UnitDescription,
-        scope.myPayment.CurrentPayoff,
-        scope.myPayment.DueDate,
-        true,
-        scope.myPayment.PrincipalPayoff,
-        45,
-        25,
-        85);
+      iScope.togglePaymentInQueue(true);
       expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
     });
 
-    it('payoff toggle button should be disabled if payment is already in queue', function() {
-      scope.$apply(function () {
+    it('should auto-remove a vehicle curtailment payment from the queue if adding a payoff for that vehicle instead', function() {
+      spyOn(Payments, 'addPayoffToQueue');
+      spyOn(Payments, 'removePaymentFromQueue');
+
+      scope.$apply(function() {
         scope.inQueue = 'payment';
       });
 
-//      expect(element.find('#togglePayoff').attr('disabled')).toBeDefined();
+      iScope.togglePaymentInQueue(true);
+      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
+      expect(Payments.addPayoffToQueue).toHaveBeenCalledWith(scope.myPayment, false);
     });
-
   });
 
   describe('payoff mode (payoff previously scheduled)', function () {
-
-    var dialog;
+    var dialog,
+        iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
@@ -324,12 +436,15 @@ describe('Directive: nxgPaymentButtons', function () {
         AmountDue: 1000,
         Scheduled: true,
         ScheduledPaymentDate: '2013-10-10',
+        ScheduledPaymentAmount: 1600,
         WebScheduledPaymentId: 'webPay2',
         CurtailmentPaymentScheduled: false
       };
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+
+      iScope = element.scope();
     }));
 
     it('should have a cancel scheduled payoff button that invokes the cancel scheduled payment modal', function() {
@@ -337,8 +452,7 @@ describe('Directive: nxgPaymentButtons', function () {
         open: angular.noop
       });
 
-      element.find('#cancelScheduledPayoff').click();
-
+      iScope.cancelScheduledPayment();
       expect(dialog.dialog).toHaveBeenCalled();
       expect(dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/cancelPayment.html');
       expect(dialog.dialog.mostRecentCall.args[0].controller).toBe('CancelPaymentCtrl');
@@ -349,14 +463,14 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(true);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(20000);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1000);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1600);
     });
 
   });
 
   describe('payoff mode (payment previously scheduled)', function () {
-
-    var dialog;
+    var dialog,
+        iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $dialog) {
       dialog = $dialog;
@@ -386,47 +500,22 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
+      iScope = element.scope();
     }));
 
-    it('should have a button that toggles payoff presence in the payment queue', function() {
-      spyOn(Payments, 'addPaymentToQueue');
-      spyOn(Payments, 'removePaymentFromQueue');
-
-      element.find('#togglePayment2').click();
-
-      scope.$apply(function () {
-        scope.inQueue = 'payoff';
+    it('should auto-cancel the previously scheduled payment when a payoff is added', function() {
+      spyOn(dialog, 'dialog').andReturn({
+         open: function() {
+          return {
+            then: function(wasCancelled) {
+              return true;
+            }
+          };
+        }
       });
 
-      element.find('#togglePayoff2').click();
-
-
-        expect(Payments.addPaymentToQueue).toHaveBeenCalledWith(
-          scope.myPayment.FloorplanId,
-          scope.myPayment.Vin,
-          scope.myPayment.StockNumber,
-          scope.myPayment.UnitDescription,
-          scope.myPayment.CurrentPayoff,
-          scope.myPayment.DueDate,
-          true,
-          scope.myPayment.PrincipalPayoff,
-          45,
-          25,
-          85);
-
-      //TODO: this line never gets called and fails tests
-//      expect(Payments.removePaymentFromQueue).toHaveBeenCalledWith(scope.myPayment.FloorplanId);
-
+      iScope.togglePaymentInQueue(true);
+      expect(dialog.dialog).toHaveBeenCalled();
     });
-
-    it('payoff toggle button should be disabled if payment is already in queue', function() {
-      scope.$apply(function () {
-        scope.inQueue = 'payment';
-      });
-
-//      expect(element.find('#togglePayoff2').attr('disabled')).toBeDefined();
-    });
-
   });
-
 });

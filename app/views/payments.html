@@ -5,7 +5,7 @@
         <span nxg-icon="icon-info"></span>
       </div>
       <h6 class="info-block-text" translate>
-        Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff.
+        Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}, due to our 8pm eastern time cutoff.
       </h6>
     </div>
     <div nxg-search
@@ -30,9 +30,9 @@
     <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
       <h2 class="well-title">
         <span translate>Account Fees</span>
-        <span class="well-sub-title" translate>Amounts shown are valid through 8pm EST
+        <span class="well-sub-title" translate>Amounts shown are valid through 8pm eastern time
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
-          <span ng-show="!canPayNow">{{ { true:'tomorrow', false: ''}[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>
+          <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
       </h2>
       <p class="notice-box" ng-switch-when="false" translate>
@@ -105,7 +105,7 @@
         <span translate>Vehicle Payments</span>
         <span class="well-sub-title" translate>Amounts shown are valid through 8pm EST
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
-          <span ng-show="!canPayNow">{{ { true:'tomorrow', false: ''}[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>
+          <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
       </h2>
       <p class="no-results" ng-switch-when="false" translate>

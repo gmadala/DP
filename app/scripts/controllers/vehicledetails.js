@@ -58,35 +58,61 @@ angular.module('nextgearWebApp')
           StockNumber: $stateParams.stockNumber,
           UnitDescription: details.FinancialSummaryInfo.Description,
           AmountDue: details.FinancialSummaryInfo.NextPaymentAmount,
+          CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
           DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
-          isPayoff: false,
+
           PrincipalDue: details.FinancialSummaryInfo.PrincipalDue,
+          PrincipalPayoff: details.FinancialSummaryInfo.PrincipalOutstanding,
+
           InterestPaymentTotal: details.FinancialSummaryInfo.InterestPaymentTotal,
+          InterestPayoffTotal: details.FinancialSummaryInfo.InterestOutstanding,
+
           FeesPaymentTotal: details.FinancialSummaryInfo.FeesPaymentTotal,
+          FeesPayoffTotal: details.FinancialSummaryInfo.FeesOutstanding,
+
           CollateralProtectionPaymentTotal: details.FinancialSummaryInfo.CollateralProtectionPaymentTotal,
+          CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
+
           Scheduled: details.FinancialSummaryInfo.Scheduled,
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
 
-        $scope.payoffForCheckout = {
-          FloorplanId: details.FinancialSummaryInfo.FloorplanId,
-          Vin: details.VehicleInfo.UnitVin,
-          StockNumber: $stateParams.stockNumber,
-          UnitDescription: details.FinancialSummaryInfo.Description,
-          CurrentPayoff: details.FinancialSummaryInfo.TotalOutstanding,
-          AmountDue: details.FinancialSummaryInfo.TotalOutstanding,
-          DueDate: moment(details.FinancialSummaryInfo.NextPaymentDueDate),
-          isPayoff: true,
-          PrincipalPayoff: details.FinancialSummaryInfo.PrincipalDue,
-          InterestPayoffTotal: details.FinancialSummaryInfo.InterestPayoffTotal,
-          FeesPayoffTotal: details.FinancialSummaryInfo.FeesPayoffTotal,
-          CollateralProtectionPayoffTotal: details.FinancialSummaryInfo.CollateralProtectionPayoffTotal,
-          Scheduled: details.FinancialSummaryInfo.Scheduled,
-          ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
-          WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
+        $scope.getAdditionalPrincipal = function() {
+          if(!Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId)) {
+            return 0;
+          } else {
+            return Payments.getPaymentFromQueue($scope.vehicleInfo.FloorplanId).payment.additionalPrincipal;
+          }
+        };
+
+        $scope.showAddPrincipalLink = function() {
+          return Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId) === 'payment';
+        };
+
+        $scope.launchPaymentOptions = function() {
+          var onQueue = Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId);
+
+          var dialogOptions = {
+            dialogClass: 'modal modal-medium',
+            backdrop: true,
+            keyboard: false,
+            backdropClick: false,
+            templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+            controller: 'PaymentOptionsBreakdownCtrl',
+            resolve: {
+              object: function() {
+                return onQueue ? Payments.getPaymentFromQueue($scope.vehicleInfo.FloorplanId) : $scope.paymentForCheckout;
+              },
+              isOnQueue: function() {
+                return onQueue;
+              }
+            }
+          };
+
+          $dialog.dialog(dialogOptions).open();
         };
 
         // Grab data for title info section
@@ -249,7 +275,7 @@ angular.module('nextgearWebApp')
           title: {
             useHTML: true,
             floating: true,
-            text: '<h5 class="chart-label-secondary">' + gettextCatalog.getString('Total Paid') + '</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
+            text: '<h5 class="chart-label-secondary">' + gettextCatalog.getString('Paid') + '</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
             y: 80
           },
           data: [
@@ -297,7 +323,7 @@ angular.module('nextgearWebApp')
           ]
         };
 
-        if(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0) {
+        if(!(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0)) {
           $scope.financialSummary.paidChart.data.push({
             name: gettextCatalog.getString('CPP'),
             y: details.FinancialSummaryInfo.CollateralProtectionPaid,
@@ -362,6 +388,9 @@ angular.module('nextgearWebApp')
         // Grab data for value info section
         // ================================
         $scope.valueInfo = details.ValueInfo;
+
+        // If any MMR value is 0, don't show MMR values.
+        $scope.showMMR = (details.ValueInfo.MmrExcellentValue > 0) && (details.ValueInfo.MmrGoodValue > 0) && (details.ValueInfo.MmrAverageValue > 0) && (details.ValueInfo.MmrFairValue > 0);
 
         // Grab data for vehicle info section
         // ==================================

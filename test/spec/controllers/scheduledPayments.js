@@ -9,6 +9,8 @@ describe('Controller: ScheduledCtrl', function () {
     loadShouldSucceed = true,
     canPayShouldSucceed = true,
     timeoutCallback,
+    BusinessHours,
+    $q,
     errMock = {
       dismiss: angular.noop
     },
@@ -76,17 +78,6 @@ describe('Controller: ScheduledCtrl', function () {
       }
     },
     paymentsMock = {
-      canPayNow: function() {
-        return {
-          then: function(success, failure) {
-            if(canPayShouldSucceed) {
-              success(true);
-            } else {
-              failure(errMock);
-            }
-          }
-        };
-      },
       isPaymentOnQueue: function(shouldPass) {
         if (!shouldPass) {
           return false;
@@ -94,10 +85,11 @@ describe('Controller: ScheduledCtrl', function () {
         return true;
       },
       addPaymentToQueue: angular.noop,
+      addPayoffToQueue: angular.noop,
       paymentInProgress: angular.noop
     },
     mockPayment = {
-      floorplanID: 123,
+      floorplanId: 123,
       vin: '',
       stockNumber: 123,
       description: '',
@@ -117,9 +109,18 @@ describe('Controller: ScheduledCtrl', function () {
     };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $dialog) {
+  beforeEach(inject(function ($controller, $rootScope, $dialog, _BusinessHours_, _$q_) {
     scope = $rootScope.$new();
     dialog = $dialog;
+    BusinessHours = _BusinessHours_;
+    $q = _$q_;
+
+    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+      if(canPayShouldSucceed) {
+        return $q.when(true);
+      }
+      return $q.when(false);
+    });
 
     ScheduledCtrl = $controller('ScheduledCtrl', {
       $scope: scope,
@@ -267,47 +268,25 @@ describe('Controller: ScheduledCtrl', function () {
     });
   });
 
-  describe('refreshCanPayNow function', function() {
-    it('should refresh whether the user can pay now if user is logged in', function() {
-      spyOn(paymentsMock, 'canPayNow').andCallThrough();
-      timeoutCallback();
-      expect(paymentsMock.canPayNow).toHaveBeenCalled();
-    });
-
-    it('should set local canPayNow variables based on results', function() {
-      scope.canPayNow = false;
-      timeoutCallback();
+  describe('canPayNow functionality', function() {
+    it('should check if we are in business hours on load', function() {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+      scope.$apply();
       expect(scope.canPayNow).toBe(true);
-      expect(scope.canPayNowLoaded).toBe(true);
     });
 
-    it('should set local canPayNow variables to false if there is an error', function() {
-      canPayShouldSucceed = false;
-      scope.canPayNow = true;
-      scope.canPayNowLoaded = true;
-
-      timeoutCallback();
-      expect(scope.canPayNow).toBe(false);
-      expect(scope.canPayNowLoaded).toBe(false);
-    });
-
-    it('should do nothing if user is not logged in', inject(function($controller) {
-      spyOn(userMock, 'isLoggedIn').andCallFake(
-        function() {
-          return false;
-        }
-      );
-
-      spyOn(paymentsMock, 'canPayNow').andCallThrough();
-      timeoutCallback();
-      expect(paymentsMock.canPayNow).not.toHaveBeenCalled();
+    it('should check if we are in business hours any time the business hours change event fires', inject(function($rootScope) {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+      scope.$apply();
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
     }));
   });
 
   it('should have a payOff function to add a payoff to the payment queue', function() {
-    spyOn(paymentsMock, 'addPaymentToQueue').andReturn();
+    spyOn(paymentsMock, 'addPayoffToQueue').andReturn();
     scope.scheduledPayments.payOff(mockPayment);
-    expect(paymentsMock.addPaymentToQueue).toHaveBeenCalled();
+    expect(paymentsMock.addPayoffToQueue).toHaveBeenCalled();
   });
 
   it('should have a cancelPayment function that opens a dialog', function() {
@@ -315,8 +294,28 @@ describe('Controller: ScheduledCtrl', function () {
     expect(typeof scope.scheduledPayments.cancelPayment).toBe('function');
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-    scope.scheduledPayments.cancelPayment();
+
+    scope.scheduledPayments.cancelPayment({
+      webScheduledPaymentId: '1234',
+      vin: 'vin1',
+      description: 'description',
+      stockNumber: 's#',
+      scheduledDate: '2014-10-02',
+      isCurtailment: true,
+      payoffAmount: 1000,
+      paymentAmount: 100,
+      scheduledPaymentAmount: 600
+    });
     expect(dialog.dialog).toHaveBeenCalled();
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.webScheduledPaymentId).toBe('1234');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.vin).toBe('vin1');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.description).toBe('description');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.stockNumber).toBe('s#');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2014-10-02');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(false);
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(1000);
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(600);
+    expect(typeof dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBe('function');
   });
 
   it('should have a cancelFee function that opens a dialog', function() {
@@ -324,8 +323,22 @@ describe('Controller: ScheduledCtrl', function () {
     expect(typeof scope.scheduledPayments.cancelFee).toBe('function');
 
     spyOn(dialog, 'dialog').andReturn({ open: angular.noop });
-    scope.scheduledPayments.cancelFee();
+    scope.scheduledPayments.cancelFee({
+      WebScheduledAccountFeeId: '1234',
+      FinancialRecordId: 'fId',
+      FeeType: 'a type of fee',
+      Description: 'description',
+      ScheduledDate: '2014-10-02',
+      Balance: 100
+    });
     expect(dialog.dialog).toHaveBeenCalled();
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('1234');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.financialRecordId).toBe('fId');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.feeType).toBe('a type of fee');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.description).toBe('description');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.scheduledDate).toBe('2014-10-02');
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().fee.balance).toBe(100);
+    expect(typeof dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBe('function');
   });
 
   it('should have a paymentInProgress method', function() {

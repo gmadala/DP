@@ -12,17 +12,25 @@ describe('Controller: PaymentsCtrl', function () {
     dialog,
     payments,
     instantiateController,
+    shouldSucceed,
     searchResult = {
       data: {}
     },
     canPayResult = {
       data: true
     },
-    scope;
+    $q,
+    scope,
+    BusinessHours,
+    inBizHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, $dialog) {
+  beforeEach(inject(function ($controller, $rootScope, _$q_, $dialog, _BusinessHours_) {
     scope = $rootScope.$new();
+    $q = _$q_;
+    BusinessHours = _BusinessHours_;
+    inBizHours = true;
+
     modelMock = {
       search: function () {
         return $q.when(searchResult.data);
@@ -35,9 +43,6 @@ describe('Controller: PaymentsCtrl', function () {
       },
       fetchFees: function () {
         return $q.when(searchResult.data);
-      },
-      canPayNow: function () {
-        return $q.when(true);
       },
       isPaymentOnQueue: function () {
         return false;
@@ -62,6 +67,13 @@ describe('Controller: PaymentsCtrl', function () {
     dialog = $dialog;
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
+
+    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+      if(inBizHours) {
+        return $q.when(true);
+      }
+      return $q.when(false);
+    });
 
     instantiateController = function() {
       PaymentsCtrl = $controller('PaymentsCtrl', {
@@ -431,9 +443,28 @@ describe('Controller: PaymentsCtrl', function () {
 
   });
 
-  it('should attach a value for canPayNow to the scope', function () {
-    scope.$apply();
-    expect(scope.canPayNow).toBe(true);
+  describe('canPayNow functionality', function() {
+    it('should check if we are in business hours on load', function() {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+      scope.$apply();
+      expect(scope.canPayNow).toBe(true);
+    });
+
+    it('should check if we are in business hours any time the business hours change event fires', inject(function($rootScope) {
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+      scope.$apply();
+      expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+    }));
+
+    it('should find the next business date if we are outside of business hours', inject(function($controller, $rootScope) {
+      spyOn(BusinessHours, 'nextBusinessDay').andReturn($q.when('2014-10-02'));
+      inBizHours = false;
+      $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+      scope.$apply();
+      expect(BusinessHours.nextBusinessDay).toHaveBeenCalled();
+      expect(scope.nextBusinessDay).toBe('2014-10-02');
+    }));
   });
 
   it('should only allow payment extensions if payment is in its final curtailment', function() {

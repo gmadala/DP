@@ -12,7 +12,7 @@
               <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
             <li>
-              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat Now</a>
+              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat</a>
             </li>
           </ul>
           <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">

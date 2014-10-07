@@ -5,7 +5,18 @@ angular.module('nextgearWebApp')
 
     return {
       getDetails: function(stockNumber) {
-        return api.request('GET', '/floorplan/expandeddetail/' + stockNumber);
+        return api.request('GET', '/floorplan/expandeddetail/' + stockNumber)
+          .then(function(data) {
+            /**
+             * VO-3015 (related to MOB-877) - The FloorplanTotal value coming from the service is the financed amount.
+             * Per Blake Weishaar, this value should be the sum of the Total Paid and the Total Outstanding.
+             */
+            if (data && data.FinancialSummaryInfo) {
+              var fs = data.FinancialSummaryInfo;
+              fs.FloorplanTotal = fs.TotalPaid + fs.TotalOutstanding;
+            }
+            return data;
+          });
       },
       getPaymentDetails: function(stockNumber, id) {
         return api.request('GET', '/floorplan/mobiledetails/financialsummary/payment/' + stockNumber + '/' + id);
