@@ -56,6 +56,13 @@ angular.module('nextgearWebApp')
       }
     });
 
+    // Enable chat only when we are using English
+    $scope.$watch(function () {
+      return gettextCatalog.currentLanguage;
+    }, function (lang) {
+      $scope.chatEnabled = lang === 'en';
+    });
+
     $scope.getQueueCount = function () {
       var queue = Payments.getPaymentQueue(),
           count = 0;

@@ -11,7 +11,7 @@
             <li ng-repeat="link in user.navLinks().secondary">
               <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
-            <li>
+            <li ng-show="chatEnabled">
               <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat</a>
             </li>
           </ul>
