@@ -1,6 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule', 'gettext'])
+  .constant('SupportedLanguages', [
+    { key: 'en', name: 'English' },
+    { key: 'enDebug', name: 'English (Debug)' },
+    { key: 'fr_CA', name: 'French (CA)' },
+    { key: 'es', name: 'Spanish' }
+  ])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {

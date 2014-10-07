@@ -1,0 +1,26 @@
+<div style="margin: 0 auto; width: 50%;">
+  <table width="100%">
+    <thead>
+    <tr>
+      <th>Strings</th>
+    </tr>
+    </thead>
+
+    <tr ng-repeat="(string, langs) in missingTranslations.strings">
+      <td>{{ string | translate }}</td>
+      <td ng-repeat="lang in langs">{{ lang.name }}</td>
+    </tr>
+  </table>
+  <table width="100%">
+    <thead>
+    <tr>
+      <th>Plurals</th>
+    </tr>
+    </thead>
+
+    <tr ng-repeat="(string, langs) in missingTranslations.plurals">
+      <td>{{ string }}</td>
+      <td ng-repeat="lang in langs">{{ lang.name }}</td>
+    </tr>
+  </table>
+</div>

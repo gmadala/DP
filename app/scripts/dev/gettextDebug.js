@@ -1,22 +1,81 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-    .run(function(gettextCatalog) {
-        gettextCatalog.debug = true;
+  .config(function($stateProvider) {
+    $stateProvider
+      .state('translations', {
+        url: '/translations',
+        templateUrl: 'views/translations.html',
+        controller: 'TranslationTestCtrl',
+        allowAnonymous: true
+      });
+  })
+  .run(function(gettextCatalog) {
+    gettextCatalog.debug = true;
 
-        angular.element('body').prepend('\
-          <div id="translationDebugger" ng-controller="TranslationDebuggerCtrl">\
-            <div nxg-translation-debugger></div>\
-          </div>\
-        ');
-    })
-  .controller('TranslationDebuggerCtrl', function ($scope) {
-    $scope.languages = [
-      { key: 'en', name: 'English' },
-      { key: 'enDebug', name: 'English (Debug)' },
-      { key: 'fr_CA', name: 'French (CA)' },
-      { key: 'es', name: 'Spanish' }
-    ];
+    var regex = /[?&]([^=#]+)=([^&#]*)/g,
+      url = window.location.href,
+      params = {},
+      match;
+    while(match = regex.exec(url)) {
+      params[match[1]] = match[2];
+    }
+
+    if (params.lang) {
+      gettextCatalog.setCurrentLanguage(params.lang);
+    }
+
+    angular.element('body').prepend('\
+      <div id="translationDebugger" ng-controller="TranslationDebuggerCtrl">\
+        <div nxg-translation-debugger></div>\
+      </div>\
+    ');
+  })
+  .constant('translationsJSON', {})
+  .controller('TranslationDebuggerCtrl', function ($scope, SupportedLanguages, translationsJSON) {
+    $scope.languages = SupportedLanguages;
+    $scope.translationsJSON = translationsJSON;
+  })
+  .controller('TranslationTestCtrl', function ($scope, SupportedLanguages, translationsJSON, gettextCatalog) {
+    $scope.languages = SupportedLanguages;
+    $scope.translationsJSON = translationsJSON;
+    var missingTranslations = $scope.missingTranslations = {
+      strings: {},
+      plurals: {}
+    };
+    var hasMatchingString = function (string, type) {
+      if (type === 'strings') {
+        return gettextCatalog.strings[gettextCatalog.currentLanguage].hasOwnProperty(string);
+      }
+      else {
+        return gettextCatalog.strings[gettextCatalog.currentLanguage].hasOwnProperty(string) && gettextCatalog.strings[gettextCatalog.currentLanguage][string].length === 2;
+      }
+    };
+
+    angular.forEach(SupportedLanguages, function (lang) {
+      if (['en', 'enDebug'].indexOf(lang.key) > -1) {
+        return;
+      }
+
+      // Set the language
+      gettextCatalog.setCurrentLanguage(lang.key);
+
+      angular.forEach(['strings', 'plurals'], function (type) {
+        angular.forEach(translationsJSON[type], function (string) {
+          if (!hasMatchingString(string, type)) {
+            if (!missingTranslations[type].hasOwnProperty(string)) {
+              missingTranslations[type][string] = [];
+            }
+
+            missingTranslations[type][string].push(lang);
+          }
+        });
+      })
+    });
+
+    // Set back to default settings
+    gettextCatalog.setCurrentLanguage(gettextCatalog.baseLanguage);
+    gettextCatalog.debug = true;
   })
   .directive('nxgTranslationDebugger', function (gettextCatalog) {
       var template = '\

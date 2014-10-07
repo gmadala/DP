@@ -58,10 +58,6 @@ msgstr ""
 msgid "<span class=\"count highlight dash-major\" ng-bind=\"eligibility.RemainingReleasesAvailable - titleQueue.contents.length\">0</span> out of <span class=\"count highlight dash-major\" ng-bind=\"eligibility.TotalReleasesAllowed\">0</span>"
 msgstr ""
 
-#: app/views/modals/confirmTitleRequest.html
-msgid "<span translate=\"\" translate-n=\"counts.total-counts.failed\" translate-plural=\"Your title requests have been submitted.\">Your title request has been submitted.</span>"
-msgstr ""
-
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr ""
@@ -558,6 +554,11 @@ msgstr ""
 msgid "Consigner Ticket Number"
 msgstr ""
 
+#: app/index.html
+#: app/unsupported.html
+msgid "Contact Us"
+msgstr ""
+
 #: app/views/login.createPassword.html
 #: app/views/login.updateSecurity.html
 msgid "Continue"
@@ -774,6 +775,10 @@ msgstr ""
 #: app/views/modals/feeDetails.html
 #: app/views/modals/paymentDetails.html
 msgid "Effective Date"
+msgstr ""
+
+#: app/unsupported.html
+msgid "Effective June 1st, in order to access the NextGear Capital Web Portal, you need to be using the latest version of Internet Explorer, Mozilla Firefox or Google Chrome. Your current browser is no longer compatible with the latest version of the NextGear Capital Web Portal. You may upgrade your browser now using one of the links below."
 msgstr ""
 
 #: app/scripts/controllers/titleReleases.js
@@ -1067,6 +1072,10 @@ msgstr ""
 msgid "If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search."
 msgstr ""
 
+#: app/unsupported.html
+msgid "If you need assistance, please call NextGear Capital Support at: (888) 969-3721."
+msgstr ""
+
 #: app/views/checkout.html
 msgid "In the Amount of"
 msgstr ""
@@ -1126,12 +1135,17 @@ msgstr ""
 msgid "Inventory Location"
 msgstr ""
 
+#: app/404.html
+msgid "It looks like this was the result of either:"
+msgstr ""
+
 #: app/scripts/controllers/floorCar.js
 msgid "Keep Editing"
 msgstr ""
 
 #: app/views/account_management.html
 #: app/views/analytics.html
+#: app/views/floorplan.html
 msgid "Last Payment"
 msgstr ""
 
@@ -1317,6 +1331,10 @@ msgstr ""
 msgid "Not Eligible for Title Release"
 msgstr ""
 
+#: app/404.html
+msgid "Not found <span>:(</span>"
+msgstr ""
+
 #: app/views/scheduledpayments.html
 msgid ""
 "Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.<br>\n"
@@ -1339,6 +1357,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: app/unsupported.html
+msgid "Once upgraded, you will be able to log in."
+msgstr ""
+
 #: app/views/vehicledetails.html
 msgid "Original Term"
 msgstr ""
@@ -1352,6 +1374,10 @@ msgid "Overdue"
 msgid_plural "Overdue"
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/404.html
+msgid "Page Not Found :("
+msgstr ""
 
 #: app/views/auction.dashboard.html
 #: app/views/modals/confirmCheckout.html
@@ -1890,6 +1916,11 @@ msgstr ""
 msgid "Principal"
 msgstr ""
 
+#: app/index.html
+#: app/unsupported.html
+msgid "Privacy Statement"
+msgstr ""
+
 #: app/scripts/controllers/scheduledPayments.js
 #: app/scripts/models/scheduledPayments.js
 #: app/views/receipts.html
@@ -2271,6 +2302,10 @@ msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Some title request(s) can not be processed at this time."
+msgstr ""
+
+#: app/404.html
+msgid "Sorry, but the page you were trying to view does not exist."
 msgstr ""
 
 #: app/views/dashboard.html
@@ -2863,6 +2898,10 @@ msgstr ""
 msgid "Welcome to NextGear!"
 msgstr ""
 
+#: app/unsupported.html
+msgid "Welcome to the New NextGear Capital Web Portal"
+msgstr ""
+
 #: app/scripts/controllers/floorCar.js
 msgid "What would you like to do?"
 msgstr ""
@@ -2989,6 +3028,14 @@ msgstr[1] ""
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
+msgstr ""
+
+#: app/404.html
+msgid "a mistyped address"
+msgstr ""
+
+#: app/404.html
+msgid "an out-of-date link"
 msgstr ""
 
 #: app/views/scheduledpayments.html
