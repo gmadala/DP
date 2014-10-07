@@ -104,7 +104,7 @@ angular.module('nextgearWebApp')
                     scheduledDate: $scope.item.ScheduledPaymentDate,
                     isPayOff: !$scope.item.CurtailmentPaymentScheduled,
                     currentPayOff: $scope.item.CurrentPayoff,
-                    amountDue: $scope.item.AmountDue
+                    amountDue: $scope.item.ScheduledPaymentAmount
                   },
                   onCancel: function() {
                     if($scope.onCancelScheduledPayment !== null) {

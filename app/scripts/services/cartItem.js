@@ -16,6 +16,7 @@ angular.module('nextgearWebApp')
           DueDate: sp.curtailmentDueDate,
           Scheduled: true,
           ScheduledPaymentDate: sp.scheduledDate,
+          ScheduledPaymentAmount: sp.scheduledPaymentAmount,
           CurrentPayoff: sp.payoffAmount,
           PrincipalPayoff: sp.principalPayoff,
           FeesPayoffTotal: sp.FeesPayoffTotal,
@@ -79,6 +80,7 @@ angular.module('nextgearWebApp')
 
       this.dueDate = item.DueDate;
       this.scheduled = item.Scheduled;
+      this.scheduledAmount = item.ScheduledPaymentAmount;
       this.overrideAddress = null;
 
       this.payoff = {
@@ -124,7 +126,7 @@ angular.module('nextgearWebApp')
         return amt;
       },
       getExtraPrincipal: function() {
-        if(this.paymentOption !== PaymentOptions.TYPE_PAYMENT) {//this.isPayoff || this.isInterestOnly || this.payment.additionalPrincipal === 0) {
+        if(this.paymentOption !== PaymentOptions.TYPE_PAYMENT) {
           return 0;
         } else {
           return this.payment.additionalPrincipal;

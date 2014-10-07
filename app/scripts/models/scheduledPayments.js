@@ -35,6 +35,7 @@ angular.module('nextgearWebApp')
                 status: prv.toStatus(item),
                 statusDate: prv.getStatusDate(item),
                 scheduledDate: item.ScheduledForDate,
+                scheduledPaymentAmount: item.ScheduledPaymentAmount,
                 isPending: prv.isPending(item),
                 isCancelled: item.Cancelled,
                 isVoided: item.Voided,

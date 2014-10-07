@@ -130,7 +130,7 @@ angular.module('nextgearWebApp')
                   scheduledDate: payment.scheduledDate,
                   isPayOff: !payment.isCurtailment,
                   currentPayOff: payment.payoffAmount,
-                  amountDue: payment.paymentAmount
+                  amountDue: payment.scheduledPaymentAmount
                 },
                 onCancel: function() {
                   prv.cancelLocalScheduledPayment(payment);

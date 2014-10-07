@@ -75,6 +75,7 @@ angular.module('nextgearWebApp')
 
           Scheduled: details.FinancialSummaryInfo.Scheduled,
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };

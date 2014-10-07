@@ -303,7 +303,8 @@ describe('Controller: ScheduledCtrl', function () {
       scheduledDate: '2014-10-02',
       isCurtailment: true,
       payoffAmount: 1000,
-      paymentAmount: 100
+      paymentAmount: 100,
+      scheduledPaymentAmount: 600
     });
     expect(dialog.dialog).toHaveBeenCalled();
     expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.webScheduledPaymentId).toBe('1234');
@@ -313,7 +314,7 @@ describe('Controller: ScheduledCtrl', function () {
     expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2014-10-02');
     expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(false);
     expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(1000);
-    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(100);
+    expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(600);
     expect(typeof dialog.dialog.mostRecentCall.args[0].resolve.options().onCancel).toBe('function');
   });
 
