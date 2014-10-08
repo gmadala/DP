@@ -14,7 +14,6 @@ angular.module('nextgearWebApp')
           Vin: sp.vin,
           UnitDescription: sp.description,
           DueDate: sp.curtailmentDueDate,
-          Scheduled: true,
           ScheduledPaymentDate: sp.scheduledDate,
           ScheduledPaymentAmount: sp.scheduledPaymentAmount,
           CurrentPayoff: sp.payoffAmount,
@@ -67,21 +66,26 @@ angular.module('nextgearWebApp')
     return FeeCartItem;
   })
   .factory('VehicleCartItem', function(api, PaymentOptions) {
+    var validOption = function(opt) {
+      return opt === PaymentOptions.TYPE_PAYOFF || opt === PaymentOptions.TYPE_PAYMENT || opt === PaymentOptions.TYPE_INTEREST;
+    };
+
     // payment type can be 'payment' (curtailment), 'payoff', or 'interest'
     var VehicleCartItem = function(item, paymentType) {
-
       this.id = item.FloorplanId;
       this.vin = item.Vin;
       this.description = item.UnitDescription;
       this.stockNum = item.StockNumber;
       this.isFee = false;
+      this.overrideAddress = null;
 
       this.paymentOption = paymentType;
 
       this.dueDate = item.DueDate;
-      this.scheduled = item.Scheduled;
+      this.scheduleDate = null; // if we want to schedule a new payment
+
+      // if the payment was previously scheduled
       this.scheduledAmount = item.ScheduledPaymentAmount;
-      this.overrideAddress = null;
 
       this.payoff = {
         amount: item.CurrentPayoff,
@@ -105,56 +109,72 @@ angular.module('nextgearWebApp')
         interest: item.InterestPaymentTotal,
         cpp: 0
       };
+
+      this.scheduledValues = {
+        payment: null,
+        payoff: null,
+        interest: null
+      };
     };
 
     VehicleCartItem.prototype = {
-      getCheckoutAmount: function(noAdditionalPrincipal) { // if true, exclude additionalPrincipal
-        var amt;
+      getCheckoutAmount: function(option) {
+        var amount,
+            currentPaymentObject;
 
-        if (this.paymentOption === PaymentOptions.TYPE_PAYOFF) {
-          amt = this.payoff.amount;
-        } else if (this.paymentOption === PaymentOptions.TYPE_INTEREST) {
-          amt = this.interest.interest;
+        if (validOption(option)) {
+          // we will just use the passed in option
+        } else if (validOption(this.paymentOption)) {
+          option = this.paymentOption; // override with default
         } else {
-          if (noAdditionalPrincipal) {
-            amt = this.payment.amount;
-          } else {
-            amt = this.payment.amount + this.payment.additionalPrincipal;
-          }
+          return undefined;
         }
 
-        return amt;
+        // If our payment is scheduled, grab the scheduled breakdown for that option
+        if (!!this.scheduleDate) {
+          currentPaymentObject = this.scheduledValues[option];
+        } else { // otherwise, grab the initial object for that option
+          currentPaymentObject = this[option];
+        }
+
+        amount = currentPaymentObject.principal + currentPaymentObject.fees + currentPaymentObject.interest + currentPaymentObject.cpp + (currentPaymentObject.additionalPrincipal ? currentPaymentObject.additionalPrincipal : 0);
+
+        return amount;
       },
       getExtraPrincipal: function() {
-        if(this.paymentOption !== PaymentOptions.TYPE_PAYMENT) {
-          return 0;
-        } else {
-          return this.payment.additionalPrincipal;
+        return this.paymentOption !== PaymentOptions.TYPE_PAYMENT ? 0 : this.payment.additionalPrincipal;
+      },
+      setExtraPrincipal: function(val) {
+        if (!!this.scheduleDate) {
+          this.scheduledValues.payment.additionalPrincipal = val;
         }
+        this.payment.additionalPrincipal = val;
       },
       isPayoff: function() {
         return this.paymentOption === PaymentOptions.TYPE_PAYOFF;
       },
-      updateAmountsOnDate: function(amts) {
-        if(this.paymentOption === PaymentOptions.TYPE_PAYOFF) {
-          this.payoff.amount = amts.PaymentAmount;
-          this.payoff.principal = amts.PrincipalAmount;
-          this.payoff.fees = amts.FeeAmount;
-          this.payoff.interest = amts.InterestAmount;
-          this.payoff.cpp = amts.CollateralProtectionAmount;
-        } else if (this.paymentOption === PaymentOptions.TYPE_INTEREST) {
-          this.interest.amount = amts.InterestAmount;
-          this.interest.principal = 0;
-          this.interest.fees = 0;
-          this.interest.interest = amts.InterestAmount;
-          this.interest.cpp = 0;
-        } else { // must be a payment.
-          this.payment.amount = amts.PaymentAmount;
-          this.payment.principal = amts.PrincipalAmount;
-          this.payment.fees = amts.FeeAmount;
-          this.payment.interest = amts.InterestAmount;
-          this.payment.cpp = amts.CollateralProtectionAmount;
-        }
+      updateAmountsOnDate: function(amts, date) {
+        this.scheduleDate = date;
+
+        this.scheduledValues.payoff = {
+          principal: this.payoff.principal,
+          fees: amts.FeeAmount,
+          interest: amts.InterestAmount,
+          cpp: amts.CollateralProtectionAmount
+        };
+        this.scheduledValues.payment = {
+          principal: this.payment.principal,
+          fees: amts.FeeAmount,
+          interest: amts.InterestAmount,
+          cpp: amts.CollateralProtectionAmount,
+          additionalPrincipal: this.payment.additionalPrincipal
+        };
+        this.scheduledValues.interest = {
+          principal: 0,
+          fees: 0,
+          interest: amts.InterestAmount,
+          cpp: amts.CollateralProtectionAmount
+        };
       },
       getApiRequestObject: function() {
         return {
@@ -163,27 +183,20 @@ angular.module('nextgearWebApp')
           IsPayoff: this.paymentOption === PaymentOptions.TYPE_PAYOFF,
           IsInterestOnly: this.paymentOption === PaymentOptions.TYPE_INTEREST,
           AdditionalPrincipalAmount: this.paymentOption === PaymentOptions.TYPE_PAYMENT ? this.payment.additionalPrincipal : 0,
-          QuotedInterestAmount: this.paymentOption === PaymentOptions.TYPE_INTEREST ? this.payment.interest : 0
+          QuotedInterestAmount: this.paymentOption === PaymentOptions.TYPE_INTEREST ? this.interest.amount : 0
         };
       },
-      getBreakdown: function() {
-        var breakdown;
+      getBreakdown: function(option) {
+        var currentObject;
 
-        switch(this.paymentOption) {
-        case PaymentOptions.TYPE_PAYMENT:
-          breakdown = this.payment;
-          break;
-        case PaymentOptions.TYPE_PAYOFF:
-          breakdown = this.payoff;
-          break;
-        case PaymentOptions.TYPE_INTEREST:
-          breakdown = this.interest;
-          break;
-        default:
-          breakdown = '_unable to get breakdown_';
+        if (!validOption(option)) {
+          option = this.paymentOption;
         }
 
-        return breakdown;
+        // If payment is scheduled, used the scheduled object for that option.
+        currentObject = !!this.scheduleDate ? this.scheduledValues[option] : this[option];
+
+        return currentObject;
       }
     };
 
