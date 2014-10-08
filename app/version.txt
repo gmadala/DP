@@ -1,11 +1,12 @@
-NextGear Capital v4.0.6
+NextGear Capital v4.0.7
 =================================
 
 Fixes included in this release:
 
-VO-2472	MMR - Add value lookup to web
-VO-2992 Update brand colors
-VO-3098 Selecting vehicle link from dashboard returns system error
-VO-3108 Checkout - Change Payment Date popup doesn't include Additional Principal
-VO-3109 Payment Options and Breakdown - inaccurate Payment Total
-VO-3122 Title Release Program does not show up on first page load.
+VO-1568	Allow dealer to make extra principal payment at time of submitting a payment
+VO-2902	Integrate the "get-text" angularjs framework
+VO-2944	Setup Localization Framework infrastructure
+VO-3018	Displaying $0.00 for CPP
+VO-3060	Hide Chat link when selected language is not English
+VO-3087	Web (Payment Options & Breakdown):”Confirm Changes” button is not working.
+VO-3140	Web (Schedule payments): Incorrect payment is getting displayed on “Cancel Schedule Payment” popup when user schedules “Interest Only Payment” of a vehicle.

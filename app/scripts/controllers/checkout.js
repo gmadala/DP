@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
   function ($scope, $q, $dialog, $timeout, protect, moment,
             messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions) {
+            api, Floorplan, PaymentOptions, BusinessHours) {
 
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
@@ -136,8 +136,6 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.todayDate = moment().toDate();
-
     $scope.bankAccounts = {
       getList: function () {
         var statics = User.getStatics();
@@ -230,55 +228,50 @@ angular.module('nextgearWebApp')
       });
     };
 
-    var refreshCanPayNow = function () {
-      if( !User.isLoggedIn() ) { return; }
+    $scope.todayDate = moment().toDate();
 
-      Payments.canPayNow().then(
-        function (result) {
-          $scope.canPayNow = result;
+    var bizHours = function() {
+      BusinessHours.insideBusinessHours().then(function(result) {
+        $scope.canPayNow = result;
+        // If we are oustide of business hours, we need to grab
+        // the next available date so we can auto-schedule.
+        if(!$scope.canPayNow) {
+          BusinessHours.nextBusinessDay().then(function(nextBizDay) {
+            var paymentSummaryUpdates = [],
+                nextAvail = moment(nextBizDay); // updatePaymentAmountOnDate requires a date object for the scheduleDate param
 
-          if(!$scope.canPayNow) {
-            // we need to explicitly auto-schedule all payments/fees for the next available business day.
-            var now = moment().toDate(),
-                later = moment().add('months', 1).toDate();
+            angular.forEach($scope.paymentQueue.contents.payments, function(item) {
+              if(!item.scheduleDate) {
+                paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
 
-            Payments.fetchPossiblePaymentDates(now, later).then(
-              function (result) {
-                if (!result.length) {
-                  // no possible payment dates...what do we do here?
-                }
-
-                var nextAvail = moment(result.sort()[0]).toDate(),
-                paymentSummaryUpdates = [];
-
-                angular.forEach($scope.paymentQueue.contents.payments, function (item) {
-                  if (!item.scheduleDate) { // if it isn't already scheduled...
-                    paymentSummaryUpdates.push(Payments.updatePaymentAmountOnDate(item, nextAvail, item.isPayoff()));
-
-                    // set the scheduled date to the next available business day.
-                    item.scheduleDate = nextAvail;
-                  }
-                });
-
-                angular.forEach($scope.paymentQueue.contents.fees, function (item) {
-                  if (!item.scheduleDate) {
-                    item.scheduleDate = nextAvail;
-                  }
-                });
+                // set scheduled date to next available business day.
+                item.scheduleDate = nextAvail.toDate();
               }
-            );
-          }
-          $scope.canPayNowLoaded = true;
-        }, function (error) {
-          // suppress error message display from this to avoid annoyance since it runs continually
-          error.dismiss();
-          $scope.canPayNow = false;
-          $scope.canPayNowLoaded = false;
-        });
+            });
 
-      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+            angular.forEach($scope.paymentQueue.contents.fees, function(item) {
+              if(!item.scheduleDate) {
+                item.scheduleDate = nextAvail.toDate();
+              }
+            });
+          });
+        }
+
+        $scope.canPayNowLoaded = true;
+      }, function(error) {
+        error.dismiss();
+        $scope.canPayNow = false;
+        $scope.canPayNowoaded = false;
+      });
     };
-    refreshCanPayNow();
+
+    // initial check
+    bizHours();
+
+    // when business hours change, update
+    $scope.$on(BusinessHours.CHANGE_EVENT, function() {
+      bizHours();
+    });
 
     $scope.launchPaymentOptions = function(payment) {
       var dialogOptions = {

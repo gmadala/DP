@@ -75,6 +75,7 @@ angular.module('nextgearWebApp')
 
           Scheduled: details.FinancialSummaryInfo.Scheduled,
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
+          ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
@@ -322,7 +323,7 @@ angular.module('nextgearWebApp')
           ]
         };
 
-        if(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0) {
+        if(!(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0)) {
           $scope.financialSummary.paidChart.data.push({
             name: 'CPP',
             y: details.FinancialSummaryInfo.CollateralProtectionPaid,

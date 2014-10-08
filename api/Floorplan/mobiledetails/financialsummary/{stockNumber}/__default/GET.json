@@ -28,6 +28,7 @@
     "PrincipalDue": 2856.60,
     "Scheduled": false,
     "ScheduledPaymentDate": null,
+    "ScheduledPaymentAmount": 0,
     "WebScheduledPaymentId": null,
 
 

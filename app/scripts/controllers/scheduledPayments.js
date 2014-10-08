@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric, User) {
+  .controller('ScheduledCtrl', function($scope, $timeout, ScheduledPaymentsSearch, Payments, moment, $dialog, segmentio, metric, User, BusinessHours) {
     segmentio.track(metric.VIEW_SCHEDULED_PAYMENTS_PAGE);
 
     var prv = {
@@ -130,7 +130,7 @@ angular.module('nextgearWebApp')
                   scheduledDate: payment.scheduledDate,
                   isPayOff: !payment.isCurtailment,
                   currentPayOff: payment.payoffAmount,
-                  amountDue: payment.paymentAmount
+                  amountDue: payment.scheduledPaymentAmount
                 },
                 onCancel: function() {
                   prv.cancelLocalScheduledPayment(payment);
@@ -215,23 +215,22 @@ angular.module('nextgearWebApp')
       }
     );
 
-    var refreshCanPayNow = function () {
-      if( !User.isLoggedIn() ) { return; }
-
-      Payments.canPayNow().then(
-        function (result) {
-          $scope.canPayNow = result;
-          $scope.canPayNowLoaded = true;
-        }, function (error) {
-          // suppress error message display from this to avoid annoyance since it runs continually
-          error.dismiss();
-          $scope.canPayNow = false;
-          $scope.canPayNowLoaded = false;
-        });
-
-      $timeout(refreshCanPayNow, 60000); // repeat once a minute
+    var bizHours = function() {
+      BusinessHours.insideBusinessHours().then(function(result) {
+        $scope.canPayNow = result;
+        $scope.canPayNowLoaded = true;
+      }, function(error) {
+        error.dismiss();
+        $scope.canPayNow = false;
+        $scope.canPayNowLoaded = false;
+      });
     };
-    refreshCanPayNow();
 
-  })
-;
+    // initial check
+    bizHours();
+
+    // when business hours change, update
+    $scope.$on(BusinessHours.CHANGE_EVENT, function() {
+      bizHours();
+    });
+  });

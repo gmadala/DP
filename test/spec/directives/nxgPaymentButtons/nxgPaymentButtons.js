@@ -263,6 +263,7 @@ describe('Directive: nxgPaymentButtons', function () {
         WebScheduledPaymentId: 'webPay1',
         ScheduledPaymentDate: '2013-10-10',
         CurtailmentPaymentScheduled: true,
+        ScheduledPaymentAmount: 1400,
         CurrentPayoff: 5000,
         AmountDue: 1000,
         FeesPaymentTotal: 20,
@@ -295,7 +296,7 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(false);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(5000);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1000);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1400);
     });
 
   });
@@ -435,6 +436,7 @@ describe('Directive: nxgPaymentButtons', function () {
         AmountDue: 1000,
         Scheduled: true,
         ScheduledPaymentDate: '2013-10-10',
+        ScheduledPaymentAmount: 1600,
         WebScheduledPaymentId: 'webPay2',
         CurtailmentPaymentScheduled: false
       };
@@ -461,7 +463,7 @@ describe('Directive: nxgPaymentButtons', function () {
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.isPayOff).toBe(true);
       expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.currentPayOff).toBe(20000);
-      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1000);
+      expect(dialog.dialog.mostRecentCall.args[0].resolve.options().payment.amountDue).toBe(1600);
     });
 
   });

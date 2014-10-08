@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
           if(validformats.test(viewValue)){
             ctrl.$setValidity('pattern', true);
             var newVal = formatViewValue(viewValue);
-            var valid = newVal < attrs.nxgInputCurrency;
+            var valid = newVal <= attrs.nxgInputCurrency;
             // check if our value is greater than the max
             ctrl.$setValidity('max', valid);
             return newVal;

@@ -105,6 +105,7 @@
       "Scheduled": true,
       "WebScheduledPaymentId": "foo",
       "ScheduledPaymentDate": "2014-07-31",
+      "ScheduledPaymentAmount": 5000,
       "CurtailmentPaymentScheduled": false,
       "FloorplanActivity": [
         {
