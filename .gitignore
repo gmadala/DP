@@ -5,6 +5,7 @@
 .tmp
 .sass-cache
 /.idea
+.idea
 .DS_Store
 test/coverage
 libpeerconnection.log
