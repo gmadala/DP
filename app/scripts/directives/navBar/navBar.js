@@ -14,7 +14,6 @@ angular.module('nextgearWebApp')
       primary: [
         { name: 'Dashboard', href: '#', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK },
         { name: 'Payments', href: '#/payments', activeWhen: 'payments', metric: metric.CLICK_PAYMENTS_LINK },
-        { name: 'Scheduled Payments', href: '#/scheduledPayments', activeWhen: 'scheduledPayments', metric: metric.CLICK_SCHEDULED_PAYMENTS_LINK },
         { name: 'Floor Plan', href: '#/floorplan', activeWhen: 'floorplan', metric: metric.CLICK_FLOORPLAN_LINK },
         { name: 'Receipts', href: '#/receipts', activeWhen: 'receipts', metric: metric.CLICK_RECEIPTS_LINK },
         { name: 'Reports', href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK },
