@@ -7,43 +7,43 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
   var PaymentOptionsBreakdownCtrl,
     scope,
+    CartItem,
     fromCartItemMock,
     fromVehicleDetailsMock,
     isOnQueueMock,
     dialogMock,
+    PaymentOptions,
     paymentOptionsHelper,
     Payments,
+    mockPayment,
+    $httpBackend,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _paymentOptionsHelper_) {
+  beforeEach(inject(function ($controller, $rootScope, _paymentOptionsHelper_, _CartItem_, _PaymentOptions_, _Payments_, _$httpBackend_) {
     scope = $rootScope.$new();
+    CartItem = _CartItem_;
+    PaymentOptions = _PaymentOptions_;
+    Payments = _Payments_;
+    $httpBackend = _$httpBackend_;
 
-    fromCartItemMock = {
-      id: 'id123',
-      payment: {
-        amount: 500,
-        principal: 300,
-        interest: 100,
-        fees: 100,
-        cpp: 0,
-        additionalPrincipal: 0
-      },
-      payoff: {
-        amount: 5000,
-        principal: 3000,
-        interest: 1000,
-        fees: 1000,
-        cpp: 0
-      },
-      interest: {
-        amount: 100,
-        principal: 0,
-        interest: 100,
-        fees: 0,
-        cpp: 0
-      }
+    mockPayment = {
+      Vin: 'vin1',
+      FloorplanId: 'id123',
+      AmountDue: 500,
+      PrincipalDue: 300,
+      FeesPaymentTotal: 100,
+      InterestPaymentTotal: 100,
+      CollateralProtectionPaymentTotal: 0,
+      CurrentPayoff: 5000,
+      PrincipalPayoff: 3000,
+      FeesPayoffTotal: 1000,
+      InterestPayoffTotal: 1000,
+      CollateralProtectionPayoffTotal: 0,
     };
+
+    fromCartItemMock = CartItem.fromPayment(mockPayment);
+
     paymentOptionsHelper = _paymentOptionsHelper_;
     fromVehicleDetailsMock = {
       FloorplanId: 'id456',
@@ -110,72 +110,98 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       expect(scope.paymentBreakdown).toBeDefined();
     });
 
-    it('should be set to equal the paymentObject\'s payment values if the chosen option is payment', function() {
-      expect(scope.paymentBreakdown).toEqual({});
+    // it('should not be set and an error should be thrown if the selected payment option is invalid', function() {
+    //   var fn = function() {
+    //     scope.selector.paymentOption = 'foo';
+    //     scope.$digest();
+    //   };
 
-      scope.selector.paymentOption = 'payment';
-      scope.$digest();
-      expect(scope.paymentBreakdown).toBe(fromCartItemMock.payment);
-      expect(scope.total).toBe(500);
-    });
+    //   expect(function() { fn(); }).toThrow('Invalid payment type');
+    // });
 
-    it('should be set to equal the paymentObject\'s payoff values if the chosen option is payoff', function() {
-      expect(scope.paymentBreakdown).toEqual({});
+    // it('should be set to equal the paymentObject\'s payment values if the chosen option is payment', function() {
+    //   expect(scope.paymentBreakdown).toEqual({});
 
-      scope.selector.paymentOption = 'payoff';
-      scope.$digest();
-      expect(scope.paymentBreakdown).toBe(fromCartItemMock.payoff);
-      expect(scope.total).toBe(5000);
-    });
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
+    //   scope.$digest();
+    //   expect(scope.paymentBreakdown).toBe(fromCartItemMock.payment);
+    //   expect(scope.total).toBe(500);
+    // });
 
-    it('should be set to equal the paymentObject\'s interest-only values if the chosen option is interest-only payment', function() {
-      expect(scope.paymentBreakdown).toEqual({});
+    // it('should be set to equal the paymentObject\'s payoff values if the chosen option is payoff', function() {
+    //   expect(scope.paymentBreakdown).toEqual({});
 
-      scope.selector.paymentOption = 'interest';
-      scope.$digest();
-      expect(scope.paymentBreakdown).toBe(fromCartItemMock.interest);
-      expect(scope.total).toBe(100);
-    });
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYOFF;
+    //   scope.$digest();
+    //   expect(scope.paymentBreakdown).toBe(fromCartItemMock.payoff);
+    //   expect(scope.total).toBe(5000);
+    // });
+
+    // it('should be set to equal the paymentObject\'s interest-only values if the chosen option is interest-only payment', function() {
+    //   expect(scope.paymentBreakdown).toEqual({});
+
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_INTEREST;
+    //   scope.$digest();
+    //   expect(scope.paymentBreakdown).toBe(fromCartItemMock.interest);
+    //   expect(scope.total).toBe(100);
+    // });
+
+    // it('should call updatePaymentAmountOnDate if the item is schedule and we do not have scheduled values for the chosen option', function() {
+    //   fromCartItemMock.scheduleDate = moment('2014-10-03');
+    //   run(fromCartItemMock);
+
+    //   spyOn(Payments, 'updatePaymentAmountOnDate').andReturn();
+    //   spyOn(scope.paymentObject, 'scheduledValuesForType').andReturn(false);
+    //   spyOn(scope.paymentObject, 'getBreakdown').andReturn({
+    //     principal: 64,
+    //     fees: 32,
+    //     interest: 16,
+    //     cpp: 8
+    //   });
+
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYOFF;
+    //   scope.$digest();
+    //   expect(Payments.updatePaymentAmountOnDate).toHaveBeenCalled();
+    //   expect(scope.paymentObject.getBreakdown).toHaveBeenCalledWith(scope.selector.paymentOption);
+    // });
   });
 
   describe('additionalAmount value', function() {
-    it('should update the total value whenever it changes', function() {
-      run(fromCartItemMock);
-      scope.selector.paymentOption = 'payment';
-      scope.$digest();
+    // it('should update the total value whenever it changes', function() {
+    //   run(fromCartItemMock);
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
+    //   scope.$digest();
 
-      expect(scope.total).toBe(500);
-      scope.selector.additionalAmount = 200;
-      scope.$digest();
-      expect(scope.total).toBe(700);
-    });
+    //   expect(scope.total).toBe(500);
+    //   scope.selector.additionalAmount = 200;
+    //   scope.$digest();
+    //   expect(scope.total).toBe(700);
+    // });
 
-    it('should be retained if the user switches to a different payment option and then returns to \'payment\'', function() {
-      run(fromCartItemMock);
-      scope.selector.paymentOption = 'payment';
-      scope.$digest();
+    // it('should be retained if the user switches to a different payment option and then returns to \'payment\'', function() {
+    //   run(fromCartItemMock);
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
+    //   scope.$digest();
 
-      expect(scope.total).toBe(500);
-      scope.selector.additionalAmount = 200;
-      scope.$digest();
-      expect(scope.total).toBe(700);
+    //   expect(scope.total).toBe(500);
+    //   scope.selector.additionalAmount = 200;
+    //   scope.$digest();
+    //   expect(scope.total).toBe(700);
 
-      scope.selector.paymentOption = 'interest';
-      scope.$digest();
-      expect(scope.total).toBe(100);
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_INTEREST;
+    //   scope.$digest();
+    //   expect(scope.total).toBe(100);
 
-      scope.selector.paymentOption = 'payment';
-      scope.$digest();
-      expect(scope.total).toBe(700);
-    });
+    //   scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
+    //   scope.$digest();
+    //   expect(scope.total).toBe(700);
+    // });
   });
 
   describe('confirm function', function() {
-    var shouldBeOnQueue,
-        Payments;
+    var shouldBeOnQueue;
 
-    beforeEach(inject(function(_Payments_) {
-      Payments = _Payments_;
+    beforeEach(function() {
       shouldBeOnQueue = true;
       spyOn(dialogMock, 'close').andCallThrough();
       spyOn(Payments, 'isPaymentOnQueue').andCallFake(function() {
@@ -183,7 +209,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
         });
       spyOn(Payments, 'getPaymentFromQueue').andReturn(fromCartItemMock);
       spyOn(Payments, 'addPaymentTypeToQueue').andReturn();
-    }));
+    });
 
     it('should do nothing if the form is invalid', function() {
       run(fromCartItemMock);
@@ -199,7 +225,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       shouldBeOnQueue = false;
       isOnQueueMock = false;
       run(fromVehicleDetailsMock);
-      scope.selector.paymentOption = 'payoff';
+      scope.selector.paymentOption = PaymentOptions.TYPE_PAYOFF;
       scope.$digest();
 
       scope.paymentOptionsForm = {
@@ -212,31 +238,11 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       expect(Payments.getPaymentFromQueue).toHaveBeenCalled();
     });
 
-    it('should auto-cancel a previously scheduled payment if we are adding a payment to the queue', function() {
-      spyOn(Payments, 'cancelScheduled').andReturn();
-      fromVehicleDetailsMock.Scheduled = true;
-      fromVehicleDetailsMock.WebScheduledPaymentId = 'abc123';
-      fromVehicleDetailsMock.ScheduledPaymentDate = '2014-09-05';
-      shouldBeOnQueue = false;
-      isOnQueueMock = false;
-
-      run(fromVehicleDetailsMock);
-      scope.selector.paymentOption = 'payoff';
-      scope.$digest();
-
-      scope.paymentOptionsForm = {
-        $valid: true
-      };
-
-      scope.confirm();
-      expect(Payments.cancelScheduled).toHaveBeenCalledWith('abc123');
-    });
-
     it('should not add the payment to the queue if it is already on there', function() {
       shouldBeOnQueue = true;
       isOnQueueMock = true;
       run(fromCartItemMock);
-      scope.selector.paymentOption = 'payoff';
+      scope.selector.paymentOption = PaymentOptions.TYPE_PAYOFF;
       scope.$digest();
 
       scope.paymentOptionsForm = {
@@ -248,21 +254,21 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       expect(Payments.addPaymentTypeToQueue).not.toHaveBeenCalled();
     });
 
-    it('should add any additional principal amount to the payment object if it is a payment', function() {
+    it('should update the additional principal if we chose the payment option', function() {
       shouldBeOnQueue = true;
       isOnQueueMock = true;
       run(fromCartItemMock);
-      scope.selector.paymentOption = 'payment';
-      scope.selector.additionalAmount = 500;
-      scope.$digest();
+      spyOn(fromCartItemMock, 'setExtraPrincipal').andCallThrough();
 
+      scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
+
+      scope.$digest();
       scope.paymentOptionsForm = {
         $valid: true
       };
 
       scope.confirm();
-
-      expect(fromCartItemMock.payment.additionalPrincipal).toBe(500);
+      expect(scope.paymentObject.setExtraPrincipal).toHaveBeenCalled();
     });
   });
 });

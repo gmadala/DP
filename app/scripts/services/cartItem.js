@@ -156,6 +156,8 @@ angular.module('nextgearWebApp')
       updateAmountsOnDate: function(amts, date) {
         this.scheduleDate = date;
 
+        // principal values do not change based on date,
+        // so we can use the ones we already have.
         this.scheduledValues.payoff = {
           principal: this.payoff.principal,
           fees: amts.FeeAmount,
@@ -173,7 +175,7 @@ angular.module('nextgearWebApp')
           principal: 0,
           fees: 0,
           interest: amts.InterestAmount,
-          cpp: amts.CollateralProtectionAmount
+          cpp: 0
         };
       },
       getApiRequestObject: function() {
