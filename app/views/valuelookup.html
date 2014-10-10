@@ -15,6 +15,7 @@
               ng-model="vinLookup.vin"
               ng-minlength="10"
               ng-maxlength="17"
+              ng-pattern="/^[A-Za-z0-9]*$/"
               required
               nxg-autofocus
               ng-class="{ 'nxg-invalid': vinLookup.validity.vin.$error.required || vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength }" />
@@ -23,6 +24,9 @@
             </label>
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength">
               VIN should be 10 - 17 characters.
+            </label>
+            <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.pattern">
+              VIN should only contain alphanumeric characters.
             </label>
 
             <label for="vinMileage" class="input-title">Mileage</label>
