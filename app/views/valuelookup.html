@@ -296,19 +296,19 @@
       </div>
       <div class="valuation-table row-fluid" ng-class="{ 'nxg-fade':results.blackbook.noMatch }">
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.blackbook.data.ExtraCleanValue || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.ExtraCleanValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5>Extra Clean</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.blackbook.data.CleanValue || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.CleanValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5>Clean</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.blackbook.data.AverageValue || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.AverageValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5>Average</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.blackbook.data.RoughValue || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.RoughValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5>Rough</h5>
         </div>
       </div>
@@ -332,21 +332,21 @@
         <h6>{{ results.mmr.data.Body }}</h6>
       </div>
       <div class="valuation-table row-fluid" ng-class="{ 'nxg-fade':results.mmr.noMatch }">
-        {{ null }}
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.mmr.data.ExcellentWholesale || 'empty') | currency) || '$'}}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.ExcellentWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch">
+          </h3>
           <h5>Excellent</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.mmr.data.GoodWholesale || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.GoodWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5>Good</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.mmr.data.AverageWholesale || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.AverageWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5>Average</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy">{{ ((results.mmr.data.FairWholesale || 'empty') | currency) || '$' }}</h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.FairWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5>Fair</h5>
         </div>
       </div>

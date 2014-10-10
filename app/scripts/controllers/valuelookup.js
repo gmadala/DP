@@ -58,6 +58,10 @@ angular.module('nextgearWebApp')
       return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
     };
 
+    $scope.searchCompleteCheck = function() {
+      return $scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete;
+    };
+
     $scope.vinLookup = {
       vin: null,
       mileage: null,
