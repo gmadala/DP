@@ -14,7 +14,7 @@
       filter-options="filterOptions"
       active-criteria="floorplanData.searchCriteria"
       on-search="floorplanData.search(floorplanData.searchCriteria)"
-      on-clear="floorplanData.resetSearch(filterOptions)"
+      on-clear="floorplanData.resetSearch()"
       filterable="true"
       show-location-filter="true">
     </div>
@@ -22,7 +22,7 @@
     <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
       <h2 class="well-title">Floor Plan</h2>
       <p class="no-results" ng-switch-when="false">
-        Sorry, no results found. Please <a ng-click="floorplanData.resetSearch(filterOptions)" title="New Search">try a new search</a>.
+        Sorry, no results found. Please <a ng-click="floorplanData.resetSearch()" title="New Search">try a new search</a>.
       </p>
 
       <div ng-switch-when="true"
