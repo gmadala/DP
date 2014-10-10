@@ -208,7 +208,7 @@ angular.module('nextgearWebApp')
             $scope.results.vin = null;
             $scope.results.mileage = which.mileage;
 
-            Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage).then(function(vehicles) {
+            Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
               // Blackbook will only ever return one result based
               // on all 5 params; it'll always be the only item in the result array
               $scope.results.blackbook.data = vehicles[0];
