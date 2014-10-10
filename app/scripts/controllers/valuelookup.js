@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.hideMmrAll = function() {
-      return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data);
+      return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data && !$scope.results.mmr.noMatch);
     };
 
     $scope.hideBlackbookAll = function() {
