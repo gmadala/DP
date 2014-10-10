@@ -144,7 +144,7 @@ angular.module('nextgearWebApp')
           /* Loop through all of the Lines of Credit */
           for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
             var lineOfCredit = $scope.dashboardData.LinesOfCredit[i];
-            var allCreditUtilized = (lineOfCredit.LineOfCreditAmount + lineOfCredit.TempLineOfCreditAmount) - lineOfCredit.AvailableCreditAmount;
+            var allCreditUtilized = lineOfCredit.LineOfCreditAmount - lineOfCredit.AvailableCreditAmount; // Temp lines LineOfCreditAmount gets updated in model layer to include temp amount.
 
             /* set calculated values for View All select option */
             viewAllCredit.LineOfCreditAmount += lineOfCredit.LineOfCreditAmount;
