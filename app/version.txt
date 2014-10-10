@@ -1,10 +1,12 @@
-NextGear Capital v4.0.7
+NextGear Capital v4.0.8
 =================================
 
 Fixes included in this release:
 
-VO-1568	Allow dealer to make extra principal payment at time of submitting a payment
-VO-3018	Displaying $0.00 for CPP
-VO-3060	Hide Chat link when selected language is not English
-VO-3087	Web (Payment Options & Breakdown):”Confirm Changes” button is not working.
-VO-3140	Web (Schedule payments): Incorrect payment is getting displayed on “Cancel Schedule Payment” popup when user schedules “Interest Only Payment” of a vehicle.
+VO-1950	Show credit availability per line of credit on Dashboard
+VO-2255	Allow dealer to make interest only payment
+VO-2830	NGC Test Web (Title Releases): Message “Sorry no result found” is getting displayed when user clicks on “Release Status” table sorting button.
+VO-2845	NGC Test Web (Payments – Vehicle Detail): “Interest-only payment ($ Amount)” link under “Financial Activity” section is not working.
+VO-3099 Remove scheduled payments screen
+VO-3150	Modify text for temp line disclaimer on dashboard
+VO-3192	Interest Amount is not being saved properly when scheduling a payment and then changing payment type at checkout
