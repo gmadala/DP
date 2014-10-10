@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, CartItem, PaymentOptions, Paginate, Floorplan, segmentio, metric) {
+  .factory('Payments', function($q, $filter, api, moment, CartItem, VehicleCartItem, PaymentOptions, Paginate, Floorplan, segmentio, metric) {
 
     // private global state:
 
@@ -96,11 +96,13 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/payment/getaccountfees');
       },
       addPaymentTypeToQueue: function(payment, paymentType, isScheduledPaymentObject) {
-        // if incoming object is already scheduled (ie. a scheduled payment),
-        // call CartItem.fromScheduledPayment. Otherwise, CartItem.fromPayment.
-        // if isScheduled flag is truthy, it's scheduled. Otherwise, normal payment.
-        var p = isScheduledPaymentObject ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, paymentType);
-        paymentQueue.payments[p.id] = p; // incoming object will have a FloorplanId; the new CartItem(p) will just have id.
+        // if it's already a cart item, just add it to queue array
+        if (payment instanceof VehicleCartItem) {
+          paymentQueue.payments[payment.id] = payment;
+        } else { // otherwise, build the cart item first
+          var p = isScheduledPaymentObject ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, paymentType);
+          paymentQueue.payments[p.id] = p;
+        }
         segmentio.track(metric.ADD_TO_BASKET);
       },
       addInterestPaymentToQueue: function(payment, isScheduledPaymentObject) {
@@ -201,7 +203,7 @@ angular.module('nextgearWebApp')
           IsCurtailment: !isPayoff
         };
         return api.request('GET', '/payment/calculatepaymentamount', params).then(function(result) {
-          payment.updateAmountsOnDate(result);
+          payment.updateAmountsOnDate(result, api.toShortISODate(scheduledDate));
           return result;
         });
       },

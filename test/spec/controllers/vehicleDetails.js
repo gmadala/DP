@@ -7,6 +7,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
       scope,
       rootScope,
       vehicleDetailsMock,
+      Payments,
       state,
       dialog,
       stateParams,
@@ -19,18 +20,23 @@ describe('Controller: VehicleDetailsCtrl', function () {
       paymentsMock,
       floorplanMock,
       initialize,
-      addressesMock;
+      $q,
+      addressesMock,
+      cancelSucceed;
 
-  beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, $q, $dialog, _api_) {
+  beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, _$q_, $dialog, _api_, _Payments_) {
     rootScope = $rootScope;
     scope = $rootScope.$new();
     api = _api_;
+    $q = _$q_;
+    Payments = _Payments_;
     state = {
       transitionTo: jasmine.createSpy()
     };
     stateParams = {
       stockNumber: 1234
     };
+    cancelSucceed = true;
 
     detailsMock = { // include only the mock data the controller explicitly grabs.
       VehicleInfo: {
@@ -80,7 +86,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
         PrincipalPaid: 1000,
         PrincipalOutstanding: 1000,
         FeesPaid: 500,
-        FeesOutstanding: 200
+        FeesOutstanding: 200,
+        Scheduled: false,
+        WebScheduledPaymentId: null
       },
       ValueInfo: {}
     };
@@ -161,7 +169,15 @@ describe('Controller: VehicleDetailsCtrl', function () {
       },
       getPaymentFromQueue: angular.noop,
       isPaymentOnQueue: angular.noop,
-      requestExtension: angular.noop
+      requestExtension: angular.noop,
+      removePaymentFromQueue: angular.noop,
+      cancelScheduled: function() {
+        if(cancelSucceed) {
+          return $q.when(true);
+        } else {
+          return $q.reject(false);
+        }
+      }
     };
 
     floorplanMock = {
@@ -275,10 +291,23 @@ describe('Controller: VehicleDetailsCtrl', function () {
     });
 
     describe('launchPaymentOptions function', function() {
+      var wasCancelled;
+
       beforeEach(function() {
-        spyOn(dialog, 'dialog').andReturn({
-          open: angular.noop
-        });
+        wasCancelled = true;
+        spyOn(dialog, 'dialog').andCallFake(function() {
+        return {
+          open: function() {
+            return {
+              then: function(success, failure) {
+                if (wasCancelled) {
+                  success(true);
+                }
+              }
+            };
+          }
+        };
+      });
 
         spyOn(paymentsMock, 'getPaymentFromQueue').andReturn();
       });
@@ -309,8 +338,58 @@ describe('Controller: VehicleDetailsCtrl', function () {
       it('should send the payment object from vehicle details if the payment is not on the queue', function() {
         spyOn(paymentsMock, 'isPaymentOnQueue').andReturn(false);
         scope.launchPaymentOptions();
-        dialog.dialog.mostRecentCall.args[0].resolve.object()
+        dialog.dialog.mostRecentCall.args[0].resolve.object();
         expect(paymentsMock.getPaymentFromQueue).not.toHaveBeenCalled();
+      });
+
+      it('should do nothing after the dialog closes if our original payment was not scheduled', function() {
+        spyOn(paymentsMock, 'removePaymentFromQueue').andCallThrough();
+        spyOn(paymentsMock, 'cancelScheduled').andCallThrough();
+
+        scope.launchPaymentOptions();
+
+        expect(paymentsMock.removePaymentFromQueue).not.toHaveBeenCalled();
+        expect(paymentsMock.cancelScheduled).not.toHaveBeenCalled();
+      });
+
+      it('should do nothing if the dialog was closed because the user cancelled', function() {
+        wasCancelled = false;
+        spyOn(paymentsMock, 'removePaymentFromQueue').andCallThrough();
+        spyOn(paymentsMock, 'cancelScheduled').andCallThrough();
+
+        scope.launchPaymentOptions();
+
+        expect(paymentsMock.removePaymentFromQueue).not.toHaveBeenCalled();
+        expect(paymentsMock.cancelScheduled).not.toHaveBeenCalled();
+      });
+
+      it('should cancel the original payment if it was scheduled and we confirmed our dialog changes before it closed', function() {
+        spyOn(paymentsMock, 'removePaymentFromQueue').andCallThrough();
+        spyOn(paymentsMock, 'cancelScheduled').andCallThrough();
+
+        scope.paymentForCheckout.Scheduled = true;
+        scope.paymentForCheckout.WebScheduledPaymentId = 'schPayId';
+        scope.launchPaymentOptions();
+        scope.$apply();
+
+        expect(paymentsMock.removePaymentFromQueue).not.toHaveBeenCalled();
+        expect(paymentsMock.cancelScheduled).toHaveBeenCalledWith('schPayId');
+
+        expect(scope.paymentForCheckout.WebScheduledPaymentId).toBe(null);
+        expect(scope.paymentForCheckout.Scheduled).toBe(false);
+      });
+
+      it('should remove the new cart item from the queue if our attempt to cancel the scheduled payment fails', function() {
+        cancelSucceed = false;
+        spyOn(paymentsMock, 'removePaymentFromQueue').andCallThrough();
+        spyOn(paymentsMock, 'cancelScheduled').andCallThrough();
+
+        scope.paymentForCheckout.Scheduled = true;
+        scope.paymentForCheckout.WebScheduledPaymentId = 'schPayId';
+        scope.launchPaymentOptions();
+        scope.$apply();
+
+        expect(paymentsMock.removePaymentFromQueue).toHaveBeenCalledWith(scope.paymentForCheckout.FloorplanId);
       });
     });
   });

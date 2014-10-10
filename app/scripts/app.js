@@ -53,12 +53,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'CheckoutCtrl',
         showNavBar: true
       })
-      .state('scheduledPayments', {
-        url: '/scheduledPayments',
-        templateUrl: 'views/scheduledpayments.html',
-        controller: 'ScheduledCtrl',
-        showNavBar: true
-      })
       .state('receipts', {
         url: '/receipts',
         templateUrl: 'views/receipts.html',

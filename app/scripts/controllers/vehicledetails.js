@@ -112,7 +112,25 @@ angular.module('nextgearWebApp')
             }
           };
 
-          $dialog.dialog(dialogOptions).open();
+          $dialog.dialog(dialogOptions).open().then(function(paymentSaved) {
+            if(paymentSaved) {
+              // there was a scheduled payment
+              if($scope.paymentForCheckout.Scheduled) {
+                // cancel it
+                Payments.cancelScheduled($scope.paymentForCheckout.WebScheduledPaymentId).then(function() {
+                  // need to update local data for vehicle details page.
+                  $scope.paymentForCheckout.WebScheduledPaymentId = null;
+                  $scope.paymentForCheckout.Scheduled = false;
+                  $scope.paymentForCheckout.ScheduledPaymentDate = null;
+                }, function(/*error*/) {
+                  // if we couldn't cancel the original, make sure we don't keep
+                  // the new payment in the queue
+                  Payments.removePaymentFromQueue($scope.paymentForCheckout.FloorplanId);
+                });
+
+              }
+            }
+          });
         };
 
         // Grab data for title info section

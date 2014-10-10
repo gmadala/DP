@@ -45,11 +45,7 @@
                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
               Purchased<span class="sortArrows"></span>
             </th>
-            <th class="sortable"
-                ng-click="sortBy('TitleReleaseProgramStatus')"
-                ng-class="{ sorted : sortField == 'TitleReleaseProgramStatus', desc : sortDescending }">
-              Release Status<span class="sortArrows"></span>
-            </th>
+            <th>Release Status</th>
             <th>Actions</th>
           </thead>
           <tr ng-repeat="item in data.results">
