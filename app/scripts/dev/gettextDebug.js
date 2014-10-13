@@ -28,7 +28,7 @@ angular.module('nextgearWebApp')
     }
 
     angular.element('body').prepend('\
-      <div id="translationDebugger" ng-controller="TranslationDebuggerCtrl">\
+      <div id="translationDebugger" ng-controller="TranslationDebuggerCtrl" ng-dblclick="hide()" ng-show="visible">\
         <div nxg-translation-debugger></div>\
       </div>\
     ');
@@ -37,6 +37,10 @@ angular.module('nextgearWebApp')
   .controller('TranslationDebuggerCtrl', function ($scope, SupportedLanguages, translationsJSON) {
     $scope.languages = SupportedLanguages;
     $scope.translationsJSON = translationsJSON;
+    $scope.visible = true;
+    $scope.hide = function () {
+      $scope.visible = false;
+    }
   })
   .controller('TranslationTestCtrl', function ($scope, SupportedLanguages, translationsJSON, gettextCatalog) {
     $scope.languages = SupportedLanguages;
@@ -81,7 +85,7 @@ angular.module('nextgearWebApp')
   })
   .directive('nxgTranslationDebugger', function (gettextCatalog) {
       var template = '\
-        <strong>Translations</strong>\
+        <strong>TRANSLATIONS</strong>\
         <ul>\
           <li ng-repeat="lang in languages"><a ng-click="switchLang(lang.key)" ng-class="{ active: lang.key == currentLanguage }">{{ lang.name }}</a></li>\
         </ul>\
