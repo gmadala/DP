@@ -7,7 +7,7 @@ angular.module('nextgearWebApp')
 
 
     $scope.viewMode = 'week';
-    $scope.today = moment().format('MMMM D, YYYY');
+    $scope.today = moment().format('LL');
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');

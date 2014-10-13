@@ -1,15 +1,16 @@
+# Karl <karl.friedrich@translatemedia.com>, 2014.
 msgid ""
 msgstr ""
+"Project-Id-Version: NextGear\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-10-13 11:47-0700\n"
+"Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
+"Language-Team: TranslateMedia New York\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Project-Id-Version: NextGear\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Language: es\n"
 "X-Generator: Poedit 1.6.8\n"
 
 #: app/views/dialogs/topAuctionsInfo.html
@@ -33,6 +34,17 @@ msgid ""
 msgstr ""
 "<b>Título liberado en {{result.titleReleaseDate | moment:'M/D/YY'}}.</b> "
 "Pague esté vehículo o devuelva el título para retirarlo de su límite."
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid ""
+"<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 "
+"characters.</p><p>Passwords must contain 3 of the 4 following types of "
+"characters: uppercase, lowercase, number, or special characters.</p>"
+msgstr ""
+"<h5>Restablecimiento de contraseña</h5><p>Las contraseñas deben contener 8 "
+"caracteres por lo menos.</p><p>Las contraseñas deben contener 3 de los 4 "
+"tipos de caracteres siguientes: mayúsculas, minúsculas, números o caracteres "
+"especiales.</p>"
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -70,7 +82,7 @@ msgid ""
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
 "a>"
 msgstr ""
-"Hay un pago que se vence esta semana <br><a class=\"primario\" href=\"\" ng-"
+"Hay un pago que se vence esta semana <br><a class=\"primary\" href=\"\" ng-"
 "show=\"showExtendLink()\" ng-click=\"requestExtension()\">¿Solicitar una "
 "extensión?</a>"
 
@@ -80,7 +92,7 @@ msgid ""
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
 "a>"
 msgstr ""
-"Hay un pago que se vence hoy. <br><a class=\"primario\" href=\"\" ng-show=\" "
+"Hay un pago que se vence hoy. <br><a class=\"primary\" href=\"\" ng-show=\" "
 "showExtendLInk()\" ng-click=\"requestExtension()\">¿Solicitar una extensión?"
 "</a>"
 
@@ -90,9 +102,20 @@ msgid ""
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </"
 "a>"
 msgstr ""
-"Hay un pago vencido. <br><a class=\"primario\" href=\"\" ng-show="
+"Hay un pago vencido. <br><a class=\"primary\" href=\"\" ng-show="
 "\"showExtendLInk()\" ng-click=\"requestExtension()\">¿Solicitar una "
 "extensión?</a>"
+
+#: app/views/auction.bulkflooring.html
+msgid ""
+"Actual sales dates must be used when flooring a car. By entering a sale date "
+"of the car being floored the auction certifies the entered sale date for the "
+"car is true and correct."
+msgstr ""
+"Deben utilizarse las fechas reales de ventas al poner en piso algún "
+"vehículo. Al capturar una fecha de venta del automóvil que se está poniendo "
+"en piso, la subasta certifica que dicha fecha de venta del automóvil es "
+"precisa y correcta."
 
 #: app/views/titleReleaseComplete.html
 msgid ""
@@ -127,9 +150,9 @@ msgid ""
 "[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
 msgstr ""
 "Las cantidades que se muestran son válidas hasta las 8pm EST/n <span ng-show="
-"\"canPayNow\">today ({{ todayDate | moment }}) </span>\n"
-" <span ng-show=\"!canPayNow\">{{ { true: 'mañana', false: ''}"
-"[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
+"\"canPayNow\">today ({{ todayDate | moment }}) </span\n"
+" <span ng-show=\"!canPayNow\">{{ { true:'mañana', false: ''}[nextBusinessDay."
+"isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
 
 #: app/views/payments.html
 msgid ""
@@ -159,7 +182,7 @@ msgid ""
 "<br>Print this screen for your records."
 msgstr ""
 "Confirmar la información del vehículo para enviar la solicitud de puesta en "
-"piso a NextGear. <br>Imprimir esta pantalla para su registro."
+"piso a NextGear. <br>Imprimir esta pantalla para sus registros."
 
 #: app/views/dialogs/welcomeInfo.html
 msgid ""
@@ -205,6 +228,20 @@ msgstr ""
 "¿Cuenta con la versión <a href=\"http://get.adobe.com/reader/\" target="
 "\"_blank\">Adobe Acrobat Reader 8.1 </a> o más reciente?"
 
+#: app/unsupported.html
+msgid ""
+"Effective June 1st, in order to access the NextGear Capital Web Portal, you "
+"need to be using the latest version of Internet Explorer, Mozilla Firefox or "
+"Google Chrome. Your current browser is no longer compatible with the latest "
+"version of the NextGear Capital Web Portal. You may upgrade your browser now "
+"using one of the links below."
+msgstr ""
+"Efectivo el 1o de junio: Para utilizar el portal de Internet de NextGear "
+"Capital, es necesario que use la última versión de Internet Explorer, "
+"Mozilla Firefox o Google Chrome. Su navegador actual ya no es compatible con "
+"la última versión del portal de Internet de NextGear Capital. Puede "
+"actualizar su navegador mediante uno de los vínculos siguientes."
+
 #: app/views/account_management.html app/views/auction.settings.html
 msgid ""
 "Enhanced Registration will result in all account access being restricted to "
@@ -241,9 +278,9 @@ msgid ""
 "password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital."
 "com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
 msgstr ""
-"Si está experimentando problemas para conectarse, haga clic en \"¿Olvidó su "
-"nombre de usuario o contraseña?\" abajo o póngase en contacto con <a href="
-"\"malito:dealertickets@nextgearcapital.com\" target=\"_blank"
+"Si está teniendo problemas para conectarse, haga clic en \"¿Olvidó su nombre "
+"de usuario o contraseña?\" abajo o póngase en contacto con <a href=\"mailto:"
+"dealertickets@nextgearcapital.com\" target=\"_blank"
 "\">dealertickets@nextgearcapital.com</a>."
 
 #: app/views/auction.dealersearch.html
@@ -253,6 +290,14 @@ msgid ""
 msgstr ""
 "Si cuenta con el número de distribuidor de NextGear Capital o con el número "
 "de acceso a la subasta, utilice la búsqueda por número de distribuidor."
+
+#: app/unsupported.html
+msgid ""
+"If you need assistance, please call NextGear Capital Support at: (888) "
+"969-3721."
+msgstr ""
+"Si necesita ayuda, por favor llame a Apoyo NextGear Capital al (888) "
+"969-3721."
 
 #: app/views/dialogs/setSecurityQuestions.html
 msgid ""
@@ -267,7 +312,7 @@ msgid ""
 "Initiate your request for a permanent or temporary increase to your current "
 "line of credit."
 msgstr ""
-"Inicie su solicitud de un aumento permanente o temporal de su línea de "
+"Inicie su solicitud de un aumento permanente o provisional de su línea de "
 "crédito."
 
 #: app/views/modals/multipleVehicles.html
@@ -311,12 +356,19 @@ msgstr ""
 "El libro de NextGear Capital es {{ businessSummary.DerivedPendingBook | "
 "number:2 }}% del precio de compra"
 
-#: app/views/vehicleDetails/floorplanValue.html
+#: app/views/vehicledetails.html
 msgid ""
 "NextGear Regional Values are based on the first 3 digits of your zip code."
 msgstr ""
 "Los valores regionales NextGear se basan en los 3 primeros dígitos de su "
 "código postal."
+
+#: app/views/auction.sellerfloorplan.html
+msgid ""
+"NextGear has been notified of this change and will be sending funding soon."
+msgstr ""
+"Se ha notificado a NextGear de este cambio y pronto le enviará "
+"financiamiento. "
 
 #: app/views/scheduledpayments.html
 msgid ""
@@ -367,6 +419,12 @@ msgstr ""
 "contener 3 de los siguientes 4 tipos de caracteres: mayúsculas, minúsculas, "
 "números o caracteres especiales."
 
+#: app/views/checkout.html
+msgid ""
+"Payments are unable to be scheduled for loans that are overdue or due today."
+msgstr ""
+"No pueden programarse pagos de préstamos vencidos o que venzan el día de hoy."
+
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
 "Please be advised that such title(s) must be returned to NextGear Capital, "
@@ -392,6 +450,34 @@ msgstr ""
 "título(s) que no se hayan devuelto a NextGear Capital dentro de dicho "
 "periodo. Usted acepta que cada Pago Requerido que se haga de acuerdo con "
 "esta solicitud, se considerará un Cargo Autorizado conforme a la Forma ACH."
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Please be advised that such title(s) must be returned to NextGear Capital, "
+"at the address listed below, by close of business on the seventh (7th) day "
+"after the date of NextGear Capital's release of such title(s) to you. You "
+"understand and agree that NextGear Capital will declare a Maturity Event (as "
+"such term is defined in your Demand Promissory Note and Loan and Security "
+"Agreement (\"Note\")) and initiate a Required Payment (as such term is "
+"defined in your ACH Authorization and Request Form) for all Liabilities (as "
+"defined in your Note) related to any title(s) not returned to NextGear "
+"Capital within such time frame. You agree that each Required Payment made "
+"pursuant to this request shall be deemed an Authorized Debit under your ACH "
+"Form."
+msgstr ""
+"Se le informa que dicho(s) título(s) deberá(n) devolverse a NextGear "
+"Capital, en la dirección que se menciona a continuación, a más tardar al "
+"cierre del séptimo (7°) día después de la fecha en que NextGear Capital le "
+"libere el(los) título(s). Usted entiende y acepta que NextGear Capital puede "
+"declarar un evento de vencimiento (conforme a la definición de dicho término "
+"en su Pagaré de demanda y en el Contrato de Crédito y Garantía (\"Pagaré\")) "
+"y se deberá hacer el Pago requerido (conforme a la definición de dicho "
+"término en su Formulario de Autorización y Solicitud de ACH) de todos los "
+"pasivos (conforme a la definición mencionada en su Pagaré) relacionados con "
+"el(los) título(s) que no se haya(n) devuelto a NextGear Capital en el "
+"mencionado plazo. Usted acepta que cada Pago requerido que se haga conforme "
+"a esta solicitud se considerará como débito autorizado conforme al "
+"Formulario ACH."
 
 #: app/views/titleReleaseComplete.html
 msgid ""
@@ -427,7 +513,7 @@ msgid ""
 "state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact "
 "customer service for further assistance."
 msgstr ""
-"Por favor, confirme la(s) solicitud(es) de la liberación de su título a "
+"Por favor, confirme la(s) solicitud(es) de liberación de su título a "
 "continuación. Los títulos liberados deberán devolverse en un lapso de 7 "
 "días. Si está solicitando un título de trabajo estatal, por favor <a nxg-"
 "chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con Servicio "
@@ -476,6 +562,13 @@ msgid ""
 msgstr ""
 "Por favor, ingrese un valor numérico positivo con un máximo de 2 decimales."
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid ""
+"Please enter an End Stock Number that is greater than the Start Stock Number"
+msgstr ""
+"Por favor, capture un número de inventario final que sea mayor al número del "
+"inventario inicial."
+
 #: app/views/dialogs/formError.html
 msgid ""
 "Please enter at least {{field.expected}} characters for <strong>{{ field."
@@ -501,7 +594,7 @@ msgstr ""
 "Por favor, ingrese su dirección de correo electrónico. Si necesita ayuda, "
 "call\n"
 " Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
-"support-phone>.G"
+"support-phone>."
 
 #: app/views/login.recover.html
 msgid ""
@@ -521,7 +614,7 @@ msgstr ""
 "Por favor, capture {{field.expected}} para <strong>{{ field.name | "
 "capitalize }}</strong>."
 
-#: app/views/requestExtension.html
+#: app/views/modals/paymentExtension.html
 msgid ""
 "Please note this quote is effective for today only and amounts are subject "
 "to change."
@@ -554,7 +647,7 @@ msgid ""
 "questions before you enter the site."
 msgstr ""
 "Ya que ésta es su primera visita a NextGear Capital, por favor indique sus "
-"preguntas de seguridad antes de entrar al sitio."
+"preguntas de seguridad antes de ingresar al sitio."
 
 #: app/views/paymentsSearch.html
 msgid ""
@@ -624,7 +717,7 @@ msgstr ""
 "Lo sentimos, no encontramos ninguna liberación de títulos. <br>\n"
 "      Por favor <a ng-click=\"newSearch()\"> haga una nueva búsqueda.</a>"
 
-#: app/views/dialogs/titleReleaseLimitReached.html
+#: app/scripts/controllers/titleReleases.js
 msgid ""
 "The floor plan you have selected for title release would put you over the "
 "financial plan limits for this account."
@@ -637,15 +730,17 @@ msgid ""
 "The title(s) will be sent to the following address: <strong>{{addresses[0] | "
 "address}}</strong>"
 msgstr ""
-"El (los) título(s) se enviarán a la siguiente dirección: "
-"<strong>{{addresses[0] | address}}</strong>"
+"El (los) título(s) se enviarán a la siguiente dirección: <strong> "
+"{{addresses[0] | address}}</strong>"
 
-#: app/views/floorSellerSearch.html app/views/floorplan.html
-#: app/views/paymentsSearch.html app/views/titleRelease.html
+#: app/views/floorplan.html app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html app/views/payments.html
+#: app/views/receipts.html app/views/scheduledpayments.html
+#: app/views/titlereleases.html
 msgid ""
 "There are too many results to display, please refine your search further."
 msgstr ""
-"Hay demasiados resultados para poder mostrarlos; por favor, refine su "
+"Hay demasiados resultados para poder mostrarlos; por favor, delimite su "
 "búsqueda."
 
 #: app/views/modals/paymentExtension.html
@@ -653,8 +748,8 @@ msgid ""
 "This extension request cannot be completed online. Please <a nxg-chat-with-"
 "us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr ""
-"Esta solicitud de ampliación no puede completarse en línea. Por favor, <a "
-"nxg-chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con "
+"Esta solicitud de ampliación no puede llenarse en línea. Por favor, <a nxg-"
+"chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con el "
 "servicio a clientes para recibir ayuda."
 
 #: app/views/requestExtension.html
@@ -671,8 +766,40 @@ msgid ""
 "This line of credit expires on: {{dashboardData.selectedLineOfCredit."
 "TempLineOfCreditExpiration | moment}}"
 msgstr ""
-"Esta línea de crédito caduca en: {{dashboardData.selectedLineOfCredit."
+"Esta línea de crédito vence el:{{dashboardData.selectedLineOfCredit."
 "TempLineOfCreditExpiration | moment}}"
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com or by a "
+"NextGear employee via NextGear's Discover system that have been approved and "
+"are currently on the NextGear dealer's floor plan."
+msgstr ""
+"Este estado se aplica a vehículos puestos en piso mediante NextGearCapital."
+"com o por un empleado de NextGear por medio del sistema Discover de NextGear "
+"que hayan sido aprobados y que estén actualmente en el plan de piso de "
+"distribuidores de NextGear."
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com or by a "
+"NextGear employee via NextGear's Discover system that have not yet been "
+"approved by a NextGear employee."
+msgstr ""
+"Este estado se aplica a vehículos puestos en piso mediante NextGearCapital."
+"com o por un empleado de NextGear por medio del sistema Discover de NextGear "
+"que no hayan sido aprobados todavía por algún empleado de NextGear."
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com that have "
+"been denied by a NextGear employee. Please contact NextGear Customer Service "
+"to find out why a vehicle has been denied."
+msgstr ""
+"Este estado se aplica a vehículos puestos en piso mediante NextGearCapital."
+"com que hayan sido rechazados por algún empleado de NextGear. Por favor, "
+"póngase en contacto con Servicio a Clientes de NextGear para ver por qué se "
+"ha rechazado el vehículo. "
 
 #: app/scripts/services/api.js
 msgid ""
@@ -681,6 +808,19 @@ msgid ""
 msgstr ""
 "Esta versión se ha bloqueado del sistema, por favor, actualice a la versión "
 "más reciente."
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits for this Account:<br>\n"
+"      You have <span class=\"count\">{{ eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of "
+"<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
+"available."
+msgstr ""
+"Límites de Liberación de Títulos para esta Cuenta:<br>\n"
+" Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable "
+"- titleQueue.contents.length }}</span> fuera de <span class=\"count"
+"\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible.  "
 
 #: app/views/titleReleaseCheckout.html
 msgid ""
@@ -696,8 +836,9 @@ msgid ""
 "Titles can only be released to an address on file. Please select the address "
 "where you would like to receive each of your requested titles."
 msgstr ""
-"Los títulos solo pueden liberarse a una dirección de archivo. Por favor, "
-"seleccione a qué dirección desea recibir cada uno de los títulos solicitados."
+"Los títulos solo pueden liberarse a una dirección en nuestros archivos. Por "
+"favor, seleccione a qué dirección desea recibir cada uno de los títulos "
+"solicitados."
 
 #: app/views/titleRelease.html
 msgid ""
@@ -715,8 +856,16 @@ msgid ""
 "To look up a dealer in Dealer search, use a combination of their Name and "
 "City or State."
 msgstr ""
-"Para buscar a un distribuidor en búsqueda de distribuidores, utilice una "
+"Para buscar a un distribuidor en Búsqueda de distribuidores, utilice una "
 "combinación de su nombre y ciudad o estado."
+
+#: app/views/account_management.html
+msgid ""
+"To update or add a Title Settings address, please contact NextGear Capital "
+"at: ' + customerSupportPhone + '."
+msgstr ""
+"Para actualizar o agregar una dirección de Ajustes de títulos, por favor "
+"póngase en contacto con NextGear Capital al: ' + customerSupportPhone + '."
 
 #: app/views/dialogs/makeLookupError.html
 msgid ""
@@ -795,10 +944,10 @@ msgid ""
 "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
 "customer-support-phone></nxg-customer-support-phone></span>"
 msgstr ""
-"Lo sentimos, el (los) título(s) resaltado(s) en la lista de arriba no pueden "
-"procesarse en este momento. Por favor, llame a Servicio a Clientes a: <span "
-"class=\"highlight\"><nxg-customer-support-phone></nxg-customer-support-"
-"phone></span>."
+"Lo sentimos, el (los) título(s) resaltado(s) en la lista de arriba no "
+"puede(n) procesarse en este momento. Por favor, llame a Servicio a Clientes "
+"a: <span class=\"highlight\"><nxg-customer-support-phone></nxg-customer-"
+"support-phone></span>."
 
 #: app/views/titleReleaseComplete.html
 msgid ""
@@ -829,6 +978,24 @@ msgstr ""
 "Lo sentimos, este título no está disponible para su liberación en este "
 "momento. Para obtener ayuda, por favor llame a Servicio a Clientes en <a nxg-"
 "customer-support-phone=\"\"></a>."
+
+#: app/scripts/controllers/titleReleases.js
+msgid ""
+"We're sorry, this title is unavailable for release at this time. If you "
+"would like more information about this title, please call Dealer Services at "
+"{{ phoneNumber }}."
+msgstr ""
+"Lo sentimos, este título no está disponible para su liberación en este "
+"momento. Si requiere más información acerca de dicho título, por favor llame "
+"a Servicio a Distribuidores al {{ phoneNumber }}."
+
+#: app/scripts/models/user.js
+msgid ""
+"You do not appear to have any security questions configured. Please contact "
+"NextGear for assistance."
+msgstr ""
+"Al parecer, no tiene ninguna pregunta de seguridad configurada. Por favor, "
+"póngase en contacto con NextGear para obtener ayuda."
 
 #: app/views/dialogs/afterBusinessHours.html
 msgid ""
@@ -874,7 +1041,7 @@ msgid ""
 msgstr ""
 "Lo necesitará para ver sus reportes. <br>\n"
 " ¿No está seguro(a)? <a href=\"https://test.discoverdsc.com/MyDSC/Public/"
-"Test.pdf\" \"target=\"_blank\">Compruebe su instalación de Adobe Reader. </"
+"Test.pdf \"target=\"_blank\">Compruebe su instalación de Adobe Reader. </"
 "a><br>\n"
 " en caso de que el documento no se vea bien, por favor, instale <a href="
 "\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader. </a>"
@@ -893,7 +1060,7 @@ msgid ""
 "providing you with the best value on vehicle purchases."
 msgstr ""
 "Sus Subastas Principales es una lista de subastas y distribuidores a los que "
-"les ha comprado por lo menos dos vehículos en los últimos 12 meses. Se "
+"les haya comprado por lo menos dos vehículos en los últimos 12 meses. Se "
 "proporciona el desglose de cada subasta y éste le permitirá analizar qué "
 "subastas o vendedores le están proporcionando el mejor valor en la compra de "
 "vehículos."
@@ -910,6 +1077,38 @@ msgstr ""
 msgid ""
 "Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}."
 msgstr "Su(s) pago(s) se han {{ items.getStatus('enviado', 'programado') }}."
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
+msgid ""
+"Your request for a payout in the amount of {{ amount }} to your account "
+"\"{{ bankAccountName }}\" has been successfully submitted."
+msgstr ""
+"Su solicitud de pago por la cantidad de {{ amount }} a su cuenta "
+"\"{{ bankAccountName }}\" se ha enviado satisfactoriamente."
+
+#: app/scripts/controllers/modals/requestCreditIncrease.js
+msgid ""
+"Your request has been submitted. Credit requests typically take 3-5 business "
+"days to process. You will be notified as soon as your request has been "
+"processed."
+msgstr ""
+"Se ha enviado su solicitud. Las solicitudes de crédito normalmente tardan de "
+"3 a 5 días hábiles en procesarse. Se le notificará tan pronto como se haya "
+"procesado su solicitud. "
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Your title request has been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgid_plural ""
+"Your title requests have been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgstr[0] ""
+"Se ha aprobado su solicitud de títulos, recibirá un correo electrónico en "
+"breve con el número de rastreo."
+msgstr[1] ""
+"Se han aprobado sus solicitudes de títulos. Se le enviará un correo "
+"electrónico en breve con el número de rastreo."
 
 #: app/views/titleReleaseComplete.html
 msgid ""
@@ -1043,6 +1242,10 @@ msgstr ""
 "{{flooringInfo.TotalDaysFloored}} <span class=\"value-note\">(de "
 "{{ flooringInfo.TotalTermPlanLength }} días)</span>"
 
+#: app/views/analytics.html
+msgid "# Purchased"
+msgstr "# comprados"
+
 #: app/views/analytics/topauctions.html
 msgid "# Vehicles Purchased"
 msgstr "No. de vehículos adquiridos"
@@ -1050,6 +1253,14 @@ msgstr "No. de vehículos adquiridos"
 #: app/views/analytics/summary.html
 msgid "# of Approved Floor Plans"
 msgstr "No. de planes de piso aprobados"
+
+#: app/views/analytics.html
+msgid "# of Cars Purchased"
+msgstr "# de automóviles comprados"
+
+#: app/views/auction.dashboard.html
+msgid "# of Floored Vehicles"
+msgstr "# de vehículos financiados"
 
 #: app/views/analytics/summary.html
 msgid "# of Pending Floor Plans"
@@ -1140,6 +1351,12 @@ msgstr "Hay un pago vencido."
 msgid "Access your GO Financial account directly from here."
 msgstr "Acceda directamente a su cuenta financiera GO aquí."
 
+#: app/views/dashboard.html
+msgid "Account Fee"
+msgid_plural "Account Fees"
+msgstr[0] "Cargo de la cuenta"
+msgstr[1] "Cargos de la cuenta"
+
 #: app/views/checkout.html
 msgid "Account Fee"
 msgstr "Cargo de la cuenta"
@@ -1148,9 +1365,17 @@ msgstr "Cargo de la cuenta"
 msgid "Account Fees"
 msgstr "Cargos de la cuenta"
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Account Management"
+msgstr "Administración de Cuentas"
+
 #: app/views/checkout.html app/views/vehicleDetails/paymentDetails.html
 msgid "Account"
 msgstr "Cuenta"
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Acknowledge VIN Look-Up Failure"
+msgstr "Falla en la búsqueda de reconocimiento de VIN"
 
 #: app/views/titlereleases.html
 msgid "Actions"
@@ -1177,6 +1402,10 @@ msgstr "Dirección"
 #: app/views/dialogs/afterHoursCheckout.html
 msgid "After Business Hours"
 msgstr "Después de horas hábiles"
+
+#: app/scripts/controllers/reports.js
+msgid "All"
+msgstr "Todos"
 
 #: app/views/checkout.html app/views/paymentsSearch.html
 msgid "Amount"
@@ -1219,6 +1448,14 @@ msgstr "Planes de piso aprobados"
 msgid "Approved"
 msgstr "Aprobado"
 
+#: app/scripts/controllers/floorplan.js
+msgid "Approved/Not Paid"
+msgstr "Aprobado/No pagado"
+
+#: app/scripts/controllers/floorplan.js
+msgid "Approved/Paid"
+msgstr "Aprobado/Pagado"
+
 #: app/scripts/models/averageturntime.js
 msgid "April"
 msgstr "Abril"
@@ -1259,6 +1496,10 @@ msgstr "Fondos no aplicados disponibles"
 msgid "Available"
 msgstr "Disponible"
 
+#: app/views/analytics.html
+msgid "Average # of Days to Turn"
+msgstr "# promedio de días de rotación"
+
 #: app/views/analytics/summary.html
 msgid "Average Purchase Price"
 msgstr "Precio de compra promedio"
@@ -1288,6 +1529,10 @@ msgstr "Valor promedio en libros de NextGear Capital"
 #: app/views/analytics/topauctions.html
 msgid "Avg Purchase Price"
 msgstr "Precio de compra promedio"
+
+#: app/views/analytics.html
+msgid "Avg. # of Days to Turn"
+msgstr "# promedio de días de rotación"
 
 #: app/views/analytics/topvehicles.html
 msgid "Avg. turn time"
@@ -1331,6 +1576,10 @@ msgstr "Regresar"
 #: app/views/floorcar.html
 msgid "Bank Account for Disbursement (when applicable)"
 msgstr "Cuenta bancaria para desembolso (cuando aplique)"
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Bank Account for Payout"
+msgstr "Cuenta bancaria para pago"
 
 #: app/views/floor/floorConfirmation.html app/views/floor/floorStepThree.html
 msgid "Bank Account"
@@ -1443,6 +1692,10 @@ msgstr "Llame a servicio a clientes"
 msgid "Cancel Changes"
 msgstr "Cancelar cambios"
 
+#: app/scripts/controllers/modals/cancelFee.js
+msgid "Cancel Fee"
+msgstr "Cancelación de cargo"
+
 #: app/views/scheduledpayments.html
 msgid "Cancel Payment"
 msgstr "Cancelar pago"
@@ -1455,6 +1708,11 @@ msgstr "Cancelar solicitud"
 #: app/views/dialogs/logout.html
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: app/scripts/controllers/scheduledPayments.js
+#: app/scripts/models/scheduledPayments.js
+msgid "Cancelled"
+msgstr "Cancelado"
 
 #: app/scripts/services/bosphoto.js
 msgid "Cannot Connect to the Server. Please Try Again Later."
@@ -1472,6 +1730,10 @@ msgstr "Cambiar ubicación"
 #: app/views/checkout.html
 msgid "Change Payment Date"
 msgstr "Cambiar fecha de pago"
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Chat Now"
+msgstr "Puede chatear ahora"
 
 #: app/views/receipts.html
 msgid "Check #"
@@ -1498,15 +1760,27 @@ msgstr "Los nombres de las ciudades solo deben contener letras y espacios."
 msgid "City"
 msgstr "Ciudad"
 
+#: app/scripts/controllers/documents.js
+msgid "Claim Form (Word Doc)"
+msgstr "Formulario de reclamación (Documento en Word)"
+
 #: app/views/analytics/bookamountresults.html
 #: app/views/vehicleDetails/floorplanValue.html
 msgid "Clean"
 msgstr "Borrar"
 
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Clear Search"
+msgstr "Eliminar búsqueda"
+
 #: app/views/floor/floorStepOne.html app/views/floor/floorStepThree.html
 #: app/views/floor/floorStepTwo.html
 msgid "Clear This Step"
 msgstr "Elimine este paso"
+
+#: app/views/analytics.html
+msgid "Close Details"
+msgstr "Cerrar detalles"
 
 #: app/views/modals/businessSearch.html
 #: app/views/modals/confirmTitleRequest.html app/views/modals/creditQuery.html
@@ -1537,6 +1811,14 @@ msgstr "Color"
 msgid "Completed"
 msgstr "Terminado"
 
+#: app/scripts/controllers/floorplan.js
+msgid "Completed/Not Paid"
+msgstr "Terminado/No pagado"
+
+#: app/scripts/controllers/floorplan.js
+msgid "Completed/Paid"
+msgstr "Terminado/Pagado"
+
 #: app/views/modals/floorCarConfirm.html
 msgid "Confirm Flooring Request"
 msgstr "Confirmar solicitud de piso"
@@ -1554,6 +1836,10 @@ msgstr[1] "Confirme las solicitudes de títulos"
 #: app/views/requestExtension.html
 msgid "Confirm Request"
 msgstr "Confirmar solicitud"
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid "Confirm Requests"
+msgstr "Confirmar solicitudes"
 
 #: app/views/modals/scheduleCheckout.html
 msgid "Confirm"
@@ -1582,6 +1868,10 @@ msgstr "Cree una nueva contraseña"
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Create your Enhanced Registration four digit PIN."
 msgstr "Cree su NIP de cuatro dígitos en Registro Mejorado"
+
+#: app/scripts/controllers/auction.reports.js
+msgid "Credit Availability Query History (PDF)"
+msgstr "Historial de Consulta de Disponibilidad de Crédito (PDF)"
 
 #: app/views/dashboard.html
 msgid "Credit Information"
@@ -1623,6 +1913,10 @@ msgstr "Tablero"
 msgid "Date Floored"
 msgstr "Fecha de puesta en piso"
 
+#: app/scripts/controllers/payments.js
+msgid "Date Range"
+msgstr "Rango de fechas"
+
 #: app/views/auction.reports.html
 msgid "Date Search"
 msgstr "Búsqueda por fecha"
@@ -1630,6 +1924,11 @@ msgstr "Búsqueda por fecha"
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Date Submitted"
 msgstr "Fecha de envío"
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Date range based on Date Floored OR Disbursement Date."
+msgstr ""
+"Rango de fechas basado en fecha de puesta en piso O en fecha de desembolso"
 
 #: app/views/auction.dashboard.html app/views/reports.html
 msgid "Date"
@@ -1643,9 +1942,17 @@ msgstr "Fechas "
 msgid "Days Floored"
 msgstr "Días de piso "
 
+#: app/views/analytics.html
+msgid "Days to Turn"
+msgstr "Días de rotación"
+
 #: app/views/analytics/averageturn.html
 msgid "Days"
 msgstr "Días"
+
+#: app/scripts/controllers/documents.js
+msgid "Dealer Funding Checklist (PDF)"
+msgstr "Lista de Verificación de Financiamiento a Proveedores (PDF)"
 
 #: app/views/auction.dealersearch.html
 msgid "Dealer Name Search"
@@ -1658,6 +1965,10 @@ msgstr "Nombre del distribuidor"
 #: app/views/auction.dealersearch.html
 msgid "Dealer Number Search"
 msgstr "Búsqueda por número de distribuidor"
+
+#: app/scripts/directives/navBar/navBar.js
+msgid "Dealer Search"
+msgstr "Búsqueda de distribuidores"
 
 #: app/views/reports.html
 msgid "Dealer Statement"
@@ -1679,11 +1990,19 @@ msgstr "Tipo de entrega"
 msgid "Denied"
 msgstr "Denegada"
 
+#: app/scripts/controllers/floorplan.js
+msgid "Denied/Not Paid"
+msgstr "Denegado/No pagado"
+
 #: app/views/dashboard.html app/views/floorplan.html
 #: app/views/paymentsSearch.html app/views/titleRelease.html
 #: app/views/vehicleDetails/vehicleDetails.html
 msgid "Description"
 msgstr "Descripción"
+
+#: app/views/account_management.html
+msgid "Disabled"
+msgstr "Desactivado"
 
 #: app/views/vehicleDetails/titleInformation.html
 msgid "Disbursement Date"
@@ -1712,6 +2031,16 @@ msgstr "Descargue NextGear Capital Mobile para iOS"
 #: app/views/paymentsSearch.html app/views/vehicleDetails/landing.html
 msgid "Due Date"
 msgstr "Fecha de vencimiento"
+
+#: app/scripts/controllers/payments.js
+msgid "Due This Week"
+msgstr "Vence esta semana"
+
+#: app/scripts/controllers/payments.js app/views/dashboard.html
+msgid "Due Today"
+msgid_plural "Due Today"
+msgstr[0] "Vence hoy"
+msgstr[1] "Vence hoy"
 
 #: app/views/dashboard.html
 msgid "Due Today"
@@ -1758,6 +2087,10 @@ msgstr "Correo electrónico"
 msgid "Enable Push Notifications"
 msgstr "Activar Presionar notificaciones"
 
+#: app/views/account_management.html
+msgid "Enabled"
+msgstr "Activado"
+
 #: app/views/reports.html
 msgid "End Date"
 msgstr "Fecha de terminación"
@@ -1769,6 +2102,10 @@ msgstr "¿Registro Mejorado activado?"
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Enhanced Registration PIN"
 msgstr "NIP de Registro Mejorado"
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Enter Stock #'s separated by a comma."
+msgstr "Capture número de acciones, separado por comas."
 
 #: app/views/dialogs/login/forgotUserId/forgotUserId.html
 msgid "Enter the email address your User ID is linked to below"
@@ -1785,6 +2122,10 @@ msgid "Enter your username to receive a new password via email."
 msgstr ""
 "Capture su nombre de usuario para recibir una nueva contraseña por correo "
 "electrónico."
+
+#: app/scripts/controllers/checkout.js
+msgid "Error retrieving schedule information"
+msgstr "Error al recuperar información del programa"
 
 #: app/scripts/controllers/analytics/bookamount.js
 #: app/scripts/controllers/floor.js
@@ -1822,6 +2163,10 @@ msgstr "Febrero"
 msgid "Fee Amount"
 msgstr "Monto del cargo"
 
+#: app/views/vehicledetails.html
+msgid "Fee Assessed for {{ activity.ActivityAmount | currency }}"
+msgstr "Cargo evaluado por {{ activity.ActivityAmount | currency }}"
+
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Fee Assessed of {{item.ActivityAmount | currency}}"
 msgstr "Cargo evaluado de {{item.ActivityAmount | currency}}"
@@ -1845,6 +2190,10 @@ msgstr "Cargo"
 msgid "Fee(s)"
 msgstr "Cargo(s)"
 
+#: app/scripts/services/userVoice.js
+msgid "Feedback & Support"
+msgstr "Retroalimentación y Apoyo"
+
 #: app/scripts/controllers/vehicleDetails/paymentActivity.js
 #: app/views/checkout.html
 msgid "Fees"
@@ -1854,6 +2203,30 @@ msgstr "Cargos"
 #: app/views/titleRelease.html
 msgid "Filter Results"
 msgstr "Resultados del filtro"
+
+#: app/views/payments.html
+msgid "Filter by Due Date"
+msgstr "Filtro por fecha de vencimiento"
+
+#: app/views/floorplan.html
+msgid "Filter by Flooring Status"
+msgstr "Filtro por estado de puesta en piso"
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Filter by Inventory Location"
+msgstr "Filtro por ubicación de inventario"
+
+#: app/views/receipts.html
+msgid "Filter by Payment Method"
+msgstr "Filtro por método de pago"
+
+#: app/views/scheduledpayments.html
+msgid "Filter by Payment Status"
+msgstr "Filtro por estado de pago"
+
+#: app/views/auction.sellerfloorplan.html app/views/titlereleases.html
+msgid "Filter by Status"
+msgstr "Filtro por estado"
 
 #: app/views/reports.html
 msgid "Filter for VIN (optional)"
@@ -1882,6 +2255,15 @@ msgstr "Cuentas financieras"
 #: app/views/vehicledetails.html
 msgid "Financial Activity"
 msgstr "Actividad financiera"
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+#: app/views/auction.sellerfloorplan.html app/views/floorplan.html
+msgid "Find a Floor Plan"
+msgstr "Encuentre un plan de piso"
+
+#: app/views/scheduledpayments.html
+msgid "Find a Scheduled Payment"
+msgstr "Encuentre un pago programado"
 
 #: app/views/dialogs/floorSuccess.html
 msgid "Floor Another Vehicle"
@@ -1950,6 +2332,10 @@ msgstr "Puesto en piso"
 msgid "Flooring Information"
 msgstr "Información de puesta en piso"
 
+#: app/scripts/controllers/floorCar.js
+msgid "Flooring Request Submitted"
+msgstr "Solicitud de puesta en piso enviada"
+
 #: app/views/reports.html
 msgid "Flooring Status"
 msgstr "Condición de puesta en piso"
@@ -1978,6 +2364,14 @@ msgstr "¿Olvidó su nombre de usuario o contraseña?"
 msgid "Future"
 msgstr "Futuro"
 
+#: app/scripts/controllers/floorCar.js
+msgid "Go Home"
+msgstr "Ir a la página principal"
+
+#: app/scripts/controllers/documents.js
+msgid "Guidelines (PDF)"
+msgstr "Lineamientos (PDF)"
+
 #: app/views/dashboard.html
 msgid "Hide Credit Details"
 msgstr "Ocultar detalles de crédito"
@@ -1985,6 +2379,14 @@ msgstr "Ocultar detalles de crédito"
 #: app/views/dashboard.html
 msgid "Hide Numeric Values"
 msgstr "Ocultar valores numéricos"
+
+#: app/views/vehicledetails.html
+msgid "Hide Payment Activity"
+msgstr "Ocultar actividad de pago"
+
+#: app/views/dashboard.html
+msgid "Hide Payment Details"
+msgstr "Ocultar detalles de pago"
 
 #: app/views/dashboard.html
 msgid "Hide Recently Floored"
@@ -2022,18 +2424,38 @@ msgstr "Incurrido {{ fee.postedDate | nxgFormatDate }}"
 msgid "Ineligible Account"
 msgstr "Cuenta descalificada"
 
+#: app/scripts/controllers/documents.js
+msgid "Information Sheet (PDF)"
+msgstr "Hoja de información (PDF)"
+
 #: app/scripts/directives/navigationDrawer/navigationDrawer.html
 msgid "Information"
 msgstr "Información"
+
+#: app/scripts/controllers/documents.js
+msgid "Instructions for Buyers (PDF)"
+msgstr "Instrucciones para compradores (PDF)"
+
+#: app/scripts/controllers/auction.documents.js
+msgid "Instructions for Sellers (PDF)"
+msgstr "Instrucciones para vendedores (PDF)"
 
 #: app/views/receipts.html
 msgid "Insufficient Funds"
 msgstr "Fondos insuficientes"
 
+#: app/scripts/controllers/vehicledetails.js
+msgid "Interest & Fees"
+msgstr "Intereses y cargos"
+
 #: app/scripts/controllers/vehicleDetails/paymentActivity.js
 #: app/views/requestExtension.html
 msgid "Interest"
 msgstr "Interés"
+
+#: app/scripts/controllers/vehicledetails.js
+msgid "Interest, Fees & CPP"
+msgstr "Intereses, cargos y CPP"
 
 #: app/views/vehicledetails.html
 msgid "Interest-only payment"
@@ -2042,6 +2464,10 @@ msgstr "Pago únicamente con interés"
 #: app/views/reports.html
 msgid "Invalid character in VIN"
 msgstr "Caracter inválido en VIN"
+
+#: app/scripts/directives/nxgSearch/nxgSearch.html
+msgid "Invalid date range"
+msgstr "Rango de fechas no válido"
 
 #: app/scripts/models/topauctions.js
 msgid "Invalid number of months"
@@ -2057,6 +2483,10 @@ msgstr "Dirección del inventario"
 msgid "Inventory Location"
 msgstr "Ubicación del inventario"
 
+#: app/404.html
+msgid "It looks like this was the result of either:"
+msgstr "Parece que éste es el resultado de:"
+
 #: app/scripts/models/averageturntime.js
 msgid "January"
 msgstr "Enero"
@@ -2068,6 +2498,10 @@ msgstr "Julio"
 #: app/scripts/models/averageturntime.js
 msgid "June"
 msgstr "Junio"
+
+#: app/scripts/controllers/floorCar.js
+msgid "Keep Editing"
+msgstr "Siga editando"
 
 #: app/views/analytics/summary.html
 msgid "Last Payment Amount"
@@ -2147,6 +2581,10 @@ msgstr "Hacer pago"
 #: app/views/vehicleDetails/landing.html
 msgid "Make a payment?"
 msgstr "¿Desea hacer un pago?"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "Make payments today or schedule your payments when you checkout."
+msgstr "Pague hoy o programe sus pagos cuando esté listo para facturar."
 
 #: app/views/analytics/bookamountsearch.html
 #: app/views/floor/floorConfirmation.html app/views/floor/floorStepOne.html
@@ -2308,6 +2746,10 @@ msgstr "No se encontraron las de mejor movimiento."
 msgid "No Payment Activity Available"
 msgstr "No hay ninguna actividad de pago disponible."
 
+#: app/scripts/controllers/floorplan.js
+msgid "No Title/Paid"
+msgstr "Sin título/pagado"
+
 #: app/views/analytics/topvehicles.html
 msgid "No Worst Movers found."
 msgstr "No se encontraron las de peor movimiento."
@@ -2404,6 +2846,10 @@ msgstr "No es elegible para liberación de título"
 msgid "Not Eligible"
 msgstr "No elegible"
 
+#: app/404.html
+msgid "Not found <span>:(</span>"
+msgstr "No se encontró <span>:(</span>"
+
 #: app/scripts/models/notification.js
 msgid "Notification Error"
 msgstr "Error de notificación"
@@ -2454,6 +2900,10 @@ msgstr "De acuerdo"
 msgid "October"
 msgstr "Octubre"
 
+#: app/unsupported.html
+msgid "Once upgraded, you will be able to log in."
+msgstr "Una vez que se haya actualizado, podrá iniciar sesión."
+
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Original Term"
 msgstr "Plazo original"
@@ -2470,7 +2920,17 @@ msgstr "Pendiente"
 
 #: app/views/dashboard.html
 msgid "Overdue"
+msgid_plural "Overdue"
+msgstr[0] "Vencido"
+msgstr[1] "Vencido"
+
+#: app/views/dashboard.html
+msgid "Overdue"
 msgstr "Vencido"
+
+#: app/404.html
+msgid "Page Not Found :("
+msgstr "Página no encontrada :("
 
 #: app/views/auction.dashboard.html
 msgid "Paid Awaiting Title"
@@ -2530,6 +2990,10 @@ msgstr "Detalles del pago"
 msgid "Payment Due"
 msgstr "Fecha de vencimiento"
 
+#: app/views/vehicledetails.html
+msgid "Payment Made for {{ activity.ActivityAmount | currency }}"
+msgstr "Pago hecho a {{ activity.ActivityAmount | currency }}"
+
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Payment Made for {{(-1) * item.ActivityAmount | currency}}"
 msgstr "Pago hecho a {{(-1) * item.ActivityAmount | currency}}"
@@ -2546,6 +3010,10 @@ msgstr "Método de pago"
 msgid "Payment Options"
 msgstr "Opciones de pago"
 
+#: app/views/payments.html
+msgid "Payment Search"
+msgstr "Búsqueda de pago"
+
 #: app/views/dialogs/paymentSuccess.html
 msgid "Payment Successful"
 msgstr "Pago exitoso"
@@ -2553,6 +3021,13 @@ msgstr "Pago exitoso"
 #: app/views/requestExtension.html
 msgid "Payment Summary"
 msgstr "Resumen del pago"
+
+#. Payment This [Month, Year]
+#: app/views/dashboard.html
+msgid "Payment This {{ viewMode | capitalize }}"
+msgid_plural "Payments This {{ viewMode | capitalize }}"
+msgstr[0] "Este pago {{ viewMode | capitalize }}"
+msgstr[1] "Estos pagos {{ viewMode | capitalize }}"
 
 #: app/views/paymentsSearch.html
 #: app/views/vehicleDetails/makePaymentModal.html
@@ -2562,6 +3037,10 @@ msgstr "Pago"
 #: app/views/receipts.html
 msgid "Payment: {{ receipt.PaymentMethod }}"
 msgstr "Pago: {{ receipt.PaymentMethod }}"
+
+#: app/scripts/models/dashboard.js
+msgid "Payments Due"
+msgstr "Pagos vencidos"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
@@ -2585,6 +3064,19 @@ msgstr "Pagar ahora"
 msgid "Payoff"
 msgstr "Pagado"
 
+#: app/scripts/models/dashboard.js
+msgid "Payoffs Due"
+msgstr "Pagos vencidos"
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Payout Amount must be $0.01 to {{ funds.available | currency }}"
+msgstr ""
+"El importe del pago debe ser de $0.01 a: {{ funds.available | currency }}"
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Payout Amount"
+msgstr "Importe del pago"
+
 #: app/views/analytics/summary.html
 msgid "Pending Floor Plans"
 msgstr "Planes pendientes de puesta en piso"
@@ -2593,6 +3085,10 @@ msgstr "Planes pendientes de puesta en piso"
 msgid "Pending"
 msgstr "Pendiente"
 
+#: app/scripts/controllers/floorplan.js
+msgid "Pending/Not Paid"
+msgstr "Pendiente/No pagado"
+
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Phone"
 msgstr "Teléfono"
@@ -2600,6 +3096,10 @@ msgstr "Teléfono"
 #: app/views/dialogs/floorVinFailure.html
 msgid "Please Enter a Valid VIN."
 msgstr "Por favor, capture un número VIN válido."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please acknowledge VIN look-up failure."
+msgstr "Por favor, reconozca la falla de búsqueda de VIN."
 
 #: app/views/login.recover.html
 msgid "Please answer this question."
@@ -2629,6 +3129,18 @@ msgstr "Por favor, ingrese un nombre de distribuidor."
 msgid "Please enter a Dealer Number."
 msgstr "Por favor, ingrese un número de distribuidor."
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Make."
+msgstr "Por favor, capture la marca."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Model."
+msgstr "Por favor, capture el modelo."
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please enter a Payout Amount."
+msgstr "Por favor, capture la cantidad de pago."
+
 #: app/views/floorcar.html
 msgid "Please enter a Purchase Date in the past."
 msgstr "Por favor, ingrese una fecha de compra pasada."
@@ -2636,6 +3148,14 @@ msgstr "Por favor, ingrese una fecha de compra pasada."
 #: app/views/auction.bulkflooring.html
 msgid "Please enter a Sales Date in the past."
 msgstr "Por favor, ingrese una fecha de venta pasada."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a Start Stock Number"
+msgstr "Por favor, capture un número de inventario de inicio válido."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Style."
+msgstr "Por favor, capture el estilo."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Please enter a User Name that is 40 characters or less."
@@ -2645,6 +3165,10 @@ msgstr "Por favor, ingrese un nombre de usuario de 40 caracteres o menos."
 msgid "Please enter a User Name."
 msgstr "Por favor, ingrese un nombre de usuario."
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a VIN."
+msgstr "Por favor, capture el número VIN."
+
 #: app/views/floorcar.html
 msgid "Please enter a Valid Purchase Date."
 msgstr "Por favor, ingrese una fecha de compra válida."
@@ -2653,14 +3177,31 @@ msgstr "Por favor, ingrese una fecha de compra válida."
 msgid "Please enter a Valid Sales Date."
 msgstr "Por favor, ingrese una fecha de venta válida."
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Year between 1901 and {{ settings.maxYear }}."
+msgstr "Por favor, capture un año entre 1901 y {{ settings.maxYear }}."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a Year."
+msgstr "Por favor, capture el año."
+
 #: app/views/modals/businessSearch.html
 msgid "Please enter a business name or number to search."
 msgstr ""
 "Por favor, ingrese un nombre o número de negocio para hacer una búsqueda."
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please enter a four-digit Year."
+msgstr "Por favor, capture un año de cuatro dígitos."
+
 #: app/views/modals/dealerNameSearch.html
 msgid "Please enter a name, and city or state, to search."
 msgstr "Por favor, ingrese un nombre, ciudad o estado para hacer una búsqueda."
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please enter a numeric value with no more than 2 decimal places."
+msgstr ""
+"Por favor, capture un valor numérico con un máximo de 2 lugares decimales."
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a numeric value."
@@ -2677,6 +3218,14 @@ msgstr "Por favor, ingrese un número entero positivo sin decimales."
 #: app/views/login.html
 msgid "Please enter a username."
 msgstr "Por favor, ingrese un nombre de usuario."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a valid End Stock Number"
+msgstr "Por favor, capture un número de inventario final válido."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter a valid Start Stock Number"
+msgstr "Por favor, capture un número de inventario inicial válido."
 
 #: app/views/account_management.html app/views/auction.settings.html
 #: app/views/profileSettings.html
@@ -2712,6 +3261,10 @@ msgstr "Por favor, ingrese una respuesta."
 msgid "Please enter an Auction Access Number."
 msgstr "Por favor, ingrese un número de acceso a la subasta."
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter an End Stock Number"
+msgstr "Por favor, capture un número de inventario final."
+
 #: app/views/login.updateSecurity.html
 msgid "Please enter an answer that is no more than 100 characters long."
 msgstr "Por favor, ingrese una respuesta que no tenga más de 100 caracteres."
@@ -2729,6 +3282,10 @@ msgstr "Por favor, ingrese una cantidad a aumentar."
 #: app/views/modals/dealerNameSearch.html
 msgid "Please enter at least 3 characters."
 msgstr "Por favor, ingrese por lo menos 3 caracteres."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please enter one or more Stock Numbers"
+msgstr "Por favor, capture uno o más números de inventario."
 
 #: app/views/auction.bulkflooring.html
 msgid "Please enter the Lot Number."
@@ -2750,6 +3307,22 @@ msgstr ""
 #: app/views/modals/requestCreditIncrease.html
 msgid "Please enter value less than $1,000,000,000,000.00."
 msgstr "Por favor, ingrese un valor menor a $1,000,000,000,000.00."
+
+#: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
+msgid "Please look up a Buyer."
+msgstr "Por favor, busque a un comprador:"
+
+#: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
+msgid "Please look up a Seller."
+msgstr "Por favor, busque a un vendedor:"
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "Please look up the VIN."
+msgstr "Por favor, busque el VIN."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Please only enter numbers, commas, or spaces in this field."
+msgstr "Por favor, capture únicamente números, comas o espacios en este campo."
 
 #: app/views/checkout.html
 msgid "Please review the following and submit your payments below."
@@ -2785,6 +3358,10 @@ msgstr "Por favor, seleccione una fecha de inicio válida."
 
 #: app/views/checkout.html
 msgid "Please select a bank account for payment."
+msgstr "Por favor, seleccione una cuenta bancaria para el pago."
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Please select a bank account for payout."
 msgstr "Por favor, seleccione una cuenta bancaria para el pago."
 
 #: app/views/modals/scheduleCheckout.html
@@ -2824,13 +3401,25 @@ msgstr "Desembolsos anteriores"
 msgid "Principal"
 msgstr "Principal"
 
+#: app/index.html app/unsupported.html
+msgid "Privacy Statement"
+msgstr "Declaración de privacidad"
+
 #: app/views/receipts.html
 msgid "Processed"
 msgstr "Procesado"
 
+#: app/scripts/directives/nxgActivity/nxgActivity.html
+msgid "Processing..."
+msgstr "Procesando..."
+
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Product Type"
 msgstr "Tipo de producto"
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Profile Settings"
+msgstr "Ajustes del perfil"
 
 #: app/views/receipts.html
 msgid "Provided"
@@ -2867,9 +3456,17 @@ msgstr "Consulta"
 msgid "Question {{ step }} of {{ questions.length }}"
 msgstr "Pregunta {{ step }} de {{ questions.length }}"
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js
+msgid "Range of Stock #'s"
+msgstr "Rango de números de inventario:"
+
 #: app/views/documents.html
 msgid "Rates and Fees"
 msgstr "Tasas y cargos"
+
+#: app/views/receipts.html
+msgid "Receipt #, Stock #, VIN, Check #, Make, Model or Year"
+msgstr "# de recibo, # de inventario, # de cheque, marca, modelo o año"
 
 #: app/views/dashboard.html
 msgid "Receipt Date"
@@ -2879,6 +3476,10 @@ msgstr "Fecha de recibo"
 msgid "Receipt No."
 msgstr "Recibo No."
 
+#: app/views/receipts.html
+msgid "Receipt Search"
+msgstr "Búsqueda de recibos"
+
 #: app/views/vehicleDetails/paymentDetails.html
 msgid "Receipt Total"
 msgstr "Total del recibo"
@@ -2886,6 +3487,11 @@ msgstr "Total del recibo"
 #: app/views/receipts.html
 msgid "Receipts"
 msgstr "Recibos"
+
+#: app/scripts/controllers/auction.reports.js
+#: app/scripts/controllers/reports.js
+msgid "Receivable Detail (PDF)"
+msgstr "Detalle de cuentas por cobrar (PDF)"
 
 #: app/views/dashboard.html
 msgid "Recent Receipts"
@@ -2923,6 +3529,10 @@ msgstr "Eliminar título"
 msgid "Remove"
 msgstr "Eliminar"
 
+#: app/scripts/directives/navBar/navBar.js
+msgid "Reports"
+msgstr "Reportes"
+
 #: app/views/dashboard.html
 msgid "Request Credit Increase"
 msgstr "Solicitar aumento de crédito"
@@ -2931,9 +3541,18 @@ msgstr "Solicitar aumento de crédito"
 msgid "Request Extension"
 msgstr "Solicitar ampliación"
 
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Request Payout"
+msgstr "Solicitar pago"
+
 #: app/views/titleRelease.html app/views/vehicleDetails/titleInformation.html
 msgid "Request Title"
 msgstr "Solicitar título"
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+msgid "Request Unapplied Funds Payout"
+msgstr "Solicitar pago de fondos no aplicados"
 
 #: app/views/account_management.html
 #: app/views/modals/requestCreditIncrease.html
@@ -2943,6 +3562,10 @@ msgstr "Solicitar un aumento de crédito"
 #: app/views/vehicleDetails/landing.html
 msgid "Request an extension?"
 msgstr "¿Desea solicitar una ampliación?"
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
+msgid "Request submitted"
+msgstr "Solicitud enviada"
 
 #: app/views/vehicledetails.html
 msgid "Request the Title"
@@ -2964,6 +3587,10 @@ msgstr "Campo obligatorio"
 #: app/views/account_management.html app/views/analytics.html
 msgid "Reserve Funds"
 msgstr "Fondos de reserva"
+
+#: app/scripts/directives/navBar/navBar.js
+msgid "Resources"
+msgstr "Recursos"
 
 #: app/views/dialogs/floorVinFailure.html
 #: app/views/dialogs/login/forgotPasswordIdentity/forgotPasswordIdentityError.html
@@ -3051,6 +3678,10 @@ msgstr "Programado en "
 msgid "Scheduled Payment(s)"
 msgstr "Pago(s) programado(s)"
 
+#: app/scripts/directives/navBar/navBar.js app/scripts/models/dashboard.js
+msgid "Scheduled Payments"
+msgstr "Pagos programados"
+
 #: app/views/scheduledpayments.html
 msgid "Scheduled Vehicle Payments"
 msgstr "Pagos de vehículos programados"
@@ -3106,6 +3737,10 @@ msgstr "Vínculos de auto servicio"
 msgid "Seller Address"
 msgstr "Dirección del vendedor"
 
+#: app/scripts/directives/navBar/navBar.js
+msgid "Seller Floor Plan Search"
+msgstr "Búsqueda del plan de piso del vendedor"
+
 #: app/scripts/app.js
 msgid "Seller Search"
 msgstr "Búsqueda del vendedor"
@@ -3122,6 +3757,10 @@ msgstr "Enviar correo electrónico"
 #: app/views/floor/floorConfirmation.html app/views/floor/floorStepThree.html
 msgid "Send Payment To"
 msgstr "Enviar pago a"
+
+#: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
+msgid "Send Title to a Different Address?"
+msgstr "¿Enviar título a un domicilio diferente?"
 
 #: app/views/titleReleaseCheckout.html app/views/titleReleaseComplete.html
 msgid "Send To"
@@ -3147,9 +3786,21 @@ msgstr "Ajustes"
 msgid "Show Credit Details"
 msgstr "Mostrar detalles del crédito"
 
+#: app/views/analytics.html
+msgid "Show Details"
+msgstr "Ver detalles"
+
 #: app/views/dashboard.html
 msgid "Show Numeric Values"
 msgstr "Mostrar valores numéricos"
+
+#: app/views/vehicledetails.html
+msgid "Show Payment Activity"
+msgstr "Ver actividad de pago"
+
+#: app/views/dashboard.html
+msgid "Show Payment Details"
+msgstr "Ver detalles de pago"
 
 #: app/views/dashboard.html
 msgid "Show Recently Floored"
@@ -3163,6 +3814,10 @@ msgstr "Mostrar su contraseña"
 msgid "Sign In"
 msgstr "Registrarse"
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Sign Out"
+msgstr "Salir"
+
 #: app/views/login.html
 msgid "Sign Up"
 msgstr "Inscribirse"
@@ -3170,6 +3825,10 @@ msgstr "Inscribirse"
 #: app/views/modals/confirmTitleRequest.html
 msgid "Some title request(s) can not be processed at this time."
 msgstr "Algunas solicitudes de títulos no pueden procesarse en este momento."
+
+#: app/404.html
+msgid "Sorry, but the page you were trying to view does not exist."
+msgstr "Lo sentimos, la página que está tratando de ver no existe."
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Sorry, no results found. Please try a new search."
@@ -3185,6 +3844,10 @@ msgstr "Lo sentimos, no encontramos ningún resultado."
 #: app/views/dialogs/passwordRequirements.html
 msgid "Special Character"
 msgstr "Caracter especial"
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js
+msgid "Specific Stock #'s"
+msgstr "Números específicos de inventario"
 
 #: app/scripts/directives/navigationDrawer/navigationDrawer.html
 #: app/scripts/app.js
@@ -3202,6 +3865,10 @@ msgstr "La fecha de inicio no debe ser posterior a la fecha de terminación."
 #: app/views/reports.html
 msgid "Start Date"
 msgstr "Fecha de inicio"
+
+#: app/scripts/controllers/floorCar.js
+msgid "Start Over"
+msgstr "Volver a iniciar"
 
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
@@ -3225,9 +3892,21 @@ msgstr "Paso 2"
 msgid "Step 3"
 msgstr "Paso 3"
 
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock # Range End"
+msgstr "Fin del rango de números de inventario:"
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock # Range Start"
+msgstr "Inicio del rango de números de inventario:"
+
 #: app/views/analytics/staleunits.html app/views/notifications.html
 msgid "Stock #"
 msgstr "Inventario #"
+
+#: app/views/floorplan.html app/views/titlereleases.html
+msgid "Stock #, VIN, Make, Model, or Year"
+msgstr "# de inventario, VIN, marca, modelo o año"
 
 #: app/scripts/controllers/vehicleDetails/vehicleDetails.js
 msgid "Stock #{{ num }} Detail"
@@ -3240,6 +3919,10 @@ msgstr "Inventario #{{ vehicleInfo.StockNumber }}"
 #: app/views/modals/confirmTitleRequest.html
 msgid "Stock No."
 msgstr "No. de inventario"
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid "Stock Number Filter (optional)"
+msgstr "Filtro de número de inventario (opcional)"
 
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Stock Number"
@@ -3275,6 +3958,10 @@ msgid "Submit"
 msgstr "Enviar"
 
 #: app/views/modals/confirmCheckout.html
+msgid "Submitted Payment(s)"
+msgstr "Pago(s) enviado(s)"
+
+#: app/views/modals/confirmCheckout.html
 msgid "Submitted Payment(s): {{ items.todayTotal() | currency }}"
 msgstr "Pago(s) enviado(s): {{ items.todayTotal() | currency }}"
 
@@ -3286,13 +3973,27 @@ msgstr "Subsidiaria fabricante"
 msgid "Subtotal"
 msgstr "Subtotal"
 
+#: app/scripts/controllers/loginRecover.js
+msgid "Success"
+msgstr "Éxito"
+
 #: app/scripts/directives/navigationDrawer/navigationDrawer.html
 msgid "Take a BOS Photo"
 msgstr "Tomar una fotografía BOS"
 
+#: app/scripts/services/userVoice.js
+msgid "Technical Support"
+msgstr "Soporte Técnico"
+
 #: app/views/vehicleDetails/flooringInformation.html
 msgid "Term Plan Name"
 msgstr "Nombre del plan de plazos"
+
+#: app/scripts/controllers/loginRecover.js
+msgid "Thank you, check your email for the requested account information."
+msgstr ""
+"Gracias, consulte su correo electrónico para ver la información de la cuenta "
+"solicitada."
 
 #: app/views/auction.bulkflooring.html
 msgid "The actual sale date must be used when flooring a car"
@@ -3327,6 +4028,15 @@ msgstr "Actualmente no hay cargos programados para esta cuenta."
 msgid "This Month"
 msgstr "Este mes"
 
+#: app/scripts/controllers/dashboard.js
+msgid "This {{ dateType }}"
+msgstr "Esta {{ dateType }}"
+
+#. paymentType = payment OR fee
+#: app/scripts/controllers/checkout.js
+msgid "This {{ paymentType }} cannot be scheduled"
+msgstr "Este {{ paymentType }} no puede programarse."
+
 #: app/views/dashboard.html
 msgid "This {{ viewMode | capitalize }}"
 msgstr "Este(a) {{ viewMode | capitalize }}"
@@ -3334,6 +4044,10 @@ msgstr "Este(a) {{ viewMode | capitalize }}"
 #: app/views/auction.sellerfloorplan.html
 msgid "Ticket No."
 msgstr "Cupón No."
+
+#: app/scripts/controllers/floorplan.js
+msgid "Title Absent"
+msgstr "Título ausente"
 
 #: app/views/vehicleDetails/landing.html
 #: app/views/vehicleDetails/titleInformation.html
@@ -3357,6 +4071,10 @@ msgstr "Programa de liberación de títulos"
 msgid "Title Release Requests"
 msgstr "Solicitudes de liberación de títulos"
 
+#: app/views/titlereleases.html
+msgid "Title Release Search"
+msgstr "Búsqueda de Liberación de Títulos"
+
 #: app/views/dialogs/titleReleaseUnavailable.html app/views/titleRelease.html
 msgid "Title Release Unavailable"
 msgstr "La liberación de títulos no está disponible."
@@ -3372,6 +4090,20 @@ msgstr "Confirmación de las liberaciones de títulos"
 #: app/scripts/app.js app/views/floorplan.html
 msgid "Title Releases"
 msgstr "Liberación de títulos"
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+#: app/views/modals/confirmTitleRequest.html
+msgid "Title Request"
+msgid_plural "Title Requests"
+msgstr[0] "Solicitud de títulos"
+msgstr[1] "Solicitudes de títulos"
+
+#: app/scripts/controllers/titleReleaseCheckout.js
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Title Requested"
+msgid_plural "Titles Requested"
+msgstr[0] "Título solicitado"
+msgstr[1] "Títulos solicitados"
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Title Requested"
@@ -3511,6 +4243,12 @@ msgid "Unable to communicate with server. Please try again later."
 msgstr ""
 "No es posible comunicarse con el servidor, por favor, inténtelo más tarde."
 
+#: app/scripts/services/api.js
+msgid "Unable to communicate with the NextGear system. Please try again later."
+msgstr ""
+"No es posible establecer comunicación con el sistema NextGear. Por favor, "
+"inténtelo más tarde."
+
 #: app/views/dialogs/vinLookupError.html
 msgid "Unable to find a vehicle for that VIN. Please double check the VIN."
 msgstr ""
@@ -3528,6 +4266,10 @@ msgstr "Fondos no aplicados por usar"
 #: app/views/account_management.html
 msgid "Unapplied Funds"
 msgstr "Fondos no aplicados"
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "Unschedule"
+msgstr "Desprogramar"
 
 #: app/views/reports.html
 msgid "Upcoming Curtailment / Payoff Quote (PDF)"
@@ -3584,6 +4326,15 @@ msgstr "Falla en la búsqueda del número VIN"
 msgid "VIN failure acknowledged"
 msgstr "Se reconoció la falla del VIN."
 
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN should be 17 characters."
+msgstr "El número VIN debe contener 17 caracteres."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN was not located; please enter Make, Model, Year and Style."
+msgstr ""
+"No se encontró el número VIN, por favor, ingrese marca, modelo, año y estilo."
+
 #: app/scripts/directives/vehicleSearch/vehicleSearch.js
 #: app/views/checkout.html app/views/dashboard.html
 #: app/views/floor/floorConfirmation.html app/views/floorplan.html
@@ -3593,6 +4344,10 @@ msgstr "Se reconoció la falla del VIN."
 #: app/views/vehicleDetails/vehicleInformation.html
 msgid "VIN"
 msgstr "VIN"
+
+#: app/views/auction.sellerfloorplan.html
+msgid "VIN, Make, Model, or Year"
+msgstr "VIN, marca, modelo o año"
 
 #: app/views/vehicleDetails/floorplanValue.html
 msgid "Value Details"
@@ -3614,6 +4369,10 @@ msgstr "Información del vehículo"
 #: app/views/checkout.html app/views/payments.html
 msgid "Vehicle Payments"
 msgstr "Pagos del vehículo"
+
+#: app/views/auction.dashboard.html
+msgid "Vehicles Floored"
+msgstr "Vehículos puestos en piso"
 
 #: app/views/documents.html
 msgid "Video Walkthrough"
@@ -3659,6 +4418,10 @@ msgstr "Ver informe"
 msgid "View Title"
 msgstr "Ver título"
 
+#: app/scripts/directives/navBar/navBar.js
+msgid "View a Report"
+msgstr "Ver un reporte"
+
 #: app/views/vehicleDetails/titleInformation.html
 msgid "View the Title"
 msgstr "Ver el título"
@@ -3685,9 +4448,22 @@ msgstr ""
 msgid "Week"
 msgstr "Semana"
 
+#: app/scripts/controllers/documents.js
+msgid "Welcome Letter (Word Doc)"
+msgstr "Carta de Bienvenida (Documento en Word)"
+
+#: app/scripts/controllers/auction.documents.js
+#: app/scripts/controllers/documents.js
+msgid "Welcome Packet (PDF)"
+msgstr "Paquete de Bienvenida (PDF)"
+
 #: app/views/login.updateSecurity.html
 msgid "Welcome to NextGear!"
 msgstr "Bienvenido(a) a NextGear"
+
+#: app/unsupported.html
+msgid "Welcome to the New NextGear Capital Web Portal"
+msgstr "Bienvenido(a) al nuevo portal de Internet de NextGear Capital "
 
 #: app/views/dialogs/welcomeInfo.html
 msgid "Welcome!"
@@ -3696,6 +4472,10 @@ msgstr "¡Bienvenido(a)!"
 #: app/views/login.updateSecurity.html
 msgid "Welcome"
 msgstr "Bienvenido(a)"
+
+#: app/scripts/controllers/floorCar.js
+msgid "What would you like to do?"
+msgstr "¿Qué desea hacer?"
 
 #: app/views/floor/floorStepTwo.html
 msgid "Who Has the Title"
@@ -3746,6 +4526,16 @@ msgstr ""
 "Respondió incorrectamente a la pregunta de seguridad, por favor, inténtelo "
 "de nuevo."
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "You have not selected a payment."
+msgstr "No ha seleccionado ningún pago."
+
+#: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
+msgid "You may select an already approved address on file with NextGear."
+msgstr ""
+"Puede seleccionar una dirección que ya haya sido aprobada en el archivo de "
+"NextGear."
+
 #: app/views/dialogs/bosphotoSuccess.html
 msgid "Your BOS photo was sent to NextGear"
 msgstr "Su fotografía BOS se envió a NextGear."
@@ -3766,6 +4556,10 @@ msgstr "Su identificación de usuario se envió a:"
 #: app/views/dialogs/login/forgotPasswordIdentity/forgotPasswordIdentity.html
 msgid "Your answer is incorrect. Please try again."
 msgstr "Su respuesta es incorrecta, por favor, inténtelo de nuevo."
+
+#: app/scripts/controllers/floorCar.js
+msgid "Your flooring request has been submitted to NextGear Capital."
+msgstr "Se ha enviado su solicitud de puesta en piso a NextGear Capital."
 
 #: app/views/dialogs/login/forgotPasswordIdentity/forgotPasswordIdentitySuccess.html
 msgid "Your new Password has been sent to your email."
@@ -3799,12 +4593,22 @@ msgstr[0] "Se ha aprobado su solicitud de liberación de títulos."
 msgstr[1] "Se han aprobado sus solicitudes de liberación de títulos."
 
 #: app/views/modals/confirmTitleRequest.html
+msgid "Your title request has been submitted."
+msgid_plural "Your title requests have been submitted."
+msgstr[0] "Se ha enviado su solicitud de títulos."
+msgstr[1] "Se han enviado sus solicitudes de títulos."
+
+#: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
 msgstr "Su(s) solicitud(es) de títulos no pueden procesarse en este momento."
 
 #: app/scripts/controllers/floor.js
 msgid "a 4 digit year between {{ min }} and {{ max }}"
 msgstr "un año de 4 dígitos entre {{ min }} y {{ max }}"
+
+#: app/404.html
+msgid "a mistyped address"
+msgstr "dirección mal escrita"
 
 #: app/scripts/controllers/floor.js
 msgid "a non-zero value under $1,000,000,000,000 with at most 2 decimal places"
@@ -3822,13 +4626,33 @@ msgstr "un valor válido"
 msgid "a value less than 1,000,000 miles"
 msgstr "un valor menor a 1,000,000 de millas"
 
+#: app/404.html
+msgid "an out-of-date link"
+msgstr "vínculo fuera de fecha"
+
 #: app/views/scheduledpayments.html
 msgid "as of: {{ pay.statusDate | moment }}"
 msgstr "a partir de: {{ pay.statusDate | moment }} "
 
+#: app/scripts/controllers/dashboard.js
+msgid "available"
+msgstr "disponible"
+
 #: app/views/dashboard.html
 msgid "dealer # {{ data.dealer.id }}"
 msgstr "No. de distribuidor {{ data.dealer.id }}"
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "dealer # {{ user.info().BusinessNumber }}"
+msgstr "distribuidor # {{ user.info().BusinessNumber }}"
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "for {{ item.ScheduledDate | moment }}"
+msgstr "para {{ item.ScheduledDate | moment }}"
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
+msgid "for {{ item.ScheduledPaymentDate | moment }}"
+msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
 #: app/scripts/models/averageturntime.js
 msgid "n/a"
@@ -3864,6 +4688,10 @@ msgstr "{{ item.DaysFloored }} días"
 msgid "{{ item.DaysOnFloorplan }} days"
 msgstr "{{ item.DaysOnFloorplan }} días"
 
+#: app/views/floorplan.html
+msgid "{{ item.FloorplanStatusName }}"
+msgstr "{{ item.FloorplanStatusName }}"
+
 #: app/views/scheduledpayments.html
 msgid "{{ pay.daysOnFloorplan }} Days"
 msgstr "{{ pay.daysOnFloorplan }} días"
@@ -3871,6 +4699,13 @@ msgstr "{{ pay.daysOnFloorplan }} días"
 #: app/views/payments.html
 msgid "{{ payment.DaysOnFloorplan }} days"
 msgstr "{{ payment.DaysOnFloorplan }} días"
+
+#: app/views/checkout.html
+msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
+msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
+msgstr[0] "{{ paymentQueue.sum.scheduledCount() }} Pago futuro"
+msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Pagos futuros"
+
 
 #: app/views/login.recover.html
 msgid "{{ question.QuestionText }}"

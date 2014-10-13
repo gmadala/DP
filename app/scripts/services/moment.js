@@ -10,6 +10,11 @@
  * See 'moment' filter if you need to access moment.js formatting in a view.
  */
 angular.module('nextgearWebApp')
-  .factory('moment', function() {
-    return window.moment;
+  .factory('moment', function(gettextCatalog) {
+    var moment = window.moment;
+
+    var lang = gettextCatalog.currentLanguage.toLowerCase().replace('_', '-');
+    moment.lang(lang);
+
+    return moment;
   });

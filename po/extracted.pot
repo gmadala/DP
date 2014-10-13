@@ -102,6 +102,10 @@ msgstr ""
 msgid "A payment is overdue. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </a>"
 msgstr ""
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "ADDITIONAL PRINCIPAL"
+msgstr ""
+
 #: app/views/account_management.html
 msgid "Access your GO Financial account directly from here."
 msgstr ""
@@ -141,9 +145,22 @@ msgstr ""
 msgid "Actual sales dates must be used when flooring a car. By entering a sale date of the car being floored the auction certifies the entered sale date for the car is true and correct."
 msgstr ""
 
+#: app/views/vehicledetails.html
+msgid "Add Additional Principal?"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Add Receipt"
+msgstr ""
+
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 msgid "Additional Addresses"
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+#: app/views/vehicledetails.html
+msgid "Additional Principal"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -171,11 +188,22 @@ msgstr ""
 msgid "Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book"
 msgstr ""
 
+#: app/views/receipts.html
+msgid "Amount Paid"
+msgstr ""
+
 #: app/views/payments.html
 msgid ""
 "Amounts shown are valid through 8pm EST\n"
 "          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
-"          <span ng-show=\"!canPayNow\">{{ { true:'tomorrow', false: ''}[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
+"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+msgstr ""
+
+#: app/views/payments.html
+msgid ""
+"Amounts shown are valid through 8pm eastern time\n"
+"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
+"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -198,11 +226,7 @@ msgid "Answer"
 msgstr ""
 
 #: app/views/payments.html
-msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
-msgstr ""
-
-#: app/views/receipts.html
-msgid "Applied"
+msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}, due to our 8pm eastern time cutoff."
 msgstr ""
 
 #: app/views/checkout.html
@@ -393,23 +417,26 @@ msgid "By Stock #, VIN, or Description"
 msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
-#: app/views/checkout.html
+#: app/views/modals/scheduleCheckout.html
 msgid "CPP"
 msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/scripts/controllers/floorCar.js
-#: app/views/account_management.html
 #: app/views/auction.bulkflooring.html
-#: app/views/auction.settings.html
 #: app/views/floorcar.html
 #: app/views/login.createPassword.html
 #: app/views/login.updateSecurity.html
 #: app/views/modals/creditQuery.html
 #: app/views/modals/scheduleCheckout.html
-#: app/views/profileSettings.html
 #: app/views/vehicledetails.html
 msgid "Cancel"
+msgstr ""
+
+#: app/views/account_management.html
+#: app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Cancel Changes"
 msgstr ""
 
 #: app/scripts/controllers/modals/cancelFee.js
@@ -440,7 +467,7 @@ msgid "Change Payment Date"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.html
-msgid "Chat Now"
+msgid "Chat"
 msgstr ""
 
 #: app/views/receipts.html
@@ -745,10 +772,6 @@ msgstr ""
 msgid "Download NextGear Capital Mobile iOS"
 msgstr ""
 
-#: app/views/modals/scheduleCheckout.html
-msgid "Due"
-msgstr ""
-
 #: app/views/checkout.html
 #: app/views/dashboard.html
 #: app/views/payments.html
@@ -766,10 +789,14 @@ msgid_plural "Due Today"
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/views/vehicledetails.html
+msgid "Edit Additional Principal"
+msgstr ""
+
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 #: app/views/profileSettings.html
-msgid "Edit"
+msgid "Edit Settings"
 msgstr ""
 
 #: app/views/modals/feeDetails.html
@@ -807,6 +834,10 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "English"
+msgstr ""
+
 #: app/views/account_management.html
 msgid "Enhanced Registration Enabled?"
 msgstr ""
@@ -841,8 +872,20 @@ msgstr ""
 msgid "Error retrieving schedule information"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Espa&ntilde;ol"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Excellent"
+msgstr ""
+
 #: app/views/receipts.html
 msgid "Export Receipt(s)"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Export Receipts"
 msgstr ""
 
 #: app/views/checkout.html
@@ -861,8 +904,11 @@ msgstr ""
 msgid "Extra Clean"
 msgstr ""
 
+#: app/views/vehicledetails.html
+msgid "Fair"
+msgstr ""
+
 #: app/views/modals/feeDetails.html
-#: app/views/modals/scheduleCheckout.html
 msgid "Fee"
 msgstr ""
 
@@ -890,7 +936,7 @@ msgstr ""
 msgid "Fee Type"
 msgstr ""
 
-#: app/views/checkout.html
+#: app/views/modals/scheduleCheckout.html
 msgid "Fee(s)"
 msgstr ""
 
@@ -901,7 +947,6 @@ msgstr ""
 #: app/scripts/controllers/vehicledetails.js
 #: app/scripts/models/dashboard.js
 #: app/views/dashboard.html
-#: app/views/modals/confirmCheckout.html
 msgid "Fees"
 msgstr ""
 
@@ -982,7 +1027,7 @@ msgid "Floor Plan Total"
 msgstr ""
 
 #: app/views/vehicledetails.html
-msgid "Floor Plan Value Estimates"
+msgid "Floor Plan Value Estimates <span class=\"well-sub-title\">NextGear &amp; MMR Valuation</span>"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
@@ -1035,12 +1080,28 @@ msgstr ""
 msgid "Forgot your username or password?"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.html
+msgid "Fran&ccedil;ais"
+msgstr ""
+
 #: app/views/checkout.html
 msgid "Future"
 msgstr ""
 
+#: app/views/modals/confirmCheckout.html
+msgid "Future Fees"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Future Payments"
+msgstr ""
+
 #: app/scripts/controllers/floorCar.js
 msgid "Go Home"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "Good"
 msgstr ""
 
 #: app/scripts/controllers/documents.js
@@ -1101,8 +1162,8 @@ msgid "Insufficient Funds"
 msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
-#: app/views/checkout.html
 #: app/views/modals/paymentExtension.html
+#: app/views/modals/scheduleCheckout.html
 msgid "Interest"
 msgstr ""
 
@@ -1181,6 +1242,14 @@ msgstr ""
 msgid "Lot Number"
 msgstr ""
 
+#: app/views/vehicledetails.html
+msgid "MMR Values"
+msgstr ""
+
+#: app/views/vehicledetails.html
+msgid "MMR Values not found on record for this vehicle."
+msgstr ""
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/vehicledetails.html
@@ -1201,17 +1270,9 @@ msgstr ""
 msgid "Manage your business with NextGear Capital on the go."
 msgstr ""
 
-#: app/views/vehicledetails.html
-msgid "Maximum"
-msgstr ""
-
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
 msgid "Mileage"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "Minimum"
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
@@ -1245,7 +1306,7 @@ msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 
 #: app/views/vehicledetails.html
-msgid "NextGear Black Book Valuation"
+msgid "NextGear Book Values"
 msgstr ""
 
 #: app/views/analytics.html
@@ -1267,10 +1328,6 @@ msgstr ""
 
 #: app/views/documents.html
 msgid "NextGear Capital Mobile Apps"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "NextGear Regional Values are based on the first 3 digits of your zip code."
 msgstr ""
 
 #: app/views/auction.sellerfloorplan.html
@@ -1379,8 +1436,8 @@ msgstr[1] ""
 msgid "Page Not Found :("
 msgstr ""
 
+#: app/scripts/controllers/vehicledetails.js
 #: app/views/auction.dashboard.html
-#: app/views/modals/confirmCheckout.html
 msgid "Paid"
 msgstr ""
 
@@ -1407,13 +1464,15 @@ msgstr ""
 msgid "Passwords must consist of a minimum of 8 characters. Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special character."
 msgstr ""
 
+#: app/views/modals/scheduleCheckout.html
+msgid "Pay Now"
+msgstr ""
+
 #: app/views/titlereleases.html
 msgid "Pay off this vehicle or return the title to remove from your limit."
 msgstr ""
 
-#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/checkout.html
-#: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
 #: app/views/receipts.html
 #: app/views/vehicledetails.html
@@ -1425,7 +1484,12 @@ msgstr ""
 msgid "Payment Amount"
 msgstr ""
 
+#: app/views/modals/scheduleCheckout.html
+msgid "Payment Breakdown"
+msgstr ""
+
 #: app/views/checkout.html
+#: app/views/modals/confirmCheckout.html
 #: app/views/receipts.html
 msgid "Payment Date"
 msgstr ""
@@ -1459,6 +1523,14 @@ msgstr ""
 msgid "Payment Options"
 msgstr ""
 
+#: app/views/vehicledetails.html
+msgid "Payment Options &amp; Breakdown"
+msgstr ""
+
+#: app/views/checkout.html
+msgid "Payment Options<br> & Breakdown"
+msgstr ""
+
 #: app/views/payments.html
 msgid "Payment Search"
 msgstr ""
@@ -1477,11 +1549,14 @@ msgid_plural "Payments This {{ viewMode | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/views/modals/scheduleCheckout.html
+msgid "Payment Total"
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.js
 #: app/scripts/models/dashboard.js
 #: app/views/checkout.html
 #: app/views/dashboard.html
-#: app/views/modals/confirmCheckout.html
 msgid "Payments"
 msgstr ""
 
@@ -1497,7 +1572,6 @@ msgstr ""
 msgid "Payments are unable to be scheduled for loans that are overdue or due today."
 msgstr ""
 
-#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/payments.html
 #: app/views/scheduledpayments.html
 #: app/views/vehicledetails.html
@@ -1911,8 +1985,8 @@ msgid "Previous Disbursements"
 msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
-#: app/views/checkout.html
 #: app/views/modals/paymentExtension.html
+#: app/views/modals/scheduleCheckout.html
 msgid "Principal"
 msgstr ""
 
@@ -1937,10 +2011,6 @@ msgstr ""
 
 #: app/scripts/directives/navBar/navBar.html
 msgid "Profile Settings"
-msgstr ""
-
-#: app/views/receipts.html
-msgid "Provided"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -2006,6 +2076,10 @@ msgstr ""
 msgid "Receipts"
 msgstr ""
 
+#: app/views/receipts.html
+msgid "Receipts Selected"
+msgstr ""
+
 #: app/scripts/controllers/auction.reports.js
 #: app/scripts/controllers/reports.js
 msgid "Receivable Detail (PDF)"
@@ -2038,6 +2112,10 @@ msgstr ""
 
 #: app/views/checkout.html
 msgid "Remove"
+msgstr ""
+
+#: app/views/receipts.html
+msgid "Remove Receipt"
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
@@ -2140,14 +2218,14 @@ msgstr ""
 msgid "Salvage"
 msgstr ""
 
+#: app/views/vehicledetails.html
+msgid "Save Changes"
+msgstr ""
+
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 #: app/views/profileSettings.html
-msgid "Save"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "Save Changes"
+msgid "Save Settings"
 msgstr ""
 
 #: app/views/modals/topAuctions.html
@@ -2155,7 +2233,7 @@ msgid "Savings Per Purchase"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
-msgid "Schedule For"
+msgid "Schedule Date"
 msgstr ""
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
@@ -2163,7 +2241,6 @@ msgstr ""
 #: app/views/dashboard.html
 #: app/views/modals/cancelFee.html
 #: app/views/modals/cancelPayment.html
-#: app/views/modals/confirmCheckout.html
 msgid "Scheduled"
 msgstr ""
 
@@ -2179,10 +2256,6 @@ msgstr ""
 msgid "Scheduled On"
 msgstr ""
 
-#: app/views/modals/confirmCheckout.html
-msgid "Scheduled Payment(s)"
-msgstr ""
-
 #: app/scripts/directives/navBar/navBar.js
 #: app/scripts/models/dashboard.js
 msgid "Scheduled Payments"
@@ -2193,7 +2266,7 @@ msgid "Scheduled Vehicle Payments"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
-msgid "Scheduled payments are not made until the scheduled date selected. <br> Fees and/or other charges may continue to accrue between now and your scheduled payment date that would need to be addressed separately."
+msgid "Scheduled payments are not made until the scheduled date. <br> Interest and/or fees may continue to accrue between now and your scheduled payment date."
 msgstr ""
 
 #: app/views/modals/businessSearch.html
@@ -2229,6 +2302,10 @@ msgstr ""
 
 #: app/views/modals/businessSearch.html
 msgid "Select a business name below."
+msgstr ""
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Select a date from the picker below"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
@@ -2374,7 +2451,6 @@ msgid "Status"
 msgstr ""
 
 #: app/views/modals/cancelPayment.html
-#: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Stock #"
 msgstr ""
@@ -2424,10 +2500,6 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "Submit Requests"
-msgstr ""
-
-#: app/views/modals/confirmCheckout.html
-msgid "Submitted Payment(s)"
 msgstr ""
 
 #: app/views/auction.reports.html
@@ -2514,7 +2586,6 @@ msgstr ""
 msgid "This {{ dateType }}"
 msgstr ""
 
-#. paymentType = payment OR fee
 #: app/scripts/controllers/checkout.js
 msgid "This {{ paymentType }} cannot be scheduled"
 msgstr ""
@@ -2618,7 +2689,9 @@ msgid "To extend this unit an additional period please click below."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
-msgid "To look up a dealer in Dealer search, use a combination of their Name and City or State."
+msgid ""
+"To look up a dealer in Dealer search, use a combination of their Name and City or\n"
+"      State."
 msgstr ""
 
 #: app/views/account_management.html
@@ -2628,6 +2701,14 @@ msgstr ""
 #: app/views/checkout.html
 #: app/views/dashboard.html
 msgid "Today"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Today's Fees"
+msgstr ""
+
+#: app/views/modals/confirmCheckout.html
+msgid "Today's Payments"
 msgstr ""
 
 #: app/views/dashboard.html
@@ -2659,7 +2740,6 @@ msgstr ""
 msgid "Total Outstanding"
 msgstr ""
 
-#: app/scripts/controllers/vehicledetails.js
 #: app/views/vehicledetails.html
 msgid "Total Paid"
 msgstr ""
@@ -2744,7 +2824,6 @@ msgstr ""
 #: app/views/modals/confirmTitleRequest.html
 #: app/views/modals/floorCarConfirm.html
 #: app/views/modals/paymentExtension.html
-#: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
 #: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
@@ -2765,9 +2844,12 @@ msgstr ""
 msgid "VIN, Make, Model, or Year"
 msgstr ""
 
+#: app/scripts/directives/navBar/navBar.js
+msgid "Value Lookup"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 #: app/views/modals/floorCarConfirm.html
-#: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Vehicle Information"
 msgstr ""
@@ -2811,7 +2893,7 @@ msgid "View Dealer Funding Checklist (PDF)"
 msgstr ""
 
 #: app/views/dashboard.html
-msgid "View Floorplans"
+msgid "View Floor Plans"
 msgstr ""
 
 #: app/views/scheduledpayments.html
@@ -2946,6 +3028,10 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: app/views/receipts.html
+msgid "You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below."
+msgstr ""
+
 #: app/scripts/models/user.js
 msgid "You do not appear to have any security questions configured. Please contact NextGear for assistance."
 msgstr ""
@@ -2982,6 +3068,10 @@ msgstr ""
 msgid "Your PIN must consist of four numbers, no letters or special characters."
 msgstr ""
 
+#: app/views/modals/confirmCheckout.html
+msgid "Your Payments Have Been Submitted."
+msgstr ""
+
 #: app/views/analytics.html
 msgid "Your Top 10 Auctions"
 msgstr ""
@@ -2996,10 +3086,6 @@ msgstr ""
 
 #: app/scripts/controllers/floorCar.js
 msgid "Your flooring request has been submitted to NextGear Capital."
-msgstr ""
-
-#: app/views/modals/confirmCheckout.html
-msgid "Your payment(s) have been {{ items.getStatus('submitted', 'scheduled') }}."
 msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
@@ -3063,7 +3149,7 @@ msgid "none"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
-msgid "or <button ng-click=\"removeSchedule()\" class=\"btn-unstyle btn-link\" ng-disabled=\"!model.canPayNow || submitInProgress\">Pay Now</button>"
+msgid "or"
 msgstr ""
 
 #: app/views/vehicledetails.html
@@ -3110,3 +3196,7 @@ msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
 msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/views/receipts.html
+msgid "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</span> 20"
+msgstr ""

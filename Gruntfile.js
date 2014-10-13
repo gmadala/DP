@@ -334,10 +334,12 @@ module.exports = function(grunt) {
       all: {
         files: {
           'po/merged/fr_CA.po': [
+            'po/translated/fr_CA_translated.po',
             'po/translated/NextGear_Web_French (CA).po',
             'po/translated/untranslated_French (CA).po'
           ],
           'po/merged/es.po': [
+            'po/translated/es_MEX_translated.po',
             'po/translated/es.po',
             'po/translated/NextGear_Web_Spanish (Mex).po',
             'po/translated/untranslated_Spanish (Mex).po'
