@@ -178,6 +178,10 @@
 
 .fc-week {
   height: 170px;
+
+  .fc-day.fc-last {
+    min-width: 140px;
+  }
 }
 
 .fc-border-separate {

@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.hideMmrAll = function() {
-      return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data);
+      return ($scope.manualLookup.searchComplete && !$scope.results.mmr.data && !$scope.results.mmr.noMatch);
     };
 
     $scope.hideBlackbookAll = function() {
@@ -56,6 +56,10 @@ angular.module('nextgearWebApp')
 
     $scope.showDescription = function() {
       return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
+    };
+
+    $scope.searchCompleteCheck = function() {
+      return $scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete;
     };
 
     $scope.vinLookup = {
@@ -208,7 +212,7 @@ angular.module('nextgearWebApp')
             $scope.results.vin = null;
             $scope.results.mileage = which.mileage;
 
-            Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage).then(function(vehicles) {
+            Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
               // Blackbook will only ever return one result based
               // on all 5 params; it'll always be the only item in the result array
               $scope.results.blackbook.data = vehicles[0];

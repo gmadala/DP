@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
         this.paginator = null;
         this.hitInfiniteScrollMax = false;
         this.results.length = 0;
-        this.searchCriteria = angular.copy(criteria);
+        this.searchCriteria = criteria;
 
         this.fetchNextResults();
       },
