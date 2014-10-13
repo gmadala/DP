@@ -78,14 +78,6 @@ msgstr "Hay un pago vencido."
 msgid "Account"
 msgstr "Cuenta"
 
-#: app/views/checkout.html
-msgid "Account Fee"
-msgstr "Cargo de la cuenta"
-
-#: app/views/dashboard.html app/views/paymentsSearch.html
-msgid "Account Fees"
-msgstr "Cargos de la cuenta"
-
 #: app/views/titleReleaseComplete.html
 msgid ""
 "Additional fees may apply. <br>\n"
@@ -1841,14 +1833,6 @@ msgid "Your title release request has been approved."
 msgid_plural "Your title release requests have been approved."
 msgstr[0] "Se ha aprobado su solicitud de liberación de títulos."
 msgstr[1] "Se han aprobado sus solicitudes de liberación de títulos."
-
-#: app/views/titleReleaseComplete.html
-msgid ""
-"Your title request has been approved. An email will be sent to you shortly "
-"with a tracking number."
-msgstr ""
-"Se ha aprobado su solicitud de títulos, recibirá un correo electrónico en "
-"breve con el número de rastreo."
 
 #: app/scripts/controllers/floor.js
 msgid "a 4 digit year between {{ min }} and {{ max }}"

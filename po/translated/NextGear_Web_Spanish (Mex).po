@@ -137,10 +137,6 @@ msgstr "Acceda directamente a su cuenta financiera GO aquí."
 msgid "Account"
 msgstr "Cuenta"
 
-#: app/views/checkout.html app/views/payments.html
-msgid "Account Fees"
-msgstr "Cargos de la cuenta"
-
 #: app/views/titlereleases.html
 msgid "Actions"
 msgstr "Acciones"
@@ -1866,7 +1862,7 @@ msgstr ""
 "búsqueda."
 
 #: app/views/analytics.html
-msgid "Stale & Aging Vehicles"
+msgid "Stale and Aging Vehicles"
 msgstr "Vehículos averiados y viejos"
 
 #: app/views/reports.html
@@ -2029,10 +2025,6 @@ msgstr "Liberación del títulos activada {{item.TitleReleaseDate | moment}}"
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
 msgstr "Confirmación de las liberaciones de títulos"
-
-#: app/views/titlereleasecheckout.html app/views/titlereleases.html
-msgid "Title Requested"
-msgstr "Título solicitado"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"

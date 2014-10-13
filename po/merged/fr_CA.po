@@ -1109,14 +1109,6 @@ msgstr[1] ""
 "Vos demandes de titres ont été approuvées. Un courriel contenant un numéro "
 "de suivi vous sera envoyé sous peu."
 
-#: app/views/titleReleaseComplete.html
-msgid ""
-"Your title request has been approved. An email will be sent to you shortly "
-"with a tracking number."
-msgstr ""
-"Votre demande de titre a été approuvée. Un courriel contenant un numéro de "
-"suivi vous sera envoyé sous peu."
-
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
 "Your title {{ {true: 'requests have', false: 'request has'}[counts.total-"
@@ -1359,14 +1351,6 @@ msgid_plural "Account Fees"
 msgstr[0] "Frais de compte"
 msgstr[1] "Frais de compte"
 
-#: app/views/checkout.html
-msgid "Account Fee"
-msgstr "Frais de compte"
-
-#: app/views/checkout.html app/views/payments.html
-msgid "Account Fees"
-msgstr "Frais de compte"
-
 #: app/scripts/directives/navBar/navBar.html
 msgid "Account Management"
 msgstr "Gestion de Compte"
@@ -1434,6 +1418,10 @@ msgstr "Répondez à la question suivante pour recevoir votre mot de passe"
 #: app/views/profileSettings.html
 msgid "Answer"
 msgstr "Réponse"
+
+#: app/views/payments.html
+msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
+msgstr "En raison de notre heure de tombée fixée à 20 h HNE, tout paiement effectué sera traité le prochain jour ouvrable, {{ nextBusinessDay.date | moment }}"
 
 #: app/views/receipts.html
 msgid "Applied"
@@ -2044,12 +2032,6 @@ msgstr "Date d'échéance"
 #: app/scripts/controllers/payments.js
 msgid "Due This Week"
 msgstr "Dû cette semaine"
-
-#: app/scripts/controllers/payments.js app/views/dashboard.html
-msgid "Due Today"
-msgid_plural "Due Today"
-msgstr[0] "Échéance aujourd'hui"
-msgstr[1] "Échéance aujourd'hui"
 
 #: app/views/dashboard.html
 msgid "Due Today"
@@ -2891,12 +2873,6 @@ msgstr "Version obsolète"
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Outstanding"
 msgstr "Dû"
-
-#: app/views/dashboard.html
-msgid "Overdue"
-msgid_plural "Overdue"
-msgstr[0] "En retard"
-msgstr[1] "En retard"
 
 #: app/views/dashboard.html
 msgid "Overdue"
@@ -3829,7 +3805,7 @@ msgid "Stale & Aging Units"
 msgstr "Unités obsolètes et vieillissantes"
 
 #: app/views/analytics.html
-msgid "Stale & Aging Vehicles"
+msgid "Stale and Aging Vehicles"
 msgstr "Véhicules obsolètes et vieillissants"
 
 #: app/views/reports.html
@@ -4073,10 +4049,6 @@ msgid "Title Requested"
 msgid_plural "Titles Requested"
 msgstr[0] "Titre demandé"
 msgstr[1] "Titres demandés"
-
-#: app/views/titlereleasecheckout.html app/views/titlereleases.html
-msgid "Title Requested"
-msgstr "Titre demandé"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"

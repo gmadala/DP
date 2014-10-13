@@ -80,7 +80,8 @@
               <div ng-switch-when="EligibleForRelease">
                 <button type="button" class="btn btn-icon" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{selected: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
                   <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">
-                    <span translate>Title Requested</span><span nxg-icon="icon-minus" class="icon-small"></span>
+                    <!-- Force pluralization due to duplicate translations -->
+                    <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span><span nxg-icon="icon-minus" class="icon-small"></span>
                   </span>
                   <span ng-switch-default nxg-track="{{metric.CLICK_TITLE_RELEASE_REQUEST_TITLE}}">
                     <span translate>Request Title</span><span nxg-icon="icon-plus" class="icon-small"></span>

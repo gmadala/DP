@@ -1110,14 +1110,6 @@ msgstr[1] ""
 "Se han aprobado sus solicitudes de títulos. Se le enviará un correo "
 "electrónico en breve con el número de rastreo."
 
-#: app/views/titleReleaseComplete.html
-msgid ""
-"Your title request has been approved. An email will be sent to you shortly "
-"with a tracking number."
-msgstr ""
-"Se ha aprobado su solicitud de títulos, recibirá un correo electrónico en "
-"breve con el número de rastreo."
-
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
 "Your title {{ {true: 'requests have', false: 'request has'}[counts.total-"
@@ -1357,14 +1349,6 @@ msgid_plural "Account Fees"
 msgstr[0] "Cargo de la cuenta"
 msgstr[1] "Cargos de la cuenta"
 
-#: app/views/checkout.html
-msgid "Account Fee"
-msgstr "Cargo de la cuenta"
-
-#: app/views/dashboard.html app/views/paymentsSearch.html
-msgid "Account Fees"
-msgstr "Cargos de la cuenta"
-
 #: app/scripts/directives/navBar/navBar.html
 msgid "Account Management"
 msgstr "Administración de Cuentas"
@@ -1431,6 +1415,10 @@ msgstr "Responda a la siguiente pregunta para recibir su contraseña."
 #: app/views/dialogs/login/forgotPasswordIdentity/forgotPasswordIdentity.html
 msgid "Answer"
 msgstr "Respuesta"
+
+#: app/views/payments.html
+msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
+msgstr "Cualquier pago que se realice se programará para que se aplique al siguiente día hábil disponible, {{nextBusinessDay.date | moment }}, vence en nuestro corte de las 8 de la noche, hora estándar del este."
 
 #: app/views/receipts.html
 msgid "Applied"
@@ -2035,12 +2023,6 @@ msgstr "Fecha de vencimiento"
 #: app/scripts/controllers/payments.js
 msgid "Due This Week"
 msgstr "Vence esta semana"
-
-#: app/scripts/controllers/payments.js app/views/dashboard.html
-msgid "Due Today"
-msgid_plural "Due Today"
-msgstr[0] "Vence hoy"
-msgstr[1] "Vence hoy"
 
 #: app/views/dashboard.html
 msgid "Due Today"
@@ -2917,12 +2899,6 @@ msgstr "Versión obsoleta"
 #: app/views/vehicleDetails/paymentActivity.html
 msgid "Outstanding"
 msgstr "Pendiente"
-
-#: app/views/dashboard.html
-msgid "Overdue"
-msgid_plural "Overdue"
-msgstr[0] "Vencido"
-msgstr[1] "Vencido"
 
 #: app/views/dashboard.html
 msgid "Overdue"
@@ -3855,7 +3831,7 @@ msgid "Stale & Aging Units"
 msgstr "Unidades viejas y averiadas"
 
 #: app/views/analytics.html
-msgid "Stale & Aging Vehicles"
+msgid "Stale and Aging Vehicles"
 msgstr "Vehículos averiados y viejos"
 
 #: app/views/reports.html
@@ -4104,10 +4080,6 @@ msgid "Title Requested"
 msgid_plural "Titles Requested"
 msgstr[0] "Título solicitado"
 msgstr[1] "Títulos solicitados"
-
-#: app/views/titlereleasecheckout.html app/views/titlereleases.html
-msgid "Title Requested"
-msgstr "Título solicitado"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"

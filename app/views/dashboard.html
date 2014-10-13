@@ -118,18 +118,14 @@
       <li ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate
-              translate-n="dashboardData.OverduePayments"
-              translate-plural="Overdue">Overdue</p>
+          <p class="dash-minor" translate>Overdue</p>
           <h4 class="dash-major" ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate
-             translate-n="dashboardData.PaymentsDueToday"
-             translate-plural="Due Today">Due Today</p>
+          <p class="dash-minor" translate>Due Today</p>
           <h4 class="dash-major">{{dashboardData.PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>

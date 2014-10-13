@@ -57,9 +57,14 @@ msgstr ""
 msgid "Add Receipt"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Additional Principal"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Additional Principal Payment"
 msgstr ""
 
 #: app/views/analytics.html
@@ -68,13 +73,6 @@ msgstr ""
 
 #: app/views/receipts.html
 msgid "Amount Paid"
-msgstr ""
-
-#: app/views/payments.html
-msgid ""
-"Amounts shown are valid through 8pm EST\n"
-"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
-"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
 msgstr ""
 
 #: app/views/payments.html
@@ -92,12 +90,20 @@ msgstr ""
 msgid "Chat"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Confirm Changes"
+msgstr ""
+
 #: app/views/modals/floorCarConfirm.html
 msgid "Confirm the vehicle information to send the flooring request to NextGear. <br>Print this screen for your records."
 msgstr ""
 
 #: app/views/modals/requestCreditIncrease.html
 msgid "Credit requests typically take 3-5 business days to process. You will be notified by email as soon as your request has been processed."
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Curtailment Payment"
 msgstr ""
 
 #: app/views/modals/confirmDisableEnhanced.html
@@ -146,6 +152,7 @@ msgstr ""
 msgid "Espa&ntilde;ol"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Excellent"
 msgstr ""
@@ -154,6 +161,7 @@ msgstr ""
 msgid "Export Receipts"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Fair"
 msgstr ""
@@ -174,6 +182,7 @@ msgstr ""
 msgid "Future Payments"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Good"
 msgstr ""
@@ -194,12 +203,37 @@ msgstr ""
 msgid "Initiate your request for a permanent or temporary increase to your current line of credit."
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Interest-Only Payment"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Lookup Values"
+msgstr ""
+
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "MMR Values"
 msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "MMR Values not found on record for this vehicle."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Manual Lookup"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "NextGear Book"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "NextGear Book &amp; MMR"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "NextGear Book or MMR"
 msgstr ""
 
 #: app/views/analytics.html
@@ -228,8 +262,13 @@ msgstr ""
 msgid "Pay Now"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Breakdown"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payment Options & Breakdown"
 msgstr ""
 
 #: app/views/vehicledetails.html
@@ -240,12 +279,21 @@ msgstr ""
 msgid "Payment Options<br> & Breakdown"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Total"
 msgstr ""
 
 #: app/views/checkout.html
 msgid "Payments are unable to be scheduled for loans that are overdue or due today."
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payoff this vehicle"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -297,6 +345,22 @@ msgstr ""
 msgid "Please note this quote is effective for today only and amounts are subject to change."
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Please select a Make."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Model."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Style."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Year."
+msgstr ""
+
 #: app/views/modals/scheduleCheckout.html
 msgid "Please select a valid banking date no earlier than tomorrow and no later than the payment due date."
 msgstr ""
@@ -307,6 +371,10 @@ msgstr ""
 
 #: app/views/receipts.html
 msgid "Remove Receipt"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Reset Values"
 msgstr ""
 
 #: app/views/account_management.html
@@ -325,6 +393,10 @@ msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
 msgid "Select a date from the picker below"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Select a payment from the options below"
 msgstr ""
 
 #: app/views/login.updateSecurity.html
@@ -358,6 +430,10 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "The title(s) will be sent to the following address: <strong>{{addresses[0] | address}}</strong>"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "There are multiple vehicle styles for this VIN. Please select the appropriate style below."
 msgstr ""
 
 #: app/views/floorplan.html
@@ -422,12 +498,32 @@ msgstr ""
 msgid "Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "VIN Lookup"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "VIN should be 10 - 17 characters."
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.js
 msgid "Value Lookup"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Values below will update based on successful VIN or Manual Lookup"
+msgstr ""
+
 #: app/views/dashboard.html
 msgid "View Floor Plans"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "We are sorry, but we are unable to provide MMR Values at this time."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "We are sorry, but we are unable to provide NextGear Book Values at this time."
 msgstr ""
 
 #: app/views/login.recover.html
@@ -514,27 +610,20 @@ msgid ""
 "            please call NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>."
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "{{ results.mileage | numeral:'0,0' }} miles"
+msgstr ""
+
 #: app/views/receipts.html
 msgid "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</span> 20"
 msgstr ""
 
 
+#: app/views/checkout.html
 #: app/views/dashboard.html
+#: app/views/payments.html
 msgid "Account Fee"
 msgid_plural "Account Fees"
-msgstr[0] ""
-msgstr[1] ""
-
-#: app/scripts/controllers/payments.js
-#: app/views/dashboard.html
-msgid "Due Today"
-msgid_plural "Due Today"
-msgstr[0] ""
-msgstr[1] ""
-
-#: app/views/dashboard.html
-msgid "Overdue"
-msgid_plural "Overdue"
 msgstr[0] ""
 msgstr[1] ""
 

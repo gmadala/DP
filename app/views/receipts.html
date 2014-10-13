@@ -92,7 +92,7 @@
                         >
                   <span class="paired-body">
                     <span ng-show="isSelected(receipt)" translate>Remove Receipt</span>
-                    <span ng-show="isSelected(receipt)" translate>Add Receipt</span>
+                    <span ng-hide="isSelected(receipt)" translate>Add Receipt</span>
                   </span>
                   <span ng-switch="isSelected(receipt)">
                     <span ng-switch-when="false" nxg-icon="icon-plus" class="paired-media icon-small"></span>

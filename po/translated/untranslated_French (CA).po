@@ -77,14 +77,6 @@ msgstr "Un paiement est en retard."
 msgid "Account"
 msgstr "Compte"
 
-#: app/views/checkout.html
-msgid "Account Fee"
-msgstr "Frais de compte"
-
-#: app/views/dashboard.html app/views/paymentsSearch.html
-msgid "Account Fees"
-msgstr "Frais de compte"
-
 #: app/views/titleReleaseComplete.html
 msgid ""
 "Additional fees may apply. <br>\n"
@@ -1835,14 +1827,6 @@ msgid "Your title release request has been approved."
 msgid_plural "Your title release requests have been approved."
 msgstr[0] "Votre demande d'émission de titre a été approuvée."
 msgstr[1] "Vos demandes d'émission de titres ont été approuvées."
-
-#: app/views/titleReleaseComplete.html
-msgid ""
-"Your title request has been approved. An email will be sent to you shortly "
-"with a tracking number."
-msgstr ""
-"Votre demande de titre a été approuvée. Un courriel contenant un numéro de "
-"suivi vous sera envoyé sous peu."
 
 #: app/scripts/controllers/floor.js
 msgid "a 4 digit year between {{ min }} and {{ max }}"

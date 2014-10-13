@@ -55,7 +55,8 @@
             </td>
 
             <td class="numeric">
-              <h4 translate>Title Requested</h4>
+              <!-- Force pluralization due to duplicate translations -->
+              <h4 translate translate-n="1" translate-plural="Titles Requested">Title Requested</h4>
               <button class="btn-unstyle btn-link"
                       type="submit"
                       ng-click="$parent.titleQueue.removeFromQueue(item)"

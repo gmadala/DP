@@ -137,10 +137,6 @@ msgstr "Accédez directement à votre compte GO Financial à partir d'ici."
 msgid "Account"
 msgstr "Compte"
 
-#: app/views/checkout.html app/views/payments.html
-msgid "Account Fees"
-msgstr "Frais de compte"
-
 #: app/views/titlereleases.html
 msgid "Actions"
 msgstr "Actions"
@@ -1854,7 +1850,7 @@ msgstr ""
 "recherche."
 
 #: app/views/analytics.html
-msgid "Stale & Aging Vehicles"
+msgid "Stale and Aging Vehicles"
 msgstr "Véhicules obsolètes et vieillissants"
 
 #: app/views/reports.html
@@ -2017,10 +2013,6 @@ msgstr "Titre émis le {{item.TitleReleaseDate | moment}}"
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
 msgstr "Confirmation de l’émission du titre"
-
-#: app/views/titlereleasecheckout.html app/views/titlereleases.html
-msgid "Title Requested"
-msgstr "Titre demandé"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request{{ {false: 's'}[counts.total == 1] }}: {{ counts.total }}"

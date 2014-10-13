@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
   .factory('moment', function(gettextCatalog) {
     var moment = window.moment;
 
-    var lang = gettextCatalog.currentLanguage.toLowerCase().replace('_', '-');
+    var lang = gettextCatalog.currentLanguage.toLowerCase().replace('_', '-').replace('-debug', '');
     moment.lang(lang);
 
     return moment;

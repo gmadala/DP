@@ -114,16 +114,13 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
+#: app/views/checkout.html
 #: app/views/dashboard.html
+#: app/views/payments.html
 msgid "Account Fee"
 msgid_plural "Account Fees"
 msgstr[0] ""
 msgstr[1] ""
-
-#: app/views/checkout.html
-#: app/views/payments.html
-msgid "Account Fees"
-msgstr ""
 
 #: app/scripts/directives/navBar/navBar.html
 msgid "Account Management"
@@ -158,9 +155,14 @@ msgstr ""
 msgid "Additional Addresses"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Additional Principal"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Additional Principal Payment"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -190,13 +192,6 @@ msgstr ""
 
 #: app/views/receipts.html
 msgid "Amount Paid"
-msgstr ""
-
-#: app/views/payments.html
-msgid ""
-"Amounts shown are valid through 8pm EST\n"
-"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
-"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
 msgstr ""
 
 #: app/views/payments.html
@@ -288,6 +283,7 @@ msgstr ""
 msgid "Available Unapplied Funds"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Average"
 msgstr ""
@@ -417,6 +413,7 @@ msgid "By Stock #, VIN, or Description"
 msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "CPP"
 msgstr ""
@@ -435,6 +432,7 @@ msgstr ""
 
 #: app/views/account_management.html
 #: app/views/auction.settings.html
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/profileSettings.html
 msgid "Cancel Changes"
 msgstr ""
@@ -493,6 +491,7 @@ msgstr ""
 msgid "Claim Form (Word Doc)"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Clean"
 msgstr ""
@@ -552,6 +551,10 @@ msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
 msgid "Confirm"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Confirm Changes"
 msgstr ""
 
 #: app/views/modals/floorCarConfirm.html
@@ -631,6 +634,10 @@ msgstr ""
 
 #: app/views/scheduledpayments.html
 msgid "Curtailment"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Curtailment Payment"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
@@ -720,6 +727,7 @@ msgstr ""
 #: app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html
 #: app/views/modals/confirmTitleRequest.html
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
 #: app/views/scheduledpayments.html
@@ -785,9 +793,7 @@ msgstr ""
 #: app/scripts/controllers/payments.js
 #: app/views/dashboard.html
 msgid "Due Today"
-msgid_plural "Due Today"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
@@ -876,6 +882,7 @@ msgstr ""
 msgid "Espa&ntilde;ol"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Excellent"
 msgstr ""
@@ -900,10 +907,12 @@ msgstr ""
 msgid "Extended Term"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Extra Clean"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Fair"
 msgstr ""
@@ -936,6 +945,7 @@ msgstr ""
 msgid "Fee Type"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Fee(s)"
 msgstr ""
@@ -1100,6 +1110,7 @@ msgstr ""
 msgid "Go Home"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Good"
 msgstr ""
@@ -1163,6 +1174,7 @@ msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Interest"
 msgstr ""
@@ -1173,6 +1185,10 @@ msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
 msgid "Interest, Fees & CPP"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Interest-Only Payment"
 msgstr ""
 
 #: app/views/vehicledetails.html
@@ -1238,10 +1254,15 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Lookup Values"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 msgid "Lot Number"
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "MMR Values"
 msgstr ""
@@ -1252,6 +1273,7 @@ msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Make"
 msgstr ""
@@ -1270,13 +1292,19 @@ msgstr ""
 msgid "Manage your business with NextGear Capital on the go."
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Manual Lookup"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
+#: app/views/valuelookup.html
 msgid "Mileage"
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Model"
 msgstr ""
@@ -1305,8 +1333,21 @@ msgstr ""
 msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "NextGear Book"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "NextGear Book &amp; MMR"
+msgstr ""
+
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "NextGear Book Values"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "NextGear Book or MMR"
 msgstr ""
 
 #: app/views/analytics.html
@@ -1428,9 +1469,7 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "Overdue"
-msgid_plural "Overdue"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 #: app/404.html
 msgid "Page Not Found :("
@@ -1484,6 +1523,7 @@ msgstr ""
 msgid "Payment Amount"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Breakdown"
 msgstr ""
@@ -1519,8 +1559,13 @@ msgstr ""
 msgid "Payment Method"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/vehicledetails.html
 msgid "Payment Options"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payment Options & Breakdown"
 msgstr ""
 
 #: app/views/vehicledetails.html
@@ -1549,6 +1594,7 @@ msgid_plural "Payments This {{ viewMode | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Total"
 msgstr ""
@@ -1587,6 +1633,10 @@ msgstr ""
 msgid "Payoff Now"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payoff this vehicle"
+msgstr ""
+
 #: app/scripts/models/dashboard.js
 msgid "Payoffs Due"
 msgstr ""
@@ -1597,6 +1647,10 @@ msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Payout Amount must be $0.01 to {{ funds.available | currency }}"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
 msgstr ""
 
 #: app/scripts/controllers/floorplan.js
@@ -1696,6 +1750,7 @@ msgid "Please enter a User Name."
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+#: app/views/valuelookup.html
 msgid "Please enter a VIN."
 msgstr ""
 
@@ -1736,6 +1791,7 @@ msgid "Please enter a name, and city or state, to search."
 msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
+#: app/views/modals/paymentOptionsBreakdown.html
 msgid "Please enter a numeric value with no more than 2 decimal places."
 msgstr ""
 
@@ -1749,6 +1805,7 @@ msgstr ""
 
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
+#: app/views/valuelookup.html
 msgid "Please enter a positive integer value with no decimals."
 msgstr ""
 
@@ -1796,6 +1853,7 @@ msgid "Please enter a value less than $1,000,000,000,000."
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
+#: app/views/valuelookup.html
 msgid "Please enter a value less than 1,000,000 miles."
 msgstr ""
 
@@ -1850,6 +1908,7 @@ msgstr ""
 
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
+#: app/views/valuelookup.html
 msgid "Please enter the Mileage."
 msgstr ""
 
@@ -1925,6 +1984,18 @@ msgstr ""
 msgid "Please select a Line of Credit."
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Please select a Make."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Model."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Style."
+msgstr ""
+
 #: app/views/auction.reports.html
 #: app/views/reports.html
 msgid "Please select a Valid Date."
@@ -1936,6 +2007,10 @@ msgstr ""
 
 #: app/views/reports.html
 msgid "Please select a Valid Start Date."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Please select a Year."
 msgstr ""
 
 #: app/views/checkout.html
@@ -1986,6 +2061,7 @@ msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Principal"
 msgstr ""
@@ -2179,6 +2255,10 @@ msgstr ""
 msgid "Reserve Funds"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "Reset Values"
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.js
 msgid "Resources"
 msgstr ""
@@ -2191,6 +2271,7 @@ msgstr ""
 msgid "Review the following and submit your title release requests."
 msgstr ""
 
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Rough"
 msgstr ""
@@ -2308,6 +2389,10 @@ msgstr ""
 msgid "Select a date from the picker below"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Select a payment from the options below"
+msgstr ""
+
 #: app/views/modals/scheduleCheckout.html
 msgid "Select the Schedule Date"
 msgstr ""
@@ -2420,7 +2505,7 @@ msgid "Specific Stock #'s"
 msgstr ""
 
 #: app/views/analytics.html
-msgid "Stale & Aging Vehicles"
+msgid "Stale and Aging Vehicles"
 msgstr ""
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
@@ -2482,6 +2567,7 @@ msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Style"
 msgstr ""
@@ -2542,6 +2628,10 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "The title(s) will be sent to the following address: <strong>{{addresses[0] | address}}</strong>"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "There are multiple vehicle styles for this VIN. Please select the appropriate style below."
 msgstr ""
 
 #: app/views/payments.html
@@ -2828,8 +2918,17 @@ msgstr ""
 #: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "VIN"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "VIN Lookup"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "VIN should be 10 - 17 characters."
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
@@ -2846,6 +2945,14 @@ msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Value Lookup"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Values below will update based on successful VIN or Manual Lookup"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "Vehicle Description"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -2932,6 +3039,14 @@ msgstr ""
 msgid "Volume of Past NextGear Capital Floorplans"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "We are sorry, but we are unable to provide MMR Values at this time."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "We are sorry, but we are unable to provide NextGear Book Values at this time."
+msgstr ""
+
 #: app/views/login.recover.html
 msgid ""
 "We were unable to locate this email address. If you need assistance, please call\n"
@@ -3012,6 +3127,7 @@ msgstr ""
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/auction.dashboard.html
 #: app/views/modals/floorCarConfirm.html
+#: app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Year"
 msgstr ""
@@ -3196,6 +3312,10 @@ msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
 msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/views/valuelookup.html
+msgid "{{ results.mileage | numeral:'0,0' }} miles"
+msgstr ""
 
 #: app/views/receipts.html
 msgid "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</span> 20"

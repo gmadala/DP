@@ -140,12 +140,8 @@ msgstr ""
 "[nextBusinessDay.isTomorrow]}} ({{ nextBusinessDay.date | moment }})</span>"
 
 #: app/views/payments.html
-msgid ""
-"Any payments made will be scheduled to be applied on the next available "
-"business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
-msgstr ""
-"En raison de notre heure de tombée fixée à 20 h HNE, tout paiement effectué "
-"sera traité le prochain jour ouvrable, {{ nextBusinessDay.date | moment }}"
+msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
+msgstr "En raison de notre heure de tombée fixée à 20 h HNE, tout paiement effectué sera traité le prochain jour ouvrable, {{ nextBusinessDay.date | moment }}"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Approved/Not Paid"
@@ -1359,18 +1355,6 @@ msgid "Account Fee"
 msgid_plural "Account Fees"
 msgstr[0] "Frais de compte"
 msgstr[1] "Frais de compte"
-
-#: app/scripts/controllers/payments.js app/views/dashboard.html
-msgid "Due Today"
-msgid_plural "Due Today"
-msgstr[0] "Échéance aujourd'hui"
-msgstr[1] "Échéance aujourd'hui"
-
-#: app/views/dashboard.html
-msgid "Overdue"
-msgid_plural "Overdue"
-msgstr[0] "En retard"
-msgstr[1] "En retard"
 
 #. Payment This [Month, Year]
 #: app/views/dashboard.html

@@ -4,9 +4,9 @@
   <section class="span6 well settings-well">
     <h2 class="well-title"><span translate>User Profile</span>
       <div class="well-sub-title">
-        <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()">Edit Settings</button>
-        <button ng-show="profile.editable" class="btn-unstyle" ng-click="profile.save()">Save Settings</button>
-        <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()">Cancel Changes</button>
+        <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()" translate>Edit Settings</button>
+        <button ng-show="profile.editable" class="btn-unstyle" ng-click="profile.save()" translate>Save Settings</button>
+        <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()" translate>Cancel Changes</button>
       </div>
     </h2>
     <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
