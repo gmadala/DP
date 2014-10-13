@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric, Payments, gettextCatalog) {
+  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore) {
     var dealerLinks = {
       primary: [
         { name: gettextCatalog.getString('Dashboard'), href: '#', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK },
@@ -62,6 +62,19 @@ angular.module('nextgearWebApp')
     }, function (lang) {
       $scope.chatEnabled = lang === 'en';
     });
+
+    $scope.isCurrentLanguage = function (lang) {
+      return gettextCatalog.currentLanguage === lang;
+    };
+
+    $scope.updateLanguage = function (lang) {
+      // Set cookie for future use
+      $cookieStore.put('lang', lang);
+
+      // Force Refresh
+      //   We are forced to refresh due to some two-way binding bugs
+      window.location.reload();
+    };
 
     $scope.getQueueCount = function () {
       var queue = Payments.getPaymentQueue(),

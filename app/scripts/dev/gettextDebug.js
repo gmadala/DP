@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
         allowAnonymous: true
       });
   })
-  .run(function(gettextCatalog) {
+  .run(function(gettextCatalog, $cookieStore) {
     gettextCatalog.debug = true;
 
     var regex = /[?&]([^=#]+)=([^&#]*)/g,
@@ -21,8 +21,10 @@ angular.module('nextgearWebApp')
       params[match[1]] = match[2];
     }
 
-    if (params.lang) {
-      gettextCatalog.setCurrentLanguage(params.lang);
+    // lang=CODE only allowed in local mode
+    if (params.lang && $cookieStore.get('lang') !== params.lang) {
+      $cookieStore.put('lang', params.lang);
+      window.location.reload();
     }
 
     angular.element('body').prepend('\
