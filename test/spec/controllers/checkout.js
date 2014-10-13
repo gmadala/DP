@@ -33,18 +33,11 @@ describe('Controller: CheckoutCtrl', function () {
     loggedIn = true;
 
     spyOn(User, 'isLoggedIn').andCallFake(function() {
-      if(loggedIn) {
-        return $q.when(true);
-      } else {
-        return $q.when(false);
-      }
+      return $q.when(loggedIn);
     });
 
     spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
-      if(inBizHours) {
-        return $q.when(true);
-      }
-      return $q.when(false);
+      return $q.when(inBizHours);
     });
 
 
@@ -752,7 +745,7 @@ describe('Controller: CheckoutCtrl', function () {
 
       spyOn(Payments, 'getPaymentQueue').andReturn(mockQueue);
       // spyOn(Payments, 'fetchPossiblePaymentDates').andReturn($q.when(['2013-01-10']));
-      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn({});
+      spyOn(Payments, 'updatePaymentAmountOnDate').andReturn($q.when({}));
       run();
     }));
 
