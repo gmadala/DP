@@ -36,18 +36,30 @@ angular.module('nextgearWebApp')
     };
 
     $scope.isPast = function() {
-      var now = angular.element('.dash-calendar').fullCalendar('getDate');
 
-      if (now.getFullYear() > new Date().getFullYear() || now.getMonth() > new Date().getMonth()) {
+      var currentCalendarDate = angular.element('.dash-calendar').fullCalendar('getDate');
+      var today = new Date();
+
+      if (currentCalendarDate.getFullYear() > today.getFullYear()) {
         return false;
-      } else {
-        return true;
       }
+
+      if($scope.isWeekMode()) {
+        if(moment(currentCalendarDate).week() > moment(today).week()) {
+          return false;
+        }
+      } else {
+        if(currentCalendarDate.getMonth() > today.getMonth()) {
+          return false;
+        }
+      }
+
+      return true;
     };
 
     $scope.getCalendarTitle = function() {
-      var now = angular.element('.dash-calendar').fullCalendar('getDate');
-      return moment(now).format('MMMM YYYY');
+      var currentCalendarDate = angular.element('.dash-calendar').fullCalendar('getDate');
+      return moment(currentCalendarDate).format('MMMM YYYY');
     };
 
     $scope.onClickPrev = function() {
