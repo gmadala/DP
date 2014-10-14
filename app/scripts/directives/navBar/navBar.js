@@ -14,7 +14,6 @@ angular.module('nextgearWebApp')
       primary: [
         { name: gettextCatalog.getString('Dashboard'), href: '#', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK },
         { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', metric: metric.CLICK_PAYMENTS_LINK },
-        { name: gettextCatalog.getString('Scheduled Payments'), href: '#/scheduledPayments', activeWhen: 'scheduledPayments', metric: metric.CLICK_SCHEDULED_PAYMENTS_LINK },
         { name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', metric: metric.CLICK_FLOORPLAN_LINK },
         { name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts', metric: metric.CLICK_RECEIPTS_LINK },
         { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK },
