@@ -24,12 +24,13 @@ describe('Controller: FloorCarCtrl', function () {
     location = $location;
     blackbook = Blackbook;
 
+    var statics = {}; // Constant object so digest limit isn't reached
     userMock = {
       isDealer: function() {
         return type = 'Dealer';
       },
       getStatics: function() {
-        return 123; // magic number to compare against
+        return statics;
       },
       canPayBuyer: function() {
         return true;

@@ -36,10 +36,10 @@ describe('Service: cartItem', function () {
       FloorplanId: 'id1',
       UnitDescription: 'a description',
       StockNumber: 'stock1',
-      AmountDue: 550,
+      AmountDue: 750,
       PrincipalDue: 350,
       FeesPaymentTotal: 100,
-      InterestPaymentTotal: 50,
+      InterestPaymentTotal: 250,
       CollateralProtectionPaymentTotal: 50,
       CurrentPayoff: 5000,
       PrincipalPayoff: 4000,
@@ -116,7 +116,7 @@ describe('Service: cartItem', function () {
     var result;
 
     beforeEach(function() {
-      result = CartItem.fromPayment(mockPayment, false);
+      result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
     });
 
     it('should add the necessary properties to the object', function() {
@@ -126,16 +126,17 @@ describe('Service: cartItem', function () {
       expect(result.stockNum).toBe('stock1');
 
       expect(result.isFee).toBe(false);
+      expect(result.paymentOption).toBe(PaymentOptions.TYPE_PAYMENT)
 
       expect(result.dueDate).toBe('2014-08-01');
-      expect(result.scheduled).toBe(false);
+      expect(result.scheduleDate).toBe(null);
       expect(result.overrideAddress).toBe(null);
 
       expect(typeof result.payment).toBe('object');
-      expect(result.payment.amount).toBe(550);
+      expect(result.payment.amount).toBe(750);
       expect(result.payment.principal).toBe(350);
       expect(result.payment.fees).toBe(100);
-      expect(result.payment.interest).toBe(50);
+      expect(result.payment.interest).toBe(250);
       expect(result.payment.cpp).toBe(50);
       expect(result.payment.additionalPrincipal).toBeDefined();
 
@@ -145,6 +146,17 @@ describe('Service: cartItem', function () {
       expect(result.payoff.fees).toBe(500);
       expect(result.payoff.interest).toBe(250);
       expect(result.payoff.cpp).toBe(250);
+
+      expect(typeof result.interest).toBe('object');
+      expect(result.interest.amount).toBe(250);
+      expect(result.interest.principal).toBe(0);
+      expect(result.interest.fees).toBe(0);
+      expect(result.interest.interest).toBe(250);
+      expect(result.interest.cpp).toBe(0);
+
+      expect(result.scheduledValues.payment).toBe(null);
+      expect(result.scheduledValues.payoff).toBe(null);
+      expect(result.scheduledValues.interest).toBe(null);
     });
 
     describe('isPayoff function', function() {
@@ -164,32 +176,61 @@ describe('Service: cartItem', function () {
     });
 
     describe('getCheckoutAmount function', function() {
-      it('should return the payoff.amount value for a payoff', function() {
+      it('should return the sum of principal, fees, interest, and cpp values for the selected payment option if none is provided', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
 
         expect(result.getCheckoutAmount()).toBe(5000);
       });
 
-      it('should return the interest amount value for an interest-only payment', function() {
-        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_INTEREST);
+      it('should return the sum of principal, fees, interest, and cpp values for a given payment type', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
 
-        expect(result.getCheckoutAmount()).toBe(50);
-      });
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(750);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(5000);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(250);
+      })
 
-      it('should return payment.amount + payment.additionalPrincipal for a curtailment payment (with no params)', function() {
+      it('should return the sum of principal, fees, interest, and cpp values + payment.additionalPrincipal if there is extra principal', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
 
-        expect(result.getCheckoutAmount()).toBe(550);
+        expect(result.getCheckoutAmount()).toBe(750);
         result.payment.additionalPrincipal = 50;
-        expect(result.getCheckoutAmount()).toBe(600);
+        expect(result.getCheckoutAmount()).toBe(800);
       });
 
-      it('should return only payment.amount (no principal) for a curtailment payment (with noAdditionalPrincipal flag set to true)', function() {
-        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
+      it('should return undefined if there was no option sent in and the cart item has no valid payment option set', function() {
+        var result = CartItem.fromPayment(mockPayment, 'foo');
 
-        result.payment.additionalPrincipal = 50;
-        expect(result.getCheckoutAmount()).toBe(600);
-        expect(result.getCheckoutAmount(true)).toBe(550);
+        expect(result.getCheckoutAmount()).not.toBeDefined();
+      })
+
+      it('should use the scheduledValues object for the given option if the payment is set to be scheduled', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
+        result.scheduleDate = "2014-01-02";
+
+        result.scheduledValues.payment = {
+          principal: 10,
+          interest: 5,
+          fees: 5,
+          cpp: 0
+        };
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(20);
+
+        result.scheduledValues.payoff = {
+          principal: 100,
+          interest: 50,
+          fees: 50,
+          cpp: 0
+        };
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(200);
+
+        result.scheduledValues.interest = {
+          principal: 0,
+          interest: 50,
+          fees: 0,
+          cpp: 0
+        };
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(50);
       });
     });
 
@@ -208,6 +249,35 @@ describe('Service: cartItem', function () {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
         result.payment.additionalPrincipal = 45;
         expect(result.getExtraPrincipal()).toBe(45);
+      });
+    });
+
+    describe('setExtraPrincipal function', function() {
+      beforeEach(function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
+      });
+
+      it('should set the additional principal value on the cart item payment object', function() {
+        expect(result.payment.additionalPrincipal).toBe(0);
+        result.setExtraPrincipal(45);
+        expect(result.payment.additionalPrincipal).toBe(45);
+      });
+
+      it('should set the additional principal value of the cart item payment object and the scheduledValues object if the item is to be scheduled', function() {
+        result.scheduleDate = '2014-10-03';
+        result.scheduledValues.payment = {
+          principal: 10,
+          interest: 5,
+          fees: 5,
+          cpp: 0,
+          additionalPrincipal: 0
+        };
+
+        expect(result.payment.additionalPrincipal).toBe(0);
+        expect(result.scheduledValues.payment.additionalPrincipal).toBe(0);
+        result.setExtraPrincipal(22);
+        expect(result.payment.additionalPrincipal).toBe(22);
+        expect(result.scheduledValues.payment.additionalPrincipal).toBe(22);
       });
     });
 
@@ -244,50 +314,78 @@ describe('Service: cartItem', function () {
           IsPayoff: false,
           IsInterestOnly: true,
           AdditionalPrincipalAmount: 0,
-          QuotedInterestAmount: 50
+          QuotedInterestAmount: 250
         });
       });
     });
 
     describe('updateAmountsOnDate function', function() {
       var amts = {
-        PaymentAmount: 100,
-        PrincipalAmount: 40,
-        FeeAmount: 20,
-        InterestAmount: 20,
-        CollateralProtectionAmount: 20
-      };
+          PaymentAmount: 100,
+          PrincipalAmount: 4000,
+          FeeAmount: 20,
+          InterestAmount: 30,
+          CollateralProtectionAmount: 10
+        },
+        myDate = new Date();
 
-      it('should set the payoff amounts to the given amounts if item is a payoff', function() {
-        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
-        result.updateAmountsOnDate(amts);
-        expect(result.payoff.amount).toBe(100);
-        expect(result.payoff.principal).toBe(40);
-        expect(result.payoff.fees).toBe(20);
-        expect(result.payoff.interest).toBe(20);
-        expect(result.payoff.cpp).toBe(20);
-      });
-
-      it('should set the payment amounts to the given amounts if item is a curtailment payment', function() {
+      it('should update the scheduleDate', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
-        result.updateAmountsOnDate(amts);
-        expect(result.payment.amount).toBe(100);
-        expect(result.payment.principal).toBe(40);
-        expect(result.payment.fees).toBe(20);
-        expect(result.payment.interest).toBe(20);
-        expect(result.payment.cpp).toBe(20);
+        result.scheduleDate = '2013-10-03';
+
+        result.updateAmountsOnDate(amts, myDate);
+        expect(result.scheduleDate).toBe(myDate);
       });
 
-      it('should set the interest-only amounts to the given amounts if item is an interest-only payment', function() {
-        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_INTEREST);
-        result.updateAmountsOnDate(amts);
-        expect(result.interest.amount).toBe(20);
-        expect(result.interest.principal).toBe(0);
-        expect(result.interest.fees).toBe(0);
-        expect(result.interest.interest).toBe(20);
-        expect(result.interest.cpp).toBe(0);
+      it('should update all 3 scheduledValues objects with the appropriate values', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
+        expect(result.scheduledValues.payment).toBe(null);
+        expect(result.scheduledValues.payoff).toBe(null);
+        expect(result.scheduledValues.interest).toBe(null);
+
+        result.updateAmountsOnDate(amts, '2014-10-04');
+
+        expect(result.scheduledValues.payoff.principal).toBe(4000);
+        expect(result.scheduledValues.payoff.fees).toBe(20);
+        expect(result.scheduledValues.payoff.interest).toBe(30);
+        expect(result.scheduledValues.payoff.cpp).toBe(10);
+
+        expect(result.scheduledValues.payment.principal).toBe(350);
+        expect(result.scheduledValues.payment.fees).toBe(20);
+        expect(result.scheduledValues.payment.interest).toBe(30);
+        expect(result.scheduledValues.payment.cpp).toBe(10);
+        expect(result.scheduledValues.payment.additionalPrincipal).toBe(result.payment.additionalPrincipal);
+
+        expect(result.scheduledValues.interest.principal).toBe(0);
+        expect(result.scheduledValues.interest.fees).toBe(0);
+        expect(result.scheduledValues.interest.interest).toBe(30);
+        expect(result.scheduledValues.interest.cpp).toBe(0);
+
       });
-    })
+    });
+
+    describe('getBreakdown function', function() {
+      it('should return the breakdown of principal/fees/interest/cpp for the given payment type', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
+
+        expect(result.getBreakdown(PaymentOptions.TYPE_PAYMENT)).toBe(result.payment);
+        expect(result.getBreakdown(PaymentOptions.TYPE_PAYOFF)).toBe(result.payoff);
+        expect(result.getBreakdown(PaymentOptions.TYPE_INTEREST)).toBe(result.interest);
+      });
+
+      it('should default to use the cart item\'s own paymentOption if the given option is invalid', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
+        expect(result.getBreakdown('fooOption')).toBe(result.payoff);
+      });
+
+      it('should return the scheduledValues breakdown opjects for the given payment type if the cartItem is scheduled', function() {
+        var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
+        result.scheduleDate = '2014-10-10';
+        expect(result.getBreakdown(PaymentOptions.TYPE_PAYMENT)).toBe(result.scheduledValues.payment);
+        expect(result.getBreakdown(PaymentOptions.TYPE_PAYOFF)).toBe(result.scheduledValues.payoff);
+        expect(result.getBreakdown(PaymentOptions.TYPE_INTEREST)).toBe(result.scheduledValues.interest);
+      });
+    });
   });
 
   describe('scheduled payment scenario', function() {

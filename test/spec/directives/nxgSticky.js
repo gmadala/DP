@@ -18,7 +18,7 @@ describe('Directive: nxgSticky', function () {
       top: 150
     };
 
-    elem = angular.element('<div nxg-sticky><h4>Some Title</h4><div class="well-out"><p>Some dummy content.</p></div></div>');
+    elem = angular.element('<div nxg-sticky header="h4" scroll=".well-out"><h4>Some Title</h4><div class="well-out"><p>Some dummy content.</p></div></div>');
     scrollElem = elem.find('.well-out');
     // Initialize style and positioning
     elem.css('height', '300px');

@@ -396,7 +396,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
   it('should have a close function that closes the modal without updating payment', function () {
     spyOn(dialog, 'close');
     scope.close();
-    expect(payment.scheduleDate).not.toBeDefined();
+    expect(payment.scheduleDate).toBeFalsy();
     expect(dialog.close).toHaveBeenCalled();
   });
 

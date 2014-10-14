@@ -154,8 +154,10 @@
     </div>
   </section>
 
-  <form class="span3 well sticky" name="paymentForm" novalidate nxg-sticky>
+  <form class="span3 well sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer">
     <h2 class="well-title" translate>Payment Summary</h2>
+
+    <section class="nxg-sticky-scroll">
       <section class="well-item well-dark">
         <p translate>Please review the following and submit your payments below.</p>
         <button type="button"
@@ -249,8 +251,10 @@
           <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
         </div>
       </section>
+    </section>
 
-      <section class="well-item well-dark bordered">
+    <section class="well-footer">
+      <section class="well-item well-dark">
         <!-- Bank Account -->
         <label for="bankAccount" translate>Bank Account</label>
         <div class="style-select">
@@ -272,11 +276,12 @@
 
       </section>
 
-    <button class="btn-cta cta-primary cta-full"
-            ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
-            ng-click="submit()"
-            nxg-track="{{metric.CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON}}">
-      <span translate>Submit Payments</span> <span nxg-icon="icon-cart"></span>
-    </button>
+      <button class="btn-cta cta-primary cta-full"
+              ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+              ng-click="submit()"
+              nxg-track="{{metric.CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON}}">
+        <span translate>Submit Payments</span> <span nxg-icon="icon-cart"></span>
+      </button>
+    </section>
   </form>
 </section>

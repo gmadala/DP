@@ -45,7 +45,7 @@ angular.module('nextgearWebApp')
       if(isLoggedIn) {
         User.infoPromise().then(function(info) {
           if(info.DisplayTitleReleaseProgram) {
-            dealerLinks.primary.splice(4, 0, {
+            dealerLinks.primary.splice(3, 0, {
               name: gettextCatalog.getString('Title Releases'),
               href: '#/titlereleases',
               activeWhen: 'titlereleases',

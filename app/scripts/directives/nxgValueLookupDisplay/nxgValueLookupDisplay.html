@@ -1,0 +1,6 @@
+<h3>
+  <span ng-show="dataAvailable()">
+    {{ (( value || 'empty') | currency) || 'n/a' }}
+  </span>
+  <span ng-hide="dataAvailable()">$</span>
+</h3>

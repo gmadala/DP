@@ -1,14 +1,15 @@
 <h2 class="well-title" translate>Payment Summary</h2>
 
-<div class="well-item">
-  <p translate>Make payments today or schedule your payments when you checkout.</p>
-  <p ng-show="paymentQueue.isEmpty()">
-    <br/>
-    <span translate>You have not selected a payment.</span> {{ emptyMessage }}</p>
-</div>
 
-<div ng-hide="paymentQueue.isEmpty()">
-  <ul class="queue-list">
+<div class="nxg-sticky-scroll">
+  <div class="well-item">
+    <p translate>Make payments today or schedule your payments when you checkout.</p>
+    <p ng-show="paymentQueue.isEmpty()">
+      <br/>
+      <span translate>You have not selected a payment.</span> {{ emptyMessage }}</p>
+  </div>
+
+  <ul ng-hide="paymentQueue.isEmpty()" class="queue-list">
     <li class="queue-item bordered" ng-repeat="fee in paymentQueue.fees">
       <button class="btn-unstyle right"
               ng-click="removeFee(fee)"
@@ -44,7 +45,7 @@
       <div class="item-summary">
         <div class="row-fluid">
           <h6 class="span6 caps">{{ getPaymentType(payment) | capitalize }}: </h6>
-          <h6 class="span6 numeric">{{ payment.getCheckoutAmount(true) | currency }}
+          <h6 class="span6 numeric">{{ payment.getCheckoutAmount() - payment.getExtraPrincipal() | currency }}
           </h6>
         </div>
         <div class="row-fluid" ng-show="payment.getExtraPrincipal() > 0">
@@ -57,16 +58,15 @@
   </ul>
 </div>
 
-<div class="well-item row-fluid">
-  <div class="span4">
-    <h4 class="subtotal"><span translate>Subtotal</span>:</h4>
-  </div>
-  <div class="span8">
-    <h3 class="numeric"><strong>{{ getSubtotal() | currency }}</strong></h3>
-  </div>
-</div>
-
 <div class="well-footer">
+  <div class="well-item row-fluid">
+    <div class="span4">
+      <h4 class="subtotal"><span translate>Subtotal</span>:</h4>
+    </div>
+    <div class="span8">
+      <h3 class="numeric"><strong>{{ getSubtotal() | currency }}</strong></h3>
+    </div>
+  </div>
   <button class="btn-cta cta-primary cta-full"
           ng-disabled="paymentQueue.isEmpty()"
           ng-click="navigate('checkout')"

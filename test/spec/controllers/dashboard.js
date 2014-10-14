@@ -23,9 +23,9 @@ describe('Controller: DashboardCtrl', function () {
       "AccountFeeAmount": 400,
       "LinesOfCredit": [
         {
-          "CreditTypeName": "Heavy Trucks( temp )",
+          "CreditTypeName": "Heavy Trucks ( temp )",
           "LineOfCreditId": "59750fc5-c0f6-4170-8dec-8d16834ab484",
-          "LineOfCreditAmount": 20000,
+          "LineOfCreditAmount": 21000,
           "TempLineOfCreditAmount": 1000,
           "TempLineOfCreditExpiration": "2014-09-16T23:59:00",
           "AvailableCreditAmount": 20550,

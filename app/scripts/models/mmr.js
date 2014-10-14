@@ -7,7 +7,7 @@ angular.module('nextgearWebApp')
     // (Excellent, Good, Average, Fair)
     var removeNulls = function(results) {
       return _.filter(results, function(r) {
-        return !!r.ExcellentWholesale && !!r.GoodWholesale && !!r.AverageWholesale && !!r.FairWholesale;
+        return !!r.ExcellentWholesale || !!r.GoodWholesale || !!r.AverageWholesale || !!r.FairWholesale;
       });
     };
 
@@ -79,10 +79,12 @@ angular.module('nextgearWebApp')
         };
 
         return api.request('GET', '/mmr/getVehicleValueByOptions', requestObj).then(function(vehicles) {
-          if(!vehicles || vehicles.length === 0) {
+          var res = removeNulls(vehicles);
+
+          if(!vehicles || res.length === 0) {
             return $q.reject(false);
           }
-          return removeNulls(vehicles);
+          return res;
         });
       },
       lookupByVin: function(vin, mileage) {
@@ -91,11 +93,13 @@ angular.module('nextgearWebApp')
         }
 
         return api.request('GET', '/mmr/getVehicleValueByVin/' + vin + (mileage ? '/' + mileage : '')).then(function(results) {
+          var res = removeNulls(results);
+
           // if there was a failure
-          if(!results || results.length === 0) {
+          if(!results || res.length === 0) {
             return $q.reject(false);
           } else {
-            return removeNulls(results);
+            return res;
           }
         });
       }

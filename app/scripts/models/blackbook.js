@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
     // (ExtraClean, Clean, Average, Rough)
     var removeNulls = function(results) {
       return _.filter(results, function(r) {
-        return !!r.ExtraCleanValue && !!r.CleanValue && !!r.AverageValue && !!r.RoughValue;
+        return !!r.ExtraCleanValue || !!r.CleanValue || !!r.AverageValue || !!r.RoughValue;
       });
     };
 
@@ -55,7 +55,7 @@ angular.module('nextgearWebApp')
           return formatResults(styles);
         });
       },
-      lookupByOptions: function(make, model, year, style, mileage) {
+      lookupByOptions: function(make, model, year, style, mileage, isValueLookup) {
         if(!make) {
           throw new Error('Missing make');
         }
@@ -81,10 +81,12 @@ angular.module('nextgearWebApp')
         };
 
         return api.request('POST', '/analytics/v1_2/blackbook/vehicles', requestObj).then(function(vehicles) {
-          if(!vehicles || vehicles.length === 0) {
+          var res = removeNulls(vehicles);
+
+          if(!vehicles || vehicles.length === 0 || isValueLookup && res.length === 0) {
             return $q.reject(false);
           }
-          return removeNulls(vehicles);
+          return isValueLookup ? res : vehicles;
         });
       },
       /**
@@ -102,8 +104,10 @@ angular.module('nextgearWebApp')
         }
 
         return api.request('GET', '/analytics/v1_2/blackbook/' + vin + (mileage ? '/' + mileage : '')).then(function(results) {
+          var res = removeNulls(results);
+
           // if there was a failure
-          if(!results || results.length === 0) {
+          if(!results || results.length === 0 || (isValueLookup && res.length === 0) ) {
             return $q.reject(false);
           }
 
@@ -111,7 +115,7 @@ angular.module('nextgearWebApp')
            * with value info (ExtraClean, Clean, etc.). Otherwise, we want all
            * matches.
            */
-          return isValueLookup ? removeNulls(results) : results;
+          return isValueLookup ? res : results;
         });
       }
     };

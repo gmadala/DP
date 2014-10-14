@@ -1,11 +1,17 @@
-NextGear Capital v4.0.6
+NextGear Capital v4.0.9
 =================================
 
 Fixes included in this release:
 
+VO-1754	Auto-schedule payments for valid business day if logged in during off hours
 VO-2472	MMR - Add value lookup to web
-VO-2992 Update brand colors
-VO-3098 Selecting vehicle link from dashboard returns system error
-VO-3108 Checkout - Change Payment Date popup doesn't include Additional Principal
-VO-3109 Payment Options and Breakdown - inaccurate Payment Total
-VO-3122 Title Release Program does not show up on first page load.
+VO-2884	NGC Test Web (Title Releases): No info message/text is getting displayed on the page.
+VO-3059	Hide UserVoice tab for non-English locales
+VO-3144	Calendar default size is cutting off the Friday column
+VO-3152	Inventory Location name does not appear as a filter name
+VO-3163	Value Lookup needs an 'OR'
+VO-3166	Value Lookup - screen requesting that the dealer select from the multiple vehicle styles but there is only one vehicle style.
+VO-3229	Web (Value Lookup): Error message “Unable to communicate with NextGear” is getting popped up when user looks up values with invalid VIN.
+VO-3257	"Clear Search" on Floorplan search causes "no results" message to display.
+VO-3262	Web (Payments): User is unable to submit payments.
+VO-3265	Web(Payments – Change Payment Date): Application hangs after user clicks on “Confirm” button.
