@@ -108,19 +108,22 @@
     </div>
   </section>
 
-  <section class="span3 well stick" nxg-sticky>
-    <h2 class="well-title">Export Receipts</h2>
-    <div class="well-item">
-      <p>You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below.
-      </p>
-    </div>
+  <section class="span3 well stick" nxg-sticky header=".nxg-sticky-header" scroll=".queue-list" footer=".well-footer">
+    <div class="nxg-sticky-header">
+      <h2 class="well-title">Export Receipts</h2>
+      <div class="well-item">
+        <p>You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below.
+        </p>
+      </div>
 
-    <div class="well-item well-light bordered">
-      <div class="alt-lockup">
-        <p class="lockup-minor">Receipts Selected</p>
-        <h3 class="lockup-major">{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
+      <div class="well-item well-light bordered">
+        <div class="alt-lockup">
+          <p class="lockup-minor">Receipts Selected</p>
+          <h3 class="lockup-major">{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
+        </div>
       </div>
     </div>
+
 
     <div ng-show="selectedReceipts.length > 0">
       <ul class="queue-list reversed">

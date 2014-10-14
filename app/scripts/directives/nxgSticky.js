@@ -4,11 +4,11 @@ angular.module('nextgearWebApp')
   .directive('nxgSticky', function () {
     return {
       restrict: 'A',
-      controller: function($scope, $element, $attrs, $window, $document) {
+      controller: function($scope, $element, $attrs, $window, $document, $timeout) {
         var win = angular.element($window),
             doc = angular.element($document),
             el = angular.element($element), // our element that needs to move
-            scrollEl = el.find('.well-out'), // the element that will scroll
+            scrollEl = el.find($attrs.scroll || '.nxg-sticky-scroll'), // the element that will scroll
             offset = el.offset(), // element's initial offset from window top
             topSpacing = 15, // amount of space we want at top of element
             bottomSpacing = 15, // amount of space we want at bottom of element
@@ -18,7 +18,15 @@ angular.module('nextgearWebApp')
             heightOfElementFooter = 0; // Subtotal box height
 
         if($attrs.footer){
-          heightOfElementFooter = angular.element($attrs.footer)[0].offsetHeight;
+          $timeout(function() {
+            heightOfElementFooter = angular.element($attrs.footer)[0].offsetHeight;
+          });
+        }
+
+        if($attrs.header){
+          $timeout(function() {
+            heightOfElementHeader = angular.element($attrs.header)[0].offsetHeight;
+          });
         }
 
         $scope.lock = false;
@@ -44,6 +52,8 @@ angular.module('nextgearWebApp')
         };
 
         $scope.getScrollElHeight = function() {
+          // This is bad - calling a DOM method inside a $watch method.
+          // Should be refactored
           return scrollEl.outerHeight();
         };
 
