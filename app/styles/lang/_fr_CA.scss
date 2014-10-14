@@ -39,4 +39,26 @@ body.lang_fr_CA {
 
     }
   }
+
+  /* Analytics */
+  #AnalyticsPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+      }
+
+      .aging-vehicles .list-table {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+    }
+
+    .movers-container {
+      .btn-toggle {
+        width: 400px;
+      }
+    }
+  }
 }

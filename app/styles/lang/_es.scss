@@ -26,4 +26,22 @@ body.lang_es {
 
     }
   }
+
+
+  /* Analytics */
+  #AnalyticsPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+      }
+
+    }
+
+    .movers-container {
+      .btn-toggle {
+        width: 400px;
+      }
+    }
+  }
 }

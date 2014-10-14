@@ -74,5 +74,15 @@
 
 .top-auctions-container, .movers-container {
   position: relative;
-  height: 500px;
+  height: 510px;
+}
+
+.business-summary {
+  .list-table {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .counter {
+    margin-left: 0;
+  }
 }
