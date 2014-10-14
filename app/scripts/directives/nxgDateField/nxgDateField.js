@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgDateField', function ($parse, $strapConfig, moment, $timeout) {
+  .directive('nxgDateField', function ($parse, $strapConfig, moment, $timeout, gettextCatalog) {
     return {
       templateUrl: 'scripts/directives/nxgDateField/nxgDateField.html',
       replace: true,
@@ -31,6 +31,20 @@ angular.module('nextgearWebApp')
         } else if (attrs.dateAllow === 'future') {
           attrs.beforeShowDay = 'notPastDates(date)';
           element.attr('before-show-day', 'notPastDates(date)');
+        }
+
+        // Automatically load in current language
+        var currentLanguage = gettextCatalog.currentLanguage;
+        if (currentLanguage !== 'en') {
+          var dateLang = moment().lang();
+          $strapConfig.datepicker.language = currentLanguage;
+          $.fn.datepicker.dates[currentLanguage] = {
+            days: dateLang._weekdays,
+            daysMin: dateLang._weekdaysMin,
+            daysShort: dateLang._weekdaysMin,
+            months: dateLang._months,
+            monthsShort: dateLang._monthsShort
+          };
         }
 
         // link function

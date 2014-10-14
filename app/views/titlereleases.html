@@ -36,7 +36,7 @@
            nxg-infinite-scroll="fetchNextResults()"
            nxg-infinite-scroll-disabled="data.loading"
            nxg-infinite-scroll-show-indicator="data.loading">
-        <table class="table table-striped table-primary">
+        <table class="table table-striped table-primary requests-grid">
           <thead>
             <th class="sortable"
                 ng-click="sortBy('FlooringDate')"
@@ -82,7 +82,7 @@
             <td class="actions" ng-switch="item.TitleReleaseProgramStatus">
               <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>Pay off this vehicle or return the title to remove from your limit.</h6>
               <div ng-switch-when="EligibleForRelease">
-                <button type="button" class="btn btn-icon" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{selected: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
+                <button type="button" class="btn btn-icon btn-title-request" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{selected: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
                   <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">
                     <!-- Force pluralization due to duplicate translations -->
                     <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span><span nxg-icon="icon-minus" class="icon-small"></span>
