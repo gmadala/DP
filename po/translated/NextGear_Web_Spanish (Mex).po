@@ -199,15 +199,6 @@ msgstr "Y {{ title.data.extraAddresses }} direcciones adicionales..."
 msgid "Answer"
 msgstr "Respuesta"
 
-#: app/views/payments.html
-msgid ""
-"Any payments made will be scheduled to be applied on the next available "
-"business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
-msgstr ""
-"Cualquier pago que se realice se programará para que se aplique al siguiente "
-"día hábil disponible, {{nextBusinessDay.date | moment }}, vence en nuestro "
-"corte de las 8 de la noche, hora estándar del este."
-
 #: app/views/receipts.html
 msgid "Applied"
 msgstr "Aplicado"

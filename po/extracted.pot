@@ -1040,6 +1040,10 @@ msgstr ""
 msgid "Floor Plan Value Estimates <span class=\"well-sub-title\">NextGear &amp; MMR Valuation</span>"
 msgstr ""
 
+#: app/views/dashboard.html
+msgid "Floor Plans"
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.js
 msgid "Floor a Vehicle"
 msgstr ""
@@ -1300,6 +1304,26 @@ msgstr ""
 #: app/views/floorcar.html
 #: app/views/valuelookup.html
 msgid "Mileage"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing make"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing mileage"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing model"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing style"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing year"
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
@@ -2997,10 +3021,6 @@ msgstr ""
 
 #: app/views/modals/floorCarConfirm.html
 msgid "View Dealer Funding Checklist (PDF)"
-msgstr ""
-
-#: app/views/dashboard.html
-msgid "View Floor Plans"
 msgstr ""
 
 #: app/views/scheduledpayments.html

@@ -170,6 +170,10 @@ msgstr ""
 msgid "Floor Plan Value Estimates <span class=\"well-sub-title\">NextGear &amp; MMR Valuation</span>"
 msgstr ""
 
+#: app/views/dashboard.html
+msgid "Floor Plans"
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.html
 msgid "Fran&ccedil;ais"
 msgstr ""
@@ -222,6 +226,10 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "Manual Lookup"
+msgstr ""
+
+#: app/scripts/models/mmr.js
+msgid "Missing mileage"
 msgstr ""
 
 #: app/views/valuelookup.html
@@ -512,10 +520,6 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "Values below will update based on successful VIN or Manual Lookup"
-msgstr ""
-
-#: app/views/dashboard.html
-msgid "View Floor Plans"
 msgstr ""
 
 #: app/views/valuelookup.html

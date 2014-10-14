@@ -198,14 +198,6 @@ msgstr "Et {{ title.data.extraAddresses }} adresses additionnelles..."
 msgid "Answer"
 msgstr "Réponse"
 
-#: app/views/payments.html
-msgid ""
-"Any payments made will be scheduled to be applied on the next available "
-"business day, {{ nextBusinessDay.date | moment }}, due to our 8pm EST cutoff."
-msgstr ""
-"En raison de notre heure de tombée fixée à 20 h HNE, tout paiement effectué "
-"sera traité le prochain jour ouvrable, {{ nextBusinessDay.date | moment }}"
-
 #: app/views/receipts.html
 msgid "Applied"
 msgstr "Alloués"
