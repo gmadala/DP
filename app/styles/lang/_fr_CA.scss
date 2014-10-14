@@ -1,0 +1,15 @@
+body.lang_fr_CA {
+
+  /* Dashboard */
+  @media (max-width: 1090px) {
+    .dash-well {
+      .well-title {
+        font-size: 18px;
+      }
+
+      .accordion-button {
+        width: 340px;
+      }
+    }
+  }
+}

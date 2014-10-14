@@ -375,6 +375,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     var lang = $cookieStore.get('lang');
     if (lang) {
       gettextCatalog.setCurrentLanguage(lang);
+      angular.element('body').addClass('lang_' + lang);
     }
 
   });
