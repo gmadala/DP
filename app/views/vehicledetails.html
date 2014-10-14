@@ -4,7 +4,7 @@
 <section class="row-fluid">
   <section class="span9">
     <!-- Flooring Information -->
-    <div class="well">
+    <div class="flooring-info well">
       <h2 class="well-title"><span translate>Flooring Information</span> <span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h2>
       <div class="row-fluid col-bordered">
         <div class="span5 first">
@@ -101,7 +101,7 @@
                 </div>
                 <div class="button-group">
                   <button type="button" class="btn-unstyle btn-link" ng-click="flooringInfo.cancelInventoryChanges()" translate>Cancel</button>
-                  <button type="submit" class="btn-cta cta-secondary" ng-click="flooringInfo.saveInventoryChanges()" translate>Save Changes</button>
+                  <button type="submit" class="btn-cta cta-secondary btn-save-changes" ng-click="flooringInfo.saveInventoryChanges()" translate>Save Changes</button>
                 </div>
               </div>
             </li>
@@ -406,7 +406,7 @@
           <h6 class="btn-text"><span translate>Payment</span>:</h6>
           <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
         </div>
-        <div class="btn-text-group">
+        <div class="btn-text-group payoff-group">
           <h6 class="btn-text"><span translate>Payoff</span>:</h6>
           <div class="btn-btn" nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
         </div>
