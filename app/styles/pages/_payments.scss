@@ -40,3 +40,17 @@
   font-weight: bold;
   color: $text;
 }
+
+#PaymentsPage {
+  .paired-media.future {
+    display: none;
+  }
+}
+
+#CheckoutPage {
+  .well.sticky .well-footer {
+    .style-select {
+      width: auto;
+    }
+  }
+}

@@ -72,4 +72,63 @@ body.lang_fr_CA {
     }
 
   }
+
+  /* Payments */
+  #PaymentsPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+
+        .well-sub-title, a {
+          font-size: 13px;
+          margin-top: 2px;
+        }
+        button {
+          font-size: 14px;
+          margin-top: 6px;
+        }
+      }
+
+    }
+
+    .well.sticky .well-footer {
+      .span4 {
+        width: 39%;
+      }
+      .span8 {
+        width: 58%;
+      }
+    }
+
+    .filter-options {
+      .span5 {
+        width: 120px;
+        margin-top: -14px;
+      }
+      .span7 {
+        width: 232px;
+      }
+    }
+
+    @media (min-width: 1120px) {
+      .filter-options {
+        .span5 {
+          width: 160px;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  /* Checkout */
+  #CheckoutPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+      }
+
+    }
+  }
 }
