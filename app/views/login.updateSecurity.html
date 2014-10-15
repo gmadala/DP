@@ -1,47 +1,46 @@
-<div class="container-line update-sec">
+<div class="container-line">
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="well span10 offset1">
-        <h4>Welcome</h4>
+        <h2 class="well-title">Welcome</h2>
 
-        <div class="well-out">
+        <div class="well-item">
           <h3>Welcome to NextGear!</h3>
-          <p>Since this is your first login to NextGear Capital, please set your security questions before you enter the site.</p>
+          <p class="paragraph">Since this is your first login to NextGear Capital, please set your security questions before you enter the site.</p>
 
-          <form class="form-horizontal" name="updateSecurity" ng-submit="submitForm()" novalidate>
+          <form class="form-block" name="updateSecurity" ng-submit="submitForm()" novalidate>
+            <div ng-repeat="question in questions">
 
-            <div class="sec-ques" ng-repeat="question in questions">
-
-              <div class="control-group">
-                <label class="control-label">Security Question #{{$index+1}}</label>
-                <div class="controls">
-                  <select
-                    id="{{question.name}}"
-                    ng-model="$parent.updateSecurity[question.name]"
-                    name="question.name"
-                    ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.name)"
-                    ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }"
-                    required >
-                    <option value="">-- Select a Question --</option>
-                  </select>
+              <div class="row-fluid">
+                <label class="span3">Security Question #{{$index+1}}</label>
+                <div class="span8">
+                  <div class="style-select" ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }">
+                    <select id="{{question.name}}"
+                      ng-model="$parent.updateSecurity[question.name]"
+                      name="question.name"
+                      ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.name)"
+                      ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }"
+                      required >
+                      <option value="">-- Select a Question --</option>
+                    </select>
+                  </div>
                   <label for="{{question.name}}" class="text-error" ng-show="$parent.validity[question.name].$error.required">Please select a security question to answer. </label>
                 </div>
               </div>
 
-              <div class="control-group" ng-show="$parent.updateSecurity[question.name]">
-                <label class="control-label">Answer</label>
-                <div class="controls">
+              <div class="row-fluid" ng-show="$parent.updateSecurity[question.name]">
+                <label class="span3">Answer</label>
+                <div class="span8">
                   <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.required">Please enter an answer to the selected security question. </label>
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.maxLength">Please enter an answer that is no more than 100 characters long. </label>
                 </div>
               </div>
-
             </div>
 
             <div class="footer modal-footer">
-              <button class="btn btn-secondary" type="button" ng-click="cancel()">Cancel</button>
-              <button class="btn btn-primary" type="submit">Continue</button>
+              <button class="btn-cta cta-secondary" type="button" ng-click="cancel()">Cancel</button>
+              <button class="btn-cta cta-primary" type="submit">Continue</button>
             </div>
           </form>
         </div>
