@@ -128,4 +128,24 @@ body.lang_es {
 
     }
   }
+
+
+  #ProfileSettingsPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+
+        .well-sub-title, a {
+          font-size: 13px;
+          margin-top: 2px;
+        }
+        button {
+          font-size: 14px;
+          margin-top: 6px;
+        }
+      }
+
+    }
+  }
 }

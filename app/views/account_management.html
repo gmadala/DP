@@ -7,14 +7,14 @@
       <div class="well-sub-title">
         <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()" translate>Edit Settings</button>
         <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()" translate>Save Settings</button>
-        <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel Changes</button>
+        <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel</button>
       </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
       <div class="row-fluid">
-        <label class="span4" for="businessEmail" translate>Business Email</label>
-        <div class="span8" nxg-input model="business.data.email" editable="business.editable">
+        <label class="span5" for="businessEmail" translate>Business Email</label>
+        <div class="span7" nxg-input model="business.data.email" editable="business.editable">
           <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
           <label class="text-error" ng-show="business.validation.businessEmail.$invalid" translate>
               Please enter a valid email address.
@@ -23,12 +23,12 @@
       </div>
 
       <div class="row-fluid">
-        <label class="span4" for="enhanced" translate>Enhanced Registration Enabled?</label>
+        <label class="span5" for="enhanced" translate>Enhanced Registration Enabled?</label>
 
-        <div class="span8">
-          <div ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
+        <div class="span7">
+          <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
           <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-          <div class="" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
+          <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
 
           <div class="cr-inline" ng-show="business.editable">
             <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
@@ -43,16 +43,16 @@
       </div>
 
       <div class="row-fluid" ng-show="business.editable">
-        <div class="span8 offset4">
+        <div class="span7 offset4">
           <p class="paragraph" translate>Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
           <p class="paragraph" translate>Create your Enhanced Registration four digit PIN.</p>
         </div>
       </div>
 
       <div class="row-fluid" ng-show="business.editable">
-        <label class="span4" translate>Enhanced Registration PIN</label>
+        <label class="span5" translate>Enhanced Registration PIN</label>
 
-        <div class="span8">
+        <div class="span5">
           <input type="text"
                  name="pin"
                  id="pin"
@@ -76,16 +76,16 @@
       <div class="well-sub-title">
         <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
         <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()" translate>Save Settings</button>
-        <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()" translate>Cancel Changes</button>
+        <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()" translate>Cancel</button>
       </div>
     </h2>
 
     <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
       <div class="row-fluid">
-        <label class="span4" for="titleAddr"><span translate>Default Address</span>:</label>
-        <div class="span8">
+        <label class="span5" for="titleAddr"><span translate>Default Address</span>:</label>
+        <div class="span7">
           <div class="row-fluid" ng-show="title.editable">
-            <div class="span9">
+            <div class="span10">
               <div class="style-select">
                 <select ng-model="title.dirtyData.titleAddress"
                         ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
@@ -95,9 +95,9 @@
                 </select>
               </div>
             </div>
-            <div class="span3">
+            <div class="span2">
               <button class="btn-help"
-                tooltip-placement="right"
+                tooltip-placement="left"
                 tooltip-trigger="focus"
                 tooltip-html="true"
                 tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '.' | translate }}"
@@ -114,7 +114,7 @@
             </div>
             <div class="span6">
               <button class="btn-help"
-                tooltip-placement="right"
+                tooltip-placement="left"
                 tooltip-trigger="focus"
                 tooltip-html="true"
                 tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '.' | translate }}"
@@ -132,8 +132,8 @@
       </div>
 
       <div class="row-fluid" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
-        <label class="span4"><span translate>Additional Addresses</span>:</label>
-        <div class="span8 static" ng-hide="title.editable">
+        <label class="span5"><span translate>Additional Addresses</span>:</label>
+        <div class="span7 static" ng-hide="title.editable">
           <ul>
             <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
               <div nxg-address="addr"></div>
@@ -156,8 +156,8 @@
 
     <form class="form-block" name="financialSettings" novalidate>
       <div class="row-fluid">
-        <label class="span4" for="setBankAcct"><span translate>Bank Account(s)</span>:</label>
-        <div class="span8">
+        <label class="span5" for="setBankAcct"><span translate>Bank Account(s)</span>:</label>
+        <div class="span7">
           <ul>
             <li ng-repeat="acct in financial.data.bankAccounts">{{ acct.BankAccountName }}</li>
           </ul>
@@ -165,38 +165,38 @@
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Available Credit</span>:</label>
-        <div class="span8 static">{{ financial.data.availableCredit | currency }}</div>
+        <label class="span5"><span translate>Available Credit</span>:</label>
+        <div class="span7 static">{{ financial.data.availableCredit | currency }}</div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Reserve Funds</span>:</label>
-        <div class="span8 static">{{ financial.data.reserveFunds || 0 | currency }}</div>
+        <label class="span5"><span translate>Reserve Funds</span>:</label>
+        <div class="span7 static">{{ financial.data.reserveFunds || 0 | currency }}</div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Last Payment</span>:</label>
-        <div class="span8 static">{{ financial.data.lastPayment.amount | currency }}</div>
+        <label class="span5"><span translate>Last Payment</span>:</label>
+        <div class="span7 static">{{ financial.data.lastPayment.amount | currency }}</div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Last Payment Date</span>:</label>
-        <div class="span8 static">{{ financial.data.lastPayment.date | moment }}</div>
+        <label class="span5"><span translate>Last Payment Date</span>:</label>
+        <div class="span7 static">{{ financial.data.lastPayment.date | moment }}</div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Unapplied Funds</span>:</label>
-        <div class="span8 static">{{ financial.data.unappliedFunds | currency }}</div>
+        <label class="span5"><span translate>Unapplied Funds</span>:</label>
+        <div class="span7 static">{{ financial.data.unappliedFunds | currency }}</div>
       </div>
 
       <div class="row-fluid">
-        <label class="span4"><span translate>Total Available</span>:</label>
-        <div class="span8 static">{{ financial.data.totalAvailable | currency }}</div>
+        <label class="span5"><span translate>Total Available</span>:</label>
+        <div class="span7 static">{{ financial.data.totalAvailable | currency }}</div>
       </div>
 
       <div ng-show="financial.data.autoDisburseUnappliedFunds" class="row-fluid">
-        <label class="span4"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
-        <div class="span8 static">
+        <label class="span5"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
+        <div class="span7 static">
           <span ng-show="financial.data.autoDisburseUnappliedFunds" translate>Enabled</span>
           <span ng-show="!financial.data.autoDisburseUnappliedFunds" translate>Disabled</span>
         </div>

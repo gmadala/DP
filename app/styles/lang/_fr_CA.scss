@@ -131,4 +131,24 @@ body.lang_fr_CA {
 
     }
   }
+
+
+  #ProfileSettingsPage, #AccountManagementPage {
+    @media (max-width: 1090px) {
+
+      .well-title {
+        font-size: 16px;
+
+        .well-sub-title, a {
+          font-size: 13px;
+          margin-top: 2px;
+        }
+        button {
+          font-size: 12px;
+          margin-top: 6px;
+        }
+      }
+
+    }
+  }
 }

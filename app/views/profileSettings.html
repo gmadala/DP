@@ -6,7 +6,7 @@
       <div class="well-sub-title">
         <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()" translate>Edit Settings</button>
         <button ng-show="profile.editable" class="btn-unstyle" ng-click="profile.save()" translate>Save Settings</button>
-        <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()" translate>Cancel Changes</button>
+        <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()" translate>Cancel</button>
       </div>
     </h2>
     <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
@@ -126,7 +126,7 @@
       <div class="well-sub-title">
         <button ng-hide="notifications.editable" class="btn-unstyle" ng-click="notifications.edit()" translate>Edit Settings</button>
         <button ng-show="notifications.editable" class="btn-unstyle" ng-click="notifications.save()" translate>Save Settings</button>
-        <button ng-show="notifications.editable" class="btn-unstyle cancel" ng-click="notifications.cancel()" translate>Cancel Changes</button>
+        <button ng-show="notifications.editable" class="btn-unstyle cancel" ng-click="notifications.cancel()" translate>Cancel</button>
       </div>
     </h2>
 
@@ -138,8 +138,8 @@
 
       <ul>
         <li class="row-fluid" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
-          <div class="span4">{{ n.NotificationName }}</div>
-          <div class="span8">
+          <div class="span6">{{ n.NotificationName }}</div>
+          <div class="span6">
             <p>
               <span ng-repeat="d in n.DeliveryMethods">
                 {{ d.DeliveryMethodName }}<span ng-show="$index < n.DeliveryMethods.length - 1">, </span>
@@ -151,8 +151,8 @@
 
         <!-- Edit -->
         <li class="row-fluid" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
-          <div class="span4">{{ n.Name }}</div>
-          <div class="span8 cr-inline">
+          <div class="span6">{{ n.Name }}</div>
+          <div class="span6 cr-inline">
             <span ng-repeat="d in n.DeliveryMethods">
               <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
               <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
