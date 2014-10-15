@@ -117,4 +117,15 @@ body.lang_es {
 
     }
   }
+
+
+  #AuctionDashboardPage {
+    @media (max-width: 1090px) {
+
+      .counter-list .counter {
+        margin-left: 0;
+      }
+
+    }
+  }
 }
