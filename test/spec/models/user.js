@@ -113,21 +113,6 @@ describe('Model: User', function () {
       expect($q.all).toHaveBeenCalledWith(['a', 'b']);
     });
 
-    it('should resolve (not reject) even if one of the other promises rejects', function() {
-      spyOn(api, 'setAuth');
-      spyOn(user, 'refreshInfo').andReturn($q.reject(true));
-      spyOn(user, 'refreshStatics').andReturn($q.when(true));
-      var promise = user.initSession();
-      var resolved = false, rejected = false;
-      promise.then(function() {
-        resolved = true;
-      }, function() {
-        rejected = true;
-      });
-      $rootScope.$digest();
-      expect(resolved).toBe(true);
-      expect(rejected).toBe(false);
-    });
   });
 
   describe('resetPassword method', function () {

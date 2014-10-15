@@ -3,7 +3,7 @@
   <div class="span6 well">
     <h2 class="well-title">Dealer Number Search</h2>
 
-    <form name="numberSearchForm" class="row-fluid search" novalidate>
+    <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row-fluid search" novalidate>
       <p> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
 
       <div class="row-fluid">
@@ -19,7 +19,7 @@
                    nxg-focus="numberSearch.setDealerNumActive()"
                    nxg-requires="data.proposedQuery.length >= 3"
                    ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }">
-            <button class="btn btn-input" type="submit" ng-click="numberSearch.search()"
+            <button class="btn btn-input" type="button" ng-click="numberSearch.search('dealerNum')"
                     ng-disabled="numberSearch.searchInProgress">
               <span nxg-icon="icon-search"></span>
             </button>
@@ -51,7 +51,7 @@
                    ng-model="numberSearch.query.auctionAccessNumber"
                    ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
                    nxg-focus="numberSearch.setAuctionNumActive()">
-           <button class="btn btn-input" type="submit" ng-click="numberSearch.search()"
+           <button class="btn btn-input" type="button" ng-click="numberSearch.search('auctionNum')"
                     ng-disabled="numberSearch.searchInProgress">
               <span nxg-icon="icon-search"></span>
            </button>
@@ -67,6 +67,7 @@
           </label>
         </div>
       </div>
+      <button class="btn-hide" tabindex="-1" type="submit"></button>
     </form>
   </div>
 

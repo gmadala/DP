@@ -5,6 +5,11 @@ angular.module('nextgearWebApp')
 
     segmentio.track(metric.VIEW_DASHBOARD);
 
+    // for caching our week/month summary data
+    $scope.paymentSummary = {
+      month: null,
+      week: null
+    };
 
     $scope.viewMode = 'week';
     $scope.today = moment().format('MMMM D, YYYY');
@@ -95,6 +100,15 @@ angular.module('nextgearWebApp')
 
     $scope.filterPayments = function(filter) {
       var param;
+      switch(filter) {
+      case 'week':
+        filter = 'this-week';
+        break;
+      case 'month':
+        filter = 'this-month';
+        break;
+      }
+
       if(filter) {
         param = {filter: filter};
       }
@@ -146,7 +160,6 @@ angular.module('nextgearWebApp')
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
-
           var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
 
           $scope.dashboardData = result;
@@ -165,6 +178,20 @@ angular.module('nextgearWebApp')
             viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
           }
           viewAllCredit.updateChartData();
+
+          // if we haven't grabbed today's week data, get it now.
+          if (!$scope.paymentSummary[$scope.viewMode]) {
+            $scope.paymentSummary[$scope.viewMode] = {
+              OverduePaymentAmount: result.OverduePaymentAmount,
+              PaymentsDueTodayAmount: result.PaymentsDueTodayAmount,
+              UpcomingPaymentsAmount: result.UpcomingPaymentsAmount,
+              AccountFeeAmount: result.AccountFeeAmount,
+              OverduePayments: result.OverduePayments,
+              PaymentsDueToday: result.PaymentsDueToday,
+              UpcomingPayments: result.UpcomingPayments,
+              AccountFees: result.AccountFees
+            };
+          }
 
           $scope.chartData = {
             credit: $scope.dashboardData.selectedLineOfCredit.CreditChartData,

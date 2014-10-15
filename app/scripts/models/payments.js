@@ -50,6 +50,7 @@ angular.module('nextgearWebApp')
         ALL: 'all',
         TODAY: 'today',
         THIS_WEEK: 'thisWeek',
+        THIS_MONTH: 'thisMonth',
         RANGE: 'range'
       },
       search: function(criteria, paginator) {

@@ -185,6 +185,17 @@ describe('Service: api', function () {
         Data: {},
         Message: '401'
       });
+      httpBackend.whenGET('/bar').respond({
+        Success: true,
+        Data: {},
+        Message: null
+      });
+      // Make 401 not be within the first 3 requests
+      api.request('GET', '/bar');
+      api.request('GET', '/bar');
+      api.request('GET', '/bar');
+      httpBackend.flush();
+
       spyOn(rootScope, '$emit').andReturn(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
@@ -198,6 +209,7 @@ describe('Service: api', function () {
 
       api.request('GET', '/foo').then(success, error);
       httpBackend.flush();
+      expect(rootScope.$emit).toHaveBeenCalledWith('event:forceClearAuth');
       expect(messages.list().length).toBe(1);
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
       expect(success).not.toHaveBeenCalled();
@@ -218,6 +230,48 @@ describe('Service: api', function () {
 
       $timeout.flush();
       expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
+    });
+
+    it('should force logout and refresh when 401 response is within first 3 responses', function () {
+      httpBackend.whenGET('/foo').respond({
+        Success: false,
+        Data: {},
+        Message: '401'
+      });
+      httpBackend.whenGET('/bar').respond({
+        Success: true,
+        Data: {},
+        Message: null
+      });
+      // Make 401 request second
+      api.request('GET', '/bar');
+      httpBackend.flush();
+
+      spyOn(rootScope, '$emit').andReturn(true);
+      var success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+      var bind = jasmine.createSpy('bind');
+      spyOn(angular, 'element').andReturn({
+        bind: bind
+      });
+
+      api.setAuth({ Token: 'foo' });
+      expect(api.hasAuthToken()).toBe(true);
+
+      api.request('GET', '/foo').then(success, error);
+      httpBackend.flush();
+      expect(rootScope.$emit).toHaveBeenCalledWith('event:forceClearAuth');
+      expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
+      // bind.calls[0].args[1].call(this, {
+      //   preventDefault: preventDefault,
+      //   stopPropagation: stopPropagation,
+      //   keyCode: 27
+      // });
+      // expect(preventDefault).toHaveBeenCalled();
+      // expect(stopPropagation).toHaveBeenCalled();
+
+      // $timeout.flush();
+      // expect(rootScope.$emit).toHaveBeenCalledWith('event:forceLogout');
     });
 
     it('should reject the promise with a newly added message service object upon invalid response', function () {

@@ -317,107 +317,215 @@ describe('Controller: DashboardCtrl', function () {
       $state: mockState
     });
 
-    spyOn(dashboard, 'fetchDealerDashboard').andCallFake(function() {
-      return $q.when(angular.copy(dealerDashboardData));
-    });
   }));
 
-  it('should set up a default viewMode', function() {
-    expect(scope.viewMode).toBe('week');
-  });
-
-  it('should have a changeViewMode function to toggle view mode', function() {
-    expect(typeof scope.changeViewMode).toBe('function');
-    scope.viewMode = 'week';
-    scope.changeViewMode('month');
-    expect(scope.viewMode).toBe('month');
-  });
-
-  it('should have an isWeekMode function to check if we are in week mode', function() {
-    scope.viewMode = 'week';
-    expect(scope.isWeekMode()).toBe(true);
-  });
-
-  it('should have an onClickButtonLink method to move to a new state', function() {
-    scope.onClickButtonLink('payments');
-    expect(mockState.transitionTo).toHaveBeenCalled();
-  })
-
-  describe('getDueStatus method', function(){
-    var p = { DueDate: "2014-06-02"},
-        clock;
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers(moment([2014, 6, 2]).valueOf(), 'Date');
+  describe('non-cached info', function() {
+    beforeEach(function() {
+      spyOn(dashboard, 'fetchDealerDashboard').andCallFake(function() {
+        return $q.when(angular.copy(dealerDashboardData));
+      });
     });
 
-    afterEach(function () {
-      clock.restore();
+    it('should set up a default viewMode', function() {
+      expect(scope.viewMode).toBe('week');
     });
 
-    it('should return "overdue" if today is past the due date', function() {
-      expect(scope.getDueStatus(p)).toBe('overdue');
+    it('should have a changeViewMode function to toggle view mode', function() {
+      expect(typeof scope.changeViewMode).toBe('function');
+      scope.viewMode = 'week';
+      scope.changeViewMode('month');
+      expect(scope.viewMode).toBe('month');
     });
 
-    it('should return "today" if today is the due date', function() {
-      p.DueDate = "2014-07-02";
-      expect(scope.getDueStatus(p)).toBe('today');
+    it('should have an isWeekMode function to check if we are in week mode', function() {
+      scope.viewMode = 'week';
+      expect(scope.isWeekMode()).toBe(true);
     });
 
-    it('should return "future" if today is in the future', function() {
-      p.DueDate = "2014-08-02";
-      expect(scope.getDueStatus(p)).toBe('future');
-    });
-  });
+    it('should have an onClickButtonLink method to move to a new state', function() {
+      scope.onClickButtonLink('payments');
+      expect(mockState.transitionTo).toHaveBeenCalled();
+    })
 
-  describe('onRequestCredIncr method', function() {
-    it('should launch a modal dialog with the request credit increase form', inject(function($dialog) {
-      spyOn($dialog, 'dialog').andCallFake(function() {
-        return {
-          open: angular.noop
-        }
+    describe('getDueStatus method', function(){
+      var p = { DueDate: "2014-06-02"},
+          clock;
+
+      beforeEach(function () {
+        clock = sinon.useFakeTimers(moment([2014, 6, 2]).valueOf(), 'Date');
       });
 
-      scope.onRequestCredIncr();
-      expect($dialog.dialog).toHaveBeenCalled();
-      expect($dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
-      expect($dialog.dialog.mostRecentCall.args[0].controller).toBe('RequestCreditIncreaseCtrl');
+      afterEach(function () {
+        clock.restore();
+      });
+
+      it('should return "overdue" if today is past the due date', function() {
+        expect(scope.getDueStatus(p)).toBe('overdue');
+      });
+
+      it('should return "today" if today is the due date', function() {
+        p.DueDate = "2014-07-02";
+        expect(scope.getDueStatus(p)).toBe('today');
+      });
+
+      it('should return "future" if today is in the future', function() {
+        p.DueDate = "2014-08-02";
+        expect(scope.getDueStatus(p)).toBe('future');
+      });
+    });
+
+    describe('onRequestCredIncr method', function() {
+      it('should launch a modal dialog with the request credit increase form', inject(function($dialog) {
+        spyOn($dialog, 'dialog').andCallFake(function() {
+          return {
+            open: angular.noop
+          }
+        });
+
+        scope.onRequestCredIncr();
+        expect($dialog.dialog).toHaveBeenCalled();
+        expect($dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
+        expect($dialog.dialog.mostRecentCall.args[0].controller).toBe('RequestCreditIncreaseCtrl');
+      }));
+    });
+
+    it('should call for data on a setDateRange event and attach the result to the scope', function() {
+      var start = new Date(),
+        end = new Date();
+
+      scope.$emit('setDateRange', start, end);
+      expect(dashboard.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
+      scope.$apply();
+      expect(scope.dashboardData).toBeDefined();
+    });
+
+    it('should add a View All option to the Lines of Credit list', function() {
+      scope.$emit('setDateRange', new Date(), new Date());
+      scope.$apply();
+      expect(scope.dashboardData.LinesOfCredit.length).toBe(3);
+    });
+
+    it('should aggregate the line of credit values for the View All option', function() {
+      scope.$emit('setDateRange', new Date(), new Date());
+      scope.$apply();
+      var viewAll = scope.dashboardData.LinesOfCredit[0];
+      var loc1 = scope.dashboardData.LinesOfCredit[1];
+      var loc2 = scope.dashboardData.LinesOfCredit[2];
+      expect(viewAll.LineOfCreditAmount).toBe(loc1.LineOfCreditAmount + loc2.LineOfCreditAmount);
+      expect(viewAll.TempLineOfCreditAmount).toBe(loc1.TempLineOfCreditAmount + loc2.TempLineOfCreditAmount);
+      expect(viewAll.AvailableCreditAmount).toBe(loc1.AvailableCreditAmount + loc2.AvailableCreditAmount);
+      expect(viewAll.UtilizedCreditAmount).toBe(loc1.UtilizedCreditAmount + loc2.UtilizedCreditAmount);
+    });
+
+    it('should have a filterPayments method that goes to payments page with initial filter', function() {
+      expect(typeof scope.filterPayments).toBe('function');
+      scope.filterPayments('foofers');
+      expect(mockState.transitionTo).toHaveBeenCalledWith('payments', {filter: 'foofers'});
+    });
+  });
+
+  describe('cached summary values', function() {
+    var $httpBackend,
+        $rootScope,
+        myWeek,
+        myMonth,
+        otherWeek,
+        otherMonth,
+        currentScenario;
+
+    beforeEach(inject(function(_$httpBackend_, _$rootScope_) {
+      $httpBackend = _$httpBackend_;
+      $rootScope = _$rootScope_;
+      currentScenario = 'myWeek';
+
+      myWeek = {
+        "OverduePayments": 1,
+        "OverduePaymentAmount": 340,
+        "PaymentsDueToday": 3,
+        "PaymentsDueTodayAmount": 1280.34,
+        "UpcomingPayments": 4,
+        "UpcomingPaymentsAmount": 13367.22,
+        "AccountFees": 1,
+        "AccountFeeAmount": 400
+      };
+
+      otherWeek = {
+        "OverduePayments": 7,
+        "OverduePaymentAmount": 1000,
+        "PaymentsDueToday": 0,
+        "PaymentsDueTodayAmount": 0,
+        "UpcomingPayments": 2,
+        "UpcomingPaymentsAmount": 3000,
+        "AccountFees": 0,
+        "AccountFeeAmount": 0
+      };
+
+      myMonth = {
+        "OverduePayments": 2,
+        "OverduePaymentAmount": 720.55,
+        "PaymentsDueToday": 4,
+        "PaymentsDueTodayAmount": 2500,
+        "UpcomingPayments": 3,
+        "UpcomingPaymentsAmount": 14000.68,
+        "AccountFees": 2,
+        "AccountFeeAmount": 500
+      };
+
+      otherMonth = {
+        "OverduePayments": 0,
+        "OverduePaymentAmount": 0,
+        "PaymentsDueToday": 1,
+        "PaymentsDueTodayAmount": 2500,
+        "UpcomingPayments": 10,
+        "UpcomingPaymentsAmount": 50000,
+        "AccountFees": 2,
+        "AccountFeeAmount": 600
+      };
+
+      spyOn(dashboard, 'fetchDealerDashboard').andCallFake(function() {
+        var toReturn = {};
+
+        if (currentScenario === 'myWeek') {
+          toReturn = myWeek;
+        } else if (currentScenario === 'myMonth') {
+          toReturn = myMonth;
+        } else if (currentScenario === 'otherWeek') {
+          toReturn = otherWeek;
+        } else if (currentScenario === 'otherMonth') {
+          toReturn = otherMonth;
+        }
+
+        return $q.when(angular.extend({
+          "LinesOfCredit": [],
+          "paymentChartData": {}
+        }, toReturn));
+      });
     }));
+
+    it('should cache summary values for this week', function() {
+      scope.$broadcast('setDateRange', new Date(2014, 9, 5), new Date(2014, 9, 12));
+      $rootScope.$digest();
+
+      expect(scope.paymentSummary.week).toEqual(myWeek);
+
+      currentScenario = 'otherWeek';
+      scope.$broadcast('setDateRange', new Date(2014, 9, 5), new Date(2014, 9, 12));
+      $rootScope.$digest();
+
+      expect(scope.paymentSummary.week).toEqual(myWeek);
+    });
+
+    it('should cache summary values for this month', function() {
+      currentScenario = 'myMonth';
+      scope.changeViewMode('month');
+      scope.$broadcast('setDateRange', new Date(2014, 8, 1), new Date(2014, 8, 30));
+      scope.$apply();
+      expect(scope.paymentSummary.month).toEqual(myMonth);
+
+      currentScenario = 'otherMonth';
+      scope.$broadcast('setDateRange', new Date(2014, 9, 1), new Date(2014, 9, 31));
+      scope.$apply();
+      expect(scope.paymentSummary.month).toEqual(myMonth);
+    });
   });
-
-  it('should call for data on a setDateRange event and attach the result to the scope', function() {
-    var start = new Date(),
-      end = new Date();
-
-    scope.$emit('setDateRange', start, end);
-    expect(dashboard.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
-    scope.$apply();
-    expect(scope.dashboardData).toBeDefined();
-  });
-
-  it('should add a View All option to the Lines of Credit list', function() {
-    scope.$emit('setDateRange', new Date(), new Date());
-    scope.$apply();
-    expect(scope.dashboardData.LinesOfCredit.length).toBe(3);
-  });
-
-  it('should aggregate the line of credit values for the View All option', function() {
-    scope.$emit('setDateRange', new Date(), new Date());
-    scope.$apply();
-    var viewAll = scope.dashboardData.LinesOfCredit[0];
-    var loc1 = scope.dashboardData.LinesOfCredit[1];
-    var loc2 = scope.dashboardData.LinesOfCredit[2];
-    expect(viewAll.LineOfCreditAmount).toBe(loc1.LineOfCreditAmount + loc2.LineOfCreditAmount);
-    expect(viewAll.TempLineOfCreditAmount).toBe(loc1.TempLineOfCreditAmount + loc2.TempLineOfCreditAmount);
-    expect(viewAll.AvailableCreditAmount).toBe(loc1.AvailableCreditAmount + loc2.AvailableCreditAmount);
-    expect(viewAll.UtilizedCreditAmount).toBe(loc1.UtilizedCreditAmount + loc2.UtilizedCreditAmount);
-  });
-
-
-  it('should have a filterPayments method that goes to payments page with initial filter', function() {
-    expect(typeof scope.filterPayments).toBe('function');
-    scope.filterPayments('foofers');
-    expect(mockState.transitionTo).toHaveBeenCalledWith('payments', {filter: 'foofers'});
-  });
-
 });

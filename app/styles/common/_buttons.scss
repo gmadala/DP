@@ -360,6 +360,23 @@
   }
 }
 
+.link {
+  cursor: pointer;
+}
+
+.btn-hide {
+  // Keeps button in DOM but hides it so it's not visible
+  // Useful for forms without submit buttons but still need
+  // pressing enter to perform onsubmit method
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -1000px;
+  border: none;
+  padding: 0;
+}
+
 .btn-link {
   @extend %small;
   color: $highlight;
