@@ -4,12 +4,22 @@ angular.module('nextgearWebApp')
   .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore) {
     var authToken = null,
         sessionHasTimedOut = false,
-        sessionTimeout = null;
+        sessionTimeout = null,
+        requestCount = 0,
+        requestCountThreshold = 3;
 
     function onSessionTimeout(ob, debug) {
       $rootScope.$emit('event:forceClearAuth');
       if (sessionHasTimedOut) {
         return null; // we've already handled this
+      }
+
+      // If this is the first 3 requests, we know that the
+      // page was just loaded. Reload the page instead of showing error
+      // Fixes VO-2566
+      if(requestCount < requestCountThreshold) {
+        $rootScope.$emit('event:forceLogout');
+        return;
       }
 
       var expiredSessionError = 'Your session expired due to inactivity. Please log in again.';
@@ -80,6 +90,9 @@ angular.module('nextgearWebApp')
         }
       },
       request: function(method, url, data, headers) {
+        if(requestCount < requestCountThreshold) {
+          requestCount++;
+        }
         var httpConfig = {
           method: method.toUpperCase(),
           url: nxgConfig.apiBase + url,

@@ -112,15 +112,6 @@ angular.module('nextgearWebApp')
               QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
             }
           }
-        }, function(/*error*/) {
-          // This is the case when a 401 error is returned - user has been timed out.
-          // If this failed promise isn't caught, the newly loaded page will remain open
-          // and display a popup saying that the user has been timed out.
-          // This is ok if the user already was on the page, but this method only runs on pageload.
-          // Catching this error and returning nothing supresses the error, which causes the no-longer
-          // valid token to be cleared and the page to instantly reload and go to the login screen.
-          //
-          // VO-2566
         });
       },
 
