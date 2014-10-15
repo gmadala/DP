@@ -164,6 +164,14 @@ body.lang_es {
     }
   }
 
+  #AuctionFloorplanPage {
+    .range {
+      .range-end {
+        width: 125px;
+      }
+    }
+  }
+
 
   #ProfileSettingsPage, #AccountManagementPage {
     @media (max-width: 1090px) {
