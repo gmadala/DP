@@ -145,6 +145,15 @@ body.lang_es {
   }
 
 
+  #ReportsPage {
+    .form-row.range {
+      .range-end {
+        width: 125px;
+      }
+    }
+  }
+
+
   #AuctionDashboardPage {
     @media (max-width: 1090px) {
 
