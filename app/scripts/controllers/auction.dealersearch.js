@@ -20,7 +20,13 @@ angular.module('nextgearWebApp')
         this.dealerNumInactive = true;
         this.auctionNumInactive = false;
       },
-      search: function() {
+      search: function(whichButton) {
+        if(whichButton === 'dealerNum') {
+          $scope.numberSearch.setDealerNumActive();
+        } else if(whichButton === 'auctionNum') {
+          $scope.numberSearch.setAuctionNumActive();
+        }
+
         this.noresults = {}; // reset the no result messages, we're doing a new search
         var which = this;
 
