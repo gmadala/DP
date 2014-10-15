@@ -165,7 +165,7 @@ body.lang_es {
   }
 
 
-  #ProfileSettingsPage {
+  #ProfileSettingsPage, #AccountManagementPage {
     @media (max-width: 1090px) {
 
       .well-title {
@@ -176,7 +176,7 @@ body.lang_es {
           margin-top: 2px;
         }
         button {
-          font-size: 14px;
+          font-size: 12px;
           margin-top: 6px;
         }
       }
