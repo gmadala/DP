@@ -53,7 +53,7 @@
           <p class="span4 numeric">{{ payment.getExtraPrincipal() | currency }}</p>
         </div>
       </div>
-      <div nxg-alternate-address="payment" enabled="payment.isPayoff" show-tooltip="false"></div>
+      <div nxg-alternate-address="payment" enabled="payment.isPayoff()" show-tooltip="false"></div>
     </li>
   </ul>
 </div>
