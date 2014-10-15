@@ -172,6 +172,11 @@ angular.module('nextgearWebApp')
     case 'this-week':
       filterParam = Payments.filterValues.THIS_WEEK;
       break;
+    case 'this-month':
+      filterParam = Payments.filterValues.RANGE;
+      startDate = moment().startOf('month').toDate();
+      endDate = moment().endOf('month').toDate();
+      break;
     }
     if($stateParams.filter && !filterParam) {
       // it's a date filter

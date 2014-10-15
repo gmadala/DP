@@ -115,41 +115,41 @@
     <h2 class="well-title">Payments Summary</h2>
     <ul class="counter-list">
       <li ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
-        <span class="counter" ng-class="{overdue: dashboardData.OverduePayments > 0}">{{dashboardData.OverduePayments}}</span>
+        <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
-              count="dashboardData.OverduePayments"
+              count="paymentSummary[viewMode].OverduePayments"
               when="{'1': 'Overdue', 'other': 'Overdue'}"></p>
-          <h4 class="dash-major" ng-class="{'overdue-amount': dashboardData.OverduePaymentAmount > 0}">{{dashboardData.OverduePaymentAmount | currency}}</h4>
+          <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
-        <span class="counter" ng-class="{'due-today': dashboardData.PaymentsDueToday > 0}">{{dashboardData.PaymentsDueToday}}</span>
+        <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
-              count="dashboardData.PaymentsDueToday"
+              count="paymentSummary[viewMode].PaymentsDueToday"
               when="{'1': 'Due Today', 'other': 'Due Today'}"></p>
-          <h4 class="dash-major">{{dashboardData.PaymentsDueTodayAmount | currency}}</h4>
+          <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
-      <li ng-click="filterPayments('this-week')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
-        <span class="counter">{{dashboardData.UpcomingPayments}}</span>
+      <li ng-click="filterPayments(viewMode)" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
+        <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
           <span class="lockup-minor" ng-pluralize
-                count="dashboardData.UpcomingPayments"
+                count="paymentSummary[viewMode].UpcomingPayments"
                 when="{'1': 'Payment', 'other': 'Payments'}"></span>
           <span>This {{ viewMode | capitalize }}</span>
-          <h4 class="dash-major">{{dashboardData.UpcomingPaymentsAmount | currency}}</h4>
+          <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>
       <li ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
-        <span class="counter">{{dashboardData.AccountFees}}</span>
+        <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
-             count="dashboardData.AccountFees"
+             count="paymentSummary[viewMode].AccountFees"
              when="{'1': 'Account Fee', 'other': 'Account Fees'}"></p>
-          <h4 class="dash-major">{{dashboardData.AccountFeeAmount | currency}}</h4>
+          <h4 class="dash-major">{{paymentSummary[viewMode].AccountFeeAmount | currency}}</h4>
         </div>
       </li>
             </ul>
