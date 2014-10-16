@@ -172,6 +172,21 @@ body.lang_es {
     }
   }
 
+  /* Auction Nav */
+  .app-header.auctions {
+    .nav-bkgd {
+      height: 62px;
+    }
+    .nav-primary li {
+      max-width: 20%;
+      text-align: center;
+
+      &.link_auction_bulkflooring {
+        width: 160px;
+      }
+    }
+  }
+
 
   #ProfileSettingsPage, #AccountManagementPage {
     @media (max-width: 1090px) {

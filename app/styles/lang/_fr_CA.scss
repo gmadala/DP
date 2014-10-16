@@ -178,4 +178,32 @@ body.lang_fr_CA {
   [name='searchControls'] > .span4 > label {
     white-space: nowrap;
   }
+
+  /* Auction Nav */
+  .app-header.auctions {
+    .nav-bkgd {
+      height: 62px;
+    }
+    .nav-primary li {
+      max-width: 19%;
+      text-align: center;
+
+      &.link_auction_sellerfloorplan {
+        width: 212px;
+        max-width: none;
+      }
+
+      &.link_auction_dealersearch {
+        width: 155px;
+      }
+
+      &.link_auction_bulkflooring {
+        width: 175px;
+      }
+
+      &.link_auction_reports {
+        width: 112px;
+      }
+    }
+  }
 }
