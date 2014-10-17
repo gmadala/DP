@@ -2751,7 +2751,7 @@ msgstr ""
 
 #: app/views/account_management.html
 #: app/views/auction.settings.html
-msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
+msgid "To update or add a Title Settings address, please contact NextGear Capital at:"
 msgstr ""
 
 #: app/views/checkout.html

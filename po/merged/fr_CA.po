@@ -905,14 +905,6 @@ msgstr ""
 "veuillez utiliser une combinaison incluant le nom et la ville ou la\n"
 " province."
 
-#: app/views/account_management.html
-msgid ""
-"To update or add a Title Settings address, please contact NextGear Capital "
-"at: ' + customerSupportPhone + '."
-msgstr ""
-"Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au ' + customerSupportPhone + '."
-
 #: app/views/dialogs/makeLookupError.html
 msgid ""
 "Unable to find a vehicle for those parameters. Please double check the "
@@ -4369,6 +4361,11 @@ msgid "To extend this unit an additional period please click below."
 msgstr ""
 "Pour prolonger cette unité pour une période additionnelle, veuillez cliquer "
 "ci-dessous."
+
+#: app/views/account_management.html
+#: app/views/auction.settings.html
+msgid "To update or add a Title Settings address, please contact NextGear Capital at:"
+msgstr "Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez contacter NextGear Capital au"
 
 #: app/views/checkout.html app/views/dashboard.html
 msgid "Today"

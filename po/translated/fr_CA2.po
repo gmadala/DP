@@ -772,12 +772,9 @@ msgstr ""
 " province."
 
 #: app/views/account_management.html
-msgid ""
-"To update or add a Title Settings address, please contact NextGear Capital "
-"at: ' + customerSupportPhone + '."
-msgstr ""
-"Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au ' + customerSupportPhone + '."
+#: app/views/auction.settings.html
+msgid "To update or add a Title Settings address, please contact NextGear Capital at:"
+msgstr "Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez contacter NextGear Capital au"
 
 #: app/views/modals/confirmCheckout.html
 msgid "Today's Fees"

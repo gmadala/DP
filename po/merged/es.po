@@ -876,14 +876,6 @@ msgid ""
 "      State."
 msgstr "Para buscar a un distribuidor en búsqueda de distribuidores, utilice una combinación de su nombre y su ciudad y/o estado."
 
-#: app/views/account_management.html
-msgid ""
-"To update or add a Title Settings address, please contact NextGear Capital "
-"at: ' + customerSupportPhone + '."
-msgstr ""
-"Para actualizar o agregar una dirección de Ajustes de títulos, por favor "
-"póngase en contacto con NextGear Capital al: ' + customerSupportPhone + '."
-
 #: app/views/dialogs/makeLookupError.html
 msgid ""
 "Unable to find a vehicle for those parameters. Please double check the "
@@ -2040,7 +2032,139 @@ msgstr "Tablero"
 
 #: app/views/vehicleDetails/landing.html
 msgid "Date Floored"
-msgstr ng-left:0;padding-right:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.navbar-static-top .container,.navbar-fixed-top .container,.navbar-fixed-bottom .container{width:940px}.navbar-fixed-top{top:0}.navbar-fixed-top .navbar-inner,.navbar-static-top .navbar-inner{-webkit-box-shadow:0 1px 10px rgba(0,0,0,0.1);-moz-box-shadow:0 1px 10px rgba(0,0,0,0.1);box-shadow:0 1px 10px rgba(0,0,0,0.1)}.navbar-fixed-bottom{bottom:0}.navbar-fixed-bottom .navbar-inner{-webkit-box-shadow:0 -1px 10px rgba(0,0,0,0.1);-moz-box-shadow:0 -1px 10px rgba(0,0,0,0.1);box-shadow:0 -1px 10px rgba(0,0,0,0.1)}.navbar .nav{position:relative;left:0;display:block;float:left;margin:0 10px 0 0}.navbar .nav.pull-right{float:right;margin-right:0}.navbar .nav>li{float:left}.navbar .nav>li>a{float:none;padding:19.4px 15px 19.4px;color:#777;text-decoration:none;text-shadow:0 1px 0 #fff}.navbar .nav .dropdown-toggle .caret{margin-top:8px}.navbar .nav>li>a:focus,.navbar .nav>li>a:hover{background-color:transparent;color:#333;text-decoration:none}.navbar .nav>.active>a,.navbar .nav>.active>a:hover,.navbar .nav>.active>a:focus{color:#555;text-decoration:none;background-color:#e6e6e6;-webkit-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);-moz-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);box-shadow:inset 0 3px 8px rgba(0,0,0,0.125)}.navbar .btn-navbar{display:none;float:right;padding:7px 10px;margin-left:5px;margin-right:5px;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.25);background-color:#ededed;background-image:-moz-linear-gradient(top, #f2f2f2, #e6e6e6);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#e6e6e6));background-image:-webkit-linear-gradient(top, #f2f2f2, #e6e6e6);background-image:-o-linear-gradient(top, #f2f2f2, #e6e6e6);background-image:linear-gradient(to bottom, #f2f2f2,#e6e6e6);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF2F2F2', endColorstr='#FFE6E6E6', GradientType=0);border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);*background-color:#e6e6e6;filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(255,255,255,0.075);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(255,255,255,0.075);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(255,255,255,0.075)}.navbar .btn-navbar:hover,.navbar .btn-navbar:focus,.navbar .btn-navbar:active,.navbar .btn-navbar.active,.navbar .btn-navbar.disabled,.navbar .btn-navbar[disabled]{color:#fff;background-color:#e6e6e6;*background-color:#d9d9d9}.navbar .btn-navbar:active,.navbar .btn-navbar.active{background-color:#ccc \9}.navbar .btn-navbar .icon-bar{display:block;width:18px;height:2px;background-color:#f5f5f5;-webkit-border-radius:1px;-moz-border-radius:1px;border-radius:1px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.25);-moz-box-shadow:0 1px 0 rgba(0,0,0,0.25);box-shadow:0 1px 0 rgba(0,0,0,0.25)}.btn-navbar .icon-bar+.icon-bar{margin-top:3px}.navbar .nav>li>.dropdown-menu:before{content:'';display:inline-block;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-bottom-color:rgba(0,0,0,0.2);position:absolute;top:-7px;left:9px}.navbar .nav>li>.dropdown-menu:after{content:'';display:inline-block;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;top:-6px;left:10px}.navbar-fixed-bottom .nav>li>.dropdown-menu:before{border-top:7px solid #ccc;border-top-color:rgba(0,0,0,0.2);border-bottom:0;bottom:-7px;top:auto}.navbar-fixed-bottom .nav>li>.dropdown-menu:after{border-top:6px solid #fff;border-bottom:0;bottom:-6px;top:auto}.navbar .nav li.dropdown>a:hover .caret,.navbar .nav li.dropdown>a:focus .caret{border-top-color:#555;border-bottom-color:#555}.navbar .nav li.dropdown.open>.dropdown-toggle,.navbar .nav li.dropdown.active>.dropdown-toggle,.navbar .nav li.dropdown.open.active>.dropdown-toggle{background-color:#e6e6e6;color:#555}.navbar .nav li.dropdown>.dropdown-toggle .caews/vehicleDetails/landing.html
+msgstr "Fecha de puesta en piso"
+
+#: app/scripts/controllers/payments.js
+msgid "Date Range"
+msgstr "Rango de fechas"
+
+#: app/views/auction.reports.html
+msgid "Date Search"
+msgstr "Búsqueda por fecha"
+
+#: app/views/vehicleDetails/flooringInformation.html
+msgid "Date Submitted"
+msgstr "Fecha de envío"
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Date range based on Date Floored OR Disbursement Date."
+msgstr ""
+"Rango de fechas basado en fecha de puesta en piso O en fecha de desembolso"
+
+#: app/views/auction.dashboard.html app/views/reports.html
+msgid "Date"
+msgstr "Fecha"
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Dates"
+msgstr "Fechas "
+
+#: app/views/vehicleDetails/landing.html
+msgid "Days Floored"
+msgstr "Días de piso "
+
+#: app/views/analytics.html
+msgid "Days to Turn"
+msgstr "Días de rotación"
+
+#: app/views/analytics/averageturn.html
+msgid "Days"
+msgstr "Días"
+
+#: app/scripts/controllers/documents.js
+msgid "Dealer Funding Checklist (PDF)"
+msgstr "Lista de Verificación de Financiamiento a Proveedores (PDF)"
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Name Search"
+msgstr "Búsqueda por nombre de distribuidor"
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Name"
+msgstr "Nombre del distribuidor"
+
+#: app/views/auction.dealersearch.html
+msgid "Dealer Number Search"
+msgstr "Búsqueda por número de distribuidor"
+
+#: app/scripts/directives/navBar/navBar.js
+msgid "Dealer Search"
+msgstr "Búsqueda de distribuidores"
+
+#: app/views/reports.html
+msgid "Dealer Statement"
+msgstr "Declaración del distribuidor"
+
+#: app/scripts/models/averageturntime.js
+msgid "December"
+msgstr "Diciembre"
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid "Default Address"
+msgstr "Dirección predeterminada"
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid "Delivery Type"
+msgstr "Tipo de entrega"
+
+#: app/scripts/controllers/floorplan.js app/views/dashboard.html
+msgid "Denied"
+msgstr "Denegada"
+
+#: app/scripts/controllers/floorplan.js
+msgid "Denied/Not Paid"
+msgstr "Denegado/No pagado"
+
+#: app/views/dashboard.html app/views/floorplan.html
+#: app/views/paymentsSearch.html app/views/titleRelease.html
+#: app/views/vehicleDetails/vehicleDetails.html
+msgid "Description"
+msgstr "Descripción"
+
+#: app/views/account_management.html
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: app/views/modals/confirmDisableEnhanced.html
+msgid "Disabling the Enhanced Registration Program will delete any current PINs associated with this business."
+msgstr "La opción desactivar el Programa de Registro Mejorado borrará los NIP actuales relacionados con esta negociación."
+
+#: app/views/vehicleDetails/titleInformation.html
+msgid "Disbursement Date"
+msgstr "Fecha de desembolso"
+
+#: app/views/auction.reports.html app/views/reports.html
+msgid "Disbursement Detail"
+msgstr "Detalles del desembolso"
+
+#: app/views/auction.dashboard.html
+msgid "Disbursement Groups"
+msgstr "Grupos de desembolso"
+
+#: app/views/auction.sellerfloorplan.html
+msgid "Disbursement"
+msgstr "Desembolso"
+
+#: app/views/auction.documents.html
+#: app/views/auction.reports.html
+#: app/views/documents.html
+#: app/views/reports.html
+msgid "Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader."
+msgstr "¿Cuenta con <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> o una versión más reciente? Sus documentos se muestran en Acrobat Reader."
+
+#: app/views/login.html
+msgid "Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> or newer?"
+msgstr "¿Cuenta con <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> o una versión más reciente?"
+
+#: app/views/documents.html
+msgid "Download NextGear Capital Mobile Android"
+msgstr "Descargue NextGear Capital Mobile para Android"
+
+#: app/views/documents.html
+msgid "Download NextGear Capital Mobile iOS"
+msgstr "Descargue NextGear Capital Mobile para iOS"
+
+#: app/views/paymentsSearch.html app/views/vehicleDetails/landing.html
 msgid "Due Date"
 msgstr "Fecha de vencimiento"
 
@@ -4494,8 +4618,9 @@ msgstr ""
 "continuación."
 
 #: app/views/account_management.html
-msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
-msgstr "Para actualizar o agregar una dirección de ajustes de títulos, por favor póngase en contacto con NextGear Capital al: ' + customerSupportPhone + '."
+#: app/views/auction.settings.html
+msgid "To update or add a Title Settings address, please contact NextGear Capital at:"
+msgstr "Para actualizar o agregar una dirección de ajustes de títulos, por favor póngase en contacto con NextGear Capital al:"
 
 #: app/views/checkout.html app/views/dashboard.html
 msgid "Today"

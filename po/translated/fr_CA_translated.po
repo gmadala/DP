@@ -1076,14 +1076,6 @@ msgstr ""
 "concessionnaire, veuillez utiliser une combinaison incluant le nom et la "
 "ville ou la province."
 
-#: app/views/account_management.html
-msgid ""
-"To update or add a Title Settings address, please contact NextGear Capital "
-"at: ' + customerSupportPhone + '."
-msgstr ""
-"Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au ' + customerSupportPhone + '."
-
 #: app/scripts/services/api.js
 msgid "Unable to communicate with the NextGear system. Please try again later."
 msgstr ""

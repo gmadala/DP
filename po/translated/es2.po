@@ -504,8 +504,9 @@ msgid ""
 msgstr "Para buscar a un distribuidor en búsqueda de distribuidores, utilice una combinación de su nombre y su ciudad y/o estado."
 
 #: app/views/account_management.html
-msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
-msgstr "Para actualizar o agregar una dirección de ajustes de títulos, por favor póngase en contacto con NextGear Capital al: ' + customerSupportPhone + '."
+#: app/views/auction.settings.html
+msgid "To update or add a Title Settings address, please contact NextGear Capital at:"
+msgstr "Para actualizar o agregar una dirección de ajustes de títulos, por favor póngase en contacto con NextGear Capital al:"
 
 #: app/views/modals/confirmCheckout.html
 msgid "Today's Fees"

@@ -265,11 +265,6 @@ msgid ""
 "      State."
 msgstr ""
 
-#: app/views/account_management.html
-#: app/views/auction.settings.html
-msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
-msgstr ""
-
 #: app/views/checkout.html
 msgid "Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
 msgstr ""

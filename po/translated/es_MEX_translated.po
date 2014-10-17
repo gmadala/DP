@@ -1075,14 +1075,6 @@ msgstr ""
 "Para buscar a un distribuidor en Búsqueda de distribuidores, utilice una "
 "combinación de su nombre y ciudad o estado."
 
-#: app/views/account_management.html
-msgid ""
-"To update or add a Title Settings address, please contact NextGear Capital "
-"at: ' + customerSupportPhone + '."
-msgstr ""
-"Para actualizar o agregar una dirección de Ajustes de títulos, por favor "
-"póngase en contacto con NextGear Capital al: ' + customerSupportPhone + '."
-
 #: app/scripts/services/api.js
 msgid "Unable to communicate with the NextGear system. Please try again later."
 msgstr ""
