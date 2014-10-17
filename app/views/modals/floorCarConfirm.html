@@ -84,7 +84,7 @@
       <li class="list-table-row">
         <p class="span6" translate>Send Payment To</p>
         <p class="span6 value">
-          <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' }}</span>
+          <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' | translate }}</span>
           <span ng-hide="isDealer">{{ formData.BankAccountId.BankAccountName }}</span>
         </p>
       </li>
@@ -92,12 +92,12 @@
   </div>
 
   <div class="center"ng-show="isDealer">
-    <a href="/documents/Dealer%20Funding%20Checklist.pdf" target="_blank" translate>View Dealer Funding Checklist (PDF)</a>
+    <a ng-href="{{ documentLink }}" target="_blank" translate>View Dealer Funding Checklist (PDF)</a>
   </div>
 </div>
 
 
 <div class="modal-footer">
-  <button ng-click="close()" type="button" class="btn-cta cta-secondary" translate>Return to Form</button>
-  <button ng-click="confirm()" type="submit" nxg-autofocus class="btn-cta cta-primary" translate>Submit Flooring Request</button>
+  <button ng-click="close()" type="button" class="btn-cta cta-secondary btn-sm" translate>Return to Form</button>
+  <button ng-click="confirm()" type="submit" nxg-autofocus class="btn-cta cta-primary btn-sm" translate>Submit Flooring Request</button>
 </div>
