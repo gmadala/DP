@@ -214,7 +214,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           collapseBooleanAttributes:      true,
-          collapseWhitespace:             true,
+          collapseWhitespace:             false, // Breaks translations if we remove whitespace
           removeAttributeQuotes:          true,
           removeComments:                 true, // Only if you don't use comment directives!
           removeEmptyAttributes:          true,
