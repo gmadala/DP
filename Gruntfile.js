@@ -334,11 +334,13 @@ module.exports = function(grunt) {
       all: {
         files: {
           'po/merged/fr_CA.po': [
+            'po/translated/fr_CA2.po',
             'po/translated/fr_CA_translated.po',
             'po/translated/NextGear_Web_French (CA).po',
             'po/translated/untranslated_French (CA).po'
           ],
           'po/merged/es.po': [
+            'po/translated/es2.po',
             'po/translated/es_MEX_translated.po',
             'po/translated/es.po',
             'po/translated/NextGear_Web_Spanish (Mex).po',
@@ -519,19 +521,23 @@ module.exports = function(grunt) {
       plurals: []
     };
     var untranslatedContents = grunt.file.read(options.pot_file).toString().split("\n\n");
+    // We don't need the file definition
     untranslatedContents.shift();
 
     untranslatedContents.forEach(function (val) {
       var splitter = (val.indexOf('msgid """') > -1) ? 'msgid """' : 'msgid "';
       var truncated = val.split(splitter)[1];
+      // If it's a plural, split before the plural definition
       splitter = (truncated.indexOf('msgid_plural') > -1) ? 'msgid_plural' : 'msgstr';
 
+      // Push plurals onto a different array since we handle them differently
       if (splitter == 'msgid_plural') {
         translationStrings.matchesPlural.push(val);
         translationStrings.plurals.push(truncated);
         return;
       }
 
+      // Truncate to just the string value
       truncated = truncated.slice(0, truncated.indexOf(splitter) - 2);
 
       translationStrings.matches.push(val);

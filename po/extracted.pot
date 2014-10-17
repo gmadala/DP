@@ -22,6 +22,7 @@ msgid "$"
 msgstr ""
 
 #: app/views/auction.dealersearch.html
+#: app/views/valuelookup.html
 msgid "- OR -"
 msgstr ""
 
@@ -155,7 +156,6 @@ msgstr ""
 msgid "Additional Addresses"
 msgstr ""
 
-#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Additional Principal"
@@ -163,6 +163,10 @@ msgstr ""
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Additional Principal Payment"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Additional Principal:"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -182,16 +186,13 @@ msgstr ""
 #: app/views/auction.dashboard.html
 #: app/views/dashboard.html
 #: app/views/modals/confirmCheckout.html
-#: app/views/scheduledpayments.html
+#: app/views/payments.html
+#: app/views/receipts.html
 msgid "Amount"
 msgstr ""
 
 #: app/views/analytics.html
 msgid "Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book"
-msgstr ""
-
-#: app/views/receipts.html
-msgid "Amount Paid"
 msgstr ""
 
 #: app/views/payments.html
@@ -408,7 +409,6 @@ msgid "Buyer Information"
 msgstr ""
 
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 msgid "By Stock #, VIN, or Description"
 msgstr ""
 
@@ -420,20 +420,20 @@ msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/scripts/controllers/floorCar.js
+#: app/views/account_management.html
 #: app/views/auction.bulkflooring.html
 #: app/views/floorcar.html
 #: app/views/login.createPassword.html
 #: app/views/login.updateSecurity.html
 #: app/views/modals/creditQuery.html
 #: app/views/modals/scheduleCheckout.html
+#: app/views/profileSettings.html
 #: app/views/vehicledetails.html
 msgid "Cancel"
 msgstr ""
 
-#: app/views/account_management.html
 #: app/views/auction.settings.html
 #: app/views/modals/paymentOptionsBreakdown.html
-#: app/views/profileSettings.html
 msgid "Cancel Changes"
 msgstr ""
 
@@ -442,18 +442,12 @@ msgid "Cancel Fee"
 msgstr ""
 
 #: app/scripts/controllers/modals/cancelPayment.js
-#: app/views/scheduledpayments.html
 msgid "Cancel Payment"
 msgstr ""
 
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/requestCreditIncrease.html
 msgid "Cancel Request"
-msgstr ""
-
-#: app/scripts/controllers/scheduledPayments.js
-#: app/scripts/models/scheduledPayments.js
-msgid "Cancelled"
 msgstr ""
 
 #: app/views/vehicledetails.html
@@ -498,6 +492,10 @@ msgstr ""
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Clear Search"
+msgstr ""
+
+#: app/views/payments.html
+msgid "Click the Add button to add a payoff or a payment."
 msgstr ""
 
 #: app/views/modals/confirmCheckout.html
@@ -632,10 +630,6 @@ msgstr ""
 msgid "Current Reports"
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid "Curtailment"
-msgstr ""
-
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Curtailment Payment"
 msgstr ""
@@ -730,7 +724,6 @@ msgstr ""
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "Description"
@@ -923,8 +916,6 @@ msgstr ""
 
 #: app/views/checkout.html
 #: app/views/modals/cancelFee.html
-#: app/views/payments.html
-#: app/views/scheduledpayments.html
 msgid "Fee Amount"
 msgstr ""
 
@@ -941,7 +932,6 @@ msgstr ""
 #: app/views/modals/confirmCheckout.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 msgid "Fee Type"
 msgstr ""
 
@@ -976,10 +966,6 @@ msgstr ""
 msgid "Filter by Payment Method"
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid "Filter by Payment Status"
-msgstr ""
-
 #: app/views/auction.sellerfloorplan.html
 #: app/views/titlereleases.html
 msgid "Filter by Status"
@@ -1009,10 +995,6 @@ msgstr ""
 #: app/views/auction.sellerfloorplan.html
 #: app/views/floorplan.html
 msgid "Find a Floor Plan"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Find a Scheduled Payment"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -1051,7 +1033,6 @@ msgstr ""
 #: app/views/auction.sellerfloorplan.html
 #: app/views/floorplan.html
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "Floored"
@@ -1193,10 +1174,6 @@ msgstr ""
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Interest-Only Payment"
-msgstr ""
-
-#: app/views/vehicledetails.html
-msgid "Interest-only payment"
 msgstr ""
 
 #: app/views/reports.html
@@ -1457,12 +1434,6 @@ msgstr ""
 msgid "Not found <span>:(</span>"
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid ""
-"Note: Payoff and due amounts may change. Interest and/or fees may continue to accrue between now and your scheduled payment.<br>\n"
-"          Note: No payment may be scheduled on an overdue loan, or a loan due today."
-msgstr ""
-
 #: app/views/auction.settings.html
 #: app/views/profileSettings.html
 msgid "Notifications"
@@ -1618,9 +1589,12 @@ msgid_plural "Payments This {{ viewMode | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Total"
+msgstr ""
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payment Total:"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
@@ -1643,7 +1617,6 @@ msgid "Payments are unable to be scheduled for loans that are overdue or due tod
 msgstr ""
 
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 #: app/views/vehicledetails.html
 msgid "Payoff"
 msgstr ""
@@ -1651,10 +1624,6 @@ msgstr ""
 #: app/scripts/models/dashboard.js
 #: app/views/dashboard.html
 msgid "Payoff Due"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Payoff Now"
 msgstr ""
 
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -1678,8 +1647,6 @@ msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
 msgstr ""
 
 #: app/scripts/controllers/floorplan.js
-#: app/scripts/controllers/scheduledPayments.js
-#: app/scripts/models/scheduledPayments.js
 #: app/views/analytics.html
 #: app/views/auction.dashboard.html
 #: app/views/dashboard.html
@@ -1716,7 +1683,7 @@ msgid "Please choose a line of credit."
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
-msgid "Please confirm your title release request(s) below. Titles released here are required to be returned within 7 days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgid "Please confirm your title release request(s) below."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -2095,8 +2062,6 @@ msgstr ""
 msgid "Privacy Statement"
 msgstr ""
 
-#: app/scripts/controllers/scheduledPayments.js
-#: app/scripts/models/scheduledPayments.js
 #: app/views/receipts.html
 msgid "Processed"
 msgstr ""
@@ -2304,7 +2269,6 @@ msgstr ""
 #: app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "STK"
@@ -2349,25 +2313,8 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid "Scheduled Account Fees"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Scheduled By"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Scheduled On"
-msgstr ""
-
-#: app/scripts/directives/navBar/navBar.js
 #: app/scripts/models/dashboard.js
 msgid "Scheduled Payments"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Scheduled Vehicle Payments"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
@@ -2499,7 +2446,7 @@ msgid "Sorry, no results found."
 msgstr ""
 
 #: app/views/floorplan.html
-msgid "Sorry, no results found. Please <a ng-click=\"floorplanData.resetSearch(filterOptions)\" title=\"New Search\">try a new search</a>."
+msgid "Sorry, no results found. Please <a ng-click=\"floorplanData.resetSearch()\" title=\"New Search\">try a new search</a>."
 msgstr ""
 
 #: app/views/payments.html
@@ -2513,10 +2460,6 @@ msgstr ""
 #: app/views/auction.sellerfloorplan.html
 #: app/views/titlereleases.html
 msgid "Sorry, no results found. Please <a ng-click=\"resetSearch()\" title=\"New Search\">try a new search</a>."
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "Sorry, no results found. Please <a ng-click=\"scheduledPayments.resetSearch()\" title=\"New Search\">try a new search</a>."
 msgstr ""
 
 #: app/views/modals/businessSearch.html
@@ -2554,7 +2497,6 @@ msgstr ""
 #: app/views/auction.sellerfloorplan.html
 #: app/views/dashboard.html
 #: app/views/floorplan.html
-#: app/views/scheduledpayments.html
 #: app/views/vehicledetails.html
 msgid "Status"
 msgstr ""
@@ -2662,26 +2604,17 @@ msgstr ""
 msgid "There are no fees associated with this account."
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid "There are no fees currently scheduled with this account."
-msgstr ""
-
 #: app/views/floorplan.html
 #: app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 #: app/views/payments.html
 #: app/views/receipts.html
-#: app/views/scheduledpayments.html
 #: app/views/titlereleases.html
 msgid "There are too many results to display, please refine your search further."
 msgstr ""
 
 #: app/views/modals/paymentExtension.html
 msgid "This extension request cannot be completed online. Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
-msgstr ""
-
-#: app/views/dashboard.html
-msgid "This line of credit expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
 msgstr ""
 
 #: app/views/dashboard.html
@@ -2694,6 +2627,10 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
 msgstr ""
 
 #: app/scripts/controllers/dashboard.js
@@ -2733,7 +2670,7 @@ msgstr ""
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
 "Title Release Limits for this Account:<br>\n"
-"      You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
 msgstr ""
 
 #: app/views/titlereleasecheckout.html
@@ -2796,6 +2733,11 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles."
+msgstr ""
+
+#: app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr ""
 
 #: app/views/modals/paymentExtension.html
@@ -2939,7 +2881,6 @@ msgstr ""
 #: app/views/modals/floorCarConfirm.html
 #: app/views/modals/paymentExtension.html
 #: app/views/payments.html
-#: app/views/scheduledpayments.html
 #: app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 #: app/views/valuelookup.html
@@ -2957,6 +2898,10 @@ msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "VIN should be 17 characters."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "VIN should only contain alphanumeric characters."
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
@@ -3001,7 +2946,6 @@ msgstr ""
 #: app/scripts/controllers/floorplan.js
 #: app/scripts/controllers/payments.js
 #: app/scripts/controllers/receipts.js
-#: app/scripts/controllers/scheduledPayments.js
 #: app/scripts/controllers/titleReleases.js
 #: app/scripts/directives/nxgSearch/nxgSearch.js
 msgid "View All"
@@ -3021,10 +2965,6 @@ msgstr ""
 
 #: app/views/modals/floorCarConfirm.html
 msgid "View Dealer Funding Checklist (PDF)"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "View Receipt"
 msgstr ""
 
 #: app/views/modals/confirmCheckout.html
@@ -3049,8 +2989,6 @@ msgid "View the Vehicle History Detail Report"
 msgstr ""
 
 #: app/scripts/controllers/reports.js
-#: app/scripts/controllers/scheduledPayments.js
-#: app/scripts/models/scheduledPayments.js
 #: app/views/receipts.html
 msgid "Voided"
 msgstr ""
@@ -3260,10 +3198,6 @@ msgstr ""
 msgid "an out-of-date link"
 msgstr ""
 
-#: app/views/scheduledpayments.html
-msgid "as of: {{ pay.statusDate | moment }}"
-msgstr ""
-
 #: app/scripts/controllers/dashboard.js
 msgid "available"
 msgstr ""
@@ -3317,10 +3251,6 @@ msgstr ""
 
 #: app/views/floorplan.html
 msgid "{{ item.FloorplanStatusName }}"
-msgstr ""
-
-#: app/views/scheduledpayments.html
-msgid "{{ pay.daysOnFloorplan }} Days"
 msgstr ""
 
 #: app/views/payments.html

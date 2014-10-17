@@ -1,0 +1,1086 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: NextGear\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-10-17 09:26-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_CA\n"
+
+#: app/views/auction.settings.html app/views/profileSettings.html
+msgid ""
+"<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 "
+"characters.</p><p>Passwords must contain 3 of the 4 following types of "
+"characters: uppercase, lowercase, number, or special characters.</p>"
+msgstr ""
+"<h5>Réinitialisation du mot de passe</h5><p>Les mots de passe doivent "
+"contenir un minimum de 8 caractères. </p><p>Les mots de passe doivent "
+"contenir 3 des 4 types de caractères suivants : majuscules, minuscules, "
+"nombres ou caractères spéciaux.</p>"
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"<span class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length\">0</span> out of "
+"<span class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"TotalReleasesAllowed\">0</span>"
+msgstr ""
+"<span class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length\">0</span> sur <span "
+"class=\"count highlight dash-major\" ng-bind=\"eligibility."
+"TotalReleasesAllowed\">0</span>"
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"<strong>Permanent</strong> – This request will be submitted for review and "
+"may require additional information. Please contact your NextGear "
+"Representative with any questions."
+msgstr ""
+"<strong>Permanent</strong> – Cette demande sera révisée et peut nécessiter "
+"des renseignements supplémentaires. Veuillez communiquer avec votre "
+"représentant NextGear si vous avez des questions."
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"<strong>Temporary</strong> – This request will be reviewed for a term up to "
+"60 days."
+msgstr ""
+"<strong>Temporaire</strong> – Cette demande sera révisée pour un terme "
+"allant jusqu’à 60 jours."
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is due this week. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
+"a>"
+msgstr ""
+"Un paiement est dû cette semaine. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Demander une "
+"prolongation?</a>"
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is due today. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
+"a>"
+msgstr ""
+"Un paiement est dû aujourd'hui. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Demander une "
+"prolongation?</a>"
+
+#: app/views/vehicledetails.html
+msgid ""
+"A payment is overdue. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </"
+"a>"
+msgstr ""
+"Un paiement est en retard. <br><a class=\"primary\" href=\"\" ng-show="
+"\"showExtendLink()\" ng-click=\"requestExtension()\">Demander une "
+"prolongation?</a>"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid "ADDITIONAL PRINCIPAL"
+msgstr "CAPITAL SUPPLÉMENTAIRE"
+
+#: app/views/auction.bulkflooring.html
+msgid ""
+"Actual sales dates must be used when flooring a car. By entering a sale date "
+"of the car being floored the auction certifies the entered sale date for the "
+"car is true and correct."
+msgstr ""
+"La date de vente actuelle doit être utilisée lors du nantissement d’un "
+"véhicule. En indiquant une date de vente pour le véhicule mis en "
+"nantissement, l’encanteur certifie que la date de vente indiquée pour ce "
+"véhicule est exacte et véridique."
+
+#: app/views/vehicledetails.html
+msgid "Add Additional Principal?"
+msgstr "Ajoutez du capital supplémentaire?"
+
+#: app/views/receipts.html
+msgid "Add Receipt"
+msgstr "Ajouter un reçu"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+#: app/views/modals/scheduleCheckout.html app/views/vehicledetails.html
+msgid "Additional Principal"
+msgstr "Capital supplémentaire"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Additional Principal Payment"
+msgstr "Paiement de capital supplémentaire"
+
+#: app/views/analytics.html
+msgid ""
+"Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | "
+"number:2 }}% of the NextGear Capital Book"
+msgstr ""
+"Le montant non réglé représente {{ businessSummary.DerivedAmountOutstanding "
+"| number:2 }} % de la valeur comptable de NextGear Capital"
+
+#: app/views/receipts.html
+msgid "Amount Paid"
+msgstr "Montant payé"
+
+#: app/views/payments.html
+msgid ""
+"Amounts shown are valid through 8pm eastern time\n"
+"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</"
+"span>\n"
+"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</"
+"span>"
+msgstr ""
+"Les montants indiqués sont valides jusqu’à 20 h (heure de l’Est)\n"
+" <span ng-show=\"canPayNow\">aujourd’hui ({{ todayDate | moment }})</span>\n"
+" <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+
+#: app/views/payments.html
+msgid ""
+"Any payments made will be scheduled to be applied on the next available "
+"business day, {{ nextBusinessDay | moment }}, due to our 8pm eastern time "
+"cutoff."
+msgstr ""
+"En raison de notre heure de tombée fixée à 20 h (heure de l’Est), tout "
+"paiement effectué sera traité le prochain jour ouvrable, {{ nextBusinessDay."
+"date | moment }}."
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Chat"
+msgstr "Clavarder"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Confirm Changes"
+msgstr "Confirmer les modifications"
+
+#: app/views/modals/floorCarConfirm.html
+msgid ""
+"Confirm the vehicle information to send the flooring request to NextGear. "
+"<br>Print this screen for your records."
+msgstr ""
+"Confirmer les informations relatives au véhicule pour envoyer la demande de "
+"nantissement à NextGear. <br>Imprimer cet écran pour vos dossiers."
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"Credit requests typically take 3-5 business days to process. You will be "
+"notified by email as soon as your request has been processed."
+msgstr ""
+"Les demandes de crédit sont généralement traitées en 3 à 5 jours ouvrables. "
+"Vous serez avisé par courriel aussitôt que votre demande sera traitée."
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Curtailment Payment"
+msgstr "Paiement de réduction"
+
+#: app/views/modals/confirmDisableEnhanced.html
+msgid ""
+"Disabling the Enhanced Registration Program will delete any current PINs "
+"associated with this business."
+msgstr ""
+"La désactivation du programme d’inscription améliorée effacera tous les NIP "
+"présentement associés à cette entreprise."
+
+#: app/views/login.html
+msgid ""
+"Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> or newer?"
+msgstr ""
+"Avez-vous <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> ou une version plus récente?"
+
+#: app/views/auction.documents.html app/views/auction.reports.html
+#: app/views/documents.html app/views/reports.html
+msgid ""
+"Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat "
+"Reader."
+msgstr ""
+"Avez-vous <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe "
+"Acrobat Reader 8.1</a> ou une version plus récente? Vos documents sont "
+"affichés dans Acrobat Reader."
+
+#: app/views/vehicledetails.html
+msgid "Edit Additional Principal"
+msgstr "Modifier le capital supplémentaire"
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Edit Settings"
+msgstr "Modifier les paramètres"
+
+#: app/unsupported.html
+msgid ""
+"Effective June 1st, in order to access the NextGear Capital Web Portal, you "
+"need to be using the latest version of Internet Explorer, Mozilla Firefox or "
+"Google Chrome. Your current browser is no longer compatible with the latest "
+"version of the NextGear Capital Web Portal. You may upgrade your browser now "
+"using one of the links below."
+msgstr ""
+"À partir du 1er juin, vous devez utiliser la plus récente version d’Internet "
+"Explorer, de Mozilla Firefox ou de Google Chrome pour accéder au portail Web "
+"de NextGear Capital. Votre fureteur actuel n’est plus compatible avec la "
+"dernière version du portail Web de NextGear Capital. Vous pouvez maintenant "
+"mettre votre fureteur à jour en utilisant l’un des liens ci-dessous."
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "English"
+msgstr "Anglais"
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid ""
+"Enhanced Registration will result in all account access being restricted to "
+"users with a PIN. All guarantors will be asked to set up their PIN when "
+"logging in to MyNextGear."
+msgstr ""
+"Avec l’inscription améliorée, les accès au compte seront restreints aux "
+"usagers disposant d’un NIP. Tous les répondants devront créer un NIP lors de "
+"l’ouverture d’une session sur MyNextGear."
+
+#: app/views/login.recover.html
+msgid ""
+"Enter the email address associated with your account to receive your "
+"username via email."
+msgstr ""
+"Inscrivez l’adresse associée à votre compte pour recevoir votre nom d’usager "
+"par courriel."
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Espa&ntilde;ol"
+msgstr "Espagnol"
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
+msgid "Excellent"
+msgstr "Excellent"
+
+#: app/views/receipts.html
+msgid "Export Receipts"
+msgstr "Exportation des reçus"
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
+msgid "Fair"
+msgstr "Adéquat"
+
+#: app/views/vehicledetails.html
+msgid ""
+"Floor Plan Value Estimates <span class=\"well-sub-title\">NextGear &amp; MMR "
+"Valuation</span>"
+msgstr ""
+"Valeurs estimées du plan de nantissement <span class=\"well-sub-title"
+"\">Évaluation MMR et NextGear Capital</span>"
+
+#: app/views/dashboard.html
+msgid "Floor Plans"
+msgstr "Plans de nantissement"
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "Fran&ccedil;ais"
+msgstr "Français"
+
+#: app/views/modals/confirmCheckout.html
+msgid "Future Fees"
+msgstr "Frais futurs"
+
+#: app/views/modals/confirmCheckout.html
+msgid "Future Payments"
+msgstr "Paiements futurs"
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
+msgid "Good"
+msgstr "Bon"
+
+#: app/views/login.html
+msgid ""
+"If you are experiencing an issue logging in, click \"Forgot your username or "
+"password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital."
+"com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
+msgstr ""
+"Si vous éprouvez un problème lors de l’ouverture de session, cliquez ci-"
+"dessous sur « Nom d’utilisateur ou mot de passe oublié? » ou contactez <a "
+"href=\"mailto:dealertickets@nextgearcapital.com\" target=\"_blank"
+"\">dealertickets@nextgearcapital.com</a>."
+
+#: app/views/auction.dealersearch.html
+msgid ""
+"If you have the NextGear Capital Dealer Number or Auction Access Number, use "
+"the Dealer Number search."
+msgstr ""
+"Si vous avez le numéro de concessionnaire de NextGear Capital ou un numéro "
+"d’accès à l’encan, utilisez la recherche par numéro de concessionnaire."
+
+#: app/unsupported.html
+msgid ""
+"If you need assistance, please call NextGear Capital Support at: (888) "
+"969-3721."
+msgstr ""
+"Si vous avez besoin d’assistance, veuillez contacter le service de soutien "
+"de NextGear Capital au (888) 969-3721."
+
+#: app/views/account_management.html
+msgid ""
+"Initiate your request for a permanent or temporary increase to your current "
+"line of credit."
+msgstr ""
+"Lancer la demande d’augmentation permanente ou temporaire de votre marge de "
+"crédit actuelle."
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Interest-Only Payment"
+msgstr "Paiement d'intérêts seulement"
+
+#: app/views/valuelookup.html
+msgid "Lookup Values"
+msgstr "Valeurs de recherche"
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
+msgid "MMR Values"
+msgstr "Valeurs MMR"
+
+#: app/views/vehicledetails.html
+msgid "MMR Values not found on record for this vehicle."
+msgstr "Valeurs MMR non trouvées dans les dossiers pour ce véhicule."
+
+#: app/views/valuelookup.html
+msgid "Manual Lookup"
+msgstr "Recherche manuelle"
+
+#: app/scripts/models/mmr.js
+msgid "Missing mileage"
+msgstr "Kilométrage non indiqué"
+
+#: app/views/valuelookup.html
+msgid "NextGear Book"
+msgstr "La valeur comptable de NextGear Capital"
+
+#: app/views/valuelookup.html
+msgid "NextGear Book &amp; MMR"
+msgstr "MMR et la valeur comptable de NextGear Capital"
+
+#: app/views/valuelookup.html
+msgid "NextGear Book or MMR"
+msgstr "MMR ou la valeur comptable de NextGear Capital"
+
+#: app/views/analytics.html
+msgid ""
+"NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | "
+"number:2 }}% of the Purchase Price"
+msgstr ""
+"La valeur comptable de NextGear Capital représente {{ businessSummary."
+"DerivedCapitalBook | number:2 }} % du prix d’achat"
+
+#: app/views/analytics.html
+msgid ""
+"NextGear Capital Book is {{ businessSummary.DerivedPendingBook | "
+"number:2 }}% of the Purchase Price."
+msgstr ""
+"La valeur comptable de NextGear Capital représente {{ businessSummary."
+"DerivedCapitalBook | number:2 }} % du prix d'achat."
+
+#: app/views/auction.sellerfloorplan.html
+msgid ""
+"NextGear has been notified of this change and will be sending funding soon."
+msgstr ""
+"NextGear Capital a été avisé de cette modification et procédera sous peu à "
+"l’envoi du financement."
+
+#: app/views/scheduledpayments.html
+msgid ""
+"Note: Payoff and due amounts may change. Interest and/or fees may continue "
+"to accrue between now and your scheduled payment.<br>\n"
+"          Note: No payment may be scheduled on an overdue loan, or a loan "
+"due today."
+msgstr ""
+"Veuillez noter : les montants remboursés et dus peuvent être modifiés. Les "
+"intérêts et/ou les frais peuvent continuer de s’accumuler d’ici la date du "
+"paiement programmé.<br>\n"
+" Veuillez noter : aucun paiement ne peut être programmé pour un prêt en "
+"retard ou un prêt échéant aujourd’hui."
+
+#: app/views/login.createPassword.html
+msgid ""
+"Passwords must consist of a minimum of 8 characters. Passwords must contain "
+"3 of the 4 following types of characters: uppercase, lowercase, number, or "
+"special character."
+msgstr ""
+"Les mots de passe doivent contenir un minimum de 8 caractères. Les mots de "
+"passe doivent contenir 3 des 4 types de caractères suivants : majuscules, "
+"minuscules, nombres ou caractères spéciaux."
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Pay Now"
+msgstr "Payer maintenant"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+#: app/views/modals/scheduleCheckout.html
+msgid "Payment Breakdown"
+msgstr "Ventilation du paiement"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payment Options & Breakdown"
+msgstr "Ventilation et options de paiement"
+
+#: app/views/vehicledetails.html
+msgid "Payment Options &amp; Breakdown"
+msgstr "Ventilation et options de paiement"
+
+#: app/views/checkout.html
+msgid "Payment Options<br> & Breakdown"
+msgstr "Ventilation <br>et options de paiement"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+#: app/views/modals/scheduleCheckout.html
+msgid "Payment Total"
+msgstr "Total du paiement"
+
+#: app/views/checkout.html
+msgid ""
+"Payments are unable to be scheduled for loans that are overdue or due today."
+msgstr ""
+"Les paiements ne peuvent être programmés pour les prêts en retard ou qui "
+"viennent à échéance aujourd’hui."
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payoff this vehicle"
+msgstr "Rembourser ce véhicule"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
+msgstr ""
+"Le montant du paiement doit se situer entre 0,01 $ et {{ maxAdditional | "
+"currency }}"
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Please be advised that such title(s) must be returned to NextGear Capital, "
+"at the address listed below, by close of business on the seventh (7th) day "
+"after the date of NextGear Capital's release of such title(s) to you. You "
+"understand and agree that NextGear Capital will declare a Maturity Event (as "
+"such term is defined in your Demand Promissory Note and Loan and Security "
+"Agreement (\"Note\")) and initiate a Required Payment (as such term is "
+"defined in your ACH Authorization and Request Form) for all Liabilities (as "
+"defined in your Note) related to any title(s) not returned to NextGear "
+"Capital within such time frame. You agree that each Required Payment made "
+"pursuant to this request shall be deemed an Authorized Debit under your ACH "
+"Form."
+msgstr ""
+"Veuillez noter que ces titres doivent être retournés à NextGear Capital, à "
+"l’adresse indiquée ci-dessous, au plus tard à la fermeture des bureaux le "
+"septième (7e) jour suivant la date d’émission de ces titres par NextGear "
+"Capital à votre intention. Vous comprenez et vous acceptez que NextGear "
+"Capital déclarera un cas d’échéance (comme défini dans votre billet à ordre "
+"et dans votre contrat de garantie de prêt [« Billet »]) et amorcera une "
+"demande de paiement (comme définie dans votre Formulaire de demande et "
+"d’autorisation ACH) pour tout passif (comme défini dans votre billet) lié à "
+"tout titre non retourné à NextGear Capital dans ces délais. Vous convenez "
+"que tout paiement demandé et effectué conformément à cette demande sera "
+"considéré comme un débit autorisé en vertu de votre formulaire ACH."
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"Please confirm your title release request(s) below. Titles released here are "
+"required to be returned within 7 days. If you are requesting a title for "
+"state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact "
+"customer service for further assistance."
+msgstr ""
+"Veuillez confirmer les demandes d’émission de titres ci-dessous. Les titres "
+"ici émis doivent être retournés dans les 7 jours. Si vous demander un titre "
+"pour un contrat avec un organisme gouvernemental, veuillez <a nxg-chat-with-"
+"us=\"\">clavarder avec nous</a> ou contacter le service à la clientèle pour "
+"obtenir de l’assistance."
+
+#: app/views/floorcar.html
+msgid ""
+"Please enter a Valid Purchase Date Year between {{minValidModelYear}} and "
+"{{maxValidModelYear}}."
+msgstr ""
+"Veuillez inscrire une date d'achat valide (année) entre "
+"{{minValidModelYear}} et {{maxValidModelYear}}."
+
+#: app/views/auction.bulkflooring.html
+msgid ""
+"Please enter a Valid Sales Date Year between {{minValidModelYear}} and "
+"{{maxValidModelYear}}."
+msgstr ""
+"Veuillez inscrire une date de vente valide (année) entre "
+"{{minValidModelYear}} et {{maxValidModelYear}}."
+
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+msgid ""
+"Please enter a positive numeric value with no <br> special characters, such "
+"as a dollar sign."
+msgstr ""
+"Veuillez inscrire une valeur numérique positive sans <br> caractères "
+"spéciaux comme le signe de dollar."
+
+#: app/views/modals/requestCreditIncrease.html
+msgid ""
+"Please enter a positive numeric value with no more than 2 decimal places."
+msgstr ""
+"Veuillez inscrire une valeur numérique positive avec un maximum de 2 "
+"décimales."
+
+#: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
+msgid ""
+"Please enter an End Stock Number that is greater than the Start Stock Number"
+msgstr ""
+"Veuillez inscrire un numéro de fin de stock supérieur au numéro de stock de "
+"départ"
+
+#: app/views/checkout.html
+msgid ""
+"Please enter the amount of unapplied funds as a number with no more than 2 "
+"decimals."
+msgstr ""
+"Veuillez inscrire le montant des fonds non alloués avec un nombre ne "
+"contenant pas plus de 2 décimales."
+
+#: app/views/login.recover.html
+msgid ""
+"Please enter your email address. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+"Veuillez inscrire votre adresse de courriel. Si vous avez besoin "
+"d’assistance, veuillez contacter\n"
+" le service de soutien de NextGear Capital au <nxg-customer-support-phone></"
+"nxg-customer-support-phone>."
+
+#: app/views/login.recover.html
+msgid ""
+"Please enter your user name. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+"Veuillez entrer votre nom d’usager. Si vous avez besoin d’assistance, "
+"veuillez contacter\n"
+" le service de soutien de NextGear Capital au <nxg-customer-support-phone></"
+"nxg-customer-support-phone>.  "
+
+#: app/views/modals/paymentExtension.html
+msgid ""
+"Please note this quote is effective for today only and amounts are subject "
+"to change."
+msgstr ""
+"Veuillez noter que ce devis n’est valide qu’aujourd’hui et que les montants "
+"sont sujets à modification."
+
+#: app/views/valuelookup.html
+msgid "Please select a Make."
+msgstr "Veuillez sélectionner une marque."
+
+#: app/views/valuelookup.html
+msgid "Please select a Model."
+msgstr "Veuillez sélectionner un modèle."
+
+#: app/views/valuelookup.html
+msgid "Please select a Style."
+msgstr "Veuillez sélectionner un style."
+
+#: app/views/valuelookup.html
+msgid "Please select a Year."
+msgstr "Veuillez sélectionner une année."
+
+#: app/views/modals/scheduleCheckout.html
+msgid ""
+"Please select a valid banking date no earlier than tomorrow and no later "
+"than the payment due date."
+msgstr ""
+"Veuillez sélectionner une date d’opération bancaire valide située entre "
+"demain et la date d’échéance du paiement."
+
+#: app/views/receipts.html
+msgid "Receipts Selected"
+msgstr "Reçus sélectionnés"
+
+#: app/views/receipts.html
+msgid "Remove Receipt"
+msgstr "Enlever le reçu"
+
+#: app/views/valuelookup.html
+msgid "Reset Values"
+msgstr "Réinitialiser les valeurs"
+
+#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/profileSettings.html
+msgid "Save Settings"
+msgstr "Sauvegarder les paramètres"
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Schedule Date"
+msgstr "Programmer une date"
+
+#: app/views/modals/scheduleCheckout.html
+msgid ""
+"Scheduled payments are not made until the scheduled date. <br> Interest and/"
+"or fees may continue to accrue between now and your scheduled payment date."
+msgstr ""
+"Les paiements programmés ne seront pas effectués avant la date programmée. "
+"<br> Des frais et/ou des intérêts peuvent continuer de s’accumuler d’ici la "
+"date de votre paiement programmé."
+
+#: app/views/modals/scheduleCheckout.html
+msgid "Select a date from the picker below"
+msgstr "Sélectionnez une date à partir du sélecteur ci-dessous"
+
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Select a payment from the options below"
+msgstr "Sélectionnez un paiement parmi les options ci-dessous"
+
+#: app/views/login.updateSecurity.html
+msgid ""
+"Since this is your first login to NextGear Capital, please set your security "
+"questions before you enter the site."
+msgstr ""
+"Comme il s’agit de votre première ouverture de session auprès de NetGear "
+"Capital, veuillez créer vos questions de sécurité avant d’accéder au site."
+
+#: app/views/floorplan.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"floorplanData."
+"resetSearch(filterOptions)\" title=\"New Search\">try a new search</a>."
+msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez <a ng-click=\"floorplanData."
+"resetSearch(filterOptions)\" title=\"New Search\">tenter une nouvelle "
+"recherche</a>."
+
+#: app/views/payments.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title="
+"\"New Search\">try a new search</a>."
+msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez <a ng-click=\"payments."
+"resetSearch()\" title=\"New Search\">tenter une nouvelle recherche</a>."
+
+#: app/views/receipts.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"receipts.resetSearch()\" title="
+"\"New Search\">try a new search</a>."
+msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez <a ng-click=\"receipts."
+"resetSearch()\" title=\"New Search\">tenter une nouvelle recherche</a>."
+
+#: app/views/auction.sellerfloorplan.html app/views/titlereleases.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"resetSearch()\" title=\"New "
+"Search\">try a new search</a>."
+msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez <a ng-click="
+"\"resetSearch()\" title=\"New Search\">tenter une nouvelle recherche</a>."
+
+#: app/views/scheduledpayments.html
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"scheduledPayments."
+"resetSearch()\" title=\"New Search\">try a new search</a>."
+msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez <a ng-click="
+"\"scheduledPayments.resetSearch()\" title=\"New Search\">tenter une nouvelle "
+"recherche</a>."
+
+#: app/scripts/controllers/titleReleases.js
+msgid ""
+"The floor plan you have selected for title release would put you over the "
+"financial plan limits for this account."
+msgstr ""
+"Le plan de nantissement que vous avez sélectionné pour l’émission de titres "
+"vous portera au-delà des limites du plan financier de ce compte."
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"The title(s) will be sent to the following address: <strong>{{addresses[0] | "
+"address}}</strong>"
+msgstr ""
+"Les titres seront envoyés à l’adresse suivante : <strong>{{addresses[0] | "
+"address}}</strong>"
+
+#: app/views/valuelookup.html
+msgid ""
+"There are multiple vehicle styles for this VIN. Please select the "
+"appropriate style below."
+msgstr ""
+"Il y a plusieurs styles de véhicules pour ce NIV. Veuillez sélectionner le "
+"style approprié ci-dessous."
+
+#: app/views/floorplan.html app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html app/views/payments.html
+#: app/views/receipts.html app/views/scheduledpayments.html
+#: app/views/titlereleases.html
+msgid ""
+"There are too many results to display, please refine your search further."
+msgstr ""
+"Il y a trop de résultats à afficher; veuillez préciser votre recherche."
+
+#: app/views/modals/paymentExtension.html
+msgid ""
+"This extension request cannot be completed online. Please <a nxg-chat-with-"
+"us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr ""
+"Cette demande de prolongation ne peut être complétée en ligne. Veuillez <a "
+"nxg-chat-with-us=\"\">clavarder avec nous</a> ou contacter le service à la "
+"clientèle pour obtenir de l’assistance."
+
+#: app/views/dashboard.html
+msgid ""
+"This line of credit expires on: {{dashboardData.selectedLineOfCredit."
+"TempLineOfCreditExpiration | moment}}"
+msgstr ""
+"Cette marge de crédit vient à échéance le : {{dashboardData."
+"selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com or by a "
+"NextGear employee via NextGear's Discover system that have been approved and "
+"are currently on the NextGear dealer's floor plan."
+msgstr ""
+"Cet état s’applique aux véhicules nantis par l’entremise de NextGearCapital."
+"com ou par un employé de NextGear Capital par l’entremise du système "
+"Discover de NextGear Capital, qui ont été approuvés et qui sont actuellement "
+"inscrits au plan de nantissement du concessionnaire NextGear Capital."
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com or by a "
+"NextGear employee via NextGear's Discover system that have not yet been "
+"approved by a NextGear employee."
+msgstr ""
+"Cet état s'applique aux véhicules nantis par l'entremise de NextGearCapital."
+"com ou par un employé de NextGear Capital par l'entremise du système "
+"Discover de NextGear Capital, et qui n’ont pas encore été approuvés par un "
+"employé de NextGear Capital."
+
+#: app/views/dashboard.html
+msgid ""
+"This status applies to vehicles floored via NextGearCapital.com that have "
+"been denied by a NextGear employee. Please contact NextGear Customer Service "
+"to find out why a vehicle has been denied."
+msgstr ""
+"Cet état s’applique aux véhicules nantis par l’entremise de NextGearCapital."
+"com qui ont été refusés par un employé de NextGear Capital. Veuillez "
+"contacter le service à la clientèle de NextGear Capital pour connaitre les "
+"raisons du refus pour ce véhicule."
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits for this Account:<br>\n"
+"      You have <span class=\"count\">{{ eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of "
+"<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
+"available."
+msgstr ""
+"Limites d’émission de titres pour ce compte : <br>\n"
+" Vous disposez de <span class=\"count\">{{ eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length }}</span> "
+"disponibles sur <span class=\"count\">{{ eligibility.TotalReleasesAllowed || "
+"0 }}</span>."
+
+#: app/views/titlereleasecheckout.html
+msgid ""
+"Titles can only be released to an address on file. Please select the address "
+"where you would like to receive each of your requested titles."
+msgstr ""
+"Les titres ne peuvent être émis qu’à une adresse inscrite au dossier. "
+"Veuillez sélectionner l’adresse où vous désirez recevoir les titres demandés."
+
+#: app/views/auction.dealersearch.html
+msgid ""
+"To look up a dealer in Dealer search, use a combination of their Name and "
+"City or\n"
+"      State."
+msgstr ""
+"Pour rechercher un concessionnaire dans la recherche de concessionnaire, "
+"veuillez utiliser une combinaison incluant le nom et la ville ou la\n"
+" province."
+
+#: app/views/account_management.html
+msgid ""
+"To update or add a Title Settings address, please contact NextGear Capital "
+"at: ' + customerSupportPhone + '."
+msgstr ""
+"Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
+"contacter NextGear Capital au ' + customerSupportPhone + '."
+
+#: app/views/modals/confirmCheckout.html
+msgid "Today's Fees"
+msgstr "Frais d’aujourd’hui"
+
+#: app/views/modals/confirmCheckout.html
+msgid "Today's Payments"
+msgstr "Paiements d'aujourd'hui"
+
+#: app/views/checkout.html
+msgid ""
+"Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></"
+"span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
+msgstr ""
+"Les fonds non alloués doivent se situer entre <span ng-bind=\"unappliedFunds."
+"min() | currency\"></span> et <span ng-bind=\"unappliedFunds.max() | currency"
+"\"></span>"
+
+#: app/views/valuelookup.html
+msgid "VIN Lookup"
+msgstr "Recherche de NIV"
+
+#: app/views/valuelookup.html
+msgid "VIN should be 10 - 17 characters."
+msgstr "Le NIV doit contenir entre 10 et 17 caractères."
+
+#: app/scripts/directives/navBar/navBar.js
+msgid "Value Lookup"
+msgstr "Recherche de valeur"
+
+#: app/views/valuelookup.html
+msgid "Values below will update based on successful VIN or Manual Lookup"
+msgstr ""
+"Les valeurs ci-dessous seront mises à jour suite à une recherche de NIV ou "
+"une recherche manuelle réussie"
+
+#: app/views/valuelookup.html
+msgid "We are sorry, but we are unable to provide MMR Values at this time."
+msgstr ""
+"Nous sommes désolés, mais nous ne sommes pas en mesure d'offrir les valeurs "
+"MMR en ce moment."
+
+#: app/views/valuelookup.html
+msgid ""
+"We are sorry, but we are unable to provide NextGear Book Values at this time."
+msgstr ""
+"Nous sommes désolés, mais nous ne sommes pas en mesure d’offrir les valeurs "
+"comptables de NextGear Capital en ce moment."
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable to locate this email address. If you need assistance, please "
+"call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+"Nous n’avons pu trouver cette adresse de courriel. Si vous avez besoin "
+"d’assistance, veuillez contacter\n"
+" le service de soutien de NextGear Capital au : <nxg-customer-support-"
+"phone></nxg-customer-support-phone>."
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable to locate this username. If you need assistance, please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+"Nous n'avons pu trouver ce nom d'utilisateur. Si vous avez besoin "
+"d'assistance, veuillez contacter\n"
+" le service de soutien de NextGear Capital au : <nxg-customer-support-"
+"phone></nxg-customer-support-phone>."
+
+#: app/views/login.recover.html
+msgid ""
+"We were unable verify one or more of your answers. If you need assistance, "
+"please call\n"
+"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
+"customer-support-phone>."
+msgstr ""
+"Nous n’avons pu vérifier une ou plusieurs de vos réponses. Si vous avez "
+"besoin d’assistance, veuillez contacter\n"
+" le service de soutien de NextGear Capital au: <nxg-customer-support-phone></"
+"nxg-customer-support-phone>."
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"We're sorry, the highlighted title(s) listed above cannot be processed at "
+"this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
+"customer-support-phone></nxg-customer-support-phone></span>"
+msgstr ""
+"Nous sommes désolés, les titres sélectionnés ne peuvent être traités pour le "
+"moment. Veuillez contacter le service à la clientèle au : <span class="
+"\"highlight\"><nxg-customer-support-phone></nxg-customer-support-phone></"
+"span>"
+
+#: app/scripts/controllers/titleReleases.js
+msgid ""
+"We're sorry, this title is unavailable for release at this time. If you "
+"would like more information about this title, please call Dealer Services at "
+"{{ phoneNumber }}."
+msgstr ""
+"Nous sommes désolés, ce titre ne peut être émis en ce moment. Si vous "
+"désirez plus d’informations au sujet de ce titre, veuillez contacter les "
+"services au concessionnaire, au {{ phoneNumber }}."
+
+#: app/views/receipts.html
+msgid ""
+"You can combine up to 20 receipts into a single pdf by selecting each "
+"receipt and clicking 'Export Receipt(s)' below."
+msgstr ""
+"Vous pouvez combiner jusqu’à 20 reçus dans un seul PDF en sélectionnant "
+"chaque reçu et en cliquant ci-dessous sur « Exporter les reçus »."
+
+#: app/scripts/models/user.js
+msgid ""
+"You do not appear to have any security questions configured. Please contact "
+"NextGear for assistance."
+msgstr ""
+"Vos questions de sécurité ne semblent pas avoir été configurées. Veuillez "
+"contacter NextGear Capital afin d’obtenir de l’assistance."
+
+#: app/views/login.html
+msgid ""
+"You will need it in order to view your reports.<br>\n"
+"          Not sure? <a href=\"https://test.discoverdsc.com/MyDSC/Public/Test."
+"pdf\" target=\"_blank\">Test your Adobe Reader installation.</a><br>\n"
+"          If the document did not successfully display, please install <a "
+"href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader."
+"</a>"
+msgstr ""
+"Vous en aurez besoin pour visionner vos rapports.<br>\n"
+" Vous n’êtes pas certain? <a href=\"https://test.discoverdsc.com/MyDSC/"
+"Public/Test.pdf\" target=\"_blank\">Vérifier l’installation d’Adobe Reader.</"
+"a><br>\n"
+" Si le document ne s’affiche par correctement, veuillez installer <a href="
+"\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader.</a>"
+
+#: app/views/account_management.html app/views/auction.settings.html
+msgid ""
+"Your PIN must consist of four numbers, no letters or special characters."
+msgstr ""
+"Votre NIP doit contenir quatre chiffres, sans lettres ni caractères spéciaux."
+
+#: app/views/modals/confirmCheckout.html
+msgid "Your Payments Have Been Submitted."
+msgstr "Vos paiements ont été soumis."
+
+#: app/views/modals/topAuctions.html
+msgid ""
+"Your Top Auctions is a list of auctions and dealers that you have purchased "
+"at least two vehicles from in the past 12 months. For each auction, a "
+"breakdown is given which allows you to analyze which auctions or sellers are "
+"providing you with the best value on vehicle purchases."
+msgstr ""
+"« Vos meilleurs encans » contient une liste des encans et des "
+"concessionnaires auprès desquels vous avez acheté au moins deux véhicules au "
+"cours des 12 derniers mois. Pour chaque encan, une ventilation vous permet "
+"d’analyser quels encans ou quels vendeurs vous offrent la meilleure valeur "
+"sur les achats de véhicules."
+
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
+msgid ""
+"Your request for a payout in the amount of {{ amount }} to your account "
+"\"{{ bankAccountName }}\" has been successfully submitted."
+msgstr ""
+"Votre demande d’un paiement au montant de {{ amount }} porté à votre compte "
+"\"{{ bankAccountName }}\" a été soumise avec succès."
+
+#: app/scripts/controllers/modals/requestCreditIncrease.js
+msgid ""
+"Your request has been submitted. Credit requests typically take 3-5 business "
+"days to process. You will be notified as soon as your request has been "
+"processed."
+msgstr ""
+"Votre demande a été soumise. Les demandes de crédit sont généralement "
+"traitées en 3 à 5 jours ouvrables. Vous serez avisé par courriel aussitôt "
+"que votre demande sera traitée."
+
+#: app/views/modals/scheduleCheckout.html
+msgid "or"
+msgstr "ou"
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.ExtendedTermPlanLength }} days)</span>"
+msgstr ""
+"{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(de "
+"{{ flooringInfo.ExtendedTermPlanLength }} jours)</span>"
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.OriginalTermDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.OriginalTermPlanLength }} days)</span>"
+msgstr ""
+"{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(de "
+"{{ flooringInfo.ExtendedTermPlanLength }} jours)</span>"
+
+#: app/views/vehicledetails.html
+msgid ""
+"{{ flooringInfo.TotalDaysFloored }} <span class=\"value-note\">(of "
+"{{ flooringInfo.TotalTermPlanLength }} days)</span>"
+msgstr ""
+"{{ flooringInfo.TotalDaysFloored }} <span class=\"value-note\">(de "
+"{{ flooringInfo.TotalTermPlanLength }} jours)</span>"
+
+#: app/views/login.recover.html
+msgid ""
+"{{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. "
+"If you need assistance,\n"
+"            please call NextGear Capital Support at: <nxg-customer-support-"
+"phone></nxg-customer-support-phone>."
+msgstr ""
+"{{ forgotUserNameValidity.email.$viewValue }} n'est pas une adresse de "
+"courriel valide. Si vous avez besoin d'assistance,\n"
+" veuillez contacter le service de soutien de NextGear Capital au : <nxg-"
+"customer-support-phone></nxg-customer-support-phone>."
+
+#: app/views/valuelookup.html
+msgid "{{ results.mileage | numeral:'0,0' }} miles"
+msgstr "{{ results.mileage | numeral:'0,0' }} milles"
+
+#: app/views/receipts.html
+msgid ""
+"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</"
+"span> 20"
+msgstr ""
+"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
+"20"
+
+#: app/views/checkout.html app/views/dashboard.html app/views/payments.html
+msgid "Account Fee"
+msgid_plural "Account Fees"
+msgstr[0] "Frais de compte"
+msgstr[1] "Frais de compte"
+
+#. Payment This [Month, Year]
+#: app/views/dashboard.html
+msgid "Payment This {{ viewMode | capitalize }}"
+msgid_plural "Payments This {{ viewMode | capitalize }}"
+msgstr[0] "Paiement ce {{ viewMode | capitalize }}"
+msgstr[1] "Paiements ce {{ viewMode | capitalize }}"
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+#: app/views/modals/confirmTitleRequest.html
+msgid "Title Request"
+msgid_plural "Title Requests"
+msgstr[0] "Demande de titre"
+msgstr[1] "Demandes de titre"
+
+#: app/scripts/controllers/titleReleaseCheckout.js
+#: app/views/titlereleasecheckout.html app/views/titlereleases.html
+msgid "Title Requested"
+msgid_plural "Titles Requested"
+msgstr[0] "Titre demandé"
+msgstr[1] "Titres demandés"
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Your title request has been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgid_plural ""
+"Your title requests have been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgstr[0] ""
+"Votre demande de titre a été approuvée. Un courriel contenant un numéro de "
+"suivi vous sera envoyé sous peu."
+msgstr[1] ""
+"Vos demandes de titres ont été approuvées. Un courriel contenant un numéro "
+"de suivi vous sera envoyé sous peu."
+
+#: app/views/modals/confirmTitleRequest.html
+msgid "Your title request has been submitted."
+msgid_plural "Your title requests have been submitted."
+msgstr[0] "Votre demande de titre a été soumise."
+msgstr[1] "Vos demandes de titres ont étés soumises."
+
+#: app/views/checkout.html
+msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
+msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
+msgstr[0] "{{ paymentQueue.sum.scheduledCount() }} Paiement futur"
+msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Paiements futurs"
