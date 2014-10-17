@@ -178,9 +178,9 @@ angular.module('nextgearWebApp')
       var title = gettextCatalog.getString('Cancel'),
         msg = gettextCatalog.getString('What would you like to do?'),
         buttons = [
-          {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary'},
-          {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary'},
-          {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary'}
+          {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary btn-sm'},
+          {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
+          {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary btn-sm'}
         ];
       $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
         if (choice === 'home') {
