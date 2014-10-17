@@ -1492,17 +1492,6 @@ msgstr ""
 "archivo. Por favor, seleccione las direcciones donde le gustaría recibir "
 "cada uno de sus títulos solicitados."
 
-#: app/views/titleRelease.html
-msgid ""
-"Titles released here are required to be returned within seven days. If you "
-"are requesting a title for state work, please contact customer service at <a "
-"nxg-customer-support-phone=\"\"></a> for further assistance."
-msgstr ""
-"Los títulos liberados en el presente documento deberán ser devueltos en "
-"siete días. Si está solicitando un título para para enviarlo a un organismo "
-"estatal, por favor, póngase en contacto con servicio a clientes en <a nxg-"
-"customer-support-phone=\"\"></a> para obtener ayuda."
-
 #: app/views/dialogs/topAuctionsInfo.html
 msgid "Top Auctions"
 msgstr "Principales subastas"

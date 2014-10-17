@@ -140,20 +140,12 @@ msgstr ""
 msgid "Passwords must consist of a minimum of 8 characters. Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special character."
 msgstr ""
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Total:"
-msgstr ""
-
 #: app/views/checkout.html
 msgid "Payments are unable to be scheduled for loans that are overdue or due today."
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Please be advised that such title(s) must be returned to NextGear Capital, at the address listed below, by close of business on the seventh (7th) day after the date of NextGear Capital's release of such title(s) to you. You understand and agree that NextGear Capital will declare a Maturity Event (as such term is defined in your Demand Promissory Note and Loan and Security Agreement (\"Note\")) and initiate a Required Payment (as such term is defined in your ACH Authorization and Request Form) for all Liabilities (as defined in your Note) related to any title(s) not returned to NextGear Capital within such time frame. You agree that each Required Payment made pursuant to this request shall be deemed an Authorized Debit under your ACH Form."
-msgstr ""
-
-#: app/views/titlereleasecheckout.html
-msgid "Please confirm your title release request(s) below."
 msgstr ""
 
 #: app/views/floorcar.html
@@ -199,6 +191,10 @@ msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
 msgid "Please select a valid banking date no earlier than tomorrow and no later than the payment due date."
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
 msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
@@ -267,19 +263,8 @@ msgstr ""
 msgid "This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
 msgstr ""
 
-#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
-msgid ""
-"Title Release Limits for this Account:<br>\n"
-"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
-msgstr ""
-
 #: app/views/titlereleasecheckout.html
 msgid "Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles."
-msgstr ""
-
-#: app/views/titlereleasecheckout.html
-#: app/views/titlereleases.html
-msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -289,6 +274,7 @@ msgid ""
 msgstr ""
 
 #: app/views/account_management.html
+#: app/views/auction.settings.html
 msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
 msgstr ""
 

@@ -848,6 +848,17 @@ msgstr ""
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
 "Title Release Limits for this Account:<br>\n"
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+msgstr ""
+"Limites d’émission de titres pour ce compte : <br>\n"
+" Vous disposez de <span class=\"count\">{{ eligibility."
+"RemainingReleasesAvailable - titleQueue.contents.length }}</span> "
+"disponibles sur <span class=\"count\">{{ eligibility.TotalReleasesAllowed || "
+"0 }}</span>."
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits for this Account:<br>\n"
 "      You have <span class=\"count\">{{ eligibility."
 "RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of "
 "<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
@@ -874,17 +885,6 @@ msgid ""
 msgstr ""
 "Les titres ne peuvent être émis qu’à une adresse inscrite au dossier. "
 "Veuillez sélectionner l’adresse où vous désirez recevoir les titres demandés."
-
-#: app/views/titleRelease.html
-msgid ""
-"Titles released here are required to be returned within seven days. If you "
-"are requesting a title for state work, please contact customer service at <a "
-"nxg-customer-support-phone=\"\"></a> for further assistance."
-msgstr ""
-"Les titres ici émis doivent être retournés dans les sept jours. Si vous "
-"demander un titre pour un contrat avec un organisme gouvernemental, veuillez "
-"communiquer avec le service à la clientèle au <a nxg-customer-support-phone="
-"\"\"></a> pour obtenir de l’aide."
 
 #: app/views/auction.dealersearch.html
 msgid ""
@@ -3160,10 +3160,6 @@ msgstr "Paiement effectué"
 msgid "Payment Method"
 msgstr "Mode de paiement"
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Options & Breakdown"
-msgstr "Ventilation et options de paiement"
-
 #: app/views/vehicledetails.html
 msgid "Payment Options &amp; Breakdown"
 msgstr "Ventilation et options de paiement"
@@ -3173,7 +3169,7 @@ msgid "Payment Options"
 msgstr "Options de paiement"
 
 #: app/views/checkout.html
-msgid "Payment Options<br> & Breakdown"
+msgid "Payment Options<br> &amp; Breakdown"
 msgstr "Ventilation <br>et options de paiement"
 
 #: app/views/payments.html
@@ -3296,6 +3292,10 @@ msgstr "Veuillez sélectionner une marge de crédit."
 #: app/views/vehicleDetails/makePaymentModal.html
 msgid "Please choose a payment amount below:"
 msgstr "Sélectionnez le montant du paiement ci-dessous :"
+
+#: app/views/titlereleasecheckout.html
+msgid "Please confirm your title release request(s) below."
+msgstr "Veuillez confirmer les demandes d’émission de titres ci-dessous."
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
@@ -4350,6 +4350,11 @@ msgstr "Titre disponible après cette demande"
 #: app/views/titlereleasecheckout.html
 msgid "Titles Requested"
 msgstr "Titres demandés"
+
+#: app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr "Les titres ici émis doivent être retournés dans les sept jours. Si vous demander un titre pour un contrat avec un organisme gouvernemental, veuillez communiquer avec le service à la clientèle au <a nxg-customer-support-phone=\"\"></a> pour obtenir de l’aide."
 
 #: app/views/modals/paymentExtension.html
 msgid "To extend this unit an additional period please click below."

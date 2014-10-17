@@ -1106,18 +1106,9 @@ msgstr ""
 msgid "Please choose a payment amount below:"
 msgstr "Por favor, a continuación seleccione un monto a pagar:"
 
-#: app/views/titleReleaseCheckout.html
-msgid ""
-"Please confirm your title release request(s) below. Titles released here are "
-"required to be returned within 7 days. If you are requesting a title for "
-"state work, please contact customer service for further assistance at <a nxg-"
-"customer-support-phone=\"\"></a>."
-msgstr ""
-"Por favor, a continuación confirme la(s) solicitud(es) de liberación de "
-"títulos. Los títulos que se liberen mediante el presente, deberán devolverse "
-"en un plazo de 7 días. En caso de que usted esté solicitando un título para "
-"trabajo estatal, por favor, póngase en contacto con servicio a clientes para "
-"obtener ayuda en <a nxg-customer-support-phone=\"\"></a>."
+#: app/views/titlereleasecheckout.html
+msgid "Please confirm your title release request(s) below."
+msgstr "Por favor, a continuación confirme la(s) solicitud(es) de liberación de títulos."
 
 #: app/views/dialogs/formError.html
 msgid ""
@@ -1492,16 +1483,10 @@ msgstr ""
 "archivo. Por favor, seleccione las direcciones donde le gustaría recibir "
 "cada uno de sus títulos solicitados."
 
-#: app/views/titleRelease.html
-msgid ""
-"Titles released here are required to be returned within seven days. If you "
-"are requesting a title for state work, please contact customer service at <a "
-"nxg-customer-support-phone=\"\"></a> for further assistance."
-msgstr ""
-"Los títulos liberados en el presente documento deberán ser devueltos en "
-"siete días. Si está solicitando un título para trabajo estatal, por favor, "
-"póngase en contacto con servicio a clientes en <a nxg-customer-support-phone="
-"\"\"></a> para obtener ayuda."
+#: app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr "Los títulos liberados en el presente documento deberán ser devueltos en siete días. Si está solicitando un título para trabajo estatal, por favor, póngase en contacto con servicio a clientes en <a nxg-customer-support-phone=\"\"></a> para obtener ayuda."
 
 #: app/views/dialogs/topAuctionsInfo.html
 msgid "Top Auctions"

@@ -422,6 +422,7 @@ msgstr ""
 #: app/scripts/controllers/floorCar.js
 #: app/views/account_management.html
 #: app/views/auction.bulkflooring.html
+#: app/views/auction.settings.html
 #: app/views/floorcar.html
 #: app/views/login.createPassword.html
 #: app/views/login.updateSecurity.html
@@ -432,7 +433,6 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: app/views/auction.settings.html
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Cancel Changes"
 msgstr ""
@@ -838,6 +838,7 @@ msgid "English"
 msgstr ""
 
 #: app/views/account_management.html
+#: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr ""
 
@@ -1560,15 +1561,12 @@ msgid "Payment Options"
 msgstr ""
 
 #: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Options & Breakdown"
-msgstr ""
-
 #: app/views/vehicledetails.html
 msgid "Payment Options &amp; Breakdown"
 msgstr ""
 
 #: app/views/checkout.html
-msgid "Payment Options<br> & Breakdown"
+msgid "Payment Options<br> &amp; Breakdown"
 msgstr ""
 
 #: app/views/payments.html
@@ -1589,12 +1587,9 @@ msgid_plural "Payments This {{ viewMode | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 msgid "Payment Total"
-msgstr ""
-
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Total:"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
@@ -2148,6 +2143,10 @@ msgstr ""
 #: app/scripts/controllers/auction.reports.js
 #: app/scripts/controllers/reports.js
 msgid "Receivable Detail (PDF)"
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
 msgstr ""
 
 #: app/views/dashboard.html
@@ -2751,6 +2750,7 @@ msgid ""
 msgstr ""
 
 #: app/views/account_management.html
+#: app/views/auction.settings.html
 msgid "To update or add a Title Settings address, please contact NextGear Capital at: ' + customerSupportPhone + '."
 msgstr ""
 

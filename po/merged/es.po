@@ -533,8 +533,8 @@ msgstr ""
 "Por favor, a continuación confirme la(s) solicitud(es) de liberación de "
 "títulos. Los títulos que se liberen mediante el presente, deberán devolverse "
 "en un plazo de 7 días. En caso de que usted esté solicitando un título para "
-"trabajo estatal, por favor, póngase en contacto con servicio a clientes para "
-"obtener ayuda en <a nxg-customer-support-phone=\"\"></a>."
+"enviarlo a un organismo estatal, por favor, póngase en contacto con servicio "
+"a clientes para obtener ayuda en <a nxg-customer-support-phone=\"\"></a>."
 
 #: app/views/floorcar.html
 msgid ""
@@ -828,6 +828,12 @@ msgstr ""
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
 "Title Release Limits for this Account:<br>\n"
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+msgstr "Límites de Liberación de Títulos para esta Cuenta:<br>\n Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> de <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible."
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits for this Account:<br>\n"
 "      You have <span class=\"count\">{{ eligibility."
 "RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of "
 "<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
@@ -837,12 +843,6 @@ msgstr ""
 " Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable "
 "- titleQueue.contents.length }}</span> fuera de <span class=\"count"
 "\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible.  "
-
-#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
-msgid ""
-"Title Release Limits for this Account:<br>\n"
-"      You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
-msgstr "Límites de Liberación de Títulos para esta Cuenta:<br>\n Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> de <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible."
 
 #: app/views/titleReleaseCheckout.html
 msgid ""
@@ -861,17 +861,6 @@ msgstr ""
 "Los títulos solo pueden liberarse a una dirección en nuestros archivos. Por "
 "favor, seleccione a qué dirección desea recibir cada uno de los títulos "
 "solicitados."
-
-#: app/views/titleRelease.html
-msgid ""
-"Titles released here are required to be returned within seven days. If you "
-"are requesting a title for state work, please contact customer service at <a "
-"nxg-customer-support-phone=\"\"></a> for further assistance."
-msgstr ""
-"Los títulos liberados en el presente documento deberán ser devueltos en "
-"siete días. Si está solicitando un título para trabajo estatal, por favor, "
-"póngase en contacto con servicio a clientes en <a nxg-customer-support-phone="
-"\"\"></a> para obtener ayuda."
 
 #: app/views/auction.dealersearch.html
 msgid ""
@@ -1148,6 +1137,20 @@ msgstr ""
 "Se ha enviado su solicitud. Las solicitudes de crédito normalmente tardan de "
 "3 a 5 días hábiles en procesarse. Se le notificará tan pronto como se haya "
 "procesado su solicitud. "
+
+#: app/views/modals/confirmTitleRequest.html
+msgid ""
+"Your title request has been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgid_plural ""
+"Your title requests have been approved. An email will be sent to you shortly "
+"with a tracking number."
+msgstr[0] ""
+"Se ha aprobado su solicitud de títulos, recibirá un correo electrónico en "
+"breve con el número de rastreo."
+msgstr[1] ""
+"Se han aprobado sus solicitudes de títulos. Se le enviará un correo "
+"electrónico en breve con el número de rastreo."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
@@ -3283,10 +3286,6 @@ msgstr "Pago realizado"
 msgid "Payment Method"
 msgstr "Método de pago"
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Options & Breakdown"
-msgstr "Opciones y desglose del pago"
-
 #: app/views/vehicledetails.html
 msgid "Payment Options &amp; Breakdown"
 msgstr "Opciones de pago & desglose"
@@ -3296,7 +3295,7 @@ msgid "Payment Options"
 msgstr "Opciones de pago"
 
 #: app/views/checkout.html
-msgid "Payment Options<br> & Breakdown"
+msgid "Payment Options<br> &amp; Breakdown"
 msgstr "Opciones de pago<br> y desglose"
 
 #: app/views/payments.html
@@ -3438,6 +3437,10 @@ msgstr "Por favor, a continuación seleccione un monto a pagar:"
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below. Titles released here are required to be returned within 7 days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr "Por favor, confirme su(s) solicitud(es) de liberación de títulos a continuación. Los títulos liberados aquí deberán devolverse en un plazo de 7 días. Si está solicitando un título de trabajo estatal, por favor <a nxg-chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con servicio a clientes para obtener ayuda."
+
+#: app/views/titlereleasecheckout.html
+msgid "Please confirm your title release request(s) below."
+msgstr "Por favor, a continuación confirme la(s) solicitud(es) de liberación de títulos."
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
@@ -4610,6 +4613,11 @@ msgstr "Títulos solicitados"
 #: app/views/titlereleasecheckout.html
 msgid "Titles can only be released to an address on file. Please select the address where you would like to receive each of your requested titles."
 msgstr "Los títulos solo pueden liberarse a una dirección que conste en los archivos. Por favor, seleccione en qué dirección desea recibir cada uno de los títulos solicitados."
+
+#: app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr "Los títulos liberados en el presente documento deberán ser devueltos en siete días. Si está solicitando un título para trabajo estatal, por favor, póngase en contacto con servicio a clientes en <a nxg-customer-support-phone=\"\"></a> para obtener ayuda."
 
 #: app/views/modals/paymentExtension.html
 msgid "To extend this unit an additional period please click below."

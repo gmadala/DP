@@ -1485,16 +1485,10 @@ msgstr ""
 "Les titres ne peuvent être émis qu’à une seule adresse au dossier. Veuillez "
 "sélectionner l’adresse où vous désirez recevoir les titres demandés."
 
-#: app/views/titleRelease.html
-msgid ""
-"Titles released here are required to be returned within seven days. If you "
-"are requesting a title for state work, please contact customer service at <a "
-"nxg-customer-support-phone=\"\"></a> for further assistance."
-msgstr ""
-"Les titres ici émis doivent être retournés dans les sept jours. Si vous "
-"demander un titre pour un contrat avec un organisme gouvernemental, veuillez "
-"communiquer avec le service à la clientèle au <a nxg-customer-support-phone="
-"\"\"></a> pour obtenir de l’aide."
+#: app/views/titlereleasecheckout.html
+#: app/views/titlereleases.html
+msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr "Les titres ici émis doivent être retournés dans les sept jours. Si vous demander un titre pour un contrat avec un organisme gouvernemental, veuillez communiquer avec le service à la clientèle au <a nxg-customer-support-phone=\"\"></a> pour obtenir de l’aide."
 
 #: app/views/dialogs/topAuctionsInfo.html
 msgid "Top Auctions"

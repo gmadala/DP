@@ -419,16 +419,12 @@ msgstr "Payer maintenant"
 msgid "Payment Breakdown"
 msgstr "Ventilation du paiement"
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Options & Breakdown"
-msgstr "Ventilation et options de paiement"
-
 #: app/views/vehicledetails.html
 msgid "Payment Options &amp; Breakdown"
 msgstr "Ventilation et options de paiement"
 
 #: app/views/checkout.html
-msgid "Payment Options<br> & Breakdown"
+msgid "Payment Options<br> &amp; Breakdown"
 msgstr "Ventilation <br>et options de paiement"
 
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -480,17 +476,8 @@ msgstr ""
 "considéré comme un débit autorisé en vertu de votre formulaire ACH."
 
 #: app/views/titlereleasecheckout.html
-msgid ""
-"Please confirm your title release request(s) below. Titles released here are "
-"required to be returned within 7 days. If you are requesting a title for "
-"state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact "
-"customer service for further assistance."
-msgstr ""
-"Veuillez confirmer les demandes d’émission de titres ci-dessous. Les titres "
-"ici émis doivent être retournés dans les 7 jours. Si vous demander un titre "
-"pour un contrat avec un organisme gouvernemental, veuillez <a nxg-chat-with-"
-"us=\"\">clavarder avec nous</a> ou contacter le service à la clientèle pour "
-"obtenir de l’assistance."
+msgid "Please confirm your title release request(s) below."
+msgstr "Veuillez confirmer les demandes d’émission de titres ci-dessous."
 
 #: app/views/floorcar.html
 msgid ""
@@ -766,10 +753,7 @@ msgstr ""
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
 "Title Release Limits for this Account:<br>\n"
-"      You have <span class=\"count\">{{ eligibility."
-"RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of "
-"<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
-"available."
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
 msgstr ""
 "Limites d’émission de titres pour ce compte : <br>\n"
 " Vous disposez de <span class=\"count\">{{ eligibility."

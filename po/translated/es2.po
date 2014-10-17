@@ -280,16 +280,12 @@ msgstr "Pague ahora"
 msgid "Payment Breakdown"
 msgstr "Desglose del pago"
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Options & Breakdown"
-msgstr "Opciones y desglose del pago"
-
 #: app/views/vehicledetails.html
 msgid "Payment Options &amp; Breakdown"
 msgstr "Opciones de pago & desglose"
 
 #: app/views/checkout.html
-msgid "Payment Options<br> & Breakdown"
+msgid "Payment Options<br> &amp; Breakdown"
 msgstr "Opciones de pago<br> y desglose"
 
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -494,7 +490,7 @@ msgstr "Este estado se aplica a vehículos puestos en piso mediante NextGearCapi
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
 "Title Release Limits for this Account:<br>\n"
-"      You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
 msgstr "Límites de Liberación de Títulos para esta Cuenta:<br>\n Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> de <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible."
 
 #: app/views/titlereleasecheckout.html

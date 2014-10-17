@@ -21,12 +21,8 @@ msgstr ""
 msgid "Click the Add button to add a payoff or a payment."
 msgstr ""
 
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Payment Total:"
-msgstr ""
-
-#: app/views/titlereleasecheckout.html
-msgid "Please confirm your title release request(s) below."
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
 msgstr ""
 
 #: app/views/floorplan.html
@@ -35,17 +31,6 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
-msgstr ""
-
-#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
-msgid ""
-"Title Release Limits for this Account:<br>\n"
-"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
-msgstr ""
-
-#: app/views/titlereleasecheckout.html
-#: app/views/titlereleases.html
-msgid "Titles released here are required to be returned within seven days. If you are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
 msgstr ""
 
 #: app/views/valuelookup.html

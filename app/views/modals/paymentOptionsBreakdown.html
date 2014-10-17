@@ -1,5 +1,5 @@
 <h3 class="modal-header" translate>
-  Payment Options & Breakdown
+  Payment Options &amp; Breakdown
 </h3>
 
 <div class="modal-body to-edge" nxg-autofocus>
@@ -85,7 +85,7 @@
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="span8" translate>Payment Total:</p>
+        <p class="span8"><span translate>Payment Total</span>:</p>
         <p class="span4 value numeric">{{ (paymentObject.getCheckoutAmount(selector.paymentOption) | currency) || 'n/a' }}</p>
       </li>
     </ul>
