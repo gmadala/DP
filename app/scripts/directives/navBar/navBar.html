@@ -8,7 +8,7 @@
       <div class="span6" ng-show="navState.current.showNavBar">
         <div class="nav-secondary" ng-show="user.isDealer()">
           <ul>
-            <li ng-repeat="link in user.navLinks().secondary">
+            <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
               <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
             <li ng-show="chatEnabled">

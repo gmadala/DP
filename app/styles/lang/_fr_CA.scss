@@ -190,6 +190,29 @@ body.lang_fr_CA {
     white-space: nowrap;
   }
 
+  .nav-secondary {
+    height: 52px;
+
+    .link {
+      height: auto;
+      a {
+        height: 26px;
+        vertical-align: middle;
+        padding: 8px 0;
+      }
+    }
+
+    .link_floorcar {
+      width: 150px;
+
+      a {padding: 0 !important;}
+    }
+
+    .cart-btn {
+      height: 51px;
+    }
+  }
+
   /* Auction Nav */
   .app-header.auctions {
     .nav-bkgd {
