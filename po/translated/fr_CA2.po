@@ -365,20 +365,12 @@ msgid "NextGear Book or MMR"
 msgstr "MMR ou la valeur comptable de NextGear Capital"
 
 #: app/views/analytics.html
-msgid ""
-"NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | "
-"number:2 }}% of the Purchase Price"
-msgstr ""
-"La valeur comptable de NextGear Capital représente {{ businessSummary."
-"DerivedCapitalBook | number:2 }} % du prix d’achat"
+msgid "NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price"
+msgstr "La valeur comptable de NextGear Capital représente {{ businessSummary.DerivedCapitalBook | number:2 }} % du prix d’achat"
 
 #: app/views/analytics.html
-msgid ""
-"NextGear Capital Book is {{ businessSummary.DerivedPendingBook | "
-"number:2 }}% of the Purchase Price."
-msgstr ""
-"La valeur comptable de NextGear Capital représente {{ businessSummary."
-"DerivedCapitalBook | number:2 }} % du prix d'achat."
+msgid "NextGear Capital Book is {{ businessSummary.DerivedPendingBook | number:2 }}% of the Purchase Price."
+msgstr "La valeur comptable de NextGear Capital représente {{ businessSummary.DerivedPendingBook | number:2 }} % du prix d'achat."
 
 #: app/views/auction.sellerfloorplan.html
 msgid ""

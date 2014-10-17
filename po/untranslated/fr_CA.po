@@ -124,14 +124,6 @@ msgstr ""
 msgid "Initiate your request for a permanent or temporary increase to your current line of credit."
 msgstr ""
 
-#: app/views/analytics.html
-msgid "NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price"
-msgstr ""
-
-#: app/views/analytics.html
-msgid "NextGear Capital Book is {{ businessSummary.DerivedPendingBook | number:2 }}% of the Purchase Price."
-msgstr ""
-
 #: app/views/auction.sellerfloorplan.html
 msgid "NextGear has been notified of this change and will be sending funding soon."
 msgstr ""

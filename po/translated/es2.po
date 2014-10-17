@@ -74,7 +74,7 @@ msgstr "Pago de capital adicional"
 
 #: app/views/analytics.html
 msgid "Amount Outstanding is {{ businessSummary.DerivedAmountOutstanding | number:2 }}% of the NextGear Capital Book"
-msgstr "El monto pendiente es {{ businessSummary.DerivedAmountOutstanding | number.2 }}% del libro de NextGear Capital"
+msgstr "El monto pendiente es {{ businessSummary.DerivedAmountOutstanding | number:2 }}% del libro de NextGear Capital"
 
 #: app/views/receipts.html
 msgid "Amount Paid"

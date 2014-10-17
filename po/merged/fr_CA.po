@@ -365,7 +365,7 @@ msgid ""
 "number:2 }}% of the Purchase Price"
 msgstr ""
 "La valeur comptable de NextGear Capital représente {{ businessSummary."
-"DerivedCapitalBook | number:2 }} % du prix d’achat"
+"DerivedCapitalBook | number:2 }} % de la valeur d'achat"
 
 #: app/views/analytics.html
 msgid ""
@@ -373,7 +373,7 @@ msgid ""
 "number:2 }}% of the Purchase Price."
 msgstr ""
 "La valeur comptable de NextGear Capital représente {{ businessSummary."
-"DerivedCapitalBook | number:2 }} % du prix d'achat."
+"DerivedCapitalBook | number:2 }} % de la valeur d'achat."
 
 #: app/views/vehicledetails.html
 msgid ""
@@ -2887,6 +2887,14 @@ msgstr "MMR ou la valeur comptable de NextGear Capital"
 #: app/views/valuelookup.html
 msgid "NextGear Book"
 msgstr "La valeur comptable de NextGear Capital"
+
+#: app/views/analytics.html
+msgid "NextGear Capital Book is {{ businessSummary.DerivedCapitalBook | number:2 }}% of the Purchase Price"
+msgstr "La valeur comptable de NextGear Capital représente {{ businessSummary.DerivedCapitalBook | number:2 }} % du prix d’achat"
+
+#: app/views/analytics.html
+msgid "NextGear Capital Book is {{ businessSummary.DerivedPendingBook | number:2 }}% of the Purchase Price."
+msgstr "La valeur comptable de NextGear Capital représente {{ businessSummary.DerivedPendingBook | number:2 }} % du prix d'achat."
 
 #: app/views/auction.dealersearch.html
 msgid "NextGear Capital Dealer Number"
