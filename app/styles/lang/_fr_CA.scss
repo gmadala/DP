@@ -201,6 +201,14 @@ body.lang_fr_CA {
     }
   }
 
+  #AuctionFloorplanPage {
+    @media (min-width: 1080px) {
+      .seller-has-title-box .cr-label {
+        width: 80%;
+      }
+    }
+  }
+
   /* Modals */
   [name='searchControls'] > .span4 > label {
     white-space: nowrap;

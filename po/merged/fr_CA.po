@@ -172,8 +172,7 @@ msgid ""
 "cutoff."
 msgstr ""
 "En raison de notre heure de tombée fixée à 20 h (heure de l’Est), tout "
-"paiement effectué sera traité le prochain jour ouvrable, {{ nextBusinessDay."
-"date | moment }}."
+"paiement effectué sera traité le prochain jour ouvrable, {{ nextBusinessDay | moment }}."
 
 #: app/views/dialogs/avgTurnTimeInfo.html
 msgid ""

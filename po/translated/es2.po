@@ -634,7 +634,7 @@ msgstr "{{ results.mileage | numeral:'0,0' }} kilómetros"
 
 #: app/views/receipts.html
 msgid "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</span> 20"
-msgstr "{{ selectedReceipts.length }} <span class=\"lockup- minor heavy\">de</span> 20"
+msgstr "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
 
 #: app/views/checkout.html
 #: app/views/dashboard.html
