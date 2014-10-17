@@ -19,7 +19,6 @@ module.exports = function(karma) {
 		// list of files / patterns to load in the browser
 		files: [
       'app/components/es5-shim/es5-shim.js',
-      'app/components/json3/lib/json3.min.js',
       'app/components/jquery/jquery.js',
 			'app/components/angular/angular.js',
 			'app/components/angular-mocks/angular-mocks.js',
