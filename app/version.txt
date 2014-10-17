@@ -1,17 +1,2 @@
 NextGear Capital v4.0.11
 =================================
-
-Fixes included in this release:
-
-VO-2566	Application timing out when page is closed shows error message
-VO-2576	Web-Dealer Search (Dealer Number Search)- No error message is displayed when user clicks on “Search” button after filling entries in both (Next Gear Dealer Number and Auction Access Number) fields at once.
-VO-2911	Payments & Checkout – Overflow Issues
-VO-2915	Title Releases – Overflow Issues
-VO-2923	Analytics – Overflow Issues
-VO-2925	Vehicle Details – Overflow Issues
-VO-3030	Setting up usability dealers and scenarios on test
-VO-3127	Auctions – Dashboard
-VO-3193	Syntax Error is logged in console whenever user selects an option in the Multiple Vehicle results dialog.
-VO-3264	Web (Dashboard): No Payments are getting displayed on the “Payments” screen when user clicks on “Payments This Month” link under “Payment Summary” section.
-VO-3268	Holiday business hours messaging incorrect
-VO-3271	Padding is off on new user security question page
