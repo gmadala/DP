@@ -7,10 +7,30 @@ body.lang_fr_CA {
         .well-title {
           font-size: 18px;
         }
+      }
+    }
 
-        .accordion-button {
-          width: 340px;
-        }
+    .accordion-button {
+      width: 340px;
+    }
+
+    .btn-floor-plans {
+      font-size: 12px;
+      padding: 7px 5px;
+
+      .paired-body {
+        max-width: 130px;
+      }
+      .paired-media {
+        position: absolute;
+        top: 14px;
+        right: 10px;
+      }
+    }
+
+    @media (min-width: 1125px) {
+      .btn-floor-plans .paired-media {
+        right: 20px;
       }
     }
   }
@@ -155,7 +175,7 @@ body.lang_fr_CA {
   }
 
 
-  #ProfileSettingsPage, #AccountManagementPage {
+  #ProfileSettingsPage, #AccountManagementPage, #AuctionSettingsPage {
     @media (max-width: 1090px) {
 
       .well-title {

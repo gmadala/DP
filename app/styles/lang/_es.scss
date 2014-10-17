@@ -66,14 +66,14 @@ body.lang_es {
 
   /* Payments */
   #PaymentsPage {
-    @media (max-width: 1090px) {
+    @media (max-width: 1150px) {
 
       .well-title {
         font-size: 16px;
 
         .well-sub-title, a {
-          font-size: 13px;
-          margin-top: 2px;
+          font-size: 12px;
+          margin-top: 4px;
         }
         button {
           font-size: 14px;
@@ -184,11 +184,15 @@ body.lang_es {
       &.link_auction_bulkflooring {
         width: 160px;
       }
+
+      &.link_auction_dealersearch {
+        width: 150px;
+      }
     }
   }
 
 
-  #ProfileSettingsPage, #AccountManagementPage {
+  #ProfileSettingsPage, #AccountManagementPage, #AuctionSettingsPage {
     @media (max-width: 1090px) {
 
       .well-title {
@@ -211,11 +215,6 @@ body.lang_es {
   #ValueLookupPage {
     .btn-toggle {
       width: 300px;
-//      height: 36px;
-//
-//      .btn, .btn-slider {
-//        height: 36px;
-//      }
     }
 
     .lookup-options {
