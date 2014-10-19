@@ -293,7 +293,7 @@ module.exports = function(grunt) {
     },
     preprocess: {
       inline : {
-        src : [ '<%= yeoman.dist %>/scripts/scripts.js' ],
+        src : [ '.tmp/concat/scripts/scripts.js' ],
         options: {
           inline : true,
           context : {
