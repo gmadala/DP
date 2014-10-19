@@ -385,6 +385,10 @@
   border: 0;
   margin: 0 0 1px 0;
 
+  &.btn-unstyle {
+    @extend %small;
+  }
+
   &:hover {
     color: darken($highlight, 10%);
   }
