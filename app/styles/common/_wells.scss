@@ -62,7 +62,10 @@
       }
 
       &.cancel {
+        font-size: $small-font-size;
+        font-weight: normal;
         color: #1B769D;
+        padding-top: 2px;
       }
     }
   }
