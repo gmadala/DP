@@ -39,7 +39,7 @@
   </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
-    <p class="no-results" ng-switch-when="false" ng-switch="!isQueryValid(data.query)">
+    <p class="notice-box" ng-switch-when="false" ng-switch="!isQueryValid(data.query)">
       <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
       <span ng-switch-when="true">Please enter a name, and city or state, to search.</span>
     </p>

@@ -20,7 +20,7 @@
     <div class="well">
       <h2 class="well-title">Receipts</h2>
       <div ng-switch="receipts.results.length > 0 || receipts.loading">
-        <p class="no-results" ng-switch-when="false">
+        <p class="notice-box" ng-switch-when="false">
           Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
         </p>
 

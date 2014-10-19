@@ -21,7 +21,7 @@
 
     <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
       <h2 class="well-title">Floor Plan</h2>
-      <p class="no-results" ng-switch-when="false">
+      <p class="notice-box" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="floorplanData.resetSearch()" title="New Search">try a new search</a>.
       </p>
 
