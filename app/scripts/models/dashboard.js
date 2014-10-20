@@ -112,7 +112,7 @@ angular.module('nextgearWebApp')
               addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
                 if (sourceList.length === 0) { return; }
                 var event = {
-                  title: '<span class="counter">' + sourceList.length + '</span>' +
+                  title: '<span class="counter">' + sourceList.length + '</span> ' +
                     (sourceList.length === 1 ? singularLabel : pluralLabel),
                   subTitle: formatMoney(sourceList.reduce(sumPayments, 0)),
                   start: dateKey
@@ -134,8 +134,8 @@ angular.module('nextgearWebApp')
               }
             });
             for (var key in dateMap) {
-              addEvent(dateMap[key].payments, dueEvents, gettextCatalog.getString(' Payment Due'), gettextCatalog.getString(' Payments Due'), key);
-              addEvent(dateMap[key].payoffs, dueEvents, gettextCatalog.getString(' Payoff Due'), gettextCatalog.getString(' Payoffs Due'), key);
+              addEvent(dateMap[key].payments, dueEvents, gettextCatalog.getString('Payment Due'), gettextCatalog.getString('Payments Due'), key);
+              addEvent(dateMap[key].payoffs, dueEvents, gettextCatalog.getString('Payoff Due'), gettextCatalog.getString('Payoffs Due'), key);
             }
 
             // aggregate scheduled payments list into a set of calendar events, max 1 per day, summarizing payments scheduled that day
@@ -145,8 +145,9 @@ angular.module('nextgearWebApp')
               list = dateMap[dateKey] || (dateMap[dateKey] = []);
               list.push(payment);
             });
+            // We add empty space in front of these strings since translations strings won't match with leading spaces
             for (var key2 in dateMap) {
-              addEvent(dateMap[key2], scheduledEvents, gettextCatalog.getString(' Scheduled'), gettextCatalog.getString(' Scheduled'), key2);
+              addEvent(dateMap[key2], scheduledEvents, gettextCatalog.getString('Scheduled'), gettextCatalog.getString('Scheduled'), key2);
             }
 
             // convert possiblePaymentDates into a map of 'yyyy-MM-dd': true
