@@ -361,7 +361,7 @@
     <!-- end Floor Plan Value Estimates -->
   </section>
 
-  <section class="span3 well sidebar last">
+  <section class="span3 well sidebar last" ng-show="hasOutstanding">
     <h2 class="well-title">Payment Options</h2>
     <div class="notice-bar" ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
       <div class="paired-media">
