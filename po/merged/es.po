@@ -159,7 +159,7 @@ msgid ""
 "Amounts shown are valid through 8pm eastern time\n"
 "          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
 "          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
-msgstr "Los importes que se muestran son válidos hasta las 8 de la noche, hora del este\n <span ng-show=\"canPayNow\">hoy ({{ todayDate | moment }})</span>\n <span ng- show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+msgstr "Los importes que se muestran son válidos hasta las 8 de la noche, hora del este\n <span ng-show=\"canPayNow\">hoy ({{ todayDate | moment }})</span>\n <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
 
 #: app/views/dialogs/avgTurnTimeInfo.html
 msgid ""
@@ -1358,7 +1358,7 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "<span class=\"count highlight dash-major\" ng-bind=\"eligibility.RemainingReleasesAvailable - titleQueue.contents.length\">0</span> out of <span class=\"count highlight dash-major\" ng-bind=\"eligibility.TotalReleasesAllowed\">0</span>"
-msgstr "<span class=\"count highlight dash-major\" ng-bind=\"eligibility.RemainingReleasesAvailable - titleQueue.contents.length\">0</span> de <span class=\"count highlight dash-major\" ng- bind=\"eligibility.TotalReleasesAllowed\">0</span>"
+msgstr "<span class=\"count highlight dash-major\" ng-bind=\"eligibility.RemainingReleasesAvailable - titleQueue.contents.length\">0</span> de <span class=\"count highlight dash-major\" ng-bind=\"eligibility.TotalReleasesAllowed\">0</span>"
 
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
@@ -1398,15 +1398,15 @@ msgstr "<strong>{{ field | capitalize }}</strong> es un campo requerido."
 
 #: app/views/vehicledetails.html
 msgid "A payment is due this week. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</a>"
-msgstr "Hay un pago que se vence esta semana. <br><a class=\"primary\" href=\"\" ng show=\"showExtendLink()\" ng- click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
+msgstr "Hay un pago que se vence esta semana. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
 
 #: app/views/vehicledetails.html
 msgid "A payment is due today. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</a>"
-msgstr "Hay un pago que se vence esta semana. <br><a class=\"primary\" href=\"\" ng show=\"showExtendLink()\" ng- click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
+msgstr "Hay un pago que se vence esta semana. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
 
 #: app/views/vehicledetails.html
 msgid "A payment is overdue. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </a>"
-msgstr "Hay un pago vencido. <br><a class=\"primary\" href=\"\" ng show=\"showExtendLink()\" ng- click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
+msgstr "Hay un pago vencido. <br><a class=\"primary\" href=\"\" ng-show=\"showExtendLink()\" ng-click=\"requestExtension()\">¿Solicitar una ampliación? </a>"
 
 #: app/views/vehicleDetails/landing.html
 msgid "A payment is overdue."
@@ -4759,7 +4759,7 @@ msgstr "Fondos no aplicados"
 
 #: app/views/checkout.html
 msgid "Unapplied funds must be <span ng-bind=\"unappliedFunds.min() | currency\"></span> to <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
-msgstr "Los fondos no aplicados deben ser <span ng- bind=\"unappliedFunds.min() | currency\"></span> a <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
+msgstr "Los fondos no aplicados deben ser <span ng-bind=\"unappliedFunds.min() | currency\"></span> a <span ng-bind=\"unappliedFunds.max() | currency\"></span>"
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"

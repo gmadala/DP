@@ -471,6 +471,7 @@ msgstr ""
 msgid "Checkout"
 msgstr ""
 
+#: app/views/auction.dealersearch.html
 #: app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "City"
