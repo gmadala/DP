@@ -562,7 +562,7 @@ describe('Model: Floorplan', function () {
     it('should make an api request', function() {
       floorplan.overrideCompletionAddress([
         {
-          floorplanId: 123,
+          id: 123,
           overrideAddress:  {
             AddressId: 143
           }
@@ -579,7 +579,7 @@ describe('Model: Floorplan', function () {
     it('should return a promise', function() {
       var returnVal = floorplan.overrideCompletionAddress([
         {
-          floorplanId: 123,
+          id: 123,
           overrideAddress:  {
             BusinessAddressId: 143
           }
@@ -606,7 +606,7 @@ describe('Model: Floorplan', function () {
     it('should set overrideInProgress', function() {
       floorplan.overrideCompletionAddress([
         {
-          floorplanId: 123,
+          id: 123,
           overrideAddress:  {
             BusinessAddressId: 143
           }
