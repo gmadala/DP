@@ -13,16 +13,43 @@
  *
 */
 angular.module('nextgearWebApp')
-  .controller('PaymentOptionsBreakdownCtrl', function ($scope, dialog, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue) {
+  .controller('PaymentOptionsBreakdownCtrl', function ($scope, dialog, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue, moment, BusinessHours) {
     $scope.PaymentOptions = PaymentOptions;
 
     $scope.paymentObject = isOnQueue ? paymentOptionsHelper.fromCartItem(object) : paymentOptionsHelper.fromVehicleDetails(object);
-
     $scope.curtailmentObject = $scope.paymentObject.getBreakdown(PaymentOptions.TYPE_PAYMENT);
 
     $scope.maxAdditional = $scope.paymentObject.payoff.amount - $scope.paymentObject.payment.amount;
     $scope.paymentBreakdown = {};
     $scope.total = 0;
+
+    $scope.todayDate = moment().toDate();
+    $scope.nextBusinessDay = null;
+    var bizHours = function() {
+      BusinessHours.insideBusinessHours().then(function(result) {
+        $scope.canPayNow = result;
+
+        if(!$scope.canPayNow) {
+          BusinessHours.nextBusinessDay().then(function(nextBizDay) {
+            $scope.nextBusinessDay = nextBizDay;
+          });
+        }
+
+        $scope.canPayNowLoaded = true;
+      }, function(error) {
+        error.dismiss();
+        $scope.canPayNow = false;
+        $scope.canPayNowLoaded = false;
+      });
+    };
+
+    // initial check
+    bizHours();
+
+    // when business hours change, update
+    $scope.$on(BusinessHours.CHANGE_EVENT, function() {
+      bizHours();
+    });
 
     $scope.selector = {
       paymentOption: $scope.paymentObject.paymentOption

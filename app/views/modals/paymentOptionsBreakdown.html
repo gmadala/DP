@@ -89,6 +89,10 @@
         <p class="span4 value numeric">{{ (paymentObject.getCheckoutAmount(selector.paymentOption) | currency) || 'n/a' }}</p>
       </li>
     </ul>
+    <p class="paragraph">Amounts shown are valid through 8pm eastern time
+      <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
+      <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
+    </p>
   </div>
 </div>
 
