@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgPaymentButtons', function () {
+  .directive('nxgPaymentButtons', function (gettextCatalog) {
     return {
       scope: {
         type:       '@nxgPaymentButtons', // fee | payment | payoff
@@ -24,6 +24,8 @@ angular.module('nextgearWebApp')
         $scope.paymentInProgress = function() {
           return Payments.paymentInProgress();
         };
+
+        $scope.tooltipText = gettextCatalog.getString('Select the payments you want to make or schedule by adding them to your payment queue.');
 
         // set internalType based on type and scheduled state
         $scope.$watch('type + item.Scheduled + item.PayPayoffAmount', function () {
