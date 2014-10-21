@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService, banner) {
+  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService, banner, signupUrls) {
 
     var savedUsername = localStorageService.get('rememberUsername');
 
@@ -14,6 +14,8 @@ angular.module('nextgearWebApp')
     $scope.validity = {};
 
     $scope.showLoginError = false;
+
+    $scope.signupURL = signupUrls.getForCurrentLanguage();
 
     $scope.saveAutocompleteUsername = function(username){
 
