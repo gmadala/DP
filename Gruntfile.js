@@ -105,11 +105,12 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       all: [
-        'Gruntfile.js',
+        //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
-        '!app/scripts/directives/tooltip.js'
+        '!app/scripts/directives/tooltip.js',
+        '!app/scripts/translations.js'
       ]
     },
     karma: {
