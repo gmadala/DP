@@ -256,8 +256,8 @@ describe('Controller: FloorCarCtrl', function () {
         spyOn(dialog, 'messageBox').andCallThrough();
         scope.cancel();
         expect(dialog.messageBox).toHaveBeenCalledWith('Cancel',
-        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary'} ]);
+        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary btn-sm'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
+          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary btn-sm'} ]);
       });
     });
   };
