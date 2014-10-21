@@ -33,6 +33,10 @@ angular.module('nextgearWebApp')
           element.attr('before-show-day', 'notPastDates(date)');
         }
 
+        if(!attrs.hidePlaceholder) {
+          element.find('input').attr('placeholder', 'mm/dd/yyyy');
+        }
+
         // link function
         return {
           pre: function (scope, element, attrs, formCtrl) {

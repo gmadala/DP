@@ -12,6 +12,7 @@
     <input id="inputScheduleDate" name="inputScheduleDate"
     class="date-inline"
            nxg-date-field before-show-day="checkDate(date)"
+           hide-placeholder="true"
            ng-model="model.selectedDate"
            required nxg-requires="checkDate(model.selectedDate)"
            ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
