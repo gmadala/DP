@@ -178,6 +178,15 @@ body.lang_es {
     }
   }
 
+  #DocumentsPage {
+    .video-well {
+      display: none;
+    }
+    .documents-well {
+      width: 45%;
+    }
+  }
+
 
   #AuctionDashboardPage {
     @media (max-width: 1090px) {

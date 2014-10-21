@@ -207,6 +207,15 @@ body.lang_fr_CA {
     }
   }
 
+  #DocumentsPage {
+    .video-well {
+      display: none;
+    }
+    .documents-well {
+      width: 45%;
+    }
+  }
+
   #AuctionFloorplanPage {
     @media (min-width: 1080px) {
       .seller-has-title-box .cr-label {
