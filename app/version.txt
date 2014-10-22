@@ -1,17 +1,22 @@
-NextGear Capital v4.0.9
+NextGear Capital v4.0.12
 =================================
 
 Fixes included in this release:
 
-VO-1754	Auto-schedule payments for valid business day if logged in during off hours
-VO-2472	MMR - Add value lookup to web
-VO-2884	NGC Test Web (Title Releases): No info message/text is getting displayed on the page.
-VO-3059	Hide UserVoice tab for non-English locales
-VO-3144	Calendar default size is cutting off the Friday column
-VO-3152	Inventory Location name does not appear as a filter name
-VO-3163	Value Lookup needs an 'OR'
-VO-3166	Value Lookup - screen requesting that the dealer select from the multiple vehicle styles but there is only one vehicle style.
-VO-3229	Web (Value Lookup): Error message “Unable to communicate with NextGear” is getting popped up when user looks up values with invalid VIN.
-VO-3257	"Clear Search" on Floorplan search causes "no results" message to display.
-VO-3262	Web (Payments): User is unable to submit payments.
-VO-3265	Web(Payments – Change Payment Date): Application hangs after user clicks on “Confirm” button.
+VO-3339 Web Localization (FR/ES): Sign Up Screen: When User is in 'French/Spanish' locale on 'Login' page and navigates on 'Sign Up' screen than 'Sign Up' screen is getting displayed in english.
+VO-3475	Web Localization (ES): Payments Screen - Information text on 'Fees' table is not getting displayed at appropriate position.
+VO-3476	Web Localization (FR): Payments Screen - Information text on 'Payments' table is not getting displayed at appropriate position.
+VO-3479	Web Localization (FR): Dashboard - Under 'Recently Floored Vehicles' section - Status 'Pending' , 'Approved' , 'Denied' and 'Completed' should also displayed in French language.
+VO-3480	Web Localization (FR/ES): Dashboard - Text 'Payment Due' under calendar is getting displayed in english for 'French' and 'Spanish' locales.
+VO-3481	Web Localization (ES): Floor Plan - Under 'Floor Paln' Table - Complete Status column content should get display in Spanish language.
+VO-3495	Web Localization (FR) - Payments: No Info text is getting displayed for Payments section.
+VO-3496	Web Localization (ES) - Floor a Vehicle: "Keep Editing" button is getting rendering in new line.
+VO-3497	Web Localization (FR) - Analytics: Credit amount is getting displayed in out of the box area.
+VO-3499	Web Localization (FR) - Floor Plan: "View Floor Plan" button is overlapping with arrow button image.
+VO-3502	Web Localization (FR/ES) - Reports: "View Report" button is not correctly aligned with Exportable Inventory drop down field.
+VO-3503	Web Localization (FR/ES) - Floor a Vehicle: Overlay displaying "javascript:Void()" is getting displayed when user hovers over Business name.
+VO-3504	Web Localization (FR/ES) - Resources: Audio and the contents displayed in the video is not getting played in "French or Spanish" language.
+VO-3505	Web Localization (ES) - Vehicle Detail: Message: "No Payment activity is available" is not get completely displayed.
+VO-3506	Web Localization (FR/ES) - Payments: Content "Floor Plan" and Title Release is not getting translated in "French or Spanish" language on the "Request Extension" popup.
+VO-3507	Web Localization (ES) - Vehicle Detail: Info text "There is payment that is due this week" is getting rendered in new line under "Payments option" section.
+VO-3508	Web Localization (FR/ES) - Profile Settings: Text "Daily Report ACH Disbursement" and "Upcoming Weekly Payments Report" is not getting translated in "French or Spanish" language.
