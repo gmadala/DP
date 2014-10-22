@@ -3,29 +3,6 @@
 angular.module('nextgearWebApp')
   .factory('Payments', function($q, $filter, api, moment, CartItem, VehicleCartItem, PaymentOptions, Paginate, Floorplan, segmentio, metric) {
 
-    // private global state:
-
-    // provides caching so that we only have to request possible payment date data once per day.
-    var possiblePaymentDates = {
-      data: null,
-      cacheDate: null,
-      promise: function(startDate, endDate) {
-        if(!possiblePaymentDates.cacheDate || !moment().isSame(possiblePaymentDates.cacheDate, 'day')) {
-          // we dont have possible payment dates cached for the current date; fetch them now
-          return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
-            function(result) {
-              possiblePaymentDates.data = result;
-              possiblePaymentDates.cacheDate = moment();
-
-              return result;
-            }
-          );
-        } else {
-          return $q.when(possiblePaymentDates.data);
-        }
-      }
-    };
-
     var paymentQueue = {
       fees: {},
       payments: {},
@@ -34,11 +11,9 @@ angular.module('nextgearWebApp')
         return !(_.find(paymentQueue.fees) || _.find(paymentQueue.payments));
       }
     };
-
     var paymentInProgress = false;
 
     // public api:
-
     return {
       requestUnappliedFundsPayout: function (amount, bankAccountId) {
         return api.request('POST', '/payment/payoutUnappliedFunds', {
@@ -183,7 +158,8 @@ angular.module('nextgearWebApp')
       fetchPossiblePaymentDates: function (startDate, endDate, asMap) {
         startDate = api.toShortISODate(startDate);
         endDate = api.toShortISODate(endDate);
-        return possiblePaymentDates.promise(startDate, endDate).then(
+
+        return api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate).then(
           function(result) {
             if (!asMap) {
               return result;
