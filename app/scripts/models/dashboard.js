@@ -33,7 +33,6 @@ angular.module('nextgearWebApp')
       });
       loc.updateChartData();
       if (loc.TempLineOfCreditExpiration !== null) {
-        loc.CreditTypeName += ' ( temp )';
         loc.LineOfCreditAmount = loc.LineOfCreditAmount + loc.TempLineOfCreditAmount;
       }
       return loc;

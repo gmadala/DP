@@ -198,6 +198,22 @@
   }
 }
 
+/*
+ * For chart legend data
+ */
+.table-legend {
+  @extend .table-unstyle;
+  margin-bottom: 5px;
+
+  td, th, tr td, tr th {
+    padding: 6px 0;
+  }
+
+  &.table .table-symbol, &.table td.table-symbol {
+    line-height: 1;
+  }
+}
+
 // Table-specific type classes. To override bootstrap,
 // we have to be extra-specific.
 .table-symbol, .table td.table-symbol {
