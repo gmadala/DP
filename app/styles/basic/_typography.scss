@@ -59,6 +59,8 @@ p {
 // Links
 a, a:link, a:visited {
   color: $highlight;
+  // ensure <a> tags with ng-click & no href still get pointer on hover
+  cursor: pointer;
 
   &:hover {
     color: darken($highlight, 10%);

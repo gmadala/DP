@@ -79,7 +79,7 @@ describe('Model: Analytics', function () {
                 "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 15
             },
             {
-                "EndOfMonthDate": "2013-1-31",
+                "EndOfMonthDate": "2013-01-31",
                 "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 13
             },
             {
@@ -91,7 +91,7 @@ describe('Model: Analytics', function () {
                 "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 15
             },
             {
-                "EndOfMonthDate": "2013-2-28",
+                "EndOfMonthDate": "2013-02-28",
                 "AvgTurnTimeForVehiclesCompletedIn60DaysPrior": 0
             }
         ]

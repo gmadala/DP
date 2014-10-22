@@ -413,11 +413,6 @@ hr {
   margin: 6px 0
 }
 
-.value-form {
-
-
-}
-
 .valuation-description {
   @include border-radius($borderRadius);
   background-color: $white;
@@ -434,6 +429,7 @@ hr {
 
 .body-style {
   margin: 0 10px;
+
   .body-style-label {
     margin: 10px 0 2px;
   }

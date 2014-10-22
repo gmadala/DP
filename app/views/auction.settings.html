@@ -146,8 +146,8 @@
         <div class="span8">
           <!-- Show "Yes" if enhanced registration is enabled.
           If it is not enabled, show nothing. -->
-          <div ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
-          <div ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
+          <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable"> Yes </div>
+          <div class="static" ng-show="!business.data.enhancedRegistrationEnabled && !business.editable"> No </div>
 
           <div class="cr-inline" ng-show="business.editable">
             <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
@@ -277,8 +277,8 @@
 
     <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">
       <div class="row-fluid">
-        <h6 class="span4">Notifications</h6>
-        <h6 class="span8" ng-hide="notifications.editable || notifications.data.selected.length == 0">Delivery Type</h6>
+        <label class="span4">Notifications</label>
+        <label class="span8" ng-hide="notifications.editable || notifications.data.selected.length == 0">Delivery Type</label>
       </div>
 
       <ul>

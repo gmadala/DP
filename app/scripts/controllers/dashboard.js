@@ -160,24 +160,28 @@ angular.module('nextgearWebApp')
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
-          var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
-
           $scope.dashboardData = result;
-          $scope.dashboardData.selectedLineOfCredit = viewAllCredit;
-          $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
-          /* Loop through all of the Lines of Credit */
-          for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
-            var lineOfCredit = $scope.dashboardData.LinesOfCredit[i];
-            var allCreditUtilized = lineOfCredit.LineOfCreditAmount - lineOfCredit.AvailableCreditAmount; // Temp lines LineOfCreditAmount gets updated in model layer to include temp amount.
+          if($scope.dashboardData.LinesOfCredit.length === 1) {
+            $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
+          } else {
+            var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
+            $scope.dashboardData.selectedLineOfCredit = viewAllCredit;
+            $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
-            /* set calculated values for View All select option */
-            viewAllCredit.LineOfCreditAmount += lineOfCredit.LineOfCreditAmount;
-            viewAllCredit.TempLineOfCreditAmount += lineOfCredit.TempLineOfCreditAmount;
-            viewAllCredit.AvailableCreditAmount += lineOfCredit.AvailableCreditAmount;
-            viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
+            /* Loop through all of the Lines of Credit */
+            for (var i = 0; i < $scope.dashboardData.LinesOfCredit.length; i++) {
+              var lineOfCredit = $scope.dashboardData.LinesOfCredit[i];
+              var allCreditUtilized = lineOfCredit.LineOfCreditAmount - lineOfCredit.AvailableCreditAmount; // Temp lines LineOfCreditAmount gets updated in model layer to include temp amount.
+
+              /* set calculated values for View All select option */
+              viewAllCredit.LineOfCreditAmount += lineOfCredit.LineOfCreditAmount;
+              viewAllCredit.TempLineOfCreditAmount += lineOfCredit.TempLineOfCreditAmount;
+              viewAllCredit.AvailableCreditAmount += lineOfCredit.AvailableCreditAmount;
+              viewAllCredit.UtilizedCreditAmount += allCreditUtilized;
+            }
+            viewAllCredit.updateChartData();
           }
-          viewAllCredit.updateChartData();
 
           // if we haven't grabbed today's week data, get it now.
           if (!$scope.paymentSummary[$scope.viewMode]) {

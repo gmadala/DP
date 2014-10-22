@@ -119,9 +119,10 @@ angular.module('nextgearWebApp')
       overrideCompletionAddress: function(payments) {
         if(payments && payments.length && payments.length > 0) {
           var data = [];
+
           _.each(payments, function(p) {
             data.push({
-              FloorplanId: p.floorplanId,
+              FloorplanId: p.id,
               TitleAddressId: p.overrideAddress.AddressId
             });
           });

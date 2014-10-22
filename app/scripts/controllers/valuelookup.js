@@ -78,45 +78,47 @@ angular.module('nextgearWebApp')
 
         var which = this;
 
-        if (this.validate()) {
-          $scope.searchInProgress = true;
-
-          $scope.results.vin = which.vin;
-          $scope.results.mileage = which.mileage;
-
-          // search blackbook
-          Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
-            if(results.length === 1) {
-              $scope.results.blackbook.data = results[0];
-            } else { // we have multiple results
-              $scope.results.blackbook.multiple = results;
-              $scope.results.blackbook.data = results[0]; // as a default
-            }
-            $scope.results.description = buildDescription(results[0]);
-          }, function() {
-            // no results
-            $scope.results.blackbook.noMatch = true;
-          });
-
-          // search mmr
-          Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
-            if(results.length === 1) {
-              $scope.results.mmr.data = results[0];
-            } else { // we have multiple results
-              $scope.results.mmr.multiple = results;
-              $scope.results.mmr.data = results[0]; // as a default
-            }
-
-            if(!$scope.results.description && results) {
-              $scope.results.description = buildDescription(results[0]);
-            }
-          }, function() {
-            // no results
-            $scope.results.mmr.noMatch = true;
-          });
-
-          this.searchComplete = true;
+        if (!this.validate()) {
+          return false;
         }
+
+        $scope.searchInProgress = true;
+
+        $scope.results.vin = which.vin;
+        $scope.results.mileage = which.mileage;
+
+        // search blackbook
+        Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
+          if(results.length === 1) {
+            $scope.results.blackbook.data = results[0];
+          } else { // we have multiple results
+            $scope.results.blackbook.multiple = results;
+            $scope.results.blackbook.data = results[0]; // as a default
+          }
+          $scope.results.description = buildDescription(results[0]);
+        }, function() {
+          // no results
+          $scope.results.blackbook.noMatch = true;
+        });
+
+        // search mmr
+        Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
+          if(results.length === 1) {
+            $scope.results.mmr.data = results[0];
+          } else { // we have multiple results
+            $scope.results.mmr.multiple = results;
+            $scope.results.mmr.data = results[0]; // as a default
+          }
+
+          if(!$scope.results.description && results) {
+            $scope.results.description = buildDescription(results[0]);
+          }
+        }, function() {
+          // no results
+          $scope.results.mmr.noMatch = true;
+        });
+
+        this.searchComplete = true;
         $scope.searchInProgress = false;
       },
       validate: function() {
@@ -206,22 +208,23 @@ angular.module('nextgearWebApp')
 
           var which = this;
 
-          if(which.validate()) {
-            $scope.searchInProgress = true;
-
-            $scope.results.vin = null;
-            $scope.results.mileage = which.mileage;
-
-            Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
-              // Blackbook will only ever return one result based
-              // on all 5 params; it'll always be the only item in the result array
-              $scope.results.blackbook.data = vehicles[0];
-              $scope.results.description = buildDescription(vehicles[0]);
-            }, function() {
-              // no results
-              $scope.results.blackbook.noMatch = true;
-            });
+          if(!which.validate()) {
+            return false;
           }
+
+          $scope.searchInProgress = true;
+          $scope.results.vin = null;
+          $scope.results.mileage = which.mileage;
+
+          Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
+            // Blackbook will only ever return one result based
+            // on all 5 params; it'll always be the only item in the result array
+            $scope.results.blackbook.data = vehicles[0];
+            $scope.results.description = buildDescription(vehicles[0]);
+          }, function() {
+            // no results
+            $scope.results.blackbook.noMatch = true;
+          });
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
@@ -308,24 +311,25 @@ angular.module('nextgearWebApp')
           $scope.vinLookup.resetSearch();
 
           var which = this;
-
-          if(which.validate()) {
-            $scope.searchInProgress = true;
-            $scope.results.vin = null;
-            $scope.results.mileage = which.mileage;
-
-            Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
-              // MMR will almost always return only one result based
-              // on all 5 params, and if there are multiples, the
-              // values will likely be the same anyway. So, we
-              // assume there is only item in the array
-              $scope.results.mmr.data = vehicles[0];
-              $scope.results.description = buildDescription(vehicles[0]);
-            }, function() {
-              // no results
-              $scope.results.mmr.noMatch = true;
-            });
+          if(!which.validate()) {
+            return false;
           }
+
+          $scope.searchInProgress = true;
+          $scope.results.vin = null;
+          $scope.results.mileage = which.mileage;
+
+          Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
+            // MMR will almost always return only one result based
+            // on all 5 params, and if there are multiples, the
+            // values will likely be the same anyway. So, we
+            // assume there is only item in the array
+            $scope.results.mmr.data = vehicles[0];
+            $scope.results.description = buildDescription(vehicles[0]);
+          }, function() {
+            // no results
+            $scope.results.mmr.noMatch = true;
+          });
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;

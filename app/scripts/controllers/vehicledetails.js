@@ -21,6 +21,8 @@ angular.module('nextgearWebApp')
       getData();
     };
 
+    $scope.hasOutstanding = null;
+
     // we wrap the api call in a function so that we can call it initially
     // as well as after an extension has been requested.
     var getData = function() {
@@ -29,6 +31,9 @@ angular.module('nextgearWebApp')
         $scope.paymentQueue.getQueueCount = function() {
           return _.size(Payments.getPaymentQueue().payments);
         };
+
+        // Hide the payment options sidebar if there is no outstanding amount for the user to pay.
+        $scope.hasOutstanding = details.FinancialSummaryInfo.TotalOutstanding > 0;
 
         // Set up variables to use for checkout (payments or titles)
         var titleForCheckout = {

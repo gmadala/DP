@@ -1,2 +1,19 @@
-NextGear Capital v4.0.11
+NextGear Capital v4.1.0
 =================================
+
+VO-2993	Display payment date disclaimer as part of payment options & breakdown
+VO-3090	Web (Floor Plan – Vehicle Detail): “Add Payment/Add Payoff” button should get disable for “Completed” floor plan.
+VO-3139	Web (Vehicle Detail): “Payment Options & Breakdown” link should be disabled for “Completed” floor plan.
+VO-3155	Clickable items don't display hand cursor
+VO-3159	Padding broken on "No Results Found"
+VO-3160	Hyperlink needs hand cursor
+VO-3178	".btn-link" Hyperlinks should be 12px, not 14px
+VO-3186	Change TRP Summary Text
+VO-3203	CTA Text Change, Floor Vehicle
+VO-3207	Change Lookup CTA to "Look Up"
+VO-3210	Cancel Changes Styling
+VO-3211	Enhanced Registration Return offset
+VO-3272 Modify the display of temp increases with the total credit breakdown
+VO-3280	Web (IE 9): User is able to Schedule payment without entering “Date” in “Schedule Date” field.
+VO-3334	Web (Value Lookup): “0” miles is getting displayed when user clicks on ”Lookup Values” without filling fields under Manual lookup (NextGear Book) section.
+VO-3483	Send title to different address does not work when submitting payment

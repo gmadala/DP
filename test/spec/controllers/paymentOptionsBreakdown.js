@@ -16,16 +16,22 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
     paymentOptionsHelper,
     Payments,
     mockPayment,
+    BusinessHours,
+    inBizHours,
     $httpBackend,
+    $q,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _paymentOptionsHelper_, _CartItem_, _PaymentOptions_, _Payments_, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, _paymentOptionsHelper_, _CartItem_, _PaymentOptions_, _Payments_, _$httpBackend_, _BusinessHours_, _$q_) {
     scope = $rootScope.$new();
     CartItem = _CartItem_;
     PaymentOptions = _PaymentOptions_;
     Payments = _Payments_;
     $httpBackend = _$httpBackend_;
+    BusinessHours = _BusinessHours_;
+    inBizHours = true;
+    $q = _$q_;
 
     mockPayment = {
       Vin: 'vin1',
@@ -65,6 +71,12 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
     spyOn(paymentOptionsHelper, 'fromVehicleDetails').andCallThrough();
     spyOn(paymentOptionsHelper, 'fromCartItem').andCallThrough();
+    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+      if(inBizHours) {
+        return $q.when(true);
+      }
+      return $q.when(false);
+    });
 
     run = function(givenObject) {
       PaymentOptionsBreakdownCtrl = $controller('PaymentOptionsBreakdownCtrl', {
@@ -100,6 +112,31 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
     scope.close();
     expect(dialogMock.close).toHaveBeenCalled();
   });
+
+  it('should check if we are in business hours when opened', function() {
+    run(fromCartItemMock);
+    expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+    scope.$apply();
+    expect(scope.canPayNow).toBe(true);
+  });
+
+  it('should check if we are in business hours any time the business hours change event fires', inject(function($rootScope) {
+    run(fromCartItemMock);
+    expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+    $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+    scope.$apply();
+    expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
+  }));
+
+  it('should find the next business day if we are outside of business hours', inject(function($rootScope) {
+    run(fromCartItemMock);
+    spyOn(BusinessHours, 'nextBusinessDay').andReturn($q.when('2014-11-02'));
+    inBizHours = false;
+    $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
+    scope.$apply();
+    expect(BusinessHours.nextBusinessDay).toHaveBeenCalled();
+    expect(scope.nextBusinessDay).toBe('2014-11-02');
+  }));
 
   describe('paymentBreakdown object', function () {
     beforeEach(function() {

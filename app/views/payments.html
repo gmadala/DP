@@ -108,7 +108,7 @@
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
       </h2>
-      <p class="no-results" ng-switch-when="false">
+      <p class="notice-box" ng-switch-when="false">
         Sorry, no results found. Please <a ng-click="payments.resetSearch()" title="New Search">try a new search</a>.
       </p>
       <div ng-switch-when="true" nxg-infinite-scroll="payments.fetchNextResults()"

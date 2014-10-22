@@ -25,7 +25,7 @@
   </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
-    <p class="no-results" ng-switch-when="false" ng-switch="!data.query">
+    <p class="notice-box" ng-switch-when="false" ng-switch="!data.query">
       <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
       <span ng-switch-when="true">Please enter a business name or number to search.</span>
     </p>

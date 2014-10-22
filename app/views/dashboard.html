@@ -114,7 +114,7 @@
   <div class="span3 well payment-summary dash-well">
     <h2 class="well-title">Payments Summary</h2>
     <ul class="counter-list">
-      <li ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
+      <li class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
@@ -123,7 +123,7 @@
           <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
-      <li ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
+      <li class="clickable" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
@@ -132,7 +132,7 @@
           <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
-      <li ng-click="filterPayments(viewMode)" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
+      <li class="clickable" ng-click="filterPayments(viewMode)" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
         <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
@@ -143,7 +143,7 @@
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>
-      <li ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
+      <li class="clickable" ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
         <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" ng-pluralize
@@ -152,11 +152,11 @@
           <h4 class="dash-major">{{paymentSummary[viewMode].AccountFeeAmount | currency}}</h4>
         </div>
       </li>
-            </ul>
-      <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
-        <span class="paired-body">View All Payments</span>
-        <span class="paired-media" nxg-icon="icon-eye"></span>
-      </button>
+    </ul>
+    <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_VIEW_ALL_PAYMENTS_BUTTON}}">
+      <span class="paired-body">View All Payments</span>
+      <span class="paired-media" nxg-icon="icon-eye"></span>
+    </button>
 
     <!-- Payments Chart -->
     <div class="payments-chart" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
@@ -199,7 +199,7 @@
   <!-- Credit Summary -->
   <div class="span5 well dash-well">
     <h2 class="well-title">Credit Information</h2>
-    <div class="row-fluid credit-chart clearfix">
+    <div class="row-fluid clearfix">
       <div class="span5 donut-nested">
           <div class="donut-outer"
                 nxg-chart
@@ -223,7 +223,7 @@
           <div class="style-select auto">
             <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit" ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
           </div>
-          <table class="table table-unstyle">
+          <table class="table table-legend">
             <tr>
               <td><i class="chart-legend-color nxg-chart-total-credit"></i></td>
               <td class="table-label">Total</td>
@@ -249,7 +249,7 @@
               <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
             </tr>
           </table>
-          <p class="" ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null">This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}</p>
+           <p class="tip" ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null">This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}.</p>
         </div>
       </div>
     </div>
@@ -347,7 +347,7 @@
   <div class="span10 well dash-well infinite">
     <h2 class="well-title">Recently Floored Vehicles</h2>
     <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
-      <p class="no-results" ng-switch-when="false">
+      <p class="notice-box" ng-switch-when="false">
         Sorry, no results found.
       </p>
 
