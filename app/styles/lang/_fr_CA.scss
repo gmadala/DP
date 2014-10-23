@@ -97,6 +97,17 @@ body.lang_fr_CA {
 
   /* Payments */
   #PaymentsPage {
+    .well-title {
+      .well-sub-title, a {
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      button {
+        font-size: 14px;
+        margin-top: 6px;
+      }
+    }
+
     @media (max-width: 1090px) {
 
       .well-title {
