@@ -68,7 +68,7 @@
         <p class="span4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && curtailmentObject.additionalPrincipal">
-        <p class="span8" translate>Additional Principal:</p>
+        <p class="span8"><span translate>Additional Principal</span>:</p>
         <p class="span4 value numeric">{{ curtailmentObject.additionalPrincipal | currency }}</p>
       </li>
       <li class="list-table-row">

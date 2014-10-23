@@ -156,6 +156,7 @@ msgstr ""
 msgid "Additional Addresses"
 msgstr ""
 
+#: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
 #: app/views/vehicledetails.html
 msgid "Additional Principal"
@@ -163,10 +164,6 @@ msgstr ""
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Additional Principal Payment"
-msgstr ""
-
-#: app/views/modals/paymentOptionsBreakdown.html
-msgid "Additional Principal:"
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
@@ -2366,6 +2363,10 @@ msgstr ""
 
 #: app/views/modals/scheduleCheckout.html
 msgid "Select the Schedule Date"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js
+msgid "Select the payments you want to make or schedule by adding them to your payment queue."
 msgstr ""
 
 #: app/views/account_management.html

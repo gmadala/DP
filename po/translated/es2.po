@@ -428,9 +428,21 @@ msgstr "Ya que ésta es su primera visita a NextGear Capital, por favor establez
 msgid "Sorry, no results found. Please <a ng-click=\"floorplanData.resetSearch(filterOptions)\" title=\"New Search\">try a new search</a>."
 msgstr "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click=\"floorplanData.resetSearch(filterOptions)\" title=\"New Search\">realice una nueva búsqueda</a>."
 
+#: app/views/floorplan.html
+msgid "Sorry, no results found. Please <a ng-click=\"floorplanData.resetSearch()\" title=\"New Search\">try a new search</a>."
+msgstr "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click=\"floorplanData.resetSearch()\" title=\"New Search\">realice una nueva búsqueda</a>."
+
 #: app/views/payments.html
 msgid "Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title=\"New Search\">try a new search</a>."
 msgstr "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click=\"payments.resetSearch()\" title=\"New Search\">try a new search</a>realice una nueva búsqueda</a>."
+
+#: app/views/payments.html
+msgid "Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title=\"New Search\">try a new search</a>."
+msgstr "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click=\"payments.resetSearch()\" title=\"New Search\">try a new search</a>realice una nueva búsqueda</a>."
+
+#: app/views/receipts.html
+msgid "Sorry, no results found. Please <a ng-click=\"receipts.resetSearch()\" title=\"New Search\">try a new search</a>."
+msgstr "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click=\"receipts.resetSearch()\" title=\"New Search\">realice una nueva búsqueda</a>."
 
 #: app/views/receipts.html
 msgid "Sorry, no results found. Please <a ng-click=\"receipts.resetSearch()\" title=\"New Search\">try a new search</a>."
