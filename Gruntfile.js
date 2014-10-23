@@ -408,53 +408,6 @@ module.exports = function(grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('translations_to_JSON', 'Convert a translations file to JSON', function () {
-    var reg = /^msgid\s"(.+)"\smsgstr/igm;
-    // Select all msgid's (JS Regex doesn't support lookbehinds)
-    reg = /msgid((.+\n)+?)msgstr/igm;
-
-    var fileContents = grunt.file.read('po/untranslated.po');
-    var matches = fileContents.toString().match(reg);
-    var results = {
-      strings: [],
-      plurals: []
-    };
-    matches.forEach(function (val) {
-      if (val.length) {
-        // Truncated string
-        var str = val.slice(7, -8);
-
-        // If it's a plural string, only grab first part of it
-        if (str.match(/msgid_plural/igm)) {
-          results.plurals.push(str.substring(0, str.indexOf('msgid_plural') - 2));
-          return;
-        }
-
-        // If it's a multi-line string, replace beginning and end quotes
-        if (str.match(/^"\n"/)) {
-          results.strings.push(str.replace(/(^"(\n)?|"$)/igm, ''));
-          return;
-        }
-
-        // Normal string
-        results.strings.push(str);
-      }
-    });
-
-    var output = [
-      '"use strict";',
-      '/* Warning: Auto Generated file */',
-      'angular.module("nextgearWebApp").factory("translationsJSON", function() {',
-        "\t" + 'return ' + JSON.stringify(results) + ';',
-      '});'
-    ];
-
-    console.log(results.strings.length + ' Strings Found');
-    console.log(results.plurals.length + ' Plural Strings Found');
-
-    grunt.file.write('app/scripts/translationJSON.js', output.join("\n\n"));
-  });
-
   grunt.registerMultiTask('translations_merge', 'Merge multiple translations files into one', function () {
     var options = this.options();
 
@@ -533,6 +486,9 @@ module.exports = function(grunt) {
 
       // Push plurals onto a different array since we handle them differently
       if (splitter == 'msgid_plural') {
+        // Truncate to just the string value
+        truncated = truncated.slice(0, truncated.indexOf(splitter) - 2);
+
         translationStrings.matchesPlural.push(val);
         translationStrings.plurals.push(truncated);
         return;
@@ -573,8 +529,9 @@ module.exports = function(grunt) {
           }
         });
 
+        // Match each of the plurals by testing for msgid_plural
         translationStrings.plurals.forEach(function (string, key) {
-          if (fileContents.indexOf('msgid "' + string + '"') === -1) {
+          if (fileContents.indexOf('msgid "' + string + '"' + "\n" + 'msgid_plural') === -1) {
             translations[filename].values.push(translationStrings.matchesPlural[key]);
           }
         });
@@ -586,7 +543,6 @@ module.exports = function(grunt) {
         grunt.file.write(file.dest, translations[filename].values.join("\n\n"));
       }); // END forEach file
     });
-
 
   });
 
