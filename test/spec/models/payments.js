@@ -621,23 +621,12 @@ describe("Model: Payments", function () {
       clock.restore();
     });
 
-    it('should make the expected API call if we have no cached data', function () {
+    it('should make the expected API call', function () {
       var start = moment("2013-01-01").toDate(),
         end = moment("2013-01-31").toDate();
       httpBackend.expectGET('/payment/possiblePaymentDates/2013-01-01/2013-01-31');
       payments.fetchPossiblePaymentDates(start, end);
       expect(httpBackend.flush).not.toThrow();
-    });
-
-    it('should used cached data on subsequent requests on the same day', function () {
-      var start = moment("2013-01-01").toDate(),
-        end = moment("2013-01-31").toDate();
-
-      payments.fetchPossiblePaymentDates(start, end);
-      httpBackend.flush();
-
-      payments.fetchPossiblePaymentDates(start, end);
-      expect(httpBackend.verifyNoOutstandingRequest).not.toThrow();
     });
 
     it('should transform results into a map of booleans by date, if requested', function () {

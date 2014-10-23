@@ -8,8 +8,15 @@
   margin-top: 0;
 }
 
+.svg-fix {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 // basic icon styling, with classes for alternate sizes.
 .svg-icon {
+  position: relative;
   display: inline-block;
   vertical-align: middle;
   width: 18px;
