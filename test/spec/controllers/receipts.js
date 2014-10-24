@@ -258,13 +258,11 @@ describe('Controller: ReceiptsCtrl', function () {
 
   describe('tooMany function', function() {
     it('should return true if the number of selected receipts exceeds the maximum', function() {
-      scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four', 'one'];
       scope.selectedReceipts = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four','one', 'two', 'three', 'four', 'one'];
       expect(scope.tooMany()).toBe(true);
     });
 
     it('should return false if the number of selected receipts is less than the maximum', function() {
-      scope.receipts.results = ['one', 'two', 'three', 'four','one', 'two', 'three', 'four'];
       scope.selectedReceipts = ['one', 'two', 'three', 'four'];
       expect(scope.tooMany()).toBe(false);
     });
@@ -328,16 +326,15 @@ describe('Controller: ReceiptsCtrl', function () {
     });
 
     it('should build a link based on the selected receipts and open it in a new window', function() {
-      scope.receipts.results = [
+      scope.selectedReceipts = [
         { transactionNumber: 1234, FinancialTransactionId: 5656 },
         { transactionNumber: 5678, FinancialTransactionId: 3434 },
         { transactionNumber: 910, FinancialTransactionId: 1212 }
       ];
 
-      scope.selectedReceipts = [true, false, true];
       spyOn(window, 'open');
       scope.onExport();
-      expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656,1212', '_blank');
+      expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656,3434,1212', '_blank');
     });
   });
 
