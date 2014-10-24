@@ -1,6 +1,4 @@
-NextGear Capital v4.1.1
+NextGear Capital v4.1.2
 =================================
 
-VO-3515	Dealer Making Payments: Screen Freezes
-VO-3536	Schedule Payment: Possible payment dates are incorrect
-VO-3539	Unable to access dashboard
+VO-3514	Receipt Export is Only Exporting Most Recent Receipt
