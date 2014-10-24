@@ -30,7 +30,7 @@
     <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
       <h2 class="well-title">
         Account Fees
-        <span class="well-sub-title">Amounts shown are valid through 8pm eastern time
+        <span class="well-sub-title">Amounts shown are valid through 8pm Eastern Time
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
@@ -103,7 +103,7 @@
     <div class="well" ng-switch="payments.results.length > 0 || payments.loading">
       <h2 class="well-title">
         Vehicle Payments
-        <span class="well-sub-title">Amounts shown are valid through 8pm eastern time
+        <span class="well-sub-title">Amounts shown are valid through 8pm Eastern Time
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>

@@ -102,16 +102,10 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      var ids = '';
-
-      for(var i = 0; i < $scope.selectedReceipts.length; i++) {
-        if ($scope.selectedReceipts[i]) {
-          ids = ids + $scope.receipts.results[i].FinancialTransactionId +  ',';
-        }
-      }
-
-      // remove extra comma at end
-      ids = ids.slice(0,-1);
+      var ids = _.reduce($scope.selectedReceipts, function(ids, nextReceipt) {
+        return ids + nextReceipt.FinancialTransactionId + ',';
+      }, '');
+      ids = ids.slice(0,-1); // remove extra comma at end
 
       // build query string
       var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: ids });
