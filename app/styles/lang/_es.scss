@@ -1,14 +1,7 @@
 body.lang_es {
 
-  /* Floor Plan */
-  #FloorplanPage {
-    .search-form {
-      .form-block {
-        .range-end {
-          width: 125px;
-        }
-      }
-    }
+  .range .range-end {
+    width: 125px;
   }
 
   /* Details */
@@ -23,7 +16,6 @@ body.lang_es {
           margin-top: 2px;
         }
       }
-
     }
 
     .btn-save-changes {
@@ -45,11 +37,9 @@ body.lang_es {
   /* Analytics */
   #AnalyticsPage {
     @media (max-width: 1090px) {
-
       .well-title {
         font-size: 16px;
       }
-
     }
 
     .movers-container {
@@ -58,7 +48,6 @@ body.lang_es {
       }
     }
   }
-
 
   /* Title Releases */
   #TitleReleasesPage {
@@ -70,13 +59,8 @@ body.lang_es {
       .span7 {
         width: 66%;
       }
-      .range-end {
-        width: 125px;
-      }
     }
-
   }
-
 
   /* Payments */
   #PaymentsPage {
@@ -116,10 +100,6 @@ body.lang_es {
       .span7 {
         width: 232px;
       }
-
-      .range-end {
-        width: 125px;
-      }
     }
 
     @media (min-width: 1170px) {
@@ -135,11 +115,9 @@ body.lang_es {
   /* Checkout */
   #CheckoutPage {
     @media (max-width: 1090px) {
-
       .well-title {
         font-size: 16px;
       }
-
     }
   }
 
@@ -153,10 +131,6 @@ body.lang_es {
       .span7 {
         width: 232px;
       }
-
-      .range-end {
-        width: 125px;
-      }
     }
 
     @media (min-width: 1120px) {
@@ -165,15 +139,6 @@ body.lang_es {
           width: 160px;
           margin-top: 0;
         }
-      }
-    }
-  }
-
-
-  #ReportsPage {
-    .form-row.range {
-      .range-end {
-        width: 125px;
       }
     }
   }
@@ -187,7 +152,6 @@ body.lang_es {
     }
   }
 
-
   #AuctionDashboardPage {
     @media (max-width: 1090px) {
 
@@ -195,14 +159,6 @@ body.lang_es {
         margin-left: 0;
       }
 
-    }
-  }
-
-  #AuctionFloorplanPage {
-    .range {
-      .range-end {
-        width: 125px;
-      }
     }
   }
 
@@ -225,7 +181,6 @@ body.lang_es {
     }
   }
 
-
   #ProfileSettingsPage, #AccountManagementPage, #AuctionSettingsPage {
     @media (max-width: 1090px) {
 
@@ -244,7 +199,6 @@ body.lang_es {
 
     }
   }
-
 
   #ValueLookupPage {
     .btn-toggle {
