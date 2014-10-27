@@ -83,7 +83,7 @@
           <td>
             <p class="lockup-major">{{ fee.FeeType || 'N/A' }}</p>
           </td>
-          <td class="description">
+          <td class="description-narrow">
             <h5>{{ fee.Description }}</h5>
           </td>
           <td>
@@ -156,7 +156,7 @@
               </div>
             </td>
 
-            <td class="description"> <!-- Vehicle Payments: description column -->
+            <td class="description-narrow"> <!-- Vehicle Payments: description column -->
               <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">
                 <span nxg-highlight="payment.UnitDescription" highlight="payment.data.query" class="break-word"></span>
               </a>

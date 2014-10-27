@@ -4,11 +4,10 @@ angular.module('nextgearWebApp')
   .factory('signupUrls', function (gettextCatalog) {
 
     return {
-
       urls: {
         en: 'https://customer.nextgearcapital.com/NGCApplication/',
-        en_CA: 'http://www.nextgearcapital.com/french/links/NG_CanadaENG_CreditApp_Web.pdf',
-        fr_CA: 'http://www.nextgearcapital.com/french/links/NG_CanadaFREN_CreditApp_Web.pdf',
+        'en_CA': 'http://www.nextgearcapital.com/french/links/NG_CanadaENG_CreditApp_Web.pdf',
+        'fr_CA': 'http://www.nextgearcapital.com/french/links/NG_CanadaFREN_CreditApp_Web.pdf',
         // Currently redirecting Spanish to English site
         es: 'https://customer.nextgearcapital.com/NGCApplication/'
       },
