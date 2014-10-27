@@ -27,7 +27,7 @@
          show-location-filter="true">
     </div>
 
-    <div class="well" ng-switch="fees.results.length > 0 || fees.loading">
+    <div class="well" ng-show="fees.results.length > 0">
       <h2 class="well-title">
         Account Fees
         <span class="well-sub-title">Amounts shown are valid through 8pm Eastern Time
@@ -35,10 +35,7 @@
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </span>
       </h2>
-      <p class="notice-box" ng-switch-when="false">
-        There are no fees associated with this account.
-      </p>
-      <table class="table table-striped table-primary" ng-switch-when="true">
+      <table class="table table-striped table-primary">
         <thead>
           <th class="sortable"
               ng-click="sortFeesBy('EffectiveDate')"
