@@ -189,7 +189,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           BusinessNumber: 1234,
@@ -197,7 +197,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });
@@ -345,7 +345,7 @@ describe('Model: User', function () {
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: resultData
       });
@@ -356,7 +356,7 @@ describe('Model: User', function () {
     });
 
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/v1_1/Static');
+      httpBackend.expectGET('/Dealer/v1_2/Static');
       user.refreshStatics();
       expect(httpBackend.flush).not.toThrow();
     });
@@ -367,9 +367,6 @@ describe('Model: User', function () {
         expect(angular.isArray(result.productTypes)).toBe(true);
         expect(angular.isArray(result.colors)).toBe(true);
         expect(angular.isArray(result.states)).toBe(true);
-        expect(angular.isArray(result.dealerAddresses)).toBe(true);
-        expect(angular.isArray(result.bankAccounts)).toBe(true);
-        expect(angular.isArray(result.linesOfCredit)).toBe(true);
         expect(angular.isArray(result.titleLocationOptions)).toBe(true);
         expect(angular.isArray(result.paymentMethods)).toBe(true);
       });
@@ -388,9 +385,6 @@ describe('Model: User', function () {
         ProductType: [],
         Colors: [],
         States: [],
-        DealerADdresses: [],
-        BankAccounts: [],
-        LinesOfCredit: [],
         TitleLocationOptions: [],
         PaymentMethods: []
       });
@@ -402,9 +396,6 @@ describe('Model: User', function () {
       expect(statics.productTypes).toBe(resultData.ProductType);
       expect(statics.colors).toBe(resultData.Colors);
       expect(statics.states).toBe(resultData.States);
-      expect(statics.locations).toBe(resultData.DealerAddresses);
-      expect(statics.bankAccounts).toBe(resultData.BankAccounts);
-      expect(statics.linesOfCredit).toBe(resultData.LinesOfCredit);
       expect(statics.titleLocationOptions).toBe(resultData.TitleLocationOptions);
       expect(statics.paymentMethods).toBe(resultData.PaymentMethods);
     });
@@ -417,7 +408,7 @@ describe('Model: User', function () {
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: resultData
       });
@@ -428,7 +419,7 @@ describe('Model: User', function () {
     });
 
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/Info');
+      httpBackend.expectGET('/Dealer/v1_2/Info');
       user.refreshInfo();
       expect(httpBackend.flush).not.toThrow();
     });
@@ -451,9 +442,6 @@ describe('Model: User', function () {
       var refreshInfo = user.refreshInfo();
       expect(user.infoPromise()).toBe(refreshInfo);
     });
-
-
-
   });
 
   describe('isDealer method', function () {
@@ -463,7 +451,7 @@ describe('Model: User', function () {
     });
 
     it('should return true if dealer info DealerAuctionStatusForGA flag is Dealer', function () {
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           DealerAuctionStatusForGA: 'Dealer'
@@ -475,7 +463,7 @@ describe('Model: User', function () {
     });
 
     it('should return false if dealer info DealerAuctionStatusForGA flag is anything else', function () {
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           DealerAuctionStatusForGA: 'foo'
@@ -526,12 +514,12 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });
@@ -591,12 +579,12 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });

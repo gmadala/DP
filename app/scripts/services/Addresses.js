@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .factory('Addresses', function() {
 
-    var addresses, flooredAddresses,
+    var addresses,
       PO_BOX_REGEX = /(p\.?[\s]*o\.?[\s]*b[\s]*o[\s]*x[\s]*|\bp[o|0]st\.?\s*[o|0]ffice\s*b[o|0]x)\s*#?\d+/;
 
     function isNullOrUndefined(val) {
@@ -11,26 +11,19 @@ angular.module('nextgearWebApp')
     }
 
     return {
-      initFlooredBusinessAddresses: function(addr) {
-        flooredAddresses = addr;
-      },
-      getFlooredBusinessAddresses: function() {
-        return flooredAddresses;
-      },
-
       init: function(addr) {
         addresses = addr;
       },
-      getAddresses: function(active, physical, titleRelease) {
-        // Returns addresses filtered by any or all of these possible params.
+      getAddresses: function(active, physical, titleRelease, flooredAgainst) {
+        // returns addresses filtered by any or all of these possible params.
         return addresses.filter(function(item) {
           return (isNullOrUndefined(physical) || item.IsPhysicalInventory === physical) &&
             (isNullOrUndefined(active) || item.IsActive === active) &&
-            (isNullOrUndefined(titleRelease) || item.IsTitleReleaseAddress === titleRelease);
+            (isNullOrUndefined(titleRelease) || item.IsTitleReleaseAddress === titleRelease) && (isNullOrUndefined(flooredAgainst) || item.HasFloorplanFlooredAgainst === flooredAgainst);
         });
       },
       getActivePhysical: function() {
-        // Returns addresses that are active and physical
+        // returns addresses that are active and physical
         return this.getAddresses(true /*active*/, true /*physical*/, null);
       },
       getTitleAddresses: function() {
@@ -40,10 +33,20 @@ angular.module('nextgearWebApp')
         });
       },
       getDefaultTitleAddress: function() {
-        // returns the default title release address (there is only ever 1 address with IsTitleReleaseAddress == true
+        // returns the default title release address (there is only ever 1 address with IsTitleReleaseAddress == true)
         return this.getTitleAddresses().filter(function(item) {
           return item.IsTitleReleaseAddress;
         })[0];
+      },
+      getFlooredBusinessAddresses: function() {
+        // returns addresses that have been floored against
+        return this.getAddresses(null, null, null, true /*flooredAgainst*/);
+      },
+      getApprovedFlooredBusinessAddresses: function() {
+        // returns addresses that have been floored against and are approved
+        return this.getFlooredBusinessAddresses().filter(function(item) {
+          return item.HasApprovedFloorplanFlooredAgainst;
+        });
       }
     };
   });

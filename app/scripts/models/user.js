@@ -137,19 +137,15 @@ angular.module('nextgearWebApp')
       },
 
       refreshStatics: function() {
-        return api.request('GET', '/Dealer/v1_1/Static').then(function(data) {
+        return api.request('GET', '/Dealer/v1_2/Static').then(function(data) {
           statics = {
             // API translation layer -- add transformation logic here as needed
             productTypes: data.ProductType || [],
             colors: data.Colors || [],
             states: data.States || [],
-            dealerAddresses: data.DealerAddresses || [],
-            bankAccounts: data.BankAccounts || [],
-            linesOfCredit: data.LinesOfCredit || [],
             titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
-          Addresses.init(data.DealerAddresses || []);
           return statics;
         },
         function() {
@@ -158,35 +154,12 @@ angular.module('nextgearWebApp')
           // populated. Set up the basic structure to avoid 'accessing property of undefined'
           // errors.
           statics = {
-            BusinessId: '',
-            BusinessNumber: 0,
-            BusinessName: '',
-            MarketName: '',
-            MarketPhoneNumber: '',
-            CSCPhoneNumber: '',
-            MarketEMail: '',
-            IsBuyerDirectlyPayable: false,
-            HasUCC: false,
-            MarketNumber: 0,
-            DealerAuctionStatusForGA: '',
-            CurrentlyApprovedMinFlooringDate: '',
-            BusinessEmail: '',
-            BusinessContactEmail: '',
-            DisplayTitleReleaseProgram: false,
-            BusinessContactUserName: '',
-            Phone: '',
-            CellPhone: '',
-            FlooredBusinessAddresses: [],
             productTypes: [],
             colors: [],
             states: [],
-            dealerAddresses: [],
-            bankAccounts: [],
-            linesOfCredit: [],
             titleLocationOptions: [],
             paymentMethods: []
           };
-          Addresses.init([]);
         });
       },
 
@@ -195,14 +168,14 @@ angular.module('nextgearWebApp')
       },
 
       refreshInfo: function() {
-        infoRequest = api.request('GET', '/Dealer/Info').then(function(data) {
+        infoRequest = api.request('GET', '/Dealer/v1_2/Info').then(function(data) {
           info = data;
           info.ManufacturerSubsidiaries = filterByBusinessName(info.ManufacturerSubsidiaries);
-          Addresses.initFlooredBusinessAddresses(info.FlooredBusinessAddresses);
+          Addresses.init(data.DealerAddresses || []);
           return info;
         },
         function() {
-          Addresses.initFlooredBusinessAddresses([]);
+          Addresses.init([]);
         });
 
         return infoRequest;
