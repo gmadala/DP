@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
       controller: 'NxgSearchCtrl'
     };
   })
-  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses) {
+  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses, gettextCatalog) {
     $scope.showHelpText = ($attrs.helpText) ? true : false;
     $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? $attrs.showLocationFilter : false;
 
@@ -64,7 +64,7 @@ angular.module('nextgearWebApp')
     var locs = Addresses.getFlooredBusinessAddresses();
 
     // Add default 'view all' options
-    $scope.inventoryLocations.push({ label: 'View All', value: undefined });
+    $scope.inventoryLocations.push({ label: gettextCatalog.getString('View All'), value: undefined });
 
     // Populate inventory location options in proper format (label & value)
     angular.forEach(locs, function(value) {

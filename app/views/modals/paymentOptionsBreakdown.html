@@ -1,28 +1,28 @@
-<h3 class="modal-header">
-  Payment Options & Breakdown
+<h3 class="modal-header" translate>
+  Payment Options &amp; Breakdown
 </h3>
 
 <div class="modal-body to-edge" nxg-autofocus>
   <div class="well-item aside">
-    <p class="truncate">Description: <span class="highlight heavy">{{ paymentObject.description }}</span></p>
+    <p class="truncate"><span translate>Description</span>: <span class="highlight heavy">{{ paymentObject.description }}</span></p>
   </div>
   <form class="modal-inner" name="paymentOptionsForm">
-    <h3>Payment Options</h3>
-    <p class="paragraph">Select a payment from the options below:</p>
+    <h3 translate>Payment Options</h3>
+    <p class="paragraph"><span translate>Select a payment from the options below</span>:</p>
 
     <ul class="form-block">
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYOFF" id="paymentOptionPayoff" required />
         <label class="radio-img" for="paymentOptionPayoff"></label>
         <label class="cr-label" for="paymentOptionPayoff">
-          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF) | currency }}</strong> – Payoff this vehicle
+          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF) | currency }}</strong> – <span translate>Payoff this vehicle</span>
         </label>
       </li>
       <li class="cr-inline">
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYMENT" id="paymentOptionCurtailment" required />
         <label class="radio-img" for="paymentOptionCurtailment"></label>
         <label class="cr-label" for="paymentOptionCurtailment">
-          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT) - curtailmentObject.additionalPrincipal | currency }}</strong> – Curtailment Payment
+          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT) - curtailmentObject.additionalPrincipal | currency }}</strong> – <span translate>Curtailment Payment</span>
         </label>
         <div class="form-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
           <div class="input-prepend dollar">
@@ -39,11 +39,11 @@
             nxg-input-currency="{{ maxAdditional }}"
 
             ng-class="{ 'nxg-invalid':validity.additionalAmount.$error.pattern || validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax }" />
-          </div> – Additional Principal Payment
+          </div> – <span translate>Additional Principal Payment</span>
         </div>
         <div class="form-row">
-          <label class="text-error" ng-show="validity.additionalAmount.$error.pattern">Please enter a numeric value with no more than 2 decimal places.</label>
-          <label class="text-error" ng-show="validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax">
+          <label class="text-error" ng-show="validity.additionalAmount.$error.pattern" translate>Please enter a numeric value with no more than 2 decimal places.</label>
+          <label class="text-error" ng-show="validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax" translate>
             Payout Amount must be $0.01 to {{ maxAdditional | currency }}
           </label>
         </div>
@@ -53,39 +53,39 @@
         <input type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_INTEREST" id="paymentOptionInterest" required />
         <label class="radio-img" for="paymentOptionInterest"></label>
         <label class="cr-label" for="paymentOptionInterest">
-          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_INTEREST) | currency }}</strong> – Interest-Only Payment
+          <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_INTEREST) | currency }}</strong> – <span translate>Interest-Only Payment</span>
         </label>
       </li>
 
     </ul>
   </form>
   <div class="aside modal-inner">
-    <h3>Payment Breakdown</h3>
+    <h3 translate>Payment Breakdown</h3>
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span8">Principal:</p>
+        <p class="span8"><span translate>Principal</span>:</p>
         <p class="span4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && curtailmentObject.additionalPrincipal">
-        <p class="span8">Additional Principal:</p>
+        <p class="span8"><span translate>Additional Principal</span>:</p>
         <p class="span4 value numeric">{{ curtailmentObject.additionalPrincipal | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span8">Interest:</p>
+        <p class="span8"><span translate>Interest</span>:</p>
         <p class="span4 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span8">Fee(s):</p>
+        <p class="span8"><span translate>Fee(s)</span>:</p>
         <p class="span4 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="paymentObject.payment.cpp">
-        <p class="span8">CPP:</p>
+        <p class="span8"><span translate>CPP</span>:</p>
         <p class="span4 value numeric"><span class="table-symbol">+</span>{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="span8">Payment Total:</p>
+        <p class="span8"><span translate>Payment Total</span>:</p>
         <p class="span4 value numeric">{{ (paymentObject.getCheckoutAmount(selector.paymentOption) | currency) || 'n/a' }}</p>
       </li>
     </ul>
@@ -97,7 +97,7 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-secondary" type="button">Cancel Changes</button>
-  <button ng-click="confirm()" class="btn-cta cta-primary" type="submit">Confirm Changes</button>
+  <button ng-click="close()" class="btn-cta cta-secondary" type="button" translate>Cancel Changes</button>
+  <button ng-click="confirm()" class="btn-cta cta-primary" type="submit" translate>Confirm Changes</button>
 </div>
 

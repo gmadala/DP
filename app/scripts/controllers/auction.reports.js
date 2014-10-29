@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function ($scope, api, segmentio, metric, User) {
+  .controller('AuctionReportsCtrl', function ($scope, api, segmentio, metric, User, gettextCatalog) {
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
      * when saving the report PDF.
@@ -12,11 +12,11 @@ angular.module('nextgearWebApp')
 
     $scope.documents = [
       {
-        'title': 'Credit Availability Query History (PDF)',
+        'title': gettextCatalog.getString('Credit Availability Query History (PDF)'),
         'url': api.contentLink('/report/creditavailabilityqueryhistory/CreditAvailability', {})
       },
       {
-        'title': 'Receivable Detail (PDF)',
+        'title': gettextCatalog.getString('Receivable Detail (PDF)'),
         'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];

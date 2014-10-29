@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api, gettextCatalog) {
 
     $scope.openRequestPayout = function($event) {
       $event.preventDefault();
@@ -45,12 +45,12 @@ angular.module('nextgearWebApp')
             $scope.fundsBalance -= Math.min(result.amount, $scope.fundsBalance);
 
             // wireframes do not specify any kind of success display, so let's just do a simple one
-            var title = 'Request submitted',
-              msg = 'Your request for a payout in the amount of ' +
-                $filter('currency')(result.amount) +
-                ' to your account "' + result.account.BankAccountName +
-                '" has been successfully submitted.',
-              buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
+            var title = gettextCatalog.getString('Request submitted'),
+              msg = gettextCatalog.getString('Your request for a payout in the amount of {{ amount }} to your account "{{ bankAccountName }}" has been successfully submitted.', {
+                amount: $filter('currency')(result.amount),
+                bankAccountName: result.account.BankAccountName
+              }),
+              buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
             $dialog.messageBox(title, msg, buttons).open();
           }
         }

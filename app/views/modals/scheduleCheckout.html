@@ -1,14 +1,14 @@
-<h3 class="modal-header">Select the Schedule Date</h3>
+<h3 class="modal-header" translate>Select the Schedule Date</h3>
 
 <div class="modal-body to-edge">
   <div class="well-item aside" ng-switch on="type">
-    <p class="truncate" ng-switch-when="payment">Description: <span class="highlight heavy">{{ model.payment.description }}</span></p>
-    <p class="truncate" ng-switch-when="fee">Fee Type: <span class="highlight heavy">{{ model.fee.feeType }}</span></p>
+    <p class="truncate" ng-switch-when="payment"><span translate>Description</span>: <span class="highlight heavy">{{ model.payment.description }}</span></p>
+    <p class="truncate" ng-switch-when="fee"><span translate>Fee Type</span>: <span class="highlight heavy">{{ model.fee.feeType }}</span></p>
   </div>
 
   <form name="dateForm" class="modal-inner">
-    <h3>Schedule Date</h3>
-    <p>Select a date from the picker below:</p>
+    <h3 translate>Schedule Date</h3>
+    <p><span translate>Select a date from the picker below</span>:</p>
     <input id="inputScheduleDate" name="inputScheduleDate"
     class="date-inline"
            nxg-date-field before-show-day="checkDate(date)"
@@ -17,47 +17,48 @@
            required nxg-requires="checkDate(model.selectedDate)"
            ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
     <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
+    <span translate>or</span> <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress" translate>Pay Now</button>
 
     <div class="row-fluid">
       <label for="inputScheduleDate" class="text-error"
-            ng-show="validity.inputScheduleDate.$error.required">
+            ng-show="validity.inputScheduleDate.$error.required" translate>
         Please select a schedule date.
       </label>
       <label for="inputScheduleDate" class="text-error"
-             ng-show="validity.$error.nxgRequires">
+             ng-show="validity.$error.nxgRequires" translate>
         Please select a valid banking date no earlier than tomorrow and no later than the payment due date.
       </label>
     </div>
-    <p class="paragraph">Scheduled payments are not made until the scheduled date. <br/> Interest and/or fees may continue to accrue between now and your scheduled payment date.</p>
+    <p class="paragraph" translate>Scheduled payments are not made until the scheduled date. <br/> Interest and/or fees may continue to accrue between now and your scheduled payment date.</p>
   </form>
 
   <div class="modal-inner aside" ng-show="isPayment">
-    <h3>Payment Breakdown</h3>
+    <h3 translate>Payment Breakdown</h3>
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span5">Principal</p>
+        <p class="span5" translate>Principal</p>
         <p class="span7 value numeric">{{ model.breakdown.principal | currency }}</p>
       </li>
       <li class="list-table-row" ng-show="model.breakdown.additionalPrincipal">
-        <p class="span5">Additional Principal</p>
+        <p class="span5" translate>Additional Principal</p>
         <p class="span7 value numeric">{{ model.breakdown.additionalPrincipal | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span5">Interest</p>
+        <p class="span5" translate>Interest</p>
         <p class="span7 value numeric">{{ model.breakdown.interest | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span5">Fee(s)</p>
+        <p class="span5" translate>Fee(s)</p>
         <p class="span7 value numeric">{{ model.breakdown.fees | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span5">CPP</p>
+        <p class="span5" translate>CPP</p>
         <p class="span7 value numeric">{{ model.breakdown.cpp | currency }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="span5">Payment Total</p>
+        <p class="span5" translate>Payment Total</p>
         <p class="span7 value numeric">{{ model.getPaymentTotal() | currency }}</p>
       </li>
     </ul>
@@ -66,6 +67,6 @@
 
 
 <div class="modal-footer">
-  <button type="button" ng-click="close()" ng-disabled="submitInProgress || updateInProgress" class="btn-cta cta-secondary">Cancel</button>
-  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress || updateInProgress" nxg-autofocus class="btn-cta cta-primary">Confirm</button>
+  <button type="button" ng-click="close()" ng-disabled="submitInProgress || updateInProgress" class="btn-cta cta-secondary" translate>Cancel</button>
+  <button type="submit" ng-click="commit()" ng-disabled="submitInProgress || updateInProgress" nxg-autofocus class="btn-cta cta-primary" translate>Confirm</button>
 </div>

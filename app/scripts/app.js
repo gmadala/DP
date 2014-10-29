@@ -1,6 +1,12 @@
 'use strict';
 
-angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule'])
+angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule', 'gettext'])
+  .constant('SupportedLanguages', [
+    { key: 'en', name: 'English' },
+    { key: 'enDebug', name: 'English (Debug)' },
+    { key: 'fr_CA', name: 'French (CA)' },
+    { key: 'es', name: 'Spanish' }
+  ])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -13,12 +19,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
+        pageID: 'Login',
         allowAnonymous: true
       })
       .state('loginRecover', {
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
         controller: 'LoginRecoverCtrl',
+        pageID: 'LoginRecover',
         allowAnonymous: true,
         noDirectAccess: true
       })
@@ -26,12 +34,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/login/updateSecurity',
         templateUrl: 'views/login.updateSecurity.html',
         controller: 'LoginUpdateSecurityCtrl',
+        pageID: 'LoginUpdateSecurity',
         noDirectAccess: true
       })
       .state('loginCreatePassword', {
         url: '/login/createPassword',
         templateUrl: 'views/login.createPassword.html',
         controller: 'LoginCreatePasswordCtrl',
+        pageID: 'LoginCreatePassword',
         noDirectAccess: true
       })
 
@@ -39,42 +49,49 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/home',
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
+        pageID: 'Dashboard',
         showNavBar: true
       })
       .state('payments', {
         url: '/payments?filter',
         templateUrl: 'views/payments.html',
         controller: 'PaymentsCtrl',
+        pageID: 'Payments',
         showNavBar: true
       })
       .state('checkout', {
         url: '/checkout',
         templateUrl: 'views/checkout.html',
         controller: 'CheckoutCtrl',
+        pageID: 'Checkout',
         showNavBar: true
       })
       .state('receipts', {
         url: '/receipts',
         templateUrl: 'views/receipts.html',
         controller: 'ReceiptsCtrl',
+        pageID: 'Receipts',
         showNavBar: true
       })
       .state('floorplan', {
         url: '/floorplan',
         templateUrl: 'views/floorplan.html',
         controller: 'FloorplanCtrl',
+        pageID: 'Floorplan',
         showNavBar: true
       })
       .state('titlereleases', {
         url: '/titlereleases',
         templateUrl: 'views/titlereleases.html',
         controller: 'TitleReleasesCtrl',
+        pageID: 'TitleReleases',
         showNavBar: true
       })
       .state('titleReleaseCheckout', {
         url: '/titlereleasecheckout',
         templateUrl: 'views/titlereleasecheckout.html',
         controller: 'TitleReleaseCheckoutCtrl',
+        pageID: 'TitleReleasesCheckout',
         showNavBar: true
       })
 
@@ -82,48 +99,56 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/vehicledetails?stockNumber',
         templateUrl: 'views/vehicledetails.html',
         controller: 'VehicleDetailsCtrl',
+        pageID: 'VehicleDetails',
         showNavBar: true
       })
       .state('floorcar', {
         url: '/floorcar',
         templateUrl: 'views/floorcar.html',
         controller: 'FloorCarCtrl',
+        pageID: 'FloorCar',
         showNavBar: true
       })
       .state('reports', {
         url: '/reports',
         templateUrl: 'views/reports.html',
         controller: 'ReportsCtrl',
+        pageID: 'Reports',
         showNavBar: true
       })
       .state('analytics', {
         url: '/analytics',
         templateUrl: 'views/analytics.html',
         controller: 'AnalyticsCtrl',
+        pageID: 'Analytics',
         showNavBar: true
       })
       .state('documents', {
         url: '/documents',
         templateUrl: 'views/documents.html',
         controller: 'DocumentsCtrl',
+        pageID: 'Documents',
         showNavBar: true
       })
       .state('profile_settings', {
         url: '/profile_settings',
         templateUrl: 'views/profileSettings.html',
         controller: 'ProfileSettingsCtrl',
+        pageID: 'ProfileSettings',
         showNavBar: true
       })
       .state('account_management', {
         url: '/account_management',
         templateUrl: 'views/account_management.html',
         controller: 'AccountManagementCtrl',
+        pageID: 'AccountManagement',
         showNavBar: true
       })
       .state('valueLookup', {
         url: '/valueLookup',
         templateUrl: 'views/valuelookup.html',
         controller: 'ValueLookupCtrl',
+        pageID: 'ValueLookup',
         showNavBar: true
       })
 
@@ -132,6 +157,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/home',
         templateUrl: 'views/auction.dashboard.html',
         controller: 'AuctionDashboardCtrl',
+        pageID: 'AuctionDashboard',
         isAuctionState: true,
         showNavBar: true
       })
@@ -139,6 +165,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/dealersearch',
         templateUrl: 'views/auction.dealersearch.html',
         controller: 'AuctionDealerSearchCtrl',
+        pageID: 'AuctionDealerSearch',
         isAuctionState: true,
         showNavBar: true
       })
@@ -146,6 +173,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/bulkflooring',
         templateUrl: 'views/auction.bulkflooring.html',
         controller: 'FloorCarCtrl',
+        pageID: 'AuctionFloorCar',
         isAuctionState: true,
         showNavBar: true
       })
@@ -153,6 +181,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/sellerfloorplan',
         templateUrl: 'views/auction.sellerfloorplan.html',
         controller: 'FloorplanCtrl',
+        pageID: 'AuctionFloorplan',
         isAuctionState: true,
         showNavBar: true
       })
@@ -160,6 +189,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/reports',
         templateUrl: 'views/auction.reports.html',
         controller: 'AuctionReportsCtrl',
+        pageID: 'AuctionReports',
         isAuctionState: true,
         showNavBar: true
       })
@@ -167,6 +197,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/documents',
         templateUrl: 'views/auction.documents.html',
         controller: 'AuctionDocumentsCtrl',
+        pageID: 'AuctionDocuments',
         isAuctionState: true,
         showNavBar: true
       })
@@ -174,13 +205,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         url: '/act/settings',
         templateUrl: 'views/auction.settings.html',
         controller: 'AuctionSettingsCtrl',
+        pageID: 'AuctionSettings',
         isAuctionState: true,
         showNavBar: true
       })
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api, metric) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api, metric, gettextCatalog) {
     //set metric constants on root scope so they are always available
     $rootScope.metric = metric;
 
@@ -365,6 +397,11 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
       }
     );
 
-
+    // Set language from cookie
+    var lang = $cookieStore.get('lang');
+    if (lang) {
+      gettextCatalog.setCurrentLanguage(lang);
+      angular.element('body').addClass('lang_' + lang);
+    }
 
   });

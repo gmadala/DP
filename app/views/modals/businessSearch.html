@@ -1,33 +1,33 @@
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Business Search
 </h3>
 
 <div class="modal-body">
   <form class="row-fluid form-block" name="searchControls">
     <div class="span4">
-      <label>Business Name or Number</label>
+      <label translate>Business Name or Number</label>
 
       <!-- using nxgRequires instead of required, ng-required, and/or ng-minlength because :invalid
            pseudoclass is messing with styles onfocus when input is empty -->
       <input type="text" id="businessSearchModalInput" ng-model="data.proposedQuery" nxg-autofocus nxg-enter="search()" nxg-requires="data.proposedQuery.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }">
-        <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires">
+        <label for="businessSearchModalInput" class="text-error" ng-show="validity.$error.nxgRequires" translate>
       Please enter at least 3 characters.
     </label>
     </div>
-    <button class="btn inline-submit" ng-click="search()">
+    <button class="btn inline-submit" ng-click="search()" translate>
       Search
     </button>
 
   </form>
 
   <div class="form-block" ng-show="data.results.length > 0">
-    <p class="paragraph">Select a business name below.</p>
+    <p class="paragraph" translate>Select a business name below.</p>
   </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
     <p class="notice-box" ng-switch-when="false" ng-switch="!data.query">
-      <span ng-switch-when="false">Sorry, no results found. Please try a new search.</span>
-      <span ng-switch-when="true">Please enter a business name or number to search.</span>
+      <span ng-switch-when="false" translate>Sorry, no results found. Please try a new search.</span>
+      <span ng-switch-when="true" translate>Please enter a business name or number to search.</span>
     </p>
 
     <div class="search-results" ng-switch-when="true"
@@ -40,33 +40,33 @@
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessName')"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-            Business Name
+            <span translate>Business Name</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessLegalName')"
-              ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+              ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }" translate>
             Legal Name
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessNumber')"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-            Business
+            <span translate>Business</span>
             <span class="sortArrows"></span>
           </th>
-          <th class="bus-auctionNum" ng-show="data.searchBuyersMode">
+          <th class="bus-auctionNum" ng-show="data.searchBuyersMode" translate>
             Auction Access #
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('City')"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-            City
+            <span translate>City</span>
             <span class="sortArrows"></span>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('State')"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-            State
+            <span translate>State</span>
             <span class="sortArrows"></span>
           </th>
         </thead>
@@ -92,7 +92,7 @@
           </tr>
         </tbody>
       </table>
-      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax">
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
         There are too many results to display, please refine your search further.
       </p>
     </div>
@@ -100,5 +100,5 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-secondary">Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-secondary" translate>Close Window</button>
 </div>

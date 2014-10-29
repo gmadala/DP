@@ -1,4 +1,4 @@
-<header class="app-header" ng-class="{ login: !navState.current.showNavBar }">
+<header class="app-header" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
   <div class="container-fluid">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="span3 ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
@@ -8,11 +8,11 @@
       <div class="span6" ng-show="navState.current.showNavBar">
         <div class="nav-secondary" ng-show="user.isDealer()">
           <ul>
-            <li ng-repeat="link in user.navLinks().secondary">
+            <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
               <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
-            <li>
-              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}">Chat</a>
+            <li ng-show="chatEnabled">
+              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat</a>
             </li>
           </ul>
           <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
@@ -26,21 +26,33 @@
         <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
           <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.info().BusinessName }}</p>
-            <p ng-show="user.isDealer()">dealer # {{ user.info().BusinessNumber }}</p>
+            <p ng-show="user.isDealer()" translate>dealer # {{ user.info().BusinessNumber }}</p>
           </a>
 
           <ul class="unstyled" collapse="isCollapsed">
             <li>
-              <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}">Settings</a>
-              <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}">Profile Settings</a>
+              <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}" translate>Settings</a>
+              <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}" translate>Profile Settings</a>
             </li>
             <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}">Account Management</a>
+              <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}" translate>Account Management</a>
             </li>
             <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}">Sign Out</a>
+              <a href="javascript:void(0)" ng-click="user.logout()" nxg-track="{{metric.}}" nxg-track="{{metric.CLICK_LOGOUT_LINK}}" translate>Sign Out</a>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <div class="span5 offset4" ng-hide="navState.current.showNavBar">
+        <div class="nav-language-chooser">
+          <span class="icon-xx-large" nxg-icon="icon-globe"></span>
+          <div class="cta btn-toggle toggle-three">
+            <div class="btn-slider" ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
+            <button class="btn" ng-click="updateLanguage('en')" translate>English</button>
+            <button class="btn" ng-click="updateLanguage('es')" translate>Espa&ntilde;ol</button>
+            <button class="btn" ng-click="updateLanguage('fr_CA')" translate>Fran&ccedil;ais</button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +62,7 @@
     <div class="container-fluid">
       <div class="header">
         <ul class="nav-primary">
-          <li ng-repeat="link in user.navLinks().primary">
+          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">
             <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
           </li>
         </ul>

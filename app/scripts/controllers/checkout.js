@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
   function ($scope, $q, $dialog, $timeout, protect, moment,
             messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions, BusinessHours) {
+            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog) {
 
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
@@ -114,7 +114,8 @@ angular.module('nextgearWebApp')
                   item.scheduleLoading = false;
                   if (!_.find(result)) {
                     // no possible schedule dates for this item (edge case, but could happen)
-                    item.scheduleError = 'This ' + (item.isFee ? 'fee' : 'payment') + ' cannot be scheduled';
+
+                    item.scheduleError = gettextCatalog.getString('This {{ paymentType }} cannot be scheduled', { paymentType: (item.isFee ? 'fee' : 'payment') });
                     item.scheduleBlocked = true;
                     item.scheduleDate = null;
                     return $q.reject();
@@ -125,7 +126,7 @@ angular.module('nextgearWebApp')
                     error.dismiss();
                   }
                   item.scheduleLoading = false;
-                  item.scheduleError = 'Error retrieving schedule information';
+                  item.scheduleError = gettextCatalog.getString('Error retrieving schedule information');
                   return $q.reject(error);
                 }
               );

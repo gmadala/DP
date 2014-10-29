@@ -32,17 +32,17 @@
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
       <div class="nxg-main-view" nxg-fluid-container>
-        <div ui-view></div>
+        <div ui-view id="{{ navState.current.pageID }}Page"></div>
       </div>
       <div nxg-activity></div>
     </div>
 
     <footer class="row-fluid">
       <ul class="horizontal-list">
-        <li>&copy; 2013-2014 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
+        <li >&copy; 2013-2014 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
         <li><nxg-customer-support-phone></nxg-customer-support-phone></li>
-        <li><a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}">Privacy Statement</a></li>
-        <li><a href="http://www.nextgearcapital.com/contact.php" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}">Contact Us</a></li>
+        <li><a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>Privacy Statement</a></li>
+        <li><a href="http://www.nextgearcapital.com/contact.php" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
       </ul>
     </footer>
 
@@ -63,14 +63,19 @@
     <script src="components/angular-ui-utils/modules/highlight/highlight.js"></script>
     <script src="components/angular-ui-utils/modules/event/event.js"></script>
     <script src="components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="components/angular-strap/dist/angular-strap.js"></script>
-    <script src="components/fullcalendar/fullcalendar.js"></script>
-    <script src="components/angular-ui-calendar/src/calendar.js"></script>
     <script src="components/lodash/lodash.js"></script>
     <script src="components/numeral/numeral.js"></script>
     <script src="components/moment/moment.js"></script>
+    <script src="components/moment/min/lang/es.js"></script>
+    <script src="components/moment/min/lang/fr-ca.js"></script>
     <script src="components/angular-local-storage/angular-local-storage.js"></script>
     <script src="components/highcharts.com/js/highcharts.src.js"></script>
+    <script src="components/angular-strap/dist/angular-strap.js"></script>
+    <!-- Modded for localization support, can remove once upgraded to fullcalendar 2.0+ -->
+    <script src="private-components/fullcalendar/fullcalendar.js"></script>
+    <script src="components/angular-ui-calendar/src/calendar.js"></script>
+    <!-- Modded version without $animate -->
+    <script src="private-components/angular-gettext/dist/angular-gettext.js"></script>
 
     <!-- move back to components once upgraded to 0.6.0 or later -->
     <script src="private-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -79,6 +84,7 @@
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/translations.js"></script>
 
     <script src="scripts/config/nxgConfig.js"></script>
 
@@ -101,6 +107,7 @@
     <script src="scripts/services/cartItem.js"></script>
     <script src="scripts/services/paymentOptions.js"></script>
     <script src="scripts/services/businessHours.js"></script>
+    <script src="scripts/services/signupUrls.js"></script>
 
     <script src="scripts/filters/alt.js"></script>
     <script src="scripts/filters/numeral.js"></script>
@@ -219,8 +226,9 @@
     <!-- endbuild -->
 
     <!-- processhtml:remove:dist -->
-    <!--<script src="scripts/config/nxgConfig.mock.js"></script>-->
-    <!--<script src="scripts/dev/autologin.js"></script>-->
+    <script src="scripts/config/nxgConfig.mock.js"></script>
+    <script src="scripts/dev/autologin.js"></script>
+    <script src="scripts/dev/gettextDebug.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
 
     <!-- /processhtml -->

@@ -1,9 +1,9 @@
 <section>
   <div class="nxg-sticky-header">
-    <h2 class="well-title">Requests Summary</h2>
+    <h2 class="well-title" translate>Requests Summary</h2>
 
     <div class="well-item">
-      <h5>Title Release Limits:<br/>
+      <h5 translate>Title Release Limits:<br/>
         You have <span class="count">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class="count">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available.</h5>
     </div>
   </div>
@@ -14,16 +14,16 @@
         <button class="btn-unstyle right" nxg-track="{{metric.}}" ng-click="titleQueue.removeFromQueue(item)">
           <span nxg-icon="icon-cancel" class="icon-small"></span>
         </button>
-        <p>Title Request</p>
+        <p translate>Title Request</p>
         <h6 class="highlight caps">
           <a class="truncate" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ getVehicleDescription(item) }}</a></h6>
-        <p>VIN: {{ item.UnitVIN }}</p>
+        <p><span translate>VIN</span>: {{ item.UnitVIN }}</p>
       </li>
     </ul>
   </div>
 
   <button class="btn-cta cta-primary cta-full well-footer" nxg-track="{{metric.CLICK_TITLE_RELEASE_CONTINUE_TO_CHECKOUT_BUTTON}}" ng-click="navigate('titleReleaseCheckout')" ng-disabled="titleQueue.contents.length == 0" >
-    <span class="paired-body">Confirm Requests</span>
+    <span class="paired-body" translate>Confirm Requests</span>
     <span class="paired media" nxg-icon="icon-title"></span>
   </button>
 </section>

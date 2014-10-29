@@ -1,20 +1,20 @@
 <div class="span3 well dash-well">
-  <h2 class="well-title">Unapplied Funds</h2>
+  <h2 class="well-title" translate>Unapplied Funds</h2>
 
   <div class="lockup">
     <h1 class="lockup-major">{{ fundsBalance | currency | alt }}</h1>
-    <p class="lockup-minor">Unapplied Funds</p>
+    <p class="lockup-minor" translate>Unapplied Funds</p>
   </div>
 
   <div class="lockup">
     <h1 class="lockup-major color-success">{{ fundsAvail | currency | alt }}</h1>
-    <p class="lockup-minor">Total Available</p>
+    <p class="lockup-minor" translate>Total Available</p>
   </div>
 
   <button class="btn-cta cta-full cta-secondary" href="#"
      ng-show="fundsAvail > 0"
      ng-click="openRequestPayout($event)" nxg-track="{{metric.CLICK_DASHBOARD_REQUEST_PAYOUT_BUTTON}}">
-      <span class="paired-body">Request Payout</span>
+      <span class="paired-body" translate>Request Payout</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
   </button>
 </div>

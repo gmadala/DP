@@ -1,15 +1,15 @@
 <section class="row-fluid">
   <section class="span9">
     <div nxg-search
-       title="Receipt Search"
+       title="{{ 'Receipt Search' | translate }}"
        class="search-form"
        metric-search="{{metric.CLICK_RECEIPTS_SEARCH_BUTTON}}"
        metric-clear-search="{{metric.CLICK_RECEIPTS_CLEAR_SEARCH_LINK}}"
        metric-filter-by-input="{{metric.CLICK_RECEIPTS_FILTER_BY_INPUT}}"
        metric-filter-from-date="{{metric.CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT}}"
        metric-filter-to-date="{{metric.CLICK_RECEIPTS_FILTER_TO_DATE_INPUT}}"
-       prompt="Receipt #, Stock #, VIN, Check #, Make, Model or Year"
-       filter-label="Filter by Payment Method"
+       prompt="{{ 'Receipt #, Stock #, VIN, Check #, Make, Model or Year' | translate }}"
+       filter-label="{{ 'Filter by Payment Method' | translate }}"
        filter-options="filterOptions"
        active-criteria="receipts.proposedSearchCriteria"
        on-search="receipts.search()"
@@ -18,9 +18,9 @@
     </div>
 
     <div class="well">
-      <h2 class="well-title">Receipts</h2>
+      <h2 class="well-title" translate>Receipts</h2>
       <div ng-switch="receipts.results.length > 0 || receipts.loading">
-        <p class="notice-box" ng-switch-when="false">
+        <p class="notice-box" ng-switch-when="false" translate>
           Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
         </p>
 
@@ -33,24 +33,24 @@
               <th class="sortable"
                   ng-click="sortBy('CreateDate')"
                   ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-                Payment Date<span class="sortArrows"></span>
+                <span translate>Payment Date</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('TransactionNumber')"
                   ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-                Receipt No.<span class="sortArrows"></span>
+                <span translate>Receipt No.</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('PaymentMethod')"
                   ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-                Payment Description<span class="sortArrows"></span>
+                <span translate>Payment Description</span><span class="sortArrows"></span>
               </th>
               <th class="sortable"
                   ng-click="sortBy('AmountProvided')"
                   ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-                Amount Paid<span class="sortArrows"></span>
+                <span translate>Amount</span><span class="sortArrows"></span>
               </th>
-              <th>
+              <th translate>
                 Export Receipt(s)
               </th>
             </thead>
@@ -58,9 +58,9 @@
               <td >
                 <h4 class="lockup-major">{{ receipt.CreateDate | moment }}</h4>
                 <p class="lockup-minor" ng-switch="getReceiptStatus(receipt)">
-                  <span ng-switch-when="nsf">Insufficient Funds</span>
-                  <span ng-switch-when="void">Voided</span>
-                  <span ng-switch-when="normal">Processed</span>
+                  <span ng-switch-when="nsf" translate>Insufficient Funds</span>
+                  <span ng-switch-when="void" translate>Voided</span>
+                  <span ng-switch-when="normal" translate>Processed</span>
                 </p>
               </td>
               <td>
@@ -70,10 +70,10 @@
               </td>
               <td class="description-no-vin">
                 <p>
-                  Payment: {{ receipt.PaymentMethod }}<br/>
+                  <span translate>Payment</span>: {{ receipt.PaymentMethod }}<br/>
                   <span ng-switch on="!!receipt.CheckNumber">
                     <span ng-switch-when="true">
-                      <span ng-show="receipt.CheckNumber">Check #:</span>
+                      <span ng-show="receipt.CheckNumber"><span translate>Check #</span>:</span>
                       <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
                     </span>
                   </span>
@@ -90,7 +90,10 @@
                         ng-click="toggleInQueue(receipt)"
                         nxg-track="{{metric.CLICK_RECEIPTS_VIEW_RECEIPT_INPUT}}"
                         >
-                  <span class="paired-body"> {{ {true:'Remove',false:'Add'}[isSelected(receipt)] }} Receipt</span>
+                  <span class="paired-body">
+                    <span ng-show="isSelected(receipt)" translate>Remove Receipt</span>
+                    <span ng-hide="isSelected(receipt)" translate>Add Receipt</span>
+                  </span>
                   <span ng-switch="isSelected(receipt)">
                     <span ng-switch-when="false" nxg-icon="icon-plus" class="paired-media icon-small"></span>
                     <span ng-switch-when="true" nxg-icon="icon-minus" class="paired-media icon-small"></span>
@@ -100,7 +103,7 @@
             </tr>
           </table>
 
-          <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax">
+          <p class="text-error notice-box" ng-show="receipts.hitInfiniteScrollMax" translate>
             There are too many results to display, please refine your search further.
           </p>
         </div>
@@ -110,16 +113,15 @@
 
   <section class="span3 well stick" nxg-sticky header=".nxg-sticky-header" scroll=".queue-list" footer=".well-footer">
     <div class="nxg-sticky-header">
-      <h2 class="well-title">Export Receipts</h2>
+      <h2 class="well-title" translate>Export Receipts</h2>
       <div class="well-item">
-        <p>You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below.
-        </p>
+        <p translate>You can combine up to 20 receipts into a single pdf by selecting each receipt and clicking 'Export Receipt(s)' below.</p>
       </div>
 
       <div class="well-item well-light bordered">
         <div class="alt-lockup">
-          <p class="lockup-minor">Receipts Selected</p>
-          <h3 class="lockup-major">{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
+          <p class="lockup-minor" translate>Receipts Selected</p>
+          <h3 class="lockup-major" translate>{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
         </div>
       </div>
     </div>
@@ -132,7 +134,7 @@
               ng-click="removeReceipt(receipt)">
             <span nxg-icon="icon-cancel" class="icon-small"></span>
           </button>
-          <h5>Receipt No. <a class="heavy" href="javascript:void(0)" ng-click="viewReceipt(receipt)">{{ receipt.TransactionNumber }}</a></h5>
+          <h5><span translate>Receipt No.</span> <a class="heavy" href="javascript:void(0)" ng-click="viewReceipt(receipt)">{{ receipt.TransactionNumber }}</a></h5>
         </li>
       </ul>
     </div>
@@ -143,7 +145,7 @@
               ng-click="onExport()"
               ng-disabled="selectedReceipts.length < 1"
               nxg-track="{{metric.CLICK_RECEIPTS_VIEW_SELECTED_RECEIPTS_BUTTON}}">
-        Export Receipt(s)
+        <span translate>Export Receipt(s)</span>
         <span nxg-icon="icon-document" class="icon-small"></span>
       </button>
     </div>

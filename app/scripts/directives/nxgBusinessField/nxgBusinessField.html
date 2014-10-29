@@ -15,14 +15,14 @@
   </div>
 
   <div ng-switch on="mode">
-    <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires">
+    <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
       Please look up a Buyer.
     </label>
-    <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires">
+    <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
       Please look up a Seller.
     </label>
   </div>
-  <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength">
+  <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength" translate>
     Please enter at least 3 characters.
   </label>
 </div>

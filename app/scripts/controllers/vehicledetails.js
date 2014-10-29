@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, Addresses, api, moment) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog) {
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -290,7 +290,7 @@ angular.module('nextgearWebApp')
 
         $scope.financialSummary.breakdown = {
           financeAmount: details.FinancialSummaryInfo.PrincipalPaid + details.FinancialSummaryInfo.PrincipalOutstanding,
-          interestFeesLabel: includeCPP ? 'Interest, Fees & CPP' : 'Interest & Fees',
+          interestFeesLabel: includeCPP ? gettextCatalog.getString('Interest, Fees & CPP') : gettextCatalog.getString('Interest & Fees'),
           interestFeesCPP: details.FinancialSummaryInfo.InterestPaid + details.FinancialSummaryInfo.InterestOutstanding + details.FinancialSummaryInfo.FeesPaid + details.FinancialSummaryInfo.FeesOutstanding + details.FinancialSummaryInfo.CollateralProtectionPaid + details.FinancialSummaryInfo.CollateralProtectionOutstanding
         };
 
@@ -298,22 +298,22 @@ angular.module('nextgearWebApp')
           title: {
             useHTML: true,
             floating: true,
-            text: '<h5 class="chart-label-secondary">Paid</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
+            text: '<h5 class="chart-label-secondary">' + gettextCatalog.getString('Paid') + '</h5> <h3 class="chart-label-primary color-success">' + $filter('currency')($scope.financialSummary.TotalPaid) + '</h3>',
             y: 80
           },
           data: [
             {
-              name: 'Principal',
+              name: gettextCatalog.getString('Principal'),
               y: details.FinancialSummaryInfo.PrincipalPaid,
               color: '#1B7ABA'
             },
             {
-              name: 'Interest',
+              name: gettextCatalog.getString('Interest'),
               y: details.FinancialSummaryInfo.InterestPaid,
               color: '#104968'
             },
             {
-              name: 'Fees',
+              name: gettextCatalog.getString('Fees'),
               y: details.FinancialSummaryInfo.FeesPaid,
               color: '#A6A8AB'
             }
@@ -324,22 +324,22 @@ angular.module('nextgearWebApp')
           title: {
             useHTML: true,
             floating: true,
-            text: '<h5 class="chart-label-secondary">Outstanding</h5> <h3 class="chart-label-primary color-danger">' + $filter('currency')($scope.financialSummary.TotalOutstanding) + '</h3>',
+            text: '<h5 class="chart-label-secondary">' + gettextCatalog.getString('Outstanding') + '</h5> <h3 class="chart-label-primary color-danger">' + $filter('currency')($scope.financialSummary.TotalOutstanding) + '</h3>',
             y: 80
           },
           data: [
             {
-              name: 'Principal',
+              name: gettextCatalog.getString('Principal'),
               y: details.FinancialSummaryInfo.PrincipalOutstanding,
               color: '#1B7ABA'
             },
             {
-              name: 'Interest',
+              name: gettextCatalog.getString('Interest'),
               y: details.FinancialSummaryInfo.InterestOutstanding,
               color: '#104968'
             },
             {
-              name: 'Fees',
+              name: gettextCatalog.getString('Fees'),
               y: details.FinancialSummaryInfo.FeesOutstanding,
               color: '#A6A8AB'
             }
@@ -348,13 +348,13 @@ angular.module('nextgearWebApp')
 
         if(!(details.FinancialSummaryInfo.CollateralProtectionPaid === 0 && details.FinancialSummaryInfo.CollateralProtectionOutstanding === 0)) {
           $scope.financialSummary.paidChart.data.push({
-            name: 'CPP',
+            name: gettextCatalog.getString('CPP'),
             y: details.FinancialSummaryInfo.CollateralProtectionPaid,
             color: '#6D6E70'
           });
 
           $scope.financialSummary.outstandingChart.data.push({
-            name: 'CPP',
+            name: gettextCatalog.getString('CPP'),
             y: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
             color: '#6D6E70'
           });

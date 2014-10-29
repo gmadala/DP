@@ -2,28 +2,28 @@
   <div class="info-block-image">
     <span nxg-icon="icon-info"></span>
   </div>
-  <p class="info-block-text">
+  <p class="info-block-text" translate>
     Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader.
   </p>
 </div>
 
 
 <div class="row-fluid">
-  <div class="span6 well">
-    <h2 class="well-title">Video Walkthrough</h2>
+  <div class="span6 well video-well">
+    <h2 class="well-title" translate>Video Walkthrough</h2>
     <div class="nxg-video">
       <iframe class='sproutvideo-player' type='text/html' src='https://videos.sproutvideo.com/embed/e89bd9b5121ce8cf60/0425ed83c4b99dd9?type=sd' width='630' height='354' frameborder='0'></iframe>
     </div>
   </div>
 
-  <div class="span3 well">
-    <h2 class="well-title">NextGear Capital Documents</h2>
+  <div class="span3 well documents-well">
+    <h2 class="well-title" translate>NextGear Capital Documents</h2>
     <div class="well-item">
       <ul class="text-list">
         <li>
           <a ng-href="{{ feeScheduleUrl }}" target="_blank"
              nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
-             track-properties="{ documentName: 'Rates and Fees' }">
+             track-properties="{ documentName: 'Rates and Fees' }" translate>
             Rates and Fees
           </a>
         </li>
@@ -35,7 +35,7 @@
           </a>
         </li>
       </ul>
-      <h4>Collateral Protection Program</h4>
+      <h4 translate>Collateral Protection Program</h4>
       <ul class="text-list">
         <li ng-repeat="doc in collateralProtection">
           <a ng-href="{{ doc.url }}" target="_blank"
@@ -48,20 +48,20 @@
     </div>
   </div>
 
-  <div class="span3 well">
-    <h2 class="well-title">NextGear Capital Mobile Apps</h2>
+  <div class="span3 well documents-well">
+    <h2 class="well-title" translate>NextGear Capital Mobile Apps</h2>
     <div class="well-item">
-      <p>Manage your business with NextGear Capital on the go.</p>
+      <p translate>Manage your business with NextGear Capital on the go.</p>
       <ul class="text-list">
         <li>
           <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8" target="_blank"
              nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}"
-             track-properties="{ MobileOS: 'iOS (iTunes)' }">
+             track-properties="{ MobileOS: 'iOS (iTunes)' }" translate>
               Download NextGear Capital Mobile iOS
           </a>
         </li>
         <li>
-          <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile" target="_blank" nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}" track-properties="{ MobileOS: 'Android (Google Play)' }">
+          <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile" target="_blank" nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}" track-properties="{ MobileOS: 'Android (Google Play)' }" translate>
             Download NextGear Capital Mobile Android
           </a>
         </li>

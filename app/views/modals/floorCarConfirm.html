@@ -1,33 +1,33 @@
 <!-- WARNING: This view is used for both dealer Floor a Car and auction Bulk Flooring -->
 
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Confirm Flooring Request
 </h3>
 
 <div class="modal-body">
-  <p class="paragraph">
+  <p class="paragraph" translate>
     Confirm the vehicle information to send the flooring request to NextGear. <br />Print this screen for your records.
   </p>
 
   <div ng-hide="isDealer">
-    <h4>Buyer Information</h4>
+    <h4 translate>Buyer Information</h4>
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span6">Business Number</p>
+        <p class="span6" translate>Business Number</p>
         <p class="span6 value">{{ formData.BusinessId.BusinessNumber }}</p>
       </li>
 
 
       <li class="list-table-row">
-        <p class="span6">Auction Access Number(s)</p>
+        <p class="span6" translate>Auction Access Number(s)</p>
         <p class="span6 value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6">Business Name</p>
+        <p class="span6" translate>Business Name</p>
         <p class="span6 value">{{ formData.BusinessId.BusinessName }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6">Address</p>
+        <p class="span6" translate>Address</p>
         <p class="span6 value">
           {{ formData.BusinessId.Address }}<br />
           {{ formData.BusinessId.City }}, {{ formData.BusinessId.State }} {{ formData.BusinessId.PostalCode }}
@@ -37,54 +37,54 @@
   </div>
 
   <div>
-    <h4>Vehicle Information</h4>
+    <h4 translate>Vehicle Information</h4>
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span6">VIN</p>
+        <p class="span6" translate>VIN</p>
         <p class="span6 value">{{ formData.UnitVin }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="span6">Make</p>
+        <p class="span6" translate>Make</p>
         <p class="span6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Make || formData.UnitMake }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="span6">Model</p>
+        <p class="span6" translate>Model</p>
         <p class="span6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Model || formData.UnitModel }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="span6">Style</p>
+        <p class="span6" translate>Style</p>
         <p class="span6 value"> {{ formData.$selectedVehicle && formData.$selectedVehicle.Style || formData.UnitStyle }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="span6">Year</p>
+        <p class="span6" translate>Year</p>
         <p class="span6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Year || formData.UnitYear }}</p>
       </li>
     </ul>
   </div>
 
   <div>
-    <h4>Flooring Information</h4>
+    <h4 translate>Flooring Information</h4>
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span6">Purchase Amount</p>
+        <p class="span6" translate>Purchase Amount</p>
         <p class="span6 value">{{ formData.UnitPurchasePrice | currency }}</p>
       </li>
       <li class="list-table-row">
         <p class="span6">
-          <span ng-show="isDealer">Purchase Date</span>
-          <span ng-hide="isDealer">Sales Date</span>
+          <span ng-show="isDealer" translate>Purchase Date</span>
+          <span ng-hide="isDealer" translate>Sales Date</span>
         </p>
         <p class="span6 value">{{ formData.UnitPurchaseDate | moment }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6">Send Payment To</p>
+        <p class="span6" translate>Send Payment To</p>
         <p class="span6 value">
-          <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' }}</span>
+          <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' | translate }}</span>
           <span ng-hide="isDealer">{{ formData.BankAccountId.BankAccountName }}</span>
         </p>
       </li>
@@ -92,12 +92,12 @@
   </div>
 
   <div class="center"ng-show="isDealer">
-    <a href="/documents/Dealer%20Funding%20Checklist.pdf" target="_blank">View Dealer Funding Checklist (PDF)</a>
+    <a ng-href="{{ documentLink }}" target="_blank" translate>View Dealer Funding Checklist (PDF)</a>
   </div>
 </div>
 
 
 <div class="modal-footer">
-  <button ng-click="close()" type="button" class="btn-cta cta-secondary">Return to Form</button>
-  <button ng-click="confirm()" type="submit" nxg-autofocus class="btn-cta cta-primary">Submit Flooring Request</button>
+  <button ng-click="close()" type="button" class="btn-cta cta-secondary btn-sm" translate>Return to Form</button>
+  <button ng-click="confirm()" type="submit" nxg-autofocus class="btn-cta cta-primary btn-sm" translate>Submit Flooring Request</button>
 </div>

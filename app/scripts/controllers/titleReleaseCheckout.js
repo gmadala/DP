@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, segmentio, metric) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, segmentio, metric, gettextCatalog) {
 
     segmentio.track(metric.VIEW_TITLE_RELEASE_CHECKOUT_PAGE);
 
@@ -19,7 +19,7 @@ angular.module('nextgearWebApp')
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
     $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
-    $scope.titleLabel = $scope.titleQueue.contents.length === 1 ? 'Title Requested' : 'Titles Requested';
+    $scope.titleLabel = gettextCatalog.getPlural($scope.titleQueue.contents.length, 'Title Requested', 'Titles Requested');
 
     $scope.onConfirmRequest = function() {
       $scope.submitting = true;

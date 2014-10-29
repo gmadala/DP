@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: NextGear\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-10-17 09:26-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_CA\n"
+
+#: app/views/payments.html
+msgid "Click the Add button to add a payoff or a payment."
+msgstr ""
+
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js
+msgid "Select the payments you want to make or schedule by adding them to your payment queue."
+msgstr ""
+
+#: app/views/dashboard.html
+msgid "This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "VIN should only contain alphanumeric characters."
+msgstr ""

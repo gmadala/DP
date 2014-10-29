@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog) {
     // Private
     var info = null,
       statics = null,
@@ -43,8 +43,8 @@ angular.module('nextgearWebApp')
             if (result.List && result.List.length > 0) {
               return result.List;
             } else {
-              var error = messages.add('You do not appear to have any security questions configured. ' +
-                'Please contact NextGear for assistance.',
+              var error = messages.add(gettextCatalog.getString('You do not appear to have any security questions configured. ' +
+                  'Please contact NextGear for assistance.'),
                 '/UserAccount/passwordResetQuestions/ returned no security questions');
               return $q.reject(error);
             }
@@ -107,7 +107,7 @@ angular.module('nextgearWebApp')
             var apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey,
               info = self.getInfo();
 
-            if (!nxgConfig.isDemo) {
+            if (!nxgConfig.isDemo && gettextCatalog.currentLanguage === 'en') {
               UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
               QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
             }

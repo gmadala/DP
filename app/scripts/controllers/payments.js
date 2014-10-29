@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours, gettextCatalog) {
 
     segmentio.track(metric.VIEW_PAYMENTS_PAGE);
     $scope.metric = metric; // make metric names available to template
@@ -35,19 +35,19 @@ angular.module('nextgearWebApp')
 
     $scope.payments.filterOptions = [
       {
-        label: 'View All',
+        label: gettextCatalog.getString('View All'),
         value: Payments.filterValues.ALL
       },
       {
-        label: 'Due Today',
+        label: gettextCatalog.getString('Due Today'),
         value: Payments.filterValues.TODAY
       },
       {
-        label: 'Due This Week',
+        label: gettextCatalog.getString('Due This Week'),
         value: Payments.filterValues.THIS_WEEK
       },
       {
-        label: 'Date Range',
+        label: gettextCatalog.getString('Date Range'),
         value: Payments.filterValues.RANGE
       }
     ];

@@ -4,10 +4,10 @@
 
     <div class="row-fluid">
       <div class="well span4 offset4">
-        <h2 class="well-title">Sign In</h2>
+        <h2 class="well-title" translate>Sign In</h2>
 
         <form class="login-form clearfix" name="loginForm">
-          <label for="credUsername">Username:</label>
+          <label for="credUsername"><span translate>Username</span>:</label>
           <input type="text"
                  class="input-full"
                  ng-model="credentials.username"
@@ -17,9 +17,9 @@
                  nxg-autofocus
                  nxg-enter="authenticate()"
                  nxg-typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
-          <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required">Please enter a username.</p>
+          <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required" translate>Please enter a username.</p>
 
-          <label for="credPassword">Password:</label>
+          <label for="credPassword"><span translate>Password</span>:</label>
           <input type="password"
                  class="input-full"
                  ng-model="credentials.password"
@@ -28,26 +28,26 @@
                  required
                  nxg-auto-fill-sync
                  nxg-enter="authenticate()" />
-          <p for="credPassword" class="text-error" ng-show="validity.credPassword.$error.required">Please enter a password.</p>
+          <p for="credPassword" class="text-error" ng-show="validity.credPassword.$error.required" translate>Please enter a password.</p>
 
           <div class="cr-inline">
             <input type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" />
             <label for="rememberUsername" class="checkbox-img"></label>
-            <label for="rememberUsername" class="cr-label">Remember Username</label>
+            <label for="rememberUsername" class="cr-label" translate>Remember Username</label>
           </div>
 
           <p class="text-error" ng-show="showLoginError">{{ errorMsg }}</p>
-          <p class="text-error" ng-show="showLoginError">If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact <a href="mailto:dealertickets@nextgearcapital.com" target="_blank">dealertickets@nextgearcapital.com</a>.</p>
+          <p class="text-error" ng-show="showLoginError" translate>If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact <a href="mailto:dealertickets@nextgearcapital.com" target="_blank">dealertickets@nextgearcapital.com</a>.</p>
 
-          <button type="submit" class="btn-cta cta-primary right" ng-click="authenticate()">Log In</button>
+          <button type="submit" class="btn-cta cta-primary right" ng-click="authenticate()" translate>Log In</button>
         </form>
 
         <div class="row-fluid">
           <div class="login-help-link">
-            <a href="#/login/recover" nxg_track="{{metric.CLICK_FORGOT_USERNAME_OR_PASSWORD}}">Forgot your username or password?</a>
+            <a href="#/login/recover" nxg_track="{{metric.CLICK_FORGOT_USERNAME_OR_PASSWORD}}" translate>Forgot your username or password?</a>
           </div>
           <div class="login-help-link">
-            <a href="https://customer.nextgearcapital.com/NGCApplication/" nxg-track="{{metric.CLICK_LOGIN_SIGNUP_LINK}}">Sign Up</a>
+            <a ng-href="{{ signupURL }}" nxg-track="{{metric.CLICK_LOGIN_SIGNUP_LINK}}" translate>Sign Up</a>
           </div>
         </div>
       </div>
@@ -56,8 +56,8 @@
     <div class="row-fluid" ng-hide="forgot">
       <div class="login-help">
         <div class="login-help-inner">
-          <h2 class="headline">Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer?</h2>
-          <p>You will need it in order to view your reports.<br/>
+          <h2 class="headline" translate>Do you have <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader 8.1</a> or newer?</h2>
+          <p translate>You will need it in order to view your reports.<br/>
           Not sure? <a href="https://test.discoverdsc.com/MyDSC/Public/Test.pdf" target="_blank">Test your Adobe Reader installation.</a><br/>
           If the document did not successfully display, please install <a href="http://get.adobe.com/reader/" target="_blank">Adobe Acrobat Reader.</a></p>
         </div>

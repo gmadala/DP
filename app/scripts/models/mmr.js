@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Mmr', function(api, $q) {
+  .factory('Mmr', function(api, $q, gettextCatalog) {
 
     // remove any results that have null for all pertinent value properties
     // (Excellent, Good, Average, Fair)
@@ -28,10 +28,10 @@ angular.module('nextgearWebApp')
       },
       getModels: function(make, year) {
         if(!year) {
-          throw new Error('Missing year');
+          throw new Error(gettextCatalog.getString('Missing year'));
         }
         if(!make) {
-          throw new Error('Missing make');
+          throw new Error(gettextCatalog.getString('Missing make'));
         }
 
         return api.request('GET', '/mmr/models/' + make.Id + '/' + year.Id).then(function(models) {
@@ -40,13 +40,13 @@ angular.module('nextgearWebApp')
       },
       getBodyStyles: function(make, year, model) {
         if(!year) {
-          throw new Error('Missing year');
+          throw new Error(gettextCatalog.getString('Missing year'));
         }
         if(!make) {
-          throw new Error('Missing make');
+          throw new Error(gettextCatalog.getString('Missing make'));
         }
         if(!model) {
-          throw new Error('Missing model');
+          throw new Error(gettextCatalog.getString('Missing model'));
         }
 
         return api.request('GET', '/mmr/bodystyles/' + make.Id + '/' + year.Id + '/' + model.Id).then(function(styles) {
@@ -55,19 +55,19 @@ angular.module('nextgearWebApp')
       },
       lookupByOptions: function(year, make, model, style, mileage) {
         if(!year) {
-          throw new Error('Missing year');
+          throw new Error(gettextCatalog.getString('Missing year'));
         }
         if(!make) {
-          throw new Error('Missing make');
+          throw new Error(gettextCatalog.getString('Missing make'));
         }
         if(!model) {
-          throw new Error('Missing model');
+          throw new Error(gettextCatalog.getString('Missing model'));
         }
         if(!style) {
-          throw new Error('Missing style');
+          throw new Error(gettextCatalog.getString('Missing style'));
         }
         if(!mileage) {
-          throw new Error('Missing mileage');
+          throw new Error(gettextCatalog.getString('Missing mileage'));
         }
 
         var requestObj = {

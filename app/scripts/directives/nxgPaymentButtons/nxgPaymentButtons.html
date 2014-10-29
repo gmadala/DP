@@ -8,7 +8,7 @@
           ng-click="toggleFeeInQueue()"
           nxg-track="{{onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_FEE || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_FEE}}"
           ng-disabled="paymentInProgress()"
-          tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null }}"
+          tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null | translate }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
       <span class="paired-body">{{ item.Balance | currency }}</span>
@@ -17,15 +17,15 @@
   </button>
 
   <div ng-switch-when="fee-scheduledFee">
-    <h4 class="lockup-major">Scheduled</h4>
-    <p class="lockup-minor">for {{ item.ScheduledDate | moment }}</p>
+    <h4 class="lockup-major" translate>Scheduled</h4>
+    <p class="lockup-minor" translate>for {{ item.ScheduledDate | moment }}</p>
     <button type="button"
             id="cancelScheduledFee"
             class="btn-unstyle btn-link"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_FEE}}"
             ng-disabled="paymentInProgress()"
             ng-click="cancelScheduledFee()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 
@@ -36,7 +36,7 @@
           ng-class="{'selected': onQueue == 'payment'}"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYMENT || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYMENT}}"
           ng-click="togglePaymentInQueue(false)"
-          tooltip="{{ onQueue != 'payment' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip="{{ onQueue != 'payment' && tooltipText || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
         <span class="paired-body">{{ item.AmountDue | currency }}</span>
@@ -48,15 +48,15 @@
   </button>
 
   <div ng-switch-when="payment-scheduledPayment" class="scheduled-payment">
-    <h4 class="lockup-major">Scheduled</h4>
-    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
+    <h4 class="lockup-major" translate>Scheduled</h4>
+    <p class="lockup-minor" translate> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
             id="cancelScheduledPayment"
             class="btn-unstyle btn-link"
             ng-disabled="paymentInProgress()"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYMENT}}"
             ng-click="cancelScheduledPayment()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 
@@ -66,7 +66,7 @@
           class="btn btn-adapts"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
           ng-click="togglePaymentInQueue(false)"
-          tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span class="paired-body">{{ item.AmountDue | currency }}</span>
@@ -84,7 +84,7 @@
           ng-class="{'selected': onQueue == 'payoff'}"
           nxg-track="{{!onQueue && metric.CLICK_PAYMENTS_VEHICLE_ADD_PAYOFF || metric.CLICK_PAYMENTS_VEHICLE_REMOVE_PAYOFF}}"
           ng-click="togglePaymentInQueue(true)"
-          tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
       <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
@@ -103,7 +103,7 @@
           ng-class="{'selected': onQueue == 'payoff'}"
           ng-disabled="onQueue == 'payment' || paymentInProgress()"
           ng-click="togglePaymentInQueue(true)"
-          tooltip="{{ onQueue != 'payoff' && 'Select the payments you want to make or schedule by adding them to your payment queue.' || null }}"
+          tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
           tooltip-placement="right"
           tooltip-popup-delay="700">
     <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
@@ -115,15 +115,15 @@
   </button>
 
   <div ng-switch-when="payoff-scheduledPayoff" class="scheduled-payoff">
-    <p class="lockup-major">Scheduled</p>
-    <p class="lockup-minor"> for {{ item.ScheduledPaymentDate | moment }} </p>
+    <p class="lockup-major" translate>Scheduled</p>
+    <p class="lockup-minor" translate> for {{ item.ScheduledPaymentDate | moment }} </p>
     <button type="button"
             id="cancelScheduledPayoff"
             class="btn-unstyle btn-link"
             ng-disabled="paymentInProgress()"
             nxg-track="{{metric.CLICK_PAYMENTS_VEHICLE_UNSCHEDULE_PAYOFF}}"
             ng-click="cancelScheduledPayment()">
-      <span>Unschedule</span>
+      <span translate>Unschedule</span>
     </button>
   </div>
 </div>
