@@ -164,7 +164,7 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
           var title = gettextCatalog.getString('Flooring Request Submitted'),
             msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),
-            buttons = [{label: 'OK', cssClass: 'btn-cta cta-primary'}];
+            buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
           $dialog.messageBox(title, msg, buttons).open().then(function () {
             $scope.reset();
           });

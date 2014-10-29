@@ -213,7 +213,7 @@ describe('Controller: FloorCarCtrl', function () {
         expect(dialog.messageBox).toHaveBeenCalledWith(
           'Flooring Request Submitted',
           'Your flooring request has been submitted to NextGear Capital.',
-          [{ label: 'OK', cssClass: 'btn-cta cta-primary'}]
+          [{ label: 'Close Window', cssClass: 'btn-cta cta-secondary'}]
         );
       });
 
