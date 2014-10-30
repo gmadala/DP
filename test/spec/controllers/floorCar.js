@@ -14,29 +14,36 @@ describe('Controller: FloorCarCtrl', function () {
     location,
     blackbook,
     AddressesMock,
-    mockForm;
+    mockForm,
+    statics = { colors: ['red', 'green']}, // Constant object so digest limit isn't reached
+    myCanPayBuyer = true,
+    myPaySellerOptions = false,
+    $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook) {
+  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_) {
     scope = $rootScope.$new();
     floorplan = Floorplan;
     dialog = $dialog;
     location = $location;
     blackbook = Blackbook;
+    $q = _$q_;
 
-    var statics = {}; // Constant object so digest limit isn't reached
     userMock = {
       isDealer: function() {
-        return type = 'Dealer';
+        return type === 'Dealer';
       },
       getStatics: function() {
-        return statics;
+        return $q.when(statics);
+      },
+      getInfo: function() {
+        return $q.when({})
       },
       canPayBuyer: function() {
-        return true;
+        return $q.when(myCanPayBuyer);
       },
       getPaySellerOptions: function() {
-        return false;
+        return $q.when(myPaySellerOptions);
       }
     };
 
@@ -65,17 +72,18 @@ describe('Controller: FloorCarCtrl', function () {
   }));
 
   var registerCommonTests = function() {
-    it('should attach necessary objects to the scope', function () {
-      expect(scope.options).not.toBeDefined();
-      scope.$digest();
-      expect(scope.options).toBe(userMock.getStatics());
-      expect(scope.paySellerOptions).toBe(userMock.getPaySellerOptions);
-      expect(scope.canPayBuyer).toBe(userMock.canPayBuyer);
+    it('should attach necessary objects to the scope', inject(function ($rootScope) {    
+      scope.$apply();
+      expect(scope.options).toBeDefined();
+      expect(scope.options.colors).toBe(statics.colors);
+      expect(scope.options.locations).toBeDefined();
+      expect(scope.paySellerOptions).toBe(myPaySellerOptions);
+      expect(scope.canPayBuyer).toBe(myCanPayBuyer);
       expect(scope.optionsHelper).toBeDefined();
 
       expect(scope.defaultData).toBeDefined();
       expect(scope.vinDetailsErrorFlag).toBe(false);
-    });
+    }));
 
     describe('reset function', function() {
       it('should exist', function() {
@@ -266,6 +274,7 @@ describe('Controller: FloorCarCtrl', function () {
     beforeEach(function(){
       spyOn(userMock, 'isDealer').andReturn(true);
       initController();
+      scope.$apply();
     });
 
     registerCommonTests();
@@ -275,6 +284,7 @@ describe('Controller: FloorCarCtrl', function () {
     beforeEach(function() {
       spyOn(userMock, 'isDealer').andReturn(false);
       initController();
+      scope.$apply();
     });
 
     registerCommonTests();

@@ -5,10 +5,9 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric, gettextCatalog) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric, gettextCatalog) {
 
     var isDealer = User.isDealer();
-
     segmentio.track(metric.VIEW_FLOOR_A_VEHICLE_PAGE);
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
@@ -17,15 +16,46 @@ angular.module('nextgearWebApp')
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    // user model holds "dealer static" data needed to populate most form dropdowns -- use: options.foo
-    $scope.$watch(function() { return User.getStatics();}, function(statics) {
-      $scope.options = statics;
+    $q.all([User.getStatics(), User.getInfo()]).then(function(data) {
+      // data[0] holds static data like colors and title locations
+      // data[1] holds info data like lines of credit and bank accounts
+      $scope.options = angular.extend({}, data[0], data[1]);
       $scope.options.locations = Addresses.getActivePhysical();
+
+      var optionListsToDefault = [
+        {
+          scopeSrc: 'options.BankAccounts',
+          modelDest: 'BankAccountId'
+        },
+        {
+          scopeSrc: 'paySellerOptions',
+          modelDest: 'PaySeller',
+          useFirst: true
+        }
+      ];
+
+      if (isDealer) {
+        optionListsToDefault.push({
+          scopeSrc: 'options.locations',
+          modelDest: 'PhysicalInventoryAddressId'
+        }, {
+          scopeSrc: 'options.LinesOfCredit',
+          modelDest: 'LineOfCreditId'
+        });
+      }
+
+      $scope.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
+      $scope.reset();
     });
 
     // pay seller vs. buyer options are derived separately
-    $scope.paySellerOptions = User.getPaySellerOptions;
-    $scope.canPayBuyer = User.canPayBuyer;
+    User.getPaySellerOptions().then(function(opts) {
+      $scope.paySellerOptions = opts;
+    });
+
+    User.canPayBuyer().then(function(canPay) {
+      $scope.canPayBuyer = canPay;
+    });
 
     // form data model holds values filled into form
     $scope.data = null;
@@ -61,38 +91,12 @@ angular.module('nextgearWebApp')
       $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
 
-    var optionListsToDefault = [
-      {
-        scopeSrc: 'options.bankAccounts',
-        modelDest: 'BankAccountId'
-      },
-      {
-        scopeSrc: 'paySellerOptions()',
-        modelDest: 'PaySeller',
-        useFirst: true
-      }
-    ];
-
-    if (isDealer) {
-      optionListsToDefault.push({
-        scopeSrc: 'options.locations',
-        modelDest: 'PhysicalInventoryAddressId'
-      }, {
-        scopeSrc: 'options.linesOfCredit',
-        modelDest: 'LineOfCreditId'
-      });
-    }
-
-    $scope.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
-
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');
     };
-
-    $scope.reset();
 
     // Handle setting the seller location options based on selected business (seller)
     $scope.sellerLocations = null;
