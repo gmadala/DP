@@ -3,23 +3,12 @@
 angular.module('nextgearWebApp')
   .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog) {
     // Private
-    var info = null,
-      statics = null,
+    var staticsRequest = null,
       paySellerOptions = [],
       securityQuestions = null,
-      infoRequest = null;
-
-
-
-    function calculateCanPayBuyer() {
-      if (!info) {
-        return undefined;
-      }
-
-      return info.DealerAuctionStatusForGA === 'Dealer' &&
-        info.IsBuyerDirectlyPayable &&
-        info.HasUCC;
-    }
+      infoRequest = null,
+      infoLoaded = false,
+      isDealer;
 
     function filterByBusinessName(subsidiaries) {
       return _.sortBy(subsidiaries, function(s) {
@@ -89,9 +78,11 @@ angular.module('nextgearWebApp')
           })
           .then(function(authResult) {
             return self.initSession(authResult).then(function () {
+              return self.getInfo().then(function(info) {
                 segmentio.identify(info.BusinessNumber, { name: info.BusinessName, username: username });
                 return authResult;
               });
+            });
           });
       },
 
@@ -104,13 +95,15 @@ angular.module('nextgearWebApp')
         api.setAuth(authData);
         return $q.all([this.refreshInfo(), this.refreshStatics()]).then(function () {
           if (authData.UserVoiceToken) {
-            var apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey,
-              info = self.getInfo();
+            var apiKey;
 
-            if (!nxgConfig.isDemo && gettextCatalog.currentLanguage === 'en') {
-              UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
-              QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
-            }
+            self.getInfo().then(function(info) {
+              apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey;
+              if (!nxgConfig.isDemo && gettextCatalog.currentLanguage === 'en') {
+                UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
+                QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
+              }
+            });
           }
         });
       },
@@ -137,8 +130,8 @@ angular.module('nextgearWebApp')
       },
 
       refreshStatics: function() {
-        return api.request('GET', '/Dealer/v1_2/Static').then(function(data) {
-          statics = {
+        staticsRequest = api.request('GET', '/Dealer/v1_2/Static').then(function(data) {
+          return {
             // API translation layer -- add transformation logic here as needed
             productTypes: data.ProductType || [],
             colors: data.Colors || [],
@@ -146,14 +139,12 @@ angular.module('nextgearWebApp')
             titleLocationOptions: data.TitleLocationOptions || [],
             paymentMethods: data.PaymentMethods || []
           };
-          return statics;
-        },
-        function() {
+        }, function() {
           // Fail gracefully. If dealer/info fails we will be very constrained but it shouldn't
           // cause any JavaScript errors. There is code that assumes that statics has been
           // populated. Set up the basic structure to avoid 'accessing property of undefined'
           // errors.
-          statics = {
+          return {
             productTypes: [],
             colors: [],
             states: [],
@@ -161,20 +152,24 @@ angular.module('nextgearWebApp')
             paymentMethods: []
           };
         });
+
+        return staticsRequest;
       },
 
       getStatics: function() {
-        return statics;
+        return staticsRequest || this.refreshStatics();
       },
 
       refreshInfo: function() {
         infoRequest = api.request('GET', '/Dealer/v1_2/Info').then(function(data) {
-          info = data;
-          info.ManufacturerSubsidiaries = filterByBusinessName(info.ManufacturerSubsidiaries);
+          infoLoaded = true;
+          isDealer = data.DealerAuctionStatusForGA === 'Dealer';
+          data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
-          return info;
-        },
-        function() {
+          return data;
+        }, function() {
+          infoLoaded = false;
+          infoRequest = null;
           Addresses.init([]);
         });
 
@@ -182,23 +177,19 @@ angular.module('nextgearWebApp')
       },
 
       getInfo: function() {
-        return info;
+        return infoRequest || this.refreshInfo();
       },
 
       infoLoaded: function() {
-        return info !== null;
-      },
-
-      infoPromise: function() {
-        if(infoRequest === null) {
-          this.refreshInfo();
-        }
-
-        return infoRequest;
+        return infoLoaded;
       },
 
       isDealer: function() {
-        return info && info.DealerAuctionStatusForGA === 'Dealer';
+        if(!angular.isDefined(isDealer)) {
+          return null;
+        } else {
+          return isDealer;
+        }
       },
 
       isPasswordChangeRequired: function() {
@@ -217,34 +208,28 @@ angular.module('nextgearWebApp')
         api.setAuthParam('ShowUserInitialization', false);
       },
 
-      canPayBuyer: calculateCanPayBuyer,
+      canPayBuyer: function () {
+        return this.getInfo().then(function(info) {
+          return info.DealerAuctionStatusForGA === 'Dealer' &&
+            info.IsBuyerDirectlyPayable &&
+            info.HasUCC;
+        });
+      },
 
       getPaySellerOptions: function() {
         // when flooring a car, the options this user has to pay seller vs. pay buyer
-        var payBuyerAllowed = calculateCanPayBuyer();
-
-        if (!angular.isDefined(payBuyerAllowed)) {
-          return null;
-        }
-
-        if (paySellerOptions.length === 0) {
-          if (payBuyerAllowed) {
-            paySellerOptions.push(false, true); // buyer or seller
-          } else {
-            paySellerOptions.push(true); // seller only
+        return this.canPayBuyer().then(function(payBuyerAllowed) {
+          if (paySellerOptions.length === 0) {
+            if (payBuyerAllowed) {
+              paySellerOptions.push(false, true); // buyer or seller
+            } else {
+              paySellerOptions.push(true); // seller only
+            }
           }
-        }
 
-        // always return the same array object so that this can be used in a binding
-        return paySellerOptions;
-      },
-
-      reset: function() {
-        statics = null;
-        info = null;
-        paySellerOptions = [];
-        securityQuestions = null;
+          // always return the same array object so that this can be used in a binding
+          return paySellerOptions;
+        });
       }
-
     };
   });
