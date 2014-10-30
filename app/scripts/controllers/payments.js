@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours, gettextCatalog) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours, Addresses, gettextCatalog) {
 
     segmentio.track(metric.VIEW_PAYMENTS_PAGE);
     $scope.metric = metric; // make metric names available to template
@@ -51,6 +51,9 @@ angular.module('nextgearWebApp')
         value: Payments.filterValues.RANGE
       }
     ];
+
+    // Grab inventory locations (approved & floored against) to send to search directive
+    $scope.inventoryLocations = Addresses.getApprovedFlooredBusinessAddresses();
 
     $scope.payments.search = function() {
       // search means "start from the beginning with current criteria"

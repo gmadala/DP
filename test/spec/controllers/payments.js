@@ -22,7 +22,8 @@ describe('Controller: PaymentsCtrl', function () {
     $q,
     scope,
     BusinessHours,
-    inBizHours;
+    inBizHours,
+    addressesMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$q_, $dialog, _BusinessHours_) {
@@ -64,6 +65,48 @@ describe('Controller: PaymentsCtrl', function () {
     userMock = {
       isLoggedIn: function(){ return true; }
     };
+
+    addressesMock = {
+      getApprovedFlooredBusinessAddresses: function() {
+        return [
+          {
+            AddressId: '1',
+            Line1: '380 NEVADA SW',
+            Line2: null,
+            City: 'HURON',
+            State: 'SD',
+            Zip: '57350',
+            Phone: '0000000000',
+            Fax: '0000000000',
+            IsActive: false,
+            IsPhysicalInventory: false,
+            HasFloorplanFlooredAgainst: true,
+            HasApprovedFloorplanFlooredAgainst: true,
+            IsTitleReleaseAddress: false,
+            IsMailingAddress: false,
+            IsPostOfficeBox: false
+          },
+          {
+            AddressId: '3',
+            Line1: '22095 392nd Ave.',
+            Line2: null,
+            City: 'Alpena',
+            State: 'SD',
+            Zip: '57312',
+            Phone: '6053521637',
+            Fax: '6053524528',
+            IsActive: true,
+            IsPhysicalInventory: true,
+            HasFloorplanFlooredAgainst: true,
+            HasApprovedFloorplanFlooredAgainst: true,
+            IsTitleReleaseAddress: false,
+            IsMailingAddress: false,
+            IsPostOfficeBox: false
+          }
+        ]
+      }
+    };
+
     dialog = $dialog;
     spyOn(modelMock, 'search').andCallThrough();
     spyOn(modelMock, 'fetchFees').andCallThrough();
@@ -80,7 +123,8 @@ describe('Controller: PaymentsCtrl', function () {
         $scope: scope,
         $stateParams: stateParamsMock,
         Payments: modelMock,
-        User: userMock
+        User: userMock,
+        Addresses: addressesMock
       });
     };
     instantiateController();

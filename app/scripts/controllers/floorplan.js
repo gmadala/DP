@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio, gettextCatalog) {
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio, gettextCatalog, Addresses) {
 
     $scope.metric = metric; // make metric names available to templates
     segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
@@ -73,6 +73,9 @@ angular.module('nextgearWebApp')
         }
       ];
     }
+
+    // Grab inventory locations (floored against) to send to search directive
+    $scope.inventoryLocations = Addresses.getFlooredBusinessAddresses();
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');

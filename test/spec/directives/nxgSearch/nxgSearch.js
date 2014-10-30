@@ -8,92 +8,15 @@ describe('Directive: nxgSearch', function () {
 
     var ctrl,
       scope,
-      attrs,
-      AddressesMock;
+      attrs;
 
     beforeEach(inject(function ($rootScope, $controller, Addresses) {
       scope = $rootScope.$new();
-
       attrs = {};
-      AddressesMock = {
-        getFlooredBusinessAddresses: function() {
-          return [
-            {
-              AddressId: '1',
-              Line1: '380 NEVADA SW',
-              Line2: null,
-              City: 'HURON',
-              State: 'SD',
-              Zip: '57350',
-              Phone: '0000000000',
-              Fax: '0000000000',
-              IsActive: false,
-              IsPhysicalInventory: false,
-              HasFloorplanFlooredAgainst: true,
-              HasApprovedFloorplanFlooredAgainst: false,
-              IsTitleReleaseAddress: false,
-              IsMailingAddress: false,
-              IsPostOfficeBox: false
-            },
-            {
-              AddressId: '2',
-              Line1: 'PO Box 1274',
-              Line2: null,
-              City: 'Huron',
-              State: 'SD',
-              Zip: '57350',
-              Phone: '6053521637',
-              Fax: '6053524528',
-              IsActive: true,
-              IsPhysicalInventory: false,
-              HasFloorplanFlooredAgainst: true,
-              HasApprovedFloorplanFlooredAgainst: false,
-              IsTitleReleaseAddress: false,
-              IsMailingAddress: true,
-              IsPostOfficeBox: true
-            },
-            {
-              AddressId: '3',
-              Line1: '22095 392nd Ave.',
-              Line2: null,
-              City: 'Alpena',
-              State: 'SD',
-              Zip: '57312',
-              Phone: '6053521637',
-              Fax: '6053524528',
-              IsActive: true,
-              IsPhysicalInventory: true,
-              HasFloorplanFlooredAgainst: true,
-              HasApprovedFloorplanFlooredAgainst: false,
-              IsTitleReleaseAddress: false,
-              IsMailingAddress: false,
-              IsPostOfficeBox: false
-            },
-            {
-              AddressId: '4',
-              Line1: '1794 1/2 E. Hwy 14',
-              Line2: null,
-              City: 'Huron',
-              State: 'SD',
-              Zip: '57350',
-              Phone: '6053521637',
-              Fax: '6053524528',
-              IsActive: false,
-              IsPhysicalInventory: true,
-              HasFloorplanFlooredAgainst: true,
-              HasApprovedFloorplanFlooredAgainst: true,
-              IsTitleReleaseAddress: false,
-              IsMailingAddress: false,
-              IsPostOfficeBox: false
-            }
-          ];
-        }
-      };
 
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs,
-        Addresses: AddressesMock
+        $attrs: attrs
       });
     }));
 
@@ -109,8 +32,7 @@ describe('Directive: nxgSearch', function () {
       };
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs,
-        Addresses: AddressesMock
+        $attrs: attrs
       });
 
       scope.$apply();
@@ -198,9 +120,6 @@ describe('Directive: nxgSearch', function () {
         scope.clear({preventDefault: angular.noop});
         expect(scope.onClear).toHaveBeenCalled();
       });
-
     });
-
   });
-
 });
