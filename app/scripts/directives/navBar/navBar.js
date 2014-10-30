@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
     // If you log out without a refresh and log back in, it'll put a duplicate item into the nav.
     $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if(isLoggedIn) {
-        User.infoPromise().then(function(info) {
+        User.getInfo().then(function(info) {
           if(info.DisplayTitleReleaseProgram) {
             dealerLinks.primary.splice(3, 0, {
               name: gettextCatalog.getString('Title Releases'),
@@ -51,6 +51,21 @@ angular.module('nextgearWebApp')
               metric: metric.CLICK_TITLE_RELEASE_LINK
             });
           }
+
+          $scope.user = {
+            BusinessNumber: info.BusinessNumber,
+            BusinessName: info.BusinessName,
+            isDealer: User.isDealer,
+            logout: function() {
+              $rootScope.$emit('event:userRequestedLogout');
+            },
+            navLinks: function() {
+              return User.isDealer() ? dealerLinks : auctionLinks;
+            },
+            homeLink: function(){
+              return User.isDealer() ? '#/home' : '#/act/home';
+            }
+          };
         });
       }
     });
@@ -88,20 +103,6 @@ angular.module('nextgearWebApp')
       });
 
       return count;
-    };
-
-    $scope.user = {
-      isDealer: User.isDealer,
-      info: User.getInfo,
-      logout: function() {
-        $rootScope.$emit('event:userRequestedLogout');
-      },
-      navLinks: function() {
-        return User.isDealer() ? dealerLinks : auctionLinks;
-      },
-      homeLink: function(){
-        return User.isDealer() ? '#/home' : '#/act/home';
-      }
     };
 
     $scope.onCartClicked = function() {
