@@ -23,15 +23,26 @@ describe('Controller: ReceiptsCtrl', function () {
     };
     searchSpy = spyOn(Receipts, 'search').andReturn($q.when(searchResults));
 
+    spyOn(user, 'getStatics').andReturn($q.when({
+      paymentMethods: [
+        {
+          PaymentMethodName: 'Foo',
+          PaymentMethodId: 'fooId'
+        },
+        {
+          PaymentMethodName: 'Bar',
+          PaymentMethodId: 'barId'
+        }
+      ]
+    }));
+
     scope = $rootScope.$new();
     ReceiptsCtrl = $controller('ReceiptsCtrl', {
       $scope: scope
     });
-
   }));
 
   describe('getReceiptStatus function', function () {
-
     it('should return nsf if nsf flag is set', function () {
       var receipt = {
         IsNsf: true,
@@ -58,29 +69,15 @@ describe('Controller: ReceiptsCtrl', function () {
       var result = scope.getReceiptStatus(receipt);
       expect(result).toBe('normal');
     });
-
   });
 
   describe('filterOptions', function () {
-
     it('should default to an empty list', function () {
       expect(angular.isArray(scope.filterOptions)).toBe(true);
       expect(scope.filterOptions.length).toBe(0);
     });
 
     it('should populate with payment methods from the User static model, plus an "all" option', function () {
-      spyOn(user, 'getStatics').andReturn({
-        paymentMethods: [
-          {
-            PaymentMethodName: 'Foo',
-            PaymentMethodId: 'fooId'
-          },
-          {
-            PaymentMethodName: 'Bar',
-            PaymentMethodId: 'barId'
-          }
-        ]
-      });
       scope.$apply();
       expect(scope.filterOptions.length).toBe(3);
       expect(scope.filterOptions[0].label).toBe('View All');
@@ -88,7 +85,6 @@ describe('Controller: ReceiptsCtrl', function () {
       expect(scope.filterOptions[1].label).toBe('Foo');
       expect(scope.filterOptions[1].value).toBe('fooId');
     });
-
   });
 
   it('should attach a receipts view model to the scope', function () {
@@ -98,7 +94,6 @@ describe('Controller: ReceiptsCtrl', function () {
   });
 
   describe('search function', function () {
-
     it('should clear any prior results', function () {
       scope.receipts.results = ['foo', 'bar'];
       scope.receipts.search();
@@ -125,11 +120,9 @@ describe('Controller: ReceiptsCtrl', function () {
       scope.receipts.search();
       expect(receipts.search).toHaveBeenCalledWith(scope.receipts.searchCriteria, null);
     });
-
   });
 
   describe('sortBy function', function(){
-
     it('should set sortField properly', function(){
       scope.sortBy('fieldA');
       expect(scope.sortField).toEqual('fieldA');
@@ -186,8 +179,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
   });
 
-  describe('fetchNextResults function', function () {
-
+  describe('fetchNextResults function', function () {    
     it('should not call for data if the paginator indicates it is already at the end', function () {
       scope.receipts.paginator = {
         hasMore: function () {
@@ -382,20 +374,6 @@ describe('Controller: ReceiptsCtrl', function () {
 
   it('should automatically kick off a search with the query passed to the state, once filters are ready',
     inject(function ($controller) {
-
-      spyOn(user, 'getStatics').andReturn({
-        paymentMethods: [
-          {
-            Name: 'Foo',
-            Id: 'fooId'
-          },
-          {
-            Name: 'Bar',
-            Id: 'barId'
-          }
-        ]
-      });
-
       $controller('ReceiptsCtrl', {
         $scope: scope,
         $stateParams: { search: 'fooSearch' }

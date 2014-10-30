@@ -148,26 +148,22 @@ angular.module('nextgearWebApp')
     $scope.receipts.resetSearch($stateParams.search);
 
     // filters (by payment method) are data-driven - wait for them to be available post-login
-    var unwatch = $scope.$watch(function () { return User.getStatics(); }, function (statics) {
-      if (statics) {
-        var filters = [],
-          allIds = [];
-        angular.forEach(statics.paymentMethods, function (method) {
-          filters.push({
-            label: method.PaymentMethodName,
-            value: method.PaymentMethodId
-          });
-          allIds.push(method.PaymentMethodId);
+    User.getStatics().then(function(statics) {
+      var filters = [],
+        allIds = [];
+      angular.forEach(statics.paymentMethods, function (method) {
+        filters.push({
+          label: method.PaymentMethodName,
+          value: method.PaymentMethodId
         });
-        // special View All filter is simply a list of all payment method ids
-        filters.unshift({
-          label: gettextCatalog.getString('View All'),
-          value: allIds.join(',')
-        });
-        $scope.filterOptions = filters;
-        $scope.receipts.resetSearch($stateParams.search);
-        unwatch();
-      }
+        allIds.push(method.PaymentMethodId);
+      });
+      // special View All filter is simply a list of all payment method ids
+      filters.unshift({
+        label: gettextCatalog.getString('View All'),
+        value: allIds.join(',')
+      });
+      $scope.filterOptions = filters;
+      $scope.receipts.resetSearch($stateParams.search);
     });
-
   });
