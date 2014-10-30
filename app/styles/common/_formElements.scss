@@ -441,6 +441,29 @@ input[type="radio"] {
   }
 }
 
+/*
+ * TABULAR INLINE CHECKBOXES
+ * Specific use case for inline checkboxes within narrow table cells
+ * ie. Auction Seller Floorplan Search
+ */
+.cr-inline-narrow {
+  position: relative;
+  padding-top: 5px;
+
+  .checkbox-img {
+    position: relative;
+    display: block;
+    float: left;
+    margin-right: 5px;
+  }
+
+  .cr-label {
+    display: block;
+    padding: 2px 10px 0 0;
+    margin: 0;
+  }
+}
+
 .clear-search {
   float: right;
 }

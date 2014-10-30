@@ -53,7 +53,7 @@
           <h4>{{ (item.DisbursementDate | moment) || 'n/a' }}</h4>
           <p>Disbursement</p>
         </td>
-        <td class="description">
+        <td class="description-narrow">
           <p class="lockup-major" nxg-highlight="item.Description" highlight="item.data.query"></p>
           <p class="lockup-minor caps">
             VIN: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
@@ -65,7 +65,7 @@
         <td class="numeric">
           <h4>{{ item.PurchaseAmount | currency }}</h4>
         </td>
-        <td>
+        <td class="buyer">
           <h5>{{ item.BuyerName }}</h5>
         </td>
         <td>
@@ -73,18 +73,18 @@
         </td>
         <td>
           <h5>{{ item.TitleLocation }}</h5>
-          <div class="seller-has-title-box cr-inline" ng-show="item.TitleEditable">
+          <div class="seller-has-title-box cr-inline-narrow" ng-show="item.TitleEditable">
             <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
                     ng-model="item.sellerHasTitle"
                     ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
-            <label class="checkbox-img small" for="{{ item.FloorplanId }}"></label>
-            <label for="{{ item.FloorplanId }}"
-                    class="cr-label"
+            <label class="checkbox-img small"
+                    for="{{ item.FloorplanId }}"
                     tooltip-placement="top"
                     tooltip-trigger="click"
                     tooltip-html="true"
                     tooltip-html-unsafe="NextGear has been notified of this change and will be sending funding soon."
-                    tooltip-animation="true">
+                    tooltip-animation="true"></label>
+            <label for="{{ item.FloorplanId }}" class="cr-label">
               I Have the Title
             </label>
           </div>
