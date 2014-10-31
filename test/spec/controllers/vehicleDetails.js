@@ -124,13 +124,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     userMock = {
       getInfo: function() {
-        return {
-          BusinessNumber: '789'
-        }
-      },
-      getStatics: function() {
-        return {
-          dealerAddresses: [
+        return $q.when({
+          BusinessNumber: '789',
+          DealerAddresses: [
             {
               IsActive: true,
               IsPhysicalInventory: true,
@@ -142,7 +138,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
               AddressId: '1234'
             }
           ]
-        };
+        });
       }
     };
 
