@@ -191,13 +191,7 @@ angular.module('nextgearWebApp')
           Zip: details.FloorplanInfo.SellerAddressZip
         };
 
-        details.FloorplanInfo.inventoryAddress = {
-          Line1: details.FloorplanInfo.InventoryAddressLine1,
-          Line2: details.FloorplanInfo.InventoryAddressLine2,
-          City: details.FloorplanInfo.InventoryAddressCity,
-          State: details.FloorplanInfo.InventoryAddressState,
-          Zip: details.FloorplanInfo.InventoryAddressZip
-        };
+        details.FloorplanInfo.inventoryAddress = Addresses.getAddressObjectFromId(details.FloorplanInfo.PhysicalInventoryAddressId);
 
         $scope.flooringInfo = details.FloorplanInfo;
         $scope.currentLocation = details.FloorplanInfo.inventoryAddress;
@@ -262,7 +256,6 @@ angular.module('nextgearWebApp')
           }).then(function() {}, function(/* error */) {
             $scope.flooringInfo.inventoryAddress = tempAddress;
           });
-
           $scope.flooringInfo.showEditInventoryLocation = false;
         };
 

@@ -276,4 +276,16 @@ describe('Service: Addresses', function () {
     expect(res[0].AddressId).toBe('4');
     expect(res[1].AddressId).toBe('8');
   });
+
+  it('should have a getAddressObjectFromId function', function() {
+    expect(angular.isFunction(Addresses.getAddressObjectFromId)).toBe(true);
+  });
+
+  it('getAddressObjectFromId should return the address object with the given id', function() {
+    var res1 = Addresses.getAddressObjectFromId('1'),
+        res2 = Addresses.getAddressObjectFromId('3');
+
+    expect(res1).toBe(MockAddresses[0]);
+    expect(res2).toBe(MockAddresses[2]);
+  });
 });

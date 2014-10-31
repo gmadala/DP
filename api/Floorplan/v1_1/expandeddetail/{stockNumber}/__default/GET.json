@@ -1,0 +1,163 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "VehicleInfo": {
+      "UnitVin": "1GCHC23G72F189423",
+      "Make": "Chevrolet",
+      "Model": "Silverado 2500",
+      "Style": "Crew Cab 8.1L V8 MPI",
+      "Color": "Gray",
+      "Year": 2002,
+      "CurrentMileage": 0,
+      "Salvage": false,
+      "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
+      "StockNumber": 801,
+      "FloorplanStatusName": "Approved",
+      "Description": "2002 Chevrolet Silverado 2500 Gray"
+    },
+    "TitleInfo": {
+      "TitleLocation": "NextGear",
+      "TitleState": "Utah",
+      "TitleTrackingNumber": 794833927762,
+      "DisbursementDate": "2014-04-25",
+      "TitleImageAvailable": true,
+      "DealerIsEligibleToReleaseTitles": true,
+      "TotalReleasesAllowed": 3,
+      "RemainingReleasesAvailable": 3,
+      "ReleaseBalanceAvailable": 80000,
+      "AmountFinanced": 7670,
+      "TitleReleaseProgramStatus": "EligibleForRelease",
+      "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
+      "StockNumber": 801,
+      "FloorplanStatusName": "Approved",
+      "Description": "2002 Chevrolet Silverado 2500 Gray"
+    },
+    "FloorplanInfo": {
+      "PurchaseDate": "2014-04-15",
+      "SubmittedDate": "2014-04-15",
+      "FlooringDate": "2014-04-15",
+      "FinanceAmount": 7670,
+      "PurchaseAmount": 7670,
+      "LineOfCredit": "Retail",
+      "TermPlanName": "D45/30/30 -- F75/70/70-- R4.5",
+      "ProductType": "Auto",
+      "UnitStatus": "Collateral Verified",
+      "SellerName": "Brashers Salt Lake Auto Auction",
+      "SellerAddressLine1": "780 S. 5600 W.",
+      "SellerAddressLine2": null,
+      "SellerAddressCity": "Salt Lake City",
+      "SellerAddressState": "UT",
+      "SellerAddressZip": "84104",
+      "PhysicalInventoryAddressId": "47161e63-5fca-4522-920f-91ffb863dd92",
+      "TotalDaysFloored": 104,
+      "TotalTermPlanLength": 105,
+      "OriginalTermDaysFloored": 104,
+      "OriginalTermPlanLength": 105,
+      "ExtendedTermDaysFloored": 0,
+      "ExtendedTermPlanLength": 0,
+      "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
+      "StockNumber": 801,
+      "FloorplanStatusName": "Approved",
+      "Description": "2002 Chevrolet Silverado 2500 Gray"
+    },
+    "ValueInfo": {
+      "Mileage": 0,
+      "Style": "Crew Cab 8.1L V8 MPI",
+      "ExtraCleanValue": 0,
+      "CleanValue": 5575,
+      "AverageValue": 3950,
+      "RoughValue": 2275,
+      "NextGearRegionalAveragePurchasePrice": 7552.5,
+      "NextGearRegionalMaxPurchasePrice": 7670,
+      "NextGearRegionalMinPurchasePrice": 7435,
+      "MmrExcellentValue": 3000,
+      "MmrGoodValue": 2425,
+      "MmrAverageValue": 1625,
+      "MmrFairValue": 600,
+      "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
+      "StockNumber": 801,
+      "FloorplanStatusName": "Approved",
+      "Description": "2002 Chevrolet Silverado 2500 Gray"
+    },
+    "FinancialSummaryInfo": {
+      "FloorplanTotal": 7670,
+      "TotalPaid": 2018.88,
+      "TotalOutstanding": 6124.64,
+      "InterestPaid": 151.42,
+      "PrincipalPaid": 1639.46,
+      "CollateralProtectionPaid": 0,
+      "FeesPaid": 228,
+      "InterestOutstanding": 24.1,
+      "PrincipalOutstanding": 6030.54,
+      "CollateralProtectionOutstanding": 0,
+      "FeesOutstanding": 70,
+      "NextPaymentAmount": 6124.64,
+      "NextPaymentDueDate": "2014-07-30",
+      "PrincipalDue": 6030.54,
+      "InterestPaymentTotal": 24.1,
+      "CollateralProtectionPaymentTotal": 0,
+      "FeesPaymentTotal": 70,
+      "Scheduled": false,
+      "WebScheduledPaymentId": null,
+      "ScheduledPaymentDate": null,
+      "CurtailmentPaymentScheduled": false,
+      "ScheduledPaymentAmount": 0,
+      "FloorplanActivity": [
+        {
+          "ActivityId": "9da0c6de-dbc1-4ed8-9c2e-58eba8fb7b27",
+          "IsPayment": true,
+          "IsFee": false,
+          "ActivityDate": "2014-06-02",
+          "ActivityAmount": -829.82
+        },
+        {
+          "ActivityId": "b47b46e6-20e7-41a0-9fc0-cb183a5619f0",
+          "IsPayment": true,
+          "IsFee": false,
+          "ActivityDate": "2014-06-30",
+          "ActivityAmount": -1189.06
+        },
+        {
+          "ActivityId": "80e1f4ca-f1ab-4654-8702-4067449f7398",
+          "IsPayment": false,
+          "IsFee": true,
+          "ActivityDate": "2014-04-15",
+          "ActivityAmount": 75
+        },
+        {
+          "ActivityId": "c581d791-45ee-4c3f-91ee-fb6f3aab3246",
+          "IsPayment": false,
+          "IsFee": true,
+          "ActivityDate": "2014-04-15",
+          "ActivityAmount": 18
+        },
+        {
+          "ActivityId": "fc365132-650d-4f6b-b7cf-5efccf90bba8",
+          "IsPayment": false,
+          "IsFee": true,
+          "ActivityDate": "2014-05-31",
+          "ActivityAmount": 70
+        },
+        {
+          "ActivityId": "08e0f07d-fddc-4148-9baa-71b0642f257d",
+          "IsPayment": false,
+          "IsFee": true,
+          "ActivityDate": "2014-07-01",
+          "ActivityAmount": 70
+        },
+        {
+          "ActivityId": "9b91cadd-1070-4990-9221-686dc3a4bab1",
+          "IsPayment": false,
+          "IsFee": true,
+          "ActivityDate": "2014-05-31",
+          "ActivityAmount": 65
+        }
+      ],
+      "FloorplanId": "b99c7e73-3b13-4257-a6a9-4e63947c7e80",
+      "StockNumber": 801,
+      "FloorplanStatusName": "Approved",
+      "Description": "2002 Chevrolet Silverado 2500 Gray"
+    }
+  }
+}

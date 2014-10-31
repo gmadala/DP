@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     return {
       getDetails: function(stockNumber) {
-        return api.request('GET', '/floorplan/expandeddetail/' + stockNumber)
+        return api.request('GET', '/floorplan/v1_1/expandeddetail/' + stockNumber)
           .then(function(data) {
             /**
              * VO-3015 (related to MOB-877) - The FloorplanTotal value coming from the service is the financed amount.
