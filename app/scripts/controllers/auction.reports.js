@@ -22,11 +22,13 @@ angular.module('nextgearWebApp')
     ];
 
     // set the subsidiary options
-    $scope.subsidiaries = User.getInfo().ManufacturerSubsidiaries || [];
-    $scope.selectedSubsidiary = $scope.subsidiaries.length > 0 ? $scope.subsidiaries[0] : null;
+    User.getInfo().then(function(info) {
+      $scope.subsidiaries = info.ManufacturerSubsidiaries || [];
+      $scope.selectedSubsidiary = $scope.subsidiaries.length > 0 ? $scope.subsidiaries[0] : null;
+      $scope.businessId = info.BusinessId;
+    });
 
     $scope.viewDisbursementDetail = function () {
-
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.disFormValidity = angular.copy($scope.disForm);
 
@@ -42,7 +44,7 @@ angular.module('nextgearWebApp')
         businessName = '-' + $scope.selectedSubsidiary.BusinessName.replace(/\W+/g, ''); // remove non-alphanumeric
       }
       else {
-        businessId = User.getInfo().BusinessId;
+        businessId = $scope.businessId;
         businessName = '';
       }
 
@@ -58,6 +60,4 @@ angular.module('nextgearWebApp')
         reportName: 'Disbursement Detail'
       });
     };
-
-
   });

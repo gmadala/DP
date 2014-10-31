@@ -30,7 +30,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
     dealerNumberSearch = DealerNumberSearch;
 
-    spyOn(User, 'getStatics').andReturn({});
+    spyOn(User, 'getStatics').andReturn(q.when({}));
 
     AuctionDealerSearchCtrl = $controller('AuctionDealerSearchCtrl', {
       $scope: scope,

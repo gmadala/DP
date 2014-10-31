@@ -19,8 +19,8 @@ angular.module('nextgearWebApp')
           cookieVal.lastState = {};
         }
 
-        if(User.infoLoaded() && User.getInfo().BusinessContactUserName) {
-          cookieVal.lastState[User.getInfo().BusinessContactUserName] = $state.current.name;
+        if(User.infoLoaded() && User.getInfoSync().BusinessContactUserName) {
+          cookieVal.lastState[User.getInfoSync().BusinessContactUserName] = $state.current.name;
         } else {
           cookieVal.lastState['default'] = $state.current.name;
         }
@@ -34,7 +34,7 @@ angular.module('nextgearWebApp')
           if(cookieVal.lastState['default']){
             cookieVal.lastState['default'] = undefined;
           } else if(User.infoLoaded()) {
-            cookieVal.lastState[User.getInfo().BusinessContactUserName] = undefined;
+            cookieVal.lastState[User.getInfoSync().BusinessContactUserName] = undefined;
           }
         }
 
@@ -49,7 +49,7 @@ angular.module('nextgearWebApp')
           if(cookieVal.lastState['default']){
             valueToPop = cookieVal.lastState['default'];
           } else if(User.infoLoaded()) {
-            valueToPop = cookieVal.lastState[User.getInfo().BusinessContactUserName];
+            valueToPop = cookieVal.lastState[User.getInfoSync().BusinessContactUserName];
           }
         }
 

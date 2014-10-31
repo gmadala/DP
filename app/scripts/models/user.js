@@ -8,7 +8,8 @@ angular.module('nextgearWebApp')
       securityQuestions = null,
       infoRequest = null,
       infoLoaded = false,
-      isDealer;
+      isDealer,
+      info = null; // only user cached info for synchronous function
 
     function filterByBusinessName(subsidiaries) {
       return _.sortBy(subsidiaries, function(s) {
@@ -166,10 +167,12 @@ angular.module('nextgearWebApp')
           isDealer = data.DealerAuctionStatusForGA === 'Dealer';
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
+          info = data;
           return data;
         }, function() {
           infoLoaded = false;
           infoRequest = null;
+          info = null;
           Addresses.init([]);
         });
 
@@ -182,6 +185,10 @@ angular.module('nextgearWebApp')
 
       infoLoaded: function() {
         return infoLoaded;
+      },
+
+      getInfoSync: function() { // LastState service needs to run synchronously, so we can't return a promise
+        return info;
       },
 
       isDealer: function() {

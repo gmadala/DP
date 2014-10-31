@@ -142,8 +142,11 @@ angular.module('nextgearWebApp')
         // ================================
         $scope.titleInfo = details.TitleInfo;
 
-        var displayId =  User.getInfo().BusinessNumber + '-' + details.TitleInfo.StockNumber;
-        $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + details.TitleInfo.StockNumber); // 0 = not first page only
+        var displayId;
+        User.getInfo().then(function(userInfo) {
+          displayId = userInfo.BusinessNumber + '-' + details.TitleInfo.StockNumber;
+          $scope.titleInfo.TitleUrl = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + details.TitleInfo.StockNumber); // 0 = not first page only
+        });
 
         // Title-specific functions
         $scope.titleInfo.dealerCanRequestTitles = function() {
