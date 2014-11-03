@@ -34,7 +34,7 @@ describe('Model: AccountManagement', function() {
       Data: null
     };
 
-    httpBackend.whenGET('/userAccount/settings').respond({
+    httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,
       Message: null,
       Data: {
@@ -64,7 +64,7 @@ describe('Model: AccountManagement', function() {
 
   it('should call get method', function() {
 
-    httpBackend.expectGET('/userAccount/settings');
+    httpBackend.expectGET('/userAccount/v1_1/settings');
     var res;
     accountManagement.get().then(function (result) {
       res = result;

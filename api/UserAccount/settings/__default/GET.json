@@ -22,6 +22,20 @@
     "BusinessEmail": "diana.guarin@manheim.com",
     "EnhancedRegistrationEnabled": false,
     "AutoDisburseUnappliedFundsDaily": false,
+    "Addresses": [
+      {
+        "BusinessAddressId": "09dd45df-1751-47e0-84ad-9fac697a948f",
+        "City": "Sanford",
+        "Fax": "0000000000",
+        "IsActive": true,
+        "IsTitleReleaseAddress": true,
+        "Line1": "1015 S Horner Blvd",
+        "Line2": null,
+        "State": "NC",
+        "Zip": "27330",
+        "Phone": "9193566338"
+      }
+    ],
     "Notifications": [
       {
         "NotificationId": "e4b6c079-3ae0-4ac4-84bc-0000d56bb2f5",

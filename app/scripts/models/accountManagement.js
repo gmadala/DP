@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     return {
       get: function() {
-        return api.request('GET', '/userAccount/settings').then(function(settings) {
+        return api.request('GET', '/userAccount/v1_1/settings').then(function(settings) {
           return settings;
         });
 

@@ -114,7 +114,7 @@ describe('Model: ProfileSettings', function() {
       spyOn(user, 'getSecurityQuestions').andReturn({
         then: angular.noop
       });
-      httpBackend.expectGET('/userAccount/settings').respond(success);
+      httpBackend.expectGET('/userAccount/v1_1/settings').respond(success);
       httpBackend.expectGET('/userAccount/availableNotifications').respond(success);
 
     });
