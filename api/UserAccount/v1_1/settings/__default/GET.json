@@ -1,0 +1,49 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "Username": "Riga38",
+    "SecurityQuestions": [
+      {
+        "SecurityQuestionId": 1,
+        "Answer": "test"
+      },
+      {
+        "SecurityQuestionId": 2,
+        "Answer": "test"
+      },
+      {
+        "SecurityQuestionId": 4,
+        "Answer": "test"
+      }
+    ],
+    "Email": "Sales@2ndChanceAutoWholesale.com",
+    "CellPhone": "9193566339",
+    "BusinessEmail": "sales@2ndchanceautowholesale.com",
+    "EnhancedRegistrationEnabled": false,
+    "Notifications": [
+      {
+        "NotificationId": "99f9cb9f-7c8c-4047-9b82-44216730d71c",
+        "NotificationName": "Floorplans",
+        "DeliveryMethodId": "651b703a-de5c-4920-95b7-33025faf2c5b",
+        "DeliveryMethodName": "text",
+        "Enabled": true
+      },
+      {
+        "NotificationId": "99f9cb9f-7c8c-4047-9b82-44216730d71c",
+        "NotificationName": "Payments",
+        "DeliveryMethodId": "651b702a-de5c-4920-95b7-33025faf2c5b",
+        "DeliveryMethodName": "alert",
+        "Enabled": true
+      },
+      {
+        "NotificationId": "99f9cb9f-7c8c-4047-9b82-44216730d71c",
+        "NotificationName": "Receipts",
+        "DeliveryMethodId": "651b703a-de5c-4920-95b7-33025faf2c5b",
+        "DeliveryMethodName": "alert",
+        "Enabled": true
+      }
+    ],
+    "AutoDisburseUnappliedFundsDaily": false
+  }
+}

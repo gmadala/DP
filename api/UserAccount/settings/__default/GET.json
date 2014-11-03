@@ -24,114 +24,16 @@
     "AutoDisburseUnappliedFundsDaily": false,
     "Addresses": [
       {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 West Kiest Blvd",
-        "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
-        "City": "Rochester",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "123 Elm St.",
-        "Line2": null,
-        "State": "NY",
-        "Zip": "14623",
-        "Phone": "2144501800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e93rwrfaa6a",
-        "City": "Beverly Hills",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "123 Dollar Ave.",
-        "Line2": null,
-        "State": "CA",
-        "Zip": "90210",
-        "Phone": "5553301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
+        "BusinessAddressId": "09dd45df-1751-47e0-84ad-9fac697a948f",
+        "City": "Sanford",
+        "Fax": "0000000000",
+        "IsActive": true,
         "IsTitleReleaseAddress": true,
-        "Line1": "1234 West Kiest Blvd",
+        "Line1": "1015 S Horner Blvd",
         "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "68070 West Kiest Blvd",
-        "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 main Blvd",
-        "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 West Kiest Blvd",
-        "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 West Kiest Blvd",
-        "Line2": null,
-        "State": "TX",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 West Kiest Blvd",
-        "Line2": null,
-        "State": "KY",
-        "Zip": "75236",
-        "Phone": "2143301800"
-      },
-      {
-        "BusinessAddressId": "be9b22cb-5896-4356-86a0-e932293faa6a",
-        "City": "Dallas",
-        "Fax": "2143399361",
-        "IsTitleReleaseAddress": false,
-        "Line1": "5333 West Kiest Blvd",
-        "Line2": null,
-        "State": "NV",
-        "Zip": "75236",
-        "Phone": "2143301800"
+        "State": "NC",
+        "Zip": "27330",
+        "Phone": "9193566338"
       }
     ],
     "Notifications": [

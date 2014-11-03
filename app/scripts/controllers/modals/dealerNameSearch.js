@@ -123,5 +123,7 @@ angular.module('nextgearWebApp')
     $scope.search();
 
     // Get list of states
-    $scope.states = User.getStatics().states;
+    User.getStatics().then(function(statics) {
+      $scope.states = statics.states;
+    });
   });

@@ -1,0 +1,32 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "PurchaseDate": "2014-01-24",
+    "SubmittedDate": "2014-01-24",
+    "FlooringDate": "2014-01-24",
+    "FinanceAmount": 3430,
+    "PurchaseAmount": 3430,
+    "LineOfCredit": "Retail",
+    "TermPlanName": "D60/30/30 -- F85/70/70 -- R4.5 -- C%10/20",
+    "ProductType": "Auto",
+    "UnitStatus": "In Stock",
+    "SellerName": "Decatur Auto Auction, Inc.",
+    "SellerAddressLine1": "1991 W Mound Rd",
+    "SellerAddressLine2": null,
+    "SellerAddressCity": "Decatur",
+    "SellerAddressState": "IL",
+    "SellerAddressZip": "62526",
+    "PhysicalInventoryAddressId": "c049dbe0-80c0-489d-ad26-c78ca7215512",
+    "TotalDaysFloored": 229,
+    "TotalTermPlanLength": 120,
+    "OriginalTermDaysFloored": 229,
+    "OriginalTermPlanLength": 120,
+    "ExtendedTermDaysFloored": 0,
+    "ExtendedTermPlanLength": 0,
+    "FloorplanId": "574c2e05-00ae-4e79-95d1-8f1aee5cce57",
+    "StockNumber": 30,
+    "FloorplanStatusName": "Approved",
+    "Description": "2002 Nissan Altima Silver"
+  }
+}

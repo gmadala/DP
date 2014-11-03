@@ -16,7 +16,8 @@ describe('Controller: CheckoutCtrl', function () {
     $q,
     api,
     BusinessHours,
-    inBizHours;
+    inBizHours,
+    accountList = ['myAccountsHere'];;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_, _BusinessHours_) {
@@ -36,10 +37,13 @@ describe('Controller: CheckoutCtrl', function () {
       return $q.when(loggedIn);
     });
 
+    spyOn(User, 'getInfo').andCallFake(function() {
+      return $q.when({ BankAccounts: accountList });
+    });
+
     spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
       return $q.when(inBizHours);
     });
-
 
     run = function () {
       $controller('CheckoutCtrl', { $scope: scope });
@@ -54,7 +58,6 @@ describe('Controller: CheckoutCtrl', function () {
   });
 
   describe('payment queue sum functions', function () {
-
     var fees = {},
       payments = {};
 
@@ -396,43 +399,27 @@ describe('Controller: CheckoutCtrl', function () {
   });
 
   describe('bankAccounts.getList', function () {
-
     it('should return the bank accounts list if loaded', function () {
-      var accountList = ['myAccountsHere'];
       run();
-      spyOn(User, 'getStatics').andReturn({
-        bankAccounts: accountList
-      });
+      scope.$apply();
       expect(scope.bankAccounts.getList()).toBe(accountList);
     });
-
-    it('should return undefined if the user statics are not yet loaded', function () {
-      run();
-      spyOn(User, 'getStatics').andReturn(null);
-      expect(scope.bankAccounts.getList()).not.toBeDefined();
-    });
-
   });
 
   describe('bankAccounts.selectedAccount', function () {
-
     it('should default to null if there are multiple bank accounts', function () {
-      spyOn(User, 'getStatics').andReturn({
-        bankAccounts: [1, 2, 3]
-      });
+      accountList = [1, 2, 3];
       run();
+      scope.$apply();
       expect(scope.bankAccounts.selectedAccount).toBe(null);
     });
 
     it('should default to the one bank account if there is only one', function () {
-      spyOn(User, 'getStatics').andReturn({
-        bankAccounts: [1]
-      });
+      accountList = [1];
       run();
       scope.$apply();
       expect(scope.bankAccounts.selectedAccount).toBe(1);
     });
-
   });
 
   describe('unapplied funds info', function () {
@@ -577,7 +564,6 @@ describe('Controller: CheckoutCtrl', function () {
   });
 
   describe('reallySubmit function', function () {
-
     var guard,
       $q,
       overrideSucceed = true;
@@ -586,6 +572,7 @@ describe('Controller: CheckoutCtrl', function () {
       guard = protect;
       $q = _$q_;
       run();
+      scope.$apply();
       scope.paymentQueue = {
         contents: {
           payments: [
@@ -609,6 +596,8 @@ describe('Controller: CheckoutCtrl', function () {
           }
         }
       });
+
+      
     }));
 
     it('should throw an error if called without the protect object', function () {

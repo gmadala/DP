@@ -119,9 +119,10 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
   describe('Payout modal controller', function () {
 
     var scope, payoutCtrl, paymentsMock, dialogMock, userMock, accts,
-      flushPayoutRequestSuccess, flushPayoutRequestError, initCtrl;
+      flushPayoutRequestSuccess, flushPayoutRequestError, initCtrl, $q;
 
-    beforeEach(inject(function ($rootScope, $controller) {
+    beforeEach(inject(function ($rootScope, $controller, _$q_) {
+      $q = _$q_;
       paymentsMock = {
         requestUnappliedFundsPayout: function (amount, accountId) {
           return {
@@ -153,10 +154,10 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       ];
 
       userMock = {
-        getStatics: function () {
-          return {
-            bankAccounts: accts
-          };
+        getInfo: function () {
+          return $q.when({
+            BankAccounts: accts
+          });
         }
       };
 
@@ -176,10 +177,6 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       initCtrl();
 
     }));
-
-    it('should attach the user model to the scope', function () {
-      expect(scope.user).toBe(userMock);
-    });
 
     it('should attach the funds object to the scope', function () {
       var fundsMock = {
@@ -211,11 +208,11 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       accts = [ myOnlyAcct ];
       initCtrl();
       scope.$apply();
+      scope.$digest();
       expect(scope.selections.account).toBe(myOnlyAcct);
     });
 
     describe('submit function', function () {
-
       // mock up a form controller on the scope
       var form;
       beforeEach(function () {

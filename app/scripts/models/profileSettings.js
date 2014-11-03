@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
     return {
       get: function() {
         return $q.all([
-            api.request('GET', '/userAccount/settings'),
+            api.request('GET', '/userAccount/v1_1/settings'),
             User.getSecurityQuestions(),
             api.request('GET', '/userAccount/availableNotifications')
           ]).then(function(responses) {

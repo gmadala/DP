@@ -32,15 +32,13 @@
       Payout Amount must be $0.01 to {{ funds.available | currency }}
     </label>
 
-
-
     <h5 translate>Bank Account for Payout</h5>
     <div class=" form-block">
       <div class="style-select" ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$invalid}">
         <select id="payoutBankAcct"
                 name="payoutBankAcct"
                 ng-model="selections.account"
-                ng-options="account.BankAccountName for account in user.getStatics().bankAccounts"
+                ng-options="account.BankAccountName for account in bankAccounts"
                 ng-class="{ 'nxg-invalid': validity.payoutBankAcct.$error.required }"
                 required>
           <option value="" translate>Make Selection</option>

@@ -10,11 +10,13 @@ describe('Controller: AuctionReportsCtrl', function() {
     api,
     formDataMock,
     mfgSubsidiaries,
-    UserMock;
+    UserMock,
+    $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, api) {
+  beforeEach(inject(function($controller, $rootScope, api, _$q_) {
     scope = $rootScope.$new();
+    $q = _$q_;
     formDataMock = {
       $valid: false,
       disDate: {
@@ -24,10 +26,10 @@ describe('Controller: AuctionReportsCtrl', function() {
 
     UserMock = {
       getInfo: function() {
-        return {
+        return $q.when({
           BusinessId: "1234",
           ManufacturerSubsidiaries: []
-        };
+        });
       }
     };
 
@@ -61,6 +63,8 @@ describe('Controller: AuctionReportsCtrl', function() {
     });
 
     it('should create an api link and open the report in a new tab if the form is valid', function() {
+            scope.$apply();
+
       spyOn(window, 'open').andReturn();
       scope.disForm.$valid = true;
 

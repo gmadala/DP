@@ -19,7 +19,6 @@ describe("Model: Payments", function () {
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
-
     var request;
 
     beforeEach(function () {
@@ -48,11 +47,9 @@ describe("Model: Payments", function () {
       expect(request.RequestAmount).toBe(200);
       expect(request.BankAccountId).toBe('foo');
     });
-
   });
 
   describe('filterValues property', function () {
-
     it('should have the expected values', function () {
       expect(payments.filterValues).toBeDefined();
       expect(payments.filterValues.ALL).toBeDefined();
@@ -60,12 +57,11 @@ describe("Model: Payments", function () {
       expect(payments.filterValues.THIS_WEEK).toBeDefined();
       expect(payments.filterValues.RANGE).toBeDefined();
     });
-
   });
 
   describe('search method', function () {
-
     var paginate,
+      $q,
       defaultCriteria = {
         query: '',
         startDate: null,
@@ -86,10 +82,11 @@ describe("Model: Payments", function () {
         }, {}];
       };
 
-    beforeEach(inject(function (Paginate, User) {
+    beforeEach(inject(function (Paginate, User, _$q_) {
       paginate = Paginate;
+      $q = _$q_;
       httpBackend.whenGET(/\/payment\/search.*/).respond(respondFnc);
-      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
     }));
 
     it('should call the expected API path', function () {
@@ -238,7 +235,7 @@ describe("Model: Payments", function () {
 
     it('should include inventory location', function () {
       payments.search(angular.extend({}, defaultCriteria, {
-        inventoryLocation: {BusinessAddressId: 'businessID'}
+        inventoryLocation: {AddressId: 'businessID'}
       }));
       httpBackend.flush();
       expect(callParams.PhysicalInventoryAddressIds).toBe('businessID');
@@ -250,11 +247,9 @@ describe("Model: Payments", function () {
       httpBackend.flush();
       expect(callParams.PhysicalInventoryAddressIds).not.toBeDefined();
     });
-
   });
 
   describe('fetchFees function', function () {
-
     beforeEach(function () {
       httpBackend.whenGET('/payment/getaccountfees').respond({
           Success: true,
@@ -283,12 +278,10 @@ describe("Model: Payments", function () {
   });
 
   describe('get/setAvailableUnappliedFunds functions', function () {
-
     it('should store the value and return it when asked', function () {
       payments.setAvailableUnappliedFunds(234.56);
       expect(payments.getAvailableUnappliedFunds()).toBe(234.56);
     });
-
   });
 
   describe('addPaymentToQueue function + isPaymentOnQueue', function () {
@@ -353,11 +346,9 @@ describe("Model: Payments", function () {
       expect(cartItem.fromScheduledPayment).toHaveBeenCalled();
       expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe('payoff');
     });
-
   });
 
   describe('addFeeToQueue function + isFeeOnQueue', function () {
-
     it('should add fees to the queue', function () {
       var fee = {
         FinancialRecordId: 'fee1',
@@ -378,7 +369,6 @@ describe("Model: Payments", function () {
 
       expect(segmentio.track).toHaveBeenCalledWith('Add to Basket');
     }));
-
   });
 
   describe('removeFromQueue', function() {
@@ -408,7 +398,6 @@ describe("Model: Payments", function () {
   })
 
   describe('removePaymentFromQueue', function () {
-
     it('should remove payments from the queue', function () {
       var payment = {
         FloorplanId: 'floorplan1',
@@ -442,7 +431,6 @@ describe("Model: Payments", function () {
   });
 
   describe('removeFeeFromQueue', function () {
-
     it('should remove fees from the queue', function () {
       var fee = {
         FinancialRecordId: 'fee1',
@@ -456,11 +444,9 @@ describe("Model: Payments", function () {
       payments.removeFeeFromQueue(fee.FinancialRecordId);
       expect(payments.isFeeOnQueue(fee.FinancialRecordId)).toBe(false);
     });
-
   });
 
   describe('getPaymentQueue function', function () {
-
     it('should include the fees hash table with expected fee data', function () {
       payments.addFeeToQueue({ FinancialRecordId: 'finId1' });
 
@@ -497,7 +483,6 @@ describe("Model: Payments", function () {
       payments.removePaymentFromQueue('floorId1');
       expect(queue.isEmpty()).toBe(true);
     });
-
   });
 
   describe('getPaymentFromQueue function', function() {
@@ -509,7 +494,6 @@ describe("Model: Payments", function () {
   });
 
   describe('clearPaymentQueue function', function () {
-
     it('should remove fees and payments from the queue', function () {
       var queue = payments.getPaymentQueue();
       payments.addFeeToQueue({ FinancialRecordId: 'id1' });
@@ -519,7 +503,6 @@ describe("Model: Payments", function () {
       payments.clearPaymentQueue();
       expect(queue.isEmpty()).toBe(true);
     });
-
   });
 
   describe('cancelScheduled function', function () {
@@ -598,7 +581,6 @@ describe("Model: Payments", function () {
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
     });
-
   });
 
   describe('fetchPossiblePaymentDates function', function () {

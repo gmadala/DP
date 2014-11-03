@@ -8,12 +8,14 @@ describe('Model: Floorplan', function () {
   // instantiate service
   var floorplan,
     httpBackend,
-    urlParser;
+    urlParser,
+    $q;
 
-  beforeEach(inject(function ($httpBackend, Floorplan, URLParser) {
+  beforeEach(inject(function ($httpBackend, Floorplan, URLParser, _$q_) {
     httpBackend = $httpBackend;
     floorplan = Floorplan;
     urlParser = URLParser;
+    $q = _$q_;
   }));
 
   it('should have a getVehicleDescription function that concatenates vehicle info', function () {
@@ -204,7 +206,7 @@ describe('Model: Floorplan', function () {
       paginate = Paginate;
       httpBackend.whenGET(/\/floorplan\/search.*/).respond(respondFnc);
       defaultCriteria.filter = floorplan.filterValues.ALL;
-      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
 
       clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
@@ -482,7 +484,7 @@ describe('Model: Floorplan', function () {
 
     it('should set inventory location', function () {
       floorplan.search(angular.extend({}, defaultCriteria, {
-        inventoryLocation: {BusinessAddressId: 'businessID'}
+        inventoryLocation: {AddressId: 'businessID'}
       }));
       httpBackend.flush();
       expect(callParams.PhysicalInventoryAddressIds).toBe('businessID');
@@ -497,13 +499,16 @@ describe('Model: Floorplan', function () {
   });
 
   describe('addTitleURL method', function () {
+    var $rootScope;
 
-    beforeEach(inject(function (User) {
-      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+    beforeEach(inject(function (User, _$rootScope_) {
+      $rootScope = _$rootScope_;
+      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
     }));
 
     it('should not add the property if item has no stock number', function () {
       var out = floorplan.addTitleURL({});
+      $rootScope.$apply();
       expect(out.$titleURL).not.toBeDefined();
     });
 
@@ -511,6 +516,7 @@ describe('Model: Floorplan', function () {
       var out = floorplan.addTitleURL({
         StockNumber: 'foo'
       });
+      $rootScope.$apply();
       expect(out.$titleURL).toBe('/floorplan/title/123-foo/0/Title_foo');
     });
 
@@ -519,9 +525,9 @@ describe('Model: Floorplan', function () {
         StockNumber: 'foo',
         BuyerBusinessNumber: '777'
       });
+      $rootScope.$apply();
       expect(out.$titleURL).toBe('/floorplan/title/777-foo/0/Title_foo');
     });
-
   });
 
   describe('getExtensionPreview method', function() {
@@ -581,7 +587,7 @@ describe('Model: Floorplan', function () {
         {
           id: 123,
           overrideAddress:  {
-            BusinessAddressId: 143
+            AddressId: 143
           }
         }
       ]);
@@ -608,7 +614,7 @@ describe('Model: Floorplan', function () {
         {
           id: 123,
           overrideAddress:  {
-            BusinessAddressId: 143
+            AddressId: 143
           }
         }
       ]);
@@ -618,6 +624,5 @@ describe('Model: Floorplan', function () {
       httpBackend.flush();
       expect(floorplan.overrideInProgress()).toBe(false);
     })
-
   });
 });

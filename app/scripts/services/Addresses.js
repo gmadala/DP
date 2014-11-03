@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
         return this.getAddresses(true /*active*/, true /*physical*/, null);
       },
       getTitleAddresses: function() {
-        // returns addresses that are active and physical, but filters out PO boxes
+        // returns addresses that are active, but filters out PO boxes
         return this.getAddresses(true, null, null).filter(function(item) {
           return !PO_BOX_REGEX.test(item.Line1.toLowerCase());
         });
@@ -47,6 +47,13 @@ angular.module('nextgearWebApp')
         return this.getFlooredBusinessAddresses().filter(function(item) {
           return item.HasApprovedFloorplanFlooredAgainst;
         });
+      },
+      getAddressObjectFromId: function(addrId) {
+        // since only a single address will ever have a
+        // given id, we can safely select the first item from the array
+        return addresses.filter(function(item) {
+          return item.AddressId === addrId;
+        })[0] ;
       }
     };
   });

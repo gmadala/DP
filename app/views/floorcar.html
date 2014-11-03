@@ -80,11 +80,11 @@
       <label translate>Trade in</label>
       <div class="form-inline">
         <div class="cr-inline">
-          <input type="radio" id="yes" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn" ng-change="data.PaySeller = !data.SaleTradeIn" ng-disabled="!canPayBuyer()">
+          <input type="radio" id="yes" name="inputTradeIn" ng-value="true" ng-model="data.SaleTradeIn" ng-change="data.PaySeller = !data.SaleTradeIn" ng-disabled="!canPayBuyer">
           <label class="radio-img" for="yes"></label>
           <label class="cr-label" for="yes" translate>Yes</label>
 
-          <input type="radio" id="no" name="inputTradeIn" ng-value="false" ng-model="data.SaleTradeIn" ng-disabled="!canPayBuyer()">
+          <input type="radio" id="no" name="inputTradeIn" ng-value="false" ng-model="data.SaleTradeIn" ng-disabled="!canPayBuyer">
           <label class="radio-img" for="no"></label>
           <label class="cr-label" for="no" translate>No</label>
         </div>
@@ -152,7 +152,7 @@
         <select id="inputCreditLine"
                 name="inputCreditLine"
                 ng-model="data.LineOfCreditId"
-                ng-options="line.LineOfCreditName for line in options.linesOfCredit"
+                ng-options="line.LineOfCreditName for line in options.LinesOfCredit"
                 required>
           <option value="" translate>Make Selection</option>
         </select>
@@ -165,7 +165,7 @@
       <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>:</label>
       <div class="style-select">
         <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
-              ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions()"
+              ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions"
               ng-change="data.BankAccountId = null"
               ng-disabled="data.SaleTradeIn">
           <option value="" translate>Make Selection</option>
@@ -179,7 +179,7 @@
                 ng-model="data.BankAccountId"
                 ng-disabled="data.PaySeller"
                 ng-required="!data.PaySeller"
-                ng-options="account.BankAccountName for account in options.bankAccounts">
+                ng-options="account.BankAccountName for account in options.BankAccounts">
           <option value="" translate>Make Selection</option>
         </select>
       </div>

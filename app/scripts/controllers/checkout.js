@@ -137,20 +137,22 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.bankAccounts = {
-      getList: function () {
-        var statics = User.getStatics();
-        return statics ? statics.bankAccounts : undefined;
-      },
-      selectedAccount: null
-    };
+    User.getInfo().then(function(info) {
+      $scope.bankAccounts = {
+        getList: function () {
+          return info ? info.BankAccounts : undefined;
+        },
+        selectedAccount: null
+      };
 
-    $scope.bankAccounts.defaultHelper = OptionDefaultHelper.create([
-      {
-        scopeSrc: 'bankAccounts.getList()',
-        modelDest: 'selectedAccount'
-      }
-    ]).applyDefaults($scope, $scope.bankAccounts);
+      $scope.bankAccounts.defaultHelper = OptionDefaultHelper.create([
+        {
+          scopeSrc: 'bankAccounts.getList()',
+          modelDest: 'selectedAccount'
+        }
+      ]).applyDefaults($scope, $scope.bankAccounts);
+    });
+
 
     $scope.unappliedFunds = {
       available: Payments.getAvailableUnappliedFunds(),

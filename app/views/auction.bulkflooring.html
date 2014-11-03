@@ -157,7 +157,7 @@
       <label for="inputDisburseAcct" class="input-title" translate>Bank Account</label>
       <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
-              ng-options="account.BankAccountName for account in options.bankAccounts"
+              ng-options="account.BankAccountName for account in options.BankAccounts"
               required>
          <option value="" translate>Make Selection</option>
         </select>

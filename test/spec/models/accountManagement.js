@@ -23,9 +23,9 @@ describe('Model: AccountManagement', function() {
     user.isDealer = function() {
       return isDealer;
     };
-    spyOn(user, 'getStatics').andReturn({
+    spyOn(user, 'getInfo').andReturn($q.when({
       BankAccounts: []
-    });
+    }));
 
 
     success = {
@@ -34,7 +34,7 @@ describe('Model: AccountManagement', function() {
       Data: null
     };
 
-    httpBackend.whenGET('/userAccount/settings').respond({
+    httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,
       Message: null,
       Data: {
@@ -64,7 +64,7 @@ describe('Model: AccountManagement', function() {
 
   it('should call get method', function() {
 
-    httpBackend.expectGET('/userAccount/settings');
+    httpBackend.expectGET('/userAccount/v1_1/settings');
     var res;
     accountManagement.get().then(function (result) {
       res = result;
@@ -82,7 +82,6 @@ describe('Model: AccountManagement', function() {
     });
 
     httpBackend.flush();
-
     expect(res).toBeDefined();
 
     var expected = {
@@ -94,17 +93,12 @@ describe('Model: AccountManagement', function() {
       TotalAvailableUnappliedFunds: 1111,
     };
 
-    // Any Financial Account data tranformations made here
-    expect(res.BankAccounts).toBe(user.getStatics().bankAccounts);
     expect(res.AvailableCredit).toBe(expected.TotalAvailableCredit);
     expect(res.ReserveFunds).toBe(expected.ReserveFundsBalance);
     expect(res.LastPayment).toBe(expected.LastPaymentAmount);
     expect(res.LastPaymentDate).toBe(expected.LastPaymentDate);
     expect(res.UnappliedFunds).toBe(expected.UnappliedFundsTotal);
     expect(res.TotalAvailable).toBe(expected.TotalAvailableUnappliedFunds);
-
-
-
   });
 
   it('should call saveBusiness method', function() {
@@ -118,5 +112,4 @@ describe('Model: AccountManagement', function() {
     accountManagement.saveTitleAddress(5);
     expect(httpBackend.flush).not.toThrow();
   });
-
 });

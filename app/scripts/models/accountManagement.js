@@ -5,26 +5,26 @@ angular.module('nextgearWebApp')
 
     return {
       get: function() {
-        return api.request('GET', '/userAccount/settings').then(function(settings) {
+        return api.request('GET', '/userAccount/v1_1/settings').then(function(settings) {
           return settings;
         });
 
       },
       getFinancialAccountData: function() {
         return api.request('GET', '/dealer/summary').then(function(summary) {
+          // Any Financial Account data tranformations made here
+          return User.getInfo().then(function(info) {
             var settings = {};
-
-            // Any Financial Account data tranformations made here
-            settings.BankAccounts = User.getStatics().bankAccounts;
+            settings.BankAccounts = info.BankAccounts;
             settings.AvailableCredit = summary.TotalAvailableCredit;
             settings.ReserveFunds = summary.ReserveFundsBalance;
             settings.LastPayment = summary.LastPaymentAmount;
             settings.LastPaymentDate = summary.LastPaymentDate;
             settings.UnappliedFunds = summary.UnappliedFundsTotal;
             settings.TotalAvailable = summary.TotalAvailableUnappliedFunds;
-
             return settings;
           });
+        });
       },
       saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
         var req = {

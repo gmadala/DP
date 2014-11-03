@@ -26,9 +26,9 @@ describe('Controller: DealerNameSearchCtrl', function () {
     model = DealerNameSearch;
     spyOn(model, 'search').andReturn($q.when(searchResult.data));
 
-    spyOn(User, 'getStatics').andReturn({
+    spyOn(User, 'getStatics').andReturn($q.when({
       states: ['fooState']
-    });
+    }));
 
     dialog = {
       close: angular.noop
@@ -301,6 +301,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
   });
 
   it('should attach the list of states to the scope', function () {
+    scope.$apply();
     expect(scope.states).toBeDefined();
     expect(scope.states.length).toBe(1);
     expect(scope.states[0]).toBe('fooState');
