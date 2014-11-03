@@ -119,15 +119,6 @@ input[type="color"] {
   }
 }
 
-.inline-input {
-  display: inline-block;
-  margin-bottom: 10px;
-
-  & + .btn.inline-submit {
-    margin: 4px 10px 0;
-  }
-}
-
 // inputs that are the full-width of parent
 .input-full {
   @extend %full-width;

@@ -1,73 +1,86 @@
 <div>
-	<div class="control-group">
-    <label class="control-label" for="paidOffStockNo">Stock Number Filter (optional)</label>
+  <div class="control-group">
+    <label class="control-label" for="paidOffStockNo" translate>Stock Number Filter (optional)</label>
+
     <div class="style-select">
       <select id="paidOffStockNo"
-        name="paidOffStockNo"
-  			ng-model="data.selectData.value"
-  			ng-options="v for v in data.selectData.values"
-  			ng-change="selectChange()" />
+              name="paidOffStockNo"
+              ng-model="data.selectData.value"
+              ng-options="v for v in data.selectData.values"
+              ng-change="selectChange()"/>
     </div>
-	</div>
+  </div>
 
-	<!-- Range of stock numbers conditional fields. -->
-	<div class="range" ng-show="isRange">
+  <!-- Range of stock numbers conditional fields. -->
+  <div class="range" ng-show="isRange">
     <div class="control-group half">
-	    <label class="control-label" for="paidOffRangeStart">Stock # Range Start</label>
-	    <div class="controls">
-        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.rangeStart" ng-required="isRange" ng-pattern="/^[0-9]*$/" ng-class="{ 'nxg-invalid': form.paidOffRangeStart.$error.required || form.paidOffRangeStart.$error.pattern }" />
-	    </div>
-		</div>
+      <label class="control-label" for="paidOffRangeStart" translate>Stock # Range Start</label>
 
-		<div class="control-group half">
-	    <label class="control-label" for="paidOffRangeEnd">Stock # Range End</label>
-	    <div class="controls">
-			  <input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" ng-required="isRange" ng-pattern="/^[0-9]*$/" nxg-greater-than="data.rangeStart" ng-class="{ 'nxg-invalid': form.paidOffRangeEnd.$error.required || form.paidOffRangeEnd.$error.pattern || form.paidOffRangeEnd.$error.greaterThan }" />
-	    </div>
-		</div>
+      <div class="controls">
+        <input type="text" id="paidOffRangeStart" name="paidOffRangeStart" ng-model="data.rangeStart"
+               ng-required="isRange" ng-pattern="/^[0-9]*$/"
+               ng-class="{ 'nxg-invalid': form.paidOffRangeStart.$error.required || form.paidOffRangeStart.$error.pattern }"/>
+      </div>
+    </div>
 
-	</div><!-- end range of stock numbers -->
+    <div class="control-group half">
+      <label class="control-label" for="paidOffRangeEnd" translate>Stock # Range End</label>
+
+      <div class="controls">
+        <input type="text" id="paidOffRangeEnd" name="paidOffRangeEnd" ng-model="data.rangeEnd" ng-required="isRange"
+               ng-pattern="/^[0-9]*$/" nxg-greater-than="data.rangeStart"
+               ng-class="{ 'nxg-invalid': form.paidOffRangeEnd.$error.required || form.paidOffRangeEnd.$error.pattern || form.paidOffRangeEnd.$error.greaterThan }"/>
+      </div>
+    </div>
+
+  </div>
+  <!-- end range of stock numbers -->
 
   <!-- Stock Number Range Errors -->
   <div ng-show="isRange">
     <label for="paidOffRangeStart" class="text-error"
-      ng-show="form.paidOffRangeStart.$error.required">
+           ng-show="form.paidOffRangeStart.$error.required" translate>
       Please enter a Start Stock Number
     </label>
     <label for="paidOffRangeStart" class="text-error"
-      ng-show="form.paidOffRangeStart.$error.pattern">
+           ng-show="form.paidOffRangeStart.$error.pattern" translate>
       Please enter a valid Start Stock Number
     </label>
     <label for="paidOffRangeEnd" class="text-error"
-    ng-show="form.paidOffRangeEnd.$error.required">
+           ng-show="form.paidOffRangeEnd.$error.required" translate>
       Please enter an End Stock Number
     </label>
     <label for="paidOffRangeEnd" class="text-error"
-    ng-show="form.paidOffRangeEnd.$error.pattern">
+           ng-show="form.paidOffRangeEnd.$error.pattern" translate>
       Please enter a valid End Stock Number
     </label>
     <label for="paidOffRangeEnd" class="text-error"
-    ng-show="!form.paidOffRangeStart.$error.pattern && !form.paidOffRangeEnd.$error.pattern && form.paidOffRangeEnd.$error.greaterThan">
+           ng-show="!form.paidOffRangeStart.$error.pattern && !form.paidOffRangeEnd.$error.pattern && form.paidOffRangeEnd.$error.greaterThan"
+           translate>
       Please enter an End Stock Number that is greater than the Start Stock Number
     </label>
   </div>
   <!-- end errors -->
 
-	<!-- Specific stock number conditional field. -->
-	<div ng-show="isSpecific">
-		<div class="control-group">
-		    <label class="control-label" for="paidOffStockNo">Enter Stock #'s separated by a comma.</label>
-		    <div class="controls">
-		        <input type="text" class="text" id="paidOffStockNos" name="paidOffStockNos" ng-model="data.stockNos" ng-required="isSpecific" ng-pattern="/^([0-9]+[ ]*,[ ]*)*[0-9]+[ ]*[,]?[ ]*$/" ng-class="{ 'nxg-invalid': form.paidOffStockNos.$error.required || form.paidOffStockNos.$error.pattern }" >
-		    </div>
-		  <label for="paidOffStockNos" class="text-error"
-        ng-show="form.paidOffStockNos.$error.required">
+  <!-- Specific stock number conditional field. -->
+  <div ng-show="isSpecific">
+    <div class="control-group">
+      <label class="control-label" for="paidOffStockNo" translate>Enter Stock #'s separated by a comma.</label>
+
+      <div class="controls">
+        <input type="text" class="text" id="paidOffStockNos" name="paidOffStockNos" ng-model="data.stockNos"
+               ng-required="isSpecific" ng-pattern="/^([0-9]+[ ]*,[ ]*)*[0-9]+[ ]*[,]?[ ]*$/"
+               ng-class="{ 'nxg-invalid': form.paidOffStockNos.$error.required || form.paidOffStockNos.$error.pattern }">
+      </div>
+      <label for="paidOffStockNos" class="text-error"
+             ng-show="form.paidOffStockNos.$error.required" translate>
         Please enter one or more Stock Numbers
       </label>
       <label for="paidOffStockNos" class="text-error"
-        ng-show="form.paidOffStockNos.$error.pattern">
+             ng-show="form.paidOffStockNos.$error.pattern" translate>
         Please only enter numbers, commas, or spaces in this field.
       </label>
-		</div>
-	</div><!-- end specific stock numbers -->
+    </div>
+  </div>
+  <!-- end specific stock numbers -->
 </div>

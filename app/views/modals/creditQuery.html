@@ -1,25 +1,25 @@
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Buyer Business Line of Credit Query
 </h3>
 
 <section class="modal-body" nxg-autofocus>
-  <h3>Buyer Information</h3>
+  <h3 translate>Buyer Information</h3>
 
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6">Business Number</p>
+      <p class="span6" translate>Business Number</p>
       <p class="span6 value">{{ business.number }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Auction Access Number(s)</p>
+      <p class="span6" translate>Auction Access Number(s)</p>
       <p class="span6 value">{{ business.auctionAccessNumbers }}</p>
     </li>
         <li class="list-table-row">
-      <p class="span6">Business Name</p>
+      <p class="span6" translate>Business Name</p>
       <p class="span6 value">{{ business.name }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Address</p>
+      <p class="span6" translate>Address</p>
       <p class="span6 value">
         {{ business.address }} <br/>
         {{ business.city }}, {{ business.state }} {{ business.zipCode }}
@@ -33,8 +33,8 @@
 
   <table class="table table-striped table-secondary" ng-show="business.creditQuery.retrieved">
     <thead>
-      <th>Credit Type</th>
-      <th>Available Credit</th>
+      <th translate>Credit Type</th>
+      <th translate>Available Credit</th>
     </thead>
     <tr ng-repeat="credit in business.creditQuery.results">
       <td class="table-label center">{{ credit.CreditType }}</td>
@@ -45,11 +45,11 @@
 
 <div class="modal-footer">
   <button ng-click="close()" class="btn-cta" ng-class="{ 'cta-secondary': !business.creditQuery.requested, 'cta-primary': business.creditQuery.requested }" >
-    <span ng-show="business.creditQuery.requested">Close Window</span>
-    <span ng-hide="business.creditQuery.requested">Cancel</span>
+    <span ng-show="business.creditQuery.requested" translate>Close Window</span>
+    <span ng-hide="business.creditQuery.requested" translate>Cancel</span>
   </button>
   <button nxg-autofocus ng-click="business.creditQuery.get()"
           type="submit"
           class="btn-cta cta-primary"
-          ng-show="!business.creditQuery.requested">Query</button>
+          ng-show="!business.creditQuery.requested" translate>Query</button>
 </div>

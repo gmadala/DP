@@ -13,7 +13,8 @@ describe('Controller: FloorplanCtrl', function () {
     shouldSucceed = true,
     initController,
     httpBackend,
-    myPlan;
+    myPlan,
+    addressesMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q, Floorplan, FloorplanUtil, $httpBackend) {
@@ -33,12 +34,71 @@ describe('Controller: FloorplanCtrl', function () {
       }
     });
 
+    addressesMock = {
+      getFlooredBusinessAddresses: function() {
+        return [
+          {
+            AddressId: '1',
+            Line1: '380 NEVADA SW',
+            Line2: null,
+            City: 'HURON',
+            State: 'SD',
+            Zip: '57350',
+            Phone: '0000000000',
+            Fax: '0000000000',
+            IsActive: false,
+            IsPhysicalInventory: false,
+            HasFloorplanFlooredAgainst: true,
+            HasApprovedFloorplanFlooredAgainst: false,
+            IsTitleReleaseAddress: false,
+            IsMailingAddress: false,
+            IsPostOfficeBox: false
+          },
+          {
+            AddressId: '2',
+            Line1: 'PO Box 1274',
+            Line2: null,
+            City: 'Huron',
+            State: 'SD',
+            Zip: '57350',
+            Phone: '6053521637',
+            Fax: '6053524528',
+            IsActive: true,
+            IsPhysicalInventory: false,
+            HasFloorplanFlooredAgainst: true,
+            HasApprovedFloorplanFlooredAgainst: false,
+            IsTitleReleaseAddress: false,
+            IsMailingAddress: true,
+            IsPostOfficeBox: true
+          },
+          {
+            AddressId: '4',
+            Line1: '1794 1/2 E. Hwy 14',
+            Line2: null,
+            City: 'Huron',
+            State: 'SD',
+            Zip: '57350',
+            Phone: '6053521637',
+            Fax: '6053524528',
+            IsActive: false,
+            IsPhysicalInventory: true,
+            HasFloorplanFlooredAgainst: true,
+            HasApprovedFloorplanFlooredAgainst: true,
+            IsTitleReleaseAddress: false,
+            IsMailingAddress: false,
+            IsPostOfficeBox: false
+          }
+        ]
+      }
+    };
+
     initController = function () {
       FloorplanCtrl = $controller('FloorplanCtrl', {
         $scope: scope,
         $stateParams: stateParamsMock,
         Floorplan: floorplan,
-        FloorplanUtil: floorplanUtil
+        FloorplanUtil: floorplanUtil,
+        Addresses: addressesMock
       });
 
       myPlan = new FloorplanUtil('FlooringDate', stateParamsMock.filter);

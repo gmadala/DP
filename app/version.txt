@@ -1,2 +1,12 @@
-NextGear Capital v4.0.11.2
+NextGear Capital v5.0.1
 =================================
+
+VO-2589	Fees Table Should be Hidden if a user has no fees
+VO-2910	Floor Plan – Overflow Issues
+VO-2911	Payments & Checkout – Overflow Issues
+VO-3129	Auctions – Seller Floorplan Search
+VO-3184	Floor Plan: Sortable Header Wrapping Instances
+VO-3189	Move "View Report" buttons down to left-align with other UI elements.
+VO-3204	Btn Style Change, Floor Submission
+VO-3212	Padding/Margin layout inconsistencies
+VO-3627	Merge i18n into develop

@@ -15,7 +15,6 @@ describe('Model: User', function () {
   }));
 
   describe('recoverUserName method', function () {
-
     var response;
 
     beforeEach(function () {
@@ -41,11 +40,9 @@ describe('Model: User', function () {
       expect(success).toHaveBeenCalled();
       expect(error).not.toHaveBeenCalled();
     });
-
   });
 
   describe('fetchPasswordResetQuestions method', function () {
-
     var response,
       messages;
 
@@ -95,7 +92,6 @@ describe('Model: User', function () {
       expect(success).not.toHaveBeenCalled();
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
     });
-
   });
 
   describe('initSession', function() {
@@ -112,11 +108,9 @@ describe('Model: User', function () {
       expect(user.refreshStatics).toHaveBeenCalled();
       expect($q.all).toHaveBeenCalledWith(['a', 'b']);
     });
-
   });
 
   describe('resetPassword method', function () {
-
     var response;
 
     beforeEach(function () {
@@ -168,11 +162,9 @@ describe('Model: User', function () {
       expect(success).toHaveBeenCalled();
       expect(error).not.toHaveBeenCalled();
     });
-
   });
 
   describe('Authenticate + isLoggedIn + logout method', function () {
-
     var segmentio,
       logoutHttpHandler;
 
@@ -189,7 +181,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           BusinessNumber: 1234,
@@ -197,7 +189,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });
@@ -326,7 +318,6 @@ describe('Model: User', function () {
       expect(success.mostRecentCall.args[0]).toEqual(null);
       expect(failure).not.toHaveBeenCalled();
     });
-
   });
 
   describe('dropSession method', function () {
@@ -340,47 +331,41 @@ describe('Model: User', function () {
   });
 
   describe('refreshStatics + getStatics methods', function () {
-
     var resultData;
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: resultData
       });
     });
 
-    it('should be null if not loaded', function () {
-      expect(user.getStatics()).toBe(null);
-    });
-
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/v1_1/Static');
-      user.refreshStatics();
+      httpBackend.expectGET('/Dealer/v1_2/Static');
+      var result;
+
+      user.refreshStatics().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should return a promise for an object with the expected properties (defaulted if missing)', function () {
-      user.refreshStatics().then(function (result) {
-        expect(result).toBeDefined();
-        expect(angular.isArray(result.productTypes)).toBe(true);
-        expect(angular.isArray(result.colors)).toBe(true);
-        expect(angular.isArray(result.states)).toBe(true);
-        expect(angular.isArray(result.dealerAddresses)).toBe(true);
-        expect(angular.isArray(result.bankAccounts)).toBe(true);
-        expect(angular.isArray(result.linesOfCredit)).toBe(true);
-        expect(angular.isArray(result.titleLocationOptions)).toBe(true);
-        expect(angular.isArray(result.paymentMethods)).toBe(true);
-      });
-      httpBackend.flush();
-    });
+      var result;
 
-    it('result should also be cached and available by get method', function () {
-      user.refreshStatics().then(function (result) {
-        expect(user.getStatics()).toBe(result);
+      user.refreshStatics().then(function (_result_) {
+        result = _result_;
       });
       httpBackend.flush();
+      $rootScope.$digest();
+      expect(result).toBeDefined();
+      expect(angular.isArray(result.productTypes)).toBe(true);
+      expect(angular.isArray(result.colors)).toBe(true);
+      expect(angular.isArray(result.states)).toBe(true);
+      expect(angular.isArray(result.titleLocationOptions)).toBe(true);
+      expect(angular.isArray(result.paymentMethods)).toBe(true);
     });
 
     it('should map properties from the API when present', function () {
@@ -388,72 +373,58 @@ describe('Model: User', function () {
         ProductType: [],
         Colors: [],
         States: [],
-        DealerADdresses: [],
-        BankAccounts: [],
-        LinesOfCredit: [],
         TitleLocationOptions: [],
         PaymentMethods: []
       });
 
-      user.refreshStatics();
+      var result;
+      user.refreshStatics().then(function(_result_) {
+        result = _result_;
+      });
       httpBackend.flush();
-      var statics = user.getStatics();
+      $rootScope.$digest();
 
-      expect(statics.productTypes).toBe(resultData.ProductType);
-      expect(statics.colors).toBe(resultData.Colors);
-      expect(statics.states).toBe(resultData.States);
-      expect(statics.locations).toBe(resultData.DealerAddresses);
-      expect(statics.bankAccounts).toBe(resultData.BankAccounts);
-      expect(statics.linesOfCredit).toBe(resultData.LinesOfCredit);
-      expect(statics.titleLocationOptions).toBe(resultData.TitleLocationOptions);
-      expect(statics.paymentMethods).toBe(resultData.PaymentMethods);
+      expect(result.productTypes).toBe(resultData.ProductType);
+      expect(result.colors).toBe(resultData.Colors);
+      expect(result.states).toBe(resultData.States);
+      expect(result.titleLocationOptions).toBe(resultData.TitleLocationOptions);
+      expect(result.paymentMethods).toBe(resultData.PaymentMethods);
     });
-
   });
 
   describe('refreshInfo + getInfo + infoPromise methods', function () {
-
     var resultData;
 
     beforeEach(function () {
       resultData = {};
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: resultData
       });
     });
 
-    it('should be null if not loaded', function () {
-      expect(user.getInfo()).toBe(null);
-    });
-
     it('should call the expected endpoint', function () {
-      httpBackend.expectGET('/Dealer/Info');
-      user.refreshInfo();
+      httpBackend.expectGET('/Dealer/v1_2/Info');
+      var result;
+
+      user.refreshInfo().then(function(_result_) {
+        result = _result_;
+      });
+
+      $rootScope.$digest();
       expect(httpBackend.flush).not.toThrow();
     });
 
-    it('should return a promise for the result data', function () {
-      user.refreshInfo().then(function (result) {
-        expect(result).toBe(resultData);
+    it('should return a promise for an object', function () {
+      var result;
+
+      user.refreshInfo().then(function (_result_) {
+        result = _result_;
       });
       httpBackend.flush();
+      $rootScope.$digest();
+      expect(result).toBe(resultData);
     });
-
-    it('result should also be cached and available by get method', function () {
-      user.refreshInfo().then(function (result) {
-        expect(user.getInfo()).toBe(result);
-      });
-      httpBackend.flush();
-    });
-
-    it('should return the same promise from infoPromise and refreshInfo', function() {
-      var refreshInfo = user.refreshInfo();
-      expect(user.infoPromise()).toBe(refreshInfo);
-    });
-
-
-
   });
 
   describe('isDealer method', function () {
@@ -463,7 +434,7 @@ describe('Model: User', function () {
     });
 
     it('should return true if dealer info DealerAuctionStatusForGA flag is Dealer', function () {
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           DealerAuctionStatusForGA: 'Dealer'
@@ -475,7 +446,7 @@ describe('Model: User', function () {
     });
 
     it('should return false if dealer info DealerAuctionStatusForGA flag is anything else', function () {
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: {
           DealerAuctionStatusForGA: 'foo'
@@ -526,20 +497,33 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });
     });
 
-    it('should return undefined if user info is not loaded', function () {
-      expect(user.canPayBuyer()).not.toBeDefined();
+    it('should call user.getInfo', function() {
+      spyOn(user, 'getInfo').andReturn($q.when({}));
+      var result;
+
+      user.canPayBuyer().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(user.getInfo).toHaveBeenCalled();
+      expect(result).toBe(false); // since the properties to check are all undefined
+
     });
+
+    // it('should return undefined if user info is not loaded', function () {
+    //   expect(user.canPayBuyer()).not.toBeDefined();
+    // });
 
     it('should return true if user is dealer and IsBuyerDirectlyPayable and HasUCC are both true', function () {
       userInfo.DealerAuctionStatusForGA = 'Dealer';
@@ -547,7 +531,13 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(user.canPayBuyer()).toBe(true);
+
+      var result;
+      user.canPayBuyer().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(result).toBe(true);
     });
 
     it('should return false if IsBuyerDirectlyPayable or HasUCC are false in user info', function () {
@@ -556,14 +546,25 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(user.canPayBuyer()).toBe(false);
+
+      var result;
+      user.canPayBuyer().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(result).toBe(false);
 
       userInfo.DealerAuctionStatusForGA = 'Dealer';
       userInfo.IsBuyerDirectlyPayable = true;
       userInfo.HasUCC = false;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(user.canPayBuyer()).toBe(false);
+      
+      user.canPayBuyer().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(result).toBe(false);
     });
 
     it('should return false if user is an auction rather than a dealer', function () {
@@ -572,7 +573,13 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(user.canPayBuyer()).toBe(false);
+      
+      var result;
+      user.canPayBuyer().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(result).toBe(false);
     });
 
   });
@@ -591,19 +598,15 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/Info').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
         Success: true,
         Data: userInfo
       });
 
-      httpBackend.whenGET('/Dealer/v1_1/Static').respond({
+      httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
         Data: {}
       });
-    });
-
-    it('should return null if user info is not loaded', function () {
-      expect(user.getPaySellerOptions()).toBe(null);
     });
 
     it('should return both options, false (pay buyer) first, if pay buyer is allowed', function () {
@@ -612,7 +615,13 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(angular.equals(user.getPaySellerOptions(), [false, true])).toBe(true);
+      
+      var result;
+      user.getPaySellerOptions().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(angular.equals(result, [false, true])).toBe(true);
     });
 
     it('should return only true (force pay seller) if pay buyer is not allowed', function () {
@@ -621,7 +630,13 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      expect(angular.equals(user.getPaySellerOptions(), [true])).toBe(true);
+
+      var result;
+      user.getPaySellerOptions().then(function(_result_) {
+        result = _result_;
+      });
+      $rootScope.$digest();
+      expect(angular.equals(result, [true])).toBe(true);
     });
 
     it('should return the same array instance on every call to avoid infinite $watch loops', function () {
@@ -629,12 +644,16 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
+
       var res1, res2;
-      res1 = user.getPaySellerOptions();
-      res2 = user.getPaySellerOptions();
+      user.getPaySellerOptions().then(function(_result_) {
+        res1 = _result_;
+      });
+      user.getPaySellerOptions().then(function(_result_) {
+        res2 = _result_;
+      });
+      $rootScope.$digest();
       expect(res1 === res2).toBe(true);
     });
-
   });
-
 });

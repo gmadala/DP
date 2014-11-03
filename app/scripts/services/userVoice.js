@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('UserVoice', function ($window, nxgConfig) {
+  .factory('UserVoice', function ($window, nxgConfig, gettextCatalog) {
 
     return {
       init: function (apiKey, ssoToken, isDealer, BusinessNumber, BusinessName) {
@@ -45,8 +45,8 @@ angular.module('nextgearWebApp')
           'default_mode': 'support',
           'forum_id': forumId,
           'custom_template_id': customTemplateId, // custom stylesheet editable on <subdomain>.uservoice.com/admin
-          'support_tab_name': 'Technical Support',
-          'tab_label': 'Feedback & Support',
+          'support_tab_name': gettextCatalog.getString('Technical Support'),
+          'tab_label': gettextCatalog.getString('Feedback & Support'),
           'tab_color': '#135889',
           'tab_position': 'middle-right',
           'tab_inverted': false

@@ -83,8 +83,9 @@ angular.module('nextgearWebApp')
             OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM,
-            PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.BusinessAddressId
+            PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
           };
+
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
             angular.forEach(results.Floorplans, function (floorplan) {
@@ -105,9 +106,14 @@ angular.module('nextgearWebApp')
       },
       addTitleURL: function (item) {
         if (!item.StockNumber) { return item; }
-        var buyerBusinessNumber = item.BuyerBusinessNumber || User.getInfo().BusinessNumber;
-        var displayId = buyerBusinessNumber + '-' + item.StockNumber;
-        item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
+
+        var buyerBusinessNumber, displayId;
+        User.getInfo().then(function(info) {
+          buyerBusinessNumber = item.BuyerBusinessNumber || info.BusinessNumber;
+          displayId = buyerBusinessNumber + '-' + item.StockNumber;
+          item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
+        });
+
         return item;
       },
       sellerHasTitle: function(floorplanId, hasTitle) {

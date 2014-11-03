@@ -233,3 +233,18 @@
   background-color: $highlight;
   border-bottom: 3px solid $primary;
 }
+
+.nav-language-chooser {
+  margin: 0 auto;
+  width: 390px;
+
+  .icon-globe {
+    display: block;
+    float: left;
+    margin-top: -6px;
+  }
+
+  .cta {
+    margin-top: 16px;
+  }
+}

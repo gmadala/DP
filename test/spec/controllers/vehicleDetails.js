@@ -22,7 +22,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
       initialize,
       $q,
       addressesMock,
-      cancelSucceed;
+      cancelSucceed,
+      invAddr;
 
   beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, _$q_, $dialog, _api_, _Payments_) {
     rootScope = $rootScope;
@@ -68,11 +69,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         SellerAddressCity: 'Rochester',
         SellerAddressState: 'NY',
         SellerAddressZip: '14607',
-        InventoryAddressLine1: '456 South Ave',
-        InventoryAddressLine2: 'Bldg. 3',
-        InventoryAddressCity: 'New York',
-        InventoryAddressState: 'NY',
-        InventoryAddressZip: '10001',
+        PhysicalInventoryAddressId: '1',
         FloorplanStatusName: 'Approved',
         FlooringDate: '07/09/14',
         TotalDaysFloored: 5,
@@ -101,12 +98,33 @@ describe('Controller: VehicleDetailsCtrl', function () {
       FloorplanId: '456id'
     };
 
+    invAddr = {
+      AddressId: '1',
+      Line1: '380 NEVADA SW',
+      Line2: null,
+      City: 'HURON',
+      State: 'SD',
+      Zip: '57350',
+      Phone: '0000000000',
+      Fax: '0000000000',
+      IsActive: false,
+      IsPhysicalInventory: true,
+      HasFloorplanFlooredAgainst: false,
+      HasApprovedFloorplanFlooredAgainst: false,
+      IsTitleReleaseAddress: false,
+      IsMailingAddress: false,
+      IsPostOfficeBox: false
+    };
+
     addressesMock = {
       getActivePhysical: function() {
         return [
           { AddressId: '1' },
           { AddressId: '2' }
         ]
+      },
+      getAddressObjectFromId: function() {
+        return invAddr;
       }
     };
 
@@ -124,13 +142,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     userMock = {
       getInfo: function() {
-        return {
-          BusinessNumber: '789'
-        }
-      },
-      getStatics: function() {
-        return {
-          dealerAddresses: [
+        return $q.when({
+          BusinessNumber: '789',
+          DealerAddresses: [
             {
               IsActive: true,
               IsPhysicalInventory: true,
@@ -142,7 +156,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
               AddressId: '1234'
             }
           ]
-        };
+        });
       }
     };
 
@@ -471,6 +485,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
   describe('FlooringInfo Object', function() {
     it('should build out address objects for seller and inventory', function() {
       expect(scope.flooringInfo.inventoryAddress).toBeDefined();
+      expect(scope.flooringInfo.inventoryAddress).toBe(invAddr);
       expect(scope.flooringInfo.sellerAddress).toBeDefined();
     });
 
@@ -514,18 +529,10 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
     describe('cancelInventoryChanges function', function() {
       it('should set the inventoryAddress to what it was and update the showEditInventoryLocation flag', function() {
-        var newAddr = { Line1: '123 foo' };
-
-        var oldAddr = {
-          Line1: detailsMock.FloorplanInfo.InventoryAddressLine1,
-          Line2: detailsMock.FloorplanInfo.InventoryAddressLine2,
-          City: detailsMock.FloorplanInfo.InventoryAddressCity,
-          State: detailsMock.FloorplanInfo.InventoryAddressState,
-          Zip: detailsMock.FloorplanInfo.InventoryAddressZip,
-        };
+        var newAddr = { AddressId: '2' };
 
         // inventory address should be based on our mock data.
-        expect(scope.flooringInfo.inventoryAddress).toEqual(oldAddr);
+        expect(scope.flooringInfo.inventoryAddress).toBe(invAddr);
         scope.flooringInfo.showInventorySelect();
 
         // we want to fake selecting a new option in the menu.
@@ -533,7 +540,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
         // now we cancel
         scope.flooringInfo.cancelInventoryChanges();
-        expect(scope.flooringInfo.inventoryAddress).toEqual(oldAddr);
+        expect(scope.flooringInfo.inventoryAddress).toBe(invAddr);
         expect(scope.flooringInfo.showEditInventoryLocation).toBe(false);
       });
     });

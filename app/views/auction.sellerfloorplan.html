@@ -1,19 +1,19 @@
 <div nxg-search
-     title="Find a Floor Plan"
+     title="{{ 'Find a Floor Plan' | translate }}"
      class="search-form"
-     prompt="VIN, Make, Model, or Year"
-     filter-label="Filter by Status"
+     prompt="{{ 'VIN, Make, Model, or Year' | translate }}"
+     filter-label="{{ 'Filter by Status' | translate }}"
      filter-options="filterOptions"
      active-criteria="floorplanData.searchCriteria"
      on-search="floorplanData.search(floorplanData.searchCriteria)"
      on-clear="floorplanData.resetSearch(filterOptions)"
-     help-text="Date range based on Date Floored OR Disbursement Date."
+     help-text="{{ 'Date range based on Date Floored OR Disbursement Date.' | translate }}"
      filterable="true">
 </div>
 
 <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
   <h2 class="well-title">Floor Plan</h2>
-  <p class="notice-box" ng-switch-when="false">
+  <p class="notice-box" ng-switch-when="false" translate>
     Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
   </p>
   <section ng-switch-when="true"
@@ -26,37 +26,37 @@
         <th class="sortable"
             ng-click="floorplanData.sortBy('FlooringDate')"
             ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
-            Dates <span class="sortArrows"></span>
+            <span translate>Dates</span> <span class="sortArrows"></span>
         </th>
         <th class="sortable"
             ng-click="floorplanData.sortBy('UnitMake')"
             ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
-          Description <span class="sortArrows"></span>
+          <span translate>Description</span> <span class="sortArrows"></span>
         </th>
-        <th>Status</th>
-        <th>Purchased For</th>
+        <th translate>Status</th>
+        <th translate>Purchased For</th>
         <th class="sortable"
             ng-click="floorplanData.sortBy('BuyerBusinessName')"
             ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'BuyerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
-          Buyer<span class="sortArrows"></span>
+          <span translate>Buyer</span><span class="sortArrows"></span>
         </th>
-        <th>Ticket No.</th>
-        <th>Title Location</th>
-        <th>Title</th>
+        <th translate>Ticket No.</th>
+        <th translate>Title Location</th>
+        <th translate>Title</th>
       </thead>
 
       <tr ng-repeat="item in floorplanData.results">
         <td class="date">
           <h4>{{ (item.FlooringDate | moment) || 'n/a'}}</h4>
-          <p>Floored</p>
+          <p translate>Floored</p>
           <br/>
           <h4>{{ (item.DisbursementDate | moment) || 'n/a' }}</h4>
-          <p>Disbursement</p>
+          <p translate>Disbursement</p>
         </td>
         <td class="description-narrow">
           <p class="lockup-major" nxg-highlight="item.Description" highlight="item.data.query"></p>
           <p class="lockup-minor caps">
-            VIN: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
+            <span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
           </p>
         </td>
         <td>
@@ -82,8 +82,9 @@
                     tooltip-placement="top"
                     tooltip-trigger="click"
                     tooltip-html="true"
-                    tooltip-html-unsafe="NextGear has been notified of this change and will be sending funding soon."
-                    tooltip-animation="true"></label>
+                    tooltip-html-unsafe="{{ 'NextGear has been notified of this change and will be sending funding soon.' | translate }}"
+                    tooltip-animation="true" translate>
+            </label>
             <label for="{{ item.FloorplanId }}" class="cr-label">
               I Have the Title
             </label>

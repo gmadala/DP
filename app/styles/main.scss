@@ -6,26 +6,6 @@
 
 @import "basic/variables";
 @import "../components/sass-bootstrap/lib/bootstrap";
-/*
- * TODO: import only parts of bootstrap we know we'll need:
- * @import "../components/sass-bootstrap/lib/variables";
- * @import "../components/sass-bootstrap/lib/mixins";
- * @import "../components/sass-bootstrap/lib/reset";
- * @import "../components/sass-bootstrap/lib/scaffolding";
- * @import "../components/sass-bootstrap/lib/grid";
- * @import "../components/sass-bootstrap/lib/layouts";
-
- * @import "../components/sass-bootstrap/lib/forms";
- * @import "../components/sass-bootstrap/lib/tables";
- * @import "../components/sass-bootstrap/lib/wells";
- * @import "../components/sass-bootstrap/lib/buttons";
-
- * @import "../components/sass-bootstrap/lib/modals";
- * @import "../components/sass-bootstrap/lib/tooltip";
- * @import "../components/sass-bootstrap/lib/utilities";
- */
-
- // we can override bootstrap variables here as well.
 
 @import "basic/mixins";
 @import "basic/base";
@@ -54,5 +34,11 @@
 @import "pages/titleReleases";
 @import "pages/resources";
 @import "pages/analytics";
+@import "pages/auctions";
+@import "pages/vehicleDetails";
+
+// Language specific overrides
+@import "lang/es";
+@import "lang/fr_CA";
 
 @import "tempRefactor";

@@ -21,7 +21,7 @@ describe('Directive: navBar', function () {
       $rootScope = _$rootScope_;
       scope = $rootScope.$new();
 
-       stateMock = {
+      stateMock = {
         current: 'floorcar',
         transitionTo: function(newState) {
           stateMock.current = newState;
@@ -34,12 +34,7 @@ describe('Directive: navBar', function () {
       dMock = {
         isDealer: function(){ return true; },
         getInfo: function(){
-          return {
-            thing: 'this',
-          };
-        },
-        infoPromise: function() {
-          return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP })
+          return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
         },
         isLoggedIn: function() {
           return true;
@@ -47,7 +42,7 @@ describe('Directive: navBar', function () {
       };
       aMock = {
         isDealer: function(){ return false; },
-        infoPromise: function() {
+        getInfo: function() {
           return $q.when({ DisplayTitleReleaseProgram: false })
         },
         isLoggedIn: function() {
@@ -69,18 +64,18 @@ describe('Directive: navBar', function () {
     }));
 
     it('should attach a user object to the scope', function() {
+      scope.$apply();
       expect(scope.user).toBeDefined();
     });
 
     describe('user object', function() {
+      beforeEach(function() {
+        scope.$apply(); // trigger initial $watch
+      });
+
       it('should have an isDealer function', function() {
         expect(scope.user.isDealer).toBeDefined();
         expect(typeof scope.user.isDealer).toBe('function');
-      });
-
-      it('should have an info function', function() {
-        expect(scope.user.info).toBeDefined();
-        expect(typeof scope.user.info).toBe('function');
       });
 
       it('should have a logout function that dispatches a userRequestedLogout event', function() {

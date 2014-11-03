@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function ($scope, api, segmentio, metric, User) {
+  .controller('AuctionReportsCtrl', function ($scope, api, segmentio, metric, User, gettextCatalog) {
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
      * when saving the report PDF.
@@ -12,21 +12,23 @@ angular.module('nextgearWebApp')
 
     $scope.documents = [
       {
-        'title': 'Credit Availability Query History (PDF)',
+        'title': gettextCatalog.getString('Credit Availability Query History (PDF)'),
         'url': api.contentLink('/report/creditavailabilityqueryhistory/CreditAvailability', {})
       },
       {
-        'title': 'Receivable Detail (PDF)',
+        'title': gettextCatalog.getString('Receivable Detail (PDF)'),
         'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
 
     // set the subsidiary options
-    $scope.subsidiaries = User.getInfo().ManufacturerSubsidiaries || [];
-    $scope.selectedSubsidiary = $scope.subsidiaries.length > 0 ? $scope.subsidiaries[0] : null;
+    User.getInfo().then(function(info) {
+      $scope.subsidiaries = info.ManufacturerSubsidiaries || [];
+      $scope.selectedSubsidiary = $scope.subsidiaries.length > 0 ? $scope.subsidiaries[0] : null;
+      $scope.businessId = info.BusinessId;
+    });
 
     $scope.viewDisbursementDetail = function () {
-
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.disFormValidity = angular.copy($scope.disForm);
 
@@ -42,7 +44,7 @@ angular.module('nextgearWebApp')
         businessName = '-' + $scope.selectedSubsidiary.BusinessName.replace(/\W+/g, ''); // remove non-alphanumeric
       }
       else {
-        businessId = User.getInfo().BusinessId;
+        businessId = $scope.businessId;
         businessName = '';
       }
 
@@ -58,6 +60,4 @@ angular.module('nextgearWebApp')
         reportName: 'Disbursement Detail'
       });
     };
-
-
   });

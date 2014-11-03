@@ -1,14 +1,13 @@
 <div class="row-fluid dealer-search">
 
   <div class="span6 well">
-    <h2 class="well-title">Dealer Number Search</h2>
-
+    <h2 class="well-title" translate>Dealer Number Search</h2>
     <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row-fluid search" novalidate>
-      <p> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
+      <p translate> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
 
       <div class="row-fluid">
         <div class="span8 form-block">
-          <label for="dealerNum">NextGear Capital Dealer Number</label>
+          <label for="dealerNum" translate>NextGear Capital Dealer Number</label>
 
           <div class="styled-input with-btn">
             <input type="text"
@@ -25,24 +24,23 @@
             </button>
           </div>
 
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.noresults.dealerNumber">
+          <label for="dealerNum" class="text-error" ng-show="numberSearch.noresults.dealerNumber" translate>
             No results found, please enter a valid Dealer Number.
           </label>
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber">
+          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber" translate>
             Please enter a Dealer Number.
           </label>
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber">
+          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber" translate>
             Please enter a numeric value.
           </label>
         </div>
       </div>
 
-        <h2 class="span12
-        ">- OR -</h2>
+        <h2 class="span12" translate>- OR -</h2>
 
       <div class="row-fluid">
         <div class="span8 form-block">
-          <label for="auctionAccessNum">Auction Access Number</label>
+          <label for="auctionAccessNum" translate>Auction Access Number</label>
           <div class="styled-input with-btn">
             <input type="text"
                    id="auctionAccessNum"
@@ -56,13 +54,13 @@
               <span nxg-icon="icon-search"></span>
            </button>
           </div>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber">
+          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber" translate>
             No results found, please enter a valid Auction Access Number.
           </label>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber">
+          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber" translate>
             Please enter an Auction Access Number.
           </label>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber">
+          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber" translate>
             Please enter a numeric value.
           </label>
         </div>
@@ -72,24 +70,24 @@
   </div>
 
   <div class="span6 well">
-    <h2 class="well-title">Dealer Name Search</h2>
+    <h2 class="well-title" translate>Dealer Name Search</h2>
 
     <form name="nameSearchForm" class="row-fluid search" novalidate>
-      <p> To look up a dealer in Dealer search, use a combination of their Name and City or
+      <p translate> To look up a dealer in Dealer search, use a combination of their Name and City or
       State. </p>
 
       <div class="row-fluid">
         <div class="span8 form-block">
-          <label for="dealerName">Dealer Name</label>
+          <label for="dealerName" translate>Dealer Name</label>
           <input type="text"
                  id="dealerName"
                  ng-model="nameSearch.query.dealerName"
                  ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName || nameSearch.invalid.minlength }">
 
-          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.dealerName">
+          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.dealerName" translate>
             Please enter a Dealer Name.
           </label>
-          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.minlength">
+          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.minlength" translate>
             Please enter at least 3 characters.
           </label>
         </div>
@@ -97,7 +95,7 @@
 
       <div class="row-fluid form-block">
         <div class="span5">
-          <label for="city">City</label>
+          <label for="city" translate>City</label>
 
           <input type="text"
                  id="city"
@@ -107,11 +105,11 @@
         </div>
 
         <div class="span2">
-          <h2 class="form-separator center">- OR -</h2>
+          <h2 class="form-separator center" translate>- OR -</h2>
         </div>
 
         <div class="span4">
-          <label for="state">State</label>
+          <label for="state" translate>State</label>
           <div class="style-select auto">
             <select id="state" class="input-medium" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
               <option value=""></option>
@@ -120,16 +118,16 @@
         </div>
       </div>
       <div class="span12">
-        <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat">
+        <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat" translate>
           City names must only have letters and spaces.
         </label>
 
-        <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState">
+        <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState" translate>
           Please enter a City or select a State.
         </label>
       </div>
 
-      <button class="btn-cta cta-primary" type="submit" ng-click="nameSearch.search()">Search Dealers</button>
+      <button class="btn-cta cta-primary" type="submit" ng-click="nameSearch.search()" translate>Search Dealers</button>
     </form>
   </div>
 </div>

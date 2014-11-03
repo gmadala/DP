@@ -59,7 +59,7 @@ describe('Model: VehicleDetails', function () {
         result = r;
       });
       expect(result).toBe(getDetailsReturn);
-      expect(api.request).toHaveBeenCalledWith('GET', '/floorplan/expandeddetail/1234');
+      expect(api.request).toHaveBeenCalledWith('GET', '/floorplan/v1_1/expandeddetail/1234');
     });
 
     it('should add up Floor Plan Total', function () {

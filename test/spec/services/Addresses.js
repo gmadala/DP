@@ -18,8 +18,11 @@ describe('Service: Addresses', function () {
         Fax: '0000000000',
         IsActive: false,
         IsPhysicalInventory: false,
+        HasFloorplanFlooredAgainst: false,
+        HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: false,
-        IsMailingAddress: false
+        IsMailingAddress: false,
+        IsPostOfficeBox: false
       },
       {
         AddressId: '2',
@@ -32,8 +35,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: false,
+        HasFloorplanFlooredAgainst: false,
+        HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: false,
-        IsMailingAddress: true
+        IsMailingAddress: true,
+        IsPostOfficeBox: true
       },
       {
         AddressId: '3',
@@ -46,8 +52,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
+        HasFloorplanFlooredAgainst: true,
+        HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: false,
-        IsMailingAddress: false
+        IsMailingAddress: false,
+        IsPostOfficeBox: false
       },
       {
         AddressId: '4',
@@ -60,8 +69,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: false,
         IsPhysicalInventory: true,
-        IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        HasFloorplanFlooredAgainst: true,
+        HasApprovedFloorplanFlooredAgainst: true,
+        IsTitleReleaseAddress: false,
+        IsMailingAddress: false,
+        IsPostOfficeBox: false
       },
       {
         AddressId: '5',
@@ -74,8 +86,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
+        HasFloorplanFlooredAgainst: true,
+        HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        IsMailingAddress: false,
+        IsPostOfficeBox: false
       },
       {
         AddressId: '6',
@@ -88,8 +103,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
-        IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        HasFloorplanFlooredAgainst: false,
+        HasApprovedFloorplanFlooredAgainst: false,
+        IsTitleReleaseAddress: false,
+        IsMailingAddress: false,
+        IsPostOfficeBox: true
       },
       {
         AddressId: '7',
@@ -102,8 +120,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
-        IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        HasFloorplanFlooredAgainst: false,
+        HasApprovedFloorplanFlooredAgainst: false,
+        IsTitleReleaseAddress: false,
+        IsMailingAddress: false,
+        IsPostOfficeBox: true
       },
       {
         AddressId: '8',
@@ -116,8 +137,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
-        IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        HasFloorplanFlooredAgainst: true,
+        HasApprovedFloorplanFlooredAgainst: true,
+        IsTitleReleaseAddress: false,
+        IsMailingAddress: false,
+        IsPostOfficeBox: true
       },
       {
         AddressId: '9',
@@ -130,8 +154,11 @@ describe('Service: Addresses', function () {
         Fax: '6053524528',
         IsActive: true,
         IsPhysicalInventory: true,
-        IsTitleReleaseAddress: true,
-        IsMailingAddress: false
+        HasFloorplanFlooredAgainst: false,
+        HasApprovedFloorplanFlooredAgainst: false,
+        IsTitleReleaseAddress: false,
+        IsMailingAddress: false,
+        IsPostOfficeBox: true
       }
     ];
   
@@ -148,15 +175,11 @@ describe('Service: Addresses', function () {
     Addresses.init(MockAddresses);
   }));
 
-  it('should have an initFlooredBusinessAdddresses function', function () {
-    expect(angular.isFunction(Addresses.initFlooredBusinessAddresses)).toBe(true);
-  });
-
   it('should have a getAddresses function', function () {
     expect(angular.isFunction(Addresses.getAddresses)).toBe(true);
   });
 
-  it('getAddresses should honor the active, physical and titlRelease arguments and return the appropriate addresses', function () {
+  it('getAddresses should honor the active, physical and titleRelease arguments and return the appropriate addresses', function () {
     var res = Addresses.getAddresses(true /*active*/);
     expect(res.length).toBe(7);
     expect(res[0].AddressId).toBe('2');
@@ -186,6 +209,13 @@ describe('Service: Addresses', function () {
     expect(res[3].AddressId).toBe('7');
     expect(res[4].AddressId).toBe('8');
     expect(res[5].AddressId).toBe('9');
+
+    res = Addresses.getAddresses(null, null, null, true /*flooredAgainst*/);
+    expect(res.length).toBe(4);
+    expect(res[0].AddressId).toBe('3');
+    expect(res[1].AddressId).toBe('4');
+    expect(res[2].AddressId).toBe('5');
+    expect(res[3].AddressId).toBe('8');
   });
 
   it('should have a getActivePhysical function', function() {
@@ -214,4 +244,48 @@ describe('Service: Addresses', function () {
     expect(res[1].AddressId).toBe('5');
   });
 
+  it('should have a getDefaultTitleAddress function', function() {
+    expect(angular.isFunction(Addresses.getDefaultTitleAddress)).toBe(true)
+  });
+
+  it('getDefaultTitleAddress should return the default title address', function() {
+    var res = Addresses.getDefaultTitleAddress();
+    expect(res.AddressId).toBe('5');
+  });
+
+  it('should have a getFlooredBusinessAddresses function', function() {
+    expect(angular.isFunction(Addresses.getFlooredBusinessAddresses)).toBe(true);
+  });
+
+  it('getFlooredBusinessAddresses should return addresses that have a floorplan floored against them', function() {
+    var res = Addresses.getFlooredBusinessAddresses();
+    expect(res.length).toBe(4);
+    expect(res[0].AddressId).toBe('3');
+    expect(res[1].AddressId).toBe('4');
+    expect(res[2].AddressId).toBe('5');
+    expect(res[3].AddressId).toBe('8');
+  });
+
+  it('should have a getApprovedFlooredBusinessAddresses function', function() {
+    expect(angular.isFunction(Addresses.getApprovedFlooredBusinessAddresses)).toBe(true);
+  });
+
+  it('getApprovedFlooredBusinessAddresses should return addresses that have an approved floorplan floored against them', function() {
+    var res = Addresses.getApprovedFlooredBusinessAddresses();
+    expect(res.length).toBe(2);
+    expect(res[0].AddressId).toBe('4');
+    expect(res[1].AddressId).toBe('8');
+  });
+
+  it('should have a getAddressObjectFromId function', function() {
+    expect(angular.isFunction(Addresses.getAddressObjectFromId)).toBe(true);
+  });
+
+  it('getAddressObjectFromId should return the address object with the given id', function() {
+    var res1 = Addresses.getAddressObjectFromId('1'),
+        res2 = Addresses.getAddressObjectFromId('3');
+
+    expect(res1).toBe(MockAddresses[0]);
+    expect(res2).toBe(MockAddresses[2]);
+  });
 });

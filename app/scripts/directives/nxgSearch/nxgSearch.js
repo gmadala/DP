@@ -22,14 +22,14 @@ angular.module('nextgearWebApp')
         filterable: '=',
         helpText: '@',
         info: '@',
-        showLocationFilter: '&' // whether to display the filter for inventory location
+        locs: '=showLocationFilter' // whether to display the filter for inventory location
       },
       controller: 'NxgSearchCtrl'
     };
   })
-  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses) {
+  .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses, gettextCatalog) {
     $scope.showHelpText = ($attrs.helpText) ? true : false;
-    $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? $attrs.showLocationFilter : false;
+    $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? !!$attrs.showLocationFilter : false;
 
     $scope.dateRangeShown = true;
     if (angular.isDefined($attrs.showDateRange)) {
@@ -61,17 +61,20 @@ angular.module('nextgearWebApp')
 
     // if we have inventory locations to filter, set them here.
     $scope.inventoryLocations = [];
-    var locs = Addresses.getFlooredBusinessAddresses();
 
     // Add default 'view all' options
-    $scope.inventoryLocations.push({ label: 'View All', value: undefined });
+    $scope.inventoryLocations.push({ label: gettextCatalog.getString('View All'), value: undefined });
 
     // Populate inventory location options in proper format (label & value)
-    angular.forEach(locs, function(value) {
+    angular.forEach($scope.locs, function(value) {
       var obj = {
-        label: $filter('address')(value),
+        label: $filter('address')(value, 'oneLineSelect'),
         value: value
       };
+
+      if (!value.IsActive) {
+        obj.label = '(INACTIVE) ' + obj.label;
+      }
       $scope.inventoryLocations.push(obj);
     });
 

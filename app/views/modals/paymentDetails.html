@@ -1,27 +1,27 @@
-<h3 class="modal-header">
+<h3 class="modal-header" translate>
   Payment Details
 </h3>
 
 <div class="modal-body to-edge">
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6">Receipt No.</p>
+      <p class="span6" translate>Receipt No.</p>
       <p class="span6 value">{{ payment.ReceiptNumber }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Payment Made</p>
+      <p class="span6" translate>Payment Made</p>
       <p class="span6 value">{{ payment.PaymentDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Effective Date</p>
+      <p class="span6" translate>Effective Date</p>
       <p class="span6 value">{{ payment.EffectiveDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Payment Method</p>
+      <p class="span6" translate>Payment Method</p>
       <p class="span6 value">{{ payment.PaymentMethod }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Account</p>
+      <p class="span6" translate>Account</p>
       <p class="span6 value">{{ payment.Account }}</p>
     </li>
   </ul>
@@ -34,16 +34,16 @@
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row">
-      <p class="span6">Total</p>
+      <p class="span6" translate>Total</p>
       <p class="span6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6">Receipt Total</p>
+      <p class="span6" translate>Receipt Total</p>
       <p class="span6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
     </li>
   </ul>
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-primary">Close Window</button>
+  <button ng-click="close()" class="btn-cta cta-primary" translate>Close Window</button>
 </div>

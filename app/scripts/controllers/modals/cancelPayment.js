@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CancelPaymentCtrl', function ($scope, $injector, dialog, options, Payments) {
+  .controller('CancelPaymentCtrl', function ($scope, $injector, dialog, options, Payments, gettextCatalog) {
     $scope.payment = options.payment;
-    $scope.title = options.title ? options.title : 'Cancel Payment';
+    $scope.title = options.title ? options.title : gettextCatalog.getString('Cancel Payment');
 
     $scope.handleNo = function () {
       dialog.close(false);

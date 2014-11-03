@@ -8,35 +8,15 @@ describe('Directive: nxgSearch', function () {
 
     var ctrl,
       scope,
-      attrs,
-      AddressesMock;
+      attrs;
 
-    beforeEach(inject(function ($rootScope, $controller, User) {
+    beforeEach(inject(function ($rootScope, $controller, Addresses) {
       scope = $rootScope.$new();
-
       attrs = {};
-      AddressesMock = {
-        getFlooredBusinessAddresses: function() {
-          return [
-            {
-              Line1: '123 Main St',
-              Line2: 'Apt 4',
-              City: 'Anytown',
-              State: 'NY'
-            },
-            {
-              Line1: '34 Elm St',
-              City: 'Anytown',
-              State: 'NY'
-            }
-          ];
-        }
-      };
 
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs,
-        User: AddressesMock
+        $attrs: attrs
       });
     }));
 
@@ -52,8 +32,7 @@ describe('Directive: nxgSearch', function () {
       };
       ctrl = $controller('NxgSearchCtrl', {
         $scope: scope,
-        $attrs: attrs,
-        User: AddressesMock
+        $attrs: attrs
       });
 
       scope.$apply();
@@ -141,9 +120,6 @@ describe('Directive: nxgSearch', function () {
         scope.clear({preventDefault: angular.noop});
         expect(scope.onClear).toHaveBeenCalled();
       });
-
     });
-
   });
-
 });

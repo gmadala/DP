@@ -149,7 +149,9 @@ angular.module('nextgearWebApp')
     };
 
     // Get list of states
-    $scope.states = User.getStatics().states;
+    User.getStatics().then(function(statics) {
+      $scope.states = statics.states;
+    });
 
     /*** Private ***/
     var prv = {

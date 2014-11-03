@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, customerSupportPhone, segmentio) {
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, customerSupportPhone, segmentio, gettextCatalog) {
 
     segmentio.track(metric.VIEW_TITLE_RELEASE_PAGE);
     $scope.metric = metric; // make metric names available to templates
@@ -41,19 +41,19 @@ angular.module('nextgearWebApp')
 
     $scope.filterOptions = [
       {
-        label: 'View All',
+        label: gettextCatalog.getString('View All'),
         value: TitleReleases.filterValues.ALL
       },
       {
-        label: 'Released',
+        label: gettextCatalog.getString('Released'),
         value: TitleReleases.filterValues.OUTSTANDING
       },
       {
-        label: 'Eligible',
+        label: gettextCatalog.getString('Eligible'),
         value: TitleReleases.filterValues.ELIGIBLE
       },
       {
-        label: 'Not Eligible',
+        label: gettextCatalog.getString('Not Eligible'),
         value: TitleReleases.filterValues.NOT_ELIGIBLE
       }
     ];
@@ -140,17 +140,17 @@ angular.module('nextgearWebApp')
     };
 
     $scope.titleReleaseUnavailable = function() {
-      var title = 'Title Release Unavailable',
-          message = 'We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at ' + customerSupportPhone +'.',
-          buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-primary'}];
+      var title = gettextCatalog.getString('Title Release Unavailable'),
+          message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}.', { phoneNumber: customerSupportPhone }),
+          buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();
     };
 
     $scope.titleReleaseLimitReached = function() {
-      var title = 'Title Release Limit Reached',
-          message = 'The floor plan you have selected for title release would put you over the financial plan limits for this account.',
-          buttons = [{label: 'Close Window', cssClass: 'btn-cta cta-primary'}];
+      var title = gettextCatalog.getString('Title Release Limit Reached'),
+          message = gettextCatalog.getString('The floor plan you have selected for title release would put you over the financial plan limits for this account.'),
+          buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
       return $dialog.messageBox(title, message, buttons).open();
     };
