@@ -3,8 +3,9 @@
 angular.module('nextgearWebApp')
   .factory('Addresses', function() {
 
-    var addresses,
-      PO_BOX_REGEX = /(p\.?[\s]*o\.?[\s]*b[\s]*o[\s]*x[\s]*|\bp[o|0]st\.?\s*[o|0]ffice\s*b[o|0]x)\s*#?\d+/;
+    var addresses;
+    // For reference:
+    // PO_BOX_REGEX = /(p\.?[\s]*o\.?[\s]*b[\s]*o[\s]*x[\s]*|\bp[o|0]st\.?\s*[o|0]ffice\s*b[o|0]x)\s*#?\d+/;
 
     function isNullOrUndefined(val) {
       return val === undefined || val === null;
@@ -24,12 +25,12 @@ angular.module('nextgearWebApp')
       },
       getActivePhysical: function() {
         // returns addresses that are active and physical
-        return this.getAddresses(true /*active*/, true /*physical*/, null);
+        return this.getAddresses(true /*active*/, true /*physical*/, null, null);
       },
       getTitleAddresses: function() {
         // returns addresses that are active, but filters out PO boxes
-        return this.getAddresses(true, null, null).filter(function(item) {
-          return !PO_BOX_REGEX.test(item.Line1.toLowerCase());
+        return this.getAddresses(true, null, null, null).filter(function(item) {
+          return !item.IsPostOfficeBox;//!PO_BOX_REGEX.test(item.Line1.toLowerCase());
         });
       },
       getDefaultTitleAddress: function() {

@@ -158,7 +158,7 @@ describe('Service: Addresses', function () {
         HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: false,
         IsMailingAddress: false,
-        IsPostOfficeBox: false
+        IsPostOfficeBox: true
       }
     ];
   
