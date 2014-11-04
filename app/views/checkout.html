@@ -101,7 +101,7 @@
                 <p class="lockup-minor caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
                 <p class="lockup-minor caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
 
-                <div nxg-alternate-address="payment" enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                <div nxg-alternate-address="payment" is-enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
               </td>
               <td>
                 <!-- is not scheduled or is scheduled for today -->
