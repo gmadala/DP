@@ -18,6 +18,11 @@
   text-align: right;
 }
 
+.static-option {
+  padding: 5px 0 0;
+  margin: 0 0 10px;
+}
+
 .text-error {
   @extend %small;
   color: $danger;
