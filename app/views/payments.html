@@ -137,11 +137,6 @@
               Status<span class="sortArrows"></span>
             </th>
             <th class="sortable"
-                ng-click="sortPaymentsBy('UnitStatus')"
-                ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
-              Status<span class="sortArrows"></span>
-            </th>
-            <th class="sortable"
                 ng-click="sortPaymentsBy('AmountDue')"
                 ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
               <span translate>Payment</span><span class="sortArrows"></span>
@@ -180,10 +175,6 @@
             <td> <!-- Vehicle Payments: floored column -->
               <p class="lockup-major">{{ payment.FlooringDate | moment }}</p>
               <p class="lockup-minor" translate>{{ payment.DaysOnFloorplan }} days</p>
-            </td>
-
-            <td>
-              <p class="lockup-minor">{{ payment.UnitStatus }}</p>
             </td>
 
             <td>
