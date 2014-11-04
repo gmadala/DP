@@ -223,6 +223,52 @@
   }
 }
 
+/*
+ * Table with Fixed Header (ex. Recently Floored table on Dashboard)
+ * Meant to be used as a wrapper class; do not apply to table itself
+ */
+.table-fixed-header {
+  height: 222px;
+  position: relative;
+  padding-top: 30px;
+
+  .table-fixed-header-inner {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .header-bkgd {
+    background-color: $white;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid $tableBorder;
+  }
+
+  .table {
+    overflow-y: auto;
+    width: 100%;
+
+    th, tr th {
+      padding: 0;
+      border: 0;
+
+      .th-inner {
+        position: absolute;
+        top: 0;
+        padding: 8px 15px;
+        border-left: 1px solid $tableBorder;
+      }
+    }
+
+    th:first-child .th-inner, tr th:first-child .th-inner {
+      border: 0;
+    }
+  }
+}
+
 // Table-specific type classes. To override bootstrap,
 // we have to be extra-specific.
 .table-symbol, .table td.table-symbol {

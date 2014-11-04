@@ -142,7 +142,8 @@ angular.module('nextgearWebApp')
         getList: function () {
           return info ? info.BankAccounts : undefined;
         },
-        selectedAccount: null
+        selectedAccount: null,
+        singleAccount: info.BankAccounts.length === 1
       };
 
       $scope.bankAccounts.defaultHelper = OptionDefaultHelper.create([
@@ -152,7 +153,6 @@ angular.module('nextgearWebApp')
         }
       ]).applyDefaults($scope, $scope.bankAccounts);
     });
-
 
     $scope.unappliedFunds = {
       available: Payments.getAvailableUnappliedFunds(),
