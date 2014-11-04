@@ -2,6 +2,10 @@
 //  NOTICES
 // =========
 
+/*
+ * NOTICE
+ * Large-scale notification displayed on login page
+ */
 .notice {
   @extend %center;
   width: 75%;
@@ -27,6 +31,10 @@
   }
 }
 
+/*
+ * NOTICE BOX
+ * Component most often used to display 'no results' messaging
+ */
 .notice-box {
   color: $text;
   font-size: $tiny-font-size;
@@ -34,13 +42,34 @@
   padding: 10px 15px;
   margin: 0;
 
-  .boxed + &, .boxed + div & {
-    border-top: 0;
-  }
-
   &.text-error {
     color: $error;
     padding: 10px 15px;
+  }
+}
+
+/*
+ * INFO BLOCK
+ * Component with info icon used to display messaging to user.   
+ */
+ .info-block {
+  @extend %full-width;
+  display: table;
+  height: 45px;
+  margin-bottom: 10px;
+
+  .info-block-image, .info-block-text {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+  .info-block-image {
+    width: 20px;
+  }
+
+  .info-block-text {
+    padding: 8px 10px 8px 10px;
   }
 }
 
@@ -50,6 +79,14 @@
   line-height: $baseLineHeight;
   padding: 5px 10px 10px;
   margin: 10px 0
+}
+
+.color-danger {
+  color: $danger !important;
+}
+
+.color-success {
+  color: $success !important;
 }
 
 .warning {

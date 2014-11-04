@@ -157,6 +157,90 @@
   }
 }
 
+/*
+ * DATA TABLE COMPONENT
+ * Table meant to display side by side data,
+ * with the assumption of 2 columns.
+ */
+.list-table {
+  @extend %full-width;
+  padding: 10px 20px;
+  margin: 0;
+
+  &.padded {
+    padding: 20px;
+  }
+
+  &.mini {
+    padding: 0;
+  }
+}
+  .list-table-row {
+    @extend .clearfix;
+    @extend .row-fluid;
+    padding: 0 0 0;
+    margin: 0;
+
+    .table-symbol {
+      @extend %float-l;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .mini & {
+      padding: 0;
+
+      p, a {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      p:first-child {
+        padding-right: 10px;
+      }
+    }
+
+    [class*="span"] {
+      min-height: 0;
+    }
+
+    p, a {
+      font-size: 14px;
+    }
+
+    p {
+      margin: 0 0 5px;
+    }
+  }
+
+  .list-table-emphasis > * {
+    font-weight: bold;
+  }
+
+  .list-table-spacer {
+    height: 20px;
+  }
+
+  .value {
+    color: $text;
+    font-weight: bold;
+
+    .highlight & {
+      color: $highlight;
+    }
+
+    .value-note {
+      font-weight: normal;
+    }
+  }
+
+  .list-table-hr {
+    border-top: 1px solid $dataTableBorder;
+    padding-top: 10px;
+    margin-top: 5px;
+  }
+
+// General table styles
 .table td,
 .table th {
   // Some columns need to be a certain
@@ -226,6 +310,7 @@
 /*
  * Table with Fixed Header (ex. Recently Floored table on Dashboard)
  * Meant to be used as a wrapper class; do not apply to table itself
+ * Inspired by http://salzerdesign.com/test/fixedTable.html (1)
  */
 .table-fixed-header {
   height: 222px;

@@ -156,3 +156,50 @@
 p.no-results {
   padding: 1em;
 }
+
+// Page-specific well classes
+.dash-well {
+  position: relative;
+  height: 270px;
+
+  &.nxg-dash-calendar-container {
+    height: auto;
+    min-height: 270px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.analytics-well {
+  position: relative;
+  height: 400px;
+}
+
+.auction-well {
+  position: relative;
+  height: 270px;
+
+  .counter-list {
+    padding: 0 10px;
+  }
+
+  .cta-full {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.settings-well {
+  padding-bottom: 20px;
+
+  [class*="span"] {
+    position: relative;
+  }
+}
+
+.details-well {
+  height: 260px;
+}
