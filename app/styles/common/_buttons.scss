@@ -258,11 +258,15 @@
   @include border-radius($borderRadius);
   background: #E6E7E8;
   position: relative;
-  width: 200px;
-  height: 24px;
+  width: 100%;
+  height: auto;
   margin: 10px auto;
   border: 1px solid $toggle-color;
   z-index: 0;
+
+  &.btn-toggle-static { // for calendar toggles
+    width: 200px;
+  }
 
   .btn {
     @extend %float-l;
@@ -270,21 +274,22 @@
     @extend %small;
     background: transparent;
     width: 50%;
-    height: 24px;
+    height: auto;
     position: relative;
     color: $toggle-color;
-    padding: 2px;
+    padding: 6px;
     border: 0;
     margin: 0;
     z-index: 2
   }
 
   .btn-slider {
+    @include box-sizing(content-box);
     @include border-radius($borderRadius);
     position: absolute;
     background: $toggle-slider-color;
     top: 0;
-    height: 24px;
+    height: 100%;
     width: 50%;
     border: 1px solid $toggle-color;
     margin: -1px;
