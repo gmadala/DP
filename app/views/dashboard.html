@@ -218,7 +218,7 @@
       <div class="span7">
         <div class="chart-legend">
           <h6 class="static-option" ng-show="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
-          <div class="style-select auto" ng-show="dashboardData.LinesOfCredit.length > 1">
+          <div class="style-select auto" ng-hide="dashboardData.LinesOfCredit.length == 1">
             <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit" ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
           </div>
           <table class="table table-legend">

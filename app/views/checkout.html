@@ -257,7 +257,10 @@
       <section class="well-item well-dark">
         <!-- Bank Account -->
         <label for="bankAccount" translate>Bank Account</label>
-        <div class="style-select">
+        <p class="static-option" ng-show="bankAccounts.singleAccount">
+          {{ bankAccounts.selectedAccount.BankAccountName }}
+        </p>
+        <div class="style-select" ng-hide="bankAccounts.singleAccount">
           <select name="bankAccount" id="bankAccount"
                   ng-model="bankAccounts.selectedAccount"
                   ng-disabled="submitInProgress"
