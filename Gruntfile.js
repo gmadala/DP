@@ -290,7 +290,8 @@ module.exports = function(grunt) {
     },
     env: {
       dev: {
-        ENV: grunt.option('target') || 'production'
+        ENV: grunt.option('target') || 'production',
+        GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
       }
     },
     preprocess: {
@@ -386,6 +387,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'gitinfo',
     'env',
     'clean:dist',
     'jshint',
