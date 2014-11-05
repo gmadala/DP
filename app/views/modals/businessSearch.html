@@ -40,35 +40,30 @@
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessName')"
               ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-            <span translate>Business Name</span>
-            <span class="sortArrows"></span>
+            <nxg-sortable sortable-text="{{ 'Business Name' | translate }}"></nxg-sortable>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessLegalName')"
               ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-            <span translate>Legal Name</span>
-            <span class="sortArrows"></span>
+            <nxg-sortable sortable-text="{{ 'Legal Name' | translate }}"></nxg-sortable>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('BusinessNumber')"
               ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-            <span translate>Business</span>
-            <span class="sortArrows"></span>
+            <nxg-sortable sortable-text="{{ 'Business No.' | translate }}"></nxg-sortable>
           </th>
           <th class="bus-auctionNum" ng-show="data.searchBuyersMode" translate>
-            Auction Access #
+            Auction Access No.
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('City')"
               ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-            <span translate>City</span>
-            <span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'City' | translate }}"></nxg-sortable>
           </th>
           <th class="sortable-secondary"
               ng-click="sortBy('State')"
               ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-            <span translate>State</span>
-            <span class="sortArrows"></span>
+            <nxg-sortable sortable-text="{{ 'State' | translate }}"></nxg-sortable>
           </th>
         </thead>
         <tbody>

@@ -34,32 +34,32 @@
             <th class="sortable"
                 ng-click="floorplanData.sortBy('FlooringDate')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Floored</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Floored' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="floorplanData.sortBy('UnitMake')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Description</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="floorplanData.sortBy('Status')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'Status', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Status</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Status' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="floorplanData.sortBy('PurchaseDate')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'PurchaseDate', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Purchased</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Purchased' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="floorplanData.sortBy('SellerBusinessName')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'SellerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Seller</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Seller' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="floorplanData.sortBy('LastPaymentDate')"
                 ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'LastPaymentDate', desc : floorplanData.searchCriteria.sortDescending }">
-              <span translate>Last Payment</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Last Payment' | translate }}"></nxg-sortable>
             </th>
             <th translate>Title</th>
           </thead>

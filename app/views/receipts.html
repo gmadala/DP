@@ -33,22 +33,22 @@
               <th class="sortable"
                   ng-click="sortBy('CreateDate')"
                   ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-                <span translate>Payment Date</span><span class="sortArrows"></span>
+                <nxg-sortable sortable-text="{{ 'Payment Date' | translate }}"></nxg-sortable>
               </th>
               <th class="sortable"
                   ng-click="sortBy('TransactionNumber')"
                   ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-                <span translate>Receipt No.</span><span class="sortArrows"></span>
+                <nxg-sortable sortable-text="{{ 'Receipt No.' | translate }}"></nxg-sortable>
               </th>
               <th class="sortable"
                   ng-click="sortBy('PaymentMethod')"
                   ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-                <span translate>Payment Description</span><span class="sortArrows"></span>
+                <nxg-sortable sortable-text="{{ 'Payment Description' | translate }}"></nxg-sortable>
               </th>
               <th class="sortable"
                   ng-click="sortBy('AmountProvided')"
                   ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-                <span translate>Amount</span><span class="sortArrows"></span>
+                <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
               </th>
               <th translate>
                 Export Receipt(s)

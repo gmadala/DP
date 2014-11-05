@@ -2,25 +2,51 @@
 //  SORTING
 // =========
 
-// Sorting arrows are used in the business search modal and on the tableList
-// search pages for floorplan, receipts, payments, etc. The class
-// ".sortable" is used to display the sorting arrows with a single
-// container for the arrows and the text.
+/* 
+ * Sorting arrows are used in the business search modal and on
+ * search pages for floorplan, receipts, payments, etc. 
+ * These classes must be used in conjunction with one another
+ * for this to work.
+ *
+ * Sample HTML:
+ *  <th class="sortable">
+ *    <div class="sortable-inner">
+ *      <span class="sortable-text"></span>
+ *      <span class="sortArrows"></span>
+ *    </div>
+ *  </th>
+ *
+ */
 
 .sortable {
   cursor: pointer;
   @include user-select(none);
 
-  .sortArrows {
-    display: inline-block;
+  .sortable-inner {
     position: relative;
-    top: -6px;
+    height: auto;
+    padding-right: 10px;
+  }
+
+  .sortable-text {
+    @extend %full-width;
+    position: relative;
+  }
+
+  .sortable-text, .sortArrows {
+    display: block;
+  }
+
+  .sortArrows {
+    position: absolute;
+    top: 47%;
+    @include translateY(-50%);
+    right: 0;
 
     &::before, &::after {
       content: '';
       display: block;
       @include box(0);
-      float: right;
       position: relative;
       top: 0px;
       left: 1px;
@@ -29,8 +55,7 @@
     }
 
     &::after {
-      top: 8px;
-      left: 7px;
+      top: 3px;
     }
 
     &::before {
@@ -66,6 +91,7 @@
 
 .sortable-secondary {
   @extend .sortable;
+  height: 30px;
 
   &.sorted {
     background-color: darken($white, 15%);

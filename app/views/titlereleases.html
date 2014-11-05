@@ -39,17 +39,17 @@
             <th class="sortable"
                 ng-click="sortBy('FlooringDate')"
                 ng-class="{ sorted : sortField == 'FlooringDate', desc : sortDescending }">
-              <span translate>Floored</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Floored' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="sortBy('UnitMake')"
                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
-              <span translate>Description</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
             </th>
             <th class="sortable"
                 ng-click="sortBy('PurchaseDate')"
                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
-              <span translate>Purchased</span><span class="sortArrows"></span>
+              <nxg-sortable sortable-text="{{ 'Purchased' | translate }}"></nxg-sortable>
             </th>
             <th translate>Release Status</th>
             <th translate>Actions</th>
