@@ -61,9 +61,10 @@ angular.module('nextgearWebApp')
               QuestionId: question.QuestionId,
               QuestionText: question.Answer
             };
-          })
+          }),
+          IsMobileApp: false
         };
-        return api.request('POST', '/userAccount/resetpassword', data);
+        return api.request('POST', '/userAccount/v1_2/resetpassword', data);
       },
 
       changePassword: function(newPassword) {

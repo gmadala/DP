@@ -1,3 +1,4 @@
+
 'use strict';
 
 describe('Model: User', function () {
@@ -135,7 +136,7 @@ describe('Model: User', function () {
             Answer: 'blue'
           }
         ];
-      httpBackend.expectPOST('/userAccount/resetpassword').respond(function (method, url, data) {
+      httpBackend.expectPOST('/userAccount/v1_2/resetpassword').respond(function (method, url, data) {
         requestData = angular.fromJson(data);
         return [200, response, {}];
       });
@@ -151,12 +152,13 @@ describe('Model: User', function () {
         QuestionId: 1,
         QuestionText: 'blue'
       })).toBe(true);
+      expect(requestData.IsMobileApp).toBe(false);
     });
 
     it('should return a promise for the success/failure result', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenPOST('/userAccount/resetpassword').respond(response);
+      httpBackend.whenPOST('/userAccount/v1_2/resetpassword').respond(response);
       user.resetPassword('foouser').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalled();
