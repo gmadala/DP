@@ -228,9 +228,9 @@ describe('Model: Floorplan', function () {
       expect(callParams.OrderByDirection).toBe('DESC');
     });
 
-    it('should ask for items sorted by most recent last if sortDesc is set and is false', function () {
+    it('should ask for items sorted by most recent last if sortDescending is set and is false', function () {
       var tempCriteria = angular.copy(defaultCriteria);
-      tempCriteria.sortDesc = false;
+      tempCriteria.sortDescending = false;
       floorplan.search(tempCriteria);
       httpBackend.flush();
       expect(callParams.OrderBy).toBe('FlooringDate');
@@ -239,7 +239,7 @@ describe('Model: Floorplan', function () {
 
     it('should ask for items sorted by an arbitrary column if that column is specified', function () {
       var tempCriteria = angular.copy(defaultCriteria);
-      tempCriteria.sortDesc = true;
+      tempCriteria.sortDescending = true;
       tempCriteria.sortField = 'anyGivenField';
       floorplan.search(tempCriteria);
       httpBackend.flush();
