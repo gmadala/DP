@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
       },
 
       recoverUserName: function(email) {
-        return api.request('POST', '/userAccount/RecoverUserName/' + email);
+        return api.request('POST', '/userAccount/RecoverUserName/' + email + '/false');
       },
 
       fetchPasswordResetQuestions: function(username) {

@@ -27,7 +27,7 @@ describe('Model: User', function () {
     });
 
     it('should post to the expected endpoint', function () {
-      httpBackend.expectPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      httpBackend.expectPOST('/userAccount/RecoverUserName/foo@example.com/false').respond(response);
       user.recoverUserName('foo@example.com');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -35,7 +35,7 @@ describe('Model: User', function () {
     it('should return a promise for the success/failure result', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      httpBackend.whenPOST('/userAccount/RecoverUserName/foo@example.com/false').respond(response);
       user.recoverUserName('foo@example.com').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalled();
