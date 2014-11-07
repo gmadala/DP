@@ -74,7 +74,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         showNavBar: true
       })
       .state('floorplan', {
-        url: '/floorplan',
+        url: '/floorplan?filter',
         templateUrl: 'views/floorplan.html',
         controller: 'FloorplanCtrl',
         pageID: 'Floorplan',

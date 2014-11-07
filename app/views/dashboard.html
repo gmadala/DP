@@ -300,7 +300,7 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/floorplan?filter=approved" translate>Approved</a>
+              <a href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
           </span>
         </div>
       </li>
@@ -315,7 +315,7 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/floorplan?filter=pending" translate>Pending</a>
+              <a href="javascript:void(0)" ng-click="filterFloorplans('pending')"" translate>Pending</a>
           </span>
         </div>
       </li>
@@ -330,7 +330,7 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="#/floorplan?filter=denied" translate>Denied</a>
+              <a href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
           </span>
         </div>
       </li>

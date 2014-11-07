@@ -422,6 +422,12 @@ describe('Controller: DashboardCtrl', function () {
       scope.filterPayments('foofers');
       expect(mockState.transitionTo).toHaveBeenCalledWith('payments', {filter: 'foofers'});
     });
+
+    it('should have a filterFloorplans method that goes to floorplan page with initial filter', function() {
+      expect(typeof scope.filterFloorplans).toBe('function');
+      scope.filterFloorplans('foofers');
+      expect(mockState.transitionTo).toHaveBeenCalledWith('floorplan', {filter: 'foofers'});
+    });
   });
 
   describe('cached summary values', function() {

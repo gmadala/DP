@@ -115,6 +115,16 @@ angular.module('nextgearWebApp')
       $state.transitionTo('payments', param);
     };
 
+    $scope.filterFloorplans = function(filter) {
+      var param;
+
+      if(filter) {
+        param = {filter: filter};
+      }
+      $state.transitionTo('floorplan', param);
+    };
+
+
     $scope.chartData = {};
     $scope.chartOptions =  {
       donutOptions: {
