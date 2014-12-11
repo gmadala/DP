@@ -365,6 +365,17 @@ module.exports = function(grunt) {
           ]
         }
       }
+    },
+    protractor: {
+      options: {
+        keepAlive: true,
+        configFile: "e2e-tests/protractor.conf.js",
+        noColor: false,
+        args: {
+        }
+      },
+      run: {
+      }
     }
   });
 
@@ -383,7 +394,8 @@ module.exports = function(grunt) {
     'clean:server',
     'compass',
     'connect:test',
-    'karma'
+    'karma',
+    'protractor:run'
   ]);
 
   grunt.registerTask('build', [
