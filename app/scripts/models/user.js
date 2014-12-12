@@ -71,12 +71,13 @@ angular.module('nextgearWebApp')
         return api.request('POST', '/UserAccount/usersettings', { Password: newPassword });
       },
 
-      authenticate: function(username, password) {
+      authenticate: function(username, password, languageId) {
         var self = this;
+        var langId = languageId || 1; // defaults to English
         return api.request(
           'POST',
           '/UserAccount/Authenticate', {}, {
-            Authorization: 'CT ' + Base64.encode(username + ':' + password)
+            Authorization: 'CT ' + Base64.encode(username + ':' + password + ':' + langId)
           })
           .then(function(authResult) {
             return self.initSession(authResult).then(function () {
