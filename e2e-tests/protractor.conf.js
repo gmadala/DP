@@ -5,9 +5,11 @@ exports.config = {
     'e2e-*.js'
   ],
 
-  capabilities: {
+  multiCapabilities: [{
+    'browserName': 'firefox'
+  }, {
     'browserName': 'chrome'
-  },
+  }],
 
   baseUrl: 'https://test.discoverdsc.com/eui/',
 

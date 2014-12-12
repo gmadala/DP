@@ -28,7 +28,12 @@ describe('Login page e2e', function () {
     loginPage.setUsername('Example');
     loginPage.setPassword('Password');
 
-    expect(loginPage.getRemember()).toBe(false);
+    expect(loginPage.getRememberUsername()).toBe(false);
+    loginPage.setRememberUsername(true);
+    expect(loginPage.getRememberUsername()).toBe(true);
+    loginPage.setRememberUsername(false);
+    expect(loginPage.getRememberUsername()).toBe(false);
+
     expect(loginPage.getUsername()).toEqual('Example');
     expect(loginPage.getPassword()).toEqual('Password');
     expect(loginPage.getSubmit()).toEqual('Log In');

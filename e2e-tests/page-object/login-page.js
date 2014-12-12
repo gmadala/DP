@@ -6,6 +6,8 @@ var LoginPage = function () {
   this.remember = element(by.model('credentials.remember'));
   this.submit = element(by.buttonText('Log In'));
 
+  this.rememberUsername = element(by.id('rememberUsername'));
+
   this.openPage = function () {
     browser.get('#/login');
   };
@@ -27,8 +29,13 @@ var LoginPage = function () {
     this.password.sendKeys(password);
   };
 
-  this.setRemember = function () {
-    this.remember.click();
+  this.setRememberUsername = function (rememberUsername) {
+    var shouldClick = (this.getRememberUsername() != rememberUsername);
+    if (shouldClick) {
+      // Trick to get clicking a checkbox. The chrome-driver have issue with clicking checkbox directly.
+      // https://code.google.com/p/selenium/issues/detail?id=2766
+      browser.driver.actions().click(this.rememberUsername).perform();
+    }
   };
 
   this.getUsername = function () {
@@ -39,8 +46,8 @@ var LoginPage = function () {
     return this.password.getAttribute('value');
   };
 
-  this.getRemember = function () {
-    return this.remember.isSelected();
+  this.getRememberUsername = function () {
+    return this.rememberUsername.isSelected();
   };
 
   this.getSubmit = function () {
@@ -49,7 +56,6 @@ var LoginPage = function () {
 
   // do-ers
   this.doSubmit = function () {
-    // return the promise after clicking
     this.submit.click();
   };
 
@@ -66,7 +72,10 @@ var LoginPage = function () {
   };
 
   this.doLoginWithRemember = function () {
-
+    this.setUsername('77439IM');
+    this.setPassword('password@1');
+    this.setRememberUsername(true);
+    this.doSubmit();
   };
 
 };
