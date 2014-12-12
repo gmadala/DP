@@ -1,0 +1,23 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "SupportedLanguages": [
+      {
+        "LanguageId": 1,
+        "Locale": "en",
+        "Name": "English"
+      },
+      {
+        "LanguageId": 2,
+        "Locale": "fr",
+        "Name": "French"
+      },
+      {
+        "LanguageId": 3,
+        "Locale": "es",
+        "Name": "Spanish"
+      }
+    ]
+  }
+}
