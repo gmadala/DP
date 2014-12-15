@@ -71,9 +71,15 @@ angular.module('nextgearWebApp')
         return api.request('POST', '/UserAccount/usersettings', { Password: newPassword });
       },
 
-      authenticate: function(username, password, languageId) {
+      authenticate: function(username, password) {
         var self = this;
-        var langId = languageId || 1; // defaults to English
+        var lang = gettextCatalog.currentLanguage;
+        var langId = 1; // defaults to English
+        if (lang === 'fr_CA') {
+          langId = 2;
+        } else if (lang === 'es') {
+          langId = 3;
+        }
         return api.request(
           'POST',
           '/UserAccount/Authenticate', {}, {
