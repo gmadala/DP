@@ -12,3 +12,4 @@ libpeerconnection.log
 /app/styles/main.css
 npm-debug.log
 *.iml
+/target
