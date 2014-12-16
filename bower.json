@@ -16,6 +16,7 @@
     "excanvas_r3.zip": "https://explorercanvas.googlecode.com/files/excanvas_r3.zip",
     "moment": "~2.6.0",
     "angular-strap": "~0.7.6",
+    "bootstrap": "~2.3.2",
     "bootstrap-datepicker": "~1.2.0",
     "angular-ui-utils": "~0.0.4",
     "modernizr": "~2.7.1",
