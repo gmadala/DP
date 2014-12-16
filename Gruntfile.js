@@ -148,7 +148,7 @@ module.exports = function(grunt) {
     processhtml: {
       options: {
         commentMarker: 'processhtml',
-        recursive: true, // for files included via processhtml (aka our svg icons)
+        recursive: true // for files included via processhtml (aka our svg icons)
       },
       dist: {
         files: {
@@ -395,6 +395,9 @@ module.exports = function(grunt) {
     'compass',
     'connect:test',
     'karma',
+    'processhtml:dist',
+    'livereload-start',
+    'connect:livereload',
     'protractor:run'
   ]);
 

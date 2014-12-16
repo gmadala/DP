@@ -14,11 +14,7 @@ function mkdir(path, root) {
 var fs = require('fs');
 mkdir('target/surefire-reports/');
 
-//var seleniumVersion = require('../node_modules/protractor/package.json').webdriverVersions.selenium;
-
 exports.config = {
-  //seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-' + seleniumVersion + '.jar',
-  allScriptsTimeout: 10000,
   specs: [
     'e2e-*.js'
   ],
@@ -30,11 +26,10 @@ exports.config = {
   }],
 
   framework: 'jasmine',
-  baseUrl: 'https://test.discoverdsc.com/eui/',
+  baseUrl: 'http://localhost:9000/',
   allScriptsTimeout: 200000,
   onPrepare: function() {
     require('jasmine-reporters');
-    //require('protractor-linkuisref-locator')(protractor);
     jasmine.getEnv().addReporter(
       new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
     );
