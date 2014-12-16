@@ -52,11 +52,9 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "preupdate-webdriver": "npm install",
-    "update-webdriver": "webdriver-manager update",
-    "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor e2e-tests/protractor.conf.js",
-    "prestart-webdriver": "npm run update-webdriver",
-    "start-webdriver": "webdriver-manager start"
+    "pretest": "npm run update-webdriver",
+    "test": "grunt test",
+    "preinstall": "bower install",
+    "update-webdriver": "webdriver-manager update"
   }
 }
