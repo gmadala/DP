@@ -395,8 +395,6 @@ module.exports = function(grunt) {
     'compass',
     'connect:test',
     'karma',
-    'processhtml:dist',
-    'livereload-start',
     'connect:livereload',
     'protractor:run'
   ]);
