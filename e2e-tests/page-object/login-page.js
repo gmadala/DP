@@ -17,7 +17,7 @@ var LoginPage = function () {
     var password = this.password;
     browser.wait(function () {
       return username.isPresent() && password.isPresent();
-    }, 2000);
+    });
   };
 
   // getters and setters
