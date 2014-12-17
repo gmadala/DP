@@ -148,7 +148,7 @@ module.exports = function(grunt) {
     processhtml: {
       options: {
         commentMarker: 'processhtml',
-        recursive: true, // for files included via processhtml (aka our svg icons)
+        recursive: true // for files included via processhtml (aka our svg icons)
       },
       dist: {
         files: {
@@ -365,6 +365,17 @@ module.exports = function(grunt) {
           ]
         }
       }
+    },
+    protractor: {
+      options: {
+        keepAlive: true,
+        configFile: "e2e-tests/protractor.conf.js",
+        noColor: false,
+        args: {
+        }
+      },
+      run: {
+      }
     }
   });
 
@@ -383,7 +394,9 @@ module.exports = function(grunt) {
     'clean:server',
     'compass',
     'connect:test',
-    'karma'
+    'karma',
+    'connect:livereload',
+    'protractor:run'
   ]);
 
   grunt.registerTask('build', [
