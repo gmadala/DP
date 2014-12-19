@@ -1,3 +1,5 @@
+'use strict';
+
 function mkdir(path, root) {
 
   var dirs = path.split('/'), dir = dirs.shift(), root = (root||'')+dir+'/';
@@ -16,14 +18,18 @@ mkdir('target/surefire-reports/');
 
 exports.config = {
   specs: [
-    'e2e-*.js'
+    'tests/*_spec.js'
   ],
 
-  multiCapabilities: [{
-    'browserName': 'firefox'
-  }, {
-    'browserName': 'chrome'
-  }],
+  //multiCapabilities: [{
+  //  'browserName': 'firefox'
+  //}, {
+  //  'browserName': 'chrome'
+  //}],
+  capabilities: {
+    'browserName': 'chrome',
+    'chromeOptions': {'args': ['--disable-extensions']}
+  },
 
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
@@ -33,6 +39,7 @@ exports.config = {
     jasmine.getEnv().addReporter(
       new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
     );
+    browser.driver.manage().window().maximize();
   },
   jasmineNodeOpts: {
     isVerbose: true,

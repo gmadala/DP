@@ -369,7 +369,7 @@ module.exports = function(grunt) {
     protractor: {
       options: {
         keepAlive: true,
-        configFile: "e2e-tests/protractor.conf.js",
+        configFile: "e2e/protractor.conf.js",
         noColor: false,
         args: {
         }
