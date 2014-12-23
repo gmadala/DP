@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
 
 #: app/views/analytics.html
 msgid "# Purchased"
@@ -194,7 +195,7 @@ msgstr ""
 
 #: app/views/payments.html
 msgid ""
-"Amounts shown are valid through 8pm eastern time\n"
+"Amounts shown are valid through 8pm Eastern Time\n"
 "          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
 "          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
 msgstr ""
@@ -216,10 +217,6 @@ msgstr ""
 #: app/views/login.updateSecurity.html
 #: app/views/profileSettings.html
 msgid "Answer"
-msgstr ""
-
-#: app/views/payments.html
-msgid "Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}, due to our 8pm eastern time cutoff."
 msgstr ""
 
 #: app/views/checkout.html
@@ -251,7 +248,7 @@ msgid "Are you sure you want to logout?"
 msgstr ""
 
 #: app/views/modals/businessSearch.html
-msgid "Auction Access #"
+msgid "Auction Access No."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -351,11 +348,6 @@ msgstr ""
 msgid "Best and Worst Movers by Zipcode"
 msgstr ""
 
-#: app/views/modals/businessSearch.html
-#: app/views/modals/dealerNameSearch.html
-msgid "Business"
-msgstr ""
-
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 msgid "Business Email"
@@ -370,6 +362,11 @@ msgstr ""
 
 #: app/views/modals/businessSearch.html
 msgid "Business Name or Number"
+msgstr ""
+
+#: app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html
+msgid "Business No."
 msgstr ""
 
 #: app/views/modals/creditQuery.html
@@ -504,6 +501,7 @@ msgstr ""
 msgid "Close Details"
 msgstr ""
 
+#: app/scripts/controllers/floorCar.js
 #: app/scripts/controllers/modals/requestCreditIncrease.js
 #: app/scripts/controllers/titleReleases.js
 #: app/views/modals/businessSearch.html
@@ -996,18 +994,12 @@ msgstr ""
 msgid "Find a Floor Plan"
 msgstr ""
 
-#: app/views/auction.bulkflooring.html
-#: app/views/floorcar.html
-msgid "Floor"
-msgstr ""
-
 #: app/views/vehicledetails.html
 msgid "Floor Date"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
 #: app/views/auction.dashboard.html
-#: app/views/auction.sellerfloorplan.html
 #: app/views/dashboard.html
 #: app/views/floorplan.html
 msgid "Floor Plan"
@@ -1023,6 +1015,11 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "Floor Plans"
+msgstr ""
+
+#: app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
+msgid "Floor Vehicle"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
@@ -1114,10 +1111,6 @@ msgstr ""
 #: app/views/auction.reports.html
 #: app/views/reports.html
 msgid "Historical Reports"
-msgstr ""
-
-#: app/views/auction.sellerfloorplan.html
-msgid "I Have the Title"
 msgstr ""
 
 #: app/views/login.html
@@ -1235,7 +1228,7 @@ msgid "Logout"
 msgstr ""
 
 #: app/views/valuelookup.html
-msgid "Lookup Values"
+msgid "Look Up Values"
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
@@ -2498,6 +2491,7 @@ msgstr ""
 #: app/views/auction.sellerfloorplan.html
 #: app/views/dashboard.html
 #: app/views/floorplan.html
+#: app/views/payments.html
 #: app/views/vehicledetails.html
 msgid "Status"
 msgstr ""
@@ -2601,10 +2595,6 @@ msgstr ""
 msgid "There are multiple vehicle styles for this VIN. Please select the appropriate style below."
 msgstr ""
 
-#: app/views/payments.html
-msgid "There are no fees associated with this account."
-msgstr ""
-
 #: app/views/floorplan.html
 #: app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
@@ -2619,6 +2609,10 @@ msgid "This extension request cannot be completed online. Please <a nxg-chat-wit
 msgstr ""
 
 #: app/views/dashboard.html
+msgid "This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+msgstr ""
+
+#: app/views/dashboard.html
 msgid "This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear's Discover system that have been approved and are currently on the NextGear dealer's floor plan."
 msgstr ""
 
@@ -2628,10 +2622,6 @@ msgstr ""
 
 #: app/views/dashboard.html
 msgid "This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied."
-msgstr ""
-
-#: app/views/dashboard.html
-msgid "This temporary credit increase expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
 msgstr ""
 
 #: app/scripts/controllers/dashboard.js
@@ -2670,7 +2660,7 @@ msgstr ""
 
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
-"Title Release Limits for this Account:<br>\n"
+"Title Release Limits:<br>\n"
 "        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
 msgstr ""
 
@@ -2899,7 +2889,7 @@ msgid "VIN should be 10 - 17 characters."
 msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
-msgid "VIN should be 17 characters."
+msgid "VIN should be 6 to 17 characters."
 msgstr ""
 
 #: app/views/valuelookup.html
@@ -3112,6 +3102,10 @@ msgstr ""
 msgid "You do not appear to have any security questions configured. Please contact NextGear for assistance."
 msgstr ""
 
+#: app/views/payments.html
+msgid "You have logged in outside of business hours. Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}."
+msgstr ""
+
 #: app/views/checkout.html
 msgid ""
 "You have no payments selected for checkout. Please visit the\n"
@@ -3205,7 +3199,7 @@ msgid "available"
 msgstr ""
 
 #: app/scripts/directives/navBar/navBar.html
-msgid "dealer # {{ user.info().BusinessNumber }}"
+msgid "dealer # {{ user.BusinessNumber }}"
 msgstr ""
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
