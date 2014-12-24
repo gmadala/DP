@@ -41,12 +41,13 @@ describe('Payments page e2e', function () {
       expect(handles.length).toEqual(1);
     });
     expect(browser.getCurrentUrl()).toContain(receiptsPage.url);
+    expect(receiptsPage.exportReceiptsButton.isEnabled()).not.toBeTruthy();
     expect(receiptsPage.addReceiptButtons.count()).toBeGreaterThan(0);
     expect(receiptsPage.getActiveAddReceiptButton()).toBeDefined();
     receiptsPage.getActiveAddReceiptButton().then(function (addReceiptButton) {
       addReceiptButton.click();
     });
-    expect(receiptsPage.exportReceiptsButton.isDisplayed()).toBeTruthy();
+    expect(receiptsPage.exportReceiptsButton.isEnabled()).toBeTruthy();
     receiptsPage.exportReceiptsButton.click();
     browser.driver.getAllWindowHandles().then(function (handles) {
       expect(handles.length).toEqual(2);
