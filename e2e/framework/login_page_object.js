@@ -11,10 +11,6 @@ LoginPage.prototype = Object.create({}, {
     value: 'http://localhost:9000/#/login'
   },
 
-  homeURL: {
-    value: 'http://localhost:9000/#/Home'
-  },
-
   loginButton: {
     get: function () {
       return browser.element(by.buttonText('Log In'));
@@ -35,7 +31,7 @@ LoginPage.prototype = Object.create({}, {
 
   rememberUsernameCheckbox: {
     get: function () {
-      return browser.element(by.css('.checkbox-img'));  //.model('credentials.remember'));
+      return browser.element(by.css('.checkbox-img'));
     }
   },
 
