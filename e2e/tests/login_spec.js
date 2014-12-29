@@ -59,12 +59,6 @@ describe('Login e2e test', function () {
     loginPage.doLoginWithError();
     expect(browser.element(by.binding('errorMsg')).isPresent()).toBeTruthy();
   });
-
-  it('should transition from login screen with correct credentials.', function () {
-    loginPage.doLogin(credPage.loginUsername, credPage.loginPassword);
-    expect(browser.getLocationAbsUrl()).not.toBe('#/login');
-  });
-
 });
 
 //Forgot Username and Password

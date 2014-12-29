@@ -21,6 +21,10 @@ exports.config = {
     'tests/*_spec.js'
   ],
 
+  suites: {
+    'wmt-51': 'tests/navigation_spec.js'
+  },
+
   //multiCapabilities: [{
   //  'browserName': 'firefox'
   //}, {
@@ -30,6 +34,9 @@ exports.config = {
     'browserName': 'chrome',
     'chromeOptions': {'args': ['--disable-extensions']}
   },
+
+  // to speed up debugging (only works on Chrome)
+  directConnect: true,
 
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
