@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Payments page e2e', function () {
+describe('Receipts page e2e', function () {
 
   var receiptsPage = require('../framework/receipts_page_object.js');
 
