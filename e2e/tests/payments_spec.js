@@ -103,12 +103,13 @@ describe('Payments page e2e', function () {
 
   it('should navigate to checkout when checkout is clicked', function() {
     expect(browser.getCurrentUrl()).toContain(paymentsPage.url);
+    expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
     expect(paymentsPage.schedulePaymentButtons.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveSchedulePaymentButton()).toBeDefined();
     paymentsPage.getActiveSchedulePaymentButton().then(function(schedulePaymentButton) {
       schedulePaymentButton.click();
     });
-    expect(paymentsPage.checkoutButton.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.checkoutButton.isEnabled()).toBeTruthy();
     paymentsPage.checkoutButton.click();
     expect(browser.getCurrentUrl()).not.toContain(paymentsPage.url);
   });
