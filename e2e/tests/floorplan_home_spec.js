@@ -15,6 +15,7 @@ describe('Dealer Portal Floor Plan Page', function(){
   beforeEach(function(){
     browser.ignoreSynchronization = true;
     browser.get(floorPlanPage.floorPlanUrl);
+    floorPlanPage.waitForPage;
   });
 
   it('should find a floor plan - search on VIN', function(){

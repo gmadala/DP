@@ -57,7 +57,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
     beforeEach(function () {
       browser.ignoreSynchronization = true;
-      browser.get(homePage.homeURL);
+      browser.get(homePage.homeUrl);
     });
 
     // simple navigation tests for primary/secondary nav
@@ -155,7 +155,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
     beforeEach(function () {
       browser.ignoreSynchronization = true;
 
-      browser.get(homePage.homeURL);
+      browser.get(homePage.homeUrl);
       dropdown = element(by.css('.user-info'));
       expect(dropdown.isDisplayed()).toBeTruthy();
       expect(dropdown.isEnabled()).toBeTruthy();
@@ -274,7 +274,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
     beforeEach(function () {
       browser.ignoreSynchronization = true;
-      browser.get(homePage.homeURL);
+      browser.get(homePage.homeUrl);
 
     });
 
@@ -297,12 +297,11 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
     beforeEach(function () {
       browser.ignoreSynchronization = true;
-      // browser.get(homePage.homeURL);
+      // browser.get(homePage.homeUrl);
     });
 
     it('Feedback & Support opens Feedback & Support modal', function () {
-      browser.get(homePage.homeURL);
-
+      browser.get(homePage.homeUrl);
       // Verifying that we can click open and click close
 
       // click on a id="uvTabLabel"
@@ -341,7 +340,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 xdescribe('Test Debugger', function () {
   beforeEach(function () {
     browser.ignoreSynchronization = true;
-    browser.get(homePage.homeURL);
+    browser.get(homePage.homeUrl);
   });
 
   it('Debug this test', function () {

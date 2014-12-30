@@ -6,7 +6,7 @@ var RecoverPageObject = function () {
 RecoverPageObject.prototype = Object.create({}, {
 
   recoverUrl: {
-    value: 'http://localhost:9000/#/login/recover'
+    value: '/#/login/recover'
   },
 
   // Locators
@@ -21,15 +21,10 @@ RecoverPageObject.prototype = Object.create({}, {
       return browser.element(by.model('passwordRecovery.username'));
     }
   },
-  okbutton: {
-    get: function () {
-      return browser.element(by.css('[ng-click="close(btn.result)"]'));
-    }
-  },
 
   usernamerecoverysubmit: {
     get: function () {
-      return browser.element(by.css('[ng-click="userNameRecovery.submit()"]')); //by.buttonText("Submit")); //
+      return browser.element(by.css('[ng-click="userNameRecovery.submit()"]'));
     }
   },
 
@@ -117,13 +112,6 @@ RecoverPageObject.prototype = Object.create({}, {
   goToRecoveryPassword: {
     value: function () {
       this.passwordrecoverysubmit.click();
-      browser.waitForAngular();
-    }
-  },
-
-  goToOKButton: {
-    value: function () {
-      this.okbutton.click();
       browser.waitForAngular();
     }
   }

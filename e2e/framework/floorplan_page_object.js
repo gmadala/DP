@@ -33,7 +33,7 @@ FloorPlanObject.prototype = Object.create({}, {
   },
   floorPlanLinks: {
     get: function () {
-      return browser.element.all(by.css('.description-narrow a'));
+      return browser.element.all(by.css('a.lockup-major'));
     }
   },
   floorPlanSearch:{
@@ -49,6 +49,15 @@ FloorPlanObject.prototype = Object.create({}, {
   invLocationsOptions: {
     get: function() {
       return browser.element.all(by.options('i.value as i.label for i in inventoryLocations'));
+    }
+  },
+
+  waitForPage: {
+    get: function () {
+      var floorPlanField = this.floorPlanSearch;
+      return browser.wait(function () {
+        return floorPlanField.isPresent();
+      }, 3000);
     }
   },
   searchButton: {

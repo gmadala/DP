@@ -30,6 +30,19 @@ UtilObject.prototype = Object.create({}, {
     value: function () {
       this.logoutnothanksbutton.click();
     }
+  },
+
+  okbutton: {
+    get: function () {
+      return browser.element(by.css('[ng-click="close(btn.result)"]'));
+    }
+  },
+
+  goToOKButton: {
+    value: function () {
+      this.okbutton.click();
+      browser.waitForAngular();
+    }
   }
 
 });

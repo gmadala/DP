@@ -27,6 +27,17 @@ CredentialsObject.prototype = Object.create({}, {
 
   recoveryQuestionOne: {
     value: 'abcdef'
+  },
+
+  floorPlanStartDate: {
+    value: '01/01/2014'
+  },
+
+  floorPlanEndDate: {
+    value: '12/31/2014'
+  },
+  findFloorPlanVIN:{
+    value: 'CH22415739545567'
   }
 
 });

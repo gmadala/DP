@@ -9,8 +9,8 @@
 
       <div class="cta btn-toggle btn-toggle-static">
         <div class="btn-slider" ng-class="{ 'active-left':isWeekMode(), 'active-right':!isWeekMode() }"></div>
-        <button class="btn" ng-click="changeViewMode('week')" translate>Week</button>
-        <button class="btn" ng-click="changeViewMode('month')" translate>Month</button>
+        <button class="btn" id="week" ng-click="changeViewMode('week')" translate >Week</button>
+        <button class="btn" id="month" ng-click="changeViewMode('month')" translate >Month</button>
       </div>
     </div>
 
@@ -24,8 +24,8 @@
 
       <div class="cta btn-toggle btn-toggle-static">
         <div class="btn-slider" ng-class="{ 'active-left':isWeekMode(), 'active-right':!isWeekMode() }"></div>
-        <button class="btn" ng-click="changeViewMode('week')" translate>Week</button>
-        <button class="btn" ng-click="changeViewMode('month')" translate>Month</button>
+        <button class="btn"  ng-click="changeViewMode('week')" translate>Week</button>
+        <button class="btn"  ng-click="changeViewMode('month')" translate>Month</button>
       </div>
 
       <table class="fc-header" style="width:100%">
@@ -33,7 +33,7 @@
           <tr>
             <td class="fc-header-left"></td>
             <td class="fc-header-center">
-              <span class="fc-button fc-button-prev fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickPrev()" ng-class="{ 'fc-state-disabled': isPast() }">
+              <span id="prevArrow" class="fc-button fc-button-prev fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickPrev()" ng-class="{ 'fc-state-disabled': isPast() }">
                 <span class="fc-text-arrow">‹</span>
               </span>
               <span class="fc-header-space"></span>
@@ -41,7 +41,7 @@
                 <h2>{{ getCalendarTitle() }}</h2>
               </span>
               <span class="fc-header-space"></span>
-              <span class="fc-button fc-button-next fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickNext()">
+              <span id="nextArrow" class="fc-button fc-button-next fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickNext()">
                 <span class="fc-text-arrow">›</span>
               </span>
             </td>
@@ -88,7 +88,7 @@
             </td>
 
             <td>
-              <a class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>
+              <a id="stockNumber{{ payment.StockNumber }}"class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>
             </td>
             <td class="numeric">
               <span>{{ payment.PayoffDue | currency }}</span>
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <button class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+    <button id="showorhide" class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
       <span class="paired-body">
         <span ng-show="isCollapsed" translate>Show Payment Details</span>
         <span ng-show="!isCollapsed" translate>Hide Payment Details</span>
@@ -115,21 +115,21 @@
   <div class="span3 well payment-summary dash-well">
     <h2 class="well-title" translate>Payments Summary</h2>
     <ul class="counter-list">
-      <li class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
+      <li id="overdue" class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" translate>Overdue</p>
           <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
-      <li class="clickable" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
+      <li id="today" class="clickable" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" translate>Due Today</p>
           <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
-      <li class="clickable" ng-click="filterPayments(viewMode)" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
+      <li id="week" class="clickable" ng-click="filterPayments(viewMode)" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_WEEK}}">
         <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
@@ -140,7 +140,7 @@
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>
-      <li class="clickable" ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
+      <li id="fees" class="clickable" ng-click="filterPayments()" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_FEES}}">
         <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
         <div class="dash-lockup">
           <p class="dash-minor" translate
@@ -272,7 +272,7 @@
         <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
       </tr>
     </table>
-    <button class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
+    <button id="viewAllReceipts" class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_ALL_RECEIPTS}}">
       <span class="paired-body" translate>View All Receipts</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
@@ -300,7 +300,7 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
+              <a id="fpApproved" href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
           </span>
         </div>
       </li>
@@ -315,7 +315,7 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="javascript:void(0)" ng-click="filterFloorplans('pending')"" translate>Pending</a>
+              <a id="fpPending" href="javascript:void(0)" ng-click="filterFloorplans('pending')" translate>Pending</a>
           </span>
         </div>
       </li>
@@ -330,13 +330,13 @@
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
-              <a href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
+              <a id="fpDenied" href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
           </span>
         </div>
       </li>
     </ul>
 
-    <button class="btn-cta cta-full cta-secondary btn-floor-plans" ng-click="onClickButtonLink('floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
+    <button id="floorPlan" class="btn-cta cta-full cta-secondary btn-floor-plans" ng-click="onClickButtonLink('floorplan')" nxg-track="{{metric.CLICK_DASHBOARD_VIEW_FLOORPLAN_BUTTON}}">
       <span class="paired-body" translate>Floor Plans</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
@@ -365,7 +365,7 @@
             </thead>
             <tr ng-repeat="item in floorplanData.results">
               <td class="center">{{ item.FlooringDate | moment }}</td>
-              <td class="table-value"><a href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
+              <td class="table-value"><a id="{{ item.Description }}" ng-model="item.StockNumber" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
               <td>{{ item.LineOfCredit }}</td>
               <td>{{ item.FloorplanStatusName }}</td>
             </tr>
