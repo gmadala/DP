@@ -58,11 +58,34 @@ module.exports = {
     var dynamicQuery = /\{\w+\}/,
       defaultDirectory = '__default';
 
-    function serveContent(file, res) {
-      console.log('mockApi is serving a file, path=', file);
-      fs.readFile(file, function(err, json) {
-        res.end(json);
-      });
+    function serveContent(file, req, res) {
+      var authorization;
+      // for authentication, dynamically create the response.
+      if (req.url.indexOf('UserAccount\/Authenticate') > 0) {
+        authorization = req.headers.authorization;
+        authorization = authorization.substring(authorization.indexOf(' '), authorization.length);
+        var response = {
+          Success: true,
+          Message: null,
+          Data:{
+            Token: authorization,
+            ShowUserInitialization: false,
+            UserVoiceToken: 'foo',
+            TemporaryPasswordUsed: false
+          }
+        };
+        console.log('mockApi is serving custom authentication data.');
+        res.end(JSON.stringify(response));
+      } else {
+        authorization = req.headers.authorization;
+        if (authorization === 'CT  YXVjdGlvbjp0ZXN0OjE=' && file.indexOf('Dealer\/v1_2\/Info') > 0) {
+          file = file.replace('Dealer', 'Auction');
+        }
+        console.log('mockApi is serving a file, path=', file);
+        fs.readFile(file, function(err, json) {
+          res.end(json);
+        });
+      }
     }
 
     function serveDefault(folder, req, res) {
@@ -75,7 +98,7 @@ module.exports = {
           break;
         }
       }
-      serveContent(folder + '/' + defaultDirectory + '/' + req.method + '.json', res);
+      serveContent(folder + '/' + defaultDirectory + '/' + req.method + '.json', req, res);
     }
 
     function findFolder(folder, done, failure) {
@@ -141,7 +164,7 @@ module.exports = {
       }
     }
 
-    return function(req, res/*,next*/) {
+    return function(req, res) {
       var originalFolder = apiFolder + req.url,
           file;
 
@@ -156,7 +179,7 @@ module.exports = {
           file = foundFolder + req.method + '.json';
           fs.exists(file, function(exists) {
             if (exists) {
-              serveContent(file, res);
+              serveContent(file, req, res);
             }
             else {
               serveDefault(file, req, res);
@@ -169,4 +192,4 @@ module.exports = {
       });
     };
   }
-}
+};

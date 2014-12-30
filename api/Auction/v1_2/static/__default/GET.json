@@ -1,0 +1,492 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "ProductTypes": [
+      {
+        "ProductId": 1,
+        "ProductName": "Auto"
+      },
+      {
+        "ProductId": 4,
+        "ProductName": "Heavy Truck"
+      },
+      {
+        "ProductId": 2,
+        "ProductName": "Powersports"
+      },
+      {
+        "ProductId": 5,
+        "ProductName": "RV"
+      },
+      {
+        "ProductId": 3,
+        "ProductName": "Salvage Auto"
+      }
+    ],
+    "Colors": [
+      {
+        "ColorId": "b8ae418a-1743-4b09-80ce-f3c89288d31b",
+        "ColorName": "Black"
+      },
+      {
+        "ColorId": "ba62870b-a91c-45e0-b8c8-ba8af489ffd0",
+        "ColorName": "Blue"
+      },
+      {
+        "ColorId": "558c83dc-966d-4964-bd84-b917eb23a41a",
+        "ColorName": "Bronze"
+      },
+      {
+        "ColorId": "4dd240c3-ccfa-4b5e-9908-1ac8cf4fbf63",
+        "ColorName": "Brown"
+      },
+      {
+        "ColorId": "13826ce0-360e-4ea2-b2e0-e5fccefe8187",
+        "ColorName": "Cream"
+      },
+      {
+        "ColorId": "db31e5fc-5736-4834-b41d-de382ec9b4c5",
+        "ColorName": "Gold"
+      },
+      {
+        "ColorId": "fa48e4af-6bea-42a1-95a2-0a9f25ea837c",
+        "ColorName": "Gray"
+      },
+      {
+        "ColorId": "bc4ee443-279d-48c4-8a1a-a90b0006d508",
+        "ColorName": "Green"
+      },
+      {
+        "ColorId": "60ee3787-003f-4841-bea5-b52b70139495",
+        "ColorName": "Maroon"
+      },
+      {
+        "ColorId": "11897168-4621-451c-87d7-2934ecdd5627",
+        "ColorName": "Orange"
+      },
+      {
+        "ColorId": "2a820cee-38d9-414c-83c9-97b699a622cd",
+        "ColorName": "Purple"
+      },
+      {
+        "ColorId": "b3a82c6a-0966-4d9e-9d7e-33bc3ad2c7e8",
+        "ColorName": "Red"
+      },
+      {
+        "ColorId": "8a212234-1d4b-499f-ad6e-9c341331823e",
+        "ColorName": "Silver"
+      },
+      {
+        "ColorId": "60b28af3-461c-42c3-9e56-5a9a9ed658e2",
+        "ColorName": "Tan"
+      },
+      {
+        "ColorId": "adfbc90c-f9e3-4889-b740-1f5894ea1aa8",
+        "ColorName": "White"
+      },
+      {
+        "ColorId": "94520416-db76-4c27-a7f4-e889e96a69dd",
+        "ColorName": "Yellow"
+      }
+    ],
+    "States": [
+      {
+        "StateId": "7c36afed-4941-4e83-b9a5-3a0bcfe44f10",
+        "StateName": "Alabama"
+      },
+      {
+        "StateId": "6a63763d-8c69-44ff-af14-29b0144a21ec",
+        "StateName": "Alaska"
+      },
+      {
+        "StateId": "b1ebdded-b72d-4a12-9f3a-076302e3124a",
+        "StateName": "Alberta"
+      },
+      {
+        "StateId": "0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3",
+        "StateName": "American Samoa"
+      },
+      {
+        "StateId": "77c78343-f0f1-4152-9f77-58a393f4099d",
+        "StateName": "Arizona"
+      },
+      {
+        "StateId": "8753dafc-dbe3-4b56-a84a-7096e5d9cbed",
+        "StateName": "Arkansas"
+      },
+      {
+        "StateId": "37e40300-d723-43c5-b976-2740b86a7e54",
+        "StateName": "British Columbia"
+      },
+      {
+        "StateId": "0b3ee659-d0e5-4d24-a851-f164bb5fe70c",
+        "StateName": "California"
+      },
+      {
+        "StateId": "390ed8fa-3fde-40e7-b255-ff9f510b0044",
+        "StateName": "Colorado"
+      },
+      {
+        "StateId": "4334f5aa-8388-4834-9a18-cce20b8c99fc",
+        "StateName": "Connecticut"
+      },
+      {
+        "StateId": "b1119367-7938-4ab4-aac2-62d613e5f1e4",
+        "StateName": "Delaware"
+      },
+      {
+        "StateId": "db73b983-42f4-4b45-a5c6-366f18e3c077",
+        "StateName": "District Of Columbia"
+      },
+      {
+        "StateId": "b5cb2e17-3dda-40f7-bd47-09ca1039591a",
+        "StateName": "Federated States Of Micronesia"
+      },
+      {
+        "StateId": "7023d61a-3eb7-4594-8f76-f87e54bacc8f",
+        "StateName": "Florida"
+      },
+      {
+        "StateId": "5ee583b7-b894-4d8f-adb9-fa858c4d38ea",
+        "StateName": "Georgia"
+      },
+      {
+        "StateId": "c0e6c830-2de3-4daa-98df-a46d31ba02d3",
+        "StateName": "Guam"
+      },
+      {
+        "StateId": "86d45cf0-baaf-4644-bcf6-5f4553433174",
+        "StateName": "Hawaii"
+      },
+      {
+        "StateId": "8e348faa-25de-4f2a-91b7-803499e345da",
+        "StateName": "Idaho"
+      },
+      {
+        "StateId": "c26855d6-c646-45c1-8951-a153fcc9c9c5",
+        "StateName": "Illinois"
+      },
+      {
+        "StateId": "eb3f9ad7-ea42-44cc-9120-d3e4cda61b69",
+        "StateName": "Indiana"
+      },
+      {
+        "StateId": "07e3f638-18c9-43ff-9cad-6ef81bbcd92b",
+        "StateName": "Iowa"
+      },
+      {
+        "StateId": "1d292e8a-e308-42e6-90ad-c08a5d1cf3cf",
+        "StateName": "Kansas"
+      },
+      {
+        "StateId": "54940fd3-3fdb-40e3-b3b9-80e72b723ace",
+        "StateName": "Kentucky"
+      },
+      {
+        "StateId": "8cdafa2d-d73a-436f-bb15-086aa0010497",
+        "StateName": "Louisiana"
+      },
+      {
+        "StateId": "4e5c96d3-ec33-430c-8216-3ad286802f88",
+        "StateName": "Maine"
+      },
+      {
+        "StateId": "e551292d-563a-4c1d-9089-20507532d860",
+        "StateName": "Manitoba"
+      },
+      {
+        "StateId": "68ae44d6-be9a-46fc-8ef9-d29dec3e3a87",
+        "StateName": "Marshall Islands"
+      },
+      {
+        "StateId": "f798c29e-a2a4-43f2-b37f-54af820020f7",
+        "StateName": "Maryland"
+      },
+      {
+        "StateId": "5fe7ffd5-37f6-4c08-8f32-bd490aec856c",
+        "StateName": "Massachusetts"
+      },
+      {
+        "StateId": "ca900aff-99bc-4d0a-9929-b0bb4e4272a8",
+        "StateName": "Michigan"
+      },
+      {
+        "StateId": "95b5c814-e9b9-4b5c-a729-ab99c182e0f5",
+        "StateName": "Minnesota"
+      },
+      {
+        "StateId": "a888cf49-a658-4a8d-a077-18c8716f1baf",
+        "StateName": "Mississippi"
+      },
+      {
+        "StateId": "cdd6e56c-278d-439a-bc3e-196e389735ed",
+        "StateName": "Missouri"
+      },
+      {
+        "StateId": "83705de0-0989-44fd-bbb1-36fcc5d559d3",
+        "StateName": "Montana"
+      },
+      {
+        "StateId": "0ab26c9b-aeda-436c-87ed-9f892a0aec9b",
+        "StateName": "Nebraska"
+      },
+      {
+        "StateId": "9c8db0f7-946b-4dc3-aa66-accf453be369",
+        "StateName": "Nevada"
+      },
+      {
+        "StateId": "a9c6a0e1-1d63-4054-bd87-fcbe0e8b4e9f",
+        "StateName": "New Brunswick"
+      },
+      {
+        "StateId": "889956df-8976-4052-af3d-44c80d07c9aa",
+        "StateName": "New Hampshire"
+      },
+      {
+        "StateId": "6d833850-7d91-452d-baba-7c8186baaaf7",
+        "StateName": "New Jersey"
+      },
+      {
+        "StateId": "10d7507a-eddf-4c6a-8fb9-84ed1e7bbdce",
+        "StateName": "New Mexico"
+      },
+      {
+        "StateId": "62036ad0-7d4a-4bf5-8f42-90d1469300c9",
+        "StateName": "New York"
+      },
+      {
+        "StateId": "6e776687-ab20-45c8-96f0-c74fe57f9239",
+        "StateName": "Newfoundland and Labrador"
+      },
+      {
+        "StateId": "4542b2a1-364c-49dc-b97f-e37b4c26aa4e",
+        "StateName": "North Carolina"
+      },
+      {
+        "StateId": "10af7be8-343e-4233-b432-bbc6258a6ccb",
+        "StateName": "North Dakota"
+      },
+      {
+        "StateId": "bb02ec97-4137-4617-92b0-8d06e650eba5",
+        "StateName": "Northern Mariana Islands"
+      },
+      {
+        "StateId": "5d17caf6-a858-4365-ae96-1ce35f8dc0d9",
+        "StateName": "Northwest Territories"
+      },
+      {
+        "StateId": "95b33fb0-ec80-4dd4-ace0-349579aa9db4",
+        "StateName": "Nova Scotia"
+      },
+      {
+        "StateId": "d0658ce7-b960-4b79-ac97-97ede1c0ac12",
+        "StateName": "Nunavut"
+      },
+      {
+        "StateId": "adb2a1bb-7819-452f-807c-e6fc2a3091f8",
+        "StateName": "Ohio"
+      },
+      {
+        "StateId": "c56407cd-6553-41b3-a2de-76372d2b4c1c",
+        "StateName": "Oklahoma"
+      },
+      {
+        "StateId": "bb48e313-cdf4-4f8a-9447-060c60bb9199",
+        "StateName": "Ontario"
+      },
+      {
+        "StateId": "72dd1799-3f64-4be9-aabc-51361c12a4ef",
+        "StateName": "Oregon"
+      },
+      {
+        "StateId": "7b9481f3-b2a0-4500-8e91-c5e904f9bb0f",
+        "StateName": "Palau"
+      },
+      {
+        "StateId": "f9a3c8c1-fa50-424d-b63f-b5165d1932fe",
+        "StateName": "Pennsylvania"
+      },
+      {
+        "StateId": "81550530-c09d-4d8c-b781-fbe052e872bc",
+        "StateName": "Prince Edward Island"
+      },
+      {
+        "StateId": "8bee54d8-0178-48ae-9788-87f20a4bcbb6",
+        "StateName": "Puerto Rico"
+      },
+      {
+        "StateId": "4a1a13fb-619d-4bc4-81ed-02e4ddf21639",
+        "StateName": "Quebec"
+      },
+      {
+        "StateId": "ee61169b-0a70-4bae-8435-628e3e925081",
+        "StateName": "Rhode Island"
+      },
+      {
+        "StateId": "bfc45704-9e0a-4bba-9f5d-887423e087a8",
+        "StateName": "Saskatchewan"
+      },
+      {
+        "StateId": "d13e861a-768c-44b0-9093-d17f77c5ba3b",
+        "StateName": "South Carolina"
+      },
+      {
+        "StateId": "63c4431c-8b43-48ec-8181-a59684b59a22",
+        "StateName": "South Dakota"
+      },
+      {
+        "StateId": "68f3dfe8-754b-41eb-b5c2-45b7305c2b8d",
+        "StateName": "Tennessee"
+      },
+      {
+        "StateId": "42cadf4d-0528-4890-84e4-8cdb5dfe7069",
+        "StateName": "Texas"
+      },
+      {
+        "StateId": "b81d2219-953b-4c24-b4c8-b91e5638b39b",
+        "StateName": "US Government"
+      },
+      {
+        "StateId": "4a13cfe3-e471-4083-8be4-d222aa135a78",
+        "StateName": "Utah"
+      },
+      {
+        "StateId": "95f1a157-9b30-41e3-894a-6674be216762",
+        "StateName": "Vermont"
+      },
+      {
+        "StateId": "99c6d263-5b32-4532-b050-5d9c6a147375",
+        "StateName": "Virgin Islands"
+      },
+      {
+        "StateId": "3b8061fe-95f9-4371-ba3c-7a02a767f24a",
+        "StateName": "Virginia"
+      },
+      {
+        "StateId": "53530e5e-4861-4e46-95ea-633efeb52d33",
+        "StateName": "Washington"
+      },
+      {
+        "StateId": "a82fa94e-bcb3-444d-acc0-b72d9a01e4ef",
+        "StateName": "West Virginia"
+      },
+      {
+        "StateId": "d24f6a2b-e86d-49b6-8b3e-25515836a3ca",
+        "StateName": "Wisconsin"
+      },
+      {
+        "StateId": "72d6fe10-8429-41a9-ae5e-3a2cab35545b",
+        "StateName": "Wyoming"
+      },
+      {
+        "StateId": "c2967546-69d9-4456-991d-aabdcbe6f31a",
+        "StateName": "Yukon"
+      }
+    ],
+    "PaymentMethods": [
+      {
+        "PaymentMethodId": 26,
+        "PaymentMethodName": "3rd Party ACH"
+      },
+      {
+        "PaymentMethodId": 1,
+        "PaymentMethodName": "ACH"
+      },
+      {
+        "PaymentMethodId": 15,
+        "PaymentMethodName": "Auction Check"
+      },
+      {
+        "PaymentMethodId": 23,
+        "PaymentMethodName": "Auction Refunds"
+      },
+      {
+        "PaymentMethodId": 2,
+        "PaymentMethodName": "Certified Funds"
+      },
+      {
+        "PaymentMethodId": 3,
+        "PaymentMethodName": "Check"
+      },
+      {
+        "PaymentMethodId": 17,
+        "PaymentMethodName": "CPP Claim"
+      },
+      {
+        "PaymentMethodId": 24,
+        "PaymentMethodName": "CPP Refunds"
+      },
+      {
+        "PaymentMethodId": 25,
+        "PaymentMethodName": "GO Financial"
+      },
+      {
+        "PaymentMethodId": 21,
+        "PaymentMethodName": "Manheim Arbitration"
+      },
+      {
+        "PaymentMethodId": 19,
+        "PaymentMethodName": "Manheim Proceeds"
+      },
+      {
+        "PaymentMethodId": 22,
+        "PaymentMethodName": "Manheim Refunds"
+      },
+      {
+        "PaymentMethodId": 14,
+        "PaymentMethodName": "Non Dealer Check"
+      },
+      {
+        "PaymentMethodId": 18,
+        "PaymentMethodName": "Proceeds"
+      },
+      {
+        "PaymentMethodId": 5,
+        "PaymentMethodName": "Unapplied Funds"
+      },
+      {
+        "PaymentMethodId": 7,
+        "PaymentMethodName": "Wire"
+      }
+    ],
+    "TitleLocationOptions": [
+      {
+        "Id": 1,
+        "Name": "I Have It",
+        "ResultingTitleLocationId": 0,
+        "ResultingTitleTypeId": 0,
+        "TitleInfoEnabled": true,
+        "TitleInfoRequired": false,
+        "DisplayOrder": 1
+      },
+      {
+        "Id": 3,
+        "Name": "Seller",
+        "ResultingTitleLocationId": 1,
+        "ResultingTitleTypeId": 0,
+        "TitleInfoEnabled": false,
+        "TitleInfoRequired": false,
+        "DisplayOrder": 2
+      },
+      {
+        "Id": 4,
+        "Name": "Unknown/TA (Title Absent)",
+        "ResultingTitleLocationId": 11,
+        "ResultingTitleTypeId": 0,
+        "TitleInfoEnabled": false,
+        "TitleInfoRequired": false,
+        "DisplayOrder": 3
+      },
+      {
+        "Id": 5,
+        "Name": "No Title Needed",
+        "ResultingTitleLocationId": 7,
+        "ResultingTitleTypeId": 1,
+        "TitleInfoEnabled": false,
+        "TitleInfoRequired": false,
+        "DisplayOrder": 4
+      }
+    ]
+  }
+}
