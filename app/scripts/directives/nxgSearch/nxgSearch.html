@@ -1,7 +1,7 @@
 <div class="well">
   <h2 class="well-title">
     {{ title }}
-    <button class="btn-unstyle right clear-search" ng-click="clear($event)" nxg-track="{{metricClearSearch}}"><strong translate>Clear Search</strong></button>
+    <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)" nxg-track="{{metricClearSearch}}"><strong translate>Clear Search</strong></button>
   </h2>
 
   <form name="searchForm" class="row-fluid search" novalidate>
@@ -13,7 +13,7 @@
         <div class="form-row">
           <div class="styled-input with-btn">
             <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
-            <button class="btn btn-input" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">
+            <button id="floorPlanSearch" class="btn btn-input" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">
               <span nxg-icon="icon-search"></span>
             </button>
           </div>
