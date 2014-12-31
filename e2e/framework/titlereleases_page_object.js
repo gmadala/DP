@@ -10,7 +10,7 @@ var PaymentPageObject = function () {
 
   this.waitForPage = function () {
     var searchField = this.searchField;
-    browser.wait(function () {
+    browser.driver.wait(function () {
       return searchField.isPresent();
     }, 3000);
   };
@@ -61,4 +61,4 @@ var PaymentPageObject = function () {
 
 };
 
-module.exports = new PaymentPageObject();
+module.exports = PaymentPageObject;

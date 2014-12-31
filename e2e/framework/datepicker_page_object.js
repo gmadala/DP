@@ -98,4 +98,4 @@ var DatepickerPageObject = function () {
 
 };
 
-module.exports = new DatepickerPageObject();
+module.exports = DatepickerPageObject;

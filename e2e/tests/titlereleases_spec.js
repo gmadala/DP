@@ -2,7 +2,8 @@
 
 describe('Title releases page e2e', function () {
 
-  var titleReleasesPage = require('../framework/titlereleases_page_object.js');
+  var TitleReleasesPage = require('../framework/titlereleases_page_object.js');
+  var titleReleasesPage = new TitleReleasesPage();
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;
@@ -11,17 +12,17 @@ describe('Title releases page e2e', function () {
   });
 
   it('should navigate to vehicle details when vehicle description is clicked.', function () {
-    expect(browser.getCurrentUrl()).toContain(titleReleasesPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(titleReleasesPage.url);
     expect(titleReleasesPage.vehicleDescriptionLinks.count()).toBeGreaterThan(0);
     expect(titleReleasesPage.getActiveVehicleDescriptionLink()).toBeDefined();
     titleReleasesPage.getActiveVehicleDescriptionLink().then(function(vehicleDescriptionLink) {
       vehicleDescriptionLink.click();
     });
-    expect(browser.getCurrentUrl()).not.toContain(titleReleasesPage.url);
+    expect(browser.driver.getCurrentUrl()).not.toContain(titleReleasesPage.url);
   });
 
   it('should navigate to title release checkout when confirm requests is clicked', function() {
-    expect(browser.getCurrentUrl()).toContain(titleReleasesPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(titleReleasesPage.url);
     expect(titleReleasesPage.confirmRequestsButton.isEnabled()).not.toBeTruthy();
     expect(titleReleasesPage.requestTitleButtons.count()).toBeGreaterThan(0);
     expect(titleReleasesPage.getActiveRequestTitleButton()).toBeDefined();
@@ -30,7 +31,7 @@ describe('Title releases page e2e', function () {
     });
     expect(titleReleasesPage.confirmRequestsButton.isEnabled()).toBeTruthy();
     titleReleasesPage.confirmRequestsButton.click();
-    expect(browser.getCurrentUrl()).not.toContain(titleReleasesPage.url);
+    expect(browser.driver.getCurrentUrl()).not.toContain(titleReleasesPage.url);
   });
 
   it('should open title release unavailable modal when title release unavailable link is clicked', function() {

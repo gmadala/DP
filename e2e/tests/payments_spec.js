@@ -2,8 +2,13 @@
 
 describe('Payments page e2e', function () {
 
-  var paymentsPage = require('../framework/payments_page_object.js');
-  var datepickerPage = require('../framework/datepicker_page_object.js');
+  var PaymentsPage = require('../framework/payments_page_object.js');
+  var DatepickerPage = require('../framework/datepicker_page_object.js');
+  var CheckoutPage = require('../framework/checkout_page_object.js');
+
+  var paymentsPage = new PaymentsPage();
+  var datepickerPage = new DatepickerPage();
+  var checkoutPage = new CheckoutPage();
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;
@@ -92,17 +97,17 @@ describe('Payments page e2e', function () {
   });
 
   it('should navigate to vehicle details when vehicle description is clicked', function() {
-    expect(browser.getCurrentUrl()).toContain(paymentsPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
     expect(paymentsPage.vehicleDetailLinks.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveVehicleDetailLink()).toBeDefined();
     paymentsPage.getActiveVehicleDetailLink().then(function(vehicleDetailLink) {
       vehicleDetailLink.click();
     });
-    expect(browser.getCurrentUrl()).not.toContain(paymentsPage.url);
+    expect(browser.driver.getCurrentUrl()).not.toContain(paymentsPage.url);
   });
 
   it('should navigate to checkout when checkout is clicked', function() {
-    expect(browser.getCurrentUrl()).toContain(paymentsPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
     expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
     expect(paymentsPage.schedulePaymentButtons.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveSchedulePaymentButton()).toBeDefined();
@@ -111,7 +116,7 @@ describe('Payments page e2e', function () {
     });
     expect(paymentsPage.checkoutButton.isEnabled()).toBeTruthy();
     paymentsPage.checkoutButton.click();
-    expect(browser.getCurrentUrl()).not.toContain(paymentsPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(checkoutPage.url);
   });
 
   it('should open cancel payment modal when unschedule link is clicked', function() {

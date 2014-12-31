@@ -41,10 +41,10 @@ var PaymentPageObject = function () {
   this.vehicleDetailLinks = browser.element.all(by.css('.description-narrow a'));
 
   // unschedule payments
-  this.unschedulePaymentButtons = browser.element.all(by.css('.btn-link'));
+  this.unschedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-link'));
 
   // schedule payments
-  this.schedulePaymentButtons = browser.element.all(by.css('.btn-adapts'));
+  this.schedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-adapts'));
 
   this.checkoutButton = browser.element(by.css('.btn-cta'));
 
@@ -149,4 +149,4 @@ var PaymentPageObject = function () {
 
 };
 
-module.exports = new PaymentPageObject();
+module.exports = PaymentPageObject;

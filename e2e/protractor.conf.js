@@ -1,19 +1,22 @@
 'use strict';
 
+var fs = require('fs');
 function mkdir(path, root) {
 
-  var dirs = path.split('/'), dir = dirs.shift(), root = (root||'')+dir+'/';
+  var dirs = path.split('/'), dir = dirs.shift();
+  root = (root||'')+dir+'/';
 
   try { fs.mkdirSync(root); }
   catch (e) {
     //dir wasn't made, something went wrong
-    if(!fs.statSync(root).isDirectory()) throw new Error(e);
+    if(!fs.statSync(root).isDirectory()) {
+      throw new Error(e);
+    }
   }
 
   return !dirs.length||mkdir(dirs.join('/'), root);
 }
 
-var fs = require('fs');
 mkdir('target/surefire-reports/');
 
 exports.config = {

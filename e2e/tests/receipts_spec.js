@@ -2,7 +2,9 @@
 
 describe('Receipts page e2e', function () {
 
-  var receiptsPage = require('../framework/receipts_page_object.js');
+  var ReceiptsPage = require('../framework/receipts_page_object.js');
+
+  var receiptsPage = new ReceiptsPage();
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;
@@ -15,7 +17,7 @@ describe('Receipts page e2e', function () {
     browser.driver.getAllWindowHandles().then(function (handles) {
       expect(handles.length).toEqual(1);
     });
-    expect(browser.getCurrentUrl()).toContain(receiptsPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(receiptsPage.url);
     expect(receiptsPage.viewReceiptLinks.count()).toBeGreaterThan(0);
     expect(receiptsPage.getActiveViewReceiptLink()).toBeDefined();
     receiptsPage.getActiveViewReceiptLink().then(function (receiptLink) {
@@ -25,11 +27,11 @@ describe('Receipts page e2e', function () {
       expect(handles.length).toEqual(2);
       var firstHandle = handles[0];
       var secondHandle = handles[1];
-      browser.switchTo().window(secondHandle).then(function () {
-        browser.executeScript('return window.location.href').then(function (url) {
+      browser.driver.switchTo().window(secondHandle).then(function () {
+        browser.driver.executeScript('return window.location.href').then(function (url) {
           expect(url).not.toContain(receiptsPage.url);
           browser.driver.close().then(function() {
-            browser.switchTo().window(firstHandle);
+            browser.driver.switchTo().window(firstHandle);
           });
         });
       });
@@ -40,7 +42,7 @@ describe('Receipts page e2e', function () {
     browser.driver.getAllWindowHandles().then(function (handles) {
       expect(handles.length).toEqual(1);
     });
-    expect(browser.getCurrentUrl()).toContain(receiptsPage.url);
+    expect(browser.driver.getCurrentUrl()).toContain(receiptsPage.url);
     expect(receiptsPage.exportReceiptsButton.isEnabled()).not.toBeTruthy();
     expect(receiptsPage.addReceiptButtons.count()).toBeGreaterThan(0);
     expect(receiptsPage.getActiveAddReceiptButton()).toBeDefined();
@@ -53,11 +55,11 @@ describe('Receipts page e2e', function () {
       expect(handles.length).toEqual(2);
       var firstHandle = handles[0];
       var secondHandle = handles[1];
-      browser.switchTo().window(secondHandle).then(function () {
-        browser.executeScript('return window.location.href').then(function (url) {
+      browser.driver.switchTo().window(secondHandle).then(function () {
+        browser.driver.executeScript('return window.location.href').then(function (url) {
           expect(url).not.toContain(receiptsPage.url);
           browser.driver.close().then(function() {
-            browser.switchTo().window(firstHandle);
+            browser.driver.switchTo().window(firstHandle);
           });
         });
       });

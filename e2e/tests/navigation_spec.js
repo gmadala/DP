@@ -4,11 +4,12 @@ var LoginPageObject = require('../framework/login_page_object.js');
 var CredentialsObject = require('../framework/credentials_page_object.js');
 var HomePageObject = require('../framework/home_page_object.js');
 var UtilObject = require('../framework/util_object.js');
-var paymentsPage = require('../framework/payments_page_object.js');
+var PaymentsPage = require('../framework/payments_page_object.js');
 
 var loginPage = new LoginPageObject();
 var credPage = new CredentialsObject();
 var homePage = new HomePageObject();
+var paymentsPage = new PaymentsPage();
 var util = new UtilObject();
 
 // TODO recommend high level nxgDescribe where we put in Jira ticket and description and that
