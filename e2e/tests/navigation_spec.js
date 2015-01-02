@@ -306,10 +306,16 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       // Verifying that we can click open and click close
 
       // click on a id="uvTabLabel"
-      element(by.id('uvTabLabel')).click();
-
-      // close it by clicking using div id="uvw-dialog-close-uv-1"
-      element(by.id('uvw-dialog-close-uv-1')).click();
+      element.all(by.id('uvTabLabel')).each(function(feedbackButton) {
+        feedbackButton.isDisplayed().then(function(displayed) {
+          if (displayed) {
+            feedbackButton.click();
+            // close it by clicking using div id="uvw-dialog-close-uv-1"
+            expect(browser.element(by.id('uvw-dialog-uv-2')).isDisplayed()).toBeTruthy();
+            element(by.id('uvw-dialog-close-uv-1')).click();
+          }
+        });
+      });
     });
 
     it('The NextGear Logo activation navigates to the DashBoard', function () {
