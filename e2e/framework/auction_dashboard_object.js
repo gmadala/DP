@@ -43,7 +43,9 @@ var AuctionDashboardObject = function () {
   this.buttonWeek = browser.element(by.cssContainingText('button', 'Week'));
 
   this.chartObject = browser.element(by.css('.chart-obj'));
+  this.chartObjectAxis = browser.element(by.css('.highcharts-axis > text > tspan'));
   this.chartObjectAxisLabels = browser.element.all(by.css('.highcharts-axis-labels'));
+  this.chartObjectTitle = browser.element(by.css('.auction-dashboard-chart > h2 > span'));
 
   this.openPage = function () {
     browser.get(this.url);
@@ -57,6 +59,7 @@ var AuctionDashboardObject = function () {
   };
 
   this.getDashboardContent = function (header) {
+    expect(this.dashboardContents.count()).toEqual(3);
     var promise = protractor.promise.defer();
     this.dashboardContents.each(function (dashboardContent) {
       var contentHeader = dashboardContent.element(by.css('h2'));

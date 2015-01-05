@@ -105,6 +105,8 @@ auctionHelperObject.describe('WMT-69', function () {
 
     it('Volume of Past NextGear Capital Floorplans includes a graph with the data selected based on the selector.', function () {
       expect(auctionDashboardObject.chartObject.isDisplayed()).toBeTruthy();
+      expect(auctionDashboardObject.chartObjectAxis.getText()).toEqual('# of Floored Vehicles');
+      expect(auctionDashboardObject.chartObjectTitle.getText()).toEqual('Volume of Past NextGear Capital Floorplans');
       auctionDashboardObject.getXAxisLabel().then(function (axisLabel) {
         var xAxisLabels = axisLabel.all(by.css('tspan'));
         xAxisLabels.each(function (xAxisLabel) {
