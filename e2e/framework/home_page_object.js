@@ -88,7 +88,7 @@ HomePageObject.prototype = Object.create({},{
   }},
 
   showPaymentDetails: { get: function(){
-    return browser.element(by.id('showorhide'));//(by.css('[ng-click="isCollapsed = !isCollapsed"]'));
+    return browser.element(by.id('showorhide'));
   }},
 
   signOutButton:{ get: function(){
