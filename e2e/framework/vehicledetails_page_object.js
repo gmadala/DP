@@ -22,13 +22,13 @@ VehiclePageObject.prototype = Object.create({}, {
 
   cancelRequest: {
     get: function () {
-      return browser.element(by.id('cancelRequest'));
+      return browser.element(by.css('.modal')).element(by.cssContainingText('button', 'Cancel Request'));
     }
   },
 
   confirmRequest: {
     get: function() {
-      return browser.element(by.id('confirmRequest'));
+      return browser.element(by.css('.modal')).element(by.cssContainingText('button', 'Confirm Request'));
     }
   },
 
