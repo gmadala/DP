@@ -101,6 +101,17 @@ var AuctionHelperObject = function() {
         browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
         helper.openLogin();
+        // pulling the login screen sometimes automatically trigger the logout modal.
+        browser.driver.wait(function() {
+          var promise = protractor.promise.defer();
+          helper.modal.isPresent().then(function(present) {
+            if (present) {
+              helper.yesButton.click();
+            }
+            promise.fulfill(true);
+          });
+          return promise;
+        }, 3000);
         helper.loginAsAuction('auction', 'test');
       });
 

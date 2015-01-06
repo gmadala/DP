@@ -129,7 +129,6 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       fillCart();
       expect(cart.isEnabled()).toBeTruthy();
       cart.click();
-      browser.debugger();
       expect(browser.getLocationAbsUrl()).toContain('#/checkout');
     });
 
@@ -177,7 +176,6 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
     // create a spec for each nav
     links.forEach(function (link) {
       it('User dropdown link spec: ' + link[0] + ' navigates to ' + link[1], function () {
-        browser.debugger();
         runUserInfoLinkTest(link[0], link[1]);
       });
     });
@@ -351,7 +349,6 @@ xdescribe('Test Debugger', function () {
   });
 
   it('Debug this test', function () {
-    browser.debugger();
     element(by.id('uvTabLabel')).click();
   });
 });
