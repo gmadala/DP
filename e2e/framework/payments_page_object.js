@@ -10,16 +10,16 @@ var PaymentPageObject = function () {
 
   this.waitForPage = function () {
     var searchField = this.searchField;
-    browser.wait(function () {
+    browser.driver.wait(function () {
       return searchField.isPresent();
     }, 3000);
   };
 
   /** Locator of elements **/
   this.searchField = browser.element(by.model('activeCriteria.query'));
-  this.searchFilter = browser.element(by.model('activeCriteria.filter'));
-  this.searchEndDate = browser.element(by.model('activeCriteria.endDate'));
-  this.searchStartDate = browser.element(by.model('activeCriteria.startDate'));
+  this.searchFilterSelection = browser.element(by.model('activeCriteria.filter'));
+  this.searchEndDateField = browser.element(by.model('activeCriteria.endDate'));
+  this.searchStartDateField = browser.element(by.model('activeCriteria.startDate'));
   this.inventoryLocations = browser.element.all(by.model('activeCriteria.inventoryLocation'));
 
   this.searchFilterOptions = browser.element.all(by.options('o.value as o.label for o in filterOptions'));
@@ -92,11 +92,19 @@ var PaymentPageObject = function () {
   };
 
   this.clickSearchEndDate = function () {
-    this.searchEndDate.click();
+    this.searchEndDateField.click();
+  };
+
+  this.getSearchEndDate = function () {
+    return this.searchEndDateField.getAttribute('value');
   };
 
   this.clickSearchStartDate = function () {
-    this.searchStartDate.click();
+    this.searchStartDateField.click();
+  };
+
+  this.getSearchStartDate = function () {
+    return this.searchStartDateField.getAttribute('value');
   };
 
   this.getModalHeaderText = function () {

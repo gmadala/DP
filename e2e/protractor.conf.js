@@ -21,7 +21,7 @@ mkdir('target/surefire-reports/');
 
 exports.config = {
   specs: [
-    'tests/*_spec.js'
+    'tests/*seller_floorplan*_spec.js'
   ],
 
   suites: {
