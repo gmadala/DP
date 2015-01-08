@@ -15,7 +15,7 @@ auctionHelper.describe('WMT-77', function () {
       auctionFloorPlan.waitForPage();
     });
 
-    xit('Should contains search, filter, start date and end date field and note for the date', function () {
+    it('Should contains search, filter, start date and end date field and note for the date', function () {
       var searchQuery = 'Search Query';
       expect(auctionFloorPlan.searchField.isDisplayed()).toBeTruthy();
       expect(auctionFloorPlan.getSearchQuery()).not.toEqual(searchQuery);
@@ -114,7 +114,7 @@ auctionHelper.describe('WMT-77', function () {
       return found;
     };
 
-    xit('Should contains all the correct headers for the search results.', function () {
+    it('Should contains all the correct headers for the search results.', function () {
       expect(auctionFloorPlan.floorplanDataHeaders.count()).toBe(8);
       // check if the header of the repeating elements is correct
       auctionFloorPlan.floorplanDataHeaders.each(function (floorplanDataHeader) {
@@ -131,7 +131,7 @@ auctionHelper.describe('WMT-77', function () {
       });
     });
 
-    xit('Should contains floored and disbursement date for the date column of the search results.', function () {
+    it('Should contains floored and disbursement date for the date column of the search results.', function () {
       var flooringDateColumn = 'item.FlooringDate';
       var disbursementDateColumn = 'item.DisbursementDate';
 
@@ -158,7 +158,7 @@ auctionHelper.describe('WMT-77', function () {
       });
     });
 
-    xit('Should contains vehicle description and vin for the description column of the search results.', function () {
+    it('Should contains vehicle description and vin for the description column of the search results.', function () {
       var vinColumn = 'item.UnitVIN';
       var descriptionColumn = 'item.Description';
       var vinPromise = unformattedDataFromRepeater(repeater, vinColumn);
