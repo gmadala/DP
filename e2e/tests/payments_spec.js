@@ -18,7 +18,7 @@ describe('Payments page e2e', function () {
 
   it('should validate payments page object is accessing the correct fields.', function () {
     expect(paymentsPage.searchField.isDisplayed()).toBeTruthy();
-    expect(paymentsPage.searchFilter.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.searchFilterSelection.isDisplayed()).toBeTruthy();
     expect(paymentsPage.getInventoryLocation()).toBeDefined();
     paymentsPage.getInventoryLocation().then(function(inventoryLocation) {
       expect(inventoryLocation.isDisplayed()).toBeTruthy();
@@ -35,8 +35,8 @@ describe('Payments page e2e', function () {
   });
 
   it('should validate payments page object is accessing the correct range fields.', function () {
-    expect(paymentsPage.searchStartDate.isDisplayed()).not.toBeTruthy();
-    expect(paymentsPage.searchEndDate.isDisplayed()).not.toBeTruthy();
+    expect(paymentsPage.searchStartDateField.isDisplayed()).not.toBeTruthy();
+    expect(paymentsPage.searchEndDateField.isDisplayed()).not.toBeTruthy();
   });
 
   it('should validate payments page object is accessing the correct error message.', function () {
@@ -48,29 +48,31 @@ describe('Payments page e2e', function () {
     paymentsPage.setFilterOption('Date Range');
     expect(paymentsPage.getFilterOption()).toEqual('Date Range');
 
-    expect(paymentsPage.searchStartDate.isDisplayed()).toBeTruthy();
-    expect(paymentsPage.searchEndDate.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.searchStartDateField.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.searchEndDateField.isDisplayed()).toBeTruthy();
 
     paymentsPage.setFilterOption('Due Today');
     expect(paymentsPage.getFilterOption()).toEqual('Due Today');
 
-    expect(paymentsPage.searchStartDate.isDisplayed()).not.toBeTruthy();
-    expect(paymentsPage.searchEndDate.isDisplayed()).not.toBeTruthy();
+    expect(paymentsPage.searchStartDateField.isDisplayed()).not.toBeTruthy();
+    expect(paymentsPage.searchEndDateField.isDisplayed()).not.toBeTruthy();
   });
 
-  xit('should allow setting start date and end date using datepicker.', function() {
+  it('should allow setting start date and end date using datepicker.', function() {
     paymentsPage.setFilterOption('Date Range');
 
-    expect(paymentsPage.searchStartDate.isDisplayed()).toBeTruthy();
-    expect(paymentsPage.searchEndDate.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.searchStartDateField.isDisplayed()).toBeTruthy();
+    expect(paymentsPage.searchEndDateField.isDisplayed()).toBeTruthy();
 
     paymentsPage.clickSearchStartDate();
     expect(datepickerPage.datepicker.isDisplayed()).toBeTruthy();
     datepickerPage.setDate(30, 'Dec', 2001);
+    expect(paymentsPage.getSearchStartDate()).toEqual('12/30/2001');
 
     paymentsPage.clickSearchEndDate();
     expect(datepickerPage.datepicker.isDisplayed()).toBeTruthy();
     datepickerPage.setDate(28, 'Jan', 2011);
+    expect(paymentsPage.getSearchEndDate()).toEqual('01/28/2011');
   });
 
   it('should verify that user is able to enter text in search field.', function () {

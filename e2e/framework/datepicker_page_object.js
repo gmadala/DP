@@ -4,51 +4,32 @@ var DatepickerPageObject = function () {
 
   this.datepicker = browser.element(by.css('.datepicker'));
 
-  this.datepickerDayHeader = browser.element(by.css('.datepicker-days .datepicker-switch'));
-  this.dayElements = browser.element.all(by.css('.day'));
+  this.datepickerDay = browser.element(by.css('.datepicker-days'));
+  this.datepickerDayHeader = this.datepickerDay.element(by.css('.datepicker-switch'));
 
-  this.datepickerMonthHeader = browser.element(by.css('.datepicker-months .datepicker-switch'));
-  this.monthElements = browser.element.all(by.css('.month'));
+  this.datepickerMonth = browser.element(by.css('.datepicker-months'));
+  this.datepickerMonthHeader = this.datepickerMonth.element(by.css('.datepicker-switch'));
 
-  this.datepickerYearPrev = browser.element(by.css('.datepicker-years .prev'));
-  this.datepickerYearHeader = browser.element(by.css('.datepicker-years .datepicker-switch'));
-  this.datepickerYearNext = browser.element(by.css('.datepicker-years .next'));
-  this.yearElements = browser.element.all(by.css('.year'));
+  this.datepickerYear = browser.element(by.css('.datepicker-years'));
+  this.datepickerYearPrev = this.datepickerYear.element(by.css('.prev'));
+  this.datepickerYearHeader = this.datepickerYear.element(by.css('.datepicker-switch'));
+  this.datepickerYearNext = this.datepickerYear.element(by.css('.next'));
 
-  var findYear = function (yearElements, year) {
-    var deferred = protractor.promise.defer();
-    yearElements.each(function (yearElement) {
-      yearElement.getText().then(function (yearText) {
-        if (parseInt(yearText) === year) {
-          deferred.fulfill(yearElement);
-        }
-      });
-    });
-    return deferred;
+  var findYear = function (parentElement, year) {
+    var yearElement = parentElement.element(by.cssContainingText('.year', year));
+    yearElement.click();
   };
 
-  var findMonth = function (monthElements, month) {
-    var deferred = protractor.promise.defer();
-    monthElements.each(function (monthElement) {
-      monthElement.getText().then(function (monthText) {
-        if (monthText === month) {
-          deferred.fulfill(monthElement);
-        }
-      });
-    });
-    return deferred;
+  var findMonth = function (parentElement, month) {
+    var monthElement = parentElement.element(by.cssContainingText('.month', month));
+    monthElement.click();
   };
 
-  var findDay = function (dayElements, day) {
-    var deferred = protractor.promise.defer();
-    dayElements.each(function (dayElement) {
-      dayElement.getText().then(function (dayText) {
-        if (parseInt(dayText) === day) {
-          deferred.fulfill(dayElement);
-        }
-      });
-    });
-    return deferred;
+  var findDay = function (parentElement, day) {
+    // may not work if you enter 1 - 9 as date
+    // because cssContainingText might confuse 1 with 11 or 12, 2 with 21 or 12 and so on.
+    var dayElement = parentElement.element(by.cssContainingText('.day', day));
+    dayElement.click();
   };
 
   this.setDate = function (day, month, year) {
@@ -58,10 +39,9 @@ var DatepickerPageObject = function () {
     var prevYear = this.datepickerYearPrev;
     var nextYear = this.datepickerYearNext;
 
-    var dayElements = this.dayElements;
-    var monthElements = this.monthElements;
-    var yearElements = this.yearElements;
-
+    var datepickerDay = this.datepickerDay;
+    var datepickerMonth = this.datepickerMonth;
+    var datepickerYear = this.datepickerYear;
 
     this.datepickerYearHeader.getText().then(function (yearHeader) {
       var years = yearHeader.split('-');
@@ -80,19 +60,10 @@ var DatepickerPageObject = function () {
         }
       }
 
-      findYear(yearElements, year).then(function (yearElement) {
-        yearElement.click().then(function () {
-          findMonth(monthElements, month).then(function (monthElement) {
-            monthElement.click().then(function () {
-              findDay(dayElements, day).then(function(dayElement) {
-                //TODO: incomplete implementation!
-                // If I click the dayElement here, then it will just throw error because the findDay is still iterating,
-                // but the calendar object is removed from the DOM by the date picker. Need to figure this out.
-              });
-            });
-          });
-        });
-      });
+      // http://stackoverflow.com/q/18225997/4351257
+      findYear(datepickerYear, year);
+      findMonth(datepickerMonth, month);
+      findDay(datepickerDay, day);
     });
   };
 

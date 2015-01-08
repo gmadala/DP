@@ -61,10 +61,14 @@ var AuctionBulkFlooringObject = function() {
   };
 
   this.waitAndCloseModal = function() {
-    waitAndCloseModal(this.modal, this.closeModal);
-  };
-
-  var waitAndCloseModal = function(modal, closeModal) {
+    var modal = this.modal;
+    var closeModal = this.closeModal;
+    // must be done in the following steps:
+    // * wait for the modal to appear in the page first
+    browser.driver.wait(function() {
+      return modal.isPresent();
+    }, 3000);
+    // * close it once it's displayed on the screen.
     browser.driver.wait(function() {
       var promise = protractor.promise.defer();
       modal.isPresent().then(function(present) {
@@ -218,16 +222,6 @@ var AuctionBulkFlooringObject = function() {
 
   this.getUnitPurchasePrice = function() {
     return this.unitPurchasePriceField.getAttribute('value');
-  };
-
-  this.setUnitPurchaseDate = function(unitPurchaseDate) {
-    var modal = this.modal;
-    var closeModal = this.closeModal;
-    var field = this.unitPurchaseDateField;
-    field.clear().then(function() {
-      waitAndCloseModal(modal, closeModal);
-      field.sendKeys(unitPurchaseDate);
-    });
   };
 
   this.getUnitPurchaseDate = function() {
