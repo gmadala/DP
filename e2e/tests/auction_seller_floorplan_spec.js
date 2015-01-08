@@ -51,21 +51,59 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     var repeater = 'item in floorplanData.results';
-    var dataFromRepeater = function (repeater, column, row) {
-      if (row) {
-        return browser.element.all(by.repeater(repeater).row(row).column(column));
-      } else {
-        return browser.element.all(by.repeater(repeater).column(column));
-      }
+    var dataFromRepeater = function (repeater, column) {
+      return browser.element.all(by.repeater(repeater).column(column));
+    };
+
+    var contentWithMarker = function () {
+      var counter = 0;
+      var contents = [];
+      var parameters = arguments;
+      var promise = protractor.promise.defer();
+      auctionFloorPlan.floorplanDataRows.count().then(function (count) {
+        auctionFloorPlan.floorplanDataRows.each(function (row) {
+          var cells = row.all(by.css('td'));
+          cells.each(function (cell) {
+            cell.getText().then(function (text) {
+              var notFound = false;
+              for (var i = 0; i < parameters.length; i++) {
+                var argument = parameters[i].toString();
+                if (text.indexOf(argument) === -1) {
+                  notFound = true;
+                  break;
+                }
+              }
+              if (!notFound) {
+                counter++;
+                contents.push(text);
+                if (counter >= count) {
+                  promise.fulfill(contents);
+                }
+              }
+            });
+          });
+        });
+      });
+      return promise;
+    };
+
+    var textInContents = function (contents, text) {
+      // check if one of the 'contents' array element contains 'text'
+      var found = false;
+      contents.forEach(function (content) {
+        if (content.indexOf(text) !== -1) {
+          found = true;
+        }
+      });
+      return found;
     };
 
     it('Should contains all the correct headers for the search results.', function () {
       expect(auctionFloorPlan.floorplanDataHeaders.count()).toBe(8);
-      var expectedHeaders = ['Dates', 'Description', 'Status', 'Purchased For', 'Buyer', 'Ticket No.', 'Title Location', 'Title'];
       // check if the header of the repeating elements is correct
       auctionFloorPlan.floorplanDataHeaders.each(function (floorplanDataHeader) {
         floorplanDataHeader.getText().then(function (headerText) {
-          expect(expectedHeaders).toContain(headerText);
+          expect(auctionFloorPlan.dataHeaders).toContain(headerText);
         });
       });
       // check if the floor plan data column is visible or not.
@@ -83,26 +121,69 @@ auctionHelper.describe('WMT-77', function () {
 
       var flooringDates = dataFromRepeater(repeater, flooringDateColumn);
       var disbursementDates = dataFromRepeater(repeater, disbursementDateColumn);
-      expect(flooringDates.count()).toEqual(disbursementDates.count());
 
-      flooringDates.count().then(function (count) {
-        for (var i = 0; i < count; i++) {
-          var flooringDate = dataFromRepeater(repeater, flooringDateColumn, i);
-          var disbursementDate = dataFromRepeater(repeater, disbursementDateColumn, i);
-        }
+      // get the content of all td tags marked with 'Floored' and 'Disbursement'.
+      // this will effectively return the text inside the first column of the search result table.
+      contentWithMarker('Floored', 'Disbursement').then(function (contents) {
+        expect(flooringDates.count()).toEqual(contents.length);
+        expect(disbursementDates.count()).toEqual(contents.length);
+        // iterate over each flooring dates column.
+        flooringDates.each(function (flooringDate) {
+          // get the text value of the flooring date
+          flooringDate.getText().then(function (text) {
+            expect(textInContents(contents, text)).toBeTruthy();
+          });
+        });
+        disbursementDates.each(function (disbursementDate) {
+          disbursementDate.getText().then(function (text) {
+            expect(textInContents(contents, text)).toBeTruthy();
+          });
+        });
       });
     });
 
     xit('Should contains vehicle description and vin for the description column of the search results.', function () {
+      var vinColumn = 'item.UnitVIN';
+      var descriptionColumn = 'item.Description';
+
+      var vins = dataFromRepeater(repeater, vinColumn);
+      var descriptions = dataFromRepeater(repeater, descriptionColumn);
+
+      contentWithMarker('VIN').then(function (contents) {
+        expect(vins.count()).toEqual(contents.length);
+        expect(descriptions.count()).toEqual(contents.length);
+        vins.each(function (vin) {
+          vin.getText().then(function (text) {
+            expect(textInContents(contents, text)).toBeTruthy();
+          });
+        });
+        descriptions.each(function (description) {
+          description.getText().then(function (text) {
+            expect(textInContents(contents, text)).toBeTruthy();
+          });
+        });
+      });
     });
 
-    xit('Should contains title owner and selector indicating seller have the title for the title location column.', function () {
+    it('Should contains title owner and seller have title for the title location column.', function () {
+      var titleLocationColumn = 'item.TitleLocation';
+      var titleLocations = dataFromRepeater(repeater, titleLocationColumn);
+      contentWithMarker('Buyer').then(function (contents) {
+        expect(titleLocations.count()).toEqual(contents.length);
+        titleLocations.each(function (titleLocation) {
+          titleLocation.getText().then(function (text) {
+            expect(textInContents(contents, text)).toBeTruthy();
+          });
+        });
+        expect(textInContents(contents, 'I Have the Title')).toBeTruthy();
+      });
     });
 
-    xit('Should display icon to view title when scanned title is available on the title column.', function () {
-    });
-
-    xit('Should not display icon when the scanned title is not available.', function () {
+    it('Should display icon to view title when scanned title is available on the title column.', function () {
+      contentWithMarker('btn-square').then(function (contents) {
+        // TODO: this test is very data specific as the icon to view title will displayed depending on data.
+        expect(contents.length).toBeGreaterThan(0);
+      });
     });
   });
 });

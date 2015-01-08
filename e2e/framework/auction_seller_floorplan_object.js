@@ -14,11 +14,13 @@ var AuctionSellerFloorPlan = function () {
   this.formTip = browser.element(by.css('.form-tip'));
 
   this.floorplanData = browser.element(by.css('table'));
-  this.floorplanDataHeaders = this.floorplanData.all(by.css('th'));
-  this.floorplanDataRows = this.floorplanData.all(by.css('tr'));
+  this.floorplanDataHeaders = this.floorplanData.all(by.css('thead th'));
+  this.floorplanDataRows = this.floorplanData.all(by.css('tbody tr'));
 
-  /** floor plan data columns **/
+  // by-repeater only takes element that have class ng-bind and ng-scope
+  // see: https://github.com/angular/protractor/issues/294
   this.floorplanData = browser.element.all(by.repeater('item in floorplanData.results'));
+  this.dataHeaders = ['Dates', 'Description', 'Status', 'Purchased For', 'Buyer', 'Ticket No.', 'Title Location', 'Title'];
   this.columnNames = ['item.FlooringDate', 'item.DisbursementDate', 'item.Description', 'item.UnitVIN',
     'item.FloorplanStatusName', 'item.PurchaseAmount', 'item.BuyerName', 'item.ConsignerTicketNumber',
     'item.TitleLocation', 'item.TitleEditable', 'item.FloorplanId', 'item.sellerHasTitle', 'item.TitleImageAvailable'];
