@@ -25,6 +25,8 @@ var AuctionSellerFloorPlan = function () {
     'item.FloorplanStatusName', 'item.PurchaseAmount', 'item.BuyerName', 'item.ConsignerTicketNumber',
     'item.TitleLocation', 'item.TitleEditable', 'item.FloorplanId', 'item.sellerHasTitle', 'item.TitleImageAvailable'];
 
+  this.noticeBox = browser.element(by.css('.notice-box'));
+
   this.openPage = function () {
     browser.get(this.url);
   };

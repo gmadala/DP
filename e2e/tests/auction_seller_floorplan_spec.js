@@ -15,7 +15,7 @@ auctionHelper.describe('WMT-77', function () {
       auctionFloorPlan.waitForPage();
     });
 
-    it('Should contains search, filter, start date and end date field and note for the date', function () {
+    xit('Should contains search, filter, start date and end date field and note for the date', function () {
       var searchQuery = 'Search Query';
       expect(auctionFloorPlan.searchField.isDisplayed()).toBeTruthy();
       expect(auctionFloorPlan.getSearchQuery()).not.toEqual(searchQuery);
@@ -47,12 +47,28 @@ auctionHelper.describe('WMT-77', function () {
       expect(auctionFloorPlan.formTip.isDisplayed()).toBeTruthy();
     });
 
-    xit('Should contains a message with action to start new search when search return no results.', function () {
+    it('Should contains a message with action to start new search when search return no results.', function () {
+      auctionFloorPlan.floorplanData.count().then(function (count) {
+        if (count <= 0) {
+          expect(auctionFloorPlan.noticeBox.isPresent()).toBeTruthy();
+          expect(auctionFloorPlan.noticeBox.isDisplayed()).toBeTruthy();
+        }
+      });
     });
 
     var repeater = 'item in floorplanData.results';
     var dataFromRepeater = function (repeater, column) {
       return browser.element.all(by.repeater(repeater).column(column));
+    };
+
+    var unformattedDataFromRepeater = function (repeater, column) {
+      // this will return a promise with an array containing all element for the repeater's column.
+      // the different being the data returned by this function will be the raw repeater data (without the filter).
+      // example:
+      // parameter passed column: item.UnitVIN will return promise with array of all VIN displayed.
+      return browser.element.all(by.repeater(repeater)).map(function (element) {
+        return element.evaluate(column);
+      });
     };
 
     var contentWithMarker = function () {
@@ -91,14 +107,14 @@ auctionHelper.describe('WMT-77', function () {
       // check if one of the 'contents' array element contains 'text'
       var found = false;
       contents.forEach(function (content) {
-        if (content.indexOf(text) !== -1) {
+        if (content.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
           found = true;
         }
       });
       return found;
     };
 
-    it('Should contains all the correct headers for the search results.', function () {
+    xit('Should contains all the correct headers for the search results.', function () {
       expect(auctionFloorPlan.floorplanDataHeaders.count()).toBe(8);
       // check if the header of the repeating elements is correct
       auctionFloorPlan.floorplanDataHeaders.each(function (floorplanDataHeader) {
@@ -115,7 +131,7 @@ auctionHelper.describe('WMT-77', function () {
       });
     });
 
-    it('Should contains floored and disbursement date for the date column of the search results.', function () {
+    xit('Should contains floored and disbursement date for the date column of the search results.', function () {
       var flooringDateColumn = 'item.FlooringDate';
       var disbursementDateColumn = 'item.DisbursementDate';
 
@@ -145,29 +161,29 @@ auctionHelper.describe('WMT-77', function () {
     xit('Should contains vehicle description and vin for the description column of the search results.', function () {
       var vinColumn = 'item.UnitVIN';
       var descriptionColumn = 'item.Description';
-
-      var vins = dataFromRepeater(repeater, vinColumn);
-      var descriptions = dataFromRepeater(repeater, descriptionColumn);
-
+      var vinPromise = unformattedDataFromRepeater(repeater, vinColumn);
+      var descPromise = unformattedDataFromRepeater(repeater, descriptionColumn);
       contentWithMarker('VIN').then(function (contents) {
-        expect(vins.count()).toEqual(contents.length);
-        expect(descriptions.count()).toEqual(contents.length);
-        vins.each(function (vin) {
-          vin.getText().then(function (text) {
-            expect(textInContents(contents, text)).toBeTruthy();
+        vinPromise.then(function (vinData) {
+          expect(vinData.length).toEqual(contents.length);
+          vinData.forEach(function (vin) {
+            expect(textInContents(contents, vin)).toBeTruthy();
           });
         });
-        descriptions.each(function (description) {
-          description.getText().then(function (text) {
-            expect(textInContents(contents, text)).toBeTruthy();
-          });
+        descPromise.then(function (descriptions) {
+          expect(descriptions.length).toEqual(contents.length);
+          descriptions.forEach(function (description) {
+            expect(textInContents(contents, description)).toBeTruthy();
+          })
         });
       });
     });
 
     it('Should contains title owner and seller have title for the title location column.', function () {
       var titleLocationColumn = 'item.TitleLocation';
+      var titleEditableColumn = 'item.TitleEditable';
       var titleLocations = dataFromRepeater(repeater, titleLocationColumn);
+      var titleEditablePromise = unformattedDataFromRepeater(repeater, titleEditableColumn);
       contentWithMarker('Buyer').then(function (contents) {
         expect(titleLocations.count()).toEqual(contents.length);
         titleLocations.each(function (titleLocation) {
@@ -175,14 +191,33 @@ auctionHelper.describe('WMT-77', function () {
             expect(textInContents(contents, text)).toBeTruthy();
           });
         });
-        expect(textInContents(contents, 'I Have the Title')).toBeTruthy();
+        titleEditablePromise.then(function (values) {
+          expect(values.length).toEqual(contents.length);
+          for (var i = 0; i < contents.length; i++) {
+            var content = contents[i];
+            var editable = values[i];
+            if (editable) {
+              expect(content).toContain('I Have the Title');
+            }
+          }
+        });
       });
     });
 
     it('Should display icon to view title when scanned title is available on the title column.', function () {
+      var titleImageAvailable = 'item.TitleImageAvailable';
+      var titleImageAvailablePromise = unformattedDataFromRepeater(repeater, titleImageAvailable);
       contentWithMarker('btn-square').then(function (contents) {
-        // TODO: this test is very data specific as the icon to view title will displayed depending on data.
-        expect(contents.length).toBeGreaterThan(0);
+        titleImageAvailablePromise.then(function (values) {
+          expect(values.length).toEqual(contents.length);
+          for (var i = 0; i < contents.length; i++) {
+            var content = contents[i];
+            var available = values[i];
+            if (available) {
+              expect(content).toContain('btn-square');
+            }
+          }
+        });
       });
     });
   });
