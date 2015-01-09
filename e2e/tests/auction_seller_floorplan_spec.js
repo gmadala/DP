@@ -57,7 +57,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     var repeater = 'item in floorplanData.results';
-    var dataFromRepeater = function (repeater, column) {
+    var formattedDataFromRepeater = function (repeater, column) {
       return browser.element.all(by.repeater(repeater).column(column));
     };
 
@@ -124,7 +124,7 @@ auctionHelper.describe('WMT-77', function () {
       });
       // check if the floor plan data column is visible or not.
       auctionFloorPlan.columnNames.forEach(function (columnName) {
-        var column = dataFromRepeater(repeater, columnName);
+        var column = formattedDataFromRepeater(repeater, columnName);
         column.each(function (columnData) {
           expect(columnData.isDisplayed()).toBeTruthy();
         });
@@ -135,8 +135,8 @@ auctionHelper.describe('WMT-77', function () {
       var flooringDateColumn = 'item.FlooringDate';
       var disbursementDateColumn = 'item.DisbursementDate';
 
-      var flooringDates = dataFromRepeater(repeater, flooringDateColumn);
-      var disbursementDates = dataFromRepeater(repeater, disbursementDateColumn);
+      var flooringDates = formattedDataFromRepeater(repeater, flooringDateColumn);
+      var disbursementDates = formattedDataFromRepeater(repeater, disbursementDateColumn);
 
       // get the content of all td tags marked with 'Floored' and 'Disbursement'.
       // this will effectively return the text inside the first column of the search result table.
@@ -182,7 +182,7 @@ auctionHelper.describe('WMT-77', function () {
     it('Should contains title owner and seller have title for the title location column.', function () {
       var titleLocationColumn = 'item.TitleLocation';
       var titleEditableColumn = 'item.TitleEditable';
-      var titleLocations = dataFromRepeater(repeater, titleLocationColumn);
+      var titleLocations = formattedDataFromRepeater(repeater, titleLocationColumn);
       var titleEditablePromise = unformattedDataFromRepeater(repeater, titleEditableColumn);
       contentWithMarker('Buyer').then(function (contents) {
         expect(titleLocations.count()).toEqual(contents.length);
