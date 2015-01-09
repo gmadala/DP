@@ -12,7 +12,7 @@ var util = new UtilObject();
 var err = new ErrorObject();
 
 //Home Page
-describe ('Dealer Portal Home Page', function() {
+describe('Dealer Portal Home Page', function () {
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;

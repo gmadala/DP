@@ -1,6 +1,6 @@
 'use strict';
 
-var AuctionDealerSearchObject = function() {
+var AuctionDealerSearchObject = function () {
 
   this.url = '#/act/dealersearch';
 
@@ -16,23 +16,23 @@ var AuctionDealerSearchObject = function() {
 
   this.stateOptions = browser.element.all(by.options('state.StateName for state in states'));
 
-  this.openPage = function() {
+  this.openPage = function () {
     browser.get(this.url);
   };
 
-  this.waitForPage = function() {
+  this.waitForPage = function () {
     var dealerNumber = this.dealerNumberField;
-    browser.driver.wait(function() {
+    browser.driver.wait(function () {
       return dealerNumber.isDisplayed();
     }, 3000);
   };
 
-  var getSearchButton = function(styledInputs, model) {
+  var getSearchButton = function (styledInputs, model) {
     expect(styledInputs.count()).toEqual(2);
     var promise = protractor.promise.defer();
-    styledInputs.each(function(styledInput) {
+    styledInputs.each(function (styledInput) {
       var dealerNumber = styledInput.element(by.model(model));
-      dealerNumber.isPresent().then(function(present) {
+      dealerNumber.isPresent().then(function (present) {
         if (present) {
           var dealerSearchButton = styledInput.element(by.css('button'));
           promise.fulfill(dealerSearchButton);
@@ -42,43 +42,43 @@ var AuctionDealerSearchObject = function() {
     return promise;
   };
 
-  this.getDealerNumberSearchButton = function() {
+  this.getDealerNumberSearchButton = function () {
     return getSearchButton(this.styledInputs, 'numberSearch.query.dealerNumber');
   };
 
-  this.getAuctionAccessSearchButton = function() {
+  this.getAuctionAccessSearchButton = function () {
     return getSearchButton(this.styledInputs, 'numberSearch.query.auctionAccessNumber');
   };
 
-  this.setDealerNumber = function(dealerNumber) {
+  this.setDealerNumber = function (dealerNumber) {
     this.dealerNumberField.sendKeys(dealerNumber);
   };
 
-  this.getDealerNumber = function() {
+  this.getDealerNumber = function () {
     return this.dealerNumberField.getAttribute('value');
   };
 
-  this.setAccessNumber = function(accessNumber) {
+  this.setAccessNumber = function (accessNumber) {
     this.accessNumberField.sendKeys(accessNumber);
   };
 
-  this.getAccessNumber = function() {
+  this.getAccessNumber = function () {
     return this.accessNumberField.getAttribute('value');
   };
 
-  this.setDealerName = function(dealerName) {
+  this.setDealerName = function (dealerName) {
     this.dealerNameField.sendKeys(dealerName);
   };
 
-  this.getDealerName = function() {
+  this.getDealerName = function () {
     return this.dealerNameField.getAttribute('value');
   };
 
-  this.setCity = function(city) {
+  this.setCity = function (city) {
     this.dealerCityField.sendKeys(city);
   };
 
-  this.getCity = function() {
+  this.getCity = function () {
     return this.dealerCityField.getAttribute('value');
   };
 
@@ -97,7 +97,7 @@ var AuctionDealerSearchObject = function() {
     this.stateOptions.each(function (option) {
       option.isSelected().then(function (selected) {
         if (selected) {
-          option.getText().then(function(text) {
+          option.getText().then(function (text) {
             promise.fulfill(text);
           });
         }

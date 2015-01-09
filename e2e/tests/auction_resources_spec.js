@@ -6,9 +6,9 @@ var AuctionResourcesObject = require('../framework/auction_resources_object');
 var auctionHelper = new AuctionHelperObject();
 var auctionResources = new AuctionResourcesObject();
 
-auctionHelper.describe('WMT-78', function() {
-  describe('Auction Portal – View A Report Content', function() {
-    beforeEach(function() {
+auctionHelper.describe('WMT-78', function () {
+  describe('Auction Portal – View A Report Content', function () {
+    beforeEach(function () {
       auctionResources.openPage();
       auctionResources.waitForPage();
     });
@@ -35,7 +35,7 @@ auctionHelper.describe('WMT-78', function() {
       return found;
     };
 
-    it('Current Reports contains Credit Availability Query History report and Receivable Detail report.', function() {
+    it('Current Reports contains Credit Availability Query History report and Receivable Detail report.', function () {
       expect(auctionResources.infoBlockIcon.isDisplayed()).toBeTruthy();
       expect(auctionResources.infoBlockText.isDisplayed()).toBeTruthy();
 
@@ -46,18 +46,18 @@ auctionHelper.describe('WMT-78', function() {
       var titlePromise = unformattedDataFromRepeater(repeater, titleColumn);
 
       var anchors = auctionResources.documents.all(by.css('a'));
-      anchors.each(function(anchor) {
-        anchor.getAttribute('href').then(function(href) {
-          urlPromise.then(function(urlArray) {
-            var encoded = urlArray.map(function(element) {
+      anchors.each(function (anchor) {
+        anchor.getAttribute('href').then(function (href) {
+          urlPromise.then(function (urlArray) {
+            var encoded = urlArray.map(function (element) {
               return element.replace(' ', '%20');
             });
             // this is very brittle as the url might have some special characters in it
             expect(textInArray(encoded, href)).toBeTruthy();
           });
         });
-        anchor.getText().then(function(text) {
-          titlePromise.then(function(titleArray) {
+        anchor.getText().then(function (text) {
+          titlePromise.then(function (titleArray) {
             expect(textInArray(titleArray, text)).toBeTruthy();
           });
         });

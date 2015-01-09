@@ -8,9 +8,9 @@ var datePickerObject = new DatePickerObject();
 var auctionHelper = new AuctionHelperObject();
 var auctionReports = new AuctionReportsObject();
 
-auctionHelper.describe('WMT-78', function() {
-  describe('Auction Portal – View A Report Content', function() {
-    beforeEach(function() {
+auctionHelper.describe('WMT-78', function () {
+  describe('Auction Portal – View A Report Content', function () {
+    beforeEach(function () {
       auctionReports.openPage();
       auctionReports.waitForPage();
     });
@@ -37,7 +37,7 @@ auctionHelper.describe('WMT-78', function() {
       return found;
     };
 
-    it('Current Reports contains Credit Availability Query History report and Receivable Detail report.', function() {
+    it('Current Reports contains Credit Availability Query History report and Receivable Detail report.', function () {
       expect(auctionReports.infoBlockIcon.isDisplayed()).toBeTruthy();
       expect(auctionReports.infoBlockText.isDisplayed()).toBeTruthy();
 
@@ -48,32 +48,32 @@ auctionHelper.describe('WMT-78', function() {
       var titlePromise = unformattedDataFromRepeater(repeater, titleColumn);
 
       var anchors = auctionReports.currentReport.all(by.css('a'));
-      anchors.each(function(anchor) {
-        anchor.getAttribute('href').then(function(href) {
-          urlPromise.then(function(urlArray) {
-            var encoded = urlArray.map(function(element) {
+      anchors.each(function (anchor) {
+        anchor.getAttribute('href').then(function (href) {
+          urlPromise.then(function (urlArray) {
+            var encoded = urlArray.map(function (element) {
               return element.replace(' ', '%20');
             });
             // this is very brittle as the url might have some special characters in it
             expect(textInArray(encoded, href)).toBeTruthy();
           });
         });
-        anchor.getText().then(function(text) {
-          titlePromise.then(function(titleArray) {
+        anchor.getText().then(function (text) {
+          titlePromise.then(function (titleArray) {
             expect(textInArray(titleArray, text)).toBeTruthy();
           });
         });
       });
     });
 
-    it('Historical Reports contains a Date selector and View Report button.', function() {
+    it('Historical Reports contains a Date selector and View Report button.', function () {
       var date = '07/23/2005';
       expect(auctionReports.disbursementDate.isDisplayed()).toBeTruthy();
       auctionReports.clickDisbursementDate();
       expect(datePickerObject.datepicker.isDisplayed()).toBeTruthy();
       datePickerObject.setDate(23, 'Jul', 2005);
       expect(auctionReports.getDisbursementDate()).toEqual(date);
-      auctionReports.subsidiaries.count().then(function(count) {
+      auctionReports.subsidiaries.count().then(function (count) {
         if (count > 0) {
           expect(auctionReports.subsidiariesSelection.isDisplayed()).toBeTruthy();
         }

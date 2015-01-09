@@ -1,145 +1,204 @@
 'use strict';
 
-var HomePageObject = function(){
+var HomePageObject = function () {
 };
 
-HomePageObject.prototype = Object.create({},{
+HomePageObject.prototype = Object.create({}, {
 
 
   // Locators
-  homeUrl:{ value: '#/home'
+  homeUrl: {
+    value: '#/home'
   },
 
-  dashboardUrl: { value: '#/dashboard.html'},
+  dashboardUrl: {value: '#/dashboard.html'},
 
-  lnkDashboard:{ get: function(){
+  lnkDashboard: {
+    get: function () {
 
-    return browser.element(by.css('.link_dashboard'));
-  }},
-  lnkPayments:{ get: function(){
+      return browser.element(by.css('.link_dashboard'));
+    }
+  },
+  lnkPayments: {
+    get: function () {
 
-    return browser.element(by.css('.link_payments'));
-  }},
+      return browser.element(by.css('.link_payments'));
+    }
+  },
 
-  lnkFloorPlan:{ get: function(){
-    return browser.element(by.css('.link_floorplan'));
-  }},
+  lnkFloorPlan: {
+    get: function () {
+      return browser.element(by.css('.link_floorplan'));
+    }
+  },
 
-  lnkTilteReleases:{ get: function(){
-    return browser.element(by.css('.link_titlereleases'));
-  }},
+  lnkTilteReleases: {
+    get: function () {
+      return browser.element(by.css('.link_titlereleases'));
+    }
+  },
 
-  lnkReceipts:{ get: function(){
-    return browser.element(by.css('.link_receipts'));
-  }},
+  lnkReceipts: {
+    get: function () {
+      return browser.element(by.css('.link_receipts'));
+    }
+  },
 
-  lnkReports:{ get: function(){
-    return browser.element(by.css('.link_reports'));
-  }},
+  lnkReports: {
+    get: function () {
+      return browser.element(by.css('.link_reports'));
+    }
+  },
   flooredVehiclesLinks: {
     get: function () {
       return browser.element.all(by.css('.table-value a'));
     }
   },
-  lnkAnalytics:{ get: function(){
-    return browser.element(by.css('.link_analytics'));
-  }},
-  btnWeek:{ get: function(){
-    return browser.element(by.id('week'));
-  }},
+  lnkAnalytics: {
+    get: function () {
+      return browser.element(by.css('.link_analytics'));
+    }
+  },
+  btnWeek: {
+    get: function () {
+      return browser.element(by.id('week'));
+    }
+  },
 
-  requestCreditIncrease:{ get: function(){
-    return browser.element(by.css('[ng-click="onRequestCredIncr()"]'));
-  }},
+  requestCreditIncrease: {
+    get: function () {
+      return browser.element(by.css('[ng-click="onRequestCredIncr()"]'));
+    }
+  },
 
-  cancelRequest:{ get: function(){
-    return browser.element(by.css('[ng-click="close()"]'));
-  }},
+  cancelRequest: {
+    get: function () {
+      return browser.element(by.css('[ng-click="close()"]'));
+    }
+  },
 
-  confirmRequest: { get: function(){
-    return browser.element(by.css('[ng-click="confirmRequest()"]'));
-  }},
+  confirmRequest: {
+    get: function () {
+      return browser.element(by.css('[ng-click="confirmRequest()"]'));
+    }
+  },
 
-  lineOfCredit:{ get: function(){
-    //return browser.element(by.model("$parent.selector.selectedLineOfCredit"));
-    return browser.element(by.id('lineOfCredit2'));
-  }},
-  lineOfCreditOptions:{ get: function(){
-    return browser.element.all(by.options('loc.CreditTypeName for loc in dashboardData.LinesOfCredit'));
-  }},
-  isNotTemporary:{ get: function(){
-    return browser.element(by.id('isTemp'));
-  }},
+  lineOfCredit: {
+    get: function () {
+      //return browser.element(by.model("$parent.selector.selectedLineOfCredit"));
+      return browser.element(by.id('lineOfCredit2'));
+    }
+  },
+  lineOfCreditOptions: {
+    get: function () {
+      return browser.element.all(by.options('loc.CreditTypeName for loc in dashboardData.LinesOfCredit'));
+    }
+  },
+  isNotTemporary: {
+    get: function () {
+      return browser.element(by.id('isTemp'));
+    }
+  },
 
-  selectAmount:{ get: function(){
-    return browser.element(by.model('selector.amount'));
-  }},
+  selectAmount: {
+    get: function () {
+      return browser.element(by.model('selector.amount'));
+    }
+  },
 
-  btnMonth:{ get: function(){
-    return browser.element(by.id('month'));
-  }},
+  btnMonth: {
+    get: function () {
+      return browser.element(by.id('month'));
+    }
+  },
 
-  nextArrow:{ get: function(){
-    return browser.element(by.css('.fc-button-next'));
-  }},
+  nextArrow: {
+    get: function () {
+      return browser.element(by.css('.fc-button-next'));
+    }
+  },
 
-  prevArrow:{get: function(){
-    return browser.element(by.css('.fc-button-prev'));
-  }},
+  prevArrow: {
+    get: function () {
+      return browser.element(by.css('.fc-button-prev'));
+    }
+  },
 
-  showPaymentDetails: { get: function(){
-    return browser.element(by.id('showorhide'));
-  }},
+  showPaymentDetails: {
+    get: function () {
+      return browser.element(by.id('showorhide'));
+    }
+  },
 
-  signOutButton:{ get: function(){
-    return browser.element(by.css('[ng-click="user.logout()"]'));
-  }},
+  signOutButton: {
+    get: function () {
+      return browser.element(by.css('[ng-click="user.logout()"]'));
+    }
+  },
 
-  menuDropdown: { get: function(){
-    return browser.element(by.css('.nxg-dropdown'));
-  }},
+  menuDropdown: {
+    get: function () {
+      return browser.element(by.css('.nxg-dropdown'));
+    }
+  },
 
   //ViewAllReceipts
-  viewAllReceipts : { get: function(){
-    return browser.element(by.id('viewAllReceipts'));
-  }},
+  viewAllReceipts: {
+    get: function () {
+      return browser.element(by.id('viewAllReceipts'));
+    }
+  },
 
   //RequestPayout
-  requestPayout: { get: function(){
-    return browser.element(by.id('requestPayout'));
-  }},
+  requestPayout: {
+    get: function () {
+      return browser.element(by.id('requestPayout'));
+    }
+  },
 
-  payOutAmt: { get: function(){
-    return browser.element(by.id('payoutAmt'));
-  }},
+  payOutAmt: {
+    get: function () {
+      return browser.element(by.id('payoutAmt'));
+    }
+  },
 
-  reqPayoutSubmit: {  get: function(){
-    return browser.element(by.id('reqPayoutSubmit'));
-  }},
+  reqPayoutSubmit: {
+    get: function () {
+      return browser.element(by.id('reqPayoutSubmit'));
+    }
+  },
 
   //FloorPlan
-  fpApproved: {  get: function(){
-    return browser.element(by.id('fpApproved'));
-  }},
-  fpPending: {  get: function(){
-    return browser.element(by.id('fpPending'));
-  }},
-  fpDenied: {  get: function(){
-    return browser.element(by.id('fpDenied'));
-  }},
-  floorPlanBtn:{ get: function(){
-    return browser.element(by.id('floorPlan'));
-  }},
+  fpApproved: {
+    get: function () {
+      return browser.element(by.id('fpApproved'));
+    }
+  },
+  fpPending: {
+    get: function () {
+      return browser.element(by.id('fpPending'));
+    }
+  },
+  fpDenied: {
+    get: function () {
+      return browser.element(by.id('fpDenied'));
+    }
+  },
+  floorPlanBtn: {
+    get: function () {
+      return browser.element(by.id('floorPlan'));
+    }
+  },
   //Setters
   setSelectAmount: {
-    value: function(){
+    value: function () {
       this.selectAmount.sendKeys('100');
       browser.waitForAngular();
     }
   },
 
   setPayOutAmt: {
-    value: function(){
+    value: function () {
       this.payOutAmt.sendKeys('100');
       browser.waitForAngular();
     }
@@ -147,13 +206,13 @@ HomePageObject.prototype = Object.create({},{
 
   //Doers
   doSelectAmount: {
-    value: function(){
+    value: function () {
       this.setSelectAmount();
       browser.waitForAngular();
     }
   },
   doSetPayOutAmt: {
-    value: function(){
+    value: function () {
       this.setPayOutAmt();
       browser.waitForAngular();
     }
@@ -161,88 +220,88 @@ HomePageObject.prototype = Object.create({},{
 
   //Navigation
   goToSignOut: {
-    value: function(){
+    value: function () {
       this.signOutButton.click();
       browser.waitForAngular();
     }
   },
   goToHome: {
-    value: function(){
+    value: function () {
       this.homeUrl.click();
     }
   },
-  goToMenuDropdown:{
-    value: function(){
+  goToMenuDropdown: {
+    value: function () {
       this.menuDropdown.click();
     }
   },
-  goToDashboard:{
-    value: function(){
+  goToDashboard: {
+    value: function () {
       this.lnkDashboard.click();
     }
   },
-  goToPayments:{
-    value: function(){
+  goToPayments: {
+    value: function () {
       this.lnkPayments.click();
     }
   },
-  goToFloorPlan:{
-    value: function(){
+  goToFloorPlan: {
+    value: function () {
       this.lnkFloorPlan.click();
     }
   },
-  goToTitleReleases:{
-    value: function(){
+  goToTitleReleases: {
+    value: function () {
       this.lnkTilteReleases.click();
     }
   },
-  goToReceipts:{
-    value: function(){
+  goToReceipts: {
+    value: function () {
       this.lnkReceipts.click();
     }
   },
-  goToReports:{
-    value: function(){
+  goToReports: {
+    value: function () {
       this.lnkReports.click();
     }
   },
-  goToTitleAnalytics:{
-    value: function(){
+  goToTitleAnalytics: {
+    value: function () {
       this.lnkAnalytics.click();
     }
   },
-  goToWeek:{
-    value: function(){
+  goToWeek: {
+    value: function () {
       this.btnWeek.click();
     }
   },
-  goToMonth:{
-    value: function(){
+  goToMonth: {
+    value: function () {
       this.btnMonth.click();
     }
   },
-  goToNextArrow:{
-    value: function(){
+  goToNextArrow: {
+    value: function () {
       this.nextArrow.click();
     }
   },
-  goToPrevArrow:{
-    value: function(){
+  goToPrevArrow: {
+    value: function () {
       this.prevArrow.click();
     }
   },
-  goToShowPaymentDetails:{
-    value: function(){
+  goToShowPaymentDetails: {
+    value: function () {
       this.showPaymentDetails.click();
     }
   },
 
-  goToVehicleDetails :{
-    value: function(){
+  goToVehicleDetails: {
+    value: function () {
       //browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(0).element(by.id('stockNumber1')).click(); //browser.element(by.id('stockNumber'+i)).click();
-      browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).then(function(data){
-        for(var i=1; i<= data.length; i++){
-          browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(i-1).element(by.id('stockNumber'+i)).click(); //browser.element(by.id('stockNumber'+i)).click();
+      browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).then(function (data) {
+        for (var i = 1; i <= data.length; i++) {
+          browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(i - 1).element(by.id('stockNumber' + i)).click(); //browser.element(by.id('stockNumber'+i)).click();
           browser.waitForAngular();
           browser.get('http://localhost:9000/#/home');
           browser.sleep(1000);
@@ -255,8 +314,8 @@ HomePageObject.prototype = Object.create({},{
     }
   },
 
-  goToPaymentSummary:{
-    value: function(){
+  goToPaymentSummary: {
+    value: function () {
       browser.element(by.id('overdue')).click();
       browser.get(this.homeUrl);
       browser.element(by.id('today')).click();
@@ -272,8 +331,8 @@ HomePageObject.prototype = Object.create({},{
     }
   },
 
-  goToCreditInformation:{
-    value: function(){
+  goToCreditInformation: {
+    value: function () {
       //expect(browser.element(by.id("lineOfCredit"))).count().toBe(2);
       browser.findElements(protractor.By.css('#lineOfCredit > option')).then(function (loc) {
         expect(loc.length).toBe(3);
@@ -282,93 +341,93 @@ HomePageObject.prototype = Object.create({},{
   },
 
   goToSelectDropdownbyNum: {
-    value: function(){
+    value: function () {
       browser.element(by.model('dashboardData.selectedLineOfCredit')).$('[value="0"]').click();
       browser.element(by.model('dashboardData.selectedLineOfCredit')).$('[value="1"]').click();
       browser.element(by.model('dashboardData.selectedLineOfCredit')).$('[value="2"]').click();
     }
   },
 
-  goToRequestCreditIncrease:{
-    value: function(){
+  goToRequestCreditIncrease: {
+    value: function () {
       this.requestCreditIncrease.click();
     }
   },
 
   goToCancelRequest: {
-    value: function(){
+    value: function () {
       this.cancelRequest.click();
     }
   },
 
-  goToConfirmRequest :{
-    value: function(){
+  goToConfirmRequest: {
+    value: function () {
       this.confirmRequest.click();
     }
   },
 
-  goToLineOfCredit:{
-    value: function(){
+  goToLineOfCredit: {
+    value: function () {
       browser.driver.actions().click(this.lineOfCredit).perform();
     }
   },
 
   goToIsNotTemporary: {
-    value: function(){
+    value: function () {
       browser.driver.actions().click(this.isNotTemporary).perform();
     }
   },
 
   goToViewAllReceipts: {
-    value: function(){
+    value: function () {
       this.viewAllReceipts.click();
     }
   },
 
   goToRequestPayout: {
-    value:function(){
+    value: function () {
       this.requestPayout.click();
     }
   },
 
   goToRequestPayoutSubmit: {
-    value:function(){
+    value: function () {
       this.reqPayoutSubmit.click();
     }
   },
 
   goToFPApproved: {
-    value:function(){
+    value: function () {
       this.fpApproved.click();
     }
   },
 
   goToFPPending: {
-    value:function(){
+    value: function () {
       this.fpPending.click();
     }
   },
 
   goToFPDenied: {
-    value:function(){
+    value: function () {
       this.fpDenied.click();
     }
   },
 
   goToFloorPlanBtn: {
-    value:function(){
+    value: function () {
       this.floorPlanBtn.click();
     }
   },
 
-  goToFlooredVehicleDetails:{
-    value: function(){
-        var promise = protractor.promise.defer();
-        this.flooredVehiclesLinks.each(function (floorPlanLink) {
-          promise.fulfill(floorPlanLink);
-        });
-        return promise;
-      }
+  goToFlooredVehicleDetails: {
+    value: function () {
+      var promise = protractor.promise.defer();
+      this.flooredVehiclesLinks.each(function (floorPlanLink) {
+        promise.fulfill(floorPlanLink);
+      });
+      return promise;
+    }
   }
 });
 module.exports = HomePageObject;

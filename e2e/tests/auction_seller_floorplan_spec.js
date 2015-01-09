@@ -174,7 +174,7 @@ auctionHelper.describe('WMT-77', function () {
           expect(descriptions.length).toEqual(contents.length);
           descriptions.forEach(function (description) {
             expect(textInContents(contents, description)).toBeTruthy();
-          })
+          });
         });
       });
     });

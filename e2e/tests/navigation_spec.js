@@ -304,8 +304,8 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       // Verifying that we can click open and click close
 
       // click on a id="uvTabLabel"
-      element.all(by.id('uvTabLabel')).each(function(feedbackButton) {
-        feedbackButton.isDisplayed().then(function(displayed) {
+      element.all(by.id('uvTabLabel')).each(function (feedbackButton) {
+        feedbackButton.isDisplayed().then(function (displayed) {
           if (displayed) {
             feedbackButton.click();
             // close it by clicking using div id="uvw-dialog-close-uv-1"

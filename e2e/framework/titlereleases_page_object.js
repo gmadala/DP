@@ -39,7 +39,7 @@ var PaymentPageObject = function () {
     return promise;
   };
 
-  this.getActiveRequestTitleUnavailableLink = function() {
+  this.getActiveRequestTitleUnavailableLink = function () {
     var promise = protractor.promise.defer();
     this.requestTitleUnavailableLinks.each(function (requestTitleUnavailableLink) {
       promise.fulfill(requestTitleUnavailableLink);

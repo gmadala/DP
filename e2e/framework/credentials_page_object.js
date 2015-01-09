@@ -36,7 +36,7 @@ CredentialsObject.prototype = Object.create({}, {
   floorPlanEndDate: {
     value: '12/31/2014'
   },
-  findFloorPlanVIN:{
+  findFloorPlanVIN: {
     value: 'CH22415739545567'
   }
 

@@ -79,10 +79,10 @@ var PaymentPageObject = function () {
     return promise;
   };
 
-  this.getInventoryLocation = function() {
+  this.getInventoryLocation = function () {
     var promise = protractor.promise.defer();
-    this.inventoryLocations.each(function(inventoryLocation) {
-      inventoryLocation.isDisplayed().then(function(displayed) {
+    this.inventoryLocations.each(function (inventoryLocation) {
+      inventoryLocation.isDisplayed().then(function (displayed) {
         if (displayed) {
           promise.fulfill(inventoryLocation);
         }
@@ -133,8 +133,8 @@ var PaymentPageObject = function () {
 
   this.getActiveSchedulePaymentButton = function () {
     var promise = protractor.promise.defer();
-    this.schedulePaymentButtons.each(function(schedulePaymentButton) {
-      schedulePaymentButton.isDisplayed().then(function(displayed) {
+    this.schedulePaymentButtons.each(function (schedulePaymentButton) {
+      schedulePaymentButton.isDisplayed().then(function (displayed) {
         if (displayed) {
           promise.fulfill(schedulePaymentButton);
         }

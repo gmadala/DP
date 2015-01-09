@@ -30,7 +30,7 @@ describe('Receipts page e2e', function () {
       browser.driver.switchTo().window(secondHandle).then(function () {
         browser.driver.executeScript('return window.location.href').then(function (url) {
           expect(url).not.toContain(receiptsPage.url);
-          browser.driver.close().then(function() {
+          browser.driver.close().then(function () {
             browser.driver.switchTo().window(firstHandle);
           });
         });
@@ -58,7 +58,7 @@ describe('Receipts page e2e', function () {
       browser.driver.switchTo().window(secondHandle).then(function () {
         browser.driver.executeScript('return window.location.href').then(function (url) {
           expect(url).not.toContain(receiptsPage.url);
-          browser.driver.close().then(function() {
+          browser.driver.close().then(function () {
             browser.driver.switchTo().window(firstHandle);
           });
         });

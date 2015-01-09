@@ -62,7 +62,7 @@ auctionHelper.describe('WMT-76', function () {
       expect(auctionBulkFlooring.getVin()).not.toEqual(vinValue);
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
-      auctionBulkFlooring.getVinSearchButton().then(function(vinSearchButton) {
+      auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
         vinSearchButton.click();
       });
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
@@ -76,7 +76,7 @@ auctionHelper.describe('WMT-76', function () {
       expect(auctionBulkFlooring.getVin()).not.toEqual(vinValue);
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
-      auctionBulkFlooring.getVinSearchButton().then(function(vinSearchButton) {
+      auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
         vinSearchButton.click();
       });
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
@@ -85,28 +85,28 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     /** validations function to validate make, model, year and style **/
-    var validateInputIsNotPresent = function() {
+    var validateInputIsNotPresent = function () {
       expect(auctionBulkFlooring.inputMake.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.inputModel.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.inputYear.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.inputStyle.isPresent()).not.toBeTruthy();
     };
 
-    var validateOutputNotPresent = function() {
+    var validateOutputNotPresent = function () {
       expect(auctionBulkFlooring.outputMake.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.outputModel.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.outputYear.isPresent()).not.toBeTruthy();
       expect(auctionBulkFlooring.outputStyle.isPresent()).not.toBeTruthy();
     };
 
-    var validateInputIsDisplayed = function() {
+    var validateInputIsDisplayed = function () {
       expect(auctionBulkFlooring.inputMake.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.inputModel.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.inputYear.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.inputStyle.isDisplayed()).toBeTruthy();
     };
 
-    var validateOutputIsDisplayedAndDisabled = function() {
+    var validateOutputIsDisplayedAndDisabled = function () {
       expect(auctionBulkFlooring.outputMake.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.outputModel.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.outputYear.isDisplayed()).toBeTruthy();
@@ -232,7 +232,7 @@ auctionHelper.describe('WMT-76', function () {
       expect(auctionBulkFlooring.saleDescriptionText.isDisplayed()).toBeTruthy();
       browser.driver.actions().mouseMove(auctionBulkFlooring.tooltipButton).perform();
       // now we wait for the delay of the tooltip before we check if the tooltip is actually gets displayed
-      browser.driver.wait(function() {
+      browser.driver.wait(function () {
         return auctionBulkFlooring.tooltip.isPresent();
       }, 3000);
       expect(auctionBulkFlooring.tooltip.isDisplayed()).toBeTruthy();

@@ -15,18 +15,18 @@ describe('Title releases page e2e', function () {
     expect(browser.driver.getCurrentUrl()).toContain(titleReleasesPage.url);
     expect(titleReleasesPage.vehicleDescriptionLinks.count()).toBeGreaterThan(0);
     expect(titleReleasesPage.getActiveVehicleDescriptionLink()).toBeDefined();
-    titleReleasesPage.getActiveVehicleDescriptionLink().then(function(vehicleDescriptionLink) {
+    titleReleasesPage.getActiveVehicleDescriptionLink().then(function (vehicleDescriptionLink) {
       vehicleDescriptionLink.click();
     });
     expect(browser.driver.getCurrentUrl()).not.toContain(titleReleasesPage.url);
   });
 
-  it('should navigate to title release checkout when confirm requests is clicked', function() {
+  it('should navigate to title release checkout when confirm requests is clicked', function () {
     expect(browser.driver.getCurrentUrl()).toContain(titleReleasesPage.url);
     expect(titleReleasesPage.confirmRequestsButton.isEnabled()).not.toBeTruthy();
     expect(titleReleasesPage.requestTitleButtons.count()).toBeGreaterThan(0);
     expect(titleReleasesPage.getActiveRequestTitleButton()).toBeDefined();
-    titleReleasesPage.getActiveRequestTitleButton().then(function(requestTitleButton) {
+    titleReleasesPage.getActiveRequestTitleButton().then(function (requestTitleButton) {
       requestTitleButton.click();
     });
     expect(titleReleasesPage.confirmRequestsButton.isEnabled()).toBeTruthy();
@@ -34,10 +34,10 @@ describe('Title releases page e2e', function () {
     expect(browser.driver.getCurrentUrl()).not.toContain(titleReleasesPage.url);
   });
 
-  it('should open title release unavailable modal when title release unavailable link is clicked', function() {
+  it('should open title release unavailable modal when title release unavailable link is clicked', function () {
     expect(titleReleasesPage.requestTitleUnavailableLinks.count()).toBeGreaterThan(0);
     expect(titleReleasesPage.getActiveRequestTitleUnavailableLink()).toBeDefined();
-    titleReleasesPage.getActiveRequestTitleUnavailableLink().then(function(requestTitleUnavailableLink) {
+    titleReleasesPage.getActiveRequestTitleUnavailableLink().then(function (requestTitleUnavailableLink) {
       requestTitleUnavailableLink.click();
     });
     var modalHeaderText = 'Title Release Unavailable';

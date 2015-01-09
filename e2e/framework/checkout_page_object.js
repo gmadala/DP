@@ -1,15 +1,15 @@
 'use strict';
 
-var CheckoutPageObject = function() {
+var CheckoutPageObject = function () {
   this.url = '#/checkout';
 
-  this.openPage = function() {
+  this.openPage = function () {
     browser.get(this.url);
   };
 
-  this.waitForPage = function() {
+  this.waitForPage = function () {
     var submitPaymentsButton = this.submitPaymentsButton;
-    browser.driver.wait(function() {
+    browser.driver.wait(function () {
       return submitPaymentsButton.isPresent();
     }, 3000);
   };

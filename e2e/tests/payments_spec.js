@@ -20,7 +20,7 @@ describe('Payments page e2e', function () {
     expect(paymentsPage.searchField.isDisplayed()).toBeTruthy();
     expect(paymentsPage.searchFilterSelection.isDisplayed()).toBeTruthy();
     expect(paymentsPage.getInventoryLocation()).toBeDefined();
-    paymentsPage.getInventoryLocation().then(function(inventoryLocation) {
+    paymentsPage.getInventoryLocation().then(function (inventoryLocation) {
       expect(inventoryLocation.isDisplayed()).toBeTruthy();
     });
 
@@ -58,7 +58,7 @@ describe('Payments page e2e', function () {
     expect(paymentsPage.searchEndDateField.isDisplayed()).not.toBeTruthy();
   });
 
-  it('should allow setting start date and end date using datepicker.', function() {
+  it('should allow setting start date and end date using datepicker.', function () {
     paymentsPage.setFilterOption('Date Range');
 
     expect(paymentsPage.searchStartDateField.isDisplayed()).toBeTruthy();
@@ -81,16 +81,16 @@ describe('Payments page e2e', function () {
     expect(paymentsPage.getSearchField()).toEqual(searchString);
   });
 
-  it('should verify that search field have the correct watermark.', function() {
+  it('should verify that search field have the correct watermark.', function () {
     var watermark = 'By Stock #, VIN, or Description';
     expect(paymentsPage.searchField.getAttribute('placeholder')).toEqual(watermark);
   });
 
   // Start of WMT-53
-  it('should open request extension modal when request extension is clicked', function() {
+  it('should open request extension modal when request extension is clicked', function () {
     expect(paymentsPage.requestExtensionLinks.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveRequestExtensionLink()).toBeDefined();
-    paymentsPage.getActiveRequestExtensionLink().then(function(requestExtensionLink) {
+    paymentsPage.getActiveRequestExtensionLink().then(function (requestExtensionLink) {
       requestExtensionLink.click();
     });
     var modalHeaderText = 'Request Extension';
@@ -98,22 +98,22 @@ describe('Payments page e2e', function () {
     expect(paymentsPage.getModalHeaderText()).toEqual(modalHeaderText);
   });
 
-  it('should navigate to vehicle details when vehicle description is clicked', function() {
+  it('should navigate to vehicle details when vehicle description is clicked', function () {
     expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
     expect(paymentsPage.vehicleDetailLinks.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveVehicleDetailLink()).toBeDefined();
-    paymentsPage.getActiveVehicleDetailLink().then(function(vehicleDetailLink) {
+    paymentsPage.getActiveVehicleDetailLink().then(function (vehicleDetailLink) {
       vehicleDetailLink.click();
     });
     expect(browser.driver.getCurrentUrl()).not.toContain(paymentsPage.url);
   });
 
-  it('should navigate to checkout when checkout is clicked', function() {
+  it('should navigate to checkout when checkout is clicked', function () {
     expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
     expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
     expect(paymentsPage.schedulePaymentButtons.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveSchedulePaymentButton()).toBeDefined();
-    paymentsPage.getActiveSchedulePaymentButton().then(function(schedulePaymentButton) {
+    paymentsPage.getActiveSchedulePaymentButton().then(function (schedulePaymentButton) {
       schedulePaymentButton.click();
     });
     expect(paymentsPage.checkoutButton.isEnabled()).toBeTruthy();
@@ -121,10 +121,10 @@ describe('Payments page e2e', function () {
     expect(browser.driver.getCurrentUrl()).toContain(checkoutPage.url);
   });
 
-  it('should open cancel payment modal when unschedule link is clicked', function() {
+  it('should open cancel payment modal when unschedule link is clicked', function () {
     expect(paymentsPage.unschedulePaymentButtons.count()).toBeGreaterThan(0);
     expect(paymentsPage.getActiveUnschedulePaymentButton()).toBeDefined();
-    paymentsPage.getActiveUnschedulePaymentButton().then(function(unschedulePaymentButton) {
+    paymentsPage.getActiveUnschedulePaymentButton().then(function (unschedulePaymentButton) {
       unschedulePaymentButton.click();
     });
     var modalHeaderText = 'Cancel';

@@ -1,6 +1,6 @@
 'use strict';
 
-var AuctionBulkFlooringObject = function() {
+var AuctionBulkFlooringObject = function () {
 
   this.url = '#/act/bulkflooring';
 
@@ -49,29 +49,29 @@ var AuctionBulkFlooringObject = function() {
   this.modalHeader = this.modal.element(by.css('.modal-header'));
   this.closeModal = this.modal.element(by.cssContainingText('button', 'Close Window'));
 
-  this.openPage = function() {
+  this.openPage = function () {
     browser.get(this.url);
   };
 
-  this.waitForPage = function() {
+  this.waitForPage = function () {
     var vinSearch = this.vinSearchField;
-    browser.driver.wait(function() {
+    browser.driver.wait(function () {
       return vinSearch.isDisplayed();
     }, 3000);
   };
 
-  this.waitAndCloseModal = function() {
+  this.waitAndCloseModal = function () {
     var modal = this.modal;
     var closeModal = this.closeModal;
     // must be done in the following steps:
     // * wait for the modal to appear in the page first
-    browser.driver.wait(function() {
+    browser.driver.wait(function () {
       return modal.isPresent();
     }, 3000);
     // * close it once it's displayed on the screen.
-    browser.driver.wait(function() {
+    browser.driver.wait(function () {
       var promise = protractor.promise.defer();
-      modal.isPresent().then(function(present) {
+      modal.isPresent().then(function (present) {
         if (present) {
           closeModal.click();
         }
@@ -81,12 +81,12 @@ var AuctionBulkFlooringObject = function() {
     }, 3000);
   };
 
-  var getSearchButton = function(styledInputs, model) {
+  var getSearchButton = function (styledInputs, model) {
     expect(styledInputs.count()).toEqual(2);
     var promise = protractor.promise.defer();
-    styledInputs.each(function(styledInput) {
+    styledInputs.each(function (styledInput) {
       var dealerNumber = styledInput.element(by.model(model));
-      dealerNumber.isPresent().then(function(present) {
+      dealerNumber.isPresent().then(function (present) {
         if (present) {
           var dealerSearchButton = styledInput.element(by.css('button'));
           promise.fulfill(dealerSearchButton);
@@ -96,23 +96,23 @@ var AuctionBulkFlooringObject = function() {
     return promise;
   };
 
-  this.getVinSearchButton = function() {
+  this.getVinSearchButton = function () {
     return getSearchButton(this.styledInputs, 'data.UnitVin');
   };
 
-  this.getSellerSearchButton = function() {
+  this.getSellerSearchButton = function () {
     return getSearchButton(this.styledInputs, 'query');
   };
 
-  this.setVin = function(vin) {
+  this.setVin = function (vin) {
     this.vinSearchField.sendKeys(vin);
   };
 
-  this.getVin = function() {
+  this.getVin = function () {
     return this.vinSearchField.getAttribute('value');
   };
 
-  this.setColor = function(colorName) {
+  this.setColor = function (colorName) {
     this.colorOptions.each(function (option) {
       option.getText().then(function (name) {
         if (name === colorName) {
@@ -122,12 +122,12 @@ var AuctionBulkFlooringObject = function() {
     });
   };
 
-  this.getColor = function() {
+  this.getColor = function () {
     var promise = protractor.promise.defer();
     this.colorOptions.each(function (option) {
       option.isSelected().then(function (selected) {
         if (selected) {
-          option.getText().then(function(text) {
+          option.getText().then(function (text) {
             promise.fulfill(text);
           });
         }
@@ -136,15 +136,15 @@ var AuctionBulkFlooringObject = function() {
     return promise;
   };
 
-  this.setMileage = function(mileage) {
+  this.setMileage = function (mileage) {
     this.mileageField.sendKeys(mileage);
   };
 
-  this.getMileage = function() {
+  this.getMileage = function () {
     return this.mileageField.getAttribute('value');
   };
 
-  this.setTitleLocation = function(titleLocationName) {
+  this.setTitleLocation = function (titleLocationName) {
     this.locationOptions.each(function (option) {
       option.getText().then(function (name) {
         if (name === titleLocationName) {
@@ -154,12 +154,12 @@ var AuctionBulkFlooringObject = function() {
     });
   };
 
-  this.getTitleLocation = function() {
+  this.getTitleLocation = function () {
     var promise = protractor.promise.defer();
     this.locationOptions.each(function (option) {
       option.isSelected().then(function (selected) {
         if (selected) {
-          option.getText().then(function(text) {
+          option.getText().then(function (text) {
             promise.fulfill(text);
           });
         }
@@ -168,31 +168,31 @@ var AuctionBulkFlooringObject = function() {
     return promise;
   };
 
-  this.setConsignerTicketNumber = function(consignerTicketNumber) {
+  this.setConsignerTicketNumber = function (consignerTicketNumber) {
     this.consignerTicketNumberField.sendKeys(consignerTicketNumber);
   };
 
-  this.getConsignerTicketNumber = function(consignerTicketNumber) {
+  this.getConsignerTicketNumber = function () {
     return this.consignerTicketNumberField.getAttribute('value');
   };
 
-  this.setLotNumber = function(lotNumber) {
+  this.setLotNumber = function (lotNumber) {
     this.lotNumberField.sendKeys(lotNumber);
   };
 
-  this.getLotNumber = function() {
+  this.getLotNumber = function () {
     return this.lotNumberField.getAttribute('value');
   };
 
-  this.setBuyerQuery = function(buyerQuery) {
+  this.setBuyerQuery = function (buyerQuery) {
     this.buyerQueryField.sendKeys(buyerQuery);
   };
 
-  this.getBuyerQuery = function() {
+  this.getBuyerQuery = function () {
     return this.buyerQueryField.getAttribute('value');
   };
 
-  this.setInventoryLocation = function(inventoryLocationName) {
+  this.setInventoryLocation = function (inventoryLocationName) {
     this.sellerOptions.each(function (option) {
       option.getText().then(function (name) {
         if (name === inventoryLocationName) {
@@ -202,12 +202,12 @@ var AuctionBulkFlooringObject = function() {
     });
   };
 
-  this.getInventoryLocation = function() {
+  this.getInventoryLocation = function () {
     var promise = protractor.promise.defer();
     this.sellerOptions.each(function (option) {
       option.isSelected().then(function (selected) {
         if (selected) {
-          option.getText().then(function(text) {
+          option.getText().then(function (text) {
             promise.fulfill(text);
           });
         }
@@ -216,19 +216,19 @@ var AuctionBulkFlooringObject = function() {
     return promise;
   };
 
-  this.setUnitPurchasePrice = function(unitPurchasePrice) {
+  this.setUnitPurchasePrice = function (unitPurchasePrice) {
     this.unitPurchasePriceField.sendKeys(unitPurchasePrice);
   };
 
-  this.getUnitPurchasePrice = function() {
+  this.getUnitPurchasePrice = function () {
     return this.unitPurchasePriceField.getAttribute('value');
   };
 
-  this.getUnitPurchaseDate = function() {
+  this.getUnitPurchaseDate = function () {
     return this.unitPurchaseDateField.getAttribute('value');
   };
 
-  this.setBankAccount = function(bankAccountName) {
+  this.setBankAccount = function (bankAccountName) {
     this.bankAccountOptions.each(function (option) {
       option.getText().then(function (name) {
         if (name === bankAccountName) {
@@ -238,12 +238,12 @@ var AuctionBulkFlooringObject = function() {
     });
   };
 
-  this.getBankAccount = function() {
+  this.getBankAccount = function () {
     var promise = protractor.promise.defer();
     this.bankAccountOptions.each(function (option) {
       option.isSelected().then(function (selected) {
         if (selected) {
-          option.getText().then(function(text) {
+          option.getText().then(function (text) {
             promise.fulfill(text);
           });
         }
@@ -252,35 +252,35 @@ var AuctionBulkFlooringObject = function() {
     return promise;
   };
 
-  this.getOutputMake = function() {
+  this.getOutputMake = function () {
     return this.outputMake.getAttribute('value');
   };
 
-  this.getOutputModel = function() {
+  this.getOutputModel = function () {
     return this.outputModel.getAttribute('value');
   };
 
-  this.getOutputYear = function() {
+  this.getOutputYear = function () {
     return this.outputYear.getAttribute('value');
   };
 
-  this.getOutputStyle = function() {
+  this.getOutputStyle = function () {
     return this.outputStyle.getAttribute('value');
   };
 
-  this.getInputMake = function(make) {
+  this.getInputMake = function (make) {
     this.inputMake.sendKeys(make);
   };
 
-  this.getInputModel = function(model) {
+  this.getInputModel = function (model) {
     this.inputModel.sendKeys(model);
   };
 
-  this.getInputYear = function(year) {
+  this.getInputYear = function (year) {
     this.inputYear.sendKeys(year);
   };
 
-  this.getInputStyle = function(style) {
+  this.getInputStyle = function (style) {
     this.inputStyle.sendKeys(style);
   };
 };

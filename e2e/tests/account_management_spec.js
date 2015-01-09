@@ -7,21 +7,21 @@ var accMgtlObject = require('../framework/account_management_page_object.js');
 
 var accMgtPage = new accMgtlObject();
 
-describe('Account Management Page', function(){
+describe('Account Management Page', function () {
 
-  beforeEach(function(){
+  beforeEach(function () {
     browser.ignoreSynchronization = true;
     browser.get(accMgtPage.accountMgtUrl);
     browser.waitForAngular();
   });
 
-  it('should check for the Request a Credit Increase - Cancel Request', function(){
+  it('should check for the Request a Credit Increase - Cancel Request', function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     requestCreditIncrease();
     accMgtPage.goToCancelRequest();
 
   });
-  it('should check for the Request a Credit Increase - Confirm Request', function(){
+  it('should check for the Request a Credit Increase - Confirm Request', function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     requestCreditIncrease();
     accMgtPage.goToConfirmRequest();
@@ -54,7 +54,7 @@ describe('Account Management Page', function(){
     });
   });
 
-  var requestCreditIncrease = function() {
+  var requestCreditIncrease = function () {
     accMgtPage.goTorequestCreditIncrease();
     expect(accMgtPage.creditExtend.isDisplayed()).toBeTruthy();
     expect(accMgtPage.isNotTemporary.isDisplayed()).toBeTruthy();
@@ -65,14 +65,14 @@ describe('Account Management Page', function(){
   };
 //Account Management Content Testing WMT-87
 
-  it('should check for the Business Email - No Editing', function(){
+  it('should check for the Business Email - No Editing', function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     expect(accMgtPage.businessEmailText.isDisplayed()).toBeTruthy();
     expect(accMgtPage.businessEmail.isDisplayed()).toBeTruthy();
     expect(accMgtPage.registrationEnabled.isPresent()).toBe(true);
   });
 
-  it('should check for the Business Settings - Editing With Invalid Registration PIN', function(){
+  it('should check for the Business Settings - Editing With Invalid Registration PIN', function () {
 
     var invalidRegPIN = 'test';
     businessSettings();
@@ -81,7 +81,7 @@ describe('Account Management Page', function(){
     expect(accMgtPage.enhancedRegPINError.isDisplayed()).toBeTruthy();
   });
 
-  it('should check for the Business Settings - Editing With Valid Registration PIN', function(){
+  it('should check for the Business Settings - Editing With Valid Registration PIN', function () {
     var validRegPIN = '1234';
     businessSettings();
     accMgtPage.doEnhancedRegistrationPIN(validRegPIN);
@@ -89,7 +89,7 @@ describe('Account Management Page', function(){
     expect(accMgtPage.enhancedRegPINError.isDisplayed()).not.toBeTruthy();
   });
 
-  var businessSettings = function(){
+  var businessSettings = function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     expect(accMgtPage.editSettings.isDisplayed()).toBeTruthy();
     expect(accMgtPage.goToEditSettings());
@@ -101,7 +101,7 @@ describe('Account Management Page', function(){
     expect(accMgtPage.paragraphTwo.isDisplayed()).toBeTruthy();
   };
 
-  it('should check for the Financial Accounts - No Editing', function(){
+  it('should check for the Financial Accounts - No Editing', function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     expect(accMgtPage.bankAccountText.isDisplayed()).toBeTruthy();
     expect(accMgtPage.availableCreditText.isDisplayed()).toBeTruthy();
@@ -120,7 +120,7 @@ describe('Account Management Page', function(){
     expect(accMgtPage.totalAvailable.isDisplayed()).toBeTruthy();
   });
 
-  it('should check for the Title Settings - No Editing', function(){
+  it('should check for the Title Settings - No Editing', function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     expect(accMgtPage.defaultAddressText.isDisplayed()).toBeTruthy();
     expect(accMgtPage.additionalAddressText.isDisplayed()).toBeTruthy();
@@ -131,18 +131,18 @@ describe('Account Management Page', function(){
     expect(accMgtPage.addressZip.isDisplayed()).toBeTruthy();
   });
 
-  it('should check for the Title Settings - Editing with Save Settings', function(){
+  it('should check for the Title Settings - Editing with Save Settings', function () {
     titleSettings();
     accMgtPage.goToButtonHelp();
     accMgtPage.goToSaveTitleSettings();
   });
-  it('should check for the Title Settings - Editing with Cancel', function(){
+  it('should check for the Title Settings - Editing with Cancel', function () {
     titleSettings();
     accMgtPage.goToButtonHelp();
     accMgtPage.goToCancelTitleSettings();
   });
 
-  var titleSettings = function()  {
+  var titleSettings = function () {
     expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
     expect(accMgtPage.defaultAddressText.isDisplayed()).toBeTruthy();
     expect(accMgtPage.additionalAddressText.isDisplayed()).not.toBe(true);

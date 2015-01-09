@@ -4,17 +4,19 @@ var fs = require('fs');
 function mkdir(path, root) {
 
   var dirs = path.split('/'), dir = dirs.shift();
-  root = (root||'')+dir+'/';
+  root = (root || '') + dir + '/';
 
-  try { fs.mkdirSync(root); }
+  try {
+    fs.mkdirSync(root);
+  }
   catch (e) {
     //dir wasn't made, something went wrong
-    if(!fs.statSync(root).isDirectory()) {
+    if (!fs.statSync(root).isDirectory()) {
       throw new Error(e);
     }
   }
 
-  return !dirs.length||mkdir(dirs.join('/'), root);
+  return !dirs.length || mkdir(dirs.join('/'), root);
 }
 
 mkdir('target/surefire-reports/');
@@ -44,7 +46,7 @@ exports.config = {
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
   allScriptsTimeout: 200000,
-  onPrepare: function() {
+  onPrepare: function () {
     require('jasmine-reporters');
     jasmine.getEnv().addReporter(
       new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')

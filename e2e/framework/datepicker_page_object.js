@@ -46,8 +46,8 @@ var DatepickerPageObject = function () {
     this.datepickerYearHeader.getText().then(function (yearHeader) {
       var years = yearHeader.split('-');
       var i;
-      var maxYear = parseInt(years[1]);
-      var minYear = parseInt(years[0]);
+      var maxYear = parseInt(years[1], 10);
+      var minYear = parseInt(years[0], 10);
       if (year > maxYear) {
         var moveYearForward = Math.round((year - maxYear) / 10);
         for (i = 0; i < moveYearForward; i++) {

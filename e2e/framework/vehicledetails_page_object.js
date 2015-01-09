@@ -27,91 +27,91 @@ VehiclePageObject.prototype = Object.create({}, {
   },
 
   confirmRequest: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.modal')).element(by.cssContainingText('button', 'Confirm Request'));
     }
   },
 
   optionsAndBreak: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.featured.block'));
     }
   },
 
   cancelChanges: {
-    get: function() {
+    get: function () {
       return browser.element(by.id('cancelChanges'));
     }
   },
 
   confirmChanges: {
-    get: function() {
+    get: function () {
       return browser.element(by.id('confirmChanges'));
     }
   },
 
   changeInventory: {
-    get: function() {
+    get: function () {
       return browser.element(by.id('changeInvLocation'));
     }
   },
 
   inventoryAddress: {
-    get: function() {
+    get: function () {
       return browser.element(by.model('flooringInfo.inventoryAddress'));
     }
   },
 
   inventoryCancel: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.button-group')).element(by.cssContainingText('button', 'Cancel'));
     }
   },
 
   inventorySave: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.button-group')).element(by.cssContainingText('button', 'Save Changes'));   //by.id('saveInvChanges'));
     }
   },
 
   showHidePayActivity: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.accordion-button'));
     }
   },
 
   viewTitle: {
-    get: function() {
+    get: function () {
       return browser.element(by.cssContainingText('a', 'View the Title'));
     }
   },
 
   requestTitle: {
-    get: function() {
+    get: function () {
       return browser.element(by.cssContainingText('button', 'Request the Title'));
     }
   },
 
   paymentOptions: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.cr-inline label'));
     }
   },
 
   vehicleHistory: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('a.featured'));
     }
   },
 
   closePaymentDetails: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('.modal')).element(by.cssContainingText('button', 'Close Window'));  //id('btnClose'));
     }
   },
 
   paymentActivityTransactionDetails: {
-    get: function() {
+    get: function () {
       return browser.element(by.css('a.primary'));
     }
   },

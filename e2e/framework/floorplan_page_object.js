@@ -8,7 +8,8 @@ var FloorPlanObject = function () {
 
 FloorPlanObject.prototype = Object.create({}, {
 
-  floorPlanUrl:{ value: '#/floorplan'
+  floorPlanUrl: {
+    value: '#/floorplan'
   },
   //Locators
   startDate: {
@@ -36,18 +37,18 @@ FloorPlanObject.prototype = Object.create({}, {
       return browser.element.all(by.css('a.lockup-major'));
     }
   },
-  floorPlanSearch:{
+  floorPlanSearch: {
     get: function () {
       return browser.element(by.id('floorPlanSearch'));
     }
   },
   invLocations: {
-    get: function() {
+    get: function () {
       return browser.element.all(by.model('activeCriteria.inventoryLocation'));
     }
   },
   invLocationsOptions: {
-    get: function() {
+    get: function () {
       return browser.element.all(by.options('i.value as i.label for i in inventoryLocations'));
     }
   },
@@ -66,25 +67,25 @@ FloorPlanObject.prototype = Object.create({}, {
     }
   },
   clearSearchButton: {
-    get: function(){
+    get: function () {
       return browser.element(by.css('button.clear-search'));
     }
   },
 
   //Setters
-  setStartDate :{
+  setStartDate: {
     value: function (startdate) {
       this.startDate.sendKeys(startdate);
       browser.waitForAngular();
     }
   },
-  setEndDate :{
+  setEndDate: {
     value: function (enddate) {
       this.endDate.sendKeys(enddate);
       browser.waitForAngular();
     }
   },
-  setSearchFloorPlan  :{
+  setSearchFloorPlan: {
     value: function (searchVIN) {
       this.searchFloorPlan.sendKeys(searchVIN);
       browser.waitForAngular();
@@ -111,7 +112,7 @@ FloorPlanObject.prototype = Object.create({}, {
   },
   //Navigation
   goToFlooringStatus: {
-    value: function(){
+    value: function () {
       browser.element(by.model('activeCriteria.filter')).$('[value="0"]').click();
       browser.element(by.model('activeCriteria.filter')).$('[value="1"]').click();
       browser.element(by.model('activeCriteria.filter')).$('[value="2"]').click();
@@ -120,8 +121,8 @@ FloorPlanObject.prototype = Object.create({}, {
     }
   },
 
-  getInventoryLocation:{
-    value : function() {
+  getInventoryLocation: {
+    value: function () {
       var promise = protractor.promise.defer();
       this.invLocations.each(function (inventoryLocation) {
         inventoryLocation.isDisplayed().then(function (displayed) {
@@ -135,7 +136,7 @@ FloorPlanObject.prototype = Object.create({}, {
   },
 
   goToFloorPlanLinks: {
-    value: function(){
+    value: function () {
       var promise = protractor.promise.defer();
       this.floorPlanLinks.each(function (floorPlanLink) {
         promise.fulfill(floorPlanLink);
@@ -145,7 +146,7 @@ FloorPlanObject.prototype = Object.create({}, {
   },
 
   goToFloorPlanSearch: {
-    value: function(){
+    value: function () {
       this.floorPlanSearch.click();
     }
   }

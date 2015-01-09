@@ -22,44 +22,44 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
 
   creditExtend: {
-    get: function() {
+    get: function () {
       return browser.element(by.id('lineOfCredit'));
     }
   },
 
-  isNotTemporary:{
-    get: function(){
+  isNotTemporary: {
+    get: function () {
       return browser.element(by.id('isTemp'));
     }
   },
 
-  selectAmount:{
-    get: function(){
+  selectAmount: {
+    get: function () {
       return browser.element(by.model('selector.amount'));
     }
   },
 
   GOFinancial: {
     get: function () {
-      return browser.element(by.cssContainingText('a','Login to GO Financial'));
+      return browser.element(by.cssContainingText('a', 'Login to GO Financial'));
     }
   },
 
   cancelRequest: {
-    get: function(){
+    get: function () {
       return browser.element(by.cssContainingText('button', 'Cancel Request'));
     }
   },
 
   confirmRequest: {
-    get: function(){
+    get: function () {
       return browser.element(by.cssContainingText('button', 'Confirm Request'));
     }
   },
 
   //Setters
   setSelectAmount: {
-    value: function(){
+    value: function () {
       this.selectAmount.sendKeys('100');
       browser.waitForAngular();
     }
@@ -67,7 +67,7 @@ AccountManagementPageObject.prototype = Object.create({}, {
 
   //Doers
   doSelectAmount: {
-    value: function(){
+    value: function () {
       this.setSelectAmount();
       browser.waitForAngular();
     }
@@ -95,20 +95,20 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
 
   goToIsNotTemporary: {
-    value: function(){
+    value: function () {
       browser.driver.actions().click(this.isNotTemporary).perform();
     }
   },
 
   goToCancelRequest: {
-    value: function(){
+    value: function () {
       this.cancelRequest.click();
       browser.waitForAngular();
     }
   },
 
   goToConfirmRequest: {
-    value: function(){
+    value: function () {
       this.confirmRequest.click();
       browser.waitForAngular();
     }
@@ -126,19 +126,19 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return browser.element(by.cssContainingText('span', 'Business Email'));
     }
   },
-  businessEmail : {
-    get: function() {
+  businessEmail: {
+    get: function () {
       return this.businessForm.all(by.css('static'));  //browser.element(by.model('business.data.email'));
     }
   },
-  registrationEnabled : {
-    get: function() {
-      return browser.element(by.cssContainingText('span','No'));
+  registrationEnabled: {
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'No'));
     }
   },
   editSettings: {
-    get: function() {
-      return browser.element(by.cssContainingText('button','Edit Settings'));
+    get: function () {
+      return browser.element(by.cssContainingText('button', 'Edit Settings'));
     }
   },
   businessEmailInput: {
@@ -146,14 +146,14 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return browser.element(by.model('business.dirtyData.email'));
     }
   },
-  enhancedNo:{
-    get: function() {
+  enhancedNo: {
+    get: function () {
       return browser.element(by.id('enhancedNo'));
     }
   },
-  enhancedYes:{
-    get: function() {
-      return  browser.element(by.id('enhancedYes'));    //browser.element(by.cssContainingText('span','Yes'));
+  enhancedYes: {
+    get: function () {
+      return browser.element(by.id('enhancedYes'));    //browser.element(by.cssContainingText('span','Yes'));
     }
   },
   registrationEnabledText: {
@@ -162,8 +162,8 @@ AccountManagementPageObject.prototype = Object.create({}, {
     }
   },
   paragraphOne: {
-    get: function() {
-      return browser.element(by.cssContainingText('span','Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to MyNextGear.'));
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to MyNextGear.'));
     }
   },
   paragraphTwo: {
@@ -176,28 +176,28 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return browser.element(by.model('business.dirtyData.enhancedRegistrationPin'));
     }
   },
-  enhancedRegPINError:{
+  enhancedRegPINError: {
     get: function () {
       return browser.element(by.cssContainingText('span', 'Your PIN must consist of four numbers, no letters or special characters.'));
     }
   },
-  saveSettings:{
+  saveSettings: {
     get: function () {
       return browser.element(by.cssContainingText('span', 'Save Settings'));
     }
   },
 
   //Setters
-  setEnhancedRegistrationPIN:{
-    value: function(pinValue){
+  setEnhancedRegistrationPIN: {
+    value: function (pinValue) {
       this.enhancedRegistrationPIN.sendKeys(pinValue);
       browser.waitForAngular();
     }
   },
 
   //Doers
-  doEnhancedRegistrationPIN:{
-    value: function(pinValue){
+  doEnhancedRegistrationPIN: {
+    value: function (pinValue) {
       this.setEnhancedRegistrationPIN(pinValue);
       browser.waitForAngular();
     }
@@ -211,13 +211,41 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
 
 
-  bankAccountText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Bank Account(s)'));}},
-  availableCreditText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Available Credit'));}},
-  ReserveFundsText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Reserve Funds'));}},
-  lastPaymentText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Last Payment'));}},
-  lastPaymentDateText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Last Payment Date'));}},
-  unappliedFundsText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Unapplied Funds'));}},
-  totalAvailableText: { get: function() { return this.financialSettingsForm.all(by.cssContainingText('span','Total Available'));}},
+  bankAccountText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Bank Account(s)'));
+    }
+  },
+  availableCreditText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Available Credit'));
+    }
+  },
+  ReserveFundsText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Reserve Funds'));
+    }
+  },
+  lastPaymentText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Last Payment'));
+    }
+  },
+  lastPaymentDateText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Last Payment Date'));
+    }
+  },
+  unappliedFundsText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Unapplied Funds'));
+    }
+  },
+  totalAvailableText: {
+    get: function () {
+      return this.financialSettingsForm.all(by.cssContainingText('span', 'Total Available'));
+    }
+  },
 
   bankAccounts: {
     get: function () {
@@ -262,19 +290,19 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return browser.element(by.css('form[name="titleSettings"]'));
     }
   },
-  defaultAddressText :{
-    get: function() {
-      return this.titleForm.all(by.cssContainingText('span','Default Address'));
+  defaultAddressText: {
+    get: function () {
+      return this.titleForm.all(by.cssContainingText('span', 'Default Address'));
     }
   },
-  buttonHelp:{
-    get: function() {
+  buttonHelp: {
+    get: function () {
       return this.titleForm.all(by.css('.btn-help-adjust'));
     }
   },
-  additionalAddressText :{
-    get: function() {
-      return this.titleForm.all(by.cssContainingText('span','Additional Addresses'));
+  additionalAddressText: {
+    get: function () {
+      return this.titleForm.all(by.cssContainingText('span', 'Additional Addresses'));
     }
   },
   defaultAddress: {
@@ -282,8 +310,8 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return browser.element(by.model('title.dirtyData.titleAddress'));
     }
   },
-  defaultAddressOptions:{
-    get:function () {
+  defaultAddressOptions: {
+    get: function () {
       return this.defaultAddress.all(by.css('option'));
     }
   },
@@ -292,50 +320,50 @@ AccountManagementPageObject.prototype = Object.create({}, {
       return this.titleForm.all(by.exactBinding('title.data.extraAddresses'));
     }
   },
-  editTitleSettings:{
-    get: function() {
-      var section = browser.element(by.cssContainingText('section','Title Settings'));
-      return section.element(by.cssContainingText('button','Edit Settings'));
+  editTitleSettings: {
+    get: function () {
+      var section = browser.element(by.cssContainingText('section', 'Title Settings'));
+      return section.element(by.cssContainingText('button', 'Edit Settings'));
     }
   },
-  saveTitleSettings:{
-    get: function() {
-      var section = browser.element(by.cssContainingText('section','Title Settings'));
-      return section.element(by.cssContainingText('button','Save Settings'));
+  saveTitleSettings: {
+    get: function () {
+      var section = browser.element(by.cssContainingText('section', 'Title Settings'));
+      return section.element(by.cssContainingText('button', 'Save Settings'));
     }
   },
-  cancelTitleSettings:{
-    get: function() {
-      var section = browser.element(by.cssContainingText('section','Title Settings'));
-      return section.element(by.cssContainingText('button','Cancel'));
+  cancelTitleSettings: {
+    get: function () {
+      var section = browser.element(by.cssContainingText('section', 'Title Settings'));
+      return section.element(by.cssContainingText('button', 'Cancel'));
     }
   },
-  editDefaultAddress:{
-    get: function() {
+  editDefaultAddress: {
+    get: function () {
       return this.titleForm.all(by.model('title.dirtyData.titleAddress'));
     }
   },
-  addressOne : {
+  addressOne: {
     get: function () {
       return this.titleForm.all(by.exactBinding('address.Line1'));
     }
   },
-  addressTwo : {
+  addressTwo: {
     get: function () {
       return this.titleForm.all(by.exactBinding('address.Line2'));
     }
   },
-  addressCity : {
+  addressCity: {
     get: function () {
       return this.titleForm.all(by.exactBinding('address.City'));
     }
   },
-  addressState : {
+  addressState: {
     get: function () {
       return this.titleForm.all(by.exactBinding('address.State'));
     }
   },
-  addressZip : {
+  addressZip: {
     get: function () {
       return this.titleForm.all(by.exactBinding('address.Zip'));
     }
@@ -348,12 +376,12 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
 
   getAddressLocation: {
-    value: function() {
+    value: function () {
       var promise = protractor.promise.defer();
       this.defaultAddressOptions.each(function (option) {
         option.isSelected().then(function (selected) {
           if (selected) {
-            option.getText().then(function(text) {
+            option.getText().then(function (text) {
               promise.fulfill(text);
             });
           }
@@ -364,7 +392,7 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
 
   goToEditSettings: {
-    value: function(){
+    value: function () {
       this.editSettings.click();
       browser.waitForAngular();
     }
@@ -376,33 +404,33 @@ AccountManagementPageObject.prototype = Object.create({}, {
     }
   },
 
-  goSaveSettings:{
-    value: function(){
+  goSaveSettings: {
+    value: function () {
       this.saveSettings.click();
       browser.waitForAngular();
     }
   },
 
-  goToEditTitleSettings:{
-    value: function(){
+  goToEditTitleSettings: {
+    value: function () {
       this.editTitleSettings.click();
       browser.waitForAngular();
     }
   },
-  goToSaveTitleSettings:{
-    value: function(){
+  goToSaveTitleSettings: {
+    value: function () {
       this.saveTitleSettings.click();
       browser.waitForAngular();
     }
   },
-  goToCancelTitleSettings:{
-    value: function(){
+  goToCancelTitleSettings: {
+    value: function () {
       this.cancelTitleSettings.click();
       browser.waitForAngular();
     }
   },
-  goToButtonHelp:{
-    value: function(){
+  goToButtonHelp: {
+    value: function () {
       this.buttonHelp.click();
       browser.waitForAngular();
     }

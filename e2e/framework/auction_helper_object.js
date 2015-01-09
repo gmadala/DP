@@ -1,10 +1,10 @@
 'use strict';
 
-var AuctionHelperObject = function() {
+var AuctionHelperObject = function () {
 
   this.loginUrl = '#/login';
 
-  this.openLogin = function() {
+  this.openLogin = function () {
     browser.get(this.loginUrl);
   };
 
@@ -38,7 +38,7 @@ var AuctionHelperObject = function() {
   // next gear logo on the top of each page.
   this.webLogo = browser.element(by.css('.header > a'));
 
-  this.loginAsAuction = function(username, password) {
+  this.loginAsAuction = function (username, password) {
     this.username.sendKeys(username);
     expect(this.username.getAttribute('value')).toEqual(username);
     this.password.sendKeys(password);
@@ -46,12 +46,12 @@ var AuctionHelperObject = function() {
     this.loginButton.click();
   };
 
-  this.logoutAsAuction = function() {
+  this.logoutAsAuction = function () {
     var logoutButton = this.logoutButton;
     expect(this.hasClass(this.userInfoDropDown, 'expanded')).toBeFalsy();
     this.userInfoLink.click();
     expect(this.hasClass(this.userInfoDropDown, 'expanded')).toBeTruthy();
-    browser.driver.wait(function(){
+    browser.driver.wait(function () {
       return logoutButton.isDisplayed();
     }, 3000);
     logoutButton.click();
@@ -64,21 +64,23 @@ var AuctionHelperObject = function() {
   };
 
   // get only the active settings button (or displayed settings button).
-  this.getActiveSettingsButton = function(navTitle) {
+  this.getActiveSettingsButton = function () {
     var promise = protractor.promise.defer();
-    this.settingsButtons.each(function(settingsButton) {
-      settingsButton.isDisplayed().then(function(displayed) {
-        promise.fulfill(settingsButton);
+    this.settingsButtons.each(function (settingsButton) {
+      settingsButton.isDisplayed().then(function (displayed) {
+        if (displayed) {
+          promise.fulfill(settingsButton);
+        }
       });
     });
     return promise;
   };
 
   // get only the active feedback button (or displayed feedback button).
-  this.getActiveFeedbackButton = function() {
+  this.getActiveFeedbackButton = function () {
     var promise = protractor.promise.defer();
-    this.feedbackButtons.each(function(feedbackButton) {
-      feedbackButton.isDisplayed().then(function(displayed) {
+    this.feedbackButtons.each(function (feedbackButton) {
+      feedbackButton.isDisplayed().then(function (displayed) {
         if (displayed) {
           promise.fulfill(feedbackButton);
         }
@@ -94,17 +96,17 @@ var AuctionHelperObject = function() {
     });
   };
 
-  this.describe = function(jiraIssue, describeFn) {
+  this.describe = function (jiraIssue, describeFn) {
     var helper = this;
-    describe('E2E Testing Suite for Jira Issue ' + jiraIssue + '.', function() {
-      beforeEach(function() {
+    describe('E2E Testing Suite for Jira Issue ' + jiraIssue + '.', function () {
+      beforeEach(function () {
         browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
         helper.openLogin();
         // pulling the login screen sometimes automatically trigger the logout modal.
-        browser.driver.wait(function() {
+        browser.driver.wait(function () {
           var promise = protractor.promise.defer();
-          helper.modal.isPresent().then(function(present) {
+          helper.modal.isPresent().then(function (present) {
             if (present) {
               helper.yesButton.click();
             }
@@ -117,7 +119,7 @@ var AuctionHelperObject = function() {
 
       describeFn();
 
-      afterEach(function() {
+      afterEach(function () {
         helper.logoutAsAuction();
       });
     });

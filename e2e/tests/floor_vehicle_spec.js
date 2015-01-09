@@ -6,7 +6,7 @@
 
 var FlooringVehicleObject = require('../framework/floor_vehicle_page_object');
 
-var floorVehiclePage= new FlooringVehicleObject();
+var floorVehiclePage = new FlooringVehicleObject();
 
 describe('Dealer Portal – Floor A Vehicle Content', function () {
 
@@ -16,7 +16,7 @@ describe('Dealer Portal – Floor A Vehicle Content', function () {
     floorVehiclePage.openPage();
   });
 
-   it('Vehicle Information - Should contain VIN, Color, Mileage, Title Owner, and Inventory Location', function () {
+  it('Vehicle Information - Should contain VIN, Color, Mileage, Title Owner, and Inventory Location', function () {
     // validate elements are displayed, readable and writable
     var vinValue = 'VIN 123456';
     expect(floorVehiclePage.vinSearchField.isDisplayed()).toBeTruthy();
@@ -57,7 +57,7 @@ describe('Dealer Portal – Floor A Vehicle Content', function () {
     expect(floorVehiclePage.getVin()).not.toEqual(vinValue);
     floorVehiclePage.setVin(vinValue);
     expect(floorVehiclePage.getVin()).toEqual(vinValue);
-    floorVehiclePage.getVinSearchButton().then(function(vinSearchButton) {
+    floorVehiclePage.getVinSearchButton().then(function (vinSearchButton) {
       vinSearchButton.click();
     });
     expect(floorVehiclePage.vinAckLookupFailure.isDisplayed()).toBeTruthy();
@@ -71,7 +71,7 @@ describe('Dealer Portal – Floor A Vehicle Content', function () {
     expect(floorVehiclePage.getVin()).not.toEqual(vinValue);
     floorVehiclePage.setVin(vinValue);
     expect(floorVehiclePage.getVin()).toEqual(vinValue);
-    floorVehiclePage.getVinSearchButton().then(function(vinSearchButton) {
+    floorVehiclePage.getVinSearchButton().then(function (vinSearchButton) {
       vinSearchButton.click();
     });
     expect(floorVehiclePage.vinAckLookupFailure.isDisplayed()).toBeTruthy();

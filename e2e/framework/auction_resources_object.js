@@ -1,6 +1,6 @@
 'use strict';
 
-var AuctionResourcesObject = function() {
+var AuctionResourcesObject = function () {
   this.url = '#/act/documents';
 
   this.infoBlockText = browser.element(by.css('.info-block-text'));
@@ -8,11 +8,11 @@ var AuctionResourcesObject = function() {
 
   this.documents = browser.element(by.cssContainingText('.well', 'NextGear Capital Documents'));
 
-  this.openPage = function() {
+  this.openPage = function () {
     browser.get(this.url);
   };
 
-  this.waitForPage = function() {
+  this.waitForPage = function () {
 
   };
 };

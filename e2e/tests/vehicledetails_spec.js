@@ -4,39 +4,35 @@
 
 'use strict';
 var vehicleDetailObject = require('../framework/vehicledetails_page_object.js');
-var CredentialsObject = require('../framework/credentials_page_object.js');
-
 var vehiclePage = new vehicleDetailObject();
-var credPage = new CredentialsObject();
 
 //Floor Plan Page
-describe('Vehicle Details Page', function(){
+describe('Vehicle Details Page', function () {
 
-  beforeEach(function(){
+  beforeEach(function () {
     browser.ignoreSynchronization = true;
     browser.get(vehiclePage.vehicledetailsUrl);
-    vehiclePage.waitForPage;
   });
 
-  it('should check for the Request an Extension - Cancel Request', function(){
+  it('should check for the Request an Extension - Cancel Request', function () {
     expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
     vehiclePage.goToRequestExtension();
     vehiclePage.goToCancelRequest();
   });
 
-  it('should check for the Request an Extension - Confirm Request', function(){
+  it('should check for the Request an Extension - Confirm Request', function () {
     expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
     vehiclePage.goToRequestExtension();
     vehiclePage.goToConfirmRequest();
   });
 
-  it('should check for payment options and breakdown - CancelChanges.', function(){
+  it('should check for payment options and breakdown - CancelChanges.', function () {
     optionsbreakdown();
     vehiclePage.goToCancelChanges();
     //browser.sleep(5000);
   });
 
-  it('should check for payment options and breakdown - ConfirmChanges.', function(){
+  it('should check for payment options and breakdown - ConfirmChanges.', function () {
     optionsbreakdown();
     vehiclePage.goToConfirmChanges();
   });
@@ -119,14 +115,14 @@ describe('Vehicle Details Page', function(){
   });
 
 
-  var optionsbreakdown = function(){
+  var optionsbreakdown = function () {
     expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
     expect(vehiclePage.optionsAndBreak.isDisplayed()).toBeTruthy();
     vehiclePage.goToOptionsAndBreak();
     vehiclePage.goToPaymentOptions();
   };
 
-  var changeInventory = function(){
+  var changeInventory = function () {
     expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
     expect(vehiclePage.changeInventory.isDisplayed()).toBeTruthy();
     vehiclePage.goToChangeInventory();
