@@ -28,7 +28,7 @@ var DatepickerPageObject = function () {
   var findDay = function (parentElement, day) {
     // may not work if you enter 1 - 9 as date
     // because cssContainingText might confuse 1 with 11 or 12, 2 with 21 or 12 and so on.
-    var dayElement = parentElement.element(by.cssContainingText('.day', day));
+    var dayElement = parentElement.element(by.cssContainingText('.day:not(.old):not(.new)', day));
     dayElement.click();
   };
 

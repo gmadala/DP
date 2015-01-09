@@ -15,6 +15,7 @@ describe('Account Management Page', function(){
   beforeEach(function(){
     browser.ignoreSynchronization = true;
     browser.get(accMgtPage.accountMgtUrl);
+    browser.waitForAngular();
   });
 
   it('should check for the Request a Credit Increase - Cancel Request', function(){
