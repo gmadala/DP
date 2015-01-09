@@ -110,8 +110,8 @@ module.exports = function(grunt) {
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
-        '!app/scripts/translations.js',
-        'e2e/**/*.js'
+        '!app/scripts/translations.js'
+        //'e2e/**/*.js'
       ]
     },
     karma: {
