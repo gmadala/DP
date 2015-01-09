@@ -61,25 +61,28 @@ HomePageObject.prototype = Object.create({}, {
   },
   btnWeek: {
     get: function () {
-      return browser.element(by.id('week'));
+      var calendarHeader = browser.element(by.css('.dash-calendar-header'));
+      return calendarHeader.element(by.cssContainingText('button', 'Week'));
     }
   },
 
   requestCreditIncrease: {
     get: function () {
-      return browser.element(by.css('[ng-click="onRequestCredIncr()"]'));
+      return browser.element(by.cssContainingText('button', 'Request Credit Increase'));
     }
   },
 
   cancelRequest: {
     get: function () {
-      return browser.element(by.css('[ng-click="close()"]'));
+      var modal = browser.element(by.css('.modal'));
+      return modal.element(by.cssContainingText('button', 'Cancel Request'));
     }
   },
 
   confirmRequest: {
     get: function () {
-      return browser.element(by.css('[ng-click="confirmRequest()"]'));
+      var modal = browser.element(by.css('.modal'));
+      return modal.element(by.cssContainingText('button', 'Confirm Request'));
     }
   },
 
@@ -114,13 +117,15 @@ HomePageObject.prototype = Object.create({}, {
 
   nextArrow: {
     get: function () {
-      return browser.element(by.css('.fc-button-next'));
+      var tableHeader = browser.element(by.css('.dash-calendar'));
+      return tableHeader.element(by.css('.fc-button-next'));
     }
   },
 
   prevArrow: {
     get: function () {
-      return browser.element(by.css('.fc-button-prev'));
+      var tableHeader = browser.element(by.css('.dash-calendar'));
+      return tableHeader.element(by.css('.fc-button-prev'));
     }
   },
 
@@ -132,7 +137,7 @@ HomePageObject.prototype = Object.create({}, {
 
   signOutButton: {
     get: function () {
-      return browser.element(by.css('[ng-click="user.logout()"]'));
+      return browser.element(by.cssContainingText('a', 'Sign Out'));
     }
   },
 
@@ -325,7 +330,7 @@ HomePageObject.prototype = Object.create({}, {
       browser.sleep(2000);
       browser.element(by.id('fees')).click();
       browser.get(this.homeUrl);
-      browser.element(by.css('.cta-full')).click();
+      browser.element(by.cssContainingText('button', 'View All Payments')).click();
       browser.get(this.homeUrl);
 
     }
