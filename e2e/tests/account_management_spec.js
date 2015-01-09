@@ -1,9 +1,6 @@
 /**
  * Created by gayathrimadala on 1/5/15.
  */
-/**
- * Created by gayathrimadala on 12/29/14.
- */
 
 'use strict';
 var accMgtlObject = require('../framework/account_management_page_object.js');
@@ -65,6 +62,105 @@ describe('Account Management Page', function(){
     accMgtPage.goToCreditExtend();
     accMgtPage.goToIsNotTemporary();
     accMgtPage.doSelectAmount();
+  };
+//Account Management Content Testing WMT-87
+
+  it('should check for the Business Email - No Editing', function(){
+    expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
+    expect(accMgtPage.businessEmailText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.businessEmail.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.registrationEnabled.isPresent()).toBe(true);
+  });
+
+  it('should check for the Business Settings - Editing With Invalid Registration PIN', function(){
+
+    var invalidRegPIN = 'test';
+    businessSettings();
+    accMgtPage.doEnhancedRegistrationPIN(invalidRegPIN);
+    accMgtPage.goSaveSettings();
+    expect(accMgtPage.enhancedRegPINError.isDisplayed()).toBeTruthy();
+  });
+
+  it('should check for the Business Settings - Editing With Valid Registration PIN', function(){
+    var validRegPIN = '1234';
+    businessSettings();
+    accMgtPage.doEnhancedRegistrationPIN(validRegPIN);
+    accMgtPage.goSaveSettings();
+    expect(accMgtPage.enhancedRegPINError.isDisplayed()).not.toBeTruthy();
+  });
+
+  var businessSettings = function(){
+    expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
+    expect(accMgtPage.editSettings.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.goToEditSettings());
+    expect(accMgtPage.businessEmailText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.businessEmailInput.isDisplayed()).toBeTruthy();
+    accMgtPage.goToEnhancedYes();
+    expect(accMgtPage.registrationEnabledText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.paragraphOne.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.paragraphTwo.isDisplayed()).toBeTruthy();
+  };
+
+  it('should check for the Financial Accounts - No Editing', function(){
+    expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
+    expect(accMgtPage.bankAccountText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.availableCreditText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.ReserveFundsText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.lastPaymentText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.lastPaymentDateText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.unappliedFundsText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.totalAvailableText.isDisplayed()).toBeTruthy();
+
+    expect(accMgtPage.bankAccounts.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.availableCredit.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.reserveFunds.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.lastPayment.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.lastPaymentDate.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.unappliedFunds.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.totalAvailable.isDisplayed()).toBeTruthy();
+  });
+
+  it('should check for the Title Settings - No Editing', function(){
+    expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
+    expect(accMgtPage.defaultAddressText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.additionalAddressText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressOne.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressTwo.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressCity.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressState.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressZip.isDisplayed()).toBeTruthy();
+  });
+
+  it('should check for the Title Settings - Editing with Save Settings', function(){
+    titleSettings();
+    accMgtPage.goToButtonHelp();
+    accMgtPage.goToSaveTitleSettings();
+  });
+  it('should check for the Title Settings - Editing with Cancel', function(){
+    titleSettings();
+    accMgtPage.goToButtonHelp();
+    accMgtPage.goToCancelTitleSettings();
+  });
+
+  var titleSettings = function()  {
+    expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);
+    expect(accMgtPage.defaultAddressText.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.additionalAddressText.isDisplayed()).not.toBe(true);
+    expect(accMgtPage.buttonHelp.isDisplayed()).toBeTruthy();
+    accMgtPage.goToEditTitleSettings();
+
+    expect(accMgtPage.defaultAddress.isDisplayed()).toBeTruthy();
+    var addressLocation = '380 NEVADA SW / HURON SD';
+    expect(accMgtPage.defaultAddress.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.getAddressLocation()).not.toEqual(addressLocation);
+    accMgtPage.setAddressLocation(addressLocation);
+    expect(accMgtPage.getAddressLocation()).toEqual(addressLocation);
+
+    expect(accMgtPage.addressOne.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressTwo.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressCity.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressState.isDisplayed()).toBeTruthy();
+    expect(accMgtPage.addressZip.isDisplayed()).toBeTruthy();
   };
 
 });
