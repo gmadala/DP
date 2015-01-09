@@ -23,7 +23,7 @@ AccountManagementPageObject.prototype = Object.create({}, {
 
   creditExtend: {
     get: function () {
-      return browser.element(by.id('lineOfCredit'));
+      return browser.element(by.cssContainingText('li', 'Approved')).element(by.css('input'));
     }
   },
 
@@ -89,7 +89,7 @@ AccountManagementPageObject.prototype = Object.create({}, {
 
   goToCreditExtend: {
     value: function () {
-      this.creditExtend.click();
+      browser.driver.actions().click(this.creditExtend).perform();
       browser.waitForAngular();
     }
   },
@@ -138,7 +138,8 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
   editSettings: {
     get: function () {
-      return browser.element(by.cssContainingText('button', 'Edit Settings'));
+      var section = browser.element(by.cssContainingText('section', 'Business Settings'));
+      return section.element(by.cssContainingText('button', 'Edit Settings'));
     }
   },
   businessEmailInput: {
@@ -183,7 +184,8 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
   saveSettings: {
     get: function () {
-      return browser.element(by.cssContainingText('span', 'Save Settings'));
+      var section = browser.element(by.cssContainingText('section', 'Business Settings'));
+      return section.element(by.cssContainingText('span', 'Save Settings'));
     }
   },
 
