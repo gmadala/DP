@@ -19,6 +19,15 @@ module.exports = function(grunt) {
     },
     useMock = mockApi.mockApi(yeomanConfig.api);
 
+  var defaultTarget = 'test';
+  var defaultProtractorSuite = 'login'; // TODO may want to change to smoke or dealer later
+
+  // user name, suite to run
+  var users = [
+    ['53190md', 'login']
+    //['10264', 'auction']
+  ];
+
   try {
     yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
   } catch (e) {
@@ -76,6 +85,15 @@ module.exports = function(grunt) {
             ];
           },
           port: 9002
+        }
+      },
+      dist: {
+        options: {
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, yeomanConfig.dist)
+            ];
+          }
         }
       }
     },
@@ -291,7 +309,7 @@ module.exports = function(grunt) {
     },
     env: {
       dev: {
-        ENV: grunt.option('target') || 'production',
+        ENV: grunt.option('target') || defaultTarget,
         GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
       }
     },
@@ -367,17 +385,31 @@ module.exports = function(grunt) {
         }
       }
     },
-    protractor: {
+    shell: {
+      webdriverUpdate: {
+        command: 'webdriver-manager update',
+        options: {
+          failOnError: true,
+          stderr: true,
+          stdout: true
+        }
+      }
+    },
+    protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
         keepAlive: true,
         configFile: "e2e/protractor.conf.js",
         noColor: false,
-        args: {
+        args: { // the args here are for when this task is run directly from the command line with --options
+          suite: grunt.option('suite') || defaultProtractorSuite, // change to smoke or dealer later
+          params: {
+            user: grunt.option('params.user'),
+            password: grunt.option('params.password'),
+            suite: grunt.option('suite') || defaultProtractorSuite
+          }
         }
       },
       run: {
-      },
-      debug: {
       }
     }
   });
@@ -393,21 +425,61 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  grunt.registerTask('test', [
+  grunt.registerTask('test:unit', [
     'clean:server',
     'compass',
     'connect:test',
-    'karma',
+    'karma'
+  ]);
+
+  grunt.registerTask('test:e2e', [
+    'clean:server',
+    'compass',
+    'shell:webdriverUpdate',
     'connect:livereload',
     'protractor:run'
   ]);
+
+  grunt.registerTask('test', [
+    'test:unit',
+    'test:e2e'
+  ]);
+
+  grunt.registerTask('test:e2e:dist', 'Runs e2e tests with multiple logins', function () {
+
+
+    grunt.task.run('shell:webdriverUpdate', 'connect:dist'); // TODO change to connect:dist
+
+    users.forEach(function (user) {
+
+      var u = user[0];
+      var suite  = user[1];
+
+      grunt.log.writeln('Adding protractor Suite ' + suite + ' for User ' + u + ' to tests to be run');
+
+      // config must be updated dynamically like this:
+      grunt.config(['protractor', 'run'], {
+        options: {
+          args: {
+            suite: suite,
+            params: {
+              user: u,
+              suite: suite // for logging purposes inside protractor
+            }
+          }
+        }
+      });
+
+      grunt.task.run('protractor:run');
+    });
+  });
 
   grunt.registerTask('build', [
     'gitinfo',
     'env',
     'clean:dist',
-    'jshint',
-    'test',
+    //'jshint',
+    'test:unit',
     'useminPrepare',
     'compass:dist',
     'concat',
@@ -425,6 +497,26 @@ module.exports = function(grunt) {
     'usemin',
     'htmlmin'
   ]);
+
+  // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
+  // app/scripts/config/nxgConfig.js
+  grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
+
+    var target = grunt.option('target');
+
+    if (!target) {
+
+      grunt.log.warn('No Continuous Integration build --target was specified, defaulting to: ' + defaultTarget);
+      target = defaultTarget;
+    }
+
+    grunt.log.writeln('Running Continuous Integration Build --target=' + target);
+
+    grunt.task.run('build');
+
+    grunt.task.run('test:e2e:dist');
+  });
+
 
   grunt.registerMultiTask('translations_merge', 'Merge multiple translations files into one', function () {
     var options = this.options();

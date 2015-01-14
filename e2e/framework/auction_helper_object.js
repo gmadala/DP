@@ -38,7 +38,12 @@ var AuctionHelperObject = function () {
   // next gear logo on the top of each page.
   this.webLogo = browser.element(by.css('.header > a'));
 
-  this.loginAsAuction = function (username, password) {
+  this.loginAsAuction = function () {
+
+    // to run against mockApi locally grunt protractor  --suite=auction --params.user "auction" --params.password "test"
+    var username = browser.params.user;
+    var password = browser.params.password;
+
     this.username.sendKeys(username);
     expect(this.username.getAttribute('value')).toEqual(username);
     this.password.sendKeys(password);
@@ -114,7 +119,7 @@ var AuctionHelperObject = function () {
           });
           return promise;
         }, 3000);
-        helper.loginAsAuction('auction', 'test');
+        helper.loginAsAuction();
       });
 
       describeFn();
