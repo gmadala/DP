@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var AuctionHelperObject = function () {
 
   this.loginUrl = '#/login';
@@ -96,6 +97,13 @@ var AuctionHelperObject = function () {
     });
   };
 
+  var screenShotDirectory = '/tmp/screenshot';
+  var writeScreenShot = function (data, filename) {
+    var stream = fs.createWriteStream(screenShotDirectory + filename);
+    stream.write(new Buffer(data, 'base64'));
+    stream.end();
+  };
+
   this.describe = function (jiraIssue, describeFn) {
     var helper = this;
     describe('E2E Testing Suite for Jira Issue ' + jiraIssue + '.', function () {
@@ -120,6 +128,15 @@ var AuctionHelperObject = function () {
       describeFn();
 
       afterEach(function () {
+        var currentSpec = jasmine.getEnv().currentSpec;
+        var passed = currentSpec.results().passed();
+
+        browser.driver.takeScreenshot().then(function (png) {
+          if (!passed) {
+            var filename = '_' + currentSpec.description.replace(/\W+/g, '_') + '.png';
+            writeScreenShot(png, filename);
+          }
+        });
         helper.logoutAsAuction();
       });
     });
