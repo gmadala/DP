@@ -113,7 +113,7 @@ auctionHelperObject.describe('WMT-61', function () {
       expect(auctionHelperObject.modalHeader.getText()).toEqual(logoutModalHeader);
       auctionHelperObject.yesButton.click();
       expect(browser.driver.getCurrentUrl()).toContain(auctionHelperObject.loginUrl);
-      auctionHelperObject.loginAsAuction('auction', 'test');
+      auctionHelperObject.loginAsAuction();
       expect(browser.driver.getCurrentUrl()).not.toContain(auctionHelperObject.loginUrl);
     });
 

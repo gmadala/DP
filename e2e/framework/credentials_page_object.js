@@ -6,11 +6,11 @@ var CredentialsObject = function () {
 CredentialsObject.prototype = Object.create({}, {
 
   loginUsername: {
-    value: '53190md'
+    value: browser.params.user
   },
 
   loginPassword: {
-    value: 'password@1'
+    value: browser.params.password
   },
 
   recoveryEmailAddress: {
@@ -18,7 +18,7 @@ CredentialsObject.prototype = Object.create({}, {
   },
 
   recoveryUsername: {
-    value: '53190md'
+    value: browser.params.user
   },
 
   recoveryQuestionZero: {

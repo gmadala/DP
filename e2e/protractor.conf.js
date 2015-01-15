@@ -23,13 +23,21 @@ mkdir('target/surefire-reports/');
 
 exports.config = {
   specs: [
-    'tests/*_spec.js'
+    'tests/{,*/}*_spec.js'
   ],
 
+  // a specific suite can be run with grunt protractor:run --suite=suite_name
+  // at least dealer and auction suites are needed
   suites: {
-    'wmt-51': 'tests/navigation_spec.js'
+    //'all': 'tests/{,*/}*_spec.js',
+    'dealer': 'tests/{,*/}*[!{auction}]*spec.js',
+    'auction': 'tests/{,*/}*auction*spec.js',
+    'dashboard': 'tests/{,*/}*dashboard_spec.js',
+    'floor': 'tests/{,*/}*floor_spec.js',
+    'floorplan': 'tests/{,*/}*floorplan_spec.js',
+    'login': 'tests/{,*/}*login_spec.js',
+    'payments': 'tests/{,*/}*payments_spec.js'
   },
-
   //multiCapabilities: [{
   //  'browserName': 'firefox'
   //}, {
@@ -37,11 +45,28 @@ exports.config = {
   //}],
   capabilities: {
     'browserName': 'chrome',
-    'chromeOptions': {'args': ['--disable-extensions']}
+    'chromeOptions': {
+      'args': [
+        '--disable-extensions',
+        '-–allow-file-access-from-files',
+        '--incognito',
+        '--disable-web-security'
+      ]
+    }
   },
 
   // to speed up debugging (only works on Chrome)
   directConnect: true,
+
+  // The params object will be passed directly to the Protractor instance,
+  // and can be accessed from your test as browser.params. It is an arbitrary
+  // object and can contain anything you may need in your test.
+  // This can be changed via the command line as:
+  //   --params.login.user 'Joe'
+  params: {
+    user: '53190md',
+    password: 'password@1'
+  },
 
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
@@ -52,6 +77,10 @@ exports.config = {
       new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
     );
     browser.driver.manage().window().maximize();
+
+    console.log('** Preparing Protractor Suite ' + browser.params.suite + ' for User ' + browser.params.user + ' **');
+    console.log(browser.params);
+
   },
   jasmineNodeOpts: {
     isVerbose: true,
