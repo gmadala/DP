@@ -387,7 +387,7 @@ module.exports = function(grunt) {
     },
     shell: {
       webdriverUpdate: {
-        command: 'webdriver-manager update',
+        command: ' ./node_modules/protractor/bin/webdriver-manager update',
         options: {
           failOnError: true,
           stderr: true,
