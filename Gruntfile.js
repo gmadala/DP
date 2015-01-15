@@ -448,7 +448,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test:e2e:dist', 'Runs e2e tests with multiple logins', function () {
 
 
-    grunt.task.run('shell:webdriverUpdate', 'connect:dist'); // TODO change to connect:dist
+    grunt.task.run('shell:webdriverUpdate', 'connect:dist');
 
     users.forEach(function (user) {
 
