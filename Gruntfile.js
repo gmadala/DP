@@ -386,6 +386,10 @@ module.exports = function(grunt) {
       }
     },
     shell: {
+      chrome: {
+        command: 'open -a Google\\ Chrome --args --disable-extensions -–allow-file-access-from-files --incognito ' +
+        '--disable-web-security'
+      },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update',
         options: {
