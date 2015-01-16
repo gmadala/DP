@@ -11,8 +11,7 @@ var auctionReports = new AuctionReportsObject();
 auctionHelper.describe('WMT-78', function () {
   describe('Auction Portal – View A Report Content', function () {
     beforeEach(function () {
-      auctionReports.openPage();
-      auctionReports.waitForPage();
+      auctionHelper.openPageAndWait(auctionReports.url, true, false);
     });
 
     var repeater = 'doc in documents';
@@ -74,7 +73,7 @@ auctionHelper.describe('WMT-78', function () {
       datePickerObject.setDate(23, 'Jul', 2005);
       expect(auctionReports.getDisbursementDate()).toEqual(date);
       auctionReports.subsidiaries.count().then(function (count) {
-        if (count > 0) {
+        if (count > 1) {
           expect(auctionReports.subsidiariesSelection.isDisplayed()).toBeTruthy();
         }
       });

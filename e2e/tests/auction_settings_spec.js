@@ -9,8 +9,7 @@ var auctionSettings = new AuctionSettingsObject();
 auctionHelper.describe('WMT-81', function () {
   describe('Auction Portal – Settings Content', function () {
     beforeEach(function () {
-      auctionSettings.openPage();
-      auctionSettings.waitForPage();
+      auctionHelper.openPageAndWait(auctionSettings.url);
     });
 
     it('User profile contains username, password, security question, email and phone.', function () {
@@ -140,28 +139,27 @@ auctionHelper.describe('WMT-81', function () {
 auctionHelper.describe('WMT-80', function () {
   describe('Auction Portal – User Dropdown Content', function () {
     beforeEach(function () {
-      auctionSettings.openPage();
-      auctionSettings.waitForPage();
+      auctionHelper.openPageAndWait(auctionSettings.url);
     });
 
     it('Contains the navigation links for Settings and Sign Out', function () {
-      var logoutButton = auctionHelper.logoutButton;
       expect(auctionHelper.hasClass(auctionHelper.userInfoDropDown, 'expanded')).toBeFalsy();
 
-      auctionHelper.userInfoLink.click();
-      browser.driver.wait(function () {
-        return logoutButton.isDisplayed();
-      }, 3000);
+      auctionHelper.userInfoLink.click().then(function () {
+        auctionHelper.waitForElementDisplayed(auctionHelper.logoutButton);
 
-      expect(auctionHelper.hasClass(auctionHelper.userInfoDropDown, 'expanded')).toBeTruthy();
-      expect(auctionHelper.userInfoDropDown.getText()).toContain('SIGN OUT');
-      expect(auctionHelper.userInfoDropDown.getText()).toContain('SETTINGS');
-      expect(auctionHelper.logoutButton.isDisplayed()).toBeTruthy();
-      auctionHelper.getActiveSettingsButton().then(function (activeSettingsButton) {
-        expect(activeSettingsButton.isDisplayed()).toBeTruthy();
+        expect(auctionHelper.hasClass(auctionHelper.userInfoDropDown, 'expanded')).toBeTruthy();
+        expect(auctionHelper.userInfoDropDown.getText()).toContain('SIGN OUT');
+        expect(auctionHelper.userInfoDropDown.getText()).toContain('SETTINGS');
+        expect(auctionHelper.logoutButton.isDisplayed()).toBeTruthy();
+        auctionHelper.getActiveSettingsButton().then(function (activeSettingsButton) {
+          expect(activeSettingsButton.isDisplayed()).toBeTruthy();
+        });
+
+        auctionHelper.userInfoLink.click().then(function () {
+          auctionHelper.waitForElementHidden(auctionHelper.logoutButton);
+        });
       });
-
-      auctionHelper.userInfoLink.click();
     });
   });
 });

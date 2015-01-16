@@ -19,17 +19,6 @@ var AuctionReportsObject = function () {
 
   this.subsidiaries = browser.element.all(by.options('o.BusinessName for o in subsidiaries'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var marker = this.disbursementDate;
-    browser.driver.wait(function () {
-      return marker.isPresent();
-    }, 3000);
-  };
-
   this.clickDisbursementDate = function () {
     this.disbursementDate.click();
   };

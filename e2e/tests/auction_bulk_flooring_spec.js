@@ -12,11 +12,10 @@ auctionHelper.describe('WMT-76', function () {
   describe('Auction Portal – Floor A Vehicle Content', function () {
 
     beforeEach(function () {
-      auctionBulkFlooring.openPage();
-      auctionBulkFlooring.waitForPage();
+      auctionHelper.openPageAndWait(auctionBulkFlooring.url);
     });
 
-    it('Should contain VIN, Color, Mileage, Title Owner, Consigner Ticket Number, and Lot Number', function () {
+    xit('Should contain VIN, Color, Mileage, Title Owner, Consigner Ticket Number, and Lot Number', function () {
       // validate elements are displayed, readable and writable
       var vinValue = 'VIN 123456';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
@@ -56,20 +55,21 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should contains Acknowledge VIN Look-Up Failure when a VIN search fails.', function () {
-      var vinValue = '123456';
+      var vinValue = '12345678901234567';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
       expect(auctionBulkFlooring.getVin()).not.toEqual(vinValue);
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
+        });
       });
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
     });
 
     it('Should not contains Acknowledge VIN Look-Up Failure before, when and after entering VIN.', function () {
-      var vinValue = '123456';
+      var vinValue = '12345678901234567';
       var otherVinValue = '0';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
@@ -77,11 +77,12 @@ auctionHelper.describe('WMT-76', function () {
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
+          auctionBulkFlooring.setVin(otherVinValue);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
+        });
       });
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
-      auctionBulkFlooring.setVin(otherVinValue);
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
     });
 
     /** validations function to validate make, model, year and style **/
@@ -118,7 +119,7 @@ auctionHelper.describe('WMT-76', function () {
     };
 
     it('Should contain unlocked Make, Model, Year, and Style after searching invalid VIN.', function () {
-      var vinValue = '123456';
+      var vinValue = browser.params.invalidVin;
       // all the outputs should not be displayed
       validateOutputNotPresent();
       // all the inputs should not be displayed as well
@@ -129,17 +130,20 @@ auctionHelper.describe('WMT-76', function () {
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          // wait for the data to populate
+          auctionHelper.waitForElementPresent(auctionBulkFlooring.inputMake);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
+          // when the lookup fail, then the output should not be displayed
+          validateOutputNotPresent();
+          // when the lookup fail, then the inputs should be displayed
+          validateInputIsDisplayed();
+        });
       });
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
-      // when the lookup fail, then the output should not be displayed
-      validateOutputNotPresent();
-      // when the lookup fail, then the inputs should be displayed
-      validateInputIsDisplayed();
     });
 
     it('Should contain locked Make, Model, Year, and Style after searching valid VIN.', function () {
-      var otherVinValue = '1234567';
+      var otherVinValue = browser.params.validVin;
       // all the outputs should not be displayed
       validateOutputNotPresent();
       // all the inputs should not be displayed as well
@@ -150,17 +154,20 @@ auctionHelper.describe('WMT-76', function () {
       auctionBulkFlooring.setVin(otherVinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(otherVinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          // wait for the data to populate
+          auctionHelper.waitForElementPresent(auctionBulkFlooring.outputMake);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
+          // when lookup succeed, then output should be displayed but disabled for editing
+          validateOutputIsDisplayedAndDisabled();
+          // when the lookup fail, then the input should not be displayed
+          validateInputIsNotPresent();
+        });
       });
-      // when lookup succeed, then output should be displayed but disabled for editing
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
-      validateOutputIsDisplayedAndDisabled();
-      // when the lookup fail, then the input should not be displayed
-      validateInputIsNotPresent();
     });
 
     it('Should not contain unlocked Make, Model, Year, and Style before or when entering VIN.', function () {
-      var vinValue = '123456';
+      var vinValue = browser.params.invalidVin;
       var otherVinValue = '1234567';
       validateInputIsNotPresent();
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
@@ -169,17 +176,20 @@ auctionHelper.describe('WMT-76', function () {
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          // wait for the data to populate
+          auctionHelper.waitForElementPresent(auctionBulkFlooring.inputMake);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
+          validateInputIsDisplayed();
+          // entering extra information in the vin should remove the input elements
+          auctionBulkFlooring.setVin(otherVinValue);
+          validateInputIsNotPresent();
+        });
       });
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).toBeTruthy();
-      validateInputIsDisplayed();
-      // entering extra information in the vin should remove the input elements
-      auctionBulkFlooring.setVin(otherVinValue);
-      validateInputIsNotPresent();
     });
 
     it('Should not contain locked Make, Model, Year, and Style before or when entering VIN.', function () {
-      var vinValue = '1234567';
+      var vinValue = browser.params.validVin;
       var otherVinValue = '123456';
       validateOutputNotPresent();
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
@@ -188,14 +198,17 @@ auctionHelper.describe('WMT-76', function () {
       auctionBulkFlooring.setVin(vinValue);
       expect(auctionBulkFlooring.getVin()).toEqual(vinValue);
       auctionBulkFlooring.getVinSearchButton().then(function (vinSearchButton) {
-        vinSearchButton.click();
+        vinSearchButton.click().then(function () {
+          // wait for the data to populate
+          auctionHelper.waitForElementPresent(auctionBulkFlooring.outputMake);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
+          validateOutputIsDisplayedAndDisabled();
+          // entering extra information in the vin should remove the output elements
+          auctionBulkFlooring.setVin(otherVinValue);
+          expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
+          validateOutputNotPresent();
+        });
       });
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
-      validateOutputIsDisplayedAndDisabled();
-      // entering extra information in the vin should remove the output elements
-      auctionBulkFlooring.setVin(otherVinValue);
-      expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
-      validateOutputNotPresent();
     });
 
     it('Should contains Buyer Search, Inventory Address, Purchase Amount, Sales Date and Bank Account.', function () {

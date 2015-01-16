@@ -46,17 +46,6 @@ var AuctionSettingsObject = function () {
   this.notificationsCancelEdit = this.notificationsSection.element(by.cssContainingText('button', 'Cancel'));
   this.notificationsSaveSettings = this.notificationsSection.element(by.cssContainingText('button', 'Save Settings'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var userProfileSection = this.userProfileSection;
-    browser.driver.wait(function () {
-      return userProfileSection.isDisplayed();
-    }, 3000);
-  };
-
   this.elementWithCaption = function (section, caption) {
     return section.element(by.cssContainingText('.row-fluid', caption));
   };

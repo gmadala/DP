@@ -16,17 +16,6 @@ var AuctionDealerSearchObject = function () {
 
   this.stateOptions = browser.element.all(by.options('state.StateName for state in states'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var dealerNumber = this.dealerNumberField;
-    browser.driver.wait(function () {
-      return dealerNumber.isDisplayed();
-    }, 3000);
-  };
-
   var getSearchButton = function (styledInputs, model) {
     expect(styledInputs.count()).toEqual(2);
     var promise = protractor.promise.defer();

@@ -9,6 +9,7 @@ var AuctionHelperObject = function () {
     browser.get(this.loginUrl);
   };
 
+  /** Locator for elements needed for the login and logout process **/
   this.username = browser.element(by.model('credentials.username'));
   this.password = browser.element(by.model('credentials.password'));
   this.loginButton = browser.element(by.buttonText('Log In'));
@@ -38,38 +39,109 @@ var AuctionHelperObject = function () {
 
   // next gear logo on the top of each page.
   this.webLogo = browser.element(by.css('.header > a'));
+  this.loading = browser.element(by.css('.loading'));
+  this.infiniteLoading = browser.element(by.css('.nxg-infinite-scroll-indicator'));
 
-  this.loginAsAuction = function () {
+  /** Common wait function to ensure that page is fully loaded **/
+  this.waitForElementDisplayed = function (element) {
+    browser.driver.wait(function () {
+      return element.isDisplayed().then(function (displayed) {
+        return displayed;
+      });
+    });
+  };
 
-    // to run against mockApi locally grunt protractor  --suite=auction --params.user "auction" --params.password "test"
+  this.waitForElementPresent = function (element) {
+    browser.driver.wait(function () {
+      return element.isPresent().then(function (displayed) {
+        return displayed;
+      });
+    });
+  };
+
+  this.waitForElementHidden = function (element) {
+    browser.driver.wait(function () {
+      return element.isDisplayed().then(function (displayed) {
+        return !displayed;
+      });
+    });
+  };
+
+  this.waitForElementDismissed = function (element) {
+    browser.driver.wait(function () {
+      return element.isPresent().then(function (present) {
+        return !present;
+      });
+    });
+  };
+
+  this.waitForUrlToContains = function (expectedRelativeUrl) {
+    var currentUrl;
+    return browser.driver.getCurrentUrl().then(function (url) {
+      currentUrl = url;
+    }).then(function () {
+      return browser.driver.wait(function () {
+        return browser.driver.getCurrentUrl().then(function (url) {
+          return url.indexOf(expectedRelativeUrl) > -1;
+        });
+      }, 3000);
+    });
+  };
+
+  this.expectingLoading = function () {
+    this.waitForElementDisplayed(this.loading);
+    this.waitForElementHidden(this.loading);
+  };
+
+  this.expectingInfiniteLoading = function () {
+    this.waitForElementDisplayed(this.infiniteLoading);
+    this.waitForElementHidden(this.infiniteLoading);
+  };
+
+  /** Common login and logout function **/
+  this.login = function () {
+    var instance = this;
+    // to run against mockApi locally:
+    // $ grunt protractor  --suite=auction --params.user "auction" --params.password "test"
     var username = browser.params.user;
     var password = browser.params.password;
 
     this.username.sendKeys(username);
-    expect(this.username.getAttribute('value')).toEqual(username);
+    expect(this.username.getAttribute('value')).toEqual(username.toString());
     this.password.sendKeys(password);
-    expect(this.password.getAttribute('value')).toEqual(password);
-    this.loginButton.click();
+    expect(this.password.getAttribute('value')).toEqual(password.toString());
+
+    this.loginButton.click().then(function () {
+      instance.waitForUrlToContains('act/home');
+    });
   };
 
-  this.logoutAsAuction = function () {
-    var logoutButton = this.logoutButton;
+  this.logout = function () {
+    var instance = this;
+    var modalHeader = 'Logout';
     expect(this.hasClass(this.userInfoDropDown, 'expanded')).toBeFalsy();
-    this.userInfoLink.click();
-    expect(this.hasClass(this.userInfoDropDown, 'expanded')).toBeTruthy();
-    browser.driver.wait(function () {
-      return logoutButton.isDisplayed();
-    }, 3000);
-    logoutButton.click();
+    this.userInfoLink.click().then(function () {
+      expect(instance.hasClass(instance.userInfoDropDown, 'expanded')).toBeTruthy();
 
-    var logoutModalHeader = 'Logout';
-    expect(this.modal.isDisplayed()).toBeTruthy();
-    expect(this.modalHeader.getText()).toEqual(logoutModalHeader);
-    this.yesButton.click();
-    expect(browser.driver.getCurrentUrl()).toContain(this.loginUrl);
+      // wait for the dropdown to scroll after clicking the user info link.
+      instance.waitForElementDisplayed(instance.logoutButton);
+      // now the logout is displayed, click it display the logout modal.
+      instance.logoutButton.click().then(function () {
+        // now we wait for the modal to be displayed.
+        instance.waitForElementDisplayed(instance.modal);
+
+        expect(instance.modal.isDisplayed()).toBeTruthy();
+        expect(instance.modalHeader.getText()).toEqual(modalHeader);
+
+        instance.yesButton.click().then(function () {
+          instance.waitForUrlToContains('login');
+        });
+      });
+    });
   };
 
-  // get only the active settings button (or displayed settings button).
+  /** Promises to retrieve active buttons that will be difficult to access using just css locator **/
+    // get only the active settings button (or displayed settings button).
   this.getActiveSettingsButton = function () {
     var promise = protractor.promise.defer();
     this.settingsButtons.each(function (settingsButton) {
@@ -95,13 +167,15 @@ var AuctionHelperObject = function () {
     return promise;
   };
 
-  // Return true when the element have cssClass in them.
+  /** Common has class function to test whether an element will have certain class or not **/
+    // Return true when the element have cssClass in them.
   this.hasClass = function (element, cssClass) {
     return element.getAttribute('class').then(function (classes) {
       return classes.indexOf(cssClass) !== -1;
     });
   };
 
+  /** Common function to write screenshot of a page. By default the output is the /tmp directory **/
   var screenShotDirectory = '/tmp/screenshot';
   var writeScreenShot = function (data, filename) {
     var stream = fs.createWriteStream(screenShotDirectory + filename);
@@ -109,25 +183,49 @@ var AuctionHelperObject = function () {
     stream.end();
   };
 
+  /** Common function to open a page and then wait for it to be fully loaded **/
+  this.openPageAndWait = function (page, expectingLoading, expectingInfiniteLoading) {
+    browser.get(page);
+    this.waitForUrlToContains(page);
+    if (expectingLoading) {
+      this.expectingLoading();
+    }
+    if (expectingInfiniteLoading) {
+      this.expectingInfiniteLoading();
+    }
+  };
+
+  /** Commond describe function which should be used to define a new set of tests based on a JIRA ticket **/
   this.describe = function (jiraIssue, describeFn) {
-    var helper = this;
+    var instance = this;
+
+    // pulling the login screen sometimes automatically trigger the logout modal.
+    // this wouldn't be needed if each e2e test perform login and logout on pre and post test.
+    // but some of the test against localhost pull some pages directly as there's no auth process.
+    var waitForLogoutGuard = function () {
+      browser.driver.wait(function () {
+        var promise = protractor.promise.defer();
+        instance.modal.isPresent().then(function (present) {
+          if (present) {
+            // if we have the modal displayed, then click the yes and then fulfill the promise.
+            instance.yesButton.click().then(function () {
+              promise.fulfill(true);
+            });
+          } else {
+            // if we don't have the modal displayed, then just fulfill the promise.
+            promise.fulfill(true);
+          }
+        });
+        return promise;
+      }, 3000);
+    };
+
     describe('E2E Testing Suite for Jira Issue ' + jiraIssue + '.', function () {
       beforeEach(function () {
-        browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
-        helper.openLogin();
-        // pulling the login screen sometimes automatically trigger the logout modal.
-        browser.driver.wait(function () {
-          var promise = protractor.promise.defer();
-          helper.modal.isPresent().then(function (present) {
-            if (present) {
-              helper.yesButton.click();
-            }
-            promise.fulfill(true);
-          });
-          return promise;
-        }, 3000);
-        helper.loginAsAuction();
+        instance.openLogin();
+        waitForLogoutGuard();
+        instance.login();
       });
 
       describeFn();
@@ -142,7 +240,7 @@ var AuctionHelperObject = function () {
             writeScreenShot(png, filename);
           }
         });
-        helper.logoutAsAuction();
+        instance.logout();
       });
     });
   };

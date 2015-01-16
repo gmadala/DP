@@ -47,17 +47,6 @@ var AuctionDashboardObject = function () {
   this.chartObjectAxisLabels = browser.element.all(by.css('.highcharts-axis-labels'));
   this.chartObjectTitle = browser.element(by.css('.auction-dashboard-chart > h2 > span'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var previousDisbursementsLink = this.previousDisbursementsLink;
-    browser.driver.wait(function () {
-      return previousDisbursementsLink.isDisplayed();
-    }, 3000);
-  };
-
   this.getDashboardContent = function (header) {
     expect(this.dashboardContents.count()).toEqual(3);
     var promise = protractor.promise.defer();

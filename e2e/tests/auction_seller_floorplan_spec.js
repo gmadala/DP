@@ -10,12 +10,10 @@ var auctionFloorPlan = new AuctionSellerFloorPlanObject();
 
 auctionHelper.describe('WMT-77', function () {
   describe('Auction Portal – Seller Floor Plan Search Content', function () {
-    beforeEach(function () {
-      auctionFloorPlan.openPage();
-      auctionFloorPlan.waitForPage();
-    });
 
     it('Should contains search, filter, start date and end date field and note for the date', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, false);
+
       var searchQuery = 'Search Query';
       expect(auctionFloorPlan.searchField.isDisplayed()).toBeTruthy();
       expect(auctionFloorPlan.getSearchQuery()).not.toEqual(searchQuery);
@@ -48,6 +46,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     it('Should contains a message with action to start new search when search return no results.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       auctionFloorPlan.floorplanData.count().then(function (count) {
         if (count <= 0) {
           expect(auctionFloorPlan.noticeBox.isPresent()).toBeTruthy();
@@ -115,6 +114,7 @@ auctionHelper.describe('WMT-77', function () {
     };
 
     it('Should contains all the correct headers for the search results.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       expect(auctionFloorPlan.floorplanDataHeaders.count()).toBe(8);
       // check if the header of the repeating elements is correct
       auctionFloorPlan.floorplanDataHeaders.each(function (floorplanDataHeader) {
@@ -132,6 +132,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     it('Should contains floored and disbursement date for the date column of the search results.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       var flooringDateColumn = 'item.FlooringDate';
       var disbursementDateColumn = 'item.DisbursementDate';
 
@@ -159,6 +160,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     it('Should contains vehicle description and vin for the description column of the search results.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       var vinColumn = 'item.UnitVIN';
       var descriptionColumn = 'item.Description';
       var vinPromise = unformattedDataFromRepeater(repeater, vinColumn);
@@ -180,6 +182,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     it('Should contains title owner and seller have title for the title location column.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       var titleLocationColumn = 'item.TitleLocation';
       var titleEditableColumn = 'item.TitleEditable';
       var titleLocations = formattedDataFromRepeater(repeater, titleLocationColumn);
@@ -205,6 +208,7 @@ auctionHelper.describe('WMT-77', function () {
     });
 
     it('Should display icon to view title when scanned title is available on the title column.', function () {
+      auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       var titleImageAvailable = 'item.TitleImageAvailable';
       var titleImageAvailablePromise = unformattedDataFromRepeater(repeater, titleImageAvailable);
       contentWithMarker('btn-square').then(function (contents) {
