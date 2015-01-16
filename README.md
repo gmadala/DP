@@ -96,3 +96,101 @@ Note: our team pushes to the develop branch often, and upon deployment the tech 
      
      `# --no-verify`
 
+#Grunt tasks
+-----------------------
+
+The project uses Grunt for task automation. The primary tasks to be run from the terminal are as follows:
+
+- #### server
+
+  This starts the application server. This is also the 'default' Grunt task.
+
+  *Sample usage*
+
+      grunt server --noTrack --apiBase='https://test.discoverdsc.com/MobileService/api'
+        --apiDomain='https://test.discoverdsc.com'
+
+  No options or args are required. By default the server will serve the files from *app/* and *.tmp/*
+  and reload the browser if there are changes to these directory. This task will also launch Google Chrome in incognito
+  mode with security disabled so that the client can be run on localhost but still communicate with a remote API server.
+  A local mock api (api/mockApi.js) is used.
+  The options are as follows (refer to *app/scripts/config/nxgConfig.js* for common values for the apiBase):
+  - noTrack - if true then analytics using segmentio will not be disabled; false by default
+  - apiBase - full path to the API; '' by default
+  - apiDomain - domain; '' by default
+
+  Please note that the apiBase and apiDomain options must either be omitted or supplied together. This may seem 
+  redundant but they are used separately in the application.
+
+
+- #### test:unit
+
+  This runs the Karma unit tests.
+
+  *Sample usage*
+
+      grunt test:unit
+
+
+- #### test:e2e
+
+  This runs the Protractor end-to-end (e2e) tests.
+
+  *Sample usage*
+
+      grunt test:e2e --suite='auction' --params.user='auction' --parms.password='test'
+
+  The following options can be supplied:
+  - suite - The set of tests to run based on the suite definition found in *e2e/protractor.conf.json*
+  - params.user - The user name to use for logging in
+  - params.password - The password to user for logging in
+
+
+- #### build
+
+  This builds the application to *dist/* performing tasks such as minification.
+
+  *Sample usage*
+
+      grunt build --target='test'
+
+  The following option should be supplied:
+  - target - This is the environment you are building for. Valid values can be found
+  in *app/scripts/config/nxgConfig.js*. Currently supported are 'demo', 'test', 'local',
+  'training', 'ruby_dal', or 'production'.
+
+
+- #### jshint
+
+  This runs jshint, checking all the JavaScript files for issues.
+
+  *Sample usage*
+
+      grunt jshint
+
+
+- #### test:e2e:users
+
+  This runs the Protractor end-to-end (e2e) tests multiple times for a set of users.
+  The user logins are currently described in the *Gruntfile.js*
+
+  *Sample usage*
+
+      grunt test:e2e:users --target='test'
+
+  The following options can be supplied:
+  - target - If supplied the tests will be run against application files from *dist/* instead of *app/*. 
+  Refer to **grunt build** for a description of this option.
+
+
+- #### ci-build
+
+  This the top-level script run for continuous integration. It performs a build
+  and runs all tests and a jshint task at the end.
+
+  *Sample usage*
+
+  grunt ci-build --target='test'
+
+  The following option should be supplied:
+  - target - Refer to **grunt build** for a description of this option

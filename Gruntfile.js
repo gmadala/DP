@@ -97,7 +97,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    open: {
+    open: { // use shell:chrome when you need security disabled in Chrome
       server: {
         url: 'http://localhost:<%= connect.options.port %>'
       }
@@ -314,12 +314,23 @@ module.exports = function(grunt) {
       }
     },
     preprocess: {
-      inline : {
+      dist : {
         src : [ '.tmp/concat/scripts/scripts.js' ],
         options: {
           inline : true,
           context : {
             DEBUG: false
+          }
+        }
+      },
+      dev: {
+        src: '<%= yeoman.app %>/scripts/config/nxgConfig.mock.js',
+        dest: '<%= yeoman.app %>/scripts/config/nxgConfig.mock.processed.js',
+        options: {
+          context: {
+            apiBase: grunt.option('apiBase') || '',
+            apiDomain: grunt.option('apiDomain') || '',
+            isDemo: grunt.option('noTrack') || false
           }
         }
       }
@@ -387,8 +398,8 @@ module.exports = function(grunt) {
     },
     shell: {
       chrome: {
-        command: 'open -a Google\\ Chrome --args --disable-extensions -–allow-file-access-from-files --incognito ' +
-        '--disable-web-security'
+        command: 'open -n -a Google\\ Chrome --args --disable-extensions -–allow-file-access-from-files --incognito ' +
+        '--disable-web-security --homepage http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update',
@@ -420,39 +431,41 @@ module.exports = function(grunt) {
 
   grunt.renameTask('regarde', 'watch');
 
-  grunt.registerTask('server', [
+  grunt.registerTask('dev-setup', [
     'clean:server',
     'processhtml:server',
     'compass:server',
+    'preprocess:dev'
+  ]);
+
+  grunt.registerTask('server', [
+    'dev-setup',
     'livereload-start',
     'connect:livereload',
+    'shell:chrome',
     'watch'
   ]);
 
   grunt.registerTask('test:unit', [
-    'clean:server',
-    'compass',
+    'dev-setup',
     'connect:test',
     'karma'
   ]);
 
   grunt.registerTask('test:e2e', [
-    'clean:server',
-    'compass',
+    'dev-setup',
     'shell:webdriverUpdate',
     'connect:livereload',
     'protractor:run'
   ]);
 
-  grunt.registerTask('test', [
-    'test:unit',
-    'test:e2e'
-  ]);
+  grunt.registerTask('test:e2e:users', 'Runs e2e tests with multiple logins', function () {
 
-  grunt.registerTask('test:e2e:dist', 'Runs e2e tests with multiple logins', function () {
-
-
-    grunt.task.run('shell:webdriverUpdate', 'connect:dist');
+    // a target will be specified when doing a build to 'dist' so server those files for that
+    // case.
+    var useDist = grunt.option('target');
+    grunt.log.writeln('Running test:e2e:users with target ' + (useDist || 'dev'));
+    grunt.task.run('shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
 
     users.forEach(function (user) {
 
@@ -482,12 +495,10 @@ module.exports = function(grunt) {
     'gitinfo',
     'env',
     'clean:dist',
-    //'jshint',
-    'test:unit',
     'useminPrepare',
     'compass:dist',
     'concat',
-    'preprocess',
+    'preprocess:dist',
     'copy',
     'cdnify',
     'ngmin',
@@ -516,11 +527,15 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('Running Continuous Integration Build --target=' + target);
 
+    grunt.task.run('test:unit');
+
     grunt.task.run('build');
 
-    grunt.task.run('test:e2e:dist');
-  });
+    grunt.task.run('test:e2e:users');
 
+    // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
+    grunt.task.run('jshint')
+  });
 
   grunt.registerMultiTask('translations_merge', 'Merge multiple translations files into one', function () {
     var options = this.options();
@@ -660,6 +675,6 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['server']);
   grunt.registerTask('translate', ['nggettext_extract', 'translations_merge', 'translations_missing', 'nggettext_compile']);
 };
