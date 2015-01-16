@@ -15,7 +15,7 @@ auctionHelper.describe('WMT-76', function () {
       auctionHelper.openPageAndWait(auctionBulkFlooring.url);
     });
 
-    xit('Should contain VIN, Color, Mileage, Title Owner, Consigner Ticket Number, and Lot Number', function () {
+    it('Should contain VIN, Color, Mileage, Title Owner, Consigner Ticket Number, and Lot Number', function () {
       // validate elements are displayed, readable and writable
       var vinValue = 'VIN 123456';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
