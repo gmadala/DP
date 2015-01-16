@@ -72,6 +72,171 @@ FloorPlanObject.prototype = Object.create({}, {
     }
   },
 
+  noResults:{
+    get: function () {
+      return browser.element(by.css('.notice-box'));
+    }
+  },
+
+  floored:{
+    get: function(){
+      return browser.element(by.cssContainingText('span','Floored'));
+    }
+  },
+  floorDescription:{
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'Description'));
+    }
+  },
+  floorStatus: {
+    get: function() {
+      return browser.element(by.cssContainingText('span','Status'));
+    }
+  },
+  purchased: {
+    get: function() {
+      return browser.element(by.cssContainingText('span', 'Purchased'));
+    }
+  },
+  seller: {
+    get:  function () {
+      return browser.element(by.cssContainingText('span', 'Seller'));
+    }
+  },
+  lastPayment: {
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'Last Payment'));
+    }
+  },
+  floorTitle: {
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'Title'));
+    }
+  },
+
+  //Content
+
+  findAFloor :{
+    get: function () {
+      return browser.element(by.cssContainingText('span', 'Find a Floor Plan'));
+    }
+  },
+  flooringStatus:{
+    get: function () {
+      return browser.element(by.cssContainingText('label', 'Filter by Flooring Status'));
+    }
+  },
+  filterSelect: {
+    get: function() {
+      return browser.element(by.id('filterSelect'));
+    }
+  },
+  filterSelectOptions:{
+    get: function () {
+      return browser.element.all(by.options('o.value as o.label for o in filterOptions'));
+    }
+  },
+
+  floorplanTableData:{
+    get: function () {
+      return browser.element(by.css('table'));
+    }
+  },
+
+  floorplanDataHeaders: {
+    get: function () {
+      return this.floorplanTableData.all(by.css('thead th'));
+    }
+  },
+  floorplanDataRows: {
+    get: function () {
+      return this.floorplanTableData.all(by.css('tbody tr'));
+    }
+  },
+
+  floorPlanData:{
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results'));
+    }
+  },
+
+  dataHeaders:{
+    get:function() {
+      return ['Floored', 'Description', 'Status', 'Purchased', 'Seller', 'Last Payment', 'Title'];
+    }
+  },
+  columnValues: {
+    get: function(){
+      return ['item.FlooringDate', 'item.Description','item.UnitVIN','item.StockNumber','item.FloorplanStatusName','item.UnitPurchaseDate','item.SellerName','item.LastPaymentDate','item.TitleImageAvailable'];
+    }
+  },
+
+//columns Data
+  flooredDays: {
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results').column('item.FlooringDate'));
+    }
+  },
+  floorDescriptionData: {
+    get: function () {
+      return browser.element.all(by.css('.description-narrow'));
+    }
+  },
+  flooredStatusData: {
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results').column('item.FloorplanStatusName'));
+    }
+  },
+  floorPurchasedData: {
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results').column('item.UnitPurchaseDate'));
+    }
+  },
+  floorSellerData: {
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results').column('item.SellerName'));
+    }
+  },
+  floorLastPaymentData: {
+    get: function () {
+      return browser.element.all(by.repeater('item in floorplanData.results').column('item.LastPaymentDate'));
+    }
+  },
+  floorTitleData: {
+    get: function () {
+      return browser.element.all(by.css('.btn.btn-square'));
+    }
+  },
+
+  setFilterSelectOptions: {
+    get: function (filterSelectOptValue) {
+      this.filterSelectOptions.each(function (option) {
+        option.getText().then(function (name) {
+          if (name === filterSelectOptValue) {
+            option.click();
+          }
+        });
+      });
+    }
+  },
+
+  getFilterSelectOptions: {
+    value: function () {
+      var promise = protractor.promise.defer();
+      this.filterSelectOptions.each(function (option) {
+        option.isSelected().then(function (selected) {
+          if (selected) {
+            option.getText().then(function (text) {
+              promise.fulfill(text);
+            });
+          }
+        });
+      });
+      return promise;
+    }
+  },
+
+
   //Setters
   setStartDate: {
     value: function (startdate) {

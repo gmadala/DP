@@ -92,18 +92,18 @@ var PaymentPageObject = function () {
 
     //Doers
   this.doSearchFloorPlan = function (searchVIN) {
-    this.setSearchFloorPlan(searchVIN);
-    browser.waitForAngular();
-  },
+      this.setSearchFloorPlan(searchVIN);
+      browser.waitForAngular();
+    },
 
-  //Getters
+    //Getters
   this.getActiveVehicleDescriptionLink = function () {
-    var promise = protractor.promise.defer();
-    this.vehicleDescriptionLinks.each(function (vehicleDescriptionLink) {
-      promise.fulfill(vehicleDescriptionLink);
-    });
-    return promise;
-  };
+      var promise = protractor.promise.defer();
+      this.vehicleDescriptionLinks.each(function (vehicleDescriptionLink) {
+        promise.fulfill(vehicleDescriptionLink);
+      });
+      return promise;
+    };
 
   this.getActiveRequestTitleUnavailableLink = function () {
     var promise = protractor.promise.defer();
@@ -134,7 +134,7 @@ var PaymentPageObject = function () {
 
   };
   this.goToCancelIcon= function(){
-   this.cancelIcon.click();
+    this.cancelIcon.click();
   };
 
 };
