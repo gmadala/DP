@@ -33,6 +33,7 @@ var PaymentPageObject = function () {
   // modal and the modal header
   this.modal = browser.element(by.css('.modal'));
   this.modalHeader = browser.element(by.css('.modal-header'));
+  this.closeModal = this.modal.element(by.cssContainingText('button', 'Close'));
 
   // request extension links
   this.requestExtensionLinks = browser.element.all(by.css('.paired a'));
