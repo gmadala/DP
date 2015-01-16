@@ -9,8 +9,7 @@ auctionHelper.describe('WMT-70', function () {
   describe('Auction Portal - Dealer Search Content', function () {
 
     beforeEach(function () {
-      auctionDealerSearch.openPage();
-      auctionDealerSearch.waitForPage();
+      auctionHelper.openPageAndWait(auctionDealerSearch.url, false, false);
     });
 
     it('Dealer Number Search includes NextGear Capital Dealer Number search.', function () {

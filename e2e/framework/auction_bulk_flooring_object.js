@@ -49,17 +49,6 @@ var AuctionBulkFlooringObject = function () {
   this.modalHeader = this.modal.element(by.css('.modal-header'));
   this.closeModal = this.modal.element(by.cssContainingText('button', 'Close Window'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var vinSearch = this.vinSearchField;
-    browser.driver.wait(function () {
-      return vinSearch.isDisplayed();
-    }, 3000);
-  };
-
   this.waitAndCloseModal = function () {
     var modal = this.modal;
     var closeModal = this.closeModal;

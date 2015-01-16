@@ -9,8 +9,7 @@ var auctionResources = new AuctionResourcesObject();
 auctionHelper.describe('WMT-78', function () {
   describe('Auction Portal – View A Report Content', function () {
     beforeEach(function () {
-      auctionResources.openPage();
-      auctionResources.waitForPage();
+      auctionHelper.openPageAndWait(auctionResources.url, true, false);
     });
 
     var repeater = 'doc in documents';

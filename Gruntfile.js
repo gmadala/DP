@@ -24,8 +24,8 @@ module.exports = function(grunt) {
 
   // user name, suite to run
   var users = [
-    ['53190md', 'login']
-    //['10264', 'auction']
+    // ['53190md', 'login']
+    ['10264', 'auction']
   ];
 
   try {

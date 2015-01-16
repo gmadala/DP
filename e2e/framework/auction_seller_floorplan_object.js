@@ -27,17 +27,6 @@ var AuctionSellerFloorPlan = function () {
 
   this.noticeBox = browser.element(by.css('.notice-box'));
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var searchField = this.searchField;
-    browser.driver.wait(function () {
-      return searchField.isPresent();
-    }, 3000);
-  };
-
   this.setSearchQuery = function (searchString) {
     this.searchField.sendKeys(searchString);
   };
