@@ -89,13 +89,17 @@ var HelperObject = function () {
   };
 
   this.expectingLoading = function () {
-    this.waitForElementDisplayed(this.loading);
-    this.waitForElementHidden(this.loading);
+    if (browser.params.env !== 'dev') {
+      this.waitForElementDisplayed(this.loading);
+      this.waitForElementHidden(this.loading);
+    }
   };
 
   this.expectingInfiniteLoading = function () {
-    this.waitForElementDisplayed(this.infiniteLoading);
-    this.waitForElementHidden(this.infiniteLoading);
+    if (browser.params.env !== 'dev') {
+      this.waitForElementDisplayed(this.infiniteLoading);
+      this.waitForElementHidden(this.infiniteLoading);
+    }
   };
 
   /** Common login and logout function **/
