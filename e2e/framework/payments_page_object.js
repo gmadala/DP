@@ -35,19 +35,62 @@ var PaymentPageObject = function () {
   this.modalHeader = browser.element(by.css('.modal-header'));
   this.closeModal = this.modal.element(by.cssContainingText('button', 'Close'));
 
+  this.accountFeeSection = browser.element(by.cssContainingText('.well', 'Account Fees'));
+  this.accountFeeRepeater = browser.element.all(by.repeater('fee in fees.results'));
+  this.accountFeeTable = this.accountFeeSection.element(by.css('table'));
+  this.accountFeeHeaders = ['Due Date', 'Fee Type', 'Description', 'Posted', 'Amount'];
+
+  this.vehiclePaymentSection = browser.element(by.cssContainingText('.well', 'Vehicle Payments'));
+  this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
+  this.vehiclePaymentTable = this.vehiclePaymentSection.element(by.css('table'));
+  this.vehiclePaymentHeaders = ['Due Date', 'Description', 'Floored', 'Status', 'Payment', 'Payoff'];
+
   // request extension links
   this.requestExtensionLinks = browser.element.all(by.css('.paired a'));
 
   // vehicle detail links
   this.vehicleDetailLinks = browser.element.all(by.css('.description-narrow a'));
-
   // unschedule payments
   this.unschedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-link'));
 
   // schedule payments
   this.schedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-adapts'));
-
   this.checkoutButton = browser.element(by.css('.btn-cta'));
+
+  var getContents = function (tableElement, headerNames) {
+    var promise = protractor.promise.defer();
+    // ensure that the header equals to all('th').getText()
+    expect(tableElement.all(by.css('th')).getText()).toEqual(headerNames);
+
+    var counter = 0;
+    var contents = [];
+    var rows = tableElement.all(by.css('tr'));
+    rows.count().then(function (count) {
+      rows.each(function (row) {
+        var cells = row.all(by.css('td'));
+        cells.each(function (cell) {
+          cell.getText().then(function (cellText) {
+            contents.push(cellText);
+            counter++;
+            // all(by.css('tr')) will include tr for header,
+            // but we don't want to count it in.
+            if (counter >= (count - 1) * headerNames.length) {
+              promise.fulfill(contents);
+            }
+          });
+        });
+      });
+    });
+    return promise;
+  };
+
+  this.getVehiclePaymentsContent = function () {
+    return getContents(this.vehiclePaymentTable, this.vehiclePaymentHeaders);
+  };
+
+  this.getAccountFeesContent = function () {
+    return getContents(this.accountFeeTable, this.accountFeeHeaders);
+  };
 
   /** Setter and getter for elements **/
   this.setSearchField = function (searchString) {
