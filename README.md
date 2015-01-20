@@ -107,9 +107,8 @@ The project uses Grunt for task automation. The primary tasks to be run from the
 
   *Sample usage*
 
-      grunt server --noTrack --apiBase='https://test.discoverdsc.com/MobileService/api'
-        --apiDomain='https://test.discoverdsc.com'
-
+      grunt server --noTrack=true --apiBase='https://test.discoverdsc.com/MobileService/api'
+      
   No options or args are required. By default the server will serve the files from *app/* and *.tmp/*
   and reload the browser if there are changes to these directory. This task will also launch Google Chrome in incognito
   mode with security disabled so that the client can be run on localhost but still communicate with a remote API server.
@@ -117,11 +116,8 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   The options are as follows (refer to *app/scripts/config/nxgConfig.js* for common values for the apiBase):
   - noTrack - if true then analytics using segmentio will not be disabled; false by default
   - apiBase - full path to the API; '' by default
-  - apiDomain - domain; '' by default
-
-  Please note that the apiBase and apiDomain options must either be omitted or supplied together. This may seem 
-  redundant but they are used separately in the application.
-
+  - apiDomain - domain; '' by default; Currently this is only used to get 
+  DSCConfigurationService/VirtualOfficeNotificationService.svc/msg info so it is not needed. 
 
 - #### test:unit
 
