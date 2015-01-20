@@ -8,7 +8,7 @@ var auctionHelper = new AuctionHelperObject();
 auctionHelper.describe('WMT-62', function () {
   describe('Auction Portal Dashboard navigation options', function () {
     beforeEach(function () {
-      auctionHelper.openPageAndWait(auctionDashboard.url, true, false);
+      auctionHelper.expectingLoading();
     });
 
     it('Previous Disbursements navigates to View A Report', function () {
