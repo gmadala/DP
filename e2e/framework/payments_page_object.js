@@ -39,6 +39,7 @@ var PaymentPageObject = function () {
   this.accountFeeRepeater = browser.element.all(by.repeater('fee in fees.results'));
   this.accountFeeTable = this.accountFeeSection.element(by.css('table'));
   this.accountFeeHeaders = ['Due Date', 'Fee Type', 'Description', 'Posted', 'Amount'];
+  this.accountFeeColumns = ['fee.EffectiveDate', 'fee.FeeType', 'fee.Description', 'fee.Posted'];
 
   this.vehiclePaymentSection = browser.element(by.cssContainingText('.well', 'Vehicle Payments'));
   this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
@@ -82,6 +83,16 @@ var PaymentPageObject = function () {
       });
     });
     return promise;
+  };
+
+  this.formattedDataFromRepeater = function (repeater, column) {
+    return browser.element.all(by.repeater(repeater).column(column));
+  };
+
+  this.unformattedDataFromRepeater = function (repeater, column) {
+    return browser.element.all(by.repeater(repeater)).map(function (element) {
+      return element.evaluate(column);
+    });
   };
 
   this.getVehiclePaymentsContent = function () {

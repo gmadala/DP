@@ -175,9 +175,68 @@ helper.describe('WMT-106', function () {
         if (count <= 0) {
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeFalsy();
         } else {
+          var repeater = 'fee in fees.results';
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeTruthy();
           paymentsPage.getAccountFeesContent().then(function (contents) {
-
+            // check the view will have the correct amount of cells
+            paymentsPage.accountFeeRepeater.count(function (count) {
+              expect(contents.length).toEqual(count * paymentsPage.accountFeeHeaders.length);
+            });
+            // check if the table (view) have the correct data (model).
+            var columnCount = paymentsPage.accountFeeHeaders.length;
+            var columnCounter = 0;
+            paymentsPage.accountFeeColumns.forEach(function (accountFeeColumn) {
+              paymentsPage.formattedDataFromRepeater(repeater, accountFeeColumn).map(function (element) {
+                return element.getText();
+              }).then(function (formattedData) {
+                var rowCounter = 0;
+                formattedData.forEach(function (data) {
+                  expect(data).toEqual(contents[rowCounter * columnCount + columnCounter]);
+                  rowCounter++;
+                });
+                columnCounter++;
+              });
+            });
+            // if the fee.Scheduled true, then should display 'Scheduled'
+            // if the fee.Scheduled true, should not display the balance amount
+            // if the fee.Scheduled true, should display the scheduled date
+            // if the fee.Scheduled true, should display link to un-schedule the payment
+            var scheduledList, balanceList, scheduledDateList;
+            paymentsPage.unformattedDataFromRepeater(repeater, 'fee.Scheduled').then(function (rawData) {
+              scheduledList = rawData;
+            }).then(function () {
+              paymentsPage.unformattedDataFromRepeater(repeater, 'fee.Balance').then(function (rawData) {
+                balanceList = rawData;
+              });
+            }).then(function () {
+              paymentsPage.unformattedDataFromRepeater(repeater, 'fee.ScheduledDate').then(function (rawData) {
+                scheduledDateList = rawData;
+              });
+            }).then(function () {
+              expect(balanceList.length).toEqual(scheduledList.length);
+              expect(balanceList.length).toEqual(scheduledDateList.length);
+              for (var i = 0; i < scheduledList.length; i++) {
+                var balance = balanceList[i];
+                var scheduled = scheduledList[i];
+                var scheduledDate = scheduledDateList[i];
+                if (scheduled) {
+                  expect(contents[i * columnCount + (columnCount - 1)]).toContain('Scheduled');
+                  expect(contents[i * columnCount + (columnCount - 1)]).toContain('Unschedule');
+                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain(balance);
+                  // reformat the date and trim '0'
+                  var trimZeroRegex = /-0/g;
+                  var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
+                  scheduledDate = scheduledDate.replace(trimZeroRegex, '-');
+                  scheduledDate = scheduledDate.replace(defaultDateRegex, '$2/$3/$1');
+                  expect(contents[i * columnCount + (columnCount - 1)]).toContain(scheduledDate);
+                } else {
+                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain('Scheduled');
+                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain('Unschedule');
+                  expect(contents[i * columnCount + (columnCount - 1)]).toContain(balance);
+                  expect(scheduledDate).toEqual(null);
+                }
+              }
+            });
           });
         }
       });
