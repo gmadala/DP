@@ -83,7 +83,7 @@ auctionHelper.describe('WMT-77', function () {
               var notFound = false;
               for (var i = 0; i < parameters.length; i++) {
                 var argument = parameters[i].toString();
-                if (text.indexOf(argument) === -1) {
+                if (text.indexOf(argument) <= -1) {
                   notFound = true;
                   break;
                 }
@@ -106,7 +106,7 @@ auctionHelper.describe('WMT-77', function () {
       // check if one of the 'contents' array element contains 'text'
       var found = false;
       contents.forEach(function (content) {
-        if (content.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
+        if (content.toLowerCase().indexOf(text.toLowerCase()) > -1) {
           found = true;
         }
       });

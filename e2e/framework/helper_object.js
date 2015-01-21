@@ -175,7 +175,7 @@ var HelperObject = function () {
     // Return true when the element have cssClass in them.
   this.hasClass = function (element, cssClass) {
     return element.getAttribute('class').then(function (classes) {
-      return classes.indexOf(cssClass) !== -1;
+      return classes.indexOf(cssClass) > -1;
     });
   };
 
