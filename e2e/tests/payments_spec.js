@@ -170,7 +170,7 @@ helper.describe('WMT-106', function () {
       expect(paymentsPage.searchField.getAttribute('placeholder')).toEqual(watermark);
     });
 
-    it('should contains account fees element', function () {
+    xit('account fees should contains the correct elements.', function () {
       paymentsPage.accountFeeRepeater.count().then(function (count) {
         if (count <= 0) {
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeFalsy();
@@ -182,13 +182,11 @@ helper.describe('WMT-106', function () {
             paymentsPage.accountFeeRepeater.count(function (count) {
               expect(contents.length).toEqual(count * paymentsPage.accountFeeHeaders.length);
             });
-            // check if the table (view) have the correct data (model).
-            var columnCount = paymentsPage.accountFeeHeaders.length;
             var columnCounter = 0;
+            var columnCount = paymentsPage.accountFeeHeaders.length;
+            // check if the table (view) have the correct data (model).
             paymentsPage.accountFeeColumns.forEach(function (accountFeeColumn) {
-              paymentsPage.formattedDataFromRepeater(repeater, accountFeeColumn).map(function (element) {
-                return element.getText();
-              }).then(function (formattedData) {
+              paymentsPage.formattedDataFromRepeater(repeater, accountFeeColumn).then(function (formattedData) {
                 var rowCounter = 0;
                 formattedData.forEach(function (data) {
                   expect(data).toEqual(contents[rowCounter * columnCount + columnCounter]);
@@ -197,10 +195,6 @@ helper.describe('WMT-106', function () {
                 columnCounter++;
               });
             });
-            // if the fee.Scheduled true, then should display 'Scheduled'
-            // if the fee.Scheduled true, should not display the balance amount
-            // if the fee.Scheduled true, should display the scheduled date
-            // if the fee.Scheduled true, should display link to un-schedule the payment
             var scheduledList, balanceList, scheduledDateList;
             paymentsPage.unformattedDataFromRepeater(repeater, 'fee.Scheduled').then(function (rawData) {
               scheduledList = rawData;
@@ -213,28 +207,234 @@ helper.describe('WMT-106', function () {
                 scheduledDateList = rawData;
               });
             }).then(function () {
+              // if the fee.Scheduled true, then should display 'Scheduled'
+              // if the fee.Scheduled true, should not display the balance amount
+              // if the fee.Scheduled true, should display the scheduled date
+              // if the fee.Scheduled true, should display link to un-schedule the payment
               expect(balanceList.length).toEqual(scheduledList.length);
               expect(balanceList.length).toEqual(scheduledDateList.length);
               for (var i = 0; i < scheduledList.length; i++) {
                 var balance = balanceList[i];
                 var scheduled = scheduledList[i];
                 var scheduledDate = scheduledDateList[i];
+                // replace the $ sign, ',' sign and .00 from the content
+                var content = contents[i * columnCount + (columnCount - 1)].trim().replace(/^\$|,|.00$/g, '');
                 if (scheduled) {
-                  expect(contents[i * columnCount + (columnCount - 1)]).toContain('Scheduled');
-                  expect(contents[i * columnCount + (columnCount - 1)]).toContain('Unschedule');
-                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain(balance);
+                  expect(content).toContain('Scheduled');
+                  expect(content).toContain('Unschedule');
+                  expect(content).not.toContain(balance);
                   // reformat the date and trim '0'
                   var trimZeroRegex = /-0/g;
                   var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
                   scheduledDate = scheduledDate.replace(trimZeroRegex, '-');
                   scheduledDate = scheduledDate.replace(defaultDateRegex, '$2/$3/$1');
-                  expect(contents[i * columnCount + (columnCount - 1)]).toContain(scheduledDate);
+                  expect(content).toContain(scheduledDate);
                 } else {
-                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain('Scheduled');
-                  expect(contents[i * columnCount + (columnCount - 1)]).not.toContain('Unschedule');
-                  expect(contents[i * columnCount + (columnCount - 1)]).toContain(balance);
+                  expect(content).not.toContain('Scheduled');
+                  expect(content).not.toContain('Unschedule');
+                  expect(content).toContain(balance);
                   expect(scheduledDate).toEqual(null);
                 }
+              }
+            });
+          });
+        }
+      });
+    });
+
+    it('vehicle payments should contains the correct elements.', function () {
+      paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
+        if (count <= 0) {
+          expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
+          expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
+        } else {
+          // try filling search term to remove search results
+          paymentsPage.setSearchField('ZZ');
+          paymentsPage.searchButton.click().then(function () {
+            paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
+              if (count <= 0) {
+                expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
+                expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
+                paymentsPage.searchField.clear();
+                paymentsPage.searchButton.click().then(function () {
+                  helper.expectingInfiniteLoading();
+                });
+              }
+              // by now, the search field should be cleared and the infinite loading should be hidden already
+              if (count > 0) {
+                paymentsPage.getVehiclePaymentsContent().then(function (contents) {
+                  expect(contents.length).toEqual(count * paymentsPage.vehiclePaymentHeaders.length);
+
+                  var repeater = 'payment in payments.results';
+                  var columnCount = paymentsPage.vehiclePaymentHeaders.length;
+
+                  // if the amount due === current pay off, should have request extension link
+                  // should contains the payment due date.
+                  var amountDues, currentPayoffs, paymentDueDates;
+                  paymentsPage.unformattedDataFromRepeater(repeater, 'payment.AmountDue').then(function (rawData) {
+                    amountDues = rawData;
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.CurrentPayoff').then(function (rawData) {
+                      currentPayoffs = rawData;
+                    });
+                  }).then(function () {
+                    paymentsPage.formattedDataFromRepeater(repeater, 'payment.DueDate').then(function (rawData) {
+                      paymentDueDates = rawData;
+                      expect(paymentDueDates.length).toEqual(count);
+                      expect(paymentDueDates.length).toEqual(amountDues.length);
+                      expect(paymentDueDates.length).toEqual(currentPayoffs.length);
+                      for (var i = 0; i < paymentDueDates.length; i++) {
+                        var amountDue = amountDues[i];
+                        var currentPayoff = currentPayoffs[i];
+                        var paymentDueDate = paymentDueDates[i];
+                        var content = contents[i * columnCount];
+                        if (amountDue === currentPayoff) {
+                          expect(content).toContain('Request');
+                          expect(content).toContain('Extension');
+                        } else {
+                          expect(content).not.toContain('Request');
+                          expect(content).not.toContain('Extension');
+                        }
+                        expect(content).toContain(paymentDueDate);
+                      }
+                    });
+                  });
+
+                  // description should contain vin and description of the car
+                  var descriptions, vinNumbers, stockNumbers;
+                  paymentsPage.unformattedDataFromRepeater(repeater, 'payment.UnitDescription').then(function (rawData) {
+                    descriptions = rawData;
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.Vin').then(function (rawData) {
+                      vinNumbers = rawData;
+                    });
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.StockNumber').then(function (rawData) {
+                      stockNumbers = rawData;
+                    });
+                  }).then(function () {
+                    expect(descriptions.length).toEqual(count);
+                    expect(descriptions.length).toEqual(vinNumbers.length);
+                    expect(descriptions.length).toEqual(stockNumbers.length);
+                    for (var i = 0; i < descriptions.length; i++) {
+                      var vinNumber = vinNumbers[i];
+                      var stockNumber = stockNumbers[i];
+                      var description = descriptions[i];
+                      var content = contents[i * columnCount + 1];
+                      expect(content).toContain(vinNumber);
+                      expect(content).toContain(stockNumber);
+                      expect(content).toContain(description);
+                    }
+                  });
+
+                  // floored should contains the date and number of days
+                  paymentsPage.formattedDataFromRepeater(repeater, 'payment.FlooringDate').then(function (flooringDates) {
+                    var daysOnFloorplans;
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.DaysOnFloorplan').then(function (rawData) {
+                      daysOnFloorplans = rawData;
+                      expect(flooringDates.length).toEqual(count);
+                      expect(flooringDates.length).toEqual(daysOnFloorplans.length);
+                      for (var i = 0; i < flooringDates.length; i++) {
+                        var flooringDate = flooringDates[i];
+                        var daysOnFloorplan = daysOnFloorplans[i];
+                        var content = contents[i * columnCount + 2];
+                        expect(content).toContain(flooringDate);
+                        expect(content).toContain(daysOnFloorplan + ' days');
+                      }
+                    });
+                  });
+
+                  // status should contains the status info
+                  paymentsPage.formattedDataFromRepeater(repeater, 'payment.UnitStatus').then(function (unitStatuses) {
+                    expect(unitStatuses.length).toEqual(count);
+                    for (var i = 0; i < unitStatuses.length; i++) {
+                      var unitStatus = unitStatuses[i];
+                      var content = contents[i * columnCount + 3];
+                      expect(content).toContain(unitStatus);
+                    }
+                  });
+
+                  // payment should contains number and scheduled and scheduled date
+                  var curtailmentList, scheduledList, amountDueList, currentPayoffList, scheduledPaymentDateList;
+                  paymentsPage.unformattedDataFromRepeater(repeater, 'payment.CurtailmentPaymentScheduled').then(function (rawData) {
+                    curtailmentList = rawData;
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.Scheduled').then(function (rawData) {
+                      scheduledList = rawData;
+                    });
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.AmountDue').then(function (rawData) {
+                      amountDueList = rawData;
+                    });
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.CurrentPayoff').then(function (rawData) {
+                      currentPayoffList = rawData;
+                    });
+                  }).then(function () {
+                    paymentsPage.unformattedDataFromRepeater(repeater, 'payment.ScheduledPaymentDate').then(function (rawData) {
+                      scheduledPaymentDateList = rawData;
+                    });
+                  }).then(function () {
+                    // if the fee.Scheduled true, then should display 'Scheduled'
+                    // if the fee.Scheduled true, should not display the balance amount
+                    // if the fee.Scheduled true, should display the scheduled date
+                    // if the fee.Scheduled true, should display link to un-schedule the payment
+                    expect(amountDueList.length).toEqual(count);
+                    expect(amountDueList.length).toEqual(scheduledList.length);
+                    expect(amountDueList.length).toEqual(curtailmentList.length);
+                    expect(amountDueList.length).toEqual(currentPayoffList.length);
+                    expect(amountDueList.length).toEqual(scheduledPaymentDateList.length);
+                    for (var i = 0; i < scheduledList.length; i++) {
+                      var amountDue = amountDueList[i];
+                      var scheduled = scheduledList[i];
+                      var curtailment = curtailmentList[i];
+                      var currentPayoff = currentPayoffList[i];
+                      var scheduledPaymentDate = scheduledPaymentDateList[i];
+                      var paymentContent = contents[i * columnCount + 4].trim().replace(/^\$|,|.00$/g, '');
+                      var payoffContent = contents[i * columnCount + 5].trim().replace(/^\$|,|.00$/g, '');
+                      // reformat the date and trim '0'
+                      var trimZeroRegex = /-0/g;
+                      var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
+                      scheduledPaymentDate = scheduledPaymentDate.replace(trimZeroRegex, '-');
+                      scheduledPaymentDate = scheduledPaymentDate.replace(defaultDateRegex, '$2/$3/$1');
+                      if (scheduled) {
+                        if (curtailment) {
+                          // payment will have 'Scheduled'
+                          expect(paymentContent).toContain('Scheduled');
+                          expect(paymentContent).toContain('Unschedule');
+                          expect(paymentContent).not.toContain(amountDue);
+                          expect(paymentContent).toContain(scheduledPaymentDate);
+                          // payoff will have amount of payoff
+                          expect(payoffContent).not.toContain('Scheduled');
+                          expect(payoffContent).not.toContain('Unschedule');
+                          expect(payoffContent).toContain(currentPayoff);
+                          expect(payoffContent).not.toContain(scheduledPaymentDate);
+                        } else {
+                          // payoff will have 'Scheduled'
+                          expect(payoffContent).toContain('Scheduled');
+                          expect(payoffContent).toContain('Unschedule');
+                          expect(payoffContent).not.toContain(currentPayoff);
+                          expect(payoffContent).toContain(scheduledPaymentDate);
+                          // payment will have the amount due
+                          expect(paymentContent).not.toContain('Scheduled');
+                          expect(paymentContent).not.toContain('Unschedule');
+                          expect(paymentContent).toContain(amountDue);
+                          expect(paymentContent).not.toContain(scheduledPaymentDate);
+                        }
+                      } else {
+                        // both payment and payoff will have amount and current payoff
+                        expect(paymentContent).not.toContain('Scheduled');
+                        expect(paymentContent).not.toContain('Unschedule');
+                        expect(paymentContent).toContain(amountDue);
+                        expect(paymentContent).not.toContain(scheduledPaymentDate);
+                        expect(payoffContent).not.toContain('Scheduled');
+                        expect(payoffContent).not.toContain('Unschedule');
+                        expect(payoffContent).toContain(currentPayoff);
+                        expect(payoffContent).not.toContain(scheduledPaymentDate);
+                      }
+                    }
+                  });
+                });
               }
             });
           });

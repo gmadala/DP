@@ -45,6 +45,7 @@ var PaymentPageObject = function () {
   this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
   this.vehiclePaymentTable = this.vehiclePaymentSection.element(by.css('table'));
   this.vehiclePaymentHeaders = ['Due Date', 'Description', 'Floored', 'Status', 'Payment', 'Payoff'];
+  this.vehicleNoticeBox = browser.element(by.css('.notice-box:not(.text-error'));
 
   // request extension links
   this.requestExtensionLinks = browser.element.all(by.css('.paired a'));
@@ -86,7 +87,9 @@ var PaymentPageObject = function () {
   };
 
   this.formattedDataFromRepeater = function (repeater, column) {
-    return browser.element.all(by.repeater(repeater).column(column));
+    return browser.element.all(by.repeater(repeater).column(column)).map(function (element) {
+      return element.getText();
+    });
   };
 
   this.unformattedDataFromRepeater = function (repeater, column) {
