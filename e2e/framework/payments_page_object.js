@@ -4,17 +4,6 @@ var PaymentPageObject = function () {
 
   this.url = '#/payments';
 
-  this.openPage = function () {
-    browser.get(this.url);
-  };
-
-  this.waitForPage = function () {
-    var searchField = this.searchField;
-    browser.driver.wait(function () {
-      return searchField.isPresent();
-    }, 3000);
-  };
-
   /** Locator of elements **/
   this.searchField = browser.element(by.model('activeCriteria.query'));
   this.searchFilterSelection = browser.element(by.model('activeCriteria.filter'));

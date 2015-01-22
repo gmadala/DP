@@ -55,7 +55,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should contains Acknowledge VIN Look-Up Failure when a VIN search fails.', function () {
-      var vinValue = browser.params.invalidVin;
+      var vinValue = browser.params.invalidVin.toString();
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
       expect(auctionBulkFlooring.getVin()).not.toEqual(vinValue);
@@ -69,7 +69,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should not contains Acknowledge VIN Look-Up Failure before, when and after entering VIN.', function () {
-      var vinValue = browser.params.invalidVin;
+      var vinValue = browser.params.invalidVin.toString();
       var otherVinValue = '0';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
@@ -119,7 +119,7 @@ auctionHelper.describe('WMT-76', function () {
     };
 
     it('Should contain unlocked Make, Model, Year, and Style after searching invalid VIN.', function () {
-      var vinValue = browser.params.invalidVin;
+      var vinValue = browser.params.invalidVin.toString();
       // all the outputs should not be displayed
       validateOutputNotPresent();
       // all the inputs should not be displayed as well
@@ -143,7 +143,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should contain locked Make, Model, Year, and Style after searching valid VIN.', function () {
-      var otherVinValue = browser.params.validVin;
+      var otherVinValue = browser.params.validVin.toString();
       // all the outputs should not be displayed
       validateOutputNotPresent();
       // all the inputs should not be displayed as well
@@ -167,7 +167,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should not contain unlocked Make, Model, Year, and Style before or when entering VIN.', function () {
-      var vinValue = browser.params.invalidVin;
+      var vinValue = browser.params.invalidVin.toString();
       var otherVinValue = '1234567';
       validateInputIsNotPresent();
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
@@ -189,7 +189,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should not contain locked Make, Model, Year, and Style before or when entering VIN.', function () {
-      var vinValue = browser.params.validVin;
+      var vinValue = browser.params.validVin.toString();
       var otherVinValue = '123456';
       validateOutputNotPresent();
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
@@ -247,7 +247,7 @@ auctionHelper.describe('WMT-76', function () {
       // now we wait for the delay of the tooltip before we check if the tooltip is actually gets displayed
       browser.driver.wait(function () {
         return auctionBulkFlooring.tooltip.isPresent();
-      }, 3000);
+      });
       expect(auctionBulkFlooring.tooltip.isDisplayed()).toBeTruthy();
     });
   });

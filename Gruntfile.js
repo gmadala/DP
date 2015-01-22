@@ -22,10 +22,18 @@ module.exports = function(grunt) {
   var defaultTarget = 'test';
   var defaultProtractorSuite = 'login'; // TODO may want to change to smoke or dealer later
 
-  // user name, suite to run
+  // element format:
+  // 0 = 'mock' if the user will be available in the mockApi (mockApi currently only care about 'auction':'test')
+  // 1 = suite name to be run (ex: payments, auction, login)
+  // 2 = username with the correct privilege to the suite
+  // 3 = password for the username
+  var counter = 0;
+  var effectiveUsers = [];
   var users = [
-    // ['53190md', 'login']
-    ['10264', 'auction']
+    ['non-mock', 'payments', '53190md', 'password@1'],
+    ['non-mock', 'auction', '10264', 'password@1'],
+    ['mock', 'payments', 'dealer', 'test'],
+    ['mock', 'auction', 'auction', 'test']
   ];
 
   try {
@@ -248,7 +256,6 @@ module.exports = function(grunt) {
             '*.html',
             'views/**/*.html',
             'scripts/directives/**/*.html',
-
             // Getting an error when uglifying this file. Should be looked into!
             '!scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html'
           ],
@@ -413,14 +420,15 @@ module.exports = function(grunt) {
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
         keepAlive: true,
-        configFile: "e2e/protractor.conf.js",
+        configFile: 'e2e/protractor.conf.js',
         noColor: false,
         args: { // the args here are for when this task is run directly from the command line with --options
           suite: grunt.option('suite') || defaultProtractorSuite, // change to smoke or dealer later
           params: {
             user: grunt.option('params.user'),
             password: grunt.option('params.password'),
-            suite: grunt.option('suite') || defaultProtractorSuite
+            suite: grunt.option('suite') || defaultProtractorSuite,
+            env: (grunt.option('apiBase') || '') ? 'dev' : 'non-dev'
           }
         }
       },
@@ -460,35 +468,55 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('test:e2e:users', 'Runs e2e tests with multiple logins', function () {
-
-    // a target will be specified when doing a build to 'dist' so server those files for that
-    // case.
+    // a target will be specified when doing a build to 'dist' so server those files for that case.
     var useDist = grunt.option('target');
-    grunt.log.writeln('Running test:e2e:users with target ' + (useDist || 'dev'));
-    grunt.task.run('shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
-
-    users.forEach(function (user) {
-
-      var u = user[0];
-      var suite  = user[1];
-
-      grunt.log.writeln('Adding protractor Suite ' + suite + ' for User ' + u + ' to tests to be run');
-
-      // config must be updated dynamically like this:
-      grunt.config(['protractor', 'run'], {
-        options: {
-          args: {
-            suite: suite,
-            params: {
-              user: u,
-              suite: suite // for logging purposes inside protractor
-            }
-          }
+    var apiBase = grunt.option('apiBase') || '';
+    grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
+    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
+    // find out which users configuration can be run based on the target of this grunt task.
+    for (var j = 0; j < users.length; j++) {
+      var user = users[j];
+      if (apiBase === '') {
+        if (user[0] === 'mock') {
+          effectiveUsers.push(user);
         }
-      });
-
+      } else {
+        if (user[0] !== 'mock') {
+          effectiveUsers.push(user);
+        }
+      }
+    }
+    // prepare the protractor configuration and then run protractor
+    for (var i = 0; i < effectiveUsers.length; i++) {
+      grunt.task.run('prepare-protractor');
       grunt.task.run('protractor:run');
+    }
+  });
+
+  grunt.registerTask('prepare-protractor', 'Build config and run protractor.', function () {
+    var effectiveUser = effectiveUsers[counter];
+    var env = (grunt.option('apiBase') || '') ? 'non-dev' : 'dev';
+    // create param object needed to run protractor
+    var params = {};
+    params.user = effectiveUser[2];
+    params.password = effectiveUser[3];
+    params.suite = effectiveUser[1];
+    params.env = env;
+    if (env === 'dev') {
+      // this is the values set inside the mock api
+      params.validVin = '1234567';
+      params.invalidVin = '123456';
+    }
+    // set the configuration
+    grunt.config(['protractor', 'run'], {
+      options: {
+        args: {
+          suite: effectiveUser[1],
+          params: params
+        }
+      }
     });
+    counter++;
   });
 
   grunt.registerTask('build', [
@@ -516,30 +544,21 @@ module.exports = function(grunt) {
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
   // app/scripts/config/nxgConfig.js
   grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
-
     var target = grunt.option('target');
-
     if (!target) {
-
       grunt.log.warn('No Continuous Integration build --target was specified, defaulting to: ' + defaultTarget);
       target = defaultTarget;
     }
 
     grunt.log.writeln('Running Continuous Integration Build --target=' + target);
-
     grunt.task.run('test:unit');
-
     grunt.task.run('build');
-
     grunt.task.run('test:e2e:users');
-
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
-    grunt.task.run('jshint')
+    grunt.task.run('jshint');
   });
 
   grunt.registerMultiTask('translations_merge', 'Merge multiple translations files into one', function () {
-    var options = this.options();
-
     this.files.forEach(function (file) {
 
       var translations = {
@@ -551,7 +570,7 @@ module.exports = function(grunt) {
 
       file.src.forEach(function (filename) {
         var fileContents = grunt.file.read(filename).toString();
-        var matches = fileContents.split("\n\n");
+        var matches = fileContents.split('\n\n');
 
         // Set the opener
         if (translations.values.length === 0) {
@@ -588,7 +607,7 @@ module.exports = function(grunt) {
       grunt.log.writeln(translations.truncated.length + ' Strings Found');
       grunt.log.writeln(dupes + ' Duplicates Found');
 
-      grunt.file.write(file.dest, translations.values.join("\n\n"));
+      grunt.file.write(file.dest, translations.values.join('\n\n'));
 
     }); // END files.forEach()
   });
@@ -603,7 +622,7 @@ module.exports = function(grunt) {
       matchesPlural: [],
       plurals: []
     };
-    var untranslatedContents = grunt.file.read(options.pot_file).toString().split("\n\n");
+    var untranslatedContents = grunt.file.read(options.pot_file).toString().split('\n\n');
     // We don't need the file definition
     untranslatedContents.shift();
 
@@ -614,7 +633,7 @@ module.exports = function(grunt) {
       splitter = (truncated.indexOf('msgid_plural') > -1) ? 'msgid_plural' : 'msgstr';
 
       // Push plurals onto a different array since we handle them differently
-      if (splitter == 'msgid_plural') {
+      if (splitter === 'msgid_plural') {
         // Truncate to just the string value
         truncated = truncated.slice(0, truncated.indexOf(splitter) - 2);
 
@@ -641,7 +660,7 @@ module.exports = function(grunt) {
        */
       file.src.forEach(function (filename) {
         var fileContents = grunt.file.read(filename).toString();
-        var matches = fileContents.toString().split("\n\n");
+        var matches = fileContents.toString().split('\n\n');
 
         if (!translations.hasOwnProperty(filename)) {
           translations[filename] = {
@@ -660,7 +679,7 @@ module.exports = function(grunt) {
 
         // Match each of the plurals by testing for msgid_plural
         translationStrings.plurals.forEach(function (string, key) {
-          if (fileContents.indexOf('msgid "' + string + '"' + "\n" + 'msgid_plural') === -1) {
+          if (fileContents.indexOf('msgid "' + string + '"' + '\n' + 'msgid_plural') === -1) {
             translations[filename].values.push(translationStrings.matchesPlural[key]);
           }
         });
@@ -669,7 +688,7 @@ module.exports = function(grunt) {
 
         translations[filename].values.unshift(matches[0]);
 
-        grunt.file.write(file.dest, translations[filename].values.join("\n\n"));
+        grunt.file.write(file.dest, translations[filename].values.join('\n\n'));
       }); // END forEach file
     });
 

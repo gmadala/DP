@@ -84,7 +84,7 @@ var HelperObject = function () {
         return browser.driver.getCurrentUrl().then(function (url) {
           return url.indexOf(expectedRelativeUrl) > -1;
         });
-      }, 3000);
+      });
     });
   };
 
@@ -221,7 +221,7 @@ var HelperObject = function () {
           }
         });
         return promise;
-      }, 3000);
+      });
     };
 
     describe('E2E Testing Suite for Jira Issue ' + jiraIssue + '.', function () {

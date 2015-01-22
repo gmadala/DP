@@ -56,7 +56,7 @@ var AuctionBulkFlooringObject = function () {
     // * wait for the modal to appear in the page first
     browser.driver.wait(function () {
       return modal.isPresent();
-    }, 3000);
+    });
     // * close it once it's displayed on the screen.
     browser.driver.wait(function () {
       var promise = protractor.promise.defer();
@@ -67,7 +67,7 @@ var AuctionBulkFlooringObject = function () {
         promise.fulfill(true);
       });
       return promise;
-    }, 3000);
+    });
   };
 
   var getSearchButton = function (styledInputs, model) {
