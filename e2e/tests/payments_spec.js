@@ -262,9 +262,9 @@ helper.describe('WMT-106', function () {
           // try filling search term to remove search results
           paymentsPage.setSearchField('ZZ');
           paymentsPage.searchButton.click().then(function () {
-            helper.waitForElementDisplayed(paymentsPage.vehicleNoticeBox);
             paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
               if (count <= 0) {
+                helper.waitForElementDisplayed(paymentsPage.vehicleNoticeBox);
                 expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
                 expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
                 paymentsPage.searchField.clear();
