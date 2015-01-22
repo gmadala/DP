@@ -538,7 +538,6 @@ helper.describe('WMT-106', function () {
                   var feeAmount = feeAmounts[i];
                   var queueText = queueTexts[i];
                   var feeDescription = feeDescriptions[i];
-                  console.log(feeDescription, queueText, feeAmount);
                   expect(queueText).toContain(feeAmount);
                   expect(queueText).toContain(feeDescription);
                 }
