@@ -29,7 +29,7 @@ auctionHelper.describe('WMT-78', function () {
       // check if one of the 'contents' array element contains 'text'
       var found = false;
       array.forEach(function (element) {
-        if (text.toLowerCase().indexOf(element.toLowerCase()) !== -1) {
+        if (text.toLowerCase().indexOf(element.toLowerCase()) > -1) {
           found = true;
         }
       });

@@ -33,20 +33,83 @@ var PaymentPageObject = function () {
   // modal and the modal header
   this.modal = browser.element(by.css('.modal'));
   this.modalHeader = browser.element(by.css('.modal-header'));
+  this.cancelExtensionModal = this.modal.element(by.cssContainingText('button', 'Cancel'));
+  this.cancelScheduledModal = this.modal.element(by.cssContainingText('button', 'No'));
+
+  this.accountFeeSection = browser.element(by.cssContainingText('.well', 'Fees'));
+  this.accountFeeRepeater = browser.element.all(by.repeater('fee in fees.results'));
+  this.accountFeeTable = this.accountFeeSection.element(by.css('table'));
+  this.accountFeeHeaders = ['Due Date', 'Fee Type', 'Description', 'Posted', 'Amount'];
+  this.accountFeeColumns = ['fee.EffectiveDate', 'fee.FeeType', 'fee.Description', 'fee.Posted'];
+
+  this.vehiclePaymentSection = browser.element(by.cssContainingText('.well', 'Vehicle'));
+  this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
+  this.vehiclePaymentTable = this.vehiclePaymentSection.element(by.css('table'));
+  this.vehiclePaymentHeaders = ['Due Date', 'Description', 'Floored', 'Status', 'Payment', 'Payoff'];
+  this.vehicleNoticeBox = browser.element(by.css('.notice-box:not(.text-error)'));
+
+  this.paymentSummaryMessage = browser.element(by.cssContainingText('p', 'You have not'));
+  this.feePaymentQueue = browser.element.all(by.repeater('fee in paymentQueue.fees'));
+  this.vehiclePaymentQueue = browser.element.all(by.repeater('payment in paymentQueue.payments'));
 
   // request extension links
-  this.requestExtensionLinks = browser.element.all(by.css('.paired a'));
-
+  this.requestExtensionLinks = browser.element.all(by.cssContainingText('a', 'Extension'));
   // vehicle detail links
-  this.vehicleDetailLinks = browser.element.all(by.css('.description-narrow a'));
-
-  // unschedule payments
-  this.unschedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-link'));
-
+  this.vehicleDetailLinks = browser.element.all(by.cssContainingText('td', 'VIN'));
+  // un-schedule payments
+  this.unscheduleFeePaymentButtons = this.accountFeeTable.all(by.cssContainingText('button', 'Unschedule'));
+  this.unscheduleVehiclePaymentButtons = this.vehiclePaymentTable.all(by.cssContainingText('button', 'Unschedule'));
   // schedule payments
-  this.schedulePaymentButtons = browser.element.all(by.css('#paymentsSearchTable .btn-adapts'));
+  this.scheduleFeePaymentButtons = this.accountFeeTable.all(by.css('button:not(.btn-unstyle)'));
+  this.scheduleVehiclePaymentButtons = this.vehiclePaymentTable.all(by.css('button:not(.btn-unstyle)'));
+  this.checkoutButton = browser.element(by.cssContainingText('button', 'Checkout'));
 
-  this.checkoutButton = browser.element(by.css('.btn-cta'));
+  var getContents = function (tableElement, headerNames) {
+    var promise = protractor.promise.defer();
+    // ensure that the header equals to all('th').getText()
+    expect(tableElement.all(by.css('th')).getText()).toEqual(headerNames);
+
+    var counter = 0;
+    var contents = [];
+    var rows = tableElement.all(by.css('tr'));
+    rows.count().then(function (count) {
+      rows.each(function (row) {
+        var cells = row.all(by.css('td'));
+        cells.each(function (cell) {
+          cell.getText().then(function (cellText) {
+            contents.push(cellText);
+            counter++;
+            // all(by.css('tr')) will include tr for header,
+            // but we don't want to count it in.
+            if (counter >= (count - 1) * headerNames.length) {
+              promise.fulfill(contents);
+            }
+          });
+        });
+      });
+    });
+    return promise;
+  };
+
+  this.formattedDataFromRepeater = function (repeater, column) {
+    return browser.element.all(by.repeater(repeater).column(column)).map(function (element) {
+      return element.getText();
+    });
+  };
+
+  this.unformattedDataFromRepeater = function (repeater, column) {
+    return browser.element.all(by.repeater(repeater)).map(function (element) {
+      return element.evaluate(column);
+    });
+  };
+
+  this.getVehiclePaymentsContent = function () {
+    return getContents(this.vehiclePaymentTable, this.vehiclePaymentHeaders);
+  };
+
+  this.getAccountFeesContent = function () {
+    return getContents(this.accountFeeTable, this.accountFeeHeaders);
+  };
 
   /** Setter and getter for elements **/
   this.setSearchField = function (searchString) {
@@ -111,50 +174,42 @@ var PaymentPageObject = function () {
     return this.modalHeader.getText();
   };
 
-  this.getActiveRequestExtensionLink = function () {
-    var promise = protractor.promise.defer();
-    this.requestExtensionLinks.each(function (requestExtensionLink) {
-      requestExtensionLink.isDisplayed().then(function (displayed) {
-        if (displayed) {
-          promise.fulfill(requestExtensionLink);
-        }
-      });
+  var getFirstElement = function (elementList) {
+    return elementList.count().then(function (count) {
+      if (count > 0) {
+        return elementList.first();
+      }
     });
-    return promise;
   };
 
-  this.getActiveVehicleDetailLink = function () {
-    var promise = protractor.promise.defer();
-    this.vehicleDetailLinks.each(function (vehicleDetailLink) {
-      promise.fulfill(vehicleDetailLink);
+  this.getVehicleDetailLink = function () {
+    var vehicleDetailLinks = this.vehicleDetailLinks;
+    return vehicleDetailLinks.count().then(function (count) {
+      if (count > 0) {
+        return vehicleDetailLinks.first().element(by.css('a'));
+      }
     });
-    return promise;
   };
 
-  this.getActiveSchedulePaymentButton = function () {
-    var promise = protractor.promise.defer();
-    this.schedulePaymentButtons.each(function (schedulePaymentButton) {
-      schedulePaymentButton.isDisplayed().then(function (displayed) {
-        if (displayed) {
-          promise.fulfill(schedulePaymentButton);
-        }
-      });
-    });
-    return promise;
+  this.getRequestExtensionLink = function () {
+    return getFirstElement(this.requestExtensionLinks);
   };
 
-  this.getActiveUnschedulePaymentButton = function () {
-    var promise = protractor.promise.defer();
-    this.unschedulePaymentButtons.each(function (unschedulePaymentButton) {
-      unschedulePaymentButton.isDisplayed().then(function (displayed) {
-        if (displayed) {
-          promise.fulfill(unschedulePaymentButton);
-        }
-      });
-    });
-    return promise;
+  this.getScheduleVehiclePaymentButton = function () {
+    return getFirstElement(this.scheduleVehiclePaymentButtons);
   };
 
+  this.getUnscheduleVehiclePaymentButton = function () {
+    return getFirstElement(this.unscheduleVehiclePaymentButtons);
+  };
+
+  this.getScheduleFeePaymentButton = function () {
+    return getFirstElement(this.scheduleFeePaymentButtons);
+  };
+
+  this.getUnscheduleFeePaymentButton = function () {
+    return getFirstElement(this.unscheduleFeePaymentButtons);
+  };
 };
 
 module.exports = PaymentPageObject;

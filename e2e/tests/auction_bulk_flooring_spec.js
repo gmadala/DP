@@ -55,7 +55,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should contains Acknowledge VIN Look-Up Failure when a VIN search fails.', function () {
-      var vinValue = '12345678901234567';
+      var vinValue = browser.params.invalidVin;
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();
       expect(auctionBulkFlooring.getVin()).not.toEqual(vinValue);
@@ -69,7 +69,7 @@ auctionHelper.describe('WMT-76', function () {
     });
 
     it('Should not contains Acknowledge VIN Look-Up Failure before, when and after entering VIN.', function () {
-      var vinValue = '12345678901234567';
+      var vinValue = browser.params.invalidVin;
       var otherVinValue = '0';
       expect(auctionBulkFlooring.vinSearchField.isDisplayed()).toBeTruthy();
       expect(auctionBulkFlooring.vinAckLookupFailure.isDisplayed()).not.toBeTruthy();

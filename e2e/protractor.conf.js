@@ -64,10 +64,11 @@ exports.config = {
   // This can be changed via the command line as:
   //   --params.login.user 'Joe'
   params: {
-    user: '10264',
+    user: '53190md',
     password: 'password@1',
     validVin: '1FADP3L92DL172226',
-    invalidVin: '12345678901234567'
+    invalidVin: '12345678901234567',
+    env: 'dev'
   },
 
   framework: 'jasmine',

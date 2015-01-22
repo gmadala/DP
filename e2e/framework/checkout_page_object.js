@@ -21,7 +21,7 @@ var CheckoutPageObject = function () {
   this.paymentsPageLink = browser.element(by.cssContainingText('a', 'Payments list'));
 
   // vehicle detail links
-  this.vehicleDetailLinks = browser.element.all(by.css('a.lockup-major'));
+  this.vehicleDetailLinks = browser.element.all(by.cssContainingText('td', 'VIN'));
 
   // payment option links
   this.paymentOptionButtons = browser.element.all(by.cssContainingText('button', 'Payment Options'));
@@ -39,12 +39,13 @@ var CheckoutPageObject = function () {
     return this.modalHeader.getText();
   };
 
-  this.getActiveVehicleDetailLink = function () {
-    var promise = protractor.promise.defer();
-    this.vehicleDetailLinks.each(function (vehicleDetailLink) {
-      promise.fulfill(vehicleDetailLink);
+  this.getVehicleDetailLink = function () {
+    var vehicleDetailLinks = this.vehicleDetailLinks;
+    return vehicleDetailLinks.count().then(function (count) {
+      if (count > 0) {
+        return vehicleDetailLinks.first().element(by.css('a'));
+      }
     });
-    return promise;
   };
 
   this.getActivePaymentOptionButton = function () {
