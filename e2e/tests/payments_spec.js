@@ -16,7 +16,7 @@ helper.describe('WMT-53', function () {
       helper.openPageAndWait(paymentsPage.url, false, true);
     });
 
-    xit('should open request extension modal when request extension is clicked', function () {
+    it('should open request extension modal when request extension is clicked', function () {
       expect(paymentsPage.requestExtensionLinks.count()).toBeGreaterThan(0);
       expect(paymentsPage.getRequestExtensionLink()).toBeDefined();
       paymentsPage.getRequestExtensionLink().then(function (requestExtensionLink) {
@@ -32,7 +32,7 @@ helper.describe('WMT-53', function () {
       });
     });
 
-    xit('should navigate to vehicle details when vehicle description is clicked', function () {
+    it('should navigate to vehicle details when vehicle description is clicked', function () {
       expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
       paymentsPage.vehicleDetailLinks.count().then(function (count) {
         if (count > 0) {
@@ -48,7 +48,7 @@ helper.describe('WMT-53', function () {
       });
     });
 
-    xit('should navigate to checkout when checkout is clicked', function () {
+    it('should navigate to checkout when checkout is clicked', function () {
       expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
       expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
       paymentsPage.scheduleVehiclePaymentButtons.count().then(function (count) {
@@ -66,7 +66,7 @@ helper.describe('WMT-53', function () {
       });
     });
 
-    xit('should open cancel payment modal when unschedule link is clicked', function () {
+    it('should open cancel payment modal when unschedule link is clicked', function () {
       paymentsPage.unscheduleVehiclePaymentButtons.count().then(function (count) {
         if (count > 0) {
           expect(paymentsPage.getUnscheduleVehiclePaymentButton()).toBeDefined();
@@ -94,7 +94,7 @@ helper.describe('WMT-106', function () {
       helper.openPageAndWait(paymentsPage.url, false, true);
     });
 
-    xit('should validate payments page object is accessing the correct fields.', function () {
+    it('should validate payments page object is accessing the correct fields.', function () {
       expect(paymentsPage.searchField.isDisplayed()).toBeTruthy();
       expect(paymentsPage.searchFilterSelection.isDisplayed()).toBeTruthy();
       expect(paymentsPage.getInventoryLocation()).toBeDefined();
@@ -106,7 +106,7 @@ helper.describe('WMT-106', function () {
       expect(paymentsPage.clearSearchButton.isDisplayed()).toBeTruthy();
     });
 
-    xit('should validate payments page object is accessing the correct option fields.', function () {
+    it('should validate payments page object is accessing the correct option fields.', function () {
       expect(paymentsPage.searchFilterOptions.count()).toEqual(4);
       // filter only gets displayed if the options is more than 2
       paymentsPage.getInventoryLocation().then(function (inventoryLocation) {
@@ -118,16 +118,16 @@ helper.describe('WMT-106', function () {
       });
     });
 
-    xit('should validate payments page object is accessing the correct range fields.', function () {
+    it('should validate payments page object is accessing the correct range fields.', function () {
       expect(paymentsPage.searchStartDateField.isDisplayed()).not.toBeTruthy();
       expect(paymentsPage.searchEndDateField.isDisplayed()).not.toBeTruthy();
     });
 
-    xit('should validate payments page object is accessing the correct error message.', function () {
+    it('should validate payments page object is accessing the correct error message.', function () {
       expect(paymentsPage.errorMessage.isDisplayed()).not.toBeTruthy();
     });
 
-    xit('should display start date and end date when filter option selected is by date range.', function () {
+    it('should display start date and end date when filter option selected is by date range.', function () {
       expect(paymentsPage.getFilterOption()).toEqual('View All');
       paymentsPage.setFilterOption('Date Range');
       expect(paymentsPage.getFilterOption()).toEqual('Date Range');
@@ -142,7 +142,7 @@ helper.describe('WMT-106', function () {
       expect(paymentsPage.searchEndDateField.isDisplayed()).not.toBeTruthy();
     });
 
-    xit('should allow setting start date and end date using datepicker.', function () {
+    it('should allow setting start date and end date using datepicker.', function () {
       paymentsPage.setFilterOption('Date Range');
 
       expect(paymentsPage.searchStartDateField.isDisplayed()).toBeTruthy();
@@ -159,18 +159,18 @@ helper.describe('WMT-106', function () {
       expect(paymentsPage.getSearchEndDate()).toEqual('01/28/2011');
     });
 
-    xit('should verify that user is able to enter text in search field.', function () {
+    it('should verify that user is able to enter text in search field.', function () {
       var searchString = 'Example search object!';
       paymentsPage.setSearchField(searchString);
       expect(paymentsPage.getSearchField()).toEqual(searchString);
     });
 
-    xit('should verify that search field have the correct watermark.', function () {
+    it('should verify that search field have the correct watermark.', function () {
       var watermark = 'By Stock #, VIN, or Description';
       expect(paymentsPage.searchField.getAttribute('placeholder')).toEqual(watermark);
     });
 
-    xit('account fees should contains the correct elements.', function () {
+    it('account fees should contains the correct elements.', function () {
       paymentsPage.accountFeeRepeater.count().then(function (count) {
         if (count <= 0) {
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeFalsy();
@@ -242,7 +242,7 @@ helper.describe('WMT-106', function () {
       });
     });
 
-    xit('vehicle payments should contains the correct elements.', function () {
+    it('vehicle payments should contains the correct elements.', function () {
       paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
         if (count <= 0) {
           expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
