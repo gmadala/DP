@@ -17,18 +17,29 @@ helper.describe('WMT-53', function () {
     });
 
     it('should open request extension modal when request extension is clicked', function () {
-      expect(paymentsPage.requestExtensionLinks.count()).toBeGreaterThan(0);
-      expect(paymentsPage.getRequestExtensionLink()).toBeDefined();
-      paymentsPage.getRequestExtensionLink().then(function (requestExtensionLink) {
-        requestExtensionLink.click().then(function () {
-          helper.waitForElementDisplayed(helper.modal);
-          var modalHeaderText = 'Request Extension';
-          expect(paymentsPage.modal.isDisplayed()).toBeTruthy();
-          expect(paymentsPage.getModalHeaderText()).toEqual(modalHeaderText);
-          paymentsPage.cancelExtensionModal.click().then(function () {
-            helper.waitForElementDismissed(helper.modal);
-          });
+      var feeCount, extensionLinkCount;
+      paymentsPage.accountFeeRepeater.count().then(function (count) {
+        feeCount = count;
+      }).then(function () {
+        paymentsPage.requestExtensionLinks.count().then(function (count) {
+          extensionLinkCount = count;
         });
+      }).then(function () {
+        if (feeCount > 0 && extensionLinkCount > 0) {
+          expect(paymentsPage.requestExtensionLinks.count()).toBeGreaterThan(0);
+          expect(paymentsPage.getRequestExtensionLink()).toBeDefined();
+          paymentsPage.getRequestExtensionLink().then(function (requestExtensionLink) {
+            requestExtensionLink.click().then(function () {
+              helper.waitForElementDisplayed(helper.modal);
+              var modalHeaderText = 'Request Extension';
+              expect(paymentsPage.modal.isDisplayed()).toBeTruthy();
+              expect(paymentsPage.getModalHeaderText()).toEqual(modalHeaderText);
+              paymentsPage.cancelExtensionModal.click().then(function () {
+                helper.waitForElementDismissed(helper.modal);
+              });
+            });
+          });
+        }
       });
     });
 
@@ -251,6 +262,7 @@ helper.describe('WMT-106', function () {
           // try filling search term to remove search results
           paymentsPage.setSearchField('ZZ');
           paymentsPage.searchButton.click().then(function () {
+            helper.waitForElementDisplayed(paymentsPage.vehicleNoticeBox);
             paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
               if (count <= 0) {
                 expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
