@@ -117,7 +117,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
 
     function fillCart() {
-      paymentsPage.schedulePaymentButtons.first().click();
+      paymentsPage.scheduleVehiclePaymentButtons.first().click();
     }
 
     it('Cart navigation is enabled if cart has an item', function () {

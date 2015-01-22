@@ -24,8 +24,8 @@ helperObject.describe('WMT-55', function () {
     it('Clicking Vehicle Description navigates to Vehicle Details.', function () {
       preparePayments();
       expect(checkoutPage.vehicleDetailLinks.count()).toBeGreaterThan(0);
-      expect(paymentsPage.getActiveVehicleDetailLink()).toBeDefined();
-      checkoutPage.getActiveVehicleDetailLink().then(function (vehicleDetailLink) {
+      expect(paymentsPage.getVehicleDetailLink()).toBeDefined();
+      checkoutPage.getVehicleDetailLink().then(function (vehicleDetailLink) {
         vehicleDetailLink.click();
       });
       expect(browser.driver.getCurrentUrl()).not.toContain(checkoutPage.url);
@@ -54,9 +54,9 @@ helperObject.describe('WMT-55', function () {
 
       expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
       expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
-      expect(paymentsPage.schedulePaymentButtons.count()).toBeGreaterThan(0);
-      expect(paymentsPage.getActiveSchedulePaymentButton()).toBeDefined();
-      paymentsPage.getActiveSchedulePaymentButton().then(function (schedulePaymentButton) {
+      expect(paymentsPage.scheduleVehiclePaymentButtons.count()).toBeGreaterThan(0);
+      expect(paymentsPage.getScheduleVehiclePaymentButton()).toBeDefined();
+      paymentsPage.getScheduleVehiclePaymentButton().then(function (schedulePaymentButton) {
         schedulePaymentButton.click();
       });
       expect(paymentsPage.checkoutButton.isEnabled()).toBeTruthy();

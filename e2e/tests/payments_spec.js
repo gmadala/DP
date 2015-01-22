@@ -18,14 +18,14 @@ helper.describe('WMT-53', function () {
 
     xit('should open request extension modal when request extension is clicked', function () {
       expect(paymentsPage.requestExtensionLinks.count()).toBeGreaterThan(0);
-      expect(paymentsPage.getActiveRequestExtensionLink()).toBeDefined();
-      paymentsPage.getActiveRequestExtensionLink().then(function (requestExtensionLink) {
+      expect(paymentsPage.getRequestExtensionLink()).toBeDefined();
+      paymentsPage.getRequestExtensionLink().then(function (requestExtensionLink) {
         requestExtensionLink.click().then(function () {
           helper.waitForElementDisplayed(helper.modal);
           var modalHeaderText = 'Request Extension';
           expect(paymentsPage.modal.isDisplayed()).toBeTruthy();
           expect(paymentsPage.getModalHeaderText()).toEqual(modalHeaderText);
-          paymentsPage.closeModal.click().then(function () {
+          paymentsPage.cancelExtensionModal.click().then(function () {
             helper.waitForElementDismissed(helper.modal);
           });
         });
@@ -37,8 +37,8 @@ helper.describe('WMT-53', function () {
       paymentsPage.vehicleDetailLinks.count().then(function (count) {
         if (count > 0) {
           expect(paymentsPage.vehicleDetailLinks.count()).toBeGreaterThan(0);
-          expect(paymentsPage.getActiveVehicleDetailLink()).toBeDefined();
-          paymentsPage.getActiveVehicleDetailLink().then(function (vehicleDetailLink) {
+          expect(paymentsPage.getVehicleDetailLink()).toBeDefined();
+          paymentsPage.getVehicleDetailLink().then(function (vehicleDetailLink) {
             vehicleDetailLink.click().then(function () {
               helper.waitForUrlToContains('vehicle');
               expect(browser.driver.getCurrentUrl()).not.toContain(paymentsPage.url);
@@ -51,11 +51,11 @@ helper.describe('WMT-53', function () {
     xit('should navigate to checkout when checkout is clicked', function () {
       expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
       expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
-      paymentsPage.schedulePaymentButtons.count().then(function (count) {
+      paymentsPage.scheduleVehiclePaymentButtons.count().then(function (count) {
         if (count > 0) {
-          expect(paymentsPage.schedulePaymentButtons.count()).toBeGreaterThan(0);
-          expect(paymentsPage.getActiveSchedulePaymentButton()).toBeDefined();
-          paymentsPage.schedulePaymentButtons.first().click().then(function () {
+          expect(paymentsPage.scheduleVehiclePaymentButtons.count()).toBeGreaterThan(0);
+          expect(paymentsPage.getScheduleVehiclePaymentButton()).toBeDefined();
+          paymentsPage.scheduleVehiclePaymentButtons.first().click().then(function () {
             expect(paymentsPage.checkoutButton.isEnabled()).toBeTruthy();
             paymentsPage.checkoutButton.click().then(function () {
               helper.waitForUrlToContains('checkout');
@@ -67,16 +67,16 @@ helper.describe('WMT-53', function () {
     });
 
     xit('should open cancel payment modal when unschedule link is clicked', function () {
-      paymentsPage.unschedulePaymentButtons.count().then(function (count) {
+      paymentsPage.unscheduleVehiclePaymentButtons.count().then(function (count) {
         if (count > 0) {
-          expect(paymentsPage.getActiveUnschedulePaymentButton()).toBeDefined();
-          paymentsPage.getActiveUnschedulePaymentButton().then(function (unschedulePaymentButton) {
+          expect(paymentsPage.getUnscheduleVehiclePaymentButton()).toBeDefined();
+          paymentsPage.getUnscheduleVehiclePaymentButton().then(function (unschedulePaymentButton) {
             unschedulePaymentButton.click().then(function () {
               helper.waitForElementDisplayed(helper.modal);
               var modalHeaderText = 'Cancel';
               expect(paymentsPage.modal.isDisplayed()).toBeTruthy();
               expect(paymentsPage.getModalHeaderText()).toContain(modalHeaderText);
-              paymentsPage.closeModal.click().then(function () {
+              paymentsPage.cancelScheduledModal.click().then(function () {
                 helper.waitForElementDismissed(helper.modal);
               });
             });
@@ -112,7 +112,7 @@ helper.describe('WMT-106', function () {
       paymentsPage.getInventoryLocation().then(function (inventoryLocation) {
         inventoryLocation.isDisplayed().then(function (displayed) {
           if (displayed) {
-            expect(inventoryLocation.options.length).toBeGreaterThan(1);
+            expect(inventoryLocation.all(by.css('option')).count()).toBeGreaterThan(1);
           }
         });
       });
@@ -218,7 +218,7 @@ helper.describe('WMT-106', function () {
                 var scheduled = scheduledList[i];
                 var scheduledDate = scheduledDateList[i];
                 // replace the $ sign, ',' sign and .00 from the content
-                var content = contents[i * columnCount + (columnCount - 1)].trim().replace(/^\$|,|.00$/g, '');
+                var content = contents[i * columnCount + (columnCount - 1)].trim().replace(/^\$|,|\.00$/g, '');
                 if (scheduled) {
                   expect(content).toContain('Scheduled');
                   expect(content).toContain('Unschedule');
@@ -242,7 +242,7 @@ helper.describe('WMT-106', function () {
       });
     });
 
-    it('vehicle payments should contains the correct elements.', function () {
+    xit('vehicle payments should contains the correct elements.', function () {
       paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
         if (count <= 0) {
           expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
@@ -390,8 +390,8 @@ helper.describe('WMT-106', function () {
                       var curtailment = curtailmentList[i];
                       var currentPayoff = currentPayoffList[i];
                       var scheduledPaymentDate = scheduledPaymentDateList[i];
-                      var paymentContent = contents[i * columnCount + 4].trim().replace(/^\$|,|.00$/g, '');
-                      var payoffContent = contents[i * columnCount + 5].trim().replace(/^\$|,|.00$/g, '');
+                      var paymentContent = contents[i * columnCount + 4].trim().replace(/^\$|,|\.00$/g, '');
+                      var payoffContent = contents[i * columnCount + 5].trim().replace(/^\$|,|\.00$/g, '');
                       // reformat the date and trim '0'
                       var trimZeroRegex = /-0/g;
                       var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
@@ -439,6 +439,113 @@ helper.describe('WMT-106', function () {
             });
           });
         }
+      });
+    });
+
+    it('payment summary should contains the correct elements.', function () {
+      var feePaymentCount, vehiclePaymentCount;
+      paymentsPage.feePaymentQueue.count().then(function (count) {
+        feePaymentCount = count;
+      }).then(function () {
+        paymentsPage.vehiclePaymentQueue.count().then(function (count) {
+          vehiclePaymentCount = count;
+        });
+      }).then(function () {
+        if (feePaymentCount === 0 && vehiclePaymentCount === 0) {
+          expect(paymentsPage.paymentSummaryMessage.isDisplayed()).toBeTruthy();
+        }
+
+        var accountFeeCount, accountVehicleCount;
+        paymentsPage.accountFeeRepeater.count().then(function (count) {
+          accountFeeCount = count;
+        }).then(function () {
+          paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
+            accountVehicleCount = count;
+          });
+        }).then(function () {
+          if (accountVehicleCount > 0) {
+            paymentsPage.getScheduleVehiclePaymentButton().then(function (button) {
+              button.click().then(function () {
+                paymentsPage.feePaymentQueue.each(function (queueElement) {
+                  helper.waitForElementDisplayed(queueElement);
+                });
+              });
+            });
+            var vehiclePaymentRepeater = 'payment in paymentQueue.payments';
+            var vehicleDescriptions, vinNumbers, checkoutAmounts, extraPrincipals;
+            paymentsPage.formattedDataFromRepeater(vehiclePaymentRepeater, 'payment.description')
+              .then(function (rawData) {
+                vehicleDescriptions = rawData;
+              }).then(function () {
+                paymentsPage.formattedDataFromRepeater(vehiclePaymentRepeater, 'payment.vin')
+                  .then(function (rawData) {
+                    vinNumbers = rawData;
+                  });
+              }).then(function () {
+                paymentsPage.unformattedDataFromRepeater(vehiclePaymentRepeater, 'payment.getCheckoutAmount()')
+                  .then(function (rawData) {
+                    checkoutAmounts = rawData;
+                  });
+              }).then(function () {
+                paymentsPage.unformattedDataFromRepeater(vehiclePaymentRepeater, 'payment.getExtraPrincipal()')
+                  .then(function (rawData) {
+                    extraPrincipals = rawData;
+                  });
+              }).then(function () {
+                paymentsPage.vehiclePaymentQueue.map(function (queueElement) {
+                  return queueElement.getText();
+                }).then(function (queueTexts) {
+                  expect(queueTexts.length).toEqual(vehicleDescriptions.length);
+                  expect(queueTexts.length).toEqual(vinNumbers.length);
+                  expect(queueTexts.length).toEqual(checkoutAmounts.length);
+                  expect(queueTexts.length).toEqual(extraPrincipals.length);
+                  for (var i = 0; i < queueTexts.length; i++) {
+                    var vinNumber = vinNumbers[i];
+                    var vehicleDescription = vehicleDescriptions[i];
+                    var totalAmount = checkoutAmounts[i] - extraPrincipals[i];
+                    var queueText = queueTexts[i].trim().replace(/\$|,|\.00/g, '');
+                    expect(queueText).toContain(vinNumber);
+                    expect(queueText).toContain(totalAmount);
+                    expect(queueText).toContain(vehicleDescription);
+                  }
+                });
+              });
+          }
+          if (accountFeeCount > 0) {
+            paymentsPage.getScheduleFeePaymentButton().then(function (button) {
+              button.click().then(function () {
+                paymentsPage.vehiclePaymentQueue.each(function (queueElement) {
+                  helper.waitForElementDisplayed(queueElement);
+                });
+              });
+            });
+            // check the data displayed
+            var feePaymentRepeater = 'fee in paymentQueue.fees';
+            var feeDescriptions, feeAmounts;
+            paymentsPage.formattedDataFromRepeater(feePaymentRepeater, 'fee.description').then(function (rawData) {
+              feeDescriptions = rawData;
+            }).then(function () {
+              paymentsPage.formattedDataFromRepeater(feePaymentRepeater, 'fee.amount').then(function (rawData) {
+                feeAmounts = rawData;
+              });
+            }).then(function () {
+              paymentsPage.feePaymentQueue.map(function (queueElement) {
+                return queueElement.getText();
+              }).then(function (queueTexts) {
+                expect(queueTexts.length).toEqual(feeAmounts.length);
+                expect(queueTexts.length).toEqual(feeDescriptions.length);
+                for (var i = 0; i < queueTexts.length; i++) {
+                  var feeAmount = feeAmounts[i];
+                  var queueText = queueTexts[i];
+                  var feeDescription = feeDescriptions[i];
+                  console.log(feeDescription, queueText, feeAmount);
+                  expect(queueText).toContain(feeAmount);
+                  expect(queueText).toContain(feeDescription);
+                }
+              });
+            });
+          }
+        });
       });
     });
   });
