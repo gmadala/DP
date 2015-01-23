@@ -243,12 +243,15 @@ auctionHelper.describe('WMT-76', function () {
 
     it('Should contain a note associated with the sales along with a tooltip describing the note.', function () {
       expect(auctionBulkFlooring.saleDescriptionText.isDisplayed()).toBeTruthy();
-      auctionBulkFlooring.tooltipButton.click();
-      // now we wait for the delay of the tooltip before we check if the tooltip is actually gets displayed
-      browser.driver.wait(function () {
-        return auctionBulkFlooring.tooltip.isPresent();
+      browser.driver.executeScript('window.scrollTo(100, 100)').then(function () {
+        expect(auctionBulkFlooring.tooltipButton.isDisplayed()).toBeTruthy();
+        auctionBulkFlooring.tooltipButton.click();
+        // now we wait for the delay of the tooltip before we check if the tooltip is actually gets displayed
+        browser.driver.wait(function () {
+          return auctionBulkFlooring.tooltip.isPresent();
+        });
+        expect(auctionBulkFlooring.tooltip.isDisplayed()).toBeTruthy();
       });
-      expect(auctionBulkFlooring.tooltip.isDisplayed()).toBeTruthy();
     });
   });
 });
