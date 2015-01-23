@@ -4,16 +4,15 @@ var HelperObject = require('../framework/helper_object.js');
 var CheckoutPage = require('../framework/checkout_page_object.js');
 var PaymentsPage = require('../framework/payments_page_object.js');
 
-var helperObject = new HelperObject();
+var helper = new HelperObject();
 var checkoutPage = new CheckoutPage();
 var paymentsPage = new PaymentsPage();
 
-helperObject.describe('WMT-55', function () {
+helper.describe('WMT-55', function () {
   describe('Dealer Portal Checkout navigation: ', function () {
 
     it('Clicking Payments navigates to the Payments page.', function () {
-      checkoutPage.openPage();
-      checkoutPage.waitForPage();
+      helper.openPageAndWait(checkoutPage.url, false, false);
       expect(browser.driver.getCurrentUrl()).toContain(checkoutPage.url);
       expect(checkoutPage.paymentsPageLink.isDisplayed()).toBeTruthy();
       checkoutPage.paymentsPageLink.click().then(function () {
@@ -49,9 +48,7 @@ helperObject.describe('WMT-55', function () {
     });
 
     var preparePayments = function () {
-      paymentsPage.openPage();
-      paymentsPage.waitForPage();
-
+      helper.openPageAndWait(paymentsPage.url, false, true);
       expect(browser.driver.getCurrentUrl()).toContain(paymentsPage.url);
       expect(paymentsPage.checkoutButton.isEnabled()).not.toBeTruthy();
       expect(paymentsPage.scheduleVehiclePaymentButtons.count()).toBeGreaterThan(0);
@@ -65,14 +62,11 @@ helperObject.describe('WMT-55', function () {
     };
 
     afterEach(function () {
-      checkoutPage.openPage();
-      checkoutPage.waitForPage();
+      helper.openPageAndWait(checkoutPage.url, false, false);
       checkoutPage.removePaymentButtons.each(function (removePaymentButton) {
         removePaymentButton.click();
       });
-      browser.driver.wait(function () {
-        return checkoutPage.paymentsPageLink.isDisplayed();
-      }, 3000);
+      helper.waitForElementDisplayed(checkoutPage.paymentsPageLink);
       expect(checkoutPage.paymentsPageLink.isDisplayed()).toBeTruthy();
     });
 
