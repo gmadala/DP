@@ -98,24 +98,27 @@ var ReportsObject = function () {
 
   this.getCurrentDate = function(){
     return this.dateInput.getAttribute('value');
-  },
+  };
 
   this.getStartCurrentDate = function(){
     return this.startDateInput.getAttribute('value');
-  },
+  };
 
   this.getEndCurrentDate = function(){
     return this.endDateInput.getAttribute('value');
-  },
+  };
+
   this.getDisbursementDate = function(){
     return this.disDateInput.getAttribute('value');
-  },
+  };
+
   this.getPaidStartDate = function(){
     return this.paidStartDateInput.getAttribute('value');
-  },
+  };
+
   this.getPaidEndDate = function(){
     return this.paidEndDateInput.getAttribute('value');
-  }
+  };
 };
 module.exports = ReportsObject;
 

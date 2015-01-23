@@ -229,7 +229,7 @@ helper.describe('WMT-106', function () {
                 var scheduled = scheduledList[i];
                 var scheduledDate = scheduledDateList[i];
                 // replace the $ sign, ',' sign and .00 from the content
-                var content = contents[i * columnCount + (columnCount - 1)].trim().replace(/^\$|,|\.00$/g, '');
+                var content = contents[i * columnCount + (columnCount - 1)].trim().replace(/\$|,|\.00/g, '');
                 if (scheduled) {
                   expect(content).toContain('Scheduled');
                   expect(content).toContain('Unschedule');
@@ -262,18 +262,21 @@ helper.describe('WMT-106', function () {
           // try filling search term to remove search results
           paymentsPage.setSearchField('ZZ');
           paymentsPage.searchButton.click().then(function () {
+            helper.waitForElementPresent(paymentsPage.vehicleNoticeBox);
             paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
               if (count <= 0) {
-                helper.waitForElementDisplayed(paymentsPage.vehicleNoticeBox);
                 expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
                 expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
                 paymentsPage.searchField.clear();
+                paymentsPage.setSearchField('A');
                 paymentsPage.searchButton.click().then(function () {
                   helper.expectingInfiniteLoading();
                 });
               }
               // by now, the search field should be cleared and the infinite loading should be hidden already
-              if (count > 0) {
+              paymentsPage.vehiclePaymentRepeater.count().then(function (newCount) {
+                count = newCount;
+              }).then(function () {
                 paymentsPage.getVehiclePaymentsContent().then(function (contents) {
                   expect(contents.length).toEqual(count * paymentsPage.vehiclePaymentHeaders.length);
 
@@ -331,7 +334,7 @@ helper.describe('WMT-106', function () {
                     for (var i = 0; i < descriptions.length; i++) {
                       var vinNumber = vinNumbers[i];
                       var stockNumber = stockNumbers[i];
-                      var description = descriptions[i];
+                      var description = descriptions[i].trim();
                       var content = contents[i * columnCount + 1];
                       expect(content).toContain(vinNumber);
                       expect(content).toContain(stockNumber);
@@ -402,14 +405,15 @@ helper.describe('WMT-106', function () {
                       var curtailment = curtailmentList[i];
                       var currentPayoff = currentPayoffList[i];
                       var scheduledPaymentDate = scheduledPaymentDateList[i];
-                      var paymentContent = contents[i * columnCount + 4].trim().replace(/^\$|,|\.00$/g, '');
-                      var payoffContent = contents[i * columnCount + 5].trim().replace(/^\$|,|\.00$/g, '');
-                      // reformat the date and trim '0'
-                      var trimZeroRegex = /-0/g;
-                      var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
-                      scheduledPaymentDate = scheduledPaymentDate.replace(trimZeroRegex, '-');
-                      scheduledPaymentDate = scheduledPaymentDate.replace(defaultDateRegex, '$2/$3/$1');
+                      var paymentContent = contents[i * columnCount + 4].trim().replace(/\$|,|\.00/g, '');
+                      var payoffContent = contents[i * columnCount + 5].trim().replace(/\$|,|\.00/g, '');
                       if (scheduled) {
+                        // reformat the date and trim '0'
+                        // need to do it here because scheduledPaymentDate could be null
+                        var trimZeroRegex = /-0/g;
+                        var defaultDateRegex = /(\d{4})-(\d+)-(\d+)/;
+                        scheduledPaymentDate = scheduledPaymentDate.replace(trimZeroRegex, '-');
+                        scheduledPaymentDate = scheduledPaymentDate.replace(defaultDateRegex, '$2/$3/$1');
                         if (curtailment) {
                           // payment will have 'Scheduled'
                           expect(paymentContent).toContain('Scheduled');
@@ -447,7 +451,7 @@ helper.describe('WMT-106', function () {
                     }
                   });
                 });
-              }
+              });
             });
           });
         }

@@ -35,7 +35,7 @@ var PaymentPageObject = function () {
   this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
   this.vehiclePaymentTable = this.vehiclePaymentSection.element(by.css('table'));
   this.vehiclePaymentHeaders = ['Due Date', 'Description', 'Floored', 'Status', 'Payment', 'Payoff'];
-  this.vehicleNoticeBox = browser.element(by.css('.notice-box'));
+  this.vehicleNoticeBox = browser.element(by.cssContainingText('.notice-box', 'Sorry, no results found'));
 
   this.paymentSummaryMessage = browser.element(by.cssContainingText('p', 'You have not'));
   this.feePaymentQueue = browser.element.all(by.repeater('fee in paymentQueue.fees'));
