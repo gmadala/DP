@@ -117,6 +117,10 @@ module.exports = {
           keepGoing = true;
 
         while (keepGoing && f.length !== 0) {
+          var marker = '/';
+          if (f.lastIndexOf('?') > -1) {
+            marker = '?';
+          }
           // Note: we don't necessarily want to stop when we found a file that exists
           // because if the full path does not exist, we go down the defaults or {} tree
           // instead, utilize the regular expression to tell if it has dynamic query string
@@ -131,12 +135,12 @@ module.exports = {
               }
             }
             if (keepGoing) {
-              f = f.substring(0, f.lastIndexOf('/'));
+              f = f.substring(0, f.lastIndexOf(marker));
               level++;
             }
           }
           else {
-            f = f.substring(0, f.lastIndexOf('/'));
+            f = f.substring(0, f.lastIndexOf(marker));
             level++;
           }
         }
