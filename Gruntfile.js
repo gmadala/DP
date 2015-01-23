@@ -470,13 +470,13 @@ module.exports = function(grunt) {
   grunt.registerTask('test:e2e:users', 'Runs e2e tests with multiple logins', function () {
     // a target will be specified when doing a build to 'dist' so server those files for that case.
     var useDist = grunt.option('target');
-    var apiBase = grunt.option('apiBase') || '';
+    var apiBase = grunt.option('apiBase');
     grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
     grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
     // find out which users configuration can be run based on the target of this grunt task.
     for (var j = 0; j < users.length; j++) {
       var user = users[j];
-      if (apiBase === '') {
+      if ((apiBase || '') === '' && (useDist || '') === '') {
         if (user[0] === 'mock') {
           effectiveUsers.push(user);
         }
@@ -495,7 +495,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('prepare-protractor', 'Build config and run protractor.', function () {
     var effectiveUser = effectiveUsers[counter];
-    var env = (grunt.option('apiBase') || '') ? 'non-dev' : 'dev';
+    var target = grunt.option('target');
+    var apiBase = grunt.option('apiBase');
+    var env = 'non-dev';
+    if ((apiBase || '') === '' && (target || '') === '') {
+      env = 'dev';
+    }
     // create param object needed to run protractor
     var params = {};
     params.user = effectiveUser[2];
@@ -544,13 +549,14 @@ module.exports = function(grunt) {
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
   // app/scripts/config/nxgConfig.js
   grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
-    var target = grunt.option('target');
-    if (!target) {
+    if (!grunt.option('target')) {
       grunt.log.warn('No Continuous Integration build --target was specified, defaulting to: ' + defaultTarget);
-      target = defaultTarget;
+      grunt.option('target', defaultTarget);
     }
+    // removing the target from option to test out mockApi
+    grunt.option('target', undefined);
 
-    grunt.log.writeln('Running Continuous Integration Build --target=' + target);
+    grunt.log.writeln('Running Continuous Integration Build --target=' + grunt.option('target'));
     grunt.task.run('test:unit');
     grunt.task.run('build');
     grunt.task.run('test:e2e:users');
