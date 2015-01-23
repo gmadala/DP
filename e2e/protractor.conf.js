@@ -80,9 +80,13 @@ exports.config = {
       new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
     );
     browser.driver.manage().window().maximize();
-
-    console.log('** Preparing Protractor Suite ' + browser.params.suite + ' for User ' + browser.params.user + ' **');
-    console.log(browser.params);
+    console.log('Starting up protractor ...');
+    console.log('The following params are available inside jasmine spec: ');
+    for (var property in browser.params) {
+      if (browser.params.hasOwnProperty(property)) {
+        console.log('* ', property, ': ', browser.params[property]);
+      }
+    }
 
   },
   jasmineNodeOpts: {
