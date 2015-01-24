@@ -262,9 +262,11 @@ var HelperObject = function () {
           }
         });
 
-        browser.driver.manage().logs().get('browser').then(function (browserLog) {
-          console.log('Browser log for spec ', currentSpec.description, ': ');
-          console.log(util.inspect(browserLog));
+        browser.driver.manage().logs().get('browser').then(function (browserLogs) {
+          console.log('      Browser log for spec ', currentSpec.description, ': ');
+          browserLogs.forEach(function (browserLog) {
+            console.log('      message: ', browserLog.message);
+          });
         });
 
         instance.logout();

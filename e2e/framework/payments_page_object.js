@@ -28,12 +28,14 @@ var PaymentPageObject = function () {
   this.accountFeeSection = browser.element(by.cssContainingText('.well', 'Fees'));
   this.accountFeeRepeater = browser.element.all(by.repeater('fee in fees.results'));
   this.accountFeeTable = this.accountFeeSection.element(by.css('table'));
+  this.accountFeeRows = this.accountFeeTable.all(by.css('tr'));
   this.accountFeeHeaders = ['Due Date', 'Fee Type', 'Description', 'Posted', 'Amount'];
   this.accountFeeColumns = ['fee.EffectiveDate', 'fee.FeeType', 'fee.Description', 'fee.Posted'];
 
   this.vehiclePaymentSection = browser.element(by.cssContainingText('.well', 'Vehicle'));
   this.vehiclePaymentRepeater = browser.element.all(by.repeater('payment in payments.results'));
   this.vehiclePaymentTable = this.vehiclePaymentSection.element(by.css('table'));
+  this.vehiclePaymentRows = this.vehiclePaymentTable.all(by.css('tr'));
   this.vehiclePaymentHeaders = ['Due Date', 'Description', 'Floored', 'Status', 'Payment', 'Payoff'];
   this.vehicleNoticeBox = browser.element(by.cssContainingText('.notice-box', 'Sorry, no results found'));
 

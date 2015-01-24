@@ -18,8 +18,8 @@ helper.describe('WMT-53', function () {
 
     it('should open request extension modal when request extension is clicked', function () {
       var feeCount, extensionLinkCount;
-      paymentsPage.accountFeeRepeater.count().then(function (count) {
-        feeCount = count;
+      paymentsPage.accountFeeRows.count().then(function (count) {
+        feeCount = count - 1;
       }).then(function () {
         paymentsPage.requestExtensionLinks.count().then(function (count) {
           extensionLinkCount = count;
@@ -182,16 +182,16 @@ helper.describe('WMT-106', function () {
     });
 
     it('account fees should contains the correct elements.', function () {
-      paymentsPage.accountFeeRepeater.count().then(function (count) {
-        if (count <= 0) {
+      paymentsPage.accountFeeRows.count().then(function (count) {
+        if (count <= 1) {
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeFalsy();
         } else {
           var repeater = 'fee in fees.results';
           expect(paymentsPage.accountFeeSection.isDisplayed()).toBeTruthy();
           paymentsPage.getAccountFeesContent().then(function (contents) {
             // check the view will have the correct amount of cells
-            paymentsPage.accountFeeRepeater.count(function (count) {
-              expect(contents.length).toEqual(count * paymentsPage.accountFeeHeaders.length);
+            paymentsPage.accountFeeRows.count(function (count) {
+              expect(contents.length).toEqual((count - 1) * paymentsPage.accountFeeHeaders.length);
             });
             var columnCounter = 0;
             var columnCount = paymentsPage.accountFeeHeaders.length;
@@ -254,16 +254,16 @@ helper.describe('WMT-106', function () {
     });
 
     it('vehicle payments should contains the correct elements.', function () {
-      paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
-        if (count <= 0) {
+      paymentsPage.vehiclePaymentRows.count().then(function (count) {
+        if (count <= 1) {
           expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
           expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
         } else {
           // try filling search term to remove search results
           paymentsPage.setSearchField('ZZ');
           paymentsPage.searchButton.click().then(function () {
-            paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
-              if (count <= 0) {
+            paymentsPage.vehiclePaymentRows.count().then(function (count) {
+              if (count <= 1) {
                 helper.waitForElementPresent(paymentsPage.vehicleNoticeBox);
                 expect(paymentsPage.vehicleNoticeBox.isDisplayed()).toBeTruthy();
                 expect(paymentsPage.vehicleNoticeBox.getText()).toContain('Sorry, no results found.');
@@ -274,8 +274,8 @@ helper.describe('WMT-106', function () {
                 });
               }
               // by now, the search field should be cleared and the infinite loading should be hidden already
-              paymentsPage.vehiclePaymentRepeater.count().then(function (newCount) {
-                count = newCount;
+              paymentsPage.vehiclePaymentRows.count().then(function (newCount) {
+                count = newCount - 1;
               }).then(function () {
                 paymentsPage.getVehiclePaymentsContent().then(function (contents) {
                   expect(contents.length).toEqual(count * paymentsPage.vehiclePaymentHeaders.length);
@@ -472,14 +472,14 @@ helper.describe('WMT-106', function () {
         }
 
         var accountFeeCount, accountVehicleCount;
-        paymentsPage.accountFeeRepeater.count().then(function (count) {
+        paymentsPage.accountFeeRows.count().then(function (count) {
           accountFeeCount = count;
         }).then(function () {
-          paymentsPage.vehiclePaymentRepeater.count().then(function (count) {
+          paymentsPage.vehiclePaymentRows.count().then(function (count) {
             accountVehicleCount = count;
           });
         }).then(function () {
-          if (accountVehicleCount > 0) {
+          if (accountVehicleCount > 1) {
             paymentsPage.getScheduleVehiclePaymentButton().then(function (button) {
               button.click().then(function () {
                 paymentsPage.feePaymentQueue.each(function (queueElement) {
@@ -527,7 +527,7 @@ helper.describe('WMT-106', function () {
                 });
               });
           }
-          if (accountFeeCount > 0) {
+          if (accountFeeCount > 1) {
             paymentsPage.getScheduleFeePaymentButton().then(function (button) {
               button.click().then(function () {
                 paymentsPage.vehiclePaymentQueue.each(function (queueElement) {

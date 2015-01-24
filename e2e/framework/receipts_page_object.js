@@ -16,6 +16,7 @@ var ReceiptPageObject = function () {
   this.clearSearchButton = browser.element(by.css('button.clear-search'));
 
   this.receipts = browser.element(by.css('table'));
+  this.receiptRows = this.receipts.all(by.css('tr'));
   this.receiptsRepeater = browser.element.all(by.repeater('receipt in receipts.results'));
   this.receiptsHeader = ['Payment Date', 'Receipt No.', 'Payment Description', 'Amount', 'Export Receipt(s)'];
   this.receiptsNoticeBox = browser.element(by.cssContainingText('.notice-box', 'Sorry, no results found'));
