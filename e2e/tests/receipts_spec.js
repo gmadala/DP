@@ -121,6 +121,7 @@ helper.describe('WMT-91', function () {
           receiptsPage.setSearchField('ZZ');
           receiptsPage.searchButton.click().then(function () {
             receiptsPage.receiptRows.count().then(function (count) {
+              browser.driver.sleep(100);
               if (count <= 1) {
                 helper.waitForElementPresent(receiptsPage.receiptsNoticeBox);
                 expect(receiptsPage.receiptsNoticeBox.isDisplayed()).toBeTruthy();
