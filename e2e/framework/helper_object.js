@@ -263,7 +263,7 @@ var HelperObject = function () {
         });
 
         browser.driver.manage().logs().get('browser').then(function (browserLogs) {
-          console.log('      Browser log for spec ', currentSpec.description, ': ');
+          console.log('      Browser log:');
           browserLogs.forEach(function (browserLog) {
             console.log('      message: ', browserLog.message);
           });
