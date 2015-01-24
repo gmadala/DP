@@ -263,7 +263,8 @@ var AuctionHelperObject = function () {
         });
 
         browser.driver.manage().logs().get('browser').then(function (browserLog) {
-          console.log('Browser log for spec ', currentSpec, ': ', util.inspect(browserLog));
+          console.log('Browser log for spec ', currentSpec.description, ': ');
+          console.log(util.inspect(browserLog));
         });
 
         instance.logout();

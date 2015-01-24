@@ -111,16 +111,20 @@ helper.describe('WMT-91', function () {
     });
 
     it('receipts search results should contains the correct fields.', function () {
+      console.log('Validating receipts ...');
       receiptsPage.receiptsRepeater.count().then(function (count) {
         if (count <= 0) {
+          console.log('No receipts found.');
           expect(receiptsPage.receiptsNoticeBox.isDisplayed()).toBeTruthy();
           expect(receiptsPage.receiptsNoticeBox.getText()).toContain('Sorry, no results found.');
         } else {
           // try filling search term to remove search results
+          console.log('Multiple receipts found. Trying to validate empty receipts result.');
           receiptsPage.setSearchField('ZZ');
           receiptsPage.searchButton.click().then(function () {
             receiptsPage.receiptsRepeater.count().then(function (count) {
               if (count <= 0) {
+                console.log('Receipt table is empty now.');
                 helper.waitForElementPresent(receiptsPage.receiptsNoticeBox);
                 expect(receiptsPage.receiptsNoticeBox.isDisplayed()).toBeTruthy();
                 expect(receiptsPage.receiptsNoticeBox.getText()).toContain('Sorry, no results found.');
