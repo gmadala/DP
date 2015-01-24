@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var util = require('util');
 var AuctionHelperObject = function () {
 
   this.loginUrl = '#/login';
@@ -260,6 +261,11 @@ var AuctionHelperObject = function () {
             writeScreenShot(png, filename);
           }
         });
+
+        browser.driver.manage().logs().get('browser').then(function (browserLog) {
+          console.log('Browser log for spec ', currentSpec, ': ', util.inspect(browserLog));
+        });
+
         instance.logout();
       });
     });
