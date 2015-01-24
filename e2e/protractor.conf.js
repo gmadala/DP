@@ -36,7 +36,8 @@ exports.config = {
     'floor': 'tests/{,*/}*floor_spec.js',
     'floorplan': 'tests/{,*/}*floorplan_spec.js',
     'login': 'tests/{,*/}*login_spec.js',
-    'payments': 'tests/{,*/}*payments_spec.js'
+    'payments': 'tests/{,*/}*payments_spec.js',
+    'receipts': 'tests/{,*/}*receipts_spec.js'
   },
   //multiCapabilities: [{
   //  'browserName': 'firefox'

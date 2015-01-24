@@ -1,6 +1,6 @@
 'use strict';
 
-var PaymentPageObject = function () {
+var ReceiptPageObject = function () {
 
   this.url = '#/receipts';
 
@@ -16,7 +16,9 @@ var PaymentPageObject = function () {
   this.clearSearchButton = browser.element(by.css('button.clear-search'));
 
   this.receipts = browser.element(by.css('table'));
+  this.receiptsRepeater = browser.element.all(by.repeater('receipt in receipts.results'));
   this.receiptsHeader = ['Payment Date', 'Receipt No.', 'Payment Description', 'Amount', 'Export Receipt(s)'];
+  this.receiptsNoticeBox = browser.element(by.cssContainingText('.notice-box', 'Sorry, no results found'));
 
   // receipt links
   this.viewReceiptLinks = this.receipts.all(by.css('a'));
@@ -132,4 +134,4 @@ var PaymentPageObject = function () {
   };
 };
 
-module.exports = PaymentPageObject;
+module.exports = ReceiptPageObject;

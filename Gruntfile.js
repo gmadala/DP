@@ -33,6 +33,7 @@ module.exports = function(grunt) {
     ['non-mock', 'payments', '53190md', 'password@1'],
     ['non-mock', 'auction', '10264', 'password@1'],
     ['mock', 'payments', 'dealer', 'test'],
+    ['mock', 'receipts', 'dealer', 'test'],
     ['mock', 'auction', 'auction', 'test']
   ];
 
