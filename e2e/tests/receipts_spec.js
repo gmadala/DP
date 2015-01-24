@@ -171,6 +171,7 @@ helper.describe('WMT-91', function () {
                         expect(content).toContain('Processed');
                       }
                     }
+                    console.log('      validating first column of the receipt grid. - pass');
                   });
 
                   // Receipt No. data contains: the receipt number.
@@ -184,6 +185,7 @@ helper.describe('WMT-91', function () {
                       var content = contents[i * columnCount + 1];
                       expect(content).toContain(transactionNumber);
                     }
+                    console.log('      validating second column of the receipt grid. - pass');
                   });
 
                   // Payment Description data always contains: the payment method, and the payee description.
@@ -214,6 +216,7 @@ helper.describe('WMT-91', function () {
                         expect(content).toContain(checkNumber);
                       }
                     }
+                    console.log('      validating third column of the receipt grid. - pass');
                   });
 
                   // Amount data contains: the Amount of the payment.
@@ -227,6 +230,7 @@ helper.describe('WMT-91', function () {
                       var content = contents[i * columnCount + 3];
                       expect(content).toContain(paymentAmount);
                     }
+                    console.log('      validating fourth column of the receipt grid. - pass');
                   });
                 });
               });
