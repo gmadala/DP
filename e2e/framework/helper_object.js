@@ -140,22 +140,24 @@ var HelperObject = function () {
   this.logout = function () {
     var instance = this;
     var modalHeader = 'Logout';
-    expect(this.hasClass(this.userInfoDropDown, 'expanded')).toBeFalsy();
-    this.userInfoLink.click().then(function () {
-      expect(instance.hasClass(instance.userInfoDropDown, 'expanded')).toBeTruthy();
+    browser.driver.executeScript('window.scrollTo(0, 0)').then(function () {
+      expect(instance.hasClass(instance.userInfoDropDown, 'expanded')).toBeFalsy();
+      instance.userInfoLink.click().then(function () {
+        expect(instance.hasClass(instance.userInfoDropDown, 'expanded')).toBeTruthy();
 
-      // wait for the dropdown to scroll after clicking the user info link.
-      instance.waitForElementDisplayed(instance.logoutButton);
-      // now the logout is displayed, click it display the logout modal.
-      instance.logoutButton.click().then(function () {
-        // now we wait for the modal to be displayed.
-        instance.waitForElementDisplayed(instance.modal);
+        // wait for the dropdown to scroll after clicking the user info link.
+        instance.waitForElementDisplayed(instance.logoutButton);
+        // now the logout is displayed, click it display the logout modal.
+        instance.logoutButton.click().then(function () {
+          // now we wait for the modal to be displayed.
+          instance.waitForElementDisplayed(instance.modal);
 
-        expect(instance.modal.isDisplayed()).toBeTruthy();
-        expect(instance.modalHeader.getText()).toEqual(modalHeader);
+          expect(instance.modal.isDisplayed()).toBeTruthy();
+          expect(instance.modalHeader.getText()).toEqual(modalHeader);
 
-        instance.yesButton.click().then(function () {
-          instance.waitForUrlToContains('login');
+          instance.yesButton.click().then(function () {
+            instance.waitForUrlToContains('login');
+          });
         });
       });
     });

@@ -308,7 +308,7 @@ HomePageObject.prototype = Object.create({}, {
         for (var i = 1; i <= data.length; i++) {
           browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(i - 1).element(by.id('stockNumber' + i)).click(); //browser.element(by.id('stockNumber'+i)).click();
           browser.waitForAngular();
-          browser.get('http://localhost:9000/#/home');
+          browser.get('#/home');
           browser.sleep(1000);
           browser.waitForAngular();
           browser.element(by.id('showorhide')).click();

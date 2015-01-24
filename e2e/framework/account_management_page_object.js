@@ -51,6 +51,12 @@ AccountManagementPageObject.prototype = Object.create({}, {
     }
   },
 
+  closeRequest: {
+    get: function () {
+      return browser.element(by.cssContainingText('button', 'Close Window'));
+    }
+  },
+
   confirmRequest: {
     get: function () {
       return browser.element(by.cssContainingText('button', 'Confirm Request'));
@@ -110,6 +116,7 @@ AccountManagementPageObject.prototype = Object.create({}, {
   goToConfirmRequest: {
     value: function () {
       this.confirmRequest.click();
+      this.closeRequest.click();
       browser.waitForAngular();
     }
   },
