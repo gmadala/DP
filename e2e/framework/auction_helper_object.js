@@ -89,17 +89,33 @@ var AuctionHelperObject = function () {
   };
 
   this.expectingLoading = function () {
-    if (browser.params.env !== 'dev') {
-      this.waitForElementDisplayed(this.loading);
-      this.waitForElementHidden(this.loading);
-    }
+    var element = this.loading;
+    browser.driver.wait(function () {
+      return element.isDisplayed().then(function (displayed) {
+        return displayed;
+      });
+    }, 1000).then(function () {
+      // Do nothing when the wait is successful (or print log message).
+    }, function () {
+      // Do nothing when the wait is not successful because the method call of
+      // waitForElementHidden will only gets executed if this element is displayed.
+    });
+    this.waitForElementHidden(this.loading);
   };
 
   this.expectingInfiniteLoading = function () {
-    if (browser.params.env !== 'dev') {
-      this.waitForElementDisplayed(this.infiniteLoading);
-      this.waitForElementHidden(this.infiniteLoading);
-    }
+    var element = this.infiniteLoading;
+    browser.driver.wait(function () {
+      return element.isDisplayed().then(function (displayed) {
+        return displayed;
+      });
+    }, 1000).then(function () {
+      // Do nothing when the wait is successful (or print log message).
+    }, function () {
+      // Do nothing when the wait is not successful because the method call of
+      // waitForElementHidden will only gets executed if this element is displayed.
+    });
+    this.waitForElementHidden(this.infiniteLoading);
   };
 
   /** Common login and logout function **/
@@ -248,7 +264,5 @@ var AuctionHelperObject = function () {
       });
     });
   };
-
 };
-
 module.exports = AuctionHelperObject;

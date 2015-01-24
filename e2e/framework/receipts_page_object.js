@@ -20,10 +20,12 @@ var ReceiptPageObject = function () {
   this.receiptsHeader = ['Payment Date', 'Receipt No.', 'Payment Description', 'Amount', 'Export Receipt(s)'];
   this.receiptsNoticeBox = browser.element(by.cssContainingText('.notice-box', 'Sorry, no results found'));
 
-  // receipt links
+  // view receipt links
   this.viewReceiptLinks = this.receipts.all(by.css('a'));
-  // button add receipts
+  // add receipt buttons
   this.addReceiptButtons = browser.element.all(by.cssContainingText('button', 'Add Receipt'));
+  // remove receipt buttons
+  this.removeReceiptButtons = browser.element.all(by.cssContainingText('button', 'Remove Receipt'));
   // export receipt button
   this.exportReceiptsButton = browser.element(by.cssContainingText('button', 'Export Receipt'));
 

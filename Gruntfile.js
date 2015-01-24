@@ -31,6 +31,7 @@ module.exports = function(grunt) {
   var effectiveUsers = [];
   var users = [
     ['non-mock', 'payments', '53190md', 'password@1'],
+    ['non-mock', 'receipts', '53190md', 'password@1'],
     ['non-mock', 'auction', '10264', 'password@1'],
     ['mock', 'payments', 'dealer', 'test'],
     ['mock', 'receipts', 'dealer', 'test'],
@@ -498,17 +499,12 @@ module.exports = function(grunt) {
     var effectiveUser = effectiveUsers[counter];
     var target = grunt.option('target');
     var apiBase = grunt.option('apiBase');
-    var env = 'non-dev';
-    if ((apiBase || '') === '' && (target || '') === '') {
-      env = 'dev';
-    }
     // create param object needed to run protractor
     var params = {};
     params.user = effectiveUser[2];
     params.password = effectiveUser[3];
     params.suite = effectiveUser[1];
-    params.env = env;
-    if (env === 'dev') {
+    if ((apiBase || '') === '' && (target || '') === '') {
       // this is the values set inside the mock api
       params.validVin = '1234567';
       params.invalidVin = '123456';
