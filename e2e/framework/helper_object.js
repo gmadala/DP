@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var util = require('util');
 var HelperObject = function () {
 
   this.loginUrl = '#/login';
@@ -260,6 +261,11 @@ var HelperObject = function () {
             writeScreenShot(png, filename);
           }
         });
+
+        browser.driver.manage().logs().get('browser').then(function (browserLog) {
+          console.log('Browser log for spec ' + currentSpec + ': ' + util.inspect(browserLog));
+        });
+
         instance.logout();
       });
     });
