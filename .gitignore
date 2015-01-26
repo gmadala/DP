@@ -2,6 +2,7 @@
 /dist
 /app/components
 /app/coverage
+/target
 .tmp
 .sass-cache
 /.idea
