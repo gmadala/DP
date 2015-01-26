@@ -1,7 +1,6 @@
 'use strict';
 
 var fs = require('fs');
-var util = require('util');
 var HelperObject = function () {
 
   this.loginUrl = '#/login';
