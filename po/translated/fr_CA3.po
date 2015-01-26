@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: NextGear\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-01-07 15:07-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_CA\n"
+
+#: app/views/payments.html
+msgid ""
+"Amounts shown are valid through 8pm Eastern Time\n"
+"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
+"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+msgstr "Les montants indiqués sont valides jusqu’à 20 h, heure de l’Est\n <span ng-show=\"canPayNow\">aujourd'hui ({{ todayDate | moment }})</span>\n <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+
+#: app/views/modals/businessSearch.html
+msgid "Auction Access No."
+msgstr "No d'accès à l'encan"
+
+#: app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html
+msgid "Business No."
+msgstr "No de l’entreprise"
+
+#: app/views/payments.html
+msgid "Click the Add button to add a payoff or a payment."
+msgstr "Cliquez sur le bouton Ajouter pour ajouter un remboursement ou un paiement."
+
+#: app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
+msgid "Floor Vehicle"
+msgstr "Financer un véhicule"
+
+#: app/views/valuelookup.html
+msgid "Look Up Values"
+msgstr "Recherche de valeurs"
+
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
+msgstr "Décaissements récents"
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js
+msgid "Select the payments you want to make or schedule by adding them to your payment queue."
+msgstr "Sélectionnez les paiements que vous souhaitez effectuer ou programmer en les ajoutant à vos paiements en attente."
+
+#: app/views/dashboard.html
+msgid "This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+msgstr "Cette marge de crédit dispose d'une augmentation de crédit temporaire au montant de {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits:<br>\n"
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+msgstr "Limites d’émission de titres : <br>\n Vous disposez de <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> disponibles sur <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span>."
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN should be 6 to 17 characters."
+msgstr "Le NIV doit contenir de 6 à 17 caractères."
+
+#: app/views/valuelookup.html
+msgid "VIN should only contain alphanumeric characters."
+msgstr "Le NIV ne doit contenir que des caractères alphanumériques."
+
+#: app/views/payments.html
+msgid "You have logged in outside of business hours. Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}."
+msgstr "Vous avez ouvert une session en dehors des heures d'ouverture. Tous les paiements effectués seront programmés pour le jour ouvrable suivant, {{ nextBusinessDay | moment }}."
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "dealer # {{ user.BusinessNumber }}"
+msgstr "concessionnaire no {{ user.BusinessNumber }}"
