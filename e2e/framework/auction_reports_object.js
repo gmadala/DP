@@ -5,9 +5,6 @@ var AuctionReportsObject = function () {
 
   this.documents = browser.element.all(by.repeater('doc in documents'));
 
-  this.infoBlockText = browser.element(by.css('.info-block-text'));
-  this.infoBlockIcon = browser.element(by.css('.info-block-image'));
-
   this.currentReport = browser.element(by.cssContainingText('.well', 'Current Reports'));
 
   this.historicalReport = browser.element(by.cssContainingText('.well', 'Historical Reports'));

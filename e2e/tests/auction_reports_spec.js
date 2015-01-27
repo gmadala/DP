@@ -37,9 +37,6 @@ auctionHelper.describe('WMT-78', function () {
     };
 
     it('Current Reports contains Credit Availability Query History report and Receivable Detail report.', function () {
-      expect(auctionReports.infoBlockIcon.isDisplayed()).toBeTruthy();
-      expect(auctionReports.infoBlockText.isDisplayed()).toBeTruthy();
-
       var urlColumn = 'doc.url';
       var titleColumn = 'doc.title';
 
