@@ -546,7 +546,7 @@ msgstr "Búsqueda de valor"
 
 #: app/views/valuelookup.html
 msgid "Values below will update based on successful VIN or Manual Lookup"
-msgstr "Los valores que se muestran a continuación se actualizarán con base en la búsqueda exitosa de VIN o en una búsqueda manual."
+msgstr "Los valores que se muestran a continuación se actualizarán con base en la búsqueda exitosa de VIN o en una búsqueda manual"
 
 #: app/views/valuelookup.html
 msgid "We are sorry, but we are unable to provide MMR Values at this time."
