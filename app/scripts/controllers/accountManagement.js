@@ -92,7 +92,7 @@ angular.module('nextgearWebApp')
               keyboard: true,
               backdropClick: true,
               templateUrl: 'views/modals/confirmDisableEnhanced.html',
-              controller: 'ConfirmDisableCtrl',
+              controller: 'ConfirmDisableCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function(result) {
               if (result) {
@@ -215,6 +215,8 @@ angular.module('nextgearWebApp')
       '/dealer/feeschedule/FeeSchedule',
       {}
     );
+
+    $scope.isUnited = User.isUnitedStates();
   })
 
   .controller('ConfirmDisableCtrl', function($scope, dialog) {

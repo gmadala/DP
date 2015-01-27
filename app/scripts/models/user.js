@@ -9,6 +9,7 @@ angular.module('nextgearWebApp')
       infoRequest = null,
       infoLoaded = false,
       isDealer,
+      isUnitedStates,
       info = null; // only user cached info for synchronous function
 
     function filterByBusinessName(subsidiaries) {
@@ -173,6 +174,7 @@ angular.module('nextgearWebApp')
         infoRequest = api.request('GET', '/Dealer/v1_2/Info').then(function(data) {
           infoLoaded = true;
           isDealer = data.DealerAuctionStatusForGA === 'Dealer';
+          isUnitedStates = data.CountryId === '29ec136a-1416-46ed-93cd-254d0fb0b820';
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
           info = data;
@@ -204,6 +206,14 @@ angular.module('nextgearWebApp')
           return null;
         } else {
           return isDealer;
+        }
+      },
+
+      isUnitedStates: function() {
+        if(!angular.isDefined(isUnitedStates)) {
+          return null;
+        } else {
+          return isUnitedStates;
         }
       },
 
