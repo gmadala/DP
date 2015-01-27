@@ -11,3 +11,7 @@ msgstr ""
 "X-Generator: Poedit 1.6.8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr_CA\n"
+
+#: app/views/valuelookup.html
+msgid "All values are displayed in US Dollars."
+msgstr ""

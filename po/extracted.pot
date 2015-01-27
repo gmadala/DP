@@ -180,6 +180,10 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: app/views/valuelookup.html
+msgid "All values are displayed in US Dollars."
+msgstr ""
+
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/auction.dashboard.html
 #: app/views/dashboard.html
@@ -748,17 +752,6 @@ msgstr ""
 
 #: app/views/auction.dashboard.html
 msgid "Disbursement Groups"
-msgstr ""
-
-#: app/views/login.html
-msgid "Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> or newer?"
-msgstr ""
-
-#: app/views/auction.documents.html
-#: app/views/auction.reports.html
-#: app/views/documents.html
-#: app/views/reports.html
-msgid "Do you have <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader 8.1</a> or newer? Your documents are displayed in Acrobat Reader."
 msgstr ""
 
 #: app/views/documents.html
@@ -3124,13 +3117,6 @@ msgstr ""
 
 #: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
 msgid "You may select an already approved address on file with NextGear."
-msgstr ""
-
-#: app/views/login.html
-msgid ""
-"You will need it in order to view your reports.<br>\n"
-"          Not sure? <a href=\"https://test.discoverdsc.com/MyDSC/Public/Test.pdf\" target=\"_blank\">Test your Adobe Reader installation.</a><br>\n"
-"          If the document did not successfully display, please install <a href=\"http://get.adobe.com/reader/\" target=\"_blank\">Adobe Acrobat Reader.</a>"
 msgstr ""
 
 #: app/views/account_management.html
