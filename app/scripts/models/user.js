@@ -84,7 +84,7 @@ angular.module('nextgearWebApp')
         return api.request(
           'POST',
           '/UserAccount/Authenticate', {}, {
-            Authorization: 'CT ' + Base64.encode(username + ':' + password + ':' + langId)
+            Authorization: 'CT ' + Base64.encode(username + ':' + password) + ':' + langId
           })
           .then(function(authResult) {
             return self.initSession(authResult).then(function () {
