@@ -156,6 +156,13 @@ msgstr ""
 
 #: app/views/payments.html
 msgid ""
+"Amounts shown are valid through 8pm Eastern Time\n"
+"          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
+"          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+msgstr "Las cantidades que se muestran tienen validez hasta las 8 pm EST\n <span ng-show=\"canPayNow\">del día de hoy ({{ todayDate | moment }})</span>\n <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
+
+#: app/views/payments.html
+msgid ""
 "Amounts shown are valid through 8pm eastern time\n"
 "          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</span>\n"
 "          <span ng-show=\"!canPayNow\">({{ nextBusinessDay | moment }})</span>"
@@ -843,6 +850,12 @@ msgstr ""
 " Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable "
 "- titleQueue.contents.length }}</span> fuera de <span class=\"count"
 "\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible.  "
+
+#: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
+msgid ""
+"Title Release Limits:<br>\n"
+"        You have <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> out of <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> available."
+msgstr "Límites para liberar Título:<br>\n Usted tiene <span class=\"count\">{{ eligibility.RemainingReleasesAvailable - titleQueue.contents.length }}</span> sobre <span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> disponible."
 
 #: app/views/titleReleaseCheckout.html
 msgid ""
@@ -1569,6 +1582,10 @@ msgstr "¿Está seguro que desea salir?"
 msgid "Auction Access #"
 msgstr "# de acceso a la subasta "
 
+#: app/views/modals/businessSearch.html
+msgid "Auction Access No."
+msgstr "No. de acceso a la subasta"
+
 #: app/views/auction.dealersearch.html
 msgid "Auction Access Number"
 msgstr "Número de acceso a la subasta"
@@ -1728,6 +1745,11 @@ msgstr "Nombre o número del negocio"
 msgid "Business Name"
 msgstr "Nombre del negocio"
 
+#: app/views/modals/businessSearch.html
+#: app/views/modals/dealerNameSearch.html
+msgid "Business No."
+msgstr "No. de negocio"
+
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Business Number"
 msgstr "Número del negocio"
@@ -1882,6 +1904,10 @@ msgstr "Eliminar búsqueda"
 #: app/views/floor/floorStepTwo.html
 msgid "Clear This Step"
 msgstr "Elimine este paso"
+
+#: app/views/payments.html
+msgid "Click the Add button to add a payoff or a payment."
+msgstr "Haga clic en el botón Añadir para agregar una liquidación o un pago."
 
 #: app/views/analytics.html
 msgid "Close Details"
@@ -2489,6 +2515,11 @@ msgstr "Plan de piso"
 msgid "Floor Plans"
 msgstr "Planes de piso"
 
+#: app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
+msgid "Floor Vehicle"
+msgstr "Vehículo en piso"
+
 #: app/scripts/directives/navigationDrawer/navigationDrawer.html
 #: app/scripts/app.js
 msgid "Floor a Vehicle"
@@ -2768,6 +2799,10 @@ msgstr "Inicie sesión en GO Financial"
 #: app/views/dialogs/logout.html
 msgid "Logout"
 msgstr "Finalizar sesión"
+
+#: app/views/valuelookup.html
+msgid "Look Up Values"
+msgstr "Buscar valores"
 
 #: app/views/analytics/bookamountsearch.html
 msgid "Look Up"
@@ -3867,6 +3902,10 @@ msgstr "Recibos"
 msgid "Receivable Detail (PDF)"
 msgstr "Detalle de cuentas por cobrar (PDF)"
 
+#: app/views/auction.dashboard.html
+msgid "Recent Disbursements"
+msgstr "Desembolsos recientes"
+
 #: app/views/dashboard.html
 msgid "Recent Receipts"
 msgstr "Recibos recientes"
@@ -4132,6 +4171,10 @@ msgstr "Seleccione un pago entre las opciones siguientes"
 #: app/views/modals/scheduleCheckout.html
 msgid "Select the Schedule Date"
 msgstr "Seleccione la fecha programada."
+
+#: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js
+msgid "Select the payments you want to make or schedule by adding them to your payment queue."
+msgstr "Para seleccionar los pagos que desee hacer o programar, agréguelos a su lista de pagos."
 
 #: app/views/account_management.html
 msgid "Self-Service Links"
@@ -4488,6 +4531,10 @@ msgid "This extension request cannot be completed online. Please <a nxg-chat-wit
 msgstr "Esta solicitud de ampliación no puede llenarse en línea. Por favor, <a nxg-chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con servicio a clientes para recibir ayuda."
 
 #: app/views/dashboard.html
+msgid "This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+msgstr "Esta línea de crédito tiene un incremento temporal de  {{dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} que vence el {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}. "
+
+#: app/views/dashboard.html
 msgid "This line of credit expires on: {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}"
 msgstr "Esta línea de crédito vence el:{{dashboardData.selectedLineOfCredit.TempLineOfCredit Expiration | moment}}"
 
@@ -4837,6 +4884,14 @@ msgid "VIN should be 17 characters."
 msgstr "El número VIN debe contener 17 caracteres."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
+msgid "VIN should be 6 to 17 characters."
+msgstr "El número VIN debe tener 17 caracteres."
+
+#: app/views/valuelookup.html
+msgid "VIN should only contain alphanumeric characters."
+msgstr "El número VIN debe tener únicamente caracteres alfanuméricos"
+
+#: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "VIN was not located; please enter Make, Model, Year and Style."
 msgstr ""
 "No se encontró el número VIN, por favor, ingrese marca, modelo, año y estilo."
@@ -5064,6 +5119,10 @@ msgstr ""
 "Respondió incorrectamente a la pregunta de seguridad, por favor, inténtelo "
 "de nuevo."
 
+#: app/views/payments.html
+msgid "You have logged in outside of business hours. Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}."
+msgstr "Usted ha ingresado en horas no hábiles. Cualquier pago que haya realizado se aplicará el siguiente día hábil,  {{ nextBusinessDay | moment }}."
+
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid "You have not selected a payment."
 msgstr "No ha seleccionado ningún pago."
@@ -5206,6 +5265,11 @@ msgstr "disponible"
 #: app/views/dashboard.html
 msgid "dealer # {{ data.dealer.id }}"
 msgstr "No. de distribuidor {{ data.dealer.id }}"
+
+#: app/scripts/directives/navBar/navBar.html
+msgid "dealer # {{ user.BusinessNumber }}"
+msgstr "distribuidor # {{ user.BusinessNumber }}"
+
 
 #: app/scripts/directives/navBar/navBar.html
 msgid "dealer # {{ user.info().BusinessNumber }}"

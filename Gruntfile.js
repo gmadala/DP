@@ -378,14 +378,16 @@ module.exports = function(grunt) {
             'po/translated/fr_CA2.po',
             'po/translated/fr_CA_translated.po',
             'po/translated/NextGear_Web_French (CA).po',
-            'po/translated/untranslated_French (CA).po'
+            'po/translated/untranslated_French (CA).po',
+            'po/translated/fr_CA3.po'
           ],
           'po/merged/es.po': [
             'po/translated/es2.po',
             'po/translated/es_MEX_translated.po',
             'po/translated/es.po',
             'po/translated/NextGear_Web_Spanish (Mex).po',
-            'po/translated/untranslated_Spanish (Mex).po'
+            'po/translated/untranslated_Spanish (Mex).po',
+            'po/translated/es_MEX3.po'
           ]
         }
       }
