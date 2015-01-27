@@ -23,7 +23,7 @@ describe('Controller: LoginCtrl', function () {
     };
 
     var httpBackend = $injector.get('$httpBackend');
-    httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg').respond('foo');
+    httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg?lang=1').respond('foo');
 
     user = {};
     user.authenticate = jasmine.createSpy('authenticate').andReturn({
