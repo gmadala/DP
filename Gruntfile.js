@@ -306,6 +306,13 @@ module.exports = function(grunt) {
           {
             expand: true,
             dot: true,
+            flatten: true,
+            dest: '<%= yeoman.dist %>/documents/',
+            src: '<%= yeoman.app %>/documents/*'
+          },
+          {
+            expand: true,
+            dot: true,
             cwd: '<%= yeoman.app %>',
             dest: '<%= yeoman.dist %>/',
             src: [
@@ -409,8 +416,10 @@ module.exports = function(grunt) {
     },
     shell: {
       chrome: {
-        command: 'open -n -a Google\\ Chrome --args --disable-extensions -–allow-file-access-from-files --incognito ' +
-        '--disable-web-security --homepage http://localhost:<%= connect.options.port %>'
+        command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
+        ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
+        ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
+        ' --homepage http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update',
@@ -462,6 +471,12 @@ module.exports = function(grunt) {
     'connect:livereload',
     'shell:chrome',
     'watch'
+  ]);
+
+  grunt.registerTask('server-dist', [
+    'build',
+    'shell:chrome',
+    'connect:dist:keepalive'
   ]);
 
   grunt.registerTask('test:unit', [

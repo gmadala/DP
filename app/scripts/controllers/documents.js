@@ -1,17 +1,23 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog) {
+  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User) {
     segmentio.track(metric.VIEW_RESOURCES_PAGE);
     $scope.metric = metric; // make metric names available to templates
 
     var languagePrefix = '';
-
-    if (gettextCatalog.currentLanguage === 'fr_CA') {
-      languagePrefix = 'CAF_';
-    }
-    else if (false /* TODO: User is English Canadian */) {
-      languagePrefix = 'CAE_';
+    var isUnitedStates = User.isUnitedStates();
+    var currentLanguage = gettextCatalog.currentLanguage;
+    if (!isUnitedStates) {
+      if (currentLanguage === 'fr_CA') {
+        languagePrefix = 'CAF_';
+      } else {
+        languagePrefix = 'CAE_';
+      }
+    } else {
+      if (currentLanguage === 'es') {
+        languagePrefix = 'ES_';
+      }
     }
 
     $scope.documents = [
