@@ -475,11 +475,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server-dist', [
     'build',
-    'dev-setup',
-    'livereload-start',
-    'connect:dist',
     'shell:chrome',
-    'watch'
+    'connect:dist:keepalive'
   ]);
 
   grunt.registerTask('test:unit', [
