@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('banner', function($rootScope, $http, nxgConfig) {
+  .factory('banner', function($rootScope, $http, nxgConfig, language) {
 
     return {
       fetch: function(callback) {
@@ -10,7 +10,10 @@ angular.module('nextgearWebApp')
 
         var httpConfig = {
           method: 'GET',
-          url: bannerLocation
+          url: bannerLocation,
+          params: {
+            lang: language.getCurrentLanguageId()
+          }
         };
 
         $http(httpConfig).then(

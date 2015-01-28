@@ -68,7 +68,7 @@ describe('Model: User', function () {
     }));
 
     it('should call to the expected endpoint', function () {
-      httpBackend.expectGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.expectGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -76,7 +76,7 @@ describe('Model: User', function () {
     it('should return a promise for the question list', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalledWith(response.Data.List);
@@ -87,7 +87,7 @@ describe('Model: User', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       response.Data.List = [];
-      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser').then(success, error);
       httpBackend.flush();
       expect(success).not.toHaveBeenCalled();
@@ -561,7 +561,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = false;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       user.canPayBuyer().then(function(_result_) {
         result = _result_;
       });
@@ -575,7 +575,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       var result;
       user.canPayBuyer().then(function(_result_) {
         result = _result_;
@@ -617,7 +617,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       var result;
       user.getPaySellerOptions().then(function(_result_) {
         result = _result_;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog, language) {
     // Private
     var staticsRequest = null,
       paySellerOptions = [],
@@ -29,7 +29,8 @@ angular.module('nextgearWebApp')
       },
 
       fetchPasswordResetQuestions: function(username) {
-        return api.request('GET', '/UserAccount/passwordResetQuestions/' + username).then(
+        var lang = language.getCurrentLanguageId();
+        return api.request('GET', '/UserAccount/passwordResetQuestions/' + username + '?lang=' + lang).then(
           function (result) {
             if (result.List && result.List.length > 0) {
               return result.List;
@@ -74,17 +75,11 @@ angular.module('nextgearWebApp')
 
       authenticate: function(username, password) {
         var self = this;
-        var lang = gettextCatalog.currentLanguage;
-        var langId = 1; // defaults to English
-        if (lang === 'fr_CA') {
-          langId = 2;
-        } else if (lang === 'es') {
-          langId = 3;
-        }
+        var lang = language.getCurrentLanguageId();
         return api.request(
           'POST',
           '/UserAccount/Authenticate', {}, {
-            Authorization: 'CT ' + Base64.encode(username + ':' + password) + ':' + langId
+            Authorization: 'CT ' + Base64.encode(username + ':' + password) + ':' + lang
           })
           .then(function(authResult) {
             return self.initSession(authResult).then(function () {

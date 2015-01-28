@@ -55,13 +55,13 @@ var fs = require('fs');
  */
 module.exports = {
   mockApi: function(apiFolder) {
-    var dynamicQuery = /\{\w+\}/,
+    var dynamicQuery = /{\w+}/,
       defaultDirectory = '__default';
 
     function serveContent(file, req, res) {
-      var authorization;
+      var authorization, auctionAuthorization;
       // for authentication, dynamically create the response.
-      if (req.url.indexOf('UserAccount\/Authenticate') > 0) {
+      if (contains(req.url, 'UserAccount\/Authenticate')) {
         authorization = req.headers.authorization;
         authorization = authorization.substring(authorization.indexOf(' '), authorization.length);
         var response = {
@@ -78,7 +78,8 @@ module.exports = {
         res.end(JSON.stringify(response));
       } else {
         authorization = req.headers.authorization;
-        if (authorization === 'CT  YXVjdGlvbjp0ZXN0OjE=' && file.indexOf('Dealer\/v1_2\/Info') > 0) {
+        auctionAuthorization = new Buffer('auction:test').toString('base64');
+        if (contains(authorization, auctionAuthorization) && contains(file, 'Dealer\/v1_2\/Info')) {
           file = file.replace('Dealer', 'Auction');
         }
         console.log('mockApi is serving a file, path=', file);
@@ -86,6 +87,10 @@ module.exports = {
           res.end(json);
         });
       }
+    }
+
+    function contains(str, substring) {
+      return str !== undefined && str.indexOf(substring) > 0;
     }
 
     function serveDefault(folder, req, res) {

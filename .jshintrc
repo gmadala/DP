@@ -36,6 +36,8 @@
     "protractor": false,
     "element": false,
     "browser": false,
-    "by": false
+    "by": false,
+    "inject": false,
+    "spyOn": false
   }
 }
