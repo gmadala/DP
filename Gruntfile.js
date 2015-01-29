@@ -378,19 +378,34 @@ module.exports = function(grunt) {
         }
       }
     },
+    gettext_update_po: {
+      src: ['po/*.po']
+    },
     shell: {
+      options: {
+        failOnError: true,
+        stderr: true,
+        stdout: true
+      },
       chrome: {
         command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
         ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
         ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
+      greet: {
+        command: function (greeting) {
+          return 'echo ' + (greeting || 'hello');
+        }
+      },
       webdriverUpdate: {
-        command: ' ./node_modules/protractor/bin/webdriver-manager update',
-        options: {
-          failOnError: true,
-          stderr: true,
-          stdout: true
+        command: ' ./node_modules/protractor/bin/webdriver-manager update'
+      },
+      msgmerge: {
+        command: function (filename) {
+          // use -N for --no-fuzzy-matching and echo how many strings are untranslated (subtract 1 for the PO header)
+          return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../dealer-portal/' + filename + ' && ' +
+            'msgattrib --untranslated ' + filename + ' | echo $(($(grep "msgid" -c) - 1)) untranslated strings';
         }
       }
     },
@@ -548,6 +563,16 @@ module.exports = function(grunt) {
     grunt.task.run('jshint');
   });
 
+  grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
+
+    this.filesSrc.forEach(function (filename) {
+
+      console.log(filename);
+      grunt.task.run('shell:msgmerge:' + filename);
+    });
+  });
+
+  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'nggettext_compile']);
+
   grunt.registerTask('default', ['server']);
-  grunt.registerTask('translate', ['nggettext_extract', 'nggettext_compile']);
 };
