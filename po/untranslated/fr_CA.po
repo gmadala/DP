@@ -12,6 +12,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr_CA\n"
 
+#: app/views/analytics.html
+msgid "All values are displayed in Canadian Dollars unless specified."
+msgstr ""
+
 #: app/views/valuelookup.html
+#: app/views/vehicledetails.html
 msgid "All values are displayed in US Dollars."
 msgstr ""

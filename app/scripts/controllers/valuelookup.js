@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook) {
+  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User) {
     $scope.results = {};
     $scope.searchInProgress = false;
 
@@ -383,4 +383,5 @@ angular.module('nextgearWebApp')
     resetResults(); // To get everything set up
     $scope.manualLookup.blackbook.makes.fill(); // Default Blackbook
     $scope.manualLookup.mmr.years.fill(); // Default MMR
+    $scope.isUnitedStates = User.isUnitedStates();
   });

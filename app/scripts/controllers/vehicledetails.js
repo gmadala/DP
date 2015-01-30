@@ -419,6 +419,8 @@ angular.module('nextgearWebApp')
         $scope.showExtendLink = function() {
           return !!$scope.financialSummary.NextPaymentAmount && $scope.financialSummary.NextPaymentAmount === $scope.financialSummary.TotalOutstanding;
         };
+        //Checking for United States Dealer
+        $scope.isUnitedStates = User.isUnitedStates();
 
         $scope.requestExtension = function() {
           // We need a payment object, but we only need the FloorplanId, Vin, & Description properties.
