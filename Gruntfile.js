@@ -397,7 +397,7 @@ module.exports = function(grunt) {
       msgmerge: {
         command: function (filename) {
           // use -N for --no-fuzzy-matching and echo how many strings are untranslated (subtract 1 for the PO header)
-          return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../dealer-portal/' + filename + ' && ' +
+          return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
             'msgattrib --untranslated ' + filename + ' | echo $(($(grep "msgid" -c) - 1)) untranslated strings';
         }
       }
