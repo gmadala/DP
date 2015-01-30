@@ -180,7 +180,12 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: app/views/analytics.html
+msgid "All values are displayed in Canadian Dollars unless specified."
+msgstr ""
+
 #: app/views/valuelookup.html
+#: app/views/vehicledetails.html
 msgid "All values are displayed in US Dollars."
 msgstr ""
 

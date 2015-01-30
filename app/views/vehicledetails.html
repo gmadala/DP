@@ -324,6 +324,13 @@
       <h2 class="well-title" translate>Floor Plan Value Estimates <span class="well-sub-title">NextGear &amp; MMR Valuation</span></h2>
       <div class="row-fluid">
         <div class="well-item span6">
+          <div ng-hide="isUnitedStates">
+            <div class="paired-media" class="row-fluid">
+              <span nxg-icon="icon-info"></span>
+            </div>
+            <span translate>All values are displayed in US Dollars.</span>
+          </div>
+          <p>&nbsp;</p>
           <h4 translate>NextGear Book Values</h4>
           <ul class="list-table">
             <li class="list-table-row">

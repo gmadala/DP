@@ -157,6 +157,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
             }
           ]
         });
+      },
+      isUnitedStates: function() {
+        return true;
       }
     };
 
