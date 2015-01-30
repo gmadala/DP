@@ -13,7 +13,7 @@
             <input type="text" id="vin"
               name="vin"
               ng-model="vinLookup.vin"
-              ng-minlength="10"
+              ng-minlength="6"
               ng-maxlength="17"
               ng-pattern="/^[A-Za-z0-9]*$/"
               required
@@ -23,7 +23,7 @@
               Please enter a VIN.
             </label>
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength" translate>
-              VIN should be 10 - 17 characters.
+              VIN should be 6 to 17 characters.
             </label>
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.pattern" translate>
               VIN should only contain alphanumeric characters.
