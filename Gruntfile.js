@@ -8,8 +8,6 @@ var mockApi = require('./api/mockApi.js');
 module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.loadNpmTasks('grunt-processhtml');
-  grunt.loadNpmTasks('grunt-angular-gettext');
 
   // configurable paths
   var yeomanConfig = {
