@@ -58,48 +58,39 @@
           <ul class="list-table">
             <li class="list-table-row">
               <p class="span4" translate>Line of Credit</p>
-
               <p class="span8 value">{{ flooringInfo.LineOfCredit }}</p>
             </li>
             <li class="list-table-row">
               <p class="span4" translate>Term Plan Name</p>
-
               <p class="span8 value">{{ flooringInfo.TermPlanName }}</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
               <p class="span4" translate>Product Type</p>
-
               <p class="span8 value">{{ flooringInfo.ProductType }}</p>
             </li>
             <li class="list-table-row">
               <p class="span4" translate>Seller</p>
-
               <p ng-show="flooringInfo.SellerName != null" class="span8 value">{{ flooringInfo.SellerName }}</p>
-
               <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span8 value" translate>
                 Trade-in</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
               <p class="span4" translate>Seller Address</p>
-
               <p ng-show="flooringInfo.SellerName != null" class="span8 value">
                 <span nxg-address="flooringInfo.sellerAddress"></span>
               </p>
-
               <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span8 value" translate>none</p>
             </li>
             <li class="list-table-row">
               <p class="span4" translate>Inventory Location</p>
-
               <p class="span8 value" ng-hide="flooringInfo.showEditInventoryLocation">
                 <span nxg-address="flooringInfo.inventoryAddress"></span>
                 <span ng-show="flooringInfo.showChangeLink"><br/><br/>
                   <a id="changeInvLocation" class="value-note" href="" ng-click="flooringInfo.showInventorySelect()" translate>Change Inventory Location</a>
                 </span>
               </p>
-
               <p class="span8 value" ng-show="flooringInfo.showEditInventoryLocation">
                 <span translate>Select Below</span>:
               </p>
