@@ -393,11 +393,6 @@ module.exports = function(grunt) {
         ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
-      greet: {
-        command: function (greeting) {
-          return 'echo ' + (greeting || 'hello');
-        }
-      },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update'
       },
