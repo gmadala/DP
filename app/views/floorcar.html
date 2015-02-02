@@ -18,7 +18,7 @@
       Please select a Color.
     </label>
 
-    <label for="inputMileage" class="input-title" translate>Mileage</label>
+    <label for="inputMileage" class="input-title" translate >{{ mileageOrOdometer }}</label>
     <input type="text" id="inputMileage"
            name="inputMileage"
            ng-model="data.UnitMileage"
@@ -30,7 +30,7 @@
               />
       <label for="inputMileage" class="text-error"
               ng-show="validity.inputMileage.$error.required" translate>
-        Please enter the Mileage.
+        Please enter the {{ mileageOrOdometer}}.
       </label>
       <label for="inputMileage"
              class="text-error"
