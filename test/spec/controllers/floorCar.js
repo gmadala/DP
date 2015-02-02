@@ -37,13 +37,16 @@ describe('Controller: FloorCarCtrl', function () {
         return $q.when(statics);
       },
       getInfo: function() {
-        return $q.when({})
+        return $q.when({});
       },
       canPayBuyer: function() {
         return $q.when(myCanPayBuyer);
       },
       getPaySellerOptions: function() {
         return $q.when(myPaySellerOptions);
+      },
+      isUnitedStates: function(){
+        return true;
       }
     };
 
@@ -72,7 +75,7 @@ describe('Controller: FloorCarCtrl', function () {
   }));
 
   var registerCommonTests = function() {
-    it('should attach necessary objects to the scope', inject(function ($rootScope) {    
+    it('should attach necessary objects to the scope', inject(function ($rootScope) {
       scope.$apply();
       expect(scope.options).toBeDefined();
       expect(scope.options.colors).toBe(statics.colors);
