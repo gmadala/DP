@@ -233,9 +233,12 @@ angular.module('nextgearWebApp')
       bizHours();
     });
 
-  }).controller('ExtensionRequestCtrl', function ($scope, dialog, payment, onConfirm, Payments, Floorplan) {
+  }).controller('ExtensionRequestCtrl', function ($scope, dialog, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
+
+    //TODO changes in here for 3893
     $scope.payment = payment;
     $scope.closeDialog = dialog.close;
+    $scope.isEnglish = gettextCatalog.currentLanguage === 'en';
 
     Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
       $scope.extPrev = result;
