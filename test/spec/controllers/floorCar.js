@@ -281,6 +281,21 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+    it('Canada', function() {
+      spyOn(userMock, 'isUnitedStates').andReturn(false);
+      initController();
+      scope.$apply();
+      expect(scope.mileageOrOdometer).toEqual('Odometer');
+    });
+
+    it('States', function() {
+      spyOn(userMock, 'isUnitedStates').andReturn(true);
+      initController();
+      scope.$apply();
+      expect(scope.mileageOrOdometer).toEqual('Mileage');
+    });
+
   });
 
   describe('in auction mode', function() {
@@ -317,5 +332,5 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.sellerLocations).toBe(biz2.ActivePhysicalInventoryLocations);
       expect(scope.data.PhysicalInventoryAddressId).toBe(biz2.ActivePhysicalInventoryLocations[0]);
     });
-  })
+  });
 });

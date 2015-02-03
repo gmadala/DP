@@ -18,7 +18,7 @@
       Please select a Color.
     </label>
 
-    <label for="inputMileage" class="input-title" translate >{{ mileageOrOdometer }}</label>
+    <label for="inputMileage" class="input-title">{{ mileageOrOdometer }}</label>
     <input type="text" id="inputMileage"
            name="inputMileage"
            ng-model="data.UnitMileage"
@@ -28,10 +28,8 @@
            nxg-validate-int="6"
            ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
               />
-      <label for="inputMileage" class="text-error"
-              ng-show="validity.inputMileage.$error.required" translate>
-        Please enter the {{ mileageOrOdometer}}.
-      </label>
+      <label for="inputMileage" class="text-error" ng-show="validity.inputMileage.$error.required" translate>Please enter the</label>
+      <span>{{ mileageOrOdometer}}.</span>
       <label for="inputMileage"
              class="text-error"
              ng-show="validity.inputMileage.$error.pattern || validity.inputMileage.$error.nxgMin" translate>
