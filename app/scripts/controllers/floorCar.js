@@ -195,4 +195,11 @@ angular.module('nextgearWebApp')
       });
     };
 
+    //Checking for United States Dealer
+
+    if(User.isUnitedStates()) {
+      $scope.mileageOrOdometer = gettextCatalog.getString('Mileage');
+    }else{
+      $scope.mileageOrOdometer = gettextCatalog.getString('Odometer');
+    }
   });

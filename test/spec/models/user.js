@@ -168,10 +168,31 @@ describe('Model: User', function () {
 
   describe('Authenticate + isLoggedIn + logout method', function () {
     var segmentio,
-      logoutHttpHandler;
+      logoutHttpHandler,
+      infoHttpHandler,
+      infoUnitedStates,
+      infoCanada;
 
     beforeEach(inject(function (_segmentio_) {
       segmentio = _segmentio_;
+
+      infoUnitedStates = {
+        Success: true,
+        Data: {
+          BusinessNumber: 1234,
+          BusinessName: 'Tricolor Auto',
+          CountryId:'29ec136a-1416-46ed-93cd-254d0fb0b820'
+        }
+      };
+
+      infoCanada = {
+        Success: true,
+        Data: {
+          BusinessNumber: 1234,
+          BusinessName: 'Tricolor Auto',
+          CountryId:'29ec136a-1416-46ed-93cd-254d0fb0b821'
+        }
+      };
 
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
         Success: true,
@@ -183,13 +204,7 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
-        Success: true,
-        Data: {
-          BusinessNumber: 1234,
-          BusinessName: 'Tricolor Auto'
-        }
-      });
+      infoHttpHandler = httpBackend.whenGET('/Dealer/v1_2/Info');
 
       httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
@@ -204,12 +219,14 @@ describe('Model: User', function () {
     }));
 
     it('should make the expected POST request', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       httpBackend.expectPOST('/UserAccount/Authenticate');
       user.authenticate('test', 'testpw');
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should set the api auth token with the value from the response', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(api, 'setAuth');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -222,6 +239,7 @@ describe('Model: User', function () {
     });
 
     it('should update the isLoggedIn function result', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       expect(user.isLoggedIn()).toBe(false);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -229,6 +247,7 @@ describe('Model: User', function () {
     });
 
     it('should set the auth header for all further requests', inject(function ($http) {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       httpBackend.expectGET('foo/bar', function (headers) {
@@ -239,6 +258,7 @@ describe('Model: User', function () {
     }));
 
     it('should refresh statics and info upon auth success', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(user, 'refreshInfo').andCallThrough();
       spyOn(user, 'refreshStatics').andCallThrough();
       user.authenticate('test', 'testpw');
@@ -248,6 +268,7 @@ describe('Model: User', function () {
     });
 
     it('should identify the user for analytics upon success', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(segmentio, 'identify');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -263,6 +284,7 @@ describe('Model: User', function () {
     it('should return a promise for authentication result data', function () {
       var out = null;
 
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw').then(function (result) {
         out = result;
       });
@@ -277,6 +299,7 @@ describe('Model: User', function () {
     });
 
     it('should make the expected logout request to the server on logout', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -286,6 +309,7 @@ describe('Model: User', function () {
     });
 
     it('should reset the auth token and isLoggedIn flag on logout call success', function() {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -302,6 +326,7 @@ describe('Model: User', function () {
     });
 
     it('should reset the auth token and isLoggedIn flag on logout call error', function() {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -320,6 +345,27 @@ describe('Model: User', function () {
       expect(success.mostRecentCall.args[0]).toEqual(null);
       expect(failure).not.toHaveBeenCalled();
     });
+
+    it('should check for the user - UnitedStates', function () {
+      infoHttpHandler.respond(infoUnitedStates);
+      httpBackend.whenPOST('/UserAccount/Authenticate').respond(function () {
+        return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
+      });
+      user.authenticate('user', 'pass');
+      httpBackend.flush();
+      expect(user.isUnitedStates()).toBeTruthy();
+    });
+
+    it('should check for the user - Canadian', function () {
+      infoHttpHandler.respond(infoCanada);
+      httpBackend.whenPOST('/UserAccount/Authenticate').respond(function () {
+        return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
+      });
+      user.authenticate('user', 'pass');
+      httpBackend.flush();
+      expect(user.isUnitedStates()).toBeFalsy();
+    });
+
   });
 
   describe('dropSession method', function () {
