@@ -31,8 +31,10 @@
   <p ng-show="extPrev.CanExtend" translate>
     To extend this unit an additional period please click below.
   </p>
-  <p ng-show="!extPrev.CanExtend" translate>
-    This extension request cannot be completed online. Please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.
+  <p ng-show="!extPrev.CanExtend">
+    <span translate>This extension request cannot be completed online.</span>
+    <span ng-show="isEnglish" translate>Please <a nxg-chat-with-us>chat with us</a> or contact customer service for further assistance.</span>
+    <span ng-show="!isEnglish" translate>Please contact customer service for further assistance.</span>
   </p>
   <p class="disclaimer" translate>Please note this quote is effective for today only and amounts are subject to change.</p>
 </div>
