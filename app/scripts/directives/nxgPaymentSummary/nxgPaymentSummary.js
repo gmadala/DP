@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions) {
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions, gettextCatalog) {
     //not showing up in html even though it's on rootScope. Adding here.
     $scope.metric = metric;
     $scope.navigate = $state.transitionTo;
@@ -74,7 +74,7 @@ angular.module('nextgearWebApp')
       default:
         text = '_invalid payment type_';
       }
-      return text;
+      return gettextCatalog.getString(text);
     };
 
   });
