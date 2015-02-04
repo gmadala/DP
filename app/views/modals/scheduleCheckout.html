@@ -17,7 +17,6 @@
            required nxg-requires="checkDate(model.selectedDate)"
            ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
     <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
-    <span translate>or</span> <button ng-click="removeSchedule()" class="btn-unstyle btn-link" ng-disabled="!model.canPayNow || submitInProgress" translate>Pay Now</button>
 
     <div class="row-fluid">
       <label for="inputScheduleDate" class="text-error"

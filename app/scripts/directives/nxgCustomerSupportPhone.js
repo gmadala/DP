@@ -1,10 +1,8 @@
 'use strict';
 
-// Confirmed with Ryan Gaddis 6/9/2014 to format number as (xxx) xxx-xxxx app-wide
-// -Josh Kramer
-//
-// This does NOT replace the value in unsupported.html (which runs in older browsers and can't rely on
-// AngularJS working)
+// This directive will display all available customer service number. This directive should be used in pre auth
+// pages:
+// * recover login information
 angular.module('nextgearWebApp')
   .directive('nxgCustomerSupportPhone', function () {
     return {

@@ -8,8 +8,6 @@ var mockApi = require('./api/mockApi.js');
 module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.loadNpmTasks('grunt-processhtml');
-  grunt.loadNpmTasks('grunt-angular-gettext');
 
   // configurable paths
   var yeomanConfig = {
@@ -374,47 +372,19 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['po/merged/*.po']
+          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
         }
       }
     },
-    translations_merge: {
-      all: {
-        files: {
-          'po/merged/fr_CA.po': [
-            'po/translated/fr_CA2.po',
-            'po/translated/fr_CA_translated.po',
-            'po/translated/NextGear_Web_French (CA).po',
-            'po/translated/untranslated_French (CA).po',
-            'po/translated/fr_CA3.po'
-          ],
-          'po/merged/es.po': [
-            'po/translated/es2.po',
-            'po/translated/es_MEX_translated.po',
-            'po/translated/es.po',
-            'po/translated/NextGear_Web_Spanish (Mex).po',
-            'po/translated/untranslated_Spanish (Mex).po',
-            'po/translated/es_MEX3.po'
-          ]
-        }
-      }
-    },
-    translations_missing: {
-      all: {
-        options: {
-          pot_file: 'po/extracted.pot'
-        },
-        files: {
-          'po/untranslated/fr_CA.po': [
-            'po/merged/fr_CA.po'
-          ],
-          'po/untranslated/es.po': [
-            'po/merged/es.po'
-          ]
-        }
-      }
+    gettext_update_po: {
+      src: ['po/*.po']
     },
     shell: {
+      options: {
+        failOnError: true,
+        stderr: true,
+        stdout: true
+      },
       chrome: {
         command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
         ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
@@ -422,11 +392,13 @@ module.exports = function(grunt) {
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
-        command: ' ./node_modules/protractor/bin/webdriver-manager update',
-        options: {
-          failOnError: true,
-          stderr: true,
-          stdout: true
+        command: ' ./node_modules/protractor/bin/webdriver-manager update'
+      },
+      msgmerge: {
+        command: function (filename) {
+          // use -N for --no-fuzzy-matching and echo how many strings are untranslated
+          return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
+            'msgattrib --untranslated ' + filename + ' | echo $(grep "msgid" -c) untranslated strings';
         }
       }
     },
@@ -584,142 +556,16 @@ module.exports = function(grunt) {
     grunt.task.run('jshint');
   });
 
-  grunt.registerMultiTask('translations_merge', 'Merge multiple translations files into one', function () {
-    this.files.forEach(function (file) {
+  grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
 
-      var translations = {
-        truncated: [],
-        values: []
-      };
-      var dupes = 0;
-      var first;
+    this.filesSrc.forEach(function (filename) {
 
-      file.src.forEach(function (filename) {
-        var fileContents = grunt.file.read(filename).toString();
-        var matches = fileContents.split('\n\n');
-
-        // Set the opener
-        if (translations.values.length === 0) {
-          first = matches[0];
-        }
-
-        grunt.log.writeln('`'+filename+'`', 'Matches:', matches.length);
-
-        matches.slice(1).forEach(function (val) {
-          var splitter = (val.indexOf('msgid """') > -1) ? 'msgid """' : 'msgid "';
-          var truncated = val.split(splitter)[1];
-          truncated = truncated.slice(0, truncated.indexOf('msgstr')); // Removes duplicate translations
-
-          if (translations.truncated.indexOf(truncated) === -1) {
-            translations.truncated.push(truncated);
-            translations.values.push(val);
-          }
-          else {
-            dupes++;
-          }
-        });
-      });
-
-      translations.values = translations.values.sort(function (a, b) {
-        var splitterA = (a.indexOf('msgid """') > -1) ? 'msgid """' : 'msgid "';
-        var splitterB = (b.indexOf('msgid """') > -1) ? 'msgid """' : 'msgid "';
-
-        a = a.split(splitterA)[1];
-        b = b.split(splitterB)[1];
-        return a > b ? 1 : -1;
-      });
-      translations.values.unshift(first);
-
-      grunt.log.writeln(translations.truncated.length + ' Strings Found');
-      grunt.log.writeln(dupes + ' Duplicates Found');
-
-      grunt.file.write(file.dest, translations.values.join('\n\n'));
-
-    }); // END files.forEach()
+      console.log(filename);
+      grunt.task.run('shell:msgmerge:' + filename);
+    });
   });
 
-  grunt.registerMultiTask('translations_missing', 'Generate a file of missing translations', function () {
-    var options = this.options();
-
-    var translations = {};
-    var translationStrings = {
-      matches: [],
-      strings: [],
-      matchesPlural: [],
-      plurals: []
-    };
-    var untranslatedContents = grunt.file.read(options.pot_file).toString().split('\n\n');
-    // We don't need the file definition
-    untranslatedContents.shift();
-
-    untranslatedContents.forEach(function (val) {
-      var splitter = (val.indexOf('msgid """') > -1) ? 'msgid """' : 'msgid "';
-      var truncated = val.split(splitter)[1];
-      // If it's a plural, split before the plural definition
-      splitter = (truncated.indexOf('msgid_plural') > -1) ? 'msgid_plural' : 'msgstr';
-
-      // Push plurals onto a different array since we handle them differently
-      if (splitter === 'msgid_plural') {
-        // Truncate to just the string value
-        truncated = truncated.slice(0, truncated.indexOf(splitter) - 2);
-
-        translationStrings.matchesPlural.push(val);
-        translationStrings.plurals.push(truncated);
-        return;
-      }
-
-      // Truncate to just the string value
-      truncated = truncated.slice(0, truncated.indexOf(splitter) - 2);
-
-      translationStrings.matches.push(val);
-      translationStrings.strings.push(truncated);
-    });
-
-    grunt.log.writeln(translationStrings.strings.length + ' Strings Found');
-    grunt.log.writeln(translationStrings.plurals.length + ' Plurals Found');
-
-    this.files.forEach(function (file) {
-
-      /**
-       * Loop through each translated file and see if we're missing translations
-       * from the all strings file.
-       */
-      file.src.forEach(function (filename) {
-        var fileContents = grunt.file.read(filename).toString();
-        var matches = fileContents.toString().split('\n\n');
-
-        if (!translations.hasOwnProperty(filename)) {
-          translations[filename] = {
-            truncated: [],
-            values: []
-          };
-        }
-
-        grunt.log.writeln('`'+filename+'`', matches.length - 1, 'Strings');
-
-        translationStrings.strings.forEach(function (string, key) {
-          if (fileContents.indexOf('msgid "' + string + '"') === -1) {
-            translations[filename].values.push(translationStrings.matches[key]);
-          }
-        });
-
-        // Match each of the plurals by testing for msgid_plural
-        translationStrings.plurals.forEach(function (string, key) {
-          if (fileContents.indexOf('msgid "' + string + '"' + '\n' + 'msgid_plural') === -1) {
-            translations[filename].values.push(translationStrings.matchesPlural[key]);
-          }
-        });
-
-        grunt.log.writeln(translations[filename].values.length + ' Translations Missing');
-
-        translations[filename].values.unshift(matches[0]);
-
-        grunt.file.write(file.dest, translations[filename].values.join('\n\n'));
-      }); // END forEach file
-    });
-
-  });
+  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'nggettext_compile']);
 
   grunt.registerTask('default', ['server']);
-  grunt.registerTask('translate', ['nggettext_extract', 'translations_merge', 'translations_missing', 'nggettext_compile']);
 };

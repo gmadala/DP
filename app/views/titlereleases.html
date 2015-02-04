@@ -54,7 +54,7 @@
             <th translate>Release Status</th>
             <th translate>Actions</th>
           </thead>
-          <tr ng-repeat="item in data.results">
+          <tr ng-repeat="item in data.results | orderBy:sortField.item:sortDescending.item">
 
             <td>
               <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
