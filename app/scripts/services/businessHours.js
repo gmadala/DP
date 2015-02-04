@@ -57,7 +57,7 @@ angular.module('nextgearWebApp')
         // if the next edge is really far away like next year then just return 24 hours. $timeout will just keep
         // invoking its function with larger ms values such as next year (AngularJS bug perhaps).
         // This is relevant at least when using the mock API.
-        diff = Math.min(diff, 86400);
+        diff = Math.min(diff, 86400000);
         return diff;
       },
 
