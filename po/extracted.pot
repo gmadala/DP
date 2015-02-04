@@ -1116,7 +1116,7 @@ msgid "I Have the Title"
 msgstr ""
 
 #: app/views/login.html
-msgid "If you are experiencing an issue logging in, click \"Forgot your username or password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital.com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
+msgid "If you are experiencing an issue logging in, click \"Forgot your username or password?\" below, or contact:"
 msgstr ""
 
 #: app/views/auction.dealersearch.html
