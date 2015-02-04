@@ -860,10 +860,6 @@ msgstr "Activé"
 msgid "End Date"
 msgstr "Date d’expiration"
 
-#: app/scripts/directives/navBar/navBar.html
-msgid "English"
-msgstr "Anglais"
-
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr "Inscription améliorée activée?"
@@ -907,10 +903,6 @@ msgstr "Erreur"
 #: app/scripts/controllers/checkout.js
 msgid "Error retrieving schedule information"
 msgstr "Erreur de récupération du tableau d'information"
-
-#: app/scripts/directives/navBar/navBar.html
-msgid "Espa&ntilde;ol"
-msgstr "Espagnol"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Excellent"
@@ -1099,10 +1091,6 @@ msgstr "Nom d'utilisateur oublié?"
 #: app/views/login.html
 msgid "Forgot your username or password?"
 msgstr "Nom d'utilisateur ou mot de passe oublié?"
-
-#: app/scripts/directives/navBar/navBar.html
-msgid "Fran&ccedil;ais"
-msgstr "Français"
 
 #: app/views/checkout.html
 msgid "Future"
@@ -1614,10 +1602,10 @@ msgstr "Relevé des paiements"
 
 #. Payment This [Month, Year]
 #: app/views/dashboard.html
-msgid "Payment This {{ viewMode | capitalize }}"
-msgid_plural "Payments This {{ viewMode | capitalize }}"
-msgstr[0] "Paiement ce {{ viewMode | capitalize }}"
-msgstr[1] "Paiements ce {{ viewMode | capitalize }}"
+msgid "Payment This {{ viewModeLabel | capitalize }}"
+msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
+msgstr[0] "Paiement ce {{ viewModeLabel | capitalize }}"
+msgstr[1] "Paiements ce {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -3511,6 +3499,15 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "English"
+#~ msgstr "Anglais"
+
+#~ msgid "Espa&ntilde;ol"
+#~ msgstr "Espagnol"
+
+#~ msgid "Fran&ccedil;ais"
+#~ msgstr "Français"
 
 #~ msgid ""
 #~ "If you are experiencing an issue logging in, click \"Forgot your username "
