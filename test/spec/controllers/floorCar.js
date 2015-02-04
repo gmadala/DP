@@ -37,13 +37,16 @@ describe('Controller: FloorCarCtrl', function () {
         return $q.when(statics);
       },
       getInfo: function() {
-        return $q.when({})
+        return $q.when({});
       },
       canPayBuyer: function() {
         return $q.when(myCanPayBuyer);
       },
       getPaySellerOptions: function() {
         return $q.when(myPaySellerOptions);
+      },
+      isUnitedStates: function(){
+        return true;
       }
     };
 
@@ -72,7 +75,7 @@ describe('Controller: FloorCarCtrl', function () {
   }));
 
   var registerCommonTests = function() {
-    it('should attach necessary objects to the scope', inject(function ($rootScope) {    
+    it('should attach necessary objects to the scope', inject(function ($rootScope) {
       scope.$apply();
       expect(scope.options).toBeDefined();
       expect(scope.options.colors).toBe(statics.colors);
@@ -278,6 +281,21 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+    it('Canada', function() {
+      spyOn(userMock, 'isUnitedStates').andReturn(false);
+      initController();
+      scope.$apply();
+      expect(scope.mileageOrOdometer).toEqual('Odometer');
+    });
+
+    it('States', function() {
+      spyOn(userMock, 'isUnitedStates').andReturn(true);
+      initController();
+      scope.$apply();
+      expect(scope.mileageOrOdometer).toEqual('Mileage');
+    });
+
   });
 
   describe('in auction mode', function() {
@@ -314,5 +332,5 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.sellerLocations).toBe(biz2.ActivePhysicalInventoryLocations);
       expect(scope.data.PhysicalInventoryAddressId).toBe(biz2.ActivePhysicalInventoryLocations[0]);
     });
-  })
+  });
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric) {
+  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric, User) {
     segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE);
 
     $scope.showDetails = false;
@@ -50,5 +50,6 @@ angular.module('nextgearWebApp')
 
     $scope.businessSummary = Analytics.fetchBusinessSummary();
     $scope.analytics = Analytics.fetchAnalytics();
-
+    //Checking for United States Dealer
+    $scope.isUnitedStates = User.isUnitedStates();
   });

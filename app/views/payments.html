@@ -143,7 +143,7 @@
             </th>
           </thead>
           <!-- Vehicle Payments: table body -->
-          <tr ng-repeat="payment in payments.results">
+          <tr ng-repeat="payment in payments.results | orderBy:sortField.payment:sortDescending.payment">
 
             <td class="paired paired-reversed"> <!-- Vehicle Payments: due date column -->
               <div class="paired-body">

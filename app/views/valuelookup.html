@@ -258,7 +258,7 @@
       </div>
       <p class="info-block-text">
         <span translate>Values below will update based on successful VIN or Manual Lookup</span>.
-        <span translate>All values are displayed in US Dollars.</span>
+        <span ng-hide="isUnitedStates" translate>All values are displayed in US Dollars.</span>
       </p>
     </div>
     <div class="info-block" ng-show="showMultiplesWarning()">
