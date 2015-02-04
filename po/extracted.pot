@@ -1111,6 +1111,10 @@ msgstr ""
 msgid "Historical Reports"
 msgstr ""
 
+#: app/views/auction.sellerfloorplan.html
+msgid "I Have the Title"
+msgstr ""
+
 #: app/views/login.html
 msgid "If you are experiencing an issue logging in, click \"Forgot your username or password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital.com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
 msgstr ""
@@ -1267,8 +1271,8 @@ msgstr ""
 msgid "Manual Lookup"
 msgstr ""
 
+#: app/scripts/controllers/floorCar.js
 #: app/views/auction.bulkflooring.html
-#: app/views/floorcar.html
 #: app/views/valuelookup.html
 msgid "Mileage"
 msgstr ""
@@ -1440,6 +1444,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: app/scripts/controllers/floorCar.js
+msgid "Odometer"
+msgstr ""
+
 #: app/unsupported.html
 msgid "Once upgraded, you will be able to log in."
 msgstr ""
@@ -1486,10 +1494,6 @@ msgstr ""
 
 #: app/views/login.createPassword.html
 msgid "Passwords must consist of a minimum of 8 characters. Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special character."
-msgstr ""
-
-#: app/views/modals/scheduleCheckout.html
-msgid "Pay Now"
 msgstr ""
 
 #: app/views/titlereleases.html
@@ -1650,6 +1654,10 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
+#: app/views/modals/paymentExtension.html
+msgid "Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgstr ""
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
 msgstr ""
@@ -1668,6 +1676,10 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below."
+msgstr ""
+
+#: app/views/modals/paymentExtension.html
+msgid "Please contact customer service for further assistance."
 msgstr ""
 
 #: app/views/auction.dealersearch.html
@@ -1877,12 +1889,15 @@ msgstr ""
 msgid "Please enter one or more Stock Numbers"
 msgstr ""
 
+#: app/views/floorcar.html
+msgid "Please enter the"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 msgid "Please enter the Lot Number."
 msgstr ""
 
 #: app/views/auction.bulkflooring.html
-#: app/views/floorcar.html
 #: app/views/valuelookup.html
 msgid "Please enter the Mileage."
 msgstr ""
@@ -2603,7 +2618,7 @@ msgid "There are too many results to display, please refine your search further.
 msgstr ""
 
 #: app/views/modals/paymentExtension.html
-msgid "This extension request cannot be completed online. Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service for further assistance."
+msgid "This extension request cannot be completed online."
 msgstr ""
 
 #: app/views/dashboard.html
@@ -3014,7 +3029,7 @@ msgid ""
 msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
-msgid "We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class=\"highlight\"><nxg-customer-support-phone></nxg-customer-support-phone></span>"
+msgid "We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at <span class=\"highlight\"><nxg-dealer-customer-support-phone></nxg-dealer-customer-support-phone></span>"
 msgstr ""
 
 #: app/scripts/controllers/titleReleases.js
@@ -3203,10 +3218,6 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "none"
-msgstr ""
-
-#: app/views/modals/scheduleCheckout.html
-msgid "or"
 msgstr ""
 
 #: app/views/vehicledetails.html
