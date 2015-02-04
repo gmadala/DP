@@ -234,7 +234,7 @@ msgstr "Tous"
 
 #: app/views/valuelookup.html
 msgid "All values are displayed in US Dollars."
-msgstr ""
+msgstr "Tous les montants sont affichés en dollars américains."
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 #: app/views/auction.dashboard.html app/views/dashboard.html
