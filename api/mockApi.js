@@ -61,7 +61,7 @@ module.exports = {
     function serveContent(file, req, res) {
       var authorization, auctionAuthorization;
       // for authentication, dynamically create the response.
-      if (contains(req.url, 'UserAccount\/Authenticate')) {
+      if (contains(req.url, 'UserAccount\/v1_1\/Authenticate')) {
         authorization = req.headers.authorization;
         authorization = authorization.substring(authorization.indexOf(' '), authorization.length);
         var response = {

@@ -1,11 +1,10 @@
 {
-  "Success": false,
-  "Message": "UserAccount/Authenticate has been deprecated",
-  "Data":{
+  "Success": true,
+  "Message": null,
+  "Data": {
     "Token": "Mzc2ZWI4NmEtZGYxYS00MGRjLWIwYjUtYTI1MTIxMzk3YTNl",
     "ShowUserInitialization": false,
     "UserVoiceToken": "foo",
     "TemporaryPasswordUsed": false
   }
 }
-
