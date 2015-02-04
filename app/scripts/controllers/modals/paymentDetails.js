@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-.controller('PaymentDetailsCtrl', function ($scope, dialog, activity) {
-  $scope.payment = activity;
+  .controller('PaymentDetailsCtrl', function ($scope, dialog, activity, gettextCatalog) {
 
-  $scope.close = function() {
-    dialog.close();
-  };
-});
+    angular.forEach(activity.PaymentItems, function(value){
+      value.ItemName = gettextCatalog.getString(value.ItemName);
+    });
+
+    $scope.payment = activity;
+
+    $scope.close = function() {
+      dialog.close();
+    };
+  });
