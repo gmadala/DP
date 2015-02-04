@@ -238,7 +238,10 @@ angular.module('nextgearWebApp')
 
         // Users should only be able to change inventory location if they have more than one,
         // and the Floorplan's status is either "Approved" or "Pending"
-        $scope.flooringInfo.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
+        $scope.flooringInfo.showChangeLink =
+          ($scope.flooringInfo.FloorplanStatusName === gettextCatalog.getString('Approved') ||
+          $scope.flooringInfo.FloorplanStatusName === gettextCatalog.getString('Pending')) &&
+          $scope.inventoryLocations.length > 1;
 
         // Update Inventory Location
         var tempAddress;
