@@ -827,10 +827,6 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: app/scripts/directives/navBar/navBar.html
-msgid "English"
-msgstr ""
-
 #: app/views/account_management.html
 #: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
@@ -864,10 +860,6 @@ msgstr ""
 
 #: app/scripts/controllers/checkout.js
 msgid "Error retrieving schedule information"
-msgstr ""
-
-#: app/scripts/directives/navBar/navBar.html
-msgid "Espa&ntilde;ol"
 msgstr ""
 
 #: app/views/valuelookup.html
@@ -1067,10 +1059,6 @@ msgstr ""
 
 #: app/views/login.html
 msgid "Forgot your username or password?"
-msgstr ""
-
-#: app/scripts/directives/navBar/navBar.html
-msgid "Fran&ccedil;ais"
 msgstr ""
 
 #: app/views/checkout.html
@@ -1575,8 +1563,8 @@ msgstr ""
 
 #. Payment This [Month, Year]
 #: app/views/dashboard.html
-msgid "Payment This {{ viewMode | capitalize }}"
-msgid_plural "Payments This {{ viewMode | capitalize }}"
+msgid "Payment This {{ viewModeLabel | capitalize }}"
+msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
 msgstr[0] ""
 msgstr[1] ""
 
