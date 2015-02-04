@@ -233,7 +233,13 @@ msgstr "Dirección"
 msgid "All"
 msgstr "Todos"
 
-#: app/views/valuelookup.html
+#: app/views/analytics.html
+msgid "All values are displayed in Canadian Dollars unless specified."
+msgstr ""
+"Todos los valores se muestran en dólares canadienses salvo especificación en "
+"contrario."
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "All values are displayed in US Dollars."
 msgstr "Todos los valores se muestran en dólares estadounidenses."
 
@@ -1137,6 +1143,10 @@ msgstr "Ocultar detalles de pago"
 msgid "Historical Reports"
 msgstr "Reportes históricos"
 
+#: app/views/auction.sellerfloorplan.html
+msgid "I Have the Title"
+msgstr "Tengo este título"
+
 #: app/views/login.html
 msgid ""
 "If you are experiencing an issue logging in, click \"Forgot your username or "
@@ -1304,7 +1314,7 @@ msgstr "Maneje su negocio con NextGear Capital en cualquier parte"
 msgid "Manual Lookup"
 msgstr "Búsqueda manual"
 
-#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
 #: app/views/valuelookup.html
 msgid "Mileage"
 msgstr "Kilometraje"
@@ -1485,6 +1495,10 @@ msgstr ""
 msgid "OK"
 msgstr "De acuerdo"
 
+#: app/scripts/controllers/floorCar.js
+msgid "Odometer"
+msgstr ""
+
 #: app/unsupported.html
 msgid "Once upgraded, you will be able to log in."
 msgstr "Una vez que se haya actualizado, podrá iniciar sesión."
@@ -1535,10 +1549,6 @@ msgstr ""
 "Las contraseñas deben consistir de por lo menos 8 caracteres. Las "
 "contraseñas deben contener 3 de los 4 tipos siguientes de caracteres: "
 "mayúsculas, minúsculas, número o carácter especial."
-
-#: app/views/modals/scheduleCheckout.html
-msgid "Pay Now"
-msgstr "Pague ahora"
 
 #: app/views/titlereleases.html
 msgid "Pay off this vehicle or return the title to remove from your limit."
@@ -1686,6 +1696,12 @@ msgstr "Pendiente/No pagado"
 msgid "Phone"
 msgstr "Teléfono"
 
+#: app/views/modals/paymentExtension.html
+msgid ""
+"Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service "
+"for further assistance."
+msgstr ""
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
 msgstr "Por favor, reconozca la falla de búsqueda de VIN."
@@ -1731,6 +1747,10 @@ msgid "Please confirm your title release request(s) below."
 msgstr ""
 "Por favor, a continuación confirme la(s) solicitud(es) de liberación de "
 "títulos."
+
+#: app/views/modals/paymentExtension.html
+msgid "Please contact customer service for further assistance."
+msgstr ""
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
@@ -1947,12 +1967,15 @@ msgstr "Por favor, ingrese por lo menos 3 caracteres."
 msgid "Please enter one or more Stock Numbers"
 msgstr "Por favor, capture uno o más números de inventario."
 
+#: app/views/floorcar.html
+msgid "Please enter the"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 msgid "Please enter the Lot Number."
 msgstr "Por favor, ingrese el número de lote."
 
-#: app/views/auction.bulkflooring.html app/views/floorcar.html
-#: app/views/valuelookup.html
+#: app/views/auction.bulkflooring.html app/views/valuelookup.html
 msgid "Please enter the Mileage."
 msgstr "Por favor, ingrese el kilometraje."
 
@@ -2706,13 +2729,8 @@ msgstr ""
 "búsqueda."
 
 #: app/views/modals/paymentExtension.html
-msgid ""
-"This extension request cannot be completed online. Please <a nxg-chat-with-"
-"us=\"\">chat with us</a> or contact customer service for further assistance."
+msgid "This extension request cannot be completed online."
 msgstr ""
-"Esta solicitud de ampliación no puede llenarse en línea. Por favor, <a nxg-"
-"chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con el "
-"servicio a clientes para recibir ayuda."
 
 #: app/views/dashboard.html
 msgid ""
@@ -3188,12 +3206,8 @@ msgstr ""
 msgid ""
 "We're sorry, the highlighted title(s) listed above cannot be processed at "
 "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
-"customer-support-phone></nxg-customer-support-phone></span>"
+"dealer-customer-support-phone></nxg-dealer-customer-support-phone></span>"
 msgstr ""
-"Lo sentimos, el (los) título(s) resaltado(s) en la lista de arriba no "
-"puede(n) procesarse en este momento. Por favor, llame a Servicio a Clientes "
-"a: <span class=\"highlight\"><nxg-customer-support-phone></nxg-customer-"
-"support-phone></span>."
 
 #: app/scripts/controllers/titleReleases.js
 msgid ""
@@ -3430,10 +3444,6 @@ msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 msgid "none"
 msgstr "ninguna"
 
-#: app/views/modals/scheduleCheckout.html
-msgid "or"
-msgstr "o"
-
 #: app/views/vehicledetails.html
 msgid ""
 "{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(of "
@@ -3502,6 +3512,31 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "Pay Now"
+#~ msgstr "Pague ahora"
+
+#~ msgid ""
+#~ "This extension request cannot be completed online. Please <a nxg-chat-"
+#~ "with-us=\"\">chat with us</a> or contact customer service for further "
+#~ "assistance."
+#~ msgstr ""
+#~ "Esta solicitud de ampliación no puede llenarse en línea. Por favor, <a "
+#~ "nxg-chat-with-us=\"\">chatee con nosotros</a> o póngase en contacto con "
+#~ "el servicio a clientes para recibir ayuda."
+
+#~ msgid ""
+#~ "We're sorry, the highlighted title(s) listed above cannot be processed at "
+#~ "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
+#~ "customer-support-phone></nxg-customer-support-phone></span>"
+#~ msgstr ""
+#~ "Lo sentimos, el (los) título(s) resaltado(s) en la lista de arriba no "
+#~ "puede(n) procesarse en este momento. Por favor, llame a Servicio a "
+#~ "Clientes a: <span class=\"highlight\"><nxg-customer-support-phone></nxg-"
+#~ "customer-support-phone></span>."
+
+#~ msgid "or"
+#~ msgstr "o"
 
 #~ msgid ""
 #~ "'My Top Auctions' is a list of auctions and dealers that you have "
@@ -4296,9 +4331,6 @@ msgstr ""
 
 #~ msgid "History"
 #~ msgstr "Historial"
-
-#~ msgid "I Have the Title"
-#~ msgstr "Tengo este título"
 
 #~ msgid "Identify Confirmation for \"{{ userId }}\""
 #~ msgstr "Identificar confirmación de \"{{ userId }}\""

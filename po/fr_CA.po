@@ -232,7 +232,13 @@ msgstr "Adresse"
 msgid "All"
 msgstr "Tous"
 
-#: app/views/valuelookup.html
+#: app/views/analytics.html
+msgid "All values are displayed in Canadian Dollars unless specified."
+msgstr ""
+"À moins d’indication contraire, tous les montants sont affichés en dollars "
+"canadiens."
+
+#: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "All values are displayed in US Dollars."
 msgstr "Tous les montants sont affichés en dollars américains."
 
@@ -1134,6 +1140,10 @@ msgstr "Masquer les détails de paiement"
 msgid "Historical Reports"
 msgstr "Rapports d'historique"
 
+#: app/views/auction.sellerfloorplan.html
+msgid "I Have the Title"
+msgstr "Je suis le tenant du titre"
+
 #: app/views/login.html
 msgid ""
 "If you are experiencing an issue logging in, click \"Forgot your username or "
@@ -1303,7 +1313,7 @@ msgstr "Gérez votre entreprise avec NextGear Capital on the go."
 msgid "Manual Lookup"
 msgstr "Recherche manuelle"
 
-#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
 #: app/views/valuelookup.html
 msgid "Mileage"
 msgstr "Kilométrage"
@@ -1480,6 +1490,10 @@ msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 msgid "OK"
 msgstr "OK"
 
+#: app/scripts/controllers/floorCar.js
+msgid "Odometer"
+msgstr ""
+
 #: app/unsupported.html
 msgid "Once upgraded, you will be able to log in."
 msgstr "Une fois la mise à jour effectuée, vous pourrez ouvrir une session."
@@ -1530,10 +1544,6 @@ msgstr ""
 "Les mots de passe doivent contenir un minimum de 8 caractères. Les mots de "
 "passe doivent contenir 3 des 4 types de caractères suivants : majuscules, "
 "minuscules, nombres ou caractères spéciaux."
-
-#: app/views/modals/scheduleCheckout.html
-msgid "Pay Now"
-msgstr "Payer maintenant"
 
 #: app/views/titlereleases.html
 msgid "Pay off this vehicle or return the title to remove from your limit."
@@ -1686,6 +1696,12 @@ msgstr "En attente/Impayé"
 msgid "Phone"
 msgstr "Téléphone"
 
+#: app/views/modals/paymentExtension.html
+msgid ""
+"Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service "
+"for further assistance."
+msgstr ""
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
 msgstr "Veuillez confirmer l'échec de recherche du NIV."
@@ -1727,6 +1743,10 @@ msgstr "Veuillez sélectionner une marge de crédit."
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below."
 msgstr "Veuillez confirmer les demandes d’émission de titres ci-dessous."
+
+#: app/views/modals/paymentExtension.html
+msgid "Please contact customer service for further assistance."
+msgstr ""
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
@@ -1942,12 +1962,15 @@ msgstr "Veuillez entrer au moins 3 caractères."
 msgid "Please enter one or more Stock Numbers"
 msgstr "Veuillez inscrire un numéro de stock ou plus"
 
+#: app/views/floorcar.html
+msgid "Please enter the"
+msgstr ""
+
 #: app/views/auction.bulkflooring.html
 msgid "Please enter the Lot Number."
 msgstr "Veuillez entrer le numéro de lot."
 
-#: app/views/auction.bulkflooring.html app/views/floorcar.html
-#: app/views/valuelookup.html
+#: app/views/auction.bulkflooring.html app/views/valuelookup.html
 msgid "Please enter the Mileage."
 msgstr "Veuillez entrer le kilométrage."
 
@@ -2699,13 +2722,8 @@ msgstr ""
 "Il y a trop de résultats à afficher; veuillez préciser votre recherche."
 
 #: app/views/modals/paymentExtension.html
-msgid ""
-"This extension request cannot be completed online. Please <a nxg-chat-with-"
-"us=\"\">chat with us</a> or contact customer service for further assistance."
+msgid "This extension request cannot be completed online."
 msgstr ""
-"Cette demande de prolongation ne peut être complétée en ligne. Veuillez <a "
-"nxg-chat-with-us=\"\">clavarder avec nous</a> ou contacter le service à la "
-"clientèle pour obtenir de l’assistance."
 
 #: app/views/dashboard.html
 msgid ""
@@ -3185,12 +3203,8 @@ msgstr ""
 msgid ""
 "We're sorry, the highlighted title(s) listed above cannot be processed at "
 "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
-"customer-support-phone></nxg-customer-support-phone></span>"
+"dealer-customer-support-phone></nxg-dealer-customer-support-phone></span>"
 msgstr ""
-"Nous sommes désolés, les titres sélectionnés ne peuvent être traités pour le "
-"moment. Veuillez contacter le service à la clientèle au : <span class="
-"\"highlight\"><nxg-customer-support-phone></nxg-customer-support-phone></"
-"span>"
 
 #: app/scripts/controllers/titleReleases.js
 msgid ""
@@ -3431,10 +3445,6 @@ msgstr "pour {{ item.ScheduledPaymentDate | moment }}"
 msgid "none"
 msgstr "aucun"
 
-#: app/views/modals/scheduleCheckout.html
-msgid "or"
-msgstr "ou"
-
 #: app/views/vehicledetails.html
 msgid ""
 "{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(of "
@@ -3504,6 +3514,31 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Pay Now"
+#~ msgstr "Payer maintenant"
+
+#~ msgid ""
+#~ "This extension request cannot be completed online. Please <a nxg-chat-"
+#~ "with-us=\"\">chat with us</a> or contact customer service for further "
+#~ "assistance."
+#~ msgstr ""
+#~ "Cette demande de prolongation ne peut être complétée en ligne. Veuillez "
+#~ "<a nxg-chat-with-us=\"\">clavarder avec nous</a> ou contacter le service "
+#~ "à la clientèle pour obtenir de l’assistance."
+
+#~ msgid ""
+#~ "We're sorry, the highlighted title(s) listed above cannot be processed at "
+#~ "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
+#~ "customer-support-phone></nxg-customer-support-phone></span>"
+#~ msgstr ""
+#~ "Nous sommes désolés, les titres sélectionnés ne peuvent être traités pour "
+#~ "le moment. Veuillez contacter le service à la clientèle au : <span class="
+#~ "\"highlight\"><nxg-customer-support-phone></nxg-customer-support-phone></"
+#~ "span>"
+
+#~ msgid "or"
+#~ msgstr "ou"
 
 #~ msgid ""
 #~ "'My Top Auctions' is a list of auctions and dealers that you have "
@@ -4308,9 +4343,6 @@ msgstr ""
 
 #~ msgid "History"
 #~ msgstr "Historique"
-
-#~ msgid "I Have the Title"
-#~ msgstr "Je suis le tenant du titre"
 
 #~ msgid "Identify Confirmation for \"{{ userId }}\""
 #~ msgstr "Confirmation d'identité pour \"{{ userId }}\""
