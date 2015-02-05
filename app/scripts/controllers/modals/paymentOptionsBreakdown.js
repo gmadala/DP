@@ -55,8 +55,13 @@ angular.module('nextgearWebApp')
       paymentOption: $scope.paymentObject.paymentOption
     };
 
+    // assign the initial value of the optionInterestOnly field.
+    $scope.optionInterestOnly = ($scope.selector.paymentOption === PaymentOptions.TYPE_INTEREST);
+
     $scope.$watch('selector.paymentOption', function(newVal) {
       $scope.paymentBreakdown = $scope.paymentObject.getBreakdown(newVal);
+      // change the optionInterestOnly value as the watch update the value.
+      $scope.optionInterestOnly = ($scope.selector.paymentOption === PaymentOptions.TYPE_INTEREST);
     });
 
     $scope.close = function() {
