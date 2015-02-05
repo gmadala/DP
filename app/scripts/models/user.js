@@ -78,7 +78,7 @@ angular.module('nextgearWebApp')
         var lang = language.getCurrentLanguageId();
         return api.request(
           'POST',
-          '/UserAccount/Authenticate', {}, {
+          '/UserAccount/v1_1/Authenticate', {}, {
             Authorization: 'CT ' + Base64.encode(username + ':' + password + ':' + lang)
           })
           .then(function(authResult) {

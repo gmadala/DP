@@ -195,8 +195,18 @@ describe('Model: User', function () {
       };
 
       httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+        Success: false,
+        Message: 'deprecated',
+        Data: {
+          Token: '12345',
+          ShowUserInitialization: true,
+          UserVoiceToken: '54321'
+        }
+      });
+
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
-        Message: null,
+        Message: '',
         Data: {
           Token: '12345',
           ShowUserInitialization: true,
@@ -220,7 +230,7 @@ describe('Model: User', function () {
 
     it('should make the expected POST request', function () {
       infoHttpHandler.respond(infoUnitedStates);
-      httpBackend.expectPOST('/UserAccount/Authenticate');
+      httpBackend.expectPOST('/UserAccount/v1_1/Authenticate');
       user.authenticate('test', 'testpw');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -348,7 +358,7 @@ describe('Model: User', function () {
 
     it('should check for the user - UnitedStates', function () {
       infoHttpHandler.respond(infoUnitedStates);
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond(function () {
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond(function () {
         return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
       });
       user.authenticate('user', 'pass');
@@ -358,7 +368,7 @@ describe('Model: User', function () {
 
     it('should check for the user - Canadian', function () {
       infoHttpHandler.respond(infoCanada);
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond(function () {
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond(function () {
         return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
       });
       user.authenticate('user', 'pass');
@@ -536,7 +546,7 @@ describe('Model: User', function () {
     var userInfo = {};
 
     beforeEach(function () {
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
         Message: null,
         Data: {
@@ -637,7 +647,7 @@ describe('Model: User', function () {
     var userInfo = {};
 
     beforeEach(function () {
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
         Message: null,
         Data: {
