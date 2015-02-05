@@ -291,8 +291,8 @@ msgid "Apply these Funds to Payment?"
 msgstr "Allouer ces fonds au paiement?"
 
 #: app/scripts/controllers/floorplan.js app/scripts/controllers/reports.js
-#: app/views/analytics.html app/views/auction.dashboard.html
-#: app/views/dashboard.html
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
+#: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Approved"
 msgstr "Approuvé"
 
@@ -860,10 +860,6 @@ msgstr "Activé"
 msgid "End Date"
 msgstr "Date d’expiration"
 
-#: app/scripts/directives/navBar/navBar.html
-msgid "English"
-msgstr "Anglais"
-
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr "Inscription améliorée activée?"
@@ -908,17 +904,13 @@ msgstr "Erreur"
 msgid "Error retrieving schedule information"
 msgstr "Erreur de récupération du tableau d'information"
 
-#: app/scripts/directives/navBar/navBar.html
-msgid "Espa&ntilde;ol"
-msgstr "Espagnol"
-
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Excellent"
 msgstr "Excellent"
 
 #: app/views/receipts.html
 msgid "Export Receipt(s)"
-msgstr "Exportation des reçus"
+msgstr "Exportation les reçus"
 
 #: app/views/receipts.html
 msgid "Export Receipts"
@@ -1100,10 +1092,6 @@ msgstr "Nom d'utilisateur oublié?"
 msgid "Forgot your username or password?"
 msgstr "Nom d'utilisateur ou mot de passe oublié?"
 
-#: app/scripts/directives/navBar/navBar.html
-msgid "Fran&ccedil;ais"
-msgstr "Français"
-
 #: app/views/checkout.html
 msgid "Future"
 msgstr "Contrat à terme"
@@ -1147,13 +1135,10 @@ msgstr "Je suis le tenant du titre"
 #: app/views/login.html
 msgid ""
 "If you are experiencing an issue logging in, click \"Forgot your username or "
-"password?\" below, or contact <a href=\"mailto:dealertickets@nextgearcapital."
-"com\" target=\"_blank\">dealertickets@nextgearcapital.com</a>."
+"password?\" below, or contact:"
 msgstr ""
 "Si vous éprouvez un problème lors de l’ouverture de session, cliquez ci-"
-"dessous sur « Nom d’utilisateur ou mot de passe oublié? » ou contactez <a "
-"href=\"mailto:dealertickets@nextgearcapital.com\" target=\"_blank"
-"\">dealertickets@nextgearcapital.com</a>."
+"dessous sur « Nom d’utilisateur ou mot de passe oublié? » ou contactez:"
 
 #: app/views/auction.dealersearch.html
 msgid ""
@@ -1371,11 +1356,11 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "NextGear Book"
-msgstr "La valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book &amp; MMR"
-msgstr "MMR et la valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear et MMR"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
@@ -1383,7 +1368,7 @@ msgstr "Valeurs comptable pour NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book or MMR"
-msgstr "MMR ou la valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear ou MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -1617,10 +1602,10 @@ msgstr "Relevé des paiements"
 
 #. Payment This [Month, Year]
 #: app/views/dashboard.html
-msgid "Payment This {{ viewMode | capitalize }}"
-msgid_plural "Payments This {{ viewMode | capitalize }}"
-msgstr[0] "Paiement ce {{ viewMode | capitalize }}"
-msgstr[1] "Paiements ce {{ viewMode | capitalize }}"
+msgid "Payment This {{ viewModeLabel | capitalize }}"
+msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
+msgstr[0] "Paiement ce {{ viewModeLabel | capitalize }}"
+msgstr[1] "Paiements ce {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -1679,7 +1664,8 @@ msgstr ""
 "Le montant du paiement doit se situer entre 0,01 $ et {{ maxAdditional | "
 "currency }}"
 
-#: app/scripts/controllers/floorplan.js app/views/analytics.html
+#: app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
 #: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Pending"
 msgstr "En attente"
@@ -3514,6 +3500,26 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "English"
+#~ msgstr "Anglais"
+
+#~ msgid "Espa&ntilde;ol"
+#~ msgstr "Espagnol"
+
+#~ msgid "Fran&ccedil;ais"
+#~ msgstr "Français"
+
+#~ msgid ""
+#~ "If you are experiencing an issue logging in, click \"Forgot your username "
+#~ "or password?\" below, or contact <a href=\"mailto:"
+#~ "dealertickets@nextgearcapital.com\" target=\"_blank"
+#~ "\">dealertickets@nextgearcapital.com</a>."
+#~ msgstr ""
+#~ "Si vous éprouvez un problème lors de l’ouverture de session, cliquez ci-"
+#~ "dessous sur « Nom d’utilisateur ou mot de passe oublié? » ou contactez <a "
+#~ "href=\"mailto:dealertickets@nextgearcapital.com\" target=\"_blank"
+#~ "\">dealertickets@nextgearcapital.com</a>."
 
 #~ msgid "Pay Now"
 #~ msgstr "Payer maintenant"
