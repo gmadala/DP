@@ -252,6 +252,16 @@ body.lang_fr_CA {
     }
   }
 
+  #ValueLookupPage {
+    .lookup-options {
+      .well-title {
+        height: 30px;
+      }
+    }
+    h4.well-title {font-size:9px;}
+
+  }
+
   /* Auction Nav */
   .app-header.auctions {
     .nav-bkgd {
