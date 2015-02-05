@@ -9,7 +9,8 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore) {
+  .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore,
+                                      language) {
     var dealerLinks = {
       primary: [
         { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK },
@@ -82,8 +83,8 @@ angular.module('nextgearWebApp')
     };
 
     $scope.updateLanguage = function (lang) {
-      // Set cookie for future use
-      $cookieStore.put('lang', lang);
+
+      language.setCurrentLanguage(lang);
 
       // Force Refresh
       //   We are forced to refresh due to some two-way binding bugs
