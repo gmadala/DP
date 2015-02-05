@@ -112,6 +112,11 @@ angular.module('nextgearWebApp')
           scope.switchLang = function (lang) {
             gettextCatalog.setCurrentLanguage(lang);
             scope.currentLanguage = gettextCatalog.currentLanguage;
+            angular.element('body').removeClass('lang_en');
+            angular.element('body').removeClass('lang_enDebug');
+            angular.element('body').removeClass('lang_es');
+            angular.element('body').removeClass('lang_fr_CA');
+            angular.element('body').addClass('lang_' + lang);
           };
 
         }
