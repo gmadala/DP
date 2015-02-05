@@ -197,9 +197,10 @@ body.lang_es {
   #ValueLookupPage {
     .lookup-options {
       .well-title {
-        height: 60px;
+        height: 30px;
       }
     }
+    h4.well-title {font-size:12px;}
   }
 
   /* Modals */
