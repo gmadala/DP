@@ -910,7 +910,7 @@ msgstr "Excellent"
 
 #: app/views/receipts.html
 msgid "Export Receipt(s)"
-msgstr "Exportation des reçus"
+msgstr "Exportation les reçus"
 
 #: app/views/receipts.html
 msgid "Export Receipts"
@@ -1356,11 +1356,11 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "NextGear Book"
-msgstr "La valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book &amp; MMR"
-msgstr "MMR et la valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear et MMR"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
@@ -1368,7 +1368,7 @@ msgstr "Valeurs comptable pour NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book or MMR"
-msgstr "MMR ou la valeur comptable de NextGear Capital"
+msgstr "La valeur comptable de NextGear ou MMR"
 
 #: app/views/analytics.html
 msgid ""
