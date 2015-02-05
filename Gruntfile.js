@@ -434,7 +434,8 @@ module.exports = function(grunt) {
     'clean:server',
     'processhtml:server',
     'compass:server',
-    'preprocess:dev'
+    'preprocess:dev',
+    'nggettext_compile'
   ]);
 
   grunt.registerTask('server', [
@@ -520,6 +521,7 @@ module.exports = function(grunt) {
     'gitinfo',
     'env',
     'clean:dist',
+    'nggettext_compile',
     'useminPrepare',
     'compass:dist',
     'concat',

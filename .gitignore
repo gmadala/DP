@@ -17,3 +17,4 @@ npm-debug.log
 *.processed.*
 *.mo
 *.pot
+app/scripts/translations.js
