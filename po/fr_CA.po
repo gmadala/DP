@@ -1081,11 +1081,11 @@ msgid "Forgot Your Password?"
 msgstr "Mot de passe oublié?"
 
 #: app/views/login.recover.html
-msgid "Forgot Your User Name or Password?"
+msgid "Forgot Your Username or Password?"
 msgstr "Nom d'utilisateur ou mot de passe oublié?"
 
 #: app/views/login.recover.html
-msgid "Forgot Your User Name?"
+msgid "Forgot Your Username?"
 msgstr "Nom d'utilisateur oublié?"
 
 #: app/views/login.html
