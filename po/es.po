@@ -294,8 +294,8 @@ msgid "Apply these Funds to Payment?"
 msgstr "¿Aplicar estos fondos al pago?"
 
 #: app/scripts/controllers/floorplan.js app/scripts/controllers/reports.js
-#: app/views/analytics.html app/views/auction.dashboard.html
-#: app/views/dashboard.html
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
+#: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Approved"
 msgstr "Aprobado"
 
@@ -531,7 +531,7 @@ msgstr "Formulario de reclamación (Documento en Word)"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Clean"
-msgstr "Borrar"
+msgstr "Limpio"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Clear Search"
@@ -1358,19 +1358,19 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "NextGear Book"
-msgstr "Libro NextGear Capital"
+msgstr "Libro NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book &amp; MMR"
-msgstr "Libro NextGear Capital & MMR"
+msgstr "Libro NextGear & MMR"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
-msgstr "Valores en libros NextGear"
+msgstr "Valores Libro NextGear"
 
 #: app/views/valuelookup.html
 msgid "NextGear Book or MMR"
-msgstr "Libro o MMR NextGear Capital"
+msgstr "Libro NextGear o MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -1664,7 +1664,8 @@ msgstr ""
 msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
 msgstr "El importe del pago debe ser de $0.01 a {{ maxAdditional | currency }}"
 
-#: app/scripts/controllers/floorplan.js app/views/analytics.html
+#: app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
 #: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Pending"
 msgstr "Pendiente"
@@ -3273,8 +3274,8 @@ msgid ""
 "You can combine up to 20 receipts into a single pdf by selecting each "
 "receipt and clicking 'Export Receipt(s)' below."
 msgstr ""
-"Usted puede combinar hasta 20 recibos en un solo pdf seleccionando cada "
-"recibo y haciendo clic en Exportar el (los) siguiente(s) recibo(s)."
+"Usted puede combinar hasta 20 recibos en un solo PDF seleccionando cada "
+"recibo y hacienda clic en Exportar recibo(s) a continuación."
 
 #: app/scripts/models/user.js
 msgid ""
