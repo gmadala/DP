@@ -294,8 +294,8 @@ msgid "Apply these Funds to Payment?"
 msgstr "¿Aplicar estos fondos al pago?"
 
 #: app/scripts/controllers/floorplan.js app/scripts/controllers/reports.js
-#: app/views/analytics.html app/views/auction.dashboard.html
-#: app/views/dashboard.html
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
+#: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Approved"
 msgstr "Aprobado"
 
@@ -531,7 +531,7 @@ msgstr "Formulario de reclamación (Documento en Word)"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Clean"
-msgstr "Borrar"
+msgstr "Limpio"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Clear Search"
@@ -1664,7 +1664,8 @@ msgstr ""
 msgid "Payout Amount must be $0.01 to {{ maxAdditional | currency }}"
 msgstr "El importe del pago debe ser de $0.01 a {{ maxAdditional | currency }}"
 
-#: app/scripts/controllers/floorplan.js app/views/analytics.html
+#: app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
 #: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Pending"
 msgstr "Pendiente"

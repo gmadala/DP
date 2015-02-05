@@ -291,8 +291,8 @@ msgid "Apply these Funds to Payment?"
 msgstr "Allouer ces fonds au paiement?"
 
 #: app/scripts/controllers/floorplan.js app/scripts/controllers/reports.js
-#: app/views/analytics.html app/views/auction.dashboard.html
-#: app/views/dashboard.html
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
+#: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Approved"
 msgstr "Approuvé"
 
@@ -1664,7 +1664,8 @@ msgstr ""
 "Le montant du paiement doit se situer entre 0,01 $ et {{ maxAdditional | "
 "currency }}"
 
-#: app/scripts/controllers/floorplan.js app/views/analytics.html
+#: app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/vehicledetails.js app/views/analytics.html
 #: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Pending"
 msgstr "En attente"
