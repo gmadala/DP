@@ -3421,8 +3421,8 @@ msgid ""
 "{{ flooringInfo.OriginalTermDaysFloored }} <span class=\"value-note\">(of "
 "{{ flooringInfo.OriginalTermPlanLength }} days)</span>"
 msgstr ""
-"{{ flooringInfo.ExtendedTermDaysFloored }} <span class=\"value-note\">(de "
-"{{ flooringInfo.ExtendedTermPlanLength }} jours)</span>"
+"{{ flooringInfo.OriginalTermDaysFloored }} <span class=\"value-note\">(de "
+"{{ flooringInfo.OriginalTermPlanLength }} jours)</span>"
 
 #: app/views/vehicledetails.html
 msgid ""
