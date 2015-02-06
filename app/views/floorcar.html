@@ -29,7 +29,7 @@
              ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
         />
       <label for="inputMileage" class="text-error" ng-show="validity.inputMileage.$error.required">
-        <span  translate>Please enter the</span>
+        <span translate translate-comment="This will be followed by 'odometer'">Please enter the</span>
         <span>{{ mileageOrOdometer}}.</span>
       </label>
       <label for="inputMileage"
