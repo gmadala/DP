@@ -19,7 +19,7 @@
                       ng-options="q.QuestionId as q.QuestionText for q in filteredQuestions(question.name)"
                       ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }"
                       required >
-                      <option value="">-- Select a Question --</option>
+                      <option value="" translate>-- Select a Question --</option>
                     </select>
                   </div>
                   <label for="{{question.name}}" class="text-error" ng-show="$parent.validity[question.name].$error.required" translate>Please select a security question to answer. </label>
