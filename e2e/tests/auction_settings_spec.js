@@ -14,7 +14,7 @@ auctionHelper.describe('WMT-81', function () {
 
     it('User profile contains username, password, security question, email and phone.', function () {
       var userSection = auctionSettings.userProfileSection;
-      expect(auctionSettings.elementWithCaption(userSection, 'User Name').isDisplayed()).toBeTruthy();
+      expect(auctionSettings.elementWithCaption(userSection, 'Username').isDisplayed()).toBeTruthy();
       expect(auctionSettings.elementWithCaption(userSection, 'Email').isDisplayed()).toBeTruthy();
       expect(auctionSettings.elementWithCaption(userSection, 'Phone').isDisplayed()).toBeTruthy();
 
