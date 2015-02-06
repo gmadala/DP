@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-10-17 09:26-0700\n"
+"PO-Revision-Date: 2015-02-06 11:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.8\n"
+"X-Generator: Poedit 1.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/views/analytics.html
@@ -621,7 +621,7 @@ msgstr ""
 msgid "Consigner Ticket Number"
 msgstr "Numéro du billet d'expéditeur"
 
-#: app/index.html app/unsupported.html
+#: app/index.html
 msgid "Contact Us"
 msgstr "Nous contacter"
 
@@ -821,20 +821,6 @@ msgstr "Modifier les paramètres"
 #: app/views/modals/feeDetails.html app/views/modals/paymentDetails.html
 msgid "Effective Date"
 msgstr "Date d'entrée en vigueur"
-
-#: app/unsupported.html
-msgid ""
-"Effective June 1st, in order to access the NextGear Capital Web Portal, you "
-"need to be using the latest version of Internet Explorer, Mozilla Firefox or "
-"Google Chrome. Your current browser is no longer compatible with the latest "
-"version of the NextGear Capital Web Portal. You may upgrade your browser now "
-"using one of the links below."
-msgstr ""
-"À partir du 1er Juin, vous devez utiliser la plus récente version d'Internet "
-"Explorer, de Mozilla Firefox ou de Google Chrome pour accéder au portail Web "
-"de NextGear Capital. Votre fureteur actuel n'est plus compatible avec la "
-"dernière version du portail Web de NextGear Capital. Vous pouvez maintenant "
-"mettre votre fureteur à jour en utilisant l'un des liens ci-dessous."
 
 #: app/scripts/controllers/titleReleases.js
 msgid "Eligible"
@@ -1081,11 +1067,11 @@ msgid "Forgot Your Password?"
 msgstr "Mot de passe oublié?"
 
 #: app/views/login.recover.html
-msgid "Forgot Your User Name or Password?"
+msgid "Forgot Your Username or Password?"
 msgstr "Nom d'utilisateur ou mot de passe oublié?"
 
 #: app/views/login.recover.html
-msgid "Forgot Your User Name?"
+msgid "Forgot Your Username?"
 msgstr "Nom d'utilisateur oublié?"
 
 #: app/views/login.html
@@ -1147,14 +1133,6 @@ msgid ""
 msgstr ""
 "Si vous avez le numéro de concessionnaire de NextGear Capital ou un numéro "
 "d'accès à l'encan, utilisez la recherche par numéro de concessionnaire."
-
-#: app/unsupported.html
-msgid ""
-"If you need assistance, please call NextGear Capital Support at: (888) "
-"969-3721."
-msgstr ""
-"Si vous avez besoin d'assistance, veuillez communiquer avec le service de "
-"soutien de NextGear Capital au (888) 969-3721."
 
 #: app/views/checkout.html
 msgid "In the Amount of"
@@ -1479,10 +1457,6 @@ msgstr "OK"
 msgid "Odometer"
 msgstr ""
 
-#: app/unsupported.html
-msgid "Once upgraded, you will be able to log in."
-msgstr "Une fois la mise à jour effectuée, vous pourrez ouvrir une session."
-
 #: app/views/vehicledetails.html
 msgid "Original Term"
 msgstr "Durée originale"
@@ -1687,6 +1661,8 @@ msgid ""
 "Please <a nxg-chat-with-us=\"\">chat with us</a> or contact customer service "
 "for further assistance."
 msgstr ""
+"Veuillez <a nxg-chat-with-us=\"\">clavarder avec nous</a> ou contacter le "
+"service à la clientèle pour obtenir de l’assistance."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
@@ -1733,6 +1709,7 @@ msgstr "Veuillez confirmer les demandes d’émission de titres ci-dessous."
 #: app/views/modals/paymentExtension.html
 msgid "Please contact customer service for further assistance."
 msgstr ""
+"Veuillez communiquer avec le service à la clientèle pour obtenir plus d’aide."
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
@@ -1779,11 +1756,11 @@ msgid "Please enter a Style."
 msgstr "Veuillez inscrire un style."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
-msgid "Please enter a User Name that is 40 characters or less."
+msgid "Please enter a Username that is 40 characters or less."
 msgstr "Veuillez entrer un nom d'usager de 40 caractères ou moins."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
-msgid "Please enter a User Name."
+msgid "Please enter a Username."
 msgstr "Veuillez entrer un nom d'usager."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
@@ -1948,9 +1925,10 @@ msgstr "Veuillez entrer au moins 3 caractères."
 msgid "Please enter one or more Stock Numbers"
 msgstr "Veuillez inscrire un numéro de stock ou plus"
 
+#. This will be followed by 'odometer'
 #: app/views/floorcar.html
 msgid "Please enter the"
-msgstr ""
+msgstr "Veuillez entrer le"
 
 #: app/views/auction.bulkflooring.html
 msgid "Please enter the Lot Number."
@@ -1993,14 +1971,14 @@ msgstr ""
 
 #: app/views/login.recover.html
 msgid ""
-"Please enter your user name. If you need assistance, please call\n"
+"Please enter your username. If you need assistance, please call\n"
 "            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
 "customer-support-phone>."
 msgstr ""
 "Veuillez entrer votre nom d'usager. Si vous avez besoin d'assistance, "
 "veuillez communiquer\n"
 " avec le soutien NextGear Capital au <nxg-customer-support-phone></nxg-"
-"customer-support-phone>.   "
+"customer-support-phone>."
 
 #: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
 msgid "Please look up a Buyer."
@@ -2131,7 +2109,7 @@ msgstr "Décaissements précédents"
 msgid "Principal"
 msgstr "Capital"
 
-#: app/index.html app/unsupported.html
+#: app/index.html
 msgid "Privacy Statement"
 msgstr "Déclaration de confidentialité"
 
@@ -2636,6 +2614,10 @@ msgstr "Soumettre des paiements"
 msgid "Submit Requests"
 msgstr "Soumettre des demandes"
 
+#: app/views/modals/paymentOptionsBreakdown.html
+msgid "Submitting an interest only payment will not advance the due date."
+msgstr ""
+
 #: app/views/auction.reports.html
 msgid "Subsidiary Manufacturer"
 msgstr "Filiale du fabricant"
@@ -2709,7 +2691,7 @@ msgstr ""
 
 #: app/views/modals/paymentExtension.html
 msgid "This extension request cannot be completed online."
-msgstr ""
+msgstr "Cette demande de prolongation ne peut être complétée en ligne."
 
 #: app/views/dashboard.html
 msgid ""
@@ -2998,16 +2980,12 @@ msgstr "Déprogrammer"
 msgid "Upcoming Curtailment / Payoff Quote (PDF)"
 msgstr "Réduction à venir / Devis de paiement (PDF)"
 
-#: app/views/auction.settings.html app/views/login.recover.html
-#: app/views/profileSettings.html
-msgid "User Name"
-msgstr "Nom d'usager"
-
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "User Profile"
 msgstr "Profil d'usager"
 
-#: app/views/login.html
+#: app/views/auction.settings.html app/views/login.html
+#: app/views/login.recover.html app/views/profileSettings.html
 msgid "Username"
 msgstr "Nom d'usager"
 
@@ -3191,6 +3169,10 @@ msgid ""
 "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
 "dealer-customer-support-phone></nxg-dealer-customer-support-phone></span>"
 msgstr ""
+"Nous sommes désolés, les titres sélectionnés ne peuvent être traités pour le "
+"moment. Veuillez contacter le service à la clientèle au : <span class="
+"\"highlight\"><nxg-dealer-customer-support-phone></nxg-dealer-customer-"
+"support-phone></span>"
 
 #: app/scripts/controllers/titleReleases.js
 msgid ""
@@ -3222,11 +3204,6 @@ msgstr "Trousse de bienvenue (PDF)"
 #: app/views/login.updateSecurity.html
 msgid "Welcome to NextGear!"
 msgstr "Bienvenue chez NextGear!"
-
-#: app/unsupported.html
-msgid "Welcome to the New NextGear Capital Web Portal"
-msgstr ""
-"Nous vous souhaitons la bienvenue au nouveau portail Web de NextGear Capital"
 
 #: app/scripts/controllers/floorCar.js
 msgid "What would you like to do?"
@@ -3500,6 +3477,46 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Forgot Your User Name or Password?"
+#~ msgstr "Nom d'utilisateur ou mot de passe oublié?"
+
+#~ msgid "Forgot Your User Name?"
+#~ msgstr "Nom d'utilisateur oublié?"
+
+#~ msgid ""
+#~ "If you need assistance, please call NextGear Capital Support at: (888) "
+#~ "969-3721."
+#~ msgstr ""
+#~ "Si vous avez besoin d'assistance, veuillez communiquer avec le service de "
+#~ "soutien de NextGear Capital au (888) 969-3721."
+
+#~ msgid "Once upgraded, you will be able to log in."
+#~ msgstr "Une fois la mise à jour effectuée, vous pourrez ouvrir une session."
+
+#~ msgid "Please enter a User Name that is 40 characters or less."
+#~ msgstr "Veuillez entrer un nom d'usager de 40 caractères ou moins."
+
+#~ msgid "Please enter a User Name."
+#~ msgstr "Veuillez entrer un nom d'usager."
+
+#~ msgid ""
+#~ "Please enter your user name. If you need assistance, please call\n"
+#~ "            NextGear Capital Support at: <nxg-customer-support-phone></"
+#~ "nxg-customer-support-phone>."
+#~ msgstr ""
+#~ "Veuillez entrer votre nom d'usager. Si vous avez besoin d'assistance, "
+#~ "veuillez communiquer\n"
+#~ " avec le soutien NextGear Capital au <nxg-customer-support-phone></nxg-"
+#~ "customer-support-phone>.   "
+
+#~ msgid "User Name"
+#~ msgstr "Nom d'usager"
+
+#~ msgid "Welcome to the New NextGear Capital Web Portal"
+#~ msgstr ""
+#~ "Nous vous souhaitons la bienvenue au nouveau portail Web de NextGear "
+#~ "Capital"
 
 #~ msgid "English"
 #~ msgstr "Anglais"
