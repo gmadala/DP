@@ -10,8 +10,8 @@
  * @return A string of the compiled template against the input object. On failure it returns the input value
  */
 angular.module('nextgearWebApp')
-  .filter('address', function ($interpolate) {
-    return function (input, selectedTemplate) {
+  .filter('address', function ($interpolate, gettextCatalog) {
+    return function (input, selectedTemplate, showInactive) {
       var templates = {
         oneLine: '{{Line1}} {{Line2 && Line2+\' \'}}/ {{City}} {{State}} {{Zip}}',
         oneLineSelect: '{{Line1}} / {{City}} {{State}}'
@@ -25,13 +25,20 @@ angular.module('nextgearWebApp')
         selectedTemplate = 'oneLine';
       }
 
+      var result;
       try {
         var parsedTemplate = $interpolate(templates[selectedTemplate]);
         // Compile the template in the context of the input object
-        return parsedTemplate(input);
+        result = parsedTemplate(input);
       } catch (e) {
-        return input;
+        result = input;
       }
+
+      if(showInactive && !input.IsActive) {
+        result = '(' + gettextCatalog.getString('INACTIVE') + ') ' + result;
+      }
+
+      return result;
 
     };
   });
