@@ -36,7 +36,7 @@ angular.module('nextgearWebApp')
               return result.List;
             } else {
               var error = messages.add(gettextCatalog.getString('You do not appear to have any security questions configured. ' +
-                  'Please contact NextGear for assistance.'),
+                'Please contact NextGear for assistance.'),
                 '/UserAccount/passwordResetQuestions/ returned no security questions');
               return $q.reject(error);
             }
@@ -53,6 +53,13 @@ angular.module('nextgearWebApp')
           );
         }
         return securityQuestions;
+      },
+
+      getShowReports: function(){
+        var langID = language.getCurrentLanguageId();
+        return api.request('POST', '/info/webreportsdisabled/' + langID). then(function(data){
+          return data.Data;
+        });
       },
 
       resetPassword: function(username, questionAnswers) {
