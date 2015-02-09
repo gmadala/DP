@@ -33,6 +33,7 @@ describe('Directive: navBar', function () {
       shouldShowTRP = false;
       dMock = {
         isDealer: function(){ return true; },
+        getShowReports: function(){return true;},
         getInfo: function(){
           return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
         },
@@ -42,8 +43,9 @@ describe('Directive: navBar', function () {
       };
       aMock = {
         isDealer: function(){ return false; },
+        getShowReports: function(){return true;},
         getInfo: function() {
-          return $q.when({ DisplayTitleReleaseProgram: false })
+          return $q.when({ DisplayTitleReleaseProgram: false });
         },
         isLoggedIn: function() {
           return true;
@@ -156,6 +158,32 @@ describe('Directive: navBar', function () {
             ret2 = scope.isActive('auction_reports');
         expect(ret).toBe(true);
         expect(ret2).toBe(false);
+      });
+    });
+    describe('showReports method', function () {
+      it('show Reports Tab for dealer-portal', function () {
+        var bScope = $rootScope.$new();
+        spyOn(dMock, 'getShowReports').andReturn(true);
+        $controller('NavBarCtrl', {
+          $scope: bScope,
+          $state: stateMock,
+          User: dMock
+        });
+        bScope.$apply();
+        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary[4].showTab).toBe(true);
+      });
+      it('hide Reports Tab for dealer-portal', function () {
+        var bScope = $rootScope.$new();
+        spyOn(dMock, 'getShowReports').andReturn(false);
+        $controller('NavBarCtrl', {
+          $scope: bScope,
+          $state: stateMock,
+          User: dMock
+        });
+        bScope.$apply();
+        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary[4].showTab).toBe(false);
       });
     });
   });

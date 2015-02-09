@@ -714,4 +714,5 @@ describe('Model: User', function () {
       expect(res1 === res2).toBe(true);
     });
   });
+
 });
