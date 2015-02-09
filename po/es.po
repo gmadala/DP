@@ -1971,7 +1971,7 @@ msgid ""
 "customer-support-phone>."
 msgstr ""
 "Por favor, ingrese su dirección de correo electrónico. Si necesita ayuda, "
-"call\n"
+"llame\n"
 " Apoyo de NextGear Capital a: <nxg-customer-support-phone></nxg-customer-"
 "support-phone>."
 
