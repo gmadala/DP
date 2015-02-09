@@ -78,7 +78,7 @@
           </th>
         </thead>
         <tbody>
-          <tr ng-repeat="business in data.results">
+          <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
             <td class="value">
               <a href ng-click="showCreditQuery(business)">
                 <span nxg-highlight="business.BusinessName" highlight="business.data.query"></span>
