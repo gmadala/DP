@@ -62,8 +62,8 @@
     <div class="container-fluid">
       <div class="header">
         <ul class="nav-primary">
-          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">
-            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}"  ng-show="link.showTab">
+            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink">{{link.name}}</a>
           </li>
         </ul>
       </div>
