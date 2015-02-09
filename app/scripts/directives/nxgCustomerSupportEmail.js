@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
       '    <span class="col-md-12">' +
       '      United States: <a href="mailto:CustomerService@nextgearcapital.com">CustomerService@nextgearcapital.com</a><br />' +
       '      Toronto: <a href="mailto:DealerServicesToronto@nextgearcapital.com">DealerServicesToronto@nextgearcapital.com</a><br />' +
-      '      Montreal: <a href="DealerServicesMontreal@nextgearcapital.com">DealerServicesMontreal@nextgearcapital.com</a><br />' +
+      '      Montreal: <a href="mailto:DealerServicesMontreal@nextgearcapital.com">DealerServicesMontreal@nextgearcapital.com</a><br />' +
       '    </span>' +
       '  </span>' +
       '</span>'
