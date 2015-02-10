@@ -53,8 +53,6 @@ label {
   &.pointer {
     cursor: pointer;
   }
-  // for translations, do not allow long labels to wrap.
-  white-space: nowrap;
 }
 
 input, select, textarea {
