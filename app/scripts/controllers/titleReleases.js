@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, customerSupportPhone, segmentio, gettextCatalog) {
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, dealerCustomerSupportPhone, segmentio, gettextCatalog) {
 
     segmentio.track(metric.VIEW_TITLE_RELEASE_PAGE);
     $scope.metric = metric; // make metric names available to templates
@@ -140,11 +140,14 @@ angular.module('nextgearWebApp')
     };
 
     $scope.titleReleaseUnavailable = function() {
-      var title = gettextCatalog.getString('Title Release Unavailable'),
+      return dealerCustomerSupportPhone.then(function (phoneNumber) {
+        var customerSupportPhone = phoneNumber.formatted;
+        var title = gettextCatalog.getString('Title Release Unavailable'),
           message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}.', { phoneNumber: customerSupportPhone }),
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
-      return $dialog.messageBox(title, message, buttons).open();
+        return $dialog.messageBox(title, message, buttons).open();
+      });
     };
 
     $scope.titleReleaseLimitReached = function() {
