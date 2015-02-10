@@ -12,6 +12,7 @@ describe('Controller: TitleReleasesCtrl', function () {
     },
     scope,
     initController,
+    mockCustomerSupportPhone,
     httpBackend,
     floorplanMock,
     dialogMock;
@@ -49,13 +50,19 @@ describe('Controller: TitleReleasesCtrl', function () {
       }
     };
 
+    mockCustomerSupportPhone = $q.when({
+      value: '1234567890',
+      formatted: '123-456-7890'
+    });
+
     httpBackend = $httpBackend;
 
     TitleReleasesCtrl = $controller('TitleReleasesCtrl', {
       $scope: scope,
       TitleReleases: titleReleasesMock,
       Floorplan: floorplanMock,
-      $dialog: dialogMock
+      $dialog: dialogMock,
+      dealerCustomerSupportPhone: mockCustomerSupportPhone
     });
 
     scope.$digest();
@@ -302,8 +309,9 @@ describe('Controller: TitleReleasesCtrl', function () {
 
   it('should display message box when release is unavailable', function() {
     spyOn(dialogMock, 'messageBox').andCallThrough();
-    scope.titleReleaseUnavailable();
-    expect(dialogMock.messageBox).toHaveBeenCalled();
+    scope.titleReleaseUnavailable().then(function () {
+      expect(dialogMock.messageBox).toHaveBeenCalled();
+    });
   });
 
   it('should display message box when release limit method is called', function() {
