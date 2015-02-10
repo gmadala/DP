@@ -1282,6 +1282,10 @@ msgstr "Búsqueda manual"
 msgid "Mileage"
 msgstr "Kilometraje"
 
+#: app/views/floorcar.html
+msgid "Odometer"
+msgstr "Cuentakilómetros"
+
 #: app/scripts/models/mmr.js
 msgid "Missing make"
 msgstr "Falta la marca"

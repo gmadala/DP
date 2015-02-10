@@ -665,6 +665,10 @@ msgstr "Crédits et paiements"
 msgid "Current Odometer"
 msgstr "Kilométrique actuel"
 
+#: app/views/floorcar.html
+msgid "Odometer"
+msgstr "Odomètre"
+
 #: app/views/auction.reports.html app/views/reports.html
 msgid "Current Reports"
 msgstr "Rapports actuels"
