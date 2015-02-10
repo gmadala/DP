@@ -141,7 +141,11 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseUnavailable = function() {
       return dealerCustomerSupportPhone.then(function (phoneNumber) {
-        var customerSupportPhone = phoneNumber.formatted;
+        var value = phoneNumber.value;
+        // format the phone number using the original formatting (xxx.yyy.zzzz).
+        // TODO: need to find out how to print the phone number on a new line.
+        var phoneElements = value.match(/([\d]{3})([\d]{3})([\d]{4})/);
+        var customerSupportPhone = phoneElements[1] + '.' + phoneElements[2] + '.' + phoneElements[3];
         var title = gettextCatalog.getString('Title Release Unavailable'),
           message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}.', { phoneNumber: customerSupportPhone }),
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
