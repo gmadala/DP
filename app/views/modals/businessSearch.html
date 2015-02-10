@@ -67,7 +67,7 @@
           </th>
         </thead>
         <tbody>
-          <tr ng-repeat="result in data.results">
+          <tr ng-repeat="result in data.results | orderBy:sortField.result:sortDescending.result">
             <td class="value">
               <a href="javascript:void(0)" ng-click="select(result)">
                 <span nxg-highlight="result.BusinessName" highlight="data.query"></span>

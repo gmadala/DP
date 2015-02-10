@@ -33,4 +33,50 @@ describe('Filter: address', function () {
       expect(address(data)).toBe('123 Main St / Rochester NY 14623');
     });
   });
+
+  describe('showInactive flag', function () {
+
+    var data = {
+      Line1: '123 Main St',
+      City: 'Rochester',
+      State: 'NY',
+      Zip: '14623',
+      IsActive: true
+    };
+    var INACTIVE = 'INACTIVE';
+
+    describe('with active address', function () {
+
+      beforeEach(function () {
+        data.IsActive = true;
+      });
+
+      it('should not add "INACTIVE" when flag is false', function () {
+
+        expect(address(data, null, false)).not.toContain(INACTIVE);
+      });
+
+      it('should not add "INACTIVE" when flag is true', function () {
+
+        expect(address(data, null, true)).not.toContain(INACTIVE);
+      });
+    });
+
+    describe('with inactive address', function () {
+
+      beforeEach(function () {
+        data.IsActive = false;
+      });
+
+      it('should not add "INACTIVE" when flag is false', function () {
+
+        expect(address(data, null, false)).not.toContain(INACTIVE);
+      });
+
+      it('should add "INACTIVE" when flag is true', function () {
+
+        expect(address(data, null, true)).toContain(INACTIVE);
+      });
+    });
+  });
 });
