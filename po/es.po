@@ -159,7 +159,7 @@ msgstr "CAPITAL ADICIONAL"
 
 #: app/views/account_management.html
 msgid "Access your GO Financial account directly from here."
-msgstr "Acceda directamente a su cuenta financiera GO aquí."
+msgstr "Acceda directamente a su cuenta GO Financial aquí."
 
 #: app/views/modals/paymentDetails.html
 msgid "Account"
