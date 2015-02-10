@@ -185,6 +185,30 @@ describe('Directive: navBar', function () {
         expect(bScope.user.navLinks().primary.length).toBe(6);
         expect(bScope.user.navLinks().primary[4].showTab).toBe(false);
       });
+      it('show Reports Tab for auction-portal', function () {
+        var bScope = $rootScope.$new();
+        spyOn(aMock, 'getShowReports').andReturn(true);
+        $controller('NavBarCtrl', {
+          $scope: bScope,
+          $state: stateMock,
+          User: aMock
+        });
+        bScope.$apply();
+        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary[4].showTab).toBe(true);
+      });
+      it('hide Reports Tab for auction-portal', function () {
+        var bScope = $rootScope.$new();
+        spyOn(aMock, 'getShowReports').andReturn(false);
+        $controller('NavBarCtrl', {
+          $scope: bScope,
+          $state: stateMock,
+          User: aMock
+        });
+        bScope.$apply();
+        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary[4].showTab).toBe(false);
+      });
     });
   });
 });
