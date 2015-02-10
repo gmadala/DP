@@ -424,17 +424,17 @@
   font-size: 1.0em;
 }
 
-  @media only screen and (max-width: 1200px) {
-    .btn-adapts {
-      padding: 0 5px 0 4px;
-      font-size: 0.9em;
-    }
+@media only screen and (max-width: 1200px) {
+  .btn-adapts {
+    padding: 0 5px 0 4px;
+    font-size: 0.79em;
   }
+}
 
 @media only screen and (min-width: 1201px) {
   .btn-adapts {
     padding: 0 5px 0 4px;
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
 }
 
