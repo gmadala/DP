@@ -662,8 +662,8 @@ msgid "Credits and Payments"
 msgstr "Crédits et paiements"
 
 #: app/views/vehicledetails.html
-msgid "Current Mileage"
-msgstr "Kilométrage actuel"
+msgid "Current Odometer"
+msgstr "Kilométrique actuel"
 
 #: app/views/auction.reports.html app/views/reports.html
 msgid "Current Reports"
