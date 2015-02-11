@@ -95,13 +95,14 @@ Note: our team pushes to the develop branch often, and upon deployment the tech 
      `grunt test`
      
      `# --no-verify`
+  - Another option is executing `grunt githooks` which will prepare pre-commit hook for you.
 
 #Grunt tasks
 -----------------------
 
 The project uses Grunt for task automation. The primary tasks to be run from the terminal are as follows:
 
-- #### server
+#### server
 
   This starts the application server. This is also the 'default' Grunt task.
 
@@ -119,7 +120,7 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   - apiDomain - domain; '' by default; Currently this is only used to get 
   DSCConfigurationService/VirtualOfficeNotificationService.svc/msg info so it is not needed. 
 
-- #### test:unit
+#### test:unit
 
   This runs the Karma unit tests.
 
@@ -128,7 +129,7 @@ The project uses Grunt for task automation. The primary tasks to be run from the
       grunt test:unit
 
 
-- #### test:e2e
+#### test:e2e
 
   This runs the Protractor end-to-end (e2e) tests.
 
@@ -142,7 +143,7 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   - params.password - The password to user for logging in
 
 
-- #### build
+#### build
 
   This builds the application to *dist/* performing tasks such as minification.
 
@@ -156,7 +157,7 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   'training', 'ruby_dal', or 'production'.
 
 
-- #### jshint
+#### jshint
 
   This runs jshint, checking all the JavaScript files for issues.
 
@@ -165,10 +166,10 @@ The project uses Grunt for task automation. The primary tasks to be run from the
       grunt jshint
 
 
-- #### test:e2e:users
+#### test:e2e:users
 
   This runs the Protractor end-to-end (e2e) tests multiple times for a set of users.
-  The user logins are currently described in the *Gruntfile.js*
+  The user login are currently described in the *Gruntfile.js*
 
   *Sample usage*
 
@@ -179,7 +180,7 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   Refer to **grunt build** for a description of this option.
 
 
-- #### ci-build
+#### ci-build
 
   This the top-level script run for continuous integration. It performs a build
   and runs all tests and a jshint task at the end.
