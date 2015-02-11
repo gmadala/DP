@@ -57,8 +57,8 @@ angular.module('nextgearWebApp')
 
       getShowReports: function(){
         var langID = language.getCurrentLanguageId();
-        return api.request('GET', '/info/webreportsdisabled/' + langID). then(function(data){
-          return data.Data;
+        return api.request('GET', '/info/webreportsdisabled/' + langID).then(function (data) {
+          return data;
         });
       },
 
