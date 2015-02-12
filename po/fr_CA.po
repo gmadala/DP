@@ -85,12 +85,6 @@ msgstr ""
 "class=\"count highlight dash-major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
 
-#: app/views/valuelookup.html
-msgid ""
-"<span translate=\"\">Values below will update based on successful VIN or "
-"Manual Lookup</span>."
-msgstr ""
-
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr "<strong>0</strong> jours"
@@ -675,10 +669,6 @@ msgstr "Crédits et paiements"
 #: app/views/vehicledetails.html
 msgid "Current Odometer"
 msgstr "Kilométrique actuel"
-
-#: app/views/vehicledetails.html
-msgid "Current Mileage"
-msgstr "Kilométrage actuel"
 
 #: app/views/auction.reports.html app/views/reports.html
 msgid "Current Reports"
@@ -1355,17 +1345,9 @@ msgstr ""
 msgid "NextGear Book"
 msgstr "La valeur comptable de NextGear"
 
-#: app/views/valuelookup.html
-msgid "NextGear Book &amp; MMR"
-msgstr "La valeur comptable de NextGear et MMR"
-
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valeurs comptable pour NextGear"
-
-#: app/views/valuelookup.html
-msgid "NextGear Book or MMR"
-msgstr "La valeur comptable de NextGear ou MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -3496,6 +3478,15 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Current Mileage"
+#~ msgstr "Kilométrage actuel"
+
+#~ msgid "NextGear Book &amp; MMR"
+#~ msgstr "La valeur comptable de NextGear et MMR"
+
+#~ msgid "NextGear Book or MMR"
+#~ msgstr "La valeur comptable de NextGear ou MMR"
 
 #~ msgid "Forgot Your User Name or Password?"
 #~ msgstr "Nom d'utilisateur ou mot de passe oublié?"

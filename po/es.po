@@ -85,12 +85,6 @@ msgstr ""
 "class=\"count highlight dash major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
 
-#: app/views/valuelookup.html
-msgid ""
-"<span translate=\"\">Values below will update based on successful VIN or "
-"Manual Lookup</span>."
-msgstr ""
-
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr "<strong>0</strong> Días"
@@ -673,10 +667,6 @@ msgstr ""
 #: app/views/analytics.html
 msgid "Credits and Payments"
 msgstr "Créditos y pagos"
-
-#: app/views/vehicledetails.html
-msgid "Current Mileage"
-msgstr "Kilometraje actual"
 
 #: app/views/vehicledetails.html
 msgid "Current Odometer"
@@ -1356,17 +1346,9 @@ msgstr ""
 msgid "NextGear Book"
 msgstr "Libro NextGear"
 
-#: app/views/valuelookup.html
-msgid "NextGear Book &amp; MMR"
-msgstr "Libro NextGear & MMR"
-
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valores Libro NextGear"
-
-#: app/views/valuelookup.html
-msgid "NextGear Book or MMR"
-msgstr "Libro NextGear o MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -1476,7 +1458,7 @@ msgstr ""
 msgid "OK"
 msgstr "De acuerdo"
 
-#: app/scripts/controllers/floorCar.js
+#: app/scripts/controllers/floorCar.js app/views/floorcar.html
 msgid "Odometer"
 msgstr "Odómetro"
 
@@ -2443,9 +2425,9 @@ msgstr ""
 msgid "Self-Service Links"
 msgstr "Vínculos de auto servicio"
 
-#: app/scripts/controllers/floorplan.js app/views/floorcar.html
-#: app/views/floorplan.html app/views/modals/topAuctions.html
-#: app/views/vehicledetails.html
+#: app/scripts/controllers/floorplan.js app/scripts/models/floorplan.js
+#: app/views/floorcar.html app/views/floorplan.html
+#: app/views/modals/topAuctions.html app/views/vehicledetails.html
 msgid "Seller"
 msgstr "Vendedor"
 
@@ -3494,6 +3476,15 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "Current Mileage"
+#~ msgstr "Kilometraje actual"
+
+#~ msgid "NextGear Book &amp; MMR"
+#~ msgstr "Libro NextGear & MMR"
+
+#~ msgid "NextGear Book or MMR"
+#~ msgstr "Libro NextGear o MMR"
 
 #~ msgid "Forgot Your User Name or Password?"
 #~ msgstr "¿Olvidó su nombre de usuario o contraseña?"
