@@ -1,16 +1,17 @@
+# Karl <karl.friedrich@translatemedia.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-02-06 11:24-0500\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2015-02-11 11:42-0400\n"
+"Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
+"Language-Team: TranslateMedia New York\n"
 "Language: fr_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: app/views/analytics.html
 msgid "# Purchased"
@@ -83,12 +84,6 @@ msgstr ""
 "RemainingReleasesAvailable - titleQueue.contents.length\">0</span> sur <span "
 "class=\"count highlight dash-major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
-
-#: app/views/valuelookup.html
-msgid ""
-"<span translate=\"\">Values below will update based on successful VIN or "
-"Manual Lookup</span>."
-msgstr ""
 
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
@@ -674,10 +669,6 @@ msgstr "Crédits et paiements"
 #: app/views/vehicledetails.html
 msgid "Current Odometer"
 msgstr "Kilométrique actuel"
-
-#: app/views/floorcar.html
-msgid "Odometer"
-msgstr "Odomètre"
 
 #: app/views/auction.reports.html app/views/reports.html
 msgid "Current Reports"
@@ -1354,17 +1345,9 @@ msgstr ""
 msgid "NextGear Book"
 msgstr "La valeur comptable de NextGear"
 
-#: app/views/valuelookup.html
-msgid "NextGear Book &amp; MMR"
-msgstr "La valeur comptable de NextGear et MMR"
-
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valeurs comptable pour NextGear"
-
-#: app/views/valuelookup.html
-msgid "NextGear Book or MMR"
-msgstr "La valeur comptable de NextGear ou MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -1473,7 +1456,7 @@ msgstr "OK"
 
 #: app/scripts/controllers/floorCar.js app/views/floorcar.html
 msgid "Odometer"
-msgstr ""
+msgstr "Odomètre"
 
 #: app/views/vehicledetails.html
 msgid "Original Term"
@@ -2634,7 +2617,7 @@ msgstr "Soumettre des demandes"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Submitting an interest only payment will not advance the due date."
-msgstr ""
+msgstr "Le seul paiement de l’intérêt ne permettra pas de devancer l’échéance."
 
 #: app/views/auction.reports.html
 msgid "Subsidiary Manufacturer"
@@ -3495,6 +3478,15 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Current Mileage"
+#~ msgstr "Kilométrage actuel"
+
+#~ msgid "NextGear Book &amp; MMR"
+#~ msgstr "La valeur comptable de NextGear et MMR"
+
+#~ msgid "NextGear Book or MMR"
+#~ msgstr "La valeur comptable de NextGear ou MMR"
 
 #~ msgid "Forgot Your User Name or Password?"
 #~ msgstr "Nom d'utilisateur ou mot de passe oublié?"

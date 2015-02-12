@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-02-06 11:25-0500\n"
+"PO-Revision-Date: 2015-02-11 11:41-0400\n"
 "Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
 "Language-Team: TranslateMedia New York\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: app/views/analytics.html
 msgid "# Purchased"
@@ -84,12 +84,6 @@ msgstr ""
 "RemainingReleasesAvailable - titleQueue.contents.length\">0</span> de <span "
 "class=\"count highlight dash major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
-
-#: app/views/valuelookup.html
-msgid ""
-"<span translate=\"\">Values below will update based on successful VIN or "
-"Manual Lookup</span>."
-msgstr ""
 
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
@@ -1296,10 +1290,6 @@ msgstr "Búsqueda manual"
 msgid "Mileage"
 msgstr "Kilometraje"
 
-#: app/views/floorcar.html
-msgid "Odometer"
-msgstr "Cuentakilómetros"
-
 #: app/scripts/models/mmr.js
 msgid "Missing make"
 msgstr "Falta la marca"
@@ -1356,17 +1346,9 @@ msgstr ""
 msgid "NextGear Book"
 msgstr "Libro NextGear"
 
-#: app/views/valuelookup.html
-msgid "NextGear Book &amp; MMR"
-msgstr "Libro NextGear & MMR"
-
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valores Libro NextGear"
-
-#: app/views/valuelookup.html
-msgid "NextGear Book or MMR"
-msgstr "Libro NextGear o MMR"
 
 #: app/views/analytics.html
 msgid ""
@@ -1478,7 +1460,7 @@ msgstr "De acuerdo"
 
 #: app/scripts/controllers/floorCar.js app/views/floorcar.html
 msgid "Odometer"
-msgstr ""
+msgstr "Odómetro"
 
 #: app/views/vehicledetails.html
 msgid "Original Term"
@@ -2641,7 +2623,7 @@ msgstr "Enviar solicitudes"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Submitting an interest only payment will not advance the due date."
-msgstr ""
+msgstr "Enviar un pago único de interés no adelantará la fecha de vencimiento."
 
 #: app/views/auction.reports.html
 msgid "Subsidiary Manufacturer"
@@ -3494,6 +3476,15 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "Current Mileage"
+#~ msgstr "Kilometraje actual"
+
+#~ msgid "NextGear Book &amp; MMR"
+#~ msgstr "Libro NextGear & MMR"
+
+#~ msgid "NextGear Book or MMR"
+#~ msgstr "Libro NextGear o MMR"
 
 #~ msgid "Forgot Your User Name or Password?"
 #~ msgstr "¿Olvidó su nombre de usuario o contraseña?"
