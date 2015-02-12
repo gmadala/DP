@@ -2,8 +2,7 @@
   <section class="span5 lookup-options">
     <div class="well">
       <h4 class="well-title">
-        <span translate>VIN Lookup</span>:
-        <span class="subtle" translate>NextGear Book &amp; MMR</span>
+        <span translate>VIN Lookup</span>
         <button class="btn-unstyle reset" ng-click="vinLookup.resetSearch()"><strong translate>Reset Values</strong></button>
       </h4>
       <div class="well-item">
@@ -61,15 +60,14 @@
     <h2 class="paragraph center" translate> - OR - </h2>
     <div class="well">
       <h4 class="well-title">
-        <span translate>Manual Lookup</span>:
-        <span class="subtle" translate>NextGear Book or MMR</span>
+        <span translate>Manual Lookup</span>
         <button class="btn-unstyle reset" ng-click="manualLookup.resetSearch()"><strong translate>Reset Values</strong></button>
       </h4>
       <div class="well-item">
         <div class="cta btn-toggle">
           <div class="btn-slider" ng-class="{ 'active-left':manualLookup.showBlackbook, 'active-right':!manualLookup.showBlackbook }"></div>
-          <button class="btn" ng-click="manualLookup.toggleForm(true)" translate>NextGear Book</button>
-          <button class="btn" ng-click="manualLookup.toggleForm(false)" translate>MMR Values</button>
+          <button class="btn btn-value-lookup-ngc" ng-click="manualLookup.toggleForm(true)" translate>NextGear Book</button>
+          <button class="btn btn-value-lookup-mmr" ng-click="manualLookup.toggleForm(false)" translate>MMR Values</button>
         </div>
         <form class="value-form" name="manualLookupForm" novalidate>
           <div class="form-block" ng-switch="manualLookup.showBlackbook">
@@ -257,7 +255,7 @@
         <span nxg-icon="icon-info"></span>
       </div>
       <p class="info-block-text">
-        <span ng-hide="results.blackbook.multiple || results.mmr.multiple || manualLookup.searchComplete || vinLookup.searchComplete" translate>
+        <span ng-hide="results.blackbook.multiple || results.mmr.multiple || manualLookup.searchComplete || vinLookup.searchComplete">
           <span translate>Values below will update based on successful VIN or Manual Lookup</span>.
         </span>
         <span ng-hide="isUnitedStates" translate>All values are displayed in US Dollars.</span>

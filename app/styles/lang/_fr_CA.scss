@@ -268,13 +268,13 @@ body.lang_fr_CA {
   }
 
   #ValueLookupPage {
-    .lookup-options {
-      .well-title {
-        height: 30px;
-      }
+    .btn-value-lookup-ngc {
+      padding: 7px 10px 7px 10px !important;
     }
-    h4.well-title {font-size:9px;}
 
+    .btn-value-lookup-mmr {
+      padding: 13px !important;
+    }
   }
 
   /* Auction Nav */
