@@ -1285,8 +1285,7 @@ msgstr "Gérez votre entreprise avec NextGear Capital on the go."
 msgid "Manual Lookup"
 msgstr "Recherche manuelle"
 
-#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
-#: app/views/valuelookup.html
+#: app/scripts/controllers/floorCar.js app/views/valuelookup.html
 msgid "Mileage"
 msgstr "Kilométrage"
 
@@ -1454,7 +1453,8 @@ msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 msgid "OK"
 msgstr "OK"
 
-#: app/scripts/controllers/floorCar.js app/views/floorcar.html
+#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
 msgid "Odometer"
 msgstr "Odomètre"
 
@@ -1967,8 +1967,8 @@ msgid ""
 msgstr ""
 "Veuillez inscrire votre adresse de courriel. Si vous avez besoin "
 "d’assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au <nxg-customer-support-phone></"
-"nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au : <nxg-customer-support-"
+"phone></nxg-customer-support-phone>"
 
 #: app/views/login.recover.html
 msgid ""
@@ -1977,9 +1977,9 @@ msgid ""
 "customer-support-phone>"
 msgstr ""
 "Veuillez entrer votre nom d'usager. Si vous avez besoin d'assistance, "
-"veuillez communiquer\n"
-" avec le soutien NextGear Capital au <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"veuillez contacter\n"
+" le service de soutien de NextGear Capital au : <nxg-customer-support-"
+"phone></nxg-customer-support-phone>"
 
 #: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
 msgid "Please look up a Buyer."
@@ -2879,7 +2879,7 @@ msgid ""
 "at:"
 msgstr ""
 "Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au"
+"contacter NextGear Capital au :"
 
 #: app/views/checkout.html app/views/dashboard.html
 msgid "Today"
@@ -3161,8 +3161,8 @@ msgid ""
 msgstr ""
 "Nous n’avons pu vérifier une ou plusieurs de vos réponses. Si vous avez "
 "besoin d’assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au: <nxg-customer-support-phone></"
-"nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au : <nxg-customer-support-"
+"phone></nxg-customer-support-phone>"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""

@@ -1285,8 +1285,7 @@ msgstr "Maneje su negocio con NextGear Capital en cualquier parte"
 msgid "Manual Lookup"
 msgstr "Búsqueda manual"
 
-#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
-#: app/views/valuelookup.html
+#: app/scripts/controllers/floorCar.js app/views/valuelookup.html
 msgid "Mileage"
 msgstr "Kilometraje"
 
@@ -1458,7 +1457,8 @@ msgstr ""
 msgid "OK"
 msgstr "De acuerdo"
 
-#: app/scripts/controllers/floorCar.js app/views/floorcar.html
+#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
 msgid "Odometer"
 msgstr "Odómetro"
 
