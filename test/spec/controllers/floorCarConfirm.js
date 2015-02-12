@@ -6,23 +6,37 @@ describe('Controller: FloorCarConfirmCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var FloorCarConfirmCtrl,
+    controller,
     scope,
+    catalog,
+    userMock,
     dialogMock,
     formDataMock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, gettextCatalog) {
+    controller = $controller;
+    catalog = gettextCatalog;
     scope = $rootScope.$new();
     dialogMock = {
       close: angular.noop
     };
     formDataMock = {};
+    userMock = {
+      isDealer: function () {
+        return true;
+      },
+      isUnitedStates: function () {
+        return true;
+      }
+    };
 
-    FloorCarConfirmCtrl = $controller('FloorCarConfirmCtrl', {
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
       $scope: scope,
       dialog: dialogMock,
       formData: formDataMock,
-      isDealer: true
+      User: userMock,
+      gettextCatalog: catalog
     });
   }));
 
@@ -44,5 +58,76 @@ describe('Controller: FloorCarConfirmCtrl', function () {
     spyOn(dialogMock, 'close');
     scope.close();
     expect(dialogMock.close).toHaveBeenCalledWith(false);
+  });
+
+  it('should return en document by default.', function () {
+    expect(scope.documentLink).not.toContain('CAE');
+    expect(scope.documentLink).not.toContain('CAF');
+    expect(scope.documentLink).not.toContain('ES');
+  });
+
+  it('should return es documents when language is es and country is US.', function () {
+    catalog.currentLanguage = 'es';
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock,
+      User: userMock,
+      gettextCatalog: catalog
+    });
+    expect(scope.documentLink).toContain('ES');
+  });
+
+  it('should return en documents when language is fr_CA and country is US.', function () {
+    catalog.currentLanguage = 'fr_CA';
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock,
+      User: userMock,
+      gettextCatalog: catalog
+    });
+    expect(scope.documentLink).not.toContain('CAE');
+    expect(scope.documentLink).not.toContain('CAF');
+    expect(scope.documentLink).not.toContain('ES');
+  });
+
+  it('should return en documents when language is es and country is Canada.', function () {
+    catalog.currentLanguage = 'es';
+    spyOn(userMock, 'isUnitedStates').andReturn(false);
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock,
+      User: userMock,
+      gettextCatalog: catalog
+    });
+    expect(scope.documentLink).toContain('CAE');
+  });
+
+  it('should return en documents when language is en and country is Canada.', function () {
+    catalog.currentLanguage = 'en';
+    spyOn(userMock, 'isUnitedStates').andReturn(false);
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock,
+      User: userMock,
+      gettextCatalog: catalog
+    });
+    expect(scope.documentLink).toContain('CAE');
+  });
+
+  it('should return fr documents when language is fr_CA and country is Canada.', function () {
+    catalog.currentLanguage = 'fr_CA';
+    spyOn(userMock, 'isUnitedStates').andReturn(false);
+    FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
+      $scope: scope,
+      dialog: dialogMock,
+      formData: formDataMock,
+      User: userMock,
+      gettextCatalog: catalog
+    });
+    expect(scope.documentLink).toContain('CAF');
   });
 });

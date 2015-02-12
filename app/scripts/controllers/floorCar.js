@@ -141,9 +141,6 @@ angular.module('nextgearWebApp')
         resolve: {
           formData: function () {
             return angular.copy($scope.data);
-          },
-          isDealer: function () {
-            return isDealer;
           }
         }
       };

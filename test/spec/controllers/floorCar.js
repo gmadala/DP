@@ -155,7 +155,6 @@ describe('Controller: FloorCarCtrl', function () {
         scope.form.$valid = true;
         scope.submit();
         expect(dialog.dialog.mostRecentCall.args[0].resolve.formData()).toEqual(scope.data);
-        expect(dialog.dialog.mostRecentCall.args[0].resolve.isDealer()).toEqual(userMock.isDealer());
       });
 
       it('should call reallySubmit() if user confirms', function() {
