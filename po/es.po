@@ -3468,7 +3468,7 @@ msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Pagos futuros"
 
 #: app/views/valuelookup.html
 msgid "{{ results.mileage | numeral:'0,0' }} miles"
-msgstr "{{ results.mileage | numeral:'0,0' }} kilómetros"
+msgstr "{{ results.mileage | numeral:'0,0' }} millas"
 
 #: app/views/receipts.html
 msgid ""
