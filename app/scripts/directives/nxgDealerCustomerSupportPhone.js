@@ -7,7 +7,7 @@ angular.module('nextgearWebApp')
       var phoneSplit = phone.match(/([\d]{3})([\d]{3})([\d]{4})/);
       return {
         value: phone,
-        formatted: '(' + phoneSplit[1] + ')&nbsp;' + phoneSplit[2] + '&#8209;' + phoneSplit[3]
+        formatted: phoneSplit[1] + '.' + phoneSplit[2] + '.' + phoneSplit[3]
       };
     });
   })
