@@ -1285,8 +1285,7 @@ msgstr "Gérez votre entreprise avec NextGear Capital on the go."
 msgid "Manual Lookup"
 msgstr "Recherche manuelle"
 
-#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
-#: app/views/valuelookup.html
+#: app/scripts/controllers/floorCar.js app/views/valuelookup.html
 msgid "Mileage"
 msgstr "Kilométrage"
 
@@ -1454,7 +1453,8 @@ msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 msgid "OK"
 msgstr "OK"
 
-#: app/scripts/controllers/floorCar.js app/views/floorcar.html
+#: app/scripts/controllers/floorCar.js app/views/auction.bulkflooring.html
+#: app/views/floorcar.html
 msgid "Odometer"
 msgstr "Odomètre"
 
@@ -1962,24 +1962,20 @@ msgstr "Veuillez entrer une valeur inférieure à 1 000 000 000 000,00 $."
 #: app/views/login.recover.html
 msgid ""
 "Please enter your email address. If you need assistance, please call\n"
-"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"            NextGear Capital Support at:"
 msgstr ""
 "Veuillez inscrire votre adresse de courriel. Si vous avez besoin "
 "d’assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au <nxg-customer-support-phone></"
-"nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au :"
 
 #: app/views/login.recover.html
 msgid ""
 "Please enter your username. If you need assistance, please call\n"
-"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"            NextGear Capital Support at:"
 msgstr ""
 "Veuillez entrer votre nom d'usager. Si vous avez besoin d'assistance, "
-"veuillez communiquer\n"
-" avec le soutien NextGear Capital au <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"veuillez contacter\n"
+" le service de soutien de NextGear Capital au :"
 
 #: app/scripts/directives/nxgBusinessField/nxgBusinessField.html
 msgid "Please look up a Buyer."
@@ -2879,7 +2875,7 @@ msgid ""
 "at:"
 msgstr ""
 "Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au"
+"contacter NextGear Capital au :"
 
 #: app/views/checkout.html app/views/dashboard.html
 msgid "Today"
@@ -3133,36 +3129,30 @@ msgstr ""
 msgid ""
 "We were unable to locate this email address. If you need assistance, please "
 "call\n"
-"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"            NextGear Capital Support at:"
 msgstr ""
 "Nous n’avons pu trouver cette adresse de courriel. Si vous avez besoin "
 "d’assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au : <nxg-customer-support-"
-"phone></nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au :"
 
 #: app/views/login.recover.html
 msgid ""
 "We were unable to locate this username. If you need assistance, please call\n"
-"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"            NextGear Capital Support at:"
 msgstr ""
 "Nous n'avons pu trouver ce nom d'utilisateur. Si vous avez besoin "
 "d'assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au : <nxg-customer-support-"
-"phone></nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au :"
 
 #: app/views/login.recover.html
 msgid ""
 "We were unable verify one or more of your answers. If you need assistance, "
 "please call\n"
-"            NextGear Capital Support at: <nxg-customer-support-phone></nxg-"
-"customer-support-phone>"
+"            NextGear Capital Support at:"
 msgstr ""
 "Nous n’avons pu vérifier une ou plusieurs de vos réponses. Si vous avez "
 "besoin d’assistance, veuillez contacter\n"
-" le service de soutien de NextGear Capital au: <nxg-customer-support-phone></"
-"nxg-customer-support-phone>"
+" le service de soutien de NextGear Capital au :"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
@@ -3437,13 +3427,11 @@ msgstr ""
 msgid ""
 "{{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. "
 "If you need assistance,\n"
-"            please call NextGear Capital Support at: <nxg-customer-support-"
-"phone></nxg-customer-support-phone>"
+"            please call NextGear Capital Support at:"
 msgstr ""
 "{{ forgotUserNameValidity.email.$viewValue }} n'est pas une adresse de "
 "courriel valide. Si vous avez besoin d'assistance,\n"
-" veuillez contacter le service de soutien de NextGear Capital au : <nxg-"
-"customer-support-phone></nxg-customer-support-phone>"
+" veuillez contacter le service de soutien de NextGear Capital au :"
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "{{ item.DaysFloored }} days"
