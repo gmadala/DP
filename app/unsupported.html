@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--[if lt IE 9]>
 <html class="lt-ie9"> <![endif]-->
 <html>
@@ -6,7 +6,9 @@
   <title>NextGear Capital</title>
   <link rel="stylesheet" href="styles/main.css">
   <script src="https://code.jquery.com/jquery-1.11.2.min.js" type="application/javascript"></script>
+  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" type="application/javascript"></script>
   <script type="application/javascript">
+
     $(document).ready(function () {
       $("#Spanish_Effective").hide();
       $("#French_Effective").hide();
@@ -77,10 +79,55 @@
     .language_button_container {
       display: table;
     }
+    .well-title, .well-title-secondary {
+      -moz-border-radius-topright: 5px;
+      border-top-right-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      border-top-left-radius: 5px;
+      position: relative;
+      background: #fff;
+      line-height: 1.8;
+      padding: 5px 18px;
+      border-bottom: 1px solid #bbbcbe;
+    }
+    .row-fluid, .list-table-row, .app-header, .header {
+      width: 100%;
+    }
+    .app-header.login {
+      margin: 0;
+    }
+    .unsupported .well-item {
+      padding: 20px 30px;
+    }
+    .unsupported .browsers li {
+      width: 50%;
+      float: left;
+      margin-bottom: 10px;
+    }
+    .unsupported p, .unsupported a {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    ul {
+      list-style-type: none;
+    }
+    a, a:link, a:visited {
+      color: #069;
+      cursor: pointer;
+    }
+
+    li {
+      line-height: 1.2;
+    }
 
     .language_btn_column {
       display: table-cell;
+    }
 
+    .nxg-main-container {
+      min-height: 100%;
+      overflow: hidden;
+      margin-bottom: -50px;
     }
 
     .language_btn_active {
@@ -151,7 +198,6 @@
     </div>
   </div>
 
-
   <div class="nxg-main-view container-public">
     <div class="row-fluid">
       <div class="well span6 offset3">
@@ -167,13 +213,13 @@
             no longer compatible with the latest version of the NextGear Capital Web Portal. You may upgrade your
             browser now using one of the links below.</p>
 
-          <p id="Spanish_Effective">A partir del 1 de junio, para acceder al portal de NextGear Capital será necesario utilizar la última
-            versión de Internet Explorer, Mozilla Firefox o Google Chrome. Su navegador actual ya no es compatible con la última versión
-            del portal de NextGear Capital.  Puede actualizar su navegador en este momento utilizando uno de los vínculos que hay abajo.</p>
+          <p id="Spanish_Effective">A partir del 1 de junio, para acceder al portal de NextGear Capital sera necesario utilizar la &Uacute;ltima
+            versi&oacute;n de Internet Explorer, Mozilla Firefox o Google Chrome. Su navegador actual ya no es compatible con la &Uacute;ltima versi&oacute;n
+            del portal de NextGear Capital.  Puede actualizar su navegador en este momento utilizando uno de los v&iacute;nculos que hay abajo.</p>
 
-          <p id="French_Effective">À partir du 1er juin, vous devrez utiliser la plus récente version d’Internet Explorer, de Mozilla Firefox ou de Google Chrome
-            pour accéder au portail Web de NextGear Capital. Votre fureteur actuel n’est plus compatible avec la dernière version du portail Web de NextGear Capital.
-            Vous pouvez dès maintenant mettre votre fureteur à jour en utilisant l’un des liens ci-dessous.</p>
+          <p id="French_Effective">&Agrave; partir du 1er juin, vous devrez utiliser la plus r&eacute;cente version d'Internet Explorer, de Mozilla Firefox ou de Google Chrome
+            pour acc&eacute;der au portail Web de NextGear Capital. Votre fureteur actuel n'est plus compatible avec la derni&egrave;re version du portail Web de NextGear Capital.
+            Vous pouvez d&egrave;s maintenant mettre votre fureteur &agrave;jour en utilisant l'un des liens ci-dessous.</p>
           <ul class="browsers">
             <li>
               <img src="img/browsers/BrowserIcons_Chrome1x.png" alt="Google Chrome" title="Google Chrome"/>
@@ -199,14 +245,14 @@
             <p>If you need assistance, please call NextGear Capital Support at: (888) 969-3721.</p>
           </div>
           <div id="Spanish_Upgraded">
-            <p class="heavy">Cuando haya actualizado podrá iniciar sesión.</p>
+            <p class="heavy">Cuando haya actualizado podr&aacute; iniciar sesi&oacute;n.</p>
 
-            <p>Si necesita ayuda, póngase en contacto con el Soporte Técnico de NextGear Capital al: (888) 969-3721.</p>
+            <p>Si necesita ayuda, p&oacute;ngase en contacto con el Soporte T&eacute;cnico de NextGear Capital al: (888) 969-3721.</p>
           </div>
           <div id="French_Upgraded">
-            <p class="heavy">Une fois la mise à jour effectuée, vous pourrez ouvrir une session.</p>
+            <p class="heavy">Une fois la mise &agrave; jour effectu&eacute;e, vous pourrez ouvrir une session.</p>
 
-            <p>Si vous avez besoin d’assistance, veuillez contacter le service de soutien de NextGear Capital au :<ul style="font-size:14px;"><li>United States 1-888-969.3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
+            <p>Si vous avez besoin d'assistance, veuillez contacter le service de soutien de NextGear Capital au :<ul style="font-size:14px;"><li>United States 1-888-969.3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
           </div>
         </div>
       </div>
