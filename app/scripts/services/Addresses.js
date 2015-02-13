@@ -35,9 +35,8 @@ angular.module('nextgearWebApp')
       },
       getDefaultTitleAddress: function() {
         // returns the default title release address (there is only ever 1 address with IsTitleReleaseAddress == true)
-        return this.getTitleAddresses().filter(function(item) {
-          return item.IsTitleReleaseAddress;
-        })[0];
+        // it can be a PO Box for legacy reasons even though getTitleAddresses can not return PO boxes
+        return this.getAddresses(null, null, true /*titleRelease*/, null)[0];
       },
       getFlooredBusinessAddresses: function() {
         // returns addresses that have been floored against
