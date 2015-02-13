@@ -47,6 +47,6 @@ describe('Directive: nxgDealerCustomerSupportPhone', function () {
     element = $compile(element)($rootScope);
     scope.$digest();
 
-    expect(element.text()).toEqual('(123) 456‑7890');
+    expect(element.text()).toEqual('123.456.7890');
   }));
 });

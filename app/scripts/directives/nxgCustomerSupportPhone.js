@@ -8,14 +8,20 @@ angular.module('nextgearWebApp')
     return {
       restrict: 'E',
       replace: true,
-      template: '<span class="container">' +
-      '  <span class="row">' +
-      '    <span class="col-md-12">' +
-      '      United States: 1-888-969-3721<br />' +
-      '      Canada - Toronto: 1-877-864-9291<br />' +
-      '      Canada - Montreal: 1-855-864-9291<br />' +
-      '    </span>' +
-      '  </span>' +
+      template:
+      '<span>'+
+      '  <span class="row-fluid">'+
+      '    <span class="span6">United States</span>'+
+      '    <span class="span6">1.888.969.3721</span>'+
+      '  </span>'+
+      '  <span class="row-fluid">'+
+      '    <span class="span6">Canada - Quebec</span>'+
+      '    <span class="span6">1.877.864.9291</span>'+
+      '  </span>'+
+      '  <span class="row-fluid">'+
+      '    <span class="span6">Canada - National</span>'+
+      '    <span class="span6">1.855.864.9291</span>'+
+      '  </span>'+
       '</span>'
     };
   });
