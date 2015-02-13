@@ -328,6 +328,10 @@ module.exports = function(grunt) {
       }
     },
     preprocess: {
+      index: {
+        src: '<%= yeoman.dist %>/index.html',
+        dest: '<%= yeoman.dist %>/index.html'
+      },
       dist : {
         src : [ '.tmp/concat/scripts/scripts.js' ],
         options: {
@@ -347,6 +351,10 @@ module.exports = function(grunt) {
             isDemo: grunt.option('noTrack') || false
           }
         }
+      },
+      debug: {
+        src: '<%= yeoman.app %>/scripts/directives/nxgDebugTitle.js',
+        dest: '<%= yeoman.app %>/scripts/directives/nxgDebugTitle.processed.js'
       }
     },
     autoprefixer: {
@@ -431,10 +439,13 @@ module.exports = function(grunt) {
   grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('dev-setup', [
+    'gitinfo',
+    'env:dev',
     'clean:server',
     'processhtml:server',
     'compass:server',
     'preprocess:dev',
+    'preprocess:debug',
     'nggettext_compile'
   ]);
 
@@ -527,6 +538,7 @@ module.exports = function(grunt) {
     'concat',
     'preprocess:dist',
     'copy',
+    'preprocess:index',
     'cdnify',
     'ngmin',
     'uglify',
