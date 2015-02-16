@@ -40,7 +40,7 @@ msgstr "-- Seleccione un banco --"
 
 #: app/views/login.updateSecurity.html
 msgid "-- Select a Question --"
-msgstr ""
+msgstr "-- Seleccione una pregunta --"
 
 #: app/views/floorcar.html
 msgid "1. Vehicle Information"
@@ -933,6 +933,14 @@ msgstr "Aceptable"
 msgid "Fee"
 msgstr "Cargo"
 
+#: app/scripts/controllers/modals/paymentDetails.js
+msgid "Fee - Floorplan/Curtailment"
+msgstr "Cargo - Plan de piso/Reducción"
+
+#: app/scripts/controllers/modals/paymentDetails.js
+msgid "Fee - Record Services"
+msgstr "Cargo - Servicios de registros"
+
 #: app/views/checkout.html app/views/modals/cancelFee.html
 msgid "Fee Amount"
 msgstr "Monto del cargo"
@@ -1173,6 +1181,7 @@ msgstr "Instrucciones para vendedores"
 msgid "Insufficient Funds"
 msgstr "Fondos insuficientes"
 
+#: app/scripts/controllers/modals/paymentDetails.js
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -2101,6 +2110,7 @@ msgstr "Fecha de publicación"
 msgid "Previous Disbursements"
 msgstr "Desembolsos anteriores"
 
+#: app/scripts/controllers/modals/paymentDetails.js
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -2204,6 +2214,10 @@ msgstr "Recibos recientes"
 #: app/views/dashboard.html
 msgid "Recently Floored Vehicles"
 msgstr "Vehículos financiados recientemente"
+
+#: app/scripts/controllers/modals/feeDetails.js
+msgid "Records Services Charge"
+msgstr "Cargo de los servicios de registro"
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Release Status"
@@ -3156,6 +3170,12 @@ msgstr ""
 "llame a\n"
 " Apoyo de NextGear Capital a:"
 
+#: app/scripts/controllers/login.js
+msgid ""
+"We're sorry, but you used a username or password that doesn't match our "
+"records."
+msgstr "Lo sentimos, pero utilizó un nombre de usuario o contraseña que no coincide con nuestros registros."
+
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
 "We're sorry, the highlighted title(s) listed above cannot be processed at "
@@ -3394,9 +3414,25 @@ msgstr "para {{ item.ScheduledDate | moment }}"
 msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "interest only"
+msgstr "sólo interes"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "invalid payment type"
+msgstr "tipo de pago inválido"
+
 #: app/views/vehicledetails.html
 msgid "none"
 msgstr "ninguna"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "payment"
+msgstr "pago"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "payoff"
+msgstr "pagado"
 
 #: app/views/vehicledetails.html
 msgid ""
