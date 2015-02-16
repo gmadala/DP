@@ -29,65 +29,204 @@ describe('Controller: DocumentsCtrl', function () {
   describe('sets correct URLs for other languages', function () {
 
     var langPrefix = {
-      fr_CA: 'CAF_',
-      en_CA: 'CAE_'
+      CAF: 'CAF%20',
+      CAE: 'CAE%20',
+      ES: 'ES'
     };
+
+    var mockUser;
 
     afterEach(function () {
       gettextCatalog.setCurrentLanguage(gettextCatalog.baseLanguage);
     });
 
-    describe('French (fr_CA)', function () {
+    describe('French Canada (CAF)', function () {
 
       beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return false;
+          }
+        };
         gettextCatalog.setCurrentLanguage('fr_CA');
 
         scope = $rootScope.$new();
         DocumentsCtrl = $controller('DocumentsCtrl', {
-          $scope: scope
+          $scope: scope,
+          User: mockUser
         });
       }));
 
       it('for documents', function () {
         angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.fr_CA) > -1).toBe(true);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
         });
       });
 
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
-          expect(document.url.indexOf(langPrefix.fr_CA) > -1).toBe(true);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
+        });
+      });
+    });
+
+    describe('English Canada (CAE)', function () {
+
+      beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return false;
+          }
+        };
+        gettextCatalog.setCurrentLanguage('en');
+
+        scope = $rootScope.$new();
+        DocumentsCtrl = $controller('DocumentsCtrl', {
+          $scope: scope,
+          User: mockUser
+        });
+      }));
+
+      it('for documents', function () {
+        angular.forEach(scope.documents, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
         });
       });
 
+      it('for collateral protection', function () {
+        angular.forEach(scope.collateralProtection, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
+        });
+      });
     });
 
-    // Skipped until implementation
+    describe('Spanish Canada', function () {
 
-//    describe('English Canada (en_CA)', function () {
-//
-//      beforeEach(inject(function ($controller, $rootScope) {
-//        gettextCatalog.setCurrentLanguage('en_CA');
-//
-//        scope = $rootScope.$new();
-//        DocumentsCtrl = $controller('DocumentsCtrl', {
-//          $scope: scope
-//        });
-//      }));
-//
-//      it('for documents', function () {
-//        angular.forEach(scope.documents, function (document) {
-//          expect(document.url.indexOf(langPrefix.en_CA) > -1).toBe(true);
-//        });
-//      });
-//
-//      it('for collateral protection', function () {
-//        angular.forEach(scope.collateralProtection, function (document) {
-//          expect(document.url.indexOf(langPrefix.en_CA) > -1).toBe(true);
-//        });
-//      });
-//
-//    });
+      beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return false;
+          }
+        };
+        gettextCatalog.setCurrentLanguage('es');
+
+        scope = $rootScope.$new();
+        DocumentsCtrl = $controller('DocumentsCtrl', {
+          $scope: scope,
+          User: mockUser
+        });
+      }));
+
+      it('for documents', function () {
+        angular.forEach(scope.documents, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
+        });
+      });
+
+      it('for collateral protection', function () {
+        angular.forEach(scope.collateralProtection, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
+        });
+      });
+    });
+
+    describe('French United States', function () {
+
+      beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return true;
+          }
+        };
+        gettextCatalog.setCurrentLanguage('fr_CA');
+
+        scope = $rootScope.$new();
+        DocumentsCtrl = $controller('DocumentsCtrl', {
+          $scope: scope,
+          User: mockUser
+        });
+      }));
+
+      it('for documents', function () {
+        angular.forEach(scope.documents, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
+        });
+      });
+
+      it('for collateral protection', function () {
+        angular.forEach(scope.collateralProtection, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
+        });
+      });
+    });
+
+    describe('English United States', function () {
+
+      beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return true;
+          }
+        };
+        gettextCatalog.setCurrentLanguage('en');
+
+        scope = $rootScope.$new();
+        DocumentsCtrl = $controller('DocumentsCtrl', {
+          $scope: scope,
+          User: mockUser
+        });
+      }));
+
+      it('for documents', function () {
+        angular.forEach(scope.documents, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
+        });
+      });
+
+      it('for collateral protection', function () {
+        angular.forEach(scope.collateralProtection, function (document) {
+          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
+        });
+      });
+    });
+
+    describe('Spanish United States', function () {
+
+      beforeEach(inject(function ($controller, $rootScope) {
+        mockUser = {
+          isUnitedStates: function () {
+            return true;
+          }
+        };
+        gettextCatalog.setCurrentLanguage('es');
+
+        scope = $rootScope.$new();
+        DocumentsCtrl = $controller('DocumentsCtrl', {
+          $scope: scope,
+          User: mockUser
+        });
+      }));
+
+      it('for documents', function () {
+        angular.forEach(scope.documents, function (document) {
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(true);
+        });
+      });
+
+      it('for collateral protection', function () {
+        angular.forEach(scope.collateralProtection, function (document) {
+          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(true);
+        });
+      });
+    });
 
   });
 });

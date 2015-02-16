@@ -12,13 +12,13 @@ angular.module('nextgearWebApp')
     var currentLanguage = gettextCatalog.currentLanguage;
     if (!User.isUnitedStates()) {
       if (currentLanguage === 'fr_CA') {
-        languagePrefix = 'CAF_';
+        languagePrefix = 'CAF%20';
       } else {
-        languagePrefix = 'CAE_';
+        languagePrefix = 'CAE%20';
       }
     } else {
       if (currentLanguage === 'es') {
-        languagePrefix = 'ES_';
+        languagePrefix = 'ES%20';
       }
     }
 
