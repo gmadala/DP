@@ -1,25 +1,31 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDocumentsCtrl', function($scope, metric, gettextCatalog) {
+  .controller('AuctionDocumentsCtrl', function($scope, metric, gettextCatalog, User) {
     $scope.metric = metric; // make metric names available to templates
 
     var languagePrefix = '';
-
-    if (gettextCatalog.currentLanguage === 'fr_CA') {
-      languagePrefix = 'CAF_';
-    }
-    else if (false /* TODO: User is English Canadian */) {
-      languagePrefix = 'CAE_';
+    var isUnitedStates = User.isUnitedStates();
+    var currentLanguage = gettextCatalog.currentLanguage;
+    if (!isUnitedStates) {
+      if (currentLanguage === 'fr_CA') {
+        languagePrefix = 'CAF%20';
+      } else {
+        languagePrefix = 'CAE%20';
+      }
+    } else {
+      if (currentLanguage === 'es') {
+        languagePrefix = 'ES%20';
+      }
     }
 
     $scope.documents = [
       {
-        title: gettextCatalog.getString('Welcome Packet (PDF)'),
+        title: gettextCatalog.getString('Welcome Packet'),
         url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf'
       },
       {
-        title: gettextCatalog.getString('Instructions for Sellers (PDF)'),
+        title: gettextCatalog.getString('Instructions for Sellers'),
         url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf'
       }
     ];
