@@ -931,6 +931,14 @@ msgstr "Adéquat"
 msgid "Fee"
 msgstr "Frais"
 
+#: app/scripts/controllers/modals/paymentDetails.js
+msgid "Fee - Floorplan/Curtailment"
+msgstr ""
+
+#: app/scripts/controllers/modals/paymentDetails.js
+msgid "Fee - Record Services"
+msgstr ""
+
 #: app/views/checkout.html app/views/modals/cancelFee.html
 msgid "Fee Amount"
 msgstr "Montant des frais"
@@ -1171,6 +1179,7 @@ msgstr "Instructions pour les vendeurs"
 msgid "Insufficient Funds"
 msgstr "Fonds insuffisants"
 
+#: app/scripts/controllers/modals/paymentDetails.js
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -2099,6 +2108,7 @@ msgstr "Date de publication"
 msgid "Previous Disbursements"
 msgstr "Décaissements précédents"
 
+#: app/scripts/controllers/modals/paymentDetails.js
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentExtension.html
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -2202,6 +2212,10 @@ msgstr "Reçus récents"
 #: app/views/dashboard.html
 msgid "Recently Floored Vehicles"
 msgstr "Véhicules récemment mis en nantissement"
+
+#: app/scripts/controllers/modals/feeDetails.js
+msgid "Records Services Charge"
+msgstr ""
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Release Status"
@@ -3154,6 +3168,12 @@ msgstr ""
 "besoin d’assistance, veuillez contacter\n"
 " le service de soutien de NextGear Capital au :"
 
+#: app/scripts/controllers/login.js
+msgid ""
+"We're sorry, but you used a username or password that doesn't match our "
+"records."
+msgstr ""
+
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
 "We're sorry, the highlighted title(s) listed above cannot be processed at "
@@ -3395,9 +3415,25 @@ msgstr "pour {{ item.ScheduledDate | moment }}"
 msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr "pour {{ item.ScheduledPaymentDate | moment }}"
 
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "interest only"
+msgstr ""
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "invalid payment type"
+msgstr ""
+
 #: app/views/vehicledetails.html
 msgid "none"
 msgstr "aucun"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "payment"
+msgstr "paiement"
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
+msgid "payoff"
+msgstr "remboursement"
 
 #: app/views/vehicledetails.html
 msgid ""
