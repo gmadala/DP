@@ -11,6 +11,9 @@ describe('Controller: LoginCtrl', function () {
     user,
     shouldPassAuthentication;
 
+  var LOGIN_ERROR_MESSAGE = 'We\'re sorry, but you used a username or password that doesn\'t match our records.';
+
+
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $injector) {
 
@@ -151,7 +154,7 @@ describe('Controller: LoginCtrl', function () {
       expect(user.authenticate).toHaveBeenCalledWith('thisUsername', 'thisPassword');
       expect(scope.saveAutocompleteUsername).not.toHaveBeenCalled();
       expect(scope.credentials.password).toBe('');
-      expect(scope.errorMsg).toBe('Error text');
+      expect(scope.errorMsg).toBe(LOGIN_ERROR_MESSAGE);
       expect(scope.showLoginError).toBe(true);
     });
 
