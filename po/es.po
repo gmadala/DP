@@ -530,8 +530,8 @@ msgid "City names must only have letters and spaces."
 msgstr "Los nombres de las ciudades solo deben contener letras y espacios."
 
 #: app/scripts/controllers/documents.js
-msgid "Claim Form (Word Doc)"
-msgstr "Formulario de reclamación (Documento en Word)"
+msgid "Claim Form"
+msgstr "Formulario de reclamación"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Clean"
@@ -718,8 +718,8 @@ msgid "Days to Turn"
 msgstr "Días de rotación"
 
 #: app/scripts/controllers/documents.js
-msgid "Dealer Funding Checklist (PDF)"
-msgstr "Lista de Verificación de Financiamiento a Proveedores (PDF)"
+msgid "Dealer Funding Checklist"
+msgstr "Lista de Verificación de Financiamiento a Proveedores"
 
 #: app/views/auction.dealersearch.html
 msgid "Dealer Name"
@@ -1106,8 +1106,8 @@ msgid "Good"
 msgstr "Bien"
 
 #: app/scripts/controllers/documents.js
-msgid "Guidelines (PDF)"
-msgstr "Lineamientos (PDF)"
+msgid "Guidelines"
+msgstr "Lineamientos"
 
 #: app/views/vehicledetails.html
 msgid "Hide Payment Activity"
@@ -1150,8 +1150,8 @@ msgid "In the Amount of"
 msgstr "Por la cantidad de"
 
 #: app/scripts/controllers/documents.js
-msgid "Information Sheet (PDF)"
-msgstr "Hoja de información (PDF)"
+msgid "Information Sheet"
+msgstr "Hoja de información"
 
 #: app/views/account_management.html
 msgid ""
@@ -1162,12 +1162,12 @@ msgstr ""
 "crédito."
 
 #: app/scripts/controllers/documents.js
-msgid "Instructions for Buyers (PDF)"
-msgstr "Instrucciones para compradores (PDF)"
+msgid "Instructions for Buyers"
+msgstr "Instrucciones para compradores"
 
 #: app/scripts/controllers/auction.documents.js
-msgid "Instructions for Sellers (PDF)"
-msgstr "Instrucciones para vendedores (PDF)"
+msgid "Instructions for Sellers"
+msgstr "Instrucciones para vendedores"
 
 #: app/views/receipts.html
 msgid "Insufficient Funds"
@@ -3186,13 +3186,13 @@ msgid "Welcome"
 msgstr "Bienvenido(a)"
 
 #: app/scripts/controllers/documents.js
-msgid "Welcome Letter (Word Doc)"
-msgstr "Carta de Bienvenida (Documento en Word)"
+msgid "Welcome Letter"
+msgstr "Carta de Bienvenida"
 
 #: app/scripts/controllers/auction.documents.js
 #: app/scripts/controllers/documents.js
-msgid "Welcome Packet (PDF)"
-msgstr "Paquete de Bienvenida (PDF)"
+msgid "Welcome Packet"
+msgstr "Paquete de Bienvenida"
 
 #: app/views/login.updateSecurity.html
 msgid "Welcome to NextGear!"
