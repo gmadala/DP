@@ -9,19 +9,19 @@ angular.module('nextgearWebApp')
       restrict: 'E',
       replace: true,
       template:
-      '<span>'+
-      '  <span class="row-fluid">'+
-      '    <span class="span4">United States</span>'+
-      '    <span class="span8">: 1.888.969.3721</span>'+
-      '  </span>'+
-      '  <span class="row-fluid">'+
-      '    <span class="span4">Canada - Quebec</span>'+
-      '    <span class="span8">: 1.877.864.9291</span>'+
-      '  </span>'+
-      '  <span class="row-fluid">'+
-      '    <span class="span4">Canada - National</span>'+
-      '    <span class="span8">: 1.855.864.9291</span>'+
-      '  </span>'+
-      '</span>'
+      '<table class="error-table">'+
+      '  <tr>'+
+      '    <td>United States</td>'+
+      '    <td>1.888.969.3721</td>'+
+      '  </tr>'+
+      '  <tr>'+
+      '    <td>Canada - Quebec</td>'+
+      '    <td>1.877.864.9291</td>'+
+      '  </tr>'+
+      '  <tr>'+
+      '    <td>Canada - National</td>'+
+      '    <td>1.855.864.9291</td>'+
+      '  </tr>'+
+      '</table>'
     };
   });
