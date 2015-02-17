@@ -55,11 +55,20 @@ angular.module('nextgearWebApp')
         return securityQuestions;
       },
 
-      getShowReports: function(){
+      // using this currently for showing Reports and showing Resources
+      getShowReportsAndResources: function () {
         var langID = language.getCurrentLanguageId();
-        return api.request('GET', '/info/webreportsdisabled/' + langID).then(function (data) {
-          return data;
-        });
+        if (langID === 1) {
+          // for English language don't even bother calling the endpoint
+          // since we always show for them
+          var deferred = $q.defer();
+          deferred.resolve(true);
+          return deferred.promise;
+        } else {
+          return api.request('GET', '/info/webreportsdisabled/' + langID).then(function (data) {
+            return data === false;
+          });
+        }
       },
 
       resetPassword: function(username, questionAnswers) {

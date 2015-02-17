@@ -5,14 +5,15 @@ describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend, api, $q, $rootScope;
+  var user, httpBackend, api, $q, $rootScope, language;
 
-  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_) {
+  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_, _language_) {
     user = User;
     api = _api_;
     httpBackend = $httpBackend;
     $q = _$q_;
     $rootScope = _$rootScope_;
+    language = _language_;
   }));
 
   describe('recoverUserName method', function () {
@@ -40,6 +41,53 @@ describe('Model: User', function () {
       httpBackend.flush();
       expect(success).toHaveBeenCalled();
       expect(error).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('showReportsAndResources method', function () {
+    var response;
+    var hideReportsSpanish = '/info/webreportsdisabled/3';
+
+    beforeEach(function () {
+      response = {
+        Success: true,
+        Message: null,
+        Data: true // hide
+      };
+
+      spyOn(api, 'request').andCallThrough();
+      expect(user.getShowReportsAndResources).toBeDefined();
+    });
+
+    afterEach(function () {
+      language.setCurrentLanguage('en');
+    });
+
+    it('should return true for English', function () {
+      user.getShowReportsAndResources().then(function(data){
+        expect(data).toBeTruthy();
+      });
+    });
+
+    it('should not call endpoint for English', function () {
+      user.getShowReportsAndResources();
+      expect(api.request).not.toHaveBeenCalled();
+    });
+
+    it('should call endpoint for non-English', function () {
+      language.setCurrentLanguage('es');
+      httpBackend.whenGET(hideReportsSpanish).respond(response);
+      user.getShowReportsAndResources();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return false for Spanish', function () {
+      language.setCurrentLanguage('es');
+      httpBackend.whenGET(hideReportsSpanish).respond(response);
+      user.getShowReportsAndResources().then(function(data){
+        expect(data).toBeFalsy();
+      });
+      expect(httpBackend.flush).not.toThrow();
     });
   });
 
