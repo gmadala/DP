@@ -95,6 +95,7 @@ Note: our team pushes to the develop branch often, and upon deployment the tech 
      `grunt test`
      
      `# --no-verify`
+     
   - Another option is executing `grunt githooks` which will prepare pre-commit hook for you.
 
 #Grunt tasks
