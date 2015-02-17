@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
   <title>NextGear Capital</title>
   <link rel="stylesheet" type="text/css" href="styles/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -12,6 +13,8 @@
       $("#well-title-fr").hide();
       $("#Spanish_Upgraded").hide();
       $("#French_Upgraded").hide();
+      $("#footer_sp").hide();
+      $("#footer_fr").hide();
 
       $("#es_btn").click(function () {
         $("#English_Effective").hide();
@@ -23,6 +26,9 @@
         $("#well-title-sp").show();
         $("#well-title-fr").hide();
         $("#well-title-en").hide();
+        $("#footer_en").hide();
+        $("#footer_sp").show();
+        $("#footer_fr").hide();
         $("#en_btn").removeClass("language_btn_column language_btn_active");
         $("#en_btn").addClass("language_btn_column language_btn_inactive language_btn_left");
         $("#es_btn").removeClass("language_btn_column language_btn_inactive");
@@ -41,6 +47,9 @@
         $("#well-title-sp").hide();
         $("#well-title-fr").show();
         $("#well-title-en").hide();
+        $("#footer_en").hide();
+        $("#footer_sp").hide();
+        $("#footer_fr").show();
         $("#en_btn").removeClass("language_btn_column language_btn_active");
         $("#en_btn").addClass("language_btn_column language_btn_inactive language_btn_left");
         $("#es_btn").removeClass("language_btn_column language_btn_active");
@@ -60,6 +69,9 @@
         $("#well-title-sp").hide();
         $("#well-title-fr").hide();
         $("#well-title-en").show();
+        $("#footer_en").show();
+        $("#footer_sp").hide();
+        $("#footer_fr").hide();
         $("#en_btn").removeClass("language_btn_column language_btn_inactive language_btn_left");
         $("#en_btn").addClass("language_btn_column language_btn_active");
         $("#es_btn").removeClass("language_btn_column language_btn_active");
@@ -70,6 +82,16 @@
     });
   </script>
   <style type="text/css">
+    .container-public {
+      padding-top: 30px;
+      border-top: 3px solid #069;
+      position: relative;
+      background-color: #39c;
+      position: fixed;
+      top: 0;
+      height: 100%;
+      z-index: -5;
+    }
     .language_button_container {
       display: table;
     }
@@ -123,7 +145,6 @@
       overflow: hidden;
       margin-bottom: -50px;
     }
-
     .language_btn_active {
       background: transparent;
       color: #1b769d;
@@ -137,7 +158,6 @@
       line-height: 1.2;
       border-radius: 5px;
     }
-
     .language_btn_inactive {
       background: #bbbbbb;
       padding: 6px 20px 6px 15px;
@@ -152,17 +172,14 @@
       border-top: 1px solid #1B769D !important;
       border-bottom: 1px solid #1B769D !important;
     }
-
     .language_btn_right {
       border-right-radius: 5px !important;
       border-right: 1px solid #1B769D !important;
     }
-
     .language_btn_left {
       border-left-radius: 5px !important;
       border-left: 1px solid #1B769D !important;
     }
-
   </style>
 </head>
 <body class="unsupported">
@@ -173,7 +190,6 @@
         <div class="span3">
           <div class="nxg-logo">
           </div>
-
         </div>
         <!--Language Selection Buttons-->
         <span class="icon-xx-large" nxg-icon="icon-globe"></span>
@@ -191,16 +207,12 @@
       </div>
     </div>
   </div>
-
   <div class="nxg-main-view container-public">
     <div class="row-fluid">
       <div class="well span6 offset3">
         <h2 id="well-title-en" class="well-title">Welcome to the New NextGear Capital Web Portal</h2>
-
         <h2 id="well-title-sp" class="well-title">Bienvenido(a) al nuevo portal de Internet de NextGear Capital</h2>
-
         <h2 id="well-title-fr" class="well-title" style="font-size:16px;">Nous vous souhaitons la bienvenue sur le nouveau portail Web de NextGear Capital</h2>
-
         <div class="well-item">
           <p id="English_Effective">Effective June 1st, in order to access the NextGear Capital Web Portal, you need to
             be using the latest version of Internet Explorer, Mozilla Firefox or Google Chrome. Your current browser is
@@ -236,33 +248,48 @@
           <div id="English_Upgraded">
             <p class="heavy">Once upgraded, you will be able to log in.</p>
 
-            <p>If you need assistance, please call NextGear Capital Support at: (888) 969-3721.</p>
+            <p>If you need assistance, please call NextGear Capital Support at: <ul style="font-size:14px;"><li>United States 1-888-969-3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
           </div>
           <div id="Spanish_Upgraded">
             <p class="heavy">Cuando haya actualizado podr&aacute; iniciar sesi&oacute;n.</p>
 
-            <p>Si necesita ayuda, p&oacute;ngase en contacto con el Soporte T&eacute;cnico de NextGear Capital al: (888) 969-3721.</p>
+            <p>Si necesita ayuda, p&oacute;ngase en contacto con el Soporte de NextGear Capital al: <ul style="font-size:14px;"><li>United States 1-888-969-3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
           </div>
           <div id="French_Upgraded">
             <p class="heavy">Une fois la mise &agrave; jour effectu&eacute;e, vous pourrez ouvrir une session.</p>
 
-            <p>Si vous avez besoin d'assistance, veuillez contacter le service de soutien de NextGear Capital au :<ul style="font-size:14px;"><li>United States 1-888-969.3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
+            <p>Si vous avez besoin d'assistance, veuillez contacter le service de soutien de NextGear Capital au: <ul style="font-size:14px;"><li>United States 1-888-969-3721</li><li>Canada - Toronto  1-877-864-9291</li><li>Canada - Montreal 1-855-864-9291</li></ul></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <div class="footer row-fluid">
+  <div id="footer_en">
   <ul class="horizontal-list">
     <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
     <li>888.969.3721</li>
-    <li><a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank"
-           nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}">Privacy Statement</a></li>
-    <li><a href="http://www.nextgearcapital.com/contact.php" target="_blank"
-           nxg-track="{{metric.CLICK_CONTACT_US_LINK}}">Contact Us</a></li>
+    <li><a href="http://www.nextgearcapital.com/privacy-policy" target="_blank">Privacy Statement</a></li>
+    <li><a href="http://www.nextgearcapital.com/contact" target="_blank">Contact Us</a></li>
   </ul>
+  </div>
+  <div id="footer_sp">
+    <ul class="horizontal-list">
+      <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
+      <li>888.969.3721</li>
+      <li><a href="http://www.nextgearcapital.com/privacy-policy" target="_blank">Declaraci&oacute;n de privacidad</a></li>
+      <li><a href="http://www.nextgearcapital.com/contact" target="_blank">P&oacute;ngase en contacto con nosotros</a></li>
+    </ul>
+  </div>
+  <div id="footer_fr">
+    <ul class="horizontal-list">
+      <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
+      <li>888.969.3721</li>
+      <li><a href="http://www.nextgearcapital.com/privacy-policy" target="_blank">D&eacute;claration de confidentialit&eacute;</a></li>
+      <li><a href="http://www.nextgearcapital.com/contact" target="_blank">Nous contacter</a></li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>
