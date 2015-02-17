@@ -73,7 +73,7 @@ exports.config = {
 
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
-  allScriptsTimeout: 200000,
+  allScriptsTimeout: 600000,
   onPrepare: function () {
     require('jasmine-reporters');
     jasmine.getEnv().addReporter(
@@ -93,6 +93,6 @@ exports.config = {
     isVerbose: true,
     showColors: true,
     includeStackTrace: true,
-    defaultTimeoutInterval: 30000
+    defaultTimeoutInterval: 60000
   }
 };
