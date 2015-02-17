@@ -21,8 +21,7 @@ angular.module('nextgearWebApp')
         ],
         secondary: [
           { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK},
-          { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup', metric: ''},
-          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK}
+          { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup', metric: ''}
         ]
       },
       auctionLinks = {
@@ -30,8 +29,7 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard', metric: ''},
           { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch', metric: ''},
           { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring', metric: ''},
-          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''},
-          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents', metric: metric.CLICK_AUCTION_RESOURCES_LINK}
+          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''}
         ]
       };
 
@@ -66,8 +64,8 @@ angular.module('nextgearWebApp')
           };
         });
 
-        User.getShowReports().then(function (data) {
-          if (!data) {
+        User.getShowReportsAndResources().then(function (data) {
+          if (data) {
             dealerLinks.primary.splice(4, 0, {
               name: gettextCatalog.getString('Reports'),
               href: '#/reports',
@@ -80,7 +78,24 @@ angular.module('nextgearWebApp')
               activeWhen: 'auction_reports',
               metric: metric.CLICK_AUCTION_REPORTS_LINK
             });
+
+            dealerLinks.secondary.splice(2, 0, {
+              name: gettextCatalog.getString('Resources'),
+              href: '#/documents',
+              activeWhen: 'documents',
+              metric: metric.CLICK_RESOURCES_LINK
+            });
+
+            auctionLinks.primary.splice(5, 0, {
+              name: gettextCatalog.getString('Resources'),
+              href: '#/act/documents',
+              activeWhen: 'auction_documents',
+              metric: metric.CLICK_AUCTION_RESOURCES_LINK
+            });
           }
+        }, function (error) {
+          // keep reports hidden by default and if there's any error
+          error.dismiss();
         });
       }
     });

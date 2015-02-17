@@ -33,7 +33,7 @@ describe('Directive: navBar', function () {
       shouldShowTRP = false;
       dMock = {
         isDealer: function(){ return true; },
-        getShowReports: function(){return $q.when(false);},
+        getShowReportsAndResources: function(){return $q.when(false);},
         getInfo: function(){
           return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
         },
@@ -43,7 +43,7 @@ describe('Directive: navBar', function () {
       };
       aMock = {
         isDealer: function(){ return false; },
-        getShowReports: function(){return $q.when(false);},
+        getShowReportsAndResources: function(){return $q.when(false);},
         getInfo: function() {
           return $q.when({ DisplayTitleReleaseProgram: false });
         },
@@ -96,12 +96,13 @@ describe('Directive: navBar', function () {
         var myLinks = scope.user.navLinks();
 
         // dealers have 7 primary links and 3 secondary links (excluding conditional TRP link)
-        expect(myLinks.primary.length).toBe(6);
-        expect(myLinks.secondary.length).toBe(3);
+        // have to exclude reports and resources
+        expect(myLinks.primary.length).toBe(5);
+        expect(myLinks.secondary.length).toBe(2);
 
         myLinks = aScope.user.navLinks();
         // auctions have 6 primary links and no secondary links
-        expect(myLinks.primary.length).toBe(6);
+        expect(myLinks.primary.length).toBe(4);
         expect(myLinks.secondary).not.toBeDefined();
       });
 
@@ -114,7 +115,7 @@ describe('Directive: navBar', function () {
           User: dMock
         });
         scope.$apply();
-        expect(scope.user.navLinks().primary.length).toBe(7);
+        expect(scope.user.navLinks().primary.length).toBe(6);
       });
 
       it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
@@ -128,10 +129,10 @@ describe('Directive: navBar', function () {
           User: dMock
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(6);
+        expect(scope.user.navLinks().primary.length).toBe(5);
         loggedIn = true;
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(7);
+        expect(scope.user.navLinks().primary.length).toBe(6);
       });
 
       it('should change the homelink based on user type', function() {
@@ -169,7 +170,7 @@ describe('Directive: navBar', function () {
           User: dMock
         });
         bScope.$apply();
-        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary.length).toBe(5);
       });
       it('hide Reports Tab for dealer-portal', function () {
         var bScope = $rootScope.$new();
@@ -179,7 +180,7 @@ describe('Directive: navBar', function () {
           User: dMock
         });
         bScope.$apply();
-        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary.length).toBe(5);
       });
       it('show Reports Tab for auction-portal', function () {
         var bScope = $rootScope.$new();
@@ -189,7 +190,7 @@ describe('Directive: navBar', function () {
           User: aMock
         });
         bScope.$apply();
-        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary.length).toBe(4);
       });
       it('hide Reports Tab for auction-portal', function () {
         var bScope = $rootScope.$new();
@@ -199,7 +200,7 @@ describe('Directive: navBar', function () {
           User: aMock
         });
         bScope.$apply();
-        expect(bScope.user.navLinks().primary.length).toBe(6);
+        expect(bScope.user.navLinks().primary.length).toBe(4);
       });
     });
   });
