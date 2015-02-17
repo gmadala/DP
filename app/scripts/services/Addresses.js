@@ -29,9 +29,16 @@ angular.module('nextgearWebApp')
       },
       getTitleAddresses: function() {
         // returns addresses that are active, but filters out PO boxes
-        return this.getAddresses(true, null, null, null).filter(function(item) {
-          return !item.IsPostOfficeBox;//!PO_BOX_REGEX.test(item.Line1.toLowerCase());
+        // but include the default address if it's not already added.
+        var titleAddresses = [];
+        var defaultTitleAddress = this.getDefaultTitleAddress();
+        titleAddresses.push(defaultTitleAddress);
+        this.getAddresses(true, null, null, null).forEach(function (item) {
+          if (!item.IsPostOfficeBox && (item.AddressId !== defaultTitleAddress.AddressId)) {//!PO_BOX_REGEX.test(item.Line1.toLowerCase());
+            titleAddresses.push(item);
+          }
         });
+        return titleAddresses;
       },
       getDefaultTitleAddress: function() {
         // returns the default title release address (there is only ever 1 address with IsTitleReleaseAddress == true)
