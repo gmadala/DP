@@ -555,13 +555,6 @@ module.exports = function(grunt) {
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
   // app/scripts/config/nxgConfig.js
   grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
-    if (!grunt.option('target')) {
-      grunt.log.warn('No Continuous Integration build --target was specified, defaulting to: ' + defaultTarget);
-      grunt.option('target', defaultTarget);
-    }
-    // removing the target from option to test out mockApi
-    grunt.option('target', undefined);
-
     grunt.log.writeln('Running Continuous Integration Build --target=' + grunt.option('target'));
     grunt.task.run('test:unit');
     grunt.task.run('build');
