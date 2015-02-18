@@ -194,4 +194,6 @@ The project uses Grunt for task automation. The primary tasks to be run from the
   - target - Refer to **grunt build** for a description of this option
   
   
-#### server-dist  
+#### server-dist
+  
+  This task will run build process and start the webapp using data from the test API.
