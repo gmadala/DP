@@ -131,6 +131,23 @@ describe('Controller: LoginCtrl', function () {
   });
 
   describe('authenticate method', function() {
+
+    beforeEach(function() {
+      user.authenticate = jasmine.createSpy('authenticate').andReturn({
+        then: function(success, error) {
+          if(shouldPassAuthentication) {
+            success({});
+          } else {
+            error({
+              dismiss: angular.noop,
+              text: 'Error text',
+              status: 200
+            });
+          }
+        }
+      });
+    });
+
     it('should pass authentication', function() {
       scope.credentials.username = "thisUsername";
       scope.credentials.password = "thisPassword";
@@ -142,7 +159,7 @@ describe('Controller: LoginCtrl', function () {
       expect(scope.saveAutocompleteUsername).toHaveBeenCalled();
     });
 
-    it('should fail authentication', function() {
+    it('should fail authentication (general non server error)', function() {
       scope.credentials.username = "thisUsername";
       scope.credentials.password = "thisPassword";
       spyOn(scope, 'saveAutocompleteUsername');
@@ -155,6 +172,42 @@ describe('Controller: LoginCtrl', function () {
       expect(scope.saveAutocompleteUsername).not.toHaveBeenCalled();
       expect(scope.credentials.password).toBe('');
       expect(scope.errorMsg).toBe(LOGIN_ERROR_MESSAGE);
+      expect(scope.showLoginError).toBe(true);
+    });
+  });
+
+  describe('authenticate method, server error', function() {
+
+    beforeEach(function() {
+
+      user.authenticate = jasmine.createSpy('authenticate500').andReturn({
+        then: function(success, error) {
+          if(shouldPassAuthentication) {
+            success({});
+          } else {
+            error({
+              dismiss: angular.noop,
+              text: 'Error text',
+              status: 500
+            });
+          }
+        }
+      });
+    });
+
+    it('should fail authentication (server error)', function() {
+      scope.credentials.username = "thisUsername";
+      scope.credentials.password = "thisPassword";
+      spyOn(scope, 'saveAutocompleteUsername');
+      expect(scope.showLoginError).toBeFalsy();
+      expect(scope.errorMsg).toBeFalsy();
+      shouldPassAuthentication = false;
+      scope.authenticate();
+
+      expect(user.authenticate).toHaveBeenCalledWith('thisUsername', 'thisPassword');
+      expect(scope.saveAutocompleteUsername).not.toHaveBeenCalled();
+      expect(scope.credentials.password).toBe('');
+      expect(scope.errorMsg).toBe('Error text');
       expect(scope.showLoginError).toBe(true);
     });
 

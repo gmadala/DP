@@ -128,9 +128,10 @@ angular.module('nextgearWebApp')
               return $q.reject(error); // Treat as unknown error
               //throw new Error('Invalid response'); // dev only
             }
-          }, function (error) {
+          }, function (e) {
             resetSessionTimeout(self, debug);
-            error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
+            var error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
+            error.status = e.status;
             return $q.reject(error); // reject w/ appropriate error
           }
         );
