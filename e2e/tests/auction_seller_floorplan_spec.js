@@ -45,7 +45,7 @@ auctionHelper.describe('WMT-77', function () {
       expect(auctionFloorPlan.formTip.isDisplayed()).toBeTruthy();
     });
 
-    it('Should contains a message with action to start new search when search return no results.', function () {
+    xit('Should contains a message with action to start new search when search return no results.', function () {
       auctionHelper.openPageAndWait(auctionFloorPlan.url, false, true);
       auctionFloorPlan.floorplanData.count().then(function (count) {
         if (count <= 0) {
