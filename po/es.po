@@ -935,11 +935,11 @@ msgstr "Cargo"
 
 #: app/scripts/controllers/modals/paymentDetails.js
 msgid "Fee - Floorplan/Curtailment"
-msgstr "Cargo - Plan de piso/Reducción"
+msgstr "Cargo - Plan de piso / Reducción"
 
 #: app/scripts/controllers/modals/paymentDetails.js
 msgid "Fee - Record Services"
-msgstr "Cargo - Servicios de registros"
+msgstr "Cargo - Servicios de registro"
 
 #: app/views/checkout.html app/views/modals/cancelFee.html
 msgid "Fee Amount"
@@ -2217,7 +2217,7 @@ msgstr "Vehículos financiados recientemente"
 
 #: app/scripts/controllers/modals/feeDetails.js
 msgid "Records Services Charge"
-msgstr "Cargo de los servicios de registro"
+msgstr "Cargo por servicios de registro"
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Release Status"
@@ -3174,7 +3174,7 @@ msgstr ""
 msgid ""
 "We're sorry, but you used a username or password that doesn't match our "
 "records."
-msgstr "Lo sentimos, pero utilizó un nombre de usuario o contraseña que no coincide con nuestros registros."
+msgstr "Disculpe, pero utilizó un nombre de usuario o una contraseña que no se encuentra en nuestros registros."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
@@ -3416,7 +3416,7 @@ msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "interest only"
-msgstr "sólo interes"
+msgstr "únicamente con interés"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "invalid payment type"
