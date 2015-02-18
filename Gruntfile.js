@@ -480,6 +480,10 @@ module.exports = function(grunt) {
     // a target will be specified when doing a build to 'dist' so server those files for that case.
     var useDist = grunt.option('target');
     var apiBase = grunt.option('apiBase');
+
+    // TODO: remove the following line to test against real API
+    useDist = undefined;
+
     grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
     grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
     // find out which users configuration can be run based on the target of this grunt task.
