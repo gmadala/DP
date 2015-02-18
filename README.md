@@ -192,3 +192,6 @@ The project uses Grunt for task automation. The primary tasks to be run from the
 
   The following option should be supplied:
   - target - Refer to **grunt build** for a description of this option
+  
+  
+#### server-dist  
