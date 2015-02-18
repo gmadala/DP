@@ -510,6 +510,10 @@ module.exports = function(grunt) {
     var effectiveUser = effectiveUsers[counter];
     var target = grunt.option('target');
     var apiBase = grunt.option('apiBase');
+
+    // TODO: remove the following line to test against real API
+    target = undefined;
+
     // create param object needed to run protractor
     var params = {};
     params.user = effectiveUser[2];
