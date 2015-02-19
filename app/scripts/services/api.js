@@ -119,6 +119,8 @@ angular.module('nextgearWebApp')
                 }
                 else {
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+                  error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
+                  // need to fix - best way is to just translate message, server side
                 }
                 return $q.reject(error);
               }
