@@ -72,7 +72,8 @@
             <li class="list-table-row">
               <p class="span5" translate>Seller</p>
               <p ng-show="flooringInfo.SellerName != null" class="span7 value">{{ flooringInfo.SellerName }}</p>
-              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value" translate>Trade-in</p>
+              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value" translate>
+                Trade-in</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
@@ -87,7 +88,7 @@
               <p class="span7 value" ng-hide="flooringInfo.showEditInventoryLocation">
                 <span nxg-address="flooringInfo.inventoryAddress"></span>
                 <span ng-show="flooringInfo.showChangeLink"><br/><br/>
-                  <a class="value-note" href="" ng-click="flooringInfo.showInventorySelect()" translate>Change Inventory Location</a>
+                  <a id="changeInvLocation" class="value-note" href="" ng-click="flooringInfo.showInventorySelect()" translate>Change Inventory Location</a>
                 </span>
               </p>
               <p class="span7 value" ng-show="flooringInfo.showEditInventoryLocation">
@@ -99,6 +100,10 @@
                 <div class="style-select">
                   <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address:'oneLineSelect') for addr in inventoryLocations"></select>
                 </div>
+              </div>
+            </li>
+            <li class="list-table-row" ng-show="flooringInfo.showEditInventoryLocation">
+              <div class="span12 text-right">
                 <div class="button-group">
                   <button type="button" class="btn-unstyle btn-link" ng-click="flooringInfo.cancelInventoryChanges()" translate>Cancel</button>
                   <button type="submit" class="btn-cta cta-secondary" ng-click="flooringInfo.saveInventoryChanges()" translate>Save Changes</button>
@@ -223,7 +228,7 @@
     <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
       <span ng-show="financialSummary.FloorplanActivity.length > 0">
         <span class="paired-body">
-          <span ng-show="isCollapsed" translate>Show Payment Activity</span>
+          <span id="showorhide" ng-show="isCollapsed" translate>Show Payment Activity</span>
           <span ng-show="!isCollapsed" translate>Hide Payment Activity</span>
         </span>
         <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }" nxg-icon="icon-chevron"></span>
@@ -265,7 +270,7 @@
               <p class="span6 value">{{ vehicleInfo.Year }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Current Mileage</p>
+              <p class="span6" translate>Current Odometer</p>
               <p class="span6 value">{{ vehicleInfo.CurrentMileage }}</p>
             </li>
             <li class="list-table-row">
@@ -317,6 +322,14 @@
     <!-- Floor Plan Value Estimates -->
     <div class="well row-fluid">
       <h2 class="well-title" translate>Floor Plan Value Estimates <span class="well-sub-title">NextGear &amp; MMR Valuation</span></h2>
+      <div class="row-fluid well-item" ng-hide="isUnitedStates">
+        <div class="">
+          <div class="paired-media" class="row-fluid">
+            <span nxg-icon="icon-info"></span>
+          </div>
+          <span translate>All values are displayed in US Dollars.</span>
+        </div>
+      </div>
       <div class="row-fluid">
         <div class="well-item span6">
           <h4 translate>NextGear Book Values</h4>
@@ -339,7 +352,6 @@
             </li>
           </ul>
         </div>
-
         <div class="well-item span6">
           <h4 translate>MMR Values</h4>
           <p class="well-item" ng-hide="showMMR" translate>MMR Values not found on record for this vehicle.</p>

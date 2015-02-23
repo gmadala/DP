@@ -5,7 +5,7 @@ describe('Service: Addresses', function () {
   // load the service's module
   beforeEach(module('nextgearWebApp'));
 
-  var Addresses, 
+  var Addresses,
     MockAddresses = [
       {
         AddressId: '1',
@@ -75,7 +75,7 @@ describe('Service: Addresses', function () {
         IsMailingAddress: false,
         IsPostOfficeBox: false
       },
-      {
+      { // the IsTitleReleaseAddress is the default title release address and can be inactive or a PO Box
         AddressId: '5',
         Line1: '1794 1/2 E. Hwy 14',
         Line2: null,
@@ -84,13 +84,13 @@ describe('Service: Addresses', function () {
         Zip: '57350',
         Phone: '6053521637',
         Fax: '6053524528',
-        IsActive: true,
+        IsActive: false,
         IsPhysicalInventory: true,
         HasFloorplanFlooredAgainst: true,
         HasApprovedFloorplanFlooredAgainst: false,
         IsTitleReleaseAddress: true,
         IsMailingAddress: false,
-        IsPostOfficeBox: false
+        IsPostOfficeBox: true
       },
       {
         AddressId: '6',
@@ -161,7 +161,7 @@ describe('Service: Addresses', function () {
         IsPostOfficeBox: true
       }
     ];
-  
+
   // instantiate service
   beforeEach(inject(function (_Addresses_) {
     Addresses = _Addresses_;
@@ -181,14 +181,13 @@ describe('Service: Addresses', function () {
 
   it('getAddresses should honor the active, physical and titleRelease arguments and return the appropriate addresses', function () {
     var res = Addresses.getAddresses(true /*active*/);
-    expect(res.length).toBe(7);
+    expect(res.length).toBe(6);
     expect(res[0].AddressId).toBe('2');
     expect(res[1].AddressId).toBe('3');
-    expect(res[2].AddressId).toBe('5');
-    expect(res[3].AddressId).toBe('6');
-    expect(res[4].AddressId).toBe('7');
-    expect(res[5].AddressId).toBe('8');
-    expect(res[6].AddressId).toBe('9');
+    expect(res[2].AddressId).toBe('6');
+    expect(res[3].AddressId).toBe('7');
+    expect(res[4].AddressId).toBe('8');
+    expect(res[5].AddressId).toBe('9');
 
 
     res = Addresses.getAddresses(null, true /*physical*/);
@@ -202,13 +201,12 @@ describe('Service: Addresses', function () {
     expect(res[6].AddressId).toBe('9');
 
     res = Addresses.getAddresses(true /*active*/, true /*physical*/);
-    expect(res.length).toBe(6);
+    expect(res.length).toBe(5);
     expect(res[0].AddressId).toBe('3');
-    expect(res[1].AddressId).toBe('5');
-    expect(res[2].AddressId).toBe('6');
-    expect(res[3].AddressId).toBe('7');
-    expect(res[4].AddressId).toBe('8');
-    expect(res[5].AddressId).toBe('9');
+    expect(res[1].AddressId).toBe('6');
+    expect(res[2].AddressId).toBe('7');
+    expect(res[3].AddressId).toBe('8');
+    expect(res[4].AddressId).toBe('9');
 
     res = Addresses.getAddresses(null, null, null, true /*flooredAgainst*/);
     expect(res.length).toBe(4);
@@ -224,24 +222,23 @@ describe('Service: Addresses', function () {
 
   it('getActivePhysical should return addresses that are active AND physical', function() {
     var res = Addresses.getActivePhysical();
-    expect(res.length).toBe(6);
+    expect(res.length).toBe(5);
     expect(res[0].AddressId).toBe('3');
-    expect(res[1].AddressId).toBe('5');
-    expect(res[2].AddressId).toBe('6');
-    expect(res[3].AddressId).toBe('7');
-    expect(res[4].AddressId).toBe('8');
-    expect(res[5].AddressId).toBe('9');
+    expect(res[1].AddressId).toBe('6');
+    expect(res[2].AddressId).toBe('7');
+    expect(res[3].AddressId).toBe('8');
+    expect(res[4].AddressId).toBe('9');
   });
 
   it('should have a getTitleAddresses function', function() {
     expect(angular.isFunction(Addresses.getTitleAddresses)).toBe(true);
   });
 
-  it('getTitleAddresses should return active and physical addresses that are not PO Box addresses', function() {
+  it('getTitleAddresses should return active and physical addresses that are not PO Box addresses (except for the default title address))', function() {
     var res = Addresses.getTitleAddresses();
     expect(res.length).toBe(2);
-    expect(res[0].AddressId).toBe('3');
-    expect(res[1].AddressId).toBe('5');
+    expect(res[0].AddressId).toBe('5');
+    expect(res[1].AddressId).toBe('3');
   });
 
   it('should have a getDefaultTitleAddress function', function() {

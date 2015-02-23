@@ -6,8 +6,8 @@ angular.module('nextgearWebApp')
     return {
       urls: {
         en: 'https://customer.nextgearcapital.com/NGCApplication/',
-        'en_CA': 'http://www.nextgearcapital.com/french/links/NG_CanadaENG_CreditApp_Web.pdf',
-        'fr_CA': 'http://www.nextgearcapital.com/french/links/NG_CanadaFREN_CreditApp_Web.pdf',
+        'en_CA': 'https://customer.nextgearcapital.com/NGCApplication/',
+        'fr_CA': 'https://customer.nextgearcapital.com/NGCApplication/',
         // Currently redirecting Spanish to English site
         es: 'https://customer.nextgearcapital.com/NGCApplication/'
       },

@@ -2,6 +2,11 @@
 
 There are usually errors in the translated files we receive back. Because of this we need to run some checks before running the compilation back into the project. Please run each of the following checks:
 
+## Line endings
+
+If the file comes back from the translator with CRLF line endings then the grunt translation task will not process the file properly.
+However, Git should automatically convert the line endings to LF anyways but you may need to delete and recheck the files in your working copy.
+
 ## Validate the File
 
 Open the single translated file in [Poedit](http://poedit.net/). You can use the __Validate__ button in the top left to test for errors. Chances are you will run into one of two scenarios:

@@ -1,17 +1,19 @@
+
 'use strict';
 
 describe('Model: User', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  var user, httpBackend, api, $q, $rootScope;
+  var user, httpBackend, api, $q, $rootScope, language;
 
-  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_) {
+  beforeEach(inject(function ($httpBackend, _$q_, User, _api_, _$rootScope_, _language_) {
     user = User;
     api = _api_;
     httpBackend = $httpBackend;
     $q = _$q_;
     $rootScope = _$rootScope_;
+    language = _language_;
   }));
 
   describe('recoverUserName method', function () {
@@ -26,7 +28,7 @@ describe('Model: User', function () {
     });
 
     it('should post to the expected endpoint', function () {
-      httpBackend.expectPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      httpBackend.expectPOST('/userAccount/RecoverUserName/foo@example.com/false').respond(response);
       user.recoverUserName('foo@example.com');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -34,11 +36,58 @@ describe('Model: User', function () {
     it('should return a promise for the success/failure result', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenPOST('/userAccount/RecoverUserName/foo@example.com').respond(response);
+      httpBackend.whenPOST('/userAccount/RecoverUserName/foo@example.com/false').respond(response);
       user.recoverUserName('foo@example.com').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalled();
       expect(error).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('showReportsAndResources method', function () {
+    var response;
+    var hideReportsSpanish = '/info/webreportsdisabled/3';
+
+    beforeEach(function () {
+      response = {
+        Success: true,
+        Message: null,
+        Data: true // hide
+      };
+
+      spyOn(api, 'request').andCallThrough();
+      expect(user.getShowReportsAndResources).toBeDefined();
+    });
+
+    afterEach(function () {
+      language.setCurrentLanguage('en');
+    });
+
+    it('should return true for English', function () {
+      user.getShowReportsAndResources().then(function(data){
+        expect(data).toBeTruthy();
+      });
+    });
+
+    it('should not call endpoint for English', function () {
+      user.getShowReportsAndResources();
+      expect(api.request).not.toHaveBeenCalled();
+    });
+
+    it('should call endpoint for non-English', function () {
+      language.setCurrentLanguage('es');
+      httpBackend.whenGET(hideReportsSpanish).respond(response);
+      user.getShowReportsAndResources();
+      expect(httpBackend.flush).not.toThrow();
+    });
+
+    it('should return false for Spanish', function () {
+      language.setCurrentLanguage('es');
+      httpBackend.whenGET(hideReportsSpanish).respond(response);
+      user.getShowReportsAndResources().then(function(data){
+        expect(data).toBeFalsy();
+      });
+      expect(httpBackend.flush).not.toThrow();
     });
   });
 
@@ -67,7 +116,7 @@ describe('Model: User', function () {
     }));
 
     it('should call to the expected endpoint', function () {
-      httpBackend.expectGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.expectGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser');
       expect(httpBackend.flush).not.toThrow();
     });
@@ -75,7 +124,7 @@ describe('Model: User', function () {
     it('should return a promise for the question list', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalledWith(response.Data.List);
@@ -86,7 +135,7 @@ describe('Model: User', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       response.Data.List = [];
-      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser').respond(response);
+      httpBackend.whenGET('/UserAccount/passwordResetQuestions/foouser?lang=1').respond(response);
       user.fetchPasswordResetQuestions('foouser').then(success, error);
       httpBackend.flush();
       expect(success).not.toHaveBeenCalled();
@@ -135,7 +184,7 @@ describe('Model: User', function () {
             Answer: 'blue'
           }
         ];
-      httpBackend.expectPOST('/userAccount/resetpassword').respond(function (method, url, data) {
+      httpBackend.expectPOST('/userAccount/v1_2/resetpassword').respond(function (method, url, data) {
         requestData = angular.fromJson(data);
         return [200, response, {}];
       });
@@ -151,12 +200,13 @@ describe('Model: User', function () {
         QuestionId: 1,
         QuestionText: 'blue'
       })).toBe(true);
+      expect(requestData.IsMobileApp).toBe(false);
     });
 
     it('should return a promise for the success/failure result', function () {
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
-      httpBackend.whenPOST('/userAccount/resetpassword').respond(response);
+      httpBackend.whenPOST('/userAccount/v1_2/resetpassword').respond(response);
       user.resetPassword('foouser').then(success, error);
       httpBackend.flush();
       expect(success).toHaveBeenCalled();
@@ -166,14 +216,35 @@ describe('Model: User', function () {
 
   describe('Authenticate + isLoggedIn + logout method', function () {
     var segmentio,
-      logoutHttpHandler;
+      logoutHttpHandler,
+      infoHttpHandler,
+      infoUnitedStates,
+      infoCanada;
 
     beforeEach(inject(function (_segmentio_) {
       segmentio = _segmentio_;
 
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+      infoUnitedStates = {
         Success: true,
-        Message: null,
+        Data: {
+          BusinessNumber: 1234,
+          BusinessName: 'Tricolor Auto',
+          CountryId:'29ec136a-1416-46ed-93cd-254d0fb0b820'
+        }
+      };
+
+      infoCanada = {
+        Success: true,
+        Data: {
+          BusinessNumber: 1234,
+          BusinessName: 'Tricolor Auto',
+          CountryId:'29ec136a-1416-46ed-93cd-254d0fb0b821'
+        }
+      };
+
+      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+        Success: false,
+        Message: 'deprecated',
         Data: {
           Token: '12345',
           ShowUserInitialization: true,
@@ -181,13 +252,17 @@ describe('Model: User', function () {
         }
       });
 
-      httpBackend.whenGET('/Dealer/v1_2/Info').respond({
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
+        Message: '',
         Data: {
-          BusinessNumber: 1234,
-          BusinessName: 'Tricolor Auto'
+          Token: '12345',
+          ShowUserInitialization: true,
+          UserVoiceToken: '54321'
         }
       });
+
+      infoHttpHandler = httpBackend.whenGET('/Dealer/v1_2/Info');
 
       httpBackend.whenGET('/Dealer/v1_2/Static').respond({
         Success: true,
@@ -202,12 +277,14 @@ describe('Model: User', function () {
     }));
 
     it('should make the expected POST request', function () {
-      httpBackend.expectPOST('/UserAccount/Authenticate');
+      infoHttpHandler.respond(infoUnitedStates);
+      httpBackend.expectPOST('/UserAccount/v1_1/Authenticate');
       user.authenticate('test', 'testpw');
       expect(httpBackend.flush).not.toThrow();
     });
 
     it('should set the api auth token with the value from the response', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(api, 'setAuth');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -220,6 +297,7 @@ describe('Model: User', function () {
     });
 
     it('should update the isLoggedIn function result', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       expect(user.isLoggedIn()).toBe(false);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -227,6 +305,7 @@ describe('Model: User', function () {
     });
 
     it('should set the auth header for all further requests', inject(function ($http) {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       httpBackend.expectGET('foo/bar', function (headers) {
@@ -237,6 +316,7 @@ describe('Model: User', function () {
     }));
 
     it('should refresh statics and info upon auth success', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(user, 'refreshInfo').andCallThrough();
       spyOn(user, 'refreshStatics').andCallThrough();
       user.authenticate('test', 'testpw');
@@ -246,6 +326,7 @@ describe('Model: User', function () {
     });
 
     it('should identify the user for analytics upon success', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       spyOn(segmentio, 'identify');
       user.authenticate('test', 'testpw');
       httpBackend.flush();
@@ -261,6 +342,7 @@ describe('Model: User', function () {
     it('should return a promise for authentication result data', function () {
       var out = null;
 
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw').then(function (result) {
         out = result;
       });
@@ -275,6 +357,7 @@ describe('Model: User', function () {
     });
 
     it('should make the expected logout request to the server on logout', function () {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -284,6 +367,7 @@ describe('Model: User', function () {
     });
 
     it('should reset the auth token and isLoggedIn flag on logout call success', function() {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -300,6 +384,7 @@ describe('Model: User', function () {
     });
 
     it('should reset the auth token and isLoggedIn flag on logout call error', function() {
+      infoHttpHandler.respond(infoUnitedStates);
       user.authenticate('test', 'testpw');
       httpBackend.flush();
 
@@ -318,6 +403,27 @@ describe('Model: User', function () {
       expect(success.mostRecentCall.args[0]).toEqual(null);
       expect(failure).not.toHaveBeenCalled();
     });
+
+    it('should check for the user - UnitedStates', function () {
+      infoHttpHandler.respond(infoUnitedStates);
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond(function () {
+        return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
+      });
+      user.authenticate('user', 'pass');
+      httpBackend.flush();
+      expect(user.isUnitedStates()).toBeTruthy();
+    });
+
+    it('should check for the user - Canadian', function () {
+      infoHttpHandler.respond(infoCanada);
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond(function () {
+        return [200, {Success: true, Message: null, Data: {Token: 'key'}}, ''];
+      });
+      user.authenticate('user', 'pass');
+      httpBackend.flush();
+      expect(user.isUnitedStates()).toBeFalsy();
+    });
+
   });
 
   describe('dropSession method', function () {
@@ -488,7 +594,7 @@ describe('Model: User', function () {
     var userInfo = {};
 
     beforeEach(function () {
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
         Message: null,
         Data: {
@@ -559,7 +665,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = false;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       user.canPayBuyer().then(function(_result_) {
         result = _result_;
       });
@@ -573,7 +679,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       var result;
       user.canPayBuyer().then(function(_result_) {
         result = _result_;
@@ -589,7 +695,7 @@ describe('Model: User', function () {
     var userInfo = {};
 
     beforeEach(function () {
-      httpBackend.whenPOST('/UserAccount/Authenticate').respond({
+      httpBackend.whenPOST('/UserAccount/v1_1/Authenticate').respond({
         Success: true,
         Message: null,
         Data: {
@@ -615,7 +721,7 @@ describe('Model: User', function () {
       userInfo.HasUCC = true;
       user.authenticate('test', 'testpw');
       httpBackend.flush();
-      
+
       var result;
       user.getPaySellerOptions().then(function(_result_) {
         result = _result_;
@@ -656,4 +762,5 @@ describe('Model: User', function () {
       expect(res1 === res2).toBe(true);
     });
   });
+
 });

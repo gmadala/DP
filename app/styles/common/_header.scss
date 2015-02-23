@@ -187,6 +187,8 @@
     }
   }
 
+
+
   .cart-btn {
     @include border-bottom-right-radius($borderRadius);
     display: block;
@@ -248,4 +250,11 @@
   .cta {
     margin-top: 16px;
   }
+}
+@media (max-width: 1200px) {
+  .cart-btn {
+    width: 45px;
+    font-size:9px !important;
+  }
+
 }

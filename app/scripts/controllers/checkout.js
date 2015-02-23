@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
   function ($scope, $q, $dialog, $timeout, protect, moment,
             messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog) {
+            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext) {
 
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
@@ -335,17 +335,17 @@ angular.module('nextgearWebApp')
 
       switch(payment.paymentOption) {
       case PaymentOptions.TYPE_PAYMENT:
-        text = 'payment';
+        text = gettext('payment');
         break;
       case PaymentOptions.TYPE_PAYOFF:
-        text = 'payoff';
+        text = gettext('payoff');
         break;
       case PaymentOptions.TYPE_INTEREST:
-        text = 'interest only';
+        text = gettext('interest only');
         break;
       default:
-        text = '_invalid payment type_';
+        text = '_' + gettext('invalid payment type') + '_';
       }
-      return text;
+      return gettextCatalog.getString(text);
     };
   });

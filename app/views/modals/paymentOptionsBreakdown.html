@@ -57,6 +57,12 @@
         </label>
       </li>
 
+      <li class="static-option" ng-show="optionInterestOnly">
+        <span class="disclaimer-interest" translate>
+          Submitting an interest only payment will not advance the due date.
+        </span>
+      </li>
+
     </ul>
   </form>
   <div class="aside modal-inner">
@@ -97,7 +103,7 @@
 </div>
 
 <div class="modal-footer">
-  <button ng-click="close()" class="btn-cta cta-secondary" type="button" translate>Cancel Changes</button>
-  <button ng-click="confirm()" class="btn-cta cta-primary" type="submit" translate>Confirm Changes</button>
+  <button id="cancelChanges" ng-click="close()" class="btn-cta cta-secondary" type="button" translate>Cancel Changes</button>
+  <button id="confirmChanges" ng-click="confirm()" class="btn-cta cta-primary" type="submit" translate>Confirm Changes</button>
 </div>
 

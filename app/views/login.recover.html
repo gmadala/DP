@@ -2,12 +2,12 @@
   <div class="container-fluid login-contents">
 
     <div class="row-fluid forgot">
-      <h3 translate>Forgot Your User Name or Password?</h3>
+      <h3 translate>Forgot Your Username or Password?</h3>
 
       <!-- USER NAME RECOVERY -->
       <div class="well span4 offset2 forgot-uname"
            ng-class="{'nxg-fade' : !!forgotPasswordForm.userName.$viewValue}">
-        <h2 class="well-title" translate>Forgot Your User Name?</h2>
+        <h2 class="well-title" translate>Forgot Your Username?</h2>
 
         <p class="well-item instructions" translate>
           Enter the email address associated with your account to receive your username via email.
@@ -22,18 +22,21 @@
 
           <p class="text-error" ng-show="forgotUserNameValidity.email.$error.required" translate>
             Please enter your email address. If you need assistance, please call
-            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            NextGear Capital Support at:
           </p>
 
           <p class="text-error" ng-show="forgotUserNameValidity.email.$error.email" translate>
             {{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. If you need assistance,
-            please call NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            please call NextGear Capital Support at:
           </p>
 
           <p class="text-error" ng-show="userNameRecovery.failed" translate>
             We were unable to locate this email address. If you need assistance, please call
-            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            NextGear Capital Support at:
           </p>
+          <span ng-show="userNameRecovery.failed || forgotUserNameValidity.email.$error.required  || forgotUserNameValidity.email.$error.email">
+            <nxg-customer-support-phone></nxg-customer-support-phone>
+          </span>
 
         </form>
 
@@ -54,21 +57,24 @@
         <p class="well-item instructions" translate>Enter your username to receive a new password via email.</p>
 
         <form class="form-block" name="forgotPasswordForm">
-          <label for="userName" translate>User Name</label>
+          <label for="userName" translate>Username</label>
           <input type="text" id="userName" name="userName" ng-model="passwordRecovery.username" required
                  ng-disabled="!!forgotUserNameForm.email.$viewValue"
                  ng-change="passwordRecovery.questions = null; passwordRecovery.questionsFailed = false"
                  ng-class="{ 'nxg-invalid': forgotPasswordValidity.userName.$error.required }" />
 
           <p class="text-error" ng-show="forgotPasswordValidity.userName.$error.required" translate>
-            Please enter your user name. If you need assistance, please call
-            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            Please enter your username. If you need assistance, please call
+            NextGear Capital Support at:
           </p>
 
           <p class="text-error" ng-show="passwordRecovery.usernameFailed" translate>
             We were unable to locate this username. If you need assistance, please call
-            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            NextGear Capital Support at:
           </p>
+          <span ng-show="passwordRecovery.usernameFailed || forgotPasswordValidity.userName.$error.required">
+            <nxg-customer-support-phone></nxg-customer-support-phone>
+          </span>
 
           <div class="question-section"
                ng-form name="questionForm"
@@ -89,8 +95,11 @@
 
           <p class="text-error" ng-show="passwordRecovery.questionsFailed" translate>
             We were unable verify one or more of your answers. If you need assistance, please call
-            NextGear Capital Support at: <nxg-customer-support-phone></nxg-customer-support-phone>.
+            NextGear Capital Support at:
           </p>
+          <span ng-show="passwordRecovery.questionsFailed">
+            <nxg-customer-support-phone></nxg-customer-support-phone>
+          </span>
 
         </form>
 

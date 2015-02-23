@@ -1,5 +1,13 @@
+<section  ng-hide="isUnitedStates">
+    <div class="paired-media">
+      <span nxg-icon="icon-info"></span>
+    </div>
+    <span translate>All values are displayed in Canadian Dollars unless specified.</span>
+    <p>&nbsp;</p>
+</section>
+
 <section class="row-fluid business-summary {{ showDetails && 'expanded' || 'collapsed'}}">
-  <div class="span12 well">
+<div class="span12 well">
     <h2 class="well-title" translate>Business Summary</h2>
 
     <div class="row-fluid">
@@ -10,24 +18,29 @@
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="span8"><span translate>Total NextGear Capital Book Value</span>:</p>
+            <p class="span7"><span translate>Total NextGear Capital Book Value</span>:</p>
             <p class="span4 value numeric">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
+            <p class="span1" ng-hide="isUnitedStates">USD</p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> <span translate>Total Financed Amount</span>: </p>
+            <p class="span7"> <span translate>Total Financed Amount</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
+            <p class="span1"></p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> <span translate>Total Outstanding</span>: </p>
+            <p class="span7"> <span translate>Total Outstanding</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
+            <p class="span1"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="span8"> <span translate>Average Purchase Price</span>: </p>
+            <p class="span7"> <span translate>Average Purchase Price</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
+            <p class="span1"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="span8"> <span translate>Total Purchase Price</span>: </p>
+            <p class="span7"> <span translate>Total Purchase Price</span>: </p>
             <p class="span4 value numeric">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
+            <p class="span1"></p>
           </li>
         </ul>
 
@@ -45,12 +58,14 @@
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="span8"> <span translate>Total Purchase Price</span>: </p>
+            <p class="span7"> <span translate>Total Purchase Price</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
+            <p class="span1"></p>
           </li>
           <li class="list-table-row">
-            <p class="span8"> <span translate>Total NextGear Capital Book Value</span>: </p>
+            <p class="span7"> <span translate>Total NextGear Capital Book Value</span>: </p>
             <p class="span4 value numeric"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
+            <p class="span1" ng-hide="isUnitedStates">USD</p>
           </li>
         </ul>
 

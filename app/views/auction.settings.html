@@ -13,16 +13,16 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
         <div class="row-fluid">
-          <label class="span4 " for="setUsername" translate>User Name</label>
+          <label class="span4 " for="setUsername" translate>Username</label>
           <div class="span8" nxg-input model="profile.data.username" editable="profile.editable">
             <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
             <label for="setUsername" class="text-error"
                ng-show="profile.validation.setUsername.$error.required" translate>
-              Please enter a User Name.
+              Please enter a Username.
             </label>
             <label for="setUsername" class="text-error"
                    ng-show="profile.validation.setUsername.$error.maxlength" translate>
-              Please enter a User Name that is 40 characters or less.
+              Please enter a Username that is 40 characters or less.
             </label>
           </div>
         </div>
@@ -131,7 +131,7 @@
         <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel</button>
       </div>
     </h2>
-    
+
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row-fluid">

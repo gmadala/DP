@@ -13,7 +13,8 @@ module.exports = function (karma) {
       'karma-ng-html2js-preprocessor',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-script-launcher'
+      'karma-script-launcher',
+      'karma-junit-reporter'
     ],
 
 		// list of files / patterns to load in the browser
@@ -66,11 +67,15 @@ module.exports = function (karma) {
 
     // test results reporter to use
     // possible values: dots || progress || growl
-    reporters: ['dots', 'coverage'],
+    reporters: ['dots', 'coverage', 'junit'],
 
     coverageReporter: {
       type: 'html',
       dir: 'test/coverage/'
+    },
+
+    junitReporter: {
+      outputFile: 'target/surefire-reports/client-test-results.xml'
     },
 
     // web server port

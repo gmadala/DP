@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function($rootScope, $scope, $location, User, $http, localStorageService, banner, signupUrls) {
+  .controller('LoginCtrl', function ($rootScope, $scope, $location, User, $http, localStorageService, banner, signupUrls,
+                                     gettextCatalog) {
 
     var savedUsername = localStorageService.get('rememberUsername');
 
@@ -62,7 +63,13 @@ angular.module('nextgearWebApp')
             $scope.saveUsername();
           }, function(error) {
             error.dismiss();
-            $scope.errorMsg = error.text;
+            if (angular.isDefined(error.status) && (error.status < 500 && error.status !== 0)) {
+              // special generic message for non-server 500 errors here - don't include 0 error which would be returned
+              // for no network connection - useful for testing and is more reasonable for the user as well
+              $scope.errorMsg = gettextCatalog.getString('We\'re sorry, but you used a username or password that doesn\'t match our records.');
+            } else {
+              $scope.errorMsg = error.text;
+            }
             $scope.showLoginError = true;
             $scope.credentials.password = '';
           });

@@ -1,12 +1,1 @@
-NextGear Capital v5.0.2
-=================================
-
-VO-3058	[VO/MOB] Update client code to move away from deprecated endpoints that return their own address formats, and add PO Box filtering.
-VO-3149	If dealer has only 1 line of credit, don't display dropdown
-VO-3153	Header/Table Header should be fixed
-VO-3180	Disable dropdown in instances of only 1 active bank account on file
-VO-3191	Align this info to the rest of the text above it
-VO-3200	Business Search under Floor a Vehicle
-VO-3205	Toggle width/padding
-VO-3488	Do not show inactive inventory location addresses as option to dealer
-VO-3512	Regular non-Payoff payments should not display "Send Title to a Different Address"
+NextGear Capital v6.0.0

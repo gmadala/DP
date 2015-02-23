@@ -39,10 +39,15 @@
 
     <footer class="row-fluid">
       <ul class="horizontal-list">
-        <li >&copy; 2013-2014 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
-        <li><nxg-customer-support-phone></nxg-customer-support-phone></li>
-        <li><a href="http://www.nextgearcapital.com/privacy-policy.php" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>Privacy Statement</a></li>
-        <li><a href="http://www.nextgearcapital.com/contact.php" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
+        <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
+        <li>
+          <nxg-customer-support-phone-simple></nxg-customer-support-phone-simple>
+        </li>
+        <li><a href="http://www.nextgearcapital.com/privacy-statement" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>Privacy Statement</a></li>
+        <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
+        <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
+        <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
+        <!-- @if ENV != 'production' !></li><!-- @endif -->
       </ul>
     </footer>
 
@@ -66,8 +71,8 @@
     <script src="components/lodash/lodash.js"></script>
     <script src="components/numeral/numeral.js"></script>
     <script src="components/moment/moment.js"></script>
-    <script src="components/moment/min/lang/es.js"></script>
-    <script src="components/moment/min/lang/fr-ca.js"></script>
+    <script src="components/moment/lang/es.js"></script>
+    <script src="components/moment/lang/fr-ca.js"></script>
     <script src="components/angular-local-storage/angular-local-storage.js"></script>
     <script src="components/highcharts.com/js/highcharts.src.js"></script>
     <script src="components/angular-strap/dist/angular-strap.js"></script>
@@ -108,6 +113,7 @@
     <script src="scripts/services/paymentOptions.js"></script>
     <script src="scripts/services/businessHours.js"></script>
     <script src="scripts/services/signupUrls.js"></script>
+    <script src="scripts/services/language.js"></script>
 
     <script src="scripts/filters/alt.js"></script>
     <script src="scripts/filters/numeral.js"></script>
@@ -213,23 +219,25 @@
     <script src="scripts/directives/nxgHighlight.js"></script>
     <script src="scripts/directives/nxgEnter.js"></script>
     <script src="scripts/directives/nxgChatWithUs.js"></script>
+    <script src="scripts/directives/nxgCustomerSupportEmail.js"></script>
     <script src="scripts/directives/nxgCustomerSupportPhone.js"></script>
+    <script src="scripts/directives/nxgDealerCustomerSupportPhone.js"></script>
+    <script src="scripts/directives/nxgCustomerSupportPhoneSimple.js"></script>
     <script src="scripts/directives/nxgTrack.js"></script>
     <script src="scripts/directives/nxgTypeahead.js"></script>
     <script src="scripts/directives/placeholder.js"></script>
     <script src="scripts/directives/ieInputPatch.js"></script>
     <script src="scripts/directives/nxgFluidContainer.js"></script>
-    <script src="scripts/directives/nxgDebugTitle.js"></script>
+    <script src="scripts/directives/nxgSticky.js"></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
-
-    <script src="scripts/directives/nxgSticky.js"></script>
     <!-- endbuild -->
 
     <!-- processhtml:remove:dist -->
-    <script src="scripts/config/nxgConfig.mock.js"></script>
+    <script src="scripts/config/nxgConfig.mock.processed.js"></script>
     <script src="scripts/dev/autologin.js"></script>
     <script src="scripts/dev/gettextDebug.js"></script>
+    <script src="scripts/directives/nxgDebugTitle.processed.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
 
     <!-- /processhtml -->

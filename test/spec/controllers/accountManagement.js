@@ -12,7 +12,12 @@ describe('Controller: AccountManagementCtrl', function () {
     AccountManagementMock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, $q) {
+
+    var mockCustomerSupportPhone = $q.when({
+      value: '1234567890',
+      formatted: '123-456-7890'
+    });
 
     settingsData = {
       Username: '10264DG',
@@ -28,9 +33,9 @@ describe('Controller: AccountManagementCtrl', function () {
           then: function(success) {
             success(settingsData);
           }
-        }
+        };
       }
-    }
+    };
 
     AddressesMock = {
       getTitleAddresses: function() {
@@ -51,7 +56,7 @@ describe('Controller: AccountManagementCtrl', function () {
       getDefaultTitleAddress: function() {
         return {
           BusinessAddressId: 'be9b22cb-5896-4356-86a0-e932293faa6a',
-            City: 'Dallas',
+          City: 'Dallas',
           Fax: '2143399361',
           IsTitleReleaseAddress: true,
           Line1: '5333 West Kiest Blvd',
@@ -59,7 +64,7 @@ describe('Controller: AccountManagementCtrl', function () {
           State: 'TX',
           Zip: '75236',
           Phone: '2143301800'
-        }
+        };
       }
     };
 
@@ -67,7 +72,8 @@ describe('Controller: AccountManagementCtrl', function () {
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
       AccountManagement: AccountManagementMock,
-      Addresses: AddressesMock
+      Addresses: AddressesMock,
+      dealerCustomerSupportPhone: mockCustomerSupportPhone
     });
   }));
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Floorplan', function(api, Paginate, User, $q) {
+  .factory('Floorplan', function(api, Paginate, User, $q, gettextCatalog) {
     var overrideInProgress = false;
 
     return {
@@ -80,7 +80,7 @@ angular.module('nextgearWebApp')
             StartDate: api.toShortISODate(criteria.startDate) || undefined,
             EndDate: api.toShortISODate(criteria.endDate) || undefined,
             OrderBy: criteria.sortField || 'FlooringDate',
-            OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
+            OrderByDirection: criteria.sortDescending === undefined || criteria.sortDescending === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
             PageSize: Paginate.PAGE_SIZE_MEDIUM,
             PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
@@ -93,11 +93,7 @@ angular.module('nextgearWebApp')
               if (floorplan.TitleImageAvailable) {
                 self.addTitleURL(floorplan);
               }
-              if (floorplan.TitleLocation === 'Seller') {
-                floorplan.sellerHasTitle = true;
-              } else {
-                floorplan.sellerHasTitle = false;
-              }
+              floorplan.sellerHasTitle = floorplan.TitleLocation === gettextCatalog.getString('Seller');
               floorplan.Description = self.getVehicleDescription(floorplan);
             });
             return Paginate.addPaginator(results, results.FloorplanRowCount, params.PageNumber, params.PageSize);

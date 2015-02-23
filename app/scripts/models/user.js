@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog, language) {
     // Private
     var staticsRequest = null,
       paySellerOptions = [],
@@ -9,6 +9,7 @@ angular.module('nextgearWebApp')
       infoRequest = null,
       infoLoaded = false,
       isDealer,
+      isUnitedStates,
       info = null; // only user cached info for synchronous function
 
     function filterByBusinessName(subsidiaries) {
@@ -24,17 +25,18 @@ angular.module('nextgearWebApp')
       },
 
       recoverUserName: function(email) {
-        return api.request('POST', '/userAccount/RecoverUserName/' + email);
+        return api.request('POST', '/userAccount/RecoverUserName/' + email + '/false');
       },
 
       fetchPasswordResetQuestions: function(username) {
-        return api.request('GET', '/UserAccount/passwordResetQuestions/' + username).then(
+        var lang = language.getCurrentLanguageId();
+        return api.request('GET', '/UserAccount/passwordResetQuestions/' + username + '?lang=' + lang).then(
           function (result) {
             if (result.List && result.List.length > 0) {
               return result.List;
             } else {
               var error = messages.add(gettextCatalog.getString('You do not appear to have any security questions configured. ' +
-                  'Please contact NextGear for assistance.'),
+                'Please contact NextGear for assistance.'),
                 '/UserAccount/passwordResetQuestions/ returned no security questions');
               return $q.reject(error);
             }
@@ -53,6 +55,22 @@ angular.module('nextgearWebApp')
         return securityQuestions;
       },
 
+      // using this currently for showing Reports and showing Resources
+      getShowReportsAndResources: function () {
+        var langID = language.getCurrentLanguageId();
+        if (langID === 1) {
+          // for English language don't even bother calling the endpoint
+          // since we always show for them
+          var deferred = $q.defer();
+          deferred.resolve(true);
+          return deferred.promise;
+        } else {
+          return api.request('GET', '/info/webreportsdisabled/' + langID).then(function (data) {
+            return data === false;
+          });
+        }
+      },
+
       resetPassword: function(username, questionAnswers) {
         var data = {
           UserName: username,
@@ -61,9 +79,10 @@ angular.module('nextgearWebApp')
               QuestionId: question.QuestionId,
               QuestionText: question.Answer
             };
-          })
+          }),
+          IsMobileApp: false
         };
-        return api.request('POST', '/userAccount/resetpassword', data);
+        return api.request('POST', '/userAccount/v1_2/resetpassword', data);
       },
 
       changePassword: function(newPassword) {
@@ -72,10 +91,11 @@ angular.module('nextgearWebApp')
 
       authenticate: function(username, password) {
         var self = this;
+        var lang = language.getCurrentLanguageId();
         return api.request(
           'POST',
-          '/UserAccount/Authenticate', {}, {
-            Authorization: 'CT ' + Base64.encode(username + ':' + password)
+          '/UserAccount/v1_1/Authenticate', {}, {
+            Authorization: 'CT ' + Base64.encode(username + ':' + password + ':' + lang)
           })
           .then(function(authResult) {
             return self.initSession(authResult).then(function () {
@@ -165,6 +185,7 @@ angular.module('nextgearWebApp')
         infoRequest = api.request('GET', '/Dealer/v1_2/Info').then(function(data) {
           infoLoaded = true;
           isDealer = data.DealerAuctionStatusForGA === 'Dealer';
+          isUnitedStates = data.CountryId === '29ec136a-1416-46ed-93cd-254d0fb0b820';
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
           info = data;
@@ -196,6 +217,14 @@ angular.module('nextgearWebApp')
           return null;
         } else {
           return isDealer;
+        }
+      },
+
+      isUnitedStates: function() {
+        if(!angular.isDefined(isUnitedStates)) {
+          return null;
+        } else {
+          return isUnitedStates;
         }
       },
 

@@ -93,7 +93,7 @@
       Please enter a Year between 1901 and {{ settings.maxYear }}.
     </label>
 
-    <label for="inputStyle">Style</label>
+    <label for="inputStyle" translate>Style</label>
     <input type="text" id="inputStyle" name="inputStyle" ng-model="data.UnitStyle"
            required maxlength="50" ng-class="{ 'nxg-invalid': validity.inputStyle.$error.required && errorFlag }" />
     <label for="inputStyle" class="text-error"

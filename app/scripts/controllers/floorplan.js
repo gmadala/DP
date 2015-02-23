@@ -80,8 +80,25 @@ angular.module('nextgearWebApp')
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
 
+
+
+  // Set up page-load filtering based on $stateParams
+    var filterParam = null;
+
+    switch($stateParams.filter) {
+    case 'approved':
+      filterParam = Floorplan.filterValues.APPROVED;
+      break;
+    case 'pending':
+      filterParam = Floorplan.filterValues.PENDING;
+      break;
+    case 'denied':
+      filterParam = Floorplan.filterValues.DENIED;
+      break;
+    }
+
     // initial search
-    $scope.floorplanData.resetSearch($stateParams.filter);
+    $scope.floorplanData.resetSearch(filterParam);
 
     $scope.sellerTimeouts = {};
     $scope.sellerHasTitle = function(floorplan, hasTitle) {

@@ -119,6 +119,8 @@ angular.module('nextgearWebApp')
                 }
                 else {
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+                  error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
+                  // need to fix - best way is to just translate message, server side
                 }
                 return $q.reject(error);
               }
@@ -128,9 +130,10 @@ angular.module('nextgearWebApp')
               return $q.reject(error); // Treat as unknown error
               //throw new Error('Invalid response'); // dev only
             }
-          }, function (error) {
+          }, function (e) {
             resetSessionTimeout(self, debug);
-            error = messages.add(defaultError, debug + 'HTTP or connection error: ' + error);
+            var error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
+            error.status = e.status;
             return $q.reject(error); // reject w/ appropriate error
           }
         );

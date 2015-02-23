@@ -84,7 +84,7 @@ angular.module('nextgearWebApp')
     gettextCatalog.setCurrentLanguage(gettextCatalog.baseLanguage);
     gettextCatalog.debug = true;
   })
-  .directive('nxgTranslationDebugger', function (gettextCatalog) {
+  .directive('nxgTranslationDebugger', function (gettextCatalog, language) {
       var template =
         '<strong>TRANSLATIONS</strong>' +
         '<ul>' +
@@ -110,7 +110,7 @@ angular.module('nextgearWebApp')
           scope.currentLanguage = gettextCatalog.currentLanguage;
 
           scope.switchLang = function (lang) {
-            gettextCatalog.setCurrentLanguage(lang);
+            language.setCurrentLanguage(lang);
             scope.currentLanguage = gettextCatalog.currentLanguage;
           };
 

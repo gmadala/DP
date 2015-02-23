@@ -22,6 +22,22 @@
   "globals": {
     "angular": false,
     "_": false,
-    "numeral": false
+    "$": false,
+    "numeral": false,
+    "moment": false,
+    "jasmine": false,
+    "describe": false,
+    "xdescribe": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "it": false,
+    "xit": false,
+    "expect": false,
+    "protractor": false,
+    "element": false,
+    "browser": false,
+    "by": false,
+    "inject": false,
+    "spyOn": false
   }
 }

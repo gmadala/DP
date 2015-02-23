@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions) {
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions, gettext, gettextCatalog) {
     //not showing up in html even though it's on rootScope. Adding here.
     $scope.metric = metric;
     $scope.navigate = $state.transitionTo;
@@ -63,18 +63,18 @@ angular.module('nextgearWebApp')
 
       switch(payment.paymentOption) {
       case PaymentOptions.TYPE_PAYMENT:
-        text = 'payment';
+        text = gettext('payment');
         break;
       case PaymentOptions.TYPE_PAYOFF:
-        text = 'payoff';
+        text = gettext('payoff');
         break;
       case PaymentOptions.TYPE_INTEREST:
-        text = 'interest only';
+        text = gettext('interest only');
         break;
       default:
-        text = '_invalid payment type_';
+        text = '_' + gettext('invalid payment type') + '_';
       }
-      return text;
+      return gettextCatalog.getString(text);
     };
 
   });

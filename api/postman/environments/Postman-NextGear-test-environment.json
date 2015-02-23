@@ -1,1 +1,32 @@
-{"id":"24202530-4d95-8901-5af3-d94d463f6104","name":"NextGear - Test","values":[{"key":"url","value":"http://test.discoverdsc.com/MobileService/api","type":"text"},{"key":"dealer_auth_token","value":"CT YWU2ZjA5YTYtMmY4Yy00NzdlLTg1ZjgtOTk5NDhjODBlMWNl","type":"text"},{"key":"email_address","value":"tester@tester.com","type":"text"},{"key":"username","value":"654321","type":"text"},{"key":"password","value":"foo","type":"text"}],"timestamp":1375365054510}
+{
+  "id": "24202530-4d95-8901-5af3-d94d463f6104",
+  "name": "NextGear - Test",
+  "values": [
+    {
+      "key": "url",
+      "value": "https://test.discoverdsc.com/MobileService/api",
+      "type": "text"
+    },
+    {
+      "key": "dealer_auth_token",
+      "value": "CT YWU2ZjA5YTYtMmY4Yy00NzdlLTg1ZjgtOTk5NDhjODBlMWNl",
+      "type": "text"
+    },
+    {
+      "key": "email_address",
+      "value": "tester@tester.com",
+      "type": "text"
+    },
+    {
+      "key": "username",
+      "value": "654321",
+      "type": "text"
+    },
+    {
+      "key": "password",
+      "value": "foo",
+      "type": "text"
+    }
+  ],
+  "timestamp": 1375365054510
+}

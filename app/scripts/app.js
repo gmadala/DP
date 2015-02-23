@@ -2,10 +2,10 @@
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule', 'gettext'])
   .constant('SupportedLanguages', [
-    { key: 'en', name: 'English' },
-    { key: 'enDebug', name: 'English (Debug)' },
-    { key: 'fr_CA', name: 'French (CA)' },
-    { key: 'es', name: 'Spanish' }
+    { key: 'en', id: 1, name: 'English' },
+    { key: 'enDebug', id: 1, name: 'English (Debug)' },
+    { key: 'fr_CA', id: 2, name: 'French (CA)' },
+    { key: 'es', id: 3, name: 'Spanish' }
   ])
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -74,7 +74,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         showNavBar: true
       })
       .state('floorplan', {
-        url: '/floorplan',
+        url: '/floorplan?filter',
         templateUrl: 'views/floorplan.html',
         controller: 'FloorplanCtrl',
         pageID: 'Floorplan',
@@ -212,7 +212,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     ;
 
   })
-  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog, LastState, api, metric, gettextCatalog) {
+  .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
+                LastState, api, metric, gettextCatalog, language) {
     //set metric constants on root scope so they are always available
     $rootScope.metric = metric;
 
@@ -398,10 +399,6 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     );
 
     // Set language from cookie
-    var lang = $cookieStore.get('lang');
-    if (lang) {
-      gettextCatalog.setCurrentLanguage(lang);
-      angular.element('body').addClass('lang_' + lang);
-    }
+    language.loadLanguage();
 
   });

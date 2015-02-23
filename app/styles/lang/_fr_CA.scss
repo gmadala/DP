@@ -10,6 +10,21 @@ body.lang_fr_CA {
       }
     }
 
+    // counter and text in the upcoming calendar overflow to the next line on this screen width.
+    @media (max-width: 1140px) {
+      .counter {
+        min-width: 30px;
+      }
+
+      .fc-event-title {
+        font-size: 10px;
+      }
+
+      .fc-event-subtitle {
+        font-size: 14px;
+      }
+    }
+
     .accordion-button {
       width: 340px;
     }
@@ -249,6 +264,16 @@ body.lang_fr_CA {
 
     .cart-btn {
       height: 51px;
+    }
+  }
+
+  #ValueLookupPage {
+    .btn-value-lookup-ngc {
+      padding: 7px 10px 7px 10px !important;
+    }
+
+    .btn-value-lookup-mmr {
+      padding: 13px !important;
     }
   }
 

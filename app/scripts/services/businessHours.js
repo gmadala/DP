@@ -25,6 +25,11 @@ angular.module('nextgearWebApp')
             }, prv.msToNextEdge(toReturn));
 
             return toReturn;
+          }, function(/* error */) {
+            $timeout(function() {
+              prv.cachedBusinessHours = null;
+              $rootScope.$broadcast(prv.CHANGE_EVENT);
+            }, prv.msToNextEdge([]));
           });
         }
         return prv.cachedBusinessHours;
@@ -48,7 +53,12 @@ angular.module('nextgearWebApp')
           return 10 * 1000; // 10 seconds
         }
 
-        return nextEdge.diff(now);
+        var diff = nextEdge.diff(now);
+        // if the next edge is really far away like next year then just return 24 hours. $timeout will just keep
+        // invoking its function with larger ms values such as next year (AngularJS bug perhaps).
+        // This is relevant at least when using the mock API.
+        diff = Math.min(diff, 86400000);
+        return diff;
       },
 
       /**

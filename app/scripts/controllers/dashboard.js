@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter, gettextCatalog) {
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil, segmentio, metric, moment, $filter, gettextCatalog, capitalizeFilter) {
 
     segmentio.track(metric.VIEW_DASHBOARD);
 
@@ -12,6 +12,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.viewMode = 'week';
+    $scope.viewModeLabel = gettextCatalog.getString(capitalizeFilter($scope.viewMode));
     $scope.today = moment().format('LL');
 
     // FloorplanUtil handles all search/fetch/reset functionality.
@@ -21,6 +22,7 @@ angular.module('nextgearWebApp')
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
+      $scope.viewModeLabel = gettextCatalog.getString(capitalizeFilter($scope.viewMode));
     };
 
     $scope.isWeekMode = function() {
@@ -114,6 +116,16 @@ angular.module('nextgearWebApp')
       }
       $state.transitionTo('payments', param);
     };
+
+    $scope.filterFloorplans = function(filter) {
+      var param;
+
+      if(filter) {
+        param = {filter: filter};
+      }
+      $state.transitionTo('floorplan', param);
+    };
+
 
     $scope.chartData = {};
     $scope.chartOptions =  {

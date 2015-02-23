@@ -68,13 +68,10 @@ angular.module('nextgearWebApp')
     // Populate inventory location options in proper format (label & value)
     angular.forEach($scope.locs, function(value) {
       var obj = {
-        label: $filter('address')(value, 'oneLineSelect'),
+        label: $filter('address')(value, 'oneLineSelect', true /* inactive prefix */),
         value: value
       };
 
-      if (!value.IsActive) {
-        obj.label = '(INACTIVE) ' + obj.label;
-      }
       $scope.inventoryLocations.push(obj);
     });
 

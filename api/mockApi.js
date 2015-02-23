@@ -55,14 +55,42 @@ var fs = require('fs');
  */
 module.exports = {
   mockApi: function(apiFolder) {
-    var dynamicQuery = /\{\w+\}/,
+    var dynamicQuery = /{\w+}/,
       defaultDirectory = '__default';
 
-    function serveContent(file, res) {
-      console.log('mockApi is serving a file, path=', file);
-      fs.readFile(file, function(err, json) {
-        res.end(json);
-      });
+    function serveContent(file, req, res) {
+      var authorization, auctionAuthorization;
+      // for authentication, dynamically create the response.
+      if (contains(req.url, 'UserAccount\/v1_1\/Authenticate')) {
+        authorization = req.headers.authorization;
+        authorization = authorization.substring(authorization.indexOf(' '), authorization.length);
+        var response = {
+          Success: true,
+          Message: null,
+          Data:{
+            Token: authorization,
+            ShowUserInitialization: false,
+            UserVoiceToken: 'foo',
+            TemporaryPasswordUsed: false
+          }
+        };
+        console.log('mockApi is serving custom authentication data.');
+        res.end(JSON.stringify(response));
+      } else {
+        authorization = req.headers.authorization;
+        auctionAuthorization = new Buffer('auction:test').toString('base64');
+        if (contains(authorization, auctionAuthorization) && contains(file, 'Dealer\/v1_2\/Info')) {
+          file = file.replace('Dealer', 'Auction');
+        }
+        console.log('mockApi is serving a file, path=', file);
+        fs.readFile(file, function(err, json) {
+          res.end(json);
+        });
+      }
+    }
+
+    function contains(str, substring) {
+      return str !== undefined && str.indexOf(substring) > 0;
     }
 
     function serveDefault(folder, req, res) {
@@ -75,7 +103,7 @@ module.exports = {
           break;
         }
       }
-      serveContent(folder + '/' + defaultDirectory + '/' + req.method + '.json', res);
+      serveContent(folder + '/' + defaultDirectory + '/' + req.method + '.json', req, res);
     }
 
     function findFolder(folder, done, failure) {
@@ -94,6 +122,10 @@ module.exports = {
           keepGoing = true;
 
         while (keepGoing && f.length !== 0) {
+          var marker = '/';
+          if (f.lastIndexOf('?') > -1) {
+            marker = '?';
+          }
           // Note: we don't necessarily want to stop when we found a file that exists
           // because if the full path does not exist, we go down the defaults or {} tree
           // instead, utilize the regular expression to tell if it has dynamic query string
@@ -108,12 +140,12 @@ module.exports = {
               }
             }
             if (keepGoing) {
-              f = f.substring(0, f.lastIndexOf('/'));
+              f = f.substring(0, f.lastIndexOf(marker));
               level++;
             }
           }
           else {
-            f = f.substring(0, f.lastIndexOf('/'));
+            f = f.substring(0, f.lastIndexOf(marker));
             level++;
           }
         }
@@ -141,7 +173,7 @@ module.exports = {
       }
     }
 
-    return function(req, res/*,next*/) {
+    return function(req, res) {
       var originalFolder = apiFolder + req.url,
           file;
 
@@ -156,7 +188,7 @@ module.exports = {
           file = foundFolder + req.method + '.json';
           fs.exists(file, function(exists) {
             if (exists) {
-              serveContent(file, res);
+              serveContent(file, req, res);
             }
             else {
               serveDefault(file, req, res);
@@ -169,4 +201,4 @@ module.exports = {
       });
     };
   }
-}
+};

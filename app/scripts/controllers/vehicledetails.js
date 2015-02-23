@@ -238,7 +238,10 @@ angular.module('nextgearWebApp')
 
         // Users should only be able to change inventory location if they have more than one,
         // and the Floorplan's status is either "Approved" or "Pending"
-        $scope.flooringInfo.showChangeLink = ($scope.flooringInfo.FloorplanStatusName === 'Approved' || $scope.flooringInfo.FloorplanStatusName === 'Pending') && $scope.inventoryLocations.length > 1;
+        $scope.flooringInfo.showChangeLink =
+          ($scope.flooringInfo.FloorplanStatusName === gettextCatalog.getString('Approved') ||
+          $scope.flooringInfo.FloorplanStatusName === gettextCatalog.getString('Pending')) &&
+          $scope.inventoryLocations.length > 1;
 
         // Update Inventory Location
         var tempAddress;
@@ -419,6 +422,8 @@ angular.module('nextgearWebApp')
         $scope.showExtendLink = function() {
           return !!$scope.financialSummary.NextPaymentAmount && $scope.financialSummary.NextPaymentAmount === $scope.financialSummary.TotalOutstanding;
         };
+        //Checking for United States Dealer
+        $scope.isUnitedStates = User.isUnitedStates();
 
         $scope.requestExtension = function() {
           // We need a payment object, but we only need the FloorplanId, Vin, & Description properties.

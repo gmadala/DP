@@ -7,6 +7,11 @@
     padding: 10px 20px 0;
   }
 
+  .error-table {
+    padding: 5px;
+    background-color: $wellBackground;
+  }
+
   label {
     font-size: $baseFontSize;
     margin-bottom: 2px;
@@ -60,6 +65,11 @@
     font-size: 22px;
     font-weight: normal;
     margin: 30px auto 20px;
+  }
+
+  .error-table {
+    padding: 5px;
+    background-color: $wellBackground;
   }
 
   .modal-footer {
