@@ -21,7 +21,8 @@ angular.module('nextgearWebApp')
       possibleDates: possibleDates,
       breakdown: fee ? null : angular.copy(payment.getBreakdown()),
       getPaymentTotal: function() {
-        return fee ? fee.Balance : $scope.model.breakdown.principal + $scope.model.breakdown.additionalPrincipal + $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
+        return fee ? fee.Balance : $scope.model.breakdown.principal + ($scope.model.breakdown.additionalPrincipal || 0)  +
+        $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
       }
     };
 
