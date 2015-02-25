@@ -167,7 +167,7 @@ angular.module('nextgearWebApp')
       // grab params, build url string and open window with report.
       var stat = $scope.expInvStatus.value;
       var strUrl = api.contentLink(
-        '/report/inventorydetail/' + stat + '/InventoryDetails_' + stat,
+        '/report/inventorydetail/' + stat + '/InventoryDetails_' + moment().format('YYYYMMDDhmmss'),
         {}
       );
 
