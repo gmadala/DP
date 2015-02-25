@@ -165,7 +165,7 @@
       <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>:</label>
       <div class="style-select">
         <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
-                ng-options="value && 'Seller' || 'Buyer' for value in paySellerOptions"
+                ng-options="value && 'Seller' || 'Buyer' | translate for value in paySellerOptions"
                 ng-change="data.BankAccountId = null"
                 ng-disabled="data.SaleTradeIn">
           <option value="" translate>Make Selection</option>
