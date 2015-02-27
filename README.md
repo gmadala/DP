@@ -101,7 +101,8 @@ Note: our team pushes to the develop branch often, and upon deployment the tech 
 #Grunt tasks
 -----------------------
 
-The project uses Grunt for task automation. The primary tasks to be run from the terminal are as follows:
+The project uses Grunt for task automation. Use `grunt --help` to list out all available task and the definition.
+The primary tasks to be run from the terminal are as follows:
 
 #### server
 
