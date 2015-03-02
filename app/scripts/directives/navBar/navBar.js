@@ -17,6 +17,7 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', metric: metric.CLICK_PAYMENTS_LINK},
           { name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', metric: metric.CLICK_FLOORPLAN_LINK},
           { name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts', metric: metric.CLICK_RECEIPTS_LINK},
+          { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK},
           { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK}
         ],
         secondary: [
@@ -29,7 +30,8 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard', metric: ''},
           { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch', metric: ''},
           { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring', metric: ''},
-          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''}
+          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''},
+          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK}
         ]
       };
 
@@ -66,19 +68,6 @@ angular.module('nextgearWebApp')
 
         User.getShowReportsAndResources().then(function (data) {
           if (data) {
-            dealerLinks.primary.splice(4, 0, {
-              name: gettextCatalog.getString('Reports'),
-              href: '#/reports',
-              activeWhen: 'reports',
-              metric: metric.CLICK_VIEW_A_REPORT_LINK
-            });
-            auctionLinks.primary.splice(3, 0, {
-              name: gettextCatalog.getString('View a Report'),
-              href: '#/act/reports',
-              activeWhen: 'auction_reports',
-              metric: metric.CLICK_AUCTION_REPORTS_LINK
-            });
-
             dealerLinks.secondary.splice(2, 0, {
               name: gettextCatalog.getString('Resources'),
               href: '#/documents',
