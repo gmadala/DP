@@ -6,13 +6,17 @@
  * @description
  * # features
  * Provides a way to turn features on or off. The features can be for development purposes or for business purposes
- * (release or business feature toggles)
+ * (release or business feature toggles).
+ *
+ * Business features are features that need to be enabled or disabled based on rules such as which user is logged in.
+ * Business features can be handled with this service but will need a separate configuration object, likely
+ * coming from the API.
+ *
+ * Features can be enabled using the query string ?features=kbb,feature1,feature2
  */
 angular.module('nextgearWebApp')
   .factory('features', function ($location) {
 
-    // release features are features that need to be shown or hidden on a temporary basis as part of the development
-    // workflow
     var service = {
       kbb: {
         enabled: false
@@ -35,12 +39,6 @@ angular.module('nextgearWebApp')
       }
     };
     service.loadFromQueryString();
-
-    // Business features are features that need to be enabled or disabled based on rules such as which user is logged in.
-    // Business features can be handled with this service but will need a separate configuration object, likely
-    // coming from the API
-
-    // features can be enabled using the query string: ?features=kbb,feature1,feature2
 
     return service;
   });
