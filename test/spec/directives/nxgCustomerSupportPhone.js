@@ -5,8 +5,8 @@ describe('Directive: nxgCustomerSupportPhone', function () {
   beforeEach(module('nextgearWebApp'));
 
   var scope, element;
-  var phoneQuebec = 'Canada - Quebec    1.877.864.9291';
-  var phoneNational = 'Canada - National    1.855.864.9291';
+  var phoneQuebec = 'Canada - Quebec    1.855.864.9291';
+  var phoneNational = 'Canada - National    1.877.864.9291';
   var phoneUnitedStates = 'United States    1.888.969.3721';
 
   it('should replace with phone number', inject(function ($rootScope, $compile) {

@@ -16,11 +16,11 @@ angular.module('nextgearWebApp')
       '  </tr>'+
       '  <tr>'+
       '    <td>Canada - Quebec</td>'+
-      '    <td>1.877.864.9291</td>'+
+      '    <td>1.855.864.9291</td>'+
       '  </tr>'+
       '  <tr>'+
       '    <td>Canada - National</td>'+
-      '    <td>1.855.864.9291</td>'+
+      '    <td>1.877.864.9291</td>'+
       '  </tr>'+
       '</table>'
     };
