@@ -21,6 +21,11 @@ angular.module('nextgearWebApp')
           noMatch: false,
           data: null
         },
+        kbb: {
+          multiple: null,
+          noMatch: false,
+          data: null
+        },
         vin: null,
         mileage: null,
         description: null
@@ -30,11 +35,18 @@ angular.module('nextgearWebApp')
       $scope.vinLookup.searchComplete = false;
     };
 
-    var resetOptions = function(field, isMmr) {
+    var resetOptions = function(field, lookupValue) {
       // clear out all the following options when a field is updated.
-      var object = isMmr ? $scope.manualLookup.mmr : $scope.manualLookup.blackbook,
-          fields = object.fields,
-          index = fields.indexOf(field);
+      var object={};
+      if (lookupValue === 'mmr') {
+        object = $scope.manualLookup.mmr;
+      }else if(lookupValue === 'bb') {
+        object = $scope.manualLookup.blackbook;
+      } else {
+        object = $scope.manualLookup.kbb;
+      }
+      var fields = object.fields;
+      var index = fields.indexOf(field);
 
       for(var i = fields.length-1; i >= index; --i) {
         object[fields[i]].selected = null;
@@ -50,12 +62,16 @@ angular.module('nextgearWebApp')
       return ($scope.manualLookup.searchComplete && !$scope.results.blackbook.data && !$scope.results.blackbook.noMatch);
     };
 
+    $scope.hideKbbAll = function() {
+      return ($scope.manualLookup.searchComplete && !$scope.results.kbb.data && !$scope.results.kbb.noMatch);
+    };
+
     $scope.showMultiplesWarning = function() {
-      return !!$scope.results.blackbook.multiple || !!$scope.results.mmr.multiple;
+      return !!$scope.results.blackbook.multiple || !!$scope.results.mmr.multiple || !!$scope.results.kbb.multiple;
     };
 
     $scope.showDescription = function() {
-      return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
+      return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch && $scope.results.kbb.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
     };
 
     $scope.searchCompleteCheck = function() {
@@ -118,6 +134,24 @@ angular.module('nextgearWebApp')
           $scope.results.mmr.noMatch = true;
         });
 
+        //search Kbb Start
+        /*Kbb.lookupByVin(this.vin, this.mileage).then(function(results) {
+          if(results.length === 1) {
+            $scope.results.kbb.data = results[0];
+          } else { // we have multiple results
+            $scope.results.kbb.multiple = results;
+            $scope.results.kbb.data = results[0]; // as a default
+          }
+
+          if(!$scope.results.description && results) {
+            $scope.results.description = buildDescription(results[0]);
+          }
+        }, function() {
+          // no results
+          $scope.results.kbb.noMatch = true;
+        });*/
+        // Kbb search End
+
         this.searchComplete = true;
         $scope.searchInProgress = false;
       },
@@ -131,8 +165,26 @@ angular.module('nextgearWebApp')
       }
     };
 
+
+    $scope.ChangeLayout=function(idValue){
+      if(idValue === 1){
+        $scope.BookValue = true;
+        $scope.MMRValue = false;
+        $scope.KBBValue = false;
+      }else if(idValue === 2) {
+        $scope.BookValue = false;
+        $scope.MMRValue = true;
+        $scope.KBBValue = false;
+      }else{
+        $scope.BookValue = false;
+        $scope.MMRValue = false;
+        $scope.KBBValue = true;
+      }
+    };
+
+
+
     $scope.manualLookup = {
-      showBlackbook: true,
       searchComplete: false,
       blackbook: {
         fields: ['makes', 'models', 'years', 'styles'],
@@ -140,7 +192,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('makes');
+            resetOptions('makes','bb');
 
             Blackbook.getMakes().then(function(makes) {
               bb.makes.list = makes;
@@ -152,7 +204,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('models');
+            resetOptions('models','bb');
 
             if(bb.makes.selected) {
               Blackbook.getModels(bb.makes.selected).then(function(models) {
@@ -170,7 +222,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('years');
+            resetOptions('years','bb');
             if(bb.models.selected) {
               Blackbook.getYears(bb.makes.selected, bb.models.selected).then(function(years) {
                 bb.years.list = years;
@@ -187,7 +239,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('styles');
+            resetOptions('styles','bb');
 
             if(bb.years.selected) {
               Blackbook.getStyles(bb.makes.selected, bb.models.selected, bb.years.selected).then(function(styles) {
@@ -244,7 +296,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('years', true);
+            resetOptions('years', 'mmr');
 
             Mmr.getYears().then(function(years) {
               mm.years.list = years;
@@ -256,7 +308,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('makes', true);
+            resetOptions('makes', 'mmr');
 
             if(mm.years.selected) {
               Mmr.getMakes(mm.years.selected).then(function(makes) {
@@ -274,7 +326,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('models', true);
+            resetOptions('models', 'mmr');
             if(mm.makes.selected) {
               Mmr.getModels(mm.makes.selected, mm.years.selected).then(function(models) {
                 mm.models.list = models;
@@ -291,7 +343,7 @@ angular.module('nextgearWebApp')
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('styles', true);
+            resetOptions('styles', 'mmr');
 
             if(mm.models.selected) {
               Mmr.getBodyStyles(mm.makes.selected, mm.years.selected, mm.models.selected).then(function(bodyStyles) {
@@ -343,9 +395,123 @@ angular.module('nextgearWebApp')
           return true;
         }
       },
-      toggleForm: function(shouldShowBlackbook) {
-        this.showBlackbook = shouldShowBlackbook;
+
+      //KBB Start
+
+      kbb: {
+        fields: ['years', 'makes', 'models', 'styles'],
+        years: {
+          selected: null,
+          list: [],
+          fill: function() {
+            resetOptions('years', 'kbb');
+
+            Kbb.getYears().then(function(years) {
+              kb.years.list = years;
+              kb.years.selected = null;
+            });
+          }
+        },
+        makes: {
+          selected: null,
+          list: [],
+          fill: function() {
+            resetOptions('makes', 'kbb');
+
+            if(kb.years.selected) {
+              Kbb.getMakes(kb.years.selected).then(function(makes) {
+                kb.makes.list = makes;
+
+                if(makes.length === 1) {
+                  kb.makes.selected = makes[0];
+                  kb.models.fill();
+                }
+              });
+            }
+          }
+        },
+        models: {
+          selected: null,
+          list: [],
+          fill: function() {
+            resetOptions('models', 'kbb');
+            if(kb.makes.selected) {
+              Kbb.getModels(kb.makes.selected, kb.years.selected).then(function(models) {
+                kb.models.list = models;
+
+                if(models.length === 1) {
+                  kb.models.selected = models[0];
+                  kb.styles.fill();
+                }
+              });
+            }
+          }
+        },
+        styles: {
+          selected: null,
+          list: [],
+          fill: function() {
+            resetOptions('styles', 'kbb');
+
+            if(kb.models.selected) {
+              Kbb.getBodyStyles(kb.makes.selected, kb.years.selected, kb.models.selected).then(function(bodyStyles) {
+                kb.styles.list = bodyStyles;
+
+                if (bodyStyles.length === 1) {
+                  kb.styles.selected = bodyStyles[0];
+                }
+              });
+            }
+          }
+        },
+        mileage: null,
+        validity: {},
+        lookup: function() {
+          // make sure we reset the other search, in case we've already run it.
+          $scope.vinLookup.resetSearch();
+
+          var which = this;
+          if(!which.validate()) {
+            return false;
+          }
+
+          $scope.searchInProgress = true;
+          $scope.results.vin = null;
+          $scope.results.mileage = which.mileage;
+
+          Kbb.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
+            // MMR will almost always return only one result based
+            // on all 5 params, and if there are multiples, the
+            // values will likely be the same anyway. So, we
+            // assume there is only item in the array
+            $scope.results.kbb.data = vehicles[0];
+            $scope.results.description = buildDescription(vehicles[0]);
+          }, function() {
+            // no results
+            $scope.results.kbb.noMatch = true;
+          });
+
+          $scope.searchInProgress = false;
+          $scope.manualLookup.searchComplete = true;
+        },
+        validate: function() {
+          this.validity = angular.copy($scope.manualLookupForm);
+
+          if(!$scope.manualLookupForm.$valid) {
+            return false;
+          }
+          return true;
+        }
       },
+
+      //KBB End
+
+
+
+
+      /* toggleForm: function(shouldShowBlackbook) {
+       this.showBlackbook = shouldShowBlackbook;
+       },*/
       resetSearch: function() {
         bb.makes.selected = null;
         bb.models.list = [];
@@ -365,6 +531,15 @@ angular.module('nextgearWebApp')
         mm.styles.selected = null;
         mm.mileage = null;
 
+        kb.years.selected = null;
+        kb.makes.list = [];
+        kb.makes.selected = null;
+        kb.models.list = [];
+        kb.models.selected = null;
+        kb.styles.list = [];
+        kb.styles.selected = null;
+        kb.mileage = null;
+
         resetResults();
       },
       lookup: function() {
@@ -379,9 +554,18 @@ angular.module('nextgearWebApp')
     // Utility objects for easier reference
     var bb = $scope.manualLookup.blackbook;
     var mm = $scope.manualLookup.mmr;
+    var kb = $scope.manualLookup.kbb;
 
     resetResults(); // To get everything set up
     $scope.manualLookup.blackbook.makes.fill(); // Default Blackbook
     $scope.manualLookup.mmr.years.fill(); // Default MMR
+    //$scope.manualLookup.kbb.years.fill(); // Default KBB
     $scope.isUnitedStates = User.isUnitedStates();
+
+    $scope.manualLookupValues=[
+      { id:1, name:'Nextgear Book'},
+      { id:2, name:'MMR Values'},
+      { id:3, name:'KBB Values'}
+    ];
+
   });
