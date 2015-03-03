@@ -329,8 +329,10 @@ module.exports = function(grunt) {
     },
     preprocess: {
       index: {
-        src: '<%= yeoman.dist %>/index.html',
-        dest: '<%= yeoman.dist %>/index.html'
+        files: {
+          '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html',
+          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
+        }
       },
       dist : {
         src : [ '.tmp/concat/scripts/scripts.js' ],
