@@ -213,7 +213,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
   })
   .run(function($rootScope, $location, User, $window, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
-                LastState, api, metric, gettextCatalog, language) {
+                LastState, api, metric, gettextCatalog, language, features) {
     //set metric constants on root scope so they are always available
     $rootScope.metric = metric;
 
@@ -400,5 +400,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
 
     // Set language from cookie
     language.loadLanguage();
+
+    features.loadFromQueryString();
 
   });

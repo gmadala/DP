@@ -13,6 +13,7 @@
  * coming from the API.
  *
  * Features can be enabled using the query string ?features=kbb,feature1,feature2
+ * The loadFromQueryString must be called from app.run while the query string is still intact.
  */
 angular.module('nextgearWebApp')
   .factory('features', function ($location) {
@@ -38,7 +39,6 @@ angular.module('nextgearWebApp')
         }
       }
     };
-    service.loadFromQueryString();
 
     return service;
   });
