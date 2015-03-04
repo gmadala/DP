@@ -137,7 +137,8 @@ module.exports = function(grunt) {
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
         '!app/scripts/translations.js',
-        'e2e/**/*.js'
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
       ]
     },
     karma: {
