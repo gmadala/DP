@@ -11,6 +11,8 @@ var modelId = 27751; // '3500 Regular Cab & Chassis'
 var vehicleId = 1000; // TODO
 var zipCode = '46123'; // TODO
 
+
+
 frisby.create('Kelley Blue Book (KBB): Authenticate')
   //.addHeader('Content-Type', 'application/json')
   //.addHeader('Accept', 'application/json')
