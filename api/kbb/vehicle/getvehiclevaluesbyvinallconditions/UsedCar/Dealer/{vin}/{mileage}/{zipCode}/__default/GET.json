@@ -1,0 +1,146 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": [
+    {
+      "priceType": "AuctionExcellent",
+      "priceValue": 26376
+    },
+    {
+      "priceType": "AuctionFair",
+      "priceValue": 22929
+    },
+    {
+      "priceType": "AuctionGood",
+      "priceValue": 24926
+    },
+    {
+      "priceType": "AuctionVeryGood",
+      "priceValue": 25815
+    },
+    {
+      "priceType": "BaseRetail",
+      "priceValue": 27313
+    },
+    {
+      "priceType": "BaseWholesale",
+      "priceValue": 25885
+    },
+    {
+      "priceType": "CPO",
+      "priceValue": 28530
+    },
+    {
+      "priceType": "CPORangeHigh",
+      "priceValue": 29866
+    },
+    {
+      "priceType": "CPORangeLow",
+      "priceValue": 27193
+    },
+    {
+      "priceType": "Invoice",
+      "priceValue": 0
+    },
+    {
+      "priceType": "MSRP",
+      "priceValue": 40570
+    },
+    {
+      "priceType": "NewCarFairPurchasePrice",
+      "priceValue": 0
+    },
+    {
+      "priceType": "NewCarFairPurchasePriceRangeHigh",
+      "priceValue": 0
+    },
+    {
+      "priceType": "NewCarFairPurchasePriceRangeLow",
+      "priceValue": 0
+    },
+    {
+      "priceType": "PrivatePartyExcellent",
+      "priceValue": 26524
+    },
+    {
+      "priceType": "PrivatePartyFair",
+      "priceValue": 23068
+    },
+    {
+      "priceType": "PrivatePartyGood",
+      "priceValue": 25069
+    },
+    {
+      "priceType": "PrivatePartyVeryGood",
+      "priceValue": 25961
+    },
+    {
+      "priceType": "Retail",
+      "priceValue": 28105
+    },
+    {
+      "priceType": "TradeInExcellent",
+      "priceValue": 25236
+    },
+    {
+      "priceType": "TradeInExcellentRangeHigh",
+      "priceValue": 25781
+    },
+    {
+      "priceType": "TradeInExcellentRangeLow",
+      "priceValue": 24690
+    },
+    {
+      "priceType": "TradeInFair",
+      "priceValue": 21789
+    },
+    {
+      "priceType": "TradeInFairRangeHigh",
+      "priceValue": 23494
+    },
+    {
+      "priceType": "TradeInFairRangeLow",
+      "priceValue": 21206
+    },
+    {
+      "priceType": "TradeInGood",
+      "priceValue": 23786
+    },
+    {
+      "priceType": "TradeInGoodRangeHigh",
+      "priceValue": 24361
+    },
+    {
+      "priceType": "TradeInGoodRangeLow",
+      "priceValue": 23212
+    },
+    {
+      "priceType": "TradeInVeryGood",
+      "priceValue": 24675
+    },
+    {
+      "priceType": "TradeInVeryGoodRangeHigh",
+      "priceValue": 25208
+    },
+    {
+      "priceType": "TradeInVeryGoodRangeLow",
+      "priceValue": 24141
+    },
+    {
+      "priceType": "UsedCarFairPurchasePrice",
+      "priceValue": 27255
+    },
+    {
+      "priceType": "UsedCarFairPurchasePriceRangeHigh",
+      "priceValue": 29844
+    },
+    {
+      "priceType": "UsedCarFairPurchasePriceRangeLow",
+      "priceValue": 24665
+    },
+    {
+      "priceType": "Wholesale",
+      "priceValue": 26610
+    }
+  ]
+}

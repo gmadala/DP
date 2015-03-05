@@ -1,0 +1,19 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "DisplayName": "Plug-in Hybrid Sedan 4D",
+    "OemBodyStyle": "Sedan",
+    "NumberOfDoors": "4",
+    "DefaultDriveTrain": "FWD",
+    "ManufacturerCode": "",
+    "BedLength": "",
+    "DefaultEngine": "4-Cyl, Hybrid i-VTEC 2.0L",
+    "DefaultTransmission": "Automatic, CVT",
+    "MarketName": "",
+    "Name": "",
+    "Id": 385279,
+    "AdditionalData": "",
+    "VehicleId": 385279
+  }
+}
