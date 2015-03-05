@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User) {
+  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User, features) {
     $scope.results = {};
     $scope.searchInProgress = false;
 
@@ -546,10 +546,12 @@ angular.module('nextgearWebApp')
 
     $scope.manualLookupValues=[
       { id:1, name:'Nextgear Book'},
-      { id:2, name:'MMR Values'},
-      { id:3, name:'Kelley Blue Book Values'}
+      { id:2, name:'MMR Values'}
     ];
-
+    var kbbEnabled = features.kbb.enabled;
+    if (kbbEnabled){
+      $scope.manualLookupValues.push({ id:3, name:'Kelly Blue Book Values'});
+    }
 
     $scope.ChangeLayout=function(idValue){
       if(idValue === 1){
