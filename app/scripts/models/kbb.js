@@ -20,7 +20,7 @@
  * 2. User enters mileage
  * 3. User enters ZIP code
  * 4. User clicks lookup
- * 5. GET /kbb/vehicle/TODO/{vin}/{mileage}/{zipCode}
+ * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/{vin}/{mileage}/{zipCode}
  */
 
 'use strict';
@@ -136,12 +136,11 @@ angular.module('nextgearWebApp')
           throw new Error('Missing mileage');
         }
 
-        var data = {
-          vin: vin,
-          mileage: mileage
-        };
+        var data = getDefaultRequestData();
+        data.vin = vin;
+        data.mileage = mileage;
 
-        return api.request('GET', base + 'TODO', data).then(function(results) {
+        return api.request('GET', base + 'getvehiclevaluesbyvinallconditions', data).then(function(results) {
 
           // TODO necessary?
           var res = removeNulls(results);
