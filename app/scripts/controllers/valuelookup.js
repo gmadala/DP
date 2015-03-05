@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User, features) {
+  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User, features, gettextCatalog) {
     $scope.results = {};
     $scope.searchInProgress = false;
 
@@ -523,12 +523,14 @@ angular.module('nextgearWebApp')
         resetResults();
       },
       lookup: function() {
-        if ($scope.BookValue) {
-          this.blackbook.lookup();
-        } else if($scope.MMRValue) {
-          this.mmr.lookup();
-        } else {
-          this.kbb.lookup();
+        if ($scope.lookupValues.id !== 0) {
+          if ($scope.BookValue) {
+            this.blackbook.lookup();
+          } else if ($scope.MMRValue) {
+            this.mmr.lookup();
+          } else if ($scope.KBBValue) {
+            this.kbb.lookup();
+          }
         }
       }
     };
@@ -545,12 +547,15 @@ angular.module('nextgearWebApp')
     $scope.isUnitedStates = User.isUnitedStates();
 
     $scope.manualLookupValues=[
-      { id:1, name:'Nextgear Book'},
-      { id:2, name:'MMR Values'}
+      { id:0, name: gettextCatalog.getString('Select Manual Lookup Values')},
+      { id:1, name: gettextCatalog.getString('NextGear Book Values')},
+      { id:2, name: gettextCatalog.getString('MMR Values')}
     ];
-    var kbbEnabled = features.kbb.enabled;
-    if (kbbEnabled){
-      $scope.manualLookupValues.push({ id:3, name:'Kelly Blue Book Values'});
+    $scope.lookupValues = $scope.manualLookupValues[0];
+
+    $scope.kbbEnabled = features.kbb.enabled;
+    if ($scope.kbbEnabled && $scope.isUnitedStates){
+      $scope.manualLookupValues.push({ id:3, name: gettextCatalog.getString('Kelley Blue Book Values')});
     }
 
     $scope.ChangeLayout=function(idValue){

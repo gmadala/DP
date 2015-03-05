@@ -11,6 +11,7 @@ describe('Controller: ValueLookupCtrl', function () {
     $q,
     mmr,
     blackbook,
+    featureValue,
     fillBlackbook,
     fillMmr,
     fillVinSearch,
@@ -20,11 +21,12 @@ describe('Controller: ValueLookupCtrl', function () {
     mock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _$q_, Blackbook, Mmr) {
+  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _$q_, Blackbook, Mmr, features) {
     $httpBackend = _$httpBackend_;
     $q = _$q_;
     blackbook = Blackbook;
     mmr = Mmr;
+    featureValue = features;
 
     scope = $rootScope.$new();
 
@@ -197,8 +199,10 @@ describe('Controller: ValueLookupCtrl', function () {
       it('should return false if we have no match for blackbook or mmr', function() {
         scope.results.mmr.data = null;
         scope.results.blackbook.data = null;
+        scope.results.kbb.data = null;
         scope.results.mmr.noMatch = true;
         scope.results.blackbook.noMatch = true;
+        scope.results.kbb.noMatch = true;
         scope.vinLookup.searchComplete = true;
         expect(scope.showDescription()).toBe(false);
       });
@@ -349,27 +353,34 @@ describe('Controller: ValueLookupCtrl', function () {
       run();
     });
 
-    it('should have a flag to determine whether to display blackbook or mmr', function() {
-      expect(scope.manualLookup.showBlackbook).toBe(true);
-    });
-
-    it('should have a toggle function to switch between blackbook and mmr forms', function() {
-      expect(typeof scope.manualLookup.toggleForm).toBe('function');
-      scope.manualLookup.showBlackbook = false;
-      scope.manualLookup.toggleForm(true);
-      expect(scope.manualLookup.showBlackbook).toBe(true);
-    });
-
     it('should have a lookup up function to call the appropriate model\'s lookupByOptions function', function() {
-      spyOn(scope.manualLookup.blackbook, 'lookup').andReturn({});
-      spyOn(scope.manualLookup.mmr, 'lookup').andReturn({});
-      expect(scope.manualLookup.showBlackbook).toBe(true);
-      scope.manualLookup.lookup();
-      expect(scope.manualLookup.blackbook.lookup).toHaveBeenCalled();
+      var nextGear = scope.manualLookupValues[0].id;
+      var mmrValue = scope.manualLookupValues[1].id;
+      var kbbEnabled = featureValue.kbb.enabled;
 
-      scope.manualLookup.showBlackbook = false;
-      scope.manualLookup.lookup();
-      expect(scope.manualLookup.mmr.lookup).toHaveBeenCalled();
+      expect(nextGear).toBe(1);
+      spyOn(scope.manualLookup.blackbook, 'lookup').andReturn({});
+      if(scope.BookValue) {
+        scope.manualLookup.lookup();
+        expect(scope.manualLookup.blackbook.lookup).toHaveBeenCalled();
+      }
+
+      expect(mmrValue).toBe(2);
+      spyOn(scope.manualLookup.mmr, 'lookup').andReturn({});
+      if(scope.MMRValue) {
+        scope.manualLookup.lookup();
+        expect(scope.manualLookup.mmr.lookup).toHaveBeenCalled();
+      }
+
+
+      if(kbbEnabled) {
+        var kbbValue = scope.manualLookupValues[2].id;
+        expect(kbbValue).toBe(3);
+        spyOn(scope.manualLookup.kbb, 'lookup').andReturn({});
+        if(scope.KBBValue) {
+          scope.manualLookup.lookup();
+        }
+      }
     });
 
     describe('blackbook functionality', function() {
