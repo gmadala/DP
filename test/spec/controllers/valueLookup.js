@@ -354,30 +354,29 @@ describe('Controller: ValueLookupCtrl', function () {
     });
 
     it('should have a lookup up function to call the appropriate model\'s lookupByOptions function', function() {
-      var nextGear = scope.manualLookupValues[0].id;
-      var mmrValue = scope.manualLookupValues[1].id;
+      var nextGear = scope.manualLookupValues[1].id;
+      var mmrValue = scope.manualLookupValues[2].id;
       var kbbEnabled = featureValue.kbb.enabled;
 
-      expect(nextGear).toBe(1);
+      expect(nextGear).toBe('bb');
       spyOn(scope.manualLookup.blackbook, 'lookup').andReturn({});
-      if(scope.BookValue) {
+      if(scope.lookupValues.id === 'bb') {
         scope.manualLookup.lookup();
         expect(scope.manualLookup.blackbook.lookup).toHaveBeenCalled();
       }
 
-      expect(mmrValue).toBe(2);
+      expect(mmrValue).toBe('mmr');
       spyOn(scope.manualLookup.mmr, 'lookup').andReturn({});
-      if(scope.MMRValue) {
+      if(scope.lookupValues.id === 'mmr') {
         scope.manualLookup.lookup();
         expect(scope.manualLookup.mmr.lookup).toHaveBeenCalled();
       }
 
-
       if(kbbEnabled) {
-        var kbbValue = scope.manualLookupValues[2].id;
-        expect(kbbValue).toBe(3);
+        var kbbValue = scope.manualLookupValues[3].id;
+        expect(kbbValue).toBe('kbb');
         spyOn(scope.manualLookup.kbb, 'lookup').andReturn({});
-        if(scope.KBBValue) {
+        if(scope.lookupValues.id === 'kbb') {
           scope.manualLookup.lookup();
         }
       }

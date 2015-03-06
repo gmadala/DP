@@ -80,18 +80,16 @@
       <div class="well-item">
         <form class="value-form" name="manualLookupForm" novalidate>
           <div class="form-block" ng-switch="lookupValues.id">
-            <div class="style-select" ng-class="{ 'nxg-invalid': validity.manualLookupValues.$error.required }">
-              <select id="lookupValues" name="lookupValues"
-                      ng-model="lookupValues"
-                      ng-change="ChangeLayout(lookupValues.id)"
+            <div class="style-select" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
+              <select id="lookupValues" name="lookupValues" ng-model="lookupValues"
                       ng-options="lookupValues.name for lookupValues in manualLookupValues"
                       required>
               </select>
-            <label for="lookupValues" class="text-error" ng-show="validity.manualLookupValues.$error.required" translate>
+            </div>
+            <label for="lookupValues" class="text-error" ng-show="manualLookupForm.lookupValues.$error.required" translate>
               Please Select a Manual Lookup Values.
             </label>
-            </div>
-            <div class="" ng-switch-when="1">
+            <div class="" ng-switch-when="bb">
               <label for="make" translate>Make</label>
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.make.$error.required }">
                 <select id="make" name="make"
@@ -177,7 +175,7 @@
               </label>
             </div>
 
-            <div class="" ng-switch-when="2">
+            <div class="" ng-switch-when="mmr">
               <label for="mmrYear" translate>MMRYear</label>
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrYear.$error.required }">
                 <select id="mmrYear" name="mmrYear"
@@ -188,7 +186,7 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="mmrYear" class="text-error" ng-show="manualLookup.mmr.validity.years.$error.required" translate>
+              <label for="mmrYear" class="text-error" ng-show="manualLookup.mmr.validity.mmrYear.$error.required" translate>
                 Please select a Year.
               </label>
 
@@ -263,7 +261,7 @@
               </label>
             </div>
 
-            <div class="" ng-switch-when="3">
+            <div class="" ng-switch-when="kbb">
               <label for="kbbYear" translate>KBBYear</label>
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbYear.$error.required }">
                 <select id="kbbYear" name="kbbYear"
@@ -274,7 +272,7 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="kbbYear" class="text-error" ng-show="manualLookup.kbb.validity.year.$error.required" translate>
+              <label for="kbbYear" class="text-error" ng-show="manualLookup.kbb.validity.kbbYear.$error.required" translate>
                 Please select a Year.
               </label>
 

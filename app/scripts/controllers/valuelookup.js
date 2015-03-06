@@ -267,11 +267,7 @@ angular.module('nextgearWebApp')
         },
         validate: function() {
           this.validity = angular.copy($scope.manualLookupForm);
-
-          if (!$scope.manualLookupForm.$valid) {
-            return false;
-          }
-          return true;
+          return $scope.manualLookupForm.$valid;
         }
       },
       mmr: {
@@ -372,11 +368,7 @@ angular.module('nextgearWebApp')
         },
         validate: function() {
           this.validity = angular.copy($scope.manualLookupForm);
-
-          if(!$scope.manualLookupForm.$valid) {
-            return false;
-          }
-          return true;
+          return $scope.manualLookupForm.$valid;
         }
       },
 
@@ -482,11 +474,7 @@ angular.module('nextgearWebApp')
         },
         validate: function() {
           this.validity = angular.copy($scope.manualLookupForm);
-
-          if(!$scope.manualLookupForm.$valid) {
-            return false;
-          }
-          return true;
+          return $scope.manualLookupForm.$valid;
         }
       },
       //KBB End
@@ -522,15 +510,19 @@ angular.module('nextgearWebApp')
 
         resetResults();
       },
-      lookup: function() {
-        if ($scope.lookupValues.id !== 0) {
-          if ($scope.BookValue) {
-            this.blackbook.lookup();
-          } else if ($scope.MMRValue) {
-            this.mmr.lookup();
-          } else if ($scope.KBBValue) {
-            this.kbb.lookup();
-          }
+      lookup: function () {
+        switch ($scope.lookupValues.id) {
+        case 'bb':
+          this.blackbook.lookup();
+          break;
+        case 'mmr':
+          this.mmr.lookup();
+          break;
+        case 'kbb':
+          this.kbb.lookup();
+          break;
+        default:
+          $scope.manualLookupForm.lookupValues.$setValidity('required', false);
         }
       }
     };
@@ -547,30 +539,14 @@ angular.module('nextgearWebApp')
     $scope.isUnitedStates = User.isUnitedStates();
 
     $scope.manualLookupValues=[
-      { id:0, name: gettextCatalog.getString('Select Manual Lookup Values')},
-      { id:1, name: gettextCatalog.getString('NextGear Book Values')},
-      { id:2, name: gettextCatalog.getString('MMR Values')}
+      { id:'', name: gettextCatalog.getString('Select Manual Lookup Values')},
+      { id:'bb', name: gettextCatalog.getString('NextGear Book Values')},
+      { id:'mmr', name: gettextCatalog.getString('MMR Values')}
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
 
     $scope.kbbEnabled = features.kbb.enabled;
     if ($scope.kbbEnabled && $scope.isUnitedStates){
-      $scope.manualLookupValues.push({ id:3, name: gettextCatalog.getString('Kelley Blue Book Values')});
+      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book Values')});
     }
-
-    $scope.ChangeLayout=function(idValue){
-      if(idValue === 1){
-        $scope.BookValue = true;
-        $scope.MMRValue = false;
-        $scope.KBBValue = false;
-      }else if(idValue === 2) {
-        $scope.BookValue = false;
-        $scope.MMRValue = true;
-        $scope.KBBValue = false;
-      }else{
-        $scope.BookValue = false;
-        $scope.MMRValue = false;
-        $scope.KBBValue = true;
-      }
-    };
   });
