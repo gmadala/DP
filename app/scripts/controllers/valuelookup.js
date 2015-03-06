@@ -547,6 +547,6 @@ angular.module('nextgearWebApp')
 
     $scope.kbbEnabled = features.kbb.enabled;
     if ($scope.kbbEnabled && $scope.isUnitedStates){
-      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book Values')});
+      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Values')});
     }
   });
