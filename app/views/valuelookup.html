@@ -267,7 +267,7 @@
                 <select id="kbbYear" name="kbbYear"
                         ng-model="manualLookup.kbb.years.selected"
                         ng-change="manualLookup.kbb.makes.fill()"
-                        ng-options="year.Name for year in manualLookup.mmr.years.list"
+                        ng-options="year.Value for year in manualLookup.kbb.years.list"
                         required>
                   <option value=""></option>
                 </select>
@@ -282,7 +282,7 @@
                         ng-model="manualLookup.kbb.makes.selected"
                         ng-change="manualLookup.kbb.models.fill()"
                         ng-disabled="!manualLookup.kbb.years.selected"
-                        ng-options="make.Name for make in manualLookup.kbb.makes.list"
+                        ng-options="make.Value for make in manualLookup.kbb.makes.list"
                         required>
                   <option value=""></option>
                 </select>
@@ -297,7 +297,7 @@
                         ng-model="manualLookup.kbb.models.selected"
                         ng-change="manualLookup.kbb.styles.fill()"
                         ng-disabled="!manualLookup.kbb.makes.selected"
-                        ng-options="model.Name for model in manualLookup.kbb.models.list"
+                        ng-options="model.Value for model in manualLookup.kbb.models.list"
                         required>
                   <option value=""></option>
                 </select>
@@ -311,7 +311,7 @@
                 <select id="kbbStyle" name="kbbStyle"
                         ng-model="manualLookup.kbb.styles.selected"
                         ng-disabled="!manualLookup.kbb.models.selected"
-                        ng-options="style.Name for style in manualLookup.kbb.styles.list"
+                        ng-options="style.DisplayName for style in manualLookup.kbb.styles.list"
                         required>
                   <option value=""></option>
                 </select>
@@ -486,7 +486,7 @@
 
     <div ng-hide="hideKbbAll()" ng-show="isUnitedStates && kbbEnabled">
       <h4 class="subtitle" translate>Kelley Blue Book Values</h4>
-      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide KBB Values at this time.</p>
+      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide KBB Values at this time.</p>
       <div ng-show="results.kbb.multiple">
         <label translate>Style</label>
         <div class="style-select">
@@ -503,20 +503,20 @@
       </div>
       <div class="valuation-table row-fluid" ng-class="{ 'nxg-fade':results.kbb.noMatch }">
         <div class="span3 center">
-          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.ExcellentWholesale" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch">
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.AuctionExcellent" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch">
           </h3>
           <h5 translate>Excellent</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.GoodWholesale" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.AuctionVeryGood" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
+          <h5 translate>Very Good</h5>
+        </div>
+        <div class="span3 center">
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.AuctionGood" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
           <h5 translate>Good</h5>
         </div>
         <div class="span3 center">
-          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.AverageWholesale" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
-          <h5 translate>Average</h5>
-        </div>
-        <div class="span3 center">
-          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.FairWholesale" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
+          <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.AuctionFair" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
           <h5 translate>Fair</h5>
         </div>
       </div>

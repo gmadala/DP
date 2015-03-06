@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, User, features, gettextCatalog) {
+  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, Kbb, User, features, gettextCatalog) {
     $scope.results = {};
     $scope.searchInProgress = false;
 
@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
         object = $scope.manualLookup.mmr;
       }else if(lookupValue === 'bb') {
         object = $scope.manualLookup.blackbook;
-      } else {
+      } else if (lookupValue === 'kbb') {
         object = $scope.manualLookup.kbb;
       }
       var fields = object.fields;
@@ -136,8 +136,8 @@ angular.module('nextgearWebApp')
           $scope.results.mmr.noMatch = true;
         });
 
-        //search start KBB
-        Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
+        // search KBB
+        Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function(results) {
           if(results.length === 1) {
             $scope.results.kbb.data = results[0];
           } else { // we have multiple results
@@ -146,7 +146,7 @@ angular.module('nextgearWebApp')
           }
 
           if(!$scope.results.description && results) {
-            $scope.results.description = buildDescription(results[0]);
+            $scope.results.description = 'TODO';//buildDescription(results[0]);
           }
         }, function() {
           // no results
@@ -372,7 +372,6 @@ angular.module('nextgearWebApp')
         }
       },
 
-      //KBB start
       kbb: {
         fields: ['years', 'makes', 'models', 'styles'],
         years: {
@@ -381,7 +380,7 @@ angular.module('nextgearWebApp')
           fill: function() {
             resetOptions('years', 'kbb');
 
-            Mmr.getYears().then(function(years) {
+            Kbb.getYears().then(function(years) {
               kb.years.list = years;
               kb.years.selected = null;
             });
@@ -394,7 +393,7 @@ angular.module('nextgearWebApp')
             resetOptions('makes', 'kbb');
 
             if(kb.years.selected) {
-              Mmr.getMakes(kb.years.selected).then(function(makes) {
+              Kbb.getMakes(kb.years.selected).then(function(makes) {
                 kb.makes.list = makes;
 
                 if(makes.length === 1) {
@@ -411,7 +410,7 @@ angular.module('nextgearWebApp')
           fill: function() {
             resetOptions('models', 'kbb');
             if(kb.makes.selected) {
-              Mmr.getModels(kb.makes.selected, kb.years.selected).then(function(models) {
+              Kbb.getModels(kb.makes.selected, kb.years.selected).then(function(models) {
                 kb.models.list = models;
 
                 if(models.length === 1) {
@@ -429,7 +428,7 @@ angular.module('nextgearWebApp')
             resetOptions('styles', 'kbb');
 
             if(kb.models.selected) {
-              Mmr.getBodyStyles(kb.makes.selected, kb.years.selected, kb.models.selected).then(function(bodyStyles) {
+              Kbb.getBodyStyles(kb.years.selected, kb.models.selected).then(function(bodyStyles) {
                 kb.styles.list = bodyStyles;
 
                 if (bodyStyles.length === 1) {
@@ -456,14 +455,14 @@ angular.module('nextgearWebApp')
           $scope.results.mileage = which.mileage;
           $scope.results.zip = which.zipcode;
 
-          //This needs to be change for KBB
-          Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
+          Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicles) {
+            // TODO find out real behavior here
             // MMR will almost always return only one result based
             // on all 5 params, and if there are multiples, the
             // values will likely be the same anyway. So, we
             // assume there is only item in the array
             $scope.results.kbb.data = vehicles[0];
-            $scope.results.description = buildDescription(vehicles[0]);
+            $scope.results.description = 'TODO';//buildDescription(vehicles[0]);
           }, function() {
             // no results
             $scope.results.kbb.noMatch = true;
@@ -477,7 +476,6 @@ angular.module('nextgearWebApp')
           return $scope.manualLookupForm.$valid;
         }
       },
-      //KBB End
       resetSearch: function() {
         bb.makes.selected = null;
         bb.models.list = [];

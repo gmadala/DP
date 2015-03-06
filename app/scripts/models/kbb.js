@@ -6,7 +6,7 @@
  * 2. User selects the year
  * 3. GET /kbb/vehicle/getmakesbyyear/UsedCar/Dealer/{yearId}
  * 4. User selects the make
- * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer
+ * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/{makeId}/{yearId}
  * 6. User selects the model
  * 7. GET /kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/{modelId}/{yearId}
  * 8. User selects the style
@@ -28,83 +28,96 @@
 angular.module('nextgearWebApp')
   .factory('Kbb', function(api, $q) {
 
-    // the vehicleClass and applicationCategory are currently not options for the client
-    var base = '/kbb/vehicle/';
-    var vehicleClass = 'UsedCar'; // or NewCar
-    var applicationCategory = 'Dealer'; // or Consumer
+    // for the moment return a single value object
+    // with values for AuctionExcellent, AuctionFair, AuctionGood, AuctionVeryGood
 
-    // remove any results that have null for all pertinent value properties
-    // (Excellent, Good, Average, Fair)
-    var removeNulls = function(results) {
-      return _.filter(results, function(r) {
-        return !!r.ExcellentWholesale || !!r.GoodWholesale || !!r.AverageWholesale || !!r.FairWholesale;
+    var extractAuctionValues = function (results) {
+
+      var auctionValues = {
+        Body: 'TODO' // TODO where do we get this from
+      };
+      results.forEach(function (value) {
+
+        var property = null;
+
+        switch (value.priceType) {
+          case 'AuctionExcellent':
+            property = 'AuctionExcellent';
+            break;
+          case 'AuctionFair':
+            property = 'AuctionFair';
+            break;
+          case 'AuctionGood':
+            property = 'AuctionGood';
+            break;
+          case 'AuctionVeryGood':
+            property = 'AuctionVeryGood';
+            break;
+          default:
+            property = null;
+        }
+        if (property) {
+          auctionValues[property] = value.priceValue || 0;
+        }
       });
+      return [auctionValues]; // TODO can there be multiple?
     };
 
-    var getDefaultRequestData = function(){
+    // the vehicleClass and applicationCategory are currently not options for the client (using UsedCar/Dealer)
+    var methodPathTemplate = _.template('/kbb/vehicle/${method}/UsedCar/Dealer');
 
-      return {
-        vehicleClass: vehicleClass,
-        applicationCategory: applicationCategory
-      };
+    var getMethodPath = function(methodName){
+
+      return methodPathTemplate({ method: methodName });
     };
 
     return {
       getYears: function() {
 
-        var data = getDefaultRequestData();
-
-        return api.request('GET', base + 'getyears', data).then(function(years) {
+        return api.request('GET', getMethodPath('getyears')).then(function(years) {
           return years;
         });
       },
       getMakes: function(year) {
-        if(!year) {
+        if(!year || !year.Key) {
           throw new Error('Missing year');
         }
 
-        var data = getDefaultRequestData();
-        data.yearId = year.Id;
-
-        return api.request('GET', base + 'getmakesbyyear', data).then(function (makes) {
+        return api.request('GET', getMethodPath('getmakesbyyear') + '/' + year.Key).then(function (makes) {
           return makes;
         });
       },
       getModels: function(make, year) {
-        if(!year) {
+        if(!year || !year.Key) {
           throw new Error('Missing year');
         }
-        if(!make) {
+        if(!make || !make.Key) {
           throw new Error('Missing make');
         }
 
-        var data = getDefaultRequestData();
-        data.makeId = make.Id;
-        data.yearId = year.Id;
+        var path = getMethodPath('getmodelsbyyearandmake') + '/' + make.Key + '/' + year.Key;
 
-        return api.request('GET', base + 'getmodelsbyyearandmake', data).then(function(models) {
+        return api.request('GET', path).then(function(models) {
           return models;
         });
       },
-      getBodyStyles: function(model, year) {
-        if(!year) {
+      getBodyStyles: function(year, model) {
+        if(!year || !year.Key) {
           throw new Error('Missing year');
         }
-        if(!model) {
+        if(!model || !model.Key) {
           throw new Error('Missing model');
         }
 
-        var data = getDefaultRequestData();
-        data.modelId = model.Id;
-        data.yearId = year.Id;
+        var path = getMethodPath('gettrimsandvehicleidsbyyearandmodel') + '/' + model.Key + '/' + year.Key;
 
-        return api.request('GET', base + 'gettrimsandvehicleidsbyyearandmodel', data).then(function(styles) {
+        return api.request('GET', path).then(function(styles) {
           return styles;
         });
       },
-      lookupByOptions: function(vehicleId, mileage, zipCode) {
-        if(!vehicleId) {
-          throw new Error('Missing vehicle ID');
+      lookupByOptions: function(style, mileage, zipCode) {
+        if(!style || !style.VehicleId) {
+          throw new Error('Missing style');
         }
         if(!mileage) {
           throw new Error('Missing mileage');
@@ -113,14 +126,11 @@ angular.module('nextgearWebApp')
           throw new Error('Missing ZIP code');
         }
 
-        var data = getDefaultRequestData();
-        data.vehicleId = vehicleId;
-        data.mileage = mileage;
-        data.zipCode = zipCode;
+        var path = getMethodPath('getvehiclevaluesallconditions') + '/' + style.VehicleId + '/' + mileage + '/' + zipCode;
 
-        return api.request('GET', base + 'getvehiclevaluesallconditions', data).then(function(vehicles) {
-          // TODO do we need this method? Does it apply to KBB
-          var res = removeNulls(vehicles);
+        return api.request('GET', path).then(function(vehicles) {
+
+          var res = extractAuctionValues(vehicles);
 
           if(!vehicles || res.length === 0) {
             return $q.reject(false);
@@ -128,22 +138,22 @@ angular.module('nextgearWebApp')
           return res;
         });
       },
-      lookupByVin: function(vin, mileage) {
+      lookupByVin: function(vin, mileage, zipCode) {
         if(!vin) {
           throw new Error('Missing vin');
         }
         if(!mileage) {
           throw new Error('Missing mileage');
         }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
 
-        var data = getDefaultRequestData();
-        data.vin = vin;
-        data.mileage = mileage;
+        var path = getMethodPath('getvehiclevaluesbyvinallconditions') + '/' + vin + '/' + mileage + '/' + zipCode;
 
-        return api.request('GET', base + 'getvehiclevaluesbyvinallconditions', data).then(function(results) {
+        return api.request('GET', path).then(function(results) {
 
-          // TODO necessary?
-          var res = removeNulls(results);
+          var res = extractAuctionValues(results);
 
           // if there was a failure
           if(!results || res.length === 0) {
