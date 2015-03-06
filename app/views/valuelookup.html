@@ -53,7 +53,7 @@
               Please enter a value less than 1,000,000 miles.
             </label>
             <div ng-show="isUnitedStates && kbbEnabled">
-              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book values</span></i></label>
+              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>&reg;</sup> values</span></i></label>
               <input type="text" id="vinKbbZipCode"
                      name="vinKbbZipCode"
                      ng-model="vinLookup.zipcode"
@@ -486,7 +486,7 @@
 
     <div ng-hide="hideKbbAll()" ng-show="isUnitedStates && kbbEnabled">
       <h4 class="subtitle"><span translate>Kelley Blue Book<sup>&reg;</sup> Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
-      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide KBB Values at this time.</p>
+      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> values at this time.</p>
       <div ng-show="results.kbb.multiple">
         <label translate>Style</label>
         <div class="style-select">
