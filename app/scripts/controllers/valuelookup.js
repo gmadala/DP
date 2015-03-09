@@ -87,6 +87,7 @@ angular.module('nextgearWebApp')
       resetSearch: function() {
         this.vin = null;
         this.mileage = null;
+        this.zipcode = null;
         resetResults();
       },
       lookup: function() {
@@ -138,21 +139,25 @@ angular.module('nextgearWebApp')
 
         // search KBB
         if (features.kbb.enabled) {
-          Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function (results) {
-            if (results.length === 1) {
-              $scope.results.kbb.data = results[0];
-            } else { // we have multiple results
-              $scope.results.kbb.multiple = results;
-              $scope.results.kbb.data = results[0]; // as a default
-            }
+          if (this.zipcode) { // only search if there is a zip code
+            Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function (results) {
+              if (results.length === 1) {
+                $scope.results.kbb.data = results[0];
+              } else { // we have multiple results
+                $scope.results.kbb.multiple = results;
+                $scope.results.kbb.data = results[0]; // as a default
+              }
 
-            if (!$scope.results.description && results) {
-              $scope.results.description = 'TODO';//buildDescription(results[0]);
-            }
-          }, function () {
-            // no results
+              if (!$scope.results.description && results) {
+                $scope.results.description = ''; // TODO use the MMR description?
+              }
+            }, function () {
+              // no results
+              $scope.results.kbb.noMatch = true;
+            });
+          } else {
             $scope.results.kbb.noMatch = true;
-          });
+          }
           //search end KBB
         }
 
@@ -382,10 +387,12 @@ angular.module('nextgearWebApp')
           fill: function() {
             resetOptions('years', 'kbb');
 
-            Kbb.getYears().then(function(years) {
-              kb.years.list = years;
-              kb.years.selected = null;
-            });
+            if (features.kbb.enabled) {
+              Kbb.getYears().then(function (years) {
+                kb.years.list = years;
+                kb.years.selected = null;
+              });
+            }
           }
         },
         makes: {
@@ -457,6 +464,13 @@ angular.module('nextgearWebApp')
           $scope.results.mileage = which.mileage;
           $scope.results.zip = which.zipcode;
 
+          // since kbb does not return info about the vehicle in the return value, set it here
+          var descriptionProperties = {
+            Make: which.makes.selected.Value,
+            Model: which.models.selected.Value,
+            Year: which.years.selected.Value
+          };
+
           Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicles) {
             // TODO find out real behavior here
             // MMR will almost always return only one result based
@@ -464,7 +478,7 @@ angular.module('nextgearWebApp')
             // values will likely be the same anyway. So, we
             // assume there is only item in the array
             $scope.results.kbb.data = vehicles[0];
-            $scope.results.description = 'TODO';//buildDescription(vehicles[0]);
+            $scope.results.description = buildDescription(descriptionProperties);
           }, function() {
             // no results
             $scope.results.kbb.noMatch = true;

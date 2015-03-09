@@ -20,7 +20,7 @@
  * 2. User enters mileage
  * 3. User enters ZIP code
  * 4. User clicks lookup
- * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/{vin}/{mileage}/{zipCode}
+ * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/{vin}/{mileage}/{zipCode}
  */
 
 'use strict';
@@ -33,9 +33,11 @@ angular.module('nextgearWebApp')
 
     var extractAuctionValues = function (results) {
 
-      var auctionValues = {
-        Body: 'TODO' // TODO where do we get this from
-      };
+      if(!results || results.length === 0){
+        return [];
+      }
+
+      var auctionValues = {};
       results.forEach(function (value) {
 
         var property = null;
@@ -125,7 +127,6 @@ angular.module('nextgearWebApp')
         if(!zipCode) {
           throw new Error('Missing ZIP code');
         }
-
         var path = getMethodPath('getvehiclevaluesallconditions') + '/' + style.VehicleId + '/' + mileage + '/' + zipCode;
 
         return api.request('GET', path).then(function(vehicles) {

@@ -11,22 +11,30 @@ describe('Controller: ValueLookupCtrl', function () {
     $q,
     mmr,
     blackbook,
-    featureValue,
+    kbb,
+    features,
+    User,
     fillBlackbook,
     fillMmr,
+    fillKbb,
     fillVinSearch,
     run,
     bbResult,
     mmrResult,
+    kbbResult,
+    kbbResultFormatted,
     mock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _$q_, Blackbook, Mmr, features) {
+  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _$q_, Blackbook, Mmr, _Kbb_, _features_, _User_) {
     $httpBackend = _$httpBackend_;
     $q = _$q_;
     blackbook = Blackbook;
     mmr = Mmr;
-    featureValue = features;
+    kbb = _Kbb_;
+    features = _features_;
+    User = _User_;
+    features.kbb.enabled = true; // always enable for unit testing
 
     scope = $rootScope.$new();
 
@@ -46,6 +54,15 @@ describe('Controller: ValueLookupCtrl', function () {
       scope.manualLookup.mmr.mileage = 789;
     };
 
+    fillKbb = function() {
+      scope.manualLookup.kbb.years.selected = { Key: 2012, Value: '2012' };
+      scope.manualLookup.kbb.makes.selected = { Key: 1, Value: 'aMake' };
+      scope.manualLookup.kbb.models.selected = { Key: 2, Value: 'aModel' };
+      scope.manualLookup.kbb.styles.selected = { VehicleId: 2, DisplayName: 'aStyle' };
+      scope.manualLookup.kbb.mileage = 789;
+      scope.manualLookup.kbb.zipcode = 12345;
+    };
+
     mock = {
       bb: {
         makes: { Success: true, Data: [{ Results: [ 'Toyota', 'Ford' ] }]},
@@ -58,12 +75,19 @@ describe('Controller: ValueLookupCtrl', function () {
         models: { Success: true, Data: [{ Id: 'id', Name: 'Corolla' }, { Id: 'id', Name: 'Camry' }]},
         years: { Success: true, Data: [{ Id: 'id', Name: 2012 }, { Id: 'id', Name: 2014 }]},
         styles: { Success: true, Data: [{ Id: 'id', Name: '4D Sedan' }, { Id: 'id', Name:  '2D Coupe' }]}
+      },
+      kbb: {
+        makes: { Success: true, Data: [{ Key: 1, Value: 'Toyota' }, { Key: 2, Value: 'Ford' }]},
+        models: { Success: true, Data: [{ Key: 123, Value: 'Corolla' }, { Key: 124, Value: 'Camry' }]},
+        years: { Success: true, Data: [{ Key: 2012, Value: '2012' }, { Key: 2014, Value: '2014' }]},
+        styles: { Success: true, Data: [{ VehicleId: 123, DisplayName: '4D Sedan' }, { VehicleId: 124, DisplayName:  '2D Coupe' }]}
       }
     };
 
     fillVinSearch = function() {
       scope.vinLookup.vin = 'someVin1234';
       scope.vinLookup.mileage = 8888;
+      scope.vinLookup.zipcode = 12345;
     };
 
     mmrResult = {
@@ -94,12 +118,51 @@ describe('Controller: ValueLookupCtrl', function () {
       }]
     };
 
+    kbbResult = {
+      Success: true,
+      Data: [
+        {
+          "priceType": "AuctionExcellent",
+          "priceValue": 26376
+        },
+        {
+          "priceType": "AuctionFair",
+          "priceValue": 22929
+        },
+        {
+          "priceType": "AuctionGood",
+          "priceValue": 24926
+        },
+        {
+          "priceType": "AuctionVeryGood",
+          "priceValue": 25815
+        },
+        {
+          "priceType": "BaseRetail",
+          "priceValue": 27313
+        },
+        {
+          "priceType": "BaseWholesale",
+          "priceValue": 25885
+        },
+      ]
+    };
+
+    kbbResultFormatted = [
+        {
+          AuctionExcellent: 26376,
+          AuctionFair: 22929,
+          AuctionGood: 24926,
+          AuctionVeryGood: 25815
+        }
+      ];
 
     run = function() {
       ValueLookupCtrl = $controller('ValueLookupCtrl', {
         $scope: scope,
         Blackbook: blackbook,
-        Mmr: mmr
+        Mmr: mmr,
+        Kbb: kbb
       });
 
       scope.vinLookupForm = {
@@ -116,6 +179,7 @@ describe('Controller: ValueLookupCtrl', function () {
     beforeEach(function() {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
       $httpBackend.whenGET('/mmr/years/').respond({});
+      $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
       run();
     });
 
@@ -167,6 +231,30 @@ describe('Controller: ValueLookupCtrl', function () {
       });
     });
 
+    describe('hideKbbAll', function() {
+      it('should return false if we have not run a search yet', function() {
+        expect(scope.hideKbbAll()).toBe(false);
+      });
+
+      it('should return false if we ran a vin search', function() {
+        scope.vinLookup.searchComplete = true;
+        expect(scope.hideKbbAll()).toBe(false);
+      });
+
+      it('should return false if we ran a manual kbb search', function() {
+        scope.manualLookup.searchComplete = true;
+        scope.results.kbb.data = ['a'];
+        expect(scope.hideKbbAll()).toBe(false);
+      });
+
+      it('should return true if we ran a different manual search', function() {
+        scope.manualLookup.searchComplete = true;
+        scope.results.kbb.data = null;
+        scope.results.kbb.noMatch = false;
+        expect(scope.hideKbbAll()).toBe(true);
+      });
+    });
+
     describe('showMultiplesWarning', function(){
       it('should return false if we have not yet run a search', function() {
         expect(scope.showMultiplesWarning()).toBe(false);
@@ -209,10 +297,33 @@ describe('Controller: ValueLookupCtrl', function () {
     });
   });
 
+  describe('KBB option is available only for UnitedStates user', function() {
+
+    beforeEach(function() {
+      $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
+      $httpBackend.whenGET('/mmr/years/').respond({});
+      $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
+    });
+
+    it('should not include KBB as a drop down for a non-UnitedStates User', function () {
+      spyOn(User, 'isUnitedStates').andReturn(false);
+      run();
+      expect(scope.manualLookupValues.length).toBe(3);
+    });
+
+    it('should include KBB as a drop down for a UnitedStates User', function () {
+      spyOn(User, 'isUnitedStates').andReturn(true);
+      run();
+      expect(scope.manualLookupValues.length).toBe(4);
+    });
+  });
+
   describe('vin lookup', function() {
     beforeEach(function() {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
       $httpBackend.whenGET('/mmr/years/').respond({});
+      $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
+      spyOn(User, 'isUnitedStates').andReturn(true);
       run();
     });
 
@@ -220,15 +331,19 @@ describe('Controller: ValueLookupCtrl', function () {
       expect(typeof scope.vinLookup.resetSearch).toBe('function');
       scope.vinLookup.vin = 'someVin';
       scope.vinLookup.mileage = 2345;
+      scope.vinLookup.zipcode = 12345;
       scope.results.blackbook.data = ['a', 'b'];
       scope.results.mmr.data = ['c', 'd'];
+      scope.results.kbb.data = ['e', 'f'];
       scope.results.description = 'foo';
       scope.vinLookup.searchComplete = true;
       scope.vinLookup.resetSearch();
       expect(scope.vinLookup.vin).toBe(null);
       expect(scope.vinLookup.mileage).toBe(null);
+      expect(scope.vinLookup.zipcode).toBe(null);
       expect(scope.results.blackbook.data).toBe(null);
       expect(scope.results.mmr.data).toBe(null);
+      expect(scope.results.kbb.data).toBe(null);
       expect(scope.results.description).toBe(null);
       expect(scope.vinLookup.searchComplete).toBe(false);
     });
@@ -237,9 +352,11 @@ describe('Controller: ValueLookupCtrl', function () {
       beforeEach(function() {
         $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin1234/8888').respond(bbResult);
         $httpBackend.whenGET('/mmr/getVehicleValueByVin/someVin1234/8888').respond(mmrResult);
-
+        $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/someVin1234/8888/12345')
+          .respond(kbbResult);
         spyOn(blackbook, 'lookupByVin').andCallThrough();
         spyOn(mmr, 'lookupByVin').andCallThrough();
+        spyOn(kbb, 'lookupByVin').andCallThrough();
 
         fillVinSearch();
       });
@@ -261,6 +378,15 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.vinLookup.lookup();
         expect(blackbook.lookupByVin).not.toHaveBeenCalled();
         expect(mmr.lookupByVin).not.toHaveBeenCalled();
+        expect(kbb.lookupByVin).not.toHaveBeenCalled();
+      });
+
+      it('should call mmr and blackbook but not KBB if ZIP code is missing', function() {
+        scope.vinLookup.zipcode = null;
+        scope.vinLookup.lookup();
+        expect(blackbook.lookupByVin).toHaveBeenCalled();
+        expect(mmr.lookupByVin).toHaveBeenCalled();
+        expect(kbb.lookupByVin).not.toHaveBeenCalled();
       });
 
       it('should look up the blackbook values', function() {
@@ -341,6 +467,31 @@ describe('Controller: ValueLookupCtrl', function () {
         expect(scope.results.mmr.noMatch).toBe(false);
         expect(scope.results.mmr.data).toBe(scope.results.mmr.multiple[0]);
       });
+
+      it('should look up the kbb values', function() {
+        scope.vinLookup.lookup();
+        expect(kbb.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888, 12345);
+        $httpBackend.flush();
+        expect(scope.results.kbb.data).toEqual(kbbResultFormatted[0]);
+        expect(scope.results.kbb.noMatch).toBe(false);
+        expect(scope.results.kbb.multiple).toBeFalsy();
+        expect(scope.results.vin).toBe('someVin1234');
+        expect(scope.results.mileage).toBe(8888);
+        expect(scope.results.zipcode).toBe(12345);
+      });
+
+      it('should handle no kbb matches', function() {
+        kbbResult.Data = [];
+        scope.vinLookup.lookup();
+        $httpBackend.flush();
+        expect(scope.results.kbb.data).toBe(null);
+        expect(scope.results.kbb.noMatch).toBe(true);
+      });
+
+      it('should handle multiple kbb matches', function() {
+        // TODO should it?
+        expect(true).toBeTruthy();
+      });
     });
   });
 
@@ -348,15 +499,18 @@ describe('Controller: ValueLookupCtrl', function () {
     beforeEach(function() {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond(mock.bb.makes);
       $httpBackend.whenGET('/mmr/years/').respond(mock.mmr.years);
+      $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond(mock.kbb.years);
       spyOn(blackbook, 'getMakes').andCallThrough();
       spyOn(mmr, 'getYears').andCallThrough();
+      spyOn(kbb, 'getYears').andCallThrough();
+      spyOn(User, 'isUnitedStates').andReturn(true);
       run();
     });
 
     it('should have a lookup up function to call the appropriate model\'s lookupByOptions function', function() {
       var nextGear = scope.manualLookupValues[1].id;
       var mmrValue = scope.manualLookupValues[2].id;
-      var kbbEnabled = featureValue.kbb.enabled;
+      var kbbValue = scope.manualLookupValues[3].id;
 
       expect(nextGear).toBe('bb');
       spyOn(scope.manualLookup.blackbook, 'lookup').andReturn({});
@@ -372,13 +526,10 @@ describe('Controller: ValueLookupCtrl', function () {
         expect(scope.manualLookup.mmr.lookup).toHaveBeenCalled();
       }
 
-      if(kbbEnabled) {
-        var kbbValue = scope.manualLookupValues[3].id;
-        expect(kbbValue).toBe('kbb');
-        spyOn(scope.manualLookup.kbb, 'lookup').andReturn({});
-        if(scope.lookupValues.id === 'kbb') {
-          scope.manualLookup.lookup();
-        }
+      expect(kbbValue).toBe('kbb');
+      spyOn(scope.manualLookup.kbb, 'lookup').andReturn({});
+      if (scope.lookupValues.id === 'kbb') {
+        scope.manualLookup.lookup();
       }
     });
 
@@ -662,6 +813,147 @@ describe('Controller: ValueLookupCtrl', function () {
           $httpBackend.flush();
           expect(scope.results.mmr.data).toBe(null);
           expect(scope.results.mmr.noMatch).toBe(true);
+        });
+      });
+    });
+
+    describe('kbb functionality', function() {
+      it('should populate the years dropdown on load', function() {
+        $httpBackend.flush();
+        expect(kbb.getYears).toHaveBeenCalled();
+        expect(scope.manualLookup.kbb.years.list.length).toBe(2);
+      });
+
+      it('should populate the makes dropdown when a year is chosen', function() {
+        spyOn(kbb, 'getMakes').andCallThrough();
+        var year = mock.kbb.years.Data[0];
+        $httpBackend.whenGET('/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/2012').respond(mock.kbb.makes);
+        scope.manualLookup.kbb.years.selected = year;
+        scope.manualLookup.kbb.makes.fill();
+        $httpBackend.flush();
+        expect(kbb.getMakes).toHaveBeenCalledWith(year);
+        expect(scope.manualLookup.kbb.makes.list.length).toBe(2);
+      });
+
+      it('should populate the models dropdown when a make is chosen', function() {
+        spyOn(kbb, 'getModels').andCallThrough();
+        $httpBackend.whenGET('/kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/1/2012').respond(mock.kbb.models);
+        scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
+        scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
+        scope.manualLookup.kbb.models.fill();
+        $httpBackend.flush();
+        expect(kbb.getModels).toHaveBeenCalledWith(mock.kbb.makes.Data[0], mock.kbb.years.Data[0]);
+        expect(scope.manualLookup.kbb.models.list.length).toBe(2);
+      });
+
+      it('should populate the styles dropdown when a model is chosen', function() {
+        spyOn(kbb, 'getBodyStyles').andCallThrough();
+        $httpBackend.whenGET('/kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/123/2012').respond(mock.kbb.styles);
+        scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
+        scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
+        scope.manualLookup.kbb.models.selected = mock.kbb.models.Data[0];
+        scope.manualLookup.kbb.styles.fill();
+        $httpBackend.flush();
+        expect(kbb.getBodyStyles).toHaveBeenCalledWith(mock.kbb.years.Data[0], mock.kbb.models.Data[0]);
+        expect(scope.manualLookup.kbb.styles.list.length).toBe(2);
+      });
+
+      it('should prevent any fill function from being called if the previous dropdowns do not have selected choices', function() {
+        spyOn(kbb, 'getMakes').andCallThrough();
+        spyOn(kbb, 'getModels').andCallThrough();
+        spyOn(kbb, 'getBodyStyles').andCallThrough();
+
+        scope.manualLookup.kbb.makes.fill();
+        expect(kbb.getMakes).not.toHaveBeenCalled();
+
+        scope.manualLookup.kbb.years.selected = { Id: 'id', Name: 2013 };
+        scope.manualLookup.kbb.models.fill();
+        expect(kbb.getModels).not.toHaveBeenCalled();
+
+        scope.manualLookup.kbb.makes.selected = 'Focus';
+        scope.manualLookup.kbb.styles.fill();
+        expect(kbb.getBodyStyles).not.toHaveBeenCalled();
+      });
+
+      it('should auto-select the first make if only one is returned', function() {
+        $httpBackend.whenGET('/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/2012').respond(mock.kbb.makes);
+
+        mock.kbb.makes.Data.splice(1,1);
+        scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
+        spyOn(scope.manualLookup.kbb.models, 'fill').andReturn({});
+        scope.manualLookup.kbb.makes.fill();
+        $httpBackend.flush();
+        expect(scope.manualLookup.kbb.makes.selected).toBe(mock.kbb.makes.Data[0]);
+      });
+
+      it('should auto-select the first model if only one is returned', function() {
+        $httpBackend.whenGET('/kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/1/2012').respond(mock.kbb.models);
+
+        mock.kbb.models.Data.splice(1,1);
+        scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
+        scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
+        spyOn(scope.manualLookup.kbb.styles, 'fill').andReturn({});
+        scope.manualLookup.kbb.models.fill();
+        $httpBackend.flush();
+        expect(scope.manualLookup.kbb.models.selected).toBe(mock.kbb.models.Data[0]);
+      });
+
+      it('should auto-select the first style if only one is returned', function() {
+        $httpBackend.whenGET('/kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/123/2012').respond(mock.kbb.styles);
+
+        mock.kbb.styles.Data.splice(1,1);
+        scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
+        scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
+        scope.manualLookup.kbb.models.selected = mock.kbb.models.Data[0];
+        scope.manualLookup.kbb.styles.fill();
+        $httpBackend.flush();
+        expect(scope.manualLookup.kbb.styles.selected).toBe(mock.kbb.styles.Data[0]);
+      });
+
+      describe('lookup', function() {
+        beforeEach(function() {
+          spyOn(kbb, 'lookupByOptions').andCallThrough();
+          $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/2/789/12345').respond(kbbResult);
+          run();
+          fillKbb();
+        });
+
+        it('should reset the opposite search', function() {
+          spyOn(scope.vinLookup, 'resetSearch');
+          scope.manualLookup.kbb.lookup();
+          expect(scope.vinLookup.resetSearch).toHaveBeenCalled();
+        });
+
+        it('should run the validate function before doing anything', function() {
+          spyOn(scope.manualLookup.kbb, 'validate');
+          scope.manualLookup.kbb.lookup();
+          expect(scope.manualLookup.kbb.validate).toHaveBeenCalled();
+        });
+
+        it('should do nothing if the form is not valid', function() {
+          scope.manualLookupForm.$valid = false;
+          scope.manualLookup.kbb.lookup();
+          expect(kbb.lookupByOptions).not.toHaveBeenCalled();
+        });
+
+        it('should look up the kbb values', function() {
+          scope.manualLookup.kbb.lookup();
+          expect(kbb.lookupByOptions).toHaveBeenCalled();
+          $httpBackend.flush();
+          expect(scope.results.kbb.data).toEqual(kbbResultFormatted[0]);
+          expect(scope.results.kbb.noMatch).toBe(false);
+          expect(scope.results.kbb.multiple).toBeFalsy();
+          expect(scope.results.mileage).toBe(789);
+
+          // expect(scope.results.description).toBe(kbbResult.Data[0].Year + ' ' + kbbResult.Data[0].Make + ' ' + kbbResult.Data[0].Model);
+        });
+
+        it('should handle no kbb matches', function() {
+          kbbResult.Data = [];
+          scope.manualLookup.kbb.lookup();
+          $httpBackend.flush();
+          expect(scope.results.kbb.data).toBe(null);
+          expect(scope.results.kbb.noMatch).toBe(true);
         });
       });
     });
