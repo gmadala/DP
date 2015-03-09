@@ -53,7 +53,7 @@
               Please enter a value less than 1,000,000 miles.
             </label>
             <div ng-show="isUnitedStates && kbbEnabled">
-              <label for="vinKbbZipCode" class="input-title"><span translate>Zipcode</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book values</span></i></label>
+              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>&reg;</sup> values</span></i></label>
               <input type="text" id="vinKbbZipCode"
                      name="vinKbbZipCode"
                      ng-model="vinLookup.zipcode"
@@ -176,7 +176,7 @@
             </div>
 
             <div class="" ng-switch-when="mmr">
-              <label for="mmrYear" translate>MMRYear</label>
+              <label for="mmrYear" translate>Year</label>
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrYear.$error.required }">
                 <select id="mmrYear" name="mmrYear"
                         ng-model="manualLookup.mmr.years.selected"
@@ -262,7 +262,7 @@
             </div>
 
             <div class="" ng-switch-when="kbb">
-              <label for="kbbYear" translate>KBBYear</label>
+              <label for="kbbYear" translate>Year</label>
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbYear.$error.required }">
                 <select id="kbbYear" name="kbbYear"
                         ng-model="manualLookup.kbb.years.selected"
@@ -345,7 +345,7 @@
                      ng-show="manualLookup.kbb.validity.kbbMileage.$error.maxlength" translate>
                 Please enter a value less than 1,000,000 miles.
               </label>
-              <label for="kbbZipCode" class="input-title" translate>ZipCode</label>
+              <label for="kbbZipCode" class="input-title" translate>Zip</label>
               <input type="text" id="kbbZipCode"
                      name="kbbZipCode"
                      ng-model="manualLookup.kbb.zipcode"
@@ -410,7 +410,7 @@
     </div>
 
     <div ng-hide="hideBlackbookAll()">
-      <h4 class="subtitle" translate>NextGear Book Values</h4>
+      <h4 class="subtitle"><span translate>NextGear Book Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
       <div ng-show="results.blackbook.multiple">
         <label translate>Style</label>
@@ -447,7 +447,7 @@
     </div>
 
     <div ng-hide="hideMmrAll()">
-      <h4 class="subtitle" translate>MMR Values</h4>
+      <h4 class="subtitle"><span translate>MMR Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
       <div ng-show="results.mmr.multiple">
         <label translate>Style</label>
@@ -485,8 +485,8 @@
     </div>
 
     <div ng-hide="hideKbbAll()" ng-show="isUnitedStates && kbbEnabled">
-      <h4 class="subtitle" translate>Kelley Blue Book Values</h4>
-      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide KBB Values at this time.</p>
+      <h4 class="subtitle"><span translate>Kelley Blue Book<sup>&reg;</sup> Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
+      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> values at this time.</p>
       <div ng-show="results.kbb.multiple">
         <label translate>Style</label>
         <div class="style-select">
