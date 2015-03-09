@@ -137,22 +137,24 @@ angular.module('nextgearWebApp')
         });
 
         // search KBB
-        Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function(results) {
-          if(results.length === 1) {
-            $scope.results.kbb.data = results[0];
-          } else { // we have multiple results
-            $scope.results.kbb.multiple = results;
-            $scope.results.kbb.data = results[0]; // as a default
-          }
+        if (features.kbb.enabled) {
+          Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function (results) {
+            if (results.length === 1) {
+              $scope.results.kbb.data = results[0];
+            } else { // we have multiple results
+              $scope.results.kbb.multiple = results;
+              $scope.results.kbb.data = results[0]; // as a default
+            }
 
-          if(!$scope.results.description && results) {
-            $scope.results.description = 'TODO';//buildDescription(results[0]);
-          }
-        }, function() {
-          // no results
-          $scope.results.kbb.noMatch = true;
-        });
-        //search end KBB
+            if (!$scope.results.description && results) {
+              $scope.results.description = 'TODO';//buildDescription(results[0]);
+            }
+          }, function () {
+            // no results
+            $scope.results.kbb.noMatch = true;
+          });
+          //search end KBB
+        }
 
         this.searchComplete = true;
         $scope.searchInProgress = false;

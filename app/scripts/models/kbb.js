@@ -41,20 +41,20 @@ angular.module('nextgearWebApp')
         var property = null;
 
         switch (value.priceType) {
-          case 'AuctionExcellent':
-            property = 'AuctionExcellent';
-            break;
-          case 'AuctionFair':
-            property = 'AuctionFair';
-            break;
-          case 'AuctionGood':
-            property = 'AuctionGood';
-            break;
-          case 'AuctionVeryGood':
-            property = 'AuctionVeryGood';
-            break;
-          default:
-            property = null;
+        case 'AuctionExcellent':
+          property = 'AuctionExcellent';
+          break;
+        case 'AuctionFair':
+          property = 'AuctionFair';
+          break;
+        case 'AuctionGood':
+          property = 'AuctionGood';
+          break;
+        case 'AuctionVeryGood':
+          property = 'AuctionVeryGood';
+          break;
+        default:
+          property = null;
         }
         if (property) {
           auctionValues[property] = value.priceValue || 0;
