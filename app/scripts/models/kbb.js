@@ -1,88 +1,137 @@
 /**
- * Created by gayathrimadala on 3/2/15.
+ * Value lookup from MobileService/kbb (Kelley Blue Book) is accomplished in the following steps:
+ *
+ * For Manual lookup
+ * 1. GET /kbb/vehicle/getyears/UsedCar/Dealer
+ * 2. User selects the year
+ * 3. GET /kbb/vehicle/getmakesbyyear/UsedCar/Dealer/{yearId}
+ * 4. User selects the make
+ * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/{makeId}/{yearId}
+ * 6. User selects the model
+ * 7. GET /kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/{modelId}/{yearId}
+ * 8. User selects the style
+ * 9. User enters the mileage
+ * 10. User enters the ZIP code
+ * 11. User clicks lookup
+ * 12. GET /kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
+ *
+ * For VIN lookup
+ * 1. User enters VIN
+ * 2. User enters mileage
+ * 3. User enters ZIP code
+ * 4. User clicks lookup
+ * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/{vin}/{mileage}/{zipCode}
  */
+
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Kbb', function(api, $q, gettextCatalog) {
+  .factory('Kbb', function(api, $q) {
 
-    // remove any results that have null for all pertinent value properties
-    // (Excellent, Good, Average, Fair)
-    var removeNulls = function(results) {
-      return _.filter(results, function(r) {
-        return !!r.ExcellentWholesale || !!r.GoodWholesale || !!r.AverageWholesale || !!r.FairWholesale;
+    // for the moment return a single value object
+    // with values for AuctionExcellent, AuctionFair, AuctionGood, AuctionVeryGood
+
+    var extractAuctionValues = function (results) {
+
+      if(!results || results.length === 0){
+        return [];
+      }
+
+      var auctionValues = {};
+      results.forEach(function (value) {
+
+        var property = null;
+
+        switch (value.priceType) {
+        case 'AuctionExcellent':
+          property = 'AuctionExcellent';
+          break;
+        case 'AuctionFair':
+          property = 'AuctionFair';
+          break;
+        case 'AuctionGood':
+          property = 'AuctionGood';
+          break;
+        case 'AuctionVeryGood':
+          property = 'AuctionVeryGood';
+          break;
+        default:
+          property = null;
+        }
+        if (property) {
+          auctionValues[property] = value.priceValue || 0;
+        }
       });
+      return [auctionValues]; // TODO can there be multiple?
+    };
+
+    // the vehicleClass and applicationCategory are currently not options for the client (using UsedCar/Dealer)
+    var methodPathTemplate = _.template('/kbb/vehicle/${method}/UsedCar/Dealer');
+
+    var getMethodPath = function(methodName){
+
+      return methodPathTemplate({ method: methodName });
     };
 
     return {
       getYears: function() {
-        return api.request('GET', '/kbb/years/').then(function(years) {
+
+        return api.request('GET', getMethodPath('getyears')).then(function(years) {
           return years;
         });
       },
       getMakes: function(year) {
-        if(!year) {
+        if(!year || !year.Key) {
           throw new Error('Missing year');
         }
 
-        return api.request('GET', '/kbb/makes/' + year.Id).then(function(makes) {
+        return api.request('GET', getMethodPath('getmakesbyyear') + '/' + year.Key).then(function (makes) {
           return makes;
         });
       },
       getModels: function(make, year) {
-        if(!year) {
-          throw new Error(gettextCatalog.getString('Missing year'));
+        if(!year || !year.Key) {
+          throw new Error('Missing year');
         }
-        if(!make) {
-          throw new Error(gettextCatalog.getString('Missing make'));
+        if(!make || !make.Key) {
+          throw new Error('Missing make');
         }
 
-        return api.request('GET', '/kbb/models/' + make.Id + '/' + year.Id).then(function(models) {
+        var path = getMethodPath('getmodelsbyyearandmake') + '/' + make.Key + '/' + year.Key;
+
+        return api.request('GET', path).then(function(models) {
           return models;
         });
       },
-      getBodyStyles: function(make, year, model) {
-        if(!year) {
-          throw new Error(gettextCatalog.getString('Missing year'));
+      getBodyStyles: function(year, model) {
+        if(!year || !year.Key) {
+          throw new Error('Missing year');
         }
-        if(!make) {
-          throw new Error(gettextCatalog.getString('Missing make'));
-        }
-        if(!model) {
-          throw new Error(gettextCatalog.getString('Missing model'));
+        if(!model || !model.Key) {
+          throw new Error('Missing model');
         }
 
-        return api.request('GET', '/kbb/bodystyles/' + make.Id + '/' + year.Id + '/' + model.Id).then(function(styles) {
+        var path = getMethodPath('gettrimsandvehicleidsbyyearandmodel') + '/' + model.Key + '/' + year.Key;
+
+        return api.request('GET', path).then(function(styles) {
           return styles;
         });
       },
-      lookupByOptions: function(year, make, model, style, mileage) {
-        if(!year) {
-          throw new Error(gettextCatalog.getString('Missing year'));
-        }
-        if(!make) {
-          throw new Error(gettextCatalog.getString('Missing make'));
-        }
-        if(!model) {
-          throw new Error(gettextCatalog.getString('Missing model'));
-        }
-        if(!style) {
-          throw new Error(gettextCatalog.getString('Missing style'));
+      lookupByOptions: function(style, mileage, zipCode) {
+        if(!style || !style.VehicleId) {
+          throw new Error('Missing style');
         }
         if(!mileage) {
-          throw new Error(gettextCatalog.getString('Missing mileage'));
+          throw new Error('Missing mileage');
         }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
+        var path = getMethodPath('getvehiclevaluesallconditions') + '/' + style.VehicleId + '/' + mileage + '/' + zipCode;
 
-        var requestObj = {
-          'yearId': year.Id,
-          'modelId': model.Id,
-          'makeId': make.Id,
-          'mileage': mileage,
-          'bodyId': style.Id
-        };
+        return api.request('GET', path).then(function(vehicles) {
 
-        return api.request('GET', '/kbb/getVehicleValueByOptions', requestObj).then(function(vehicles) {
-          var res = removeNulls(vehicles);
+          var res = extractAuctionValues(vehicles);
 
           if(!vehicles || res.length === 0) {
             return $q.reject(false);
@@ -90,13 +139,22 @@ angular.module('nextgearWebApp')
           return res;
         });
       },
-      lookupByVin: function(vin, mileage) {
+      lookupByVin: function(vin, mileage, zipCode) {
         if(!vin) {
           throw new Error('Missing vin');
         }
+        if(!mileage) {
+          throw new Error('Missing mileage');
+        }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
 
-        return api.request('GET', '/kbb/getVehicleValueByVin/' + vin + (mileage ? '/' + mileage : '')).then(function(results) {
-          var res = removeNulls(results);
+        var path = getMethodPath('getvehiclevaluesbyvinallconditions') + '/' + vin + '/' + mileage + '/' + zipCode;
+
+        return api.request('GET', path).then(function(results) {
+
+          var res = extractAuctionValues(results);
 
           // if there was a failure
           if(!results || res.length === 0) {

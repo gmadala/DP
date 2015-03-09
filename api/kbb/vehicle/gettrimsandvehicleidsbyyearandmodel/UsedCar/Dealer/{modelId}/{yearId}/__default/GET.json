@@ -1,7 +1,7 @@
 {
   "Success": true,
   "Message": null,
-  "Data": {
+  "Data": [{
     "DisplayName": "Plug-in Hybrid Sedan 4D",
     "OemBodyStyle": "Sedan",
     "NumberOfDoors": "4",
@@ -15,5 +15,5 @@
     "Id": 385279,
     "AdditionalData": "",
     "VehicleId": 385279
-  }
+  }]
 }
