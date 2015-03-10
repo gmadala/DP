@@ -4,6 +4,8 @@ angular.module('nextgearWebApp')
   .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, Kbb, User, features, gettextCatalog) {
     $scope.results = {};
     $scope.searchInProgress = false;
+    $scope.isUnitedStates = User.isUnitedStates();
+    $scope.kbbEnabled = features.kbb.enabled && $scope.isUnitedStates;
 
     var buildDescription = function(obj) {
       return obj.Year + ' ' + obj.Make + ' ' + obj.Model;
@@ -63,7 +65,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.hideKbbAll = function() {
-      return ($scope.manualLookup.searchComplete && !$scope.results.kbb.data && !$scope.results.kbb.noMatch);
+      return !$scope.kbbEnabled || ($scope.manualLookup.searchComplete && !$scope.results.kbb.data && !$scope.results.kbb.noMatch);
     };
 
     $scope.showMultiplesWarning = function() {
@@ -138,7 +140,7 @@ angular.module('nextgearWebApp')
         });
 
         // search KBB
-        if (features.kbb.enabled) {
+        if ($scope.kbbEnabled) {
           if (this.zipcode) { // only search if there is a zip code
             Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function (results) {
               if (results.length === 1) {
@@ -387,7 +389,7 @@ angular.module('nextgearWebApp')
           fill: function() {
             resetOptions('years', 'kbb');
 
-            if (features.kbb.enabled) {
+            if ($scope.kbbEnabled) {
               Kbb.getYears().then(function (years) {
                 kb.years.list = years;
                 kb.years.selected = null;
@@ -550,7 +552,6 @@ angular.module('nextgearWebApp')
     $scope.manualLookup.blackbook.makes.fill(); // Default Blackbook
     $scope.manualLookup.mmr.years.fill(); // Default MMR
     $scope.manualLookup.kbb.years.fill(); // Default KBB
-    $scope.isUnitedStates = User.isUnitedStates();
 
     $scope.manualLookupValues=[
       { id:'', name: gettextCatalog.getString('Select Manual Lookup Values')},
@@ -559,8 +560,7 @@ angular.module('nextgearWebApp')
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
 
-    $scope.kbbEnabled = features.kbb.enabled;
-    if ($scope.kbbEnabled && $scope.isUnitedStates){
+    if ($scope.kbbEnabled){
       $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Values')});
     }
   });
