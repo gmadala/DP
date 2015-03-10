@@ -973,6 +973,10 @@ msgstr "Retroalimentación y Apoyo"
 msgid "Fees"
 msgstr "Cargos"
 
+#: app/views/valuelookup.html
+msgid "Fill out for Kelley Blue Book<sup>&reg;</sup> values"
+msgstr ""
+
 #: app/views/payments.html
 msgid "Filter by Due Date"
 msgstr "Filtro por fecha de vencimiento"
@@ -1225,6 +1229,14 @@ msgstr "Parece que éste es el resultado de:"
 msgid "Keep Editing"
 msgstr "Siga editando"
 
+#: app/views/valuelookup.html
+msgid "Kelley Blue Book<sup>&reg;</sup> Values"
+msgstr ""
+
+#: app/scripts/controllers/valuelookup.js
+msgid "Kelley Blue Book® Values"
+msgstr ""
+
 #: app/views/account_management.html app/views/analytics.html
 #: app/views/floorplan.html
 msgid "Last Payment"
@@ -1263,7 +1275,8 @@ msgstr "Buscar valores"
 msgid "Lot Number"
 msgstr "Número de lote"
 
-#: app/views/valuelookup.html app/views/vehicledetails.html
+#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
+#: app/views/vehicledetails.html
 msgid "MMR Values"
 msgstr "Valores MMR"
 
@@ -1350,11 +1363,8 @@ msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 "El siguiente pago vence {{ financialSummary.NextPaymentDueDate | moment }}"
 
-#: app/views/valuelookup.html
-msgid "NextGear Book"
-msgstr "Libro NextGear"
-
-#: app/views/valuelookup.html app/views/vehicledetails.html
+#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
+#: app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valores Libro NextGear"
 
@@ -1673,6 +1683,10 @@ msgstr ""
 "Por favor, <a nxg-chat-with-us=\"\">chatee con nosotros</a> o póngase en "
 "contacto con el servicio a clientes para recibir ayuda."
 
+#: app/views/valuelookup.html
+msgid "Please Select a Manual Lookup Values."
+msgstr "Por favor, seleccione una búsqueda manual."
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
 msgstr "Por favor, reconozca la falla de búsqueda de VIN."
@@ -1863,6 +1877,10 @@ msgstr ""
 msgid "Please enter a username."
 msgstr "Por favor, ingrese un nombre de usuario."
 
+#: app/views/valuelookup.html
+msgid "Please enter a valid 5 digit Zipcode."
+msgstr ""
+
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Please enter a valid End Stock Number"
 msgstr "Por favor, capture un número de inventario final válido."
@@ -1955,6 +1973,10 @@ msgstr "Por favor, ingrese el kilometraje."
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please enter the Purchase Amount."
 msgstr "Por favor, ingrese el importe de la compra."
+
+#: app/views/valuelookup.html
+msgid "Please enter the Zipcode."
+msgstr ""
 
 #: app/views/checkout.html
 msgid ""
@@ -2402,6 +2424,10 @@ msgstr "Pregunta de seguridad {{$index + 1}}"
 msgid "Select Below"
 msgstr "Seleccione abajo"
 
+#: app/scripts/controllers/valuelookup.js
+msgid "Select Manual Lookup Values"
+msgstr "Seleccione una búsqueda manual"
+
 #: app/views/modals/dealerNameSearch.html
 msgid "Select a business name below to query the account."
 msgstr ""
@@ -2675,6 +2701,14 @@ msgid ""
 msgstr ""
 "El plan de piso que seleccionó para la liberación de títulos lo colocaría "
 "por encima de los límites del plan financiero de esta cuenta."
+
+#: app/views/valuelookup.html
+msgid "The following values are a regional average based on the Zip provided."
+msgstr ""
+
+#: app/views/valuelookup.html
+msgid "The following values represent a national average."
+msgstr ""
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "The passwords do not match. Please re-enter the password."
@@ -3075,6 +3109,10 @@ msgstr "Pagos del vehículo"
 msgid "Vehicles Floored"
 msgstr "Vehículos puestos en piso"
 
+#: app/views/valuelookup.html
+msgid "Very Good"
+msgstr ""
+
 #: app/views/documents.html
 msgid "Video Walkthrough"
 msgstr "Explicación en video"
@@ -3131,6 +3169,12 @@ msgid "Volume of Past NextGear Capital Floorplans"
 msgstr "Volumen de planes de piso pasados de NextGear Capital"
 
 #: app/views/valuelookup.html
+msgid ""
+"We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> "
+"values at this time."
+msgstr ""
+
+#: app/views/valuelookup.html
 msgid "We are sorry, but we are unable to provide MMR Values at this time."
 msgstr ""
 "Lo sentimos, pero no podemos proporcionarle valores MMR en este momento."
@@ -3174,7 +3218,9 @@ msgstr ""
 msgid ""
 "We're sorry, but you used a username or password that doesn't match our "
 "records."
-msgstr "Disculpe, pero utilizó un nombre de usuario o una contraseña que no se encuentra en nuestros registros."
+msgstr ""
+"Disculpe, pero utilizó un nombre de usuario o una contraseña que no se "
+"encuentra en nuestros registros."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid ""
@@ -3390,6 +3436,10 @@ msgstr[1] "Se han enviado sus solicitudes de títulos."
 msgid "Your title request(s) can not be processed at this time."
 msgstr "Su(s) solicitud(es) de títulos no pueden procesarse en este momento."
 
+#: app/views/valuelookup.html
+msgid "Zip"
+msgstr ""
+
 #: app/404.html
 msgid "a mistyped address"
 msgstr "dirección mal escrita"
@@ -3414,10 +3464,12 @@ msgstr "para {{ item.ScheduledDate | moment }}"
 msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
+#: app/scripts/controllers/checkout.js
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "interest only"
 msgstr "únicamente con interés"
 
+#: app/scripts/controllers/checkout.js
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "invalid payment type"
 msgstr "tipo de pago inválido"
@@ -3426,10 +3478,12 @@ msgstr "tipo de pago inválido"
 msgid "none"
 msgstr "ninguna"
 
+#: app/scripts/controllers/checkout.js
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "payment"
 msgstr "pago"
 
+#: app/scripts/controllers/checkout.js
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js
 msgid "payoff"
 msgstr "pagado"
@@ -3500,6 +3554,9 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "NextGear Book"
+#~ msgstr "Libro NextGear"
 
 #~ msgid "Current Mileage"
 #~ msgstr "Kilometraje actual"
