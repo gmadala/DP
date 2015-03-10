@@ -1686,7 +1686,7 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "Please Select a Manual Lookup Values."
-msgstr ""
+msgstr "Veuillez sélectionner une recherche manuelle."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
@@ -2424,7 +2424,7 @@ msgstr "Sélectionner ci-dessous"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "Select Manual Lookup Values"
-msgstr ""
+msgstr "Sélectionner une recherche manuelle"
 
 #: app/views/modals/dealerNameSearch.html
 msgid "Select a business name below to query the account."
