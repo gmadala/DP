@@ -231,30 +231,6 @@ describe('Controller: ValueLookupCtrl', function () {
       });
     });
 
-    describe('hideKbbAll', function() {
-      it('should return false if we have not run a search yet', function() {
-        expect(scope.hideKbbAll()).toBe(false);
-      });
-
-      it('should return false if we ran a vin search', function() {
-        scope.vinLookup.searchComplete = true;
-        expect(scope.hideKbbAll()).toBe(false);
-      });
-
-      it('should return false if we ran a manual kbb search', function() {
-        scope.manualLookup.searchComplete = true;
-        scope.results.kbb.data = ['a'];
-        expect(scope.hideKbbAll()).toBe(false);
-      });
-
-      it('should return true if we ran a different manual search', function() {
-        scope.manualLookup.searchComplete = true;
-        scope.results.kbb.data = null;
-        scope.results.kbb.noMatch = false;
-        expect(scope.hideKbbAll()).toBe(true);
-      });
-    });
-
     describe('showMultiplesWarning', function(){
       it('should return false if we have not yet run a search', function() {
         expect(scope.showMultiplesWarning()).toBe(false);
@@ -297,24 +273,84 @@ describe('Controller: ValueLookupCtrl', function () {
     });
   });
 
-  describe('KBB option is available only for UnitedStates user', function() {
+  describe('KBB is only shown for UnitedStates user', function() {
 
     beforeEach(function() {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
       $httpBackend.whenGET('/mmr/years/').respond({});
-      $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
     });
 
-    it('should not include KBB as a drop down for a non-UnitedStates User', function () {
-      spyOn(User, 'isUnitedStates').andReturn(false);
-      run();
-      expect(scope.manualLookupValues.length).toBe(3);
+    describe('non US user suite', function() {
+
+      beforeEach(function() {
+        spyOn(User, 'isUnitedStates').andReturn(false);
+        run();
+      });
+
+      it('should not include KBB as a drop down', function () {
+        expect(scope.manualLookupValues.length).toBe(3);
+      });
+
+      describe('hideKbbAll', function() {
+        it('should return true if we have not run a search yet', function() {
+          expect(scope.hideKbbAll()).toBe(true);
+        });
+
+        it('should return true if we ran a vin search', function() {
+          scope.vinLookup.searchComplete = true;
+          expect(scope.hideKbbAll()).toBe(true);
+        });
+
+        it('should return true if we ran a manual kbb search', function() {
+          scope.manualLookup.searchComplete = true;
+          scope.results.kbb.data = ['a'];
+          expect(scope.hideKbbAll()).toBe(true);
+        });
+
+        it('should return true if we ran a different manual search', function() {
+          scope.manualLookup.searchComplete = true;
+          scope.results.kbb.data = null;
+          scope.results.kbb.noMatch = false;
+          expect(scope.hideKbbAll()).toBe(true);
+        });
+      });
     });
 
-    it('should include KBB as a drop down for a UnitedStates User', function () {
-      spyOn(User, 'isUnitedStates').andReturn(true);
-      run();
-      expect(scope.manualLookupValues.length).toBe(4);
+    describe('US user suite', function() {
+
+      beforeEach(function() {
+        $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
+        spyOn(User, 'isUnitedStates').andReturn(true);
+        run();
+      });
+
+      it('should include KBB as a drop down for a UnitedStates User', function () {
+        expect(scope.manualLookupValues.length).toBe(4);
+      });
+
+      describe('hideKbbAll', function() {
+        it('should return false if we have not run a search yet', function() {
+          expect(scope.hideKbbAll()).toBe(false);
+        });
+
+        it('should return false if we ran a vin search', function() {
+          scope.vinLookup.searchComplete = true;
+          expect(scope.hideKbbAll()).toBe(false);
+        });
+
+        it('should return false if we ran a manual kbb search', function() {
+          scope.manualLookup.searchComplete = true;
+          scope.results.kbb.data = ['a'];
+          expect(scope.hideKbbAll()).toBe(false);
+        });
+
+        it('should return true if we ran a different manual search', function() {
+          scope.manualLookup.searchComplete = true;
+          scope.results.kbb.data = null;
+          scope.results.kbb.noMatch = false;
+          expect(scope.hideKbbAll()).toBe(true);
+        });
+      });
     });
   });
 
