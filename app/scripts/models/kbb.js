@@ -25,7 +25,7 @@
 
 'use strict';
 
-angular.module('nextgearWebApp')
+angular.module('nextgearWebCommon')
   .factory('Kbb', function(apiCommon, $q) {
 
     var api = apiCommon;
