@@ -31,38 +31,84 @@ angular.module('nextgearWebApp')
     // for the moment return a single value object
     // with values for AuctionExcellent, AuctionFair, AuctionGood, AuctionVeryGood
 
-    var extractAuctionValues = function (results) {
+    /*
+    Price type enum from server side code
+     (talked with Chris and it seems the server will return the number, not the enum name):
 
-      if(!results || results.length === 0){
+     BaseWholesale = 0,
+     Wholesale = 1,
+     BaseRetail = 2,
+     Retail = 3,
+     PrivatePartyExcellent = 4,
+     PrivatePartyGood = 5,
+     PrivatePartyVeryGood = 6,
+     PrivatePartyFair = 7,
+     TradeInExcellent = 8,
+     TradeInGood = 9,
+     TradeInVeryGood = 10,
+     TradeInFair = 11,
+     MSRP = 12,
+     Invoice = 13,
+     AuctionExcellent = 14,
+     AuctionGood = 15,
+     AuctionVeryGood = 16,
+     AuctionFair = 17,
+     CPO = 18,
+     TradeInExcellentRangeLow = 19,
+     TradeInExcellentRangeHigh = 20,
+     TradeInGoodRangeLow = 21,
+     TradeInGoodRangeHigh = 22,
+     TradeInVeryGoodRangeLow = 23,
+     TradeInVeryGoodRangeHigh = 24,
+     TradeInFairRangeLow = 25,
+     TradeInFairRangeHigh = 26,
+     NewCarFairPurchasePrice = 27,
+     NewCarFairPurchasePriceRangeLow = 28,
+     NewCarFairPurchasePriceRangeHigh = 29,
+     CPORangeLow = 30,
+     CPORangeHigh = 31,
+     UsedCarFairPurchasePrice = 32,
+     UsedCarFairPurchasePriceRangeLow = 33,
+     UsedCarFairPurchasePriceRangeHigh = 34
+     */
+
+    var extractAuctionValues = function (result) {
+
+      if(!result){
+        return [];
+      }
+
+      var valuations = result.ValuationPrices;
+      if (!valuations || valuations.length === 0) {
         return [];
       }
 
       var auctionValues = {};
-      results.forEach(function (value) {
+      valuations.forEach(function (value) {
 
         var property = null;
 
-        switch (value.priceType) {
-        case 'AuctionExcellent':
-          property = 'AuctionExcellent';
+        switch (value.PriceType) {
+        case '14':
+          property = '14';
           break;
-        case 'AuctionFair':
-          property = 'AuctionFair';
+        case '17':
+          property = '17';
           break;
-        case 'AuctionGood':
-          property = 'AuctionGood';
+        case '15':
+          property = '15';
           break;
-        case 'AuctionVeryGood':
-          property = 'AuctionVeryGood';
+        case '16':
+          property = '16';
           break;
         default:
           property = null;
         }
         if (property) {
-          auctionValues[property] = value.priceValue || 0;
+          auctionValues[property] = value.Value || 0;
         }
       });
-      return [auctionValues]; // TODO can there be multiple?
+      return auctionValues;
     };
 
     // the vehicleClass and applicationCategory are currently not options for the client (using UsedCar/Dealer)
@@ -139,8 +185,21 @@ angular.module('nextgearWebApp')
           return res;
         });
       },
-      lookupByVin: function(vin, mileage, zipCode) {
+      getConfigurations: function(vin, zipCode) {
         if(!vin) {
+          throw new Error('Missing mileage');
+        }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
+        var path = '/kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode;
+
+        return api.request('GET', path).then(function(configurations) {
+          return configurations;
+        });
+      },
+      lookupByConfiguration: function(configuration, mileage, zipCode) {
+        if(!configuration) {
           throw new Error('Missing vin');
         }
         if(!mileage) {
@@ -150,14 +209,14 @@ angular.module('nextgearWebApp')
           throw new Error('Missing ZIP code');
         }
 
-        var path = getMethodPath('getvehiclevaluesbyvinallconditions') + '/' + vin + '/' + mileage + '/' + zipCode;
+        var path = getMethodPath('getvehiclevaluesallconditions') + '/' + configuration.Id + '/' + mileage + '/' + zipCode;
 
-        return api.request('GET', path).then(function(results) {
+        return api.request('GET', path).then(function(result) {
 
-          var res = extractAuctionValues(results);
+          var res = extractAuctionValues(result);
 
           // if there was a failure
-          if(!results || res.length === 0) {
+          if(!result || res.length === 0) {
             return $q.reject(false);
           } else {
             return res;

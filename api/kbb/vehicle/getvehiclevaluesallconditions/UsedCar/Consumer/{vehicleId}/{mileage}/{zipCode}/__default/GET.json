@@ -1,146 +1,223 @@
 {
   "Success": true,
   "Message": null,
-  "Data": [
-    {
-      "priceType": "AuctionExcellent",
-      "priceValue": 26376
-    },
-    {
-      "priceType": "AuctionFair",
-      "priceValue": 22929
-    },
-    {
-      "priceType": "AuctionGood",
-      "priceValue": 24926
-    },
-    {
-      "priceType": "AuctionVeryGood",
-      "priceValue": 25815
-    },
-    {
-      "priceType": "BaseRetail",
-      "priceValue": 27313
-    },
-    {
-      "priceType": "BaseWholesale",
-      "priceValue": 25885
-    },
-    {
-      "priceType": "CPO",
-      "priceValue": 28530
-    },
-    {
-      "priceType": "CPORangeHigh",
-      "priceValue": 29866
-    },
-    {
-      "priceType": "CPORangeLow",
-      "priceValue": 27193
-    },
-    {
-      "priceType": "Invoice",
-      "priceValue": 0
-    },
-    {
-      "priceType": "MSRP",
-      "priceValue": 40570
-    },
-    {
-      "priceType": "NewCarFairPurchasePrice",
-      "priceValue": 0
-    },
-    {
-      "priceType": "NewCarFairPurchasePriceRangeHigh",
-      "priceValue": 0
-    },
-    {
-      "priceType": "NewCarFairPurchasePriceRangeLow",
-      "priceValue": 0
-    },
-    {
-      "priceType": "PrivatePartyExcellent",
-      "priceValue": 26524
-    },
-    {
-      "priceType": "PrivatePartyFair",
-      "priceValue": 23068
-    },
-    {
-      "priceType": "PrivatePartyGood",
-      "priceValue": 25069
-    },
-    {
-      "priceType": "PrivatePartyVeryGood",
-      "priceValue": 25961
-    },
-    {
-      "priceType": "Retail",
-      "priceValue": 28105
-    },
-    {
-      "priceType": "TradeInExcellent",
-      "priceValue": 25236
-    },
-    {
-      "priceType": "TradeInExcellentRangeHigh",
-      "priceValue": 25781
-    },
-    {
-      "priceType": "TradeInExcellentRangeLow",
-      "priceValue": 24690
-    },
-    {
-      "priceType": "TradeInFair",
-      "priceValue": 21789
-    },
-    {
-      "priceType": "TradeInFairRangeHigh",
-      "priceValue": 23494
-    },
-    {
-      "priceType": "TradeInFairRangeLow",
-      "priceValue": 21206
-    },
-    {
-      "priceType": "TradeInGood",
-      "priceValue": 23786
-    },
-    {
-      "priceType": "TradeInGoodRangeHigh",
-      "priceValue": 24361
-    },
-    {
-      "priceType": "TradeInGoodRangeLow",
-      "priceValue": 23212
-    },
-    {
-      "priceType": "TradeInVeryGood",
-      "priceValue": 24675
-    },
-    {
-      "priceType": "TradeInVeryGoodRangeHigh",
-      "priceValue": 25208
-    },
-    {
-      "priceType": "TradeInVeryGoodRangeLow",
-      "priceValue": 24141
-    },
-    {
-      "priceType": "UsedCarFairPurchasePrice",
-      "priceValue": 27255
-    },
-    {
-      "priceType": "UsedCarFairPurchasePriceRangeHigh",
-      "priceValue": 29844
-    },
-    {
-      "priceType": "UsedCarFairPurchasePriceRangeLow",
-      "priceValue": 24665
-    },
-    {
-      "priceType": "Wholesale",
-      "priceValue": 26610
-    }
-  ]
+  "Data": {
+    "IsInsufficientMarketData": false,
+    "IsLimitedProduction": false,
+    "MileageAdjustment": 0,
+    "MileageZeroPoint": 0,
+    "ValuationZipCode": "46303",
+    "ValuationPrices": [
+      {
+        "Id": 1,
+        "IsMaxDeductApplied": false,
+        "PriceType": "14",
+        "Value": 12345
+      },
+      {
+        "Id": 2,
+        "IsMaxDeductApplied": false,
+        "PriceType": "17",
+        "Value": 45678
+      },
+      {
+        "Id": 3,
+        "IsMaxDeductApplied": false,
+        "PriceType": "16",
+        "Value": 34567
+      },
+      {
+        "Id": 4,
+        "IsMaxDeductApplied": false,
+        "PriceType": "15",
+        "Value": 23456
+      },
+      {
+        "Id": 5,
+        "IsMaxDeductApplied": false,
+        "PriceType": "2",
+        "Value": 27313
+      },
+      {
+        "Id": 6,
+        "IsMaxDeductApplied": false,
+        "PriceType": "0",
+        "Value": 25885
+      },
+      {
+        "Id": 7,
+        "IsMaxDeductApplied": false,
+        "PriceType": "18",
+        "Value": 28530
+      },
+      {
+        "Id": 8,
+        "IsMaxDeductApplied": false,
+        "PriceType": "31",
+        "Value": 29866
+      },
+      {
+        "Id": 9,
+        "IsMaxDeductApplied": false,
+        "PriceType": "30",
+        "Value": 27193
+      },
+      {
+        "Id": 10,
+        "IsMaxDeductApplied": false,
+        "PriceType": "13",
+        "Value": 0
+      },
+      {
+        "Id": 11,
+        "IsMaxDeductApplied": false,
+        "PriceType": "12",
+        "Value": 40570
+      },
+      {
+        "Id": 12,
+        "IsMaxDeductApplied": false,
+        "PriceType": "27",
+        "Value": 0
+      },
+      {
+        "Id": 13,
+        "IsMaxDeductApplied": false,
+        "PriceType": "28",
+        "Value": 0
+      },
+      {
+        "Id": 14,
+        "IsMaxDeductApplied": false,
+        "PriceType": "29",
+        "Value": 0
+      },
+      {
+        "Id": 15,
+        "IsMaxDeductApplied": false,
+        "PriceType": "4",
+        "Value": 26524
+      },
+      {
+        "Id": 16,
+        "IsMaxDeductApplied": false,
+        "PriceType": "7",
+        "Value": 23068
+      },
+      {
+        "Id": 17,
+        "IsMaxDeductApplied": false,
+        "PriceType": "5",
+        "Value": 25069
+      },
+      {
+        "Id": 18,
+        "IsMaxDeductApplied": false,
+        "PriceType": "6",
+        "Value": 25961
+      },
+      {
+        "Id": 19,
+        "IsMaxDeductApplied": false,
+        "PriceType": "3",
+        "Value": 28105
+      },
+      {
+        "Id": 20,
+        "IsMaxDeductApplied": false,
+        "PriceType": "8",
+        "Value": 25236
+      },
+      {
+        "Id": 21,
+        "IsMaxDeductApplied": false,
+        "PriceType": "20",
+        "Value": 25781
+      },
+      {
+        "Id": 22,
+        "IsMaxDeductApplied": false,
+        "PriceType": "19",
+        "Value": 24690
+      },
+      {
+        "Id": 23,
+        "IsMaxDeductApplied": false,
+        "PriceType": "11",
+        "Value": 21789
+      },
+      {
+        "Id": 24,
+        "IsMaxDeductApplied": false,
+        "PriceType": "26",
+        "Value": 23494
+      },
+      {
+        "Id": 25,
+        "IsMaxDeductApplied": false,
+        "PriceType": "25",
+        "Value": 21206
+      },
+      {
+        "Id": 26,
+        "IsMaxDeductApplied": false,
+        "PriceType": "9",
+        "Value": 23786
+      },
+      {
+        "Id": 27,
+        "IsMaxDeductApplied": false,
+        "PriceType": "22",
+        "Value": 24361
+      },
+      {
+        "Id": 28,
+        "IsMaxDeductApplied": false,
+        "PriceType": "21",
+        "Value": 23212
+      },
+      {
+        "Id": 29,
+        "IsMaxDeductApplied": false,
+        "PriceType": "10",
+        "Value": 24675
+      },
+      {
+        "Id": 30,
+        "IsMaxDeductApplied": false,
+        "PriceType": "24",
+        "Value": 25208
+      },
+      {
+        "Id": 31,
+        "IsMaxDeductApplied": false,
+        "PriceType": "23",
+        "Value": 24141
+      },
+      {
+        "Id": 32,
+        "IsMaxDeductApplied": false,
+        "PriceType": "32",
+        "Value": 27255
+      },
+      {
+        "Id": 33,
+        "IsMaxDeductApplied": false,
+        "PriceType": "34",
+        "Value": 29844
+      },
+      {
+        "Id": 34,
+        "IsMaxDeductApplied": false,
+        "PriceType": "33",
+        "Value": 24665
+      },
+      {
+        "Id": 35,
+        "IsMaxDeductApplied": false,
+        "PriceType": "1",
+        "Value": 26610
+      }
+    ]
+  }
 }
