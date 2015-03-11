@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore, gettextCatalog) {
+  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore, gettextCatalog,
+  apiCommon) {
     var authToken = null,
         sessionHasTimedOut = false,
         sessionTimeout = null,
@@ -56,7 +57,7 @@ angular.module('nextgearWebApp')
       }, nxgConfig.sessionTimeoutMs);
     }
 
-    return {
+    var service = {
       setAuth: function(authData) {
         // save authData on cookies to allow us to restore in case of reload
         $cookieStore.put('auth', authData);
@@ -199,4 +200,8 @@ angular.module('nextgearWebApp')
         }
       }
     };
+
+    apiCommon.init(service);
+
+    return service;
   });

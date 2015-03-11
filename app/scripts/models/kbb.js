@@ -26,8 +26,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Kbb', function(api, $q) {
+  .factory('Kbb', function(apiCommon, $q) {
 
+    var api = apiCommon;
     // for the moment return a single value object
     // with values for AuctionExcellent, AuctionFair, AuctionGood, AuctionVeryGood
 
