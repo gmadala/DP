@@ -1,27 +1,7 @@
 /**
  * Simple proxy to allow nextgearWebCommon to start using the API.
- * The actual 'api' service in each project has dependenc
- *
- * For Manual lookup
- * 1. GET /kbb/vehicle/getyears/UsedCar/Dealer
- * 2. User selects the year
- * 3. GET /kbb/vehicle/getmakesbyyear/UsedCar/Dealer/{yearId}
- * 4. User selects the make
- * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/{makeId}/{yearId}
- * 6. User selects the model
- * 7. GET /kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/{modelId}/{yearId}
- * 8. User selects the style
- * 9. User enters the mileage
- * 10. User enters the ZIP code
- * 11. User clicks lookup
- * 12. GET /kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
- *
- * For VIN lookup
- * 1. User enters VIN
- * 2. User enters mileage
- * 3. User enters ZIP code
- * 4. User clicks lookup
- * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/{vin}/{mileage}/{zipCode}
+ * The actual 'api' service in each project will have to call apiCommon.init(service) to inject itself into this
+ * service. This may need to be modified later but should be good enough to get started using it.
  */
 
 'use strict';
