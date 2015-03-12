@@ -142,16 +142,27 @@ angular.module('nextgearWebApp')
         // search KBB
         if ($scope.kbbEnabled) {
           if (this.zipcode) { // only search if there is a zip code
-            Kbb.lookupByVin(this.vin, this.mileage, this.zipcode).then(function (results) {
+            var vin = this.vin;
+            var mileage = this.mileage;
+            var zipCode = this.zipcode;
+            Kbb.getConfigurations(vin, zipCode).then(function (results) {
               if (results.length === 1) {
-                $scope.results.kbb.data = results[0];
+                $scope.results.kbb.configuration = results[0];
               } else { // we have multiple results
-                $scope.results.kbb.multiple = results;
-                $scope.results.kbb.data = results[0]; // as a default
+                $scope.results.kbb.configurations = results;
+                $scope.results.kbb.configuration = results[0]; // as a default
               }
 
+              Kbb.lookupByConfiguration(results[0], mileage, zipCode).then(function (result) {
+                $scope.results.kbb.data = result;
+              }, function () {
+                // no results
+                $scope.results.kbb.noMatch = true;
+              });
+
               if (!$scope.results.description && results) {
-                $scope.results.description = ''; // TODO use the MMR description?
+                var configuration = $scope.results.kbb.configuration;
+                $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value + ' ' + configuration.Model.Value;
               }
             }, function () {
               // no results
@@ -168,12 +179,20 @@ angular.module('nextgearWebApp')
       },
       validate: function() {
         this.validity = angular.copy($scope.vinLookupForm);
-
-        if (!$scope.vinLookupForm.$valid) {
-          return false;
-        }
-        return true;
+        return $scope.vinLookupForm.$valid;
       }
+    };
+
+    $scope.updateKbbData = function() {
+      var mileage = $scope.vinLookup.mileage;
+      var zipCode = $scope.vinLookup.zipcode;
+      var configuration = $scope.results.kbb.configuration;
+      Kbb.lookupByConfiguration(configuration, mileage, zipCode).then(function (result) {
+        $scope.results.kbb.data = result;
+      }, function () {
+        // no results
+        $scope.results.kbb.noMatch = true;
+      });
     };
 
     $scope.manualLookup = {
@@ -473,13 +492,13 @@ angular.module('nextgearWebApp')
             Year: which.years.selected.Value
           };
 
-          Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicles) {
+          Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicle) {
             // TODO find out real behavior here
             // MMR will almost always return only one result based
             // on all 5 params, and if there are multiples, the
             // values will likely be the same anyway. So, we
             // assume there is only item in the array
-            $scope.results.kbb.data = vehicles[0];
+            $scope.results.kbb.data = vehicle;
             $scope.results.description = buildDescription(descriptionProperties);
           }, function() {
             // no results

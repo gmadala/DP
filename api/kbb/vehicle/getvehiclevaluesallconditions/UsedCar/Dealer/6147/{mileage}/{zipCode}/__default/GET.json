@@ -12,25 +12,25 @@
         "Id": 1,
         "IsMaxDeductApplied": false,
         "PriceType": "14",
-        "Value": 12345
+        "Value": 98765
       },
       {
         "Id": 2,
         "IsMaxDeductApplied": false,
         "PriceType": "17",
-        "Value": 45678
+        "Value": 65432
       },
       {
         "Id": 3,
         "IsMaxDeductApplied": false,
         "PriceType": "16",
-        "Value": 34567
+        "Value": 76543
       },
       {
         "Id": 4,
         "IsMaxDeductApplied": false,
         "PriceType": "15",
-        "Value": 23456
+        "Value": 87654
       },
       {
         "Id": 5,

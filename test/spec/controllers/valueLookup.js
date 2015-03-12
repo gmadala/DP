@@ -22,6 +22,7 @@ describe('Controller: ValueLookupCtrl', function () {
     bbResult,
     mmrResult,
     kbbResult,
+    configResult,
     kbbResultFormatted,
     mock;
 
@@ -118,42 +119,56 @@ describe('Controller: ValueLookupCtrl', function () {
       }]
     };
 
-    kbbResult = {
-      Success: true,
-      Data: [
+    configResult = {
+      'Success': true,
+      'Message': null,
+      'Data': [
         {
-          "priceType": "AuctionExcellent",
-          "priceValue": 26376
-        },
-        {
-          "priceType": "AuctionFair",
-          "priceValue": 22929
-        },
-        {
-          "priceType": "AuctionGood",
-          "priceValue": 24926
-        },
-        {
-          "priceType": "AuctionVeryGood",
-          "priceValue": 25815
-        },
-        {
-          "priceType": "BaseRetail",
-          "priceValue": 27313
-        },
-        {
-          "priceType": "BaseWholesale",
-          "priceValue": 25885
-        },
+          'Id': '6146',
+          'VIN': '1234567890'
+        }
       ]
+    };
+
+    kbbResult = {
+      'Success': true,
+      'Data': {
+        'ValuationZipCode': '46303',
+        'ValuationPrices': [
+          {
+            'PriceType': '14',
+            'Value': 26376
+          },
+          {
+            'PriceType': '17',
+            'Value': 22929
+          },
+          {
+            'PriceType': '16',
+            'Value': 24926
+          },
+          {
+            'PriceType': '15',
+            'Value': 25815
+          },
+          {
+            'PriceType': '2',
+            'Value': 27313
+          },
+          {
+            'PriceType': '0',
+            'Value': 25885
+          }
+        ]
+      }
     };
 
     kbbResultFormatted = [
         {
-          AuctionExcellent: 26376,
-          AuctionFair: 22929,
-          AuctionGood: 24926,
-          AuctionVeryGood: 25815
+          14: 26376,
+          15: 25815,
+          16: 24926,
+          17: 22929
         }
       ];
 
@@ -388,11 +403,12 @@ describe('Controller: ValueLookupCtrl', function () {
       beforeEach(function() {
         $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin1234/8888').respond(bbResult);
         $httpBackend.whenGET('/mmr/getVehicleValueByVin/someVin1234/8888').respond(mmrResult);
-        $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/someVin1234/8888/12345')
-          .respond(kbbResult);
+        $httpBackend.whenGET('/kbb/vin/getvehicleconfigurationbyvin/someVin1234/12345').respond(configResult);
+        $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/6146/8888/12345').respond(kbbResult);
         spyOn(blackbook, 'lookupByVin').andCallThrough();
         spyOn(mmr, 'lookupByVin').andCallThrough();
-        spyOn(kbb, 'lookupByVin').andCallThrough();
+        spyOn(kbb, 'getConfigurations').andCallThrough();
+        spyOn(kbb, 'lookupByConfiguration').andCallThrough();
 
         fillVinSearch();
       });
@@ -414,7 +430,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.vinLookup.lookup();
         expect(blackbook.lookupByVin).not.toHaveBeenCalled();
         expect(mmr.lookupByVin).not.toHaveBeenCalled();
-        expect(kbb.lookupByVin).not.toHaveBeenCalled();
+        expect(kbb.lookupByConfiguration).not.toHaveBeenCalled();
       });
 
       it('should call mmr and blackbook but not KBB if ZIP code is missing', function() {
@@ -422,7 +438,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.vinLookup.lookup();
         expect(blackbook.lookupByVin).toHaveBeenCalled();
         expect(mmr.lookupByVin).toHaveBeenCalled();
-        expect(kbb.lookupByVin).not.toHaveBeenCalled();
+        expect(kbb.lookupByConfiguration).not.toHaveBeenCalled();
       });
 
       it('should look up the blackbook values', function() {
@@ -506,8 +522,9 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should look up the kbb values', function() {
         scope.vinLookup.lookup();
-        expect(kbb.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888, 12345);
         $httpBackend.flush();
+        expect(kbb.getConfigurations).toHaveBeenCalledWith('someVin1234', 12345);
+        expect(kbb.lookupByConfiguration).toHaveBeenCalledWith(configResult.Data[0], 8888, 12345);
         expect(scope.results.kbb.data).toEqual(kbbResultFormatted[0]);
         expect(scope.results.kbb.noMatch).toBe(false);
         expect(scope.results.kbb.multiple).toBeFalsy();
@@ -517,7 +534,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should handle no kbb matches', function() {
-        kbbResult.Data = [];
+        kbbResult.Data = {};
         scope.vinLookup.lookup();
         $httpBackend.flush();
         expect(scope.results.kbb.data).toBe(null);
@@ -985,7 +1002,7 @@ describe('Controller: ValueLookupCtrl', function () {
         });
 
         it('should handle no kbb matches', function() {
-          kbbResult.Data = [];
+          kbbResult.Data = {};
           scope.manualLookup.kbb.lookup();
           $httpBackend.flush();
           expect(scope.results.kbb.data).toBe(null);
