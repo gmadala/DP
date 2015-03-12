@@ -1,7 +1,7 @@
 'use strict';
 
 var frisby = require('frisby');
-var base = 'https://test.discoverdsc.com/MobileService/api/';
+var base = 'https://test.nextgearcapital.com/MobileService/api/';
 var credentials = 'Njg5NDZURjpuZ2NwYXNzITA6MQ==';
 var vehicleClass = 'UsedCar'; // or NewCar
 var applicationCategory = 'Dealer'; // or Consumer
