@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, Kbb, User, features, gettextCatalog) {
+  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, Kbb, User, features, gettextCatalog, metric,
+                                           segmentio) {
     $scope.results = {};
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
@@ -107,6 +108,9 @@ angular.module('nextgearWebApp')
         $scope.results.vin = which.vin;
         $scope.results.mileage = which.mileage;
         $scope.results.zipcode = which.zipcode;
+
+        segmentio.track(which.zipcode ? metric.CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON :
+          metric.CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON);
 
         // search blackbook
         Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
@@ -280,6 +284,8 @@ angular.module('nextgearWebApp')
           $scope.results.vin = null;
           $scope.results.mileage = which.mileage;
 
+          segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON);
+
           Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
             // Blackbook will only ever return one result based
             // on all 5 params; it'll always be the only item in the result array
@@ -378,6 +384,8 @@ angular.module('nextgearWebApp')
           $scope.searchInProgress = true;
           $scope.results.vin = null;
           $scope.results.mileage = which.mileage;
+
+          segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON);
 
           Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
             // MMR will almost always return only one result based
@@ -484,6 +492,8 @@ angular.module('nextgearWebApp')
           $scope.results.vin = null;
           $scope.results.mileage = which.mileage;
           $scope.results.zip = which.zipcode;
+
+          segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON);
 
           // since kbb does not return info about the vehicle in the return value, set it here
           var descriptionProperties = {
