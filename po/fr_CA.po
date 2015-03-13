@@ -1875,7 +1875,7 @@ msgid "Please enter a username."
 msgstr "Veuillez entrer un nom d'usager."
 
 #: app/views/valuelookup.html
-msgid "Please enter a valid 5 digit Zipcode."
+msgid "Please enter a valid 5 digit Zip."
 msgstr ""
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
@@ -1904,9 +1904,13 @@ msgstr "Veuillez entrer un numéro de téléphone valide."
 msgid "Please enter a value less than $1,000,000,000,000."
 msgstr "Veuillez entrer une valeur inférieure à 1 000 000 000 000 $."
 
-#: app/views/auction.bulkflooring.html app/views/valuelookup.html
+#: app/views/auction.bulkflooring.html
 msgid "Please enter a value less than 1,000,000 miles."
 msgstr "Veuillez entrer une valeur inférieure à 1 000 000 de miles."
+
+#: app/views/floorcar.html app/views/valuelookup.html
+msgid "Please enter a value less than 1,000,000."
+msgstr "Veuillez entrer une valeur inférieure à 1 000 000."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Please enter an Answer that is a maximum of 100 characters."
@@ -1971,7 +1975,7 @@ msgid "Please enter the Purchase Amount."
 msgstr "Veuillez entrer le montant d'achat."
 
 #: app/views/valuelookup.html
-msgid "Please enter the Zipcode."
+msgid "Please enter the Zip."
 msgstr ""
 
 #: app/views/checkout.html
