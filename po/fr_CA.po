@@ -3558,9 +3558,6 @@ msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
 
-#~ msgid "Please enter a value less than 1,000,000 miles."
-#~ msgstr "Veuillez entrer une valeur inférieure à 1 000 000 de miles."
-
 #~ msgid "NextGear Book"
 #~ msgstr "La valeur comptable de NextGear"
 
