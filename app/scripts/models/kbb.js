@@ -223,6 +223,19 @@ angular.module('nextgearWebCommon')
             return res;
           }
         });
+      },
+      getConfiguration: function(style, zipCode) {
+        if(!style || !style.VehicleId) {
+          throw new Error('Missing style');
+        }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
+        var path = getMethodPath('getvehicleconfigurationbyvehicleid') + '/' + style.VehicleId + '/' + zipCode;
+
+        return api.request('GET', path).then(function(configurations) {
+          return configurations;
+        });
       }
     };
   });
