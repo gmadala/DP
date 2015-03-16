@@ -1907,11 +1907,8 @@ msgstr "Por favor, ingrese un número de teléfono válido."
 msgid "Please enter a value less than $1,000,000,000,000."
 msgstr "Por favor, ingrese un valor menor a $1,000,000,000,000."
 
-#: app/views/auction.bulkflooring.html
-msgid "Please enter a value less than 1,000,000 miles."
-msgstr "Por favor, ingrese un valor menor a 1,000,000 millas."
-
-#: app/views/floorcar.html app/views/valuelookup.html
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/views/valuelookup.html
 msgid "Please enter a value less than 1,000,000."
 msgstr "Por favor, ingrese un valor menor a 1,000,000."
 
