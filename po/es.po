@@ -1908,8 +1908,8 @@ msgid "Please enter a value less than $1,000,000,000,000."
 msgstr "Por favor, ingrese un valor menor a $1,000,000,000,000."
 
 #: app/views/auction.bulkflooring.html
-msgid "Please enter a value less than 1,000,000 miles."
-msgstr "Por favor, ingrese un valor menor a 1,000,000 millas."
+msgid "Please enter a value less than 1,000,000."
+msgstr "Por favor, ingrese un valor menor a 1,000,000."
 
 #: app/views/floorcar.html app/views/valuelookup.html
 msgid "Please enter a value less than 1,000,000."

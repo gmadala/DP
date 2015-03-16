@@ -1904,11 +1904,8 @@ msgstr "Veuillez entrer un numéro de téléphone valide."
 msgid "Please enter a value less than $1,000,000,000,000."
 msgstr "Veuillez entrer une valeur inférieure à 1 000 000 000 000 $."
 
-#: app/views/auction.bulkflooring.html
-msgid "Please enter a value less than 1,000,000 miles."
-msgstr "Veuillez entrer une valeur inférieure à 1 000 000 de miles."
-
-#: app/views/floorcar.html app/views/valuelookup.html
+#: app/views/auction.bulkflooring.html app/views/floorcar.html
+#: app/views/valuelookup.html
 msgid "Please enter a value less than 1,000,000."
 msgstr "Veuillez entrer une valeur inférieure à 1 000 000."
 
@@ -3560,6 +3557,9 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Please enter a value less than 1,000,000 miles."
+#~ msgstr "Veuillez entrer une valeur inférieure à 1 000 000 de miles."
 
 #~ msgid "NextGear Book"
 #~ msgstr "La valeur comptable de NextGear"
