@@ -53,7 +53,7 @@
               Please enter a value less than 1,000,000.
             </label>
             <div ng-show="kbbEnabled">
-              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>&reg;</sup> values</span></i></label>
+              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>&reg;</sup> auction values</span></i></label>
               <input type="text" id="vinKbbZipCode"
                      name="vinKbbZipCode"
                      ng-model="vinLookup.zipcode"
@@ -80,11 +80,13 @@
       <div class="well-item">
         <form class="value-form" name="manualLookupForm" novalidate>
           <div class="form-block" ng-switch="lookupValues.id">
-            <div class="style-select" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
-              <select id="lookupValues" name="lookupValues" ng-model="lookupValues"
-                      ng-options="lookupValues.name for lookupValues in manualLookupValues"
-                      required>
-              </select>
+            <div class="row-fluid">
+              <div class="style-select span9" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
+                <select id="lookupValues" name="lookupValues" ng-model="lookupValues"
+                        ng-options="lookupValues.name for lookupValues in manualLookupValues"
+                        required>
+                </select>
+              </div>
             </div>
             <label for="lookupValues" class="text-error" ng-show="manualLookupForm.lookupValues.$error.required" translate>
               Please Select a Manual Lookup Values.
@@ -410,7 +412,7 @@
     </div>
 
     <div ng-hide="hideBlackbookAll()">
-      <h4 class="subtitle"><span translate>NextGear Book Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
+      <h4 class="subtitle"><span translate>NextGear Book Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
       <div ng-show="results.blackbook.multiple">
         <label translate>Style</label>
@@ -447,7 +449,7 @@
     </div>
 
     <div ng-hide="hideMmrAll()">
-      <h4 class="subtitle"><span translate>MMR Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
+      <h4 class="subtitle"><span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
       <div ng-show="results.mmr.multiple">
         <label translate>Style</label>
@@ -485,7 +487,7 @@
     </div>
 
     <div ng-hide="hideKbbAll()">
-      <h4 class="subtitle"><span translate>Kelley Blue Book<sup>&reg;</sup> Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
+      <h4 class="subtitle"><span translate>Kelley Blue Book<sup>&reg;</sup> Auction Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
       <p class="text-error" ng-show="results.kbb.noMatch && vinLookup.zipcode" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> values at this time.</p>
       <div ng-show="results.kbb.configurations">
         <label translate>Style</label>

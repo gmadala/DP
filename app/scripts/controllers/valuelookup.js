@@ -584,12 +584,12 @@ angular.module('nextgearWebApp')
 
     $scope.manualLookupValues=[
       { id:'', name: gettextCatalog.getString('Select Manual Lookup Values')},
-      { id:'bb', name: gettextCatalog.getString('NextGear Book Values')},
-      { id:'mmr', name: gettextCatalog.getString('MMR Values')}
+      { id:'bb', name: gettextCatalog.getString('NextGear Book Wholesale Values')},
+      { id:'mmr', name: gettextCatalog.getString('MMR Wholesale Values')}
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
 
     if ($scope.kbbEnabled){
-      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Values')});
+      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Auction Values')});
     }
   });
