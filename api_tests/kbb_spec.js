@@ -5,12 +5,12 @@ var base = 'https://test.nextgearcapital.com/MobileService/api/';
 var credentials = 'Njg5NDZURjpuZ2NwYXNzITA6MQ==';
 var vehicleClass = 'UsedCar'; // or NewCar
 var applicationCategory = 'Dealer'; // or Consumer
-var yearId = 1995;
-var makeId = 16; // 'GMC'
-var modelId = 27751; // '3500 Regular Cab & Chassis'
-var vehicleId = 1000; // TODO
-var zipCode = '46123'; // TODO
-
+var yearId = 2011;
+var makeId = 4; // 'Audi'
+var modelId = 8; // '3500 Regular Cab & Chassis'
+var vehicleId = 352620;
+var zipCode = '46032';
+var vin = '19UYA3253WL002778';
 
 
 frisby.create('Kelley Blue Book (KBB): Authenticate')
