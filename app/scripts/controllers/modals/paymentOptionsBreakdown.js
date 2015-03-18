@@ -71,6 +71,10 @@ angular.module('nextgearWebApp')
     $scope.confirm = function() {
       $scope.validity = angular.copy($scope.paymentOptionsForm);
 
+      if($scope.selector.paymentOption  !== PaymentOptions.TYPE_PAYMENT){
+        $scope.paymentOptionsForm.$valid = true;
+      }
+
       if(!$scope.paymentOptionsForm.$valid) {
         // form is invalid, don't submit
         return;
