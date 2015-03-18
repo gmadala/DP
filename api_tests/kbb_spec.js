@@ -2,7 +2,7 @@
 
 var frisby = require('frisby');
 var base = 'https://test.nextgearcapital.com/MobileService/api/';
-var credentials = 'NTMxOTBtZDpwYXNzd29yZEAxOjE=';
+var credentials = 'Njg5NDZURjpuZ2NwYXNzITA6MQ==';
 var yearId = 2011;
 var makeId = 4; // 'Audi'
 var modelId = 8; // '3500 Regular Cab & Chassis'
