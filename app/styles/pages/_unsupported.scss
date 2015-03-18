@@ -50,8 +50,14 @@
   }
 
   .nxg-logo {
-    background-image: url(../img/nxg_logo_blue.png);
+   /* background-image: url(../img/nxg_logo_blue.png);*/
+    background-image: url(../img/nxg_logo_blue.svg);
+    background-size: 200px auto;
     background-repeat: no-repeat;
+    position: relative;
+    top: 10px;
+    padding-top: 1px;
+    z-index: 5;
   }
 
   .span2 {
