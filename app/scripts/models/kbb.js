@@ -169,11 +169,11 @@ angular.module('nextgearWebCommon')
         var path = '/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/' + style.VehicleId + '/' +
           mileage + '/' + zipCode;
 
-        return api.request('GET', path).then(function(vehicles) {
+        return api.request('GET', path).then(function(result) {
 
-          var res = extractAuctionValues(vehicles);
+          var res = extractAuctionValues(result);
 
-          if(!vehicles || res.length === 0) {
+          if(!result || res.length === 0) {
             return $q.reject(false);
           }
           return res;
@@ -188,13 +188,14 @@ angular.module('nextgearWebCommon')
         }
         var path = '/kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode;
 
+        // TODO Access Denied
         return api.request('GET', path).then(function(configurations) {
           return configurations;
         });
       },
       lookupByConfiguration: function(configuration, mileage, zipCode) {
         if(!configuration) {
-          throw new Error('Missing vin');
+          throw new Error('Missing configuration');
         }
         if(!mileage) {
           throw new Error('Missing mileage');
@@ -203,21 +204,17 @@ angular.module('nextgearWebCommon')
           throw new Error('Missing ZIP code');
         }
 
-        //Configuration has VIN and Mileage
-        //TODO update this method to match the endpoint value/GetVehicleValuesByVehicleConfiguration/{applicationCategory}/{zipCode}/{vehicleCondition}
-        //TODO no vehicle class?
-        var path = '/kbb/value/getvehiclevaluesbyconfiguration/UsedCar/Dealer/' + zipCode + '/' + 'vehicleConditionTODO';
+        var path = '/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/' + configuration.Id + '/' +
+          mileage + '/' + zipCode;
 
-        return api.request('GET', path, configuration).then(function(result) {
+        return api.request('GET', path).then(function(result) {
 
           var res = extractAuctionValues(result);
 
-          // if there was a failure
           if(!result || res.length === 0) {
             return $q.reject(false);
-          } else {
-            return res;
           }
+          return res;
         });
       },
       getConfiguration: function(style, zipCode) {
