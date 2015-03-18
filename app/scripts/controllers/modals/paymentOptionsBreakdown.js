@@ -71,7 +71,7 @@ angular.module('nextgearWebApp')
     $scope.confirm = function() {
       $scope.validity = angular.copy($scope.paymentOptionsForm);
 
-      // Other than Curtailment Payment is selected in the payment options then we are making checking any validation for the controls.
+      // Other than Curtailment Payment is selected in the payment options then we are not checking any validation for the controls.
       if($scope.selector.paymentOption  !== PaymentOptions.TYPE_PAYMENT){
         $scope.paymentOptionsForm.$valid = true;
       }
