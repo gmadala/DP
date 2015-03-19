@@ -1,0 +1,43 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "IsInsufficientMarketData": false,
+    "IsLimitedProduction": false,
+    "MileageAdjustment": 0,
+    "MileageZeroPoint": 0,
+    "ValuationZipCode": "46303",
+    "ValuationPrices": [
+      {
+        "Id": 1,
+        "IsMaxDeductApplied": false,
+        "PriceType": 14,
+        "Value": 26376
+      },
+      {
+        "Id": 2,
+        "IsMaxDeductApplied": false,
+        "PriceType": 17,
+        "Value": 22929
+      },
+      {
+        "Id": 3,
+        "IsMaxDeductApplied": false,
+        "PriceType": 15,
+        "Value": 24926
+      },
+      {
+        "Id": 4,
+        "IsMaxDeductApplied": false,
+        "PriceType": 16,
+        "Value": 25815
+      },
+      {
+        "Id": 35,
+        "IsMaxDeductApplied": false,
+        "PriceType": 1,
+        "Value": 26610
+      }
+    ]
+  }
+}

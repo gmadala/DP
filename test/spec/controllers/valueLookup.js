@@ -136,28 +136,20 @@ describe('Controller: ValueLookupCtrl', function () {
         'ValuationZipCode': '46303',
         'ValuationPrices': [
           {
-            'PriceType': '14',
+            'PriceType': 14,
             'Value': 26376
           },
           {
-            'PriceType': '17',
+            'PriceType': 17,
             'Value': 22929
           },
           {
-            'PriceType': '16',
+            'PriceType': 16,
             'Value': 24926
           },
           {
-            'PriceType': '15',
+            'PriceType': 15,
             'Value': 25815
-          },
-          {
-            'PriceType': '2',
-            'Value': 27313
-          },
-          {
-            'PriceType': '0',
-            'Value': 25885
           }
         ]
       }
