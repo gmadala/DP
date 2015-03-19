@@ -404,7 +404,7 @@ describe('Controller: ValueLookupCtrl', function () {
         $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin1234/8888').respond(bbResult);
         $httpBackend.whenGET('/mmr/getVehicleValueByVin/someVin1234/8888').respond(mmrResult);
         $httpBackend.whenGET('/kbb/vin/getvehicleconfigurationbyvin/someVin1234/12345').respond(configResult);
-        $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/6146/8888/12345').respond(kbbResult);
+        $httpBackend.whenGET('/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/6146/8888/12345').respond(kbbResult);
         spyOn(blackbook, 'lookupByVin').andCallThrough();
         spyOn(mmr, 'lookupByVin').andCallThrough();
         spyOn(kbb, 'getConfigurations').andCallThrough();
@@ -966,7 +966,7 @@ describe('Controller: ValueLookupCtrl', function () {
       describe('lookup', function() {
         beforeEach(function() {
           spyOn(kbb, 'lookupByOptions').andCallThrough();
-          $httpBackend.whenGET('/kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/2/789/12345').respond(kbbResult);
+          $httpBackend.whenGET('/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/2/789/12345').respond(kbbResult);
           run();
           fillKbb();
         });
