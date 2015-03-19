@@ -1,15 +1,18 @@
 'use strict';
 
 var frisby = require('./frisby_mobile_service');
-var yearId = 2011;
+var yearId = 2014;
 var makeId = 4; // 'Audi'
-var modelId = 8; // '3500 Regular Cab & Chassis'
+var modelId = 9; // ''
 var vehicleId = 352620;
 var mileage = 10000;
 var zipCode = '46032';
 var vin = '19UYA3253WL002778';
 var base = frisby.apiBase;
 
+// for dev
+//base = 'http://localhost:8080/';
+//frisby.login('68946TF', 'ngcpass!0')
 frisby.authenticate()
   .after(function () {
 
@@ -34,33 +37,33 @@ frisby.authenticate()
 
     frisby.create('KBB: Gets vehicle models by year and make')
       .get(base + 'kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/' + makeId + '/' + yearId)
-      .expectSuccess();
+      .expectSuccess()
       //.expectJSONTypes('Data.*', {
       //  Key: Number,
       //  Value: String
       //})
       //.expectJSONLength('Data', 1)
-      //.toss();
+      .toss();
 
     frisby.create('KBB: Gets trims and vehicle IDs by year and model')
       .get(base + 'kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/' + modelId + '/' + yearId)
-      .expectSuccess();
+      .expectSuccess()
       //.expectJSONTypes('Data.*', {
       //  Key: Number,
       //  Value: String
       //})
       //.expectJSONLength('Data', 1)
-      //.toss();
+      .toss();
 
     frisby.create('KBB: Gets vehicle values by vehicle ID, mileage, and ZIP code')
       .get(base + 'kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/' + vehicleId + '/' + mileage + '/' + zipCode)
-      .expectSuccess();
+      .expectSuccess()
       //.expectJSONTypes('Data.*', {
       //  Key: Number,
       //  Value: String
       //})
       //.expectJSONLength('Data', 1)
-      //.toss();
+      .toss();
 
     frisby.create('KBB: Gets vehicle configurations by VIN and ZIP code')
       .get(base + 'kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode)
@@ -72,20 +75,14 @@ frisby.authenticate()
       //.expectJSONLength('Data', 1)
       //.toss();
 
-    frisby.create('KBB: Gets vehicle values by configuration, ZIP code and vehicle condition')
-      // API needs to be updated here!
-      .get(base + 'kbb/vehicle/getvehicleconfigurationbyvehicleid/UsedCar/Dealer' + vehicleId + '/' + zipCode)
-      .expectSuccess();
-      //.toss();
-
     frisby.create('KBB: Gets vehicle configuration by vehicle ID and ZIP code')
       .get(base + '/kbb/vehicle/getvehicleconfigurationbyvehicleid/UsedCar/Dealer/' + vehicleId + '/' + zipCode)
-      .expectSuccess();
+      .expectSuccess()
       //.expectJSONTypes('Data.*', {
       //  Key: Number,
       //  Value: String
       //})
       //.expectJSONLength('Data', 1)
-      //.toss();
+      .toss();
   })
   .toss();
