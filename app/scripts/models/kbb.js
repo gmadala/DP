@@ -173,7 +173,7 @@ angular.module('nextgearWebCommon')
 
           var res = extractAuctionValues(result);
 
-          if(!result || res.length === 0) {
+          if(!result || _.keys(res).length === 0) {
             return $q.reject(false);
           }
           return res;
@@ -211,7 +211,7 @@ angular.module('nextgearWebCommon')
 
           var res = extractAuctionValues(result);
 
-          if(!result || res.length === 0) {
+          if(!result || _.keys(res).length === 0) {
             return $q.reject(false);
           }
           return res;

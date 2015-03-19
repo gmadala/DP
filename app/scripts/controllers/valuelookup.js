@@ -74,7 +74,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.showDescription = function() {
-      return !($scope.results.blackbook.noMatch && $scope.results.mmr.noMatch && $scope.results.kbb.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
+      return !($scope.results.blackbook.noMatch || $scope.results.mmr.noMatch || $scope.results.kbb.noMatch) && ($scope.vinLookup.searchComplete || $scope.manualLookup.searchComplete);
     };
 
     $scope.searchCompleteCheck = function() {

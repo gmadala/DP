@@ -488,7 +488,7 @@
 
     <div ng-hide="hideKbbAll()">
       <h4 class="subtitle"><span translate>Kelley Blue Book<sup>&reg;</sup> Auction Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
-      <p class="text-error" ng-show="results.kbb.noMatch && vinLookup.zipcode" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> values at this time.</p>
+      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> values at this time.</p>
       <div ng-show="results.kbb.configurations">
         <label translate>Style</label>
         <div class="style-select">
