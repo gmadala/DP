@@ -13,7 +13,7 @@
  * 9. User enters the mileage
  * 10. User enters the ZIP code
  * 11. User clicks lookup
- * 12. GET /kbb/vehicle/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
+ * 12. GET /kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
  *
  * For VIN lookup
  * 1. User enters VIN
@@ -112,18 +112,10 @@ angular.module('nextgearWebCommon')
       return auctionValues;
     };
 
-    // the vehicleClass and applicationCategory are currently not options for the client (using UsedCar/Dealer)
-    var methodPathTemplate = _.template('/kbb/vehicle/${method}/UsedCar/Dealer');
-
-    var getMethodPath = function(methodName){
-
-      return methodPathTemplate({ method: methodName });
-    };
-
     return {
       getYears: function() {
 
-        return api.request('GET', getMethodPath('getyears')).then(function(years) {
+        return api.request('GET', '/kbb/vehicle/getyears/UsedCar/Dealer').then(function(years) {
           return years;
         });
       },
@@ -132,7 +124,7 @@ angular.module('nextgearWebCommon')
           throw new Error('Missing year');
         }
 
-        return api.request('GET', getMethodPath('getmakesbyyear') + '/' + year.Key).then(function (makes) {
+        return api.request('GET', '/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/' + year.Key).then(function (makes) {
           return makes;
         });
       },
@@ -144,7 +136,7 @@ angular.module('nextgearWebCommon')
           throw new Error('Missing make');
         }
 
-        var path = getMethodPath('getmodelsbyyearandmake') + '/' + make.Key + '/' + year.Key;
+        var path = '/kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/' + make.Key + '/' + year.Key;
 
         return api.request('GET', path).then(function(models) {
           return models;
@@ -158,7 +150,7 @@ angular.module('nextgearWebCommon')
           throw new Error('Missing model');
         }
 
-        var path = getMethodPath('gettrimsandvehicleidsbyyearandmodel') + '/' + model.Key + '/' + year.Key;
+        var path = '/kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/' + model.Key + '/' + year.Key;
 
         return api.request('GET', path).then(function(styles) {
           return styles;
@@ -174,13 +166,14 @@ angular.module('nextgearWebCommon')
         if(!zipCode) {
           throw new Error('Missing ZIP code');
         }
-        var path = getMethodPath('getvehiclevaluesallconditions') + '/' + style.VehicleId + '/' + mileage + '/' + zipCode;
+        var path = '/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/' + style.VehicleId + '/' +
+          mileage + '/' + zipCode;
 
-        return api.request('GET', path).then(function(vehicles) {
+        return api.request('GET', path).then(function(result) {
 
-          var res = extractAuctionValues(vehicles);
+          var res = extractAuctionValues(result);
 
-          if(!vehicles || res.length === 0) {
+          if(!result || res.length === 0) {
             return $q.reject(false);
           }
           return res;
@@ -195,13 +188,14 @@ angular.module('nextgearWebCommon')
         }
         var path = '/kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode;
 
+        // TODO Access Denied
         return api.request('GET', path).then(function(configurations) {
           return configurations;
         });
       },
       lookupByConfiguration: function(configuration, mileage, zipCode) {
         if(!configuration) {
-          throw new Error('Missing vin');
+          throw new Error('Missing configuration');
         }
         if(!mileage) {
           throw new Error('Missing mileage');
@@ -210,18 +204,30 @@ angular.module('nextgearWebCommon')
           throw new Error('Missing ZIP code');
         }
 
-        var path = getMethodPath('getvehiclevaluesallconditions') + '/' + configuration.Id + '/' + mileage + '/' + zipCode;
+        var path = '/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/' + configuration.Id + '/' +
+          mileage + '/' + zipCode;
 
         return api.request('GET', path).then(function(result) {
 
           var res = extractAuctionValues(result);
 
-          // if there was a failure
           if(!result || res.length === 0) {
             return $q.reject(false);
-          } else {
-            return res;
           }
+          return res;
+        });
+      },
+      getConfiguration: function(style, zipCode) {
+        if(!style || !style.VehicleId) {
+          throw new Error('Missing style');
+        }
+        if(!zipCode) {
+          throw new Error('Missing ZIP code');
+        }
+        var path = '/kbb/vehicle/getvehicleconfigurationbyvehicleid/UsedCar/Dealer/' + style.VehicleId + '/' + zipCode;
+
+        return api.request('GET', path).then(function(configurations) {
+          return configurations;
         });
       }
     };
