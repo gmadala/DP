@@ -20,7 +20,7 @@ angular.module('nextgearWebApp')
 
     var service = {
       kbb: {
-        enabled: false
+        enabled: true
       },
       loadFromQueryString: function () {
         var search = $location.search();

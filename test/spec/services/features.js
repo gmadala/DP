@@ -20,9 +20,9 @@ describe('Service: features', function () {
     expect(features.kbb.enabled).toBeDefined();
   });
 
-  it('kbb should be disabled by default', function () {
+  it('kbb should be enabled', function () {
 
-    expect(features.kbb.enabled).toBeFalsy();
+    expect(features.kbb.enabled).toBeTruthy();
   });
 
   it('kbb should be enabled when enabled by query parameter', function () {
@@ -36,7 +36,7 @@ describe('Service: features', function () {
     expect(features.kbb.enabled).toBeTruthy();
   });
 
-  it('kbb should NOT be enabled when the query parameter sets other features', function () {
+  it('kbb should still be enabled when the query parameter sets other features', function () {
 
     // change query string
     $location.search('features', 'feature1,anotherfeature');
@@ -44,6 +44,6 @@ describe('Service: features', function () {
     // reload from the query string
     features.loadFromQueryString();
 
-    expect(features.kbb.enabled).toBeFalsy();
+    expect(features.kbb.enabled).toBeTruthy();
   });
 });
