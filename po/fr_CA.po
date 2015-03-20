@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-02-11 11:42-0400\n"
+"PO-Revision-Date: 2015-03-19 11:30-0400\n"
 "Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
 "Language-Team: TranslateMedia New York\n"
 "Language: fr_CA\n"
@@ -972,8 +972,8 @@ msgid "Fees"
 msgstr "Frais"
 
 #: app/views/valuelookup.html
-msgid "Fill out for Kelley Blue Book<sup>&reg;</sup> values"
-msgstr ""
+msgid "Fill out for Kelley Blue Book<sup>®</sup> Auction Values"
+msgstr "Remplir pour obtenir les valeurs aux enchères de Kelley Blue Book<sup>®</sup>"
 
 #: app/views/payments.html
 msgid "Filter by Due Date"
@@ -1228,12 +1228,12 @@ msgid "Keep Editing"
 msgstr "Continuer l'édition"
 
 #: app/views/valuelookup.html
-msgid "Kelley Blue Book<sup>&reg;</sup> Values"
-msgstr ""
+msgid "Kelley Blue Book<sup>®</sup> Auction Values"
+msgstr "Valeurs aux enchères de Kelley Blue Book<sup>®</sup>"
 
 #: app/scripts/controllers/valuelookup.js
-msgid "Kelley Blue Book® Values"
-msgstr ""
+msgid "Kelley Blue Book® Auction Values"
+msgstr "Valeurs aux enchères de Kelley Blue Book®"
 
 #: app/views/account_management.html app/views/analytics.html
 #: app/views/floorplan.html
@@ -1273,7 +1273,6 @@ msgstr "Recherche de valeurs"
 msgid "Lot Number"
 msgstr "Numéro de lot"
 
-#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "MMR Values"
 msgstr "Valeurs MMR"
@@ -1281,6 +1280,10 @@ msgstr "Valeurs MMR"
 #: app/views/vehicledetails.html
 msgid "MMR Values not found on record for this vehicle."
 msgstr "Valeurs MMR non trouvées dans les dossiers pour ce véhicule."
+
+#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
+msgid "MMR Wholesale Values"
+msgstr "Valeurs en gros de MMR"
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 #: app/views/modals/floorCarConfirm.html app/views/valuelookup.html
@@ -1362,10 +1365,13 @@ msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 "Prochain paiement dû {{ financialSummary.NextPaymentDueDate | moment }}"
 
-#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "NextGear Book Values"
 msgstr "Valeurs comptable pour NextGear"
+
+#: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
+msgid "NextGear Book Wholesale Values"
+msgstr "Valeurs comptables en gros de NextGear"
 
 #: app/views/analytics.html
 msgid ""
@@ -1686,7 +1692,7 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "Please Select a Manual Lookup Values."
-msgstr "Veuillez sélectionner une recherche manuelle."
+msgstr "Veuillez sélectionner des valeurs de recherche manuelle."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please acknowledge VIN look-up failure."
@@ -1876,7 +1882,7 @@ msgstr "Veuillez entrer un nom d'usager."
 
 #: app/views/valuelookup.html
 msgid "Please enter a valid 5 digit Zip."
-msgstr ""
+msgstr "Veuillez entrer un code ZIP valide à cinq chiffres."
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Please enter a valid End Stock Number"
@@ -1973,7 +1979,7 @@ msgstr "Veuillez entrer le montant d'achat."
 
 #: app/views/valuelookup.html
 msgid "Please enter the Zip."
-msgstr ""
+msgstr "Veuillez entrer le code ZIP."
 
 #: app/views/checkout.html
 msgid ""
@@ -2425,7 +2431,7 @@ msgstr "Sélectionner ci-dessous"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "Select Manual Lookup Values"
-msgstr "Sélectionner une recherche manuelle"
+msgstr "Sélectionnez les valeurs de recherche manuelle"
 
 #: app/views/modals/dealerNameSearch.html
 msgid "Select a business name below to query the account."
@@ -2700,10 +2706,12 @@ msgstr ""
 #: app/views/valuelookup.html
 msgid "The following values are a regional average based on the Zip provided."
 msgstr ""
+"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon "
+"le code ZIP indiqué."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
-msgstr ""
+msgstr "Les valeurs ci-dessous représentent une moyenne nationale."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "The passwords do not match. Please re-enter the password."
@@ -3108,7 +3116,7 @@ msgstr "Véhicules en nantissement"
 
 #: app/views/valuelookup.html
 msgid "Very Good"
-msgstr ""
+msgstr "Très bon"
 
 #: app/views/documents.html
 msgid "Video Walkthrough"
@@ -3167,9 +3175,11 @@ msgstr "Volume des plans de nantissement antérieurs de NextGear Capital"
 
 #: app/views/valuelookup.html
 msgid ""
-"We are sorry, but we are unable to provide Kelley Blue Book<sup>&reg;</sup> "
+"We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> "
 "values at this time."
 msgstr ""
+"Nous sommes désolés, mais nous ne sommes pas en mesure de fournir les "
+"valeurs de Kelley Blue Book<sup>®</sup> en ce moment."
 
 #: app/views/valuelookup.html
 msgid "We are sorry, but we are unable to provide MMR Values at this time."
@@ -3440,7 +3450,7 @@ msgstr "Vos demandes de titre ne peuvent être traitées en ce moment."
 
 #: app/views/valuelookup.html
 msgid "Zip"
-msgstr ""
+msgstr "Code ZIP"
 
 #: app/404.html
 msgid "a mistyped address"
