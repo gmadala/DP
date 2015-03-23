@@ -181,14 +181,13 @@ angular.module('nextgearWebCommon')
       },
       getConfigurations: function(vin, zipCode) {
         if(!vin) {
-          throw new Error('Missing mileage');
+          throw new Error('Missing VIN');
         }
         if(!zipCode) {
           throw new Error('Missing ZIP code');
         }
-        var path = '/kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode;
+        var path = '/kbb/vin/getvehicleconfigurationbyvin/UsedCar/' + vin + '/' + zipCode;
 
-        // TODO Access Denied
         return api.request('GET', path).then(function(configurations) {
           return configurations;
         });

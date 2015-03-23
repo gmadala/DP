@@ -66,7 +66,7 @@ frisby.authenticate()
       .toss();
 
     frisby.create('KBB: Gets vehicle configurations by VIN and ZIP code')
-      .get(base + 'kbb/vin/getvehicleconfigurationbyvin/' + vin + '/' + zipCode)
+      .get(base + 'kbb/vin/getvehicleconfigurationbyvin/UsedCar/' + vin + '/' + zipCode)
       .expectSuccess();
       //.expectJSONTypes('Data.*', {
       //  Key: Number,
