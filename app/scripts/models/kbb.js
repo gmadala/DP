@@ -186,7 +186,7 @@ angular.module('nextgearWebCommon')
         if(!zipCode) {
           throw new Error('Missing ZIP code');
         }
-        var path = '/kbb/vin/getvehicleconfigurationbyvin/UsedCar/' + vin + '/' + zipCode;
+        var path = '/kbb/vin/getvehicleconfigurationbyvinandclass/UsedCar/' + vin + '/' + zipCode;
 
         return api.request('GET', path).then(function(configurations) {
           return configurations;
