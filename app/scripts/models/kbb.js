@@ -117,6 +117,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', '/kbb/vehicle/getyears/UsedCar/Dealer').then(function(years) {
           return years;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       getMakes: function(year) {
@@ -126,6 +129,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', '/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/' + year.Key).then(function (makes) {
           return makes;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       getModels: function(make, year) {
@@ -140,6 +146,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', path).then(function(models) {
           return models;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       getBodyStyles: function(year, model) {
@@ -154,6 +163,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', path).then(function(styles) {
           return styles;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       lookupByOptions: function(style, mileage, zipCode) {
@@ -177,6 +189,9 @@ angular.module('nextgearWebCommon')
             return $q.reject(false);
           }
           return res;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       getConfigurations: function(vin, zipCode) {
@@ -190,6 +205,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', path).then(function(configurations) {
           return configurations;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       lookupByConfiguration: function(configuration, mileage, zipCode) {
@@ -214,6 +232,9 @@ angular.module('nextgearWebCommon')
             return $q.reject(false);
           }
           return res;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       },
       getConfiguration: function(style, zipCode) {
@@ -227,6 +248,9 @@ angular.module('nextgearWebCommon')
 
         return api.request('GET', path).then(function(configurations) {
           return configurations;
+        }, function (error) {
+          error.dismiss();
+          return $q.reject(error);
         });
       }
     };
