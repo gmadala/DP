@@ -150,29 +150,33 @@ angular.module('nextgearWebApp')
             var mileage = this.mileage;
             var zipCode = this.zipcode;
             Kbb.getConfigurations(vin, zipCode).then(function (results) {
-              if (results.length === 1) {
+              if (results.length > 0) {
                 $scope.results.kbb.configuration = results[0];
-              } else { // we have multiple results
-                $scope.results.kbb.configurations = results;
-                $scope.results.kbb.configuration = results[0]; // as a default
-              }
+                if (results.length > 1) {
+                  $scope.results.kbb.configurations = results;
+                }
 
-              Kbb.lookupByConfiguration(results[0], mileage, zipCode).then(function (result) {
-                $scope.results.kbb.data = result;
-              }, function () {
-                // no results
+                Kbb.lookupByConfiguration($scope.results.kbb.configuration, mileage, zipCode).then(function (result) {
+                  $scope.results.kbb.data = result;
+                }, function () {
+                  // no valuation results
+                  $scope.results.kbb.noMatch = true;
+                });
+
+                if (!$scope.results.description && results) {
+                  var configuration = $scope.results.kbb.configuration;
+                  $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value + ' ' + configuration.Model.Value;
+                }
+              } else {
+                // no result
                 $scope.results.kbb.noMatch = true;
-              });
-
-              if (!$scope.results.description && results) {
-                var configuration = $scope.results.kbb.configuration;
-                $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value + ' ' + configuration.Model.Value;
               }
             }, function () {
-              // no results
+              // server error
               $scope.results.kbb.noMatch = true;
             });
           } else {
+            // no VIN entered
             $scope.results.kbb.noMatch = true;
           }
           //search end KBB
