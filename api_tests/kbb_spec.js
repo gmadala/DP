@@ -10,10 +10,7 @@ var zipCode = '46032';
 var vin = '19UYA3253WL002778';
 var base = frisby.apiBase;
 
-// for dev
-//base = 'http://localhost:8080/';
-//frisby.login('68946TF', 'ngcpass!0')
-frisby.authenticate()
+frisby.login()
   .after(function () {
 
     frisby.create('KBB: Gets vehicle years for the specified vehicle class and application category')
