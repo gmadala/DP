@@ -30,8 +30,8 @@ console.log(password);
 console.log(process.env);
 
 console.log('You can run with the following options:');
-console.log('jasmine-node api_tests/ --config API_BASE http://localhost:9000/ '
-+ '--config USERNAME myUser --config PASSWORD myPassword)');
+console.log('jasmine-node api_tests/ --config API_BASE http://localhost:9000/ ' +
+'--config USERNAME myUser --config PASSWORD myPassword)');
 
 // extend the frisby prototype so each Frisby test can use extension methods
 var frisbyPrototype = frisby.create('mobileservice-exensions').constructor.prototype;
@@ -70,7 +70,7 @@ frisby.login = function (langId) {
   return newFrisby
     //.addHeader('Content-Type', 'application/json')
     //.addHeader('Accept', 'application/json')
-    .addHeader('Authorization', 'CT ' + (authorization || defaultAuthorization))
+    .addHeader('Authorization', 'CT ' + authorization)
     .post(apiBase + 'UserAccount/v1_1/Authenticate')
     .expectSuccess()
     .afterJSON(function (res) {
