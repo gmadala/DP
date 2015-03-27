@@ -160,7 +160,9 @@ angular.module('nextgearWebApp')
                   $scope.results.kbb.data = result;
                 }, function (error) {
                   // no valuation results
-                  error.dismiss();
+                  if (error) {
+                    error.dismiss();
+                  }
                   $scope.results.kbb.noMatch = true;
                 });
 
@@ -527,7 +529,9 @@ angular.module('nextgearWebApp')
             $scope.results.description = buildDescription(descriptionProperties);
           }, function(error) {
             // no results
-            error.dismiss();
+            if (error) {
+              error.dismiss();
+            }
             $scope.results.kbb.noMatch = true;
           });
 
