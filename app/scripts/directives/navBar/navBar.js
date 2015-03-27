@@ -21,8 +21,7 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK}
         ],
         secondary: [
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK},
-          { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup', metric: ''}
+          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK}
         ]
       },
       auctionLinks = {
@@ -42,6 +41,15 @@ angular.module('nextgearWebApp')
     $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if (isLoggedIn) {
         User.getInfo().then(function (info) {
+          $scope.isUnited = User.isUnitedStates();
+          if ($scope.isUnited) {
+            dealerLinks.secondary.splice(1, 0, {
+              name: gettextCatalog.getString('Value Lookup'),
+              href: '#/valueLookup',
+              activeWhen: 'valueLookup',
+              metric: ''
+            });
+          }
           if (info.DisplayTitleReleaseProgram) {
             dealerLinks.primary.splice(3, 0, {
               name: gettextCatalog.getString('Title Releases'),

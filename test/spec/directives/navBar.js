@@ -33,6 +33,7 @@ describe('Directive: navBar', function () {
       shouldShowTRP = false;
       dMock = {
         isDealer: function(){ return true; },
+        isUnitedStates: function(){ return true;},
         getShowReportsAndResources: function(){return $q.when(false);},
         getInfo: function(){
           return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
@@ -43,6 +44,7 @@ describe('Directive: navBar', function () {
       };
       aMock = {
         isDealer: function(){ return false; },
+        isUnitedStates: function(){ return false; },
         getShowReportsAndResources: function(){return $q.when(false);},
         getInfo: function() {
           return $q.when({ DisplayTitleReleaseProgram: false });
@@ -104,6 +106,20 @@ describe('Directive: navBar', function () {
         // auctions have 6 primary links and no secondary links
         expect(myLinks.primary.length).toBe(5);
         expect(myLinks.secondary).not.toBeDefined();
+      });
+
+      it('should hide the Value Lookup tab for the canadian users', function(){
+        var isUnited = false;
+        spyOn(dMock,'isUnitedStates').andCallFake(function(){ return isUnited; });
+
+        $controller('NavBarCtrl', {
+          $scope: scope,
+          $state: stateMock,
+          User: dMock
+        });
+        $rootScope.$digest();
+        expect(scope.user.navLinks().primary.length).toBe(6);
+        expect(scope.user.navLinks().secondary.length).toBe(1);
       });
 
       it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {
