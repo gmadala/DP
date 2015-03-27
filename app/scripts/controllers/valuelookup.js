@@ -158,8 +158,9 @@ angular.module('nextgearWebApp')
 
                 Kbb.lookupByConfiguration($scope.results.kbb.configuration, mileage, zipCode).then(function (result) {
                   $scope.results.kbb.data = result;
-                }, function () {
+                }, function (error) {
                   // no valuation results
+                  error.dismiss();
                   $scope.results.kbb.noMatch = true;
                 });
 
@@ -171,8 +172,9 @@ angular.module('nextgearWebApp')
                 // no result
                 $scope.results.kbb.noMatch = true;
               }
-            }, function () {
+            }, function (error) {
               // server error
+              error.dismiss();
               $scope.results.kbb.noMatch = true;
             });
           } else {
@@ -197,8 +199,9 @@ angular.module('nextgearWebApp')
       var configuration = $scope.results.kbb.configuration;
       Kbb.lookupByConfiguration(configuration, mileage, zipCode).then(function (result) {
         $scope.results.kbb.data = result;
-      }, function () {
+      }, function (error) {
         // no results
+        error.dismiss();
         $scope.results.kbb.noMatch = true;
       });
     };
@@ -424,6 +427,8 @@ angular.module('nextgearWebApp')
               Kbb.getYears().then(function (years) {
                 kb.years.list = years;
                 kb.years.selected = null;
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -442,6 +447,8 @@ angular.module('nextgearWebApp')
                   kb.makes.selected = makes[0];
                   kb.models.fill();
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -459,6 +466,8 @@ angular.module('nextgearWebApp')
                   kb.models.selected = models[0];
                   kb.styles.fill();
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -476,6 +485,8 @@ angular.module('nextgearWebApp')
                 if (bodyStyles.length === 1) {
                   kb.styles.selected = bodyStyles[0];
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -514,8 +525,9 @@ angular.module('nextgearWebApp')
             // assume there is only item in the array
             $scope.results.kbb.data = vehicle;
             $scope.results.description = buildDescription(descriptionProperties);
-          }, function() {
+          }, function(error) {
             // no results
+            error.dismiss();
             $scope.results.kbb.noMatch = true;
           });
 

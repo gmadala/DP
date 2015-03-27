@@ -118,8 +118,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', '/kbb/vehicle/getyears/UsedCar/Dealer').then(function(years) {
           return years;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -131,8 +129,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', '/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/' + year.Key).then(function (makes) {
           return makes;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -149,8 +145,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', path).then(function(models) {
           return models;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -167,8 +161,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', path).then(function(styles) {
           return styles;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -194,8 +186,6 @@ angular.module('nextgearWebCommon')
           }
           return res;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -211,8 +201,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', path).then(function(configurations) {
           return configurations;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -239,8 +227,6 @@ angular.module('nextgearWebCommon')
           }
           return res;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       },
@@ -256,8 +242,6 @@ angular.module('nextgearWebCommon')
         return api.request('GET', path).then(function(configurations) {
           return configurations;
         }, function (error) {
-          console.log(error);
-          error.dismiss();
           return $q.reject(error);
         });
       }
