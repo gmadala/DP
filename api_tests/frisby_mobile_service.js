@@ -2,7 +2,7 @@
  * Frisby extensions for testing the MobileService API with an authenticate method and helper methods
  *
  * Usage:
- *  frisby.authenticate() // or frisby.login('myUserName', 'myPassword', 1)
+ *  frisby.login()
  *    .after(function () {
  *
  *      frisby.create('Foo: Gets all the foos')
@@ -23,8 +23,15 @@
 
 var frisby = require('frisby');
 
-var apiBase = 'https://test.nextgearcapital.com/MobileService/api/';
-var defaultAuthorization = 'Njg5NDZURjpuZ2NwYXNzITA6MQ=='; // user 68946TF
+var apiBase = process.env.API_BASE || 'https://test.nextgearcapital.com/MobileService/api/';
+var username = process.env.USERNAME || '53190md';
+var password = process.env.PASSWORD || 'ngcpass!0';
+console.log(password);
+console.log(process.env);
+
+console.log('You can run with the following options:');
+console.log('jasmine-node api_tests/ --config API_BASE http://localhost:9000/ ' +
+'--config USERNAME myUser --config PASSWORD myPassword)');
 
 // extend the frisby prototype so each Frisby test can use extension methods
 var frisbyPrototype = frisby.create('mobileservice-exensions').constructor.prototype;
@@ -53,15 +60,17 @@ frisbyPrototype.expectSuccess = function () {
     });
 };
 
-// login method
-frisby.authenticate = function (authorization) {
+frisby.login = function (langId) {
+
+  var lang = langId || 1;
+  var authorization = new Buffer(username + ':' + password + ':' + lang).toString('base64');
 
   var newFrisby = frisby.create('Mobile Service Authenticate');
 
   return newFrisby
     //.addHeader('Content-Type', 'application/json')
     //.addHeader('Accept', 'application/json')
-    .addHeader('Authorization', 'CT ' + (authorization || defaultAuthorization))
+    .addHeader('Authorization', 'CT ' + authorization)
     .post(apiBase + 'UserAccount/v1_1/Authenticate')
     .expectSuccess()
     .afterJSON(function (res) {
@@ -74,11 +83,4 @@ frisby.authenticate = function (authorization) {
         }
       });
     });
-};
-
-frisby.login = function (username, password, langId) {
-
-  var lang = langId || 1;
-
-  return frisbyMobileService.authenticate(new Buffer(username + ':' + password + ':' + lang).toString('base64'));
 };
