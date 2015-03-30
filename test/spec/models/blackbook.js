@@ -71,12 +71,12 @@ describe('Service: Blackbook', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make').respond({});
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=make').respond(response);
         expect(angular.isFunction(Blackbook.getModels('make').then)).toBe(true);
       });
 
       it('should format the results', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make').respond(response);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=make').respond(response);
 
         Blackbook.getModels('make').then(function(result) {
           expect(angular.isArray(result)).toBe(true);
@@ -96,12 +96,12 @@ describe('Service: Blackbook', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model').respond(response);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model?make=make&model=model').respond(response);
         expect(angular.isFunction(Blackbook.getYears('make', 'model').then)).toBe(true);
       });
 
       it('should format the results', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model').respond(response);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model?make=make&model=model').respond(response);
 
         Blackbook.getYears('make', 'model').then(function(result) {
           expect(angular.isArray(result)).toBe(true);
@@ -123,12 +123,12 @@ describe('Service: Blackbook', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/year').respond(response);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=make&model=model&year=year').respond(response);
         expect(angular.isFunction(Blackbook.getStyles('make', 'model', 'year').then)).toBe(true);
       });
 
       it('should format the results', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/year').respond(response);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=make&model=model&year=year').respond(response);
 
         Blackbook.getStyles('make', 'model', 'year').then(function(result) {
           expect(angular.isArray(result)).toBe(true);

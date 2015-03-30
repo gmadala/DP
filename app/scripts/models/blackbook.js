@@ -24,7 +24,8 @@ angular.module('nextgearWebApp')
         if(!make) {
           throw new Error('Missing make');
         }
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make).then(function(models) {
+        var encodeMake = encodeURIComponent(make);
+        return api.request('GET', '/analytics/blackbook/vehicles/make?make=' + encodeMake).then(function(models) {
           return formatResults(models);
         });
       },
@@ -35,8 +36,9 @@ angular.module('nextgearWebApp')
         if(!model) {
           throw new Error('Missing model');
         }
-
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model).then(function(years) {
+        var encodeMake = encodeURIComponent(make);
+        var encodeModel = encodeURIComponent(model);
+        return api.request('GET', '/analytics/blackbook/vehicles/make/model?make=' + encodeMake +'&model=' + encodeModel).then(function(years) {
           return formatResults(years);
         });
       },
@@ -50,8 +52,9 @@ angular.module('nextgearWebApp')
         if(!year) {
           throw new Error('Missing year');
         }
-
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model + '/' + year).then(function(styles) {
+        var encodeMake = encodeURIComponent(make);
+        var encodeModel = encodeURIComponent(model);
+        return api.request('GET', '/analytics/blackbook/vehicles/make/model/1?make=' + encodeMake + '&model=' + encodeModel + '&year=' + year).then(function(styles) {
           return formatResults(styles);
         });
       },
