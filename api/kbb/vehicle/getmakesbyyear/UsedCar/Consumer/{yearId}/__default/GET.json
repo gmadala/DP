@@ -1,0 +1,34 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": [
+    {
+      "Key": 4,
+      "Value": "Audi"
+    },
+    {
+      "Key": 15,
+      "Value": "Ford"
+    },
+    {
+      "Key": 18,
+      "Value": "Honda"
+    },
+    {
+      "Key": 25,
+      "Value": "Kia"
+    },
+    {
+      "Key": 30,
+      "Value": "Mazda"
+    },
+    {
+      "Key": 35,
+      "Value": "Nissan"
+    },
+    {
+      "Key": 47,
+      "Value": "Subaru"
+    }
+  ]
+}

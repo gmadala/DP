@@ -1,7 +1,7 @@
 ###Production Info
 ####Service API Base
 **production:** https://customer.nextgearcapital.com/MobileService/api  
-**test:** https://test.discoverdsc.com/MobileService/api
+**test:** https://test.nextgearcapital.com/MobileService/api
 
 
 ####Segment.io Key

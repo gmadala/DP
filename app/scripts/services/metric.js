@@ -205,6 +205,12 @@ angular.module('nextgearWebApp')
     CLICK_VIEW_ANALYTICS_WORST_MOVERS_BUTTON: 'Click View Analytics Worst Movers Button',//x
 
     //Resources Events
-    VIEW_RESOURCES_PAGE: 'View Resources Page'//x
+    VIEW_RESOURCES_PAGE: 'View Resources Page',//x
 
+    //Value Lookup Events
+    CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN With Zip Lookup Button',
+    CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN Without Zip Lookup Button',
+    CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON: 'Click Value Lookup NGC Lookup Button',
+    CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON: 'Click Value Lookup MMR Lookup Button',
+    CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON: 'Click Value Lookup KBB Lookup Button'
   });

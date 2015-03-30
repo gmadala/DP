@@ -35,7 +35,7 @@
 
 ####Deploy Instructions:
 * Connect to Test or Production server via Remote Desktop Connection (RDP client does not work on latest Mac OS X, need to run in Windows VM->RDP)
-  * Test: test.discoverdsc.com (Crusher)
+  * Test: test.nextgearcapital.com (Crusher)
   * Production: customer.nextgearcapital.com
   * In RDP, open windows explorer and find your mounted shared drive.
 * Replace contents of current build with new build.

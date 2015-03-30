@@ -110,7 +110,7 @@ The primary tasks to be run from the terminal are as follows:
 
   *Sample usage*
 
-      grunt server --noTrack=true --apiBase='https://test.discoverdsc.com/MobileService/api'
+      grunt server --noTrack=true --apiBase='https://test.nextgearcapital.com/MobileService/api'
       
   No options or args are required. By default the server will serve the files from *app/* and *.tmp/*
   and reload the browser if there are changes to these directory. This task will also launch Google Chrome in incognito

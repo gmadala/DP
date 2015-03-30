@@ -1,1 +1,1 @@
-NextGear Capital v6.0.0
+<!-- @echo GIT_SHA -->

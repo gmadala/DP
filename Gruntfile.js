@@ -137,7 +137,8 @@ module.exports = function(grunt) {
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
         '!app/scripts/translations.js',
-        'e2e/**/*.js'
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
       ]
     },
     karma: {
@@ -329,8 +330,10 @@ module.exports = function(grunt) {
     },
     preprocess: {
       index: {
-        src: '<%= yeoman.dist %>/index.html',
-        dest: '<%= yeoman.dist %>/index.html'
+        files: {
+          '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html',
+          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
+        }
       },
       dist : {
         src : [ '.tmp/concat/scripts/scripts.js' ],

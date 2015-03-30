@@ -1,10 +1,63 @@
 {
-    "Success": true,
-    "Message": null,
-    "Data": {
-        "ItemName": "ItemName",
+  "Success": true,
+  "Message": null,
+  "Data": [{
+    "PushNotificationEnabled": true,
+    "PushNotificationItemList": {
+      "Flooring": [{
+        "ItemName": "Floorplan Saved as Pending",
+        "Enabled": false,
+        "TypeName": "Flooring",
+        "TypeId": 0
+      }, {
+        "ItemName": "Floorplan Approved",
         "Enabled": true,
-        "TypeName": "TypeName",
+        "TypeName": "Flooring",
+        "TypeId": 1
+      }, {
+        "ItemName": "Floorplan Denied",
+        "Enabled": true,
+        "TypeName": "Flooring",
         "TypeId": 2
+      }, {
+        "ItemName": "Floorplan Completed",
+        "Enabled": true,
+        "TypeName": "Flooring",
+        "TypeId": 3
+      }],
+      "Payments": [{
+        "ItemName": "Payment Received",
+        "Enabled": true,
+        "TypeName": "Payments",
+        "TypeId": 4
+      }, {
+        "ItemName": "Disbursement Sent",
+        "Enabled": true,
+        "TypeName": "Payments",
+        "TypeId": 5
+      }],
+      "Titles": [{
+        "ItemName": "Title Received",
+        "Enabled": true,
+        "TypeName": "Titles",
+        "TypeId": 6
+      }],
+      "General Settings": [{
+        "ItemName": "Notices on vehicles from universal source",
+        "Enabled": true,
+        "TypeName": "General Settings",
+        "TypeId": 7
+      }, {
+        "ItemName": "Notices on vehicles from auctions",
+        "Enabled": true,
+        "TypeName": "General Settings",
+        "TypeId": 8
+      }, {
+        "ItemName": "Notices on vehicles where buyer paid",
+        "Enabled": true,
+        "TypeName": "General Settings",
+        "TypeId": 9
+      }]
     }
+  }]
 }

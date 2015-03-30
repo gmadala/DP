@@ -163,12 +163,23 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
     it('should do nothing if the form is invalid', function() {
       run(fromCartItemMock);
-      scope.paymentOptionsForm = {
-        $valid: false
-      };
 
-      scope.confirm();
-      expect(dialogMock.close).not.toHaveBeenCalled();
+      if(scope.selector.paymentOption !== PaymentOptions.TYPE_PAYMENT)
+      {
+        scope.paymentOptionsForm = {
+          $valid: true
+        };
+        scope.confirm();
+        expect(dialogMock.close).toHaveBeenCalled();
+      }
+      else {
+        scope.paymentOptionsForm = {
+          $valid: false
+        };
+
+        scope.confirm();
+        expect(dialogMock.close).not.toHaveBeenCalled();
+      }
     });
 
     it('should add the payment to the queue if it is not on there already', function() {

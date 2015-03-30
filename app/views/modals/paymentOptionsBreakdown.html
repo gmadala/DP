@@ -42,8 +42,8 @@
           </div> – <span translate>Additional Principal Payment</span>
         </div>
         <div class="form-row">
-          <label class="text-error" ng-show="validity.additionalAmount.$error.pattern" translate>Please enter a numeric value with no more than 2 decimal places.</label>
-          <label class="text-error" ng-show="validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax" translate>
+          <label class="text-error" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (validity.additionalAmount.$error.pattern)" translate>Please enter a numeric value with no more than 2 decimal places.</label>
+          <label class="text-error" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax)"   translate>
             Payout Amount must be $0.01 to {{ maxAdditional | currency }}
           </label>
         </div>

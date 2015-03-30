@@ -2,9 +2,9 @@ Here are some user credentials for test accounts that contain data in the test e
 
 
 ####URLs
-[Test Web App](https://test.discoverdsc.com/eui)  
-[Old/existing web app](https://test.discoverdsc.com/MyDSC/)  
-[API URI](http://test.discoverdsc.com/MobileService/api/)
+[Test Web App](https://test.nextgearcapital.com/eui)  
+[Old/existing web app](https://test.nextgearcapital.com/MyDSC/)  
+[API URI](http://test.nextgearcapital.com/MobileService/api/)
 
 
 ####Master Development Password

@@ -7,6 +7,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "frisby": "^0.8.5",
     "grunt": "~0.4.2",
     "grunt-angular-gettext": "~0.2.15",
     "grunt-autoprefixer": "~0.7.2",
@@ -36,6 +37,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-shell": "~1.1.1",
     "grunt-usemin": "~2.0.0",
+    "jasmine-node": "^1.14.5",
     "jasmine-reporters": "1.0.1",
     "karma": "~0.12.0",
     "karma-chrome-launcher": "~0.1.3",
