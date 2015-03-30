@@ -741,7 +741,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should populate the models dropdown when a make is chosen', function() {
         spyOn(mmr, 'getModels').andCallThrough();
-        $httpBackend.whenGET('/mmr/models/makeId?makeId=id&yearId=id').respond(mock.mmr.models);
+        $httpBackend.whenGET('/mmr/models/id/id').respond(mock.mmr.models);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
         scope.manualLookup.mmr.models.fill();
@@ -752,7 +752,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should populate the styles dropdown when a model is chosen', function() {
         spyOn(mmr, 'getBodyStyles').andCallThrough();
-        $httpBackend.whenGET('/mmr/bodystyles/makeId/yearId/modelId?makeId=id&yearId=id&modelId=id').respond(mock.mmr.styles);
+        $httpBackend.whenGET('/mmr/bodystyles/id/id/id').respond(mock.mmr.styles);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
         scope.manualLookup.mmr.models.selected = mock.mmr.models.Data[0];
@@ -791,7 +791,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should auto-select the first model if only one is returned', function() {
-        $httpBackend.whenGET('/mmr/models/makeId?makeId=id&yearId=id').respond(mock.mmr.models);
+        $httpBackend.whenGET('/mmr/models/id/id').respond(mock.mmr.models);
 
         mock.mmr.models.Data.splice(1,1);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
@@ -803,7 +803,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should auto-select the first style if only one is returned', function() {
-        $httpBackend.whenGET('/mmr/bodystyles/makeId/yearId/modelId?makeId=id&yearId=id&modelId=id').respond(mock.mmr.styles);
+        $httpBackend.whenGET('/mmr/bodystyles/id/id/id').respond(mock.mmr.styles);
 
         mock.mmr.styles.Data.splice(1,1);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];

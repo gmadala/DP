@@ -73,13 +73,13 @@ describe('Service: Mmr', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/mmr/models/makeId?makeId=make1&yearId=yr1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/models/make1/yr1').respond(responseStub);
 
         expect(angular.isFunction(Mmr.getModels(mock.make, mock.year).then)).toBe(true);
       });
 
       it('should return an array of model objects', function() {
-        $httpBackend.whenGET('/mmr/models/makeId?makeId=make1&yearId=yr1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/models/make1/yr1').respond(responseStub);
 
         Mmr.getModels(mock.make, mock.year).then(function(results) {
           expect(angular.isArray(results)).toBe(true);
@@ -106,13 +106,13 @@ describe('Service: Mmr', function () {
       });
 
       it('should support promises', function() {
-        $httpBackend.whenGET('/mmr/bodystyles/makeId/yearId/modelId?makeId=make1&yearId=yr1&modelId=model1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/bodystyles/make1/yr1/model1').respond(responseStub);
 
         expect(angular.isFunction(Mmr.getBodyStyles(mock.make, mock.year, mock.model).then)).toBe(true);
       });
 
       it('should return an array of bodyStyle objects', function() {
-        $httpBackend.whenGET('/mmr/bodystyles/makeId/yearId/modelId?makeId=make1&yearId=yr1&modelId=model1').respond(responseStub);
+        $httpBackend.whenGET('/mmr/bodystyles/make1/yr1/model1').respond(responseStub);
 
         Mmr.getBodyStyles(mock.make, mock.year, mock.model).then(function(results) {
           expect(angular.isArray(results)).toBe(true);

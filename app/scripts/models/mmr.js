@@ -34,8 +34,7 @@ angular.module('nextgearWebApp')
           throw new Error(gettextCatalog.getString('Missing make'));
         }
 
-        var encodeMake = encodeURIComponent(make.Id);
-        return api.request('GET', '/mmr/models/makeId?makeId=' + encodeMake + '&yearId=' + year.Id).then(function(models) {
+        return api.request('GET', '/mmr/models/' + make.Id + '/' + year.Id).then(function(models) {
           return models;
         });
       },
@@ -49,9 +48,8 @@ angular.module('nextgearWebApp')
         if(!model) {
           throw new Error(gettextCatalog.getString('Missing model'));
         }
-        var encodeMake = encodeURIComponent(make.Id);
-        var encodeModel = encodeURIComponent(model.Id);
-        return api.request('GET', '/mmr/bodystyles/makeId/yearId/modelId?makeId=' + encodeMake + '&yearId=' + year.Id + '&modelId=' + encodeModel).then(function(styles) {
+
+        return api.request('GET', '/mmr/bodystyles/' + make.Id + '/' + year.Id + '/' + model.Id).then(function(styles) {
           return styles;
         });
       },
