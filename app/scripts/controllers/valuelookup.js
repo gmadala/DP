@@ -250,7 +250,7 @@ angular.module('nextgearWebApp')
             resetOptions('years','bb');
             if(bb.models.selected) {
               Blackbook.getYears(bb.makes.selected, bb.models.selected).then(function(years) {
-                bb.years.list = years.reverse();
+                bb.years.list = years;
 
                 if(years.length === 1) {
                   bb.years.selected = years[0];
