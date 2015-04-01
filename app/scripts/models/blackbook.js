@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Blackbook', function (api, $q) {
-    var formatResults = function(results) {
-      return results[0].Results;
+  .factory('Blackbook', function (api, $q, $filter) {
+
+    var formatResults = function(results ) {
+      return $filter('orderBy')(results[0].Results,'toString()',false);
+    };
+
+    var formatYearResults = function(results) {
+      return results[0].Results.sort().reverse();
     };
 
     // remove any results that have null for all pertinent value properties
@@ -39,7 +44,7 @@ angular.module('nextgearWebApp')
         var encodeMake = encodeURIComponent(make);
         var encodeModel = encodeURIComponent(model);
         return api.request('GET', '/analytics/blackbook/vehicles/make/model?make=' + encodeMake +'&model=' + encodeModel).then(function(years) {
-          return formatResults(years);
+          return formatYearResults(years);
         });
       },
       getStyles: function(make, model, year) {
