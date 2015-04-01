@@ -415,16 +415,20 @@
       <h4 class="subtitle"><span translate>NextGear Book Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
       <div ng-show="results.blackbook.multiple">
-        <label translate>Style</label>
+        <label translate>Model</label>
         <div class="style-select">
           <select id="blackbookSelectSingle"
                   name="blackbookSelectSingle"
                   ng-model="results.blackbook.data"
-                  ng-options="result.Style for result in results.blackbook.multiple">
+                  ng-options="result.Model for result in results.blackbook.multiple">
           </select>
         </div>
+        <p class="body-style-label" translate>Style</p>
+        <h6>{{ results.blackbook.data.Style }}</h6>
       </div>
       <div class="body-style" ng-hide="!vinLookup.searchComplete || results.blackbook.multiple || results.blackbook.noMatch">
+        <p class="body-style-label" translate>Model</p>
+        <h6>{{ results.blackbook.data.Model }}</h6>
         <p class="body-style-label" translate>Style</p>
         <h6>{{ results.blackbook.data.Style }}</h6>
       </div>
@@ -452,6 +456,8 @@
       <h4 class="subtitle"><span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
       <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
       <div ng-show="results.mmr.multiple">
+        <p class="body-style-label" translate>Model</p>
+        <h6>{{ results.mmr.data.Model }}</h6>
         <label translate>Style</label>
         <div class="style-select">
           <select id="mmrSelectSingle"
@@ -462,6 +468,8 @@
         </div>
       </div>
       <div class="body-style" ng-hide="!vinLookup.searchComplete || results.mmr.multiple || results.mmr.noMatch">
+        <p class="body-style-label" translate>Model</p>
+        <h6>{{ results.mmr.data.Model }}</h6>
         <p class="body-style-label" translate>Style</p>
         <h6>{{ results.mmr.data.Body }}</h6>
       </div>
@@ -490,6 +498,8 @@
       <h4 class="subtitle"><span translate>Kelley Blue Book<sup>®</sup> Auction Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
       <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> values at this time.</p>
       <div ng-show="results.kbb.configurations">
+        <p class="body-style-label" translate>Model</p>
+        <h6>{{ results.kbb.configuration.Model.Value }}</h6>
         <label translate>Style</label>
         <div class="style-select">
           <select id="kbbSelectSingle"
@@ -501,6 +511,8 @@
         </div>
       </div>
       <div class="body-style" ng-hide="!vinLookup.searchComplete || results.kbb.configurations || results.kbb.noMatch">
+        <p class="body-style-label" translate>Model</p>
+        <h6>{{ results.kbb.configuration.Model.Value }}</h6>
         <p class="body-style-label" translate>Style</p>
         <h6>{{ results.kbb.configuration.Trim.Value }}</h6>
       </div>

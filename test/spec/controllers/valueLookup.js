@@ -125,7 +125,23 @@ describe('Controller: ValueLookupCtrl', function () {
       'Data': [
         {
           'Id': '6146',
-          'VIN': '1234567890'
+          'VIN': '1234567890',
+          'Year': {
+            'Id': '1998',
+            'Value': '1998'
+          },
+          'Make': {
+            'Id': '2',
+            'Value': 'Acura'
+          },
+          'Model': {
+            'Id': '318',
+            'Value': 'CL'
+          },
+          'Trim': {
+            'Id': '273304',
+            'Value': '2.3 Coupe 2D'
+          }
         }
       ]
     };
@@ -443,7 +459,7 @@ describe('Controller: ValueLookupCtrl', function () {
         expect(scope.results.vin).toBe('someVin1234');
         expect(scope.results.mileage).toBe(8888);
 
-        expect(scope.results.description).toBe(bbResult.Data[0].Year + ' ' + bbResult.Data[0].Make + ' ' + bbResult.Data[0].Model);
+        expect(scope.results.description).toBe(bbResult.Data[0].Year + ' ' + bbResult.Data[0].Make);
       });
 
       it('should handle no blackbook matches', function() {
