@@ -114,13 +114,18 @@ angular.module('nextgearWebApp')
 
         // search blackbook
         Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
-          if(results.length === 1) {
+          if (results.length > 0) {
             $scope.results.blackbook.data = results[0];
-          } else { // we have multiple results
-            $scope.results.blackbook.multiple = results;
-            $scope.results.blackbook.data = results[0]; // as a default
+            if(results.length > 1) {
+              $scope.results.blackbook.multiple = results;
+            }
+            if (!$scope.results.description && $scope.results.kbb.noMatch && results) {
+              // only use blackbook as last resort.
+              $scope.results.description = results[0].Year + ' ' + results[0].Make;
+            }
+          } else {
+            $scope.results.blackbook.noMatch = true;
           }
-          $scope.results.description = buildDescription(results[0]);
         }, function() {
           // no results
           $scope.results.blackbook.noMatch = true;
@@ -128,15 +133,15 @@ angular.module('nextgearWebApp')
 
         // search mmr
         Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
-          if(results.length === 1) {
+          if (results.length > 0) {
+            if(results.length > 1) {
+              $scope.results.mmr.multiple = results;
+            }
             $scope.results.mmr.data = results[0];
-          } else { // we have multiple results
-            $scope.results.mmr.multiple = results;
-            $scope.results.mmr.data = results[0]; // as a default
-          }
-
-          if(!$scope.results.description && results) {
-            $scope.results.description = buildDescription(results[0]);
+            // we use the MMR result as the default for vehicle description
+            $scope.results.description = results[0].Year + ' ' + results[0].Make;
+          } else {
+            $scope.results.mmr.noMatch = true;
           }
         }, function() {
           // no results
@@ -166,9 +171,9 @@ angular.module('nextgearWebApp')
                   $scope.results.kbb.noMatch = true;
                 });
 
-                if (!$scope.results.description && results) {
+                if (!$scope.results.description && !$scope.results.blackbook.noMatch && results) {
                   var configuration = $scope.results.kbb.configuration;
-                  $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value + ' ' + configuration.Model.Value;
+                  $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value;
                 }
               } else {
                 // no result
