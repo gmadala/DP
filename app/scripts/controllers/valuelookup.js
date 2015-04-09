@@ -114,13 +114,18 @@ angular.module('nextgearWebApp')
 
         // search blackbook
         Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
-          if(results.length === 1) {
+          if (results.length > 0) {
             $scope.results.blackbook.data = results[0];
-          } else { // we have multiple results
-            $scope.results.blackbook.multiple = results;
-            $scope.results.blackbook.data = results[0]; // as a default
+            if(results.length > 1) {
+              $scope.results.blackbook.multiple = results;
+            }
+            if (!$scope.results.description && $scope.results.kbb.noMatch && results) {
+              // only use blackbook as last resort.
+              $scope.results.description = results[0].Year + ' ' + results[0].Make;
+            }
+          } else {
+            $scope.results.blackbook.noMatch = true;
           }
-          $scope.results.description = buildDescription(results[0]);
         }, function() {
           // no results
           $scope.results.blackbook.noMatch = true;
@@ -128,15 +133,15 @@ angular.module('nextgearWebApp')
 
         // search mmr
         Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
-          if(results.length === 1) {
+          if (results.length > 0) {
+            if(results.length > 1) {
+              $scope.results.mmr.multiple = results;
+            }
             $scope.results.mmr.data = results[0];
-          } else { // we have multiple results
-            $scope.results.mmr.multiple = results;
-            $scope.results.mmr.data = results[0]; // as a default
-          }
-
-          if(!$scope.results.description && results) {
-            $scope.results.description = buildDescription(results[0]);
+            // we use the MMR result as the default for vehicle description
+            $scope.results.description = results[0].Year + ' ' + results[0].Make;
+          } else {
+            $scope.results.mmr.noMatch = true;
           }
         }, function() {
           // no results
@@ -150,29 +155,37 @@ angular.module('nextgearWebApp')
             var mileage = this.mileage;
             var zipCode = this.zipcode;
             Kbb.getConfigurations(vin, zipCode).then(function (results) {
-              if (results.length === 1) {
+              if (results.length > 0) {
                 $scope.results.kbb.configuration = results[0];
-              } else { // we have multiple results
-                $scope.results.kbb.configurations = results;
-                $scope.results.kbb.configuration = results[0]; // as a default
-              }
+                if (results.length > 1) {
+                  $scope.results.kbb.configurations = results;
+                }
 
-              Kbb.lookupByConfiguration(results[0], mileage, zipCode).then(function (result) {
-                $scope.results.kbb.data = result;
-              }, function () {
-                // no results
+                Kbb.lookupByConfiguration($scope.results.kbb.configuration, mileage, zipCode).then(function (result) {
+                  $scope.results.kbb.data = result;
+                }, function (error) {
+                  // no valuation results
+                  if (error && error.hasOwnProperty('dismiss')) {
+                    error.dismiss();
+                  }
+                  $scope.results.kbb.noMatch = true;
+                });
+
+                if (!$scope.results.description && !$scope.results.blackbook.noMatch && results) {
+                  var configuration = $scope.results.kbb.configuration;
+                  $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value;
+                }
+              } else {
+                // no result
                 $scope.results.kbb.noMatch = true;
-              });
-
-              if (!$scope.results.description && results) {
-                var configuration = $scope.results.kbb.configuration;
-                $scope.results.description = configuration.Year.Value + ' ' + configuration.Make.Value + ' ' + configuration.Model.Value;
               }
-            }, function () {
-              // no results
+            }, function (error) {
+              // server error
+              error.dismiss();
               $scope.results.kbb.noMatch = true;
             });
           } else {
+            // no VIN entered
             $scope.results.kbb.noMatch = true;
           }
           //search end KBB
@@ -193,8 +206,9 @@ angular.module('nextgearWebApp')
       var configuration = $scope.results.kbb.configuration;
       Kbb.lookupByConfiguration(configuration, mileage, zipCode).then(function (result) {
         $scope.results.kbb.data = result;
-      }, function () {
+      }, function (error) {
         // no results
+        error.dismiss();
         $scope.results.kbb.noMatch = true;
       });
     };
@@ -420,6 +434,8 @@ angular.module('nextgearWebApp')
               Kbb.getYears().then(function (years) {
                 kb.years.list = years;
                 kb.years.selected = null;
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -438,6 +454,8 @@ angular.module('nextgearWebApp')
                   kb.makes.selected = makes[0];
                   kb.models.fill();
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -455,6 +473,8 @@ angular.module('nextgearWebApp')
                   kb.models.selected = models[0];
                   kb.styles.fill();
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -472,6 +492,8 @@ angular.module('nextgearWebApp')
                 if (bodyStyles.length === 1) {
                   kb.styles.selected = bodyStyles[0];
                 }
+              }, function (error) {
+                error.dismiss();
               });
             }
           }
@@ -510,8 +532,11 @@ angular.module('nextgearWebApp')
             // assume there is only item in the array
             $scope.results.kbb.data = vehicle;
             $scope.results.description = buildDescription(descriptionProperties);
-          }, function() {
+          }, function(error) {
             // no results
+            if (error && error.hasOwnProperty('dismiss')) {
+              error.dismiss();
+            }
             $scope.results.kbb.noMatch = true;
           });
 

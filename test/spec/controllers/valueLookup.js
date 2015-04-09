@@ -125,7 +125,23 @@ describe('Controller: ValueLookupCtrl', function () {
       'Data': [
         {
           'Id': '6146',
-          'VIN': '1234567890'
+          'VIN': '1234567890',
+          'Year': {
+            'Id': '1998',
+            'Value': '1998'
+          },
+          'Make': {
+            'Id': '2',
+            'Value': 'Acura'
+          },
+          'Model': {
+            'Id': '318',
+            'Value': 'CL'
+          },
+          'Trim': {
+            'Id': '273304',
+            'Value': '2.3 Coupe 2D'
+          }
         }
       ]
     };
@@ -443,7 +459,7 @@ describe('Controller: ValueLookupCtrl', function () {
         expect(scope.results.vin).toBe('someVin1234');
         expect(scope.results.mileage).toBe(8888);
 
-        expect(scope.results.description).toBe(bbResult.Data[0].Year + ' ' + bbResult.Data[0].Make + ' ' + bbResult.Data[0].Model);
+        expect(scope.results.description).toBe(bbResult.Data[0].Year + ' ' + bbResult.Data[0].Make);
       });
 
       it('should handle no blackbook matches', function() {
@@ -587,7 +603,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should populate the models dropdown when a make is chosen', function() {
         spyOn(blackbook, 'getModels').andCallThrough();
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota').respond(mock.bb.models);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=Toyota').respond(mock.bb.models);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.fill();
         $httpBackend.flush();
@@ -597,7 +613,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should populate the years dropdown when a model is chosen', function() {
         spyOn(blackbook, 'getYears').andCallThrough();
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota/Camry').respond(mock.bb.years);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model?make=Toyota&model=Camry').respond(mock.bb.years);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Camry';
         scope.manualLookup.blackbook.years.fill();
@@ -608,7 +624,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should populate the styles dropdown when a year is chosen', function() {
         spyOn(blackbook, 'getStyles').andCallThrough();
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota/Camry/2014').respond(mock.bb.styles);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=Toyota&model=Camry&year=2014').respond(mock.bb.styles);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Camry';
         scope.manualLookup.blackbook.years.selected = 2014;
@@ -636,7 +652,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should auto-select the first model if only one is returned', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota').respond(mock.bb.models);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=Toyota').respond(mock.bb.models);
 
         mock.bb.models.Data[0].Results.splice(1,1);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
@@ -647,8 +663,8 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should auto-select the first year if only one is returned', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota').respond(mock.bb.models);
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota/Corolla').respond(mock.bb.years);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=Toyota').respond(mock.bb.models);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model?make=Toyota&model=Corolla').respond(mock.bb.years);
 
         mock.bb.years.Data[0].Results.splice(1,1);
 
@@ -662,7 +678,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should auto-select the first style if only one is returned', function() {
-        $httpBackend.whenGET('/analytics/blackbook/vehicles/Toyota/Corolla/2014').respond(mock.bb.styles);
+        $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=Toyota&model=Corolla&year=2014').respond(mock.bb.styles);
 
         mock.bb.styles.Data[0].Results.splice(1,1);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
