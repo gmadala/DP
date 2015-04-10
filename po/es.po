@@ -976,8 +976,7 @@ msgstr "Cargos"
 #: app/views/valuelookup.html
 msgid "Fill out for Kelley Blue Book<sup>®</sup> Auction Values"
 msgstr ""
-"Ingrese para obtener los valores de subasta de Kelley Blue "
-"Book<sup>®</sup>"
+"Ingrese para obtener los valores de subasta de Kelley Blue Book<sup>®</sup>"
 
 #: app/views/payments.html
 msgid "Filter by Due Date"
@@ -2148,10 +2147,6 @@ msgstr "Desembolsos anteriores"
 #: app/views/modals/scheduleCheckout.html
 msgid "Principal"
 msgstr "Principal"
-
-#: app/index.html
-msgid "Privacy Statement"
-msgstr "Declaración de privacidad"
 
 #: app/views/receipts.html
 msgid "Processed"
@@ -3567,6 +3562,9 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "Privacy Statement"
+#~ msgstr "Declaración de privacidad"
 
 #~ msgid "NextGear Book"
 #~ msgstr "Libro NextGear"

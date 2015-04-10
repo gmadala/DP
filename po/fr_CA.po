@@ -23,7 +23,7 @@ msgstr "Voitures achetées"
 
 #: app/views/auction.dashboard.html
 msgid "# of Floored Vehicles"
-msgstr "Véhicules mis en nantissement"
+msgstr "Véhicules mis en financement"
 
 #: app/views/auction.bulkflooring.html app/views/checkout.html
 #: app/views/floorcar.html
@@ -197,9 +197,9 @@ msgid ""
 "of the car being floored the auction certifies the entered sale date for the "
 "car is true and correct."
 msgstr ""
-"La date de vente actuelle doit être utilisée lors du nantissement d’un "
+"La date de vente actuelle doit être utilisée lors du financement d’un "
 "véhicule. En indiquant une date de vente pour le véhicule mis en "
-"nantissement, l’encanteur certifie que la date de vente indiquée pour ce "
+"financement, l’encanteur certifie que la date de vente indiquée pour ce "
 "véhicule est exacte et véridique."
 
 #: app/views/vehicledetails.html
@@ -303,7 +303,7 @@ msgstr "Approuvé"
 
 #: app/views/analytics.html
 msgid "Approved Floor Plans"
-msgstr "Plans de nantissement approuvés"
+msgstr "Plans de financement approuvés"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Approved/Not Paid"
@@ -348,11 +348,11 @@ msgstr "Fonds non alloués disponibles"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Average"
-msgstr "Moyenne"
+msgstr "Moyen"
 
 #: app/views/analytics.html
 msgid "Average # of Days to Turn"
-msgstr "Rotation moyenne en jours"
+msgstr "Rotation moyen en jours"
 
 #: app/views/analytics.html
 msgid "Average Purchase Price"
@@ -364,7 +364,7 @@ msgstr "Roulement moyen"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg NextGear Capital Book Value"
-msgstr "Valeur comptable moyenne – NextGear Capital"
+msgstr "Valeur comptable moyen – NextGear Capital"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg Purchase Price"
@@ -372,7 +372,7 @@ msgstr "Prix d'achat moyen"
 
 #: app/views/analytics.html
 msgid "Avg. # of Days to Turn"
-msgstr "Rotation moyenne en jours"
+msgstr "Rotation moyen en jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Disbursement"
@@ -533,7 +533,7 @@ msgstr "Furmulaire de réclamation"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Clean"
-msgstr "Nettoyer"
+msgstr "Propre"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Clear Search"
@@ -598,7 +598,7 @@ msgstr "Confirmer les modifications"
 
 #: app/views/modals/floorCarConfirm.html
 msgid "Confirm Flooring Request"
-msgstr "Confirmer la demande de nantissement"
+msgstr "Confirmer la demande de financement"
 
 #: app/views/auction.settings.html app/views/login.createPassword.html
 #: app/views/profileSettings.html
@@ -620,7 +620,7 @@ msgid ""
 "<br>Print this screen for your records."
 msgstr ""
 "Confirmer les informations relatives au véhicule pour envoyer la demande de "
-"nantissement à NextGear. <br> Imprimer cet écran pour vos dossiers."
+"financement à NextGear. <br> Imprimer cet écran pour vos dossiers."
 
 #: app/views/auction.bulkflooring.html
 msgid "Consigner Ticket Number"
@@ -668,7 +668,7 @@ msgstr "Crédits et paiements"
 
 #: app/views/vehicledetails.html
 msgid "Current Odometer"
-msgstr "Kilométrique actuel"
+msgstr "Kilométrique actel"
 
 #: app/views/auction.reports.html app/views/reports.html
 msgid "Current Reports"
@@ -700,8 +700,7 @@ msgstr "Date de soumission"
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Date range based on Date Floored OR Disbursement Date."
-msgstr ""
-"Plage de dates selon la date de nantissement OU la date de déboursement."
+msgstr "Plage de dates selon la date financé OU la date de déboursement."
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Dates"
@@ -709,7 +708,7 @@ msgstr "Dates"
 
 #: app/views/vehicledetails.html
 msgid "Days Floored"
-msgstr "Jours de nantissement"
+msgstr "Jours de financement"
 
 #: app/views/analytics.html
 msgid "Days to Turn"
@@ -812,7 +811,7 @@ msgstr "Dû cette semaine"
 
 #: app/scripts/controllers/payments.js app/views/dashboard.html
 msgid "Due Today"
-msgstr "Échéance aujourd'hui"
+msgstr "À Échéance Aujourd'hui"
 
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
@@ -921,7 +920,7 @@ msgstr "Durée prolongée"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Extra Clean"
-msgstr "Nettoyage supplémentaire"
+msgstr "Très Propre"
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Fair"
@@ -933,7 +932,7 @@ msgstr "Frais"
 
 #: app/scripts/controllers/modals/paymentDetails.js
 msgid "Fee - Floorplan/Curtailment"
-msgstr "Frais - Plan de nantissement / Réduction"
+msgstr "Frais - Plan de financement / Réduction"
 
 #: app/scripts/controllers/modals/paymentDetails.js
 msgid "Fee - Record Services"
@@ -973,7 +972,8 @@ msgstr "Frais"
 
 #: app/views/valuelookup.html
 msgid "Fill out for Kelley Blue Book<sup>®</sup> Auction Values"
-msgstr "Remplir pour obtenir les valeurs aux enchères de Kelley Blue Book<sup>®</sup>"
+msgstr ""
+"Remplir pour obtenir les valeurs aux enchères de Kelley Blue Book<sup>®</sup>"
 
 #: app/views/payments.html
 msgid "Filter by Due Date"
@@ -981,7 +981,7 @@ msgstr "Filtrer par date d'échéance"
 
 #: app/views/floorplan.html
 msgid "Filter by Flooring Status"
-msgstr "Filtrer par état de nantissement"
+msgstr "Filtrer par état de financement"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Filter by Inventory Location"
@@ -1001,7 +1001,7 @@ msgstr "Filtre pour NIV (facultatif)"
 
 #: app/views/vehicledetails.html
 msgid "Finance Amount"
-msgstr "Montant de financement"
+msgstr "Montant financé"
 
 #: app/views/vehicledetails.html
 msgid "Financed Amount"
@@ -1018,32 +1018,32 @@ msgstr "Activité financière"
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 msgid "Find a Floor Plan"
-msgstr "Recherche de plan de nantissement"
+msgstr "Rechercher dans le plan de financement"
 
 #: app/views/vehicledetails.html
 msgid "Floor Date"
-msgstr "Date de nantissement"
+msgstr "Date financé"
 
 #: app/scripts/directives/navBar/navBar.js app/views/auction.dashboard.html
 #: app/views/dashboard.html app/views/floorplan.html
 msgid "Floor Plan"
-msgstr "Plan de nantissement"
+msgstr "Plan de Financement"
 
 #: app/views/vehicledetails.html
 msgid "Floor Plan Total"
-msgstr "Total du plan de nantissement"
+msgstr "Total du plan de financement"
 
 #: app/views/vehicledetails.html
 msgid ""
 "Floor Plan Value Estimates <span class=\"well-sub-title\">NextGear &amp; MMR "
 "Valuation</span>"
 msgstr ""
-"Valeurs estimées du plan de nantissement <span class=\"well-sub-title"
+"Valeurs estimées au plan de financement <span class=\"well-sub-title"
 "\">Évaluation MMR et NextGear Capital</span>"
 
 #: app/views/dashboard.html
 msgid "Floor Plans"
-msgstr "Plans de nantissement"
+msgstr "Plans de financement"
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Floor Vehicle"
@@ -1051,33 +1051,33 @@ msgstr "Financer un véhicule"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Floor a Vehicle"
-msgstr "Mettre un véhicule en nantissement"
+msgstr "Appliquer un véhicule sur le plan de financement"
 
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 #: app/views/payments.html app/views/titlereleasecheckout.html
 #: app/views/titlereleases.html
 msgid "Floored"
-msgstr "Nantis"
+msgstr "Date financé"
 
 #: app/views/dashboard.html
 msgid "Floored On"
-msgstr "Nantis le"
+msgstr "Date financé le"
 
 #: app/views/vehicledetails.html
 msgid "Floored on {{ flooringInfo.FlooringDate | moment }}"
-msgstr "Nantis le {{ flooringInfo.FlooringDate | moment }}"
+msgstr "Date financé le {{ flooringInfo.FlooringDate | moment }}"
 
 #: app/views/modals/floorCarConfirm.html app/views/vehicledetails.html
 msgid "Flooring Information"
-msgstr "Informations sur le nantissement"
+msgstr "Informations sur le financement"
 
 #: app/scripts/controllers/floorCar.js
 msgid "Flooring Request Submitted"
-msgstr "Demande de nantissement soumise"
+msgstr "Demande de financement soumise"
 
 #: app/views/reports.html
 msgid "Flooring Status"
-msgstr "État du nantissement"
+msgstr "État du financement"
 
 #: app/views/login.recover.html
 msgid "Forgot Your Password?"
@@ -1289,12 +1289,12 @@ msgstr "Valeurs en gros de MMR"
 #: app/views/modals/floorCarConfirm.html app/views/valuelookup.html
 #: app/views/vehicledetails.html
 msgid "Make"
-msgstr "Faire"
+msgstr "Marque"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Make Selection"
-msgstr "Faire une sélection"
+msgstr "Marque une sélection"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid "Make payments today or schedule your payments when you checkout."
@@ -1367,11 +1367,11 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "NextGear Book Values"
-msgstr "Valeurs comptable pour NextGear"
+msgstr "Valeurs de marché pour NextGear"
 
 #: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
 msgid "NextGear Book Wholesale Values"
-msgstr "Valeurs comptables en gros de NextGear"
+msgstr "Valeurs de marché en gros de NextGear"
 
 #: app/views/analytics.html
 msgid ""
@@ -1598,14 +1598,14 @@ msgstr "Recherche de paiement"
 #: app/views/checkout.html app/views/modals/paymentExtension.html
 #: app/views/vehicledetails.html
 msgid "Payment Summary"
-msgstr "Relevé des paiements"
+msgstr "Sommaire des Paiements"
 
 #. Payment This [Month, Year]
 #: app/views/dashboard.html
 msgid "Payment This {{ viewModeLabel | capitalize }}"
 msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
-msgstr[0] "Paiement ce {{ viewModeLabel | capitalize }}"
-msgstr[1] "Paiements ce {{ viewModeLabel | capitalize }}"
+msgstr[0] "Paiements dû cette {{ viewModeLabel | capitalize }}"
+msgstr[1] "Paiements dû cette {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -1623,7 +1623,7 @@ msgstr "Paiements dus"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
-msgstr "Relevé des paiements"
+msgstr "Sommaire des Paiements"
 
 #: app/views/checkout.html
 msgid ""
@@ -1672,7 +1672,7 @@ msgstr "En attente"
 
 #: app/views/analytics.html
 msgid "Pending Floor Plans"
-msgstr "Plans de nantissement en attente"
+msgstr "Plans de financement en attente"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Pending/Not Paid"
@@ -2145,10 +2145,6 @@ msgstr "Décaissements précédents"
 msgid "Principal"
 msgstr "Capital"
 
-#: app/index.html
-msgid "Privacy Statement"
-msgstr "Déclaration de confidentialité"
-
 #: app/views/receipts.html
 msgid "Processed"
 msgstr "Traité"
@@ -2240,7 +2236,7 @@ msgstr "Reçus récents"
 
 #: app/views/dashboard.html
 msgid "Recently Floored Vehicles"
-msgstr "Véhicules récemment mis en nantissement"
+msgstr "Véhicules récemment financé"
 
 #: app/scripts/controllers/modals/feeDetails.js
 msgid "Records Services Charge"
@@ -2315,7 +2311,7 @@ msgstr "Demande soumise"
 
 #: app/views/vehicledetails.html
 msgid "Request the Title"
-msgstr "Demander le titre"
+msgstr "Demander I'immatriculation"
 
 #: app/views/payments.html
 msgid "Request<br>Extension"
@@ -2348,7 +2344,7 @@ msgstr "Révisez ce qui suit et soumettez vos demandes d’émission de titre."
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Rough"
-msgstr "Approximatif"
+msgstr "Décharné"
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -2366,7 +2362,7 @@ msgstr "Date de vente"
 
 #: app/views/vehicledetails.html
 msgid "Salvage"
-msgstr "Sauvetage"
+msgstr "VGA"
 
 #: app/views/vehicledetails.html
 msgid "Save Changes"
@@ -2477,7 +2473,7 @@ msgstr "Adresse du vendeur"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Seller Floor Plan Search"
-msgstr "Recherche de plan de nantissement du vendeur"
+msgstr "Recherche dans le plan de financement du vendeur"
 
 #: app/views/floorcar.html app/views/modals/floorCarConfirm.html
 msgid "Send Payment To"
@@ -2648,7 +2644,7 @@ msgstr "Soumettre"
 
 #: app/views/modals/floorCarConfirm.html
 msgid "Submit Flooring Request"
-msgstr "Soumettre une demande de nantissement"
+msgstr "Soumettre une demande de financement"
 
 #: app/views/checkout.html
 msgid "Submit Payments"
@@ -2692,7 +2688,7 @@ msgstr ""
 #: app/views/auction.bulkflooring.html
 msgid "The actual sale date must be used when flooring a car"
 msgstr ""
-"La date de vente actuelle doit être utilisée lors du nantissement d'une "
+"La date de vente actuelle doit être utilisée lors du financement d'une "
 "voiture"
 
 #: app/scripts/controllers/titleReleases.js
@@ -2700,18 +2696,18 @@ msgid ""
 "The floor plan you have selected for title release would put you over the "
 "financial plan limits for this account."
 msgstr ""
-"Le plan de nantissement que vous avez sélectionné pour l’émission de titres "
+"Le plan de financement que vous avez sélectionné pour l’émission de titres "
 "vous portera au-delà des limites du plan financier de ce compte."
 
 #: app/views/valuelookup.html
 msgid "The following values are a regional average based on the Zip provided."
 msgstr ""
-"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon "
-"le code ZIP indiqué."
+"Les valeurs ci-dessous représentent une moyen régionale déterminée selon le "
+"code ZIP indiqué."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
-msgstr "Les valeurs ci-dessous représentent une moyenne nationale."
+msgstr "Les valeurs ci-dessous représentent une moyen nationale."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "The passwords do not match. Please re-enter the password."
@@ -2765,10 +2761,10 @@ msgid ""
 "NextGear employee via NextGear's Discover system that have been approved and "
 "are currently on the NextGear dealer's floor plan."
 msgstr ""
-"Cet état s’applique aux véhicules nantis par l'entremise de NextGearCapital."
-"com ou par un employé de NextGear par l’entremise du système Discover de "
-"NextGear, qui ont été approuvés et qui sont actuellement inscrits au plan de "
-"nantissement du concessionnaire NextGear."
+"Cet état s’applique aux véhicules date financé par l'entremise de "
+"NextGearCapital.com ou par un employé de NextGear par l’entremise du système "
+"Discover de NextGear, qui ont été approuvés et qui sont actuellement "
+"inscrits au plan de financement du concessionnaire NextGear."
 
 #: app/views/dashboard.html
 msgid ""
@@ -2776,9 +2772,10 @@ msgid ""
 "NextGear employee via NextGear's Discover system that have not yet been "
 "approved by a NextGear employee."
 msgstr ""
-"Cet état s'applique aux véhicules nantis par l'entremise de NextGearCapital."
-"com ou par un employé de NextGear par l'entremise du système Discover de "
-"NextGear, et qui n’ont pas encore été approuvés par un employé de NextGear."
+"Cet état s'applique aux véhicules date financé par l'entremise de "
+"NextGearCapital.com ou par un employé de NextGear par l'entremise du système "
+"Discover de NextGear, et qui n’ont pas encore été approuvés par un employé "
+"de NextGear."
 
 #: app/views/dashboard.html
 msgid ""
@@ -2786,10 +2783,10 @@ msgid ""
 "been denied by a NextGear employee. Please contact NextGear Customer Service "
 "to find out why a vehicle has been denied."
 msgstr ""
-"Cet état s’applique aux véhicules nantis par l’entremise de NextGearCapital."
-"com qui ont été refusés par un employé de NextGear. Veuillez contacter le "
-"service à la clientèle de NextGear pour connaitre les raisons du refus pour "
-"ce véhicule."
+"Cet état s’applique aux véhicules date financé par l’entremise de "
+"NextGearCapital.com qui ont été refusés par un employé de NextGear. Veuillez "
+"contacter le service à la clientèle de NextGear pour connaitre les raisons "
+"du refus pour ce véhicule."
 
 #: app/scripts/controllers/dashboard.js
 msgid "This {{ dateType }}"
@@ -2817,7 +2814,7 @@ msgstr "Informations sur le titre"
 
 #: app/views/auction.sellerfloorplan.html app/views/vehicledetails.html
 msgid "Title Location"
-msgstr "Emplacement du titre"
+msgstr "Emplacement de I'immatriculation"
 
 #: app/scripts/controllers/titleReleases.js
 msgid "Title Release Limit Reached"
@@ -2881,7 +2878,7 @@ msgstr "Paramètres du titre"
 
 #: app/views/vehicledetails.html
 msgid "Title State"
-msgstr "État du titre"
+msgstr "État de I'imatriculation"
 
 #: app/views/titlereleasecheckout.html
 msgid "Titles Available After This Request"
@@ -2959,7 +2956,7 @@ msgstr "Total disponible"
 
 #: app/views/vehicledetails.html
 msgid "Total Days Floored"
-msgstr "Total des jours en nantissement"
+msgstr "Total des jours en financement"
 
 #: app/views/analytics.html
 msgid "Total Financed Amount"
@@ -3108,11 +3105,11 @@ msgstr "Informations sur le véhicule"
 
 #: app/views/checkout.html app/views/payments.html
 msgid "Vehicle Payments"
-msgstr "Paiements pour le véhicule"
+msgstr "Paiements par véhicule"
 
 #: app/views/auction.dashboard.html
 msgid "Vehicles Floored"
-msgstr "Véhicules en nantissement"
+msgstr "Véhicules en financement"
 
 #: app/views/valuelookup.html
 msgid "Very Good"
@@ -3171,7 +3168,7 @@ msgstr "Annulé"
 
 #: app/views/auction.dashboard.html
 msgid "Volume of Past NextGear Capital Floorplans"
-msgstr "Volume des plans de nantissement antérieurs de NextGear Capital"
+msgstr "Volume des plans de financement antérieurs de NextGear Capital"
 
 #: app/views/valuelookup.html
 msgid ""
@@ -3192,7 +3189,7 @@ msgid ""
 "We are sorry, but we are unable to provide NextGear Book Values at this time."
 msgstr ""
 "Nous sommes désolés, mais nous ne sommes pas en mesure d’offrir les valeurs "
-"comptables de NextGear Capital en ce moment."
+"de marché de NextGear Capital en ce moment."
 
 #: app/views/login.recover.html
 msgid ""
@@ -3398,7 +3395,7 @@ msgstr ""
 
 #: app/scripts/controllers/floorCar.js
 msgid "Your flooring request has been submitted to NextGear Capital."
-msgstr "Votre demande de nantissement a été soumise à NextGear Capital."
+msgstr "Votre demande de financement a été soumise à NextGear Capital."
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js
 msgid ""
@@ -3567,6 +3564,9 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "Privacy Statement"
+#~ msgstr "Déclaration de confidentialité"
 
 #~ msgid "NextGear Book"
 #~ msgstr "La valeur comptable de NextGear"
