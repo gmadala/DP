@@ -44,16 +44,16 @@ angular.module('nextgearWebApp')
           config = prv.generateConfig('http://demo.nextgearcapital.com', null, null, 900000 /*15 minutes*/, true /*isDemo*/);
           break;
         case prv.profile.TEST:
-          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
+          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
           break;
         case prv.profile.RUBY_DAL_TEST:
-          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
+          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
           break;
         case prv.profile.LOCAL:
-          config = prv.generateConfig('https://test.discoverdsc.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
+          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
           break;
         case prv.profile.TRAINING:
-          config = prv.generateConfig('https://training.discoverdsc.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
+          config = prv.generateConfig('https://training.nextgearcapital.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
           break;
         case prv.profile.PRODUCTION:
           config = prv.generateConfig('https://customer.nextgearcapital.com', '9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);

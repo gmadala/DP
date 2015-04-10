@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Blackbook', function (api, $q) {
-    var formatResults = function(results) {
-      return results[0].Results;
+  .factory('Blackbook', function (api, $q, $filter) {
+
+    var formatResults = function(results ) {
+      return $filter('orderBy')(results[0].Results,'toString()',false);
+    };
+
+    var formatYearResults = function(results) {
+      return results[0].Results.sort().reverse();
     };
 
     // remove any results that have null for all pertinent value properties
@@ -24,7 +29,8 @@ angular.module('nextgearWebApp')
         if(!make) {
           throw new Error('Missing make');
         }
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make).then(function(models) {
+        var encodeMake = encodeURIComponent(make);
+        return api.request('GET', '/analytics/blackbook/vehicles/make?make=' + encodeMake).then(function(models) {
           return formatResults(models);
         });
       },
@@ -35,9 +41,10 @@ angular.module('nextgearWebApp')
         if(!model) {
           throw new Error('Missing model');
         }
-
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model).then(function(years) {
-          return formatResults(years);
+        var encodeMake = encodeURIComponent(make);
+        var encodeModel = encodeURIComponent(model);
+        return api.request('GET', '/analytics/blackbook/vehicles/make/model?make=' + encodeMake +'&model=' + encodeModel).then(function(years) {
+          return formatYearResults(years);
         });
       },
       getStyles: function(make, model, year) {
@@ -50,8 +57,9 @@ angular.module('nextgearWebApp')
         if(!year) {
           throw new Error('Missing year');
         }
-
-        return api.request('GET', '/analytics/blackbook/vehicles/' + make + '/' + model + '/' + year).then(function(styles) {
+        var encodeMake = encodeURIComponent(make);
+        var encodeModel = encodeURIComponent(model);
+        return api.request('GET', '/analytics/blackbook/vehicles/make/model/1?make=' + encodeMake + '&model=' + encodeModel + '&year=' + year).then(function(styles) {
           return formatResults(styles);
         });
       },

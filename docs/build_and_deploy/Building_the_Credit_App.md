@@ -16,14 +16,14 @@ Have a windows VM (or machine) as this doesn't work on the mac RDC
 **Test**
 
 
-machine = Crusher.discoverdsc.com
-Url to App = https://test.discoverdsc.com/eui/creditapplication/#/  
+machine = Crusher.nextgearcapital.com
+Url to App = https://test.nextgearcapital.com/eui/creditapplication/#/  
 
 
 **Production/Live**
 
 
-machine = ColoLWeb01.discoverdsc.com
+machine = ColoLWeb01.nextgearcapital.com
 Url to App = https://customer.nextgearcapital.com/NGCApplication/#/
 
 
