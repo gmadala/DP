@@ -133,7 +133,7 @@ describe('Directive: nxgDateField', function () {
 
   });
 
-  describe('beforeShowDay support', function () {
+  ddescribe('beforeShowDay support', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
       scope = $rootScope;
@@ -143,6 +143,7 @@ describe('Directive: nxgDateField', function () {
         '<input name="dateInput" id="foo" ng-model="bar" nxg-date-field before-show-day="onDayRender(date)" />' +
         '</form>');
       element = $compile(element)(scope);
+      console.log('bleh');
       scope.$digest();
     }));
 

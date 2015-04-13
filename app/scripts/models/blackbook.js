@@ -26,7 +26,7 @@ angular.module('nextgearWebApp')
         });
       },
       getModels: function(make) {
-        if(!make) {
+        if(!make || !angular.isString(make)) {
           throw new Error('Missing make');
         }
         var encodeMake = encodeURIComponent(make);
@@ -35,10 +35,10 @@ angular.module('nextgearWebApp')
         });
       },
       getYears: function(make, model) {
-        if(!make) {
+        if(!make || !angular.isString(make)) {
           throw new Error('Missing make');
         }
-        if(!model) {
+        if(!model || !angular.isString(model)) {
           throw new Error('Missing model');
         }
         var encodeMake = encodeURIComponent(make);
@@ -48,13 +48,13 @@ angular.module('nextgearWebApp')
         });
       },
       getStyles: function(make, model, year) {
-        if(!make) {
+        if(!make || !angular.isString(make)) {
           throw new Error('Missing make');
         }
-        if(!model) {
+        if(!model || !angular.isString(model)) {
           throw new Error('Missing model');
         }
-        if(!year) {
+        if(!year || !angular.isString(year)) {
           throw new Error('Missing year');
         }
         var encodeMake = encodeURIComponent(make);
@@ -64,19 +64,19 @@ angular.module('nextgearWebApp')
         });
       },
       lookupByOptions: function(make, model, year, style, mileage, isValueLookup) {
-        if(!make) {
+        if(!make || !angular.isString(make)) {
           throw new Error('Missing make');
         }
-        if(!model) {
+        if(!model || !angular.isString(model)) {
           throw new Error('Missing model');
         }
-        if(!year) {
+        if(!year || !angular.isString(year)) {
           throw new Error('Missing year');
         }
-        if(!style) {
+        if(!style || !angular.isString(style)) {
           throw new Error('Missing style');
         }
-        if(!mileage) {
+        if(!mileage || !angular.isNumber(mileage)) {
           throw new Error('Missing mileage');
         }
 
@@ -107,7 +107,7 @@ angular.module('nextgearWebApp')
        *
        */
       lookupByVin: function(vin, mileage, isValueLookup) {
-        if(!vin) {
+        if(!vin || !angular.isString(vin)) {
           throw new Error('Missing vin');
         }
 

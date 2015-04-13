@@ -28,23 +28,23 @@ describe('Directive: nxgUpcomingCalendar', function () {
   });
 
   it('should bind the display value into its scope', function () {
-    expect(element.scope().display).toBe('week');
+    expect(element.isolateScope().display).toBe('week');
   });
 
   it('should bind the data value into its scope', function () {
-    expect(element.scope().data).toBe(scope.myData);
+    expect(element.isolateScope().data).toBe(scope.myData);
   });
 
   it('should attach an eventSources object to its scope', function () {
-    expect(angular.isArray(element.scope().eventSources)).toBe(true);
+    expect(angular.isArray(element.isolateScope().eventSources)).toBe(true);
   });
 
   it('should attach an options object to its scope', function () {
-    expect(element.scope().options).toBeDefined();
+    expect(element.isolateScope().options).toBeDefined();
   });
 
   it('should tell the calendar to rebuild when display setting changes in the parent scope', function () {
-    spyOn(element.scope().cal, 'fullCalendar');
+    spyOn(element.isolateScope().cal, 'fullCalendar');
     scope.$apply(function () {
       scope.mode = 'week';
     });
@@ -52,8 +52,8 @@ describe('Directive: nxgUpcomingCalendar', function () {
     scope.$apply(function () {
       scope.mode = 'month';
     });
-    expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
-    expect(element.scope().cal.fullCalendar).toHaveBeenCalledWith(element.scope().options);
+    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
+    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith(element.isolateScope().options);
   });
 
   it('should emit a setDateRange event when the calendar loads up a date range', function () {
@@ -63,7 +63,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         end: moment()
       };
     scope.$on('setDateRange', handler);
-    element.scope().options.viewDisplay(viewMock);
+    element.isolateScope().options.viewDisplay(viewMock);
     expect(handler).toHaveBeenCalled();
     expect(handler.mostRecentCall.args[1]).toBe(viewMock.start);
     expect(handler.mostRecentCall.args[2]).toBe(viewMock.end);
@@ -75,7 +75,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         start: moment(),
         end: moment()
       },
-      scope = element.scope();
+      scope = element.isolateScope();
       element = angular.element('<div><table><th class="fc-day-header">&lt;b&gt;Title1&lt;/b&gt;</th><th class="fc-day-header">&lt;i&gt;Title2&lt;/i&gt;</th></table></div>');
       scope.options.viewRender(viewMock, element);
 
@@ -92,61 +92,61 @@ describe('Directive: nxgUpcomingCalendar', function () {
         '1990-01-01': true,
         '1990-01-02': true
       };
-      element.scope().options.dayRender(moment().toDate(), ele);
+      element.isolateScope().options.dayRender(moment().toDate(), ele);
       expect(ele.hasClass('closed')).toBeTruthy();
     });
 
     it('should mark open day as not closed', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-number">29</div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.scope().openDates = {
+      element.isolateScope().openDates = {
         '1990-01-01': true,
         '1990-01-02': true
       };
-      element.scope().options.dayRender(moment('1990-01-01', 'YYYY-MM-DD').toDate(), ele);
+      element.isolateScope().options.dayRender(moment('1990-01-01', 'YYYY-MM-DD').toDate(), ele);
       expect(ele.hasClass('closed')).toBeFalsy();
     });
 
     it('should recognize date string', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-number">29</div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.scope().openDates = {
+      element.isolateScope().openDates = {
         '1990-01-01': true,
         '1990-01-02': true
       };
-      element.scope().options.dayRender('1990-01-01', ele);
+      element.isolateScope().options.dayRender('1990-01-01', ele);
       expect(ele.hasClass('closed')).toBeFalsy();
     });
 
     it('should add date element if one does not exist', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.scope().openDates = {
+      element.isolateScope().openDates = {
         '1990-01-01': true,
         '1990-01-02': true
       };
-      element.scope().options.dayRender('1990-01-10', ele);
+      element.isolateScope().options.dayRender('1990-01-10', ele);
       expect(ele.find('.fc-day-number').text()).toEqual('10');
     });
 
     it('should add has-events class if day has events', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.scope().openDates = {
+      element.isolateScope().openDates = {
         '1990-01-10': true
       };
-      element.scope().eventsByDate = {
+      element.isolateScope().eventsByDate = {
         '1990-01-10': ['Event 1', 'Event 2']
       };
-      element.scope().options.dayRender('1990-01-10', ele);
+      element.isolateScope().options.dayRender('1990-01-10', ele);
       expect(ele.hasClass('has-events')).toBeTruthy();
     });
 
     it('should remove has-events class if day has no events', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.scope().openDates = {
+      element.isolateScope().openDates = {
         '1990-01-10': true
       };
-      element.scope().eventsByDate = {
+      element.isolateScope().eventsByDate = {
         '1990-01-10': []
       };
-      element.scope().options.dayRender('1990-01-10', ele);
+      element.isolateScope().options.dayRender('1990-01-10', ele);
       expect(ele.hasClass('has-events')).toBeFalsy();
     });
 
@@ -159,7 +159,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         start: moment(),
         subTitle: 'event subtitle'
       },
-      scope = element.scope();
+      scope = element.isolateScope();
       element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
@@ -172,7 +172,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         start: moment(),
         subTitle: 'event subtitle'
       },
-      scope = element.scope();
+      scope = element.isolateScope();
       element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
@@ -185,7 +185,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         start: moment().subtract('days', 1),
         subTitle: 'event subtitle'
       },
-      scope = element.scope();
+      scope = element.isolateScope();
       element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
@@ -196,28 +196,28 @@ describe('Directive: nxgUpcomingCalendar', function () {
 
   describe('scope.watch(data)', function () {
     it('should watch scope.data and update when data is not null', function () {
-      element.scope().data.openDates = 'string';
-      element.scope().$apply();
+      element.isolateScope().data.openDates = 'string';
+      element.isolateScope().$apply();
 
-      expect(element.scope().openDates).toEqual('string');
+      expect(element.isolateScope().openDates).toEqual('string');
     });
 
     it('should watch scope.data and not update when data is null', function () {
-      element.scope().data = null;
-      element.scope().$apply();
+      element.isolateScope().data = null;
+      element.isolateScope().$apply();
 
-      expect(element.scope().openDates).toEqual({});
+      expect(element.isolateScope().openDates).toEqual({});
     });
 
     it('should render each fc-day cell', function () {
       element.append('<div class="fc-day"></div><div class="fc-day"></div><div class="fc-day"></div>');
 
-      element.scope().data.openDates = 'string';
+      element.isolateScope().data.openDates = 'string';
 
-      spyOn(element.scope().options, 'dayRender');
-      element.scope().$apply();
+      spyOn(element.isolateScope().options, 'dayRender');
+      element.isolateScope().$apply();
 
-      expect(element.scope().options.dayRender.calls.length).toEqual(3);
+      expect(element.isolateScope().options.dayRender.calls.length).toEqual(3);
     });
   });
 });

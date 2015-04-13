@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
-        var regex = /[^\d\.]/g;
+        var regex = /[^\d^A-Za-z\.]/g;
 
         var parser = function(value) {
           if (typeof value === 'string') {

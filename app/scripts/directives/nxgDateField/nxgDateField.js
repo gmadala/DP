@@ -12,6 +12,10 @@ angular.module('nextgearWebApp')
         var inputName = attrs.name,
             required = attrs.required;
 
+        // compile --> trigger change --> trigger compile
+        // cycling there.
+        // changing attribute, setting it etc will trigger change.
+
         // move the id and ng-model down onto the enclosed input
         element.removeAttr('id').removeAttr('ng-model').removeAttr('name');
         element.find('input').attr('id', attrs.id).attr('ng-model', attrs.ngModel).attr('name', attrs.name);
@@ -38,6 +42,8 @@ angular.module('nextgearWebApp')
           element.find('input').attr('placeholder', 'mm/dd/yyyy');
         }
 
+        console.log('compile');
+
         // Automatically load in current language
         var currentLanguage = gettextCatalog.currentLanguage;
         if (currentLanguage !== 'en') {
@@ -62,6 +68,7 @@ angular.module('nextgearWebApp')
                 datepickerPopup;
 
             element.on('show', function() {
+              console.log('show');
               datepickerIsOpen = true;
 
 
@@ -83,14 +90,16 @@ angular.module('nextgearWebApp')
             // hence we do some digging and IF this field has a date error, reset the input to
             // reflect that bad data
             element.on('change', function() {
+              console.log('change');
+              console.log('element: ', element);
               var errs = formCtrl.$error.date,
                   utcVal;
 
               // IE9 has an issue with timezones - if date isn't set at midnight,
               // then the date will be wrong for timezones west of GMT. Correct for this
-              if(this.value && this.value.getHours() !== 0) {
-                this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
-              }
+              //if(this.value && this.value.getHours() !== 0) {
+              //  this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
+              //}
 
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
@@ -107,6 +116,7 @@ angular.module('nextgearWebApp')
             // Make the current date get filled by default when you hit
             // enter (keyCode 13) and there isn't already a value in the input.
             $input.on('keydown', function(event) {
+              console.log('keydown');
               if(event.keyCode === 13){
                 if(datepickerIsOpen) {
                   if(false === showCode(scope, {date: new Date(this.value)})){
@@ -141,6 +151,7 @@ angular.module('nextgearWebApp')
             });
 
             $input.on('blur', function() {
+              console.log('blur');
               if(!this.value.match(scope.isDate) && this.value !== '') {
                 formCtrl[inputName].$setValidity('date', false);
               } else {
@@ -150,6 +161,7 @@ angular.module('nextgearWebApp')
 
             // When date changes (esp with a click), make sure focus remains on the input element.
             element.on('hide', function() {
+              console.log('hide');
               datepickerIsOpen = false;
 
               // In IE10, date wasn't getting selected without double-clicking. The "click"
@@ -203,6 +215,7 @@ angular.module('nextgearWebApp')
 
             // When navigating to another state, hide all datepickers
             element.bind('$destroy', function() {
+              console.log('destroy');
               $input.datepicker('hide');
             });
 

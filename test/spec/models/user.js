@@ -490,11 +490,11 @@ describe('Model: User', function () {
       httpBackend.flush();
       $rootScope.$digest();
 
-      expect(result.productTypes).toBe(resultData.ProductType);
-      expect(result.colors).toBe(resultData.Colors);
-      expect(result.states).toBe(resultData.States);
-      expect(result.titleLocationOptions).toBe(resultData.TitleLocationOptions);
-      expect(result.paymentMethods).toBe(resultData.PaymentMethods);
+      expect(result.productTypes).toEqual(resultData.ProductType);
+      expect(result.colors).toEqual(resultData.Colors);
+      expect(result.states).toEqual(resultData.States);
+      expect(result.titleLocationOptions).toEqual(resultData.TitleLocationOptions);
+      expect(result.paymentMethods).toEqual(resultData.PaymentMethods);
     });
   });
 
@@ -529,7 +529,14 @@ describe('Model: User', function () {
       });
       httpBackend.flush();
       $rootScope.$digest();
-      expect(result).toBe(resultData);
+      // When the GET is called, it will return empty object. And then this empty object will be assigned with
+      // 'ManufacturerSubsidiaries' property inside the refreshInfo method. So, this test should be either comparing it
+      // as not going to be the same with resultData or it will be resultData extended with 'ManufacturerSubsidiaries'
+      expect(result).not.toBe(resultData);
+      angular.extend(resultData, {
+        ManufacturerSubsidiaries: []
+      });
+      expect(result).toEqual(resultData);
     });
   });
 
