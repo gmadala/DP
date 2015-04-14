@@ -74,7 +74,7 @@ angular.module('nextgearWebApp')
         if(!isValid(style)) {
           throw new Error(gettextCatalog.getString('Missing style'));
         }
-        if(!mileage || !angular.isNumber(mileage)) {
+        if(!mileage) {
           throw new Error(gettextCatalog.getString('Missing mileage'));
         }
 
