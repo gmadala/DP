@@ -36,7 +36,7 @@
   }
 
   .login-help {
-    @extend .span12;
+    @extend .col-lg-12;
     @extend %small;
     line-height: 1.8;
     margin: 0 0 20px;

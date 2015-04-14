@@ -1,9 +1,9 @@
 <div class="login container-line">
-  <div class="container-fluid login-contents">
+  <div class="container login-contents">
     <p class="notice" ng-show="showBanner">{{ bannerText }}</p>
 
-    <div class="row-fluid">
-      <div class="well span4 offset4">
+    <div class="row">
+      <div class="well col-md-4 offset4">
         <h2 class="well-title" translate>Sign In</h2>
 
         <form class="login-form clearfix" name="loginForm">
@@ -44,7 +44,7 @@
           <button type="submit" class="btn-cta cta-primary right" ng-click="authenticate()" translate>Log In</button>
         </form>
 
-        <div class="row-fluid">
+        <div class="row">
           <div class="login-help-link">
             <a href="#/login/recover" nxg_track="{{metric.CLICK_FORGOT_USERNAME_OR_PASSWORD}}" translate>Forgot your username or password?</a>
           </div>

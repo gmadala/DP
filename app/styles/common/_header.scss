@@ -3,7 +3,7 @@
 // ========
 
 .app-header {
-  @extend .row-fluid;
+  @extend .row;
   background: $white;
   margin-bottom: 20px;
 
@@ -13,10 +13,10 @@
 }
 
 .header {
-  @extend .row-fluid;
-  position: relative;
+  @extend .row;
+  //position: relative;
 
-  .span6 {
+  .col-md-6 {
     @extend %center;
   }
 }

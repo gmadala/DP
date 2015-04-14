@@ -1,4 +1,4 @@
-<section class="row-fluid upcoming">
+<section class="row upcoming">
   <!-- Calendar -->
   <div class="span9 nxg-dash-calendar-container well dash-well" >
     <div class="dash-calendar-header">
@@ -112,7 +112,7 @@
   </div>
 
   <!-- Payment Summary -->
-  <div class="span3 well payment-summary dash-well">
+  <div class="col-md-3 well payment-summary dash-well">
     <h2 class="well-title" translate>Payments Summary</h2>
     <ul class="counter-list">
       <li id="overdue" class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
@@ -192,12 +192,12 @@
 
 <section class="page-break"></section>
 
-<section class="row-fluid">
+<section class="row">
   <!-- Credit Summary -->
-  <div class="span5 well dash-well">
+  <div class="col-md-5 well dash-well">
     <h2 class="well-title" translate>Credit Information</h2>
-    <div class="row-fluid clearfix">
-      <div class="span5 donut-nested">
+    <div class="row clearfix">
+      <div class="col-md-5 donut-nested">
           <div class="donut-outer"
                 nxg-chart
                 nxg-chart-type="pie"
@@ -215,7 +215,7 @@
                 nxg-donut-options="chartOptions.donutOptions"></div>
       </div>
 
-      <div class="span7">
+      <div class="col-md-7">
         <div class="chart-legend">
           <h6 class="static-option" ng-show="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
           <div class="style-select auto" ng-hide="dashboardData.LinesOfCredit.length == 1">
@@ -258,7 +258,7 @@
   </div>
 
   <!-- Receipts Summary -->
-  <div class="span4 well dash-well">
+  <div class="col-md-4 well dash-well">
     <h2 class="well-title" translate>Recent Receipts</h2>
     <table class="table table-striped table-secondary">
       <thead>
@@ -285,18 +285,18 @@
   </div>
 </section>
 
-<section class="row-fluid">
+<section class="row">
   <!-- Floor Plan Summary -->
-  <div class="span2 well dash-well">
+  <div class="col-md-2 well dash-well">
     <h2 class="well-title" translate>Floor Plan</h2>
     <ul>
-      <li class="row-fluid">
-        <div class="span6">
+      <li class="row">
+        <div class="col-md-6">
           <span class="counter">
             {{ dashboardData.ApprovedFloorplans | alt }}
           </span>
         </div>
-        <div class="span6 counter-label">
+        <div class="col-md-6 counter-label">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
@@ -305,13 +305,13 @@
         </div>
       </li>
 
-      <li class="row-fluid">
-        <div class="span6">
+      <li class="row">
+        <div class="col-md-6">
           <span class="counter">
             {{ dashboardData.PendingFloorplans | alt }}
           </span>
         </div>
-        <div class="span6 counter-label">
+        <div class="col-md-6 counter-label">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
@@ -320,8 +320,8 @@
         </div>
       </li>
 
-      <li class="row-fluid">
-        <div class="span6">
+      <li class="row">
+        <div class="col-md-6">
           <span class="counter">
             {{ dashboardData.DeniedFloorplans | alt }}
           </span>
@@ -342,7 +342,7 @@
     </button>
   </div><!-- end .summary.floorplan -->
 
-  <div class="span10 well dash-well">
+  <div class="col-md-10 well dash-well">
     <h2 class="well-title" translate>Recently Floored Vehicles</h2>
     <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
       <p class="notice-box" ng-switch-when="false" translate>
