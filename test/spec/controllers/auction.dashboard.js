@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Controller: AuctionDashboardCtrl', function() {
+describe('Controller: AuctionDashboardCtrl', function() {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
