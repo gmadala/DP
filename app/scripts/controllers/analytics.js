@@ -18,9 +18,7 @@ angular.module('nextgearWebApp')
         controller: 'TopAuctionsCtrl',
         resolve: {
           auctions: function () {
-            return $scope.analytics.then(function (result) {
-              return result.allAuctions;
-            });
+            return $scope.analytics.allAuctions;
           }
         }
       };
