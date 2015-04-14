@@ -133,7 +133,7 @@ describe('Directive: nxgDateField', function () {
 
   });
 
-  ddescribe('beforeShowDay support', function () {
+  describe('beforeShowDay support', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
       scope = $rootScope;

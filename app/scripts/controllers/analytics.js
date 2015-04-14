@@ -32,8 +32,12 @@ angular.module('nextgearWebApp')
       $scope.showDetails = !$scope.showDetails;
     };
 
-    $scope.bestMovers = Analytics.fetchMovers(true);
-    $scope.worstMovers = Analytics.fetchMovers(false);
+    Analytics.fetchMovers(true).then(function (data) {
+      $scope.bestMovers = data;
+    });
+    Analytics.fetchMovers(false).then(function (data) {
+      $scope.worstMovers = data;
+    });
     $scope.selectedMoverChart = $scope.bestMovers;
 
     $scope.changeMoverChart = function(chartName) {
@@ -48,8 +52,12 @@ angular.module('nextgearWebApp')
       return $scope.selectedMoverChart === $scope.bestMovers;
     };
 
-    $scope.businessSummary = Analytics.fetchBusinessSummary();
-    $scope.analytics = Analytics.fetchAnalytics();
+    Analytics.fetchBusinessSummary().then(function (data) {
+      $scope.businessSummary = data;
+    });
+    Analytics.fetchAnalytics().then(function (data) {
+      $scope.analytics = data;
+    });
     //Checking for United States Dealer
     $scope.isUnitedStates = User.isUnitedStates();
   });
