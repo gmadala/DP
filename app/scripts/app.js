@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight',
-  'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule', 'gettext', 'nextgearWebCommon'])
+  'ui.event', 'segmentio', 'ngCookies', 'ngSanitize', 'LocalStorageModule', 'gettext', 'nextgearWebCommon'])
   .constant('SupportedLanguages', [
     { key: 'en', id: 1, name: 'English' },
     { key: 'enDebug', id: 1, name: 'English (Debug)' },
