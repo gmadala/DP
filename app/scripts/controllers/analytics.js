@@ -34,11 +34,11 @@ angular.module('nextgearWebApp')
 
     Analytics.fetchMovers(true).then(function (data) {
       $scope.bestMovers = data;
+      $scope.selectedMoverChart = $scope.bestMovers;
     });
     Analytics.fetchMovers(false).then(function (data) {
       $scope.worstMovers = data;
     });
-    $scope.selectedMoverChart = $scope.bestMovers;
 
     $scope.changeMoverChart = function(chartName) {
       if (chartName === 'best'){
