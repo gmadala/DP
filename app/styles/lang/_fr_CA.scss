@@ -2,6 +2,16 @@ body.lang_fr_CA {
 
   /* Dashboard */
   #DashboardPage {
+    .payment-summary {
+      /* Handle longer title for payment summary */
+      .well-title {
+        font-size: 18px;
+      }
+    }
+    /* Class to allow the payment summary height to not be fixed in case of smaller width with the title on 2 lines */
+    .dash-well-height-fluid {
+      height: auto !important;
+    }
     @media (max-width: 1090px) {
       .dash-well {
         .well-title {
