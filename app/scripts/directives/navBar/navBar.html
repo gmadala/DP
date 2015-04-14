@@ -1,5 +1,5 @@
 <header class="app-header" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
-  <div class="container-fluid">
+  <div class="container">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="span3 ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
         <div class="nxg-logo" nxg-debug-title></div>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="nav-bkgd" ng-show="navState.current.showNavBar">
-    <div class="container-fluid">
+    <div class="container">
       <div class="header">
         <ul class="nav-primary">
           <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">
