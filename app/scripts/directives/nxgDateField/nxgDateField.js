@@ -12,10 +12,6 @@ angular.module('nextgearWebApp')
         var inputName = attrs.name,
             required = attrs.required;
 
-        // compile --> trigger change --> trigger compile
-        // cycling there.
-        // changing attribute, setting it etc will trigger change.
-
         // move the id and ng-model down onto the enclosed input
         element.removeAttr('id').removeAttr('ng-model').removeAttr('name');
         element.find('input').attr('id', attrs.id).attr('ng-model', attrs.ngModel).attr('name', attrs.name);
