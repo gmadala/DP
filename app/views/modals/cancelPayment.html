@@ -7,16 +7,16 @@
   <h4><span translate>VIN</span>: {{ payment.vin }} - {{ payment.description }}</h4>
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6" translate>Stock #</p>
-      <p class="span6 value">{{ payment.stockNumber }}</p>
+      <p class="col-md-6" translate>Stock #</p>
+      <p class="col-md-6 value">{{ payment.stockNumber }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Scheduled</p>
-      <p class="span6 value">{{ payment.scheduledDate | moment }}</p>
+      <p class="col-md-6" translate>Scheduled</p>
+      <p class="col-md-6 value">{{ payment.scheduledDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Payment Amount</p>
-      <p class="span6 value">{{ (payment.isPayOff && payment.currentPayoff || payment.amountDue) | currency }}</p>
+      <p class="col-md-6" translate>Payment Amount</p>
+      <p class="col-md-6 value">{{ (payment.isPayOff && payment.currentPayoff || payment.amountDue) | currency }}</p>
     </li>
   </ul>
 </div>

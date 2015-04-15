@@ -5,24 +5,24 @@
 <div class="modal-body to-edge">
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6" translate>Posted Date</p>
-      <p class="span6 value ">{{ fee.PostedDate | moment }}</p>
+      <p class="col-md-6" translate>Posted Date</p>
+      <p class="col-md-6 value ">{{ fee.PostedDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Effective Date</p>
-      <p class="span6 value ">{{ fee.EffectiveDate | moment }}</p>
+      <p class="col-md-6" translate>Effective Date</p>
+      <p class="col-md-6 value ">{{ fee.EffectiveDate | moment }}</p>
     </li>
   </ul>
 
   <ul class="list-table aside">
     <li class="list-table-row">
-      <p class="span6"><span translate>Fee</span> – {{ fee.FeeName }}</p>
-      <p class="span6 value numeric">{{ fee.FeeAmount | currency }}</p>
+      <p class="col-md-6"><span translate>Fee</span> – {{ fee.FeeName }}</p>
+      <p class="col-md-6 value numeric">{{ fee.FeeAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row">
-      <p class="span6" translate>Total</p>
-      <p class="span6 value numeric">{{ fee.FeeTotal | currency }}</p>
+      <p class="col-md-6" translate>Total</p>
+      <p class="col-md-6 value numeric">{{ fee.FeeTotal | currency }}</p>
     </li>
   </ul>
 </div>

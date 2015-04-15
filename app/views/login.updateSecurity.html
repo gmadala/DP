@@ -1,7 +1,7 @@
 <div class="container-line">
   <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="well span10 offset1">
+    <div class="row">
+      <div class="well col-md-10 offset-md-1">
         <h2 class="well-title" translate>Welcome</h2>
         <div class="well-item">
           <h3 translate>Welcome to NextGear!</h3>
@@ -9,9 +9,9 @@
 
           <form class="form-block" name="updateSecurity" ng-submit="submitForm()" novalidate>
             <div ng-repeat="question in questions">
-              <div class="row-fluid">
-                <label class="span3" translate>Security Question #{{$index+1}}</label>
-                <div class="span8">
+              <div class="row">
+                <label class="col-md-3" translate>Security Question #{{$index+1}}</label>
+                <div class="col-md-8">
                   <div class="style-select" ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }">
                     <select id="{{question.name}}"
                       ng-model="$parent.updateSecurity[question.name]"
@@ -26,9 +26,9 @@
                 </div>
               </div>
 
-              <div class="row-fluid" ng-show="$parent.updateSecurity[question.name]">
-                <label class="span3" translate>Answer</label>
-                <div class="span8">
+              <div class="row" ng-show="$parent.updateSecurity[question.name]">
+                <label class="col-md-3" translate>Answer</label>
+                <div class="col-md-8">
                   <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.required" translate>Please enter an answer to the selected security question. </label>
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.maxLength" translate>Please enter an answer that is no more than 100 characters long. </label>
