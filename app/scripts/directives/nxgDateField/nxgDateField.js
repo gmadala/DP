@@ -207,7 +207,6 @@ angular.module('nextgearWebApp')
 
             // When navigating to another state, hide all datepickers
             element.bind('$destroy', function() {
-              console.log('destroy');
               $input.datepicker('hide');
             });
 
