@@ -1,12 +1,12 @@
-<div class="row-fluid dealer-search">
+<div class="row dealer-search">
 
-  <div class="span6 well">
+  <div class="col-md-6 well">
     <h2 class="well-title" translate>Dealer Number Search</h2>
-    <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row-fluid search" novalidate>
+    <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row search" novalidate>
       <p translate> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
 
-      <div class="row-fluid">
-        <div class="span8 form-block">
+      <div class="row">
+        <div class="col-md-8 form-block">
           <label for="dealerNum" translate>NextGear Capital Dealer Number</label>
 
           <div class="styled-input with-btn">
@@ -36,10 +36,10 @@
         </div>
       </div>
 
-        <h2 class="span12" translate>- OR -</h2>
+        <h2 class="col-md-12" translate>- OR -</h2>
 
-      <div class="row-fluid">
-        <div class="span8 form-block">
+      <div class="row">
+        <div class="col-md-8 form-block">
           <label for="auctionAccessNum" translate>Auction Access Number</label>
           <div class="styled-input with-btn">
             <input type="text"
@@ -69,15 +69,15 @@
     </form>
   </div>
 
-  <div class="span6 well">
+  <div class="col-md-6 well">
     <h2 class="well-title" translate>Dealer Name Search</h2>
 
-    <form name="nameSearchForm" class="row-fluid search" novalidate>
+    <form name="nameSearchForm" class="row search" novalidate>
       <p translate> To look up a dealer in Dealer search, use a combination of their Name and City or
       State. </p>
 
-      <div class="row-fluid">
-        <div class="span8 form-block">
+      <div class="row">
+        <div class="col-md-8 form-block">
           <label for="dealerName" translate>Dealer Name</label>
           <input type="text"
                  id="dealerName"
@@ -93,8 +93,8 @@
         </div>
       </div>
 
-      <div class="row-fluid form-block">
-        <div class="span5">
+      <div class="row form-block">
+        <div class="col-md-5">
           <label for="city" translate>City</label>
 
           <input type="text"
@@ -104,11 +104,11 @@
                  ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
         </div>
 
-        <div class="span2">
+        <div class="col-md-2">
           <h2 class="form-separator center" translate>- OR -</h2>
         </div>
 
-        <div class="span4">
+        <div class="col-md-4">
           <label for="state" translate>State</label>
           <div class="style-select auto">
             <select id="state" class="input-medium" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
@@ -117,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div class="span12">
+      <div class="col-md-12">
         <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat" translate>
           City names must only have letters and spaces.
         </label>
