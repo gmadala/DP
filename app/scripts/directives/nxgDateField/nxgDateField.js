@@ -91,15 +91,14 @@ angular.module('nextgearWebApp')
             // reflect that bad data
             element.on('change', function() {
               console.log('change');
-              console.log('element: ', element);
               var errs = formCtrl.$error.date,
                   utcVal;
 
               // IE9 has an issue with timezones - if date isn't set at midnight,
               // then the date will be wrong for timezones west of GMT. Correct for this
-              //if(this.value && this.value.getHours() !== 0) {
-              //  this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
-              //}
+              if(this.value && this.value.getHours() !== 0) {
+                this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
+              }
 
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
