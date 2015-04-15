@@ -303,7 +303,7 @@ msgstr "Approuvé"
 
 #: app/views/analytics.html
 msgid "Approved Floor Plans"
-msgstr "Plans de financement approuvés"
+msgstr "Financements Approuvés"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Approved/Not Paid"
@@ -352,7 +352,7 @@ msgstr "Moyen"
 
 #: app/views/analytics.html
 msgid "Average # of Days to Turn"
-msgstr "Rotation moyenne en jours"
+msgstr "Rotation Moyenne en nombre de jours"
 
 #: app/views/analytics.html
 msgid "Average Purchase Price"
@@ -364,7 +364,7 @@ msgstr "Roulement moyen"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg NextGear Capital Book Value"
-msgstr "Valeur comptable moyenne – NextGear Capital"
+msgstr "Valeur Comptable moyenne NextGear Capital"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg Purchase Price"
@@ -700,7 +700,7 @@ msgstr "Date de soumission"
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Date range based on Date Floored OR Disbursement Date."
-msgstr "Plage de dates selon la date financé OU la date de déboursement."
+msgstr "Plage de dates selon la date financé OU la date du déboursé."
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Dates"
@@ -708,7 +708,7 @@ msgstr "Dates"
 
 #: app/views/vehicledetails.html
 msgid "Days Floored"
-msgstr "Jours de financement"
+msgstr "Jours en Financement"
 
 #: app/views/analytics.html
 msgid "Days to Turn"
@@ -981,7 +981,7 @@ msgstr "Filtrer par date d'échéance"
 
 #: app/views/floorplan.html
 msgid "Filter by Flooring Status"
-msgstr "Filtrer par état de financement"
+msgstr "Filtrer par statut du financement"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 msgid "Filter by Inventory Location"
@@ -1018,7 +1018,7 @@ msgstr "Activité financière"
 #: app/scripts/directives/nxgSearch/nxgSearch.html
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 msgid "Find a Floor Plan"
-msgstr "Rechercher dans le plan de financement"
+msgstr "Recherche d’un plan de financement"
 
 #: app/views/vehicledetails.html
 msgid "Floor Date"
@@ -1077,7 +1077,7 @@ msgstr "Demande de financement soumise"
 
 #: app/views/reports.html
 msgid "Flooring Status"
-msgstr "État du financement"
+msgstr "Statut du Financement"
 
 #: app/views/login.recover.html
 msgid "Forgot Your Password?"
@@ -1294,7 +1294,7 @@ msgstr "Marque"
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Make Selection"
-msgstr "Marque une sélection"
+msgstr "Sélection d’une marque"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid "Make payments today or schedule your payments when you checkout."
@@ -1367,11 +1367,11 @@ msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "NextGear Book Values"
-msgstr "Valeurs de marché pour NextGear"
+msgstr "Valeur marchande pour NextGear"
 
 #: app/scripts/controllers/valuelookup.js app/views/valuelookup.html
 msgid "NextGear Book Wholesale Values"
-msgstr "Valeurs de marché en gros de NextGear"
+msgstr "Valeur du marché en gros de NextGear"
 
 #: app/views/analytics.html
 msgid ""
@@ -1672,7 +1672,7 @@ msgstr "En attente"
 
 #: app/views/analytics.html
 msgid "Pending Floor Plans"
-msgstr "Plans de financement en attente"
+msgstr "Financements en attente"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Pending/Not Paid"
@@ -2311,7 +2311,7 @@ msgstr "Demande soumise"
 
 #: app/views/vehicledetails.html
 msgid "Request the Title"
-msgstr "Demander I'immatriculation"
+msgstr "Requérir le certificat d’immatriculation"
 
 #: app/views/payments.html
 msgid "Request<br>Extension"
@@ -2696,14 +2696,16 @@ msgid ""
 "The floor plan you have selected for title release would put you over the "
 "financial plan limits for this account."
 msgstr ""
-"Le plan de financement que vous avez sélectionné pour l’émission de titres "
-"vous portera au-delà des limites du plan financier de ce compte."
+"Le plan de financement que vous avez sélectionné pour l’émission du "
+"certificat d’immatriculation vous portera au-delà des limites du plan "
+"financier de ce compte."
 
 #: app/views/valuelookup.html
+#, fuzzy
 msgid "The following values are a regional average based on the Zip provided."
 msgstr ""
-"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon le "
-"code ZIP indiqué."
+"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon "
+"le code ZIP indiqué."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
@@ -2752,10 +2754,11 @@ msgid ""
 msgstr ""
 "Cette marge de crédit dispose d'une augmentation de crédit temporaire au "
 "montant de {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | "
-"numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData."
-"selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+"numeral:'$0,0.00' }} qui arrive à échéance le "
+"{{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
 #: app/views/dashboard.html
+#, fuzzy
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
 "NextGear employee via NextGear's Discover system that have been approved and "
@@ -2772,8 +2775,8 @@ msgid ""
 "NextGear employee via NextGear's Discover system that have not yet been "
 "approved by a NextGear employee."
 msgstr ""
-"Cet état s'applique aux véhicules date financé par l'entremise de "
-"NextGearCapital.com ou par un employé de NextGear par l'entremise du système "
+"Ce statut s’applique aux véhicules financés par l’entremise de "
+"NextGearCapital.com ou par un employé de NextGear par l’entremise du système "
 "Discover de NextGear, et qui n’ont pas encore été approuvés par un employé "
 "de NextGear."
 
@@ -2783,10 +2786,10 @@ msgid ""
 "been denied by a NextGear employee. Please contact NextGear Customer Service "
 "to find out why a vehicle has been denied."
 msgstr ""
-"Cet état s’applique aux véhicules date financé par l’entremise de "
-"NextGearCapital.com qui ont été refusés par un employé de NextGear. Veuillez "
-"contacter le service à la clientèle de NextGear pour connaitre les raisons "
-"du refus pour ce véhicule."
+"Ce statut s’applique aux véhicules financés par l’entremise de "
+"NextGearCapital.com qui ont été refusés par un employé de NextGear.  "
+"Veuillez contacter le service à la clientèle de NextGear afin de connaitre "
+"les raisons du refus pour le véhicule en question."
 
 #: app/scripts/controllers/dashboard.js
 msgid "This {{ dateType }}"
@@ -2878,7 +2881,7 @@ msgstr "Paramètres du titre"
 
 #: app/views/vehicledetails.html
 msgid "Title State"
-msgstr "État de I'imatriculation"
+msgstr "Statut de l’immatriculation"
 
 #: app/views/titlereleasecheckout.html
 msgid "Titles Available After This Request"
@@ -3562,8 +3565,7 @@ msgid ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</"
 "span> 20"
 msgstr ""
-"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
-"20"
+"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> 20"
 
 #~ msgid "Privacy Statement"
 #~ msgstr "Déclaration de confidentialité"
