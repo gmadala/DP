@@ -319,11 +319,11 @@ msgstr "Êtes-vous certain de vouloir terminer la session?"
 
 #: app/views/modals/businessSearch.html
 msgid "Auction Access No."
-msgstr "No d'accès à l'encan"
+msgstr "No. D’Auction Acces"
 
 #: app/views/auction.dealersearch.html
 msgid "Auction Access Number"
-msgstr "No d'accès à l'encan"
+msgstr "No. D’Auction Acces"
 
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Auction Access Number(s)"
@@ -380,15 +380,15 @@ msgstr "Décaissements en attente"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 0-15 Days"
-msgstr "Titres en attente, 0 à 15 jours"
+msgstr "Certificat d’immatriculation en attente, 0 à 15 jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 16-30 Days"
-msgstr "Titres en attente, 16 à 30 jours"
+msgstr "Certificat d’immatriculation en attente, 16 à 30 jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 30+ Days"
-msgstr "Titres en attente, 30 jours ou plus"
+msgstr "Certificat d’immatriculation en attente, 30 jours ou plus"
 
 #: app/views/auction.bulkflooring.html app/views/checkout.html
 msgid "Bank Account"
@@ -832,7 +832,7 @@ msgstr "Admissible"
 
 #: app/views/titlereleases.html
 msgid "Eligible for Title Release"
-msgstr "Admissible à l’émission du titre"
+msgstr " Admissible à l’émission de l’immatriculation"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Email"
@@ -1505,7 +1505,7 @@ msgstr "Payé"
 
 #: app/views/auction.dashboard.html
 msgid "Paid Awaiting Title"
-msgstr "Payé en attente du titre"
+msgstr "Payé, en attente du certificat d’immatriculation"
 
 #: app/views/reports.html
 msgid "Paid off Summary"
@@ -2579,7 +2579,7 @@ msgstr "No de stock particulier"
 
 #: app/views/analytics.html
 msgid "Stale and Aging Vehicles"
-msgstr "Véhicules obsolètes et vieillissants"
+msgstr "Véhicules Périmés et Vieillissants"
 
 #: app/scripts/directives/nxgSearch/nxgSearch.html app/views/reports.html
 msgid "Start Date"
@@ -2855,7 +2855,7 @@ msgstr "Titre émis le {{item.TitleReleaseDate | moment}}"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Title Releases"
-msgstr "Émissions de titres"
+msgstr "Émission du Certificat d’Immatriculation"
 
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
@@ -3063,7 +3063,7 @@ msgstr "NIV"
 
 #: app/views/valuelookup.html
 msgid "VIN Lookup"
-msgstr "Recherche de NIV"
+msgstr "Recherche par NIV"
 
 #: app/views/valuelookup.html
 msgid "VIN should be 10 - 17 characters."
@@ -3279,7 +3279,7 @@ msgstr "Qu’aimeriez-vous faire?"
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Who has the Title?"
-msgstr "Qui possède le titre?"
+msgstr "Qui possède le certificat d’immatriculation?"
 
 #: app/views/analytics.html
 msgid "Worst Movers"
