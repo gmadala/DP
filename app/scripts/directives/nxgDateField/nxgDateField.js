@@ -42,8 +42,6 @@ angular.module('nextgearWebApp')
           element.find('input').attr('placeholder', 'mm/dd/yyyy');
         }
 
-        console.log('compile');
-
         // Automatically load in current language
         var currentLanguage = gettextCatalog.currentLanguage;
         if (currentLanguage !== 'en') {
@@ -68,7 +66,6 @@ angular.module('nextgearWebApp')
                 datepickerPopup;
 
             element.on('show', function() {
-              console.log('show');
               datepickerIsOpen = true;
 
 
@@ -90,7 +87,6 @@ angular.module('nextgearWebApp')
             // hence we do some digging and IF this field has a date error, reset the input to
             // reflect that bad data
             element.on('change', function() {
-              console.log('change');
               var errs = formCtrl.$error.date,
                   utcVal;
 
@@ -115,7 +111,6 @@ angular.module('nextgearWebApp')
             // Make the current date get filled by default when you hit
             // enter (keyCode 13) and there isn't already a value in the input.
             $input.on('keydown', function(event) {
-              console.log('keydown');
               if(event.keyCode === 13){
                 if(datepickerIsOpen) {
                   if(false === showCode(scope, {date: new Date(this.value)})){
@@ -150,7 +145,6 @@ angular.module('nextgearWebApp')
             });
 
             $input.on('blur', function() {
-              console.log('blur');
               if(!this.value.match(scope.isDate) && this.value !== '') {
                 formCtrl[inputName].$setValidity('date', false);
               } else {
@@ -160,7 +154,6 @@ angular.module('nextgearWebApp')
 
             // When date changes (esp with a click), make sure focus remains on the input element.
             element.on('hide', function() {
-              console.log('hide');
               datepickerIsOpen = false;
 
               // In IE10, date wasn't getting selected without double-clicking. The "click"
