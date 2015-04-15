@@ -352,7 +352,7 @@ msgstr "Moyen"
 
 #: app/views/analytics.html
 msgid "Average # of Days to Turn"
-msgstr "Rotation moyen en jours"
+msgstr "Rotation moyenne en jours"
 
 #: app/views/analytics.html
 msgid "Average Purchase Price"
@@ -364,7 +364,7 @@ msgstr "Roulement moyen"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg NextGear Capital Book Value"
-msgstr "Valeur comptable moyen – NextGear Capital"
+msgstr "Valeur comptable moyenne – NextGear Capital"
 
 #: app/views/modals/topAuctions.html
 msgid "Avg Purchase Price"
@@ -372,7 +372,7 @@ msgstr "Prix d'achat moyen"
 
 #: app/views/analytics.html
 msgid "Avg. # of Days to Turn"
-msgstr "Rotation moyen en jours"
+msgstr "Rotation moyenne en jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Disbursement"
@@ -2702,12 +2702,12 @@ msgstr ""
 #: app/views/valuelookup.html
 msgid "The following values are a regional average based on the Zip provided."
 msgstr ""
-"Les valeurs ci-dessous représentent une moyen régionale déterminée selon le "
+"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon le "
 "code ZIP indiqué."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
-msgstr "Les valeurs ci-dessous représentent une moyen nationale."
+msgstr "Les valeurs ci-dessous représentent une moyenne nationale."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "The passwords do not match. Please re-enter the password."
