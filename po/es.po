@@ -2148,6 +2148,10 @@ msgstr "Desembolsos anteriores"
 msgid "Principal"
 msgstr "Principal"
 
+#: app/scripts/directives/nxgPrivacyStatement.js
+msgid "Privacy Statement"
+msgstr "Declaración de privacidad"
+
 #: app/views/receipts.html
 msgid "Processed"
 msgstr "Procesado"

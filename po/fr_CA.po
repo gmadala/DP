@@ -2151,6 +2151,10 @@ msgstr "Décaissements précédents"
 msgid "Principal"
 msgstr "Capital"
 
+#: app/scripts/directives/nxgPrivacyStatement.js
+msgid "Privacy Statement"
+msgstr "Déclaration de confidentialité"
+
 #: app/views/receipts.html
 msgid "Processed"
 msgstr "Traité"
