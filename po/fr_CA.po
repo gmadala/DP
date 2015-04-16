@@ -1133,7 +1133,7 @@ msgstr "Rapports d'historique"
 
 #: app/views/auction.sellerfloorplan.html
 msgid "I Have the Title"
-msgstr "Je suis le tenant du titre"
+msgstr "Le certificat d'immatriculation est en ma possession"
 
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
@@ -1422,7 +1422,7 @@ msgstr "Aucune activité de paiement disponible"
 
 #: app/scripts/controllers/floorplan.js
 msgid "No Title/Paid"
-msgstr "Aucun titre/Payé"
+msgstr "Aucun certificat d'immatriculation/Payé"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "No notifications are currently enabled."
@@ -1458,7 +1458,7 @@ msgstr "Non admissible"
 
 #: app/views/titlereleases.html
 msgid "Not Eligible for Title Release"
-msgstr "Non admissible à l’émission du titre"
+msgstr "Non admissible à l’émission du certificat d'immatriculation"
 
 #: app/404.html
 msgid "Not found <span>:(</span>"
@@ -1534,7 +1534,8 @@ msgstr ""
 #: app/views/titlereleases.html
 msgid "Pay off this vehicle or return the title to remove from your limit."
 msgstr ""
-"Payez ce véhicule ou retournez le titre pour le retirer de votre limite."
+"Payez ce véhicule ou retournez l'immatriculation pour le retirer de votre "
+"limite."
 
 #: app/views/checkout.html app/views/payments.html app/views/receipts.html
 #: app/views/vehicledetails.html
@@ -1717,17 +1718,18 @@ msgid ""
 "pursuant to this request shall be deemed an Authorized Debit under your ACH "
 "Form."
 msgstr ""
-"Veuillez noter que ces titres doivent être retournés à NextGear Capital, à "
-"l’adresse indiquée ci-dessous, au plus tard à la fermeture des bureaux le "
-"septième (7e) jour suivant la date d’émission de ces titres par NextGear "
-"Capital à votre intention. Vous comprenez et vous acceptez que NextGear "
-"Capital déclarera un cas d’échéance (comme défini dans votre billet à ordre "
-"et dans votre contrat de garantie de prêt [« Billet »]) et amorcera une "
-"demande de paiement (comme définie dans votre Formulaire de demande et "
-"d’autorisation ACH) pour tout passif (comme définis dans votre billet) lié à "
-"tout titre non retourné à NextGear Capital dans ces délais. Vous convenez "
-"que tout paiement demandé et effectué conformément à cette demande sera "
-"considéré comme un débit autorisé en vertu de votre formulaire ACH."
+"Veuillez noter que ces certificats d'immatriculation doivent être retournés "
+"à NextGear Capital, à l’adresse indiquée ci-dessous, au plus tard à la "
+"fermeture des bureaux le septième (7e) jour suivant la date d’émission du "
+"certificat d'immatriculation par NextGear Capital à votre intention. Vous "
+"comprenez et vous acceptez que NextGear Capital déclarera en cas d’échéance "
+"(comme défini dans votre billet à ordre et dans votre contrat de garantie de "
+"prêt [« Billet »]) et amorcera une demande de paiement (comme définie dans "
+"votre Formulaire de demande et d’autorisation ACH) pour tout passif (comme "
+"définis dans votre billet) lié à tout certificat d'immatriculation non "
+"retourné à NextGear Capital dans ces délais. Vous convenez que tout paiement "
+"demandé et effectué conformément à cette demande sera considéré comme un "
+"débit autorisé en vertu de votre formulaire ACH."
 
 #: app/views/modals/requestCreditIncrease.html
 msgid "Please choose a line of credit."
@@ -1735,7 +1737,9 @@ msgstr "Veuillez sélectionner une marge de crédit."
 
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below."
-msgstr "Veuillez confirmer les demandes d’émission de titres ci-dessous."
+msgstr ""
+"Veuillez confirmer la demande d’émission des certificats d'enregistrements "
+"ci-dessous."
 
 #: app/views/modals/paymentExtension.html
 msgid "Please contact customer service for further assistance."
@@ -2124,7 +2128,8 @@ msgstr "Veuillez sélectionner « Temporaire » ou « Permanent »."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please select who has the title."
-msgstr "Veuillez sélectionner qui est en possession du titre."
+msgstr ""
+"Veuillez sélectionner qui est en possession du certificat d'immatriculation."
 
 #: app/views/payments.html
 msgid "Posted"
@@ -2269,7 +2274,7 @@ msgstr "Enlever le reçu"
 
 #: app/views/titlereleasecheckout.html
 msgid "Remove Title"
-msgstr "Retirer le titre"
+msgstr "Retirer le certificat d'immatriculation"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Reports"
@@ -2290,7 +2295,7 @@ msgstr "Demander un paiement"
 
 #: app/views/titlereleases.html
 msgid "Request Title"
-msgstr "Demander un titre"
+msgstr "Demander un certification d'immatriculation"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Request Unapplied Funds Payout"
@@ -2341,7 +2346,9 @@ msgstr "Retourner au formulaire"
 
 #: app/views/titlereleasecheckout.html
 msgid "Review the following and submit your title release requests."
-msgstr "Révisez ce qui suit et soumettez vos demandes d’émission de titre."
+msgstr ""
+"Révisez ce qui suit et soumettez vos demandes d’émission de certificat "
+"d'immatriculation."
 
 #: app/views/valuelookup.html app/views/vehicledetails.html
 msgid "Rough"
@@ -2482,7 +2489,7 @@ msgstr "Envoyer le paiement à"
 
 #: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
 msgid "Send Title to a Different Address?"
-msgstr "Envoyer le titre à une adresse différente?"
+msgstr "Envoyer le certificat d'immatriculation à une adresse différente?"
 
 #: app/views/titlereleasecheckout.html
 msgid "Send To"
@@ -2526,7 +2533,9 @@ msgstr ""
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Some title request(s) can not be processed at this time."
-msgstr "Certaines demandes de titre ne peuvent être traitées en ce moment."
+msgstr ""
+"Certaines demandes de certificat d'immatriculation ne peuvent être traitées "
+"en ce moment."
 
 #: app/404.html
 msgid "Sorry, but the page you were trying to view does not exist."
@@ -2701,11 +2710,10 @@ msgstr ""
 "financier de ce compte."
 
 #: app/views/valuelookup.html
-#, fuzzy
 msgid "The following values are a regional average based on the Zip provided."
 msgstr ""
 "Les valeurs ci-dessous représentent une moyenne régionale déterminée selon "
-"le code ZIP indiqué."
+"le code postale indiqué."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
@@ -2722,8 +2730,8 @@ msgid ""
 "The title(s) will be sent to the following address: <strong>{{addresses[0] | "
 "address}}</strong>"
 msgstr ""
-"Les titres seront envoyés à l’adresse suivante : <strong>{{addresses[0] | "
-"address}}</strong>"
+"Les certificats d'immatriculation seront envoyés à l’adresse suivante : "
+"<strong>{{addresses[0] | address}}</strong>"
 
 #: app/views/valuelookup.html
 msgid ""
@@ -2758,13 +2766,12 @@ msgstr ""
 "{{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
 #: app/views/dashboard.html
-#, fuzzy
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
 "NextGear employee via NextGear's Discover system that have been approved and "
 "are currently on the NextGear dealer's floor plan."
 msgstr ""
-"Cet état s’applique aux véhicules date financé par l'entremise de "
+"Ce statut s’applique aux véhicules  financé par l'entremise de "
 "NextGearCapital.com ou par un employé de NextGear par l’entremise du système "
 "Discover de NextGear, qui ont été approuvés et qui sont actuellement "
 "inscrits au plan de financement du concessionnaire NextGear."
@@ -2805,15 +2812,15 @@ msgstr "No de ticket"
 
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 msgid "Title"
-msgstr "Titre"
+msgstr "Certificat d'immatriculation"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Title Absent"
-msgstr "Titre absent"
+msgstr "Certificat d'immatriculation manquant"
 
 #: app/views/vehicledetails.html
 msgid "Title Information"
-msgstr "Informations sur le titre"
+msgstr "Informations sur le certificat d'immatriculation"
 
 #: app/views/auction.sellerfloorplan.html app/views/vehicledetails.html
 msgid "Title Location"
@@ -2821,7 +2828,7 @@ msgstr "Emplacement de I'immatriculation"
 
 #: app/scripts/controllers/titleReleases.js
 msgid "Title Release Limit Reached"
-msgstr "Limite d'émission de titres atteinte"
+msgstr "Limite d'émission de certificats d'immatriculation atteinte"
 
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 msgid ""
@@ -2831,7 +2838,7 @@ msgid ""
 "<span class=\"count\">{{ eligibility.TotalReleasesAllowed || 0 }}</span> "
 "available."
 msgstr ""
-"Limites d’émission de titres : <br>\n"
+"Limites d’émission de certificats d'immatriculation : <br>\n"
 " Vous disposez de <span class=\"count\">{{ eligibility."
 "RemainingReleasesAvailable - titleQueue.contents.length }}</span> "
 "disponibles sur <span class=\"count\">{{ eligibility.TotalReleasesAllowed || "
@@ -2839,19 +2846,20 @@ msgstr ""
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Title Release Requests"
-msgstr "Demandes d’émission de titres"
+msgstr "Demandes d’émission de certificats d'immatriculation"
 
 #: app/views/titlereleases.html
 msgid "Title Release Search"
-msgstr "Recherche de titres émis"
+msgstr "Recherche de certificats d'immatriculation émis"
 
 #: app/scripts/controllers/titleReleases.js app/views/titlereleases.html
 msgid "Title Release Unavailable"
-msgstr "Émission du titre non disponible"
+msgstr "Émission du certificat d'immatriculation non disponible"
 
 #: app/views/titlereleases.html
 msgid "Title Released on {{item.TitleReleaseDate | moment}}"
-msgstr "Titre émis le {{item.TitleReleaseDate | moment}}"
+msgstr ""
+"Certificat d'immatriculation émis le {{item.TitleReleaseDate | moment}}"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Title Releases"
@@ -2859,25 +2867,25 @@ msgstr "Émission du Certificat d’Immatriculation"
 
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
-msgstr "Confirmation de l’émission du titre"
+msgstr "Confirmation de l’émission du certificat d'immatriculation"
 
 #: app/scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html
 #: app/views/modals/confirmTitleRequest.html
 msgid "Title Request"
 msgid_plural "Title Requests"
-msgstr[0] "Demande de titre"
+msgstr[0] "Demande d'un certificat d'immatriculation"
 msgstr[1] "Demandes de titre"
 
 #: app/scripts/controllers/titleReleaseCheckout.js
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Title Requested"
 msgid_plural "Titles Requested"
-msgstr[0] "Titre demandé"
+msgstr[0] "Certification d'immatriculation demandé"
 msgstr[1] "Titres demandés"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Title Settings"
-msgstr "Paramètres du titre"
+msgstr "Paramètres du certificat d'immatriculation"
 
 #: app/views/vehicledetails.html
 msgid "Title State"
@@ -2885,19 +2893,20 @@ msgstr "Statut de l’immatriculation"
 
 #: app/views/titlereleasecheckout.html
 msgid "Titles Available After This Request"
-msgstr "Titre disponible après cette demande"
+msgstr "Certificat d'immatriculation disponible après cette demande"
 
 #: app/views/titlereleasecheckout.html
 msgid "Titles Requested"
-msgstr "Titres demandés"
+msgstr "Certificats d'immatriculation demandés"
 
 #: app/views/titlereleasecheckout.html
 msgid ""
 "Titles can only be released to an address on file. Please select the address "
 "where you would like to receive each of your requested titles."
 msgstr ""
-"Les titres ne peuvent être émis qu’à une adresse inscrite au dossier. "
-"Veuillez sélectionner l’adresse où vous désirez recevoir les titres demandés."
+"Les certificats d'immatriculation ne peuvent être émis qu’à une adresse "
+"inscrite au dossier. Veuillez sélectionner l’adresse où vous désirez "
+"recevoir les titres demandés."
 
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid ""
@@ -2905,10 +2914,10 @@ msgid ""
 "are requesting a title for state work, please <a nxg-chat-with-us=\"\">chat "
 "with us</a> or contact customer service for further assistance."
 msgstr ""
-"Les titres ici émis doivent être retournés dans les sept jours. Si vous "
-"demander un titre pour un contrat avec un organisme gouvernemental, veuillez "
-"communiquer avec le service à la clientèle au <a nxg-customer-support-phone="
-"\"\"></a> pour obtenir de l’aide."
+"Les certificats d'immatriculation  émis ici doivent être retournés dans les "
+"sept jours. Si vous demander un certificat d'immatriculation pour un contrat "
+"avec un organisme gouvernemental, veuillez communiquer avec le service à la "
+"clientèle au <a nxg-customer-support-phone=\"\"></a> pour obtenir de l’aide."
 
 #: app/views/modals/paymentExtension.html
 msgid "To extend this unit an additional period please click below."
@@ -2930,8 +2939,8 @@ msgid ""
 "To update or add a Title Settings address, please contact NextGear Capital "
 "at:"
 msgstr ""
-"Pour mettre à jour ou ajouter des paramètres d’adresse à un titre, veuillez "
-"contacter NextGear Capital au :"
+"Pour mettre à jour ou ajouter des paramètres d’adresse à un certificat "
+"d'immatriculation, veuillez contacter NextGear Capital au :"
 
 #: app/views/checkout.html app/views/dashboard.html
 msgid "Today"
@@ -3158,7 +3167,7 @@ msgstr "Afficher un rapport"
 
 #: app/views/vehicledetails.html
 msgid "View the Title"
-msgstr "Voir le titre"
+msgstr "Voir le certificat d'immatriculation"
 
 #: app/views/vehicledetails.html
 msgid "View the Vehicle History Detail Report"
@@ -3236,10 +3245,10 @@ msgid ""
 "this time. Please call Customer Service at <span class=\"highlight\"><nxg-"
 "dealer-customer-support-phone></nxg-dealer-customer-support-phone></span>"
 msgstr ""
-"Nous sommes désolés, les titres sélectionnés ne peuvent être traités pour le "
-"moment. Veuillez contacter le service à la clientèle au : <span class="
-"\"highlight\"><nxg-dealer-customer-support-phone></nxg-dealer-customer-"
-"support-phone></span>"
+"Nous sommes désolés, les certificats d'immatriculation sélectionnés ne "
+"peuvent être traités pour le moment. Veuillez contacter le service à la "
+"clientèle au : <span class=\"highlight\"><nxg-dealer-customer-support-"
+"phone></nxg-dealer-customer-support-phone></span>"
 
 #: app/scripts/controllers/titleReleases.js
 msgid ""
@@ -3247,9 +3256,9 @@ msgid ""
 "would like more information about this title, please call Dealer Services at "
 "{{ phoneNumber }}."
 msgstr ""
-"Nous sommes désolés, ce titre ne peut être émis en ce moment. Si vous "
-"désirez plus d’informations au sujet de ce titre, veuillez contacter les "
-"services au concessionnaire, au {{ phoneNumber }}."
+"Nous sommes désolés, ce certificat d'immatriculation ne peut être émis en ce "
+"moment. Si vous désirez plus d’informations au sujet de ce titre, veuillez "
+"contacter les services au concessionnaire, au {{ phoneNumber }}."
 
 #: app/views/auction.dashboard.html app/views/dashboard.html
 msgid "Week"
@@ -3355,9 +3364,10 @@ msgid ""
 "You have not selected any titles. Please visit the\n"
 "        <a href=\"#/titlereleases\">Title Releases list</a> to select some."
 msgstr ""
-"Vous n'avez aucun titre sélectionné. Veuillez consulter la \n"
-" <a href=\"#/payments\"> Liste des titres émis</a> pour effectuer une "
-"sélection."
+"Vous n'avez aucun certificat d'immatriculation sélectionné. Veuillez "
+"consulter la \n"
+" <a href=\"#/payments\"> Liste des certificats d'immatriculation émis</a> "
+"pour effectuer une sélection."
 
 #: app/scripts/directives/nxgAlternateAddress/nxgAlternateAddress.html
 msgid "You may select an already approved address on file with NextGear."
@@ -3431,8 +3441,8 @@ msgid_plural ""
 "Your title requests have been approved. An email will be sent to you shortly "
 "with a tracking number."
 msgstr[0] ""
-"Votre demande de titre a été approuvée. Un courriel contenant un numéro de "
-"suivi vous sera envoyé sous peu."
+"Votre demande de certificat d'immatriculation a été approuvée. Un courriel "
+"contenant un numéro de suivi vous sera envoyé sous peu."
 msgstr[1] ""
 "Vos demandes de titres ont été approuvées. Un courriel contenant un numéro "
 "de suivi vous sera envoyé sous peu."
@@ -3440,12 +3450,14 @@ msgstr[1] ""
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request has been submitted."
 msgid_plural "Your title requests have been submitted."
-msgstr[0] "Votre demande de titre a été soumise."
+msgstr[0] "Votre demande de certificat d'immatriculation a été soumise."
 msgstr[1] "Vos demandes de titres ont étés soumises."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
-msgstr "Vos demandes de titre ne peuvent être traitées en ce moment."
+msgstr ""
+"Vos demandes de certificats d'immatriculation ne peuvent être traitées en ce "
+"moment."
 
 #: app/views/valuelookup.html
 msgid "Zip"
