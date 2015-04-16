@@ -993,7 +993,7 @@ msgstr "Filtrer par mode de paiement"
 
 #: app/views/auction.sellerfloorplan.html app/views/titlereleases.html
 msgid "Filter by Status"
-msgstr "Filtrer par état"
+msgstr "Filtrer par Province"
 
 #: app/views/reports.html
 msgid "Filter for VIN (optional)"
@@ -1152,8 +1152,9 @@ msgid ""
 "If you have the NextGear Capital Dealer Number or Auction Access Number, use "
 "the Dealer Number search."
 msgstr ""
-"Si vous avez le numéro de concessionnaire de NextGear Capital ou un numéro "
-"d'accès à l'encan, utilisez la recherche par numéro de concessionnaire."
+"Si vous connaissez le numéro du concessionnaire chez NextGear Capital ou "
+"encore le numéro D’Auction Access, utilisez la recherche par numéro de "
+"concessionnaire."
 
 #: app/views/checkout.html
 msgid "In the Amount of"
@@ -1743,7 +1744,7 @@ msgstr ""
 
 #: app/views/auction.dealersearch.html
 msgid "Please enter a City or select a State."
-msgstr "Veuillez entrer une ville ou sélectionner un État."
+msgstr "Veuillez entrer une ville ou sélectionner une Province."
 
 #: app/views/auction.bulkflooring.html
 msgid "Please enter a Consigner Ticket Number."
@@ -2596,7 +2597,7 @@ msgstr "Recommencer"
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "State"
-msgstr "État"
+msgstr "Province"
 
 #: app/views/auction.sellerfloorplan.html app/views/dashboard.html
 #: app/views/floorplan.html app/views/payments.html
@@ -2688,8 +2689,7 @@ msgstr ""
 #: app/views/auction.bulkflooring.html
 msgid "The actual sale date must be used when flooring a car"
 msgstr ""
-"La date de vente actuelle doit être utilisée lors du financement d'une "
-"voiture"
+"Plage des dates selon la date du financement OU de la date du déboursement."
 
 #: app/scripts/controllers/titleReleases.js
 msgid ""
@@ -2922,9 +2922,8 @@ msgid ""
 "City or\n"
 "      State."
 msgstr ""
-"Pour rechercher un concessionnaire dans la recherche de concessionnaire, "
-"veuillez utiliser une combinaison incluant le nom et la ville ou la\n"
-" province."
+"Pour rechercher par nom de concessionnaire, veuillez inclure le nom et la "
+"ville ou province."
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid ""
