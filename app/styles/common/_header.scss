@@ -37,7 +37,7 @@
   @extend %align-right;
   @include border-bottom-radius($borderRadius);
   background-color: $white;
-  //position: absolute;
+  position: absolute;
   top: -1px;
   right: 0;
   padding: 10px 20px;
