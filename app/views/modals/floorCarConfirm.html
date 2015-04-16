@@ -13,22 +13,22 @@
     <h4 translate>Buyer Information</h4>
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="span6" translate>Business Number</p>
-        <p class="span6 value">{{ formData.BusinessId.BusinessNumber }}</p>
+        <p class="col-md-6" translate>Business Number</p>
+        <p class="col-md-6 value">{{ formData.BusinessId.BusinessNumber }}</p>
       </li>
 
 
       <li class="list-table-row">
-        <p class="span6" translate>Auction Access Number(s)</p>
-        <p class="span6 value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</p>
+        <p class="col-md-6" translate>Auction Access Number(s)</p>
+        <p class="col-md-6 value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6" translate>Business Name</p>
-        <p class="span6 value">{{ formData.BusinessId.BusinessName }}</p>
+        <p class="col-md-6" translate>Business Name</p>
+        <p class="col-md-6 value">{{ formData.BusinessId.BusinessName }}</p>
       </li>
       <li class="list-table-row">
-        <p class="span6" translate>Address</p>
-        <p class="span6 value">
+        <p class="col-md-6" translate>Address</p>
+        <p class="col-md-6 value">
           {{ formData.BusinessId.Address }}<br />
           {{ formData.BusinessId.City }}, {{ formData.BusinessId.State }} {{ formData.BusinessId.PostalCode }}
         </p>

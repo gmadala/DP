@@ -3,7 +3,7 @@
 // ========
 
 .modal-backdrop {
-  @include opacity(50);
+  @include opacity(.50);
   z-index: 1050;
 
   // Modal to go over all other modals
@@ -16,13 +16,17 @@
 .modal {
   @extend %small;
   @include border-radius(0);
+  display: block;
   width: 450px;
-  height: auto;
-  max-height: 90%;
+  height: 0;
+  //height:100%;
+ // max-height: 50%;
   background: #F2F2F2;
-  overflow-y: auto;
+  overflow: visible;
   border: 0;
-  margin-left: -200px;
+  margin-left: 30%;
+  margin-top:150px;
+  z-index:2000;
 
   form {
     margin: 0;
@@ -41,17 +45,17 @@
   // modal widths
   &.modal-medium {
     width: 500px;
-    margin-left: -250px;
+    margin-left: 30%;
   }
 
   &.modal-large {
     width: 700px;
-    margin-left: -350px;
+    margin-left: 25%;
   }
 
   &.modal-x-large {
     width: 800px;
-    margin-left: -400px;
+    margin-left: 20%;
   }
 }
 
@@ -71,6 +75,8 @@
   max-height: none;
   border: 1px solid $border;
   padding: 20px;
+  overflow:visible;
+  background: #F2F2F2;
 
   &.to-edge {
     padding: 0;
@@ -132,6 +138,8 @@
   @include box-shadow(none);
   padding: 10px;
   border: 0;
+  background: #F2F2F2;
+  margin-top:0;
 
   .btn {
     margin: 5px 10px;

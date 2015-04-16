@@ -29,17 +29,17 @@
   <ul class="list-table aside">
     <li class="list-table-row"></li>
     <li class="list-table-row" ng-repeat="item in payment.PaymentItems">
-      <p class="span6">{{ item.ItemName }}</p>
-      <p class="span6 value numeric">{{ item.ItemAmount | currency }}</p>
+      <p class="col-md-6">{{ item.ItemName }}</p>
+      <p class="col-md-6 value numeric">{{ item.ItemAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row">
-      <p class="span6" translate>Total</p>
-      <p class="span6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
+      <p class="col-md-6" translate>Total</p>
+      <p class="col-md-6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Receipt Total</p>
-      <p class="span6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
+      <p class="col-md-6" translate>Receipt Total</p>
+      <p class="col-md-6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
     </li>
   </ul>
 </div>
