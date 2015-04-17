@@ -1051,7 +1051,7 @@ msgstr "Financer un véhicule"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Floor a Vehicle"
-msgstr "Appliquer un véhicule sur le plan de financement"
+msgstr "Financer un véhicule"
 
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 #: app/views/payments.html app/views/titlereleasecheckout.html
@@ -1133,7 +1133,7 @@ msgstr "Rapports d'historique"
 
 #: app/views/auction.sellerfloorplan.html
 msgid "I Have the Title"
-msgstr "Le certificat d'immatriculation est en ma possession"
+msgstr "L’enregistrement est en ma possession"
 
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
@@ -2299,7 +2299,7 @@ msgstr "Demander un paiement"
 
 #: app/views/titlereleases.html
 msgid "Request Title"
-msgstr "Demander un certification d'immatriculation"
+msgstr "Demander un enregistrement"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Request Unapplied Funds Payout"
