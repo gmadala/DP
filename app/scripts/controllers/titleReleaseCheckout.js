@@ -18,7 +18,9 @@ angular.module('nextgearWebApp')
     $scope.addresses = Addresses.getTitleAddresses();
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
-    $scope.eligibility = TitleReleases.getTitleReleaseEligibility();
+    TitleReleases.getTitleReleaseEligibility().then(function (data) {
+      $scope.eligibility = data;
+    });
     $scope.titleLabel = gettextCatalog.getPlural($scope.titleQueue.contents.length, 'Title Requested', 'Titles Requested');
 
     $scope.onConfirmRequest = function() {

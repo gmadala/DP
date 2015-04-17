@@ -17,11 +17,12 @@ angular.module('nextgearWebApp')
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
-        var regex = /[^\d\.]/g;
+        var VALID_NUMBER = /^[0-9]{1,3}(?:,?[0-9]{3})*$/g;
+        var NON_DIGIT = /[^\d\.]/g;
 
         var parser = function(value) {
-          if (typeof value === 'string') {
-            var newVal = value.replace(regex, '');
+          if (typeof value === 'string' && VALID_NUMBER.test(value)) {
+            var newVal = value.replace(NON_DIGIT, '');
             var valid = newVal.length <= attrs.nxgValidateInt;
 
             ctrl.$setValidity('maxlength', valid);

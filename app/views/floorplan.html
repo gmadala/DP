@@ -64,7 +64,7 @@
             <th translate>Title</th>
           </thead>
 
-          <tr ng-repeat="item in floorplanData.results | orderBy:sortField.item:sortDescending.item">
+          <tr ng-repeat="item in floorplanData.results">
             <td>
               <p class="lockup-major"> {{ item.FlooringDate | moment }} </p>
               <p class="lockup-minor" translate>{{ item.DaysOnFloorplan }} days</p>

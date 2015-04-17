@@ -136,10 +136,11 @@ describe('Directive: nxgDateField', function () {
   describe('beforeShowDay support', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
-      scope = $rootScope;
+      scope = $rootScope.$new();
       scope.bar = new Date();
       scope.onDayRender = jasmine.createSpy('onDayRender');
-      element = angular.element('<form name="form">' +
+      element = angular.element(
+        '<form name="form">' +
         '<input name="dateInput" id="foo" ng-model="bar" nxg-date-field before-show-day="onDayRender(date)" />' +
         '</form>');
       element = $compile(element)(scope);
@@ -156,7 +157,7 @@ describe('Directive: nxgDateField', function () {
   describe('allow past and future date restriction support', function(){
     var dateAllow = function(pastOrFuture) {
       inject(function ($rootScope, $compile) {
-        scope = $rootScope;
+        scope = $rootScope.$new();
         scope.bar = new Date();
         scope.onDayRender = jasmine.createSpy('onDayRender');
         element = angular.element('<form name="form">' +

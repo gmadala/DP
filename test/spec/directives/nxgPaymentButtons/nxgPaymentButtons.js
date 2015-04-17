@@ -39,7 +39,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should have a button that toggles fee presence in the payment queue', function() {
@@ -81,7 +81,7 @@ describe('Directive: nxgPaymentButtons', function () {
         $compile(element)(scope);
         $rootScope.$digest();
 
-        iScope = element.scope();
+        iScope = element.isolateScope();
       }));
 
       it('should have a cancel scheduled fee button that invokes the cancel scheduled fee modal', function() {
@@ -165,7 +165,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       $compile(element)(scope);
       $rootScope.$digest();
-      var iScope = element.scope();
+      var iScope = element.isolateScope();
 
       iScope.cancelScheduledPayment();
 
@@ -184,7 +184,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       $compile(element)(scope);
       $rootScope.$digest();
-      var iScope = element.scope();
+      var iScope = element.isolateScope();
 
       iScope.cancelScheduledPayment();
       expect(iScope.onCancelScheduledPayment).toBe(null);
@@ -223,7 +223,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should have a button that toggles payment presence in the payment queue', function() {
@@ -277,7 +277,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should have a cancel scheduled payment button that invokes the cancel scheduled payment modal', function() {
@@ -318,7 +318,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope()
+      iScope = element.isolateScope();
 
     }));
 
@@ -390,7 +390,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should have a button that toggles payoff presence in the payment queue', function() {
@@ -444,7 +444,7 @@ describe('Directive: nxgPaymentButtons', function () {
       $compile(element)(scope);
       $rootScope.$digest();
 
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should have a cancel scheduled payoff button that invokes the cancel scheduled payment modal', function() {
@@ -500,7 +500,7 @@ describe('Directive: nxgPaymentButtons', function () {
       scope.inQueue = false;
       $compile(element)(scope);
       $rootScope.$digest();
-      iScope = element.scope();
+      iScope = element.isolateScope();
     }));
 
     it('should auto-cancel the previously scheduled payment when a payoff is added', function() {

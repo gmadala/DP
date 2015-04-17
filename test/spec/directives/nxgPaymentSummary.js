@@ -8,7 +8,7 @@ describe('Directive: nxgPaymentSummary', function () {
   it('should create an isolate scope', inject(function ($rootScope, $compile) {
     element = angular.element('<section nxg-payment-summary></section>');
     element = $compile(element)($rootScope);
-    expect(element.scope()).not.toBe($rootScope);
+    expect(element.isolateScope()).not.toEqual($rootScope);
   }));
 
   describe('controller', function () {

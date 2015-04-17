@@ -7,7 +7,7 @@ describe('Controller: AnalyticsCtrl', function () {
 
   var AnalyticsCtrl,
     scope, httpBackend,
-    analyticsMock, q,
+    analyticsMock,
     $dialog;
 
   // Initialize the controller and a mock scope
@@ -19,12 +19,15 @@ describe('Controller: AnalyticsCtrl', function () {
     scope = $rootScope.$new();
 
     analyticsMock = {
-      create: function () {
-        return $q.resolved(createResult);
+      fetchBusinessSummary : function() {
+        return $q.when({});
       },
-      fetchBusinessSummary : function() {},
-      fetchAnalytics: function() {},
-      fetchMovers: function() {}
+      fetchAnalytics: function() {
+        return $q.when({});
+      },
+      fetchMovers: function() {
+        return $q.when({});
+      }
     };
 
     AnalyticsCtrl = $controller('AnalyticsCtrl', {

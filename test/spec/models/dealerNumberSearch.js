@@ -86,7 +86,7 @@ describe('Model: DealerNumberSearch', function() {
           out = result;
         });
       httpBackend.flush();
-      expect(out).toBe(businessSearchResults.SearchResults[0]);
+      expect(out).toEqual(businessSearchResults.SearchResults[0]);
     });
   });
 
@@ -134,7 +134,7 @@ describe('Model: DealerNumberSearch', function() {
           out = result;
         });
       httpBackend.flush();
-      expect(out).toBe(businessSearchResults.SearchResults[0]);
+      expect(out).toEqual(businessSearchResults.SearchResults[0]);
     });
 
     it('should return null if there were no SearchResults returned', function() {

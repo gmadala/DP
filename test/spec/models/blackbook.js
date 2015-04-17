@@ -265,7 +265,7 @@ describe('Service: Blackbook', function () {
         });
 
         Blackbook.lookupByVin('someVin', 4567, true).then(function(result) {
-          expect(result[0]).toBe(response);
+          expect(result[0]).toEqual(response);
         });
         $httpBackend.flush();
 
@@ -300,8 +300,8 @@ describe('Service: Blackbook', function () {
 
         Blackbook.lookupByVin('someVin', 4567).then(function(result) {
           expect(result.length).toBe(2);
-          expect(result[0]).toBe(responseWithNulls);
-          expect(result[1]).toBe(response);
+          expect(result[0]).toEqual(responseWithNulls);
+          expect(result[1]).toEqual(response);
         });
 
         $httpBackend.flush();
