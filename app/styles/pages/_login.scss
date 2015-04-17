@@ -7,6 +7,17 @@
     padding: 10px 20px 0;
   }
 
+  .col-md-4 {
+    width:33.33333%;
+    margin:0;
+
+  }
+  .col-md-offset-4
+  {
+    margin-left:33.33333%;
+  }
+
+
   .error-table {
     padding: 5px;
     background-color: $wellBackground;
