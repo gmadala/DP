@@ -48,10 +48,18 @@ describe('Controller: ValueLookupCtrl', function () {
     };
 
     fillMmr = function() {
-      scope.manualLookup.mmr.years.selected = 'aYear';
-      scope.manualLookup.mmr.makes.selected = 'aMake';
-      scope.manualLookup.mmr.models.selected = 'aModel';
-      scope.manualLookup.mmr.styles.selected = 'aStyle';
+      scope.manualLookup.mmr.years.selected = {
+        Id: 'aYear'
+      };
+      scope.manualLookup.mmr.makes.selected = {
+        Id: 'aMake'
+      };
+      scope.manualLookup.mmr.models.selected = {
+        Id: 'aModel'
+      };
+      scope.manualLookup.mmr.styles.selected = {
+        Id: 'aStyle'
+      };
       scope.manualLookup.mmr.mileage = 789;
     };
 
@@ -453,7 +461,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.vinLookup.lookup();
         expect(blackbook.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888, true);
         $httpBackend.flush();
-        expect(scope.results.blackbook.data).toBe(bbResult.Data[0]);
+        expect(scope.results.blackbook.data).toEqual(bbResult.Data[0]);
         expect(scope.results.blackbook.noMatch).toBe(false);
         expect(scope.results.blackbook.multiple).toBeFalsy();
         expect(scope.results.vin).toBe('someVin1234');
@@ -493,7 +501,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.vinLookup.lookup();
         expect(mmr.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888);
         $httpBackend.flush();
-        expect(scope.results.mmr.data).toBe(mmrResult.Data[0]);
+        expect(scope.results.mmr.data).toEqual(mmrResult.Data[0]);
         expect(scope.results.mmr.noMatch).toBe(false);
         expect(scope.results.mmr.multiple).toBeFalsy();
         expect(scope.results.vin).toBe('someVin1234');
@@ -627,10 +635,10 @@ describe('Controller: ValueLookupCtrl', function () {
         $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=Toyota&model=Camry&year=2014').respond(mock.bb.styles);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Camry';
-        scope.manualLookup.blackbook.years.selected = 2014;
+        scope.manualLookup.blackbook.years.selected = '2014';
         scope.manualLookup.blackbook.styles.fill();
         $httpBackend.flush();
-        expect(blackbook.getStyles).toHaveBeenCalledWith('Toyota', 'Camry', 2014);
+        expect(blackbook.getStyles).toHaveBeenCalledWith('Toyota', 'Camry', '2014');
         expect(scope.manualLookup.blackbook.styles.list.length).toBe(2);
       });
 
@@ -683,7 +691,7 @@ describe('Controller: ValueLookupCtrl', function () {
         mock.bb.styles.Data[0].Results.splice(1,1);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Corolla';
-        scope.manualLookup.blackbook.years.selected = 2014;
+        scope.manualLookup.blackbook.years.selected = '2014';
         scope.manualLookup.blackbook.styles.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.blackbook.styles.selected).toBe(mock.bb.styles.Data[0].Results[0]);
@@ -719,7 +727,7 @@ describe('Controller: ValueLookupCtrl', function () {
           scope.manualLookup.blackbook.lookup();
           expect(blackbook.lookupByOptions).toHaveBeenCalled();
           $httpBackend.flush();
-          expect(scope.results.blackbook.data).toBe(bbResult.Data[0]);
+          expect(scope.results.blackbook.data).toEqual(bbResult.Data[0]);
           expect(scope.results.blackbook.noMatch).toBe(false);
           expect(scope.results.blackbook.multiple).toBeFalsy();
           expect(scope.results.vin).toBe(null);
@@ -803,7 +811,7 @@ describe('Controller: ValueLookupCtrl', function () {
         spyOn(scope.manualLookup.mmr.models, 'fill').andReturn({});
         scope.manualLookup.mmr.makes.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.mmr.makes.selected).toBe(mock.mmr.makes.Data[0]);
+        expect(scope.manualLookup.mmr.makes.selected).toEqual(mock.mmr.makes.Data[0]);
       });
 
       it('should auto-select the first model if only one is returned', function() {
@@ -815,7 +823,7 @@ describe('Controller: ValueLookupCtrl', function () {
         spyOn(scope.manualLookup.mmr.styles, 'fill').andReturn({});
         scope.manualLookup.mmr.models.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.mmr.models.selected).toBe(mock.mmr.models.Data[0]);
+        expect(scope.manualLookup.mmr.models.selected).toEqual(mock.mmr.models.Data[0]);
       });
 
       it('should auto-select the first style if only one is returned', function() {
@@ -827,13 +835,13 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.manualLookup.mmr.models.selected = mock.mmr.models.Data[0];
         scope.manualLookup.mmr.styles.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.mmr.styles.selected).toBe(mock.mmr.styles.Data[0]);
+        expect(scope.manualLookup.mmr.styles.selected).toEqual(mock.mmr.styles.Data[0]);
       });
 
       describe('lookup', function() {
         beforeEach(function() {
           spyOn(mmr, 'lookupByOptions').andCallThrough();
-          $httpBackend.whenGET('/mmr/getVehicleValueByOptions?mileage=789').respond(mmrResult);
+          $httpBackend.whenGET('/mmr/getVehicleValueByOptions?bodyId=aStyle&makeId=aMake&mileage=789&modelId=aModel&yearId=aYear').respond(mmrResult);
           run();
           fillMmr();
         });
@@ -860,7 +868,7 @@ describe('Controller: ValueLookupCtrl', function () {
           scope.manualLookup.mmr.lookup();
           expect(mmr.lookupByOptions).toHaveBeenCalled();
           $httpBackend.flush();
-          expect(scope.results.mmr.data).toBe(mmrResult.Data[0]);
+          expect(scope.results.mmr.data).toEqual(mmrResult.Data[0]);
           expect(scope.results.mmr.noMatch).toBe(false);
           expect(scope.results.mmr.multiple).toBeFalsy();
           expect(scope.results.mileage).toBe(789);
@@ -944,7 +952,7 @@ describe('Controller: ValueLookupCtrl', function () {
         spyOn(scope.manualLookup.kbb.models, 'fill').andReturn({});
         scope.manualLookup.kbb.makes.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.kbb.makes.selected).toBe(mock.kbb.makes.Data[0]);
+        expect(scope.manualLookup.kbb.makes.selected).toEqual(mock.kbb.makes.Data[0]);
       });
 
       it('should auto-select the first model if only one is returned', function() {
@@ -956,7 +964,7 @@ describe('Controller: ValueLookupCtrl', function () {
         spyOn(scope.manualLookup.kbb.styles, 'fill').andReturn({});
         scope.manualLookup.kbb.models.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.kbb.models.selected).toBe(mock.kbb.models.Data[0]);
+        expect(scope.manualLookup.kbb.models.selected).toEqual(mock.kbb.models.Data[0]);
       });
 
       it('should auto-select the first style if only one is returned', function() {
@@ -968,7 +976,7 @@ describe('Controller: ValueLookupCtrl', function () {
         scope.manualLookup.kbb.models.selected = mock.kbb.models.Data[0];
         scope.manualLookup.kbb.styles.fill();
         $httpBackend.flush();
-        expect(scope.manualLookup.kbb.styles.selected).toBe(mock.kbb.styles.Data[0]);
+        expect(scope.manualLookup.kbb.styles.selected).toEqual(mock.kbb.styles.Data[0]);
       });
 
       describe('lookup', function() {

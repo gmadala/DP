@@ -73,11 +73,11 @@ describe('Directive: nxgAlternateAddress', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    dScope = element.scope();
+    dScope = element.isolateScope();
   }));
 
   it('should set the title address and default address', function() {
-    expect(dScope.addrList).toBe(addrResponseMock);
+    expect(dScope.addrList).toEqual(addrResponseMock);
     expect(dScope.addrLoaded).toBe(true);
     expect(dScope.defaultAddress).toBe(defaultAddrResponseMock);
     expect(dScope.showSelectMenu).toBe(false);
@@ -123,7 +123,7 @@ describe('Directive: nxgAlternateAddress', function () {
     element = compile(element)(scope);
     rootScope.$digest();
 
-    dScope = element.scope();
+    dScope = element.isolateScope();
 
     expect(dScope.showSelectMenu).toBe(true);
   });

@@ -38,7 +38,7 @@ describe('Directive: nxgValidateInt', function () {
   it('should set the input to invalid if the length exceeds the max', function() {
     form.input.$setViewValue('123,123,123');
     expect(form.input.$error.maxlength).toBe(true);
-  })
+  });
 
   it('should defer to earlier, and likely more sensitive, validators', function () {
     form.input.$setViewValue('1pq3');

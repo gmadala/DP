@@ -4,7 +4,10 @@ angular.module('nextgearWebApp')
   .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api, $state) {
 
     segmentio.track(metric.VIEW_DASHBOARD);
-    $scope.dashboardData = Dashboard.fetchAuctionDashboard();
+    $scope.dashboardData = {};
+    Dashboard.fetchAuctionDashboard().then(function(data) {
+      $scope.dashboardData = data;
+    });
 
     $scope.selectedFloorplanChart = 'year';
 
@@ -24,7 +27,9 @@ angular.module('nextgearWebApp')
       default:
         throw 'Unexpected value for filtering floorplan chart!';
       }
-      $scope.chartData = Dashboard.fetchFloorplanChartData(range);
+      Dashboard.fetchFloorplanChartData(range).then(function (data) {
+        $scope.chartData = data;
+      });
     });
 
     $scope.changeFloorplanChart = function(mode) {

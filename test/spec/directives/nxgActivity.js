@@ -23,7 +23,7 @@ describe('Directive: nxgActivity', function () {
   }));
 
   it('should be hidden by default', function () {
-    expect(element.css('display')).toBe('none');
+    expect(element.hasClass('ng-hide')).toBeTruthy();
   });
 
   it('should display after delay while there are in-progress http requests, and it has not been suppressed', function () {
@@ -31,15 +31,15 @@ describe('Directive: nxgActivity', function () {
 
     http.get('/foo');
     scope.$apply();
-    expect(element.css('display')).toBe('none');
+    expect(element.hasClass('ng-hide')).toBeTruthy();
 
     timeout.flush();
     scope.$apply();
-    expect(element.css('display')).not.toBe('none');
+    expect(element.hasClass('ng-hide')).toBeFalsy();
 
     httpBackend.flush();
     scope.$apply();
-    expect(element.css('display')).toBe('none');
+    expect(element.hasClass('ng-hide')).toBeTruthy();
   });
 
   it('should NOT display while there are in-progress http requests, and it has been suppressed', function () {
@@ -48,16 +48,16 @@ describe('Directive: nxgActivity', function () {
 
     http.get('/foo');
     scope.$apply();
-    expect(element.css('display')).toBe('none');
+    expect(element.hasClass('ng-hide')).toBeTruthy();
 
     status.show();
     scope.$apply();
     timeout.flush();
-    expect(element.css('display')).not.toBe('none');
+    expect(element.hasClass('ng-hide')).toBeFalsy();
 
     httpBackend.flush();
     scope.$apply();
-    expect(element.css('display')).toBe('none');
+    expect(element.hasClass('ng-hide')).toBeTruthy();
   });
 
 });

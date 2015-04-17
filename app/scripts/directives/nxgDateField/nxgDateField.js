@@ -92,6 +92,13 @@ angular.module('nextgearWebApp')
                 this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
               }
 
+              // adding this validation here to update the past or future $error after the tz correction.
+              if (attrs.dateAllow === 'past') {
+                formCtrl[inputName].$setValidity('past', scope.notFutureDates(this.value));
+              } else if (attrs.dateAllow === 'future') {
+                formCtrl[inputName].$setValidity('future', scope.notPastDates(this.value));
+              }
+
               if (errs && errs.length > 0) {
                 angular.forEach(errs, function(err){
                   //for invalid format dates, parse with the moment library
