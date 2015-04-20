@@ -1,5 +1,19 @@
 body.lang_fr_CA {
 
+  /* Auction Dashboard */
+  #AuctionDashboardPage {
+    // handle long labels for 'title'
+    // TODO - it may be appropriate to have most wells to stop using fixed height and instead use min-height
+    // and auto height. This should be considered with respective to a responsive design
+    .auction-well {
+      min-height: 270px;
+      height: auto;
+      .dash-minor {
+        font-size: 10px;
+      }
+    }
+  }
+
   /* Dashboard */
   #DashboardPage {
     .payment-summary {
