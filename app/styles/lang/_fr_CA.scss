@@ -293,12 +293,15 @@ body.lang_fr_CA {
       height: 62px;
     }
     .nav-primary li {
-      max-width: 19%;
+      max-width: 30%;
       text-align: center;
 
+      &.link_auction_dashboard {
+        width: 112px;
+      }
+
       &.link_auction_sellerfloorplan {
-        width: 212px;
-        max-width: none;
+        width: 300px;
       }
 
       &.link_auction_dealersearch {
@@ -306,7 +309,7 @@ body.lang_fr_CA {
       }
 
       &.link_auction_bulkflooring {
-        width: 175px;
+        width: 155px;
       }
 
       &.link_auction_reports {

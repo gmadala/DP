@@ -2485,7 +2485,7 @@ msgstr "Adresse du vendeur"
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Seller Floor Plan Search"
-msgstr "Recherche dans le plan de financement du vendeur"
+msgstr "Recherche des achats au plan de financement du vendeur"
 
 #: app/views/floorcar.html app/views/modals/floorCarConfirm.html
 msgid "Send Payment To"
