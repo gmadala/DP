@@ -2878,14 +2878,14 @@ msgstr "Confirmation de l’émission du certificat d'immatriculation"
 msgid "Title Request"
 msgid_plural "Title Requests"
 msgstr[0] "Demande d'un certificat d'immatriculation"
-msgstr[1] "Demandes de titre"
+msgstr[1] "Demande de certificats d’immatriculation"
 
 #: app/scripts/controllers/titleReleaseCheckout.js
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Title Requested"
 msgid_plural "Titles Requested"
-msgstr[0] "Certification d'immatriculation demandé"
-msgstr[1] "Titres demandés"
+msgstr[0] "Enregistrement demandé"
+msgstr[1] "Enregistrements demandés"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Title Settings"
@@ -3448,14 +3448,14 @@ msgstr[0] ""
 "Votre demande de certificat d'immatriculation a été approuvée. Un courriel "
 "contenant un numéro de suivi vous sera envoyé sous peu."
 msgstr[1] ""
-"Vos demandes de titres ont été approuvées. Un courriel contenant un numéro "
-"de suivi vous sera envoyé sous peu."
+"Vos demandes de certificats d’immatriculation ont été approuvées. Un courriel "
+"contenant un numéro de suivi vous sera envoyé sous peu."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request has been submitted."
 msgid_plural "Your title requests have been submitted."
 msgstr[0] "Votre demande de certificat d'immatriculation a été soumise."
-msgstr[1] "Vos demandes de titres ont étés soumises."
+msgstr[1] "Vos demandes de certificats d’immatriculation ont été soumises."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request(s) can not be processed at this time."
