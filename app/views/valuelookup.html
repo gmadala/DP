@@ -80,8 +80,8 @@
       <div class="well-item">
         <form class="value-form" name="manualLookupForm" novalidate>
           <div class="form-block" ng-switch="lookupValues.id">
-            <div class="row">
-              <div class="style-select col-md-10" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
+            <div class="row leftMargin">
+              <div class="style-select col-md-10 zeroPadding" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
                 <select id="lookupValues" name="lookupValues" ng-model="lookupValues"
                         ng-options="lookupValues.name for lookupValues in manualLookupValues"
                         required>

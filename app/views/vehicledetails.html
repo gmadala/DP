@@ -7,7 +7,7 @@
     <div class="flooring-info well">
       <h2 class="well-title"><span translate>Flooring Information</span> <span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h2>
       <div class="row col-bordered">
-        <div class="span5 first">
+        <div class="col-md-5 first">
           <ul class="list-table">
             <li class="list-table-row">
               <p class="col-md-6" translate>Total Days Floored</p>
@@ -58,16 +58,16 @@
           <ul class="list-table">
             <li class="list-table-row">
               <p class="col-md-5" translate>Line of Credit</p>
-              <p class="col-md-7 value">{{ flooringInfo.LineOfCredit }}</p>
+              <p class="col-md-7 value zeroLeftPadding">{{ flooringInfo.LineOfCredit }}</p>
             </li>
             <li class="list-table-row">
               <p class="col-md-5" translate>Term Plan Name</p>
-              <p class="col-md-7 value">{{ flooringInfo.TermPlanName }}</p>
+              <p class="col-md-7 value zeroLeftPadding">{{ flooringInfo.TermPlanName }}</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
               <p class="col-md-5" translate>Product Type</p>
-              <p class="col-md-7 value">{{ flooringInfo.ProductType }}</p>
+              <p class="col-md-7 value zeroLeftPadding">{{ flooringInfo.ProductType }}</p>
             </li>
             <li class="list-table-row">
               <p class="col-md-5" translate>Seller</p>
@@ -85,7 +85,7 @@
             </li>
             <li class="list-table-row">
               <p class="col-md-5" translate>Inventory Location</p>
-              <p class="col-md-7 value" ng-hide="flooringInfo.showEditInventoryLocation">
+              <p class="col-md-7 value zeroLeftPadding" ng-hide="flooringInfo.showEditInventoryLocation">
                 <span nxg-address="flooringInfo.inventoryAddress"></span>
                 <span ng-show="flooringInfo.showChangeLink"><br/><br/>
                   <a id="changeInvLocation" class="value-note" href="" ng-click="flooringInfo.showInventorySelect()" translate>Change Inventory Location</a>
@@ -320,7 +320,7 @@
     </div>
 
     <!-- Floor Plan Value Estimates -->
-    <div class="well row">
+    <div class="well row topMargin">
       <h2 class="well-title" translate>Floor Plan Value Estimates <span class="well-sub-title">NextGear &amp; MMR Valuation</span></h2>
       <div class="row well-item" ng-hide="isUnitedStates">
         <div class="">

@@ -231,7 +231,8 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
-    padding: 4px 15% 4px 9px;
+    //padding: 4px 15% 4px 9px;
+    padding: 5px 15% 5px 15px;
     border: 0;
     margin: 0;
 
@@ -504,6 +505,10 @@ input[type="radio"] {
   }
 }
 
+.smallInput{
+  width:45%;
+}
+
   /*
    * BUTTON INPUT
    * Button specifically designed to be paired with an input,
@@ -511,7 +516,7 @@ input[type="radio"] {
    */
   .btn-input {
     @include border-left-radius(0);
-    width: 15%;
+    width: 10%;
     background: $accent;
     display: block;
     float: left;

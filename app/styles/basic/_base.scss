@@ -71,19 +71,52 @@ body {
   }
 }
 
+
+
 // so that our feedback tab displays beneath the modal backdrop.
 #uvTab, #ki_container{
   z-index: 1000 !important;
 }
 
 //Bootstrap 3 override for margins between columns
+.RecievableDetailMargin
+{
+  margin-left:-35px;
+}
+.zeroPadding
+{
+  padding:0;
+}
+.zeroLeftPadding
+{
+  padding-left:0;
+}
+.padding-left
+{
+  padding-left:15px;
+}
+.topMargin
+{
+  margin-top:10px;
+}
+.containerLeftMargin{
+  margin-left:15px;
+}
+.leftMargin {
+  margin-left:5px;
+}
+.leftMarginMedium
+{
+  margin-left:10px;
+}
+.leftMarginLarge {
+  margin-left:15px;
+}
 .col-md-3 {
   width:23%;
-  margin:0 1%;
 }
 .col-md-4 {
   width: 31%;
-  margin: 0 1%;
 }
 
 .col-md-6 {

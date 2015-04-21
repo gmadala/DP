@@ -3,7 +3,7 @@
 .col-bordered {
   padding: 20px 0;
 
-  & > [class*="span"] {
+  & > [class*="col"] {
     border-right: 1px solid #BBBBBB;
 
     &:last-child {
