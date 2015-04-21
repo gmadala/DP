@@ -51,18 +51,18 @@ describe('Model: Analytics', function () {
     it('should set calculated values to 0 if NaN or Infinity', function() {
 
       response.Data.TotalApprovedPurchasePrice = 0; //will make response.DerivedCapitalBook infinity
-      response.Data.TotalApprovedBlackBookValue = 'string' //will make response.DerivedAmountOutstanding NaN
-      response.Data.TotalPendingPurchasePrice = 'string' //will make response.DerivedPendingBook NaN
+      response.Data.TotalApprovedBlackBookValue = 'string'; //will make response.DerivedAmountOutstanding NaN
+      response.Data.TotalPendingPurchasePrice = 'string'; //will make response.DerivedPendingBook NaN
 
       var res;
       analytics.fetchBusinessSummary().then(function(response) {
         res = response;
+      }).then(function () {
+        expect(res.DerivedCapitalBook).toEqual(0);
+        expect(res.DerivedAmountOutstanding).toEqual(0);
+        expect(res.DerivedPendingBook).toEqual(0);
       });
       httpBackend.flush();
-
-      expect(response.Data.DerivedCapitalBook).toEqual(0);
-      expect(response.Data.DerivedAmountOutstanding).toEqual(0);
-      expect(response.Data.DerivedPendingBook).toEqual(0);
     });
   });
 

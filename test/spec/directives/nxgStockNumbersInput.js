@@ -15,7 +15,7 @@ describe('Directive: nxgStockNumbersInput', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    dScope = element.scope();
+    dScope = element.isolateScope();
   }));
 
   it('should have a data object', function() {

@@ -34,7 +34,9 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
         };
       },
       clearQueue: angular.noop,
-      getTitleReleaseEligibility: angular.noop
+      getTitleReleaseEligibility: function () {
+        return $q.when({});
+      }
     };
     AddressesMock = {
       getTitleAddresses: function(){
@@ -94,7 +96,7 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       queue.push({AmountFinanced: 20, FloorplanId: 20});
 
       expect(scope.titleQueue.sum()).toBe(45);
-    })
+    });
 
     it('should have removeFromQueue method point to TitleReleases method', function() {
       expect(scope.titleQueue.removeFromQueue).toBe(titleReleasesMock.removeFromQueue);

@@ -13,8 +13,8 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     $rootScope.bar = 2;
     element = angular.element('<div nxg-unapplied-funds-widget balance="foo" available="bar"></div>');
     element = $compile(element)($rootScope);
-    isolateScope = element.scope();
     $rootScope.$digest();
+    isolateScope = element.isolateScope();
   }));
 
   it('should create a new scope', inject(function ($rootScope) {
