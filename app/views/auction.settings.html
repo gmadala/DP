@@ -61,7 +61,7 @@
           <!-- Question Select -->
           <div class="row">
             <label class="col-md-4" translate>Security Question {{$index + 1}}</label>
-            <div class="col-md-8 static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
+            <div class="col-md-8 static zeroLeftPadding" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
 
           <!-- Answer -->
           <div class="row" ng-show="profile.editable">
-            <label class="col-md-4 " for="secAnswer" translate>Answer</label>
+            <label class="col-md-4" for="secAnswer" translate>Answer</label>
             <div class="col-md-8 zeroLeftPadding">
               <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
               <label class="text-error" ng-show="question.$error.required" translate>
@@ -146,7 +146,7 @@
 
         <div class="row">
           <label class="col-md-5" for="enhanced" translate>Enhanced Registration Enabled?</label>
-          <div class="col-md-7">
+          <div class="col-md-7 zeroLeftPadding">
             <!-- Show "Yes" if enhanced registration is enabled.
             If it is not enabled, show nothing. -->
             <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
@@ -193,7 +193,7 @@
 
 <div class="row">
   <!-- TITLE SETTINGS -->
-  <section class="col-md-6 well settings-well" ng-controller="AccountManagementCtrl">
+  <section class="col-md-6 well settings-well topMargin" ng-controller="AccountManagementCtrl">
     <h2 class="well-title"><span translate>Title Settings</span>
       <div class="well-sub-title">
         <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
@@ -272,7 +272,7 @@
   </section>
 
   <!-- NOTIFICATIONS -->
-  <section class="col-md-6 well settings-well leftMarginMedium" ng-controller="ProfileSettingsCtrl">
+  <section class="col-md-6 well settings-well leftMarginMedium topMargin" ng-controller="ProfileSettingsCtrl">
     <h2 class="well-title"><span translate>Notifications</span>
       <div class="well-sub-title">
         <button ng-hide="notifications.editable" class="btn-unstyle" ng-click="notifications.edit()" translate>Edit Settings</button>
@@ -288,7 +288,7 @@
           <label class="col-md-7" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
         </div>
 
-        <ul>
+        <ul class="zeroLeftPadding">
           <li class="row" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
             <div class="col-md-5">{{ n.NotificationName }}</div>
 
