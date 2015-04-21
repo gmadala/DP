@@ -136,7 +136,7 @@
         <div class="row" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
           <label class="col-md-5"><span translate>Additional Addresses</span>:</label>
           <div class="col-md-7 static" ng-hide="title.editable">
-            <ul>
+            <ul class="zeroLeftPadding">
               <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
                 <div nxg-address="addr"></div>
               </li>
