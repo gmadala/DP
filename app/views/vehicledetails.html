@@ -311,7 +311,7 @@
               <p class="span6 value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" ng-show="titleInfo.dealerCanRequestTitles()"><button class="btn-link" href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()" translate>Request the Title</button></p>
+              <p class="span12" ng-show="titleInfo.dealerCanRequestTitles()"><button class="btn-link" href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()" translate>Request the Title</button></p>
             </li>
           </ul>
         </div>
