@@ -60,7 +60,7 @@
           <!-- Question Select -->
           <div class="row">
             <label class="col-md-4" translate>Security Question {{$index + 1}}</label>
-            <div class="col-md-8 static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
+            <div class="col-md-8 static zeroLeftPadding" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
           <!-- Question Select -->
           <div class="row">
             <label class="col-md-4" translate>Security Question {{$index + 1}}</label>
-            <div class="col-md-8 style-select zeroPadding">
+            <div class="col-md-8 style-select zeroLeftPadding">
               <select ng-model="question.SecurityQuestionId"
                       ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
                       tooltip="{{ question.QuestionText }}"
@@ -81,7 +81,7 @@
           <!-- Answer -->
           <div class="row" ng-show="profile.editable">
             <label class="col-md-4" for="secAnswer" translate>Answer</label>
-            <div class="col-md-8 zeroPadding">
+            <div class="col-md-8 zeroLeftPadding">
               <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
 
               <label class="text-error" ng-show="question.$error.required" translate>
@@ -93,10 +93,9 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <label class="col-md-4" for="email" translate>Email</label>
-          <div class="col-md-8 zeroPadding" nxg-input model="profile.data.email" editable="profile.editable">
+          <div class="col-md-8 zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
             <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
             <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
               Please enter a valid email address.
@@ -106,7 +105,7 @@
 
         <div class="row">
           <label class="col-md-4" for="phone" translate>Phone</label>
-          <div class="col-md-8 zeroPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
+          <div class="col-md-8 zeroLeftPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
             <input type="tel"
                    name="phone"
                    ng-model="profile.dirtyData.phone"
@@ -135,14 +134,14 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">
         <div class="row">
-          <label class="col-md-6" translate>Notifications</label>
-          <label class="col-md-6" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
+          <label class="col-md-6 zeroLeftPadding" translate>Notifications</label>
+          <label class="col-md-6 zeroLeftPadding" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
         </div>
 
-        <ul>
+        <ul class="zeroLeftPadding">
           <li class="row" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
-            <div class="col-md-6">{{ n.NotificationName }}</div>
-            <div class="col-md-6">
+            <div class="col-md-6 zeroLeftPadding">{{ n.NotificationName }}</div>
+            <div class="col-md-6 zeroLeftPadding">
               <p>
                 <span ng-repeat="d in n.DeliveryMethods">
                   {{ d.DeliveryMethodName }}<span ng-show="$index < n.DeliveryMethods.length - 1">, </span>
@@ -153,9 +152,9 @@
           <li ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</li>
 
           <!-- Edit -->
-          <li class="row-fluid" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
+          <li class="row" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
             <div class="col-md-6">{{ n.Name }}</div>
-            <div class="col-md-6 cr-inline">
+            <div class="col-md-6 cr-inline zeroLeftPadding">
               <span ng-repeat="d in n.DeliveryMethods">
                 <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
                 <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
