@@ -1296,7 +1296,7 @@ msgstr "Marque"
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Make Selection"
-msgstr "Sélection d’une marque"
+msgstr "Faire une sélection"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid "Make payments today or schedule your payments when you checkout."
