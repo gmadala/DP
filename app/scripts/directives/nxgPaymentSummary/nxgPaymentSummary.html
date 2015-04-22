@@ -9,7 +9,7 @@
       <span translate>You have not selected a payment.</span> {{ emptyMessage }}</p>
   </div>
 
-  <ul ng-hide="paymentQueue.isEmpty()" class="queue-list">
+  <ul ng-hide="paymentQueue.isEmpty()" class="queue-list zeroLeftPadding"">
     <li class="queue-item bordered" ng-repeat="fee in paymentQueue.fees">
       <button class="btn-unstyle right"
               ng-click="removeFee(fee)"

@@ -91,6 +91,10 @@ body {
 {
   padding-left:0;
 }
+.zeroRightPadding
+{
+  padding-right:0;
+}
 .zeroLeftMargin
 {
   margin-left:0;
@@ -112,14 +116,17 @@ body {
   margin-left:15px;
 }
 .leftMargin {
-  margin-left:5px;
+  margin-left:0px;
+}
+.rightMargin{
+  margin-right:0px;
 }
 .leftMarginMedium
 {
-  margin-left:10px;
+  margin-left:15px;
 }
 .leftMarginLarge {
-  margin-left:15px;
+  margin-left:25px;
 }
 .col-md-3 {
   width:23%;
