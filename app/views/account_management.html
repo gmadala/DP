@@ -4,7 +4,7 @@
   <section class="span6 well settings-well" novalidate>
     <h2 class="well-title">
       <span translate>Business Settings</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()" translate>Edit Settings</button>
         <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()" translate>Save Settings</button>
         <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel</button>
@@ -74,7 +74,7 @@
   <section class="span6 well settings-well">
     <h2 class="well-title">
       <span translate>Title Settings</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
         <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()" translate>Save Settings</button>
         <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()" translate>Cancel</button>

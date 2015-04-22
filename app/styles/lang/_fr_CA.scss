@@ -1,7 +1,42 @@
 body.lang_fr_CA {
 
+  /* Auction Dashboard */
+  #AuctionDashboardPage {
+    // handle long labels for 'title'
+    // TODO - it may be appropriate to have most wells to stop using fixed height and instead use min-height
+    // and auto height. This should be considered with respective to a responsive design
+    .auction-well {
+      min-height: 270px;
+      height: auto;
+      .dash-minor {
+        font-size: 10px;
+      }
+    }
+  }
+
+  // make wells that can be edited (by clicking subtitle)
+  // go to two lines since many of the main titles are too long to allow having everything on one line
+  .well-sub-title-edit {
+    float: none;
+
+    .btn-unstyle {
+      float: none;
+    }
+
+    .cancel {
+      // keep cancel on left side
+      float: left;
+    }
+  }
+
   /* Dashboard */
   #DashboardPage {
+    .payment-summary {
+      /* Handle longer title for payment summary */
+      .well-title {
+        font-size: 18px;
+      }
+    }
     @media (max-width: 1090px) {
       .dash-well {
         .well-title {
@@ -30,7 +65,7 @@ body.lang_fr_CA {
     }
 
     .btn-floor-plans {
-      font-size: 12px;
+      //font-size: 12px;
       padding: 7px 5px;
 
       .paired-body {
@@ -283,12 +318,15 @@ body.lang_fr_CA {
       height: 62px;
     }
     .nav-primary li {
-      max-width: 19%;
+      max-width: 30%;
       text-align: center;
 
+      &.link_auction_dashboard {
+        width: 112px;
+      }
+
       &.link_auction_sellerfloorplan {
-        width: 212px;
-        max-width: none;
+        width: 300px;
       }
 
       &.link_auction_dealersearch {
@@ -296,7 +334,7 @@ body.lang_fr_CA {
       }
 
       &.link_auction_bulkflooring {
-        width: 175px;
+        width: 155px;
       }
 
       &.link_auction_reports {
