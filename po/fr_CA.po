@@ -2868,7 +2868,7 @@ msgstr ""
 
 #: app/scripts/directives/navBar/navBar.js
 msgid "Title Releases"
-msgstr "Émission du Certificat d’Immatriculation"
+msgstr "Émission d’enregistrements"
 
 #: app/views/titlereleasecheckout.html
 msgid "Title Releases Confirmation"
@@ -3172,7 +3172,7 @@ msgstr "Afficher un rapport"
 
 #: app/views/vehicledetails.html
 msgid "View the Title"
-msgstr "Voir le certificat d'immatriculation"
+msgstr "Voir l’enregistrement"
 
 #: app/views/vehicledetails.html
 msgid "View the Vehicle History Detail Report"
