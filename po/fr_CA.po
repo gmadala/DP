@@ -380,15 +380,15 @@ msgstr "Décaissements en attente"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 0-15 Days"
-msgstr "Certificat d’immatriculation en attente, 0 à 15 jours"
+msgstr "Enregistrements en attente, 0 à 15 jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 16-30 Days"
-msgstr "Certificat d’immatriculation en attente, 16 à 30 jours"
+msgstr "Enregistrements en attente, 16 à 30 jours"
 
 #: app/views/auction.dashboard.html
 msgid "Awaiting Titles 30+ Days"
-msgstr "Certificat d’immatriculation en attente, 30 jours ou plus"
+msgstr "Enregistrements en attente, 30 jours ou plus"
 
 #: app/views/auction.bulkflooring.html app/views/checkout.html
 msgid "Bank Account"
@@ -1025,7 +1025,8 @@ msgid "Floor Date"
 msgstr "Date financé"
 
 #: app/scripts/directives/navBar/navBar.js app/views/auction.dashboard.html
-#: app/views/dashboard.html app/views/floorplan.html
+#: app/views/auction.sellerfloorplan.html app/views/dashboard.html
+#: app/views/floorplan.html
 msgid "Floor Plan"
 msgstr "Plan de Financement"
 
@@ -1506,7 +1507,7 @@ msgstr "Payé"
 
 #: app/views/auction.dashboard.html
 msgid "Paid Awaiting Title"
-msgstr "Payé, en attente du certificat d’immatriculation"
+msgstr "Payé, en attente de l’enregistrement"
 
 #: app/views/reports.html
 msgid "Paid off Summary"
@@ -2766,8 +2767,8 @@ msgid ""
 msgstr ""
 "Cette marge de crédit dispose d'une augmentation de crédit temporaire au "
 "montant de {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | "
-"numeral:'$0,0.00' }} qui arrive à échéance le "
-"{{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
+"numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData."
+"selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
 #: app/views/dashboard.html
 msgid ""
@@ -3448,8 +3449,8 @@ msgstr[0] ""
 "Votre demande de certificat d'immatriculation a été approuvée. Un courriel "
 "contenant un numéro de suivi vous sera envoyé sous peu."
 msgstr[1] ""
-"Vos demandes de certificats d’immatriculation ont été approuvées. Un courriel "
-"contenant un numéro de suivi vous sera envoyé sous peu."
+"Vos demandes de certificats d’immatriculation ont été approuvées. Un "
+"courriel contenant un numéro de suivi vous sera envoyé sous peu."
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Your title request has been submitted."
@@ -3580,4 +3581,5 @@ msgid ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</"
 "span> 20"
 msgstr ""
-"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> 20"
+"{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
+"20"
