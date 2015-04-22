@@ -1028,7 +1028,8 @@ msgid "Floor Date"
 msgstr "Fecha de puesta en piso"
 
 #: app/scripts/directives/navBar/navBar.js app/views/auction.dashboard.html
-#: app/views/dashboard.html app/views/floorplan.html
+#: app/views/auction.sellerfloorplan.html app/views/dashboard.html
+#: app/views/floorplan.html
 msgid "Floor Plan"
 msgstr "Plan de piso"
 

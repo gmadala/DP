@@ -8,8 +8,16 @@ body.lang_fr_CA {
     .auction-well {
       min-height: 270px;
       height: auto;
-      .dash-minor {
-        font-size: 10px;
+      @media (max-width: 1200px) {
+        .dash-minor {
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 1120px) {
+        .dash-minor {
+          font-size: 10px;
+        }
       }
     }
   }
