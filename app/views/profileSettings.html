@@ -59,7 +59,7 @@
         <div ng-repeat="question in profile.data.questions" ng-hide="profile.editable">
           <!-- Question Select -->
           <div class="row">
-            <label class="col-md-4" translate>Security Question {{$index + 1}}</label>
+            <label class="col-md-4 questText" translate>Security Question {{$index + 1}}</label>
             <div class="col-md-8 static zeroLeftPadding" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
           </div>
         </div>
@@ -108,6 +108,7 @@
           <div class="col-md-8 zeroLeftPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
             <input type="tel"
                    name="phone"
+                   class="xsmallInput"
                    ng-model="profile.dirtyData.phone"
                    ng-pattern="phonePattern"
                    size="10"

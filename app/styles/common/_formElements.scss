@@ -179,7 +179,7 @@ select {
   @include border-radius($borderRadius);
   position: relative;
   overflow: hidden;
-  width: 206px;
+  width: 65%;
   border: 1px solid $highlight;
   margin: 5px 0;
   background: #fff;
@@ -202,6 +202,8 @@ select {
     width: auto;
   }
 
+  &.small {width:206px;}
+
   &.disabled {
     border-color: $border;
 
@@ -217,6 +219,9 @@ select {
       border-color: $danger transparent transparent;
     }
   }
+
+
+
 
   select {
     @extend .truncate;
@@ -506,8 +511,9 @@ input[type="radio"] {
 }
 
 .smallInput{
-  width:45%;
+  width:55%;
 }
+.xsmallInput{width:145px;}
 
   /*
    * BUTTON INPUT
