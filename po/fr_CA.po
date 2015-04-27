@@ -1622,7 +1622,7 @@ msgstr "Paiements"
 
 #: app/scripts/models/dashboard.js
 msgid "Payments Due"
-msgstr "Paiements dus"
+msgstr "Paiements dûs"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
@@ -1649,7 +1649,7 @@ msgstr "Rembourser ce véhicule"
 
 #: app/scripts/models/dashboard.js
 msgid "Payoffs Due"
-msgstr "Remboursements dus"
+msgstr "Remboursements dûs"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Payout Amount"
