@@ -61,7 +61,8 @@ angular.module('nextgearWebApp')
           data: {
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
-            enhancedRegistrationPin: null
+            enhancedRegistrationPin: null,
+            autoPayEnabled: results.AutoPayEnabled
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -104,6 +105,46 @@ angular.module('nextgearWebApp')
                 $scope.business.dirtyData.enhancedRegistrationEnabled = true;
               }
             });
+          },
+          autoPay: {
+            confirmEnable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmEnableAutoPay.html',
+                controller: 'ConfirmDisableCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                }
+              });
+            },
+            confirmDisable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmDisableAutoPay.html',
+                controller: 'ConfirmDisableCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                }
+              });
+            },
+            isEditable: function () {
+              return $scope.business.editable; // TODO && user allowed to edit
+            },
+            isDisplayed: function () {
+              return true; // TODO
+            }
           }
         };
 

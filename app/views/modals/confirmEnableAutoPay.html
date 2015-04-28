@@ -1,0 +1,13 @@
+<h3 class="modal-header">Confirm Changes</h3>
+<section class="modal-body">
+  <p>You are about to enroll in auto-pay...</p>
+  <div class="cr-inline">
+    <input type="checkbox" name="autoPayTerms" id="autoPayTerms" ng-model="autoPayTerms"/>
+    <label for="autoPayTerms" class="checkbox-img small"></label>
+    <label for="autoPayTerms" class="cr-label">I agree to the terms and conditions.</label>
+  </div>
+</section>
+<div class="modal-footer">
+  <button class="btn-cta cta-secondary" type="button" ng-click="close(false)">Cancel</button>
+  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus>Confirm</button>
+</div>
