@@ -2,12 +2,12 @@
 <section class="modal-body">
   <p>You are about to unenroll in auto-pay...</p>
   <div class="cr-inline">
-    <input type="checkbox" name="autoPayTerms" id="autoPayTerms" ng-model="autoPayTerms"/>
-    <label for="autoPayTerms" class="checkbox-img small"></label>
-    <label for="autoPayTerms" class="cr-label">I agree to the terms and conditions.</label>
+    <input type="checkbox" name="terms" id="disableAutoPayTerms" ng-model="agree"/>
+    <label for="disableAutoPayTerms" class="checkbox-img small"></label>
+    <label for="disableAutoPayTerms" class="cr-label">I agree to the terms and conditions.</label>
   </div>
 </section>
 <div class="modal-footer">
   <button class="btn-cta cta-secondary" type="button" ng-click="close(false)">Cancel</button>
-  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus>Confirm</button>
+  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus ng-disabled="!agree">Confirm</button>
 </div>

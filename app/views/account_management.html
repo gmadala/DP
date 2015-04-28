@@ -86,22 +86,22 @@
 
         <div class="row-fluid" ng-show="business.autoPay.isDisplayed()">
 
-          <label class="span5" for="autoPay" translate>Enrolled in Auto-Pay:</label>
+          <label class="span5" for="autoPay">Enrolled in Auto-Pay:</label>
           <div class="span7">
             <div class="row-fluid">
               <div class="span6">
-                <div class="static" ng-show="business.data.autoPayEnabled && !business.autoPay.isEditable()" translate> Yes </div>
+                <div class="static" ng-show="business.data.autoPayEnabled && !business.autoPay.isEditable()"> Yes </div>
                 <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-                <div class="static" ng-show="business.data.autoPayEnabled == false && !business.autoPay.isEditable()" translate> No </div>
+                <div class="static" ng-show="business.data.autoPayEnabled == false && !business.autoPay.isEditable()"> No </div>
 
                 <div class="cr-inline" ng-show="business.autoPay.isEditable()">
                   <input type="radio" id="autoPayNo" name="autoPay" ng-model="business.dirtyData.autoPayEnabled" ng-value='false' ng-click="business.autoPay.confirmDisable()"/>
                   <label class="radio-img" for="autoPayNo"></label>
-                  <label class="cr-label" for="autoPayNo" translate>No</label>
+                  <label class="cr-label" for="autoPayNo">No</label>
 
                   <input type="radio" id="autoPayYes" name="autoPay" ng-model="business.dirtyData.autoPayEnabled" ng-value='true' ng-click="business.autoPay.confirmEnable()"/>
                   <label class="radio-img" for="autoPayYes"></label>
-                  <label class="cr-label" for="autoPayYes" translate>Yes</label>
+                  <label class="cr-label" for="autoPayYes">Yes</label>
                 </div>
               </div>
               <div class="span2">
@@ -109,7 +109,7 @@
                         tooltip-placement="left"
                         tooltip-trigger="focus"
                         tooltip-html="true"
-                        tooltip-html-unsafe="{{ 'Lorem ipsum lorem lorem be asked to set up their PIN when logging in to MyNextGear.' | translate }}"
+                        tooltip-html-unsafe="{{ 'Lorem ipsum lorem lorem be asked to set up their PIN when logging in to MyNextGear.' }}"
                         tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
                 </button>

@@ -95,7 +95,7 @@ angular.module('nextgearWebApp')
               keyboard: true,
               backdropClick: true,
               templateUrl: 'views/modals/confirmDisableEnhanced.html',
-              controller: 'ConfirmDisableCtrl'
+              controller: 'ConfirmCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function(result) {
               if (result) {
@@ -113,7 +113,7 @@ angular.module('nextgearWebApp')
                 keyboard: true,
                 backdropClick: true,
                 templateUrl: 'views/modals/confirmEnableAutoPay.html',
-                controller: 'ConfirmDisableCtrl'
+                controller: 'ConfirmCtrl'
               };
               $dialog.dialog(dialogOptions).open().then(function (result) {
                 if (result) {
@@ -129,7 +129,7 @@ angular.module('nextgearWebApp')
                 keyboard: true,
                 backdropClick: true,
                 templateUrl: 'views/modals/confirmDisableAutoPay.html',
-                controller: 'ConfirmDisableCtrl'
+                controller: 'ConfirmCtrl'
               };
               $dialog.dialog(dialogOptions).open().then(function (result) {
                 if (result) {
@@ -140,10 +140,10 @@ angular.module('nextgearWebApp')
               });
             },
             isEditable: function () {
-              return $scope.business.editable; // TODO && user allowed to edit
+              return $scope.business.editable;// && User.isActive() && User.isStakeHolder() && User.haveSignedAch(); // TODO
             },
             isDisplayed: function () {
-              return true; // TODO
+              return angular.isDefined(results.AutoPayEnabled) && User.isDealer() && User.isUnitedStates();
             }
           }
         };
@@ -262,8 +262,10 @@ angular.module('nextgearWebApp')
     $scope.isUnited = User.isUnitedStates();
   })
 
-  .controller('ConfirmDisableCtrl', function($scope, dialog) {
+  .controller('ConfirmCtrl', function($scope, dialog) {
     $scope.close = function(result) {
       dialog.close(result);
     };
+
+    $scope.agree = false;
   });
