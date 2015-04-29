@@ -76,7 +76,8 @@ angular.module('nextgearWebApp')
             if (prv.save.apply(this)) {
               var d = this.dirtyData;
 
-              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
+              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
+                d.autoPayEnabled).then(
                 prv.saveSuccess.bind(this)
               );
             }
