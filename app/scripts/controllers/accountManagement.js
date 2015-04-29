@@ -6,6 +6,8 @@ angular.module('nextgearWebApp')
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
+    $scope.isUnitedStates = User.isUnitedStates();
+    $scope.isDealer = User.isDealer();
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -62,7 +64,9 @@ angular.module('nextgearWebApp')
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
             enhancedRegistrationPin: null,
-            autoPayEnabled: results.AutoPayEnabled
+            autoPayEnabled: results.AutoPayEnabled,
+            isActive: results.IsActive,
+            isStakeHolder: results.IsStakeHolder
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -141,10 +145,10 @@ angular.module('nextgearWebApp')
               });
             },
             isEditable: function () {
-              return $scope.business.editable;// && User.isActive() && User.isStakeHolder() && User.haveSignedAch(); // TODO
+              return $scope.business.editable && $scope.business.data.isActive && $scope.business.data.isStakeHolder;
             },
             isDisplayed: function () {
-              return angular.isDefined(results.AutoPayEnabled) && User.isDealer() && User.isUnitedStates();
+              return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates;
             }
           }
         };
@@ -260,7 +264,6 @@ angular.module('nextgearWebApp')
       {}
     );
 
-    $scope.isUnited = User.isUnitedStates();
   })
 
   .controller('ConfirmCtrl', function($scope, dialog) {

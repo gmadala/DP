@@ -24,7 +24,10 @@ describe('Controller: AccountManagementCtrl', function () {
       Email: 'diana.guarin@manheim.com',
       CellPhone: '2143301800',
       BusinessEmail: 'diana.guarin@manheim.com',
-      EnhancedRegistrationEnabled: false
+      EnhancedRegistrationEnabled: false,
+      AutoPayEnabled: false,
+      IsActive: false,
+      IsStakeHolder: false
     };
 
     AccountManagementMock = {
@@ -104,6 +107,54 @@ describe('Controller: AccountManagementCtrl', function () {
       scope.business.cancel();
       expect(scope.business.dirtyData).toBe(null);
       expect(scope.business.editable).toBe(false);
+    });
+
+    it('autoPay should be displayed only for US Dealers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.isUnitedStates = true;
+      scope.isDealer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.isUnitedStates = false;
+      scope.isDealer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.isUnitedStates = false;
+      scope.isDealer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    it('autoPay should be editable only for active stakeholders', function () {
+
+      scope.business.editable = true;
+
+      scope.business.data.isActive = true;
+      scope.business.data.isStakeHolder = true;
+
+      expect(scope.business.autoPay.isEditable()).toBeTruthy();
+
+      scope.business.data.isActive = true;
+      scope.business.data.isStakeHolder = false;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+
+      scope.business.data.isActive = false;
+      scope.business.data.isStakeHolder = true;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+
+      scope.business.data.isActive = false;
+      scope.business.data.isStakeHolder = false;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
     });
 
     describe('save()', function(){
