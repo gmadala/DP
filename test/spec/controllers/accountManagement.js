@@ -27,7 +27,7 @@ describe('Controller: AccountManagementCtrl', function () {
       EnhancedRegistrationEnabled: false,
       AutoPayEnabled: false,
       IsActive: false,
-      IsStakeHolder: false
+      IsStakeholder: false
     };
 
     AccountManagementMock = {
@@ -137,22 +137,22 @@ describe('Controller: AccountManagementCtrl', function () {
       scope.business.editable = true;
 
       scope.business.data.isActive = true;
-      scope.business.data.isStakeHolder = true;
+      scope.business.data.isStakeholder = true;
 
       expect(scope.business.autoPay.isEditable()).toBeTruthy();
 
       scope.business.data.isActive = true;
-      scope.business.data.isStakeHolder = false;
+      scope.business.data.isStakeholder = false;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isActive = false;
-      scope.business.data.isStakeHolder = true;
+      scope.business.data.isStakeholder = true;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isActive = false;
-      scope.business.data.isStakeHolder = false;
+      scope.business.data.isStakeholder = false;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
     });
