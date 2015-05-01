@@ -26,7 +26,7 @@ describe('Controller: AccountManagementCtrl', function () {
       BusinessEmail: 'diana.guarin@manheim.com',
       EnhancedRegistrationEnabled: false,
       AutoPayEnabled: false,
-      IsActive: false,
+      IsStakeholderActive: false,
       IsStakeholder: false
     };
 
@@ -136,22 +136,22 @@ describe('Controller: AccountManagementCtrl', function () {
 
       scope.business.editable = true;
 
-      scope.business.data.isActive = true;
+      scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = true;
 
       expect(scope.business.autoPay.isEditable()).toBeTruthy();
 
-      scope.business.data.isActive = true;
+      scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = false;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
 
-      scope.business.data.isActive = false;
+      scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = true;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
 
-      scope.business.data.isActive = false;
+      scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = false;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();

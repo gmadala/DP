@@ -65,7 +65,7 @@ angular.module('nextgearWebApp')
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
             enhancedRegistrationPin: null,
             autoPayEnabled: results.AutoPayEnabled,
-            isActive: results.IsActive,
+            isStakeholderActive: results.IsStakeholderActive,
             isStakeholder: results.IsStakeholder
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
@@ -145,7 +145,8 @@ angular.module('nextgearWebApp')
               });
             },
             isEditable: function () {
-              return $scope.business.editable && $scope.business.data.isActive && $scope.business.data.isStakeholder;
+              return $scope.business.editable && $scope.business.data.isStakeholder &&
+                $scope.business.data.isStakeholderActive;
             },
             isDisplayed: function () {
               return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates;
