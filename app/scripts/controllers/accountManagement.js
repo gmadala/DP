@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
         City: 'Some City',
         State: 'Some State',
         Status: true,
-        AccountNumber: '****-**-2110',
+        AccountNumber: 'XXXXXX2110',
         RoutingNumber: '123452112',
         PrimaryPayment: true,
         PrimaryDisbursement: false
@@ -32,7 +32,7 @@ angular.module('nextgearWebApp')
         City: 'Other Some City',
         State: 'Other Some State',
         Status: true,
-        AccountNumber: '****-**-2111',
+        AccountNumber: 'XXXXXX2111',
         RoutingNumber: '123452112',
         PrimaryPayment: false,
         PrimaryDisbursement: true
@@ -46,7 +46,7 @@ angular.module('nextgearWebApp')
         City: 'Another Some City',
         State: 'Another Some State',
         Status: false,
-        AccountNumber: '****-**-2112',
+        AccountNumber: 'XXXXXX2112',
         RoutingNumber: '123452112',
         PrimaryPayment: false,
         PrimaryDisbursement: false

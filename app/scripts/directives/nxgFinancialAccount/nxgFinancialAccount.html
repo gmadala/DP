@@ -1,21 +1,21 @@
 <div>
-  <div class="row">
-    <div class="col-md-4 static">
-      <span ng-show="isCollapsed">{{account.AccountName}} ({{account.AccountNumber}})</span>
+  <div class="row well-item bordered">
+    <div class="col-md-4 static heavy">
+      <span>{{account.AccountName}} - {{account.AccountNumber}}</span>
     </div>
     <div class="col-md-2 static">
-      <span ng-show="isCollapsed">{{account.LastModified | moment}}</span>
+      <span>{{account.LastModified | moment}}</span>
     </div>
     <div class="col-md-2 static">
-      <span ng-show="isCollapsed">{{account.DateAdded | moment}}</span>
+      <span>{{account.DateAdded | moment}}</span>
     </div>
     <div class="col-md-2 static">
-      <span ng-show="isCollapsed">{{ defaults }}</span>
+      <span>{{ defaults }}</span>
     </div>
     <div class="col-md-2 static text-right">
       <button class="btn-unstyle" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
               <span class="paired-body small">
-                <span ng-show="isCollapsed" translate>Account Details</span>
+                <span ng-show="isCollapsed" translate>Show Details</span>
                 <span ng-hide="isCollapsed" translate>Hide Details</span>
               </span>
               <span class="paired-media"
@@ -24,8 +24,8 @@
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+  <div class="row well-item bordered" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+    <div class="col-md-12">
       <div class="row">
         <div class="col-md-2 static heavy">Account Name</div>
         <div class="col-md-3 static">{{account.AccountName}}</div>
