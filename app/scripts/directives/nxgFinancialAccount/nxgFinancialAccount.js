@@ -10,7 +10,17 @@ angular.module('nextgearWebApp')
       },
       restrict: 'E',
       link: function(scope/*, element, attr */) {
-        console.log(scope.account);
+        var generateDefaults = function () {
+          var defaults = [];
+          if (scope.account.PrimaryPayment) {
+            defaults.push('Default Payment');
+          }
+          if (scope.account.PrimaryDisbursement) {
+            defaults.push('Default Disbursement');
+          }
+          return defaults.join(', ');
+        };
+        scope.defaults = generateDefaults();
       }
     };
   });
