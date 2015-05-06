@@ -1,4 +1,30 @@
 <div class="row">
+  <section class="col-md-12 well settings-well">
+    <h2 class="well-title">
+      <span translate>Financial Accounts</span>
+      <div class="well-sub-title well-sub-title-edit">
+        <button ng-hide="banks.editable" class="btn-unstyle" ng-click="banks.edit()" translate>Add Payment Account</button>
+        <button ng-show="banks.editable" class="btn-unstyle" ng-click="banks.save()" translate>Save Payment Account</button>
+        <button ng-show="banks.editable" class="btn-unstyle cancel" ng-click="banks.cancel()" translate>Cancel</button>
+      </div>
+    </h2>
+
+    <div class="well-item">
+      <div class="row">
+        <div class="col-md-4 static heavy">Descriptions</div>
+        <div class="col-md-2 static heavy">Last Modified</div>
+        <div class="col-md-2 static heavy">Date Added</div>
+        <div class="col-md-2 static heavy">Defaults</div>
+        <div class="col-md-2 static heavy text-right">View / Hide Details</div>
+      </div>
+      <div ng-repeat="financialAccount in financialAccounts">
+        <nxg-financial-account data-account="financialAccount"></nxg-financial-account>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="row">
 
   <!-- BUSINESS SETTINGS -->
   <section class="col-md-6 well settings-well" novalidate>
@@ -16,7 +42,7 @@
         <div class="row">
           <label class="col-md-5" for="businessEmail" translate>Business Email</label>
           <div class="col-md-7" nxg-input model="business.data.email" editable="business.editable">
-            <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
+            <input type="email" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
             <label class="text-error" ng-show="business.validation.businessEmail.$invalid" translate>
                 Please enter a valid email address.
             </label>
@@ -24,7 +50,7 @@
         </div>
 
         <div class="row">
-          <label class="col-md-5" for="enhanced" translate>Enhanced Registration Enabled?</label>
+          <label class="col-md-5" for="enhancedNo" translate>Enhanced Registration Enabled?</label>
           <div class="col-md-7">
             <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
             <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
@@ -89,7 +115,7 @@
             <div class="row" ng-show="title.editable">
               <div class="col-md-10">
                 <div class="style-select">
-                  <select ng-model="title.dirtyData.titleAddress"
+                  <select id="titleAddr" ng-model="title.dirtyData.titleAddress"
                           ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
                           tooltip="{{ addr | address:'oneLine' }}"
                           tooltip-placement="right"
@@ -158,15 +184,6 @@
     <h2 class="well-title" translate>Financial Accounts</h2>
     <div class="well-item">
       <form class="form-block" name="financialSettings" novalidate>
-        <div class="row">
-          <label class="col-md-5" for="setBankAcct"><span translate>Bank Account(s)</span>:</label>
-          <div class="col-md-7">
-            <ul class="zeroLeftPadding">
-              <li ng-repeat="acct in financial.data.bankAccounts">{{ acct.BankAccountName }}</li>
-            </ul>
-          </div>
-        </div>
-
         <div class="row">
           <label class="col-md-5"><span translate>Available Credit</span>:</label>
           <div class="col-md-7 static">{{ financial.data.availableCredit | currency }}</div>

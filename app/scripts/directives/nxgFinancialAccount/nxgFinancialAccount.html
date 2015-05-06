@@ -1,0 +1,79 @@
+<div>
+  <div class="row">
+    <div class="col-md-4 static">
+      <span ng-show="isCollapsed">{{account.AccountName}} ({{account.AccountNumber}})</span>
+    </div>
+    <div class="col-md-2 static">
+      <span ng-show="isCollapsed">{{account.LastModified | moment}}</span>
+    </div>
+    <div class="col-md-2 static">
+      <span ng-show="isCollapsed">{{account.DateAdded | moment}}</span>
+    </div>
+    <div class="col-md-2 static">
+      <span ng-show="isCollapsed">{{ defaults }}</span>
+    </div>
+    <div class="col-md-2 static text-right">
+      <button class="btn-unstyle" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+              <span class="paired-body small">
+                <span ng-show="isCollapsed" translate>Account Details</span>
+                <span ng-hide="isCollapsed" translate>Hide Details</span>
+              </span>
+              <span class="paired-media"
+                    ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }"
+                    nxg-icon="icon-chevron"></span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+      <div class="row">
+        <div class="col-md-2 static heavy">Account Name</div>
+        <div class="col-md-3 static">{{account.AccountName}}</div>
+        <div class="col-md-2 static"></div>
+        <div class="col-md-2 static heavy">Account Status</div>
+        <div class="col-md-3 static">{{account.Status ? 'Active' : 'Inactive'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 static heavy">Account Number</div>
+        <div class="col-md-3 static">{{account.AccountNumber}}</div>
+        <div class="col-md-2 static"></div>
+        <div class="col-md-2 static heavy">Date Added</div>
+        <div class="col-md-3 static">{{account.DateAdded | moment}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 static heavy">Routing Number</div>
+        <div class="col-md-3 static">{{account.RoutingNumber}}</div>
+        <div class="col-md-2 static"></div>
+        <div class="col-md-2 static heavy">Last Modified</div>
+        <div class="col-md-3 static">{{account.LastModified | moment}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 static heavy">Bank</div>
+        <div class="col-md-3 static">{{account.BankName}}</div>
+        <div class="col-md-2 static"></div>
+        <!--
+        <div class="col-md-2">
+          <div class="cr-inline">
+            <input id="payment{{account.Id}}" type="radio" name="defaultPayment"
+                   ng-model="primaryPayment" ng-value="true"/>
+            <label class="radio-img small" for="payment{{account.Id}}"></label>
+            <label class="cr-label" for="payment{{account.Id}}" translate>Default Payment</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="cr-inline">
+            <input id="disbursement{{account.Id}}" type="radio" name="defaultDisbursement"
+                   ng-model="primaryDisbursement" ng-value="true"/>
+            <label class="radio-img small" for="disbursement{{account.Id}}"></label>
+            <label class="cr-label" for="disbursement{{account.Id}}" translate>Default Disbursement</label>
+          </div>
+        </div>
+        -->
+      </div>
+      <div class="row">
+        <div class="col-md-2 static heavy">Address</div>
+        <div class="col-md-3 static">{{account.City}}, {{account.State}}</div>
+      </div>
+    </div>
+  </div>
+</div>
