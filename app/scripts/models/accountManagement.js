@@ -26,10 +26,11 @@ angular.module('nextgearWebApp')
           });
         });
       },
-      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
+      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin, autoPayEnabled) {
         var req = {
           BusinessEmailAddress: email,
-          EnhancedRegistrationEnabled: enhancedRegEnabled
+          EnhancedRegistrationEnabled: enhancedRegEnabled,
+          AutoPayEnabled: autoPayEnabled
         };
         if (enhancedRegEnabled) {
           req.EnhancedRegistrationPin = enhancedRegPin;

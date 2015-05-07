@@ -122,6 +122,12 @@ input[type="color"] {
   &::-ms-clear {
     display: none;
   }
+
+  // use this when also using the input "size" and "maxlength" attributes for inputs
+  // of known length (social security numbers, PINs, phone numbers, etc.)
+  &.size-fixed {
+    width: auto;
+  }
 }
 
 // inputs that are the full-width of parent
