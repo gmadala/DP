@@ -24,6 +24,8 @@
     "AutoPayEnabled": false,
     "IsStakeholder": true,
     "IsStakeholderActive": true,
+    "IsQuickBuyer": false,
+    "UseAutoACH": true,
     "Notifications": [
       {
         "NotificationId": "99f9cb9f-7c8c-4047-9b82-44216730d71c",

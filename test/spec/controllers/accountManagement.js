@@ -27,7 +27,9 @@ describe('Controller: AccountManagementCtrl', function () {
       EnhancedRegistrationEnabled: false,
       AutoPayEnabled: false,
       IsStakeholderActive: false,
-      IsStakeholder: false
+      IsStakeholder: false,
+      IsQuickBuyer: false,
+      UseAutoACH: true
     };
 
     AccountManagementMock = {
@@ -155,6 +157,42 @@ describe('Controller: AccountManagementCtrl', function () {
       scope.business.data.isStakeholder = false;
 
       expect(scope.business.autoPay.isEditable()).toBeFalsy();
+    });
+
+    it('autoPay should be hidden for quick buyers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      scope.business.data.isQuickBuyer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.business.data.isQuickBuyer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.business.data.isQuickBuyer = undefined;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    it('autoPay should be hidden for non-auto ACH dealers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      scope.business.data.useAutoACH = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.business.data.useAutoACH = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.business.data.useAutoACH = undefined;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
     });
 
     describe('save()', function(){
