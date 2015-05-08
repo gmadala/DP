@@ -151,8 +151,8 @@ angular.module('nextgearWebApp')
                 $scope.business.data.isStakeholderActive;
             },
             isDisplayed: function () {
-              return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates
-                && $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true;
+              return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
+                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true;
             }
           }
         };
