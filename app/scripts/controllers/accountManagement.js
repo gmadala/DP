@@ -7,52 +7,6 @@ angular.module('nextgearWebApp')
     }
     $scope.loading = false;
 
-    // TODO: fill this financialAccounts array with return value from API call
-    $scope.financialAccounts = [
-      {
-        Id: 1,
-        AccountName: 'Example Account Name',
-        LastModified: '2015-04-05',
-        DateAdded: '2015-04-01',
-        BankName: 'Some Bank',
-        City: 'Some City',
-        State: 'Some State',
-        Status: true,
-        AccountNumber: 'XXXXXX2110',
-        RoutingNumber: '123452112',
-        PrimaryPayment: true,
-        PrimaryDisbursement: false
-      },
-      {
-        Id: 2,
-        AccountName: 'Other Example Account Name',
-        LastModified: '2015-04-06',
-        DateAdded: '2015-04-01',
-        BankName: 'Other Some Bank',
-        City: 'Other Some City',
-        State: 'Other Some State',
-        Status: true,
-        AccountNumber: 'XXXXXX2111',
-        RoutingNumber: '123452112',
-        PrimaryPayment: false,
-        PrimaryDisbursement: true
-      },
-      {
-        Id: 3,
-        AccountName: 'Another Example Account Name',
-        LastModified: '2015-04-07',
-        DateAdded: '2015-04-01',
-        BankName: 'Another Some Bank',
-        City: 'Another Some City',
-        State: 'Another Some State',
-        Status: false,
-        AccountNumber: 'XXXXXX2112',
-        RoutingNumber: '123452112',
-        PrimaryPayment: false,
-        PrimaryDisbursement: false
-      }
-    ];
-
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
     });
@@ -157,6 +111,8 @@ angular.module('nextgearWebApp')
         $scope.financial = {
           data: {
             bankAccounts: results.BankAccounts,
+            disbursementAccount: results.DefaultDisbursementBankAccountId,
+            billingAccount: results.DefaultBillingBankAccountId,
             availableCredit: results.AvailableCredit,
             reserveFunds: results.ReserveFunds,
             lastPayment: {

@@ -1,14 +1,14 @@
-<div>
+<div ng-if="isDisplayed()">
   <div class="row well-item bordered">
-    <div class="col-md-4 static heavy">
-      <span>{{account.AccountName}} - {{account.AccountNumber}}</span>
+    <div class="col-md-8 static heavy">
+      <span>{{ getDescriptiveAccountName() }}</span>
     </div>
-    <div class="col-md-2 static">
-      <span>{{account.LastModified | moment}}</span>
-    </div>
-    <div class="col-md-2 static">
-      <span>{{account.DateAdded | moment}}</span>
-    </div>
+    <!--<div class="col-md-2 static">-->
+      <!--<span>{{account.LastModified | moment}}</span>-->
+    <!--</div>-->
+    <!--<div class="col-md-2 static">-->
+      <!--<span>{{account.DateAdded | moment}}</span>-->
+    <!--</div>-->
     <div class="col-md-2 static">
       <span>{{ defaults }}</span>
     </div>
@@ -28,29 +28,29 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-2 static heavy">Account Name</div>
-        <div class="col-md-3 static">{{account.AccountName}}</div>
-        <div class="col-md-2 static"></div>
-        <div class="col-md-2 static heavy">Account Status</div>
-        <div class="col-md-3 static">{{account.Status ? 'Active' : 'Inactive'}}</div>
+        <div class="col-md-3 static">{{account.BankAccountName}}</div>
+        <!--<div class="col-md-2 static"></div>-->
+        <div class="col-md-2 static heavy">Bank Name</div>
+        <div class="col-md-3 static">{{account.BankName}}</div>
       </div>
       <div class="row">
         <div class="col-md-2 static heavy">Account Number</div>
-        <div class="col-md-3 static">{{account.AccountNumber}}</div>
-        <div class="col-md-2 static"></div>
-        <div class="col-md-2 static heavy">Date Added</div>
-        <div class="col-md-3 static">{{account.DateAdded | moment}}</div>
-      </div>
-      <div class="row">
+        <div class="col-md-3 static">******{{account.AccountNumberLast4Digits}}</div>
         <div class="col-md-2 static heavy">Routing Number</div>
         <div class="col-md-3 static">{{account.RoutingNumber}}</div>
-        <div class="col-md-2 static"></div>
-        <div class="col-md-2 static heavy">Last Modified</div>
-        <div class="col-md-3 static">{{account.LastModified | moment}}</div>
+        <!--<div class="col-md-2 static"></div>-->
+        <!--<div class="col-md-2 static heavy">Date Added</div>-->
+        <!--<div class="col-md-3 static">{{account.DateAdded | moment}}</div>-->
       </div>
       <div class="row">
-        <div class="col-md-2 static heavy">Bank</div>
-        <div class="col-md-3 static">{{account.BankName}}</div>
-        <div class="col-md-2 static"></div>
+        <div class="col-md-2 static heavy">Status</div>
+        <!--TODO translate-->
+        <div class="col-md-3 static">{{ getAccountStatus() | translate }}</div>
+        <!--<div class="col-md-2 static"></div>-->
+        <!--<div class="col-md-2 static heavy">Last Modified</div>-->
+        <!--<div class="col-md-3 static">{{account.LastModified | moment}}</div>-->
+      </div>
+      <div class="row">
         <!--
         <div class="col-md-2">
           <div class="cr-inline">
@@ -70,10 +70,10 @@
         </div>
         -->
       </div>
-      <div class="row">
-        <div class="col-md-2 static heavy">Address</div>
-        <div class="col-md-3 static">{{account.City}}, {{account.State}}</div>
-      </div>
+      <!--<div class="row">-->
+        <!--<div class="col-md-2 static heavy">Address</div>-->
+        <!--<div class="col-md-3 static">{{account.City}}, {{account.State}}</div>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
