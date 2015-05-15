@@ -11,10 +11,10 @@ angular.module('nextgearWebApp')
      */
     function getDescriptiveAccountName(account) {
 
-      if (account.BankAccountName.indexOf(account.AccountNumberLast4Digits) > -1) {
+      if (account.BankAccountName.indexOf(account.AchAccountNumberLast4) > -1) {
         return account.BankAccountName;
       } else {
-        return account.BankAccountName + ' - ' + account.AccountNumberLast4Digits;
+        return account.BankAccountName + ' - ' + account.AchAccountNumberLast4;
       }
     }
 

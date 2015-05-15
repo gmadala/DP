@@ -26,10 +26,10 @@ describe('Directive: nxgFinancialAccount', function () {
     account = {
       "BankAccountId": "123456789",
       "BankAccountName": "Super Bank Account",
-      "AccountNumberLast4Digits": 1098,
+      "AchAccountNumberLast4": 1098,
       "IsActive": true,
-      "RoutingNumber": 123456789,
-      "BankName": "Previous Wheel FCU",
+      "AchAbaNumber": 123456789,
+      "AchBankName": "Previous Wheel FCU",
       "AllowPaymentByAch": true
     };
 
@@ -90,7 +90,7 @@ describe('Directive: nxgFinancialAccount', function () {
   it('descriptive account name should append the last 4 digits of the account number (if not already in the name)',
     function () {
 
-      iScope.account.AccountNumberLast4Digits = 1234;
+      iScope.account.AchAccountNumberLast4 = 1234;
 
       iScope.account.BankAccountName = "My Account";
       expect(iScope.getDescriptiveAccountName()).toEqual('My Account - 1234');
