@@ -6,6 +6,8 @@ angular.module('nextgearWebApp')
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
+    $scope.isUnitedStates = User.isUnitedStates();
+    $scope.isDealer = User.isDealer();
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -61,7 +63,12 @@ angular.module('nextgearWebApp')
           data: {
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
-            enhancedRegistrationPin: null
+            enhancedRegistrationPin: null,
+            autoPayEnabled: results.AutoPayEnabled,
+            isQuickBuyer: results.IsQuickBuyer,
+            isStakeholderActive: results.IsStakeholderActive,
+            isStakeholder: results.IsStakeholder,
+            useAutoACH: results.UseAutoACH
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -75,7 +82,8 @@ angular.module('nextgearWebApp')
             if (prv.save.apply(this)) {
               var d = this.dirtyData;
 
-              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
+              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
+                d.autoPayEnabled).then(
                 prv.saveSuccess.bind(this)
               );
             }
@@ -94,7 +102,7 @@ angular.module('nextgearWebApp')
               keyboard: true,
               backdropClick: true,
               templateUrl: 'views/modals/confirmDisableEnhanced.html',
-              controller: 'ConfirmDisableCtrl'
+              controller: 'ConfirmCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function(result) {
               if (result) {
@@ -104,6 +112,48 @@ angular.module('nextgearWebApp')
                 $scope.business.dirtyData.enhancedRegistrationEnabled = true;
               }
             });
+          },
+          autoPay: {
+            confirmEnable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmEnableAutoPay.html',
+                controller: 'ConfirmCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                }
+              });
+            },
+            confirmDisable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmDisableAutoPay.html',
+                controller: 'ConfirmCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                }
+              });
+            },
+            isEditable: function () {
+              return $scope.business.editable && $scope.business.data.isStakeholder &&
+                $scope.business.data.isStakeholderActive;
+            },
+            isDisplayed: function () {
+              return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
+                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true;
+            }
           }
         };
 
@@ -218,11 +268,12 @@ angular.module('nextgearWebApp')
       {}
     );
 
-    $scope.isUnited = User.isUnitedStates();
   })
 
-  .controller('ConfirmDisableCtrl', function($scope, dialog) {
+  .controller('ConfirmCtrl', function($scope, dialog) {
     $scope.close = function(result) {
       dialog.close(result);
     };
+
+    $scope.agree = false;
   });

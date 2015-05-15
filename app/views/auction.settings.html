@@ -3,7 +3,7 @@
   <!-- USER PROFILE -->
   <section class="col-md-6 well settings-well" ng-controller="ProfileSettingsCtrl">
     <h2 class="well-title"><span translate>User Profile</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()" translate>Edit Settings</button>
         <button ng-show="profile.editable" class="btn-unstyle" ng-click="profile.save()" translate>Save Settings</button>
         <button ng-show="profile.editable" class="btn-unstyle cancel" ng-click="profile.cancel()" translate>Cancel</button>
@@ -127,7 +127,7 @@
   <!-- BUSINESS SETTINGS -->
   <section class="col-md-6 well settings-well leftMarginMedium" novalidate ng-controller="AccountManagementCtrl">
     <h2 class="well-title"><span translate>Business Settings</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()" translate>Edit Settings</button>
         <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()" translate>Save Settings</button>
         <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel</button>
@@ -198,7 +198,7 @@
   <!-- TITLE SETTINGS -->
   <section class="col-md-6 well settings-well" ng-controller="AccountManagementCtrl">
     <h2 class="well-title"><span translate>Title Settings</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
         <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()" translate>Save Settings</button>
         <button ng-show="title.editable" class="btn-unstyle cancel" ng-click="title.cancel()" translate>Cancel</button>
@@ -277,7 +277,7 @@
   <!-- NOTIFICATIONS -->
   <section class="col-md-6 well settings-well leftMarginMedium topMargin" ng-controller="ProfileSettingsCtrl">
     <h2 class="well-title"><span translate>Notifications</span>
-      <div class="well-sub-title">
+      <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="notifications.editable" class="btn-unstyle" ng-click="notifications.edit()" translate>Edit Settings</button>
         <button ng-show="notifications.editable" class="btn-unstyle" ng-click="notifications.save()" translate>Save Settings</button>
         <button ng-show="notifications.editable" class="btn-unstyle cancel" ng-click="notifications.cancel()" translate>Cancel</button>
