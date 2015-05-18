@@ -1,4 +1,34 @@
 <div class="row">
+  <section class="col-md-12 well settings-well">
+    <h2 class="well-title">
+      <span translate>Financial Accounts</span>
+
+      <!--<div class="well-sub-title well-sub-title-edit">-->
+        <!--<button ng-hide="banks.editable" class="btn-unstyle" ng-click="banks.edit()" translate>Add Payment Account-->
+        <!--</button>-->
+        <!--<button ng-show="banks.editable" class="btn-unstyle" ng-click="banks.save()" translate>Save Payment Account-->
+        <!--</button>-->
+        <!--<button ng-show="banks.editable" class="btn-unstyle cancel" ng-click="banks.cancel()" translate>Cancel</button>-->
+      <!--</div>-->
+    </h2>
+    <div class="well-item">
+      <div class="row well-item">
+        <div class="col-md-8 heavy">Descriptions</div>
+        <!--<div class="col-md-2 heavy">Last Modified</div>-->
+        <!--<div class="col-md-2 heavy">Date Added</div>-->
+        <div class="col-md-2 heavy"></div>
+        <div class="col-md-2 heavy text-right">View / Hide Details</div>
+      </div>
+      <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true">
+        <nxg-financial-account account="account" disbursement-account="financial.data.disbursementAccount"
+                               billing-account="financial.data.billingAccount">
+        </nxg-financial-account>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="row">
 
   <!-- BUSINESS SETTINGS -->
   <section class="col-md-6 well settings-well" novalidate>
@@ -15,10 +45,13 @@
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row">
           <label class="col-md-5" for="businessEmail" translate>Business Email</label>
+
           <div class="col-md-7" nxg-input model="business.data.email" editable="business.editable">
-            <input type="email" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
+            <input type="email" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email"
+                   value="business.dirtyData.email" ng-maxlength="100"
+                   ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required/>
             <label class="text-error" ng-show="business.validation.businessEmail.$invalid" translate>
-                Please enter a valid email address.
+              Please enter a valid email address.
             </label>
           </div>
         </div>
@@ -146,11 +179,12 @@
       <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
         <div class="row">
           <label class="col-md-5" for="titleAddr"><span translate>Default Address</span>:</label>
+
           <div class="col-md-7">
             <div class="row" ng-show="title.editable">
               <div class="col-md-10">
                 <div class="style-select">
-                  <select ng-model="title.dirtyData.titleAddress"
+                  <select id="titleAddr" ng-model="title.dirtyData.titleAddress"
                           ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
                           tooltip="{{ addr | address:'oneLine' }}"
                           tooltip-placement="right"
@@ -160,11 +194,11 @@
               </div>
               <div class="col-md-2">
                 <button class="btn-help btn-help-adjust"
-                  tooltip-placement="left"
-                  tooltip-trigger="focus"
-                  tooltip-html="true"
-                  tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
-                  tooltip-animation="true">
+                        tooltip-placement="left"
+                        tooltip-trigger="focus"
+                        tooltip-html="true"
+                        tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
+                        tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
                 </button>
               </div>
@@ -177,11 +211,11 @@
               </div>
               <div class="col-md-6">
                 <button class="btn-help"
-                  tooltip-placement="left"
-                  tooltip-trigger="focus"
-                  tooltip-html="true"
-                  tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
-                  tooltip-animation="true">
+                        tooltip-placement="left"
+                        tooltip-trigger="focus"
+                        tooltip-html="true"
+                        tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
+                        tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
                 </button>
               </div>
@@ -196,12 +230,15 @@
 
         <div class="row" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
           <label class="col-md-5"><span translate>Additional Addresses</span>:</label>
+
           <div class="col-md-7 static" ng-hide="title.editable">
             <ul class="zeroLeftPadding">
               <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
                 <div nxg-address="addr"></div>
               </li>
-              <li ng-show="title.data.extraAddresses" translate>And {{ title.data.extraAddresses }} additional addresses...</li>
+              <li ng-show="title.data.extraAddresses" translate>And {{ title.data.extraAddresses }} additional
+                addresses...
+              </li>
             </ul>
             <p ng-show="title.data.addresses.length == 0" translate>
               None
@@ -217,49 +254,48 @@
   <!-- FINANCIAL ACCOUNTS -->
   <section class="col-md-6 well settings-well">
     <h2 class="well-title" translate>Financial Accounts</h2>
+
     <div class="well-item">
       <form class="form-block" name="financialSettings" novalidate>
         <div class="row">
-          <label class="col-md-5" for="setBankAcct"><span translate>Bank Account(s)</span>:</label>
-          <div class="col-md-7">
-            <ul class="zeroLeftPadding">
-              <li ng-repeat="acct in financial.data.bankAccounts">{{ acct.BankAccountName }}</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row">
           <label class="col-md-5"><span translate>Available Credit</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.availableCredit | currency }}</div>
         </div>
 
         <div class="row">
           <label class="col-md-5"><span translate>Reserve Funds</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.reserveFunds || 0 | currency }}</div>
         </div>
 
         <div class="row">
           <label class="col-md-5"><span translate>Last Payment</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.lastPayment.amount | currency }}</div>
         </div>
 
         <div class="row">
           <label class="col-md-5"><span translate>Last Payment Date</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.lastPayment.date | moment }}</div>
         </div>
 
         <div class="row">
           <label class="col-md-5"><span translate>Unapplied Funds</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.unappliedFunds | currency }}</div>
         </div>
 
         <div class="row">
           <label class="col-md-5"><span translate>Total Available</span>:</label>
+
           <div class="col-md-7 static">{{ financial.data.totalAvailable | currency }}</div>
         </div>
 
         <div ng-show="financial.data.autoDisburseUnappliedFunds" class="row">
           <label class="col-md-5"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
+
           <div class="col-md-7 static">
             <span ng-show="financial.data.autoDisburseUnappliedFunds" translate>Enabled</span>
             <span ng-show="!financial.data.autoDisburseUnappliedFunds" translate>Disabled</span>
@@ -278,7 +314,9 @@
         <!-- CREDIT INCREASE -->
         <div class="col-md-6 static">
           <p><a href="javascript:void(0)" ng-click="onRequestCredIncr()" translate>Request a Credit Increase</a><br/>
-          <span translate>Initiate your request for a permanent or temporary increase to your current line of credit.</span></p>
+            <span
+                translate>Initiate your request for a permanent or temporary increase to your current line of credit.</span>
+          </p>
         </div>
 
         <!-- GO FINANCIAL -->

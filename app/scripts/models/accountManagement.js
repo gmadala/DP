@@ -16,6 +16,8 @@ angular.module('nextgearWebApp')
           return User.getInfo().then(function(info) {
             var settings = {};
             settings.BankAccounts = info.BankAccounts;
+            settings.DefaultDisbursementBankAccountId = info.DefaultDisbursementBankAccountId;
+            settings.DefaultBillingBankAccountId = info.DefaultBillingBankAccountId;
             settings.AvailableCredit = summary.TotalAvailableCredit;
             settings.ReserveFunds = summary.ReserveFundsBalance;
             settings.LastPayment = summary.LastPaymentAmount;
