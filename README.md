@@ -185,7 +185,8 @@ The primary tasks to be run from the terminal are as follows:
 #### ci-build
 
   This the top-level script run for continuous integration. It performs a build
-  and runs all tests and a jshint task at the end.
+  and runs all tests and a jshint task at the end. This task was setup to assist the DevOps team in setting up the
+  continuous build. However, it is currently getting refactoring into smaller pieces.
 
   *Sample usage*
 
@@ -198,3 +199,8 @@ The primary tasks to be run from the terminal are as follows:
 #### server-dist
   
   This task will run build process and start the webapp using data from the test API.
+  
+#### translate
+  
+  This task runs several tasks related to preparing and compiling translation files. Refer to /docs/translation
+  for detailed information about this task.
