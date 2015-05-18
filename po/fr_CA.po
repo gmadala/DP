@@ -850,15 +850,25 @@ msgstr "Activé"
 msgid "End Date"
 msgstr "Date d’expiration"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid "Enhanced Registration Enabled:"
+msgstr ""
+
+#: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr "Inscription améliorée activée?"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/auction.settings.html
 msgid "Enhanced Registration PIN"
 msgstr "NIP d’inscription améliorée"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid ""
+"Enhanced Registration will result in all account access being restricted to "
+"users with a PIN."
+msgstr ""
+
+#: app/views/auction.settings.html
 msgid ""
 "Enhanced Registration will result in all account access being restricted to "
 "users with a PIN. All guarantors will be asked to set up their PIN when "
@@ -1496,6 +1506,10 @@ msgstr "Dû"
 #: app/views/dashboard.html
 msgid "Overdue"
 msgstr "En retard"
+
+#: app/views/account_management.html
+msgid "PIN"
+msgstr ""
 
 #: app/404.html
 msgid "Page Not Found :("
