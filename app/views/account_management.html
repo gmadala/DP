@@ -58,7 +58,7 @@
 
         <div ng-show="business.editable && business.dirtyData.enhancedRegistrationEnabled">
           <div class="row">
-            <div class="col-md-7 offset-md-5">
+            <div class="col-md-7 col-md-offset-5">
               <p class="paragraph" translate></p>
 
               <p class="paragraph" translate>Create your Enhanced Registration four digit PIN.</p>
@@ -66,10 +66,10 @@
           </div>
 
           <div ng-show="business.editable">
-            <div class="row-fluid">
-              <label class="span1 offset-md-5"><span translate>PIN</span>:</label>
+            <div class="row">
+              <label class="col-md-1 col-md-offset-5"><span translate>PIN</span>:</label>
 
-              <div class="span1">
+              <div class="col-md-1">
                 <input type="text"
                        name="pin"
                        id="pin"
@@ -83,10 +83,12 @@
                        ng-class="{ 'nxg-invalid': business.validation.pin.$invalid }"/>
               </div>
             </div>
-            <div class="row-fluid">
-              <label for="pin" class="span7 offsetmd-5 text-error" ng-show="business.validation.pin.$invalid" translate>
-                Your PIN must consist of four numbers, no letters or special characters.
-              </label>
+            <div class="row">
+              <div class="col-md-7 col-md-offset-5">
+                <label for="pin" class="text-error" ng-show="business.validation.pin.$invalid" translate>
+                  Your PIN must consist of four numbers, no letters or special characters.
+                </label>
+              </div>
             </div>
           </div>
 
