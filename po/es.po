@@ -752,7 +752,7 @@ msgstr "Tipo de entrega"
 #: app/scripts/controllers/floorplan.js app/scripts/controllers/reports.js
 #: app/views/dashboard.html
 msgid "Denied"
-msgstr "Denegada"
+msgstr "Negado"
 
 #: app/scripts/controllers/floorplan.js
 msgid "Denied/Not Paid"
@@ -2781,6 +2781,10 @@ msgstr ""
 "el {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | "
 "moment}}. "
 
+#: app/scripts/controllers/dashboard.js
+msgid "This month"
+msgstr "Este mes"
+
 #: app/views/dashboard.html
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
@@ -2814,8 +2818,8 @@ msgstr ""
 "ha rechazado el vehículo. "
 
 #: app/scripts/controllers/dashboard.js
-msgid "This {{ dateType }}"
-msgstr "Esta {{ dateType }}"
+msgid "This week"
+msgstr "Esta semana"
 
 #: app/scripts/controllers/checkout.js
 msgid "This {{ paymentType }} cannot be scheduled"
@@ -3187,7 +3191,7 @@ msgstr "Ver el informe detallado del historial del vehículo"
 
 #: app/scripts/controllers/reports.js app/views/receipts.html
 msgid "Voided"
-msgstr "Nulo"
+msgstr "Anulado"
 
 #: app/views/auction.dashboard.html
 msgid "Volume of Past NextGear Capital Floorplans"
@@ -3581,3 +3585,6 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid "This {{ dateType }}"
+#~ msgstr "Esta {{ dateType }}"

@@ -133,10 +133,15 @@
         <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
-          <span class="lockup-minor" translate
+          <span class="lockup-minor" ng-show="viewMode === 'week'" translate
                 translate-n="paymentSummary[viewMode].UpcomingPayments"
-                translate-plural="Payments This {{ viewModeLabel | capitalize }}"
-                translate-comment="Payment This [Month, Year]">Payment This {{ viewModeLabel | capitalize }}</span>
+                translate-plural="Payments This Week">
+            Payment This Week
+          </span>
+                    <span class="lockup-minor" translate
+                          translate-n="paymentSummary[viewMode].UpcomingPayments"
+                          translate-plural="Payments This {{ viewModeLabel | capitalize }}"
+                          translate-comment="Payment This [Month, Year]">Payment This {{ viewModeLabel | capitalize }}</span>
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>

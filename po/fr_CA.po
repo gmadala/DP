@@ -2784,6 +2784,10 @@ msgstr ""
 "numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData."
 "selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
+#: app/scripts/controllers/dashboard.js
+msgid "This month"
+msgstr "Ce mois"
+
 #: app/views/dashboard.html
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
@@ -2818,8 +2822,8 @@ msgstr ""
 "les raisons du refus pour le véhicule en question."
 
 #: app/scripts/controllers/dashboard.js
-msgid "This {{ dateType }}"
-msgstr "Ce {{ dateType }}"
+msgid "This week"
+msgstr "Cette semaine"
 
 #: app/scripts/controllers/checkout.js
 msgid "This {{ paymentType }} cannot be scheduled"
@@ -3597,3 +3601,6 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#~ msgid "This {{ dateType }}"
+#~ msgstr "Ce {{ dateType }}"
