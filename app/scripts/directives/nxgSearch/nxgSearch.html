@@ -6,7 +6,7 @@
 
   <form name="searchForm form-horizontal" role="form" class="search" novalidate>
     <div class="row">
-      <div class="col-xs-8 col-md-5 col-lg-5">
+      <div class="col-md-5">
         <label for="keyword" translate>
           Find a Floor Plan
         </label>
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-8 col-lg-3" ng-show="filterable">
+      <div class="col-md-3" ng-show="filterable">
         <label for="filterSelect">{{ filterLabel }}</label>
         <div class="style-select auto">
           <select id="filterSelect" name="filterSelect"
@@ -30,7 +30,7 @@
                   ng-options="o.value as o.label for o in filterOptions"></select>
         </div>
       </div>
-      <div class="col-xs-8 col-lg-3" ng-show="dateRangeShown">
+      <div class="col-md-4" ng-show="dateRangeShown">
         <div class="range">
           <div class="range-start">
             <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-8 col-md-5" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2" >
+      <div class="col-md-5" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2" >
 
         <label for="invLocSelect" translate>Filter by Inventory Location</label>
 
@@ -65,7 +65,7 @@
                   ng-options="i.value as i.label for i in inventoryLocations"></select>
         </div>
       </div>
-      <div class="col-xs-8 col-md-5" ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
+      <div class="col-md-5" ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
         <label for="invLocSelect" translate>Filter by Inventory Location</label>
 
         <div class="style-select input-large">
