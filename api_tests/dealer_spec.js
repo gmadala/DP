@@ -54,14 +54,10 @@ frisby.login()
         IsMailingAddress: Boolean,
         IsPostOfficeBox: Boolean
       })
+      // these are active bank accounts used for payments
       .expectJSONTypes('Data.BankAccounts.*', {
         BankAccountId: String,
-        BankAccountName: String,
-        AchAccountNumberLast4: String,
-        IsActive: Boolean,
-        AchAbaNumber: String,
-        AchBankName: String,
-        AllowPaymentByAch: Boolean
+        BankAccountName: String
       })
       .expectJSONTypes('Data.LinesOfCredit.*', {
         LineOfCreditId: String,
@@ -76,6 +72,41 @@ frisby.login()
         State: String,
         Zip: String,
         Phone: String
+      })
+      .expectSuccess()
+      .toss();
+
+    frisby.create('Dealer: Get Summary')
+      .get(base + 'dealer/v1_1/summary')
+      .expectJSONTypes('Data', {
+        ApprovedFloorplans: Number,
+        AveragePurchasePrice: Number,
+        TotalApprovedPurchasePrice: Number,
+        TotalApprovedFinancedAmount: Number,
+        TotalApprovedBlackBookValue: Number,
+        TotalOutstandingPrincipal: Number,
+        PendingFloorplans: Number,
+        TotalPendingPurchasePrice: Number,
+        TotalPendingBlackBookPrice: Number,
+        TotalOutstandingCredit: Number,
+        TotalAvailableCredit: Number,
+        LastPaymentDate: String,
+        LastPaymentAmount: Number,
+        TotalPaymentInLast7Days: Number,
+        ReserveFundsBalance: Number,
+        TotalAvailableUnappliedFunds: Number,
+        UnappliedFundsTotal: Number,
+        BankAccounts: []
+      })
+      // these are all the bank accounts (that have ACH enabled) used for listing bank accounts in account management
+      .expectJSONTypes('Data.BankAccounts.*', {
+        BankAccountId: String,
+        BankAccountName: String,
+        AchAccountNumberLast4: String,
+        IsActive: Boolean,
+        AchAbaNumber: String,
+        AchBankName: String,
+        AllowPaymentByAch: Boolean
       })
       .expectSuccess()
       .toss();

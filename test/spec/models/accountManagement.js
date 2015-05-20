@@ -47,7 +47,7 @@ describe('Model: AccountManagement', function() {
     });
 
 
-    httpBackend.whenGET('/dealer/summary').respond({
+    httpBackend.whenGET('/dealer/v1_1/summary').respond({
       Success: true,
       Message: null,
       Data: {
@@ -56,7 +56,8 @@ describe('Model: AccountManagement', function() {
         LastPaymentDate: "2013-01-01",
         LastPaymentAmount: 180.00,
         UnappliedFundsTotal: 2222,
-        TotalAvailableUnappliedFunds: 1111
+        TotalAvailableUnappliedFunds: 1111,
+        BankAccounts: []
       }
     });
 
@@ -74,7 +75,7 @@ describe('Model: AccountManagement', function() {
   });
 
   it('should call getFinancialAccountData method', function() {
-    httpBackend.expectGET('/dealer/summary');
+    httpBackend.expectGET('/dealer/v1_1/summary');
 
     var res;
     accountManagement.getFinancialAccountData().then(function (result) {
