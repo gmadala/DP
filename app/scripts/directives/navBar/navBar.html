@@ -1,5 +1,5 @@
-<header class="app-header" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
-  <div class="container">
+<header class="app-header container-fixed" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
+  <div class="container container-fixed">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-md-3 ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
         <div class="nxg-logo" nxg-debug-title></div>
