@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="col-xs-3" ng-show="navState.current.showNavBar">
+      <div class="col-xs-3 pull-right" ng-show="navState.current.showNavBar">
         <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
           <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.BusinessName }}</p>
@@ -30,7 +30,7 @@
           </a>
 
           <ul class="unstyled" collapse="isCollapsed">
-            <li>
+            <li class="noLeftPadding">
               <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}" translate>Settings</a>
               <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}" translate>Profile Settings</a>
             </li>

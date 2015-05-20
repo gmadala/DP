@@ -43,6 +43,7 @@
   padding: 10px 20px;
   border: 1px solid $border;
   z-index: 100;
+  min-width:175px;
   max-width: 23.40426%; // same as span3, which is the width of the parent element
 
   &.expanded {

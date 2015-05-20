@@ -14,7 +14,7 @@
         <div class="row">
           <label class="col-xs-4" for="setUsername" translate>Username</label>
           <div class="col-xs-8 zeroPadding" nxg-input model="profile.data.username" editable="profile.editable">
-            <input type="text" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
+            <input type="text" name="setUsername" class="xsmallInput" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
             <label for="setUsername" class="text-error"
                    ng-show="profile.validation.setUsername.$error.required" translate>
               Please enter a Username.
@@ -31,7 +31,7 @@
           <div class="col-xs-8 zeroPadding">
             <div class="static" ng-hide="profile.editable">***********</div>
             <div ng-show="profile.editable">
-              <input type="password" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
+              <input type="password" name="setPassword" class="xsmallInput" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                 <button class="btn-help"
                         tooltip-placement="right"
                         tooltip-trigger="click"
@@ -49,7 +49,7 @@
         <div class="row" ng-show="profile.editable">
           <label class="col-xs-4" for="confirmPassword" translate>Confirm Password</label>
           <div class="col-xs-8 zeroPadding">
-            <input type="password" id="confirmPassword" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
+            <input type="password" id="confirmPassword" class="xsmallInput" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
             <label for="confirmPassword" class="text-error" ng-show="profile.validation.setPassword.$error.nomatch" translate>
               The passwords do not match. Please re-enter the password.
             </label>
@@ -82,7 +82,7 @@
           <div class="row" ng-show="profile.editable">
             <label class="col-xs-4" for="secAnswer" translate>Answer</label>
             <div class="col-xs-8 zeroLeftPadding">
-              <input type="text" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
+              <input type="text" name="secAnswer" class="xsmallInput" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
 
               <label class="text-error" ng-show="question.$error.required" translate>
                 Please enter an Answer.
@@ -96,7 +96,7 @@
         <div class="row">
           <label class="col-xs-4" for="email" translate>Email</label>
           <div class="col-xs-8 zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
-            <input type="email" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
+            <input type="email" name="email" class="xsmallInput" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
             <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
               Please enter a valid email address.
             </label>

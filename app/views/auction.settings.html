@@ -68,7 +68,7 @@
         <div ng-repeat="question in profile.dirtyData.questions" ng-show="profile.editable">
           <!-- Question Select -->
           <div class="row">
-            <label class="col-xs-4" translate>Security Question {{$index + 1}}</label>
+            <label class="col-xs-4 questText" translate>Security Question {{$index + 1}}</label>
             <div class="col-xs-8 style-select zeroLeftPadding">
               <select ng-model="question.SecurityQuestionId"
                       ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
