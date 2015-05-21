@@ -141,6 +141,18 @@ module.exports = function(grunt) {
         'api_tests/**/*.js'
       ]
     },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/scripts/**/*.js',
+        '!app/scripts/translations.js',
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
+      ]
+    },
     karma: {
       unit: {
         configFile: 'karma.conf.js',
