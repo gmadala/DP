@@ -449,7 +449,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint karma'
+        'pre-commit': 'jshint jscs karma'
       }
     }
   });
