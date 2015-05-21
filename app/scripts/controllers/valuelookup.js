@@ -85,6 +85,7 @@ angular.module('nextgearWebApp')
       vin: null,
       mileage: null,
       zipcode: null,
+      version: null,
       validity: {},
       searchComplete: false,
       resetSearch: function() {
@@ -154,6 +155,13 @@ angular.module('nextgearWebApp')
             var vin = this.vin;
             var mileage = this.mileage;
             var zipCode = this.zipcode;
+
+            Kbb.getVersion().then(function(version) {
+              $scope.kbb = {
+                version: version
+              };
+            });
+
             Kbb.getConfigurations(vin, zipCode).then(function (results) {
               if (results.length > 0) {
                 $scope.results.kbb.configuration = results[0];
@@ -423,6 +431,7 @@ angular.module('nextgearWebApp')
       },
 
       kbb: {
+        version: null,
         fields: ['years', 'makes', 'models', 'styles'],
         years: {
           selected: null,
@@ -523,6 +532,12 @@ angular.module('nextgearWebApp')
             Model: which.models.selected.Value,
             Year: which.years.selected.Value
           };
+
+          Kbb.getVersion().then(function(version) {
+            $scope.kbb = {
+              version: version
+            };
+          });
 
           Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicle) {
             // TODO find out real behavior here

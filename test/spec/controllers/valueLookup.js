@@ -387,6 +387,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
   describe('vin lookup', function() {
     beforeEach(function() {
+      $httpBackend.whenGET('/kbb/miscellaneous/GetReleaseVersionByVersionDate/0').respond({});
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
       $httpBackend.whenGET('/mmr/years/').respond({});
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
@@ -417,6 +418,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
     describe('lookup function', function() {
       beforeEach(function() {
+        $httpBackend.whenGET('/kbb/miscellaneous/GetReleaseVersionByVersionDate/0').respond({});
         $httpBackend.whenGET('/analytics/v1_2/blackbook/someVin1234/8888').respond(bbResult);
         $httpBackend.whenGET('/mmr/getVehicleValueByVin/someVin1234/8888').respond(mmrResult);
         $httpBackend.whenGET('/kbb/vin/getvehicleconfigurationbyvinandclass/UsedCar/someVin1234/12345').respond(configResult);
@@ -566,6 +568,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
   describe('manual lookup', function() {
     beforeEach(function() {
+      $httpBackend.whenGET('/kbb/miscellaneous/GetReleaseVersionByVersionDate/0').respond({});
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond(mock.bb.makes);
       $httpBackend.whenGET('/mmr/years/').respond(mock.mmr.years);
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond(mock.kbb.years);
