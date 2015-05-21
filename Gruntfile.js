@@ -588,6 +588,7 @@ module.exports = function(grunt) {
     grunt.task.run('test:e2e:users');
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
     grunt.task.run('jshint');
+    grunt.task.run('jscs');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
