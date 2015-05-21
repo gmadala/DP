@@ -407,9 +407,10 @@ module.exports = function(grunt) {
       },
       msgmerge: {
         command: function (filename) {
-          // use -N for --no-fuzzy-matching and echo how many strings are untranslated
+          // use -N for --no-fuzzy-matching and echo how many strings are untranslated (use 'tail' to skip opening
+          // comment lines which typically have an irrelevant msgid)
           return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
-            'msgattrib --untranslated ' + filename + ' | echo $(grep "msgid" -c) untranslated strings';
+            'msgattrib --untranslated ' + filename + ' | tail -n +10 | echo $(grep "msgid" -c) untranslated strings';
         }
       }
     },

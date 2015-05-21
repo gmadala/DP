@@ -805,13 +805,26 @@ msgstr "Télécharger NextGear Capital Mobile sur iOS"
 msgid "Due Date"
 msgstr "Date d'échéance"
 
-#: app/scripts/controllers/payments.js
-msgid "Due This Week"
-msgstr "Dû cette semaine"
+#. Payment(s) due this month
+#: app/views/dashboard.html
+msgid "Due This Month"
+msgid_plural "Due This Month"
+msgstr[0] "Dû ce mois"
+msgstr[1] "Dûs ce mois"
 
+#. Payment(s) due this week
+#: app/scripts/controllers/payments.js app/views/dashboard.html
+msgid "Due This Week"
+msgid_plural "Due This Week"
+msgstr[0] "Dû cette semaine"
+msgstr[1] "Dûs cette semaine"
+
+#. Payment(s) due today
 #: app/scripts/controllers/payments.js app/views/dashboard.html
 msgid "Due Today"
-msgstr "À Échéance Aujourd'hui"
+msgid_plural "Due today"
+msgstr[0] "À Échéance Aujourd'hui"
+msgstr[1] "À Échéance Aujourd'hui"
 
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
@@ -1503,9 +1516,12 @@ msgstr "Durée originale"
 msgid "Outstanding"
 msgstr "Dû"
 
+#. Payment(s) overdue
 #: app/views/dashboard.html
 msgid "Overdue"
-msgstr "En retard"
+msgid_plural "Overdue"
+msgstr[0] "En retard"
+msgstr[1] "En retard"
 
 #: app/views/account_management.html
 msgid "PIN"
@@ -1616,13 +1632,6 @@ msgstr "Recherche de paiement"
 #: app/views/vehicledetails.html
 msgid "Payment Summary"
 msgstr "Sommaire des Paiements"
-
-#. Payment This [Month, Year]
-#: app/views/dashboard.html
-msgid "Payment This {{ viewModeLabel | capitalize }}"
-msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
-msgstr[0] "Paiements dû cette {{ viewModeLabel | capitalize }}"
-msgstr[1] "Paiements dû cette {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -3153,8 +3162,8 @@ msgstr "Très bon"
 msgid "Video Walkthrough"
 msgstr "Guide vidéo"
 
-#: app/scripts/controllers/floorplan.js app/scripts/controllers/payments.js
-#: app/scripts/controllers/receipts.js
+#: app/scripts/controllers/dashboard.js app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/payments.js app/scripts/controllers/receipts.js
 #: app/scripts/controllers/titleReleases.js
 #: app/scripts/directives/nxgSearch/nxgSearch.js
 msgid "View All"
@@ -3601,6 +3610,3 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
-
-#~ msgid "This {{ dateType }}"
-#~ msgstr "Ce {{ dateType }}"

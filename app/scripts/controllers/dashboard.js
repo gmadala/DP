@@ -178,7 +178,7 @@ angular.module('nextgearWebApp')
           if($scope.dashboardData.LinesOfCredit.length === 1) {
             $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];
           } else {
-            var viewAllCredit = Dashboard.createLineOfCreditObject('View All');
+            var viewAllCredit = Dashboard.createLineOfCreditObject(gettextCatalog.getString('View All'));
             $scope.dashboardData.selectedLineOfCredit = viewAllCredit;
             $scope.dashboardData.LinesOfCredit.unshift(viewAllCredit); // add viewAllCredit to the beginning of LinesOfCredit array.
 
@@ -217,7 +217,8 @@ angular.module('nextgearWebApp')
             gettext('This week');
 
             // return the actual translation
-            return gettextCatalog.getString('This ' + $scope.viewMode);
+            var paymentsTitle = 'This ' + $scope.viewMode;
+            return gettextCatalog.getString(paymentsTitle);
           }
 
           $scope.chartData = {
@@ -232,7 +233,7 @@ angular.module('nextgearWebApp')
             paymentsTitle: {
               useHTML: true,
               floating: true,
-              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary" translate>' + getPaymentsTitle() + '</p>',
+              text:'<h2 class="center chart-label-primary">' + $filter('numeral')(result.paymentChartData.total, '($0[.]00a)') + '</h2><p class="center chart-label-secondary">' + getPaymentsTitle() + '</p>',
               y: 75
             }
           };
