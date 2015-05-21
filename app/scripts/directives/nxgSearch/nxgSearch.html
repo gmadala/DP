@@ -1,4 +1,4 @@
-<div class="well container-fluid">
+<div class="well">
   <h2 class="well-title">
     {{ title }}
     <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)" nxg-track="{{metricClearSearch}}"><strong translate>Clear Search</strong></button>
@@ -30,7 +30,7 @@
                   ng-options="o.value as o.label for o in filterOptions"></select>
         </div>
       </div>
-      <div class="col-md-4" ng-show="dateRangeShown">
+      <div class="col-xs-4" ng-show="dateRangeShown">
         <div class="range">
           <div class="range-start">
             <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
