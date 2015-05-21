@@ -141,6 +141,21 @@ module.exports = function(grunt) {
         'api_tests/**/*.js'
       ]
     },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/scripts/**/*.js',
+        '!app/scripts/translations.js',
+        // TODO JSCS could be used for all test files depending on what rules we decide on
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
+        //'!test/spec/**/*.js',
+        //'test/util/**/*.js'
+      ]
+    },
     karma: {
       unit: {
         configFile: 'karma.conf.js',
@@ -434,7 +449,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint karma'
+        'pre-commit': 'jshint jscs karma'
       }
     }
   });
