@@ -52,39 +52,48 @@ describe('Directive: nxgFinancialAccount', function () {
 
   it('should be displayed only if AllowPaymentByAch is true', function () {
 
-    expect(iScope.isDisplayed()).toBeTruthy();
+    expect(iScope.displayed).toBeTruthy();
 
     iScope.account.AllowPaymentByAch = false;
 
-    expect(iScope.isDisplayed()).toBeFalsy();
+    createIsolateScope();
+
+    expect(iScope.displayed).toBeFalsy();
   });
 
   it('should be displayed if active or inactive', function () {
 
     iScope.account.IsActive = true;
-    expect(iScope.isDisplayed()).toBeTruthy();
+    createIsolateScope();
+    expect(iScope.displayed).toBeTruthy();
 
     iScope.account.IsActive = false;
-    expect(iScope.isDisplayed()).toBeTruthy();
+    createIsolateScope();
+    expect(iScope.displayed).toBeTruthy();
   });
 
   it('status should be "Active" if IsActive is true', function () {
 
     iScope.account.IsActive = true;
 
-    expect(iScope.getAccountStatus()).toEqual('Active');
+    createIsolateScope();
+
+    expect(iScope.status).toEqual('Active');
   });
 
   it('status should be "Inactive" if IsActive is not true', function () {
 
     iScope.account.IsActive = null;
-    expect(iScope.getAccountStatus()).toEqual('Inactive');
+    createIsolateScope();
+    expect(iScope.status).toEqual('Inactive');
 
     iScope.account.IsActive = undefined;
-    expect(iScope.getAccountStatus()).toEqual('Inactive');
+    createIsolateScope();
+    expect(iScope.status).toEqual('Inactive');
 
     iScope.account.IsActive = false;
-    expect(iScope.getAccountStatus()).toEqual('Inactive');
+    createIsolateScope();
+    expect(iScope.status).toEqual('Inactive');
   });
 
   it('descriptive account name should append the last 4 digits of the account number (if not already in the name)',
@@ -93,10 +102,12 @@ describe('Directive: nxgFinancialAccount', function () {
       iScope.account.AchAccountNumberLast4 = 1234;
 
       iScope.account.BankAccountName = "My Account";
-      expect(iScope.getDescriptiveAccountName()).toEqual('My Account - 1234');
+      createIsolateScope();
+      expect(iScope.descriptiveName).toEqual('My Account - 1234');
 
       iScope.account.BankAccountName = "My7771234777Account";
-      expect(iScope.getDescriptiveAccountName()).toEqual('My7771234777Account');
+      createIsolateScope();
+      expect(iScope.descriptiveName).toEqual('My7771234777Account');
     });
 
   it('should designate default disbursement account', function () {
@@ -105,7 +116,7 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.defaults.indexOf('Default Disbursement')).toBeGreaterThan(-1);
+    expect(iScope.defaultForDisbursement).toBeTruthy();
   });
 
   it('should designate default billing account', function () {
@@ -114,7 +125,7 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.defaults.indexOf('Default Payment')).toBeGreaterThan(-1);
+    expect(iScope.defaultForBilling).toBeTruthy();
   });
 
   it('should not have special designations for non-billing, non-disbursement', function () {
@@ -123,6 +134,7 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.defaults.length).toBe(0);
+    expect(iScope.defaultForDisbursement).toBeFalsy();
+    expect(iScope.defaultForBilling).toBeFalsy();
   });
 });
