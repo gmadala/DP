@@ -11,7 +11,7 @@
 }
 
 body, html {
-  min-width: 1020px;
+  min-width: 1020px !important;
   color: $text;
 }
 
@@ -78,7 +78,7 @@ body {
   z-index: 1000 !important;
 }
 
-//Bootstrap 3 override for margins between columns
+//Bootstrap 3 override for margins between columns, and padding
 .RecievableDetailMargin
 {
   margin-left:-35px;
@@ -128,18 +128,18 @@ body {
 .leftMarginLarge {
   margin-left:25px;
 }
-.col-md-3 {
+.col-xs-3 {
   width:23%;
 }
-.col-md-4 {
+.col-xs-4 {
   width: 31%;
 }
 
-.col-md-6 {
+.col-xs-6 {
 width:48%;
   margin: 0 1%;
 }
-.col-md-10{
+.col-xs-10{
   width: 81%;
   margin: 0 1.0%;
 }

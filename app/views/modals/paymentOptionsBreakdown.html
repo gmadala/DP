@@ -70,29 +70,29 @@
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="col-md-8"><span translate>Principal</span>:</p>
-        <p class="col-md-4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
+        <p class="col-xs-8"><span translate>Principal</span>:</p>
+        <p class="col-xs-4 value numeric">{{ (paymentBreakdown.principal | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && curtailmentObject.additionalPrincipal">
-        <p class="col-md-8"><span translate>Additional Principal</span>:</p>
-        <p class="col-md-4 value numeric">{{ curtailmentObject.additionalPrincipal | currency }}</p>
+        <p class="col-xs-8"><span translate>Additional Principal</span>:</p>
+        <p class="col-xs-4 value numeric">{{ curtailmentObject.additionalPrincipal | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-8"><span translate>Interest</span>:</p>
-        <p class="col-md-4 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
+        <p class="col-xs-8"><span translate>Interest</span>:</p>
+        <p class="col-xs-4 value numeric">{{ (paymentBreakdown.interest | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-8"><span translate>Fee(s)</span>:</p>
-        <p class="col-md-4 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
+        <p class="col-xs-8"><span translate>Fee(s)</span>:</p>
+        <p class="col-xs-4 value numeric">{{ (paymentBreakdown.fees | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-row" ng-show="paymentObject.payment.cpp">
-        <p class="col-md-8"><span translate>CPP</span>:</p>
-        <p class="col-md-4 value numeric"><span class="table-symbol">+</span>{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
+        <p class="col-xs-8"><span translate>CPP</span>:</p>
+        <p class="col-xs-4 value numeric"><span class="table-symbol">+</span>{{ (paymentBreakdown.cpp | currency) || 'n/a' }}</p>
       </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
-        <p class="col-md-8"><span translate>Payment Total</span>:</p>
-        <p class="col-md-4 value numeric">{{ (paymentObject.getCheckoutAmount(selector.paymentOption) | currency) || 'n/a' }}</p>
+        <p class="col-xs-8"><span translate>Payment Total</span>:</p>
+        <p class="col-xs-4 value numeric">{{ (paymentObject.getCheckoutAmount(selector.paymentOption) | currency) || 'n/a' }}</p>
       </li>
     </ul>
     <p class="paragraph">Amounts shown are valid through 8pm Eastern Time

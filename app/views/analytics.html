@@ -7,40 +7,40 @@
 </section>
 
 <section class="row business-summary {{ showDetails && 'expanded' || 'collapsed'}}">
-<div class="col-md-12 well">
+<div class="col-xs-12 well">
     <h2 class="well-title" translate>Business Summary</h2>
 
     <div class="row leftMarginLarge">
-      <div class="col-md-4 well-item">
+      <div class="col-xs-4 well-item">
         <h3 translate>Approved Floor Plans</h3>
 
         <span class="counter"> {{ businessSummary.ApprovedFloorplans }} </span> <span translate>Approved</span>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="col-md-7"><span translate>Total NextGear Capital Book Value</span>:</p>
-            <p class="col-md-4 value numeric">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
-            <p class="col-md-1" ng-hide="isUnitedStates">USD</p>
+            <p class="col-xs-7 zeroLeftPadding"><span translate>Total NextGear Capital Book Value</span>:</p>
+            <p class="col-xs-4 value numeric zeroLeftPadding">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
+            <p class="col-xs-1" ng-hide="isUnitedStates">USD</p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-7"> <span translate>Total Financed Amount</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
-            <p class="col-md-1"></p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Financed Amount</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
+            <p class="col-xs-1"></p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-7"> <span translate>Total Outstanding</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
-            <p class="col-md-1"></p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Outstanding</span>: </p>
+            <p class="col-xs-4 value numeric"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
+            <p class="col-xs-1"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="col-md-7"> <span translate>Average Purchase Price</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
-            <p class="col-md-1"></p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Average Purchase Price</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
+            <p class="col-xs-1"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
-            <p class="col-md-7"> <span translate>Total Purchase Price</span>: </p>
-            <p class="col-md-4 value numeric">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
-            <p class="col-md-1"></p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Purchase Price</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
+            <p class="col-xs-1"></p>
           </li>
         </ul>
 
@@ -52,20 +52,21 @@
         </p>
       </div>
 
-      <div class="col-md-4 well-item">
+      <div class="col-xs-4 well-item">
         <h3 translate>Pending Floor Plans</h3>
         <span class="counter"> {{ businessSummary.PendingFloorplans }} </span> <span translate>Pending</span>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="col-md-7"> <span translate>Total Purchase Price</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
-            <p class="col-md-1"></p>
+            <p class="col-xs-7 zeroLeftPadding
+            "> <span translate>Total Purchase Price</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
+            <p class="col-xs-1"></p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-7"> <span translate>Total NextGear Capital Book Value</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
-            <p class="col-md-1" ng-hide="isUnitedStates">USD</p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Total NextGear Capital Book Value</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
+            <p class="col-xs-1" ng-hide="isUnitedStates">USD</p>
           </li>
         </ul>
 
@@ -74,25 +75,25 @@
         </p>
       </div>
 
-      <div class="col-md-4 well-item">
+      <div class="col-xs-4 well-item">
         <h3 translate>Credits and Payments</h3>
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="col-md-8"> <span translate>Available Credit</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.TotalAvailableCredit | currency }}</p>
+            <p class="col-xs-8 zeroLeftPadding"> <span translate>Available Credit</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.TotalAvailableCredit | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-8"> <span translate>Reserve Funds</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.ReserveFundsBalance | currency }}</p>
+            <p class="col-xs-8 zeroLeftPadding"> <span translate>Reserve Funds</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.ReserveFundsBalance | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-7"> <span translate>Last Payment</span>: </p>
-            <p class="col-md-5 value numeric"> {{ businessSummary.LastPaymentAmount | currency }}</p>
+            <p class="col-xs-7 zeroLeftPadding"> <span translate>Last Payment</span>: </p>
+            <p class="col-xs-5 value numeric zeroLeftPadding"> {{ businessSummary.LastPaymentAmount | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-md-8"> <span translate>Last Payment Date</span>: </p>
-            <p class="col-md-4 value numeric"> {{ businessSummary.LastPaymentDate | moment }}</p>
+            <p class="col-xs-8 zeroLeftPadding"> <span translate>Last Payment Date</span>: </p>
+            <p class="col-xs-4 value numeric zeroLeftPadding"> {{ businessSummary.LastPaymentDate | moment }}</p>
           </li>
         </ul>
       </div>
@@ -109,7 +110,7 @@
 </button>
 
 <section class="row">
-  <div class="col-md-9 well analytics-well average-turn-chart">
+  <div class="col-xs-9 well analytics-well average-turn-chart">
     <h2 class="well-title" translate>Average Turn</h2>
 
     <div class="well-item">
@@ -125,56 +126,56 @@
     </div>
   </div>
 
-  <div class="col-md-3 well analytics-well aging-vehicles leftMarginMedium">
+  <div class="col-xs-3 well analytics-well aging-vehicles leftMarginMedium">
     <h2 class="well-title" translate>Stale and Aging Vehicles</h2>
 
     <div class="well-item">
       <ul class="list-table">
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter overdue">{{ analytics.aging[5] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>100+</strong> Days
           </p>
         </li>
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter">{{ analytics.aging[4] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>75-99</strong> Days
           </p>
         </li>
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter">{{ analytics.aging[3] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>50-74</strong> Days
           </p>
         </li>
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter">{{ analytics.aging[2] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>25-49</strong> Days
           </p>
         </li>
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter">{{ analytics.aging[1] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>1-24</strong> Days
           </p>
         </li>
         <li class="list-table-row">
-          <p class="col-md-4">
+          <p class="col-xs-4">
             <span class="counter">{{ analytics.aging[0] }}</span>
           </p>
-          <p class="col-md-8 numeric counter-label" translate>
+          <p class="col-xs-8 numeric counter-label" translate>
             <strong>0</strong> Days
           </p>
         </li>
@@ -184,10 +185,10 @@
 </section>
 
 <section class="row">
-  <div class="col-md-6 well movers-container">
+  <div class="col-xs-6 well movers-container">
     <h2 class="well-title" translate>Best and Worst Movers by Zipcode</h2>
     <div class="well-item">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-xs-8 col-xs-offset-2">
         <div class="cta btn-toggle">
           <div class="btn-slider" ng-class="{ 'active-left':showBest(), 'active-right':!showBest() }"></div>
           <button class="btn" ng-click="changeMoverChart('best')" translate>Best Movers</button>
@@ -224,7 +225,7 @@
   </div>
 
 
-  <div class="col-md-6 well top-auctions-container">
+  <div class="col-xs-6 well top-auctions-container">
     <h2 class="well-title" translate>Your Top 10 Auctions</h2>
     <div class="well-item">
       <h4 translate>Number of Cars Purchased Per-Auction (in the last 12 months)</h4>

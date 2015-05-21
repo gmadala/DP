@@ -1,5 +1,5 @@
 <section class="row">
-  <section class="col-md-5 lookup-options">
+  <section class="col-xs-5 lookup-options">
     <div class="well">
       <h4 class="well-title">
         <span translate>VIN Lookup</span>
@@ -81,7 +81,7 @@
         <form class="value-form" name="manualLookupForm" novalidate>
           <div class="form-block" ng-switch="lookupValues.id">
             <div class="row leftMargin">
-              <div class="style-select col-md-10 zeroPadding" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
+              <div class="style-select col-xs-10 zeroPadding" ng-class="{ 'nxg-invalid': manualLookupForm.lookupValues.$error.required }">
                 <select id="lookupValues" name="lookupValues" ng-model="lookupValues"
                         ng-options="lookupValues.name for lookupValues in manualLookupValues"
                         required>
@@ -373,7 +373,7 @@
     </div>
   </section>
 
-  <section class="col-md-7">
+  <section class="col-xs-7">
     <div class="info-block" ng-hide="isUnitedStates">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
@@ -416,10 +416,10 @@
       <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
       <div ng-show="results.blackbook.multiple">
         <div class="row">
-          <div class="col-md-1 heavy">
+          <div class="col-xs-1 heavy">
             <label for="blackbookSelectSingle"><span translate>Model</span>:</label>
           </div>
-          <div class="col-md-11">
+          <div class="col-xs-11">
             <div class="style-select">
               <select id="blackbookSelectSingle"
                       name="blackbookSelectSingle"
@@ -430,34 +430,34 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Style</span>:</div>
-          <div class="col-md-11">{{ results.blackbook.data.Style }}</div>
+          <div class="col-xs-1 heavy"><span translate>Style</span>:</div>
+          <div class="col-xs-11">{{ results.blackbook.data.Style }}</div>
         </div>
       </div>
       <div ng-hide="!vinLookup.searchComplete || results.blackbook.multiple || results.blackbook.noMatch">
         <div class="row">
-          <div class="col-md-1 heavy description-spacer"><span translate>Model</span>:</div>
-          <div class="col-md-11">{{ results.blackbook.data.Model }}</div>
+          <div class="col-xs-1 heavy description-spacer"><span translate>Model</span>:</div>
+          <div class="col-xs-11">{{ results.blackbook.data.Model }}</div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Style</span>:</div>
-          <div class="col-md-11">{{ results.blackbook.data.Style }}</div>
+          <div class="col-xs-1 heavy"><span translate>Style</span>:</div>
+          <div class="col-xs-11">{{ results.blackbook.data.Style }}</div>
         </div>
       </div>
       <div class="valuation-table row" ng-class="{ 'nxg-fade':results.blackbook.noMatch }">
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.ExtraCleanValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5 translate>Extra Clean</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.CleanValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5 translate>Clean</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.AverageValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5 translate>Average</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.blackbook.data.RoughValue" search-done="searchCompleteCheck()" no-results="results.blackbook.noMatch"></h3>
           <h5 translate>Rough</h5>
         </div>
@@ -469,14 +469,14 @@
       <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
       <div ng-show="results.mmr.multiple">
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Model</span>:</div>
-          <div class="col-md-11">{{ results.mmr.data.Model }}</div>
+          <div class="col-xs-1 heavy"><span translate>Model</span>:</div>
+          <div class="col-xs-11">{{ results.mmr.data.Model }}</div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy">
+          <div class="col-xs-1 heavy">
             <label for="mmrSelectSingle"><span translate>Style</span>:</label>
           </div>
-          <div class="col-md-11">
+          <div class="col-xs-11">
             <div class="style-select">
               <select id="mmrSelectSingle"
                       name="mmrSelectSingle"
@@ -489,29 +489,29 @@
       </div>
       <div ng-hide="!vinLookup.searchComplete || results.mmr.multiple || results.mmr.noMatch">
         <div class="row">
-          <div class="col-md-1 heavy description-spacer"><span translate>Model</span>:</div>
-          <div class="col-md-11">{{ results.mmr.data.Model }}</div>
+          <div class="col-xs-1 heavy description-spacer"><span translate>Model</span>:</div>
+          <div class="col-xs-11">{{ results.mmr.data.Model }}</div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Style</span>:</div>
-          <div class="col-md-11">{{ results.mmr.data.Body }}</div>
+          <div class="col-xs-1 heavy"><span translate>Style</span>:</div>
+          <div class="col-xs-11">{{ results.mmr.data.Body }}</div>
         </div>
       </div>
       <div class="valuation-table row" ng-class="{ 'nxg-fade':results.mmr.noMatch }">
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.ExcellentWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch">
           </h3>
           <h5 translate>Excellent</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.GoodWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5 translate>Good</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.AverageWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5 translate>Average</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.mmr.data.FairWholesale" search-done="searchCompleteCheck()" no-results="results.mmr.noMatch"></h3>
           <h5 translate>Fair</h5>
         </div>
@@ -523,14 +523,14 @@
       <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> values at this time.</p>
       <div ng-show="results.kbb.configurations">
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Model</span>:</div>
-          <div class="col-md-11">{{ results.kbb.configuration.Model.Value }}</div>
+          <div class="col-xs-1 heavy"><span translate>Model</span>:</div>
+          <div class="col-xs-11">{{ results.kbb.configuration.Model.Value }}</div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy">
+          <div class="col-xs-1 heavy">
             <label for="kbbSelectSingle"><span translate>Style</span>:</label>
           </div>
-          <div class="col-md-11">
+          <div class="col-xs-11">
             <div class="style-select">
               <select id="kbbSelectSingle"
                       name="kbbSelectSingle"
@@ -544,29 +544,29 @@
       </div>
       <div ng-hide="!vinLookup.searchComplete || results.kbb.configurations || results.kbb.noMatch">
         <div class="row">
-          <div class="col-md-1 heavy description-spacer"><span translate>Model</span>:</div>
-          <div class="col-md-11">{{ results.kbb.configuration.Model.Value }}</div>
+          <div class="col-xs-1 heavy description-spacer"><span translate>Model</span>:</div>
+          <div class="col-xs-11">{{ results.kbb.configuration.Model.Value }}</div>
         </div>
         <div class="row">
-          <div class="col-md-1 heavy"><span translate>Style</span>:</div>
-          <div class="col-md-11">{{ results.kbb.configuration.Trim.Value }}</div>
+          <div class="col-xs-1 heavy"><span translate>Style</span>:</div>
+          <div class="col-xs-11">{{ results.kbb.configuration.Trim.Value }}</div>
         </div>
       </div>
       <div class="valuation-table row" ng-class="{ 'nxg-fade':results.kbb.noMatch }">
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.14" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch">
           </h3>
           <h5 translate>Excellent</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.16" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
           <h5 translate>Very Good</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.15" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
           <h5 translate>Good</h5>
         </div>
-        <div class="col-md-3 center">
+        <div class="col-xs-3 center">
           <h3 class="highlight heavy" nxg-value-lookup-display="results.kbb.data.17" search-done="searchCompleteCheck()" no-results="results.kbb.noMatch"></h3>
           <h5 translate>Fair</h5>
         </div>

@@ -25,7 +25,7 @@
   background: url(../img/nxg_logo_blue.png);
   background-repeat: no-repeat;
   background-size: 200px 64px;
-  background-position: 20px 0;
+  background-position: 0px 0;
   height: 70px;
   position: relative;
   top: 10px;
@@ -43,7 +43,8 @@
   padding: 10px 20px;
   border: 1px solid $border;
   z-index: 100;
-  //max-width: 23.40426%; // same as span3, which is the width of the parent element
+  min-width:175px;
+  max-width: 23.40426%; // same as span3, which is the width of the parent element
 
   &.expanded {
     @include box-shadow(rgba(0,0,0,0.25) 0 3px 3px);
