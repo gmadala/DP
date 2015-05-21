@@ -118,14 +118,26 @@
       <li id="overdue" class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate>Overdue</p>
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].OverduePayments"
+             translate-plural="Overdue"
+             translate-comment="Payment(s) overdue">
+            Overdue
+          </p>
           <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li id="today" class="clickable" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate>Due Today</p>
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].PaymentsDueToday"
+             translate-plural="Due today"
+             translate-comment="Payment(s) due today">
+            Due Today
+          </p>
           <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
@@ -133,10 +145,20 @@
         <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
-          <span class="lockup-minor" translate
+          <span class="lockup-minor" ng-show="viewMode === 'week'"
+                translate
                 translate-n="paymentSummary[viewMode].UpcomingPayments"
-                translate-plural="Payments This {{ viewModeLabel | capitalize }}"
-                translate-comment="Payment This [Month, Year]">Payment This {{ viewModeLabel | capitalize }}</span>
+                translate-plural="Due This Week"
+                translate-comment="Payment(s) due this week">
+            Due This Week
+          </span>
+          <span class="lockup-minor" ng-show="viewMode === 'month'"
+                translate
+                translate-n="paymentSummary[viewMode].UpcomingPayments"
+                translate-plural="Due This Month"
+                translate-comment="Payment(s) due this month">
+            Due This Month
+          </span>
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>

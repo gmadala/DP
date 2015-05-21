@@ -805,13 +805,26 @@ msgstr "Télécharger NextGear Capital Mobile sur iOS"
 msgid "Due Date"
 msgstr "Date d'échéance"
 
-#: app/scripts/controllers/payments.js
-msgid "Due This Week"
-msgstr "Dû cette semaine"
+#. Payment(s) due this month
+#: app/views/dashboard.html
+msgid "Due This Month"
+msgid_plural "Due This Month"
+msgstr[0] "Dû ce mois"
+msgstr[1] "Dûs ce mois"
 
+#. Payment(s) due this week
+#: app/scripts/controllers/payments.js app/views/dashboard.html
+msgid "Due This Week"
+msgid_plural "Due This Week"
+msgstr[0] "Dû cette semaine"
+msgstr[1] "Dûs cette semaine"
+
+#. Payment(s) due today
 #: app/scripts/controllers/payments.js app/views/dashboard.html
 msgid "Due Today"
-msgstr "À Échéance Aujourd'hui"
+msgid_plural "Due today"
+msgstr[0] "À Échéance Aujourd'hui"
+msgstr[1] "À Échéance Aujourd'hui"
 
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
@@ -850,15 +863,25 @@ msgstr "Activé"
 msgid "End Date"
 msgstr "Date d’expiration"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid "Enhanced Registration Enabled:"
+msgstr ""
+
+#: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr "Inscription améliorée activée?"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/auction.settings.html
 msgid "Enhanced Registration PIN"
 msgstr "NIP d’inscription améliorée"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid ""
+"Enhanced Registration will result in all account access being restricted to "
+"users with a PIN."
+msgstr ""
+
+#: app/views/auction.settings.html
 msgid ""
 "Enhanced Registration will result in all account access being restricted to "
 "users with a PIN. All guarantors will be asked to set up their PIN when "
@@ -1493,9 +1516,16 @@ msgstr "Durée originale"
 msgid "Outstanding"
 msgstr "Dû"
 
+#. Payment(s) overdue
 #: app/views/dashboard.html
 msgid "Overdue"
-msgstr "En retard"
+msgid_plural "Overdue"
+msgstr[0] "En retard"
+msgstr[1] "En retard"
+
+#: app/views/account_management.html
+msgid "PIN"
+msgstr ""
 
 #: app/404.html
 msgid "Page Not Found :("
@@ -1602,13 +1632,6 @@ msgstr "Recherche de paiement"
 #: app/views/vehicledetails.html
 msgid "Payment Summary"
 msgstr "Sommaire des Paiements"
-
-#. Payment This [Month, Year]
-#: app/views/dashboard.html
-msgid "Payment This {{ viewModeLabel | capitalize }}"
-msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
-msgstr[0] "Paiements dû cette {{ viewModeLabel | capitalize }}"
-msgstr[1] "Paiements dû cette {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -2770,6 +2793,10 @@ msgstr ""
 "numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData."
 "selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
+#: app/scripts/controllers/dashboard.js
+msgid "This month"
+msgstr "Ce mois"
+
 #: app/views/dashboard.html
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
@@ -2804,8 +2831,8 @@ msgstr ""
 "les raisons du refus pour le véhicule en question."
 
 #: app/scripts/controllers/dashboard.js
-msgid "This {{ dateType }}"
-msgstr "Ce {{ dateType }}"
+msgid "This week"
+msgstr "Cette semaine"
 
 #: app/scripts/controllers/checkout.js
 msgid "This {{ paymentType }} cannot be scheduled"
@@ -3135,8 +3162,8 @@ msgstr "Très bon"
 msgid "Video Walkthrough"
 msgstr "Guide vidéo"
 
-#: app/scripts/controllers/floorplan.js app/scripts/controllers/payments.js
-#: app/scripts/controllers/receipts.js
+#: app/scripts/controllers/dashboard.js app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/payments.js app/scripts/controllers/receipts.js
 #: app/scripts/controllers/titleReleases.js
 #: app/scripts/directives/nxgSearch/nxgSearch.js
 msgid "View All"
