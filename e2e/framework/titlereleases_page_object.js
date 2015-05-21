@@ -89,13 +89,13 @@ var PaymentPageObject = function () {
   this.setSearchFloorPlan = function (searchVIN) {
     this.searchField.sendKeys(searchVIN);
     browser.waitForAngular();
-  },
+  };
 
     //Doers
   this.doSearchFloorPlan = function (searchVIN) {
       this.setSearchFloorPlan(searchVIN);
       browser.waitForAngular();
-    },
+    };
 
     //Getters
   this.getActiveVehicleDescriptionLink = function () {
