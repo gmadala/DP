@@ -10,7 +10,7 @@ var helper = new HelperObject();
 var vehiclePage = new vehicleDetailObject();
 
 helper.describe('WMT-58', function () {
-//Floor Plan Page
+  //Floor Plan Page
   describe('Vehicle Details Page', function () {
 
     beforeEach(function () {

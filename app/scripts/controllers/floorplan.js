@@ -82,7 +82,7 @@ angular.module('nextgearWebApp')
 
 
 
-  // Set up page-load filtering based on $stateParams
+    // Set up page-load filtering based on $stateParams
     var filterParam = null;
 
     switch($stateParams.filter) {

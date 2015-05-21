@@ -139,7 +139,7 @@ angular.module('nextgearWebApp')
           },
           onConfirm: function() {
             return function() {
-               // Reload data since which payments can be extended has now changed
+              // Reload data since which payments can be extended has now changed
               // If user extends a payment not on the first page it will un-load previously
               // loaded payments and kick them to the top of the list.
               $scope.payments.search();
