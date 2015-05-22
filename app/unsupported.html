@@ -99,7 +99,7 @@
       padding: 5px 18px;
       border-bottom: 1px solid #bbbcbe;
     }
-    .row-fluid, .list-table-row, .app-header, .header {
+    .row, .list-table-row, .app-header, .header {
       width: 100%;
     }
     .app-header.login {
@@ -173,14 +173,18 @@
       border-left-radius: 5px !important;
       border-left: 1px solid #1B769D !important;
     }
+    .position-left {
+
+      margin-left:25%
+    }
   </style>
 </head>
 <body class="unsupported">
 <div class="nxg-main-container">
   <div class="app-header login">
-    <div class="container-fluid">
+    <div class="container">
       <div class="header">
-        <div class="span3">
+        <div class="col-xs-3">
           <div class="nxg-logo">
           </div>
         </div>
@@ -201,8 +205,8 @@
     </div>
   </div>
   <div class="nxg-main-view container-public">
-    <div class="row-fluid">
-      <div class="well span6 offset3">
+    <div class="row">
+      <div class="well col-xs-6 position-left">
         <h2 id="well-title-en" class="well-title">Welcome to the New NextGear Capital Web Portal</h2>
         <h2 id="well-title-sp" class="well-title">Bienvenido(a) al nuevo portal de Internet de NextGear Capital</h2>
         <h2 id="well-title-fr" class="well-title" style="font-size:16px;">Nous vous souhaitons la bienvenue sur le nouveau portail Web de NextGear Capital</h2>
@@ -258,7 +262,7 @@
     </div>
   </div>
 </div>
-<div class="footer row-fluid">
+<div class="footer row">
   <div id="footer_en">
   <ul class="horizontal-list">
     <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
