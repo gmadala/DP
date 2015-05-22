@@ -47,11 +47,17 @@ body.lang_es {
   #TitleReleasesPage {
 
     .filter-options {
-      .col-md-5 {
+      .col-xs-5 {
         width: 31%;
       }
-      .col-md-7 {
+      .col-xs-7 {
         width: 66%;
+      }
+    }
+    .requests-grid {
+      .btn-title-request {
+        width: 150px;
+        font-size:8px;
       }
     }
   }
