@@ -19,7 +19,10 @@ angular.module('nextgearWebApp')
 
         // update language
         gettextCatalog.setCurrentLanguage(key);
-
+        // load remotely (lazy-load)
+        if (key !== 'en') {
+          gettextCatalog.loadRemote('/languages/' + key + '.json');
+        }
         // update page css
         _.forEach(SupportedLanguages, function(language) {
 
