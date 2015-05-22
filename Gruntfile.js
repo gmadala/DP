@@ -321,6 +321,13 @@ module.exports = function(grunt) {
             expand: true,
             dot: true,
             flatten: true,
+            dest: '<%= yeoman.dist %>/languages/',
+            src: '<%= yeoman.app %>/languages/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
             dest: '<%= yeoman.dist %>/documents/',
             src: '<%= yeoman.app %>/documents/*'
           },
@@ -397,9 +404,19 @@ module.exports = function(grunt) {
     },
     nggettext_compile: {
       all: {
-        files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
-        }
+        options: {
+          format: 'json'
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'po',
+            dest: 'app/languages',
+            src: ['*.po'],
+            ext: '.json'
+          }
+        ]
       }
     },
     gettext_update_po: {
