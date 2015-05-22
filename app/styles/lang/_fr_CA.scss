@@ -223,18 +223,20 @@ body.lang_fr_CA {
 
   #ReceiptsPage {
     .filter-options {
-      .col-md-5 {
+      .col-xs-5 {
         width: 120px;
         margin-top: -14px;
       }
-      .col-md-7 {
+      .col-xs-7 {
         width: 232px;
       }
     }
 
+    .search-form Label {font-size:11px;}
+
     @media (min-width: 1150px) {
       .filter-options {
-        .col-md-5 {
+        .col-xs-5 {
           width: 170px;
           margin-top: 0;
         }
