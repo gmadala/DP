@@ -39,7 +39,7 @@
             nxg-input-currency="{{ maxAdditional }}"
 
             ng-class="{ 'nxg-invalid':validity.additionalAmount.$error.pattern || validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax }" />
-          </div> – <span translate>Additional Principal Payment</span>
+          </div><div class="additionalPaymentText">-– <span translate>Additional Principal Payment</span></div>
         </div>
         <div class="form-row">
           <label class="text-error" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (validity.additionalAmount.$error.pattern)" translate>Please enter a numeric value with no more than 2 decimal places.</label>
