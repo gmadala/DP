@@ -1,9 +1,10 @@
 <h3 class="modal-header" translate>Enroll in ProperNounTBD</h3>
 
 <section class="modal-body">
-  <p translate>You are about to enroll in ProperNounTBD...</p>
+  <p translate>You are about to enroll in ProperNounTBD. Please review the terms and conditions below.</p>
 
   <div class="legal-textarea">
+    <h3>Terms and Conditions</h3>
     <h4>Authorization and Request for Automated Payments</h4>
     The Authorization and Request for Automated Payments (this “Automated Payment Request”) may only be submitted by an
     authorized representative of the Borrower designated on the account that you are currently logged into (this
@@ -80,11 +81,14 @@
   </div>
 </section>
 <div class="modal-footer">
-  <div class="cr-inline">
+  <div class="cr-inline text-left" style="margin-left:10px;">
     <input type="checkbox" name="terms" id="enableAutoPayTerms" ng-model="agree"/>
     <label for="enableAutoPayTerms" class="checkbox-img small"></label>
     <label for="enableAutoPayTerms" class="cr-label" translate>I agree to the terms and conditions.</label>
   </div>
+</div>
+<hr/>
+<div class="modal-footer">
   <button class="btn-cta cta-secondary" type="button" ng-click="close(false)" translate>Cancel</button>
   <button class="btn-cta cta-primary" type="submit" ng-click="close(agree)" nxg-autofocus ng-disabled="!agree"
           translate>
