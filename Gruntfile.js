@@ -136,7 +136,6 @@ module.exports = function(grunt) {
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
-        '!app/scripts/translations.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -148,7 +147,6 @@ module.exports = function(grunt) {
       all: [
         //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
-        '!app/scripts/translations.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -414,7 +412,7 @@ module.exports = function(grunt) {
             cwd: 'po',
             dest: 'app/languages',
             src: ['*.po'],
-            ext: '.json'
+            ext: '.js'
           }
         ]
       }

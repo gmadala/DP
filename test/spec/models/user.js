@@ -75,7 +75,7 @@ describe('Model: User', function () {
     });
 
     it('should call endpoint for non-English', function () {
-      httpBackend.expectGET('/languages/es.json').respond(response);
+      httpBackend.expectGET('languages/es.js').respond(response);
       language.setCurrentLanguage('es');
       httpBackend.whenGET(hideReportsSpanish).respond(response);
       user.getShowReportsAndResources();
@@ -83,7 +83,7 @@ describe('Model: User', function () {
     });
 
     it('should return false for Spanish', function () {
-      httpBackend.expectGET('/languages/es.json').respond(response);
+      httpBackend.expectGET('languages/es.js').respond(response);
       language.setCurrentLanguage('es');
       httpBackend.whenGET(hideReportsSpanish).respond(response);
       user.getShowReportsAndResources().then(function(data){
