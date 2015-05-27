@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('language', function ($q, gettextCatalog, SupportedLanguages) {
+  .factory('language', function (gettextCatalog, SupportedLanguages) {
     return {
       getCurrentLanguageId: function () {
         // default to English
