@@ -319,7 +319,10 @@ module.exports = function(grunt) {
             expand: true,
             dot: true,
             flatten: true,
-            dest: '<%= yeoman.dist %>/languages/',
+            // cache bust language files using the GIT SHA - This is overly aggressive since the translations may not
+            // have changed between revisions but typically they will change between releases anyways so this
+            // approach should be good enough
+            dest: '<%= yeoman.dist %>/languages-<%= gitinfo.local.branch.current.shortSHA %>/',
             src: '<%= yeoman.app %>/languages/*'
           },
           {

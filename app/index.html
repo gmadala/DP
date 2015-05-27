@@ -255,10 +255,17 @@
           });
         }
 
+        var langDir = 'languages-<!-- @echo GIT_SHA -->/';
+
+        '<!-- processhtml:remove:dist -->'
+        // this needs to be just the app/languages/ dir unless it's for a build
+        langDir = 'languages/';
+        '<!-- /processhtml -->'
+
         var key = window.localStorage.getItem('lang');
         if (key && key !== 'en' && key != 'enDebug') {
           $.ajax({
-            url: 'languages/' + key + '.js',
+            url: langDir + key + '.js',
             dataType: 'script',
             success: bootstrapApp,
             cache: true
