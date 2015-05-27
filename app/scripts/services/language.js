@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('language', function (gettextCatalog, SupportedLanguages) {
+  .factory('language', function ($window, gettextCatalog, SupportedLanguages) {
     return {
       getCurrentLanguageId: function () {
         // default to English
@@ -15,7 +15,7 @@ angular.module('nextgearWebApp')
       },
       setCurrentLanguage: function (key) {
         // Store preference for future use
-        window.localStorage.setItem('lang', key);
+        $window.localStorage.setItem('lang', key);
 
         // update language
         gettextCatalog.setCurrentLanguage(key);
@@ -29,7 +29,7 @@ angular.module('nextgearWebApp')
       },
       loadLanguage: function () {
 
-        var key = window.localStorage.getItem('lang');
+        var key = $window.localStorage.getItem('lang');
         if (key) {
           this.setCurrentLanguage(key);
         }
