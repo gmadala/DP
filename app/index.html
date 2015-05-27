@@ -22,7 +22,7 @@
       </script>
     <![endif]-->
   </head>
-  <body ng-app="nextgearWebApp">
+  <body>
     <!-- htmlmin:ignore -->
       <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
         This will pull in the content of our svg file for use across the app.
@@ -246,5 +246,27 @@
 
     <!-- /processhtml -->
 
+    <script>
+      (function () {
+
+        function bootstrapApp() {
+          angular.element(document).ready(function () {
+            angular.bootstrap(document, ['nextgearWebApp']);
+          });
+        }
+
+        var key = window.localStorage.getItem('lang');
+        if (key && key !== 'en' && key != 'enDebug') {
+          $.ajax({
+            url: 'languages/' + key + '.js',
+            dataType: 'script',
+            success: bootstrapApp,
+            cache: true
+          });
+        } else {
+          bootstrapApp();
+        }
+      })();
+    </script>
   </body>
 </html>
