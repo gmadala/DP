@@ -403,7 +403,9 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         options: {
-          format: 'json'
+          // format: 'json' - Use standard js angular module and not json because asynchronous loading will not
+          // work since currently the window has to be reloaded on any language change due to binding issues
+          // index.html loads the correct language file as needed before bootstrapping the app
         },
         files: [
           {
