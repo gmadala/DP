@@ -136,7 +136,6 @@ module.exports = function(grunt) {
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
-        '!app/scripts/translations.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -148,7 +147,6 @@ module.exports = function(grunt) {
       all: [
         //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
-        '!app/scripts/translations.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -321,6 +319,13 @@ module.exports = function(grunt) {
             expand: true,
             dot: true,
             flatten: true,
+            dest: '<%= yeoman.dist %>/languages/',
+            src: '<%= yeoman.app %>/languages/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
             dest: '<%= yeoman.dist %>/documents/',
             src: '<%= yeoman.app %>/documents/*'
           },
@@ -397,9 +402,21 @@ module.exports = function(grunt) {
     },
     nggettext_compile: {
       all: {
-        files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
-        }
+        options: {
+          // format: 'json' - Use standard js angular module and not json because asynchronous loading will not
+          // work since currently the window has to be reloaded on any language change due to binding issues
+          // index.html loads the correct language file as needed before bootstrapping the app
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'po',
+            dest: 'app/languages',
+            src: ['*.po'],
+            ext: '.js'
+          }
+        ]
       }
     },
     gettext_update_po: {

@@ -825,7 +825,7 @@ msgstr[1] "Vencen esta semana"
 #. Payment(s) due today
 #: app/scripts/controllers/payments.js app/views/dashboard.html
 msgid "Due Today"
-msgid_plural "Due today"
+msgid_plural "Due Today"
 msgstr[0] "Vence hoy"
 msgstr[1] "Vencen hoy"
 
