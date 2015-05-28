@@ -113,8 +113,14 @@ angular.module('nextgearWebCommon')
     };
 
     return {
+      getVersion: function() {
+        return api.request('GET', '/kbb/miscellaneous/GetReleaseVersionByVersionDate/0').then(function (version) {
+          return version;
+        }, function(error) {
+          return $q.reject(error);
+        });
+      },
       getYears: function() {
-
         return api.request('GET', '/kbb/vehicle/getyears/UsedCar/Dealer').then(function(years) {
           return years;
         }, function (error) {
