@@ -1,7 +1,37 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, segmentio, metric, User, api, $q, dealerCustomerSupportPhone) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
+                                                metric, User, api, $q, dealerCustomerSupportPhone) {
+
+    // TODO remove this once bank accounts is merged - just mark these for translation
+    // default billing account
+    gettext('Default for Payments');
+    // default disbursement account
+    gettext('Default for Disbursements');
+    gettext('Account Name');
+    /// account status (active or inactive)
+    gettext('Status');
+    gettext('Details');
+    gettext('Account Number');
+    gettext('Routing Number');
+    gettext('Bank Name');
+    gettext('City');
+    gettext('Set to default payment account?');
+    gettext('Set to default disbursement account?');
+    gettext('Add payment account');
+    gettext('Add account');
+    /// the date when the account was last modified
+    gettext('Last modified');
+    /// the date when the account was added
+    gettext('Date added');
+    /// the date when payment was last made using the account
+    gettext('Last payment on');
+    gettext('Edit');
+    gettext('Disable');
+
+
+
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }

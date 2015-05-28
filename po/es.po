@@ -179,6 +179,14 @@ msgstr[1] "Cargos de la cuenta"
 msgid "Account Management"
 msgstr "Administración de Cuentas"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Account Name"
+msgstr ""
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Account Number"
+msgstr ""
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Acknowledge VIN Look-Up Failure"
 msgstr "Falla en la búsqueda de reconocimiento de VIN"
@@ -209,6 +217,14 @@ msgstr "¿Agregar capital adicional?"
 #: app/views/receipts.html
 msgid "Add Receipt"
 msgstr "Agregar recibo"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Add account"
+msgstr ""
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Add payment account"
+msgstr ""
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Additional Addresses"
@@ -408,6 +424,10 @@ msgstr "Cuenta bancaria para pago"
 msgid "Bank Account(s)"
 msgstr "Cuenta(s) bancaria(s)"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Bank Name"
+msgstr ""
+
 #: app/views/analytics.html
 msgid "Best Movers"
 msgstr "Las de mejor movimiento"
@@ -476,9 +496,11 @@ msgstr "CPP"
 #: app/scripts/controllers/floorCar.js app/views/account_management.html
 #: app/views/auction.bulkflooring.html app/views/auction.settings.html
 #: app/views/floorcar.html app/views/login.createPassword.html
-#: app/views/login.updateSecurity.html app/views/modals/creditQuery.html
-#: app/views/modals/scheduleCheckout.html app/views/profileSettings.html
-#: app/views/vehicledetails.html
+#: app/views/login.updateSecurity.html
+#: app/views/modals/confirmDisableAutoPay.html
+#: app/views/modals/confirmEnableAutoPay.html
+#: app/views/modals/creditQuery.html app/views/modals/scheduleCheckout.html
+#: app/views/profileSettings.html app/views/vehicledetails.html
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -520,6 +542,7 @@ msgstr "Cheque #"
 msgid "Checkout"
 msgstr "Verificación"
 
+#: app/scripts/controllers/accountManagement.js
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "City"
@@ -700,6 +723,11 @@ msgstr "Búsqueda por fecha"
 msgid "Date Submitted"
 msgstr "Fecha de envío"
 
+#. the date when the account was added
+#: app/scripts/controllers/accountManagement.js
+msgid "Date added"
+msgstr ""
+
 #: app/views/auction.sellerfloorplan.html
 msgid "Date range based on Date Floored OR Disbursement Date."
 msgstr ""
@@ -745,6 +773,14 @@ msgstr "Declaración del distribuidor"
 msgid "Default Address"
 msgstr "Dirección predeterminada"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Default for Disbursements"
+msgstr ""
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Default for Payments"
+msgstr ""
+
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
 msgstr "Tipo de entrega"
@@ -767,6 +803,14 @@ msgstr "Denegado/No pagado"
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Description"
 msgstr "Descripción"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Details"
+msgstr ""
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Disable"
+msgstr ""
 
 #: app/views/account_management.html
 msgid "Disabled"
@@ -829,6 +873,10 @@ msgid_plural "Due Today"
 msgstr[0] "Vence hoy"
 msgstr[1] "Vencen hoy"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Edit"
+msgstr "Editar"
+
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
 msgstr "Editar capital adicional"
@@ -867,7 +915,7 @@ msgid "End Date"
 msgstr "Fecha de terminación"
 
 #: app/views/account_management.html
-msgid "Enhanced Registration Enabled:"
+msgid "Enhanced Registration Enabled"
 msgstr ""
 
 #: app/views/auction.settings.html
@@ -893,6 +941,14 @@ msgstr ""
 "El Registro Mejorado restringirá el acceso a todas las cuentas a usuarios "
 "que cuenten con NIP. Se pedirá a todos los fiadores que capturen su NIP "
 "cuando entren a MyNextGear."
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Enroll in ProperNounTBD"
+msgstr ""
+
+#: app/views/account_management.html
+msgid "Enrolled in ProperNounTBD"
+msgstr ""
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Enter Stock #'s separated by a comma."
@@ -1162,6 +1218,14 @@ msgstr "Reportes históricos"
 msgid "I Have the Title"
 msgstr "Tengo este título"
 
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "I agree to the terms and conditions."
+msgstr ""
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "I have reviewed and agree to the Terms and Conditions."
+msgstr ""
+
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
 msgstr "INACTIVA"
@@ -1270,6 +1334,16 @@ msgstr "Último pago"
 #: app/views/account_management.html app/views/analytics.html
 msgid "Last Payment Date"
 msgstr "Fecha del último pago"
+
+#. the date when the account was last modified
+#: app/scripts/controllers/accountManagement.js
+msgid "Last modified"
+msgstr ""
+
+#. the date when payment was last made using the account
+#: app/scripts/controllers/accountManagement.js
+msgid "Last payment on"
+msgstr ""
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Legal Name"
@@ -2377,6 +2451,10 @@ msgstr "Revise lo siguiente y envíe sus solicitudes de liberación de título."
 msgid "Rough"
 msgstr "Aproximado"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Routing Number"
+msgstr ""
+
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
@@ -2519,6 +2597,14 @@ msgstr "¿Enviar título a un domicilio diferente?"
 msgid "Send To"
 msgstr "Enviar a"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Set to default disbursement account?"
+msgstr ""
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Set to default payment account?"
+msgstr ""
+
 #: app/scripts/directives/navBar/navBar.html
 msgid "Settings"
 msgstr "Ajustes"
@@ -2633,6 +2719,8 @@ msgstr "Volver a iniciar"
 msgid "State"
 msgstr "Estado"
 
+#. account status (active or inactive)
+#: app/scripts/controllers/accountManagement.js
 #: app/views/auction.sellerfloorplan.html app/views/dashboard.html
 #: app/views/floorplan.html app/views/payments.html
 #: app/views/vehicledetails.html
@@ -2735,10 +2823,8 @@ msgstr ""
 "por encima de los límites del plan financiero de esta cuenta."
 
 #: app/views/valuelookup.html
-msgid "The following values are a regional average based on the Zip provided."
+msgid "The following values are based on the Zip provided."
 msgstr ""
-"Los siguientes valores son un promedio regional basado en el código postal "
-"proporcionado."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
@@ -3060,6 +3146,14 @@ msgstr ""
 "currency\"></span> a <span ng-bind=\"unappliedFunds.max() | currency\"></"
 "span>"
 
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "Unenroll from ProperNounTBD"
+msgstr ""
+
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "Unenroll now"
+msgstr ""
+
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"
 msgstr "Desprogramar"
@@ -3208,23 +3302,21 @@ msgstr "Volumen de planes de piso pasados de NextGear Capital"
 
 #: app/views/valuelookup.html
 msgid ""
-"We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> "
-"values at this time."
+"We are sorry, but we are unable to provide\n"
+"        NextGear Book Values at this time."
 msgstr ""
-"Lo sentimos, pero no podemos proporcionarle valores de Kelley Blue "
-"Book<sup>®</sup> en este momento."
-
-#: app/views/valuelookup.html
-msgid "We are sorry, but we are unable to provide MMR Values at this time."
-msgstr ""
-"Lo sentimos, pero no podemos proporcionarle valores MMR en este momento."
 
 #: app/views/valuelookup.html
 msgid ""
-"We are sorry, but we are unable to provide NextGear Book Values at this time."
+"We are sorry, but we are unable to provide Kelley\n"
+"        Blue Book<sup>®</sup> values at this time."
 msgstr ""
-"Lo sentimos, pero no podemos proporcionarle valores en libros de NextGear "
-"Capital en este momento."
+
+#: app/views/valuelookup.html
+msgid ""
+"We are sorry, but we are unable to provide MMR\n"
+"        Values at this time."
+msgstr ""
 
 #: app/views/login.recover.html
 msgid ""
@@ -3342,6 +3434,20 @@ msgstr "Año"
 #: app/views/modals/confirmLogout.html
 msgid "Yes"
 msgstr "Sí"
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Yes, I want to enroll"
+msgstr ""
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid ""
+"You are about to enroll in ProperNounTBD. Please review the terms and "
+"conditions below."
+msgstr ""
+
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "You are about to unenroll from ProperNounTBD..."
+msgstr ""
 
 #: app/views/receipts.html
 msgid ""
@@ -3594,3 +3700,27 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#~ msgid ""
+#~ "The following values are a regional average based on the Zip provided."
+#~ msgstr ""
+#~ "Los siguientes valores son un promedio regional basado en el código "
+#~ "postal proporcionado."
+
+#~ msgid ""
+#~ "We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> "
+#~ "values at this time."
+#~ msgstr ""
+#~ "Lo sentimos, pero no podemos proporcionarle valores de Kelley Blue "
+#~ "Book<sup>®</sup> en este momento."
+
+#~ msgid "We are sorry, but we are unable to provide MMR Values at this time."
+#~ msgstr ""
+#~ "Lo sentimos, pero no podemos proporcionarle valores MMR en este momento."
+
+#~ msgid ""
+#~ "We are sorry, but we are unable to provide NextGear Book Values at this "
+#~ "time."
+#~ msgstr ""
+#~ "Lo sentimos, pero no podemos proporcionarle valores en libros de NextGear "
+#~ "Capital en este momento."
