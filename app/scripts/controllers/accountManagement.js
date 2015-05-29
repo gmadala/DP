@@ -54,6 +54,9 @@ angular.module('nextgearWebApp')
     ' Canada - National Customer Service Center 1.877.864.9291 - dealerservicestoronto@nextgearcapital.com.' +
     ' Thank you!');
 
+    // putting this in for the moment (probably a server side issue)
+    gettext('Weekly Upcoming Payments Report');
+
 
 
     if(User.isDealer()) {

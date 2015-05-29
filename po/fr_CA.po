@@ -3433,6 +3433,10 @@ msgstr ""
 msgid "Week"
 msgstr "Semaine"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Weekly Upcoming Payments Report"
+msgstr ""
+
 #: app/views/login.updateSecurity.html
 msgid "Welcome"
 msgstr "Bienvenue"
