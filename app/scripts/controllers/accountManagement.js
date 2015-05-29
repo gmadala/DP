@@ -31,6 +31,30 @@ angular.module('nextgearWebApp')
     gettext('Disable');
 
 
+    // new KBB tooltip (remove this once merged with 5430)
+    gettext('© 2015 By Kelley Blue Book Co., Inc.');
+    gettext('2013 - 2015 Edition for zip code 46123');
+    gettext('All Rights Reserved');
+    gettext('The specific information required to determine the value for this particular vehicle was supplied by the' +
+    ' person generating this' +
+    ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
+    ' Actual valuations will vary based upon market conditions, specifications,' +
+    ' vehicle condition or other particular circumstances pertinent to this' +
+    ' particular vehicle or the transaction or the parties to the transaction.' +
+    ' This report is intended for the individual use of the person generating' +
+    ' this report only and shall not be sold or transmitted to another party.' +
+    ' Kelley Blue Book assumes no responsibility for errors or omissions');
+
+    // email notification
+    gettext('Notification of changes to your account');
+    gettext('Dear Customer, We appreciate your business and want to let you know about recent changes made to your NextGear Capital account.' +
+    ' Recent Changes: ProperNounTBD Enrollment Change(s). If these changes were not made by you or if you have any questions about the changes, please immediately contact NextGear Capital support at:' +
+    ' US Customer Service Center 1.888.969.3721 - customerservice@nextgearcapital.com' +
+    ' Canada - Quebec Customer Service Center 1.855.864.9291 - dealerservicesmontreal@nextgearcapital.com' +
+    ' Canada - National Customer Service Center 1.877.864.9291 - dealerservicestoronto@nextgearcapital.com.' +
+    ' Thank you!');
+
+
 
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);

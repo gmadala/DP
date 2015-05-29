@@ -58,6 +58,10 @@ msgstr "2. ¿Quiere que dicho aumento sea temporal o permanente?"
 msgid "2. Sale Information"
 msgstr "2. Información de ventas"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "2013 - 2015 Edition for zip code 46123"
+msgstr ""
+
 #: app/views/modals/requestCreditIncrease.html
 msgid "3. How much would you like to increase it by?"
 msgstr "3. ¿De cuánto desea que sea el aumento?"
@@ -253,6 +257,10 @@ msgstr "Dirección"
 msgid "All"
 msgstr "Todos"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "All Rights Reserved"
+msgstr ""
+
 #: app/views/analytics.html
 msgid "All values are displayed in Canadian Dollars unless specified."
 msgstr ""
@@ -346,6 +354,10 @@ msgstr "Número de acceso a la subasta"
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Auction Access Number(s)"
 msgstr "Número(s) de acceso a la subasta"
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Authorization and Request for Automated Payments"
+msgstr ""
 
 #: app/views/account_management.html
 msgid "Auto-Disburse Unapplied Funds"
@@ -768,6 +780,19 @@ msgstr "Búsqueda de distribuidores"
 #: app/views/reports.html
 msgid "Dealer Statement"
 msgstr "Declaración del distribuidor"
+
+#: app/scripts/controllers/accountManagement.js
+msgid ""
+"Dear Customer, We appreciate your business and want to let you know about "
+"recent changes made to your NextGear Capital account. Recent Changes: "
+"ProperNounTBD Enrollment Change(s). If these changes were not made by you or "
+"if you have any questions about the changes, please immediately contact "
+"NextGear Capital support at: US Customer Service Center 1.888.969.3721 - "
+"customerservice@nextgearcapital.com Canada - Quebec Customer Service Center "
+"1.855.864.9291 - dealerservicesmontreal@nextgearcapital.com Canada - "
+"National Customer Service Center 1.877.864.9291 - "
+"dealerservicestoronto@nextgearcapital.com. Thank you!"
+msgstr ""
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Default Address"
@@ -1565,6 +1590,10 @@ msgstr "No es elegible para liberación de título"
 msgid "Not found <span>:(</span>"
 msgstr "No se encontró <span>:(</span>"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Notification of changes to your account"
+msgstr ""
+
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Notifications"
 msgstr "Notificaciones"
@@ -1603,7 +1632,7 @@ msgstr[1] "Vencidos"
 
 #: app/views/account_management.html
 msgid "PIN"
-msgstr ""
+msgstr "NIP"
 
 #: app/404.html
 msgid "Page Not Found :("
@@ -2802,6 +2831,10 @@ msgstr "Soporte Técnico"
 msgid "Term Plan Name"
 msgstr "Nombre del plan de plazos"
 
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Terms and Conditions"
+msgstr ""
+
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
 msgstr ""
@@ -2834,6 +2867,19 @@ msgstr "Los siguientes valores representan un promedio nacional."
 msgid "The passwords do not match. Please re-enter the password."
 msgstr ""
 "Las contraseñas no coinciden, por favor, capture la contraseña de nuevo."
+
+#: app/scripts/controllers/accountManagement.js
+msgid ""
+"The specific information required to determine the value for this particular "
+"vehicle was supplied by the person generating this report. Vehicle "
+"valuations are opinions and may vary from vehicle to vehicle. Actual "
+"valuations will vary based upon market conditions, specifications, vehicle "
+"condition or other particular circumstances pertinent to this particular "
+"vehicle or the transaction or the parties to the transaction. This report is "
+"intended for the individual use of the person generating this report only "
+"and shall not be sold or transmitted to another party. Kelley Blue Book "
+"assumes no responsibility for errors or omissions"
+msgstr ""
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -3700,6 +3746,10 @@ msgid ""
 "span> 20"
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "© 2015 By Kelley Blue Book Co., Inc."
+msgstr ""
 
 #~ msgid ""
 #~ "The following values are a regional average based on the Zip provided."
