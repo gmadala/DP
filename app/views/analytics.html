@@ -19,28 +19,28 @@
         <ul class="list-table">
           <li class="list-table-row">
             <p class="col-xs-7 zeroLeftPadding"><span translate>Total NextGear Capital Book Value</span>:</p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
-            <p class="col-xs-1" ng-hide="isUnitedStates">USD</p>
+            <p class="col-xs-4 value numeric  zeroLeftPadding zeroRightPadding">{{ businessSummary.TotalApprovedBlackBookValue | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding" ng-hide="isUnitedStates">USD</p>
           </li>
           <li class="list-table-row">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Financed Amount</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
-            <p class="col-xs-1"></p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding"> {{ businessSummary.TotalApprovedFinancedAmount| currency }} </p>
+            <p class="col-xs-1 zeroRightPadding"></p>
           </li>
           <li class="list-table-row">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Outstanding</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
-            <p class="col-xs-1"></p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding"> {{ businessSummary.TotalOutstandingPrincipal | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Average Purchase Price</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
-            <p class="col-xs-1"></p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding"> {{ businessSummary.AveragePurchasePrice | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding"></p>
           </li>
           <li class="list-table-row" ng-show="showDetails">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Purchase Price</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
-            <p class="col-xs-1"></p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding">  {{ businessSummary.TotalApprovedPurchasePrice | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding"></p>
           </li>
         </ul>
 
@@ -59,13 +59,13 @@
         <ul class="list-table">
           <li class="list-table-row">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Total Purchase Price</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
-            <p class="col-xs-1"></p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding"> {{ businessSummary.TotalPendingPurchasePrice | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding"></p>
           </li>
           <li class="list-table-row">
             <p class="col-xs-7 zeroLeftPadding"> <span translate>Total NextGear Capital Book Value</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
-            <p class="col-xs-1" ng-hide="isUnitedStates">USD</p>
+            <p class="col-xs-4 value numeric zeroLeftPadding zeroRightPadding"> {{ businessSummary.TotalPendingBlackBookPrice | currency }} </p>
+            <p class="col-xs-1 zeroRightPadding" ng-hide="isUnitedStates">USD</p>
           </li>
         </ul>
 
@@ -79,20 +79,20 @@
 
         <ul class="list-table">
           <li class="list-table-row">
-            <p class="col-xs-8 zeroLeftPadding"> <span translate>Available Credit</span>: </p>
-            <p class="col-xs-5 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.TotalAvailableCredit | currency }}</p>
+            <p class="col-xs-6 zeroLeftPadding"> <span translate>Available Credit</span>: </p>
+            <p class="col-xs-6 value numeric numericRightFloat zeroLeftPadding zeroRightPadding"> {{ businessSummary.TotalAvailableCredit | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-xs-8 zeroLeftPadding"> <span translate>Reserve Funds</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.ReserveFundsBalance | currency }}</p>
+            <p class="col-xs-6 zeroLeftPadding"> <span translate>Reserve Funds</span>: </p>
+            <p class="col-xs-6 value numeric numericRightFloat zeroLeftPadding zeroRightPadding"> {{ businessSummary.ReserveFundsBalance | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-xs-8 zeroLeftPadding"> <span translate>Last Payment</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.LastPaymentAmount | currency }}</p>
+            <p class="col-xs-6 zeroLeftPadding"> <span translate>Last Payment</span>: </p>
+            <p class="col-xs-6 value numeric numericRightFloat zeroLeftPadding zeroRightPadding"> {{ businessSummary.LastPaymentAmount | currency }}</p>
           </li>
           <li class="list-table-row">
-            <p class="col-xs-8 zeroLeftPadding"> <span translate>Last Payment Date</span>: </p>
-            <p class="col-xs-4 value numeric zeroLeftPadding numericRightFloat zeroRightPadding"> {{ businessSummary.LastPaymentDate | moment }}</p>
+            <p class="col-xs-6 zeroLeftPadding"> <span translate>Last Payment Date</span>: </p>
+            <p class="col-xs-6 value numeric numericRightFloat zeroLeftPadding zeroRightPadding"> {{ businessSummary.LastPaymentDate | moment }}</p>
           </li>
         </ul>
       </div>
