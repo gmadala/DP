@@ -368,7 +368,7 @@ angular.module('nextgearWebApp')
           },
           size: {
             height: '220',
-            width: '190',
+            width: '190'
           }
         };
 

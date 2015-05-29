@@ -186,7 +186,7 @@ angular.module('nextgearWebApp')
             var financial = $scope.financial;
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
-          },
+          }
         };
 
         var titleAddresses = Addresses.getTitleAddresses();

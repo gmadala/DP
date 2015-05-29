@@ -1,8 +1,46 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, Mmr, Blackbook, Kbb, User, features, gettextCatalog, metric,
-                                           segmentio) {
+  .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, features, gettextCatalog, gettext,
+                                           metric, segmentio) {
+
+    // need to use the string twice because gettext doesn't like variable sadly.
+    gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
+    var disclaimerHeader = gettextCatalog.getString('© %YEAR% By Kelley Blue Book Co., Inc.');
+
+    gettext('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
+    var disclaimerEdition = gettextCatalog.getString('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
+
+    gettext('All Right Reserved.');
+    var disclaimerRight = gettextCatalog.getString('All Right Reserved.');
+
+    gettext('The specific information required to determine the' +
+      ' value for this particular vehicle was supplied by the person generating this' +
+      ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
+      ' Actual valuations will vary based upon market conditions, specifications,' +
+      ' vehicle condition or other particular circumstances pertinent to this' +
+      ' particular vehicle or the transaction or the parties to the transaction.' +
+      ' This report is intended for the individual use of the person generating' +
+      ' this report only and shall not be sold or transmitted to another party.' +
+      ' Kelley Blue Book assumes no responsibility for errors or omissions.');
+    var disclaimerText = gettextCatalog.getString(
+      'The specific information required to determine the' +
+      ' value for this particular vehicle was supplied by the person generating this' +
+      ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
+      ' Actual valuations will vary based upon market conditions, specifications,' +
+      ' vehicle condition or other particular circumstances pertinent to this' +
+      ' particular vehicle or the transaction or the parties to the transaction.' +
+      ' This report is intended for the individual use of the person generating' +
+      ' this report only and shall not be sold or transmitted to another party.' +
+      ' Kelley Blue Book assumes no responsibility for errors or omissions.');
+    var boldDiv = '<div><strong>%CONTENT%</strong></div>';
+    var normalDiv = '<div>%CONTENT%</div>';
+
+    var disclaimer = boldDiv.replace(/%CONTENT%/, disclaimerHeader);
+    disclaimer = disclaimer + boldDiv.replace(/%CONTENT%/, disclaimerEdition);
+    disclaimer = disclaimer + boldDiv.replace(/%CONTENT%/, disclaimerRight);
+    disclaimer = disclaimer + normalDiv.replace(/%CONTENT%/, disclaimerText);
+
     $scope.results = {};
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
@@ -157,9 +195,14 @@ angular.module('nextgearWebApp')
             var zipCode = this.zipcode;
 
             Kbb.getVersion().then(function(version) {
-              $scope.kbb = {
-                version: version
-              };
+              var replacements = {};
+              replacements['%YEAR%'] = $filter('moment')(version.EndDate, 'YYYY');
+              replacements['%START_DATE%'] = $filter('moment')(version.StartDate);
+              replacements['%END_DATE%'] = $filter('moment')(version.EndDate);
+              replacements['%ZIP_CODE%'] = zipCode;
+              $scope.disclaimer = disclaimer.replace(/%\w+%/g, function(match) {
+                return replacements[match] || match;
+              });
             });
 
             Kbb.getConfigurations(vin, zipCode).then(function (results) {
@@ -534,9 +577,14 @@ angular.module('nextgearWebApp')
           };
 
           Kbb.getVersion().then(function(version) {
-            $scope.kbb = {
-              version: version
-            };
+            var replacements = {};
+            replacements['%YEAR%'] = $filter('moment')(version.EndDate, 'YYYY');
+            replacements['%START_DATE%'] = $filter('moment')(version.StartDate);
+            replacements['%END_DATE%'] = $filter('moment')(version.EndDate);
+            replacements['%ZIP_CODE%'] = which.zipcode;
+            $scope.disclaimer = disclaimer.replace(/%\w+%/g, function(match) {
+              return replacements[match] || match;
+            });
           });
 
           Kbb.lookupByOptions(which.styles.selected, which.mileage, which.zipcode).then(function(vehicle) {

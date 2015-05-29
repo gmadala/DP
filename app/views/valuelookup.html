@@ -596,18 +596,7 @@
                 tooltip-html="true"
                 tooltip-trigger="click"
                 tooltip-placement="left"
-                tooltip-html-unsafe="{{ '<div><strong>©' }} {{ kbb.version.StartDate | moment:'YYYY' }} {{ 'By Kelley Blue Book Co., Inc.</strong></div>' }}
-                                     {{ '<div><strong>' }} {{ kbb.version.StartDate | moment }} - {{ kbb.version.EndDate | moment }} {{ ' Edition for zip code ' }} {{ vinLookup.zipcode || manualLookup.kbb.zipcode }} {{'</strong></div>'}}
-                                     {{ '<div><strong>All Rights Reserved.</strong></div>' +
-                                        '<div>The specific information required to determine the' +
-                                        ' value for this particular vehicle was supplied by the person generating this' +
-                                        ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
-                                        ' Actual valuations will vary based upon market conditions, specifications,' +
-                                        ' vehicle condition or other particular circumstances pertinent to this' +
-                                        ' particular vehicle or the transaction or the parties to the transaction.' +
-                                        ' This report is intended for the individual use of the person generating' +
-                                        ' this report only and shall not be sold or transmitted to another party.' +
-                                        ' Kelley Blue Book assumes no responsibility for errors or omissions.</div>' | translate }} {{values}}"
+                tooltip-html-unsafe="{{ disclaimer }}"
                 tooltip-delay="500">
           <span nxg-icon="icon-help"></span>
       </h4>
