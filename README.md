@@ -37,6 +37,9 @@ nonexistent ref, unable to checkout." You can ignore this as the next steps will
 
 This document is written in [Markdown](http://daringfireball.net/projects/markdown/) format.
 
+Additionally documentation about the project can be found in the "docs" folder and on
+[this Confluence page](https://tardis.discoverdsc.com/confluence/display/CP/myNextGear+Home)
+
 #Project setup
 -----------------------
 
@@ -77,13 +80,36 @@ Note: The node brew formula spits out some subtle output about the fact that you
 
     `git checkout develop` 
     
-Note: our team pushes to the develop branch often, and upon deployment the tech lead will merge this branch into master. To read more about our GIT workflow [read this article](http://nvie.com/posts/a-successful-git-branching-model/)
+Note: our team pushes to the develop branch often, and upon deployment the tech lead will merge this branch into master.
+Our team uses feature branches (with pull requests in Stash). We initially, used a git-flow branching model described
+here [read this article](http://nvie.com/posts/a-successful-git-branching-model/) or 
+[this one](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+but moved towards the GitLab
+Flow model [read this article](https://about.gitlab.com/2014/09/29/gitlab-flow/) which seems to be a better and simpler 
+model for us. We don't require using a specific naming convention for branches but currently it is highly recommended
+to include the Jira Issue (eg. MNGW-4247) in the branch name. This allows Stash to link the commit and pull request
+to specific Jira Issues automatically and vice versa (Jira can link to the commit in Stash).
+
+We have different branches for our different environments:
+
+  - develop (test environment that is currently deployed at test.nextgearcapital.com/develop)
+  - uat (currently deployed at test.nextgearcapital.com/uat--it uses the same data as "develop")
+  - master (production environment that is deployed at customer.nextgearcapital.com)
+  - training (currently deployed at training.nextgearcapital.com)
+  - demo (currently deployed at demo.nextgearcapital.com)
+  
+We also have a Bamboo deployment environment "Dealer-Portal Feature Branch" which we can use to manually deploy any
+feature branch that we want. These will be deployed to test.nextgearcapital.com/feature/{git-branch-name}
    
    
 #### 8. Install local dependencies with NPM and Bower:
     
     npm install   
     bower install
+    
+A common gotcha may be that `npm install` fails. This probably happens if you have previously run `sudo npm install`
+in which case you will need to run `sudo npm install` or just remove the .npm directory from your home directory and
+re-run `npm install`.
 
 #### 9. Configure GIT pre-commit hook:
 
@@ -96,7 +122,7 @@ Note: our team pushes to the develop branch often, and upon deployment the tech 
      
      `# --no-verify`
      
-  - Another option is executing `grunt githooks` which will prepare pre-commit hook for you.
+  - Another option is executing `grunt githooks` which will prepare a pre-commit hook for you.
 
 #Grunt tasks
 -----------------------
