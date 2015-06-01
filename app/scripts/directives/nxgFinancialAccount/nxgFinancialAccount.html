@@ -19,7 +19,7 @@
       </div>
       <div class="col-xs-1">
       </div>
-      <div class="col-xs-7 static heavy">
+      <div class="col-xs-7 static">
         <span>{{ descriptiveName }}</span>
       </div>
       <div class="col-xs-1 static text-center">
@@ -35,14 +35,21 @@
     </div>
   </div>
 
-  <div class="well-item bordered" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+  <div class="well-item" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
     <div class="row">
-      <div class="col-xs-2 static heavy text-right">Bank Name</div>
-      <div class="col-xs-2 static text-left">{{account.AchBankName}}</div>
-      <div class="col-xs-2 static heavy text-right">Account Number</div>
-      <div class="col-xs-2 static text-left">******{{account.AchAccountNumberLast4}}</div>
-      <div class="col-xs-2 static heavy text-right">Routing Number</div>
-      <div class="col-xs-2 static text-left">{{account.AchAbaNumber}}</div>
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy">Bank Name</div>
+      <div class="col-xs-2 static">{{account.AchBankName}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy">Account Number</div>
+      <div class="col-xs-2 static">******{{account.AchAccountNumberLast4}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy">Routing Number</div>
+      <div class="col-xs-2 static">{{account.AchAbaNumber}}</div>
     </div>
   </div>
 </div>
