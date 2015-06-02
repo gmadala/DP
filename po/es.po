@@ -106,11 +106,12 @@ msgstr "# comprados"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%."
-msgstr "[ES] %START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%."
+msgstr "Todos los derechos reservados. Blue Book® es una "
+"marca comercial registrada de Kelley Blue Book Co., Inc."
 
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
-msgstr "[ES] © %YEAR% By Kelley Blue Book Co., Inc."
+msgstr "© %YEAR% Kelley Blue Book Co., Inc."
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid ""
@@ -318,7 +319,7 @@ msgstr "Todos"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "All Right Reserved."
-msgstr "[ES] All Right Reserved"
+msgstr "(Edición %START_DATE% - %END_DATE%). Codigo postal %ZIP_CODE%."
 
 #: app/views/analytics.html
 msgid "All values are displayed in Canadian Dollars unless specified."
@@ -2886,15 +2887,12 @@ msgid ""
 "and shall not be sold or transmitted to another party. Kelley Blue Book "
 "assumes no responsibility for errors or omissions."
 msgstr ""
-"[ES] The specific information required to determine the value for this particular "
- "vehicle was supplied by the person generating this report. Vehicle "
- "valuations are opinions and may vary from vehicle to vehicle. Actual "
- "valuations will vary based upon market conditions, specifications, vehicle "
- "condition or other particular circumstances pertinent to this particular "
- "vehicle or the transaction or the parties to the transaction. This report is "
- "intended for the individual use of the person generating this report only "
- "and shall not be sold or transmitted to another party. Kelley Blue Book "
- "assumes no responsibility for errors or omissions."
+"Las tasaciones de los vehículos son opiniones y pueden variar "
+"según el vehículo. Las tasaciones reales variarán según las condiciones "
+"del mercado, las especificaciones, el estado del vehículo u otras "
+"circunstancias particulares en relación con este vehículo o la transacción "
+"o las partes involucradas. Kelley Blue Book no asume ninguna responsabilidad "
+"por errores u omisiones. (v.14051)"
 
 #: app/views/titlereleasecheckout.html
 msgid ""
