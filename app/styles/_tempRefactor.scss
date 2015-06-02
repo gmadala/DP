@@ -223,9 +223,9 @@ hr {
   margin: 10px 0 20px;
 
    & > [class*="col"] {
-    padding: 10px;
+    padding: 0px;
     border-right: 1px solid #BBBBBB;
-
+    width:25%;
     & + [class*="col"] {
       padding-left: 0;
     }
