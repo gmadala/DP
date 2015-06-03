@@ -340,3 +340,31 @@ Typical commands for using Git from the terminal are as follows:
 it's not uncommon to merge locally if you need to resolve conflicts.
 
         git merge --no-ff
+
+#Code Sharing
+-----------------------
+
+The mobile-apps project has a lot of the same functionality as the dealer-portal project. They both use the 
+MobileService api and have overlapping features. Unfortunately, they were not developed with a common code base
+or coding style. This has resulted in various challenges with code maintenance and bugs.
+
+Additionally, there has been some progress made towards a responsive (mobile friendly) dealer-portal application 
+that could at some point in the future mostly supplant the mobile-apps project. The idea would be that that the mobile-apps
+project would become a thin native shell that would bootstrap the dealer-portal web application (basically a native
+app that is just a hyperlink).
+
+With these issues in mind we put in place a simple mechanism to begin refactoring code to a common code base. The 
+main angular application module is "nextgearWeb". We created a second module called "nextgearWebCommon". Currently,
+files for each module are kept in the same directories but this could be refactored in the future. Then, the mobile-apps
+bower.json was modified to import the dealer-portal as a bower package into the mobile-apps project. The mobile-apps project
+references the specific Git revision that it needs and references the "nextgearWebCommon" files that it needs in
+its index.html and karma.conf.js files.
+
+The main shim that was quickly put in place for this to work is services/apiCommon.js since the api.js service in
+each project is different. models/kbb.js is an example of a component in "nextgearWebCommon".
+
+Other approaches using Git submodules or subtrees are also possible but the approach used here was a very quick
+way to put something in place without getting new developers into trouble with submodules or subtrees.
+
+With the current bower approach, new services, models, and filters should be created in the "nextgearWebCommon" module
+when it makes sense. Some work would need to go into getting directives to be shareable.
