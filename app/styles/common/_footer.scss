@@ -36,6 +36,10 @@ body {
   margin-bottom: -50px;
 }
 
+.no-left-margin {
+  margin-left:0px;
+}
+
 .nxg-main:after {
   content: '';
   display: block;

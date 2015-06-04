@@ -31,7 +31,7 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" nxg-fluid-container>
+      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
         <div ui-view id="{{ navState.current.pageID }}Page"></div>
       </div>
       <div nxg-activity></div>
