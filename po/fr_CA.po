@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-03-19 11:30-0400\n"
+"PO-Revision-Date: 2015-06-04 13:00-0400\n"
 "Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
 "Language-Team: TranslateMedia New York\n"
 "Language: fr_CA\n"
@@ -60,7 +60,7 @@ msgstr "2. Informations sur la vente"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "2013 - 2015 Edition for zip code 46123"
-msgstr ""
+msgstr "Édition 2013-2015 pour code postal américain 46123"
 
 #: app/views/modals/requestCreditIncrease.html
 msgid "3. How much would you like to increase it by?"
@@ -185,11 +185,11 @@ msgstr "Gestion de Compte"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Account Name"
-msgstr ""
+msgstr "Intitulé de compte"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Account Number"
-msgstr ""
+msgstr "Numéro de compte"
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Acknowledge VIN Look-Up Failure"
@@ -224,11 +224,11 @@ msgstr "Ajouter un reçu"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Add account"
-msgstr ""
+msgstr "Ajouter un compte"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Add payment account"
-msgstr ""
+msgstr "Ajouter un compte de paiement"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Additional Addresses"
@@ -259,7 +259,7 @@ msgstr "Tous"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "All Rights Reserved"
-msgstr ""
+msgstr "Tous droits réservés"
 
 #: app/views/analytics.html
 msgid "All values are displayed in Canadian Dollars unless specified."
@@ -355,7 +355,7 @@ msgstr "Numéro(s) d'accès à l'encan"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Authorization and Request for Automated Payments"
-msgstr ""
+msgstr "Autorisation et demande de paiement automatisé"
 
 #: app/views/account_management.html
 msgid "Auto-Disburse Unapplied Funds"
@@ -436,7 +436,7 @@ msgstr "Compte(s) bancaire(s)"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Bank Name"
-msgstr ""
+msgstr "Nom de la banque"
 
 #: app/views/analytics.html
 msgid "Best Movers"
@@ -736,7 +736,7 @@ msgstr "Date de soumission"
 #. the date when the account was added
 #: app/scripts/controllers/accountManagement.js
 msgid "Date added"
-msgstr ""
+msgstr "Date d'ajout"
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Date range based on Date Floored OR Disbursement Date."
@@ -790,6 +790,17 @@ msgid ""
 "National Customer Service Center 1.877.864.9291 - "
 "dealerservicestoronto@nextgearcapital.com. Thank you!"
 msgstr ""
+"Cher client, nous sommes reconnaissants de votre clientèle et nous désirons "
+"vous aviser de récents changements apportés à votre compte NextGear Capital. "
+"Récents changements :  Changements apportés à l'inscription ProperNounTBD. "
+"Si vous n’avez pas effectué ces changements, ou si vous avez des questions "
+"relatives à ces changements, veuillez communiquer immédiatement avec le "
+"service à la clientèle de NextGear Capital, au : Centre de service à la "
+"clientèle des É.-U., 1 (888) 969-3721 – customerservice@nextgearcapital.com "
+"Canada — Centre de service à la clientèle du Québec 1 (855) 864.9291 - "
+"dealerservicesmontreal@nextgearcapital.com Canada – Centre de service à la "
+"clientèle national 1 (877) 864-9291 –  dealerservicestoronto@nextgearcapital."
+"com. Merci!"
 
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Default Address"
@@ -797,11 +808,11 @@ msgstr "Adresse par défaut"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Default for Disbursements"
-msgstr ""
+msgstr "Décaissements par défaut"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Default for Payments"
-msgstr ""
+msgstr "Paiements par défaut"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
@@ -828,11 +839,11 @@ msgstr "Description"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Disable"
-msgstr ""
+msgstr "Désactiver"
 
 #: app/views/account_management.html
 msgid "Disabled"
@@ -938,7 +949,7 @@ msgstr "Date d’expiration"
 
 #: app/views/account_management.html
 msgid "Enhanced Registration Enabled"
-msgstr ""
+msgstr "Inscription optimisée activée"
 
 #: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
@@ -953,6 +964,7 @@ msgid ""
 "Enhanced Registration will result in all account access being restricted to "
 "users with a PIN."
 msgstr ""
+"L’inscription optimisée limitera l’accès aux utilisateurs munis d’un NIP. "
 
 #: app/views/auction.settings.html
 msgid ""
@@ -966,11 +978,11 @@ msgstr ""
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Enroll in ProperNounTBD"
-msgstr ""
+msgstr "Inscription à ProperNounTBD"
 
 #: app/views/account_management.html
 msgid "Enrolled in ProperNounTBD"
-msgstr ""
+msgstr "Inscrit à ProperNounTBD"
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Enter Stock #'s separated by a comma."
@@ -1242,11 +1254,11 @@ msgstr "L’enregistrement est en ma possession"
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "I agree to the terms and conditions."
-msgstr ""
+msgstr "J'accepte les modalités."
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "I have reviewed and agree to the Terms and Conditions."
-msgstr ""
+msgstr "J’ai lu et j’accepte les modalités."
 
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
@@ -1361,12 +1373,12 @@ msgstr "Date du dernier paiement"
 #. the date when the account was last modified
 #: app/scripts/controllers/accountManagement.js
 msgid "Last modified"
-msgstr ""
+msgstr "Dernière modification"
 
 #. the date when payment was last made using the account
 #: app/scripts/controllers/accountManagement.js
 msgid "Last payment on"
-msgstr ""
+msgstr "Dernier paiement"
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Legal Name"
@@ -1589,7 +1601,7 @@ msgstr "Non trouvé <span>:(</span>"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Notification of changes to your account"
-msgstr ""
+msgstr "Avis de changements à votre compte"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Notifications"
@@ -2487,7 +2499,7 @@ msgstr "Décharné"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Routing Number"
-msgstr ""
+msgstr "Numéro d'acheminement"
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -2632,11 +2644,11 @@ msgstr "Envoyer à"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Set to default disbursement account?"
-msgstr ""
+msgstr "Sélectionner le compte de décaissement par défaut?"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Set to default payment account?"
-msgstr ""
+msgstr "Sélectionner le compte de paiement par défaut?"
 
 #: app/scripts/directives/navBar/navBar.html
 msgid "Settings"
@@ -2836,7 +2848,7 @@ msgstr "Nom du plan à terme"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "Les modalités."
 
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
@@ -2861,6 +2873,8 @@ msgstr ""
 #: app/views/valuelookup.html
 msgid "The following values are based on the Zip provided."
 msgstr ""
+"Les valeurs ci-dessous sont basées sur le code postal américain que vous "
+"avez fourni."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
@@ -2884,6 +2898,17 @@ msgid ""
 "and shall not be sold or transmitted to another party. Kelley Blue Book "
 "assumes no responsibility for errors or omissions"
 msgstr ""
+"L’information exacte requise pour déterminer la valeur de ce véhicule en "
+"particulier a été fournie par la personne qui produit ce rapport. Les "
+"évaluations des véhicules ne sont que des opinions et peuvent varier d’un "
+"véhicule à l’autre. Les évaluations réelles varient en fonction de "
+"l’évolution du marché, des caractéristiques et de la condition du véhicule "
+"ou de toute autre circonstance exceptionnelle liée à ce véhicule en "
+"particulier ou à la transaction ou aux parties effectuant la transaction. Ce "
+"rapport est destiné uniquement à une utilisation individuelle par la "
+"personne produisant ce rapport et ne doit ni être vendu, ni être transmis à "
+"un tiers. Le Kelley Blue Book n'assume aucune responsabilité en cas "
+"d'erreurs ou d'omissions"
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -3200,11 +3225,11 @@ msgstr ""
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "Unenroll from ProperNounTBD"
-msgstr ""
+msgstr "Désinscription du ProperNoun TBD"
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "Unenroll now"
-msgstr ""
+msgstr "Se désinscrire maintenant"
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"
@@ -3358,18 +3383,25 @@ msgid ""
 "We are sorry, but we are unable to provide\n"
 "        NextGear Book Values at this time."
 msgstr ""
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir\n"
+" les valeurs comptables de NextGear. "
 
 #: app/views/valuelookup.html
 msgid ""
 "We are sorry, but we are unable to provide Kelley\n"
 "        Blue Book<sup>®</sup> values at this time."
 msgstr ""
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir les "
+"valeurs Kelley\n"
+" Blue Book<sup>®</sup>. "
 
 #: app/views/valuelookup.html
 msgid ""
 "We are sorry, but we are unable to provide MMR\n"
 "        Values at this time."
 msgstr ""
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir les "
+"valeurs MMR/n  "
 
 #: app/views/login.recover.html
 msgid ""
@@ -3435,7 +3467,7 @@ msgstr "Semaine"
 
 #: app/scripts/controllers/accountManagement.js
 msgid "Weekly Upcoming Payments Report"
-msgstr ""
+msgstr "Rapport hebdomadaire de paiements à venir"
 
 #: app/views/login.updateSecurity.html
 msgid "Welcome"
@@ -3495,17 +3527,19 @@ msgstr "Oui"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Yes, I want to enroll"
-msgstr ""
+msgstr "Oui, je souhaite m’inscrire"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid ""
 "You are about to enroll in ProperNounTBD. Please review the terms and "
 "conditions below."
 msgstr ""
+"Vous êtes sur le point de vous inscrire à ProperNounTBD. Veuillez prendre "
+"connaissance des modalités ci-dessous. "
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "You are about to unenroll from ProperNounTBD..."
-msgstr ""
+msgstr "Vous êtes sur le point de vous désinscrire de ProperNounTBD..."
 
 #: app/views/receipts.html
 msgid ""
@@ -3768,7 +3802,7 @@ msgstr ""
 
 #: app/scripts/controllers/accountManagement.js
 msgid "© 2015 By Kelley Blue Book Co., Inc."
-msgstr ""
+msgstr "© 2015 Par Kelley Blue Book Co., Inc."
 
 #~ msgid ""
 #~ "The following values are a regional average based on the Zip provided."
