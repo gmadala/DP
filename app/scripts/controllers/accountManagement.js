@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone) {
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
 
     // TODO remove this once bank accounts is merged - just mark these for translation
     // default billing account
@@ -58,13 +58,14 @@ angular.module('nextgearWebApp')
     gettext('Weekly Upcoming Payments Report');
 
 
-
+      
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
+    $scope.autoPayEnabled = features.autoPay.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -209,7 +210,7 @@ angular.module('nextgearWebApp')
             },
             isDisplayed: function () {
               return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
-                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true;
+                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true && $scope.autoPayEnabled;
             }
           }
         };
