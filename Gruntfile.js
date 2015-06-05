@@ -41,6 +41,8 @@ module.exports = function(grunt) {
   } catch (e) {
   }
 
+  grunt.file.defaultEncoding = 'utf8';
+
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
@@ -429,6 +431,9 @@ module.exports = function(grunt) {
     gettext_update_po: {
       src: ['po/*.po']
     },
+    po_validate: {
+      src: ['po/*.po']
+    },
     shell: {
       options: {
         failOnError: true,
@@ -621,6 +626,28 @@ module.exports = function(grunt) {
 
       console.log(filename);
       grunt.task.run('shell:msgmerge:' + filename);
+    });
+  });
+
+  // apply validation/formatting/other post-processing as needed
+  // TODO: Grunt translation tasks should be cleaned up slightly with MNGW-5568
+  grunt.registerMultiTask('po_validate', 'update PO files from the POT file', function () {
+
+    // Replace ’ with ' for apostrophe symbol - MNGW-5529
+    this.filesSrc.forEach(function (filename) {
+
+      var contents;
+      var replace = /’/g;
+      var replaceWith = '\'';
+
+      contents = grunt.file.read(filename);
+
+      if (replace.test(contents)) {
+
+        console.log('Replacing "' + replace.source + '" with "' + replaceWith + '" in ' + filename);
+        contents = contents.replace(replace, replaceWith);
+        grunt.file.write(filename, contents);
+      }
     });
   });
 
