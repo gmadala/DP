@@ -22,6 +22,9 @@ angular.module('nextgearWebApp')
       kbb: {
         enabled: true
       },
+      autoPay: {
+        enabled: false
+      },
       loadFromQueryString: function () {
         var search = $location.search();
 
