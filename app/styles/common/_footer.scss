@@ -2,7 +2,7 @@
 //  FOOTER
 // ========
 
-footer.row-fluid {
+footer.row-footer{
   @extend %center;
   @extend %full-width;
   background: #FFF;
@@ -16,6 +16,7 @@ footer.row-fluid {
 
 .nxg-main-view {
   margin-bottom: 50px;
+  margin-left:20px;
 }
 
 html, body {
@@ -33,6 +34,10 @@ body {
   overflow: hidden;
   /* equal to footer height plus some extra spacing */
   margin-bottom: -50px;
+}
+
+.no-left-margin {
+  margin-left:0px;
 }
 
 .nxg-main:after {

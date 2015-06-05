@@ -216,6 +216,8 @@ angular.module('nextgearWebApp')
         $scope.financial = {
           data: {
             bankAccounts: results.BankAccounts,
+            disbursementAccount: results.DefaultDisbursementBankAccountId,
+            billingAccount: results.DefaultBillingBankAccountId,
             availableCredit: results.AvailableCredit,
             reserveFunds: results.ReserveFunds,
             lastPayment: {

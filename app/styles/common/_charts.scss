@@ -1,7 +1,10 @@
 // ========
 //  CHARTS
 // ========
-
+.highcharts-container
+{
+  left:10px;
+}
 .scale-description {
   @extend %heavy;
   font-size: $tiny-font-size;
@@ -60,8 +63,10 @@
 .payments-chart {
   @extend %center;
   position: relative;
+  margin-top:30px;
   padding: 20px 20px 10px;
   z-index: -1;
+
 
   .chart-label-primary {
     margin-bottom: 0;
@@ -69,6 +74,7 @@
   .chart-label-primary, .chart-label-secondary {
     font-weight: normal;
   }
+  .highcharts-title{ left:45px !important; }
 }
 
 // Vehicle Details semicircle charts.

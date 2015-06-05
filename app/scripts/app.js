@@ -8,6 +8,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     { key: 'fr_CA', id: 2, name: 'French (CA)' },
     { key: 'es', id: 3, name: 'Spanish' }
   ])
+  // TODO Uncomment the below config upon upgrading to Angular 1.3 for a performance boost
+  // (it can be enabled in nxgConfig.mock.js for local dev)
+  // https://docs.angularjs.org/guide/production
+  //.config(['$compileProvider', function ($compileProvider) {
+  //  // https://docs.angularjs.org/guide/production
+  //  $compileProvider.debugInfoEnabled(false);
+  //}])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -21,7 +28,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         pageID: 'Login',
-        allowAnonymous: true
+        allowAnonymous: true,
+        margin: 'no-left-margin'
       })
       .state('loginRecover', {
         url: '/login/recover',
@@ -29,7 +37,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'LoginRecoverCtrl',
         pageID: 'LoginRecover',
         allowAnonymous: true,
-        noDirectAccess: true
+        noDirectAccess: true,
+        margin: 'no-left-margin'
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',

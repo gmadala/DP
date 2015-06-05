@@ -11,7 +11,7 @@
 }
 
 body, html {
-  min-width: 1020px;
+  min-width: 1020px !important;
   color: $text;
 }
 
@@ -22,7 +22,7 @@ body {
   background: url(../img/backgroundNoise.png) repeat;
 }
 
-.container-fluid {
+.container {
   position: relative;
   width: 100%;
   min-width: 1020px;
@@ -71,7 +71,90 @@ body {
   }
 }
 
+
+
 // so that our feedback tab displays beneath the modal backdrop.
 #uvTab, #ki_container{
   z-index: 1000 !important;
+}
+
+//Bootstrap 3 override for margins between columns, and padding
+.RecievableDetailMargin
+{
+  margin-left:-35px;
+}
+.centerTextAlign
+{
+  text-align:center;
+}
+.numericRightFloat
+{
+  float:right;
+}
+
+.additionalPaymentText
+{
+  margin-left:160px;
+  margin-top:-30px;
+}
+.zeroPadding
+{
+  padding:0;
+}
+.zeroLeftPadding
+{
+  padding-left:0;
+}
+.zeroRightPadding
+{
+  padding-right:0;
+}
+.zeroLeftMargin
+{
+  margin-left:0;
+}
+
+.zeroRightMargin
+{
+  margin-right:0;
+}
+.padding-left
+{
+  padding-left:15px;
+}
+
+.topMargin
+{
+  margin-top:10px;
+}
+.containerLeftMargin{
+  margin-left:15px;
+}
+.leftMargin {
+  margin-left:0px;
+}
+.rightMargin{
+  margin-right:0px;
+}
+.leftMarginMedium
+{
+  margin-left:15px;
+}
+.leftMarginLarge {
+  margin-left:25px;
+}
+.col-xs-3 {
+  width:23%;
+}
+.col-xs-4 {
+  width: 31%;
+}
+
+.col-xs-6 {
+width:48%;
+  margin: 0 1%;
+}
+.col-xs-10{
+  width: 81%;
+  margin: 0 1.0%;
 }

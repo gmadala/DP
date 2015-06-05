@@ -31,13 +31,13 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" nxg-fluid-container>
+      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
         <div ui-view id="{{ navState.current.pageID }}Page"></div>
       </div>
       <div nxg-activity></div>
     </div>
 
-    <footer class="row-fluid">
+    <footer class="row row-footer">
       <ul class="horizontal-list">
         <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved. 11799 North College Avenue, Carmel, IN 46032</li>
         <li>
@@ -233,6 +233,7 @@
     <script src="scripts/directives/nxgFluidContainer.js"></script>
     <script src="scripts/directives/nxgSticky.js"></script>
     <script src="scripts/directives/nxgPrivacyStatement.js"></script>
+    <script src="scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js" ></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
     <!-- endbuild -->
@@ -240,7 +241,7 @@
     <!-- processhtml:remove:dist -->
     <script src="scripts/config/nxgConfig.mock.processed.js"></script>
     <script src="scripts/dev/autologin.js"></script>
-    <script src="scripts/dev/gettextDebug.js"></script>
+    <!-- <script src="scripts/dev/gettextDebug.js"></script> -->
     <script src="scripts/directives/nxgDebugTitle.processed.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
 

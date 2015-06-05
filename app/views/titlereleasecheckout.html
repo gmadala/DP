@@ -1,5 +1,5 @@
-<section class="row-fluid">
-  <section class="span9">
+<section class="row">
+  <section class="col-xs-9">
     <div class="info-block">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
@@ -46,8 +46,8 @@
               <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">
                 <span nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
               </a>
-              <div class="row-fluid">
-                <p class="lockup-minor caps vin"><span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
+              <div class="row">
+                <p class="lockup-minor caps vin padding-left"><span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
                 <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span></p>
               </div>
 
@@ -77,7 +77,7 @@
     </div>
   </section>
 
-  <div class="span3 well sticky" nxg-sticky>
+  <div class="col-xs-3 well sticky" nxg-sticky>
     <h2 class="well-title" translate>Requests Summary</h2>
     <div class="well-item well-dark bordered">
       <p translate>Review the following and submit your title release requests.</p>

@@ -3,7 +3,7 @@
 .col-bordered {
   padding: 20px 0;
 
-  & > [class*="span"] {
+  & > [class*="col"] {
     border-right: 1px solid #BBBBBB;
 
     &:last-child {
@@ -112,14 +112,16 @@
 }
 
 .payment-activity {
-  [class*="span"] {
+  [class*="col"] {
     height: 250px;
     margin: 0;
+    background-color:#fff;
+    @include border-bottom-radius($borderRadius);
   }
 
   .table-holder {
-    border: 0;
-    border-right: 1px solid #BBBBBB;
+    background-color:#fff;
+    @include border-bottom-radius($borderRadius);
   }
 
   h3 {
@@ -144,8 +146,8 @@
 .search {
   padding: 20px 10px;
 
-  & > [class*="span"] {
-    & + [class*="span"] {
+  & > [class*="col"] {
+    & + [class*="col"] {
       padding-left: 20px;
       border-left: 1px solid $border;
     }
@@ -220,11 +222,11 @@ hr {
   padding: 10px 0;
   margin: 10px 0 20px;
 
-   & > [class*="span"] {
-    padding: 10px;
+   & > [class*="col"] {
+    padding: 0px;
     border-right: 1px solid #BBBBBB;
-
-    & + [class*="span"] {
+    width:25%;
+    & + [class*="col"] {
       padding-left: 0;
     }
     &:last-child {

@@ -286,7 +286,7 @@ module.exports = function(grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [
           {
@@ -591,7 +591,7 @@ module.exports = function(grunt) {
     'copy',
     'preprocess:index',
     'cdnify',
-    'ngmin',
+    'ngAnnotate',
     'uglify',
     'cssmin',
     'autoprefixer',

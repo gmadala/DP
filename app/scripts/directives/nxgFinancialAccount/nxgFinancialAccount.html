@@ -1,0 +1,55 @@
+<div ng-if="displayed">
+  <div class="well-item bordered">
+    <div class="row">
+      <div class="col-xs-1">
+        <div class="cr-inline text-center">
+          <input id="defaultForBilling{{account.BankAccountId}}" type="radio" name="defaultForBilling"
+                 ng-model="defaultForBilling" ng-value="true" disabled/>
+          <label class="radio-img small" for="defaultForBilling{{account.BankAccountId}}"></label>
+          <label class="cr-label" for="defaultForBilling{{account.BankAccountId}}"></label>
+        </div>
+      </div>
+      <div class="col-xs-1">
+        <div class="cr-inline text-center">
+          <input id="defaultForDisbursement{{account.BankAccountId}}" type="radio" name="defaultForDisbursement"
+                 ng-model="defaultForDisbursement" ng-value="true" disabled/>
+          <label class="radio-img small" for="defaultForDisbursement{{account.BankAccountId}}"></label>
+          <label class="cr-label" for="defaultForDisbursement{{account.BankAccountId}}"></label>
+        </div>
+      </div>
+      <div class="col-xs-1">
+      </div>
+      <div class="col-xs-7 static heavy">
+        <span>{{ descriptiveName }}</span>
+      </div>
+      <div class="col-xs-1 static text-center">
+        <span>{{ status | translate }}</span>
+      </div>
+      <div class="col-md-1 static text-right pull-right">
+        <button class="btn-unstyle" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+                <span class="paired-media"
+                      ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }"
+                      nxg-icon="icon-chevron"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="well-item" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+    <div class="row">
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy" translate>Bank Name</div>
+      <div class="col-xs-2 static">{{account.AchBankName}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy" translate>Account Number</div>
+      <div class="col-xs-2 static">******{{account.AchAccountNumberLast4}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 static"></div>
+      <div class="col-xs-2 static heavy" translate>Routing Number</div>
+      <div class="col-xs-2 static">{{account.AchAbaNumber}}</div>
+    </div>
+  </div>
+</div>

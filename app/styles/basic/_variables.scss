@@ -19,6 +19,7 @@ $tableBorder: #BBBBBB;
 $tooltipArrowWidth: 10px;
 $tooltipArrowColor: #FFF;
 $tooltipBackground: #FFF;
+$zindexTooltip : 0;
 $wellBackground: #f8f8f8;
 // end bootstrap overrides
 
@@ -39,6 +40,9 @@ $today: $warning;
 $upcoming: $success;
 
 $white: #FFFFFF;
+$red: #b30015;
+$yellow: #ffff00;
+$green: #00ff00;
 
 // Type Sizes
 $tiny-font-size: 11px;

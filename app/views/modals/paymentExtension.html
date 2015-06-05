@@ -7,25 +7,25 @@
 
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6"><span translate>Principal</span>:</p>
-      <p class="span6 value numeric">{{ extPrev.PrincipalAmount | currency }}</p>
+      <p class="col-xs-6"><span translate>Principal</span>:</p>
+      <p class="col-xs-6 value numeric">{{ extPrev.PrincipalAmount | currency }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6"><span translate>Interest</span>:</p>
-      <p class="span6 value numeric">{{ extPrev.InterestAmount | currency }}</p>
+      <p class="col-xs-6"><span translate>Interest</span>:</p>
+      <p class="col-xs-6 value numeric">{{ extPrev.InterestAmount | currency }}</p>
     </li>
     <li class="list-table-row" ng-repeat="fee in extPrev.Fees">
-      <p class="span6">{{ fee.Type }}</p>
-      <p class="span6 value numeric">{{ fee.Amount | currency }}</p>
+      <p class="col-xs-6">{{ fee.Type }}</p>
+      <p class="col-xs-6 value numeric">{{ fee.Amount | currency }}</p>
     </li>
     <li class="list-table-row" ng-show="extPrev.CollateralProtectionAmount > 0">
-      <p class="span6"><span translate>Collateral Protection</span>: </p>
-      <p class="span6 value numeric">{{ extPrev.CollateralProtectionAmount | currency }}</p>
+      <p class="col-xs-6"><span translate>Collateral Protection</span>: </p>
+      <p class="col-xs-6 value numeric">{{ extPrev.CollateralProtectionAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row list-table-emphasis">
-      <p class="span6"><span translate>Subtotal</span>:</p>
-      <p class="span6 value numeric">{{ subtotal | currency }}</p>
+      <p class="col-xs-6"><span translate>Subtotal</span>:</p>
+      <p class="col-xs-6 value numeric">{{ subtotal | currency }}</p>
     </li>
   </ul>
   <p ng-show="extPrev.CanExtend" translate>
