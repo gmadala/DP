@@ -89,6 +89,19 @@ msgstr ""
 "class=\"count highlight dash major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
 
+#: app/scripts/controllers/valuelookup.js
+msgid "%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%."
+msgstr "Todos los derechos reservados. Blue Book® es una "
+"marca comercial registrada de Kelley Blue Book Co., Inc."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "© %YEAR% By Kelley Blue Book Co., Inc."
+msgstr "© %YEAR% Por Kelley Blue Book Co., Inc."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "All Right Reserved."
+msgstr "(Edición %START_DATE% - %END_DATE%). Codigo postal %ZIP_CODE%."
+
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr "<strong>0</strong> Días"
@@ -345,7 +358,7 @@ msgstr "¿Está seguro que desea salir?"
 
 #: app/views/modals/businessSearch.html
 msgid "Auction Access No."
-msgstr "No. de acceso a la subasta"
+msgstr "Núm. de acceso a la subasta"
 
 #: app/views/auction.dealersearch.html
 msgid "Auction Access Number"
@@ -464,7 +477,7 @@ msgstr "Nombre o número del negocio"
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Business No."
-msgstr "No. de negocio"
+msgstr "Núm. de negocio"
 
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Business Number"
@@ -1584,7 +1597,7 @@ msgstr "No, gracias"
 
 #: app/views/auction.dashboard.html
 msgid "No."
-msgstr "No"
+msgstr "Núm."
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js
 #: app/views/account_management.html app/views/auction.settings.html
@@ -1715,7 +1728,7 @@ msgstr "Detalles del pago"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payment Due"
-msgstr "Fecha de vencimiento"
+msgstr "Pago vence"
 
 #: app/views/modals/paymentDetails.html
 msgid "Payment Made"
@@ -1763,7 +1776,7 @@ msgstr "Pagos"
 
 #: app/scripts/models/dashboard.js
 msgid "Payments Due"
-msgstr "Pagos vencidos"
+msgstr "Pagos vencen"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
@@ -1781,7 +1794,7 @@ msgstr "Pagado"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payoff Due"
-msgstr "El pago vence en"
+msgstr "Pagos vencidos"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Payoff this vehicle"
@@ -2350,7 +2363,7 @@ msgstr "Fecha de recibo"
 #: app/views/dashboard.html app/views/modals/paymentDetails.html
 #: app/views/receipts.html
 msgid "Receipt No."
-msgstr "Recibo No."
+msgstr "Recibo Núm."
 
 #: app/views/receipts.html
 msgid "Receipt Search"
@@ -2787,7 +2800,7 @@ msgstr "# de inventario, VIN, marca, modelo o año"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Stock No."
-msgstr "No. de inventario"
+msgstr "Núm. de inventario"
 
 #: app/views/vehicledetails.html
 msgid "Stock Number"
@@ -2891,7 +2904,7 @@ msgid ""
 "vehicle or the transaction or the parties to the transaction. This report is "
 "intended for the individual use of the person generating this report only "
 "and shall not be sold or transmitted to another party. Kelley Blue Book "
-"assumes no responsibility for errors or omissions"
+"assumes no responsibility for errors or omissions."
 msgstr ""
 "La información específica que se requiere para determinar el valor de este "
 "vehículo en particular la suministró la persona que generó este reporte. Las "
@@ -2990,7 +3003,7 @@ msgstr "Este {{ paymentType }} no puede programarse."
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Ticket No."
-msgstr "Cupón No."
+msgstr "Cupón Núm."
 
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 msgid "Title"

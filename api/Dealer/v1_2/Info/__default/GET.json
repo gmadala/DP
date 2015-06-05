@@ -139,6 +139,7 @@
       }
     ],
     "CountryId":"29ec136a-1416-46ed-93cd-254d0fb0b820",
-    "LanguageId": 1
+    "LanguageId": 1,
+    "BusinessClassification" :2
   }
 }

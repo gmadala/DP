@@ -89,6 +89,18 @@ msgstr ""
 "class=\"count highlight dash-major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
 
+#: app/scripts/controllers/valuelookup.js
+msgid "© %YEAR% By Kelley Blue Book Co., Inc."
+msgstr "© %YEAR% Par Kelley Blue Book Co., Inc."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "All Right Reserved."
+msgstr "Tous droits réservés."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%."
+msgstr "Édition %START_DATE% - %END_DATE% pour code postal américain %ZIP_CODE%."
+
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr "<strong>0</strong> jours"
@@ -889,8 +901,8 @@ msgstr "Date d'échéance"
 #: app/views/dashboard.html
 msgid "Due This Month"
 msgid_plural "Due This Month"
-msgstr[0] "Dû ce mois"
-msgstr[1] "Dûs ce mois"
+msgstr[0] "Dû ce mois-ci"
+msgstr[1] "Dûs ce mois-ci"
 
 #. Payment(s) due this week
 #: app/scripts/controllers/payments.js app/views/dashboard.html
@@ -2896,7 +2908,7 @@ msgid ""
 "vehicle or the transaction or the parties to the transaction. This report is "
 "intended for the individual use of the person generating this report only "
 "and shall not be sold or transmitted to another party. Kelley Blue Book "
-"assumes no responsibility for errors or omissions"
+"assumes no responsibility for errors or omissions."
 msgstr ""
 "L’information exacte requise pour déterminer la valeur de ce véhicule en "
 "particulier a été fournie par la personne qui produit ce rapport. Les "
