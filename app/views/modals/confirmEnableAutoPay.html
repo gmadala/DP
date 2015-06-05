@@ -1,15 +1,99 @@
-<h3 class="modal-header">Enroll in Auto-Pay</h3>
+<h3 class="modal-header" translate>Enroll in ProperNounTBD</h3>
+
 <section class="modal-body">
-  <p>You are about to enroll in auto-pay...</p>
-  <div class="cr-inline">
-    <input type="checkbox" name="terms" id="enableAutoPayTerms" ng-model="agree"/>
-    <label for="enableAutoPayTerms" class="checkbox-img small"></label>
-    <label for="enableAutoPayTerms" class="cr-label">I agree to the terms and conditions.</label>
+  <p translate>You are about to enroll in ProperNounTBD. Please review the terms and conditions below.</p>
+
+  <div class="legal-textarea">
+    <h3 translate>Terms and Conditions</h3>
+    <h4 translate>Authorization and Request for Automated Payments</h4>
+    The Authorization and Request for Automated Payments (this “Automated Payment Request”) may only be submitted by an
+    authorized representative of the Borrower designated on the account that you are currently logged into (this
+    “Account”). By submitting this Automated Payment Request, you are certifying to NextGear Capital, Inc. (“Lender”)
+    that you are an authorized representative of Borrower and have all necessary authority to provide the authorizations
+    and make the requests set forth herein, in each case for and on behalf of Borrower. Capitalized terms used herein
+    but not defined herein shall have the respective meanings as set forth in that certain Demand Promissory Note and
+    Loan and Security Agreement by and between Borrower and Lender (the “Note”).
+
+    By clicking on the “Enroll” button at the bottom of this Automated Payment Request, Borrower hereby authorizes and
+    requests Lender to initiate recurring electronic debit entries (each, an “Automated Debit”) from the bank account
+    specified by Borrower in that certain ACH Authorization and Request or similar authorization, executed by Borrower
+    in favor of Lender (as the same now exists or is hereafter amended, the “Designated Account”) in payment of amounts
+    and other Liabilities owed by Borrower under the Note and the other Loan Documents. Lender will schedule an
+    Automated Debit from the Designated Account on the Maturity Date for any Liability, in each case in such amount as
+    is due and owing with respect to such Liability on or after the date that such Automated Payment is scheduled by
+    Lender (including any applicable fees, interest and other amounts incurred by Borrower or accrued on such Liability
+    after the Maturity Date) (collectively, an “Automated Payment”).
+
+
+    Borrower further acknowledges and agrees that:
+
+    This Automated Payment Request may take up to five (5) Business Days for Lender to process. Once this Automated
+    Payment Request has been processed by Lender, a confirmation may be sent to Borrower via email to the email address
+    designated for Borrower’s account (the “Designated Email”). . Once this Automated Payment Request is processed by
+    Lender, the Automated Debits will continue to be initiated by Lender until such time as Borrower terminates this
+    Automated Payment Request by logging into Borrower’s Account at https://customer.nextgearcapital.com and
+    un-enrolling. Any termination of this Automated Payment Request by Borrower may take up to five (5) Business Days
+    for Lender to process, and during this time Lender may continue to initiate Automated Debits in accordance with this
+    Automated Payment Request.
+    • Borrower must maintain sufficient funds in the Designated Account to satisfy all Automated Debits authorized under
+    this Automated Payment Request. If the Designated Account holds insufficient funds to cover an Automated Debit,
+    Borrower may be assessed fees or other charges by both the financial institution at which the Designated Account is
+    held (the “Depository Bank”) and by Lender, just as if Borrower had written a check to Lender that was returned for
+    insufficient funds.
+
+    • Borrower is solely responsible for any overdraft charges or other fees that the Depository Bank may assess in
+    connection with any Automated Debits initiated pursuant to this Automated Payment Request.
+
+    • This Automated Payment Request shall be deemed a “Loan Document” for all intents and purposes under the Note, and
+    Lender shall be entitled to avail itself of any limitations of liability and other similar protections or relief
+    afforded Lender under the Note, and these provisions and protections shall apply to any Automated Debit or other
+    transaction initiated by Lender hereunder. Additionally, Lender shall have no liability and shall not be responsible
+    for any damages arising from or relating to any checks or other payments dishonored after the available balance in
+    the Designated Account is reduced by any Automated Debit or other transaction initiated by Lender hereunder.
+
+    • Borrower will remain liable and responsible for all amounts owed under the Note and other Loan Documents which
+    remain unpaid as a result of an unsuccessful attempt to debit funds from the Designated Account pursuant to this
+    Automated Payment Request.
+
+    • This Automated Payment Request does not create a fiduciary relationship between Lender and Borrower.
+
+    • Borrower is bound by the Operating Rules of the National Automated Clearing House Association (NACHA), as in
+    effect from time to time with regard to each Automated Debit and other transaction initiated by Lender hereunder.
+
+    • Lender may send to Borrower at its Designated Email a confirmation of each Automated Debit and other transaction
+    processed hereunder. Borrower shall maintain the active status of the Designated Email (or provide immediate written
+    notification to Lender of any change in the Designated Email) at all times.
+
+    • In the event that any of Borrower’s Designated Account information changes, or in the event that Borrower closes
+    the Designated Account, Borrower will update its Designated Account information at least ten (10) Business Days
+    prior to the effective date of such change or closure by logging into Borrower’s Account at
+    https://customer.nextgearcapital.com. .
+
+    Lender may, if necessary, initiate adjustments at any time and without advance notice to Borrower for any Automated
+    Debit made in error to the Designated Account pursuant to this Automated Payment Request. Lender reserves the right
+    to terminate Borrower or this Automated Payment Request program at any time and without prior notice to Borrower.
+    This Automated Payment Request does not in any way terminate, amend or modify, in whole or in part the Note or any
+    other Loan Documents, including any ACH Authorization and Request or similar authorization or any other agreements
+    between Borrower and Lender. Borrower acknowledges and agrees that this Automated Payment Request and the Automated
+    Debits being authorized and requested herein are in addition to any ACH Authorization and Request or similar
+    authorization or request that may have been submitted to Lender and any electronic debits or other payments
+    authorized or requested by Borrower therein.
   </div>
 </section>
 <div class="modal-footer">
-  <button class="btn-cta cta-secondary" type="button" ng-click="close(false)">Cancel</button>
-  <button class="btn-cta cta-primary" type="submit" ng-click="close(agree)" nxg-autofocus ng-disabled="!agree">
+  <div class="cr-inline text-left" style="margin-left:10px;">
+    <input type="checkbox" name="terms" id="enableAutoPayTerms" ng-model="agree"/>
+    <label for="enableAutoPayTerms" class="checkbox-img small"></label>
+    <label for="enableAutoPayTerms" class="cr-label" translate>
+      I have reviewed and agree to the Terms and Conditions.
+    </label>
+  </div>
+</div>
+<hr/>
+<div class="modal-footer">
+  <button class="btn-cta cta-secondary" type="button" ng-click="close(false)" translate>Cancel</button>
+  <button class="btn-cta cta-primary" type="submit" ng-click="close(agree)" nxg-autofocus ng-disabled="!agree"
+          translate>
     Yes, I want to enroll
   </button>
 </div>
