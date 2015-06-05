@@ -1,13 +1,68 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, segmentio, metric, User, api, $q, dealerCustomerSupportPhone) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
+
+    // TODO remove this once bank accounts is merged - just mark these for translation
+    // default billing account
+    gettext('Default for Payments');
+    // default disbursement account
+    gettext('Default for Disbursements');
+    gettext('Account Name');
+    /// account status (active or inactive)
+    gettext('Status');
+    gettext('Details');
+    gettext('Account Number');
+    gettext('Routing Number');
+    gettext('Bank Name');
+    gettext('City');
+    gettext('Set to default payment account?');
+    gettext('Set to default disbursement account?');
+    gettext('Add payment account');
+    gettext('Add account');
+    /// the date when the account was last modified
+    gettext('Last modified');
+    /// the date when the account was added
+    gettext('Date added');
+    /// the date when payment was last made using the account
+    gettext('Last payment on');
+    gettext('Edit');
+    gettext('Disable');
+
+    // new KBB tooltip (remove this once merged with 5430)
+    gettext('© 2015 By Kelley Blue Book Co., Inc.');
+    gettext('2013 - 2015 Edition for zip code 46123');
+    gettext('All Rights Reserved');
+    gettext('The specific information required to determine the value for this particular vehicle was supplied by the' +
+    ' person generating this' +
+    ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
+    ' Actual valuations will vary based upon market conditions, specifications,' +
+    ' vehicle condition or other particular circumstances pertinent to this' +
+    ' particular vehicle or the transaction or the parties to the transaction.' +
+    ' This report is intended for the individual use of the person generating' +
+    ' this report only and shall not be sold or transmitted to another party.' +
+    ' Kelley Blue Book assumes no responsibility for errors or omissions');
+
+    // email notification
+    gettext('Notification of changes to your account');
+    gettext('Dear Customer, We appreciate your business and want to let you know about recent changes made to your NextGear Capital account.' +
+    ' Recent Changes: ProperNounTBD Enrollment Change(s). If these changes were not made by you or if you have any questions about the changes, please immediately contact NextGear Capital support at:' +
+    ' US Customer Service Center 1.888.969.3721 - customerservice@nextgearcapital.com' +
+    ' Canada - Quebec Customer Service Center 1.855.864.9291 - dealerservicesmontreal@nextgearcapital.com' +
+    ' Canada - National Customer Service Center 1.877.864.9291 - dealerservicestoronto@nextgearcapital.com.' +
+    ' Thank you!');
+
+    // putting this in for the moment (probably a server side issue)
+    gettext('Weekly Upcoming Payments Report');
+
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
+    $scope.autoPayEnabled = features.autoPay.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -152,7 +207,7 @@ angular.module('nextgearWebApp')
             },
             isDisplayed: function () {
               return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
-                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true;
+                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true && $scope.autoPayEnabled;
             }
           }
         };
