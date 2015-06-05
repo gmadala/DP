@@ -124,8 +124,11 @@ angular.module('nextgearWebApp')
           },
           save: function() {
             if (prv.save.apply(this)) {
-              var d = this.dirtyData,
+              var d = this.dirtyData;
+              var cleanPhone = null;
+              if(d.phone !== null) {
                 cleanPhone = d.phone.replace($scope.phonePattern, '$2$4$5$6$7'); // sanitize phone format
+              }
 
               this.updateQuestionText(d.questions);
 
