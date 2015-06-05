@@ -89,6 +89,19 @@ msgstr ""
 "class=\"count highlight dash major\" ng-bind=\"eligibility."
 "TotalReleasesAllowed\">0</span>"
 
+#: app/scripts/controllers/valuelookup.js
+msgid "%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%."
+msgstr "Todos los derechos reservados. Blue Book® es una "
+"marca comercial registrada de Kelley Blue Book Co., Inc."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "© %YEAR% By Kelley Blue Book Co., Inc."
+msgstr "© %YEAR% Por Kelley Blue Book Co., Inc."
+
+#: app/scripts/controllers/valuelookup.js
+msgid "All Right Reserved."
+msgstr "(Edición %START_DATE% - %END_DATE%). Codigo postal %ZIP_CODE%."
+
 #: app/views/analytics.html
 msgid "<strong>0</strong> Days"
 msgstr "<strong>0</strong> Días"
@@ -2891,7 +2904,7 @@ msgid ""
 "vehicle or the transaction or the parties to the transaction. This report is "
 "intended for the individual use of the person generating this report only "
 "and shall not be sold or transmitted to another party. Kelley Blue Book "
-"assumes no responsibility for errors or omissions"
+"assumes no responsibility for errors or omissions."
 msgstr ""
 "La información específica que se requiere para determinar el valor de este "
 "vehículo en particular la suministró la persona que generó este reporte. Las "
