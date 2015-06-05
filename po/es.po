@@ -358,7 +358,7 @@ msgstr "¿Está seguro que desea salir?"
 
 #: app/views/modals/businessSearch.html
 msgid "Auction Access No."
-msgstr "No. de acceso a la subasta"
+msgstr "Núm. de acceso a la subasta"
 
 #: app/views/auction.dealersearch.html
 msgid "Auction Access Number"
@@ -477,7 +477,7 @@ msgstr "Nombre o número del negocio"
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Business No."
-msgstr "No. de negocio"
+msgstr "Núm. de negocio"
 
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Business Number"
@@ -1597,7 +1597,7 @@ msgstr "No, gracias"
 
 #: app/views/auction.dashboard.html
 msgid "No."
-msgstr "No"
+msgstr "Núm."
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js
 #: app/views/account_management.html app/views/auction.settings.html
@@ -1728,7 +1728,7 @@ msgstr "Detalles del pago"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payment Due"
-msgstr "Fecha de vencimiento"
+msgstr "Pago vence"
 
 #: app/views/modals/paymentDetails.html
 msgid "Payment Made"
@@ -1776,7 +1776,7 @@ msgstr "Pagos"
 
 #: app/scripts/models/dashboard.js
 msgid "Payments Due"
-msgstr "Pagos vencidos"
+msgstr "Pagos vencen"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
@@ -1794,7 +1794,7 @@ msgstr "Pagado"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payoff Due"
-msgstr "El pago vence en"
+msgstr "Pagos vencidos"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Payoff this vehicle"
@@ -2363,7 +2363,7 @@ msgstr "Fecha de recibo"
 #: app/views/dashboard.html app/views/modals/paymentDetails.html
 #: app/views/receipts.html
 msgid "Receipt No."
-msgstr "Recibo No."
+msgstr "Recibo Núm."
 
 #: app/views/receipts.html
 msgid "Receipt Search"
@@ -2800,7 +2800,7 @@ msgstr "# de inventario, VIN, marca, modelo o año"
 
 #: app/views/modals/confirmTitleRequest.html
 msgid "Stock No."
-msgstr "No. de inventario"
+msgstr "Núm. de inventario"
 
 #: app/views/vehicledetails.html
 msgid "Stock Number"
@@ -3003,7 +3003,7 @@ msgstr "Este {{ paymentType }} no puede programarse."
 
 #: app/views/auction.sellerfloorplan.html
 msgid "Ticket No."
-msgstr "Cupón No."
+msgstr "Cupón Núm."
 
 #: app/views/auction.sellerfloorplan.html app/views/floorplan.html
 msgid "Title"
