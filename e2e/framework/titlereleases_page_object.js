@@ -91,13 +91,13 @@ var PaymentPageObject = function () {
     browser.waitForAngular();
   };
 
-    //Doers
+  //Doers
   this.doSearchFloorPlan = function (searchVIN) {
       this.setSearchFloorPlan(searchVIN);
       browser.waitForAngular();
     };
 
-    //Getters
+  //Getters
   this.getActiveVehicleDescriptionLink = function () {
       var promise = protractor.promise.defer();
       this.vehicleDescriptionLinks.each(function (vehicleDescriptionLink) {

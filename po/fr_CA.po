@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-03-19 11:30-0400\n"
+"PO-Revision-Date: 2015-06-04 13:00-0400\n"
 "Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
 "Language-Team: TranslateMedia New York\n"
 "Language: fr_CA\n"
@@ -57,6 +57,10 @@ msgstr "2. Voulez-vous que cette augmentation soit temporaire ou permanente?"
 #: app/views/floorcar.html
 msgid "2. Sale Information"
 msgstr "2. Informations sur la vente"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "2013 - 2015 Edition for zip code 46123"
+msgstr "Édition 2013-2015 pour code postal américain 46123"
 
 #: app/views/modals/requestCreditIncrease.html
 msgid "3. How much would you like to increase it by?"
@@ -179,6 +183,14 @@ msgstr[1] "Frais de compte"
 msgid "Account Management"
 msgstr "Gestion de Compte"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Account Name"
+msgstr "Intitulé de compte"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Account Number"
+msgstr "Numéro de compte"
+
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Acknowledge VIN Look-Up Failure"
 msgstr "Confirmer l'échec de recherche de NIV"
@@ -210,6 +222,14 @@ msgstr "Ajoutez du capital supplémentaire?"
 msgid "Add Receipt"
 msgstr "Ajouter un reçu"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Add account"
+msgstr "Ajouter un compte"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Add payment account"
+msgstr "Ajouter un compte de paiement"
+
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Additional Addresses"
 msgstr "Adresses supplémentaires"
@@ -236,6 +256,10 @@ msgstr "Adresse"
 #: app/scripts/controllers/reports.js
 msgid "All"
 msgstr "Tous"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "All Rights Reserved"
+msgstr "Tous droits réservés"
 
 #: app/views/analytics.html
 msgid "All values are displayed in Canadian Dollars unless specified."
@@ -329,6 +353,10 @@ msgstr "No. D’Auction Acces"
 msgid "Auction Access Number(s)"
 msgstr "Numéro(s) d'accès à l'encan"
 
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Authorization and Request for Automated Payments"
+msgstr "Autorisation et demande de paiement automatisé"
+
 #: app/views/account_management.html
 msgid "Auto-Disburse Unapplied Funds"
 msgstr "Décaissement automatique des fonds non alloués"
@@ -406,6 +434,10 @@ msgstr "Compte bancaire pour décaissement"
 msgid "Bank Account(s)"
 msgstr "Compte(s) bancaire(s)"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Bank Name"
+msgstr "Nom de la banque"
+
 #: app/views/analytics.html
 msgid "Best Movers"
 msgstr "Meilleurs taux de roulement"
@@ -474,9 +506,11 @@ msgstr "PPC"
 #: app/scripts/controllers/floorCar.js app/views/account_management.html
 #: app/views/auction.bulkflooring.html app/views/auction.settings.html
 #: app/views/floorcar.html app/views/login.createPassword.html
-#: app/views/login.updateSecurity.html app/views/modals/creditQuery.html
-#: app/views/modals/scheduleCheckout.html app/views/profileSettings.html
-#: app/views/vehicledetails.html
+#: app/views/login.updateSecurity.html
+#: app/views/modals/confirmDisableAutoPay.html
+#: app/views/modals/confirmEnableAutoPay.html
+#: app/views/modals/creditQuery.html app/views/modals/scheduleCheckout.html
+#: app/views/profileSettings.html app/views/vehicledetails.html
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -518,6 +552,7 @@ msgstr "No de chèque"
 msgid "Checkout"
 msgstr "Caisse"
 
+#: app/scripts/controllers/accountManagement.js
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "City"
@@ -698,6 +733,11 @@ msgstr "Recherche de date"
 msgid "Date Submitted"
 msgstr "Date de soumission"
 
+#. the date when the account was added
+#: app/scripts/controllers/accountManagement.js
+msgid "Date added"
+msgstr "Date d'ajout"
+
 #: app/views/auction.sellerfloorplan.html
 msgid "Date range based on Date Floored OR Disbursement Date."
 msgstr "Plage de dates selon la date financé OU la date du déboursé."
@@ -738,9 +778,41 @@ msgstr "Recherche de concessionnaire"
 msgid "Dealer Statement"
 msgstr "Relevé du concessionnaire"
 
+#: app/scripts/controllers/accountManagement.js
+msgid ""
+"Dear Customer, We appreciate your business and want to let you know about "
+"recent changes made to your NextGear Capital account. Recent Changes: "
+"ProperNounTBD Enrollment Change(s). If these changes were not made by you or "
+"if you have any questions about the changes, please immediately contact "
+"NextGear Capital support at: US Customer Service Center 1.888.969.3721 - "
+"customerservice@nextgearcapital.com Canada - Quebec Customer Service Center "
+"1.855.864.9291 - dealerservicesmontreal@nextgearcapital.com Canada - "
+"National Customer Service Center 1.877.864.9291 - "
+"dealerservicestoronto@nextgearcapital.com. Thank you!"
+msgstr ""
+"Cher client, nous sommes reconnaissants de votre clientèle et nous désirons "
+"vous aviser de récents changements apportés à votre compte NextGear Capital. "
+"Récents changements :  Changements apportés à l'inscription ProperNounTBD. "
+"Si vous n’avez pas effectué ces changements, ou si vous avez des questions "
+"relatives à ces changements, veuillez communiquer immédiatement avec le "
+"service à la clientèle de NextGear Capital, au : Centre de service à la "
+"clientèle des É.-U., 1 (888) 969-3721 – customerservice@nextgearcapital.com "
+"Canada — Centre de service à la clientèle du Québec 1 (855) 864.9291 - "
+"dealerservicesmontreal@nextgearcapital.com Canada – Centre de service à la "
+"clientèle national 1 (877) 864-9291 –  dealerservicestoronto@nextgearcapital."
+"com. Merci!"
+
 #: app/views/account_management.html app/views/auction.settings.html
 msgid "Default Address"
 msgstr "Adresse par défaut"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Default for Disbursements"
+msgstr "Décaissements par défaut"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Default for Payments"
+msgstr "Paiements par défaut"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
@@ -764,6 +836,14 @@ msgstr "Refusé/Impayé"
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
 msgid "Description"
 msgstr "Description"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Details"
+msgstr "Détails"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Disable"
+msgstr "Désactiver"
 
 #: app/views/account_management.html
 msgid "Disabled"
@@ -805,13 +885,30 @@ msgstr "Télécharger NextGear Capital Mobile sur iOS"
 msgid "Due Date"
 msgstr "Date d'échéance"
 
-#: app/scripts/controllers/payments.js
-msgid "Due This Week"
-msgstr "Dû cette semaine"
+#. Payment(s) due this month
+#: app/views/dashboard.html
+msgid "Due This Month"
+msgid_plural "Due This Month"
+msgstr[0] "Dû ce mois"
+msgstr[1] "Dûs ce mois"
 
+#. Payment(s) due this week
+#: app/scripts/controllers/payments.js app/views/dashboard.html
+msgid "Due This Week"
+msgid_plural "Due This Week"
+msgstr[0] "Dû cette semaine"
+msgstr[1] "Dûs cette semaine"
+
+#. Payment(s) due today
 #: app/scripts/controllers/payments.js app/views/dashboard.html
 msgid "Due Today"
-msgstr "À Échéance Aujourd'hui"
+msgid_plural "Due Today"
+msgstr[0] "À Échéance Aujourd'hui"
+msgstr[1] "À Échéance Aujourd'hui"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Edit"
+msgstr "Modifier"
 
 #: app/views/vehicledetails.html
 msgid "Edit Additional Principal"
@@ -850,15 +947,26 @@ msgstr "Activé"
 msgid "End Date"
 msgstr "Date d’expiration"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid "Enhanced Registration Enabled"
+msgstr "Inscription optimisée activée"
+
+#: app/views/auction.settings.html
 msgid "Enhanced Registration Enabled?"
 msgstr "Inscription améliorée activée?"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/auction.settings.html
 msgid "Enhanced Registration PIN"
 msgstr "NIP d’inscription améliorée"
 
-#: app/views/account_management.html app/views/auction.settings.html
+#: app/views/account_management.html
+msgid ""
+"Enhanced Registration will result in all account access being restricted to "
+"users with a PIN."
+msgstr ""
+"L’inscription optimisée limitera l’accès aux utilisateurs munis d’un NIP. "
+
+#: app/views/auction.settings.html
 msgid ""
 "Enhanced Registration will result in all account access being restricted to "
 "users with a PIN. All guarantors will be asked to set up their PIN when "
@@ -867,6 +975,14 @@ msgstr ""
 "Avec l’inscription améliorée, les accès au compte seront restreints aux "
 "usagers disposant d'un NIP. Tous les répondants devront créer un NIP lors de "
 "l'ouverture d’une session sur MyNextGear."
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Enroll in ProperNounTBD"
+msgstr "Inscription à ProperNounTBD"
+
+#: app/views/account_management.html
+msgid "Enrolled in ProperNounTBD"
+msgstr "Inscrit à ProperNounTBD"
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Enter Stock #'s separated by a comma."
@@ -1136,6 +1252,14 @@ msgstr "Rapports d'historique"
 msgid "I Have the Title"
 msgstr "L’enregistrement est en ma possession"
 
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "I agree to the terms and conditions."
+msgstr "J'accepte les modalités."
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "I have reviewed and agree to the Terms and Conditions."
+msgstr "J’ai lu et j’accepte les modalités."
+
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
 msgstr "INACTIF"
@@ -1245,6 +1369,16 @@ msgstr "Dernier paiement"
 #: app/views/account_management.html app/views/analytics.html
 msgid "Last Payment Date"
 msgstr "Date du dernier paiement"
+
+#. the date when the account was last modified
+#: app/scripts/controllers/accountManagement.js
+msgid "Last modified"
+msgstr "Dernière modification"
+
+#. the date when payment was last made using the account
+#: app/scripts/controllers/accountManagement.js
+msgid "Last payment on"
+msgstr "Dernier paiement"
 
 #: app/views/modals/businessSearch.html app/views/modals/dealerNameSearch.html
 msgid "Legal Name"
@@ -1465,6 +1599,10 @@ msgstr "Non admissible à l’émission du certificat d'immatriculation"
 msgid "Not found <span>:(</span>"
 msgstr "Non trouvé <span>:(</span>"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Notification of changes to your account"
+msgstr "Avis de changements à votre compte"
+
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Notifications"
 msgstr "Notifications"
@@ -1493,9 +1631,16 @@ msgstr "Durée originale"
 msgid "Outstanding"
 msgstr "Dû"
 
+#. Payment(s) overdue
 #: app/views/dashboard.html
 msgid "Overdue"
-msgstr "En retard"
+msgid_plural "Overdue"
+msgstr[0] "En retard"
+msgstr[1] "En retard"
+
+#: app/views/account_management.html
+msgid "PIN"
+msgstr "NIP"
 
 #: app/404.html
 msgid "Page Not Found :("
@@ -1602,13 +1747,6 @@ msgstr "Recherche de paiement"
 #: app/views/vehicledetails.html
 msgid "Payment Summary"
 msgstr "Sommaire des Paiements"
-
-#. Payment This [Month, Year]
-#: app/views/dashboard.html
-msgid "Payment This {{ viewModeLabel | capitalize }}"
-msgid_plural "Payments This {{ viewModeLabel | capitalize }}"
-msgstr[0] "Paiements dû cette {{ viewModeLabel | capitalize }}"
-msgstr[1] "Paiements dû cette {{ viewModeLabel | capitalize }}"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 #: app/views/modals/scheduleCheckout.html
@@ -2359,6 +2497,10 @@ msgstr ""
 msgid "Rough"
 msgstr "Décharné"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Routing Number"
+msgstr "Numéro d'acheminement"
+
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
 #: app/views/titlereleasecheckout.html app/views/titlereleases.html
@@ -2500,6 +2642,14 @@ msgstr "Envoyer le certificat d'immatriculation à une adresse différente?"
 msgid "Send To"
 msgstr "Envoyer à"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Set to default disbursement account?"
+msgstr "Sélectionner le compte de décaissement par défaut?"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "Set to default payment account?"
+msgstr "Sélectionner le compte de paiement par défaut?"
+
 #: app/scripts/directives/navBar/navBar.html
 msgid "Settings"
 msgstr "Paramètres"
@@ -2613,6 +2763,8 @@ msgstr "Recommencer"
 msgid "State"
 msgstr "Province"
 
+#. account status (active or inactive)
+#: app/scripts/controllers/accountManagement.js
 #: app/views/auction.sellerfloorplan.html app/views/dashboard.html
 #: app/views/floorplan.html app/views/payments.html
 #: app/views/vehicledetails.html
@@ -2694,6 +2846,10 @@ msgstr "Soutien technique"
 msgid "Term Plan Name"
 msgstr "Nom du plan à terme"
 
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Terms and Conditions"
+msgstr "Les modalités."
+
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
 msgstr ""
@@ -2715,10 +2871,10 @@ msgstr ""
 "financier de ce compte."
 
 #: app/views/valuelookup.html
-msgid "The following values are a regional average based on the Zip provided."
+msgid "The following values are based on the Zip provided."
 msgstr ""
-"Les valeurs ci-dessous représentent une moyenne régionale déterminée selon "
-"le code postale indiqué."
+"Les valeurs ci-dessous sont basées sur le code postal américain que vous "
+"avez fourni."
 
 #: app/views/valuelookup.html
 msgid "The following values represent a national average."
@@ -2729,6 +2885,30 @@ msgid "The passwords do not match. Please re-enter the password."
 msgstr ""
 "Les mots de passe ne correspondent pas. Veuillez entrer le mot de passe à "
 "nouveau."
+
+#: app/scripts/controllers/accountManagement.js
+msgid ""
+"The specific information required to determine the value for this particular "
+"vehicle was supplied by the person generating this report. Vehicle "
+"valuations are opinions and may vary from vehicle to vehicle. Actual "
+"valuations will vary based upon market conditions, specifications, vehicle "
+"condition or other particular circumstances pertinent to this particular "
+"vehicle or the transaction or the parties to the transaction. This report is "
+"intended for the individual use of the person generating this report only "
+"and shall not be sold or transmitted to another party. Kelley Blue Book "
+"assumes no responsibility for errors or omissions"
+msgstr ""
+"L’information exacte requise pour déterminer la valeur de ce véhicule en "
+"particulier a été fournie par la personne qui produit ce rapport. Les "
+"évaluations des véhicules ne sont que des opinions et peuvent varier d’un "
+"véhicule à l’autre. Les évaluations réelles varient en fonction de "
+"l’évolution du marché, des caractéristiques et de la condition du véhicule "
+"ou de toute autre circonstance exceptionnelle liée à ce véhicule en "
+"particulier ou à la transaction ou aux parties effectuant la transaction. Ce "
+"rapport est destiné uniquement à une utilisation individuelle par la "
+"personne produisant ce rapport et ne doit ni être vendu, ni être transmis à "
+"un tiers. Le Kelley Blue Book n'assume aucune responsabilité en cas "
+"d'erreurs ou d'omissions"
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -2770,6 +2950,10 @@ msgstr ""
 "numeral:'$0,0.00' }} qui arrive à échéance le {{dashboardData."
 "selectedLineOfCredit.TempLineOfCreditExpiration | moment}}."
 
+#: app/scripts/controllers/dashboard.js
+msgid "This month"
+msgstr "Ce mois"
+
 #: app/views/dashboard.html
 msgid ""
 "This status applies to vehicles floored via NextGearCapital.com or by a "
@@ -2804,8 +2988,8 @@ msgstr ""
 "les raisons du refus pour le véhicule en question."
 
 #: app/scripts/controllers/dashboard.js
-msgid "This {{ dateType }}"
-msgstr "Ce {{ dateType }}"
+msgid "This week"
+msgstr "Cette semaine"
 
 #: app/scripts/controllers/checkout.js
 msgid "This {{ paymentType }} cannot be scheduled"
@@ -3039,6 +3223,14 @@ msgstr ""
 "min() | currency\"></span> et <span ng-bind=\"unappliedFunds.max() | currency"
 "\"></span>"
 
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "Unenroll from ProperNounTBD"
+msgstr "Désinscription du ProperNoun TBD"
+
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "Unenroll now"
+msgstr "Se désinscrire maintenant"
+
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"
 msgstr "Déprogrammer"
@@ -3135,8 +3327,8 @@ msgstr "Très bon"
 msgid "Video Walkthrough"
 msgstr "Guide vidéo"
 
-#: app/scripts/controllers/floorplan.js app/scripts/controllers/payments.js
-#: app/scripts/controllers/receipts.js
+#: app/scripts/controllers/dashboard.js app/scripts/controllers/floorplan.js
+#: app/scripts/controllers/payments.js app/scripts/controllers/receipts.js
 #: app/scripts/controllers/titleReleases.js
 #: app/scripts/directives/nxgSearch/nxgSearch.js
 msgid "View All"
@@ -3188,24 +3380,28 @@ msgstr "Volume des plans de financement antérieurs de NextGear Capital"
 
 #: app/views/valuelookup.html
 msgid ""
-"We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> "
-"values at this time."
+"We are sorry, but we are unable to provide\n"
+"        NextGear Book Values at this time."
 msgstr ""
-"Nous sommes désolés, mais nous ne sommes pas en mesure de fournir les "
-"valeurs de Kelley Blue Book<sup>®</sup> en ce moment."
-
-#: app/views/valuelookup.html
-msgid "We are sorry, but we are unable to provide MMR Values at this time."
-msgstr ""
-"Nous sommes désolés, mais nous ne sommes pas en mesure d'offrir les valeurs "
-"MMR en ce moment."
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir\n"
+" les valeurs comptables de NextGear. "
 
 #: app/views/valuelookup.html
 msgid ""
-"We are sorry, but we are unable to provide NextGear Book Values at this time."
+"We are sorry, but we are unable to provide Kelley\n"
+"        Blue Book<sup>®</sup> values at this time."
 msgstr ""
-"Nous sommes désolés, mais nous ne sommes pas en mesure d’offrir les valeurs "
-"de marché de NextGear Capital en ce moment."
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir les "
+"valeurs Kelley\n"
+" Blue Book<sup>®</sup>. "
+
+#: app/views/valuelookup.html
+msgid ""
+"We are sorry, but we are unable to provide MMR\n"
+"        Values at this time."
+msgstr ""
+"Nous sommes désolés, mais il nous est actuellement impossible de fournir les "
+"valeurs MMR/n  "
 
 #: app/views/login.recover.html
 msgid ""
@@ -3269,6 +3465,10 @@ msgstr ""
 msgid "Week"
 msgstr "Semaine"
 
+#: app/scripts/controllers/accountManagement.js
+msgid "Weekly Upcoming Payments Report"
+msgstr "Rapport hebdomadaire de paiements à venir"
+
 #: app/views/login.updateSecurity.html
 msgid "Welcome"
 msgstr "Bienvenue"
@@ -3324,6 +3524,22 @@ msgstr "Année"
 #: app/views/modals/confirmLogout.html
 msgid "Yes"
 msgstr "Oui"
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid "Yes, I want to enroll"
+msgstr "Oui, je souhaite m’inscrire"
+
+#: app/views/modals/confirmEnableAutoPay.html
+msgid ""
+"You are about to enroll in ProperNounTBD. Please review the terms and "
+"conditions below."
+msgstr ""
+"Vous êtes sur le point de vous inscrire à ProperNounTBD. Veuillez prendre "
+"connaissance des modalités ci-dessous. "
+
+#: app/views/modals/confirmDisableAutoPay.html
+msgid "You are about to unenroll from ProperNounTBD..."
+msgstr "Vous êtes sur le point de vous désinscrire de ProperNounTBD..."
 
 #: app/views/receipts.html
 msgid ""
@@ -3583,3 +3799,32 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
+
+#: app/scripts/controllers/accountManagement.js
+msgid "© 2015 By Kelley Blue Book Co., Inc."
+msgstr "© 2015 Par Kelley Blue Book Co., Inc."
+
+#~ msgid ""
+#~ "The following values are a regional average based on the Zip provided."
+#~ msgstr ""
+#~ "Les valeurs ci-dessous représentent une moyenne régionale déterminée "
+#~ "selon le code postale indiqué."
+
+#~ msgid ""
+#~ "We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> "
+#~ "values at this time."
+#~ msgstr ""
+#~ "Nous sommes désolés, mais nous ne sommes pas en mesure de fournir les "
+#~ "valeurs de Kelley Blue Book<sup>®</sup> en ce moment."
+
+#~ msgid "We are sorry, but we are unable to provide MMR Values at this time."
+#~ msgstr ""
+#~ "Nous sommes désolés, mais nous ne sommes pas en mesure d'offrir les "
+#~ "valeurs MMR en ce moment."
+
+#~ msgid ""
+#~ "We are sorry, but we are unable to provide NextGear Book Values at this "
+#~ "time."
+#~ msgstr ""
+#~ "Nous sommes désolés, mais nous ne sommes pas en mesure d’offrir les "
+#~ "valeurs de marché de NextGear Capital en ce moment."

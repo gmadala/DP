@@ -3,7 +3,8 @@
     <div class="well">
       <h4 class="well-title">
         <span translate>VIN Lookup</span>
-        <button class="btn-unstyle reset" ng-click="vinLookup.resetSearch()"><strong translate>Reset Values</strong></button>
+        <button class="btn-unstyle reset" ng-click="vinLookup.resetSearch()"><strong translate>Reset Values</strong>
+        </button>
       </h4>
       <div class="well-item">
         <form class="value-form" name="vinLookupForm" novalidate>
@@ -17,11 +18,13 @@
                    ng-pattern="/^[A-Za-z0-9]*$/"
                    required
                    nxg-autofocus
-                   ng-class="{ 'nxg-invalid': vinLookup.validity.vin.$error.required || vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength }" />
+                   ng-class="{ 'nxg-invalid': vinLookup.validity.vin.$error.required || vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength }"/>
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.required" translate>
               Please enter a VIN.
             </label>
-            <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength" translate>
+            <label for="vin" class="text-error"
+                   ng-show="vinLookup.validity.vin.$error.minlength || vinLookup.validity.vin.$error.maxlength"
+                   translate>
               VIN should be 10 - 17 characters.
             </label>
             <label for="vin" class="text-error" ng-show="vinLookup.validity.vin.$error.pattern" translate>
@@ -37,14 +40,15 @@
                    required
                    nxg-validate-int="6"
                    ng-class="{ 'nxg-invalid': vinLookup.validity.vinMileage.$error.required || vinLookup.validity.vinMileage.$error.pattern || vinLookup.validity.vinMileage.$error.maxlength || vinLookup.validity.vinMileage.$error.nxgMin }"
-              />
+                />
             <label for="vinMileage" class="text-error"
                    ng-show="vinLookup.validity.vinMileage.$error.required" translate>
               Please enter the Mileage.
             </label>
             <label for="vinMileage"
                    class="text-error"
-                   ng-show="vinLookup.validity.vinMileage.$error.pattern || vinLookup.validity.vinMileage.$error.nxgMin" translate>
+                   ng-show="vinLookup.validity.vinMileage.$error.pattern || vinLookup.validity.vinMileage.$error.nxgMin"
+                   translate>
               Please enter a positive integer value with no decimals.
             </label>
             <label for="vinMileage"
@@ -52,14 +56,17 @@
                    ng-show="vinLookup.validity.vinMileage.$error.maxlength" translate>
               Please enter a value less than 1,000,000.
             </label>
+
             <div ng-show="kbbEnabled">
-              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>®</sup> Auction Values</span></i></label>
+              <label for="vinKbbZipCode" class="input-title"><span translate>Zip</span><i
+                  style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span
+                  translate>Fill out for Kelley Blue Book<sup>®</sup> Auction Values</span></i></label>
               <input type="text" id="vinKbbZipCode"
                      name="vinKbbZipCode"
                      ng-model="vinLookup.zipcode"
                      ng-pattern="/^\d{5}$/"
                      ng-class="{ 'nxg-invalid': vinLookup.validity.vinKbbZipCode.$error.required || vinLookup.validity.vinKbbZipCode.$error.pattern || vinLookup.validity.vinKbbZipCode.$error.maxlength }"
-                />
+                  />
               <label for="vinKbbZipCode"
                      class="text-error"
                      ng-show="vinLookup.validity.vinKbbZipCode.$error.pattern" translate>
@@ -67,15 +74,19 @@
               </label>
             </div>
           </div>
-          <button class="btn-cta cta-primary" ng-click="vinLookup.lookup()" ng-disabled="searchInProgress" translate>Look Up Values</button>
+          <button class="btn-cta cta-primary" ng-click="vinLookup.lookup()" ng-disabled="searchInProgress" translate>
+            Look Up Values
+          </button>
         </form>
       </div>
     </div>
     <h2 class="paragraph center" translate> - OR - </h2>
+
     <div class="well">
       <h4 class="well-title">
         <span translate>Manual Lookup</span>
-        <button class="btn-unstyle reset" ng-click="manualLookup.resetSearch()"><strong translate>Reset Values</strong></button>
+        <button class="btn-unstyle reset" ng-click="manualLookup.resetSearch()"><strong translate>Reset Values</strong>
+        </button>
       </h4>
       <div class="well-item">
         <form class="value-form" name="manualLookupForm" novalidate>
@@ -88,12 +99,16 @@
                 </select>
               </div>
             </div>
-            <label for="lookupValues" class="text-error" ng-show="manualLookupForm.lookupValues.$error.required" translate>
+            <label for="lookupValues" class="text-error" ng-show="manualLookupForm.lookupValues.$error.required"
+                   translate>
               Please Select a Manual Lookup Values.
             </label>
+
             <div class="" ng-switch-when="bb">
               <label for="make" translate>Make</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.make.$error.required }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.make.$error.required }">
                 <select id="make" name="make"
                         ng-model="manualLookup.blackbook.makes.selected"
                         ng-change="manualLookup.blackbook.models.fill()"
@@ -102,12 +117,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="make" class="text-error" ng-show="manualLookup.blackbook.validity.make.$error.required" translate>
+              <label for="make" class="text-error" ng-show="manualLookup.blackbook.validity.make.$error.required"
+                     translate>
                 Please select a Make.
               </label>
 
               <label for="model" translate>Model</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.model.$error.required, disabled: !manualLookup.blackbook.makes.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.model.$error.required, disabled: !manualLookup.blackbook.makes.selected }">
                 <select id="model" name="model"
                         ng-model="manualLookup.blackbook.models.selected"
                         ng-change="manualLookup.blackbook.years.fill()"
@@ -117,12 +135,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="model" class="text-error" ng-show="manualLookup.blackbook.validity.model.$error.required" translate>
+              <label for="model" class="text-error" ng-show="manualLookup.blackbook.validity.model.$error.required"
+                     translate>
                 Please select a Model.
               </label>
 
               <label for="year" translate>Year</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.year.$error.required, disabled: !manualLookup.blackbook.models.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.year.$error.required, disabled: !manualLookup.blackbook.models.selected }">
                 <select id="year" name="year"
                         ng-model="manualLookup.blackbook.years.selected"
                         ng-change="manualLookup.blackbook.styles.fill()"
@@ -132,12 +153,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="year" class="text-error" ng-show="manualLookup.blackbook.validity.year.$error.required" translate>
+              <label for="year" class="text-error" ng-show="manualLookup.blackbook.validity.year.$error.required"
+                     translate>
                 Please select a Year.
               </label>
 
               <label for="style" translate>Style</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.style.$error.required, disabled: !manualLookup.blackbook.years.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.style.$error.required, disabled: !manualLookup.blackbook.years.selected }">
                 <select id="style" name="style"
                         ng-model="manualLookup.blackbook.styles.selected"
                         ng-disabled="!manualLookup.blackbook.years.selected"
@@ -160,14 +184,15 @@
                      required
                      nxg-validate-int="6"
                      ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.blackbookMileage.$error.required || manualLookup.blackbook.validity.blackbookMileage.$error.pattern || manualLookup.blackbook.validity.blackbookMileage.$error.maxlength || manualLookup.blackbook.validity.blackbookMileage.$error.nxgMin }"
-                />
+                  />
               <label for="blackbookMileage" class="text-error"
                      ng-show="manualLookup.blackbook.validity.blackbookMileage.$error.required" translate>
                 Please enter the Mileage.
               </label>
               <label for="blackbookMileage"
                      class="text-error"
-                     ng-show="manualLookup.blackbook.validity.blackbookMileage.$error.pattern || manualLookup.blackbook.validity.blackbookMileage.$error.nxgMin" translate>
+                     ng-show="manualLookup.blackbook.validity.blackbookMileage.$error.pattern || manualLookup.blackbook.validity.blackbookMileage.$error.nxgMin"
+                     translate>
                 Please enter a positive integer value with no decimals.
               </label>
               <label for="blackbookMileage"
@@ -179,6 +204,7 @@
 
             <div class="" ng-switch-when="mmr">
               <label for="mmrYear" translate>Year</label>
+
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrYear.$error.required }">
                 <select id="mmrYear" name="mmrYear"
                         ng-model="manualLookup.mmr.years.selected"
@@ -188,12 +214,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="mmrYear" class="text-error" ng-show="manualLookup.mmr.validity.mmrYear.$error.required" translate>
+              <label for="mmrYear" class="text-error" ng-show="manualLookup.mmr.validity.mmrYear.$error.required"
+                     translate>
                 Please select a Year.
               </label>
 
               <label for="mmrMake" translate>Make</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrMake.$error.required, disabled: !manualLookup.mmr.years.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrMake.$error.required, disabled: !manualLookup.mmr.years.selected }">
                 <select id="mmrMake" name="mmrMake"
                         ng-model="manualLookup.mmr.makes.selected"
                         ng-change="manualLookup.mmr.models.fill()"
@@ -203,12 +232,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="make" class="text-error" ng-show="manualLookup.mmr.validity.mmrMake.$error.required" translate>
+              <label for="make" class="text-error" ng-show="manualLookup.mmr.validity.mmrMake.$error.required"
+                     translate>
                 Please select a Make.
               </label>
 
               <label for="mmrModel" translate>Model</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrModel.$error.required, disabled: !manualLookup.mmr.makes.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrModel.$error.required, disabled: !manualLookup.mmr.makes.selected }">
                 <select id="mmrModel" name="mmrModel"
                         ng-model="manualLookup.mmr.models.selected"
                         ng-change="manualLookup.mmr.styles.fill()"
@@ -218,12 +250,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="mmrModel" class="text-error" ng-show="manualLookup.mmr.validity.mmrModel.$error.required" translate>
+              <label for="mmrModel" class="text-error" ng-show="manualLookup.mmr.validity.mmrModel.$error.required"
+                     translate>
                 Please select a Model.
               </label>
 
               <label for="mmrStyle" translate>Style</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrStyle.$error.required, disabled: !manualLookup.mmr.models.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrStyle.$error.required, disabled: !manualLookup.mmr.models.selected }">
                 <select id="mmrStyle" name="mmrStyle"
                         ng-model="manualLookup.mmr.styles.selected"
                         ng-disabled="!manualLookup.mmr.models.selected"
@@ -246,14 +281,15 @@
                      required
                      nxg-validate-int="6"
                      ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrMileage.$error.required || manualLookup.mmr.validity.mmrMileage.$error.pattern || manualLookup.mmr.validity.mmrMileage.$error.maxlength || manualLookup.mmr.validity.mmrMileage.$error.nxgMin }"
-                />
+                  />
               <label for="mmrMileage" class="text-error"
                      ng-show="manualLookup.mmr.validity.mmrMileage.$error.required" translate>
                 Please enter the Mileage.
               </label>
               <label for="mmrMileage"
                      class="text-error"
-                     ng-show="manualLookup.mmr.validity.mmrMileage.$error.pattern || manualLookup.mmr.validity.mmrMileage.$error.nxgMin" translate>
+                     ng-show="manualLookup.mmr.validity.mmrMileage.$error.pattern || manualLookup.mmr.validity.mmrMileage.$error.nxgMin"
+                     translate>
                 Please enter a positive integer value with no decimals.
               </label>
               <label for="mmrMileage"
@@ -265,6 +301,7 @@
 
             <div class="" ng-switch-when="kbb">
               <label for="kbbYear" translate>Year</label>
+
               <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbYear.$error.required }">
                 <select id="kbbYear" name="kbbYear"
                         ng-model="manualLookup.kbb.years.selected"
@@ -274,12 +311,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="kbbYear" class="text-error" ng-show="manualLookup.kbb.validity.kbbYear.$error.required" translate>
+              <label for="kbbYear" class="text-error" ng-show="manualLookup.kbb.validity.kbbYear.$error.required"
+                     translate>
                 Please select a Year.
               </label>
 
               <label for="kbbMake" translate>Make</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid' : manualLookup.kbb.validity.kbbMake.$error.required, disabled: !manualLookup.kbb.years.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid' : manualLookup.kbb.validity.kbbMake.$error.required, disabled: !manualLookup.kbb.years.selected }">
                 <select id="kbbMake" name="kbbMake"
                         ng-model="manualLookup.kbb.makes.selected"
                         ng-change="manualLookup.kbb.models.fill()"
@@ -289,12 +329,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="kbbMake" class="text-error" ng-show="manualLookup.kbb.validity.kbbMake.$error.required" translate>
+              <label for="kbbMake" class="text-error" ng-show="manualLookup.kbb.validity.kbbMake.$error.required"
+                     translate>
                 Please select a Make.
               </label>
 
               <label for="kbbModel" translate>Model</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbModel.$error.required, disabled: !manualLookup.kbb.makes.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbModel.$error.required, disabled: !manualLookup.kbb.makes.selected }">
                 <select id="kbbModel" name="kbbModel"
                         ng-model="manualLookup.kbb.models.selected"
                         ng-change="manualLookup.kbb.styles.fill()"
@@ -304,12 +347,15 @@
                   <option value=""></option>
                 </select>
               </div>
-              <label for="kbbModel" class="text-error" ng-show="manualLookup.kbb.validity.kbbModel.$error.required" translate>
+              <label for="kbbModel" class="text-error" ng-show="manualLookup.kbb.validity.kbbModel.$error.required"
+                     translate>
                 Please select a Model.
               </label>
 
               <label for="kbbStyle" translate>Style</label>
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbStyle.$error.required, disabled: !manualLookup.kbb.models.selected }">
+
+              <div class="style-select"
+                   ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbStyle.$error.required, disabled: !manualLookup.kbb.models.selected }">
                 <select id="kbbStyle" name="kbbStyle"
                         ng-model="manualLookup.kbb.styles.selected"
                         ng-disabled="!manualLookup.kbb.models.selected"
@@ -332,14 +378,15 @@
                      required
                      nxg-validate-int="6"
                      ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbMileage.$error.required || manualLookup.kbb.validity.kbbMileage.$error.pattern || manualLookup.kbb.validity.kbbMileage.$error.maxlength || manualLookup.kbb.validity.kbbMileage.$error.nxgMin }"
-                />
+                  />
               <label for="kbbMileage" class="text-error"
                      ng-show="manualLookup.kbb.validity.kbbMileage.$error.required" translate>
                 Please enter the Mileage.
               </label>
               <label for="kbbMileage"
                      class="text-error"
-                     ng-show="manualLookup.kbb.validity.kbbMileage.$error.pattern || manualLookup.kbb.validity.kbbMileage.$error.nxgMin" translate>
+                     ng-show="manualLookup.kbb.validity.kbbMileage.$error.pattern || manualLookup.kbb.validity.kbbMileage.$error.nxgMin"
+                     translate>
                 Please enter a positive integer value with no decimals.
               </label>
               <label for="kbbMileage"
@@ -354,7 +401,7 @@
                      ng-pattern="/^\d{5}$/"
                      required
                      ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbZipCode.$error.required || manualLookup.kbb.validity.kbbZipCode.$error.pattern || manualLookup.kbb.validity.kbbZipCode.$error.maxlength }"
-                />
+                  />
               <label for="kbbZipCode" class="text-error"
                      ng-show="manualLookup.kbb.validity.kbbZipCode.$error.required" translate>
                 Please enter the Zip.
@@ -364,10 +411,12 @@
                      ng-show="manualLookup.kbb.validity.kbbZipCode.$error.pattern" translate>
                 Please enter a valid 5 digit Zip.
               </label>
-            </div >
+            </div>
 
           </div>
-          <button class="btn-cta cta-primary" ng-click="manualLookup.lookup()" ng-disabled="searchInProgress" translate>Look Up Values</button>
+          <button class="btn-cta cta-primary" ng-click="manualLookup.lookup()" ng-disabled="searchInProgress" translate>
+            Look Up Values
+          </button>
         </form>
       </div>
     </div>
@@ -382,7 +431,8 @@
         <span translate>All values are displayed in US Dollars.</span>
       </p>
     </div>
-    <div class="info-block" ng-hide="results.blackbook.multiple || results.mmr.multiple || results.kbb.multiple || manualLookup.searchComplete || vinLookup.searchComplete">
+    <div class="info-block"
+         ng-hide="results.blackbook.multiple || results.mmr.multiple || results.kbb.multiple || manualLookup.searchComplete || vinLookup.searchComplete">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
       </div>
@@ -403,17 +453,25 @@
 
     <div ng-show="showDescription()">
       <h4 class="subtitle" translate>Vehicle Description</h4>
+
       <div class="valuation-description">
         <h2>{{ results.description }}</h2>
         <h4 ng-show="results.vin"><span translate>VIN</span>: {{ results.vin }}</h4>
+
         <p ng-show="results.style">{{ results.style }} </p>
+
         <p translate>{{ results.mileage | numeral:'0,0' }} miles</p>
       </div>
     </div>
 
     <div ng-hide="hideBlackbookAll()">
-      <h4 class="subtitle"><span translate>NextGear Book Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
-      <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Book Values at this time.</p>
+      <h4 class="subtitle"><span translate>NextGear Book Wholesale Values</span><i
+          style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i>
+      </h4>
+
+      <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide
+        NextGear Book Values at this time.</p>
+
       <div ng-show="results.blackbook.multiple">
         <div class="row">
           <div class="col-xs-1 heavy">
@@ -465,8 +523,12 @@
     </div>
 
     <div ng-hide="hideMmrAll()">
-      <h4 class="subtitle"><span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
-      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
+      <h4 class="subtitle"><span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">
+        &nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
+
+      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR
+        Values at this time.</p>
+
       <div ng-show="results.mmr.multiple">
         <div class="row">
           <div class="col-xs-1 heavy"><span translate>Model</span>:</div>
@@ -519,8 +581,31 @@
     </div>
 
     <div ng-hide="hideKbbAll()">
-      <h4 class="subtitle"><span translate>Kelley Blue Book<sup>®</sup> Auction Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are a regional average based on the Zip provided.</span></i></h4>
-      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> values at this time.</p>
+      <h4 class="subtitle"><span translate>Kelley Blue Book<sup>®</sup> Auction Values</span>
+        <i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are based on the Zip provided.</span></i>
+        <button ng-hide="!vinLookup.searchComplete || results.kbb.noMatch" class="btn-help"
+                tooltip-html="true"
+                tooltip-trigger="click"
+                tooltip-placement="left"
+                tooltip-html-unsafe="{{ '<div><strong>©' }} {{ kbb.version.StartDate | moment:'YYYY' }} {{ 'By Kelley Blue Book Co., Inc.</strong></div>' }}
+                                     {{ '<div><strong>' }} {{ kbb.version.StartDate | moment }} - {{ kbb.version.EndDate | moment }} {{ ' Edition for zip code ' }} {{ vinLookup.zipcode || manualLookup.kbb.zipcode }} {{'</strong></div>'}}
+                                     {{ '<div><strong>All Rights Reserved.</strong></div>' +
+                                        '<div>The specific information required to determine the' +
+                                        ' value for this particular vehicle was supplied by the person generating this' +
+                                        ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
+                                        ' Actual valuations will vary based upon market conditions, specifications,' +
+                                        ' vehicle condition or other particular circumstances pertinent to this' +
+                                        ' particular vehicle or the transaction or the parties to the transaction.' +
+                                        ' This report is intended for the individual use of the person generating' +
+                                        ' this report only and shall not be sold or transmitted to another party.' +
+                                        ' Kelley Blue Book assumes no responsibility for errors or omissions.</div>' | translate }} {{values}}"
+                tooltip-delay="500">
+          <span nxg-icon="icon-help"></span>
+      </h4>
+
+      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley
+        Blue Book<sup>®</sup> values at this time.</p>
+
       <div ng-show="results.kbb.configurations">
         <div class="row">
           <div class="col-xs-1 heavy"><span translate>Model</span>:</div>

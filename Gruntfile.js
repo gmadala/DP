@@ -136,7 +136,6 @@ module.exports = function(grunt) {
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
-        '!app/scripts/translations.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -149,8 +148,11 @@ module.exports = function(grunt) {
         //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/translations.js',
+        // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
+        //'!test/spec/**/*.js',
+        //'test/util/**/*.js'
       ]
     },
     karma: {
@@ -318,6 +320,16 @@ module.exports = function(grunt) {
             expand: true,
             dot: true,
             flatten: true,
+            // cache bust language files using the GIT SHA - This is overly aggressive since the translations may not
+            // have changed between revisions but typically they will change between releases anyways so this
+            // approach should be good enough
+            dest: '<%= yeoman.dist %>/languages-<%= gitinfo.local.branch.current.shortSHA %>/',
+            src: '<%= yeoman.app %>/languages/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
             dest: '<%= yeoman.dist %>/documents/',
             src: '<%= yeoman.app %>/documents/*'
           },
@@ -394,9 +406,21 @@ module.exports = function(grunt) {
     },
     nggettext_compile: {
       all: {
-        files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
-        }
+        options: {
+          // format: 'json' - Use standard js angular module and not json because asynchronous loading will not
+          // work since currently the window has to be reloaded on any language change due to binding issues
+          // index.html loads the correct language file as needed before bootstrapping the app
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'po',
+            dest: 'app/languages',
+            src: ['*.po'],
+            ext: '.js'
+          }
+        ]
       }
     },
     gettext_update_po: {
@@ -419,9 +443,10 @@ module.exports = function(grunt) {
       },
       msgmerge: {
         command: function (filename) {
-          // use -N for --no-fuzzy-matching and echo how many strings are untranslated
+          // use -N for --no-fuzzy-matching and echo how many strings are untranslated (use 'tail' to skip opening
+          // comment lines which typically have an irrelevant msgid)
           return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
-            'msgattrib --untranslated ' + filename + ' | echo $(grep "msgid" -c) untranslated strings';
+            'msgattrib --untranslated ' + filename + ' | tail -n +10 | echo $(grep "msgid" -c) untranslated strings';
         }
       }
     },
@@ -446,7 +471,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint karma'
+        'pre-commit': 'jshint jscs karma'
       }
     }
   });
@@ -584,6 +609,7 @@ module.exports = function(grunt) {
     grunt.task.run('test:e2e:users');
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
     grunt.task.run('jshint');
+    grunt.task.run('jscs');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {

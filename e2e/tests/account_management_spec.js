@@ -64,7 +64,7 @@ helper.describe('WMT-87', function () {
       accMgtPage.goToIsNotTemporary();
       accMgtPage.doSelectAmount();
     };
-//Account Management Content Testing WMT-87
+    //Account Management Content Testing WMT-87
 
     it('should check for the Business Email - No Editing', function () {
       expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);

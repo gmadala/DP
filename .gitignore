@@ -18,4 +18,5 @@ npm-debug.log
 *.mo
 *.pot
 app/scripts/translations.js
+app/languages/
 .metadata/
