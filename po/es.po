@@ -1728,7 +1728,7 @@ msgstr "Detalles del pago"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payment Due"
-msgstr "Fecha de vencimiento"
+msgstr "Pago vence"
 
 #: app/views/modals/paymentDetails.html
 msgid "Payment Made"
@@ -1776,7 +1776,7 @@ msgstr "Pagos"
 
 #: app/scripts/models/dashboard.js
 msgid "Payments Due"
-msgstr "Pagos vencidos"
+msgstr "Pagos vencen"
 
 #: app/views/dashboard.html
 msgid "Payments Summary"
@@ -1794,7 +1794,7 @@ msgstr "Pagado"
 
 #: app/scripts/models/dashboard.js app/views/dashboard.html
 msgid "Payoff Due"
-msgstr "El pago vence en"
+msgstr "Pagos vencidos"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Payoff this vehicle"
