@@ -26,7 +26,7 @@ angular.module('nextgearWebApp')
       $scope.documents.push({
         'title': gettextCatalog.getString('Aging Reports Detail (PDF)'),
         'url': api.contentLink('/report/getAgingReportDetail/ManufacturerAgingReport', {})
-      })
+      });
     }
 
     // set the subsidiary options
