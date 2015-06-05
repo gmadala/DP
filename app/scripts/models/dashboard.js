@@ -90,7 +90,7 @@ angular.module('nextgearWebApp')
                 {name: gettextCatalog.getString('Fees'), color: '#9F9F9F', y: result.AccountFeeAmount},
                 {name: gettextCatalog.getString('Payments'), color: '#3399CC', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
                 {name: gettextCatalog.getString('Scheduled Payments'), color: '#1864A1', y: scheduledPaymentAmount}
-              ],
+              ]
             };
 
             // calculate .calendarData

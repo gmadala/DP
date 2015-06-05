@@ -111,7 +111,7 @@ angular.module('nextgearWebApp')
             var newElTop = newElBottom - $scope.getElHeight() - bottomElMargin;
 
             el.stop().animate({
-              marginTop: newElTop,
+              marginTop: newElTop
             });
 
           } else {

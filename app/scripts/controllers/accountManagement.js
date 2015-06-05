@@ -30,7 +30,6 @@ angular.module('nextgearWebApp')
     gettext('Edit');
     gettext('Disable');
 
-
     // new KBB tooltip (remove this once merged with 5430)
     gettext('© 2015 By Kelley Blue Book Co., Inc.');
     gettext('2013 - 2015 Edition for zip code 46123');
@@ -57,8 +56,6 @@ angular.module('nextgearWebApp')
     // putting this in for the moment (probably a server side issue)
     gettext('Weekly Upcoming Payments Report');
 
-
-      
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
@@ -244,7 +241,7 @@ angular.module('nextgearWebApp')
             var financial = $scope.financial;
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
-          },
+          }
         };
 
         var titleAddresses = Addresses.getTitleAddresses();
