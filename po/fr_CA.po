@@ -901,8 +901,8 @@ msgstr "Date d'échéance"
 #: app/views/dashboard.html
 msgid "Due This Month"
 msgid_plural "Due This Month"
-msgstr[0] "Dû ce mois"
-msgstr[1] "Dûs ce mois"
+msgstr[0] "Dû ce mois-ci"
+msgstr[1] "Dûs ce mois-ci"
 
 #. Payment(s) due this week
 #: app/scripts/controllers/payments.js app/views/dashboard.html
