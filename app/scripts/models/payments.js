@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, CartItem, VehicleCartItem, PaymentOptions, Paginate, Floorplan, segmentio, metric) {
+  .factory('Payments', function($q, $filter, api, moment, CartItem, VehicleCartItem, PaymentOptions, Paginate, Floorplan) {
 
     var paymentQueue = {
       fees: {},
@@ -81,7 +81,6 @@ angular.module('nextgearWebApp')
           var p = isScheduledPaymentObject ? CartItem.fromScheduledPayment(payment) : CartItem.fromPayment(payment, paymentType);
           paymentQueue.payments[p.id] = p;
         }
-        segmentio.track(metric.ADD_TO_BASKET);
       },
       addInterestPaymentToQueue: function(payment, isScheduledPaymentObject) {
         this.addPaymentTypeToQueue(payment, PaymentOptions.TYPE_INTEREST, isScheduledPaymentObject);
@@ -95,7 +94,6 @@ angular.module('nextgearWebApp')
       addFeeToQueue: function (fee) {
         var f = CartItem.fromFee(fee);
         paymentQueue.fees[f.financialRecordId] = f;
-        segmentio.track(metric.ADD_TO_BASKET);
       },
       removePaymentFromQueue: function (id) {
         delete paymentQueue.payments[id];

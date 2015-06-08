@@ -9,7 +9,7 @@
            nxg-blur="handleExit($event)"
            ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
     <button href class="btn btn-input" ng-click="disabled || openBusinessSearch()"
-     ng-class="{disabled: disabled}" type="button" nxg-track="{{metricByMode()}}">
+     ng-class="{disabled: disabled}" type="button">
       <span nxg-icon="icon-search"></span>
     </button>
   </div>

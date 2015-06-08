@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog, language) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, nxgConfig, Addresses, gettextCatalog, language) {
     // Private
     var staticsRequest = null,
       paySellerOptions = [],
@@ -123,7 +123,6 @@ angular.module('nextgearWebApp')
               apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey;
               if (!nxgConfig.isDemo && gettextCatalog.currentLanguage === 'en') {
                 UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
-                QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
               }
             });
           }
