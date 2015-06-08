@@ -1,3 +1,9 @@
 .description-spacer {
   margin-bottom: 5px;
 }
+
+.value-form {
+  #vin, #vinMileage, #vinKbbZipCode {
+    width: 60%;
+  }
+}

@@ -78,6 +78,9 @@
     margin: 30px auto 20px;
   }
 
+  #email, #userName {
+    width: 75%;
+  }
   .error-table {
     padding: 5px;
     background-color: $wellBackground;
