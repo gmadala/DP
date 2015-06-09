@@ -10,11 +10,6 @@
          title="{{ 'Title Release Search' | translate }}"
          class="search-form"
          prompt="{{ 'Stock #, VIN, Make, Model, or Year' | translate }}"
-         metric-search="{{metric.CLICK_TITLE_RELEASE_SEARCH_BUTTON}}"
-         metric-clear-search="{{metric.CLICK_TITLE_RELEASE_CLEAR_SEARCH_LINK}}"
-         metric-filter-by-input="{{metric.CLICK_TITLE_RELEASE_FILTER_BY_INPUT}}"
-         metric-filter-from-date="{{metric.CLICK_TITLE_RELEASE_FILTER_FROM_DATE_INPUT}}"
-         metric-filter-to-date="{{metric.CLICK_TITLE_RELEASE_FILTER_TO_DATE_INPUT}}"
          filter-label="{{ 'Filter by Status' | translate }}"
          filter-options="filterOptions"
          active-criteria="searchParams.proposedSearchCriteria"
@@ -62,7 +57,7 @@
             </td>
             <td class="description">
               <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">
-                <span nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
+                <span nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
               </a>
               <div class="row">
                 <p class="lockup-minor caps vin padding-left"><span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
@@ -81,16 +76,16 @@
               <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>Pay off this vehicle or return the title to remove from your limit.</h6>
               <div ng-switch-when="EligibleForRelease">
                 <button type="button" class="btn btn-icon btn-title-request" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)" ng-class="{selected: isFloorplanOnQueue(item)}" ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
-                  <span ng-switch-when="true" nxg-track="{{metric.CLICK_TITLE_RELEASE_TITLE_REQUESTED}}">
+                  <span ng-switch-when="true">
                     <!-- Force pluralization due to duplicate translations -->
                     <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span><span nxg-icon="icon-minus" class="icon-small"></span>
                   </span>
-                  <span ng-switch-default nxg-track="{{metric.CLICK_TITLE_RELEASE_REQUEST_TITLE}}">
+                  <span ng-switch-default>
                     <span translate>Request Title</span><span nxg-icon="icon-plus" class="icon-small"></span>
                   </span>
                 </button>
               </div>
-              <a ng-switch-when="NotEligibleForRelease" ng-click="titleReleaseUnavailable()" nxg-track="{{metric.CLICK_TITLE_RELEASE_UNAVAILABLE}}" translate>
+              <a ng-switch-when="NotEligibleForRelease" ng-click="titleReleaseUnavailable()" translate>
                 Title Release Unavailable
               </a>
             </td>

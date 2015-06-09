@@ -1,7 +1,7 @@
 <div class="well">
   <h2 class="well-title">
     {{ title }}
-    <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)" nxg-track="{{metricClearSearch}}"><strong translate>Clear Search</strong></button>
+    <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)"><strong translate>Clear Search</strong></button>
   </h2>
 
   <form name="searchForm" role="form" class="search form-horizontal" novalidate>
@@ -14,7 +14,7 @@
         <div class="form-row">
           <div class="styled-input with-btn">
             <input type="text" id="keyword" name="keyword" placeholder="{{ prompt }}" ng-model="activeCriteria.query"/>
-            <button id="floorPlanSearch" class="btn btn-input" type="submit" ng-click="search()" nxg-track="{{metricSearch}}">
+            <button id="floorPlanSearch" class="btn btn-input" type="submit" ng-click="search()">
               <span nxg-icon="icon-search"></span>
             </button>
           </div>
@@ -24,7 +24,6 @@
         <label for="filterSelect">{{ filterLabel }}</label>
         <div class="style-select auto">
           <select id="filterSelect" name="filterSelect"
-                  nxg-track="{{metricFilterByInput}}"
                   ng-change="search()"
                   ng-model="activeCriteria.filter"
                   ng-options="o.value as o.label for o in filterOptions"></select>
@@ -36,7 +35,6 @@
             <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
             <input type="text" id="startDate" name="startDate"
                    ng-model="activeCriteria.startDate"
-                   nxg-track="{{metricFilterFromDate}}"
                    nxg-date-field
                    ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
           </div>
@@ -44,13 +42,12 @@
             <label for="endDate" translate>End Date</label>
             <input type="text" id="endDate" name="endDate"
                    ng-model="activeCriteria.endDate"
-                   nxg-track="{{metricFilterToDate}}"
                    nxg-date-field
                    ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
           </div>
-        </div>
-        <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>Invalid date range</label>
-      </div>
+            </div>
+            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>Invalid date range</label>
+          </div>
       <div class="col-xs-4" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2" >
 
       <label for="invLocSelect" translate>Filter by Inventory Location</label>
@@ -58,7 +55,6 @@
       <div class="style-select input-large">
         <select id="invLocSelect" name="invLocSelect"
                 ng-change="search()"
-                nxg-track="{{metricFilterByInventoryLocation}}"
                 ng-model="activeCriteria.inventoryLocation"
                 ng-options="i.value as i.label for i in inventoryLocations"></select>
       </div>
@@ -69,7 +65,6 @@
         <div class="style-select input-large">
           <select id="invLocSelect" name="invLocSelect"
                   ng-change="search()"
-                  nxg-track="{{metricFilterByInventoryLocation}}"
                   ng-model="activeCriteria.inventoryLocation"
                   ng-options="i.value as i.label for i in inventoryLocations"></select>
         </div>

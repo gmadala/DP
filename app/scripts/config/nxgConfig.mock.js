@@ -13,10 +13,7 @@ angular.module('nextgearWebApp')
         apiDomain: '/* @echo apiDomain */',
         // @if isDemo
         isDemo: true,
-        segmentIoKey: null,
-        qualarooSurvey: {
-          domainCode: null
-        }
+        segmentIoKey: null
         // @endif
       });
     }]);

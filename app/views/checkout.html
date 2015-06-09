@@ -135,8 +135,7 @@
                   <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
                           ng-click="paymentQueue.removePayment(payment.id)"
-                          ng-disabled="submitInProgress"
-                          nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}" translate>
+                          ng-disabled="submitInProgress" translate>
                     Remove
                   </button>
                 </div>
@@ -197,7 +196,6 @@
             <div class="cr-inline float-r">
               <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
                      ng-value="true" ng-model="unappliedFunds.useFunds"
-                     nxg-track="{{metric.CLICK_CHECKOUT_APPLY_FUNDS_YES}}"
                      ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
               <label class="radio-img" for="unappliedYes"></label>
               <label class="cr-label" for="unappliedYes" translate>Yes</label>
@@ -265,9 +263,7 @@
                   ng-model="bankAccounts.selectedAccount"
                   ng-disabled="submitInProgress"
                   ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }"
-                  nxg-track="{{metric.CLICK_CHECKOUT_SELECT_ACCOUNT}}"
-                  required>
+                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
             <option value="" translate>-- Select Bank --</option>
           </select>
         </div>

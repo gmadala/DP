@@ -12,12 +12,6 @@
     <div nxg-search
          title="{{ 'Payment Search' | translate }}"
          prompt="{{ 'By Stock #, VIN, or Description' | translate }}"
-         metric-search="{{metric.CLICK_PAYMENTS_SEARCH_BUTTON}}"
-         metric-clear-search="{{metric.CLICK_PAYMENTS_CLEAR_SEARCH_LINK}}"
-         metric-filter-by-input="{{metric.CLICK_PAYMENTS_FILTER_BY_DUE_DATE}}"
-         metric-filter-from-date="{{metric.CLICK_PAYMENTS_FILTER_FROM_DATE_INPUT}}"
-         metric-filter-to-date="{{metric.CLICK_PAYMENTS_FILTER_TO_DATE_INPUT}}"
-         metric-filter-by-inventory-location="{{metric.CLICK_PAYMENTS_FILTER_BY_INVENTORY_LOCATION}}"
          filter-label="{{ 'Filter by Due Date' | translate }}"
          filter-options="payments.filterOptions"
          active-criteria="payments.proposedSearchCriteria"
