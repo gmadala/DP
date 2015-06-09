@@ -45,6 +45,7 @@ angular.module('nextgearWebApp')
           break;
         case 'range':
           // use dates as entered by user
+          break;
         }
 
         var params = {

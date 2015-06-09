@@ -4,11 +4,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgPrivacyStatement', function () {
+  .directive('nxgPrivacyStatement', function (gettext) {
+
+    var privacyStatement = gettext('Privacy Statement');
     return {
       restrict: 'E',
       replace: true,
-      template: '<a href="{{href}}" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>Privacy Statement</a>',
+      template: '<a href="{{href}}" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>' +
+      privacyStatement + '</a>',
       controller: function ($scope, User) {
         $scope.$watch(
           function(){ return User.infoLoaded(); },

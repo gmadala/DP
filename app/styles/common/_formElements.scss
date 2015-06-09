@@ -122,6 +122,12 @@ input[type="color"] {
   &::-ms-clear {
     display: none;
   }
+
+  // use this when also using the input "size" and "maxlength" attributes for inputs
+  // of known length (social security numbers, PINs, phone numbers, etc.)
+  &.size-fixed {
+    width: auto;
+  }
 }
 
 // inputs that are the full-width of parent
@@ -179,7 +185,7 @@ select {
   @include border-radius($borderRadius);
   position: relative;
   overflow: hidden;
-  width: 65%;
+  min-width:65%;
   border: 1px solid $highlight;
   margin: 5px 0;
   background: #fff;
@@ -513,7 +519,7 @@ input[type="radio"] {
 .smallInput{
   width:55%;
 }
-.xsmallInput{width:145px;}
+.xsmallInput{width:206px;}
 
   /*
    * BUTTON INPUT

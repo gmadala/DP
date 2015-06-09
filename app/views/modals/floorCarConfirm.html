@@ -13,22 +13,22 @@
     <h4 translate>Buyer Information</h4>
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="col-md-6" translate>Business Number</p>
-        <p class="col-md-6 value">{{ formData.BusinessId.BusinessNumber }}</p>
+        <p class="col-xs-6" translate>Business Number</p>
+        <p class="col-xs-6 value">{{ formData.BusinessId.BusinessNumber }}</p>
       </li>
 
 
       <li class="list-table-row">
-        <p class="col-md-6" translate>Auction Access Number(s)</p>
-        <p class="col-md-6 value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</p>
+        <p class="col-xs-6" translate>Auction Access Number(s)</p>
+        <p class="col-xs-6 value">{{ formData.BusinessId.AuctionAccessDealershipNumbers | list }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-6" translate>Business Name</p>
-        <p class="col-md-6 value">{{ formData.BusinessId.BusinessName }}</p>
+        <p class="col-xs-6" translate>Business Name</p>
+        <p class="col-xs-6 value">{{ formData.BusinessId.BusinessName }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-6" translate>Address</p>
-        <p class="col-md-6 value">
+        <p class="col-xs-6" translate>Address</p>
+        <p class="col-xs-6 value">
           {{ formData.BusinessId.Address }}<br />
           {{ formData.BusinessId.City }}, {{ formData.BusinessId.State }} {{ formData.BusinessId.PostalCode }}
         </p>
@@ -40,28 +40,28 @@
     <h4 translate>Vehicle Information</h4>
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="col-md-6" translate>VIN</p>
-        <p class="col-md-6 value">{{ formData.UnitVin }}</p>
+        <p class="col-xs-6" translate>VIN</p>
+        <p class="col-xs-6 value">{{ formData.UnitVin }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="col-md-6" translate>Make</p>
-        <p class="col-md-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Make || formData.UnitMake }}</p>
+        <p class="col-xs-6" translate>Make</p>
+        <p class="col-xs-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Make || formData.UnitMake }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="col-md-6" translate>Model</p>
-        <p class="col-md-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Model || formData.UnitModel }}</p>
+        <p class="col-xs-6" translate>Model</p>
+        <p class="col-xs-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Model || formData.UnitModel }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="col-md-6" translate>Style</p>
-        <p class="col-md-6 value"> {{ formData.$selectedVehicle && formData.$selectedVehicle.Style || formData.UnitStyle }}</p>
+        <p class="col-xs-6" translate>Style</p>
+        <p class="col-xs-6 value"> {{ formData.$selectedVehicle && formData.$selectedVehicle.Style || formData.UnitStyle }}</p>
       </li>
 
       <li class="list-table-row">
-        <p class="col-md-6" translate>Year</p>
-        <p class="col-md-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Year || formData.UnitYear }}</p>
+        <p class="col-xs-6" translate>Year</p>
+        <p class="col-xs-6 value">{{ formData.$selectedVehicle && formData.$selectedVehicle.Year || formData.UnitYear }}</p>
       </li>
     </ul>
   </div>
@@ -71,19 +71,19 @@
 
     <ul class="list-table">
       <li class="list-table-row">
-        <p class="col-md-6" translate>Purchase Amount</p>
-        <p class="col-md-6 value">{{ formData.UnitPurchasePrice | currency }}</p>
+        <p class="col-xs-6" translate>Purchase Amount</p>
+        <p class="col-xs-6 value">{{ formData.UnitPurchasePrice | currency }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-6">
+        <p class="col-xs-6">
           <span ng-show="isDealer" translate>Purchase Date</span>
           <span ng-hide="isDealer" translate>Sales Date</span>
         </p>
-        <p class="col-md-6 value">{{ formData.UnitPurchaseDate | moment }}</p>
+        <p class="col-xs-6 value">{{ formData.UnitPurchaseDate | moment }}</p>
       </li>
       <li class="list-table-row">
-        <p class="col-md-6" translate>Send Payment To</p>
-        <p class="col-md-6 value">
+        <p class="col-xs-6" translate>Send Payment To</p>
+        <p class="col-xs-6 value">
           <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' | translate }}</span>
           <span ng-hide="isDealer">{{ formData.BankAccountId.BankAccountName }}</span>
         </p>

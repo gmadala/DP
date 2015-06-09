@@ -12,7 +12,7 @@
 </div>
 
 <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
-  <h2 class="well-title">Floor Plan</h2>
+  <h2 class="well-title" translate>Floor Plan</h2>
   <p class="notice-box" ng-switch-when="false" translate>
     Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
   </p>
@@ -85,9 +85,10 @@
                     tooltip-html-unsafe="{{ 'NextGear has been notified of this change and will be sending funding soon.' | translate }}"
                     tooltip-animation="true" translate>
             </label>
-            <label for="{{ item.FloorplanId }}" class="cr-label" translate>
+            <div class="centerTextAlign">
+            <p><label for="{{ item.FloorplanId }}" class="cr-label" translate>
               I Have the Title
-            </label>
+            </label></p></div>
           </div>
         </td>
         <td>

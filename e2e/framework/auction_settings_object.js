@@ -29,8 +29,8 @@ var AuctionSettingsObject = function () {
   this.titleSettingsSection = browser.element(by.cssContainingText('section', 'Title Settings'));
   this.addressSelection = browser.element(by.model('title.dirtyData.titleAddress'));
   this.addressOptions = browser.element.all(by.options('addr | address:\'oneLineSelect\' for addr in title.data.addresses'));
-  this.defaultAddressesLine = this.titleSettingsSection.element(by.cssContainingText('.row-fluid', 'Default'));
-  this.additionalAddressesLine = this.titleSettingsSection.element(by.cssContainingText('.row-fluid', 'Additional'));
+  this.defaultAddressesLine = this.titleSettingsSection.element(by.cssContainingText('.row', 'Default'));
+  this.additionalAddressesLine = this.titleSettingsSection.element(by.cssContainingText('.row', 'Additional'));
   this.additionalAddressRepeater = this.titleSettingsSection.all(by.repeater('addr in title.data.addresses'));
   this.addressHelpButtons = this.titleSettingsSection.all(by.css('.btn-help'));
 
@@ -47,7 +47,7 @@ var AuctionSettingsObject = function () {
   this.notificationsSaveSettings = this.notificationsSection.element(by.cssContainingText('button', 'Save Settings'));
 
   this.elementWithCaption = function (section, caption) {
-    return section.element(by.cssContainingText('.row-fluid', caption));
+    return section.element(by.cssContainingText('.row', caption));
   };
 
   this.displayedAddressHelp = function () {

@@ -15,7 +15,7 @@ angular.module('nextgearWebApp')
     ];
 
     $scope.filteredQuestions = function(ignore) {
-          // build an array of fields based on scope.questions
+      // build an array of fields based on scope.questions
       var fields = _.map($scope.questions, function(q) { return q.name; }),
           // filter out the current 'ignore' value
           filteredFields = _.reject(fields, function(f){ return f === ignore; }),

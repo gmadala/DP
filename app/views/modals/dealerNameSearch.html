@@ -4,7 +4,7 @@
 
 <div class="modal-body">
   <form class="row form-block" name="dealerNameSearch">
-    <div class="col-md-4">
+    <div class="col-xs-4">
       <label translate>Business Name</label>
       <input type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
       <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires" translate>
@@ -12,13 +12,13 @@
       </label>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-3">
       <label translate>City</label>
       <input type="text" id="businessSearchModalCity" class="input-medium" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
       <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern" translate>City names must only have letters and spaces.</label>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-3">
       <label translate>State</label>
       <div class="style-select auto">
         <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-xs-2">
       <button class="btn inline-submit" ng-click="search()" translate>
         Search
       </button>

@@ -163,7 +163,7 @@ var HelperObject = function () {
   };
 
   /** Promises to retrieve active buttons that will be difficult to access using just css locator **/
-    // get only the active settings button (or displayed settings button).
+  // get only the active settings button (or displayed settings button).
   this.getActiveSettingsButton = function () {
     var promise = protractor.promise.defer();
     this.settingsButtons.each(function (settingsButton) {
@@ -190,7 +190,7 @@ var HelperObject = function () {
   };
 
   /** Common has class function to test whether an element will have certain class or not **/
-    // Return true when the element have cssClass in them.
+  // Return true when the element have cssClass in them.
   this.hasClass = function (element, cssClass) {
     return element.getAttribute('class').then(function (classes) {
       return classes.indexOf(cssClass) > -1;

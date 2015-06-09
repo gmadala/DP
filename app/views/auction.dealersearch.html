@@ -1,11 +1,11 @@
 <div class="row dealer-search">
-  <div class="col-md-6 well">
+  <div class="col-xs-6 well">
     <h2 class="well-title" translate>Dealer Number Search</h2>
     <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row search zeroLeftMargin zeroRightMargin" novalidate>
       <p translate> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-8">
           <label for="dealerNum" translate>NextGear Capital Dealer Number</label>
 
           <div class="styled-input with-btn">
@@ -35,10 +35,10 @@
         </div>
       </div>
 
-        <h2 class="col-md-12" translate>- OR -</h2>
+        <h2 class="col-xs-12" translate>- OR -</h2>
 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-8">
           <label for="auctionAccessNum" translate>Auction Access Number</label>
           <div class="styled-input with-btn">
             <input type="text"
@@ -68,7 +68,7 @@
     </form>
   </div>
 
-  <div class="col-md-6 well">
+  <div class="col-xs-6 well">
     <h2 class="well-title" translate>Dealer Name Search</h2>
 
     <form name="nameSearchForm" class="row search zeroLeftMargin zeroRightMargin" novalidate>
@@ -76,7 +76,7 @@
       State. </p>
 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-8">
           <label for="dealerName" translate>Dealer Name</label>
           <input type="text"
                  class="smallInput"
@@ -94,7 +94,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-xs-5">
           <label for="city" translate>City</label>
 
           <input type="text"
@@ -104,11 +104,11 @@
                  ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
         </div>
 
-        <div class="col-md-2">
+        <div class="col-xs-2">
           <h2 class="form-separator center" translate>- OR -</h2>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <label for="state" translate>State</label>
           <div class="style-select auto">
             <select id="state" class="input-medium" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
@@ -117,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-xs-12">
         <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat" translate>
           City names must only have letters and spaces.
         </label>

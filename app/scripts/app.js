@@ -28,7 +28,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         pageID: 'Login',
-        allowAnonymous: true
+        allowAnonymous: true,
+        margin: 'no-left-margin'
       })
       .state('maintenance', {
         url: '/maintenance',
@@ -43,7 +44,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'LoginRecoverCtrl',
         pageID: 'LoginRecover',
         allowAnonymous: true,
-        noDirectAccess: true
+        noDirectAccess: true,
+        margin: 'no-left-margin'
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',

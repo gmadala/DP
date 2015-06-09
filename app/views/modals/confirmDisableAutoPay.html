@@ -1,0 +1,15 @@
+<h3 class="modal-header" translate>Unenroll from ProperNounTBD</h3>
+<section class="modal-body">
+  <p translate>You are about to unenroll from ProperNounTBD...</p>
+  <div class="cr-inline">
+    <input type="checkbox" name="terms" id="disableAutoPayTerms" ng-model="agree"/>
+    <label for="disableAutoPayTerms" class="checkbox-img small"></label>
+    <label for="disableAutoPayTerms" class="cr-label" translate>I agree to the terms and conditions.</label>
+  </div>
+</section>
+<div class="modal-footer">
+  <button class="btn-cta cta-secondary" type="button" ng-click="close(false)" translate>Cancel</button>
+  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus ng-disabled="!agree" translate>
+    Unenroll now
+  </button>
+</div>

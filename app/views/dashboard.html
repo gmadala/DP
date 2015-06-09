@@ -1,6 +1,6 @@
 <section class="row upcoming">
   <!-- Calendar -->
-  <div class="col-md-9 nxg-dash-calendar-container well dash-well" >
+  <div class="col-xs-9 nxg-dash-calendar-container well dash-well" >
     <div class="dash-calendar-header">
       <h5>
         <a href class="featured today-btn" ng-class="{ 'disabled': isPast() }" ng-click="onClickToday()"><span translate>Today</span>:</a>
@@ -112,20 +112,32 @@
   </div>
 
   <!-- Payment Summary -->
-  <div class="col-md-3 well payment-summary dash-well leftMarginMedium">
+  <div class="col-xs-3 well payment-summary dash-well leftMarginMedium">
     <h2 class="well-title" translate>Payments Summary</h2>
     <ul class="counter-list">
       <li id="overdue" class="clickable" ng-click="filterPayments('overdue')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_OVERDUE}}">
         <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate>Overdue</p>
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].OverduePayments"
+             translate-plural="Overdue"
+             translate-comment="Payment(s) overdue">
+            Overdue
+          </p>
           <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li id="today" class="clickable" ng-click="filterPayments('today')" nxg-track="{{metric.CLICK_DASHBOARD_PAYMENTS_DUE_TODAY}}">
         <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
-          <p class="dash-minor" translate>Due Today</p>
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].PaymentsDueToday"
+             translate-plural="Due Today"
+             translate-comment="Payment(s) due today">
+            Due Today
+          </p>
           <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
         </div>
       </li>
@@ -133,10 +145,20 @@
         <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
 
         <div class="dash-lockup">
-          <span class="lockup-minor" translate
+          <span class="lockup-minor" ng-show="viewMode === 'week'"
+                translate
                 translate-n="paymentSummary[viewMode].UpcomingPayments"
-                translate-plural="Payments This {{ viewModeLabel | capitalize }}"
-                translate-comment="Payment This [Month, Year]">Payment This {{ viewModeLabel | capitalize }}</span>
+                translate-plural="Due This Week"
+                translate-comment="Payment(s) due this week">
+            Due This Week
+          </span>
+          <span class="lockup-minor" ng-show="viewMode === 'month'"
+                translate
+                translate-n="paymentSummary[viewMode].UpcomingPayments"
+                translate-plural="Due This Month"
+                translate-comment="Payment(s) due this month">
+            Due This Month
+          </span>
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
         </div>
       </li>
@@ -194,10 +216,10 @@
 
 <section class="row">
   <!-- Credit Summary -->
-  <div class="col-md-5 well dash-well">
+  <div class="col-xs-5 well dash-well">
     <h2 class="well-title" translate>Credit Information</h2>
     <div class="row clearfix">
-      <div class="col-md-5 donut-nested">
+      <div class="col-xs-5 donut-nested">
           <div class="donut-outer"
                 nxg-chart
                 nxg-chart-type="pie"
@@ -215,7 +237,7 @@
                 nxg-donut-options="chartOptions.donutOptions"></div>
       </div>
 
-      <div class="col-md-7">
+      <div class="col-xs-7">
         <div class="chart-legend">
           <h6 class="static-option" ng-show="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
           <div class="style-select auto" ng-hide="dashboardData.LinesOfCredit.length == 1">
@@ -258,7 +280,7 @@
   </div>
 
   <!-- Receipts Summary -->
-  <div class="col-md-4 well dash-well leftMarginMedium">
+  <div class="col-xs-4 well dash-well leftMarginMedium">
     <h2 class="well-title" translate>Recent Receipts</h2>
     <table class="table table-striped table-secondary">
       <thead>
@@ -287,16 +309,16 @@
 
 <section class="row">
   <!-- Floor Plan Summary -->
-  <div class="col-md-2 well dash-well">
+  <div class="col-xs-2 well dash-well">
     <h2 class="well-title" translate>Floor Plan</h2>
     <ul>
       <li class="row">
-        <div class="col-md-6 zeroPadding leftMarginMedium">
+        <div class="col-xs-6 zeroPadding leftMarginMedium">
           <span class="counter">
             {{ dashboardData.ApprovedFloorplans | alt }}
           </span>
         </div>
-        <div class="col-md-6 counter-label zeroPadding">
+        <div class="col-xs-6 counter-label zeroPadding">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
@@ -306,12 +328,12 @@
       </li>
 
       <li class="row">
-        <div class="col-md-6 zeroPadding">
+        <div class="col-xs-6 zeroPadding">
           <span class="counter">
             {{ dashboardData.PendingFloorplans | alt }}
           </span>
         </div>
-        <div class="col-md-6 counter-label">
+        <div class="col-xs-6 counter-label">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
@@ -321,12 +343,12 @@
       </li>
 
       <li class="row">
-        <div class="col-md-6 zeroPadding">
+        <div class="col-xs-6 zeroPadding">
           <span class="counter">
             {{ dashboardData.DeniedFloorplans | alt }}
           </span>
         </div>
-        <div class="col-md-6 counter-label">
+        <div class="col-xs-6 counter-label">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
             tooltip-placement="right"
             tooltip-popup-delay="700">
@@ -342,7 +364,7 @@
     </button>
   </div><!-- end .summary.floorplan -->
 
-  <div class="col-md-10 well dash-well">
+  <div class="col-xs-10 well dash-well">
     <h2 class="well-title" translate>Recently Floored Vehicles</h2>
     <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
       <p class="notice-box" ng-switch-when="false" translate>

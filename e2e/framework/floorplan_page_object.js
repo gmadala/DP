@@ -171,7 +171,7 @@ FloorPlanObject.prototype = Object.create({}, {
     }
   },
 
-//columns Data
+  //columns Data
   flooredDays: {
     get: function () {
       return browser.element.all(by.repeater('item in floorplanData.results').column('item.FlooringDate'));

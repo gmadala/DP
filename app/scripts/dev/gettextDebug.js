@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
         allowAnonymous: true
       });
   })
-  .run(function(gettextCatalog, $cookieStore) {
+  .run(function($window, gettextCatalog) {
     gettextCatalog.debug = true;
 
     var regex = /[?&]([^=#]+)=([^&#]*)/g,
@@ -23,9 +23,9 @@ angular.module('nextgearWebApp')
     }
 
     // lang=CODE only allowed in local mode
-    if (params.lang && $cookieStore.get('lang') !== params.lang) {
-      $cookieStore.put('lang', params.lang);
-      window.location.reload();
+    if (params.lang && $window.localStorage.getItem('lang') !== params.lang) {
+      $window.localStorage.setItem('lang', params.lang);
+      $window.location.reload();
     }
 
     angular.element('body').prepend(
@@ -84,7 +84,7 @@ angular.module('nextgearWebApp')
     gettextCatalog.setCurrentLanguage(gettextCatalog.baseLanguage);
     gettextCatalog.debug = true;
   })
-  .directive('nxgTranslationDebugger', function (gettextCatalog, language) {
+  .directive('nxgTranslationDebugger', function ($window, gettextCatalog) {
       var template =
         '<strong>TRANSLATIONS</strong>' +
         '<ul>' +
@@ -110,8 +110,8 @@ angular.module('nextgearWebApp')
           scope.currentLanguage = gettextCatalog.currentLanguage;
 
           scope.switchLang = function (lang) {
-            language.setCurrentLanguage(lang);
-            scope.currentLanguage = gettextCatalog.currentLanguage;
+            $window.localStorage.setItem('lang', lang);
+            $window.location.reload();
           };
 
         }

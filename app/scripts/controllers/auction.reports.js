@@ -9,6 +9,7 @@ angular.module('nextgearWebApp')
     $scope.metric = metric; // make metric names available to template
 
     $scope.data = null;
+    $scope.isManufacturer = User.isManufacturer() ;
 
     $scope.documents = [
       {
@@ -20,6 +21,13 @@ angular.module('nextgearWebApp')
         'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
+
+    if($scope.isManufacturer){
+      $scope.documents.push({
+        'title': gettextCatalog.getString('Aging Reports Detail (PDF)'),
+        'url': api.contentLink('/report/getAgingReportDetail/ManufacturerAgingReport', {})
+      });
+    }
 
     // set the subsidiary options
     User.getInfo().then(function(info) {

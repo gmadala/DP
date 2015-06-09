@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('nxgConfig', function(){
+  .factory('nxgConfig', function($location){
 
     var prv = {
-      generateConfig: function (apiDomain, segmentIoKey, qualarooDomainCode, timeoutMs, isDemo, serviceName) {
+      generateConfig: function (segmentIoKey, qualarooDomainCode, timeoutMs, isDemo, serviceName) {
         if (!serviceName) {
           serviceName = 'MobileService';
         }
+        var apiDomain = 'https://' + $location.host();
         return {
           apiBase: apiDomain + '/' + serviceName + '/api',
           apiDomain: apiDomain,
@@ -41,22 +42,22 @@ angular.module('nextgearWebApp')
         var config;
         switch (profile) {
         case prv.profile.DEMO:
-          config = prv.generateConfig('http://demo.nextgearcapital.com', null, null, 900000 /*15 minutes*/, true /*isDemo*/);
+          config = prv.generateConfig(null, null, 3600000 /*60 minutes*/, true /*isDemo*/);
           break;
         case prv.profile.TEST:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
+          config = prv.generateConfig('sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
           break;
         case prv.profile.RUBY_DAL_TEST:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
+          config = prv.generateConfig('sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
           break;
         case prv.profile.LOCAL:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
+          config = prv.generateConfig('sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
           break;
         case prv.profile.TRAINING:
-          config = prv.generateConfig('https://training.nextgearcapital.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
+          config = prv.generateConfig('sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
           break;
         case prv.profile.PRODUCTION:
-          config = prv.generateConfig('https://customer.nextgearcapital.com', '9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);
+          config = prv.generateConfig('9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);
           break;
         default:
           throw 'nxgConfig profile \'' + profile + '\' not found!';

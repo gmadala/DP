@@ -11,11 +11,13 @@ angular.module('nextgearWebApp')
 
       },
       getFinancialAccountData: function() {
-        return api.request('GET', '/dealer/summary').then(function(summary) {
+        return api.request('GET', '/dealer/v1_1/summary').then(function(summary) {
           // Any Financial Account data tranformations made here
           return User.getInfo().then(function(info) {
             var settings = {};
-            settings.BankAccounts = info.BankAccounts;
+            settings.BankAccounts = summary.BankAccounts;
+            settings.DefaultDisbursementBankAccountId = info.DefaultDisbursementBankAccountId;
+            settings.DefaultBillingBankAccountId = info.DefaultBillingBankAccountId;
             settings.AvailableCredit = summary.TotalAvailableCredit;
             settings.ReserveFunds = summary.ReserveFundsBalance;
             settings.LastPayment = summary.LastPaymentAmount;
@@ -26,10 +28,11 @@ angular.module('nextgearWebApp')
           });
         });
       },
-      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
+      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin, autoPayEnabled) {
         var req = {
           BusinessEmailAddress: email,
-          EnhancedRegistrationEnabled: enhancedRegEnabled
+          EnhancedRegistrationEnabled: enhancedRegEnabled,
+          AutoPayEnabled: autoPayEnabled
         };
         if (enhancedRegEnabled) {
           req.EnhancedRegistrationPin = enhancedRegPin;

@@ -22,7 +22,7 @@
       </script>
     <![endif]-->
   </head>
-  <body ng-app="nextgearWebApp">
+  <body>
     <!-- htmlmin:ignore -->
       <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
         This will pull in the content of our svg file for use across the app.
@@ -31,7 +31,7 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" nxg-fluid-container>
+      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
         <div ui-view id="{{ navState.current.pageID }}Page"></div>
       </div>
       <div nxg-activity></div>
@@ -90,7 +90,6 @@
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/common.js"></script>
-    <script src="scripts/translations.js"></script>
 
     <script src="scripts/config/nxgConfig.js"></script>
 
@@ -235,6 +234,7 @@
     <script src="scripts/directives/nxgFluidContainer.js"></script>
     <script src="scripts/directives/nxgSticky.js"></script>
     <script src="scripts/directives/nxgPrivacyStatement.js"></script>
+    <script src="scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js" ></script>
 
     <script src="scripts/decorators/dialogDecorator.js"></script>
     <!-- endbuild -->
@@ -248,5 +248,34 @@
 
     <!-- /processhtml -->
 
+    <script>
+      (function () {
+
+        function bootstrapApp() {
+          angular.element(document).ready(function () {
+            angular.bootstrap(document, ['nextgearWebApp']);
+          });
+        }
+
+        var langDir = 'languages-<!-- @echo GIT_SHA -->/';
+
+        '<!-- processhtml:remove:dist -->'
+        // this needs to be just the app/languages/ dir unless it's for a build
+        langDir = 'languages/';
+        '<!-- /processhtml -->'
+
+        var key = window.localStorage.getItem('lang');
+        if (key && key !== 'en' && key != 'enDebug') {
+          $.ajax({
+            url: langDir + key + '.js',
+            dataType: 'script',
+            success: bootstrapApp,
+            cache: true
+          });
+        } else {
+          bootstrapApp();
+        }
+      })();
+    </script>
   </body>
 </html>

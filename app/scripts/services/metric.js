@@ -9,8 +9,8 @@ angular.module('nextgearWebApp')
     CHANGE_ACCOUNT_MANAGEMENT: 'Change Account Management',
     VIEW_AUCTION_SETTINGS: 'View Auction Settings',
     CHANGE_AUCTION_SETTINGS: 'Change Auction Settings',
-//    // Analytics & Reports
-//    VIEW_ANALYTICS_DASHBOARD: 'View Analytics Dashboard',
+    //    // Analytics & Reports
+    //    VIEW_ANALYTICS_DASHBOARD: 'View Analytics Dashboard',
     VIEW_ALL_TOP_AUCTIONS: 'View All Top Auctions',
     VIEW_CURRENT_REPORT: 'View Current Report', // reportName
     VIEW_HISTORICAL_REPORT: 'View Historical Report', // reportName
@@ -19,24 +19,24 @@ angular.module('nextgearWebApp')
     BULK_FLOOR_A_VEHICLE: 'Bulk Floor a Vehicle',
     SEARCH_FOR_SELLER: 'Search for Seller',
     SEARCH_FOR_BUYER: 'Search for Buyer',
-//    // Floorplan
-//    VIEW_FLOOR_PLAN_DETAILS: 'View Floor Plan Details',
-//    VIEW_TITLE: 'View Title',
-//    // General
-//    VIEW_MAIN_DASHBOARD: 'View Main Dashboard',
+    //    // Floorplan
+    //    VIEW_FLOOR_PLAN_DETAILS: 'View Floor Plan Details',
+    //    VIEW_TITLE: 'View Title',
+    //    // General
+    //    VIEW_MAIN_DASHBOARD: 'View Main Dashboard',
     VIEW_RESOURCE_DOCUMENT: 'View Resource Document', // documentName
     QUERY_BUYER_LINE_OF_CREDIT: 'Query Buyer Line of Credit',
     REQUEST_UNAPPLIED_FUNDS_PAYOUT: 'Request Unapplied Funds Payout',
-//    // Payments
-//    VIEW_PAYMENTS_LIST: 'View Payments List',
+    //    // Payments
+    //    VIEW_PAYMENTS_LIST: 'View Payments List',
     SCHEDULE_PAYMENT: 'Schedule Payment',
     MAKE_IMMEDIATE_PAYMENT: 'Make Immediate Payment', // revenue => NOT IMPLEMENTED: this was removed by client's request
     ADD_TO_BASKET: 'Add to Basket',
-//    VIEW_SCHEDULED_PAYMENTS_LIST: 'View Scheduled Payments List',
-//    // Receipts
-//    VIEW_RECEIPTS_LIST: 'View Receipts List',
-//    VIEW_RECEIPT_DETAIL: 'View Receipt Detail',//NOT IMPLEMENTED
-//    // Download Mobile App Links - App Stores
+    //    VIEW_SCHEDULED_PAYMENTS_LIST: 'View Scheduled Payments List',
+    //    // Receipts
+    //    VIEW_RECEIPTS_LIST: 'View Receipts List',
+    //    VIEW_RECEIPT_DETAIL: 'View Receipt Detail',//NOT IMPLEMENTED
+    //    // Download Mobile App Links - App Stores
     DOWNLOAD_MOBILE_APP: 'Download Mobile App',
 
     //*****************NEW EVENTS TRACKED*******************
@@ -79,11 +79,11 @@ angular.module('nextgearWebApp')
 
     //Dashboard Events
     VIEW_DASHBOARD: 'View Dashboard',
-//    CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',//can't find
+    //    CLICK_DASHBOARD_CALENDAR_TODAY_LINK: 'Click Dashboard Calendar Today Link',//can't find
     CLICK_DASHBOARD_CALENDAR_WEEK_BUTTON: 'Click Dashboard Calendar Week Button',//x
     CLICK_DASHBOARD_CALENDAR_MONTH_BUTTON: 'Click Dashboard Calendar Month Button',//x
-//    CLICK_DASHBOARD_CALENDAR_BACK_BUTTON: 'Click Dashboard Calendar Back Button',//can't find
-//    CLICK_DASHBOARD_CALENDAR_FORWARD_BUTTON: 'Click Dashboard Calendar Forward Button',//can't find
+    //    CLICK_DASHBOARD_CALENDAR_BACK_BUTTON: 'Click Dashboard Calendar Back Button',//can't find
+    //    CLICK_DASHBOARD_CALENDAR_FORWARD_BUTTON: 'Click Dashboard Calendar Forward Button',//can't find
     CLICK_DASHBOARD_CALENDAR_PAYMENT_LINK: 'Click Dashboard Calendar Payment Link',
     CLICK_DASHBOARD_PAYMENTS_OVERDUE: 'Click Dashboard Payments Overdue',//x
     CLICK_DASHBOARD_PAYMENTS_DUE_TODAY: 'Click Dashboard Payments Due Today',//x
@@ -130,7 +130,7 @@ angular.module('nextgearWebApp')
 
     //Checkout Events
     CLICK_CHECKOUT_PANEL_CONTINUE_TO_CHECKOUT_BUTTON: 'Click Checkout Panel Continue to Checkout Button',//x
-//    CLICK_CHECKOUT_PANEL_REMOVE_PAYMENT: 'Click Checkout Panel Remove Payment',//can't find (only find the 'link')
+    //    CLICK_CHECKOUT_PANEL_REMOVE_PAYMENT: 'Click Checkout Panel Remove Payment',//can't find (only find the 'link')
     CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',//x
     CLICK_CHECKOUT_VEHICLE_EXPAND_INFORMATION: 'Click Checkout Vehicle Expand Information',//x
     CLICK_CHECKOUT_SUBMIT_PAYMENTS_BUTTON: 'Click Checkout Submit Payments Button',//x

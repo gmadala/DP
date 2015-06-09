@@ -45,19 +45,27 @@ body.lang_es {
 
   /* Title Releases */
   #TitleReleasesPage {
+    .col-xs-9 {width:77%;}
 
     .filter-options {
-      .col-md-5 {
+      .col-xs-5 {
         width: 31%;
       }
-      .col-md-7 {
+      .col-xs-7 {
         width: 66%;
+      }
+    }
+    .requests-grid {
+      .btn-title-request {
+        width: 150px;
+        font-size:8px;
       }
     }
   }
 
   /* Payments */
   #PaymentsPage {
+    .col-xs-9 {width:77%;}
     .well-title {
       .well-sub-title, a {
         font-size: 13px;
@@ -68,6 +76,11 @@ body.lang_es {
         margin-top: 6px;
       }
     }
+    .lockup-minor {
+      font-size: 11px;
+    }
+
+    .search Label {font-size:10px;}
 
     @media (max-width: 1150px) {
 
@@ -117,6 +130,7 @@ body.lang_es {
 
 
   #ReceiptsPage {
+    .col-xs-9 {width:77%;}
     .filter-options {
       .col-md-5 {
         width: 120px;
@@ -126,7 +140,7 @@ body.lang_es {
         width: 232px;
       }
     }
-
+    .search Label {font-size:10px;}
     @media (min-width: 1120px) {
       .filter-options {
         .col-md-5 {
