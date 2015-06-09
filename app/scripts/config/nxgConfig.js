@@ -42,7 +42,7 @@ angular.module('nextgearWebApp')
         var config;
         switch (profile) {
         case prv.profile.DEMO:
-          config = prv.generateConfig(null, null, 900000 /*15 minutes*/, true /*isDemo*/);
+          config = prv.generateConfig(null, null, 3600000 /*60 minutes*/, true /*isDemo*/);
           break;
         case prv.profile.TEST:
           config = prv.generateConfig('sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
