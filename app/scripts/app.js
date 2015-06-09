@@ -31,6 +31,13 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         allowAnonymous: true,
         margin: 'no-left-margin'
       })
+      .state('maintenance', {
+        url: '/maintenance',
+        templateUrl: 'views/maintenance.html',
+        controller: 'MaintenanceCtrl',
+        pageID: 'Maintenance',
+        allowAnonymous: true
+      })
       .state('loginRecover', {
         url: '/login/recover',
         templateUrl: 'views/login.recover.html',
