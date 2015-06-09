@@ -50,7 +50,7 @@ angular.module('nextgearWebApp')
           config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.DEMO:
-          config = prv.generateConfig(SEGMENT_KEY_DEMO, FIFTEEN_MINUTES, isDemo);
+          config = prv.generateConfig(SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TEST:
           config = prv.generateConfig(SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
