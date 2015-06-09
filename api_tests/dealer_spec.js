@@ -45,7 +45,7 @@ frisby.login()
         State: String,
         Zip: String,
         Phone: String,
-        Fax: String,
+        Fax: Object,
         IsActive: Boolean,
         IsPhysicalInventory: Boolean,
         HasFloorplanFlooredAgainst: Boolean,
