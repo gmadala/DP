@@ -104,6 +104,8 @@ re-run `npm install`.
 
   Run `grunt githooks` to configure some pre-commit hooks that will check for common errors before commiting code.
   Currently, unit tests, JSHint, and JSCS will be run with the pre-commit hook.
+  
+#### To run see grunt tasks below
 
 #About this README
 -----------------------
@@ -211,7 +213,13 @@ The primary tasks to be run from the terminal are as follows:
 #### server-ie
 
   This starts the application server on internet explorer. Refer to 'server' for a more detailed description.
+  
+  *Sample usage*
+  
+        grunt server-ie
 
+  Refer to 'server' for options that can be supplied.
+   
 #### test:unit
 
   This runs the Karma unit tests.
