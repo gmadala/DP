@@ -38,7 +38,7 @@ Our team supports Internet Explorer and these are instructions to test IE locall
 #### 1. Install Python 3 and add it to PATH variable (https://www.python.org/downloads/):
 
    Navigate to Computer > Properties > Advanced Settings > Environmental Variables
-   Add: PYTHON C:\Python\Lib
+   Add to User Variables: PYTHONPATH  C:\Python<Version#>\Lib
 
 Python is a dependency for mock-Api.
 
@@ -48,37 +48,50 @@ Python is a dependency for mock-Api.
 
 #### 4. Install Node.js (https://nodejs.org/).
 
+#### 5. Install Ruby (http://rubyinstaller.org/).
+
 ## Bash specific steps
 ### (all of the following will need to be done in the Git Bash or another Bash emulator.
 
-#### 5. Install Sass and compass (this assumes you have Ruby and Rubygems already):
+#### 6. Install Sass and compass (this assumes you have Ruby and Rubygems already):
     gem update --system
     gem install sass
     gem install compass
 
-#### 6. Install Global Dependencies Yeoman, Karma, bower, grunt, mock-Api, and the Yeoman AngularJS generator:
+#### 7. Install Global Dependencies Yeoman, Karma, bower, grunt, mock-Api, and the Yeoman AngularJS generator:
 
-    npm install -g yo generator-angular karma bower grunt grunt-cli api-mock
+    npm install -g yo 
+    npm install -g generator-angular 
+    npm install -g karma 
+    npm install -g bower 
+    npm install -g grunt 
+    npm install -g grunt-cli 
+    npm install -g api-mock
+    
+Installs need to be done separately, you get an error thrown when installing in the same command.
 
-#### 7. Create an SSH-key and add it to Stash. Open Git Bash:
+#### 8. Create an SSH-key and add it to Stash. Open Git Bash:
 
     ssh-keygen
-    ssh-agent -s
+    eval $(ssh-agent -s)
     ssh-add ~/.ssh/id_rsa
+    
+    In command prompt:
+    
+    clip < C:\Users\<user.name>\.ssh\id_rsa.pub
 
-    clip < ~/.ssh/id_rsa.pub
-
-Navigate to Stash, Account Settings, SSH-keys and add it.
+Navigate to Stash, Manage Account, SSH-keys, and add it by pasting.
 
 ## Project specific steps 
 ### (all of the following will need to be done in the mobile and desktop root folders separately)
 
-#### 8. Clone Git repo, cd to repo. Optionally Git GUI can be used to clone the repo. 
+#### 9. Clone Git repo, cd to repo. Optionally Git GUI or SourceTree can be used to clone the repo. 
+#### If you are using SourceTree first go to Tools > Options > General and set SSH client to OpenSSH.
 
     git clone ssh://git@stash.nextgearcapital.com/sus/dealer-portal.git
     cd dealer-portal
 
-#### 9. Install local dependencies with NPM and Bower:
+#### 10. Install local dependencies with NPM and Bower:
     
     npm install   
     bower install
@@ -87,10 +100,12 @@ A common gotcha may be that `npm install` fails. This probably happens if you ha
 in which case you will need to run `sudo npm install` or just remove the .npm directory from your home directory and
 re-run `npm install`.
 
-#### 10. Configure GIT pre-commit hook:
+#### 11. Configure GIT pre-commit hook:
 
   Run `grunt githooks` to configure some pre-commit hooks that will check for common errors before commiting code.
   Currently, unit tests, JSHint, and JSCS will be run with the pre-commit hook.
+  
+#### To run see grunt tasks below
 
 #About this README
 -----------------------
@@ -198,7 +213,13 @@ The primary tasks to be run from the terminal are as follows:
 #### server-ie
 
   This starts the application server on internet explorer. Refer to 'server' for a more detailed description.
+  
+  *Sample usage*
+  
+        grunt server-ie
 
+  Refer to 'server' for options that can be supplied.
+   
 #### test:unit
 
   This runs the Karma unit tests.
