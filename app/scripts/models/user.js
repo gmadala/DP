@@ -186,7 +186,7 @@ angular.module('nextgearWebApp')
           infoLoaded = true;
           isDealer = data.DealerAuctionStatusForGA === 'Dealer';
           isUnitedStates = data.CountryId === '29ec136a-1416-46ed-93cd-254d0fb0b820';
-          isManufacturer = data.BusinessClassification === '2';
+          isManufacturer = data.BusinessClassification === 2;
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
           info = data;
