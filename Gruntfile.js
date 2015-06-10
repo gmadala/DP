@@ -446,6 +446,9 @@ module.exports = function(grunt) {
         ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
+      ie: {
+        command: 'start iexplore.exe -extoff -framemerging "http://localhost:<%= connect.options.port %>'
+      },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update'
       },
@@ -505,6 +508,13 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
+  grunt.registerTask('server-ie', [
+      'dev-setup',
+      'livereload-start',
+      'connect:livereload',
+      'shell:ie',
+      'watch'
+  ]);
   grunt.registerTask('server-dist', [
     'build',
     'shell:chrome',
