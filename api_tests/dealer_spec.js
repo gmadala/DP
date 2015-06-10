@@ -34,7 +34,8 @@ frisby.login()
         DisplayTitleReleaseProgram: true,
         ManufacturerSubsidiaries: [],
         CountryId: String,
-        LanguageId: Number
+        LanguageId: Number,
+        BusinessClassification: Number
       })
       // expectJSONTypes does not recurse into arrays so test those separately
       .expectJSONTypes('Data.DealerAddresses.*', {
