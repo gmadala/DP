@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext) {
+  function financialAccount(gettext, $dialog) {
 
     var directive = {
       link: link,
@@ -23,13 +23,14 @@
 
     return directive;
 
-    function link(scope/*, element, attr */) {
+    function link(scope) {
 
       scope.descriptiveName = getDescriptiveName();
       scope.status = getStatus();
       scope.displayed = isDisplayed();
       scope.defaultForBilling = isDefaultForBilling();
       scope.defaultForDisbursement = isDefaultForDisbursement();
+      scope.editFinancialAccount = editFinancialAccount;
 
       /**
        * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
@@ -62,6 +63,26 @@
 
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
+      }
+
+      function editFinancialAccount() {
+        var dialogOptions = {
+          dialogClass: 'modal',
+          backdrop: true,
+          keyboard: false,
+          backdropClick: false,
+          templateUrl: 'views/modals/updateFinancialAccount.html',
+          resolve: {
+            options: function () {
+              return {
+                account: scope.account
+              };
+            }
+          },
+          controller: 'UpdateFinancialAccount'
+        };
+
+        $dialog.dialog(dialogOptions).open();
       }
     }
   }
