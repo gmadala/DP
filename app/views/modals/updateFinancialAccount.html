@@ -15,14 +15,14 @@
                  ng-model="account.IsActive" required/>
           <label class="checkbox-img" for="financialAccountActive"></label>
           <label class="cr-label" for="financialAccountActive">
-            <strong>Active</strong>
+            <strong translate>Active</strong>
           </label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <label for="accountName" translate>Account Name</label>
-          <input type="text" id="accountName" class="input-medium" ng-model="account.BankAccountName"
+          <input type="text" id="accountName" class="input-full" ng-model="account.BankAccountName"
                  ng-class="{ 'nxg-invalid': validity.$error.pattern }">
           <label for="accountName" class="text-error" ng-show="validity.$error.pattern" translate>
             Account name must only have letters and spaces.
@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col-xs-12">
           <label for="bankName" translate>Bank Name</label>
-          <input type="text" id="bankName" class="input-medium" ng-model="account.AchBankName"
+          <input type="text" id="bankName" class="input-full" ng-model="account.AchBankName"
                  ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
           <label for="bankName" class="text-error" ng-show="validity.$error.pattern" translate>
             Bank name must only have letters and spaces.
@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col-xs-6">
             <label for="routingNumber" translate>Routing Number</label>
-            <input type="text" id="routingNumber" class="input-medium" ng-model="account.AchAbaNumber"
+            <input type="text" id="routingNumber" class="input-full" ng-model="account.AchAbaNumber"
                    value="1234567890" disabled="disabled" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
             <label for="routingNumber" class="text-error" ng-show="validity.$error.pattern" translate>
               Routing number must only have numbers.
@@ -50,7 +50,7 @@
         </div>
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
-          <input type="text" id="accountNumber" class="input-medium" ng-model="account.AchAccountNumberLast4"
+          <input type="text" id="accountNumber" class="input-full" ng-model="account.AchAccountNumberLast4"
                  value="******7890" disabled="disabled" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
           <label for="accountNumber" class="text-error" ng-show="validity.$error.pattern" translate>
             Account number must only have numbers.
@@ -59,21 +59,21 @@
       </div>
       <div class="row">
         <div class="col-xs-12 cr-inline">
-          <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
-                 ng-model="account.IsActive" required/>
-          <label class="checkbox-img" for="financialAccountActive"></label>
-          <label class="cr-label" for="financialAccountActive">
-            <strong>Default for disbursement</strong>
+          <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
+                 ng-model="defaultForDisbursement" required/>
+          <label class="checkbox-img" for="defaultForDisbursement"></label>
+          <label class="cr-label" for="defaultForDisbursement">
+            <strong translate>Default for disbursement</strong>
           </label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 cr-inline">
-          <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
-                 ng-model="account.IsActive" required/>
-          <label class="checkbox-img" for="financialAccountActive"></label>
-          <label class="cr-label" for="financialAccountActive">
-            <strong>Default for payment</strong>
+          <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
+                 ng-model="defaultForBilling" required/>
+          <label class="checkbox-img" for="defaultForPayment"></label>
+          <label class="cr-label" for="defaultForPayment">
+            <strong translate>Default for payment</strong>
           </label>
         </div>
       </div>
@@ -81,10 +81,10 @@
 
     <div class="modal-footer">
       <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>
-        Cancel Edit
+        Cancel Changes
       </button>
       <button type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
-        Save Edit
+        Save Changes
       </button>
     </div>
 

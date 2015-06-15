@@ -75,7 +75,9 @@
           resolve: {
             options: function () {
               return {
-                account: scope.account
+                account: scope.account,
+                defaultForBilling: scope.defaultForBilling,
+                defaultForDisbursement: scope.defaultForDisbursement
               };
             }
           },
