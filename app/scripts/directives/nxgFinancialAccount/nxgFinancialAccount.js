@@ -50,7 +50,7 @@
       }
 
       function getStatus() {
-        return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
+        return scope.account.IsActive ? true : false;
       }
 
       function isDisplayed() {

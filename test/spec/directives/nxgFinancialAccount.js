@@ -78,22 +78,22 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.status).toEqual('Active');
+    expect(iScope.status).toEqual(true);
   });
 
   it('status should be "Inactive" if IsActive is not true', function () {
 
     iScope.account.IsActive = null;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toEqual(false);
 
     iScope.account.IsActive = undefined;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toEqual(false);
 
     iScope.account.IsActive = false;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toEqual(false);
   });
 
   it('descriptive account name should append the last 4 digits of the account number (if not already in the name)',

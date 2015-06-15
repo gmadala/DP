@@ -22,4 +22,47 @@
   .btn-help-adjust {
     margin-top: 10px;
   }
+
+  #FinancialAccounts {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .financial-table {
+    padding-bottom: 0px;
+  }
+  .payments-icon {
+    background-image: url(../img/icons/payments_icon.png);
+    background-size: contain;
+    width: 25px;
+    height: 25px;
+    margin-top: 3.5px;
+    margin-bottom: 3.5px;
+  }
+  .disbursements-icon {
+    background-image: url(../img/icons/disbursements_icon.png);
+    background-size: contain;
+    width: 25px;
+    height: 25px;
+    margin-top: 3.5px;
+    margin-bottom: 3.5px;
+  }
+  .active {
+    background-color: rgb(51, 153, 204);
+    box-shadow: 0 0 1em deepskyblue;
+    border-top-right-radius: 8%;
+    border-bottom-right-radius: 8%;
+    height: 32px;
+  }
+  .text-vertical-center-4 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .text-vertical-center-1 {
+    margin-top: 7.5px;
+  }
+  .faded {
+    color: #555555;
+    font-size: 90%;
+    font-style: italic;
+  }
 }

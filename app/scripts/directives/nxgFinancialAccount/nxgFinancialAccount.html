@@ -1,63 +1,29 @@
 <div ng-if="displayed">
   <div class="well-item bordered">
     <div class="row">
-      <div class="col-xs-1">
-        <div class="cr-inline text-center">
-          <input id="defaultForBilling{{account.BankAccountId}}" type="radio" name="defaultForBilling"
-                 ng-model="defaultForBilling" ng-value="true" disabled/>
-          <label class="radio-img small" for="defaultForBilling{{account.BankAccountId}}"></label>
-          <label class="cr-label" for="defaultForBilling{{account.BankAccountId}}"></label>
-        </div>
+      <div class="col-xs-1" ng-class="{active : status}">
+        <div class="payments-icon pull-left" ng-show="defaultForBilling"></div>
+        <div class="disbursements-icon pull-right" ng-show="defaultForDisbursement"></div>
       </div>
-      <div class="col-xs-1">
-        <div class="cr-inline text-center">
-          <input id="defaultForDisbursement{{account.BankAccountId}}" type="radio" name="defaultForDisbursement"
-                 ng-model="defaultForDisbursement" ng-value="true" disabled/>
-          <label class="radio-img small" for="defaultForDisbursement{{account.BankAccountId}}"></label>
-          <label class="cr-label" for="defaultForDisbursement{{account.BankAccountId}}"></label>
-        </div>
-      </div>
-      <div class="col-xs-1">
-      </div>
-      <div class="col-xs-7 static heavy">
+      <div class="col-xs-4 static text-vertical-center-4">
+        <span class="faded">Account Name</span> <br>
         <span>{{ descriptiveName }}</span>
       </div>
-      <div class="col-xs-1 static text-center">
-        <span>{{ status | translate }}</span>
+      <div class="col-xs-4 static text-vertical-center-4">
+        <span class="faded">Bank Name</span> <br>
+        <span>{{ account.AchBankName }}</span>
       </div>
-      <div class="col-md-1 static text-right pull-right">
-        <button class="btn-unstyle" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
-                <span class="paired-media"
-                      ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }"
-                      nxg-icon="icon-chevron"></span>
+      <div class="col-xs-2">
+        <span>******{{account.AchAccountNumberLast4}}</span> <br>
+        <span>{{account.AchAbaNumber}}</span>
+      </div>
+      <div class="col-md-1 static text-right pull-right text-vertical-center-1">
+        <button class="btn-unstyle" ng-click="editFinancialAccount()">
+          <span class="glyphicon glyphicon-edit"></span>
         </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="well-item" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
-    <div class="row">
-      <div class="col-xs-4 static"></div>
-      <div class="col-xs-2 static heavy" translate>Bank Name</div>
-      <div class="col-xs-2 static">{{account.AchBankName}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-4 static"></div>
-      <div class="col-xs-2 static heavy" translate>Account Number</div>
-      <div class="col-xs-2 static">******{{account.AchAccountNumberLast4}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-4 static"></div>
-      <div class="col-xs-2 static heavy" translate>Routing Number</div>
-      <div class="col-xs-2 static">{{account.AchAbaNumber}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-4 static"></div>
-      <div class="col-xs-2 static">
-        <button class="btn btn-block" ng-click="editFinancialAccount()">Edit</button>
-      </div>
-      <div class="col-xs-2 static">
-        <button class="btn btn-block">Delete</button>
+        <button class="btn-unstyle" ng-click="">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </div>
     </div>
   </div>
