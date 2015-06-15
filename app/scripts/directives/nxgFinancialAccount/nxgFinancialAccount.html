@@ -51,7 +51,7 @@
       <div class="col-xs-2 static heavy" translate>Routing Number</div>
       <div class="col-xs-2 static">{{account.AchAbaNumber}}</div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="editBankAccount">
       <div class="col-xs-4 static"></div>
       <div class="col-xs-2 static">
         <button class="btn btn-block" ng-click="editFinancialAccount()">Edit</button>
