@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, features) {
+  function financialAccount(gettext, $dialog, AccountManagement, features) {
 
     var directive = {
       link: link,
@@ -75,11 +75,16 @@
           templateUrl: 'views/modals/financialAccount.html',
           resolve: {
             options: function () {
-              return {
-                account: angular.copy(scope.account),
+              var options = {
                 defaultForBilling: scope.defaultForBilling,
                 defaultForDisbursement: scope.defaultForDisbursement
               };
+              return AccountManagement.getBankAccount(scope.account.BankAccountId).then(function (bankAccount) {
+                angular.extend(options, {
+                  account: bankAccount
+                });
+                return options;
+              });
             }
           },
           controller: 'FinancialAccount'

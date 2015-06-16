@@ -14,7 +14,7 @@ angular.module('nextgearWebApp')
         if (!accountId) {
           throw new Error('Account id is required.');
         }
-        return api.request('GET', '/dealer/bankaccount/' + accountId).then(function (bankAccount) {
+        return api.request('GET', '/Dealer/bankaccount/' + accountId).then(function (bankAccount) {
           return bankAccount;
         });
       },
@@ -22,7 +22,7 @@ angular.module('nextgearWebApp')
         if (!bankAccount) {
           throw new Error('Bank account is required.');
         }
-        return api.request('PUT', '/dealer/bankaccount/', bankAccount).then(function (bankAccount) {
+        return api.request('PUT', '/Dealer/bankaccount/', bankAccount).then(function (bankAccount) {
           return bankAccount;
         });
       },

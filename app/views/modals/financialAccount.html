@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-xs-12">
         <label for="accountName" translate>Account Name</label>
-        <input type="text" id="accountName" name="accountName" class="input-full" ng-model="account.BankAccountName"
+        <input type="text" id="accountName" name="accountName" class="input-full" ng-model="account.AccountName"
                ng-class="{ 'nxg-invalid': validity.accountName.$error.required }" required>
         <label for="accountName" class="text-error" ng-show="validity.accountName.$error.required"
                translate>
@@ -32,7 +32,7 @@
     <div class="row">
       <div class="col-xs-12">
         <label for="bankName" translate>Bank Name</label>
-        <input type="text" id="bankName" name="bankName" class="input-full" ng-model="account.AchBankName"
+        <input type="text" id="bankName" name="bankName" class="input-full" ng-model="account.BankName"
                ng-required="true" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
         <label for="bankName" class="text-error" ng-show="validity.bankName.$error.required" translate>
           You can't have empty bank name.
@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- EDIT BANK ACCOUNT -->
-    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AchAccountNumberLast4">
+    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AccountNumber">
       <div class="row">
         <div class="col-xs-4 no-right-padding">
           <span translate><b>Account Number:</b></span>
@@ -60,7 +60,7 @@
     </div>
 
     <!-- ADD BANK ACCOUNT -->
-    <div ng-show="!account.AchAccountNumberLast4">
+    <div ng-show="!account.AccountNumber">
       <div class="row">
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
