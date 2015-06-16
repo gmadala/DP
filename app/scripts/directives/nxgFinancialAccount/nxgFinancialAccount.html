@@ -1,25 +1,35 @@
 <div ng-if="displayed">
   <div class="well-item bordered">
     <div class="row">
-      <div class="col-xs-1" ng-class="{active : status}">
-        <div class="payments-icon pull-left" ng-show="defaultForBilling"></div>
-        <div class="disbursements-icon pull-right" ng-show="defaultForDisbursement"></div>
+      <div class="col-xs-1 text-left">
+        <ul class="no-left-padding text-vertical-center">
+          <li ng-show="defaultForBilling" translate>Payment</li>
+          <li ng-show="defaultForDisbursement" translate>Disbursement</li>
+        </ul>
       </div>
       <div class="col-xs-4 text-left text-vertical-center">
-        <span class="faded">Account Name</span> <br>
-        <span>{{ descriptiveName }}</span>
+        <ul>
+          <li class="faded" translate>Account Name</li>
+          <li>{{ descriptiveName }}</li>
+        </ul>
       </div>
       <div class="col-xs-3 text-left text-vertical-center">
-        <span class="faded">Bank Name</span> <br>
-        <span>{{ account.AchBankName }}</span>
+        <ul>
+          <li class="faded" translate>Bank Name</li>
+          <li>{{ account.AchBankName }}</li>
+        </ul>
       </div>
       <div class="col-xs-2 text-left text-vertical-center">
-        <span>******{{account.AchAccountNumberLast4}}</span> <br>
-        <span>{{account.AchAbaNumber}}</span>
+        <ul>
+          <li>******{{account.AchAccountNumberLast4}}</li>
+          <li>{{account.AchAbaNumber}}</li>
+        </ul>
       </div>
       <div class="col-md-1 text-left text-vertical-center">
-        <span class="faded">Status</span> <br>
-        <span>{{ status | translate }}</span>
+        <ul>
+          <li class="faded" translate>Status</li>
+          <li>{{ status | translate }}</li>
+        </ul>
       </div>
       <div class="col-md-1 text-right pull-right icon-vertical-center">
         <button class="btn-unstyle" ng-click="editFinancialAccount()">
