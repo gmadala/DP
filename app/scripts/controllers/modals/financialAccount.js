@@ -3,6 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('FinancialAccount', function($scope, dialog, $dialog, options) {
     $scope.account = options.account;
+    //$scope.account = { };
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
     $scope.accountNumberDisplay = $scope.account.AchAccountNumberLast4 ? '******' + $scope.account.AchAccountNumberLast4 : '';

@@ -39,30 +39,53 @@
         </label>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-6">
-        <label for="accountNumber" translate>Account Number</label>
-        <input type="text" id="accountNumber" name="accountNumber" class="input-full"
-               ng-model="accountNumberDisplay" ng-disabled="!!account.AchAccountNumberLast4" ng-required="true"
-               ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}">
-        <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
-          Account number must only have numbers.
-        </label>
-        <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.required" translate>
-          You can't have empty account number.
-        </label>
+    <!-- EDIT BANK ACCOUNT -->
+    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AchAccountNumberLast4">
+      <div class="row">
+        <div class="col-xs-4 no-right-padding">
+          <span translate><b>Account Number:</b></span>
+        </div>
+        <div class="col-xs-2 no-left-padding">
+          <span>{{accountNumberDisplay}}</span>
+        </div>
       </div>
-      <div class="col-xs-6">
-        <label for="routingNumber" translate>Routing Number</label>
-        <input type="text" id="routingNumber" name="routingNumber" class="input-full"
-               ng-model="routingNumberDisplay" ng-disabled="!!account.AchAbaNumber" ng-required="true"
-               ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}">
-        <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
-          Routing number must only have numbers.
-        </label>
-        <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.required" translate>
-          You can't have empty routing number.
-        </label>
+      <div class="row smaller-top-margin">
+        <div class="col-xs-4 no-right-padding">
+          <span translate><b>Routing Number:</b></span>
+        </div>
+        <div class="col-xs-2 no-left-padding">
+          <span>{{routingNumberDisplay}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD BANK ACCOUNT -->
+    <div ng-show="!account.AchAccountNumberLast4">
+      <div class="row">
+        <div class="col-xs-6">
+          <label for="accountNumber" translate>Account Number</label>
+          <input type="text" id="accountNumber" name="accountNumber" class="input-full"
+                 ng-model="accountNumberDisplay" ng-required="true"
+                 ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}">
+          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
+            Account number must only have numbers.
+          </label>
+          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.required" translate>
+            You can't have empty account number.
+          </label>
+        </div>
+        <div class="col-xs-6">
+          <label for="routingNumber" translate>Routing Number</label>
+          <input type="text" id="routingNumber" name="routingNumber" class="input-full"
+                 ng-model="routingNumberDisplay" ng-required="true"
+                 ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}">
+          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
+            Routing number must only have numbers.
+          </label>
+          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.required" translate>
+            You can't have empty routing number.
+          </label>
+        </div>
       </div>
     </div>
     <div class="row">
