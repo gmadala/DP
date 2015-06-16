@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
 
     if($scope.isManufacturer){
       $scope.documents.push({
-        'title': gettextCatalog.getString('Aging Reports Detail (PDF)'),
+        'title': gettextCatalog.getString('Manufacturer Aging Report (PDF)'),
         'url': api.contentLink('/report/getAgingReportDetail/ManufacturerAgingReport', {})
       });
     }
