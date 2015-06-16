@@ -34,6 +34,24 @@ describe('Model: AccountManagement', function() {
       Data: null
     };
 
+    httpBackend.whenGET('/dealer/bankaccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond({
+        "Success": true,
+        "Message": null,
+        "Data": {
+          "AccountId": "9e05f8c9-2e3b-4f80-a346-00004bceacb1",
+          "AccountName": "JP Morgan Chase Bank - 7905",
+          "BankName": "JP Morgan Chase Bank",
+          "IsActive": true,
+          "RoutingtNumber": "349886738",
+          "City": "Phoenix",
+          "State": "77c78343-f0f1-4152-9f77-58a393f4099d",
+          "IsDefaultPayment": true,
+          "IsDefaultDisbursement": true,
+          "AccountNumber" : "4199137905"
+        }
+      }
+    );
+
     httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,
       Message: null,
