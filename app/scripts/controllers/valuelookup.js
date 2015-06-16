@@ -5,16 +5,16 @@ angular.module('nextgearWebApp')
                                            metric, segmentio) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
-    gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
-    var disclaimerHeader = gettextCatalog.getString('© %YEAR% By Kelley Blue Book Co., Inc.');
+    var disclaimerHeader =  gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
+    disclaimerHeader = gettextCatalog.getString(disclaimerHeader);
 
-    gettext('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
-    var disclaimerEdition = gettextCatalog.getString('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
+    var disclaimerEdition = gettext('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
+    disclaimerEdition = gettextCatalog.getString(disclaimerEdition);
 
-    gettext('All Right Reserved.');
-    var disclaimerRight = gettextCatalog.getString('All Right Reserved.');
+    var disclaimerRight = gettext('All Right Reserved.');
+    disclaimerRight = gettextCatalog.getString(disclaimerRight);
 
-    gettext('The specific information required to determine the' +
+    var disclaimerText = gettext('The specific information required to determine the' +
       ' value for this particular vehicle was supplied by the person generating this' +
       ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
       ' Actual valuations will vary based upon market conditions, specifications,' +
@@ -23,16 +23,7 @@ angular.module('nextgearWebApp')
       ' This report is intended for the individual use of the person generating' +
       ' this report only and shall not be sold or transmitted to another party.' +
       ' Kelley Blue Book assumes no responsibility for errors or omissions.');
-    var disclaimerText = gettextCatalog.getString(
-      'The specific information required to determine the' +
-      ' value for this particular vehicle was supplied by the person generating this' +
-      ' report. Vehicle valuations are opinions and may vary from vehicle to vehicle.' +
-      ' Actual valuations will vary based upon market conditions, specifications,' +
-      ' vehicle condition or other particular circumstances pertinent to this' +
-      ' particular vehicle or the transaction or the parties to the transaction.' +
-      ' This report is intended for the individual use of the person generating' +
-      ' this report only and shall not be sold or transmitted to another party.' +
-      ' Kelley Blue Book assumes no responsibility for errors or omissions.');
+    var disclaimerText = gettextCatalog.getString(disclaimerText);
     var boldDiv = '<div><strong>%CONTENT%</strong></div>';
     var normalDiv = '<div>%CONTENT%</div>';
 
