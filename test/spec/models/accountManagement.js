@@ -34,7 +34,7 @@ describe('Model: AccountManagement', function() {
       Data: null
     };
 
-    httpBackend.whenGET('/dealer/bankaccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond({
+    httpBackend.whenGET('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond({
         "Success": true,
         "Message": null,
         "Data": {
@@ -129,6 +129,30 @@ describe('Model: AccountManagement', function() {
   it('should call saveTitleAddress method', function() {
     httpBackend.expectPOST('/UserAccount/titleSettings').respond(success);
     accountManagement.saveTitleAddress(5);
+    expect(httpBackend.flush).not.toThrow();
+  });
+  iit('should call getBankAccount and throw error with invalid id', function() {
+    expect(function() { accountManagement.getBankAccount() }).toThrow(new Error('Account id is required.'));
+  });
+
+  iit('should call getBankAccount and receive a valid id', function() {
+    var returnedAccount = {};
+    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1').then(function(bankAccount) {
+      returnedAccount = bankAccount;
+    });
+    httpBackend.flush();
+    expect(returnedAccount.AccountId).toEqual('9e05f8c9-2e3b-4f80-a346-00004bceacb1');
+  });
+  iit('should call updateBankAccount and throw error with invalid bank account', function() {
+    expect(function(){ accountManagement.updateBankAccount('') }).toThrow(new Error('Bank account is required.'));
+  });
+  iit('should call updateBankAccount', function() {
+    var returnedAccount = {};
+    httpBackend.whenPUT('/Dealer/bankAccount/').respond(success);
+    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1').then(function(bankAccount) {
+      returnedAccount = bankAccount;
+    });
+    accountManagement.updateBankAccount(returnedAccount);
     expect(httpBackend.flush).not.toThrow();
   });
 });
