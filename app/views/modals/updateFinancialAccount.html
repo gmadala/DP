@@ -41,20 +41,21 @@
       </div>
       <div class="row">
         <div class="col-xs-6">
+          <label for="accountNumber" translate>Account Number</label>
+          <input type="text" id="accountNumber" class="input-full"
+                 ng-init="accountNumberDisplay='******' + account.AchAccountNumberLast4"
+                 ng-model="accountNumberDisplay" disabled="disabled" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
+          <label for="accountNumber" class="text-error" ng-show="validity.$error.pattern" translate>
+            Account number must only have numbers.
+          </label>
+        </div>
+        <div class="col-xs-6">
             <label for="routingNumber" translate>Routing Number</label>
             <input type="text" id="routingNumber" class="input-full" ng-model="account.AchAbaNumber"
                    value="1234567890" disabled="disabled" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
             <label for="routingNumber" class="text-error" ng-show="validity.$error.pattern" translate>
               Routing number must only have numbers.
             </label>
-        </div>
-        <div class="col-xs-6">
-          <label for="accountNumber" translate>Account Number</label>
-          <input type="text" id="accountNumber" class="input-full" ng-model="account.AchAccountNumberLast4"
-                 value="******7890" disabled="disabled" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
-          <label for="accountNumber" class="text-error" ng-show="validity.$error.pattern" translate>
-            Account number must only have numbers.
-          </label>
         </div>
       </div>
       <div class="row">
