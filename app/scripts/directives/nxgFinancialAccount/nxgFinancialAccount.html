@@ -1,38 +1,38 @@
 <div ng-if="displayed">
   <div class="well-item bordered">
     <div class="row">
-      <div class="col-xs-1 text-left">
-        <ul class="no-left-padding text-vertical-center">
+      <div class="col-xs-1 text-left text-vertical-center small-right-margin">
+        <ul class="no-left-padding no-bottom-margin">
           <li ng-show="defaultForBilling" translate>Payment</li>
           <li ng-show="defaultForDisbursement" translate>Disbursement</li>
         </ul>
       </div>
       <div class="col-xs-4 text-left text-vertical-center">
-        <ul>
+        <ul class="no-left-padding no-bottom-margin">
           <li class="faded" translate>Account Name</li>
           <li>{{ descriptiveName }}</li>
         </ul>
       </div>
       <div class="col-xs-3 text-left text-vertical-center">
-        <ul>
+        <ul class="no-left-padding no-bottom-margin">
           <li class="faded" translate>Bank Name</li>
           <li>{{ account.AchBankName }}</li>
         </ul>
       </div>
       <div class="col-xs-2 text-left text-vertical-center">
-        <ul>
+        <ul class="no-left-padding no-bottom-margin">
           <li>******{{account.AchAccountNumberLast4}}</li>
           <li>{{account.AchAbaNumber}}</li>
         </ul>
       </div>
-      <div class="col-md-1 text-left text-vertical-center">
-        <ul>
+      <div class="col-xs-1 text-left text-vertical-center">
+        <ul class="no-left-padding no-bottom-margin">
           <li class="faded" translate>Status</li>
           <li>{{ status | translate }}</li>
         </ul>
       </div>
-      <div class="col-md-1 text-right pull-right icon-vertical-center">
-        <button class="btn-unstyle" ng-click="editFinancialAccount()">
+      <div class="col-xs-1 pull-right icon-vertical-center icon-padding-right">
+        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
           <span class="glyphicon glyphicon-edit"></span>
         </button>
       </div>
