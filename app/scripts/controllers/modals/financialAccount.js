@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FinancialAccount', function($scope, dialog, AccountManagement, $dialog, options) {
+  .controller('FinancialAccount', function($scope, AccountManagement, dialog, options) {
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
           $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
         }
         AccountManagement.updateBankAccount($scope.account).then(function () {
-          $dialog.close();
+          dialog.close();
         });
       }
     };
