@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FinancialAccount', function($scope, AccountManagement, dialog, options) {
+  .controller('FinancialAccountCtrl', function($scope, AccountManagement, dialog, options) {
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;

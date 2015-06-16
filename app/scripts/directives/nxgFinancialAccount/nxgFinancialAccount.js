@@ -87,7 +87,7 @@
               });
             }
           },
-          controller: 'FinancialAccount'
+          controller: 'FinancialAccountCtrl'
         };
 
         $dialog.dialog(dialogOptions).open();

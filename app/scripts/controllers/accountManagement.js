@@ -258,7 +258,7 @@ angular.module('nextgearWebApp')
                   };
                 }
               },
-              controller: 'FinancialAccount'
+              controller: 'FinancialAccountCtrl'
             };
 
             $dialog.dialog(dialogOptions).open();
