@@ -72,17 +72,17 @@
           backdrop: true,
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'views/modals/updateFinancialAccount.html',
+          templateUrl: 'views/modals/financialAccount.html',
           resolve: {
             options: function () {
               return {
-                account: scope.account,
+                account: angular.copy(scope.account),
                 defaultForBilling: scope.defaultForBilling,
                 defaultForDisbursement: scope.defaultForDisbursement
               };
             }
           },
-          controller: 'UpdateFinancialAccount'
+          controller: 'FinancialAccount'
         };
 
         $dialog.dialog(dialogOptions).open();

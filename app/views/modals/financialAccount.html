@@ -1,0 +1,100 @@
+<h3 class="modal-header" translate>
+  Updating Financial Account
+</h3>
+
+<div class="modal-body to-edge" nxg-autofocus>
+  <form class="modal-inner" name="financialAccountForm">
+    <h3 translate>Financial Account</h3>
+
+    <p class="paragraph"><span translate>Please update your financial account below:</span></p>
+
+    <div class="row">
+      <div class="col-xs-12 cr-inline">
+        <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
+               ng-required="true" ng-model="account.IsActive"/>
+        <label class="checkbox-img" for="financialAccountActive"></label>
+        <label class="cr-label" for="financialAccountActive">
+          <strong translate>Active</strong>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="accountName" translate>Account Name</label>
+        <input type="text" id="accountName" name="accountName" class="input-full" ng-model="account.BankAccountName"
+               ng-class="{ 'nxg-invalid': financialAccountForm.accountName.$error.required }" required>
+        <label for="accountName" class="text-error" ng-show="financialAccountForm.accountName.$error.required"
+               translate>
+          You can't have empty account name.
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="bankName" translate>Bank Name</label>
+        <input type="text" id="bankName" name="bankName" class="input-full" ng-model="account.AchBankName"
+               ng-required="true" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
+        <label for="bankName" class="text-error" ng-show="financialAccountForm.bankName.$error.required" translate>
+          You can't have empty bank name.
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <label for="accountNumber" translate>Account Number</label>
+        <input type="text" id="accountNumber" name="accountNumber" class="input-full"
+               ng-model="accountNumberDisplay" ng-disabled="!!!$scope.account.AchAccountNumberLast4" ng-required="true"
+               ng-class="{ 'nxg-invalid': financialAccountForm.accountNumber.$error.pattern || financialAccountForm.accountNumber.$error.required}">
+        <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.pattern" translate>
+          Account number must only have numbers.
+        </label>
+        <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.required" translate>
+          You can't have empty account number.
+        </label>
+      </div>
+      <div class="col-xs-6">
+        <label for="routingNumber" translate>Routing Number</label>
+        <input type="text" id="routingNumber" name="routingNumber" class="input-full"
+               ng-model="routingNumberDisplay" ng-disabled="!!!$scope.account.AchAbaNumber" ng-required="true"
+               ng-class="{ 'nxg-invalid': financialAccountForm.routingNumber.$error.pattern | financialAccountForm.routingNumber.$error.required}">
+        <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.pattern" translate>
+          Routing number must only have numbers.
+        </label>
+        <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.required" translate>
+          You can't have empty routing number.
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 cr-inline">
+        <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
+               ng-model="defaultForDisbursement"/>
+        <label class="checkbox-img" for="defaultForDisbursement"></label>
+        <label class="cr-label" for="defaultForDisbursement">
+          <strong translate>Default for disbursement</strong>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 cr-inline">
+        <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
+               ng-model="defaultForBilling"/>
+        <label class="checkbox-img" for="defaultForPayment"></label>
+        <label class="cr-label" for="defaultForPayment">
+          <strong translate>Default for payment</strong>
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>
+    Cancel Changes
+  </button>
+  <button type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
+    Save Changes
+  </button>
+</div>
+
+

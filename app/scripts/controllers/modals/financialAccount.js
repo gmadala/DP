@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('UpdateFinancialAccount', function($scope, dialog, $dialog, options) {
+  .controller('FinancialAccount', function($scope, dialog, $dialog, options) {
     $scope.account = options.account;
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
+    $scope.accountNumberDisplay = '******' + $scope.account.AchAccountNumberLast4;
+    $scope.routingNumberDisplay = $scope.account.AchAbaNumber;
 
     $scope.confirmRequest = function() {
+      console.log($scope.financialAccountForm);
     };
 
     $scope.close = dialog.close;
