@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
       ' This report is intended for the individual use of the person generating' +
       ' this report only and shall not be sold or transmitted to another party.' +
       ' Kelley Blue Book assumes no responsibility for errors or omissions.');
-    var disclaimerText = gettextCatalog.getString(disclaimerText);
+    disclaimerText = gettextCatalog.getString(disclaimerText);
     var boldDiv = '<div><strong>%CONTENT%</strong></div>';
     var normalDiv = '<div>%CONTENT%</div>';
 
