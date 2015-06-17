@@ -44,7 +44,7 @@
 
             <td class="description">
               <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">
-                <span nxg-track="{{metric.CLICK_TITLE_RELEASE_VEHICLE_DETAILS}}" nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
+                <span nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
               </a>
               <div class="row">
                 <p class="lockup-minor caps vin padding-left"><span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
@@ -52,7 +52,7 @@
               </div>
 
               <div ng-hide="1 == addresses.length" class="send-to-label"><span translate>Send To</span>: </div>
-              <div nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_SEND_TO_ADDRESS_FIELD}}" nxg-alternate-address="item" is-enabled="true" show-tooltip="true" show-select-menu>
+              <div nxg-alternate-address="item" is-enabled="true" show-tooltip="true" show-select-menu>
               </div>
             </td>
 
@@ -66,7 +66,6 @@
               <button class="btn-unstyle btn-link"
                       type="submit"
                       ng-click="$parent.titleQueue.removeFromQueue(item)"
-                      nxg-track="{{metric.CLICK_TITLE_RELEASE_CHECKOUT_REMOVE_REQUEST_BUTTON}}"
                       ng-disabled="$parent.submitting" translate>
                 Remove Title
               </button>

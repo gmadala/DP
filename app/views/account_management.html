@@ -45,7 +45,7 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row">
-          <label class="col-md-5" for="businessEmail" translate>Business Email</label>
+          <label class="col-md-5" for="businessEmail"><span translate>Business Email</span>:</label>
           <!--From develop: <label class="span5" for="businessEmail"><span translate>Business Email</span>:</label>-->
           <div class="col-md-7" nxg-input model="business.data.email" editable="business.editable">
             <input type="email" class="xsmallInput" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email"
@@ -58,7 +58,7 @@
         </div>
 
         <div class="row">
-          <label class="col-md-5" for="enhanced" translate>Enhanced Registration Enabled:</label>
+          <label class="col-md-5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>
           <!--From develop: <label class="span5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>-->
           <div class="col-md-7">
             <div class="row">
@@ -94,8 +94,6 @@
         <div ng-show="business.editable && business.dirtyData.enhancedRegistrationEnabled">
           <div class="row">
             <div class="col-md-7 col-md-offset-5">
-              <p class="paragraph" translate></p>
-
               <p class="paragraph" translate>Create your Enhanced Registration four digit PIN.</p>
             </div>
           </div>
@@ -131,8 +129,7 @@
 
         <div class="row" ng-show="business.autoPay.isDisplayed()">
 
-          <label class="col-md-5" for="autoPay">Enrolled in Auto-Pay:</label>
-          <!--from develop: <label class="span5" for="autoPay"><span translate>Enrolled in ProperNounTBD</span>:</label>-->
+          <label class="col-md-5" for="autoPay"><span translate>Enrolled in ProperNounTBD</span>:</label>
           <div class="col-md-7">
             <div class="row">
               <div class="col-md-6">

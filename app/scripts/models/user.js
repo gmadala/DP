@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, QualarooSurvey, nxgConfig, Addresses, gettextCatalog, language) {
+  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, nxgConfig, Addresses, gettextCatalog, language) {
     // Private
     var staticsRequest = null,
       paySellerOptions = [],
@@ -123,7 +123,6 @@ angular.module('nextgearWebApp')
               apiKey = self.isDealer() ? nxgConfig.userVoice.dealerApiKey : nxgConfig.userVoice.auctionApiKey;
               if (!nxgConfig.isDemo && gettextCatalog.currentLanguage === 'en') {
                 UserVoice.init(apiKey, authData.UserVoiceToken, self.isDealer(), info.BusinessNumber, info.BusinessName);
-                QualarooSurvey.init(nxgConfig.qualarooSurvey.apiKey, nxgConfig.qualarooSurvey.domainCode, self.isDealer(), info.BusinessNumber, info.BusinessName);
               }
             });
           }
@@ -187,7 +186,7 @@ angular.module('nextgearWebApp')
           infoLoaded = true;
           isDealer = data.DealerAuctionStatusForGA === 'Dealer';
           isUnitedStates = data.CountryId === '29ec136a-1416-46ed-93cd-254d0fb0b820';
-          isManufacturer = data.BusinessClassification === '2';
+          isManufacturer = data.BusinessClassification === 2;
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
           info = data;

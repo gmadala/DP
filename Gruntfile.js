@@ -126,6 +126,11 @@ module.exports = function(grunt) {
           }
         ]
       },
+      maintenance: {
+        src: [
+          'maintenance/**/*'
+        ]
+      },
       server: '.tmp'
     },
     jshint: {
@@ -177,6 +182,13 @@ module.exports = function(grunt) {
         relativeAssets: true
       },
       dist: {
+        options: {
+          sassDir: '<%= yeoman.app %>/styles',
+          cssDir: '<%= yeoman.app %>/styles',
+          force: true
+        }
+      },
+      maintenance: {
         options: {
           sassDir: '<%= yeoman.app %>/styles',
           cssDir: '<%= yeoman.app %>/styles',
@@ -313,6 +325,59 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      maintenance: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/',
+            src: '<%= yeoman.app %>/img/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/icons/',
+            src: '<%= yeoman.app %>/img/icons/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/browsers/',
+            src: '<%= yeoman.app %>/img/browsers/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/fonts/',
+            src: '<%= yeoman.app %>/fonts/**/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance',
+            src: '<%= yeoman.app %>/favicon.ico'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance',
+            src: '<%= yeoman.app %>/maintenance.html'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/styles/',
+            src: '<%= yeoman.app %>/styles/main.css'
+          }
+        ]
+      },
       dist: {
         files: [
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt' },
@@ -446,6 +511,9 @@ module.exports = function(grunt) {
         ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
+      ie: {
+        command: 'start iexplore.exe -extoff -framemerging "http://localhost:<%= connect.options.port %>'
+      },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update'
       },
@@ -505,6 +573,13 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
+  grunt.registerTask('server-ie', [
+      'dev-setup',
+      'livereload-start',
+      'connect:livereload',
+      'shell:ie',
+      'watch'
+  ]);
   grunt.registerTask('server-dist', [
     'build',
     'shell:chrome',
@@ -584,6 +659,14 @@ module.exports = function(grunt) {
     counter++;
   });
 
+  grunt.registerTask('build-maintenance', [
+    'gitinfo',
+    'env',
+    'clean:maintenance',
+    'compass:maintenance',
+    'copy:maintenance'
+  ]);
+
   grunt.registerTask('build', [
     'gitinfo',
     'env',
@@ -593,7 +676,7 @@ module.exports = function(grunt) {
     'compass:dist',
     'concat',
     'preprocess:dist',
-    'copy',
+    'copy:dist',
     'preprocess:index',
     'cdnify',
     'ngAnnotate',

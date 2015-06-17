@@ -54,20 +54,6 @@ angular.module('nextgearWebApp')
       return lengthAtSubmit >= 3;
     };
 
-    //using ng-switch in html messes up Lookup Button alignment for some reason.
-    //Just as easy to do the switch here in the controller.
-    $scope.metricByMode = function() {
-      var _metric = '';
-      var fieldMode = $scope.mode;
-      switch( fieldMode){
-      case 'sellers':
-        _metric = metric.CLICK_FLOOR_A_VEHICLE_SELLER_LOOKUP_BUTTON;
-        break;
-      }
-
-      return _metric;
-    };
-
     $scope.openBusinessSearch = function() {
       lengthAtSubmit = $element.find('input').val().length;
 
