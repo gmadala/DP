@@ -1,13 +1,9 @@
 <h3 class="modal-header" translate>
-  {{account.AchAccountNumberLast4 ? 'Edit' : 'Add'}} Financial Account
+  {{account.AccountId ? 'Edit' : 'Add'}} Financial Account
 </h3>
 
 <div class="modal-body to-edge" nxg-autofocus>
   <form class="modal-inner" name="financialAccountForm">
-    <h3 translate>Financial Account</h3>
-
-    <p class="paragraph"><span translate>Please update your financial account below:</span></p>
-
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
