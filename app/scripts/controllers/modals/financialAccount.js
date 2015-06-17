@@ -12,7 +12,7 @@ angular.module('nextgearWebApp')
     $scope.confirmRequest = function() {
       $scope.validity = angular.copy($scope.financialAccountForm);
       if ($scope.validity.$valid) {
-        if (!$scope.account.BankAccountId) {
+        if (!$scope.account.AccountId) {
           $scope.account.AccountNumber = $scope.accountNumberDisplay;
           $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
         }
@@ -22,5 +22,7 @@ angular.module('nextgearWebApp')
       }
     };
 
-    $scope.close = dialog.close;
+    $scope.close = function() {
+      dialog.close();
+    };
   });
