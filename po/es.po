@@ -197,11 +197,11 @@ msgstr "Número de la cuenta"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Account name must only have letters and spaces."
-msgstr ""
+msgstr "El nombre de la cuenta solo debe contener letras y espacios."
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Account number must only have numbers."
-msgstr ""
+msgstr "El número de la cuenta solo debe contener números."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Acknowledge VIN Look-Up Failure"
@@ -214,7 +214,7 @@ msgstr "Acciones"
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js
 #: app/views/modals/updateFinancialAccount.html
 msgid "Active"
-msgstr ""
+msgstr "Activa"
 
 #: app/views/vehicledetails.html
 msgid "Activity Date"
@@ -457,7 +457,7 @@ msgstr "Nombre del banco"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Bank name must only have letters and spaces."
-msgstr ""
+msgstr "El nombre del banco solo debe contener letras y espacios."
 
 #: app/views/analytics.html
 msgid "Best Movers"
@@ -555,7 +555,7 @@ msgstr "Cancelar solicitud"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Cell Phone"
-msgstr ""
+msgstr "Teléfono celular"
 
 #: app/views/vehicledetails.html
 msgid "Change Inventory Location"
@@ -818,11 +818,11 @@ msgstr "Predeterminado para pagos"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Default for disbursement"
-msgstr ""
+msgstr "Predeterminado para desembolsos"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Default for payment"
-msgstr ""
+msgstr "Predeterminado para pagos"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 msgid "Delete"
@@ -1141,7 +1141,7 @@ msgstr " Cantidad financiada"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Financial Account"
-msgstr ""
+msgstr "Cuenta financiera"
 
 #: app/views/account_management.html
 msgid "Financial Accounts"
@@ -1303,7 +1303,7 @@ msgstr "Por la cantidad de"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js
 msgid "Inactive"
-msgstr ""
+msgstr "Inactiva"
 
 #: app/scripts/controllers/documents.js
 msgid "Information Sheet"
@@ -1466,7 +1466,7 @@ msgstr "Búsqueda manual"
 
 #: app/scripts/controllers/auction.reports.js
 msgid "Manufacturer Aging Report (PDF)"
-msgstr ""
+msgstr "Informe de antigüedad del fabricante (PDF)"
 
 #: app/scripts/controllers/floorCar.js app/views/valuelookup.html
 msgid "Mileage"
@@ -1526,7 +1526,7 @@ msgstr ""
 
 #: app/views/account_management.html
 msgid "NextGear Account Information"
-msgstr ""
+msgstr "Información de cuenta de NextGear"
 
 #: app/views/vehicledetails.html
 msgid "NextGear Book Values"
@@ -2287,7 +2287,7 @@ msgstr "Por favor, seleccione quién tiene el título."
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Please update your financial account below:"
-msgstr ""
+msgstr "Por favor, actualice su cuenta financiera a continuación:"
 
 #: app/views/payments.html
 msgid "Posted"
@@ -2521,7 +2521,7 @@ msgstr "Número de enrutamiento"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Routing number must only have numbers."
-msgstr ""
+msgstr "El número de enrutamiento solo debe contener números."
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -3249,7 +3249,7 @@ msgstr "Próxima reducción / cotización de pago (PDF)"
 
 #: app/views/modals/updateFinancialAccount.html
 msgid "Updating Financial Account"
-msgstr ""
+msgstr "Actualizando la cuenta financiera"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "User Profile"
@@ -3391,7 +3391,7 @@ msgstr "Volumen de planes de piso pasados de NextGear Capital"
 
 #: app/maintenance.html
 msgid "We Will Be Back Soon!"
-msgstr ""
+msgstr "¡Regresaremos en breve!"
 
 #: app/views/valuelookup.html
 msgid ""
@@ -3729,6 +3729,10 @@ msgid ""
 "while we actively work to improve our\n"
 "                service to you. Thank you for using myNextGear!"
 msgstr ""
+"myNextGear no está disponible en estos momentos, lo estamos actualizando con "
+"características y beneficios adicionales. Lamentamos los inconvenientes y le "
+"agradecemos su paciencia mientras trabajamos diligentemente para mejorar el "
+"servicio que le prestamos. ¡Gracias por utilizar myNextGear!"
 
 #: app/views/vehicledetails.html
 msgid "none"
