@@ -10,7 +10,8 @@
    */
   function financialAccount(gettext, $dialog, AccountManagement, features) {
 
-    var directive = {
+    var directive;
+    directive = {
       link: link,
       templateUrl: 'scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html',
       scope: {
@@ -43,7 +44,8 @@
 
         var account = scope.account;
 
-        if (account.BankAccountName.indexOf(account.AchAccountNumberLast4) > -1) {
+        var partialAccountNumber = account.AchAccountNumberLast4.toString();
+        if (account.BankAccountName.indexOf(partialAccountNumber) > -1) {
           return account.BankAccountName;
         } else {
           return account.BankAccountName + ' - ' + account.AchAccountNumberLast4;
@@ -90,7 +92,21 @@
           controller: 'FinancialAccountCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open();
+        $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
+          if (updatedAccount) {
+            scope.defaultForBilling = updatedAccount.IsDefaultPayment;
+            scope.defaultForDisbursement = updatedAccount.IsDefaultDisbursement;
+            scope.AchBankName = updatedAccount.BankName;
+            scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
+
+            var description = updatedAccount.BankAccountName;
+            var partialAccountNumber = scope.account.AchAccountNumberLast4.toString();
+            if (updatedAccount.BankAccountName.indexOf(partialAccountNumber) === -1) {
+              description = updatedAccount.BankAccountName + ' - ' + scope.account.AchAccountNumberLast4;
+            }
+            scope.descriptiveName = description;
+          }
+        });
       }
     }
   }
