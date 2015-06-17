@@ -233,8 +233,8 @@
               <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
                 <div nxg-address="addr"></div>
               </li>
-              <li ng-show="title.data.extraAddresses" translate>And {{ title.data.extraAddresses }} additional
-                addresses...
+              <li ng-show="title.data.extraAddresses" translate>
+                And {{ title.data.extraAddresses }} additional addresses...
               </li>
             </ul>
             <p ng-show="title.data.addresses.length == 0" translate>
