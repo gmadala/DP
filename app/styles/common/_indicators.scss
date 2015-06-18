@@ -86,10 +86,10 @@
 }
 
 .counter-list {
+  padding: 15px;
   li {
     @extend .clearfix;
   }
-  padding: 15px;
   .counter {
     @extend %float-l;
     margin: 4px 0px;
