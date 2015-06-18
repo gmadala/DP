@@ -10,6 +10,22 @@ angular.module('nextgearWebApp')
         });
 
       },
+      getBankAccount: function(accountId) {
+        if (!accountId) {
+          throw new Error('Account id is required.');
+        }
+        return api.request('GET', '/Dealer/bankAccount/' + accountId).then(function (bankAccount) {
+          return bankAccount;
+        });
+      },
+      updateBankAccount: function(bankAccount) {
+        if (!bankAccount) {
+          throw new Error('Bank account is required.');
+        }
+        return api.request('PUT', '/Dealer/bankAccount/'+ bankAccount.AccountId, bankAccount).then(function (bankAccount) {
+          return bankAccount;
+        });
+      },
       getFinancialAccountData: function() {
         return api.request('GET', '/dealer/v1_1/summary').then(function(summary) {
           // Any Financial Account data tranformations made here
