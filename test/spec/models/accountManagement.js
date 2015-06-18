@@ -34,6 +34,25 @@ describe('Model: AccountManagement', function() {
       Data: null
     };
 
+    var bankAccountData = {
+      "Success": true,
+      "Message": null,
+      "Data": {
+        "AccountId": "9e05f8c9-2e3b-4f80-a346-00004bceacb1",
+        "AccountName": "JP Morgan Chase Bank - 7905",
+        "BankName": "JP Morgan Chase Bank",
+        "IsActive": true,
+        "RoutingtNumber": "349886738",
+        "City": "Phoenix",
+        "State": "77c78343-f0f1-4152-9f77-58a393f4099d",
+        "IsDefaultPayment": true,
+        "IsDefaultDisbursement": true,
+        "AccountNumber" : "4199137905"
+      }
+    };
+    httpBackend.whenGET('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
+    httpBackend.whenPUT('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
+
     httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,
       Message: null,
@@ -112,5 +131,47 @@ describe('Model: AccountManagement', function() {
     httpBackend.expectPOST('/UserAccount/titleSettings').respond(success);
     accountManagement.saveTitleAddress(5);
     expect(httpBackend.flush).not.toThrow();
+  });
+
+  it('should call getBankAccount and throw error with invalid id', function() {
+    spyOn(accountManagement, 'getBankAccount').andCallThrough();
+    expect(accountManagement.getBankAccount).toThrow(new Error('Account id is required.'));
+  });
+
+  it('should call getBankAccount and receive a valid id', function() {
+    var returnedAccount = {};
+    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1').then(function(bankAccount) {
+      returnedAccount = bankAccount;
+    });
+    httpBackend.flush();
+    expect(returnedAccount.AccountId).toEqual('9e05f8c9-2e3b-4f80-a346-00004bceacb1');
+  });
+
+  it('should call updateBankAccount and throw error with invalid bank account', function() {
+    spyOn(accountManagement, 'updateBankAccount').andCallThrough();
+    expect(accountManagement.updateBankAccount).toThrow(new Error('Bank account is required.'));
+  });
+
+  it('should call updateBankAccount', function() {
+    var returnedBankAccount = {}, updatedBankAccount = {};
+
+    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
+      .then(function (bankAccount) {
+        returnedBankAccount = bankAccount;
+        return bankAccount;
+      }).then(function (returnedBankAccount) {
+        return accountManagement.updateBankAccount(returnedBankAccount)
+          .then(function (bankAccount) {
+            updatedBankAccount = bankAccount;
+            return updatedBankAccount;
+          });
+      });
+
+    spyOn(accountManagement, 'updateBankAccount').andCallThrough();
+    httpBackend.flush();
+
+    expect(accountManagement.updateBankAccount).toHaveBeenCalledWith(returnedBankAccount);
+    expect(updatedBankAccount).toEqual(returnedBankAccount);
+
   });
 });

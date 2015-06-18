@@ -22,4 +22,46 @@
   .btn-help-adjust {
     margin-top: 10px;
   }
+
+  #FinancialAccounts {
+    .financial-table {
+      padding-bottom: 0;
+    }
+    .text-vertical-center {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+    .icon-vertical-center {
+      margin-top: 7.5px;
+    }
+    .icon-padding-right {
+      padding-right: 25px;
+    }
+    .faded {
+      color: #555555;
+      font-size: 90%;
+      font-style: italic;
+    }
+    .no-bottom-border {
+      border-bottom: 0;
+    }
+    .no-bottom-margin {
+      margin-bottom: 0;
+    }
+  }
+}
+.no-left-padding {
+  padding-left:  0;
+}
+.no-right-padding {
+  padding-right: 0;
+}
+.small-top-margin {
+  margin-top: 3%;
+}
+.smaller-top-margin {
+  margin-top: 2%;
+}
+.smallest-bottom-margin {
+  margin-bottom: 1%;
 }

@@ -203,6 +203,25 @@ angular.module('nextgearWebApp')
             var financial = $scope.financial;
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
+          },
+          addFinancialAccount: function() {
+            var dialogOptions = {
+              dialogClass: 'modal',
+              backdrop: true,
+              keyboard: false,
+              backdropClick: false,
+              templateUrl: 'views/modals/financialAccount.html',
+              resolve: {
+                options: function () {
+                  return {
+                    account: { }
+                  };
+                }
+              },
+              controller: 'FinancialAccountCtrl'
+            };
+
+            $dialog.dialog(dialogOptions).open();
           }
         };
 

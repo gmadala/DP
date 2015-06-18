@@ -734,7 +734,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'nggettext_compile']);
+  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'po_validate', 'nggettext_compile']);
 
   grunt.registerTask('default', ['server']);
 };

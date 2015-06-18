@@ -8,9 +8,10 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, features) {
+  function financialAccount(gettext, $dialog, AccountManagement, features) {
 
-    var directive = {
+    var directive;
+    directive = {
       link: link,
       templateUrl: 'scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html',
       scope: {
@@ -43,7 +44,8 @@
 
         var account = scope.account;
 
-        if (account.BankAccountName.indexOf(account.AchAccountNumberLast4) > -1) {
+        var partialAccountNumber = account.AchAccountNumberLast4.toString();
+        if (account.BankAccountName.indexOf(partialAccountNumber) > -1) {
           return account.BankAccountName;
         } else {
           return account.BankAccountName + ' - ' + account.AchAccountNumberLast4;
@@ -72,20 +74,39 @@
           backdrop: true,
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'views/modals/updateFinancialAccount.html',
+          templateUrl: 'views/modals/financialAccount.html',
           resolve: {
             options: function () {
-              return {
-                account: scope.account,
+              var options = {
                 defaultForBilling: scope.defaultForBilling,
                 defaultForDisbursement: scope.defaultForDisbursement
               };
+              return AccountManagement.getBankAccount(scope.account.BankAccountId).then(function (bankAccount) {
+                angular.extend(options, {
+                  account: bankAccount
+                });
+                return options;
+              });
             }
           },
-          controller: 'UpdateFinancialAccount'
+          controller: 'FinancialAccountCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open();
+        $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
+          if (updatedAccount) {
+            scope.defaultForBilling = updatedAccount.IsDefaultPayment;
+            scope.defaultForDisbursement = updatedAccount.IsDefaultDisbursement;
+            scope.AchBankName = updatedAccount.BankName;
+            scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
+
+            var description = updatedAccount.BankAccountName;
+            var partialAccountNumber = scope.account.AchAccountNumberLast4.toString();
+            if (updatedAccount.BankAccountName.indexOf(partialAccountNumber) === -1) {
+              description = updatedAccount.BankAccountName + ' - ' + scope.account.AchAccountNumberLast4;
+            }
+            scope.descriptiveName = description;
+          }
+        });
       }
     }
   }
