@@ -45,7 +45,7 @@ body {
    */
 
   & > * {
-    @include opacity(40);
+    @include opacity(.4);
   }
 }
 
@@ -135,6 +135,9 @@ body {
 }
 .rightMargin{
   margin-right:0px;
+}
+.leftMarginSmall{
+  margin-left: 5px;
 }
 .leftMarginMedium
 {

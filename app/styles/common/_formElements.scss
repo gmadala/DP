@@ -59,6 +59,7 @@ input, select, textarea {
   font-size: $inputFontSize;
   color: $text;
   height: $cta-2-height;
+  width: 45%;
   padding: 5px 9px;
   margin: 5px 0;
 }
@@ -135,10 +136,24 @@ input[type="color"] {
   @extend %full-width;
 }
 
+.input-large-width {
+  width: 85%;
+}
+
+.no-right-padding {
+  padding-right: 0;
+}
+
+.small-left-padding {
+  padding-left: 13px;
+}
+
 // Overriding Bootstrap's input-prepend class to make it work for us.
 .input-prepend.dollar .add-on{
+  top: 11px;
+  padding-right: 2px;
+  margin-right: 0;
   position: relative;
-  top: 7px;
   font-size: 14px;
   background-color: transparent;
   border: none;
@@ -208,7 +223,10 @@ select {
     width: auto;
   }
 
-  &.small {width:206px;}
+  &.small {
+    width:45%;
+    min-width: 45%;
+  }
 
   &.disabled {
     border-color: $border;

@@ -89,12 +89,12 @@
       </span>
 
       <label for="inventoryAddress" class="input-title" translate>Inventory Address</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocations.length <= 1 }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocation == null || sellerLocations.length <= 1 }">
         <select id="inventoryAddress"
                name="inventoryAddress"
                ng-model="data.PhysicalInventoryAddressId"
                ng-options="(location | address:'oneLineSelect') for location in sellerLocations"
-               ng-disabled="sellerLocations.length <= 1"
+               ng-disabled="sellerLocation == null || sellerLocations.length <= 1"
                required>
           <option value="" translate>Make Selection</option>
         </select>

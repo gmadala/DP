@@ -107,7 +107,7 @@
             <div class="" ng-switch-when="bb">
               <label for="make" translate>Make</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.make.$error.required }">
                 <select id="make" name="make"
                         ng-model="manualLookup.blackbook.makes.selected"
@@ -124,7 +124,7 @@
 
               <label for="model" translate>Model</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.model.$error.required, disabled: !manualLookup.blackbook.makes.selected }">
                 <select id="model" name="model"
                         ng-model="manualLookup.blackbook.models.selected"
@@ -142,7 +142,7 @@
 
               <label for="year" translate>Year</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.year.$error.required, disabled: !manualLookup.blackbook.models.selected }">
                 <select id="year" name="year"
                         ng-model="manualLookup.blackbook.years.selected"
@@ -160,7 +160,7 @@
 
               <label for="style" translate>Style</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.blackbook.validity.style.$error.required, disabled: !manualLookup.blackbook.years.selected }">
                 <select id="style" name="style"
                         ng-model="manualLookup.blackbook.styles.selected"
@@ -205,7 +205,7 @@
             <div class="" ng-switch-when="mmr">
               <label for="mmrYear" translate>Year</label>
 
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrYear.$error.required }">
+              <div class="style-select small" ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrYear.$error.required }">
                 <select id="mmrYear" name="mmrYear"
                         ng-model="manualLookup.mmr.years.selected"
                         ng-change="manualLookup.mmr.makes.fill()"
@@ -221,7 +221,7 @@
 
               <label for="mmrMake" translate>Make</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrMake.$error.required, disabled: !manualLookup.mmr.years.selected }">
                 <select id="mmrMake" name="mmrMake"
                         ng-model="manualLookup.mmr.makes.selected"
@@ -239,7 +239,7 @@
 
               <label for="mmrModel" translate>Model</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrModel.$error.required, disabled: !manualLookup.mmr.makes.selected }">
                 <select id="mmrModel" name="mmrModel"
                         ng-model="manualLookup.mmr.models.selected"
@@ -257,7 +257,7 @@
 
               <label for="mmrStyle" translate>Style</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.mmr.validity.mmrStyle.$error.required, disabled: !manualLookup.mmr.models.selected }">
                 <select id="mmrStyle" name="mmrStyle"
                         ng-model="manualLookup.mmr.styles.selected"
@@ -302,7 +302,7 @@
             <div class="" ng-switch-when="kbb">
               <label for="kbbYear" translate>Year</label>
 
-              <div class="style-select" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbYear.$error.required }">
+              <div class="style-select small" ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbYear.$error.required }">
                 <select id="kbbYear" name="kbbYear"
                         ng-model="manualLookup.kbb.years.selected"
                         ng-change="manualLookup.kbb.makes.fill()"
@@ -318,7 +318,7 @@
 
               <label for="kbbMake" translate>Make</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid' : manualLookup.kbb.validity.kbbMake.$error.required, disabled: !manualLookup.kbb.years.selected }">
                 <select id="kbbMake" name="kbbMake"
                         ng-model="manualLookup.kbb.makes.selected"
@@ -336,7 +336,7 @@
 
               <label for="kbbModel" translate>Model</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbModel.$error.required, disabled: !manualLookup.kbb.makes.selected }">
                 <select id="kbbModel" name="kbbModel"
                         ng-model="manualLookup.kbb.models.selected"
@@ -354,7 +354,7 @@
 
               <label for="kbbStyle" translate>Style</label>
 
-              <div class="style-select"
+              <div class="style-select small"
                    ng-class="{ 'nxg-invalid': manualLookup.kbb.validity.kbbStyle.$error.required, disabled: !manualLookup.kbb.models.selected }">
                 <select id="kbbStyle" name="kbbStyle"
                         ng-model="manualLookup.kbb.styles.selected"
