@@ -18,7 +18,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         'AccountName': 'JP Morgan Chase Bank - 7905',
         'BankName': 'JP Morgan Chase Bank',
         'IsActive': true,
-        'RoutingtNumber': '349886738',
+        'RoutingNumber': '349886738',
         'City': 'Phoenix',
         'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
         'IsDefaultPayment': true,
