@@ -512,7 +512,7 @@ module.exports = function(grunt) {
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
       ie: {
-        command: 'start iexplore.exe -extoff -framemerging "http://localhost:<%= connect.options.port %>'
+        command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update'
