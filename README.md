@@ -105,6 +105,12 @@ re-run `npm install`.
   Run `grunt githooks` to configure some pre-commit hooks that will check for common errors before commiting code.
   Currently, unit tests, JSHint, and JSCS will be run with the pre-commit hook.
   
+#### Before running grunt tasks:
+#### 12. Disable CORS on IE 'local intranet' to enable apiBase option
+
+Go into IE > settings > Security tab > Local Intranet. Set the security level to Low. Then go to custom settings and
+under 'Miscellaneous' (about 3/4 down the list of options) set 'Access data sources across domains' to Enabled.
+  
 #### To run see grunt tasks below
 
 #About this README
