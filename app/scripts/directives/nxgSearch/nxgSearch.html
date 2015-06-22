@@ -22,53 +22,66 @@
         </div>
       </div>
 
+      <div class="col-xs-7 small-left-border">
+        <div ng-class="{row:dateRangeShown}">
+          <div class="col-xs-5" ng-show="filterable">
+            <label for="filterSelect">{{ filterLabel }}</label>
 
-      <div class="col-xs-3" ng-show="filterable">
-        <label for="filterSelect">{{ filterLabel }}</label>
-
-        <div class="style-select auto">
-          <select id="filterSelect" name="filterSelect"
-                  ng-change="search()"
-                  ng-model="activeCriteria.filter"
-                  ng-options="o.value as o.label for o in filterOptions"></select>
-        </div>
-
-        <div ng-show="showInventoryLocation && inventoryLocations.length > 2">
-          <label for="invLocSelect" translate>Filter by Inventory Location</label>
-
-          <div class="style-select input-large">
-            <select id="invLocSelect" name="invLocSelect"
-                    ng-change="search()"
-                    ng-model="activeCriteria.inventoryLocation"
-                    ng-options="i.value as i.label for i in inventoryLocations"></select>
+            <div class="style-select auto">
+              <select id="filterSelect" name="filterSelect"
+                      ng-change="search()"
+                      ng-model="activeCriteria.filter"
+                      ng-options="o.value as o.label for o in filterOptions"></select>
+            </div>
           </div>
-          <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
-
-          <p class="tip info" ng-show="info">{{ info }}</p>
-        </div>
-      </div>
-
-      <div class="col-xs-4" ng-show="dateRangeShown">
-        <div class="range">
-          <div class="range-start">
-            <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
-            <input type="text" id="startDate" name="startDate"
-                   ng-model="activeCriteria.startDate"
-                   nxg-date-field
-                   ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
-          </div>
-          <div class="range-end">
-            <label for="endDate" translate>End Date</label>
-            <input type="text" id="endDate" name="endDate"
-                   ng-model="activeCriteria.endDate"
-                   nxg-date-field
-                   ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+          <div class="col-xs-7" ng-show="dateRangeShown">
+            <div class="range">
+              <div class="range-start">
+                <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
+                <input type="text" id="startDate" name="startDate"
+                       ng-model="activeCriteria.startDate"
+                       nxg-date-field
+                       ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+              </div>
+              <div class="range-end">
+                <label for="endDate" translate>End Date</label>
+                <input type="text" id="endDate" name="endDate"
+                       ng-model="activeCriteria.endDate"
+                       nxg-date-field
+                       ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
+              </div>
+            </div>
+            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>Invalid date
+              range</label>
           </div>
         </div>
-        <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>Invalid date
-          range</label>
+        <div ng-class="{row:dateRangeShown}">
+          <div class="col-xs-5" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
+
+            <label for="invLocSelect" translate>Filter by Inventory Location</label>
+
+            <div class="style-select input-large">
+              <select id="invLocSelect" name="invLocSelect"
+                      ng-change="search()"
+                      ng-model="activeCriteria.inventoryLocation"
+                      ng-options="i.value as i.label for i in inventoryLocations"></select>
+            </div>
+          </div>
+          <div class="col-xs-5" ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
+            <label for="invLocSelect" translate>Filter by Inventory Location</label>
+
+            <div class="style-select input-large">
+              <select id="invLocSelect" name="invLocSelect"
+                      ng-change="search()"
+                      ng-model="activeCriteria.inventoryLocation"
+                      ng-options="i.value as i.label for i in inventoryLocations"></select>
+            </div>
+            <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
+
+            <p class="tip info" ng-show="info">{{ info }}</p>
+          </div>
+        </div>
       </div>
     </div>
-
   </form>
 </div>
