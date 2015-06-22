@@ -26,6 +26,9 @@
 @import "common/tooltips";
 @import "common/sortable";
 
+// Individual directive styles.
+@import "directives/nxgSearch";
+
 // Individual page styles.
 @import "pages/login";
 @import "pages/unsupported";
