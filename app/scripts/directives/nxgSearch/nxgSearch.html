@@ -76,11 +76,11 @@
                       ng-model="activeCriteria.inventoryLocation"
                       ng-options="i.value as i.label for i in inventoryLocations"></select>
             </div>
-            <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
-
-            <p class="tip info" ng-show="info">{{ info }}</p>
           </div>
         </div>
+        <p class="tip form-tip" ng-show="showHelpText">* {{ helpText }}</p>
+
+        <p class="tip info" ng-show="info">{{ info }}</p>
       </div>
     </div>
   </form>
