@@ -27,6 +27,7 @@
     button {
       margin: 0 auto;
     }
+
   }
 
   .separated { // On the checkout pages we use thicker borders to separate items.
@@ -70,6 +71,10 @@
           border-top: 1px solid $border;
         }
       }
+    }
+
+    .medium-left-margin {
+      margin-left: 20%;
     }
   }
 
