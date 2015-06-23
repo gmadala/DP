@@ -37,7 +37,7 @@ frisby.login()
       .toss();
 
     frisby.create('Financial Account: Update one financial account')
-      .put('/dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1',
+      .put('/dealer/bankAccount',
       {
         AccountId: '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
         AccountName: 'JP Morgan Chase Bank - 7905',
