@@ -167,6 +167,10 @@ p.no-results {
     min-height: 270px;
   }
 
+  .counter-list {
+    padding: 0 6%;
+  }
+
   .cta-full {
     position: absolute;
     bottom: 0;
@@ -183,7 +187,7 @@ p.no-results {
   height: 270px;
 
   .counter-list {
-    padding: 0 10px;
+    padding: 0 6%;
   }
 
   .cta-full {
@@ -191,6 +195,7 @@ p.no-results {
     bottom: 0;
   }
 }
+
 
 .settings-well {
   padding-bottom: 20px;
