@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
 
     var SEGMENT_KEY_UAT = 'bw2QaHkMIcEiOyWB05un7LxoDPHjLigp';
     var SEGMENT_KEY_DEMO = 'u6uZuH8MgCfZEV7wBBgVheRBL67bWZkQ';
-    var SEGMENT_KEY_TEST = 'sb06a2jbvj';
+    var SEGMENT_KEY_TEST = 'tkJXmFd2GlRCEvU96xJXWPvh2LCFgVdx';
     var SEGMENT_KEY_TRAINING = '2uofWGF1e5Bkd18gE2B7LahCnGV8PQaX';
     var SEGMENT_KEY_PRODUCTION = '9eaffv4cbe';
 
