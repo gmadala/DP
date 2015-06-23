@@ -6,7 +6,7 @@ var base = frisby.apiBase;
 frisby.login()
   .after(function () {
     frisby.create('Financial Account: Get financial accounts')
-      .get(base + 'useraccount/v1_1/summary')
+      .get(base + '/dealer/v1_1/summary')
       .expectJSONTypes('Data.BankAccounts.*', {
         AchAbaNumber: String,
         AchAccountNumberLast4: String,
@@ -20,8 +20,8 @@ frisby.login()
       .toss();
 
     frisby.create('Financial Account: Get one financial account')
-      .get(base + '/dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1')
-      .expectJSONTypes({
+      .get(base + 'dealer/bankAccount/4ed7e947-db20-43e1-a36e-b2dbb79c3ce5')
+      .expectJSONTypes('Data', {
         AccountId: String,
         AccountName: String,
         BankName: String,
@@ -37,9 +37,9 @@ frisby.login()
       .toss();
 
     frisby.create('Financial Account: Update one financial account')
-      .put('/dealer/bankAccount',
+      .put(base + 'dealer/bankAccount',
       {
-        AccountId: '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
+        AccountId: '4ed7e947-db20-43e1-a36e-b2dbb79c3ce5',
         AccountName: 'JP Morgan Chase Bank - 7905',
         BankName: 'JP Morgan Chase Bank',
         IsActive: true,
@@ -50,18 +50,6 @@ frisby.login()
         IsDefaultDisbursement: true,
         AccountNumber: '4199137905'
       }, {json: true})
-      .expectJSONTypes('Data', {
-        AccountId: String,
-        AccountName: String,
-        BankName: String,
-        IsActive: Boolean,
-        RoutingNumber: String,
-        City: String,
-        State: String,
-        IsDefaultPayment: Boolean,
-        IsDefaultDisbursement: Boolean,
-        AccountNumber: String
-      })
       .expectSuccess()
       .toss();
   })

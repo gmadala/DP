@@ -25,8 +25,9 @@
           $scope.account.AccountNumber = $scope.accountNumberDisplay;
           $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
         }
-        AccountManagement.updateBankAccount($scope.account).then(function (updatedBankAccount) {
-          dialog.close(updatedBankAccount);
+
+        AccountManagement.updateBankAccount($scope.account).then(function () {
+          dialog.close($scope.account);
         });
       }
     }

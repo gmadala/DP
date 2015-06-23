@@ -70,6 +70,22 @@ angular.module('nextgearWebApp')
       getData = AccountManagement.get();
     }
 
+    $scope.updateDisbursementAccount = function(disbursementAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.disbursementAccount = disbursementAccountId;
+      }
+    };
+
+    $scope.updateBillingAccount = function(billingAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.billingAccount = billingAccountId;
+      }
+    };
+
     getData.then(function(results) {
         $scope.loading = true;
 

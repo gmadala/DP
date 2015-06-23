@@ -17,7 +17,9 @@
       scope: {
         account: '=',
         defaultDisbursementBankAccountId: '=disbursementAccount',
-        defaultBillingBankAccountId: '=billingAccount'
+        defaultBillingBankAccountId: '=billingAccount',
+        updateBillingAccount: '&',
+        updateDisbursementAccount: '&'
       },
       restrict: 'E'
     };
@@ -94,20 +96,36 @@
 
         $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
           if (updatedAccount) {
-            scope.defaultForBilling = updatedAccount.IsDefaultPayment;
-            scope.defaultForDisbursement = updatedAccount.IsDefaultDisbursement;
-            scope.AchBankName = updatedAccount.BankName;
+            if (updatedAccount.IsDefaultPayment) {
+              scope.updateBillingAccount({billingAccountId: updatedAccount.AccountId});
+            }
+            if (updatedAccount.IsDefaultDisbursement) {
+              scope.updateDisbursementAccount({disbursementAccountId: updatedAccount.AccountId});
+            }
+            scope.account.AchBankName = updatedAccount.BankName;
             scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
 
-            var description = updatedAccount.BankAccountName;
+            var description = updatedAccount.AccountName;
             var partialAccountNumber = scope.account.AchAccountNumberLast4.toString();
-            if (updatedAccount.BankAccountName.indexOf(partialAccountNumber) === -1) {
-              description = updatedAccount.BankAccountName + ' - ' + scope.account.AchAccountNumberLast4;
+            if (updatedAccount.AccountName.indexOf(partialAccountNumber) === -1) {
+              description = updatedAccount.AccountName + ' - ' + scope.account.AchAccountNumberLast4;
             }
             scope.descriptiveName = description;
           }
         });
       }
+
+      scope.$watch('defaultBillingBankAccountId', function(newVal, oldVal) {
+        if (newVal !== oldVal) {
+          scope.defaultForBilling = isDefaultForBilling();
+        }
+      });
+
+      scope.$watch('defaultDisbursementBankAccountId', function(newVal, oldVal) {
+        if (newVal !== oldVal) {
+          scope.defaultForDisbursement = isDefaultForDisbursement();
+        }
+      });
     }
   }
 

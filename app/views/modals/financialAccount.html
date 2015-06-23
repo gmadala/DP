@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
-               ng-required="true" ng-model="account.IsActive"/>
+               ng-model="account.IsActive"/>
         <label class="checkbox-img" for="financialAccountActive"></label>
         <label class="cr-label" for="financialAccountActive">
           <strong translate>Active</strong>
@@ -87,7 +87,7 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
-               ng-model="defaultForDisbursement"/>
+               ng-model="account.IsDefaultDisbursement"/>
         <label class="checkbox-img" for="defaultForDisbursement"></label>
         <label class="cr-label" for="defaultForDisbursement">
           <strong translate>Default for disbursement</strong>
@@ -97,7 +97,7 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
-               ng-model="defaultForBilling"/>
+               ng-model="account.IsDefaultPayment"/>
         <label class="checkbox-img" for="defaultForPayment"></label>
         <label class="cr-label" for="defaultForPayment">
           <strong translate>Default for payment</strong>

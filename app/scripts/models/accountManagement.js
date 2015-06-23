@@ -8,7 +8,6 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/userAccount/v1_1/settings').then(function(settings) {
           return settings;
         });
-
       },
       getBankAccount: function(accountId) {
         if (!accountId) {
