@@ -51,7 +51,7 @@ describe('Model: AccountManagement', function() {
       }
     };
     httpBackend.whenGET('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
-    httpBackend.whenPUT('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
+    httpBackend.whenPUT('/Dealer/bankAccount/').respond(bankAccountData);
 
     httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,

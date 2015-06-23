@@ -13,7 +13,7 @@
 
     var accountNumber = $scope.account.AccountNumber;
     $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber.substr(accountNumber.length - 4) : '';
-    $scope.routingNumberDisplay = $scope.account.RoutingtNumber;
+    $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
@@ -25,8 +25,9 @@
           $scope.account.AccountNumber = $scope.accountNumberDisplay;
           $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
         }
-        AccountManagement.updateBankAccount($scope.account).then(function (updatedBankAccount) {
-          dialog.close(updatedBankAccount);
+
+        AccountManagement.updateBankAccount($scope.account).then(function () {
+          dialog.close($scope.account);
         });
       }
     }

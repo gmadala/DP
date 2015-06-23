@@ -23,6 +23,7 @@ angular.module('nextgearWebApp')
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
     $scope.autoPayEnabled = features.autoPay.enabled;
+    $scope.addBankAccountEnabled = features.addBankAccount.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -68,6 +69,22 @@ angular.module('nextgearWebApp')
     } else {
       getData = AccountManagement.get();
     }
+
+    $scope.updateDisbursementAccount = function(disbursementAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.disbursementAccount = disbursementAccountId;
+      }
+    };
+
+    $scope.updateBillingAccount = function(billingAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.billingAccount = billingAccountId;
+      }
+    };
 
     getData.then(function(results) {
         $scope.loading = true;

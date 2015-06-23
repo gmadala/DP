@@ -2,29 +2,21 @@
   <section class="col-md-12 well settings-well financial-table">
     <h2 class="well-title no-bottom-border">
       <span translate>Financial Accounts</span>
-      <div class="well-subtitle well-subtitle-edit pull-right">
+      <div class="well-subtitle well-subtitle-edit pull-right" ng-show="addBankAccountEnabled">
         <button class="btn-unstyle heavy" ng-click="financial.addFinancialAccount()" translate>Add Account</button>
       </div>
-      <!--<span class="glyphicon glyphicon-plus"></span>-->
-
-      <!--<div class="well-sub-title well-sub-title-edit">-->
-        <!--<button ng-hide="banks.editable" class="btn-unstyle" ng-click="banks.edit()" translate>Add Payment Account-->
-        <!--</button>-->
-        <!--<button ng-show="banks.editable" class="btn-unstyle" ng-click="banks.save()" translate>Save Payment Account-->
-        <!--</button>-->
-        <!--<button ng-show="banks.editable" class="btn-unstyle cancel" ng-click="banks.cancel()" translate>Cancel</button>-->
-      <!--</div>-->
     </h2>
     <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true" class="">
       <nxg-financial-account account="account" disbursement-account="financial.data.disbursementAccount"
-                             billing-account="financial.data.billingAccount">
+                             billing-account="financial.data.billingAccount"
+                             update-billing-account="updateBillingAccount(billingAccountId)"
+                             update-disbursement-account="updateDisbursementAccount(disbursementAccountId)">
       </nxg-financial-account>
     </div>
   </section>
 </div>
 
 <div class="row">
-
   <!-- BUSINESS SETTINGS -->
   <section class="col-xs-6 well settings-well" novalidate>
     <h2 class="well-title">
@@ -40,7 +32,6 @@
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row">
           <label class="col-md-5" for="businessEmail"><span translate>Business Email</span>:</label>
-          <!--From develop: <label class="span5" for="businessEmail"><span translate>Business Email</span>:</label>-->
           <div class="col-md-7" nxg-input model="business.data.email" editable="business.editable">
             <input type="email" class="xsmallInput" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email"
                    value="business.dirtyData.email" ng-maxlength="100"
@@ -145,14 +136,6 @@
                 </div>
               </div>
               <div class="col-md-2">
-                <!--<button class="btn-help btn-help-adjust"
-                        tooltip-placement="left"
-                        tooltip-trigger="focus"
-                        tooltip-html="true"
-                        tooltip-html-unsafe="{{ 'Lorem ipsum lorem lorem be asked to set up their PIN when logging in to MyNextGear.' }}"
-                        tooltip-animation="true">
-                  <span nxg-icon="icon-help"></span>
-                </button>-->
               </div>
             </div>
           </div>
