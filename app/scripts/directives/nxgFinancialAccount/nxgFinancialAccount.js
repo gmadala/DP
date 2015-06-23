@@ -32,7 +32,7 @@
       scope.defaultForBilling = isDefaultForBilling();
       scope.defaultForDisbursement = isDefaultForDisbursement();
       scope.editFinancialAccount = editFinancialAccount;
-      scope.editBankAccount = features.editBankAccount.enabled;
+      scope.editBankAccountEnabled = features.editBankAccount.enabled;
 
       /**
        * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
