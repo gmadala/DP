@@ -116,9 +116,9 @@ under 'Miscellaneous' (about 3/4 down the list of options) set 'Access data sour
 #### To develop and host localhost on Mac while using Windows solely for the IE environment
 
 Go to Network Adapter on VMWareFusion, add a Network Adapter device, and select 'Share with my Mac'.
-Run local server on the mac and find the IP connection between mac and VM using ifconfig in the terminal. 
-The IP should be listed under vm#: ... inet 'ip_address'.
-Run IE on the VM and connect to 'ip_address':9000.
+On the mac terminal, run the local server using grunt and use ifconfig to find the IP connection between mac and VM
+The IP address should be listed under vmnet#: ... inet 'ip_address'.
+Run IE on the VM and connect to "http://ip_address:9000".
 
 #About this README
 -----------------------
