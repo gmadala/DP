@@ -2,14 +2,18 @@
  * Base64 encoder/decoder service. Based on the implementation of
  * webtoolkits (http://www.webtoolkit.info/javascript-base64.html).
  */
+'use strict';
 
 angular.module('nextgearWebApp')
   .factory('Base64', function () {
-    var _keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
+    /*jshint camelcase: false */
+    /*jslint bitwise: true */
+
+    var _keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
     var _utf8_encode = function (string) {
-      string = string.replace(/\r\n/g, "\n");
-      var utftext = "";
+      string = string.replace(/\r\n/g, '\n');
+      var utftext = '';
 
       for (var n = 0; n < string.length; n++) {
         var c = string.charCodeAt(n);
@@ -32,9 +36,10 @@ angular.module('nextgearWebApp')
 
     // private method for UTF-8 decoding
     var _utf8_decode = function (utftext) {
-      var string = "";
+      var string = '';
       var i = 0;
-      var c = c1 = c2 = 0;
+      var c, c2, c3;
+      c = c2 = 0;
 
       while (i < utftext.length) {
         c = utftext.charCodeAt(i);
@@ -60,7 +65,7 @@ angular.module('nextgearWebApp')
 
     return {
       encode: function (input) {
-        var output = "";
+        var output = '';
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
 
@@ -90,12 +95,12 @@ angular.module('nextgearWebApp')
       },
 
       decode: function (input) {
-        var output = "";
+        var output = '';
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
         var i = 0;
 
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
 
         while (i < input.length) {
           enc1 = _keyStr.indexOf(input.charAt(i++));
@@ -109,10 +114,10 @@ angular.module('nextgearWebApp')
 
           output = output + String.fromCharCode(chr1);
 
-          if (enc3 != 64) {
+          if (enc3 !== 64) {
             output = output + String.fromCharCode(chr2);
           }
-          if (enc4 != 64) {
+          if (enc4 !== 64) {
             output = output + String.fromCharCode(chr3);
           }
         }
