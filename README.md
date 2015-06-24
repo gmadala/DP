@@ -7,13 +7,20 @@ about Nextgear Capital [visit their website](http://www.nextgearcapital.com/abou
 read about Floor Plan Loans [here](http://en.wikipedia.org/wiki/Retail_floorplan) and 
 [here](http://www.sba.gov/content/what-floor-plan-financing).
 
+Tools
+-----------------------
+
+bower = similar to linux "apt-get" for managing JS libraries
+npm = similar to linux "apt-get" for node (node package manager)
+brew = similar to linux "apt-get" for Mac
+
 Development Quick Start
 -----------------------
 1. make sure you have ruby, git and node.js installed (there are various ways to get these; on a Mac, you likely
 already have Ruby and can use Homebrew to get the others. Install via instructions at http://brew.sh/ and
 then run `brew install node` and/or `brew install git`)
 
-2. make sure you have compass installed (e.g. `sudo gem update --system && gem install compass`)
+2. make sure you have compass installed (e.g. `sudo gem update --system && sudo gem install compass`)
 
 3. install/update the yeoman toolset: `npm install -g yo` or `npm update -g yo`
 
@@ -24,11 +31,15 @@ nonexistent ref, unable to checkout." You can ignore this as the next steps will
 
 6. `git checkout develop` (to switch to the develop branch)
 
-7. `npm install` (to install development dependencies)
+7. `npm install` (to install development dependencies and while remaining in the repository root)
 
 8. `bower install` (to install app dependencies)
 
-9. `grunt server` then point a browser to http://localhost:9000 and you should see the app running
+9. 'sudo npm install -g grunt'
+
+10. 'sudo npm install -g grunt-cli'
+
+11. `grunt server` then point a browser to http://localhost:9000 and you should see the app running
 (use ?mock in the URL to get mock services)
 
 #Project Setup: Windows
