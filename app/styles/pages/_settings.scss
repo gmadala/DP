@@ -32,15 +32,10 @@
       margin-bottom: 2px;
     }
     .icon-vertical-center {
-      margin-top: 7.5px;
+      margin-top: 14px;
     }
     .icon-padding-right {
       padding-right: 25px;
-    }
-    .faded {
-      color: #555555;
-      font-size: 90%;
-      font-style: italic;
     }
     .no-bottom-border {
       border-bottom: 0;
@@ -50,8 +45,11 @@
     }
   }
 }
+.small-padding {
+  padding: 7px;
+}
 .no-left-padding {
-  padding-left:  0;
+  padding:  0;
 }
 .no-right-padding {
   padding-right: 0;
