@@ -79,7 +79,8 @@ frisby.login = function (langId) {
         request: {
           headers: {
             'Authorization': 'CT ' + token
-          }
+          },
+          timeout: 10 * 1000
         }
       });
     });
