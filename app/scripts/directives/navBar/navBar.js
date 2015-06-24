@@ -11,6 +11,8 @@ angular.module('nextgearWebApp')
 
   .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore, language) {
 
+    $scope.isCollapsed = true;
+
     var dealerLinks = {
         primary: [
           { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK},

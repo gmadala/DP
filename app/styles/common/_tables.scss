@@ -27,6 +27,7 @@
     button {
       margin: 0 auto;
     }
+
   }
 
   .separated { // On the checkout pages we use thicker borders to separate items.
@@ -42,7 +43,6 @@
     height: 75px;
     text-align: left;
     vertical-align: top;
-    position: relative;
     padding: 10px 15px;
     border: 1px solid $tableBorder;
 
@@ -71,6 +71,10 @@
           border-top: 1px solid $border;
         }
       }
+    }
+
+    .medium-left-margin {
+      margin-left: 20%;
     }
   }
 
