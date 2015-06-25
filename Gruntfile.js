@@ -201,6 +201,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    // Run "bless" to make sure that there aren't too many rules in our css for ie9.
+    // TODO: Update the package.json to use bless 0.3.0 once it is released (0.2.0 does not have a "failOnLimit" option)
+    bless: {
+      css: {
+        options: {
+          logCount: true,
+          failOnLimit: true
+        },
+        src: ['<%= yeoman.app %>/styles/main.css']
+      }
+    },
     // grunt-usemin has a bug regarding build:remove blocks, so
     // processhtml is just used to remove that block. Changing
     // the commentMarker to tell them apart
@@ -674,6 +685,7 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'useminPrepare',
     'compass:dist',
+    'bless',
     'concat',
     'preprocess:dist',
     'copy:dist',
