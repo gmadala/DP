@@ -185,7 +185,8 @@ module.exports = function(grunt) {
         options: {
           sassDir: '<%= yeoman.app %>/styles',
           cssDir: '<%= yeoman.app %>/styles',
-          force: true
+          force: true,
+          environment: 'production'
         }
       },
       maintenance: {
