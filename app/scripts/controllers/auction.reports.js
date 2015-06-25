@@ -15,10 +15,6 @@ angular.module('nextgearWebApp')
       {
         'title': gettextCatalog.getString('Credit Availability Query History (PDF)'),
         'url': api.contentLink('/report/creditavailabilityqueryhistory/CreditAvailability', {})
-      },
-      {
-        'title': gettextCatalog.getString('Receivable Detail (PDF)'),
-        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
 
