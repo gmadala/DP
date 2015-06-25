@@ -13,6 +13,7 @@ angular.module('nextgearWebApp')
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
+        /*jshint camelcase: false */
         attrs.$observe('tooltip', function (newValue) {
           if (!newValue && scope.tt_isOpen) {
             // the content became empty with the tooltip showing; forcibly hide it
