@@ -120,7 +120,7 @@ module.exports = function(grunt) {
             src: [
               '.tmp',
               '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main.css',
+              '<%= yeoman.app %>/styles/main*.css',
               '!<%= yeoman.dist %>/.git*'
             ]
           }
@@ -185,8 +185,7 @@ module.exports = function(grunt) {
         options: {
           sassDir: '<%= yeoman.app %>/styles',
           cssDir: '<%= yeoman.app %>/styles',
-          force: true,
-          environment: 'production'
+          force: true
         }
       },
       maintenance: {
@@ -202,13 +201,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    csssplit: {
-      your_target: {
-        src: ['<%= yeoman.app %>/styles/main.css'],
-        dest: '<%= yeoman.app %>/styles/page.css',
+    // Run "bless" to make sure that there aren't too many rules in our css for ie9.
+    // TODO: Update the package.json to use bless 0.3.0 once it is released (0.2.0 does not have a "failOnLimit" option)
+    bless: {
+      css: {
         options: {
-          maxSelecters: 4095,
-          suffix: '_'
+          logCount: true,
+          // overwrite original file
+          force: true,
+          imports: false
+        },
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.css'
         }
       }
     },
@@ -385,7 +389,7 @@ module.exports = function(grunt) {
             dot: true,
             flatten: true,
             dest: 'maintenance/styles/',
-            src: '<%= yeoman.app %>/styles/main.css'
+            src: '<%= yeoman.app %>/styles/main*.css'
           }
         ]
       },
@@ -685,7 +689,7 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'useminPrepare',
     'compass:dist',
-    'csssplit',
+    'bless',
     'concat',
     'preprocess:dist',
     'copy:dist',
