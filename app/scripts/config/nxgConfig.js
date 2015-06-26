@@ -55,8 +55,8 @@ angular.module('nextgearWebApp')
             break;
           case prv.profile.LOCAL_TEST:
             config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
-            config.apiBase = 'http://minint-9p4bnm0/MobileService4/api';
-            config.apiDomain = 'http://minint-9p4bnm0';
+            config.apiBase = 'https://test.nextgearcapital.com/MobileService/api';
+            config.apiDomain = 'https://test.nextgearcapital.com';
             break;
           case prv.profile.UAT:
             config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
