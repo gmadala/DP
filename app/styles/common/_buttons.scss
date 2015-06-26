@@ -441,8 +441,8 @@
 
 
 // IE9-SPECIFIC
-// Because IE9 forces a particular text color on disabled buttons.
 .ie9 {
+  // Because IE9 forces a particular text color on disabled buttons.
   .btn:disabled,
   .btn.disabled,
   .btn-primary:disabled,
@@ -454,3 +454,9 @@
   }
 }
 
+.ie {
+  // Because IE forces a dashed outline after clicking a button
+  a:active, a:focus {
+    outline: none;
+  }
+}
