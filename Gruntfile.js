@@ -202,15 +202,14 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Run "bless" to make sure that there aren't too many rules in our css for ie9.
-    // TODO: Update the package.json to use bless 0.3.0 once it is released (0.2.0 does not have a "failOnLimit" option)
-    bless: {
-      css: {
+    csssplit: {
+      your_target: {
+        src: ['<%= yeoman.app %>/styles/main.css'],
+        dest: '<%= yeoman.app %>/styles/page.css',
         options: {
-          logCount: true,
-          failOnLimit: true
-        },
-        src: ['<%= yeoman.app %>/styles/main.css']
+          maxSelecters: 4095,
+          suffix: '_'
+        }
       }
     },
     // grunt-usemin has a bug regarding build:remove blocks, so
@@ -686,7 +685,7 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'useminPrepare',
     'compass:dist',
-    'bless',
+    'csssplit',
     'concat',
     'preprocess:dist',
     'copy:dist',
