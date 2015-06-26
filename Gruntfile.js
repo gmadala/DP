@@ -120,7 +120,7 @@ module.exports = function(grunt) {
             src: [
               '.tmp',
               '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main.css',
+              '<%= yeoman.app %>/styles/main*.css',
               '!<%= yeoman.dist %>/.git*'
             ]
           }
@@ -207,9 +207,13 @@ module.exports = function(grunt) {
       css: {
         options: {
           logCount: true,
-          failOnLimit: true
+          // overwrite original file
+          force: true,
+          imports: false
         },
-        src: ['<%= yeoman.app %>/styles/main.css']
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.css'
+        }
       }
     },
     // grunt-usemin has a bug regarding build:remove blocks, so
@@ -385,7 +389,7 @@ module.exports = function(grunt) {
             dot: true,
             flatten: true,
             dest: 'maintenance/styles/',
-            src: '<%= yeoman.app %>/styles/main.css'
+            src: '<%= yeoman.app %>/styles/main*.css'
           }
         ]
       },
