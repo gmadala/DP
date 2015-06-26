@@ -1,8 +1,6 @@
-<!--[if IE ]><![endif]-->
 <!doctype html>
-<!--[if lt IE 9]>      <html class="lt-ie9"> <![endif]-->
-<!--[if IE 9]>         <html class="ie9"> <![endif]-->
-<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+
+<html>
   <head>
     <title>NextGear Capital</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,16 +23,21 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <!-- build:css styles/ie9.css -->
-    <!--[if lt IE 10]>
-    <link rel="stylesheet" href="styles/browsers/ie9.css">
+    <!--[if IE]>
+    <script>
+      document.getElementsByTagName("html")[0].className += " ie";
+    </script>
     <![endif]-->
-    <!-- endbuild -->
+    <!--[if lt IE 10]>
+    <script>
+      document.getElementsByTagName("html")[0].className += " ie9";
+    </script>
+    <![endif]-->
 
     <!--[if lt IE 9]>
-      <script>
-        window.location.replace('unsupported.html');
-      </script>
+    <script>
+      window.location.replace('unsupported.html');
+    </script>
     <![endif]-->
   </head>
   <body>
