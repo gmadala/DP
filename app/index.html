@@ -3,294 +3,284 @@
 <!--[if lt IE 9]>      <html class="lt-ie9"> <![endif]-->
 <!--[if IE 9]>         <html class="ie9"> <![endif]-->
 <!--[if gt IE 9]><!--> <html> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>NextGear Capital</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=1020">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <!-- build:css styles/libraries.css -->
-    <link rel="stylesheet" href="components/bootstrap-datepicker/css/datepicker.css">
-    <link rel="stylesheet" href="components/fullcalendar/fullcalendar.css">
-    <!-- endbuild -->
-    <!-- build:css styles/main1.css -->
-    <link rel="stylesheet" href="styles/page_1.css">
-    <!-- endbuild -->
-    <!-- build:css styles/main2.css -->
-    <link rel="stylesheet" href="styles/page_2.css">
-    <!-- endbuild -->
-    <!--
-    <link rel="stylesheet" href="styles/provider.css">
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/directives.css">
-    <link rel="stylesheet" href="styles/page.css">
-    <link rel="stylesheet" href="styles/lang.css">
-    <link rel="stylesheet" href="styles/temp.css">
-     -->
-    <!-- build:css styles/ie9.css -->
-    <!--[if lt IE 10]>
-    <link rel="stylesheet" href="styles/browsers/ie9.css">
-    <![endif]-->
-    <!-- endbuild -->
-    <!--[if lt IE 9]>
-      <script>
-        window.location.replace('unsupported.html');
-      </script>
-    <![endif]-->
-  </head>
-  <body>
-    <!-- htmlmin:ignore -->
-      <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
-        This will pull in the content of our svg file for use across the app.
-      <!-- /processhtml -->
-    <!-- htmlmin:ignore -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>NextGear Capital</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=1020">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <!-- build:css styles/main2.css -->
+  <link rel="stylesheet" href="styles/main-blessed1.css">
+  <!-- endbuild -->
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="components/bootstrap-datepicker/css/datepicker.css">
+  <link rel="stylesheet" href="components/fullcalendar/fullcalendar.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <!-- build:css styles/ie9.css -->
+  <!--[if lt IE 10]>
+  <link rel="stylesheet" href="styles/browsers/ie9.css">
+  <![endif]-->
+  <!-- endbuild -->
+  <!--[if lt IE 9]>
+  <script>
+    window.location.replace('unsupported.html');
+  </script>
+  <![endif]-->
+</head>
+<body>
+<!-- htmlmin:ignore -->
+<!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
+This will pull in the content of our svg file for use across the app.
+<!-- /processhtml -->
+<!-- htmlmin:ignore -->
 
-    <div class="nxg-main-container" nxg-messages>
-      <div nav-bar></div>
-      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
-        <div ui-view id="{{ navState.current.pageID }}Page"></div>
-      </div>
-      <div nxg-activity></div>
-    </div>
+<div class="nxg-main-container" nxg-messages>
+  <div nav-bar></div>
+  <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
+    <div ui-view id="{{ navState.current.pageID }}Page"></div>
+  </div>
+  <div nxg-activity></div>
+</div>
 
-    <footer class="row row-footer">
-      <ul class="horizontal-list">
-        <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-        <li><nxg-privacy-statement></nxg-privacy-statement></li>
-        <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
-        <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
-        <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
-        <!-- @if ENV != 'production' !></li><!-- @endif -->
-      </ul>
-    </footer>
+<footer class="row row-footer">
+  <ul class="horizontal-list">
+    <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
+    <li><nxg-privacy-statement></nxg-privacy-statement></li>
+    <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
+    <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
+    <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
+    <!-- @if ENV != 'production' !></li><!-- @endif -->
+  </ul>
+</footer>
 
-    <!-- Bypass to Clicky's eventqueue cookie issue  -->
-    <script type="text/javascript">
-        var clicky_custom = clicky_custom || {};
-        clicky_custom.queue_disable = 1;
-    </script>
-    <!-- End Bypass to Clicky's eventqueue cookie issue  -->
+<!-- Bypass to Clicky's eventqueue cookie issue  -->
+<script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.queue_disable = 1;
+</script>
+<!-- End Bypass to Clicky's eventqueue cookie issue  -->
 
-    <!-- build:js scripts/components.js -->
-    <script src="components/modernizr/modernizr.js"></script>
-    <script src="components/jquery/jquery.js"></script>
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="components/angular-ui-utils/modules/highlight/highlight.js"></script>
-    <script src="components/angular-ui-utils/modules/event/event.js"></script>
-    <script src="components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="components/lodash/lodash.js"></script>
-    <script src="components/numeral/numeral.js"></script>
-    <script src="components/moment/moment.js"></script>
-    <script src="components/moment/lang/es.js"></script>
-    <script src="components/moment/lang/fr-ca.js"></script>
-    <script src="components/angular-local-storage/angular-local-storage.js"></script>
-    <script src="components/highcharts.com/js/highcharts.src.js"></script>
-    <script src="components/angular-strap/dist/angular-strap.js"></script>
-    <!-- Modded for localization support, can remove once upgraded to fullcalendar 2.0+ -->
-    <script src="private-components/fullcalendar/fullcalendar.js"></script>
-    <script src="components/angular-ui-calendar/src/calendar.js"></script>
-    <!-- Modded version without $animate -->
-    <script src="private-components/angular-gettext/dist/angular-gettext.js"></script>
+<!-- build:js scripts/components.js -->
+<script src="components/modernizr/modernizr.js"></script>
+<script src="components/jquery/jquery.js"></script>
+<script src="components/angular/angular.js"></script>
+<script src="components/angular-cookies/angular-cookies.js"></script>
+<script src="components/angular-sanitize/angular-sanitize.js"></script>
+<script src="components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="components/angular-ui-utils/modules/highlight/highlight.js"></script>
+<script src="components/angular-ui-utils/modules/event/event.js"></script>
+<script src="components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="components/lodash/lodash.js"></script>
+<script src="components/numeral/numeral.js"></script>
+<script src="components/moment/moment.js"></script>
+<script src="components/moment/lang/es.js"></script>
+<script src="components/moment/lang/fr-ca.js"></script>
+<script src="components/angular-local-storage/angular-local-storage.js"></script>
+<script src="components/highcharts.com/js/highcharts.src.js"></script>
+<script src="components/angular-strap/dist/angular-strap.js"></script>
+<!-- Modded for localization support, can remove once upgraded to fullcalendar 2.0+ -->
+<script src="private-components/fullcalendar/fullcalendar.js"></script>
+<script src="components/angular-ui-calendar/src/calendar.js"></script>
+<!-- Modded version without $animate -->
+<script src="private-components/angular-gettext/dist/angular-gettext.js"></script>
 
-    <!-- move back to components once upgraded to 0.6.0 or later -->
-    <script src="private-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="private-components/angular-segmentio/angular-segmentio.js"></script>
-    <!-- endbuild -->
+<!-- move back to components once upgraded to 0.6.0 or later -->
+<script src="private-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="private-components/angular-segmentio/angular-segmentio.js"></script>
+<!-- endbuild -->
 
-    <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/common.js"></script>
+<!-- build:js scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/common.js"></script>
 
-    <script src="scripts/config/nxgConfig.js"></script>
+<script src="scripts/config/nxgConfig.js"></script>
 
-    <script src="scripts/services/status.js"></script>
-    <script src="scripts/services/banner.js"></script>
-    <script src="scripts/services/messages.js"></script>
-    <script src="scripts/services/api.js"></script>
-    <script src="scripts/services/apiCommon.js"></script>
-    <script src="scripts/services/base64.js"></script>
-    <script src="scripts/services/protect.js"></script>
-    <script src="scripts/services/moment.js"></script>
-    <script src="scripts/services/optionDefaultHelper.js"></script>
-    <script src="scripts/services/paginate.js"></script>
-    <script src="scripts/services/metric.js"></script>
-    <script src="scripts/services/logout.js"></script>
-    <script src="scripts/services/lastState.js"></script>
-    <script src="scripts/services/userVoice.js"></script>
-    <script src="scripts/services/floorplanUtil.js"></script>
-    <script src="scripts/services/Addresses.js"></script>
-    <script src="scripts/services/cartItem.js"></script>
-    <script src="scripts/services/paymentOptions.js"></script>
-    <script src="scripts/services/businessHours.js"></script>
-    <script src="scripts/services/signupUrls.js"></script>
-    <script src="scripts/services/language.js"></script>
-    <script src="scripts/services/features.js"></script>
+<script src="scripts/services/status.js"></script>
+<script src="scripts/services/banner.js"></script>
+<script src="scripts/services/messages.js"></script>
+<script src="scripts/services/api.js"></script>
+<script src="scripts/services/apiCommon.js"></script>
+<script src="scripts/services/base64.js"></script>
+<script src="scripts/services/protect.js"></script>
+<script src="scripts/services/moment.js"></script>
+<script src="scripts/services/optionDefaultHelper.js"></script>
+<script src="scripts/services/paginate.js"></script>
+<script src="scripts/services/metric.js"></script>
+<script src="scripts/services/logout.js"></script>
+<script src="scripts/services/lastState.js"></script>
+<script src="scripts/services/userVoice.js"></script>
+<script src="scripts/services/floorplanUtil.js"></script>
+<script src="scripts/services/Addresses.js"></script>
+<script src="scripts/services/cartItem.js"></script>
+<script src="scripts/services/paymentOptions.js"></script>
+<script src="scripts/services/businessHours.js"></script>
+<script src="scripts/services/signupUrls.js"></script>
+<script src="scripts/services/language.js"></script>
+<script src="scripts/services/features.js"></script>
 
-    <script src="scripts/filters/alt.js"></script>
-    <script src="scripts/filters/numeral.js"></script>
-    <script src="scripts/filters/moment.js"></script>
-    <script src="scripts/filters/yesno.js"></script>
-    <script src="scripts/filters/shortenVIN.js"></script>
-    <script src="scripts/filters/list.js"></script>
-    <script src="scripts/filters/capitalize.js"></script>
-    <script src="scripts/filters/address.js"></script>
+<script src="scripts/filters/alt.js"></script>
+<script src="scripts/filters/numeral.js"></script>
+<script src="scripts/filters/moment.js"></script>
+<script src="scripts/filters/yesno.js"></script>
+<script src="scripts/filters/shortenVIN.js"></script>
+<script src="scripts/filters/list.js"></script>
+<script src="scripts/filters/capitalize.js"></script>
+<script src="scripts/filters/address.js"></script>
 
-    <script src="scripts/models/businessSearch.js"></script>
-    <script src="scripts/models/floorplan.js"></script>
-    <script src="scripts/models/payments.js"></script>
-    <script src="scripts/models/receipts.js"></script>
-    <script src="scripts/models/user.js"></script>
-    <script src="scripts/models/vehicleDetails.js"></script>
-    <script src="scripts/models/blackbook.js"></script>
-    <script src="scripts/models/dashboard.js"></script>
-    <script src="scripts/models/analytics.js"></script>
-    <script src="scripts/models/dealerNameSearch.js"></script>
-    <script src="scripts/models/dealerNumberSearch.js"></script>
-    <script src="scripts/models/creditQuery.js"></script>
-    <script src="scripts/models/profileSettings.js"></script>
-    <script src="scripts/models/accountManagement.js"></script>
-    <script src="scripts/models/creditIncrease.js"></script>
-    <script src="scripts/models/titleReleases.js"></script>
-    <script src="scripts/models/mmr.js"></script>
-    <script src="scripts/models/kbb.js"></script>
+<script src="scripts/models/businessSearch.js"></script>
+<script src="scripts/models/floorplan.js"></script>
+<script src="scripts/models/payments.js"></script>
+<script src="scripts/models/receipts.js"></script>
+<script src="scripts/models/user.js"></script>
+<script src="scripts/models/vehicleDetails.js"></script>
+<script src="scripts/models/blackbook.js"></script>
+<script src="scripts/models/dashboard.js"></script>
+<script src="scripts/models/analytics.js"></script>
+<script src="scripts/models/dealerNameSearch.js"></script>
+<script src="scripts/models/dealerNumberSearch.js"></script>
+<script src="scripts/models/creditQuery.js"></script>
+<script src="scripts/models/profileSettings.js"></script>
+<script src="scripts/models/accountManagement.js"></script>
+<script src="scripts/models/creditIncrease.js"></script>
+<script src="scripts/models/titleReleases.js"></script>
+<script src="scripts/models/mmr.js"></script>
+<script src="scripts/models/kbb.js"></script>
 
-    <script src="scripts/controllers/dashboard.js"></script>
-    <script src="scripts/controllers/payments.js"></script>
-    <script src="scripts/controllers/receipts.js"></script>
-    <script src="scripts/controllers/floorplan.js"></script>
-    <script src="scripts/controllers/titleReleases.js"></script>
-    <script src="scripts/controllers/checkout.js"></script>
-    <script src="scripts/controllers/confirmCheckout.js"></script>
-    <script src="scripts/controllers/scheduleCheckout.js"></script>
-    <script src="scripts/controllers/titleReleaseCheckout.js"></script>
-    <script src="scripts/controllers/confirmTitleReleaseCheckout.js"></script>
-    <script src="scripts/controllers/analytics.js"></script>
-    <script src="scripts/controllers/documents.js"></script>
-    <script src="scripts/controllers/floorCar.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/maintenance.js"></script>
-    <script src="scripts/controllers/loginRecover.js"></script>
-    <script src="scripts/controllers/loginUpdateSecurity.js"></script>
-    <script src="scripts/controllers/reports.js"></script>
-    <script src="scripts/controllers/auctionSettings.js"></script>
-    <script src="scripts/controllers/profileSettings.js"></script>
-    <script src="scripts/controllers/accountManagement.js"></script>
-    <script src="scripts/controllers/auction.dashboard.js"></script>
-    <script src="scripts/controllers/auction.dealersearch.js"></script>
-    <script src="scripts/controllers/auction.documents.js"></script>
-    <script src="scripts/controllers/auction.home.js"></script>
-    <script src="scripts/controllers/auction.reports.js"></script>
-    <script src="scripts/controllers/loginCreatePassword.js"></script>
-    <script src="scripts/controllers/vehicledetails.js"></script>
-    <script src="scripts/controllers/valuelookup.js"></script>
-    <script src="scripts/controllers/modals/businessSearch.js"></script>
-    <script src="scripts/controllers/modals/cancelFee.js"></script>
-    <script src="scripts/controllers/modals/cancelPayment.js"></script>
-    <script src="scripts/controllers/modals/confirmLogout.js"></script>
-    <script src="scripts/controllers/modals/creditQuery.js"></script>
-    <script src="scripts/controllers/modals/dealerNameSearch.js"></script>
-    <script src="scripts/controllers/modals/feeDetails.js"></script>
-    <script src="scripts/controllers/modals/floorCarConfirm.js"></script>
-    <script src="scripts/controllers/modals/multipleVehicles.js"></script>
-    <script src="scripts/controllers/modals/paymentDetails.js"></script>
-    <script src="scripts/controllers/modals/requestCreditIncrease.js"></script>
-    <script src="scripts/controllers/modals/topAuctions.js"></script>
-    <script src="scripts/controllers/modals/paymentOptionsBreakdown.js"></script>
-    <script src="scripts/controllers/modals/financialAccount.js"></script>
+<script src="scripts/controllers/dashboard.js"></script>
+<script src="scripts/controllers/payments.js"></script>
+<script src="scripts/controllers/receipts.js"></script>
+<script src="scripts/controllers/floorplan.js"></script>
+<script src="scripts/controllers/titleReleases.js"></script>
+<script src="scripts/controllers/checkout.js"></script>
+<script src="scripts/controllers/confirmCheckout.js"></script>
+<script src="scripts/controllers/scheduleCheckout.js"></script>
+<script src="scripts/controllers/titleReleaseCheckout.js"></script>
+<script src="scripts/controllers/confirmTitleReleaseCheckout.js"></script>
+<script src="scripts/controllers/analytics.js"></script>
+<script src="scripts/controllers/documents.js"></script>
+<script src="scripts/controllers/floorCar.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/maintenance.js"></script>
+<script src="scripts/controllers/loginRecover.js"></script>
+<script src="scripts/controllers/loginUpdateSecurity.js"></script>
+<script src="scripts/controllers/reports.js"></script>
+<script src="scripts/controllers/auctionSettings.js"></script>
+<script src="scripts/controllers/profileSettings.js"></script>
+<script src="scripts/controllers/accountManagement.js"></script>
+<script src="scripts/controllers/auction.dashboard.js"></script>
+<script src="scripts/controllers/auction.dealersearch.js"></script>
+<script src="scripts/controllers/auction.documents.js"></script>
+<script src="scripts/controllers/auction.home.js"></script>
+<script src="scripts/controllers/auction.reports.js"></script>
+<script src="scripts/controllers/loginCreatePassword.js"></script>
+<script src="scripts/controllers/vehicledetails.js"></script>
+<script src="scripts/controllers/valuelookup.js"></script>
+<script src="scripts/controllers/modals/businessSearch.js"></script>
+<script src="scripts/controllers/modals/cancelFee.js"></script>
+<script src="scripts/controllers/modals/cancelPayment.js"></script>
+<script src="scripts/controllers/modals/confirmLogout.js"></script>
+<script src="scripts/controllers/modals/creditQuery.js"></script>
+<script src="scripts/controllers/modals/dealerNameSearch.js"></script>
+<script src="scripts/controllers/modals/feeDetails.js"></script>
+<script src="scripts/controllers/modals/floorCarConfirm.js"></script>
+<script src="scripts/controllers/modals/multipleVehicles.js"></script>
+<script src="scripts/controllers/modals/paymentDetails.js"></script>
+<script src="scripts/controllers/modals/requestCreditIncrease.js"></script>
+<script src="scripts/controllers/modals/topAuctions.js"></script>
+<script src="scripts/controllers/modals/paymentOptionsBreakdown.js"></script>
+<script src="scripts/controllers/modals/financialAccount.js"></script>
 
-    <script src="scripts/directives/navBar/navBar.js"></script>
-    <script src="scripts/directives/tooltip.js"></script>
-    <script src="scripts/directives/nxgInput.js"></script>
-    <script src="scripts/directives/nxgMin.js"></script>
-    <script src="scripts/directives/nxgMax.js"></script>
-    <script src="scripts/directives/nxgBlur.js"></script>
-    <script src="scripts/directives/nxgFocus.js"></script>
-    <script src="scripts/directives/nxgRequires.js"></script>
-    <script src="scripts/directives/nxgValidateInt.js"></script>
-    <script src="scripts/directives/nxgGreaterThan.js"></script>
-    <script src="scripts/directives/nxgInputCurrency.js"></script>
-    <script src="scripts/directives/nxgDateField/nxgDateField.js"></script>
-    <script src="scripts/directives/nxgUpcomingCalendar/nxgUpcomingCalendar.js"></script>
-    <script src="scripts/directives/nxgChart/nxgChart.js"></script>
-    <script src="scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js"></script>
-    <script src="scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js"></script>
-    <script src="scripts/directives/nxgBusinessField/nxgBusinessField.js"></script>
-    <script src="scripts/directives/nxgSearch/nxgSearch.js"></script>
-    <script src="scripts/directives/nxgVinDetails/nxgVinDetails.js"></script>
-    <script src="scripts/directives/nxgInfiniteScroll.js"></script>
-    <script src="scripts/directives/nxgFillHeight.js"></script>
-    <script src="scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js"></script>
-    <script src="scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js"></script>
-    <script src="scripts/directives/nxgRequestsSummary/nxgRequestsSummary.js"></script>
-    <script src="scripts/directives/nxgAlternateAddress/nxgAlternateAddress.js"></script>
-    <script src="scripts/directives/nxgValueLookupDisplay/nxgValueLookupDisplay.js"></script>
-    <script src="scripts/directives/nxgSortable/nxgSortable.js"></script>
-    <script src="scripts/directives/nxgAddress.js"></script>
-    <script src="scripts/directives/nxgActivity/nxgActivity.js"></script>
-    <script src="scripts/directives/nxgMessages/nxgMessages.js"></script>
-    <script src="scripts/directives/nxgIcon/nxgIcon.js"></script>
-    <script src="scripts/directives/nxgAutofocus.js"></script>
-    <script src="scripts/directives/nxgHighlight.js"></script>
-    <script src="scripts/directives/nxgEnter.js"></script>
-    <script src="scripts/directives/nxgChatWithUs.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportEmail.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportPhone.js"></script>
-    <script src="scripts/directives/nxgDealerCustomerSupportPhone.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportPhoneSimple.js"></script>
-    <script src="scripts/directives/nxgTrack.js"></script>
-    <script src="scripts/directives/nxgTypeahead.js"></script>
-    <script src="scripts/directives/placeholder.js"></script>
-    <script src="scripts/directives/ieInputPatch.js"></script>
-    <script src="scripts/directives/nxgFluidContainer.js"></script>
-    <script src="scripts/directives/nxgSticky.js"></script>
-    <script src="scripts/directives/nxgPrivacyStatement.js"></script>
-    <script src="scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js" ></script>
+<script src="scripts/directives/navBar/navBar.js"></script>
+<script src="scripts/directives/tooltip.js"></script>
+<script src="scripts/directives/nxgInput.js"></script>
+<script src="scripts/directives/nxgMin.js"></script>
+<script src="scripts/directives/nxgMax.js"></script>
+<script src="scripts/directives/nxgBlur.js"></script>
+<script src="scripts/directives/nxgFocus.js"></script>
+<script src="scripts/directives/nxgRequires.js"></script>
+<script src="scripts/directives/nxgValidateInt.js"></script>
+<script src="scripts/directives/nxgGreaterThan.js"></script>
+<script src="scripts/directives/nxgInputCurrency.js"></script>
+<script src="scripts/directives/nxgDateField/nxgDateField.js"></script>
+<script src="scripts/directives/nxgUpcomingCalendar/nxgUpcomingCalendar.js"></script>
+<script src="scripts/directives/nxgChart/nxgChart.js"></script>
+<script src="scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js"></script>
+<script src="scripts/directives/nxgPaymentButtons/nxgPaymentButtons.js"></script>
+<script src="scripts/directives/nxgBusinessField/nxgBusinessField.js"></script>
+<script src="scripts/directives/nxgSearch/nxgSearch.js"></script>
+<script src="scripts/directives/nxgVinDetails/nxgVinDetails.js"></script>
+<script src="scripts/directives/nxgInfiniteScroll.js"></script>
+<script src="scripts/directives/nxgFillHeight.js"></script>
+<script src="scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js"></script>
+<script src="scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js"></script>
+<script src="scripts/directives/nxgRequestsSummary/nxgRequestsSummary.js"></script>
+<script src="scripts/directives/nxgAlternateAddress/nxgAlternateAddress.js"></script>
+<script src="scripts/directives/nxgValueLookupDisplay/nxgValueLookupDisplay.js"></script>
+<script src="scripts/directives/nxgSortable/nxgSortable.js"></script>
+<script src="scripts/directives/nxgAddress.js"></script>
+<script src="scripts/directives/nxgActivity/nxgActivity.js"></script>
+<script src="scripts/directives/nxgMessages/nxgMessages.js"></script>
+<script src="scripts/directives/nxgIcon/nxgIcon.js"></script>
+<script src="scripts/directives/nxgAutofocus.js"></script>
+<script src="scripts/directives/nxgHighlight.js"></script>
+<script src="scripts/directives/nxgEnter.js"></script>
+<script src="scripts/directives/nxgChatWithUs.js"></script>
+<script src="scripts/directives/nxgCustomerSupportEmail.js"></script>
+<script src="scripts/directives/nxgCustomerSupportPhone.js"></script>
+<script src="scripts/directives/nxgDealerCustomerSupportPhone.js"></script>
+<script src="scripts/directives/nxgCustomerSupportPhoneSimple.js"></script>
+<script src="scripts/directives/nxgTrack.js"></script>
+<script src="scripts/directives/nxgTypeahead.js"></script>
+<script src="scripts/directives/placeholder.js"></script>
+<script src="scripts/directives/ieInputPatch.js"></script>
+<script src="scripts/directives/nxgFluidContainer.js"></script>
+<script src="scripts/directives/nxgSticky.js"></script>
+<script src="scripts/directives/nxgPrivacyStatement.js"></script>
+<script src="scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js" ></script>
 
-    <script src="scripts/decorators/dialogDecorator.js"></script>
-    <!-- endbuild -->
+<script src="scripts/decorators/dialogDecorator.js"></script>
+<!-- endbuild -->
 
-    <!-- processhtml:remove:dist -->
-    <script src="scripts/config/nxgConfig.mock.processed.js"></script>
-    <script src="scripts/dev/autologin.js"></script>
-    <!-- <script src="scripts/dev/gettextDebug.js"></script> -->
-    <script src="scripts/directives/nxgDebugTitle.processed.js"></script>
-    <!--<script src="scripts/dev/throttle.js"></script>-->
+<!-- processhtml:remove:dist -->
+<script src="scripts/config/nxgConfig.mock.processed.js"></script>
+<script src="scripts/dev/autologin.js"></script>
+<!-- <script src="scripts/dev/gettextDebug.js"></script> -->
+<script src="scripts/directives/nxgDebugTitle.processed.js"></script>
+<!--<script src="scripts/dev/throttle.js"></script>-->
 
-    <!-- /processhtml -->
+<!-- /processhtml -->
 
-    <script>
-      (function () {
+<script>
+  (function () {
 
-        function bootstrapApp() {
-          angular.element(document).ready(function () {
-            angular.bootstrap(document, ['nextgearWebApp']);
-          });
-        }
+    function bootstrapApp() {
+      angular.element(document).ready(function () {
+        angular.bootstrap(document, ['nextgearWebApp']);
+      });
+    }
 
-        var langDir = 'languages-<!-- @echo GIT_SHA -->/';
+    var langDir = 'languages-<!-- @echo GIT_SHA -->/';
 
-        '<!-- processhtml:remove:dist -->'
-        // this needs to be just the app/languages/ dir unless it's for a build
-        langDir = 'languages/';
-        '<!-- /processhtml -->'
+    '<!-- processhtml:remove:dist -->'
+    // this needs to be just the app/languages/ dir unless it's for a build
+    langDir = 'languages/';
+    '<!-- /processhtml -->'
 
-        var key = window.localStorage.getItem('lang');
-        if (key && key !== 'en' && key != 'enDebug') {
-          $.ajax({
-            url: langDir + key + '.js',
-            dataType: 'script',
-            success: bootstrapApp,
-            cache: true
-          });
-        } else {
-          bootstrapApp();
-        }
-      })();
-    </script>
-  </body>
+    var key = window.localStorage.getItem('lang');
+    if (key && key !== 'en' && key != 'enDebug') {
+      $.ajax({
+        url: langDir + key + '.js',
+        dataType: 'script',
+        success: bootstrapApp,
+        cache: true
+      });
+    } else {
+      bootstrapApp();
+    }
+  })();
+</script>
+</body>
 </html>
