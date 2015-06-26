@@ -37,6 +37,7 @@ angular.module('nextgearWebApp')
       },
       profile: {
         LOCAL: 'local',
+        LOCAL_TEST: 'local_test',
         UAT: 'uat',
         DEMO: 'demo',
         TEST: 'test',
@@ -48,6 +49,11 @@ angular.module('nextgearWebApp')
         var isDemo = profile === prv.profile.DEMO;
         switch (profile) {
         case prv.profile.LOCAL:
+          config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          config.apiBase = '';
+          config.apiDomain = '';
+          break;
+        case prv.profile.LOCAL_TEST:
           config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
           config.apiBase = 'https://test.nextgearcapital.com/MobileService/api';
           config.apiDomain = 'https://test.nextgearcapital.com';
@@ -78,6 +84,10 @@ angular.module('nextgearWebApp')
 
     // @if ENV='local'
     profile = prv.profile.LOCAL;
+    // @endif
+
+    // @if ENV='local_test'
+    profile = prv.profile.LOCAL_TEST;
     // @endif
 
     // @if ENV='uat'
