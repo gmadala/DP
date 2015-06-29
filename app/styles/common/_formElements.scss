@@ -147,6 +147,13 @@ input[type="color"] {
 .small-left-padding {
   padding-left: 13px;
 }
+.medium-right-padding {
+  padding-right: 18px;
+}
+
+.full-width {
+  width: 100%;
+}
 
 // Overriding Bootstrap's input-prepend class to make it work for us.
 .input-prepend.dollar .add-on{
