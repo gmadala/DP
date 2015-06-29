@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
     var disclaimerEdition = gettext('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
     disclaimerEdition = gettextCatalog.getString(disclaimerEdition);
 
-    var disclaimerRight = gettext('All Right Reserved.');
+    var disclaimerRight = gettext('All Rights Reserved.');
     disclaimerRight = gettextCatalog.getString(disclaimerRight);
 
     var disclaimerText = gettext('The specific information required to determine the' +

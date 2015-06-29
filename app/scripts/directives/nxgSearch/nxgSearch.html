@@ -1,8 +1,9 @@
 <div id="search" name="search" class="well">
   <h2 class="well-title">
     {{ title }}
-    <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)"><strong translate>Clear
-      Search</strong></button>
+    <button id="clearSearch" class="btn-unstyle right clear-search" ng-click="clear($event)">
+      <strong translate>Clear Search</strong>
+    </button>
   </h2>
 
   <form name="searchForm" role="form" class="search form-horizontal" novalidate>
@@ -51,8 +52,9 @@
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
               </div>
             </div>
-            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>Invalid date
-              range</label>
+            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>
+              Invalid date range
+            </label>
           </div>
         </div>
         <div ng-class="{'row form-block':dateRangeShown}">
