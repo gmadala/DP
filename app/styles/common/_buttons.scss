@@ -452,9 +452,13 @@
     color: $btn-text-disabled;
     background-color: $btn-bkgd-disabled;
   }
+  a:active, a:focus {
+    outline: none;
+  }
 }
 
-.ie {
+// IE 10 & IE 11 SPECIFIC
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   // Because IE forces a dashed outline after clicking a button
   a:active, a:focus {
     outline: none;
