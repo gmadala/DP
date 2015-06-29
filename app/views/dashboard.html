@@ -189,20 +189,20 @@
           nxg-chart-title="chartData.paymentsTitle">
       </div>
 
-      <table class="table table-unstyle chart-legend">
+      <table class="table table-unstyle chart-legend text-left">
         <tr>
           <td><i class="chart-legend-color nxg-chart-fees"></i></td>
-          <td class="table-label" translate>Fees</td>
+          <td translate>Fees</td>
           <td class="table-value numeric">{{ dashboardData.paymentChartData.fees | currency }}</td>
         </tr>
         <tr>
           <td><i class="chart-legend-color nxg-chart-payments"></i></td>
-          <td class="table-label" translate>Payments</td>
+          <td translate>Payments</td>
           <td class="table-value numeric">{{ dashboardData.paymentChartData.payments | currency }}</td>
         </tr>
-        <tr class="">
+        <tr>
           <td><i class="chart-legend-color nxg-chart-scheduled-payments"></i></td>
-          <td class="table-label" translate>Scheduled</td>
+          <td translate>Scheduled</td>
           <td class="table-value numeric">
             {{ dashboardData.paymentChartData.scheduledPayments | currency }}
           </td>
