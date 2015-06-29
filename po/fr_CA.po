@@ -184,21 +184,16 @@ msgstr[1] "Frais de compte"
 msgid "Account Management"
 msgstr "Gestion de Compte"
 
-#: app/views/account_management.html
-#: app/views/modals/updateFinancialAccount.html
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Account Name"
 msgstr "Intitulé de compte"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Account Number"
 msgstr "Numéro de compte"
 
-#: app/views/modals/updateFinancialAccount.html
-msgid "Account name must only have letters and spaces."
-msgstr "Le nom du compte ne doit contenir que des lettres et des espaces."
-
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Account number must only have numbers."
 msgstr "Le numéro de compte ne doit contenir que des chiffres."
 
@@ -211,7 +206,7 @@ msgid "Actions"
 msgstr "Actions"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Active"
 msgstr "Actif"
 
@@ -229,6 +224,10 @@ msgstr ""
 "véhicule. En indiquant une date de vente pour le véhicule mis en "
 "financement, l'encanteur certifie que la date de vente indiquée pour ce "
 "véhicule est exacte et véridique."
+
+#: app/views/account_management.html
+msgid "Add Account"
+msgstr ""
 
 #: app/views/vehicledetails.html
 msgid "Add Additional Principal?"
@@ -274,7 +273,7 @@ msgid "All"
 msgstr "Tous"
 
 #: app/scripts/controllers/valuelookup.js
-msgid "All Right Reserved."
+msgid "All Rights Reserved."
 msgstr "Tous droits réservés."
 
 #: app/views/analytics.html
@@ -448,13 +447,9 @@ msgid "Bank Account for Payout"
 msgstr "Compte bancaire pour décaissement"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Bank Name"
 msgstr "Nom de la banque"
-
-#: app/views/modals/updateFinancialAccount.html
-msgid "Bank name must only have letters and spaces."
-msgstr "Le nom de la banque ne doit contenir que des lettres et des espaces."
 
 #: app/views/analytics.html
 msgid "Best Movers"
@@ -532,8 +527,8 @@ msgstr "PPC"
 msgid "Cancel"
 msgstr "Annuler"
 
+#: app/views/modals/financialAccount.html
 #: app/views/modals/paymentOptionsBreakdown.html
-#: app/views/modals/updateFinancialAccount.html
 msgid "Cancel Changes"
 msgstr "Annuler les modifications"
 
@@ -804,25 +799,13 @@ msgstr "Relevé du concessionnaire"
 msgid "Default Address"
 msgstr "Adresse par défaut"
 
-#: app/views/account_management.html
-msgid "Default for Disbursements"
-msgstr "Décaissements par défaut"
-
-#: app/views/account_management.html
-msgid "Default for Payments"
-msgstr "Paiements par défaut"
-
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Default for disbursement"
 msgstr "Décaissement par défaut"
 
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Default for payment"
 msgstr "Paiement par défaut"
-
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
-msgid "Delete"
-msgstr ""
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
@@ -847,10 +830,6 @@ msgstr "Refusé/Impayé"
 msgid "Description"
 msgstr "Description"
 
-#: app/views/account_management.html
-msgid "Details"
-msgstr "Détails"
-
 #: app/scripts/controllers/accountManagement.js
 msgid "Disable"
 msgstr "Désactiver"
@@ -867,6 +846,7 @@ msgstr ""
 "La désactivation du programme d'inscription améliorée effacera tous les NIP "
 "présentement associés à cette entreprise."
 
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/auction.sellerfloorplan.html
 msgid "Disbursement"
 msgstr "Décaissement"
@@ -916,7 +896,6 @@ msgid_plural "Due Today"
 msgstr[0] "À Échéance Aujourd'hui"
 msgstr[1] "À Échéance Aujourd'hui"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/scripts/controllers/accountManagement.js
 msgid "Edit"
 msgstr "Modifier"
@@ -1133,10 +1112,6 @@ msgstr "Montant financé"
 #: app/views/vehicledetails.html
 msgid "Financed Amount"
 msgstr "Montant financé"
-
-#: app/views/modals/updateFinancialAccount.html
-msgid "Financial Account"
-msgstr "Compte de financement"
 
 #: app/views/account_management.html
 msgid "Financial Accounts"
@@ -1703,6 +1678,7 @@ msgstr ""
 "Payez ce véhicule ou retournez l'immatriculation pour le retirer de votre "
 "limite."
 
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/checkout.html app/views/payments.html app/views/receipts.html
 #: app/views/vehicledetails.html
 msgid "Payment"
@@ -2286,10 +2262,6 @@ msgid "Please select who has the title."
 msgstr ""
 "Veuillez sélectionner qui est en possession du certificat d'immatriculation."
 
-#: app/views/modals/updateFinancialAccount.html
-msgid "Please update your financial account below:"
-msgstr "Veuillez mettre à jour votre compte financier ci-dessous :"
-
 #: app/views/payments.html
 msgid "Posted"
 msgstr "Publié"
@@ -2390,7 +2362,6 @@ msgstr "Reçus"
 msgid "Receipts Selected"
 msgstr "Reçus sélectionnés"
 
-#: app/scripts/controllers/auction.reports.js
 #: app/scripts/controllers/reports.js
 msgid "Receivable Detail (PDF)"
 msgstr "Détails de la créance (PDF)"
@@ -2517,14 +2488,13 @@ msgstr ""
 msgid "Rough"
 msgstr "Décharné"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Routing Number"
 msgstr "Numéro d'acheminement"
 
-#: app/views/modals/updateFinancialAccount.html
+#: app/views/modals/financialAccount.html
 msgid "Routing number must only have numbers."
-msgstr "Le numéro d’acheminement ne doit contenir que des chiffres."
+msgstr "Le numéro d'acheminement ne doit contenir que des chiffres."
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -2544,7 +2514,7 @@ msgstr "Date de vente"
 msgid "Salvage"
 msgstr "VGA"
 
-#: app/views/modals/updateFinancialAccount.html app/views/vehicledetails.html
+#: app/views/modals/financialAccount.html app/views/vehicledetails.html
 msgid "Save Changes"
 msgstr "Sauvegarder les modifications"
 
@@ -2780,8 +2750,9 @@ msgstr "Recommencer"
 msgid "State"
 msgstr "Province"
 
-#: app/views/account_management.html app/views/auction.sellerfloorplan.html
-#: app/views/dashboard.html app/views/floorplan.html app/views/payments.html
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
+#: app/views/auction.sellerfloorplan.html app/views/dashboard.html
+#: app/views/floorplan.html app/views/payments.html
 #: app/views/vehicledetails.html
 msgid "Status"
 msgstr "État"
@@ -2923,7 +2894,7 @@ msgstr ""
 "transaction ou aux parties effectuant la transaction. Ce rapport est destiné "
 "uniquement à une utilisation individuelle par la personne produisant ce "
 "rapport et ne doit ni être vendu, ni être transmis à un tiers. Kelley Blue "
-"Book n'assume aucune responsabilité en cas d'erreurs ou d’omissions."
+"Book n'assume aucune responsabilité en cas d'erreurs ou d'omissions."
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -3254,10 +3225,6 @@ msgstr "Déprogrammer"
 msgid "Upcoming Curtailment / Payoff Quote (PDF)"
 msgstr "Réduction à venir / Devis de paiement (PDF)"
 
-#: app/views/modals/updateFinancialAccount.html
-msgid "Updating Financial Account"
-msgstr "Mise à jour du compte de financement"
-
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "User Profile"
 msgstr "Profil d'usager"
@@ -3568,6 +3535,22 @@ msgstr ""
 "Vous pouvez combiner jusqu'à 20 reçus dans un seul PDF en sélectionnant "
 "chaque reçu et en cliquant ci-dessous sur « Exporter les reçus »."
 
+#: app/views/modals/financialAccount.html
+msgid "You can't have empty account name."
+msgstr ""
+
+#: app/views/modals/financialAccount.html
+msgid "You can't have empty account number."
+msgstr ""
+
+#: app/views/modals/financialAccount.html
+msgid "You can't have empty bank name."
+msgstr ""
+
+#: app/views/modals/financialAccount.html
+msgid "You can't have empty routing number."
+msgstr ""
+
 #: app/scripts/models/user.js
 msgid ""
 "You do not appear to have any security questions configured. Please contact "
@@ -3745,11 +3728,11 @@ msgid ""
 "while we actively work to improve our\n"
 "                service to you. Thank you for using myNextGear!"
 msgstr ""
-"myNextGear n’est pas accessible pour le moment — nous effectuons une mise à "
+"myNextGear n'est pas accessible pour le moment — nous effectuons une mise à "
 "jour incluant de nouvelles fonctionnalités et de nouveaux avantages. Nous\n"
 " sommes désolés des inconvénients, et nous vous remercions pour votre "
 "patience pendant que nous améliorons les services que nous\n"
-" vous offrons.  Nous vous remercions d’utiliser myNextGear!"
+" vous offrons.  Nous vous remercions d'utiliser myNextGear!"
 
 #: app/views/vehicledetails.html
 msgid "none"
@@ -3833,9 +3816,38 @@ msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">sur</span> "
 "20"
 
+#: app/views/modals/financialAccount.html
+msgid "{{account.AccountId ? 'Edit' : 'Add'}} Financial Account"
+msgstr ""
+
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Par Kelley Blue Book Co., Inc."
+
+#~ msgid "Account name must only have letters and spaces."
+#~ msgstr "Le nom du compte ne doit contenir que des lettres et des espaces."
+
+#~ msgid "Bank name must only have letters and spaces."
+#~ msgstr ""
+#~ "Le nom de la banque ne doit contenir que des lettres et des espaces."
+
+#~ msgid "Default for Disbursements"
+#~ msgstr "Décaissements par défaut"
+
+#~ msgid "Default for Payments"
+#~ msgstr "Paiements par défaut"
+
+#~ msgid "Details"
+#~ msgstr "Détails"
+
+#~ msgid "Financial Account"
+#~ msgstr "Compte de financement"
+
+#~ msgid "Please update your financial account below:"
+#~ msgstr "Veuillez mettre à jour votre compte financier ci-dessous :"
+
+#~ msgid "Updating Financial Account"
+#~ msgstr "Mise à jour du compte de financement"
 
 #~ msgid "2013 - 2015 Edition for zip code 46123"
 #~ msgstr "Édition 2013-2015 pour code postal américain 46123"
