@@ -157,6 +157,10 @@ input[type="color"] {
   font-size: 14px;
   background-color: transparent;
   border: none;
+
+  &.no-top{
+    top: 0px;
+  }
 }
 
 .input-prepend input {
