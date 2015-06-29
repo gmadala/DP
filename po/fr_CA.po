@@ -273,7 +273,7 @@ msgid "All"
 msgstr "Tous"
 
 #: app/scripts/controllers/valuelookup.js
-msgid "All Right Reserved."
+msgid "All Rights Reserved."
 msgstr "Tous droits réservés."
 
 #: app/views/analytics.html

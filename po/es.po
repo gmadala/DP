@@ -274,7 +274,7 @@ msgid "All"
 msgstr "Todos"
 
 #: app/scripts/controllers/valuelookup.js
-msgid "All Right Reserved."
+msgid "All Rights Reserved."
 msgstr "(Edición %START_DATE% - %END_DATE%). Codigo postal %ZIP_CODE%."
 
 #: app/views/analytics.html
