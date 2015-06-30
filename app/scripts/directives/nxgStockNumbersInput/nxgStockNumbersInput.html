@@ -2,12 +2,13 @@
   <div class="control-group">
     <label class="control-label" for="paidOffStockNo" translate>Stock Number Filter (optional)</label>
 
-    <div class="style-select">
+    <div class="style-select small">
       <select id="paidOffStockNo"
               name="paidOffStockNo"
               ng-model="data.selectData.value"
               ng-options="v for v in data.selectData.values"
-              ng-change="selectChange()"/>
+              ng-change="selectChange()"
+               />
     </div>
   </div>
 
