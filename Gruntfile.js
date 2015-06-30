@@ -160,6 +160,9 @@ module.exports = function(grunt) {
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/config/nxgConfig.mock.processed.js',
         '!app/scripts/translations.js',
+        '!app/scripts/services/base64.js',
+        '!app/scripts/directives/nxgChart/nxgChart.js',
+        '!app/scripts/directives/tooltip.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'

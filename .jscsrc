@@ -1,3 +1,7 @@
 {
-  "validateIndentation": 2
+  "validateIndentation": 2,
+  "validateQuoteMarks": "'",
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCapitalizedConstructors": true,
+  "requireParenthesesAroundIIFE": true
 }
