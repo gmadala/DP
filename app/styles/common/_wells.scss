@@ -175,6 +175,14 @@ p.no-results {
     position: absolute;
     bottom: 0;
   }
+
+  &.payment-summary{
+    height: 270px;
+  }
+
+  &.recent-receipts{
+    min-width: 305px;
+  }
 }
 
 .analytics-well {

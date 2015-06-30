@@ -145,6 +145,11 @@
       border-left: 0;
     }
 
+    &.bigger{
+      min-width: 135px;
+    }
+
+
     &:last-child {
       border-right: 0;
     }
@@ -366,7 +371,7 @@
       .th-inner {
         position: absolute;
         top: 0;
-        padding: 8px 15px;
+        padding: 6px 15px;
         border-left: 1px solid $tableBorder;
       }
     }
