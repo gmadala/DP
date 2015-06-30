@@ -239,6 +239,11 @@ select {
     min-width: 45%;
   }
 
+  &.large {
+    width: 85%;
+    min-width: 85%;
+  }
+
   &.disabled {
     border-color: $border;
 
