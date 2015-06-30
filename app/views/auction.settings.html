@@ -258,9 +258,9 @@
 
         <div class="row" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
           <label class="col-xs-5"><span translate>Additional Addresses</span>:</label>
-          <div class="col-xs-7 static" ng-hide="title.editable">
-            <ul ng-show="title.data.addresses.length > 0">
-              <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
+          <div class="col-xs-7 static no-left-padding" ng-hide="title.editable">
+            <ul class="no-left-padding" ng-show="title.data.addresses.length > 0">
+              <li class="alt-addr smallest-bottom-margin" ng-repeat="addr in title.data.addresses | limitTo: 3">
                 <div nxg-address="addr"></div>
               </li>
               <li ng-show="title.data.extraAddresses" translate>And {{ title.data.extraAddresses }} additional addresses...</li>
