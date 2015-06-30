@@ -160,4 +160,8 @@ width:48%;
 .col-xs-10{
   width: 81%;
   margin: 0 1.0%;
+  &.col-xs-offset-1{
+    width: 83.33333333333%;
+    margin: 0 0 0 8.333333333333332%;
+  }
 }

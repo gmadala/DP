@@ -145,6 +145,11 @@
       border-left: 0;
     }
 
+    &.bigger{
+      min-width: 135px;
+    }
+
+
     &:last-child {
       border-right: 0;
     }
