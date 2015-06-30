@@ -48,7 +48,7 @@ body.lang_fr_CA {
     @media (max-width: 1090px) {
       .dash-well {
         .well-title {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
@@ -310,6 +310,7 @@ body.lang_fr_CA {
   /* Navs */
   .nav-secondary {
     height: 52px;
+    min-width: 451.375px;
 
     .link {
       height: auto;
@@ -327,7 +328,7 @@ body.lang_fr_CA {
     }
 
     .cart-btn {
-      height: 51px;
+      height: 50px;
     }
   }
 
