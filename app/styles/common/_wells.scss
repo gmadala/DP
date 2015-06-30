@@ -179,6 +179,10 @@ p.no-results {
   &.payment-summary{
     height: 270px;
   }
+
+  &.recent-receipts{
+    min-width: 305px;
+  }
 }
 
 .analytics-well {
