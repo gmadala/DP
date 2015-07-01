@@ -31,8 +31,8 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row">
-          <label class="col-md-5" for="businessEmail"><span translate>Business Email</span>:</label>
-          <div class="col-md-7" nxg-input model="business.data.email" editable="business.editable">
+          <label class="col-xs-5" for="businessEmail"><span translate>Business Email</span>:</label>
+          <div class="col-xs-7" nxg-input model="business.data.email" editable="business.editable">
             <input type="email" class="xsmallInput" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email"
                    value="business.dirtyData.email" ng-maxlength="100"
                    ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required/>
@@ -43,11 +43,11 @@
         </div>
 
         <div class="row">
-          <label class="col-md-5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>
+          <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>
           <!--From develop: <label class="span5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>-->
-          <div class="col-md-7">
+          <div class="col-xs-7">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-xs-6">
                 <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
                 <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
                 <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
@@ -62,7 +62,7 @@
                   <label class="cr-label" for="enhancedYes" translate>Yes</label>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-xs-6">
                 <button class="btn-help btn-help-adjust"
                         tooltip-placement="left"
                         tooltip-trigger="focus"
