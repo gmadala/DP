@@ -1,11 +1,29 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, segmentio, metric, User, api, $q, dealerCustomerSupportPhone) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
+
+    // TODO remove this once bank accounts content is all done - just mark these for translation in advance
+    gettext('Add payment account');
+    gettext('Add account');
+    /// the date when the account was last modified
+    gettext('Last modified');
+    /// the date when the account was added
+    gettext('Date added');
+    /// the date when payment was last made using the account
+    gettext('Last payment on');
+    gettext('Edit');
+    gettext('Disable');
+
     if(User.isDealer()) {
       segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
     }
     $scope.loading = false;
+    $scope.isUnitedStates = User.isUnitedStates();
+    $scope.isDealer = User.isDealer();
+    $scope.autoPayEnabled = features.autoPay.enabled;
+    $scope.addBankAccountEnabled = features.addBankAccount.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -52,6 +70,22 @@ angular.module('nextgearWebApp')
       getData = AccountManagement.get();
     }
 
+    $scope.updateDisbursementAccount = function(disbursementAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.disbursementAccount = disbursementAccountId;
+      }
+    };
+
+    $scope.updateBillingAccount = function(billingAccountId) {
+      var financialDataDefined = $scope.financial && $scope.financial.data;
+      if (financialDataDefined) {
+        var financialData = $scope.financial.data;
+        financialData.billingAccount = billingAccountId;
+      }
+    };
+
     getData.then(function(results) {
         $scope.loading = true;
 
@@ -61,7 +95,12 @@ angular.module('nextgearWebApp')
           data: {
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
-            enhancedRegistrationPin: null
+            enhancedRegistrationPin: null,
+            autoPayEnabled: results.AutoPayEnabled,
+            isQuickBuyer: results.IsQuickBuyer,
+            isStakeholderActive: results.IsStakeholderActive,
+            isStakeholder: results.IsStakeholder,
+            useAutoACH: results.UseAutoACH
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
@@ -75,7 +114,8 @@ angular.module('nextgearWebApp')
             if (prv.save.apply(this)) {
               var d = this.dirtyData;
 
-              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin).then(
+              AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
+                d.autoPayEnabled).then(
                 prv.saveSuccess.bind(this)
               );
             }
@@ -94,7 +134,7 @@ angular.module('nextgearWebApp')
               keyboard: true,
               backdropClick: true,
               templateUrl: 'views/modals/confirmDisableEnhanced.html',
-              controller: 'ConfirmDisableCtrl'
+              controller: 'ConfirmCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function(result) {
               if (result) {
@@ -104,6 +144,48 @@ angular.module('nextgearWebApp')
                 $scope.business.dirtyData.enhancedRegistrationEnabled = true;
               }
             });
+          },
+          autoPay: {
+            confirmEnable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmEnableAutoPay.html',
+                controller: 'ConfirmCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                }
+              });
+            },
+            confirmDisable: function () {
+              var dialogOptions = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'views/modals/confirmDisableAutoPay.html',
+                controller: 'ConfirmCtrl'
+              };
+              $dialog.dialog(dialogOptions).open().then(function (result) {
+                if (result) {
+                  $scope.business.dirtyData.autoPayEnabled = false;
+                } else {
+                  $scope.business.dirtyData.autoPayEnabled = true;
+                }
+              });
+            },
+            isEditable: function () {
+              return $scope.business.editable && $scope.business.data.isStakeholder &&
+                $scope.business.data.isStakeholderActive;
+            },
+            isDisplayed: function () {
+              return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
+                $scope.business.data.isQuickBuyer === false && $scope.business.data.useAutoACH === true && $scope.autoPayEnabled;
+            }
           }
         };
 
@@ -111,6 +193,8 @@ angular.module('nextgearWebApp')
         $scope.financial = {
           data: {
             bankAccounts: results.BankAccounts,
+            disbursementAccount: results.DefaultDisbursementBankAccountId,
+            billingAccount: results.DefaultBillingBankAccountId,
             availableCredit: results.AvailableCredit,
             reserveFunds: results.ReserveFunds,
             lastPayment: {
@@ -137,6 +221,25 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          addFinancialAccount: function() {
+            var dialogOptions = {
+              dialogClass: 'modal',
+              backdrop: true,
+              keyboard: false,
+              backdropClick: false,
+              templateUrl: 'views/modals/financialAccount.html',
+              resolve: {
+                options: function () {
+                  return {
+                    account: { }
+                  };
+                }
+              },
+              controller: 'FinancialAccountCtrl'
+            };
+
+            $dialog.dialog(dialogOptions).open();
+          }
         };
 
         var titleAddresses = Addresses.getTitleAddresses();
@@ -160,8 +263,9 @@ angular.module('nextgearWebApp')
             prv.cancel.apply(this);
             // make sure to close any tooltips left open
             angular.forEach(angular.element('.btn-help'), function(elem) {
-              /*jshint camelcase: false */
+              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
               angular.element(elem).scope().tt_isOpen = false;
+              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             });
           },
           save: function() {
@@ -218,11 +322,12 @@ angular.module('nextgearWebApp')
       {}
     );
 
-    $scope.isUnited = User.isUnitedStates();
   })
 
-  .controller('ConfirmDisableCtrl', function($scope, dialog) {
+  .controller('ConfirmCtrl', function($scope, dialog) {
     $scope.close = function(result) {
       dialog.close(result);
     };
+
+    $scope.agree = false;
   });

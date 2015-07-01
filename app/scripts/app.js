@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives', 'ui.calendar', 'ui.highlight',
-  'ui.event', 'segmentio', 'ngCookies', 'LocalStorageModule', 'gettext', 'nextgearWebCommon'])
+  'ui.event', 'segmentio', 'ngCookies', 'ngSanitize', 'LocalStorageModule', 'gettext', 'nextgearWebCommon'])
   .constant('SupportedLanguages', [
     { key: 'en', id: 1, name: 'English' },
     { key: 'enDebug', id: 1, name: 'English (Debug)' },
     { key: 'fr_CA', id: 2, name: 'French (CA)' },
     { key: 'es', id: 3, name: 'Spanish' }
   ])
+  // TODO Uncomment the below config upon upgrading to Angular 1.3 for a performance boost
+  // (it can be enabled in nxgConfig.mock.js for local dev)
+  // https://docs.angularjs.org/guide/production
+  //.config(['$compileProvider', function ($compileProvider) {
+  //  // https://docs.angularjs.org/guide/production
+  //  $compileProvider.debugInfoEnabled(false);
+  //}])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -21,6 +28,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         pageID: 'Login',
+        allowAnonymous: true,
+        margin: 'no-left-margin'
+      })
+      .state('maintenance', {
+        url: '/maintenance',
+        templateUrl: 'views/maintenance.html',
+        controller: 'MaintenanceCtrl',
+        pageID: 'Maintenance',
         allowAnonymous: true
       })
       .state('loginRecover', {
@@ -29,7 +44,8 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
         controller: 'LoginRecoverCtrl',
         pageID: 'LoginRecover',
         allowAnonymous: true,
-        noDirectAccess: true
+        noDirectAccess: true,
+        margin: 'no-left-margin'
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',
@@ -253,10 +269,7 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
     };
 
     LogoutGuard.watchForLogoutAttemptByURLState();
-
-    if (!nxgConfig.isDemo) {
-      segmentio.load(nxgConfig.segmentIoKey);
-    }
+    segmentio.load(nxgConfig.segmentIoKey);
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;

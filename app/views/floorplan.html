@@ -1,15 +1,9 @@
-<section class="row-fluid">
-  <section class="span12">
+<section class="row">
+  <section class="col-xs-12">
     <div nxg-search
       title="{{ 'Find a Floor Plan' | translate }}"
       class="search-form"
       prompt="{{ 'Stock #, VIN, Make, Model, or Year' | translate }}"
-      metric-search="{{metric.CLICK_FLOORPLAN_SEARCH_BUTTON}}"
-      metric-clear-search="{{metric.CLICK_FLOORPLAN_PAYMENTS_CLEAR_SEARCH_LINK}}"
-      metric-filter-by-input="{{metric.CLICK_FLOORPLAN_FILTER_BY_INPUT}}"
-      metric-filter-from-date="{{metric.CLICK_FLOORPLAN_FILTER_FROM_DATE_INPUT}}"
-      metric-filter-to-date="{{metric.CLICK_FLOORPLAN_FILTER_TO_DATE_INPUT}}"
-      metric-filter-by-inventory-location="{{metric.CLICK_FLOORPLAN_FILTER_BY_INVENTORY_LOCATION}}"
       filter-label="{{ 'Filter by Flooring Status' | translate }}"
       filter-options="filterOptions"
       active-criteria="floorplanData.searchCriteria"
@@ -64,7 +58,7 @@
             <th translate>Title</th>
           </thead>
 
-          <tr ng-repeat="item in floorplanData.results | orderBy:sortField.item:sortDescending.item">
+          <tr ng-repeat="item in floorplanData.results">
             <td>
               <p class="lockup-major"> {{ item.FlooringDate | moment }} </p>
               <p class="lockup-minor" translate>{{ item.DaysOnFloorplan }} days</p>
@@ -74,7 +68,7 @@
                 <span nxg-highlight="item.Description" highlight="item.data.query" class="break-word"></span>
               </a>
 
-              <div class="row-fluid">
+              <div>
                 <p class="lockup-minor caps vin"><span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="item.data.query" class="break-word"></span></p>
                 <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span></p>
               </div>

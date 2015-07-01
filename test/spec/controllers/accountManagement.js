@@ -24,7 +24,12 @@ describe('Controller: AccountManagementCtrl', function () {
       Email: 'diana.guarin@manheim.com',
       CellPhone: '2143301800',
       BusinessEmail: 'diana.guarin@manheim.com',
-      EnhancedRegistrationEnabled: false
+      EnhancedRegistrationEnabled: false,
+      AutoPayEnabled: false,
+      IsStakeholderActive: false,
+      IsStakeholder: false,
+      IsQuickBuyer: false,
+      UseAutoACH: true
     };
 
     AccountManagementMock = {
@@ -104,6 +109,95 @@ describe('Controller: AccountManagementCtrl', function () {
       scope.business.cancel();
       expect(scope.business.dirtyData).toBe(null);
       expect(scope.business.editable).toBe(false);
+    });
+
+    xit('autoPay should be displayed only for US Dealers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.isUnitedStates = true;
+      scope.isDealer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.isUnitedStates = false;
+      scope.isDealer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.isUnitedStates = false;
+      scope.isDealer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    it('autoPay should be editable only for active stakeholders', function () {
+
+      scope.business.editable = true;
+
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = true;
+
+      expect(scope.business.autoPay.isEditable()).toBeTruthy();
+
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = false;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = false;
+      scope.business.data.isStakeholder = true;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = false;
+      scope.business.data.isStakeholder = false;
+
+      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+    });
+
+    xit('autoPay should be hidden for quick buyers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      scope.business.data.isQuickBuyer = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.business.data.isQuickBuyer = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.business.data.isQuickBuyer = undefined;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
+    it('autoPay should be hidden', function () {
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    xit('autoPay should be hidden for non-auto ACH dealers', function () {
+
+      scope.isUnitedStates = true;
+      scope.isDealer = true;
+
+      scope.business.data.useAutoACH = false;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+
+      scope.business.data.useAutoACH = true;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+
+      scope.business.data.useAutoACH = undefined;
+
+      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
     });
 
     describe('save()', function(){

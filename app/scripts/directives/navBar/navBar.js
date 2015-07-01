@@ -11,6 +11,8 @@ angular.module('nextgearWebApp')
 
   .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore, language) {
 
+    $scope.isCollapsed = true;
+
     var dealerLinks = {
         primary: [
           { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK},
@@ -21,7 +23,9 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK}
         ],
         secondary: [
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK}
+          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK},
+          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
+
         ]
       },
       auctionLinks = {
@@ -30,7 +34,8 @@ angular.module('nextgearWebApp')
           { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch', metric: ''},
           { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring', metric: ''},
           { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''},
-          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK}
+          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK},
+          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents', metric: metric.CLICK_AUCTION_RESOURCES_LINK }
         ]
       };
 
@@ -72,27 +77,6 @@ angular.module('nextgearWebApp')
               return User.isDealer() ? '#/home' : '#/act/home';
             }
           };
-        });
-
-        User.getShowReportsAndResources().then(function (data) {
-          if (data) {
-            dealerLinks.secondary.splice(2, 0, {
-              name: gettextCatalog.getString('Resources'),
-              href: '#/documents',
-              activeWhen: 'documents',
-              metric: metric.CLICK_RESOURCES_LINK
-            });
-
-            auctionLinks.primary.splice(5, 0, {
-              name: gettextCatalog.getString('Resources'),
-              href: '#/act/documents',
-              activeWhen: 'auction_documents',
-              metric: metric.CLICK_AUCTION_RESOURCES_LINK
-            });
-          }
-        }, function (error) {
-          // keep reports hidden by default and if there's any error
-          error.dismiss();
         });
       }
     });

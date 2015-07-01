@@ -18,9 +18,7 @@ angular.module('nextgearWebApp')
         controller: 'TopAuctionsCtrl',
         resolve: {
           auctions: function () {
-            return $scope.analytics.then(function (result) {
-              return result.allAuctions;
-            });
+            return $scope.analytics.allAuctions;
           }
         }
       };
@@ -32,9 +30,13 @@ angular.module('nextgearWebApp')
       $scope.showDetails = !$scope.showDetails;
     };
 
-    $scope.bestMovers = Analytics.fetchMovers(true);
-    $scope.worstMovers = Analytics.fetchMovers(false);
-    $scope.selectedMoverChart = $scope.bestMovers;
+    Analytics.fetchMovers(true).then(function (data) {
+      $scope.bestMovers = data;
+      $scope.selectedMoverChart = $scope.bestMovers;
+    });
+    Analytics.fetchMovers(false).then(function (data) {
+      $scope.worstMovers = data;
+    });
 
     $scope.changeMoverChart = function(chartName) {
       if (chartName === 'best'){
@@ -48,8 +50,12 @@ angular.module('nextgearWebApp')
       return $scope.selectedMoverChart === $scope.bestMovers;
     };
 
-    $scope.businessSummary = Analytics.fetchBusinessSummary();
-    $scope.analytics = Analytics.fetchAnalytics();
+    Analytics.fetchBusinessSummary().then(function (data) {
+      $scope.businessSummary = data;
+    });
+    Analytics.fetchAnalytics().then(function (data) {
+      $scope.analytics = data;
+    });
     //Checking for United States Dealer
     $scope.isUnitedStates = User.isUnitedStates();
   });

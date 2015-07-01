@@ -1,13 +1,13 @@
-<form class="row-fluid floorcar" name="form" novalidate>
-  <div class="span6 well">
+<form class="row floorcar" name="form" novalidate>
+  <div class="col-xs-6 well">
     <h2 class="well-title" translate>Vehicle Information</h2>
 
     <fieldset class="well-item">
       <div nxg-vin-details floor-model="data" validity="validity" error-flag="vinDetailsErrorFlag" form="form" nxg-autofocus="reset"></div>
 
       <label for="inputColor" class="input-title" translate>Color</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" >
-        <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }" >
+        <select id="inputColor"  name="inputColor" ng-model="data.UnitColorId"
                ng-options="color.ColorName for color in options.colors" required>
           <option value="" translate>Make Selection</option>
          </select>
@@ -40,8 +40,8 @@
       </label>
 
       <label for="inputTitleHolder" class="input-title" translate>Who has the Title?</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
-        <select id="inputTitleHolder" name="inputTitleHolder" ng-model="data.TitleLocationId"
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
+        <select id="inputTitleHolder"  name="inputTitleHolder" ng-model="data.TitleLocationId"
                ng-options="location.Name for location in options.titleLocationOptions"
                required>
           <option value="" translate>Make Selection</option>
@@ -74,7 +74,7 @@
     </fieldset>
   </div>
 
-  <div class="span6 well">
+  <div class="col-xs-6 well">
     <h2 class="well-title" translate>Sale Information</h2>
 
     <fieldset class="well-item">
@@ -89,14 +89,15 @@
       </span>
 
       <label for="inventoryAddress" class="input-title" translate>Inventory Address</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocations.length <= 1 }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocations == null || sellerLocations.length <= 1 }">
         <select id="inventoryAddress"
                name="inventoryAddress"
                ng-model="data.PhysicalInventoryAddressId"
                ng-options="(location | address:'oneLineSelect') for location in sellerLocations"
-               ng-disabled="sellerLocations.length <= 1"
+               ng-disabled="sellerLocations == null || sellerLocations.length <= 1"
                required>
           <option value="" translate>Make Selection</option>
+
         </select>
       </div>
       <label for="inputAddress" class="text-error" ng-show="validity.inventoryAddress.$error.required" translate>
@@ -105,7 +106,7 @@
 
       <label for="inputPurchaseAmt" class="input-title" translate>Purchase Amount</label>
       <div class="input-prepend dollar">
-        <span class="add-on" translate>$</span>
+        <span class="add-on no-top" translate>$</span>
         <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
                nxg-min="1"
                required
@@ -155,7 +156,7 @@
       </p>
 
       <label for="inputDisburseAcct" class="input-title" translate>Bank Account</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
               ng-options="account.BankAccountName for account in options.BankAccounts"
               required>

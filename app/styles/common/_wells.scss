@@ -86,11 +86,11 @@
     background: $white;
 
     &:nth-child(2n) {
-      background: #ececec;
+      background: #f5f5f5;
     }
 
     .reversed & {
-      background: #ececec;
+      background: #f5f5f5;
 
       &:nth-child(2n) {
         background: $white;
@@ -160,16 +160,28 @@ p.no-results {
 // Page-specific well classes
 .dash-well {
   position: relative;
-  height: 270px;
+  height: 285px;
 
   &.nxg-dash-calendar-container {
     height: auto;
     min-height: 270px;
   }
 
+  .counter-list {
+    padding: 0 6%;
+  }
+
   .cta-full {
     position: absolute;
     bottom: 0;
+  }
+
+  &.payment-summary{
+    height: 270px;
+  }
+
+  &.recent-receipts{
+    min-width: 305px;
   }
 }
 
@@ -183,7 +195,7 @@ p.no-results {
   height: 270px;
 
   .counter-list {
-    padding: 0 10px;
+    padding: 0 6%;
   }
 
   .cta-full {
@@ -192,10 +204,11 @@ p.no-results {
   }
 }
 
+
 .settings-well {
   padding-bottom: 20px;
 
-  [class*="span"] {
+  [class*="col"] {
     position: relative;
   }
 }

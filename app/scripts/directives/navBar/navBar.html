@@ -1,11 +1,11 @@
 <header class="app-header" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
-  <div class="container-fluid">
+  <div class="container">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="span3 ng-binding" nxg-track="{{metric.CLICK_NEXTGEAR_LOGO}}">
+      <a ng-href="{{user.homeLink()}}" class="col-xs-3 ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
 
-      <div class="span6" ng-show="navState.current.showNavBar">
+      <div class="col-xs-6" ng-show="navState.current.showNavBar">
         <div class="nav-secondary" ng-show="user.isDealer()">
           <ul>
             <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="span3" ng-show="navState.current.showNavBar">
+      <div class="col-xs-3 pull-right" ng-show="navState.current.showNavBar">
         <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
           <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.BusinessName }}</p>
@@ -30,7 +30,7 @@
           </a>
 
           <ul class="unstyled" collapse="isCollapsed">
-            <li>
+            <li class="noLeftPadding">
               <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}" translate>Settings</a>
               <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}" translate>Profile Settings</a>
             </li>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="span5 offset4" ng-hide="navState.current.showNavBar">
+      <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
@@ -59,7 +59,7 @@
   </div>
 
   <div class="nav-bkgd" ng-show="navState.current.showNavBar">
-    <div class="container-fluid">
+    <div class="container">
       <div class="header">
         <ul class="nav-primary">
           <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">

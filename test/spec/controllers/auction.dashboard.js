@@ -28,11 +28,9 @@ describe('Controller: AuctionDashboardCtrl', function() {
   });
 
   it('should attach a promise of dashboard data results to the scope', function () {
-    expect(scope.dashboardData).toBeDefined();
-    scope.dashboardData.then(function (result) {
-      expect(result).toBe('dashboard data');
-    });
     scope.$apply();
+    expect(scope.dashboardData).toBeDefined();
+    expect(scope.dashboardData).toEqual('dashboard data');
   });
 
   it('should default selectedFloorplanChart to year', function () {
@@ -47,9 +45,7 @@ describe('Controller: AuctionDashboardCtrl', function() {
   it('should attach a promise of floorplan chart data results to the scope', function () {
     scope.$apply();
     expect(scope.chartData).toBeDefined();
-    scope.chartData.then(function (result) {
-      expect(result).toBe('floorplan chart data');
-    });
+    expect(scope.chartData).toEqual('floorplan chart data');
     scope.$apply();
   });
 
@@ -68,7 +64,7 @@ describe('Controller: AuctionDashboardCtrl', function() {
       dashboard.fetchFloorplanChartData.reset();
       scope.selectedFloorplanChart = 'foo';
       scope.$apply();
-    }
+    };
     expect(testFn).toThrow(new Error('Unexpected value for filtering floorplan chart!'));
   });
 

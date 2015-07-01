@@ -45,13 +45,10 @@ var AuctionBulkFlooringObject = function () {
 
   this.styledInputs = browser.element.all(by.css('.styled-input'));
 
-  this.modal = browser.element(by.css('.modal'));
-  this.modalHeader = this.modal.element(by.css('.modal-header'));
-  this.closeModal = this.modal.element(by.cssContainingText('button', 'Close Window'));
+  var modal = browser.element(by.css('.modal'));
+  var businessSearchInput = modal.element(by.model('data.proposedQuery'));
 
   this.waitAndCloseModal = function () {
-    var modal = this.modal;
-    var closeModal = this.closeModal;
     // must be done in the following steps:
     // * wait for the modal to appear in the page first
     browser.driver.wait(function () {
@@ -62,7 +59,7 @@ var AuctionBulkFlooringObject = function () {
       var promise = protractor.promise.defer();
       modal.isPresent().then(function (present) {
         if (present) {
-          closeModal.click();
+          businessSearchInput.sendKeys(protractor.Key.ESCAPE);
         }
         promise.fulfill(true);
       });

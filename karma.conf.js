@@ -21,6 +21,7 @@ module.exports = function (karma) {
 		files: [
       'app/components/jquery/jquery.js',
       'app/components/angular/angular.js',
+      'app/components/angular-sanitize/angular-sanitize.js',
       'app/components/angular-mocks/angular-mocks.js',
       'app/components/angular-ui-router/release/angular-ui-router.js',
       'app/components/angular-ui-utils/modules/highlight/highlight.js',

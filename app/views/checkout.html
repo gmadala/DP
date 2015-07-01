@@ -1,5 +1,5 @@
-<section class="row-fluid">
-  <section class="span9">
+<section class="row">
+  <section class="col-xs-9">
     <div ng-switch="paymentQueue.contents.isEmpty()">
 
       <!-- When there are no payments or fees -->
@@ -135,8 +135,7 @@
                   <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
                   <button class="btn-unstyle btn-link right"
                           ng-click="paymentQueue.removePayment(payment.id)"
-                          ng-disabled="submitInProgress"
-                          nxg-track="{{metric.CLICK_CHECKOUT_REMOVE_PAYMENT_LINK}}" translate>
+                          ng-disabled="submitInProgress" translate>
                     Remove
                   </button>
                 </div>
@@ -154,7 +153,7 @@
     </div>
   </section>
 
-  <form class="span3 well sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer">
+  <form class="col-xs-3 well sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer">
     <h2 class="well-title" translate>Payment Summary</h2>
 
     <section class="nxg-sticky-scroll">
@@ -197,7 +196,6 @@
             <div class="cr-inline float-r">
               <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
                      ng-value="true" ng-model="unappliedFunds.useFunds"
-                     nxg-track="{{metric.CLICK_CHECKOUT_APPLY_FUNDS_YES}}"
                      ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
               <label class="radio-img" for="unappliedYes"></label>
               <label class="cr-label" for="unappliedYes" translate>Yes</label>
@@ -265,9 +263,7 @@
                   ng-model="bankAccounts.selectedAccount"
                   ng-disabled="submitInProgress"
                   ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }"
-                  nxg-track="{{metric.CLICK_CHECKOUT_SELECT_ACCOUNT}}"
-                  required>
+                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
             <option value="" translate>-- Select Bank --</option>
           </select>
         </div>

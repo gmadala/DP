@@ -41,6 +41,8 @@ module.exports = function(grunt) {
   } catch (e) {
   }
 
+  grunt.file.defaultEncoding = 'utf8';
+
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
@@ -99,7 +101,9 @@ module.exports = function(grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist)
+              mountFolder(connect, yeomanConfig.dist),
+              mountFolder(connect, 'api'),
+              useMock
             ];
           }
         }
@@ -118,10 +122,15 @@ module.exports = function(grunt) {
             src: [
               '.tmp',
               '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main.css',
+              '<%= yeoman.app %>/styles/main*.css',
               '!<%= yeoman.dist %>/.git*'
             ]
           }
+        ]
+      },
+      maintenance: {
+        src: [
+          'maintenance/**/*'
         ]
       },
       server: '.tmp'
@@ -133,12 +142,32 @@ module.exports = function(grunt) {
       all: [
         //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
+        '!app/scripts/config/nxgConfig.mock.processed.js',
+        '!app/scripts/translations.js',
         '!app/scripts/services/base64.js',
         '!app/scripts/directives/nxgChart/nxgChart.js',
         '!app/scripts/directives/tooltip.js',
-        '!app/scripts/translations.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
+      ]
+    },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/scripts/**/*.js',
+        '!app/scripts/config/nxgConfig.mock.processed.js',
+        '!app/scripts/translations.js',
+        '!app/scripts/services/base64.js',
+        '!app/scripts/directives/nxgChart/nxgChart.js',
+        '!app/scripts/directives/tooltip.js',
+        // TODO JSCS could be used for all test files depending on what rules we decide on
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
+        //'!test/spec/**/*.js',
+        //'test/util/**/*.js'
       ]
     },
     karma: {
@@ -164,9 +193,31 @@ module.exports = function(grunt) {
           force: true
         }
       },
+      maintenance: {
+        options: {
+          sassDir: '<%= yeoman.app %>/styles',
+          cssDir: '<%= yeoman.app %>/styles',
+          force: true
+        }
+      },
       server: {
         options: {
           debugInfo: true
+        }
+      }
+    },
+    // Run "bless" to make sure that there aren't too many rules in our css for ie9.
+    // TODO: Update the package.json to use bless 0.3.0 once it is released (0.2.0 does not have a "failOnLimit" option)
+    bless: {
+      css: {
+        options: {
+          logCount: true,
+          // overwrite original file
+          force: true,
+          imports: false
+        },
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.css'
         }
       }
     },
@@ -269,7 +320,7 @@ module.exports = function(grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [
           {
@@ -294,6 +345,59 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      maintenance: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/',
+            src: '<%= yeoman.app %>/img/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/icons/',
+            src: '<%= yeoman.app %>/img/icons/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/img/browsers/',
+            src: '<%= yeoman.app %>/img/browsers/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/fonts/',
+            src: '<%= yeoman.app %>/fonts/**/*'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance',
+            src: '<%= yeoman.app %>/favicon.ico'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance',
+            src: '<%= yeoman.app %>/maintenance.html'
+          },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            dest: 'maintenance/styles/',
+            src: '<%= yeoman.app %>/styles/main*.css'
+          }
+        ]
+      },
       dist: {
         files: [
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt' },
@@ -302,6 +406,16 @@ module.exports = function(grunt) {
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/icons/', src: '<%= yeoman.app %>/img/icons/*' },
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/browsers/', src: '<%= yeoman.app %>/img/browsers/*' },
           { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/fonts/', src: '<%= yeoman.app %>/fonts/**/*' },
+          {
+            expand: true,
+            dot: true,
+            flatten: true,
+            // cache bust language files using the GIT SHA - This is overly aggressive since the translations may not
+            // have changed between revisions but typically they will change between releases anyways so this
+            // approach should be good enough
+            dest: '<%= yeoman.dist %>/languages-<%= gitinfo.local.branch.current.shortSHA %>/',
+            src: '<%= yeoman.app %>/languages/*'
+          },
           {
             expand: true,
             dot: true,
@@ -382,12 +496,27 @@ module.exports = function(grunt) {
     },
     nggettext_compile: {
       all: {
-        files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['po/*.po']
-        }
+        options: {
+          // format: 'json' - Use standard js angular module and not json because asynchronous loading will not
+          // work since currently the window has to be reloaded on any language change due to binding issues
+          // index.html loads the correct language file as needed before bootstrapping the app
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: 'po',
+            dest: 'app/languages',
+            src: ['*.po'],
+            ext: '.js'
+          }
+        ]
       }
     },
     gettext_update_po: {
+      src: ['po/*.po']
+    },
+    po_validate: {
       src: ['po/*.po']
     },
     shell: {
@@ -402,14 +531,18 @@ module.exports = function(grunt) {
         ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
         ' --homepage http://localhost:<%= connect.options.port %>'
       },
+      ie: {
+        command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
+      },
       webdriverUpdate: {
         command: ' ./node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
         command: function (filename) {
-          // use -N for --no-fuzzy-matching and echo how many strings are untranslated
+          // use -N for --no-fuzzy-matching and echo how many strings are untranslated (use 'tail' to skip opening
+          // comment lines which typically have an irrelevant msgid)
           return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
-            'msgattrib --untranslated ' + filename + ' | echo $(grep "msgid" -c) untranslated strings';
+            'msgattrib --untranslated ' + filename + ' | tail -n +10 | echo $(grep "msgid" -c) untranslated strings';
         }
       }
     },
@@ -434,7 +567,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint karma'
+        'pre-commit': 'jshint jscs karma'
       }
     }
   });
@@ -460,6 +593,13 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
+  grunt.registerTask('server-ie', [
+      'dev-setup',
+      'livereload-start',
+      'connect:livereload',
+      'shell:ie',
+      'watch'
+  ]);
   grunt.registerTask('server-dist', [
     'build',
     'shell:chrome',
@@ -539,6 +679,14 @@ module.exports = function(grunt) {
     counter++;
   });
 
+  grunt.registerTask('build-maintenance', [
+    'gitinfo',
+    'env',
+    'clean:maintenance',
+    'compass:maintenance',
+    'copy:maintenance'
+  ]);
+
   grunt.registerTask('build', [
     'gitinfo',
     'env',
@@ -546,12 +694,13 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'useminPrepare',
     'compass:dist',
+    'bless',
     'concat',
     'preprocess:dist',
-    'copy',
+    'copy:dist',
     'preprocess:index',
     'cdnify',
-    'ngmin',
+    'ngAnnotate',
     'uglify',
     'cssmin',
     'autoprefixer',
@@ -572,6 +721,7 @@ module.exports = function(grunt) {
     grunt.task.run('test:e2e:users');
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
     grunt.task.run('jshint');
+    grunt.task.run('jscs');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
@@ -583,7 +733,29 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'nggettext_compile']);
+  // apply validation/formatting/other post-processing as needed
+  // TODO: Grunt translation tasks should be cleaned up slightly with MNGW-5568
+  grunt.registerMultiTask('po_validate', 'update PO files from the POT file', function () {
+
+    // Replace ’ with ' for apostrophe symbol - MNGW-5529
+    this.filesSrc.forEach(function (filename) {
+
+      var contents;
+      var replace = /’/g;
+      var replaceWith = '\'';
+
+      contents = grunt.file.read(filename);
+
+      if (replace.test(contents)) {
+
+        console.log('Replacing "' + replace.source + '" with "' + replaceWith + '" in ' + filename);
+        contents = contents.replace(replace, replaceWith);
+        grunt.file.write(filename, contents);
+      }
+    });
+  });
+
+  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'po_validate', 'nggettext_compile']);
 
   grunt.registerTask('default', ['server']);
 };

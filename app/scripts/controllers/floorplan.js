@@ -82,7 +82,7 @@ angular.module('nextgearWebApp')
 
 
 
-  // Set up page-load filtering based on $stateParams
+    // Set up page-load filtering based on $stateParams
     var filterParam = null;
 
     switch($stateParams.filter) {
@@ -102,6 +102,10 @@ angular.module('nextgearWebApp')
 
     $scope.sellerTimeouts = {};
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
+      // TODO: Upgrade note for 1.2.28.
+      // In new angular 1.2.28, it seems that ng-click gets executed before ng-model gets assigned.
+      // When user check the checkbox, the click still have the old ng-model value.
+
       /*jshint camelcase: false */
       var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
 
@@ -115,13 +119,17 @@ angular.module('nextgearWebApp')
       };
 
       // prevent flash of tooltip when "i have title" is unchecked
+      // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
       curFloorplan.scope().tt_isOpen = false;
+      // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
       toggleTooltip(curFloorplan.next(), true);
 
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
           if (hasTitle) { // show the tooltip for 5 seconds, then fade
+            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
             curFloorplan.scope().tt_isOpen = true;
+            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             toggleTooltip(curFloorplan.next(), false);
 
             if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
@@ -130,7 +138,9 @@ angular.module('nextgearWebApp')
             }
 
             $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
+              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
               curFloorplan.scope().tt_isOpen = false;
+              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
               toggleTooltip(curFloorplan.next(), true);
             }, 5000);
           }

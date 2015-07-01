@@ -1,15 +1,15 @@
-<div class="row-fluid">
-  <div class="span6 well video-well">
+<div class="row">
+  <div class="col-xs-6 well video-well">
     <h2 class="well-title" translate>Video Walkthrough</h2>
     <div class="nxg-video">
       <iframe class='sproutvideo-player' type='text/html' src='https://videos.sproutvideo.com/embed/e89bd9b5121ce8cf60/0425ed83c4b99dd9?type=sd' width='630' height='354' frameborder='0'></iframe>
     </div>
   </div>
 
-  <div class="span3 well documents-well">
+  <div class="col-xs-3 well documents-well">
     <h2 class="well-title" translate>NextGear Capital Documents</h2>
     <div class="well-item">
-      <ul class="text-list">
+      <ul class="text-list zeroLeftPadding">
         <li>
           <a ng-href="{{ feeScheduleUrl }}" target="_blank"
              nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
@@ -26,7 +26,7 @@
         </li>
       </ul>
       <h4 translate>Collateral Protection Program</h4>
-      <ul class="text-list">
+      <ul class="text-list zeroLeftPadding">
         <li ng-repeat="doc in collateralProtection">
           <a ng-href="{{ doc.url }}" target="_blank"
              nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
@@ -38,11 +38,11 @@
     </div>
   </div>
 
-  <div class="span3 well documents-well">
+  <div class="col-xs-3 well documents-well leftMarginLarge">
     <h2 class="well-title" translate>NextGear Capital Mobile Apps</h2>
     <div class="well-item">
       <p translate>Manage your business with NextGear Capital on the go.</p>
-      <ul class="text-list">
+      <ul class="text-list zeroLeftPadding">
         <li>
           <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8" target="_blank"
              nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}"

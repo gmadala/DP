@@ -1,0 +1,11 @@
+{
+  "Success": true,
+  "Message": null,
+  "Data": {
+    "Edition": "May 2015",
+    "EndDate": "2015-05-28T00:00:00",
+    "NewCarReleaseVersion": "150503",
+    "StartDate": "2015-05-22T00:00:00",
+    "UsedCarReleaseVersion": "15053"
+  }
+}

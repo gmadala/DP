@@ -26,6 +26,9 @@
 @import "common/tooltips";
 @import "common/sortable";
 
+// Individual directive styles.
+@import "directives/nxgSearch";
+
 // Individual page styles.
 @import "pages/login";
 @import "pages/unsupported";
@@ -36,6 +39,8 @@
 @import "pages/analytics";
 @import "pages/auctions";
 @import "pages/lookup";
+@import "pages/valueLookup";
+@import "pages/dashboard";
 
 // Language specific overrides
 @import "lang/es";

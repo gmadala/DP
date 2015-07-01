@@ -66,7 +66,7 @@
   min-width: 35px;
   background: $white;
   padding: 7px 10px;
-  margin: 6px 15px 6px 15px;
+  margin: 6px 15px 6px 0px;
   border: 1px solid #808080;
 
   &.overdue {
@@ -86,16 +86,16 @@
 }
 
 .counter-list {
+  padding: 15px;
   li {
     @extend .clearfix;
   }
-
   .counter {
     @extend %float-l;
-    margin: 4px 15px;
+    margin: 4px 0px;
   }
 
   .dash-lockup {
-    padding: 4px 10px;
+    padding: 4px 0;
   }
 }

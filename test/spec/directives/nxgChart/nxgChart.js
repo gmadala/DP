@@ -21,8 +21,8 @@ describe('Directive: nxgChart', function () {
   }));
 
   it('should attach the given parameters to the scope', function (){
-    var iScope = element.scope();
-    expect(iScope.data).toBe(outerScope.mockData);
+    var iScope = element.isolateScope();
+    expect(iScope.data).toEqual(outerScope.mockData);
     expect(iScope.type).toBe('bar');
     expect(iScope.descriptionX).toBe('Foo Description');
     expect(iScope.dataName).toBe('Foo Data Name');

@@ -100,11 +100,11 @@ describe('Directive: navBar', function () {
         // dealers have 7 primary links and 3 secondary links (excluding conditional TRP link)
         // have to exclude reports and resources
         expect(myLinks.primary.length).toBe(6);
-        expect(myLinks.secondary.length).toBe(2);
+        expect(myLinks.secondary.length).toBe(3);
 
         myLinks = aScope.user.navLinks();
         // auctions have 6 primary links and no secondary links
-        expect(myLinks.primary.length).toBe(5);
+        expect(myLinks.primary.length).toBe(6);
         expect(myLinks.secondary).not.toBeDefined();
       });
 
@@ -119,7 +119,7 @@ describe('Directive: navBar', function () {
         });
         $rootScope.$digest();
         expect(scope.user.navLinks().primary.length).toBe(6);
-        expect(scope.user.navLinks().secondary.length).toBe(1);
+        expect(scope.user.navLinks().secondary.length).toBe(2);
       });
 
       it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {

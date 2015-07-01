@@ -121,7 +121,9 @@ angular.module('nextgearWebApp')
         query: null,
         startDate: null,
         endDate: null,
-        filter: TitleReleases.filterValues.ALL
+        filter: TitleReleases.filterValues.ALL,
+        sortField: $scope.sortField,
+        sortDesc: $scope.sortDescending
       };
       $scope.search();
     };

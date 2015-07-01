@@ -3,7 +3,7 @@
 .col-bordered {
   padding: 20px 0;
 
-  & > [class*="span"] {
+  & > [class*="col"] {
     border-right: 1px solid #BBBBBB;
 
     &:last-child {
@@ -80,7 +80,6 @@
 
 // dashboard
 .dash-lockup {
-  @extend .lockup;
   @extend .clearfix;
   float: right;
   text-align: right;
@@ -112,14 +111,16 @@
 }
 
 .payment-activity {
-  [class*="span"] {
+  [class*="col"] {
     height: 250px;
     margin: 0;
+    background-color:#fff;
+    @include border-bottom-radius($borderRadius);
   }
 
   .table-holder {
-    border: 0;
-    border-right: 1px solid #BBBBBB;
+    background-color:#fff;
+    @include border-bottom-radius($borderRadius);
   }
 
   h3 {
@@ -144,8 +145,8 @@
 .search {
   padding: 20px 10px;
 
-  & > [class*="span"] {
-    & + [class*="span"] {
+  & > [class*="col"] {
+    & + [class*="col"] {
       padding-left: 20px;
       border-left: 1px solid $border;
     }
@@ -159,9 +160,12 @@
 }
 
 .vin {
-  margin-right: 10px;
+  width: 170px;
 }
 
+.stock {
+  margin-right: 10px;
+}
 
 // for payment buttons on the vehicle details page.
 .payment-btn-block {
@@ -187,6 +191,10 @@ hr {
   border-top: 1px solid $border;
   border-bottom: 0;
   margin-bottom: 20px;
+}
+
+.hr-no-margin {
+  margin:0;
 }
 
 // Provides our highlightable search text
@@ -220,11 +228,11 @@ hr {
   padding: 10px 0;
   margin: 10px 0 20px;
 
-   & > [class*="span"] {
-    padding: 10px;
+   & > [class*="col"] {
+    padding: 0px;
     border-right: 1px solid #BBBBBB;
-
-    & + [class*="span"] {
+    width:25%;
+    & + [class*="col"] {
       padding-left: 0;
     }
     &:last-child {

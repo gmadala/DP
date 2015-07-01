@@ -118,14 +118,18 @@ angular.module('nextgearWebApp')
             prv.cancel.apply(this);
             // make sure to close any tooltips left open
             angular.forEach(angular.element('.btn-help'), function(elem) {
-              /*jshint camelcase: false */
+              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
               angular.element(elem).scope().tt_isOpen = false;
+              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             });
           },
           save: function() {
             if (prv.save.apply(this)) {
-              var d = this.dirtyData,
+              var d = this.dirtyData;
+              var cleanPhone = null;
+              if(d.phone !== null) {
                 cleanPhone = d.phone.replace($scope.phonePattern, '$2$4$5$6$7'); // sanitize phone format
+              }
 
               this.updateQuestionText(d.questions);
 
@@ -133,8 +137,9 @@ angular.module('nextgearWebApp')
                 prv.saveSuccess.bind(this)
               ).then(function() {
                 angular.forEach(angular.element('.btn-help'), function(elem) {
-                  /*jshint camelcase: false */
+                  // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                   angular.element(elem).scope().tt_isOpen = false;
+                  // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                 });
               });
             }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('banner', function($rootScope, $http, nxgConfig, language) {
+  .factory('banner', function($rootScope, $http, $state, nxgConfig, language) {
 
     return {
       fetch: function(callback) {
@@ -25,7 +25,7 @@ angular.module('nextgearWebApp')
             }
           },
           function(/*error*/) {
-            callback('');
+            $state.transitionTo('maintenance');
           }
         );
       }

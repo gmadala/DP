@@ -1,4 +1,6 @@
-
+// ===========
+//  AUCTIONS
+// ===========
 #AuctionReportsPage {
   .date-search-label {
     white-space: nowrap;
@@ -13,9 +15,20 @@
     }
   }
 
+  .checkbox-img.small {
+    margin-top: 9px;
+  }
+
   @media (min-width: 1100px) {
     .seller-has-title-box .cr-label {
       width: 75%;
     }
   }
 }
+
+#AuctionDashboardPage {
+  .counter-list.small-top-margin {
+    margin-top: 3%;
+  }
+}
+

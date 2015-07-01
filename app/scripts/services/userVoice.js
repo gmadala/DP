@@ -48,7 +48,7 @@ angular.module('nextgearWebApp')
           'support_tab_name': gettextCatalog.getString('Technical Support'),
           'tab_label': gettextCatalog.getString('Feedback & Support'),
           'tab_color': '#135889',
-          'tab_position': 'middle-right',
+          'tab_position': 'middle-left',
           'tab_inverted': false
         }]);
 

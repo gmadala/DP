@@ -151,7 +151,7 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
 
       var currentTransition;
       var doTransition = function(change) {
-        if ( currentTransition ) {
+        if (currentTransition) {
           currentTransition.cancel();
         }
         currentTransition = $transition(element,change);
@@ -162,7 +162,7 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
         return currentTransition;
       };
 
-      var expand = function() {
+     /* var expand = function() {
         if (initialAnimSkip) {
           initialAnimSkip = false;
           if ( !isCollapsed ) {
@@ -171,6 +171,7 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
         } else {
           doTransition({ height : element[0].scrollHeight + 'px' })
           .then(function() {
+
             // This check ensures that we don't accidentally update the height if the user has closed
             // the group while the animation was still running
             if ( !isCollapsed ) {
@@ -179,9 +180,19 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
           });
         }
         isCollapsed = false;
+      };*/
+
+      var expand = function() {
+        if (!initialAnimSkip || element[0].scrollHeight!==0) {
+          initialAnimSkip = false;
+          expandDone();
+        } else {
+          element.removeClass('collapse').addClass('collapsing');
+          doTransition({ height: element[0].scrollHeight + 'px' }).then(expandDone);
+        }
       };
 
-      var collapse = function() {
+      /*var collapse = function() {
         isCollapsed = true;
         if (initialAnimSkip) {
           initialAnimSkip = false;
@@ -190,7 +201,38 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
           fixUpHeight(scope, element, element[0].scrollHeight + 'px');
           doTransition({'height':'0'});
         }
+      };*/
+
+      var collapse = function() {
+        if (initialAnimSkip || element[0].scrollHeight==0) {
+          initialAnimSkip = false;
+          collapseDone();
+        } else {
+          // CSS transitions don't work with height: auto, so we have to manually change the height to a specific value
+          element.css({ height: element[0].scrollHeight + 'px' });
+          //trigger reflow so a browser realizes that height was updated from auto to a specific value
+          var x = element[0].offsetWidth;
+
+          element.removeClass('collapse in').addClass('collapsing');
+
+          doTransition({ height: 0 }).then(collapseDone);
+        }
       };
+
+      var collapseDone = function() {
+        element.removeClass('collapsing');
+        element.addClass('collapse');
+        element.css({height: 0});
+
+      };
+
+      var expandDone= function() {
+        element.removeClass('collapsing');
+        element.addClass('collapse in');
+        element.css({height: 'auto'});
+      };
+
+
     }
   };
 }]);
@@ -3408,7 +3450,7 @@ angular.module("template/tooltip/tooltip-html-unsafe-popup.html", []).run(["$tem
   $templateCache.put("template/tooltip/tooltip-html-unsafe-popup.html",
     "<div class=\"tooltip {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
     "  <div class=\"tooltip-arrow\"></div>\n" +
-    "  <div class=\"tooltip-inner\" ng-bind-html-unsafe=\"content\"></div>\n" +
+    "  <div class=\"tooltip-inner\" ng-bind-html=\"content\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -3545,7 +3587,7 @@ angular.module("template/typeahead/typeahead.html", []).run(["$templateCache", f
   $templateCache.put("template/typeahead/typeahead.html",
     "<ul class=\"typeahead dropdown-menu\" ng-style=\"{display: isOpen()&&'block' || 'none', top: position.top+'px', left: position.left+'px'}\">\n" +
     "    <li ng-repeat=\"match in matches\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\">\n" +
-    "        <a tabindex=\"-1\" ng-click=\"selectMatch($index)\" ng-bind-html-unsafe=\"match.label | typeaheadHighlight:query\"></a>\n" +
+    "        <a tabindex=\"-1\" ng-click=\"selectMatch($index)\" ng-bind-html=\"match.label | typeaheadHighlight:query\"></a>\n" +
     "    </li>\n" +
     "</ul>");
 }]);

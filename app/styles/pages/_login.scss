@@ -7,6 +7,17 @@
     padding: 10px 20px 0;
   }
 
+  .col-md-4 {
+    width:33.33333%;
+    margin:0;
+
+  }
+  .col-md-offset-4
+  {
+    margin-left:33.33333%;
+  }
+
+
   .error-table {
     padding: 5px;
     background-color: $wellBackground;
@@ -36,7 +47,7 @@
   }
 
   .login-help {
-    @extend .span12;
+    @extend .col-lg-12;
     @extend %small;
     line-height: 1.8;
     margin: 0 0 20px;
@@ -67,6 +78,9 @@
     margin: 30px auto 20px;
   }
 
+  #email, #userName {
+    width: 75%;
+  }
   .error-table {
     padding: 5px;
     background-color: $wellBackground;
