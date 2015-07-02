@@ -1,8 +1,8 @@
 'use strict';
 
-var HelperObject = require('../framework/helper_object.js');
-var CheckoutPage = require('../framework/checkout_page_object.js');
-var PaymentsPage = require('../framework/payments_page_object.js');
+var HelperObject = require('../../framework/helper_object.js');
+var CheckoutPage = require('../../framework/checkout_page_object.js');
+var PaymentsPage = require('../../framework/payments_page_object.js');
 
 var helper = new HelperObject();
 var checkoutPage = new CheckoutPage();
@@ -42,7 +42,7 @@ helper.describe('WMT-55', function () {
       expect(checkoutPage.getModalHeaderText()).toContain(modalHeaderText);
     });
 
-    it('Export Summary opens payment summary for selected payments.', function () {
+    xit('Export Summary opens payment summary for selected payments.', function () {
       // TODO: Unable to implement as I can't get the link to become active.
       // This seems to be data related as the link will be active when there's a current payment.
     });

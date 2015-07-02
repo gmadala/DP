@@ -1,7 +1,3 @@
-/**
- * Created by gayathrimadala on 1/6/15.
- */
-
 'use strict';
 
 var FlooringVehicleObject = function () {

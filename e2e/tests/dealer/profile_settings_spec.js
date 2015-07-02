@@ -1,9 +1,7 @@
-/**
- * Created by gayathrimadala on 1/16/15.
- */
 'use strict';
-var HelperObject = require('../framework/helper_object.js');
-var ProfileSettingsObject = require('../framework/profile_settings_page_object');
+
+var HelperObject = require('../../framework/helper_object.js');
+var ProfileSettingsObject = require('../../framework/profile_settings_page_object');
 
 var helper = new HelperObject();
 var profileSettingsPage = new ProfileSettingsObject();
@@ -87,7 +85,6 @@ helper.describe('WMT-86', function () {
     });
 
     it('should check for the Notifications on the page.', function () {
-      browser.sleep(1000);
       profileSettingsPage.repeaterOptions.count().then(function (count) {
         if (count === 0) {
           expect(profileSettingsPage.notificationMessage.isDisplayed()).toBeTruthy();

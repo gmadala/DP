@@ -1,10 +1,6 @@
-/**
- * Created by gayathrimadala on 12/29/14.
- */
-
 'use strict';
-var HelperObject = require('../framework/helper_object');
-var VehicleDetailObject = require('../framework/vehicledetails_page_object.js');
+var HelperObject = require('../../framework/helper_object');
+var VehicleDetailObject = require('../../framework/vehicledetails_page_object.js');
 
 var helper = new HelperObject();
 var vehiclePage = new VehicleDetailObject();
@@ -70,18 +66,17 @@ helper.describe('WMT-58', function () {
     });
 
     it('should check for Payment Activity - Show/Hide', function () {
-      expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
+      expect(browser.driver.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
       expect(vehiclePage.showHidePayActivity.isDisplayed()).toBeTruthy();
       vehiclePage.goToShowHidePayActivity();
-      browser.sleep(1000);
       vehiclePage.paymentActivityTransactionDetails.click();
       vehiclePage.goToClosePaymentDetails();
-      browser.sleep(1000);
       vehiclePage.goToShowHidePayActivity();
     });
 
     it('should check for View the Title', function () {
-      expect(browser.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
+      expect(browser.driver.getCurrentUrl()).toContain(vehiclePage.vehicledetailsUrl);
+      browser.driver.executeScript('window.scrollTo(400, 400)');
       expect(vehiclePage.viewTitle.isDisplayed()).toBeTruthy();
 
       browser.driver.getAllWindowHandles().then(function (handles) {

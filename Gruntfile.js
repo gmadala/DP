@@ -28,11 +28,9 @@ module.exports = function(grunt) {
   var counter = 0;
   var effectiveUsers = [];
   var users = [
-    ['non-mock', 'payments', '53190md', 'password@1'],
-    ['non-mock', 'receipts', '53190md', 'password@1'],
+    ['non-mock', 'dealer', '53190md', 'password@1'],
     ['non-mock', 'auction', '10264', 'password@1'],
-    ['mock', 'payments', 'dealer', 'test'],
-    ['mock', 'receipts', 'dealer', 'test'],
+    ['mock', 'dealer', 'dealer', 'test'],
     ['mock', 'auction', 'auction', 'test']
   ];
 
