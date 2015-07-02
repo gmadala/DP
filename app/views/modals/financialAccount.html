@@ -1,3 +1,4 @@
+<!-- Uncommented Sections are shared by both Add and Edit Bank Account -->
 <h3 class="modal-header" translate>
   {{account.AccountId ? 'Edit' : 'Add'}} Financial Account
 </h3>
@@ -35,7 +36,8 @@
         </label>
       </div>
     </div>
-    <!-- EDIT BANK ACCOUNT -->
+
+    <!-- EDIT BANK ACCOUNT ONLY -->
     <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AccountNumber">
       <div class="row">
         <div class="col-xs-5 no-right-padding">
@@ -54,8 +56,9 @@
         </div>
       </div>
     </div>
+    <!-- END EDIT BANK ACCOUNT ONLY -->
 
-    <!-- ADD BANK ACCOUNT -->
+    <!-- ADD BANK ACCOUNT ONLY -->
     <div ng-show="!account.AccountNumber">
       <div class="row">
         <div class="col-xs-6">
@@ -84,6 +87,8 @@
         </div>
       </div>
     </div>
+    <!-- END ADD BANK ACCOUNT ONLY -->
+
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
