@@ -8,6 +8,7 @@
 
   function FinancialAccountCtrl($scope, AccountManagement, dialog, options) {
     $scope.account = options.account || {};
+    console.log($scope.account);
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
 
@@ -23,8 +24,10 @@
       if ($scope.validity.$valid) {
         if (!$scope.account.AccountId) {
           $scope.account.AccountNumber = $scope.accountNumberDisplay;
-          $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
+          $scope.account.RoutingNumber = $scope.routingNumberDisplay;
         }
+
+        console.log($scope.account);
 
         AccountManagement.updateBankAccount($scope.account).then(function () {
           dialog.close($scope.account);

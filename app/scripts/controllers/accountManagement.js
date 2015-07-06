@@ -231,7 +231,13 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
-                    account: { }
+                    defaultForBilling: false,
+                    defaultForDisbursement: false,
+                    account: {
+                      IsActive: false,
+                      City: '',
+                      State: ''
+                    }
                   };
                 }
               },
