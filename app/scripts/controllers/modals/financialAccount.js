@@ -8,7 +8,6 @@
 
   function FinancialAccountCtrl($scope, AccountManagement, dialog, options) {
     $scope.account = options.account || {};
-    console.log($scope.account);
 
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
@@ -22,7 +21,6 @@
 
     function confirmRequest () {
       $scope.validity = angular.copy($scope.financialAccountForm);
-      console.log($scope.financialAccountForm);
       if ($scope.validity.$valid) {
         if (!$scope.account.AccountId) {
           $scope.account.AccountNumber = $scope.accountNumberDisplay;
@@ -30,7 +28,6 @@
         }
 
         console.log($scope.account);
-
         AccountManagement.updateBankAccount($scope.account).then(function () {
           dialog.close($scope.account);
         });
