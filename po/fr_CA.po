@@ -2018,7 +2018,7 @@ msgstr "Veuillez entrer un nom d'usager."
 
 #: app/views/valuelookup.html
 msgid "Please enter a valid 5 digit Zip."
-msgstr "Veuillez entrer un code ZIP valide à cinq chiffres."
+msgstr "Veuillez entrer un code postal(?e) valide à cinq chiffres."
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Please enter a valid End Stock Number"
@@ -2115,7 +2115,7 @@ msgstr "Veuillez entrer le montant d'achat."
 
 #: app/views/valuelookup.html
 msgid "Please enter the Zip."
-msgstr "Veuillez entrer le code ZIP."
+msgstr "Veuillez entrer le code postal(e?)."
 
 #: app/views/checkout.html
 msgid ""
@@ -2860,7 +2860,7 @@ msgstr ""
 #: app/views/valuelookup.html
 msgid "The following values are based on the Zip provided."
 msgstr ""
-"Les valeurs ci-dessous sont basées sur le code postal américain que vous "
+"Les valeurs ci-dessous sont basées sur le code postal(?e) américain que vous "
 "avez fourni."
 
 #: app/views/valuelookup.html
@@ -3684,7 +3684,7 @@ msgstr ""
 
 #: app/views/valuelookup.html
 msgid "Zip"
-msgstr "Code ZIP"
+msgstr "Code Postal"
 
 #: app/404.html
 msgid "a mistyped address"
