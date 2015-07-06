@@ -26,10 +26,10 @@ angular.module('nextgearWebApp')
         enabled: false
       },
       editBankAccount: {
-        enabled: false
+        enabled: true
       },
       addBankAccount: {
-        enabled: false
+        enabled: true
       },
       loadFromQueryString: function () {
         var search = $location.search();
