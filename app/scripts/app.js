@@ -17,10 +17,14 @@ angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives
   //}])
   .config(function($stateProvider, $urlRouterProvider) {
 
-    // $urlRouterProvider.otherwise(function($injector) {
-    //   var User = $injector.get('User');
-    //   return User.isDealer() ? '/home' : '/act/home';
-    // });
+    $urlRouterProvider.otherwise(function($injector) {
+      var User = $injector.get('User');
+      if (User.isLoggedIn()) {
+        return User.isDealer() ? '/home' : '/act/home';
+      } else {
+        return '/login';
+      }
+    });
 
     $stateProvider
       .state('login', {
