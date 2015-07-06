@@ -38,7 +38,7 @@
     </div>
 
     <!-- EDIT BANK ACCOUNT ONLY -->
-    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AccountNumber">
+    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AccountId">
       <div class="row">
         <div class="col-xs-5 no-right-padding">
           <span class="heavy" translate>Account Number</span>
@@ -59,7 +59,7 @@
     <!-- END EDIT BANK ACCOUNT ONLY -->
 
     <!-- ADD BANK ACCOUNT ONLY -->
-    <div ng-show="!account.AccountNumber">
+    <div ng-show="!account.AccountId">
       <div class="row">
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
