@@ -15,11 +15,12 @@
       link: link,
       templateUrl: 'scripts/directives/nxgAddress/nxgAddress.html',
       scope: {
+        city: '=',
         info: '=',
-        streetAddress: '@',
-        city: '@',
-        state: '@',
-        zip: '@'
+        state: '=',
+        streetAddress: '=',
+        validity: '=',
+        zip: '='
       },
       restrict: 'E'
     };

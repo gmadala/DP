@@ -234,9 +234,7 @@ angular.module('nextgearWebApp')
                     defaultForBilling: false,
                     defaultForDisbursement: false,
                     account: {
-                      IsActive: false,
-                      City: '',
-                      State: ''
+                      IsActive: false
                     }
                   };
                 }

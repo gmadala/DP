@@ -30,7 +30,7 @@
       <div class="col-xs-12">
         <label for="bankName" translate>Bank Name</label>
         <input type="text" id="bankName" name="bankName" class="input-full" ng-model="account.BankName"
-               ng-required="true" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
+               ng-required="true" ng-class="{ 'nxg-invalid': validity.bankName.$error.required || validity.bankName.$error.pattern }">
         <label for="bankName" class="text-error" ng-show="validity.bankName.$error.required" translate>
           You can't have empty bank name.
         </label>
@@ -86,9 +86,10 @@
           </label>
         </div>
       </div>
-      <nxg-address info="account"
-                   city="true"
-                   state="true">
+      <nxg-address city="true"
+                   info="account"
+                   state="true"
+                   validity="validity">
       </nxg-address>
     </div>
     <!-- END ADD BANK ACCOUNT ONLY -->
