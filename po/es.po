@@ -3801,7 +3801,7 @@ msgstr ""
 
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
-msgstr "© %YEAR% Por Kelley Blue Book Co., Inc."
+msgstr "© %YEAR% Kelley Blue Book Co., Inc."
 
 #~ msgid "Account name must only have letters and spaces."
 #~ msgstr "El nombre de la cuenta solo debe contener letras y espacios."

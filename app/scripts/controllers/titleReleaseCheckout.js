@@ -31,7 +31,7 @@ angular.module('nextgearWebApp')
           resolve: {
             response: function() {return response;}
           },
-          dialogClass: 'modal modal-medium',
+          dialogClass: 'modal modal-medium modal-long',
           backdrop: true,
           keyboard: false,
           backdropClick: false,
