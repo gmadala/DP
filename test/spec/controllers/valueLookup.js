@@ -181,10 +181,10 @@ describe('Controller: ValueLookupCtrl', function () {
 
     kbbResultFormatted = [
         {
-          14: 26376,
-          15: 25815,
-          16: 24926,
-          17: 22929
+          'Excellent': 26376,
+          'Good': 25815,
+          'Fair': 24926,
+          'VeryGood': 22929
         }
       ];
 

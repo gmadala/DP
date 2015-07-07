@@ -125,7 +125,8 @@ describe('Directive: nxgMin', function () {
         scope.settings.minAllowed = 50;
       });
 
-      expect(scope.model.data).toBe('99');
+      form.input.$setViewValue('98');
+      expect(scope.model.data).toBe('98');
       expect(form.input.$valid).toBe(true);
 
       form.input.$setViewValue('50');
