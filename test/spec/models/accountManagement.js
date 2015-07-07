@@ -42,7 +42,7 @@ describe('Model: AccountManagement', function() {
         "AccountName": "JP Morgan Chase Bank - 7905",
         "BankName": "JP Morgan Chase Bank",
         "IsActive": true,
-        "RoutingtNumber": "349886738",
+        "RoutingNumber": "349886738",
         "City": "Phoenix",
         "State": "77c78343-f0f1-4152-9f77-58a393f4099d",
         "IsDefaultPayment": true,
@@ -52,6 +52,7 @@ describe('Model: AccountManagement', function() {
     };
     httpBackend.whenGET('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
     httpBackend.whenPUT('/Dealer/bankAccount/').respond(bankAccountData);
+    httpBackend.whenPOST('/Dealer/bankAccount/').respond(bankAccountData);
 
     httpBackend.whenGET('/userAccount/v1_1/settings').respond({
       Success: true,
@@ -172,6 +173,32 @@ describe('Model: AccountManagement', function() {
 
     expect(accountManagement.updateBankAccount).toHaveBeenCalledWith(returnedBankAccount);
     expect(updatedBankAccount).toEqual(returnedBankAccount);
+  });
 
+  it('should call addBankAccount and throw error with invalid bank account', function() {
+    spyOn(accountManagement, 'addBankAccount').andCallThrough();
+    expect(accountManagement.addBankAccount).toThrow(new Error('Bank account is required.'));
+  });
+
+  it('should call addBankAccount', function() {
+    var newBankAccount = {}, returnedBankAccount = {};
+    spyOn(accountManagement, 'addBankAccount').andCallThrough();
+
+    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
+      .then(function (mockAccount) {
+        returnedBankAccount = mockAccount;
+        accountManagement.addBankAccount(returnedBankAccount)
+          .then(function (bankAccount) {
+            newBankAccount = bankAccount;
+          });
+      });
+
+    httpBackend.flush();
+
+    expect(accountManagement.addBankAccount).toHaveBeenCalled();
+    expect(accountManagement.addBankAccount).toHaveBeenCalledWith(returnedBankAccount);
+
+    expect(newBankAccount.AccountId).toEqual('9e05f8c9-2e3b-4f80-a346-00004bceacb1');
+    expect(newBankAccount).toEqual(returnedBankAccount);
   });
 });
