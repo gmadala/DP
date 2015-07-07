@@ -109,10 +109,73 @@ describe('Controller: FinancialAccountCtrl', function () {
   });
 
   describe('adding financial account', function () {
-    it('should not close the dialog if the form is not valid', function() {
+    beforeEach(inject(function ($controller, $rootScope, $q) {
 
+      dialog = {
+        close: angular.noop
+      };
+
+      AccountManagementMock = {
+        addBankAccount: function () {
+          return $q.when(bankAccount);
+        }
+      };
+
+      scope = $rootScope.$new();
+      FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
+        $scope: scope,
+        AccountManagement: AccountManagementMock,
+        dialog: dialog,
+        options: {
+          account: {
+            IsActive: false,
+            IsDefaultDisbursement: false,
+            IsDefaultPayment: false,
+          }
+        }
+      });
+    }));
+
+    it('should have empty fields', function() {
+      expect(scope.account.AccountName).toBeUndefined();
+      expect(scope.account.AccountNumber).toBeUndefined();
+      expect(scope.account.BankName).toBeUndefined();
+      expect(scope.account.City).toBeUndefined();
+      expect(scope.account.IsActive).toBeFalsy();
+      expect(scope.account.IsDefaultDisbursement).toBeFalsy();
+      expect(scope.account.IsDefaultPayment).toBeFalsy();
+      expect(scope.account.RoutingNumber).toBeFalsy();
+      expect(scope.account.State).toBeUndefined();
     });
 
+    it('should not close the dialog if the form is not valid', function() {
+      scope.financialAccountForm = {
+        $valid: false
+      };
 
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.confirmRequest('add');
+
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should close the dialog after adding bank account succeed', function() {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.confirmRequest('add');
+      // resolve remaining promise to send the updated bank account
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
   });
 });
