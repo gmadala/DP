@@ -341,7 +341,15 @@
                   controller.$setValidity('date', true);
                   if (isAppleTouch)
                     return new Date(viewValue);
-                  return type === 'string' ? viewValue : $.fn.datepicker.DPGlobal.parseDate(viewValue, $.fn.datepicker.DPGlobal.parseFormat(format), language);
+                  // Prior to Angular 1.2.28 this parser function was not called.
+                  // Now that it is called it takes viewValue as a date string
+                  // such as "07/08/2015" and converts it to a time string such
+                  // as "Tue Jul 07 2015 20:00:00 GMT-0400 (EDT)". Instead, we
+                  // make it return new Date(viewValue) so that it will return
+                  // "Wed Jul 08 2015 00:00:00 GMT-0400 (EDT)". See MNGW-5508.
+                  // We should be upgrading the datepicker soon so that
+                  // we will be able to remove this custom component.
+                  return type === 'string' ? viewValue : new Date(viewValue); // $.fn.datepicker.DPGlobal.parseDate(viewValue, $.fn.datepicker.DPGlobal.parseFormat(format), language);
                 } else {
                   controller.$setValidity('date', false);
                   return undefined;
