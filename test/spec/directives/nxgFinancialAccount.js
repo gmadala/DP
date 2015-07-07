@@ -41,9 +41,10 @@ describe('Directive: nxgFinancialAccount', function () {
     scope.account = account;
     scope.disbursementAccount = disbursementAccount;
     scope.billingAccount = billingAccount;
+    scope.isStakeholderActive=true;
 
     element = angular.element(
-      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount"></nxg-financial-account>');
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"></nxg-financial-account>');
 
     createIsolateScope();
 
@@ -72,6 +73,31 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.displayed).toBeTruthy();
   });
 
+  it('should show edit if stakeholder active', function () {
+
+    createIsolateScope();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+
+    expect(iScope.isEditable()).toBeTruthy();
+
+    iScope.editBankAccountEnabled= false;
+    iScope.isStakeholderActive = false;
+
+    expect(iScope.isEditable()).toBeFalsy();
+
+    iScope.editBankAccountEnabled = false;
+    iScope.isStakeholderActive = true;
+
+    expect(iScope.isEditable()).toBeFalsy();
+
+    iScope.editBankAccountEnabled = true;
+    iScope.isStakeholderActive = false;
+
+    expect(iScope.isEditable()).toBeFalsy();
+  });
+
   it('status should be "Active" if IsActive is true', function () {
 
     iScope.account.IsActive = true;
@@ -80,6 +106,7 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(iScope.status).toEqual('Active');
   });
+
 
   it('status should be "Inactive" if IsActive is not true', function () {
 
