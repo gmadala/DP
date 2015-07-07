@@ -50,7 +50,8 @@ module.exports = function (karma) {
       'app/scripts/directives/**/*.html',
       'test/spec/**/*.js',
       'test/util/analytics.js',
-      'test/util/urlParser.js'
+      'test/util/urlParser.js',
+      'test/util/disableOtherwise.js'
     ],
 
     preprocessors: {
