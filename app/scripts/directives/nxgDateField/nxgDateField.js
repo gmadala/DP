@@ -88,14 +88,12 @@ angular.module('nextgearWebApp')
 
               // IE9 has an issue with timezones - if date isn't set at midnight,
               // then the date will be wrong for timezones west of GMT. Correct for this
-              // TODO: In 1.3.16, this value returns string value instead of date value.
               var self = this;
-              if(self.value) {
-                var momentValue = moment(new Date(self.value));
-                if (momentValue.hour() !== 0) {
-                  momentValue = momentValue.add(moment().zone(), 'minutes');
+              if (self.value) {
+                self.value = moment(new Date(self.value)).toDate();
+                if(self.value.getHours() !== 0) {
+                  self.value.setTime(self.value.getTime() + self.value.getTimezoneOffset()*60*1000);
                 }
-                self.value = momentValue.format();
               }
 
               // adding this validation here to update the past or future $error after the tz correction.
