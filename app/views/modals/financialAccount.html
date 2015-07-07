@@ -8,9 +8,9 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
-               ng-model="account.IsActive"/>
+               ng-model="account.IsActive" ng-disabled="account.IsDefaultDisbursement || account.IsDefaultPayment"/>
         <label class="checkbox-img" for="financialAccountActive"></label>
-        <label class="cr-label" for="financialAccountActive">
+        <label class="cr-label" for="financialAccountActive" ng-class="{'text-disabled' : account.IsDefaultDisbursement || account.IsDefaultPayment}">
           <strong translate>Active</strong>
         </label>
       </div>
@@ -97,9 +97,9 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
-               ng-model="account.IsDefaultDisbursement"/>
+               ng-model="account.IsDefaultDisbursement" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForDisbursement"></label>
-        <label class="cr-label" for="defaultForDisbursement">
+        <label class="cr-label" for="defaultForDisbursement" ng-class="{'text-disabled' : !account.IsActive}">
           <strong translate>Default for disbursement</strong>
         </label>
       </div>
@@ -107,9 +107,9 @@
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
-               ng-model="account.IsDefaultPayment"/>
+               ng-model="account.IsDefaultPayment" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForPayment"></label>
-        <label class="cr-label" for="defaultForPayment">
+        <label class="cr-label" for="defaultForPayment" ng-class="{'text-disabled' : !account.IsActive}">
           <strong translate>Default for payment</strong>
         </label>
       </div>
