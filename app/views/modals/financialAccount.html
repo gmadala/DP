@@ -38,7 +38,7 @@
     </div>
 
     <!-- EDIT BANK ACCOUNT ONLY -->
-    <div class="small-top-margin smallest-bottom-margin" ng-show="!!account.AccountId">
+    <div class="small-top-margin smallest-bottom-margin" ng-if="!!account.AccountId">
       <div class="row">
         <div class="col-xs-5 no-right-padding">
           <span class="heavy" translate>Account Number</span>
@@ -59,12 +59,12 @@
     <!-- END EDIT BANK ACCOUNT ONLY -->
 
     <!-- ADD BANK ACCOUNT ONLY -->
-    <div ng-show="!account.AccountId">
+    <div ng-if="!account.AccountId">
       <div class="row">
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
           <input type="text" id="accountNumber" name="accountNumber" class="input-full"
-                 ng-model="accountNumberDisplay" ng-required="true"
+                 ng-model="account.AccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}">
           <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
             Account number must only have numbers.
@@ -76,7 +76,7 @@
         <div class="col-xs-6">
           <label for="routingNumber" translate>Routing Number</label>
           <input type="text" id="routingNumber" name="routingNumber" class="input-full"
-                 ng-model="routingNumberDisplay" ng-required="true"
+                 ng-model="account.RoutingNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}">
           <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
             Routing number must only have numbers.
@@ -121,7 +121,10 @@
   <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>
     Cancel Changes
   </button>
-  <button type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
+  <button ng-if="!!account.AccountId" type="submit" ng-disabled="loading" ng-click="confirmRequest('edit')" class="btn-cta cta-primary" translate>
+    Save Changes
+  </button>
+  <button ng-if="!account.AccountId" type="submit" ng-disabled="loading" ng-click="confirmRequest('add')" class="btn-cta cta-primary" translate>
     Save Changes
   </button>
 </div>

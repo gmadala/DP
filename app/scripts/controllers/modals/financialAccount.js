@@ -19,18 +19,19 @@
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
 
-    function confirmRequest () {
+    function confirmRequest (action) {
       $scope.validity = angular.copy($scope.financialAccountForm);
       if ($scope.validity.$valid) {
-        if (!$scope.account.AccountId) {
-          $scope.account.AccountNumber = $scope.accountNumberDisplay;
-          $scope.account.RoutingNumber = $scope.routingNumberDisplay;
+        if(action === 'edit') {
+          AccountManagement.updateBankAccount($scope.account).then(function () {
+            dialog.close($scope.account);
+          });
         }
-
-        console.log($scope.account);
-        AccountManagement.updateBankAccount($scope.account).then(function () {
-          dialog.close($scope.account);
-        });
+        if(action === 'add') {
+          AccountManagement.addBankAccount($scope.account).then(function () {
+            dialog.close($scope.account);
+          });
+        }
       }
     }
 

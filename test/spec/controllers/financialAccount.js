@@ -10,48 +10,47 @@ describe('Controller: FinancialAccountCtrl', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  beforeEach(inject(function ($controller, $rootScope, $q) {
-
-    bankAccount = {
-      'AccountId': '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
-      'AccountName': 'JP Morgan Chase Bank - 7905',
-      'BankName': 'JP Morgan Chase Bank',
-      'IsActive': true,
-      'RoutingNumber': '349886738',
-      'City': 'Phoenix',
-      'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
-      'IsDefaultPayment': true,
-      'IsDefaultDisbursement': true,
-      'AccountNumber': '4199137905'
-    };
-
-    dialog = {
-      close: angular.noop
-    };
-
-    AccountManagementMock = {
-      getBankAccount: function () {
-        return $q.when(bankAccount);
-      },
-      updateBankAccount: function () {
-        return $q.when(bankAccount);
-      }
-    };
-
-    scope = $rootScope.$new();
-    FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
-      $scope: scope,
-      AccountManagement: AccountManagementMock,
-      dialog: dialog,
-      options: {
-        account: bankAccount,
-        defaultForBilling: true,
-        defaultForDisbursement: true
-      }
-    });
-  }));
-
   describe('editing financial account', function () {
+    beforeEach(inject(function ($controller, $rootScope, $q) {
+
+      bankAccount = {
+        'AccountId': '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
+        'AccountName': 'JP Morgan Chase Bank - 7905',
+        'BankName': 'JP Morgan Chase Bank',
+        'IsActive': true,
+        'RoutingNumber': '349886738',
+        'City': 'Phoenix',
+        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
+        'IsDefaultPayment': true,
+        'IsDefaultDisbursement': true,
+        'AccountNumber': '4199137905'
+      };
+
+      dialog = {
+        close: angular.noop
+      };
+
+      AccountManagementMock = {
+        getBankAccount: function () {
+          return $q.when(bankAccount);
+        },
+        updateBankAccount: function () {
+          return $q.when(bankAccount);
+        }
+      };
+
+      scope = $rootScope.$new();
+      FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
+        $scope: scope,
+        AccountManagement: AccountManagementMock,
+        dialog: dialog,
+        options: {
+          account: bankAccount,
+          defaultForBilling: true,
+          defaultForDisbursement: true
+        }
+      });
+    }));
 
     it('should remove digit other than last 4 digit of account number', function () {
       expect(scope.accountNumberDisplay).toMatch(/\D+\d{4}$/);
@@ -84,7 +83,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       spyOn(dialog, 'close').andCallThrough();
       spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-      scope.confirmRequest();
+      scope.confirmRequest('edit');
       expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
       expect(dialog.close).not.toHaveBeenCalled();
     });
@@ -97,7 +96,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       spyOn(dialog, 'close').andCallThrough();
       spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-      scope.confirmRequest();
+      scope.confirmRequest('edit');
       // resolve remaining promise to send the updated bank account
       scope.$digest();
 
@@ -110,5 +109,10 @@ describe('Controller: FinancialAccountCtrl', function () {
   });
 
   describe('adding financial account', function () {
+    it('should not close the dialog if the form is not valid', function() {
+
+    });
+
+
   });
 });
