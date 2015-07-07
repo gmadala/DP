@@ -111,6 +111,8 @@ describe('Controller: FinancialAccountCtrl', function () {
   describe('adding financial account', function () {
     beforeEach(inject(function ($controller, $rootScope, $q) {
 
+      bankAccount = {};
+
       dialog = {
         close: angular.noop
       };
@@ -130,7 +132,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           account: {
             IsActive: false,
             IsDefaultDisbursement: false,
-            IsDefaultPayment: false,
+            IsDefaultPayment: false
           }
         }
       });
@@ -177,5 +179,37 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(dialog.close).toHaveBeenCalled();
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
     });
+
+    it('should call confirmRequest and throw an error if account is inactive and set to either default disbursement or default payment.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = true;
+
+      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+
+      scope.account.IsDefaultDisbursement = false;
+      scope.account.IsDefaultPayment = true;
+
+      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = false;
+
+      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+
+      scope.account.IsDefaultDisbursement = false;
+      scope.account.IsDefaultPayment = false;
+
+      expect(scope.confirmRequest).not.toThrow();
+
+      scope.account.IsActive = true;
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = true;
+
+      expect(scope.confirmRequest).not.toThrow();
+    })
   });
 });
