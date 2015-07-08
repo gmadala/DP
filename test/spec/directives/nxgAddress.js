@@ -58,13 +58,4 @@ describe('Directive: nxgAddress', function () {
     expect(dScope.info.State).toEqual(mockAddressAccount.State);
     expect(dScope.info.Zip).toEqual(mockAddressAccount.Zip);
   });
-
-  it('should get an address GUID', function() {
-
-  });
-
-  it('should get an state GUID', function() {
-
-  })
-
 });

@@ -201,4 +201,12 @@ describe('Model: AccountManagement', function() {
     expect(newBankAccount.AccountId).toEqual('9e05f8c9-2e3b-4f80-a346-00004bceacb1');
     expect(newBankAccount).toEqual(returnedBankAccount);
   });
+  //TODO MNGW-3840 Do State :)
+  it('should get an address GUID', function() {
+
+  });
+
+  it('should get an state GUID', function() {
+
+  })
 });
