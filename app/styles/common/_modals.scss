@@ -19,14 +19,21 @@
   display: block;
   width: 450px;
   height: 0;
-  //height:100%;
- // max-height: 50%;
   background: #F2F2F2;
   overflow: visible;
   border: 0;
   margin-left: 30%;
   margin-top:60px;
   z-index:2000;
+
+  &.modal-long{
+    height: 60%;
+    max-height: 545px;
+    .modal-body{
+      max-height: 100%;
+      overflow: scroll;
+    }
+  }
 
   form {
     margin: 0;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('nxgConfig', function($location){
+  .factory('nxgConfig', function ($location) {
 
     var SIXTY_MINUTES = 60 * 60 * 1000;
     var FIFTEEN_MINUTES = 15 * 60 * 1000;
@@ -37,38 +37,44 @@ angular.module('nextgearWebApp')
       },
       profile: {
         LOCAL: 'local',
+        LOCAL_TEST: 'local_test',
         UAT: 'uat',
         DEMO: 'demo',
         TEST: 'test',
         TRAINING: 'training',
         PRODUCTION: 'production'
       },
-      getConfig: function(profile) {
+      getConfig: function (profile) {
         var config;
         var isDemo = profile === prv.profile.DEMO;
         switch (profile) {
-        case prv.profile.LOCAL:
-          config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
-          config.apiBase = 'https://test.nextgearcapital.com/MobileService/api';
-          config.apiDomain = 'https://test.nextgearcapital.com';
-          break;
-        case prv.profile.UAT:
-          config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
-          break;
-        case prv.profile.DEMO:
-          config = prv.generateConfig(SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
-          break;
-        case prv.profile.TEST:
-          config = prv.generateConfig(SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
-          break;
-        case prv.profile.TRAINING:
-          config = prv.generateConfig(SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
-          break;
-        case prv.profile.PRODUCTION:
-          config = prv.generateConfig(SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
-          break;
-        default:
-          throw 'nxgConfig profile \'' + profile + '\' not found!';
+          case prv.profile.LOCAL:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+            config.apiBase = '';
+            config.apiDomain = '';
+            break;
+          case prv.profile.LOCAL_TEST:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+            config.apiBase = 'https://test.nextgearcapital.com/MobileService/api';
+            config.apiDomain = 'https://test.nextgearcapital.com';
+            break;
+          case prv.profile.UAT:
+            config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
+            break;
+          case prv.profile.DEMO:
+            config = prv.generateConfig(SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
+            break;
+          case prv.profile.TEST:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
+            break;
+          case prv.profile.TRAINING:
+            config = prv.generateConfig(SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
+            break;
+          case prv.profile.PRODUCTION:
+            config = prv.generateConfig(SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
+            break;
+          default:
+            throw 'nxgConfig profile \'' + profile + '\' not found!';
         }
         return config;
       }
@@ -78,6 +84,10 @@ angular.module('nextgearWebApp')
 
     // @if ENV='local'
     profile = prv.profile.LOCAL;
+    // @endif
+
+    // @if ENV='local_test'
+    profile = prv.profile.LOCAL_TEST;
     // @endif
 
     // @if ENV='uat'

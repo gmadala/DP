@@ -48,7 +48,7 @@ body.lang_fr_CA {
     @media (max-width: 1090px) {
       .dash-well {
         .well-title {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
@@ -83,6 +83,22 @@ body.lang_fr_CA {
         position: absolute;
         top: 14px;
         right: 10px;
+      }
+    }
+
+    .col-xs-2.well.dash-well ul{
+      margin-top: 8%;
+    }
+
+    #floorPlan {
+      padding-left: 7px;
+      padding-right: 7px;
+      .paired-body {
+        float: left;
+      }
+      .paired-media {
+        right: 0;
+        float: right;
       }
     }
 
@@ -298,12 +314,14 @@ body.lang_fr_CA {
   /* Navs */
   .nav-secondary {
     height: 52px;
+    min-width: 451.375px;
 
     .link {
       height: auto;
       a {
         height: 26px;
         vertical-align: middle;
+        text-align: center;
         padding: 8px 0;
       }
     }
@@ -315,7 +333,7 @@ body.lang_fr_CA {
     }
 
     .cart-btn {
-      height: 51px;
+      height: 50px;
     }
   }
 

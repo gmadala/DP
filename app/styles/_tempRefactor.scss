@@ -80,7 +80,6 @@
 
 // dashboard
 .dash-lockup {
-  @extend .lockup;
   @extend .clearfix;
   float: right;
   text-align: right;
@@ -161,9 +160,12 @@
 }
 
 .vin {
-  margin-right: 10px;
+  width: 170px;
 }
 
+.stock {
+  margin-right: 10px;
+}
 
 // for payment buttons on the vehicle details page.
 .payment-btn-block {

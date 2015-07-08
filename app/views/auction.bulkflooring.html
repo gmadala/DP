@@ -89,14 +89,15 @@
       </span>
 
       <label for="inventoryAddress" class="input-title" translate>Inventory Address</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocation == null || sellerLocations.length <= 1 }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inventoryAddress.$error.required, 'disabled': sellerLocations == null || sellerLocations.length <= 1 }">
         <select id="inventoryAddress"
                name="inventoryAddress"
                ng-model="data.PhysicalInventoryAddressId"
                ng-options="(location | address:'oneLineSelect') for location in sellerLocations"
-               ng-disabled="sellerLocation == null || sellerLocations.length <= 1"
+               ng-disabled="sellerLocations == null || sellerLocations.length <= 1"
                required>
           <option value="" translate>Make Selection</option>
+
         </select>
       </div>
       <label for="inputAddress" class="text-error" ng-show="validity.inventoryAddress.$error.required" translate>
@@ -105,7 +106,7 @@
 
       <label for="inputPurchaseAmt" class="input-title" translate>Purchase Amount</label>
       <div class="input-prepend dollar">
-        <span class="add-on" translate>$</span>
+        <span class="add-on no-top" translate>$</span>
         <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
                nxg-min="1"
                required

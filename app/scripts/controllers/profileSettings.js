@@ -118,8 +118,9 @@ angular.module('nextgearWebApp')
             prv.cancel.apply(this);
             // make sure to close any tooltips left open
             angular.forEach(angular.element('.btn-help'), function(elem) {
-              /*jshint camelcase: false */
+              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
               angular.element(elem).scope().tt_isOpen = false;
+              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             });
           },
           save: function() {
@@ -136,8 +137,9 @@ angular.module('nextgearWebApp')
                 prv.saveSuccess.bind(this)
               ).then(function() {
                 angular.forEach(angular.element('.btn-help'), function(elem) {
-                  /*jshint camelcase: false */
+                  // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                   angular.element(elem).scope().tt_isOpen = false;
+                  // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                 });
               });
             }

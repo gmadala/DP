@@ -101,7 +101,9 @@ module.exports = function(grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist)
+              mountFolder(connect, yeomanConfig.dist),
+              mountFolder(connect, 'api'),
+              useMock
             ];
           }
         }
@@ -120,7 +122,7 @@ module.exports = function(grunt) {
             src: [
               '.tmp',
               '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main.css',
+              '<%= yeoman.app %>/styles/main*.css',
               '!<%= yeoman.dist %>/.git*'
             ]
           }
@@ -158,6 +160,9 @@ module.exports = function(grunt) {
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/config/nxgConfig.mock.processed.js',
         '!app/scripts/translations.js',
+        '!app/scripts/services/base64.js',
+        '!app/scripts/directives/nxgChart/nxgChart.js',
+        '!app/scripts/directives/tooltip.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -198,6 +203,21 @@ module.exports = function(grunt) {
       server: {
         options: {
           debugInfo: true
+        }
+      }
+    },
+    // Run "bless" to make sure that there aren't too many rules in our css for ie9.
+    // TODO: Update the package.json to use bless 0.3.0 once it is released (0.2.0 does not have a "failOnLimit" option)
+    bless: {
+      css: {
+        options: {
+          logCount: true,
+          // overwrite original file
+          force: true,
+          imports: false
+        },
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.css'
         }
       }
     },
@@ -374,7 +394,7 @@ module.exports = function(grunt) {
             dot: true,
             flatten: true,
             dest: 'maintenance/styles/',
-            src: '<%= yeoman.app %>/styles/main.css'
+            src: '<%= yeoman.app %>/styles/main*.css'
           }
         ]
       },
@@ -674,6 +694,7 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'useminPrepare',
     'compass:dist',
+    'bless',
     'concat',
     'preprocess:dist',
     'copy:dist',

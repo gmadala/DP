@@ -27,7 +27,7 @@ module.exports = function (karma) {
       'app/components/angular-ui-utils/modules/highlight/highlight.js',
       'app/components/angular-ui-utils/modules/event/event.js',
       'app/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-      'app/components/angular-strap/dist/angular-strap.js',
+      'app/private-components/angular-strap.js',
       'app/private-components/fullcalendar/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
