@@ -245,10 +245,10 @@ angular.module('nextgearWebApp')
             $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
               if(updatedAccount) {
                 if(updatedAccount.IsDefaultPayment) {
-                  $scope.updateBillingAccount(/*TODO acc id*/);
+                  $scope.updateBillingAccount(updatedAccount.AccountId);
                 }
                 if(updatedAccount.IsDefaultDisbursement) {
-                  $scope.updateDisbursementAccount(/*TODO acc id*/);
+                  $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
               }
             });

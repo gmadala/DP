@@ -29,8 +29,8 @@ angular.module('nextgearWebApp')
         if(!bankAccount) {
           throw new Error('Bank account is required.');
         }
-        return api.request('POST', '/Dealer/bankAccount/', bankAccount).then(function (bankAccount) {
-          return bankAccount;
+        return api.request('POST', '/Dealer/bankAccount/', bankAccount).then(function (bankAccountId) {
+          return bankAccountId;
         });
       },
       getFinancialAccountData: function() {

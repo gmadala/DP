@@ -39,7 +39,8 @@
           });
         }
         if(action === 'add') {
-          AccountManagement.addBankAccount($scope.account).then(function () {
+          AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
+            $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);
           });
         }
