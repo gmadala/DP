@@ -88,6 +88,7 @@ angular.module('nextgearWebApp')
 
               // IE9 has an issue with timezones - if date isn't set at midnight,
               // then the date will be wrong for timezones west of GMT. Correct for this
+              /*
               var self = this;
               if (self.value) {
                 self.value = moment(new Date(self.value)).toDate();
@@ -95,6 +96,7 @@ angular.module('nextgearWebApp')
                   self.value.setTime(self.value.getTime() + self.value.getTimezoneOffset()*60*1000);
                 }
               }
+              */
 
               // adding this validation here to update the past or future $error after the tz correction.
               if (attrs.dateAllow === 'past') {
@@ -180,6 +182,8 @@ angular.module('nextgearWebApp')
               // If value is outside allowed date range element.val() will be the invalid date
               // but $input.val() will show the minimum valid date. When they don't match, clear
               // the input.
+
+              /*
               var displayDate = moment($input.val(), 'MM/DD/YYYY');
               var memoryDate = moment(element.val());
               if(!displayDate || !displayDate.isValid() || !memoryDate || !memoryDate.isValid() || !displayDate.isSame(memoryDate, 'day')) {
@@ -190,6 +194,7 @@ angular.module('nextgearWebApp')
                 });
 
               }
+              */
 
               if(document.activeElement !== $input.get()[0]) {
                 $input.focus();
