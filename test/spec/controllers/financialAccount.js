@@ -129,7 +129,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         AccountManagement: AccountManagementMock,
         dialog: dialog,
         options: {
-          account: {
+          account : {
             IsActive: false,
             IsDefaultDisbursement: false,
             IsDefaultPayment: false
@@ -180,36 +180,99 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
     });
 
-    it('should call confirmRequest and throw an error if account is inactive and set to either default disbursement or default payment.', function () {
+    it('should not close dialog if account is inactive and set to default disbursement and default payment.', function () {
       scope.financialAccountForm = {
         $valid: true
       };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
       scope.account.IsActive = false;
       scope.account.IsDefaultDisbursement = true;
       scope.account.IsDefaultPayment = true;
 
-      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+      scope.confirmRequest('add');
+      scope.$digest();
 
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should not close dialog if account is inactive and set to default payment.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
       scope.account.IsDefaultDisbursement = false;
       scope.account.IsDefaultPayment = true;
 
-      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+      scope.confirmRequest('add');
+      scope.$digest();
 
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should not close dialog if account is inactive and set to default disbursement.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
       scope.account.IsDefaultDisbursement = true;
       scope.account.IsDefaultPayment = false;
 
-      expect(scope.confirmRequest).toThrow(new Error('Account must be active for it to be set as default disbursement or default payment.'));
+      scope.confirmRequest('add');
+      scope.$digest();
 
-      scope.account.IsDefaultDisbursement = false;
-      scope.account.IsDefaultPayment = false;
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
 
-      expect(scope.confirmRequest).not.toThrow();
+    it('should close dialog if account is active and any defaults are set.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
 
       scope.account.IsActive = true;
       scope.account.IsDefaultDisbursement = true;
       scope.account.IsDefaultPayment = true;
 
-      expect(scope.confirmRequest).not.toThrow();
-    })
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
+
+    it('should close dialog if account is inactive and no defaults are set.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = false;
+      scope.account.IsDefaultPayment = false;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
   });
 });
