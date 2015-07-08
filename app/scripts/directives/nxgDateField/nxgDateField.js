@@ -226,14 +226,14 @@ angular.module('nextgearWebApp')
               if (date !== date || !date) { // Stop NaN or null from getting into the function
                 return true;
               }
-              return !(moment().isBefore(moment(date), 'day'));
+              return !(moment().isBefore(moment(new Date(date)), 'day'));
             };
 
             scope.notPastDates = function(date) {
               if (date !== date || !date) { // Stop NaN or null from getting into the function
                 return true;
               }
-              return !(moment().isAfter(moment(date), 'day'));
+              return !(moment().isAfter(moment(new Date(date)), 'day'));
             };
 
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"
