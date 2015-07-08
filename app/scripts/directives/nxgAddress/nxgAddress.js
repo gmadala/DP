@@ -17,8 +17,9 @@
       scope: {
         city: '=',
         info: '=',
+        line1: '=',
+        line2: '=',
         state: '=',
-        streetAddress: '=',
         validity: '=',
         zip: '='
       },
@@ -30,6 +31,9 @@
     function link() {
       // TODO
       // Obtain endpoint for GUID -- state
+
+      // TODO
+      // Obtain Address GUID
     }
   }
 

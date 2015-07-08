@@ -2,30 +2,49 @@
 CamelCase is not used for ng-model, since endpoints use capitalized properties.
 -->
 
-<!-- ADDRESS -->
-<div class="row" ng-if="streetAddress">
+<!-- LINE1 -->
+<div class="row" ng-if="line1">
   <div class="col-xs-12 text-vertical-center">
-    <label for="addressStreetAddress" translate>Address</label>
+    <label for="addressLine1" translate>Address 1</label>
     <input class="input-full"
-           id="addressStreetAddress"
-           name="addressStreetAddress"
-           ng-class="{ 'nxg-invalid' : validity.addressStreetAddress.$error.required || validity.addressStreetAddress.$error.pattern }"
-           ng-model="info.Address"
-           placeholder="Street Address"
+           id="addressLine1"
+           name="addressLine1"
+           ng-class="{ 'nxg-invalid' : validity.addressLine1.$error.required || validity.addressLine1.$error.pattern }"
+           ng-model="info.Line1"
+           ng-pattern="/\d{1,5}\s\w*\s.*/"
            type="text" required>
     <label class="text-error"
-           for="addressStreetAddress"
-           ng-show="validity.addressStreetAddress.$error.required" translate>
+           for="addressLine1"
+           ng-show="validity.addressLine1.$error.required" translate>
       You can't have empty address.
     </label>
     <label class="text-error"
-           for="addressStreetAddress"
-           ng-show="validity.addressStreetAddress.$error.pattern" translate>
+           for="addressLine1"
+           ng-show="validity.addressLine1.$error.pattern && !validity.addressLine1.$error.required" translate>
       Address must be a valid street address.
     </label>
   </div>
 </div>
-<!-- END ADDRESS -->
+<!-- END LINE1 -->
+
+<!-- LINE2 -->
+<div class="row" ng-if="line2">
+  <div class="col-xs-12 text-vertical-center">
+    <label for="addressLine2" translate>Address 2</label>
+    <input class="input-full"
+           id="addressLine2"
+           name="addressLine2"
+           ng-class="{ 'nxg-invalid' : validity.addressLine2.$error.required }"
+           ng-model="info.Line2"
+           type="text" required>
+    <label class="text-error"
+           for="addressLine2"
+           ng-show="validity.addressLine2.$error.required" translate>
+      You can't have empty address.
+    </label>
+  </div>
+</div>
+<!-- END LINE2 -->
 
 <!-- CITY AND STATE -->
 <div class="row" ng-if="city || state">
@@ -126,7 +145,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
            name="addressZip"
            ng-class="{ 'nxg-invalid' : validity.addressZip.$error.required || validity.addressZip.$error.pattern }"
            ng-model="info.Zip"
-           placeholder="46202"
+           ng-pattern="/\d{5}(-\d{4})?/"
            type="text" required>
     <label class="text-error"
            for="addressZip"
@@ -135,7 +154,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     </label>
     <label class="text-error"
            for="addressZip"
-           ng-show="validity.addressZip.$error.pattern">
+           ng-show="validity.addressZip.$error.pattern && !validity.addressZip.$error.required">
       Zip must be a valid zip code.
     </label>
   </div>
