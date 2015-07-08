@@ -11,7 +11,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
            name="addressLine1"
            ng-class="{ 'nxg-invalid' : validity.addressLine1.$error.required || validity.addressLine1.$error.pattern }"
            ng-model="info.Line1"
-           ng-pattern="/\d{1,5}\s\w*\s.*/"
+           ng-pattern="line1Regex"
            type="text" required>
     <label class="text-error"
            for="addressLine1"
@@ -145,7 +145,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
            name="addressZip"
            ng-class="{ 'nxg-invalid' : validity.addressZip.$error.required || validity.addressZip.$error.pattern }"
            ng-model="info.Zip"
-           ng-pattern="/\d{5}(-\d{4})?/"
+           ng-pattern="zipRegex"
            type="text" required>
     <label class="text-error"
            for="addressZip"

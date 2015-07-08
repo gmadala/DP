@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,7 +9,6 @@
    * Directive for rendering addresses - currently used in financial accounts in account management
    */
   function address() {
-
     var directive;
     directive = {
       link: link,
@@ -28,13 +27,21 @@
 
     return directive;
 
-    function link() {
-      // TODO
-      // Obtain endpoint for GUID -- state
+    function link(scope) {
+      scope.line1Regex = /\d{1,5}\s\w*\s.*/;
+      scope.zipRegex = /\d{5}(-\d{4})?/;
 
-      // TODO
+      /* TODO Implement
       // Obtain Address GUID
+      function getAddressGuid() {
+        return false;
+      }
+
+      // Obtain endpoint for GUID -- state
+      function getStateGuid() {
+        return false;
+      }
+      */
     }
   }
-
 })();
