@@ -30,18 +30,6 @@
     function link(scope) {
       scope.line1Regex = /\d{1,5}\s\w*\s.*/;
       scope.zipRegex = /\d{5}(-\d{4})?/;
-
-      /* TODO Implement
-      // Obtain Address GUID
-      function getAddressGuid() {
-        return false;
-      }
-
-      // Obtain endpoint for GUID -- state
-      function getStateGuid() {
-        return false;
-      }
-      */
     }
   }
 })();
