@@ -8,7 +8,6 @@
 
   function FinancialAccountCtrl($scope, AccountManagement, dialog, options) {
     $scope.account = options.account || {};
-
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
 
