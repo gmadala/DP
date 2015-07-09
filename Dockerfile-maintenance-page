@@ -1,0 +1,5 @@
+FROM nginx
+MAINTAINER NextGear Capital <devops@nextgearcapital.com>
+
+COPY maintenance/ /usr/share/nginx/html
+RUN sed -i 's/index.html index.htm/maintenance.html/' /etc/nginx/conf.d/default.conf
