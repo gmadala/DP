@@ -29,8 +29,8 @@
   <ul class="list-table aside">
     <li class="list-table-row"></li>
     <li class="list-table-row" ng-repeat="item in payment.PaymentItems">
-      <p class="col-xs-6">{{ item.ItemName }}</p>
-      <p class="col-xs-6 value numeric">{{ item.ItemAmount | currency }}</p>
+      <p class="col-xs-6 no-right-margin">{{ item.ItemName }}</p>
+      <p class="col-xs-6 no-left-margin value numeric">{{ item.ItemAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row">
