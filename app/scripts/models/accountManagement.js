@@ -67,15 +67,7 @@ angular.module('nextgearWebApp')
           TitleReleaseAddressId: addressId
         };
         return api.request('POST', '/UserAccount/titleSettings', req);
-      }/*,
-       Implement when needed.
-       TODO MNGW-3840 StateGUID
-       getAddressGuid: function () {
-
-       },
-       getStateGuid: function () {
-
-      }*/
+      }
     };
 
   });
