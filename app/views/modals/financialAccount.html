@@ -65,7 +65,8 @@
           <label for="accountNumber" translate>Account Number</label>
           <input type="text" id="accountNumber" name="accountNumber" class="input-full"
                  ng-model="account.AccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}">
+                 ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}"
+                 ng-pattern="accountNumberRegex">
           <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
             Account number must only have numbers.
           </label>
@@ -77,7 +78,8 @@
           <label for="routingNumber" translate>Routing Number</label>
           <input type="text" id="routingNumber" name="routingNumber" class="input-full"
                  ng-model="account.RoutingNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}">
+                 ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}"
+                 ng-pattern="routingNumberRegex">
           <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
             Routing number must only have numbers.
           </label>

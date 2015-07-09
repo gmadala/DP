@@ -20,6 +20,10 @@
       activeValid: activeValid
     };
 
+    // These should be refactored in the validation story.
+    $scope.accountNumberRegex = /[0-9]+/;
+    $scope.routingNumberRegex = /[0-9]{9}/;
+
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
 
