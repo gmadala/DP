@@ -53,9 +53,10 @@
                 <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
                   <span translate>Unable to Schedule</span>
                   <button class="btn-help"
-                      tooltip-placement="right"
-                      tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
-                      tooltip-delay="300">
+                          tooltip-placement="right"
+                          tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                          tooltip-trigger="mouseenter"
+                          tooltip-delay="300">
                     <span nxg-icon="icon-help"></span>
                   </button>
                 </p>
@@ -117,9 +118,10 @@
                 <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(payment) && canPayNow">
                   <span translate>Unable to Schedule</span>
                   <button class="btn-help inline"
-                      tooltip-placement="right"
-                      tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
-                      tooltip-delay="300"><span nxg-icon="icon-help"></span></button>
+                          tooltip-placement="right"
+                          tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                          tooltip-trigger="mouseenter"
+                          tooltip-delay="300"><span nxg-icon="icon-help"></span></button>
                 </p>
 
                 <button class="btn-unstyle btn-link"

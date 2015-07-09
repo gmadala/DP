@@ -77,6 +77,7 @@
             <td><span nxg-highlight="result.BusinessNumber" highlight="data.query"></span></td>
             <td ng-show="data.searchBuyersMode">
               <span tooltip-html-unsafe="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
+                    tooltip-trigger="mouseenter"
                     tooltip-placement="right"
                     tooltip-popup-delay="700"
                     tooltip-append-to-body="true">
