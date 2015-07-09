@@ -92,7 +92,7 @@ describe('Directive: nxgAddress', function () {
     expect(dScope.info.State).toEqual("7c36afed-4941-4e83-b9a5-3a0bcfe44f10");
   });
 
-  iit('should get a list of states from endpoint', function() {
+  it('should get a list of states from endpoint', function() {
     expect(dScope.states).toEqual(mockStates.states);
   });
 });
