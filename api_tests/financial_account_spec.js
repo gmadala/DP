@@ -52,5 +52,23 @@ frisby.login()
       }, {json: true})
       .expectSuccess()
       .toss();
+
+    frisby.create('Financial Account: Add one financial account')
+      .post(base + 'dealer/bankAccount/',
+      {
+        AccountName: 'JP Morgan Chase Bank - 7905',
+        BankName: 'JP Morgan Chase Bank',
+        IsActive: true,
+        RoutingNumber: '349886738',
+        City: 'Phoenix',
+        State: '77c78343-f0f1-4152-9f77-58a393f4099d',
+        IsDefaultPayment: true,
+        IsDefaultDisbursement: true,
+        AccountNumber: '4199137905'
+      }, {json: true})
+      .expectJSONTypes('Data', String)
+      .expectStatus(200)
+      .expectSuccess()
+      .toss();
   })
   .toss();
