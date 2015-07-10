@@ -67,7 +67,6 @@ frisby.login()
         AccountNumber: '4199137905'
       }, {json: true})
       .expectJSONTypes('Data', String)
-      .expectStatus(200)
       .expectSuccess()
       .toss();
   })

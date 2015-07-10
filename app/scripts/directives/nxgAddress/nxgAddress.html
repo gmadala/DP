@@ -16,12 +16,12 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     <label class="text-error"
            for="addressLine1"
            ng-show="validity.addressLine1.$error.required" translate>
-      You can't have empty address.
+      Please enter an address.
     </label>
     <label class="text-error"
            for="addressLine1"
            ng-show="validity.addressLine1.$error.pattern && !validity.addressLine1.$error.required" translate>
-      Address must be a valid street address.
+      Please enter a valid street address.
     </label>
   </div>
 </div>
@@ -34,14 +34,8 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     <input class="input-full"
            id="addressLine2"
            name="addressLine2"
-           ng-class="{ 'nxg-invalid' : validity.addressLine2.$error.required }"
            ng-model="info.Line2"
-           type="text" required>
-    <label class="text-error"
-           for="addressLine2"
-           ng-show="validity.addressLine2.$error.required" translate>
-      You can't have empty address.
-    </label>
+           type="text">
   </div>
 </div>
 <!-- END LINE2 -->
@@ -60,7 +54,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     <label class="text-error"
            for="addressCity"
            ng-show="validity.addressCity.$error.required" translate>
-      You can't have empty city.
+      Please enter a city.
     </label>
     <label class="text-error"
            for="addressCity"
@@ -81,7 +75,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     <label class="text-error"
            for="addressState"
            ng-show="validity.addressState.$error.required" translate>
-      You can't have empty state.
+      Please enter a state.
     </label>
   </div>
 </div>
@@ -101,12 +95,12 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     <label class="text-error"
            for="addressZip"
            ng-show="validity.addressZip.$error.required">
-      You can't have empty zip.
+      Please enter a zip.
     </label>
     <label class="text-error"
            for="addressZip"
            ng-show="validity.addressZip.$error.pattern && !validity.addressZip.$error.required">
-      Zip must be a valid zip code.
+      Please enter a valid zip code.
     </label>
   </div>
 </div>
