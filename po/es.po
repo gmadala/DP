@@ -1350,11 +1350,11 @@ msgstr "Siga editando"
 
 #: app/views/valuelookup.html
 msgid "Kelley Blue Book<sup>®</sup> Auction Values"
-msgstr "Valores de Subasta de Kelly Blue Book<sup>®</sup>"
+msgstr "Valores de Subasta de Kelley Blue Book<sup>®</sup>"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "Kelley Blue Book® Auction Values"
-msgstr "Valores de Subasta de Kelly Blue Book®"
+msgstr "Valores de Subasta de Kelley Blue Book®"
 
 #: app/views/account_management.html app/views/analytics.html
 #: app/views/floorplan.html
