@@ -15,9 +15,7 @@
     $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber.substr(accountNumber.length - 4) : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
-    $scope.accountValid = {
-      activeValid: activeValid
-    };
+    $scope.activeValid = activeValid;
 
     // These should be refactored in the validation story.
     $scope.accountNumberRegex = /[0-9]+/;
@@ -33,9 +31,8 @@
 
     function confirmRequest (action) {
       $scope.validity = angular.copy($scope.financialAccountForm);
-      angular.extend($scope.validity, $scope.accountValid);
 
-      if ($scope.validity.$valid && $scope.validity.activeValid()) {
+      if ($scope.validity.$valid && $scope.activeValid()) {
         if(action === 'edit') {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);
