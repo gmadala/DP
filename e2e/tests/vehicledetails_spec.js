@@ -4,13 +4,13 @@
 
 'use strict';
 var HelperObject = require('../framework/helper_object');
-var vehicleDetailObject = require('../framework/vehicledetails_page_object.js');
+var VehicleDetailObject = require('../framework/vehicledetails_page_object.js');
 
 var helper = new HelperObject();
-var vehiclePage = new vehicleDetailObject();
+var vehiclePage = new VehicleDetailObject();
 
 helper.describe('WMT-58', function () {
-//Floor Plan Page
+  //Floor Plan Page
   describe('Vehicle Details Page', function () {
 
     beforeEach(function () {

@@ -2,12 +2,12 @@
   "Success": true,
   "Message": null,
   "Data": {
-    "OverduePayments": 1,
-    "OverduePaymentAmount": 340.00,
-    "PaymentsDueToday": 3,
-    "PaymentsDueTodayAmount": 1280.34,
-    "UpcomingPayments": 4,
-    "UpcomingPaymentsAmount": 13367.22,
+    "OverduePayments": 4,
+    "OverduePaymentAmount": 12412.21,
+    "PaymentsDueToday": 13,
+    "PaymentsDueTodayAmount": 77565.75,
+    "UpcomingPayments": 23,
+    "UpcomingPaymentsAmount": 113355.98,
     "AccountFees": 1,
     "AccountFeeAmount": 400,
     "LinesOfCredit": [

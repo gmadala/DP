@@ -8,14 +8,31 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/userAccount/v1_1/settings').then(function(settings) {
           return settings;
         });
-
+      },
+      getBankAccount: function(accountId) {
+        if (!accountId) {
+          throw new Error('Account id is required.');
+        }
+        return api.request('GET', '/Dealer/bankAccount/' + accountId).then(function (bankAccount) {
+          return bankAccount;
+        });
+      },
+      updateBankAccount: function(bankAccount) {
+        if (!bankAccount) {
+          throw new Error('Bank account is required.');
+        }
+        return api.request('PUT', '/Dealer/bankAccount/', bankAccount).then(function (bankAccount) {
+          return bankAccount;
+        });
       },
       getFinancialAccountData: function() {
-        return api.request('GET', '/dealer/summary').then(function(summary) {
+        return api.request('GET', '/dealer/v1_1/summary').then(function(summary) {
           // Any Financial Account data tranformations made here
           return User.getInfo().then(function(info) {
             var settings = {};
-            settings.BankAccounts = info.BankAccounts;
+            settings.BankAccounts = summary.BankAccounts;
+            settings.DefaultDisbursementBankAccountId = info.DefaultDisbursementBankAccountId;
+            settings.DefaultBillingBankAccountId = info.DefaultBillingBankAccountId;
             settings.AvailableCredit = summary.TotalAvailableCredit;
             settings.ReserveFunds = summary.ReserveFundsBalance;
             settings.LastPayment = summary.LastPaymentAmount;
@@ -26,10 +43,11 @@ angular.module('nextgearWebApp')
           });
         });
       },
-      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin) {
+      saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin, autoPayEnabled) {
         var req = {
           BusinessEmailAddress: email,
-          EnhancedRegistrationEnabled: enhancedRegEnabled
+          EnhancedRegistrationEnabled: enhancedRegEnabled,
+          AutoPayEnabled: autoPayEnabled
         };
         if (enhancedRegEnabled) {
           req.EnhancedRegistrationPin = enhancedRegPin;

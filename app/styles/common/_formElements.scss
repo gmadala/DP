@@ -59,6 +59,7 @@ input, select, textarea {
   font-size: $inputFontSize;
   color: $text;
   height: $cta-2-height;
+  width: 45%;
   padding: 5px 9px;
   margin: 5px 0;
 }
@@ -122,6 +123,12 @@ input[type="color"] {
   &::-ms-clear {
     display: none;
   }
+
+  // use this when also using the input "size" and "maxlength" attributes for inputs
+  // of known length (social security numbers, PINs, phone numbers, etc.)
+  &.size-fixed {
+    width: auto;
+  }
 }
 
 // inputs that are the full-width of parent
@@ -129,13 +136,38 @@ input[type="color"] {
   @extend %full-width;
 }
 
+.input-large-width {
+  width: 85%;
+}
+
+.no-right-padding {
+  padding-right: 0;
+}
+
+.small-left-padding {
+  padding-left: 13px;
+}
+.medium-right-padding {
+  padding-right: 18px;
+}
+
+.full-width {
+  width: 100%;
+}
+
 // Overriding Bootstrap's input-prepend class to make it work for us.
 .input-prepend.dollar .add-on{
+  top: 11px;
+  padding-right: 2px;
+  margin-right: 0;
   position: relative;
-  top: 7px;
   font-size: 14px;
   background-color: transparent;
   border: none;
+
+  &.no-top{
+    top: 0px;
+  }
 }
 
 .input-prepend input {
@@ -179,9 +211,10 @@ select {
   @include border-radius($borderRadius);
   position: relative;
   overflow: hidden;
-  width: 206px;
+  min-width:65%;
   border: 1px solid $highlight;
   margin: 5px 0;
+  background: #fff;
 
   &:after {
     content: '';
@@ -201,6 +234,16 @@ select {
     width: auto;
   }
 
+  &.small {
+    width:45%;
+    min-width: 45%;
+  }
+
+  &.large {
+    width: 85%;
+    min-width: 85%;
+  }
+
   &.disabled {
     border-color: $border;
 
@@ -217,6 +260,9 @@ select {
     }
   }
 
+
+
+
   select {
     @extend .truncate;
     @include border-radius($borderRadius);
@@ -230,7 +276,8 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
-    padding: 4px 15% 4px 9px;
+    //padding: 4px 15% 4px 9px;
+    padding: 5px 15% 5px 15px;
     border: 0;
     margin: 0;
 
@@ -503,6 +550,11 @@ input[type="radio"] {
   }
 }
 
+.smallInput{
+  width:55%;
+}
+.xsmallInput{width:206px;}
+
   /*
    * BUTTON INPUT
    * Button specifically designed to be paired with an input,
@@ -510,7 +562,7 @@ input[type="radio"] {
    */
   .btn-input {
     @include border-left-radius(0);
-    width: 15%;
+    width: 10%;
     background: $accent;
     display: block;
     float: left;

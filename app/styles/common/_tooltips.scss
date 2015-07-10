@@ -70,6 +70,7 @@
   @extend %align-left;
   @include border-radius(0);
   color: $text;
+  background:#fff;
   width: 250px;
   padding: 10px;
   border: 1px solid #BBB;

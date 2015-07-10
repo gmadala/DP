@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
     return {
       template: '<span>{{ address.Line1 }} <br/><span ng-show="address.Line2">{{ address.Line2 }}<br/></span> {{ address.City && address.City + \', \' }} {{ address.State }} {{ address.Zip }}</span>',
       scope: {
-        address: '=nxgAddress',
+        address: '=nxgAddress'
       },
       restrict: 'A'
     };

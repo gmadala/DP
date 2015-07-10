@@ -30,6 +30,9 @@ describe('Controller: AuctionReportsCtrl', function() {
           BusinessId: "1234",
           ManufacturerSubsidiaries: []
         });
+      },
+      isManufacturer: function(){
+        return true;
       }
     };
 

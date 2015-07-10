@@ -5,41 +5,41 @@
 <div class="modal-body to-edge">
   <ul class="list-table">
     <li class="list-table-row">
-      <p class="span6" translate>Receipt No.</p>
-      <p class="span6 value">{{ payment.ReceiptNumber }}</p>
+      <p class="col-xs-6" translate>Receipt No.</p>
+      <p class="col-xs-6 value">{{ payment.ReceiptNumber }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Payment Made</p>
-      <p class="span6 value">{{ payment.PaymentDate | moment }}</p>
+      <p class="col-xs-6" translate>Payment Made</p>
+      <p class="col-xs-6 value">{{ payment.PaymentDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Effective Date</p>
-      <p class="span6 value">{{ payment.EffectiveDate | moment }}</p>
+      <p class="col-xs-6" translate>Effective Date</p>
+      <p class="col-xs-6 value">{{ payment.EffectiveDate | moment }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Payment Method</p>
-      <p class="span6 value">{{ payment.PaymentMethod }}</p>
+      <p class="col-xs-6" translate>Payment Method</p>
+      <p class="col-xs-6 value">{{ payment.PaymentMethod }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Account</p>
-      <p class="span6 value">{{ payment.Account }}</p>
+      <p class="col-xs-6" translate>Account</p>
+      <p class="col-xs-6 value">{{ payment.Account }}</p>
     </li>
   </ul>
 
   <ul class="list-table aside">
     <li class="list-table-row"></li>
     <li class="list-table-row" ng-repeat="item in payment.PaymentItems">
-      <p class="span6">{{ item.ItemName }}</p>
-      <p class="span6 value numeric">{{ item.ItemAmount | currency }}</p>
+      <p class="col-xs-6 no-right-margin">{{ item.ItemName }}</p>
+      <p class="col-xs-6 no-left-margin value numeric">{{ item.ItemAmount | currency }}</p>
     </li>
     <li class="list-table-hr"></li>
     <li class="list-table-row">
-      <p class="span6" translate>Total</p>
-      <p class="span6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
+      <p class="col-xs-6" translate>Total</p>
+      <p class="col-xs-6 value numeric">{{ payment.TotalPaymentAmount | currency }}</p>
     </li>
     <li class="list-table-row">
-      <p class="span6" translate>Receipt Total</p>
-      <p class="span6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
+      <p class="col-xs-6" translate>Receipt Total</p>
+      <p class="col-xs-6 value numeric">{{ payment.ReceiptTotal | currency }}</p>
     </li>
   </ul>
 </div>

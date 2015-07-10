@@ -9,17 +9,21 @@ angular.module('nextgearWebApp')
     $scope.metric = metric; // make metric names available to template
 
     $scope.data = null;
+    $scope.isManufacturer = User.isManufacturer() ;
 
     $scope.documents = [
       {
         'title': gettextCatalog.getString('Credit Availability Query History (PDF)'),
         'url': api.contentLink('/report/creditavailabilityqueryhistory/CreditAvailability', {})
-      },
-      {
-        'title': gettextCatalog.getString('Receivable Detail (PDF)'),
-        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
       }
     ];
+
+    if($scope.isManufacturer){
+      $scope.documents.push({
+        'title': gettextCatalog.getString('Manufacturer Aging Report (PDF)'),
+        'url': api.contentLink('/report/getAgingReportDetail/ManufacturerAgingReport', {})
+      });
+    }
 
     // set the subsidiary options
     User.getInfo().then(function(info) {

@@ -11,6 +11,14 @@ angular.module('nextgearWebApp')
       });
     };
 
+    var isValid = function(param) {
+      if (!param) {
+        return false;
+      } else {
+        return angular.isObject(param) && !angular.isArray(param);
+      }
+    };
+
     return {
       getYears: function() {
         return api.request('GET', '/mmr/years/').then(function(years) {
@@ -18,7 +26,7 @@ angular.module('nextgearWebApp')
         });
       },
       getMakes: function(year) {
-        if(!year) {
+        if(!isValid(year)) {
           throw new Error('Missing year');
         }
 
@@ -27,10 +35,10 @@ angular.module('nextgearWebApp')
         });
       },
       getModels: function(make, year) {
-        if(!year) {
+        if(!isValid(year)) {
           throw new Error(gettextCatalog.getString('Missing year'));
         }
-        if(!make) {
+        if(!isValid(make)) {
           throw new Error(gettextCatalog.getString('Missing make'));
         }
 
@@ -39,13 +47,13 @@ angular.module('nextgearWebApp')
         });
       },
       getBodyStyles: function(make, year, model) {
-        if(!year) {
+        if(!isValid(year)) {
           throw new Error(gettextCatalog.getString('Missing year'));
         }
-        if(!make) {
+        if(!isValid(make)) {
           throw new Error(gettextCatalog.getString('Missing make'));
         }
-        if(!model) {
+        if(!isValid(model)) {
           throw new Error(gettextCatalog.getString('Missing model'));
         }
 
@@ -54,16 +62,16 @@ angular.module('nextgearWebApp')
         });
       },
       lookupByOptions: function(year, make, model, style, mileage) {
-        if(!year) {
+        if(!isValid(year)) {
           throw new Error(gettextCatalog.getString('Missing year'));
         }
-        if(!make) {
+        if(!isValid(make)) {
           throw new Error(gettextCatalog.getString('Missing make'));
         }
-        if(!model) {
+        if(!isValid(model)) {
           throw new Error(gettextCatalog.getString('Missing model'));
         }
-        if(!style) {
+        if(!isValid(style)) {
           throw new Error(gettextCatalog.getString('Missing style'));
         }
         if(!mileage) {
@@ -88,7 +96,7 @@ angular.module('nextgearWebApp')
         });
       },
       lookupByVin: function(vin, mileage) {
-        if(!vin) {
+        if(!vin || !angular.isString(vin)) {
           throw new Error('Missing vin');
         }
 

@@ -1,13 +1,23 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('nxgConfig', function(){
+  .factory('nxgConfig', function ($location) {
+
+    var SIXTY_MINUTES = 60 * 60 * 1000;
+    var FIFTEEN_MINUTES = 15 * 60 * 1000;
+
+    var SEGMENT_KEY_UAT = 'bw2QaHkMIcEiOyWB05un7LxoDPHjLigp';
+    var SEGMENT_KEY_DEMO = 'u6uZuH8MgCfZEV7wBBgVheRBL67bWZkQ';
+    var SEGMENT_KEY_TEST = 'tkJXmFd2GlRCEvU96xJXWPvh2LCFgVdx';
+    var SEGMENT_KEY_TRAINING = '2uofWGF1e5Bkd18gE2B7LahCnGV8PQaX';
+    var SEGMENT_KEY_PRODUCTION = '9eaffv4cbe';
 
     var prv = {
-      generateConfig: function (apiDomain, segmentIoKey, qualarooDomainCode, timeoutMs, isDemo, serviceName) {
+      generateConfig: function (segmentIoKey, timeoutMs, isDemo, serviceName) {
         if (!serviceName) {
           serviceName = 'MobileService';
         }
+        var apiDomain = 'https://' + $location.host();
         return {
           apiBase: apiDomain + '/' + serviceName + '/api',
           apiDomain: apiDomain,
@@ -20,52 +30,69 @@ angular.module('nextgearWebApp')
             auctionForumId: 229017,
             auctionCustomTemplateId: 23042
           },
-          qualarooSurvey: {
-            apiKey: 52803,
-            domainCode: qualarooDomainCode
-          },
           infiniteScrollingMax: 500,
           sessionTimeoutMs: timeoutMs,
           isDemo: isDemo || false // default to false
         };
       },
       profile: {
+        LOCAL: 'local',
+        LOCAL_TEST: 'local_test',
+        UAT: 'uat',
         DEMO: 'demo',
         TEST: 'test',
-        LOCAL: 'local',
         TRAINING: 'training',
-        RUBY_DAL_TEST: 'ruby_dal',
         PRODUCTION: 'production'
       },
-      getConfig: function(profile) {
+      getConfig: function (profile) {
         var config;
+        var isDemo = profile === prv.profile.DEMO;
         switch (profile) {
-        case prv.profile.DEMO:
-          config = prv.generateConfig('http://demo.nextgearcapital.com', null, null, 900000 /*15 minutes*/, true /*isDemo*/);
-          break;
-        case prv.profile.TEST:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/);
-          break;
-        case prv.profile.RUBY_DAL_TEST:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'brC', 3600000 /*60 minutes*/, false /*isDemo*/, 'MobileServiceSnake');
-          break;
-        case prv.profile.LOCAL:
-          config = prv.generateConfig('https://test.nextgearcapital.com', 'sb06a2jbvj', 'boa', 3600000 /*60 minutes*/);
-          break;
-        case prv.profile.TRAINING:
-          config = prv.generateConfig('https://training.nextgearcapital.com', 'sb06a2jbvj', 'brC', 900000 /*15 minutes*/);
-          break;
-        case prv.profile.PRODUCTION:
-          config = prv.generateConfig('https://customer.nextgearcapital.com', '9eaffv4cbe', 'bmV', 900000 /*15 minutes*/);
-          break;
-        default:
-          throw 'nxgConfig profile \'' + profile + '\' not found!';
+          case prv.profile.LOCAL:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+            config.apiBase = '';
+            config.apiDomain = '';
+            break;
+          case prv.profile.LOCAL_TEST:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+            config.apiBase = 'https://test.nextgearcapital.com/MobileService/api';
+            config.apiDomain = 'https://test.nextgearcapital.com';
+            break;
+          case prv.profile.UAT:
+            config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
+            break;
+          case prv.profile.DEMO:
+            config = prv.generateConfig(SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
+            break;
+          case prv.profile.TEST:
+            config = prv.generateConfig(SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
+            break;
+          case prv.profile.TRAINING:
+            config = prv.generateConfig(SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
+            break;
+          case prv.profile.PRODUCTION:
+            config = prv.generateConfig(SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
+            break;
+          default:
+            throw 'nxgConfig profile \'' + profile + '\' not found!';
         }
         return config;
       }
     };
 
     var profile;
+
+    // @if ENV='local'
+    profile = prv.profile.LOCAL;
+    // @endif
+
+    // @if ENV='local_test'
+    profile = prv.profile.LOCAL_TEST;
+    // @endif
+
+    // @if ENV='uat'
+    profile = prv.profile.UAT;
+    // @endif
 
     // @if ENV='demo'
     profile = prv.profile.DEMO;
@@ -77,10 +104,6 @@ angular.module('nextgearWebApp')
 
     // @if ENV='production'
     profile = prv.profile.PRODUCTION;
-    // @endif
-
-    // @if ENV='rubydal'
-    profile = prv.profile.RUBY_DAL_TEST;
     // @endif
 
     /**

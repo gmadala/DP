@@ -1,0 +1,41 @@
+<div ng-if="displayed">
+  <div class="well-item bordered">
+    <div class="row">
+      <div class="col-xs-2 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li ng-show="defaultForBilling" translate>Payment</li>
+          <li ng-show="defaultForDisbursement" translate>Disbursement</li>
+        </ul>
+      </div>
+      <div class="col-xs-3 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li class="heavy" translate>Account Name</li>
+          <li>{{ descriptiveName }}</li>
+        </ul>
+      </div>
+      <div class="col-xs-3 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li class="heavy" translate>Bank Name</li>
+          <li>{{ account.AchBankName }}</li>
+        </ul>
+      </div>
+      <div class="col-xs-2 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li>******{{account.AchAccountNumberLast4}}</li>
+          <li>{{account.AchAbaNumber}}</li>
+        </ul>
+      </div>
+      <div class="col-xs-1 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li class="heavy" translate>Status</li>
+          <li>{{ status | translate }}</li>
+        </ul>
+      </div>
+      <div class="col-xs-1 pull-right icon-vertical-center icon-padding-right" ng-show="editBankAccountEnabled">
+        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

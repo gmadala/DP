@@ -22,6 +22,15 @@ angular.module('nextgearWebApp')
       kbb: {
         enabled: true
       },
+      autoPay: {
+        enabled: false
+      },
+      editBankAccount: {
+        enabled: false
+      },
+      addBankAccount: {
+        enabled: false
+      },
       loadFromQueryString: function () {
         var search = $location.search();
 

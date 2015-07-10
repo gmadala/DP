@@ -8,7 +8,7 @@ angular.module('nextgearWebApp')
       scope: {
         data: '=data',
         validity: '=',
-        form: '=form',
+        form: '=form'
       },
       controller: function($scope, gettextCatalog) {
 

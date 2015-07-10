@@ -4,10 +4,10 @@
 
 'use strict';
 var HelperObject = require('../framework/helper_object');
-var accMgtlObject = require('../framework/account_management_page_object.js');
+var AccMgtlObject = require('../framework/account_management_page_object.js');
 
 var helper = new HelperObject();
-var accMgtPage = new accMgtlObject();
+var accMgtPage = new AccMgtlObject();
 
 helper.describe('WMT-87', function () {
   describe('Account Management Page', function () {
@@ -64,7 +64,7 @@ helper.describe('WMT-87', function () {
       accMgtPage.goToIsNotTemporary();
       accMgtPage.doSelectAmount();
     };
-//Account Management Content Testing WMT-87
+    //Account Management Content Testing WMT-87
 
     it('should check for the Business Email - No Editing', function () {
       expect(browser.getCurrentUrl()).toContain(accMgtPage.accountMgtUrl);

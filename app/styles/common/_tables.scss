@@ -10,6 +10,8 @@
 .table-primary {
   @include border-bottom-radius($borderRadius);
   border: 0;
+  margin-bottom:0px;
+  background-color: white;
 
   thead th, thead td {
     @extend .heavy;
@@ -25,6 +27,7 @@
     button {
       margin: 0 auto;
     }
+
   }
 
   .separated { // On the checkout pages we use thicker borders to separate items.
@@ -40,7 +43,6 @@
     height: 75px;
     text-align: left;
     vertical-align: top;
-    position: relative;
     padding: 10px 15px;
     border: 1px solid $tableBorder;
 
@@ -69,6 +71,10 @@
           border-top: 1px solid $border;
         }
       }
+    }
+
+    .medium-left-margin {
+      margin-left: 20%;
     }
   }
 
@@ -114,7 +120,7 @@
 .table-secondary {
   border: 1px solid $tableBorder;
   border-width: 0 0 1px 0;
-
+  background-color: white;
   &.table-border {
     border: 1px solid $tableBorder;
   }
@@ -136,7 +142,13 @@
 
     &:first-child {
       border-left: 0;
+      max-width: 170px;
     }
+
+    &.bigger{
+      min-width: 135px;
+    }
+
 
     &:last-child {
       border-right: 0;
@@ -178,7 +190,7 @@
 }
   .list-table-row {
     @extend .clearfix;
-    @extend .row-fluid;
+    @extend .row;
     padding: 0 0 0;
     margin: 0;
 
@@ -201,7 +213,7 @@
       }
     }
 
-    [class*="span"] {
+    [class*="col"] {
       min-height: 0;
     }
 
@@ -279,6 +291,27 @@
   }
 }
 
+.row.ng-scope .col-xs-6{
+  &:first-child{
+    margin-left: 0;
+    margin-right: 2%;
+    &.no-right-margin{
+      margin-right: 0;
+    }
+  }
+
+  &:last-child{
+    margin-left: 2%;
+    margin-right: 0;
+    &.no-left-margin{
+      margin-left: 0;
+    }
+  }
+}
+
+.row .col-xs-2 ul{
+  padding: 7px;
+}
 /*
  * For tabular content with no styling.
  */
@@ -314,7 +347,7 @@
  * Inspired by http://salzerdesign.com/test/fixedTable.html (1)
  */
 .table-fixed-header {
-  height: 222px;
+  height: 234px;
   position: relative;
   padding-top: 30px;
 
@@ -344,7 +377,7 @@
       .th-inner {
         position: absolute;
         top: 0;
-        padding: 8px 15px;
+        padding: 6px 15px;
         border-left: 1px solid $tableBorder;
       }
     }

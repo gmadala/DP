@@ -1,5 +1,5 @@
-<section class="row-fluid">
-  <section class="span9">
+<section class="row">
+  <section class="col-xs-9">
     <div class="info-block" ng-show="!canPayNow && canPayNowLoaded">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
@@ -12,12 +12,6 @@
     <div nxg-search
          title="{{ 'Payment Search' | translate }}"
          prompt="{{ 'By Stock #, VIN, or Description' | translate }}"
-         metric-search="{{metric.CLICK_PAYMENTS_SEARCH_BUTTON}}"
-         metric-clear-search="{{metric.CLICK_PAYMENTS_CLEAR_SEARCH_LINK}}"
-         metric-filter-by-input="{{metric.CLICK_PAYMENTS_FILTER_BY_DUE_DATE}}"
-         metric-filter-from-date="{{metric.CLICK_PAYMENTS_FILTER_FROM_DATE_INPUT}}"
-         metric-filter-to-date="{{metric.CLICK_PAYMENTS_FILTER_TO_DATE_INPUT}}"
-         metric-filter-by-inventory-location="{{metric.CLICK_PAYMENTS_FILTER_BY_INVENTORY_LOCATION}}"
          filter-label="{{ 'Filter by Due Date' | translate }}"
          filter-options="payments.filterOptions"
          active-criteria="payments.proposedSearchCriteria"
@@ -161,7 +155,7 @@
               <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">
                 <span nxg-highlight="payment.UnitDescription" highlight="payment.data.query" class="break-word"></span>
               </a>
-              <div class="row-fluid">
+              <div>
                 <p class="lockup-minor caps vin"><span translate>VIN</span>: <span nxg-highlight="payment.Vin" highlight="payment.data.query" class="break-word"></span></p>
                 <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
               </div>
@@ -192,5 +186,5 @@
       There are too many results to display, please refine your search further.
     </p>
   </section>
-  <section class="span3 well sticky" nxg-payment-summary nxg-sticky scroll=".nxg-sticky-scroll" header=".well-title" footer=".well-footer" empty-message="{{ 'Click the Add button to add a payoff or a payment.' | translate }}"></section>
+  <section class="col-xs-3 well sticky" nxg-payment-summary nxg-sticky scroll=".nxg-sticky-scroll" header=".well-title" footer=".well-footer" empty-message="{{ 'Click the Add button to add a payoff or a payment.' | translate }}"></section>
 </section>

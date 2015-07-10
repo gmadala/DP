@@ -1,13 +1,8 @@
-<section class="row-fluid">
-  <section class="span9">
+<section class="row">
+  <section class="col-xs-9">
     <div nxg-search
        title="{{ 'Receipt Search' | translate }}"
        class="search-form"
-       metric-search="{{metric.CLICK_RECEIPTS_SEARCH_BUTTON}}"
-       metric-clear-search="{{metric.CLICK_RECEIPTS_CLEAR_SEARCH_LINK}}"
-       metric-filter-by-input="{{metric.CLICK_RECEIPTS_FILTER_BY_INPUT}}"
-       metric-filter-from-date="{{metric.CLICK_RECEIPTS_FILTER_FROM_DATE_INPUT}}"
-       metric-filter-to-date="{{metric.CLICK_RECEIPTS_FILTER_TO_DATE_INPUT}}"
        prompt="{{ 'Receipt #, Stock #, VIN, Check #, Make, Model or Year' | translate }}"
        filter-label="{{ 'Filter by Payment Method' | translate }}"
        filter-options="filterOptions"
@@ -111,7 +106,7 @@
     </div>
   </section>
 
-  <section class="span3 well stick" nxg-sticky header=".nxg-sticky-header" scroll=".queue-list" footer=".well-footer">
+  <section class="col-xs-3 well stick" nxg-sticky header=".nxg-sticky-header" scroll=".queue-list" footer=".well-footer">
     <div class="nxg-sticky-header">
       <h2 class="well-title" translate>Export Receipts</h2>
       <div class="well-item">
@@ -128,7 +123,7 @@
 
 
     <div ng-show="selectedReceipts.length > 0">
-      <ul class="queue-list reversed">
+      <ul class="queue-list reversed zeroLeftPadding">
         <li class="queue-item bordered" ng-repeat="receipt in selectedReceipts">
           <button class="btn-unstyle right"
               ng-click="removeReceipt(receipt)">

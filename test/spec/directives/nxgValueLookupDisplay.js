@@ -26,7 +26,7 @@ describe('Directive: nxgValueLookupDisplay', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    iScope = element.scope();
+    iScope = element.isolateScope();
   }));
 
   it('should set the searchDone and noResult properties on the directive scope', function() {

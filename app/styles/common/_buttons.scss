@@ -196,7 +196,7 @@
   @extend .heavy;
   font-family: $baseFontFamily;
   font-size: 13px;
-  padding: 10px;
+  padding: 8px 10px;
 
   &.cta-primary {
     &:hover, &:focus {
@@ -441,8 +441,8 @@
 
 
 // IE9-SPECIFIC
-// Because IE9 forces a particular text color on disabled buttons.
 .ie9 {
+  // Because IE9 forces a particular text color on disabled buttons.
   .btn:disabled,
   .btn.disabled,
   .btn-primary:disabled,
@@ -452,5 +452,15 @@
     color: $btn-text-disabled;
     background-color: $btn-bkgd-disabled;
   }
+  a:active, a:focus {
+    outline: none;
+  }
 }
 
+// IE 10 & IE 11 SPECIFIC
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  // Because IE forces a dashed outline after clicking a button
+  a:active, a:focus {
+    outline: none;
+  }
+}

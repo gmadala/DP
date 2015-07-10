@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
       replace: true,
       template: '<span class="container">' +
       '  <span class="row">' +
-      '    <span class="col-md-12">' +
+      '    <span class="col-xs-12">' +
       '      United States: <a href="mailto:CustomerService@nextgearcapital.com">CustomerService@nextgearcapital.com</a><br />' +
       '      Toronto: <a href="mailto:DealerServicesToronto@nextgearcapital.com">DealerServicesToronto@nextgearcapital.com</a><br />' +
       '      Montreal: <a href="mailto:DealerServicesMontreal@nextgearcapital.com">DealerServicesMontreal@nextgearcapital.com</a><br />' +

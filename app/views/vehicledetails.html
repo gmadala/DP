@@ -1,109 +1,109 @@
-<div class="row-fluid">
+<div class="row padding-left">
   <h1>{{ flooringInfo.Description }}</h1>
 </div>
-<section class="row-fluid">
-  <section class="span9">
+<section class="row">
+  <section class="col-xs-9">
     <!-- Flooring Information -->
     <div class="flooring-info well">
       <h2 class="well-title"><span translate>Flooring Information</span> <span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span> </h2>
-      <div class="row-fluid col-bordered">
-        <div class="span5 first">
+      <div class="row col-bordered">
+        <div class="col-xs-5 first">
           <ul class="list-table">
             <li class="list-table-row">
-              <p class="span6" translate>Total Days Floored</p>
-              <p class="span6 value" translate>{{ flooringInfo.TotalDaysFloored }} <span class="value-note">(of {{ flooringInfo.TotalTermPlanLength }} days)</span></p>
+              <p class="col-xs-6" translate>Total Days Floored</p>
+              <p class="col-xs-6 value" translate>{{ flooringInfo.TotalDaysFloored }} <span class="value-note">(of {{ flooringInfo.TotalTermPlanLength }} days)</span></p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Original Term</p>
-              <p class="span6 value" translate>{{ flooringInfo.OriginalTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.OriginalTermPlanLength }} days)</span></p>
+              <p class="col-xs-6" translate>Original Term</p>
+              <p class="col-xs-6 value" translate>{{ flooringInfo.OriginalTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.OriginalTermPlanLength }} days)</span></p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Extended Term</p>
-              <p class="span6 value" translate>{{ flooringInfo.ExtendedTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.ExtendedTermPlanLength }} days)</span></p>
-            </li>
-            <li class="list-table-spacer"></li>
-            <li class="list-table-row">
-              <p class="span6" translate>Status</p>
-              <p class="span6 value">{{ flooringInfo.FloorplanStatusName }}</p>
-            </li>
-            <li class="list-table-row">
-              <p class="span6" translate>Stock Number</p>
-              <p class="span6 value">{{ flooringInfo.StockNumber }}</p>
+              <p class="col-xs-6" translate>Extended Term</p>
+              <p class="col-xs-6 value" translate>{{ flooringInfo.ExtendedTermDaysFloored }} <span class="value-note">(of {{ flooringInfo.ExtendedTermPlanLength }} days)</span></p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
-              <p class="span6" translate>Purchase Date</p>
-              <p class="span6 value">{{ flooringInfo.PurchaseDate | moment }}</p>
+              <p class="col-xs-6" translate>Status</p>
+              <p class="col-xs-6 value">{{ flooringInfo.FloorplanStatusName }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Date Submitted</p>
-              <p class="span6 value">{{ flooringInfo.SubmittedDate | moment }}</p>
-            </li>
-            <li class="list-table-row">
-              <p class="span6" translate>Floor Date</p>
-              <p class="span6 value">{{ flooringInfo.FlooringDate | moment }}</p>
+              <p class="col-xs-6" translate>Stock Number</p>
+              <p class="col-xs-6 value">{{ flooringInfo.StockNumber }}</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
-              <p class="span6" translate>Finance Amount</p>
-              <p class="span6 value">{{ flooringInfo.FinanceAmount | currency }}</p>
+              <p class="col-xs-6" translate>Purchase Date</p>
+              <p class="col-xs-6 value">{{ flooringInfo.PurchaseDate | moment }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Purchase Amount</p>
-              <p class="span6 value">{{ flooringInfo.PurchaseAmount | currency }}</p>
+              <p class="col-xs-6" translate>Date Submitted</p>
+              <p class="col-xs-6 value">{{ flooringInfo.SubmittedDate | moment }}</p>
+            </li>
+            <li class="list-table-row">
+              <p class="col-xs-6" translate>Floor Date</p>
+              <p class="col-xs-6 value">{{ flooringInfo.FlooringDate | moment }}</p>
+            </li>
+            <li class="list-table-spacer"></li>
+            <li class="list-table-row">
+              <p class="col-xs-6" translate>Finance Amount</p>
+              <p class="col-xs-6 value">{{ flooringInfo.FinanceAmount | currency }}</p>
+            </li>
+            <li class="list-table-row">
+              <p class="col-xs-6" translate>Purchase Amount</p>
+              <p class="col-xs-6 value">{{ flooringInfo.PurchaseAmount | currency }}</p>
             </li>
           </ul>
         </div>
-        <div class="span7 last">
+        <div class="col-xs-7 last">
           <ul class="list-table">
             <li class="list-table-row">
-              <p class="span5" translate>Line of Credit</p>
-              <p class="span7 value">{{ flooringInfo.LineOfCredit }}</p>
+              <p class="col-xs-5" translate>Line of Credit</p>
+              <p class="col-xs-7 value zeroLeftPadding">{{ flooringInfo.LineOfCredit }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span5" translate>Term Plan Name</p>
-              <p class="span7 value">{{ flooringInfo.TermPlanName }}</p>
+              <p class="col-xs-5" translate>Term Plan Name</p>
+              <p class="col-xs-7 value zeroLeftPadding">{{ flooringInfo.TermPlanName }}</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
-              <p class="span5" translate>Product Type</p>
-              <p class="span7 value">{{ flooringInfo.ProductType }}</p>
+              <p class="col-xs-5" translate>Product Type</p>
+              <p class="col-xs-7 value zeroLeftPadding">{{ flooringInfo.ProductType }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span5" translate>Seller</p>
-              <p ng-show="flooringInfo.SellerName != null" class="span7 value">{{ flooringInfo.SellerName }}</p>
-              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value" translate>
+              <p class="col-xs-5" translate>Seller</p>
+              <p ng-show="flooringInfo.SellerName != null" class="col-xs-7 value zeroLeftPadding">{{ flooringInfo.SellerName }}</p>
+              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="col-xs-7 value" translate>
                 Trade-in</p>
             </li>
             <li class="list-table-spacer"></li>
             <li class="list-table-row">
-              <p class="span5" translate>Seller Address</p>
-              <p ng-show="flooringInfo.SellerName != null" class="span7 value">
+              <p class="col-xs-5" translate>Seller Address</p>
+              <p ng-show="flooringInfo.SellerName != null" class="col-xs-7 value zeroLeftPadding">
                 <span nxg-address="flooringInfo.sellerAddress"></span>
               </p>
-              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="span7 value" translate>none</p>
+              <p ng-hide="flooringInfo.SellerName != null || dataLoaded == false" class="col-xs-7 value" translate>none</p>
             </li>
             <li class="list-table-row">
-              <p class="span5" translate>Inventory Location</p>
-              <p class="span7 value" ng-hide="flooringInfo.showEditInventoryLocation">
+              <p class="col-xs-5" translate>Inventory Location</p>
+              <p class="col-xs-7 value zeroLeftPadding" ng-hide="flooringInfo.showEditInventoryLocation">
                 <span nxg-address="flooringInfo.inventoryAddress"></span>
                 <span ng-show="flooringInfo.showChangeLink"><br/><br/>
                   <a id="changeInvLocation" class="value-note" href="" ng-click="flooringInfo.showInventorySelect()" translate>Change Inventory Location</a>
                 </span>
               </p>
-              <p class="span7 value" ng-show="flooringInfo.showEditInventoryLocation">
+              <p class="col-xs-7 value" ng-show="flooringInfo.showEditInventoryLocation">
                 <span translate>Select Below</span>:
               </p>
             </li>
             <li class="list-table-row" ng-show="flooringInfo.showEditInventoryLocation">
-              <div class="offset5 span7">
+              <div class="col-xs-offset-5 col-xs-7">
                 <div class="style-select">
                   <select ng-model="flooringInfo.inventoryAddress" ng-options="addr as (addr | address:'oneLineSelect') for addr in inventoryLocations"></select>
                 </div>
               </div>
             </li>
             <li class="list-table-row" ng-show="flooringInfo.showEditInventoryLocation">
-              <div class="span12 text-right">
+              <div class="col-xs-12 text-right">
                 <div class="button-group">
                   <button type="button" class="btn-unstyle btn-link" ng-click="flooringInfo.cancelInventoryChanges()" translate>Cancel</button>
                   <button type="submit" class="btn-cta cta-secondary" ng-click="flooringInfo.saveInventoryChanges()" translate>Save Changes</button>
@@ -125,10 +125,10 @@
           </a>
         </div>
       </h2>
-      <div class="row-fluid col-bordered">
-        <div class="span7">
-          <div class="row-fluid">
-            <div class="span6 semi-donut">
+      <div class="row col-bordered">
+        <div class="col-xs-7">
+          <div class="row">
+            <div class="col-xs-6 semi-donut">
               <div class="chart-obj"
                 nxg-chart
                 nxg-chart-size="financialSummary.chart.size"
@@ -140,7 +140,7 @@
                 nxg-chart-title="financialSummary.paidChart.title">
               </div>
             </div>
-            <div class="span6 semi-donut">
+            <div class="col-xs-6 semi-donut">
               <div class="chart-obj"
                 nxg-chart
                 nxg-chart-size="financialSummary.chart.size"
@@ -154,39 +154,39 @@
             </div>
           </div>
         </div>
-        <div class="span5">
+        <div class="col-xs-5">
           <ul class="list-table">
             <li class="list-table-row list-table-emphasis">
               <p translate>Payment Summary</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Financed Amount</p>
-              <p class="span5 value numeric">{{ financialSummary.breakdown.financeAmount | currency }}</p>
+              <p class="col-xs-7" translate>Financed Amount</p>
+              <p class="col-xs-5 value numeric">{{ financialSummary.breakdown.financeAmount | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7">{{ financialSummary.breakdown.interestFeesLabel }}</p>
-              <p class="span5 value numeric"><span class="table-symbol">+</span>{{ financialSummary.breakdown.interestFeesCPP | currency }}</p>
+              <p class="col-xs-7">{{ financialSummary.breakdown.interestFeesLabel }}</p>
+              <p class="col-xs-5 value numeric"><span class="table-symbol">+</span>{{ financialSummary.breakdown.interestFeesCPP | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Floor Plan Total</p>
-              <p class="span5 value numeric"><span class="table-symbol">=</span>{{ financialSummary.FloorplanTotal | currency }}</p>
+              <p class="col-xs-7" translate>Floor Plan Total</p>
+              <p class="col-xs-5 value numeric"><span class="table-symbol">=</span>{{ financialSummary.FloorplanTotal | currency }}</p>
             </li>
             <li class="list-table-hr"></li>
             <li class="list-table-row">
-              <p class="span7" translate>Total Paid</p>
-              <p class="span5 value  numeric color-success">{{ financialSummary.TotalPaid | currency }}</p>
+              <p class="col-xs-7" translate>Total Paid</p>
+              <p class="col-xs-5 value  numeric color-success">{{ financialSummary.TotalPaid | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Total Outstanding</p>
-              <p class="span5 value  numeric color-danger">{{ financialSummary.TotalOutstanding | currency }}</p>
+              <p class="col-xs-7" translate>Total Outstanding</p>
+              <p class="col-xs-5 value  numeric color-danger">{{ financialSummary.TotalOutstanding | currency }}</p>
             </li>
             <li class="list-table-spacer">
           </ul>
         </div>
       </div>
       <!-- Hidden by default; Hide & disable button if there is no payment activity to show. -->
-      <div collapse="isCollapsed" ng-show="financialSummary.FloorplanActivity.length > 0" class="row-fluid aside payment-activity">
-        <div class="span7 table-holder">
+      <div collapse="isCollapsed" ng-show="financialSummary.FloorplanActivity.length > 0" class="row aside payment-activity leftMargin rightMargin">
+        <div class="col-xs-7 table-holder">
           <table class="table table-striped table-secondary">
             <thead>
               <th translate>Activity Date</th>
@@ -207,7 +207,7 @@
             </tr>
           </table>
         </div>
-        <div class="span5 last">
+        <div class="col-xs-5 last">
           <div class="chart-obj chart-daysFloored"
             nxg-chart
             nxg-chart-size="flooringInfo.chart.size"
@@ -239,43 +239,43 @@
     </button>
     <!-- end Payment Activity -->
 
-    <div class="row-fluid">
+    <div class="row">
       <!-- Vehicle Information -->
-      <div class="well span6 details-well">
+      <div class="well col-xs-6 details-well">
         <h2 class="well-title"><span translate>Vehicle Information</span> <span class="well-sub-title"><span translate>Stock #</span>{{ vehicleInfo.StockNumber }}</span></h2>
-        <div class="row-fluid">
+        <div class="row">
           <ul class="list-table padded">
             <li class="list-table-row">
-              <p class="span6" translate>VIN</p>
-              <p class="span6 value">{{ vehicleInfo.UnitVin }}</p>
+              <p class="col-xs-6" translate>VIN</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.UnitVin }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Make</p>
-              <p class="span6 value">{{ vehicleInfo.Make }}</p>
+              <p class="col-xs-6" translate>Make</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.Make }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Model</p>
-              <p class="span6 value">{{ vehicleInfo.Model }}</p>
+              <p class="col-xs-6" translate>Model</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.Model }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Style</p>
-              <p class="span6 value">{{ vehicleInfo.Style }}</p>
+              <p class="col-xs-6" translate>Style</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.Style }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Color</p>
-              <p class="span6 value">{{ vehicleInfo.Color }}</p>
+              <p class="col-xs-6" translate>Color</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.Color }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Year</p>
-              <p class="span6 value">{{ vehicleInfo.Year }}</p>
+              <p class="col-xs-6" translate>Year</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.Year }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Current Odometer</p>
-              <p class="span6 value">{{ vehicleInfo.CurrentMileage }}</p>
+              <p class="col-xs-6" translate>Current Odometer</p>
+              <p class="col-xs-6 value">{{ vehicleInfo.CurrentMileage }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Salvage</p>
-              <p class="span6 value">{{ {true: 'Yes', false: 'No'}[!!vehicleInfo.Salvage] }}</p>
+              <p class="col-xs-6" translate>Salvage</p>
+              <p class="col-xs-6 value">{{ {true: 'Yes', false: 'No'}[!!vehicleInfo.Salvage] }}</p>
             </li>
           </ul>
 
@@ -284,34 +284,34 @@
       <!-- end Vehicle Information -->
 
       <!-- Title Information -->
-      <div class="well span6 details-well">
+      <div class="well col-xs-6 details-well">
         <h2 class="well-title"><span translate>Title Information</span>
-          <div class="well-sub-title paired-reversed">
+          <div class="well-sub-title paired-reversed well-sub-title-edit">
             <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}" target="_blank">
               <span class="paired-body" translate>View the Title</span><span class="paired-media" nxg-icon="icon-title"></span>
             </a>
           </div>
         </h2>
-        <div class="row-fluid">
+        <div class="row">
           <ul class="list-table padded">
             <li class="list-table-row">
-              <p class="span6" translate>Title Location</p>
-              <p class="span6 value">{{ titleInfo.TitleLocation }}</p>
+              <p class="col-xs-6" translate>Title Location</p>
+              <p class="col-xs-6 value">{{ titleInfo.TitleLocation }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Title State</p>
-              <p class="span6 value">{{ titleInfo.TitleState }}</p>
+              <p class="col-xs-6" translate>Title State</p>
+              <p class="col-xs-6 value">{{ titleInfo.TitleState }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Tracking Number</p>
-              <p class="span6 value">{{ titleInfo.TitleTrackingNumber }}</p>
+              <p class="col-xs-6" translate>Tracking Number</p>
+              <p class="col-xs-6 value">{{ titleInfo.TitleTrackingNumber }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" translate>Disbursement Date</p>
-              <p class="span6 value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</p>
+              <p class="col-xs-6" translate>Disbursement Date</p>
+              <p class="col-xs-6 value">{{ (titleInfo.DisbursementDate | moment) || 'n/a' }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span6" ng-show="titleInfo.dealerCanRequestTitles()"><button class="btn-link" href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()" translate>Request the Title</button></p>
+              <p class="col-xs-6" ng-show="titleInfo.dealerCanRequestTitles()"><button class="btn-link" href="" ng-disabled="titleInfo.titleRequestDisabled()" ng-click="titleInfo.requestTitle()" translate>Request the Title</button></p>
             </li>
           </ul>
         </div>
@@ -320,57 +320,57 @@
     </div>
 
     <!-- Floor Plan Value Estimates -->
-    <div class="well row-fluid">
+    <div class="well row topMargin">
       <h2 class="well-title" translate>Floor Plan Value Estimates <span class="well-sub-title">NextGear &amp; MMR Valuation</span></h2>
-      <div class="row-fluid well-item" ng-hide="isUnitedStates">
+      <div class="row well-item" ng-hide="isUnitedStates">
         <div class="">
-          <div class="paired-media" class="row-fluid">
+          <div class="paired-media" class="row">
             <span nxg-icon="icon-info"></span>
           </div>
           <span translate>All values are displayed in US Dollars.</span>
         </div>
       </div>
-      <div class="row-fluid">
-        <div class="well-item span6">
+      <div class="row no-left-margin no-right-margin">
+        <div class="well-item col-xs-6">
           <h4 translate>NextGear Book Values</h4>
           <ul class="list-table">
             <li class="list-table-row">
-              <p class="span7" translate>Extra Clean</p>
-              <p class="span5 value numeric">{{ valueInfo.ExtraCleanValue | currency }}</p>
+              <p class="col-xs-7" translate>Extra Clean</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.ExtraCleanValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Clean</p>
-              <p class="span5 value numeric">{{ valueInfo.CleanValue | currency }}</p>
+              <p class="col-xs-7" translate>Clean</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.CleanValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Average</p>
-              <p class="span5 value numeric">{{ valueInfo.AverageValue | currency }}</p>
+              <p class="col-xs-7" translate>Average</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.AverageValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Rough</p>
-              <p class="span5 value numeric">{{ valueInfo.RoughValue | currency }}</p>
+              <p class="col-xs-7" translate>Rough</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.RoughValue | currency }}</p>
             </li>
           </ul>
         </div>
-        <div class="well-item span6">
+        <div class="well-item col-xs-6">
           <h4 translate>MMR Values</h4>
           <p class="well-item" ng-hide="showMMR" translate>MMR Values not found on record for this vehicle.</p>
           <ul class="list-table" ng-show="showMMR">
             <li class="list-table-row">
-              <p class="span7" translate>Excellent</p>
-              <p class="span5 value numeric">{{ valueInfo.MmrExcellentValue | currency }}</p>
+              <p class="col-xs-7" translate>Excellent</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.MmrExcellentValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Good</p>
-              <p class="span5 value numeric">{{ valueInfo.MmrGoodValue | currency }}</p>
+              <p class="col-xs-7" translate>Good</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.MmrGoodValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Average</p>
-              <p class="span5 value numeric">{{ valueInfo.MmrAverageValue | currency }}</p>
+              <p class="col-xs-7" translate>Average</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.MmrAverageValue | currency }}</p>
             </li>
             <li class="list-table-row">
-              <p class="span7" translate>Fair</p>
-              <p class="span5 value numeric">{{ valueInfo.MmrFairValue | currency }}</p>
+              <p class="col-xs-7" translate>Fair</p>
+              <p class="col-xs-5 value numeric">{{ valueInfo.MmrFairValue | currency }}</p>
             </li>
           </ul>
         </div>
@@ -379,7 +379,7 @@
     <!-- end Floor Plan Value Estimates -->
   </section>
 
-  <section class="span3 well sidebar last" ng-show="hasOutstanding">
+  <section class="col-xs-3 well sidebar last" ng-show="hasOutstanding">
     <h2 class="well-title" translate>Payment Options</h2>
     <div class="notice-bar" ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
       <div class="paired-media">
@@ -423,9 +423,9 @@
           <div class="btn-btn" nxg-payment-buttons="payoff" item="paymentForCheckout" on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)" on-cancel-scheduled-payment="onCancelScheduled()"></div>
         </div>
       </div>
-      <div class="row-fluid" ng-show="getAdditionalPrincipal() > 0">
-        <h6 class="span8" translate>Additional Principal</h6>
-        <h6 class="span4 numeric">{{ getAdditionalPrincipal() | currency }}</h6>
+      <div class="row" ng-show="getAdditionalPrincipal() > 0">
+        <h6 class="col-xs-8" translate>Additional Principal</h6>
+        <h6 class="col-xs-4 numeric">{{ getAdditionalPrincipal() | currency }}</h6>
         <br/>
       </div>
       <button class="btn-unstyle btn-link right" ng-show="showAddPrincipalLink()" ng-click="launchPaymentOptions()">

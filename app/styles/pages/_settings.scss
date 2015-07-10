@@ -8,8 +8,64 @@
 	padding: 5px 3px;
 }
 
+.legal-textarea {
+//  padding: 10px 10px 10px 10px;
+  margin-top: 10px;
+//  margin-bottom: 40px;
+//  width: 100%;
+  height: 400px;
+//  background-color: $white;
+  overflow: auto;
+}
+
 #AccountManagementPage, #AuctionSettingsPage {
   .btn-help-adjust {
     margin-top: 10px;
   }
+
+  #FinancialAccounts {
+    .financial-table {
+      padding-bottom: 0;
+    }
+    .text-vertical-center {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+    .icon-vertical-center {
+      margin-top: 14px;
+    }
+    .icon-padding-right {
+      padding-right: 25px;
+    }
+    .no-bottom-border {
+      border-bottom: 0;
+    }
+    .no-bottom-margin {
+      margin-bottom: 0;
+    }
+  }
+}
+.medium-left-padding {
+  padding-left: 15px;
+}
+.small-padding {
+  padding: 7px;
+}
+.no-left-padding {
+  padding:  0;
+}
+.no-right-padding {
+  padding-right: 0;
+}
+.small-top-margin {
+  margin-top: 3%;
+}
+.smaller-top-margin {
+  margin-top: 2%;
+}
+.smallest-bottom-margin {
+  margin-bottom: 1%;
+}
+.smallest-left-margin {
+  margin-left: 1%;
 }

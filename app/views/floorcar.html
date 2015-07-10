@@ -1,12 +1,12 @@
-<form class="row-fluid" name="form" novalidate>
-  <fieldset class="span6 well first">
+<form class="row" name="form" novalidate>
+  <fieldset class="col-xs-6 well first">
     <h2 class="well-title" translate>1. Vehicle Information</h2>
     <div class="well-form">
 
       <div nxg-vin-details floor-model="data" validity="validity" form="form" error-flag="vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
       <label for="inputColor" class="input-title" translate>Color</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }">
         <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
                 ng-options="color.ColorName for color in options.colors" required>
           <option value="" translate>Make Selection</option>
@@ -44,7 +44,7 @@
       </label>
 
       <label for="inputTitleHolder" class="input-title" translate>Who has the Title?</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
         <select id="inputTitleHolder"
                 name="inputTitleHolder" ng-model="data.TitleLocationId"
                 ng-options="location.Name for location in options.titleLocationOptions"
@@ -59,7 +59,7 @@
       </label>
 
       <label for="inputInvLoc" class="input-title" translate>Inventory Location</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }">
         <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                 ng-options="(location | address:'oneLineSelect') for location in options.locations"
                 required>
@@ -74,7 +74,7 @@
     </div>
   </fieldset>
 
-  <fieldset class="span6 well">
+  <fieldset class="col-med-6 well">
     <h2 class="well-title" translate>2. Sale Information</h2>
     <div class="well-form">
       <label translate>Trade in</label>
@@ -148,7 +148,7 @@
       </label>
 
       <label for="inputCreditLine" class="input-title" translate>Line of Credit</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }">
+      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }">
         <select id="inputCreditLine"
                 name="inputCreditLine"
                 ng-model="data.LineOfCreditId"
@@ -163,7 +163,7 @@
       </label>
 
       <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>:</label>
-      <div class="style-select">
+      <div class="style-select small">
         <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
                 ng-options="value && 'Seller' || 'Buyer' | translate for value in paySellerOptions"
                 ng-change="data.BankAccountId = null"
@@ -173,7 +173,7 @@
       </div>
 
       <label for="inputDisburseAcct" translate>Bank Account for Disbursement (when applicable)</label>
-      <div class="style-select" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
+      <div class="style-select large" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
         <select id="inputDisburseAcct"
                 name="inputDisburseAcct"
                 ng-model="data.BankAccountId"
@@ -193,7 +193,7 @@
                 type="button"
                 ng-disabled="submitInProgress"
                 ng-click="cancel()"
-                nxg-track="{{metric.CLICK_FLOOR_A_VEHICLE_CANCEL_BUTTON}}" translate>
+                translate>
           Cancel
         </button>
         <button class="btn-cta cta-primary"
