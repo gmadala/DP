@@ -34,7 +34,7 @@
           ng-class="{'selected': onQueue == 'payment'}"
           ng-click="togglePaymentInQueue(false)"
           tooltip="{{ onQueue != 'payment' && tooltipText || null }}"
-          tooltip-placement="right"
+          tooltip-placement="left"
           tooltip-popup-delay="700">
         <span class="paired-body">{{ item.AmountDue | currency }}</span>
         <span ng-switch="onQueue">
@@ -79,7 +79,7 @@
           ng-class="{'selected': onQueue == 'payoff'}"
           ng-click="togglePaymentInQueue(true)"
           tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
-          tooltip-placement="right"
+          tooltip-placement="left"
           tooltip-popup-delay="700">
       <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
       <span ng-switch="onQueue">

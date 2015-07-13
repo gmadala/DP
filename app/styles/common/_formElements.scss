@@ -31,6 +31,10 @@
   margin: 0 0 10px;
 }
 
+.text-disabled {
+  color: $disabled;
+}
+
 // Basic form element styling.
 fieldset {}
 legend {}

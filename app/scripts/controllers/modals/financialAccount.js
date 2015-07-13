@@ -15,20 +15,35 @@
     $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber.substr(accountNumber.length - 4) : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
+    $scope.activeValid = activeValid;
+
+    // These should be refactored in the validation story.
+    $scope.accountNumberRegex = /[0-9]+/;
+    $scope.routingNumberRegex = /[0-9]{9}/;
+
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
 
-    function confirmRequest () {
-      $scope.validity = angular.copy($scope.financialAccountForm);
-      if ($scope.validity.$valid) {
-        if (!$scope.account.AccountId) {
-          $scope.account.AccountNumber = $scope.accountNumberDisplay;
-          $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
-        }
+    // User cannot have an account that is not active and set as either a default disbursement or default payment.
+    function activeValid () {
+      return $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
+    }
 
-        AccountManagement.updateBankAccount($scope.account).then(function () {
-          dialog.close($scope.account);
-        });
+    function confirmRequest (action) {
+      $scope.validity = angular.copy($scope.financialAccountForm);
+
+      if ($scope.validity.$valid && $scope.activeValid()) {
+        if(action === 'edit') {
+          AccountManagement.updateBankAccount($scope.account).then(function () {
+            dialog.close($scope.account);
+          });
+        }
+        if(action === 'add') {
+          AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
+            $scope.account.AccountId = bankAccountId;
+            dialog.close($scope.account);
+          });
+        }
       }
     }
 
