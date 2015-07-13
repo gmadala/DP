@@ -95,7 +95,8 @@
           <label for="confirmAccountNumber" translate>Confirm Account Number</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" max-length="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !confirmAccountNumberValid }">
+                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !confirmAccountNumberValid }"
+                 ng-paste="$event.preventDefault()">
           <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && !confirmAccountNumberValid" translate>
             Does not match with account number.
           </label>
