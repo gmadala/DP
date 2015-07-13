@@ -110,7 +110,21 @@ describe('Controller: FinancialAccountCtrl', function () {
   });
 
   describe('adding financial account', function () {
+    var faultyBankAccount;
+
     beforeEach(inject(function ($controller, $rootScope, $q) {
+
+      faultyBankAccount = {
+        'AccountName': 'JP Morgan Chase Fake Bank - sa2!',
+        'BankName': 'JP Morgan Chase Fake Bank',
+        'IsActive': true,
+        'RoutingNumber': '312432',
+        'City': 'Phoenix',
+        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
+        'IsDefaultPayment': true,
+        'IsDefaultDisbursement': true,
+        'AccountNumber': '@$dsa2!'
+      };
 
       bankAccount = {
         'AccountName': 'JP Morgan Chase Bank - 7905',
@@ -193,7 +207,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
     });
 
-    it('should not close dialog if account is inactive and set to default disbursement and default payment.', function () {
+    it('should not close dialog if account is inactive and set to default disbursement or default payment.', function () {
       scope.financialAccountForm = {
         $valid: true
       };
@@ -208,38 +222,12 @@ describe('Controller: FinancialAccountCtrl', function () {
       scope.confirmRequest('add');
       scope.$digest();
 
-      expect(dialog.close).not.toHaveBeenCalled();
-      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
-    });
-
-    it('should not close dialog if account is inactive and set to default payment.', function () {
-      scope.financialAccountForm = {
-        $valid: true
-      };
-
-      spyOn(dialog, 'close').andCallThrough();
-      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
-
-      scope.account.IsActive = false;
       scope.account.IsDefaultDisbursement = false;
       scope.account.IsDefaultPayment = true;
 
       scope.confirmRequest('add');
       scope.$digest();
 
-      expect(dialog.close).not.toHaveBeenCalled();
-      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
-    });
-
-    it('should not close dialog if account is inactive and set to default disbursement.', function () {
-      scope.financialAccountForm = {
-        $valid: true
-      };
-
-      spyOn(dialog, 'close').andCallThrough();
-      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
-
-      scope.account.IsActive = false;
       scope.account.IsDefaultDisbursement = true;
       scope.account.IsDefaultPayment = false;
 
