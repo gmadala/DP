@@ -6,7 +6,8 @@ describe('Controller: FinancialAccountCtrl', function () {
     AccountManagementMock,
     scope,
     dialog,
-    bankAccount;
+    bankAccount,
+    bankId;
 
   beforeEach(module('nextgearWebApp'));
 
@@ -111,7 +112,19 @@ describe('Controller: FinancialAccountCtrl', function () {
   describe('adding financial account', function () {
     beforeEach(inject(function ($controller, $rootScope, $q) {
 
-      bankAccount = {};
+      bankAccount = {
+        'AccountName': 'JP Morgan Chase Bank - 7905',
+        'BankName': 'JP Morgan Chase Bank',
+        'IsActive': true,
+        'RoutingNumber': '349886738',
+        'City': 'Phoenix',
+        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
+        'IsDefaultPayment': true,
+        'IsDefaultDisbursement': true,
+        'AccountNumber': '4199137905'
+      };
+
+      bankId = '9e05f8c9-2e3b-4f80-a346-00004bceacb1';
 
       dialog = {
         close: angular.noop
@@ -119,7 +132,7 @@ describe('Controller: FinancialAccountCtrl', function () {
 
       AccountManagementMock = {
         addBankAccount: function () {
-          return $q.when(bankAccount);
+          return $q.when(bankId);
         }
       };
 
@@ -274,10 +287,5 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(dialog.close).toHaveBeenCalled();
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
     });
-
-    it('should not close the dialog and add bank account if routing number is not 9 alpha-numeric numbers', function () {
-
-    });
-
   });
 });
