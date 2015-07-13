@@ -30,8 +30,8 @@
     return directive;
 
     function link(scope) {
-      scope.line1Regex = /\d{1,5}\s\w*\s.*/;
-      scope.zipRegex = /\d{5}(-\d{4})?/;
+      scope.line1Regex = /^\d{1,5}(\s\w*){1,2}\s.*$/;
+      scope.zipRegex = /^\d{5}(-\d{4})?$/;
       scope.cityRegex = /^[A-Za-z ]*$/;
 
       // Level of indirection and wrapper for two-way binding in child scope
