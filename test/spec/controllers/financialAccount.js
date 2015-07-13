@@ -110,21 +110,7 @@ describe('Controller: FinancialAccountCtrl', function () {
   });
 
   describe('adding financial account', function () {
-    var faultyBankAccount;
-
     beforeEach(inject(function ($controller, $rootScope, $q) {
-
-      faultyBankAccount = {
-        'AccountName': 'JP Morgan Chase Fake Bank - sa2!',
-        'BankName': 'JP Morgan Chase Fake Bank',
-        'IsActive': true,
-        'RoutingNumber': '312432',
-        'City': 'Phoenix',
-        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
-        'IsDefaultPayment': true,
-        'IsDefaultDisbursement': true,
-        'AccountNumber': '@$dsa2!'
-      };
 
       bankAccount = {
         'AccountName': 'JP Morgan Chase Bank - 7905',
@@ -274,6 +260,34 @@ describe('Controller: FinancialAccountCtrl', function () {
 
       expect(dialog.close).toHaveBeenCalled();
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
+
+    it('should not match more than 16 numbers against account number regex', function() {
+      expect(scope.accountNumberRegex.test('12345678901234567')).toBe(false);
+    });
+
+    it('should not match non-alpha-numeric characters against account number regex', function() {
+      expect(scope.accountNumberRegex.test('@!#$421321@!#')).toBe(false);
+    });
+
+    it('should match 1-16 alpha-numeric characters against account number regex', function() {
+      expect(scope.accountNumberRegex.test('12345678901')).toBe(true);
+    });
+
+    it('should not match more than 9 alpha-numeric characters against routing number regex', function() {
+      expect(scope.routingNumberRegex.test('1234567890')).toBe(false);
+    });
+
+    it('should not match less than 9 alpha-numeric characters against routing number regex', function() {
+      expect(scope.routingNumberRegex.test('12345678')).toBe(false);
+    });
+
+    it('should not match non-alpha-numeric characters against routing number regex', function() {
+      expect(scope.routingNumberRegex.test('@@#123$#@')).toBe(false);
+    });
+
+    it('should match 9 alpha-numeric characters against routing number regex', function() {
+      expect(scope.routingNumberRegex.test('123456789')).toBe(true);
     });
   });
 });
