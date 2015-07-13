@@ -232,7 +232,7 @@ angular.module('nextgearWebApp')
                 options: function () {
                   return {
                     account: {
-                      IsActive: false,
+                      IsActive: true,
                       IsDefaultDisbursement: false,
                       IsDefaultPayment: false
                     }
