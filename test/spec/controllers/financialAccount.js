@@ -274,5 +274,10 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(dialog.close).toHaveBeenCalled();
       expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
     });
+
+    it('should not close the dialog and add bank account if routing number is not 9 alpha-numeric numbers', function () {
+
+    });
+
   });
 });

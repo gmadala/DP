@@ -63,7 +63,7 @@
       <div class="row">
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
-          <input type="text" id="accountNumber" name="accountNumber" class="input-full"
+          <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
                  ng-model="account.AccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}"
                  ng-pattern="accountNumberRegex">
@@ -76,7 +76,7 @@
         </div>
         <div class="col-xs-6">
           <label for="routingNumber" translate>Routing Number</label>
-          <input type="text" id="routingNumber" name="routingNumber" class="input-full"
+          <input type="text" id="routingNumber" name="routingNumber" class="input-full" maxlength="9"
                  ng-model="account.RoutingNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}"
                  ng-pattern="routingNumberRegex">
