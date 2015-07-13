@@ -88,6 +88,23 @@
           </label>
         </div>
       </div>
+
+
+      <div class="row">
+        <div class="col-xs-6">
+          <label for="confirmAccountNumber" translate>Confirm Account Number</label>
+          <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" max-length="16"
+                 ng-model="inputs.confirmAccountNumber" ng-required="true"
+                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !confirmAccountNumberValid }">
+          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && !confirmAccountNumberValid" translate>
+            Does not match with account number.
+          </label>
+          <label for=confirmAccountNumber class="text-error" ng-show="validity.confirmAccountNumber.$error.required" translate>
+            Please confirm the account number.
+          </label>
+
+        </div>
+      </div>
       <nxg-address city="true"
                    info="account"
                    state="true"

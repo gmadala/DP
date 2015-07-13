@@ -15,7 +15,9 @@
     $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber.substr(accountNumber.length - 4) : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
-    $scope.activeValid = activeValid;
+    $scope.confirmAccountNumberValid = true;
+
+    $scope.inputs = {};
 
     $scope.accountNumberRegex = /^\d{1,16}$/;
     $scope.routingNumberRegex = /^\d{9}$/;
@@ -28,10 +30,16 @@
       return $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
     }
 
+    function confirmAccountNumberValid () {
+      return $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+    }
+
     function confirmRequest (action) {
       $scope.validity = angular.copy($scope.financialAccountForm);
+      $scope.activeValid = activeValid();
+      $scope.confirmAccountNumberValid = confirmAccountNumberValid();
 
-      if ($scope.validity.$valid && $scope.activeValid()) {
+      if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
         if(action === 'edit') {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);
