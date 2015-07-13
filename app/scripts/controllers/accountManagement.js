@@ -231,14 +231,27 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
-                    account: { }
+                    account: {
+                      IsActive: false,
+                      IsDefaultDisbursement: false,
+                      IsDefaultPayment: false
+                    }
                   };
                 }
               },
               controller: 'FinancialAccountCtrl'
             };
 
-            $dialog.dialog(dialogOptions).open();
+            $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
+              if(updatedAccount) {
+                if(updatedAccount.IsDefaultPayment) {
+                  $scope.updateBillingAccount(updatedAccount.AccountId);
+                }
+                if(updatedAccount.IsDefaultDisbursement) {
+                  $scope.updateDisbursementAccount(updatedAccount.AccountId);
+                }
+              }
+            });
           }
         };
 

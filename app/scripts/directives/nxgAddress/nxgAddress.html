@@ -1,0 +1,107 @@
+<!--
+CamelCase is not used for ng-model, since endpoints use capitalized properties.
+-->
+
+<!-- LINE1 -->
+<div class="row" ng-if="line1">
+  <div class="col-xs-12 text-vertical-center">
+    <label for="addressLine1" translate>Address 1</label>
+    <input class="input-full"
+           id="addressLine1"
+           name="addressLine1"
+           ng-class="{ 'nxg-invalid' : validity.addressLine1.$error.required || validity.addressLine1.$error.pattern }"
+           ng-model="info.Line1"
+           ng-pattern="line1Regex"
+           type="text" required>
+    <label class="text-error"
+           for="addressLine1"
+           ng-show="validity.addressLine1.$error.required" translate>
+      Please enter an address.
+    </label>
+    <label class="text-error"
+           for="addressLine1"
+           ng-show="validity.addressLine1.$error.pattern && !validity.addressLine1.$error.required" translate>
+      Please enter a valid street address.
+    </label>
+  </div>
+</div>
+<!-- END LINE1 -->
+
+<!-- LINE2 -->
+<div class="row" ng-if="line2">
+  <div class="col-xs-12 text-vertical-center">
+    <label for="addressLine2" translate>Address 2</label>
+    <input class="input-full"
+           id="addressLine2"
+           name="addressLine2"
+           ng-model="info.Line2"
+           type="text">
+  </div>
+</div>
+<!-- END LINE2 -->
+
+<!-- CITY AND STATE -->
+<div class="row" ng-if="city || state">
+  <div class="col-xs-6 text-vertical-center" ng-if="city">
+    <label for="addressCity" translate>City</label>
+    <input class="input-full"
+           id="addressCity"
+           name="addressCity"
+           ng-class="{ 'nxg-invalid' : validity.addressCity.$error.required || validity.addressCity.$error.pattern }"
+           ng-model="info.City"
+           ng-pattern="cityRegex"
+           type="text" required>
+    <label class="text-error"
+           for="addressCity"
+           ng-show="validity.addressCity.$error.required" translate>
+      Please enter a city.
+    </label>
+    <label class="text-error"
+           for="addressCity"
+           ng-show="validity.addressCity.$error.pattern && !validity.addressCity.$error.required" translate>
+      City names must only have letters and spaces.
+    </label>
+
+  </div>
+  <div class="col-xs-6 text-vertical-center" ng-if="state">
+    <label for="addressState" translate>State</label>
+    <div class="style-select" ng-class="{ 'nxg-invalid' : validity.addressState.$error.required }">
+      <select id="addressState"
+              name="addressState"
+              ng-model="inputs.state"
+              ng-options="state.StateName for state in states" required>
+      </select>
+    </div>
+    <label class="text-error"
+           for="addressState"
+           ng-show="validity.addressState.$error.required" translate>
+      Please enter a state.
+    </label>
+  </div>
+</div>
+<!-- END CITY AND STATE -->
+
+<!-- ZIP -->
+<div class="row" ng-if="zip">
+  <div class="col-xs-6 text-vertical-center">
+    <label for="addressZip" translate>Zip Code</label>
+    <input class="input-full"
+           id="addressZip"
+           name="addressZip"
+           ng-class="{ 'nxg-invalid' : validity.addressZip.$error.required || validity.addressZip.$error.pattern }"
+           ng-model="info.Zip"
+           ng-pattern="zipRegex"
+           type="text" required>
+    <label class="text-error"
+           for="addressZip"
+           ng-show="validity.addressZip.$error.required">
+      Please enter a zip.
+    </label>
+    <label class="text-error"
+           for="addressZip"
+           ng-show="validity.addressZip.$error.pattern && !validity.addressZip.$error.required">
+      Please enter a valid zip code.
+    </label>
+  </div>
+</div>
+<!-- END ZIP -->

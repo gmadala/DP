@@ -83,7 +83,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       spyOn(dialog, 'close').andCallThrough();
       spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-      scope.confirmRequest();
+      scope.confirmRequest('edit');
       expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
       expect(dialog.close).not.toHaveBeenCalled();
     });
@@ -96,7 +96,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       spyOn(dialog, 'close').andCallThrough();
       spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-      scope.confirmRequest();
+      scope.confirmRequest('edit');
       // resolve remaining promise to send the updated bank account
       scope.$digest();
 
@@ -109,5 +109,170 @@ describe('Controller: FinancialAccountCtrl', function () {
   });
 
   describe('adding financial account', function () {
+    beforeEach(inject(function ($controller, $rootScope, $q) {
+
+      bankAccount = {};
+
+      dialog = {
+        close: angular.noop
+      };
+
+      AccountManagementMock = {
+        addBankAccount: function () {
+          return $q.when(bankAccount);
+        }
+      };
+
+      scope = $rootScope.$new();
+      FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
+        $scope: scope,
+        AccountManagement: AccountManagementMock,
+        dialog: dialog,
+        options: {
+          account : {
+            IsActive: false,
+            IsDefaultDisbursement: false,
+            IsDefaultPayment: false
+          }
+        }
+      });
+    }));
+
+    it('should have empty fields', function() {
+      expect(scope.account.AccountName).toBeUndefined();
+      expect(scope.account.AccountNumber).toBeUndefined();
+      expect(scope.account.BankName).toBeUndefined();
+      expect(scope.account.City).toBeUndefined();
+      expect(scope.account.IsActive).toBeFalsy();
+      expect(scope.account.IsDefaultDisbursement).toBeFalsy();
+      expect(scope.account.IsDefaultPayment).toBeFalsy();
+      expect(scope.account.RoutingNumber).toBeFalsy();
+      expect(scope.account.State).toBeUndefined();
+    });
+
+    it('should not close the dialog if the form is not valid', function() {
+      scope.financialAccountForm = {
+        $valid: false
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.confirmRequest('add');
+
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should close the dialog after adding bank account succeed', function() {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.confirmRequest('add');
+      // resolve remaining promise to send the updated bank account
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
+
+    it('should not close dialog if account is inactive and set to default disbursement and default payment.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = true;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should not close dialog if account is inactive and set to default payment.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = false;
+      scope.account.IsDefaultPayment = true;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should not close dialog if account is inactive and set to default disbursement.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = false;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).not.toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
+    });
+
+    it('should close dialog if account is active and any defaults are set.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = true;
+      scope.account.IsDefaultDisbursement = true;
+      scope.account.IsDefaultPayment = true;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
+
+    it('should close dialog if account is inactive and no defaults are set.', function () {
+      scope.financialAccountForm = {
+        $valid: true
+      };
+
+      spyOn(dialog, 'close').andCallThrough();
+      spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+
+      scope.account.IsActive = false;
+      scope.account.IsDefaultDisbursement = false;
+      scope.account.IsDefaultPayment = false;
+
+      scope.confirmRequest('add');
+      scope.$digest();
+
+      expect(dialog.close).toHaveBeenCalled();
+      expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+    });
   });
 });
