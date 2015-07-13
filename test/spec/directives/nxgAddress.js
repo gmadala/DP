@@ -140,7 +140,10 @@ describe('Directive: nxgAddress', function () {
     expect(dScope.cityRegex.test('12345123')).toBe(false);
   });
 
-  it('should match a city with only alphabetic characters', function() {
+  it('should match a city with only alphabetic characters and \' - .', function() {
     expect(dScope.cityRegex.test('Indianapolis')).toBe(true);
+    expect(dScope.cityRegex.test('St. Martin')).toBe(true);
+    expect(dScope.cityRegex.test('Winston-Salem')).toBe(true);
+    expect(dScope.cityRegex.test('King\'s Palace')).toBe(true);
   });
 });
