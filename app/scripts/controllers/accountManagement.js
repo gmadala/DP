@@ -251,6 +251,14 @@ angular.module('nextgearWebApp')
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
               }
+            }).then(function() {
+              AccountManagement.getFinancialAccountData()
+                .then(function(updatedData) {
+                  $scope.financial.data.bankAccounts = updatedData.BankAccounts;
+                  $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
+                  $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
+                  $scope.apply();
+                });
             });
           }
         };
