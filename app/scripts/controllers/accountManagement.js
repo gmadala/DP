@@ -257,7 +257,6 @@ angular.module('nextgearWebApp')
                   $scope.financial.data.bankAccounts = updatedData.BankAccounts;
                   $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
                   $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
-                  $scope.apply();
                 });
             });
           }
