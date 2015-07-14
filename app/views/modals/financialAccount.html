@@ -88,12 +88,10 @@
           </label>
         </div>
       </div>
-
-
       <div class="row">
         <div class="col-xs-6">
           <label for="confirmAccountNumber" translate>Confirm Account Number</label>
-          <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" max-length="16"
+          <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !confirmAccountNumberValid }"
                  ng-paste="$event.preventDefault()">

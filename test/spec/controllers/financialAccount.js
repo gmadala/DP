@@ -174,27 +174,27 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.accountNumberRegex.test('12345678901234567')).toBe(false);
     });
 
-    it('should not match non-alpha-numeric characters against account number regex', function() {
+    it('should not match non-numeric characters against account number regex', function() {
       expect(scope.accountNumberRegex.test('@!#$421321@!#')).toBe(false);
     });
 
-    it('should match 1-16 alpha-numeric characters against account number regex', function() {
+    it('should match 1-16 numeric characters against account number regex', function() {
       expect(scope.accountNumberRegex.test('12345678901')).toBe(true);
     });
 
-    it('should not match more than 9 alpha-numeric characters against routing number regex', function() {
+    it('should not match more than 9 numeric characters against routing number regex', function() {
       expect(scope.routingNumberRegex.test('1234567890')).toBe(false);
     });
 
-    it('should not match less than 9 alpha-numeric characters against routing number regex', function() {
+    it('should not match less than 9 numeric characters against routing number regex', function() {
       expect(scope.routingNumberRegex.test('12345678')).toBe(false);
     });
 
-    it('should not match non-alpha-numeric characters against routing number regex', function() {
+    it('should not match non-numeric characters against routing number regex', function() {
       expect(scope.routingNumberRegex.test('@@#123$#@')).toBe(false);
     });
 
-    it('should match 9 alpha-numeric characters against routing number regex', function() {
+    it('should match 9 numeric characters against routing number regex', function() {
       expect(scope.routingNumberRegex.test('123456789')).toBe(true);
     });
 

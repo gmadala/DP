@@ -37,7 +37,7 @@
     function confirmRequest (action) {
       $scope.validity = angular.copy($scope.financialAccountForm);
       $scope.activeValid = activeValid();
-      $scope.confirmAccountNumberValid = confirmAccountNumberValid();
+      $scope.confirmAccountNumberValid = action === 'edit' || confirmAccountNumberValid();
 
       if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
         if(action === 'edit') {
