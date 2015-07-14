@@ -29,7 +29,7 @@ angular.module('nextgearWebApp')
         enabled: false
       },
       addBankAccount: {
-        enabled: true
+        enabled: false
       },
       loadFromQueryString: function () {
         var search = $location.search();
