@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features, gettextCatalog) {
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -221,6 +221,11 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          updateFinancialAccounts: function(updatedData) {
+            $scope.financial.data.bankAccounts = updatedData.BankAccounts;
+            $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
+            $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
+          },
           addFinancialAccount: function() {
             var dialogOptions = {
               dialogClass: 'modal',
@@ -232,7 +237,7 @@ angular.module('nextgearWebApp')
                 options: function () {
                   return {
                     account: {
-                      IsActive: false,
+                      IsActive: true,
                       IsDefaultDisbursement: false,
                       IsDefaultPayment: false
                     }
@@ -251,6 +256,16 @@ angular.module('nextgearWebApp')
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
               }
+            }).then(function(/* success */) {
+              var title = gettextCatalog.getString('Bank Account Added'),
+                msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
+                buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
+              $dialog.messageBox(title, msg, buttons).open();
+
+              AccountManagement.getFinancialAccountData()
+                .then(function(updatedData) {
+                  $scope.financial.updateFinancialAccounts(updatedData);
+                });
             });
           }
         };
