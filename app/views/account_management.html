@@ -2,7 +2,7 @@
   <section class="col-md-12 well settings-well financial-table">
     <h2 class="well-title no-bottom-border">
       <span translate>Financial Accounts</span>
-      <div class="well-subtitle well-subtitle-edit pull-right" ng-show="addBankAccountEnabled">
+      <div class="well-subtitle well-subtitle-edit pull-right" ng-show="financial.isAddBankAccountEditable()">
         <button class="btn-unstyle heavy" ng-click="financial.addFinancialAccount()" translate>Add Account</button>
       </div>
     </h2>
