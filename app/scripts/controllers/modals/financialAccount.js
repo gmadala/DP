@@ -15,20 +15,42 @@
     $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber.substr(accountNumber.length - 4) : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
+    $scope.confirmAccountNumberValid = true;
+
+    $scope.inputs = {};
+
+    $scope.accountNumberRegex = /^\d{1,16}$/;
+    $scope.routingNumberRegex = /^\d{9}$/;
+
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
 
-    function confirmRequest () {
-      $scope.validity = angular.copy($scope.financialAccountForm);
-      if ($scope.validity.$valid) {
-        if (!$scope.account.AccountId) {
-          $scope.account.AccountNumber = $scope.accountNumberDisplay;
-          $scope.account.RoutingtNumber = $scope.routingNumberDisplay;
-        }
+    // User cannot have an account that is not active and set as either a default disbursement or default payment.
+    function activeValid () {
+      return $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
+    }
 
-        AccountManagement.updateBankAccount($scope.account).then(function () {
-          dialog.close($scope.account);
-        });
+    function confirmAccountNumberValid () {
+      return $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+    }
+
+    function confirmRequest (action) {
+      $scope.validity = angular.copy($scope.financialAccountForm);
+      $scope.activeValid = activeValid();
+      $scope.confirmAccountNumberValid = action === 'edit' || confirmAccountNumberValid();
+
+      if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
+        if(action === 'edit') {
+          AccountManagement.updateBankAccount($scope.account).then(function () {
+            dialog.close($scope.account);
+          });
+        }
+        if(action === 'add') {
+          AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
+            $scope.account.AccountId = bankAccountId;
+            dialog.close($scope.account);
+          });
+        }
       }
     }
 

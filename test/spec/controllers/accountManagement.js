@@ -200,6 +200,30 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
     });
 
+    it('add bank account should be enabled only for active stakeholders', function () {
+
+      // TODO modify all the expectations once the add bank account feature is enabled
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = true;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = false;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = false;
+      scope.business.data.isStakeholder = true;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = false;
+      scope.business.data.isStakeholder = false;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+    });
+
     describe('save()', function(){
       var savingBusiness, validateResult;
       beforeEach(function() {

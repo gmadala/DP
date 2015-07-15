@@ -19,7 +19,8 @@
         defaultDisbursementBankAccountId: '=disbursementAccount',
         defaultBillingBankAccountId: '=billingAccount',
         updateBillingAccount: '&',
-        updateDisbursementAccount: '&'
+        updateDisbursementAccount: '&',
+        isStakeholderActive: '='
       },
       restrict: 'E'
     };
@@ -35,6 +36,7 @@
       scope.defaultForDisbursement = isDefaultForDisbursement();
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
+      scope.isEditable = isEditable;
 
       /**
        * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
@@ -62,6 +64,9 @@
         return scope.account.AllowPaymentByAch;
       }
 
+      function isEditable() {
+        return scope.editBankAccountEnabled && scope.isStakeholderActive;
+      }
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;
       }

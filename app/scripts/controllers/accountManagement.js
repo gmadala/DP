@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features, gettextCatalog) {
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -23,7 +23,6 @@ angular.module('nextgearWebApp')
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
     $scope.autoPayEnabled = features.autoPay.enabled;
-    $scope.addBankAccountEnabled = features.addBankAccount.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -221,6 +220,15 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          isAddBankAccountEditable: function() {
+            return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
+              $scope.business.data.isStakeholderActive;
+          },
+          updateFinancialAccounts: function(updatedData) {
+            $scope.financial.data.bankAccounts = updatedData.BankAccounts;
+            $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
+            $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
+          },
           addFinancialAccount: function() {
             var dialogOptions = {
               dialogClass: 'modal',
@@ -231,14 +239,37 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
-                    account: { }
+                    account: {
+                      IsActive: true,
+                      IsDefaultDisbursement: false,
+                      IsDefaultPayment: false
+                    }
                   };
                 }
               },
               controller: 'FinancialAccountCtrl'
             };
 
-            $dialog.dialog(dialogOptions).open();
+            $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
+              if(updatedAccount) {
+                if(updatedAccount.IsDefaultPayment) {
+                  $scope.updateBillingAccount(updatedAccount.AccountId);
+                }
+                if(updatedAccount.IsDefaultDisbursement) {
+                  $scope.updateDisbursementAccount(updatedAccount.AccountId);
+                }
+
+                var title = gettextCatalog.getString('Bank Account Added'),
+                  msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
+                  buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
+                $dialog.messageBox(title, msg, buttons).open();
+
+                AccountManagement.getFinancialAccountData()
+                  .then(function(updatedData) {
+                    $scope.financial.updateFinancialAccounts(updatedData);
+                  });
+              }
+            });
           }
         };
 
