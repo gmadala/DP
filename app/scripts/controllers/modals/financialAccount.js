@@ -27,15 +27,8 @@
 
     function lastFour(str, prefix) {
       prefix = prefix || '';
-      if(!str) {
-        return '';
-      }
-      else if(str.length < 4) {
-        return prefix + str;
-      }
-      else {
-        return prefix + str.substr(str.length - 4);
-      }
+      var charFromEnd = str.length < 4 ? str.length : 4;
+      return !!str ? prefix + str.substr(str.length - charFromEnd) : '';
     }
 
     // User cannot have an account that is not active and set as either a default disbursement or default payment.
@@ -53,7 +46,6 @@
       $scope.confirmAccountNumberValid = action === 'edit' || confirmAccountNumberValid();
 
       if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
-        $scope.q = 'q';
         if(action === 'edit') {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);

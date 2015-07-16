@@ -112,6 +112,16 @@ describe('Controller: FinancialAccountCtrl', function () {
         expect(AccountManagementMock.updateBankAccount).toHaveBeenCalled();
         expect(dialog.close).toHaveBeenCalled();
       });
+
+      it('should not set accountName when closing', function () {
+        var original = scope.account.AccountName;
+
+        scope.account.BankName = 'Chase Bank';
+        scope.account.AccountNumber = '1234';
+        scope.$digest();
+
+        expect(scope.account.AccountName).toBe(original);
+      });
     });
   });
 
@@ -169,6 +179,33 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.account.State).toBeUndefined();
     });
 
+    it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
+      scope.account.BankName = 'Chase Bank';
+      scope.account.AccountNumber = '1234';
+      scope.$digest();
+
+      expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
+    });
+
+    it('should not set accountName if both bankName and accountNumber are not set', function () {
+      scope.account.BankName = '';
+      scope.account.AccountNumber = '';
+
+      scope.$digest();
+      expect(scope.accountNameDisplay).toBe('');
+
+      scope.account.BankName = 'Chase Bank';
+      scope.account.AccountNumber = '';
+
+      scope.$digest();
+      expect(scope.accountNameDisplay).toBe('');
+
+      scope.account.BankName = '';
+      scope.account.AccountNumber = '1234';
+
+      scope.$digest();
+      expect(scope.accountNameDisplay).toBe('');
+    });
 
     it('should not match more than 16 numbers against account number regex', function() {
       expect(scope.accountNumberRegex.test('12345678901234567')).toBe(false);
