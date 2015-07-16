@@ -19,6 +19,7 @@
     "BusinessContactUserName": "Riga38",
     "Phone": "9193566338",
     "CellPhone": "9193566339",
+    "AutoPayEnabled": true,
     "DealerAddresses": [
       {
         "AddressId": "d8c60d7c-1330-4458-9599-1bce92b5dcb0",

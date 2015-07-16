@@ -12,6 +12,7 @@ frisby.login()
         BusinessId: String,
         BusinessNumber: Number,
         BusinessName: String,
+        AutoPayEnabled: Boolean,
         MarketName: String,
         MarketPhoneNumber: String,
         CSCPhoneNumber: String,

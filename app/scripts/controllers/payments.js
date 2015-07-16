@@ -225,6 +225,13 @@ angular.module('nextgearWebApp')
       });
     };
 
+    //autopay check
+    User.getInfo().then(function(info){
+      $scope.autoPayEnabled = info.AutoPayEnabled;
+    });
+
+
+
     // initial check
     bizHours();
 

@@ -9,6 +9,15 @@
         You have logged in outside of business hours. Any payments made will be scheduled to be applied on the next available business day, {{ nextBusinessDay | moment }}.
       </h6>
     </div>
+    <div class="info-block" ng-show="autoPayEnabled">
+      <div class="info-block-image">
+        <span nxg-icon="icon-info"></span>
+      </div>
+
+      <h6 class="info-block-text" translate>
+        You are enrolled in ProperNounTBD. All payments will be processed automatically on their due date.
+      </h6>
+    </div>
     <div nxg-search
          title="{{ 'Payment Search' | translate }}"
          prompt="{{ 'By Stock #, VIN, or Description' | translate }}"
