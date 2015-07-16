@@ -17,13 +17,16 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <label for="accountName" translate>Account Name</label>
-        <input type="text" id="accountName" name="accountName" class="input-full" ng-model="account.AccountName"
-               ng-class="{ 'nxg-invalid': validity.accountName.$error.required }" required>
-        <label for="accountName" class="text-error" ng-show="validity.accountName.$error.required"
-               translate>
-          Please enter an account name.
-        </label>
+        <div class="row small-top-margin">
+          <div class="col-xs-12">
+            <span class="heavy" translate>Account Name</span>
+          </div>
+        </div>
+        <div class="row smallest-top-margin text-height">
+          <div class="col-xs-12">
+            <span>{{accountNameDisplay}}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
