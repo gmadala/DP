@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
         enabled: true
       },
       autoPay: {
-        enabled: true
+        enabled: false
       },
       editBankAccount: {
         enabled: false
