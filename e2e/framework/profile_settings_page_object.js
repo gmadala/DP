@@ -1,7 +1,3 @@
-/**
- * Created by gayathrimadala on 1/16/15.
- */
-
 'use strict';
 
 var ProfileSettingsObject = function () {

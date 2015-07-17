@@ -1,7 +1,3 @@
-/**
- * Created by gayathrimadala on 1/22/15.
- */
-
 'use strict';
 
 var ReportsObject = function () {

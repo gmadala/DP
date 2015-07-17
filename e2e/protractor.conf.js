@@ -29,16 +29,16 @@ exports.config = {
   // a specific suite can be run with grunt protractor:run --suite=suite_name
   // at least dealer and auction suites are needed
   suites: {
-    //'all': 'tests/{,*/}*_spec.js',
-    'dealer': 'tests/{,*/}*[!{auction}]*spec.js',
-    'auction': 'tests/{,*/}*auction*spec.js',
-    'dashboard': 'tests/{,*/}*dashboard_spec.js',
-    'floor': 'tests/{,*/}*floor_spec.js',
-    'floorplan': 'tests/{,*/}*floorplan_spec.js',
-    'login': 'tests/{,*/}*login_spec.js',
-    'payments': 'tests/{,*/}*payments_spec.js',
-    'receipts': 'tests/{,*/}*receipts_spec.js'
+    // suite for the auction
+    'auction': 'tests/auction/*spec.js',
+    // suites for the dealer
+    'dealer': 'tests/dealer/*spec.js',
+    'dashboard': 'tests/dealer/*dashboard_spec.js',
+    'floorplan': 'tests/dealer/*floorplan_spec.js',
+    'payments': 'tests/dealer/*payments_spec.js',
+    'receipts': 'tests/dealer/*receipts_spec.js'
   },
+
   //multiCapabilities: [{
   //  'browserName': 'firefox'
   //}, {
@@ -73,7 +73,7 @@ exports.config = {
 
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
-  allScriptsTimeout: 600000,
+  allScriptsTimeout: 60000,
   onPrepare: function () {
     require('jasmine-reporters');
     jasmine.getEnv().addReporter(
@@ -93,6 +93,6 @@ exports.config = {
     isVerbose: true,
     showColors: true,
     includeStackTrace: true,
-    defaultTimeoutInterval: 60000
+    defaultTimeoutInterval: 30000
   }
 };

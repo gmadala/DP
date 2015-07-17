@@ -1,15 +1,17 @@
 'use strict';
 
-var AuctionHelperObject = require('../framework/auction_helper_object');
-var AuctionResourcesObject = require('../framework/auction_resources_object');
+var DatePickerObject = require('../../framework/datepicker_page_object');
+var AuctionHelperObject = require('../../framework/auction_helper_object');
+var AuctionReportsObject = require('../../framework/auction_reports_object');
 
+var datePickerObject = new DatePickerObject();
 var auctionHelper = new AuctionHelperObject();
-var auctionResources = new AuctionResourcesObject();
+var auctionReports = new AuctionReportsObject();
 
 auctionHelper.describe('WMT-78', function () {
   describe('Auction Portal – View A Report Content', function () {
     beforeEach(function () {
-      auctionHelper.openPageAndWait(auctionResources.url, true, false);
+      auctionHelper.openPageAndWait(auctionReports.url, true, false);
     });
 
     var repeater = 'doc in documents';
@@ -41,7 +43,7 @@ auctionHelper.describe('WMT-78', function () {
       var urlPromise = unformattedDataFromRepeater(repeater, urlColumn);
       var titlePromise = unformattedDataFromRepeater(repeater, titleColumn);
 
-      var anchors = auctionResources.documents.all(by.css('a'));
+      var anchors = auctionReports.currentReport.all(by.css('a'));
       anchors.each(function (anchor) {
         anchor.getAttribute('href').then(function (href) {
           urlPromise.then(function (urlArray) {
@@ -58,6 +60,21 @@ auctionHelper.describe('WMT-78', function () {
           });
         });
       });
+    });
+
+    it('Historical Reports contains a Date selector and View Report button.', function () {
+      var date = '07/23/2005';
+      expect(auctionReports.disbursementDate.isDisplayed()).toBeTruthy();
+      auctionReports.clickDisbursementDate();
+      expect(datePickerObject.datepicker.isDisplayed()).toBeTruthy();
+      datePickerObject.setDate(23, 'Jul', 2005);
+      expect(auctionReports.getDisbursementDate()).toEqual(date);
+      auctionReports.subsidiaries.count().then(function (count) {
+        if (count > 1) {
+          expect(auctionReports.subsidiariesSelection.isDisplayed()).toBeTruthy();
+        }
+      });
+      expect(auctionReports.viewReportButton.isDisplayed()).toBeTruthy();
     });
   });
 });

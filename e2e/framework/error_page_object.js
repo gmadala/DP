@@ -1,6 +1,3 @@
-/**
- * Created by gayathrimadala on 12/19/14.
- */
 'use strict';
 
 var ErrorObject = function () {
