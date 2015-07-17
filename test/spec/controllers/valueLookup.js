@@ -183,8 +183,8 @@ describe('Controller: ValueLookupCtrl', function () {
         {
           'Excellent': 26376,
           'Good': 25815,
-          'Fair': 24926,
-          'VeryGood': 22929
+          'VeryGood': 24926,
+          'Fair': 22929
         }
       ];
 

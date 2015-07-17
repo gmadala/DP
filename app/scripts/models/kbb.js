@@ -94,13 +94,13 @@ angular.module('nextgearWebCommon')
           property = 'Excellent';
           break;
         case 17:
-          property = 'VeryGood';
+          property = 'Fair';
           break;
         case 15:
           property = 'Good';
           break;
         case 16:
-          property = 'Fair';
+          property = 'VeryGood';
           break;
         default:
           property = null;
