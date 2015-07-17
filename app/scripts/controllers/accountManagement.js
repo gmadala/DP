@@ -114,9 +114,8 @@ angular.module('nextgearWebApp')
               var d = this.dirtyData;
 
               AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
-                d.autoPayEnabled).then(
-                prv.saveSuccess.bind(this)
-              );
+                d.autoPayEnabled).then(prv.saveSuccess.bind(this))
+                .then(User.setAutoPayEnabled.bind(this, d.autoPayEnabled));
             }
           },
           isDirty: function() {
