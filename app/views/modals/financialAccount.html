@@ -32,7 +32,7 @@
     <div class="row">
       <div class="col-xs-12">
         <label for="bankName" translate>Bank Name</label>
-        <input type="text" id="bankName" name="bankName" class="input-full" ng-model="account.BankName"
+        <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
                ng-required="true" ng-class="{ 'nxg-invalid': validity.bankName.$error.required || validity.bankName.$error.pattern }">
         <label for="bankName" class="text-error" ng-show="validity.bankName.$error.required" translate>
           Please enter a bank name.

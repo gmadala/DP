@@ -30,7 +30,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       loginPage.goToLogin();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/home');
+      expect(browser.getLocationAbsUrl()).toContain('/home');
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', 'Dashboard')).isPresent()).toBeTruthy();
     });
@@ -49,7 +49,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
 
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', text)).isPresent()).toBeTruthy();
@@ -189,7 +189,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check still on home page
-      expect(browser.getLocationAbsUrl()).toContain('#/home');
+      expect(browser.getLocationAbsUrl()).toContain('/home');
 
     }
 
@@ -348,7 +348,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
 
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', text)).isPresent()).toBeTruthy();
