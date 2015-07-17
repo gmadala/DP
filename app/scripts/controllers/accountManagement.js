@@ -259,14 +259,14 @@ angular.module('nextgearWebApp')
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
 
-                var title = gettextCatalog.getString('Bank Account Added'),
-                  msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
-                  buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-                $dialog.messageBox(title, msg, buttons).open();
-
                 AccountManagement.getFinancialAccountData()
                   .then(function(updatedData) {
                     $scope.financial.updateFinancialAccounts(updatedData);
+
+                    var title = gettextCatalog.getString('Bank Account Added'),
+                      msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
+                      buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
+                    $dialog.messageBox(title, msg, buttons).open();
                   });
               }
             });

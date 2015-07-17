@@ -21,6 +21,8 @@
 
     $scope.accountNumberRegex = /^\d{1,16}$/;
     $scope.routingNumberRegex = /^\d{9}$/;
+    // Discover limits account and bank name to 50 chars. Account name appends 7 chars to bank name when adding account.
+    $scope.maxBankLength = 43;
 
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
