@@ -129,7 +129,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       fillCart();
       expect(cart.isEnabled()).toBeTruthy();
       cart.click();
-      expect(browser.getLocationAbsUrl()).toContain('#/checkout');
+      expect(browser.getLocationAbsUrl()).toContain('/checkout');
     });
 
   });
@@ -147,7 +147,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
     }
 
     var dropdown;
