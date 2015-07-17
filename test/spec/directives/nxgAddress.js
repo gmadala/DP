@@ -95,4 +95,55 @@ describe('Directive: nxgAddress', function () {
   it('should get a list of states from endpoint', function() {
     expect(dScope.states).toEqual(mockStates.states);
   });
+
+  it('should not match a line1 address with more than 5 numbers', function() {
+    expect(dScope.line1Regex.test('123456 College Ave.')).toBe(false);
+  });
+
+  it('should not match a line1 address with no number', function() {
+    expect(dScope.line1Regex.test('College Ave.')).toBe(false);
+  });
+
+  it('should not match a line1 address without a type of road', function() {
+    expect(dScope.line1Regex.test('12345 College')).toBe(false);
+  });
+
+  it('should not match a line1 address without a road name', function () {
+    expect(dScope.line1Regex.test('12345 Ave.')).toBe(false);
+  });
+
+  it('should match a line1 address with a # roadName roadType format', function() {
+    expect(dScope.line1Regex.test('12345 College Ave')).toBe(true);
+  });
+
+  it('should match a line1 address with a # compassDirection roadName roadType format', function() {
+    expect(dScope.line1Regex.test('12345 N College Ave')).toBe(true);
+  });
+
+  it('should not match the first half of a zip that is greater or less than 5 numbers', function () {
+    expect(dScope.zipRegex.test('1234')).toBe(false);
+    expect(dScope.zipRegex.test('123456')).toBe(false);
+  });
+
+  it('should not match the second half of a zip that is greater or less than 4 numbers', function() {
+    expect(dScope.zipRegex.test('12345-123')).toBe(false);
+    expect(dScope.zipRegex.test('12345-12345')).toBe(false);
+  });
+
+  it('should match a zip with short and long format', function() {
+    expect(dScope.zipRegex.test('12345')).toBe(true);
+    expect(dScope.zipRegex.test('12345-1234')).toBe(true);
+  });
+
+  it('should not match a city with non-alphabetic characters', function() {
+    expect(dScope.cityRegex.test('@!#!@$!')).toBe(false);
+    expect(dScope.cityRegex.test('12345123')).toBe(false);
+  });
+
+  it('should match a city with only alphabetic characters and \' - .', function() {
+    expect(dScope.cityRegex.test('Indianapolis')).toBe(true);
+    expect(dScope.cityRegex.test('St. Martin')).toBe(true);
+    expect(dScope.cityRegex.test('Winston-Salem')).toBe(true);
+    expect(dScope.cityRegex.test('King\'s Palace')).toBe(true);
+  });
 });
