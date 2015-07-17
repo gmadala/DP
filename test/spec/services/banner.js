@@ -62,6 +62,7 @@ describe('Service: banner', function () {
     });
 
     it('should give an empty message if error is returned', function () {
+      httpBackend.whenGET('views/maintenance.html').respond('<div></div>');
       httpBackend.expectGET('/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg?lang=1').respond(500);
       banner.fetch(function(text){
         expect(text).toEqual('');
