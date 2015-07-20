@@ -84,7 +84,7 @@
       }
 
       function routingNumberLabel() {
-        return scope.isUnitedStates ? gettext('Routing Number') : gettext('TBD');
+        return scope.isUnitedStates ? gettext('Routing Number') : gettext('Transit/Institution Number');
       }
 
       function editFinancialAccount() {
