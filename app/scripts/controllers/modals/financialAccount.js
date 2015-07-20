@@ -10,6 +10,7 @@
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
+    $scope.modal = options.modal;
 
     var accountNumber = $scope.account.AccountNumber;
     $scope.accountNumberDisplay = accountNumber ? '******' + lastFour(accountNumber) : '';
@@ -42,26 +43,30 @@
     }
 
     function confirmAccountNumberValid () {
-      return $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+      return $scope.modal === 'edit' || $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
     }
 
-    function confirmRequest (action) {
+    function confirmRequest () {
       $scope.validity = angular.copy($scope.financialAccountForm);
       $scope.activeValid = activeValid();
-      $scope.confirmAccountNumberValid = action === 'edit' || confirmAccountNumberValid();
+      $scope.confirmAccountNumberValid = confirmAccountNumberValid();
 
       if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
-        if(action === 'edit') {
+        if($scope.modal === 'edit') {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);
           });
         }
-        if(action === 'add') {
+        else if($scope.modal === 'add') {
           $scope.account.AccountName = $scope.accountNameDisplay;
           AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
             $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);
           });
+        }
+        // Fail gracefully
+        else {
+          dialog.close();
         }
       }
     }
@@ -72,12 +77,18 @@
 
     $scope.$watch(
       function() {
-        return $scope.account.BankName + $scope.account.AccountNumber;
+        return $scope.account.BankName + $scope.account.AccountNumber + $scope.inputs.confirmAccountNumber;
       },
       function() {
         var bankName = $scope.account.BankName;
         var accNumber = $scope.account.AccountNumber;
-        $scope.accountNameDisplay = (bankName && accNumber) ? bankName + lastFour(accNumber, ' - ') : '';
+
+        if(bankName && accNumber && confirmAccountNumberValid()) {
+          $scope.accountNameDisplay = bankName + lastFour(accNumber, ' - ');
+        }
+        else {
+          $scope.accountNameDisplay = '';
+        }
       }
     );
   }

@@ -48,7 +48,8 @@ describe('Controller: FinancialAccountCtrl', function () {
         options: {
           account: bankAccount,
           defaultForBilling: true,
-          defaultForDisbursement: true
+          defaultForDisbursement: true,
+          modal: 'edit'
         }
       });
     }));
@@ -93,7 +94,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         spyOn(dialog, 'close').andCallThrough();
         spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-        scope.confirmRequest('edit');
+        scope.confirmRequest();
         expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
         expect(dialog.close).not.toHaveBeenCalled();
       });
@@ -102,7 +103,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         spyOn(dialog, 'close').andCallThrough();
         spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
 
-        scope.confirmRequest('edit');
+        scope.confirmRequest();
         // resolve remaining promise to send the updated bank account
         scope.$digest();
 
@@ -121,6 +122,14 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.$digest();
 
         expect(scope.account.AccountName).toBe(original);
+      });
+
+      it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
+        scope.account.BankName = 'Chase Bank';
+        scope.account.AccountNumber = '1234';
+        scope.$digest();
+
+        expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
       });
     });
   });
@@ -158,6 +167,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         AccountManagement: AccountManagementMock,
         dialog: dialog,
         options: {
+          modal: 'add',
           account : {
             IsActive: false,
             IsDefaultDisbursement: false,
@@ -182,26 +192,37 @@ describe('Controller: FinancialAccountCtrl', function () {
     it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
       scope.account.BankName = 'Chase Bank';
       scope.account.AccountNumber = '1234';
+      scope.inputs.confirmAccountNumber = '1234';
       scope.$digest();
 
       expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
     });
 
-    it('should not set accountName if both bankName and accountNumber are not set', function () {
+    it('should not set accountName if bankName, accountNumber, and confirmAccountNumber are not set correctly', function () {
       scope.account.BankName = '';
       scope.account.AccountNumber = '';
+      scope.inputs.confirmAccountNumber = '';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');
 
       scope.account.BankName = 'Chase Bank';
       scope.account.AccountNumber = '';
+      scope.inputs.confirmAccountNumber = '';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');
 
       scope.account.BankName = '';
       scope.account.AccountNumber = '1234';
+      scope.inputs.confirmAccountNumber = '';
+
+      scope.$digest();
+      expect(scope.accountNameDisplay).toBe('');
+
+      scope.account.BankName = '';
+      scope.account.AccountNumber = '1234';
+      scope.inputs.confirmAccountNumber = '12';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');
@@ -252,7 +273,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         spyOn(dialog, 'close').andCallThrough();
         spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
 
         expect(dialog.close).not.toHaveBeenCalled();
         expect(AccountManagementMock.addBankAccount).not.toHaveBeenCalled();
@@ -262,7 +283,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         spyOn(dialog, 'close').andCallThrough();
         spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         // resolve remaining promise to send the updated bank account
         scope.$digest();
 
@@ -278,19 +299,19 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.IsDefaultDisbursement = true;
         scope.account.IsDefaultPayment = true;
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         scope.account.IsDefaultDisbursement = false;
         scope.account.IsDefaultPayment = true;
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         scope.account.IsDefaultDisbursement = true;
         scope.account.IsDefaultPayment = false;
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         expect(dialog.close).not.toHaveBeenCalled();
@@ -305,7 +326,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.IsDefaultDisbursement = true;
         scope.account.IsDefaultPayment = true;
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         expect(dialog.close).toHaveBeenCalled();
@@ -320,7 +341,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.IsDefaultDisbursement = false;
         scope.account.IsDefaultPayment = false;
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         expect(dialog.close).toHaveBeenCalled();
@@ -334,7 +355,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.AccountNumber = '123123123';
         scope.inputs.confirmAccountNumber = '987987987';
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         expect(dialog.close).not.toHaveBeenCalled();
@@ -348,7 +369,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.AccountNumber = '123123123';
         scope.inputs.confirmAccountNumber = '123123123';
 
-        scope.confirmRequest('add');
+        scope.confirmRequest();
         scope.$digest();
 
         expect(dialog.close).toHaveBeenCalled();

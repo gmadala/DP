@@ -85,6 +85,7 @@
           resolve: {
             options: function () {
               var options = {
+                modal: 'edit',
                 defaultForBilling: scope.defaultForBilling,
                 defaultForDisbursement: scope.defaultForDisbursement
               };
