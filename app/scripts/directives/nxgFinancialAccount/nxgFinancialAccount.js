@@ -20,7 +20,8 @@
         defaultBillingBankAccountId: '=billingAccount',
         updateBillingAccount: '&',
         updateDisbursementAccount: '&',
-        isStakeholderActive: '='
+        isStakeholderActive: '=',
+        isUnitedStates: '='
       },
       restrict: 'E'
     };
@@ -37,6 +38,8 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
+      scope.routingNumber = routingNumber();
+      scope.routingNumberLabel = routingNumberLabel();
 
       /**
        * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
@@ -73,6 +76,15 @@
 
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
+      }
+
+      function routingNumber() {
+        var routingNo = scope.account.AchAbaNumber.toString();
+        return scope.isUnitedStates ? routingNo : routingNo.substr(1, 5) + '-' + routingNo.substr(6);
+      }
+
+      function routingNumberLabel() {
+        return scope.isUnitedStates ? gettext('Routing Number') : gettext('TBD');
       }
 
       function editFinancialAccount() {
