@@ -42,9 +42,10 @@ describe('Directive: nxgFinancialAccount', function () {
     scope.disbursementAccount = disbursementAccount;
     scope.billingAccount = billingAccount;
     scope.isStakeholderActive=true;
+    scope.isUnitedStates = true;
 
     element = angular.element(
-      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"></nxg-financial-account>');
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
 
     createIsolateScope();
 
@@ -163,5 +164,17 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(iScope.defaultForDisbursement).toBeFalsy();
     expect(iScope.defaultForBilling).toBeFalsy();
+  });
+
+  it('routing number should display correctly for US and Canada users.', function() {
+
+    expect(iScope.routingNumber).toBe('123456789');
+
+    scope.isUnitedStates = false;
+    element = angular.element(
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
+    createIsolateScope();
+
+    expect(iScope.routingNumber).toBe('23456-789');
   });
 });
