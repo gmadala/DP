@@ -77,18 +77,13 @@
 
     $scope.$watch(
       function() {
-        return $scope.account.BankName + $scope.account.AccountNumber + $scope.inputs.confirmAccountNumber;
+        return $scope.account.BankName;
       },
       function() {
         var bankName = $scope.account.BankName;
         var accNumber = $scope.account.AccountNumber;
 
-        if(bankName && accNumber && confirmAccountNumberValid()) {
-          $scope.accountNameDisplay = bankName + lastFour(accNumber, ' - ');
-        }
-        else {
-          $scope.accountNameDisplay = '';
-        }
+        $scope.accountNameDisplay = bankName && accNumber ? bankName + lastFour(accNumber, ' - ') : '';
       }
     );
   }
