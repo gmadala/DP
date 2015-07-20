@@ -168,13 +168,13 @@ describe('Directive: nxgFinancialAccount', function () {
 
   it('routing number should display correctly for US and Canada users.', function() {
 
-    expect(iScope.routingNumber).toBe('123456789');
+    expect(iScope.routingNumberDisplay).toBe('123456789');
 
     scope.isUnitedStates = false;
     element = angular.element(
       '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
     createIsolateScope();
 
-    expect(iScope.routingNumber).toBe('23456-789');
+    expect(iScope.routingNumberDisplay).toBe('23456-789');
   });
 });

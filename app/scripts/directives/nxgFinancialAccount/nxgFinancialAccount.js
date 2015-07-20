@@ -38,8 +38,8 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
-      scope.routingNumber = routingNumber();
-      scope.routingNumberLabel = routingNumberLabel();
+      scope.routingNumberDisplay = getRoutingNumberDisplay();
+      scope.routingNumberLabel = getRoutingNumberLabel();
 
       /**
        * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
@@ -78,12 +78,12 @@
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
       }
 
-      function routingNumber() {
+      function getRoutingNumberDisplay() {
         var routingNo = scope.account.AchAbaNumber.toString();
         return scope.isUnitedStates ? routingNo : routingNo.substr(1, 5) + '-' + routingNo.substr(6);
       }
 
-      function routingNumberLabel() {
+      function getRoutingNumberLabel() {
         return scope.isUnitedStates ? gettext('Routing Number') : gettext('Transit/Institution Number');
       }
 
