@@ -17,14 +17,6 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <label for="accountName" translate>Account Name</label>
-        <input type="text" id="accountName" name="accountName" class="input-full" ng-model="accountNameDisplay"
-               placeholder="Your Account Name..." disabled>
-        </input>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
         <label for="bankName" translate>Bank Name</label>
         <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
                ng-required="true" ng-class="{ 'nxg-invalid': validity.bankName.$error.required || validity.bankName.$error.pattern }">
@@ -38,9 +30,17 @@
     <div class="small-top-margin smallest-bottom-margin" ng-if="!!account.AccountId">
       <div class="row">
         <div class="col-xs-5 no-right-padding">
+          <span class="heavy" translate>Account Name</span>
+        </div>
+        <div class="col-xs-7 no-left-padding break-wrap small-right-padding">
+          <span>{{accountNameDisplay}}</span>
+        </div>
+      </div>
+      <div class="row smaller-top-margin">
+        <div class="col-xs-5 no-right-padding">
           <span class="heavy" translate>Account Number</span>
         </div>
-        <div class="col-xs-2 no-left-padding">
+        <div class="col-xs-7 no-left-padding">
           <span>{{accountNumberDisplay}}</span>
         </div>
       </div>
@@ -48,7 +48,7 @@
         <div class="col-xs-5 no-right-padding">
           <span class="heavy" translate>Routing Number</span>
         </div>
-        <div class="col-xs-2 no-left-padding">
+        <div class="col-xs-7 no-left-padding">
           <span>{{routingNumberDisplay}}</span>
         </div>
       </div>
