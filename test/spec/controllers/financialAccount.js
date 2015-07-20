@@ -192,37 +192,26 @@ describe('Controller: FinancialAccountCtrl', function () {
     it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
       scope.account.BankName = 'Chase Bank';
       scope.account.AccountNumber = '1234';
-      scope.inputs.confirmAccountNumber = '1234';
       scope.$digest();
 
       expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
     });
 
-    it('should not set accountName if bankName, accountNumber, and confirmAccountNumber are not set correctly', function () {
+    it('should not set accountName if bankName and accountNumber are not set correctly', function () {
       scope.account.BankName = '';
       scope.account.AccountNumber = '';
-      scope.inputs.confirmAccountNumber = '';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');
 
       scope.account.BankName = 'Chase Bank';
       scope.account.AccountNumber = '';
-      scope.inputs.confirmAccountNumber = '';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');
 
       scope.account.BankName = '';
       scope.account.AccountNumber = '1234';
-      scope.inputs.confirmAccountNumber = '';
-
-      scope.$digest();
-      expect(scope.accountNameDisplay).toBe('');
-
-      scope.account.BankName = '';
-      scope.account.AccountNumber = '1234';
-      scope.inputs.confirmAccountNumber = '12';
 
       scope.$digest();
       expect(scope.accountNameDisplay).toBe('');

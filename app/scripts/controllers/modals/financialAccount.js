@@ -64,7 +64,7 @@
             dialog.close($scope.account);
           });
         }
-        // Fail gracefully
+        // Fail gracefully if somehow modal was opened
         else {
           dialog.close();
         }
@@ -77,13 +77,13 @@
 
     $scope.$watch(
       function() {
-        return $scope.account.BankName;
+        return $scope.account.BankName + $scope.account.AccountNumber;
       },
       function() {
         var bankName = $scope.account.BankName;
         var accNumber = $scope.account.AccountNumber;
 
-        $scope.accountNameDisplay = bankName && accNumber ? bankName + lastFour(accNumber, ' - ') : '';
+        $scope.accountNameDisplay = (bankName && accNumber) ? bankName + lastFour(accNumber, ' - ') : '';
       }
     );
   }
