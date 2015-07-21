@@ -35,16 +35,16 @@ angular.module('nextgearWebApp')
     );
   })
   .constant('translationsJSON', {})
-  .controller('TranslationDebuggerCtrl', function ($scope, SupportedLanguages, translationsJSON) {
-    $scope.languages = SupportedLanguages;
+  .controller('TranslationDebuggerCtrl', function ($scope, supportedLanguages, translationsJSON) {
+    $scope.languages = supportedLanguages;
     $scope.translationsJSON = translationsJSON;
     $scope.visible = true;
     $scope.hide = function () {
       $scope.visible = false;
     };
   })
-  .controller('TranslationTestCtrl', function ($scope, SupportedLanguages, translationsJSON, gettextCatalog) {
-    $scope.languages = SupportedLanguages;
+  .controller('TranslationTestCtrl', function ($scope, supportedLanguages, translationsJSON, gettextCatalog) {
+    $scope.languages = supportedLanguages;
     $scope.translationsJSON = translationsJSON;
     var missingTranslations = $scope.missingTranslations = {
       strings: {},
@@ -59,7 +59,7 @@ angular.module('nextgearWebApp')
       }
     };
 
-    angular.forEach(SupportedLanguages, function (lang) {
+    angular.forEach(supportedLanguages, function (lang) {
       if (['en', 'enDebug'].indexOf(lang.key) > -1) {
         return;
       }
