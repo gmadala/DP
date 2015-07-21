@@ -44,8 +44,8 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
-        <div ui-view id="{{ navState.current.pageID }}Page"></div>
+      <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }" nxg-fluid-container>
+        <div ui-view id="{{ navState.current.data.pageId }}Page"></div>
       </div>
       <div nxg-activity></div>
     </div>
@@ -102,7 +102,9 @@
     <script src="scripts/common.js"></script>
 
     <script src="scripts/config/nxgConfig.js"></script>
-    <script src="scripts/config/nxgDebugData.js"></script>
+    <script src="scripts/config/nxgRouteConfig.js"></script>
+    <script src="scripts/config/nxgInitialize.js"></script>
+    <script src="scripts/config/nxgDebugInfo.js"></script>
 
     <script src="scripts/services/status.js"></script>
     <script src="scripts/services/banner.js"></script>

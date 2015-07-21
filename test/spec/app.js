@@ -94,7 +94,7 @@ describe('app.js', function () {
 
     it('should go to pending state if one exists', function() {
 
-      var toStateObject = {allowAnonymous: false, name: 'myfancystring'};
+      var toStateObject = {data: {allowAnonymous: false, name: 'myfancystring'}};
 
       // Must do this part to set up "pendingState" variable.
       spyOn(user, 'isLoggedIn').andReturn(false);
@@ -157,7 +157,7 @@ describe('app.js', function () {
 
     it('should not check type of user if state allows anonymous users', function() {
       spyOn(user, 'isDealer');
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: true});
+      rootScope.$broadcast('$stateChangeStart', {data: {allowAnonymous: true}});
       expect(user.isDealer).not.toHaveBeenCalled();
     });
 
@@ -166,7 +166,7 @@ describe('app.js', function () {
       spyOn(cookieStore, 'get').andReturn('savedAuthString');
       spyOn(user, 'initSession').andCallThrough();
       spyOn(state, 'transitionTo');
-      var toState = {allowAnonymous: false};
+      var toState = {data: {allowAnonymous: false}};
       rootScope.$broadcast('$stateChangeStart', toState);
 
       expect(user.initSession).toHaveBeenCalledWith('savedAuthString');
@@ -180,7 +180,7 @@ describe('app.js', function () {
       dealer = true;
       spyOn(cookieStore, 'get').andReturn(false);
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false});
+      rootScope.$broadcast('$stateChangeStart', {data: {allowAnonymous: false}});
 
       expect(user.isDealer).toHaveBeenCalled();
       expect(user.isLoggedIn).toHaveBeenCalled();
@@ -194,7 +194,7 @@ describe('app.js', function () {
       spyOn(location, 'path');
       dealer = true;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false});
+      rootScope.$broadcast('$stateChangeStart', {data: {allowAnonymous: false}});
 
       expect(location.path).toHaveBeenCalledWith('/login/updateSecurity');
     });
@@ -205,7 +205,7 @@ describe('app.js', function () {
       spyOn(location, 'path');
       dealer = false;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false, isAuctionState: false});
+      rootScope.$broadcast('$stateChangeStart', {data: {allowAnonymous: false, isAuctionState: false}});
 
       expect(location.path).toHaveBeenCalledWith('/act/home');
     });
@@ -216,7 +216,7 @@ describe('app.js', function () {
       spyOn(location, 'path');
       dealer = true;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false, isAuctionState: true});
+      rootScope.$broadcast('$stateChangeStart', {data: {allowAnonymous: false, isAuctionState: true}});
 
       expect(location.path).toHaveBeenCalledWith('/home');
     });

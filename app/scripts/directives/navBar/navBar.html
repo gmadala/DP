@@ -1,11 +1,11 @@
-<header class="app-header" ng-class="{ login: !navState.current.showNavBar, auctions: !user.isDealer() }">
+<header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-xs-3 ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
 
-      <div class="col-xs-6" ng-show="navState.current.showNavBar">
+      <div class="col-xs-6" ng-show="navState.current.data.showNavBar">
         <div class="nav-secondary" ng-show="user.isDealer()">
           <ul>
             <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="col-xs-3 pull-right" ng-show="navState.current.showNavBar">
+      <div class="col-xs-3 pull-right" ng-show="navState.current.data.showNavBar">
         <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
           <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.BusinessName }}</p>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.showNavBar">
+      <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="nav-bkgd" ng-show="navState.current.showNavBar">
+  <div class="nav-bkgd" ng-show="navState.current.data.showNavBar">
     <div class="container">
       <div class="header">
         <ul class="nav-primary">
