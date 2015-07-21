@@ -31,10 +31,10 @@
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
 
-    function lastFour(str, prefix) {
-      prefix = prefix || '';
+    function lastFour(str, suffix) {
+      suffix = suffix || '';
       var charFromEnd = str.length < 4 ? str.length : 4;
-      return !!str ? prefix + str.substr(str.length - charFromEnd) : '';
+      return !!str ? str.substr(str.length - charFromEnd) + suffix : '';
     }
 
     // User cannot have an account that is not active and set as either a default disbursement or default payment.
@@ -83,7 +83,7 @@
         var bankName = $scope.account.BankName;
         var accNumber = $scope.account.AccountNumber;
 
-        $scope.accountNameDisplay = (bankName && accNumber) ? bankName + lastFour(accNumber, ' - ') : '';
+        $scope.accountNameDisplay = (bankName && accNumber) ? lastFour(accNumber, ' - ') + bankName : '';
       }
     );
   }

@@ -129,7 +129,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.account.AccountNumber = '1234';
         scope.$digest();
 
-        expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
+        expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
       });
     });
   });
@@ -194,7 +194,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       scope.account.AccountNumber = '1234';
       scope.$digest();
 
-      expect(scope.accountNameDisplay).toBe('Chase Bank - 1234');
+      expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
     });
 
     it('should not set accountName if bankName and accountNumber are not set correctly', function () {
