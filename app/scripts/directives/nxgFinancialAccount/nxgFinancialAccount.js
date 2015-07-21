@@ -29,7 +29,6 @@
 
     function link(scope) {
 
-      scope.descriptiveName = getDescriptiveName();
       scope.status = getStatus();
       scope.displayed = isDisplayed();
       scope.defaultForBilling = isDefaultForBilling();
@@ -37,24 +36,6 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
-
-      /**
-       * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
-       * these same 4 digits since users may commonly already use those numbers in the account name and it is not
-       * useful to make the name unnecessarily long.
-       * @param account
-       */
-      function getDescriptiveName() {
-
-        var account = scope.account;
-
-        var partialAccountNumber = account.AchAccountNumberLast4.toString();
-        if (account.BankAccountName.indexOf(partialAccountNumber) > -1) {
-          return account.BankAccountName;
-        } else {
-          return account.BankAccountName + ' - ' + account.AchAccountNumberLast4;
-        }
-      }
 
       function getStatus() {
         return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
@@ -110,13 +91,6 @@
             }
             scope.account.AchBankName = updatedAccount.BankName;
             scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
-
-            var description = updatedAccount.AccountName;
-            var partialAccountNumber = scope.account.AchAccountNumberLast4.toString();
-            if (updatedAccount.AccountName.indexOf(partialAccountNumber) === -1) {
-              description = updatedAccount.AccountName + ' - ' + scope.account.AchAccountNumberLast4;
-            }
-            scope.descriptiveName = description;
           }
         });
       }
