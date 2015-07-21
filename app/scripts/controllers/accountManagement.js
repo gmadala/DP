@@ -264,7 +264,7 @@ angular.module('nextgearWebApp')
                   .then(function(updatedData) {
                     $scope.financial.updateFinancialAccounts(updatedData);
 
-                    var title = gettextCatalog.getString('Bank Account Added'),
+                    var title = updatedAccount.AccountName + gettextCatalog.getString(' has been updated.'),
                       msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
                       buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
                     $dialog.messageBox(title, msg, buttons).open();
