@@ -238,6 +238,7 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
+                    modal: 'add',
                     account: {
                       IsActive: true,
                       IsDefaultDisbursement: false,
@@ -263,7 +264,7 @@ angular.module('nextgearWebApp')
                     $scope.financial.updateFinancialAccounts(updatedData);
 
                     var title = gettextCatalog.getString('Bank Account Added'),
-                      msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
+                      msg = gettextCatalog.getString('Your bank account, ') + updatedAccount.AccountName + gettextCatalog.getString(' has successfully been added.'),
                       buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
                     $dialog.messageBox(title, msg, buttons).open();
                   });

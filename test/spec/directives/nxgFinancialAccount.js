@@ -124,20 +124,6 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.status).toEqual('Inactive');
   });
 
-  it('descriptive account name should append the last 4 digits of the account number (if not already in the name)',
-    function () {
-
-      iScope.account.AchAccountNumberLast4 = 1234;
-
-      iScope.account.BankAccountName = "My Account";
-      createIsolateScope();
-      expect(iScope.descriptiveName).toEqual('My Account - 1234');
-
-      iScope.account.BankAccountName = "My7771234777Account";
-      createIsolateScope();
-      expect(iScope.descriptiveName).toEqual('My7771234777Account');
-    });
-
   it('should designate default disbursement account', function () {
 
     scope.account.BankAccountId = disbursementAccount;
