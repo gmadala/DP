@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('nextgearWebApp').config(routeConfig);
+  angular.module('nextgearWebApp')
+    .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
   otherwiseRouteConfig.$inject = ['$injector'];

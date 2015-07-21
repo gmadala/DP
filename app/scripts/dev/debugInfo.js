@@ -2,7 +2,7 @@
 
   'use strict';
 
-  // app/scripts/config/nxgDebugInfo.js disabled debug info so enable it here for dev.
+  // app/scripts/debugInfo.js disabled debug info so enable it here for dev.
   // https://code.angularjs.org/1.3.16/docs/guide/production
   angular.module('nextgearWebApp')
     .config(enableDebugMessage);

@@ -66,7 +66,7 @@ module.exports = function (karma) {
     // list of files to exclude
     exclude: [
       'app/scripts/dev/**/*.js',
-      'app/scripts/config/nxgDebugInfo.js'
+      'app/scripts/debugInfo.js'
     ],
 
     // test results reporter to use
