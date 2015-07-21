@@ -17,8 +17,7 @@ var util = new UtilObject();
 // probably should manage login at the high level as well
 describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
-  // TODO will have to manage logout first
-  xdescribe('Login page', function () {
+  describe('Login page', function () {
     beforeEach(function () {
       browser.ignoreSynchronization = true;
     });
@@ -30,6 +29,11 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       loginPage.goToLogin();
 
       // check for correct url
+      browser.wait(function () {
+        return browser.getCurrentUrl().then(function (url) {
+          return url.indexOf('home') > -1;
+        });
+      });
       expect(browser.getLocationAbsUrl()).toContain('/home');
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', 'Dashboard')).isPresent()).toBeTruthy();
@@ -81,20 +85,6 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
         runNavLinkTest(nav[0], nav[1]);
       });
     });
-
-    it('Title Release navigation option displays if business is eligible for title release program (Mock API)',
-      function () {
-        expect(true).toBeTruthy();
-        // TODO implement in a separate suite for a live server and reference that here
-      });
-
-    it('Title Release navigation option is hidden if business is not eligible for title release program (Mock API)',
-      function () {
-        expect(true).toBeTruthy();
-        // TODO implement in a separate suite for a live server and reference that here
-      });
-
-
   });
 
 
@@ -213,6 +203,17 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
 
       // dismiss
       util.goToLogoutYesButton();
+
+      browser.get(loginPage.loginUrl);
+      loginPage.doLogin(credPage.loginUsername, credPage.loginPassword);
+      loginPage.goToLogin();
+
+      browser.get(homePage.homeUrl);
+
+      // check for correct url
+      expect(browser.getLocationAbsUrl()).toContain('/home');
+      // check that the correct view is active
+      expect(element(by.cssContainingText('.active', 'Dashboard')).isPresent()).toBeTruthy();
     });
   });
 
