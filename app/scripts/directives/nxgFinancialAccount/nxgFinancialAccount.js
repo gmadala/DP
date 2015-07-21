@@ -49,7 +49,7 @@
       }
 
       function isEditable() {
-        return scope.editBankAccountEnabled && scope.isStakeholderActive;
+        return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates;
       }
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;

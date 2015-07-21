@@ -99,6 +99,23 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.isEditable()).toBeFalsy();
   });
 
+  it('should not show edit if Canadian user.', function() {
+
+    createIsolateScope();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = false;
+
+    expect(iScope.isEditable()).toBeFalsy();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = true;
+
+    expect(iScope.isEditable()).toBeTruthy();
+  });
+
   it('status should be "Active" if IsActive is true', function () {
 
     iScope.account.IsActive = true;
