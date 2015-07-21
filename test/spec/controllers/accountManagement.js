@@ -246,13 +246,6 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.business.edit();
       });
 
-      it('should define dirtyData and set editable to false', function() {
-        scope.business.save();
-
-        expect(scope.business.dirtyData).toBeDefined();
-        expect(scope.business.editable).toBe(false);
-      });
-
       it('should not change if not in editing mode', function() {
         validateResult = false;
 
