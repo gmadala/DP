@@ -15,7 +15,11 @@
   disableOtherwise.$inject = ['$urlRouterProvider'];
 
   function disableOtherwise($urlRouterProvider) {
-    $urlRouterProvider.otherwise(function(){return false;});
+    $urlRouterProvider.otherwise(
+      function () {
+        return false;
+      }
+    );
   }
 
 })();

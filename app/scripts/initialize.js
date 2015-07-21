@@ -25,51 +25,41 @@
     features.loadFromQueryString();
 
     var prv = {
-      reloadPending: false,
       resetToLogin: resetToLogin,
-      continuePostLoginTransition: continuePostLoginTransition,
-      isStateInappropriateForRole: isStateInappropriateForRole
+      continuePostLogin: continuePostLogin,
+      isStateNotForRole: isStateNotForRole
     };
 
     function resetToLogin() {
-      prv.reloadPending = true;
-      // set location as login page before refreshing to stop pendingState from being set
-      window.location.hash = '/login';
-      // clobber everything and start over at login page
-      // LastState cookie modifications are asynchronous
-      window.location.reload(true);
+      $state.go('login');
     }
 
-    function continuePostLoginTransition() {
+    function continuePostLogin() {
       if (pendingState) {
-        $state.transitionTo(pendingState.name); // resume transition to the original state destination
+        // resume transition to the original state destination
+        $state.go(pendingState.name);
         pendingState = null;
       }
       else {
         // Make sure we got a valid last state to switch to. Fixes VO-804
         if (LastState.getUserState() && LastState.getUserState() !== '') {
-          $state.transitionTo(LastState.getUserState()); // go back to the last state visited
+          // go back to the last state visited
+          $state.transitionTo(LastState.getUserState());
           LastState.clearUserState();
         }
         else {
-          $location.path(User.isDealer() ? '/home' : '/act/home');
+          $state.go(User.isDealer() ? 'dashboard' : 'auction_dashboard');
         }
       }
     }
 
-    function isStateInappropriateForRole(state, isDealer) {
+    function isStateNotForRole(state, isDealer) {
       return (state.data.isAuctionState && isDealer) || (!state.data.isAuctionState && !isDealer);
     }
 
     // listen for route changes
     $rootScope.$on('$stateChangeStart',
-      function (event, toState, toStateParams/*, fromState, fromStateParams*/) {
-        if (prv.reloadPending) {
-          // prevent state change since we're reloading anyway
-          event.preventDefault();
-          return;
-        }
-
+      function (event, toState, toStateParams) {
         // If there are dialogs open and we aren't going to login state to popup the login "are you sure?" modal
         if ($dialog.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
           /**
@@ -90,31 +80,31 @@
             event.preventDefault();
             User.initSession(savedAuth).then(
               function () {
-                $state.transitionTo(toState, toStateParams);
+                $state.go(toState, toStateParams);
               }
             );
-          }
-          else if (!User.isLoggedIn()) {
+          } else if (!User.isLoggedIn()) {
             // not logged in; redirect to login screen
             event.preventDefault();
-            pendingState = toState; // save the original state destination to switch back when logged in
-            $location.path('/login');
+            // save the original state destination to switch back when logged in
+            pendingState = toState;
+            $state.go('login');
           } else if (User.isPasswordChangeRequired()) {
             // temporary password? user needs to change it before it can proceed
             if (toState.name !== 'loginCreatePassword') {
-              $location.path('/login/createPassword');
+              $state.go('loginCreatePassword');
             }
           } else if (User.isUserInitRequired()) {
             // not initialized? lets update the security questions
             if (toState.name !== 'loginUpdateSecurity') {
-              $location.path('/login/updateSecurity');
+              $state.go('loginUpdateSecurity');
             }
-          } else if (prv.isStateInappropriateForRole(toState, isDealer) || toState.data.noDirectAccess) {
+          } else if (prv.isStateNotForRole(toState, isDealer) || toState.data.noDirectAccess) {
             // user is trying to access a state that's not appropriate to their role; redirect to their home
             event.preventDefault();
             // If auction user, go to /act/home. On page load, isDealer is null, but assume
             // that still means it's a dealer until API call corrects this.
-            $location.path(isDealer || isDealer === null ? '/home' : '/act/home');
+            $state.go(isDealer || isDealer === null ? 'dashboard' : 'auction_dashboard');
           }
         }
       }
@@ -123,15 +113,15 @@
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
       if (fromState.name) {
         segmentio.page(null, null, {
-          path: $location.path(),
-          url: $location.absUrl(),
-          title: $location.path()
+          path: $state.current.url,
+          url: $state.href($state.current, null, { absolute: true }),
+          title: $state.current.name
         });
       }
     });
 
     $rootScope.$on('event:switchState', function (event, state) {
-      $location.path(state.url);
+      $state.go(state);
     });
 
     $rootScope.$on('event:userRequestedLogout',
@@ -177,13 +167,13 @@
       function () {
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
-          $location.path('/login/createPassword');
+          $state.go('loginCreatePassword');
         }
         else if (User.isUserInitRequired()) {
-          $location.path('/login/updateSecurity');
+          $state.go('loginUpdateSecurity');
         }
         else {
-          prv.continuePostLoginTransition();
+          prv.continuePostLogin();
         }
       }
     );
@@ -191,10 +181,10 @@
     $rootScope.$on('event:temporaryPasswordChanged',
       function () {
         if (User.isUserInitRequired()) {
-          $location.path('/login/updateSecurity');
+          $state.go('loginUpdateSecurity');
         }
         else {
-          prv.continuePostLoginTransition();
+          prv.continuePostLogin();
         }
       }
     );

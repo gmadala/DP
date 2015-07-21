@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('nextgearWebApp', ['ui.state', 'ui.bootstrap', '$strap.directives',
+  angular.module('nextgearWebApp', ['ui.router', 'ui.bootstrap', '$strap.directives',
     'ui.calendar', 'ui.highlight', 'ui.event', 'segmentio', 'ngCookies', 'ngSanitize',
     'LocalStorageModule', 'gettext', 'nextgearWebCommon']);
 
