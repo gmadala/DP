@@ -2,11 +2,16 @@
 
 
 <div class="nxg-sticky-scroll">
-  <div class="well-item">
-    <p translate>Make payments today or schedule your payments when you checkout.</p>
-    <p ng-show="paymentQueue.isEmpty()">
-      <br/>
-      <span translate>You have not selected a payment.</span> {{ emptyMessage }}</p>
+  <div class="well-item ">
+    <p translate >Make payments today or schedule your payments when you checkout.<br/><br/></p>
+    <div ng-show="autoPayEnabled">
+      <div class="info-block-image col-xs-2 no-left-padding">
+        <span nxg-icon="icon-info"></span>
+      </div>
+      <p class="info-block-text col-xs-10 no-left-padding" translate>
+        You are enrolled in ProperNounTBD. All payments will be processed automatically on their due date.
+      </p>
+    </div>
   </div>
 
   <ul ng-hide="paymentQueue.isEmpty()" class="queue-list zeroLeftPadding">
