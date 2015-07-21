@@ -57,7 +57,7 @@ describe('Directive: nxgDateField', function () {
       scope.$digest();
       var input = element.find('input');
       input.val('foofers');
-      input.trigger('blur')
+      input.trigger('blur');
       expect(scope.form.$error.date).toBeTruthy();
     });
 

@@ -1,11 +1,11 @@
-/**
- * Created by gayathrimadala on 1/22/15.
- */
-
 'use strict';
-var HelperObject = require('../framework/helper_object.js');
-var ReportsObject = require('../framework/reports_page_object.js');
-var DatePickerObject = require('../framework/datepicker_page_object');
+
+// In .jshintrc we're saying moment is global var, but they are not global in the e2e context.
+/* jshint -W079 */
+var moment = require('moment');
+var HelperObject = require('../../framework/helper_object.js');
+var ReportsObject = require('../../framework/reports_page_object.js');
+var DatePickerObject = require('../../framework/datepicker_page_object');
 
 var helper = new HelperObject();
 var reportsPage = new ReportsObject();
@@ -19,64 +19,29 @@ helper.describe('WMT-89', function () {
 
     it('should check for the click on the Current Reports', function () {
       expect(reportsPage.currentReports.isDisplayed()).toBeTruthy();
-
-      /* //Needs to be completed
-       browser.driver.getAllWindowHandles().then(function (handles) {
-       expect(handles.length).toEqual(1);
-       });
-       var link = reportsPage.reportsDiv.first().element(by.css('a'));
-       //console.log('AAA',link);
-       browser.driver.actions().click(link).perform();
-       link.click();
-       browser.sleep(3000);
-
-       // reportsPage.currentReportsLink.click();
-       browser.driver.getAllWindowHandles().then(function (handles) {
-       console.log('handles.length', handles.length);
-       expect(handles.length).toEqual(2);
-       var firstHandle = handles[0];
-       var secondHandle = handles[1];
-       browser.driver.switchTo().window(secondHandle).then(function () {
-       browser.driver.executeScript('return window.location.href').then(function (url) {
-       expect(url).not.toContain(reportsPage.url);
-       browser.driver.close().then(function () {
-       browser.driver.switchTo().window(firstHandle);
-       });
-       });
-       });
-       });*/
     });
 
     it('should check for the Current Reports - Upcoming Curtailment/Payoff Quote (PDF) - With Date', function () {
-      var date = '10/12/2010';
+
+      var current = moment();
+      var reportMoment = moment().set({'year': current.get('year'), 'month': current.get('month') + 1, 'date': 15});
+      var reportDate = reportMoment.format('MM/DD/YYYY');
+
       currentReportsFields();
       expect(reportsPage.upcomingCurtailment.isDisplayed()).toBeTruthy();
       expect(reportsPage.datelabel.isDisplayed()).toBeTruthy();
       expect(reportsPage.dateInput.isDisplayed()).toBeTruthy();
       reportsPage.dateInput.click();
       expect(datePickerObject.datepicker.isDisplayed()).toBeTruthy();
-      datePickerObject.setDate(12, 'Oct', 2010);
-      expect(reportsPage.getCurrentDate()).toEqual(date);
+
+      datePickerObject.setDate(reportMoment.format('DD'), reportMoment.format('MMM'), reportMoment.format('YYYY'));
+      expect(reportsPage.getCurrentDate()).toEqual(reportDate);
 
       browser.driver.getAllWindowHandles().then(function (handles) {
         expect(handles.length).toEqual(1);
       });
       expect(browser.driver.getCurrentUrl()).toContain(reportsPage.url);
       reportsPage.curtViewReportBtn.click();
-      browser.driver.getAllWindowHandles().then(function (handles) {
-        expect(handles.length).toEqual(2);
-        var firstHandle = handles[0];
-        var secondHandle = handles[1];
-        browser.driver.switchTo().window(secondHandle).then(function () {
-          browser.driver.executeScript('return window.location.href').then(function (url) {
-            expect(url).not.toContain(reportsPage.url);
-            browser.driver.close().then(function () {
-              browser.driver.switchTo().window(firstHandle);
-            });
-          });
-        });
-      });
-
     });
 
     it('should check for the Current Reports - Upcoming Curtailment- View Report without Date', function () {
@@ -114,7 +79,6 @@ helper.describe('WMT-89', function () {
       reportsPage.hisRepViewReport.click();
       expect(reportsPage.startDateError.isDisplayed()).toBeTruthy();
       expect(reportsPage.endDateError.isDisplayed()).toBeTruthy();
-      browser.sleep(5000);
     });
 
     it('should check for the Historical Reports - Dealer Statement. - with start date and end date', function () {
@@ -137,19 +101,6 @@ helper.describe('WMT-89', function () {
       });
       expect(browser.driver.getCurrentUrl()).toContain(reportsPage.url);
       reportsPage.hisRepViewReport.click();
-      browser.driver.getAllWindowHandles().then(function (handles) {
-        expect(handles.length).toEqual(2);
-        var firstHandle = handles[0];
-        var secondHandle = handles[1];
-        browser.driver.switchTo().window(secondHandle).then(function () {
-          browser.driver.executeScript('return window.location.href').then(function (url) {
-            expect(url).not.toContain(reportsPage.url);
-            browser.driver.close().then(function () {
-              browser.driver.switchTo().window(firstHandle);
-            });
-          });
-        });
-      });
       expect(reportsPage.startDateError.isDisplayed()).not.toBeTruthy();
       expect(reportsPage.endDateError.isDisplayed()).not.toBeTruthy();
     });
@@ -177,19 +128,6 @@ helper.describe('WMT-89', function () {
       });
       expect(browser.driver.getCurrentUrl()).toContain(reportsPage.url);
       reportsPage.disRepViewReport.click();
-      browser.driver.getAllWindowHandles().then(function (handles) {
-        expect(handles.length).toEqual(2);
-        var firstHandle = handles[0];
-        var secondHandle = handles[1];
-        browser.driver.switchTo().window(secondHandle).then(function () {
-          browser.driver.executeScript('return window.location.href').then(function (url) {
-            expect(url).not.toContain(reportsPage.url);
-            browser.driver.close().then(function () {
-              browser.driver.switchTo().window(firstHandle);
-            });
-          });
-        });
-      });
       expect(reportsPage.disDateError.isDisplayed()).not.toBeTruthy();
     });
 

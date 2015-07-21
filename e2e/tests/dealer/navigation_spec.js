@@ -1,10 +1,10 @@
 'use strict';
 
-var LoginPageObject = require('../framework/login_page_object.js');
-var CredentialsObject = require('../framework/credentials_page_object.js');
-var HomePageObject = require('../framework/home_page_object.js');
-var UtilObject = require('../framework/util_object.js');
-var PaymentsPage = require('../framework/payments_page_object.js');
+var LoginPageObject = require('../../framework/login_page_object.js');
+var CredentialsObject = require('../../framework/credentials_page_object.js');
+var HomePageObject = require('../../framework/home_page_object.js');
+var UtilObject = require('../../framework/util_object.js');
+var PaymentsPage = require('../../framework/payments_page_object.js');
 
 var loginPage = new LoginPageObject();
 var credPage = new CredentialsObject();
@@ -30,7 +30,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       loginPage.goToLogin();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/home');
+      expect(browser.getLocationAbsUrl()).toContain('/home');
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', 'Dashboard')).isPresent()).toBeTruthy();
     });
@@ -49,7 +49,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
 
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', text)).isPresent()).toBeTruthy();
@@ -129,7 +129,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       fillCart();
       expect(cart.isEnabled()).toBeTruthy();
       cart.click();
-      expect(browser.getLocationAbsUrl()).toContain('#/checkout');
+      expect(browser.getLocationAbsUrl()).toContain('/checkout');
     });
 
   });
@@ -147,7 +147,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
     }
 
     var dropdown;
@@ -189,7 +189,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check still on home page
-      expect(browser.getLocationAbsUrl()).toContain('#/home');
+      expect(browser.getLocationAbsUrl()).toContain('/home');
 
     }
 
@@ -280,7 +280,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
     // external links - [link text, new page title]
     var links = [
       ['Chat', 'Patron Facing Chat'],
-      ['Privacy Statement', 'Privacy statement | NextGear Capital'], // this test fails because the href is wrong
+      ['Privacy Statement', 'Privacy Statement | NextGear Capital'], // this test fails because the href is wrong
       ['Contact Us', 'Contact Us | NextGear Capital'] // this test fails because the href is wrong
     ];
 
@@ -299,7 +299,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       // browser.get(homePage.homeUrl);
     });
 
-    it('Feedback & Support opens Feedback & Support modal', function () {
+    xit('Feedback & Support opens Feedback & Support modal', function () {
       browser.get(homePage.homeUrl);
       // Verifying that we can click open and click close
 
@@ -307,10 +307,24 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       element.all(by.id('uvTabLabel')).each(function (feedbackButton) {
         feedbackButton.isDisplayed().then(function (displayed) {
           if (displayed) {
-            feedbackButton.click();
+            browser.driver.actions().click(feedbackButton).perform();
+
+            var dialogElement = browser.element(by.id('uvw-dialog-uv-1'));
+            browser.driver.wait(function () {
+              return dialogElement.isDisplayed().then(function (displayed) {
+                return displayed;
+              });
+            });
             // close it by clicking using div id="uvw-dialog-close-uv-1"
-            expect(browser.element(by.id('uvw-dialog-uv-2')).isDisplayed()).toBeTruthy();
-            element(by.id('uvw-dialog-close-uv-1')).click();
+            expect(dialogElement.isDisplayed()).toBeTruthy();
+            var closeDialogElement = browser.element(by.cssContainingText('button', 'Close Dialog'));
+            browser.driver.actions().click(closeDialogElement).perform();
+            browser.driver.wait(function () {
+              return dialogElement.isDisplayed().then(function (displayed) {
+                return !displayed;
+              });
+            });
+            expect(dialogElement.isDisplayed()).toBeFalsy();
           }
         });
       });
@@ -334,7 +348,7 @@ describe('WMT-51 - Dealer Portal High-level navigation options', function () {
       link.click();
 
       // check for correct url
-      expect(browser.getLocationAbsUrl()).toContain('#/' + href);
+      expect(browser.getLocationAbsUrl()).toContain('/' + href);
 
       // check that the correct view is active
       expect(element(by.cssContainingText('.active', text)).isPresent()).toBeTruthy();

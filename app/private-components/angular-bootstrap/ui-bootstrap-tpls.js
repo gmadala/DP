@@ -2170,6 +2170,14 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position' ] )
             scope.tt_popupDelay = ! isNaN(delay) ? delay : options.popupDelay;
           });
 
+          // --- Begin temporary tooltip workaround until we upgrade ui.bootstrap
+          // You have to explicitly bind the trigger to get tooltips working
+          // in the Angular 1.3 upgrade
+          element.bind( triggers.show, showTooltipBind );
+          element.bind( triggers.hide, hideTooltipBind );
+          hasRegisteredTriggers = true;
+          // --- End temporary tooltip workaround
+
           attrs.$observe( prefix+'Trigger', function ( val ) {
 
             if (hasRegisteredTriggers) {

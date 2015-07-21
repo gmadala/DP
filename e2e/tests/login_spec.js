@@ -20,40 +20,51 @@ describe('Login e2e test', function () {
     browser.ignoreSynchronization = true;
     browser.get(loginPage.loginUrl);
   });
+
   //when Username and Password are Blank
   it('should not log you in if username and password are blank', function () {
-    util.goToLogoutYesButton();
     browser.get(loginPage.loginUrl);
     loginPage.doLogin('', '');
     loginPage.goToLogin();
-    expect($(('[ng-show="validity.credUsername.$error.required"]') && ('[ng-show="validity.credPassword.$error.required"]')).
-      isDisplayed()).toBeTruthy();
+    expect(browser.driver.getCurrentUrl()).toContain('/login');
+    expect(browser.element(by.cssContainingText('p', 'Please enter a username.')).isDisplayed()).toBeTruthy();
+    expect(browser.element(by.cssContainingText('p', 'Please enter a password.')).isDisplayed()).toBeTruthy();
   });
+
   //when Username is Blank
   it('should not log you in if username is blank', function () {
     loginPage.doLogin('', credPage.loginPassword);
     loginPage.goToLogin();
-    expect($('[ng-show="validity.credUsername.$error.required"]').isDisplayed()).toBeTruthy();
+    expect(browser.driver.getCurrentUrl()).toContain('/login');
+    expect(browser.element(by.cssContainingText('p', 'Please enter a username.')).isDisplayed()).toBeTruthy();
   });
+
   //when Password is Blank
   it('should not log you in if password is blank', function () {
     loginPage.doLogin(credPage.loginUsername, '');
     loginPage.goToLogin();
-    expect($('[ng-show="validity.credPassword.$error.required"]').isDisplayed()).toBeTruthy();
+    expect(browser.driver.getCurrentUrl()).toContain('/login');
+    expect(browser.element(by.cssContainingText('p', 'Please enter a password.')).isDisplayed()).toBeTruthy();
   });
 
   it('should check for remember username', function () {
-
     loginPage.doLogin(credPage.loginUsername, credPage.loginPassword);
     loginPage.doRememberUsername();
     loginPage.goToLogin();
     browser.get(homePage.homeUrl);
     homePage.goToMenuDropdown();
-    browser.sleep(1000);
     homePage.goToSignOut();
     util.goToLogoutYesButton();
-    browser.sleep(1000);
     expect(loginPage.username.getAttribute('value')).toBe(credPage.loginUsername);
+    loginPage.doRememberUsername();
+    loginPage.username.clear();
+    loginPage.doLogin(credPage.loginUsername, credPage.loginPassword);
+    loginPage.goToLogin();
+    browser.get(homePage.homeUrl);
+    homePage.goToMenuDropdown();
+    homePage.goToSignOut();
+    util.goToLogoutYesButton();
+    expect(loginPage.username.getAttribute('value')).not.toBe(credPage.loginUsername);
   });
 
   xit('should show error messages when credentials is incorrect.', function () {
@@ -70,32 +81,38 @@ describe('Login e2e test', function () {
 
 //Forgot Username and Password
 describe('Username, password recovery e2e test', function () {
+  var usernameError = browser.element(by.cssContainingText('p', 'Please enter your username.'));
+  var emailAddressError = browser.element(by.cssContainingText('p', 'Please enter your email address.'));
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;
     browser.get(recoverPage.recoverUrl);
   });
+
   //Forgot your Username
   it('should not allow without username on recovery page', function () {
     recoverPage.doEmailAddress('');
-    expect($('[ng-show="forgotUserNameValidity.email.$error.required"]').isDisplayed()).toBeTruthy();
+    expect(emailAddressError.isDisplayed()).toBeTruthy();
   });
+
   //Forgot your Username with No Thanks
   it('should allow without username with No Thanks on recovery page', function () {
     recoverPage.doEmailAddress(credPage.recoveryEmailAddress);
-    expect($('[ng-show="forgotUserNameValidity.email.$error.required"]').isDisplayed()).toBeFalsy();
+    expect(emailAddressError.isDisplayed()).toBeFalsy();
     util.goToOKButton();
     util.goToLogoutNoThanksButton();
   });
+
   //Forgot your Password with Security Question
   it('should provide password with security question on recovery page with Logout NoThanks', function () {
     recoveryPasswordWithUsername();
     util.goToLogoutNoThanksButton();
   });
+
   //Forgot your Username with OK
-  it('"should allow with username with OK on recovery page', function () {
+  it('should allow with username with OK on recovery page', function () {
     recoverPage.doEmailAddress(credPage.recoveryEmailAddress);
-    expect($('[ng-show="forgotUserNameValidity.email.$error.required"]').isDisplayed()).toBeFalsy();
+    expect(emailAddressError.isDisplayed()).toBeFalsy();
     util.goToOKButton();
     util.goToLogoutYesButton();
   });
@@ -106,18 +123,20 @@ describe('Username, password recovery e2e test', function () {
     recoveryPasswordWithUsername();
     util.goToLogoutYesButton();
   });
+
   var recoveryPasswordWithUsername = function () {
     recoverPage.doUsername('');
-    expect($('[ng-show="forgotPasswordValidity.userName.$error.required"]').isDisplayed()).toBeTruthy();
+    expect(usernameError.isDisplayed()).toBeTruthy();
     recoverPage.goToRecoveryPassword();
     recoverPage.doUsername(credPage.recoveryUsername);
     recoverPage.goToRecoveryPassword();
     recoverPage.doSecurityQuestions('', '');
-    expect($('[ng-show="question.$invalid"]').isDisplayed()).toBeTruthy();
+    var securityQuestions = browser.element.all(by.cssContainingText('p', 'Please answer this question.'));
+    expect(securityQuestions.isDisplayed()).toEqual([true, true]);
     recoverPage.doSecurityQuestions('', credPage.recoveryQuestionOne);
-    expect($('[ng-show="question.$invalid"]').isDisplayed()).toBeTruthy();
+    expect(securityQuestions.isDisplayed()).toEqual([true, false]);
     recoverPage.doSecurityQuestions(credPage.recoveryQuestionZero, '');
-    expect($('[ng-show="question.$invalid"]').isDisplayed()).toBeFalsy();
+    expect(securityQuestions.isDisplayed()).toEqual([false, false]);
     util.goToOKButton();
   };
 });

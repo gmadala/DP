@@ -303,17 +303,11 @@ HomePageObject.prototype = Object.create({}, {
 
   goToVehicleDetails: {
     value: function () {
-      //browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(0).element(by.id('stockNumber1')).click(); //browser.element(by.id('stockNumber'+i)).click();
       browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).then(function (data) {
         for (var i = 1; i <= data.length; i++) {
-          browser.element.all(by.repeater('payment in dashboardData.UpcomingPaymentsList')).get(i - 1).element(by.id('stockNumber' + i)).click(); //browser.element(by.id('stockNumber'+i)).click();
-          browser.waitForAngular();
+          browser.element(by.id('stockNumber' + i)).click();
           browser.get('#/home');
-          browser.sleep(1000);
-          browser.waitForAngular();
           browser.element(by.id('showorhide')).click();
-          browser.waitForAngular();
-          browser.sleep(1000);
         }
       });
     }
@@ -327,7 +321,7 @@ HomePageObject.prototype = Object.create({}, {
       browser.get(this.homeUrl);
       this.btnWeek.click();
       browser.get(this.homeUrl);
-      browser.sleep(2000);
+      browser.sleep(1000);
       browser.element(by.id('fees')).click();
       browser.get(this.homeUrl);
       browser.element(by.cssContainingText('button', 'View All Payments')).click();
@@ -338,7 +332,6 @@ HomePageObject.prototype = Object.create({}, {
 
   goToCreditInformation: {
     value: function () {
-      //expect(browser.element(by.id("lineOfCredit"))).count().toBe(2);
       browser.findElements(protractor.By.css('#lineOfCredit > option')).then(function (loc) {
         expect(loc.length).toBe(3);
       });

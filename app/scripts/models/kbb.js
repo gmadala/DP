@@ -91,16 +91,16 @@ angular.module('nextgearWebCommon')
 
         switch (value.PriceType) {
         case 14:
-          property = '14';
+          property = 'Excellent';
           break;
         case 17:
-          property = '17';
+          property = 'Fair';
           break;
         case 15:
-          property = '15';
+          property = 'Good';
           break;
         case 16:
-          property = '16';
+          property = 'VeryGood';
           break;
         default:
           property = null;

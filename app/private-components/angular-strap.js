@@ -298,7 +298,7 @@
             if (modelValue && type === 'iso' && ISODateRegexp.test(modelValue)) {
               return $.fn.datepicker.DPGlobal.parseDate(new Date(modelValue), $.fn.datepicker.DPGlobal.parseFormat(format), language);
             } else if (modelValue && type === 'date' && angular.isString(modelValue)) {
-              return $.fn.datepicker.DPGlobal.parseDate(modelValue, $.fn.datepicker.DPGlobal.parseFormat(format), language);
+              return $.fn.datepicker.DPGlobal.parseDate(new Date(modelValue), $.fn.datepicker.DPGlobal.parseFormat(format), language);
             } else {
               return modelValue;
             }

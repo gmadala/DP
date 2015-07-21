@@ -1,6 +1,3 @@
-/**
- * Created by gayathrimadala on 12/29/14.
- */
 'use strict';
 
 var VehiclePageObject = function () {
@@ -16,7 +13,7 @@ VehiclePageObject.prototype = Object.create({}, {
 
   requestExtension: {
     get: function () {
-      return browser.element(by.css('.paired-body a'));
+      return browser.element.all(by.cssContainingText('a', 'Request an extension')).first();
     }
   },
 
@@ -34,7 +31,7 @@ VehiclePageObject.prototype = Object.create({}, {
 
   optionsAndBreak: {
     get: function () {
-      return browser.element(by.css('.featured.block'));
+      return browser.element(by.cssContainingText('a', 'Payment Options'));
     }
   },
 
@@ -94,13 +91,13 @@ VehiclePageObject.prototype = Object.create({}, {
 
   paymentOptions: {
     get: function () {
-      return browser.element(by.css('.cr-inline label'));
+      return browser.element.all(by.css('.cr-inline label')).first();
     }
   },
 
   vehicleHistory: {
     get: function () {
-      return browser.element(by.css('a.featured'));
+      return browser.element(by.cssContainingText('a', 'Vehicle History'));
     }
   },
 
@@ -112,7 +109,7 @@ VehiclePageObject.prototype = Object.create({}, {
 
   paymentActivityTransactionDetails: {
     get: function () {
-      return browser.element(by.css('a.primary'));
+      return browser.element(by.css('table')).all(by.css('a.primary')).first();
     }
   },
 
@@ -195,7 +192,6 @@ VehiclePageObject.prototype = Object.create({}, {
   goToShowHidePayActivity: {
     value: function () {
       this.showHidePayActivity.click();
-      browser.waitForAngular();
     }
   },
 
