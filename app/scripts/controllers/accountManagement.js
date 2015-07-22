@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone, features, gettextCatalog) {
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -223,10 +223,19 @@ angular.module('nextgearWebApp')
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
-          updateFinancialAccounts: function(updatedData) {
-            $scope.financial.data.bankAccounts = updatedData.BankAccounts;
-            $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
-            $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
+          updateFinancialAccounts: function(updatedAccount) {
+            var lastFour = updatedAccount.AccountNumber,
+              processedBankAccount = {
+                BankAccountId: updatedAccount.AccountId,
+                BankAccountName: updatedAccount.AccountName,
+                AchAccountNumberLast4: lastFour.length > 4 ? parseInt(lastFour.substr(lastFour.length - 4)) : parseInt(lastFour),
+                IsActive: updatedAccount.IsActive,
+                AchAbaNumber: parseInt(updatedAccount.RoutingNumber),
+                AchBankName: updatedAccount.BankName,
+                AllowPaymentByAch: true
+              };
+
+            $scope.financial.data.bankAccounts.unshift(processedBankAccount);
           },
           addFinancialAccount: function() {
             var dialogOptions = {
@@ -259,6 +268,9 @@ angular.module('nextgearWebApp')
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
 
+                $scope.financial.updateFinancialAccounts(updatedAccount);
+
+                /*
                 AccountManagement.getFinancialAccountData()
                   .then(function(updatedData) {
                     $scope.financial.updateFinancialAccounts(updatedData);
@@ -268,6 +280,7 @@ angular.module('nextgearWebApp')
                       buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
                     $dialog.messageBox(title, msg, buttons).open();
                   });
+                  */
               }
             });
           }
