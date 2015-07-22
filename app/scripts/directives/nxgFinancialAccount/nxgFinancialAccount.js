@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, features) {
+  function financialAccount(gettext, $dialog, AccountManagement, features, routingNumberFilter) {
 
     var directive;
     directive = {
@@ -34,11 +34,11 @@
       scope.displayed = isDisplayed();
       scope.defaultForBilling = isDefaultForBilling();
       scope.defaultForDisbursement = isDefaultForDisbursement();
+      scope.routingNumberLabel = routingNumberFilter('', scope.isUnitedStates, true);
+      scope.routingNumberDisplay = routingNumberFilter(scope.account.AchAbaNumber, scope.isUnitedStates, false);
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
-      scope.routingNumberDisplay = getRoutingNumberDisplay();
-      scope.routingNumberLabel = getRoutingNumberLabel();
 
       function getStatus() {
         return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
@@ -49,7 +49,7 @@
       }
 
       function isEditable() {
-        return scope.editBankAccountEnabled && scope.isStakeholderActive;
+        return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates;
       }
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;
@@ -57,15 +57,6 @@
 
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
-      }
-
-      function getRoutingNumberDisplay() {
-        var routingNo = scope.account.AchAbaNumber.toString();
-        return scope.isUnitedStates ? routingNo : routingNo.substr(1, 5) + '-' + routingNo.substr(6);
-      }
-
-      function getRoutingNumberLabel() {
-        return scope.isUnitedStates ? gettext('Routing Number') : gettext('Transit/Institution Number');
       }
 
       function editFinancialAccount() {

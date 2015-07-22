@@ -221,7 +221,7 @@ angular.module('nextgearWebApp')
           },
           isAddBankAccountEditable: function() {
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
-              $scope.business.data.isStakeholderActive;
+              $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
           updateFinancialAccounts: function(updatedData) {
             $scope.financial.data.bankAccounts = updatedData.BankAccounts;

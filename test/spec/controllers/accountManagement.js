@@ -224,6 +224,22 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
     });
 
+    // TODO modify all the expectations once the add bank account feature is enabled.
+    // TODO modify second expectation to true once add Bank Account is released to Canada.
+    it('add bank account should be enabled for US only.', function() {
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = true;
+      scope.isUnitedStates = false;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+      scope.business.data.isStakeholderActive = true;
+      scope.business.data.isStakeholder = true;
+      scope.isUnitedStates = true;
+
+      expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+    });
+
     describe('save()', function(){
       var savingBusiness, validateResult;
       beforeEach(function() {

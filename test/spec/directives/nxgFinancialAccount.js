@@ -99,6 +99,23 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.isEditable()).toBeFalsy();
   });
 
+  it('should not show edit if Canadian user.', function() {
+
+    createIsolateScope();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = false;
+
+    expect(iScope.isEditable()).toBeFalsy();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = true;
+
+    expect(iScope.isEditable()).toBeTruthy();
+  });
+
   it('status should be "Active" if IsActive is true', function () {
 
     iScope.account.IsActive = true;
@@ -152,9 +169,10 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.defaultForBilling).toBeFalsy();
   });
 
-  it('routing number should display correctly for US and Canada users.', function() {
+  it('routing number and its label should display correctly for US and Canada users.', function() {
 
     expect(iScope.routingNumberDisplay).toBe('123456789');
+    expect(iScope.routingNumberLabel).toBe('Routing Number');
 
     scope.isUnitedStates = false;
     element = angular.element(
@@ -162,5 +180,6 @@ describe('Directive: nxgFinancialAccount', function () {
     createIsolateScope();
 
     expect(iScope.routingNumberDisplay).toBe('23456-789');
+    expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
   });
 });
