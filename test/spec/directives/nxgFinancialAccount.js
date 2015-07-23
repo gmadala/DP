@@ -57,9 +57,9 @@ describe('Directive: nxgFinancialAccount', function () {
     account = {
       "BankAccountId": "123456789",
       "BankAccountName": "Super Bank Account",
-      "AchAccountNumberLast4": 1098,
+      "AchAccountNumberLast4": "1098",
       "IsActive": true,
-      "AchAbaNumber": 123456789,
+      "AchAbaNumber": "123456789",
       "AchBankName": "Previous Wheel FCU",
       "AllowPaymentByAch": true
     };
@@ -207,7 +207,7 @@ describe('Directive: nxgFinancialAccount', function () {
       '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
     createIsolateScope();
 
-    expect(iScope.routingNumberDisplay).toBe('23456-789');
+    expect(iScope.routingNumberDisplay).toBe('56789-234');
     expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
   });
 

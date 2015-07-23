@@ -224,13 +224,13 @@ angular.module('nextgearWebApp')
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
           updateFinancialAccounts: function(updatedAccount) {
-            var lastFour = updatedAccount.AccountNumber,
+            var accNumber = updatedAccount.AccountNumber,
               processedBankAccount = {
                 BankAccountId: updatedAccount.AccountId,
                 BankAccountName: updatedAccount.AccountName,
-                AchAccountNumberLast4: lastFour.length > 4 ? parseInt(lastFour.substr(lastFour.length - 4)) : parseInt(lastFour),
+                AchAccountNumberLast4: accNumber.length > 4 ? accNumber.substr(accNumber.length - 4) : accNumber,
                 IsActive: updatedAccount.IsActive,
-                AchAbaNumber: parseInt(updatedAccount.RoutingNumber),
+                AchAbaNumber: updatedAccount.RoutingNumber,
                 AchBankName: updatedAccount.BankName,
                 AllowPaymentByAch: true
               };

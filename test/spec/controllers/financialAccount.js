@@ -365,7 +365,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
       });
 
-      iit('should close and set accountName to bankName.', function () {
+      it('should close and set accountName to bankName.', function () {
         spyOn(dialog, 'close').andCallThrough();
 
         scope.account.BankName = 'Chase Bank';

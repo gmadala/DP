@@ -53,9 +53,9 @@ describe('Controller: AccountManagementCtrl', function () {
       {
         BankAccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',
         BankAccountName: '789 - Chase Bank',
-        AchAccountNumberLast4: 789,
+        AchAccountNumberLast4: '789',
         IsActive: true,
-        AchAbaNumber: 123456789,
+        AchAbaNumber: '123456789',
         AchBankName: 'Chase Bank',
         AllowPaymentByAch: true
       }
