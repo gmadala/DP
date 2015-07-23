@@ -267,20 +267,8 @@ angular.module('nextgearWebApp')
                 if(updatedAccount.IsDefaultDisbursement) {
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
-
+                // Update local data
                 $scope.financial.updateFinancialAccounts(updatedAccount);
-
-                /*
-                AccountManagement.getFinancialAccountData()
-                  .then(function(updatedData) {
-                    $scope.financial.updateFinancialAccounts(updatedData);
-
-                    var title = gettextCatalog.getString('Bank Account Added'),
-                      msg = gettextCatalog.getString('Your bank account, ') + updatedAccount.AccountName + gettextCatalog.getString(' has successfully been added.'),
-                      buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-                    $dialog.messageBox(title, msg, buttons).open();
-                  });
-                  */
               }
             });
           }
