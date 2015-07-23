@@ -189,7 +189,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.account.State).toBeUndefined();
     });
 
-    it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
+    it('should set accountNameDisplay to \'accountNumberLast4\' - \'bankName\'',function () {
       scope.account.BankName = 'Chase Bank';
       scope.account.AccountNumber = '1234';
       scope.$digest();
@@ -197,7 +197,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
     });
 
-    it('should not set accountName if bankName and accountNumber are not set correctly', function () {
+    it('should not set accountNameDisplay if bankName and accountNumber are not set correctly', function () {
       scope.account.BankName = '';
       scope.account.AccountNumber = '';
 
@@ -363,6 +363,20 @@ describe('Controller: FinancialAccountCtrl', function () {
 
         expect(dialog.close).toHaveBeenCalled();
         expect(AccountManagementMock.addBankAccount).toHaveBeenCalled();
+      });
+
+      iit('should close and set accountName to bankName.', function () {
+        spyOn(dialog, 'close').andCallThrough();
+
+        scope.account.BankName = 'Chase Bank';
+        scope.account.AccountNumber = '123123123';
+        scope.inputs.confirmAccountNumber = '123123123';
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(dialog.close).toHaveBeenCalled();
+        expect(scope.account.AccountName).toBe('Chase Bank');
       });
     });
   });
