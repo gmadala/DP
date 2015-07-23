@@ -261,6 +261,9 @@ angular.module('nextgearWebApp')
 
             $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
               if(updatedAccount) {
+                // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
+                User.refreshInfo();
+
                 if(updatedAccount.IsDefaultPayment) {
                   $scope.updateBillingAccount(updatedAccount.AccountId);
                 }

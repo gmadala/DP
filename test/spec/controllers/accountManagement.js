@@ -12,7 +12,8 @@ describe('Controller: AccountManagementCtrl', function () {
     updatedBankData,
     AddressesMock,
     AccountManagementMock,
-    dialogMock;
+    dialogMock,
+    UserMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q) {
@@ -111,13 +112,25 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     };
 
+    UserMock = {
+      isDealer: function() {
+        return null;
+      },
+      isUnitedStates: function() {
+        return null;
+      },
+      refreshInfo: angular.noop,
+      setAutoPayEnabled: angular.noop
+    };
+
     scope = $rootScope.$new();
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
       $dialog: dialogMock,
       AccountManagement: AccountManagementMock,
       Addresses: AddressesMock,
-      dealerCustomerSupportPhone: mockCustomerSupportPhone
+      dealerCustomerSupportPhone: mockCustomerSupportPhone,
+      User: UserMock
     });
   }));
 
@@ -295,6 +308,15 @@ describe('Controller: AccountManagementCtrl', function () {
 
         expect(scope.financial.data.disbursementAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
         expect(scope.financial.data.billingAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
+      });
+
+      it('addFinancialAccount should call User.refreshInfo.', function() {
+        spyOn(UserMock, 'refreshInfo').andCallFake(angular.noop);
+
+        scope.financial.addFinancialAccount();
+        scope.$apply();
+
+        expect(UserMock.refreshInfo).toHaveBeenCalled();
       });
     });
 
