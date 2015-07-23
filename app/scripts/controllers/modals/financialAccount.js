@@ -58,7 +58,7 @@
           });
         }
         else if($scope.modal === 'add') {
-          $scope.account.AccountName = $scope.accountNameDisplay;
+          $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
             $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);

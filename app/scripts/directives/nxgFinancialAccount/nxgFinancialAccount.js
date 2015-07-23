@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, features, routingNumberFilter) {
+  function financialAccount(gettext, $dialog, AccountManagement, User, features, routingNumberFilter) {
 
     var directive;
     directive = {
@@ -86,6 +86,9 @@
 
         $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
           if (updatedAccount) {
+            // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
+            User.refreshInfo();
+
             if (updatedAccount.IsDefaultPayment) {
               scope.updateBillingAccount({billingAccountId: updatedAccount.AccountId});
             }

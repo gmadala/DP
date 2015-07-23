@@ -11,8 +11,12 @@ describe('Directive: nxgFinancialAccount', function () {
     scope,
     $compile,
     $rootScope,
+    $dialog,
+    $q,
+    User,
     iScope,
-    account;
+    account,
+    editedBankAccount;
 
   function createIsolateScope() {
     element = $compile(element)(scope);
@@ -21,20 +25,44 @@ describe('Directive: nxgFinancialAccount', function () {
     iScope = element.isolateScope();
   }
 
-  beforeEach(inject(function (_$compile_, _$rootScope_) {
+  beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_ ,_User_) {
+    $compile = _$compile_;
+    $rootScope = _$rootScope_;
+    $dialog = _$dialog_;
+    $q = _$q_;
+    User = _User_;
+
+    spyOn($dialog, 'dialog').andCallFake(function() {
+      return {
+        open: function() {
+          return $q.when(editedBankAccount)
+        }
+      }
+    });
+    spyOn(User, 'refreshInfo').andCallFake(angular.noop);
+
+    editedBankAccount = {
+      AccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',
+      AccountName: '789 - Chase Bank',
+      AccountNumber: '789',
+      BankName: 'Chase Bank',
+      City: 'Indianapolis',
+      IsActive: true,
+      IsDefaultDisbursement: true,
+      IsDefaultPayment: true,
+      RoutingNumber: '123456789',
+      State: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3'
+    };
 
     account = {
       "BankAccountId": "123456789",
       "BankAccountName": "Super Bank Account",
-      "AchAccountNumberLast4": 1098,
+      "AchAccountNumberLast4": "1098",
       "IsActive": true,
-      "AchAbaNumber": 123456789,
+      "AchAbaNumber": "123456789",
       "AchBankName": "Previous Wheel FCU",
       "AllowPaymentByAch": true
     };
-
-    $compile = _$compile_;
-    $rootScope = _$rootScope_;
 
     scope = $rootScope.$new();
 
@@ -179,7 +207,14 @@ describe('Directive: nxgFinancialAccount', function () {
       '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
     createIsolateScope();
 
-    expect(iScope.routingNumberDisplay).toBe('23456-789');
+    expect(iScope.routingNumberDisplay).toBe('56789-234');
     expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
+  });
+
+  it('editFinancialAccount should call User.refreshInfo.', function() {
+    iScope.editFinancialAccount();
+    iScope.$apply();
+
+    expect(User.refreshInfo).toHaveBeenCalled();
   });
 });
