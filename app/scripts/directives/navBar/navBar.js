@@ -39,15 +39,12 @@ angular.module('nextgearWebApp')
         ]
       };
 
-    // Only show Title Release link if API says we should for this user
-    // WARNING
-    // This will break if, at any time in the future, we don't refresh when logging a user out.
-    // If you log out without a refresh and log back in, it'll put a duplicate item into the nav.
     $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if (isLoggedIn) {
         User.getInfo().then(function (info) {
-          $scope.isUnited = User.isUnitedStates();
-          if ($scope.isUnited) {
+          $scope.isUnitedStates = User.isUnitedStates();
+          $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
+          if ($scope.isUnitedStates) {
             dealerLinks.secondary.splice(1, 0, {
               name: gettextCatalog.getString('Value Lookup'),
               href: '#/valueLookup',
@@ -55,7 +52,7 @@ angular.module('nextgearWebApp')
               metric: ''
             });
           }
-          if (info.DisplayTitleReleaseProgram) {
+          if ($scope.displayTitleRelease) {
             dealerLinks.primary.splice(3, 0, {
               name: gettextCatalog.getString('Title Releases'),
               href: '#/titlereleases',
@@ -78,6 +75,13 @@ angular.module('nextgearWebApp')
             }
           };
         });
+      } else {
+        if ($scope.displayTitleRelease) {
+          dealerLinks.primary.splice(3, 1);
+        }
+        if ($scope.isUnitedStates) {
+          dealerLinks.secondary.splice(1, 1);
+        }
       }
     });
 
