@@ -109,8 +109,8 @@ describe('Directive: navBar', function () {
       });
 
       it('should hide the Value Lookup tab for the canadian users', function(){
-        var isUnited = false;
-        spyOn(dMock,'isUnitedStates').andCallFake(function(){ return isUnited; });
+        var isUnitedStates = false;
+        spyOn(dMock,'isUnitedStates').andCallFake(function(){ return isUnitedStates; });
 
         $controller('NavBarCtrl', {
           $scope: scope,
