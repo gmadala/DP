@@ -613,6 +613,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test:e2e', [
     'dev-setup',
     'shell:webdriverUpdate',
+    'livereload-start',
     'connect:livereload',
     'protractor:run'
   ]);
