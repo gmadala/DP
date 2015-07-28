@@ -627,7 +627,7 @@ module.exports = function(grunt) {
     useDist = undefined;
 
     grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
-    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
+    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'livereload-start', 'connect:' + (useDist ? 'dist' : 'livereload'));
     // find out which users configuration can be run based on the target of this grunt task.
     for (var j = 0; j < users.length; j++) {
       var user = users[j];
