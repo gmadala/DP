@@ -68,13 +68,13 @@ describe('app.js', function () {
 
       spyOn(lastState, 'getUserState').andReturn('');
       spyOn(lastState, 'clearUserState');
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
 
       rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState).toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
-      expect(location.path).toHaveBeenCalledWith('/home');
+      expect(state.go).toHaveBeenCalledWith('dashboard');
 
     });
 
@@ -82,46 +82,59 @@ describe('app.js', function () {
 
       spyOn(lastState, 'getUserState').andReturn('');
       spyOn(lastState, 'clearUserState');
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = false;
 
       rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState).toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
-      expect(location.path).toHaveBeenCalledWith('/act/home');
+      expect(state.go).toHaveBeenCalledWith('auction_dashboard');
 
     });
 
     it('should go to pending state if one exists', function() {
 
-      var toStateObject = {allowAnonymous: false, name: 'myfancystring'};
+      var toStateObject = {
+        data: {
+          allowAnonymous: false,
+          name: 'myfancystring'
+        }
+      };
+
+      var otheToStateObject = {
+        ShowUserInitialization: false
+      };
 
       // Must do this part to set up "pendingState" variable.
       spyOn(user, 'isLoggedIn').andReturn(false);
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       spyOn(cookieStore, 'get').andReturn(false);
       rootScope.$broadcast('$stateChangeStart', toStateObject);
-      expect(location.path).toHaveBeenCalledWith('/login');
+      expect(state.go).toHaveBeenCalledWith('login');
 
-      spyOn(state, 'transitionTo');
-      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
-      expect(state.transitionTo).toHaveBeenCalledWith(toStateObject.name);
+      rootScope.$broadcast('event:userAuthenticated', otheToStateObject);
+      expect(state.go).toHaveBeenCalledWith(toStateObject.name);
 
     });
 
     it('should show updateSecurity page when User.isUserInitRequired() is true', function() {
 
+      var toStateObject = {
+        ShowUserInitialization: true,
+        TemporaryPasswordUsed: false
+      };
+
       spyOn(lastState, 'getUserState').andReturn('');
       spyOn(lastState, 'clearUserState');
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
       passwordChangeRequired = false;
       userInitRequired = true;
 
-      rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: true, TemporaryPasswordUsed: false});
+      rootScope.$broadcast('event:userAuthenticated', toStateObject);
       expect(lastState.getUserState).not.toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
-      expect(location.path).toHaveBeenCalledWith('/login/updateSecurity');
+      expect(state.go).toHaveBeenCalledWith('loginUpdateSecurity');
 
     });
 
@@ -129,7 +142,7 @@ describe('app.js', function () {
 
       spyOn(lastState, 'getUserState').andReturn('');
       spyOn(lastState, 'clearUserState');
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
       passwordChangeRequired = true;
       userInitRequired = false;
@@ -137,7 +150,7 @@ describe('app.js', function () {
       rootScope.$broadcast('event:userAuthenticated');
       expect(lastState.getUserState).not.toHaveBeenCalled();
       expect(lastState.clearUserState).not.toHaveBeenCalled();
-      expect(location.path).toHaveBeenCalledWith('/login/createPassword');
+      expect(state.go).toHaveBeenCalledWith('loginCreatePassword');
 
     });
 
@@ -146,18 +159,48 @@ describe('app.js', function () {
   describe('event:switchState', function() {
 
     it('should switch the location path', function() {
-      spyOn(location, 'path');
-      rootScope.$broadcast('event:switchState', {url: 'bar'});
-      expect(location.path).toHaveBeenCalledWith('bar');
-    })
+      var toState = {
+        url: 'bar'
+      };
+
+      spyOn(state, 'go');
+      rootScope.$broadcast('event:switchState', toState);
+      expect(state.go).toHaveBeenCalledWith(toState);
+    });
 
   });
 
   describe('$stateChangeStart', function() {
 
+    var toNonAnonState = {
+      data: {
+        allowAnonymous: false
+      }
+    };
+
+    var toAnonState = {
+      data: {
+        allowAnonymous: true
+      }
+    };
+
+    var toNonAnonDealerState = {
+      data: {
+        allowAnonymous: false,
+        isAuctionState: false
+      }
+    };
+
+    var toNonAnonAuctionState = {
+      data: {
+        allowAnonymous: false,
+        isAuctionState: true
+      }
+    };
+
     it('should not check type of user if state allows anonymous users', function() {
       spyOn(user, 'isDealer');
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: true});
+      rootScope.$broadcast('$stateChangeStart', toAnonState);
       expect(user.isDealer).not.toHaveBeenCalled();
     });
 
@@ -165,60 +208,64 @@ describe('app.js', function () {
       spyOn(user, 'isLoggedIn').andReturn(false);
       spyOn(cookieStore, 'get').andReturn('savedAuthString');
       spyOn(user, 'initSession').andCallThrough();
-      spyOn(state, 'transitionTo');
-      var toState = {allowAnonymous: false};
+      spyOn(state, 'go');
+      var toState = {
+        data: {
+          allowAnonymous: false
+        }
+      };
       rootScope.$broadcast('$stateChangeStart', toState);
 
       expect(user.initSession).toHaveBeenCalledWith('savedAuthString');
-      expect(state.transitionTo).toHaveBeenCalledWith(toState, undefined)
+      expect(state.go).toHaveBeenCalledWith(toState, undefined);
     });
 
     it('should redirect to login if user not logged in', function() {
       spyOn(user, 'isDealer').andCallThrough();
       spyOn(user, 'isLoggedIn').andReturn(false);
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
       spyOn(cookieStore, 'get').andReturn(false);
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false});
+      rootScope.$broadcast('$stateChangeStart', toNonAnonState);
 
       expect(user.isDealer).toHaveBeenCalled();
       expect(user.isLoggedIn).toHaveBeenCalled();
-      expect(location.path).toHaveBeenCalledWith('/login');
+      expect(state.go).toHaveBeenCalledWith('login');
     });
 
     it('should redirect to update security questions', function() {
       spyOn(user, 'isDealer').andCallThrough();
       spyOn(user, 'isLoggedIn').andReturn(true);
       spyOn(user, 'isUserInitRequired').andReturn(true);
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false});
+      rootScope.$broadcast('$stateChangeStart', toNonAnonState);
 
-      expect(location.path).toHaveBeenCalledWith('/login/updateSecurity');
+      expect(state.go).toHaveBeenCalledWith('loginUpdateSecurity');
     });
 
     it('should redirect auction user if trying to access page for dealer user', function() {
       spyOn(user, 'isLoggedIn').andReturn(true);
       spyOn(user, 'isUserInitRequired').andReturn(false);
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = false;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false, isAuctionState: false});
+      rootScope.$broadcast('$stateChangeStart', toNonAnonDealerState);
 
-      expect(location.path).toHaveBeenCalledWith('/act/home');
+      expect(state.go).toHaveBeenCalledWith('auction_dashboard');
     });
 
     it('should redirect dealer user if trying to access page for auction user', function() {
       spyOn(user, 'isLoggedIn').andReturn(true);
       spyOn(user, 'isUserInitRequired').andReturn(false);
-      spyOn(location, 'path');
+      spyOn(state, 'go');
       dealer = true;
 
-      rootScope.$broadcast('$stateChangeStart', {allowAnonymous: false, isAuctionState: true});
+      rootScope.$broadcast('$stateChangeStart', toNonAnonAuctionState);
 
-      expect(location.path).toHaveBeenCalledWith('/home');
+      expect(state.go).toHaveBeenCalledWith('dashboard');
     });
 
   });

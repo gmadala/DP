@@ -1,8 +1,8 @@
 'use strict';
 
-var AuctionHelperObject = require('../framework/auction_helper_object');
-var DatepickerObject = require('../framework/datepicker_page_object.js');
-var AuctionSellerFloorPlanObject = require('../framework/auction_seller_floorplan_object');
+var AuctionHelperObject = require('../../framework/auction_helper_object');
+var DatepickerObject = require('../../framework/datepicker_page_object.js');
+var AuctionSellerFloorPlanObject = require('../../framework/auction_seller_floorplan_object');
 
 var auctionHelper = new AuctionHelperObject();
 var datepickerObject = new DatepickerObject();

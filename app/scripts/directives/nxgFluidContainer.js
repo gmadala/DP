@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
         scope.containerClass = '';
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-          if (toState.showNavBar) {
+          if (toState.data.showNavBar) {
             scope.containerClass = 'container';
           } else {
             // we're on a public page, we need a blue background

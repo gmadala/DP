@@ -36,7 +36,7 @@ describe('Directive: nxgRequires', function () {
       scope.model.foo = 'bar';
     });
     expect(form.input.$valid).toBe(true);
-    expect(form.input.$error.nxgRequires).toBe(false);
+    expect(form.input.$error.nxgRequires).toBe(undefined);
   });
 
   it('should keep the same validity state when the field value changes', function () {
@@ -45,7 +45,7 @@ describe('Directive: nxgRequires', function () {
     });
     form.input.$setViewValue('def456');
     expect(form.input.$valid).toBe(true);
-    expect(form.input.$error.nxgRequires).toBe(false);
+    expect(form.input.$error.nxgRequires).toBe(undefined);
   });
 
   it('should pass through the model value regardless of validity state', function () {

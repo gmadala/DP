@@ -23,36 +23,36 @@
       {
         "BankAccountId": "66e9e774-3dcc-4852-801d-b6e91d161a13",
         "BankAccountName": "Dakotaland FCU 51098 acc no.",
-        "AchAccountNumberLast4": 1098,
+        "AchAccountNumberLast4": "1098",
         "IsActive": true,
-        "AchAbaNumber": 123456789,
+        "AchAbaNumber": "123456789",
         "AchBankName": "DakotaLand FCU",
         "AllowPaymentByAch": true
       },
       {
         "BankAccountId": "76e9e774-3dcc-4852-801d-b6e91d161a13",
         "BankAccountName": "Stage Coach Primary",
-        "AchAccountNumberLast4": 2222,
+        "AchAccountNumberLast4": "2222",
         "IsActive": true,
-        "AchAbaNumber": 777777777,
+        "AchAbaNumber": "777777777",
         "AchBankName": "Stage Coach",
         "AllowPaymentByAch": true
       },
       {
         "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
         "BankAccountName": "My Checking",
-        "AchAccountNumberLast4": 5725,
+        "AchAccountNumberLast4": "5725",
         "IsActive": false,
-        "AchAbaNumber": 987654321,
+        "AchAbaNumber": "987654321",
         "AchBankName": "Bank of North America",
         "AllowPaymentByAch": true
       },
       {
         "BankAccountId": "99e9e774-3dcc-4852-801d-b6e91d161a13",
         "BankAccountName": "My Savings",
-        "AchAccountNumberLast4": 4217,
+        "AchAccountNumberLast4": "4217",
         "IsActive": true,
-        "AchAbaNumber": 987654321,
+        "AchAbaNumber": "987654321",
         "AchBankName": "Bank of North America",
         "AllowPaymentByAch": false
       }

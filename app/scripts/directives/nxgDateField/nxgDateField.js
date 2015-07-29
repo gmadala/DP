@@ -88,9 +88,15 @@ angular.module('nextgearWebApp')
 
               // IE9 has an issue with timezones - if date isn't set at midnight,
               // then the date will be wrong for timezones west of GMT. Correct for this
-              if(this.value && this.value.getHours() !== 0) {
-                this.value.setTime(this.value.getTime() + this.value.getTimezoneOffset()*60*1000);
+              /*
+              var self = this;
+              if (self.value) {
+                self.value = moment(new Date(self.value)).toDate();
+                if(self.value.getHours() !== 0) {
+                  self.value.setTime(self.value.getTime() + self.value.getTimezoneOffset()*60*1000);
+                }
               }
+              */
 
               // adding this validation here to update the past or future $error after the tz correction.
               if (attrs.dateAllow === 'past') {
@@ -176,6 +182,8 @@ angular.module('nextgearWebApp')
               // If value is outside allowed date range element.val() will be the invalid date
               // but $input.val() will show the minimum valid date. When they don't match, clear
               // the input.
+
+              /*
               var displayDate = moment($input.val(), 'MM/DD/YYYY');
               var memoryDate = moment(element.val());
               if(!displayDate || !displayDate.isValid() || !memoryDate || !memoryDate.isValid() || !displayDate.isSame(memoryDate, 'day')) {
@@ -186,6 +194,7 @@ angular.module('nextgearWebApp')
                 });
 
               }
+              */
 
               if(document.activeElement !== $input.get()[0]) {
                 $input.focus();
@@ -217,14 +226,14 @@ angular.module('nextgearWebApp')
               if (date !== date || !date) { // Stop NaN or null from getting into the function
                 return true;
               }
-              return !(moment().isBefore(moment(date), 'day'));
+              return !(moment().isBefore(moment(new Date(date)), 'day'));
             };
 
             scope.notPastDates = function(date) {
               if (date !== date || !date) { // Stop NaN or null from getting into the function
                 return true;
               }
-              return !(moment().isAfter(moment(date), 'day'));
+              return !(moment().isAfter(moment(new Date(date)), 'day'));
             };
 
             // adds support for an attribute like before-show-day="someScopeObj.configureDate(date)"

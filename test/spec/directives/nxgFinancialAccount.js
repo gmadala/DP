@@ -11,8 +11,12 @@ describe('Directive: nxgFinancialAccount', function () {
     scope,
     $compile,
     $rootScope,
+    $dialog,
+    $q,
+    User,
     iScope,
-    account;
+    account,
+    editedBankAccount;
 
   function createIsolateScope() {
     element = $compile(element)(scope);
@@ -21,20 +25,44 @@ describe('Directive: nxgFinancialAccount', function () {
     iScope = element.isolateScope();
   }
 
-  beforeEach(inject(function (_$compile_, _$rootScope_) {
+  beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_ ,_User_) {
+    $compile = _$compile_;
+    $rootScope = _$rootScope_;
+    $dialog = _$dialog_;
+    $q = _$q_;
+    User = _User_;
+
+    spyOn($dialog, 'dialog').andCallFake(function() {
+      return {
+        open: function() {
+          return $q.when(editedBankAccount)
+        }
+      }
+    });
+    spyOn(User, 'refreshInfo').andCallFake(angular.noop);
+
+    editedBankAccount = {
+      AccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',
+      AccountName: '789 - Chase Bank',
+      AccountNumber: '789',
+      BankName: 'Chase Bank',
+      City: 'Indianapolis',
+      IsActive: true,
+      IsDefaultDisbursement: true,
+      IsDefaultPayment: true,
+      RoutingNumber: '123456789',
+      State: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3'
+    };
 
     account = {
       "BankAccountId": "123456789",
       "BankAccountName": "Super Bank Account",
-      "AchAccountNumberLast4": 1098,
+      "AchAccountNumberLast4": "1098",
       "IsActive": true,
-      "AchAbaNumber": 123456789,
+      "AchAbaNumber": "123456789",
       "AchBankName": "Previous Wheel FCU",
       "AllowPaymentByAch": true
     };
-
-    $compile = _$compile_;
-    $rootScope = _$rootScope_;
 
     scope = $rootScope.$new();
 
@@ -42,9 +70,10 @@ describe('Directive: nxgFinancialAccount', function () {
     scope.disbursementAccount = disbursementAccount;
     scope.billingAccount = billingAccount;
     scope.isStakeholderActive=true;
+    scope.isUnitedStates = true;
 
     element = angular.element(
-      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"></nxg-financial-account>');
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
 
     createIsolateScope();
 
@@ -98,6 +127,23 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.isEditable()).toBeFalsy();
   });
 
+  it('should not show edit if Canadian user.', function() {
+
+    createIsolateScope();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = false;
+
+    expect(iScope.isEditable()).toBeFalsy();
+
+    iScope.editBankAccountEnabled= true;
+    iScope.isStakeholderActive = true;
+    iScope.isUnitedStates = true;
+
+    expect(iScope.isEditable()).toBeTruthy();
+  });
+
   it('status should be "Active" if IsActive is true', function () {
 
     iScope.account.IsActive = true;
@@ -122,20 +168,6 @@ describe('Directive: nxgFinancialAccount', function () {
     createIsolateScope();
     expect(iScope.status).toEqual('Inactive');
   });
-
-  it('descriptive account name should append the last 4 digits of the account number (if not already in the name)',
-    function () {
-
-      iScope.account.AchAccountNumberLast4 = 1234;
-
-      iScope.account.BankAccountName = "My Account";
-      createIsolateScope();
-      expect(iScope.descriptiveName).toEqual('My Account - 1234');
-
-      iScope.account.BankAccountName = "My7771234777Account";
-      createIsolateScope();
-      expect(iScope.descriptiveName).toEqual('My7771234777Account');
-    });
 
   it('should designate default disbursement account', function () {
 
@@ -163,5 +195,26 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(iScope.defaultForDisbursement).toBeFalsy();
     expect(iScope.defaultForBilling).toBeFalsy();
+  });
+
+  it('routing number and its label should display correctly for US and Canada users.', function() {
+
+    expect(iScope.routingNumberDisplay).toBe('123456789');
+    expect(iScope.routingNumberLabel).toBe('Routing Number');
+
+    scope.isUnitedStates = false;
+    element = angular.element(
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
+    createIsolateScope();
+
+    expect(iScope.routingNumberDisplay).toBe('56789-234');
+    expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
+  });
+
+  it('editFinancialAccount should call User.refreshInfo.', function() {
+    iScope.editFinancialAccount();
+    iScope.$apply();
+
+    expect(User.refreshInfo).toHaveBeenCalled();
   });
 });

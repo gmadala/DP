@@ -63,7 +63,14 @@ describe('Controller: PaymentsCtrl', function () {
       filter: modelMock.filterValues.TODAY
     };
     userMock = {
-      isLoggedIn: function(){ return true; }
+      isLoggedIn: function(){ return true; },
+      getInfo: function() {
+        return $q.when({
+          data: {
+            AutoPayEnabled: false
+          }
+        })
+      }
     };
 
     addressesMock = {

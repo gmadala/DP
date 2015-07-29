@@ -14,6 +14,8 @@ angular.module('nextgearWebApp')
       {name: 'q3', resName: 'q3_res'}
     ];
 
+    $scope.updateSecurityModel = {};
+
     $scope.filteredQuestions = function(ignore) {
       // build an array of fields based on scope.questions
       var fields = _.map($scope.questions, function(q) { return q.name; }),
@@ -49,7 +51,7 @@ angular.module('nextgearWebApp')
         }
         questions.push({
           SecurityQuestionId: $scope.updateSecurity[q.name],
-          Answer: $scope.updateSecurity[q.resName]
+          Answer: $scope.updateSecurityModel[q.resName]
         });
       });
 

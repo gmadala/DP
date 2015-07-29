@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone, features, gettextCatalog) {
+                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -114,9 +114,8 @@ angular.module('nextgearWebApp')
               var d = this.dirtyData;
 
               AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
-                d.autoPayEnabled).then(
-                prv.saveSuccess.bind(this)
-              );
+                d.autoPayEnabled).then(prv.saveSuccess.bind(this))
+                .then(User.setAutoPayEnabled.bind(this, d.autoPayEnabled));
             }
           },
           isDirty: function() {
@@ -222,12 +221,21 @@ angular.module('nextgearWebApp')
           },
           isAddBankAccountEditable: function() {
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
-              $scope.business.data.isStakeholderActive;
+              $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
-          updateFinancialAccounts: function(updatedData) {
-            $scope.financial.data.bankAccounts = updatedData.BankAccounts;
-            $scope.financial.data.disbursementAccount = updatedData.DefaultDisbursementBankAccountId;
-            $scope.financial.data.billingAccount = updatedData.DefaultBillingBankAccountId;
+          updateFinancialAccounts: function(updatedAccount) {
+            var accNumber = updatedAccount.AccountNumber,
+              processedBankAccount = {
+                BankAccountId: updatedAccount.AccountId,
+                BankAccountName: updatedAccount.AccountName,
+                AchAccountNumberLast4: accNumber.length > 4 ? accNumber.substr(accNumber.length - 4) : accNumber,
+                IsActive: updatedAccount.IsActive,
+                AchAbaNumber: updatedAccount.RoutingNumber,
+                AchBankName: updatedAccount.BankName,
+                AllowPaymentByAch: true
+              };
+
+            $scope.financial.data.bankAccounts.unshift(processedBankAccount);
           },
           addFinancialAccount: function() {
             var dialogOptions = {
@@ -239,6 +247,7 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
+                    modal: 'add',
                     account: {
                       IsActive: true,
                       IsDefaultDisbursement: false,
@@ -252,22 +261,17 @@ angular.module('nextgearWebApp')
 
             $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
               if(updatedAccount) {
+                // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
+                User.refreshInfo();
+
                 if(updatedAccount.IsDefaultPayment) {
                   $scope.updateBillingAccount(updatedAccount.AccountId);
                 }
                 if(updatedAccount.IsDefaultDisbursement) {
                   $scope.updateDisbursementAccount(updatedAccount.AccountId);
                 }
-
-                var title = gettextCatalog.getString('Bank Account Added'),
-                  msg = gettextCatalog.getString('Your Bank Account has successfully been added.'),
-                  buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-                $dialog.messageBox(title, msg, buttons).open();
-
-                AccountManagement.getFinancialAccountData()
-                  .then(function(updatedData) {
-                    $scope.financial.updateFinancialAccounts(updatedData);
-                  });
+                // Update local data
+                $scope.financial.updateFinancialAccounts(updatedAccount);
               }
             });
           }

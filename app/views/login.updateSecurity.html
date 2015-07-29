@@ -29,7 +29,7 @@
               <div class="row" ng-show="$parent.updateSecurity[question.name]">
                 <label class="col-xs-3" translate>Answer</label>
                 <div class="col-xs-8">
-                  <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurity[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
+                  <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurityModel[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.required" translate>Please enter an answer to the selected security question. </label>
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.maxLength" translate>Please enter an answer that is no more than 100 characters long. </label>
                 </div>

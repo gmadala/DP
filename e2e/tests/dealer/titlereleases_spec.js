@@ -1,13 +1,13 @@
 'use strict';
 
-var HelperObject = require('../framework/helper_object');
+var HelperObject = require('../../framework/helper_object');
 var helper = new HelperObject();
 
 helper.describe('WMT-99', function () {
   describe('Title releases page e2e', function () {
 
-    var TitleReleasesPage = require('../framework/titlereleases_page_object.js');
-    var CredentialsObject = require('../framework/credentials_page_object.js');
+    var TitleReleasesPage = require('../../framework/titlereleases_page_object.js');
+    var CredentialsObject = require('../../framework/credentials_page_object.js');
     var titleReleasesPage = new TitleReleasesPage();
     var credPage = new CredentialsObject();
 

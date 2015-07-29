@@ -1,7 +1,7 @@
 'use strict';
 
-var AuctionHelperObject = require('../framework/auction_helper_object');
-var AuctionSettingsObject = require('../framework/auction_settings_object');
+var AuctionHelperObject = require('../../framework/auction_helper_object');
+var AuctionSettingsObject = require('../../framework/auction_settings_object');
 
 var auctionHelper = new AuctionHelperObject();
 var auctionSettings = new AuctionSettingsObject();

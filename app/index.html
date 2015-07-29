@@ -44,8 +44,8 @@
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view {{ navState.current.margin }}" nxg-fluid-container>
-        <div ui-view id="{{ navState.current.pageID }}Page"></div>
+      <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }" nxg-fluid-container>
+        <div ui-view id="{{ navState.current.data.pageId }}Page"></div>
       </div>
       <div nxg-activity></div>
     </div>
@@ -74,7 +74,7 @@
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="components/ui-router/release/angular-ui-router.js"></script>
     <script src="components/angular-ui-utils/modules/highlight/highlight.js"></script>
     <script src="components/angular-ui-utils/modules/event/event.js"></script>
     <script src="components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
@@ -102,6 +102,9 @@
     <script src="scripts/common.js"></script>
 
     <script src="scripts/config/nxgConfig.js"></script>
+    <script src="scripts/routeConfig.js"></script>
+    <script src="scripts/initialize.js"></script>
+    <script src="scripts/debugInfo.js"></script>
 
     <script src="scripts/services/status.js"></script>
     <script src="scripts/services/banner.js"></script>
@@ -134,6 +137,7 @@
     <script src="scripts/filters/list.js"></script>
     <script src="scripts/filters/capitalize.js"></script>
     <script src="scripts/filters/address.js"></script>
+    <script src="scripts/filters/routingNumber.js"></script>
 
     <script src="scripts/models/businessSearch.js"></script>
     <script src="scripts/models/floorplan.js"></script>
@@ -256,6 +260,7 @@
     <!-- <script src="scripts/dev/gettextDebug.js"></script> -->
     <script src="scripts/directives/nxgDebugTitle.processed.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
+    <script src="scripts/dev/debugInfo.js"></script>
 
     <!-- /processhtml -->
 
