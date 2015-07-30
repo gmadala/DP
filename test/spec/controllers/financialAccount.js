@@ -170,13 +170,14 @@ describe('Controller: FinancialAccountCtrl', function () {
             AccountNumber: '',
             IsActive: false,
             IsDefaultDisbursement: false,
-            IsDefaultPayment: false
+            IsDefaultPayment: false,
+            TOSAcceptanceFlag: false
           }
         }
       });
     }));
 
-    it('should have empty fields', function() {
+    it('should have empty or default fields', function() {
       expect(scope.account.AccountName).toBeUndefined();
       expect(scope.account.AccountNumber).toBe('');
       expect(scope.account.BankName).toBeUndefined();
@@ -184,6 +185,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.account.IsActive).toBeFalsy();
       expect(scope.account.IsDefaultDisbursement).toBeFalsy();
       expect(scope.account.IsDefaultPayment).toBeFalsy();
+      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
       expect(scope.account.RoutingNumber).toBeFalsy();
       expect(scope.account.State).toBeUndefined();
     });
@@ -250,7 +252,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           $valid: true
         };
 
-        scope.confirmAccountNumberValid = true;
+        scope.account.TOSAcceptanceFlag = true;
       });
 
       it('should not close if the form is not valid', function () {
@@ -376,6 +378,28 @@ describe('Controller: FinancialAccountCtrl', function () {
 
         expect(dialog.close).toHaveBeenCalled();
         expect(scope.account.AccountName).toBe('Chase Bank');
+      });
+
+      it('should not close if TOSAcceptance flag is not true', function () {
+        spyOn(dialog, 'close').andCallThrough();
+
+        scope.account.TOSAcceptanceFlag = false;
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(dialog.close).not.toHaveBeenCalled();
+      });
+
+      it('should close if TOSAcceptance flag is true', function () {
+        spyOn(dialog, 'close').andCallThrough();
+
+        scope.account.TOSAcceptanceFlag = true;
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(dialog.close).toHaveBeenCalled();
       });
     });
   });

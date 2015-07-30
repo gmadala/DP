@@ -43,9 +43,9 @@
     function isValidSubmission() {
       // User cannot have an account that is not active and set as either a default disbursement or default payment.
       var isActiveValid = $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
-      var isAccountNumberValid = $scope.modal === 'edit' || $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+      var isAccountNumberValid = $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
 
-      return isActiveValid && isAccountNumberValid;
+      return isActiveValid && ($scope.modal === 'edit' || (isAccountNumberValid && $scope.account.TOSAcceptanceFlag));
     }
 
     function confirmRequest () {
