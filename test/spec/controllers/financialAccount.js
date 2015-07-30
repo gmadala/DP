@@ -169,6 +169,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         options: {
           modal: 'add',
           account : {
+            AccountNumber: '',
             IsActive: false,
             IsDefaultDisbursement: false,
             IsDefaultPayment: false
@@ -179,7 +180,7 @@ describe('Controller: FinancialAccountCtrl', function () {
 
     it('should have empty fields', function() {
       expect(scope.account.AccountName).toBeUndefined();
-      expect(scope.account.AccountNumber).toBeUndefined();
+      expect(scope.account.AccountNumber).toBe('');
       expect(scope.account.BankName).toBeUndefined();
       expect(scope.account.City).toBeUndefined();
       expect(scope.account.IsActive).toBeFalsy();

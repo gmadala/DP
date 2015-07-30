@@ -18,7 +18,9 @@
 
     $scope.confirmAccountNumberValid = true;
 
-    $scope.inputs = {};
+    $scope.inputs = {
+      confirmAccountNumber: ''
+    };
 
     $scope.accountNumberRegex = /^\d{1,16}$/;
     $scope.routingNumberRegex = /^\d{9}$/;

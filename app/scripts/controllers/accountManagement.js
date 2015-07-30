@@ -249,6 +249,7 @@ angular.module('nextgearWebApp')
                   return {
                     modal: 'add',
                     account: {
+                      AccountNumber: '',
                       IsActive: true,
                       IsDefaultDisbursement: false,
                       IsDefaultPayment: false
