@@ -3,7 +3,6 @@
 angular.module('nextgearWebApp')
   .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User) {
     segmentio.track(metric.VIEW_RESOURCES_PAGE);
-    $scope.metric = metric; // make metric names available to templates
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();

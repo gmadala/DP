@@ -5,9 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, gettextCatalog, Addresses) {
-
-    $scope.metric = metric; // make metric names available to templates
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, $timeout, gettextCatalog, Addresses) {
     $scope.isCollapsed = true;
 
     var isDealer = User.isDealer();

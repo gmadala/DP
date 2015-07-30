@@ -40,9 +40,8 @@ angular.module('nextgearWebApp')
       }
     };
   })
-  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout, metric) {
+  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout) {
     var searchOpen = false;
-    $scope.metric = metric;
     $scope.query = '';
     var lengthAtSubmit = 0;
 

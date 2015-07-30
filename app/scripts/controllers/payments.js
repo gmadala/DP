@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, metric, $dialog, BusinessHours, Addresses, gettextCatalog) {
-
-    $scope.metric = metric; // make metric names available to template
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $dialog, BusinessHours, Addresses, gettextCatalog) {
 
     $scope.isCollapsed = true;
 

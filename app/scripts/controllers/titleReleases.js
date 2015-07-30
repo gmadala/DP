@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, dealerCustomerSupportPhone, gettextCatalog) {
-
-    $scope.metric = metric; // make metric names available to templates
-
-
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, $dialog, dealerCustomerSupportPhone, gettextCatalog) {
     $scope.isCollapsed = true;
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
