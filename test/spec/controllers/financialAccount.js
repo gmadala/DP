@@ -76,8 +76,6 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.financialAccountForm = {
           $valid: true
         };
-        scope.confirmAccountNumberValid = true;
-        scope.inputs.confirmAccountNumber = '4199137905';
       });
 
       it('should close when close function is called', function () {

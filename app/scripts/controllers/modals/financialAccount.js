@@ -39,21 +39,20 @@
       return !!str ? str.substr(str.length - charFromEnd) + suffix : '';
     }
 
-    // User cannot have an account that is not active and set as either a default disbursement or default payment.
-    function activeValid () {
-      return $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
-    }
+    // A group of non-native angular validation steps performed to ensure a valid bank account submission.
+    function isValidSubmission() {
+      // User cannot have an account that is not active and set as either a default disbursement or default payment.
+      var isActiveValid = $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
+      var isAccountNumberValid = $scope.modal === 'edit' || $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
 
-    function confirmAccountNumberValid () {
-      return $scope.modal === 'edit' || $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+      return isActiveValid && isAccountNumberValid;
     }
 
     function confirmRequest () {
       $scope.validity = angular.copy($scope.financialAccountForm);
-      $scope.activeValid = activeValid();
-      $scope.confirmAccountNumberValid = confirmAccountNumberValid();
+      var validSubmission = isValidSubmission();
 
-      if ($scope.validity.$valid && $scope.activeValid && $scope.confirmAccountNumberValid) {
+      if ($scope.validity.$valid && validSubmission) {
         if($scope.modal === 'edit') {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);
