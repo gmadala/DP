@@ -109,7 +109,7 @@
     <!-- END ADD BANK ACCOUNT ONLY -->
 
     <div class="row">
-      <div class="col-xs-12 cr-inline">
+      <div class="col-xs-6 cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
                ng-model="account.IsDefaultDisbursement" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForDisbursement"></label>
@@ -117,9 +117,7 @@
           <strong translate>Default for disbursement</strong>
         </label>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 cr-inline">
+      <div class="col-xs-6 cr-inline">
         <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
                ng-model="account.IsDefaultPayment" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForPayment"></label>
@@ -128,6 +126,7 @@
         </label>
       </div>
     </div>
+
     <!-- ADD BANK ACCOUNT ONLY -->
     <div ng-if="isAddModal">
       <div class="row">
