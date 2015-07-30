@@ -10,17 +10,16 @@
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
-    $scope.modal = options.modal;
 
     var accountNumber = $scope.account.AccountNumber;
     $scope.accountNumberDisplay = accountNumber ? '******' + lastFour(accountNumber) : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
-    $scope.confirmAccountNumberValid = true;
-
     $scope.inputs = {
       confirmAccountNumber: ''
     };
+    $scope.isAccountNumberValid = true;
+    $scope.tosVisited = false;
 
     $scope.accountNumberRegex = /^\d{1,16}$/;
     $scope.routingNumberRegex = /^\d{9}$/;
@@ -30,8 +29,27 @@
      * front-end max-length and discover max-length for account and bank name */
     $scope.maxBankLength = 43;
 
+    $scope.isAddModal = isAddModal();
+    $scope.isEditModal = isEditModal();
+    $scope.visitTOS = visitTOS;
+
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
+
+    function isAddModal() {
+      return options.modal === 'add';
+    }
+
+    function isEditModal() {
+      return options.modal === 'edit';
+    }
+
+    function visitTOS () {
+      if(!$scope.tosVisited) {
+        $scope.account.TOSAcceptanceFlag = true;
+      }
+      $scope.tosVisited = true;
+    }
 
     function lastFour(str, suffix) {
       suffix = suffix || '';
@@ -43,9 +61,9 @@
     function isValidSubmission() {
       // User cannot have an account that is not active and set as either a default disbursement or default payment.
       var isActiveValid = $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
-      var isAccountNumberValid = $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
+      $scope.isAccountNumberValid = $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
 
-      return isActiveValid && ($scope.modal === 'edit' || (isAccountNumberValid && $scope.account.TOSAcceptanceFlag));
+      return isActiveValid && ($scope.isEditModal || ($scope.isAccountNumberValid && $scope.account.TOSAcceptanceFlag));
     }
 
     function confirmRequest () {
@@ -53,12 +71,12 @@
       var validSubmission = isValidSubmission();
 
       if ($scope.validity.$valid && validSubmission) {
-        if($scope.modal === 'edit') {
+        if($scope.isEditModal) {
           AccountManagement.updateBankAccount($scope.account).then(function () {
             dialog.close($scope.account);
           });
         }
-        else if($scope.modal === 'add') {
+        else if($scope.isAddModal) {
           $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function (bankAccountId) {
             $scope.account.AccountId = bankAccountId;

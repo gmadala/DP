@@ -54,6 +54,11 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
     }));
 
+    it('should be recognized as an edit modal', function() {
+      expect(scope.isAddModal).toBeFalsy();
+      expect(scope.isEditModal).toBeTruthy();
+    });
+
     it('should remove digit other than last 4 digit of account number', function () {
       expect(scope.accountNumberDisplay).toMatch(/\D+\d{4}$/);
     });
@@ -177,6 +182,11 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
     }));
 
+    it('should be recognized as an edit modal', function() {
+      expect(scope.isAddModal).toBeTruthy();
+      expect(scope.isEditModal).toBeFalsy();
+    });
+
     it('should have empty or default fields', function() {
       expect(scope.account.AccountName).toBeUndefined();
       expect(scope.account.AccountNumber).toBe('');
@@ -244,6 +254,25 @@ describe('Controller: FinancialAccountCtrl', function () {
 
     it('should match 9 numeric characters against routing number regex', function() {
       expect(scope.routingNumberRegex.test('123456789')).toBe(true);
+    });
+
+    it('should have the checkbox disabled on default', function () {
+      expect(scope.tosVisited).toBe(false);
+    });
+
+    it('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
+      spyOn(scope, 'visitTOS').andCallThrough();
+
+      scope.visitTOS();
+
+      expect(scope.visitTOS).toHaveBeenCalled();
+      expect(scope.tosVisited).toBeTruthy();
+      expect(scope.account.TOSAcceptanceFlag).toBeTruthy();
+
+      scope.account.TOSAcceptanceFlag = false;
+      scope.visitTOS();
+
+      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
     });
 
     describe('the dialog', function() {
