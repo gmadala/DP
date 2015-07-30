@@ -75,9 +75,9 @@
           <label for="confirmAccountNumber" translate>Confirm Account Number</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !isAccountNumberValid }"
+                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)}"
                  ng-paste="$event.preventDefault()">
-          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && !isAccountNumberValid" translate>
+          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)" translate>
             Does not match with account number.
           </label>
           <label for=confirmAccountNumber class="text-error" ng-show="validity.confirmAccountNumber.$error.required" translate>
@@ -134,9 +134,9 @@
           <input type="checkbox" name="tosAcceptanceFlag" id="tosAcceptanceFlag"
                  ng-model="account.TOSAcceptanceFlag" ng-disabled="!tosVisited">
           <label class="checkbox-img" for="tosAcceptanceFlag"></label>
-          <label class="cr-label" for="tosAcceptanceFlag">
+          <label class="cr-label" for="tosAcceptanceFlag" translate>
             Lorem ipsum dolor sit amet, consectetur silt iverra of the
-            <a href="https://www.youtube.com/watch?v=sd4bqmP_460" target="_blank" ng-click="visitTOS()">Terms and Conditions.</a>
+            <a href="https://www.youtube.com/watch?v=sd4bqmP_460" target="_blank" ng-click="visitTOS()" translate>Terms and Conditions.</a>
           </label>
         </div>
       </div>

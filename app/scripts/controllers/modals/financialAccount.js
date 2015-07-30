@@ -18,7 +18,7 @@
     $scope.inputs = {
       confirmAccountNumber: ''
     };
-    $scope.isAccountNumberValid = true;
+    $scope.isAccountNumberValid = false;
     $scope.tosVisited = false;
 
     $scope.accountNumberRegex = /^\d{1,16}$/;
