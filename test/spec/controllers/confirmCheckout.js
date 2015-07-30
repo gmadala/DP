@@ -12,18 +12,14 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     transactionInfo,
     receipts,
     state,
-    segmentio,
     _window,
     run;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, _segmentio_, $window) {
+  beforeEach(inject(function ($controller, $rootScope, $state, Receipts, $window) {
     receipts = Receipts;
     state = $state;
-    segmentio = _segmentio_;
     _window = $window;
-
-    spyOn(segmentio, 'track');
 
     scope = $rootScope.$new();
     dialog = {
@@ -158,15 +154,6 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     it('should return the expected result when a mix of items were sent', function () {
       run();
       expect(scope.items.getStatus('submitted', 'scheduled')).toBe('submitted and scheduled');
-    });
-
-  });
-
-  describe('analytics logic', function () {
-
-    it('should track scheduled payments', function () {
-      expect(segmentio.track.calls.length).toBe(1);
-      expect(segmentio.track.mostRecentCall.args[0]).toBe('Schedule Payment');
     });
 
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog) {
+  .controller('ReportsCtrl', function($scope, api, metric, moment, gettextCatalog) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -9,7 +9,6 @@ angular.module('nextgearWebApp')
      */
 
     $scope.metric = metric; // make metric names available to template
-    segmentio.track(metric.VIEW_VIEW_A_REPORT_PAGE);
 
     $scope.data = null;
 
@@ -62,10 +61,6 @@ angular.module('nextgearWebApp')
         '_blank'  // open a new window every time
       );
 
-      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
-        reportName: 'Dealer Statement'
-      });
-
     };
 
     $scope.viewDisbursementDetail = function() {
@@ -87,10 +82,6 @@ angular.module('nextgearWebApp')
         strUrl,
         '_blank'  // open a new window every time
       );
-
-      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
-        reportName: 'Disbursement Detail'
-      });
     };
 
     $scope.viewPaidOffSummary = function() {
@@ -132,10 +123,6 @@ angular.module('nextgearWebApp')
         strUrl,
         '_blank'  // open a new window every time
       );
-
-      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
-        reportName: 'Paid off Summary'
-      });
     };
 
     $scope.viewCurtailment = function() {
@@ -157,10 +144,6 @@ angular.module('nextgearWebApp')
         strUrl,
         '_blank'  // open a new window every time
       );
-
-      segmentio.track(metric.VIEW_CURRENT_REPORT, {
-        reportName: 'Upcoming Curtailment / Payoff Quote (PDF)'
-      });
     };
 
     $scope.viewExpInv = function() {
@@ -175,10 +158,6 @@ angular.module('nextgearWebApp')
         strUrl,
         '_blank'  // open a new window every time
       );
-
-      segmentio.track(metric.VIEW_CURRENT_REPORT, {
-        reportName: 'Exportable Inventory'
-      });
     };
 
 

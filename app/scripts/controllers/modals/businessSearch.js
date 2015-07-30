@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, closeNow, segmentio, metric) {
+  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, closeNow) {
 
     var lastPromise;
 
@@ -41,7 +41,6 @@ angular.module('nextgearWebApp')
       }
       if (isNewQuery) {
         $scope.fetch();
-        segmentio.track(searchBuyersMode ? metric.SEARCH_FOR_BUYER : metric.SEARCH_FOR_SELLER);
       }
     };
 

@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, dealerCustomerSupportPhone, segmentio, gettextCatalog) {
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, metric, $dialog, dealerCustomerSupportPhone, gettextCatalog) {
 
-    segmentio.track(metric.VIEW_TITLE_RELEASE_PAGE);
     $scope.metric = metric; // make metric names available to templates
 
 

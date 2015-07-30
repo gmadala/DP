@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function ($scope, api, segmentio, metric, User, gettextCatalog) {
+  .controller('AuctionReportsCtrl', function ($scope, api, metric, User, gettextCatalog) {
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
      * when saving the report PDF.
@@ -59,9 +59,5 @@ angular.module('nextgearWebApp')
           ('/Disbursements-' + reportDate + businessName /*filename*/), {});
 
       window.open(strUrl, '_blank'); // open a new window every time
-
-      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
-        reportName: 'Disbursement Detail'
-      });
     };
   });

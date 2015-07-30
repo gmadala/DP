@@ -110,16 +110,6 @@
       }
     );
 
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
-      if (fromState.name) {
-        segmentio.page(null, null, {
-          path: $state.current.url,
-          url: $state.href($state.current, null, { absolute: true }),
-          title: $state.current.name
-        });
-      }
-    });
-
     $rootScope.$on('event:switchState', function (event, state) {
       $state.go(state);
     });

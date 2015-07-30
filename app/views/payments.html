@@ -147,7 +147,7 @@
                     <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
                   </span>
                   {{ payment.DueDate | moment }}</p>
-                <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" nxg-track="{{metric.CLICK_PAYMENTS_REQUEST_EXTENSION}}" translate>Request<br/>Extension</a>
+                <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" translate>Request<br/>Extension</a>
               </div>
             </td>
 

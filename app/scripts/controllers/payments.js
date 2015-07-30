@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, segmentio, metric, $dialog, BusinessHours, Addresses, gettextCatalog) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, metric, $dialog, BusinessHours, Addresses, gettextCatalog) {
 
-    segmentio.track(metric.VIEW_PAYMENTS_PAGE);
     $scope.metric = metric; // make metric names available to template
 
     $scope.isCollapsed = true;
