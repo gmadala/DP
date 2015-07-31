@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, metric, moment, gettextCatalog) {
+  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -56,6 +56,8 @@ angular.module('nextgearWebApp')
         strUrl += 'forVin_' + encodedVin + '/' + encodedVin;
       }
 
+      segmentio.track(metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON);
+
       window.open(
         api.contentLink(strUrl, {}),
         '_blank'  // open a new window every time
@@ -77,6 +79,8 @@ angular.module('nextgearWebApp')
         '/report/disbursementdetail/' + date + ('/Disbursements_' + date /*filename*/),
         {}
       );
+
+      segmentio.track(metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON);
 
       window.open(
         strUrl,
@@ -119,6 +123,8 @@ angular.module('nextgearWebApp')
         params
       );
 
+      segmentio.track(metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT);
+
       window.open(
         strUrl,
         '_blank'  // open a new window every time
@@ -139,6 +145,8 @@ angular.module('nextgearWebApp')
         '/report/getupcomingcurtailmentpayments/' + date + '/CurtailmentPaymentsUntil_' + date,
         {}
       );
+
+      segmentio.track(metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON);
 
       window.open(
         strUrl,
