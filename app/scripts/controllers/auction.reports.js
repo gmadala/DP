@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function ($scope, api, metric, User, gettextCatalog) {
+  .controller('AuctionReportsCtrl', function ($scope, api, User, gettextCatalog) {
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
      * when saving the report PDF.
      */
-    $scope.metric = metric; // make metric names available to template
 
     $scope.data = null;
     $scope.isManufacturer = User.isManufacturer() ;
