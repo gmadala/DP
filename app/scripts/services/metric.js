@@ -3,9 +3,15 @@
 angular.module('nextgearWebApp')
   .value('metric', {
     //*****************NEW EVENTS TRACKED*******************
+    LOGIN_SUCCESSFUL: 'Login Successful',
+    SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
+
     //Login Events
     CLICK_LOGIN_USERNAME_RECOVERY_SUBMIT_BUTTON: 'Click Login UN Recovery Submit Button',//x
     CLICK_LOGIN_PASSWORD_RECOVERY_SUBMIT_BUTTON: 'Click Login PW Recovery Submit Button',//x
+
+    // Flooring car
+    DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
 
     //Global Events
     CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
@@ -14,11 +20,13 @@ angular.module('nextgearWebApp')
     CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',//x
 
     //View a Report Events
-    CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON: 'Click View a Report Upcoming Curtailment/Payoff Quote Button',//x
-    CLICK_VIEW_A_REPORT_EXPORTABLE_INVENTORY_BUTTON: 'Click View a Report Exportable Inventory Button',//x
-    CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON: 'Click View a Report Dealer Statement Button',//x
-    CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON: 'Click View a Report Disbursement Detail Button',//x
-    CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT: 'Click View a Report Paid Off Summary View Report',//x
+    DEALER_REPORTS_VEHICLE_HISTORY_DETAIL:'Dealer Reports - Vehicle History Detail',
+    DEALER_REPORTS_RECEIVABLE_DETAIL: 'Dealer Reports - Receivable Detail',
+    DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE: 'Dealer Reports - Upcoming Curtailment/Payoff Quote',//x
+    DEALER_REPORTS_EXPORTABLE_INVENTORY: 'Dealer Reports - Exportable Inventory',//x
+    DEALER_REPORT_DEALER_STATEMENT: 'Dealer Reports - Dealer Statement',//x
+    DEALER_REPORTS_DISBURSEMENT_DETAIL: 'Dealer Report - Disbursement Detail',//x
+    DEALER_REPORTS_PAID_OFF_SUMMARY: 'Dealer Report - Paid Off Summary',//x
 
     //View Analytics Events
     VIEW_VIEW_ANALYTICS_PAGE: 'View View Analytics Page',//x
