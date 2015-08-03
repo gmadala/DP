@@ -57,7 +57,7 @@ angular.module('nextgearWebApp')
       );
     };
   })
-  .controller('PayoutModalCtrl', function($scope, $filter, $timeout, dialog, funds, User, Payments, OptionDefaultHelper, segmentio, metric) {
+  .controller('PayoutModalCtrl', function($scope, $filter, $timeout, dialog, funds, User, Payments, OptionDefaultHelper) {
     $scope.funds = funds;
     $scope.selections = {
       amount: null,
@@ -94,7 +94,6 @@ angular.module('nextgearWebApp')
           $scope.submitInProgress = false;
         }
       );
-      segmentio.track(metric.REQUEST_UNAPPLIED_FUNDS_PAYOUT);
     };
 
     $scope.cancel = function () {

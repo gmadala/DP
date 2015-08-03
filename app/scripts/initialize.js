@@ -5,10 +5,10 @@
   angular.module('nextgearWebApp')
     .run(initialize);
 
-  initialize.$inject = ['$rootScope', '$location', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
+  initialize.$inject = ['$rootScope', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
     '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features'];
 
-  function initialize($rootScope, $location, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
+  function initialize($rootScope, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
                       LastState, api, metric, language, features) {
 
     // state whose transition was interrupted to ask the user to log in
@@ -110,16 +110,6 @@
       }
     );
 
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
-      if (fromState.name) {
-        segmentio.page(null, null, {
-          path: $state.current.url,
-          url: $state.href($state.current, null, { absolute: true }),
-          title: $state.current.name
-        });
-      }
-    });
-
     $rootScope.$on('event:switchState', function (event, state) {
       $state.go(state);
     });
@@ -165,6 +155,7 @@
 
     $rootScope.$on('event:userAuthenticated',
       function () {
+        segmentio.track(metric.LOGIN_SUCCESSFUL);
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
           $state.go('loginCreatePassword');

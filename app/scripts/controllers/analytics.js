@@ -23,7 +23,6 @@ angular.module('nextgearWebApp')
         }
       };
       $dialog.dialog(dialogOptions).open();
-      segmentio.track(metric.VIEW_ALL_TOP_AUCTIONS);
     };
 
     $scope.toggleDetails = function() {

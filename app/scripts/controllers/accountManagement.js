@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext, segmentio,
-                                                metric, User, api, $q, dealerCustomerSupportPhone, features) {
+  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
+                                                User, api, $q, dealerCustomerSupportPhone, features) {
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -16,9 +16,6 @@ angular.module('nextgearWebApp')
     gettext('Edit');
     gettext('Disable');
 
-    if(User.isDealer()) {
-      segmentio.track(metric.VIEW_ACCOUNT_MANAGEMENT);
-    }
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
@@ -44,11 +41,6 @@ angular.module('nextgearWebApp')
         if (!this.isDirty()) {
           this.cancel();
           return false;
-        }
-        if(User.isDealer()) {
-          segmentio.track(metric.CHANGE_ACCOUNT_MANAGEMENT);
-        } else {
-          segmentio.track(metric.CHANGE_AUCTION_SETTINGS);
         }
         return true;
       },

@@ -11,8 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'RequestsSummaryCtrl'
     };
   })
-  .controller('RequestsSummaryCtrl', function ($scope, $state, TitleReleases, Floorplan, metric) {
-    $scope.metric = metric;
+  .controller('RequestsSummaryCtrl', function ($scope, $state, TitleReleases, Floorplan) {
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
       removeFromQueue: TitleReleases.removeFromQueue
