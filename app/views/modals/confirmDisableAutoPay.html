@@ -1,24 +1,14 @@
 <h3 class="modal-header" translate>Unenroll from ProperNounTBD</h3>
 <section class="modal-body">
-  <p translate>You are about to unenroll from ProperNounTBD. Please review the Authorization and Request for Automated Payments below.</p>
-  <div class="legal-textarea">
-    <h3 translate>Authorization and Request for Automated Payments</h3>
-    TBD
-  </div>
+  <h4 translate>Authorization and Request to Unenroll</h4>
+  <p translate>By clicking on the button "Unenroll Now", you acknowledge and agree that you are unenrolling from
+    ProperNounTBD.
+  </p>
 </section>
-<div class="modal-footer">
-  <div class="cr-inline text-left" style="margin-left:10px;">
-    <input type="checkbox" name="terms" id="disableAutoPayTerms" ng-model="agree"/>
-    <label for="disableAutoPayTerms" class="checkbox-img small"></label>
-    <label for="disableAutoPayTerms" class="cr-label" translate>
-      I have reviewed and agree to the Authorization and Request for Automated Payments.
-    </label>
-  </div>
-</div>
 <hr class="hr-no-margin"/>
 <div class="modal-footer">
   <button class="btn-cta cta-secondary" type="button" ng-click="close(false)" translate>Cancel</button>
-  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus ng-disabled="!agree" translate>
-    Unenroll now
+  <button class="btn-cta cta-primary" type="submit" ng-click="close(true)" nxg-autofocus translate>
+    Unenroll Now
   </button>
 </div>
