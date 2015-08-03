@@ -27,7 +27,8 @@ angular.module('nextgearWebApp')
     $scope.currentReports = [
       {
         'title': gettextCatalog.getString('Receivable Detail (PDF)'),
-        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {})
+        'url': api.contentLink('/report/getReceivableDetail/ReceivableDetail', {}),
+        'metric': metric.DEALER_REPORTS_RECEIVABLE_DETAIL
       }
     ];
 
@@ -56,7 +57,7 @@ angular.module('nextgearWebApp')
         strUrl += 'forVin_' + encodedVin + '/' + encodedVin;
       }
 
-      segmentio.track(metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON);
+      segmentio.track(metric.DEALER_REPORT_DEALER_STATEMENT);
 
       window.open(
         api.contentLink(strUrl, {}),
@@ -80,7 +81,7 @@ angular.module('nextgearWebApp')
         {}
       );
 
-      segmentio.track(metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON);
+      segmentio.track(metric.DEALER_REPORTS_DISBURSEMENT_DETAIL);
 
       window.open(
         strUrl,
@@ -123,7 +124,7 @@ angular.module('nextgearWebApp')
         params
       );
 
-      segmentio.track(metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT);
+      segmentio.track(metric.DEALER_REPORTS_PAID_OFF_SUMMARY);
 
       window.open(
         strUrl,
@@ -146,7 +147,7 @@ angular.module('nextgearWebApp')
         {}
       );
 
-      segmentio.track(metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON);
+      segmentio.track(metric.DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE);
 
       window.open(
         strUrl,

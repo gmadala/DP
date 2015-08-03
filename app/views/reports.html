@@ -4,7 +4,7 @@
     <div class="well-item">
       <ul class="unstyled RecievableDetailMargin">
         <li ng-repeat="report in currentReports">
-          <a target="_blank" ng-href="{{ report.url }}">
+          <a target="_blank" ng-href="{{ report.url }}" nxg-track="{{report.metric}}">
             {{ report.title }}
           </a>
         </li>
