@@ -2,7 +2,9 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
-                                                User, api, $q, dealerCustomerSupportPhone, features) {
+                                                User, api, $q, dealerCustomerSupportPhone, features, segmentio, metric) {
+
+    segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
