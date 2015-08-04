@@ -6,7 +6,7 @@
  */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog, segmentio, metric) {
+                                       OptionDefaultHelper, moment, gettextCatalog, segmentio, metric, kissMetricInfo) {
 
     var isDealer = User.isDealer();
 
@@ -161,7 +161,12 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (/*success*/) {
-          segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED);
+
+          kissMetricInfo.getKissMetricInfo().then(
+            function(result){
+              segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED,result);
+            }
+          );
 
           $scope.submitInProgress = false;
           var title = gettextCatalog.getString('Flooring Request Submitted'),

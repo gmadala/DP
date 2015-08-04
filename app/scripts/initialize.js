@@ -6,10 +6,10 @@
     .run(initialize);
 
   initialize.$inject = ['$rootScope', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
-    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features'];
+    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
 
   function initialize($rootScope, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
-                      LastState, api, metric, language, features) {
+                      LastState, api, metric, language, features, kissMetricInfo) {
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
@@ -155,7 +155,12 @@
 
     $rootScope.$on('event:userAuthenticated',
       function () {
-        segmentio.track(metric.LOGIN_SUCCESSFUL);
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(metric.LOGIN_SUCCESSFUL,result);
+          }
+        );
+
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
           $state.go('loginCreatePassword');

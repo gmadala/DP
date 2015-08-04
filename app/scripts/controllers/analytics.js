@@ -1,8 +1,13 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric, User) {
-    segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE);
+  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric, User, kissMetricInfo) {
+
+    kissMetricInfo.getKissMetricInfo().then(
+      function(result){
+        segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE,result);
+      }
+    );
 
     $scope.showDetails = false;
 
