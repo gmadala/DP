@@ -24,7 +24,7 @@ Url to App = https://test.nextgearcapital.com/eui/creditapplication/#/
 
 
 machine = ColoLWeb01.nextgearcapital.com
-Url to App = https://customer.nextgearcapital.com/NGCApplication/#/
+Url to App = http://www.nextgearcapital.com/apply-for-credit/
 
 
 ####Build and Deploy Instructions:
