@@ -217,6 +217,12 @@ angular.module('nextgearWebApp')
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
+          /**
+           * Updates the local financial account data to keep consistent with
+           * the endpoint data.
+           * @param  {Object} updatedAccount A bank account that was added.
+           * @return {void}
+           */
           updateFinancialAccounts: function(updatedAccount) {
             var accNumber = updatedAccount.AccountNumber,
               processedBankAccount = {
@@ -231,6 +237,11 @@ angular.module('nextgearWebApp')
 
             $scope.financial.data.bankAccounts.unshift(processedBankAccount);
           },
+          /**
+           * Opens the add bank account modal and processes the bank account if
+           * one is submitted
+           * @return {void}
+           */
           addFinancialAccount: function() {
             var dialogOptions = {
               dialogClass: 'modal',
@@ -254,7 +265,17 @@ angular.module('nextgearWebApp')
               controller: 'FinancialAccountCtrl'
             };
 
-            $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
+            $dialog.dialog(dialogOptions).open()
+              .then(updateLocalFinancialData);
+
+            /**
+             * Update local financial data to be consistent with endpoint data
+             * after adding a bank account.
+             * @param  {Object} updatedAccount Bank account that was added to
+             *                                 endpoint.
+             * @return {void}
+             */
+            function updateLocalFinancialData (updatedAccount) {
               if(updatedAccount) {
                 // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
                 User.refreshInfo();
@@ -268,7 +289,7 @@ angular.module('nextgearWebApp')
                 // Update local data
                 $scope.financial.updateFinancialAccounts(updatedAccount);
               }
-            });
+            }
           }
         };
 
