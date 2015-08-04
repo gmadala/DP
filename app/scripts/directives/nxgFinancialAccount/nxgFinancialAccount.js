@@ -40,6 +40,11 @@
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
 
+      /**
+       * Provides the correct string in the user's language to the account status
+       * field.
+       * @return {String} Translated string value for account status field.
+       */
       function getStatus() {
         return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
       }
@@ -48,17 +53,35 @@
         return scope.account.AllowPaymentByAch;
       }
 
+      /**
+       * Determines if the current user should be allowed to edit a bank account.
+       * @return {Boolean} Allowed to edit a bank account?
+       */
       function isEditable() {
         return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates;
       }
+
+      /**
+       * Determines if the bank account is the user's default billing account.
+       * @return {Boolean} Account default billing account?
+       */
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;
       }
 
+      /**
+       * Determines if the bank account is the user's default disbursement account.
+       * @return {Boolean} Account default disbursement account?
+       */
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
       }
 
+      /**
+       * Opens the edit bank account modal and processes the user's changes if
+       * a bank account is changed.
+       * @return {void}
+       */
       function editFinancialAccount() {
         var dialogOptions = {
           dialogClass: 'modal',
@@ -84,7 +107,16 @@
           controller: 'FinancialAccountCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
+        $dialog.dialog(dialogOptions).open()
+          .then(updateLocalFinancialData);
+
+        /**
+         * Helper function: Propogate bank account changes to local data to
+         * keep consistent with endpoint data.
+         * @param  {Object} updatedAccount The edited bank account.
+         * @return {void}
+         */
+        function updateLocalFinancialData (updatedAccount) {
           if (updatedAccount) {
             // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
             User.refreshInfo();
@@ -98,7 +130,7 @@
             scope.account.AchBankName = updatedAccount.BankName;
             scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
           }
-        });
+        }
       }
 
       scope.$watch('defaultBillingBankAccountId', function(newVal, oldVal) {
@@ -116,4 +148,3 @@
   }
 
 })();
-

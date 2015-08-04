@@ -213,6 +213,10 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          /**
+           * Determines if the current user should be allowed to add a bank account.
+           * @return {Boolean} Is the user allowed to add a bank account?
+           */
           isAddBankAccountEditable: function() {
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
@@ -269,10 +273,10 @@ angular.module('nextgearWebApp')
               .then(updateLocalFinancialData);
 
             /**
-             * Update local financial data to be consistent with endpoint data
-             * after adding a bank account.
+             * Helper function: Propogate bank account changes to local data to
+             * keep consistent with endpoint data.
              * @param  {Object} updatedAccount Bank account that was added to
-             *                                 endpoint.
+             * endpoint.
              * @return {void}
              */
             function updateLocalFinancialData (updatedAccount) {
