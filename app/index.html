@@ -54,19 +54,12 @@
       <ul class="horizontal-list">
         <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
         <li><nxg-privacy-statement></nxg-privacy-statement></li>
-        <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" nxg-track="{{metric.CLICK_CONTACT_US_LINK}}" translate>Contact Us</a></li>
+        <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" translate>Contact Us</a></li>
         <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
         <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
         <!-- @if ENV != 'production' !></li><!-- @endif -->
       </ul>
     </footer>
-
-    <!-- Bypass to Clicky's eventqueue cookie issue  -->
-    <script type="text/javascript">
-        var clicky_custom = clicky_custom || {};
-        clicky_custom.queue_disable = 1;
-    </script>
-    <!-- End Bypass to Clicky's eventqueue cookie issue  -->
 
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>

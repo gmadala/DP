@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDocumentsCtrl', function($scope, metric, gettextCatalog, User) {
-    $scope.metric = metric; // make metric names available to templates
-
+  .controller('AuctionDocumentsCtrl', function($scope, gettextCatalog, User) {
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;

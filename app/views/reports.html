@@ -4,9 +4,7 @@
     <div class="well-item">
       <ul class="unstyled RecievableDetailMargin">
         <li ng-repeat="report in currentReports">
-          <a target="_blank" ng-href="{{ report.url }}"
-             nxg-track="{{ metric.VIEW_CURRENT_REPORT }}"
-             track-properties="{ reportName: report.title }">
+          <a target="_blank" ng-href="{{ report.url }}" nxg-track="{{report.metric}}">
             {{ report.title }}
           </a>
         </li>
@@ -20,10 +18,10 @@
 
         <div class="form-row">
           <label for="curtailmentDate" translate>Date</label>
-          <input id="curtailmentDate" name="curtailmentDate" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DATE_INPUT}}" nxg-date-field date-allow="future"  ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
+          <input id="curtailmentDate" name="curtailmentDate" nxg-date-field date-allow="future" ng-model="data.curtailmentDate" ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }" required />
         </div>
         <div class="form-row button-group">
-          <button type="submit" class="btn" ng-click="viewCurtailment()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_CURTAILMENT_PAYOFF_QUOTE_BUTTON}}" translate>View Report</button>
+          <button type="submit" class="btn" ng-click="viewCurtailment()" translate>View Report</button>
         </div>
 
         <div class="form-row">
@@ -93,7 +91,7 @@
         </div>
 
         <div class="form-row button-group">
-          <button type="submit" class="btn" ng-click="viewDealerStatement()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DEALER_STATEMENT_BUTTON}}" translate>View Report</button>
+          <button type="submit" class="btn" ng-click="viewDealerStatement()" translate>View Report</button>
         </div>
       </form>
 
@@ -108,7 +106,7 @@
 					<input id="disDate" name="disDate" nxg-date-field date-allow="past" ng-model="data.disDate" ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }" required />
         </div>
         <div class="form-row button-group">
-          <button type="submit" class="btn" ng-click="viewDisbursementDetail()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_DISBURSEMENT_DETAIL_BUTTON}}" translate>View Report</button>
+          <button type="submit" class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
         </div>
         <div class="form-row">
           <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date" translate>
@@ -157,7 +155,7 @@
         <div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
 
         <div class="form-row button-group">
-          <button type="submit" class="btn" ng-click="viewPaidOffSummary()" nxg-track="{{metric.CLICK_VIEW_A_REPORT_PAID_OFF_SUMMARY_VIEW_REPORT}}" translate>View Report</button>
+          <button type="submit" class="btn" ng-click="viewPaidOffSummary()" translate>View Report</button>
         </div>
 
       </form>

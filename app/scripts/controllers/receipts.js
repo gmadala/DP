@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, segmentio, metric, api, gettextCatalog) {
-
-    segmentio.track(metric.VIEW_RECEIPTS_PAGE);
-    $scope.metric = metric; // make metric names available to template
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, api, gettextCatalog) {
 
     var lastPromise;
     var maxReceipts = 20;

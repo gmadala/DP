@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, $location, User, ProfileSettings) {
+  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, segmentio, metric, $location, User, ProfileSettings) {
     var securityQuestions;
 
     User.getSecurityQuestions().then(function(questions){
@@ -60,6 +60,7 @@ angular.module('nextgearWebApp')
       }
 
       ProfileSettings.saveSecurityAnswers(questions).then(function() {
+        segmentio.track(metric.SECURITY_QUESTIONS_COMPLETED);
         //success
         User.clearUserInitRequired();
         $location.path('/home');

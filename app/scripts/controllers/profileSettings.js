@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings, segmentio, metric, User) {
-    if(User.isDealer()) {
-      segmentio.track(metric.VIEW_PROFILE_SETTINGS);
-    }
+  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings) {
 
     $scope.loading = false;
 
@@ -35,11 +32,6 @@ angular.module('nextgearWebApp')
         if (!this.isDirty()) {
           this.cancel();
           return false;
-        }
-        if(User.isDealer()) {
-          segmentio.track(metric.CHANGE_PROFILE_SETTINGS);
-        } else {
-          segmentio.track(metric.CHANGE_AUCTION_SETTINGS);
         }
         return true;
       },

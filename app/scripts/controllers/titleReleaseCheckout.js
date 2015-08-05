@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, segmentio, metric, gettextCatalog) {
-
-    segmentio.track(metric.VIEW_TITLE_RELEASE_CHECKOUT_PAGE);
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
