@@ -4,12 +4,12 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
   beforeEach(module('nextgearWebApp'));
 
-  var settingsData, ProfileSettingsMock, scope, LoginUpdateSecurityCtrl, userData, UserMock, locationMock;
+  var settingsData, ProfileSettingsMock, scope, LoginUpdateSecurityCtrl, userData, UserMock, locationMock, $httpBackend;
 
   function noop() {
   }
 
-  beforeEach(inject(function($rootScope, $controller) {
+  beforeEach(inject(function($rootScope, $controller,_$httpBackend_) {
 
     settingsData = {
       Username: '10264DG',
@@ -99,6 +99,8 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       'q2_res': 'Harry Potter'
     };
 
+    $httpBackend = _$httpBackend_;
+
   }));
 
   describe('questions', function() {
@@ -139,6 +141,10 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
   });
 
   describe('submitForm', function() {
+
+    beforeEach(function() {
+      $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
+    });
 
     it('should be defined', function() {
       expect(scope.submitForm).toBeDefined();

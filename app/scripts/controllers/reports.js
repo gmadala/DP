@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog) {
+  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog, kissMetricInfo) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -57,7 +57,11 @@ angular.module('nextgearWebApp')
         strUrl += 'forVin_' + encodedVin + '/' + encodedVin;
       }
 
-      segmentio.track(metric.DEALER_REPORT_DEALER_STATEMENT);
+      kissMetricInfo.getKissMetricInfo().then(
+        function(result){
+          segmentio.track(metric.DEALER_REPORT_DEALER_STATEMENT,result);
+        }
+      );
 
       window.open(
         api.contentLink(strUrl, {}),
@@ -81,7 +85,11 @@ angular.module('nextgearWebApp')
         {}
       );
 
-      segmentio.track(metric.DEALER_REPORTS_DISBURSEMENT_DETAIL);
+      kissMetricInfo.getKissMetricInfo().then(
+        function(result){
+          segmentio.track(metric.DEALER_REPORTS_DISBURSEMENT_DETAIL,result);
+        }
+      );
 
       window.open(
         strUrl,
@@ -124,7 +132,11 @@ angular.module('nextgearWebApp')
         params
       );
 
-      segmentio.track(metric.DEALER_REPORTS_PAID_OFF_SUMMARY);
+      kissMetricInfo.getKissMetricInfo().then(
+        function(result){
+          segmentio.track(metric.DEALER_REPORTS_PAID_OFF_SUMMARY,result);
+        }
+      );
 
       window.open(
         strUrl,
@@ -147,7 +159,11 @@ angular.module('nextgearWebApp')
         {}
       );
 
-      segmentio.track(metric.DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE);
+      kissMetricInfo.getKissMetricInfo().then(
+        function(result){
+          segmentio.track(metric.DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE,result);
+        }
+      );
 
       window.open(
         strUrl,
