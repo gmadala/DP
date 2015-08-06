@@ -6,13 +6,35 @@ describe('Controller: FinancialAccountCtrl', function () {
     AccountManagementMock,
     scope,
     dialog,
+    segmentio,
+    $controller,
+    $rootScope,
+    $q,
     bankAccount,
-    bankId;
+    bankId,
+
+    // Constants
+    DEALER_ADD_BANK_ACCOUNT = 'Dealer - Add Bank Account',
+    DEALER_EDIT_BANK_ACCOUNT = 'Dealer - Edit Bank Account';
 
   beforeEach(module('nextgearWebApp'));
 
+  beforeEach(inject(function(_$controller_, _$rootScope_, _$q_) {
+    $controller = _$controller_;
+    $rootScope = _$rootScope_;
+    $q = _$q_;
+
+    dialog = {
+      close: angular.noop
+    };
+
+    segmentio = {
+      track: angular.noop
+    }
+  }));
+
   describe('editing financial account', function () {
-    beforeEach(inject(function ($controller, $rootScope, $q) {
+    beforeEach(function () {
 
       bankAccount = {
         'AccountId': '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
@@ -25,10 +47,6 @@ describe('Controller: FinancialAccountCtrl', function () {
         'IsDefaultPayment': true,
         'IsDefaultDisbursement': true,
         'AccountNumber': '4199137905'
-      };
-
-      dialog = {
-        close: angular.noop
       };
 
       AccountManagementMock = {
@@ -45,6 +63,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         $scope: scope,
         AccountManagement: AccountManagementMock,
         dialog: dialog,
+        segmentio: segmentio,
         options: {
           account: bankAccount,
           defaultForBilling: true,
@@ -52,7 +71,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           modal: 'edit'
         }
       });
-    }));
+    });
 
     it('should be recognized as an edit modal', function() {
       expect(scope.isAddModal).toBeFalsy();
@@ -127,36 +146,29 @@ describe('Controller: FinancialAccountCtrl', function () {
         expect(scope.account.AccountName).toBe(original);
       });
 
-      it('should set accountName to \'bankName\' - \'accountNumberLast4\'',function () {
+      it('should set accountNameDisplay to \'accountNumberLast4\' - \'bankName\' ',function () {
         scope.account.BankName = 'Chase Bank';
         scope.account.AccountNumber = '1234';
         scope.$digest();
 
         expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
       });
+
+      it('should fire a metric if edit is successful', function() {
+        spyOn(segmentio, 'track').andCallThrough();
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(segmentio.track).toHaveBeenCalledWith(DEALER_EDIT_BANK_ACCOUNT);
+      });
     });
   });
 
   describe('adding financial account', function () {
-    beforeEach(inject(function ($controller, $rootScope, $q) {
-
-      bankAccount = {
-        'AccountName': 'JP Morgan Chase Bank - 7905',
-        'BankName': 'JP Morgan Chase Bank',
-        'IsActive': true,
-        'RoutingNumber': '349886738',
-        'City': 'Phoenix',
-        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
-        'IsDefaultPayment': true,
-        'IsDefaultDisbursement': true,
-        'AccountNumber': '4199137905'
-      };
+    beforeEach(function () {
 
       bankId = '9e05f8c9-2e3b-4f80-a346-00004bceacb1';
-
-      dialog = {
-        close: angular.noop
-      };
 
       AccountManagementMock = {
         addBankAccount: function () {
@@ -169,6 +181,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         $scope: scope,
         AccountManagement: AccountManagementMock,
         dialog: dialog,
+        segmentio: segmentio,
         options: {
           modal: 'add',
           account : {
@@ -180,7 +193,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           }
         }
       });
-    }));
+    });
 
     it('should be recognized as an edit modal', function() {
       expect(scope.isAddModal).toBeTruthy();
@@ -200,13 +213,6 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.account.State).toBeUndefined();
     });
 
-    it('should set accountNameDisplay to \'accountNumberLast4\' - \'bankName\'',function () {
-      scope.account.BankName = 'Chase Bank';
-      scope.account.AccountNumber = '1234';
-      scope.$digest();
-
-      expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
-    });
 
     it('should not set accountNameDisplay if bankName and accountNumber are not set correctly', function () {
       scope.account.BankName = '';
@@ -429,6 +435,15 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.$apply();
 
         expect(dialog.close).toHaveBeenCalled();
+      });
+
+      it('should fire a metric if add is successful', function() {
+        spyOn(segmentio, 'track').andCallThrough();
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(segmentio.track).toHaveBeenCalledWith(DEALER_ADD_BANK_ACCOUNT);
       });
     });
   });

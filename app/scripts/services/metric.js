@@ -39,5 +39,10 @@ angular.module('nextgearWebApp')
     CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN Without Zip Lookup Button',
     CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON: 'Click Value Lookup NGC Lookup Button',
     CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON: 'Click Value Lookup MMR Lookup Button',
-    CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON: 'Click Value Lookup KBB Lookup Button'
+    CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON: 'Click Value Lookup KBB Lookup Button',
+
+    //Account Management Events
+    DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE: 'Dealer - View Account Management Page',
+    DEALER_ADD_BANK_ACCOUNT: 'Dealer - Add Bank Account',
+    DEALER_EDIT_BANK_ACCOUNT: 'Dealer - Edit Bank Account'
   });

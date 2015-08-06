@@ -2,7 +2,9 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
-                                                User, api, $q, dealerCustomerSupportPhone, features) {
+                                                User, api, $q, dealerCustomerSupportPhone, features, segmentio, metric) {
+
+    segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
 
     // TODO remove this once bank accounts content is all done - just mark these for translation in advance
     gettext('Add payment account');
@@ -211,10 +213,20 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          /**
+           * Determines if the current user should be allowed to add a bank account.
+           * @return {Boolean} Is the user allowed to add a bank account?
+           */
           isAddBankAccountEditable: function() {
             return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
+          /**
+           * Updates the local financial account data to keep consistent with
+           * the endpoint data.
+           * @param  {Object} updatedAccount A bank account that was added.
+           * @return {void}
+           */
           updateFinancialAccounts: function(updatedAccount) {
             var accNumber = updatedAccount.AccountNumber,
               processedBankAccount = {
@@ -229,6 +241,11 @@ angular.module('nextgearWebApp')
 
             $scope.financial.data.bankAccounts.unshift(processedBankAccount);
           },
+          /**
+           * Opens the add bank account modal and processes the bank account if
+           * one is submitted
+           * @return {void}
+           */
           addFinancialAccount: function() {
             var dialogOptions = {
               dialogClass: 'modal',
@@ -252,7 +269,17 @@ angular.module('nextgearWebApp')
               controller: 'FinancialAccountCtrl'
             };
 
-            $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
+            $dialog.dialog(dialogOptions).open()
+              .then(updateLocalFinancialData);
+
+            /**
+             * Helper function: Propogate bank account changes to local data to
+             * keep consistent with endpoint data.
+             * @param  {Object} updatedAccount Bank account that was added to
+             * endpoint.
+             * @return {void}
+             */
+            function updateLocalFinancialData (updatedAccount) {
               if(updatedAccount) {
                 // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
                 User.refreshInfo();
@@ -266,7 +293,7 @@ angular.module('nextgearWebApp')
                 // Update local data
                 $scope.financial.updateFinancialAccounts(updatedAccount);
               }
-            });
+            }
           }
         };
 
