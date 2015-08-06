@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard, segmentio, metric, api, $state) {
+  .controller('AuctionDashboardCtrl', function($scope, Dashboard, api, $state) {
 
-    segmentio.track(metric.VIEW_DASHBOARD);
     $scope.dashboardData = {};
     Dashboard.fetchAuctionDashboard().then(function(data) {
       $scope.dashboardData = data;
@@ -59,9 +58,5 @@ angular.module('nextgearWebApp')
         strUrl,
         '_blank'  // open a new window every time
       );
-
-      segmentio.track(metric.VIEW_HISTORICAL_REPORT, {
-        reportName: 'Disbursement Detail'
-      });
     };
   });

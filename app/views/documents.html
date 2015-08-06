@@ -11,16 +11,12 @@
     <div class="well-item">
       <ul class="text-list zeroLeftPadding">
         <li>
-          <a ng-href="{{ feeScheduleUrl }}" target="_blank"
-             nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
-             track-properties="{ documentName: 'Rates and Fees' }" translate>
+          <a ng-href="{{ feeScheduleUrl }}" target="_blank" translate>
             Rates and Fees
           </a>
         </li>
         <li ng-repeat="doc in documents">
-          <a ng-href="{{ doc.url }}" target="_blank"
-             nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
-             track-properties="{ documentName: doc.title }">
+          <a ng-href="{{ doc.url }}" target="_blank">
             {{ doc.title }}
           </a>
         </li>
@@ -28,9 +24,7 @@
       <h4 translate>Collateral Protection Program</h4>
       <ul class="text-list zeroLeftPadding">
         <li ng-repeat="doc in collateralProtection">
-          <a ng-href="{{ doc.url }}" target="_blank"
-             nxg-track="{{ metric.VIEW_RESOURCE_DOCUMENT }}"
-             track-properties="{ documentName: doc.title }">
+          <a ng-href="{{ doc.url }}" target="_blank">
             {{ doc.title }}
           </a>
         </li>
@@ -44,14 +38,12 @@
       <p translate>Manage your business with NextGear Capital on the go.</p>
       <ul class="text-list zeroLeftPadding">
         <li>
-          <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8" target="_blank"
-             nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}"
-             track-properties="{ MobileOS: 'iOS (iTunes)' }" translate>
+          <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8" target="_blank" translate>
               Download NextGear Capital Mobile iOS
           </a>
         </li>
         <li>
-          <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile" target="_blank" nxg-track="{{ metric.DOWNLOAD_MOBILE_APP }}" track-properties="{ MobileOS: 'Android (Google Play)' }" translate>
+          <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile" target="_blank" translate>
             Download NextGear Capital Mobile Android
           </a>
         </li>

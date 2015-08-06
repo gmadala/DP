@@ -17,9 +17,7 @@ angular.module('nextgearWebApp')
           scope.onCancelScheduledPayment = null;
         }
       },
-      controller: function($scope, $dialog, Payments, metric, PaymentOptions) {
-        //set on $rootScope, but for some reason, not available unless explicitly set here
-        $scope.metric = metric;
+      controller: function($scope, $dialog, Payments, PaymentOptions) {
 
         $scope.paymentInProgress = function() {
           return Payments.paymentInProgress();

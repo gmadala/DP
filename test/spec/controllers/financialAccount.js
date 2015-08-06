@@ -54,6 +54,11 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
     }));
 
+    it('should be recognized as an edit modal', function() {
+      expect(scope.isAddModal).toBeFalsy();
+      expect(scope.isEditModal).toBeTruthy();
+    });
+
     it('should remove digit other than last 4 digit of account number', function () {
       expect(scope.accountNumberDisplay).toMatch(/\D+\d{4}$/);
     });
@@ -76,8 +81,6 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.financialAccountForm = {
           $valid: true
         };
-        scope.confirmAccountNumberValid = true;
-        scope.inputs.confirmAccountNumber = '4199137905';
       });
 
       it('should close when close function is called', function () {
@@ -169,22 +172,30 @@ describe('Controller: FinancialAccountCtrl', function () {
         options: {
           modal: 'add',
           account : {
+            AccountNumber: '',
             IsActive: false,
             IsDefaultDisbursement: false,
-            IsDefaultPayment: false
+            IsDefaultPayment: false,
+            TOSAcceptanceFlag: false
           }
         }
       });
     }));
 
-    it('should have empty fields', function() {
+    it('should be recognized as an edit modal', function() {
+      expect(scope.isAddModal).toBeTruthy();
+      expect(scope.isEditModal).toBeFalsy();
+    });
+
+    it('should have empty or default fields', function() {
       expect(scope.account.AccountName).toBeUndefined();
-      expect(scope.account.AccountNumber).toBeUndefined();
+      expect(scope.account.AccountNumber).toBe('');
       expect(scope.account.BankName).toBeUndefined();
       expect(scope.account.City).toBeUndefined();
       expect(scope.account.IsActive).toBeFalsy();
       expect(scope.account.IsDefaultDisbursement).toBeFalsy();
       expect(scope.account.IsDefaultPayment).toBeFalsy();
+      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
       expect(scope.account.RoutingNumber).toBeFalsy();
       expect(scope.account.State).toBeUndefined();
     });
@@ -245,13 +256,32 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.routingNumberRegex.test('123456789')).toBe(true);
     });
 
+    it('should have the checkbox disabled on default', function () {
+      expect(scope.tosVisited).toBe(false);
+    });
+
+    it('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
+      spyOn(scope, 'visitTOS').andCallThrough();
+
+      scope.visitTOS();
+
+      expect(scope.visitTOS).toHaveBeenCalled();
+      expect(scope.tosVisited).toBeTruthy();
+      expect(scope.account.TOSAcceptanceFlag).toBeTruthy();
+
+      scope.account.TOSAcceptanceFlag = false;
+      scope.visitTOS();
+
+      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
+    });
+
     describe('the dialog', function() {
       beforeEach(function() {
         scope.financialAccountForm = {
           $valid: true
         };
 
-        scope.confirmAccountNumberValid = true;
+        scope.account.TOSAcceptanceFlag = true;
       });
 
       it('should not close if the form is not valid', function () {
@@ -377,6 +407,28 @@ describe('Controller: FinancialAccountCtrl', function () {
 
         expect(dialog.close).toHaveBeenCalled();
         expect(scope.account.AccountName).toBe('Chase Bank');
+      });
+
+      it('should not close if TOSAcceptance flag is not true', function () {
+        spyOn(dialog, 'close').andCallThrough();
+
+        scope.account.TOSAcceptanceFlag = false;
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(dialog.close).not.toHaveBeenCalled();
+      });
+
+      it('should close if TOSAcceptance flag is true', function () {
+        spyOn(dialog, 'close').andCallThrough();
+
+        scope.account.TOSAcceptanceFlag = true;
+
+        scope.confirmRequest();
+        scope.$apply();
+
+        expect(dialog.close).toHaveBeenCalled();
       });
     });
   });
