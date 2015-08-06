@@ -228,7 +228,7 @@ msgstr ""
 
 #: app/views/account_management.html
 msgid "Add Account"
-msgstr ""
+msgstr "Agregar cuenta"
 
 #: app/views/vehicledetails.html
 msgid "Add Additional Principal?"
@@ -271,11 +271,11 @@ msgstr "Dirección"
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Address 1"
-msgstr ""
+msgstr "Dirección 1"
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Address 2"
-msgstr ""
+msgstr "Dirección 2"
 
 #: app/scripts/controllers/reports.js
 msgid "All"
@@ -658,7 +658,7 @@ msgstr "Confirmar"
 
 #: app/views/modals/financialAccount.html
 msgid "Confirm Account Number"
-msgstr ""
+msgstr "Confirmar número de cuenta"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Confirm Changes"
@@ -883,7 +883,7 @@ msgstr "Grupos de desembolso"
 
 #: app/views/modals/financialAccount.html
 msgid "Does not match with account number."
-msgstr ""
+msgstr "No coincide con el número de cuenta."
 
 #: app/views/documents.html
 msgid "Download NextGear Capital Mobile Android"
@@ -1271,6 +1271,8 @@ msgid ""
 "I have reviewed and agree to the Authorization and Request for Automated "
 "Payments."
 msgstr ""
+"Revisé la Autorización y solicitud de pagos automáticos y estoy de acuerdo "
+"con ella."
 
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
@@ -1451,6 +1453,8 @@ msgstr "Seleccione"
 msgid ""
 "Make payments today or schedule your payments when you checkout.<br><br>"
 msgstr ""
+"Realice sus pagos hoy o programe sus pagos cuando esté listo para facturar."
+"<br><br>"
 
 #: app/views/documents.html
 msgid "Manage your business with NextGear Capital on the go."
@@ -1890,7 +1894,7 @@ msgstr "Por favor, seleccione una línea de crédito."
 
 #: app/views/modals/financialAccount.html
 msgid "Please confirm the account number."
-msgstr ""
+msgstr "Confirme el número de cuenta."
 
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below."
@@ -1994,7 +1998,7 @@ msgstr "Por favor, capture el año."
 
 #: app/views/modals/financialAccount.html
 msgid "Please enter a bank name."
-msgstr ""
+msgstr "Escriba el nombre del banco."
 
 #: app/views/modals/businessSearch.html
 msgid "Please enter a business name or number to search."
@@ -2003,7 +2007,7 @@ msgstr ""
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Please enter a city."
-msgstr ""
+msgstr "Escriba la ciudad."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please enter a four-digit Year."
@@ -2048,11 +2052,11 @@ msgstr ""
 
 #: app/views/modals/financialAccount.html
 msgid "Please enter a routing number."
-msgstr ""
+msgstr "Escriba el número de enrutamiento."
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Please enter a state."
-msgstr ""
+msgstr "Escriba el estado."
 
 #: app/views/login.html
 msgid "Please enter a username."
@@ -2086,7 +2090,7 @@ msgstr "Por favor, ingrese un número de teléfono válido."
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Please enter a valid street address."
-msgstr ""
+msgstr "Escriba una dirección válida."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please enter a value less than $1,000,000,000,000."
@@ -2122,11 +2126,11 @@ msgstr ""
 
 #: app/views/modals/financialAccount.html
 msgid "Please enter an account number."
-msgstr ""
+msgstr "Escriba el número de cuenta."
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Please enter an address."
-msgstr ""
+msgstr "Escriba la dirección."
 
 #: app/views/login.updateSecurity.html
 msgid "Please enter an answer that is no more than 100 characters long."
@@ -2544,7 +2548,7 @@ msgstr "Número de enrutamiento"
 
 #: app/views/modals/financialAccount.html
 msgid "Routing number must only have 9 numbers."
-msgstr ""
+msgstr "El número de enrutamiento solo debe tener 9 números."
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -3221,7 +3225,7 @@ msgstr "Detalles de la transacción"
 
 #: app/scripts/filters/routingNumber.js
 msgid "Transit/Institution Number"
-msgstr ""
+msgstr "Número de tránsito / institución"
 
 #: app/views/checkout.html
 msgid "Unable to Schedule"
@@ -3560,18 +3564,24 @@ msgid ""
 "You are about to enroll in ProperNounTBD. Please review the Authorization "
 "and Request for Automated Payments below."
 msgstr ""
+"Está a punto de registrarse en ProperNounTBD. Revise la Autorización y "
+"solicitud de pagos automáticos que aparece a continuación."
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid ""
 "You are about to unenroll from ProperNounTBD. Please review the "
 "Authorization and Request for Automated Payments below."
 msgstr ""
+"Está a punto de cancelar su inscripción en ProperNounTBD. Revise la "
+"Autorización y solicitud de pagos automáticos que aparece a continuación."
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid ""
 "You are enrolled in ProperNounTBD. All payments will be processed "
 "automatically on their due date."
 msgstr ""
+"Ya está registrado en ProperNounTBD. Todos los pagos se procesarán de forma "
+"automática en la fecha de vencimiento."
 
 #: app/views/receipts.html
 msgid ""
@@ -3708,7 +3718,7 @@ msgstr "Código postal"
 
 #: app/scripts/directives/nxgAddress/nxgAddress.html
 msgid "Zip Code"
-msgstr ""
+msgstr "Código postal"
 
 #: app/404.html
 msgid "a mistyped address"
@@ -3840,7 +3850,7 @@ msgstr ""
 
 #: app/views/modals/financialAccount.html
 msgid "{{account.AccountId ? 'Edit' : 'Add'}} Financial Account"
-msgstr ""
+msgstr "{{account.AccountId ? 'Editar' : 'Agregar'}} Cuenta Financiera"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
