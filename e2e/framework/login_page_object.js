@@ -8,7 +8,7 @@ LoginPage.prototype = Object.create({}, {
 
   //Locators
   loginUrl: {
-    value: 'http://localhost:9000/#/login'
+    value: '#/login'
   },
 
   loginButton: {
@@ -87,7 +87,7 @@ LoginPage.prototype = Object.create({}, {
 
   doRememberUsername: {
     value: function () {
-      this.rememberUsernameCheckbox.click();
+      browser.driver.actions().click(this.rememberUsernameCheckbox).perform();
       browser.waitForAngular();
     }
   },

@@ -11,6 +11,7 @@
 test/coverage
 libpeerconnection.log
 /app/styles/main.css
+/app/styles/main-blessed1.css
 npm-debug.log
 *.iml
 /target

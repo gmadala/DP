@@ -275,6 +275,10 @@ angular.module('nextgearWebApp')
           // always return the same array object so that this can be used in a binding
           return paySellerOptions;
         });
+      },
+
+      setAutoPayEnabled: function(autoPayEnabled){
+        info.AutoPayEnabled = autoPayEnabled;
       }
     };
   });

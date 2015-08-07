@@ -1,10 +1,6 @@
-/**
- * Created by gayathrimadala on 1/5/15.
- */
-
 'use strict';
-var HelperObject = require('../framework/helper_object');
-var AccMgtlObject = require('../framework/account_management_page_object.js');
+var HelperObject = require('../../framework/helper_object');
+var AccMgtlObject = require('../../framework/account_management_page_object.js');
 
 var helper = new HelperObject();
 var accMgtPage = new AccMgtlObject();
@@ -57,6 +53,7 @@ helper.describe('WMT-87', function () {
 
     var requestCreditIncrease = function () {
       accMgtPage.goTorequestCreditIncrease();
+      helper.waitForElementDisplayed(accMgtPage.creditExtend);
       expect(accMgtPage.creditExtend.isDisplayed()).toBeTruthy();
       expect(accMgtPage.isNotTemporary.isDisplayed()).toBeTruthy();
       expect(accMgtPage.selectAmount.isDisplayed()).toBeTruthy();
@@ -98,8 +95,10 @@ helper.describe('WMT-87', function () {
       expect(accMgtPage.businessEmailInput.isDisplayed()).toBeTruthy();
       accMgtPage.goToEnhancedYes();
       expect(accMgtPage.registrationEnabledText.isDisplayed()).toBeTruthy();
-      expect(accMgtPage.paragraphOne.isDisplayed()).toBeTruthy();
-      expect(accMgtPage.paragraphTwo.isDisplayed()).toBeTruthy();
+      expect(accMgtPage.enhancedRegistrationPIN.isDisplayed()).toBeTruthy();
+      // TODO: (protractor) disabling the two expectation as the page layout changed to tooltip.
+      // expect(accMgtPage.paragraphOne.isDisplayed()).toBeTruthy();
+      // expect(accMgtPage.paragraphTwo.isDisplayed()).toBeTruthy();
     };
 
     it('should check for the Financial Accounts - No Editing', function () {

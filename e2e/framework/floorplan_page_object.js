@@ -1,6 +1,3 @@
-/**
- * Created by gayathrimadala on 12/23/14.
- */
 'use strict';
 
 var FloorPlanObject = function () {

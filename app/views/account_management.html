@@ -2,7 +2,7 @@
   <section class="col-md-12 well settings-well financial-table">
     <h2 class="well-title no-bottom-border">
       <span translate>Financial Accounts</span>
-      <div class="well-subtitle well-subtitle-edit pull-right" ng-show="addBankAccountEnabled">
+      <div class="well-subtitle well-subtitle-edit pull-right" ng-show="financial.isAddBankAccountEditable()">
         <button class="btn-unstyle heavy" ng-click="financial.addFinancialAccount()" translate>Add Account</button>
       </div>
     </h2>
@@ -10,7 +10,9 @@
       <nxg-financial-account account="account" disbursement-account="financial.data.disbursementAccount"
                              billing-account="financial.data.billingAccount"
                              update-billing-account="updateBillingAccount(billingAccountId)"
-                             update-disbursement-account="updateDisbursementAccount(disbursementAccountId)">
+                             update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                             is-stakeholder-active="business.data.isStakeholderActive"
+                             is-united-states="isUnitedStates">
       </nxg-financial-account>
     </div>
   </section>

@@ -8,8 +8,12 @@ describe('Controller: AccountManagementCtrl', function () {
   var AccountManagementCtrl,
     scope,
     settingsData,
+    filledBankAccount,
+    updatedBankData,
     AddressesMock,
-    AccountManagementMock;
+    AccountManagementMock,
+    dialogMock,
+    UserMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q) {
@@ -31,6 +35,31 @@ describe('Controller: AccountManagementCtrl', function () {
       IsQuickBuyer: false,
       UseAutoACH: true
     };
+
+    filledBankAccount = {
+      AccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',
+      AccountName: '789 - Chase Bank',
+      AccountNumber: '789',
+      BankName: 'Chase Bank',
+      City: 'Indianapolis',
+      IsActive: true,
+      IsDefaultDisbursement: true,
+      IsDefaultPayment: true,
+      RoutingNumber: '123456789',
+      State: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3'
+    };
+
+    updatedBankData = [
+      {
+        BankAccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',
+        BankAccountName: '789 - Chase Bank',
+        AchAccountNumberLast4: '789',
+        IsActive: true,
+        AchAbaNumber: '123456789',
+        AchBankName: 'Chase Bank',
+        AllowPaymentByAch: true
+      }
+    ];
 
     AccountManagementMock = {
       get: function() {
@@ -73,12 +102,35 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     };
 
+    dialogMock = {
+      dialog: function() {
+        return {
+          open: function() {
+            return $q.when(filledBankAccount);
+          }
+        };
+      }
+    };
+
+    UserMock = {
+      isDealer: function() {
+        return null;
+      },
+      isUnitedStates: function() {
+        return null;
+      },
+      refreshInfo: angular.noop,
+      setAutoPayEnabled: angular.noop
+    };
+
     scope = $rootScope.$new();
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
+      $dialog: dialogMock,
       AccountManagement: AccountManagementMock,
       Addresses: AddressesMock,
-      dealerCustomerSupportPhone: mockCustomerSupportPhone
+      dealerCustomerSupportPhone: mockCustomerSupportPhone,
+      User: UserMock
     });
   }));
 
@@ -200,6 +252,74 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
     });
 
+    describe('financial', function() {
+      beforeEach(function() {
+        scope.financial.data.bankAccounts = [];
+      });
+
+      it('add bank account should be enabled only for active stakeholders', function () {
+
+        // TODO modify all the expectations once the add bank account feature is enabled
+        scope.business.data.isStakeholderActive = true;
+        scope.business.data.isStakeholder = true;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+        scope.business.data.isStakeholderActive = true;
+        scope.business.data.isStakeholder = false;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+        scope.business.data.isStakeholderActive = false;
+        scope.business.data.isStakeholder = true;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+        scope.business.data.isStakeholderActive = false;
+        scope.business.data.isStakeholder = false;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+      });
+
+      // TODO modify all the expectations once the add bank account feature is enabled.
+      // TODO modify second expectation to true once add Bank Account is released to Canada.
+      it('add bank account should be enabled for US only.', function() {
+        scope.business.data.isStakeholderActive = true;
+        scope.business.data.isStakeholder = true;
+        scope.isUnitedStates = false;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+
+        scope.business.data.isStakeholderActive = true;
+        scope.business.data.isStakeholder = true;
+        scope.isUnitedStates = true;
+
+        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+      });
+
+      it('add bank account should update local financial data', function() {
+        spyOn(scope.financial, 'addFinancialAccount').andCallThrough();
+
+        scope.financial.addFinancialAccount();
+        // Resolve promise
+        scope.$apply();
+
+        expect(scope.financial.data.bankAccounts).toEqual(updatedBankData);
+
+        expect(scope.financial.data.disbursementAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
+        expect(scope.financial.data.billingAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
+      });
+
+      it('addFinancialAccount should call User.refreshInfo.', function() {
+        spyOn(UserMock, 'refreshInfo').andCallFake(angular.noop);
+
+        scope.financial.addFinancialAccount();
+        scope.$apply();
+
+        expect(UserMock.refreshInfo).toHaveBeenCalled();
+      });
+    });
+
     describe('save()', function(){
       var savingBusiness, validateResult;
       beforeEach(function() {
@@ -220,13 +340,6 @@ describe('Controller: AccountManagementCtrl', function () {
           };
         };
         scope.business.edit();
-      });
-
-      it('should define dirtyData and set editable to false', function() {
-        scope.business.save();
-
-        expect(scope.business.dirtyData).toBeDefined();
-        expect(scope.business.editable).toBe(false);
       });
 
       it('should not change if not in editing mode', function() {

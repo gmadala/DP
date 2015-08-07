@@ -45,17 +45,20 @@
     }
   }
 }
-.medium-left-padding {
-  padding-left: 15px;
-}
 .small-padding {
   padding: 7px;
 }
 .no-left-padding {
   padding:  0;
 }
+.medium-left-padding {
+  padding-left: 15px;
+}
 .no-right-padding {
   padding-right: 0;
+}
+.small-right-padding {
+  padding-right: 3%;
 }
 .small-top-margin {
   margin-top: 3%;
@@ -68,4 +71,8 @@
 }
 .smallest-left-margin {
   margin-left: 1%;
+}
+.text-height {
+  height: 14px;
+  overflow: hidden;
 }

@@ -31,11 +31,12 @@ describe('Directive: nxgBusinessField', function () {
         }
       });
 
+      timeout.cancel = jasmine.createSpy();
+
       $provide.provider('$timeout', function() {
         this.$get = function() {
           return timeout;
         };
-
       });
 
     });

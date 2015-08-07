@@ -125,7 +125,8 @@ describe('Directive: nxgMax', function () {
         scope.settings.maxAllowed = 150;
       });
 
-      expect(scope.model.data).toBe('101');
+      form.input.$setViewValue('100');
+      expect(scope.model.data).toBe('100');
       expect(form.input.$valid).toBe(true);
 
       form.input.$setViewValue('120.23');

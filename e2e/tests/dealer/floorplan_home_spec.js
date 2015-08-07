@@ -1,11 +1,8 @@
-/**
- * Created by gayathrimadala on 12/29/14.
- */
 'use strict';
 
-var HelperObject = require('../framework/helper_object');
-var FloorPlanObject = require('../framework/floorplan_page_object.js');
-var CredentialsObject = require('../framework/credentials_page_object.js');
+var HelperObject = require('../../framework/helper_object');
+var FloorPlanObject = require('../../framework/floorplan_page_object.js');
+var CredentialsObject = require('../../framework/credentials_page_object.js');
 
 var helper = new HelperObject();
 var credPage = new CredentialsObject();

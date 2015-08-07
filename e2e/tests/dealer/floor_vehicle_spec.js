@@ -1,10 +1,7 @@
-/**
- * Created by gayathrimadala on 1/6/15.
- */
-
 'use strict';
-var HelperObject = require('../framework/helper_object');
-var FlooringVehicleObject = require('../framework/floor_vehicle_page_object');
+
+var HelperObject = require('../../framework/helper_object');
+var FlooringVehicleObject = require('../../framework/floor_vehicle_page_object');
 
 var helper = new HelperObject();
 var floorVehiclePage = new FlooringVehicleObject();

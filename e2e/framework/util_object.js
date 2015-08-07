@@ -8,14 +8,15 @@ UtilObject.prototype = Object.create({}, {
   // common functionality for all the forms
   logoutnothanksbutton: {
     get: function () {
-      return browser.element(by.css('[ng-click="close(false)"]'));
-
+      var modal = browser.element(by.css('.modal'));
+      return modal.element(by.cssContainingText('button', 'No'));
     }
   },
 
   logoutyesbutton: {
     get: function () {
-      return browser.element(by.css('[ng-click="close(true)"]'));
+      var modal = browser.element(by.css('.modal'));
+      return modal.element(by.cssContainingText('button', 'Yes'));
     }
   },
 
@@ -34,7 +35,8 @@ UtilObject.prototype = Object.create({}, {
 
   okbutton: {
     get: function () {
-      return browser.element(by.css('[ng-click="close(btn.result)"]'));
+      var modal = browser.element(by.css('.modal'));
+      return modal.element(by.css('button'));
     }
   },
 

@@ -1,7 +1,3 @@
-/**
- * Created by gayathrimadala on 1/5/15.
- */
-
 'use strict';
 
 var AccountManagementPageObject = function () {
@@ -161,12 +157,12 @@ AccountManagementPageObject.prototype = Object.create({}, {
   },
   enhancedYes: {
     get: function () {
-      return browser.element(by.id('enhancedYes'));    //browser.element(by.cssContainingText('span','Yes'));
+      return browser.element(by.css('label[for=enhancedYes]'));
     }
   },
   registrationEnabledText: {
     get: function () {
-      return browser.element(by.cssContainingText('span', 'Enhanced Registration Enabled?'));
+      return browser.element(by.cssContainingText('span', 'Enhanced Registration Enabled'));
     }
   },
   paragraphOne: {

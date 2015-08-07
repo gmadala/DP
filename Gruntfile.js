@@ -28,11 +28,9 @@ module.exports = function(grunt) {
   var counter = 0;
   var effectiveUsers = [];
   var users = [
-    ['non-mock', 'payments', '53190md', 'password@1'],
-    ['non-mock', 'receipts', '53190md', 'password@1'],
+    ['non-mock', 'dealer', '53190md', 'password@1'],
     ['non-mock', 'auction', '10264', 'password@1'],
-    ['mock', 'payments', 'dealer', 'test'],
-    ['mock', 'receipts', 'dealer', 'test'],
+    ['mock', 'dealer', 'dealer', 'test'],
     ['mock', 'auction', 'auction', 'test']
   ];
 
@@ -615,6 +613,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test:e2e', [
     'dev-setup',
     'shell:webdriverUpdate',
+    'livereload-start',
     'connect:livereload',
     'protractor:run'
   ]);
@@ -628,7 +627,7 @@ module.exports = function(grunt) {
     useDist = undefined;
 
     grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
-    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'connect:' + (useDist ? 'dist' : 'livereload'));
+    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'livereload-start', 'connect:' + (useDist ? 'dist' : 'livereload'));
     // find out which users configuration can be run based on the target of this grunt task.
     for (var j = 0; j < users.length; j++) {
       var user = users[j];

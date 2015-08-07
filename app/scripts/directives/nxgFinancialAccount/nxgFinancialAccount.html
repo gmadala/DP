@@ -7,13 +7,7 @@
           <li ng-show="defaultForDisbursement" translate>Disbursement</li>
         </ul>
       </div>
-      <div class="col-xs-3 text-left text-vertical-center">
-        <ul class="small-padding no-bottom-margin">
-          <li class="heavy" translate>Account Name</li>
-          <li>{{ descriptiveName }}</li>
-        </ul>
-      </div>
-      <div class="col-xs-3 text-left text-vertical-center">
+      <div class="col-xs-4 text-left text-vertical-center paired">
         <ul class="small-padding no-bottom-margin">
           <li class="heavy" translate>Bank Name</li>
           <li>{{ account.AchBankName }}</li>
@@ -21,8 +15,14 @@
       </div>
       <div class="col-xs-2 text-left text-vertical-center">
         <ul class="small-padding no-bottom-margin">
+          <li class="heavy" translate>Account Number</li>
           <li>******{{account.AchAccountNumberLast4}}</li>
-          <li>{{account.AchAbaNumber}}</li>
+        </ul>
+      </div>
+      <div class="col-xs-2 text-left text-vertical-center">
+        <ul class="small-padding no-bottom-margin">
+          <li class="heavy">{{routingNumberLabel}}</li>
+          <li>{{routingNumberDisplay}}</li>
         </ul>
       </div>
       <div class="col-xs-1 text-left text-vertical-center">
@@ -31,7 +31,7 @@
           <li>{{ status | translate }}</li>
         </ul>
       </div>
-      <div class="col-xs-1 pull-right icon-vertical-center icon-padding-right" ng-show="editBankAccountEnabled">
+      <div class="col-xs-1 pull-right icon-vertical-center icon-padding-right" ng-show="isEditable()">
         <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
           <span class="glyphicon glyphicon-edit"></span>
         </button>

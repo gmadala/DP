@@ -1,7 +1,7 @@
 'use strict';
-var HelperObject = require('../framework/helper_object');
-var ReceiptsPage = require('../framework/receipts_page_object');
-var DatepickerPageObject = require('../framework/datepicker_page_object.js');
+var HelperObject = require('../../framework/helper_object');
+var ReceiptsPage = require('../../framework/receipts_page_object');
+var DatepickerPageObject = require('../../framework/datepicker_page_object.js');
 
 var helper = new HelperObject();
 var receiptsPage = new ReceiptsPage();

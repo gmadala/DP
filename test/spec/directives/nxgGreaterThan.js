@@ -15,10 +15,8 @@ describe('Directive: nxgGreaterThan', function () {
 
     element = angular.element(
       '<form name="form">' +
-        '<input type="text" name="input" ng-model="model.data1" ' +
-        ' ></input>' +
-        '<input type="text" name="input2" ng-model="model.data2" ' +
-        ' nxg-greater-than="model.data1"></input>' +
+        '<input type="text" name="input" ng-model="model.data1">' +
+        '<input type="text" name="input2" ng-model="model.data2" nxg-greater-than="model.data1">' +
       '</form>'
     );
     element = $compile(element)(scope);
@@ -39,22 +37,23 @@ describe('Directive: nxgGreaterThan', function () {
     form.input.$setViewValue('12');
     form.input2.$setViewValue('123');
     scope.$digest();
-    expect(form.input2.$error.greaterThan).toBe(false);
+    // TODO: In 1.3.16, the greaterThan field will not gets added to the $error array unless they are set to false.
+    expect(form.input2.$error.greaterThan).toBe(undefined);
   });
 
   it('should set the input to valid if either input is empty', function() {
     form.input.$setViewValue('');
     form.input2.$setViewValue('12');
     scope.$digest();
-    expect(form.input2.$error.greaterThan).toBe(false);
-  })
+    expect(form.input2.$error.greaterThan).toBe(undefined);
+  });
 
   it('should set the input to valid if either input is empty', function() {
     form.input.$setViewValue('23');
     form.input2.$setViewValue('');
     scope.$digest();
-    expect(form.input2.$error.greaterThan).toBe(false);
-  })
+    expect(form.input2.$error.greaterThan).toBe(undefined);
+  });
 
 
 });

@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, features) {
+  function financialAccount(gettext, $dialog, AccountManagement, User, features, routingNumberFilter) {
 
     var directive;
     directive = {
@@ -19,7 +19,9 @@
         defaultDisbursementBankAccountId: '=disbursementAccount',
         defaultBillingBankAccountId: '=billingAccount',
         updateBillingAccount: '&',
-        updateDisbursementAccount: '&'
+        updateDisbursementAccount: '&',
+        isStakeholderActive: '=',
+        isUnitedStates: '='
       },
       restrict: 'E'
     };
@@ -28,31 +30,15 @@
 
     function link(scope) {
 
-      scope.descriptiveName = getDescriptiveName();
       scope.status = getStatus();
       scope.displayed = isDisplayed();
       scope.defaultForBilling = isDefaultForBilling();
       scope.defaultForDisbursement = isDefaultForDisbursement();
+      scope.routingNumberLabel = routingNumberFilter('', scope.isUnitedStates, true);
+      scope.routingNumberDisplay = routingNumberFilter(scope.account.AchAbaNumber, scope.isUnitedStates, false);
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
-
-      /**
-       * Adds the last 4 digits of the account name to the account only if the account name doesn't contain
-       * these same 4 digits since users may commonly already use those numbers in the account name and it is not
-       * useful to make the name unnecessarily long.
-       * @param account
-       */
-      function getDescriptiveName() {
-
-        var account = scope.account;
-
-        var partialAccountNumber = account.AchAccountNumberLast4.toString();
-        if (account.BankAccountName.indexOf(partialAccountNumber) > -1) {
-          return account.BankAccountName;
-        } else {
-          return account.BankAccountName + ' - ' + account.AchAccountNumberLast4;
-        }
-      }
+      scope.isEditable = isEditable;
 
       function getStatus() {
         return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
@@ -62,6 +48,9 @@
         return scope.account.AllowPaymentByAch;
       }
 
+      function isEditable() {
+        return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates;
+      }
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;
       }
@@ -80,6 +69,7 @@
           resolve: {
             options: function () {
               var options = {
+                modal: 'edit',
                 defaultForBilling: scope.defaultForBilling,
                 defaultForDisbursement: scope.defaultForDisbursement
               };
@@ -96,6 +86,9 @@
 
         $dialog.dialog(dialogOptions).open().then(function (updatedAccount) {
           if (updatedAccount) {
+            // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
+            User.refreshInfo();
+
             if (updatedAccount.IsDefaultPayment) {
               scope.updateBillingAccount({billingAccountId: updatedAccount.AccountId});
             }
@@ -104,13 +97,6 @@
             }
             scope.account.AchBankName = updatedAccount.BankName;
             scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
-
-            var description = updatedAccount.AccountName;
-            var partialAccountNumber = scope.account.AchAccountNumberLast4.toString();
-            if (updatedAccount.AccountName.indexOf(partialAccountNumber) === -1) {
-              description = updatedAccount.AccountName + ' - ' + scope.account.AchAccountNumberLast4;
-            }
-            scope.descriptiveName = description;
           }
         });
       }

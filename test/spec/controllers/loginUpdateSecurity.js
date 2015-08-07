@@ -85,10 +85,17 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
       User: UserMock
     });
 
+    // this is the form object used for validation
     scope.updateSecurity = {
       'q1': 1,
       'q1_res': 'Blue Lagoon',
       'q2': 3,
+      'q2_res': 'Harry Potter'
+    };
+
+    // this is the actual model in the answer
+    scope.updateSecurityModel = {
+      'q1_res': 'Blue Lagoon',
       'q2_res': 'Harry Potter'
     };
 

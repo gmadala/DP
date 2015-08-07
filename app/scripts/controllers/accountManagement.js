@@ -23,7 +23,6 @@ angular.module('nextgearWebApp')
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
     $scope.autoPayEnabled = features.autoPay.enabled;
-    $scope.addBankAccountEnabled = features.addBankAccount.enabled;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -115,9 +114,8 @@ angular.module('nextgearWebApp')
               var d = this.dirtyData;
 
               AccountManagement.saveBusiness(d.email, d.enhancedRegistrationEnabled, d.enhancedRegistrationPin,
-                d.autoPayEnabled).then(
-                prv.saveSuccess.bind(this)
-              );
+                d.autoPayEnabled).then(prv.saveSuccess.bind(this))
+                .then(User.setAutoPayEnabled.bind(this, d.autoPayEnabled));
             }
           },
           isDirty: function() {
@@ -221,6 +219,24 @@ angular.module('nextgearWebApp')
             financial.validation = angular.copy($scope.financialSettings);
             return financial.validation.$valid;
           },
+          isAddBankAccountEditable: function() {
+            return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
+              $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
+          },
+          updateFinancialAccounts: function(updatedAccount) {
+            var accNumber = updatedAccount.AccountNumber,
+              processedBankAccount = {
+                BankAccountId: updatedAccount.AccountId,
+                BankAccountName: updatedAccount.AccountName,
+                AchAccountNumberLast4: accNumber.length > 4 ? accNumber.substr(accNumber.length - 4) : accNumber,
+                IsActive: updatedAccount.IsActive,
+                AchAbaNumber: updatedAccount.RoutingNumber,
+                AchBankName: updatedAccount.BankName,
+                AllowPaymentByAch: true
+              };
+
+            $scope.financial.data.bankAccounts.unshift(processedBankAccount);
+          },
           addFinancialAccount: function() {
             var dialogOptions = {
               dialogClass: 'modal',
@@ -231,14 +247,33 @@ angular.module('nextgearWebApp')
               resolve: {
                 options: function () {
                   return {
-                    account: { }
+                    modal: 'add',
+                    account: {
+                      IsActive: true,
+                      IsDefaultDisbursement: false,
+                      IsDefaultPayment: false
+                    }
                   };
                 }
               },
               controller: 'FinancialAccountCtrl'
             };
 
-            $dialog.dialog(dialogOptions).open();
+            $dialog.dialog(dialogOptions).open().then(function(updatedAccount) {
+              if(updatedAccount) {
+                // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
+                User.refreshInfo();
+
+                if(updatedAccount.IsDefaultPayment) {
+                  $scope.updateBillingAccount(updatedAccount.AccountId);
+                }
+                if(updatedAccount.IsDefaultDisbursement) {
+                  $scope.updateDisbursementAccount(updatedAccount.AccountId);
+                }
+                // Update local data
+                $scope.financial.updateFinancialAccounts(updatedAccount);
+              }
+            });
           }
         };
 

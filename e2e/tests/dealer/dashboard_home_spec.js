@@ -1,11 +1,9 @@
-/**
- * Created by gayathrimadala on 12/29/14.
- */
 'use strict';
-var HelperObject = require('../framework/helper_object.js');
-var HomePageObject = require('../framework/home_page_object.js');
-var UtilObject = require('../framework/util_object.js');
-var ErrorObject = require('../framework/error_page_object.js');
+
+var HelperObject = require('../../framework/helper_object.js');
+var HomePageObject = require('../../framework/home_page_object.js');
+var UtilObject = require('../../framework/util_object.js');
+var ErrorObject = require('../../framework/error_page_object.js');
 
 var helper = new HelperObject();
 var homePage = new HomePageObject();
@@ -53,7 +51,6 @@ helper.describe('WMT-52', function () {
       homePage.goToShowPaymentDetails();
       homePage.goToVehicleDetails();
       homePage.goToShowPaymentDetails();
-      browser.sleep(1000);
       homePage.goToPaymentSummary();
       homePage.goToCreditInformation();
       homePage.goToSelectDropdownbyNum();

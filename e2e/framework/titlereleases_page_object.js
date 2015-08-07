@@ -32,8 +32,8 @@ var PaymentPageObject = function () {
   this.informationTwo = browser.element(by.cssContainingText('a','chat with us'));
   this.informationThree = browser.element(by.cssContainingText('span',' or contact customer service for further assistance.'));
 
-  this.findAFloorPlan = browser.element(by.css('.span5.form-block'));
-  this.filterByStatus = browser.element(by.cssContainingText('label','Filter by Status'));
+  this.findAFloorPlan = browser.element(by.cssContainingText('label', 'Find a Floor Plan'));
+  this.filterByStatus = browser.element(by.cssContainingText('label', 'Filter by Status'));
   this.startDate = browser.element(by.css('.range-start'));
   this.endDate = browser.element(by.css('.range-end'));
   this.filterByStatusOption= browser.element.all(by.options('o.value as o.label for o in filterOptions'));

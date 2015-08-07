@@ -11,7 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions, gettext, gettextCatalog) {
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions, gettext, User, gettextCatalog) {
     //not showing up in html even though it's on rootScope. Adding here.
     $scope.metric = metric;
     $scope.navigate = $state.transitionTo;
@@ -76,5 +76,10 @@ angular.module('nextgearWebApp')
       }
       return gettextCatalog.getString(text);
     };
+
+    //autopay check
+    User.getInfo().then(function(info){
+      $scope.autoPayEnabled = info.AutoPayEnabled;
+    });
 
   });
