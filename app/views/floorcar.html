@@ -172,7 +172,7 @@
         </select>
       </div>
 
-      <label for="inputDisburseAcct" translate>Bank Account for Disbursement (when applicable)</label>
+      <label for="inputDisburseAcct" translate>Bank Account for Deposit (when applicable)</label>
       <div class="style-select large" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
         <select id="inputDisburseAcct"
                 name="inputDisburseAcct"
@@ -185,7 +185,7 @@
       </div>
       <label for="inputDisburseAcct" class="text-error"
              ng-show="validity.inputDisburseAcct.$error.required" translate>
-        Please select a Bank Account for Disbursement.
+        Please select a Bank Account for Deposit.
       </label>
 
       <div class="form-footer button-group">
