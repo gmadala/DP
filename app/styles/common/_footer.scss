@@ -39,6 +39,10 @@ body {
   margin-left:0px;
 }
 
+.no-right-margin {
+  margin-right: 0px;
+}
+
 .nxg-main:after {
   content: '';
   display: block;
