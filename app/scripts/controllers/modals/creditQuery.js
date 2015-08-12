@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options, segmentio, metric) {
+  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options) {
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
@@ -33,7 +33,6 @@ angular.module('nextgearWebApp')
               this.retrieved = true;
             }.bind(this)
           );
-          segmentio.track(metric.QUERY_BUYER_LINE_OF_CREDIT);
         },
         results: []
       }

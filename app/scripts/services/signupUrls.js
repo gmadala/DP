@@ -5,11 +5,11 @@ angular.module('nextgearWebApp')
 
     return {
       urls: {
-        en: 'https://customer.nextgearcapital.com/NGCApplication/',
-        'en_CA': 'https://customer.nextgearcapital.com/NGCApplication/',
-        'fr_CA': 'https://customer.nextgearcapital.com/NGCApplication/',
+        en: 'http://www.nextgearcapital.com/apply-for-credit/',
+        'en_CA': 'http://www.nextgearcapital.com/apply-for-credit/',
+        'fr_CA': 'http://www.nextgearcapital.com/apply-for-credit/',
         // Currently redirecting Spanish to English site
-        es: 'https://customer.nextgearcapital.com/NGCApplication/'
+        es: 'http://www.nextgearcapital.com/apply-for-credit/'
       },
 
       /**

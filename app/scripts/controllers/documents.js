@@ -1,9 +1,13 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User) {
-    segmentio.track(metric.VIEW_RESOURCES_PAGE);
-    $scope.metric = metric; // make metric names available to templates
+  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User, kissMetricInfo) {
+
+    kissMetricInfo.getKissMetricInfo().then(
+      function(result){
+        segmentio.track(metric.VIEW_RESOURCES_PAGE,result);
+      }
+    );
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();

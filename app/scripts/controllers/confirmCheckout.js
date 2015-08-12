@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, segmentio, metric, $window) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, $window) {
 
     $scope.today = new Date();
 
@@ -57,10 +57,6 @@ angular.module('nextgearWebApp')
         return totals;
       }
     };
-
-    if (paymentsScheduled.length > 0) {
-      segmentio.track(metric.SCHEDULE_PAYMENT); // Server is responsible for tracking revenue when schedule occurs
-    }
 
     $scope.receiptUrls = [];
     var url;

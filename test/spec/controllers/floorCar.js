@@ -18,16 +18,18 @@ describe('Controller: FloorCarCtrl', function () {
     statics = { colors: ['red', 'green']}, // Constant object so digest limit isn't reached
     myCanPayBuyer = true,
     myPaySellerOptions = false,
-    $q;
+    $q,
+    $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_) {
+  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_, _$httpBackend_) {
     scope = $rootScope.$new();
     floorplan = Floorplan;
     dialog = $dialog;
     location = $location;
     blackbook = Blackbook;
     $q = _$q_;
+    $httpBackend = _$httpBackend_;
 
     userMock = {
       isDealer: function() {
@@ -103,12 +105,9 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     describe('submit function', function() {
-      var httpBackend,
-          succeed = true;
+         var succeed = true;
 
-      beforeEach(inject(function($httpBackend) {
-        httpBackend = $httpBackend;
-
+      beforeEach(inject(function() {
         scope.form = mockForm;
         spyOn(dialog, 'dialog').andReturn({
           open: function() {
@@ -125,7 +124,7 @@ describe('Controller: FloorCarCtrl', function () {
           }
         });
 
-        httpBackend.expectPOST('/floorplan/v1_1/create')
+        $httpBackend.expectPOST('/floorplan/v1_1/create')
           .respond({
             Success: true,
             Message: null,
@@ -172,11 +171,13 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     describe('really submit function', function() {
-      var httpBackend,
-          p;
+      var  p;
 
-      beforeEach(inject(function($httpBackend, protect) {
-        httpBackend = $httpBackend;
+      beforeEach(function() {
+        $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
+      });
+
+      beforeEach(inject(function(protect) {
         p = protect;
 
         spyOn(dialog, 'dialog').andReturn({
@@ -203,7 +204,7 @@ describe('Controller: FloorCarCtrl', function () {
       });
 
       it('should show a dialog if the flooring is successful', function() {
-       httpBackend.whenPOST('/floorplan/v1_1/create')
+        $httpBackend.whenPOST('/floorplan/v1_1/create')
         .respond(function() {
           return [200, { Success: true }];
         });
@@ -219,7 +220,7 @@ describe('Controller: FloorCarCtrl', function () {
         });
 
         scope.reallySubmit(p);
-        httpBackend.flush();
+        $httpBackend.flush();
         expect(dialog.messageBox).toHaveBeenCalledWith(
           'Flooring Request Submitted',
           'Your flooring request has been submitted to NextGear Capital.',
@@ -229,7 +230,7 @@ describe('Controller: FloorCarCtrl', function () {
 
       it('should do nothing if the flooring fails', function() {
         spyOn(dialog, 'messageBox').andReturn();
-        httpBackend.whenPOST('/floorplan/v1_1/create')
+        $httpBackend.whenPOST('/floorplan/v1_1/create')
           .respond(function() {
             return [200, { Success: false }];
         });
