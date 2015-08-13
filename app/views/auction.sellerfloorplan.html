@@ -76,7 +76,7 @@
           <div class="seller-has-title-box cr-inline-narrow" ng-show="item.TitleEditable">
             <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
                     ng-model="item.sellerHasTitle"
-                    ng-click="sellerHasTitle(item, !item.sellerHasTitle)" />
+                    ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
             <label class="checkbox-img small"
                     for="{{ item.FloorplanId }}"
                     tooltip-placement="top"

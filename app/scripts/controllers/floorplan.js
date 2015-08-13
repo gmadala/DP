@@ -114,18 +114,14 @@ angular.module('nextgearWebApp')
           possibleTT.css('display', displayVal);
         }
       };
-
       // prevent flash of tooltip when "i have title" is unchecked
-      // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-      curFloorplan.scope().tt_isOpen = false;
       // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
       toggleTooltip(curFloorplan.next(), true);
 
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
-          if (hasTitle) { // show the tooltip for 5 seconds, then fade
-            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-            curFloorplan.scope().tt_isOpen = true;
+          if (hasTitle) {
+            // show the tooltip for 5 seconds, then fade
             // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             toggleTooltip(curFloorplan.next(), false);
 
@@ -135,8 +131,6 @@ angular.module('nextgearWebApp')
             }
 
             $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
-              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-              curFloorplan.scope().tt_isOpen = false;
               // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
               toggleTooltip(curFloorplan.next(), true);
             }, 5000);
