@@ -380,9 +380,8 @@ msgid "Auction Access Number(s)"
 msgstr "Número(s) de acceso a la subasta"
 
 #: app/views/modals/confirmDisableAutoPay.html
-#: app/views/modals/confirmEnableAutoPay.html
-msgid "Authorization and Request for Automated Payments"
-msgstr "Autorización y solicitud de pagos automatizados"
+msgid "Authorization and Request to Unenroll"
+msgstr ""
 
 #: app/views/account_management.html
 msgid "Auto-Disburse Unapplied Funds"
@@ -450,8 +449,8 @@ msgid "Bank Account"
 msgstr "Cuenta bancaria"
 
 #: app/views/floorcar.html
-msgid "Bank Account for Disbursement (when applicable)"
-msgstr "Cuenta bancaria para desembolso (cuando aplique)"
+msgid "Bank Account for Deposit (when applicable)"
+msgstr ""
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Bank Account for Payout"
@@ -519,6 +518,13 @@ msgstr "Información del comprador"
 #: app/views/payments.html
 msgid "By Stock #, VIN, or Description"
 msgstr "Por número de inventario, VIN o descripción"
+
+#: app/views/modals/confirmDisableAutoPay.html
+msgid ""
+"By clicking on the button \"Unenroll Now\", you acknowledge and agree that "
+"you are unenrolling from\n"
+"    Automatic Payments."
+msgstr ""
 
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -818,12 +824,12 @@ msgid "Default Address"
 msgstr "Dirección predeterminada"
 
 #: app/views/modals/financialAccount.html
-msgid "Default for disbursement"
-msgstr "Predeterminado para desembolsos"
+msgid "Default for deposits"
+msgstr ""
 
 #: app/views/modals/financialAccount.html
-msgid "Default for payment"
-msgstr "Predeterminado para pagos"
+msgid "Default for withdrawals"
+msgstr ""
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
@@ -837,6 +843,10 @@ msgstr "Negado"
 #: app/scripts/controllers/floorplan.js
 msgid "Denied/Not Paid"
 msgstr "Denegado/No pagado"
+
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
+msgid "Deposit To"
+msgstr ""
 
 #: app/views/auction.sellerfloorplan.html app/views/checkout.html
 #: app/views/dashboard.html app/views/floorplan.html
@@ -864,7 +874,6 @@ msgstr ""
 "Si desactiva el programa de Registro Mejorado, se borrarán los NIPs actuales "
 "relacionados con este negocio."
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/auction.sellerfloorplan.html
 msgid "Disbursement"
 msgstr "Desembolso"
@@ -990,12 +999,12 @@ msgstr ""
 "cuando entren a MyNextGear."
 
 #: app/views/modals/confirmEnableAutoPay.html
-msgid "Enroll in ProperNounTBD"
-msgstr "Regístrese en ProperNounTBD"
+msgid "Enroll in Automatic Payments"
+msgstr ""
 
 #: app/views/account_management.html
-msgid "Enrolled in ProperNounTBD"
-msgstr "Registrado en ProperNounTBD"
+msgid "Enrolled in Automatic Payments"
+msgstr ""
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Enter Stock #'s separated by a comma."
@@ -1265,7 +1274,6 @@ msgstr "Reportes históricos"
 msgid "I Have the Title"
 msgstr "Tengo este título"
 
-#: app/views/modals/confirmDisableAutoPay.html
 #: app/views/modals/confirmEnableAutoPay.html
 msgid ""
 "I have reviewed and agree to the Authorization and Request for Automated "
@@ -1707,7 +1715,6 @@ msgstr ""
 msgid "Pay off this vehicle or return the title to remove from your limit."
 msgstr "Pague este vehículo o devuelva el título para retirarlo de su límite."
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/checkout.html app/views/payments.html app/views/receipts.html
 #: app/views/vehicledetails.html
 msgid "Payment"
@@ -2239,8 +2246,8 @@ msgid "Please review the following and submit your payments below."
 msgstr "Por favor, revise lo siguiente y envíe sus pagos a continuación."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
-msgid "Please select a Bank Account for Disbursement."
-msgstr "Por favor, seleccione una cuenta bancaria para el desembolso."
+msgid "Please select a Bank Account for Deposit."
+msgstr ""
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please select a Color."
@@ -2889,6 +2896,10 @@ msgstr "Soporte Técnico"
 msgid "Term Plan Name"
 msgstr "Nombre del plan de plazos"
 
+#: app/views/modals/financialAccount.html
+msgid "Terms and Conditions."
+msgstr ""
+
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
 msgstr ""
@@ -3257,12 +3268,12 @@ msgstr ""
 "span>"
 
 #: app/views/modals/confirmDisableAutoPay.html
-msgid "Unenroll from ProperNounTBD"
-msgstr "Darse de baja de ProperNoun TBD"
+msgid "Unenroll Now"
+msgstr ""
 
 #: app/views/modals/confirmDisableAutoPay.html
-msgid "Unenroll now"
-msgstr "Darse de baja ahora"
+msgid "Unenroll from Automatic Payments"
+msgstr ""
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"
@@ -3524,6 +3535,10 @@ msgstr "¿Qué desea hacer?"
 msgid "Who has the Title?"
 msgstr "¿Quién tiene el título?"
 
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
+msgid "Withdraw From"
+msgstr ""
+
 #: app/views/analytics.html
 msgid "Worst Movers"
 msgstr "Los que se mueven menos"
@@ -3561,27 +3576,15 @@ msgstr "Sí, quiero registrarme"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid ""
-"You are about to enroll in ProperNounTBD. Please review the Authorization "
-"and Request for Automated Payments below."
-msgstr ""
-"Está a punto de registrarse en ProperNounTBD. Revise la Autorización y "
-"solicitud de pagos automáticos que aparece a continuación."
-
-#: app/views/modals/confirmDisableAutoPay.html
-msgid ""
-"You are about to unenroll from ProperNounTBD. Please review the "
+"You are about to enroll in Automatic Payments. Please review the "
 "Authorization and Request for Automated Payments below."
 msgstr ""
-"Está a punto de cancelar su inscripción en ProperNounTBD. Revise la "
-"Autorización y solicitud de pagos automáticos que aparece a continuación."
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid ""
-"You are enrolled in ProperNounTBD. All payments will be processed "
+"You are enrolled in Automatic Payments. All payments will be processed "
 "automatically on their due date."
 msgstr ""
-"Ya está registrado en ProperNounTBD. Todos los pagos se procesarán de forma "
-"automática en la fecha de vencimiento."
 
 #: app/views/receipts.html
 msgid ""
@@ -3855,6 +3858,54 @@ msgstr "{{account.AccountId ? 'Editar' : 'Agregar'}} Cuenta Financiera"
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Kelley Blue Book Co., Inc."
+
+#~ msgid "Authorization and Request for Automated Payments"
+#~ msgstr "Autorización y solicitud de pagos automatizados"
+
+#~ msgid "Bank Account for Disbursement (when applicable)"
+#~ msgstr "Cuenta bancaria para desembolso (cuando aplique)"
+
+#~ msgid "Default for disbursement"
+#~ msgstr "Predeterminado para desembolsos"
+
+#~ msgid "Default for payment"
+#~ msgstr "Predeterminado para pagos"
+
+#~ msgid "Enroll in ProperNounTBD"
+#~ msgstr "Regístrese en ProperNounTBD"
+
+#~ msgid "Enrolled in ProperNounTBD"
+#~ msgstr "Registrado en ProperNounTBD"
+
+#~ msgid "Please select a Bank Account for Disbursement."
+#~ msgstr "Por favor, seleccione una cuenta bancaria para el desembolso."
+
+#~ msgid "Unenroll from ProperNounTBD"
+#~ msgstr "Darse de baja de ProperNoun TBD"
+
+#~ msgid "Unenroll now"
+#~ msgstr "Darse de baja ahora"
+
+#~ msgid ""
+#~ "You are about to enroll in ProperNounTBD. Please review the Authorization "
+#~ "and Request for Automated Payments below."
+#~ msgstr ""
+#~ "Está a punto de registrarse en ProperNounTBD. Revise la Autorización y "
+#~ "solicitud de pagos automáticos que aparece a continuación."
+
+#~ msgid ""
+#~ "You are about to unenroll from ProperNounTBD. Please review the "
+#~ "Authorization and Request for Automated Payments below."
+#~ msgstr ""
+#~ "Está a punto de cancelar su inscripción en ProperNounTBD. Revise la "
+#~ "Autorización y solicitud de pagos automáticos que aparece a continuación."
+
+#~ msgid ""
+#~ "You are enrolled in ProperNounTBD. All payments will be processed "
+#~ "automatically on their due date."
+#~ msgstr ""
+#~ "Ya está registrado en ProperNounTBD. Todos los pagos se procesarán de "
+#~ "forma automática en la fecha de vencimiento."
 
 #~ msgid "I have reviewed and agree to the Terms and Conditions."
 #~ msgstr ""
