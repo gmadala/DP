@@ -97,11 +97,27 @@ angular.module('nextgearWebApp')
     // initial search
     $scope.floorplanData.resetSearch(filterParam);
 
+    $scope.showTooltip = function(sellerHasTitle, sellerHasTitleChanged) {
+      if (!!sellerHasTitleChanged) {
+        return true;
+      } else if (!sellerHasTitle) {
+        return true;
+      }
+    };
+
+    $scope.hideTooltip = function(sellerHasTitle, sellerHasTitleChanged) {
+      if (!!sellerHasTitleChanged) {
+        return false;
+      } else if (sellerHasTitle) {
+        return true;
+      }
+    };
+
     $scope.sellerTimeouts = {};
     $scope.sellerHasTitle = function(floorplan, hasTitle) {
-      // TODO: Upgrade note for 1.2.28.
-      // In new angular 1.2.28, it seems that ng-click gets executed before ng-model gets assigned.
-      // When user check the checkbox, the click still have the old ng-model value.
+      if (!floorplan.sellerHasTitleChanged) {
+        floorplan.sellerHasTitleChanged = !floorplan.sellerHasTitleChanged;
+      }
 
       /*jshint camelcase: false */
       var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
@@ -114,27 +130,18 @@ angular.module('nextgearWebApp')
           possibleTT.css('display', displayVal);
         }
       };
-      // prevent flash of tooltip when "i have title" is unchecked
-      // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-      toggleTooltip(curFloorplan.next(), true);
 
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
         function() {
-          if (hasTitle) {
-            // show the tooltip for 5 seconds, then fade
-            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-            toggleTooltip(curFloorplan.next(), false);
-
-            if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
-              // cancel any previous timeouts before setting a new one.
-              $timeout.cancel($scope.sellerTimeouts[floorplan.FloorplanId]);
-            }
-
-            $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
-              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-              toggleTooltip(curFloorplan.next(), true);
-            }, 5000);
+          if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
+            // cancel any previous timeouts before setting a new one.
+            $timeout.cancel($scope.sellerTimeouts[floorplan.FloorplanId]);
           }
+
+          $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
+            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+            toggleTooltip(curFloorplan.next(), true);
+          }, 2000);
 
           // real purpose of this function
           floorplan.TitleLocation = hasTitle ? gettextCatalog.getString('Seller') : gettextCatalog.getString('Title Absent');
