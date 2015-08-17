@@ -136,8 +136,6 @@ angular.module('nextgearWebApp')
           }
 
           $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
-            /*jshint camelcase: false */
-            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
             toggleTooltip(curFloorplan.next(), true);
           }, 2000);
