@@ -526,8 +526,7 @@ module.exports = function(grunt) {
       chrome: {
         command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
         ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
-        ' --disable-extensions -–allow-file-access-from-files --incognito --disable-web-security' +
-        ' --homepage http://localhost:<%= connect.options.port %>'
+        ' --disable-web-security --homepage http://localhost:<%= connect.options.port %>'
       },
       ie: {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
