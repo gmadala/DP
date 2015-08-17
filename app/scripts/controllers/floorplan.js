@@ -119,9 +119,6 @@ angular.module('nextgearWebApp')
         floorplan.sellerHasTitleChanged = !floorplan.sellerHasTitleChanged;
       }
 
-      /*jshint camelcase: false */
-      var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
-
       var toggleTooltip = function(possibleTT, hide) {
         if(possibleTT.hasClass('tooltip')) {
           // the tooltip div exists, so we need to make sure its
@@ -139,7 +136,9 @@ angular.module('nextgearWebApp')
           }
 
           $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
+            /*jshint camelcase: false */
             // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+            var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
             toggleTooltip(curFloorplan.next(), true);
           }, 2000);
 
