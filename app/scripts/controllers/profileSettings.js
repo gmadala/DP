@@ -108,12 +108,6 @@ angular.module('nextgearWebApp')
           },
           cancel: function() {
             prv.cancel.apply(this);
-            // make sure to close any tooltips left open
-            angular.forEach(angular.element('.btn-help'), function(elem) {
-              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-              angular.element(elem).scope().tt_isOpen = false;
-              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-            });
           },
           save: function() {
             if (prv.save.apply(this)) {
@@ -127,13 +121,7 @@ angular.module('nextgearWebApp')
 
               ProfileSettings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
                 prv.saveSuccess.bind(this)
-              ).then(function() {
-                angular.forEach(angular.element('.btn-help'), function(elem) {
-                  // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-                  angular.element(elem).scope().tt_isOpen = false;
-                  // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-                });
-              });
+              );
             }
           },
           updateQuestionText: function(questions) {
