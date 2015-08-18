@@ -314,7 +314,6 @@ body.lang_fr_CA {
   /* Navs */
   .nav-secondary {
     height: 52px;
-    min-width: 451.375px;
 
     .link {
       height: auto;
@@ -334,6 +333,10 @@ body.lang_fr_CA {
 
     .cart-btn {
       height: 50px;
+    }
+
+    li {
+      padding: 5px 8px 7px;
     }
   }
 
