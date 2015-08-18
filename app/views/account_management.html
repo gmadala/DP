@@ -116,10 +116,10 @@
 
         <div class="row" ng-show="business.autoPay.isDisplayed()">
 
-          <label class="col-md-5" for="autoPay"><span translate>Enrolled in Automatic Payments</span>:</label>
-          <div class="col-md-7">
+          <label class="col-xs-5" for="autoPay"><span translate>Enrolled in Automatic Payments</span>:</label>
+          <div class="col-xs-7">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-xs-7">
                 <div class="static" ng-show="business.data.autoPayEnabled && !business.autoPay.isEditable()" translate> Yes </div>
                 <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
                 <div class="static" ng-show="business.data.autoPayEnabled == false && !business.autoPay.isEditable()"
