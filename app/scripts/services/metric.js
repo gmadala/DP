@@ -33,6 +33,16 @@ angular.module('nextgearWebApp')
 
     //Resources Events
     VIEW_RESOURCES_PAGE: 'View Resources Page',//x
+    DEALER_RESOURCES_RATES_AND_FEES_PAGE: 'Dealer Resources - Rates and Fees',//x
+    DEALER_RESOURCES_WELCOME_PACKET_PAGE: 'Dealer Resources - Welcome Packet',//x
+    DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE: 'Dealer Resources - Dealer Funding Checklist',//x
+    DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE: 'Dealer Resources - Instructions For Buyers',//x
+    DEALER_RESOURCES_WELCOME_LETTER_PAGE: 'Dealer Resources - Welcome Letter',//x
+    DEALER_RESOURCES_GUIDELINES_PAGE: 'Dealer Resources - Guidelines',//X
+    DEALER_RESOURCES_INFORMATION_SHEET_PAGE: 'Dealer Resources - Information Sheet',//X
+    DEALER_RESOURCES_CLAIM_FORM_PAGE: 'Dealer Resources - Claim Form',//X
+    DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
+    DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
 
     //Value Lookup Events
     CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN With Zip Lookup Button',
