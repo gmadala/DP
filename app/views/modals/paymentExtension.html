@@ -15,8 +15,8 @@
       <p class="col-xs-6 value numeric">{{ extPrev.InterestAmount | currency }}</p>
     </li>
     <li class="list-table-row" ng-repeat="fee in extPrev.Fees">
-      <p class="col-xs-6">{{ fee.Type }}</p>
-      <p class="col-xs-6 value numeric">{{ fee.Amount | currency }}</p>
+      <p class="col-xs-6 no-right-margin">{{ fee.Type }}</p>
+      <p class="col-xs-6 value numeric no-left-margin">{{ fee.Amount | currency }}</p>
     </li>
     <li class="list-table-row" ng-show="extPrev.CollateralProtectionAmount > 0">
       <p class="col-xs-6"><span translate>Collateral Protection</span>: </p>

@@ -7,13 +7,36 @@ describe('Controller: DocumentsCtrl', function () {
 
   var DocumentsCtrl,
     scope,
-    gettextCatalog;
+    gettextCatalog,
+    httpBackend,
+    mockKissMetricInfo,
+    $q;
+
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _gettextCatalog_) {
-    scope = $rootScope.$new();
+  beforeEach(inject(function ($controller, _$rootScope_, _gettextCatalog_, _kissMetricInfo_, _metric_, $httpBackend, _$q_){
+    $q = _$q_;
+    httpBackend = $httpBackend;
+    scope = _$rootScope_.$new();
+
+    mockKissMetricInfo = {
+      getKissMetricInfo : function() {
+        return $q.when({
+          height: 1080,
+          isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
+      }
+    };
+
+    httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
+
     DocumentsCtrl = $controller('DocumentsCtrl', {
-      $scope: scope
+      $scope: scope,
+      kissMetricInfo: mockKissMetricInfo,
+      metric: _metric_
     });
     gettextCatalog = _gettextCatalog_;
   }));
@@ -24,6 +47,16 @@ describe('Controller: DocumentsCtrl', function () {
 
   it('should attach a list of collateralProtection to the scope', function () {
     expect(scope.collateralProtection.length).toBe(4);
+  });
+
+  it('should return true when user clicks on Resources - Rates and Fees in the business hours. ', function(){
+
+    scope.$apply();
+    expect(scope.kissMetricData.isBusinessHours).toBe(true);
+    expect(scope.kissMetricData.height).toBe(1080);
+    expect(scope.kissMetricData.vendor).toBe('Google Inc.');
+    expect(scope.kissMetricData.version).toBe('Chrome 44');
+    expect(scope.kissMetricData.width).toBe(1920);
   });
 
   describe('sets correct URLs for other languages', function () {

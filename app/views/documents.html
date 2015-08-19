@@ -11,12 +11,12 @@
     <div class="well-item">
       <ul class="text-list zeroLeftPadding">
         <li>
-          <a ng-href="{{ feeScheduleUrl }}" target="_blank" translate>
+          <a ng-href="{{ feeScheduleUrl }}" target="_blank" nxg-track="{{metric.DEALER_RESOURCES_RATES_AND_FEES_PAGE}}" track-properties="{{ kissMetricData }}" translate>
             Rates and Fees
           </a>
         </li>
         <li ng-repeat="doc in documents">
-          <a ng-href="{{ doc.url }}" target="_blank">
+          <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
             {{ doc.title }}
           </a>
         </li>
