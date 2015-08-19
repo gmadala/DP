@@ -3581,7 +3581,7 @@ msgstr "Sí"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Yes, I want to enroll"
-msgstr "Sí, quiero registrarme"
+msgstr "Sí, quiero darme de alta"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid ""
