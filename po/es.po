@@ -381,7 +381,7 @@ msgstr "Número(s) de acceso a la subasta"
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "Authorization and Request to Unenroll"
-msgstr ""
+msgstr "Autorización y solicitud para darse de baja"
 
 #: app/views/account_management.html
 msgid "Auto-Disburse Unapplied Funds"
@@ -450,7 +450,7 @@ msgstr "Cuenta bancaria"
 
 #: app/views/floorcar.html
 msgid "Bank Account for Deposit (when applicable)"
-msgstr ""
+msgstr "Cuenta bancaria para depósitos (en su caso)"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html
 msgid "Bank Account for Payout"
@@ -525,6 +525,8 @@ msgid ""
 "you are unenrolling from\n"
 "    Automatic Payments."
 msgstr ""
+"Al hacer clic en el botón \"Darse de baja\", usted reconoce y acepta que se "
+"da de baja de Pagos Automáticos."
 
 #: app/scripts/controllers/vehicledetails.js
 #: app/views/modals/paymentOptionsBreakdown.html
@@ -825,11 +827,11 @@ msgstr "Dirección predeterminada"
 
 #: app/views/modals/financialAccount.html
 msgid "Default for deposits"
-msgstr ""
+msgstr "Función predeterminada para depósitos"
 
 #: app/views/modals/financialAccount.html
 msgid "Default for withdrawals"
-msgstr ""
+msgstr "Función predeterminada para retiros"
 
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Delivery Type"
@@ -846,7 +848,7 @@ msgstr "Denegado/No pagado"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 msgid "Deposit To"
-msgstr ""
+msgstr "Depósito para"
 
 #: app/views/auction.sellerfloorplan.html app/views/checkout.html
 #: app/views/dashboard.html app/views/floorplan.html
@@ -1000,11 +1002,11 @@ msgstr ""
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid "Enroll in Automatic Payments"
-msgstr ""
+msgstr "Darse de alta en Pagos Automáticos"
 
 #: app/views/account_management.html
 msgid "Enrolled in Automatic Payments"
-msgstr ""
+msgstr "Dado de alta en Pagos Automáticos"
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html
 msgid "Enter Stock #'s separated by a comma."
@@ -1429,6 +1431,13 @@ msgstr "Finalizar sesión"
 #: app/views/valuelookup.html
 msgid "Look Up Values"
 msgstr "Buscar valores"
+
+#: app/views/modals/financialAccount.html
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur silt iverra of the\n"
+"            <a href=\"https://www.nextgearcapital.com\" target=\"_blank\" ng-"
+"click=\"visitTOS()\" translate=\"\">Terms and Conditions.</a>"
+msgstr ""
 
 #: app/views/auction.bulkflooring.html
 msgid "Lot Number"
@@ -2247,7 +2256,7 @@ msgstr "Por favor, revise lo siguiente y envíe sus pagos a continuación."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please select a Bank Account for Deposit."
-msgstr ""
+msgstr "Seleccione una cuenta bancaria para el depósito."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please select a Color."
@@ -2898,7 +2907,7 @@ msgstr "Nombre del plan de plazos"
 
 #: app/views/modals/financialAccount.html
 msgid "Terms and Conditions."
-msgstr ""
+msgstr "Términos y condiciones"
 
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
@@ -3269,11 +3278,11 @@ msgstr ""
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "Unenroll Now"
-msgstr ""
+msgstr "Darse de baja"
 
 #: app/views/modals/confirmDisableAutoPay.html
 msgid "Unenroll from Automatic Payments"
-msgstr ""
+msgstr "Darse de baja de Pagos Automáticos"
 
 #: app/scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html
 msgid "Unschedule"
@@ -3537,7 +3546,7 @@ msgstr "¿Quién tiene el título?"
 
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 msgid "Withdraw From"
-msgstr ""
+msgstr "Retirar de"
 
 #: app/views/analytics.html
 msgid "Worst Movers"
@@ -3579,12 +3588,16 @@ msgid ""
 "You are about to enroll in Automatic Payments. Please review the "
 "Authorization and Request for Automated Payments below."
 msgstr ""
+"Está a punto de darse de alta en Pagos Automáticos. Revise la Autorización y "
+"solicitud para darse de alta en Pagos Automáticos que aparece a continuación."
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
 msgid ""
 "You are enrolled in Automatic Payments. All payments will be processed "
 "automatically on their due date."
 msgstr ""
+"Ya está dado de alta en Pagos Automáticos. Todos los pagos se procesarán de "
+"forma automática en la fecha de vencimiento."
 
 #: app/views/receipts.html
 msgid ""
