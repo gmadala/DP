@@ -11,12 +11,15 @@ describe('Controller: AuctionReportsCtrl', function() {
     formDataMock,
     mfgSubsidiaries,
     UserMock,
-    $q;
+    $q,
+    $httpBackend,
+    mockKissMetricInfo;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, api, _$q_) {
+  beforeEach(inject(function($controller, $rootScope, api, _$q_, _$httpBackend_) {
     scope = $rootScope.$new();
     $q = _$q_;
+    $httpBackend = _$httpBackend_;
     formDataMock = {
       $valid: false,
       disDate: {
@@ -36,9 +39,24 @@ describe('Controller: AuctionReportsCtrl', function() {
       }
     };
 
+    mockKissMetricInfo = {
+      getKissMetricInfo: function(){
+        return $q.when({
+          height: 1080,
+          isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
+      }
+    };
+
+    $httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
+
     AuctionReportsCtrl = $controller('AuctionReportsCtrl', {
       $scope: scope,
-      User: UserMock
+      User: UserMock,
+      kissMetricInfo : mockKissMetricInfo
     });
 
     scope.disForm = formDataMock;
@@ -53,6 +71,16 @@ describe('Controller: AuctionReportsCtrl', function() {
 
   it('should contain a list of documents', function() {
     expect(scope.documents).toBeDefined();
+  });
+
+  it('should return true when user clicks on Auction Reports. ', function(){
+
+    scope.$apply();
+    expect(scope.kissMetricData.isBusinessHours).toBe(true);
+    expect(scope.kissMetricData.height).toBe(1080);
+    expect(scope.kissMetricData.vendor).toBe('Google Inc.');
+    expect(scope.kissMetricData.version).toBe('Chrome 44');
+    expect(scope.kissMetricData.width).toBe(1920);
   });
 
   describe('viewDisbursementDetail function', function() {

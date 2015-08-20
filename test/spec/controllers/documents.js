@@ -50,7 +50,6 @@ describe('Controller: DocumentsCtrl', function () {
   });
 
   it('should return true when user clicks on Resources - Rates and Fees in the business hours. ', function(){
-
     scope.$apply();
     expect(scope.kissMetricData.isBusinessHours).toBe(true);
     expect(scope.kissMetricData.height).toBe(1080);

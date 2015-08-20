@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options) {
+  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options, kissMetricInfo, segmentio, metric) {
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
@@ -22,6 +22,12 @@ angular.module('nextgearWebApp')
           this.error = null;
           CreditQuery.get(options.businessId).then(
             function(data) {
+              kissMetricInfo.getKissMetricInfo().then(
+                function(result){
+                  segmentio.track(metric.AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE,result);
+                  $scope.kissMetricData = result;
+                }
+              );
               this.loading = false;
               this.results = data;
               this.retrieved = true;

@@ -44,6 +44,19 @@ angular.module('nextgearWebApp')
     DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
     DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
 
+    //Resources Events for  - Auction
+    VIEW_AUCTION_REPORTS_PAGE: 'View Auction Reports',
+    AUCTION_RESOURCES_WELCOME_PACKET_PAGE: 'Auction Resources - Welcome Packet',//X
+    AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE: 'Auction Resources - Instructions for Sellers',//X
+    AUCTION_REPORTS_CREDIT_AVAILABILITY_QUERY_HISTORY_PAGE: 'Auction Reports - Credit Availability Query History',//X
+    AUCTION_REPORTS_DISBURSEMENT_DETAIL_PAGE: 'Auction Reports - Disbursement Detail',//X
+    MANUFACTURER_REPORTS_AGING_REPORT_PAGE: 'Manufacturer Reports - Aging Report',
+
+    AUCTION_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED_PAGE: 'Auction - Successful Flooring Request Submitted',//X
+    AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE: 'Auction - Individual Dealer LOC Query',//X
+
+
+
     //Value Lookup Events
     CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN With Zip Lookup Button',
     CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN Without Zip Lookup Button',
