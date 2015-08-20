@@ -2,7 +2,7 @@
   <h2 class="well-title" translate>NextGear Capital Documents</h2>
   <ul class="text-list zeroLeftPadding">
     <li ng-repeat="doc in documents">
-      <a ng-href="{{ doc.url }}"
+      <a ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}"
          target="_blank">
         {{ doc.title }}
       </a>

@@ -11,12 +11,17 @@ describe('Controller: FloorCarConfirmCtrl', function () {
     catalog,
     userMock,
     dialogMock,
-    formDataMock;
+    formDataMock,
+    mockKissMetricInfo,
+    $httpBackend,
+    $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, gettextCatalog) {
+  beforeEach(inject(function ($controller, $rootScope, gettextCatalog, _$httpBackend_, _$q_) {
     controller = $controller;
     catalog = gettextCatalog;
+    $httpBackend = _$httpBackend_;
+    $q = _$q_;
     scope = $rootScope.$new();
     dialogMock = {
       close: angular.noop
@@ -31,12 +36,27 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       }
     };
 
+    mockKissMetricInfo = {
+      getKissMetricInfo : function() {
+        return $q.when({
+          height: 1080,
+          isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
+      }
+    };
+
+    $httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
+
     FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
       $scope: scope,
       dialog: dialogMock,
       formData: formDataMock,
       User: userMock,
-      gettextCatalog: catalog
+      gettextCatalog: catalog,
+      kissMetricInfo: mockKissMetricInfo
     });
   }));
 
@@ -62,6 +82,17 @@ describe('Controller: FloorCarConfirmCtrl', function () {
     spyOn(dialogMock, 'close');
     scope.confirm();
     expect(dialogMock.close).toHaveBeenCalledWith(true);
+  });
+
+  it('should return true when user clicks Flooring Request submitted', function(){
+    spyOn(dialogMock, 'close');
+    scope.confirm();
+    scope.$apply();
+    expect(scope.kissMetricData.isBusinessHours).toBe(true);
+    expect(scope.kissMetricData.height).toBe(1080);
+    expect(scope.kissMetricData.vendor).toBe('Google Inc.');
+    expect(scope.kissMetricData.version).toBe('Chrome 44');
+    expect(scope.kissMetricData.width).toBe(1920);
   });
 
   it('should provide a cancel function that closes the dialog with false result', function () {
