@@ -5,10 +5,10 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect, OptionDefaultHelper, moment, segmentio, metric, gettextCatalog) {
+  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
+                                       OptionDefaultHelper, moment, gettextCatalog, segmentio, metric, kissMetricInfo) {
 
     var isDealer = User.isDealer();
-    segmentio.track(metric.VIEW_FLOOR_A_VEHICLE_PAGE);
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -161,7 +161,13 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (/*success*/) {
-          segmentio.track(isDealer ? metric.FLOOR_A_VEHICLE : metric.BULK_FLOOR_A_VEHICLE);
+
+          kissMetricInfo.getKissMetricInfo().then(
+            function(result){
+              segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED,result);
+            }
+          );
+
           $scope.submitInProgress = false;
           var title = gettextCatalog.getString('Flooring Request Submitted'),
             msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),

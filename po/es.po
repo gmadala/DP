@@ -185,11 +185,11 @@ msgstr[1] "Cargos de la cuenta"
 msgid "Account Management"
 msgstr "Administración de Cuentas"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/modals/financialAccount.html
 msgid "Account Name"
 msgstr "Nombre de la cuenta"
 
+#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html
 #: app/views/modals/financialAccount.html
 msgid "Account Number"
 msgstr "Número de la cuenta"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: app/views/account_management.html
 msgid "Add Account"
-msgstr ""
+msgstr "Agregar cuenta"
 
 #: app/views/vehicledetails.html
 msgid "Add Additional Principal?"
@@ -268,6 +268,14 @@ msgstr ""
 #: app/views/modals/creditQuery.html app/views/modals/floorCarConfirm.html
 msgid "Address"
 msgstr "Dirección"
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Address 1"
+msgstr "Dirección 1"
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Address 2"
+msgstr "Dirección 2"
 
 #: app/scripts/controllers/reports.js
 msgid "All"
@@ -573,11 +581,13 @@ msgstr "Cheque #"
 msgid "Checkout"
 msgstr "Verificación"
 
+#: app/scripts/directives/nxgAddress/nxgAddress.html
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "City"
 msgstr "Ciudad"
 
+#: app/scripts/directives/nxgAddress/nxgAddress.html
 #: app/views/auction.dealersearch.html app/views/modals/dealerNameSearch.html
 msgid "City names must only have letters and spaces."
 msgstr "Los nombres de las ciudades solo deben contener letras y espacios."
@@ -645,6 +655,10 @@ msgstr "Terminado/Pagado"
 #: app/views/modals/scheduleCheckout.html
 msgid "Confirm"
 msgstr "Confirmar"
+
+#: app/views/modals/financialAccount.html
+msgid "Confirm Account Number"
+msgstr "Confirmar número de cuenta"
 
 #: app/views/modals/paymentOptionsBreakdown.html
 msgid "Confirm Changes"
@@ -866,6 +880,10 @@ msgstr "Detalles del desembolso"
 #: app/views/auction.dashboard.html
 msgid "Disbursement Groups"
 msgstr "Grupos de desembolso"
+
+#: app/views/modals/financialAccount.html
+msgid "Does not match with account number."
+msgstr "No coincide con el número de cuenta."
 
 #: app/views/documents.html
 msgid "Download NextGear Capital Mobile Android"
@@ -1249,8 +1267,12 @@ msgstr "Tengo este título"
 
 #: app/views/modals/confirmDisableAutoPay.html
 #: app/views/modals/confirmEnableAutoPay.html
-msgid "I have reviewed and agree to the Terms and Conditions."
-msgstr "He revisado los términos y condiciones y estoy de acuerdo con ellos."
+msgid ""
+"I have reviewed and agree to the Authorization and Request for Automated "
+"Payments."
+msgstr ""
+"Revisé la Autorización y solicitud de pagos automáticos y estoy de acuerdo "
+"con ella."
 
 #: app/scripts/filters/address.js
 msgid "INACTIVE"
@@ -1428,8 +1450,11 @@ msgid "Make Selection"
 msgstr "Seleccione"
 
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
-msgid "Make payments today or schedule your payments when you checkout."
-msgstr "Pague hoy o programe sus pagos cuando esté listo para facturar."
+msgid ""
+"Make payments today or schedule your payments when you checkout.<br><br>"
+msgstr ""
+"Realice sus pagos hoy o programe sus pagos cuando esté listo para facturar."
+"<br><br>"
 
 #: app/views/documents.html
 msgid "Manage your business with NextGear Capital on the go."
@@ -1867,6 +1892,10 @@ msgstr ""
 msgid "Please choose a line of credit."
 msgstr "Por favor, seleccione una línea de crédito."
 
+#: app/views/modals/financialAccount.html
+msgid "Please confirm the account number."
+msgstr "Confirme el número de cuenta."
+
 #: app/views/titlereleasecheckout.html
 msgid "Please confirm your title release request(s) below."
 msgstr ""
@@ -1967,10 +1996,18 @@ msgstr "Por favor, capture un año entre 1901 y {{ settings.maxYear }}."
 msgid "Please enter a Year."
 msgstr "Por favor, capture el año."
 
+#: app/views/modals/financialAccount.html
+msgid "Please enter a bank name."
+msgstr "Escriba el nombre del banco."
+
 #: app/views/modals/businessSearch.html
 msgid "Please enter a business name or number to search."
 msgstr ""
 "Por favor, ingrese un nombre o número de negocio para hacer una búsqueda."
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Please enter a city."
+msgstr "Escriba la ciudad."
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html
 msgid "Please enter a four-digit Year."
@@ -2013,6 +2050,14 @@ msgid ""
 msgstr ""
 "Por favor, ingrese un valor numérico positivo con un máximo de 2 decimales."
 
+#: app/views/modals/financialAccount.html
+msgid "Please enter a routing number."
+msgstr "Escriba el número de enrutamiento."
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Please enter a state."
+msgstr "Escriba el estado."
+
 #: app/views/login.html
 msgid "Please enter a username."
 msgstr "Por favor, ingrese un nombre de usuario."
@@ -2042,6 +2087,10 @@ msgstr "Por favor, ingrese una contraseña válida."
 #: app/views/auction.settings.html app/views/profileSettings.html
 msgid "Please enter a valid phone number."
 msgstr "Por favor, ingrese un número de teléfono válido."
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Please enter a valid street address."
+msgstr "Escriba una dirección válida."
 
 #: app/views/auction.bulkflooring.html app/views/floorcar.html
 msgid "Please enter a value less than $1,000,000,000,000."
@@ -2074,6 +2123,14 @@ msgid ""
 msgstr ""
 "Por favor, capture un número de inventario final que sea mayor al número del "
 "inventario inicial."
+
+#: app/views/modals/financialAccount.html
+msgid "Please enter an account number."
+msgstr "Escriba el número de cuenta."
+
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Please enter an address."
+msgstr "Escriba la dirección."
 
 #: app/views/login.updateSecurity.html
 msgid "Please enter an answer that is no more than 100 characters long."
@@ -2485,13 +2542,13 @@ msgstr "Revise lo siguiente y envíe sus solicitudes de liberación de título."
 msgid "Rough"
 msgstr "Aproximado"
 
-#: app/views/modals/financialAccount.html
+#: app/scripts/filters/routingNumber.js app/views/modals/financialAccount.html
 msgid "Routing Number"
 msgstr "Número de enrutamiento"
 
 #: app/views/modals/financialAccount.html
-msgid "Routing number must only have numbers."
-msgstr "El número de enrutamiento solo debe contener números."
+msgid "Routing number must only have 9 numbers."
+msgstr "El número de enrutamiento solo debe tener 9 números."
 
 #: app/views/checkout.html app/views/floorplan.html
 #: app/views/modals/confirmCheckout.html app/views/payments.html
@@ -2744,6 +2801,7 @@ msgstr "La fecha de inicio no debe ser posterior a la fecha de terminación."
 msgid "Start Over"
 msgstr "Volver a iniciar"
 
+#: app/scripts/directives/nxgAddress/nxgAddress.html
 #: app/views/auction.dealersearch.html app/views/modals/businessSearch.html
 #: app/views/modals/dealerNameSearch.html
 msgid "State"
@@ -2830,11 +2888,6 @@ msgstr "Soporte Técnico"
 #: app/views/vehicledetails.html
 msgid "Term Plan Name"
 msgstr "Nombre del plan de plazos"
-
-#: app/views/modals/confirmDisableAutoPay.html
-#: app/views/modals/confirmEnableAutoPay.html
-msgid "Terms and Conditions"
-msgstr "Términos y condiciones"
 
 #: app/scripts/controllers/loginRecover.js
 msgid "Thank you, check your email for the requested account information."
@@ -3170,6 +3223,10 @@ msgstr "Canje"
 msgid "Transaction Details"
 msgstr "Detalles de la transacción"
 
+#: app/scripts/filters/routingNumber.js
+msgid "Transit/Institution Number"
+msgstr "Número de tránsito / institución"
+
 #: app/views/checkout.html
 msgid "Unable to Schedule"
 msgstr "Imposible de programar"
@@ -3353,7 +3410,7 @@ msgstr "Anulado"
 msgid "Volume of Past NextGear Capital Floorplans"
 msgstr "Volumen de planes de piso pasados de NextGear Capital"
 
-#: app/maintenance.html
+#: app/views/maintenance.html app/maintenance.html
 msgid "We Will Be Back Soon!"
 msgstr "¡Regresaremos en breve!"
 
@@ -3504,15 +3561,27 @@ msgstr "Sí, quiero registrarme"
 
 #: app/views/modals/confirmEnableAutoPay.html
 msgid ""
-"You are about to enroll in ProperNounTBD. Please review the terms and "
-"conditions below."
+"You are about to enroll in ProperNounTBD. Please review the Authorization "
+"and Request for Automated Payments below."
 msgstr ""
-"Está a punto de registrarse en ProperNounTBD. Por favor, revise los "
-"siguientes términos y condiciones."
+"Está a punto de registrarse en ProperNounTBD. Revise la Autorización y "
+"solicitud de pagos automáticos que aparece a continuación."
 
 #: app/views/modals/confirmDisableAutoPay.html
-msgid "You are about to unenroll from ProperNounTBD..."
-msgstr "Está a punto de cancelar su registro en ProperNounTBD"
+msgid ""
+"You are about to unenroll from ProperNounTBD. Please review the "
+"Authorization and Request for Automated Payments below."
+msgstr ""
+"Está a punto de cancelar su inscripción en ProperNounTBD. Revise la "
+"Autorización y solicitud de pagos automáticos que aparece a continuación."
+
+#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
+msgid ""
+"You are enrolled in ProperNounTBD. All payments will be processed "
+"automatically on their due date."
+msgstr ""
+"Ya está registrado en ProperNounTBD. Todos los pagos se procesarán de forma "
+"automática en la fecha de vencimiento."
 
 #: app/views/receipts.html
 msgid ""
@@ -3521,22 +3590,6 @@ msgid ""
 msgstr ""
 "Usted puede combinar hasta 20 recibos en un solo PDF seleccionando cada "
 "recibo y hacienda clic en Exportar recibo(s) a continuación."
-
-#: app/views/modals/financialAccount.html
-msgid "You can't have empty account name."
-msgstr ""
-
-#: app/views/modals/financialAccount.html
-msgid "You can't have empty account number."
-msgstr ""
-
-#: app/views/modals/financialAccount.html
-msgid "You can't have empty bank name."
-msgstr ""
-
-#: app/views/modals/financialAccount.html
-msgid "You can't have empty routing number."
-msgstr ""
 
 #: app/scripts/models/user.js
 msgid ""
@@ -3562,10 +3615,6 @@ msgid ""
 msgstr ""
 "No tiene ningún pago seleccionado para verificación. Por favor, visite the\n"
 " <a href=\"#/payments\">Lista de pagos</a> para seleccionar algunos."
-
-#: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.html
-msgid "You have not selected a payment."
-msgstr "No ha seleccionado ningún pago."
 
 #: app/views/titlereleasecheckout.html
 msgid ""
@@ -3667,6 +3716,10 @@ msgstr "Su(s) solicitud(es) de títulos no pueden procesarse en este momento."
 msgid "Zip"
 msgstr "Código postal"
 
+#: app/scripts/directives/nxgAddress/nxgAddress.html
+msgid "Zip Code"
+msgstr "Código postal"
+
 #: app/404.html
 msgid "a mistyped address"
 msgstr "dirección mal escrita"
@@ -3701,7 +3754,7 @@ msgstr "únicamente con interés"
 msgid "invalid payment type"
 msgstr "tipo de pago inválido"
 
-#: app/maintenance.html
+#: app/views/maintenance.html app/maintenance.html
 msgid ""
 "myNextGear is currently unavailable while we update it with additional "
 "features and benefits. We\n"
@@ -3797,11 +3850,37 @@ msgstr ""
 
 #: app/views/modals/financialAccount.html
 msgid "{{account.AccountId ? 'Edit' : 'Add'}} Financial Account"
-msgstr ""
+msgstr "{{account.AccountId ? 'Editar' : 'Agregar'}} Cuenta Financiera"
 
 #: app/scripts/controllers/valuelookup.js
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Kelley Blue Book Co., Inc."
+
+#~ msgid "I have reviewed and agree to the Terms and Conditions."
+#~ msgstr ""
+#~ "He revisado los términos y condiciones y estoy de acuerdo con ellos."
+
+#~ msgid "Make payments today or schedule your payments when you checkout."
+#~ msgstr "Pague hoy o programe sus pagos cuando esté listo para facturar."
+
+#~ msgid "Routing number must only have numbers."
+#~ msgstr "El número de enrutamiento solo debe contener números."
+
+#~ msgid "Terms and Conditions"
+#~ msgstr "Términos y condiciones"
+
+#~ msgid ""
+#~ "You are about to enroll in ProperNounTBD. Please review the terms and "
+#~ "conditions below."
+#~ msgstr ""
+#~ "Está a punto de registrarse en ProperNounTBD. Por favor, revise los "
+#~ "siguientes términos y condiciones."
+
+#~ msgid "You are about to unenroll from ProperNounTBD..."
+#~ msgstr "Está a punto de cancelar su registro en ProperNounTBD"
+
+#~ msgid "You have not selected a payment."
+#~ msgstr "No ha seleccionado ningún pago."
 
 #~ msgid "Account name must only have letters and spaces."
 #~ msgstr "El nombre de la cuenta solo debe contener letras y espacios."

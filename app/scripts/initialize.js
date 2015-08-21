@@ -5,11 +5,11 @@
   angular.module('nextgearWebApp')
     .run(initialize);
 
-  initialize.$inject = ['$rootScope', '$location', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
-    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features'];
+  initialize.$inject = ['$rootScope', '$window', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
+    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
 
-  function initialize($rootScope, $location, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
-                      LastState, api, metric, language, features) {
+  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
+                      LastState, api, metric, language, features, kissMetricInfo) {
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
@@ -25,6 +25,7 @@
     features.loadFromQueryString();
 
     var prv = {
+      pendingReload: false,
       resetToLogin: resetToLogin,
       continuePostLogin: continuePostLogin,
       isStateNotForRole: isStateNotForRole
@@ -32,6 +33,7 @@
 
     function resetToLogin() {
       $state.go('login');
+      prv.pendingReload = true;
     }
 
     function continuePostLogin() {
@@ -110,15 +112,15 @@
       }
     );
 
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
-      if (fromState.name) {
-        segmentio.page(null, null, {
-          path: $state.current.url,
-          url: $state.href($state.current, null, { absolute: true }),
-          title: $state.current.name
-        });
-      }
-    });
+    $rootScope.$on('$stateChangeSuccess',
+        function(event, toState) {
+          if (toState.name === 'login' && prv.pendingReload) {
+            // clobber when success going to login
+            prv.pendingReload = false;
+            $window.location.reload(true);
+          }
+        }
+    );
 
     $rootScope.$on('event:switchState', function (event, state) {
       $state.go(state);
@@ -165,6 +167,12 @@
 
     $rootScope.$on('event:userAuthenticated',
       function () {
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(metric.LOGIN_SUCCESSFUL,result);
+          }
+        );
+
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
           $state.go('loginCreatePassword');

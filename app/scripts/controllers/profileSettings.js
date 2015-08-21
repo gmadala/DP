@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings, segmentio, metric, User) {
-    if(User.isDealer()) {
-      segmentio.track(metric.VIEW_PROFILE_SETTINGS);
-    }
+  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings) {
 
     $scope.loading = false;
 
@@ -35,11 +32,6 @@ angular.module('nextgearWebApp')
         if (!this.isDirty()) {
           this.cancel();
           return false;
-        }
-        if(User.isDealer()) {
-          segmentio.track(metric.CHANGE_PROFILE_SETTINGS);
-        } else {
-          segmentio.track(metric.CHANGE_AUCTION_SETTINGS);
         }
         return true;
       },
@@ -116,12 +108,6 @@ angular.module('nextgearWebApp')
           },
           cancel: function() {
             prv.cancel.apply(this);
-            // make sure to close any tooltips left open
-            angular.forEach(angular.element('.btn-help'), function(elem) {
-              // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-              angular.element(elem).scope().tt_isOpen = false;
-              // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-            });
           },
           save: function() {
             if (prv.save.apply(this)) {
@@ -135,13 +121,7 @@ angular.module('nextgearWebApp')
 
               ProfileSettings.saveProfile(d.username, d.password, d.email, cleanPhone, d.questions).then(
                 prv.saveSuccess.bind(this)
-              ).then(function() {
-                angular.forEach(angular.element('.btn-help'), function(elem) {
-                  // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-                  angular.element(elem).scope().tt_isOpen = false;
-                  // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-                });
-              });
+              );
             }
           },
           updateQuestionText: function(questions) {

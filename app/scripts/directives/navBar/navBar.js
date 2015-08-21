@@ -9,33 +9,33 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, metric, Payments, gettextCatalog, $cookieStore, language) {
+  .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, Payments, gettextCatalog, $cookieStore, language) {
 
     $scope.isCollapsed = true;
 
     var dealerLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard', metric: metric.CLICK_DASHBOARD_LINK},
-          { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', metric: metric.CLICK_PAYMENTS_LINK},
-          { name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', metric: metric.CLICK_FLOORPLAN_LINK},
-          { name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts', metric: metric.CLICK_RECEIPTS_LINK},
-          { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports', metric: metric.CLICK_VIEW_A_REPORT_LINK},
-          { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics', metric: metric.CLICK_VIEW_ANALYTICS_LINK}
+          { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard'},
+          { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments'},
+          { name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan'},
+          { name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts'},
+          { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports'},
+          { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics'}
         ],
         secondary: [
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar', metric: metric.CLICK_FLOOR_A_CAR_LINK},
-          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', metric: metric.CLICK_RESOURCES_LINK }
+          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
+          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'}
 
         ]
       },
       auctionLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard', metric: ''},
-          { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch', metric: ''},
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring', metric: ''},
-          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan', metric: ''},
-          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports', metric: metric.CLICK_AUCTION_REPORTS_LINK},
-          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents', metric: metric.CLICK_AUCTION_RESOURCES_LINK }
+          { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
+          { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
+          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
+          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
+          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports'},
+          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
         ]
       };
 
@@ -49,15 +49,13 @@ angular.module('nextgearWebApp')
               name: gettextCatalog.getString('Value Lookup'),
               href: '#/valueLookup',
               activeWhen: 'valueLookup',
-              metric: ''
             });
           }
           if ($scope.displayTitleRelease) {
             dealerLinks.primary.splice(3, 0, {
               name: gettextCatalog.getString('Title Releases'),
               href: '#/titlereleases',
-              activeWhen: 'titlereleases',
-              metric: metric.CLICK_TITLE_RELEASE_LINK
+              activeWhen: 'titlereleases'
             });
           }
           $scope.user = {

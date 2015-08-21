@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, features, gettextCatalog, gettext,
-                                           metric, segmentio) {
+                                           metric, segmentio, kissMetricInfo) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
     var disclaimerHeader =  gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
@@ -139,8 +139,14 @@ angular.module('nextgearWebApp')
         $scope.results.mileage = which.mileage;
         $scope.results.zipcode = which.zipcode;
 
-        segmentio.track(which.zipcode ? metric.CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON :
-          metric.CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON);
+        var whichMetric = which.zipcode ? metric.CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON :
+          metric.CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON;
+
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(whichMetric,result);
+          }
+        );
 
         // search blackbook
         Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
@@ -340,7 +346,11 @@ angular.module('nextgearWebApp')
           $scope.results.vin = null;
           $scope.results.mileage = which.mileage;
 
-          segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON);
+          kissMetricInfo.getKissMetricInfo().then(
+            function(result){
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON,result);
+            }
+          );
 
           Blackbook.lookupByOptions(which.makes.selected, which.models.selected, which.years.selected, which.styles.selected, which.mileage, true).then(function(vehicles) {
             // Blackbook will only ever return one result based
@@ -441,7 +451,11 @@ angular.module('nextgearWebApp')
           $scope.results.vin = null;
           $scope.results.mileage = which.mileage;
 
-          segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON);
+          kissMetricInfo.getKissMetricInfo().then(
+            function(result){
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON,result);
+            }
+          );
 
           Mmr.lookupByOptions(which.years.selected, which.makes.selected, which.models.selected, which.styles.selected, which.mileage).then(function(vehicles) {
             // MMR will almost always return only one result based
@@ -558,7 +572,11 @@ angular.module('nextgearWebApp')
           $scope.results.mileage = which.mileage;
           $scope.results.zip = which.zipcode;
 
-          segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON);
+          kissMetricInfo.getKissMetricInfo().then(
+            function(result){
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON,result);
+            }
+          );
 
           // since kbb does not return info about the vehicle in the return value, set it here
           var descriptionProperties = {

@@ -9,7 +9,7 @@
         <div class="nav-secondary" ng-show="user.isDealer()">
           <ul>
             <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
-              <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+              <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
             <li ng-show="chatEnabled">
               <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat</a>
@@ -31,14 +31,14 @@
 
           <ul class="unstyled" collapse="isCollapsed">
             <li class="noLeftPadding">
-              <a href="#/act/settings" ng-show="!user.isDealer()" nxg-track="{{metric.CLICK_SETTINGS_LINK}}" translate>Settings</a>
-              <a href="#/profile_settings" ng-show="user.isDealer()"  nxg-track="{{metric.CLICK_PROFILE_SETTINGS_LINK}}" translate>Profile Settings</a>
+              <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
+              <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
             </li>
             <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()" nxg-track="{{metric.CLICK_ACCOUNT_MANAGEMENT_LINK}}" translate>Account Management</a>
+              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
             </li>
             <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" nxg-track="{{metric.CLICK_LOGOUT_LINK}}" translate>Sign Out</a>
+              <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
             </li>
           </ul>
         </div>
@@ -63,7 +63,7 @@
       <div class="header">
         <ul class="nav-primary">
           <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">
-            <a ng-href="{{link.href}}" nxg-track="{{link.metric}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
+            <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
           </li>
         </ul>
       </div>

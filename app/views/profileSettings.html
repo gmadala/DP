@@ -34,7 +34,7 @@
               <input type="password" name="setPassword" class="xsmallInput" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                 <button class="btn-help"
                         tooltip-placement="right"
-                        tooltip-trigger="click"
+                        tooltip-trigger="mouseenter"
                         tooltip-html="true"
                         tooltip-html-unsafe="{{ '<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>' | translate }}"
                         tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
@@ -135,7 +135,7 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">
         <div class="row">
-          <label class="col-xs-6" translate>Notifications</label>
+          <label class="col-xs-6 no-left-margin" translate>Notifications</label>
           <label class="col-xs-6" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
         </div>
 

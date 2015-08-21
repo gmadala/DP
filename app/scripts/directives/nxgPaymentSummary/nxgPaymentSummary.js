@@ -11,9 +11,7 @@ angular.module('nextgearWebApp')
       controller: 'PaymentSummaryCtrl'
     };
   })
-  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, metric, PaymentOptions, gettext, User, gettextCatalog) {
-    //not showing up in html even though it's on rootScope. Adding here.
-    $scope.metric = metric;
+  .controller('PaymentSummaryCtrl', function ($scope, $state, Payments, PaymentOptions, gettext, User, gettextCatalog) {
     $scope.navigate = $state.transitionTo;
     $scope.paymentQueue = Payments.getPaymentQueue();
     $scope.paymentInProgress = Payments.paymentInProgress;

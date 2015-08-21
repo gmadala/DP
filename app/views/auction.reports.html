@@ -4,9 +4,7 @@
     <div class="well-item">
       <ul class="text-list zeroLeftPadding">
         <li ng-repeat="doc in documents">
-          <a target="_blank" ng-href="{{ doc.url }}"
-             nxg-track="{{ metric.VIEW_CURRENT_REPORT }}"
-             track-properties="{ reportName: doc.title }">
+          <a target="_blank" ng-href="{{ doc.url }}">
             {{ doc.title }}
           </a>
         </li>

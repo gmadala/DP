@@ -27,7 +27,7 @@
     </div>
 
     <!-- EDIT BANK ACCOUNT ONLY -->
-    <div class="small-top-margin smallest-bottom-margin" ng-if="!!account.AccountId">
+    <div class="small-top-margin smallest-bottom-margin" ng-if="isEditModal">
       <div class="row">
         <div class="col-xs-5 no-right-padding">
           <span class="heavy" translate>Account Name</span>
@@ -56,7 +56,7 @@
     <!-- END EDIT BANK ACCOUNT ONLY -->
 
     <!-- ADD BANK ACCOUNT ONLY -->
-    <div ng-if="!account.AccountId">
+    <div ng-if="isAddModal">
       <div class="row">
         <div class="col-xs-6">
           <label for="accountNumber" translate>Account Number</label>
@@ -75,9 +75,9 @@
           <label for="confirmAccountNumber" translate>Confirm Account Number</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || !confirmAccountNumberValid }"
+                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)}"
                  ng-paste="$event.preventDefault()">
-          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && !confirmAccountNumberValid" translate>
+          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)" translate>
             Does not match with account number.
           </label>
           <label for=confirmAccountNumber class="text-error" ng-show="validity.confirmAccountNumber.$error.required" translate>
@@ -109,25 +109,39 @@
     <!-- END ADD BANK ACCOUNT ONLY -->
 
     <div class="row">
-      <div class="col-xs-12 cr-inline">
+      <div class="col-xs-6 cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
                ng-model="account.IsDefaultDisbursement" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForDisbursement"></label>
         <label class="cr-label" for="defaultForDisbursement" ng-class="{'text-disabled' : !account.IsActive}">
-          <strong translate>Default for disbursement</strong>
+          <strong translate>Default for deposits</strong>
         </label>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 cr-inline">
+      <div class="col-xs-6 cr-inline">
         <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
                ng-model="account.IsDefaultPayment" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForPayment"></label>
         <label class="cr-label" for="defaultForPayment" ng-class="{'text-disabled' : !account.IsActive}">
-          <strong translate>Default for payment</strong>
+          <strong translate>Default for withdrawals</strong>
         </label>
       </div>
     </div>
+
+    <!-- ADD BANK ACCOUNT ONLY -->
+    <div ng-if="isAddModal">
+      <div class="row">
+        <div class="col-xs-12 cr-inline">
+          <input type="checkbox" name="tosAcceptanceFlag" id="tosAcceptanceFlag"
+                 ng-model="account.TOSAcceptanceFlag" ng-disabled="!tosVisited">
+          <label class="checkbox-img" for="tosAcceptanceFlag"></label>
+          <label class="cr-label" for="tosAcceptanceFlag" translate>
+            Lorem ipsum dolor sit amet, consectetur silt iverra of the
+            <a target="_blank" ng-click="visitTOS()" translate>Terms and Conditions.</a>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- END ADD BANK ACCOUNT ONLY -->
   </form>
 </div>
 
@@ -135,10 +149,7 @@
   <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>
     Cancel Changes
   </button>
-  <button ng-if="!!account.AccountId" type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
-    Save Changes
-  </button>
-  <button ng-if="!account.AccountId" type="submit" ng-disabled="loading" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
+  <button type="submit" ng-disabled="loading || (isAddModal && !account.TOSAcceptanceFlag)" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
     Save Changes
   </button>
 </div>

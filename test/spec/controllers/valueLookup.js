@@ -391,6 +391,7 @@ describe('Controller: ValueLookupCtrl', function () {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond({});
       $httpBackend.whenGET('/mmr/years/').respond({});
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
+      $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
       spyOn(User, 'isUnitedStates').andReturn(true);
       run();
     });
@@ -572,6 +573,7 @@ describe('Controller: ValueLookupCtrl', function () {
       $httpBackend.whenGET('/analytics/blackbook/vehicles/').respond(mock.bb.makes);
       $httpBackend.whenGET('/mmr/years/').respond(mock.mmr.years);
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond(mock.kbb.years);
+      $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
       spyOn(blackbook, 'getMakes').andCallThrough();
       spyOn(mmr, 'getYears').andCallThrough();
       spyOn(kbb, 'getYears').andCallThrough();

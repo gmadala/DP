@@ -5,10 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, metric, $timeout, segmentio, gettextCatalog, Addresses) {
-
-    $scope.metric = metric; // make metric names available to templates
-    segmentio.track(metric.VIEW_FLOORPLAN_PAGE);
+  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, $timeout, gettextCatalog, Addresses) {
     $scope.isCollapsed = true;
 
     var isDealer = User.isDealer();
@@ -139,8 +136,6 @@ angular.module('nextgearWebApp')
           }
 
           $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
-            /*jshint camelcase: false */
-            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
             toggleTooltip(curFloorplan.next(), true);
           }, 2000);

@@ -1,18 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, $window, Dashboard, Floorplan, FloorplanUtil, segmentio,
-                                        metric, moment, $filter, gettext, gettextCatalog, capitalizeFilter) {
-    var additionalInfo = {
-      height: $window.screen.height,
-      width: $window.screen.width,
-      availTop: $window.screen.availTop,
-      availLeft: $window.screen.availLeft,
-      availHeight: $window.screen.availHeight,
-      availWidth: $window.screen.availWidth,
-      userAgent: $window.navigator.userAgent
-    };
-    segmentio.track(metric.VIEW_DASHBOARD, additionalInfo);
+  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil,
+                                        moment, $filter, gettext, gettextCatalog, capitalizeFilter) {
 
     // for caching our week/month summary data
     $scope.paymentSummary = {

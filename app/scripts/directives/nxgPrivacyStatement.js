@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
     return {
       restrict: 'E',
       replace: true,
-      template: '<a href="{{href}}" target="_blank" nxg-track="{{metric.CLICK_PRIVACY_STATEMENT_LINK}}" translate>' +
+      template: '<a href="{{href}}" target="_blank" translate>' +
       privacyStatement + '</a>',
       controller: function ($scope, User) {
         $scope.$watch(
