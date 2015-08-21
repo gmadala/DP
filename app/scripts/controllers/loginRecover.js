@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog) {
+  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
 
     $scope.userNameRecovery = {
       // forgotUserNameForm
@@ -9,15 +9,24 @@ angular.module('nextgearWebApp')
       failed: false,
       submit: function () {
         $scope.userNameRecovery.failed = false;
-
         $scope.forgotUserNameValidity = angular.copy($scope.forgotUserNameForm);
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(metric.ATTEMPT_USERNAME_RECOVERY,result);
+          }
+        );
         if ($scope.forgotUserNameForm.$invalid) {
           return;
         }
 
         $scope.submitInProgress = true;
         User.recoverUserName($scope.userNameRecovery.email).then(
-          function (/*success*/) {
+          function(/*success*/) {
+            kissMetricInfo.getKissMetricInfo().then(
+              function(result){
+                segmentio.track(metric.USERNAME_RECOVERY_SUCCESS,result);
+              }
+            );
             $scope.submitInProgress = false;
             $scope.showSuccessMessage();
           }, function (error) {
@@ -35,7 +44,11 @@ angular.module('nextgearWebApp')
       usernameFailed: false,
       submitUsername: function () {
         $scope.passwordRecovery.usernameFailed = false;
-
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY,result);
+          }
+        );
         $scope.forgotPasswordValidity = angular.copy($scope.forgotPasswordForm);
         if ($scope.forgotPasswordForm.$invalid) {
           return;
@@ -67,7 +80,11 @@ angular.module('nextgearWebApp')
         angular.forEach($scope.passwordRecovery.questions, function (question) {
           question.$invalid = question.Answer ? false : true;
         });
-
+        kissMetricInfo.getKissMetricInfo().then(
+          function(result){
+            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS,result);
+          }
+        );
         if ($scope.forgotPasswordForm.$invalid) {
           return;
         }
@@ -75,6 +92,11 @@ angular.module('nextgearWebApp')
         $scope.submitInProgress = true;
         User.resetPassword($scope.passwordRecovery.username, $scope.passwordRecovery.questions).then(
           function (/*success*/) {
+            kissMetricInfo.getKissMetricInfo().then(
+              function(result){
+                segmentio.track(metric.PASSWORD_RECOVERY_SUCCESS,result);
+              }
+            );
             $scope.submitInProgress = false;
             $scope.showSuccessMessage();
           }, function (error) {
