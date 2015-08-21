@@ -73,17 +73,22 @@
         </td>
         <td>
           <h5>{{ item.TitleLocation }}</h5>
+          <input type="hidden" ng-model="item.sellerHasTitleChanged" />
           <div class="seller-has-title-box cr-inline-narrow" ng-show="item.TitleEditable">
             <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
-                    ng-model="item.sellerHasTitle"
-                    ng-click="sellerHasTitle(item, !item.sellerHasTitle)" />
+                   ng-model="item.sellerHasTitle"
+                   ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
             <label class="checkbox-img small"
-                    for="{{ item.FloorplanId }}"
-                    tooltip-placement="top"
-                    tooltip-trigger="click"
-                    tooltip-html="true"
-                    tooltip-html-unsafe="{{ 'NextGear has been notified of this change and will be sending funding soon.' | translate }}"
-                    tooltip-animation="true" translate>
+                   for="{{ item.FloorplanId }}" ng-if="hideTooltip(item.sellerHasTitle, item.sellerHasTitleChanged)">
+            </label>
+            <label class="checkbox-img small"
+                   for="{{ item.FloorplanId }}"
+                   ng-show="showTooltip(item.sellerHasTitle, item.sellerHasTitleChanged)"
+                   tooltip-placement="top"
+                   tooltip-trigger="click"
+                   tooltip-html="true"
+                   tooltip-html-unsafe="{{ 'NextGear has been notified of this change and will be sending funding soon.' | translate }}"
+                   tooltip-animation="true" translate>
             </label>
             <div class="medium-left-margin">
             <label for="{{ item.FloorplanId }}" class="cr-label" translate>

@@ -25,7 +25,8 @@ angular.module('nextgearWebApp')
             }
           },
           function(/*error*/) {
-            $state.transitionTo('maintenance');
+            callback('');
+            // $state.transitionTo('maintenance');
           }
         );
       }
