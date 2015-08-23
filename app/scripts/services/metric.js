@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
     CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
 
     //Checkout Events
-    CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',//x
+    DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Dealer Reports - Export Payment Summary',//x
 
     //View a Report Events
     DEALER_REPORTS_VEHICLE_HISTORY_DETAIL:'Dealer Reports - Vehicle History Detail',
