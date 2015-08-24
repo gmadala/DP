@@ -25,10 +25,13 @@ angular.module('nextgearWebApp')
     $scope.documentLink = '/documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf';
 
     $scope.confirm = function () {
-
       kissMetricInfo.getKissMetricInfo().then(
-        function(result){
-          segmentio.track(metric.AUCTION_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED_PAGE,result);
+        function (result) {
+          if ($scope.isDealer) {
+            segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED, result);
+          } else {
+            segmentio.track(metric.AUCTION_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED_PAGE, result);
+          }
           $scope.kissMetricData = result;
         }
       );

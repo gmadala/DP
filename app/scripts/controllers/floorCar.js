@@ -161,13 +161,6 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (/*success*/) {
-
-          kissMetricInfo.getKissMetricInfo().then(
-            function(result){
-              segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED,result);
-            }
-          );
-
           $scope.submitInProgress = false;
           var title = gettextCatalog.getString('Flooring Request Submitted'),
             msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),
