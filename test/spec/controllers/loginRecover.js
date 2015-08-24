@@ -9,13 +9,32 @@ describe('Controller: LoginRecoverCtrl', function () {
     scope,
     state,
     $dialog,
-    dialog;
+    dialog,
+    segmentio,
+    metric,
+    mockKissMetricInfo,
+    BusinessHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$dialog_, $q) {
+  beforeEach(inject(function ($controller, $rootScope, _$dialog_, $q, _segmentio_, _BusinessHours_, _metric_) {
+    BusinessHours=_BusinessHours_;
+    metric = _metric_;
+    segmentio = _segmentio_;
     scope = $rootScope.$new();
     state = {
       transitionTo: angular.noop
+    };
+
+    mockKissMetricInfo = {
+      getKissMetricInfo: function() {
+        return $q.when({
+          vendor : 'Google Inc.',
+          version : 'Chrome 44',
+          height : 1080,
+          width : 1920,
+          isBusinessHours : true
+        });
+      }
     };
 
     dialog = {
@@ -28,11 +47,29 @@ describe('Controller: LoginRecoverCtrl', function () {
 
     LoginRecoverCtrl = $controller('LoginRecoverCtrl', {
       $scope: scope,
-      $state: state
+      $state: state,
+      kissMetricInfo: mockKissMetricInfo
     });
+    spyOn(BusinessHours,'insideBusinessHours').andReturn($q.when(true));
   }));
 
   describe('userNameRecovery', function () {
+
+    it('should track username recovery attempt using segment io.', function() {
+      scope.forgotUserNameForm = {
+        $invalid: true
+      };
+      spyOn(segmentio, 'track');
+      scope.userNameRecovery.submit();
+      scope.$digest();
+      expect(segmentio.track).toHaveBeenCalledWith(metric.ATTEMPT_USERNAME_RECOVERY, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : true
+      });
+    });
 
     it('should have an email model property defaulted to null', function () {
       expect(scope.userNameRecovery.email).toBe(null);

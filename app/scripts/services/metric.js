@@ -7,8 +7,11 @@ angular.module('nextgearWebApp')
     SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
 
     //Login Events
-    CLICK_LOGIN_USERNAME_RECOVERY_SUBMIT_BUTTON: 'Click Login UN Recovery Submit Button',//x
-    CLICK_LOGIN_PASSWORD_RECOVERY_SUBMIT_BUTTON: 'Click Login PW Recovery Submit Button',//x
+    ATTEMPT_PASSWORD_RECOVERY: 'Attempt to Recover Password',//x
+    ATTEMPT_PASSWORD_RECOVERY_QUESTIONS: 'Attempt to Answer Password Recovery Questions',
+    ATTEMPT_USERNAME_RECOVERY: 'Attempt to Recover Username',//x
+    PASSWORD_RECOVERY_SUCCESS: 'Submitted Password Recovery Successfully',
+    USERNAME_RECOVERY_SUCCESS: 'Submitted Username Recovery Successfully',
 
     // Flooring car
     DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
