@@ -37,7 +37,7 @@
     }
 
     function getKissMetricInfo(){
-      return getKissMetricInfoAuthenticated(true)
+      return getKissMetricInfoAuthenticated(true);
     }
 
   }

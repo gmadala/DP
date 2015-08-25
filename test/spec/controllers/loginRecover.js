@@ -13,14 +13,18 @@ describe('Controller: LoginRecoverCtrl', function () {
     segmentio,
     metric,
     mockKissMetricInfo,
+    User,
+    $q,
     BusinessHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$dialog_, $q, _segmentio_, _BusinessHours_, _metric_) {
+  beforeEach(inject(function ($controller, $rootScope, _$dialog_, _$q_, _segmentio_, _BusinessHours_, _metric_, _User_) {
     BusinessHours=_BusinessHours_;
     metric = _metric_;
     segmentio = _segmentio_;
     scope = $rootScope.$new();
+    User = _User_;
+    $q = _$q_;
     state = {
       transitionTo: angular.noop
     };
@@ -73,6 +77,97 @@ describe('Controller: LoginRecoverCtrl', function () {
       scope.userNameRecovery.submit();
       scope.$digest();
       expect(segmentio.track).toHaveBeenCalledWith(metric.ATTEMPT_USERNAME_RECOVERY, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+      expect(segmentio.track).not.toHaveBeenCalledWith(metric.USERNAME_RECOVERY_SUCCESS, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+    });
+
+    it('should track username recovery success using segment io.', function() {
+      scope.forgotUserNameForm = {
+        $invalid: false
+      };
+
+      spyOn(User, 'recoverUserName').andReturn($q.when({}));
+
+      spyOn(segmentio, 'track');
+      scope.userNameRecovery.submit();
+      scope.$digest();
+
+      expect(segmentio.track).toHaveBeenCalledWith(metric.USERNAME_RECOVERY_SUCCESS, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+    });
+
+    it('should track password recover attempt using segment io.', function(){
+      scope.forgotPasswordForm = {
+        $invalid: true
+      };
+      spyOn(segmentio, 'track');
+      scope.passwordRecovery.submitUsername();
+      scope.$digest();
+      expect(segmentio.track).toHaveBeenCalledWith(metric.ATTEMPT_PASSWORD_RECOVERY, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+    });
+
+    it('should track password recovery attempt questions answered using segment io.', function(){
+      scope.forgotPasswordForm = {
+        $invalid: true
+      };
+      spyOn(segmentio, 'track');
+      scope.passwordRecovery.submitQuestions();
+      scope.$digest();
+      expect(segmentio.track).toHaveBeenCalledWith(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+      expect(segmentio.track).not.toHaveBeenCalledWith(metric.PASSWORD_RECOVERY_SUCCESS, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+    });
+
+    it('should track password recovery success using segment io.', function(){
+      scope.forgotPasswordForm = {
+        $invalid: false
+      };
+      spyOn(User, 'resetPassword').andReturn($q.when({}));
+
+      spyOn(segmentio, 'track');
+      scope.passwordRecovery.submitQuestions();
+      scope.$digest();
+      expect(segmentio.track).toHaveBeenCalledWith(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS, {
+        vendor : 'Google Inc.',
+        version : 'Chrome 44',
+        height : 1080,
+        width : 1920,
+        isBusinessHours : null
+      });
+      expect(segmentio.track).toHaveBeenCalledWith(metric.PASSWORD_RECOVERY_SUCCESS, {
         vendor : 'Google Inc.',
         version : 'Chrome 44',
         height : 1080,
