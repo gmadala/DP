@@ -6,7 +6,7 @@
  */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog, segmentio, metric, kissMetricInfo) {
+                                       OptionDefaultHelper, moment, gettextCatalog) {
 
     var isDealer = User.isDealer();
 

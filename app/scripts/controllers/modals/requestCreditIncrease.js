@@ -46,9 +46,9 @@ angular.module('nextgearWebApp')
 
           kissMetricInfo.getKissMetricInfo().then(function(result) {
             if ($scope.selector.isTemporary === 'true') {
-               segmentio.track(metric.DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE, result);
+              segmentio.track(metric.DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE, result);
             } else {
-               segmentio.track(metric.DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED, result);
+              segmentio.track(metric.DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED, result);
             }
             $scope.kissMetricData = result;
           });
