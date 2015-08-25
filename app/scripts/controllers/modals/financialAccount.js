@@ -12,7 +12,7 @@
     $scope.defaultForDisbursement = options.defaultForDisbursement;
 
     var accountNumber = $scope.account.AccountNumber;
-    $scope.accountNumberDisplay = accountNumber ? '******' + lastFour(accountNumber) : '';
+    $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
     $scope.inputs = {

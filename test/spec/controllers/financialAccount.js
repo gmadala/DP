@@ -46,7 +46,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
         'IsDefaultPayment': true,
         'IsDefaultDisbursement': true,
-        'AccountNumber': '4199137905'
+        'AccountNumber': '7905'
       };
 
       AccountManagementMock = {
