@@ -3,12 +3,6 @@
 angular.module('nextgearWebApp')
   .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User, kissMetricInfo) {
 
-    kissMetricInfo.getKissMetricInfo().then(
-      function(result){
-        segmentio.track(metric.VIEW_RESOURCES_PAGE,result);
-      }
-    );
-
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
