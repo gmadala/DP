@@ -10,7 +10,7 @@ angular.module('nextgearWebApp')
       submit: function () {
         $scope.userNameRecovery.failed = false;
         $scope.forgotUserNameValidity = angular.copy($scope.forgotUserNameForm);
-        kissMetricInfo.getKissMetricInfo().then(
+        kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
             segmentio.track(metric.ATTEMPT_USERNAME_RECOVERY,result);
           }
@@ -22,7 +22,7 @@ angular.module('nextgearWebApp')
         $scope.submitInProgress = true;
         User.recoverUserName($scope.userNameRecovery.email).then(
           function(/*success*/) {
-            kissMetricInfo.getKissMetricInfo().then(
+            kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
               function(result){
                 segmentio.track(metric.USERNAME_RECOVERY_SUCCESS,result);
               }
@@ -44,7 +44,7 @@ angular.module('nextgearWebApp')
       usernameFailed: false,
       submitUsername: function () {
         $scope.passwordRecovery.usernameFailed = false;
-        kissMetricInfo.getKissMetricInfo().then(
+        kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
             segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY,result);
           }
@@ -80,7 +80,7 @@ angular.module('nextgearWebApp')
         angular.forEach($scope.passwordRecovery.questions, function (question) {
           question.$invalid = question.Answer ? false : true;
         });
-        kissMetricInfo.getKissMetricInfo().then(
+        kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
             segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS,result);
           }
@@ -92,7 +92,7 @@ angular.module('nextgearWebApp')
         $scope.submitInProgress = true;
         User.resetPassword($scope.passwordRecovery.username, $scope.passwordRecovery.questions).then(
           function (/*success*/) {
-            kissMetricInfo.getKissMetricInfo().then(
+            kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
               function(result){
                 segmentio.track(metric.PASSWORD_RECOVERY_SUCCESS,result);
               }

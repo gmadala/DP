@@ -4,13 +4,16 @@
   angular.module('nextgearWebApp')
     .factory('kissMetricInfo', kissMetricInfo);
 
-  kissMetricInfo.$inject = [ '$window', 'BusinessHours'];
+  kissMetricInfo.$inject = [ '$window', 'BusinessHours', '$q'];
 
-  function kissMetricInfo($window, BusinessHours) {
+  function kissMetricInfo($window, BusinessHours, $q) {
 
-    return {getKissMetricInfo:getKissMetricInfo};
+    return {
+      getKissMetricInfoAuthenticated: getKissMetricInfoAuthenticated,
+      getKissMetricInfo: getKissMetricInfo
+    };
 
-    function getKissMetricInfo() {
+    function getKissMetricInfoAuthenticated(authenticated) {
 
       var retObj = {};
 
@@ -19,13 +22,22 @@
       retObj.height = $window.screen.height;
       retObj.width = $window.screen.width;
 
-      return BusinessHours.insideBusinessHours().then(function (result) {
-        retObj.isBusinessHours = result;
-        return retObj;
-      }, function () {
-        retObj.isBusinessHours = false;
-        return retObj;
-      });
+      if(authenticated === true) {
+        return BusinessHours.insideBusinessHours().then(function (result) {
+          retObj.isBusinessHours = result;
+          return retObj;
+        }, function () {
+          retObj.isBusinessHours = false;
+          return retObj;
+        });
+      } else {
+        retObj.isBusinessHours = null;
+        return $q.when(retObj);
+      }
+    }
+
+    function getKissMetricInfo(){
+      return getKissMetricInfoAuthenticated(true)
     }
 
   }
