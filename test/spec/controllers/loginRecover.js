@@ -34,6 +34,16 @@ describe('Controller: LoginRecoverCtrl', function () {
           width : 1920,
           isBusinessHours : true
         });
+      },
+
+      getKissMetricInfoAuthenticated: function() {
+        return $q.when({
+          vendor: 'Google Inc.',
+          version : 'Chrome 44',
+          height : 1080,
+          width : 1920,
+          isBusinessHours: null
+        });
       }
     };
 
@@ -67,7 +77,7 @@ describe('Controller: LoginRecoverCtrl', function () {
         version : 'Chrome 44',
         height : 1080,
         width : 1920,
-        isBusinessHours : true
+        isBusinessHours : null
       });
     });
 
