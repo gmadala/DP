@@ -9,3 +9,22 @@
 .col-xs-2.well.dash-well ul {
   margin-top: 14%;
 }
+
+#unappliedFunds {
+  position: absolute;
+  bottom: 0;
+  padding: 14px 5px;
+  color: #39c;
+  border: 1px solid #bbb;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0 0 5px 5px;
+  height: 40px;
+  margin: 0;
+  width: 100%;
+  p{
+    font-size: 10px;
+    text-align: center;
+  }
+}

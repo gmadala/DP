@@ -13,7 +13,12 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api, gettextCatalog) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api, gettextCatalog, AccountManagement) {
+
+    AccountManagement.get().then(function (result) {
+      $scope.autoDisburseUnappliedFunds = result.AutoDisburseUnappliedFundsDaily;
+    });
+
 
     $scope.openRequestPayout = function($event) {
       $event.preventDefault();
