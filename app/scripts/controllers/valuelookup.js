@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, features, gettextCatalog, gettext,
+  .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext,
                                            metric, segmentio, kissMetricInfo) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
@@ -35,7 +35,7 @@ angular.module('nextgearWebApp')
     $scope.results = {};
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
-    $scope.kbbEnabled = features.kbb.enabled && $scope.isUnitedStates;
+    $scope.kbbEnabled = (User.getFeatures.hasOwnProperty("kbb") ? User.getFeatures.kbb.enabled  : true) && $scope.isUnitedStates;
 
     var buildDescription = function(obj) {
       return obj.Year + ' ' + obj.Make + ' ' + obj.Model;

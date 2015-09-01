@@ -16,7 +16,7 @@
  * The loadFromQueryString must be called from app.run while the query string is still intact.
  */
 angular.module('nextgearWebApp')
-  .factory('features', function ($location) {
+  .factory('features', function ($location, api) {
 
     var service = {
       kbb: {

@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
-                                                User, api, $q, dealerCustomerSupportPhone, features, segmentio, metric) {
+                                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric) {
 
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
 
@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
-    $scope.autoPayEnabled = features.autoPay.enabled;
+    $scope.autoPayEnabled = User.getFeatures.hasOwnProperty("autoPay") ?  User.getFeatures.autoPay.enabled :  true;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -218,7 +218,7 @@ angular.module('nextgearWebApp')
            * @return {Boolean} Is the user allowed to add a bank account?
            */
           isAddBankAccountEditable: function() {
-            return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
+            return (User.getFeatures.hasOwnProperty("addBankAccount") ? User.getFeatures.addBankAccount.enabled : true)  && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
           /**
