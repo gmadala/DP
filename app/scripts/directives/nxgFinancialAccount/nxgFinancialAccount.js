@@ -37,7 +37,7 @@
       scope.routingNumberLabel = routingNumberFilter('', scope.isUnitedStates, true);
       scope.routingNumberDisplay = routingNumberFilter(scope.account.AchAbaNumber, scope.isUnitedStates, false);
       scope.editFinancialAccount = editFinancialAccount;
-      scope.editBankAccountEnabled = User.getFeatures.hasOwnProperty("editBankAccount") ? User.getFeatures.editBankAccount.enabled : true;
+      scope.editBankAccountEnabled = User.features.hasOwnProperty("editBankAccount") ? User.features.editBankAccount.enabled : true;
       scope.isEditable = isEditable;
 
       /**

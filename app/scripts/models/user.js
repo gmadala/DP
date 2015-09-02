@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
     return {
       features : [],
       getFeatures: function(){
-         return this.features
+         return this.features;
        },
 
       setFeatures: function(features){
