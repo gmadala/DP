@@ -89,8 +89,8 @@ angular.module('nextgearWebApp')
         /** BUSINESS SETTINGS **/
         $scope.business = {
           data: {
-            phone: "1-234-567-8910",
-            fax: "1-234-567-8912",
+            phone: '1-234-567-8910',
+            fax: '1-234-567-8912',
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
             enhancedRegistrationPin: null,
