@@ -128,7 +128,7 @@
               scope.updateDisbursementAccount({disbursementAccountId: updatedAccount.AccountId});
             }
             scope.account.AchBankName = updatedAccount.BankName;
-            scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
+            scope.status = updatedAccount.IsActive;
           }
         }
       }

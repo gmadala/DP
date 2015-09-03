@@ -1,11 +1,30 @@
 <div class="row" id="FinancialAccounts">
   <section class="col-md-12 well settings-well financial-table">
-    <h2 class="well-title no-bottom-border">
+    <h2 class="well-title">
       <span translate>Financial Accounts</span>
       <div class="well-subtitle well-subtitle-edit pull-right" ng-show="financial.isAddBankAccountEditable()">
         <button class="btn-unstyle heavy" ng-click="financial.addFinancialAccount()" translate>Add Account</button>
       </div>
     </h2>
+    <div class="well-column-header" ng-show="editBankAccountEnabled">
+      <h6 class="col-xs-1">Deposit To</h6>
+      <h6 class="col-xs-15">Withdraw From</h6>
+      <h6 class="col-xs-2 left-align left-padding">Bank Name</h6>
+      <h6 class="col-xs-2">Account Number</h6>
+      <h6 class="col-xs-15">{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-2" ng-show="editBankAccountEnabled">Recent Transaction</h6>
+      <h6 class="col-xs-1">Active</h6>
+    </div>
+    <!--The following allows for the re-spacing when recent transactions is hidden.
+    This can be removed as soon as recent transactions goes live-->
+    <div class="well-column-header" ng-show="!editBankAccountEnabled">
+      <h6 class="col-xs-1">Deposit To</h6>
+      <h6 class="col-xs-15">Withdraw From</h6>
+      <h6 class="col-xs-3 left-align left-padding">Bank Name</h6>
+      <h6 class="col-xs-2">Account Number</h6>
+      <h6 class="col-xs-15">{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-2">Active</h6>
+    </div>
     <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true" class="">
       <nxg-financial-account account="account" disbursement-account="financial.data.disbursementAccount"
                              billing-account="financial.data.billingAccount"
@@ -32,8 +51,33 @@
 
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
-        <div class="row">
-          <label class="col-xs-5" for="businessEmail"><span translate>Business Email</span>:</label>
+
+        <div class="row"  ng-show="business.contactInfo.isDisplayed()">
+          <label class="col-xs-5" for="businessPhone"><span translate>Phone</span></label>
+          <div class="col-xs-7" nxg-input model="business.data.phone" editable="business.editable">
+            <input type="tel" class="xsmallInput" id="businessPhone" name="businessPhone" ng-model="business.dirtyData.phone"
+                   value="business.dirtyData.phone"
+                   ng-class="{ 'nxg-invalid': business.validation.businessPhone.$invalid }" required/>
+            <label class="text-error" ng-show="business.validation.businessPhone.$invalid" translate>
+              Please enter a valid phone number.
+            </label>
+          </div>
+        </div>
+
+        <div class="row"  ng-show="business.contactInfo.isDisplayed()">
+          <label class="col-xs-5" for="businessFax"><span translate>Fax</span></label>
+          <div class="col-xs-7" nxg-input model="business.data.fax" editable="business.editable">
+            <input type="tel" class="xsmallInput" id="businessFax" name="businessFax" ng-model="business.dirtyData.fax"
+                   value="business.dirtyData.fax"
+                   ng-class="{ 'nxg-invalid': business.validation.businessFax.$invalid }" required/>
+            <label class="text-error" ng-show="business.validation.businessFax.$invalid" translate>
+              Please enter a valid fax number.
+            </label>
+          </div>
+        </div>
+
+        <div class="row small-bottom-border">
+          <label class="col-xs-5" for="businessEmail"><span translate>Email</span></label>
           <div class="col-xs-7" nxg-input model="business.data.email" editable="business.editable">
             <input type="email" class="xsmallInput" id="businessEmail" name="businessEmail" ng-model="business.dirtyData.email"
                    value="business.dirtyData.email" ng-maxlength="100"
@@ -44,8 +88,11 @@
           </div>
         </div>
 
+        <div class="divider">
+        </div>
+
         <div class="row">
-          <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>
+          <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span></label>
           <!--From develop: <label class="span5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>-->
           <div class="col-xs-7">
             <div class="row">
@@ -114,42 +161,15 @@
 
         </div>
 
-        <div class="row" ng-show="business.autoPay.isDisplayed()">
 
-          <label class="col-xs-5" for="autoPay"><span translate>Enrolled in Automated Payments</span>:</label>
-          <div class="col-xs-7">
-            <div class="row">
-              <div class="col-xs-7">
-                <div class="static" ng-show="business.data.autoPayEnabled && !business.autoPay.isEditable()" translate> Yes </div>
-                <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-                <div class="static" ng-show="business.data.autoPayEnabled == false && !business.autoPay.isEditable()"
-                     translate>
-                  No
-                </div>
-
-                <div class="cr-inline" ng-show="business.autoPay.isEditable()">
-                  <input type="radio" id="autoPayNo" name="autoPay" ng-model="business.dirtyData.autoPayEnabled" ng-value='false' ng-click="business.autoPay.confirmDisable()"/>
-                  <label class="radio-img" for="autoPayNo"></label>
-                  <label class="cr-label" for="autoPayNo" translate>No</label>
-
-                  <input type="radio" id="autoPayYes" name="autoPay" ng-model="business.dirtyData.autoPayEnabled" ng-value='true' ng-click="business.autoPay.confirmEnable()"/>
-                  <label class="radio-img" for="autoPayYes"></label>
-                  <label class="cr-label" for="autoPayYes" translate>Yes</label>
-                </div>
-              </div>
-              <div class="col-md-2">
-              </div>
-            </div>
-          </div>
-        </div>
       </form>
     </div>
   </section>
 
-  <!-- TITLE SETTINGS -->
+  <!-- ADDRESS SETTINGS (formerly Title Settings)-->
   <section class="col-xs-6 well settings-well">
     <h2 class="well-title">
-      <span translate>Title Settings</span>
+      <span translate>Address Settings</span>
       <div class="well-sub-title well-sub-title-edit">
         <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
         <button ng-show="title.editable" class="btn-unstyle" ng-click="title.save()" translate>Save Settings</button>
@@ -160,9 +180,9 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
         <div class="row">
-          <label class="col-xs-5" for="titleAddr"><span translate>Default Address</span>:</label>
+          <label class="col-xs-4" for="titleAddr"><span translate>Default Address</span></label>
 
-          <div class="col-xs-7">
+          <div class="col-xs-8">
             <div class="row" ng-show="title.editable">
               <div class="col-xs-10">
                 <div class="style-select">
@@ -188,10 +208,10 @@
 
             <!-- Saved Address -->
             <div class="row static" ng-hide="title.editable">
-              <div class="col-xs-6">
-                <div nxg-address="title.data.titleAddress"></div>
+              <div class="col-xs-10 noLeftMargin">
+                <div nxg-address-inline="title.data.titleAddress"></div>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-2">
                 <button class="btn-help"
                         tooltip-placement="left"
                         tooltip-trigger="focus"
@@ -205,18 +225,18 @@
 
             <!-- Current Address Selection-->
             <div class="static" ng-show="title.editable">
-              <div nxg-address="title.dirtyData.titleAddress"></div>
+              <div nxg-address-inline="title.dirtyData.titleAddress"></div>
             </div>
           </div>
         </div>
 
-        <div class="row" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
-          <label class="col-xs-5"><span translate>Additional Addresses</span>:</label>
+        <div class="row alt-addr" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
+          <label class="col-xs-4"><span translate>Additional Addresses</span></label>
 
-          <div class="col-xs-7 static" ng-hide="title.editable">
+          <div class="col-xs-8 static" ng-hide="title.editable">
             <ul class="zeroLeftPadding">
-              <li class="alt-addr" ng-repeat="addr in title.data.addresses | limitTo: 3">
-                <div nxg-address="addr"></div>
+              <li ng-repeat="addr in title.data.addresses | limitTo: 3">
+                <div nxg-address-inline="addr"></div>
               </li>
               <li ng-show="title.data.extraAddresses" translate>
                 And {{ title.data.extraAddresses }} additional addresses...
@@ -232,60 +252,62 @@
   </section>
 </div>
 
-<div class="row topMargin">
-  <!-- ACCOUNT INFORMATION (previously FINANCIAL ACCOUNTS) -->
-  <section class="col-xs-6 well settings-well">
-    <h2 class="well-title" translate>NextGear Account Information</h2>
+<div class="row ng-scope topMargin">
+  <!-- [BRAND] -->
+
+  <section class="col-xs-6 well settings-well" ng-show="brand.autoPay.isDisplayed()">
+    <h2 class="well-title">
+      <span translate>[New Label Here]</span>
+      <div class="well-sub-title well-sub-title-edit">
+        <button ng-hide="brand.editable" class="btn-unstyle" ng-click="brand.edit()" translate>Edit Settings</button>
+        <button ng-show="brand.editable" class="btn-unstyle" ng-click="brand.save()" translate>Save Settings</button>
+        <button ng-show="brand.editable" class="btn-unstyle cancel" ng-click="brand.cancel()" translate>Cancel</button>
+      </div>
+    </h2>
 
     <div class="well-item">
-      <form class="form-block" name="financialSettings" novalidate>
+      <form class="form-block" name="brandSettings" novalidate>
         <div class="row">
-          <label class="col-xs-5"><span translate>Available Credit</span>:</label>
+          <div class="nxg-small-logo col-xs-2">
 
-          <div class="col-xs-7 static">{{ financial.data.availableCredit | currency }}</div>
-        </div>
+          </div>
+          <div class="col-xs-10" ng-show="brand.autoPay.isDisplayed()">
 
-        <div class="row">
-          <label class="col-xs-5"><span translate>Reserve Funds</span>:</label>
+            <label class="col-xs-7 no-left-padding" for="autoPay"><span translate>Enrolled in Automated Payments</span></label>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-4 no-left-padding">
+              <div class="row">
+                <div class="static" ng-show="brand.data.autoPayEnabled && !brand.autoPay.isEditable()" translate> Yes </div>
+                <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
+                <div class="static" ng-show="brand.data.autoPayEnabled == false && !brand.autoPay.isEditable()"
+                     translate>
+                  No
+                </div>
 
-          <div class="col-xs-7 static">{{ financial.data.reserveFunds || 0 | currency }}</div>
-        </div>
+                <div class="cr-inline" ng-show="brand.autoPay.isEditable()">
+                  <input type="radio" id="autoPayNo" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled" ng-value='false' ng-click="brand.autoPay.confirmDisable()"/>
+                  <label class="radio-img" for="autoPayNo"></label>
+                  <label class="cr-label" for="autoPayNo" translate>No</label>
 
-        <div class="row">
-          <label class="col-xs-5"><span translate>Last Payment</span>:</label>
-
-          <div class="col-xs-7 static">{{ financial.data.lastPayment.amount | currency }}</div>
-        </div>
-
-        <div class="row">
-          <label class="col-xs-5"><span translate>Last Payment Date</span>:</label>
-
-          <div class="col-xs-7 static">{{ financial.data.lastPayment.date | moment }}</div>
-        </div>
-
-        <div class="row">
-          <label class="col-xs-5"><span translate>Unapplied Funds</span>:</label>
-
-          <div class="col-xs-7 static">{{ financial.data.unappliedFunds | currency }}</div>
-        </div>
-
-        <div class="row">
-          <label class="col-xs-5"><span translate>Total Available</span>:</label>
-
-          <div class="col-xs-7 static">{{ financial.data.totalAvailable | currency }}</div>
-        </div>
-
-        <div ng-show="financial.data.autoDisburseUnappliedFunds" class="row">
-          <label class="col-xs-5"><span translate>Auto-Disburse Unapplied Funds</span>:</label>
-
-          <div class="col-xs-7 static">
-            <span ng-show="financial.data.autoDisburseUnappliedFunds" translate>Enabled</span>
-            <span ng-show="!financial.data.autoDisburseUnappliedFunds" translate>Disabled</span>
+                  <input type="radio" id="autoPayYes" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled" ng-value='true' ng-click="brand.autoPay.confirmEnable()"/>
+                  <label class="radio-img" for="autoPayYes"></label>
+                  <label class="cr-label" for="autoPayYes" translate>Yes</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-7 no-left-padding">
+              <p class="description" translate>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua.
+              </p>
+            </div>
           </div>
         </div>
       </form>
     </div>
   </section>
+  <section class="col-xs-6" ng-show="!brand.autoPay.isDisplayed()"></section>
 
   <!-- SELF-SERVICE LINKS -->
   <section class="col-xs-6 well settings-well topMargin">
