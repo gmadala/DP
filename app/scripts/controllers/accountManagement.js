@@ -21,7 +21,7 @@ angular.module('nextgearWebApp')
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
-    $scope.autoPayEnabled = User.features.hasOwnProperty("autoPay") ?  User.features.autoPay.enabled :  true;
+    $scope.autoPayEnabled = User.getFeatures().hasOwnProperty("autoPay") ?  User.getFeatures().autoPay.enabled :  true;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -218,7 +218,7 @@ angular.module('nextgearWebApp')
            * @return {Boolean} Is the user allowed to add a bank account?
            */
           isAddBankAccountEditable: function() {
-            return (User.features.hasOwnProperty("addBankAccount") ? User.features.addBankAccount.enabled : true)  && $scope.business.data.isStakeholder &&
+            return (User.getFeatures().hasOwnProperty("addBankAccount") ? User.getFeatures().addBankAccount.enabled : true)  && $scope.business.data.isStakeholder &&
               $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
           },
           /**

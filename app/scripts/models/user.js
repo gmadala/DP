@@ -20,14 +20,15 @@ angular.module('nextgearWebApp')
     }
 
     // Public API
+    var features = {};
     return {
-      features : [],
+
       getFeatures: function(){
-         return this.features;
+         return features;
        },
 
-      setFeatures: function(features){
-        this.features = features;
+      setFeatures: function(data){
+        features = data;
       },
       isLoggedIn: function() {
         return api.hasAuthToken();
