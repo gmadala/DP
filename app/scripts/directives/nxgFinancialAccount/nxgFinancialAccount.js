@@ -39,6 +39,7 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = features.editBankAccount.enabled;
       scope.isEditable = isEditable;
+      scope.account.RecentTransaction = '01/01/1900';
 
       /**
        * Provides the correct string in the user's language to the account status
