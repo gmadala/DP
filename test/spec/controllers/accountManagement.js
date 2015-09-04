@@ -188,27 +188,27 @@ describe('Controller: AccountManagementCtrl', function () {
 
     it('autoPay should be editable only for active stakeholders', function () {
 
-      scope.business.editable = true;
+      scope.brand.editable = true;
 
       scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = true;
 
-      expect(scope.business.autoPay.isEditable()).toBeTruthy();
+      expect(scope.brand.autoPay.isEditable()).toBeTruthy();
 
       scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = false;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = true;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = false;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
     });
 
     xit('autoPay should be hidden for quick buyers', function () {
@@ -231,7 +231,7 @@ describe('Controller: AccountManagementCtrl', function () {
 
     // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
     it('autoPay should be hidden', function () {
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     xit('autoPay should be hidden for non-auto ACH dealers', function () {

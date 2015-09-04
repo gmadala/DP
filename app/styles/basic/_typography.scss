@@ -165,6 +165,21 @@ a, a:link, a:visited {
   padding-top: 3px;
 }
 
+.description {
+  font-size: 10px;
+}
+
+.alt-addr{
+  padding-top: 15px;
+  li{
+    padding-bottom: 15px;
+  }
+}
+
+.recent-transaction{
+  color: $primary;
+}
+
 .caps {
   text-transform: uppercase;
 }

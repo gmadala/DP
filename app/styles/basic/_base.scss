@@ -156,9 +156,17 @@ body {
   width: 31%;
 }
 
-.col-xs-6 {
-width:48%;
+section.col-xs-6 {
+  width:48%;
   margin: 0 1%;
+  &.settings-well{
+    margin-bottom: 20px
+  }
+}
+
+.col-xs-6.custom{
+  width:48%;
+  margin: 0 1%
 }
 .col-xs-10{
   width: 81%;
@@ -167,7 +175,18 @@ width:48%;
     width: 83.33333333333%;
     margin: 0 0 0 8.333333333333332%;
   }
+  &.noLeftMargin{
+    margin-left: 0;
+  }
+}
+.col-xs-15{
+  width:12.5%;
+  float: left;
 }
 .break-wrap {
   word-wrap: break-word;
+}
+.divider {
+  padding: 15px 15px 0 15px;
+  border-bottom: 1px solid #bbb;
 }
