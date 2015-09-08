@@ -15,14 +15,13 @@ describe('Service: BusinessHours', function () {
 
   beforeEach(module(function($provide) {
     $provide.decorator('$timeout', function($delegate) {
-      var $timeoutSpy = jasmine.createSpy('$timeout').andCallFake(function() {
+      var $timeoutSpy = jasmine.createSpy('$timeout').andCallFake(function(done) {
+        done();
         $delegate.apply(this, arguments);
       });
       $timeoutSpy.flush = function() {
         $delegate.flush();
       }
-
-
       $timeout = $timeoutSpy;
       return $timeoutSpy;
     });
@@ -100,12 +99,10 @@ describe('Service: BusinessHours', function () {
 
     it('should cache the business hours', function() {
       BusinessHours.insideBusinessHours();
-      $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
       api.request.reset();
 
       BusinessHours.insideBusinessHours();
-      $rootScope.$digest();
       expect(api.request).not.toHaveBeenCalled();
     });
 
@@ -118,8 +115,9 @@ describe('Service: BusinessHours', function () {
 
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
-      expect(api.request).not.toHaveBeenCalled();
       api.request.reset();
+      expect(api.request).not.toHaveBeenCalled();
+
 
       $timeout.flush();
       BusinessHours.insideBusinessHours();
