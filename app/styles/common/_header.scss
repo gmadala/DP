@@ -32,6 +32,14 @@
   padding-top: 1px;
   z-index: 5;
 }
+.nxg-small-logo{
+  background: url(../img/nxg_logo.png);
+  background-repeat: no-repeat;
+  background-size: 65px 65px;
+  background-position: 10px 0;
+  height: 70px;
+  padding: 0;
+}
 
 .nxg-dropdown {
   @extend %align-right;

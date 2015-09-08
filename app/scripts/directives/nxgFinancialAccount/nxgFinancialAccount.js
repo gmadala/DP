@@ -39,6 +39,7 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty("editBankAccount") ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
+      scope.account.RecentTransaction = '01/01/1900';
 
       /**
        * Provides the correct string in the user's language to the account status
@@ -128,7 +129,7 @@
               scope.updateDisbursementAccount({disbursementAccountId: updatedAccount.AccountId});
             }
             scope.account.AchBankName = updatedAccount.BankName;
-            scope.status = updatedAccount.IsActive ? gettext('Active') : gettext('Inactive');
+            scope.status = updatedAccount.IsActive;
           }
         }
       }

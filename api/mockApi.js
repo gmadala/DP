@@ -71,8 +71,26 @@ module.exports = {
             Token: authorization,
             ShowUserInitialization: false,
             UserVoiceToken: 'foo',
-            TemporaryPasswordUsed: false
+            TemporaryPasswordUsed: false,
+            Features: {
+              kbb: {
+                enabled: false
+              },
+              editBankAccount: {
+                enabled: false
+              },
+              autoPay: {
+                enabled: false
+              },
+              addBankAccount: {
+                enabled: false
+              },
+              contactInfo: {
+                enabled: false
+              }
+            }
           }
+
         };
         console.log('mockApi is serving custom authentication data.');
         res.end(JSON.stringify(response));

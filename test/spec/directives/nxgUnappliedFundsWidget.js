@@ -6,9 +6,11 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
   var element,
     isolateScope;
 
-  beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
+  beforeEach(inject(function ($rootScope, $compile, $httpBackend, $q) {
     $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
-
+    $httpBackend.whenGET('/userAccount/v1_1/settings').respond($q.when({
+      AutoDisburseUnappliedFundsDaily: false
+    }));
     $rootScope.foo = 1;
     $rootScope.bar = 2;
     element = angular.element('<div nxg-unapplied-funds-widget balance="foo" available="bar"></div>');

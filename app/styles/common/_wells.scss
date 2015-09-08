@@ -34,6 +34,22 @@
     }
   }
 
+  .well-column-header {
+    background: $white;
+    border-bottom: 1px solid $wellBorder;
+    height: 34px;
+    h6{
+      padding: 10px 0px;
+      text-align: center;
+      &.left-align{
+        text-align: left;
+      }
+      &.left-padding{
+        padding-left: 15px;
+      }
+    }
+  }
+
   // For additional text in the title bar at the top
   .well-title-secondary {
     @extend .well-title;
