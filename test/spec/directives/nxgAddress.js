@@ -48,7 +48,7 @@ describe('Directive: nxgAddress', function () {
       ]
     };
 
-    spyOn(user, 'getStatics').andReturn($q.when(mockStates));
+    spyOn(user, 'getStatics').and.returnValue($q.when(mockStates));
 
     element = angular.element(
       '<nxg-address city="true" info="account" line1="true" line2="true" state="true" validity="{}" zip="true"></nxg-address>'

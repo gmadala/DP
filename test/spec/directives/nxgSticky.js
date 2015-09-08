@@ -30,17 +30,17 @@ describe('Directive: nxgSticky', function () {
       $scope: scope,
     });
 
-    spyOn(scope, 'adjustScroll').andCallThrough();
-    spyOn(scope, 'sizeCallback').andCallThrough();
-    spyOn(scope, 'getMaxAllowableElHeight').andCallFake(function() {
+    spyOn(scope, 'adjustScroll').and.callThrough();
+    spyOn(scope, 'sizeCallback').and.callThrough();
+    spyOn(scope, 'getMaxAllowableElHeight').and.callFake(function() {
         return 300;
     });
-    spyOn(scope, 'getElHeight').andCallFake(
+    spyOn(scope, 'getElHeight').and.callFake(
       function() {
         return 300;
     });
 
-    spyOn(scope, 'getScrollElHeight').andCallFake(
+    spyOn(scope, 'getScrollElHeight').and.callFake(
       function() {
         return 250;
     });

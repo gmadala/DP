@@ -24,7 +24,7 @@ describe('Controller: FloorplanCtrl', function() {
     };
     floorplanUtil = FloorplanUtil;
 
-    searchSpy = spyOn(Floorplan, 'search').andCallFake(function() {
+    searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
       if(shouldSucceed) {
         return $q.when({ Floorplans: ['one', 'two'] });
       } else {
@@ -159,11 +159,11 @@ describe('Controller: FloorplanCtrl', function() {
         }
       };
 
-      searchSpy.andReturn( $q.when({ $paginator: p }) );
+      searchSpy.and.returnValue( $q.when({ $paginator: p }) );
       myPlan.fetchNextResults();
       $rootScope.$apply();
       myPlan.fetchNextResults();
-      expect(Floorplan.search.mostRecentCall.args[1]).toBe(p);
+      expect(Floorplan.search.calls.mostRecent().args[1]).toBe(p);
     }));
 
     it('should append new results to the results array', inject(function($rootScope) {

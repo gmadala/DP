@@ -125,7 +125,12 @@ module.exports = {
     }
 
     function findFolder(folder, done, failure) {
-      folder = folder.lastIndexOf('/') === folder.length - 1 ? folder.substring(0, folder.length - 1) : folder;
+      var lastSeparatorIndex = folder.lastIndexOf('/');
+      if (lastSeparatorIndex === folder.length - 1) {
+        folder = folder.substring(0, folder.length - 1);
+      } else if (folder.lastIndexOf('\/?') > -1) {
+        folder = folder.substring(0, lastSeparatorIndex);
+      }
       if (fs.existsSync(folder)) {
         done(folder + '/');
       }

@@ -16,7 +16,7 @@ describe('Service: kissMetricInfo', function () {
     $rootScope = _$rootScope_;
 
 
-    spyOn(BusinessHours,'insideBusinessHours').andReturn($q.when(true));
+    spyOn(BusinessHours,'insideBusinessHours').and.returnValue($q.when(true));
   }));
 
   it('should return true for biz hours if within biz hours and return non-null properties for kissMetric', function() {

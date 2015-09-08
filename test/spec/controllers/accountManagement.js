@@ -301,7 +301,7 @@ describe('Controller: AccountManagementCtrl', function () {
       });
 
       it('add bank account should update local financial data', function() {
-        spyOn(scope.financial, 'addFinancialAccount').andCallThrough();
+        spyOn(scope.financial, 'addFinancialAccount').and.callThrough();
 
         scope.financial.addFinancialAccount();
         // Resolve promise
@@ -314,7 +314,7 @@ describe('Controller: AccountManagementCtrl', function () {
       });
 
       it('addFinancialAccount should call User.refreshInfo.', function() {
-        spyOn(UserMock, 'refreshInfo').andCallFake(angular.noop);
+        spyOn(UserMock, 'refreshInfo').and.callFake(angular.noop);
 
         scope.financial.addFinancialAccount();
         scope.$apply();
@@ -327,10 +327,10 @@ describe('Controller: AccountManagementCtrl', function () {
       var savingBusiness, validateResult;
       beforeEach(function() {
         validateResult = true;
-        spyOn(scope.business, 'validate').andCallFake(function() {
+        spyOn(scope.business, 'validate').and.callFake(function() {
           return validateResult;
         });
-        spyOn(scope.business, 'isDirty').andReturn(true);
+        spyOn(scope.business, 'isDirty').and.returnValue(true);
 
         AccountManagementMock.saveBusiness = function(email, enhancedRegistrationEnabled, enhancedRegistrationPin) {
           savingBusiness = {
@@ -392,10 +392,10 @@ describe('Controller: AccountManagementCtrl', function () {
       var savingTitle, validateResult;
       beforeEach(function() {
         validateResult = true;
-        spyOn(scope.title, 'validate').andCallFake(function() {
+        spyOn(scope.title, 'validate').and.callFake(function() {
           return validateResult;
         });
-        spyOn(scope.title, 'isDirty').andReturn(true);
+        spyOn(scope.title, 'isDirty').and.returnValue(true);
         spyOn(scope.title, 'updateAddressSelection');
 
         AccountManagementMock.saveTitleAddress = function(titleAddressId) {

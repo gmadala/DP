@@ -24,9 +24,9 @@ describe('Controller: DealerNameSearchCtrl', function () {
     };
 
     model = DealerNameSearch;
-    spyOn(model, 'search').andReturn($q.when(searchResult.data));
+    spyOn(model, 'search').and.returnValue($q.when(searchResult.data));
 
-    spyOn(User, 'getStatics').andReturn($q.when({
+    spyOn(User, 'getStatics').and.returnValue($q.when({
       states: ['fooState']
     }));
 
@@ -121,16 +121,16 @@ describe('Controller: DealerNameSearchCtrl', function () {
     });
 
     it('should call for data with no paginator to start at beginning, if query is valid', function () {
-      model.search.reset();
-      spyOn(scope, 'isQueryValid').andReturn(true);
+      model.search.calls.reset();
+      spyOn(scope, 'isQueryValid').and.returnValue(true);
       scope.search();
       expect(model.search).toHaveBeenCalled();
-      expect(model.search.mostRecentCall.args[5]).toBe(null);
+      expect(model.search.calls.mostRecent().args[5]).toBe(null);
     });
 
     it('should not call for data if query is not valid', function () {
-      model.search.reset();
-      spyOn(scope, 'isQueryValid').andReturn(false);
+      model.search.calls.reset();
+      spyOn(scope, 'isQueryValid').and.returnValue(false);
       scope.search();
       expect(model.search).not.toHaveBeenCalled();
     });
@@ -140,7 +140,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
   describe('fetchNextResults function', function () {
 
     it('should not call for data if the paginator indicates it is already at the end', function () {
-      model.search.reset();
+      model.search.calls.reset();
 
       scope.data.paginator = {
         hasMore: function () {
@@ -201,7 +201,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
       scope.fetchNextResults();
       scope.$apply();
       scope.fetchNextResults();
-      expect(model.search.mostRecentCall.args[5]).toBe(p);
+      expect(model.search.calls.mostRecent().args[5]).toBe(p);
     });
 
     it('should append new results to the results array', function () {
@@ -252,14 +252,14 @@ describe('Controller: DealerNameSearchCtrl', function () {
 
     beforeEach(inject(function (_$dialog_) {
       $dialog = _$dialog_;
-      spyOn($dialog, 'dialog').andReturn({ open: angular.noop });
+      spyOn($dialog, 'dialog').and.returnValue({ open: angular.noop });
     }));
 
     it('should invoke the credit query dialog', function () {
       scope.showCreditQuery();
       expect($dialog.dialog).toHaveBeenCalled();
-      expect($dialog.dialog.mostRecentCall.args[0].controller).toBe('CreditQueryCtrl');
-      expect($dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/creditQuery.html');
+      expect($dialog.dialog.calls.mostRecent().args[0].controller).toBe('CreditQueryCtrl');
+      expect($dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/creditQuery.html');
     });
 
     it('should provide the dialog with the selected business information', function () {
@@ -276,7 +276,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
         State: 'state',
         PostalCode: 'postalCode'
       });
-      var options = $dialog.dialog.mostRecentCall.args[0].resolve.options();
+      var options = $dialog.dialog.calls.mostRecent().args[0].resolve.options();
       expect(options.businessId).toBe('businessId');
       expect(options.businessNumber).toBe('businessNumber');
       expect(options.auctionAccessNumbers).toBe('aa1, aa2');

@@ -136,7 +136,7 @@ describe('Model: TitleReleases', function () {
   it('should fetch the default address if one or more floorplans does not have an override address', function() {
     var request;
 
-    spyOn(Addresses, 'getDefaultTitleAddress').andReturn({AddressId: 12});
+    spyOn(Addresses, 'getDefaultTitleAddress').and.returnValue({AddressId: 12});
 
     titleReleases.addToQueue({
       FloorplanId: '10'
@@ -192,7 +192,7 @@ describe('Model: TitleReleases', function () {
       };
       httpBackend.whenGET(/\/titleRelease\/search.*/).respond(respondFnc);
       defaultCriteria.filter = titleReleases.filterValues.ALL;
-      spyOn(User, 'getInfo').andReturn({ BusinessNumber: '123' });
+      spyOn(User, 'getInfo').and.returnValue({ BusinessNumber: '123' });
       clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
 

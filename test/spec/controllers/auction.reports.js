@@ -85,7 +85,7 @@ describe('Controller: AuctionReportsCtrl', function() {
 
   describe('viewDisbursementDetail function', function() {
     it('should check form validity and return if invalid', function() {
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
 
       expect(scope.data).toBeDefined();
       scope.viewDisbursementDetail();
@@ -96,7 +96,7 @@ describe('Controller: AuctionReportsCtrl', function() {
     it('should create an api link and open the report in a new tab if the form is valid', function() {
             scope.$apply();
 
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
       scope.disForm.$valid = true;
 
       scope.viewDisbursementDetail();
@@ -110,7 +110,7 @@ describe('Controller: AuctionReportsCtrl', function() {
         BusinessName: 'subsidiaryName'
       };
 
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
       scope.disForm.$valid = true;
 
       scope.viewDisbursementDetail();
@@ -124,7 +124,7 @@ describe('Controller: AuctionReportsCtrl', function() {
         BusinessName: 'Subsidiary, @$%^!@  #Num1=+'
       };
 
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
       scope.disForm.$valid = true;
 
       scope.viewDisbursementDetail();

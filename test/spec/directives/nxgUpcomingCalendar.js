@@ -65,8 +65,8 @@ describe('Directive: nxgUpcomingCalendar', function () {
     scope.$on('setDateRange', handler);
     element.isolateScope().options.viewDisplay(viewMock);
     expect(handler).toHaveBeenCalled();
-    expect(handler.mostRecentCall.args[1]).toBe(viewMock.start);
-    expect(handler.mostRecentCall.args[2]).toBe(viewMock.end);
+    expect(handler.calls.mostRecent().args[1]).toBe(viewMock.start);
+    expect(handler.calls.mostRecent().args[2]).toBe(viewMock.end);
   });
 
   describe('viewRender()', function () {
@@ -217,7 +217,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
       spyOn(element.isolateScope().options, 'dayRender');
       element.isolateScope().$apply();
 
-      expect(element.isolateScope().options.dayRender.calls.length).toEqual(3);
+      expect(element.isolateScope().options.dayRender.calls.count()).toEqual(3);
     });
   });
 });

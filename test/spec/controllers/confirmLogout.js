@@ -20,7 +20,7 @@ describe('Controller: ConfirmLogoutCtrl', function () {
     };
     user = User;
 
-    spyOn(user, 'logout').andReturn($q.when('OK'));
+    spyOn(user, 'logout').and.returnValue($q.when('OK'));
 
     ConfirmLogoutCtrl = $controller('ConfirmLogoutCtrl', {
       $scope: scope,

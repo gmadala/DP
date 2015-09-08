@@ -57,14 +57,14 @@ describe('Controller: LoginRecoverCtrl', function () {
       }
     };
     $dialog = _$dialog_;
-    spyOn($dialog, 'messageBox').andReturn(dialog);
+    spyOn($dialog, 'messageBox').and.returnValue(dialog);
 
     LoginRecoverCtrl = $controller('LoginRecoverCtrl', {
       $scope: scope,
       $state: state,
       kissMetricInfo: mockKissMetricInfo
     });
-    spyOn(BusinessHours,'insideBusinessHours').andReturn($q.when(true));
+    spyOn(BusinessHours,'insideBusinessHours').and.returnValue($q.when(true));
   }));
 
   describe('userNameRecovery', function () {
@@ -97,7 +97,7 @@ describe('Controller: LoginRecoverCtrl', function () {
         $invalid: false
       };
 
-      spyOn(User, 'recoverUserName').andReturn($q.when({}));
+      spyOn(User, 'recoverUserName').and.returnValue($q.when({}));
 
       spyOn(segmentio, 'track');
       scope.userNameRecovery.submit();
@@ -155,7 +155,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       scope.forgotPasswordForm = {
         $invalid: false
       };
-      spyOn(User, 'resetPassword').andReturn($q.when({}));
+      spyOn(User, 'resetPassword').and.returnValue($q.when({}));
 
       spyOn(segmentio, 'track');
       scope.passwordRecovery.submitQuestions();
@@ -210,21 +210,21 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should skip the call if the form is invalid', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.when('OK'));
+        spyOn(user, 'recoverUserName').and.returnValue($q.when('OK'));
         scope.userNameRecovery.submit();
         expect(user.recoverUserName).not.toHaveBeenCalled();
         expect(scope.submitInProgress).not.toBe(true);
       });
 
       it('should set submitInProgress on start of call', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.when('OK'));
+        spyOn(user, 'recoverUserName').and.returnValue($q.when('OK'));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
         expect(scope.submitInProgress).toBe(true);
       });
 
       it('should call the recoverUserName method on the model with the email address', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.when('OK'));
+        spyOn(user, 'recoverUserName').and.returnValue($q.when('OK'));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.email = 'foo@example.com';
         scope.userNameRecovery.submit();
@@ -232,7 +232,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on success', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.when('OK'));
+        spyOn(user, 'recoverUserName').and.returnValue($q.when('OK'));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
         scope.$apply();
@@ -240,7 +240,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on error', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'recoverUserName').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
         scope.$apply();
@@ -248,7 +248,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should invoke success message on success', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.when('OK'));
+        spyOn(user, 'recoverUserName').and.returnValue($q.when('OK'));
         spyOn(scope, 'showSuccessMessage');
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
@@ -257,7 +257,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set failed flag on error', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'recoverUserName').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
         scope.$apply();
@@ -265,7 +265,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should suppress global error display on error', function () {
-        spyOn(user, 'recoverUserName').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'recoverUserName').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotUserNameForm.$invalid = false;
         scope.userNameRecovery.submit();
         scope.$apply();
@@ -347,21 +347,21 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should skip the call if the form is invalid', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.when([]));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.when([]));
         scope.passwordRecovery.submitUsername();
         expect(user.fetchPasswordResetQuestions).not.toHaveBeenCalled();
         expect(scope.submitInProgress).not.toBe(true);
       });
 
       it('should set submitInProgress on start of call', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.when([]));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.when([]));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         expect(scope.submitInProgress).toBe(true);
       });
 
       it('should call the fetchPasswordResetQuestions method on the model with the username', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.when([]));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.when([]));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.username = 'foo';
         scope.passwordRecovery.submitUsername();
@@ -369,7 +369,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on success', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.when([]));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.when([]));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         scope.$apply();
@@ -377,7 +377,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on error', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         scope.$apply();
@@ -386,7 +386,7 @@ describe('Controller: LoginRecoverCtrl', function () {
 
       it('should attach the retrieved questions to the scope on success', function () {
         var questions = [];
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.when(questions));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.when(questions));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         scope.$apply();
@@ -394,7 +394,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set usernameFailed flag on error', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         scope.$apply();
@@ -402,7 +402,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should suppress global error display on error', function () {
-        spyOn(user, 'fetchPasswordResetQuestions').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'fetchPasswordResetQuestions').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitUsername();
         scope.$apply();
@@ -452,21 +452,21 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should skip the call if the form is invalid', function () {
-        spyOn(user, 'resetPassword').andReturn($q.when('OK'));
+        spyOn(user, 'resetPassword').and.returnValue($q.when('OK'));
         scope.passwordRecovery.submitQuestions();
         expect(user.resetPassword).not.toHaveBeenCalled();
         expect(scope.submitInProgress).not.toBe(true);
       });
 
       it('should set submitInProgress on start of call', function () {
-        spyOn(user, 'resetPassword').andReturn($q.when('OK'));
+        spyOn(user, 'resetPassword').and.returnValue($q.when('OK'));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
         expect(scope.submitInProgress).toBe(true);
       });
 
       it('should call the resetPassword method on the model with the username and questions', function () {
-        spyOn(user, 'resetPassword').andReturn($q.when('OK'));
+        spyOn(user, 'resetPassword').and.returnValue($q.when('OK'));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.username = 'foo';
         scope.passwordRecovery.submitQuestions();
@@ -474,7 +474,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on success', function () {
-        spyOn(user, 'resetPassword').andReturn($q.when('OK'));
+        spyOn(user, 'resetPassword').and.returnValue($q.when('OK'));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
         scope.$apply();
@@ -482,7 +482,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set submitInProgress to false on error', function () {
-        spyOn(user, 'resetPassword').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'resetPassword').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
         scope.$apply();
@@ -490,7 +490,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should invoke success message on success', function () {
-        spyOn(user, 'resetPassword').andReturn($q.when('OK'));
+        spyOn(user, 'resetPassword').and.returnValue($q.when('OK'));
         spyOn(scope, 'showSuccessMessage');
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
@@ -499,7 +499,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should set questionsFailed flag on error', function () {
-        spyOn(user, 'resetPassword').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'resetPassword').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
         scope.$apply();
@@ -507,7 +507,7 @@ describe('Controller: LoginRecoverCtrl', function () {
       });
 
       it('should suppress global error display on error', function () {
-        spyOn(user, 'resetPassword').andReturn($q.reject(messages.add('oops')));
+        spyOn(user, 'resetPassword').and.returnValue($q.reject(messages.add('oops')));
         scope.forgotPasswordForm.$invalid = false;
         scope.passwordRecovery.submitQuestions();
         scope.$apply();
@@ -523,9 +523,9 @@ describe('Controller: LoginRecoverCtrl', function () {
     it('should invoke a messageBox with the expected content', function () {
       scope.showSuccessMessage();
       expect($dialog.messageBox).toHaveBeenCalled();
-      expect(typeof $dialog.messageBox.mostRecentCall.args[0]).toBe('string');
-      expect(typeof $dialog.messageBox.mostRecentCall.args[1]).toBe('string');
-      expect(angular.isArray($dialog.messageBox.mostRecentCall.args[2])).toBe(true);
+      expect(typeof $dialog.messageBox.calls.mostRecent().args[0]).toBe('string');
+      expect(typeof $dialog.messageBox.calls.mostRecent().args[1]).toBe('string');
+      expect(angular.isArray($dialog.messageBox.calls.mostRecent().args[2])).toBe(true);
     });
 
     it('should transition to the login state on message box close', function () {
