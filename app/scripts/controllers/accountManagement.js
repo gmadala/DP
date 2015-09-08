@@ -22,10 +22,10 @@ angular.module('nextgearWebApp')
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
-    $scope.autoPayEnabled = User.getFeatures().hasOwnProperty("autoPay") ?  User.getFeatures().autoPay.enabled :  true;
-    $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty("contactInfo") ?  User.getFeatures().contactInfo.enabled :  true;
-    $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty("addBankAccount") ?  User.getFeatures().addBankAccount.enabled :  true;
-    $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty("editBankAccount") ?  User.getFeatures().editBankAccount.enabled :  true;
+    $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ?  User.getFeatures().autoPay.enabled :  true;
+    $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ?  User.getFeatures().contactInfo.enabled :  true;
+    $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ?  User.getFeatures().addBankAccount.enabled :  true;
+    $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;

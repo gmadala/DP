@@ -35,7 +35,7 @@ angular.module('nextgearWebApp')
     $scope.results = {};
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
-    $scope.kbbEnabled = (User.getFeatures().hasOwnProperty("kbb") ? User.getFeatures().kbb.enabled  : true) && $scope.isUnitedStates;
+    $scope.kbbEnabled = (User.getFeatures().hasOwnProperty('kbb') ? User.getFeatures().kbb.enabled  : true) && $scope.isUnitedStates;
 
     var buildDescription = function(obj) {
       return obj.Year + ' ' + obj.Make + ' ' + obj.Model;
