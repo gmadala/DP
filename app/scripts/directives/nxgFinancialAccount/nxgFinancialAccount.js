@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, User, features, routingNumberFilter) {
+  function financialAccount(gettext, $dialog, AccountManagement, User, routingNumberFilter) {
 
     var directive;
     directive = {
@@ -37,7 +37,7 @@
       scope.routingNumberLabel = routingNumberFilter('', scope.isUnitedStates, true);
       scope.routingNumberDisplay = routingNumberFilter(scope.account.AchAbaNumber, scope.isUnitedStates, false);
       scope.editFinancialAccount = editFinancialAccount;
-      scope.editBankAccountEnabled = features.editBankAccount.enabled;
+      scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
       scope.account.RecentTransaction = '01/01/1900';
 

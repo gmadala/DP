@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
-                                                User, api, $q, dealerCustomerSupportPhone, features, segmentio, metric,
+                                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
                                                 routingNumberFilter) {
 
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
@@ -22,9 +22,10 @@ angular.module('nextgearWebApp')
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
-    $scope.autoPayEnabled = features.autoPay.enabled;
-    $scope.contactInfoEnabled = features.contactInfo.enabled;
-    $scope.editBankAccountEnabled = features.editBankAccount.enabled;
+    $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ?  User.getFeatures().autoPay.enabled :  true;
+    $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ?  User.getFeatures().contactInfo.enabled :  true;
+    $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ?  User.getFeatures().addBankAccount.enabled :  true;
+    $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -146,7 +147,7 @@ angular.module('nextgearWebApp')
             isDisplayed: function () {
               return $scope.isDealer && $scope.isUnitedStates && $scope.contactInfoEnabled;
             }
-          },
+          }
 
         };
 
@@ -253,8 +254,8 @@ angular.module('nextgearWebApp')
            * @return {Boolean} Is the user allowed to add a bank account?
            */
           isAddBankAccountEditable: function() {
-            return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
-              $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
+            return ($scope.addBankAccountEnabled  && $scope.business.data.isStakeholder &&
+              $scope.business.data.isStakeholderActive && $scope.isUnitedStates);
           },
           /**
            * Updates the local financial account data to keep consistent with

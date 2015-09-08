@@ -120,7 +120,10 @@ describe('Controller: AccountManagementCtrl', function () {
         return null;
       },
       refreshInfo: angular.noop,
-      setAutoPayEnabled: angular.noop
+      setAutoPayEnabled: angular.noop,
+      getFeatures: function(){
+        return {};
+      }
     };
 
     scope = $rootScope.$new();
@@ -281,7 +284,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
       });
 
-      // TODO modify all the expectations once the add bank account feature is enabled.
+      
       // TODO modify second expectation to true once add Bank Account is released to Canada.
       it('add bank account should be enabled for US only.', function() {
         scope.business.data.isStakeholderActive = true;
@@ -294,7 +297,7 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.business.data.isStakeholder = true;
         scope.isUnitedStates = true;
 
-        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+        expect(scope.financial.isAddBankAccountEditable()).toBeTruthy();
       });
 
       it('add bank account should update local financial data', function() {

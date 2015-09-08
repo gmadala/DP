@@ -20,7 +20,16 @@ angular.module('nextgearWebApp')
     }
 
     // Public API
+    var features = {};
     return {
+
+      getFeatures: function(){
+         return features;
+       },
+
+      setFeatures: function(data){
+        features = data;
+      },
       isLoggedIn: function() {
         return api.hasAuthToken();
       },
@@ -113,7 +122,7 @@ angular.module('nextgearWebApp')
        */
       initSession: function(authData) {
         var self = this;
-
+        self.setFeatures(authData.Features);
         api.setAuth(authData);
         return $q.all([this.refreshInfo(), this.refreshStatics()]).then(function () {
           if (authData.UserVoiceToken) {
@@ -132,6 +141,9 @@ angular.module('nextgearWebApp')
       logout: function() {
         var self = this;
         return api.request('GET', '/userAccount/logout').then(function (result) {
+
+          //Clear out pilot features.
+          self.setFeatures({});
           self.dropSession();
           return result;
         }, function (/*error*/) {
