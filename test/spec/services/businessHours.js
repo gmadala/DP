@@ -15,13 +15,12 @@ describe('Service: BusinessHours', function () {
 
   beforeEach(module(function($provide) {
     $provide.decorator('$timeout', function($delegate) {
-      var $timeoutSpy = jasmine.createSpy('$timeout').andCallFake(function(done) {
-        done();
+      var $timeoutSpy = jasmine.createSpy('$timeout').and.callFake(function() {
         $delegate.apply(this, arguments);
       });
       $timeoutSpy.flush = function() {
         $delegate.flush();
-      }
+      };
       $timeout = $timeoutSpy;
       return $timeoutSpy;
     });
@@ -52,20 +51,22 @@ describe('Service: BusinessHours', function () {
   describe('insideBusinessHours function', function() {
     var rootScope;
 
-    beforeEach(function($rootScope) {
+    beforeEach(function(done) {
       // Start javascript date at 4 hours before start of first business hours,
       // 8pm previous night eastern time
       clock = sinon.useFakeTimers(moment('2014-10-01T00:00:00Z').valueOf(), 'Date');
+      done();
     });
 
     afterEach(function() {
       clock.restore();
     });
 
-    it('should call the business hours endpoint', function() {
+    it('should call the business hours endpoint', function(done) {
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalledWith('GET', '/info/v1_1/businesshours');
+      done();
     });
 
     it('should return false if we are logged in before business hours begin', function() {
@@ -115,7 +116,7 @@ describe('Service: BusinessHours', function () {
 
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
-      api.request.reset();
+      api.request.calls.reset();
       expect(api.request).not.toHaveBeenCalled();
 
 
