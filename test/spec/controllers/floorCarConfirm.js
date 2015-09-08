@@ -121,9 +121,9 @@ describe('Controller: FloorCarConfirmCtrl', function () {
   });
 
   it('should return true when user clicks Dealer Flooring Request submitted', function(){
-    spyOn(userDealerMock, 'isDealer').andReturn(true);
+    spyOn(userDealerMock, 'isDealer').and.returnValue(true);
     spyOn(dialogMock, 'close');
-    spyOn(segmentio, 'track').andCallThrough();
+    spyOn(segmentio, 'track').and.callThrough();
 
     scope.confirm();
     scope.$digest();
@@ -144,9 +144,9 @@ describe('Controller: FloorCarConfirmCtrl', function () {
   });
 
   it('should return true when user clicks Auction Flooring Request submitted', function(){
-    spyOn(userAuctionMock, 'isDealer').andReturn(false);
+    spyOn(userAuctionMock, 'isDealer').and.returnValue(false);
     spyOn(dialogMock, 'close');
-    spyOn(segmentio, 'track').andCallThrough();
+    spyOn(segmentio, 'track').and.callThrough();
 
     scopeAuction.confirm();
     scopeAuction.$digest();
@@ -194,21 +194,21 @@ describe('Controller: FloorCarConfirmCtrl', function () {
 
   it('should return en documents when language is es and country is Canada.', function () {
     catalog.currentLanguage = 'es';
-    spyOn(userDealerMock, 'isUnitedStates').andReturn(false);
+    spyOn(userDealerMock, 'isUnitedStates').and.returnValue(false);
     createController();
     expect(scope.documentLink).toContain('CAE');
   });
 
   it('should return en documents when language is en and country is Canada.', function () {
     catalog.currentLanguage = 'en';
-    spyOn(userDealerMock, 'isUnitedStates').andReturn(false);
+    spyOn(userDealerMock, 'isUnitedStates').and.returnValue(false);
     createController();
     expect(scope.documentLink).toContain('CAE');
   });
 
   it('should return fr documents when language is fr_CA and country is Canada.', function () {
     catalog.currentLanguage = 'fr_CA';
-    spyOn(userDealerMock, 'isUnitedStates').andReturn(false);
+    spyOn(userDealerMock, 'isUnitedStates').and.returnValue(false);
     createController();
     expect(scope.documentLink).toContain('CAF');
   });

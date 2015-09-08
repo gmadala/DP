@@ -30,15 +30,15 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
     dealerNumberSearch = DealerNumberSearch;
 
-    spyOn(User, 'getStatics').andReturn(q.when({}));
+    spyOn(User, 'getStatics').and.returnValue(q.when({}));
 
     AuctionDealerSearchCtrl = $controller('AuctionDealerSearchCtrl', {
       $scope: scope,
       $dialog: dialog
     });
 
-    spyOn(dealerNumberSearch, 'searchByDealerNumber').andReturn(q.when(''));
-    spyOn(dealerNumberSearch, 'searchByAuctionAccessNumber').andReturn(q.when(''));
+    spyOn(dealerNumberSearch, 'searchByDealerNumber').and.returnValue(q.when(''));
+    spyOn(dealerNumberSearch, 'searchByAuctionAccessNumber').and.returnValue(q.when(''));
 
     scope.nameSearch.query.dealerNumber = 'dealerNumber';
     scope.nameSearch.query.auctionAccessNumber = 22;
@@ -48,7 +48,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
   describe('Dealer Number Search', function() {
     it('should search by dealer number', function() {
 
-      spyOn(scope.numberSearch, 'validate').andReturn(true);
+      spyOn(scope.numberSearch, 'validate').and.returnValue(true);
 
       scope.numberSearch.setDealerNumActive();
 
@@ -60,7 +60,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
     it('should search by auction access number', function() {
 
-      spyOn(scope.numberSearch, 'validate').andReturn(true);
+      spyOn(scope.numberSearch, 'validate').and.returnValue(true);
 
       scope.numberSearch.setAuctionNumActive();
 
@@ -72,7 +72,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
     it('should not search if form not valid', function() {
 
-      spyOn(scope.numberSearch, 'validate').andReturn(false);
+      spyOn(scope.numberSearch, 'validate').and.returnValue(false);
 
       scope.numberSearch.setAuctionNumActive();
 
@@ -222,8 +222,8 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
   describe('Dealer Name Search', function() {
 
     it('should open a dialog if validation passes', function() {
-      spyOn(scope.nameSearch, 'validate').andReturn(true);
-      spyOn(dialog, 'dialog').andCallThrough();
+      spyOn(scope.nameSearch, 'validate').and.returnValue(true);
+      spyOn(dialog, 'dialog').and.callThrough();
       spyOn(dialog, 'open');
 
       scope.nameSearch.search();
@@ -234,7 +234,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
     });
 
     it('should not open a dialog if validation does not pass', function() {
-      spyOn(scope.nameSearch, 'validate').andReturn(false);
+      spyOn(scope.nameSearch, 'validate').and.returnValue(false);
       spyOn(dialog, 'dialog');
 
       scope.nameSearch.search();

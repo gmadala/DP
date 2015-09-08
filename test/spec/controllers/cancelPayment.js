@@ -76,19 +76,19 @@ describe('Controller: CancelPaymentCtrl', function () {
     }));
 
     it('should set submitInProgress to true', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.when(true));
       scope.handleYes();
       expect(scope.submitInProgress).toBe(true);
     });
 
     it('should call cancelScheduled in payments model with web scheduled payment id of provided payment', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.when(true));
       scope.handleYes();
       expect(Payments.cancelScheduled).toHaveBeenCalledWith('schedId');
     });
 
     it('should set submitInProgress to false and close the dialog with true on success', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.when(true));
       spyOn(dialogMock, 'close');
       scope.handleYes();
       scope.$apply();
@@ -97,7 +97,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     });
 
     it('should call the onCancel function, if defined, on success', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.when(true));
       spyOn(optionsMock, 'onCancel');
 
       scope.handleYes();
@@ -106,7 +106,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     });
 
     it('should not blow up on success if onCancel is not defined in the options', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.when(true));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.when(true));
       optionsMock.onCancel = undefined;
 
       scope.handleYes();
@@ -116,7 +116,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     });
 
     it('should set submitInProgress to false on error and remain open', function () {
-      spyOn(Payments, 'cancelScheduled').andReturn(q.reject('fail'));
+      spyOn(Payments, 'cancelScheduled').and.returnValue(q.reject('fail'));
       spyOn(dialogMock, 'close');
       spyOn(optionsMock, 'onCancel');
       scope.handleYes();

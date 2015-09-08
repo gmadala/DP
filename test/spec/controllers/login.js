@@ -29,7 +29,7 @@ describe('Controller: LoginCtrl', function () {
     httpBackend.when('GET', '/DSCConfigurationService/VirtualOfficeNotificationService.svc/msg?lang=1').respond('foo');
 
     user = {};
-    user.authenticate = jasmine.createSpy('authenticate').andReturn({
+    user.authenticate = jasmine.createSpy('authenticate').and.returnValue({
       then: function(success, error) {
         if(shouldPassAuthentication) {
           success({});
@@ -133,7 +133,7 @@ describe('Controller: LoginCtrl', function () {
   describe('authenticate method', function() {
 
     beforeEach(function() {
-      user.authenticate = jasmine.createSpy('authenticate').andReturn({
+      user.authenticate = jasmine.createSpy('authenticate').and.returnValue({
         then: function(success, error) {
           if(shouldPassAuthentication) {
             success({});
@@ -180,7 +180,7 @@ describe('Controller: LoginCtrl', function () {
 
     beforeEach(function() {
 
-      user.authenticate = jasmine.createSpy('authenticate500').andReturn({
+      user.authenticate = jasmine.createSpy('authenticate500').and.returnValue({
         then: function(success, error) {
           if(shouldPassAuthentication) {
             success({});

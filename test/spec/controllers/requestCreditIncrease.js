@@ -153,7 +153,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn(creditIncreaseMock, 'requestCreditIncrease').andReturn(q.when(q.when(true)));
+    spyOn(creditIncreaseMock, 'requestCreditIncrease').and.returnValue(q.when(q.when(true)));
     scope.confirmRequest();
     scope.$digest();
     expect(creditIncreaseMock.requestCreditIncrease).toHaveBeenCalled();
@@ -206,7 +206,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn($dialogMock, 'messageBox').andCallThrough();
+    spyOn($dialogMock, 'messageBox').and.callThrough();
     scope.confirmRequest();
     successCallback();
     expect($dialogMock.messageBox).toHaveBeenCalled();
@@ -218,7 +218,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn(creditIncreaseMock, 'requestCreditIncrease').andReturn(q.when(q.when(true)));
+    spyOn(creditIncreaseMock, 'requestCreditIncrease').and.returnValue(q.when(q.when(true)));
     scope.confirmRequest();
     scope.$apply();
     expect(scope.kissMetricData.isBusinessHours).toBe(true);

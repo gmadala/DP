@@ -196,11 +196,11 @@ describe('Service: api', function () {
       api.request('GET', '/bar');
       httpBackend.flush();
 
-      spyOn(rootScope, '$emit').andReturn(true);
+      spyOn(rootScope, '$emit').and.returnValue(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       var bind = jasmine.createSpy('bind');
-      spyOn(angular, 'element').andReturn({
+      spyOn(angular, 'element').and.returnValue({
         bind: bind
       });
 
@@ -217,10 +217,11 @@ describe('Service: api', function () {
 
       expect(angular.element).toHaveBeenCalledWith('body');
       expect(bind).toHaveBeenCalled();
-      expect(bind.calls[0].args[0]).toBe('keydown');
+      expect(bind.calls.mostRecent().args[0]).toBe('keydown');
       var preventDefault = jasmine.createSpy('preventDefault');
       var stopPropagation = jasmine.createSpy('stopPropagation');
-      bind.calls[0].args[1].call(this, {
+      //bind.calls[0].args[1].call(this, {
+      bind.calls.mostRecent().args[1].call(this, {
         preventDefault: preventDefault,
         stopPropagation: stopPropagation,
         keyCode: 27
@@ -247,11 +248,11 @@ describe('Service: api', function () {
       api.request('GET', '/bar');
       httpBackend.flush();
 
-      spyOn(rootScope, '$emit').andReturn(true);
+      spyOn(rootScope, '$emit').and.returnValue(true);
       var success = jasmine.createSpy('success'),
         error = jasmine.createSpy('error');
       var bind = jasmine.createSpy('bind');
-      spyOn(angular, 'element').andReturn({
+      spyOn(angular, 'element').and.returnValue({
         bind: bind
       });
 
@@ -296,7 +297,7 @@ describe('Service: api', function () {
       httpBackend.flush();
       expect(messages.list().length).toBe(1);
       expect(error).toHaveBeenCalledWith(messages.list()[0]);
-      expect(error.mostRecentCall.args[0].text).toBe('Error 321');
+      expect(error.calls.mostRecent().args[0].text).toBe('Error 321');
       expect(success).not.toHaveBeenCalled();
     });
 
@@ -308,7 +309,7 @@ describe('Service: api', function () {
       httpBackend.flush();
       expect(error).not.toHaveBeenCalled();
       expect(success).toHaveBeenCalled();
-      expect(angular.equals(success.mostRecentCall.args[0], {
+      expect(angular.equals(success.calls.mostRecent().args[0], {
         Prop1: 'Value1',
         Prop2: 'Value2'
       })).toBe(true);
@@ -438,33 +439,33 @@ describe('Service: api', function () {
     });
 
     it('should return the expected URL when user is not logged in, and no params are provided', function () {
-      spyOn(user, 'isLoggedIn').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
       var url = api.contentLink('/foo/bar');
       expect(url).toBe('http://example.com/api/foo/bar');
     });
 
     it('should return the expected URL when user is not logged in, and 1 param is provided', function () {
-      spyOn(user, 'isLoggedIn').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
       var url = api.contentLink('/foo/bar', {param1: 'value1'});
       expect(url).toBe('http://example.com/api/foo/bar?param1=value1');
     });
 
     it('should return the expected URL when user is not logged in, and 2+ params are provided', function () {
-      spyOn(user, 'isLoggedIn').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
       var url = api.contentLink('/foo/bar', {param1: 'value1', param2: 'value2'});
       expect(url === 'http://example.com/api/foo/bar?param1=value1&param2=value2' ||
         url === 'http://example.com/api/foo/bar?param2=value2&param1=value1').toBe(true);
     });
 
     it('should return the expected URL when user is logged in, and no params are provided', function () {
-      spyOn(user, 'isLoggedIn').andReturn(true);
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
       api.setAuth({ Token: 'SECRET' });
       var url = api.contentLink('/foo/bar');
       expect(url).toBe('http://example.com/api/foo/bar?AuthToken=SECRET');
     });
 
     it('should return the expected URL when user is logged in, and any params are provided', function () {
-      spyOn(user, 'isLoggedIn').andReturn(true);
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
       api.setAuth({ Token: 'SECRET' });
       var url = api.contentLink('/foo/bar', {param1: 'value1'});
       expect(url).toBe('http://example.com/api/foo/bar?AuthToken=SECRET&param1=value1');

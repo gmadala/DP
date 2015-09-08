@@ -20,8 +20,8 @@ describe('Directive: nxgTrack', function () {
       element.triggerHandler('click');
 
       expect(segmentio.track).toHaveBeenCalled();
-      expect(segmentio.track.mostRecentCall.args[0]).toBe('Enable Auto Destruct');
-      expect(segmentio.track.mostRecentCall.args[1]).not.toBeDefined();
+      expect(segmentio.track.calls.mostRecent().args[0]).toBe('Enable Auto Destruct');
+      expect(segmentio.track.calls.mostRecent().args[1]).not.toBeDefined();
     });
 
   });
@@ -41,8 +41,8 @@ describe('Directive: nxgTrack', function () {
       element.triggerHandler('click');
 
       expect(segmentio.track).toHaveBeenCalled();
-      expect(segmentio.track.mostRecentCall.args[0]).toBe('Bar Event');
-      expect(segmentio.track.mostRecentCall.args[1]).not.toBeDefined();
+      expect(segmentio.track.calls.mostRecent().args[0]).toBe('Bar Event');
+      expect(segmentio.track.calls.mostRecent().args[1]).not.toBeDefined();
     });
 
   });
@@ -61,9 +61,9 @@ describe('Directive: nxgTrack', function () {
       element.triggerHandler('click');
 
       expect(segmentio.track).toHaveBeenCalled();
-      expect(segmentio.track.mostRecentCall.args[0]).toBe('Enable Auto Destruct');
-      expect(segmentio.track.mostRecentCall.args[1]).toBeDefined();
-      expect(segmentio.track.mostRecentCall.args[1].revenue).toBe(321.10);
+      expect(segmentio.track.calls.mostRecent().args[0]).toBe('Enable Auto Destruct');
+      expect(segmentio.track.calls.mostRecent().args[1]).toBeDefined();
+      expect(segmentio.track.calls.mostRecent().args[1].revenue).toBe(321.10);
     });
 
   });

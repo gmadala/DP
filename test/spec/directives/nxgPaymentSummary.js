@@ -26,7 +26,7 @@ describe('Directive: nxgPaymentSummary', function () {
       state = $state;
       payments = Payments;
 
-      spyOn(Payments, 'getPaymentQueue').andReturn(mockPaymentQueue);
+      spyOn(Payments, 'getPaymentQueue').and.returnValue(mockPaymentQueue);
 
       $controller('PaymentSummaryCtrl', {
         $scope: scope

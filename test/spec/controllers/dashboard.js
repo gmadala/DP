@@ -303,7 +303,7 @@ describe('Controller: DashboardCtrl', function () {
       transitionTo: jasmine.createSpy()
     }
 
-    searchSpy = spyOn(Floorplan, 'search').andCallFake(function() {
+    searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
       if(shouldSucceed) {
         return $q.when({ Floorplans: ['one', 'two'] });
       } else {
@@ -321,7 +321,7 @@ describe('Controller: DashboardCtrl', function () {
 
   describe('non-cached info', function() {
     beforeEach(function() {
-      spyOn(dashboard, 'fetchDealerDashboard').andCallFake(function() {
+      spyOn(dashboard, 'fetchDealerDashboard').and.callFake(function() {
         return $q.when(angular.copy(dealerDashboardData));
       });
     });
@@ -376,7 +376,7 @@ describe('Controller: DashboardCtrl', function () {
 
     describe('onRequestCredIncr method', function() {
       it('should launch a modal dialog with the request credit increase form', inject(function($dialog) {
-        spyOn($dialog, 'dialog').andCallFake(function() {
+        spyOn($dialog, 'dialog').and.callFake(function() {
           return {
             open: angular.noop
           }
@@ -384,8 +384,8 @@ describe('Controller: DashboardCtrl', function () {
 
         scope.onRequestCredIncr();
         expect($dialog.dialog).toHaveBeenCalled();
-        expect($dialog.dialog.mostRecentCall.args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
-        expect($dialog.dialog.mostRecentCall.args[0].controller).toBe('RequestCreditIncreaseCtrl');
+        expect($dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
+        expect($dialog.dialog.calls.mostRecent().args[0].controller).toBe('RequestCreditIncreaseCtrl');
       }));
     });
 
@@ -488,7 +488,7 @@ describe('Controller: DashboardCtrl', function () {
         "AccountFeeAmount": 600
       };
 
-      spyOn(dashboard, 'fetchDealerDashboard').andCallFake(function() {
+      spyOn(dashboard, 'fetchDealerDashboard').and.callFake(function() {
         var toReturn = {};
 
         if (currentScenario === 'myWeek') {

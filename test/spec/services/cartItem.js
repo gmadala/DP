@@ -390,7 +390,7 @@ describe('Service: cartItem', function () {
 
   describe('scheduled payment scenario', function() {
     it('should map the property names to make a payment object, and use that to create a new VehicleCartItem', function() {
-      spyOn(CartItem, 'fromScheduledPayment').andCallThrough();
+      spyOn(CartItem, 'fromScheduledPayment').and.callThrough();
       var result = CartItem.fromScheduledPayment(mockScheduled);
 
       expect(result.id).toBe('id2');

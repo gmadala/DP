@@ -69,9 +69,9 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       close: angular.noop
     };
 
-    spyOn(paymentOptionsHelper, 'fromVehicleDetails').andCallThrough();
-    spyOn(paymentOptionsHelper, 'fromCartItem').andCallThrough();
-    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+    spyOn(paymentOptionsHelper, 'fromVehicleDetails').and.callThrough();
+    spyOn(paymentOptionsHelper, 'fromCartItem').and.callThrough();
+    spyOn(BusinessHours, 'insideBusinessHours').and.callFake(function() {
       if(inBizHours) {
         return $q.when(true);
       }
@@ -130,7 +130,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
   it('should find the next business day if we are outside of business hours', inject(function($rootScope) {
     run(fromCartItemMock);
-    spyOn(BusinessHours, 'nextBusinessDay').andReturn($q.when('2014-11-02'));
+    spyOn(BusinessHours, 'nextBusinessDay').and.returnValue($q.when('2014-11-02'));
     inBizHours = false;
     $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
     scope.$apply();
@@ -153,12 +153,12 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
     beforeEach(function() {
       shouldBeOnQueue = true;
-      spyOn(dialogMock, 'close').andCallThrough();
-      spyOn(Payments, 'isPaymentOnQueue').andCallFake(function() {
+      spyOn(dialogMock, 'close').and.callThrough();
+      spyOn(Payments, 'isPaymentOnQueue').and.callFake(function() {
           return shouldBeOnQueue;
         });
-      spyOn(Payments, 'getPaymentFromQueue').andReturn(fromCartItemMock);
-      spyOn(Payments, 'addPaymentTypeToQueue').andReturn();
+      spyOn(Payments, 'getPaymentFromQueue').and.returnValue(fromCartItemMock);
+      spyOn(Payments, 'addPaymentTypeToQueue').and.returnValue();
     });
 
     it('should do nothing if the form is invalid', function() {
@@ -219,7 +219,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       shouldBeOnQueue = true;
       isOnQueueMock = true;
       run(fromCartItemMock);
-      spyOn(fromCartItemMock, 'setExtraPrincipal').andCallThrough();
+      spyOn(fromCartItemMock, 'setExtraPrincipal').and.callThrough();
 
       scope.selector.paymentOption = PaymentOptions.TYPE_PAYMENT;
 

@@ -25,7 +25,7 @@ describe('Directive: nxgBusinessField', function () {
         };
       });
 
-      timeout = jasmine.createSpy().andReturn({
+      timeout = jasmine.createSpy().and.returnValue({
         then: function(callback) {
           return callback();
         }
@@ -76,21 +76,21 @@ describe('Directive: nxgBusinessField', function () {
   });
 
   it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').andCallThrough();
+    spyOn($dialog, 'dialog').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(false);
+    expect($dialog.dialog.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(false);
   }));
 
   it('should wait for 200ms before opening dialog to let click event finish', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').andCallThrough();
+    spyOn($dialog, 'dialog').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect(timeout).toHaveBeenCalledWith(angular.noop, 200);
   }));
 
   it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').andReturn({
+    spyOn($dialog, 'dialog').and.returnValue({
       open: function () {
         return {
           then: function (success) {
@@ -103,7 +103,7 @@ describe('Directive: nxgBusinessField', function () {
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     element.find('input').scope().openBusinessSearch();
-    expect(timeout.calls.length).toBe(1);
+    expect(timeout.calls.count()).toBe(1);
   }));
 
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',
@@ -116,10 +116,10 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'dialog').andCallThrough();
+    spyOn($dialog, 'dialog').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.dialog.mostRecentCall.args[0].resolve.searchBuyersMode()).toBe(true);
+    expect($dialog.dialog.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
   }));
 
   it('should respect the ng-disabled attribute on the original input', function () {
@@ -128,14 +128,14 @@ describe('Directive: nxgBusinessField', function () {
 
     expect(element.find('input').attr('disabled')).toBeUndefined();
     element.find('button').trigger('click');
-    expect(iScope.openBusinessSearch.calls.length).toBe(1);
+    expect(iScope.openBusinessSearch.calls.count()).toBe(1);
 
     scope.$apply(function () {
       scope.model.disableMe = true;
     });
     expect(element.find('input').attr('disabled')).toBe('disabled');
     element.find('button').trigger('click');
-    expect(iScope.openBusinessSearch.calls.length).toBe(1);
+    expect(iScope.openBusinessSearch.calls.count()).toBe(1);
   });
 
   it('should only open business dialog if input is valid', inject(function($dialog, $compile, $rootScope) {
@@ -147,7 +147,7 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'dialog').andCallThrough();
+    spyOn($dialog, 'dialog').and.callThrough();
     element.find('button').trigger('click');
     expect($dialog.dialog).not.toHaveBeenCalled();
 

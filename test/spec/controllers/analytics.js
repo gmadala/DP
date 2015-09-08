@@ -35,7 +35,7 @@ describe('Controller: AnalyticsCtrl', function () {
       Analytics: analyticsMock
     });
 
-    spyOn($dialog, 'dialog').andReturn({ open: angular.noop });
+    spyOn($dialog, 'dialog').and.returnValue({ open: angular.noop });
 
   }));
 
@@ -53,7 +53,7 @@ describe('Controller: AnalyticsCtrl', function () {
   it('should attach a toggleDetails function', function() {
     scope.showDetails = true;
     expect(typeof scope.toggleDetails).toBe('function');
-    spyOn(scope, 'toggleDetails').andCallThrough();
+    spyOn(scope, 'toggleDetails').and.callThrough();
 
     scope.toggleDetails();
     expect(scope.toggleDetails).toHaveBeenCalled();

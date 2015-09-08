@@ -55,7 +55,7 @@ describe('Model: User', function () {
         Data: true // hide
       };
 
-      spyOn(api, 'request').andCallThrough();
+      spyOn(api, 'request').and.callThrough();
       expect(user.getShowReportsAndResources).toBeDefined();
     });
 
@@ -146,13 +146,14 @@ describe('Model: User', function () {
   describe('initSession', function() {
     it('should call appropriate methods', function() {
       spyOn(api, 'setAuth');
-      spyOn(user, 'refreshInfo').andReturn('a');
-      spyOn(user, 'refreshStatics').andReturn('b');
-      spyOn($q, 'all').andReturn($q.when(true));
+      spyOn(user, 'refreshInfo').and.returnValue('a');
+      spyOn(user, 'refreshStatics').and.returnValue('b');
+      spyOn($q, 'all').and.returnValue($q.when(true));
       var auth = {};
       user.initSession(auth);
       expect(api.setAuth).toHaveBeenCalled();
-      expect(api.setAuth.calls[0].args[0]).toBe(auth);
+      //expect(api.setAuth.calls[0].args[0]).toBe(auth);
+      expect(api.setAuth.calls.mostRecent().args[0]).toBe(auth);
       expect(user.refreshInfo).toHaveBeenCalled();
       expect(user.refreshStatics).toHaveBeenCalled();
       expect($q.all).toHaveBeenCalledWith(['a', 'b']);
@@ -289,7 +290,7 @@ describe('Model: User', function () {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(api.setAuth).toHaveBeenCalled();
-      expect(api.setAuth.mostRecentCall.args[0]).toEqual({
+      expect(api.setAuth.calls.mostRecent().args[0]).toEqual({
         Token: '12345',
         ShowUserInitialization: true,
         UserVoiceToken: '54321'
@@ -317,8 +318,8 @@ describe('Model: User', function () {
 
     it('should refresh statics and info upon auth success', function () {
       infoHttpHandler.respond(infoUnitedStates);
-      spyOn(user, 'refreshInfo').andCallThrough();
-      spyOn(user, 'refreshStatics').andCallThrough();
+      spyOn(user, 'refreshInfo').and.callThrough();
+      spyOn(user, 'refreshStatics').and.callThrough();
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(user.refreshInfo).toHaveBeenCalled();
@@ -331,12 +332,12 @@ describe('Model: User', function () {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       expect(segmentio.identify).toHaveBeenCalled();
-      expect(segmentio.identify.mostRecentCall.args[0]).toBe(1234);
-      expect(segmentio.identify.mostRecentCall.args[1]).toEqual({
+      expect(segmentio.identify.calls.mostRecent().args[0]).toBe(1234);
+      expect(segmentio.identify.calls.mostRecent().args[1]).toEqual({
         name: 'Tricolor Auto',
         username: 'test'
       });
-      expect(segmentio.identify.mostRecentCall.args[1].name).toBe('Tricolor Auto');
+      expect(segmentio.identify.calls.mostRecent().args[1].name).toBe('Tricolor Auto');
     });
 
     it('should return a promise for authentication result data', function () {
@@ -379,7 +380,7 @@ describe('Model: User', function () {
       expect(user.isLoggedIn()).toBe(false);
       expect(api.hasAuthToken()).toBe(false);
       expect(success).toHaveBeenCalled();
-      expect(success.mostRecentCall.args[0]).toEqual({});
+      expect(success.calls.mostRecent().args[0]).toEqual({});
       expect(failure).not.toHaveBeenCalled();
     });
 
@@ -400,7 +401,7 @@ describe('Model: User', function () {
       expect(user.isLoggedIn()).toBe(false);
       expect(api.hasAuthToken()).toBe(false);
       expect(success).toHaveBeenCalled();
-      expect(success.mostRecentCall.args[0]).toEqual(null);
+      expect(success.calls.mostRecent().args[0]).toEqual(null);
       expect(failure).not.toHaveBeenCalled();
     });
 
@@ -622,7 +623,7 @@ describe('Model: User', function () {
     });
 
     it('should call user.getInfo', function() {
-      spyOn(user, 'getInfo').andReturn($q.when({}));
+      spyOn(user, 'getInfo').and.returnValue($q.when({}));
       var result;
 
       user.canPayBuyer().then(function(_result_) {

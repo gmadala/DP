@@ -107,21 +107,21 @@ describe('Directive: NxgVinDetails', function () {
       });
 
       it('should do nothing if this vin has already been looked up', function() {
-        spyOn(scope, 'lookupVin').andReturn({});
+        spyOn(scope, 'lookupVin').and.returnValue({});
         scope.settings.vinMode = 'matched';
         scope.vinExit();
         expect(scope.lookupVin).not.toHaveBeenCalled();
       });
 
       it('should do nothing if this vin is not valid', function() {
-        spyOn(scope, 'lookupVin').andReturn({});
+        spyOn(scope, 'lookupVin').and.returnValue({});
 
         scope.vinExit();
         expect(scope.lookupVin).not.toHaveBeenCalled();
       });
 
       it('should call the lookup function if the VIN is valid and has not yet been looked up', function() {
-        spyOn(scope, 'lookupVin').andReturn({});
+        spyOn(scope, 'lookupVin').and.returnValue({});
         scope.form.inputVin.$error.minlength = false;
         scope.vinExit();
         expect(scope.lookupVin).toHaveBeenCalled();
@@ -161,7 +161,7 @@ describe('Directive: NxgVinDetails', function () {
           }
         };
 
-        spyOn(blackbook, 'lookupByVin').andReturn({
+        spyOn(blackbook, 'lookupByVin').and.returnValue({
           then: function(success, fail) {
             if (shouldSucceed) {
               return success(results);
@@ -170,7 +170,7 @@ describe('Directive: NxgVinDetails', function () {
           }
         });
 
-        spyOn($dialog, 'dialog').andReturn({
+        spyOn($dialog, 'dialog').and.returnValue({
           open: function() {
             return {
               then: function(success) {
@@ -228,7 +228,7 @@ describe('Directive: NxgVinDetails', function () {
         };
 
         scope.lookupVin();
-        expect($dialog.dialog.mostRecentCall.args[0].resolve.matchList()).toBe(results);
+        expect($dialog.dialog.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
       });
 
       // TODO: fix this test so it passes
@@ -246,7 +246,7 @@ describe('Directive: NxgVinDetails', function () {
         };
         dialogChoice = results[1];
         scope.lookupVin();
-        expect($dialog.dialog.mostRecentCall.args[0].resolve.matchList()).toBe(results);
+        expect($dialog.dialog.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
 
         // expect(scope.data.$selectedVehicle).toBe(dialogChoice);
       })
@@ -265,7 +265,7 @@ describe('Directive: NxgVinDetails', function () {
 
       it('should dismiss other errors and reat all as \'no match\'', function() {
         errObject.dismiss = angular.noop;
-        spyOn(errObject, 'dismiss').andCallThrough();
+        spyOn(errObject, 'dismiss').and.callThrough();
         expect(scope.settings.vinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();

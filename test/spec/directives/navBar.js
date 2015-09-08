@@ -110,7 +110,7 @@ describe('Directive: navBar', function () {
 
       it('should hide the Value Lookup tab for the canadian users', function(){
         var isUnitedStates = false;
-        spyOn(dMock,'isUnitedStates').andCallFake(function(){ return isUnitedStates; });
+        spyOn(dMock,'isUnitedStates').and.callFake(function(){ return isUnitedStates; });
 
         $controller('NavBarCtrl', {
           $scope: scope,
@@ -136,7 +136,7 @@ describe('Directive: navBar', function () {
 
       it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
         var loggedIn = false;
-        spyOn(dMock, 'isLoggedIn').andCallFake(function(){ return loggedIn; });
+        spyOn(dMock, 'isLoggedIn').and.callFake(function(){ return loggedIn; });
         shouldShowTRP = true;
 
         $controller('NavBarCtrl', {

@@ -116,7 +116,7 @@ describe('Controller: CreditQueryCtrl', function () {
 
     describe('get function', function() {
       it('should call the credit query model function', function() {
-        spyOn(mockQuery, 'get').andCallThrough();
+        spyOn(mockQuery, 'get').and.callThrough();
         scope.business.creditQuery.get(opts.businessId);
         expect(mockQuery.get).toHaveBeenCalled();
       });
@@ -163,7 +163,7 @@ describe('Controller: CreditQueryCtrl', function () {
 
   describe('autoQueryCredit conditional', function() {
     beforeEach(inject(function ($httpBackend) {
-      spyOn(mockQuery, 'get').andCallThrough();
+      spyOn(mockQuery, 'get').and.callThrough();
     }));
 
     it('should do nothing if its value is false', function() {

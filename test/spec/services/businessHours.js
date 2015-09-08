@@ -35,7 +35,7 @@ describe('Service: BusinessHours', function () {
     $q = _$q_;
     moment = _moment_;
 
-    spyOn(api, 'request').andReturn($q.when({
+    spyOn(api, 'request').and.returnValue($q.when({
       BusinessHours: [
         {
           StartDateTime: '2014-10-01T04:00:00Z',
@@ -100,7 +100,7 @@ describe('Service: BusinessHours', function () {
     it('should cache the business hours', function() {
       BusinessHours.insideBusinessHours();
       expect(api.request).toHaveBeenCalled();
-      api.request.reset();
+      api.request.calls.reset();
 
       BusinessHours.insideBusinessHours();
       expect(api.request).not.toHaveBeenCalled();
@@ -111,7 +111,7 @@ describe('Service: BusinessHours', function () {
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
       expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 4 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
-      api.request.reset();
+      api.request.calls.reset();
 
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
@@ -125,12 +125,12 @@ describe('Service: BusinessHours', function () {
     });
 
     it('should broadcast a change event when we go from outside to inside business hours', function() {
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
       expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 4 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
-      api.request.reset();
+      api.request.calls.reset();
 
       $timeout.flush();
       expect($rootScope.$broadcast).toHaveBeenCalledWith(BusinessHours.CHANGE_EVENT);
@@ -138,12 +138,12 @@ describe('Service: BusinessHours', function () {
 
     it('should broadcast a change event when we go from inside to outside business hours', function() {
       clock.tick(6 * 60 * 60 * 1000); // plus 6 hours, to 2am
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
       expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 18 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
-      api.request.reset();
+      api.request.calls.reset();
 
       $timeout.flush();
       expect($rootScope.$broadcast).toHaveBeenCalledWith(BusinessHours.CHANGE_EVENT);
