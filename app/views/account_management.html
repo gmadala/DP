@@ -6,7 +6,7 @@
         <button class="btn-unstyle heavy" ng-click="financial.addFinancialAccount()" translate>Add Account</button>
       </div>
     </h2>
-    <div class="well-column-header" ng-show="editBankAccountEnabled">
+    <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled">
       <h6 class="col-xs-1">Deposit To</h6>
       <h6 class="col-xs-15">Withdraw From</h6>
       <h6 class="col-xs-2 left-align left-padding">Bank Name</h6>
@@ -17,7 +17,7 @@
     </div>
     <!--The following allows for the re-spacing when recent transactions is hidden.
     This can be removed as soon as recent transactions goes live-->
-    <div class="well-column-header" ng-show="!editBankAccountEnabled">
+    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled">
       <h6 class="col-xs-1">Deposit To</h6>
       <h6 class="col-xs-15">Withdraw From</h6>
       <h6 class="col-xs-3 left-align left-padding">Bank Name</h6>
