@@ -370,7 +370,7 @@ to https://test.nextgearcapital.com/develop/ via the Deployment Environment Deal
 
 We try to avoid having long-lived branches. We do try to keep them sync'd with "develop". 
 Feature toggles can be used as a good way to integrate new features back into "develop" on a more regular basis. 
-A quick implementation of this can be done using the app/scripts/services/features.js service. 
+A quick implementation of this can be done using the app/scripts/services/features.js service. (NOTE:  This is deprecated as 9/1/2015).  Features are now set during authentication, and can be found by using User.getFeatures() property.
 Ideally, we will integrate changes back with "develop" on a daily basis.
 
 Besides creating branches off of "develop" we also have permanent branches for our different environments as follows:

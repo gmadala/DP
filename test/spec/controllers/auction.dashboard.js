@@ -13,8 +13,8 @@ describe('Controller: AuctionDashboardCtrl', function() {
   beforeEach(inject(function($controller, $rootScope, $q, Dashboard) {
     scope = $rootScope.$new();
 
-    spyOn(Dashboard, 'fetchAuctionDashboard').andReturn($q.when('dashboard data'));
-    spyOn(Dashboard, 'fetchFloorplanChartData').andReturn($q.when('floorplan chart data'));
+    spyOn(Dashboard, 'fetchAuctionDashboard').and.returnValue($q.when('dashboard data'));
+    spyOn(Dashboard, 'fetchFloorplanChartData').and.returnValue($q.when('floorplan chart data'));
 
     dashboard = Dashboard;
 
@@ -50,18 +50,18 @@ describe('Controller: AuctionDashboardCtrl', function() {
   });
 
   it('should re-fetch chart data when selectedFloorplanChart changes', function () {
-    dashboard.fetchFloorplanChartData.reset();
+    dashboard.fetchFloorplanChartData.calls.reset();
     scope.selectedFloorplanChart = 'month';
     scope.$apply();
     expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(1);
 
-    dashboard.fetchFloorplanChartData.reset();
+    dashboard.fetchFloorplanChartData.calls.reset();
     scope.selectedFloorplanChart = 'week';
     scope.$apply();
     expect(dashboard.fetchFloorplanChartData).toHaveBeenCalledWith(0);
 
     var testFn = function() {
-      dashboard.fetchFloorplanChartData.reset();
+      dashboard.fetchFloorplanChartData.calls.reset();
       scope.selectedFloorplanChart = 'foo';
       scope.$apply();
     };
@@ -72,7 +72,7 @@ describe('Controller: AuctionDashboardCtrl', function() {
     var d = '2013-11-24';
 
     it('should create an api link and open the report in a new tab', function() {
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
 
       scope.viewDisbursementDetail(d);
       var expectedStr = '/report/disbursementdetail/2013-11-24/Disbursements-2013-11-24';

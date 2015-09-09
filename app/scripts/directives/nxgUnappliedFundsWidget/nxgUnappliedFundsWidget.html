@@ -12,9 +12,12 @@
   </div>
 
   <button id="requestPayout" class="btn-cta cta-full cta-secondary" href="#"
-          ng-show="fundsAvail > 0"
+          ng-show="fundsAvail > 0 && !autoDisburseUnappliedFunds"
           ng-click="openRequestPayout($event)">
       <span class="paired-body" translate>Request Payout</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
   </button>
+  <div ng-show="autoDisburseUnappliedFunds" id="unappliedFunds">
+    <p><b>Auto-Disburse Unapplied Funds:</b> Enabled</p>
+  </div>
 </div>

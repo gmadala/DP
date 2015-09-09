@@ -38,7 +38,7 @@ describe('Model: VehicleDetails', function () {
     beforeEach(inject(function (VehicleDetails, _api_) {
       vehicleDetails = VehicleDetails;
       api = _api_;
-      spyOn(api, 'request').andReturn({
+      spyOn(api, 'request').and.returnValue({
         then: function (f) {
           return {
             then: function(f2) {
@@ -74,7 +74,7 @@ describe('Model: VehicleDetails', function () {
 
   it('should getPaymentDetails', function() {
     var returnVal = {};
-    spyOn(api, 'request').andReturn(returnVal);
+    spyOn(api, 'request').and.returnValue(returnVal);
     var result = vehicleDetails.getPaymentDetails(123, 456);
     expect(result).toBe(returnVal);
     expect(api.request).toHaveBeenCalledWith('GET', '/floorplan/mobiledetails/financialsummary/payment/123/456');
@@ -82,7 +82,7 @@ describe('Model: VehicleDetails', function () {
 
   it('should getFeeDetails', function() {
     var returnVal = {};
-    spyOn(api, 'request').andReturn(returnVal);
+    spyOn(api, 'request').and.returnValue(returnVal);
     var result = vehicleDetails.getFeeDetails(123, 456);
     expect(result).toBe(returnVal);
     expect(api.request).toHaveBeenCalledWith('GET', '/floorplan/mobiledetails/financialsummary/fee/123/456');

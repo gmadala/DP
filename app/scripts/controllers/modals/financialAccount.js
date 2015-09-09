@@ -7,12 +7,15 @@
   FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', 'options', 'segmentio', 'metric'];
 
   function FinancialAccountCtrl($scope, AccountManagement, dialog, options, segmentio, metric) {
+
+    $scope.tooltipImage = '<div class="tooltip-image">';
+
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
 
     var accountNumber = $scope.account.AccountNumber;
-    $scope.accountNumberDisplay = accountNumber ? '******' + lastFour(accountNumber) : '';
+    $scope.accountNumberDisplay = accountNumber ? '******' + accountNumber : '';
     $scope.routingNumberDisplay = $scope.account.RoutingNumber;
 
     $scope.inputs = {

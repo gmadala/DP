@@ -26,7 +26,7 @@ describe('Controller: FloorplanCtrl', function () {
     floorplanUtil = FloorplanUtil;
     httpBackend = $httpBackend;
 
-    searchSpy = spyOn(Floorplan, 'search').andCallFake(function() {
+    searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
       if(shouldSucceed) {
         return $q.when({ Floorplans: ['one', 'two'] });
       } else {
@@ -114,7 +114,7 @@ describe('Controller: FloorplanCtrl', function () {
       };
 
       beforeEach(function() {
-        spyOn(floorplan, 'sellerHasTitle').andCallThrough();
+        spyOn(floorplan, 'sellerHasTitle').and.callThrough();
 
         httpBackend.expectPOST('/floorplan/SellerHasTitle')
           .respond({
@@ -123,7 +123,7 @@ describe('Controller: FloorplanCtrl', function () {
             Data: []
           });
 
-        spyOn(angular, 'element').andReturn({
+        spyOn(angular, 'element').and.returnValue({
           scope: function() {
             return {
               tt_isOpen: ''
@@ -160,7 +160,7 @@ describe('Controller: FloorplanCtrl', function () {
     var floorplan, floorplanUtil;
 
     beforeEach(inject(function (User, Floorplan, FloorplanUtil) {
-      spyOn(User, 'isDealer').andReturn(true);
+      spyOn(User, 'isDealer').and.returnValue(true);
       floorplan = Floorplan;
       floorplanUtil = FloorplanUtil;
       initController();
@@ -194,7 +194,7 @@ describe('Controller: FloorplanCtrl', function () {
     var floorplan, floorplanUtil;
 
     beforeEach(inject(function (User, Floorplan) {
-      spyOn(User, 'isDealer').andReturn(false);
+      spyOn(User, 'isDealer').and.returnValue(false);
       floorplan = Floorplan;
       initController();
     }));

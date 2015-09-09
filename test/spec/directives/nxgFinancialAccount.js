@@ -32,14 +32,14 @@ describe('Directive: nxgFinancialAccount', function () {
     $q = _$q_;
     User = _User_;
 
-    spyOn($dialog, 'dialog').andCallFake(function() {
+    spyOn($dialog, 'dialog').and.callFake(function() {
       return {
         open: function() {
           return $q.when(editedBankAccount)
         }
       }
     });
-    spyOn(User, 'refreshInfo').andCallFake(angular.noop);
+    spyOn(User, 'refreshInfo').and.callFake(angular.noop);
 
     editedBankAccount = {
       AccountId: '66e9e774-3dcc-4852-801d-b6e91d161a13',

@@ -1,8 +1,6 @@
 'use strict';
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function(connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
+
+var serveStatic = require('serve-static');
 var mockApi = require('./api/mockApi.js');
 
 module.exports = function(grunt) {
@@ -74,11 +72,10 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              lrSnippet,
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app),
-              mountFolder(connect, 'test'),
-              mountFolder(connect, 'api'),
+              serveStatic('.tmp'),
+              serveStatic(yeomanConfig.app),
+              serveStatic('test'),
+              serveStatic('api'),
               useMock
             ];
           }
@@ -88,8 +85,8 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
+              serveStatic('.tmp'),
+              serveStatic('test')
             ];
           },
           port: 9002
@@ -99,8 +96,8 @@ module.exports = function(grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist),
-              mountFolder(connect, 'api'),
+              serveStatic(yeomanConfig.dist),
+              serveStatic('api'),
               useMock
             ];
           }

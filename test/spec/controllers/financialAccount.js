@@ -46,7 +46,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
         'IsDefaultPayment': true,
         'IsDefaultDisbursement': true,
-        'AccountNumber': '4199137905'
+        'AccountNumber': '7905'
       };
 
       AccountManagementMock = {
@@ -103,7 +103,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close when close function is called', function () {
-        spyOn(dialog, 'close').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
         scope.close();
         expect(dialog.close).toHaveBeenCalled();
       });
@@ -113,8 +113,8 @@ describe('Controller: FinancialAccountCtrl', function () {
           $valid: false
         };
 
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'updateBankAccount').and.callThrough();
 
         scope.confirmRequest();
         expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
@@ -122,8 +122,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close after updating bank account succeed', function () {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'updateBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'updateBankAccount').and.callThrough();
 
         scope.confirmRequest();
         // resolve remaining promise to send the updated bank account
@@ -155,7 +155,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should fire a metric if edit is successful', function() {
-        spyOn(segmentio, 'track').andCallThrough();
+        spyOn(segmentio, 'track').and.callThrough();
 
         scope.confirmRequest();
         scope.$apply();
@@ -267,7 +267,7 @@ describe('Controller: FinancialAccountCtrl', function () {
     });
 
     it('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
-      spyOn(scope, 'visitTOS').andCallThrough();
+      spyOn(scope, 'visitTOS').and.callThrough();
 
       scope.visitTOS();
 
@@ -295,8 +295,8 @@ describe('Controller: FinancialAccountCtrl', function () {
           $valid: false
         };
 
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.confirmRequest();
 
@@ -305,8 +305,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close after adding bank account succeed', function () {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.confirmRequest();
         // resolve remaining promise to send the updated bank account
@@ -317,8 +317,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should not close if account is inactive and set to default disbursement or default payment.', function () {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.account.IsActive = false;
         scope.account.IsDefaultDisbursement = true;
@@ -344,8 +344,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close if account is active and any defaults are set.', function () {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.account.IsActive = true;
         scope.account.IsDefaultDisbursement = true;
@@ -359,8 +359,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close if account is inactive and no defaults are set.', function () {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.account.IsActive = false;
         scope.account.IsDefaultDisbursement = false;
@@ -374,8 +374,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should not close if account number does not match confirm input', function() {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.account.AccountNumber = '123123123';
         scope.inputs.confirmAccountNumber = '987987987';
@@ -388,8 +388,8 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close if account number does match confirm input', function() {
-        spyOn(dialog, 'close').andCallThrough();
-        spyOn(AccountManagementMock, 'addBankAccount').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
 
         scope.account.AccountNumber = '123123123';
         scope.inputs.confirmAccountNumber = '123123123';
@@ -402,7 +402,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close and set accountName to bankName.', function () {
-        spyOn(dialog, 'close').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
 
         scope.account.BankName = 'Chase Bank';
         scope.account.AccountNumber = '123123123';
@@ -416,7 +416,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should not close if TOSAcceptance flag is not true', function () {
-        spyOn(dialog, 'close').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
 
         scope.account.TOSAcceptanceFlag = false;
 
@@ -427,7 +427,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should close if TOSAcceptance flag is true', function () {
-        spyOn(dialog, 'close').andCallThrough();
+        spyOn(dialog, 'close').and.callThrough();
 
         scope.account.TOSAcceptanceFlag = true;
 
@@ -438,7 +438,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       });
 
       it('should fire a metric if add is successful', function() {
-        spyOn(segmentio, 'track').andCallThrough();
+        spyOn(segmentio, 'track').and.callThrough();
 
         scope.confirmRequest();
         scope.$apply();

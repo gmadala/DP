@@ -115,13 +115,13 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
   describe('onConfirmRequest method', function() {
 
     it('should call makeRequest', function(){
-      spyOn(titleReleasesMock, 'makeRequest').andCallThrough();
+      spyOn(titleReleasesMock, 'makeRequest').and.callThrough();
       scope.onConfirmRequest();
       expect(titleReleasesMock.makeRequest).toHaveBeenCalled();
     });
 
     it('should open dialog once API call is done', function() {
-      spyOn(dialogMock, 'dialog').andCallThrough();
+      spyOn(dialogMock, 'dialog').and.callThrough();
       scope.onConfirmRequest();
       expect(dialogMock.dialog).toHaveBeenCalled();
     });

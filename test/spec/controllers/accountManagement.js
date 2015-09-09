@@ -120,7 +120,10 @@ describe('Controller: AccountManagementCtrl', function () {
         return null;
       },
       refreshInfo: angular.noop,
-      setAutoPayEnabled: angular.noop
+      setAutoPayEnabled: angular.noop,
+      getFeatures: function(){
+        return {};
+      }
     };
 
     scope = $rootScope.$new();
@@ -188,27 +191,27 @@ describe('Controller: AccountManagementCtrl', function () {
 
     it('autoPay should be editable only for active stakeholders', function () {
 
-      scope.business.editable = true;
+      scope.brand.editable = true;
 
       scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = true;
 
-      expect(scope.business.autoPay.isEditable()).toBeTruthy();
+      expect(scope.brand.autoPay.isEditable()).toBeTruthy();
 
       scope.business.data.isStakeholderActive = true;
       scope.business.data.isStakeholder = false;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = true;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
 
       scope.business.data.isStakeholderActive = false;
       scope.business.data.isStakeholder = false;
 
-      expect(scope.business.autoPay.isEditable()).toBeFalsy();
+      expect(scope.brand.autoPay.isEditable()).toBeFalsy();
     });
 
     xit('autoPay should be hidden for quick buyers', function () {
@@ -231,7 +234,7 @@ describe('Controller: AccountManagementCtrl', function () {
 
     // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
     it('autoPay should be hidden', function () {
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     xit('autoPay should be hidden for non-auto ACH dealers', function () {
@@ -281,7 +284,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
       });
 
-      // TODO modify all the expectations once the add bank account feature is enabled.
+      
       // TODO modify second expectation to true once add Bank Account is released to Canada.
       it('add bank account should be enabled for US only.', function() {
         scope.business.data.isStakeholderActive = true;
@@ -294,11 +297,11 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.business.data.isStakeholder = true;
         scope.isUnitedStates = true;
 
-        expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
+        expect(scope.financial.isAddBankAccountEditable()).toBeTruthy();
       });
 
       it('add bank account should update local financial data', function() {
-        spyOn(scope.financial, 'addFinancialAccount').andCallThrough();
+        spyOn(scope.financial, 'addFinancialAccount').and.callThrough();
 
         scope.financial.addFinancialAccount();
         // Resolve promise
@@ -311,7 +314,7 @@ describe('Controller: AccountManagementCtrl', function () {
       });
 
       it('addFinancialAccount should call User.refreshInfo.', function() {
-        spyOn(UserMock, 'refreshInfo').andCallFake(angular.noop);
+        spyOn(UserMock, 'refreshInfo').and.callFake(angular.noop);
 
         scope.financial.addFinancialAccount();
         scope.$apply();
@@ -324,10 +327,10 @@ describe('Controller: AccountManagementCtrl', function () {
       var savingBusiness, validateResult;
       beforeEach(function() {
         validateResult = true;
-        spyOn(scope.business, 'validate').andCallFake(function() {
+        spyOn(scope.business, 'validate').and.callFake(function() {
           return validateResult;
         });
-        spyOn(scope.business, 'isDirty').andReturn(true);
+        spyOn(scope.business, 'isDirty').and.returnValue(true);
 
         AccountManagementMock.saveBusiness = function(email, enhancedRegistrationEnabled, enhancedRegistrationPin) {
           savingBusiness = {
@@ -389,10 +392,10 @@ describe('Controller: AccountManagementCtrl', function () {
       var savingTitle, validateResult;
       beforeEach(function() {
         validateResult = true;
-        spyOn(scope.title, 'validate').andCallFake(function() {
+        spyOn(scope.title, 'validate').and.callFake(function() {
           return validateResult;
         });
-        spyOn(scope.title, 'isDirty').andReturn(true);
+        spyOn(scope.title, 'isDirty').and.returnValue(true);
         spyOn(scope.title, 'updateAddressSelection');
 
         AccountManagementMock.saveTitleAddress = function(titleAddressId) {

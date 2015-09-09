@@ -115,10 +115,10 @@ describe('Controller: PaymentsCtrl', function () {
     };
 
     dialog = $dialog;
-    spyOn(modelMock, 'search').andCallThrough();
-    spyOn(modelMock, 'fetchFees').andCallThrough();
+    spyOn(modelMock, 'search').and.callThrough();
+    spyOn(modelMock, 'fetchFees').and.callThrough();
 
-    spyOn(BusinessHours, 'insideBusinessHours').andCallFake(function() {
+    spyOn(BusinessHours, 'insideBusinessHours').and.callFake(function() {
       if(inBizHours) {
         return $q.when(true);
       }
@@ -304,7 +304,7 @@ describe('Controller: PaymentsCtrl', function () {
     });
 
     it('should call __sortBy with a "payment" argument', function() {
-      spyOn(scope, '__sortBy').andCallThrough();
+      spyOn(scope, '__sortBy').and.callThrough();
       scope.sortPaymentsBy('fieldA');
       expect(scope.__sortBy).toHaveBeenCalledWith('payment', 'fieldA');
     });
@@ -318,7 +318,7 @@ describe('Controller: PaymentsCtrl', function () {
     });
 
     it('should call __sortBy with a "fee" argument', function() {
-      spyOn(scope, '__sortBy').andCallThrough();
+      spyOn(scope, '__sortBy').and.callThrough();
       scope.sortFeesBy('fieldA');
       expect(scope.__sortBy).toHaveBeenCalledWith('fee', 'fieldA');
     });
@@ -377,7 +377,7 @@ describe('Controller: PaymentsCtrl', function () {
       scope.payments.fetchNextResults();
       scope.$apply();
       scope.payments.fetchNextResults();
-      expect(modelMock.search.mostRecentCall.args[1]).toBe(p);
+      expect(modelMock.search.calls.mostRecent().args[1]).toBe(p);
     });
 
     it('should append new results to the results array', function () {
@@ -509,7 +509,7 @@ describe('Controller: PaymentsCtrl', function () {
     }));
 
     it('should find the next business date if we are outside of business hours', inject(function($controller, $rootScope) {
-      spyOn(BusinessHours, 'nextBusinessDay').andReturn($q.when('2014-10-02'));
+      spyOn(BusinessHours, 'nextBusinessDay').and.returnValue($q.when('2014-10-02'));
       inBizHours = false;
       $rootScope.$broadcast(BusinessHours.CHANGE_EVENT);
       scope.$apply();
@@ -595,8 +595,8 @@ describe('Controller: ExtensionRequestCtrl', function() {
       Floorplan: floorplan
     });
 
-    spyOn(paymentsMock, 'requestExtension').andCallThrough();
-    spyOn(scope, 'onConfirm').andCallThrough();
+    spyOn(paymentsMock, 'requestExtension').and.callThrough();
+    spyOn(scope, 'onConfirm').and.callThrough();
   }));
 
   describe('controller', function() {

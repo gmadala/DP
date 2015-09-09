@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDocumentsCtrl', function($scope, gettextCatalog, User) {
+  .controller('AuctionDocumentsCtrl', function($scope, gettextCatalog, User, segmentio, metric, kissMetricInfo) {
+
+    kissMetricInfo.getKissMetricInfo().then(
+      function(result){
+        segmentio.track(metric.VIEW_RESOURCES_PAGE,result);
+      }
+    );
+
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
@@ -17,14 +24,21 @@ angular.module('nextgearWebApp')
       }
     }
 
+    kissMetricInfo.getKissMetricInfo().then(function(result){
+      $scope.kissMetricData = result;
+    });
+
+
     $scope.documents = [
       {
         title: gettextCatalog.getString('Welcome Packet'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf'
+        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf',
+        metric:metric.AUCTION_RESOURCES_WELCOME_PACKET_PAGE
       },
       {
         title: gettextCatalog.getString('Instructions for Sellers'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf'
+        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf',
+        metric: metric.AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE
       }
     ];
   });

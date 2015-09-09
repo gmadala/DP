@@ -314,7 +314,7 @@ describe('Controller: ValueLookupCtrl', function () {
     describe('non US user suite', function() {
 
       beforeEach(function() {
-        spyOn(User, 'isUnitedStates').andReturn(false);
+        spyOn(User, 'isUnitedStates').and.returnValue(false);
         run();
       });
 
@@ -351,7 +351,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       beforeEach(function() {
         $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
-        spyOn(User, 'isUnitedStates').andReturn(true);
+        spyOn(User, 'isUnitedStates').and.returnValue(true);
         run();
       });
 
@@ -392,7 +392,7 @@ describe('Controller: ValueLookupCtrl', function () {
       $httpBackend.whenGET('/mmr/years/').respond({});
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond({});
       $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
-      spyOn(User, 'isUnitedStates').andReturn(true);
+      spyOn(User, 'isUnitedStates').and.returnValue(true);
       run();
     });
 
@@ -424,10 +424,10 @@ describe('Controller: ValueLookupCtrl', function () {
         $httpBackend.whenGET('/mmr/getVehicleValueByVin/someVin1234/8888').respond(mmrResult);
         $httpBackend.whenGET('/kbb/vin/getvehicleconfigurationbyvinandclass/UsedCar/someVin1234/12345').respond(configResult);
         $httpBackend.whenGET('/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/6146/8888/12345').respond(kbbResult);
-        spyOn(blackbook, 'lookupByVin').andCallThrough();
-        spyOn(mmr, 'lookupByVin').andCallThrough();
-        spyOn(kbb, 'getConfigurations').andCallThrough();
-        spyOn(kbb, 'lookupByConfiguration').andCallThrough();
+        spyOn(blackbook, 'lookupByVin').and.callThrough();
+        spyOn(mmr, 'lookupByVin').and.callThrough();
+        spyOn(kbb, 'getConfigurations').and.callThrough();
+        spyOn(kbb, 'lookupByConfiguration').and.callThrough();
 
         fillVinSearch();
       });
@@ -574,10 +574,10 @@ describe('Controller: ValueLookupCtrl', function () {
       $httpBackend.whenGET('/mmr/years/').respond(mock.mmr.years);
       $httpBackend.whenGET('/kbb/vehicle/getyears/UsedCar/Dealer').respond(mock.kbb.years);
       $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
-      spyOn(blackbook, 'getMakes').andCallThrough();
-      spyOn(mmr, 'getYears').andCallThrough();
-      spyOn(kbb, 'getYears').andCallThrough();
-      spyOn(User, 'isUnitedStates').andReturn(true);
+      spyOn(blackbook, 'getMakes').and.callThrough();
+      spyOn(mmr, 'getYears').and.callThrough();
+      spyOn(kbb, 'getYears').and.callThrough();
+      spyOn(User, 'isUnitedStates').and.returnValue(true);
       run();
     });
 
@@ -587,21 +587,21 @@ describe('Controller: ValueLookupCtrl', function () {
       var kbbValue = scope.manualLookupValues[3].id;
 
       expect(nextGear).toBe('bb');
-      spyOn(scope.manualLookup.blackbook, 'lookup').andReturn({});
+      spyOn(scope.manualLookup.blackbook, 'lookup').and.returnValue({});
       if(scope.lookupValues.id === 'bb') {
         scope.manualLookup.lookup();
         expect(scope.manualLookup.blackbook.lookup).toHaveBeenCalled();
       }
 
       expect(mmrValue).toBe('mmr');
-      spyOn(scope.manualLookup.mmr, 'lookup').andReturn({});
+      spyOn(scope.manualLookup.mmr, 'lookup').and.returnValue({});
       if(scope.lookupValues.id === 'mmr') {
         scope.manualLookup.lookup();
         expect(scope.manualLookup.mmr.lookup).toHaveBeenCalled();
       }
 
       expect(kbbValue).toBe('kbb');
-      spyOn(scope.manualLookup.kbb, 'lookup').andReturn({});
+      spyOn(scope.manualLookup.kbb, 'lookup').and.returnValue({});
       if (scope.lookupValues.id === 'kbb') {
         scope.manualLookup.lookup();
       }
@@ -615,7 +615,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the models dropdown when a make is chosen', function() {
-        spyOn(blackbook, 'getModels').andCallThrough();
+        spyOn(blackbook, 'getModels').and.callThrough();
         $httpBackend.whenGET('/analytics/blackbook/vehicles/make?make=Toyota').respond(mock.bb.models);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.fill();
@@ -625,7 +625,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the years dropdown when a model is chosen', function() {
-        spyOn(blackbook, 'getYears').andCallThrough();
+        spyOn(blackbook, 'getYears').and.callThrough();
         $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model?make=Toyota&model=Camry').respond(mock.bb.years);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Camry';
@@ -636,7 +636,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the styles dropdown when a year is chosen', function() {
-        spyOn(blackbook, 'getStyles').andCallThrough();
+        spyOn(blackbook, 'getStyles').and.callThrough();
         $httpBackend.whenGET('/analytics/blackbook/vehicles/make/model/1?make=Toyota&model=Camry&year=2014').respond(mock.bb.styles);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Camry';
@@ -648,9 +648,9 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should prevent any fill function from being called if the previous dropdowns do not have selected choices', function() {
-        spyOn(blackbook, 'getModels').andCallThrough();
-        spyOn(blackbook, 'getYears').andCallThrough();
-        spyOn(blackbook, 'getStyles').andCallThrough();
+        spyOn(blackbook, 'getModels').and.callThrough();
+        spyOn(blackbook, 'getYears').and.callThrough();
+        spyOn(blackbook, 'getStyles').and.callThrough();
 
         scope.manualLookup.blackbook.models.fill();
         expect(blackbook.getModels).not.toHaveBeenCalled();
@@ -669,7 +669,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         mock.bb.models.Data[0].Results.splice(1,1);
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
-        spyOn(scope.manualLookup.blackbook.years, 'fill').andReturn({});
+        spyOn(scope.manualLookup.blackbook.years, 'fill').and.returnValue({});
         scope.manualLookup.blackbook.models.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.blackbook.models.selected).toBe(mock.bb.models.Data[0].Results[0]);
@@ -683,7 +683,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         scope.manualLookup.blackbook.makes.selected = 'Toyota';
         scope.manualLookup.blackbook.models.selected = 'Corolla';
-        spyOn(scope.manualLookup.blackbook.styles, 'fill').andReturn({});
+        spyOn(scope.manualLookup.blackbook.styles, 'fill').and.returnValue({});
 
         scope.manualLookup.blackbook.years.fill();
         $httpBackend.flush();
@@ -704,7 +704,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       describe('lookup', function() {
         beforeEach(function() {
-          spyOn(blackbook, 'lookupByOptions').andCallThrough();
+          spyOn(blackbook, 'lookupByOptions').and.callThrough();
           $httpBackend.whenPOST('/analytics/v1_2/blackbook/vehicles').respond(bbResult);
           run();
           fillBlackbook();
@@ -759,7 +759,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the makes dropdown when a year is chosen', function() {
-        spyOn(mmr, 'getMakes').andCallThrough();
+        spyOn(mmr, 'getMakes').and.callThrough();
         $httpBackend.whenGET('/mmr/makes/id').respond(mock.mmr.makes);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.fill();
@@ -769,7 +769,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the models dropdown when a make is chosen', function() {
-        spyOn(mmr, 'getModels').andCallThrough();
+        spyOn(mmr, 'getModels').and.callThrough();
         $httpBackend.whenGET('/mmr/models/id/id').respond(mock.mmr.models);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
@@ -780,7 +780,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the styles dropdown when a model is chosen', function() {
-        spyOn(mmr, 'getBodyStyles').andCallThrough();
+        spyOn(mmr, 'getBodyStyles').and.callThrough();
         $httpBackend.whenGET('/mmr/bodystyles/id/id/id').respond(mock.mmr.styles);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
@@ -792,9 +792,9 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should prevent any fill function from being called if the previous dropdowns do not have selected choices', function() {
-        spyOn(mmr, 'getMakes').andCallThrough();
-        spyOn(mmr, 'getModels').andCallThrough();
-        spyOn(mmr, 'getBodyStyles').andCallThrough();
+        spyOn(mmr, 'getMakes').and.callThrough();
+        spyOn(mmr, 'getModels').and.callThrough();
+        spyOn(mmr, 'getBodyStyles').and.callThrough();
 
         scope.manualLookup.mmr.makes.fill();
         expect(mmr.getMakes).not.toHaveBeenCalled();
@@ -813,7 +813,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         mock.mmr.makes.Data.splice(1,1);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
-        spyOn(scope.manualLookup.mmr.models, 'fill').andReturn({});
+        spyOn(scope.manualLookup.mmr.models, 'fill').and.returnValue({});
         scope.manualLookup.mmr.makes.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.mmr.makes.selected).toEqual(mock.mmr.makes.Data[0]);
@@ -825,7 +825,7 @@ describe('Controller: ValueLookupCtrl', function () {
         mock.mmr.models.Data.splice(1,1);
         scope.manualLookup.mmr.years.selected = mock.mmr.years.Data[0];
         scope.manualLookup.mmr.makes.selected = mock.mmr.makes.Data[0];
-        spyOn(scope.manualLookup.mmr.styles, 'fill').andReturn({});
+        spyOn(scope.manualLookup.mmr.styles, 'fill').and.returnValue({});
         scope.manualLookup.mmr.models.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.mmr.models.selected).toEqual(mock.mmr.models.Data[0]);
@@ -845,7 +845,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       describe('lookup', function() {
         beforeEach(function() {
-          spyOn(mmr, 'lookupByOptions').andCallThrough();
+          spyOn(mmr, 'lookupByOptions').and.callThrough();
           $httpBackend.whenGET('/mmr/getVehicleValueByOptions?bodyId=aStyle&makeId=aMake&mileage=789&modelId=aModel&yearId=aYear').respond(mmrResult);
           run();
           fillMmr();
@@ -899,7 +899,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the makes dropdown when a year is chosen', function() {
-        spyOn(kbb, 'getMakes').andCallThrough();
+        spyOn(kbb, 'getMakes').and.callThrough();
         var year = mock.kbb.years.Data[0];
         $httpBackend.whenGET('/kbb/vehicle/getmakesbyyear/UsedCar/Dealer/2012').respond(mock.kbb.makes);
         scope.manualLookup.kbb.years.selected = year;
@@ -910,7 +910,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the models dropdown when a make is chosen', function() {
-        spyOn(kbb, 'getModels').andCallThrough();
+        spyOn(kbb, 'getModels').and.callThrough();
         $httpBackend.whenGET('/kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/1/2012').respond(mock.kbb.models);
         scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
         scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
@@ -921,7 +921,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should populate the styles dropdown when a model is chosen', function() {
-        spyOn(kbb, 'getBodyStyles').andCallThrough();
+        spyOn(kbb, 'getBodyStyles').and.callThrough();
         $httpBackend.whenGET('/kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/123/2012').respond(mock.kbb.styles);
         scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
         scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
@@ -933,9 +933,9 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should prevent any fill function from being called if the previous dropdowns do not have selected choices', function() {
-        spyOn(kbb, 'getMakes').andCallThrough();
-        spyOn(kbb, 'getModels').andCallThrough();
-        spyOn(kbb, 'getBodyStyles').andCallThrough();
+        spyOn(kbb, 'getMakes').and.callThrough();
+        spyOn(kbb, 'getModels').and.callThrough();
+        spyOn(kbb, 'getBodyStyles').and.callThrough();
 
         scope.manualLookup.kbb.makes.fill();
         expect(kbb.getMakes).not.toHaveBeenCalled();
@@ -954,7 +954,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         mock.kbb.makes.Data.splice(1,1);
         scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
-        spyOn(scope.manualLookup.kbb.models, 'fill').andReturn({});
+        spyOn(scope.manualLookup.kbb.models, 'fill').and.returnValue({});
         scope.manualLookup.kbb.makes.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.kbb.makes.selected).toEqual(mock.kbb.makes.Data[0]);
@@ -966,7 +966,7 @@ describe('Controller: ValueLookupCtrl', function () {
         mock.kbb.models.Data.splice(1,1);
         scope.manualLookup.kbb.years.selected = mock.kbb.years.Data[0];
         scope.manualLookup.kbb.makes.selected = mock.kbb.makes.Data[0];
-        spyOn(scope.manualLookup.kbb.styles, 'fill').andReturn({});
+        spyOn(scope.manualLookup.kbb.styles, 'fill').and.returnValue({});
         scope.manualLookup.kbb.models.fill();
         $httpBackend.flush();
         expect(scope.manualLookup.kbb.models.selected).toEqual(mock.kbb.models.Data[0]);
@@ -986,7 +986,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       describe('lookup', function() {
         beforeEach(function() {
-          spyOn(kbb, 'lookupByOptions').andCallThrough();
+          spyOn(kbb, 'lookupByOptions').and.callThrough();
           $httpBackend.whenGET('/kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/2/789/12345').respond(kbbResult);
           run();
           fillKbb();

@@ -86,7 +86,7 @@ describe("Model: Payments", function () {
       paginate = Paginate;
       $q = _$q_;
       httpBackend.whenGET(/\/payment\/search.*/).respond(respondFnc);
-      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
+      spyOn(User, 'getInfo').and.returnValue($q.when({ BusinessNumber: '123' }));
     }));
 
     it('should call the expected API path', function () {
@@ -339,7 +339,7 @@ describe("Model: Payments", function () {
         CollateralProtectionPayoffTotal: 200,
         curtailmentDueDate: '2013-01-01',
       };
-      spyOn(cartItem, 'fromScheduledPayment').andCallThrough();
+      spyOn(cartItem, 'fromScheduledPayment').and.callThrough();
 
       expect(payments.isPaymentOnQueue(schPayment.floorplanId)).toBe(false);
       payments.addPaymentToQueue(schPayment, 'payoff', true/*isScheduled*/);
@@ -377,7 +377,7 @@ describe("Model: Payments", function () {
         FinancialRecordId: 'fee123'
       };
 
-      spyOn(payments, 'removeFeeFromQueue').andReturn({});
+      spyOn(payments, 'removeFeeFromQueue').and.returnValue({});
 
       payments.addFeeToQueue(fee);
       payments.removeFromQueue(payments.getPaymentQueue().fees.fee123);
@@ -389,7 +389,7 @@ describe("Model: Payments", function () {
         FloorplanId: 'payment123'
       };
 
-      spyOn(payments, 'removePaymentFromQueue').andReturn({});
+      spyOn(payments, 'removePaymentFromQueue').and.returnValue({});
 
       payments.addPaymentToQueue(payment);
       payments.removeFromQueue(payments.getPaymentQueue().payments.payment123);

@@ -313,12 +313,12 @@
     <h2 class="well-title" translate>Floor Plan</h2>
     <ul class="counter-list">
       <li class="row">
-        <div class="col-xs-6 leftMarginMedium">
+        <div class="col-xs-6 custom leftMarginMedium">
           <span class="counter">
             {{ dashboardData.ApprovedFloorplans | alt }}
           </span>
         </div>
-        <div class="col-xs-6 counter-label zeroPadding">
+        <div class="col-xs-6 custom counter-label zeroPadding">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
                 tooltip-placement="right"
                 tooltip-popup-delay="700">
@@ -328,12 +328,12 @@
       </li>
 
       <li class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 custom ">
           <span class="counter">
             {{ dashboardData.PendingFloorplans | alt }}
           </span>
         </div>
-        <div class="col-xs-6 counter-label zeroPadding">
+        <div class="col-xs-6 custom counter-label zeroPadding">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
                 tooltip-placement="right"
                 tooltip-popup-delay="700">
@@ -343,12 +343,12 @@
       </li>
 
       <li class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 custom ">
           <span class="counter">
             {{ dashboardData.DeniedFloorplans | alt }}
           </span>
         </div>
-        <div class="col-xs-6 counter-label zeroPadding">
+        <div class="col-xs-6 custom counter-label zeroPadding">
           <span tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
                 tooltip-placement="right"
                 tooltip-popup-delay="700">

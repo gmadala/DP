@@ -71,8 +71,26 @@ module.exports = {
             Token: authorization,
             ShowUserInitialization: false,
             UserVoiceToken: 'foo',
-            TemporaryPasswordUsed: false
+            TemporaryPasswordUsed: false,
+            Features: {
+              kbb: {
+                enabled: true
+              },
+              editBankAccount: {
+                enabled: true
+              },
+              autoPay: {
+                enabled: true
+              },
+              addBankAccount: {
+                enabled: true
+              },
+              contactInfo: {
+                enabled: true
+              }
+            }
           }
+
         };
         console.log('mockApi is serving custom authentication data.');
         res.end(JSON.stringify(response));
@@ -107,7 +125,12 @@ module.exports = {
     }
 
     function findFolder(folder, done, failure) {
-      folder = folder.lastIndexOf('/') === folder.length - 1 ? folder.substring(0, folder.length - 1) : folder;
+      var lastSeparatorIndex = folder.lastIndexOf('/');
+      if (lastSeparatorIndex === folder.length - 1) {
+        folder = folder.substring(0, folder.length - 1);
+      } else if (folder.lastIndexOf('\/?') > -1) {
+        folder = folder.substring(0, lastSeparatorIndex);
+      }
       if (fs.existsSync(folder)) {
         done(folder + '/');
       }
