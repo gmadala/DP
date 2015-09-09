@@ -74,19 +74,19 @@ module.exports = {
             TemporaryPasswordUsed: false,
             Features: {
               kbb: {
-                enabled: false
+                enabled: true
               },
               editBankAccount: {
-                enabled: false
+                enabled: true
               },
               autoPay: {
-                enabled: false
+                enabled: true
               },
               addBankAccount: {
-                enabled: false
+                enabled: true
               },
               contactInfo: {
-                enabled: false
+                enabled: true
               }
             }
           }

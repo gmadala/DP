@@ -861,11 +861,11 @@ msgstr "Dirección predeterminada"
 
 #: app/views/modals/financialAccount.html:117
 msgid "Default for deposits"
-msgstr "Función predeterminada para depósitos"
+msgstr "Depósitos por defecto"
 
 #: app/views/modals/financialAccount.html:125
 msgid "Default for withdrawals"
-msgstr "Función predeterminada para retiros"
+msgstr "Retiros por defecto"
 
 #: app/views/auction.settings.html:291 app/views/profileSettings.html:139
 msgid "Delivery Type"
