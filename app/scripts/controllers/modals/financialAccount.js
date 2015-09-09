@@ -7,6 +7,9 @@
   FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', 'options', 'segmentio', 'metric'];
 
   function FinancialAccountCtrl($scope, AccountManagement, dialog, options, segmentio, metric) {
+
+    $scope.tooltipImage = '<div class="tooltip-image">';
+
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;
     $scope.defaultForDisbursement = options.defaultForDisbursement;
