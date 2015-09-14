@@ -35,9 +35,9 @@ describe('Directive: nxgFinancialAccount', function () {
     spyOn($dialog, 'dialog').and.callFake(function() {
       return {
         open: function() {
-          return $q.when(editedBankAccount)
+          return $q.when(editedBankAccount);
         }
-      }
+      };
     });
     spyOn(User, 'refreshInfo').and.callFake(angular.noop);
 
@@ -76,23 +76,17 @@ describe('Directive: nxgFinancialAccount', function () {
       '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
 
     createIsolateScope();
-
     expect(iScope).toBeDefined();
   }));
 
   it('should be displayed only if AllowPaymentByAch is true', function () {
-
     expect(iScope.displayed).toBeTruthy();
-
     iScope.account.AllowPaymentByAch = false;
-
     createIsolateScope();
-
     expect(iScope.displayed).toBeFalsy();
   });
 
   it('should be displayed if active or inactive', function () {
-
     iScope.account.IsActive = true;
     createIsolateScope();
     expect(iScope.displayed).toBeTruthy();
@@ -103,92 +97,73 @@ describe('Directive: nxgFinancialAccount', function () {
   });
 
   it('should show edit if stakeholder active', function () {
-
     createIsolateScope();
 
     iScope.editBankAccountEnabled= true;
     iScope.isStakeholderActive = true;
-
     expect(iScope.isEditable()).toBeTruthy();
 
     iScope.editBankAccountEnabled= false;
     iScope.isStakeholderActive = false;
-
     expect(iScope.isEditable()).toBeFalsy();
 
     iScope.editBankAccountEnabled = false;
     iScope.isStakeholderActive = true;
-
     expect(iScope.isEditable()).toBeFalsy();
 
     iScope.editBankAccountEnabled = true;
     iScope.isStakeholderActive = false;
-
     expect(iScope.isEditable()).toBeFalsy();
   });
 
   it('should not show edit if Canadian user.', function() {
-
     createIsolateScope();
 
     iScope.editBankAccountEnabled= true;
     iScope.isStakeholderActive = true;
     iScope.isUnitedStates = false;
-
     expect(iScope.isEditable()).toBeFalsy();
 
     iScope.editBankAccountEnabled= true;
     iScope.isStakeholderActive = true;
     iScope.isUnitedStates = true;
-
     expect(iScope.isEditable()).toBeTruthy();
   });
 
   it('status should be "Active" if IsActive is true', function () {
-
     iScope.account.IsActive = true;
-
     createIsolateScope();
-
-    expect(iScope.status).toEqual('Active');
+    expect(iScope.status).toBeTruthy();
   });
 
 
   it('status should be "Inactive" if IsActive is not true', function () {
-
     iScope.account.IsActive = null;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toBeFalsy();
 
     iScope.account.IsActive = undefined;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toBeFalsy();
 
     iScope.account.IsActive = false;
     createIsolateScope();
-    expect(iScope.status).toEqual('Inactive');
+    expect(iScope.status).toBeFalsy();
   });
 
   it('should designate default disbursement account', function () {
-
     scope.account.BankAccountId = disbursementAccount;
-
     createIsolateScope();
-
     expect(iScope.defaultForDisbursement).toBeTruthy();
   });
 
   it('should designate default billing account', function () {
-
     scope.account.BankAccountId = billingAccount;
-
     createIsolateScope();
-
     expect(iScope.defaultForBilling).toBeTruthy();
   });
 
   it('should not have special designations for non-billing, non-disbursement', function () {
-
     scope.account.BankAccountId = 123;
 
     createIsolateScope();
@@ -198,7 +173,6 @@ describe('Directive: nxgFinancialAccount', function () {
   });
 
   it('routing number and its label should display correctly for US and Canada users.', function() {
-
     expect(iScope.routingNumberDisplay).toBe('123456789');
     expect(iScope.routingNumberLabel).toBe('Routing Number');
 
