@@ -146,6 +146,9 @@ body {
 .leftMarginLarge {
   margin-left:25px;
 }
+.left-margin-large{
+  margin-left: 2%;
+}
 .left-margin-extra-large {
   margin-left:3.5%;
 }
@@ -177,6 +180,9 @@ section.col-xs-6 {
   }
   &.noLeftMargin{
     margin-left: 0;
+  }
+  &.left-margin-large{
+    margin: 0 0 0 2%;
   }
 }
 .col-xs-15{

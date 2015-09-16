@@ -41,7 +41,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
 <!-- END LINE2 -->
 
 <!-- CITY AND STATE -->
-<div ng-if="city || state">
+<div ng-if="city || state" class="row ng-scope">
   <div class="col-xs-6 custom text-vertical-center" ng-if="city">
     <label for="addressCity" translate>City</label>
     <input class="input-full"

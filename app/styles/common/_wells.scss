@@ -150,6 +150,11 @@
   &.inset {
     padding: 10px 20px;
   }
+
+  &.financial-account{
+    padding: 0 15px;
+    line-height: 3;
+  }
 }
   .well-light {
     background: #ffffff;
