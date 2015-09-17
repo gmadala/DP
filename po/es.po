@@ -1294,7 +1294,7 @@ msgstr "Cargos futuros"
 
 #: app/views/modals/confirmCheckout.html:65
 msgid "Future Payments"
-msgstr "Pagos futuros"
+msgstr "Pagos Futuros"
 
 #: app/scripts/controllers/floorCar.js:181
 msgid "Go Home"
