@@ -52,21 +52,20 @@ describe('app.js', function () {
 
   describe('event:userAuthenticated', function () {
     it('should restore a previous state', function() {
-
-      spyOn(lastState, 'getUserState').andReturn('userstate');
+      spyOn(lastState, 'getUserState').and.returnValue('userstate');
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'transitionTo');
 
       rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
-      expect(lastState.getUserState.calls.length).toEqual(3);
-      expect(lastState.clearUserState.calls.length).toEqual(1);
+      expect(lastState.getUserState.calls.count()).toEqual(3);
+      expect(lastState.clearUserState.calls.count()).toEqual(1);
       expect(state.transitionTo).toHaveBeenCalledWith('userstate');
 
     });
 
     it('should go to dealer home if no saved state', function() {
 
-      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'getUserState').and.returnValue('');
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'go');
       dealer = true;
@@ -80,7 +79,7 @@ describe('app.js', function () {
 
     it('should go to auction home if no saved state', function() {
 
-      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'getUserState').and.returnValue('');
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'go');
       dealer = false;
@@ -106,9 +105,9 @@ describe('app.js', function () {
       };
 
       // Must do this part to set up "pendingState" variable.
-      spyOn(user, 'isLoggedIn').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
       spyOn(state, 'go');
-      spyOn(cookieStore, 'get').andReturn(false);
+      spyOn(cookieStore, 'get').and.returnValue(false);
       rootScope.$broadcast('$stateChangeStart', toStateObject);
       expect(state.go).toHaveBeenCalledWith('login');
 
@@ -124,7 +123,7 @@ describe('app.js', function () {
         TemporaryPasswordUsed: false
       };
 
-      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'getUserState').and.returnValue('');
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'go');
       dealer = true;
@@ -140,7 +139,7 @@ describe('app.js', function () {
 
     it('should show createPassword page when User.isPasswordChangeRequired() is true', function() {
 
-      spyOn(lastState, 'getUserState').andReturn('');
+      spyOn(lastState, 'getUserState').and.returnValue('');
       spyOn(lastState, 'clearUserState');
       spyOn(state, 'go');
       dealer = true;
@@ -205,9 +204,9 @@ describe('app.js', function () {
     });
 
     it('should restore session from saved auth token', function() {
-      spyOn(user, 'isLoggedIn').andReturn(false);
-      spyOn(cookieStore, 'get').andReturn('savedAuthString');
-      spyOn(user, 'initSession').andCallThrough();
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
+      spyOn(cookieStore, 'get').and.returnValue('savedAuthString');
+      spyOn(user, 'initSession').and.callThrough();
       spyOn(state, 'go');
       var toState = {
         data: {
@@ -221,11 +220,11 @@ describe('app.js', function () {
     });
 
     it('should redirect to login if user not logged in', function() {
-      spyOn(user, 'isDealer').andCallThrough();
-      spyOn(user, 'isLoggedIn').andReturn(false);
+      spyOn(user, 'isDealer').and.callThrough();
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
       spyOn(state, 'go');
       dealer = true;
-      spyOn(cookieStore, 'get').andReturn(false);
+      spyOn(cookieStore, 'get').and.returnValue(false);
 
       rootScope.$broadcast('$stateChangeStart', toNonAnonState);
 
@@ -235,9 +234,9 @@ describe('app.js', function () {
     });
 
     it('should redirect to update security questions', function() {
-      spyOn(user, 'isDealer').andCallThrough();
-      spyOn(user, 'isLoggedIn').andReturn(true);
-      spyOn(user, 'isUserInitRequired').andReturn(true);
+      spyOn(user, 'isDealer').and.callThrough();
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
+      spyOn(user, 'isUserInitRequired').and.returnValue(true);
       spyOn(state, 'go');
       dealer = true;
 
@@ -247,8 +246,8 @@ describe('app.js', function () {
     });
 
     it('should redirect auction user if trying to access page for dealer user', function() {
-      spyOn(user, 'isLoggedIn').andReturn(true);
-      spyOn(user, 'isUserInitRequired').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
+      spyOn(user, 'isUserInitRequired').and.returnValue(false);
       spyOn(state, 'go');
       dealer = false;
 
@@ -258,8 +257,8 @@ describe('app.js', function () {
     });
 
     it('should redirect dealer user if trying to access page for auction user', function() {
-      spyOn(user, 'isLoggedIn').andReturn(true);
-      spyOn(user, 'isUserInitRequired').andReturn(false);
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
+      spyOn(user, 'isUserInitRequired').and.returnValue(false);
       spyOn(state, 'go');
       dealer = true;
 

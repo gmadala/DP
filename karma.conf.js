@@ -75,7 +75,8 @@ module.exports = function (karma) {
 
     coverageReporter: {
       type: 'html',
-      dir: 'test/coverage/'
+      dir: 'test/coverage/',
+      subdir: '.'
     },
 
     junitReporter: {

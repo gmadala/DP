@@ -21,9 +21,9 @@ describe('Controller: ReceiptsCtrl', function () {
     searchResults = {
       Receipts: []
     };
-    searchSpy = spyOn(Receipts, 'search').andReturn($q.when(searchResults));
+    searchSpy = spyOn(Receipts, 'search').and.returnValue($q.when(searchResults));
 
-    spyOn(user, 'getStatics').andReturn($q.when({
+    spyOn(user, 'getStatics').and.returnValue($q.when({
       paymentMethods: [
         {
           PaymentMethodName: 'Foo',
@@ -179,7 +179,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
   });
 
-  describe('fetchNextResults function', function () {    
+  describe('fetchNextResults function', function () {
     it('should not call for data if the paginator indicates it is already at the end', function () {
       scope.receipts.paginator = {
         hasMore: function () {
@@ -215,7 +215,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
     it('should pass the current search criteria', function () {
       scope.receipts.fetchNextResults();
-      expect(receipts.search.mostRecentCall.args[0]).toBe(scope.receipts.searchCriteria);
+      expect(receipts.search.calls.mostRecent().args[0]).toBe(scope.receipts.searchCriteria);
     });
 
     it('should pass back the paginator from previous calls on subsequent ones', function () {
@@ -227,7 +227,7 @@ describe('Controller: ReceiptsCtrl', function () {
       scope.receipts.fetchNextResults();
       scope.$apply();
       scope.receipts.fetchNextResults();
-      expect(receipts.search.mostRecentCall.args[1]).toBe(searchResults.$paginator);
+      expect(receipts.search.calls.mostRecent().args[1]).toBe(searchResults.$paginator);
     });
 
     it('should append new results to the results array', function () {
@@ -278,7 +278,7 @@ describe('Controller: ReceiptsCtrl', function () {
     describe('toggleInQueue function', function() {
       beforeEach(function() {
         // spyOn(scope, 'isSelected');
-        spyOn(scope, 'removeReceipt').andCallThrough();
+        spyOn(scope, 'removeReceipt').and.callThrough();
       });
 
       it('should add a receipt to the list if it is not already on there', function() {
@@ -312,7 +312,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
   describe('onExport function', function() {
     it('should do nothing if no receipts are selected', function() {
-      spyOn(window, 'open').andReturn();
+      spyOn(window, 'open').and.returnValue();
       scope.onExport();
       expect(window.open).not.toHaveBeenCalled();
     });
@@ -382,7 +382,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
       expect(scope.receipts.searchCriteria.query).toBe('fooSearch');
       expect(receipts.search).toHaveBeenCalled();
-      expect(receipts.search.mostRecentCall.args[0].query).toBe('fooSearch');
+      expect(receipts.search.calls.mostRecent().args[0].query).toBe('fooSearch');
   }));
 
 });

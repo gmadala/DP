@@ -2,7 +2,8 @@
 
 angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
-                                                User, api, $q, dealerCustomerSupportPhone, features, segmentio, metric) {
+                                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
+                                                routingNumberFilter) {
 
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
 
@@ -21,7 +22,10 @@ angular.module('nextgearWebApp')
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.isDealer = User.isDealer();
-    $scope.autoPayEnabled = features.autoPay.enabled;
+    $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ?  User.getFeatures().autoPay.enabled :  true;
+    $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ?  User.getFeatures().contactInfo.enabled :  true;
+    $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ?  User.getFeatures().addBankAccount.enabled :  true;
+    $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
@@ -86,6 +90,8 @@ angular.module('nextgearWebApp')
         /** BUSINESS SETTINGS **/
         $scope.business = {
           data: {
+            phone: '1-234-567-8910',
+            fax: '1-234-567-8912',
             email: results.BusinessEmail,
             enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
             enhancedRegistrationPin: null,
@@ -137,6 +143,44 @@ angular.module('nextgearWebApp')
               }
             });
           },
+          contactInfo: {
+            isDisplayed: function () {
+              return $scope.isDealer && $scope.isUnitedStates && $scope.contactInfoEnabled;
+            }
+          }
+
+        };
+
+        /** BRAND SETTINGS **/
+        $scope.brand={
+          data: {
+            autoPayEnabled: results.AutoPayEnabled
+          },
+          dirtyData: null,
+          editable: false,
+          edit: function() {
+            prv.edit.apply(this);
+          },
+          cancel: function() {
+            prv.cancel.apply(this);
+          },
+          save: function() {
+            if (prv.save.apply(this)) {
+              var d = this.dirtyData;
+
+              AccountManagement.saveBusiness($scope.business.data.email, $scope.business.data.enhancedRegistrationEnabled, $scope.business.data.enhancedRegistrationPin,
+                d.autoPayEnabled).then(prv.saveSuccess.bind(this))
+                .then(User.setAutoPayEnabled.bind(this, d.autoPayEnabled));
+            }
+          },
+          isDirty: function(){
+            return $scope.brandSettings.$dirty;
+          },
+          validate: function(){
+            var brand = $scope.brand;
+            brand.validation = angular.copy($scope.brandSettings);
+            return brand.validation.$valid;
+          },
           autoPay: {
             confirmEnable: function () {
               var dialogOptions = {
@@ -148,9 +192,9 @@ angular.module('nextgearWebApp')
               };
               $dialog.dialog(dialogOptions).open().then(function (result) {
                 if (result) {
-                  $scope.business.dirtyData.autoPayEnabled = true;
+                  $scope.brand.dirtyData.autoPayEnabled = true;
                 } else {
-                  $scope.business.dirtyData.autoPayEnabled = false;
+                  $scope.brand.dirtyData.autoPayEnabled = false;
                 }
               });
             },
@@ -164,14 +208,14 @@ angular.module('nextgearWebApp')
               };
               $dialog.dialog(dialogOptions).open().then(function (result) {
                 if (result) {
-                  $scope.business.dirtyData.autoPayEnabled = false;
+                  $scope.brand.dirtyData.autoPayEnabled = false;
                 } else {
-                  $scope.business.dirtyData.autoPayEnabled = true;
+                  $scope.brand.dirtyData.autoPayEnabled = true;
                 }
               });
             },
             isEditable: function () {
-              return $scope.business.editable && $scope.business.data.isStakeholder &&
+              return $scope.brand.editable && $scope.business.data.isStakeholder &&
                 $scope.business.data.isStakeholderActive;
             },
             isDisplayed: function () {
@@ -187,17 +231,9 @@ angular.module('nextgearWebApp')
             bankAccounts: results.BankAccounts,
             disbursementAccount: results.DefaultDisbursementBankAccountId,
             billingAccount: results.DefaultBillingBankAccountId,
-            availableCredit: results.AvailableCredit,
-            reserveFunds: results.ReserveFunds,
-            lastPayment: {
-              amount: results.LastPayment,
-              date: results.LastPaymentDate
-            },
-            unappliedFunds: results.UnappliedFunds,
-            totalAvailable: results.TotalAvailable,
-            autoDisburseUnappliedFunds: results.AutoDisburseUnappliedFundsDaily
+            routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true)
           },
-          dirtyData: null, // a copy of the data for editing (lazily built)
+          /**dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
           edit: function() {
             prv.edit.apply(this);
@@ -218,8 +254,8 @@ angular.module('nextgearWebApp')
            * @return {Boolean} Is the user allowed to add a bank account?
            */
           isAddBankAccountEditable: function() {
-            return features.addBankAccount.enabled && $scope.business.data.isStakeholder &&
-              $scope.business.data.isStakeholderActive && $scope.isUnitedStates;
+            return ($scope.addBankAccountEnabled  && $scope.business.data.isStakeholder &&
+              $scope.business.data.isStakeholderActive && $scope.isUnitedStates);
           },
           /**
            * Updates the local financial account data to keep consistent with

@@ -110,10 +110,10 @@ describe('Controller: ProfileSettingsCtrl', function () {
       var savingProfile, validateResult;
       beforeEach(function() {
         validateResult = true;
-        spyOn(scope.profile, 'validate').andCallFake(function() {
+        spyOn(scope.profile, 'validate').and.callFake(function() {
           return validateResult;
         });
-        spyOn(scope.profile, 'isDirty').andReturn(true);
+        spyOn(scope.profile, 'isDirty').and.returnValue(true);
 
         ProfileSettingsMock.saveProfile = function(username, password, email, cleanPhone, questions) {
           savingProfile = {

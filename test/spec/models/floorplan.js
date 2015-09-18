@@ -206,7 +206,7 @@ describe('Model: Floorplan', function () {
       paginate = Paginate;
       httpBackend.whenGET(/\/floorplan\/search.*/).respond(respondFnc);
       defaultCriteria.filter = floorplan.filterValues.ALL;
-      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
+      spyOn(User, 'getInfo').and.returnValue($q.when({ BusinessNumber: '123' }));
 
       clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
@@ -503,7 +503,7 @@ describe('Model: Floorplan', function () {
 
     beforeEach(inject(function (User, _$rootScope_) {
       $rootScope = _$rootScope_;
-      spyOn(User, 'getInfo').andReturn($q.when({ BusinessNumber: '123' }));
+      spyOn(User, 'getInfo').and.returnValue($q.when({ BusinessNumber: '123' }));
     }));
 
     it('should not add the property if item has no stock number', function () {

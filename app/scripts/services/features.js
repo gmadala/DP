@@ -31,6 +31,9 @@ angular.module('nextgearWebApp')
       addBankAccount: {
         enabled: false
       },
+      contactInfo: {
+        enabled: false
+      },
       loadFromQueryString: function () {
         var search = $location.search();
 

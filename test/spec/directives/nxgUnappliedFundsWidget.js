@@ -6,9 +6,11 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
   var element,
     isolateScope;
 
-  beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
+  beforeEach(inject(function ($rootScope, $compile, $httpBackend, $q) {
     $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
-
+    $httpBackend.whenGET('/userAccount/v1_1/settings').respond($q.when({
+      AutoDisburseUnappliedFundsDaily: false
+    }));
     $rootScope.foo = 1;
     $rootScope.bar = 2;
     element = angular.element('<div nxg-unapplied-funds-widget balance="foo" available="bar"></div>');
@@ -64,9 +66,9 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     });
 
     it('openRequestPayout() should create a dialog with the right settings & data', function () {
-      spyOn(dialogMock, 'dialog').andCallThrough();
+      spyOn(dialogMock, 'dialog').and.callThrough();
       scope.openRequestPayout({preventDefault: angular.noop});
-      var config = dialogMock.dialog.mostRecentCall.args[0];
+      var config = dialogMock.dialog.calls.mostRecent().args[0];
 
       expect(config.templateUrl).toBeDefined();
       expect(config.controller).toBe('PayoutModalCtrl');
@@ -77,7 +79,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     });
 
     it('openRequestPayout() should show a success modal and update available and total balance on success', function () {
-      spyOn(dialogMock, 'dialog').andReturn({
+      spyOn(dialogMock, 'dialog').and.returnValue({
         open: function () {
           return $q.when({
             amount: 100,
@@ -89,26 +91,26 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
           });
         }
       });
-      spyOn(dialogMock, 'messageBox').andCallThrough();
+      spyOn(dialogMock, 'messageBox').and.callThrough();
       scope.openRequestPayout({preventDefault: angular.noop});
       scope.$apply();
       expect(dialogMock.messageBox).toHaveBeenCalled();
-      expect(typeof dialogMock.messageBox.mostRecentCall.args[0]).toBe('string');
-      expect(dialogMock.messageBox.mostRecentCall.args[1]).toBe('Your request for a payout in the amount of ' +
+      expect(typeof dialogMock.messageBox.calls.mostRecent().args[0]).toBe('string');
+      expect(dialogMock.messageBox.calls.mostRecent().args[1]).toBe('Your request for a payout in the amount of ' +
         '$100.00 to your account "foo" has been successfully submitted.');
-      expect(dialogMock.messageBox.mostRecentCall.args[2].length).toBe(1);
+      expect(dialogMock.messageBox.calls.mostRecent().args[2].length).toBe(1);
 
       expect(scope.fundsAvail).toBe(300);
       expect(scope.fundsBalance).toBe(400);
     });
 
     it('openRequestPayout() should not do anything if not successful', function() {
-      spyOn(dialogMock, 'dialog').andReturn({
+      spyOn(dialogMock, 'dialog').and.returnValue({
         open: angular.noop
 
       });
 
-      spyOn(dialogMock, 'messageBox').andCallThrough();
+      spyOn(dialogMock, 'messageBox').and.callThrough();
       // scope.openRequestPayout({preventDefault: angular.noop});
       scope.$apply();
       expect(dialogMock.messageBox).not.toHaveBeenCalled();
@@ -235,7 +237,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       });
 
       it('should not submit if there are local validation errors', function () {
-        spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
+        spyOn(paymentsMock, 'requestUnappliedFundsPayout').and.callThrough();
         scope.form = {
           $valid: false,
           payoutAmt: {
@@ -252,7 +254,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
       });
 
       it('should send along the expected data', function () {
-        spyOn(paymentsMock, 'requestUnappliedFundsPayout').andCallThrough();
+        spyOn(paymentsMock, 'requestUnappliedFundsPayout').and.callThrough();
         scope.submit();
         expect(paymentsMock.requestUnappliedFundsPayout).toHaveBeenCalledWith(100, 'fooId');
       });
@@ -274,10 +276,10 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         scope.submit();
         flushPayoutRequestSuccess();
         expect(dialogMock.close).toHaveBeenCalled();
-        expect(dialogMock.close.mostRecentCall.args[0].amount).toBe(100);
-        expect(dialogMock.close.mostRecentCall.args[0].newAvailableAmount).toBe(80);
-        expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountId).toBe('fooId');
-        expect(dialogMock.close.mostRecentCall.args[0].account.BankAccountName).toBe('foo');
+        expect(dialogMock.close.calls.mostRecent().args[0].amount).toBe(100);
+        expect(dialogMock.close.calls.mostRecent().args[0].newAvailableAmount).toBe(80);
+        expect(dialogMock.close.calls.mostRecent().args[0].account.BankAccountId).toBe('fooId');
+        expect(dialogMock.close.calls.mostRecent().args[0].account.BankAccountName).toBe('foo');
       });
 
     });

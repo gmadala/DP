@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $dialog, CreditIncrease, gettextCatalog) {
+  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $dialog, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
+
+    kissMetricInfo.getKissMetricInfo().then(
+      function(result){
+        segmentio.track(metric.VIEW_REQUEST_CREDIT_INCREASE_PAGE,result);
+      }
+    );
+
     $scope.loading = false;
     $scope.twoDecimalRegex = /^(\d)*(.(\d){0,2})?$/;
 
@@ -23,8 +30,8 @@ angular.module('nextgearWebApp')
       }
     });
 
-
     $scope.confirmRequest = function() {
+
 
       $scope.formValidation = angular.copy($scope.requestCreditIncreaseForm);
       if($scope.formValidation.$invalid) {
@@ -36,6 +43,16 @@ angular.module('nextgearWebApp')
       CreditIncrease.requestCreditIncrease($scope.selector.selectedLineOfCredit.id, $scope.selector.isTemporary === 'true', parseFloat($scope.selector.amount)).then(
         // success
         function() {
+
+          kissMetricInfo.getKissMetricInfo().then(function(result) {
+            if ($scope.selector.isTemporary === 'true') {
+              segmentio.track(metric.DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE, result);
+            } else {
+              segmentio.track(metric.DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED, result);
+            }
+            $scope.kissMetricData = result;
+          });
+
           $scope.loading = false;
           dialog.close(); // close request dialog
 

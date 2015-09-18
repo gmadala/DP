@@ -24,7 +24,7 @@ describe('Directive: nxgMessages', function () {
         close: function () { defer.resolve(); }
       };
 
-      spyOn($dialog, 'dialog').andReturn(fakeDialog);
+      spyOn($dialog, 'dialog').and.returnValue(fakeDialog);
 
       element = angular.element('<div nxg-messages></div>');
       element = $compile(element)($rootScope);
@@ -32,11 +32,11 @@ describe('Directive: nxgMessages', function () {
     }));
 
     it('should open the message dialog when message(s) become present', function () {
-      spyOn(fakeDialog, 'open').andCallThrough();
+      spyOn(fakeDialog, 'open').and.callThrough();
       messages.add('msg1', 'debug1');
       scope.$apply();
       expect($dialog.dialog).toHaveBeenCalled();
-      var opts = $dialog.dialog.mostRecentCall.args[0];
+      var opts = $dialog.dialog.calls.mostRecent().args[0];
       expect(opts.templateUrl).toBe('scripts/directives/nxgMessages/nxgMessagesModal.html');
       expect(opts.controller).toBe('MessagesModalCtrl');
       expect(fakeDialog.open).toHaveBeenCalled();

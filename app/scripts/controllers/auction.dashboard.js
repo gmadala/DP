@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
         range = 0;
         break;
       default:
-        throw 'Unexpected value for filtering floorplan chart!';
+        throw new Error('Unexpected value for filtering floorplan chart!');
       }
       Dashboard.fetchFloorplanChartData(range).then(function (data) {
         $scope.chartData = data;

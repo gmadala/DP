@@ -23,7 +23,7 @@ describe('Model: AccountManagement', function() {
     user.isDealer = function() {
       return isDealer;
     };
-    spyOn(user, 'getInfo').andReturn($q.when({
+    spyOn(user, 'getInfo').and.returnValue($q.when({
       BankAccounts: []
     }));
 
@@ -135,7 +135,7 @@ describe('Model: AccountManagement', function() {
   });
 
   it('should call getBankAccount and throw error with invalid id', function() {
-    spyOn(accountManagement, 'getBankAccount').andCallThrough();
+    spyOn(accountManagement, 'getBankAccount').and.callThrough();
     expect(accountManagement.getBankAccount).toThrow(new Error('Account id is required.'));
   });
 
@@ -149,7 +149,7 @@ describe('Model: AccountManagement', function() {
   });
 
   it('should call updateBankAccount and throw error with invalid bank account', function() {
-    spyOn(accountManagement, 'updateBankAccount').andCallThrough();
+    spyOn(accountManagement, 'updateBankAccount').and.callThrough();
     expect(accountManagement.updateBankAccount).toThrow(new Error('Bank account is required.'));
   });
 
@@ -168,7 +168,7 @@ describe('Model: AccountManagement', function() {
           });
       });
 
-    spyOn(accountManagement, 'updateBankAccount').andCallThrough();
+    spyOn(accountManagement, 'updateBankAccount').and.callThrough();
     httpBackend.flush();
 
     expect(accountManagement.updateBankAccount).toHaveBeenCalledWith(returnedBankAccount);
@@ -176,13 +176,13 @@ describe('Model: AccountManagement', function() {
   });
 
   it('should call addBankAccount and throw error with invalid bank account', function() {
-    spyOn(accountManagement, 'addBankAccount').andCallThrough();
+    spyOn(accountManagement, 'addBankAccount').and.callThrough();
     expect(accountManagement.addBankAccount).toThrow(new Error('Bank account is required.'));
   });
 
   it('should call addBankAccount', function() {
     var newBankAccount = {}, returnedBankAccount = {};
-    spyOn(accountManagement, 'addBankAccount').andCallThrough();
+    spyOn(accountManagement, 'addBankAccount').and.callThrough();
 
     accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
       .then(function (mockAccount) {

@@ -109,7 +109,7 @@ describe('Controller: FloorCarCtrl', function () {
 
       beforeEach(inject(function() {
         scope.form = mockForm;
-        spyOn(dialog, 'dialog').andReturn({
+        spyOn(dialog, 'dialog').and.returnValue({
           open: function() {
             return {
               then: function(s,f) {
@@ -153,18 +153,18 @@ describe('Controller: FloorCarCtrl', function () {
       it('should call dialog with a valid form', function() {
         scope.form.$valid = true;
         scope.submit();
-        expect(dialog.dialog.mostRecentCall.args[0].resolve.formData()).toEqual(scope.data);
+        expect(dialog.dialog.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
       });
 
       it('should call reallySubmit() if user confirms', function() {
-        spyOn(scope, 'reallySubmit').andReturn();
+        spyOn(scope, 'reallySubmit').and.returnValue();
         scope.submit();
         expect(scope.reallySubmit).toHaveBeenCalled();
       });
 
       it('should not call reallySubmit() if user does not confirm', function() {
         succeed = false;
-        spyOn(scope, 'reallySubmit').andReturn();
+        spyOn(scope, 'reallySubmit').and.returnValue();
         scope.submit();
         expect(scope.reallySubmit).not.toHaveBeenCalled();
       })
@@ -180,7 +180,7 @@ describe('Controller: FloorCarCtrl', function () {
       beforeEach(inject(function(protect) {
         p = protect;
 
-        spyOn(dialog, 'dialog').andReturn({
+        spyOn(dialog, 'dialog').and.returnValue({
           open: function() {
             return {
               then: function(s,f) {
@@ -209,7 +209,7 @@ describe('Controller: FloorCarCtrl', function () {
           return [200, { Success: true }];
         });
 
-        spyOn(dialog, 'messageBox').andReturn({
+        spyOn(dialog, 'messageBox').and.returnValue({
           open: function() {
             return {
               then: function(s) {
@@ -229,7 +229,7 @@ describe('Controller: FloorCarCtrl', function () {
       });
 
       it('should do nothing if the flooring fails', function() {
-        spyOn(dialog, 'messageBox').andReturn();
+        spyOn(dialog, 'messageBox').and.returnValue();
         $httpBackend.whenPOST('/floorplan/v1_1/create')
           .respond(function() {
             return [200, { Success: false }];
@@ -264,7 +264,7 @@ describe('Controller: FloorCarCtrl', function () {
       });
 
       it('should launch a messagebox box', function() {
-        spyOn(dialog, 'messageBox').andCallThrough();
+        spyOn(dialog, 'messageBox').and.callThrough();
         scope.cancel();
         expect(dialog.messageBox).toHaveBeenCalledWith('Cancel',
         'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary btn-sm'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
@@ -275,7 +275,7 @@ describe('Controller: FloorCarCtrl', function () {
 
   describe('in dealer mode', function() {
     beforeEach(function(){
-      spyOn(userMock, 'isDealer').andReturn(true);
+      spyOn(userMock, 'isDealer').and.returnValue(true);
       initController();
       scope.$apply();
     });
@@ -283,14 +283,14 @@ describe('Controller: FloorCarCtrl', function () {
     registerCommonTests();
 
     it('Canada', function() {
-      spyOn(userMock, 'isUnitedStates').andReturn(false);
+      spyOn(userMock, 'isUnitedStates').and.returnValue(false);
       initController();
       scope.$apply();
       expect(scope.mileageOrOdometer).toEqual('Odometer');
     });
 
     it('States', function() {
-      spyOn(userMock, 'isUnitedStates').andReturn(true);
+      spyOn(userMock, 'isUnitedStates').and.returnValue(true);
       initController();
       scope.$apply();
       expect(scope.mileageOrOdometer).toEqual('Mileage');
@@ -300,7 +300,7 @@ describe('Controller: FloorCarCtrl', function () {
 
   describe('in auction mode', function() {
     beforeEach(function() {
-      spyOn(userMock, 'isDealer').andReturn(false);
+      spyOn(userMock, 'isDealer').and.returnValue(false);
       initController();
       scope.$apply();
     });

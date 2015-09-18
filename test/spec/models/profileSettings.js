@@ -95,7 +95,7 @@ describe('Model: ProfileSettings', function() {
   describe('get method', function() {
 
     beforeEach(function() {
-      spyOn($q, 'all').andReturn({
+      spyOn($q, 'all').and.returnValue({
         then: function(success) {
           var result = success([
             settings,
@@ -111,7 +111,7 @@ describe('Model: ProfileSettings', function() {
         }
       });
 
-      spyOn(user, 'getSecurityQuestions').andReturn({
+      spyOn(user, 'getSecurityQuestions').and.returnValue({
         then: angular.noop
       });
       httpBackend.expectGET('/userAccount/v1_1/settings').respond(success);

@@ -7,8 +7,11 @@ angular.module('nextgearWebApp')
     SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
 
     //Login Events
-    CLICK_LOGIN_USERNAME_RECOVERY_SUBMIT_BUTTON: 'Click Login UN Recovery Submit Button',//x
-    CLICK_LOGIN_PASSWORD_RECOVERY_SUBMIT_BUTTON: 'Click Login PW Recovery Submit Button',//x
+    ATTEMPT_PASSWORD_RECOVERY: 'Attempt to Recover Password',//x
+    ATTEMPT_PASSWORD_RECOVERY_QUESTIONS: 'Attempt to Answer Password Recovery Questions',
+    ATTEMPT_USERNAME_RECOVERY: 'Attempt to Recover Username',//x
+    PASSWORD_RECOVERY_SUCCESS: 'Submitted Password Recovery Successfully',
+    USERNAME_RECOVERY_SUCCESS: 'Submitted Username Recovery Successfully',
 
     // Flooring car
     DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
@@ -17,7 +20,7 @@ angular.module('nextgearWebApp')
     CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
 
     //Checkout Events
-    CLICK_CHECKOUT_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Click Checkout Export Payments Summary Button',//x
+    DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Dealer Reports - Export Payment Summary',//x
 
     //View a Report Events
     DEALER_REPORTS_VEHICLE_HISTORY_DETAIL:'Dealer Reports - Vehicle History Detail',
@@ -33,6 +36,30 @@ angular.module('nextgearWebApp')
 
     //Resources Events
     VIEW_RESOURCES_PAGE: 'View Resources Page',//x
+    DEALER_RESOURCES_RATES_AND_FEES_PAGE: 'Dealer Resources - Rates and Fees',//x
+    DEALER_RESOURCES_WELCOME_PACKET_PAGE: 'Dealer Resources - Welcome Packet',//x
+    DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE: 'Dealer Resources - Dealer Funding Checklist',//x
+    DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE: 'Dealer Resources - Instructions For Buyers',//x
+    DEALER_RESOURCES_WELCOME_LETTER_PAGE: 'Dealer Resources - Welcome Letter',//x
+    DEALER_RESOURCES_GUIDELINES_PAGE: 'Dealer Resources - Guidelines',//X
+    DEALER_RESOURCES_INFORMATION_SHEET_PAGE: 'Dealer Resources - Information Sheet',//X
+    DEALER_RESOURCES_CLAIM_FORM_PAGE: 'Dealer Resources - Claim Form',//X
+    VIEW_REQUEST_CREDIT_INCREASE_PAGE: 'View Request Credit Increase',//x
+    DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
+    DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
+
+    //Resources Events for  - Auction
+    VIEW_AUCTION_REPORTS_PAGE: 'View Auction Reports',
+    AUCTION_RESOURCES_WELCOME_PACKET_PAGE: 'Auction Resources - Welcome Packet',//X
+    AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE: 'Auction Resources - Instructions for Sellers',//X
+    AUCTION_REPORTS_CREDIT_AVAILABILITY_QUERY_HISTORY_PAGE: 'Auction Reports - Credit Availability Query History',//X
+    AUCTION_REPORTS_DISBURSEMENT_DETAIL_PAGE: 'Auction Reports - Disbursement Detail',//X
+    MANUFACTURER_REPORTS_AGING_REPORT_PAGE: 'Manufacturer Reports - Aging Report',
+
+    AUCTION_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED_PAGE: 'Auction - Successful Flooring Request Submitted',//X
+    AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE: 'Auction - Individual Dealer LOC Query',//X
+
+
 
     //Value Lookup Events
     CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN With Zip Lookup Button',

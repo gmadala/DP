@@ -14,7 +14,7 @@ describe('Service: dealerCustomerSupportPhone', function () {
   }));
 
   it('should return the correct csc information based on the API value.', function () {
-    spyOn(user, 'getInfo').andReturn($q.when({
+    spyOn(user, 'getInfo').and.returnValue($q.when({
       CSCPhoneNumber: '1234567890'
     }));
 
@@ -37,7 +37,7 @@ describe('Directive: nxgDealerCustomerSupportPhone', function () {
 
     scope = $rootScope;
 
-    spyOn(User, 'getInfo').andReturn($q.when({
+    spyOn(User, 'getInfo').and.returnValue($q.when({
       CSCPhoneNumber: '1234567890'
     }));
 

@@ -1,37 +1,64 @@
 <div ng-if="displayed">
-  <div class="well-item bordered">
-    <div class="row">
-      <div class="col-xs-2 text-left text-vertical-center">
-        <ul class="small-padding no-bottom-margin">
-          <li ng-show="defaultForBilling" translate>Withdraw From</li>
-          <li ng-show="defaultForDisbursement" translate>Deposit To</li>
-        </ul>
+  <div class="well-item bordered financial-account">
+    <div class="row" ng-show="isEditable()">
+      <div class="col-xs-1 text-center text-vertical-center">
+          <div class="glyphicon glyphicon-ok" ng-show="defaultForDisbursement"></div>
       </div>
-      <div class="col-xs-4 text-left text-vertical-center paired">
-        <ul class="small-padding no-bottom-margin">
-          <li class="heavy" translate>Bank Name</li>
-          <li>{{ account.AchBankName }}</li>
-        </ul>
+      <div class="col-xs-15 text-center text-vertical-center">
+          <div class="glyphicon glyphicon-ok" ng-show="defaultForBilling"></div>
       </div>
-      <div class="col-xs-2 text-left text-vertical-center">
-        <ul class="small-padding no-bottom-margin">
-          <li class="heavy" translate>Account Number</li>
-          <li>******{{account.AchAccountNumberLast4}}</li>
-        </ul>
+      <div class="col-xs-2 text-left no-left-padding text-vertical-center"
+        style="padding-left: 15px">
+          <div >{{ account.AchBankName }}</div>
       </div>
-      <div class="col-xs-2 text-left text-vertical-center">
-        <ul class="small-padding no-bottom-margin">
-          <li class="heavy">{{routingNumberLabel}}</li>
-          <li>{{routingNumberDisplay}}</li>
-        </ul>
+      <div class="col-xs-1" ng-show="!isEditable()"></div>
+      <div class="col-xs-2 text-center text-vertical-center">
+          <div>******{{account.AchAccountNumberLast4}}</div>
       </div>
-      <div class="col-xs-1 text-left text-vertical-center">
-        <ul class="small-padding no-bottom-margin">
-          <li class="heavy" translate>Status</li>
-          <li>{{ status | translate }}</li>
-        </ul>
+      <div class="col-xs-15 text-center text-vertical-center">
+          <div>{{routingNumberDisplay}}</div>
       </div>
-      <div class="col-xs-1 pull-right icon-vertical-center icon-padding-right" ng-show="isEditable()">
+      <div class="col-xs-2 text-center text-vertical-center" ng-show="isEditable()">
+        <div class="recent-transaction">
+          {{account.RecentTransaction}}
+          <span class="glyphicon glyphicon-file"></span>
+        </div>
+      </div>
+      <div class="col-xs-1" ng-show="!isEditable()"></div>
+      <div class="col-xs-1 text-center text-vertical-center">
+          <div class="glyphicon glyphicon-ok" ng-show="status"></div>
+      </div>
+      <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
+        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+      </div>
+    </div>
+
+    <!--The following allows for the re-spacing when recent transactions is hidden.
+    This can be removed as soon as recent transactions goes live-->
+    <div class="row" ng-show="!isEditable()">
+      <div class="col-xs-1 text-center text-vertical-center">
+        <div class="glyphicon glyphicon-ok" ng-show="defaultForDisbursement"></div>
+      </div>
+      <div class="col-xs-15 text-center text-vertical-center">
+        <div class="glyphicon glyphicon-ok" ng-show="defaultForBilling"></div>
+      </div>
+      <div class="col-xs-3 text-left no-left-padding text-vertical-center"
+           style="padding-left: 15px">
+        <div >{{ account.AchBankName }}</div>
+      </div>
+
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div>******{{account.AchAccountNumberLast4}}</div>
+      </div>
+      <div class="col-xs-15 text-center text-vertical-center">
+        <div>{{routingNumberDisplay}}</div>
+      </div>
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div class="glyphicon glyphicon-ok" ng-show="status"></div>
+      </div>
+      <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
         <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
           <span class="glyphicon glyphicon-edit"></span>
         </button>

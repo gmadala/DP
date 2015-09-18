@@ -152,7 +152,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
     it('should call methods with the correct params', function() {
       ProfileSettingsMock.toSucceed = true; // tell the ProfileSettingsMock to succeed at submitting the form
-      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').andCallThrough();
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').and.callThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();
@@ -167,7 +167,7 @@ describe('Controllers: LoginUpdateSecurityCtrl', function() {
 
     it('should call methods and fail', function() {
       ProfileSettingsMock.toSucceed = false; // tell the ProfileSettingsMock to fail at submitting the form
-      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').andCallThrough();
+      spyOn(ProfileSettingsMock, 'saveSecurityAnswers').and.callThrough();
       spyOn(UserMock, 'clearUserInitRequired');
       scope.submitForm();
       scope.$apply();

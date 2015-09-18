@@ -25,7 +25,7 @@ describe('Controller: BusinessSearchCtrl', function () {
     };
 
     model = BusinessSearch;
-    spyOn(model, 'search').andReturn($q.when(searchResult.data));
+    spyOn(model, 'search').and.returnValue($q.when(searchResult.data));
 
     dialog = {
       close: angular.noop
@@ -79,11 +79,11 @@ describe('Controller: BusinessSearchCtrl', function () {
     it('should call for data with no paginator to start at beginning, if query is present', function () {
       scope.search();
       expect(model.search).toHaveBeenCalled();
-      expect(model.search.mostRecentCall.args[4]).toBe(null);
+      expect(model.search.calls.mostRecent().args[4]).toBe(null);
     });
 
     it('should not call for data if no query is present', function () {
-      model.search.reset();
+      model.search.calls.reset();
       scope.data.proposedQuery = '';
       scope.search();
       expect(model.search).not.toHaveBeenCalled();
@@ -100,7 +100,7 @@ describe('Controller: BusinessSearchCtrl', function () {
     });
 
     it('should not run search if input is not valid, and should clear previous results', function() {
-      model.search.reset(); // clears previous spyOn calls since one is done on controller initialization
+      model.search.calls.reset(); // clears previous spyOn calls since one is done on controller initialization
       spyOn(scope, 'fetch');
       scope.searchControls = {
         $invalid: true
@@ -182,7 +182,7 @@ describe('Controller: BusinessSearchCtrl', function () {
       scope.fetchNextResults();
       scope.$apply();
       scope.fetchNextResults();
-      expect(model.search.mostRecentCall.args[4]).toBe(p);
+      expect(model.search.calls.mostRecent().args[4]).toBe(p);
     });
 
     it('should append new results to the results array', function () {

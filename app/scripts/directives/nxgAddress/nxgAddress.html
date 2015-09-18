@@ -41,8 +41,8 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
 <!-- END LINE2 -->
 
 <!-- CITY AND STATE -->
-<div class="row" ng-if="city || state">
-  <div class="col-xs-6 text-vertical-center" ng-if="city">
+<div ng-if="city || state" class="row ng-scope">
+  <div class="col-xs-6 custom text-vertical-center" ng-if="city">
     <label for="addressCity" translate>City</label>
     <input class="input-full"
            id="addressCity"
@@ -63,7 +63,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     </label>
 
   </div>
-  <div class="col-xs-6 text-vertical-center" ng-if="state">
+  <div class="col-xs-6 custom text-vertical-center" ng-if="state">
     <label for="addressState" translate>State</label>
     <div class="style-select" ng-class="{ 'nxg-invalid' : validity.addressState.$error.required }">
       <select id="addressState"

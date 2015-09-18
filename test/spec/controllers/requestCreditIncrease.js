@@ -14,13 +14,16 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     rootScope,
     q,
     successCallback,
-    failureCallback;
+    failureCallback,
+    mockKissMetricInfo,
+    httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q) {
+  beforeEach(inject(function ($controller, $rootScope, $q, $httpBackend) {
     scope = $rootScope.$new();
     rootScope = $rootScope;
     q = $q;
+    httpBackend = $httpBackend;
     linesOfCredit = [{
       id: 'id',
       type: 'retail',
@@ -53,13 +56,28 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       messageBox: function(){
         return {open: angular.noop};
       }
-    }
+    };
+
+    mockKissMetricInfo = {
+      getKissMetricInfo: function(){
+        return $q.when({
+          height: 1080,
+          isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
+      }
+    };
+
+    httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
 
     RequestCreditIncreaseCtrl = $controller('RequestCreditIncreaseCtrl', {
       $scope: scope,
       dialog: dialogMock,
       $dialog: $dialogMock,
-      CreditIncrease: creditIncreaseMock
+      CreditIncrease: creditIncreaseMock,
+      kissMetricInfo: mockKissMetricInfo
     });
   }));
 
@@ -72,6 +90,8 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     rootScope.$digest();
     expect(scope.selector.selectedLineOfCredit).toEqual(linesOfCredit[0]);
   });
+
+
 
   describe('multiple lines of credit scenario', function() {
     var scope,
@@ -133,7 +153,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn(creditIncreaseMock, 'requestCreditIncrease').andReturn(q.when(q.when(true)));
+    spyOn(creditIncreaseMock, 'requestCreditIncrease').and.returnValue(q.when(q.when(true)));
     scope.confirmRequest();
     scope.$digest();
     expect(creditIncreaseMock.requestCreditIncrease).toHaveBeenCalled();
@@ -186,9 +206,25 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn($dialogMock, 'messageBox').andCallThrough();
+    spyOn($dialogMock, 'messageBox').and.callThrough();
     scope.confirmRequest();
     successCallback();
     expect($dialogMock.messageBox).toHaveBeenCalled();
+  });
+
+  it('should return true when user clicks on Request Credit Increase -Temp/Permanent. ', function(){
+    scope.requestCreditIncreaseForm = {
+      $invalid: false,
+      $valid: true
+    };
+    scope.selector.selectedLineOfCredit = linesOfCredit[0];
+    spyOn(creditIncreaseMock, 'requestCreditIncrease').and.returnValue(q.when(q.when(true)));
+    scope.confirmRequest();
+    scope.$apply();
+    expect(scope.kissMetricData.isBusinessHours).toBe(true);
+    expect(scope.kissMetricData.height).toBe(1080);
+    expect(scope.kissMetricData.vendor).toBe('Google Inc.');
+    expect(scope.kissMetricData.version).toBe('Chrome 44');
+    expect(scope.kissMetricData.width).toBe(1920);
   });
 });

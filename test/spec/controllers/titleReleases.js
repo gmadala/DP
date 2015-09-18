@@ -108,7 +108,7 @@ describe('Controller: TitleReleasesCtrl', function () {
     });
 
     it('should call for data with no paginator to start at beginning', function () {
-      spyOn(titleReleasesMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').and.callThrough();
       scope.search();
       expect(titleReleasesMock.search).toHaveBeenCalledWith(scope.searchCriteria, null);
     });
@@ -180,7 +180,7 @@ describe('Controller: TitleReleasesCtrl', function () {
   describe('fetchNextResults function', function () {
 
     it('should not call for data if the paginator indicates it is already at the end', function () {
-      spyOn(titleReleasesMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').and.callThrough();
 
       scope.data.paginator = {
         hasMore: function () {
@@ -215,7 +215,7 @@ describe('Controller: TitleReleasesCtrl', function () {
     }));
 
     it('should pass back the paginator from previous calls on subsequent ones', function () {
-      spyOn(titleReleasesMock, 'search').andCallThrough();
+      spyOn(titleReleasesMock, 'search').and.callThrough();
       var p = {
         hasMore: function () {
           return true;
@@ -230,7 +230,7 @@ describe('Controller: TitleReleasesCtrl', function () {
       scope.fetchNextResults();
       scope.$apply();
       scope.fetchNextResults();
-      expect(titleReleasesMock.search.mostRecentCall.args[1]).toBe(p);
+      expect(titleReleasesMock.search.calls.mostRecent().args[1]).toBe(p);
     });
 
     it('should append new results to the results array', function () {
@@ -251,12 +251,12 @@ describe('Controller: TitleReleasesCtrl', function () {
     scope.eligibility = {
       ReleaseBalanceAvailable: 200
     };
-    spyOn(titleReleasesMock, 'isFloorplanOnQueue').andCallFake(function(){
+    spyOn(titleReleasesMock, 'isFloorplanOnQueue').and.callFake(function(){
       return inQueue;
     });
 
 
-    spyOn(titleReleasesMock, 'getQueueFinanced').andReturn(0);
+    spyOn(titleReleasesMock, 'getQueueFinanced').and.returnValue(0);
 
     spyOn(titleReleasesMock, 'addToQueue');
     spyOn(titleReleasesMock, 'removeFromQueue');
@@ -278,10 +278,10 @@ describe('Controller: TitleReleasesCtrl', function () {
     scope.eligibility = {
       ReleaseBalanceAvailable: 200
     };
-    spyOn(titleReleasesMock, 'getQueueFinanced').andReturn(110);
+    spyOn(titleReleasesMock, 'getQueueFinanced').and.returnValue(110);
 
     spyOn(scope, 'titleReleaseLimitReached');
-    spyOn(titleReleasesMock, 'isFloorplanOnQueue').andReturn(inQueue);
+    spyOn(titleReleasesMock, 'isFloorplanOnQueue').and.returnValue(inQueue);
     spyOn(titleReleasesMock, 'addToQueue');
     spyOn(titleReleasesMock, 'removeFromQueue');
 
@@ -308,14 +308,14 @@ describe('Controller: TitleReleasesCtrl', function () {
   });
 
   it('should display message box when release is unavailable', function() {
-    spyOn(dialogMock, 'messageBox').andCallThrough();
+    spyOn(dialogMock, 'messageBox').and.callThrough();
     scope.titleReleaseUnavailable().then(function () {
       expect(dialogMock.messageBox).toHaveBeenCalled();
     });
   });
 
   it('should display message box when release limit method is called', function() {
-    spyOn(dialogMock, 'messageBox').andCallThrough();
+    spyOn(dialogMock, 'messageBox').and.callThrough();
     scope.titleReleaseLimitReached();
     expect(dialogMock.messageBox).toHaveBeenCalled();
   });

@@ -149,7 +149,7 @@ describe('Directive: nxgDateField', function () {
 
     it('should cause the before-show-day function to be called with date(s) being rendered', function () {
       expect(scope.onDayRender).toHaveBeenCalled();
-      expect(angular.isDate(scope.onDayRender.mostRecentCall.args[0])).toBe(true);
+      expect(angular.isDate(scope.onDayRender.calls.mostRecent().args[0])).toBe(true);
     });
 
   });
@@ -174,14 +174,14 @@ describe('Directive: nxgDateField', function () {
       });
 
       it('with past value', function(){
-        spyOn(scope, 'notFutureDates').andReturn(true); //have the date be a past value
+        spyOn(scope, 'notFutureDates').and.returnValue(true); //have the date be a past value
         scope.bar = new Date();
         scope.$digest();
         expect(scope.form.dateInput.$error.past).toBeFalsy();
       });
 
       it('with future value', function(){
-        spyOn(scope, 'notFutureDates').andReturn(false); //have the date be a future value
+        spyOn(scope, 'notFutureDates').and.returnValue(false); //have the date be a future value
         scope.bar = new Date();
         scope.$digest();
         expect(scope.form.dateInput.$error.past).toBeTruthy();
@@ -194,14 +194,14 @@ describe('Directive: nxgDateField', function () {
       });
 
       it('with past value', function(){
-        spyOn(scope, 'notPastDates').andReturn(true); //have the date be a past value
+        spyOn(scope, 'notPastDates').and.returnValue(true); //have the date be a past value
         scope.bar = new Date();
         scope.$digest();
         expect(scope.form.dateInput.$error.future).toBeFalsy();
       });
 
       it('with future value', function(){
-        spyOn(scope, 'notPastDates').andReturn(false); //have the date be a future value
+        spyOn(scope, 'notPastDates').and.returnValue(false); //have the date be a future value
         scope.bar = new Date();
         scope.$digest();
         expect(scope.form.dateInput.$error.future).toBeTruthy();

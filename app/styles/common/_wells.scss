@@ -34,6 +34,25 @@
     }
   }
 
+  .well-column-header {
+    background: $white;
+    border-bottom: 1px solid $wellBorder;
+    &.col-xs-12{
+      padding: 0;
+    }
+    h6{
+      padding: 10px 0px;
+      text-align: center;
+      margin: 0;
+      &.left-align{
+        text-align: left;
+      }
+      &.left-padding{
+        padding-left: 15px;
+      }
+    }
+  }
+
   // For additional text in the title bar at the top
   .well-title-secondary {
     @extend .well-title;
@@ -130,6 +149,11 @@
 
   &.inset {
     padding: 10px 20px;
+  }
+
+  &.financial-account{
+    padding: 0 15px;
+    line-height: 3;
   }
 }
   .well-light {

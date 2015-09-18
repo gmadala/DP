@@ -1,0 +1,19 @@
+.tooltip-image {
+  background: url(../img/img-checknumbers.png);
+  background-repeat: no-repeat;
+  background-size: 303px 164px;
+  background-position: 0px 0;
+  height: 164px;
+  position: relative;
+  z-index: 5;
+}
+
+.image-tooltip {
+  .tooltip-inner {
+    max-width: 303px;
+    width: 303px;
+    font-weight: normal;
+  }
+  padding-top: 36px;
+  padding-bottom: 12px;
+}
