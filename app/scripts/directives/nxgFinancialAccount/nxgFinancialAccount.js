@@ -43,11 +43,11 @@
 
       /**
        * Provides the correct string in the user's language to the account status
-       * field.
-       * @return {String} Translated string value for account status field.
+       * field. Default if the field is not available will return false.
+       * @return {Boolean} Translated string value for account status field.
        */
       function getStatus() {
-        return scope.account.IsActive ? gettext('Active') : gettext('Inactive');
+        return scope.account.IsActive || false;
       }
 
       function isDisplayed() {

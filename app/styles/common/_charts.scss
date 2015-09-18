@@ -91,4 +91,7 @@
 
 .chart-label-primary {
   font-weight: bold;
+  &.negative {
+    font-size: 18px;
+  }
 }

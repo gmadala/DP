@@ -167,7 +167,7 @@ msgstr ""
 msgid "ADDITIONAL PRINCIPAL"
 msgstr "CAPITAL SUPPLÉMENTAIRE"
 
-#: app/views/account_management.html:308
+#: app/views/account_management.html:330
 msgid "Access your GO Financial account directly from here."
 msgstr "Accédez directement à votre compte GO Financial à partir d'ici."
 
@@ -190,7 +190,7 @@ msgstr "Gestion de Compte"
 msgid "Account Name"
 msgstr "Intitulé de compte"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:18
+#: app/views/account_management.html:13 app/views/account_management.html:24
 #: app/views/modals/financialAccount.html:41
 #: app/views/modals/financialAccount.html:62
 msgid "Account Number"
@@ -208,8 +208,7 @@ msgstr "Confirmer l'échec de recherche de NIV"
 msgid "Actions"
 msgstr "Actions"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js:131
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js:49
+#: app/views/account_management.html:16 app/views/account_management.html:26
 #: app/views/modals/financialAccount.html:14
 msgid "Active"
 msgstr "Actif"
@@ -241,15 +240,15 @@ msgstr "Ajoutez du capital supplémentaire?"
 msgid "Add Receipt"
 msgstr "Ajouter un reçu"
 
-#: app/scripts/controllers/accountManagement.js:11
+#: app/scripts/controllers/accountManagement.js:12
 msgid "Add account"
 msgstr "Ajouter un compte"
 
-#: app/scripts/controllers/accountManagement.js:10
+#: app/scripts/controllers/accountManagement.js:11
 msgid "Add payment account"
 msgstr "Ajouter un compte de paiement"
 
-#: app/views/account_management.html:214 app/views/auction.settings.html:260
+#: app/views/account_management.html:234 app/views/auction.settings.html:260
 msgid "Additional Addresses"
 msgstr "Adresses supplémentaires"
 
@@ -280,6 +279,10 @@ msgstr "Adresse 1"
 #: app/scripts/directives/nxgAddress/nxgAddress.html:33
 msgid "Address 2"
 msgstr "Adresse 2"
+
+#: app/views/account_management.html:172
+msgid "Address Settings"
+msgstr "Paramètres de l'adresse"
 
 #: app/scripts/controllers/reports.js:17 app/scripts/controllers/reports.js:19
 msgid "All"
@@ -337,7 +340,7 @@ msgstr "Un courriel contenant un numéro de suivi vous sera envoyé sous peu."
 msgid "Analytics"
 msgstr "Analyses"
 
-#: app/views/account_management.html:221 app/views/auction.settings.html:266
+#: app/views/account_management.html:241 app/views/auction.settings.html:266
 msgid "And {{ title.data.extraAddresses }} additional addresses..."
 msgstr "Et {{ title.data.extraAddresses }} adresses additionnelles..."
 
@@ -390,16 +393,11 @@ msgstr "Numéro(s) d'accès à l'encan"
 msgid "Authorization and Request to Unenroll"
 msgstr "Autorisation et demande de désinscription"
 
-#: app/views/account_management.html:279
-msgid "Auto-Disburse Unapplied Funds"
-msgstr "Décaissement automatique des fonds non alloués"
-
 #: app/views/dashboard.html:267
 msgid "Available"
 msgstr "Disponible"
 
-#: app/views/account_management.html:243 app/views/analytics.html:82
-#: app/views/modals/creditQuery.html:37
+#: app/views/analytics.html:82 app/views/modals/creditQuery.html:37
 msgid "Available Credit"
 msgstr "Crédit disponible"
 
@@ -464,7 +462,7 @@ msgstr "Compte bancaire pour le dépôt (le cas échéant)"
 msgid "Bank Account for Payout"
 msgstr "Compte bancaire pour décaissement"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:12
+#: app/views/account_management.html:12 app/views/account_management.html:23
 #: app/views/modals/financialAccount.html:20
 msgid "Bank Name"
 msgstr "Nom de la banque"
@@ -477,11 +475,12 @@ msgstr "Meilleurs taux de roulement"
 msgid "Best and Worst Movers by Zipcode"
 msgstr "Meilleurs et pires taux de roulement par code postal"
 
-#: app/views/account_management.html:36 app/views/auction.settings.html:140
+#: app/views/auction.settings.html:140
 msgid "Business Email"
 msgstr "Courriel de l'entreprise"
 
-#: app/views/modals/businessSearch.html:43 app/views/modals/creditQuery.html:18
+#: app/views/modals/businessSearch.html:43
+#: app/views/modals/creditQuery.html:18
 #: app/views/modals/dealerNameSearch.html:57
 #: app/views/modals/dealerNameSearch.html:8
 #: app/views/modals/floorCarConfirm.html:26
@@ -507,7 +506,7 @@ msgstr "Numéro d'entreprise"
 msgid "Business Search"
 msgstr "Recherche d'entreprise"
 
-#: app/views/account_management.html:25 app/views/auction.settings.html:129
+#: app/views/account_management.html:44 app/views/auction.settings.html:129
 msgid "Business Settings"
 msgstr "Paramètres de l'entreprise"
 
@@ -524,7 +523,8 @@ msgstr "Acheteur"
 msgid "Buyer Business Line of Credit Query"
 msgstr "Consulter la marge de crédit commerciale de l'acheteur"
 
-#: app/views/modals/creditQuery.html:6 app/views/modals/floorCarConfirm.html:13
+#: app/views/modals/creditQuery.html:6
+#: app/views/modals/floorCarConfirm.html:13
 msgid "Buyer Information"
 msgstr "Informations sur l'acheteur"
 
@@ -551,7 +551,8 @@ msgstr "PPC"
 
 #: app/scripts/controllers/floorCar.js:178
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html:53
-#: app/views/account_management.html:156 app/views/account_management.html:29
+#: app/views/account_management.html:176 app/views/account_management.html:264
+#: app/views/account_management.html:48
 #: app/views/auction.bulkflooring.html:171 app/views/auction.settings.html:133
 #: app/views/auction.settings.html:204 app/views/auction.settings.html:283
 #: app/views/auction.settings.html:9 app/views/floorcar.html:192
@@ -560,12 +561,13 @@ msgstr "PPC"
 #: app/views/modals/confirmDisableAutoPay.html:10
 #: app/views/modals/confirmEnableAutoPay.html:114
 #: app/views/modals/creditQuery.html:49
-#: app/views/modals/scheduleCheckout.html:69 app/views/profileSettings.html:131
-#: app/views/profileSettings.html:9 app/views/vehicledetails.html:108
+#: app/views/modals/scheduleCheckout.html:69
+#: app/views/profileSettings.html:131 app/views/profileSettings.html:9
+#: app/views/vehicledetails.html:108
 msgid "Cancel"
 msgstr "Annuler"
 
-#: app/views/modals/financialAccount.html:149
+#: app/views/modals/financialAccount.html:160
 #: app/views/modals/paymentOptionsBreakdown.html:106
 msgid "Cancel Changes"
 msgstr "Annuler les modifications"
@@ -744,7 +746,7 @@ msgstr "Continuer"
 msgid "Create a New Password"
 msgstr "Créer un nouveau mot de passe"
 
-#: app/views/account_management.html:84 app/views/auction.settings.html:171
+#: app/views/account_management.html:131 app/views/auction.settings.html:171
 msgid "Create your Enhanced Registration four digit PIN."
 msgstr "Créer votre NIP d'inscription améliorée à quatre chiffres "
 
@@ -807,7 +809,7 @@ msgid "Date Submitted"
 msgstr "Date de soumission"
 
 #. the date when the account was added
-#: app/scripts/controllers/accountManagement.js:15
+#: app/scripts/controllers/accountManagement.js:16
 msgid "Date added"
 msgstr "Date d'ajout"
 
@@ -851,15 +853,15 @@ msgstr "Recherche de concessionnaire"
 msgid "Dealer Statement"
 msgstr "Relevé du concessionnaire"
 
-#: app/views/account_management.html:163 app/views/auction.settings.html:211
+#: app/views/account_management.html:183 app/views/auction.settings.html:211
 msgid "Default Address"
 msgstr "Adresse par défaut"
 
-#: app/views/modals/financialAccount.html:117
+#: app/views/modals/financialAccount.html:128
 msgid "Default for deposits"
 msgstr "Dépôts par défaut"
 
-#: app/views/modals/financialAccount.html:125
+#: app/views/modals/financialAccount.html:136
 msgid "Default for withdrawals"
 msgstr "Prélèvements par défaut"
 
@@ -876,7 +878,7 @@ msgstr "Refusé"
 msgid "Denied/Not Paid"
 msgstr "Refusé/Impayé"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:7
+#: app/views/account_management.html:10 app/views/account_management.html:21
 msgid "Deposit To"
 msgstr "Dépôt à"
 
@@ -892,13 +894,9 @@ msgstr "Dépôt à"
 msgid "Description"
 msgstr "Description"
 
-#: app/scripts/controllers/accountManagement.js:19
+#: app/scripts/controllers/accountManagement.js:20
 msgid "Disable"
 msgstr "Désactiver"
-
-#: app/views/account_management.html:283
-msgid "Disabled"
-msgstr "Désactivé"
 
 #: app/views/modals/confirmDisableEnhanced.html:3
 msgid ""
@@ -963,7 +961,7 @@ msgid_plural "Due Today"
 msgstr[0] "À Échéance Aujourd'hui"
 msgstr[1] "À Échéance Aujourd'hui"
 
-#: app/scripts/controllers/accountManagement.js:18
+#: app/scripts/controllers/accountManagement.js:19
 msgid "Edit"
 msgstr "Modifier"
 
@@ -971,10 +969,11 @@ msgstr "Modifier"
 msgid "Edit Additional Principal"
 msgstr "Modifier le capital supplémentaire"
 
-#: app/views/account_management.html:154 app/views/account_management.html:27
-#: app/views/auction.settings.html:131 app/views/auction.settings.html:202
-#: app/views/auction.settings.html:281 app/views/auction.settings.html:7
-#: app/views/profileSettings.html:129 app/views/profileSettings.html:7
+#: app/views/account_management.html:174 app/views/account_management.html:262
+#: app/views/account_management.html:46 app/views/auction.settings.html:131
+#: app/views/auction.settings.html:202 app/views/auction.settings.html:281
+#: app/views/auction.settings.html:7 app/views/profileSettings.html:129
+#: app/views/profileSettings.html:7
 msgid "Edit Settings"
 msgstr "Modifier les paramètres"
 
@@ -990,7 +989,8 @@ msgstr "Admissible"
 msgid "Eligible for Title Release"
 msgstr " Admissible à l'émission de l'immatriculation"
 
-#: app/views/auction.settings.html:99 app/views/profileSettings.html:97
+#: app/views/account_management.html:80 app/views/auction.settings.html:99
+#: app/views/profileSettings.html:97
 msgid "Email"
 msgstr "Courriel"
 
@@ -998,16 +998,12 @@ msgstr "Courriel"
 msgid "Email Address"
 msgstr "Adresse de courriel"
 
-#: app/views/account_management.html:282
-msgid "Enabled"
-msgstr "Activé"
-
 #: app/scripts/directives/nxgSearch/nxgSearch.html:48
 #: app/views/reports.html:134 app/views/reports.html:68
 msgid "End Date"
 msgstr "Date d'expiration"
 
-#: app/views/account_management.html:48
+#: app/views/account_management.html:95
 msgid "Enhanced Registration Enabled"
 msgstr "Inscription optimisée activée"
 
@@ -1019,7 +1015,7 @@ msgstr "Inscription améliorée activée?"
 msgid "Enhanced Registration PIN"
 msgstr "NIP d'inscription améliorée"
 
-#: app/views/account_management.html:72
+#: app/views/account_management.html:119
 msgid ""
 "Enhanced Registration will result in all account access being restricted to "
 "users with a PIN."
@@ -1040,7 +1036,7 @@ msgstr ""
 msgid "Enroll in Automated Payments"
 msgstr "S'inscrire aux paiements automatiques"
 
-#: app/views/account_management.html:119
+#: app/views/account_management.html:276
 msgid "Enrolled in Automated Payments"
 msgstr "Inscrit aux paiements automatiques"
 
@@ -1103,6 +1099,10 @@ msgstr "Très Propre"
 #: app/views/vehicledetails.html:372
 msgid "Fair"
 msgstr "Adéquat"
+
+#: app/views/account_management.html:68
+msgid "Fax"
+msgstr "Télécopieur"
 
 #: app/views/modals/feeDetails.html:19
 msgid "Fee"
@@ -1352,16 +1352,11 @@ msgstr ""
 msgid "In the Amount of"
 msgstr "Au montant de"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js:131
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.js:49
-msgid "Inactive"
-msgstr "Inactif"
-
 #: app/scripts/controllers/documents.js:51
 msgid "Information Sheet"
 msgstr "Feuillet d'information"
 
-#: app/views/account_management.html:299
+#: app/views/account_management.html:321
 msgid ""
 "Initiate your request for a permanent or temporary increase to your current "
 "line of credit."
@@ -1434,22 +1429,21 @@ msgstr "Valeurs aux enchères de Kelley Blue Book<sup>®</sup>"
 msgid "Kelley Blue Book® Auction Values"
 msgstr "Valeurs aux enchères de Kelley Blue Book®"
 
-#: app/views/account_management.html:255 app/views/analytics.html:90
-#: app/views/floorplan.html:56
+#: app/views/analytics.html:90 app/views/floorplan.html:56
 msgid "Last Payment"
 msgstr "Dernier paiement"
 
-#: app/views/account_management.html:261 app/views/analytics.html:94
+#: app/views/analytics.html:94
 msgid "Last Payment Date"
 msgstr "Date du dernier paiement"
 
 #. the date when the account was last modified
-#: app/scripts/controllers/accountManagement.js:13
+#: app/scripts/controllers/accountManagement.js:14
 msgid "Last modified"
 msgstr "Dernière modification"
 
 #. the date when payment was last made using the account
-#: app/scripts/controllers/accountManagement.js:17
+#: app/scripts/controllers/accountManagement.js:18
 msgid "Last payment on"
 msgstr "Dernier paiement"
 
@@ -1467,7 +1461,7 @@ msgstr "Marge de crédit"
 msgid "Log In"
 msgstr "Ouverture de session"
 
-#: app/views/account_management.html:307
+#: app/views/account_management.html:329
 msgid "Login to GO Financial"
 msgstr "Ouverture de session GO Financial"
 
@@ -1479,7 +1473,14 @@ msgstr "Fermeture de session"
 msgid "Look Up Values"
 msgstr "Recherche de valeurs"
 
-#: app/views/modals/financialAccount.html:137
+#: app/views/account_management.html:299
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n"
+"                sed do eiusmod tempor incididunt ut labore et dolore magna\n"
+"                aliqua."
+msgstr ""
+
+#: app/views/modals/financialAccount.html:148
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur silt iverra of the\n"
 "            <a href=\"https://www.nextgearcapital.com\" target=\"_blank\" ng-"
@@ -1605,10 +1606,6 @@ msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 "Prochain paiement dû {{ financialSummary.NextPaymentDueDate | moment }}"
 
-#: app/views/account_management.html:238
-msgid "NextGear Account Information"
-msgstr "Information du compte NextGear"
-
 #: app/views/vehicledetails.html:335
 msgid "NextGear Book Values"
 msgstr "Valeur marchande pour NextGear"
@@ -1652,9 +1649,9 @@ msgstr ""
 "NextGear a été avisé de cette modification et procédera sous peu à l'envoi "
 "du financement."
 
-#: app/scripts/filters/yesno.js:6 app/views/account_management.html:125
-#: app/views/account_management.html:133 app/views/account_management.html:55
-#: app/views/account_management.html:60 app/views/auction.settings.html:155
+#: app/scripts/filters/yesno.js:6 app/views/account_management.html:102
+#: app/views/account_management.html:107 app/views/account_management.html:282
+#: app/views/account_management.html:290 app/views/auction.settings.html:155
 #: app/views/auction.settings.html:160 app/views/checkout.html:207
 #: app/views/floorcar.html:89 app/views/modals/cancelFee.html:26
 #: app/views/modals/cancelPayment.html:25
@@ -1694,7 +1691,7 @@ msgstr "Non."
 
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js:27
 #: app/scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.js:29
-#: app/views/account_management.html:225 app/views/auction.settings.html:268
+#: app/views/account_management.html:245 app/views/auction.settings.html:268
 msgid "None"
 msgstr "Aucun"
 
@@ -1721,7 +1718,7 @@ msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 
 #: app/scripts/controllers/loginRecover.js:124
 #: app/scripts/directives/nxgMessages/nxgMessagesModal.html:11
-#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:53
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:58
 #: app/views/modals/confirmCheckout.html:91
 msgid "OK"
 msgstr "OK"
@@ -1746,7 +1743,7 @@ msgid_plural "Overdue"
 msgstr[0] "En retard"
 msgstr[1] "En retard"
 
-#: app/views/account_management.html:90
+#: app/views/account_management.html:137
 msgid "PIN"
 msgstr "NIP"
 
@@ -1933,6 +1930,10 @@ msgstr "Financements en attente"
 #: app/scripts/controllers/floorplan.js:44
 msgid "Pending/Not Paid"
 msgstr "En attente/Impayé"
+
+#: app/views/account_management.html:56
+msgid "Phone"
+msgstr "Téléphone"
 
 #: app/views/modals/paymentExtension.html:36
 msgid ""
@@ -2169,17 +2170,22 @@ msgstr "Veuillez inscrire un numéro de fin de stock valide"
 msgid "Please enter a valid Start Stock Number"
 msgstr "Veuillez inscrire un numéro de stock de départ valide"
 
-#: app/views/account_management.html:41 app/views/auction.settings.html:102
+#: app/views/account_management.html:85 app/views/auction.settings.html:102
 #: app/views/auction.settings.html:143 app/views/profileSettings.html:100
 msgid "Please enter a valid email address."
 msgstr "Veuillez entrer une adresse de courriel valide."
+
+#: app/views/account_management.html:73
+msgid "Please enter a valid fax number."
+msgstr "Veuillez entrer un numéro de télécopieur valide."
 
 #: app/views/auction.settings.html:44 app/views/login.createPassword.html:32
 #: app/views/profileSettings.html:43
 msgid "Please enter a valid password."
 msgstr "Veuillez entrer un mot de passe valide."
 
-#: app/views/auction.settings.html:118 app/views/profileSettings.html:116
+#: app/views/account_management.html:61 app/views/auction.settings.html:118
+#: app/views/profileSettings.html:116
 msgid "Please enter a valid phone number."
 msgstr "Veuillez entrer un numéro de téléphone valide."
 
@@ -2537,6 +2543,10 @@ msgstr "Décaissements récents"
 msgid "Recent Receipts"
 msgstr "Reçus récents"
 
+#: app/views/account_management.html:15
+msgid "Recent Transaction"
+msgstr "Transaction récente"
+
 #: app/views/dashboard.html:368
 msgid "Recently Floored Vehicles"
 msgstr "Véhicules récemment financé"
@@ -2599,7 +2609,7 @@ msgid "Request Unapplied Funds Payout"
 msgstr "Demander un paiement de fonds non alloués"
 
 #: app/scripts/controllers/modals/requestCreditIncrease.js:60
-#: app/views/account_management.html:298
+#: app/views/account_management.html:320
 #: app/views/modals/requestCreditIncrease.html:1
 msgid "Request a Credit Increase"
 msgstr "Demander une augmentation de crédit"
@@ -2608,7 +2618,7 @@ msgstr "Demander une augmentation de crédit"
 msgid "Request an extension?"
 msgstr "Demander une prolongation?"
 
-#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:48
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:53
 msgid "Request submitted"
 msgstr "Demande soumise"
 
@@ -2625,7 +2635,7 @@ msgstr "Demander une<br>prolongation"
 msgid "Requests Summary"
 msgstr "Sommaire des demandes"
 
-#: app/views/account_management.html:249 app/views/analytics.html:86
+#: app/views/analytics.html:86
 msgid "Reserve Funds"
 msgstr "Fonds de réserve"
 
@@ -2683,14 +2693,16 @@ msgstr "Date de vente"
 msgid "Salvage"
 msgstr "VGA"
 
-#: app/views/modals/financialAccount.html:152 app/views/vehicledetails.html:109
+#: app/views/modals/financialAccount.html:163
+#: app/views/vehicledetails.html:109
 msgid "Save Changes"
 msgstr "Sauvegarder les modifications"
 
-#: app/views/account_management.html:155 app/views/account_management.html:28
-#: app/views/auction.settings.html:132 app/views/auction.settings.html:203
-#: app/views/auction.settings.html:282 app/views/auction.settings.html:8
-#: app/views/profileSettings.html:130 app/views/profileSettings.html:8
+#: app/views/account_management.html:175 app/views/account_management.html:263
+#: app/views/account_management.html:47 app/views/auction.settings.html:132
+#: app/views/auction.settings.html:203 app/views/auction.settings.html:282
+#: app/views/auction.settings.html:8 app/views/profileSettings.html:130
+#: app/views/profileSettings.html:8
 msgid "Save Settings"
 msgstr "Sauvegarder les paramètres"
 
@@ -2782,7 +2794,7 @@ msgstr ""
 "Sélectionnez les paiements que vous souhaitez effectuer ou programmer en les "
 "ajoutant à vos paiements en attente."
 
-#: app/views/account_management.html:292
+#: app/views/account_management.html:314
 msgid "Self-Service Links"
 msgstr "Liens libre-service"
 
@@ -2930,7 +2942,6 @@ msgstr "Recommencer"
 msgid "State"
 msgstr "Province"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:30
 #: app/views/auction.sellerfloorplan.html:36 app/views/dashboard.html:386
 #: app/views/floorplan.html:41 app/views/payments.html:126
 #: app/views/vehicledetails.html:26
@@ -3017,7 +3028,7 @@ msgstr "Soutien technique"
 msgid "Term Plan Name"
 msgstr "Nom du plan à terme"
 
-#: app/views/modals/financialAccount.html:139
+#: app/views/modals/financialAccount.html:150
 msgid "Terms and Conditions."
 msgstr "Modalités."
 
@@ -3211,7 +3222,8 @@ msgstr "Demandes d'émission de certificats d'immatriculation"
 msgid "Title Release Search"
 msgstr "Recherche de certificats d'immatriculation émis"
 
-#: app/scripts/controllers/titleReleases.js:148 app/views/titlereleases.html:88
+#: app/scripts/controllers/titleReleases.js:148
+#: app/views/titlereleases.html:88
 msgid "Title Release Unavailable"
 msgstr "Émission du certificat d'immatriculation non disponible"
 
@@ -3242,7 +3254,7 @@ msgid_plural "Titles Requested"
 msgstr[0] "Enregistrement demandé"
 msgstr[1] "Enregistrements demandés"
 
-#: app/views/account_management.html:152 app/views/auction.settings.html:200
+#: app/views/auction.settings.html:200
 msgid "Title Settings"
 msgstr "Paramètres du certificat d'immatriculation"
 
@@ -3293,7 +3305,7 @@ msgstr ""
 "Pour rechercher par nom de concessionnaire, veuillez inclure le nom et la "
 "ville ou province."
 
-#: app/views/account_management.html:182 app/views/account_management.html:199
+#: app/views/account_management.html:202 app/views/account_management.html:219
 #: app/views/auction.settings.html:229 app/views/auction.settings.html:247
 msgid ""
 "To update or add a Title Settings address, please contact NextGear Capital "
@@ -3323,7 +3335,6 @@ msgstr "Total"
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html:11
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html:10
-#: app/views/account_management.html:273
 msgid "Total Available"
 msgstr "Total disponible"
 
@@ -3385,7 +3396,6 @@ msgstr ""
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html:2
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html:6
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html:6
-#: app/views/account_management.html:267
 msgid "Unapplied Funds"
 msgstr "Fonds non alloués"
 
@@ -3683,7 +3693,7 @@ msgstr "Qu'aimeriez-vous faire?"
 msgid "Who has the Title?"
 msgstr "Qui possède le certificat d'immatriculation?"
 
-#: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:6
+#: app/views/account_management.html:11 app/views/account_management.html:22
 msgid "Withdraw From"
 msgstr "Prélèvement de"
 
@@ -3712,9 +3722,9 @@ msgstr "Voulez-vous désactiver l'inscription améliorée?"
 msgid "Year"
 msgstr "Année"
 
-#: app/scripts/filters/yesno.js:6 app/views/account_management.html:123
-#: app/views/account_management.html:137 app/views/account_management.html:53
-#: app/views/account_management.html:64 app/views/auction.settings.html:154
+#: app/scripts/filters/yesno.js:6 app/views/account_management.html:100
+#: app/views/account_management.html:111 app/views/account_management.html:280
+#: app/views/account_management.html:294 app/views/auction.settings.html:154
 #: app/views/auction.settings.html:163 app/views/checkout.html:201
 #: app/views/floorcar.html:85 app/views/modals/cancelFee.html:27
 #: app/views/modals/cancelPayment.html:26
@@ -3751,7 +3761,7 @@ msgstr ""
 "Vous pouvez combiner jusqu'à 20 reçus dans un seul PDF en sélectionnant "
 "chaque reçu et en cliquant ci-dessous sur « Exporter les reçus »."
 
-#: app/scripts/models/user.js:39
+#: app/scripts/models/user.js:48
 msgid ""
 "You do not appear to have any security questions configured. Please contact "
 "NextGear for assistance."
@@ -3793,7 +3803,7 @@ msgid "You may select an already approved address on file with NextGear."
 msgstr ""
 "Vous pouvez sélectionner une adresse au dossier déjà approuvée par NextGear."
 
-#: app/views/account_management.html:108 app/views/auction.settings.html:187
+#: app/views/account_management.html:155 app/views/auction.settings.html:187
 msgid ""
 "Your PIN must consist of four numbers, no letters or special characters."
 msgstr ""
@@ -3828,7 +3838,7 @@ msgstr ""
 msgid "Your flooring request has been submitted to NextGear Capital."
 msgstr "Votre demande de financement a été soumise à NextGear Capital."
 
-#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:49
+#: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.js:54
 msgid ""
 "Your request for a payout in the amount of {{ amount }} to your account "
 "\"{{ bankAccountName }}\" has been successfully submitted."
@@ -3885,6 +3895,10 @@ msgstr "Code Postal"
 #: app/scripts/directives/nxgAddress/nxgAddress.html:87
 msgid "Zip Code"
 msgstr "Code postal"
+
+#: app/views/account_management.html:260
+msgid "[New Label Here]"
+msgstr ""
 
 #: app/404.html:148
 msgid "a mistyped address"
@@ -4022,9 +4036,28 @@ msgstr ""
 msgid "{{account.AccountId ? 'Edit' : 'Add'}} Financial Account"
 msgstr "{{account.AccountId ? 'Modifier' : 'Ajouter'}} Compte de Financement"
 
+#: app/views/account_management.html:14 app/views/account_management.html:25
+msgid "{{financial.data.routingNumberLabel}}"
+msgstr ""
+
 #: app/scripts/controllers/valuelookup.js:8
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Par Kelley Blue Book Co., Inc."
+
+#~ msgid "Auto-Disburse Unapplied Funds"
+#~ msgstr "Décaissement automatique des fonds non alloués"
+
+#~ msgid "Disabled"
+#~ msgstr "Désactivé"
+
+#~ msgid "Enabled"
+#~ msgstr "Activé"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactif"
+
+#~ msgid "NextGear Account Information"
+#~ msgstr "Information du compte NextGear"
 
 #~ msgid ""
 #~ "By clicking on the button \"Unenroll Now\", you acknowledge and agree "
@@ -4210,9 +4243,6 @@ msgstr "© %YEAR% Par Kelley Blue Book Co., Inc."
 
 #~ msgid "I agree to the terms and conditions."
 #~ msgstr "J'accepte les modalités."
-
-#~ msgid "Phone"
-#~ msgstr "Téléphone"
 
 #~ msgid ""
 #~ "The following values are a regional average based on the Zip provided."
