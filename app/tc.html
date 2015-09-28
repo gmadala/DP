@@ -1,83 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>NextGear Capital</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=1020">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- build:css styles/libraries.css -->
+  <link rel="stylesheet" href="components/bootstrap-datepicker/css/datepicker.css">
+  <link rel="stylesheet" href="components/fullcalendar/fullcalendar.css">
+  <!-- endbuild -->
+
+  <!-- build:css styles/main1.css -->
+  <link rel="stylesheet" href="styles/main-blessed1.css">
+  <!-- endbuild-->
+
+  <!-- build:css styles/main2.css -->
   <link rel="stylesheet" href="styles/main.css">
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('.en').show();
-      $('.es').hide();
-      $('.fr').hide();
+  <!-- endbuild -->
 
-      $('.btn-en').click(function () {
-        $('.btn-slider').addClass('active-left');
-        $('.btn-slider').removeClass('active-center');
-        $('.btn-slider').removeClass('active-right');
-
-        $('.en').show();
-        $('.es').hide();
-        $('.fr').hide();
-      });
-
-      $('.btn-es').click(function () {
-        $('.btn-slider').removeClass('active-left');
-        $('.btn-slider').addClass('active-center');
-        $('.btn-slider').removeClass('active-right');
-
-        $('.en').hide();
-        $('.es').show();
-        $('.fr').hide();
-      });
-
-      $('.btn-fr').click(function () {
-        $('.btn-slider').removeClass('active-left');
-        $('.btn-slider').removeClass('active-center');
-        $('.btn-slider').addClass('active-right');
-
-        $('.en').hide();
-        $('.es').hide();
-        $('.fr').show();
-      });
-    });
-  </script>
-  <!--[if IE 8]>
-  <style type="text/css">
-    .ie-centered {
-      text-align: center;
-    }
-  </style>
-  <![endif]-->
 </head>
 <body>
-<svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     x="0px" y="0px" style="display:none;" width="0" height="0" viewBox="7.985 3.374 33.975 18.179"
-     enable-background="new 7.985 3.374 33.975 18.179" xml:space="preserve" preserveAspectRatio="xMidYMid meet">
-  <symbol id="icon-globe" viewBox="0 0 35 35">
-    <path fill="#3399CC" stroke="#3399CC" stroke-width="0.5" stroke-miterlimit="10" d="M17.742,4.016
-      C10.444,4.016,4.5,9.96,4.5,17.258c0,7.297,5.944,13.242,13.242,13.242s13.243-5.944,13.243-13.242
-      C30.984,9.96,25.039,4.016,17.742,4.016z M27.6,10.196h-3.854c-0.56-1.825-1.384-3.414-2.413-4.532
-      C23.862,6.458,26.069,8.077,27.6,10.196z M17.153,17.847v5.297h-4.885c-0.412-1.647-0.647-3.472-0.677-5.297H17.153z
-       M11.592,16.669c0.029-1.824,0.265-3.648,0.677-5.296h4.885v5.296H11.592z M18.331,17.847h5.267
-      c-0.029,1.884-0.265,3.708-0.677,5.297h-4.59V17.847z M18.331,16.669v-5.296h4.59c0.412,1.648,0.647,3.472,0.677,5.296H18.331z
-       M22.568,10.196h-4.238V5.223C20.272,5.546,21.686,7.518,22.568,10.196z M17.153,5.193v5.002h-4.532
-      C13.534,7.371,15.064,5.34,17.153,5.193z M13.77,5.812c-0.618,0.647-1.177,1.5-1.619,2.501c-0.265,0.588-0.5,1.207-0.706,1.883
-      H7.884C9.355,8.195,11.386,6.635,13.77,5.812z M7.148,11.373h4.002c-0.383,1.618-0.588,3.413-0.618,5.296H5.647
-      C5.736,14.757,6.266,12.962,7.148,11.373z M5.647,17.847h4.885c0.03,1.795,0.265,3.619,0.647,5.297H7.148
-      C6.266,21.555,5.736,19.76,5.647,17.847z M7.884,24.32h3.59c0.53,1.766,1.294,3.296,2.295,4.385
-      C11.415,27.881,9.355,26.352,7.884,24.32z M12.622,24.32h4.532v4.973C15.064,29.146,13.534,27.116,12.622,24.32z M18.331,29.264
-      V24.32h4.238c-0.147,0.5-0.354,0.941-0.53,1.383C21.361,27.204,20.066,28.94,18.331,29.264z M21.273,28.852
-      c1.059-1.088,1.883-2.707,2.472-4.531H27.6C26.04,26.469,23.833,28.058,21.273,28.852z M24.039,23.144
-      c0.412-1.678,0.618-3.502,0.677-5.297h5.091v-1.177h-5.091c-0.029-1.795-0.265-3.619-0.677-5.296h4.297
-      c0.971,1.736,1.529,3.737,1.529,5.885c0,2.148-0.559,4.149-1.529,5.885H24.039z"/>
-  </symbol>
-</svg>
+
 <div class="nxg-main-container">
   <div>
     <header class="app-header">
@@ -159,16 +106,12 @@
     <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
     <li>
       <a href="http://www.nextgearcapital.com/privacy-statement" target="_blank">
-        <span class="en" translate>Privacy Statement</span>
-        <span class="es">Declaración de privacidad</span>
-        <span class="fr">Déclaration de confidentialité</span>
+        <span>Privacy Statement</span>
       </a>
     </li>
     <li>
       <a href="http://www.nextgearcapital.com/contact-us" target="_blank">
-        <span class="en" translate>Contact Us</span>
-        <span class="es">Póngase en contacto con nosotros</span>
-        <span class="fr">Nous contacter</span>
+        <span>Contact Us</span>
       </a>
     </li>
   </ul>
