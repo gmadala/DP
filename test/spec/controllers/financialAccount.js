@@ -7,6 +7,8 @@ describe('Controller: FinancialAccountCtrl', function () {
     scope,
     dialog,
     segmentio,
+    mockKissMetricInfo,
+    httpBackend,
     $controller,
     $rootScope,
     $q,
@@ -19,9 +21,10 @@ describe('Controller: FinancialAccountCtrl', function () {
 
   beforeEach(module('nextgearWebApp'));
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _$q_) {
+  beforeEach(inject(function(_$controller_, _$rootScope_, _$q_, _metric_, _kissMetricInfo_, _$httpBackend_) {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
+    httpBackend = _$httpBackend_;
     $q = _$q_;
 
     dialog = {
@@ -58,12 +61,25 @@ describe('Controller: FinancialAccountCtrl', function () {
         }
       };
 
+      mockKissMetricInfo = {
+        getKissMetricInfo: function () {
+          return $q.when({
+            height: 1080,
+            isBusinessHours: true,
+            vendor: 'Google Inc.',
+            version: 'Chrome 44',
+            width: 1920
+          });
+        }
+      };
+      httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
+
       scope = $rootScope.$new();
       FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
         $scope: scope,
+        kissMetricInfo: mockKissMetricInfo,
         AccountManagement: AccountManagementMock,
         dialog: dialog,
-        segmentio: segmentio,
         options: {
           account: bankAccount,
           defaultForBilling: true,
@@ -115,7 +131,7 @@ describe('Controller: FinancialAccountCtrl', function () {
 
         spyOn(dialog, 'close').and.callThrough();
         spyOn(AccountManagementMock, 'updateBankAccount').and.callThrough();
-
+        spyOn(segmentio, 'track').and.callThrough();
         scope.confirmRequest();
         expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
         expect(dialog.close).not.toHaveBeenCalled();
@@ -159,8 +175,6 @@ describe('Controller: FinancialAccountCtrl', function () {
 
         scope.confirmRequest();
         scope.$apply();
-
-        expect(segmentio.track).toHaveBeenCalledWith(DEALER_EDIT_BANK_ACCOUNT);
       });
     });
   });
@@ -175,10 +189,22 @@ describe('Controller: FinancialAccountCtrl', function () {
           return $q.when(bankId);
         }
       };
-
+      mockKissMetricInfo = {
+        getKissMetricInfo: function () {
+          return $q.when({
+            height: 1080,
+            isBusinessHours: true,
+            vendor: 'Google Inc.',
+            version: 'Chrome 44',
+            width: 1920
+          });
+        }
+      };
+      httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
       scope = $rootScope.$new();
       FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
         $scope: scope,
+        kissMetricInfo: mockKissMetricInfo,
         AccountManagement: AccountManagementMock,
         dialog: dialog,
         segmentio: segmentio,
@@ -439,11 +465,8 @@ describe('Controller: FinancialAccountCtrl', function () {
 
       it('should fire a metric if add is successful', function() {
         spyOn(segmentio, 'track').and.callThrough();
-
         scope.confirmRequest();
         scope.$apply();
-
-        expect(segmentio.track).toHaveBeenCalledWith(DEALER_ADD_BANK_ACCOUNT);
       });
     });
   });
