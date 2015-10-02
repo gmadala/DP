@@ -80,6 +80,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         kissMetricInfo: mockKissMetricInfo,
         AccountManagement: AccountManagementMock,
         dialog: dialog,
+        segmentio: segmentio,
         options: {
           account: bankAccount,
           defaultForBilling: true,
@@ -172,9 +173,15 @@ describe('Controller: FinancialAccountCtrl', function () {
 
       it('should fire a metric if edit is successful', function() {
         spyOn(segmentio, 'track').and.callThrough();
-
         scope.confirmRequest();
         scope.$apply();
+        expect(segmentio.track).toHaveBeenCalledWith(DEALER_EDIT_BANK_ACCOUNT, {
+          height: 1080,
+            isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
       });
     });
   });
@@ -467,6 +474,13 @@ describe('Controller: FinancialAccountCtrl', function () {
         spyOn(segmentio, 'track').and.callThrough();
         scope.confirmRequest();
         scope.$apply();
+        expect(segmentio.track).toHaveBeenCalledWith(DEALER_ADD_BANK_ACCOUNT,{
+          height: 1080,
+          isBusinessHours: true,
+          vendor: 'Google Inc.',
+          version: 'Chrome 44',
+          width: 1920
+        });
       });
     });
   });
