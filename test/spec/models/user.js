@@ -310,7 +310,7 @@ describe('Model: User', function () {
       user.authenticate('test', 'testpw');
       httpBackend.flush();
       httpBackend.expectGET('foo/bar', function (headers) {
-        return headers.Authorization === 'CT 12345';
+        return headers.Authorization === '12345';
       }).respond({});
       $http.get('foo/bar');
       expect(httpBackend.flush).not.toThrow();

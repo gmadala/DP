@@ -78,7 +78,7 @@ frisby.login = function (langId) {
       frisby.globalSetup({
         request: {
           headers: {
-            'Authorization': 'CT ' + token
+            'Authorization':  token
           },
           timeout: 10 * 1000
         }

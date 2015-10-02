@@ -23,7 +23,7 @@ describe('Service: api', function () {
   describe('setAuth and hasAuthToken functions', function () {
     it('should set the correct http default Authorization header', function () {
       api.setAuth({ Token: 'foo' });
-      expect(http.defaults.headers.common.Authorization).toBe('CT foo');
+      expect(http.defaults.headers.common.Authorization).toBe('foo');
     });
 
     it('should store the auth data in a cookie', function () {
