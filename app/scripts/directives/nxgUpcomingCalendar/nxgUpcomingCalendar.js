@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgUpcomingCalendar', function (moment, $state, uiCalendarConfig) {
+  .directive('nxgUpcomingCalendar', function (moment, $state) {
     return {
       template: '<div class="dash-calendar" ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
       restrict: 'AC',
@@ -121,12 +121,9 @@ angular.module('nextgearWebApp')
             return;
           }
 
-          // unfortunately fullCalendar does not have live option setter support, see
-          // https://code.google.com/p/fullcalendar/issues/detail?id=293
-          uiCalendarConfig.calendars.cal.fullCalendar('destroy');
-          uiCalendarConfig.calendars.cal.fullCalendar(angular.extend($scope.options, {
+          angular.extend($scope.options, {
             defaultView: newValue === 'month' ? newValue : 'basicWeek'
-          }));
+          });
         });
 
         $scope.$watch('data', function(newValue) {

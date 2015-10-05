@@ -6,9 +6,11 @@ describe('Directive: nxgUpcomingCalendar', function () {
   var element,
     scope,
     compile,
-    moment;
+    moment,
+    uiCalendarConfig;
 
-  beforeEach(inject(function ($rootScope, $compile, _moment_, uiCalendarConfig) {
+  beforeEach(inject(function ($rootScope, $compile, _moment_, _uiCalendarConfig_) {
+    uiCalendarConfig = _uiCalendarConfig_;
     scope = $rootScope.$new();
     scope.mode = 'week';
     scope.myData = {
@@ -41,19 +43,6 @@ describe('Directive: nxgUpcomingCalendar', function () {
 
   it('should attach an options object to its scope', function () {
     expect(element.isolateScope().options).toBeDefined();
-  });
-
-  it('should tell the calendar to rebuild when display setting changes in the parent scope', function () {
-    spyOn(element.isolateScope().cal, 'fullCalendar');
-    scope.$apply(function () {
-      scope.mode = 'week';
-    });
-    // first time won't do it, we have to call a second time
-    scope.$apply(function () {
-      scope.mode = 'month';
-    });
-    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
-    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith(element.isolateScope().options);
   });
 
   it('should emit a setDateRange event when the calendar loads up a date range', function () {
