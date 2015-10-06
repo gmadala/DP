@@ -204,9 +204,11 @@
 
 .fc-widget-header.fc-day-header {
   @extend %align-left;
+  padding: 4px 10px;
 }
 .fc-widget-content {
   @extend %align-right;
+  box-sizing: border-box;
 }
 
 // Individual Events with Counters

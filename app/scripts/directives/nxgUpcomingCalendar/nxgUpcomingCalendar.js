@@ -38,7 +38,7 @@ angular.module('nextgearWebApp')
               columnFormat: 'ddd'
             },
             week: {
-              titleFormat: 'MMM DD YYYY',
+              titleFormat: 'MMM DD, YYYY',
               columnFormat: 'ddd M/D'
             }
           },
@@ -48,7 +48,7 @@ angular.module('nextgearWebApp')
               view.start.valueOf() < new Date().valueOf());
 
             // notify that the view has changed
-            $scope.$emit('setDateRange', view.start, view.end);
+            $scope.$emit('setDateRange', view.start, moment(view.end).add(1, 'd'));
 
             // un-escape HTML characters in event title to make HTML formatting & entities work
             // see http://code.google.com/p/fullcalendar/issues/detail?id=152
