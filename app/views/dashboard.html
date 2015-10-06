@@ -14,42 +14,7 @@
       </div>
     </div>
 
-    <div nxg-upcoming-calendar display="viewMode" data="dashboardData.calendarData"></div>
-
-    <div class="dash-calendar-footer" ng-show="viewMode == 'month'">
-      <h5>
-        <a href class="featured today-btn" ng-class="{ 'disabled': isPast() }" ng-click="onClickToday()"><span translate>Today</span>:</a>
-        {{ today }}
-      </h5>
-
-      <div class="cta btn-toggle btn-toggle-static">
-        <div class="btn-slider" ng-class="{ 'active-left':isWeekMode(), 'active-right':!isWeekMode() }"></div>
-        <button class="btn"  ng-click="changeViewMode('week')" translate>Week</button>
-        <button class="btn"  ng-click="changeViewMode('month')" translate>Month</button>
-      </div>
-
-      <table class="fc-header" style="width:100%">
-        <tbody>
-          <tr>
-            <td class="fc-header-left"></td>
-            <td class="fc-header-center">
-              <span id="prevArrow" class="fc-button fc-button-prev fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickPrev()" ng-class="{ 'fc-state-disabled': isPast() }">
-                <span class="fc-text-arrow">‹</span>
-              </span>
-              <span class="fc-header-space"></span>
-              <span class="fc-header-title">
-                <h2>{{ getCalendarTitle() }}</h2>
-              </span>
-              <span class="fc-header-space"></span>
-              <span id="nextArrow" class="fc-button fc-button-next fc-state-default fc-corner-left fc-corner-right" unselectable="on" ng-click="onClickNext()">
-                <span class="fc-text-arrow">›</span>
-              </span>
-            </td>
-            <td class="fc-header-right"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div nxg-upcoming-calendar display="viewMode" language="calLanguage" data="dashboardData.calendarData"></div>
 
     <!-- Upcoming Payments Table -->
     <div collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">

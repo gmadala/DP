@@ -4044,6 +4044,42 @@ msgstr ""
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Par Kelley Blue Book Co., Inc."
 
+msgid "January"
+msgstr "janvier"
+
+msgid "February"
+msgstr "février"
+
+msgid "March"
+msgstr "mars"
+
+msgid "April"
+msgstr "avril"
+
+msgid "May"
+msgstr "mai"
+
+msgid "June"
+msgstr "juin"
+
+msgid "July"
+msgstr "juillet"
+
+msgid "August"
+msgstr "août"
+
+msgid "September"
+msgstr "septembre"
+
+msgid "October"
+msgstr "octobre"
+
+msgid "November"
+msgstr "novembre"
+
+msgid "December"
+msgstr "décembre"
+
 #~ msgid "Auto-Disburse Unapplied Funds"
 #~ msgstr "Décaissement automatique des fonds non alloués"
 

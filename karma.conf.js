@@ -19,7 +19,7 @@ module.exports = function (karma) {
 
 		// list of files / patterns to load in the browser
 		files: [
-      'app/components/jquery/jquery.js',
+      'app/components/jquery/dist/jquery.js',
       'app/components/angular/angular.js',
       'app/components/angular-sanitize/angular-sanitize.js',
       'app/components/angular-mocks/angular-mocks.js',
@@ -28,9 +28,9 @@ module.exports = function (karma) {
       'app/components/angular-ui-utils/modules/event/event.js',
       'app/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
       'app/private-components/angular-strap.js',
-      'app/private-components/fullcalendar/fullcalendar.js',
-      'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/moment/moment.js',
+      'app/components/fullcalendar/dist/fullcalendar.js',
+      'app/components/angular-ui-calendar/src/calendar.js',
       'app/components/modernizr/modernizr.js',
       'app/components/numeral/numeral.js',
       'app/components/angular-cookies/angular-cookies.js',
