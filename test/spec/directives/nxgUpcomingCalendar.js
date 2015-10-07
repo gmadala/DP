@@ -54,8 +54,8 @@ describe('Directive: nxgUpcomingCalendar', function () {
     scope.$on('setDateRange', handler);
     element.isolateScope().options.viewRender(viewMock, element);
     expect(handler).toHaveBeenCalled();
-    expect(handler.calls.mostRecent().args[1]).toBe(viewMock.start);
-    expect(handler.calls.mostRecent().args[2]).toBe(viewMock.end);
+    expect(handler.calls.mostRecent().args[1]).toEqual(viewMock.start);
+    expect(handler.calls.mostRecent().args[2]).toEqual(moment(viewMock.end).add(1, 'd'));
   });
 
   describe('viewRender()', function () {
