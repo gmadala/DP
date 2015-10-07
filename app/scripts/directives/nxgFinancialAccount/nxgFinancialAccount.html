@@ -20,8 +20,10 @@
       </div>
       <div class="col-xs-2 text-center text-vertical-center" ng-show="isEditable()">
         <div class="recent-transaction">
-          {{account.RecentTransaction}}
-          <span class="glyphicon glyphicon-file"></span>
+          {{RecentTransaction}}
+          <button class="btn-unstyle" ng-click="generateReceipt()" ng-show="isDisplayed">
+            <span class="glyphicon glyphicon-file"></span>
+          </button>
         </div>
       </div>
       <div class="col-xs-1" ng-show="!isEditable()"></div>
