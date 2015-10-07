@@ -68,7 +68,7 @@
 
       /**
        * Determines if the bank account is the user's default billing account.
-       * @return {Boolean} Account default billing account?editFinancialAccount
+       * @return {Boolean} Account default billing account?
        */
       function isDefaultForBilling() {
         return scope.account.BankAccountId === scope.defaultBillingBankAccountId;

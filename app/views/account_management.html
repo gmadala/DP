@@ -15,6 +15,16 @@
       <h6 class="col-xs-2" ng-show="editBankAccountEnabled" translate>Recent Transaction</h6>
       <h6 class="col-xs-1" translate>Active</h6>
     </div>
+    <!--The following allows for the re-spacing when recent transactions is hidden.
+   This can be removed as soon as recent transactions goes live-->
+    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled">
+      <h6 class="col-xs-1" translate>Deposit To</h6>
+      <h6 class="col-xs-15" translate>Withdraw From</h6>
+      <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
+      <h6 class="col-xs-2" translate>Account Number</h6>
+      <h6 class="col-xs-15" translate>{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-2" translate>Active</h6>
+    </div>
     <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true">
       <nxg-financial-account account="account" disbursement-account="financial.data.disbursementAccount"
                              billing-account="financial.data.billingAccount"
