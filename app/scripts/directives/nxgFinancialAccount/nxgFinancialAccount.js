@@ -40,9 +40,20 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
-      scope.RecentTransaction = scope.recentTransaction !== undefined ? moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD') : 'N/A' ;
-      scope.isDisplayed = scope.recentTransaction !== undefined ? true : false;
+      scope.isRecentDate = isRecentDate();
+      scope.isNoRecentDate = isNoRecentDate();
 
+      function isRecentDate() {
+        if (scope.recentTransaction !== undefined) {
+          scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
+          return true;
+        }
+      }
+      function isNoRecentDate(){
+        if (scope.recentTransaction === undefined) {
+         return true;
+        }
+      }
       scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
       scope.generateReceipt = generateReceipt;
       /**
