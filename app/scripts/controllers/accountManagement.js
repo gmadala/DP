@@ -33,10 +33,9 @@ angular.module('nextgearWebApp')
     });
 
     $scope.getLatestTransaction = function(bankAccountId) {
-       var recentTransactionResults =  _.find($scope.recentTransactions, function(recentTransaction) {
+       return _.find($scope.recentTransactions, function(recentTransaction) {
         return recentTransaction.BankAccountId === bankAccountId;
       });
-     return recentTransactionResults;
     };
 
     dealerCustomerSupportPhone.then(function (phoneNumber) {

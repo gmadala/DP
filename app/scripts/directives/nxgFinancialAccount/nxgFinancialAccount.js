@@ -42,20 +42,23 @@
       scope.isEditable = isEditable;
       scope.isRecentDate = isRecentDate();
       scope.isNoRecentDate = isNoRecentDate();
+      scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
+      scope.generateReceipt = generateReceipt;
+
+      console.log('isRecentDate   :', scope.isRecentDate);
+      console.log('scope.isNoRecentDate', scope.isNoRecentDate);
 
       function isRecentDate() {
         if (scope.recentTransaction !== undefined) {
           scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
           return true;
-        }
+        }else{ return false;}
       }
       function isNoRecentDate(){
         if (scope.recentTransaction === undefined) {
          return true;
-        }
+        }else { return false;}
       }
-      scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
-      scope.generateReceipt = generateReceipt;
       /**
        * Provides the correct string in the user's language to the account status
        * field. Default if the field is not available will return false.
