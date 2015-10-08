@@ -45,9 +45,6 @@
       scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
       scope.generateReceipt = generateReceipt;
 
-      console.log('isRecentDate   :', scope.isRecentDate);
-      console.log('scope.isNoRecentDate', scope.isNoRecentDate);
-
       function isRecentDate() {
         if (scope.recentTransaction !== undefined) {
           scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
