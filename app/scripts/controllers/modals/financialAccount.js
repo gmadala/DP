@@ -4,9 +4,9 @@
   angular.module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', 'options', 'segmentio', 'metric'];
+  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', 'options', 'segmentio', 'metric', 'kissMetricInfo'];
 
-  function FinancialAccountCtrl($scope, AccountManagement, dialog, options, segmentio, metric) {
+  function FinancialAccountCtrl($scope, AccountManagement, dialog, options, segmentio, metric, kissMetricInfo) {
 
     $scope.tooltipImage = '<div class="tooltip-image">';
 
@@ -101,13 +101,19 @@
       if ($scope.validity.$valid && validSubmission) {
         if ($scope.isEditModal) {
           AccountManagement.updateBankAccount($scope.account).then(function() {
-            segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT);
+            kissMetricInfo.getKissMetricInfo().then(
+              function(result){
+                segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT,result);
+              });
             dialog.close($scope.account);
           });
         } else if ($scope.isAddModal) {
           $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function(bankAccountId) {
-            segmentio.track(metric.DEALER_ADD_BANK_ACCOUNT);
+            kissMetricInfo.getKissMetricInfo().then(
+              function(result){
+                segmentio.track(metric.DEALER_ADD_BANK_ACCOUNT,result);
+              });
             $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);
           });

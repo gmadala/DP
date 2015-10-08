@@ -6,9 +6,11 @@ describe('Directive: nxgUpcomingCalendar', function () {
   var element,
     scope,
     compile,
-    moment;
+    moment,
+    uiCalendarConfig;
 
-  beforeEach(inject(function ($rootScope, $compile, _moment_) {
+  beforeEach(inject(function ($rootScope, $compile, _moment_, _uiCalendarConfig_) {
+    uiCalendarConfig = _uiCalendarConfig_;
     scope = $rootScope.$new();
     scope.mode = 'week';
     scope.myData = {
@@ -43,19 +45,6 @@ describe('Directive: nxgUpcomingCalendar', function () {
     expect(element.isolateScope().options).toBeDefined();
   });
 
-  it('should tell the calendar to rebuild when display setting changes in the parent scope', function () {
-    spyOn(element.isolateScope().cal, 'fullCalendar');
-    scope.$apply(function () {
-      scope.mode = 'week';
-    });
-    // first time won't do it, we have to call a second time
-    scope.$apply(function () {
-      scope.mode = 'month';
-    });
-    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith('destroy');
-    expect(element.isolateScope().cal.fullCalendar).toHaveBeenCalledWith(element.isolateScope().options);
-  });
-
   it('should emit a setDateRange event when the calendar loads up a date range', function () {
     var handler = jasmine.createSpy('eventHandler'),
       viewMock = {
@@ -63,10 +52,10 @@ describe('Directive: nxgUpcomingCalendar', function () {
         end: moment()
       };
     scope.$on('setDateRange', handler);
-    element.isolateScope().options.viewDisplay(viewMock);
+    element.isolateScope().options.viewRender(viewMock, element);
     expect(handler).toHaveBeenCalled();
-    expect(handler.calls.mostRecent().args[1]).toBe(viewMock.start);
-    expect(handler.calls.mostRecent().args[2]).toBe(viewMock.end);
+    expect(handler.calls.mostRecent().args[1]).toEqual(viewMock.start);
+    expect(handler.calls.mostRecent().args[2]).toEqual(moment(viewMock.end).add(1, 'd'));
   });
 
   describe('viewRender()', function () {
@@ -116,16 +105,6 @@ describe('Directive: nxgUpcomingCalendar', function () {
       expect(ele.hasClass('closed')).toBeFalsy();
     });
 
-    it('should add date element if one does not exist', function () {
-      var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
-      element.isolateScope().openDates = {
-        '1990-01-01': true,
-        '1990-01-02': true
-      };
-      element.isolateScope().options.dayRender('1990-01-10', ele);
-      expect(ele.find('.fc-day-number').text()).toEqual('10');
-    });
-
     it('should add has-events class if day has events', function () {
       var ele = angular.element('<td class="fc-day closed"><div><div class="fc-day-content"><div>&nbsp;</div></div></div></td>');
       element.isolateScope().openDates = {
@@ -160,11 +139,11 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.isolateScope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
+      element = angular.element('<div><table><span class="fc-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-content"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
-      expect(element.find('span.fc-event-title').first().html()).toEqual('<b>Title1</b>');
-      expect(element.find('span.fc-event-title').last().html()).toEqual('<i>Title2</i>');
+      expect(element.find('span.fc-title').first().html()).toEqual('<b>Title1</b>');
+      expect(element.find('span.fc-title').last().html()).toEqual('<i>Title2</i>');
     });
 
     it('should add class for events today', function () {
@@ -173,7 +152,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.isolateScope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
+      element = angular.element('<div><table><span class="fc-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-content"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
       expect(element.hasClass('today')).toBeTruthy();
@@ -186,7 +165,7 @@ describe('Directive: nxgUpcomingCalendar', function () {
         subTitle: 'event subtitle'
       },
       scope = element.isolateScope();
-      element = angular.element('<div><table><span class="fc-event-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-event-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-event-inner"></span></table></div>');
+      element = angular.element('<div><table><span class="fc-title">&lt;b&gt;Title1&lt;/b&gt;</span><span class="fc-title">&lt;i&gt;Title2&lt;/i&gt;</span><span class="fc-content"></span></table></div>');
       scope.options.eventRender(eventMock, element);
 
       expect(element.hasClass('overdue')).toBeTruthy();
