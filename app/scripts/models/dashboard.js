@@ -51,14 +51,6 @@ angular.module('nextgearWebApp')
       },
       extendLineOfCreditObject: extendLineOfCreditObject,
       fetchDealerDashboard: function (startDate, endDate) {
-
-        // When fetching a month it also grabs the first day of the next month.
-        // This line prevents that from happening.
-        endDate = moment(endDate).subtract('days', 1).toDate();
-
-        startDate = api.toShortISODate(startDate);
-        endDate = api.toShortISODate(endDate);
-
         return $q.all([
             api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate),
             api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate)
