@@ -67,6 +67,11 @@ angular.module('nextgearWebApp')
           TitleReleaseAddressId: addressId
         };
         return api.request('POST', '/UserAccount/titleSettings', req);
+      },
+      getTransactionDate: function(){
+        return api.request('GET', '/dealer/recenttransaction').then(function(results){
+          return results;
+        });
       }
     };
 

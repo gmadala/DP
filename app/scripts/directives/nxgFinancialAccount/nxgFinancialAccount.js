@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, User, routingNumberFilter) {
+  function financialAccount(gettext, $dialog, AccountManagement, User, routingNumberFilter, moment, api) {
 
     var directive;
     directive = {
@@ -21,7 +21,8 @@
         updateBillingAccount: '&',
         updateDisbursementAccount: '&',
         isStakeholderActive: '=',
-        isUnitedStates: '='
+        isUnitedStates: '=',
+        recentTransaction:'='
       },
       restrict: 'E'
     };
@@ -39,8 +40,22 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
-      scope.account.RecentTransaction = '01/01/1900';
+      scope.isRecentDate = isRecentDate();
+      scope.isNoRecentDate = isNoRecentDate();
+      scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
+      scope.generateReceipt = generateReceipt;
 
+      function isRecentDate() {
+        if (scope.recentTransaction !== undefined) {
+          scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
+          return true;
+        }else{ return false;}
+      }
+      function isNoRecentDate(){
+        if (scope.recentTransaction === undefined) {
+         return true;
+        }else { return false;}
+      }
       /**
        * Provides the correct string in the user's language to the account status
        * field. Default if the field is not available will return false.
@@ -76,6 +91,11 @@
        */
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
+      }
+
+      function generateReceipt(){
+        var strUrl =  api.contentLink('/receipt/view/' + scope.transactionId + '/Receipt');
+        window.open(strUrl, '_blank');
       }
 
       /**
