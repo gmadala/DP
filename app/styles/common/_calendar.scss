@@ -156,6 +156,10 @@
   }
 }
 
+.fc-view-container table{
+  border-bottom: 1px solid #BBB;
+}
+
 
 .fc-grid {
   border: 0;
@@ -254,4 +258,8 @@
 
   .fc-widget-content {
     text-transform: none;
+  }
+
+  .fc-unthemed td{
+    border-color: $dataTableBorder;
   }
