@@ -16,7 +16,7 @@
       <h6 class="col-xs-1" translate>Active</h6>
     </div>
     <!--The following allows for the re-spacing when recent transactions is hidden.
-    This can be removed as soon as recent transactions goes live-->
+   This can be removed as soon as recent transactions goes live-->
     <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled">
       <h6 class="col-xs-1" translate>Deposit To</h6>
       <h6 class="col-xs-15" translate>Withdraw From</h6>
@@ -31,7 +31,8 @@
                              update-billing-account="updateBillingAccount(billingAccountId)"
                              update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
                              is-stakeholder-active="business.data.isStakeholderActive"
-                             is-united-states="isUnitedStates">
+                             is-united-states="isUnitedStates"
+                             recent-transaction="getLatestTransaction(account.BankAccountId)" >
       </nxg-financial-account>
     </div>
   </section>

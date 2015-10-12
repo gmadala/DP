@@ -13,7 +13,9 @@ describe('Controller: AccountManagementCtrl', function () {
     AddressesMock,
     AccountManagementMock,
     dialogMock,
-    UserMock;
+    UserMock,
+    RecentTransactionMock;
+
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q) {
@@ -61,13 +63,21 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     ];
 
+    RecentTransactionMock = {
+      BankAccountId:'59ebfdb2-03b8-4734-ac04-b97cf6a329f8',
+      FinancialTransactionId:'55310c5d-a241-422a-9f22-5e3f4a4f5a73',
+      MaxDate:'2015-02-25T15:00:45.923'
+    };
     AccountManagementMock = {
-      get: function() {
+      get: function () {
         return {
-          then: function(success) {
+          then: function (success) {
             success(settingsData);
           }
         };
+      },
+      getTransactionDate: function(){
+        return $q.when(RecentTransactionMock);
       }
     };
 
@@ -284,7 +294,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
       });
 
-      
+
       // TODO modify second expectation to true once add Bank Account is released to Canada.
       it('add bank account should be enabled for US only.', function() {
         scope.business.data.isStakeholderActive = true;
@@ -321,6 +331,10 @@ describe('Controller: AccountManagementCtrl', function () {
 
         expect(UserMock.refreshInfo).toHaveBeenCalled();
       });
+      it('should display recent transaction date for the bank account'), function(){
+        spyOn(AccountManagementMock, 'getTransactionDate').and.callThrough();
+        expect(AccountManagementMock.getTransactionDate()).toHaveBeenCalled();
+      }
     });
 
     describe('save()', function(){

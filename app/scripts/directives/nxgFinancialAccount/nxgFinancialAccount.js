@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, User, routingNumberFilter) {
+  function financialAccount(gettext, gettextCatalog, $dialog, AccountManagement, User, routingNumberFilter, moment, api) {
 
     var directive;
     directive = {
@@ -21,7 +21,8 @@
         updateBillingAccount: '&',
         updateDisbursementAccount: '&',
         isStakeholderActive: '=',
-        isUnitedStates: '='
+        isUnitedStates: '=',
+        recentTransaction: '='
       },
       restrict: 'E'
     };
@@ -29,6 +30,8 @@
     return directive;
 
     function link(scope) {
+
+      gettext('Not Applicable');
 
       scope.status = getStatus();
       scope.displayed = isDisplayed();
@@ -39,8 +42,23 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
-      scope.account.RecentTransaction = '01/01/1900';
 
+      scope.recentTransactionId = '';
+      scope.recentTransactionDate = gettextCatalog.getString('Not Applicable');
+      if (!recentTransactionExists()) {
+        scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
+        scope.recentTransactionDate = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
+      }
+
+      scope.generateReceipt = generateReceipt;
+
+      /**
+       * Check if the current bank account have recent date or not.
+       * @returns {boolean} true if the current bank account have recent transaction.
+       */
+      function recentTransactionExists() {
+        return scope.recentTransaction !== undefined;
+      }
       /**
        * Provides the correct string in the user's language to the account status
        * field. Default if the field is not available will return false.
@@ -76,6 +94,11 @@
        */
       function isDefaultForDisbursement() {
         return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
+      }
+
+      function generateReceipt(){
+        var strUrl =  api.contentLink('/receipt/view/' + scope.recentTransactionId + '/Receipt');
+        window.open(strUrl, '_blank');
       }
 
       /**

@@ -27,6 +27,17 @@ angular.module('nextgearWebApp')
     $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ?  User.getFeatures().addBankAccount.enabled :  true;
     $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
 
+    //to retreive the latest transaction date
+    AccountManagement.getTransactionDate().then(function(results){
+      $scope.recentTransactions =  results;
+    });
+
+    $scope.getLatestTransaction = function(bankAccountId) {
+      return _.find($scope.recentTransactions, function(recentTransaction) {
+        return recentTransaction.BankAccountId === bankAccountId;
+      });
+    };
+
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
     });
