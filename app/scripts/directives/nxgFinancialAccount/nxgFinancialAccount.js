@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, $dialog, AccountManagement, User, routingNumberFilter, moment, api) {
+  function financialAccount(gettext, gettextCatalog, $dialog, AccountManagement, User, routingNumberFilter, moment, api) {
 
     var directive;
     directive = {
@@ -22,7 +22,7 @@
         updateDisbursementAccount: '&',
         isStakeholderActive: '=',
         isUnitedStates: '=',
-        recentTransaction:'='
+        recentTransaction: '='
       },
       restrict: 'E'
     };
@@ -30,6 +30,8 @@
     return directive;
 
     function link(scope) {
+
+      gettext('Not Applicable');
 
       scope.status = getStatus();
       scope.displayed = isDisplayed();
@@ -40,21 +42,22 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
-      scope.isRecentDate = isRecentDate();
-      scope.isNoRecentDate = isNoRecentDate();
-      scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
+
+      scope.recentTransactionId = '';
+      scope.recentTransactionDate = gettextCatalog.getString('Not Applicable');
+      if (!recentTransactionExists()) {
+        scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
+        scope.recentTransactionDate = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
+      }
+
       scope.generateReceipt = generateReceipt;
 
-      function isRecentDate() {
-        if (scope.recentTransaction !== undefined) {
-          scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
-          return true;
-        }else{ return false;}
-      }
-      function isNoRecentDate(){
-        if (scope.recentTransaction === undefined) {
-         return true;
-        }else { return false;}
+      /**
+       * Check if the current bank account have recent date or not.
+       * @returns {boolean} true if the current bank account have recent transaction.
+       */
+      function recentTransactionExists() {
+        return scope.recentTransaction !== undefined;
       }
       /**
        * Provides the correct string in the user's language to the account status
@@ -94,7 +97,7 @@
       }
 
       function generateReceipt(){
-        var strUrl =  api.contentLink('/receipt/view/' + scope.transactionId + '/Receipt');
+        var strUrl =  api.contentLink('/receipt/view/' + scope.recentTransactionId + '/Receipt');
         window.open(strUrl, '_blank');
       }
 

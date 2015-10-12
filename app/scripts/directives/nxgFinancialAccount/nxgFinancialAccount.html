@@ -19,14 +19,10 @@
           <div>{{routingNumberDisplay}}</div>
       </div>
       <div class="col-xs-2 text-center text-vertical-center" ng-show="isEditable()">
-        <a class="recent-transaction transaction-date" ng-click="generateReceipt()" ng-if="isRecentDate">
-          {{RecentTransaction}}
+        <a class="recent-transaction transaction-date" ng-click="generateReceipt()">
+          {{ recentTransactionDate }}
           <span class="glyphicon glyphicon-file"></span>
         </a>
-        <div class="recent-transaction" ng-if="isNoRecentDate">
-          <span translate>Not Applicable</span>
-        </div>
-
       </div>
       <div class="col-xs-1" ng-show="!isEditable()"></div>
       <div class="col-xs-1 text-center text-vertical-center">
