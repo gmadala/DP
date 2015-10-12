@@ -45,7 +45,7 @@
 
       scope.recentTransactionId = '';
       scope.recentTransactionDate = gettextCatalog.getString('Not Applicable');
-      if (!recentTransactionExists()) {
+      if (recentTransactionExists()) {
         scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
         scope.recentTransactionDate = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
       }
