@@ -8,7 +8,7 @@
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, gettextCatalog, $dialog, AccountManagement, User, routingNumberFilter, moment, api) {
+  function financialAccount(gettext, gettextCatalog, $dialog, $filter, AccountManagement, User, routingNumberFilter, moment, api) {
 
     var directive;
     directive = {
@@ -43,11 +43,13 @@
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
 
+      scope.recentTransactionExists = recentTransactionExists();
+
       scope.recentTransactionId = '';
       scope.recentTransactionDate = gettextCatalog.getString('Not Applicable');
-      if (recentTransactionExists()) {
+      if (scope.recentTransactionExists) {
         scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
-        scope.recentTransactionDate = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
+        scope.recentTransactionDate = $filter('moment')(scope.recentTransaction.MaxDate);
       }
 
       scope.generateReceipt = generateReceipt;
