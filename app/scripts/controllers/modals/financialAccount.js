@@ -139,7 +139,7 @@
      */
     $scope.showSuccessMessage = function () {
       var title = gettextCatalog.getString('Success'),
-        msg = gettextCatalog.getString('Your account is saved successfully.'),
+        msg = gettextCatalog.getString('Your account was saved successfully.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
       return $dialog.messageBox(title, msg, buttons).open();
     }
