@@ -5,7 +5,7 @@
   angular.module('nextgearWebApp')
     .controller('ReceiptsCtrl', ReceiptsCtrl);
 
-  function ReceiptsCtrl($scope, $stateParams, Receipts, User, api, gettextCatalog) {
+  function ReceiptsCtrl($scope, $stateParams, $window, Receipts, User, api, gettextCatalog) {
 
     var lastPromise;
     var maxReceipts = 20;
@@ -152,11 +152,16 @@
      * @param receipt the receipt to viewed.
      */
     function viewReceipt(receipt) {
+      var stringUrl;
       var transactionId = receipt.FinancialTransactionId;
       if ($scope.format === 'grouped') {
-        var strUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
-        window.open(strUrl, '_blank');
+        stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
       } else if ($scope.format === 'single') {
+        stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
+      }
+
+      if (stringUrl !== undefined) {
+        $window.open(stringUrl, '_blank');
       }
     }
 
@@ -173,11 +178,17 @@
       }, '');
       ids = ids.slice(0, -1); // remove extra comma at end
 
+      var stringUrl;
       if ($scope.format === 'grouped') {
         // build query string
-        var strUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: ids});
-        window.open(strUrl, '_blank');
+        stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: ids});
       } else if ($scope.format === 'single') {
+        // build query string
+        stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: ids});
+      }
+
+      if (stringUrl !== undefined) {
+        $window.open(stringUrl, '_blank');
       }
       // reset selection
       $scope.selectedReceipts = [];

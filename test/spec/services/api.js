@@ -472,4 +472,50 @@ describe('Service: api', function () {
     });
   });
 
+  describe('ngenContentLink function', function () {
+    var user;
+
+    beforeEach(inject(function (User, nxgConfig) {
+      user = User;
+      nxgConfig.ngenDomain = 'http://example.com';
+    }));
+
+    it('should throw an error if no path is provided', function () {
+      expect(api.ngenContentLink).toThrow();
+    });
+
+    it('should return the expected URL when user is not logged in, and no params are provided', function () {
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
+      var url = api.ngenContentLink('/foo/bar');
+      expect(url).toBe('http://example.com/foo/bar');
+    });
+
+    it('should return the expected URL when user is not logged in, and 1 param is provided', function () {
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
+      var url = api.ngenContentLink('/foo/bar', {param1: 'value1'});
+      expect(url).toBe('http://example.com/foo/bar?param1=value1');
+    });
+
+    it('should return the expected URL when user is not logged in, and 2+ params are provided', function () {
+      spyOn(user, 'isLoggedIn').and.returnValue(false);
+      var url = api.ngenContentLink('/foo/bar', {param1: 'value1', param2: 'value2'});
+      expect(url === 'http://example.com/foo/bar?param1=value1&param2=value2' ||
+        url === 'http://example.com/foo/bar?param2=value2&param1=value1').toBe(true);
+    });
+
+    it('should return the expected URL when user is logged in, and no params are provided', function () {
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
+      api.setAuth({ Token: 'SECRET' });
+      var url = api.ngenContentLink('/foo/bar');
+      expect(url).toBe('http://example.com/foo/bar?apiToken=SECRET');
+    });
+
+    it('should return the expected URL when user is logged in, and any params are provided', function () {
+      spyOn(user, 'isLoggedIn').and.returnValue(true);
+      api.setAuth({ Token: 'SECRET' });
+      var url = api.ngenContentLink('/foo/bar', {param1: 'value1'});
+      expect(url).toBe('http://example.com/foo/bar?apiToken=SECRET&param1=value1');
+    });
+  });
+
 });

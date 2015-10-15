@@ -295,7 +295,7 @@ describe('Controller: ReceiptsCtrl', function () {
       });
     });
 
-    describe('viewReceipt function', function() {
+    describe('viewReceipt function (discover)', function() {
       it('should exist', function() {
         expect(scope.viewReceipt).toBeDefined();
       });
@@ -308,9 +308,24 @@ describe('Controller: ReceiptsCtrl', function () {
         expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656', '_blank');
       });
     });
+
+    describe('viewReceipt function (ngen)', function() {
+      it('should exist', function() {
+        expect(scope.viewReceipt).toBeDefined();
+      });
+
+      it('should open a new tab with a pdf of the selected receipts', function() {
+        var receipt = { transactionNumber: 1234, FinancialTransactionId: 5656 };
+        scope.format = 'single';
+
+        spyOn(window, 'open');
+        scope.viewReceipt(receipt);
+        expect(window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=5656', '_blank');
+      });
+    });
   });
 
-  describe('onExport function', function() {
+  describe('onExport function (discover)', function() {
     it('should do nothing if no receipts are selected', function() {
       spyOn(window, 'open').and.returnValue();
       scope.onExport();
@@ -327,6 +342,27 @@ describe('Controller: ReceiptsCtrl', function () {
       spyOn(window, 'open');
       scope.onExport();
       expect(window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=5656,3434,1212', '_blank');
+    });
+  });
+
+  describe('onExport function (ngen)', function() {
+    it('should do nothing if no receipts are selected', function() {
+      spyOn(window, 'open').and.returnValue();
+      scope.onExport();
+      expect(window.open).not.toHaveBeenCalled();
+    });
+
+    it('should build a link based on the selected receipts and open it in a new window', function() {
+      scope.format = 'single';
+      scope.selectedReceipts = [
+        { transactionNumber: 1234, FinancialTransactionId: 5656 },
+        { transactionNumber: 5678, FinancialTransactionId: 3434 },
+        { transactionNumber: 910, FinancialTransactionId: 1212 }
+      ];
+
+      spyOn(window, 'open');
+      scope.onExport();
+      expect(window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=5656,3434,1212', '_blank');
     });
   });
 
