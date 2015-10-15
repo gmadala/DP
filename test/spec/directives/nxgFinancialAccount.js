@@ -8,7 +8,6 @@ describe('Directive: nxgFinancialAccount', function () {
   var billingAccount = "76e9e774-3dcc-4852-801d-b6e91d161a13";
 
   var element,
-    elementTransaction,
     scope,
     $compile,
     $rootScope,
@@ -16,7 +15,6 @@ describe('Directive: nxgFinancialAccount', function () {
     $q,
     User,
     iScope,
-    tScope,
     account,
     transaction,
     undefinedTransaction,
@@ -24,11 +22,8 @@ describe('Directive: nxgFinancialAccount', function () {
 
   function createIsolateScope() {
     element = $compile(element)(scope);
-    elementTransaction = $compile(elementTransaction)(scope);
     scope.$digest();
-
     iScope = element.isolateScope();
-    tScope = elementTransaction.isolateScope();
   }
 
   beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_, _gettext_, _gettextCatalog_,  _User_) {
