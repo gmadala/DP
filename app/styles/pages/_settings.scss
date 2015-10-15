@@ -13,6 +13,9 @@
   height: 400px;
   overflow: auto;
   font-size: 10px;
+  &.add-account{
+    height: 300px;
+  }
   ul {
     list-style-type: disc;
     li{
