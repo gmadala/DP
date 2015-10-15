@@ -8,6 +8,7 @@ describe('Directive: nxgFinancialAccount', function () {
   var billingAccount = "76e9e774-3dcc-4852-801d-b6e91d161a13";
 
   var element,
+    elementTransaction,
     scope,
     $compile,
     $rootScope,
@@ -15,15 +16,19 @@ describe('Directive: nxgFinancialAccount', function () {
     $q,
     User,
     iScope,
+    tScope,
     account,
     transaction,
+    undefinedTransaction,
     editedBankAccount;
 
   function createIsolateScope() {
     element = $compile(element)(scope);
+    elementTransaction = $compile(elementTransaction)(scope);
     scope.$digest();
 
     iScope = element.isolateScope();
+    tScope = elementTransaction.isolateScope();
   }
 
   beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_, _gettext_, _gettextCatalog_,  _User_) {
@@ -69,7 +74,7 @@ describe('Directive: nxgFinancialAccount', function () {
       FinancialTransactionId: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3',
       MaxDate: '2015-06-13'
     };
-
+    undefinedTransaction :undefined;
     scope = $rootScope.$new();
 
     scope.account = account;
@@ -204,4 +209,17 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(User.refreshInfo).toHaveBeenCalled();
   });
+
+  it('should display n/a for recent transaction date.', function() {
+    element = angular.element(
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +
+      ' billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"' +
+      ' is-united-states="isUnitedStates" recent-transaction="undefinedTransaction">' +
+      '</nxg-financial-account>');
+    createIsolateScope();
+    expect(iScope.recentTransactionDate).toBe('n/a');
+
+  });
+
+
 });
