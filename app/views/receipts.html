@@ -119,7 +119,6 @@
       </div>
     </div>
 
-
     <div ng-show="selectedReceipts.length > 0">
       <ul class="queue-list reversed zeroLeftPadding">
         <li class="queue-item bordered" ng-repeat="receipt in selectedReceipts">
@@ -130,6 +129,23 @@
           <h5><span translate>Receipt No.</span> <a class="heavy" href="javascript:void(0)" ng-click="viewReceipt(receipt)">{{ receipt.TransactionNumber }}</a></h5>
         </li>
       </ul>
+    </div>
+
+    <div class="queue-list reversed">
+      <div class="alt-lockup queue-item ">
+        <p class="lockup-minor" translate>Receipts formatting options</p>
+
+        <div class="cr-inline">
+          <label class="cr-label" for="grouped" translate>Grouped by transaction</label>
+          <input type="radio" name="receiptOption" id="grouped" ng-model="format" value="grouped">
+          <label class="radio-img" for="grouped"></label>
+        </div>
+        <div class="cr-inline">
+          <label class="cr-label" for="single" translate>1 VIN per page</label>
+          <input type="radio" name="receiptOption" id="single" ng-model="format" value="single">
+          <label class="radio-img" for="single"></label>
+        </div>
+      </div>
     </div>
 
     <div class="well-footer">

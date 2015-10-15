@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, Receipts, User, api, gettextCatalog) {
+  .controller('ReceiptsCtrl', function($scope, $log, $stateParams, $window, Receipts, User, api, gettextCatalog) {
 
     var lastPromise;
     var maxReceipts = 20;
 
+    $scope.format = 'grouped';
     $scope.isCollapsed = true;
 
     $scope.getReceiptStatus = function (receipt) {
@@ -64,10 +65,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.tooMany = function() {
-      if ($scope.selectedReceipts.length >= maxReceipts) {
-        return true;
-      }
-      return false;
+      return $scope.selectedReceipts.length >= maxReceipts;
     };
 
     $scope.selectedReceipts = []; // to hold selected receipts to print/export
@@ -89,9 +87,12 @@ angular.module('nextgearWebApp')
     };
 
     $scope.viewReceipt = function(receipt) {
-      var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: receipt.FinancialTransactionId.toString() });
-
-      window.open(strUrl, '_blank');
+      var transactionId = receipt.FinancialTransactionId;
+      if ($scope.format === 'grouped') {
+        var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: transactionId });
+        window.open(strUrl, '_blank');
+      } else if ($scope.format === 'single') {
+      }
     };
 
     $scope.onExport = function() {
@@ -104,13 +105,12 @@ angular.module('nextgearWebApp')
       }, '');
       ids = ids.slice(0,-1); // remove extra comma at end
 
-      // build query string
-      var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: ids });
-
-      window.open(
-        strUrl,
-        '_blank' // open in new window
-      );
+      if ($scope.format === 'grouped') {
+        // build query string
+        var strUrl = api.contentLink('/receipt/viewMultiple/receipts', { financialtransactionids: ids });
+        window.open(strUrl, '_blank');
+      } else if ($scope.format === 'single') {
+      }
       // reset selection
       $scope.selectedReceipts = [];
     };
