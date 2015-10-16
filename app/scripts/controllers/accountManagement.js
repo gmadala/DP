@@ -1,23 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AccountManagementCtrl', function($scope, $dialog, AccountManagement, Addresses, gettext,
+  .controller('AccountManagementCtrl', AccountManagementCtrl)
+  .controller('ConfirmCtrl', ConfirmCtrl);
+
+  function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, gettext,
                                                 User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
                                                 routingNumberFilter) {
 
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
-
-    // TODO remove this once bank accounts content is all done - just mark these for translation in advance
-    gettext('Add payment account');
-    gettext('Add account');
-    /// the date when the account was last modified
-    gettext('Last modified');
-    /// the date when the account was added
-    gettext('Date added');
-    /// the date when payment was last made using the account
-    gettext('Last payment on');
-    gettext('Edit');
-    gettext('Disable');
 
     $scope.loading = false;
     $scope.isUnitedStates = User.isUnitedStates();
@@ -26,8 +17,11 @@ angular.module('nextgearWebApp')
     $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ?  User.getFeatures().contactInfo.enabled :  true;
     $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ?  User.getFeatures().addBankAccount.enabled :  true;
     $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
+    $scope.editDefaultAccount = false;
 
-    //to retreive the latest transaction date
+    /**
+     * retrieve the latest transaction date
+     **/
     AccountManagement.getTransactionDate().then(function(results){
       $scope.recentTransactions =  results;
     });
@@ -38,10 +32,18 @@ angular.module('nextgearWebApp')
       });
     };
 
+    /**
+     * Format the customer support phone for the address settings help text
+     */
     dealerCustomerSupportPhone.then(function (phoneNumber) {
       $scope.customerSupportPhone = phoneNumber.formatted;
     });
 
+    /**
+     * Generic functions for edit, cancel, save, and success
+     * Can be used for business settings, address settings, and [brand] settings
+     * @type {{edit: Function, cancel: Function, save: Function, saveSuccess: Function}}
+     */
     var prv = {
       edit: function() {
         this.dirtyData = angular.copy(this.data);
@@ -68,16 +70,27 @@ angular.module('nextgearWebApp')
       }
     };
 
+    /**
+     * retrieve information concerning the user's account settings, and save it in the data object as two arrays
+     */
     var getData;
+
+    function handleData(data) {
+      return angular.extend({}, data[0], data[1]);
+    }
+
     if(User.isDealer()) {
       getData = $q.all([AccountManagement.get(), AccountManagement.getFinancialAccountData()])
-      .then(function(data) {
-        return angular.extend({}, data[0], data[1]);
-      });
+      .then(handleData);
     } else {
       getData = AccountManagement.get();
     }
 
+    $scope.editDefaultAccount = false;
+    /**
+     * Updates the default disbursement account
+     * @param disbursementAccountId
+     */
     $scope.updateDisbursementAccount = function(disbursementAccountId) {
       var financialDataDefined = $scope.financial && $scope.financial.data;
       if (financialDataDefined) {
@@ -86,6 +99,10 @@ angular.module('nextgearWebApp')
       }
     };
 
+    /**
+     * Updates the default billing account
+     * @param billingAccountId
+     */
     $scope.updateBillingAccount = function(billingAccountId) {
       var financialDataDefined = $scope.financial && $scope.financial.data;
       if (financialDataDefined) {
@@ -236,21 +253,75 @@ angular.module('nextgearWebApp')
           }
         };
 
+        /**
+         *gets the bank name of the default account for disbursement.
+         * @returns {*}
+         */
+        function getDefaultDisbursement(disbursementId, accounts){
+          var defaultDisbursement = _.find(accounts, function(account){
+            return account.BankAccountId === disbursementId;
+          });
+
+          return defaultDisbursement ?  defaultDisbursement.BankAccountName : null;
+        }
+
+        /**
+         * gets the bank name of the default account for billing
+         */
+        function getDefaultBilling(billingId, accounts){
+          var defaultBilling = _.find(accounts, function(account){
+            return account.BankAccountId === billingId;
+          });
+
+          return defaultBilling ? defaultBilling.BankAccountName : null;
+        }
+
+
+        $scope.defaultPayment = _.find(results.BankAccounts, function(account){
+          return account.BankAccountId === results.DefaultBillingBankAccountId;
+        });
+
+        $scope.defaultDeposit = _.find(results.BankAccounts, function(account){
+          return account.BankAccountId === results.DefaultDisbursementBankAccountId;
+        });
+
+        var dirtyPayment = null;
+        var dirtyDeposit = null;
+
         /** FINANCIAL ACCOUNTS SETTINGS **/
         $scope.financial = {
           data: {
             bankAccounts: results.BankAccounts,
-            disbursementAccount: results.DefaultDisbursementBankAccountId,
-            billingAccount: results.DefaultBillingBankAccountId,
-            routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true)
+            selectedAccount: null,
+            selectedForPayment: null,
+            selectedForDeposit: null,
+            singleAccount: results.BankAccounts.length === 1,
+            routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true),
+            getDefaultDisbursement: getDefaultDisbursement(results.DefaultDisbursementBankAccountId, results.BankAccounts),
+            getDefaultBilling: getDefaultBilling(results.DefaultBillingBankAccountId, results.BankAccounts)
           },
-          /**dirtyData: null, // a copy of the data for editing (lazily built)
+          dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
           edit: function() {
-            prv.edit.apply(this);
+            $scope.editDefaultAccount = true;
+            dirtyPayment = $scope.defaultPayment;
+            dirtyDeposit = $scope.defaultDeposit;
           },
           cancel: function() {
-            prv.cancel.apply(this);
+            $scope.defaultPayment = dirtyPayment;
+            $scope.defaultDeposit = dirtyDeposit;
+            $scope.editDefaultAccount = false;
+          },
+          save: function(){
+            AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId).then(function(account){
+              account.IsDefaultDisbursement = true;
+              AccountManagement.updateBankAccount(account);
+            });
+            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId).then(function(account){
+              account.IsDefaultPayment = true;
+              AccountManagement.updateBankAccount(account);
+            });
+            $scope.editDefaultAccount = false;
           },
           isDirty: function() {
             return $scope.financialSettings.$dirty;
@@ -424,12 +495,12 @@ angular.module('nextgearWebApp')
       {}
     );
 
-  })
+  }
 
-  .controller('ConfirmCtrl', function($scope, dialog) {
+  function ConfirmCtrl($scope, dialog){
     $scope.close = function(result) {
       dialog.close(result);
     };
 
     $scope.agree = false;
-  });
+  }

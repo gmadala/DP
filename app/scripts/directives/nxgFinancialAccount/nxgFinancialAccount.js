@@ -44,6 +44,38 @@
       scope.isNoRecentDate = isNoRecentDate();
       scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
       scope.generateReceipt = generateReceipt;
+      scope.editMode = false;
+
+      var prv = {
+        edit: function() {
+          this.dirtyData = angular.copy(this.data);
+          this.editMode = true;
+        },
+        cancel: function() {
+          this.dirtyData = this.validation = null;
+          this.editMode = false;
+          this.editable = false;
+        },
+        save: function() {
+          if (!this.validate()) {
+            return false;
+          }
+          if (!this.isDirty()) {
+            this.cancel();
+            return false;
+          }
+          return true;
+        },
+        saveSuccess: function() {
+          this.data = this.dirtyData;
+          this.dirtyData = this.validation = null;
+          this.editable = false;
+        }
+      };
+
+      scope.cancel = function(){
+        prv.cancel.apply(this);
+      }
 
       function isRecentDate() {
         if (scope.recentTransaction !== undefined) {

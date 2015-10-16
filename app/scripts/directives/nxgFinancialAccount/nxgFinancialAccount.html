@@ -1,54 +1,86 @@
 <div ng-if="displayed">
   <div class="well-item bordered financial-account">
-    <div class="row" ng-show="isEditable()">
-      <div class="col-xs-1 text-center text-vertical-center">
-          <div class="glyphicon glyphicon-ok" ng-show="defaultForDisbursement"></div>
-      </div>
-      <div class="col-xs-15 text-center text-vertical-center">
-          <div class="glyphicon glyphicon-ok" ng-show="defaultForBilling"></div>
-      </div>
-      <div class="col-xs-2 text-left no-left-padding text-vertical-center"
+    <!--Add/Edit Enabled, view mode-->
+    <div class="row" ng-show="isEditable() && !editMode">
+      <!--Bank Name-->
+      <div class="col-xs-3 text-left no-left-padding text-vertical-center"
         style="padding-left: 15px">
           <div >{{ account.AchBankName }}</div>
       </div>
-      <div class="col-xs-1" ng-show="!isEditable()"></div>
+      <!--Account Number-->
       <div class="col-xs-2 text-center text-vertical-center">
           <div>******{{account.AchAccountNumberLast4}}</div>
       </div>
-      <div class="col-xs-15 text-center text-vertical-center">
+      <!--Routing Number-->
+      <div class="col-xs-2 text-center text-vertical-center">
           <div>{{routingNumberDisplay}}</div>
       </div>
+      <!--Recent Transaction-->
       <div class="col-xs-2 text-center text-vertical-center" ng-show="isEditable()">
         <a class="recent-transaction transaction-date" ng-click="generateReceipt()" ng-if="isRecentDate">
           {{RecentTransaction}}
           <span class="glyphicon glyphicon-file"></span>
         </a>
         <div class="recent-transaction" ng-if="isNoRecentDate">
-          <span translate>Not Applicable</span>
+          <span translate>n/a</span>
         </div>
 
       </div>
-      <div class="col-xs-1" ng-show="!isEditable()"></div>
+      <!--Active-->
       <div class="col-xs-1 text-center text-vertical-center">
           <div class="glyphicon glyphicon-ok" ng-show="status"></div>
       </div>
-      <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
-        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
-          <span class="glyphicon glyphicon-edit"></span>
-        </button>
+      <!--Edit-->
+      <div class="col-xs-2 icon-padding-right edit-column" ng-show="isEditable()">
+        <button ng-hide="editMode" class="btn-unstyle" ng-click="editMode = true"><span class="glyphicon glyphicon-pencil"></span><span translate>Edit</span></button>
+        <button ng-show="editMode" class="btn-unstyle" ng-click="save()" translate>Save | </button>
+        <button ng-show="editMode" class="btn-unstyle cancel" ng-click="cancel()" translate>Cancel</button>
       </div>
     </div>
+
+    <!--Add/Edit enabled, edit mode-->
+    <form class="row" ng-show="isEditable() && editMode">
+      <!--Bank Name-->
+      <div class="col-xs-3 text-left no-left-padding text-vertical-center"
+           style="padding-left: 15px">
+        <input class="inline-edit-select" type="text" ng-model="account.AchBankName" placeholder="account.AchBankName" ng-required/>
+      </div>
+      <!--Account Number-->
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div>******{{account.AchAccountNumberLast4}}</div>
+      </div>
+      <!--Routing Number-->
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div>{{routingNumberDisplay}}</div>
+      </div>
+      <!--Recent Transaction-->
+      <div class="col-xs-2 text-center text-vertical-center">
+        <a class="recent-transaction transaction-date" ng-click="generateReceipt()" ng-if="isRecentDate">
+          {{RecentTransaction}}
+          <span class="glyphicon glyphicon-file"></span>
+        </a>
+        <div class="recent-transaction" ng-if="isNoRecentDate">
+          <span translate>n/a</span>
+        </div>
+
+      </div>
+      <!--Active-->
+      <div class="col-xs-1 text-center text-vertical-center">
+        <input type="checkbox" id="active" ng-model="account.IsActive" ng-disabled="account.IsDefaultDisbursement || account.IsDefaultPayment"/>
+        <label class="checkbox-img small" for="active"></label>
+      </div>
+      <!--Cancel/Save-->
+      <div class="col-xs-2 icon-padding-right" ng-show="isEditable()">
+        <button ng-hide="editMode" class="btn-unstyle" ng-click="edit()"><span class="glyphicon glyphicon-pencil"></span><span translate>Edit</span></button>
+        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="cancel()" translate>Cancel</button>
+        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle save-edit" ng-click="save()" translate>Save</button>
+      </div>
+    </form>
 
     <!--The following allows for the re-spacing when recent transactions is hidden.
     This can be removed as soon as recent transactions goes live-->
     <div class="row" ng-show="!isEditable()">
-      <div class="col-xs-1 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="defaultForDisbursement"></div>
-      </div>
-      <div class="col-xs-15 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="defaultForBilling"></div>
-      </div>
-      <div class="col-xs-3 text-left no-left-padding text-vertical-center"
+      <div class="col-xs-4 text-left no-left-padding text-vertical-center"
            style="padding-left: 15px">
         <div >{{ account.AchBankName }}</div>
       </div>
@@ -56,15 +88,15 @@
       <div class="col-xs-2 text-center text-vertical-center">
         <div>******{{account.AchAccountNumberLast4}}</div>
       </div>
-      <div class="col-xs-15 text-center text-vertical-center">
+      <div class="col-xs-3 text-center text-vertical-center">
         <div>{{routingNumberDisplay}}</div>
       </div>
-      <div class="col-xs-2 text-center text-vertical-center">
+      <div class="col-xs-1 text-center text-vertical-center">
         <div class="glyphicon glyphicon-ok" ng-show="status"></div>
       </div>
       <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
         <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="glyphicon glyphicon-pencil"></span>
         </button>
       </div>
     </div>
