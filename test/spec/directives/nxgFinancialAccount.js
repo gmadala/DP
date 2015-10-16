@@ -16,16 +16,17 @@ describe('Directive: nxgFinancialAccount', function () {
     User,
     iScope,
     account,
+    transaction,
+    undefinedTransaction,
     editedBankAccount;
 
   function createIsolateScope() {
     element = $compile(element)(scope);
     scope.$digest();
-
     iScope = element.isolateScope();
   }
 
-  beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_ ,_User_) {
+  beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_, _gettext_, _gettextCatalog_,  _User_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     $dialog = _$dialog_;
@@ -64,16 +65,25 @@ describe('Directive: nxgFinancialAccount', function () {
       "AllowPaymentByAch": true
     };
 
+    transaction = {
+      FinancialTransactionId: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3',
+      MaxDate: '2015-06-13'
+    };
+    undefinedTransaction :undefined;
     scope = $rootScope.$new();
 
     scope.account = account;
     scope.disbursementAccount = disbursementAccount;
     scope.billingAccount = billingAccount;
-    scope.isStakeholderActive=true;
+    scope.isStakeholderActive = true;
     scope.isUnitedStates = true;
+    scope.transaction = transaction;
 
     element = angular.element(
-      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +
+      ' billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"' +
+      ' is-united-states="isUnitedStates" recent-transaction="transaction">' +
+      '</nxg-financial-account>');
 
     createIsolateScope();
     expect(iScope).toBeDefined();
@@ -178,7 +188,10 @@ describe('Directive: nxgFinancialAccount', function () {
 
     scope.isUnitedStates = false;
     element = angular.element(
-      '<nxg-financial-account account="account" disbursement-account="disbursementAccount" billing-account="billingAccount" is-stakeholder-active="isStakeholderActive" is-united-states="isUnitedStates"></nxg-financial-account>');
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +
+      ' billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"' +
+      ' is-united-states="isUnitedStates" recent-transaction="transaction">' +
+      '</nxg-financial-account>');
     createIsolateScope();
 
     expect(iScope.routingNumberDisplay).toBe('56789-234');
@@ -191,4 +204,17 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(User.refreshInfo).toHaveBeenCalled();
   });
+
+  it('should display n/a for recent transaction date.', function() {
+    element = angular.element(
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +
+      ' billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"' +
+      ' is-united-states="isUnitedStates" recent-transaction="undefinedTransaction">' +
+      '</nxg-financial-account>');
+    createIsolateScope();
+    expect(iScope.recentTransactionDate).toBe('n/a');
+
+  });
+
+
 });

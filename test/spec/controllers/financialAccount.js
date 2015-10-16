@@ -299,7 +299,7 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.tosVisited).toBe(false);
     });
 
-    it('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
+    xit('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
       spyOn(scope, 'visitTOS').and.callThrough();
 
       scope.visitTOS();
@@ -320,7 +320,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           $valid: true
         };
 
-        scope.account.TOSAcceptanceFlag = true;
+        scope.agree = true;
       });
 
       it('should not close if the form is not valid', function () {
@@ -448,26 +448,14 @@ describe('Controller: FinancialAccountCtrl', function () {
         expect(scope.account.AccountName).toBe('Chase Bank');
       });
 
-      it('should not close if TOSAcceptance flag is not true', function () {
-        spyOn(dialog, 'close').and.callThrough();
-
-        scope.account.TOSAcceptanceFlag = false;
-
+      it('should save add bank account.', function () {
         scope.confirmRequest();
         scope.$apply();
-
-        expect(dialog.close).not.toHaveBeenCalled();
-      });
-
-      it('should close if TOSAcceptance flag is true', function () {
-        spyOn(dialog, 'close').and.callThrough();
-
-        scope.account.TOSAcceptanceFlag = true;
-
-        scope.confirmRequest();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
         scope.$apply();
-
-        expect(dialog.close).toHaveBeenCalled();
+        spyOn(scope, 'showSuccessMessage').and.callThrough();
+        scope.showSuccessMessage();
+        expect(scope.showSuccessMessage).toHaveBeenCalled();
       });
 
       it('should fire a metric if add is successful', function() {

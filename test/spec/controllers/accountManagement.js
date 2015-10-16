@@ -331,7 +331,8 @@ describe('Controller: AccountManagementCtrl', function () {
 
         expect(UserMock.refreshInfo).toHaveBeenCalled();
       });
-      it('should display recent transaction date for the bank account'), function(){
+      it('should display recent transaction date for the bank account only for Dealers'), function(){
+        spyOn(scope, 'isDealer').and.returnValue(true);
         spyOn(AccountManagementMock, 'getTransactionDate').and.callThrough();
         expect(AccountManagementMock.getTransactionDate()).toHaveBeenCalled();
       }

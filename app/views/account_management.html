@@ -24,16 +24,18 @@
     </div>
 
     <!--Financial Account information display-->
-    <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true">
-      <nxg-financial-account account="account"
-                             disbursement-account="financial.data.disbursementAccount"
-                             billing-account="financial.data.billingAccount"
-                             update-billing-account="updateBillingAccount(billingAccountId)"
-                             update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
-                             is-stakeholder-active="business.data.isStakeholderActive"
-                             is-united-states="isUnitedStates"
-                             recent-transaction="getLatestTransaction(account.BankAccountId)" >
-      </nxg-financial-account>
+    <div class="bank-accounts-container">
+      <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true">
+        <nxg-financial-account account="account"
+                               disbursement-account="financial.data.disbursementAccount"
+                               billing-account="financial.data.billingAccount"
+                               update-billing-account="updateBillingAccount(billingAccountId)"
+                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               is-stakeholder-active="business.data.isStakeholderActive"
+                               is-united-states="isUnitedStates"
+                               recent-transaction="getLatestTransaction(account.BankAccountId)" >
+        </nxg-financial-account>
+      </div>
     </div>
 
     <!--Default accounts display-->
@@ -41,20 +43,20 @@
       <div class="col-xs-2"><label for="defaultDeposit" translate>Default Deposit Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultDeposit.BankAccountName }}
+          {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultDeposit"
                   ng-model="defaultDeposit"
-                  ng-options="account.BankAccountName for account in financial.data.bankAccounts"
+                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAccounts"
                   required>
           </select>
         </div>
       </div>
       <div class="col-xs-1">
         <button class="btn-help btn-help-adjust inline-row"
-                tooltip-placement="left"
-                tooltip-trigger="focus"
+                tooltip-placement="right"
+                tooltip-trigger="mouseenter"
                 tooltip-html="true"
                 tooltip-html-unsafe="{{ 'This account will be used for all system-generated deposits, including automatic payout of unapplied funds.' | translate }}"
                 tooltip-animation="true">
@@ -64,20 +66,20 @@
       <div class="col-xs-2"><label for="defaultPayment" translate>Default Payment Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultPayment.BankAccountName }}
+          {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultPayment"
                   ng-model="defaultPayment"
-                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.bankAccounts"
+                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAccounts"
                   required>
           </select>
         </div>
       </div>
       <div class="col-xs-1">
         <button class="btn-help btn-help-adjust inline-row"
-                tooltip-placement="left"
-                tooltip-trigger="focus"
+                tooltip-placement="right"
+                tooltip-trigger="mouseenter"
                 tooltip-html="true"
                 tooltip-html-unsafe="{{ 'This account will be used for all system-generated payments.  When making or scheduling payments online, you can select any active account.' | translate }}"
                 tooltip-animation="true">
@@ -85,7 +87,7 @@
         </button>
       </div>
       <div class="col-xs-2 icon-padding-right edit-column" ng-show="!financial.data.singleAccount">
-        <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span translate>Edit</span></button>
+        <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
         <button ng-show="editDefaultAccount" class="btn-unstyle" ng-click="financial.save()" translate>Save | </button>
         <button ng-show="editDefaultAccount" class="btn-unstyle cancel" ng-click="financial.cancel()" translate>Cancel</button>
       </div>
@@ -253,7 +255,7 @@
               <div class="col-xs-2">
                 <button class="btn-help btn-help-adjust"
                         tooltip-placement="left"
-                        tooltip-trigger="focus"
+                        tooltip-trigger="mouseenter"
                         tooltip-html="true"
                         tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                         tooltip-animation="true">
@@ -270,7 +272,7 @@
               <div class="col-xs-2">
                 <button class="btn-help"
                         tooltip-placement="left"
-                        tooltip-trigger="focus"
+                        tooltip-trigger="mouseenter"
                         tooltip-html="true"
                         tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                         tooltip-animation="true">

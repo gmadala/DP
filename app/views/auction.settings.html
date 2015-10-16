@@ -36,7 +36,7 @@
                 <button class="btn-help"
                         id="password-help-tooltip"
                         tooltip-placement="right"
-                        tooltip-trigger="click"
+                        tooltip-trigger="mouseenter"
                         tooltip-html="true"
                         tooltip-html-unsafe="{{ '<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>' | translate }}"
                         tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
@@ -224,7 +224,7 @@
               <div class="col-xs-2">
                 <button class="btn-help btn-help-adjust"
                   tooltip-placement="right"
-                  tooltip-trigger="click"
+                  tooltip-trigger="mouseenter"
                   tooltip-html="true"
                   tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                   tooltip-animation="true">
@@ -242,7 +242,7 @@
                 <button class="btn-help"
                   ng-show="title.data.addresses.length == 0"
                   tooltip-placement="right"
-                  tooltip-trigger="click"
+                  tooltip-trigger="mouseenter"
                   tooltip-html="true"
                   tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                   tooltip-animation="true"><span nxg-icon="icon-help"></span></button>

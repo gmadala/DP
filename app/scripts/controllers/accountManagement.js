@@ -19,15 +19,15 @@ angular.module('nextgearWebApp')
     $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ?  User.getFeatures().editBankAccount.enabled :  true;
     $scope.editDefaultAccount = false;
 
-    /**
-     * retrieve the latest transaction date
-     **/
-    AccountManagement.getTransactionDate().then(function(results){
-      $scope.recentTransactions =  results;
-    });
 
+    //to retreive the latest transaction date
+    if($scope.isDealer) {
+      AccountManagement.getTransactionDate().then(function (results) {
+        $scope.recentTransactions = results;
+      });
+    }
     $scope.getLatestTransaction = function(bankAccountId) {
-       return _.find($scope.recentTransactions, function(recentTransaction) {
+      return _.find($scope.recentTransactions, function(recentTransaction) {
         return recentTransaction.BankAccountId === bankAccountId;
       });
     };
@@ -276,7 +276,10 @@ angular.module('nextgearWebApp')
           return defaultBilling ? defaultBilling.BankAccountName : null;
         }
 
-
+        /**
+         * gets the account object for the default accounts for payment and deposit
+         * @type {Mixed}
+         */
         $scope.defaultPayment = _.find(results.BankAccounts, function(account){
           return account.BankAccountId === results.DefaultBillingBankAccountId;
         });
@@ -285,6 +288,14 @@ angular.module('nextgearWebApp')
           return account.BankAccountId === results.DefaultDisbursementBankAccountId;
         });
 
+        function getActiveAccounts(accounts){
+          var activeAccounts =  _.filter(accounts, function(account) {
+            return (account.IsActive === true);
+          });
+
+          return activeAccounts;
+        }
+
         var dirtyPayment = null;
         var dirtyDeposit = null;
 
@@ -292,6 +303,7 @@ angular.module('nextgearWebApp')
         $scope.financial = {
           data: {
             bankAccounts: results.BankAccounts,
+            getActiveAccounts: getActiveAccounts(results.BankAccounts),
             selectedAccount: null,
             selectedForPayment: null,
             selectedForDeposit: null,
@@ -315,13 +327,22 @@ angular.module('nextgearWebApp')
           save: function(){
             AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId).then(function(account){
               account.IsDefaultDisbursement = true;
-              AccountManagement.updateBankAccount(account);
+              AccountManagement.updateBankAccount(account).then(function(response){
+                if(response.success === true){
+                  $scope.editDefaultAccount = false;
+                }
+              });
             });
-            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId).then(function(account){
-              account.IsDefaultPayment = true;
-              AccountManagement.updateBankAccount(account);
-            });
-            $scope.editDefaultAccount = false;
+            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)
+              .then(function(account){
+                account.IsDefaultPayment = true;
+                return AccountManagement.updateBankAccount(account);
+              })
+              .then(function(response) {
+                if (response.success === true) {
+                  $scope.editDefaultAccount = false;
+                }
+              });
           },
           isDirty: function() {
             return $scope.financialSettings.$dirty;

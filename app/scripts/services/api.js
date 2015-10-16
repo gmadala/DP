@@ -65,7 +65,7 @@ angular.module('nextgearWebApp')
         authToken = authData.Token;
         sessionHasTimedOut = false;
         // set a default Authorization header with the authentication token
-        $http.defaults.headers.common.Authorization = 'CT ' + authToken;
+        $http.defaults.headers.common.Authorization =  authToken;
       },
       resetAuth: function() {
         // clear saved token
