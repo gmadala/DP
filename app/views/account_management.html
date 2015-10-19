@@ -7,7 +7,7 @@
       </div>
     </h2>
 
-    <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled">
+    <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive">
       <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
       <h6 class="col-xs-2" translate>Account Number</h6>
       <h6 class="col-xs-2" translate>{{financial.data.routingNumberLabel}}</h6>
@@ -16,19 +16,30 @@
     </div>
     <!--The following allows for the re-spacing when recent transactions is hidden.
    This can be removed as soon as recent transactions goes live-->
-    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled">
+    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled || !business.data.isStakeholderActive">
       <h6 class="col-xs-4 left-align left-padding" translate>Bank Name</h6>
-      <h6 class="col-xs-2" translate>Account Number</h6>
-      <h6 class="col-xs-2" translate>{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-3" translate>Account Number</h6>
+      <h6 class="col-xs-3" translate>{{financial.data.routingNumberLabel}}</h6>
       <h6 class="col-xs-1" translate>Active</h6>
     </div>
 
     <!--Financial Account information display-->
     <div class="bank-accounts-container">
-      <div ng-repeat="account in financial.data.bankAccounts | orderBy:'IsActive':true">
+      <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'recentTransactionDate'">
         <nxg-financial-account account="account"
-                               disbursement-account="financial.data.disbursementAccount"
-                               billing-account="financial.data.billingAccount"
+                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
+                               billing-account="financial.data.billingAccount.BankAccountId"
+                               update-billing-account="updateBillingAccount(billingAccountId)"
+                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               is-stakeholder-active="business.data.isStakeholderActive"
+                               is-united-states="isUnitedStates"
+                               recent-transaction="getLatestTransaction(account.BankAccountId)" >
+        </nxg-financial-account>
+      </div>
+      <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'recentTransactionDate'">
+        <nxg-financial-account account="account"
+                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
+                               billing-account="financial.data.billingAccount.BankAccountId"
                                update-billing-account="updateBillingAccount(billingAccountId)"
                                update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
                                is-stakeholder-active="business.data.isStakeholderActive"
@@ -48,7 +59,7 @@
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultDeposit"
                   ng-model="defaultDeposit"
-                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAccounts"
+                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
                   required>
           </select>
         </div>
@@ -71,7 +82,7 @@
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultPayment"
                   ng-model="defaultPayment"
-                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAccounts"
+                  ng-options="account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
                   required>
           </select>
         </div>
@@ -86,7 +97,7 @@
           <span nxg-icon="icon-help"></span>
         </button>
       </div>
-      <div class="col-xs-2 icon-padding-right edit-column" ng-show="!financial.data.singleAccount">
+      <div class="col-xs-2 icon-padding-right edit-column" ng-show="!financial.data.singleAccount && editBankAccountEnabled">
         <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
         <button ng-show="editDefaultAccount" class="btn-unstyle" ng-click="financial.save()" translate>Save | </button>
         <button ng-show="editDefaultAccount" class="btn-unstyle cancel" ng-click="financial.cancel()" translate>Cancel</button>

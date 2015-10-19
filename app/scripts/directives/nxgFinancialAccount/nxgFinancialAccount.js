@@ -49,57 +49,26 @@
       scope.generateReceipt = generateReceipt;
       scope.editMode = false;
 
-      var prv = {
-        edit: function() {
-          this.dirtyData = angular.copy(this.data);
-          this.editMode = true;
-        },
-        cancel: function() {
-          this.dirtyData = this.validation = null;
-          this.editMode = false;
-          this.editable = false;
-        },
-        save: function() {
-          if (!this.validate()) {
-            return false;
-          }
-          if (!this.isDirty()) {
-            this.cancel();
-            return false;
-          }
-          return true;
-        },
-        saveSuccess: function() {
-          this.data = this.dirtyData;
-          this.dirtyData = this.validation = null;
-          this.editable = false;
-        }
-      };
-
-      var dirtyBankName = null;
-      var dirtyStatus = null;
-      scope.edit = function(){
+      scope.dirtyBankName = null;
+      scope.dirtyStatus = null;
+      scope.editAccount = function(){
         scope.editMode=true;
-        dirtyBankName = scope.bankName;
-        dirtyStatus = scope.status;
+        scope.dirtyBankName = getBankName();
+        scope.dirtyStatus = getStatus();
       };
-      scope.cancel = function(){
+      scope.cancelAccount = function(){
         scope.editMode=false;
-        scope.bankName = dirtyBankName;
-        scope.status = dirtyStatus;
+        scope.bankName = scope.dirtyBankName;
+        scope.status = scope.dirtyStatus;
       };
-      scope.save = function(){
+      scope.saveAccount = function(){
         AccountManagement.getBankAccount(scope.account.BankAccountId)
           .then(function (bankAccount){
-            bankAccount.IsActive = scope.status;
-            bankAccount.BankName = scope.bankName;
+            bankAccount.IsActive = getStatus();
+            bankAccount.BankName = getBankName();
             return AccountManagement.updateBankAccount(bankAccount);
-          })
-          .then(function (result){
-            if(result.success === true){
-              scope.editMode=false;
-            }
           });
+        scope.editMode = false;
       };
 
       function isRecentDate(){
