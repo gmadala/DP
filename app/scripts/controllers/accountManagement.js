@@ -219,11 +219,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               controller: 'ConfirmCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function (result) {
-              if (result) {
-                $scope.brand.dirtyData.autoPayEnabled = true;
-              } else {
-                $scope.brand.dirtyData.autoPayEnabled = false;
-              }
+              $scope.brand.dirtyData.autoPayEnabled = !!result;
             });
           },
           confirmDisable: function () {
@@ -235,11 +231,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               controller: 'ConfirmCtrl'
             };
             $dialog.dialog(dialogOptions).open().then(function (result) {
-              if (result) {
-                $scope.brand.dirtyData.autoPayEnabled = false;
-              } else {
-                $scope.brand.dirtyData.autoPayEnabled = true;
-              }
+              $scope.brand.dirtyData.autoPayEnabled = !result;
             });
           },
           isEditable: function () {
@@ -446,8 +438,6 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
           }
         }
       };
-
-      console.log($scope.financial.data);
 
       var titleAddresses = Addresses.getTitleAddresses();
       /** TITLE SETTINGS **/

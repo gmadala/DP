@@ -1,7 +1,7 @@
 <div ng-if="displayed">
   <div class="well-item bordered financial-account">
     <!--Add/Edit Enabled, view mode-->
-    <div class="row" ng-show="isEditable()">
+    <div class="row " ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
       <!--Bank Name-->
       <div class="col-xs-3 text-left no-left-padding text-vertical-center"
            style="padding-left: 15px">
@@ -28,10 +28,29 @@
       </div>
       <!--Active-->
       <div class="col-xs-1 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="status && !editMode"></div>
+        <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
         <div ng-show="editMode">
-          <input type="checkbox" id="active" ng-model="account.IsActive" ng-disabled="defaultForDisbursement || defaultForBilling"/>
-          <label class="checkbox-img small" for="active"></label>
+          <div ng-show="defaultForDisbursement || defaultForBilling">
+            <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
+                   ng-model="account.IsActive"
+                   ng-disabled="defaultForDisbursement || defaultForBilling"/>
+            <label class="checkbox-img small" for="{{ account.BankAccountId }}"
+                   ng-show="defaultForDisbursement || defaultForBilling"
+                   tooltip-placement="right"
+                   tooltip-trigger="mouseenter"
+                   tooltip-html="true"
+                   tooltip-html-unsafe="{{ 'Accounts that are used as default for deposits and payments can not be deactivated' | translate }}"
+                   tooltip-animation="true">
+            </label>
+          </div>
+          <div ng-hide="defaultForDisbursement || defaultForBilling">
+            <input type="checkbox" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
+                   ng-model="account.IsActive" ng-disabled="defaultForDisbursement || defaultForBilling"/>
+            <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}"
+                   ng-hide="defaultForDisbursement || defaultForBilling">
+            </label>
+          </div>
+
         </div>
       </div>
       <!--Edit-->

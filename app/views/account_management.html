@@ -25,7 +25,7 @@
 
     <!--Financial Account information display-->
     <div class="bank-accounts-container">
-      <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'recentTransactionDate'">
+      <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
                                disbursement-account="financial.data.disbursementAccount.BankAccountId"
                                billing-account="financial.data.billingAccount.BankAccountId"
@@ -36,7 +36,7 @@
                                recent-transaction="getLatestTransaction(account.BankAccountId)" >
         </nxg-financial-account>
       </div>
-      <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'recentTransactionDate'">
+      <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
                                disbursement-account="financial.data.disbursementAccount.BankAccountId"
                                billing-account="financial.data.billingAccount.BankAccountId"
@@ -99,8 +99,8 @@
       </div>
       <div class="col-xs-2 icon-padding-right edit-column" ng-show="!financial.data.singleAccount && editBankAccountEnabled">
         <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
-        <button ng-show="editDefaultAccount" class="btn-unstyle" ng-click="financial.save()" translate>Save | </button>
-        <button ng-show="editDefaultAccount" class="btn-unstyle cancel" ng-click="financial.cancel()" translate>Cancel</button>
+        <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="financial.cancel()" translate>Cancel</button>
+        <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle save-edit" ng-click="financial.save()" translate>Save</button>
       </div>
     </div>
   </section>

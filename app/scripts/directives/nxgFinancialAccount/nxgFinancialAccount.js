@@ -43,8 +43,6 @@
       scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
-      scope.isRecentDate = isRecentDate();
-      scope.isNoRecentDate = isNoRecentDate();
       scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
       scope.generateReceipt = generateReceipt;
       scope.editMode = false;
@@ -71,15 +69,6 @@
         scope.editMode = false;
       };
 
-      function isRecentDate(){
-        if(scope.recentTransaction !== undefined){
-          scope.RecentTransaction = moment(scope.recentTransaction.MaxDate).format('YYYY-MM-DD');
-          return true;
-        } else {
-          return false;
-        }
-      }
-
       scope.recentTransactionExists = recentTransactionExists();
 
       scope.recentTransactionId = '';
@@ -87,14 +76,6 @@
       if (scope.recentTransactionExists) {
         scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
         scope.recentTransactionDate = $filter('moment')(scope.recentTransaction.MaxDate);
-      }
-
-      function isNoRecentDate(){
-        if(scope.recentTransaction === undefined) {
-          return true;
-        } else {
-          return false;
-        }
       }
 
       scope.generateReceipt = generateReceipt;
