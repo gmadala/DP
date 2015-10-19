@@ -7,7 +7,7 @@
       </div>
     </h2>
 
-    <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive">
+    <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
       <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
       <h6 class="col-xs-2" translate>Account Number</h6>
       <h6 class="col-xs-2" translate>{{financial.data.routingNumberLabel}}</h6>
@@ -16,7 +16,7 @@
     </div>
     <!--The following allows for the re-spacing when recent transactions is hidden.
    This can be removed as soon as recent transactions goes live-->
-    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled || !business.data.isStakeholderActive">
+    <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled || !business.data.isStakeholderActive || !isUnitedStates">
       <h6 class="col-xs-4 left-align left-padding" translate>Bank Name</h6>
       <h6 class="col-xs-3" translate>Account Number</h6>
       <h6 class="col-xs-3" translate>{{financial.data.routingNumberLabel}}</h6>
@@ -182,7 +182,7 @@
               </div>
               <div class="col-xs-5">
                 <div class="btn-help btn-help-adjust"
-                        tooltip-placement="left"
+                        tooltip-placement="right"
                         tooltip-trigger="mouseenter"
                         tooltip-html="true"
                         tooltip-html-unsafe="{{ 'Enhanced Registration will result in all account access being restricted to users with a PIN.' | translate }}"
