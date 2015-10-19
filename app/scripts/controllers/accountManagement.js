@@ -328,23 +328,22 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
           $scope.editDefaultAccount = false;
         },
         save: function () {
-          AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId).then(function (account) {
-            account.IsDefaultDisbursement = true;
-            AccountManagement.updateBankAccount(account).then(function (response) {
-              if (response.success === true) {
-                $scope.editDefaultAccount = false;
-              }
-            });
-          });
-          AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)
-            .then(function (account) {
-              account.IsDefaultPayment = true;
-              return AccountManagement.updateBankAccount(account);
+          var accounts;
+          $q.all([AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId),
+            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)])
+            .then(function (responses) {
+              accounts = responses;
+              accounts[0].IsDefaultDisbursement = true;
+              accounts[1].IsDefaultPayment = true;
             })
-            .then(function (response) {
-              if (response.success === true) {
-                $scope.editDefaultAccount = false;
-              }
+            .then(function () {
+              return AccountManagement.updateBankAccount(accounts[0]);
+            })
+            .then(function () {
+              return AccountManagement.updateBankAccount(accounts[1]);
+            })
+            .then(function () {
+              $scope.editDefaultAccount = false;
             });
         },
         isDirty: function () {
