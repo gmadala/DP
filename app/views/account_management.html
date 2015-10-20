@@ -33,6 +33,7 @@
                                update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
+                               get-financial-data="getFinancialData()"
                                recent-transaction="getLatestTransaction(account.BankAccountId)" >
         </nxg-financial-account>
       </div>
@@ -44,7 +45,8 @@
                                update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
-                               recent-transaction="getLatestTransaction(account.BankAccountId)" >
+                               get-financial-data="getFinancialData()"
+                               recent-transaction="getLatestTransaction(account.BankAccountId)">
         </nxg-financial-account>
       </div>
     </div>
@@ -97,7 +99,7 @@
           <span nxg-icon="icon-help"></span>
         </button>
       </div>
-      <div class="col-xs-2 icon-padding-right edit-column" ng-show="!financial.data.singleAccount && editBankAccountEnabled">
+      <div class="col-xs-2 icon-padding-right edit-column" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
         <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
         <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="financial.cancel()" translate>Cancel</button>
         <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle save-edit" ng-click="financial.save()" translate>Save</button>

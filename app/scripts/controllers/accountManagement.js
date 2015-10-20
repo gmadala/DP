@@ -18,6 +18,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : true;
   $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
   $scope.editDefaultAccount = false;
+  $scope.getFinancialData = getFinancialData;
 
 
   //to retreive the latest transaction date
@@ -110,6 +111,21 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       financialData.billingAccount = billingAccountId;
     }
   };
+
+  function getFinancialData(){
+    AccountManagement.getFinancialAccountData().then(function(result){
+      $scope.financial.data.getActiveAchAccounts = getActiveAchAccounts(result.BankAccounts);
+    });
+  }
+
+  function getActiveAchAccounts(accounts) {
+    var activeAccounts = _.filter(accounts, function (account) {
+      return (account.IsActive === true);
+    });
+    return _.filter(activeAccounts, function (account) {
+      return (account.AllowPaymentByAch === true);
+    });
+  }
 
   getData.then(function (results) {
       $scope.loading = true;
@@ -276,15 +292,6 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
         return account.BankAccountId === results.DefaultDisbursementBankAccountId;
       });
 
-      function getActiveAchAccounts(accounts) {
-        var activeAccounts = _.filter(accounts, function (account) {
-          return (account.IsActive === true);
-        });
-        return _.filter(activeAccounts, function (account) {
-          return (account.AllowPaymentByAch === true);
-        });
-      }
-
       function getActiveBankAccounts(accounts) {
         return _.filter(accounts, function (account) {
           return (account.IsActive === true);
@@ -310,7 +317,6 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
           selectedAccount: null,
           selectedForPayment: null,
           selectedForDeposit: null,
-          singleAccount: results.BankAccounts.length === 1,
           routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true),
           disbursementAccount: getDefaultDisbursement(results.DefaultDisbursementBankAccountId, results.BankAccounts),
           billingAccount: getDefaultBilling(results.DefaultBillingBankAccountId, results.BankAccounts)

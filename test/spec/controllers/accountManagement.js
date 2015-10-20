@@ -148,58 +148,58 @@ describe('Controller: AccountManagementCtrl', function () {
   }));
 
   describe('business', function() {
-    xit('business should exist on scope', function () {
+    it('business should exist on scope', function () {
       expect(scope.business.data).toBeDefined();
     });
 
-    xit('edit function should be defined for business', function() {
+    it('edit function should be defined for business', function() {
       expect(scope.business.edit).toBeDefined();
     });
 
-    xit('cancel function should be defined for business', function() {
+    it('cancel function should be defined for business', function() {
       expect(scope.business.cancel).toBeDefined();
     });
 
-    xit('save function should be defined for business', function() {
+    it('save function should be defined for business', function() {
       expect(scope.business.save).toBeDefined();
     });
 
-    xit('calling edit() on the business should set the business\'s editable property to true', function() {
+    it('calling edit() on the business should set the business\'s editable property to true', function() {
       scope.business.edit();
       expect(scope.business.dirtyData).toEqual(scope.business.data);
       expect(scope.business.editable).toBe(true);
     });
 
-    xit('calling cancel() on the business should set the business\'s editable property to false', function() {
+    it('calling cancel() on the business should set the business\'s editable property to false', function() {
       scope.business.cancel();
       expect(scope.business.dirtyData).toBe(null);
       expect(scope.business.editable).toBe(false);
     });
 
-    xit('autoPay should be displayed only for US Dealers', function () {
+    it('autoPay should be displayed only for US Dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.isUnitedStates = true;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
-    xit('autoPay should be editable only for active stakeholders', function () {
+    it('autoPay should be editable only for active stakeholders', function () {
 
       scope.brand.editable = true;
 
@@ -224,45 +224,45 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.brand.autoPay.isEditable()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for quick buyers', function () {
+    it('autoPay should be hidden for quick buyers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.isQuickBuyer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.isQuickBuyer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.isQuickBuyer = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
-    });
-
-    // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
-    xit('autoPay should be hidden', function () {
       expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for non-auto ACH dealers', function () {
+    // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
+    it('autoPay should be hidden', function () {
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
+    });
+
+    it('autoPay should be hidden for non-auto ACH dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.useAutoACH = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.useAutoACH = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.useAutoACH = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     describe('financial', function() {
@@ -270,7 +270,7 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.financial.data.bankAccounts = [];
       });
 
-      xit('add bank account should be enabled only for active stakeholders', function () {
+      it('add bank account should be enabled only for active stakeholders', function () {
 
         // TODO modify all the expectations once the add bank account feature is enabled
         scope.business.data.isStakeholderActive = true;
@@ -296,7 +296,7 @@ describe('Controller: AccountManagementCtrl', function () {
 
 
       // TODO modify second expectation to true once add Bank Account is released to Canada.
-      xit('add bank account should be enabled for US only.', function() {
+      it('add bank account should be enabled for US only.', function() {
         scope.business.data.isStakeholderActive = true;
         scope.business.data.isStakeholder = true;
         scope.isUnitedStates = false;
@@ -310,7 +310,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.isAddBankAccountEditable()).toBeTruthy();
       });
 
-      xit('add bank account should update local financial data', function() {
+      it('add bank account should update local financial data', function() {
         spyOn(scope.financial, 'addFinancialAccount').and.callThrough();
 
         scope.financial.addFinancialAccount();
@@ -323,7 +323,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.data.billingAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
       });
 
-      xit('addFinancialAccount should call User.refreshInfo.', function() {
+      it('addFinancialAccount should call User.refreshInfo.', function() {
         spyOn(UserMock, 'refreshInfo').and.callFake(angular.noop);
 
         scope.financial.addFinancialAccount();
@@ -331,7 +331,7 @@ describe('Controller: AccountManagementCtrl', function () {
 
         expect(UserMock.refreshInfo).toHaveBeenCalled();
       });
-      xit('should display recent transaction date for the bank account only for Dealers'), function(){
+      it('should display recent transaction date for the bank account only for Dealers'), function(){
         spyOn(scope, 'isDealer').and.returnValue(true);
         spyOn(AccountManagementMock, 'getTransactionDate').and.callThrough();
         expect(AccountManagementMock.getTransactionDate()).toHaveBeenCalled();
@@ -360,7 +360,7 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.business.edit();
       });
 
-      xit('should not change if not in editing mode', function() {
+      it('should not change if not in editing mode', function() {
         validateResult = false;
 
         spyOn(AccountManagementMock, 'saveBusiness');
@@ -373,23 +373,23 @@ describe('Controller: AccountManagementCtrl', function () {
   });
 
   describe('title', function() {
-    xit('title should exist on scope', function () {
+    it('title should exist on scope', function () {
       expect(scope.title.data).toBeDefined();
     });
 
-    xit('edit function should be defined for title', function() {
+    it('edit function should be defined for title', function() {
       expect(scope.title.edit).toBeDefined();
     });
 
-    xit('cancel function should be defined for title', function() {
+    it('cancel function should be defined for title', function() {
       expect(scope.title.cancel).toBeDefined();
     });
 
-    xit('save function should be defined for title', function() {
+    it('save function should be defined for title', function() {
       expect(scope.title.save).toBeDefined();
     });
 
-    xit('calling edit() on the title should set the title\'s editable property to true', function() {
+    it('calling edit() on the title should set the title\'s editable property to true', function() {
       spyOn(scope.title, 'updateAddressSelection');
       scope.title.edit();
       expect(scope.title.updateAddressSelection).toHaveBeenCalled();
@@ -397,7 +397,7 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.title.editable).toBe(true);
     });
 
-    xit('calling cancel() on the title should set the title\'s editable property to false', function() {
+    it('calling cancel() on the title should set the title\'s editable property to false', function() {
       scope.title.cancel();
       expect(scope.title.dirtyData).toBe(null);
       expect(scope.title.editable).toBe(false);
@@ -429,7 +429,7 @@ describe('Controller: AccountManagementCtrl', function () {
         scope.title.edit();
       });
 
-      xit('should define dirtyData and set editable to false and call updateAddressSelection', function() {
+      it('should define dirtyData and set editable to false and call updateAddressSelection', function() {
         scope.title.save();
 
         expect(scope.title.updateAddressSelection).toHaveBeenCalled();
@@ -437,7 +437,7 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.title.editable).toBe(false);
       });
 
-      xit('should not change if not in editing mode', function() {
+      it('should not change if not in editing mode', function() {
         validateResult = false;
 
         spyOn(AccountManagementMock, 'saveTitleAddress');

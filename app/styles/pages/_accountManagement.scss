@@ -67,3 +67,13 @@
 .is-not-active{
   color: #BBBBBB;
 }
+
+.display-bank-name{
+  max-width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 15px;
+  position: relative;
+}

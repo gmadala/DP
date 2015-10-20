@@ -3,11 +3,17 @@
     <!--Add/Edit Enabled, view mode-->
     <div class="row " ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
       <!--Bank Name-->
-      <div class="col-xs-3 text-left no-left-padding text-vertical-center"
+      <form class="col-xs-3 text-left no-left-padding text-vertical-center" name="bankName"
            style="padding-left: 15px">
-        <div ng-show="!editMode">{{ account.AchBankName }}</div>
-        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="account.AchBankName" placeholder="account.AchBankName" ng-required/>
-      </div>
+        <div class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</div>
+        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="account.AchBankName" id="editBankName" name="editBankName" placeholder="Bank Name" ng-maxlength="43" ng-required/>
+        <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
+          Please enter a bank name.
+        </label>
+        <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.maxlength" translate>
+          Bank names are limited to 43 characters.
+        </label>
+      </form>
       <!--Account Number-->
       <div class="col-xs-2 text-center text-vertical-center">
           <div>******{{account.AchAccountNumberLast4}}</div>
@@ -63,7 +69,7 @@
 
     <!--The following allows for the re-spacing when recent transactions is hidden.
     This can be removed as soon as recent transactions goes live-->
-    <div class="row" ng-show="!isEditable()">
+    <div class="row" ng-show="!isEditable()" ng-class="{'is-not-active': !account.IsActive}">
       <div class="col-xs-4 text-left no-left-padding text-vertical-center"
            style="padding-left: 15px">
         <div >{{ account.AchBankName }}</div>
