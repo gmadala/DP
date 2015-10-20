@@ -48,7 +48,18 @@ angular.module('nextgearWebApp')
               view.start.valueOf() < new Date().valueOf());
 
             // notify that the view has changed
-            $scope.$emit('setDateRange', view.start, moment(view.end).add(1, 'd'));
+            if ($scope.options.defaultView === 'basicWeek') {
+              var startOfWeek = view.start.startOf('week').add(4, 'hours');
+              var endOfWeek = view.end.endOf('week').add(4,'hours');
+              $scope.$emit('setDateRange', startOfWeek.format('YYYY-MM-DD'), endOfWeek.format('YYYY-MM-DD'));
+            } else if ($scope.options.defaultView === 'month') {
+              // super complex calculation to determine the current month.
+              var afterViewStart = view.start.add(20, 'd');
+              var startOfMonth = afterViewStart.startOf('month');
+              var beforeViewEnd = view.end.subtract(20, 'd');
+              var endOfMonth = beforeViewEnd.endOf('month');
+              $scope.$emit('setDateRange', startOfMonth.format('YYYY-MM-DD'), endOfMonth.format('YYYY-MM-DD'));
+            }
 
             // un-escape HTML characters in event title to make HTML formatting & entities work
             // see http://code.google.com/p/fullcalendar/issues/detail?id=152
@@ -89,11 +100,14 @@ angular.module('nextgearWebApp')
               dayEvent.html(dayEvent.text());
             });
             // add styling hook for events that are today
-            if (moment().isSame(event.start, 'day')) {
+            var eventStart = moment(event.start).format('DD-MM-YYYY');
+            var now = moment().format('DD-MM-YYYY');
+            if (now===eventStart) {
               element.addClass('today');
             }
             // add styling hook for events that are overdue
-            if (moment().isAfter(event.start, 'day')) {
+            eventStart = moment(event.start);
+            if (moment().isAfter(eventStart.add(1, 'day'), 'day')) {
               element.addClass('overdue');
             }
 
