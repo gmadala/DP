@@ -41,9 +41,9 @@
     $scope.isTermsConditions = (accountNumber === '');
 
     function AcceptChanges() {
-        $scope.isAddAccount = true;
-        $scope.isTermsConditions = false;
-        $scope.submit = true;
+      $scope.isAddAccount = true;
+      $scope.isTermsConditions = false;
+      $scope.submit = true;
     }
 
     /**
@@ -60,17 +60,6 @@
      */
     function isEditModal() {
       return options.modal === 'edit';
-    }
-
-    /**
-     * Toggles all relevant flags regarding the Terms of Service to true.
-     * @return {void}
-     */
-    function visitTOS() {
-      if (!$scope.tosVisited) {
-        $scope.account.TOSAcceptanceFlag = true;
-      }
-      $scope.tosVisited = true;
     }
 
     /**
@@ -142,7 +131,7 @@
         msg = gettextCatalog.getString('Your account was saved successfully.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
       return $dialog.messageBox(title, msg, buttons).open();
-    }
+    };
 
     /**
      * Closes the dialog.

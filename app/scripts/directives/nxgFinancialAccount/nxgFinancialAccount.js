@@ -31,7 +31,7 @@
 
     function link(scope) {
 
-      gettext('Not Applicable');
+      gettext('n/a');
 
       scope.status = getStatus();
       scope.displayed = isDisplayed();
@@ -46,7 +46,7 @@
       scope.recentTransactionExists = recentTransactionExists();
 
       scope.recentTransactionId = '';
-      scope.recentTransactionDate = gettextCatalog.getString('Not Applicable');
+      scope.recentTransactionDate = gettextCatalog.getString('n/a');
       if (scope.recentTransactionExists) {
         scope.recentTransactionId = scope.recentTransaction.FinancialTransactionId;
         scope.recentTransactionDate = $filter('moment')(scope.recentTransaction.MaxDate);
