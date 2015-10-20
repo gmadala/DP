@@ -72,6 +72,9 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/dealer/recenttransaction').then(function(results){
           return results;
         });
+      },
+      getDealerSummary: function() {
+        return api.request('GET', '/dealer/v1_1/summary');
       }
     };
 
