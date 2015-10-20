@@ -45,37 +45,37 @@
         case prv.profile.LOCAL:
           apiDomain = '';
           ngenDomain = '';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.LOCAL_TEST:
           apiDomain = 'https://test.nextgearcapital.com';
           ngenDomain = 'https://localhost:8080';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.UAT:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://ngen.uat.nextgearcapital.com';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.DEMO:
           apiDomain = 'https://demo.nextgearcapital.com';
-          ngenDomain = 'https://ngen.uat.nextgearcapital.com';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://ngen.dev.nextgearcapital.com';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api.dev.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TRAINING:
           apiDomain = 'https://training.nextgearcapital.com';
-          ngenDomain = 'https://ngen.uat.nextgearcapital.com';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.PRODUCTION:
           apiDomain = 'https://customer.nextgearcapital.com';
-          ngenDomain = 'https://ngen.nextgearcapital.com';
-          config = prv.generateConfig(apiDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
           break;
         default:
           throw 'nxgConfig profile \'' + profile + '\' not found!';
@@ -91,13 +91,12 @@
      * @param timeoutMs
      * @param isDemo
      */
-    function generateConfig(apiDomain, segmentIoKey, timeoutMs, isDemo) {
+    function generateConfig(apiDomain, ngenDomain, segmentIoKey, timeoutMs, isDemo) {
       var configuration;
       configuration = {
-        ngenBase: '',
-        ngenDomain: '',
         apiBase: apiDomain + '/MobileService/api',
         apiDomain: apiDomain,
+        ngenDomain: ngenDomain,
         segmentIoKey: segmentIoKey,
         userVoice: {
           dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
