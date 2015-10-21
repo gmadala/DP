@@ -77,3 +77,7 @@
   line-height: 15px;
   position: relative;
 }
+
+.settings-well [class*="col"].tooltip-fix{
+  position: static;
+}
