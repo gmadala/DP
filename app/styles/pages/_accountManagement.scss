@@ -81,3 +81,7 @@
 .settings-well [class*="col"].tooltip-fix{
   position: static;
 }
+
+button[disabled]{
+  color: #BBBBBB;
+}

@@ -63,7 +63,8 @@
       <div class="col-xs-2 icon-padding-right edit-column" ng-show="isEditable()">
         <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
         <button ng-show="editMode" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="cancelAccount()" translate>Cancel</button>
-        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle save-edit" ng-click="saveAccount()" translate>Save</button>
+        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle save-edit" ng-click="saveAccount()"
+                ng-disabled="bankName.editBankName.$error.maxlength" translate>Save</button>
       </div>
     </div>
 
