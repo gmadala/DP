@@ -22,6 +22,7 @@
         updateDisbursementAccount: '&',
         isStakeholderActive: '=',
         isUnitedStates: '=',
+        getFinancialData: '&',
         recentTransaction: '='
       },
       restrict: 'E'
@@ -34,14 +35,41 @@
       gettext('n/a');
 
       scope.status = getStatus();
+      scope.bankName = getBankName();
       scope.displayed = isDisplayed();
       scope.defaultForBilling = isDefaultForBilling();
       scope.defaultForDisbursement = isDefaultForDisbursement();
       scope.routingNumberLabel = routingNumberFilter('', scope.isUnitedStates, true);
       scope.routingNumberDisplay = routingNumberFilter(scope.account.AchAbaNumber, scope.isUnitedStates, false);
-      scope.editFinancialAccount = editFinancialAccount;
       scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
       scope.isEditable = isEditable;
+      scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
+      scope.generateReceipt = generateReceipt;
+      scope.editMode = false;
+
+      scope.dirtyBankName = null;
+      scope.dirtyStatus = null;
+      scope.editAccount = function(){
+        scope.editMode=true;
+        scope.dirtyBankName = getBankName();
+        scope.dirtyStatus = getStatus();
+      };
+      scope.cancelAccount = function(){
+        scope.editMode=false;
+        setBankName(scope.dirtyBankName);
+        setStatus(scope.dirtyStatus);
+      };
+      scope.saveAccount = function(){
+        AccountManagement.getBankAccount(scope.account.BankAccountId)
+          .then(function (bankAccount){
+            bankAccount.IsActive = getStatus();
+            bankAccount.BankName = getBankName();
+            AccountManagement.updateBankAccount(bankAccount).then(function(){
+              scope.getFinancialData({});
+            });
+          });
+        scope.editMode = false;
+      };
 
       scope.recentTransactionExists = recentTransactionExists();
 
@@ -68,6 +96,22 @@
        */
       function getStatus() {
         return scope.account.IsActive || false;
+      }
+
+      function setStatus(newStatus){
+        scope.account.IsActive = newStatus;
+      }
+
+      /**
+       * Provides the bank name for the select account
+       * @returns {string|string|*|string|string}
+       */
+      function getBankName(){
+        return scope.account.AchBankName;
+      }
+
+      function setBankName(newBankName){
+        scope.account.AchBankName = newBankName;
       }
 
       function isDisplayed() {
@@ -101,62 +145,6 @@
       function generateReceipt(){
         var strUrl =  api.contentLink('/receipt/view/' + scope.recentTransactionId + '/Receipt');
         window.open(strUrl, '_blank');
-      }
-
-      /**
-       * Opens the edit bank account modal and processes the user's changes if
-       * a bank account is changed.
-       * @return {void}
-       */
-      function editFinancialAccount() {
-        var dialogOptions = {
-          dialogClass: 'modal',
-          backdrop: true,
-          keyboard: false,
-          backdropClick: false,
-          templateUrl: 'views/modals/financialAccount.html',
-          resolve: {
-            options: function () {
-              var options = {
-                modal: 'edit',
-                defaultForBilling: scope.defaultForBilling,
-                defaultForDisbursement: scope.defaultForDisbursement
-              };
-              return AccountManagement.getBankAccount(scope.account.BankAccountId).then(function (bankAccount) {
-                angular.extend(options, {
-                  account: bankAccount
-                });
-                return options;
-              });
-            }
-          },
-          controller: 'FinancialAccountCtrl'
-        };
-
-        $dialog.dialog(dialogOptions).open()
-          .then(updateLocalFinancialData);
-
-        /**
-         * Helper function: Propogate bank account changes to local data to
-         * keep consistent with endpoint data.
-         * @param  {Object} updatedAccount The edited bank account.
-         * @return {void}
-         */
-        function updateLocalFinancialData (updatedAccount) {
-          if (updatedAccount) {
-            // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
-            User.refreshInfo();
-
-            if (updatedAccount.IsDefaultPayment) {
-              scope.updateBillingAccount({billingAccountId: updatedAccount.AccountId});
-            }
-            if (updatedAccount.IsDefaultDisbursement) {
-              scope.updateDisbursementAccount({disbursementAccountId: updatedAccount.AccountId});
-            }
-            scope.account.AchBankName = updatedAccount.BankName;
-            scope.status = updatedAccount.IsActive;
-          }
-        }
       }
 
       scope.$watch('defaultBillingBankAccountId', function(newVal, oldVal) {

@@ -176,27 +176,27 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.business.editable).toBe(false);
     });
 
-    xit('autoPay should be displayed only for US Dealers', function () {
+    it('autoPay should be displayed only for US Dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.isUnitedStates = true;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     it('autoPay should be editable only for active stakeholders', function () {
@@ -224,22 +224,22 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.brand.autoPay.isEditable()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for quick buyers', function () {
+    it('autoPay should be hidden for quick buyers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.isQuickBuyer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.isQuickBuyer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.isQuickBuyer = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
@@ -247,22 +247,22 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for non-auto ACH dealers', function () {
+    it('autoPay should be hidden for non-auto ACH dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.useAutoACH = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.useAutoACH = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.useAutoACH = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     describe('financial', function() {

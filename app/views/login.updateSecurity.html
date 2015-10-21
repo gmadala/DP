@@ -10,7 +10,7 @@
           <form class="form-block" name="updateSecurity" ng-submit="submitForm()" novalidate>
             <div ng-repeat="question in questions">
               <div class="row">
-                <label class="col-xs-3" translate>Security Question #{{$index+1}}</label>
+                <label class="col-xs-3 custom" translate>Security Question #{{$index+1}}</label>
                 <div class="col-xs-8">
                   <div class="style-select" ng-class="{ 'nxg-invalid': $parent.validity[question.name].$error.required }">
                     <select id="{{question.name}}"
@@ -27,7 +27,7 @@
               </div>
 
               <div class="row" ng-show="$parent.updateSecurity[question.name]">
-                <label class="col-xs-3" translate>Answer</label>
+                <label class="col-xs-3 custom" translate>Answer</label>
                 <div class="col-xs-8">
                   <input type="text" id="{{question.resName}}" name="{{question.resName}}" ng-model="$parent.updateSecurityModel[question.resName]" ng-class="{ 'nxg-invalid': $parent.validity[question.resName].$error.required || $parent.validity[question.resName].$error.maxLength }" required />
                   <label for="{{question.resName}}" class="text-error" ng-show="$parent.validity[question.resName].$error.required" translate>Please enter an answer to the selected security question. </label>

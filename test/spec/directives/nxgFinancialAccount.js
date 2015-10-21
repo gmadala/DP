@@ -198,13 +198,6 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
   });
 
-  it('editFinancialAccount should call User.refreshInfo.', function() {
-    iScope.editFinancialAccount();
-    iScope.$apply();
-
-    expect(User.refreshInfo).toHaveBeenCalled();
-  });
-
   it('should display n/a for recent transaction date.', function() {
     element = angular.element(
       '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +

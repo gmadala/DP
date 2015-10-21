@@ -12,13 +12,13 @@
       </label>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-3 custom">
       <label translate>City</label>
       <input class="full-width" type="text" id="businessSearchModalCity" class="input-medium" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
       <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern" translate>City names must only have letters and spaces.</label>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-3 custom">
       <label translate>State</label>
       <div class="style-select auto">
         <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
