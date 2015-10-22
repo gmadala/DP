@@ -16,8 +16,8 @@
       templateUrl: 'scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html',
       scope: {
         account: '=',
-        defaultDisbursementBankAccountId: '=disbursementAccount',
-        defaultBillingBankAccountId: '=billingAccount',
+        defaultDepositId: '=disbursementAccount',
+        defaultPaymentId: '=billingAccount',
         updateBillingAccount: '&',
         updateDisbursementAccount: '&',
         isStakeholderActive: '=',
@@ -64,9 +64,14 @@
           .then(function (bankAccount){
             bankAccount.IsActive = getStatus();
             bankAccount.BankName = getBankName();
-            AccountManagement.updateBankAccount(bankAccount).then(function(){
-              scope.getFinancialData({});
-            });
+            AccountManagement.updateBankAccount(bankAccount)
+              .then(function(){
+                scope.getFinancialData({});
+              })
+              .catch(function () {
+                setBankName(scope.dirtyBankName);
+                setStatus(scope.dirtyStatus);
+              });
           });
         scope.editMode = false;
       };
@@ -131,7 +136,7 @@
        * @return {Boolean} Account default billing account?
        */
       function isDefaultForBilling() {
-        return scope.account.BankAccountId === scope.defaultBillingBankAccountId;
+        return scope.account.BankAccountId === scope.defaultPaymentId;
       }
 
       /**
@@ -139,7 +144,7 @@
        * @return {Boolean} Account default disbursement account?
        */
       function isDefaultForDisbursement() {
-        return scope.account.BankAccountId === scope.defaultDisbursementBankAccountId;
+        return scope.account.BankAccountId === scope.defaultDepositId;
       }
 
       function generateReceipt(){
@@ -147,15 +152,15 @@
         window.open(strUrl, '_blank');
       }
 
-      scope.$watch('defaultBillingBankAccountId', function(newVal, oldVal) {
+      scope.$watch('defaultPaymentId', function(newVal, oldVal) {
         if (newVal !== oldVal) {
-          scope.defaultForBilling = isDefaultForBilling();
+          scope.defaultDepositId = newVal;
         }
       });
 
-      scope.$watch('defaultDisbursementBankAccountId', function(newVal, oldVal) {
+      scope.$watch('defaultDepositId', function(newVal, oldVal) {
         if (newVal !== oldVal) {
-          scope.defaultForDisbursement = isDefaultForDisbursement();
+          scope.defaultPaymentId = newVal;
         }
       });
     }
