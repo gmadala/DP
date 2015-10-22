@@ -65,7 +65,7 @@
         cubilia Curae; Nam ut sodales ex. Proin ut blandit mauris. Fusce dapibus pellentesque quam, sed congue felis
         sodales et. Ut sit amet tempor ante. Nullam euismod laoreet congue. Cras eget fermentum erat.
       </p>
-</div>
+    </div>
     <div class="modal-footer add-account">
       <div class="cr-inline text-left" style="margin-left:10px;">
         <input type="checkbox" name="terms" id="enableAddAccountTerms" ng-model="agree"/>
@@ -78,7 +78,8 @@
   </section>
 
 <div class="modal-body to-edge" nxg-autofocus ng-show="isAddAccount">
-  <h4 translate class="add-account">Step 2 of 2: Add Your Account</h4>
+  <p class="required-text">* required</p>
+  <h4 translate class="add-account step-two">Step 2 of 2: Add Your Account</h4>
   <form class="modal-inner add-account" name="financialAccountForm">
     <div class="row">
       <div class="col-xs-12 cr-inline">
@@ -92,85 +93,66 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <label for="bankName" translate>Bank Name</label>
+        <label for="bankName" translate>Bank Name *</label>
         <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
-               ng-required="true" ng-class="{ 'nxg-invalid': validity.bankName.$error.required || validity.bankName.$error.pattern }">
-        <label for="bankName" class="text-error" ng-show="validity.bankName.$error.required" translate>
+               ng-required="true" ng-class="{ 'nxg-invalid': financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty}">
+        <label for="bankName" class="text-error" ng-show="financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty" translate>
           Please enter a bank name.
         </label>
       </div>
     </div>
-
-    <!-- EDIT BANK ACCOUNT ONLY -->
-    <div class="small-top-margin smallest-bottom-margin" ng-if="isEditModal">
-      <div class="row">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Account Name</span>
-        </div>
-        <div class="col-xs-7 no-left-padding break-wrap small-right-padding">
-          <span>{{accountNameDisplay}}</span>
-        </div>
-      </div>
-      <div class="row smaller-top-margin">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Account Number</span>
-        </div>
-        <div class="col-xs-7 no-left-padding">
-          <span>{{accountNumberDisplay}}</span>
-        </div>
-      </div>
-      <div class="row smaller-top-margin">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Routing Number</span>
-        </div>
-        <div class="col-xs-7 no-left-padding">
-          <span>{{routingNumberDisplay}}</span>
-        </div>
-      </div>
-    </div>
-    <!-- END EDIT BANK ACCOUNT ONLY -->
-
-    <!-- ADD BANK ACCOUNT ONLY -->
     <div ng-if="isAddModal">
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="accountNumber" translate>Account Number</label>
+          <label for="accountNumber" translate>Account Number *</label>
           <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
                  ng-model="account.AccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.accountNumber.$error.pattern ||
+                 financialAccountForm.accountNumber.$error.required) && financialAccountForm.accountNumber.$dirty}"
                  ng-pattern="accountNumberRegex">
-          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.pattern  &&
+          financialAccountForm.accountNumber.$dirty" translate>
             Account number must only have numbers.
           </label>
-          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.required" translate>
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.required  &&
+          financialAccountForm.accountNumber.$dirty" translate>
             Please enter an account number.
           </label>
         </div>
         <div class="col-xs-6 custom">
-          <label for="confirmAccountNumber" translate>Confirm Account Number</label>
+          <label for="confirmAccountNumber" translate>Confirm Account Number *</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.confirmAccountNumber.$error.required &&
+                 financialAccountForm.confirmAccountNumber.$dirty) ||
+                 ((account.AccountNumber != inputs.confirmAccountNumber) && financialAccountForm.confirmAccountNumber.$dirty)}"
                  ng-paste="$event.preventDefault()">
-          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)" translate>
+          <label for="confirmAccountNumber" class="text-error"
+                 ng-show="!financialAccountForm.confirmAccountNumber.$error.required &&
+                 ((account.AccountNumber != inputs.confirmAccountNumber) &&
+                 financialAccountForm.confirmAccountNumber.$dirty)" translate>
             Does not match with account number.
           </label>
-          <label for=confirmAccountNumber class="text-error" ng-show="validity.confirmAccountNumber.$error.required" translate>
+          <label for=confirmAccountNumber class="text-error" ng-show="financialAccountForm.confirmAccountNumber.$error.required &&
+          financialAccountForm.confirmAccountNumber.$dirty" translate>
             Please confirm the account number.
           </label>
         </div>
       </div>
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="routingNumber" translate>Routing Number</label>
+          <label for="routingNumber" translate>Routing Number *</label>
           <input type="text" id="routingNumber" name="routingNumber" class="input-full" maxlength="9"
                  ng-model="account.RoutingNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.routingNumber.$error.pattern ||
+                 financialAccountForm.routingNumber.$error.required) && financialAccountForm.routingNumber.$dirty}"
                  ng-pattern="routingNumberRegex">
-          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
-            Routing number must only have 9 numbers.
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.pattern &&
+          financialAccountForm.routingNumber.$dirty" translate>
+            Routing number must have 9 digits.
           </label>
-          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.required" translate>
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.required &&
+          financialAccountForm.routingNumber.$dirty" translate>
             Please enter a routing number.
           </label>
         </div>
@@ -189,10 +171,9 @@
       <nxg-address city="true"
                    info="account"
                    state="true"
-                   validity="validity">
+                   validity="financialAccountForm">
       </nxg-address>
     </div>
-    <!-- END ADD BANK ACCOUNT ONLY -->
     <div class="row ng-scope">
       <div class="col-xs-6 custom cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
@@ -211,14 +192,15 @@
         </label>
       </div>
     </div>
-    <!-- END ADD BANK ACCOUNT ONLY -->
   </form>
 </div>
 
 <div class="modal-footer">
   <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>Cancel</button>
-  <button type="submit" id="submitProceed" class="btn-cta cta-primary" ng-click="AcceptChanges()" translate nxg-autofocus ng-show="!submit" ng-disabled="!agree">Proceed to Step 2</button>
-  <button type="submit" id="submitSave" class="btn-cta cta-primary" ng-click="confirmRequest()" translate nxg-autofocus ng-show="submit">Submit</button>
+  <button type="submit" id="submitProceed" class="btn-cta cta-primary" ng-click="AcceptChanges()" translate
+          nxg-autofocus ng-show="!submit" ng-disabled="!agree">Proceed to Step 2</button>
+  <button type="submit" ng-disabled="financialAccountForm.$invalid" id="submitSave" class="btn-cta cta-primary"
+          ng-click="confirmRequest()" translate nxg-autofocus ng-show="submit">Submit</button>
 </div>
 
 
