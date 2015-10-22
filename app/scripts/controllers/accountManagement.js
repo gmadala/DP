@@ -334,31 +334,39 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
           $scope.editDefaultAccount = false;
         },
         save: function () {
-          var accounts;
-          $q.all([AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId),
-            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)])
-            .then(function (responses) {
-              accounts = responses;
-              accounts[0].IsDefaultDisbursement = true;
-              accounts[1].IsDefaultPayment = true;
-            })
-            .then(function () {
-              return AccountManagement.updateBankAccount(accounts[0]);
-            })
-            .then(function () {
-              return AccountManagement.updateBankAccount(accounts[1]);
-            })
-            .then(function () {
-              $scope.editDefaultAccount = false;
-            });
-        },
-        isDirty: function () {
-          return $scope.financialSettings.$dirty;
-        },
-        validate: function () {
-          var financial = $scope.financial;
-          financial.validation = angular.copy($scope.financialSettings);
-          return financial.validation.$valid;
+          if ($scope.defaultDeposit.BankAccountId === $scope.defaultPayment.BankAccountId) {
+            var account;
+            AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId)
+              .then(function (response) {
+                account = response;
+                account.IsDefaultDisbursement = true;
+                account.IsDefaultPayment = true;
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(account);
+              })
+              .then(function () {
+                $scope.editDefaultAccount = false;
+              });
+          } else {
+            var accounts;
+            $q.all([AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId),
+              AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)])
+              .then(function (responses) {
+                accounts = responses;
+                accounts[0].IsDefaultDisbursement = true;
+                accounts[1].IsDefaultPayment = true;
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(accounts[0]);
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(accounts[1]);
+              })
+              .then(function () {
+                $scope.editDefaultAccount = false;
+              });
+          }
         },
         /**
          * Determines if the current user should be allowed to add a bank account.
