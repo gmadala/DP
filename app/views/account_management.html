@@ -27,25 +27,21 @@
     <div class="bank-accounts-container">
       <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
-                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
-                               billing-account="financial.data.billingAccount.BankAccountId"
-                               update-billing-account="updateBillingAccount(billingAccountId)"
-                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
-                               get-financial-data="getFinancialData()"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
                                recent-transaction="getLatestTransaction(account.BankAccountId)" >
         </nxg-financial-account>
       </div>
       <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
-                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
-                               billing-account="financial.data.billingAccount.BankAccountId"
-                               update-billing-account="updateBillingAccount(billingAccountId)"
-                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
-                               get-financial-data="getFinancialData()"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
                                recent-transaction="getLatestTransaction(account.BankAccountId)">
         </nxg-financial-account>
       </div>
@@ -56,12 +52,12 @@
       <div class="col-xs-2"><label for="defaultDeposit" translate>Default Deposit Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName }}
+          {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName | truncate:23 }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultDeposit"
                   ng-model="defaultDeposit"
-                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
+                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts | orderBy:'AchBankName'"
                   required>
           </select>
         </div>
@@ -79,12 +75,12 @@
       <div class="col-xs-2"><label for="defaultPayment" translate>Default Payment Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName }}
+          {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName | truncate:23 }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultPayment"
                   ng-model="defaultPayment"
-                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
+                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts | orderBy:'AchBankName'"
                   required>
           </select>
         </div>

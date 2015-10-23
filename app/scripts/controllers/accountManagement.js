@@ -18,7 +18,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : true;
   $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
   $scope.editDefaultAccount = false;
-  $scope.getFinancialData = getFinancialData;
+  $scope.refreshActiveAchAccounts = refreshActiveAchAccounts;
 
 
   //to retreive the latest transaction date
@@ -95,8 +95,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.updateDisbursementAccount = function (disbursementAccountId) {
     var financialDataDefined = $scope.financial && $scope.financial.data;
     if (financialDataDefined) {
-      var financialData = $scope.financial.data;
-      financialData.disbursementAccount = disbursementAccountId;
+      $scope.defaultPayment = getDefaultPayment(disbursementAccountId, $scope.financial.data.getActiveAchAccounts);
     }
   };
 
@@ -107,14 +106,15 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.updateBillingAccount = function (billingAccountId) {
     var financialDataDefined = $scope.financial && $scope.financial.data;
     if (financialDataDefined) {
-      var financialData = $scope.financial.data;
-      financialData.billingAccount = billingAccountId;
+      $scope.defaultPayment = getDefaultPayment(billingAccountId, $scope.financial.data.getActiveAchAccounts);
     }
   };
 
-  function getFinancialData(){
+  function refreshActiveAchAccounts(){
     AccountManagement.getFinancialAccountData().then(function(result){
       $scope.financial.data.getActiveAchAccounts = getActiveAchAccounts(result.BankAccounts);
+      $scope.defaultPayment = getDefaultPayment($scope.defaultPayment.BankAccountId, result.BankAccounts);
+      $scope.defaultDeposit = getDefaultDeposit($scope.defaultDeposit.BankAccountId, result.BankAccounts);
     });
   }
 
@@ -124,6 +124,42 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
     });
     return _.filter(activeAccounts, function (account) {
       return (account.AllowPaymentByAch === true);
+    });
+  }
+
+  function getActiveBankAccounts(accounts) {
+    return _.filter(accounts, function (account) {
+      return (account.IsActive === true);
+    });
+  }
+
+  function getInactiveBankAccounts(accounts) {
+    return _.filter(accounts, function (account) {
+      return (account.IsActive === false);
+    });
+  }
+
+  /**
+   * Get the default bank account used for deposit.
+   * @param depositId
+   * @param accounts
+   * @returns {Mixed|*}
+   */
+  function getDefaultDeposit(depositId, accounts) {
+    return _.find(accounts, function (account) {
+      return account.BankAccountId === depositId;
+    });
+  }
+
+  /**
+   * Get the default bank account used for payment.
+   * @param billingId
+   * @param accounts
+   * @returns {Mixed|*}
+   */
+  function getDefaultPayment(billingId, accounts) {
+    return _.find(accounts, function (account) {
+      return account.BankAccountId === billingId;
     });
   }
 
@@ -262,64 +298,24 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       };
 
       /**
-       *gets the bank name of the default account for disbursement.
-       * @returns {*}
-       */
-      function getDefaultDisbursement(disbursementId, accounts) {
-        return _.find(accounts, function (account) {
-          return account.BankAccountId === disbursementId;
-        });
-      }
-
-      /**
-       * gets the bank name of the default account for billing
-       */
-      function getDefaultBilling(billingId, accounts) {
-        return _.find(accounts, function (account) {
-          return account.BankAccountId === billingId;
-        });
-      }
-
-      /**
        * gets the account object for the default accounts for payment and deposit
        * @type {Mixed}
        */
-      $scope.defaultPayment = _.find(results.BankAccounts, function (account) {
-        return account.BankAccountId === results.DefaultBillingBankAccountId;
-      });
-
-      $scope.defaultDeposit = _.find(results.BankAccounts, function (account) {
-        return account.BankAccountId === results.DefaultDisbursementBankAccountId;
-      });
-
-      function getActiveBankAccounts(accounts) {
-        return _.filter(accounts, function (account) {
-          return (account.IsActive === true);
-        });
-      }
-
-      function getInactiveBankAccounts(accounts) {
-        return _.filter(accounts, function (account) {
-          return (account.IsActive === false);
-        });
-      }
+      $scope.defaultPayment = getDefaultPayment(results.DefaultBillingBankAccountId, results.BankAccounts);
+      $scope.defaultDeposit = getDefaultDeposit(results.DefaultDisbursementBankAccountId, results.BankAccounts);
 
       var dirtyPayment = null;
       var dirtyDeposit = null;
 
       /** FINANCIAL ACCOUNTS SETTINGS **/
+      var sortedBankAccounts = _.sortBy(results.BankAccounts, 'AchBankName');
       $scope.financial = {
         data: {
-          bankAccounts: results.BankAccounts,
-          activeBankAccounts: getActiveBankAccounts(results.BankAccounts),
-          inactiveBankAccounts: getInactiveBankAccounts(results.BankAccounts),
-          getActiveAchAccounts: getActiveAchAccounts(results.BankAccounts),
-          selectedAccount: null,
-          selectedForPayment: null,
-          selectedForDeposit: null,
-          routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true),
-          disbursementAccount: getDefaultDisbursement(results.DefaultDisbursementBankAccountId, results.BankAccounts),
-          billingAccount: getDefaultBilling(results.DefaultBillingBankAccountId, results.BankAccounts)
+          bankAccounts: sortedBankAccounts,
+          activeBankAccounts: getActiveBankAccounts(sortedBankAccounts),
+          inactiveBankAccounts: getInactiveBankAccounts(sortedBankAccounts),
+          getActiveAchAccounts: getActiveAchAccounts(sortedBankAccounts),
+          routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true)
         },
         dirtyData: null, // a copy of the data for editing (lazily built)
         editable: false,
@@ -334,31 +330,43 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
           $scope.editDefaultAccount = false;
         },
         save: function () {
-          var accounts;
-          $q.all([AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId),
-            AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)])
-            .then(function (responses) {
-              accounts = responses;
-              accounts[0].IsDefaultDisbursement = true;
-              accounts[1].IsDefaultPayment = true;
-            })
-            .then(function () {
-              return AccountManagement.updateBankAccount(accounts[0]);
-            })
-            .then(function () {
-              return AccountManagement.updateBankAccount(accounts[1]);
-            })
-            .then(function () {
-              $scope.editDefaultAccount = false;
-            });
-        },
-        isDirty: function () {
-          return $scope.financialSettings.$dirty;
-        },
-        validate: function () {
-          var financial = $scope.financial;
-          financial.validation = angular.copy($scope.financialSettings);
-          return financial.validation.$valid;
+          if ($scope.defaultDeposit.BankAccountId === $scope.defaultPayment.BankAccountId) {
+            var account;
+            AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId)
+              .then(function (response) {
+                account = response;
+                account.IsDefaultDisbursement = true;
+                account.IsDefaultPayment = true;
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(account);
+              })
+              .then(function () {
+                $scope.editDefaultAccount = false;
+                $scope.financial.data.billingAccount = account;
+                $scope.financial.data.disbursementAccount = account;
+              });
+          } else {
+            var accounts;
+            $q.all([AccountManagement.getBankAccount($scope.defaultDeposit.BankAccountId),
+              AccountManagement.getBankAccount($scope.defaultPayment.BankAccountId)])
+              .then(function (responses) {
+                accounts = responses;
+                accounts[0].IsDefaultDisbursement = true;
+                accounts[1].IsDefaultPayment = true;
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(accounts[0]);
+              })
+              .then(function () {
+                return AccountManagement.updateBankAccount(accounts[1]);
+              })
+              .then(function () {
+                $scope.editDefaultAccount = false;
+                $scope.financial.data.disbursementAccount = accounts[0];
+                $scope.financial.data.billingAccount = accounts[1];
+              });
+          }
         },
         /**
          * Determines if the current user should be allowed to add a bank account.
