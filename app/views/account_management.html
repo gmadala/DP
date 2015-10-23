@@ -61,7 +61,7 @@
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultDeposit"
                   ng-model="defaultDeposit"
-                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
+                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts | orderBy:'AchBankName'"
                   required>
           </select>
         </div>
@@ -84,7 +84,7 @@
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultPayment"
                   ng-model="defaultPayment"
-                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts"
+                  ng-options="account as account.AchAccountNumberLast4 + ' - ' + account.AchBankName for account in financial.data.getActiveAchAccounts | orderBy:'AchBankName'"
                   required>
           </select>
         </div>
