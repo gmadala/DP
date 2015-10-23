@@ -179,7 +179,7 @@
                 ng-model="data.BankAccountId"
                 ng-disabled="data.PaySeller"
                 ng-required="!data.PaySeller"
-                ng-options="account.BankAccountName for account in options.BankAccounts">
+                ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in options.BankAccounts">
           <option value="" translate>Make Selection</option>
         </select>
       </div>

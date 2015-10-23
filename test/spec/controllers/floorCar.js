@@ -14,15 +14,17 @@ describe('Controller: FloorCarCtrl', function () {
     location,
     blackbook,
     AddressesMock,
+    mockDealerSummary,
     mockForm,
     statics = { colors: ['red', 'green']}, // Constant object so digest limit isn't reached
     myCanPayBuyer = true,
     myPaySellerOptions = false,
     $q,
+    api,
     $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_, _api_, _$httpBackend_) {
     scope = $rootScope.$new();
     floorplan = Floorplan;
     dialog = $dialog;
@@ -33,7 +35,7 @@ describe('Controller: FloorCarCtrl', function () {
 
     userMock = {
       isDealer: function() {
-        return type === 'Dealer';
+        return false;
       },
       getStatics: function() {
         return $q.when(statics);
@@ -52,18 +54,35 @@ describe('Controller: FloorCarCtrl', function () {
       }
     };
 
+    mockDealerSummary = {
+      getDealerSummary: function () {
+        return $q.when({
+          BankAccounts: [{
+            "BankAccountId": "66e9e774-3dcc-4852-801d-b6e91d161a13",
+            "IsActive": true
+          }, {
+            "BankAccountId": "76e9e774-3dcc-4852-801d-b6e91d161a13",
+            "IsActive": true
+          }, {
+            "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
+            "IsActive": false
+          }]
+        });
+      }
+    };
+
     AddressesMock = {
       getActivePhysical: function() {
         return [];
       }
-    }
+    };
 
     mockForm = {
       $valid: true,
       inputMileage: {}
     };
 
-    initController = function(type) {
+    initController = function() {
       FloorCarCtrl = $controller('FloorCarCtrl', {
         $scope: scope,
         User: userMock,
@@ -71,9 +90,10 @@ describe('Controller: FloorCarCtrl', function () {
         $dialog: dialog,
         $location: location,
         Blackbook: blackbook,
-        Addresses: AddressesMock
+        Addresses: AddressesMock,
+        AccountManagement: mockDealerSummary
       });
-    }
+    };
   }));
 
   var registerCommonTests = function() {
@@ -85,6 +105,12 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.paySellerOptions).toBe(myPaySellerOptions);
       expect(scope.canPayBuyer).toBe(myCanPayBuyer);
       expect(scope.optionsHelper).toBeDefined();
+
+      // should only display active bank account
+      scope.options.BankAccounts.forEach(function (bankAccount) {
+        expect(bankAccount.IsActive).toBe(true);
+      });
+      expect(scope.options.BankAccounts.length).toBe(2);
 
       expect(scope.defaultData).toBeDefined();
       expect(scope.vinDetailsErrorFlag).toBe(false);

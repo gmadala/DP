@@ -69,7 +69,7 @@ describe('Directive: nxgFinancialAccount', function () {
       FinancialTransactionId: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3',
       MaxDate: '2015-06-13'
     };
-    undefinedTransaction :undefined;
+    undefinedTransaction = undefined;
     scope = $rootScope.$new();
 
     scope.account = account;
@@ -178,8 +178,8 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.defaultForDisbursement).toBeFalsy();
-    expect(iScope.defaultForBilling).toBeFalsy();
+    expect(iScope.defaultForDisbursement()).toBeFalsy();
+    expect(iScope.defaultForBilling()).toBeFalsy();
   });
 
   it('routing number and its label should display correctly for US and Canada users.', function() {
@@ -196,13 +196,6 @@ describe('Directive: nxgFinancialAccount', function () {
 
     expect(iScope.routingNumberDisplay).toBe('56789-234');
     expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
-  });
-
-  it('editFinancialAccount should call User.refreshInfo.', function() {
-    iScope.editFinancialAccount();
-    iScope.$apply();
-
-    expect(User.refreshInfo).toHaveBeenCalled();
   });
 
   it('should display n/a for recent transaction date.', function() {

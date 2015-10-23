@@ -85,7 +85,7 @@
         <p class="col-xs-6" translate>Send Payment To</p>
         <p class="col-xs-6 value">
           <span ng-show="isDealer">{{ formData.PaySeller && 'Seller' || 'Buyer' | translate }}</span>
-          <span ng-hide="isDealer">{{ formData.BankAccountId.BankAccountName }}</span>
+          <span ng-hide="isDealer">{{ [formData.BankAccountId.AchAccountNumberLast4, formData.BankAccountId.AchBankName].join(' - ') }}</span>
         </p>
       </li>
     </ul>

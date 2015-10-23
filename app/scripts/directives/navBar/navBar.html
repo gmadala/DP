@@ -1,7 +1,7 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="col-xs-3 ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="col-xs-3 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
 
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="col-xs-3 pull-right" ng-show="navState.current.data.showNavBar">
+      <div class="col-xs-3 custom pull-right" ng-show="navState.current.data.showNavBar">
         <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
           <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
             <p>{{ user.BusinessName }}</p>

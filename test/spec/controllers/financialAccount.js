@@ -207,6 +207,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           });
         }
       };
+
       httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
       scope = $rootScope.$new();
       FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
@@ -226,6 +227,8 @@ describe('Controller: FinancialAccountCtrl', function () {
           }
         }
       });
+
+      spyOn(scope,'showSuccessMessage').and.callFake(angular.noop);
     });
 
     it('should be recognized as an edit modal', function() {
@@ -297,21 +300,6 @@ describe('Controller: FinancialAccountCtrl', function () {
 
     it('should have the checkbox disabled on default', function () {
       expect(scope.tosVisited).toBe(false);
-    });
-
-    xit('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
-      spyOn(scope, 'visitTOS').and.callThrough();
-
-      scope.visitTOS();
-
-      expect(scope.visitTOS).toHaveBeenCalled();
-      expect(scope.tosVisited).toBeTruthy();
-      expect(scope.account.TOSAcceptanceFlag).toBeTruthy();
-
-      scope.account.TOSAcceptanceFlag = false;
-      scope.visitTOS();
-
-      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
     });
 
     describe('the dialog', function() {
@@ -453,7 +441,6 @@ describe('Controller: FinancialAccountCtrl', function () {
         scope.$apply();
         spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
         scope.$apply();
-        spyOn(scope, 'showSuccessMessage').and.callThrough();
         scope.showSuccessMessage();
         expect(scope.showSuccessMessage).toHaveBeenCalled();
       });
