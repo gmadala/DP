@@ -53,7 +53,7 @@
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.UAT:
-          apiDomain = 'https://test.nextgearcapital.com';
+          apiDomain = 'https://exp1uatdapp01.nextgearcapital.com/';
           ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
           break;
