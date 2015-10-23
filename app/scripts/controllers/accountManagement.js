@@ -308,18 +308,19 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       var dirtyDeposit = null;
 
       /** FINANCIAL ACCOUNTS SETTINGS **/
+      var sortedBankAccounts = _.sortBy(results.BankAccounts, 'AchBankName');
       $scope.financial = {
         data: {
-          bankAccounts: results.BankAccounts,
-          activeBankAccounts: getActiveBankAccounts(results.BankAccounts),
-          inactiveBankAccounts: getInactiveBankAccounts(results.BankAccounts),
-          getActiveAchAccounts: getActiveAchAccounts(results.BankAccounts),
+          bankAccounts: sortedBankAccounts,
+          activeBankAccounts: getActiveBankAccounts(sortedBankAccounts),
+          inactiveBankAccounts: getInactiveBankAccounts(sortedBankAccounts),
+          getActiveAchAccounts: getActiveAchAccounts(sortedBankAccounts),
           selectedAccount: null,
           selectedForPayment: null,
           selectedForDeposit: null,
           routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true),
-          disbursementAccount: getDefaultDisbursement(results.DefaultDisbursementBankAccountId, results.BankAccounts),
-          billingAccount: getDefaultBilling(results.DefaultBillingBankAccountId, results.BankAccounts)
+          disbursementAccount: getDefaultDisbursement(results.DefaultDisbursementBankAccountId, sortedBankAccounts),
+          billingAccount: getDefaultBilling(results.DefaultBillingBankAccountId, sortedBankAccounts)
         },
         dirtyData: null, // a copy of the data for editing (lazily built)
         editable: false,

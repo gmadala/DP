@@ -56,7 +56,7 @@
       <div class="col-xs-2"><label for="defaultDeposit" translate>Default Deposit Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName }}
+          {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName | truncate:23 }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultDeposit"
@@ -79,7 +79,7 @@
       <div class="col-xs-2"><label for="defaultPayment" translate>Default Payment Account: </label></div>
       <div class="col-xs-2">
         <p class="static-option inline-row" ng-show="!editDefaultAccount">
-          {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName }}
+          {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName | truncate:23 }}
         </p>
         <div class="style-select" ng-show="editDefaultAccount">
           <select id="defaultPayment"
