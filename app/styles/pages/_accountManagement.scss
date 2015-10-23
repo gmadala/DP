@@ -85,3 +85,13 @@
 button[disabled]{
   color: #BBBBBB;
 }
+
+.required-text{
+  font-style: italic;
+  text-align: right;
+  padding: 5px;
+}
+
+.modal-body h4.add-account.step-two{
+  margin-top: 0px;
+}
