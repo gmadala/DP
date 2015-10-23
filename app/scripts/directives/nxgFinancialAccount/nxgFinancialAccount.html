@@ -1,4 +1,4 @@
-<div ng-if="displayed">
+<div>
   <div class="well-item bordered financial-account">
     <!--Add/Edit Enabled, view mode-->
     <div class="row " ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
@@ -6,7 +6,7 @@
       <form class="col-xs-3 text-left no-left-padding text-vertical-center" name="bankName"
            style="padding-left: 15px">
         <div class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</div>
-        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="account.AchBankName"
+        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
                id="editBankName" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43" ng-required/>
         <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
           Please enter a bank name.
@@ -37,7 +37,7 @@
       <div class="col-xs-1 text-center text-vertical-center">
         <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
         <div ng-show="editMode">
-          <div ng-if="defaultForDisbursement() || defaultForBilling()">
+          <div ng-show="defaultForDisbursement() || defaultForBilling()">
             <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
                    ng-model="account.IsActive" disabled/>
             <label class="checkbox-img small" for="{{ account.BankAccountId }}"
@@ -48,9 +48,9 @@
                    tooltip-animation="true">
             </label>
           </div>
-          <div ng-if="!defaultForDisbursement() && !defaultForBilling()">
+          <div ng-hide="defaultForDisbursement() || defaultForBilling()">
             <input type="checkbox" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
-                   ng-model="account.IsActive"/>
+                   ng-model="dirtyStatus"/>
             <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}">
             </label>
           </div>

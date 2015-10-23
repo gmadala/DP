@@ -109,6 +109,8 @@ describe('Model: AccountManagement', function() {
 
     httpBackend.flush();
     expect(res).toBeDefined();
+    expect(User.refreshInfo).toHaveBeenCalled();
+
 
     var expected = {
       TotalAvailableCredit: 1234.56,

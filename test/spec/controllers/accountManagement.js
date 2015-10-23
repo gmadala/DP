@@ -325,22 +325,12 @@ describe('Controller: AccountManagementCtrl', function () {
       });
 
       it('add bank account should update local financial data', function() {
-        spyOn(scope.financial, 'addFinancialAccount').and.callThrough();
-
-        scope.financial.addFinancialAccount();
-        // Resolve promise
-        scope.$apply();
-
-        expect(scope.financial.data.bankAccounts).toEqual(updatedBankData);
-      });
-
-      it('addFinancialAccount should call User.refreshInfo.', function() {
-        spyOn(UserMock, 'refreshInfo').and.callFake(angular.noop);
+        spyOn(AccountManagementMock, 'getFinancialAccountData').and.callThrough();
 
         scope.financial.addFinancialAccount();
         scope.$apply();
 
-        expect(UserMock.refreshInfo).toHaveBeenCalled();
+        expect(AccountManagementMock.getFinancialAccountData).toHaveBeenCalled();
       });
 
       it('should display recent transaction date for the bank account only for Dealers', function(){

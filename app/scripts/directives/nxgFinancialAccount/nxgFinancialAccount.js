@@ -84,8 +84,8 @@
        */
       function cancelAccount() {
         scope.editMode = false;
-        setStatus(scope.dirtyStatus);
-        setBankName(scope.dirtyBankName);
+        scope.dirtyStatus = getStatus();
+        scope.dirtyBankName = getBankName();
       }
 
       /**
@@ -94,16 +94,18 @@
       function saveAccount() {
         AccountManagement.getBankAccount(scope.account.BankAccountId)
           .then(function (bankAccount) {
-            bankAccount.IsActive = getStatus();
-            bankAccount.BankName = getBankName();
+            bankAccount.IsActive = scope.dirtyStatus;
+            bankAccount.BankName = scope.dirtyBankName;
             return AccountManagement.updateBankAccount(bankAccount);
           })
           .then(function () {
             scope.refreshActiveAchAccounts({});
-          })
-          .catch(function () {
             setStatus(scope.dirtyStatus);
             setBankName(scope.dirtyBankName);
+          })
+          .catch(function () {
+            scope.dirtyStatus = getStatus();
+            scope.dirtyBankName = getBankName();
           });
         scope.editMode = false;
       }

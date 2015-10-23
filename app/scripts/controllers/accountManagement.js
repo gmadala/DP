@@ -88,54 +88,26 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   }
 
   $scope.editDefaultAccount = false;
-  /**
-   * Updates the default disbursement account
-   * @param disbursementAccountId
-   */
-  $scope.updateDisbursementAccount = function (disbursementAccountId) {
-    var financialDataDefined = $scope.financial && $scope.financial.data;
-    if (financialDataDefined) {
-      $scope.defaultPayment = getDefaultPayment(disbursementAccountId, $scope.financial.data.getActiveAchAccounts);
-    }
-  };
-
-  /**
-   * Updates the default billing account
-   * @param billingAccountId
-   */
-  $scope.updateBillingAccount = function (billingAccountId) {
-    var financialDataDefined = $scope.financial && $scope.financial.data;
-    if (financialDataDefined) {
-      $scope.defaultPayment = getDefaultPayment(billingAccountId, $scope.financial.data.getActiveAchAccounts);
-    }
-  };
 
   function refreshActiveAchAccounts(){
-    AccountManagement.getFinancialAccountData().then(function(result){
-      $scope.financial.data.getActiveAchAccounts = getActiveAchAccounts(result.BankAccounts);
-      $scope.defaultPayment = getDefaultPayment($scope.defaultPayment.BankAccountId, result.BankAccounts);
-      $scope.defaultDeposit = getDefaultDeposit($scope.defaultDeposit.BankAccountId, result.BankAccounts);
-    });
+    AccountManagement.getFinancialAccountData()
+      .then(function(result) {
+        $scope.financial.data.activeBankAccounts = getActiveAchAccounts(result.BankAccounts);
+        $scope.financial.data.inactiveBankAccounts = getInactiveAchAccounts(result.BankAccounts);
+        $scope.defaultPayment = getDefaultPayment(result.DefaultDisbursementBankAccountId, result.BankAccounts);
+        $scope.defaultDeposit = getDefaultDeposit(result.DefaultBillingBankAccountId, result.BankAccounts);
+      });
   }
 
   function getActiveAchAccounts(accounts) {
-    var activeAccounts = _.filter(accounts, function (account) {
-      return (account.IsActive === true);
-    });
-    return _.filter(activeAccounts, function (account) {
-      return (account.AllowPaymentByAch === true);
+    return _.filter(accounts, function (account) {
+      return (account.IsActive === true && account.AllowPaymentByAch === true);
     });
   }
 
-  function getActiveBankAccounts(accounts) {
+  function getInactiveAchAccounts(accounts) {
     return _.filter(accounts, function (account) {
-      return (account.IsActive === true);
-    });
-  }
-
-  function getInactiveBankAccounts(accounts) {
-    return _.filter(accounts, function (account) {
-      return (account.IsActive === false);
+      return (account.IsActive === false && account.AllowPaymentByAch === true);
     });
   }
 
@@ -311,10 +283,8 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       var sortedBankAccounts = _.sortBy(results.BankAccounts, 'AchBankName');
       $scope.financial = {
         data: {
-          bankAccounts: sortedBankAccounts,
-          activeBankAccounts: getActiveBankAccounts(sortedBankAccounts),
-          inactiveBankAccounts: getInactiveBankAccounts(sortedBankAccounts),
-          getActiveAchAccounts: getActiveAchAccounts(sortedBankAccounts),
+          activeBankAccounts: getActiveAchAccounts(sortedBankAccounts),
+          inactiveBankAccounts: getInactiveAchAccounts(sortedBankAccounts),
           routingNumberLabel: routingNumberFilter('', $scope.isUnitedStates, true)
         },
         dirtyData: null, // a copy of the data for editing (lazily built)
@@ -436,17 +406,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
            */
           function updateLocalFinancialData(updatedAccount) {
             if (updatedAccount) {
-              // Refresh cached endpoint info for active bank accounts. See /Dealer/v1_2/Info/.
-              User.refreshInfo();
-
-              if (updatedAccount.IsDefaultPayment) {
-                $scope.updateBillingAccount(updatedAccount.AccountId);
-              }
-              if (updatedAccount.IsDefaultDisbursement) {
-                $scope.updateDisbursementAccount(updatedAccount.AccountId);
-              }
-              // Update local data
-              $scope.financial.updateFinancialAccounts(updatedAccount);
+              refreshActiveAchAccounts();
             }
           }
         }

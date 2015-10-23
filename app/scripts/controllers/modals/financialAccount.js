@@ -95,15 +95,7 @@
       var validSubmission = isValidSubmission();
 
       if ($scope.validity.$valid && validSubmission) {
-        if ($scope.isEditModal) {
-          AccountManagement.updateBankAccount($scope.account).then(function() {
-            kissMetricInfo.getKissMetricInfo().then(
-              function(result){
-                segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT,result);
-              });
-            dialog.close($scope.account);
-          });
-        } else if ($scope.isAddModal) {
+        if ($scope.isAddModal) {
           $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function(bankAccountId) {
             kissMetricInfo.getKissMetricInfo().then(
@@ -114,9 +106,8 @@
             dialog.close($scope.account);
             $scope.showSuccessMessage();
           });
-        }
-        // Fail gracefully if somehow modal was opened
-        else {
+        } else {
+          // Fail gracefully if somehow modal was opened
           dialog.close();
         }
       }
