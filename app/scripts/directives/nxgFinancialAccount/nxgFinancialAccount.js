@@ -16,13 +16,11 @@
       templateUrl: 'scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html',
       scope: {
         account: '=',
-        defaultDepositId: '=disbursementAccount',
-        defaultPaymentId: '=billingAccount',
-        updateBillingAccount: '&',
-        updateDisbursementAccount: '&',
+        defaultDepositId: '=',
+        defaultPaymentId: '=',
         isStakeholderActive: '=',
         isUnitedStates: '=',
-        getFinancialData: '&',
+        refreshActiveAchAccounts: '&',
         recentTransaction: '='
       },
       restrict: 'E'
@@ -101,7 +99,7 @@
             return AccountManagement.updateBankAccount(bankAccount);
           })
           .then(function () {
-            scope.getFinancialData({});
+            scope.refreshActiveAchAccounts({});
           })
           .catch(function () {
             setStatus(scope.dirtyStatus);
@@ -175,18 +173,6 @@
         var strUrl =  api.contentLink('/receipt/view/' + scope.recentTransactionId + '/receipt');
         window.open(strUrl, '_blank');
       }
-
-      scope.$watch('defaultPaymentId', function(newVal, oldVal) {
-        if (newVal !== oldVal) {
-          scope.defaultDepositId = newVal;
-        }
-      });
-
-      scope.$watch('defaultDepositId', function(newVal, oldVal) {
-        if (newVal !== oldVal) {
-          scope.defaultPaymentId = newVal;
-        }
-      });
     }
   }
 

@@ -27,25 +27,21 @@
     <div class="bank-accounts-container">
       <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
-                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
-                               billing-account="financial.data.billingAccount.BankAccountId"
-                               update-billing-account="updateBillingAccount(billingAccountId)"
-                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
-                               get-financial-data="getFinancialData()"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
                                recent-transaction="getLatestTransaction(account.BankAccountId)" >
         </nxg-financial-account>
       </div>
       <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'AchBankName'">
         <nxg-financial-account account="account"
-                               disbursement-account="financial.data.disbursementAccount.BankAccountId"
-                               billing-account="financial.data.billingAccount.BankAccountId"
-                               update-billing-account="updateBillingAccount(billingAccountId)"
-                               update-disbursement-account="updateDisbursementAccount(disbursementAccountId)"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
                                is-stakeholder-active="business.data.isStakeholderActive"
                                is-united-states="isUnitedStates"
-                               get-financial-data="getFinancialData()"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
                                recent-transaction="getLatestTransaction(account.BankAccountId)">
         </nxg-financial-account>
       </div>

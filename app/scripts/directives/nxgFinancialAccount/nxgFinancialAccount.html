@@ -6,7 +6,8 @@
       <form class="col-xs-3 text-left no-left-padding text-vertical-center" name="bankName"
            style="padding-left: 15px">
         <div class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</div>
-        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="account.AchBankName" id="editBankName" name="editBankName" placeholder="Bank Name" ng-maxlength="43" ng-required/>
+        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
+               id="editBankName" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43" ng-required/>
         <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
           Please enter a bank name.
         </label>
@@ -33,27 +34,24 @@
         </span>
       </div>
       <!--Active-->
-      <div class="col-xs-1 text-center text-vertical-center tooltip-fix">
+      <div class="col-xs-1 text-center text-vertical-center">
         <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
         <div ng-show="editMode">
-          <div ng-show="defaultForDisbursement() || defaultForBilling()">
+          <div ng-if="defaultForDisbursement() || defaultForBilling()">
             <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
-                   ng-model="account.IsActive"
-                   ng-disabled="defaultForDisbursement() || defaultForBilling()"/>
+                   ng-model="account.IsActive" disabled/>
             <label class="checkbox-img small" for="{{ account.BankAccountId }}"
-                   ng-show="defaultForDisbursement() || defaultForBilling()"
                    tooltip-placement="right"
-                   tooltip-trigger="mouseenter"
+                   tooltip-trigger="click"
                    tooltip-html="true"
                    tooltip-html-unsafe="{{ 'Accounts that are used as default for deposits and payments can not be deactivated' | translate }}"
                    tooltip-animation="true">
             </label>
           </div>
-          <div ng-hide="defaultForDisbursement() || defaultForBilling()">
+          <div ng-if="!defaultForDisbursement() && !defaultForBilling()">
             <input type="checkbox" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
-                   ng-model="account.IsActive" ng-disabled="defaultForDisbursement() || defaultForBilling()"/>
-            <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}"
-                   ng-hide="defaultForDisbursement() || defaultForBilling()">
+                   ng-model="dirtyStatus"/>
+            <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}">
             </label>
           </div>
 
