@@ -6,24 +6,23 @@ describe('Model: AccountManagement', function() {
 
   var httpBackend,
       $q,
-      accountManagement,
+      AccountManagement,
       emailStub,
-      securityAnswersStub,
-      user,
-      success,
-      isDealer;
+      User,
+      success;
 
-  beforeEach(inject(function ($httpBackend, _$q_, AccountManagement, User) {
+  beforeEach(inject(function ($httpBackend, _$q_, _AccountManagement_, _User_) {
     httpBackend = $httpBackend;
     $q = _$q_;
-    accountManagement = AccountManagement;
+    AccountManagement = _AccountManagement_;
     emailStub = 'peanutbutter@jellytime.com';
-    user = User;
-    isDealer = true;
-    user.isDealer = function() {
-      return isDealer;
+    User = _User_;
+
+    User.isDealer = function() {
+      return true;
     };
-    spyOn(user, 'getInfo').and.returnValue($q.when({
+
+    spyOn(User, 'getInfo').and.returnValue($q.when({
       BankAccounts: []
     }));
 
@@ -87,7 +86,7 @@ describe('Model: AccountManagement', function() {
 
     httpBackend.expectGET('/userAccount/v1_1/settings');
     var res;
-    accountManagement.get().then(function (result) {
+    AccountManagement.get().then(function (result) {
       res = result;
     });
     httpBackend.flush();
@@ -96,14 +95,22 @@ describe('Model: AccountManagement', function() {
 
   it('should call getFinancialAccountData method', function() {
     httpBackend.expectGET('/dealer/v1_1/summary');
+    spyOn(User, 'refreshInfo').and.returnValue(
+      $q.when({
+        DefaultDisbursementBankAccountId: 'foo',
+        DefaultBillingBankAccountId: 'bar'
+      })
+    );
 
     var res;
-    accountManagement.getFinancialAccountData().then(function (result) {
+    AccountManagement.getFinancialAccountData().then(function (result) {
       res = result;
     });
 
     httpBackend.flush();
     expect(res).toBeDefined();
+    expect(User.refreshInfo).toHaveBeenCalled();
+
 
     var expected = {
       TotalAvailableCredit: 1234.56,
@@ -124,24 +131,24 @@ describe('Model: AccountManagement', function() {
 
   it('should call saveBusiness method', function() {
     httpBackend.expectPOST('/UserAccount/businessSettings').respond(success);
-    accountManagement.saveBusiness('email', true, true);
+    AccountManagement.saveBusiness('email', true, true);
     expect(httpBackend.flush).not.toThrow();
   });
 
   it('should call saveTitleAddress method', function() {
     httpBackend.expectPOST('/UserAccount/titleSettings').respond(success);
-    accountManagement.saveTitleAddress(5);
+    AccountManagement.saveTitleAddress(5);
     expect(httpBackend.flush).not.toThrow();
   });
 
   it('should call getBankAccount and throw error with invalid id', function() {
-    spyOn(accountManagement, 'getBankAccount').and.callThrough();
-    expect(accountManagement.getBankAccount).toThrow(new Error('Account id is required.'));
+    spyOn(AccountManagement, 'getBankAccount').and.callThrough();
+    expect(AccountManagement.getBankAccount).toThrow(new Error('Account id is required.'));
   });
 
   it('should call getBankAccount and receive a valid id', function() {
     var returnedAccount = {};
-    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1').then(function(bankAccount) {
+    AccountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1').then(function(bankAccount) {
       returnedAccount = bankAccount;
     });
     httpBackend.flush();
@@ -149,45 +156,45 @@ describe('Model: AccountManagement', function() {
   });
 
   it('should call updateBankAccount and throw error with invalid bank account', function() {
-    spyOn(accountManagement, 'updateBankAccount').and.callThrough();
-    expect(accountManagement.updateBankAccount).toThrow(new Error('Bank account is required.'));
+    spyOn(AccountManagement, 'updateBankAccount').and.callThrough();
+    expect(AccountManagement.updateBankAccount).toThrow(new Error('Bank account is required.'));
   });
 
   it('should call updateBankAccount', function() {
     var returnedBankAccount = {}, updatedBankAccount = {};
 
-    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
+    AccountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
       .then(function (bankAccount) {
         returnedBankAccount = bankAccount;
         return bankAccount;
       }).then(function (returnedBankAccount) {
-        return accountManagement.updateBankAccount(returnedBankAccount)
+        return AccountManagement.updateBankAccount(returnedBankAccount)
           .then(function (bankAccount) {
             updatedBankAccount = bankAccount;
             return updatedBankAccount;
           });
       });
 
-    spyOn(accountManagement, 'updateBankAccount').and.callThrough();
+    spyOn(AccountManagement, 'updateBankAccount').and.callThrough();
     httpBackend.flush();
 
-    expect(accountManagement.updateBankAccount).toHaveBeenCalledWith(returnedBankAccount);
+    expect(AccountManagement.updateBankAccount).toHaveBeenCalledWith(returnedBankAccount);
     expect(updatedBankAccount).toEqual(returnedBankAccount);
   });
 
   it('should call addBankAccount and throw error with invalid bank account', function() {
-    spyOn(accountManagement, 'addBankAccount').and.callThrough();
-    expect(accountManagement.addBankAccount).toThrow(new Error('Bank account is required.'));
+    spyOn(AccountManagement, 'addBankAccount').and.callThrough();
+    expect(AccountManagement.addBankAccount).toThrow(new Error('Bank account is required.'));
   });
 
   it('should call addBankAccount', function() {
     var newBankAccount = {}, returnedBankAccount = {};
-    spyOn(accountManagement, 'addBankAccount').and.callThrough();
+    spyOn(AccountManagement, 'addBankAccount').and.callThrough();
 
-    accountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
+    AccountManagement.getBankAccount('9e05f8c9-2e3b-4f80-a346-00004bceacb1')
       .then(function (mockAccount) {
         returnedBankAccount = mockAccount;
-        accountManagement.addBankAccount(returnedBankAccount)
+        AccountManagement.addBankAccount(returnedBankAccount)
           .then(function (bankAccount) {
             newBankAccount = bankAccount;
           });
@@ -195,8 +202,8 @@ describe('Model: AccountManagement', function() {
 
     httpBackend.flush();
 
-    expect(accountManagement.addBankAccount).toHaveBeenCalled();
-    expect(accountManagement.addBankAccount).toHaveBeenCalledWith(returnedBankAccount);
+    expect(AccountManagement.addBankAccount).toHaveBeenCalled();
+    expect(AccountManagement.addBankAccount).toHaveBeenCalledWith(returnedBankAccount);
 
     expect(newBankAccount.AccountId).toEqual('9e05f8c9-2e3b-4f80-a346-00004bceacb1');
     expect(newBankAccount).toEqual(returnedBankAccount);

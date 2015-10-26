@@ -12,12 +12,10 @@ describe('Controller: FinancialAccountCtrl', function () {
     $controller,
     $rootScope,
     $q,
-    bankAccount,
     bankId,
 
     // Constants
-    DEALER_ADD_BANK_ACCOUNT = 'Dealer - Add Bank Account',
-    DEALER_EDIT_BANK_ACCOUNT = 'Dealer - Edit Bank Account';
+    DEALER_ADD_BANK_ACCOUNT = 'Dealer - Add Bank Account';
 
   beforeEach(module('nextgearWebApp'));
 
@@ -35,156 +33,6 @@ describe('Controller: FinancialAccountCtrl', function () {
       track: angular.noop
     }
   }));
-
-  describe('editing financial account', function () {
-    beforeEach(function () {
-
-      bankAccount = {
-        'AccountId': '9e05f8c9-2e3b-4f80-a346-00004bceacb1',
-        'AccountName': 'JP Morgan Chase Bank - 7905',
-        'BankName': 'JP Morgan Chase Bank',
-        'IsActive': true,
-        'RoutingNumber': '349886738',
-        'City': 'Phoenix',
-        'State': '77c78343-f0f1-4152-9f77-58a393f4099d',
-        'IsDefaultPayment': true,
-        'IsDefaultDisbursement': true,
-        'AccountNumber': '7905'
-      };
-
-      AccountManagementMock = {
-        getBankAccount: function () {
-          return $q.when(bankAccount);
-        },
-        updateBankAccount: function () {
-          return $q.when(bankAccount);
-        }
-      };
-
-      mockKissMetricInfo = {
-        getKissMetricInfo: function () {
-          return $q.when({
-            height: 1080,
-            isBusinessHours: true,
-            vendor: 'Google Inc.',
-            version: 'Chrome 44',
-            width: 1920
-          });
-        }
-      };
-      httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
-
-      scope = $rootScope.$new();
-      FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
-        $scope: scope,
-        kissMetricInfo: mockKissMetricInfo,
-        AccountManagement: AccountManagementMock,
-        dialog: dialog,
-        segmentio: segmentio,
-        options: {
-          account: bankAccount,
-          defaultForBilling: true,
-          defaultForDisbursement: true,
-          modal: 'edit'
-        }
-      });
-    });
-
-    it('should be recognized as an edit modal', function() {
-      expect(scope.isAddModal).toBeFalsy();
-      expect(scope.isEditModal).toBeTruthy();
-    });
-
-    it('should remove digit other than last 4 digit of account number', function () {
-      expect(scope.accountNumberDisplay).toMatch(/\D+\d{4}$/);
-    });
-
-    it('should remove digit other than last 4 digit of account number', function () {
-      expect(scope.accountNumberDisplay).toMatch(/\D+\d{4}$/);
-    });
-
-    it('should receive bank account information from the directive', function () {
-      expect(scope.account).toEqual(bankAccount);
-    });
-
-    it('should set the default billing and disbursement value', function() {
-      expect(scope.defaultForBilling).toBeTruthy();
-      expect(scope.defaultForDisbursement).toBeTruthy();
-    });
-
-    describe('the dialog', function() {
-      beforeEach(function() {
-        scope.financialAccountForm = {
-          $valid: true
-        };
-      });
-
-      it('should close when close function is called', function () {
-        spyOn(dialog, 'close').and.callThrough();
-        scope.close();
-        expect(dialog.close).toHaveBeenCalled();
-      });
-
-      it('should not close when the form is not valid', function () {
-        scope.financialAccountForm = {
-          $valid: false
-        };
-
-        spyOn(dialog, 'close').and.callThrough();
-        spyOn(AccountManagementMock, 'updateBankAccount').and.callThrough();
-        spyOn(segmentio, 'track').and.callThrough();
-        scope.confirmRequest();
-        expect(AccountManagementMock.updateBankAccount).not.toHaveBeenCalled();
-        expect(dialog.close).not.toHaveBeenCalled();
-      });
-
-      it('should close after updating bank account succeed', function () {
-        spyOn(dialog, 'close').and.callThrough();
-        spyOn(AccountManagementMock, 'updateBankAccount').and.callThrough();
-
-        scope.confirmRequest();
-        // resolve remaining promise to send the updated bank account
-        scope.$digest();
-
-        // editing bank account should not override the original account number with the view value
-        expect(scope.account.AccountNumber).not.toEqual(scope.accountNumberDisplay);
-        // check the update bank account call and dialog's close is called.
-        expect(AccountManagementMock.updateBankAccount).toHaveBeenCalled();
-        expect(dialog.close).toHaveBeenCalled();
-      });
-
-      it('should not set accountName when closing', function () {
-        var original = scope.account.AccountName;
-
-        scope.account.BankName = 'Chase Bank';
-        scope.account.AccountNumber = '1234';
-        scope.$digest();
-
-        expect(scope.account.AccountName).toBe(original);
-      });
-
-      it('should set accountNameDisplay to \'accountNumberLast4\' - \'bankName\' ',function () {
-        scope.account.BankName = 'Chase Bank';
-        scope.account.AccountNumber = '1234';
-        scope.$digest();
-
-        expect(scope.accountNameDisplay).toBe('1234 - Chase Bank');
-      });
-
-      it('should fire a metric if edit is successful', function() {
-        spyOn(segmentio, 'track').and.callThrough();
-        scope.confirmRequest();
-        scope.$apply();
-        expect(segmentio.track).toHaveBeenCalledWith(DEALER_EDIT_BANK_ACCOUNT, {
-          height: 1080,
-            isBusinessHours: true,
-          vendor: 'Google Inc.',
-          version: 'Chrome 44',
-          width: 1920
-        });
-      });
-    });
-  });
 
   describe('adding financial account', function () {
     beforeEach(function () {
@@ -207,6 +55,7 @@ describe('Controller: FinancialAccountCtrl', function () {
           });
         }
       };
+
       httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
       scope = $rootScope.$new();
       FinancialAccountCtrl = $controller('FinancialAccountCtrl', {
@@ -226,6 +75,8 @@ describe('Controller: FinancialAccountCtrl', function () {
           }
         }
       });
+
+      spyOn(scope,'showSuccessMessage').and.callFake(angular.noop);
     });
 
     it('should be recognized as an edit modal', function() {
@@ -299,28 +150,13 @@ describe('Controller: FinancialAccountCtrl', function () {
       expect(scope.tosVisited).toBe(false);
     });
 
-    it('should enable the checkbox and set it to true after the link is clicked for the first time', function () {
-      spyOn(scope, 'visitTOS').and.callThrough();
-
-      scope.visitTOS();
-
-      expect(scope.visitTOS).toHaveBeenCalled();
-      expect(scope.tosVisited).toBeTruthy();
-      expect(scope.account.TOSAcceptanceFlag).toBeTruthy();
-
-      scope.account.TOSAcceptanceFlag = false;
-      scope.visitTOS();
-
-      expect(scope.account.TOSAcceptanceFlag).toBeFalsy();
-    });
-
     describe('the dialog', function() {
       beforeEach(function() {
         scope.financialAccountForm = {
           $valid: true
         };
 
-        scope.account.TOSAcceptanceFlag = true;
+        scope.agree = true;
       });
 
       it('should not close if the form is not valid', function () {
@@ -448,26 +284,13 @@ describe('Controller: FinancialAccountCtrl', function () {
         expect(scope.account.AccountName).toBe('Chase Bank');
       });
 
-      it('should not close if TOSAcceptance flag is not true', function () {
-        spyOn(dialog, 'close').and.callThrough();
-
-        scope.account.TOSAcceptanceFlag = false;
-
+      it('should save add bank account.', function () {
         scope.confirmRequest();
         scope.$apply();
-
-        expect(dialog.close).not.toHaveBeenCalled();
-      });
-
-      it('should close if TOSAcceptance flag is true', function () {
-        spyOn(dialog, 'close').and.callThrough();
-
-        scope.account.TOSAcceptanceFlag = true;
-
-        scope.confirmRequest();
+        spyOn(AccountManagementMock, 'addBankAccount').and.callThrough();
         scope.$apply();
-
-        expect(dialog.close).toHaveBeenCalled();
+        scope.showSuccessMessage();
+        expect(scope.showSuccessMessage).toHaveBeenCalled();
       });
 
       it('should fire a metric if add is successful', function() {

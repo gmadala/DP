@@ -6,7 +6,7 @@
  */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog) {
+                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement) {
 
     var isDealer = User.isDealer();
 
@@ -16,10 +16,18 @@ angular.module('nextgearWebApp')
 
     //$scope.form = <form directive's controller, assigned by view>
 
-    $q.all([User.getStatics(), User.getInfo()]).then(function(data) {
+    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function(data) {
       // data[0] holds static data like colors and title locations
       // data[1] holds info data like lines of credit and bank accounts
       $scope.options = angular.extend({}, data[0], data[1]);
+
+      // replace bank accounts from getInfo() with the active bank accounts from /dealer/v1_1/summary
+      var activeBankAccounts = _.filter(data[2].BankAccounts, function(bankAccount) {
+        return bankAccount.IsActive === true;
+      });
+
+      $scope.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
+
       $scope.options.locations = Addresses.getActivePhysical();
 
       var optionListsToDefault = [
@@ -117,9 +125,8 @@ angular.module('nextgearWebApp')
     $scope.minValidModelYear = 1900;
     $scope.isYear = (function() {
       var arr = $scope.maxValidModelYear.toString().split('').slice(2),
-          regStr = '(19[0-9][0-9]|200[0-9]|20[0-' +  arr[0] +'][0-' +  arr[1] +'])',
-          regEx = new RegExp(regStr);
-      return regEx;
+        regStr = '(19[0-9][0-9]|200[0-9]|20[0-' +  arr[0] +'][0-' +  arr[1] +'])';
+      return new RegExp(regStr);
     })();
 
     $scope.submit = function () {

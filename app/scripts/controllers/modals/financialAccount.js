@@ -4,9 +4,9 @@
   angular.module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', 'options', 'segmentio', 'metric', 'kissMetricInfo'];
+  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', '$dialog','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
 
-  function FinancialAccountCtrl($scope, AccountManagement, dialog, options, segmentio, metric, kissMetricInfo) {
+  function FinancialAccountCtrl($scope, AccountManagement, dialog, $dialog, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
 
     $scope.tooltipImage = '<div class="tooltip-image">';
 
@@ -34,10 +34,17 @@
 
     $scope.isAddModal = isAddModal();
     $scope.isEditModal = isEditModal();
-    $scope.visitTOS = visitTOS;
-
     $scope.confirmRequest = confirmRequest;
     $scope.close = closeDialog;
+    $scope.agree = false;
+    $scope.AcceptChanges = AcceptChanges;
+    $scope.isTermsConditions = (accountNumber === '');
+
+    function AcceptChanges() {
+      $scope.isAddAccount = true;
+      $scope.isTermsConditions = false;
+      $scope.submit = true;
+    }
 
     /**
      * Decides whether the modal is an add bank account modal.
@@ -53,17 +60,6 @@
      */
     function isEditModal() {
       return options.modal === 'edit';
-    }
-
-    /**
-     * Toggles all relevant flags regarding the Terms of Service to true.
-     * @return {void}
-     */
-    function visitTOS() {
-      if (!$scope.tosVisited) {
-        $scope.account.TOSAcceptanceFlag = true;
-      }
-      $scope.tosVisited = true;
     }
 
     /**
@@ -86,7 +82,7 @@
       var isActiveValid = $scope.account.IsActive || (!$scope.account.IsDefaultDisbursement && !$scope.account.IsDefaultPayment);
       $scope.isAccountNumberValid = $scope.account.AccountNumber === $scope.inputs.confirmAccountNumber;
 
-      return isActiveValid && ($scope.isEditModal || ($scope.isAccountNumberValid && $scope.account.TOSAcceptanceFlag));
+      return isActiveValid && ($scope.isEditModal || ($scope.isAccountNumberValid));
     }
 
     /**
@@ -99,15 +95,7 @@
       var validSubmission = isValidSubmission();
 
       if ($scope.validity.$valid && validSubmission) {
-        if ($scope.isEditModal) {
-          AccountManagement.updateBankAccount($scope.account).then(function() {
-            kissMetricInfo.getKissMetricInfo().then(
-              function(result){
-                segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT,result);
-              });
-            dialog.close($scope.account);
-          });
-        } else if ($scope.isAddModal) {
+        if ($scope.isAddModal) {
           $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function(bankAccountId) {
             kissMetricInfo.getKissMetricInfo().then(
@@ -116,14 +104,25 @@
               });
             $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);
+            $scope.showSuccessMessage();
           });
-        }
-        // Fail gracefully if somehow modal was opened
-        else {
+        } else {
+          // Fail gracefully if somehow modal was opened
           dialog.close();
         }
       }
+      $scope.agree = false;
     }
+
+    /**
+     * Displays a Successful wizard
+     */
+    $scope.showSuccessMessage = function () {
+      var title = gettextCatalog.getString('Success'),
+        msg = gettextCatalog.getString('Your account was saved successfully.'),
+        buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
+      return $dialog.messageBox(title, msg, buttons).open();
+    };
 
     /**
      * Closes the dialog.

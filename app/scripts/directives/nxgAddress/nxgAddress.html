@@ -43,29 +43,29 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
 <!-- CITY AND STATE -->
 <div ng-if="city || state" class="row ng-scope">
   <div class="col-xs-6 custom text-vertical-center" ng-if="city">
-    <label for="addressCity" translate>City</label>
+    <label for="addressCity" translate>City *</label>
     <input class="input-full"
            id="addressCity"
            name="addressCity"
-           ng-class="{ 'nxg-invalid' : validity.addressCity.$error.required || validity.addressCity.$error.pattern }"
+           ng-class="{ 'nxg-invalid' : (validity.addressCity.$error.required || validity.addressCity.$error.pattern) && validity.addressCity.$dirty}"
            ng-model="info.City"
            ng-pattern="cityRegex"
            type="text" required>
     <label class="text-error"
            for="addressCity"
-           ng-show="validity.addressCity.$error.required" translate>
+           ng-show="validity.addressCity.$error.required && validity.addressCity.$dirty" translate>
       Please enter a city.
     </label>
     <label class="text-error"
            for="addressCity"
-           ng-show="validity.addressCity.$error.pattern && !validity.addressCity.$error.required" translate>
+           ng-show="validity.addressCity.$error.pattern && !validity.addressCity.$error.required && validity.addressCity.$dirty" translate>
       City names must only have letters and spaces.
     </label>
 
   </div>
   <div class="col-xs-6 custom text-vertical-center" ng-if="state">
-    <label for="addressState" translate>State</label>
-    <div class="style-select" ng-class="{ 'nxg-invalid' : validity.addressState.$error.required }">
+    <label for="addressState" translate>State *</label>
+    <div class="style-select" ng-class="{ 'nxg-invalid' : validity.addressState.$error.required && validity.addressState.$dirty }">
       <select id="addressState"
               name="addressState"
               ng-model="inputs.state"
@@ -74,7 +74,7 @@ CamelCase is not used for ng-model, since endpoints use capitalized properties.
     </div>
     <label class="text-error"
            for="addressState"
-           ng-show="validity.addressState.$error.required" translate>
+           ng-show="validity.addressState.$error.required && validity.addressState.$dirty" translate>
       Please enter a state.
     </label>
   </div>

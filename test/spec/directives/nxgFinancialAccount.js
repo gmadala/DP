@@ -17,12 +17,12 @@ describe('Directive: nxgFinancialAccount', function () {
     iScope,
     account,
     transaction,
+    undefinedTransaction,
     editedBankAccount;
 
   function createIsolateScope() {
     element = $compile(element)(scope);
     scope.$digest();
-
     iScope = element.isolateScope();
   }
 
@@ -69,7 +69,7 @@ describe('Directive: nxgFinancialAccount', function () {
       FinancialTransactionId: '0ecc6d57-aeeb-4f52-85a2-e9e33a33b1e3',
       MaxDate: '2015-06-13'
     };
-
+    undefinedTransaction = undefined;
     scope = $rootScope.$new();
 
     scope.account = account;
@@ -178,8 +178,8 @@ describe('Directive: nxgFinancialAccount', function () {
 
     createIsolateScope();
 
-    expect(iScope.defaultForDisbursement).toBeFalsy();
-    expect(iScope.defaultForBilling).toBeFalsy();
+    expect(iScope.defaultForDisbursement()).toBeFalsy();
+    expect(iScope.defaultForBilling()).toBeFalsy();
   });
 
   it('routing number and its label should display correctly for US and Canada users.', function() {
@@ -198,10 +198,16 @@ describe('Directive: nxgFinancialAccount', function () {
     expect(iScope.routingNumberLabel).toBe('Transit/Institution Number');
   });
 
-  it('editFinancialAccount should call User.refreshInfo.', function() {
-    iScope.editFinancialAccount();
-    iScope.$apply();
+  it('should display n/a for recent transaction date.', function() {
+    element = angular.element(
+      '<nxg-financial-account account="account" disbursement-account="disbursementAccount"' +
+      ' billing-account="billingAccount" is-stakeholder-active="isStakeholderActive"' +
+      ' is-united-states="isUnitedStates" recent-transaction="undefinedTransaction">' +
+      '</nxg-financial-account>');
+    createIsolateScope();
+    expect(iScope.recentTransactionDate).toBe('n/a');
 
-    expect(User.refreshInfo).toHaveBeenCalled();
   });
+
+
 });

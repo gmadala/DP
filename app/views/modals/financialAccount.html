@@ -1,10 +1,86 @@
 <!-- Uncommented Sections are shared by both Add and Edit Bank Account -->
 <h3 class="modal-header" translate>
-  {{account.AccountId ? 'Edit' : 'Add'}} Financial Account
+ {{account.AccountId ? 'Edit' : 'Add'}} Account
 </h3>
 
-<div class="modal-body to-edge" nxg-autofocus>
-  <form class="modal-inner" name="financialAccountForm">
+ <section class="modal-body to-edge add-account" ng-show="isTermsConditions">
+    <h4 translate class="add-account">Step 1 of 2: Terms and Conditions</h4>
+    <div class="legal-textarea add-account">
+      <p class="well-item">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis sagittis turpis sed varius. Nullam
+        porttitor quis nulla ac porttitor. Aliquam vestibulum elit eu leo aliquam suscipit. Phasellus vitae auctor
+        metus. Sed sed lacinia erat, ac tempus quam. Fusce est nunc, fermentum vel cursus ac, facilisis a ex. Nulla
+        odio nisi, pretium quis enim nec, luctus euismod dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+        ultrices posuere cubilia Curae; In lectus magna, tristique et sem ac, congue fermentum felis.
+      </p>
+
+      <p class="well-item">
+        Cras lacinia aliquet urna, id accumsan libero tristique hendrerit. Aenean arcu mi, fringilla in luctus quis,
+        tincidunt ac sem. Donec sit amet nisi luctus, ornare arcu quis, fringilla tellus. Nullam tempor mauris a nisi
+        vehicula, vitae semper elit dignissim. Ut finibus nunc at lorem sagittis venenatis. Cum sociis natoque
+        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed vitae egestas arcu. Morbi a tincidunt
+        nisl. Mauris vitae erat tempor, interdum nibh quis, viverra nunc. Quisque a ligula id felis elementum
+        fermentum nec sed justo.
+      </p>
+
+      <p class="well-item">
+        Morbi sapien mi, convallis id nibh ac, facilisis faucibus eros. Curabitur finibus ornare facilisis. Fusce
+        commodo tortor eu mauris consectetur, a viverra nulla tristique. Vestibulum vitae varius erat, a faucibus
+        leo. Aliquam erat volutpat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+        mus. Quisque sed tellus sed augue maximus ultrices eu lacinia purus. Vestibulum nibh elit, faucibus sed
+        aliquet a, accumsan euismod enim. Aenean tristique urna ac ligula fringilla, nec dignissim leo suscipit.
+        Vivamus egestas nisi ac lorem posuere consectetur. Vestibulum efficitur mauris et metus porttitor, vitae
+        feugiat lectus scelerisque. Curabitur id feugiat metus. Mauris fringilla interdum elit, sed lobortis nisl
+        cursus ut. Vivamus vestibulum auctor ligula aliquet rutrum. Aliquam finibus scelerisque orci a suscipit.
+        Sed est lacus, ultrices eu libero eget, dapibus hendrerit orci.
+      </p>
+
+      <p class="well-item">
+        Duis ultricies tempus nunc, ac lacinia nulla sodales commodo. In laoreet libero mauris. Duis iaculis dui
+        a nibh porta, eget scelerisque diam mollis. Nam sodales diam sit amet sem porta semper. Praesent dignissim
+        tristique ante, at eleifend sapien pretium non. Fusce metus libero, convallis ut eros eu, maximus pellentesque
+        augue. Morbi nec risus lacinia, posuere dolor ac, rhoncus est. Nullam ut neque est. Donec commodo metus dolor,
+        sed gravida felis tincidunt ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia Curae; Nam ut sodales ex. Proin ut blandit mauris. Fusce dapibus pellentesque quam, sed congue felis
+        sodales et. Ut sit amet tempor ante. Nullam euismod laoreet congue. Cras eget fermentum erat.
+      </p>
+
+      <p class="well-item">
+        Morbi eu mauris diam. In hac habitasse platea dictumst. Donec a pulvinar lectus, sit amet commodo ex. Cras
+        posuere, lorem eu tincidunt tempus, ex felis consectetur velit, id bibendum lectus nisi ut tellus. Sed sed
+        orci luctus, tempor ex a, bibendum lectus. Vestibulum eget massa eu leo faucibus bibendum sed ac mi. Maecenas
+        ut tortor odio. Ut nec lacinia orci. Nunc augue augue, tristique ut felis id, vehicula condimentum tortor.
+        Sed felis mauris, faucibus quis sodales ac, egestas id risus. Suspendisse potenti. Ut sollicitudin ex ac odio
+        pellentesque, pharetra finibus tortor tempor. Mauris quam purus, rhoncus in rhoncus dapibus, porta vel nulla.
+        In dapibus dui viverra porttitor euismod. Mauris efficitur ex sit amet urna luctus molestie.
+      </p>
+
+
+      <p class="well-item">
+        Duis ultricies tempus nunc, ac lacinia nulla sodales commodo. In laoreet libero mauris. Duis iaculis dui
+        a nibh porta, eget scelerisque diam mollis. Nam sodales diam sit amet sem porta semper. Praesent dignissim
+        tristique ante, at eleifend sapien pretium non. Fusce metus libero, convallis ut eros eu, maximus pellentesque
+        augue. Morbi nec risus lacinia, posuere dolor ac, rhoncus est. Nullam ut neque est. Donec commodo metus dolor,
+        sed gravida felis tincidunt ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia Curae; Nam ut sodales ex. Proin ut blandit mauris. Fusce dapibus pellentesque quam, sed congue felis
+        sodales et. Ut sit amet tempor ante. Nullam euismod laoreet congue. Cras eget fermentum erat.
+      </p>
+    </div>
+    <div class="modal-footer add-account">
+      <div class="cr-inline text-left" style="margin-left:10px;">
+        <input type="checkbox" name="terms" id="enableAddAccountTerms" ng-model="agree"/>
+        <label for="enableAddAccountTerms" class="checkbox-img small"></label>
+        <label for="enableAddAccountTerms" class="cr-label" translate>
+          I acknowledge that I have reviewed and agree to the Terms and Conditions.
+        </label>
+      </div>
+    </div>
+  </section>
+
+<div class="modal-body to-edge" nxg-autofocus ng-show="isAddAccount">
+  <p class="required-text">* required</p>
+  <h4 translate class="add-account step-two">Step 2 of 2: Add Your Account</h4>
+  <form class="modal-inner add-account" name="financialAccountForm">
     <div class="row">
       <div class="col-xs-12 cr-inline">
         <input type="checkbox" name="financialAccountActive" id="financialAccountActive"
@@ -17,93 +93,74 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <label for="bankName" translate>Bank Name</label>
+        <label for="bankName" translate>Bank Name *</label>
         <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
-               ng-required="true" ng-class="{ 'nxg-invalid': validity.bankName.$error.required || validity.bankName.$error.pattern }">
-        <label for="bankName" class="text-error" ng-show="validity.bankName.$error.required" translate>
+               ng-required="true" ng-class="{ 'nxg-invalid': financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty}">
+        <label for="bankName" class="text-error" ng-show="financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty" translate>
           Please enter a bank name.
         </label>
       </div>
     </div>
-
-    <!-- EDIT BANK ACCOUNT ONLY -->
-    <div class="small-top-margin smallest-bottom-margin" ng-if="isEditModal">
-      <div class="row">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Account Name</span>
-        </div>
-        <div class="col-xs-7 no-left-padding break-wrap small-right-padding">
-          <span>{{accountNameDisplay}}</span>
-        </div>
-      </div>
-      <div class="row smaller-top-margin">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Account Number</span>
-        </div>
-        <div class="col-xs-7 no-left-padding">
-          <span>{{accountNumberDisplay}}</span>
-        </div>
-      </div>
-      <div class="row smaller-top-margin">
-        <div class="col-xs-5 no-right-padding">
-          <span class="heavy" translate>Routing Number</span>
-        </div>
-        <div class="col-xs-7 no-left-padding">
-          <span>{{routingNumberDisplay}}</span>
-        </div>
-      </div>
-    </div>
-    <!-- END EDIT BANK ACCOUNT ONLY -->
-
-    <!-- ADD BANK ACCOUNT ONLY -->
     <div ng-if="isAddModal">
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="accountNumber" translate>Account Number</label>
+          <label for="accountNumber" translate>Account Number *</label>
           <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
                  ng-model="account.AccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.accountNumber.$error.pattern || validity.accountNumber.$error.required}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.accountNumber.$error.pattern ||
+                 financialAccountForm.accountNumber.$error.required) && financialAccountForm.accountNumber.$dirty}"
                  ng-pattern="accountNumberRegex">
-          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.pattern" translate>
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.pattern  &&
+          financialAccountForm.accountNumber.$dirty" translate>
             Account number must only have numbers.
           </label>
-          <label for="accountNumber" class="text-error" ng-show="validity.accountNumber.$error.required" translate>
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.required  &&
+          financialAccountForm.accountNumber.$dirty" translate>
             Please enter an account number.
           </label>
         </div>
         <div class="col-xs-6 custom">
-          <label for="confirmAccountNumber" translate>Confirm Account Number</label>
+          <label for="confirmAccountNumber" translate>Confirm Account Number *</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.confirmAccountNumber.$error.required || (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.confirmAccountNumber.$error.required &&
+                 financialAccountForm.confirmAccountNumber.$dirty) ||
+                 ((account.AccountNumber != inputs.confirmAccountNumber) && financialAccountForm.confirmAccountNumber.$dirty)}"
                  ng-paste="$event.preventDefault()">
-          <label for="confirmAccountNumber" class="text-error" ng-show="!validity.confirmAccountNumber.$error.required && (!isAccountNumberValid && validity.confirmAccountNumber.$dirty)" translate>
+          <label for="confirmAccountNumber" class="text-error"
+                 ng-show="!financialAccountForm.confirmAccountNumber.$error.required &&
+                 ((account.AccountNumber != inputs.confirmAccountNumber) &&
+                 financialAccountForm.confirmAccountNumber.$dirty)" translate>
             Does not match with account number.
           </label>
-          <label for=confirmAccountNumber class="text-error" ng-show="validity.confirmAccountNumber.$error.required" translate>
+          <label for=confirmAccountNumber class="text-error" ng-show="financialAccountForm.confirmAccountNumber.$error.required &&
+          financialAccountForm.confirmAccountNumber.$dirty" translate>
             Please confirm the account number.
           </label>
         </div>
       </div>
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="routingNumber" translate>Routing Number</label>
+          <label for="routingNumber" translate>Routing Number *</label>
           <input type="text" id="routingNumber" name="routingNumber" class="input-full" maxlength="9"
                  ng-model="account.RoutingNumber" ng-required="true"
-                 ng-class="{ 'nxg-invalid': validity.routingNumber.$error.pattern || validity.routingNumber.$error.required}"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.routingNumber.$error.pattern ||
+                 financialAccountForm.routingNumber.$error.required) && financialAccountForm.routingNumber.$dirty}"
                  ng-pattern="routingNumberRegex">
-          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.pattern" translate>
-            Routing number must only have 9 numbers.
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.pattern &&
+          financialAccountForm.routingNumber.$dirty" translate>
+            Routing number must have 9 digits.
           </label>
-          <label for="routingNumber" class="text-error" ng-show="validity.routingNumber.$error.required" translate>
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.required &&
+          financialAccountForm.routingNumber.$dirty" translate>
             Please enter a routing number.
           </label>
         </div>
         <div class="col-xs-6 custom image-tooltip">
           Where can I find my account and routing numbers?
           <div class="btn-help btn-help-adjust"
-               tooltip-placement="left"
-               tooltip-trigger="click"
+               tooltip-placement="right"
+               tooltip-trigger="mouseenter"
                tooltip-html="true"
                tooltip-html-unsafe="{{ tooltipImage }}"
                tooltip-animation="true">
@@ -114,11 +171,9 @@
       <nxg-address city="true"
                    info="account"
                    state="true"
-                   validity="validity">
+                   validity="financialAccountForm">
       </nxg-address>
     </div>
-    <!-- END ADD BANK ACCOUNT ONLY -->
-
     <div class="row ng-scope">
       <div class="col-xs-6 custom cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
@@ -137,32 +192,15 @@
         </label>
       </div>
     </div>
-
-    <!-- ADD BANK ACCOUNT ONLY -->
-    <div ng-if="isAddModal">
-      <div class="row ng-scope" style="padding-top:15px">
-        <div class="col-xs-12 cr-inline">
-          <input type="checkbox" name="tosAcceptanceFlag" id="tosAcceptanceFlag"
-                 ng-model="account.TOSAcceptanceFlag" ng-disabled="!tosVisited">
-          <label class="checkbox-img" for="tosAcceptanceFlag"></label>
-          <label class="cr-label" for="tosAcceptanceFlag" translate>
-            By clicking this checkbox, I acknowledge that I have reviewed and agree to the
-            <a href="tc.html" target="_blank" ng-click="visitTOS()" translate>Terms and Conditions.</a>
-          </label>
-        </div>
-      </div>
-    </div>
-    <!-- END ADD BANK ACCOUNT ONLY -->
   </form>
 </div>
 
 <div class="modal-footer">
-  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>
-    Cancel Changes
-  </button>
-  <button type="submit" ng-disabled="loading || (isAddModal && !account.TOSAcceptanceFlag)" ng-click="confirmRequest()" class="btn-cta cta-primary" translate>
-    Save Changes
-  </button>
+  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>Cancel</button>
+  <button type="submit" id="submitProceed" class="btn-cta cta-primary" ng-click="AcceptChanges()" translate
+          nxg-autofocus ng-show="!submit" ng-disabled="!agree">Proceed to Step 2</button>
+  <button type="submit" ng-disabled="financialAccountForm.$invalid" id="submitSave" class="btn-cta cta-primary"
+          ng-click="confirmRequest()" translate nxg-autofocus ng-show="submit">Submit</button>
 </div>
 
 

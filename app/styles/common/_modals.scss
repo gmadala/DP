@@ -87,10 +87,16 @@
 
   &.to-edge {
     padding: 0;
+    &.add-account{
+      border-bottom:0;
+    }
   }
 
   .modal-inner {
     padding: 20px;
+    &.add-account{
+      padding: 0 20px 20px 20px;
+    }
   }
 
   .list-table {
@@ -107,9 +113,15 @@
 
   h4 {
     margin: 0 0 5px;
+    &.add-account{
+      margin:15px;
+    }
   }
 }
 
+ .wizard-navigation{
+   margin:10px;
+ }
 .modal-header {
   background: $modalHeader;
   color: $white;
@@ -147,7 +159,12 @@
   border: 0;
   background: #F2F2F2;
   margin-top:0;
-
+  &.add-account{
+    margin-top: 10px;
+    border-top: 1px solid #BBC;
+    border-bottom: 1px solid #BBC;
+    padding:10px 0 8px 5px;
+  }
   .btn {
     margin: 5px 10px;
 
