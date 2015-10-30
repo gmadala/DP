@@ -13,7 +13,7 @@
 angular.module('nextgearWebApp')
   .filter('moment', function (moment) {
     return function (input, outputFormat, inputFormat) {
-      outputFormat = outputFormat || 'M/D/YYYY';
+      outputFormat = outputFormat || 'MM/DD/YYYY';
       if (input === null || !angular.isDefined(input)) {
         return input;
       }
@@ -22,7 +22,7 @@ angular.module('nextgearWebApp')
   })
   .filter('momentUTC', function (moment) {
     return function (input, outputFormat, inputFormat) {
-      outputFormat = outputFormat || 'M/D/YYYY';
+      outputFormat = outputFormat || 'MM/DD/YYYY';
       if (input === null || !angular.isDefined(input)) {
         return input;
       }

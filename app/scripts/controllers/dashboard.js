@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil,
-                                        moment, $filter, gettext, gettextCatalog, capitalizeFilter) {
+                                        moment, $filter, gettext, gettextCatalog, capitalizeFilter, language) {
 
     // for caching our week/month summary data
     $scope.paymentSummary = {
@@ -12,7 +12,22 @@ angular.module('nextgearWebApp')
 
     $scope.viewMode = 'week';
     $scope.viewModeLabel = gettextCatalog.getString(capitalizeFilter($scope.viewMode));
+    $scope.todayMonth = moment().format('MMMM');
+    $scope.todayDate = moment().format('D');
+    $scope.todayYear = moment().format('YYYY');
     $scope.today = moment().format('LL');
+    var languageId = language.getCurrentLanguageId();
+    if(languageId === 2){
+      $scope.calLanguage = 'fr-ca';
+      $scope.todayMonth = gettextCatalog.getString($scope.todayMonth);
+      $scope.today = $scope.todayDate + ' ' + $scope.todayMonth + ' ' + $scope.todayYear;
+    } else if(languageId === 3){
+      $scope.calLanguage = 'es';
+      $scope.todayMonth = gettextCatalog.getString($scope.todayMonth);
+      $scope.today = $scope.todayDate + ' ' + $scope.todayMonth + ', ' + $scope.todayYear;
+    } else {
+      $scope.calLanguage = 'en';
+    }
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
@@ -46,7 +61,7 @@ angular.module('nextgearWebApp')
       var currentCalendarDate = angular.element('.dash-calendar').fullCalendar('getDate');
       var today = new Date();
 
-      if (currentCalendarDate.getFullYear() > today.getFullYear()) {
+      if (moment(currentCalendarDate).year() > moment(today).year()) {
         return false;
       }
 
@@ -55,7 +70,7 @@ angular.module('nextgearWebApp')
           return false;
         }
       } else {
-        if(currentCalendarDate.getMonth() > today.getMonth()) {
+        if(moment(currentCalendarDate).month() > moment(today).month()) {
           return false;
         }
       }

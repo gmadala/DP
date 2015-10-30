@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('AccountManagement', function(api, User) {
+  .factory('AccountManagement', function($q, api, User) {
 
     return {
       get: function() {
@@ -34,21 +34,18 @@ angular.module('nextgearWebApp')
         });
       },
       getFinancialAccountData: function() {
-        return api.request('GET', '/dealer/v1_1/summary').then(function(summary) {
-          // Any Financial Account data tranformations made here
-          return User.getInfo().then(function(info) {
-            var settings = {};
-            settings.BankAccounts = summary.BankAccounts;
-            settings.DefaultDisbursementBankAccountId = info.DefaultDisbursementBankAccountId;
-            settings.DefaultBillingBankAccountId = info.DefaultBillingBankAccountId;
-            settings.AvailableCredit = summary.TotalAvailableCredit;
-            settings.ReserveFunds = summary.ReserveFundsBalance;
-            settings.LastPayment = summary.LastPaymentAmount;
-            settings.LastPaymentDate = summary.LastPaymentDate;
-            settings.UnappliedFunds = summary.UnappliedFundsTotal;
-            settings.TotalAvailable = summary.TotalAvailableUnappliedFunds;
-            return settings;
-          });
+        return $q.all([this.getDealerSummary(), User.refreshInfo()]).then(function(responds) {
+          var settings = {};
+          settings.BankAccounts = responds[0].BankAccounts;
+          settings.DefaultDisbursementBankAccountId = responds[1].DefaultDisbursementBankAccountId;
+          settings.DefaultBillingBankAccountId = responds[1].DefaultBillingBankAccountId;
+          settings.AvailableCredit = responds[0].TotalAvailableCredit;
+          settings.ReserveFunds = responds[0].ReserveFundsBalance;
+          settings.LastPayment = responds[0].LastPaymentAmount;
+          settings.LastPaymentDate = responds[0].LastPaymentDate;
+          settings.UnappliedFunds = responds[0].UnappliedFundsTotal;
+          settings.TotalAvailable = responds[0].TotalAvailableUnappliedFunds;
+          return settings;
         });
       },
       saveBusiness: function(email, enhancedRegEnabled, enhancedRegPin, autoPayEnabled) {
@@ -67,6 +64,14 @@ angular.module('nextgearWebApp')
           TitleReleaseAddressId: addressId
         };
         return api.request('POST', '/UserAccount/titleSettings', req);
+      },
+      getTransactionDate: function(){
+        return api.request('GET', '/dealer/recenttransaction').then(function(results){
+          return results;
+        });
+      },
+      getDealerSummary: function() {
+        return api.request('GET', '/dealer/v1_1/summary');
       }
     };
 

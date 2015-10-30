@@ -4001,8 +4001,8 @@ msgstr "{{ payment.DaysOnFloorplan }} días"
 #: app/views/checkout.html:247
 msgid "{{ paymentQueue.sum.scheduledCount() }} Future Payment"
 msgid_plural "{{ paymentQueue.sum.scheduledCount() }} Future Payments"
-msgstr[0] "{{ paymentQueue.sum.scheduledCount() }} Pago futuro"
-msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Pagos futuros"
+msgstr[0] "{{ paymentQueue.sum.scheduledCount() }} Pago Futuro"
+msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Pagos Futuros"
 
 #: app/views/valuelookup.html:463
 msgid "{{ results.mileage | numeral:'0,0' }} miles"
@@ -4026,6 +4026,43 @@ msgstr ""
 #: app/scripts/controllers/valuelookup.js:8
 msgid "© %YEAR% By Kelley Blue Book Co., Inc."
 msgstr "© %YEAR% Kelley Blue Book Co., Inc."
+
+msgid "January"
+msgstr "enero"
+
+msgid "February"
+msgstr "febrero"
+
+msgid "March"
+msgstr "marzo"
+
+msgid "April"
+msgstr "abril"
+
+msgid "May"
+msgstr "mayo"
+
+msgid "June"
+msgstr "junio"
+
+msgid "July"
+msgstr "julio"
+
+msgid "August"
+msgstr "agosto"
+
+msgid "September"
+msgstr "septiembre"
+
+msgid "October"
+msgstr "octubre"
+
+msgid "November"
+msgstr "noviembre"
+
+msgid "December"
+msgstr "diciembre"
+
 
 #~ msgid "Auto-Disburse Unapplied Funds"
 #~ msgstr "Fondos de auto-desembolso no aplicados"

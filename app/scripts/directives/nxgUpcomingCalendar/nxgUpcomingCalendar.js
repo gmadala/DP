@@ -7,6 +7,7 @@ angular.module('nextgearWebApp')
       restrict: 'AC',
       scope: {
         display: '=', // week or month
+        language: '=', //english, spanish, or french
         data: '='
       },
       controller: function($scope, $element, $filter) {
@@ -22,30 +23,44 @@ angular.module('nextgearWebApp')
         $scope.options = {
           defaultView: 'basicWeek',
           weekends: false,
-          weekMode: 'liquid',
+          fixedWeekCount: 'false',
+          height: 'auto',
+          contentHeight: 150,
+          lang: $scope.language,
           header: {
             left: '',
             center: 'prev, title, next',
             right: ''
           },
-          contentHeight: 150,
-          titleFormat: {
-            month: 'MMMM yyyy',
-            week: 'MMMM yyyy'
+          views: {
+            month: {
+              titleFormat: 'MMMM YYYY',
+              columnFormat: 'ddd'
+            },
+            week: {
+              titleFormat: 'MMM DD, YYYY',
+              columnFormat: 'ddd M/D'
+            }
           },
-          columnFormat: {
-            month: 'ddd',
-            week: 'ddd'
-          },
-          viewDisplay: function(view) {
+          viewRender: function (view, element) {
             // prevent navigation into the past
-            $element.find('.fc-button-prev').toggleClass('fc-state-disabled',
+            $element.find('.fc-prev-button').toggleClass('fc-state-disabled',
               view.start.valueOf() < new Date().valueOf());
 
             // notify that the view has changed
-            $scope.$emit('setDateRange', view.start, view.end);
-          },
-          viewRender: function (view, element) {
+            if ($scope.options.defaultView === 'basicWeek') {
+              var startOfWeek = view.start.startOf('week').add(4, 'hours');
+              var endOfWeek = view.end.endOf('week').add(4,'hours');
+              $scope.$emit('setDateRange', startOfWeek.format('YYYY-MM-DD'), endOfWeek.format('YYYY-MM-DD'));
+            } else if ($scope.options.defaultView === 'month') {
+              // super complex calculation to determine the current month.
+              var afterViewStart = view.start.add(20, 'd');
+              var startOfMonth = afterViewStart.startOf('month');
+              var beforeViewEnd = view.end.subtract(20, 'd');
+              var endOfMonth = beforeViewEnd.endOf('month');
+              $scope.$emit('setDateRange', startOfMonth.format('YYYY-MM-DD'), endOfMonth.format('YYYY-MM-DD'));
+            }
+
             // un-escape HTML characters in event title to make HTML formatting & entities work
             // see http://code.google.com/p/fullcalendar/issues/detail?id=152
             var dayTitles = element.find('th.fc-day-header');
@@ -73,27 +88,30 @@ angular.module('nextgearWebApp')
             if (angular.element(cell).find('.fc-day-number').length === 0) {
               var d = moment(dateKey).date();
 
-              angular.element(cell).find('div > .fc-day-content').before('<div class="fc-day-number">' + d + '</div>');
+              angular.element(cell).find('div > .fc-content').before('<div class="fc-day-number">' + d + '</div>');
             }
           },
           eventRender: function(event, element/*, view*/) {
             // un-escape HTML characters in event title to make HTML formatting & entities work
             // see http://code.google.com/p/fullcalendar/issues/detail?id=152
-            var dayEvents = element.find('span.fc-event-title');
+            var dayEvents = element.find('span.fc-title');
             angular.forEach(dayEvents, function(value) {
               var dayEvent = angular.element(value);
               dayEvent.html(dayEvent.text());
             });
             // add styling hook for events that are today
-            if (moment().isSame(event.start, 'day')) {
+            var eventStart = moment(event.start).format('DD-MM-YYYY');
+            var now = moment().format('DD-MM-YYYY');
+            if (now===eventStart) {
               element.addClass('today');
             }
             // add styling hook for events that are overdue
-            if (moment().isAfter(event.start, 'day')) {
+            eventStart = moment(event.start);
+            if (moment().isAfter(eventStart.add(1, 'day'), 'day')) {
               element.addClass('overdue');
             }
 
-            var inner = element.find('.fc-event-inner');
+            var inner = element.find('.fc-content');
 
             inner.append('<span class="fc-event-subtitle">'+event.subTitle+'</span>');
             inner.addClass('link');
@@ -117,12 +135,9 @@ angular.module('nextgearWebApp')
             return;
           }
 
-          // unfortunately fullCalendar does not have live option setter support, see
-          // https://code.google.com/p/fullcalendar/issues/detail?id=293
-          $scope.cal.fullCalendar('destroy');
-          $scope.cal.fullCalendar(angular.extend($scope.options, {
+          angular.extend($scope.options, {
             defaultView: newValue === 'month' ? newValue : 'basicWeek'
-          }));
+          });
         });
 
         $scope.$watch('data', function(newValue) {

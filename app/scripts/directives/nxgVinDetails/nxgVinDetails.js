@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
   .controller('VinDetailsCtrl', function ($scope, moment, Blackbook, $dialog, $q) {
     var s = $scope.settings = {
       // next year is the highest valid year
-      maxYear: moment().add('years', 1).year(),
+      maxYear: moment().add('years', 2).year(),
       vinMode: 'none', // none|noMatch|matched
       vinLookupPending: false
     };

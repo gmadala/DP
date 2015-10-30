@@ -145,8 +145,8 @@
              ng-show="validity.inputSaleDate.$error.past" translate>
         Please enter a Sales Date in the past.
       </label>
-      <p class="scale-description">
-        <span translate>The actual sale date must be used when flooring a car</span>
+      <p>
+        <span class="scale-description" translate>The actual sale date must be used when flooring a car</span>
         <button class="btn-help inline"
                 tooltip-placement="left"
                 tooltip-popup-delay="300"
@@ -157,8 +157,8 @@
       <label for="inputDisburseAcct" class="input-title" translate>Bank Account</label>
       <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required }">
         <select id="inputDisburseAcct" name="inputDisburseAcct" ng-model="data.BankAccountId"
-              ng-options="account.BankAccountName for account in options.BankAccounts"
-              required>
+                ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in options.BankAccounts"
+                required>
          <option value="" translate>Make Selection</option>
         </select>
       </div>

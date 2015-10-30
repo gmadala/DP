@@ -17,12 +17,14 @@
   @extend %full-width;
   position: absolute;
   top: 0;
-
-  .fc-header {
+}
+.nxg-dash-calendar-container{
+  .fc-toolbar {
     @include border-radius(0);
+    margin-bottom: 0;
   }
 
-  .fc-header-center {
+  .fc-center {
     position: relative;
     height: 42px;
     z-index: 5;
@@ -48,7 +50,7 @@
   @extend .clearfix;
   position: relative;
 
-  .fc-header {
+  .fc-toolbar {
     // @include border-bottom-radius($borderRadius);
     border-width: 0px 1px 1px;
     position: absolute;
@@ -64,14 +66,14 @@
   }
 }
 
-.fc-header {
+.fc-toolbar {
   @extend %full-width;
   @include border-top-radius($borderRadius);
   background: $white;
   border: 1px solid $wellBorder;
   border-width: 1px 1px 0;
 
-  .fc-header-right, .fc-header-left, .fc-header-center {
+  .fc-right, .fc-left, .fc-center {
     padding: 5px 10px;
   }
 
@@ -84,7 +86,7 @@
   }
 }
 
-  .fc-header-title h2 {
+  .fc-toolbar .fc-center h2 {
     font-size: 18px;
     font-weight: bold;
     color: #666666;
@@ -111,23 +113,23 @@
     }
   }
 
-  .fc-button-prev, .fc-button-next {
+  .fc-prev-button, .fc-next-button {
     @extend .btn-unstyle;
     @include box-shadow(none);
     border: 0;
-    margin: 5px;
+    margin: 0 5px 5px 5px;
 
     &.fc-state-disabled {
       border: 0;
-      margin: 5px;
+      margin: 0 5px 5px 5px;
 
-      .fc-text-arrow {
+      .fc-icon {
         color: #BBB;
         font-weight: normal;
       }
     }
 
-    .fc-text-arrow {
+    .fc-icon {
       color: $primary;
     }
   }
@@ -154,6 +156,13 @@
   }
 }
 
+.fc-view-container table{
+  border-bottom: 1px solid #BBB;
+}
+
+.fc-content-skeleton table{
+  border-bottom: none;
+}
 
 .fc-grid {
   border: 0;
@@ -165,7 +174,7 @@
   padding-top: 3px;
 }
 
-.fc-grid .fc-day-content {
+.fc-grid .fc-content {
   padding: 5px;
 }
 
@@ -179,6 +188,7 @@
 
 .fc-week {
   height: 170px;
+  padding: 0;
 
   .fc-day.fc-last {
     min-width: 140px;
@@ -197,14 +207,15 @@
   color: #666;
   background-color: $white;
   text-transform: uppercase;
-  padding: 4px 10px;
 }
 
 .fc-widget-header.fc-day-header {
   @extend %align-left;
+  padding: 4px 10px;
 }
 .fc-widget-content {
   @extend %align-right;
+  box-sizing: border-box;
 }
 
 // Individual Events with Counters
@@ -219,6 +230,10 @@
   .counter {
     float: left;
     margin: 0 5px 5px 0;
+    box-sizing: border-box;
+  }
+  &:hover{
+    color: $text;
   }
 }
 
@@ -232,7 +247,7 @@
     background-color: $danger;
   }
 
-  .fc-event-title {
+  .fc-title {
     font-size: 12px;
     line-height: 1.1;
     color: #666666;
@@ -242,4 +257,12 @@
     font-weight: bold;
     color: $highlight;
     font-size: 16px;
+  }
+
+  .fc-widget-content {
+    text-transform: none;
+  }
+
+  .fc-unthemed td{
+    border-color: $dataTableBorder;
   }

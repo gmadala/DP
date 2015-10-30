@@ -13,7 +13,9 @@ describe('Controller: AccountManagementCtrl', function () {
     AddressesMock,
     AccountManagementMock,
     dialogMock,
-    UserMock;
+    UserMock,
+    recentTransactionMock;
+
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $q) {
@@ -61,11 +63,31 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     ];
 
+    recentTransactionMock = {
+      BankAccountId:'59ebfdb2-03b8-4734-ac04-b97cf6a329f8',
+      FinancialTransactionId:'55310c5d-a241-422a-9f22-5e3f4a4f5a73',
+      MaxDate:'2015-02-25T15:00:45.923'
+    };
+
     AccountManagementMock = {
-      get: function() {
+      get: function () {
+        return {
+          then: function (success) {
+            success(settingsData);
+          }
+        };
+      },
+      getTransactionDate: function(){
         return {
           then: function(success) {
-            success(settingsData);
+            success(recentTransactionMock);
+          }
+        };
+      },
+      getFinancialAccountData: function() {
+        return {
+          then: function(success) {
+            success({});
           }
         };
       }
@@ -114,7 +136,7 @@ describe('Controller: AccountManagementCtrl', function () {
 
     UserMock = {
       isDealer: function() {
-        return null;
+        return true;
       },
       isUnitedStates: function() {
         return null;
@@ -126,6 +148,8 @@ describe('Controller: AccountManagementCtrl', function () {
       }
     };
 
+    spyOn(AccountManagementMock, 'getTransactionDate').and.callThrough();
+
     scope = $rootScope.$new();
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
@@ -135,6 +159,7 @@ describe('Controller: AccountManagementCtrl', function () {
       dealerCustomerSupportPhone: mockCustomerSupportPhone,
       User: UserMock
     });
+    scope.$digest();
   }));
 
   describe('business', function() {
@@ -166,27 +191,27 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.business.editable).toBe(false);
     });
 
-    xit('autoPay should be displayed only for US Dealers', function () {
+    it('autoPay should be displayed only for US Dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.isUnitedStates = true;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.isUnitedStates = false;
       scope.isDealer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     it('autoPay should be editable only for active stakeholders', function () {
@@ -214,22 +239,22 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.brand.autoPay.isEditable()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for quick buyers', function () {
+    it('autoPay should be hidden for quick buyers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.isQuickBuyer = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.isQuickBuyer = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.isQuickBuyer = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     // Once autoPay feature is enabled, this test will fail. Re-enable all other autoPay functionality tests for show/hide
@@ -237,22 +262,22 @@ describe('Controller: AccountManagementCtrl', function () {
       expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
-    xit('autoPay should be hidden for non-auto ACH dealers', function () {
+    it('autoPay should be hidden for non-auto ACH dealers', function () {
 
       scope.isUnitedStates = true;
       scope.isDealer = true;
 
       scope.business.data.useAutoACH = false;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
 
       scope.business.data.useAutoACH = true;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeTruthy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeTruthy();
 
       scope.business.data.useAutoACH = undefined;
 
-      expect(scope.business.autoPay.isDisplayed()).toBeFalsy();
+      expect(scope.brand.autoPay.isDisplayed()).toBeFalsy();
     });
 
     describe('financial', function() {
@@ -284,7 +309,6 @@ describe('Controller: AccountManagementCtrl', function () {
         expect(scope.financial.isAddBankAccountEditable()).toBeFalsy();
       });
 
-      
       // TODO modify second expectation to true once add Bank Account is released to Canada.
       it('add bank account should be enabled for US only.', function() {
         scope.business.data.isStakeholderActive = true;
@@ -301,25 +325,16 @@ describe('Controller: AccountManagementCtrl', function () {
       });
 
       it('add bank account should update local financial data', function() {
-        spyOn(scope.financial, 'addFinancialAccount').and.callThrough();
+        spyOn(AccountManagementMock, 'getFinancialAccountData').and.callThrough();
 
         scope.financial.addFinancialAccount();
-        // Resolve promise
         scope.$apply();
 
-        expect(scope.financial.data.bankAccounts).toEqual(updatedBankData);
-
-        expect(scope.financial.data.disbursementAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
-        expect(scope.financial.data.billingAccount).toBe('66e9e774-3dcc-4852-801d-b6e91d161a13');
+        expect(AccountManagementMock.getFinancialAccountData).toHaveBeenCalled();
       });
 
-      it('addFinancialAccount should call User.refreshInfo.', function() {
-        spyOn(UserMock, 'refreshInfo').and.callFake(angular.noop);
-
-        scope.financial.addFinancialAccount();
-        scope.$apply();
-
-        expect(UserMock.refreshInfo).toHaveBeenCalled();
+      it('should display recent transaction date for the bank account only for Dealers', function(){
+        expect(AccountManagementMock.getTransactionDate).toHaveBeenCalled();
       });
     });
 
@@ -339,7 +354,9 @@ describe('Controller: AccountManagementCtrl', function () {
             enhancedRegistrationEnabled: enhancedRegistrationEnabled
           };
           return {
-            then: function(callback){callback()}
+            then: function(callback){
+              callback();
+            }
           };
         };
         scope.business.edit();
@@ -403,7 +420,9 @@ describe('Controller: AccountManagementCtrl', function () {
             titleAddressId: titleAddressId
           };
           return {
-            then: function(callback){callback()}
+            then: function(callback){
+              callback();
+            }
           };
         };
 
