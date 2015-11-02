@@ -59,17 +59,17 @@
           break;
         case prv.profile.DEMO:
           apiDomain = 'https://demo.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          ngenDomain = 'https://dis-demo-ngen-api.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.dev.nextgearcapital.com';
+          ngenDomain = 'https://dis-ngen-api.dev.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TRAINING:
           apiDomain = 'https://training.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          ngenDomain = 'https://dis-training-ngen-api.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.PRODUCTION:
