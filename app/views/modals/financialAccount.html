@@ -1,7 +1,4 @@
-<!-- Uncommented Sections are shared by both Add and Edit Bank Account -->
-<h3 class="modal-header" translate>
- {{account.AccountId ? 'Edit' : 'Add'}} Account
-</h3>
+<h3 class="modal-header" translate>Add Account</h3>
 
  <section class="modal-body to-edge add-account" ng-show="isTermsConditions">
     <h4 translate class="add-account">Step 1 of 2: Terms and Conditions</h4>
@@ -78,7 +75,7 @@
   </section>
 
 <div class="modal-body to-edge" nxg-autofocus ng-show="isAddAccount">
-  <p class="required-text">* required</p>
+  <p class="required-text">* <span translate>required</span></p>
   <h4 translate class="add-account step-two">Step 2 of 2: Add Your Account</h4>
   <form class="modal-inner add-account" name="financialAccountForm">
     <div class="row">
@@ -93,7 +90,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <label for="bankName" translate>Bank Name *</label>
+        <label for="bankName"><span translate>Bank Name</span> *</label>
         <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
                ng-required="true" ng-class="{ 'nxg-invalid': financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty}">
         <label for="bankName" class="text-error" ng-show="financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty" translate>
@@ -104,7 +101,7 @@
     <div ng-if="isAddModal">
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="accountNumber" translate>Account Number *</label>
+          <label for="accountNumber"><span translate>Account Number</span> *</label>
           <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
                  ng-model="account.AccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': (financialAccountForm.accountNumber.$error.pattern ||
@@ -120,7 +117,7 @@
           </label>
         </div>
         <div class="col-xs-6 custom">
-          <label for="confirmAccountNumber" translate>Confirm Account Number *</label>
+          <label for="confirmAccountNumber"><span translate>Confirm Account Number</span> *</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': (financialAccountForm.confirmAccountNumber.$error.required &&
@@ -141,7 +138,7 @@
       </div>
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
-          <label for="routingNumber" translate>Routing Number *</label>
+          <label for="routingNumber"><span translate>Routing Number</span> *</label>
           <input type="text" id="routingNumber" name="routingNumber" class="input-full" maxlength="9"
                  ng-model="account.RoutingNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': (financialAccountForm.routingNumber.$error.pattern ||
