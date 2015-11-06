@@ -17,11 +17,12 @@
       if (end === undefined) {
         end = '...';
       }
-
-      if (text.length <= length || text.length - end.length <= length) {
-        return text;
-      } else {
-        return String(text).substring(0, length - end.length) + end;
+      if(text){
+        if (text.length <= length || text.length - end.length <= length) {
+          return text;
+        } else {
+          return String(text).substring(0, length - end.length) + end;
+        }
       }
     };
   }
