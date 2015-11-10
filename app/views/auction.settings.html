@@ -138,17 +138,33 @@
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
         <div class="row">
           <label class="col-xs-5" for="businessEmail" translate>Business Email</label>
+          <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
+          block should be removed
           <div class="col-xs-7 zeroLeftPadding" nxg-input model="business.data.email" editable="business.editable">
             <input type="email" class="styled-input" name="businessEmail" ng-model="business.dirtyData.email" value="business.dirtyData.email" ng-maxlength="100" ng-class="{ 'nxg-invalid': business.validation.businessEmail.$invalid }" required />
             <label class="text-error" ng-show="business.validation.businessEmail.$invalid" translate>
                 Please enter a valid email address.
             </label>
           </div>
+          -->
+          <!-- Begin temporary code -->
+          <div class="col-xs-5" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 28}}</div>
+          <div class="col-xs-2">
+            <div class="btn-help btn-help-adjust"
+                 tooltip-placement="left"
+                 tooltip-trigger="mouseenter"
+                 tooltip-html="true"
+                 tooltip-html-unsafe="{{ 'To change your email address, please contact customer service for further assistance.' | translate }}"
+                 tooltip-animation="true">
+              <span nxg-icon="icon-help"></span>
+            </div>
+          </div>
+          <!-- End temporary code -->
         </div>
 
         <div class="row">
           <label class="col-xs-5" for="enhanced" translate>Enhanced Registration Enabled?</label>
-          <div class="col-xs-7 zeroLeftPadding">
+          <div class="col-xs-7">
             <!-- Show "Yes" if enhanced registration is enabled.
             If it is not enabled, show nothing. -->
             <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
