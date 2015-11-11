@@ -28,17 +28,18 @@ angular.module('nextgearWebApp')
       $scope.kissMetricData = result;
     });
 
+    $scope.documents = [] ;
 
-    $scope.documents = [
-      {
+    if (isUnitedStates){
+      $scope.documents.push({
         title: gettextCatalog.getString('Welcome Packet'),
         url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf',
         metric:metric.AUCTION_RESOURCES_WELCOME_PACKET_PAGE
-      },
-      {
+      });
+      $scope.documents.push({
         title: gettextCatalog.getString('Instructions for Sellers'),
         url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf',
         metric: metric.AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE
-      }
-    ];
+      });
+    }
   });
