@@ -1,5 +1,5 @@
 <form class="row" name="form" novalidate>
-  <section class="col-xs-6 well first">
+  <section class="col-xs-4 well first">
     <h2 class="well-title" translate>1. Vehicle Information</h2>
     <div class="well-form">
 
@@ -74,7 +74,7 @@
     </div>
   </section>
 
-  <section class="col-xs-6 well">
+  <section class="col-xs-4 well">
     <h2 class="well-title" translate>2. Sale Information</h2>
     <div class="well-form">
       <label translate>Trade in</label>
@@ -187,23 +187,57 @@
              ng-show="validity.inputDisburseAcct.$error.required" translate>
         Please select a Bank Account for Deposit.
       </label>
-
-      <div class="form-footer button-group">
-        <button class="btn-cta cta-secondary"
-                type="button"
-                ng-disabled="submitInProgress"
-                ng-click="cancel()"
-                translate>
-          Cancel
-        </button>
-        <button class="btn-cta cta-primary"
-                ng-disabled="submitInProgress"
-                type="submit"
-                ng-click="submit()"
-                translate>
-          Floor Vehicle
-        </button>
-      </div>
     </div>
+  </section>
+
+  <section class="col-xs-4 well">
+    <h2 class="well-title" translate>3. Document Upload</h2>
+    <div class="well-form">
+      <p>
+        For faster funding, please upload your floor plan documents now. Document types should include:
+      </p>
+      <ul>
+        <li><span class="glyphicon glyphicon-ok"></span>Bill of Sale</li>
+        <li><span class="glyphicon glyphicon-ok"></span>Front of Title</li>
+        <li><span class="glyphicon glyphicon-ok"></span>Back of Title</li>
+        <li><span class="glyphicon glyphicon-ok"></span>Other required documents</li>
+      </ul>
+      <p>
+        Not sure what to send?
+        <a href="/documents/Dealer%20Funding%20Checklist.pdf" class="primary">View the Dealer Funding Checklist.</a>
+      </p>
+
+      <!-- Upload file code -->
+      <div ngf-drop
+           ng-model="files" class="drop-box"
+           ngf-drag-over-class="'dragover'"
+           ngf-allow-dir="true"
+           ngf-pattern="'image/*,application/pdf'"
+           ngf-multiple="true"
+           ngf-keep="true" >
+        <div ng-hide="files" class="drop-box-empty">Drag files here...</div>
+        <div ng-show="files">
+          <ul class="files-container">
+            <li ng-repeat="file in files">
+              <img ngf-thumbnail="file" class="thumb">
+              <div class="file-delete" ng-click="file=null">&times;</div>
+              <div>{{file.name}} {{file.$error}} {{file.$errorParam}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+      <p>Files: {{files}}</p>
+      <!-- End upload file code -->
+
+    </div>
+    <button class="btn-cta cta-full cta-primary"
+            ng-disabled="submitInProgress"
+            type="submit"
+            ng-click="submit()"
+            translate>
+      Review and Floor Vehicle
+    </button>
   </section>
 </form>

@@ -38,6 +38,8 @@ module.exports = function (karma) {
       'app/components/highcharts.com/js/highcharts.src.js',
       'app/private-components/angular-gettext/dist/angular-gettext.js',
       'app/private-components/angular-segmentio/angular-segmentio.js',
+      'app/components/ng-file-upload/ng-file-upload.js',
+      'app/components/ng-file-upload/ng-file-upload-shim.js',
 
       // Once ui-bootstrap is updated to version 0.6.0 or greater this
       // reference should go back to the minified bower installed version
