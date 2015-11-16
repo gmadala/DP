@@ -102,6 +102,13 @@
       <div class="row ng-scope">
         <div class="col-xs-6 custom">
           <label for="accountNumber"><span translate>Account Number</span> *</label>
+        </div>
+        <div class="col-xs-6 custom">
+          <label for="confirmAccountNumber"><span translate>Confirm Account Number</span> *</label>
+        </div>
+      </div>
+      <div class="row ng-scope">
+        <div class="col-xs-6 custom">
           <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
                  ng-model="account.AccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': (financialAccountForm.accountNumber.$error.pattern ||
@@ -117,7 +124,6 @@
           </label>
         </div>
         <div class="col-xs-6 custom">
-          <label for="confirmAccountNumber"><span translate>Confirm Account Number</span> *</label>
           <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
                  ng-model="inputs.confirmAccountNumber" ng-required="true"
                  ng-class="{ 'nxg-invalid': (financialAccountForm.confirmAccountNumber.$error.required &&
@@ -154,7 +160,7 @@
           </label>
         </div>
         <div class="col-xs-6 custom image-tooltip">
-          Where can I find my account and routing numbers?
+          <span translate>Where can I find my account and routing numbers?</span>
           <div class="btn-help btn-help-adjust"
                tooltip-placement="right"
                tooltip-trigger="mouseenter"
@@ -172,7 +178,7 @@
       </nxg-address>
     </div>
     <div class="row ng-scope">
-      <div class="col-xs-6 custom cr-inline">
+      <div class="col-xs-12 custom cr-inline">
         <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
                ng-model="account.IsDefaultDisbursement" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForDisbursement"></label>
@@ -180,7 +186,7 @@
           <strong translate>Default for deposits</strong>
         </label>
       </div>
-      <div class="col-xs-6 custom cr-inline">
+      <div class="col-xs-12 custom cr-inline">
         <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
                ng-model="account.IsDefaultPayment" ng-disabled="!account.IsActive"/>
         <label class="checkbox-img" for="defaultForPayment"></label>
