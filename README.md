@@ -77,7 +77,6 @@ Python is a dependency for mock-Api.
     npm install -g bower 
     npm install -g grunt 
     npm install -g grunt-cli 
-    npm install -g api-mock
     
 Installs need to be done separately, you get an error thrown when installing in the same command.
 
