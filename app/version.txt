@@ -1,1 +1,2 @@
-<!-- @echo GIT_SHA -->
+Stash hash: <!-- @echo GIT_SHA -->
+Fix version: <!-- @echo VERSION -->
