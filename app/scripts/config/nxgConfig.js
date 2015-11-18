@@ -64,7 +64,7 @@
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://dis-ngen-api.dev.nextgearcapital.com/';
+          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
           break;
         case prv.profile.TRAINING:
