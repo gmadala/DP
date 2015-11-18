@@ -136,6 +136,7 @@
 
 // STATIC ICONS
 .icon-alert, .icon-failure {  fill: $red; }
+.failure-icon{ color: $red; }
 .icon-warning { fill: $yellow; }
 .icon-info { fill: $primary; }
 .icon-success { fill: $green; }
@@ -193,4 +194,8 @@
 
 .glyphicon-ok{
   color: $success;
+}
+
+.icon-spacing{
+  margin-right: 3%;
 }

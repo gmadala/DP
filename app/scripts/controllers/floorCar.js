@@ -6,7 +6,7 @@
  */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement) {
+                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
     var isDealer = User.isDealer();
 
@@ -101,6 +101,7 @@ angular.module('nextgearWebApp')
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
+      $scope.files = null;
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');
@@ -148,6 +149,11 @@ angular.module('nextgearWebApp')
         resolve: {
           formData: function () {
             return angular.copy($scope.data);
+          },
+          fileNames: function(){
+            return _.map($scope.files, function(file) {
+              return file.name;
+            });
           }
         }
       };
@@ -167,18 +173,89 @@ angular.module('nextgearWebApp')
 
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
-        function (/*success*/) {
+        function (resp) { /*floorplan success*/
           $scope.submitInProgress = false;
-          var title = gettextCatalog.getString('Flooring Request Submitted'),
-            msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),
-            buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-          $dialog.messageBox(title, msg, buttons).open().then(function () {
+
+
+          var upload = Upload.upload({
+            url: nxgConfig.apiBase + 'floorplan/upload/' + resp.FloorplanId,
+            method: 'POST',
+            data: {
+              files: $scope.files
+            }
+          });
+          upload.then(function(resp) {/*upload success*/
+            if (resp.data.Success) {
+              var floorMessage={
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                dialogClass: 'modal modal-medium',
+                templateUrl: 'views/modals/floorCarMessage.html',
+                controller: 'FloorCarMessageCtrl',
+                resolve: {
+                  floorSuccess: function () {
+                    return true;
+                  },
+                  uploadSuccess: function () {
+                    return true;
+                  }
+                }
+              };
+              $dialog.dialog(floorMessage).open().then(function(){
+                $scope.reset();
+              });
+            } else {
+              var floorMessageFail={
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                dialogClass: 'modal modal-medium',
+                templateUrl: 'views/modals/floorCarMessage.html',
+                controller: 'FloorCarMessageCtrl',
+                resolve: {
+                  floorSuccess: function () {
+                    return true;
+                  },
+                  uploadSuccess: function () {
+                    return false;
+                  }
+                }
+              };
+              $dialog.dialog(floorMessageFail).open().then(function(){
+                $scope.reset();
+              });
+            }
+          });
+        }, function (/*floorplan error*/) {
+          $scope.submitInProgress = false;
+          var floorMessageFailed={
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            dialogClass: 'modal modal-medium',
+            templateUrl: 'views/modals/floorCarMessage.html',
+            controller: 'FloorCarMessageCtrl',
+            resolve: {
+              floorSuccess: function () {
+                return false;
+              },
+              uploadSuccess: function () {
+                return false;
+              }
+            }
+          };
+          $dialog.dialog(floorMessageFailed).open().then(function(){
             $scope.reset();
           });
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
         }
       );
+    };
+
+    $scope.removeFile = function(file) {
+      $scope.files = $scope.files.filter(function (f) {
+        return f.name !== file.name;
+      });
     };
 
     $scope.cancel = function () {

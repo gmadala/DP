@@ -135,6 +135,13 @@ input[type="color"] {
   }
 }
 
+input[type="file"]{
+  border: none;
+  background: none;
+  width: 60%;
+  display: inline;
+}
+
 // inputs that are the full-width of parent
 .input-full {
   @extend %full-width;
@@ -779,17 +786,25 @@ input[type="radio"] {
   }
 }
 
+.supported-files{
+  font-size: 10px;
+  color: #BBBCBE;
+  padding-top: 10px;
+}
+
 .drop-box{
   background: #FBFBFB;
-  border: 2px dashed #DDD;
-  width: 93%;
-  min-height: 65px;
+  border: 2px dashed #BBBCBE;
+  width: 100%;
+  min-height: 140px;
   text-align: left;
-  margin: 10px;
+  margin: 10px 0 0 0;
 }
 .drop-box-empty{
-  padding-top: 15px;
+  padding-top: 50px;
   text-align: center;
+  font-size: 14px;
+  color: #BBBCBE;
 }
 .dragover{
   border: 2px dashed #069;

@@ -55,6 +55,9 @@ p {
   color: $text;
   margin: 0;
 }
+p.spaced{
+  padding: 5px 0 5px 0;
+}
 
 // Links
 a, a:link, a:visited {
@@ -207,4 +210,9 @@ ul {
       border-left: 1px solid $highlight;
     }
   }
+}
+
+ul.document-list{
+  padding-left: 5%;
+  line-height: 20px;
 }
