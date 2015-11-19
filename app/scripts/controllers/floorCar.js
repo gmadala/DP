@@ -172,10 +172,18 @@ angular.module('nextgearWebApp')
       }
 
       $scope.submitInProgress = true;
+
+      var baseDialogParams = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        dialogClass: 'modal modal-medium',
+        templateUrl: 'views/modals/floorCarMessage.html',
+        controller: 'FloorCarMessageCtrl',
+      };
+
       Floorplan.create($scope.data).then(
         function (resp) { /*floorplan success*/
-          $scope.submitInProgress = false;
-
 
           var upload = Upload.upload({
             url: nxgConfig.apiBase + '/floorplan/upload/' + resp.FloorplanId,
@@ -184,58 +192,53 @@ angular.module('nextgearWebApp')
               files: $scope.files
             }
           });
-          upload.then(function(resp) {/*upload success*/
-            if (resp.data.Success) {
-              var floorMessage={
-                backdrop: true,
-                keyboard: true,
-                backdropClick: true,
-                dialogClass: 'modal modal-medium',
-                templateUrl: 'views/modals/floorCarMessage.html',
-                controller: 'FloorCarMessageCtrl',
-                resolve: {
-                  floorSuccess: function () {
-                    return true;
-                  },
-                  uploadSuccess: function () {
-                    return true;
-                  }
+
+          upload.then(function(resp) {
+            $scope.submitInProgress = false;
+            // floorplan created successfully.
+            var dialogParams = angular.extend(baseDialogParams, {
+              resolve: {
+                floorSuccess: function () {
+                  return true;
                 }
-              };
-              $dialog.dialog(floorMessage).open().then(function(){
-                $scope.reset();
+              }
+            });
+
+            if (resp.data.Success) {
+              dialogParams = angular.extend(baseDialogParams.resolve, {
+                uploadSuccess: function () {
+                  return true;
+                }
               });
             } else {
-              var floorMessageFail={
-                backdrop: true,
-                keyboard: true,
-                backdropClick: true,
-                dialogClass: 'modal modal-medium',
-                templateUrl: 'views/modals/floorCarMessage.html',
-                controller: 'FloorCarMessageCtrl',
-                resolve: {
-                  floorSuccess: function () {
-                    return true;
-                  },
-                  uploadSuccess: function () {
-                    return false;
-                  }
+              dialogParams = angular.extend(baseDialogParams.resolve, {
+                uploadSuccess: function () {
+                  return false;
                 }
-              };
-              $dialog.dialog(floorMessageFail).open().then(function(){
-                $scope.reset();
               });
             }
+            $dialog.dialog(dialogParams).open().then(function(){
+              $scope.reset();
+            });
+          }, function() {
+            $scope.submitInProgress = false;
+            var dialogParams = angular.extend(baseDialogParams, {
+              resolve: {
+                floorSuccess: function () {
+                  return true;
+                },
+                uploadSuccess: function () {
+                  return false;
+                }
+              }
+            });
+            $dialog.dialog(dialogParams).open().then(function(){
+              $scope.reset();
+            });
           });
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
-          var floorMessageFailed={
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            dialogClass: 'modal modal-medium',
-            templateUrl: 'views/modals/floorCarMessage.html',
-            controller: 'FloorCarMessageCtrl',
+          var dialogParams = angular.extend(baseDialogParams, {
             resolve: {
               floorSuccess: function () {
                 return false;
@@ -244,8 +247,8 @@ angular.module('nextgearWebApp')
                 return false;
               }
             }
-          };
-          $dialog.dialog(floorMessageFailed).open().then(function(){
+          });
+          $dialog.dialog(dialogParams).open().then(function(){
             $scope.reset();
           });
         }
