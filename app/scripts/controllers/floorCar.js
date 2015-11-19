@@ -178,7 +178,7 @@ angular.module('nextgearWebApp')
 
 
           var upload = Upload.upload({
-            url: nxgConfig.apiBase + 'floorplan/upload/' + resp.FloorplanId,
+            url: nxgConfig.apiBase + '/floorplan/upload/' + resp.FloorplanId,
             method: 'POST',
             data: {
               files: $scope.files
