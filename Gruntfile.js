@@ -16,6 +16,7 @@ module.exports = function(grunt) {
     useMock = mockApi.mockApi(yeomanConfig.api);
 
   var defaultTarget = 'test';
+  var defaultVersion = '15.11.3';
   var defaultProtractorSuite = 'login'; // TODO may want to change to smoke or dealer later
 
   // element format:
@@ -434,6 +435,7 @@ module.exports = function(grunt) {
     env: {
       dev: {
         ENV: grunt.option('target') || defaultTarget,
+        VERSION: grunt.option('buildVersion') || defaultVersion,
         GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
       }
     },

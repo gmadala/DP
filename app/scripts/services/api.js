@@ -118,6 +118,9 @@ angular.module('nextgearWebApp')
                 if(response.data.Message === '401') {
                   error = onSessionTimeout(self, debug);
                 }
+                else if (url.indexOf('extensionPreview') > -1) {
+                  // just reject the promise if extension preview fail.
+                }
                 else {
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
                   error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
