@@ -101,7 +101,7 @@ angular.module('nextgearWebApp')
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
-      $scope.files = null;
+      $scope.files = undefined;
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');
@@ -173,30 +173,30 @@ angular.module('nextgearWebApp')
 
       $scope.submitInProgress = true;
 
-      var baseDialogParams = {
+      var dialogParams = {
         backdrop: true,
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
         templateUrl: 'views/modals/floorCarMessage.html',
-        controller: 'FloorCarMessageCtrl',
+        controller: 'FloorCarMessageCtrl'
       };
 
       Floorplan.create($scope.data).then(
-        function (resp) { /*floorplan success*/
+        function (reponse) { /*floorplan success*/
 
           var upload = Upload.upload({
-            url: nxgConfig.apiBase + '/floorplan/upload/' + resp.FloorplanId,
+            url: nxgConfig.apiBase + '/floorplan/upload/' + reponse.FloorplanId,
             method: 'POST',
             data: {
-              files: $scope.files
+              file: $scope.files
             }
           });
 
-          upload.then(function(resp) {
+          upload.then(function(reponse) {
             $scope.submitInProgress = false;
             // floorplan created successfully.
-            var dialogParams = angular.extend(baseDialogParams, {
+            angular.extend(dialogParams, {
               resolve: {
                 floorSuccess: function () {
                   return true;
@@ -204,14 +204,14 @@ angular.module('nextgearWebApp')
               }
             });
 
-            if (resp.data.Success) {
-              dialogParams = angular.extend(baseDialogParams.resolve, {
+            if (reponse.data.Success) {
+              angular.extend(dialogParams.resolve, {
                 uploadSuccess: function () {
                   return true;
                 }
               });
             } else {
-              dialogParams = angular.extend(baseDialogParams.resolve, {
+              angular.extend(dialogParams.resolve, {
                 uploadSuccess: function () {
                   return false;
                 }
@@ -222,7 +222,7 @@ angular.module('nextgearWebApp')
             });
           }, function() {
             $scope.submitInProgress = false;
-            var dialogParams = angular.extend(baseDialogParams, {
+            angular.extend(dialogParams, {
               resolve: {
                 floorSuccess: function () {
                   return true;
@@ -238,7 +238,7 @@ angular.module('nextgearWebApp')
           });
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
-          var dialogParams = angular.extend(baseDialogParams, {
+          angular.extend(dialogParams, {
             resolve: {
               floorSuccess: function () {
                 return false;

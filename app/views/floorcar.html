@@ -212,6 +212,7 @@
       <!-- Upload file code -->
       <div ngf-drop
            ng-model="files" class="drop-box"
+           ngf-fix-orientation="false"
            ngf-drag-over-class="'dragover'"
            ngf-allow-dir="true"
            ngf-pattern="'image/*,application/pdf'"
@@ -236,6 +237,7 @@
              ngf-multiple="true"
              ngf-pattern="'image/*,application/pdf'"
              ngf-keep="true"
+             ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
       <!--IE9 workaround -->
       <div ngf-no-file-drop>
