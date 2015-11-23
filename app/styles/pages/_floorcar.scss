@@ -1,0 +1,23 @@
+// Styling override for the floor car a vehicle page.
+
+#FloorCarPage {
+  .styled-input {
+    input {
+      width: 90%;
+    }
+  }
+
+  .smallInput {
+    width: 100%;
+  }
+
+  .input-prepend, #nxg-vin-no-match-info, .nxg-static {
+    input {
+      width: 95%;
+    }
+  }
+  
+  input {
+    width: 100%
+  }
+}

@@ -93,13 +93,15 @@
 
   <div>
     <h4 translate>Uploaded Documents</h4>
-    <ul>
-      <li ng-repeat="fileName in fileNames">{{ fileName }}</li>
+    <ul class="list-table">
+      <li class="list-table-row" data-ng-repeat="fileName in fileNames">
+        <p class="col-xs-12">{{ fileName }}</p>
+      </li>
     </ul>
   </div>
 
-  <div class="center"ng-show="isDealer">
-    <a ng-href="{{ documentLink }}" target="_blank" translate>View Dealer Funding Checklist (PDF)</a>
+  <div class="center" ng-show="isDealer">
+    <button class="btn-link heavy" ng-click="openDocument()" translate>View Dealer Funding Checklist (PDF)</button>
   </div>
 </div>
 
