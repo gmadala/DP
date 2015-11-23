@@ -207,7 +207,7 @@
         <a href="/documents/Dealer%20Funding%20Checklist.pdf" class="primary" translate>View the Dealer Funding Checklist.</a>
       </p>
 
-      <p class="supported-files" translate>Supported formats: jpg, doc, pdf. 5MB max per file.</p>
+      <p class="supported-files" translate>Supported formats: image, word, excel and pdf. 5MB max per file.</p>
 
       <!-- Upload file code -->
       <div ngf-drop
@@ -215,7 +215,7 @@
            ngf-fix-orientation="false"
            ngf-drag-over-class="'dragover'"
            ngf-allow-dir="true"
-           ngf-pattern="'image/*,application/pdf'"
+           ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*'"
            ngf-multiple="true"
            ngf-keep="true"
            ngf-max-size="'5MB'">
@@ -235,7 +235,7 @@
              ngf-select
              ng-model="files"
              ngf-multiple="true"
-             ngf-pattern="'image/*,application/pdf'"
+             ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*'"
              ngf-keep="true"
              ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
