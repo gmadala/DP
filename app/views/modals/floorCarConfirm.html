@@ -91,6 +91,13 @@
     </ul>
   </div>
 
+  <div>
+    <h4 translate>Uploaded Documents</h4>
+    <ul>
+      <li ng-repeat="fileName in fileNames">{{ fileName }}</li>
+    </ul>
+  </div>
+
   <div class="center"ng-show="isDealer">
     <a ng-href="{{ documentLink }}" target="_blank" translate>View Dealer Funding Checklist (PDF)</a>
   </div>

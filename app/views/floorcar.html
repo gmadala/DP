@@ -1,5 +1,5 @@
 <form class="row" name="form" novalidate>
-  <section class="col-xs-6 well first">
+  <section class="col-xs-4 well first left-margin-large">
     <h2 class="well-title" translate>1. Vehicle Information</h2>
     <div class="well-form">
 
@@ -74,7 +74,7 @@
     </div>
   </section>
 
-  <section class="col-xs-6 well">
+  <section class="col-xs-4 well left-margin-large">
     <h2 class="well-title" translate>2. Sale Information</h2>
     <div class="well-form">
       <label translate>Trade in</label>
@@ -187,23 +187,78 @@
              ng-show="validity.inputDisburseAcct.$error.required" translate>
         Please select a Bank Account for Deposit.
       </label>
-
-      <div class="form-footer button-group">
-        <button class="btn-cta cta-secondary"
-                type="button"
-                ng-disabled="submitInProgress"
-                ng-click="cancel()"
-                translate>
-          Cancel
-        </button>
-        <button class="btn-cta cta-primary"
-                ng-disabled="submitInProgress"
-                type="submit"
-                ng-click="submit()"
-                translate>
-          Floor Vehicle
-        </button>
-      </div>
     </div>
+  </section>
+
+  <section class="col-xs-4 well left-margin-large">
+    <h2 class="well-title" translate>3. Document Upload</h2>
+    <div class="well-form">
+      <p class="spaced" translate>
+        For faster funding, please upload your floor plan documents now. Document types should include:
+      </p>
+      <ul class="document-list">
+        <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Bill of Sale</span></li>
+        <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Front of Title</span></li>
+        <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Back of Title</span></li>
+        <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Other required documents</span></li>
+      </ul>
+      <p>
+        <span translate>Not sure what to send?</span>
+        <a href="/documents/Dealer%20Funding%20Checklist.pdf" class="primary" translate>View the Dealer Funding Checklist.</a>
+      </p>
+
+      <p class="supported-files" translate>Supported formats: jpg, doc, pdf. 5MB max per file.</p>
+
+      <!-- Upload file code -->
+      <div ngf-drop
+           ng-model="files" class="drop-box"
+           ngf-fix-orientation="false"
+           ngf-drag-over-class="'dragover'"
+           ngf-allow-dir="true"
+           ngf-pattern="'image/*,application/pdf'"
+           ngf-multiple="true"
+           ngf-keep="true"
+           ngf-max-size="'5MB'">
+        <div ng-hide="files" class="drop-box-empty" translate>Drag files here...</div>
+        <div ng-show="files">
+          <ul class="files-container">
+            <li ng-repeat="file in files">
+              <img ngf-thumbnail="file" class="thumb">
+              <div class="file-delete" ng-click="removeFile(file)">&times;</div>
+              <div>{{file.name}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <span translate>Can't drag & drop?</span>
+      <input type="file"
+             ngf-select
+             ng-model="files"
+             ngf-multiple="true"
+             ngf-pattern="'image/*,application/pdf'"
+             ngf-keep="true"
+             ngf-fix-orientation="false"
+             ngf-max-size="'5MB'">
+      <!--IE9 workaround -->
+      <div ngf-no-file-drop>
+        <div ng-show="files">
+          <ul class="files-container" style="border-style: solid">
+            <li ng-repeat="file in files">
+              <img ngf-thumbnail="file" class="thumb">
+              <div class="file-delete" ng-click="removeFile(file)">&times;</div>
+              <div>{{file.name}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- End upload file code -->
+
+    </div>
+    <button class="btn-cta cta-full cta-primary"
+            ng-disabled="submitInProgress"
+            ng-click="submit()"
+            translate>
+      Review and Floor Vehicle
+    </button>
   </section>
 </form>
