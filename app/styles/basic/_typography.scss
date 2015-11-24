@@ -198,6 +198,7 @@ ul {
 
 .horizontal-list { // used for footer content
   margin: 5px 0;
+  padding-left:10px;
 
   li {
     display: inline-block;
@@ -207,4 +208,8 @@ ul {
       border-left: 1px solid $highlight;
     }
   }
+}
+
+.footer-element{
+  padding-left: 2px;
 }
