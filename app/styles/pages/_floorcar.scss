@@ -20,4 +20,12 @@
   input {
     width: 100%
   }
+
+  .file-error {
+    border: 2px dashed $danger;
+  }
+
+  .ngf-hide {
+    display: block !important;
+  }
 }

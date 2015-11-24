@@ -209,7 +209,10 @@
 
       <!-- Upload file code -->
       <div ngf-drop
-           ng-model="files" class="drop-box"
+           class="drop-box"
+           ng-class="{ 'file-error': validity.$error.pattern }"
+           ng-model="files"
+           ngf-model-invalid="invalidFiles"
            ngf-fix-orientation="false"
            ngf-drag-over-class="'dragover'"
            ngf-allow-dir="true"
@@ -223,20 +226,37 @@
             <li ng-repeat="file in files">
               <img ngf-thumbnail="file" class="thumb">
               <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-              <div>{{file.name}}</div>
+              <div>{{ file.name | truncate:18 }}</div>
             </li>
           </ul>
         </div>
       </div>
-      <span translate>Can't drag & drop?</span>
+
+      <p ng-show="files.length > 0">
+        <span class="glyphicon glyphicon-ok icon-spacing"></span>
+        <span translate>{{ files.length }} valid files.</span>
+      </p>
+      <p ng-show="invalidFiles.length > 0">
+        <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
+        <span translate>{{ invalidFiles.length }} invalid files.</span>
+      </p>
+
+      <p class="spaced" translate>Can't drag & drop?</p>
       <input type="file"
+             id="document"
+             ng-class="{ 'nxg-invalid': validity.$error.pattern }"
              ngf-select
              ng-model="files"
+             ngf-model-invalid="invalidFiles"
              ngf-multiple="true"
              ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*'"
              ngf-keep="true"
              ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
+      <label for="document" class="text-error"
+             ng-show="validity.$error.pattern" translate>
+        Please select valid document type (image, excel, word or pdf file).
+      </label>
       <!--IE9 workaround -->
       <div ngf-no-file-drop>
         <div ng-show="files">
@@ -250,6 +270,7 @@
         </div>
       </div>
       <!-- End upload file code -->
+
 
     </div>
     <button class="btn-cta cta-full cta-primary"
