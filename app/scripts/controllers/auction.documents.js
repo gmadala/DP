@@ -32,7 +32,7 @@ angular.module('nextgearWebApp')
     $scope.documents = [
       {
         title: gettextCatalog.getString('Welcome Packet'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf',
+        url: 'http://www.nextgearcapital.com/welcome-packet/',
         metric:metric.AUCTION_RESOURCES_WELCOME_PACKET_PAGE
       },
       {
