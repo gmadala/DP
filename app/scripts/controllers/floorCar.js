@@ -101,7 +101,8 @@ angular.module('nextgearWebApp')
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
-      $scope.files = undefined;
+      $scope.files = [];
+      $scope.invalidFiles = [];
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');

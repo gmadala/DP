@@ -6,7 +6,7 @@
       <div nxg-vin-details floor-model="data" validity="validity" form="form" error-flag="vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
       <label for="inputColor" class="input-title" translate>Color</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }">
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.inputColor.$error.required }">
         <select id="inputColor" name="inputColor" ng-model="data.UnitColorId"
                 ng-options="color.ColorName for color in options.colors" required>
           <option value="" translate>Make Selection</option>
@@ -44,7 +44,7 @@
       </label>
 
       <label for="inputTitleHolder" class="input-title" translate>Who has the Title?</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.inputTitleHolder.$error.required }">
         <select id="inputTitleHolder"
                 name="inputTitleHolder" ng-model="data.TitleLocationId"
                 ng-options="location.Name for location in options.titleLocationOptions"
@@ -59,7 +59,7 @@
       </label>
 
       <label for="inputInvLoc" class="input-title" translate>Inventory Location</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }">
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.inputInvLoc.$error.required }">
         <select id="inputInvLoc" name="inputInvLoc" ng-model="data.PhysicalInventoryAddressId"
                 ng-options="(location | address:'oneLineSelect') for location in options.locations"
                 required>
@@ -90,42 +90,6 @@
         </div>
       </div>
 
-      <label for="inputBiz" class="input-title" translate>Seller</label>
-      <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
-        <input nxg-business-field="sellers"
-               id="inputBiz"
-               class="input-xlarge"
-               name="inputBiz"
-               ng-disabled="data.SaleTradeIn"
-               ng-required="!data.SaleTradeIn"
-               selected-business="data.BusinessId"
-               form="form"
-               validity="validity" />
-      </span>
-
-      <label for="inputPurchaseAmt" class="input-title" translate>Purchase Amount</label>
-      <div class="input-prepend dollar">
-        <span class="add-on" translate>$</span>
-        <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
-               required
-               nxg-input-currency="1000000000000"
-               nxg-min="1"
-               ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
-        <label for="inputPurchaseAmt" class="text-error"
-               ng-show="validity.inputPurchaseAmt.$error.required" translate>
-          Please enter the Purchase Amount.
-        </label>
-        <label for="inputPurchaseAmt"
-               class="text-error"
-               ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)" translate>
-          Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
-        </label>
-        <label for="inputPurchaseAmt" class="text-error"
-               ng-show="!validity.inputPurchaseAmt.$error.required && !validity.inputPurchaseAmt.$error.pattern && validity.inputPurchaseAmt.$error.max" translate>
-          Please enter a value less than $1,000,000,000,000.
-        </label>
-      </div>
-
       <label for="inputPurchaseDate" class="input-title" translate>Purchase Date</label>
       <input id="inputPurchaseDate"
              name="inputPurchaseDate"
@@ -147,8 +111,42 @@
         Please enter a Purchase Date in the past.
       </label>
 
+      <label for="inputBiz" class="input-title" translate>Seller</label>
+      <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
+        <input nxg-business-field="sellers"
+               id="inputBiz"
+               name="inputBiz"
+               ng-disabled="data.SaleTradeIn"
+               ng-required="!data.SaleTradeIn"
+               selected-business="data.BusinessId"
+               validity="validity" />
+      </span>
+
+      <label for="inputPurchaseAmt" class="input-title" translate>Purchase Amount</label>
+      <div class="input-prepend dollar">
+        <span class="add-on no-top" translate>$</span>
+        <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
+               required
+               nxg-input-currency="1000000000000"
+               nxg-min="1"
+               ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }" />
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="validity.inputPurchaseAmt.$error.required" translate>
+          Please enter the Purchase Amount.
+        </label>
+        <label for="inputPurchaseAmt"
+               class="text-error"
+               ng-show="!validity.inputPurchaseAmt.$error.required && (validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.nxgMin)" translate>
+          Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
+        </label>
+        <label for="inputPurchaseAmt" class="text-error"
+               ng-show="!validity.inputPurchaseAmt.$error.required && !validity.inputPurchaseAmt.$error.pattern && validity.inputPurchaseAmt.$error.max" translate>
+          Please enter a value less than $1,000,000,000,000.
+        </label>
+      </div>
+
       <label for="inputCreditLine" class="input-title" translate>Line of Credit</label>
-      <div class="style-select small" ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }">
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.inputCreditLine.$error.required }">
         <select id="inputCreditLine"
                 name="inputCreditLine"
                 ng-model="data.LineOfCreditId"
@@ -163,7 +161,7 @@
       </label>
 
       <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>:</label>
-      <div class="style-select small">
+      <div class="style-select full-width">
         <select id="inputSendPay" name="inputSendPay" ng-model="data.PaySeller"
                 ng-options="value && 'Seller' || 'Buyer' | translate for value in paySellerOptions"
                 ng-change="data.BankAccountId = null"
@@ -173,7 +171,7 @@
       </div>
 
       <label for="inputDisburseAcct" translate>Bank Account for Deposit (when applicable)</label>
-      <div class="style-select large" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.inputDisburseAcct.$error.required, 'disabled': data.PaySeller }">
         <select id="inputDisburseAcct"
                 name="inputDisburseAcct"
                 ng-model="data.BankAccountId"
@@ -211,7 +209,10 @@
 
       <!-- Upload file code -->
       <div ngf-drop
-           ng-model="files" class="drop-box"
+           class="drop-box"
+           ng-class="{ 'file-error': validity.$error.pattern }"
+           ng-model="files"
+           ngf-model-invalid="invalidFiles"
            ngf-fix-orientation="false"
            ngf-drag-over-class="'dragover'"
            ngf-allow-dir="true"
@@ -225,20 +226,37 @@
             <li ng-repeat="file in files">
               <img ngf-thumbnail="file" class="thumb">
               <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-              <div>{{file.name}}</div>
+              <div>{{ file.name | truncate:18 }}</div>
             </li>
           </ul>
         </div>
       </div>
-      <span translate>Can't drag & drop?</span>
+
+      <p ng-show="files.length > 0">
+        <span class="glyphicon glyphicon-ok icon-spacing"></span>
+        <span translate>{{ files.length }} valid files.</span>
+      </p>
+      <p ng-show="invalidFiles.length > 0">
+        <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
+        <span translate>{{ invalidFiles.length }} invalid files.</span>
+      </p>
+
+      <p class="spaced" translate>Can't drag & drop?</p>
       <input type="file"
+             id="document"
+             ng-class="{ 'nxg-invalid': validity.$error.pattern }"
              ngf-select
              ng-model="files"
+             ngf-model-invalid="invalidFiles"
              ngf-multiple="true"
              ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*'"
              ngf-keep="true"
              ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
+      <label for="document" class="text-error"
+             ng-show="validity.$error.pattern" translate>
+        Please select valid document type (image, excel, word or pdf file).
+      </label>
       <!--IE9 workaround -->
       <div ngf-no-file-drop>
         <div ng-show="files">
@@ -252,6 +270,7 @@
         </div>
       </div>
       <!-- End upload file code -->
+
 
     </div>
     <button class="btn-cta cta-full cta-primary"
