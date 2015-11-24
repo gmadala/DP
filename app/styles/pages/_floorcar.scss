@@ -2,7 +2,7 @@
 
 #FloorCarPage {
   .styled-input {
-    input {
+    input:not([type='file']) {
       width: 90%;
     }
   }
@@ -12,12 +12,12 @@
   }
 
   .input-prepend, #nxg-vin-no-match-info, .nxg-static {
-    input {
+    input:not([type='file']) {
       width: 95%;
     }
   }
-  
-  input {
+
+  input:not([type='file']) {
     width: 100%
   }
 

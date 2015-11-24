@@ -232,16 +232,18 @@
         </div>
       </div>
 
-      <p ng-show="files.length > 0">
-        <span class="glyphicon glyphicon-ok icon-spacing"></span>
-        <span translate>{{ files.length }} valid files.</span>
-      </p>
-      <p ng-show="invalidFiles.length > 0">
-        <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
-        <span translate>{{ invalidFiles.length }} invalid files.</span>
-      </p>
+      <div class="row">
+        <div class="col-xs-5 paragraph" ng-show="files.length > 0">
+          <span class="glyphicon glyphicon-ok icon-spacing"></span>
+          <span translate>{{ files.length }} valid files.</span>
+        </div>
+        <div class="col-xs-5 paragraph" ng-show="invalidFiles.length > 0">
+          <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
+          <span translate>{{ invalidFiles.length }} invalid files.</span>
+        </div>
+      </div>
 
-      <p class="spaced" translate>Can't drag & drop?</p>
+      <span translate>Can't drag & drop?</span>
       <input type="file"
              id="document"
              ng-class="{ 'nxg-invalid': validity.$error.pattern }"
