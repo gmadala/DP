@@ -9,8 +9,8 @@
 
       <div class="cta btn-toggle btn-toggle-static">
         <div class="btn-slider" ng-class="{ 'active-left':isWeekMode(), 'active-right':!isWeekMode() }"></div>
-        <button class="btn" id="week" ng-click="changeViewMode('week')" translate >Week</button>
-        <button class="btn" id="month" ng-click="changeViewMode('month')" translate >Month</button>
+        <button class="btn" id="week" ng-click="changeViewMode('week')" id="weekView" translate >Week</button>
+        <button class="btn" id="month" ng-click="changeViewMode('month')" id="monthViewDash" translate >Month</button>
       </div>
     </div>
 
@@ -90,11 +90,11 @@
              translate-comment="Payment(s) overdue">
             Overdue
           </p>
-          <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
+          <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}" id="overduePaymentDash">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
         </div>
       </li>
       <li id="today" class="clickable" ng-click="filterPayments('today')">
-        <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
+        <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
         <div class="dash-lockup">
           <p class="dash-minor"
              translate
@@ -121,7 +121,7 @@
                 translate
                 translate-n="paymentSummary[viewMode].UpcomingPayments"
                 translate-plural="Due This Month"
-                translate-comment="Payment(s) due this month">
+                translate-comment="Payment(s) due this month" id="dueThisMonthDash">
             Due This Month
           </span>
           <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
@@ -137,7 +137,7 @@
         </div>
       </li>
     </ul>
-    <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')">
+    <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" id="viewAllButton">
       <span class="paired-body" translate>View All Payments</span>
       <span class="paired-media" nxg-icon="icon-eye"></span>
     </button>
@@ -238,7 +238,7 @@
         </div>
       </div>
     </div>
-    <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()">
+    <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" id="requestCreditButton">
         <span class="paired-body" translate>Request Credit Increase</span>
         <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
