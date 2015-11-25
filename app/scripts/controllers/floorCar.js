@@ -256,6 +256,11 @@ angular.module('nextgearWebApp')
       );
     };
 
+    $scope.removeInvalidFiles = function() {
+      $scope.invalidFiles = [];
+      $scope.form.documents.$setValidity('pattern', true);
+    };
+
     $scope.removeFile = function(file) {
       $scope.files = $scope.files.filter(function (f) {
         return f.name !== file.name;
