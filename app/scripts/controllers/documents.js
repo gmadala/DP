@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
     if (isUnitedStates){
       $scope.documents.push({
         title: gettextCatalog.getString('Welcome Packet'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf',
+        url: 'http://www.nextgearcapital.com/welcome-packet/',
         metric: metric.DEALER_RESOURCES_WELCOME_PACKET_PAGE
       });
 
