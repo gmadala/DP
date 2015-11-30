@@ -118,6 +118,9 @@ angular.module('nextgearWebApp')
                 if(response.data.Message === '401') {
                   error = onSessionTimeout(self, debug);
                 }
+                else if (url.indexOf('extensionPreview') > -1) {
+                  // just reject the promise if extension preview fail.
+                }
                 else {
                   error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
                   error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
@@ -197,6 +200,27 @@ angular.module('nextgearWebApp')
           return nxgConfig.apiBase + path + '?' + queryParts.join('&');
         } else {
           return nxgConfig.apiBase + path;
+        }
+      },
+      ngenContentLink: function (path, params) {
+        if (!path) {
+          throw 'api.contentLink requires a path string';
+        }
+
+        var queryParts = [];
+
+        if (authToken) {
+          queryParts.push('apiToken=' + authToken);
+        }
+
+        angular.forEach(params, function(value, key) {
+          queryParts.push(key + '=' + value);
+        });
+
+        if (queryParts.length > 0) {
+          return nxgConfig.ngenDomain + path + '?' + queryParts.join('&');
+        } else {
+          return nxgConfig.ngenDomain + path;
         }
       }
     };

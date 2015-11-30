@@ -135,6 +135,13 @@ input[type="color"] {
   }
 }
 
+input[type="file"]{
+  border: none;
+  background: none;
+  width: 60%;
+  display: inline;
+}
+
 // inputs that are the full-width of parent
 .input-full {
   @extend %full-width;
@@ -777,4 +784,83 @@ input[type="radio"] {
   select { // in ie9, padding on the left pushes the arrow over.
     padding: 4px 9px;
   }
+}
+
+.supported-files{
+  font-size: 10px;
+  color: #BBBCBE;
+  padding-top: 10px;
+}
+
+.drop-box{
+  background: #FBFBFB;
+  border: 2px dashed #BBBCBE;
+  width: 100%;
+  min-height: 140px;
+  text-align: left;
+  margin: 10px 0 0 0;
+}
+.drop-box-empty{
+  padding-top: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #BBBCBE;
+}
+.dragover{
+  border: 2px dashed #069;
+}
+ul.files-container{
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding: 5px;
+  list-style-type: none;
+  transition: all .5s;
+}
+ul.files-container li{
+  width: 38%;
+  height: 38%;
+  padding: 1px;
+  float: left;
+  position: relative;
+  margin: 6%;
+}
+.thumb{
+  max-width: 96px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 96px;
+  width: 96px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  border: 1px solid white;
+  display: block;
+}
+ul.files-container li .file-delete{
+  background-color: rgba(0, 0, 0, .25);
+  width: 50px;
+  height: 50px;
+  font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+  color: white;
+  font-size: 25px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, .25);
+  text-align: center;
+  cursor: pointer;
+  line-height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 101;
+  top: 25px;
+  left: 25px;
+  opacity: 0;
+  transition: all .30s;
+  transform: scale(0.5);
+}
+ul.files-container li:hover .file-delete{
+  opacity: 1;
+  transform: scale(1);
+}
+
+ul.files-container li .file-delete:hover{
+  background-color: rgba(0, 0, 0, .45);
 }

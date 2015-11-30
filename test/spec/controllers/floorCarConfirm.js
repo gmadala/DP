@@ -69,6 +69,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $scope: scope,
       dialog: dialogMock,
       formData: formDataMock,
+      fileNames: [],
       User: userDealerMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -78,6 +79,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $scope: scopeAuction,
       dialog: dialogMock,
       formData: formDataMock,
+      fileNames: [],
       User: userAuctionMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -89,6 +91,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $scope: scope,
       dialog: dialogMock,
       formData: formDataMock,
+      fileNames: [],
       User: userDealerMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -100,6 +103,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $scope: scopeAuction,
       dialog: dialogMock,
       formData: formDataMock,
+      fileNames: [],
       User: userAuctionMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo

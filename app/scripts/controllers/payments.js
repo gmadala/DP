@@ -252,6 +252,10 @@ angular.module('nextgearWebApp')
       }, 0);
 
       $scope.subtotal = $scope.extPrev.PrincipalAmount + $scope.extPrev.InterestAmount + feeTotal + $scope.extPrev.CollateralProtectionAmount;
+    }, function() {
+      $scope.extPrev = {
+        CanExtend: false
+      };
     });
 
     $scope.onConfirm = function() {
