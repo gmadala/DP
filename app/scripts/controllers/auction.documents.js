@@ -11,7 +11,6 @@ angular.module('nextgearWebApp')
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
-    var isSeller = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
     if (!isUnitedStates) {
       if (currentLanguage === 'fr_CA') {
