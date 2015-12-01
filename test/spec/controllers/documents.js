@@ -89,12 +89,6 @@ describe('Controller: DocumentsCtrl', function () {
         });
       }));
 
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
-        });
-      });
-
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
           expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
@@ -119,12 +113,6 @@ describe('Controller: DocumentsCtrl', function () {
         });
       }));
 
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
-        });
-      });
-
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
           expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
@@ -148,12 +136,6 @@ describe('Controller: DocumentsCtrl', function () {
           User: mockUser
         });
       }));
-
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
-        });
-      });
 
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
@@ -246,12 +228,6 @@ describe('Controller: DocumentsCtrl', function () {
           User: mockUser
         });
       }));
-
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(true);
-        });
-      });
 
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
