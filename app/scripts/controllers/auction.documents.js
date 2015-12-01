@@ -11,6 +11,7 @@ angular.module('nextgearWebApp')
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
+    var isSeller = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
     if (!isUnitedStates) {
       if (currentLanguage === 'fr_CA') {
@@ -30,11 +31,6 @@ angular.module('nextgearWebApp')
 
 
     $scope.documents = [
-      {
-        title: gettextCatalog.getString('Welcome Packet'),
-        url: 'http://www.nextgearcapital.com/welcome-packet/',
-        metric:metric.AUCTION_RESOURCES_WELCOME_PACKET_PAGE
-      },
       {
         title: gettextCatalog.getString('Instructions for Sellers'),
         url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf',
