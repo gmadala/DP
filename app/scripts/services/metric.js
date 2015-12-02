@@ -47,6 +47,7 @@ angular.module('nextgearWebApp')
     VIEW_REQUEST_CREDIT_INCREASE_PAGE: 'View Request Credit Increase',//x
     DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
     DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
+    DEALER_RECORDS_TITLE_FAQ: 'Dealer - Records Title FAQ',//X
 
     //Resources Events for  - Auction
     VIEW_AUCTION_REPORTS_PAGE: 'View Auction Reports',

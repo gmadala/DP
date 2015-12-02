@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
         languagePrefix = 'ES%20';
       }
     }
-    
+
     $scope.documents = [] ;
 
     if (isUnitedStates){
@@ -31,6 +31,12 @@ angular.module('nextgearWebApp')
         title: gettextCatalog.getString('Dealer Funding Checklist'),
         url: 'documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf',
         metric: metric.DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE
+      });
+
+      $scope.documents.push({
+        title: gettextCatalog.getString('Title Management Frequently Asked Questions'),
+        url: 'documents/' + languagePrefix + 'Records%20Title%20FAQ.pdf',
+        metric: metric.DEALER_RECORDS_TITLE_FAQ
       });
     }
 
