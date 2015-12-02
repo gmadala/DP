@@ -42,7 +42,7 @@ describe('Controller: DocumentsCtrl', function () {
   }));
 
   it('should attach a list of documents to the scope', function () {
-    expect(scope.documents.length).toBe(3);
+    expect(scope.documents.length).toBe(1);
   });
 
   it('should attach a list of collateralProtection to the scope', function () {
@@ -89,12 +89,6 @@ describe('Controller: DocumentsCtrl', function () {
         });
       }));
 
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
-        });
-      });
-
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
           expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
@@ -119,12 +113,6 @@ describe('Controller: DocumentsCtrl', function () {
         });
       }));
 
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
-        });
-      });
-
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
           expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
@@ -148,12 +136,6 @@ describe('Controller: DocumentsCtrl', function () {
           User: mockUser
         });
       }));
-
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(true);
-        });
-      });
 
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {
@@ -246,12 +228,6 @@ describe('Controller: DocumentsCtrl', function () {
           User: mockUser
         });
       }));
-
-      it('for documents', function () {
-        angular.forEach(scope.documents, function (document) {
-          expect(document.url.indexOf(langPrefix.ES) > -1).toBe(true);
-        });
-      });
 
       it('for collateral protection', function () {
         angular.forEach(scope.collateralProtection, function (document) {

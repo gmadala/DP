@@ -18,23 +18,33 @@ angular.module('nextgearWebApp')
       }
     }
 
-    $scope.documents = [
-      {
+    $scope.documents = [] ;
+
+    if (isUnitedStates){
+      $scope.documents.push({
         title: gettextCatalog.getString('Welcome Packet'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Welcome%20Packet.pdf',
+        url: 'http://www.nextgearcapital.com/welcome-packet/',
         metric: metric.DEALER_RESOURCES_WELCOME_PACKET_PAGE
-      },
-      {
+      });
+
+      $scope.documents.push({
         title: gettextCatalog.getString('Dealer Funding Checklist'),
         url: 'documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf',
         metric: metric.DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE
-      },
-      {
-        title: gettextCatalog.getString('Instructions for Buyers'),
-        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
-        metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
-      }
-    ];
+      });
+
+      $scope.documents.push({
+        title: gettextCatalog.getString('Title Management Frequently Asked Questions'),
+        url: 'documents/' + languagePrefix + 'Records%20Title%20FAQ.pdf',
+        metric: metric.DEALER_RECORDS_TITLE_FAQ
+      });
+    }
+
+    $scope.documents.push({
+      title: gettextCatalog.getString('Instructions for Buyers'),
+      url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
+      metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
+    });
 
     $scope.collateralProtection = [
       {

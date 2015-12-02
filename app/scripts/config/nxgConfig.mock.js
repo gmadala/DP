@@ -6,6 +6,7 @@ angular.module('nextgearWebApp')
       return angular.extend({}, $delegate, {
         apiBase: '/* @echo apiBase */',
         apiDomain: '/* @echo apiDomain */',
+        ngenDomain: '',
         // @if isDemo
         isDemo: true,
         segmentIoKey: null
