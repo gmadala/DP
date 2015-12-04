@@ -263,10 +263,6 @@ msgstr ""
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Demander une "
 "prolongation?</a>"
 
-#: app/views/account_management.html:413
-msgid "Access your GO Financial account directly from here."
-msgstr "Accédez directement à votre compte GO Financial à partir d'ici."
-
 #: app/views/modals/paymentDetails.html:24
 msgid "Account"
 msgstr "Compte"
@@ -484,6 +480,10 @@ msgstr "Numéro(s) d'accès à l'encan"
 msgid "Authorization and Request to Unenroll"
 msgstr "Autorisation et demande de désinscription"
 
+#: app/index.html:58
+msgid "Autotrader"
+msgstr ""
+
 #: app/scripts/controllers/dashboard.js:170
 #: app/scripts/controllers/dashboard.js:243
 msgid "available"
@@ -657,10 +657,10 @@ msgid "By Stock #, VIN, or Description"
 msgstr "Par numéro de stock, NIV, ou description"
 
 #: app/views/floorcar.html:250
-msgid "Can't drag & drop?"
+msgid "Can't drag &amp; drop?"
 msgstr "Impossible de glisser-déposer?"
 
-#: app/scripts/controllers/floorCar.js:271
+#: app/scripts/controllers/floorCar.js:272
 #: app/scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html:66
 #: app/scripts/directives/nxgUnappliedFundsWidget/requestPayoutModal.html:53
 #: app/views/account_management.html:100 app/views/account_management.html:115
@@ -734,7 +734,7 @@ msgstr "Ville"
 msgid "City names must only have letters and spaces."
 msgstr "Les noms de villes ne doivent contenir que des lettres et des espaces"
 
-#: app/scripts/controllers/documents.js:56
+#: app/scripts/controllers/documents.js:60
 msgid "Claim Form"
 msgstr "Furmulaire de réclamation"
 
@@ -843,7 +843,7 @@ msgstr ""
 msgid "Consigner Ticket Number"
 msgstr "Numéro du billet d'expéditeur"
 
-#: app/index.html:57 app/maintenance.html:173
+#: app/index.html:75 app/maintenance.html:173
 msgid "Contact Us"
 msgstr "Nous contacter"
 
@@ -945,7 +945,7 @@ msgstr "Rotation en jours"
 msgid "dealer # {{ user.BusinessNumber }}"
 msgstr "concessionnaire no {{ user.BusinessNumber }}"
 
-#: app/scripts/controllers/documents.js:28
+#: app/scripts/controllers/documents.js:31
 msgid "Dealer Funding Checklist"
 msgstr "Liste de vérification de financement du concessionnaire"
 
@@ -968,6 +968,10 @@ msgstr "Recherche de concessionnaire"
 #: app/views/reports.html:59
 msgid "Dealer Statement"
 msgstr "Relevé du concessionnaire"
+
+#: app/index.html:59
+msgid "DealShield"
+msgstr ""
 
 #: app/views/account_management.html:266 app/views/auction.settings.html:227
 msgid "Default Address"
@@ -1037,6 +1041,10 @@ msgstr "Informations sur le décaissement"
 #: app/views/auction.dashboard.html:3
 msgid "Disbursement Groups"
 msgstr "Groupes de décaissement"
+
+#: app/views/documents.html:10
+msgid "Documents"
+msgstr ""
 
 #: app/views/modals/financialAccount.html:133
 msgid "Does not match with account number."
@@ -1429,7 +1437,15 @@ msgstr "Frais futurs"
 msgid "Future Payments"
 msgstr "Paiements futurs"
 
-#: app/scripts/controllers/floorCar.js:274
+#: app/index.html:60
+msgid "Go Auto Exchange"
+msgstr ""
+
+#: app/index.html:61
+msgid "Go Financial"
+msgstr ""
+
+#: app/scripts/controllers/floorCar.js:275
 msgid "Go Home"
 msgstr "Retour au menu principal"
 
@@ -1442,9 +1458,13 @@ msgstr "Bon"
 msgid "Grouped by transaction"
 msgstr ""
 
-#: app/scripts/controllers/documents.js:46
+#: app/scripts/controllers/documents.js:50
 msgid "Guidelines"
 msgstr "Directives"
+
+#: app/index.html:62
+msgid "Haystak Digital Marketing"
+msgstr ""
 
 #: app/views/vehicledetails.html:232
 msgid "Hide Payment Activity"
@@ -1457,6 +1477,10 @@ msgstr "Masquer les détails de paiement"
 #: app/views/auction.reports.html:16 app/views/reports.html:54
 msgid "Historical Reports"
 msgstr "Rapports d'historique"
+
+#: app/index.html:65
+msgid "HomeNet Automotive"
+msgstr ""
 
 #: app/views/modals/financialAccount.html:70
 msgid ""
@@ -1499,7 +1523,7 @@ msgstr "Au montant de"
 msgid "INACTIVE"
 msgstr "INACTIF"
 
-#: app/scripts/controllers/documents.js:51
+#: app/scripts/controllers/documents.js:55
 msgid "Information Sheet"
 msgstr "Feuillet d'information"
 
@@ -1511,11 +1535,11 @@ msgstr ""
 "Lancer la demande d'augmentation permanente ou temporaire de votre marge de "
 "crédit actuelle."
 
-#: app/scripts/controllers/documents.js:33
+#: app/scripts/controllers/documents.js:38
 msgid "Instructions for Buyers"
 msgstr "Instructions pour les acheteurs"
 
-#: app/scripts/controllers/auction.documents.js:39
+#: app/scripts/controllers/auction.documents.js:35
 msgid "Instructions for Sellers"
 msgstr "Instructions pour les vendeurs"
 
@@ -1574,9 +1598,13 @@ msgstr "Emplacement de l'inventaire"
 msgid "It looks like this was the result of either:"
 msgstr "Ceci semble être dû à l'une ou l'autre des raisons suivantes :"
 
-#: app/scripts/controllers/floorCar.js:276
+#: app/scripts/controllers/floorCar.js:277
 msgid "Keep Editing"
 msgstr "Continuer l'édition"
+
+#: app/index.html:66
+msgid "Kelley Blue Book"
+msgstr ""
 
 #: app/scripts/controllers/valuelookup.js:690
 msgid "Kelley Blue Book® Auction Values"
@@ -1607,10 +1635,6 @@ msgstr "Marge de crédit"
 #: app/views/login.html:44
 msgid "Log In"
 msgstr "Ouverture de session"
-
-#: app/views/account_management.html:412
-msgid "Login to GO Financial"
-msgstr "Ouverture de session GO Financial"
 
 #: app/views/modals/confirmLogout.html:1
 msgid "Logout"
@@ -1661,6 +1685,10 @@ msgstr "Faire une sélection"
 msgid "Manage your business with NextGear Capital on the go."
 msgstr "Gérez votre entreprise avec NextGear Capital pendant vos déplacements."
 
+#: app/index.html:67
+msgid "Manheim"
+msgstr ""
+
 #: app/views/valuelookup.html:87
 msgid "Manual Lookup"
 msgstr "Recherche manuelle"
@@ -1669,7 +1697,7 @@ msgstr "Recherche manuelle"
 msgid "Manufacturer Aging Report (PDF)"
 msgstr "Rapport de classement chronologique du fabricant (PDF)"
 
-#: app/scripts/controllers/floorCar.js:290 app/views/valuelookup.html:178
+#: app/scripts/controllers/floorCar.js:291 app/views/valuelookup.html:178
 #: app/views/valuelookup.html:275 app/views/valuelookup.html:34
 #: app/views/valuelookup.html:372
 msgid "Mileage"
@@ -1708,6 +1736,10 @@ msgstr "Valeurs MMR non trouvées dans les dossiers pour ce véhicule."
 #: app/scripts/controllers/valuelookup.js:685 app/views/valuelookup.html:526
 msgid "MMR Wholesale Values"
 msgstr "Valeurs en gros de MMR"
+
+#: app/views/documents.html:36
+msgid "Mobile Apps"
+msgstr ""
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html:53
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html:72
@@ -1792,13 +1824,9 @@ msgstr ""
 msgid "NextGear Capital Dealer Number"
 msgstr "Numéro du concessionnaire NextGear Capital"
 
-#: app/views/auction.documents.html:2 app/views/documents.html:10
+#: app/views/auction.documents.html:2
 msgid "NextGear Capital Documents"
 msgstr "Documents NextGear Capital"
-
-#: app/views/documents.html:36
-msgid "NextGear Capital Mobile Apps"
-msgstr "Applications mobiles NextGear Capital"
 
 #: app/views/auction.sellerfloorplan.html:90
 msgid ""
@@ -1882,7 +1910,7 @@ msgstr "Notifications"
 msgid "Number of Cars Purchased Per-Auction (in the last 12 months)"
 msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 
-#: app/scripts/controllers/floorCar.js:292
+#: app/scripts/controllers/floorCar.js:293
 #: app/views/auction.bulkflooring.html:20 app/views/floorcar.html:21
 msgid "Odometer"
 msgstr "Odomètre"
@@ -2687,6 +2715,10 @@ msgstr "Plage de numéros de stock"
 msgid "Rates and Fees"
 msgstr "Taux et frais"
 
+#: app/index.html:68
+msgid "Ready Auto Transport"
+msgstr ""
+
 #: app/views/receipts.html:6
 msgid "Receipt #, Stock #, VIN, Check #, Make, Model or Year"
 msgstr "No de reçu, no de stock, no de vérification, marque, modèle ou année"
@@ -3123,7 +3155,7 @@ msgstr "Date de début"
 msgid "Start Date should not be later than End Date."
 msgstr "La date de début doit être antérieure à la date de fin."
 
-#: app/scripts/controllers/floorCar.js:275
+#: app/scripts/controllers/floorCar.js:276
 msgid "Start Over"
 msgstr "Recommencer"
 
@@ -3714,6 +3746,10 @@ msgstr ""
 "Les valeurs ci-dessous seront mises à jour suite à une recherche de NIV ou "
 "une recherche manuelle réussie"
 
+#: app/index.html:69
+msgid "vAuto"
+msgstr ""
+
 #: app/views/valuelookup.html:455
 msgid "Vehicle Description"
 msgstr "Description du véhicule"
@@ -3833,6 +3869,10 @@ msgstr ""
 msgid "VIN, Make, Model, or Year"
 msgstr "NIV, marque, modèle, ou année"
 
+#: app/index.html:70
+msgid "VinSolutions"
+msgstr ""
+
 #: app/scripts/controllers/reports.js:23 app/views/receipts.html:57
 msgid "Voided"
 msgstr "Annulé"
@@ -3936,12 +3976,11 @@ msgstr "Semaine"
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: app/scripts/controllers/documents.js:41
+#: app/scripts/controllers/documents.js:45
 msgid "Welcome Letter"
 msgstr "Lettre de bienvenue"
 
-#: app/scripts/controllers/auction.documents.js:34
-#: app/scripts/controllers/documents.js:23
+#: app/scripts/controllers/documents.js:25
 msgid "Welcome Packet"
 msgstr "Trousse de bienvenue"
 
@@ -3949,7 +3988,7 @@ msgstr "Trousse de bienvenue"
 msgid "Welcome to NextGear!"
 msgstr "Bienvenue chez NextGear!"
 
-#: app/scripts/controllers/floorCar.js:272
+#: app/scripts/controllers/floorCar.js:273
 msgid "What would you like to do?"
 msgstr "Qu'aimeriez-vous faire?"
 
@@ -4168,6 +4207,15 @@ msgstr "Code Postal"
 #: app/scripts/directives/nxgAddress/nxgAddress.html:87
 msgid "Zip Code"
 msgstr "Code postal"
+
+#~ msgid "Access your GO Financial account directly from here."
+#~ msgstr "Accédez directement à votre compte GO Financial à partir d'ici."
+
+#~ msgid "Login to GO Financial"
+#~ msgstr "Ouverture de session GO Financial"
+
+#~ msgid "NextGear Capital Mobile Apps"
+#~ msgstr "Applications mobiles NextGear Capital"
 
 #~ msgid "Supported formats: jpg, doc, pdf. 5MB max per file."
 #~ msgstr "Formats reconnus : JPG, doc, PDF (maximum de 5 Mo par fichier)"
