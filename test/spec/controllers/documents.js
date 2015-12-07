@@ -165,9 +165,9 @@ describe('Controller: DocumentsCtrl', function () {
         angular.forEach(scope.documents, function (document) {
           expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
           if (document.url.indexOf('Records%20Title') > -1) {
-            expect(document.url.indexOf('Records%20Title') > -1).toBe(true);
+            expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
           } else {
-            expect(document.url.indexOf('Records%20Title') > -1).toBe(false);
+            expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
           }
           expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
         });
