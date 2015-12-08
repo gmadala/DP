@@ -46,13 +46,14 @@ angular.module('nextgearWebApp')
         metric: metric.DEALER_RECORDS_TITLE_FAQ
       });
 
+      $scope.documents.push({
+        title: gettextCatalog.getString('Instructions for Buyers'),
+        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
+        metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
+      });
     }
 
-    $scope.documents.push({
-      title: gettextCatalog.getString('Instructions for Buyers'),
-      url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
-      metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
-    });
+
 
     $scope.collateralProtection = [
       {
