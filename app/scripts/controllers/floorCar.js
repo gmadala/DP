@@ -9,6 +9,7 @@ angular.module('nextgearWebApp')
                                        OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
     var isDealer = User.isDealer();
+    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -180,7 +181,12 @@ angular.module('nextgearWebApp')
         backdropClick: true,
         dialogClass: 'modal modal-medium',
         templateUrl: 'views/modals/floorCarMessage.html',
-        controller: 'FloorCarMessageCtrl'
+        controller: 'FloorCarMessageCtrl',
+        resolve:{
+          canAttachDocuments: function(){
+            return $scope.canAttachDocuments();
+          }
+        }
       };
 
       Floorplan.create($scope.data).then(
@@ -197,11 +203,9 @@ angular.module('nextgearWebApp')
           upload.then(function(reponse) {
             $scope.submitInProgress = false;
             // floorplan created successfully.
-            angular.extend(dialogParams, {
-              resolve: {
-                floorSuccess: function () {
-                  return true;
-                }
+            angular.extend(dialogParams.resolve, {
+              floorSuccess: function () {
+                return true;
               }
             });
 
@@ -223,14 +227,12 @@ angular.module('nextgearWebApp')
             });
           }, function() {
             $scope.submitInProgress = false;
-            angular.extend(dialogParams, {
-              resolve: {
-                floorSuccess: function () {
-                  return true;
-                },
-                uploadSuccess: function () {
-                  return false;
-                }
+            angular.extend(dialogParams.resolve, {
+              floorSuccess: function () {
+                return true;
+              },
+              uploadSuccess: function () {
+                return false;
               }
             });
             $dialog.dialog(dialogParams).open().then(function(){
@@ -239,14 +241,12 @@ angular.module('nextgearWebApp')
           });
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
-          angular.extend(dialogParams, {
-            resolve: {
-              floorSuccess: function () {
-                return false;
-              },
-              uploadSuccess: function () {
-                return false;
-              }
+          angular.extend(dialogParams.resolve, {
+            floorSuccess: function () {
+              return false;
+            },
+            uploadSuccess: function () {
+              return false;
             }
           });
           $dialog.dialog(dialogParams).open().then(function(){
@@ -258,6 +258,8 @@ angular.module('nextgearWebApp')
 
     $scope.removeInvalidFiles = function() {
       $scope.invalidFiles = [];
+      $scope.form.boxDocuments.$setValidity('pattern', true);
+      $scope.validity.boxDocuments = angular.copy($scope.form.boxDocuments);
       $scope.form.documents.$setValidity('pattern', true);
       $scope.validity.documents = angular.copy($scope.form.documents);
     };
@@ -292,4 +294,12 @@ angular.module('nextgearWebApp')
     }else{
       $scope.mileageOrOdometer = gettextCatalog.getString('Odometer');
     }
+
+    /**
+     * Determines if the current user should be allowed to upload documents.
+     * @return {Boolean} Is the user allowed to upload documents?
+     */
+    $scope.canAttachDocuments = function () {
+      return ($scope.attachDocumentsEnabled);
+    };
   });

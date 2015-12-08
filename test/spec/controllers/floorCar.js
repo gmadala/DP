@@ -57,6 +57,9 @@ describe('Controller: FloorCarCtrl', function () {
       },
       isUnitedStates: function(){
         return true;
+      },
+      getFeatures: function(){
+        return {uploadDocuments: {enabled: false}};
       }
     };
 
