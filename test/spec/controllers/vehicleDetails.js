@@ -158,6 +158,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
           ]
         });
       },
+      getFeatures: function(){
+        return {uploadDocuments: {enabled: false}};
+      },
       isUnitedStates: function() {
         return true;
       }

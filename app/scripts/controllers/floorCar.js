@@ -185,6 +185,9 @@ angular.module('nextgearWebApp')
         resolve:{
           canAttachDocuments: function(){
             return $scope.canAttachDocuments();
+          },
+          createFloorplan: function(){
+            return true;
           }
         }
       };

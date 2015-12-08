@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User, TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog) {
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User,
+                                              TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
+                                              Upload, nxgConfig) {
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -9,9 +11,12 @@ angular.module('nextgearWebApp')
     $scope.flooringInfo = {};
     $scope.valueInfo = {};
     $scope.financialSummary = {};
+    $scope.floorplanId = '';
 
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;
+
+    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : true;
 
     $scope.goToCheckout = function() {
       $state.transitionTo('checkout');
@@ -23,6 +28,85 @@ angular.module('nextgearWebApp')
 
     $scope.hasOutstanding = null;
 
+    $scope.uploadDocuments = function(){
+      var dialogParams = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        dialogClass: 'modal modal-medium',
+        templateUrl: 'views/modals/floorCarMessage.html',
+        controller: 'FloorCarMessageCtrl',
+        resolve:{
+          canAttachDocuments: function() {
+            return true;
+          },
+          floorSuccess: function(){
+            return true;
+          },
+          createFloorplan: function(){
+            return false;
+          }
+        }
+      };
+
+      var upload = Upload.upload({
+        url: nxgConfig.apiBase + '/floorplan/upload/' + $scope.floorplanId,
+        method: 'POST',
+        data: {
+          file: $scope.files
+        }
+      });
+
+      upload.then(function(reponse) {
+        if (reponse.data.Success) {
+          angular.extend(dialogParams.resolve, {
+            uploadSuccess: function () {
+              return true;
+            }
+          });
+        } else {
+          angular.extend(dialogParams.resolve, {
+            uploadSuccess: function () {
+              return false;
+            }
+          });
+        }
+        $dialog.dialog(dialogParams).open().then(function(){
+          $scope.files = [];
+          $scope.invalidFiles = [];
+        });
+      }, function() {
+        angular.extend(dialogParams.resolve, {
+          floorSuccess: function () {
+            return true;
+          },
+          uploadSuccess: function () {
+            return false;
+          }
+        });
+        $dialog.dialog(dialogParams).open().then(function(){
+          $scope.files = [];
+          $scope.invalidFiles = [];
+        });
+      });
+    };
+
+    $scope.removeInvalidFiles = function() {
+      $scope.invalidFiles = [];
+      $scope.boxDocuments.$setValidity('pattern', true);
+      $scope.boxDocuments.$setValidity('maxSize', true);
+      $scope.validity.boxDocuments = angular.copy($scope.boxDocuments);
+      $scope.documents.$setValidity('pattern', true);
+      $scope.documents.$setValidity('maxSize', true);
+      $scope.validity.documents = angular.copy($scope.documents);
+    };
+
+    $scope.removeFile = function(file) {
+      $scope.files = $scope.files.filter(function (f) {
+        return f.name !== file.name;
+      });
+    };
+
     // we wrap the api call in a function so that we can call it initially
     // as well as after an extension has been requested.
     var getData = function() {
@@ -31,6 +115,8 @@ angular.module('nextgearWebApp')
         $scope.paymentQueue.getQueueCount = function() {
           return _.size(Payments.getPaymentQueue().payments);
         };
+
+        $scope.floorplanId = details.FinancialSummaryInfo.FloorplanId;
 
         // Hide the payment options sidebar if there is no outstanding amount for the user to pay.
         $scope.hasOutstanding = details.FinancialSummaryInfo.TotalOutstanding > 0;

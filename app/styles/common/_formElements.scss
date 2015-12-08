@@ -864,3 +864,15 @@ ul.files-container li:hover .file-delete{
 ul.files-container li .file-delete:hover{
   background-color: rgba(0, 0, 0, .45);
 }
+
+.files-container .ng-hide {
+  background: url("../img/file.png") no-repeat center;
+  background-size: contain;
+  display: block !important;
+}
+
+.files-container .ngf-hide {
+  background: url("../img/file.png") no-repeat center;
+  background-size: contain;
+  display: block !important;
+}
