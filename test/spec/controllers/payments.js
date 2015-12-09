@@ -518,10 +518,10 @@ describe('Controller: PaymentsCtrl', function () {
     }));
   });
 
-  it('should only allow payment extensions if payment is in its final curtailment', function() {
-    var canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 100 });
+  it('should only allow payment extensions if payment is extendable', function() {
+    var canShow = scope.showExtendLink({ Extendable: true });
     expect(canShow).toBe(true);
-    canShow = scope.showExtendLink({ CurrentPayoff: 100, AmountDue: 60 });
+    canShow = scope.showExtendLink({ Extendable: false });
     expect(canShow).toBe(false);
   });
 });
