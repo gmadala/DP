@@ -262,8 +262,10 @@ angular.module('nextgearWebApp')
     $scope.removeInvalidFiles = function() {
       $scope.invalidFiles = [];
       $scope.form.boxDocuments.$setValidity('pattern', true);
+      $scope.form.boxDocuments.$setValidity('maxSize', true);
       $scope.validity.boxDocuments = angular.copy($scope.form.boxDocuments);
       $scope.form.documents.$setValidity('pattern', true);
+      $scope.form.documents.$setValidity('maxSize', true);
       $scope.validity.documents = angular.copy($scope.form.documents);
     };
 

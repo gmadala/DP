@@ -41,10 +41,6 @@ describe('Controller: DocumentsCtrl', function () {
     gettextCatalog = _gettextCatalog_;
   }));
 
-  it('should attach a list of documents to the scope', function () {
-    expect(scope.documents.length).toBe(1);
-  });
-
   it('should attach a list of collateralProtection to the scope', function () {
     expect(scope.collateralProtection.length).toBe(4);
   });
