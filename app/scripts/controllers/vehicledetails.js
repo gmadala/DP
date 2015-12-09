@@ -29,6 +29,12 @@ angular.module('nextgearWebApp')
     $scope.hasOutstanding = null;
 
     $scope.uploadDocuments = function(){
+
+      $scope.validity = angular.copy($scope.form);
+      if (!$scope.form.$valid) {
+        return false;
+      }
+
       var dialogParams = {
         backdrop: true,
         keyboard: true,
@@ -93,12 +99,16 @@ angular.module('nextgearWebApp')
 
     $scope.removeInvalidFiles = function() {
       $scope.invalidFiles = [];
-      $scope.boxDocuments.$setValidity('pattern', true);
-      $scope.boxDocuments.$setValidity('maxSize', true);
-      $scope.validity.boxDocuments = angular.copy($scope.boxDocuments);
-      $scope.documents.$setValidity('pattern', true);
-      $scope.documents.$setValidity('maxSize', true);
-      $scope.validity.documents = angular.copy($scope.documents);
+      $scope.form.boxDocuments.$setValidity('pattern', true);
+      $scope.form.boxDocuments.$setValidity('maxSize', true);
+      if ($scope.validity.boxDocuments) {
+        $scope.validity.boxDocuments = angular.copy($scope.boxDocuments);
+      }
+      $scope.form.documents.$setValidity('pattern', true);
+      $scope.form.documents.$setValidity('maxSize', true);
+      if ($scope.validity.documents) {
+        $scope.validity.documents = angular.copy($scope.documents);
+      }
     };
 
     $scope.removeFile = function(file) {
