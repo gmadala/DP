@@ -6,6 +6,7 @@ angular.module('nextgearWebApp')
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
+
     if (!isUnitedStates) {
       if (currentLanguage === 'fr_CA') {
         languagePrefix = 'CAF%20';
@@ -21,6 +22,7 @@ angular.module('nextgearWebApp')
     $scope.documents = [] ;
 
     if (isUnitedStates){
+
       $scope.documents.push({
         title: gettextCatalog.getString('Welcome Packet'),
         url: 'http://www.nextgearcapital.com/welcome-packet/',
@@ -33,18 +35,25 @@ angular.module('nextgearWebApp')
         metric: metric.DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE
       });
 
+      var forTMFFAQ = languagePrefix;
+
+      if (currentLanguage==='fr_CA'){
+        forTMFFAQ = 'CAF%20';
+      }
       $scope.documents.push({
         title: gettextCatalog.getString('Title Management Frequently Asked Questions'),
-        url: 'documents/' + languagePrefix + 'Records%20Title%20FAQ.pdf',
+        url: 'documents/' + forTMFFAQ + 'Records%20Title%20FAQ.pdf',
         metric: metric.DEALER_RECORDS_TITLE_FAQ
+      });
+
+      $scope.documents.push({
+        title: gettextCatalog.getString('Instructions for Buyers'),
+        url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
+        metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
       });
     }
 
-    $scope.documents.push({
-      title: gettextCatalog.getString('Instructions for Buyers'),
-      url: 'documents/' + languagePrefix + 'NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf',
-      metric: metric.DEALER_RESOURCES_INSTRUCTIONS_FOR_BUYERS_PAGE
-    });
+
 
     $scope.collateralProtection = [
       {
