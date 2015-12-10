@@ -3,7 +3,7 @@
 </h3>
 
 <div class="modal-body">
-  <div ng-show="floorSuccess == false">
+  <div ng-show="floorSuccess == false && createFloorplan == true">
     <p class="spaced">
       <span class="glyphicon glyphicon-exclamation-sign failure-icon icon-spacing"></span>
       <span translate>There was a problem with your flooring request. Please contact NextGear Capital.</span>
@@ -11,7 +11,7 @@
   </div>
 
   <div ng-show="floorSuccess == true && uploadSuccess == true">
-    <p class="spaced">
+    <p class="spaced" ng-show="createFloorplan == true">
       <span class="glyphicon glyphicon-ok icon-success icon-spacing"></span>
       <span translate>Your flooring request has been submitted to NextGear Capital.</span>
     </p>
@@ -22,7 +22,7 @@
   </div>
 
   <div ng-show="floorSuccess == true && uploadSuccess == false">
-    <p class="spaced">
+    <p class="spaced" ng-show="createFloorplan == true">
       <span class="glyphicon glyphicon-ok icon-success icon-spacing"></span>
       <span translate>Your flooring request has been submitted to NextGear Capital.</span>
     </p>
