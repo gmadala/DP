@@ -186,9 +186,16 @@
         Please select a Bank Account for Deposit.
       </label>
     </div>
+    <button class="btn-cta cta-full cta-primary"
+            ng-disabled="submitInProgress"
+            ng-click="submit()"
+            ng-hide="canAttachDocuments()"
+            translate>
+      Review and Floor Vehicle
+    </button>
   </section>
 
-  <section class="col-xs-4 well left-margin-large">
+  <section class="col-xs-4 well left-margin-large" ng-show="canAttachDocuments()">
     <h2 class="well-title" translate>3. Document Upload</h2>
     <div class="well-form">
       <p class="spaced" translate>
@@ -202,27 +209,27 @@
       </ul>
       <p>
         <span translate>Not sure what to send?</span>
-        <a href="/documents/Dealer%20Funding%20Checklist.pdf" class="primary" translate>View the Dealer Funding Checklist.</a>
+        <a href="/documents/Dealer%20Funding%20Checklist.pdf" target="_blank" class="primary" translate>View the Dealer Funding Checklist.</a>
       </p>
 
       <p class="supported-files" translate>Supported formats: image, word, excel and pdf. 5MB max per file.</p>
 
       <!-- Upload file code -->
       <div ngf-drop
-           name="documents"
+           name="boxDocuments"
            class="drop-box"
-           ng-class="{ 'file-error': validity.documents.$error.pattern }"
+           ng-class="{ 'file-error': validity.documents.$error.pattern || validity.boxDocuments.$error.pattern || validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize }"
            ng-model="files"
            ngf-model-invalid="invalidFiles"
            ngf-fix-orientation="false"
            ngf-drag-over-class="'dragover'"
            ngf-allow-dir="true"
-           ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*'"
+           ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
            ngf-multiple="true"
            ngf-keep="true"
            ngf-max-size="'5MB'">
-        <div ng-hide="files" class="drop-box-empty" translate>Drag files here...</div>
-        <div ng-show="files">
+        <div ng-hide="files.length > 0" class="drop-box-empty" translate>Drag files here...</div>
+        <div ng-show="files.length > 0">
           <ul class="files-container">
             <li ng-repeat="file in files">
               <img ngf-thumbnail="file" class="thumb">
@@ -251,7 +258,7 @@
       <input type="file"
              id="documents"
              name="documents"
-             ng-class="{ 'nxg-invalid': validity.documents.$error.pattern }"
+             ng-class="{ 'nxg-invalid': validity.documents.$error.pattern || validity.documents.$error.maxSize }"
              ngf-select
              ng-model="files"
              ngf-model-invalid="invalidFiles"
@@ -261,8 +268,12 @@
              ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
       <label for="documents" class="text-error"
-             ng-show="validity.documents.$error.pattern" translate>
+             ng-show="validity.documents.$error.pattern || validity.boxDocuments.$error.pattern" translate>
         Unsupported file found in selection.
+      </label>
+      <label for="documents" class="text-error"
+             ng-show="validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize" translate>
+        One or more files exceeded the 5MB limit.
       </label>
       <!--IE9 workaround -->
       <div ngf-no-file-drop>

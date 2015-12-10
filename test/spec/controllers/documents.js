@@ -41,10 +41,6 @@ describe('Controller: DocumentsCtrl', function () {
     gettextCatalog = _gettextCatalog_;
   }));
 
-  it('should attach a list of documents to the scope', function () {
-    expect(scope.documents.length).toBe(1);
-  });
-
   it('should attach a list of collateralProtection to the scope', function () {
     expect(scope.collateralProtection.length).toBe(4);
   });
@@ -164,7 +160,11 @@ describe('Controller: DocumentsCtrl', function () {
       it('for documents', function () {
         angular.forEach(scope.documents, function (document) {
           expect(document.url.indexOf(langPrefix.CAE) > -1).toBe(false);
-          expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          if (document.url.indexOf('Records%20Title') > -1) {
+            expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(true);
+          } else {
+            expect(document.url.indexOf(langPrefix.CAF) > -1).toBe(false);
+          }
           expect(document.url.indexOf(langPrefix.ES) > -1).toBe(false);
         });
       });
