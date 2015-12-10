@@ -51,7 +51,7 @@ msgstr "-- Seleccione una pregunta --"
 
 #: app/views/receipts.html:144
 msgid "1 VIN per page"
-msgstr ""
+msgstr "1 VIN por página"
 
 #: app/views/floorcar.html:3
 msgid "1. Vehicle Information"
@@ -948,7 +948,7 @@ msgstr "Grupos de desembolso"
 
 #: app/views/documents.html:10
 msgid "Documents"
-msgstr ""
+msgstr "Documentos"
 
 #: app/views/modals/financialAccount.html:133
 msgid "Does not match with account number."
@@ -1352,7 +1352,7 @@ msgstr "Bien"
 
 #: app/views/receipts.html:139
 msgid "Grouped by transaction"
-msgstr ""
+msgstr "Agrupados por transacción"
 
 #: app/scripts/controllers/documents.js:56
 msgid "Guidelines"
@@ -1630,7 +1630,7 @@ msgstr "Falta el año"
 
 #: app/views/documents.html:36
 msgid "Mobile Apps"
-msgstr ""
+msgstr "Aplicaciones móviles"
 
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html:53
 #: app/scripts/directives/nxgVinDetails/nxgVinDetails.html:72
@@ -2605,7 +2605,7 @@ msgstr "Recibos seleccionados"
 
 #: app/views/receipts.html:136
 msgid "Receipts formatting options"
-msgstr ""
+msgstr "Opciones para el formato de recibos"
 
 #: app/scripts/controllers/reports.js:29
 msgid "Receivable Detail (PDF)"
@@ -3116,6 +3116,7 @@ msgstr "Éxito"
 #: app/views/floorcar.html:208
 msgid "Supported formats: image, word, excel and pdf. 5MB max per file."
 msgstr ""
+"Formatos compatibles: imagen, word, excel y pdf. 5 MB máx. por archivo."
 
 #: app/scripts/services/userVoice.js:48
 msgid "Technical Support"
@@ -3321,7 +3322,7 @@ msgstr "Ubicación del título"
 
 #: app/scripts/controllers/documents.js:37
 msgid "Title Management Frequently Asked Questions"
-msgstr ""
+msgstr "Preguntas frecuentes sobre el manejo del Título de propiedad"
 
 #: app/scripts/controllers/titleReleases.js:157
 msgid "Title Release Limit Reached"
@@ -3560,7 +3561,7 @@ msgstr "Desprogramar"
 
 #: app/views/floorcar.html:263
 msgid "Unsupported file found in selection."
-msgstr ""
+msgstr "Se encontró un archivo no compatible en la selección."
 
 #: app/views/reports.html:17
 msgid "Upcoming Curtailment / Payoff Quote (PDF)"
@@ -4080,7 +4081,7 @@ msgstr "únicamente con interés"
 
 #: app/views/floorcar.html:245
 msgid "invalid files."
-msgstr ""
+msgstr "archivos inválidos."
 
 #: app/scripts/controllers/checkout.js:347
 #: app/scripts/directives/nxgPaymentSummary/nxgPaymentSummary.js:73
@@ -4129,7 +4130,7 @@ msgstr "vAuto"
 
 #: app/views/floorcar.html:240
 msgid "valid files."
-msgstr ""
+msgstr "archivos válidos."
 
 #: app/views/vehicledetails.html:22
 msgid ""
