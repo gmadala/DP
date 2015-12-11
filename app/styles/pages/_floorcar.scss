@@ -1,0 +1,31 @@
+// Styling override for the floor car a vehicle page.
+
+#FloorCarPage {
+  .styled-input {
+    input:not([type='file']) {
+      width: 90%;
+    }
+  }
+
+  .smallInput {
+    width: 100%;
+  }
+
+  .input-prepend, #nxg-vin-no-match-info, .nxg-static {
+    input:not([type='file']) {
+      width: 95%;
+    }
+  }
+
+  input:not([type='file']) {
+    width: 100%
+  }
+
+  .file-error {
+    border: 2px dashed $danger;
+  }
+
+  .files-container .ng-hide {
+    display: block !important;
+  }
+}

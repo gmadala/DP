@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarConfirmCtrl', function ($scope, dialog, formData, User, gettextCatalog, kissMetricInfo, segmentio, metric) {
+  .controller('FloorCarConfirmCtrl', function ($scope, $window, dialog, formData, fileNames, User, gettextCatalog,
+                                               kissMetricInfo, segmentio, metric) {
     // access to all the data the user entered in the form (a copy)
     $scope.formData = formData;
+    $scope.fileNames = fileNames;
 
     // mode
     $scope.isDealer = User.isDealer();
@@ -23,6 +25,9 @@ angular.module('nextgearWebApp')
     }
 
     $scope.documentLink = '/documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf';
+    $scope.openDocument = function() {
+      $window.open($scope.documentLink);
+    };
 
     $scope.confirm = function () {
       kissMetricInfo.getKissMetricInfo().then(

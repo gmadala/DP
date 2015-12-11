@@ -1,0 +1,39 @@
+<h3 class="modal-header" translate>
+  Confirm Flooring Request
+</h3>
+
+<div class="modal-body">
+  <div ng-show="floorSuccess == false">
+    <p class="spaced">
+      <span class="glyphicon glyphicon-exclamation-sign failure-icon icon-spacing"></span>
+      <span translate>There was a problem with your flooring request. Please contact NextGear Capital.</span>
+    </p>
+  </div>
+
+  <div ng-show="floorSuccess == true && uploadSuccess == true">
+    <p class="spaced">
+      <span class="glyphicon glyphicon-ok icon-success icon-spacing"></span>
+      <span translate>Your flooring request has been submitted to NextGear Capital.</span>
+    </p>
+    <p class="spaced" ng-show="canAttachDocuments">
+      <span class="glyphicon glyphicon-ok icon-success icon-spacing"></span>
+      <span translate>Your documents were uploaded successfully.</span>
+    </p>
+  </div>
+
+  <div ng-show="floorSuccess == true && uploadSuccess == false">
+    <p class="spaced">
+      <span class="glyphicon glyphicon-ok icon-success icon-spacing"></span>
+      <span translate>Your flooring request has been submitted to NextGear Capital.</span>
+    </p>
+    <p class="spaced" ng-show="canAttachDocuments">
+      <span class="glyphicon glyphicon-exclamation-sign failure-icon icon-spacing"></span>
+      <span translate>There was a problem uploading your documents. Please email them to NextGear Capital.</span>
+    </p>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button ng-click="close()" type="button" class="btn-cta cta-secondary btn-sm" translate>Close Window</button>
+</div>

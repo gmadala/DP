@@ -47,6 +47,7 @@ angular.module('nextgearWebApp')
     VIEW_REQUEST_CREDIT_INCREASE_PAGE: 'View Request Credit Increase',//x
     DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
     DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
+    DEALER_RECORDS_TITLE_FAQ: 'Dealer - Records Title FAQ',//X
 
     //Resources Events for  - Auction
     VIEW_AUCTION_REPORTS_PAGE: 'View Auction Reports',
@@ -71,5 +72,19 @@ angular.module('nextgearWebApp')
     //Account Management Events
     DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE: 'Dealer - View Account Management Page',
     DEALER_ADD_BANK_ACCOUNT: 'Dealer - Add Bank Account',
-    DEALER_EDIT_BANK_ACCOUNT: 'Dealer - Edit Bank Account'
+    DEALER_EDIT_BANK_ACCOUNT: 'Dealer - Edit Bank Account',
+
+    //Footer partner links
+    AUTOTRADER_INDEX: 'Autotrader Partner Link',
+    DEALSHIELD_INDEX: 'Dealshield Partner Link',
+    GOAUTOEXCHANGE_INDEX: 'Go Auto Exchange Partner Link',
+    GOFINANCIAL_INDEX: 'Go Financial Partner Link',
+    HAYSTACK_INDEX: 'Haystack Digital Marketing Partner Link',
+    HOMENET_INDEX: 'HomeNet Automotive Partner Link',
+    KELLYBLUEBOOK_INDEX: 'Kelly Blue Book Partner Link',
+    MANHEIM_INDEX: 'Manheim Partner Link',
+    READYAUTO_INDEX: 'Ready Auto Transport Partner Link',
+    VAUTO_INDEX: 'vAuto Partner Link',
+    VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link'
+
   });

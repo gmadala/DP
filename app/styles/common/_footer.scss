@@ -9,10 +9,13 @@ footer.row-footer{
   @include background-image(linear-gradient(#FFF, #e4e4e4));
   font-size: $tiny-font-size;
   color: $highlight;
-  padding: 14px 0 11px 0;
   border-top: 1px solid $border;
-  margin: 10px 0 -50px 0;
+  margin-top: 10px;
+  margin-bottom: -50px;
+  padding-top: 14px;
+  padding-bottom:11px;
 }
+
 
 .nxg-main-view {
   margin-bottom: 50px;
@@ -50,10 +53,21 @@ body {
 
 footer, .nxg-main:after {
   /* .push must be the same height as footer */
-  height: 50px;
+  height: 120px;
 }
 
 .nxg-phone {
   display: inline-block;
   margin: 0 2px;
+}
+
+.nxg-cox-logo {
+  background: url(../img/Logo-CoxAutomotive.png);
+  background-repeat: no-repeat;
+  background-size: 250px;
+  background-position: center;
+  height: 33px;
+  position: relative;
+  top: -7px;
+  z-index: 5;
 }

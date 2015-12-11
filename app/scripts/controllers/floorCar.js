@@ -6,9 +6,10 @@
  */
 angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement) {
+                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
     var isDealer = User.isDealer();
+    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -101,6 +102,8 @@ angular.module('nextgearWebApp')
 
     $scope.reset = function () {
       $scope.data = angular.copy($scope.defaultData);
+      $scope.files = [];
+      $scope.invalidFiles = [];
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');
@@ -148,6 +151,11 @@ angular.module('nextgearWebApp')
         resolve: {
           formData: function () {
             return angular.copy($scope.data);
+          },
+          fileNames: function(){
+            return _.map($scope.files, function(file) {
+              return file.name;
+            });
           }
         }
       };
@@ -166,19 +174,106 @@ angular.module('nextgearWebApp')
       }
 
       $scope.submitInProgress = true;
+
+      var dialogParams = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        dialogClass: 'modal modal-medium',
+        templateUrl: 'views/modals/floorCarMessage.html',
+        controller: 'FloorCarMessageCtrl',
+        resolve:{
+          canAttachDocuments: function(){
+            return $scope.canAttachDocuments();
+          }
+        }
+      };
+
       Floorplan.create($scope.data).then(
-        function (/*success*/) {
+        function (reponse) { /*floorplan success*/
+
+          var upload = Upload.upload({
+            url: nxgConfig.apiBase + '/floorplan/upload/' + reponse.FloorplanId,
+            method: 'POST',
+            data: {
+              file: $scope.files
+            }
+          });
+
+          upload.then(function(reponse) {
+            $scope.submitInProgress = false;
+            // floorplan created successfully.
+            angular.extend(dialogParams.resolve, {
+              floorSuccess: function () {
+                return true;
+              }
+            });
+
+            if (reponse.data.Success) {
+              angular.extend(dialogParams.resolve, {
+                uploadSuccess: function () {
+                  return true;
+                }
+              });
+            } else {
+              angular.extend(dialogParams.resolve, {
+                uploadSuccess: function () {
+                  return false;
+                }
+              });
+            }
+            $dialog.dialog(dialogParams).open().then(function(){
+              $scope.reset();
+            });
+          }, function() {
+            $scope.submitInProgress = false;
+            angular.extend(dialogParams.resolve, {
+              floorSuccess: function () {
+                return true;
+              },
+              uploadSuccess: function () {
+                return false;
+              }
+            });
+            $dialog.dialog(dialogParams).open().then(function(){
+              $scope.reset();
+            });
+          });
+        }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
-          var title = gettextCatalog.getString('Flooring Request Submitted'),
-            msg = gettextCatalog.getString('Your flooring request has been submitted to NextGear Capital.'),
-            buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-          $dialog.messageBox(title, msg, buttons).open().then(function () {
+          angular.extend(dialogParams.resolve, {
+            floorSuccess: function () {
+              return false;
+            },
+            uploadSuccess: function () {
+              return false;
+            }
+          });
+          $dialog.dialog(dialogParams).open().then(function(){
             $scope.reset();
           });
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
         }
       );
+    };
+
+    $scope.removeInvalidFiles = function() {
+      $scope.invalidFiles = [];
+      $scope.form.boxDocuments.$setValidity('pattern', true);
+      $scope.form.boxDocuments.$setValidity('maxSize', true);
+      if ($scope.validity.boxDocuments) {
+        $scope.validity.boxDocuments = angular.copy($scope.form.boxDocuments);
+      }
+      $scope.form.documents.$setValidity('pattern', true);
+      $scope.form.documents.$setValidity('maxSize', true);
+      if ($scope.validity.documents) {
+        $scope.validity.documents = angular.copy($scope.form.documents);
+      }
+    };
+
+    $scope.removeFile = function(file) {
+      $scope.files = $scope.files.filter(function (f) {
+        return f.name !== file.name;
+      });
     };
 
     $scope.cancel = function () {
@@ -205,4 +300,12 @@ angular.module('nextgearWebApp')
     }else{
       $scope.mileageOrOdometer = gettextCatalog.getString('Odometer');
     }
+
+    /**
+     * Determines if the current user should be allowed to upload documents.
+     * @return {Boolean} Is the user allowed to upload documents?
+     */
+    $scope.canAttachDocuments = function () {
+      return ($scope.attachDocumentsEnabled);
+    };
   });

@@ -1,7 +1,10 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('nxgConfig', function ($location) {
+  angular.module('nextgearWebApp')
+    .factory('nxgConfig', nxgConfig);
+
+  function nxgConfig() {
 
     var SIXTY_MINUTES = 60 * 60 * 1000;
     var FIFTEEN_MINUTES = 15 * 60 * 1000;
@@ -13,28 +16,6 @@ angular.module('nextgearWebApp')
     var SEGMENT_KEY_PRODUCTION = '9eaffv4cbe';
 
     var prv = {
-      generateConfig: function (segmentIoKey, timeoutMs, isDemo, serviceName) {
-        if (!serviceName) {
-          serviceName = 'MobileService';
-        }
-        var apiDomain = 'https://' + $location.host();
-        return {
-          apiBase: apiDomain + '/' + serviceName + '/api',
-          apiDomain: apiDomain,
-          segmentIoKey: segmentIoKey,
-          userVoice: {
-            dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
-            dealerForumId: 227793,
-            dealerCustomTemplateId: 21815,
-            auctionApiKey: 'WqAjMXsGO7Fj57N6sQ4Cw',
-            auctionForumId: 229017,
-            auctionCustomTemplateId: 23042
-          },
-          infiniteScrollingMax: 500,
-          sessionTimeoutMs: timeoutMs,
-          isDemo: isDemo || false // default to false
-        };
-      },
       profile: {
         LOCAL: 'local',
         LOCAL_TEST: 'local_test',
@@ -44,44 +25,98 @@ angular.module('nextgearWebApp')
         TRAINING: 'training',
         PRODUCTION: 'production'
       },
-      getConfig: function (profile) {
-        var config;
-        var isDemo = profile === prv.profile.DEMO;
-        switch (profile) {
-          case prv.profile.LOCAL:
-            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
-            config.apiBase = '';
-            config.apiDomain = '';
-            break;
-          case prv.profile.LOCAL_TEST:
-            config = prv.generateConfig(SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
-            config.apiBase = 'https://test.nextgearcapital.com/mobileservice/api';
-            config.apiDomain = 'https://test.nextgearcapital.com';
-            break;
-          case prv.profile.UAT:
-            config = prv.generateConfig(SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
-            config.apiBase = 'https://exp1uatdapp01.nextgearcapital.com/mobileservice/api/';
-            config.apiDomain = 'https://exp1uatdapp01.nextgearcapital.com/';
-            break;
-          case prv.profile.DEMO:
-            config = prv.generateConfig(SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
-            break;
-          case prv.profile.TEST:
-            config = prv.generateConfig(SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
-            break;
-          case prv.profile.TRAINING:
-            config = prv.generateConfig(SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
-            break;
-          case prv.profile.PRODUCTION:
-            config = prv.generateConfig(SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
-            break;
-          default:
-            throw 'nxgConfig profile \'' + profile + '\' not found!';
-        }
-        return config;
-      }
+      generateConfig: generateConfig,
+      getConfig: getConfig
     };
 
+    /**
+     * Get configuration for specific configuration profile.
+     * @param profile the configuration profile which will be used.
+     * @returns {*} the configuration object for the specified profile.
+     */
+    function getConfig(profile) {
+
+      var config;
+      var apiDomain;
+      var ngenDomain;
+
+      var isDemo = profile === prv.profile.DEMO;
+      switch (profile) {
+        case prv.profile.LOCAL:
+          apiDomain = '';
+          ngenDomain = '';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          break;
+        case prv.profile.LOCAL_TEST:
+          apiDomain = 'https://test.nextgearcapital.com';
+          ngenDomain = 'https://localhost:8080';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          break;
+        case prv.profile.UAT:
+          apiDomain = 'https://exp1uatdapp01.nextgearcapital.com/';
+          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
+          break;
+        case prv.profile.DEMO:
+          apiDomain = 'https://demo.nextgearcapital.com';
+          ngenDomain = 'https://dis-demo-ngen-api.nextgearcapital.com/';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
+          break;
+        case prv.profile.TEST:
+          apiDomain = 'https://test.nextgearcapital.com';
+          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com/';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
+          break;
+        case prv.profile.TRAINING:
+          apiDomain = 'https://training.nextgearcapital.com';
+          ngenDomain = 'https://dis-training-ngen-api.nextgearcapital.com/';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
+          break;
+        case prv.profile.PRODUCTION:
+          apiDomain = 'https://customer.nextgearcapital.com';
+          ngenDomain = 'https://ngen-api.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
+          break;
+        default:
+          throw 'nxgConfig profile \'' + profile + '\' not found!';
+      }
+      return config;
+    }
+
+    /**
+     * Generate web configuration based on the parameters.
+     *
+     * @param apiDomain
+     * @param segmentIoKey
+     * @param timeoutMs
+     * @param isDemo
+     */
+    function generateConfig(apiDomain, ngenDomain, segmentIoKey, timeoutMs, isDemo) {
+      var configuration;
+      configuration = {
+        apiBase: apiDomain + '/MobileService/api',
+        apiDomain: apiDomain,
+        ngenDomain: ngenDomain,
+        segmentIoKey: segmentIoKey,
+        userVoice: {
+          dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
+          dealerForumId: 227793,
+          dealerCustomTemplateId: 21815,
+          auctionApiKey: 'WqAjMXsGO7Fj57N6sQ4Cw',
+          auctionForumId: 229017,
+          auctionCustomTemplateId: 23042
+        },
+        infiniteScrollingMax: 500,
+        sessionTimeoutMs: timeoutMs,
+        isDemo: isDemo || false // default to false
+      };
+      return configuration;
+    }
+
+    /**
+     * Grunt will process the following lines of code depending on the ENV option value passed when building the web.
+     * See: https://github.com/jsoverson/grunt-preprocess
+     */
     var profile;
 
     // @if ENV='local'
@@ -118,4 +153,5 @@ angular.module('nextgearWebApp')
     // @endif
 
     return prv.getConfig(profile);
-  });
+  }
+})();

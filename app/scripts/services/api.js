@@ -201,6 +201,27 @@ angular.module('nextgearWebApp')
         } else {
           return nxgConfig.apiBase + path;
         }
+      },
+      ngenContentLink: function (path, params) {
+        if (!path) {
+          throw 'api.contentLink requires a path string';
+        }
+
+        var queryParts = [];
+
+        if (authToken) {
+          queryParts.push('apiToken=' + authToken);
+        }
+
+        angular.forEach(params, function(value, key) {
+          queryParts.push(key + '=' + value);
+        });
+
+        if (queryParts.length > 0) {
+          return nxgConfig.ngenDomain + path + '?' + queryParts.join('&');
+        } else {
+          return nxgConfig.ngenDomain + path;
+        }
       }
     };
 
