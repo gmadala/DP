@@ -14,7 +14,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.isUnitedStates = User.isUnitedStates();
   $scope.isDealer = User.isDealer();
   $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ? User.getFeatures().autoPay.enabled : true;
-  $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ? User.getFeatures().contactInfo.enabled : true;
+  $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ? User.getFeatures().contactInfo.enabled : false;
   $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : true;
   $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
   $scope.editDefaultAccount = false;
@@ -142,8 +142,8 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       /** BUSINESS SETTINGS **/
       $scope.business = {
         data: {
-          phone: '1-234-567-8910',
-          fax: '1-234-567-8912',
+          phone: results.Phone,
+          fax: '',
           email: results.BusinessEmail,
           enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
           enhancedRegistrationPin: null,
