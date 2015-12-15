@@ -119,7 +119,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.showExtendLink = function(payment) {
-      return payment.Extendable;
+      return payment.Extendable === (payment.Scheduled) ? false : payment.Extendable;
     };
 
     $scope.payments.extension = function (payment) {
