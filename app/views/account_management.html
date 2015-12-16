@@ -10,7 +10,7 @@
     <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
       <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
       <h6 class="col-xs-2" translate>Account Number</h6>
-      <h6 class="col-xs-2" translate>{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-2">{{financial.data.routingNumberLabel}}</h6>
       <h6 class="col-xs-2" ng-show="editBankAccountEnabled" translate>Recent Transaction</h6>
       <h6 class="col-xs-1" translate>Active</h6>
     </div>
@@ -19,7 +19,7 @@
     <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled || !business.data.isStakeholderActive || !isUnitedStates">
       <h6 class="col-xs-4 left-align left-padding" translate>Bank Name</h6>
       <h6 class="col-xs-3" translate>Account Number</h6>
-      <h6 class="col-xs-3" translate>{{financial.data.routingNumberLabel}}</h6>
+      <h6 class="col-xs-3">{{financial.data.routingNumberLabel}}</h6>
       <h6 class="col-xs-1" translate>Active</h6>
     </div>
 

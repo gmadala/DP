@@ -244,12 +244,12 @@
         <div class="col-xs-5 paragraph">
           <span ng-show="files.length > 0">
             <span class="glyphicon glyphicon-ok icon-spacing"></span>
-            <span translate>{{ files.length }} valid files.</span>
+            <span>{{ files.length }} <span translate>valid files.</span></span>
           </span>
         </div>
         <div class="col-xs-7 paragraph" ng-show="invalidFiles.length > 0">
           <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
-          <span translate>{{ invalidFiles.length }} invalid files.</span>
+          <span>{{ invalidFiles.length }} <span translate>invalid files.</span></span>
           <button class="btn-unstyle btn-link" ng-click="removeInvalidFiles()">clear</button>
         </div>
       </div>
