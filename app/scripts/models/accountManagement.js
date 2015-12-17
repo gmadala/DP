@@ -45,7 +45,6 @@ angular.module('nextgearWebApp')
           settings.LastPaymentDate = responds[0].LastPaymentDate;
           settings.UnappliedFunds = responds[0].UnappliedFundsTotal;
           settings.TotalAvailable = responds[0].TotalAvailableUnappliedFunds;
-          settings.Phone = responds[1].Phone;
           return settings;
         });
       },
