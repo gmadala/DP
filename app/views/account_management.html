@@ -119,8 +119,10 @@
     <div class="well-item">
       <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
 
-        <div class="row"  ng-show="business.contactInfo.isDisplayed()">
+        <div class="row">
           <label class="col-xs-5" for="businessPhone"><span translate>Phone</span></label>
+          <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
+          block should be removed
           <div class="col-xs-7" nxg-input model="business.data.phone" editable="business.editable">
             <input type="tel" class="xsmallInput" id="businessPhone" name="businessPhone" ng-model="business.dirtyData.phone"
                    value="business.dirtyData.phone"
@@ -128,6 +130,18 @@
             <label class="text-error" ng-show="business.validation.businessPhone.$invalid" translate>
               Please enter a valid phone number.
             </label>
+          </div>-->
+          <!-- Begin temporary code -->
+          <div class="col-xs-4" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{business.data.phone | tel}}</div>
+          <div class="col-xs-3" style="padding-left: 30px">
+            <div class="btn-help btn-help-adjust"
+                 tooltip-placement="right"
+                 tooltip-trigger="mouseenter"
+                 tooltip-html="true"
+                 tooltip-html-unsafe="{{ 'To change your phone number, please contact customer service for further assistance.' | translate }}"
+                 tooltip-animation="true">
+              <span nxg-icon="icon-help"></span>
+            </div>
           </div>
         </div>
 
