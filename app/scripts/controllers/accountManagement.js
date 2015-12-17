@@ -142,8 +142,6 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       /** BUSINESS SETTINGS **/
       $scope.business = {
         data: {
-          phone: results.Phone,
-          fax: '',
           email: results.BusinessEmail,
           enhancedRegistrationEnabled: results.EnhancedRegistrationEnabled,
           enhancedRegistrationPin: null,

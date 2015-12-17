@@ -132,7 +132,7 @@
             </label>
           </div>-->
           <!-- Begin temporary code -->
-          <div class="col-xs-4" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{business.data.phone | tel}}</div>
+          <div class="col-xs-4" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{title.data.titleAddress.Phone | tel}}</div>
           <div class="col-xs-3" style="padding-left: 30px">
             <div class="btn-help btn-help-adjust"
                  tooltip-placement="right"
@@ -148,7 +148,7 @@
         <div class="row"  ng-show="business.contactInfo.isDisplayed()">
           <label class="col-xs-5" for="businessFax"><span translate>Fax</span></label>
           <div class="col-xs-7" nxg-input model="business.data.fax" editable="business.editable">
-            <input type="tel" class="xsmallInput" id="businessFax" name="businessFax" ng-model="business.dirtyData.fax"
+            <input type="tel" class="xsmallInput" id="businessFax" name="businessFax" ng-model="title.data.titleAddress.Fax"
                    value="business.dirtyData.fax"
                    ng-class="{ 'nxg-invalid': business.validation.businessFax.$invalid }" required/>
             <label class="text-error" ng-show="business.validation.businessFax.$invalid" translate>
