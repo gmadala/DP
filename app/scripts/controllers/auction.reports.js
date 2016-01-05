@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
-        segmentio.track(metric.VIEW_AUCTION_REPORTS_PAGE,result);
+        segmentio.track(metric.VIEW_AUCTION_REPORTS_PAGE, result);
       }
     );
 
@@ -50,7 +50,7 @@ angular.module('nextgearWebApp')
 
       kissMetricInfo.getKissMetricInfo().then(
         function(result){
-          segmentio.track(metric.AUCTION_REPORTS_DISBURSEMENT_DETAIL_PAGE,result);
+          segmentio.track(metric.AUCTION_REPORTS_DISBURSEMENT_DETAIL_PAGE, result);
         }
       );
 

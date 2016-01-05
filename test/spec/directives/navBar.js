@@ -3,15 +3,14 @@
 describe('Directive: navBar', function () {
   beforeEach(module('nextgearWebApp', 'scripts/directives/navBar/navBar.html'));
 
-  var element;
-
   describe('controller', function () {
     var scope,
       aScope,
       $rootScope,
       $controller,
-      state,
       stateMock,
+      kissMetricData,
+      mockKissMetricInfo,
       shouldShowTRP,
       dMock,
       aMock;
@@ -20,6 +19,22 @@ describe('Directive: navBar', function () {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       scope = $rootScope.$new();
+
+      kissMetricData = {
+        height: 1080,
+        isBusinessHours: true,
+        vendor: 'Google Inc.',
+        version: 'Chrome 44',
+        width: 1920
+      };
+
+      mockKissMetricInfo = {
+        getKissMetricInfo : function() {
+          return $q.when(kissMetricData);
+        }
+      };
+
+      spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
 
       stateMock = {
         current: 'floorcar',
@@ -57,15 +72,23 @@ describe('Directive: navBar', function () {
       $controller('NavBarCtrl', {
         $scope: scope,
         $state: stateMock,
-        User: dMock
+        User: dMock,
+        kissMetricInfo: mockKissMetricInfo
       });
 
       aScope = $rootScope.$new();
       $controller('NavBarCtrl', {
         $scope: aScope,
-        User: aMock
+        User: aMock,
+        kissMetricInfo: mockKissMetricInfo
       });
     }));
+
+    it('should call to get core properties from kissmetric info service', function() {
+      scope.$apply();
+      expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+      expect(scope.kissMetricData).toEqual(kissMetricData);
+    });
 
     it('should attach a user object to the scope', function() {
       scope.$apply();
@@ -115,7 +138,8 @@ describe('Directive: navBar', function () {
         $controller('NavBarCtrl', {
           $scope: scope,
           $state: stateMock,
-          User: dMock
+          User: dMock,
+          kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
         expect(scope.user.navLinks().primary.length).toBe(6);
@@ -128,7 +152,8 @@ describe('Directive: navBar', function () {
         $controller('NavBarCtrl', {
           $scope: scope,
           $state: stateMock,
-          User: dMock
+          User: dMock,
+          kissMetricInfo: mockKissMetricInfo
         });
         scope.$apply();
         expect(scope.user.navLinks().primary.length).toBe(7);
@@ -142,7 +167,8 @@ describe('Directive: navBar', function () {
         $controller('NavBarCtrl', {
           $scope: scope,
           $state: stateMock,
-          User: dMock
+          User: dMock,
+          kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
         expect(scope.user.navLinks().primary.length).toBe(6);

@@ -63,7 +63,7 @@ angular.module('nextgearWebApp')
 
         kissMetricInfo.getKissMetricInfo().then(
           function(result){
-            segmentio.track(metric.SECURITY_QUESTIONS_COMPLETED,result);
+            segmentio.track(metric.SECURITY_QUESTIONS_COMPLETED, result);
           }
         );
 

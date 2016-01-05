@@ -348,7 +348,7 @@ angular.module('nextgearWebApp')
 
           kissMetricInfo.getKissMetricInfo().then(
             function(result){
-              segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON,result);
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON, result);
             }
           );
 
@@ -453,7 +453,7 @@ angular.module('nextgearWebApp')
 
           kissMetricInfo.getKissMetricInfo().then(
             function(result){
-              segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON,result);
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON, result);
             }
           );
 
@@ -574,7 +574,7 @@ angular.module('nextgearWebApp')
 
           kissMetricInfo.getKissMetricInfo().then(
             function(result){
-              segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON,result);
+              segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON, result);
             }
           );
 

@@ -53,8 +53,6 @@ angular.module('nextgearWebApp')
       });
     }
 
-
-
     $scope.collateralProtection = [
       {
         title: gettextCatalog.getString('Welcome Letter'),

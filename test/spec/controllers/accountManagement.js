@@ -14,7 +14,9 @@ describe('Controller: AccountManagementCtrl', function () {
     AccountManagementMock,
     dialogMock,
     UserMock,
-    recentTransactionMock;
+    recentTransactionMock,
+    kissMetricData,
+    mockKissMetricInfo;
 
 
   // Initialize the controller and a mock scope
@@ -150,6 +152,22 @@ describe('Controller: AccountManagementCtrl', function () {
 
     spyOn(AccountManagementMock, 'getTransactionDate').and.callThrough();
 
+    kissMetricData = {
+      height: 1080,
+      isBusinessHours: true,
+      vendor: 'Google Inc.',
+      version: 'Chrome 44',
+      width: 1920
+    };
+
+    mockKissMetricInfo = {
+      getKissMetricInfo : function() {
+        return $q.when(kissMetricData);
+      }
+    };
+
+    spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
+
     scope = $rootScope.$new();
     AccountManagementCtrl = $controller('AccountManagementCtrl', {
       $scope: scope,
@@ -157,10 +175,15 @@ describe('Controller: AccountManagementCtrl', function () {
       AccountManagement: AccountManagementMock,
       Addresses: AddressesMock,
       dealerCustomerSupportPhone: mockCustomerSupportPhone,
-      User: UserMock
+      User: UserMock,
+      kissMetricInfo: mockKissMetricInfo
     });
     scope.$digest();
   }));
+
+  it('should call to get core properties from kissmetric info service', function() {
+    expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+  });
 
   describe('business', function() {
     it('business should exist on scope', function () {

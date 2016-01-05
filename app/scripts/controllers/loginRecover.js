@@ -12,7 +12,7 @@ angular.module('nextgearWebApp')
         $scope.forgotUserNameValidity = angular.copy($scope.forgotUserNameForm);
         kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
-            segmentio.track(metric.ATTEMPT_USERNAME_RECOVERY,result);
+            segmentio.track(metric.ATTEMPT_USERNAME_RECOVERY, result);
           }
         );
         if ($scope.forgotUserNameForm.$invalid) {
@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
           function(/*success*/) {
             kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
               function(result){
-                segmentio.track(metric.USERNAME_RECOVERY_SUCCESS,result);
+                segmentio.track(metric.USERNAME_RECOVERY_SUCCESS, result);
               }
             );
             $scope.submitInProgress = false;
@@ -46,7 +46,7 @@ angular.module('nextgearWebApp')
         $scope.passwordRecovery.usernameFailed = false;
         kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
-            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY,result);
+            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY, result);
           }
         );
         $scope.forgotPasswordValidity = angular.copy($scope.forgotPasswordForm);
@@ -82,7 +82,7 @@ angular.module('nextgearWebApp')
         });
         kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
           function(result){
-            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS,result);
+            segmentio.track(metric.ATTEMPT_PASSWORD_RECOVERY_QUESTIONS, result);
           }
         );
         if ($scope.forgotPasswordForm.$invalid) {
@@ -94,7 +94,7 @@ angular.module('nextgearWebApp')
           function (/*success*/) {
             kissMetricInfo.getKissMetricInfoAuthenticated(false).then(
               function(result){
-                segmentio.track(metric.PASSWORD_RECOVERY_SUCCESS,result);
+                segmentio.track(metric.PASSWORD_RECOVERY_SUCCESS, result);
               }
             );
             $scope.submitInProgress = false;

@@ -6,9 +6,11 @@ angular.module('nextgearWebApp')
 
 function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, gettext,
                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
-                               routingNumberFilter) {
+                               routingNumberFilter, kissMetricInfo) {
 
-  segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE);
+  kissMetricInfo.getKissMetricInfo().then(function(result){
+    segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE, result);
+  });
 
   $scope.loading = false;
   $scope.isUnitedStates = User.isUnitedStates();

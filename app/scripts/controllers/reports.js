@@ -24,6 +24,10 @@ angular.module('nextgearWebApp')
       ]
     };
 
+    kissMetricInfo.getKissMetricInfo().then(function(result){
+      $scope.kissMetricData = result;
+    });
+
     $scope.currentReports = [
       {
         'title': gettextCatalog.getString('Receivable Detail (PDF)'),
@@ -59,7 +63,7 @@ angular.module('nextgearWebApp')
 
       kissMetricInfo.getKissMetricInfo().then(
         function(result){
-          segmentio.track(metric.DEALER_REPORT_DEALER_STATEMENT,result);
+          segmentio.track(metric.DEALER_REPORT_DEALER_STATEMENT, result);
         }
       );
 
@@ -87,7 +91,7 @@ angular.module('nextgearWebApp')
 
       kissMetricInfo.getKissMetricInfo().then(
         function(result){
-          segmentio.track(metric.DEALER_REPORTS_DISBURSEMENT_DETAIL,result);
+          segmentio.track(metric.DEALER_REPORTS_DISBURSEMENT_DETAIL, result);
         }
       );
 
@@ -134,7 +138,7 @@ angular.module('nextgearWebApp')
 
       kissMetricInfo.getKissMetricInfo().then(
         function(result){
-          segmentio.track(metric.DEALER_REPORTS_PAID_OFF_SUMMARY,result);
+          segmentio.track(metric.DEALER_REPORTS_PAID_OFF_SUMMARY, result);
         }
       );
 
@@ -161,7 +165,7 @@ angular.module('nextgearWebApp')
 
       kissMetricInfo.getKissMetricInfo().then(
         function(result){
-          segmentio.track(metric.DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE,result);
+          segmentio.track(metric.DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE, result);
         }
       );
 
