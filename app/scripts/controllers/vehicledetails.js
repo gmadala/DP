@@ -16,7 +16,7 @@ angular.module('nextgearWebApp')
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;
 
-    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : true;
+    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
 
     $scope.goToCheckout = function() {
       $state.transitionTo('checkout');
