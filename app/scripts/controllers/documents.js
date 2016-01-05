@@ -43,7 +43,7 @@ angular.module('nextgearWebApp')
       $scope.documents.push({
         title: gettextCatalog.getString('Title Management Frequently Asked Questions'),
         url: 'documents/' + forTMFFAQ + 'Records%20Title%20FAQ.pdf',
-        metric: metric.DEALER_RECORDS_TITLE_FAQ
+        metric: metric.DEALER_RESOURCES_TITLE_MANAGEMENT_FAQ
       });
 
       $scope.documents.push({
