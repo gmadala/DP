@@ -41,6 +41,33 @@
   padding: 0;
 }
 
+.user-info{
+  display: block;
+  position: relative;
+  font-weight: bold;
+  padding-top: 5px;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  :hover, :hover{
+    text-decoration: none;
+  }
+
+  .dealer-number{
+    border-left: 1px solid black;
+    padding-left: 5px;
+    margin-left: 5px;
+  }
+}
+
+.menu-divider{
+  border-bottom: 1px solid #bbb;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+
 .nxg-dropdown {
   @extend %align-right;
   @include border-bottom-radius($borderRadius);
