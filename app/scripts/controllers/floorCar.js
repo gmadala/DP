@@ -178,7 +178,7 @@ angular.module('nextgearWebApp')
         controller: 'FloorCarMessageCtrl',
         resolve: {
           canAttachDocuments: function() {
-            return canAttachDocuments();
+            return canAttachDocuments;
           },
           createFloorplan: function() {
             return true;
