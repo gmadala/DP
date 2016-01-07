@@ -168,90 +168,74 @@ angular.module('nextgearWebApp')
       return true;
     };
 
-    $scope.reallySubmit = function (guard) {
-      if (guard !== protect) {
-        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
-      }
-
-      $scope.submitInProgress = true;
-
-      var dialogParams = {
+    function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+      return {
         backdrop: true,
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
         templateUrl: 'views/modals/floorCarMessage.html',
         controller: 'FloorCarMessageCtrl',
-        resolve:{
-          canAttachDocuments: function(){
-            return $scope.canAttachDocuments();
+        resolve: {
+          canAttachDocuments: function() {
+            return canAttachDocuments;
           },
-          createFloorplan: function(){
+          createFloorplan: function() {
             return true;
+          },
+          floorSuccess: function() {
+            return floorSuccess;
+          },
+          uploadSuccess: function() {
+            return uploadSuccess;
           }
         }
       };
+    }
 
+    $scope.reallySubmit = function (guard) {
+      if (guard !== protect) {
+        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
+      }
+
+      var dialogParams;
+      $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
-        function (reponse) { /*floorplan success*/
-
-          var upload = Upload.upload({
-            url: nxgConfig.apiBase + '/floorplan/upload/' + reponse.FloorplanId,
-            method: 'POST',
-            data: {
-              file: $scope.files
-            }
-          });
-
-          upload.then(function(reponse) {
-            $scope.submitInProgress = false;
-            // floorplan created successfully.
-            angular.extend(dialogParams.resolve, {
-              floorSuccess: function () {
-                return true;
+        function (response) { /*floorplan success*/
+          if ($scope.files && $scope.files.length > 0) {
+            var upload = Upload.upload({
+              url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
+              method: 'POST',
+              data: {
+                file: $scope.files
               }
             });
 
-            if (reponse.data.Success) {
-              angular.extend(dialogParams.resolve, {
-                uploadSuccess: function () {
-                  return true;
-                }
+            upload.then(function(response) {
+              $scope.submitInProgress = false;
+              dialogParams = response.data.Success ?
+                buildDialog($scope.canAttachDocuments(), true, true) :
+                buildDialog($scope.canAttachDocuments(), true, false);
+              $dialog.dialog(dialogParams).open().then(function(){
+                $scope.reset();
               });
-            } else {
-              angular.extend(dialogParams.resolve, {
-                uploadSuccess: function () {
-                  return false;
-                }
+            }, function() {
+              $scope.submitInProgress = false;
+              dialogParams = buildDialog($scope.canAttachDocuments(), true, false);
+              $dialog.dialog(dialogParams).open().then(function(){
+                $scope.reset();
               });
-            }
-            $dialog.dialog(dialogParams).open().then(function(){
-              $scope.reset();
             });
-          }, function() {
+          } else {
             $scope.submitInProgress = false;
-            angular.extend(dialogParams.resolve, {
-              floorSuccess: function () {
-                return true;
-              },
-              uploadSuccess: function () {
-                return false;
-              }
-            });
+            dialogParams = buildDialog(false, true, false);
             $dialog.dialog(dialogParams).open().then(function(){
               $scope.reset();
             });
-          });
+          }
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
-          angular.extend(dialogParams.resolve, {
-            floorSuccess: function () {
-              return false;
-            },
-            uploadSuccess: function () {
-              return false;
-            }
-          });
+          dialogParams = buildDialog($scope.canAttachDocuments(), false, false);
           $dialog.dialog(dialogParams).open().then(function(){
             $scope.reset();
           });
