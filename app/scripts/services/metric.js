@@ -45,6 +45,8 @@ angular.module('nextgearWebApp')
     DEALER_RESOURCES_INFORMATION_SHEET_PAGE: 'Dealer Resources - Information Sheet',//X
     DEALER_RESOURCES_CLAIM_FORM_PAGE: 'Dealer Resources - Claim Form',//X
     DEALER_RESOURCES_TITLE_MANAGEMENT_FAQ: 'Dealer Resources - Title Management FAQ',//X
+    DEALER_RESOURCES_IOS_APP: 'Dealer Resources - iOS Apps',//X
+    DEALER_RESOURCES_ANDROID_APP: 'Dealer Resources - Android Apps',//X
     VIEW_REQUEST_CREDIT_INCREASE_PAGE: 'View Request Credit Increase',//x
     DEALER_TEMP_CREDIT_INCREASE_REQUEST_SUBMITTED_PAGE: 'Dealer - Temp Credit Increase Request Submitted',//X
     DEALER_PERMANENT_CREDIT_INCREASE_REQUEST_SUBMITTED: 'Dealer - Permanent Credit Increase Request Submitted',//X
