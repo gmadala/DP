@@ -100,7 +100,7 @@
           AccountManagement.addBankAccount($scope.account).then(function(bankAccountId) {
             kissMetricInfo.getKissMetricInfo().then(
               function(result){
-                segmentio.track(metric.DEALER_ADD_BANK_ACCOUNT,result);
+                segmentio.track(metric.DEALER_ADD_BANK_ACCOUNT, result);
               });
             $scope.account.AccountId = bankAccountId;
             dialog.close($scope.account);
