@@ -50,7 +50,7 @@
 
 /*
  * INFO BLOCK
- * Component with info icon used to display messaging to user.   
+ * Component with info icon used to display messaging to user.
  */
  .info-block {
   @extend %full-width;
@@ -88,7 +88,9 @@
 .color-success {
   color: $success !important;
 }
-
+.color-dollar {
+  color: #069 !important;
+}
 .warning {
   font-size: $tiny-font-size;
   font-style: italic;
