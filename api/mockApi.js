@@ -87,6 +87,9 @@ module.exports = {
               },
               contactInfo: {
                 enabled: true
+              },
+              uploadDocuments: {
+                enabled: true
               }
             }
           }

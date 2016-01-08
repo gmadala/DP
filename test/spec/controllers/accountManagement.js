@@ -146,7 +146,12 @@ describe('Controller: AccountManagementCtrl', function () {
       refreshInfo: angular.noop,
       setAutoPayEnabled: angular.noop,
       getFeatures: function(){
-        return {};
+        return {
+          autoPay: {enabled: true},
+          addBankAccount: {enabled: true},
+          editBankAccount: {enabled: true},
+          uploadDocuments: {enabled: true}
+        };
       }
     };
 

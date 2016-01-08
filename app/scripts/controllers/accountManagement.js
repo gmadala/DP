@@ -15,10 +15,10 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
   $scope.loading = false;
   $scope.isUnitedStates = User.isUnitedStates();
   $scope.isDealer = User.isDealer();
-  $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ? User.getFeatures().autoPay.enabled : true;
+  $scope.autoPayEnabled = User.getFeatures().hasOwnProperty('autoPay') ? User.getFeatures().autoPay.enabled : false;
   $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ? User.getFeatures().contactInfo.enabled : false;
-  $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : true;
-  $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : true;
+  $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : false;
+  $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : false;
   $scope.editDefaultAccount = false;
   $scope.refreshActiveAchAccounts = refreshActiveAchAccounts;
 
