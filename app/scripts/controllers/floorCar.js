@@ -104,6 +104,7 @@ angular.module('nextgearWebApp')
       $scope.data = angular.copy($scope.defaultData);
       $scope.files = [];
       $scope.invalidFiles = [];
+      $scope.comment = '';
       $scope.optionsHelper.applyDefaults($scope, $scope.data);
       $scope.validity = undefined;
       $scope.$broadcast('reset');
@@ -202,6 +203,13 @@ angular.module('nextgearWebApp')
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (response) { /*floorplan success*/
+          if($scope.comment) {
+            Floorplan.addComment({
+              CommentText: $scope.comment,
+              FloorplanId: response.FloorplanId
+            });
+          }
+
           if ($scope.files && $scope.files.length > 0) {
             var upload = Upload.upload({
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
@@ -236,11 +244,8 @@ angular.module('nextgearWebApp')
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
           dialogParams = buildDialog($scope.canAttachDocuments(), false, false);
-          $dialog.dialog(dialogParams).open().then(function(){
-            $scope.reset();
-          });
-        }
-      );
+          $dialog.dialog(dialogParams).open();
+        });
     };
 
     $scope.removeInvalidFiles = function() {
