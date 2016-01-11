@@ -132,6 +132,7 @@ a, a:link, a:visited {
 .receipt-option {
   @extend %align-left;
   background: $white;
+  border-top: 1px solid #bbb;
 
   .receipt-minor {
     padding:2px;
@@ -148,8 +149,16 @@ a, a:link, a:visited {
   background-color: #F2F2F2;
   width : 100%;
   padding:20px 20px 10px 20px;
-  border-bottom: 1px solid #bbb;
+}
 
+.more-payments {
+  max-height: 220px;
+  overflow: auto;
+  font-size: 10px;
+}
+
+.bottom-padding{
+  padding-bottom: 5px;
 }
 
 .block-title {
