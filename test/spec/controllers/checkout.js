@@ -16,8 +16,10 @@ describe('Controller: CheckoutCtrl', function () {
     $q,
     api,
     BusinessHours,
+    kissMetricData,
+    mockKissMetricInfo,
     inBizHours,
-    accountList = ['myAccountsHere'];;
+    accountList = ['myAccountsHere'];
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_, _BusinessHours_) {
@@ -33,6 +35,20 @@ describe('Controller: CheckoutCtrl', function () {
     inBizHours = true;
     loggedIn = true;
 
+    kissMetricData = {
+      height: 1080,
+      isBusinessHours: true,
+      vendor: 'Google Inc.',
+      version: 'Chrome 44',
+      width: 1920
+    };
+
+    mockKissMetricInfo = {
+      getKissMetricInfo : function() {
+        return $q.when(kissMetricData);
+      }
+    };
+
     spyOn(User, 'isLoggedIn').and.callFake(function() {
       return $q.when(loggedIn);
     });
@@ -46,9 +62,17 @@ describe('Controller: CheckoutCtrl', function () {
     });
 
     run = function () {
-      $controller('CheckoutCtrl', { $scope: scope });
+      $controller('CheckoutCtrl', { $scope: scope, kissMetricInfo: mockKissMetricInfo });
     };
   }));
+
+  it('should call to get core properties from kissmetric info service', function() {
+    spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
+    run();
+    expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+    scope.$apply();
+    expect(scope.kissMetricData).toEqual(kissMetricData);
+  });
 
   it('should attach the contents of the payment queue to the scope', function () {
     var mockQueue = {};

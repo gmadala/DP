@@ -12,7 +12,8 @@
               <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
             </li>
             <li ng-show="chatEnabled">
-              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}" translate>Chat</a>
+              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+                 track-properties="{{ kissMetricData }}" translate>Chat</a>
             </li>
           </ul>
           <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
@@ -22,26 +23,33 @@
         </div>
       </div>
 
-      <div class="col-xs-3 custom pull-right" ng-show="navState.current.data.showNavBar">
-        <div class="nxg-dropdown" ng-class="{ expanded: !isCollapsed }">
-          <a class="user-info" href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
-            <p>{{ user.BusinessName }}</p>
-            <p ng-show="user.isDealer()" translate>dealer # {{ user.BusinessNumber }}</p>
+      <div class="col-xs-3 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
+        <div class="align-right">{{ user.BusinessName | truncate:20 }}
+          <span class=ng-show="user.isDealer()">
+            <span class="dealer-number"translate>
+              Dealer #:
+            </span>
+            {{ user.BusinessNumber }}
+          </span></div>
+        <div class="align-right dropdown-toggle" id="settingsDropdown">
+          <a>
+            <span translate>My Account</span>
+            <span style="border-top: 4px solid #069" class="caret"></span>
           </a>
-
-          <ul class="unstyled" collapse="isCollapsed">
-            <li class="noLeftPadding">
-              <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
-              <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
-            </li>
-            <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
-            </li>
-          </ul>
         </div>
+        <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+          <li>
+            <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
+            <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
+          </li>
+          <li>
+            <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
+          </li>
+          <li class="menu-divider"></li>
+          <li>
+            <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
+          </li>
+        </ul>
       </div>
 
       <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">

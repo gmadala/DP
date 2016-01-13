@@ -160,6 +160,9 @@ angular.module('nextgearWebApp')
       },
       editInventoryAddress: function(address) {
         return api.request('POST', '/floorplan/EditInventoryAddress', address);
+      },
+      addComment: function(Comment) {
+        return api.request('POST', '/floorplan/comment', Comment);
       }
     };
   });

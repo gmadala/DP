@@ -21,6 +21,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
       floorplanMock,
       initialize,
       $q,
+      kissMetricData,
+      mockKissMetricInfo,
       addressesMock,
       cancelSucceed,
       invAddr;
@@ -38,6 +40,22 @@ describe('Controller: VehicleDetailsCtrl', function () {
       stockNumber: 1234
     };
     cancelSucceed = true;
+
+    kissMetricData = {
+      height: 1080,
+      isBusinessHours: true,
+      vendor: 'Google Inc.',
+      version: 'Chrome 44',
+      width: 1920
+    };
+
+    mockKissMetricInfo = {
+      getKissMetricInfo : function() {
+        return $q.when(kissMetricData);
+      }
+    };
+
+    spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
 
     detailsMock = { // include only the mock data the controller explicitly grabs.
       VehicleInfo: {
@@ -167,7 +185,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
     };
 
     titleReleasesMock = {
-      isFloorplanOnQueue: function(floorplan) {
+      isFloorplanOnQueue: function() {
         return false;
       },
       getQueue: function() {
@@ -185,7 +203,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
           fees: [1,2,3],
           payments: [1,2,3,4],
           isEmpty: angular.noop
-        }
+        };
       },
       getPaymentFromQueue: angular.noop,
       isPaymentOnQueue: angular.noop,
@@ -217,13 +235,20 @@ describe('Controller: VehicleDetailsCtrl', function () {
         User: userMock,
         Payments: paymentsMock,
         Floorplan: floorplanMock,
-        Addresses: addressesMock
+        Addresses: addressesMock,
+        kissMetricInfo: mockKissMetricInfo
       });
     };
 
     initialize();
     $rootScope.$digest();
   }));
+
+  it('should call to get core properties from kissmetric info service', function() {
+    expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+    scope.$apply();
+    expect(scope.kissMetricData).toEqual(kissMetricData);
+  });
 
   it('should create the necessary vehicle details objects on the scope', function() {
     expect(scope.vehicleInfo).toBeDefined();

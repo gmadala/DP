@@ -59,13 +59,23 @@ label {
   }
 }
 
-input, select, textarea {
+input, select {
   font-size: $inputFontSize;
   color: $text;
   height: $cta-2-height;
   width: 45%;
   padding: 5px 9px;
   margin: 5px 0;
+}
+
+textarea{
+  font-size: $inputFontSize;
+  color: $text;
+  height: 60px;
+  width: 100%;
+  padding: 5px 9px;
+  margin: 5px 0;
+  border-color: #bbb;
 }
 
 input,

@@ -120,7 +120,9 @@
     <div class="well">
       <h2 class="well-title"><span translate>Financial Activity</span>
         <div class="paired paired-reversed well-sub-title">
-          <a class="featured" ng-href="{{ historyReportUrl }}" nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}">
+          <a class="featured" ng-href="{{ historyReportUrl }}"
+             nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}"
+             track-properties="{{ kissMetricData }}">
             <span class="paired-body" translate>View the Vehicle History Detail Report</span><span class="paired-media" nxg-icon="icon-car"></span>
           </a>
         </div>

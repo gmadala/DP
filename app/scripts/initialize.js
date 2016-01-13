@@ -169,7 +169,7 @@
       function () {
         kissMetricInfo.getKissMetricInfo().then(
           function(result){
-            segmentio.track(metric.LOGIN_SUCCESSFUL,result);
+            segmentio.track(metric.LOGIN_SUCCESSFUL, result);
           }
         );
 
