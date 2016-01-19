@@ -101,7 +101,7 @@ angular.module('nextgearWebApp')
           headers: headers
         },
         self = this,
-        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.'),
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear Capital system. Please try again later.'),
         debug = httpConfig.method + ' ' + httpConfig.url + ': ';
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
