@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $dialog, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
+  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $modal, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -60,7 +60,7 @@ angular.module('nextgearWebApp')
           var title = gettextCatalog.getString('Request a Credit Increase'),
             message = gettextCatalog.getString('Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.'),
             buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-          return $dialog.messageBox(title, message, buttons).open();
+          return $modal.messageBox(title, message, buttons).open();
         },
         // failure
         function() {

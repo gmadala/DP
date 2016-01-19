@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', AccountManagementCtrl)
   .controller('ConfirmCtrl', ConfirmCtrl);
 
-function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, gettext,
+function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, gettext,
                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
                                routingNumberFilter, kissMetricInfo) {
 
@@ -186,7 +186,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
             templateUrl: 'views/modals/confirmDisableEnhanced.html',
             controller: 'ConfirmCtrl'
           };
-          $dialog.dialog(dialogOptions).open().then(function (result) {
+          $modal.dialog(dialogOptions).open().then(function (result) {
             if (result) {
               $scope.business.dirtyData.enhancedRegistrationPin = null;
               $scope.business.dirtyData.enhancedRegistrationEnabled = false;
@@ -242,7 +242,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               templateUrl: 'views/modals/confirmEnableAutoPay.html',
               controller: 'ConfirmCtrl'
             };
-            $dialog.dialog(dialogOptions).open().then(function (result) {
+            $modal.dialog(dialogOptions).open().then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !!result;
             });
           },
@@ -254,7 +254,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               templateUrl: 'views/modals/confirmDisableAutoPay.html',
               controller: 'ConfirmCtrl'
             };
-            $dialog.dialog(dialogOptions).open().then(function (result) {
+            $modal.dialog(dialogOptions).open().then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !result;
             });
           },
@@ -394,7 +394,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
             controller: 'FinancialAccountCtrl'
           };
 
-          $dialog.dialog(dialogOptions).open()
+          $modal.dialog(dialogOptions).open()
             .then(updateLocalFinancialData);
 
           /**
@@ -484,7 +484,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       controller: 'RequestCreditIncreaseCtrl'
     };
 
-    $dialog.dialog(dialogOptions).open();
+    $modal.dialog(dialogOptions).open();
   };
 
   $scope.feeScheduleUrl = api.contentLink(

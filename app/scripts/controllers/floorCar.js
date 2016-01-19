@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
+  .controller('FloorCarCtrl', function($scope, $modal, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
                                        OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
     var isDealer = User.isDealer();
@@ -14,6 +14,10 @@ angular.module('nextgearWebApp')
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
+
+    $scope.dealerMinDate = moment().subtract(364, 'days');
+    $scope.auctionMinDate = moment().subtract(7, 'days');
+    $scope.maxDate = new Date();
 
     //$scope.form = <form directive's controller, assigned by view>
 
@@ -160,7 +164,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(confirmation).open().then(function (result) {
+      $modal.dialog(confirmation).open().then(function (result) {
         if (result === true) {
           // submission confirmed
           $scope.reallySubmit(protect);
@@ -224,27 +228,27 @@ angular.module('nextgearWebApp')
               dialogParams = response.data.Success ?
                 buildDialog($scope.canAttachDocuments(), true, true) :
                 buildDialog($scope.canAttachDocuments(), true, false);
-              $dialog.dialog(dialogParams).open().then(function(){
+              $modal.dialog(dialogParams).open().then(function(){
                 $scope.reset();
               });
             }, function() {
               $scope.submitInProgress = false;
               dialogParams = buildDialog($scope.canAttachDocuments(), true, false);
-              $dialog.dialog(dialogParams).open().then(function(){
+              $modal.dialog(dialogParams).open().then(function(){
                 $scope.reset();
               });
             });
           } else {
             $scope.submitInProgress = false;
             dialogParams = buildDialog(false, true, false);
-            $dialog.dialog(dialogParams).open().then(function(){
+            $modal.dialog(dialogParams).open().then(function(){
               $scope.reset();
             });
           }
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
           dialogParams = buildDialog($scope.canAttachDocuments(), false, false);
-          $dialog.dialog(dialogParams).open();
+          $modal.dialog(dialogParams).open();
         });
     };
 
@@ -276,7 +280,7 @@ angular.module('nextgearWebApp')
           {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
           {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary btn-sm'}
         ];
-      $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
+      $modal.messageBox(title, msg, buttons).open().then(function (choice) {
         if (choice === 'home') {
           $location.path('');
         } else if (choice === 'reset') {

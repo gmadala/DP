@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric, User, kissMetricInfo) {
+  .controller('AnalyticsCtrl', function ($scope, $modal, Analytics, segmentio, metric, User, kissMetricInfo) {
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -27,7 +27,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(dialogOptions).open();
+      $modal.dialog(dialogOptions).open();
     };
 
     $scope.toggleDetails = function() {

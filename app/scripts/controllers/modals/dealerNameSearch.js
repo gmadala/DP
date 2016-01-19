@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, dialog, $dialog, DealerNameSearch, User, options) {
+  .controller('DealerNameSearchCtrl', function($scope, dialog, $modal, DealerNameSearch, User, options) {
 
     $scope.proposedQuery = {
       name: options.dealerName,
@@ -109,7 +109,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(dialogOptions).open();
+      $modal.dialog(dialogOptions).open();
       dialog.close();
     };
 

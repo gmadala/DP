@@ -91,6 +91,7 @@
       </div>
 
       <label for="inputPurchaseDate" class="input-title" translate>Purchase Date</label>
+      <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.UnitPurchaseDate" min-date="dealerMinDate" max-date="maxDate" show-weeks="false">
       <input id="inputPurchaseDate"
              name="inputPurchaseDate"
              ng-model="data.UnitPurchaseDate"

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $dialog, $log, Dashboard, Floorplan, FloorplanUtil,
+  .controller('DashboardCtrl', function($scope, $state, $modal, $log, Dashboard, Floorplan, FloorplanUtil,
                                         moment, $filter, gettext, gettextCatalog, capitalizeFilter, language) {
 
     // for caching our week/month summary data
@@ -107,7 +107,7 @@ angular.module('nextgearWebApp')
         controller: 'RequestCreditIncreaseCtrl'
       };
 
-      $dialog.dialog(dialogOptions).open();
+      $modal.dialog(dialogOptions).open();
     };
 
     $scope.onClickButtonLink = function(newState) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $modal, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -37,7 +37,7 @@ angular.module('nextgearWebApp')
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open().then(function() {
+        $modal.dialog(dialogOptions).open().then(function() {
           TitleReleases.clearQueue();
 
           $state.transitionTo('titlereleases');

@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
-  function ($scope, $q, $dialog, $timeout, protect, moment,
+  function ($scope, $q, $modal, $timeout, protect, moment,
             messages, User, Payments, OptionDefaultHelper,
             api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo) {
 
@@ -137,7 +137,7 @@ angular.module('nextgearWebApp')
             }
           }
         };
-        $dialog.dialog(dialogOptions).open();
+        $modal.dialog(dialogOptions).open();
       }
     };
 
@@ -227,7 +227,7 @@ angular.module('nextgearWebApp')
                 transactionInfo: function () { return result; }
               }
             };
-            $dialog.dialog(dialogOptions).open().then(function () {
+            $modal.dialog(dialogOptions).open().then(function () {
               Payments.clearPaymentQueue();
             });
           }
@@ -304,7 +304,7 @@ angular.module('nextgearWebApp')
         }
       };
 
-      $dialog.dialog(dialogOptions).open();
+      $modal.dialog(dialogOptions).open();
     };
 
     $scope.exportPaymentSummary = function() {

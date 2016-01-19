@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
+  .controller('LoginRecoverCtrl', function ($scope, $state, $modal, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
 
     $scope.userNameRecovery = {
       // forgotUserNameForm
@@ -122,7 +122,7 @@ angular.module('nextgearWebApp')
       var title = gettextCatalog.getString('Success'),
         msg = gettextCatalog.getString('Thank you, check your email for the requested account information.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-      $dialog.messageBox(title, msg, buttons).open().then(
+      $modal.messageBox(title, msg, buttons).open().then(
         function () {
           $state.transitionTo('login');
         }

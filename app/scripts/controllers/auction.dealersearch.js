@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
+  .controller('AuctionDealerSearchCtrl', function($scope, $modal, User, DealerNumberSearch) {
     $scope.onlyNumbersPattern = /^\d+$/;
 
     /*** Number Search ***/
@@ -121,7 +121,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          $modal.dialog(dialogOptions).open();
         }
       },
       validate: function() {
@@ -180,7 +180,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          $modal.dialog(dialogOptions).open();
         }
         else {
           if (this.auctionNumInactive) {

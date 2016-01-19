@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, $dialog, dealerCustomerSupportPhone, gettextCatalog) {
+  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, $modal, dealerCustomerSupportPhone, gettextCatalog) {
     $scope.isCollapsed = true;
 
     $scope.getVehicleDescription = Floorplan.getVehicleDescription;
@@ -149,7 +149,7 @@ angular.module('nextgearWebApp')
           message = gettextCatalog.getString('We\'re sorry, this title is unavailable for release at this time. If you would like more information about this title, please call Dealer Services at {{ phoneNumber }}.', { phoneNumber: customerSupportPhone }),
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
-        return $dialog.messageBox(title, message, buttons).open();
+        return $modal.messageBox(title, message, buttons).open();
       });
     };
 
@@ -158,7 +158,7 @@ angular.module('nextgearWebApp')
           message = gettextCatalog.getString('The floor plan you have selected for title release would put you over the financial plan limits for this account.'),
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
-      return $dialog.messageBox(title, message, buttons).open();
+      return $modal.messageBox(title, message, buttons).open();
     };
 
   });

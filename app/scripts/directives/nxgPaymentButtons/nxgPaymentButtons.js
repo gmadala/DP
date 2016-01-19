@@ -17,7 +17,7 @@ angular.module('nextgearWebApp')
           scope.onCancelScheduledPayment = null;
         }
       },
-      controller: function($scope, $dialog, Payments, PaymentOptions) {
+      controller: function($scope, $modal, Payments, PaymentOptions) {
 
         $scope.paymentInProgress = function() {
           return Payments.paymentInProgress();
@@ -121,7 +121,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          return $dialog.dialog(dialogOptions).open();
+          return $modal.dialog(dialogOptions).open();
         };
 
         $scope.cancelScheduledFee = function () {
@@ -152,7 +152,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          $modal.dialog(dialogOptions).open();
         };
       },
       templateUrl: 'scripts/directives/nxgPaymentButtons/nxgPaymentButtons.html',

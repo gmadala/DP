@@ -6,9 +6,9 @@
     .run(initialize);
 
   initialize.$inject = ['$rootScope', '$window', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
-    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
+    '$state', '$modal', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
 
-  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
+  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $modal,
                       LastState, api, metric, language, features, kissMetricInfo) {
 
     // state whose transition was interrupted to ask the user to log in
@@ -63,13 +63,13 @@
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toStateParams) {
         // If there are dialogs open and we aren't going to login state to popup the login "are you sure?" modal
-        if ($dialog.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
+        if ($modal.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
           /**
            * if a dialog is open, close it before navigating to new state
            * but not for login, because the logout function already closes
            * all dialogs.
            */
-          $dialog.closeAll();
+          $modal.closeAll();
         }
 
         if (!toState.data.allowAnonymous) {
@@ -128,8 +128,8 @@
 
     $rootScope.$on('event:userRequestedLogout',
       function () {
-        $dialog.closeAll();
-        $dialog.dialog({
+        $modal.closeAll();
+        $modal.dialog({
           keyboard: false,
           backdropClick: false,
           templateUrl: 'views/modals/confirmLogout.html',

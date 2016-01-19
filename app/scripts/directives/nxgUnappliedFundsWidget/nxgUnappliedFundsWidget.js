@@ -13,7 +13,7 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $dialog, $filter, api, gettextCatalog, AccountManagement) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $modal, $filter, api, gettextCatalog, AccountManagement) {
 
     AccountManagement.get().then(function (result) {
       $scope.autoDisburseUnappliedFunds = result.AutoDisburseUnappliedFundsDaily;
@@ -40,7 +40,7 @@ angular.module('nextgearWebApp')
         }
       };
 
-      $dialog.dialog(dialogOptions).open().then(
+      $modal.dialog(dialogOptions).open().then(
         function (result) {
           if (result) {
             // ** The endpoint returns a single updated balance but we got two
@@ -56,7 +56,7 @@ angular.module('nextgearWebApp')
                 bankAccountName: result.account.BankAccountName
               }),
               buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-            $dialog.messageBox(title, msg, buttons).open();
+            $modal.messageBox(title, msg, buttons).open();
           }
         }
       );

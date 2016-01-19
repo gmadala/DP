@@ -4,9 +4,9 @@
   angular.module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', '$dialog','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
+  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', '$modal','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
 
-  function FinancialAccountCtrl($scope, AccountManagement, dialog, $dialog, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
+  function FinancialAccountCtrl($scope, AccountManagement, dialog, $modal, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
 
     $scope.tooltipImage = '<div class="tooltip-image">';
 
@@ -121,7 +121,7 @@
       var title = gettextCatalog.getString('Success'),
         msg = gettextCatalog.getString('Your account was saved successfully.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-      return $dialog.messageBox(title, msg, buttons).open();
+      return $modal.messageBox(title, msg, buttons).open();
     };
 
     /**

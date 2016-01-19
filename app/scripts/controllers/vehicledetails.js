@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User,
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $modal, $filter, VehicleDetails, User,
                                               TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
                                               Upload, nxgConfig, kissMetricInfo) {
     $scope.dataLoaded = false;
@@ -81,7 +81,7 @@ angular.module('nextgearWebApp')
             }
           });
         }
-        $dialog.dialog(dialogParams).open().then(function(){
+        $modal.dialog(dialogParams).open().then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -94,7 +94,7 @@ angular.module('nextgearWebApp')
             return false;
           }
         });
-        $dialog.dialog(dialogParams).open().then(function(){
+        $modal.dialog(dialogParams).open().then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -217,7 +217,7 @@ angular.module('nextgearWebApp')
             }
           };
 
-          $dialog.dialog(dialogOptions).open().then(function(paymentSaved) {
+          $modal.dialog(dialogOptions).open().then(function(paymentSaved) {
             if(paymentSaved) {
               // there was a scheduled payment
               if($scope.paymentForCheckout.Scheduled) {
@@ -487,7 +487,7 @@ angular.module('nextgearWebApp')
           }
 
           promise.then(function(data) {
-            $dialog.dialog({
+            $modal.dialog({
               backdrop: true,
               keyboard: true,
               backdropClick: true,
@@ -533,7 +533,7 @@ angular.module('nextgearWebApp')
             UnitDescription: $scope.vehicleInfo.Description
           };
 
-          $dialog.dialog({
+          $modal.dialog({
             backdrop: true,
             keyboard: true,
             backdropClick: true,

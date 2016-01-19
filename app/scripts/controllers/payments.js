@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $dialog, BusinessHours, Addresses, gettextCatalog) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $modal, BusinessHours, Addresses, gettextCatalog) {
 
     $scope.isCollapsed = true;
 
@@ -123,7 +123,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.extension = function (payment) {
-      $dialog.dialog({
+      $modal.dialog({
         backdrop: true,
         keyboard: true,
         backdropClick: true,

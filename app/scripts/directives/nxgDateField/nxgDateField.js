@@ -38,6 +38,12 @@ angular.module('nextgearWebApp')
           element.find('input').attr('placeholder', 'mm/dd/yyyy');
         }
 
+        if(attrs.dateAllow === 'dealerFloorRange') {
+          attrs.startDate = '';
+          attrs.endDate = '';
+          element.attr('start-date', 'end-date');
+        }
+
         // Automatically load in current language
         var currentLanguage = gettextCatalog.currentLanguage;
         if (currentLanguage !== 'en') {
