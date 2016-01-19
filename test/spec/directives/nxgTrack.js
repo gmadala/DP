@@ -58,13 +58,7 @@ describe('Directive: nxgTrack', function () {
       var $q = _$q_;
       kissMetricInfo = _kissMetricInfo_;
       spyOn(kissMetricInfo, 'getKissMetricInfo').and.callFake(function() {
-        return $q.when({
-          height: 1080,
-          isBusinessHours: true,
-          vendor: 'Google Inc.',
-          version: 'Chrome 44',
-          width: 1920
-        });
+        return $q.when(coreProperties);
       });
 
       $compile = _$compile_;
@@ -96,19 +90,13 @@ describe('Directive: nxgTrack', function () {
       var $q = _$q_;
       kissMetricInfo = _kissMetricInfo_;
       spyOn(kissMetricInfo, 'getKissMetricInfo').and.callFake(function() {
-        return $q.when({
-          height: 1080,
-          isBusinessHours: true,
-          vendor: 'Google Inc.',
-          version: 'Chrome 44',
-          width: 1920
-        });
+        return $q.when(coreProperties);
       });
 
       $compile = _$compile_;
       $rootScope = _$rootScope_;
 
-      element = angular.element('<a href="#" nxg-track="Enable Auto Destruct" track-properties="{ revenue: 321.10 }"></a>');
+      element = angular.element('<a href="#" nxg-track="Enable Auto Destruct" track-properties="{ revenue: 321.10, width: 3000 }"></a>');
       element = $compile(element)($rootScope);
       $rootScope.$digest();
     }));
@@ -121,6 +109,7 @@ describe('Directive: nxgTrack', function () {
       expect(segmentio.track.calls.mostRecent().args[0]).toBe('Enable Auto Destruct');
       expect(segmentio.track.calls.mostRecent().args[1]).toBeDefined();
       expect(segmentio.track.calls.mostRecent().args[1].revenue).toBe(321.10);
+      expect(segmentio.track.calls.mostRecent().args[1].width).toBe(3000);
     });
 
   });
