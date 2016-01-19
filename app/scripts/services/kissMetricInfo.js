@@ -27,7 +27,7 @@
           retObj.isBusinessHours = result;
           return retObj;
         }, function () {
-          retObj.isBusinessHours = false;
+          retObj.isBusinessHours = null;
           return retObj;
         });
       } else {
