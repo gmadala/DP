@@ -8,6 +8,14 @@ angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
                                        OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
+
+    $scope.$watch('files', function(newValue, oldValue){
+      if(newValue.length !== oldValue.length){
+        $scope.form.documents.$setValidity('pattern', true);
+        $scope.form.documents.$setValidity('maxSize', true);
+      }
+    });
+
     var isDealer = User.isDealer();
     $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
 
@@ -138,6 +146,7 @@ angular.module('nextgearWebApp')
       $scope.validity = angular.copy($scope.form);
       if($scope.form.documents) {
         $scope.form.documents.$setValidity('pattern', true);
+        $scope.form.documents.$setValidity('maxSize', true);
       }
 
       $scope.vinDetailsErrorFlag = true;
