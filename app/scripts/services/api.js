@@ -98,7 +98,7 @@ angular.module('nextgearWebApp')
         }
         var httpConfig = {
           method: method.toUpperCase(),
-          url: (isNgen) ?  'https://ngen-api1.uat.nextgearcapital.com' + url : nxgConfig.apiBase + url,
+          url: (isNgen) ?  url : nxgConfig.apiBase + url,
           headers: headers
         },successHandler=this.defaultSuccessHanlder,
           errorHandler=this.defaultErrorHanlder;
