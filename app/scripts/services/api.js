@@ -197,7 +197,7 @@ angular.module('nextgearWebApp')
       },
       defaultSuccessHanlder : function (response) {
         var error,debug,defaultError;
-        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear Capital system. Please try again later.');
         debug = response.config.method + ' ' + response.config.url + ': ';
 
         resetSessionTimeout(debug);
@@ -228,17 +228,17 @@ angular.module('nextgearWebApp')
       },
       defaultErrorHanlder : function (e) {
         var error,debug,defaultError;
-        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear Capital system. Please try again later.');
         debug = e.config.method + ' ' + e.config.url + ': ';
         resetSessionTimeout(debug);
-        var error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
+        error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
         error.status = e.status;
         return $q.reject(error); // reject w/ appropriate error
       },
 
       ngenSuccessHandler: function(response) {
         var error,debug,defaultError;
-        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear Capital system. Please try again later.');
         debug = response.config.method + ' ' + response.config.url + ': ';
 
         resetSessionTimeout(debug);
@@ -263,7 +263,7 @@ angular.module('nextgearWebApp')
           //throw new Error('Invalid response'); // dev only
         }
       }
-    }
+    };
 
     apiCommon.init(service);
 
