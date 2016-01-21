@@ -46,7 +46,7 @@ angular.module('nextgearWebApp')
               return result.List;
             } else {
               var error = messages.add(gettextCatalog.getString('You do not appear to have any security questions configured. ' +
-                'Please contact NextGear for assistance.'),
+                'Please contact NextGear Capital for assistance.'),
                 '/UserAccount/passwordResetQuestions/ returned no security questions');
               return $q.reject(error);
             }
