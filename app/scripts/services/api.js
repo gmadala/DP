@@ -9,7 +9,7 @@ angular.module('nextgearWebApp')
         requestCount = 0,
         requestCountThreshold = 3;
 
-    function onSessionTimeout(ob, debug) {
+    function onSessionTimeout(debug) {
       $rootScope.$emit('event:forceClearAuth');
       if (sessionHasTimedOut) {
         return null; // we've already handled this
@@ -49,11 +49,11 @@ angular.module('nextgearWebApp')
       });
     }
 
-    function resetSessionTimeout(ob, debug) {
+    function resetSessionTimeout(debug) {
       if (sessionTimeout) { $timeout.cancel(sessionTimeout); }
       sessionTimeout = $timeout(function(){
         $timeout.cancel(sessionTimeout);
-        if (ob.hasAuthToken()) { onSessionTimeout(ob, debug); }
+        if (!!authToken) { onSessionTimeout(debug); }
       }, nxgConfig.sessionTimeoutMs);
     }
 
@@ -91,56 +91,27 @@ angular.module('nextgearWebApp')
           $cookieStore.put('auth', auth);
         }
       },
-      request: function(method, url, data, headers) {
+      request: function(method, url, data, headers, isNgen, overrideSuccessHandler, overrideErrorHanlder) {
+
         if(requestCount < requestCountThreshold) {
           requestCount++;
         }
         var httpConfig = {
           method: method.toUpperCase(),
-          url: nxgConfig.apiBase + url,
+          url: (isNgen) ?  url : nxgConfig.apiBase + url,
           headers: headers
-        },
-        self = this,
-        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.'),
-        debug = httpConfig.method + ' ' + httpConfig.url + ': ';
+        },successHandler=this.defaultSuccessHanlder,
+          errorHandler=this.defaultErrorHanlder;
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
 
-        return $http(httpConfig).then(
-          function (response) {
-            var error;
-            resetSessionTimeout(self, debug);
-            if (response.data && angular.isDefined(response.data.Success)) {
-              if (response.data.Success) {
-                return response.data.Data;
-              }
-              else {
-                if(response.data.Message === '401') {
-                  error = onSessionTimeout(self, debug);
-                }
-                else if (url.indexOf('extensionPreview') > -1) {
-                  // just reject the promise if extension preview fail.
-                }
-                else {
-                  error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
-                  error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
-                  // need to fix - best way is to just translate message, server side
-                }
-                return $q.reject(error);
-              }
-            }
-            else {
-              error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
-              return $q.reject(error); // Treat as unknown error
-              //throw new Error('Invalid response'); // dev only
-            }
-          }, function (e) {
-            resetSessionTimeout(self, debug);
-            var error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
-            error.status = e.status;
-            return $q.reject(error); // reject w/ appropriate error
-          }
-        );
+        if (overrideSuccessHandler){
+          successHandler=overrideSuccessHandler;
+        }
+        if (overrideErrorHanlder){
+          errorHandler=overrideErrorHanlder;
+        }
+        return $http(httpConfig).then(successHandler,errorHandler);
       },
       toBoolean: function (value) {
         if (value === null || !angular.isDefined(value)) {
@@ -203,6 +174,7 @@ angular.module('nextgearWebApp')
         }
       },
       ngenContentLink: function (path, params) {
+
         if (!path) {
           throw 'api.contentLink requires a path string';
         }
@@ -222,10 +194,79 @@ angular.module('nextgearWebApp')
         } else {
           return nxgConfig.ngenDomain + path;
         }
+      },
+      defaultSuccessHanlder : function (response) {
+        var error,debug,defaultError;
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        debug = response.config.method + ' ' + response.config.url + ': ';
+
+        resetSessionTimeout(debug);
+        if (response.data && angular.isDefined(response.data.Success)) {
+          if (response.data.Success) {
+            return response.data.Data;
+          }
+          else {
+            if(response.data.Message === '401') {
+              error = onSessionTimeout(debug);
+            }
+            else if (response.config.url.indexOf('extensionPreview') > -1) {
+              // just reject the promise if extension preview fail.
+            }
+            else {
+              error = messages.add(response.data.Message || defaultError, debug + 'api error: ' + response.data.Message);
+              error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
+              // need to fix - best way is to just translate message, server side
+            }
+            return $q.reject(error);
+          }
+        }
+        else {
+          error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
+          return $q.reject(error); // Treat as unknown error
+          //throw new Error('Invalid response'); // dev only
+        }
+      },
+      defaultErrorHanlder : function (e) {
+        var error,debug,defaultError;
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        debug = e.config.method + ' ' + e.config.url + ': ';
+        resetSessionTimeout(debug);
+        var error = messages.add(defaultError, debug + 'HTTP or connection error: ' + e);
+        error.status = e.status;
+        return $q.reject(error); // reject w/ appropriate error
+      },
+
+      ngenSuccessHandler: function(response) {
+        var error,debug,defaultError;
+        defaultError = gettextCatalog.getString('Unable to communicate with the NextGear system. Please try again later.');
+        debug = response.config.method + ' ' + response.config.url + ': ';
+
+        resetSessionTimeout(debug);
+        if (response.data) {
+          if (typeof response.data !== 'undefined') {
+            return response.data;
+          }
+          else {
+            if(response.data.errors) {
+              error = onSessionTimeout(debug);
+
+              error = messages.add(response.data.errors[0].message || defaultError, debug + 'api error: ' + response.data.errors[0].message);
+              error.status = response.status; // TODO there is brittle logic here for VO-5248 to work
+              // need to fix - best way is to just translate message, server side
+            }
+            return $q.reject(error);
+          }
+        }
+        else {
+          error = messages.add(defaultError, debug + 'invalid API response: ' + response.data);
+          return $q.reject(error); // Treat as unknown error
+          //throw new Error('Invalid response'); // dev only
+        }
       }
-    };
+    }
 
     apiCommon.init(service);
 
     return service;
   });
+
