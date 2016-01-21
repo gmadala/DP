@@ -221,7 +221,7 @@
       <div ngf-drop
            name="boxDocuments"
            class="drop-box"
-           ng-class="{ 'file-error': validity.documents.$error.pattern || validity.boxDocuments.$error.pattern || validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize }"
+           ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern) && invalidFiles.length > 0 }"
            ng-model="files"
            ngf-model-invalid="invalidFiles"
            ngf-fix-orientation="false"
@@ -271,11 +271,12 @@
              ngf-fix-orientation="false"
              ngf-max-size="'5MB'">
       <label for="documents" class="text-error"
-             ng-show="validity.documents.$error.pattern || validity.boxDocuments.$error.pattern" translate>
+             ng-show="(form.documents.$error.pattern || form.boxDocuments.$error.pattern)"
+            translate>
         Unsupported file found in selection.
       </label>
       <label for="documents" class="text-error"
-             ng-show="validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize" translate>
+             ng-show="form.documents.$error.maxSize || form.boxDocuments.$error.maxSize" translate>
         One or more files exceeded the 5MB limit.
       </label>
       <!--IE9 workaround -->
