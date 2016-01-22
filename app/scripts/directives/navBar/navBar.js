@@ -9,7 +9,8 @@ angular.module('nextgearWebApp')
     };
   })
 
-  .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, Payments, gettextCatalog, $cookieStore, language) {
+  .controller('NavBarCtrl', function ($rootScope, $scope, $state, User, Payments, gettextCatalog, $cookieStore,
+                                      language, kissMetricInfo) {
 
     $scope.isCollapsed = true;
 
@@ -41,6 +42,11 @@ angular.module('nextgearWebApp')
 
     $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if (isLoggedIn) {
+
+        kissMetricInfo.getKissMetricInfo().then(function(result){
+          $scope.kissMetricData = result;
+        });
+
         User.getInfo().then(function (info) {
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;

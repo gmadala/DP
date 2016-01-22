@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
-        segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE,result);
+        segmentio.track(metric.VIEW_VIEW_ANALYTICS_PAGE, result);
       }
     );
 

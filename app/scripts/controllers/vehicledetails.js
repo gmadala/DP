@@ -3,7 +3,7 @@
 angular.module('nextgearWebApp')
   .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User,
                                               TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
-                                              Upload, nxgConfig) {
+                                              Upload, nxgConfig, kissMetricInfo) {
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -12,6 +12,10 @@ angular.module('nextgearWebApp')
     $scope.valueInfo = {};
     $scope.financialSummary = {};
     $scope.floorplanId = '';
+
+    kissMetricInfo.getKissMetricInfo().then(function(result){
+      $scope.kissMetricData = result;
+    });
 
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;

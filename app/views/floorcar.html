@@ -196,8 +196,10 @@
   </section>
 
   <section class="col-xs-4 well left-margin-large" ng-show="canAttachDocuments()">
-    <h2 class="well-title" translate>3. Document Upload</h2>
+    <h2 class="well-title" translate>3. Optional Items</h2>
     <div class="well-form">
+      <h4 translate>Document Upload</h4>
+      <div class="column-divider"></div>
       <p class="spaced" translate>
         For faster funding, please upload your floor plan documents now. Document types should include:
       </p>
@@ -289,6 +291,12 @@
       </div>
       <!-- End upload file code -->
 
+      <!-- Floor Plan Comments -->
+      <h4 style="padding-top:15px" translate>Floor Plan Comments</h4>
+      <div class="column-divider"></div>
+      <textarea class="comment-box"
+                placeholder="(Ex. Additional instructions, etc.)"
+                ng-model="comment"></textarea>
 
     </div>
     <button class="btn-cta cta-full cta-primary"

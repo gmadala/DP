@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, $window) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, $window, api) {
 
     $scope.today = new Date();
 
@@ -72,9 +72,16 @@ angular.module('nextgearWebApp')
     }
 
     $scope.viewReceipts = function () {
-      angular.forEach($scope.receiptUrls, function(url) {
-        $window.open(url);
-      });
+      var stringUrl;
+      var transactionId = transactionInfo.FinancialTransactionId;
+      if ($scope.format === 'grouped') {
+        stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
+      } else if ($scope.format === 'single') {
+        stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
+      }
+      if (stringUrl !== undefined) {
+        $window.open(stringUrl, '_blank');
+      }
       $state.transitionTo('payments');
       dialog.close();
     };

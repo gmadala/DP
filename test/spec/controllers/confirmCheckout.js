@@ -178,14 +178,24 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
       expect(scope.receiptUrls.length).toBe(0);
     });
 
-    it('viewReceipts function should open the receipts in new windows, close modal and transition to the payments state', function () {
+    it('viewReceipts - grouped by transaction function should open the receipts in new windows, close modal and transition to the payments state', function () {
       spyOn(dialog, 'close');
       spyOn(_window, 'open');
       spyOn(state, 'transitionTo');
+      scope.format = 'grouped';
       scope.viewReceipts();
       expect(dialog.close).toHaveBeenCalled();
-      expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[0]);
-      expect(_window.open).toHaveBeenCalledWith(scope.receiptUrls[1]);
+      expect(_window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=abc123', '_blank');
+      expect(state.transitionTo).toHaveBeenCalledWith('payments');
+    });
+    it('viewReceipts - 1 Vin per page function should open the receipts in new windows, close modal and transition to the payments state', function () {
+      spyOn(dialog, 'close');
+      spyOn(_window, 'open');
+      spyOn(state, 'transitionTo');
+      scope.format = 'single';
+      scope.viewReceipts();
+      expect(dialog.close).toHaveBeenCalled();
+      expect(_window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=abc123', '_blank');
       expect(state.transitionTo).toHaveBeenCalledWith('payments');
     });
   });

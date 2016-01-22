@@ -44,7 +44,9 @@
           </div>
         </div>
         <div class="form-row button-group">
-          <button type="submit" class="btn" ng-click="viewExpInv()" nxg-track="{{metric.DEALER_REPORTS_EXPORTABLE_INVENTORY}}" translate>View Report</button>
+          <button type="submit" class="btn" ng-click="viewExpInv()"
+                  nxg-track="{{metric.DEALER_REPORTS_EXPORTABLE_INVENTORY}}"
+                  track-properties="{{ kissMetricData }}" translate>View Report</button>
         </div>
       </form>
     </div>

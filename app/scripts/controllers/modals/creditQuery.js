@@ -24,7 +24,7 @@ angular.module('nextgearWebApp')
             function(data) {
               kissMetricInfo.getKissMetricInfo().then(
                 function(result){
-                  segmentio.track(metric.AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE,result);
+                  segmentio.track(metric.AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE, result);
                   $scope.kissMetricData = result;
                 }
               );

@@ -129,6 +129,51 @@ a, a:link, a:visited {
   }
 }
 
+.receipt-option {
+  @extend %align-left;
+  background: $white;
+  border-top: 1px solid #bbb;
+
+  .receipt-minor {
+    padding:2px;
+    font-size: 12px;
+    color: #808080;
+  }
+
+  .receipt-major {
+    @extend %heavy;
+    color: $highlight;
+  }
+}
+.future-payments{
+  background-color: #F2F2F2;
+  width : 100%;
+  padding:20px 20px 0px 20px;
+}
+
+.more-payments {
+  max-height: 220px;
+  overflow: auto;
+  font-size: 10px;
+}
+
+.bottom-padding{
+  padding-bottom: 5px;
+}
+
+.block-title {
+  font-size: 12px;
+}
+.receipt-option {
+  width:100%;
+  padding:20px;
+  border-bottom: 1px solid #bbb;
+}
+.receipt-modal {
+  border-bottom: 1px solid #bbb;
+  background-color: #F2F2F2;
+}
+
 // Titles, subtitles, & other special type classes
 .paragraph {
   margin: 10px 0;

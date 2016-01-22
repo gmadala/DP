@@ -4,10 +4,14 @@ angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
   function ($scope, $q, $dialog, $timeout, protect, moment,
             messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext) {
+            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo) {
 
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
+
+    kissMetricInfo.getKissMetricInfo().then(function(result){
+      $scope.kissMetricData = result;
+    });
 
     // Digest cycle wasn't noticing it change when simply assigning
     // submitInProgress to the watch method. This forces it to
