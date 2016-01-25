@@ -189,10 +189,13 @@ angular.module('nextgearWebApp')
         Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
            function (result) {
              var resultVal=false;
+             var extNumber = 0;
+
              if (typeof result[0] !== 'undefined') {
                resultVal=result[0].extendable;
+               extNumber = result[0].extensionNumber ;
              }
-             $scope.isShowExtendLink = resultVal;
+             $scope.isShowExtendLink = resultVal && (extNumber<3) && !$scope.paymentForCheckout.Scheduled;
            }
         );
 
