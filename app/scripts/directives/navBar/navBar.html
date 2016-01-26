@@ -31,13 +31,13 @@
             </span>
             {{ user.BusinessNumber }}
           </span></div>
-        <div class="align-right dropdown-toggle" id="settingsDropdown">
+        <div class="align-right dropdown-toggle" data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
           <a>
             <span translate>My Account</span>
             <span style="border-top: 4px solid #069" class="caret"></span>
           </a>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+        <ul class="dropdown-menu"  aria-labelledby="settingsDropdown">
           <li>
             <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
             <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>

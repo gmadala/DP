@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmTitleReleaseCheckoutCtrl', function ($scope, dialog, response, TitleReleases, Floorplan) {
+  .controller('ConfirmTitleReleaseCheckoutCtrl', function ($scope, $uibModalInstance, response, TitleReleases, Floorplan) {
 
+    var uibModalInstance = $uibModalInstance;
     $scope.counts = {
       total: response.TitleReleaseResults.length,
       failed: _.reduce(response.TitleReleaseResults, function(sum, item){
@@ -25,7 +26,7 @@ angular.module('nextgearWebApp')
     });
 
     $scope.close = function () {
-      dialog.close();
+      uibModalInstance.close();
     };
 
   });

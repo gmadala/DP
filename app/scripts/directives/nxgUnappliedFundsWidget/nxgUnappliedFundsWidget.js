@@ -13,7 +13,9 @@ angular.module('nextgearWebApp')
       controller: 'UnappliedFundsWidgetCtrl'
     };
   })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $modal, $filter, api, gettextCatalog, AccountManagement) {
+  .controller('UnappliedFundsWidgetCtrl', function ($scope, $uibModal, $filter, api, gettextCatalog, AccountManagement) {
+
+    var uibModal = $uibModal;
 
     AccountManagement.get().then(function (result) {
       $scope.autoDisburseUnappliedFunds = result.AutoDisburseUnappliedFundsDaily;
@@ -40,7 +42,7 @@ angular.module('nextgearWebApp')
         }
       };
 
-      $modal.dialog(dialogOptions).open().then(
+      uibModal.open(dialogOptions).result.then(
         function (result) {
           if (result) {
             // ** The endpoint returns a single updated balance but we got two
@@ -51,18 +53,40 @@ angular.module('nextgearWebApp')
 
             // wireframes do not specify any kind of success display, so let's just do a simple one
             var title = gettextCatalog.getString('Request submitted'),
-              msg = gettextCatalog.getString('Your request for a payout in the amount of {{ amount }} to your account "{{ bankAccountName }}" has been successfully submitted.', {
+              message = gettextCatalog.getString('Your request for a payout in the amount of {{ amount }} to your account "{{ bankAccountName }}" has been successfully submitted.', {
                 amount: $filter('currency')(result.amount),
                 bankAccountName: result.account.BankAccountName
               }),
               buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-            $modal.messageBox(title, msg, buttons).open();
+            var dialogOptions = {
+              backdrop: true,
+              keyboard: true,
+              backdropClick: true,
+              templateUrl: 'views/modals/messageBox.html',
+              controller: 'MessageBoxCtrl',
+              dialogClass: 'modal modal-medium',
+              resolve: {
+                title: function () {
+                  return title;
+                },
+                message : function() {
+                  return message;
+                },
+                buttons: function () {
+                  return buttons;
+                }
+              }
+            };
+            uibModal.open(dialogOptions);
           }
         }
       );
     };
   })
-  .controller('PayoutModalCtrl', function($scope, $filter, $timeout, dialog, funds, User, Payments, OptionDefaultHelper) {
+  .controller('PayoutModalCtrl', function($scope, $filter, $timeout, $uibModalInstance, funds, User, Payments, OptionDefaultHelper) {
+
+    var uibModalInstance = $uibModalInstance;
+
     $scope.funds = funds;
     $scope.selections = {
       amount: null,
@@ -94,7 +118,7 @@ angular.module('nextgearWebApp')
           var resultData = angular.extend({}, $scope.selections, {
             newAvailableAmount: result.BalanceAfter
           });
-          dialog.close(resultData);
+          uibModalInstance.close(resultData);
         }, function (/*error*/) {
           $scope.submitInProgress = false;
         }
@@ -102,6 +126,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.cancel = function () {
-      dialog.close();
+      uibModalInstance.close();
     };
   });

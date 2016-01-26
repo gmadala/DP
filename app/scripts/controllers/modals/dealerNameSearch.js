@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, dialog, $modal, DealerNameSearch, User, options) {
+  .controller('DealerNameSearchCtrl', function($scope, $uibModal, $uibModalInstance, DealerNameSearch, User, options) {
+
+    var uibModal = $uibModal,
+       uibModalInstance= $uibModalInstance;
+
 
     $scope.proposedQuery = {
       name: options.dealerName,
@@ -109,14 +113,14 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $modal.dialog(dialogOptions).open();
-      dialog.close();
+      uibModal.open(dialogOptions);
+      uibModalInstance.close();
     };
 
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
     };
 
     // Do an initial search with the initial query

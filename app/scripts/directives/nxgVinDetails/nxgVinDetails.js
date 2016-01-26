@@ -14,7 +14,8 @@ angular.module('nextgearWebApp')
       controller: 'VinDetailsCtrl'
     };
   })
-  .controller('VinDetailsCtrl', function ($scope, moment, Blackbook, $modal, $q) {
+  .controller('VinDetailsCtrl', function ($scope, moment, Blackbook, $uibModal, $q) {
+    var uibModal =$uibModal;
     var s = $scope.settings = {
       // next year is the highest valid year
       maxYear: moment().add('years', 2).year(),
@@ -43,7 +44,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      return $modal.dialog(options).open().then(function (choice) {
+      return uibModal.open(options).result.then(function (choice) {
         if (!choice) {
           return $q.reject(USER_CANCEL);
         } else {

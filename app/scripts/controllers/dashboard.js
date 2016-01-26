@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $modal, $log, Dashboard, Floorplan, FloorplanUtil,
+  .controller('DashboardCtrl', function($scope, $state, $uibModal, $log, Dashboard, Floorplan, FloorplanUtil,
                                         moment, $filter, gettext, gettextCatalog, capitalizeFilter, language) {
 
+    var uibModal = $uibModal;
     // for caching our week/month summary data
     $scope.paymentSummary = {
       month: null,
@@ -107,7 +108,7 @@ angular.module('nextgearWebApp')
         controller: 'RequestCreditIncreaseCtrl'
       };
 
-      $modal.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.onClickButtonLink = function(newState) {

@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $modal, $filter, VehicleDetails, User,
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $uibModal, $filter, VehicleDetails, User,
                                               TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
                                               Upload, nxgConfig, kissMetricInfo) {
+    var uibModal = $uibModal;
+
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -81,7 +83,7 @@ angular.module('nextgearWebApp')
             }
           });
         }
-        $modal.dialog(dialogParams).open().then(function(){
+        uibModal.open(dialogParams).result.then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -94,7 +96,7 @@ angular.module('nextgearWebApp')
             return false;
           }
         });
-        $modal.dialog(dialogParams).open().then(function(){
+        uibModal.open(dialogParams).result.then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -217,7 +219,7 @@ angular.module('nextgearWebApp')
             }
           };
 
-          $modal.dialog(dialogOptions).open().then(function(paymentSaved) {
+          uibModal.open(dialogOptions).result.then(function(paymentSaved) {
             if(paymentSaved) {
               // there was a scheduled payment
               if($scope.paymentForCheckout.Scheduled) {
@@ -487,7 +489,7 @@ angular.module('nextgearWebApp')
           }
 
           promise.then(function(data) {
-            $modal.dialog({
+            uibModal.open({
               backdrop: true,
               keyboard: true,
               backdropClick: true,
@@ -499,7 +501,7 @@ angular.module('nextgearWebApp')
                   return data;
                 }
               }
-            }).open();
+            });
           });
         };
 
@@ -533,7 +535,7 @@ angular.module('nextgearWebApp')
             UnitDescription: $scope.vehicleInfo.Description
           };
 
-          $modal.dialog({
+          uibModal.open({
             backdrop: true,
             keyboard: true,
             backdropClick: true,
@@ -550,12 +552,13 @@ angular.module('nextgearWebApp')
                 };
               }
             }
-          }).open();
+          });
         };
 
         $scope.dataLoaded = true;
       });
     };
+
 
     getData();
   });

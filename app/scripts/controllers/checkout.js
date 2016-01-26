@@ -2,10 +2,11 @@
 
 angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
-  function ($scope, $q, $modal, $timeout, protect, moment,
+  function ($scope, $q, $timeout, protect, moment, $uibModal,
             messages, User, Payments, OptionDefaultHelper,
             api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo) {
 
+    var uibModal = $uibModal;
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -137,7 +138,7 @@ angular.module('nextgearWebApp')
             }
           }
         };
-        $modal.dialog(dialogOptions).open();
+        uibModal.open(dialogOptions);
       }
     };
 
@@ -223,11 +224,16 @@ angular.module('nextgearWebApp')
               controller: 'ConfirmCheckoutCtrl',
               dialogClass: 'modal modal-medium',
               resolve: {
-                queue: function () { return $scope.paymentQueue.contents; },
-                transactionInfo: function () { return result; }
+                queue: function () {
+                  return $scope.paymentQueue.contents;
+                },
+                transactionInfo: function () {
+                  return result;
+                }
               }
             };
-            $modal.dialog(dialogOptions).open().then(function () {
+            var modal =  $uibModal.open(dialogOptions);
+            modal.result.then(function () {
               Payments.clearPaymentQueue();
             });
           }
@@ -303,8 +309,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-
-      $modal.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.exportPaymentSummary = function() {

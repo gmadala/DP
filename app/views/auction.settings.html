@@ -38,7 +38,7 @@
                         tooltip-placement="right"
                         tooltip-trigger="mouseenter"
                         tooltip-html="true"
-                        tooltip-html-unsafe="{{ '<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>' | translate }}"
+                        uib-tooltip="{{ '<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>' | translate }}"
                         tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
             </div>
             <label class="text-error" ng-show="profile.validation.setPassword.$error.pattern" translate>
@@ -154,7 +154,7 @@
                  tooltip-placement="left"
                  tooltip-trigger="mouseenter"
                  tooltip-html="true"
-                 tooltip-html-unsafe="{{ 'To change your email address, please contact customer service for further assistance.' | translate }}"
+                 uib-tooltip="{{ 'To change your email address, please contact customer service for further assistance.' | translate }}"
                  tooltip-animation="true">
               <span nxg-icon="icon-help"></span>
             </div>
@@ -242,7 +242,7 @@
                   tooltip-placement="right"
                   tooltip-trigger="mouseenter"
                   tooltip-html="true"
-                  tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
+                  uib-tooltip="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                   tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
                 </button>
@@ -260,7 +260,7 @@
                   tooltip-placement="right"
                   tooltip-trigger="mouseenter"
                   tooltip-html="true"
-                  tooltip-html-unsafe="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
+                  uib-tooltip="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                   tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
               </div>
             </div>

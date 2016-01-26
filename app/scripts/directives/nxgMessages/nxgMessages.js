@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgMessages', function ($modal, messages) {
+  .directive('nxgMessages', function ($uibModal, $uibModalInstance, messages) {
+    var uibModal = $uibModal,
+      uibModalInstance = $uibModalInstance;
+
     return {
       restrict: 'A',
       link: function (scope) {
@@ -20,8 +23,8 @@ angular.module('nextgearWebApp')
               topmost: true,
               topmostClass: 'topmost'
             };
-            currentDialog = $modal.dialog(dialogOptions);
-            currentDialog.open().then(function () {
+            currentDialog = uibModal.dialog(dialogOptions);
+            currentDialog.result.then(function () {
               // Destructive array operation - work with copy of array
               angular.forEach(messages.list().slice(), function (msg) {
                 msg.dismiss();
@@ -29,7 +32,7 @@ angular.module('nextgearWebApp')
               currentDialog = null;
             });
           } else if (!hasMessages && currentDialog) {
-            currentDialog.close();
+            uibModalInstance.close();
           }
         });
       }

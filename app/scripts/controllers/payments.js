@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $modal, BusinessHours, Addresses, gettextCatalog) {
+  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $uibModal, BusinessHours, Addresses, gettextCatalog) {
 
     $scope.isCollapsed = true;
 
+    var uibModal = $uibModal;
     var lastPromise;
 
     $scope.getDueStatus = function (item, isPayment) {
@@ -123,7 +124,7 @@ angular.module('nextgearWebApp')
     };
 
     $scope.payments.extension = function (payment) {
-      $modal.dialog({
+      uibModal.open({
         backdrop: true,
         keyboard: true,
         backdropClick: true,
@@ -143,7 +144,7 @@ angular.module('nextgearWebApp')
             };
           }
         }
-      }).open();
+      });
     };
 
     $scope.payments.resetSearch = function (initialFilter, initialStartDate, initialEndDate) {
@@ -237,11 +238,12 @@ angular.module('nextgearWebApp')
       bizHours();
     });
 
-  }).controller('ExtensionRequestCtrl', function ($scope, dialog, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
+  }).controller('ExtensionRequestCtrl', function ($scope, $uibModalInstance, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
 
+    var uibModalInstance = $uibModalInstance;
     //TODO changes in here for 3893
     $scope.payment = payment;
-    $scope.closeDialog = dialog.close;
+    $scope.closeDialog = uibModalInstance.close();
     $scope.isEnglish = gettextCatalog.currentLanguage === 'en';
 
     Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
@@ -260,7 +262,7 @@ angular.module('nextgearWebApp')
 
     $scope.onConfirm = function() {
       onConfirm();
-      dialog.close();
+      uibModalInstance.close();
     };
 
     $scope.confirmRequest = function() {
@@ -269,7 +271,7 @@ angular.module('nextgearWebApp')
           $scope.onConfirm();
         });
       } else {
-        dialog.close();
+        uibModalInstance.close();
       }
     };
   });

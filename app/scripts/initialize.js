@@ -6,11 +6,12 @@
     .run(initialize);
 
   initialize.$inject = ['$rootScope', '$window', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
-    '$state', '$modal', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
+    '$state', '$uibModal', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
 
-  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $modal,
+  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $uibModal,
                       LastState, api, metric, language, features, kissMetricInfo) {
 
+    var uibModal =$uibModal;
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
     //set metric constants on root scope so they are always available
@@ -63,15 +64,15 @@
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toStateParams) {
         // If there are dialogs open and we aren't going to login state to popup the login "are you sure?" modal
-        if ($modal.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
-          /**
+        /* if (uibModal.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
+          /!**
            * if a dialog is open, close it before navigating to new state
            * but not for login, because the logout function already closes
            * all dialogs.
-           */
-          $modal.closeAll();
+           *!/
+          uibModal.closeAll();
         }
-
+*/
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer(),
@@ -128,13 +129,13 @@
 
     $rootScope.$on('event:userRequestedLogout',
       function () {
-        $modal.closeAll();
-        $modal.dialog({
+        //$modal.closeAll();
+        uibModal.open({
           keyboard: false,
           backdropClick: false,
           templateUrl: 'views/modals/confirmLogout.html',
           controller: 'ConfirmLogoutCtrl'
-        }).open().then(function (confirmed) {
+        }).result.then(function (confirmed) {
           // dialog controller did User.logout() so it could block until that finished
           if (confirmed) {
             // we don't need to clear the user state here, because it's

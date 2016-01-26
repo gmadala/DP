@@ -4,9 +4,12 @@
   angular.module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', 'dialog', '$modal','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
+  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', '$uibModal', '$uibModalInstance','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
 
-  function FinancialAccountCtrl($scope, AccountManagement, dialog, $modal, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
+  function FinancialAccountCtrl($scope, AccountManagement, $uibModal, $uibModalInstance, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
+
+    var uibModal = $uibModal,
+      uibModalInstance= $uibModalInstance;
 
     $scope.tooltipImage = '<div class="tooltip-image">';
 
@@ -103,12 +106,12 @@
                 segmentio.track(metric.DEALER_ADD_BANK_ACCOUNT, result);
               });
             $scope.account.AccountId = bankAccountId;
-            dialog.close($scope.account);
+            uibModalInstance.close($scope.account);
             $scope.showSuccessMessage();
           });
         } else {
           // Fail gracefully if somehow modal was opened
-          dialog.close();
+          uibModalInstance.close();
         }
       }
       $scope.agree = false;
@@ -119,9 +122,30 @@
      */
     $scope.showSuccessMessage = function () {
       var title = gettextCatalog.getString('Success'),
-        msg = gettextCatalog.getString('Your account was saved successfully.'),
+        message = gettextCatalog.getString('Your account was saved successfully.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-      return $modal.messageBox(title, msg, buttons).open();
+
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/messageBox.html',
+        controller: 'MessageBoxCtrl',
+        dialogClass: 'modal modal-medium',
+        resolve: {
+          title: function () {
+            return title;
+          },
+          message : function() {
+            return message;
+          },
+          buttons: function () {
+            return buttons;
+          }
+        }
+      };
+
+      return uibModal.open(dialogOptions);
     };
 
     /**
@@ -129,7 +153,7 @@
      * @return {void}
      */
     function closeDialog() {
-      dialog.close();
+      uibModalInstance.close();
     }
 
     $scope.$watch(accountNumberAndBankName, updateAccountNameDisplay);

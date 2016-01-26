@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('RequestCreditIncreaseCtrl', function($scope, dialog, $modal, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
+  .controller('RequestCreditIncreaseCtrl', function($scope, $uibModal, $uibModalInstance, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
+
+    var uibModal = $uibModal,
+      uibModalInstance= $uibModalInstance;
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -54,13 +57,33 @@ angular.module('nextgearWebApp')
           });
 
           $scope.loading = false;
-          dialog.close(); // close request dialog
+          uibModalInstance.close(); // close request dialog
 
           // show success dialog
           var title = gettextCatalog.getString('Request a Credit Increase'),
             message = gettextCatalog.getString('Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.'),
             buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-secondary'}];
-          return $modal.messageBox(title, message, buttons).open();
+
+          var dialogOptions = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            templateUrl: 'views/modals/messageBox.html',
+            controller: 'MessageBoxCtrl',
+            dialogClass: 'modal modal-medium',
+            resolve: {
+              title: function () {
+                return title;
+              },
+              message : function() {
+                return message;
+              },
+              buttons: function () {
+                return buttons;
+              }
+            }
+          };
+          return uibModal.open(dialogOptions);
         },
         // failure
         function() {
@@ -69,6 +92,6 @@ angular.module('nextgearWebApp')
       );
     };
 
-    $scope.close = dialog.close;
+    $scope.close = uibModalInstance.close();
 
   });

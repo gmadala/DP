@@ -4,10 +4,11 @@ angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', AccountManagementCtrl)
   .controller('ConfirmCtrl', ConfirmCtrl);
 
-function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, gettext,
+function AccountManagementCtrl($scope, $uibModal, AccountManagement, Addresses,
                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
                                routingNumberFilter, kissMetricInfo) {
 
+  var uibModal = $uibModal;
   kissMetricInfo.getKissMetricInfo().then(function(result){
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE, result);
   });
@@ -186,7 +187,7 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
             templateUrl: 'views/modals/confirmDisableEnhanced.html',
             controller: 'ConfirmCtrl'
           };
-          $modal.dialog(dialogOptions).open().then(function (result) {
+          uibModal.open(dialogOptions).result.then(function(result) {
             if (result) {
               $scope.business.dirtyData.enhancedRegistrationPin = null;
               $scope.business.dirtyData.enhancedRegistrationEnabled = false;
@@ -242,7 +243,7 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
               templateUrl: 'views/modals/confirmEnableAutoPay.html',
               controller: 'ConfirmCtrl'
             };
-            $modal.dialog(dialogOptions).open().then(function (result) {
+            uibModal.open(dialogOptions).result.then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !!result;
             });
           },
@@ -254,7 +255,7 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
               templateUrl: 'views/modals/confirmDisableAutoPay.html',
               controller: 'ConfirmCtrl'
             };
-            $modal.dialog(dialogOptions).open().then(function (result) {
+            uibModal.open(dialogOptions).result.then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !result;
             });
           },
@@ -394,7 +395,7 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
             controller: 'FinancialAccountCtrl'
           };
 
-          $modal.dialog(dialogOptions).open()
+          uibModal.open(dialogOptions).result
             .then(updateLocalFinancialData);
 
           /**
@@ -484,7 +485,7 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
       controller: 'RequestCreditIncreaseCtrl'
     };
 
-    $modal.dialog(dialogOptions).open();
+    uibModal.open(dialogOptions);
   };
 
   $scope.feeScheduleUrl = api.contentLink(
@@ -494,9 +495,10 @@ function AccountManagementCtrl($scope, $modal, AccountManagement, Addresses, get
 
 }
 
-function ConfirmCtrl($scope, dialog) {
+function ConfirmCtrl($scope, $uibModalInstance) {
+  var uibModalInstance = $uibModalInstance;
   $scope.close = function (result) {
-    dialog.close(result);
+    uibModalInstance.close(result);
   };
 
   $scope.agree = false;

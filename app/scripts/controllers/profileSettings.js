@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, $modal, ProfileSettings) {
+  .controller('ProfileSettingsCtrl', function($scope, ProfileSettings) {
 
     $scope.loading = false;
 

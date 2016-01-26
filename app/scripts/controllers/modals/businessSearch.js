@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, dialog, BusinessSearch, initialQuery, searchBuyersMode, closeNow) {
+  .controller('BusinessSearchCtrl', function($scope, $uibModalInstance, BusinessSearch, initialQuery, searchBuyersMode, closeNow) {
 
     var lastPromise;
+    var uibModalInstance = $uibModalInstance;
 
     $scope.data = {
       searchBuyersMode: searchBuyersMode,
@@ -23,7 +24,7 @@ angular.module('nextgearWebApp')
       },
       function(newVal) {
         if(newVal) {
-          dialog.close();
+          uibModalInstance.close();
         }
       }
     );
@@ -106,14 +107,14 @@ angular.module('nextgearWebApp')
     focusField = angular.element('#inputBiz').next('button');
 
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
       if (focusField.length > 0) {
         focusField.focus();
       }
     };
 
     $scope.select = function(business) {
-      dialog.close(business);
+      uibModalInstance.close(business);
       if (focusField.length > 0) {
         focusField.focus();
       }

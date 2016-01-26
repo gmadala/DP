@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
+  .controller('ScheduleCheckoutCtrl', function ($scope, $uibModalInstance, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
 
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
     var item = payment ? payment : fee;
+    var uibModalInstance = $uibModalInstance;
 
     $scope.updateInProgress = false;
     $scope.type = payment ? 'payment' : 'fee';
@@ -101,7 +102,7 @@ angular.module('nextgearWebApp')
     $scope.finalize = function (scheduleDate) {
       if (item.isFee){
         item.scheduleDate = scheduleDate;
-        dialog.close();
+        uibModalInstance.close();
       } else {
         $scope.submitInProgress = true;
         // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
@@ -109,7 +110,7 @@ angular.module('nextgearWebApp')
           function () {
             $scope.submitInProgress = false;
             item.scheduleDate = scheduleDate;
-            dialog.close();
+            uibModalInstance.close();
           }, function (/*error*/) {
             $scope.submitInProgress = false;
           }
@@ -118,6 +119,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
     };
   });
