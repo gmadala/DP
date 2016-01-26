@@ -12,6 +12,7 @@ angular.module('nextgearWebApp')
     $scope.valueInfo = {};
     $scope.financialSummary = {};
     $scope.floorplanId = '';
+    $scope.isShowExtendLink = false;
 
     kissMetricInfo.getKissMetricInfo().then(function(result){
       $scope.kissMetricData = result;
@@ -184,6 +185,19 @@ angular.module('nextgearWebApp')
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
         };
+
+        Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
+           function (result) {
+             var resultVal=false;
+             var extNumber = 0;
+
+             if (typeof result[0] !== 'undefined') {
+               resultVal=result[0].extendable;
+               extNumber = result[0].extensionNumber ;
+             }
+             $scope.isShowExtendLink = resultVal && (extNumber<3) && !$scope.paymentForCheckout.Scheduled;
+           }
+        );
 
         $scope.getAdditionalPrincipal = function() {
           if(!Payments.isPaymentOnQueue($scope.vehicleInfo.FloorplanId)) {
@@ -520,7 +534,7 @@ angular.module('nextgearWebApp')
 
         // Handle payment extension requests
         $scope.showExtendLink = function() {
-          return !!$scope.financialSummary.NextPaymentAmount && $scope.financialSummary.NextPaymentAmount === $scope.financialSummary.TotalOutstanding;
+          return $scope.isShowExtendLink ;
         };
         //Checking for United States Dealer
         $scope.isUnitedStates = User.isUnitedStates();
@@ -558,4 +572,5 @@ angular.module('nextgearWebApp')
     };
 
     getData();
+
   });

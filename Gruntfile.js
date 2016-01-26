@@ -341,6 +341,15 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      notification: {
+        files: [
+          {
+            expand: true, dot: true, flatten: true,
+            dest: '<%= yeoman.dist %>/img/email',
+            src: '<%= yeoman.app %>/img/email/*'
+          }
+        ]
+      },
       maintenance: {
         files: [
           {
@@ -706,7 +715,8 @@ module.exports = function(grunt) {
     'processhtml:svgDist',
     'imagemin',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:notification'
   ]);
 
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
