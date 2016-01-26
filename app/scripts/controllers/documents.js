@@ -19,6 +19,12 @@ angular.module('nextgearWebApp')
       }
     }
 
+    var forTMFFAQ = languagePrefix;
+
+    if (currentLanguage==='fr_CA'){
+      forTMFFAQ = 'CAF%20';
+    }
+
     $scope.documents = [] ;
 
     if (isUnitedStates){
@@ -35,11 +41,6 @@ angular.module('nextgearWebApp')
         metric: metric.DEALER_RESOURCES_DEALER_FUNDING_CHECKLIST_PAGE
       });
 
-      var forTMFFAQ = languagePrefix;
-
-      if (currentLanguage==='fr_CA'){
-        forTMFFAQ = 'CAF%20';
-      }
       $scope.documents.push({
         title: gettextCatalog.getString('Title Management Frequently Asked Questions'),
         url: 'documents/' + forTMFFAQ + 'Records%20Title%20FAQ.pdf',
@@ -71,7 +72,7 @@ angular.module('nextgearWebApp')
       },
       {
         title: gettextCatalog.getString('Claim Form'),
-        url: 'documents/' + languagePrefix + 'Claim%20Form.pdf',
+        url: 'documents/' + forTMFFAQ + 'Claim%20Form.pdf',
         metric: metric.DEALER_RESOURCES_CLAIM_FORM_PAGE
       }
     ];
