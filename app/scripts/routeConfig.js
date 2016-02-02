@@ -189,6 +189,15 @@
           showNavBar: true
         }
       })
+      .state('promos', {
+        url: '/promos',
+        templateUrl: '/views/promos.html',
+        controller: 'PromosCtrl',
+        data:{
+          pageId: 'Promos',
+          showNavBar: true
+        }
+      })
       .state('valueLookup', {
         url: '/valueLookup',
         templateUrl: 'views/valuelookup.html',

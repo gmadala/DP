@@ -56,6 +56,11 @@ angular.module('nextgearWebApp')
               href: '#/valueLookup',
               activeWhen: 'valueLookup',
             });
+            dealerLinks.primary.push({
+              name: gettextCatalog.getString('Promos'),
+              href: '#/promos',
+              activeWhen: 'promos'
+            });
           }
           if ($scope.displayTitleRelease) {
             dealerLinks.primary.splice(3, 0, {
