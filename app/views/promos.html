@@ -1,0 +1,45 @@
+<div class="promos">
+  <section class="col-md-12 well settings-well financial-table">
+    <h2 class="well-title">
+      <span translate>Promotions / Event Sales</span>
+    </h2>
+    <div class="well-column-header col-xs-12">
+      <h6 class="col-xs-3" translate>Location</h6>
+      <h6 class="col-xs-3" translate>Description</h6>
+      <h6 class="col-xs-3">Sales Date</h6>
+      <h6 class="col-xs-3" translate>Terms and Conditions</h6>
+    </div>
+    <div class="promo-container">
+      <div ng-repeat="promo in promos | orderBy:'SalesDate'">
+        <div class="col-xs-3">{{promo.Location}}</div>
+        <div class="col-xs-3">{{promo.Description}}</div>
+        <div class="col-xs-3">{{promo.SalesDate}}</div>
+        <div class="col-xs-3">{{promo.TermsAndConditions}}</div>
+      </div>
+    </div>
+    <!--
+    <div class="bank-accounts-container">
+      <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'AchBankName'">
+        <nxg-financial-account account="account"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
+                               is-stakeholder-active="business.data.isStakeholderActive"
+                               is-united-states="isUnitedStates"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
+                               recent-transaction="getLatestTransaction(account.BankAccountId)" >
+        </nxg-financial-account>
+      </div>
+      <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'AchBankName'">
+        <nxg-financial-account account="account"
+                               default-deposit-id="defaultDeposit.BankAccountId"
+                               default-payment-id="defaultPayment.BankAccountId"
+                               is-stakeholder-active="business.data.isStakeholderActive"
+                               is-united-states="isUnitedStates"
+                               refresh-active-ach-accounts="refreshActiveAchAccounts()"
+                               recent-transaction="getLatestTransaction(account.BankAccountId)">
+        </nxg-financial-account>
+      </div>
+    </div>
+    -->
+  </section>
+</div>
