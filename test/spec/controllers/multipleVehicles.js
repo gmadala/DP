@@ -24,7 +24,7 @@ describe('Controller: MultipleVehiclesCtrl', function () {
     scope = $rootScope.$new();
     MultipleVehiclesCtrl = $controller('MultipleVehiclesCtrl', {
       $scope: scope,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       matchList: matchListMock
     });
   }));

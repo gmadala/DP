@@ -4,14 +4,14 @@
   angular.module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', 'AccountManagement', '$uibModal', '$uibModalInstance','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
+  FinancialAccountCtrl.$inject = ['$scope', '$sce','AccountManagement', '$uibModal', '$uibModalInstance','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
 
-  function FinancialAccountCtrl($scope, AccountManagement, $uibModal, $uibModalInstance, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
+  function FinancialAccountCtrl($scope, $sce, AccountManagement, $uibModal, $uibModalInstance, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
 
     var uibModal = $uibModal,
       uibModalInstance= $uibModalInstance;
 
-    $scope.tooltipImage = '<div class="tooltip-image">';
+    $scope.tooltipImage = $sce.trustAsHtml('<div class="tooltip-image">');
 
     $scope.account = options.account || {};
     $scope.defaultForBilling = options.defaultForBilling;

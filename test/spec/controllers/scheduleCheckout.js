@@ -61,7 +61,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
       ScheduleCheckoutCtrl = $controller('ScheduleCheckoutCtrl', {
         $scope: scope,
-        dialog: dialog,
+        $uibModalInstance: dialog,
         payment: type === 'payment' && payment,
         fee: type === 'fee' && fee,
         possibleDates: possibleDates

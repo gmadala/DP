@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
               topmost: true,
               topmostClass: 'topmost'
             };
-            currentDialog = uibModal.dialog(dialogOptions);
+            currentDialog = uibModal.open(dialogOptions);
             currentDialog.result.then(function () {
               // Destructive array operation - work with copy of array
               angular.forEach(messages.list().slice(), function (msg) {

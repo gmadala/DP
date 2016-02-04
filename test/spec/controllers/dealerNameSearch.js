@@ -37,7 +37,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
     scope = $rootScope.$new();
     DealerNameSearchCtrl = $controller('DealerNameSearchCtrl', {
       $scope: scope,
-      dialog: dialog,
+      $uibModalInstance: dialog,
       options: {
         dealerName: 'foo',
         city: 'footown',
@@ -250,16 +250,16 @@ describe('Controller: DealerNameSearchCtrl', function () {
 
     var $dialog;
 
-    beforeEach(inject(function (_$dialog_) {
-      $dialog = _$dialog_;
-      spyOn($dialog, 'dialog').and.returnValue({ open: angular.noop });
+    beforeEach(inject(function ($uibModal) {
+      $dialog = $uibModal;
+      spyOn($dialog, 'open').and.returnValue({ open: angular.noop });
     }));
 
     it('should invoke the credit query dialog', function () {
       scope.showCreditQuery();
-      expect($dialog.dialog).toHaveBeenCalled();
-      expect($dialog.dialog.calls.mostRecent().args[0].controller).toBe('CreditQueryCtrl');
-      expect($dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/creditQuery.html');
+      expect($dialog.open).toHaveBeenCalled();
+      expect($dialog.open.calls.mostRecent().args[0].controller).toBe('CreditQueryCtrl');
+      expect($dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/creditQuery.html');
     });
 
     it('should provide the dialog with the selected business information', function () {
@@ -276,7 +276,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
         State: 'state',
         PostalCode: 'postalCode'
       });
-      var options = $dialog.dialog.calls.mostRecent().args[0].resolve.options();
+      var options = $dialog.open.calls.mostRecent().args[0].resolve.options();
       expect(options.businessId).toBe('businessId');
       expect(options.businessNumber).toBe('businessNumber');
       expect(options.auctionAccessNumbers).toBe('aa1, aa2');

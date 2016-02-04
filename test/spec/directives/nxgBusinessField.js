@@ -9,7 +9,7 @@ describe('Directive: nxgBusinessField', function () {
   // that will instantly return the fakeBiz object above as its result
   beforeEach(function () {
     module('nextgearWebApp', function($provide) {
-      $provide.decorator('$dialog', function($delegate) {
+      $provide.decorator('$uibModal', function($delegate) {
         return {
           dialog: function () {
             return {
@@ -76,21 +76,21 @@ describe('Directive: nxgBusinessField', function () {
   });
 
   it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').and.callThrough();
+    spyOn($dialog, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.dialog.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(false);
+    expect($dialog.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(false);
   }));
 
   it('should wait for 200ms before opening dialog to let click event finish', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').and.callThrough();
+    spyOn($dialog, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect(timeout).toHaveBeenCalledWith(angular.noop, 200);
   }));
 
   it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($dialog) {
-    spyOn($dialog, 'dialog').and.returnValue({
+    spyOn($dialog, 'open').and.returnValue({
       open: function () {
         return {
           then: function (success) {
@@ -116,10 +116,10 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'dialog').and.callThrough();
+    spyOn($dialog, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.dialog.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
+    expect($dialog.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
   }));
 
   it('should respect the ng-disabled attribute on the original input', function () {
@@ -147,13 +147,13 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'dialog').and.callThrough();
+    spyOn($dialog, 'open').and.callThrough();
     element.find('button').trigger('click');
-    expect($dialog.dialog).not.toHaveBeenCalled();
+    expect($dialog.open).not.toHaveBeenCalled();
 
     element.find('input').val('ab');
     element.find('button').trigger('click');
-    expect($dialog.dialog).not.toHaveBeenCalled();
+    expect($dialog.open).not.toHaveBeenCalled();
 
     element.find('input').val(fakeBiz);
     element.find('button').trigger('click');

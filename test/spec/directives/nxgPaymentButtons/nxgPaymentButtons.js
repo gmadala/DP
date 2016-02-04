@@ -64,8 +64,8 @@ describe('Directive: nxgPaymentButtons', function () {
       var dialog,
           iScope;
 
-      beforeEach(inject(function ($rootScope, $compile, $dialog) {
-        dialog = $dialog;
+      beforeEach(inject(function ($rootScope, $compile, $uibModal) {
+        dialog = $uibModal;
         element = angular.element('<div nxg-payment-buttons="fee" ' +
           'item="myFee" on-queue="inQueue"></div>');
         scope = $rootScope.$new();
@@ -85,20 +85,20 @@ describe('Directive: nxgPaymentButtons', function () {
       }));
 
       it('should have a cancel scheduled fee button that invokes the cancel scheduled fee modal', function() {
-        spyOn(dialog, 'dialog').and.returnValue({
+        spyOn(dialog, 'open').and.returnValue({
           open: angular.noop
         });
 
         iScope.cancelScheduledFee();
 
-        expect(dialog.dialog).toHaveBeenCalled();
-        expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelFee.html');
-        expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('CancelFeeCtrl');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('webFee1');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().fee.feeType).toBe('FeeType');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().fee.description).toBe('FeeDescription');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().fee.scheduledDate).toBe('2013-01-01');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().fee.balance).toBe(1500);
+        expect(dialog.open).toHaveBeenCalled();
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelFee.html');
+        expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelFeeCtrl');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('webFee1');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.feeType).toBe('FeeType');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.description).toBe('FeeDescription');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.scheduledDate).toBe('2013-01-01');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.balance).toBe(1500);
 
         dialog.dialog.calls.mostRecent().args[0].resolve.options().onCancel();
         expect(scope.myFee.Scheduled).toBe(false);
@@ -112,8 +112,8 @@ describe('Directive: nxgPaymentButtons', function () {
         dialog,
         shouldBeCancelled;
 
-    beforeEach(inject(function ($dialog) {
-      dialog = $dialog;
+    beforeEach(inject(function ($uibModal) {
+      dialog = $uibModal;
       myPayment = {
         FloorplanId: 'floorplanId',
         Vin: 'vin',
@@ -138,7 +138,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       shouldBeCancelled = true;
 
-      spyOn(dialog, 'dialog').and.callFake(function() {
+      spyOn(dialog, 'open').and.callFake(function() {
         return {
           open: function() {
             return {
@@ -169,8 +169,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
       iScope.cancelScheduledPayment();
 
-      expect(dialog.dialog).toHaveBeenCalled();
-      dialog.dialog.calls.mostRecent().args[0].resolve.options().onCancel();
+      expect(dialog.open).toHaveBeenCalled();
+      dialog.open.calls.mostRecent().args[0].resolve.options().onCancel();
       expect(scope.myFunc).toHaveBeenCalled();
     }));
 
@@ -189,7 +189,7 @@ describe('Directive: nxgPaymentButtons', function () {
       iScope.cancelScheduledPayment();
       expect(iScope.onCancelScheduledPayment).toBe(null);
 
-      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.open).toHaveBeenCalled();
     }));
   });
 
@@ -250,8 +250,8 @@ describe('Directive: nxgPaymentButtons', function () {
     var dialog,
     iScope;
 
-    beforeEach(inject(function ($rootScope, $compile, $dialog) {
-      dialog = $dialog;
+    beforeEach(inject(function ($rootScope, $compile, $uibModal) {
+      dialog = $uibModal;
       element = angular.element('<div nxg-payment-buttons="payment" ' +
         'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
@@ -281,22 +281,22 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a cancel scheduled payment button that invokes the cancel scheduled payment modal', function() {
-      spyOn(dialog, 'dialog').and.returnValue({
+      spyOn(dialog, 'open').and.returnValue({
         open: angular.noop
       });
 
       iScope.cancelScheduledPayment();
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelPayment.html');
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay1');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.description).toBe('some description');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.stockNumber).toBe('stocknumber');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.isPayOff).toBe(false);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.currentPayOff).toBe(5000);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.amountDue).toBe(1400);
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelPayment.html');
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay1');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.description).toBe('some description');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.stockNumber).toBe('stocknumber');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.isPayOff).toBe(false);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.currentPayOff).toBe(5000);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.amountDue).toBe(1400);
     });
 
   });
@@ -305,8 +305,8 @@ describe('Directive: nxgPaymentButtons', function () {
     var dialog,
     iScope;
 
-    beforeEach(inject(function ($rootScope, $compile, $dialog) {
-      dialog = $dialog;
+    beforeEach(inject(function ($rootScope, $compile, $uibModal) {
+      dialog = $uibModal;
       element = angular.element('<div nxg-payment-buttons="payment" ' +
         'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
@@ -323,7 +323,7 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should auto-cancel the previously scheduled payoff when a payment is added', function() {
-      spyOn(dialog, 'dialog').and.returnValue({
+      spyOn(dialog, 'open').and.returnValue({
          open: function() {
           return {
             then: function(wasCancelled) {
@@ -334,8 +334,8 @@ describe('Directive: nxgPaymentButtons', function () {
       });
 
       iScope.togglePaymentInQueue(false);
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
     });
 
     it('should add the payment if the user ends up cancelling the scheduled payment', inject(function($q, $rootScope) {
@@ -423,8 +423,8 @@ describe('Directive: nxgPaymentButtons', function () {
     var dialog,
         iScope;
 
-    beforeEach(inject(function ($rootScope, $compile, $dialog) {
-      dialog = $dialog;
+    beforeEach(inject(function ($rootScope, $compile, $uibModal) {
+      dialog = $uibModal;
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
         'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
@@ -448,22 +448,22 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should have a cancel scheduled payoff button that invokes the cancel scheduled payment modal', function() {
-      spyOn(dialog, 'dialog').and.returnValue({
+      spyOn(dialog, 'open').and.returnValue({
         open: angular.noop
       });
 
       iScope.cancelScheduledPayment();
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelPayment.html');
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay2');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.description).toBe('some description');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.stockNumber).toBe('stocknum');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.isPayOff).toBe(true);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.currentPayOff).toBe(20000);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.options().payment.amountDue).toBe(1600);
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/cancelPayment.html');
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay2');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.description).toBe('some description');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.stockNumber).toBe('stocknum');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.scheduledDate).toBe('2013-10-10');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.isPayOff).toBe(true);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.currentPayOff).toBe(20000);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.amountDue).toBe(1600);
     });
 
   });
@@ -472,8 +472,8 @@ describe('Directive: nxgPaymentButtons', function () {
     var dialog,
         iScope;
 
-    beforeEach(inject(function ($rootScope, $compile, $dialog) {
-      dialog = $dialog;
+    beforeEach(inject(function ($rootScope, $compile, $uibModal) {
+      dialog = $uibModal;
       element = angular.element('<div nxg-payment-buttons="payoff" ' +
         'item="myPayment" on-queue="inQueue"></div>');
       scope = $rootScope.$new();
@@ -504,7 +504,7 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should auto-cancel the previously scheduled payment when a payoff is added', function() {
-      spyOn(dialog, 'dialog').and.returnValue({
+      spyOn(dialog, 'open').and.returnValue({
          open: function() {
           return {
             then: function(wasCancelled) {
@@ -515,7 +515,7 @@ describe('Directive: nxgPaymentButtons', function () {
       });
 
       iScope.togglePaymentInQueue(true);
-      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.open).toHaveBeenCalled();
     });
   });
 });

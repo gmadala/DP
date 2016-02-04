@@ -12,8 +12,8 @@ describe('Controller: AnalyticsCtrl', function () {
 
   // Initialize the controller and a mock scope
 
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $q, _$dialog_) {
-    $dialog = _$dialog_;
+  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $q, $uibModal) {
+    $dialog = $uibModal;
     httpBackend = $httpBackend;
     httpBackend.when('GET', /\/dealer\/summary?.+/).respond({});
     scope = $rootScope.$new();
@@ -35,7 +35,7 @@ describe('Controller: AnalyticsCtrl', function () {
       Analytics: analyticsMock
     });
 
-    spyOn($dialog, 'dialog').and.returnValue({ open: angular.noop });
+    spyOn($dialog, 'open').and.returnValue({ open: angular.noop });
 
   }));
 
@@ -47,7 +47,7 @@ describe('Controller: AnalyticsCtrl', function () {
     expect(typeof scope.openTopAuctions).toBe('function');
 
     scope.openTopAuctions();
-    expect($dialog.dialog).toHaveBeenCalled();
+    expect($dialog.open).toHaveBeenCalled();
   });
 
   it('should attach a toggleDetails function', function() {

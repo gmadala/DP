@@ -18,7 +18,7 @@ describe('Controller: LoginRecoverCtrl', function () {
     BusinessHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$dialog_, _$q_, _segmentio_, _BusinessHours_, _metric_, _User_) {
+  beforeEach(inject(function ($controller, $rootScope, $uibModal, _$q_, _segmentio_, _BusinessHours_, _metric_, _User_) {
     BusinessHours=_BusinessHours_;
     metric = _metric_;
     segmentio = _segmentio_;
@@ -56,7 +56,7 @@ describe('Controller: LoginRecoverCtrl', function () {
         return $q.when(undefined);
       }
     };
-    $dialog = _$dialog_;
+    $dialog = $uibModal;
     spyOn($dialog, 'messageBox').and.returnValue(dialog);
 
     LoginRecoverCtrl = $controller('LoginRecoverCtrl', {

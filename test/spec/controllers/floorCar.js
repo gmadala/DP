@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: FloorCarCtrl', function () {
+fdescribe('Controller: FloorCarCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
@@ -24,10 +24,10 @@ describe('Controller: FloorCarCtrl', function () {
     $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_, _api_, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, Floorplan, $uibModal, $location, Blackbook, _$q_, _api_, _$httpBackend_) {
     scope = $rootScope.$new();
     floorplan = Floorplan;
-    dialog = $dialog;
+    dialog = $uibModal;
     location = $location;
     blackbook = Blackbook;
     $q = _$q_;
@@ -96,7 +96,7 @@ describe('Controller: FloorCarCtrl', function () {
         $scope: scope,
         User: userMock,
         Floorplan: floorplan,
-        $dialog: dialog,
+        $uibModal: dialog,
         $location: location,
         Blackbook: blackbook,
         Addresses: AddressesMock,
@@ -144,18 +144,20 @@ describe('Controller: FloorCarCtrl', function () {
 
       beforeEach(inject(function() {
         scope.form = mockForm;
-        spyOn(dialog, 'dialog').and.returnValue({
-          open: function() {
-            return {
-              then: function(s,f) {
-                if (succeed) {
-                  s(true);
-                } else {
-                  s(false);
-                }
+        spyOn(dialog, 'open').and.returnValue({
+          result: {
+            then: function () {
+              return {
+                then: function (s, f) {
+                  if (succeed) {
+                    s(true);
+                  } else {
+                    s(false);
+                  }
 
-              }
-            };
+                }
+              };
+            }
           }
         });
 
@@ -182,16 +184,16 @@ describe('Controller: FloorCarCtrl', function () {
       it('should do nothing if the form is invalid', function() {
         scope.form.$valid = false;
         scope.submit();
-        expect(dialog.dialog).not.toHaveBeenCalled();
+        expect(dialog.open).not.toHaveBeenCalled();
       });
 
       it('should call dialog with a valid form', function() {
         scope.form.$valid = true;
         scope.submit();
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
+        expect(dialog.open.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
       });
 
-      it('should call reallySubmit() if user confirms', function() {
+      fit('should call reallySubmit() if user confirms', function() {
         spyOn(scope, 'reallySubmit').and.returnValue();
         scope.submit();
         expect(scope.reallySubmit).toHaveBeenCalled();
@@ -215,7 +217,7 @@ describe('Controller: FloorCarCtrl', function () {
       beforeEach(inject(function(protect) {
         p = protect;
 
-        spyOn(dialog, 'dialog').and.returnValue({
+        spyOn(dialog, 'open').and.returnValue({
           open: function() {
             return {
               then: function(s,f) {

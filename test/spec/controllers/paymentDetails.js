@@ -51,7 +51,7 @@ describe('Controller: PaymentDetailsCtrl', function () {
 
     PaymentDetailsCtrl = $controller('PaymentDetailsCtrl', {
       $scope: scope,
-      dialog: dialog,
+      $uibModalInstance: dialog,
       activity: activityMock
     });
 

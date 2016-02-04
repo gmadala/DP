@@ -74,8 +74,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
 
     RequestCreditIncreaseCtrl = $controller('RequestCreditIncreaseCtrl', {
       $scope: scope,
-      dialog: dialogMock,
-      $dialog: $dialogMock,
+      $uibModalInstance: dialogMock,
       CreditIncrease: creditIncreaseMock,
       kissMetricInfo: mockKissMetricInfo
     });
@@ -124,7 +123,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
 
       RequestCreditIncreaseCtrl = $controller('RequestCreditIncreaseCtrl', {
         $scope: scope,
-        dialog: dialogMock,
+        $uibModalInstance: dialogMock,
         $dialog: $dialogMock,
         CreditIncrease: creditIncreaseMock
       });

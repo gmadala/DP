@@ -79,7 +79,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     });
 
     it('openRequestPayout() should show a success modal and update available and total balance on success', function () {
-      spyOn(dialogMock, 'dialog').and.returnValue({
+      spyOn(dialogMock, 'open').and.returnValue({
         open: function () {
           return $q.when({
             amount: 100,
@@ -167,7 +167,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         scope = $rootScope.$new();
         payoutCtrl = $controller('PayoutModalCtrl', {
           $scope: scope,
-          dialog: dialogMock,
+          $uibModalInstance: dialogMock,
           funds: {
             balance: 1,
             available: 2

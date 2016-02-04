@@ -67,7 +67,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
 
     FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
       $scope: scope,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
       User: userDealerMock,
@@ -77,7 +77,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
 
     FloorAuctionCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
       $scope: scopeAuction,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
       User: userAuctionMock,
@@ -89,7 +89,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
   var createController = function () {
     FloorCarConfirmCtrl = controller('FloorCarConfirmCtrl', {
       $scope: scope,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
       User: userDealerMock,
