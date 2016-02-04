@@ -2,7 +2,6 @@
 
 angular.module('nextgearWebApp')
   .controller('PromosCtrl', PromosCtrl);
-
 function PromosCtrl($scope, api) {
 
   var getEventSalesData = function() {
@@ -12,7 +11,7 @@ function PromosCtrl($scope, api) {
         $scope.promos = result;
       }
     );
-  }
+  };
 
   getEventSalesData();
 }
