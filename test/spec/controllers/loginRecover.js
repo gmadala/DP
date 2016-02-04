@@ -57,7 +57,13 @@ describe('Controller: LoginRecoverCtrl', function () {
       }
     };
     $dialog = $uibModal;
-    spyOn($dialog, 'messageBox').and.returnValue(dialog);
+    spyOn($dialog, 'open').and.returnValue({
+      result: {
+        then: function(callback){
+          callback();
+        }
+      }
+    });
 
     LoginRecoverCtrl = $controller('LoginRecoverCtrl', {
       $scope: scope,
@@ -522,10 +528,8 @@ describe('Controller: LoginRecoverCtrl', function () {
 
     it('should invoke a messageBox with the expected content', function () {
       scope.showSuccessMessage();
-      expect($dialog.messageBox).toHaveBeenCalled();
-      expect(typeof $dialog.messageBox.calls.mostRecent().args[0]).toBe('string');
-      expect(typeof $dialog.messageBox.calls.mostRecent().args[1]).toBe('string');
-      expect(angular.isArray($dialog.messageBox.calls.mostRecent().args[2])).toBe(true);
+      expect($dialog.open).toHaveBeenCalled();
+      expect(typeof $dialog.open.calls.mostRecent().args[0]).toBe('object');
     });
 
     it('should transition to the login state on message box close', function () {

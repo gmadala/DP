@@ -296,7 +296,11 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       it('should launch a modal dialog', function() {
         spyOn(dialog, 'open').and.returnValue({
-          open: angular.noop
+          result: {
+            then: function (callback) {
+              callback();
+            }
+          }
         });
         scope.requestExtension();
         expect(dialog.open).toHaveBeenCalled();
@@ -340,19 +344,13 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       beforeEach(function() {
         wasCancelled = true;
-        spyOn(dialog, 'open').and.callFake(function() {
-        return {
-          open: function() {
-            return {
-              then: function(success, failure) {
-                if (wasCancelled) {
-                  success(true);
-                }
-              }
-            };
+        spyOn(dialog, 'open').and.returnValue({
+          result: {
+            then: function (callback) {
+              callback(true);
+            }
           }
-        };
-      });
+        });
 
         spyOn(paymentsMock, 'getPaymentFromQueue').and.returnValue();
       });

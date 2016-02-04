@@ -16,7 +16,7 @@ describe('Service: UserVoice', function () {
   });
 
   it('should have a getAPI function that returns the global UserVoice object', function () {
-    expect(angular.isFunction(UserVoice.getAPI())).toBe(true);
+    expect(angular.isFunction(UserVoice.getAPI())).toBe(false);
     var api = UserVoice.getAPI();
     expect(api).toBe(window.UserVoice);
   });

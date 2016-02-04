@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: nxgPaymentButtons', function () {
+fdescribe('Directive: nxgPaymentButtons', function () {
 
   var element,
     scope,
@@ -100,7 +100,7 @@ describe('Directive: nxgPaymentButtons', function () {
         expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.scheduledDate).toBe('2013-01-01');
         expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.balance).toBe(1500);
 
-        dialog.dialog.calls.mostRecent().args[0].resolve.options().onCancel();
+        dialog.open.calls.mostRecent().args[0].resolve.options().onCancel();
         expect(scope.myFee.Scheduled).toBe(false);
         expect(scope.myFee.ScheduledDate).toBe(null);
       });
@@ -138,14 +138,13 @@ describe('Directive: nxgPaymentButtons', function () {
 
       shouldBeCancelled = true;
 
-      spyOn(dialog, 'open').and.callFake(function() {
+      spyOn(dialog, 'open').and.callFake(function () {
         return {
-          open: function() {
-            return {
-              then: function() {
-                return shouldBeCancelled;
-              }
-            };
+          result: {
+            then: function (callback) {
+              //return shouldBeCancelled;
+              callback();
+            }
           }
         };
       });
@@ -301,7 +300,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   });
 
-  describe('payment mode (payoff previously scheduled)', function () {
+  fdescribe('payment mode (payoff previously scheduled)', function () {
     var dialog,
     iScope;
 
@@ -324,15 +323,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should auto-cancel the previously scheduled payoff when a payment is added', function() {
       spyOn(dialog, 'open').and.returnValue({
-         open: function() {
-          return {
-            then: function(wasCancelled) {
-              return true;
-            }
-          };
-        }
+        open: angular.noop
       });
-
       iScope.togglePaymentInQueue(false);
       expect(dialog.open).toHaveBeenCalled();
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
@@ -340,7 +332,6 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should add the payment if the user ends up cancelling the scheduled payment', inject(function($q, $rootScope) {
       spyOn(iScope, 'cancelScheduledPayment').and.returnValue($q.when(true));
-
       spyOn(Payments, 'addPaymentTypeToQueue').and.callThrough();
       iScope.togglePaymentInQueue(false);
       $rootScope.$digest();
@@ -449,7 +440,11 @@ describe('Directive: nxgPaymentButtons', function () {
 
     it('should have a cancel scheduled payoff button that invokes the cancel scheduled payment modal', function() {
       spyOn(dialog, 'open').and.returnValue({
-        open: angular.noop
+        result: {
+          then: function () {
+            angular.noop();
+          }
+        }
       });
 
       iScope.cancelScheduledPayment();
@@ -468,7 +463,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   });
 
-  describe('payoff mode (payment previously scheduled)', function () {
+  fdescribe('payoff mode (payment previously scheduled)', function () {
     var dialog,
         iScope;
 
@@ -504,16 +499,7 @@ describe('Directive: nxgPaymentButtons', function () {
     }));
 
     it('should auto-cancel the previously scheduled payment when a payoff is added', function() {
-      spyOn(dialog, 'open').and.returnValue({
-         open: function() {
-          return {
-            then: function(wasCancelled) {
-              return true;
-            }
-          };
-        }
-      });
-
+      spyOn(dialog, 'open').and.callThrough();
       iScope.togglePaymentInQueue(true);
       expect(dialog.open).toHaveBeenCalled();
     });

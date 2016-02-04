@@ -24,6 +24,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     rootScope = $rootScope;
     q = $q;
     httpBackend = $httpBackend;
+
     linesOfCredit = [{
       id: 'id',
       type: 'retail',
@@ -45,16 +46,13 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     };
     dialogMock = {
       close: function(){
-        return {
-          then: function(callback){
-            callback();
-          }
-        };
-      }
-    };
+          angular.noop();
+        }
+      };
+
     $dialogMock = {
-      messageBox: function(){
-        return {open: angular.noop};
+      open: function () {
+        angular.noop();
       }
     };
 
@@ -71,9 +69,11 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     };
 
     httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
+    httpBackend.whenGET('views/modals/messageBox.html').respond($q.when({}));
 
     RequestCreditIncreaseCtrl = $controller('RequestCreditIncreaseCtrl', {
       $scope: scope,
+      $uibModal: $dialogMock,
       $uibModalInstance: dialogMock,
       CreditIncrease: creditIncreaseMock,
       kissMetricInfo: mockKissMetricInfo
@@ -205,10 +205,10 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       $valid: true
     };
     scope.selector.selectedLineOfCredit = linesOfCredit[0];
-    spyOn($dialogMock, 'messageBox').and.callThrough();
+    spyOn($dialogMock, 'open').and.callThrough();
     scope.confirmRequest();
     successCallback();
-    expect($dialogMock.messageBox).toHaveBeenCalled();
+    expect($dialogMock.open).toHaveBeenCalled();
   });
 
   it('should return true when user clicks on Request Credit Increase -Temp/Permanent. ', function(){

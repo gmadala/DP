@@ -11,16 +11,14 @@ describe('Directive: nxgBusinessField', function () {
     module('nextgearWebApp', function($provide) {
       $provide.decorator('$uibModal', function($delegate) {
         return {
-          dialog: function () {
+          open: function() {
             return {
-              open: function () {
-                return {
-                  then: function (success) {
-                    success(fakeBiz);
-                  }
-                };
+              result: {
+                then: function (callback) {
+                  callback(true);
+                }
               }
-            };
+            }
           }
         };
       });
@@ -75,22 +73,22 @@ describe('Directive: nxgBusinessField', function () {
     expect(element.find('input').attr('id')).toBe('fooInput');
   });
 
-  it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($dialog) {
-    spyOn($dialog, 'open').and.callThrough();
+  it('should set the searchBuyersMode for the search to false if field is in sellers mode', inject(function ($uibModal) {
+    spyOn($uibModal, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(false);
+    expect($uibModal.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(false);
   }));
 
-  it('should wait for 200ms before opening dialog to let click event finish', inject(function ($dialog) {
-    spyOn($dialog, 'open').and.callThrough();
+  it('should wait for 200ms before opening dialog to let click event finish', inject(function ($uibModal) {
+    spyOn($uibModal, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
     expect(timeout).toHaveBeenCalledWith(angular.noop, 200);
   }));
 
-  it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($dialog) {
-    spyOn($dialog, 'open').and.returnValue({
+  it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($uibModal) {
+    spyOn($uibModal, 'open').and.returnValue({
       open: function () {
         return {
           then: function (success) {
@@ -107,7 +105,7 @@ describe('Directive: nxgBusinessField', function () {
   }));
 
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',
-    inject(function ($dialog, $compile, $rootScope) {
+    inject(function ($uibModal, $compile, $rootScope) {
     element = angular.element('<form name="myForm">' +
       '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
@@ -116,10 +114,10 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'open').and.callThrough();
+    spyOn($uibModal, 'open').and.callThrough();
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
-    expect($dialog.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
+    expect($uibModal.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
   }));
 
   it('should respect the ng-disabled attribute on the original input', function () {
@@ -138,7 +136,7 @@ describe('Directive: nxgBusinessField', function () {
     expect(iScope.openBusinessSearch.calls.count()).toBe(1);
   });
 
-  it('should only open business dialog if input is valid', inject(function($dialog, $compile, $rootScope) {
+  it('should only open business dialog if input is valid', inject(function($uibModal, $compile, $rootScope) {
     element = angular.element('<form name="myForm">' +
       '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
@@ -147,13 +145,13 @@ describe('Directive: nxgBusinessField', function () {
     element = $compile(element)(scope);
     $rootScope.$digest();
 
-    spyOn($dialog, 'open').and.callThrough();
+    spyOn($uibModal, 'open').and.callThrough();
     element.find('button').trigger('click');
-    expect($dialog.open).not.toHaveBeenCalled();
+    expect($uibModal.open).not.toHaveBeenCalled();
 
     element.find('input').val('ab');
     element.find('button').trigger('click');
-    expect($dialog.open).not.toHaveBeenCalled();
+    expect($uibModal.open).not.toHaveBeenCalled();
 
     element.find('input').val(fakeBiz);
     element.find('button').trigger('click');

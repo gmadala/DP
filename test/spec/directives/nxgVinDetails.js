@@ -171,16 +171,14 @@ describe('Directive: NxgVinDetails', function () {
         });
 
         spyOn($dialog, 'open').and.returnValue({
-          open: function() {
-            return {
-              then: function(success) {
-                if (userHasChosen) {
-                  return success($q.when(dialogChoice));
-                } else {
-                  return success($q.when());
-                }
+          result: {
+            then: function (success) {
+              if (userHasChosen) {
+                return success($q.when(dialogChoice));
+              } else {
+                return success($q.when());
               }
-            };
+            }
           }
         });
       }));

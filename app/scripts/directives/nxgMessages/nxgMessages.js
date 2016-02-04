@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgMessages', function ($uibModal, $uibModalInstance, messages) {
-    var uibModal = $uibModal,
-      uibModalInstance = $uibModalInstance;
+  .directive('nxgMessages', function ($uibModal, messages) {
+    var uibModal = $uibModal;
 
     return {
       restrict: 'A',
@@ -32,7 +31,7 @@ angular.module('nextgearWebApp')
               currentDialog = null;
             });
           } else if (!hasMessages && currentDialog) {
-            uibModalInstance.close();
+            currentDialog.close();
           }
         });
       }

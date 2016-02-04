@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Controller: FloorCarCtrl', function () {
+describe('Controller: FloorCarCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
@@ -146,17 +146,8 @@ fdescribe('Controller: FloorCarCtrl', function () {
         scope.form = mockForm;
         spyOn(dialog, 'open').and.returnValue({
           result: {
-            then: function () {
-              return {
-                then: function (s, f) {
-                  if (succeed) {
-                    s(true);
-                  } else {
-                    s(false);
-                  }
-
-                }
-              };
+            then: function (callback) {
+              callback(succeed);
             }
           }
         });
@@ -193,7 +184,7 @@ fdescribe('Controller: FloorCarCtrl', function () {
         expect(dialog.open.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
       });
 
-      fit('should call reallySubmit() if user confirms', function() {
+      it('should call reallySubmit() if user confirms', function() {
         spyOn(scope, 'reallySubmit').and.returnValue();
         scope.submit();
         expect(scope.reallySubmit).toHaveBeenCalled();
@@ -248,12 +239,11 @@ fdescribe('Controller: FloorCarCtrl', function () {
       });
 
       it('should do nothing if the flooring fails', function() {
-        spyOn(dialog, 'messageBox').and.returnValue();
         $httpBackend.whenPOST('/floorplan/v1_1/create')
           .respond(function() {
             return [200, { Success: false , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
         });
-        expect(dialog.messageBox).not.toHaveBeenCalled();
+        expect(dialog.open).not.toHaveBeenCalled();
       })
     });
 
@@ -283,11 +273,9 @@ fdescribe('Controller: FloorCarCtrl', function () {
       });
 
       it('should launch a messagebox box', function() {
-        spyOn(dialog, 'messageBox').and.callThrough();
+        spyOn(dialog, 'open').and.callThrough();
         scope.cancel();
-        expect(dialog.messageBox).toHaveBeenCalledWith('Cancel',
-        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary btn-sm'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary btn-sm'} ]);
+        expect(dialog.open).toHaveBeenCalled();
       });
     });
   };

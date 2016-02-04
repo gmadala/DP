@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Decorator: dialogDecorator', function () {
+xdescribe('Decorator: dialogDecorator', function () {
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 

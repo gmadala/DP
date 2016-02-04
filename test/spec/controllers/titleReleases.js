@@ -43,10 +43,14 @@ describe('Controller: TitleReleasesCtrl', function () {
     };
 
     dialogMock = {
-      messageBox: function() {
+      open: function() {
         return {
-          open: angular.noop
-        };
+          result: {
+            then: function (callback) {
+              callback();
+            }
+          }
+        }
       }
     };
 
@@ -61,7 +65,7 @@ describe('Controller: TitleReleasesCtrl', function () {
       $scope: scope,
       TitleReleases: titleReleasesMock,
       Floorplan: floorplanMock,
-      $dialog: dialogMock,
+      $uibModal: dialogMock,
       dealerCustomerSupportPhone: mockCustomerSupportPhone
     });
 
@@ -308,16 +312,16 @@ describe('Controller: TitleReleasesCtrl', function () {
   });
 
   it('should display message box when release is unavailable', function() {
-    spyOn(dialogMock, 'messageBox').and.callThrough();
+    spyOn(dialogMock, 'open').and.callThrough();
     scope.titleReleaseUnavailable().then(function () {
-      expect(dialogMock.messageBox).toHaveBeenCalled();
+      expect(dialogMock.open).toHaveBeenCalled();
     });
   });
 
   it('should display message box when release limit method is called', function() {
-    spyOn(dialogMock, 'messageBox').and.callThrough();
+    spyOn(dialogMock, 'open').and.callThrough();
     scope.titleReleaseLimitReached();
-    expect(dialogMock.messageBox).toHaveBeenCalled();
+    expect(dialogMock.open).toHaveBeenCalled();
   });
 
 });
