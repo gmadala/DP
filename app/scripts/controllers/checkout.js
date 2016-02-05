@@ -232,7 +232,7 @@ angular.module('nextgearWebApp')
                 }
               }
             };
-           $uibModal.open(dialogOptions).result.then(function (test) {
+            $uibModal.open(dialogOptions).result.then(function () {
               Payments.clearPaymentQueue();
             });
           }

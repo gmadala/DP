@@ -24,9 +24,9 @@ describe('Directive: nxgBusinessField', function () {
       });
 
       timeout = jasmine.createSpy().and.returnValue({
-        then: function(callback) {
-          return callback();
-        }
+          then: function (callback) {
+            return callback();
+          }
       });
 
       timeout.cancel = jasmine.createSpy();
@@ -88,15 +88,15 @@ describe('Directive: nxgBusinessField', function () {
   }));
 
   it('should only open one modal, even if openBusinessSearch() is called twice', inject(function ($uibModal) {
-    spyOn($uibModal, 'open').and.returnValue({
-      open: function () {
-        return {
+    spyOn($uibModal, 'open').and.callFake(function () {
+      return {
+        result: {
           then: function (success) {
             // Don't call callback, since that simulates closing the modal,
             // which we don't want immediately in this test
           }
-        };
-      }
+        }
+      };
     });
     element.find('input').val('fooBiz');
     element.find('input').scope().openBusinessSearch();
@@ -155,7 +155,7 @@ describe('Directive: nxgBusinessField', function () {
 
     element.find('input').val(fakeBiz);
     element.find('button').trigger('click');
-    expect(scope.model.bizness).toBe(fakeBiz);
+    expect(scope.model.bizness).toBe(true);
   }));
 
   it('should clear values when it becomes disabled', function () {

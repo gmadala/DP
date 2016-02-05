@@ -95,7 +95,7 @@ angular.module('nextgearWebApp')
         // Delay by 200ms (almost unnoticeable) so the user's click event has time to complete
         // before the popup opens, potentially cancelling the popup.
         $timeout(angular.noop, 200).then(function() {
-          return uibModal.open(dialogOptions);
+          return uibModal.open(dialogOptions).result;
         }).then(function(selectedBusiness) {
           if (selectedBusiness) {
             // replace any existing query text with the selected business name

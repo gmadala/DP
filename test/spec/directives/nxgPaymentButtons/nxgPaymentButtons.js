@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Directive: nxgPaymentButtons', function () {
+describe('Directive: nxgPaymentButtons', function () {
 
   var element,
     scope,
@@ -300,7 +300,7 @@ fdescribe('Directive: nxgPaymentButtons', function () {
 
   });
 
-  fdescribe('payment mode (payoff previously scheduled)', function () {
+  describe('payment mode (payoff previously scheduled)', function () {
     var dialog,
     iScope;
 
@@ -323,8 +323,12 @@ fdescribe('Directive: nxgPaymentButtons', function () {
 
     it('should auto-cancel the previously scheduled payoff when a payment is added', function() {
       spyOn(dialog, 'open').and.returnValue({
-        open: angular.noop
-      });
+        result: {
+          then: function () {
+            angular.noop();
+          }
+        }
+    });
       iScope.togglePaymentInQueue(false);
       expect(dialog.open).toHaveBeenCalled();
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
@@ -463,7 +467,7 @@ fdescribe('Directive: nxgPaymentButtons', function () {
 
   });
 
-  fdescribe('payoff mode (payment previously scheduled)', function () {
+  describe('payoff mode (payment previously scheduled)', function () {
     var dialog,
         iScope;
 
