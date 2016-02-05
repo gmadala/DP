@@ -6,7 +6,7 @@ function PromosCtrl($scope, api) {
 
   var getEventSalesData = function() {
 
-    api.request('GET',api.ngenContentLink('eventsales/getall'),null,null,true, api.ngenSuccessHandler).then(
+    api.request('GET',api.ngenContentLink('eventsales'),null,null,true, api.ngenSuccessHandler).then(
       function (result) {
         $scope.promos = result;
       }

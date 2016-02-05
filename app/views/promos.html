@@ -1,28 +1,35 @@
 <div class="promos">
-  <p>See your local representative for more information regarding these events.</p>
-  <section class="col-md-12 well settings-well financial-table">
+  <h5 class="promo-contact pull-right" translate>Please contact your local representative for any details about the promotions and/or event sales listed below.</h5>
+  <section class="col-md-12 well settings-well fincial-table">
     <h2 class="well-title">
       <span translate>Promotions / Event Sales</span>
     </h2>
     <div class="well-column-header promo-header col-xs-12">
-      <h6 class="col-xs-3 promo-header-item" translate>Location</h6>
-      <h6 class="col-xs-3 promo-header-item" translate>Description</h6>
-      <h6 class="col-xs-3 promo-header-item" translate>Sales Date</h6>
-      <h6 class="col-xs-3 promo-header-item" translate>Terms and Conditions</h6>
+      <h6 class="col-xs-4 promo-header-item" translate>Description</h6>
+      <h6 class="col-xs-1 promo-header-item" translate>Date</h6>
+      <h6 class="col-xs-7 promo-header-item" translate>Terms and Conditions</h6>
     </div>
     <div class="promo-container">
-      <div class="promo-item row" ng-repeat="promo in promos | filter: { IsActive: true }">
-        <div class="col-xs-3">{{promo.auctionName}}</div>
-        <div class="col-xs-3">{{promo.name}}</div>
-        <div class="col-xs-3">{{promo.salesDate}}</div>
-        <div class="col-xs-3">{{promo.termsAndConditions}}</div>
+      <div class="promo-item row" ng-repeat="promo in promos | filter: { terminated: false }">
+        <div class="col-xs-4">
+          <div class="promo-auction-name">{{promo.auctionName}}</div>
+          <div class="promo-name">{{promo.name}}</div>
+        </div>
+        <div class="col-xs-1">
+          <div class="promo-date">{{promo.salesDate}}</div>
+        </div>
+        <div class="col-xs-7">{{promo.termsAndConditions}}</div>
       </div>
       <div collapse="isCollapsed" ng-init="isCollapsed = true">
-        <div class="promo-item inactive row" ng-repeat="promo in promos  | filter: { IsActive: false }">
-          <div class="col-xs-3">{{promo.auctionName}}</div>
-          <div class="col-xs-3">{{promo.name}}</div>
-          <div class="col-xs-3">{{promo.salesDate}}</div>
-          <div class="col-xs-3">{{promo.termsAndConditions}}</div>
+        <div class="promo-item inactive row" ng-repeat="promo in promos  | filter: { terminated: true }">
+          <div class="col-xs-4">
+            <div class="promo-auction-name">{{promo.auctionName}}</div>
+            <div class="promo-name">{{promo.name}}</div>
+          </div>
+          <div class="col-xs-1">
+            <div class="promo-date">{{promo.salesDate}}</div>
+          </div>
+          <div class="col-xs-7">{{promo.termsAndConditions}}</div>
         </div>
       </div>
     </div>
