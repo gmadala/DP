@@ -58,6 +58,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
     spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
 
     detailsMock = { // include only the mock data the controller explicitly grabs.
+      IsShowExtendLink : true,
       VehicleInfo: {
         Make: 'Toyota',
         Model: 'Corolla',
@@ -147,6 +148,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
     };
 
     vehicleDetailsMock = {
+      IsShowExtendLink : true,
       getDetails: function() {
         return $q.when(detailsMock);
       },
@@ -219,7 +221,10 @@ describe('Controller: VehicleDetailsCtrl', function () {
     };
 
     floorplanMock = {
-      editInventoryAddress: angular.noop
+      editInventoryAddress: angular.noop,
+      determineFloorPlanExtendability  : function() {
+      return $q.when(detailsMock);
+     }
     };
 
     dialog = $dialog;
@@ -284,8 +289,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
     });
 
     it('should have a showExtendLink function that controls display of the request extension link', function() {
+      scope.isShowExtendLink = false;
       expect(scope.showExtendLink()).toBe(false);
-      detailsMock.FinancialSummaryInfo.NextPaymentAmount = detailsMock.FinancialSummaryInfo.TotalOutstanding = 500;
+      scope.isShowExtendLink = true;
       expect(scope.showExtendLink()).toBe(true);
     });
 

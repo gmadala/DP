@@ -163,6 +163,12 @@ angular.module('nextgearWebApp')
       },
       addComment: function(Comment) {
         return api.request('POST', '/floorplan/comment', Comment);
+      },
+      determineFloorPlanExtendability : function (floorPlanIds){
+        var fpArray = [];
+        fpArray.push(floorPlanIds);
+        var fpJSON = JSON.stringify(fpArray);
+        return api.request('POST',api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'),fpJSON,null,true, api.ngenSuccessHandler);
       }
     };
   });

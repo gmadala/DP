@@ -681,7 +681,7 @@ angular.module('nextgearWebApp')
 
     $scope.manualLookupValues=[
       { id:'', name: gettextCatalog.getString('Select Manual Lookup Values')},
-      { id:'bb', name: gettextCatalog.getString('NextGear Book Wholesale Values')},
+      { id:'bb', name: gettextCatalog.getString('NextGear Capital Book Wholesale Values')},
       { id:'mmr', name: gettextCatalog.getString('MMR Wholesale Values')}
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
