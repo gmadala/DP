@@ -31,14 +31,20 @@
           </div>
 
           <div class="form-row">
-            <label for="disDate" class="input-title date-search-label" translate>Date Search</label>
-            <input id="disDate"
-                    name="disDate"
-                    nxg-date-field
-                    ng-model="data.disDate"
-                    date-allow="past"
-                    ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past || disFormValidity.disDate.$error.date }"
-                    required />
+            <div class="date-field date-picker">
+              <label for="disDate" class="input-title date-search-label" translate>Date Search</label>
+              <input type="text" uib-datepicker-popup="{{dateFormat}}"
+                     ng-model="data.disDate"
+                     max-date="maxDate"
+                     show-weeks="false"
+                     show-button-bar="false"
+                     is-open="datePicker.opened"
+                     ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past || disFormValidity.disDate.$error.date }"
+                     id="disDate"
+                     name="disDate"
+                     required>
+              <button tabindex="-1" type="button" class="btn-unstyle" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+            </div>
           </div>
           <div class="form-row btn-group">
             <button class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>

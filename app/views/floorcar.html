@@ -90,27 +90,35 @@
         </div>
       </div>
 
-      <label for="inputPurchaseDate" class="input-title" translate>Purchase Date</label>
-      <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.UnitPurchaseDate" min-date="dealerMinDate" max-date="maxDate" show-weeks="false">
-      <input id="inputPurchaseDate"
-             name="inputPurchaseDate"
-             ng-model="data.UnitPurchaseDate"
-             ng-pattern="isYear"
-             nxg-date-field date-allow="past"
-             required ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) || validity.inputPurchaseDate.$error.past || validity.inputPurchaseDate.$error.date || validity.inputPurchaseDate.$error.pattern }"/>
-      <label for="inputPurchaseDate" class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.required || validity.inputPurchaseDate.$error.date" translate>
-        Please enter a Valid Purchase Date.
-      </label>
-      <label for="inputPurchaseDate"
-             class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.pattern && !validity.inputPurchaseDate.$error.date" translate>
-        Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
-      </label>
-      <label for="inputPurchaseDate" class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.past" translate>
-        Please enter a Purchase Date in the past.
-      </label>
+
+
+      <div class="date-field date-picker">
+        <label for="purchaseDealerDatePicker" class="input-title" translate>Purchase Date</label>
+        <input type="text" uib-datepicker-popup="{{dateFormat}}"
+               ng-model="data.UnitPurchaseDate"
+               min-date="dealerMinDate"
+               max-date="maxDate"
+               show-weeks="false"
+               show-button-bar="false"
+               is-open="datePicker.opened"
+               id="purchaseDealerDatePicker"
+               readonly
+               required>
+        <button tabindex="-1" type="button" class="btn-unstyle" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+        <label for="purchaseDealerDatePicker" class="text-error"
+               ng-show="validity.purchaseDealerDatePicker.$error.required || validity.purchaseDealerDatePicker.$error.date" translate>
+          Please enter a Valid Purchase Date.
+        </label>
+        <label for="purchaseDealerDatePicker"
+               class="text-error"
+               ng-show="validity.purchaseDealerDatePicker.$error.pattern && !validity.purchaseDealerDatePicker.$error.date" translate>
+          Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
+        </label>
+        <label for="purchaseDealerDatePicker" class="text-error"
+               ng-show="validity.purchaseDealerDatePicker.$error.past" translate>
+          Please enter a Purchase Date in the past.
+        </label>
+      </div>
 
       <label for="inputBiz" class="input-title" translate>Seller</label>
       <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">

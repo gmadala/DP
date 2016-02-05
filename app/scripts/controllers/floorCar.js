@@ -19,6 +19,14 @@ angular.module('nextgearWebApp')
     $scope.dealerMinDate = moment().subtract(364, 'days');
     $scope.auctionMinDate = moment().subtract(7, 'days');
     $scope.maxDate = new Date();
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
+    $scope.dateFormat = "MM/dd/yyyy";
+    $scope.isDealer = User.isDealer();
 
     //$scope.form = <form directive's controller, assigned by view>
 

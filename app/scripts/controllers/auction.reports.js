@@ -16,6 +16,15 @@ angular.module('nextgearWebApp')
     $scope.data = null;
     $scope.isManufacturer = User.isManufacturer() ;
 
+    $scope.maxDate = new Date();
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
+    $scope.dateFormat = "MM/dd/yyyy";
+
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
         $scope.kissMetricData = result;

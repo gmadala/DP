@@ -649,7 +649,7 @@ input[type="radio"] {
 
   .btn-unstyle {
     position: absolute;
-    top: 10px;
+    top: 24px;
     right: 7px;
     margin: 0;
   }
@@ -657,6 +657,12 @@ input[type="radio"] {
   .btn-unstyle:hover, .btn-unstyle:focus {
     .icon-calendar svg {
       fill: $highlight;
+    }
+  }
+  .dropdown-menu thead tr:first-child{
+    border-bottom: 1px solid #bbb;
+    strong{
+      font-size: 1.75em;
     }
   }
 }

@@ -126,25 +126,34 @@
         </label>
       </div>
 
-      <label for="inputSaleDate" class="input-title" translate>Sales Date</label>
-
-      <input id="inputSaleDate" name="inputSaleDate" ng-model="data.UnitPurchaseDate"
-             nxg-date-field date-allow="past"
-             required
-             ng-pattern="isYear"
-             ng-class="{ 'nxg-invalid': validity.inputSaleDate.$error.required || (validity.inputSaleDate.$error.nxgRequires && !validity.inputSaleDate.$error.required) || validity.inputSaleDate.$error.past || validity.inputSaleDate.$error.pattern || validity.inputSaleDate.$error.date }" />
-      <label for="inputSaleDate" class="text-error"
-             ng-show="validity.inputSaleDate.$error.required || validity.inputSaleDate.$error.date" translate>
-        Please enter a Valid Sales Date.
-      </label>
-      <label for="inputPurchaseDate" class="text-error"
-             ng-show="validity.inputSaleDate.$error.pattern && !validity.inputSaleDate.$error.date" translate>
-          Please enter a Valid Sales Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
+      <div class="date-picker date-field">
+        <label for="purchaseAuctionDatePicker" class="input-title" translate>Sales Date</label>
+        <input type="text" uib-datepicker-popup="{{dateFormat}}"
+               ng-model="data.UnitPurchaseDate"
+               min-date="auctionMinDate"
+               max-date="maxDate"
+               show-weeks="false"
+               show-button-bar="false"
+               is-open="datePicker.opened"
+               id="purchaseAuctionDatePicker"
+               name="purchaseAuctionDatePicker"
+               readonly
+               required>
+        <button tabindex="-1" type="button" class="btn-unstyle" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+        <label for="purchaseAuctionDatePicker" class="text-error"
+               ng-show="validity.purchaseAuctionDatePicker.$error.required || validity.purchaseAuctionDatePicker.$error.date" translate>
+          Please enter a Valid Sales Date.
         </label>
-      <label for="inputSaleDate" class="text-error"
-             ng-show="validity.inputSaleDate.$error.past" translate>
-        Please enter a Sales Date in the past.
-      </label>
+        <label for="purchaseAuctionDatePicker" class="text-error"
+               ng-show="validity.purchaseAuctionDatePicker.$error.pattern && !validity.purchaseAuctionDatePicker.$error.date" translate>
+          Please enter a Valid Sales Date Year between {{auctionMinDate}} and {{maxDate}}.
+        </label>
+        <label for="purchaseAuctionDatePicker" class="text-error"
+               ng-show="validity.purchaseAuctionDatePicker.$error.past" translate>
+          Please enter a Sales Date in the past.
+        </label>
+
+      </div>
       <p>
         <span class="scale-description" translate>The actual sale date must be used when flooring a car</span>
         <button class="btn-help inline"
