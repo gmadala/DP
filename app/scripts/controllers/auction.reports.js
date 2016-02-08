@@ -23,7 +23,7 @@ angular.module('nextgearWebApp')
     $scope.openDatePicker = function() {
       $scope.datePicker.opened = true;
     };
-    $scope.dateFormat = "MM/dd/yyyy";
+    $scope.dateFormat = 'MM/dd/yyyy';
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){

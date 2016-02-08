@@ -12,6 +12,32 @@ angular.module('nextgearWebApp')
 
     $scope.data = null;
 
+    $scope.dateFormat = 'MM/dd/yyyy';
+    $scope.dealerStartDatePicker = {
+      opened: false
+    };
+    $scope.dealerEndDatePicker = {
+      opened: false
+    };
+    $scope.openDealerStartDatePicker = function() {
+      $scope.dealerStartDatePicker.opened = true;
+    };
+    $scope.openDealerEndDatePicker = function() {
+      $scope.dealerEndDatePicker.opened = true;
+    };
+
+    $scope.paidStartDatePicker = {
+      opened: false
+    };
+    $scope.paidEndDatePicker = {
+      opened: false
+    };
+    $scope.openPaidStartDatePicker = function() {
+      $scope.paidStartDatePicker.opened = true;
+    };
+    $scope.openPaidEndDatePicker = function() {
+      $scope.paidEndDatePicker.opened = true;
+    };
     $scope.expInvStatus = {
       'type': 'select',
       'value': gettextCatalog.getString('All'),

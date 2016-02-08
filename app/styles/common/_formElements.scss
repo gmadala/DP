@@ -653,6 +653,19 @@ input[type="radio"] {
     right: 7px;
     margin: 0;
   }
+  .btn-calendar {
+    position: absolute;
+    top: 57%;
+    right: 9%;
+    margin: 0;
+  }
+
+  .reports-btn-calendar {
+    position: absolute;
+    top: 57%;
+    right: -8%;
+    margin: 0;
+  }
 
   .btn-unstyle:hover, .btn-unstyle:focus {
     .icon-calendar svg {
@@ -891,4 +904,31 @@ ul.files-container li .file-delete:hover{
   background: url("../img/file.png") no-repeat center;
   background-size: contain;
   display: block !important;
+}
+.search-date-picker {
+     button span{
+       top: 58%;
+       right: 8%;
+       margin: 0;
+     }
+     input{
+       width: 85%;
+     }
+}
+
+.reports-search-date-picker {
+  button span {
+    top: 58%;
+    right: 8%;
+  }
+  input {
+    width: 137%;
+  }
+  .dropdown-menu{
+    display: block;
+    top: 63px;
+    left: 15px;
+    padding: 0px;
+    height: 279px;
+  }
 }

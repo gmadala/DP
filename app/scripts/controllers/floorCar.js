@@ -25,7 +25,15 @@ angular.module('nextgearWebApp')
     $scope.openDatePicker = function() {
       $scope.datePicker.opened = true;
     };
-    $scope.dateFormat = "MM/dd/yyyy";
+    $scope.isDealer = User.isDealer();
+
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
+    $scope.dateFormat = 'MM/dd/yyyy';
     $scope.isDealer = User.isDealer();
 
     //$scope.form = <form directive's controller, assigned by view>
