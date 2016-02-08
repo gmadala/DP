@@ -59,7 +59,6 @@ module.exports = {
       defaultDirectory = '__default';
 
     function serveContent(file, req, res) {
-      console.log(req.url);
       var authorization, auctionAuthorization;
       // for authentication, dynamically create the response.
       if (contains(req.url, 'UserAccount\/v1_1\/Authenticate')) {
