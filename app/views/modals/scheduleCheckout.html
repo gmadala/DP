@@ -9,18 +9,24 @@
   <form name="dateForm" class="modal-inner">
     <h3 translate>Schedule Date</h3>
     <p><span translate>Select a date from the picker below</span>:</p>
-    <input id="inputScheduleDate" name="inputScheduleDate"
-    class="date-inline"
-           nxg-date-field before-show-day="checkDate(date)"
-           hide-placeholder="true"
-           ng-model="model.selectedDate"
-           required nxg-requires="checkDate(model.selectedDate)"
-           ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
+    <div class="date-field date-picker col-xs-5 custom reports-search-date-picker">
+      <input id="inputScheduleDate" name="inputScheduleDate"
+             uib-datepicker-popup="{{dateFormat}}"
+             date-disabled="disabled(date, mode)"
+             hide-placeholder="true"
+             ng-model="model.selectedDate"
+             show-weeks="false"
+             show-button-bar="false"
+             is-open="datePicker.opened" readonly
+             required
+             ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
+      <button tabindex="-1" type="button" class="btn-unstyle checkout-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+    </div>
     <button ng-click="commit()" ng-disabled="submitInProgress" class="hide"></button>
 
     <div class="row">
       <label for="inputScheduleDate" class="text-error"
-            ng-show="validity.inputScheduleDate.$error.required" translate>
+                    ng-show="validity.inputScheduleDate.$error.required" translate>
         Please select a schedule date.
       </label>
       <label for="inputScheduleDate" class="text-error"

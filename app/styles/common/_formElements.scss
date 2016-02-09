@@ -667,6 +667,13 @@ input[type="radio"] {
     margin: 0;
   }
 
+  .checkout-btn-calendar {
+    position: absolute;
+    top: 27%;
+    right: -6%;
+    margin: 0;
+  }
+
   .btn-unstyle:hover, .btn-unstyle:focus {
     .icon-calendar svg {
       fill: $highlight;
