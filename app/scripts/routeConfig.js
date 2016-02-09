@@ -191,7 +191,7 @@
       })
       .state('promos', {
         url: '/promos',
-        templateUrl: '/views/promos.html',
+        templateUrl: 'views/promos.html',
         controller: 'PromosCtrl',
         data:{
           pageId: 'Promos',
