@@ -55,6 +55,14 @@ describe('Directive: navBar', function () {
         },
         isLoggedIn: function() {
           return true;
+        },
+        getFeatures: function(){
+          return {
+            autoPay: {enabled: true},
+            addBankAccount: {enabled: true},
+            editBankAccount: {enabled: true},
+            uploadDocuments: {enabled: true}
+          };
         }
       };
       aMock = {
@@ -66,6 +74,15 @@ describe('Directive: navBar', function () {
         },
         isLoggedIn: function() {
           return true;
+        },
+        getFeatures: function(){
+          return {
+            autoPay: {enabled: true},
+            addBankAccount: {enabled: true},
+            editBankAccount: {enabled: true},
+            uploadDocuments: {enabled: true},
+            eventSales: {enabled: true}
+          };
         }
       };
 

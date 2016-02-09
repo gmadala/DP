@@ -50,12 +50,20 @@ angular.module('nextgearWebApp')
         User.getInfo().then(function (info) {
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
+          $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : false;
           if ($scope.isUnitedStates) {
             dealerLinks.secondary.splice(1, 0, {
               name: gettextCatalog.getString('Value Lookup'),
               href: '#/valueLookup',
               activeWhen: 'valueLookup',
             });
+            if($scope.eventSalesEnabled){
+              dealerLinks.primary.push({
+                name: gettextCatalog.getString('Promos'),
+                href: '#/promos',
+                activeWhen: 'promos'
+              });
+            }
           }
           if ($scope.displayTitleRelease) {
             dealerLinks.primary.splice(3, 0, {
