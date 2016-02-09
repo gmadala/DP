@@ -5,32 +5,57 @@
       <span translate>Promotions / Event Sales</span>
     </h2>
     <div class="well-column-header promo-header col-xs-12">
-      <h6 class="col-xs-4 promo-header-item" translate>Description</h6>
-      <h6 class="col-xs-1 promo-header-item" translate>Date</h6>
-      <h6 class="col-xs-7 promo-header-item" translate>Terms and Conditions</h6>
+      <h6 class="col-xs-5 promo-header-item" translate>Location</h6>
+      <h6 class="col-xs-5 promo-header-item" translate>Description</h6>
+      <h6 class="col-xs-2 promo-header-item" translate>Date</h6>
     </div>
     <div class="promo-container">
       <div class="promo-item row" ng-repeat="promo in promos | filter: { terminated: false }">
-        <div class="col-xs-4">
-          <div class="promo-auction-name">{{promo.auctionName}}</div>
+        <div class="col-xs-5">
+          <div>
+            <span class="paired-media"
+                  ng-class="{ 'point-up':!tcCollapsed, 'point-down':tcCollapsed }"
+                  nxg-icon="icon-chevron"
+                  ng-click="tcCollapsed = !tcCollapsed"
+                  ng-show="promo.termsAndConditions"></span>
+            <span class="promo-auction-name" ng-class="{ 'promo-empty-tc':!promo.termsAndConditions }">{{promo.auctionName}}</span>
+          </div>
+
+        </div>
+        <div class="col-xs-5">
           <div class="promo-name">{{promo.name}}</div>
         </div>
-        <div class="col-xs-1">
+        <div class="col-xs-2">
           <div class="promo-date">{{promo.salesDate}}</div>
         </div>
-        <div class="col-xs-7">{{promo.termsAndConditions}}</div>
+        <div collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
+          <span style="font-weight: bold;"translate>Details: </span>
+          {{promo.termsAndConditions}}
+        </div>
       </div>
       <div collapse="isCollapsed" ng-init="isCollapsed = true">
         <div class="promo-item inactive row" ng-repeat="promo in promos  | filter: { terminated: true }">
-          <div class="col-xs-4">
-            <div class="promo-auction-name">{{promo.auctionName}}</div>
+          <div class="col-xs-5">
+            <div>
+            <span class="paired-media"
+                  ng-class="{ 'point-up':!tcCollapsed, 'point-down':tcCollapsed }"
+                  nxg-icon="icon-chevron"
+                  ng-click="tcCollapsed = !tcCollapsed"
+                  ng-show="promo.termsAndConditions"></span>
+              <span class="promo-auction-name" ng-class="{ 'promo-empty-tc':!promo.termsAndConditions }">{{promo.auctionName}}</span>
+            </div>
+
+          </div>
+          <div class="col-xs-5">
             <div class="promo-name">{{promo.name}}</div>
           </div>
-          <div class="col-xs-1">
+          <div class="col-xs-2">
             <div class="promo-date">{{promo.salesDate}}</div>
           </div>
-          <div class="col-xs-7">{{promo.termsAndConditions}}</div>
-        </div>
+          <div collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
+            <span style="font-weight: bold;"translate>Details: </span>
+            {{promo.termsAndConditions}}
+          </div>
       </div>
     </div>
   </section>
