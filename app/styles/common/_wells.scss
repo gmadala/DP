@@ -258,21 +258,17 @@ p.no-results {
       margin-top: 0;
     }
   }
-  .promo-auction-name{
-    font-size: 14px;
-    padding-left: 5px;
-  }
 
   .promo-terms-conditions{
-    padding: 5px 5px 5px 50px;
+    padding: 5px 15px;
   }
 
   .paired-media{
     cursor: pointer;
   }
-
-  .promo-empty-tc{
-    margin-left: 30px;
+  .promo-details{
+    color: #3496c7;
+    cursor: pointer;
   }
 }
 .promo-header{
@@ -285,4 +281,5 @@ p.no-results {
 }
 .promo-contact{
   padding-bottom: 9px;
+  color: black;
 }
