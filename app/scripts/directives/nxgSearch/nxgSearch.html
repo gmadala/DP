@@ -35,7 +35,7 @@
                       ng-options="o.value as o.label for o in filterOptions"></select>
             </div>
           </div>
-          <div class="col-xs-12" style="padding: 0;" ng-show="dateRangeShown">
+          <div class="col-xs-6" style="padding: 0;" ng-show="dateRangeShown">
             <div class="range">
               <div class="date-field date-picker col-xs-6 custom search-date-picker">
                 <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>
@@ -48,7 +48,7 @@
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
                 <button tabindex="-1" type="button" class="btn-unstyle btn-calendar" ng-click="openStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
               </div>
-              <div class="date-field date-picker col-xs-6 custom search-date-picker">
+              <div class="date-field date-picker col-xs-6 custom search-date-picker" style="margin-left:-27px;">
                 <label for="endDate" translate>End Date</label>
                 <input type="text" id="endDate" name="endDate"
                        uib-datepicker-popup="{{dateFormat}}"
@@ -60,7 +60,7 @@
                 <button tabindex="-1" type="button" class="btn-unstyle btn-calendar" ng-click="openEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
               </div>
             </div>
-            <label for="endDate" class="col-xs-6 text-error" ng-show="validity.$error.invalidDateRange" translate>
+            <label for="endDate" class="col-xs-7 text-error" ng-show="validity.$error.invalidDateRange" translate>
               Invalid date range
             </label>
           </div>
