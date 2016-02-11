@@ -667,6 +667,13 @@ input[type="radio"] {
     margin: 0;
   }
 
+  .disbursement-btn-calendar {
+    position: absolute;
+    top: 46%;
+    right: 13%;
+    margin: 0;
+  }
+
   .checkout-btn-calendar {
     position: absolute;
     top: 27%;
@@ -939,3 +946,10 @@ ul.files-container li .file-delete:hover{
     height: 279px;
   }
 }
+
+.disbursement-date-picker {
+  input {
+    width: 92%;
+  }
+}
+

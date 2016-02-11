@@ -19,13 +19,24 @@ angular.module('nextgearWebApp')
     $scope.dealerEndDatePicker = {
       opened: false
     };
+    $scope.upcomingDatePicker = {
+      opened: false
+    };
+    $scope.disbursementDatePicker = {
+      opened: false
+    };
     $scope.openDealerStartDatePicker = function() {
       $scope.dealerStartDatePicker.opened = true;
     };
     $scope.openDealerEndDatePicker = function() {
       $scope.dealerEndDatePicker.opened = true;
     };
-
+    $scope.openUpcomingDatePicker = function() {
+      $scope.upcomingDatePicker.opened = true;
+    };
+    $scope.openDisbursementDatePicker = function() {
+      $scope.disbursementDatePicker.opened = true;
+    };
     $scope.paidStartDatePicker = {
       opened: false
     };
@@ -38,6 +49,8 @@ angular.module('nextgearWebApp')
     $scope.openPaidEndDatePicker = function() {
       $scope.paidEndDatePicker.opened = true;
     };
+    $scope.maxDate = new Date();
+
     $scope.expInvStatus = {
       'type': 'select',
       'value': gettextCatalog.getString('All'),
