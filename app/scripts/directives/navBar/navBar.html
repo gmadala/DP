@@ -24,30 +24,38 @@
       </div>
 
       <div class="col-xs-3 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
-        <div class="align-right">{{ user.BusinessName | truncate:20 }}
+        <div class="align-right">{{ user.BusinessName | uppercase |truncate:20 }}
           <span class=ng-show="user.isDealer()">
             <span class="dealer-number"translate>
-              Dealer #:
+              Dealer #
             </span>
             {{ user.BusinessNumber }}
           </span></div>
-        <div class="align-right dropdown-toggle" id="settingsDropdown">
+        <div class="align-right dropdown-toggle dropdown-spaced" id="settingsDropdown">
           <a>
             <span translate>My Account</span>
             <span style="border-top: 4px solid #069" class="caret"></span>
           </a>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+        <ul class="dropdown-menu dropdown-bold" aria-labelledby="settingsDropdown">
           <li>
-            <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
-            <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
+            <a href="#/act/settings" ng-show="!user.isDealer()">
+              <span class="heavy" translate>Settings</span>
+            </a>
+            <a href="#/profile_settings" ng-show="user.isDealer()">
+              <span class="heavy" translate>Profile Settings</span>
+            </a>
           </li>
           <li>
-            <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
+            <a ng-href="#/account_management" ng-show="user.isDealer()">
+              <span class="heavy">Account Management</span>
+            </a>
           </li>
           <li class="menu-divider"></li>
           <li>
-            <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
+            <a href="javascript:void(0)" ng-click="user.logout()" translate>
+              <span class="heavy">Sign Out</span>
+            </a>
           </li>
         </ul>
       </div>

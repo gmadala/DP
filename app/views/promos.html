@@ -1,6 +1,14 @@
 <div class="promos">
-  <h5 class="promo-contact pull-right" translate>Please contact your local representative for any details about the promotions and/or event sales listed below.</h5>
-  <section class="col-md-12 well settings-well fincial-table">
+  <div class="info-block">
+    <div class="info-block-image">
+      <span nxg-icon="icon-info"></span>
+    </div>
+
+    <h6 class="info-block-text" translate>
+      Please contact your local representative for any details about the promotions and/or event sales listed below.
+    </h6>
+  </div>
+  <section class="col-md-12 well" ng-class="{'promo-well': !isCollapsed}">
     <h2 class="well-title">
       <span translate>Promotions / Event Sales</span>
     </h2>
@@ -51,7 +59,7 @@
           <div class="col-xs-1">
             <div class="promo-date">{{promo.salesDate}}</div>
           </div>
-          <div class="col-xs-2" style="text-align: right;">
+          <div class="col-xs-2 text-right">
             <div ng-click="tcCollapsed = !tcCollapsed"
                  ng-show="promo.termsAndConditions">
               <span class="promo-details" translate>Details</span>
