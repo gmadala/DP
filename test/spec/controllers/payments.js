@@ -489,7 +489,7 @@ describe('Controller: PaymentsCtrl', function () {
       };
       scope.$apply();
       expect(scope.fees.loading).toBe(false);
-      expect(scope.fees.results.length).toBe(0);
+      expect(scope.fees.results.length).toBeUndefined();
     }));
 
   });

@@ -243,7 +243,7 @@ angular.module('nextgearWebApp')
     var uibModalInstance = $uibModalInstance;
     //TODO changes in here for 3893
     $scope.payment = payment;
-    $scope.closeDialog = uibModalInstance.close();
+
     $scope.isEnglish = gettextCatalog.currentLanguage === 'en';
 
     Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
@@ -259,6 +259,10 @@ angular.module('nextgearWebApp')
         CanExtend: false
       };
     });
+
+    $scope.closeDialog = function(){
+      uibModalInstance.close();
+    };
 
     $scope.onConfirm = function() {
       onConfirm();

@@ -2,7 +2,7 @@
 
 angular.module('nextgearWebApp')
   .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext,
-                                           metric, segmentio, kissMetricInfo) {
+                                           metric, segmentio, kissMetricInfo, $sce) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
     var disclaimerHeader =  gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
@@ -197,9 +197,9 @@ angular.module('nextgearWebApp')
               replacements['%START_DATE%'] = $filter('moment')(version.StartDate);
               replacements['%END_DATE%'] = $filter('moment')(version.EndDate);
               replacements['%ZIP_CODE%'] = zipCode;
-              $scope.disclaimer = disclaimer.replace(/%\w+%/g, function(match) {
+              $scope.disclaimer =$sce.trustAsHtml(disclaimer.replace(/%\w+%/g, function(match) {
                 return replacements[match] || match;
-              });
+              }));
             });
 
             Kbb.getConfigurations(vin, zipCode).then(function (results) {
