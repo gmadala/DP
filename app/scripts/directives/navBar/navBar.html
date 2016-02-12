@@ -25,12 +25,16 @@
 
       <div class="col-xs-3 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
         <div class="align-right">{{ user.BusinessName | uppercase |truncate:20 }}
-          <span class=ng-show="user.isDealer()">
-            <span class="dealer-number"translate>
+          <span>
+            <span class="dealer-number" ng-show="user.isDealer()" translate>
               Dealer #
             </span>
+            <span class="dealer-number" ng-show="!user.isDealer()" translate>
+              Auction #
+            </span>
             {{ user.BusinessNumber }}
-          </span></div>
+          </span>
+        </div>
         <div class="align-right dropdown-toggle dropdown-spaced" id="settingsDropdown">
           <a>
             <span translate>My Account</span>
