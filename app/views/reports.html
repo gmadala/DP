@@ -19,6 +19,7 @@
         <div class="form-row date-field date-picker custom disbursement-date-picker">
           <label for="curtailmentDate" translate>Date</label>
           <input id="curtailmentDate" name="curtailmentDate"
+                 placeholder="mm/dd/yyyy"
                  uib-datepicker-popup="{{dateFormat}}"
                  show-weeks="false"
                  min-date="maxDate"
@@ -73,6 +74,7 @@
           <div class="date-field date-picker col-xs-5 custom reports-search-date-picker">
             <label for="stmtStart" translate>Start Date</label>
             <input id="stmtStart" name="stmtStart"
+                   placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    ng-model="data.stmtStartDate"
                    show-weeks="false"
@@ -86,6 +88,7 @@
           <div class="date-field date-picker col-xs-5 custom reports-search-date-picker">
             <label for="stmtEnd" translate>End Date</label>
             <input id="stmtEnd" name="stmtEnd"
+                   placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    ng-model="data.stmtEndDate"
                    show-weeks="false"
@@ -130,6 +133,7 @@
         <div class="form-row date-field date-picker custom disbursement-date-picker">
             <label for="disDate" translate>Date</label>
             <input id="disDate" name="disDate"
+                   placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    show-weeks="false"
                    max-date="maxDate"
@@ -163,6 +167,7 @@
           <div class="date-field date-picker col-xs-5 custom reports-search-date-picker">
             <label for="paidOffStart" translate>Start Date</label>
             <input id="paidOffStart" name="paidOffStart"
+                   placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    ng-model="data.paidOffStartDate"
                    show-weeks="false"
@@ -177,6 +182,7 @@
             <label for="paidOffEnd" translate>End Date</label>
             <input id="paidOffEnd" name="paidOffEnd"
                    ng-model="data.paidOffEndDate"
+                   placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    show-weeks="false"
                    show-button-bar="false"

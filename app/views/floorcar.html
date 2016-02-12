@@ -95,6 +95,7 @@
       <div class="date-field date-picker">
         <label for="purchaseDealerDatePicker" class="input-title" translate>Purchase Date</label>
         <input type="text" uib-datepicker-popup="{{dateFormat}}"
+               placeholder="mm/dd/yyyy"
                ng-model="data.UnitPurchaseDate"
                min-date="dealerMinDate"
                max-date="maxDate"
