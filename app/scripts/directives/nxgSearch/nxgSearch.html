@@ -8,7 +8,7 @@
 
   <form name="searchForm" role="form" class="search form-horizontal" novalidate>
     <div class="row form-block">
-      <div class="col-xs-4">
+      <div class="col-xs-5">
         <label for="keyword" translate>
           Find a Floor Plan
         </label>
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="col-xs-8 small-left-border">
+      <div class="col-xs-7 small-left-border">
         <div ng-class="{'row form-block':dateRangeShown}">
           <div ng-class="{'col-xs-5':dateRangeShown, 'col-xs-6':!dateRangeShown}" ng-show="filterable">
             <label for="filterSelect">{{ filterLabel }}</label>
@@ -35,7 +35,7 @@
                       ng-options="o.value as o.label for o in filterOptions"></select>
             </div>
           </div>
-          <div class="col-xs-6" style="padding: 0;" ng-show="dateRangeShown">
+          <div class="col-xs-7" style="padding: 0;" ng-show="dateRangeShown">
             <div class="range">
               <div class="date-field date-picker col-xs-6 custom search-date-picker">
                 <label for="startDate"><span translate>Start Date</span><span ng-show="showHelpText"> *</span></label>

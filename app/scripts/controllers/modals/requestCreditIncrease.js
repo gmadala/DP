@@ -92,6 +92,8 @@ angular.module('nextgearWebApp')
       );
     };
 
-    $scope.close = uibModalInstance.close();
+    $scope.close = function(){
+      uibModalInstance.close();
+    };
 
   });
