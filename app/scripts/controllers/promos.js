@@ -13,5 +13,11 @@ function PromosCtrl($scope, api) {
     );
   };
 
+  $scope.convertSalesDate = function(ms) {
+    if (ms) {
+      return moment(ms).format('MM/DD/YYYY');
+    }
+  };
+
   getEventSalesData();
 }
