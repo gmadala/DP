@@ -45,7 +45,7 @@
                        ng-model="activeCriteria.startDate"
                        show-weeks="false"
                        show-button-bar="false"
-                       is-open="dateStartDatePicker.opened" readonly
+                       is-open="dateStartDatePicker.opened"
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
                 <button tabindex="-1" type="button" class="btn-unstyle btn-calendar" ng-click="openStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
               </div>
@@ -57,7 +57,7 @@
                        ng-model="activeCriteria.endDate"
                        show-weeks="false"
                        show-button-bar="false"
-                       is-open="dateEndDatePicker.opened" readonly
+                       is-open="dateEndDatePicker.opened"
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
                 <button tabindex="-1" type="button" class="btn-unstyle btn-calendar" ng-click="openEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
               </div>

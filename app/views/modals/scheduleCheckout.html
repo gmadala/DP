@@ -17,7 +17,7 @@
              ng-model="model.selectedDate"
              show-weeks="false"
              show-button-bar="false"
-             is-open="datePicker.opened" readonly
+             is-open="datePicker.opened"
              required
              ng-class="{ 'nxg-invalid': validity.inputScheduleDate.$error.required || validity.$error.nxgRequires }" />
       <button tabindex="-1" type="button" class="btn-unstyle checkout-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>

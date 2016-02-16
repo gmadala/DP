@@ -24,7 +24,7 @@
                  show-weeks="false"
                  min-date="maxDate"
                  show-button-bar="false"
-                 is-open="upcomingDatePicker.opened" readonly
+                 is-open="upcomingDatePicker.opened"
                  ng-model="data.curtailmentDate"
                  ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }"
                  required />
@@ -81,7 +81,6 @@
                    show-weeks="false"
                    show-button-bar="false"
                    is-open="dealerStartDatePicker.opened"
-                   readonly
                    ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}"
                    required />
             <button tabindex="-1" type="button" style="right: 8%"
@@ -100,7 +99,6 @@
                    show-weeks="false"
                    show-button-bar="false"
                    is-open="dealerEndDatePicker.opened"
-                   readonly
                    ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
             <button tabindex="-1" type="button" style="right: 8%"
                     class="btn-unstyle reports-btn-calendar"
@@ -147,7 +145,7 @@
                    show-weeks="false"
                    max-date="maxDate"
                    show-button-bar="false"
-                   is-open="disbursementDatePicker.opened" readonly
+                   is-open="disbursementDatePicker.opened"
                    ng-model="data.disDate"
                    ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }"
                    required />
@@ -181,7 +179,7 @@
                    ng-model="data.paidOffStartDate"
                    show-weeks="false"
                    show-button-bar="false"
-                   is-open="paidStartDatePicker.opened" readonly
+                   is-open="paidStartDatePicker.opened"
                    date-allow="past"
                    max-date="maxDate"
                    ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required>
@@ -198,7 +196,7 @@
                    uib-datepicker-popup="{{dateFormat}}"
                    show-weeks="false"
                    show-button-bar="false"
-                   is-open="paidEndDatePicker.opened" readonly
+                   is-open="paidEndDatePicker.opened"
                    date-allow="past"
                    min-date="data.paidOffStartDate"
                    max-date="maxDate"

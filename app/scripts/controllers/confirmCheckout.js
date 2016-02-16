@@ -96,4 +96,9 @@ angular.module('nextgearWebApp')
       $uibModalInstance.close();
     };
 
+    $scope.openVehicleDetail = function(payment) {
+      $uibModalInstance.close();
+      $state.go('vehicledetails', {stockNumber: payment.stockNum});
+    };
+
   });
