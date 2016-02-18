@@ -30,7 +30,7 @@
           <div class="promo-type">Event Sale</div>
         </div>
         <div class="col-xs-1">
-          <div class="promo-date">{{promo.salesDate}}</div>
+          <div class="promo-date">{{convertSalesDate(promo.salesDate)}}</div>
         </div>
         <div class="col-xs-2" style="text-align: right;">
           <div ng-click="tcCollapsed = !tcCollapsed"
@@ -57,7 +57,7 @@
             <div class="promo-type">Event Sale</div>
           </div>
           <div class="col-xs-1">
-            <div class="promo-date">{{promo.salesDate}}</div>
+            <div class="promo-date">{{convertSalesDate(promo.salesDate)}}</div>
           </div>
           <div class="col-xs-2 text-right">
             <div ng-click="tcCollapsed = !tcCollapsed"
