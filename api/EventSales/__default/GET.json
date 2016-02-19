@@ -1,0 +1,49 @@
+[{
+  "eventSaleName": "NonAuctionGuaranteed",
+  "salesDate": "12/14/2015",
+  "name": "2 day free promo 12-14",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "blah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blah"
+}, {
+  "eventSaleName": "AuctionGuaranteed",
+  "salesDate": "12/11/2015",
+  "name": "2 day free promo 12-11",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "salesDate": "12/10/2015",
+  "name": "2 day free promo 12-10",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blahhblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "salesDate": "12/09/2015",
+  "name": "2 day free promo 12/09",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": null
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "salesDate": "12/08/2015",
+  "name": "2 day free promo 12/08",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "salesDate": "12/07/2015",
+  "name": "another 2 day free promo",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": true,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}]
