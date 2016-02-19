@@ -27,10 +27,11 @@
           <div class="promo-name">{{promo.name}}</div>
         </div>
         <div class="col-xs-3">
-          <div class="promo-type">Event Sale</div>
+          <div class="promo-type" ng-hide="promo.promo" translate>Event Sale</div>
+          <div class="promo-type" ng-show="promo.promo" translate>Promo</div>
         </div>
         <div class="col-xs-1">
-          <div class="promo-date">{{convertSalesDate(promo.salesDate)}}</div>
+          <div class="promo-date">{{promo.salesDate | moment}}</div>
         </div>
         <div class="col-xs-2" style="text-align: right;">
           <div ng-click="tcCollapsed = !tcCollapsed"
@@ -54,10 +55,11 @@
             <div class="promo-name">{{promo.name}}</div>
           </div>
           <div class="col-xs-3">
-            <div class="promo-type">Event Sale</div>
+            <div class="promo-type" ng-hide="promo.promo" translate>Event Sale</div>
+            <div class="promo-type" ng-show="promo.promo" translate>Promo</div>
           </div>
           <div class="col-xs-1">
-            <div class="promo-date">{{convertSalesDate(promo.salesDate)}}</div>
+            <div class="promo-date">{{promo.salesDate | moment}}</div>
           </div>
           <div class="col-xs-2 text-right">
             <div ng-click="tcCollapsed = !tcCollapsed"
