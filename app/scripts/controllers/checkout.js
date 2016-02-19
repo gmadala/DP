@@ -25,6 +25,11 @@ angular.module('nextgearWebApp')
       }
     );
 
+    $scope.sanitize = function(str) {
+      var sanitized = str || '';
+      return api.toFloat(sanitized.replace(/[^\d\.]/g, ''));
+    };
+
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
       sum: {
