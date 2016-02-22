@@ -102,13 +102,15 @@
                show-weeks="false"
                show-button-bar="false"
                is-open="datePicker.opened"
-               id="purchaseDealerDatePicker"
-               required>
+               id="purchaseDealerDatePicker" name="purchaseDealerDatePicker"
+               required
+               ng-class="{ 'nxg-invalid': validity.purchaseDealerDatePicker.$error.required || (validity.purchaseDealerDatePicker.$error.nxgRequires && !validity.purchaseDealerDatePicker.$error.required) || validity.purchaseDealerDatePicker.$error.past || validity.purchaseDealerDatePicker.$error.date || validity.purchaseDealerDatePicker.$error.pattern }"/>
         <button tabindex="-1" type="button" class="btn-unstyle" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+      </div>
         <label for="purchaseDealerDatePicker" class="text-error"
-               ng-show="validity.purchaseDealerDatePicker.$error.required || validity.purchaseDealerDatePicker.$error.date" translate>
-          Please enter a Valid Purchase Date.
-        </label>
+                       ng-show="validity.purchaseDealerDatePicker.$error.required || validity.purchaseDealerDatePicker.$error.date" translate>
+      Please enter a Valid Purchase Date.
+    </label>
         <label for="purchaseDealerDatePicker"
                class="text-error"
                ng-show="validity.purchaseDealerDatePicker.$error.pattern && !validity.purchaseDealerDatePicker.$error.date" translate>
@@ -118,7 +120,6 @@
                ng-show="validity.purchaseDealerDatePicker.$error.past" translate>
           Please enter a Purchase Date in the past.
         </label>
-      </div>
 
       <label for="inputBiz" class="input-title" translate>Seller</label>
       <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
