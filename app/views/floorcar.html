@@ -105,7 +105,7 @@
                id="purchaseDealerDatePicker" name="purchaseDealerDatePicker"
                required
                ng-class="{ 'nxg-invalid': validity.purchaseDealerDatePicker.$error.required || (validity.purchaseDealerDatePicker.$error.nxgRequires && !validity.purchaseDealerDatePicker.$error.required) || validity.purchaseDealerDatePicker.$error.past || validity.purchaseDealerDatePicker.$error.date || validity.purchaseDealerDatePicker.$error.pattern }"/>
-        <button tabindex="-1" type="button" class="btn-unstyle" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+        <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
       </div>
         <label for="purchaseDealerDatePicker" class="text-error"
                        ng-show="validity.purchaseDealerDatePicker.$error.required || validity.purchaseDealerDatePicker.$error.date" translate>
