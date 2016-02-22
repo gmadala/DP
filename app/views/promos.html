@@ -21,7 +21,8 @@
     <div class="promo-container">
       <div class="promo-item row" ng-repeat="promo in promosCurrent">
         <div class="col-xs-3">
-          <span class="promo-auction-name">{{promo.auctionName}}</span>
+          <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
+          <span ng-show="promo.promo" class="promo-auction-name" translate>See Details</span>
         </div>
         <div class="col-xs-3">
           <div class="promo-name">{{promo.name}}</div>
@@ -49,7 +50,8 @@
       <div collapse="isCollapsed" ng-init="isCollapsed = true">
         <div class="promo-item inactive row" ng-repeat="promo in promosPast">
           <div class="col-xs-3">
-            <span class="promo-auction-name">{{promo.auctionName}}</span>
+            <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
+            <span ng-show="promo.promo" class="promo-auction-name" translate>See Details</span>
           </div>
           <div class="col-xs-3">
             <div class="promo-name">{{promo.name}}</div>
