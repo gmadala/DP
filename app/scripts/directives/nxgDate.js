@@ -29,11 +29,7 @@
           }
         }
 
-        ctrl.$parsers.push(validate);
-
-        scope.$watch(attrs.nxgDate, function() {
-          ctrl.$setViewValue(ctrl.$viewValue);
-        });
+        ctrl.$parsers.unshift(validate);
       }
     };
   }
