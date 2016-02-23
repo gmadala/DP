@@ -254,11 +254,13 @@ p.no-results {
   }
   &.inactive{
     color: $wellBorder;
-    &:first-child{
-      margin-top: 0;
-    }
   }
-
+  &.non-empty-promos:first-child{
+    margin-top: 0;
+  }
+  &.empty-promos:first-child{
+    margin-top: 35px;
+  }
   .promo-terms-conditions{
     padding: 5px 15px;
   }
