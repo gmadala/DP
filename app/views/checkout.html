@@ -220,7 +220,7 @@
                      ng-model="unappliedFunds.useAmount"
                      nxg-min="unappliedFunds.min()"
                      nxg-max="unappliedFunds.max()"
-                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
+                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
                      ng-required="unappliedFunds.useFunds"
                      ng-disabled="submitInProgress"
                      ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
