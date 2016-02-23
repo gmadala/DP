@@ -23,6 +23,8 @@
             ctrl.$setValidity('future', false);
             return undefined;
           } else {
+            ctrl.$setValidity('future', true);
+            ctrl.$setValidity('past', true);
             return value;
           }
         }
