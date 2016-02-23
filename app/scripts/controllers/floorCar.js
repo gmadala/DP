@@ -18,7 +18,7 @@ angular.module('nextgearWebApp')
 
     $scope.dealerMinDate = moment().subtract(364, 'days');
     $scope.auctionMinDate = moment().subtract(7, 'days');
-    $scope.maxDate = new Date();
+    $scope.maxDate = moment();
     $scope.datePicker = {
       opened: false
     };
@@ -158,7 +158,6 @@ angular.module('nextgearWebApp')
     $scope.submit = function () {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
-      $scope.validity.purchaseDealerDatePicker.$setValidity('pattern', false);
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
