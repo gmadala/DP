@@ -9,8 +9,8 @@
  * number. You can use ng-pattern alongside this to enforce a numeric value.
  */
 angular.module('nextgearWebApp')
-  .directive('nxgMax', function () {
-    return {
+      .directive('nxgMax', function () {
+        return {
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {

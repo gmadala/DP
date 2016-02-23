@@ -146,6 +146,7 @@ angular.module('nextgearWebApp')
       });
     }
 
+
     $scope.maxValidModelYear = new Date().getFullYear();
     $scope.minValidModelYear = 1900;
     $scope.isYear = (function() {
@@ -157,6 +158,7 @@ angular.module('nextgearWebApp')
     $scope.submit = function () {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
+      $scope.validity.purchaseDealerDatePicker.$setValidity('pattern', false);
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {

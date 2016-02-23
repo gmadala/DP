@@ -236,7 +236,7 @@ angular.module('nextgearWebApp')
             };
 
             scope.notPastDates = function(date) {
-              if (date !== date || !date) { // Stop NaN or null from getting into the function
+              if (date !== date || !date) { // Stop NaN or null from gettin   g into the function
                 return true;
               }
               return !(moment().isAfter(moment(new Date(date)), 'day'));
