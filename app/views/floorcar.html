@@ -102,6 +102,7 @@
                is-open="datePicker.opened"
                id="purchaseDealerDatePicker"
                name="purchaseDealerDatePicker"
+               ng-pattern="isYear"
                required
                ng-class="{ 'nxg-invalid': validity.purchaseDealerDatePicker.$error.required || validity.purchaseDealerDatePicker.$error.past || validity.purchaseDealerDatePicker.$error.date }"/>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()">
@@ -111,6 +112,10 @@
       <label for="purchaseDealerDatePicker" class="text-error"
              ng-show="validity.purchaseDealerDatePicker.$error.required" translate>
         Please enter a Valid Purchase Date.
+      </label>
+      <label for="purchaseDealerDatePicker" class="text-error"
+             ng-show="validity.purchaseDealerDatePicker.$error.pattern" translate>
+        Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
       </label>
       <label for="purchaseDealerDatePicker" class="text-error"
              ng-show="validity.purchaseDealerDatePicker.$error.past" translate>
