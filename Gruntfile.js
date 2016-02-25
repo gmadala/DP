@@ -140,9 +140,9 @@ module.exports = function(grunt) {
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/config/nxgConfig.mock.processed.js',
         '!app/scripts/translations.js',
-        '!app/scripts/services/base64.js',
-        '!app/scripts/directives/nxgChart/nxgChart.js',
-        '!app/scripts/directives/tooltip.js',
+        '!app/scripts/services/base64.service.js',
+        '!app/scripts/directives/nxgChart/nxgChart.directive.js',
+        '!app/scripts/directives/tooltip.directive.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -156,9 +156,9 @@ module.exports = function(grunt) {
         '<%= yeoman.app %>/scripts/**/*.js',
         '!app/scripts/config/nxgConfig.mock.processed.js',
         '!app/scripts/translations.js',
-        '!app/scripts/services/base64.js',
-        '!app/scripts/directives/nxgChart/nxgChart.js',
-        '!app/scripts/directives/tooltip.js',
+        '!app/scripts/services/base64.service.js',
+        '!app/scripts/directives/nxgChart/nxgChart.directive.js',
+        '!app/scripts/directives/tooltip.directive.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -476,7 +476,7 @@ module.exports = function(grunt) {
         }
       },
       debug: {
-        src: '<%= yeoman.app %>/scripts/directives/nxgDebugTitle.js',
+        src: '<%= yeoman.app %>/scripts/directives/nxgDebugTitle.directive.js',
         dest: '<%= yeoman.app %>/scripts/directives/nxgDebugTitle.processed.js'
       }
     },
