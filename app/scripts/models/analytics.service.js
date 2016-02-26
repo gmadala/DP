@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Analytics', function ($q, $filter, api, moment) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Analytics', Analytics);
+
+  Analytics.$inject = ['$q', '$filter', 'api', 'moment'];
+
+  function Analytics($q, $filter, api, moment) {
 
     return {
 
@@ -33,60 +39,60 @@ angular.module('nextgearWebApp')
 
       fetchAnalytics: function() {
         return $q.all([
-            api.request('GET', '/analytics/averageturntime'),
-            api.request('GET', '/analytics/aging'),
-            api.request('GET', '/analytics/bookvaluemargins/12')
-          ]).then(
-            function (responses) {
+          api.request('GET', '/analytics/averageturntime'),
+          api.request('GET', '/analytics/aging'),
+          api.request('GET', '/analytics/bookvaluemargins/12')
+        ]).then(
+          function (responses) {
 
-              var result = {};
+            var result = {};
 
-              // Parse average turn time into a model suitable for charting
-              result.averageTurn = {
-                data: []
-              };
-              _.each(
-                _.sortBy(responses[0], 'EndOfMonthDate'),
-                function ( item ) {
-                  var fmt, date = moment(item.EndOfMonthDate);
-                  fmt = date.month() === 0 ? 'MMM \'YY' : 'MMM';
-                  result.averageTurn.data.push([date.format(fmt), item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior]
-                  );
-                }
-              );
+            // Parse average turn time into a model suitable for charting
+            result.averageTurn = {
+              data: []
+            };
+            _.each(
+              _.sortBy(responses[0], 'EndOfMonthDate'),
+              function ( item ) {
+                var fmt, date = moment(item.EndOfMonthDate);
+                fmt = date.month() === 0 ? 'MMM \'YY' : 'MMM';
+                result.averageTurn.data.push([date.format(fmt), item.AvgTurnTimeForVehiclesCompletedIn60DaysPrior]
+                );
+              }
+            );
 
-              // Parse aging data into a segmented counts
-              result.aging = [0, 0, 0, 0, 0, 0];
-              _.each(
-                responses[1],
-                function ( item ) {
-                  var age = item.DaysOnFloor;
-                  if (age >= 100)                  {  result.aging[5]++; }
-                  else if (age >= 75 && age <= 99) {  result.aging[4]++; }
-                  else if (age >= 50 && age <= 74) {  result.aging[3]++; }
-                  else if (age >= 25 && age <= 49) {  result.aging[2]++; }
-                  else if (age >= 1 && age <= 24)  {  result.aging[1]++; }
-                  else if (age >= 0)               {  result.aging[0]++; }
-                }
-              );
+            // Parse aging data into a segmented counts
+            result.aging = [0, 0, 0, 0, 0, 0];
+            _.each(
+              responses[1],
+              function ( item ) {
+                var age = item.DaysOnFloor;
+                if (age >= 100)                  {  result.aging[5]++; }
+                else if (age >= 75 && age <= 99) {  result.aging[4]++; }
+                else if (age >= 50 && age <= 74) {  result.aging[3]++; }
+                else if (age >= 25 && age <= 49) {  result.aging[2]++; }
+                else if (age >= 1 && age <= 24)  {  result.aging[1]++; }
+                else if (age >= 0)               {  result.aging[0]++; }
+              }
+            );
 
-              // Parse book value margins data into a model suitable for charting and all auctions modal
-              result.allAuctions = _.sortBy(responses[2], 'NumVehiclesAnalyzed').reverse(); // sort descending
+            // Parse book value margins data into a model suitable for charting and all auctions modal
+            result.allAuctions = _.sortBy(responses[2], 'NumVehiclesAnalyzed').reverse(); // sort descending
 
-              // trim down to the top ten for chart
-              var top10 = result.allAuctions.slice(0, 10);
-              result.top10Auctions = [];
+            // trim down to the top ten for chart
+            var top10 = result.allAuctions.slice(0, 10);
+            result.top10Auctions = [];
 
-              _.each(
-                top10,
-                function ( item ) {
-                  result.top10Auctions.push([item.SellerName, item.NumVehiclesAnalyzed]);
-                }
-              );
+            _.each(
+              top10,
+              function ( item ) {
+                result.top10Auctions.push([item.SellerName, item.NumVehiclesAnalyzed]);
+              }
+            );
 
-              return result;
+            return result;
 
-            }
+          }
         );
       },
 
@@ -116,6 +122,7 @@ angular.module('nextgearWebApp')
           }
         );
       }
-
     };
-  });
+
+  }
+})();

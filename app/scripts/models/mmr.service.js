@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Mmr', function(api, $q, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Mmr', Mmr);
+
+  Mmr.$inject = ['api', '$q', 'gettextCatalog'];
+
+  function Mmr(api, $q, gettextCatalog) {
 
     // remove any results that have null for all pertinent value properties
     // (Excellent, Good, Average, Fair)
@@ -112,4 +118,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

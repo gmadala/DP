@@ -1,7 +1,29 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Payments', function($q, $filter, api, moment, CartItem, VehicleCartItem, PaymentOptions, Paginate, Floorplan) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Payments', Payments);
+
+  Payments.$inject = [
+    '$q',
+    'api',
+    'moment',
+    'CartItem',
+    'VehicleCartItem',
+    'PaymentOptions',
+    'Paginate',
+    'Floorplan'];
+
+  function Payments(
+    $q,
+    api,
+    moment,
+    CartItem,
+    VehicleCartItem,
+    PaymentOptions,
+    Paginate,
+    Floorplan) {
 
     var paymentQueue = {
       fees: {},
@@ -33,19 +55,19 @@ angular.module('nextgearWebApp')
         criteria = angular.copy(criteria);
 
         switch (criteria.filter) {
-        case 'all':
-          criteria.startDate = criteria.endDate = null;
-          break;
-        case 'today':
-          criteria.startDate = criteria.endDate = new Date();
-          break;
-        case 'thisWeek':
-          criteria.startDate = moment().startOf('week').toDate();
-          criteria.endDate = moment().endOf('week').toDate();
-          break;
-        case 'range':
-          // use dates as entered by user
-          break;
+          case 'all':
+            criteria.startDate = criteria.endDate = null;
+            break;
+          case 'today':
+            criteria.startDate = criteria.endDate = new Date();
+            break;
+          case 'thisWeek':
+            criteria.startDate = moment().startOf('week').toDate();
+            criteria.endDate = moment().endOf('week').toDate();
+            break;
+          case 'range':
+            // use dates as entered by user
+            break;
         }
 
         var params = {
@@ -218,4 +240,6 @@ angular.module('nextgearWebApp')
         return api.request('POST', '/Floorplan/requestextension/' + floorplanId);
       }
     };
-  });
+
+  }
+})();

@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('AccountManagement', function($q, api, User) {
+  angular
+    .module('nextgearWebApp')
+    .factory('AccountManagement', AccountManagement);
+
+  AccountManagement.$inject = ['$q', 'api', 'User'];
+
+  function AccountManagement($q, api, User) {
 
     return {
       get: function() {
@@ -75,4 +81,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

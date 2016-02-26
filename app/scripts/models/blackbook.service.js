@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Blackbook', function (api, $q, $filter) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Blackbook', Blackbook);
+
+  Blackbook.$inject = ['api', '$q', '$filter'];
+
+  function Blackbook(api, $q, $filter) {
 
     var formatResults = function(results ) {
       return $filter('orderBy')(results[0].Results,'toString()',false);
@@ -127,4 +133,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

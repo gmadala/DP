@@ -1,7 +1,35 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('User', function($q, api, Base64, messages, segmentio, UserVoice, nxgConfig, Addresses, gettextCatalog, language) {
+  angular
+    .module('nextgearWebApp')
+    .factory('User', User);
+
+  User.$inject = [
+    '$q',
+    'api',
+    'Base64',
+    'messages',
+    'segmentio',
+    'UserVoice',
+    'nxgConfig',
+    'Addresses',
+    'gettextCatalog',
+    'language'
+  ];
+
+  function User(
+    $q,
+    api,
+    Base64,
+    messages,
+    segmentio,
+    UserVoice,
+    nxgConfig,
+    Addresses,
+    gettextCatalog,
+    language) {
+
     // Private
     var staticsRequest = null,
       paySellerOptions = [],
@@ -24,8 +52,8 @@ angular.module('nextgearWebApp')
     return {
 
       getFeatures: function(){
-         return features;
-       },
+        return features;
+      },
 
       setFeatures: function(data){
         features = data;
@@ -46,7 +74,7 @@ angular.module('nextgearWebApp')
               return result.List;
             } else {
               var error = messages.add(gettextCatalog.getString('You do not appear to have any security questions configured. ' +
-                'Please contact NextGear Capital for assistance.'),
+                  'Please contact NextGear Capital for assistance.'),
                 '/UserAccount/passwordResetQuestions/ returned no security questions');
               return $q.reject(error);
             }
@@ -293,4 +321,6 @@ angular.module('nextgearWebApp')
         info.AutoPayEnabled = autoPayEnabled;
       }
     };
-  });
+
+  }
+})();

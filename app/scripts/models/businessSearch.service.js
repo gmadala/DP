@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('BusinessSearch', function(api, Paginate) {
+  angular
+    .module('nextgearWebApp')
+    .factory('BusinessSearch', BusinessSearch);
+
+  BusinessSearch.$inject = ['api', 'Paginate'];
+
+  function BusinessSearch(api, Paginate) {
 
     var isNumeric = function (value) {
       if (!value) {
@@ -43,4 +49,6 @@ angular.module('nextgearWebApp')
         );
       }
     };
-  });
+
+  }
+})();
