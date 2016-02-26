@@ -5,7 +5,7 @@
     .module('nextgearWebApp')
     .directive('nxgBlur', nxgBlur);
 
-  nxgBlur.$inject = ['parse'];
+  nxgBlur.$inject = ['$parse'];
 
   function nxgBlur($parse) {
 

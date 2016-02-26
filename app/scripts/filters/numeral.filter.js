@@ -1,18 +1,9 @@
-(function() {
-  'use strict';
+'use strict';
 
-  angular
-    .module('nextgearWebApp')
-    .filter('numeral', numeral);
-
-  numeral.$inject = [];
-
-  function numeral() {
-
+angular.module('nextgearWebApp')
+  .filter('numeral', function () {
     return function(number, format) {
       // @see http://numeraljs.com/
       return numeral(number).format(format);
     };
-
-  }
-})();
+  });

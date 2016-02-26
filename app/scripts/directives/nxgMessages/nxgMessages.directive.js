@@ -5,7 +5,7 @@ angular
   .module('nextgearWebApp')
   .directive('nxgMessages', nxgMessages);
 
-  nxgMessages.$inject = [];
+  nxgMessages.$inject = ['$dialog', 'messages'];
 
   function nxgMessages($dialog, messages) {
 

@@ -1,13 +1,7 @@
-(function() {
-  'use strict';
+'use strict';
 
-  angular
-    .module('nextgearWebApp')
-    .factory('FloorplanUtil', FloorplanUtil);
-
-  FloorplanUtil.$inject = ['defaultSort', 'initialFilter'];
-
-  function FloorplanUtil(Floorplan) {
+angular.module('nextgearWebApp')
+  .factory('FloorplanUtil', function (Floorplan) {
 
     var FloorplanUtil = function(defaultSort, initialFilter) {
       this.results = [];
@@ -90,8 +84,5 @@
         this.search(this.searchCriteria);
       }
     };
-
     return FloorplanUtil;
-
-  }
-})();
+  });
