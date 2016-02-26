@@ -13,18 +13,18 @@
    */
   angular
     .module('nextgearWebApp')
-    .filter('moment', moment);
+    .filter('momentUTC', momentUTC);
 
-  moment.$inject = ['moment'];
+  momentUTC.$inject = ['moment'];
 
-  function moment(moment) {
+  function momentUTC(moment) {
 
     return function (input, outputFormat, inputFormat) {
       outputFormat = outputFormat || 'MM/DD/YYYY';
       if (input === null || !angular.isDefined(input)) {
         return input;
       }
-      return moment(input, inputFormat).format(outputFormat);
+      return moment.utc(input, inputFormat).format(outputFormat);
     };
 
   }
