@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('UserVoice', function ($window, nxgConfig, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('UserVoice', UserVoice);
+
+  UserVoice.$inject = ['$window', 'nxgConfig', 'gettextCatalog'];
+
+  function UserVoice($window, nxgConfig, gettextCatalog) {
 
     return {
       init: function (apiKey, ssoToken, isDealer, BusinessNumber, BusinessName) {
@@ -60,4 +66,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

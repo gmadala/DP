@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('LastState', function($cookieStore, $state, User) {
+  angular
+    .module('nextgearWebApp')
+    .factory('LastState', LastState);
+
+  LastState.$inject = ['$cookieStore', '$state', 'User'];
+
+  function LastState($cookieStore, $state, User) {
 
     var cookieGet = function(){
       return $cookieStore.get('uiState');
@@ -58,4 +64,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

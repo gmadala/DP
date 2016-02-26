@@ -1,22 +1,28 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * @ngdoc service
- * @name nextgearWebApp.features
- * @description
- * # features
- * Provides a way to turn features on or off. The features can be for development purposes or for business purposes
- * (release or business feature toggles).
- *
- * Business features are features that need to be enabled or disabled based on rules such as which user is logged in.
- * Business features can be handled with this service but will need a separate configuration object, likely
- * coming from the API.
- *
- * Features can be enabled using the query string ?features=kbb,feature1,feature2
- * The loadFromQueryString must be called from app.run while the query string is still intact.
- */
-angular.module('nextgearWebApp')
-  .factory('features', function ($location) {
+  /**
+   * @ngdoc service
+   * @name nextgearWebApp.features
+   * @description
+   * # features
+   * Provides a way to turn features on or off. The features can be for development purposes or for business purposes
+   * (release or business feature toggles).
+   *
+   * Business features are features that need to be enabled or disabled based on rules such as which user is logged in.
+   * Business features can be handled with this service but will need a separate configuration object, likely
+   * coming from the API.
+   *
+   * Features can be enabled using the query string ?features=kbb,feature1,feature2
+   * The loadFromQueryString must be called from app.run while the query string is still intact.
+   */
+  angular
+    .module('nextgearWebApp')
+    .factory('features', features);
+
+  features.$inject = ['$location'];
+
+  function features($location) {
 
     var service = {
       kbb: {
@@ -53,4 +59,6 @@ angular.module('nextgearWebApp')
     };
 
     return service;
-  });
+
+  }
+})();

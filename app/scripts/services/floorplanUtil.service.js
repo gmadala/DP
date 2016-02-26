@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('FloorplanUtil', function (Floorplan) {
+  angular
+    .module('nextgearWebApp')
+    .factory('FloorplanUtil', FloorplanUtil);
+
+  FloorplanUtil.$inject = ['defaultSort', 'initialFilter'];
+
+  function FloorplanUtil(Floorplan) {
 
     var FloorplanUtil = function(defaultSort, initialFilter) {
       this.results = [];
@@ -44,16 +50,16 @@ angular.module('nextgearWebApp')
         this.loading = true;
         promise = lastPromise = Floorplan.search(this.searchCriteria, paginator);
         promise.then(_.bind(
-          function (result) {
-            if (promise !== lastPromise) {
-              return;
-            }
+            function (result) {
+              if (promise !== lastPromise) {
+                return;
+              }
 
-            this.loading = false;
-            this.paginator = result.$paginator;
-            // fast concatenation of results into existing array
-            Array.prototype.push.apply(this.results, result.Floorplans);
-          }, this), _.bind(function (/*error*/) {
+              this.loading = false;
+              this.paginator = result.$paginator;
+              // fast concatenation of results into existing array
+              Array.prototype.push.apply(this.results, result.Floorplans);
+            }, this), _.bind(function (/*error*/) {
             if (promise !== lastPromise) { return; }
             this.loading = false;
           }, this)
@@ -84,5 +90,8 @@ angular.module('nextgearWebApp')
         this.search(this.searchCriteria);
       }
     };
+
     return FloorplanUtil;
-  });
+
+  }
+})();

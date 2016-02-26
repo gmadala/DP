@@ -4,7 +4,8 @@
 
   // Following the guide here (thanks to John Daley):
   // https://code.angularjs.org/1.3.16/docs/guide/production
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .config(enableDebugMessage);
 
   enableDebugMessage.$inject = ['$compileProvider'];

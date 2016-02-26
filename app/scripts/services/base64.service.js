@@ -1,11 +1,18 @@
-/**
- * Base64 encoder/decoder service. Based on the implementation of
- * webtoolkits (http://www.webtoolkit.info/javascript-base64.html).
- */
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Base64', function () {
+  /**
+   * Base64 encoder/decoder service. Based on the implementation of
+   * webtoolkits (http://www.webtoolkit.info/javascript-base64.html).
+   */
+
+  angular
+    .module('nextgearWebApp')
+    .factory('Base64', Base64);
+
+  Base64.$inject = [];
+
+  function Base64() {
 
     /*jshint camelcase: false */
     /*jslint bitwise: true */
@@ -88,8 +95,8 @@ angular.module('nextgearWebApp')
             enc4 = 64;
           }
           output = output +
-          _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
-          _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
         }
         return output;
       },
@@ -126,4 +133,6 @@ angular.module('nextgearWebApp')
         return output;
       }
     };
-  });
+
+  }
+})();

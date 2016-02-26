@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('banner', function($rootScope, $http, $state, nxgConfig, language) {
+  angular
+    .module('nextgearWebApp')
+    .factory('banner', banner);
+
+  banner.$inject = ['$rootScope', '$http', '$state', 'nxgConfig', 'language'];
+
+  function banner($rootScope, $http, $state, nxgConfig, language) {
 
     return {
       fetch: function(callback) {
@@ -31,4 +37,6 @@ angular.module('nextgearWebApp')
         );
       }
     };
-  });
+
+  }
+})();

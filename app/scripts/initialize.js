@@ -1,15 +1,44 @@
 (function () {
-
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .run(initialize);
 
-  initialize.$inject = ['$rootScope', '$window', 'User', 'segmentio', 'nxgConfig', 'LogoutGuard', '$cookieStore',
-    '$state', '$dialog', 'LastState', 'api', 'metric', 'language', 'features','kissMetricInfo'];
+  initialize.$inject = [
+    '$rootScope',
+    '$window',
+    'User',
+    'segmentio',
+    'nxgConfig',
+    'LogoutGuard',
+    '$cookieStore',
+    '$state',
+    '$dialog',
+    'LastState',
+    'api',
+    'metric',
+    'language',
+    'features',
+    'kissMetricInfo'
+  ];
 
-  function initialize($rootScope, $window, User, segmentio, nxgConfig, LogoutGuard, $cookieStore, $state, $dialog,
-                      LastState, api, metric, language, features, kissMetricInfo) {
+  function initialize(
+    $rootScope,
+    $window,
+    User,
+    segmentio,
+    nxgConfig,
+    LogoutGuard,
+    $cookieStore,
+    $state,
+    $dialog,
+    LastState,
+    api,
+    metric,
+    language,
+    features,
+    kissMetricInfo) {
 
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
@@ -113,13 +142,13 @@
     );
 
     $rootScope.$on('$stateChangeSuccess',
-        function(event, toState) {
-          if (toState.name === 'login' && prv.pendingReload) {
-            // clobber when success going to login
-            prv.pendingReload = false;
-            $window.location.reload(true);
-          }
+      function(event, toState) {
+        if (toState.name === 'login' && prv.pendingReload) {
+          // clobber when success going to login
+          prv.pendingReload = false;
+          $window.location.reload(true);
         }
+      }
     );
 
     $rootScope.$on('event:switchState', function (event, state) {
@@ -196,5 +225,6 @@
         }
       }
     );
+
   }
 })();
