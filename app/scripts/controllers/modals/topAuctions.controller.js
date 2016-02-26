@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('TopAuctionsCtrl', function ($scope, dialog, auctions) {
+  angular
+    .module('nextgearWebApp')
+    .controller('TopAuctionsCtrl', TopAuctionsCtrl);
+
+  TopAuctionsCtrl.$inject = ['$scope', 'dialog', 'auctions'];
+
+  function TopAuctionsCtrl($scope, dialog, auctions) {
 
     $scope.data = auctions;
 
@@ -10,4 +16,6 @@ angular.module('nextgearWebApp')
     $scope.close = function() {
       dialog.close();
     };
-  });
+
+  }
+})();

@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ConfirmLogoutCtrl', function($rootScope, $scope, dialog, User) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ConfirmLogoutCtrl', ConfirmLogoutCtrl);
+
+  ConfirmLogoutCtrl.$inject = ['$scope', 'dialog', 'User'];
+
+  function ConfirmLogoutCtrl($scope, dialog, User) {
+
     $scope.logoutPending = false;
 
     $scope.close = function(confirmed) {
@@ -15,4 +22,7 @@ angular.module('nextgearWebApp')
         dialog.close(confirmed);
       }
     };
-  });
+
+  }
+
+})();

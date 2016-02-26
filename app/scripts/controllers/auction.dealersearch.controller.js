@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AuctionDealerSearchCtrl', AuctionDealerSearchCtrl);
+
+  AuctionDealerSearchCtrl.$inject = ['$scope', '$dialog', 'User', 'DealerNumberSearch'];
+
+  function AuctionDealerSearchCtrl($scope, $dialog, User, DealerNumberSearch) {
+
     $scope.onlyNumbersPattern = /^\d+$/;
 
     /*** Number Search ***/
@@ -192,5 +199,6 @@ angular.module('nextgearWebApp')
         }
       }.bind($scope.numberSearch)
     };
-  })
-;
+
+  }
+})();

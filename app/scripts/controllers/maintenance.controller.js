@@ -1,6 +1,12 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('MaintenanceCtrl', function () {
-  }
-);
+  angular
+    .module('nextgearWebApp')
+    .controller('MaintenanceCtrl', MaintenanceCtrl);
+
+  MaintenanceCtrl.$inject = [];
+
+  function MaintenanceCtrl() {}
+
+})();

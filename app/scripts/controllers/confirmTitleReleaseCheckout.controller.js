@@ -1,13 +1,19 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ConfirmTitleReleaseCheckoutCtrl', function ($scope, dialog, response, TitleReleases, Floorplan) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ConfirmTitleReleaseCheckoutCtrl', ConfirmTitleReleaseCheckoutCtrl);
+
+  ConfirmTitleReleaseCheckoutCtrl.$inject = [];
+
+  function ConfirmTitleReleaseCheckoutCtrl($scope, dialog, response, TitleReleases, Floorplan) {
 
     $scope.counts = {
       total: response.TitleReleaseResults.length,
       failed: _.reduce(response.TitleReleaseResults, function(sum, item){
-          return sum + (item.ReleaseSuccessful ? 0 : 1);
-        }, 0)
+        return sum + (item.ReleaseSuccessful ? 0 : 1);
+      }, 0)
     };
 
     $scope.results = _.map(response.TitleReleaseResults, function(result) {
@@ -28,4 +34,5 @@ angular.module('nextgearWebApp')
       dialog.close();
     };
 
-  });
+  }
+})();

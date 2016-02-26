@@ -1,7 +1,15 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+
+  angular
+    .module('nextgearWebApp')
+    .controller('CreditQueryCtrl', CreditQueryCtrl);
+
+  CreditQueryCtrl.$inject = ['$scope', 'dialog', 'CreditQuery', 'options', 'kissMetricInfo', 'segmentio', 'metric'];
+
+  function CreditQueryCtrl($scope, dialog, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
@@ -53,4 +61,7 @@ angular.module('nextgearWebApp')
     if (options.autoQueryCredit) {
       $scope.business.creditQuery.get();
     }
-  });
+
+  }
+
+})();

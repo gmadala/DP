@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, dialog, $dialog, DealerNameSearch, User, options) {
+  angular
+    .module('nextgearWebApp')
+    .controller('DealerNameSearchCtrl', DealerNameSearchCtrl);
+
+  DealerNameSearchCtrl.$inject = ['$scope', 'dialog', '$dialog', 'DealerNameSearch', 'User', 'options'];
+
+  function DealerNameSearchCtrl($scope, dialog, $dialog, DealerNameSearch, User, options) {
 
     $scope.proposedQuery = {
       name: options.dealerName,
@@ -57,13 +63,13 @@ angular.module('nextgearWebApp')
 
       $scope.data.loading = true;
       DealerNameSearch.search(
-          $scope.data.query.name,
-          $scope.data.query.city,
-          $scope.data.query.state,
-          $scope.data.sortBy,
-          $scope.data.sortDescending,
-          paginator
-        ).then(
+        $scope.data.query.name,
+        $scope.data.query.city,
+        $scope.data.query.state,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      ).then(
         function(result) {
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
@@ -126,4 +132,7 @@ angular.module('nextgearWebApp')
     User.getStatics().then(function(statics) {
       $scope.states = statics.states;
     });
-  });
+
+  }
+
+})();

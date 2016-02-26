@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AuctionReportsCtrl', function ($scope, api, User, gettextCatalog, metric, kissMetricInfo, segmentio) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AuctionReportsCtrl', AuctionReportsCtrl);
+
+  AuctionReportsCtrl.$inject = ['$scope', 'api', 'User', 'gettextCatalog', 'metric', 'kissMetricInfo', 'segmentio'];
+
+  function AuctionReportsCtrl($scope, api, User, gettextCatalog, metric, kissMetricInfo, segmentio) {
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
      * when saving the report PDF.
@@ -80,4 +86,6 @@ angular.module('nextgearWebApp')
 
       window.open(strUrl, '_blank'); // open a new window every time
     };
-  });
+
+  }
+})();

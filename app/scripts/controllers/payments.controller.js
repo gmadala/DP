@@ -1,7 +1,32 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('PaymentsCtrl', function($scope, $stateParams, $timeout, moment, Payments, User, $dialog, BusinessHours, Addresses, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('PaymentsCtrl', PaymentsCtrl);
+
+  PaymentsCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    'moment',
+    'Payments',
+    'User',
+    '$dialog',
+    'BusinessHours',
+    'Addresses',
+    'gettextCatalog'
+  ];
+
+  function PaymentsCtrl(
+    $scope,
+    $stateParams,
+    moment,
+    Payments,
+    User,
+    $dialog,
+    BusinessHours,
+    Addresses,
+    gettextCatalog) {
 
     $scope.isCollapsed = true;
 
@@ -92,7 +117,7 @@ angular.module('nextgearWebApp')
 
     $scope.payments.fetchNextResults = function () {
       var paginator = $scope.payments.paginator,
-          promise;
+        promise;
 
       if (paginator && !paginator.hasMore()) {
         if (paginator.hitMaximumLimit()) {
@@ -159,24 +184,24 @@ angular.module('nextgearWebApp')
 
     // Set up page-load filtering based on $stateParams
     var filterParam = null,
-        startDate = null,
-        endDate = null;
+      startDate = null,
+      endDate = null;
     switch($stateParams.filter) {
-    case 'today':
-      filterParam = Payments.filterValues.TODAY;
-      break;
-    case 'overdue':
-      filterParam = Payments.filterValues.RANGE;
-      endDate = moment().subtract(1, 'days').toDate();
-      break;
-    case 'this-week':
-      filterParam = Payments.filterValues.THIS_WEEK;
-      break;
-    case 'this-month':
-      filterParam = Payments.filterValues.RANGE;
-      startDate = moment().startOf('month').toDate();
-      endDate = moment().endOf('month').toDate();
-      break;
+      case 'today':
+        filterParam = Payments.filterValues.TODAY;
+        break;
+      case 'overdue':
+        filterParam = Payments.filterValues.RANGE;
+        endDate = moment().subtract(1, 'days').toDate();
+        break;
+      case 'this-week':
+        filterParam = Payments.filterValues.THIS_WEEK;
+        break;
+      case 'this-month':
+        filterParam = Payments.filterValues.RANGE;
+        startDate = moment().startOf('month').toDate();
+        endDate = moment().endOf('month').toDate();
+        break;
     }
     if($stateParams.filter && !filterParam) {
       // it's a date filter
@@ -237,39 +262,5 @@ angular.module('nextgearWebApp')
       bizHours();
     });
 
-  }).controller('ExtensionRequestCtrl', function ($scope, dialog, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
-
-    //TODO changes in here for 3893
-    $scope.payment = payment;
-    $scope.closeDialog = dialog.close;
-    $scope.isEnglish = gettextCatalog.currentLanguage === 'en';
-
-    Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
-      $scope.extPrev = result;
-
-      var feeTotal = _.reduce($scope.extPrev.Fees, function(sum, fee) {
-        return sum + fee.Amount;
-      }, 0);
-
-      $scope.subtotal = $scope.extPrev.PrincipalAmount + $scope.extPrev.InterestAmount + feeTotal + $scope.extPrev.CollateralProtectionAmount;
-    }, function() {
-      $scope.extPrev = {
-        CanExtend: false
-      };
-    });
-
-    $scope.onConfirm = function() {
-      onConfirm();
-      dialog.close();
-    };
-
-    $scope.confirmRequest = function() {
-      if($scope.extPrev.CanExtend) {
-        Payments.requestExtension(payment.FloorplanId).then(function() {
-          $scope.onConfirm();
-        });
-      } else {
-        dialog.close();
-      }
-    };
-  });
+  }
+})();

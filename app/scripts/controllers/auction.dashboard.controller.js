@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AuctionDashboardCtrl', function($scope, Dashboard, api, $state) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AuctionDashboardCtrl', AuctionDashboardCtrl);
+
+  AuctionDashboardCtrl.$inject = ['$scope', 'Dashboard', 'api', '$state'];
+
+  function AuctionDashboardCtrl($scope, Dashboard, api, $state) {
 
     $scope.dashboardData = {};
     Dashboard.fetchAuctionDashboard().then(function(data) {
@@ -14,17 +20,17 @@ angular.module('nextgearWebApp')
       var range = -1;  // See API for full definition, 0 = week, 1 = month, 2 = year
 
       switch(newVal) {
-      case 'year':
-        range = 2;
-        break;
-      case 'month':
-        range = 1;
-        break;
-      case 'week':
-        range = 0;
-        break;
-      default:
-        throw new Error('Unexpected value for filtering floorplan chart!');
+        case 'year':
+          range = 2;
+          break;
+        case 'month':
+          range = 1;
+          break;
+        case 'week':
+          range = 0;
+          break;
+        default:
+          throw new Error('Unexpected value for filtering floorplan chart!');
       }
       Dashboard.fetchFloorplanChartData(range).then(function (data) {
         $scope.chartData = data;
@@ -59,4 +65,6 @@ angular.module('nextgearWebApp')
         '_blank'  // open a new window every time
       );
     };
-  });
+
+  }
+})();

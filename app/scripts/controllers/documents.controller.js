@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('DocumentsCtrl', DocumentsCtrl);
+
+  DocumentsCtrl.$inject = ['$scope', 'api', 'metric', 'gettextCatalog', 'User', 'kissMetricInfo'];
+
+  function DocumentsCtrl($scope, api, metric, gettextCatalog, User, kissMetricInfo) {
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
@@ -78,11 +84,13 @@ angular.module('nextgearWebApp')
     ];
 
     kissMetricInfo.getKissMetricInfo().then(function(result){
-        $scope.kissMetricData = result;
-      });
+      $scope.kissMetricData = result;
+    });
 
     $scope.feeScheduleUrl = api.contentLink(
-        '/dealer/feeschedule/FeeSchedule',
-        {}
-      );
-  });
+      '/dealer/feeschedule/FeeSchedule',
+      {}
+    );
+
+  }
+})();

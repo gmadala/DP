@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ProfileSettingsCtrl', ProfileSettingsCtrl);
+
+  ProfileSettingsCtrl.$inject = ['$scope', 'ProfileSettings'];
+
+  function ProfileSettingsCtrl($scope, ProfileSettings) {
 
     $scope.loading = false;
 
@@ -281,4 +287,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

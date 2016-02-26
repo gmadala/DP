@@ -1,15 +1,21 @@
-'use strict';
+(function (){
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, $window, api) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ConfirmCheckoutCtrl', ConfirmCheckoutCtrl);
+
+  ConfirmCheckoutCtrl.$inject = ['$scope', '$state', 'dialog', 'queue', 'transactionInfo', 'Receipts', '$window', 'api'];
+
+  function ConfirmCheckoutCtrl($scope, $state, dialog, queue, transactionInfo, Receipts, $window, api) {
 
     $scope.today = new Date();
 
     // split the payments queue into immediate and scheduled
     var paymentsToday = [],
-        paymentsScheduled = [],
-        feesToday = [],
-        feesScheduled = [];
+      paymentsScheduled = [],
+      feesToday = [],
+      feesScheduled = [];
 
     angular.forEach(queue.payments, function (payment) {
       if (payment.scheduleDate) {
@@ -96,4 +102,5 @@ angular.module('nextgearWebApp')
       dialog.close();
     };
 
-  });
+  }
+})();

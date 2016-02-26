@@ -1,9 +1,51 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User,
-                                              TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
-                                              Upload, nxgConfig, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('VehicleDetailsCtrl', VehicleDetailsCtrl);
+
+  VehicleDetailsCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    '$state',
+    '$q',
+    '$dialog',
+    '$filter',
+    'VehicleDetails',
+    'User',
+    'TitleReleases',
+    'Floorplan',
+    'Payments',
+    'Addresses',
+    'api',
+    'moment',
+    'gettextCatalog',
+    'Upload',
+    'nxgConfig',
+    'kissMetricInfo'
+  ];
+
+  function VehicleDetailsCtrl(
+    $scope,
+    $stateParams,
+    $state,
+    $q,
+    $dialog,
+    $filter,
+    VehicleDetails,
+    User,
+    TitleReleases,
+    Floorplan,
+    Payments,
+    Addresses,
+    api,
+    moment,
+    gettextCatalog,
+    Upload,
+    nxgConfig,
+    kissMetricInfo) {
+
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -187,16 +229,16 @@ angular.module('nextgearWebApp')
         };
 
         Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
-           function (result) {
-             var resultVal=false;
-             var extNumber = 0;
+          function (result) {
+            var resultVal=false;
+            var extNumber = 0;
 
-             if (typeof result[0] !== 'undefined') {
-               resultVal=result[0].extendable;
-               extNumber = result[0].extensionNumber ;
-             }
-             $scope.isShowExtendLink = resultVal && (extNumber<3) && !$scope.paymentForCheckout.Scheduled;
-           }
+            if (typeof result[0] !== 'undefined') {
+              resultVal=result[0].extendable;
+              extNumber = result[0].extensionNumber ;
+            }
+            $scope.isShowExtendLink = resultVal && (extNumber<3) && !$scope.paymentForCheckout.Scheduled;
+          }
         );
 
         $scope.getAdditionalPrincipal = function() {
@@ -573,4 +615,5 @@ angular.module('nextgearWebApp')
 
     getData();
 
-  });
+  }
+})();

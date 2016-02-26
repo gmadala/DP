@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('MultipleVehiclesCtrl', function ($scope, dialog, matchList) {
+  angular
+    .module('nextgearWebApp')
+    .controller('MultipleVehiclesCtrl', MultipleVehiclesCtrl);
+
+  MultipleVehiclesCtrl.$inject = ['$scope', 'dialog', 'matchList'];
+
+  function MultipleVehiclesCtrl($scope, dialog, matchList) {
+
     $scope.matches = matchList;
 
     var focusField = angular.element('#inputVin');
@@ -19,4 +26,7 @@ angular.module('nextgearWebApp')
         focusField.focus();
       }
     };
-  });
+
+  }
+
+})();

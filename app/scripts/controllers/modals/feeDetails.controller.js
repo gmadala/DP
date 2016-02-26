@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('FeeDetailsCtrl', function ($scope, dialog, activity, gettext, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('FeeDetailsCtrl', FeeDetailsCtrl);
+
+  FeeDetailsCtrl.$inject = ['$scope', 'dialog', 'activity', 'gettext', 'gettextCatalog'];
+
+  function FeeDetailsCtrl($scope, dialog, activity, gettext, gettextCatalog) {
 
     // TODO should be translated server side but doing it this way for now https://tardis.discoverdsc.com/browse/VO-3581
     // Then we would not need this section
@@ -17,4 +23,7 @@ angular.module('nextgearWebApp')
     $scope.close = function () {
       dialog.close();
     };
-  });
+
+  }
+
+})();

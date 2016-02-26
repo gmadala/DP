@@ -1,7 +1,30 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
+  angular
+    .module('nextgearWebApp')
+    .controller('LoginRecoverCtrl', LoginRecoverCtrl);
+
+  LoginRecoverCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$dialog',
+    'User',
+    'gettextCatalog',
+    'kissMetricInfo',
+    'metric',
+    'segmentio'
+  ];
+
+  function LoginRecoverCtrl(
+    $scope,
+    $state,
+    $dialog,
+    User,
+    gettextCatalog,
+    kissMetricInfo,
+    metric,
+    segmentio) {
 
     $scope.userNameRecovery = {
       // forgotUserNameForm
@@ -129,4 +152,5 @@ angular.module('nextgearWebApp')
       );
     };
 
-  });
+  }
+})();

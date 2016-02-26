@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CancelPaymentCtrl', function ($scope, $injector, dialog, options, Payments, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('CancelPaymentCtrl', CancelPaymentCtrl);
+
+  CancelPaymentCtrl.$inject = ['$scope', 'dialog', 'options', 'Payments', 'gettextCatalog'];
+
+  function CancelPaymentCtrl($scope, dialog, options, Payments, gettextCatalog) {
+
     $scope.payment = options.payment;
     $scope.title = options.title ? options.title : gettextCatalog.getString('Cancel Payment');
 
@@ -24,4 +31,6 @@ angular.module('nextgearWebApp')
       );
     };
 
-  });
+  }
+
+})();

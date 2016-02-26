@@ -1,12 +1,48 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * WARNING: This controller is used for both dealer Floor a Car AND auction Bulk Flooring. Understand
- * the ramifications to each view and test both when making any changes here!!
- */
-angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
-                                       OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
+  /**
+   * WARNING: This controller is used for both dealer Floor a Car AND auction Bulk Flooring. Understand
+   * the ramifications to each view and test both when making any changes here!!
+   */
+  angular
+    .module('nextgearWebApp')
+    .controller('FloorCarCtrl', FloorCarCtrl);
+
+  FloorCarCtrl.$inject = [
+    '$scope',
+    '$dialog',
+    '$location',
+    '$q',
+    'User',
+    'Floorplan',
+    'Addresses',
+    'Blackbook',
+    'protect',
+    'OptionDefaultHelper',
+    'moment',
+    'gettextCatalog',
+    'AccountManagement',
+    'Upload',
+    'nxgConfig'
+  ];
+
+  function FloorCarCtrl(
+    $scope,
+    $dialog,
+    $location,
+    $q,
+    User,
+    Floorplan,
+    Addresses,
+    Blackbook,
+    protect,
+    OptionDefaultHelper,
+    moment,
+    gettextCatalog,
+    AccountManagement,
+    Upload,
+    nxgConfig) {
 
 
     $scope.$watch('files', function(newValue, oldValue){
@@ -312,4 +348,6 @@ angular.module('nextgearWebApp')
     $scope.canAttachDocuments = function () {
       return ($scope.attachDocumentsEnabled);
     };
-  });
+
+  }
+})();

@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AuctionDocumentsCtrl', function($scope, gettextCatalog, User, segmentio, metric, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AuctionDocumentsCtrl', AuctionDocumentsCtrl);
+
+  AuctionDocumentsCtrl.$inject = ['$scope', 'gettextCatalog', 'User', 'segmentio', 'metric', 'kissMetricInfo'];
+
+  function AuctionDocumentsCtrl($scope, gettextCatalog, User, segmentio, metric, kissMetricInfo) {
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -37,4 +43,6 @@ angular.module('nextgearWebApp')
         metric: metric.AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE
       });
     }
-  });
+
+  }
+})();
