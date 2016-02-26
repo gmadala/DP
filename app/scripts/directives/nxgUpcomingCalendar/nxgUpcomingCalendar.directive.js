@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgUpcomingCalendar', function (moment, $state) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgUpcomingCalendar', nxgUpcomingCalendar);
+
+  nxgUpcomingCalendar.$inject = ['moment', '$state'];
+
+  function nxgUpcomingCalendar(moment, $state) {
+
     return {
       template: '<div class="dash-calendar" ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
       restrict: 'AC',
@@ -159,4 +166,6 @@ angular.module('nextgearWebApp')
 
       }
     };
-  });
+
+  }
+})();

@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgEnter', function() {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgEnter', nxgEnter);
+
+  nxgEnter.$inject = [];
+
+  function nxgEnter() {
+
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {
         if (event.which === 13 /*enter key code*/) {
@@ -12,4 +19,6 @@ angular.module('nextgearWebApp')
         }
       });
     };
-  });
+
+  }
+})();

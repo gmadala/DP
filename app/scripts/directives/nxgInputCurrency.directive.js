@@ -1,21 +1,28 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgInputCurrency', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgInputCurrency', nxgInputCurrency);
+
+  nxgInputCurrency.$inject = [];
+
+  function nxgInputCurrency() {
+
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
         var removeSymbols = /[^\d\.]/g,
-            validformats = /^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/,
+          validformats = /^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/,
 
-            formatViewValue = function(value) {
-              if( typeof value === 'string') {
-                return parseFloat(value.replace(removeSymbols, ''), 10);
-              } else {
-                return value;
-              }
-            };
+          formatViewValue = function(value) {
+            if( typeof value === 'string') {
+              return parseFloat(value.replace(removeSymbols, ''), 10);
+            } else {
+              return value;
+            }
+          };
 
         ctrl.$parsers.unshift(function(viewValue) {
           //if the validation pattern is wrong, set the pattern validity to false here rather than as part of the
@@ -36,4 +43,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

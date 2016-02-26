@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgFluidContainer', function ($rootScope) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgFluidContainer', nxgFluidContainer);
+
+  nxgFluidContainer.$inject = ['$rootScope'];
+
+  function nxgFluidContainer($rootScope) {
+
     return {
       template: '<div class="{{ containerClass }}" ng-transclude></div>',
       restrict: 'A',
@@ -20,4 +27,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

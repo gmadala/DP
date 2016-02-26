@@ -1,21 +1,28 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgSticky', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgSticky', nxgSticky);
+
+  nxgSticky.$inject = [];
+
+  function nxgSticky() {
+
     return {
       restrict: 'A',
       controller: function($scope, $element, $attrs, $window, $document, $timeout) {
         var win = angular.element($window),
-            doc = angular.element($document),
-            el = angular.element($element), // our element that needs to move
-            scrollEl = el.find($attrs.scroll || '.nxg-sticky-scroll'), // the element that will scroll
-            offset = el.offset(), // element's initial offset from window top
-            topSpacing = 15, // amount of space we want at top of element
-            bottomSpacing = 15, // amount of space we want at bottom of element
-            bottomElMargin = 20, // bottom margin for when we're at the bottom of the page
-            footerHeight = 50, // size of footer that we need to account for in our calculations
-            heightOfElementHeader = 50, // Grey background header height
-            heightOfElementFooter = 0; // Subtotal box height
+          doc = angular.element($document),
+          el = angular.element($element), // our element that needs to move
+          scrollEl = el.find($attrs.scroll || '.nxg-sticky-scroll'), // the element that will scroll
+          offset = el.offset(), // element's initial offset from window top
+          topSpacing = 15, // amount of space we want at top of element
+          bottomSpacing = 15, // amount of space we want at bottom of element
+          bottomElMargin = 20, // bottom margin for when we're at the bottom of the page
+          footerHeight = 50, // size of footer that we need to account for in our calculations
+          heightOfElementHeader = 50, // Grey background header height
+          heightOfElementFooter = 0; // Subtotal box height
 
         if($attrs.footer){
           $timeout(function() {
@@ -139,4 +146,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

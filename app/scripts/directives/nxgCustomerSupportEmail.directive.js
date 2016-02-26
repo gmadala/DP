@@ -1,10 +1,17 @@
-'use strict';
+(function() {
+  'use strict';
 
 // This directive will display all available customer service email addresses. This directive should be used in pre auth
 // pages:
 // * login page
-angular.module('nextgearWebApp')
-  .directive('nxgCustomerSupportEmail', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgCustomerSupportEmail', nxgCustomerSupportEmail);
+
+  nxgCustomerSupportEmail.$inject = [];
+
+  function nxgCustomerSupportEmail() {
+
     return {
       restrict: 'E',
       replace: true,
@@ -18,4 +25,6 @@ angular.module('nextgearWebApp')
       '  </span>' +
       '</span>'
     };
-  });
+
+  }
+})();

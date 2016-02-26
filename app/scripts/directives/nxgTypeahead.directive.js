@@ -1,15 +1,22 @@
-'use strict';
-/**
- * U G L Y you ain't got no alibi, you UGLY.
- *
- * This is a terribly hack, but it's required until angular-strap is changed.
- * If it's ever changed (eg upgraded to native Angular version), this
- * directive SHOULD be removed.
- *
- * Built to fix bug VO-2621
- */
-angular.module('nextgearWebApp')
-  .directive('nxgTypeahead', function ($compile) {
+(function() {
+  'use strict';
+  /**
+   * U G L Y you ain't got no alibi, you UGLY.
+   *
+   * This is a terribly hack, but it's required until angular-strap is changed.
+   * If it's ever changed (eg upgraded to native Angular version), this
+   * directive SHOULD be removed.
+   *
+   * Built to fix bug VO-2621
+   */
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgTypeahead', nxgTypeahead);
+
+  nxgTypeahead.$inject = ['$compile'];
+
+  function nxgTypeahead($compile) {
+
     return {
       restrict: 'A',
       priority: 1000,
@@ -44,7 +51,8 @@ angular.module('nextgearWebApp')
 
           $compile(element)(scope);
         };
-
       }
     };
-  });
+
+  }
+})();

@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgBlur', function ($parse) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgBlur', nxgBlur);
+
+  nxgBlur.$inject = ['parse'];
+
+  function nxgBlur($parse) {
+
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
@@ -13,4 +20,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

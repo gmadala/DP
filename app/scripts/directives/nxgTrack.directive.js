@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgTrack', function(segmentio, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgTrack', nxgTrack);
+
+  nxgTrack.$inject = ['segmentio', 'kissMetricInfo'];
+
+  function nxgTrack(segmentio, kissMetricInfo) {
+
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
@@ -19,4 +26,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

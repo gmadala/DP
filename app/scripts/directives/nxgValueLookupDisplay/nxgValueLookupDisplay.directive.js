@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgValueLookupDisplay', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgValueLookupDisplay', nxgValueLookupDisplay);
+
+  nxgValueLookupDisplay.$inject = [];
+
+  function nxgValueLookupDisplay() {
+
     return {
       templateUrl: 'scripts/directives/nxgValueLookupDisplay/nxgValueLookupDisplay.html',
       restrict: 'A',
@@ -20,4 +27,6 @@ angular.module('nextgearWebApp')
         };
       }
     };
-  });
+
+  }
+})();

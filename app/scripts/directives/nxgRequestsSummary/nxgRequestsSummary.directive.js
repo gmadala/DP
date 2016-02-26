@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgRequestsSummary', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgRequestsSummary', nxgRequestsSummary);
+
+  nxgRequestsSummary.$inject = [];
+
+  function nxgRequestsSummary() {
+
     return {
       templateUrl: 'scripts/directives/nxgRequestsSummary/nxgRequestsSummary.html',
       restrict: 'A',
@@ -10,14 +17,6 @@ angular.module('nextgearWebApp')
       },
       controller: 'RequestsSummaryCtrl'
     };
-  })
-  .controller('RequestsSummaryCtrl', function ($scope, $state, TitleReleases, Floorplan) {
-    $scope.titleQueue = {
-      contents: TitleReleases.getQueue(),
-      removeFromQueue: TitleReleases.removeFromQueue
-    };
 
-    $scope.getVehicleDescription = Floorplan.getVehicleDescription;
-
-    $scope.navigate = $state.transitionTo;
-  });
+  }
+})();

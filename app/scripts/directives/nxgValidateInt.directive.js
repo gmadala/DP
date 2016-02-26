@@ -1,18 +1,25 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * Strip everything but digits and decimals from a string entered
- * in an input and make sure its length is less than the
- * value sent in, before sending it on down the model.
- *
- * This is very aggressive, so you may want to pair with
- * an ng-pattern validator to make sure the value looked
- * reasonably like a number before stripping.
- *
- * As of Feb 2014, only used on Floor Car and Bulk Flooring pages.
- */
-angular.module('nextgearWebApp')
-  .directive('nxgValidateInt', function () {
+  /**
+   * Strip everything but digits and decimals from a string entered
+   * in an input and make sure its length is less than the
+   * value sent in, before sending it on down the model.
+   *
+   * This is very aggressive, so you may want to pair with
+   * an ng-pattern validator to make sure the value looked
+   * reasonably like a number before stripping.
+   *
+   * As of Feb 2014, only used on Floor Car and Bulk Flooring pages.
+   */
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgValidateInt', nxgValidateInt);
+
+  nxgValidateInt.$inject = [];
+
+  function nxgValidateInt() {
+
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -40,4 +47,6 @@ angular.module('nextgearWebApp')
         ctrl.$parsers.push(parser);
       }
     };
-  });
+
+  }
+})();
