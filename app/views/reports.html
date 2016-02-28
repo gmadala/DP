@@ -18,7 +18,7 @@
 
         <div class="form-row date-field date-picker custom disbursement-date-picker">
           <label for="curtailmentDate" translate>Date</label>
-          <input id="curtailmentDate" name="curtailmentDate"
+          <input id="curtailmentDate" name="curtailmentDate" nxg-date
                  placeholder="mm/dd/yyyy"
                  uib-datepicker-popup="{{dateFormat}}"
                  show-weeks="false"
@@ -140,7 +140,7 @@
         <div class="form-row date-field date-picker custom disbursement-date-picker">
             <label for="disDate" translate>Date</label>
             <input id="disDate" name="disDate"
-                   placeholder="mm/dd/yyyy"
+                   placeholder="mm/dd/yyyy" nxg-date
                    uib-datepicker-popup="{{dateFormat}}"
                    show-weeks="false"
                    max-date="maxDate"
@@ -155,7 +155,7 @@
           <button type="submit" class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
         </div>
         <div class="form-row">
-          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date" translate>
+          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.past)" translate>
              Please select a Valid Date.
           </label>
           <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
@@ -180,9 +180,9 @@
                    show-weeks="false"
                    show-button-bar="false"
                    is-open="paidStartDatePicker.opened"
-                   date-allow="past"
                    max-date="maxDate"
                    ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required>
+
             <button tabindex="-1" type="button" style="right: 8%"
                     class="btn-unstyle reports-btn-calendar"
                     ng-click="openPaidStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
@@ -197,7 +197,6 @@
                    show-weeks="false"
                    show-button-bar="false"
                    is-open="paidEndDatePicker.opened"
-                   date-allow="past"
                    min-date="data.paidOffStartDate"
                    max-date="maxDate"
                    ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date }"
@@ -209,9 +208,17 @@
         </div>
 
         <div class="form-row">
-          <label for="paidOffStart" class="text-error" ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date" translate>Please select a Valid Start Date.</label>
-          <label for="paidOffEnd" class="text-error" ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date" translate>Please select a Valid End Date.</label>
-          <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>Start Date should not be later than End Date.</label>
+          <label for="paidOffStart" class="text-error"
+                 ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date" translate>
+            Please select a Valid Start Date.
+          </label>
+          <label for="paidOffEnd" class="text-error"
+                 ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date" translate>
+            Please select a Valid End Date.
+          </label>
+          <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>
+            Start Date should not be later than End Date.
+          </label>
         </div>
 
         <div class="form-row">

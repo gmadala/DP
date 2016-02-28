@@ -33,8 +33,8 @@
           <div class="form-row">
             <div class="date-field date-picker">
               <label for="disDate" class="input-title date-search-label" translate>Date Search</label>
-              <input type="text" uib-datepicker-popup="{{dateFormat}}"
-                     placeholder="mm/dd/yyyy"
+              <input uib-datepicker-popup="{{dateFormat}}"
+                     placeholder="mm/dd/yyyy" nxg-date
                      ng-model="data.disDate"
                      max-date="maxDate"
                      show-weeks="false"
@@ -50,19 +50,20 @@
           <div class="form-row btn-group">
             <button class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
           </div>
-        </div>
+
 
         <div class="row">
           <div class="col-xs-12">
-            <label for="disDate" class="text-error form-block" ng-show="disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date" translate>
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.past)" translate>
              Please select a Valid Date.
             </label>
-            <label for="disDate" class="text-error form-block" ng-show="disFormValidity.disDate.$error.past" translate>
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
                Please select a Date in the past.
             </label>
           </div>
         </div>
-      </form>
+        </form>
+      </div>
     </section>
   </div>
 </div>

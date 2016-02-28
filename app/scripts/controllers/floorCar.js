@@ -16,7 +16,7 @@ angular.module('nextgearWebApp')
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
 
-    $scope.dealerMinDate = moment().subtract(364, 'days');
+    $scope.dealerMinDate = moment().subtract(1, 'years');
     $scope.auctionMinDate = moment().subtract(7, 'days');
     $scope.maxDate = moment();
     $scope.datePicker = {
