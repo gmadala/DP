@@ -1,97 +1,94 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
-    $scope.onlyNumbersPattern = /^\d+$/;
+  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, BusinessSearch) {
 
-    /*** Number Search ***/
-    $scope.numberSearch = {
-      dealerNumInactive: false,
-      auctionNumInactive: false,
-      searchInProgress: false,
-      query: {},
-      invalid: {},
-      noresults: {},
-      setDealerNumActive: function() {
-        this.dealerNumInactive = false;
-        this.auctionNumInactive = true;
-      },
-      setAuctionNumActive: function() {
-        this.dealerNumInactive = true;
-        this.auctionNumInactive = false;
-      },
-      search: function(whichButton) {
-        if(whichButton === 'dealerNum') {
-          $scope.numberSearch.setDealerNumActive();
-        } else if(whichButton === 'auctionNum') {
-          $scope.numberSearch.setAuctionNumActive();
-        }
+    var lastPromise;
 
-        this.noresults = {}; // reset the no result messages, we're doing a new search
-        var which = this;
+    $scope.data = {
+      proposedQuery: '',
+      query: null,
+      results: [],
+      loading: false,
+      paginator: null,
+      sortBy: 'BusinessName',
+      sortDescending: false,
+      hitInfiniteScrollMax: false
+    };
 
-        if (this.validate()) {
-          this.searchInProgress = true;
-          if (!this.dealerNumInactive) {
-            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
-              // success
-              function(business) {
-                which.searchInProgress = false;
-                prv.searchByNumberHandler(business);
-              },
-              // failure
-              function() {
-                which.searchInProgress = false;
-              }
-            );
-          }
-          else {
-            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
-              // success
-              function(business) {
-                which.searchInProgress = false;
-                prv.searchByNumberHandler(business);
-              },
-              // failure
-              function() {
-                which.searchInProgress = false;
-              }
-            );
-          }
-        }
-      },
-      validate: function() {
-        var isValid = false,
-          dealerNumInput = $scope.numberSearchForm.dealerNum,
-          auctionAccessNumInput = $scope.numberSearchForm.auctionAccessNum,
-          missingRequiredDealerNum = !(this.dealerNumInactive || dealerNumInput.$viewValue),
-          missingRequiredAuctionAccessNum = !(this.auctionNumInactive || auctionAccessNumInput.$viewValue);
+    $scope.search = function() {
+      var isNewQuery = $scope.data.query !== $scope.data.proposedQuery;
 
-        this.invalid = {
-          required: {},
-          pattern: {}
-        };
+      $scope.data.query = $scope.data.proposedQuery;
+      $scope.validity = angular.copy($scope.searchControls);
 
-        if (missingRequiredDealerNum && missingRequiredAuctionAccessNum) {
-          this.invalid.required.dealerOrAccessNumber = true;
-        }
-        else if (missingRequiredDealerNum) {
-          this.invalid.required.dealerNumber = true;
-        }
-        else if (missingRequiredAuctionAccessNum) {
-          this.invalid.required.auctionAccessNumber = true;
-        }
-        else if (!this.dealerNumInactive && dealerNumInput.$error.pattern) {
-          this.invalid.pattern.dealerNumber = true;
-        }
-        else if (!this.auctionNumInactive && auctionAccessNumInput.$error.pattern) {
-          this.invalid.pattern.auctionAccessNumber = true;
-        }
-        else {
-          isValid = true;
-        }
-        return isValid;
+      if ($scope.validity && $scope.validity.$invalid) {
+        $scope.data.results.length = 0;
+        return;
       }
+
+      if (isNewQuery) {
+        $scope.fetch();
+      }
+    };
+
+    $scope.fetch = function() {
+      // search means "start from the beginning with current criteria"
+      $scope.data.paginator = null;
+      $scope.data.hitInfiniteScrollMax = false;
+      $scope.data.results.length = 0;
+
+      if ($scope.data.query) {
+        // a query is required for the search to be executed
+        $scope.fetchNextResults();
+      }
+    };
+
+    $scope.fetchNextResults = function() {
+      var promise;
+      var paginator = $scope.data.paginator;
+      if (paginator && !paginator.hasMore()) {
+        if (paginator.hitMaximumLimit()) {
+          $scope.data.hitInfiniteScrollMax = true;
+        }
+        return;
+      }
+
+      $scope.data.loading = true;
+      promise = lastPromise = BusinessSearch.search(
+        $scope.data.searchBuyersMode,
+        $scope.data.query,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      );
+
+      promise.then(
+        function(result) {
+          if (promise !== lastPromise) {
+            return;
+          }
+          $scope.data.loading = false;
+          $scope.data.paginator = result.$paginator;
+          Array.prototype.push.apply($scope.data.results, result.SearchResults);
+        }, function(/*error*/) {
+          if (promise !== lastPromise) {
+            return;
+          }
+          $scope.data.loading = false;
+        }
+      );
+    };
+
+    $scope.sortBy = function(fieldName) {
+      if ($scope.data.sortBy === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.data.sortDescending = !$scope.data.sortDescending;
+      } else {
+        $scope.data.sortBy = fieldName;
+        $scope.data.sortDescending = false;
+      }
+      $scope.fetch();
     };
 
     /*** Name Search ***/
@@ -148,11 +145,6 @@ angular.module('nextgearWebApp')
       }
     };
 
-    // Get list of states
-    User.getStatics().then(function(statics) {
-      $scope.states = statics.states;
-    });
-
     /*** Private ***/
     var prv = {
       searchByNumberHandler: function(business) {
@@ -192,5 +184,6 @@ angular.module('nextgearWebApp')
         }
       }.bind($scope.numberSearch)
     };
-  })
-;
+
+    prv.searchByNumberHandler();
+  });

@@ -1,133 +1,102 @@
-<div class="row dealer-search">
-  <div class="col-xs-6 well">
-    <h2 class="well-title" translate>Dealer Number Search</h2>
-    <form name="numberSearchForm" ng-submit="numberSearch.search()" class="row search zeroLeftMargin zeroRightMargin" novalidate>
-      <p translate> If you have the NextGear Capital Dealer Number or Auction Access Number, use the Dealer Number search. </p>
+<div class="well">
+  <h2 class="well-title" translate>Find a Dealer</h2>
 
-      <div class="row">
-        <div class="col-xs-8">
-          <label for="dealerNum" translate>NextGear Capital Dealer Number</label>
-
-          <div class="styled-input with-btn">
-            <input type="text"
-                   id="dealerNum"
-                   name="dealerNum"
-                   ng-pattern="onlyNumbersPattern"
-                   ng-model="numberSearch.query.dealerNumber"
-                   nxg-focus="numberSearch.setDealerNumActive()"
-                   nxg-requires="data.proposedQuery.length >= 3"
-                   ng-class="{ 'nxg-invalid': numberSearch.invalid.required.dealerNumber || numberSearch.invalid.pattern.dealerNumber }">
-            <button class="btn btn-input" type="button" ng-click="numberSearch.search('dealerNum')"
-                    ng-disabled="numberSearch.searchInProgress">
-              <span nxg-icon="icon-search"></span>
-            </button>
-          </div>
-
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.noresults.dealerNumber" translate>
-            No results found, please enter a valid Dealer Number.
-          </label>
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.required.dealerNumber" translate>
-            Please enter a Dealer Number.
-          </label>
-          <label for="dealerNum" class="text-error" ng-show="numberSearch.invalid.pattern.dealerNumber" translate>
-            Please enter a numeric value.
-          </label>
+  <form name="numberSearchForm" ng-submit="numberSearch.search()" class="search" novalidate>
+    <div class="row vertical-align">
+      <div class="col-xs-6 custom form-block">
+        <div class="padding-left">
+          Search by your Business Number, NextGear Capital Dealer Number, Auction Access Number or by the name of the
+          business.
         </div>
       </div>
-
-        <h2 class="col-xs-12" translate>- OR -</h2>
-
-      <div class="row">
-        <div class="col-xs-8">
-          <label for="auctionAccessNum" translate>Auction Access Number</label>
-          <div class="styled-input with-btn">
-            <input type="text"
-                   id="auctionAccessNum"
-                   name="auctionAccessNum"
-                   ng-pattern="onlyNumbersPattern"
-                   ng-model="numberSearch.query.auctionAccessNumber"
-                   ng-class="{'nxg-fade' : !numberSearch.auctionAccessNumberActive, 'nxg-invalid': numberSearch.invalid.required.auctionAccessNumber || numberSearch.invalid.pattern.auctionAccessNumber }"
-                   nxg-focus="numberSearch.setAuctionNumActive()">
-           <button class="btn btn-input" type="button" ng-click="numberSearch.search('auctionNum')"
-                    ng-disabled="numberSearch.searchInProgress">
-              <span nxg-icon="icon-search"></span>
-           </button>
-          </div>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.noresults.auctionAccessNumber" translate>
-            No results found, please enter a valid Auction Access Number.
-          </label>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.required.auctionAccessNumber" translate>
-            Please enter an Auction Access Number.
-          </label>
-          <label for="auctionAccessNum" class="text-error" ng-show="numberSearch.invalid.pattern.auctionAccessNumber" translate>
-            Please enter a numeric value.
-          </label>
+      <div class="col-xs-6 custom">
+        <div class="styled-input with-btn">
+          <input type="text" id="search" name="search" class="full-width">
+          <button id="floorPlanSearch" class="btn btn-input" type="submit" ng-click="search()">
+            <span nxg-icon="icon-search"></span>
+          </button>
         </div>
       </div>
-      <button class="btn-hide" tabindex="-1" type="submit"></button>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 
-  <div class="col-xs-6 well">
-    <h2 class="well-title" translate>Dealer Name Search</h2>
+<div class="well">
+  <div>
+    <h2 class="well-title">Dealer Search Results</h2>
+    <p class="notice-box" translate>
+      Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+    </p>
 
-    <form name="nameSearchForm" class="row search zeroLeftMargin zeroRightMargin" novalidate>
-      <p translate> To look up a dealer in Dealer search, use a combination of their Name and City or
-      State. </p>
+    <div class="search-results"
+         nxg-infinite-scroll="fetchNextResults()"
+         nxg-infinite-scroll-disabled="data.loading"
+         nxg-infinite-scroll-show-indicator="data.loading"
+         nxg-scroll-container>
+      <table class="table table-primary table-striped">
+        <thead>
+        <th class="sortable"
+            ng-click="sortBy('BusinessName')"
+            ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'Business Name' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('BusinessLegalName')"
+            ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'Legal Name' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('CarmaxNumber')"
+            ng-class="{ sorted : data.sortBy == 'CarmaxNumber', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'Carmax No.' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('BusinessNumber')"
+            ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'Business No.' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('AuctionAccessNumber')"
+            ng-class="{ sorted : data.sortBy == 'AuctionAccessNumber', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'Auction Access No.' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('City')"
+            ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'City' | translate }}"></nxg-sortable>
+        </th>
+        <th class="sortable"
+            ng-click="sortBy('State')"
+            ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+          <nxg-sortable sortable-text="{{ 'State' | translate }}"></nxg-sortable>
+        </th>
+        <th translate>
+          Details
+        </th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
+          <td class="value">
+            <a href ng-click="showCreditQuery(business)">
+              <span nxg-highlight="business.BusinessName" highlight="business.data.query"></span>
+            </a>
+          </td>
+          <td>{{ business.BusinessLegalName }}</td>
+          <td>{{ business.BusinessNumber }}</td>
+          <td>{{ business.BusinessNumber }}</td>
+          <td>{{ business.BusinessNumber }}</td>
+          <td>{{ business.City }}</td>
+          <td>{{ business.State }}</td>
 
-      <div class="row">
-        <div class="col-xs-8">
-          <label for="dealerName" translate>Dealer Name</label>
-          <input type="text"
-                 class="smallInput"
-                 id="dealerName"
-                 ng-model="nameSearch.query.dealerName"
-                 ng-class="{ 'nxg-invalid': nameSearch.invalid.dealerName || nameSearch.invalid.minlength }">
-
-          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.dealerName" translate>
-            Please enter a Dealer Name.
-          </label>
-          <label for="dealerName" class="text-error" ng-show="nameSearch.invalid.minlength" translate>
-            Please enter at least 3 characters.
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-5">
-          <label for="city" translate>City</label>
-
-          <input type="text"
-                 id="city"
-                 class="input-full"
-                 ng-model="nameSearch.query.city"
-                 ng-class="{ 'nxg-invalid': nameSearch.invalid.cityFormat }">
-        </div>
-
-        <div class="col-xs-3">
-          <h2 class="form-separator center" translate>- OR -</h2>
-        </div>
-
-        <div class="col-xs-4">
-          <label for="state" translate>State</label>
-          <div class="style-select auto">
-            <select id="state" class="input-medium" ng-model="nameSearch.query.state" ng-options="state.StateName for state in states">
-              <option value=""></option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <label for="city" class="text-error" ng-show="nameSearch.invalid.cityFormat" translate>
-          City names must only have letters and spaces.
-        </label>
-
-        <label for="city" class="text-error" ng-show="nameSearch.invalid.CityOrState" translate>
-          Please enter a City or select a State.
-        </label>
-      </div>
-
-      <button class="btn-cta cta-primary" type="submit" ng-click="nameSearch.search()" translate>Search Dealers</button>
-    </form>
+          <td>
+            <button class="btn-cta cta-primary" type="submit" ng-click="view()">View</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
+        There are too many results to display, please refine your search further.
+      </p>
+    </div>
   </div>
 </div>
