@@ -74,7 +74,7 @@
           <div class="date-field date-picker col-xs-5 custom reports-search-date-picker" style="width: 41.66667%">
             <label for="stmtStart" translate>Start Date</label>
             <input id="stmtStart" name="stmtStart" style="width: 103%;"
-                   placeholder="mm/dd/yyyy"
+                   placeholder="mm/dd/yyyy" type="text"
                    uib-datepicker-popup="{{dateFormat}}"
                    ng-model="data.stmtStartDate"
                    max-date="maxDate"
@@ -114,6 +114,9 @@
         </label>
         <label class="text-error" ng-show="stmtFormValidity.dateRangeError" translate>
           Start Date should not be later than End Date.
+        </label>
+        <label class="text-error" ng-show="stmtFormValidity.endDateRangeError" translate>
+          Please select past End Date.
         </label>
 
         <div class="form-row">
@@ -191,7 +194,7 @@
           <div class="date-field date-picker col-xs-5 custom reports-search-date-picker" style="width: 41.66667%">
             <label for="paidOffEnd" translate>End Date</label>
             <input id="paidOffEnd" name="paidOffEnd" style="width: 103%;"
-                   ng-model="data.paidOffEndDate"
+                   ng-model="data.paidOffEndDate"  type="text"
                    placeholder="mm/dd/yyyy"
                    uib-datepicker-popup="{{dateFormat}}"
                    show-weeks="false"
@@ -218,6 +221,9 @@
           </label>
           <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>
             Start Date should not be later than End Date.
+          </label>
+          <label class="text-error" ng-show="paidOffFormValidity.endDateRangeError" translate>
+            Please select past End Date.
           </label>
         </div>
 

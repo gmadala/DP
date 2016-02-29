@@ -52,6 +52,9 @@
                        ng-show="validity.startDate.$error.date" translate>
                   Please enter a Valid Start Date.
                 </label>
+                <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>
+                  Invalid date range
+                </label>
               </div>
 
               <div class="date-field date-picker col-xs-6 custom search-date-picker" style="padding-right: 25px;">
@@ -71,9 +74,6 @@
                 </label>
               </div>
             </div>
-            <label for="endDate" class="text-error" ng-show="validity.$error.invalidDateRange" translate>
-              Invalid date range
-            </label>
           </div>
         </div>
         <div ng-class="{'row form-block':dateRangeShown}">

@@ -126,7 +126,7 @@
         </label>
       </div>
 
-      <div class="date-picker date-field">
+      <div class="date-picker date-field" style="width: 120px;">
         <label for="purchaseAuctionDatePicker" class="input-title" translate>Sales Date</label>
         <input type="text" uib-datepicker-popup="{{dateFormat}}"
                placeholder="mm/dd/yyyy"
@@ -140,6 +140,7 @@
                name="purchaseAuctionDatePicker"
                required>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+        </div>
         <label for="purchaseAuctionDatePicker" class="text-error"
                ng-show="validity.purchaseAuctionDatePicker.$error.required || validity.purchaseAuctionDatePicker.$error.date" translate>
           Please enter a Valid Sales Date.
@@ -152,8 +153,6 @@
                ng-show="validity.purchaseAuctionDatePicker.$error.past" translate>
           Please enter a Sales Date in the past.
         </label>
-
-      </div>
       <p>
         <span class="scale-description" translate>The actual sale date must be used when flooring a car</span>
         <button class="btn-help inline"
