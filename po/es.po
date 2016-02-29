@@ -363,7 +363,7 @@ msgstr "¿Está seguro que desea salir?"
 
 #: app/scripts/directives/navBar/navBar.html:32
 msgid "Auction #"
-msgstr ""
+msgstr "# de subasta"
 
 #: app/views/modals/businessSearch.html:55
 msgid "Auction Access No."
@@ -739,6 +739,8 @@ msgid ""
 "Confirm the vehicle information to send the flooring request to NextGear "
 "Capital. <br>Print this screen for your records."
 msgstr ""
+"Confirme la información del vehículo para enviar la solicitud de puesta en "
+"piso a NextGear Capital. <br>Imprima esta pantalla para sus registros."
 
 #: app/views/auction.bulkflooring.html:55
 msgid "Consigner Ticket Number"
@@ -839,7 +841,7 @@ msgstr "Días de rotación"
 
 #: app/scripts/directives/navBar/navBar.html:29
 msgid "Dealer #"
-msgstr ""
+msgstr "Distribuidor #"
 
 #: app/scripts/controllers/documents.js:39
 msgid "Dealer Funding Checklist"
@@ -952,11 +954,11 @@ msgstr "No coincide con el número de cuenta."
 
 #: app/views/documents.html:48
 msgid "Download myNextGear mobile Android"
-msgstr ""
+msgstr "Descargue myNextGear mobile para Android"
 
 #: app/views/documents.html:41
 msgid "Download myNextGear mobile iOS"
-msgstr ""
+msgstr "Descargue myNextGear mobile para iOS"
 
 #: app/views/floorcar.html:234 app/views/vehicledetails.html:483
 msgid "Drag files here..."
@@ -1057,6 +1059,9 @@ msgid ""
 "users with a PIN. All guarantors will be asked to set up their PIN when "
 "logging in to myNextGear."
 msgstr ""
+"El Registro Mejorado tendrá como resultado que todo el acceso a cuentas se "
+"restrinja a usuarios con NIP. Se pedirá a todos los fiadores que configuren "
+"su NIP cuando inicien una sesión en MyNextGear."
 
 #: app/views/modals/confirmEnableAutoPay.html:1
 msgid "Enroll in Automated Payments"
@@ -1094,7 +1099,7 @@ msgstr "Error al recuperar información del programa"
 
 #: app/views/promos.html:31 app/views/promos.html:60
 msgid "Event Sale"
-msgstr ""
+msgstr "Evento de Venta"
 
 #: app/views/valuelookup.html:558 app/views/valuelookup.html:624
 #: app/views/vehicledetails.html:359
@@ -1252,7 +1257,7 @@ msgstr "Total del plan de piso"
 
 #: app/views/vehicledetails.html:323
 msgid "Floor Plan Value Estimates"
-msgstr ""
+msgstr "Estimados del valor del plan de piso"
 
 #: app/views/dashboard.html:327
 msgid "Floor Plans"
@@ -1348,7 +1353,7 @@ msgstr "Lineamientos"
 
 #: app/views/promos.html:85
 msgid "Hide Old Promos"
-msgstr ""
+msgstr "Ocultar promociones antiguas"
 
 #: app/views/vehicledetails.html:234
 msgid "Hide Payment Activity"
@@ -1510,7 +1515,7 @@ msgstr "Línea de crédito"
 
 #: app/views/promos.html:16
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: app/views/login.html:44
 msgid "Log In"
@@ -1663,15 +1668,15 @@ msgstr ""
 
 #: app/views/vehicledetails.html:323
 msgid "NextGear Capital &amp; MMR Valuation"
-msgstr ""
+msgstr "NextGear Capital & Valoración MMR"
 
 #: app/views/vehicledetails.html:334
 msgid "NextGear Capital Book Values"
-msgstr ""
+msgstr "Valores de NextGear Capital Book"
 
 #: app/scripts/controllers/valuelookup.js:684 app/views/valuelookup.html:462
 msgid "NextGear Capital Book Wholesale Values"
-msgstr ""
+msgstr "Valores de mayoreo de NextGear Capital Book"
 
 #: app/views/analytics.html:47
 msgid ""
@@ -1702,6 +1707,8 @@ msgid ""
 "NextGear Capital has been notified of this change and will be sending "
 "funding soon."
 msgstr ""
+"Se ha notificado a NextGear Capital de este cambio y pronto le enviará "
+"financiamiento."
 
 #: app/scripts/filters/yesno.js:6 app/views/account_management.html:199
 #: app/views/account_management.html:204 app/views/account_management.html:379
@@ -1998,7 +2005,7 @@ msgstr "Pendiente/No pagado"
 
 #: app/views/modals/requestCreditIncrease.html:37
 msgid "Permanent"
-msgstr ""
+msgstr "Permanente"
 
 #: app/views/account_management.html:123
 msgid "Phone"
@@ -2076,6 +2083,9 @@ msgid ""
 "Please contact your local representative for any details about the "
 "promotions and/or event sales listed below."
 msgstr ""
+"Por favor, póngase en contacto con su representante local para obtener "
+"información sobre las promociones y/o eventos de ventas que se enumeran a "
+"continuación."
 
 #: app/views/auction.dealersearch.html:125
 msgid "Please enter a City or select a State."
@@ -2550,15 +2560,15 @@ msgstr "Ajustes del perfil"
 
 #: app/views/promos.html:32 app/views/promos.html:61
 msgid "Promo"
-msgstr ""
+msgstr "Promoción"
 
 #: app/scripts/directives/navBar/navBar.js:62
 msgid "Promos"
-msgstr ""
+msgstr "Promociones"
 
 #: app/views/promos.html:13
 msgid "Promotions / Event Sales"
-msgstr ""
+msgstr "Promociones / Eventos de Venta"
 
 #: app/views/auction.bulkflooring.html:107 app/views/floorcar.html:125
 #: app/views/modals/floorCarConfirm.html:74 app/views/vehicledetails.html:52
@@ -2784,7 +2794,7 @@ msgstr "Información de venta"
 
 #: app/views/promos.html:18
 msgid "Sale Type"
-msgstr ""
+msgstr "Tipo de venta"
 
 #: app/views/auction.bulkflooring.html:129
 #: app/views/modals/floorCarConfirm.html:80
@@ -2865,7 +2875,7 @@ msgstr "Pregunta de seguridad {{$index + 1}}"
 
 #: app/views/promos.html:25 app/views/promos.html:54
 msgid "See Details"
-msgstr ""
+msgstr "Ver detalles"
 
 #: app/views/vehicledetails.html:95
 msgid "Select Below"
@@ -2944,7 +2954,7 @@ msgstr "Ver detalles"
 
 #: app/views/promos.html:84
 msgid "Show Old Promos"
-msgstr ""
+msgstr "Mostrar promociones antiguas"
 
 #: app/views/vehicledetails.html:233
 msgid "Show Payment Activity"
@@ -2971,6 +2981,8 @@ msgid ""
 "Since this is your first login to myNextGear, please set your security "
 "questions before you enter the site."
 msgstr ""
+"Ya que ésta es su primera visita a myNextGear, por favor establezca sus "
+"preguntas de seguridad antes de entrar al sitio."
 
 #: app/views/modals/confirmTitleRequest.html:4
 msgid "Some title request(s) can not be processed at this time."
@@ -3296,6 +3308,10 @@ msgid ""
 "NextGear Capital employee via NextGear's Discover system that have been "
 "approved and are currently on the NextGear dealer's floor plan."
 msgstr ""
+"Este estado se aplica a vehículos puestos en piso a través de "
+"NextGearCapital.com o por un empleado de NextGear Capital mediante el "
+"sistema Discover de NextGear, que hayan sido aprobados y que estén "
+"actualmente en el plan de piso de distribuidores de NextGear."
 
 #: app/views/dashboard.html:302
 msgid ""
@@ -3303,6 +3319,10 @@ msgid ""
 "NextGear Capital employee via NextGear's Discover system that have not yet "
 "been approved by a NextGear employee."
 msgstr ""
+"Este estado se aplica a vehículos puestos en piso a través de "
+"NextGearCapital.com o por un empleado de NextGear Capital mediante el "
+"sistema Discover de NextGear Capital, que no hayan sido aprobados todavía "
+"por algún empleado de NextGear."
 
 #: app/views/dashboard.html:317
 msgid ""
@@ -3310,6 +3330,10 @@ msgid ""
 "been denied by a NextGear Capital employee. Please contact NextGear Customer "
 "Service to find out why a vehicle has been denied."
 msgstr ""
+"Este estado se aplica a vehículos puestos en piso a través de "
+"NextGearCapital.com que hayan sido rechazados por algún empleado de NextGear "
+"Capital. Por favor, póngase en contacto con Servicio a Clientes de NextGear "
+"para ver por qué se ha rechazado el vehículo."
 
 #: app/scripts/controllers/dashboard.js:230
 msgid "This week"
@@ -3549,6 +3573,8 @@ msgid ""
 "Unable to communicate with the NextGear Capital system. Please try again "
 "later."
 msgstr ""
+"No es posible establecer comunicación con el sistema NextGear Capital. Por "
+"favor, inténtelo más tarde."
 
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html:2
 #: app/scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html:6
@@ -3770,6 +3796,8 @@ msgid ""
 "We are sorry, but we are unable to provide NextGear Capital Book Values at "
 "this time."
 msgstr ""
+"Lo sentimos, pero no podemos proporcionarle valores de NextGear Capital Book "
+"en este momento."
 
 #: app/views/login.recover.html:33
 msgid ""
@@ -3846,7 +3874,7 @@ msgstr "Paquete de Bienvenida"
 
 #: app/views/login.updateSecurity.html:7
 msgid "Welcome to myNextGear!"
-msgstr ""
+msgstr "¡Bienvenido(a) a myNextGear!"
 
 #: app/scripts/controllers/floorCar.js:285
 msgid "What would you like to do?"
@@ -3930,6 +3958,8 @@ msgid ""
 "You do not appear to have any security questions configured. Please contact "
 "NextGear Capital for assistance."
 msgstr ""
+"Al parecer, no tiene ninguna pregunta de seguridad configurada. Por favor, "
+"póngase en contacto con NextGear Capital para obtener ayuda."
 
 #: app/views/payments.html:8
 msgid ""
@@ -3961,6 +3991,8 @@ msgstr ""
 msgid ""
 "You may select an already approved address on file with NextGear Capital."
 msgstr ""
+"Puede seleccionar una dirección que ya haya sido aprobada en el archivo de "
+"NextGear Capital."
 
 #: app/views/account_management.html:252 app/views/auction.settings.html:205
 msgid ""
@@ -4217,6 +4249,9 @@ msgid ""
 "information. Please contact your NextGear Capital Representative with any "
 "questions."
 msgstr ""
+"– Esta solicitud se enviará para su revisión y puede requerir información "
+"adicional. Por favor, póngase en contacto con su representante de NextGear "
+"Capital si tiene alguna pregunta."
 
 #~ msgid ""
 #~ "We are sorry, but we are unable to provide Kelley\n"
