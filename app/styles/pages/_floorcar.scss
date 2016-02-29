@@ -36,4 +36,9 @@
     background-size: contain;
     display: block !important;
   }
+  .tooltip-inner {
+    max-width: 300px;
+    width: 300px;
+    font-weight: normal;
+  }
 }

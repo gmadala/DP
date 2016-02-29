@@ -18,6 +18,7 @@
 
           if (attrs.maxDate && currentDate.isAfter(maxDate)) {
             ctrl.$setValidity('past', false);
+            ctrl.$setValidity('pastSales', false);
             return undefined;
           } else if (attrs.minDate && currentDate.isBefore(minDate)) {
             ctrl.$setValidity('future', false);

@@ -129,7 +129,7 @@
       <div class="date-picker date-field" style="width: 120px;">
         <label for="purchaseAuctionDatePicker" class="input-title" translate>Sales Date</label>
         <input type="text" uib-datepicker-popup="{{dateFormat}}"
-               placeholder="mm/dd/yyyy"
+               placeholder="mm/dd/yyyy"  nxg-date
                ng-model="data.UnitPurchaseDate"
                min-date="auctionMinDate"
                max-date="maxDate"
@@ -140,9 +140,18 @@
                name="purchaseAuctionDatePicker"
                required>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-        </div>
+        <button class="btn-alert" style="padding:0px;" ng-show="validity.purchaseAuctionDatePicker.$error.date"
+                tooltip-placement="right"
+                tooltip-trigger="mouseenter"
+                tooltip-html="true"
+                uib-tooltip="{{ 'You have entered a sale date that indicates that 8 or more days have passed from the sale date for the car you are attempting to floor. To floor this car please email NGC Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale and provide the Dealer\'s NGC Number and requested floorplan amount.' | translate }}"
+                tooltip-animation="true">
+          <span nxg-icon="icon-alert"></span>
+        </button>
+
+      </div>
         <label for="purchaseAuctionDatePicker" class="text-error"
-               ng-show="validity.purchaseAuctionDatePicker.$error.required || validity.purchaseAuctionDatePicker.$error.date" translate>
+               ng-show="validity.purchaseAuctionDatePicker.$error.required || (validity.purchaseAuctionDatePicker.$error.date)" translate>
           Please enter a Valid Sales Date.
         </label>
         <label for="purchaseAuctionDatePicker" class="text-error"
