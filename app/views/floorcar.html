@@ -105,11 +105,11 @@
                ng-class="{ 'nxg-invalid': validity.purchaseDate.$error.required || validity.purchaseDate.$error.past || validity.purchaseDate.$error.date }"/>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()">
           <span nxg-icon="icon-calendar"></span></button>
-          <button class="btn-alert" ng-show="validity.purchaseDate.$error.past"
+          <button class="btn-alert" ng-show="validity.purchaseDate.$error.future || validity.purchaseDate.$error.past"
                   tooltip-placement="right"
                   tooltip-trigger="mouseenter"
                   tooltip-html="true"
-                  uib-tooltip="{{ 'You have entered a sale date that indicates that 365 or more days have passed from the sale date for the car you are attempting to floor. To floor this car please email NGC Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale and provide the Dealer\'s NGC Number and requested floorplan amount.' | translate }}"
+                  uib-tooltip="{{ 'To floor plan purchases older than 365 days, please contact NextGear Capital Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, and provide the customer’s NextGear Dealer Number.' | translate }}"
                   tooltip-animation="true">
             <span nxg-icon="icon-alert"></span>
           </button>
@@ -117,12 +117,8 @@
       </div>
 
       <label for="purchaseDate" class="text-error"
-             ng-show="validity.purchaseDate.$error.required || validity.purchaseDate.$error.date || validity.purchaseDate.$error.past" translate>
+             ng-show="validity.purchaseDate.$error.required || validity.purchaseDate.$error.date || validity.purchaseDate.$error.past || validity.purchaseDate.$error.future" translate>
         Please enter a Valid Purchase Date.
-      </label>
-      <label for="purchaseDate" class="text-error"
-             ng-show="validity.purchaseDate.$error.future" translate>
-        Please enter a Purchase Date in the past.
       </label>
       <label for="inputBiz" class="input-title" translate>Seller</label>
       <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
