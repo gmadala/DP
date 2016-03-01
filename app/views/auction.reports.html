@@ -51,14 +51,13 @@
             <button class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
           </div>
 
-
         <div class="row">
           <div class="col-xs-12">
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.past)" translate>
-             Please select a Valid Date.
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.future)" translate>
+              Please select a Valid Date.
             </label>
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
-               Please select a Date in the past.
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.future" translate>
+              Please select a Date in the past.
             </label>
           </div>
         </div>

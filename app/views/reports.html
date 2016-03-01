@@ -38,6 +38,9 @@
           <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date" translate>
             Please select a Valid Date.
           </label>
+          <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
+            Please select a Date in the future.
+          </label>
         </div>
       </form>
 

@@ -16,18 +16,15 @@
           var maxDate = scope.$eval(attrs.maxDate);
           var minDate = scope.$eval(attrs.minDate);
 
-          if (attrs.maxDate && currentDate.isAfter(maxDate)) {
-            ctrl.$setValidity('past', false);
-            ctrl.$setValidity('pastSales', false);
-            return undefined;
-          } else if (attrs.minDate && currentDate.isBefore(minDate)) {
+          if (attrs.maxDate && currentDate.isAfter(maxDate, 'day')) {
             ctrl.$setValidity('future', false);
-            return undefined;
+          } else if (attrs.minDate && currentDate.isBefore(minDate, 'day')) {
+            ctrl.$setValidity('past', false);
           } else {
             ctrl.$setValidity('future', true);
             ctrl.$setValidity('past', true);
-            return value;
           }
+          return value;
         }
 
         ctrl.$parsers.unshift(validate);

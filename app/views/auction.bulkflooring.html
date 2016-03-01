@@ -140,7 +140,7 @@
                name="purchaseAuctionDatePicker"
                required>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-        <button class="btn-alert" style="padding:0px;" ng-show="validity.purchaseAuctionDatePicker.$error.date"
+        <button class="btn-alert" style="padding:0px;" ng-show="validity.purchaseAuctionDatePicker.$error.past"
                 tooltip-placement="right"
                 tooltip-trigger="mouseenter"
                 tooltip-html="true"
@@ -151,15 +151,11 @@
 
       </div>
         <label for="purchaseAuctionDatePicker" class="text-error"
-               ng-show="validity.purchaseAuctionDatePicker.$error.required || (validity.purchaseAuctionDatePicker.$error.date)" translate>
+               ng-show="validity.purchaseAuctionDatePicker.$error.required || validity.purchaseAuctionDatePicker.$error.date || validity.purchaseAuctionDatePicker.$error.past" translate>
           Please enter a Valid Sales Date.
         </label>
         <label for="purchaseAuctionDatePicker" class="text-error"
-               ng-show="validity.purchaseAuctionDatePicker.$error.pattern && !validity.purchaseAuctionDatePicker.$error.date" translate>
-          Please enter a Valid Sales Date Year between {{auctionMinDate}} and {{maxDate}}.
-        </label>
-        <label for="purchaseAuctionDatePicker" class="text-error"
-               ng-show="validity.purchaseAuctionDatePicker.$error.past" translate>
+               ng-show="validity.purchaseAuctionDatePicker.$error.future" translate>
           Please enter a Sales Date in the past.
         </label>
       <p>

@@ -105,7 +105,7 @@
                ng-class="{ 'nxg-invalid': validity.purchaseDate.$error.required || validity.purchaseDate.$error.past || validity.purchaseDate.$error.date }"/>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()">
           <span nxg-icon="icon-calendar"></span></button>
-          <button class="btn-alert" ng-show="validity.purchaseDate.$error.date"
+          <button class="btn-alert" ng-show="validity.purchaseDate.$error.past"
                   tooltip-placement="right"
                   tooltip-trigger="mouseenter"
                   tooltip-html="true"
@@ -117,11 +117,11 @@
       </div>
 
       <label for="purchaseDate" class="text-error"
-             ng-show="validity.purchaseDate.$error.required || (validity.purchaseDate.$error.date && !validity.purchaseDate.$error.past)" translate>
+             ng-show="validity.purchaseDate.$error.required || validity.purchaseDate.$error.date || validity.purchaseDate.$error.past" translate>
         Please enter a Valid Purchase Date.
       </label>
       <label for="purchaseDate" class="text-error"
-             ng-show="validity.purchaseDate.$error.past" translate>
+             ng-show="validity.purchaseDate.$error.future" translate>
         Please enter a Purchase Date in the past.
       </label>
       <label for="inputBiz" class="input-title" translate>Seller</label>
