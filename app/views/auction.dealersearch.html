@@ -1,17 +1,15 @@
 <div class="well">
   <h2 class="well-title" translate>Find a Dealer</h2>
 
-  <form name="numberSearchForm" ng-submit="numberSearch.search()" class="search" novalidate>
+  <form name="dealerSearchForm" ng-submit="search()" class="search" novalidate>
     <div class="row vertical-align">
       <div class="col-xs-6 custom form-block">
-        <div class="padding-left">
-          Search by your Business Number, NextGear Capital Dealer Number, Auction Access Number or by the name of the
-          business.
-        </div>
+        Search by your Business Number, NextGear Capital Dealer Number, Auction Access Number or by the name of the
+        business.
       </div>
       <div class="col-xs-6 custom">
         <div class="styled-input with-btn">
-          <input type="text" id="search" name="search" class="full-width">
+          <input type="text" id="search" name="search" class="full-width" ng-model="proposedQuery" ng-minlength="3">
           <button id="floorPlanSearch" class="btn btn-input" type="submit" ng-click="search()">
             <span nxg-icon="icon-search"></span>
           </button>
@@ -21,82 +19,94 @@
   </form>
 </div>
 
-<div class="well">
-  <div>
-    <h2 class="well-title">Dealer Search Results</h2>
-    <p class="notice-box" translate>
-      Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+
+<div class="well" ng-switch="data.results.length > 0 || data.loading" ng-show="searchExecuted">
+  <h2 class="well-title" translate>Dealer</h2>
+
+  <p class="notice-box" ng-switch-when="false" translate>
+    Sorry, no results found. Please try a new search query.
+  </p>
+  <section ng-switch-when="true"
+           nxg-infinite-scroll="fetchNextResults()"
+           nxg-infinite-scroll-disabled="data.loading"
+           nxg-infinite-scroll-show-indicator="data.loading">
+    <table class="table table-primary table-striped">
+      <thead>
+      <th class="sortable"
+          ng-click="sortBy('BusinessName')"
+          ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Business Name' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('BusinessLegalName')"
+          ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Legal Name' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('CarmaxNumber')"
+          ng-class="{ sorted : data.sortBy == 'CarmaxNumber', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Carmax No.' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('BusinessNumber')"
+          ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Business No.' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('AuctionAccessNumber')"
+          ng-class="{ sorted : data.sortBy == 'AuctionAccessNumber', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Auction Access No.' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('City')"
+          ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'City' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="sortBy('State')"
+          ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'State' | translate }}"></nxg-sortable>
+      </th>
+      <th translate>
+        Details
+      </th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
+        <td class="value">
+          <span nxg-highlight="business.BusinessName" highlight="data.query"></span>
+        </td>
+        <td>{{ business.BusinessLegalName }}</td>
+        <td>
+          <div class="center">
+            <span nxg-highlight="business.BusinessNumber" highlight="data.query"></span>
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <span nxg-highlight="business.BusinessNumber" highlight="data.query"></span>
+          </div>
+        </td>
+        <td>
+          <div class="center">
+            <span nxg-highlight="business.BusinessNumber" highlight="data.query"></span>
+          </div>
+        </td>
+        <td>{{ business.City }}</td>
+        <td>
+          <div class="center">{{ business.State }}</div>
+        </td>
+
+        <td>
+          <div class="center">
+            <button class="btn-cta cta-primary" type="submit" ng-click="viewDealer(business)">View</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
+      There are too many results to display, please refine your search further.
     </p>
-
-    <div class="search-results"
-         nxg-infinite-scroll="fetchNextResults()"
-         nxg-infinite-scroll-disabled="data.loading"
-         nxg-infinite-scroll-show-indicator="data.loading"
-         nxg-scroll-container>
-      <table class="table table-primary table-striped">
-        <thead>
-        <th class="sortable"
-            ng-click="sortBy('BusinessName')"
-            ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Business Name' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('BusinessLegalName')"
-            ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Legal Name' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('CarmaxNumber')"
-            ng-class="{ sorted : data.sortBy == 'CarmaxNumber', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Carmax No.' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('BusinessNumber')"
-            ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Business No.' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('AuctionAccessNumber')"
-            ng-class="{ sorted : data.sortBy == 'AuctionAccessNumber', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Auction Access No.' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('City')"
-            ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'City' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="sortBy('State')"
-            ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'State' | translate }}"></nxg-sortable>
-        </th>
-        <th translate>
-          Details
-        </th>
-        </thead>
-        <tbody>
-        <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
-          <td class="value">
-            <a href ng-click="showCreditQuery(business)">
-              <span nxg-highlight="business.BusinessName" highlight="business.data.query"></span>
-            </a>
-          </td>
-          <td>{{ business.BusinessLegalName }}</td>
-          <td>{{ business.BusinessNumber }}</td>
-          <td>{{ business.BusinessNumber }}</td>
-          <td>{{ business.BusinessNumber }}</td>
-          <td>{{ business.City }}</td>
-          <td>{{ business.State }}</td>
-
-          <td>
-            <button class="btn-cta cta-primary" type="submit" ng-click="view()">View</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
-        There are too many results to display, please refine your search further.
-      </p>
-    </div>
-  </div>
+  </section>
 </div>
