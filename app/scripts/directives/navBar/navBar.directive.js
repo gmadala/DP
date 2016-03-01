@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .directive('navBar', function() {
     return {
       restrict: 'A',
-      templateUrl: 'scripts/directives/navBar/navBar.html',
+      templateUrl: 'scripts/directives/navbar/navbar.html',
       controller: 'NavBarCtrl'
     };
   })
