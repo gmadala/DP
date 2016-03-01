@@ -33,8 +33,8 @@
         <li class="cr-inline">
           <input type="radio" ng-model="selector.isTemporary" name="isTemporary" value="false" id="isNotTemporary" ng-disabled="loading" required />
           <label id ="isNotTemp" class="radio-img" for="isNotTemporary"></label>
-          <label class="cr-label" for="isNotTemporary" translate>
-            <strong>Permanent</strong> – This request will be submitted for review and may require additional information. Please contact your NextGear Capital Representative with any questions.
+          <label class="cr-label" for="isNotTemporary">
+            <strong translate>Permanent</strong><span translate> – This request will be submitted for review and may require additional information. Please contact your NextGear Capital Representative with any questions.</span>
           </label>
         </li>
         <span class="text-error" ng-show="formValidation.isTemporary.$error.required" translate>
