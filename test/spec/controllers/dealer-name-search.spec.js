@@ -259,7 +259,7 @@ describe('Controller: DealerNameSearchCtrl', function () {
       scope.showCreditQuery();
       expect($dialog.open).toHaveBeenCalled();
       expect($dialog.open.calls.mostRecent().args[0].controller).toBe('CreditQueryCtrl');
-      expect($dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/creditQuery.html');
+      expect($dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/credit-query.html');
     });
 
     it('should provide the dialog with the selected business information', function () {

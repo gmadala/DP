@@ -17,7 +17,7 @@
     <div nxg-upcoming-calendar display="viewMode" language="calLanguage" data="dashboardData.calendarData"></div>
 
     <!-- Upcoming Payments Table -->
-    <div collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+    <div uib-collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
       <div class="upcoming-payments table-holder">
         <table class="table table-striped table-secondary table-border">
           <thead>
@@ -143,7 +143,7 @@
     </button>
 
     <!-- Payments Chart -->
-    <div class="payments-chart" collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+    <div class="payments-chart" uib-collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
       <div class="chart-obj"
           nxg-chart
           nxg-chart-type="pie"
