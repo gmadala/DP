@@ -33,10 +33,9 @@
               Auction #
             </span>
             {{ user.BusinessNumber }}
-          </span>
-        </div>
+          </span></div>
         <div uib-dropdown>
-          <div class="align-right dropdown-toggle dropdown-spaced"  uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="align-right dropdown-toggle"  uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
             <a>
               <span translate>My Account</span>
               <span style="border-top: 4px solid #069" class="caret"></span>
@@ -44,27 +43,20 @@
           </div>
           <ul class="dropdown-menu margin" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
             <li>
-              <a href="#/act/settings" ng-show="!user.isDealer()" translate>
-                <span class="heavy" translate>Settings</span>
-              </a>
-              <a href="#/profile_settings" ng-show="user.isDealer()" translate>
-                <span class="heavy" translate>Profile Settings</span>
-              </a>
+              <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
+              <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
             </li>
             <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>
-                <span class="heavy" translate>Account Management</span>
-              </a>
+              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
             </li>
             <li class="menu-divider"></li>
             <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" translate>
-                <span class="heavy" translate>Sign Out</span>
-              </a>
+              <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
             </li>
           </ul>
         </div>
       </div>
+
       <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
