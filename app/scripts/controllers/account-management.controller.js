@@ -4,10 +4,11 @@ angular.module('nextgearWebApp')
   .controller('AccountManagementCtrl', AccountManagementCtrl)
   .controller('ConfirmCtrl', ConfirmCtrl);
 
-function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, gettext,
+function AccountManagementCtrl($scope, $uibModal, AccountManagement, Addresses,
                                User, api, $q, dealerCustomerSupportPhone, segmentio, metric,
                                routingNumberFilter, kissMetricInfo) {
 
+  var uibModal = $uibModal;
   kissMetricInfo.getKissMetricInfo().then(function(result){
     segmentio.track(metric.DEALER_VIEW_ACCOUNT_MANAGEMENT_PAGE, result);
   });
@@ -183,10 +184,10 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'views/modals/confirmDisableEnhanced.html',
+            templateUrl: 'views/modals/confirm-disable-enhanced.html',
             controller: 'ConfirmCtrl'
           };
-          $dialog.dialog(dialogOptions).open().then(function (result) {
+          uibModal.open(dialogOptions).result.then(function(result) {
             if (result) {
               $scope.business.dirtyData.enhancedRegistrationPin = null;
               $scope.business.dirtyData.enhancedRegistrationEnabled = false;
@@ -239,10 +240,10 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'views/modals/confirmEnableAutoPay.html',
+              templateUrl: 'views/modals/confirm-enable-autopay.html',
               controller: 'ConfirmCtrl'
             };
-            $dialog.dialog(dialogOptions).open().then(function (result) {
+            uibModal.open(dialogOptions).result.then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !!result;
             });
           },
@@ -251,10 +252,10 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'views/modals/confirmDisableAutoPay.html',
+              templateUrl: 'views/modals/confirm-disable-autopay.html',
               controller: 'ConfirmCtrl'
             };
-            $dialog.dialog(dialogOptions).open().then(function (result) {
+            uibModal.open(dialogOptions).result.then(function (result) {
               $scope.brand.dirtyData.autoPayEnabled = !result;
             });
           },
@@ -377,7 +378,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
             backdrop: true,
             keyboard: false,
             backdropClick: false,
-            templateUrl: 'views/modals/financialAccount.html',
+            templateUrl: 'views/modals/financial-account.html',
             resolve: {
               options: function () {
                 return {
@@ -394,7 +395,7 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
             controller: 'FinancialAccountCtrl'
           };
 
-          $dialog.dialog(dialogOptions).open()
+          uibModal.open(dialogOptions).result
             .then(updateLocalFinancialData);
 
           /**
@@ -480,11 +481,11 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
       backdrop: true,
       keyboard: false,
       backdropClick: false,
-      templateUrl: 'views/modals/requestCreditIncrease.html',
+      templateUrl: 'views/modals/request-credit-increase.html',
       controller: 'RequestCreditIncreaseCtrl'
     };
 
-    $dialog.dialog(dialogOptions).open();
+    uibModal.open(dialogOptions);
   };
 
   $scope.feeScheduleUrl = api.contentLink(
@@ -494,9 +495,10 @@ function AccountManagementCtrl($scope, $dialog, AccountManagement, Addresses, ge
 
 }
 
-function ConfirmCtrl($scope, dialog) {
+function ConfirmCtrl($scope, $uibModalInstance) {
+  var uibModalInstance = $uibModalInstance;
   $scope.close = function (result) {
-    dialog.close(result);
+    uibModalInstance.close(result);
   };
 
   $scope.agree = false;

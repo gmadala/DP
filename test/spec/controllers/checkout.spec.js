@@ -22,9 +22,9 @@ describe('Controller: CheckoutCtrl', function () {
     accountList = ['myAccountsHere'];
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $dialog, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_, _BusinessHours_) {
+  beforeEach(inject(function ($controller, $rootScope, $uibModal, _api_, _$q_, _protect_, _User_, _Payments_, _Floorplan_, _BusinessHours_) {
     scope = $rootScope.$new();
-    dialog = $dialog;
+    dialog = $uibModal;
     $q = _$q_;
     protect = _protect_;
     User = _User_;
@@ -277,7 +277,13 @@ describe('Controller: CheckoutCtrl', function () {
 
     beforeEach(inject(function (_$q_) {
       $q = _$q_;
-      spyOn(dialog, 'dialog').and.returnValue({ open: angular.noop });
+      spyOn(dialog, 'open').and.returnValue({
+        result: {
+          then: function () {
+            return $q.when('done');
+          }
+        }
+      });
       run();
     }));
 
@@ -294,47 +300,47 @@ describe('Controller: CheckoutCtrl', function () {
     it('should invoke the schedule modal with a payment', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
     });
 
     it('should pass the payment to be scheduled', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
     });
 
     it('should invoke the schedule modal with a fee', function () {
       var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
       scope.paymentQueue.schedule(fee);
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/scheduleCheckout.html');
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
     });
 
     it('should pass the fee to be scheduled', function () {
       var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
       scope.paymentQueue.schedule(fee);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
     });
 
     it('should set payment to the item when it is a payment', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.fee()).toBeFalsy();
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBeFalsy();
     });
 
     it('should set fee to the item when it is a fee', function () {
       var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
       scope.paymentQueue.schedule(fee);
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.payment()).toBeFalsy();
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBeFalsy();
     });
 
     it('should pass a promise for a map of possible payment dates from tomorrow to the payment due date', function () {
@@ -347,7 +353,7 @@ describe('Controller: CheckoutCtrl', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
 
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates().then(
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates().then(
         function (result) {
           expect(result).toBe(possibleDates);
         }
@@ -369,7 +375,7 @@ describe('Controller: CheckoutCtrl', function () {
         success = jasmine.createSpy('success'),
         failure = jasmine.createSpy('failure');
       scope.paymentQueue.schedule(payment);
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates().then(success, failure);
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates().then(success, failure);
       scope.$apply();
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
@@ -379,7 +385,7 @@ describe('Controller: CheckoutCtrl', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').and.returnValue($q.when({}));
       var payment = {dueDate: '2013-01-10', scheduleDate: new Date(), isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates();
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates();
       scope.$apply();
       expect(payment.scheduleLoading).toBe(false);
       expect(typeof payment.scheduleError).toBe('string');
@@ -393,7 +399,7 @@ describe('Controller: CheckoutCtrl', function () {
         success = jasmine.createSpy('success'),
         failure = jasmine.createSpy('failure');
       scope.paymentQueue.schedule(payment);
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates().then(success, failure);
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates().then(success, failure);
       scope.$apply();
       expect(success).not.toHaveBeenCalled();
       expect(failure).toHaveBeenCalled();
@@ -403,7 +409,7 @@ describe('Controller: CheckoutCtrl', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').and.returnValue($q.reject('oof'));
       var payment = {dueDate: '2013-01-10', scheduleDate: new Date(), isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates();
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates();
       scope.$apply();
       expect(payment.scheduleLoading).toBe(false);
       expect(typeof payment.scheduleError).toBe('string');
@@ -415,7 +421,7 @@ describe('Controller: CheckoutCtrl', function () {
       spyOn(Payments, 'fetchPossiblePaymentDates').and.returnValue($q.when({ '2013-01-01': true }));
       var payment = { dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
-      dialog.dialog.calls.mostRecent().args[0].resolve.possibleDates();
+      dialog.open.calls.mostRecent().args[0].resolve.possibleDates();
       scope.$apply();
       expect(payment.scheduleLoading).toBe(false);
     });
@@ -610,7 +616,13 @@ describe('Controller: CheckoutCtrl', function () {
           ]
         }
       };
-      spyOn(dialog, 'dialog').and.returnValue({ open: function () { return $q.when('done'); } });
+      spyOn(dialog, 'open').and.returnValue({
+        result: {
+          then: function (callback) {
+            callback();
+          }
+        }
+      });
       spyOn(Floorplan, 'overrideCompletionAddress').and.returnValue({
         then: function(result) {
           if (overrideSucceed) {
@@ -668,11 +680,11 @@ describe('Controller: CheckoutCtrl', function () {
       spyOn(Payments, 'checkout').and.returnValue($q.when(txInfo));
       scope.reallySubmit(guard);
       scope.$apply();
-      expect(dialog.dialog).toHaveBeenCalled();
-      expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/confirmCheckout.html');
-      expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('ConfirmCheckoutCtrl');
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.queue()).toBe(scope.paymentQueue.contents);
-      expect(dialog.dialog.calls.mostRecent().args[0].resolve.transactionInfo()).toBe(txInfo);
+      expect(dialog.open).toHaveBeenCalled();
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/confirmCheckout.html');
+      expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ConfirmCheckoutCtrl');
+      expect(dialog.open.calls.mostRecent().args[0].resolve.queue()).toBe(scope.paymentQueue.contents);
+      expect(dialog.open.calls.mostRecent().args[0].resolve.transactionInfo()).toBe(txInfo);
     });
 
     it('should clear the payment queue when the confirmation modal closes', function () {

@@ -34,7 +34,7 @@
         </thead>
         <tr ng-repeat="payment in items.paymentsToday">
           <td class="description">
-            <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+            <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
           </td>
@@ -77,7 +77,7 @@
         </thead>
         <tr ng-repeat="payment in items.paymentsScheduled">
           <td class="description">
-            <a class="block-title heavy" href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a><br/>
+            <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
           </td>
@@ -109,4 +109,5 @@
 </div>
 <div class="modal-footer" ng-hide="!!receiptUrls.length">
   <button type="submit" ng-click="close()" class="btn-cta cta-primary" nxg-autofocus translate>OK</button>
+</div>
 </div>

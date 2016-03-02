@@ -18,7 +18,7 @@ describe('Controller: LoginRecoverCtrl', function () {
     BusinessHours;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$dialog_, _$q_, _segmentio_, _BusinessHours_, _metric_, _User_) {
+  beforeEach(inject(function ($controller, $rootScope, $uibModal, _$q_, _segmentio_, _BusinessHours_, _metric_, _User_) {
     BusinessHours=_BusinessHours_;
     metric = _metric_;
     segmentio = _segmentio_;
@@ -56,8 +56,14 @@ describe('Controller: LoginRecoverCtrl', function () {
         return $q.when(undefined);
       }
     };
-    $dialog = _$dialog_;
-    spyOn($dialog, 'messageBox').and.returnValue(dialog);
+    $dialog = $uibModal;
+    spyOn($dialog, 'open').and.returnValue({
+      result: {
+        then: function(callback){
+          callback();
+        }
+      }
+    });
 
     LoginRecoverCtrl = $controller('LoginRecoverCtrl', {
       $scope: scope,
@@ -522,10 +528,8 @@ describe('Controller: LoginRecoverCtrl', function () {
 
     it('should invoke a messageBox with the expected content', function () {
       scope.showSuccessMessage();
-      expect($dialog.messageBox).toHaveBeenCalled();
-      expect(typeof $dialog.messageBox.calls.mostRecent().args[0]).toBe('string');
-      expect(typeof $dialog.messageBox.calls.mostRecent().args[1]).toBe('string');
-      expect(angular.isArray($dialog.messageBox.calls.mostRecent().args[2])).toBe(true);
+      expect($dialog.open).toHaveBeenCalled();
+      expect(typeof $dialog.open.calls.mostRecent().args[0]).toBe('object');
     });
 
     it('should transition to the login state on message box close', function () {

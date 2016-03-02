@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
+  .controller('AuctionDealerSearchCtrl', function($scope,  $uibModal, User, DealerNumberSearch) {
+
+    var uibModal = $uibModal;
+
     $scope.onlyNumbersPattern = /^\d+$/;
 
     /*** Number Search ***/
@@ -108,7 +111,7 @@ angular.module('nextgearWebApp')
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'views/modals/dealerNameSearch.html',
+            templateUrl: 'views/modals/dealer-name-search.html',
             controller: 'DealerNameSearchCtrl',
             dialogClass: 'modal modal-large',
             resolve: {
@@ -121,7 +124,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          uibModal.open(dialogOptions);
         }
       },
       validate: function() {
@@ -161,7 +164,7 @@ angular.module('nextgearWebApp')
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'views/modals/creditQuery.html',
+            templateUrl: 'views/modals/credit-query.html',
             controller: 'CreditQueryCtrl',
             dialogClass: 'modal modal-medium',
             resolve: {
@@ -180,7 +183,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          uibModal.open(dialogOptions);
         }
         else {
           if (this.auctionNumInactive) {

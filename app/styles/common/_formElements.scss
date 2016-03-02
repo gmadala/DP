@@ -29,6 +29,7 @@
   line-height: $baseLineHeight;
   display: block;
   margin: 0 0 10px;
+  right: -1%;
 }
 
 .text-disabled {
@@ -643,20 +644,54 @@ input[type="radio"] {
   }
 
   input, input[type="text"] {
-    width: 100%;
+    width: 103%;
     padding-right: 26px; // to account for icon
   }
 
   .btn-unstyle {
     position: absolute;
-    top: 10px;
-    right: 7px;
+    top: 38px;
+    right: 27px;
+    margin: 0;
+    height: 17px;
+  }
+  .btn-calendar {
+    position: absolute;
+    top: 57%;
+    right: 13%;
+    margin: 0;
+  }
+
+  .reports-btn-calendar {
+    position: absolute;
+    top: 57%;
+    right: -8%;
+    margin: 0;
+  }
+
+  .disbursement-btn-calendar {
+    position: absolute;
+    top: 46%;
+    right: 8%;
+    margin: 0;
+  }
+
+  .checkout-btn-calendar {
+    position: absolute;
+    top: 27%;
+    right: -6%;
     margin: 0;
   }
 
   .btn-unstyle:hover, .btn-unstyle:focus {
     .icon-calendar svg {
       fill: $highlight;
+    }
+  }
+  .dropdown-menu thead tr:first-child{
+    border-bottom: 1px solid #bbb;
+    strong{
+      font-size: 1.75em;
     }
   }
 }
@@ -885,4 +920,44 @@ ul.files-container li .file-delete:hover{
   background: url("../img/file.png") no-repeat center;
   background-size: contain;
   display: block !important;
+}
+.search-date-picker {
+     button span{
+       top: 58%;
+       right: 8%;
+       margin: 0;
+     }
+     input{
+       width: 85%;
+     }
+}
+
+.reports-search-date-picker {
+  button span {
+    top: 58%;
+    right: 8%;
+  }
+  input {
+    width: 137%;
+  }
+  .dropdown-menu{
+    display: block;
+    top: 63px;
+    left: 15px;
+    padding: 0px;
+    height: 279px;
+  }
+}
+
+.disbursement-date-picker {
+  input {
+    width: 97%;
+  }
+}
+.end-date{
+  margin-left: -27px;
+}
+
+.margin {
+  margin:2px 88px 0;
 }

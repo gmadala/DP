@@ -305,7 +305,7 @@ module.exports = function(grunt) {
             'views/**/*.html',
             'scripts/directives/**/*.html',
             // Getting an error when uglifying this file. Should be looked into!
-            '!scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.html'
+            '!scripts/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
           ],
           dest: '<%= yeoman.dist %>'
         }]

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, dialog, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+  .controller('CreditQueryCtrl', function($scope, $uibModalInstance, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+    var uibModalInstance = $uibModalInstance;
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
@@ -47,7 +48,7 @@ angular.module('nextgearWebApp')
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
     };
 
     if (options.autoQueryCredit) {

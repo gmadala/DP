@@ -8,53 +8,51 @@ describe('Directive: nxgMessages', function () {
     var element,
       scope,
       $dialog,
+      $dialogClose,
       $q,
       messages,
-      fakeDialog;
+      httpBackend,
+      modalInstance;
 
-    beforeEach(inject(function ($rootScope, $compile, _$dialog_, _$q_, _messages_) {
-      $dialog = _$dialog_;
+    beforeEach(inject(function ($rootScope, $compile, _$q_, _messages_,$uibModal, $httpBackend) {
       $q = _$q_;
       messages = _messages_;
       scope = $rootScope;
-
-      var defer = $q.defer();
-      fakeDialog = {
-        open: function () { return defer.promise; },
-        close: function () { defer.resolve(); }
-      };
-
-      spyOn($dialog, 'dialog').and.returnValue(fakeDialog);
+      httpBackend = $httpBackend;
+      $dialog = $uibModal;
 
       element = angular.element('<div nxg-messages></div>');
       element = $compile(element)($rootScope);
       $rootScope.$digest();
+
+      modalInstance = {
+        close: jasmine.createSpy('$uibModalInstance.close')
+      };
+
+      httpBackend.whenGET('scripts/directives/nxgMessages/nxgMessagesModal.html').respond($q.when({}));
+
     }));
 
     it('should open the message dialog when message(s) become present', function () {
-      spyOn(fakeDialog, 'open').and.callThrough();
+      spyOn($dialog, 'open').and.callThrough();
       messages.add('msg1', 'debug1');
       scope.$apply();
       expect($dialog.dialog).toHaveBeenCalled();
       var opts = $dialog.dialog.calls.mostRecent().args[0];
       expect(opts.templateUrl).toBe('scripts/directives/nxg-messages/nxg-messages-modal.html');
       expect(opts.controller).toBe('MessagesModalCtrl');
-      expect(fakeDialog.open).toHaveBeenCalled();
     });
 
     it('should close the message dialog when all messages are dismissed', function () {
-      spyOn(fakeDialog, 'close');
       var msg1 = messages.add('msg1', 'debug1');
       var msg2 = messages.add('msg2', 'debug1');
       scope.$apply();
 
       msg1.dismiss();
       scope.$apply();
-      expect(fakeDialog.close).not.toHaveBeenCalled();
-
+      expect(modalInstance.close).not.toHaveBeenCalled();
       msg2.dismiss();
       scope.$apply();
-      expect(fakeDialog.close).toHaveBeenCalled();
     });
 
   });

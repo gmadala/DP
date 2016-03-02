@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $dialog, Analytics, segmentio, metric, User, kissMetricInfo) {
+  .controller('AnalyticsCtrl', function ($scope, $uibModal, Analytics, segmentio, metric, User, kissMetricInfo) {
+
+    var uibModal = $uibModal;
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -19,7 +21,7 @@ angular.module('nextgearWebApp')
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-x-large',
-        templateUrl: 'views/modals/topAuctions.html',
+        templateUrl: 'views/modals/top-auctions.html',
         controller: 'TopAuctionsCtrl',
         resolve: {
           auctions: function () {
@@ -27,7 +29,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.toggleDetails = function() {

@@ -85,7 +85,7 @@ describe('Controller: CreditQueryCtrl', function () {
     scope = $rootScope.$new();
     CreditQueryCtrl = $controller('CreditQueryCtrl', {
       $scope: scope,
-      dialog: dialog,
+      $uibModalInstance: dialog,
       options: opts,
       CreditQuery: mockQuery,
       kissMetricInfo: mockKissMetricInfo,
@@ -175,7 +175,7 @@ describe('Controller: CreditQueryCtrl', function () {
 
       CreditQueryCtrl = $controller('CreditQueryCtrl', {
         $scope: scope,
-        dialog: dialog,
+        $uibModalInstance: dialog,
         options: opts,
         CreditQuery: mockQuery
       });

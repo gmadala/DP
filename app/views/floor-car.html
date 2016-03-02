@@ -89,28 +89,37 @@
           <label class="cr-label" for="no" translate>No</label>
         </div>
       </div>
+      <div class="date-field date-picker" style="width: 120px;">
+        <label for="purchaseDate" class="input-title" translate>Purchase Date</label>
+        <input type="text" uib-datepicker-popup="{{dateFormat}}"
+               placeholder="mm/dd/yyyy" nxg-date
+               ng-model="data.UnitPurchaseDate"
+               min-date="dealerMinDate"
+               max-date="maxDate"
+               show-weeks="false"
+               show-button-bar="false"
+               is-open="datePicker.opened"
+               id="purchaseDate"
+               name="purchaseDate"
+               required
+               ng-class="{ 'nxg-invalid': validity.purchaseDate.$error.required || validity.purchaseDate.$error.past || validity.purchaseDate.$error.date }"/>
+        <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()">
+          <span nxg-icon="icon-calendar"></span></button>
+          <button class="btn-alert" ng-show="validity.purchaseDate.$error.future || validity.purchaseDate.$error.past"
+                  tooltip-placement="right"
+                  tooltip-trigger="mouseenter"
+                  tooltip-html="true"
+                  uib-tooltip="{{ 'To floor plan purchases older than 365 days, please contact NextGear Capital Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, and provide the customer’s NextGear Dealer Number.' | translate }}"
+                  tooltip-animation="true">
+            <span nxg-icon="icon-alert"></span>
+          </button>
 
-      <label for="inputPurchaseDate" class="input-title" translate>Purchase Date</label>
-      <input id="inputPurchaseDate"
-             name="inputPurchaseDate"
-             ng-model="data.UnitPurchaseDate"
-             ng-pattern="isYear"
-             nxg-date-field date-allow="past"
-             required ng-class="{ 'nxg-invalid': validity.inputPurchaseDate.$error.required || (validity.inputPurchaseDate.$error.nxgRequires && !validity.inputPurchaseDate.$error.required) || validity.inputPurchaseDate.$error.past || validity.inputPurchaseDate.$error.date || validity.inputPurchaseDate.$error.pattern }"/>
-      <label for="inputPurchaseDate" class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.required || validity.inputPurchaseDate.$error.date" translate>
+      </div>
+
+      <label for="purchaseDate" class="text-error"
+             ng-show="validity.purchaseDate.$error.required || validity.purchaseDate.$error.date || validity.purchaseDate.$error.past || validity.purchaseDate.$error.future" translate>
         Please enter a Valid Purchase Date.
       </label>
-      <label for="inputPurchaseDate"
-             class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.pattern && !validity.inputPurchaseDate.$error.date" translate>
-        Please enter a Valid Purchase Date Year between {{minValidModelYear}} and {{maxValidModelYear}}.
-      </label>
-      <label for="inputPurchaseDate" class="text-error"
-             ng-show="validity.inputPurchaseDate.$error.past" translate>
-        Please enter a Purchase Date in the past.
-      </label>
-
       <label for="inputBiz" class="input-title" translate>Seller</label>
       <span class="nxg-business-field" ng-class="{ 'nxg-invalid': validity.inputBiz.$error.nxgRequires || validity.inputBiz.$error.minlength }">
         <input nxg-business-field="sellers"
@@ -121,7 +130,6 @@
                selected-business="data.BusinessId"
                validity="validity" />
       </span>
-
       <label for="inputPurchaseAmt" class="input-title" translate>Purchase Amount</label>
       <div class="input-prepend dollar">
         <span class="add-on no-top" translate>$</span>

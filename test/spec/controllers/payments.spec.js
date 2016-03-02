@@ -26,7 +26,7 @@ describe('Controller: PaymentsCtrl', function () {
     addressesMock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$q_, $dialog, _BusinessHours_) {
+  beforeEach(inject(function ($controller, $rootScope, _$q_, $uibModal, _BusinessHours_) {
     scope = $rootScope.$new();
     $q = _$q_;
     BusinessHours = _BusinessHours_;
@@ -114,7 +114,7 @@ describe('Controller: PaymentsCtrl', function () {
       }
     };
 
-    dialog = $dialog;
+    dialog = $uibModal;
     spyOn(modelMock, 'search').and.callThrough();
     spyOn(modelMock, 'fetchFees').and.callThrough();
 
@@ -588,7 +588,7 @@ describe('Controller: ExtensionRequestCtrl', function() {
 
     ExtensionRequestCtrl = $controller('ExtensionRequestCtrl', {
       $scope: scope,
-      dialog: dialog, // current open instance of dialog
+      $uibModalInstance: dialog, // current open instance of dialog
       Payments: paymentsMock,
       payment: payMock,
       onConfirm: confirm,

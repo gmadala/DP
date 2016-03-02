@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FloorCarConfirmCtrl', function ($scope, $window, dialog, formData, fileNames, User, gettextCatalog,
+  .controller('FloorCarConfirmCtrl', function ($scope, $window, $uibModalInstance, formData, fileNames, User, gettextCatalog,
                                                kissMetricInfo, segmentio, metric) {
     // access to all the data the user entered in the form (a copy)
+    var uibModalInstance = $uibModalInstance;
     $scope.formData = formData;
     $scope.fileNames = fileNames;
 
@@ -40,10 +41,10 @@ angular.module('nextgearWebApp')
           $scope.kissMetricData = result;
         }
       );
-      dialog.close(true);
+      uibModalInstance.close(true);
     };
 
     $scope.close = function () {
-      dialog.close(false);
+      uibModalInstance.close(false);
     };
   });

@@ -34,7 +34,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
     AuctionDealerSearchCtrl = $controller('AuctionDealerSearchCtrl', {
       $scope: scope,
-      $dialog: dialog
+      $uibModal: dialog
     });
 
     spyOn(dealerNumberSearch, 'searchByDealerNumber').and.returnValue(q.when(''));
@@ -228,7 +228,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
 
       scope.nameSearch.search();
 
-      expect(dialog.dialog).toHaveBeenCalled();
+      expect(dialog.open).toHaveBeenCalled();
       expect(dialog.open).toHaveBeenCalled();
 
     });

@@ -27,7 +27,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
       cancelSucceed,
       invAddr;
 
-  beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, _$q_, $dialog, _api_, _Payments_) {
+  beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, _$q_, $uibModal, _api_, _Payments_) {
     rootScope = $rootScope;
     scope = $rootScope.$new();
     api = _api_;
@@ -227,14 +227,14 @@ describe('Controller: VehicleDetailsCtrl', function () {
      }
     };
 
-    dialog = $dialog;
+    dialog = $uibModal;
 
     initialize = function() {
       VehicleDetailsCtrl = $controller('VehicleDetailsCtrl', {
         $scope: scope,
         $state: state,
         $stateParams: stateParams,
-        $dialog: dialog,
+        $uidModal: dialog,
         VehicleDetails: vehicleDetailsMock,
         TitleReleases: titleReleasesMock,
         User: userMock,
@@ -301,12 +301,16 @@ describe('Controller: VehicleDetailsCtrl', function () {
       });
 
       it('should launch a modal dialog', function() {
-        spyOn(dialog, 'dialog').and.returnValue({
-          open: angular.noop
+        spyOn(dialog, 'open').and.returnValue({
+          result: {
+            then: function (callback) {
+              callback();
+            }
+          }
         });
         scope.requestExtension();
-        expect(dialog.dialog).toHaveBeenCalled();
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.payment()).toEqual({
+        expect(dialog.open).toHaveBeenCalled();
+        expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toEqual({
           FloorplanId: detailsMock.VehicleInfo.FloorplanId,
           Vin: detailsMock.VehicleInfo.UnitVin,
           UnitDescription: detailsMock.VehicleInfo.Description
@@ -346,19 +350,13 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       beforeEach(function() {
         wasCancelled = true;
-        spyOn(dialog, 'dialog').and.callFake(function() {
-        return {
-          open: function() {
-            return {
-              then: function(success, failure) {
-                if (wasCancelled) {
-                  success(true);
-                }
-              }
-            };
+        spyOn(dialog, 'open').and.returnValue({
+          result: {
+            then: function (callback) {
+              callback(true);
+            }
           }
-        };
-      });
+        });
 
         spyOn(paymentsMock, 'getPaymentFromQueue').and.returnValue();
       });
@@ -369,27 +367,27 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       it('should launch a modal dialog', function() {
         scope.launchPaymentOptions();
-        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.open).toHaveBeenCalled();
       });
 
       it('should send an onQueue flag (as isOnQueue function) to the dialog', function() {
         var myOnQueue = false;
         spyOn(paymentsMock, 'isPaymentOnQueue').and.returnValue(myOnQueue);
         scope.launchPaymentOptions();
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.isOnQueue()).toBe(myOnQueue);
+        expect(dialog.open.calls.mostRecent().args[0].resolve.isOnQueue()).toBe(myOnQueue);
       });
 
       it('should send a cartItem object if payment is already on the queue', function() {
         spyOn(paymentsMock, 'isPaymentOnQueue').and.returnValue(true);
         scope.launchPaymentOptions();
-        dialog.dialog.calls.mostRecent().args[0].resolve.object()
+        dialog.open.calls.mostRecent().args[0].resolve.object()
         expect(paymentsMock.getPaymentFromQueue).toHaveBeenCalled();
       });
 
       it('should send the payment object from vehicle details if the payment is not on the queue', function() {
         spyOn(paymentsMock, 'isPaymentOnQueue').and.returnValue(false);
         scope.launchPaymentOptions();
-        dialog.dialog.calls.mostRecent().args[0].resolve.object();
+        dialog.open.calls.mostRecent().args[0].resolve.object();
         expect(paymentsMock.getPaymentFromQueue).not.toHaveBeenCalled();
       });
 
@@ -641,7 +639,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
         spyOn(vehicleDetailsMock, 'getPaymentDetails').and.callThrough();
         spyOn(vehicleDetailsMock, 'getFeeDetails').and.callThrough();
-        spyOn(dialog, 'dialog').and.returnValue({
+        spyOn(dialog, 'open').and.returnValue({
           open: angular.noop
         });
       });
@@ -651,11 +649,11 @@ describe('Controller: VehicleDetailsCtrl', function () {
         $rootScope.$digest();
 
         expect(vehicleDetailsMock.getPaymentDetails).toHaveBeenCalledWith(1234, activityMock.ActivityId);
-        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.open).toHaveBeenCalled();
 
-        expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('PaymentDetailsCtrl');
-        expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/paymentDetails.html');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.activity()).toBe(paymentDetailsMock);
+        expect(dialog.open.calls.mostRecent().args[0].controller).toBe('PaymentDetailsCtrl');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/paymentDetails.html');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(paymentDetailsMock);
       }));
 
       it('should grab fee details if the activity is a fee', inject(function($rootScope) {
@@ -665,11 +663,11 @@ describe('Controller: VehicleDetailsCtrl', function () {
         $rootScope.$digest();
 
         expect(vehicleDetailsMock.getFeeDetails).toHaveBeenCalledWith(1234, activityMock.ActivityId);
-        expect(dialog.dialog).toHaveBeenCalled();
+        expect(dialog.open).toHaveBeenCalled();
 
-        expect(dialog.dialog.calls.mostRecent().args[0].controller).toBe('FeeDetailsCtrl');
-        expect(dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/feeDetails.html');
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.activity()).toBe(feeDetailsMock);
+        expect(dialog.open.calls.mostRecent().args[0].controller).toBe('FeeDetailsCtrl');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/feeDetails.html');
+        expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(feeDetailsMock);
       }));
     });
   });

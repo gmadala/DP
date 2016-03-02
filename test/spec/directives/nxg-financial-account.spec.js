@@ -26,14 +26,14 @@ describe('Directive: nxgFinancialAccount', function () {
     iScope = element.isolateScope();
   }
 
-  beforeEach(inject(function (_$compile_, _$rootScope_, _$dialog_, _$q_, _gettext_, _gettextCatalog_,  _User_) {
+  beforeEach(inject(function (_$compile_, _$rootScope_, $uibModal, _$q_, _gettext_, _gettextCatalog_,  _User_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
-    $dialog = _$dialog_;
+    $dialog = $uibModal;
     $q = _$q_;
     User = _User_;
 
-    spyOn($dialog, 'dialog').and.callFake(function() {
+    spyOn($dialog, 'open').and.callFake(function() {
       return {
         open: function() {
           return $q.when(editedBankAccount);

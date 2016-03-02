@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $dialog, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
+  .controller('TitleReleaseCheckoutCtrl', function($scope, $uibModal, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
 
+    var uibModal = $uibModal;
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
       sum: function() {
@@ -33,11 +34,11 @@ angular.module('nextgearWebApp')
           backdrop: true,
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'views/modals/confirmTitleRequest.html',
+          templateUrl: 'views/modals/confirm-title-request.html',
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
 
-        $dialog.dialog(dialogOptions).open().then(function() {
+        uibModal.open(dialogOptions).result.then(function() {
           TitleReleases.clearQueue();
 
           $state.transitionTo('titlereleases');

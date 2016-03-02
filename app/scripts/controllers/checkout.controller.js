@@ -2,10 +2,11 @@
 
 angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
-  function ($scope, $q, $dialog, $timeout, protect, moment,
+  function ($scope, $q, $timeout, protect, moment, $uibModal,
             messages, User, Payments, OptionDefaultHelper,
             api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo, decimalAdjust) {
 
+    var uibModal = $uibModal;
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -110,7 +111,7 @@ angular.module('nextgearWebApp')
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'views/modals/scheduleCheckout.html',
+          templateUrl: 'views/modals/schedule-checkout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
             payment: function () { return !item.isFee && item; },
@@ -142,7 +143,7 @@ angular.module('nextgearWebApp')
             }
           }
         };
-        $dialog.dialog(dialogOptions).open();
+        uibModal.open(dialogOptions);
       }
     };
 
@@ -228,15 +229,19 @@ angular.module('nextgearWebApp')
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'views/modals/confirmCheckout.html',
+              templateUrl: 'views/modals/confirm-checkout.html',
               controller: 'ConfirmCheckoutCtrl',
               dialogClass: 'modal modal-medium',
               resolve: {
-                queue: function () { return $scope.paymentQueue.contents; },
-                transactionInfo: function () { return result; }
+                queue: function () {
+                  return $scope.paymentQueue.contents;
+                },
+                transactionInfo: function () {
+                  return result;
+                }
               }
             };
-            $dialog.dialog(dialogOptions).open().then(function () {
+            $uibModal.open(dialogOptions).result.then(function () {
               Payments.clearPaymentQueue();
             });
           }
@@ -301,7 +306,7 @@ angular.module('nextgearWebApp')
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+        templateUrl: 'views/modals/payment-options-breakdown.html',
         controller: 'PaymentOptionsBreakdownCtrl',
         resolve: {
           object: function() {
@@ -312,8 +317,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-
-      $dialog.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.exportPaymentSummary = function() {

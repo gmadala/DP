@@ -9,23 +9,25 @@
  * number. You can use ng-pattern alongside this to enforce a numeric value.
  */
 angular.module('nextgearWebApp')
-  .directive('nxgMax', function () {
+  .directive('nxgMax', function() {
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-        var numberize = function (value) {
+        var numberize = function(value) {
           if (/^\-?([0-9]+(\.[0-9]+)?)$/.test(value)) {
             return Number(value);
           }
           return NaN;
         };
 
-        var validate = function (value) {
+        var validate = function(value) {
           var numValue = numberize(value),
             setting = scope.$eval(attrs.nxgMax);
-          if (!angular.isNumber(setting)) {setting = Infinity;}
+          if (!angular.isNumber(setting)) {
+            setting = Infinity;
+          }
           if (angular.isNumber(numValue) && numValue > setting) {
             ctrl.$setValidity('nxgMax', false);
             return undefined;
@@ -37,7 +39,7 @@ angular.module('nextgearWebApp')
 
         ctrl.$parsers.push(validate);
 
-        scope.$watch(attrs.nxgMax, function () {
+        scope.$watch(attrs.nxgMax, function() {
           ctrl.$setViewValue(ctrl.$viewValue);
         });
       }

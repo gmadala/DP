@@ -81,7 +81,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
     run = function(givenObject) {
       PaymentOptionsBreakdownCtrl = $controller('PaymentOptionsBreakdownCtrl', {
         $scope: scope,
-        dialog: dialogMock,
+        $uibModalInstance: dialogMock,
         object: givenObject,
         isOnQueue: isOnQueueMock
       });

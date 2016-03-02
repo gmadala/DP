@@ -13,7 +13,9 @@
  *
 */
 angular.module('nextgearWebApp')
-  .controller('PaymentOptionsBreakdownCtrl', function ($scope, dialog, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue, moment, BusinessHours) {
+  .controller('PaymentOptionsBreakdownCtrl', function ($scope, $uibModalInstance, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue, moment, BusinessHours) {
+
+    var uibModalInstance = $uibModalInstance;
     $scope.PaymentOptions = PaymentOptions;
 
     $scope.paymentObject = isOnQueue ? paymentOptionsHelper.fromCartItem(object) : paymentOptionsHelper.fromVehicleDetails(object);
@@ -65,7 +67,7 @@ angular.module('nextgearWebApp')
     });
 
     $scope.close = function() {
-      dialog.close(false);
+      uibModalInstance.close(false);
     };
 
     $scope.confirm = function() {
@@ -96,7 +98,7 @@ angular.module('nextgearWebApp')
         $scope.paymentObject.setExtraPrincipal($scope.curtailmentObject.additionalPrincipal);
       }
 
-      dialog.close(true);
+      uibModalInstance.close(true);
     };
 
   })

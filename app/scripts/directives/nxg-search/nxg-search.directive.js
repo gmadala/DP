@@ -24,8 +24,22 @@ angular.module('nextgearWebApp')
   .controller('NxgSearchCtrl', function ($scope, $attrs, $filter, Addresses, gettextCatalog) {
     $scope.showHelpText = ($attrs.helpText) ? true : false;
     $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? !!$attrs.showLocationFilter : false;
-
+    $scope.dateFormat = 'MM/dd/yyyy';
     $scope.dateRangeShown = true;
+
+    $scope.dateStartDatePicker = {
+      opened: false
+    };
+    $scope.dateEndDatePicker = {
+      opened: false
+    };
+    $scope.openStartDatePicker = function() {
+      $scope.dateStartDatePicker.opened = true;
+    };
+    $scope.openEndDatePicker = function() {
+      $scope.dateEndDatePicker.opened = true;
+    };
+
     if (angular.isDefined($attrs.showDateRange)) {
       $scope.$watch($scope.showDateRange, function (value) {
         $scope.dateRangeShown = value;

@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $dialog, $filter, VehicleDetails, User,
+  .controller('VehicleDetailsCtrl', function ($scope, $stateParams, $state, $q, $uibModal, $filter, VehicleDetails, User,
                                               TitleReleases, Floorplan, Payments, Addresses, api, moment, gettextCatalog,
                                               Upload, nxgConfig, kissMetricInfo) {
+    var uibModal = $uibModal;
+
     $scope.dataLoaded = false;
 
     $scope.vehicleInfo = {};
@@ -45,7 +47,7 @@ angular.module('nextgearWebApp')
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'views/modals/floorCarMessage.html',
+        templateUrl: 'views/modals/floor-car-message.html',
         controller: 'FloorCarMessageCtrl',
         resolve:{
           canAttachDocuments: function() {
@@ -82,7 +84,7 @@ angular.module('nextgearWebApp')
             }
           });
         }
-        $dialog.dialog(dialogParams).open().then(function(){
+        uibModal.open(dialogParams).result.then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -95,7 +97,7 @@ angular.module('nextgearWebApp')
             return false;
           }
         });
-        $dialog.dialog(dialogParams).open().then(function(){
+        uibModal.open(dialogParams).result.then(function(){
           $scope.files = [];
           $scope.invalidFiles = [];
         });
@@ -219,7 +221,7 @@ angular.module('nextgearWebApp')
             backdrop: true,
             keyboard: false,
             backdropClick: false,
-            templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+            templateUrl: 'views/modals/payment-options-breakdown.html',
             controller: 'PaymentOptionsBreakdownCtrl',
             resolve: {
               object: function() {
@@ -231,7 +233,7 @@ angular.module('nextgearWebApp')
             }
           };
 
-          $dialog.dialog(dialogOptions).open().then(function(paymentSaved) {
+          uibModal.open(dialogOptions).result.then(function(paymentSaved) {
             if(paymentSaved) {
               // there was a scheduled payment
               if($scope.paymentForCheckout.Scheduled) {
@@ -501,7 +503,7 @@ angular.module('nextgearWebApp')
           }
 
           promise.then(function(data) {
-            $dialog.dialog({
+            uibModal.open({
               backdrop: true,
               keyboard: true,
               backdropClick: true,
@@ -513,7 +515,7 @@ angular.module('nextgearWebApp')
                   return data;
                 }
               }
-            }).open();
+            });
           });
         };
 
@@ -547,12 +549,12 @@ angular.module('nextgearWebApp')
             UnitDescription: $scope.vehicleInfo.Description
           };
 
-          $dialog.dialog({
+          uibModal.open({
             backdrop: true,
             keyboard: true,
             backdropClick: true,
             controller: 'ExtensionRequestCtrl',
-            templateUrl: 'views/modals/paymentExtension.html',
+            templateUrl: 'views/modals/payment-extension.html',
             dialogClass: 'modal modal-medium',
             resolve: {
               payment: function() {
@@ -564,12 +566,13 @@ angular.module('nextgearWebApp')
                 };
               }
             }
-          }).open();
+          });
         };
 
         $scope.dataLoaded = true;
       });
     };
+
 
     getData();
 

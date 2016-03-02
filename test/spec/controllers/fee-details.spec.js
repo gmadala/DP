@@ -28,7 +28,7 @@ describe('Controller: FeeDetailsCtrl', function () {
 
     FeeDetailsCtrl = $controller('FeeDetailsCtrl', {
       $scope: scope,
-      dialog: dialog,
+      $uibModalInstance: dialog,
       activity: activityMock
     });
 

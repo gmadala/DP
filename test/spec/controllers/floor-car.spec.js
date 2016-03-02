@@ -24,10 +24,10 @@ describe('Controller: FloorCarCtrl', function () {
     $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Floorplan, $dialog, $location, Blackbook, _$q_, _api_, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, Floorplan, $uibModal, $location, Blackbook, _$q_, _api_, _$httpBackend_) {
     scope = $rootScope.$new();
     floorplan = Floorplan;
-    dialog = $dialog;
+    dialog = $uibModal;
     location = $location;
     blackbook = Blackbook;
     $q = _$q_;
@@ -96,7 +96,7 @@ describe('Controller: FloorCarCtrl', function () {
         $scope: scope,
         User: userMock,
         Floorplan: floorplan,
-        $dialog: dialog,
+        $uibModal: dialog,
         $location: location,
         Blackbook: blackbook,
         Addresses: AddressesMock,
@@ -144,18 +144,11 @@ describe('Controller: FloorCarCtrl', function () {
 
       beforeEach(inject(function() {
         scope.form = mockForm;
-        spyOn(dialog, 'dialog').and.returnValue({
-          open: function() {
-            return {
-              then: function(s,f) {
-                if (succeed) {
-                  s(true);
-                } else {
-                  s(false);
-                }
-
-              }
-            };
+        spyOn(dialog, 'open').and.returnValue({
+          result: {
+            then: function (callback) {
+              callback(succeed);
+            }
           }
         });
 
@@ -182,13 +175,13 @@ describe('Controller: FloorCarCtrl', function () {
       it('should do nothing if the form is invalid', function() {
         scope.form.$valid = false;
         scope.submit();
-        expect(dialog.dialog).not.toHaveBeenCalled();
+        expect(dialog.open).not.toHaveBeenCalled();
       });
 
       it('should call dialog with a valid form', function() {
         scope.form.$valid = true;
         scope.submit();
-        expect(dialog.dialog.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
+        expect(dialog.open.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
       });
 
       it('should call reallySubmit() if user confirms', function() {
@@ -215,7 +208,7 @@ describe('Controller: FloorCarCtrl', function () {
       beforeEach(inject(function(protect) {
         p = protect;
 
-        spyOn(dialog, 'dialog').and.returnValue({
+        spyOn(dialog, 'open').and.returnValue({
           open: function() {
             return {
               then: function(s,f) {
@@ -246,12 +239,11 @@ describe('Controller: FloorCarCtrl', function () {
       });
 
       it('should do nothing if the flooring fails', function() {
-        spyOn(dialog, 'messageBox').and.returnValue();
         $httpBackend.whenPOST('/floorplan/v1_1/create')
           .respond(function() {
             return [200, { Success: false , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
         });
-        expect(dialog.messageBox).not.toHaveBeenCalled();
+        expect(dialog.open).not.toHaveBeenCalled();
       })
     });
 
@@ -281,11 +273,9 @@ describe('Controller: FloorCarCtrl', function () {
       });
 
       it('should launch a messagebox box', function() {
-        spyOn(dialog, 'messageBox').and.callThrough();
+        spyOn(dialog, 'open').and.callThrough();
         scope.cancel();
-        expect(dialog.messageBox).toHaveBeenCalledWith('Cancel',
-        'What would you like to do?', [ {label: 'Go Home', result:'home', cssClass: 'btn-cta cta-secondary btn-sm'}, {label: 'Start Over', result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: 'Keep Editing', result: null, cssClass: 'btn-cta cta-primary btn-sm'} ]);
+        expect(dialog.open).toHaveBeenCalled();
       });
     });
   };
