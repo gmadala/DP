@@ -240,3 +240,53 @@ p.no-results {
 .details-well {
   height: 280px;
 }
+
+.promo-item{
+  border-bottom: 1px solid $wellBorder;
+  margin: 0;
+  padding: 10px;
+  &:first-child{
+    margin-top: 35px;
+  }
+  &:last-child{
+    border-bottom: none;
+    margin-bottom: -15px;
+  }
+  &.inactive{
+    color: $wellBorder;
+  }
+  &.non-empty-promos:first-child{
+    margin-top: 0;
+  }
+  &.empty-promos:first-child{
+    margin-top: 35px;
+  }
+  .promo-terms-conditions{
+    padding: 5px 15px;
+  }
+
+  .paired-media{
+    cursor: pointer;
+  }
+  .promo-details{
+    color: #3496c7;
+    cursor: pointer;
+  }
+}
+.promo-header{
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  .promo-header-item span{
+    float: left;
+    padding: 0px 15px !important;
+  }
+}
+
+.promo-well {
+  padding-bottom: 15px;
+}
+
+.promo-contact{
+  padding-bottom: 9px;
+  color: black;
+}

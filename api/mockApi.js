@@ -90,6 +90,9 @@ module.exports = {
               },
               uploadDocuments: {
                 enabled: true
+              },
+              eventSales: {
+                enabled: true
               }
             }
           }

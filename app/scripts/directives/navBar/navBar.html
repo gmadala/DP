@@ -24,10 +24,13 @@
       </div>
 
       <div class="col-xs-3 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
-        <div class="align-right">{{ user.BusinessName | truncate:20 }}
-          <span class=ng-show="user.isDealer()">
-            <span class="dealer-number"translate>
-              Dealer #:
+        <div class="align-right">{{ user.BusinessName | uppercase |truncate:20 }}
+          <span>
+            <span class="dealer-number" ng-show="user.isDealer()" translate>
+              Dealer #
+            </span>
+            <span class="dealer-number" ng-show="!user.isDealer()" translate>
+              Auction #
             </span>
             {{ user.BusinessNumber }}
           </span></div>
@@ -53,6 +56,7 @@
           </ul>
         </div>
       </div>
+
       <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>

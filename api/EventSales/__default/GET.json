@@ -1,0 +1,75 @@
+[{
+  "eventSaleName": "NonAuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1391111286730,
+  "name": "2 day free promo 12-14",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "blah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blah"
+}, {
+  "eventSaleName": "AuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1391111286731,
+  "name": "2 day free promo 12-11",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1491111286732,
+  "name": "2 day free promo 12/09",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": null
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1591111286733,
+  "name": "2 day free promo 12/08",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1491111286734,
+  "name": "another 2 day free promo",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": true,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": null,
+  "promo": true,
+  "number": "73193",
+  "salesDate": 1391111286735,
+  "name": "2 day Free promo",
+  "termPlanName": "2 day Free promo",
+  "auctionName": null,
+  "terminated": false,
+  "termsAndConditions": null
+}, {
+  "eventSaleName": "NonAuctionGuaranteed",
+  "promo": false,
+  "salesDate": 1391111286736,
+  "name": "2 day free promo 12-10",
+  "termPlanName": "2 day Free promo",
+  "auctionName": "Waldron, IN",
+  "terminated": false,
+  "termsAndConditions": "hblah blah blahblah blah blahblah blah blahblah blah blahblah blahhblah blah blahblah blah blahblah blah blahblah blah blahblah blah"
+}, {
+  "eventSaleName": null,
+  "promo": true,
+  "number": "72547",
+  "salesDate": 1491111286737,
+  "name": "Enterprise SS Event Sale (D30 - F0 - R0 - C%0)",
+  "termPlanName": "D30 - F0 - R0 - C%0",
+  "auctionName": null,
+  "terminated": true,
+  "termsAndConditions": null
+}]

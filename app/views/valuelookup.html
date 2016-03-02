@@ -427,20 +427,14 @@
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
       </div>
-      <p class="info-block-text">
-        <span translate>All values are displayed in US Dollars.</span>
-      </p>
+      <h6 class="info-block-text" translate>All values are displayed in US Dollars.</h6>
     </div>
     <div class="info-block"
          ng-hide="results.blackbook.multiple || results.mmr.multiple || results.kbb.multiple || manualLookup.searchComplete || vinLookup.searchComplete">
       <div class="info-block-image">
         <span nxg-icon="icon-info"></span>
       </div>
-      <p class="info-block-text">
-        <span>
-          <span translate>Values below will update based on successful VIN or Manual Lookup</span>.
-        </span>
-      </p>
+      <h6 class="info-block-text" translate>Values below will update based on successful VIN or Manual Lookup</h6>
     </div>
     <div class="info-block" ng-show="showMultiplesWarning()">
       <div class="info-block-image">
@@ -465,12 +459,11 @@
     </div>
 
     <div ng-hide="hideBlackbookAll()">
-      <h4 class="subtitle"><span translate>NextGear Book Wholesale Values</span><i
+      <h4 class="subtitle"><span translate>NextGear Capital Book Wholesale Values</span><i
           style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i>
       </h4>
 
-      <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide
-        NextGear Book Values at this time.</p>
+      <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Capital Book Values at this time.</p>
 
       <div ng-show="results.blackbook.multiple">
         <div class="row">
@@ -526,8 +519,7 @@
       <h4 class="subtitle"><span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">
         &nbsp;&nbsp;<span translate>The following values represent a national average.</span></i></h4>
 
-      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR
-        Values at this time.</p>
+      <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
 
       <div ng-show="results.mmr.multiple">
         <div class="row">
@@ -591,8 +583,7 @@
         </button>
       </h4>
 
-      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley
-        Blue Book<sup>®</sup> values at this time.</p>
+      <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> values at this time.</p>
 
       <div ng-show="results.kbb.configurations">
         <div class="row">

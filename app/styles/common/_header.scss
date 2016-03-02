@@ -12,6 +12,25 @@
   }
 }
 
+.dropdown-spaced {
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.dropdown-bold {
+  a {
+    color: $accent;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:hover {
+      color: #999;
+      text-decoration: none;
+    }
+  }
+}
+
 .header {
   @extend .row;
   //position: relative;
@@ -56,6 +75,7 @@
   }
 
   .dealer-number{
+    text-transform: uppercase;
     border-left: 1px solid black;
     padding-left: 5px;
     margin-left: 5px;

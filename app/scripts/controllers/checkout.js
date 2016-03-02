@@ -4,7 +4,7 @@ angular.module('nextgearWebApp')
   .controller('CheckoutCtrl',
   function ($scope, $q, $timeout, protect, moment, $uibModal,
             messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo) {
+            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo, decimalAdjust) {
 
     var uibModal = $uibModal;
     $scope.isCollapsed = true;
@@ -25,6 +25,11 @@ angular.module('nextgearWebApp')
         $scope.submitInProgress = newValue;
       }
     );
+
+    $scope.sanitize = function(str) {
+      var sanitized = str || '';
+      return api.toFloat(sanitized.replace(/[^\d\.]/g, ''));
+    };
 
     $scope.paymentQueue = {
       contents: Payments.getPaymentQueue(),
@@ -165,8 +170,12 @@ angular.module('nextgearWebApp')
         return $scope.unappliedFunds.useFunds ? 0.01 : 0;
       },
       max: function () {
+        var max = Math.min($scope.unappliedFunds.available, $scope.paymentQueue.sum.todayTotal());
         // cannot use more unapplied funds than available, or than the total owed for same-day payments
-        return Math.min($scope.unappliedFunds.available, $scope.paymentQueue.sum.todayTotal());
+        // PROD-36: Adjust the max value to 2 decimal points.
+        // e.g.: 18492.559999999998 -> 18492.56
+        // This is javascript floating point calculation error. You can try: 0.1 * 0.2.
+        return decimalAdjust.round(max, -2);
       },
       useFunds: false,
       useAmount: ''

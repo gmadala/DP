@@ -127,11 +127,13 @@
   <!-- BUSINESS SETTINGS -->
   <section class="col-xs-6 well settings-well leftMarginMedium" novalidate ng-controller="AccountManagementCtrl">
     <h2 class="well-title"><span translate>Business Settings</span>
+      <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
       <div class="well-sub-title well-sub-title-edit">
         <button ng-hide="business.editable" class="btn-unstyle" ng-click="business.edit()" translate>Edit Settings</button>
         <button ng-show="business.editable" class="btn-unstyle" ng-click="business.save()" translate>Save Settings</button>
         <button ng-show="business.editable" class="btn-unstyle cancel" ng-click="business.cancel()" translate>Cancel</button>
       </div>
+      -->
     </h2>
 
     <div class="well-item">
@@ -162,7 +164,7 @@
           <!-- End temporary code -->
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="isDealer">
           <label class="col-xs-5" for="enhanced" translate>Enhanced Registration Enabled?</label>
           <div class="col-xs-7">
             <!-- Show "Yes" if enhanced registration is enabled.
@@ -181,14 +183,14 @@
           </div>
         </div>
 
-        <div class="row" ng-show="business.editable">
+        <div class="row" ng-show="isDealer && business.editable">
           <div class="col-xs-7 col-xs-offset-5">
-            <p class="paragraph" translate>Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to MyNextGear.</p>
+            <p class="paragraph" translate>Enhanced Registration will result in all account access being restricted to users with a PIN. All guarantors will be asked to set up their PIN when logging in to myNextGear.</p>
             <p class="paragraph" translate>Create your Enhanced Registration four digit PIN.</p>
           </div>
         </div>
 
-        <div class="row" ng-show="business.editable">
+        <div class="row" ng-show="isDealer && business.editable">
           <label class="col-xs-5" translate>Enhanced Registration PIN</label>
           <div class="col-xs-7 zeroLeftPadding">
             <input type="text"
