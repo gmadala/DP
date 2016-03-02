@@ -1,13 +1,13 @@
 'use strict';
 
 describe('Directive: nxgUnappliedFundsWidget', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.html'));
 
   var element,
     isolateScope;
 
   beforeEach(inject(function ($rootScope, $compile, $httpBackend, $q) {
-    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
+    $httpBackend.expectGET('scripts/directives/nxg-icon/nxg-icon.html').respond('<div></div>');
     $httpBackend.whenGET('/userAccount/v1_1/settings').respond($q.when({
       AutoDisburseUnappliedFundsDaily: false
     }));

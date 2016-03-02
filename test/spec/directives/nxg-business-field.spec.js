@@ -42,13 +42,13 @@ describe('Directive: nxgBusinessField', function () {
     });
   });
 
-  beforeEach(module('scripts/directives/nxgBusinessField/nxgBusinessField.html'));
+  beforeEach(module('scripts/directives/nxg-business-field/nxg-business-field.html'));
 
   var element,
     scope;
 
   beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
-    $httpBackend.whenGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>')
+    $httpBackend.whenGET('scripts/directives/nxg-icon/nxg-icon.html').respond('<div></div>')
 
     scope = $rootScope.$new();
     scope.model = {

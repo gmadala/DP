@@ -1,13 +1,13 @@
 'use strict';
 
 describe('Directive: nxgDateField', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgDateField/nxgDateField.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-date-field/nxg-date-field.html'));
 
   var element,
     scope;
 
   beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
-    $httpBackend.expectGET('scripts/directives/nxgIcon/nxgIcon.html').respond('<div></div>');
+    $httpBackend.expectGET('scripts/directives/nxg-icon/nxg-icon.html').respond('<div></div>');
 
     scope = $rootScope;
     scope.bar = new Date();

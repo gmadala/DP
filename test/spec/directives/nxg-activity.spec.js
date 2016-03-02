@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgActivity', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgActivity/nxgActivity.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-activity/nxg-activity.html'));
 
   var element,
     scope,

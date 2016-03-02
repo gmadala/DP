@@ -52,8 +52,8 @@ module.exports = function (karma) {
       'app/scripts/directives/**/*.html',
       'test/spec/**/*.js',
       'test/util/analytics.js',
-      'test/util/urlParser.js',
-      'test/util/disableOtherwise.js'
+      'test/util/url-parser.js',
+      'test/util/disable-otherwise.js'
     ],
 
     preprocessors: {
@@ -68,7 +68,7 @@ module.exports = function (karma) {
     // list of files to exclude
     exclude: [
       'app/scripts/dev/**/*.js',
-      'app/scripts/debugInfo.js'
+      'app/scripts/debug-info.js'
     ],
 
     // test results reporter to use

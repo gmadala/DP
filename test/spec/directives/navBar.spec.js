@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: navBar', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/navBar/navBar.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/navbar/navbar.html'));
 
   describe('controller', function () {
     var scope,

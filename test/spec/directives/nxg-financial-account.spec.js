@@ -1,8 +1,8 @@
 'use strict';
 
 describe('Directive: nxgFinancialAccount', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgFinancialAccount/nxgFinancialAccount.html',
-    'scripts/directives/nxgIcon/nxgIcon.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-financial-account/nxg-financial-account.html',
+    'scripts/directives/nxg-icon/nxg-icon.html'));
 
   var disbursementAccount = "66e9e774-3dcc-4852-801d-b6e91d161a13";
   var billingAccount = "76e9e774-3dcc-4852-801d-b6e91d161a13";

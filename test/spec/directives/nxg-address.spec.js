@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgAddress', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgAddress/nxgAddress.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-address/nxg-address.html'));
 
   var element,
     dScope,

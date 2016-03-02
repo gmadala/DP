@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgValueLookupDisplay', function () {
-  beforeEach(module('nextgearWebApp', 'scripts/directives/nxgValueLookupDisplay/nxgValueLookupDisplay.html'));
+  beforeEach(module('nextgearWebApp', 'scripts/directives/nxg-value-lookup-display/nxg-value-lookup-display.html'));
 
   var element,
       scope,

@@ -37,7 +37,7 @@ describe('Directive: nxgMessages', function () {
       scope.$apply();
       expect($dialog.dialog).toHaveBeenCalled();
       var opts = $dialog.dialog.calls.mostRecent().args[0];
-      expect(opts.templateUrl).toBe('scripts/directives/nxgMessages/nxgMessagesModal.html');
+      expect(opts.templateUrl).toBe('scripts/directives/nxg-messages/nxg-messages-modal.html');
       expect(opts.controller).toBe('MessagesModalCtrl');
       expect(fakeDialog.open).toHaveBeenCalled();
     });
