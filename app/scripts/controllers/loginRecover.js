@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $dialog, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
+  .controller('LoginRecoverCtrl', function ($scope, $state, $uibModal, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
 
+    var uibModal = $uibModal;
     $scope.userNameRecovery = {
       // forgotUserNameForm
       email: null,
@@ -120,9 +121,29 @@ angular.module('nextgearWebApp')
 
     $scope.showSuccessMessage = function () {
       var title = gettextCatalog.getString('Success'),
-        msg = gettextCatalog.getString('Thank you, check your email for the requested account information.'),
+        message = gettextCatalog.getString('Thank you, check your email for the requested account information.'),
         buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-      $dialog.messageBox(title, msg, buttons).open().then(
+
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/messageBox.html',
+        controller: 'MessageBoxCtrl',
+        dialogClass: 'modal modal-medium',
+        resolve: {
+          title: function () {
+            return title;
+          },
+          message : function() {
+            return message;
+          },
+          buttons: function () {
+            return buttons;
+          }
+        }
+      };
+      uibModal.open(dialogOptions).result.then(
         function () {
           $state.transitionTo('login');
         }

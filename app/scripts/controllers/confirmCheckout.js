@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmCheckoutCtrl', function ($scope, $state, dialog, queue, transactionInfo, Receipts, $window, api) {
+  .controller('ConfirmCheckoutCtrl', function ($scope, $state, $uibModalInstance, queue, transactionInfo, Receipts, $window, api) {
 
     $scope.today = new Date();
 
@@ -83,7 +83,7 @@ angular.module('nextgearWebApp')
         $window.open(stringUrl, '_blank');
       }
       $state.transitionTo('payments');
-      dialog.close();
+      $uibModalInstance.close();
     };
 
     $scope.close = function () {
@@ -93,7 +93,12 @@ angular.module('nextgearWebApp')
       }
 
       // If user has navigated away, just close the dialog and let them stay here.
-      dialog.close();
+      $uibModalInstance.close();
+    };
+
+    $scope.openVehicleDetail = function(payment) {
+      $uibModalInstance.close();
+      $state.go('vehicledetails', {stockNumber: payment.stockNum});
     };
 
   });

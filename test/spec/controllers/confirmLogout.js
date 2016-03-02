@@ -24,7 +24,7 @@ describe('Controller: ConfirmLogoutCtrl', function () {
 
     ConfirmLogoutCtrl = $controller('ConfirmLogoutCtrl', {
       $scope: scope,
-      dialog: dialog
+      $uibModalInstance: dialog
     });
   }));
 

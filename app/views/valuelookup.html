@@ -576,9 +576,8 @@
       <h4 class="subtitle"><span translate>Kelley Blue Book<sup>®</sup> Auction Values</span>
         <i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are based on the Zip provided.</span></i>
         <button ng-show="results.kbb.data || (results.kbb.noMatch && (results.zip || results.zipcode))" class="btn-help"
-                tooltip-html="true"
                 tooltip-placement="left"
-                tooltip-html-unsafe="{{ disclaimer }}"
+                uib-tooltip-html="disclaimer"
                 tooltip-popup-delay="500">
           <span nxg-icon="icon-help"></span>
         </button>

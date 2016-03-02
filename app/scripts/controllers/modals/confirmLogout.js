@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ConfirmLogoutCtrl', function($rootScope, $scope, dialog, User) {
+  .controller('ConfirmLogoutCtrl', function($rootScope, $scope, $uibModalInstance, User) {
+    var uibModalInstance = $uibModalInstance;
     $scope.logoutPending = false;
 
     $scope.close = function(confirmed) {
@@ -9,10 +10,10 @@ angular.module('nextgearWebApp')
         $scope.logoutPending = true;
         User.logout().then(function () {
           $scope.logoutPending = false;
-          dialog.close(confirmed);
+          uibModalInstance.close(confirmed);
         });
       } else {
-        dialog.close(confirmed);
+        uibModalInstance.close(confirmed);
       }
     };
   });

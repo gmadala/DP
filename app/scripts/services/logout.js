@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .factory('LogoutGuard', function($rootScope, $dialog, $state, User) {
+  .factory('LogoutGuard', function($rootScope, $state, User) {
 
     return {
       /**

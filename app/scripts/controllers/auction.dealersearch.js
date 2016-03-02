@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, User, DealerNumberSearch) {
+  .controller('AuctionDealerSearchCtrl', function($scope,  $uibModal, User, DealerNumberSearch) {
+
+    var uibModal = $uibModal;
+
     $scope.onlyNumbersPattern = /^\d+$/;
 
     /*** Number Search ***/
@@ -121,7 +124,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          uibModal.open(dialogOptions);
         }
       },
       validate: function() {
@@ -180,7 +183,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $dialog.dialog(dialogOptions).open();
+          uibModal.open(dialogOptions);
         }
         else {
           if (this.auctionNumInactive) {

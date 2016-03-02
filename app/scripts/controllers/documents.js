@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('DocumentsCtrl', function ($scope, $dialog, api, metric, segmentio, gettextCatalog, User, kissMetricInfo) {
+  .controller('DocumentsCtrl', function ($scope, api, metric, segmentio, gettextCatalog, User, kissMetricInfo) {
 
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();

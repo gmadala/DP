@@ -12,6 +12,45 @@ angular.module('nextgearWebApp')
 
     $scope.data = null;
 
+    $scope.dateFormat = 'MM/dd/yyyy';
+    $scope.dealerStartDatePicker = {
+      opened: false
+    };
+    $scope.dealerEndDatePicker = {
+      opened: false
+    };
+    $scope.upcomingDatePicker = {
+      opened: false
+    };
+    $scope.disbursementDatePicker = {
+      opened: false
+    };
+    $scope.openDealerStartDatePicker = function() {
+      $scope.dealerStartDatePicker.opened = true;
+    };
+    $scope.openDealerEndDatePicker = function() {
+      $scope.dealerEndDatePicker.opened = true;
+    };
+    $scope.openUpcomingDatePicker = function() {
+      $scope.upcomingDatePicker.opened = true;
+    };
+    $scope.openDisbursementDatePicker = function() {
+      $scope.disbursementDatePicker.opened = true;
+    };
+    $scope.paidStartDatePicker = {
+      opened: false
+    };
+    $scope.paidEndDatePicker = {
+      opened: false
+    };
+    $scope.openPaidStartDatePicker = function() {
+      $scope.paidStartDatePicker.opened = true;
+    };
+    $scope.openPaidEndDatePicker = function() {
+      $scope.paidEndDatePicker.opened = true;
+    };
+    $scope.maxDate = new Date();
+
     $scope.expInvStatus = {
       'type': 'select',
       'value': gettextCatalog.getString('All'),
@@ -45,8 +84,9 @@ angular.module('nextgearWebApp')
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.stmtFormValidity = angular.copy($scope.stmtForm);
       $scope.stmtFormValidity.dateRangeError = startDate && endDate && moment(startDate).isAfter(endDate);
+      $scope.stmtFormValidity.endDateRangeError =  moment(endDate).isAfter(moment($scope.maxDate));
 
-      if (!$scope.stmtForm.$valid || $scope.stmtFormValidity.dateRangeError) {
+      if (!$scope.stmtForm.$valid || $scope.stmtFormValidity.dateRangeError || $scope.stmtFormValidity.endDateRangeError) {
         return false;
       }
 
@@ -108,8 +148,9 @@ angular.module('nextgearWebApp')
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.paidOffFormValidity = angular.copy($scope.paidOffForm);
       $scope.paidOffFormValidity.dateRangeError = startDate && endDate && moment(startDate).isAfter(endDate);
+      $scope.paidOffFormValidity.endDateRangeError =  moment(endDate).isAfter(moment($scope.maxDate));
 
-      if (!$scope.paidOffForm.$valid || $scope.paidOffFormValidity.dateRangeError) {
+      if (!$scope.paidOffForm.$valid || $scope.paidOffFormValidity.dateRangeError  || $scope.paidOffFormValidity.endDateRangeError ) {
         return false;
       }
 

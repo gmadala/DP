@@ -38,7 +38,7 @@ describe('Controller: BusinessSearchCtrl', function () {
     scope = $rootScope.$new();
     BusinessSearchCtrl = $controller('BusinessSearchCtrl', {
       $scope: scope,
-      dialog: dialog,
+      $uibModalInstance: dialog,
       initialQuery: 'x',
       searchBuyersMode: false,
       closeNow: closeNowFunction

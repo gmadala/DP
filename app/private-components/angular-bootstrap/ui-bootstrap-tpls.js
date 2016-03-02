@@ -1332,7 +1332,7 @@ dialogModule.controller('MessageBoxController', ['$scope', 'dialog', 'model', fu
   };
 }]);
 
-dialogModule.provider("$dialog", function(){
+dialogModule.provider("$modal", function(){
 
   // The default options for all dialogs.
   var defaults = {
@@ -1653,7 +1653,7 @@ angular.module('ui.bootstrap.dropdownToggle', []).directive('dropdownToggle', ['
   };
 }]);
 angular.module('ui.bootstrap.modal', ['ui.bootstrap.dialog'])
-.directive('modal', ['$parse', '$dialog', function($parse, $dialog) {
+.directive('modal', ['$parse', '$modal', function($parse, $modal) {
   return {
     restrict: 'EA',
     terminal: true,
@@ -1668,7 +1668,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.dialog'])
         template: elm.html(),
         resolve: { $scope: function() { return scope; } }
       });
-      var dialog = $dialog.dialog(opts);
+      var dialog = $modal.dialog(opts);
 
       elm.remove();
 

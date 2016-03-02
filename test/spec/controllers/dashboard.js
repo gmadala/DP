@@ -296,7 +296,7 @@ describe('Controller: DashboardCtrl', function () {
     };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Dashboard, Floorplan, FloorplanUtil, _$q_) {
+  beforeEach(inject(function ($controller, $rootScope, Dashboard, Floorplan, FloorplanUtil, _$q_, $uibModal) {
     scope = $rootScope.$new();
     $q = _$q_;
     mockState = {
@@ -375,17 +375,17 @@ describe('Controller: DashboardCtrl', function () {
     });
 
     describe('onRequestCredIncr method', function() {
-      it('should launch a modal dialog with the request credit increase form', inject(function($dialog) {
-        spyOn($dialog, 'dialog').and.callFake(function() {
+      it('should launch a modal dialog with the request credit increase form', inject(function($uibModal) {
+        spyOn($uibModal, 'open').and.callFake(function() {
           return {
             open: angular.noop
           }
         });
 
         scope.onRequestCredIncr();
-        expect($dialog.dialog).toHaveBeenCalled();
-        expect($dialog.dialog.calls.mostRecent().args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
-        expect($dialog.dialog.calls.mostRecent().args[0].controller).toBe('RequestCreditIncreaseCtrl');
+        expect($uibModal.open).toHaveBeenCalled();
+        expect($uibModal.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/requestCreditIncrease.html');
+        expect($uibModal.open.calls.mostRecent().args[0].controller).toBe('RequestCreditIncreaseCtrl');
       }));
     });
 

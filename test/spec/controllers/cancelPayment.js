@@ -33,7 +33,7 @@ describe('Controller: CancelPaymentCtrl', function () {
 
     CancelPaymentCtrl = $controller('CancelPaymentCtrl', {
       $scope: scope,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       options: optionsMock
     });
   }));
@@ -50,7 +50,7 @@ describe('Controller: CancelPaymentCtrl', function () {
     optionsMock.title = '';
     CancelPaymentCtrl = $controller('CancelPaymentCtrl', {
       $scope: scope,
-      dialog: dialogMock,
+      $uibModalInstance: dialogMock,
       options: optionsMock
     });
     expect(scope.title).toBe('Cancel Payment');

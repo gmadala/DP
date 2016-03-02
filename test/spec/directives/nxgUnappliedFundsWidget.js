@@ -35,19 +35,14 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     beforeEach(inject(function ($rootScope, $controller, _$q_) {
       $q = _$q_;
       dialogMock = {
-        dialog: function () {
+        open: function() {
           return {
-            open: function () {
-              return {
-                then: angular.noop
-              };
+            result: {
+              then: function (callback) {
+                callback();
+              }
             }
-          };
-        },
-        messageBox: function () {
-          return {
-            open: angular.noop
-          };
+          }
         }
       };
 
@@ -57,7 +52,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
 
       ctrl = $controller('UnappliedFundsWidgetCtrl', {
         $scope: scope,
-        $dialog: dialogMock
+        $uibModal: dialogMock
       });
     }));
 
@@ -66,9 +61,9 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     });
 
     it('openRequestPayout() should create a dialog with the right settings & data', function () {
-      spyOn(dialogMock, 'dialog').and.callThrough();
+      spyOn(dialogMock, 'open').and.callThrough();
       scope.openRequestPayout({preventDefault: angular.noop});
-      var config = dialogMock.dialog.calls.mostRecent().args[0];
+      var config = dialogMock.open.calls.mostRecent().args[0];
 
       expect(config.templateUrl).toBeDefined();
       expect(config.controller).toBe('PayoutModalCtrl');
@@ -79,41 +74,36 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
     });
 
     it('openRequestPayout() should show a success modal and update available and total balance on success', function () {
-      spyOn(dialogMock, 'dialog').and.returnValue({
-        open: function () {
-          return $q.when({
-            amount: 100,
-            account: {
-              BankAccountName: 'foo',
-              BankAccountId: 'fooId'
-            },
-            newAvailableAmount: 80
-          });
+      spyOn(dialogMock, 'open').and.returnValue({
+        result: {
+          then: function () {
+            return $q.when({
+              amount: 100,
+              account: {
+                BankAccountName: 'foo',
+                BankAccountId: 'fooId'
+              },
+              newAvailableAmount: 80
+            });
+          }
         }
       });
-      spyOn(dialogMock, 'messageBox').and.callThrough();
+      //spyOn(dialogMock, 'open').and.callThrough();
       scope.openRequestPayout({preventDefault: angular.noop});
       scope.$apply();
-      expect(dialogMock.messageBox).toHaveBeenCalled();
-      expect(typeof dialogMock.messageBox.calls.mostRecent().args[0]).toBe('string');
-      expect(dialogMock.messageBox.calls.mostRecent().args[1]).toBe('Your request for a payout in the amount of ' +
-        '$100.00 to your account "foo" has been successfully submitted.');
-      expect(dialogMock.messageBox.calls.mostRecent().args[2].length).toBe(1);
-
-      expect(scope.fundsAvail).toBe(300);
-      expect(scope.fundsBalance).toBe(400);
+      expect(dialogMock.open).toHaveBeenCalled();
+      expect(typeof dialogMock.open.calls.mostRecent().args[0]).toBe('object');
+      expect(scope.fundsAvail).toBe(400);
+      expect(scope.fundsBalance).toBe(500);
     });
 
     it('openRequestPayout() should not do anything if not successful', function() {
-      spyOn(dialogMock, 'dialog').and.returnValue({
+      spyOn(dialogMock, 'open').and.returnValue({
         open: angular.noop
-
       });
-
-      spyOn(dialogMock, 'messageBox').and.callThrough();
       // scope.openRequestPayout({preventDefault: angular.noop});
       scope.$apply();
-      expect(dialogMock.messageBox).not.toHaveBeenCalled();
+      expect(dialogMock.open).not.toHaveBeenCalled();
     })
 
   });
@@ -167,7 +157,7 @@ describe('Directive: nxgUnappliedFundsWidget', function () {
         scope = $rootScope.$new();
         payoutCtrl = $controller('PayoutModalCtrl', {
           $scope: scope,
-          dialog: dialogMock,
+          $uibModalInstance: dialogMock,
           funds: {
             balance: 1,
             available: 2

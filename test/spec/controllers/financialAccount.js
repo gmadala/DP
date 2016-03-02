@@ -62,7 +62,7 @@ describe('Controller: FinancialAccountCtrl', function () {
         $scope: scope,
         kissMetricInfo: mockKissMetricInfo,
         AccountManagement: AccountManagementMock,
-        dialog: dialog,
+        $uibModalInstance: dialog,
         segmentio: segmentio,
         options: {
           modal: 'add',

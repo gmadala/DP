@@ -5,7 +5,7 @@
  * the ramifications to each view and test both when making any changes here!!
  */
 angular.module('nextgearWebApp')
-  .controller('FloorCarCtrl', function($scope, $dialog, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
+  .controller('FloorCarCtrl', function($scope, $uibModal, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
                                        OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
 
@@ -17,11 +17,32 @@ angular.module('nextgearWebApp')
     });
 
     var isDealer = User.isDealer();
+    var uibModal  = $uibModal;
     $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
+
+    $scope.dealerMinDate = moment().subtract(364, 'days');
+    $scope.auctionMinDate = moment().subtract(6, 'days');
+    $scope.maxDate = moment();
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
+    $scope.isDealer = User.isDealer();
+
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
+    $scope.dateFormat = 'MM/dd/yyyy';
+    $scope.isDealer = User.isDealer();
 
     //$scope.form = <form directive's controller, assigned by view>
 
@@ -172,7 +193,7 @@ angular.module('nextgearWebApp')
           }
         }
       };
-      $dialog.dialog(confirmation).open().then(function (result) {
+      uibModal.open(confirmation).result.then(function (result) {
         if (result === true) {
           // submission confirmed
           $scope.reallySubmit(protect);
@@ -236,27 +257,27 @@ angular.module('nextgearWebApp')
               dialogParams = response.data.Success ?
                 buildDialog($scope.canAttachDocuments(), true, true) :
                 buildDialog($scope.canAttachDocuments(), true, false);
-              $dialog.dialog(dialogParams).open().then(function(){
+              uibModal.open(dialogParams).result.then(function(){
                 $scope.reset();
               });
             }, function() {
               $scope.submitInProgress = false;
               dialogParams = buildDialog($scope.canAttachDocuments(), true, false);
-              $dialog.dialog(dialogParams).open().then(function(){
+              uibModal.open(dialogParams).result.then(function(){
                 $scope.reset();
               });
             });
           } else {
             $scope.submitInProgress = false;
             dialogParams = buildDialog(false, true, false);
-            $dialog.dialog(dialogParams).open().then(function(){
+            uibModal.open(dialogParams).result.then(function(){
               $scope.reset();
             });
           }
         }, function (/*floorplan error*/) {
           $scope.submitInProgress = false;
           dialogParams = buildDialog($scope.canAttachDocuments(), false, false);
-          $dialog.dialog(dialogParams).open();
+          uibModal.open(dialogParams);
         });
     };
 
@@ -282,13 +303,33 @@ angular.module('nextgearWebApp')
 
     $scope.cancel = function () {
       var title = gettextCatalog.getString('Cancel'),
-        msg = gettextCatalog.getString('What would you like to do?'),
+        message = gettextCatalog.getString('What would you like to do?'),
         buttons = [
           {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary btn-sm'},
           {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
           {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary btn-sm'}
         ];
-      $dialog.messageBox(title, msg, buttons).open().then(function (choice) {
+
+      var dialogOptions = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl: 'views/modals/messageBox.html',
+        controller: 'MessageBoxCtrl',
+        dialogClass: 'modal modal-medium',
+        resolve: {
+          title: function () {
+            return title;
+          },
+          message : function() {
+            return message;
+          },
+          buttons: function () {
+            return buttons;
+          }
+        }
+      };
+      uibModal.open(dialogOptions).result.then(function (choice) {
         if (choice === 'home') {
           $location.path('');
         } else if (choice === 'reset') {

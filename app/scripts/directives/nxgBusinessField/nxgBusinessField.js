@@ -40,7 +40,8 @@ angular.module('nextgearWebApp')
       }
     };
   })
-  .controller('BusinessFieldCtrl', function($scope, $element, $dialog, $timeout) {
+  .controller('BusinessFieldCtrl', function($scope, $element, $uibModal, $timeout) {
+    var uibModal = $uibModal;
     var searchOpen = false;
     $scope.query = '';
     var lengthAtSubmit = 0;
@@ -94,7 +95,7 @@ angular.module('nextgearWebApp')
         // Delay by 200ms (almost unnoticeable) so the user's click event has time to complete
         // before the popup opens, potentially cancelling the popup.
         $timeout(angular.noop, 200).then(function() {
-          return $dialog.dialog(dialogOptions).open();
+          return uibModal.open(dialogOptions).result;
         }).then(function(selectedBusiness) {
           if (selectedBusiness) {
             // replace any existing query text with the selected business name

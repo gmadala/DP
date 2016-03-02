@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('FeeDetailsCtrl', function ($scope, dialog, activity, gettext, gettextCatalog) {
+  .controller('FeeDetailsCtrl', function ($scope, $uibModalInstance, activity, gettext, gettextCatalog) {
 
+    var uibModalInstance = $uibModalInstance;
     // TODO should be translated server side but doing it this way for now https://tardis.discoverdsc.com/browse/VO-3581
     // Then we would not need this section
     // use getText to mark these for translation
@@ -15,6 +16,6 @@ angular.module('nextgearWebApp')
     $scope.fee = activity;
 
     $scope.close = function () {
-      dialog.close();
+      uibModalInstance.close();
     };
   });

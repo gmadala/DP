@@ -38,6 +38,12 @@ angular.module('nextgearWebApp')
           element.find('input').attr('placeholder', 'mm/dd/yyyy');
         }
 
+        if(attrs.dateAllow === 'dealerFloorRange') {
+          attrs.startDate = '';
+          attrs.endDate = '';
+          element.attr('start-date', 'end-date');
+        }
+
         // Automatically load in current language
         var currentLanguage = gettextCatalog.currentLanguage;
         if (currentLanguage !== 'en') {
@@ -230,7 +236,7 @@ angular.module('nextgearWebApp')
             };
 
             scope.notPastDates = function(date) {
-              if (date !== date || !date) { // Stop NaN or null from getting into the function
+              if (date !== date || !date) { // Stop NaN or null from gettin   g into the function
                 return true;
               }
               return !(moment().isAfter(moment(new Date(date)), 'day'));

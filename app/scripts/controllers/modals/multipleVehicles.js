@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('MultipleVehiclesCtrl', function ($scope, dialog, matchList) {
+  .controller('MultipleVehiclesCtrl', function ($scope, $uibModalInstance, matchList) {
+    var uibModalInstance = $uibModalInstance;
     $scope.matches = matchList;
 
     var focusField = angular.element('#inputVin');
 
     $scope.select = function(match) {
-      dialog.close(match);
+      uibModalInstance.close(match);
       if (focusField.length > 0) {
         focusField.focus();
       }
     };
 
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
       if (focusField.length > 0) {
         focusField.focus();
       }

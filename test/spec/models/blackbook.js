@@ -11,7 +11,7 @@ describe('Service: Blackbook', function () {
   // the open() promise immediately with dialogResult
   beforeEach(function () {
     module('nextgearWebApp', function($provide) {
-      $provide.decorator('$dialog', function($delegate, $q) {
+      $provide.decorator('$uibModal', function($delegate, $q) {
         dialogMock = {
           dialog: function () {
             return {

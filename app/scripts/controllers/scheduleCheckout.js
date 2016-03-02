@@ -1,15 +1,25 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ScheduleCheckoutCtrl', function ($scope, dialog, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
+  .controller('ScheduleCheckoutCtrl', function ($scope, $uibModalInstance, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
 
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
     var item = payment ? payment : fee;
+    var uibModalInstance = $uibModalInstance;
 
     $scope.updateInProgress = false;
     $scope.type = payment ? 'payment' : 'fee';
     $scope.isPayment = !!payment;
+    $scope.dateFormat = 'MM/dd/yyyy';
+    $scope.mindate= new Date();
+
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.openDatePicker = function() {
+      $scope.datePicker.opened = true;
+    };
 
     $scope.model = {
       // we use a copy of the original payment/breakdown, so that if we change
@@ -64,12 +74,25 @@ angular.module('nextgearWebApp')
         return;
       }
 
-      if (newVal === oldVal || !$scope.checkDate(newVal)) {
+      if (newVal === oldVal || !$scope.disabled(newVal)) {
         return; // our value is old or invalid; don't update breakdown
       } else {
         prv.handleNewDate(newVal);
       }
     });
+
+    $scope.disabled = function (date, mode) {
+      // this can be called by the nxg-requires validator with no date - in this case,
+      // just return true; the error will be handled upstream by the required validator
+      if (!date) { return 0; }
+
+      date = moment(date);
+
+      // check if the date is a possible payment date per data
+      var key = api.toShortISODate(date.toDate());
+      mode = ($scope.model.possibleDates[key] === true ? 0 : 1);
+      return mode;
+    };
 
     $scope.checkDate = function (date) {
       // this can be called by the nxg-requires validator with no date - in this case,
@@ -101,7 +124,7 @@ angular.module('nextgearWebApp')
     $scope.finalize = function (scheduleDate) {
       if (item.isFee){
         item.scheduleDate = scheduleDate;
-        dialog.close();
+        uibModalInstance.close();
       } else {
         $scope.submitInProgress = true;
         // based on the scheduled date, or lack thereof, the payment amount may change due to interest accrual etc.
@@ -109,7 +132,7 @@ angular.module('nextgearWebApp')
           function () {
             $scope.submitInProgress = false;
             item.scheduleDate = scheduleDate;
-            dialog.close();
+            uibModalInstance.close();
           }, function (/*error*/) {
             $scope.submitInProgress = false;
           }
@@ -118,6 +141,6 @@ angular.module('nextgearWebApp')
     };
 
     $scope.close = function() {
-      dialog.close();
+      uibModalInstance.close();
     };
   });

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, $dialog, ProfileSettings) {
+  .controller('ProfileSettingsCtrl', function($scope, ProfileSettings, $sce) {
 
     $scope.loading = false;
-
+    $scope.passwordTooltip = $sce.trustAsHtml('<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>');
     // Valid pattern examples: 5552301520, (555)230-1520, 555-230-1520, 1-555-230-1520
     $scope.phonePattern = /^((\d)-?)?(\((\d{3})\)|(\d{3})-?)(\d{3})-?(\d{4})$/;
     $scope.cleanPhoneReplacementPattern = '$2$4$5$6$7'; // this matches all the digit groups in the phonePattern regex

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .directive('nxgMessages', function ($dialog, messages) {
+  .directive('nxgMessages', function ($uibModal, messages) {
+    var uibModal = $uibModal;
+
     return {
       restrict: 'A',
       link: function (scope) {
@@ -20,8 +22,8 @@ angular.module('nextgearWebApp')
               topmost: true,
               topmostClass: 'topmost'
             };
-            currentDialog = $dialog.dialog(dialogOptions);
-            currentDialog.open().then(function () {
+            currentDialog = uibModal.open(dialogOptions);
+            currentDialog.result.then(function () {
               // Destructive array operation - work with copy of array
               angular.forEach(messages.list().slice(), function (msg) {
                 msg.dismiss();

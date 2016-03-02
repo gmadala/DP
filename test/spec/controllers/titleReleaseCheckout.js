@@ -56,16 +56,14 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     };
 
     dialogMock = {
-      dialog: function() {
+      open: function () {
         return {
-          open: function(){
-            return {
-              then: function(cb) {
-                cb();
+            result: {
+              then: function (callback) {
+                callback();
               }
-            };
-          }
-        };
+            }
+        }
       }
     };
 
@@ -73,7 +71,7 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       $scope: scope,
       TitleReleases: titleReleasesMock,
       Floorplan: floorplanMock,
-      $dialog: dialogMock,
+      $uibModal: dialogMock,
       Addresses: AddressesMock
     });
 
@@ -121,9 +119,9 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     });
 
     it('should open dialog once API call is done', function() {
-      spyOn(dialogMock, 'dialog').and.callThrough();
+      spyOn(dialogMock, 'open').and.callThrough();
       scope.onConfirmRequest();
-      expect(dialogMock.dialog).toHaveBeenCalled();
+      expect(dialogMock.open).toHaveBeenCalled();
     });
 
     it('should clear queue and redirect to search once dialog closes', function() {

@@ -69,7 +69,7 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
     run = function () {
       ConfirmCheckoutCtrl = $controller('ConfirmCheckoutCtrl', {
         $scope: scope,
-        dialog: dialog,
+        $uibModalInstance: dialog,
         queue: queue,
         transactionInfo: transactionInfo
       });
