@@ -66,7 +66,7 @@
         <button class="btn-help btn-help-adjust inline-row"
                 tooltip-placement="right"
                 tooltip-trigger="mouseenter"
-                tooltip-html="true"
+                uib-tooltip-html="true"
                 uib-tooltip="{{ 'This account will be used for all system-generated deposits, including automatic payout of unapplied funds.' | translate }}"
                 tooltip-animation="true">
           <span nxg-icon="icon-help"></span>
@@ -89,7 +89,7 @@
         <button class="btn-help btn-help-adjust inline-row"
                 tooltip-placement="right"
                 tooltip-trigger="mouseenter"
-                tooltip-html="true"
+                uib-tooltip-html="true"
                 uib-tooltip="{{ 'This account will be used for all system-generated payments.  When making or scheduling payments online, you can select any active account.' | translate }}"
                 tooltip-animation="true">
           <span nxg-icon="icon-help"></span>
@@ -137,7 +137,7 @@
             <div class="btn-help btn-help-adjust"
                  tooltip-placement="right"
                  tooltip-trigger="mouseenter"
-                 tooltip-html="true"
+                 uib-tooltip-html="true"
                  uib-tooltip="{{ 'To change your phone number, please contact customer service for further assistance.' | translate }}"
                  tooltip-animation="true">
               <span nxg-icon="icon-help"></span>
@@ -176,7 +176,7 @@
             <div class="btn-help btn-help-adjust"
                  tooltip-placement="right"
                  tooltip-trigger="mouseenter"
-                 tooltip-html="true"
+                 uib-tooltip-html="true"
                  uib-tooltip="{{ 'To change your email address, please contact customer service for further assistance.' | translate }}"
                  tooltip-animation="true">
               <span nxg-icon="icon-help"></span>
@@ -212,7 +212,7 @@
                 <div class="btn-help btn-help-adjust"
                         tooltip-placement="right"
                         tooltip-trigger="mouseenter"
-                        tooltip-html="true"
+                        uib-tooltip-html="true"
                         uib-tooltip="{{ 'Enhanced Registration will result in all account access being restricted to users with a PIN.' | translate }}"
                         tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
@@ -285,7 +285,7 @@
                 <div class="style-select">
                   <select id="titleAddr" ng-model="title.dirtyData.titleAddress"
                           ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
-                          tooltip="{{ addr | address:'oneLine' }}"
+                          uib-tooltip="{{ addr | address:'oneLine' }}"
                           tooltip-placement="right"
                           tooltip-popup-delay="700">
                   </select>
@@ -295,7 +295,7 @@
                 <button class="btn-help btn-help-adjust"
                         tooltip-placement="left"
                         tooltip-trigger="mouseenter"
-                        tooltip-html="true"
+                        uib-tooltip-html="true"
                         uib-tooltip="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                         tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>
@@ -312,7 +312,7 @@
                 <button class="btn-help"
                         tooltip-placement="left"
                         tooltip-trigger="mouseenter"
-                        tooltip-html="true"
+                        uib-tooltip-html="true"
                         uib-tooltip="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                         tooltip-animation="true">
                   <span nxg-icon="icon-help"></span>

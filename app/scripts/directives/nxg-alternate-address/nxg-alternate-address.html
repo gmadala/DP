@@ -7,11 +7,11 @@
     ng-class="{ wide: !showTooltip }"></select>
   </div>
   <button ng-show="showTooltip && showSelectMenu"
-   class="btn-help"
-   type="button"
-   tooltip-placement="right"
-   tooltip-trigger="mouseenter"
-   tooltip-popup-delay="300"
-   tooltip="{{ 'You may select an already approved address on file with NextGear Capital.' | translate }}"
-   tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
+          class="btn-help"
+          type="button"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-popup-delay="300"
+          uib-tooltip="{{ 'You may select an already approved address on file with NextGear Capital.' | translate }}"
+          tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
 </div>

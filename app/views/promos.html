@@ -43,11 +43,11 @@
                   nxg-icon="icon-chevron"></span>
           </div>
         </div>
-        <div collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
+        <div uib-collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
           {{promo.termsAndConditions}}
         </div>
       </div>
-      <div collapse="isCollapsed" ng-init="isCollapsed = true">
+      <div uib-collapse="isCollapsed" ng-init="isCollapsed = true">
         <div class="promo-item inactive row" ng-repeat="promo in promosPast" ng-class="{'empty-promos': promosCurrent.length == 0, 'non-empty-promos': promosCurrent.length != 0}">
           <div class="col-xs-3">
             <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
@@ -72,7 +72,7 @@
                   nxg-icon="icon-chevron"></span>
             </div>
           </div>
-          <div collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
+          <div uib-collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
             {{promo.termsAndConditions}}
           </div>
         </div>

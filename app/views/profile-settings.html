@@ -70,7 +70,7 @@
             <div class="col-xs-8  smallest-left-margin style-select zeroLeftPadding">
               <select ng-model="question.SecurityQuestionId"
                       ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
-                      tooltip="{{ question.QuestionText }}"
+                      uib-tooltip="{{ question.QuestionText }}"
                       tooltip-placement="right"
                       tooltip-popup-delay="700">
               </select>
