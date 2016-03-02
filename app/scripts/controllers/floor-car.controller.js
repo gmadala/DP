@@ -8,6 +8,9 @@ angular.module('nextgearWebApp')
   .controller('FloorCarCtrl', function($scope, $uibModal, $location, $q, User, Floorplan, Addresses, Blackbook, protect,
                                        OptionDefaultHelper, moment, gettextCatalog, AccountManagement, Upload, nxgConfig) {
 
+    // init files as empty array to avoid
+    // error of undefined.length from $watcher
+    $scope.files = [];
 
     $scope.$watch('files', function(newValue, oldValue){
       if(newValue.length !== oldValue.length){
