@@ -96,7 +96,7 @@ angular.module('nextgearWebApp')
                   city: business.City,
                   state: business.State,
                   zipCode: business.PostalCode,
-                  autoQueryCredit: false
+                  autoQueryCredit: true
                 };
               }
             }
