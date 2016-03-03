@@ -2080,11 +2080,11 @@ msgstr ""
 
 #: app/views/promos.html:7
 msgid ""
-"Please contact your local representative for any details about the "
-"promotions and/or event sales listed below."
+"Please contact your local representative for details about the Promotions "
+"and Event Sales listed below."
 msgstr ""
 "Por favor, póngase en contacto con su representante local para obtener "
-"información sobre las promociones y/o eventos de ventas que se enumeran a "
+"información sobre las Promociones e Eventos de Ventas que se enumeran a "
 "continuación."
 
 #: app/views/auction.dealersearch.html:125
