@@ -5,12 +5,14 @@
     .module('nextgearWebApp')
     .controller('ConfirmCtrl', ConfirmCtrl);
 
-  ConfirmCtrl.$inject = ['$scope', 'dialog'];
+  ConfirmCtrl.$inject = ['$scope', '$uibModalInstance'];
 
-  function ConfirmCtrl($scope, dialog) {
+  function ConfirmCtrl($scope, $uibModalInstance) {
+
+    var uibModalInstance = $uibModalInstance;
 
     $scope.close = function (result) {
-      dialog.close(result);
+      uibModalInstance.close(result);
     };
 
     $scope.agree = false;

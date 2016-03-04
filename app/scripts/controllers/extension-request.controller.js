@@ -5,13 +5,14 @@
     .module('nextgearWebApp')
     .controller('ExtensionRequestCtrl', ExtensionRequestCtrl);
 
-  ExtensionRequestCtrl.$inject = ['$scope', 'dialog', 'gettextCatalog', 'payment', 'onConfirm', 'Payments', 'Floorplan'];
+  ExtensionRequestCtrl.$inject = ['$scope', '$uibModalInstance', 'gettextCatalog', 'payment', 'onConfirm', 'Payments', 'Floorplan'];
 
-  function ExtensionRequestCtrl($scope, dialog, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
+  function ExtensionRequestCtrl($scope, $uibModalInstance, gettextCatalog, payment, onConfirm, Payments, Floorplan) {
 
+    var uibModalInstance = $uibModalInstance;
     //TODO changes in here for 3893
     $scope.payment = payment;
-    $scope.closeDialog = dialog.close;
+
     $scope.isEnglish = gettextCatalog.currentLanguage === 'en';
 
     Floorplan.getExtensionPreview(payment.FloorplanId).then(function(result) {
@@ -28,9 +29,13 @@
       };
     });
 
+    $scope.closeDialog = function(){
+      uibModalInstance.close();
+    };
+
     $scope.onConfirm = function() {
       onConfirm();
-      dialog.close();
+      uibModalInstance.close();
     };
 
     $scope.confirmRequest = function() {
@@ -39,7 +44,7 @@
           $scope.onConfirm();
         });
       } else {
-        dialog.close();
+        uibModalInstance.close();
       }
     };
 

@@ -4,7 +4,6 @@
   angular.module('nextgearWebApp', [
     'ui.router',
     'ui.bootstrap',
-    '$strap.directives',
     'ui.calendar',
     'ui.highlight',
     'ui.event',

@@ -21,7 +21,6 @@
     <!-- build:css styles/main2.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-
     <!--[if IE 9]>
     <script>
       document.getElementsByTagName("html")[0].className += " ie9";
@@ -96,18 +95,18 @@
     <script src="components/moment/lang/fr-ca.js"></script>
     <script src="components/angular-local-storage/angular-local-storage.js"></script>
     <script src="components/highcharts.com/js/highcharts.src.js"></script>
-    <script src="private-components/angular-strap.js"></script>
     <script src="components/angular-ui-calendar/src/calendar.js"></script>
     <script src="components/fullcalendar/dist/fullcalendar.js"></script>
     <script src="components/fullcalendar/dist/lang/es.js"></script>
     <script src="components/fullcalendar/dist/lang/fr-ca.js"></script>
     <script src="components/ng-file-upload/ng-file-upload.js"></script>
     <script src="components/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- Modded version without $animate -->
     <script src="private-components/angular-gettext/dist/angular-gettext.js"></script>
 
     <!-- move back to components once upgraded to 0.6.0 or later -->
-    <script src="private-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="private-components/angular-segmentio/angular-segmentio.js"></script>
     <!-- endbuild -->
 
@@ -115,35 +114,35 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/common.js"></script>
 
-    <script src="scripts/config/nxgConfig.js"></script>
-    <script src="scripts/routeConfig.js"></script>
+    <script src="scripts/config/nxg-config.js"></script>
+    <script src="scripts/route-config.js"></script>
     <script src="scripts/initialize.js"></script>
-    <script src="scripts/debugInfo.js"></script>
+    <script src="scripts/debug-info.js"></script>
 
     <script src="scripts/services/status.service.js"></script>
     <script src="scripts/services/banner.service.js"></script>
     <script src="scripts/services/messages.service.js"></script>
     <script src="scripts/services/api.service.js"></script>
-    <script src="scripts/services/apiCommon.service.js"></script>
+    <script src="scripts/services/api-common.service.js"></script>
     <script src="scripts/services/base64.service.js"></script>
     <script src="scripts/services/protect.service.js"></script>
     <script src="scripts/services/moment.service.js"></script>
-    <script src="scripts/services/optionDefaultHelper.service.js"></script>
+    <script src="scripts/services/option-default-helper.service.js"></script>
     <script src="scripts/services/paginate.service.js"></script>
     <script src="scripts/services/metric.service.js"></script>
     <script src="scripts/services/logout.service.js"></script>
-    <script src="scripts/services/lastState.service.js"></script>
-    <script src="scripts/services/userVoice.service.js"></script>
-    <script src="scripts/services/floorplanUtil.service.js"></script>
-    <script src="scripts/services/Addresses.service.js"></script>
-    <script src="scripts/services/cartItem.service.js"></script>
-    <script src="scripts/services/paymentOptions.service.js"></script>
-    <script src="scripts/services/businessHours.service.js"></script>
-    <script src="scripts/services/signupUrls.service.js"></script>
+    <script src="scripts/services/last-state.service.js"></script>
+    <script src="scripts/services/user-voice.service.js"></script>
+    <script src="scripts/services/floor-plan-util.service.js"></script>
+    <script src="scripts/services/addresses.service.js"></script>
+    <script src="scripts/services/cart-item.service.js"></script>
+    <script src="scripts/services/payment-options.service.js"></script>
+    <script src="scripts/services/business-hours.service.js"></script>
+    <script src="scripts/services/signup-urls.service.js"></script>
     <script src="scripts/services/language.service.js"></script>
     <script src="scripts/services/features.service.js"></script>
-    <script src="scripts/services/kissMetricInfo.service.js"></script>
-    <script src="scripts/services/decimalAdjust.service.js"></script>
+    <script src="scripts/services/kiss-metric-info.service.js"></script>
+    <script src="scripts/services/decimal-adjust.service.js"></script>
     <script src="scripts/services/fee-cart-item.service.js"></script>
     <script src="scripts/services/payment-options-helper.service.js"></script>
     <script src="scripts/services/vehicle-cart-item.service.js"></script>
@@ -151,163 +150,151 @@
     <script src="scripts/filters/alt.filter.js"></script>
     <script src="scripts/filters/numeral.filter.js"></script>
     <script src="scripts/filters/moment.filter.js"></script>
-    <script src="scripts/filters/yesno.filter.js"></script>
-    <script src="scripts/filters/shortenVIN.filter.js"></script>
+    <script src="scripts/filters/yes-no.filter.js"></script>
+    <script src="scripts/filters/shorten-vin.filter.js"></script>
     <script src="scripts/filters/list.filter.js"></script>
     <script src="scripts/filters/capitalize.filter.js"></script>
     <script src="scripts/filters/address.filter.js"></script>
-    <script src="scripts/filters/routingNumber.filter.js"></script>
+    <script src="scripts/filters/routing-number.filter.js"></script>
     <script src="scripts/filters/telephone.filter.js"></script>
     <script src="scripts/filters/truncate.filter.js"></script>
-    <script src="scripts/filters/moment-utc.filter.js"></script>
 
-    <script src="scripts/models/businessSearch.service.js"></script>
-    <script src="scripts/models/floorplan.service.js"></script>
+    <script src="scripts/models/business-search.service.js"></script>
+    <script src="scripts/models/floor-plan.service.js"></script>
     <script src="scripts/models/payments.service.js"></script>
     <script src="scripts/models/receipts.service.js"></script>
     <script src="scripts/models/user.service.js"></script>
-    <script src="scripts/models/vehicleDetails.service.js"></script>
+    <script src="scripts/models/vehicle-details.service.js"></script>
     <script src="scripts/models/blackbook.service.js"></script>
     <script src="scripts/models/dashboard.service.js"></script>
     <script src="scripts/models/analytics.service.js"></script>
-    <script src="scripts/models/dealerNameSearch.service.js"></script>
-    <script src="scripts/models/dealerNumberSearch.service.js"></script>
-    <script src="scripts/models/creditQuery.service.js"></script>
-    <script src="scripts/models/profileSettings.service.js"></script>
-    <script src="scripts/models/accountManagement.service.js"></script>
-    <script src="scripts/models/creditIncrease.service.js"></script>
-    <script src="scripts/models/titleReleases.service.js"></script>
+    <script src="scripts/models/dealer-name-search.service.js"></script>
+    <script src="scripts/models/dealer-number-search.service.js"></script>
+    <script src="scripts/models/credit-query.service.js"></script>
+    <script src="scripts/models/profile-settings.service.js"></script>
+    <script src="scripts/models/account-management.service.js"></script>
+    <script src="scripts/models/credit-increase.service.js"></script>
+    <script src="scripts/models/title-releases.service.js"></script>
     <script src="scripts/models/mmr.service.js"></script>
     <script src="scripts/models/kbb.service.js"></script>
 
     <script src="scripts/controllers/dashboard.controller.js"></script>
     <script src="scripts/controllers/payments.controller.js"></script>
     <script src="scripts/controllers/receipts.controller.js"></script>
-    <script src="scripts/controllers/floorplan.controller.js"></script>
-    <script src="scripts/controllers/titleReleases.controller.js"></script>
+    <script src="scripts/controllers/extension-request.controller.js"></script>
+    <script src="scripts/controllers/floor-plan.controller.js"></script>
+    <script src="scripts/controllers/title-releases.controller.js"></script>
     <script src="scripts/controllers/checkout.controller.js"></script>
-    <script src="scripts/controllers/confirmCheckout.controller.js"></script>
-    <script src="scripts/controllers/scheduleCheckout.controller.js"></script>
-    <script src="scripts/controllers/titleReleaseCheckout.controller.js"></script>
-    <script src="scripts/controllers/confirmTitleReleaseCheckout.controller.js"></script>
+    <script src="scripts/controllers/confirm-checkout.controller.js"></script>
+    <script src="scripts/controllers/schedule-checkout.controller.js"></script>
+    <script src="scripts/controllers/title-release-checkout.controller.js"></script>
+    <script src="scripts/controllers/confirm-title-release-checkout.controller.js"></script>
     <script src="scripts/controllers/analytics.controller.js"></script>
     <script src="scripts/controllers/documents.controller.js"></script>
-    <script src="scripts/controllers/floorCar.controller.js"></script>
+    <script src="scripts/controllers/floor-car.controller.js"></script>
     <script src="scripts/controllers/login.controller.js"></script>
     <script src="scripts/controllers/maintenance.controller.js"></script>
-    <script src="scripts/controllers/loginRecover.controller.js"></script>
-    <script src="scripts/controllers/loginUpdateSecurity.controller.js"></script>
+    <script src="scripts/controllers/login-recover.controller.js"></script>
+    <script src="scripts/controllers/login-update-security.controller.js"></script>
     <script src="scripts/controllers/reports.controller.js"></script>
-    <script src="scripts/controllers/auctionSettings.controller.js"></script>
-    <script src="scripts/controllers/profileSettings.controller.js"></script>
-    <script src="scripts/controllers/accountManagement.controller.js"></script>
+    <script src="scripts/controllers/auction-settings.controller.js"></script>
+    <script src="scripts/controllers/profile-settings.controller.js"></script>
+    <script src="scripts/controllers/account-management.controller.js"></script>
     <script src="scripts/controllers/promos.controller.js"></script>
-    <script src="scripts/controllers/auction.dashboard.controller.js"></script>
-    <script src="scripts/controllers/auction.dealersearch.controller.js"></script>
-    <script src="scripts/controllers/auction.documents.controller.js"></script>
-    <script src="scripts/controllers/auction.home.controller.js"></script>
-    <script src="scripts/controllers/auction.reports.controller.js"></script>
-    <script src="scripts/controllers/loginCreatePassword.controller.js"></script>
-    <script src="scripts/controllers/vehicledetails.controller.js"></script>
-    <script src="scripts/controllers/valuelookup.controller.js"></script>
-    <script src="scripts/controllers/modals/businessSearch.controller.js"></script>
-    <script src="scripts/controllers/modals/cancelFee.controller.js"></script>
-    <script src="scripts/controllers/modals/cancelPayment.controller.js"></script>
-    <script src="scripts/controllers/modals/confirmLogout.controller.js"></script>
-    <script src="scripts/controllers/modals/creditQuery.controller.js"></script>
-    <script src="scripts/controllers/modals/dealerNameSearch.controller.js"></script>
-    <script src="scripts/controllers/modals/feeDetails.controller.js"></script>
-    <script src="scripts/controllers/modals/floorCarConfirm.controller.js"></script>
-    <script src="scripts/controllers/modals/floorCarMessage.controller.js"></script>
-    <script src="scripts/controllers/modals/multipleVehicles.controller.js"></script>
-    <script src="scripts/controllers/modals/paymentDetails.controller.js"></script>
-    <script src="scripts/controllers/modals/requestCreditIncrease.controller.js"></script>
-    <script src="scripts/controllers/modals/topAuctions.controller.js"></script>
-    <script src="scripts/controllers/modals/paymentOptionsBreakdown.controller.js"></script>
-    <script src="scripts/controllers/modals/financialAccount.controller.js"></script>
-    <script src="scripts/controllers/extension-request.controller.js"></script>
+    <script src="scripts/controllers/auction-dashboard.controller.js"></script>
+    <script src="scripts/controllers/auction-dealer-search.controller.js"></script>
+    <script src="scripts/controllers/auction-documents.controller.js"></script>
+    <script src="scripts/controllers/auction-home.controller.js"></script>
+    <script src="scripts/controllers/auction-reports.controller.js"></script>
+    <script src="scripts/controllers/login-create-password.controller.js"></script>
+    <script src="scripts/controllers/vehicle-details.controller.js"></script>
+    <script src="scripts/controllers/value-lookup.controller.js"></script>
 
-    <script src="scripts/directives/navBar/navBar.directive.js"></script>
-    <script src="scripts/directives/navBar/navbar.controller.js"></script>
+    <script src="scripts/controllers/modals/business-search.controller.js"></script>
+    <script src="scripts/controllers/modals/cancel-fee.controller.js"></script>
+    <script src="scripts/controllers/modals/cancel-payment.controller.js"></script>
+    <script src="scripts/controllers/modals/confirm-logout.controller.js"></script>
+    <script src="scripts/controllers/modals/credit-query.controller.js"></script>
+    <script src="scripts/controllers/modals/dealer-name-search.controller.js"></script>
+    <script src="scripts/controllers/modals/fee-details.controller.js"></script>
+    <script src="scripts/controllers/modals/floor-car-confirm.controller.js"></script>
+    <script src="scripts/controllers/modals/floor-car-message.controller.js"></script>
+    <script src="scripts/controllers/modals/multiple-vehicles.controller.js"></script>
+    <script src="scripts/controllers/modals/payment-details.controller.js"></script>
+    <script src="scripts/controllers/modals/request-credit-increase.controller.js"></script>
+    <script src="scripts/controllers/modals/top-auctions.controller.js"></script>
+    <script src="scripts/controllers/modals/payment-options-breakdown.controller.js"></script>
+    <script src="scripts/controllers/modals/financial-account.controller.js"></script>
+    <script src="scripts/controllers/modals/message-box.js"></script>
+    <script src="scripts/directives/navbar/navbar.controller.js"></script>
 
-    <script src="scripts/directives/tooltip.directive.js"></script>
-    <script src="scripts/directives/nxgInput.directive.js"></script>
-    <script src="scripts/directives/nxgMin.directive.js"></script>
-    <script src="scripts/directives/nxgMax.directive.js"></script>
-    <script src="scripts/directives/nxgBlur.directive.js"></script>
-    <script src="scripts/directives/nxgFocus.directive.js"></script>
-    <script src="scripts/directives/nxgRequires.directive.js"></script>
-    <script src="scripts/directives/nxgValidateInt.directive.js"></script>
-    <script src="scripts/directives/nxgGreaterThan.directive.js"></script>
-    <script src="scripts/directives/nxgInputCurrency.directive.js"></script>
-    <script src="scripts/directives/nxgDateField/nxgDateField.directive.js"></script>
-    <script src="scripts/directives/nxgUpcomingCalendar/nxgUpcomingCalendar.directive.js"></script>
-    <script src="scripts/directives/nxgChart/nxgChart.directive.js"></script>
-
-    <script src="scripts/directives/nxgUnappliedFundsWidget/nxgUnappliedFundsWidget.directive.js"></script>
-    <script src="scripts/directives/nxgUnappliedFundsWidget/unapplied-funds-widget.controller.js"></script>
-
-    <script src="scripts/directives/nxgPaymentButtons/nxgPaymentButtons.directive.js"></script>
-
-    <script src="scripts/directives/nxgBusinessField/nxgBusinessField.directive.js"></script>
-    <script src="scripts/directives/nxgBusinessField/nxg-business-field.controller.js"></script>
-
-    <script src="scripts/directives/nxgSearch/nxgSearch.directive.js"></script>
-    <script src="scripts/directives/nxgSearch/nxg-search.controller.js"></script>
-
-    <script src="scripts/directives/nxgVinDetails/nxgVinDetails.directive.js"></script>
-    <script src="scripts/directives/nxgVinDetails/vin-details.controller.js"></script>
-
-    <script src="scripts/directives/nxgInfiniteScroll.directive.js"></script>
-    <script src="scripts/directives/nxgFillHeight.directive.js"></script>
-    <script src="scripts/directives/nxgStockNumbersInput/nxgStockNumbersInput.directive.js"></script>
-
-    <script src="scripts/directives/nxgPaymentSummary/nxgPaymentSummary.directive.js"></script>
-    <script src="scripts/directives/nxgPaymentSummary/payment-summary.controller.js"></script>
-
-    <script src="scripts/directives/nxgRequestsSummary/nxgRequestsSummary.directive.js"></script>
-    <script src="scripts/directives/nxgRequestsSummary/requests-summary.controller.js"></script>
-
-    <script src="scripts/directives/nxgAlternateAddress/nxgAlternateAddress.directive.js"></script>
-    <script src="scripts/directives/nxgValueLookupDisplay/nxgValueLookupDisplay.directive.js"></script>
-    <script src="scripts/directives/nxgSortable/nxgSortable.directive.js"></script>
-    <script src="scripts/directives/nxgAddress.directive.js"></script>
-    <script src="scripts/directives/nxgActivity/nxgActivity.directive.js"></script>
-
-    <script src="scripts/directives/nxgMessages/nxgMessages.directive.js"></script>
-    <script src="scripts/directives/nxgMessages/messages-modal.controller.js"></script>
-
-    <script src="scripts/directives/nxgIcon/nxgIcon.directive.js"></script>
-    <script src="scripts/directives/nxgAutofocus.directive.js"></script>
-    <script src="scripts/directives/nxgHighlight.directive.js"></script>
-    <script src="scripts/directives/nxgEnter.directive.js"></script>
-    <script src="scripts/directives/nxgChatWithUs.directive.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportEmail.directive.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportPhone.directive.js"></script>
-    <script src="scripts/directives/nxgDealerCustomerSupportPhone.directive.js"></script>
-    <script src="scripts/directives/nxgCustomerSupportPhoneSimple.directive.js"></script>
-    <script src="scripts/directives/nxgTrack.directive.js"></script>
-    <script src="scripts/directives/nxgTypeahead.directive.js"></script>
-    <script src="scripts/directives/placeholder.directive.js"></script>
-    <script src="scripts/directives/ieInputPatch.directive.js"></script>
-    <script src="scripts/directives/nxgFluidContainer.directive.js"></script>
-    <script src="scripts/directives/nxgSticky.directive.js"></script>
-    <script src="scripts/directives/nxgPrivacyStatement.directive.js"></script>
-    <script src="scripts/directives/nxgFinancialAccount/nxgFinancialAccount.directive.js" ></script>
-    <script src="scripts/directives/nxgAddress/nxgAddress.directive.js"></script>
     <script src="scripts/directives/nxg-address-inline.directive.js"></script>
     <script src="scripts/directives/dealer-customer-support-phone.directive.js"></script>
-
-    <script src="scripts/decorators/dialogDecorator.js"></script>
+    <script src="scripts/directives/nxg-payment-summary/payment-summary.controller.js"></script>
+    <script src="scripts/directives/nxg-requests-summary/requests-summary.controller.js"></script>
+    <script src="scripts/directives/nxg-messages/messages-modal.controller.js"></script>
+    <script src="scripts/directives/nxg-date.js"></script>
+    <script src="scripts/directives/navbar/navbar.directive.js"></script>
+    <script src="scripts/directives/tooltip.directive.js"></script>
+    <script src="scripts/directives/nxg-input.directive.js"></script>
+    <script src="scripts/directives/nxg-min.directive.js"></script>
+    <script src="scripts/directives/nxg-max.directive.js"></script>
+    <script src="scripts/directives/nxg-blur.directive.js"></script>
+    <script src="scripts/directives/nxg-focus.directive.js"></script>
+    <script src="scripts/directives/nxg-requires.directive.js"></script>
+    <script src="scripts/directives/nxg-valid-date-int.directive.js"></script>
+    <script src="scripts/directives/nxg-greater-than.directive.js"></script>
+    <script src="scripts/directives/nxg-input-currency.directive.js"></script>
+    <script src="scripts/directives/nxg-upcoming-calendar/nxg-upcoming-calendar.directive.js"></script>
+    <script src="scripts/directives/nxg-chart/nxg-chart.directive.js"></script>
+    <script src="scripts/directives/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.directive.js"></script>
+    <script src="scripts/directives/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.controller.js"></script>
+    <script src="scripts/directives/nxg-unapplied-funds-widget/payout-modal.controller.js"></script>
+    <script src="scripts/directives/nxg-payment-buttons/nxg-payment-buttons.directive.js"></script>
+    <script src="scripts/directives/nxg-business-field/nxg-business-field.directive.js"></script>
+    <script src="scripts/directives/nxg-business-field/nxg-business-field.controller.js"></script>
+    <script src="scripts/directives/nxg-search/nxg-search.directive.js"></script>
+    <script src="scripts/directives/nxg-search/nxg-search.controller.js"></script>
+    <script src="scripts/directives/nxg-vin-details/nxg-vin-details.directive.js"></script>
+    <script src="scripts/directives/nxg-vin-details/nxg-vin-details.controller.js"></script>
+    <script src="scripts/directives/nxg-infinite-scroll.directive.js"></script>
+    <script src="scripts/directives/nxg-fill-height.directive.js"></script>
+    <script src="scripts/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.directive.js"></script>
+    <script src="scripts/directives/nxg-payment-summary/nxg-payment-summary.directive.js"></script>
+    <script src="scripts/directives/nxg-requests-summary/nxg-requests-summary.directive.js"></script>
+    <script src="scripts/directives/nxg-alternate-address/nxg-alternate-address.directive.js"></script>
+    <script src="scripts/directives/nxg-value-lookup-display/nxg-value-lookup-display.directive.js"></script>
+    <script src="scripts/directives/nxg-sortable/nxg-sortable.directive.js"></script>
+    <script src="scripts/directives/nxg-address.directive.js"></script>
+    <script src="scripts/directives/nxg-activity/nxg-activity.directive.js"></script>
+    <script src="scripts/directives/nxg-messages/nxg-messages.directive.js"></script>
+    <script src="scripts/directives/nxg-icon/nxg-icon.directive.js"></script>
+    <script src="scripts/directives/nxg-autofocus.directive.js"></script>
+    <script src="scripts/directives/nxg-highlight.directive.js"></script>
+    <script src="scripts/directives/nxg-enter.directive.js"></script>
+    <script src="scripts/directives/nxg-chat-with-us.directive.js"></script>
+    <script src="scripts/directives/nxg-customer-support-email.directive.js"></script>
+    <script src="scripts/directives/nxg-customer-support-phone.directive.js"></script>
+    <script src="scripts/directives/nxg-dealer-customer-support-phone.directive.js"></script>
+    <script src="scripts/directives/nxg-customer-support-phone-simple.directive.js"></script>
+    <script src="scripts/directives/nxg-track.directive.js"></script>
+    <script src="scripts/directives/nxg-typeahead.directive.js"></script>
+    <script src="scripts/directives/placeholder.directive.js"></script>
+    <script src="scripts/directives/ie-input-patch.directive.js"></script>
+    <script src="scripts/directives/nxg-fluid-container.directive.js"></script>
+    <script src="scripts/directives/nxg-sticky.directive.js"></script>
+    <script src="scripts/directives/nxg-privacy-statement.directive.js"></script>
+    <script src="scripts/directives/nxg-financial-account/nxg-financial-account.directive.js" ></script>
+    <script src="scripts/directives/nxg-address/nxg-address.directive.js"></script>
     <!-- endbuild -->
 
     <!-- processhtml:remove:dist -->
-    <script src="scripts/config/nxgConfig.mock.processed.js"></script>
+    <script src="scripts/config/nxg-config.mock.processed.js"></script>
     <!-- <script src="scripts/dev/autologin.js"></script> -->
     <!-- <script src="scripts/dev/gettextDebug.js"></script> -->
-    <script src="scripts/directives/nxgDebugTitle.processed.js"></script>
+    <script src="scripts/directives/nxg-debug-title.processed.js"></script>
     <!--<script src="scripts/dev/throttle.js"></script>-->
-    <script src="scripts/dev/debugInfo.js"></script>
+    <script src="scripts/dev/debug-info.js"></script>
 
     <!-- /processhtml -->
 

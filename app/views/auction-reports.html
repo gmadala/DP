@@ -1,0 +1,68 @@
+<div class="row">
+  <section class="col-xs-6 well">
+    <h2 class="well-title" translate>Current Reports</h2>
+    <div class="well-item">
+      <ul class="text-list zeroLeftPadding">
+        <li ng-repeat="doc in documents">
+          <a target="_blank" ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
+            {{ doc.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="col-xs-6 well leftMarginMedium">
+    <h2 class="well-title" translate>Historical Reports</h2>
+    <div class="well-item">
+      <form id="disForm" name="disForm" class="row-fluid" novalidate>
+        <h4 translate>Disbursement Detail</h4>
+
+          <div class="form-row" ng-show="subsidiaries.length > 0">
+            <label for="subsidiary" translate>Subsidiary Manufacturer</label>
+            <div class="style-select">
+              <select id="subsidiary"
+                      name="subsidiary"
+                      ng-model="selectedSubsidiary"
+                      ng-options="o.BusinessName for o in subsidiaries"
+                      ng-required="subsidiary.length > 0">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="date-field date-picker">
+              <label for="disDate" class="input-title date-search-label" translate>Date Search</label>
+              <input uib-datepicker-popup="{{dateFormat}}"
+                     placeholder="mm/dd/yyyy" nxg-date
+                     ng-model="data.disDate"
+                     max-date="maxDate"
+                     show-weeks="false"
+                     show-button-bar="false"
+                     is-open="datePicker.opened"
+                     ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.past || disFormValidity.disDate.$error.date }"
+                     id="disDate"
+                     name="disDate"
+                     required>
+              <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+            </div>
+          </div>
+          <div class="form-row btn-group">
+            <button class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
+          </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.future)" translate>
+              Please select a Valid Date.
+            </label>
+            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.future" translate>
+              Please select a Date in the past.
+            </label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

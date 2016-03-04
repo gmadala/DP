@@ -11,7 +11,7 @@
     'moment',
     'Payments',
     'User',
-    '$dialog',
+    '$uibModal',
     'BusinessHours',
     'Addresses',
     'gettextCatalog'
@@ -23,13 +23,14 @@
     moment,
     Payments,
     User,
-    $dialog,
+    $uibModal,
     BusinessHours,
     Addresses,
     gettextCatalog) {
 
     $scope.isCollapsed = true;
 
+    var uibModal = $uibModal;
     var lastPromise;
 
     $scope.getDueStatus = function (item, isPayment) {
@@ -148,12 +149,12 @@
     };
 
     $scope.payments.extension = function (payment) {
-      $dialog.dialog({
+      uibModal.open({
         backdrop: true,
         keyboard: true,
         backdropClick: true,
         controller: 'ExtensionRequestCtrl',
-        templateUrl: 'views/modals/paymentExtension.html',
+        templateUrl: 'views/modals/payment-extension.html',
         dialogClass: 'modal modal-medium',
         resolve: {
           payment: function() {
@@ -168,7 +169,7 @@
             };
           }
         }
-      }).open();
+      });
     };
 
     $scope.payments.resetSearch = function (initialFilter, initialStartDate, initialEndDate) {

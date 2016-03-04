@@ -1,4 +1,5 @@
-(function() {'use strict';
+(function() {
+  'use strict';
 
   angular
     .module('nextgearWebApp')
@@ -7,7 +8,7 @@
   CheckoutCtrl.$inject = [
     '$scope',
     '$q',
-    '$dialog',
+    '$uibModal',
     'protect',
     'moment',
     'User',
@@ -26,7 +27,7 @@
   function CheckoutCtrl(
     $scope,
     $q,
-    $dialog,
+    $uibModal,
     protect,
     moment,
     User,
@@ -40,6 +41,8 @@
     gettext,
     kissMetricInfo,
     decimalAdjust) {
+
+    var uibModal = $uibModal;
 
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
@@ -145,7 +148,7 @@
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'views/modals/scheduleCheckout.html',
+          templateUrl: 'views/modals/schedule-checkout.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
             payment: function () { return !item.isFee && item; },
@@ -177,7 +180,7 @@
             }
           }
         };
-        $dialog.dialog(dialogOptions).open();
+        uibModal.open(dialogOptions);
       }
     };
 
@@ -263,15 +266,19 @@
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'views/modals/confirmCheckout.html',
+              templateUrl: 'views/modals/confirm-checkout.html',
               controller: 'ConfirmCheckoutCtrl',
               dialogClass: 'modal modal-medium',
               resolve: {
-                queue: function () { return $scope.paymentQueue.contents; },
-                transactionInfo: function () { return result; }
+                queue: function () {
+                  return $scope.paymentQueue.contents;
+                },
+                transactionInfo: function () {
+                  return result;
+                }
               }
             };
-            $dialog.dialog(dialogOptions).open().then(function () {
+            $uibModal.open(dialogOptions).result.then(function () {
               Payments.clearPaymentQueue();
             });
           }
@@ -336,7 +343,7 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'views/modals/paymentOptionsBreakdown.html',
+        templateUrl: 'views/modals/payment-options-breakdown.html',
         controller: 'PaymentOptionsBreakdownCtrl',
         resolve: {
           object: function() {
@@ -347,8 +354,7 @@
           }
         }
       };
-
-      $dialog.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.exportPaymentSummary = function() {

@@ -14,7 +14,7 @@
     'LogoutGuard',
     '$cookieStore',
     '$state',
-    '$dialog',
+    '$uibModal',
     'LastState',
     'api',
     'metric',
@@ -32,7 +32,7 @@
     LogoutGuard,
     $cookieStore,
     $state,
-    $dialog,
+    $uibModal,
     LastState,
     api,
     metric,
@@ -40,6 +40,7 @@
     features,
     kissMetricInfo) {
 
+    var uibModal = $uibModal;
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
     //set metric constants on root scope so they are always available
@@ -92,15 +93,15 @@
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toStateParams) {
         // If there are dialogs open and we aren't going to login state to popup the login "are you sure?" modal
-        if ($dialog.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
-          /**
-           * if a dialog is open, close it before navigating to new state
-           * but not for login, because the logout function already closes
-           * all dialogs.
-           */
-          $dialog.closeAll();
-        }
-
+        /* if (uibModal.openDialogsCount() > 0 && !(toState.name === 'login' && api.hasAuthToken())) {
+         /!**
+         * if a dialog is open, close it before navigating to new state
+         * but not for login, because the logout function already closes
+         * all dialogs.
+         *!/
+         uibModal.closeAll();
+         }
+         */
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer(),
@@ -157,20 +158,20 @@
 
     $rootScope.$on('event:userRequestedLogout',
       function () {
-        $dialog.closeAll();
-        $dialog.dialog({
+        //$modal.closeAll();
+        uibModal.open({
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'views/modals/confirmLogout.html',
+          templateUrl: 'views/modals/confirm-logout.html',
           controller: 'ConfirmLogoutCtrl'
-        }).open().then(function (confirmed) {
-          // dialog controller did User.logout() so it could block until that finished
-          if (confirmed) {
-            // we don't need to clear the user state here, because it's
-            // done on userAuthentication (see below)
-            prv.resetToLogin();
-          }
-        });
+        }).result.then(function (confirmed) {
+            // dialog controller did User.logout() so it could block until that finished
+            if (confirmed) {
+              // we don't need to clear the user state here, because it's
+              // done on userAuthentication (see below)
+              prv.resetToLogin();
+            }
+          });
       }
     );
 

@@ -5,9 +5,11 @@
     .module('nextgearWebApp')
     .controller('AnalyticsCtrl', AnalyticsCtrl);
 
-  AnalyticsCtrl.$inject = ['$scope', '$dialog', 'Analytics', 'segmentio', 'metric', 'User', 'kissMetricInfo'];
+  AnalyticsCtrl.$inject = ['$scope', '$uibModal', 'Analytics', 'segmentio', 'metric', 'User', 'kissMetricInfo'];
 
-  function AnalyticsCtrl($scope, $dialog, Analytics, segmentio, metric, User, kissMetricInfo) {
+  function AnalyticsCtrl($scope, $uibModal, Analytics, segmentio, metric, User, kissMetricInfo) {
+
+    var uibModal = $uibModal;
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -25,7 +27,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-x-large',
-        templateUrl: 'views/modals/topAuctions.html',
+        templateUrl: 'views/modals/top-auctions.html',
         controller: 'TopAuctionsCtrl',
         resolve: {
           auctions: function () {
@@ -33,7 +35,7 @@
           }
         }
       };
-      $dialog.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.toggleDetails = function() {

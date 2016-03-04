@@ -8,7 +8,7 @@
   DashboardCtrl.$inject = [
     '$scope',
     '$state',
-    '$dialog',
+    '$uibModal',
     'Dashboard',
     'FloorplanUtil',
     'moment',
@@ -22,7 +22,7 @@
   function DashboardCtrl(
     $scope,
     $state,
-    $dialog,
+    $uibModal,
     Dashboard,
     FloorplanUtil,
     moment,
@@ -31,6 +31,8 @@
     gettextCatalog,
     capitalizeFilter,
     language) {
+
+    var uibModal = $uibModal;
 
     // for caching our week/month summary data
     $scope.paymentSummary = {
@@ -131,11 +133,11 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'views/modals/requestCreditIncrease.html',
+        templateUrl: 'views/modals/request-credit-increase.html',
         controller: 'RequestCreditIncreaseCtrl'
       };
 
-      $dialog.dialog(dialogOptions).open();
+      uibModal.open(dialogOptions);
     };
 
     $scope.onClickButtonLink = function(newState) {
