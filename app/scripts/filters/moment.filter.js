@@ -13,11 +13,11 @@
    */
   angular
     .module('nextgearWebApp')
-    .filter('moment', moment);
+    .filter('moment', momentFn);
 
-  moment.$inject = ['moment'];
+  momentFn.$inject = ['moment'];
 
-  function moment(moment) {
+  function momentFn(moment) {
 
     return function (input, outputFormat, inputFormat) {
       outputFormat = outputFormat || 'MM/DD/YYYY';

@@ -3,11 +3,11 @@
 
   angular
     .module('nextgearWebApp')
-    .service('CartItem', CartItem);
+    .service('CartItem', CartItemFn);
 
-  CartItem.$inject = ['VehicleCartItem', 'FeeCartItem', 'PaymentOptions'];
+  CartItemFn.$inject = ['VehicleCartItem', 'FeeCartItem', 'PaymentOptions'];
 
-  function CartItem(VehicleCartItem, FeeCartItem, PaymentOptions) {
+  function CartItemFn(VehicleCartItem, FeeCartItem, PaymentOptions) {
 
     var CartItem = {
       fromPayment: function(p, paymentType) {

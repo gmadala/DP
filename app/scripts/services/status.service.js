@@ -3,11 +3,11 @@
 
   angular
     .module('nextgearWebApp')
-    .factory('status', status);
+    .factory('status', statusFn);
 
-  status.$inject = [];
+  statusFn.$inject = [];
 
-  function status() {
+  function statusFn() {
     // Private
 
     var showStatus = true;

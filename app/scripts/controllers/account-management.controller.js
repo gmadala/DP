@@ -3,7 +3,7 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('AccountManagementCtrl', AccountManagementCtrl)
+    .controller('AccountManagementCtrl', AccountManagementCtrl);
 
   AccountManagementCtrl.$inject = [
     '$scope',

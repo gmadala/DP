@@ -3,11 +3,11 @@
 
   angular
     .module('nextgearWebApp')
-    .factory('FloorplanUtil', FloorplanUtil);
+    .factory('FloorplanUtil', FloorplanUtilFn);
 
-  FloorplanUtil.$inject = ['Floorplan'];
+  FloorplanUtilFn.$inject = ['Floorplan'];
 
-  function FloorplanUtil(Floorplan) {
+  function FloorplanUtilFn(Floorplan) {
 
     var FloorplanUtil = function(defaultSort, initialFilter) {
       this.results = [];

@@ -3,11 +3,11 @@
 
   angular
     .module('nextgearWebApp')
-    .factory('VehicleCartItem', VehicleCartItem);
+    .factory('VehicleCartItem', VehicleCartItemFn);
 
-  VehicleCartItem.$inject = ['api', 'PaymentOptions'];
+  VehicleCartItemFn.$inject = ['api', 'PaymentOptions'];
 
-  function VehicleCartItem(api, PaymentOptions) {
+  function VehicleCartItemFn(api, PaymentOptions) {
     var validOption = function (opt) {
       return opt === PaymentOptions.TYPE_PAYOFF || opt === PaymentOptions.TYPE_PAYMENT || opt === PaymentOptions.TYPE_INTEREST;
     };

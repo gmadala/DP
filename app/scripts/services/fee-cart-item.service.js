@@ -3,11 +3,11 @@
 
   angular
     .module('nextgearWebApp')
-    .factory('FeeCartItem', FeeCartItem);
+    .factory('FeeCartItem', FeeCartItemFn);
 
-  FeeCartItem.$inject = ['api'];
+  FeeCartItemFn.$inject = ['api'];
 
-  function FeeCartItem(api) {
+  function FeeCartItemFn(api) {
 
     var FeeCartItem = function(item) {
       this.isFee = true;

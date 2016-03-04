@@ -12,11 +12,11 @@
    */
   angular
     .module('nextgearWebApp')
-    .factory('moment', moment);
+    .factory('moment', momentFn);
 
-  moment.$inject = ['gettextCatalog'];
+  momentFn.$inject = ['gettextCatalog'];
 
-  function moment(gettextCatalog) {
+  function momentFn(gettextCatalog) {
     var moment = window.moment;
 
     var lang = gettextCatalog.currentLanguage.toLowerCase().replace('_', '-').replace('-debug', '');
