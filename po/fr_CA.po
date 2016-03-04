@@ -2235,11 +2235,11 @@ msgstr ""
 
 #: app/views/promos.html:7
 msgid ""
-"Please contact your local representative for any details about the "
-"promotions and/or event sales listed below."
+"Please contact your local representative for details about the Promotions "
+"and Event Sales listed below."
 msgstr ""
-"Veuillez communiquer avec votre représentant local pour tout détail au sujet "
-"des promotions ou des activités de ventes indiquées ci-dessous."
+"Veuillez communiquer avec votre représentant local pour tout détail au "
+"sujet des Promotions et des Activités de Ventes indiquées ci-dessous."
 
 #: app/scripts/directives/nxg-financial-account/nxg-financial-account.html:11
 #: app/views/modals/financial-account.html:96
