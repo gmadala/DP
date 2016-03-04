@@ -1847,10 +1847,11 @@ msgstr "Documents NextGear Capital"
 
 #: app/views/auction-seller-floor-plan.html:89
 msgid ""
-"NextGear has been notified of this change and will be sending funding soon."
+"NextGear Capital has been notified of this change and will be sending "
+"funding soon."
 msgstr ""
-"NextGear a été avisé de cette modification et procédera sous peu à l'envoi "
-"du financement."
+"NextGear Capital a été avisé de cette modification et procédera sous peu à "
+"l'envoi du financement."
 
 #: app/scripts/filters/yes-no.filter.js:6
 #: app/views/account-management.html:195 app/views/account-management.html:200
@@ -2238,8 +2239,8 @@ msgid ""
 "Please contact your local representative for details about the Promotions "
 "and Event Sales listed below."
 msgstr ""
-"Veuillez communiquer avec votre représentant local pour tout détail au "
-"sujet des Promotions et des Activités de Ventes indiquées ci-dessous."
+"Veuillez communiquer avec votre représentant local pour tout détail au sujet "
+"des Promotions et des Activités de Ventes indiquées ci-dessous."
 
 #: app/scripts/directives/nxg-financial-account/nxg-financial-account.html:11
 #: app/views/modals/financial-account.html:96
@@ -4289,6 +4290,13 @@ msgid "Zip Code"
 msgstr "Code postal"
 
 #~ msgid ""
+#~ "NextGear has been notified of this change and will be sending funding "
+#~ "soon."
+#~ msgstr ""
+#~ "NextGear a été avisé de cette modification et procédera sous peu à "
+#~ "l'envoi du financement."
+
+#~ msgid ""
 #~ "<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 "
 #~ "characters.</p><p>Passwords must contain 3 of the 4 following types of "
 #~ "characters: uppercase, lowercase, number, or special characters.</p>"
@@ -4297,13 +4305,6 @@ msgstr "Code postal"
 #~ "contenir un minimum de 8 caractères. </p><p>Les mots de passe doivent "
 #~ "contenir 3 des 4 types de caractères suivants : majuscules, minuscules, "
 #~ "nombres ou caractères spéciaux.</p>"
-
-#~ msgid ""
-#~ "NextGear Capital has been notified of this change and will be sending "
-#~ "funding soon."
-#~ msgstr ""
-#~ "NextGear Capital a été avisé de cette modification et procédera sous peu "
-#~ "à l'envoi du financement."
 
 #~ msgid "Please enter a Purchase Date in the past."
 #~ msgstr "Veuillez entrer une date d'achat antérieure."

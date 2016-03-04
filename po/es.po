@@ -1853,10 +1853,11 @@ msgstr "Documentos de NextGear Capital"
 
 #: app/views/auction-seller-floor-plan.html:89
 msgid ""
-"NextGear has been notified of this change and will be sending funding soon."
+"NextGear Capital has been notified of this change and will be sending "
+"funding soon."
 msgstr ""
-"Se ha notificado a NextGear de este cambio y pronto le enviará "
-"financiamiento. "
+"Se ha notificado a NextGear Capital de este cambio y pronto le enviará "
+"financiamiento."
 
 #: app/scripts/filters/yes-no.filter.js:6
 #: app/views/account-management.html:195 app/views/account-management.html:200
@@ -4275,6 +4276,13 @@ msgid "Zip Code"
 msgstr "Código postal"
 
 #~ msgid ""
+#~ "NextGear has been notified of this change and will be sending funding "
+#~ "soon."
+#~ msgstr ""
+#~ "Se ha notificado a NextGear de este cambio y pronto le enviará "
+#~ "financiamiento. "
+
+#~ msgid ""
 #~ "<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 "
 #~ "characters.</p><p>Passwords must contain 3 of the 4 following types of "
 #~ "characters: uppercase, lowercase, number, or special characters.</p>"
@@ -4283,13 +4291,6 @@ msgstr "Código postal"
 #~ "8 caracteres por lo menos.</p><p>Las contraseñas deben contener 3 de los "
 #~ "4 tipos de caracteres siguientes: mayúsculas, minúsculas, números o "
 #~ "caracteres especiales.</p>"
-
-#~ msgid ""
-#~ "NextGear Capital has been notified of this change and will be sending "
-#~ "funding soon."
-#~ msgstr ""
-#~ "Se ha notificado a NextGear Capital de este cambio y pronto le enviará "
-#~ "financiamiento."
 
 #~ msgid "Please enter a Purchase Date in the past."
 #~ msgstr "Por favor, ingrese una fecha de compra pasada."
