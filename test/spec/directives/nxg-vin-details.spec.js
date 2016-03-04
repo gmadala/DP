@@ -132,14 +132,14 @@ describe('Directive: NxgVinDetails', function () {
       var results,
           shouldSucceed,
           $q,
-          $dialog,
+          uibModal,
           dialogChoice,
           userHasChosen,
           errObject;
 
       beforeEach(inject(function(_$q_, $uibModal) {
         $q = _$q_;
-        $dialog = $uibModal;
+        uibModal = $uibModal;
         shouldSucceed = true;
         results = [{
           foo: 'bar'
@@ -170,7 +170,7 @@ describe('Directive: NxgVinDetails', function () {
           }
         });
 
-        spyOn($dialog, 'open').and.returnValue({
+        spyOn(uibModal, 'open').and.returnValue({
           result: {
             then: function (success) {
               if (userHasChosen) {
@@ -226,7 +226,7 @@ describe('Directive: NxgVinDetails', function () {
         };
 
         scope.lookupVin();
-        expect($dialog.open.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
+        expect(uibModal.open.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
       });
 
       // TODO: fix this test so it passes
@@ -244,7 +244,7 @@ describe('Directive: NxgVinDetails', function () {
         };
         dialogChoice = results[1];
         scope.lookupVin();
-        expect($dialog.open.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
+        expect(uibModal.open.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
 
         // expect(scope.data.$selectedVehicle).toBe(dialogChoice);
       })

@@ -5,12 +5,12 @@
     .module('nextgearWebApp')
     .controller('DealerNameSearchCtrl', DealerNameSearchCtrl);
 
-  DealerNameSearchCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', '$dialog', 'DealerNameSearch', 'User', 'options'];
+  DealerNameSearchCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'DealerNameSearch', 'User', 'options'];
 
-  function DealerNameSearchCtrl($scope, dialog, $uibModal, $uibModalInstance, DealerNameSearch, User, options) {
+  function DealerNameSearchCtrl($scope, $uibModal, $uibModalInstance, DealerNameSearch, User, options) {
 
     var uibModal          = $uibModal,
-      uibModalInstance  = $uibModalInstance;
+        uibModalInstance  = $uibModalInstance;
 
 
     $scope.proposedQuery = {
