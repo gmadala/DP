@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-angular
-  .module('nextgearWebApp')
-  .directive('nxgVinDetails', nxgVinDetails);
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgVinDetails', nxgVinDetails);
 
   nxgVinDetails.$inject = [];
 
