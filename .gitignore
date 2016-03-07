@@ -18,7 +18,7 @@ npm-debug.log
 *.processed.*
 *.mo
 *.pot
-app/scripts/translations.js
+app/client/scripts/translations.js
 app/languages/
 .metadata/
 maintenance

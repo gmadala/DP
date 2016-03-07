@@ -53,7 +53,7 @@ module.exports = function(grunt) {
           '!<%= yeoman.app %>/index.html',
           '.tmp/index.html',
           '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/client/**/*.js',
           '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
           '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
@@ -138,11 +138,11 @@ module.exports = function(grunt) {
       all: [
         //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/**/*.js',
-        '!app/scripts/config/nxg-config.mock.processed.js',
+        '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
-        '!app/scripts/services/base64.service.js',
-        '!app/scripts/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/scripts/directives/tooltip.directive.js',
+        '!app/client/services/base64.service.js',
+        '!app/client/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/directives/tooltip.directive.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -153,12 +153,12 @@ module.exports = function(grunt) {
       },
       all: [
         //'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/**/*.js',
-        '!app/scripts/config/nxg-config.mock.processed.js',
+        '<%= yeoman.app %>/client/**/*.js',
+        '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
-        '!app/scripts/services/base64.service.js',
-        '!app/scripts/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/scripts/directives/tooltip.directive.js',
+        '!app/client/services/base64.service.js',
+        '!app/client/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/directives/tooltip.directive.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -302,10 +302,10 @@ module.exports = function(grunt) {
           cwd: '<%= yeoman.dist %>',
           src: [
             '*.html',
-            'views/**/*.html',
-            'scripts/directives/**/*.html',
+            'client/**/*.html',
+            'client/directives/**/*.html',
             // Getting an error when uglifying this file. Should be looked into!
-            '!scripts/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
+            '!client/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
           ],
           dest: '<%= yeoman.dist %>'
         }]
@@ -465,7 +465,7 @@ module.exports = function(grunt) {
         }
       },
       dev: {
-        src: '<%= yeoman.app %>/scripts/config/nxg-config.mock.js',
+        src: '<%= yeoman.app %>/client/config/nxg-config.mock.js',
         dest: '<%= yeoman.app %>/scripts/config/nxg-config.mock.processed.js',
         options: {
           context: {
@@ -476,7 +476,7 @@ module.exports = function(grunt) {
         }
       },
       debug: {
-        src: '<%= yeoman.app %>/scripts/directives/nxg-debug-title.directive.js',
+        src: '<%= yeoman.app %>/client/directives/nxg-debug-title.directive.js',
         dest: '<%= yeoman.app %>/scripts/directives/nxg-debug-title.processed.js'
       }
     },
@@ -492,9 +492,8 @@ module.exports = function(grunt) {
       pot: {
         files: {
           'po/extracted.pot': [
-            '<%= yeoman.app %>/scripts/**/*.html',
-            '<%= yeoman.app %>/scripts/**/*.js',
-            '<%= yeoman.app %>/views/**/*.html',
+            '<%= yeoman.app %>/client/**/*.html',
+            '<%= yeoman.app %>/client/**/*.js',
             '<%= yeoman.app %>/*.html'
           ]
         }

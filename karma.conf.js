@@ -45,18 +45,18 @@ module.exports = function (karma) {
 
       'app/components/sinon/lib/sinon/util/fake_timers.js',
       'app/components/lodash/lodash.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
-      'app/scripts/directives/**/*.html',
-      'test/spec/**/*.js',
+      'app/client/*.js',
+      'app/client/**/*.js',
+      'app/client/directives/**/*.html',
+      'app/client/**/*.spec.js',
       'test/util/analytics.js',
       'test/util/url-parser.js',
       'test/util/disable-otherwise.js'
     ],
 
     preprocessors: {
-      'app/scripts/directives/**/*.html': 'html2js',
-      'app/scripts/**/*.js': 'coverage'
+      'app/client/directives/**/*.html': 'html2js',
+      'app/client/**/*.js': 'coverage'
     },
 
     ngHtml2JsPreprocessor: {
@@ -65,8 +65,8 @@ module.exports = function (karma) {
 
     // list of files to exclude
     exclude: [
-      'app/scripts/dev/**/*.js',
-      'app/scripts/debug-info.js'
+      'app/client/dev/**/*.js',
+      'app/client/debug-info.js'
     ],
 
     // test results reporter to use
