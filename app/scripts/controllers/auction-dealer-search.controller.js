@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $dialog, dealerSearch) {
+  .controller('AuctionDealerSearchCtrl', function($scope, $uibModal, dealerSearch) {
 
     $scope.proposedQuery = null;
     $scope.searchExecuted = false;
@@ -101,7 +101,7 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          uibModal.open(dialogOptions);
+          $uibModal.open(dialogOptions);
         }
       }
   });

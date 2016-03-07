@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, $uibModalInstance, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+  .controller('CreditQueryCtrl', function($scope, $uibModalInstance, CreditQuery, dealerSearch,
+                                          options, kissMetricInfo, segmentio, User, metric) {
     var uibModalInstance = $uibModalInstance;
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
       auctionAccessNumbers: options.auctionAccessNumbers,
+      externalId: options.externalId,
       name: options.businessName,
       address: options.address,
       city: options.city,
@@ -43,6 +45,18 @@ angular.module('nextgearWebApp')
         },
         results: []
       }
+    };
+
+    $scope.saveExternalId = function() {
+      User.getInfo()
+        .then(function(info) {
+          return dealerSearch.relateExternal($scope.business.id, info.BusinessId, $scope.externalId);
+        })
+        .then(function(response) {
+          if (response.true) {
+            $scope.business.externalId = $scope.externalId;
+          }
+        });
     };
 
     // Allow the dialog to close itself using the "Cancel" button.

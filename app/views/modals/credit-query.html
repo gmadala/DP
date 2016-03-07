@@ -15,10 +15,11 @@
   </div>
   <div class="row">
     <div class="col-xs-5 paragraph" translate>Auction Buyer No.</div>
-    <div class="col-xs-7 value">
-      <input type="text">
-      <button class="btn">Save</button>
+    <div class="col-xs-7 value" ng-hide="business.externalId">
+      <input type="text" ng-model="externalId">
+      <button class="btn" ng-click="saveExternalId()">Save</button>
     </div>
+    <div class="col-xs-7 paragraph value" ng-show="business.externalId">{{ externalId }}</div>
   </div>
   <div class="row">
     <div class="col-xs-5 paragraph" translate>Business Name</div>

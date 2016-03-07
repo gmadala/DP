@@ -9,7 +9,8 @@
 
   function dealerSearch(api, Paginate) {
     return {
-      search: search
+      search: search,
+      relateExternal: relateExternal
     };
 
     function search(query, sortField, sortDesc, paginator) {
@@ -33,6 +34,15 @@
           return Paginate.addPaginator(results, results.DealerRowCount, params.PageNumber, params.PageSize);
         }
       );
+    }
+
+    function relateExternal(dealerId, externalId, value) {
+      var data = {
+        auctionBusinessId: externalId,
+        businessNumber: dealerId,
+        externalId: value
+      };
+      return api.request('POST', api.ngenContentLink('/relate_external'), data, true, api.ngenSuccessHandler);
     }
 
     function isNumeric(value) {
