@@ -64,7 +64,7 @@
         User.getInfo().then(function (info) {
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
-          $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : false;
+          $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
           if ($scope.isUnitedStates) {
             dealerLinks.secondary.splice(1, 0, {
               name: gettextCatalog.getString('Value Lookup'),
@@ -160,8 +160,6 @@
     $rootScope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = true;
     });
-
-    $scope.navState = $state;
 
   }
 })();

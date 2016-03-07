@@ -12,6 +12,6 @@
       templateUrl: 'scripts/directives/navbar/navbar.html',
       controller: 'NavBarCtrl'
     };
-
+    
   }
 })();
