@@ -26,6 +26,14 @@
   }
 }
 
+#AuctionFloorCarPage{
+  .tooltip-inner {
+    max-width: 300px;
+    width: 300px;
+    font-weight: normal;
+  }
+}
+
 #AuctionDashboardPage {
   .counter-list.small-top-margin {
     margin-top: 3%;
