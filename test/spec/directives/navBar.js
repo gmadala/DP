@@ -139,7 +139,7 @@ describe('Directive: navBar', function () {
 
         // dealers have 7 primary links and 3 secondary links (excluding conditional TRP link)
         // have to exclude reports and resources
-        expect(myLinks.primary.length).toBe(6);
+        expect(myLinks.primary.length).toBe(7);
         expect(myLinks.secondary.length).toBe(3);
 
         myLinks = aScope.user.navLinks();
@@ -173,7 +173,7 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         scope.$apply();
-        expect(scope.user.navLinks().primary.length).toBe(7);
+        expect(scope.user.navLinks().primary.length).toBe(8);
       });
 
       it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
@@ -188,10 +188,10 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(6);
+        expect(scope.user.navLinks().primary.length).toBe(7);
         loggedIn = true;
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(7);
+        expect(scope.user.navLinks().primary.length).toBe(8);
       });
 
       it('should change the homelink based on user type', function() {
