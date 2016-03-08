@@ -137,7 +137,7 @@ module.exports = function(grunt) {
       },
       all: [
         //'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/**/*.js',
+        '<%= yeoman.app %>/client/**/*.js',
         '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
         '!app/client/services/base64.service.js',
@@ -177,7 +177,7 @@ module.exports = function(grunt) {
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
         imagesDir: '<%= yeoman.app %>/img',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
+        javascriptsDir: '<%= yeoman.app %>/client',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
         importPath: '<%= yeoman.app %>/components',
         relativeAssets: true
@@ -466,7 +466,7 @@ module.exports = function(grunt) {
       },
       dev: {
         src: '<%= yeoman.app %>/client/config/nxg-config.mock.js',
-        dest: '<%= yeoman.app %>/scripts/config/nxg-config.mock.processed.js',
+        dest: '<%= yeoman.app %>/client/config/nxg-config.mock.processed.js',
         options: {
           context: {
             apiBase: grunt.option('apiBase') || '',
@@ -477,7 +477,7 @@ module.exports = function(grunt) {
       },
       debug: {
         src: '<%= yeoman.app %>/client/directives/nxg-debug-title.directive.js',
-        dest: '<%= yeoman.app %>/scripts/directives/nxg-debug-title.processed.js'
+        dest: '<%= yeoman.app %>/client/directives/nxg-debug-title.processed.js'
       }
     },
     autoprefixer: {
@@ -598,11 +598,11 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('server-ie', [
-      'dev-setup',
-      'livereload-start',
-      'connect:livereload',
-      'shell:ie',
-      'watch'
+    'dev-setup',
+    'livereload-start',
+    'connect:livereload',
+    'shell:ie',
+    'watch'
   ]);
   grunt.registerTask('server-dist', [
     'build',

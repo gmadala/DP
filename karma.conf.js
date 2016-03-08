@@ -47,6 +47,8 @@ module.exports = function (karma) {
       'app/components/lodash/lodash.js',
       'app/client/*.js',
       'app/client/**/*.js',
+      'app/core/**/*.js',
+      'app/core/**/*.spec.js',
       'app/client/directives/**/*.html',
       'app/client/**/*.spec.js',
       'test/util/analytics.js',

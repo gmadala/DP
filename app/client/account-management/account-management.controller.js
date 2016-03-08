@@ -267,7 +267,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'views/modals/confirm-enable-autopay.html',
+                templateUrl: 'client/modals/confirm-enable-autopay.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
@@ -279,7 +279,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'views/modals/confirm-disable-autopay.html',
+                templateUrl: 'client/modals/confirm-disable-autopay.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
@@ -405,7 +405,7 @@
               backdrop: true,
               keyboard: false,
               backdropClick: false,
-              templateUrl: 'views/modals/financialAccount.html',
+              templateUrl: 'client/modals/financial-account.html',
               resolve: {
                 options: function () {
                   return {
@@ -508,7 +508,7 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'views/modals/requestCreditIncrease.html',
+        templateUrl: 'client/modals/request-credit-increase/request-credit-increase.html',
         controller: 'RequestCreditIncreaseCtrl'
       };
 
