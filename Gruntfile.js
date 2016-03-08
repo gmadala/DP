@@ -162,8 +162,6 @@ module.exports = function(grunt) {
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
-        //'!test/spec/**/*.js',
-        //'test/util/**/*.js'
       ]
     },
     karma: {

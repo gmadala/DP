@@ -279,8 +279,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
   describe('controller-wide functions', function() {
     beforeEach(inject(function($httpBackend) {
-      $httpBackend.whenGET('views/modals/paymentExtension.html').respond('<div></div>');
-      $httpBackend.whenGET('views/modals/paymentOptionsBreakdown.html').respond('<div></div>');
+      $httpBackend.whenGET('client/modals/payment-extension/payment-extension.html').respond('<div></div>');
+      $httpBackend.whenGET('client/modals/payment-options-breakdown/payment-options-breakdown.html').respond('<div></div>');
     }));
 
     it('should have a paymentQueue.getQueueCount function to return the length of the queue', function() {
@@ -652,7 +652,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('PaymentDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/paymentDetails.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/payment-details/payment-details.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(paymentDetailsMock);
       }));
 
@@ -666,7 +666,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('FeeDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('views/modals/feeDetails.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/fee-details/fee-details.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(feeDetailsMock);
       }));
     });

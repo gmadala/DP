@@ -91,7 +91,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'views/modals/messageBox.html',
+            templateUrl: 'client/modals/message-box/message-box.html',
             controller: 'MessageBoxCtrl',
             dialogClass: 'modal modal-medium',
             resolve: {

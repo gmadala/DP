@@ -31,7 +31,7 @@
           keyboard: false,
           backdropClick: false,
           dialogClass: 'modal modal-medium',
-          templateUrl: 'views/modals/multipleVehicles.html',
+          templateUrl: 'client/modals/multiple-vehicles/multiple-vehicles.html',
           controller: 'MultipleVehiclesCtrl',
           resolve: {
             matchList: function () {

@@ -13,7 +13,7 @@ describe('Directive: nxgPaymentButtons', function () {
   beforeEach(inject(function (_Payments_, _PaymentOptions_, $httpBackend) {
     httpBackend = $httpBackend;
     httpBackend.expectGET('client/directives/nxg-icon/nxg-icon.html').respond('<div></div>');
-    httpBackend.expectGET('views/modals/cancelPayment.html').respond('<div></div>');
+    httpBackend.expectGET('client/modals/cancel-payment/cancel-payment.html').respond('<div></div>');
 
     Payments = _Payments_;
     PaymentOptions = _PaymentOptions_;

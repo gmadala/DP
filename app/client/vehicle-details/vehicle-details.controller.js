@@ -534,13 +534,13 @@
           var promise, template, ctrl;
           if (activity.IsPayment) {
             promise = VehicleDetails.getPaymentDetails($stateParams.stockNumber, activity.ActivityId);
-            template = 'paymentDetails.html';
+            template = 'payment-details/payment-details.html';
             ctrl = 'PaymentDetailsCtrl';
           }
 
           if (activity.IsFee) {
             promise = VehicleDetails.getFeeDetails($stateParams.stockNumber, activity.ActivityId);
-            template = 'feeDetails.html';
+            template = 'fee-details/fee-details.html';
             ctrl = 'FeeDetailsCtrl';
           }
 
@@ -550,7 +550,7 @@
               keyboard: true,
               backdropClick: true,
               controller: ctrl,
-              templateUrl: 'views/modals/' + template,
+              templateUrl: 'client/modals/' + template,
               dialogClass: 'modal',
               resolve: {
                 activity: function() {
