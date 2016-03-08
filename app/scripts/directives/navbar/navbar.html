@@ -43,15 +43,23 @@
           </div>
           <ul class="dropdown-menu margin" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
             <li>
-              <a href="#/act/settings" ng-show="!user.isDealer()" translate>Settings</a>
-              <a href="#/profile_settings" ng-show="user.isDealer()" translate>Profile Settings</a>
+              <a href="#/act/settings" ng-show="!user.isDealer()" translate>
+                <strong>Settings</strong>
+              </a>
+              <a href="#/profile_settings" ng-show="user.isDealer()" translate>
+                <strong>Profile Settings</strong>
+              </a>
             </li>
             <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>Account Management</a>
+              <a ng-href="#/account_management" ng-show="user.isDealer()" translate>
+                <strong>Account Management</strong>
+              </a>
             </li>
             <li class="menu-divider"></li>
             <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
+              <a href="javascript:void(0)" ng-click="user.logout()" translate>
+                <strong>Sign Out</strong>
+              </a>
             </li>
           </ul>
         </div>
