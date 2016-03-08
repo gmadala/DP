@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgFillHeight', function($window) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgFillHeight', nxgFillHeight);
+
+  nxgFillHeight.$inject = ['$window'];
+
+  function nxgFillHeight($window) {
 
     var getAbsOffsetTop = function($elem) {
       var offsetTop = $elem[0].offsetTop;
@@ -32,4 +38,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

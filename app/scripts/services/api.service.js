@@ -1,13 +1,40 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('api', function($rootScope, $q, $http, $filter, $timeout, nxgConfig, messages, $cookieStore, gettextCatalog,
-  apiCommon) {
+  angular
+    .module('nextgearWebApp')
+    .factory('api', api);
+
+  api.$inject = [
+    '$rootScope',
+    '$q',
+    '$http',
+    '$filter',
+    '$timeout',
+    'nxgConfig',
+    'messages',
+    '$cookieStore',
+    'gettextCatalog',
+    'apiCommon'
+  ];
+
+  function api(
+    $rootScope,
+    $q,
+    $http,
+    $filter,
+    $timeout,
+    nxgConfig,
+    messages,
+    $cookieStore,
+    gettextCatalog,
+    apiCommon) {
+
     var authToken = null,
-        sessionHasTimedOut = false,
-        sessionTimeout = null,
-        requestCount = 0,
-        requestCountThreshold = 3;
+      sessionHasTimedOut = false,
+      sessionTimeout = null,
+      requestCount = 0,
+      requestCountThreshold = 3;
 
     function onSessionTimeout(debug) {
       $rootScope.$emit('event:forceClearAuth');
@@ -97,10 +124,10 @@ angular.module('nextgearWebApp')
           requestCount++;
         }
         var httpConfig = {
-          method: method.toUpperCase(),
-          url: (isNgen) ?  url : nxgConfig.apiBase + url,
-          headers: headers
-        },successHandler=this.defaultSuccessHanlder,
+            method: method.toUpperCase(),
+            url: (isNgen) ?  url : nxgConfig.apiBase + url,
+            headers: headers
+          },successHandler=this.defaultSuccessHanlder,
           errorHandler=this.defaultErrorHanlder;
 
         httpConfig[httpConfig.method === 'GET' ? 'params' : 'data'] = data;
@@ -268,5 +295,6 @@ angular.module('nextgearWebApp')
     apiCommon.init(service);
 
     return service;
-  });
 
+  }
+})();

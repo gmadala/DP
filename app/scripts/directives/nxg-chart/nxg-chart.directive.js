@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgChart', function() {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgChart', nxgChart);
+
+  nxgChart.$inject = [];
+
+  function nxgChart() {
+
     return {
       scope: {
         data: '=nxgChartData',
@@ -196,8 +203,8 @@ angular.module('nextgearWebApp')
 
             if(initializeChart.initialized){
               var dataMin = _.min(scope.data, function(point){
-                  return point[1];
-                })[1];
+                return point[1];
+              })[1];
               element.highcharts().yAxis[0].update({
                 // only subtract 5 if it won't give us a negative value
                 min: (dataMin >= 5) ? dataMin - 5 : dataMin,
@@ -229,4 +236,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

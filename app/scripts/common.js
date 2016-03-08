@@ -1,3 +1,6 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebCommon', []);
+  angular.module('nextgearWebCommon', []);
+
+})();

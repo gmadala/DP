@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('BusinessHours', function($rootScope, api, moment, $timeout) {
+  angular
+    .module('nextgearWebApp')
+    .factory('BusinessHours', BusinessHours);
+
+  BusinessHours.$inject = ['$rootScope', 'api', 'moment', '$timeout'];
+
+  function BusinessHours($rootScope, api, moment, $timeout) {
 
     var prv = {
       cachedBusinessHours: null,
@@ -128,4 +134,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

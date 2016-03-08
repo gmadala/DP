@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgAlternateAddress', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgAlternateAddress', nxgAlternateAddress);
+
+  nxgAlternateAddress.$inject = [];
+
+  function nxgAlternateAddress() {
+
     return {
       templateUrl: 'scripts/directives/nxg-alternate-address/nxg-alternate-address.html',
       restrict: 'A',
@@ -52,4 +59,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

@@ -1,10 +1,33 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('RequestCreditIncreaseCtrl', function($scope, $uibModal, $uibModalInstance, CreditIncrease, gettextCatalog, kissMetricInfo, segmentio, metric) {
+  angular
+    .module('nextgearWebApp')
+    .controller('RequestCreditIncreaseCtrl', RequestCreditIncreaseCtrl);
 
-    var uibModal = $uibModal,
-      uibModalInstance= $uibModalInstance;
+  RequestCreditIncreaseCtrl.$inject = [
+    '$scope',
+    '$uibModal',
+    '$uibModalInstance',
+    'CreditIncrease',
+    'gettextCatalog',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
+  ];
+
+  function RequestCreditIncreaseCtrl(
+    $scope,
+    $uibModal,
+    $uibModalInstance,
+    CreditIncrease,
+    gettextCatalog,
+    kissMetricInfo,
+    segmentio,
+    metric) {
+
+    var uibModal          = $uibModal,
+      uibModalInstance  = $uibModalInstance;
 
     kissMetricInfo.getKissMetricInfo().then(
       function(result){
@@ -68,7 +91,7 @@ angular.module('nextgearWebApp')
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'views/modals/message-box.html',
+            templateUrl: 'views/modals/messageBox.html',
             controller: 'MessageBoxCtrl',
             dialogClass: 'modal modal-medium',
             resolve: {
@@ -96,4 +119,5 @@ angular.module('nextgearWebApp')
       uibModalInstance.close();
     };
 
-  });
+  }
+})();

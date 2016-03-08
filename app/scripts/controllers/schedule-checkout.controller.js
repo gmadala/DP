@@ -1,7 +1,32 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ScheduleCheckoutCtrl', function ($scope, $uibModalInstance, api, moment, payment, fee, possibleDates, Payments, PaymentOptions) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ScheduleCheckoutCtrl', ScheduleCheckoutCtrl);
+
+  ScheduleCheckoutCtrl.$inject = [
+    '$scope',
+    '$uibModalInstance',
+    'api',
+    'moment',
+    'payment',
+    'fee',
+    'possibleDates',
+    'Payments',
+    'PaymentOptions'
+  ];
+
+  function ScheduleCheckoutCtrl(
+    $scope,
+    $uibModalInstance,
+    api,
+    moment,
+    payment,
+    fee,
+    possibleDates,
+    Payments,
+    PaymentOptions) {
 
     // default to the next available date
     var orderedDates = _.keys(possibleDates).sort();
@@ -143,4 +168,6 @@ angular.module('nextgearWebApp')
     $scope.close = function() {
       uibModalInstance.close();
     };
-  });
+
+  }
+})();

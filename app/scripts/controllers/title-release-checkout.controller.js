@@ -1,9 +1,31 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('TitleReleaseCheckoutCtrl', function($scope, $uibModal, $state, TitleReleases, Floorplan, Addresses, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('TitleReleaseCheckoutCtrl', TitleReleaseCheckoutCtrl);
+
+  TitleReleaseCheckoutCtrl.$inject = [
+    '$scope',
+    '$uibModal',
+    '$state',
+    'TitleReleases',
+    'Floorplan',
+    'Addresses',
+    'gettextCatalog'
+  ];
+
+  function TitleReleaseCheckoutCtrl(
+    $scope,
+    $uibModal,
+    $state,
+    TitleReleases,
+    Floorplan,
+    Addresses,
+    gettextCatalog) {
 
     var uibModal = $uibModal;
+
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
       sum: function() {
@@ -45,4 +67,6 @@ angular.module('nextgearWebApp')
         });
       });
     };
-  });
+
+  }
+})();

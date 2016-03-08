@@ -1,10 +1,12 @@
 (function () {
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
   otherwiseRouteConfig.$inject = ['$injector'];
 
   function otherwiseRouteConfig($injector) {
@@ -278,5 +280,6 @@
           showNavBar: true
         }
       });
+
   }
 })();

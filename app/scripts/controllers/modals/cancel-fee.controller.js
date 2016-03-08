@@ -1,8 +1,16 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CancelFeeCtrl', function ($scope, $injector, $uibModalInstance, options, Payments, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('CancelFeeCtrl', CancelFeeCtrl);
+
+  CancelFeeCtrl.$inject = ['$scope', '$uibModalInstance', 'options', 'Payments', 'gettextCatalog'];
+
+  function CancelFeeCtrl($scope, $uibModalInstance, options, Payments, gettextCatalog) {
+
     var uibModalInstance = $uibModalInstance;
+
     $scope.fee = options.fee;
     $scope.title = options.title ? options.title : gettextCatalog.getString('Cancel Fee');
 
@@ -26,4 +34,5 @@ angular.module('nextgearWebApp')
       );
     };
 
-  });
+  }
+})();

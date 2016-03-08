@@ -1,10 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('PromosCtrl', PromosCtrl);
-function PromosCtrl($scope, $filter, api) {
+  angular
+    .module('nextgearWebApp')
+    .controller('PromosCtrl', PromosCtrl);
 
-  var getEventSalesData = function() {
+  PromosCtrl.$inject = ['$scope', '$filter', 'api'];
+
+  function PromosCtrl($scope, $filter, api) {
 
     api.request('GET',api.ngenContentLink('/eventsales'),null,null,true, api.ngenSuccessHandler).then(
       function (result) {
@@ -23,7 +26,6 @@ function PromosCtrl($scope, $filter, api) {
         });
       }
     );
-  };
 
-  getEventSalesData();
-}
+  }
+})();

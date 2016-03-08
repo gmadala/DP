@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('signupUrls', function (gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('signupUrls', signupUrls);
+
+  signupUrls.$inject = ['gettextCatalog'];
+
+  function signupUrls(gettextCatalog) {
 
     return {
       urls: {
@@ -40,4 +46,6 @@ angular.module('nextgearWebApp')
         return this.getByLanguage(gettextCatalog.currentLanguage);
       }
     };
-  });
+
+  }
+})();

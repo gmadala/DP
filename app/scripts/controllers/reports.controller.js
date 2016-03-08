@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ReportsCtrl', function($scope, api, segmentio, metric, moment, gettextCatalog, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ReportsCtrl', ReportsCtrl);
+
+  ReportsCtrl.$inject = ['$scope', 'api', 'segmentio', 'metric', 'moment', 'gettextCatalog', 'kissMetricInfo'];
+
+  function ReportsCtrl($scope, api, segmentio, metric, moment, gettextCatalog, kissMetricInfo) {
 
     /***
      * The last URI route param of the report endpoints is used so browsers can get it as a default filename
@@ -245,4 +251,6 @@ angular.module('nextgearWebApp')
       return parts.join(',');
 
     };
-  });
+
+  }
+})();

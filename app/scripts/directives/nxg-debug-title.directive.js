@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgDebugTitle', function (nxgConfig) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgDebugTitle', nxgDebugTitle);
+
+  nxgDebugTitle.$inject = ['nxgConfig'];
+
+  function nxgDebugTitle(nxgConfig) {
+
     return {
       restrict: 'A',
       compile: function (element) {
@@ -19,4 +26,6 @@ angular.module('nextgearWebApp')
         element.attr('title', gitSha + ' ' + api);
       }
     };
-  });
+
+  }
+})();

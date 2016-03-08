@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgIcon', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgIcon', nxgIcon);
+
+  nxgIcon.$inject = [];
+
+  function nxgIcon() {
+
     return {
       restrict: 'A',
       replace: true,
@@ -20,4 +27,6 @@ angular.module('nextgearWebApp')
         element.find('use').attr('xlink:href', '#'+attrs.nxgIcon);
       }
     };
-  });
+
+  }
+})();

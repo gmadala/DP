@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('DealerNameSearch', function(api, Paginate) {
+  angular
+    .module('nextgearWebApp')
+    .factory('DealerNameSearch', DealerNameSearch);
+
+  DealerNameSearch.$inject = ['api', 'Paginate'];
+
+  function DealerNameSearch(api, Paginate) {
 
     return {
       search: function(name, city, state, sortField, sortDesc, paginator) {
@@ -30,4 +36,6 @@ angular.module('nextgearWebApp')
         );
       }
     };
-  });
+
+  }
+})();

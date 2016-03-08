@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Floorplan', function(api, Paginate, User, $q, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Floorplan', Floorplan);
+
+  Floorplan.$inject = ['api', 'Paginate', 'User', '$q', 'gettextCatalog'];
+
+  function Floorplan(api, Paginate, User, $q, gettextCatalog) {
     var overrideInProgress = false;
 
     return {
@@ -171,4 +177,6 @@ angular.module('nextgearWebApp')
         return api.request('POST',api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'),fpJSON,null,true, api.ngenSuccessHandler);
       }
     };
-  });
+
+  }
+})();

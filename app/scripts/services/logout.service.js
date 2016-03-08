@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('LogoutGuard', function($rootScope, $state, User) {
+  angular
+    .module('nextgearWebApp')
+    .factory('LogoutGuard', LogoutGuard);
+
+  LogoutGuard.$inject = ['$rootScope', 'User'];
+
+  function LogoutGuard($rootScope, User) {
 
     return {
       /**
@@ -27,4 +33,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

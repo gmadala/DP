@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('TitleReleases', function(api, Addresses, $q, Paginate, moment) {
+  angular
+    .module('nextgearWebApp')
+    .factory('TitleReleases', TitleReleases);
+
+  TitleReleases.$inject = ['api', 'Addresses', 'Paginate', 'moment'];
+
+  function TitleReleases(api, Addresses, Paginate, moment) {
 
     var eligibilityLoading = false;
 
@@ -88,17 +94,17 @@ angular.module('nextgearWebApp')
       },
       search: function (criteria, paginator) {
         var params = {
-            Keyword: criteria.query || undefined,
-            OrderBy: criteria.sortField || 'FlooringDate',
-            OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
-            PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-            PageSize: Paginate.PAGE_SIZE_MEDIUM,
-            StartDate: api.toShortISODate(criteria.startDate) || undefined,
-            EndDate: api.toShortISODate(criteria.endDate) || undefined,
-            SearchOutstandingTitleReleaseProgramRelease: criteria.filter === this.filterValues.OUTSTANDING || criteria.filter === this.filterValues.ALL,
-            SearchEligibleForRelease: criteria.filter === this.filterValues.ELIGIBLE || criteria.filter === this.filterValues.ALL,
-            SearchNotEligibleForRelease: criteria.filter === this.filterValues.NOT_ELIGIBLE || criteria.filter === this.filterValues.ALL
-          };
+          Keyword: criteria.query || undefined,
+          OrderBy: criteria.sortField || 'FlooringDate',
+          OrderByDirection: criteria.sortDesc === undefined || criteria.sortDesc === true ? 'DESC' : 'ASC',
+          PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
+          PageSize: Paginate.PAGE_SIZE_MEDIUM,
+          StartDate: api.toShortISODate(criteria.startDate) || undefined,
+          EndDate: api.toShortISODate(criteria.endDate) || undefined,
+          SearchOutstandingTitleReleaseProgramRelease: criteria.filter === this.filterValues.OUTSTANDING || criteria.filter === this.filterValues.ALL,
+          SearchEligibleForRelease: criteria.filter === this.filterValues.ELIGIBLE || criteria.filter === this.filterValues.ALL,
+          SearchNotEligibleForRelease: criteria.filter === this.filterValues.NOT_ELIGIBLE || criteria.filter === this.filterValues.ALL
+        };
         return api.request('GET', '/titleRelease/search', params).then(
           function (results) {
             angular.forEach(results.Floorplans, function (floorplan) {
@@ -115,4 +121,6 @@ angular.module('nextgearWebApp')
       }
 
     };
-  });
+
+  }
+})();

@@ -1,8 +1,38 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ValueLookupCtrl', function ($scope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext,
-                                           metric, segmentio, kissMetricInfo, $sce) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ValueLookupCtrl', ValueLookupCtrl);
+
+  ValueLookupCtrl.$inject = [
+    '$scope',
+    '$filter',
+    'Mmr',
+    'Blackbook',
+    'Kbb',
+    'User',
+    'gettextCatalog',
+    'gettext',
+    'metric',
+    'segmentio',
+    'kissMetricInfo',
+    '$sce'
+  ];
+
+  function ValueLookupCtrl(
+    $scope,
+    $filter,
+    Mmr,
+    Blackbook,
+    Kbb,
+    User,
+    gettextCatalog,
+    gettext,
+    metric,
+    segmentio,
+    kissMetricInfo,
+    $sce) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
     var disclaimerHeader =  gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
@@ -654,17 +684,17 @@ angular.module('nextgearWebApp')
       },
       lookup: function () {
         switch ($scope.lookupValues.id) {
-        case 'bb':
-          this.blackbook.lookup();
-          break;
-        case 'mmr':
-          this.mmr.lookup();
-          break;
-        case 'kbb':
-          this.kbb.lookup();
-          break;
-        default:
-          $scope.manualLookupForm.lookupValues.$setValidity('required', false);
+          case 'bb':
+            this.blackbook.lookup();
+            break;
+          case 'mmr':
+            this.mmr.lookup();
+            break;
+          case 'kbb':
+            this.kbb.lookup();
+            break;
+          default:
+            $scope.manualLookupForm.lookupValues.$setValidity('required', false);
         }
       }
     };
@@ -689,4 +719,6 @@ angular.module('nextgearWebApp')
     if ($scope.kbbEnabled){
       $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Auction Values')});
     }
-  });
+
+  }
+})();

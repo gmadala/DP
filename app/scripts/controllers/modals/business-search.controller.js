@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('BusinessSearchCtrl', function($scope, $uibModalInstance, BusinessSearch, initialQuery, searchBuyersMode, closeNow) {
+  angular
+    .module('nextgearWebApp')
+    .controller('BusinessSearchCtrl', BusinessSearchCtrl);
+
+  BusinessSearchCtrl.$inject = ['$scope', '$uibModalInstance', 'BusinessSearch', 'initialQuery', 'searchBuyersMode', 'closeNow'];
+
+  function BusinessSearchCtrl($scope, $uibModalInstance, BusinessSearch, initialQuery, searchBuyersMode, closeNow) {
 
     var lastPromise;
     var uibModalInstance = $uibModalInstance;
@@ -59,7 +65,7 @@ angular.module('nextgearWebApp')
 
     $scope.fetchNextResults = function() {
       var paginator = $scope.data.paginator,
-          promise;
+        promise;
       if (paginator && !paginator.hasMore()) {
         if (paginator.hitMaximumLimit()) {
           $scope.data.hitInfiniteScrollMax = true;
@@ -123,4 +129,5 @@ angular.module('nextgearWebApp')
     // Do a search with the initial query
     $scope.search();
 
-  });
+  }
+})();

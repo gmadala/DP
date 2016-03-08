@@ -1,7 +1,26 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('TitleReleasesCtrl', function($scope, TitleReleases, Floorplan, $uibModal, dealerCustomerSupportPhone, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('TitleReleasesCtrl', TitleReleasesCtrl);
+
+  TitleReleasesCtrl.$inject = [
+    '$scope',
+    'TitleReleases',
+    'Floorplan',
+    '$uibModal',
+    'dealerCustomerSupportPhone',
+    'gettextCatalog'
+  ];
+
+  function TitleReleasesCtrl(
+    $scope,
+    TitleReleases,
+    Floorplan,
+    $uibModal,
+    dealerCustomerSupportPhone,
+    gettextCatalog) {
 
     var uibModal = $uibModal;
     $scope.isCollapsed = true;
@@ -86,7 +105,7 @@ angular.module('nextgearWebApp')
 
     $scope.fetchNextResults = function () {
       var paginator = $scope.data.paginator,
-          promise;
+        promise;
 
       if (paginator && !paginator.hasMore()) {
         if (paginator.hitMaximumLimit()) {
@@ -176,8 +195,8 @@ angular.module('nextgearWebApp')
 
     $scope.titleReleaseLimitReached = function() {
       var title = gettextCatalog.getString('Title Release Limit Reached'),
-          message = gettextCatalog.getString('The floor plan you have selected for title release would put you over the financial plan limits for this account.'),
-          buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
+        message = gettextCatalog.getString('The floor plan you have selected for title release would put you over the financial plan limits for this account.'),
+        buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
       var dialogOptions = {
         backdrop: true,
@@ -202,4 +221,5 @@ angular.module('nextgearWebApp')
       return uibModal.open(dialogOptions);
     };
 
-  });
+  }
+})();

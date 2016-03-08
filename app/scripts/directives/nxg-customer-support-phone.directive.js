@@ -1,10 +1,17 @@
-'use strict';
+(function() {
+  'use strict';
 
-// This directive will display all available customer service number. This directive should be used in pre auth
-// pages:
-// * recover login information
-angular.module('nextgearWebApp')
-  .directive('nxgCustomerSupportPhone', function () {
+  // This directive will display all available customer service number. This directive should be used in pre auth
+  // pages:
+  // * recover login information
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgCustomerSupportPhone', nxgCustomerSupportPhone);
+
+  nxgCustomerSupportPhone.$inject = [];
+
+  function nxgCustomerSupportPhone() {
+
     return {
       restrict: 'E',
       replace: true,
@@ -24,4 +31,6 @@ angular.module('nextgearWebApp')
       '  </tr>'+
       '</table>'
     };
-  });
+
+  }
+})();

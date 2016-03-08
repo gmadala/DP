@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope,  $uibModal, User, DealerNumberSearch) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AuctionDealerSearchCtrl', AuctionDealerSearchCtrl);
+
+  AuctionDealerSearchCtrl.$inject = ['$scope', '$uibModal', 'User', 'DealerNumberSearch'];
+
+  function AuctionDealerSearchCtrl($scope, $uibModal, User, DealerNumberSearch) {
 
     var uibModal = $uibModal;
 
@@ -195,5 +201,6 @@ angular.module('nextgearWebApp')
         }
       }.bind($scope.numberSearch)
     };
-  })
-;
+
+  }
+})();

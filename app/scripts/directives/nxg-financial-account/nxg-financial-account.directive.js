@@ -3,12 +3,30 @@
 
   angular
     .module('nextgearWebApp')
-    .directive('nxgFinancialAccount', financialAccount);
+    .directive('nxgFinancialAccount', nxgFinancialAccount);
 
+  nxgFinancialAccount.$inject = [
+    'gettext',
+    'gettextCatalog',
+    '$filter',
+    'AccountManagement',
+    'User',
+    'routingNumberFilter',
+    'moment',
+    'api'
+  ];
   /**
    * Directive for rendering a bank account - currently used in account management
    */
-  function financialAccount(gettext, gettextCatalog, $filter, AccountManagement, User, routingNumberFilter, moment, api) {
+  function nxgFinancialAccount(
+    gettext,
+    gettextCatalog,
+    $filter,
+    AccountManagement,
+    User,
+    routingNumberFilter,
+    moment,
+    api) {
 
     var directive;
     directive = {
@@ -176,6 +194,6 @@
         window.open(strUrl, '_blank');
       }
     }
-  }
 
+  }
 })();

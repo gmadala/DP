@@ -1,27 +1,33 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * This is based on the ngInfiniteScroll directive (http://binarymuse.github.io/ngInfiniteScroll/). We've extended
- * it for the following cases:
- *
- * The ngInfiniteScroll directive is constrained to the window's bottom and will not work with popups or lists
- * that don't extend to the bottom of the window. This variant adds an nxg-scroll-container attribute; if present/true
- * it will use the scrollHeight and scrollTop properties of the directive's element to figure out when
- * to load more data. (Note that for this to work, you must have an overflow style of "scroll" or "auto" on the element,
- * and make sure that the first page of data that's loaded is big enough to go "below the fold" if additional
- * pages should be reachable).
- *
- * This adds an optional nxg-infinite-scroll-show-indicator attribute. If present, and the expression provided
- * evaluates to true, the directive will display a <div class="nxg-infinite-scroll-indicator"> at the bottom of the
- * directive's element. (Because of this, you should avoid using this directive on elements that should not have
- * <div> children, like <table> -- if you need scrolling in a table, you can put the table inside a div and put
- * the infinite-scroll there. If you don't want the headers to scroll, move those out to a second table above
- * and make sure their widths match their data columns).
- *
- * Disables some overly eager scroll handling logic that could cause 2 pages to be loaded at a time.
- */
-angular.module('nextgearWebApp')
-  .directive('nxgInfiniteScroll', function ($rootScope, $timeout, $window, status) {
+  /**
+   * This is based on the ngInfiniteScroll directive (http://binarymuse.github.io/ngInfiniteScroll/). We've extended
+   * it for the following cases:
+   *
+   * The ngInfiniteScroll directive is constrained to the window's bottom and will not work with popups or lists
+   * that don't extend to the bottom of the window. This variant adds an nxg-scroll-container attribute; if present/true
+   * it will use the scrollHeight and scrollTop properties of the directive's element to figure out when
+   * to load more data. (Note that for this to work, you must have an overflow style of "scroll" or "auto" on the element,
+   * and make sure that the first page of data that's loaded is big enough to go "below the fold" if additional
+   * pages should be reachable).
+   *
+   * This adds an optional nxg-infinite-scroll-show-indicator attribute. If present, and the expression provided
+   * evaluates to true, the directive will display a <div class="nxg-infinite-scroll-indicator"> at the bottom of the
+   * directive's element. (Because of this, you should avoid using this directive on elements that should not have
+   * <div> children, like <table> -- if you need scrolling in a table, you can put the table inside a div and put
+   * the infinite-scroll there. If you don't want the headers to scroll, move those out to a second table above
+   * and make sure their widths match their data columns).
+   *
+   * Disables some overly eager scroll handling logic that could cause 2 pages to be loaded at a time.
+   */
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgInfiniteScroll', nxgInfiniteScroll);
+
+  nxgInfiniteScroll.$inject = ['$rootScope', '$timeout', '$window', 'status'];
+
+  function nxgInfiniteScroll($rootScope, $timeout, $window, status) {
 
     var windowShouldScroll = function (window, elem, scrollDistance) {
       var elementBottom, remaining, windowBottom;
@@ -126,5 +132,6 @@ angular.module('nextgearWebApp')
         }, 0);
       }
     };
-  });
 
+  }
+})();

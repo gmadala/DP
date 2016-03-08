@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .filter('list', function () {
+  angular
+    .module('nextgearWebApp')
+    .filter('list', list);
+
+  list.$inject = [];
+
+  function list() {
+
     return function (input, separator) {
       separator = separator || ', ';
       if (angular.isArray(input)) {
@@ -9,4 +16,6 @@ angular.module('nextgearWebApp')
       }
       return input;
     };
-  });
+
+  }
+})();

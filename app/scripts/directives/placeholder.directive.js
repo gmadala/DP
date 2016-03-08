@@ -1,13 +1,20 @@
-'use strict';
+(function() {
+  'use strict';
 
-/*global Modernizr:true*/
+  /*global Modernizr:true*/
 
-angular.module('nextgearWebApp')
-  .directive('placeholder', function ($timeout) {
+  angular
+    .module('nextgearWebApp')
+    .directive('placeholder', placeholder);
+
+  placeholder.$inject = ['$timeout'];
+
+  function placeholder($timeout) {
     // check for placeholder support first
     if (Modernizr.input.placeholder === true) {
       return {};
     }
+
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
@@ -26,4 +33,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

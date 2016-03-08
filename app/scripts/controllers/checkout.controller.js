@@ -1,12 +1,49 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CheckoutCtrl',
-  function ($scope, $q, $timeout, protect, moment, $uibModal,
-            messages, User, Payments, OptionDefaultHelper,
-            api, Floorplan, PaymentOptions, BusinessHours, gettextCatalog, gettext, kissMetricInfo, decimalAdjust) {
+  angular
+    .module('nextgearWebApp')
+    .controller('CheckoutCtrl', CheckoutCtrl);
+
+  CheckoutCtrl.$inject = [
+    '$scope',
+    '$q',
+    '$uibModal',
+    'protect',
+    'moment',
+    'User',
+    'Payments',
+    'OptionDefaultHelper',
+    'api',
+    'Floorplan',
+    'PaymentOptions',
+    'BusinessHours',
+    'gettextCatalog',
+    'gettext',
+    'kissMetricInfo',
+    'decimalAdjust'
+  ];
+
+  function CheckoutCtrl(
+    $scope,
+    $q,
+    $uibModal,
+    protect,
+    moment,
+    User,
+    Payments,
+    OptionDefaultHelper,
+    api,
+    Floorplan,
+    PaymentOptions,
+    BusinessHours,
+    gettextCatalog,
+    gettext,
+    kissMetricInfo,
+    decimalAdjust) {
 
     var uibModal = $uibModal;
+
     $scope.isCollapsed = true;
     $scope.submitInProgress = false;
 
@@ -351,18 +388,20 @@ angular.module('nextgearWebApp')
       var text;
 
       switch(payment.paymentOption) {
-      case PaymentOptions.TYPE_PAYMENT:
-        text = gettext('payment');
-        break;
-      case PaymentOptions.TYPE_PAYOFF:
-        text = gettext('payoff');
-        break;
-      case PaymentOptions.TYPE_INTEREST:
-        text = gettext('interest only');
-        break;
-      default:
-        text = '_' + gettext('invalid payment type') + '_';
+        case PaymentOptions.TYPE_PAYMENT:
+          text = gettext('payment');
+          break;
+        case PaymentOptions.TYPE_PAYOFF:
+          text = gettext('payoff');
+          break;
+        case PaymentOptions.TYPE_INTEREST:
+          text = gettext('interest only');
+          break;
+        default:
+          text = '_' + gettext('invalid payment type') + '_';
       }
       return gettextCatalog.getString(text);
     };
-  });
+
+  }
+})();

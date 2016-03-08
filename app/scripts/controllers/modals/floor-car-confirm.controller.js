@@ -1,8 +1,34 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('FloorCarConfirmCtrl', function ($scope, $window, $uibModalInstance, formData, fileNames, User, gettextCatalog,
-                                               kissMetricInfo, segmentio, metric) {
+  angular
+    .module('nextgearWebApp')
+    .controller('FloorCarConfirmCtrl', FloorCarConfirmCtrl);
+
+  FloorCarConfirmCtrl.$inject = [
+    '$scope',
+    '$window',
+    '$uibModalInstance',
+    'formData',
+    'fileNames',
+    'User',
+    'gettextCatalog',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'];
+
+  function FloorCarConfirmCtrl(
+    $scope,
+    $window,
+    $uibModalInstance,
+    formData,
+    fileNames,
+    User,
+    gettextCatalog,
+    kissMetricInfo,
+    segmentio,
+    metric) {
+
     // access to all the data the user entered in the form (a copy)
     var uibModalInstance = $uibModalInstance;
     $scope.formData = formData;
@@ -26,7 +52,7 @@ angular.module('nextgearWebApp')
     }
 
     $scope.documentLink = '/documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf';
-    $scope.openDocument = function() {
+    $scope.openDocument = function () {
       $window.open($scope.documentLink);
     };
 
@@ -47,4 +73,6 @@ angular.module('nextgearWebApp')
     $scope.close = function () {
       uibModalInstance.close(false);
     };
-  });
+
+  }
+})();

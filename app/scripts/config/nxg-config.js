@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .factory('nxgConfig', nxgConfig);
 
   function nxgConfig() {

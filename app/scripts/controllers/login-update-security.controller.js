@@ -1,7 +1,31 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('LoginUpdateSecurityCtrl', function($rootScope, $scope, segmentio, metric, $location, User, ProfileSettings, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('LoginUpdateSecurityCtrl', LoginUpdateSecurityCtrl);
+
+  LoginUpdateSecurityCtrl.$inject = [
+    '$rootScope',
+    '$scope',
+    'segmentio',
+    'metric',
+    '$location',
+    'User',
+    'ProfileSettings',
+    'kissMetricInfo'
+  ];
+
+  function LoginUpdateSecurityCtrl(
+    $rootScope,
+    $scope,
+    segmentio,
+    metric,
+    $location,
+    User,
+    ProfileSettings,
+    kissMetricInfo) {
+
     var securityQuestions;
 
     User.getSecurityQuestions().then(function(questions){
@@ -19,14 +43,14 @@ angular.module('nextgearWebApp')
     $scope.filteredQuestions = function(ignore) {
       // build an array of fields based on scope.questions
       var fields = _.map($scope.questions, function(q) { return q.name; }),
-          // filter out the current 'ignore' value
-          filteredFields = _.reject(fields, function(f){ return f === ignore; }),
-          // grab the security question ids that are 'taken'
-          filters = _.map(filteredFields, function(f) { return $scope.updateSecurity[f]; }),
-          // reject all questions that have been selected
-          filteredQuestions = _.reject(securityQuestions, function(q) {
-            return filters.indexOf(q.QuestionId) !== -1;
-          });
+      // filter out the current 'ignore' value
+        filteredFields = _.reject(fields, function(f){ return f === ignore; }),
+      // grab the security question ids that are 'taken'
+        filters = _.map(filteredFields, function(f) { return $scope.updateSecurity[f]; }),
+      // reject all questions that have been selected
+        filteredQuestions = _.reject(securityQuestions, function(q) {
+          return filters.indexOf(q.QuestionId) !== -1;
+        });
       return filteredQuestions;
     };
 
@@ -78,4 +102,5 @@ angular.module('nextgearWebApp')
       $rootScope.$emit('event:userRequestedLogout');
     };
 
-  });
+  }
+})();

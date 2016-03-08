@@ -1,9 +1,11 @@
 (function () {
-
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .controller('ReceiptsCtrl', ReceiptsCtrl);
+
+  ReceiptsCtrl.$inject = ['$scope', '$stateParams', '$window', 'Receipts', 'User', 'api', 'gettextCatalog'];
 
   function ReceiptsCtrl($scope, $stateParams, $window, Receipts, User, api, gettextCatalog) {
 
@@ -249,6 +251,6 @@
       $scope.filterOptions = filters;
       $scope.receipts.resetSearch($stateParams.search);
     }
-  }
 
+  }
 })();

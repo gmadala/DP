@@ -11,6 +11,7 @@
    * Directive for rendering addresses - currently used in financial accounts in account management
    */
   function address(User) {
+
     var directive;
     directive = {
       link: link,
@@ -52,5 +53,6 @@
        * conversion between addresses inputted as a string
        * and Address ID */
     }
+
   }
 })();
