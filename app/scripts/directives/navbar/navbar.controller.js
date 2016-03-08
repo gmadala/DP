@@ -161,5 +161,7 @@
       $scope.isCollapsed = true;
     });
 
+    $scope.navState = $state;
+    
   }
 })();
