@@ -50,10 +50,10 @@ angular.module('nextgearWebApp')
     $scope.saveExternalId = function() {
       User.getInfo()
         .then(function(info) {
-          return dealerSearch.relateExternal($scope.business.id, info.BusinessId, $scope.externalId);
+          return dealerSearch.relateExternal($scope.business.number, info.BusinessId, $scope.externalId);
         })
         .then(function(response) {
-          if (response.true) {
+          if (response.key) {
             $scope.business.externalId = $scope.externalId;
           }
         });

@@ -1,20 +1,23 @@
 'use strict';
 
 angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $uibModal, dealerSearch) {
+  .controller('AuctionDealerSearchCtrl', function($scope, $uibModal, dealerSearch, User) {
 
     $scope.proposedQuery = null;
     $scope.searchExecuted = false;
 
-    $scope.data = {
-      query: null, // proposed query is copied here on search
-      results: [],
-      loading: false,
-      paginator: null,
-      sortBy: 'BusinessName',
-      sortDescending: false,
-      hitInfiniteScrollMax: false
-    };
+    User.getInfo().then(function(info) {
+      $scope.data = {
+        query: null, // proposed query is copied here on search
+        results: [],
+        loading: false,
+        paginator: null,
+        auction: info.BusinessId,
+        sortBy: 'BusinessName',
+        sortDescending: false,
+        hitInfiniteScrollMax: false
+      };
+    });
 
     $scope.search = function() {
       // search means "start from the beginning with current criteria"
@@ -48,6 +51,7 @@ angular.module('nextgearWebApp')
       $scope.data.loading = true;
       dealerSearch.search(
         $scope.data.query,
+        $scope.data.auction,
         $scope.data.sortBy,
         $scope.data.sortDescending,
         paginator
@@ -88,14 +92,14 @@ angular.module('nextgearWebApp')
             resolve: {
               options: function() {
                 return {
-                  businessId: business.BusinessId,
-                  businessNumber: business.BusinessNumber,
-                  auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
-                  businessName: business.BusinessName,
-                  address: business.Address,
-                  city: business.City,
-                  state: business.State,
-                  zipCode: business.PostalCode,
+                  businessId: business.businessId,
+                  businessNumber: business.businessNumber,
+                  auctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
+                  businessName: business.businessName,
+                  address: business.businessAddress,
+                  city: business.businessCity,
+                  state: business.businessState,
+                  zipCode: business.businessZip,
                   autoQueryCredit: true
                 };
               }

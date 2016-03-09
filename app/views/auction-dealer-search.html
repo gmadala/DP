@@ -73,12 +73,14 @@
       <tbody>
       <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
         <td class="value">
-          <span nxg-highlight="business.BusinessName" highlight="data.query"></span>
+          <span nxg-highlight="business.businessName" highlight="data.query"></span>
         </td>
-        <td>{{ business.BusinessLegalName }}</td>
+        <td>
+          <span nxg-highlight="business.businessLegalName" highlight="data.query"></span>
+        </td>
         <td>
           <div class="center">
-            <span nxg-highlight="business.BusinessNumber" highlight="data.query"></span>
+            <span nxg-highlight="business.businessNumber" highlight="data.query"></span>
           </div>
         </td>
         <td>
@@ -88,12 +90,12 @@
         </td>
         <td>
           <div class="center">
-            <span nxg-highlight="business.AuctionAccessDealershipNumbers" highlight="data.query"></span>
+            <span nxg-highlight="business.businessAuctionAccessDealershipNumber" highlight="data.query"></span>
           </div>
         </td>
-        <td>{{ business.City }}</td>
+        <td>{{ business.businessCity }}</td>
         <td>
-          <div class="center">{{ business.State }}</div>
+          <div class="center">{{ business.businessState }}</div>
         </td>
 
         <td>
