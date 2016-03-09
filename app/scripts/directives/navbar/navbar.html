@@ -35,13 +35,13 @@
             {{ user.BusinessNumber }}
           </span></div>
         <div uib-dropdown>
-          <div class="align-right dropdown-toggle"  uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="align-right dropdown-toggle dropdown-spaced"  uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
             <a>
               <span translate>My Account</span>
               <span style="border-top: 4px solid #069" class="caret"></span>
             </a>
           </div>
-          <ul class="dropdown-menu margin" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
+          <ul class="dropdown-menu margin dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
             <li>
               <a href="#/act/settings" ng-show="!user.isDealer()">
                 <strong translate>Settings</strong>
