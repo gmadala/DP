@@ -49,6 +49,7 @@ module.exports = function (karma) {
       'app/client/**/*.js',
       'app/core/**/*.js',
       'app/core/**/*.spec.js',
+      'app/client/**/*.html',
       'app/client/shared/directives/**/*.html',
       'app/client/**/*.spec.js',
       'test/util/analytics.js',
@@ -57,7 +58,7 @@ module.exports = function (karma) {
     ],
 
     preprocessors: {
-      'app/client/shared/directives/**/*.html': 'html2js',
+      'app/client/**/*.html': 'html2js',
       'app/client/**/*.js': 'coverage'
     },
 

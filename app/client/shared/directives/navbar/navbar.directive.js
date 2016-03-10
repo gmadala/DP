@@ -9,7 +9,7 @@
 
     return {
       restrict: 'A',
-      templateUrl: 'client/shared/directives/navbar/navbar.html',
+      templateUrl: 'client/shared/directives/navbar/navbar.template.html',
       controller: 'NavBarCtrl'
     };
 

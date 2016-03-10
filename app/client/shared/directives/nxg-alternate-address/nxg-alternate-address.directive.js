@@ -10,7 +10,7 @@
   function nxgAlternateAddress() {
 
     return {
-      templateUrl: 'client/shared/directives/nxg-alternate-address/nxg-alternate-address.html',
+      templateUrl: 'client/shared/directives/nxg-alternate-address/nxg-alternate-address.template.html',
       restrict: 'A',
       replace: true,
       scope: {

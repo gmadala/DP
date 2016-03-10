@@ -10,7 +10,7 @@
   function nxgActivity() {
 
     return {
-      templateUrl: 'client/shared/directives/nxg-activity/nxg-activity.html',
+      templateUrl: 'client/shared/directives/nxg-activity/nxg-activity.template.html',
       replace: true,
       restrict: 'A',
       scope: true,

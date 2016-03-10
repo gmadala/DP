@@ -474,8 +474,8 @@ module.exports = function(grunt) {
         }
       },
       debug: {
-        src: '<%= yeoman.app %>/client/shared/directives/nxg-debug-title.directive.js',
-        dest: '<%= yeoman.app %>/client/shared/directives/nxg-debug-title.processed.js'
+        src: '<%= yeoman.app %>/client/shared/directives/navbar/nxg-debug-title.directive.js',
+        dest: '<%= yeoman.app %>/client/shared/directives/navbar/nxg-debug-title.processed.js'
       }
     },
     autoprefixer: {

@@ -164,7 +164,7 @@
           return uibModal.open(dialogOptions).result;
         };
       },
-      templateUrl: 'client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.html',
+      templateUrl: 'client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.template.html',
       replace: true
     };
 

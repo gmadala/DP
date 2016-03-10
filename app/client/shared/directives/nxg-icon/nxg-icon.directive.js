@@ -12,7 +12,7 @@
     return {
       restrict: 'A',
       replace: true,
-      templateUrl: 'client/shared/directives/nxg-icon/nxg-icon.html',
+      templateUrl: 'client/shared/directives/nxg-icon/nxg-icon.template.html',
       compile: function(element, attrs) {
         /*
          * We manually throw the class and id names in here,

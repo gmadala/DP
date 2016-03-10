@@ -8,11 +8,11 @@ describe('Directive: nxgPaymentButtons', function () {
     PaymentOptions,
     httpBackend;
 
-  beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.html'));
+  beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.template.html'));
 
   beforeEach(inject(function (_Payments_, _PaymentOptions_, $httpBackend) {
     httpBackend = $httpBackend;
-    httpBackend.expectGET('client/shared/directives/nxg-icon/nxg-icon.html').respond('<div></div>');
+    httpBackend.expectGET('client/shared/directives/nxg-icon/nxg-icon.template.html').respond('<div></div>');
     httpBackend.expectGET('client/shared/modals/cancel-payment/cancel-payment.html').respond('<div></div>');
 
     Payments = _Payments_;

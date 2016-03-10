@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgAlternateAddress', function () {
-  beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-alternate-address/nxg-alternate-address.html'));
+  beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-alternate-address/nxg-alternate-address.template.html'));
 
   var element,
       scope,
@@ -13,7 +13,7 @@ describe('Directive: nxgAlternateAddress', function () {
       defaultAddrResponseMock;
 
   beforeEach(inject(function ($rootScope, $compile, Addresses, $httpBackend) {
-    $httpBackend.expectGET('client/shared/directives/nxg-icon/nxg-icon.html').respond('<div></div>');
+    $httpBackend.expectGET('client/shared/directives/nxg-icon/nxg-icon.template.html').respond('<div></div>');
     scope = $rootScope.$new();
     compile = $compile;
     rootScope = $rootScope;

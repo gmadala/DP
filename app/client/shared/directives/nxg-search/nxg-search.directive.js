@@ -10,7 +10,7 @@
   function nxgSearch() {
 
     return {
-      templateUrl: 'client/shared/directives/nxg-search/nxg-search.html',
+      templateUrl: 'client/shared/directives/nxg-search/nxg-search.template.html',
       scope: {
         title: '@',
         prompt: '@',

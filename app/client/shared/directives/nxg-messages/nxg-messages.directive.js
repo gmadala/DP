@@ -23,7 +23,7 @@
               backdrop: true,
               keyboard: true,
               backdropClick: false,
-              templateUrl: 'client/shared/directives/nxg-messages/nxg-messages-modal.html',
+              templateUrl: 'client/shared/directives/nxg-messages/nxg-messages-modal.template.html',
               controller: 'MessagesModalCtrl',
               dialogClass: 'modal',
               topmost: true,

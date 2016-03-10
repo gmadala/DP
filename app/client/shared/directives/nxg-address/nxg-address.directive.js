@@ -15,7 +15,7 @@
     var directive;
     directive = {
       link: link,
-      templateUrl: 'client/shared/directives/nxg-address/nxg-address.html',
+      templateUrl: 'client/shared/directives/nxg-address/nxg-address.template.html',
       scope: {
         city: '=',
         info: '=',
