@@ -8,7 +8,7 @@ describe('app.js', function () {
   var dealer, user, state, lastState;
 
   // instantiate service
-  var api, http, rootScope, location, cookieStore, userInitRequired, passwordChangeRequired;
+  var rootScope, location, cookieStore, userInitRequired, passwordChangeRequired;
   beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location) {
     rootScope = $rootScope;
     user = User;
@@ -23,7 +23,7 @@ describe('app.js', function () {
       return dealer;
     };
 
-    User.reloadSession = function(authToken){
+    User.reloadSession = function(){
       return {
         then: function(callback){
           callback();
@@ -31,7 +31,7 @@ describe('app.js', function () {
       };
     };
 
-    User.initSession = function(savedAuth){
+    User.initSession = function(){
       return {
         then: function(callback){
           callback();

@@ -14,8 +14,7 @@ describe('Model: Analytics', function () {
   }));
 
   describe('fetchBusinessSummary method', function () {
-    var response,
-      messages;
+    var response;
 
     beforeEach(function () {
       response = {
@@ -67,7 +66,6 @@ describe('Model: Analytics', function () {
   });
 
   describe('fetchAnalytics method', function () {
-    var response;
 
     beforeEach(function () {
       httpBackend.expectGET('/analytics/averageturntime').respond({
