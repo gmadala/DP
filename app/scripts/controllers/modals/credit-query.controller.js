@@ -29,6 +29,7 @@
 
     var uibModalInstance = $uibModalInstance;
 
+    $scope.dirty = false;
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
@@ -80,6 +81,7 @@
         .then(function(response) {
           if (response.key) {
             $scope.business.externalId = $scope.externalId;
+            $scope.dirty = true;
           }
         });
     };
@@ -87,7 +89,7 @@
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
     $scope.close = function() {
-      uibModalInstance.close();
+      uibModalInstance.close($scope.dirty);
     };
 
     if (options.autoQueryCredit) {
