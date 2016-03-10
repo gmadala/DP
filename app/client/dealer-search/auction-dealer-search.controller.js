@@ -117,7 +117,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/modals/dealer-name-search/dealer-name-search.html',
+            templateUrl: 'client/shared/modals/dealer-name-search/dealer-name-search.html',
             controller: 'DealerNameSearchCtrl',
             dialogClass: 'modal modal-large',
             resolve: {
@@ -170,7 +170,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/modals/credit-query/credit-query.html',
+            templateUrl: 'client/shared/modals/credit-query/credit-query.html',
             controller: 'CreditQueryCtrl',
             dialogClass: 'modal modal-medium',
             resolve: {

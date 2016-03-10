@@ -56,7 +56,7 @@
           backdrop: true,
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'client/modals/confirm-title-release/confirm-title-request.html',
+          templateUrl: 'client/shared/modals/confirm-title-release/confirm-title-request.html',
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
 

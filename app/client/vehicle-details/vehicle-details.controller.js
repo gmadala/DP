@@ -89,7 +89,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'client/modals/floor-car-message/floor-car-message.html',
+        templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.html',
         controller: 'FloorCarMessageCtrl',
         resolve:{
           canAttachDocuments: function() {
@@ -263,7 +263,7 @@
             backdrop: true,
             keyboard: false,
             backdropClick: false,
-            templateUrl: 'client/modals/payment-options-breakdown/payment-options-breakdown.html',
+            templateUrl: 'client/shared/modals/payment-options-breakdown/payment-options-breakdown.html',
             controller: 'PaymentOptionsBreakdownCtrl',
             resolve: {
               object: function() {
@@ -596,7 +596,7 @@
             keyboard: true,
             backdropClick: true,
             controller: 'ExtensionRequestCtrl',
-            templateUrl: 'client/modals/extension-request/payment-extension.html',
+            templateUrl: 'client/shared/modals/extension-request/payment-extension.html',
             dialogClass: 'modal modal-medium',
             resolve: {
               payment: function() {

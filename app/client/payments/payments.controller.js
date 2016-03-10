@@ -154,7 +154,7 @@
         keyboard: true,
         backdropClick: true,
         controller: 'ExtensionRequestCtrl',
-        templateUrl: 'client/modals/extension-request/payment-extension.html',
+        templateUrl: 'client/shared/modals/extension-request/payment-extension.html',
         dialogClass: 'modal modal-medium',
         resolve: {
           payment: function() {

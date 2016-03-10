@@ -219,7 +219,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'client/modals/floor-car-confirm/floor-car-confirm.html',
+        templateUrl: 'client/shared/modals/floor-car-confirm/floor-car-confirm.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
           formData: function () {
@@ -247,7 +247,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'client/modals/floor-car-message/floor-car-message.html',
+        templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.html',
         controller: 'FloorCarMessageCtrl',
         resolve: {
           canAttachDocuments: function() {
@@ -353,7 +353,7 @@
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: 'client/modals/message-box/message-box.html',
+        templateUrl: 'client/shared/modals/message-box/message-box.html',
         controller: 'MessageBoxCtrl',
         dialogClass: 'modal modal-medium',
         resolve: {

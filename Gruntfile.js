@@ -141,8 +141,8 @@ module.exports = function(grunt) {
         '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
         '!app/client/services/base64.service.js',
-        '!app/client/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/directives/tooltip.directive.js',
+        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/shared/directives/tooltip.directive.js',
         'e2e/**/*.js',
         'api_tests/**/*.js'
       ]
@@ -157,8 +157,8 @@ module.exports = function(grunt) {
         '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
         '!app/client/services/base64.service.js',
-        '!app/client/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/directives/tooltip.directive.js',
+        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/shared/directives/tooltip.directive.js',
         // TODO JSCS could be used for all test files depending on what rules we decide on
         'e2e/**/*.js',
         'api_tests/**/*.js'
@@ -301,9 +301,9 @@ module.exports = function(grunt) {
           src: [
             '*.html',
             'client/**/*.html',
-            'client/directives/**/*.html',
+            'client/shared/directives/**/*.html',
             // Getting an error when uglifying this file. Should be looked into!
-            '!client/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
+            '!client/shared/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
           ],
           dest: '<%= yeoman.dist %>'
         }]
@@ -474,8 +474,8 @@ module.exports = function(grunt) {
         }
       },
       debug: {
-        src: '<%= yeoman.app %>/client/directives/nxg-debug-title.directive.js',
-        dest: '<%= yeoman.app %>/client/directives/nxg-debug-title.processed.js'
+        src: '<%= yeoman.app %>/client/shared/directives/nxg-debug-title.directive.js',
+        dest: '<%= yeoman.app %>/client/shared/directives/nxg-debug-title.processed.js'
       }
     },
     autoprefixer: {

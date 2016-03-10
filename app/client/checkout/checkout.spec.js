@@ -301,7 +301,7 @@ describe('Controller: CheckoutCtrl', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/schedule-checkout/schedule-checkout.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/schedule-checkout/schedule-checkout.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
     });
@@ -316,7 +316,7 @@ describe('Controller: CheckoutCtrl', function () {
       var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
       scope.paymentQueue.schedule(fee);
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/schedule-checkout/schedule-checkout.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/schedule-checkout/schedule-checkout.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
     });
@@ -681,7 +681,7 @@ describe('Controller: CheckoutCtrl', function () {
       scope.reallySubmit(guard);
       scope.$apply();
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/confirm-checkout/confirm-checkout.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/confirm-checkout/confirm-checkout.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ConfirmCheckoutCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.queue()).toBe(scope.paymentQueue.contents);
       expect(dialog.open.calls.mostRecent().args[0].resolve.transactionInfo()).toBe(txInfo);
