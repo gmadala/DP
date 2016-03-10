@@ -1,19 +1,44 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CreditQueryCtrl', function($scope, $uibModalInstance, CreditQuery, dealerSearch,
-                                          options, kissMetricInfo, segmentio, User, metric) {
+  angular.module('nextgearWebApp')
+    .controller('CreditQueryCtrl', CreditQueryCtrl);
+
+  CreditQueryCtrl.$inject = [
+    '$scope',
+    '$uibModalInstance',
+    'CreditQuery',
+    'dealerSearch',
+    'options',
+    'kissMetricInfo',
+    'segmentio',
+    'User',
+    'metric'
+  ];
+
+  function CreditQueryCtrl(
+    $scope,
+    $uibModalInstance,
+    CreditQuery,
+    dealerSearch,
+    options,
+    kissMetricInfo,
+    segmentio,
+    User,
+    metric) {
+
     var uibModalInstance = $uibModalInstance;
+
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
-      auctionAccessNumbers: options.auctionAccessNumbers,
-      externalId: options.externalId,
+      auctionAccessNumbers: options.businessAuctionAccessNumbers,
+      externalId: options.externalBusinessId,
       name: options.businessName,
-      address: options.address,
-      city: options.city,
-      state: options.state,
-      zipCode: options.zipCode,
+      address: options.businessAddress,
+      city: options.businessCity,
+      state: options.businessState,
+      zipCode: options.businessZip,
       creditQuery: {
         requested: false,
         retrieved: false,
@@ -26,7 +51,7 @@ angular.module('nextgearWebApp')
           CreditQuery.get(options.businessId).then(
             function(data) {
               kissMetricInfo.getKissMetricInfo().then(
-                function(result){
+                function(result) {
                   segmentio.track(metric.AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE, result);
                   $scope.kissMetricData = result;
                 }
@@ -68,4 +93,6 @@ angular.module('nextgearWebApp')
     if (options.autoQueryCredit) {
       $scope.business.creditQuery.get();
     }
-  });
+  }
+
+})();

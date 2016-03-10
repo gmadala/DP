@@ -94,12 +94,13 @@ angular.module('nextgearWebApp')
                 return {
                   businessId: business.businessId,
                   businessNumber: business.businessNumber,
-                  auctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
+                  businessAuctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
                   businessName: business.businessName,
-                  address: business.businessAddress,
-                  city: business.businessCity,
-                  state: business.businessState,
-                  zipCode: business.businessZip,
+                  businessAddress: business.businessAddress,
+                  businessCity: business.businessCity,
+                  businessState: business.businessState,
+                  businessZip: business.businessZip,
+                  externalBusinessId: business.externalBusinessId,
                   autoQueryCredit: true
                 };
               }
