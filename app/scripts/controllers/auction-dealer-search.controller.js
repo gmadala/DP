@@ -106,7 +106,9 @@ angular.module('nextgearWebApp')
               }
             }
           };
-          $uibModal.open(dialogOptions);
+          $uibModal.open(dialogOptions).result.then(function() {
+            $scope.search();
+          });
         }
       }
   });
