@@ -485,7 +485,7 @@ describe('Controller: CheckoutCtrl', function () {
       run();
 
       scope.unappliedFunds.useFunds = true;
-      queue.payments['id'].scheduleDate = new Date();
+      queue.payments.id.scheduleDate = new Date();
       scope.$apply();
       expect(scope.unappliedFunds.useFunds).toBe(false);
     });

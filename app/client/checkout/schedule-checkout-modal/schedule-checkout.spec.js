@@ -72,7 +72,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
   }));
 
   it('should attach A COPY OF the payment being scheduled to the scope', function () {
-    run('payment')
+    run('payment');
     expect(scope.model.payment).toBeDefined();
     expect(scope.model.payment).not.toBe(CartItem.fromPayment(payment, PaymentOptions.TYPE_PAYMENT));
     expect(scope.model.fee).toBeFalsy();
@@ -141,7 +141,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     afterEach(function () {
       clock.restore();
-    })
+    });
 
     it('should do nothing if the item we are scheduling is a fee', function() {
       run('fee');

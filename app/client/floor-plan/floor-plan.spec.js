@@ -88,7 +88,7 @@ describe('Controller: FloorplanCtrl', function () {
             IsMailingAddress: false,
             IsPostOfficeBox: false
           }
-        ]
+        ];
       }
     };
 
@@ -191,7 +191,7 @@ describe('Controller: FloorplanCtrl', function () {
 
   describe('(in auction seller floorplan mode)', function () {
 
-    var floorplan, floorplanUtil;
+    var floorplan;
 
     beforeEach(inject(function (User, Floorplan) {
       spyOn(User, 'isDealer').and.returnValue(false);
