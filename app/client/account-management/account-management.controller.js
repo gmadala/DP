@@ -211,7 +211,7 @@
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'client/shared/modals/confirm-disable-enhanced.template.html',
+              templateUrl: 'client/shared/modals/confirm/confirm-disable-enhanced.template.html',
               controller: 'ConfirmCtrl'
             };
             uibModal.open(dialogOptions).result.then(function (result) {
@@ -267,7 +267,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'client/shared/modals/confirm-enable-autopay.template.html',
+                templateUrl: 'client/shared/modals/confirm/confirm-enable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
@@ -279,7 +279,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'client/shared/modals/confirm-disable-autopay.template.html',
+                templateUrl: 'client/shared/modals/confirm/confirm-disable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {

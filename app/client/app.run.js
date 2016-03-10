@@ -162,7 +162,7 @@
         uibModal.open({
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'client/shared/modals/confirm-logout/confirm-logout.template.html',
+          templateUrl: 'client/shared/modals/confirm/confirm-logout/confirm-logout.template.html',
           controller: 'ConfirmLogoutCtrl'
         }).result.then(function (confirmed) {
             // dialog controller did User.logout() so it could block until that finished

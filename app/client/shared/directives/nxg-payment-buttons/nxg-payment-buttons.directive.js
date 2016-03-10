@@ -100,7 +100,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/shared/modals/cancel-payment/cancel-payment.template.html',
+            templateUrl: 'client/shared/directives/nxg-payment-buttons/cancel-payment/cancel-payment.template.html',
             controller: 'CancelPaymentCtrl',
             resolve: {
               options: function() {

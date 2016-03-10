@@ -117,7 +117,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/shared/modals/dealer-name-search/dealer-name-search.template.html',
+            templateUrl: 'client/dealer-search/dealer-name-search/dealer-name-search.template.html',
             controller: 'DealerNameSearchCtrl',
             dialogClass: 'modal modal-large',
             resolve: {

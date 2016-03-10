@@ -13,7 +13,7 @@ describe('Directive: nxgPaymentButtons', function () {
   beforeEach(inject(function (_Payments_, _PaymentOptions_, $httpBackend) {
     httpBackend = $httpBackend;
     httpBackend.expectGET('client/shared/directives/nxg-icon/nxg-icon.template.html').respond('<div></div>');
-    httpBackend.expectGET('client/shared/modals/cancel-payment/cancel-payment.template.html').respond('<div></div>');
+    httpBackend.expectGET('client/shared/directives/nxg-payment-buttons/cancel-payment/cancel-payment.template.html').respond('<div></div>');
 
     Payments = _Payments_;
     PaymentOptions = _PaymentOptions_;
@@ -286,7 +286,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       iScope.cancelScheduledPayment();
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/cancel-payment/cancel-payment.template.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/directives/nxg-payment-buttons/cancel-payment/cancel-payment.template.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay1');
       expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');
@@ -453,7 +453,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
       iScope.cancelScheduledPayment();
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/cancel-payment/cancel-payment.template.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/directives/nxg-payment-buttons/cancel-payment/cancel-payment.template.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.webScheduledPaymentId).toBe('webPay2');
       expect(dialog.open.calls.mostRecent().args[0].resolve.options().payment.vin).toBe('vin');

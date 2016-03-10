@@ -148,7 +148,7 @@
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'client/shared/modals/schedule-checkout/schedule-checkout.template.html',
+          templateUrl: 'client/checkout/schedule-checkout/schedule-checkout.template.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
             payment: function () { return !item.isFee && item; },
@@ -266,7 +266,7 @@
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'client/shared/modals/confirm-checkout/confirm-checkout.template.html',
+              templateUrl: 'client/checkout/confirm-checkout-modal/confirm-checkout.template.html',
               controller: 'ConfirmCheckoutCtrl',
               dialogClass: 'modal modal-medium',
               resolve: {
