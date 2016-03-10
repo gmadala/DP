@@ -5,7 +5,7 @@ angular.module('nextgearWebApp')
     $stateProvider
       .state('translations', {
         url: '/translations',
-        templateUrl: 'client/dev/translations.html',
+        templateUrl: 'client/dev/translations.template.html',
         controller: 'TranslationTestCtrl',
         allowAnonymous: true
       });

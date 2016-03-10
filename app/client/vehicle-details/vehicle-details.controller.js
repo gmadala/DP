@@ -89,7 +89,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.html',
+        templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',
         controller: 'FloorCarMessageCtrl',
         resolve:{
           canAttachDocuments: function() {
@@ -263,7 +263,7 @@
             backdrop: true,
             keyboard: false,
             backdropClick: false,
-            templateUrl: 'client/shared/modals/payment-options-breakdown/payment-options-breakdown.html',
+            templateUrl: 'client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html',
             controller: 'PaymentOptionsBreakdownCtrl',
             resolve: {
               object: function() {
@@ -534,13 +534,13 @@
           var promise, template, ctrl;
           if (activity.IsPayment) {
             promise = VehicleDetails.getPaymentDetails($stateParams.stockNumber, activity.ActivityId);
-            template = 'payment-details/payment-details.html';
+            template = 'payment-details/payment-details.template.html';
             ctrl = 'PaymentDetailsCtrl';
           }
 
           if (activity.IsFee) {
             promise = VehicleDetails.getFeeDetails($stateParams.stockNumber, activity.ActivityId);
-            template = 'fee-details/fee-details.html';
+            template = 'fee-details/fee-details.template.html';
             ctrl = 'FeeDetailsCtrl';
           }
 
@@ -596,7 +596,7 @@
             keyboard: true,
             backdropClick: true,
             controller: 'ExtensionRequestCtrl',
-            templateUrl: 'client/shared/modals/extension-request/payment-extension.html',
+            templateUrl: 'client/shared/modals/extension-request/payment-extension.template.html',
             dialogClass: 'modal modal-medium',
             resolve: {
               payment: function() {

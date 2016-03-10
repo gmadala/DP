@@ -100,7 +100,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/shared/modals/cancel-payment/cancel-payment.html',
+            templateUrl: 'client/shared/modals/cancel-payment/cancel-payment.template.html',
             controller: 'CancelPaymentCtrl',
             resolve: {
               options: function() {
@@ -138,7 +138,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/shared/modals/cancel-fee/cancel-fee.html',
+            templateUrl: 'client/shared/modals/cancel-fee/cancel-fee.template.html',
             controller: 'CancelFeeCtrl',
             resolve: {
               options: function() {

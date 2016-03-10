@@ -10,7 +10,7 @@
   function nxgPaymentSummary() {
 
     return {
-      templateUrl: 'client/payments/nxg-payment-summary/nxg-payment-summary.html',
+      templateUrl: 'client/payments/nxg-payment-summary/nxg-payment-summary.template.html',
       restrict: 'A',
       scope: {
         emptyMessage: '@'

@@ -211,7 +211,7 @@
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'client/shared/modals/confirm-disable-enhanced.html',
+              templateUrl: 'client/shared/modals/confirm-disable-enhanced.template.html',
               controller: 'ConfirmCtrl'
             };
             uibModal.open(dialogOptions).result.then(function (result) {
@@ -267,7 +267,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'client/shared/modals/confirm-enable-autopay.html',
+                templateUrl: 'client/shared/modals/confirm-enable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
@@ -279,7 +279,7 @@
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl: 'client/shared/modals/confirm-disable-autopay.html',
+                templateUrl: 'client/shared/modals/confirm-disable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
@@ -405,7 +405,7 @@
               backdrop: true,
               keyboard: false,
               backdropClick: false,
-              templateUrl: 'client/shared/modals/financial-account/financial-account.html',
+              templateUrl: 'client/shared/modals/financial-account/financial-account.template.html',
               resolve: {
                 options: function () {
                   return {
@@ -508,7 +508,7 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.html',
+        templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.template.html',
         controller: 'RequestCreditIncreaseCtrl'
       };
 

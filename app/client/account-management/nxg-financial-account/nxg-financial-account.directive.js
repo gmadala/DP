@@ -31,7 +31,7 @@
     var directive;
     directive = {
       link: link,
-      templateUrl: 'client/account-management/nxg-financial-account/nxg-financial-account.html',
+      templateUrl: 'client/account-management/nxg-financial-account/nxg-financial-account.template.html',
       scope: {
         account: '=',
         defaultDepositId: '=',

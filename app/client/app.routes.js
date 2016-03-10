@@ -19,7 +19,7 @@
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'client/login/login.html',
+        templateUrl: 'client/login/login.template.html',
         controller: 'LoginCtrl',
         data: {
           pageId: 'Login',
@@ -38,7 +38,7 @@
       })
       .state('loginRecover', {
         url: '/login/recover',
-        templateUrl: 'client/login/login-recover/login-recover.html',
+        templateUrl: 'client/login/login-recover/login-recover.template.html',
         controller: 'LoginRecoverCtrl',
         data: {
           pageId: 'LoginRecover',
@@ -49,7 +49,7 @@
       })
       .state('loginUpdateSecurity', {
         url: '/login/updateSecurity',
-        templateUrl: 'client/login/login-update-security/login-update-security.html',
+        templateUrl: 'client/login/login-update-security/login-update-security.template.html',
         controller: 'LoginUpdateSecurityCtrl',
         data: {
           pageId: 'LoginUpdateSecurity',
@@ -58,7 +58,7 @@
       })
       .state('loginCreatePassword', {
         url: '/login/createPassword',
-        templateUrl: 'client/login/login-create-password/login-create-password.html',
+        templateUrl: 'client/login/login-create-password/login-create-password.template.html',
         controller: 'LoginCreatePasswordCtrl',
         data: {
           pageId: 'LoginCreatePassword',
@@ -67,7 +67,7 @@
       })
       .state('dashboard', {
         url: '/home',
-        templateUrl: 'client/dashboard/dealer/dashboard.html',
+        templateUrl: 'client/dashboard/dealer/dashboard.template.html',
         controller: 'DashboardCtrl',
         data: {
           pageId: 'Dashboard',
@@ -76,7 +76,7 @@
       })
       .state('payments', {
         url: '/payments?filter',
-        templateUrl: 'client/payments/payments.html',
+        templateUrl: 'client/payments/payments.template.html',
         controller: 'PaymentsCtrl',
         data: {
           pageId: 'Payments',
@@ -85,7 +85,7 @@
       })
       .state('checkout', {
         url: '/checkout',
-        templateUrl: 'client/checkout/checkout.html',
+        templateUrl: 'client/checkout/checkout.template.html',
         controller: 'CheckoutCtrl',
         data: {
           pageId: 'Checkout',
@@ -94,7 +94,7 @@
       })
       .state('receipts', {
         url: '/receipts',
-        templateUrl: 'client/receipts/receipts.html',
+        templateUrl: 'client/receipts/receipts.template.html',
         controller: 'ReceiptsCtrl',
         data: {
           pageId: 'Receipts',
@@ -103,7 +103,7 @@
       })
       .state('floorplan', {
         url: '/floorplan?filter',
-        templateUrl: 'client/floor-plan/floor-plan.html',
+        templateUrl: 'client/floor-plan/floor-plan.template.html',
         controller: 'FloorplanCtrl',
         data: {
           pageId: 'Floorplan',
@@ -139,7 +139,7 @@
       })
       .state('floorcar', {
         url: '/floorcar',
-        templateUrl: 'client/floor-vehicle/floor-car.html',
+        templateUrl: 'client/floor-vehicle/floor-car.template.html',
         controller: 'FloorCarCtrl',
         data: {
           pageId: 'FloorCar',
@@ -148,7 +148,7 @@
       })
       .state('reports', {
         url: '/reports',
-        templateUrl: 'client/reports/dealer/reports.html',
+        templateUrl: 'client/reports/dealer/reports.template.html',
         controller: 'ReportsCtrl',
         data: {
           pageId: 'Reports',
@@ -157,7 +157,7 @@
       })
       .state('analytics', {
         url: '/analytics',
-        templateUrl: 'client/analytics/analytics.html',
+        templateUrl: 'client/analytics/analytics.template.html',
         controller: 'AnalyticsCtrl',
         data: {
           pageId: 'Analytics',
@@ -166,7 +166,7 @@
       })
       .state('documents', {
         url: '/documents',
-        templateUrl: 'client/resources/dealer/resources.html',
+        templateUrl: 'client/resources/dealer/resources.template.html',
         controller: 'DocumentsCtrl',
         data: {
           pageId: 'Documents',
@@ -175,7 +175,7 @@
       })
       .state('profile_settings', {
         url: '/profile_settings',
-        templateUrl: 'client/profile-settings/dealer/profile-settings.html',
+        templateUrl: 'client/profile-settings/dealer/profile-settings.template.html',
         controller: 'ProfileSettingsCtrl',
         data: {
           pageId: 'ProfileSettings',
@@ -184,7 +184,7 @@
       })
       .state('account_management', {
         url: '/account_management',
-        templateUrl: 'client/account-management/account-management.html',
+        templateUrl: 'client/account-management/account-management.template.html',
         controller: 'AccountManagementCtrl',
         data: {
           pageId: 'AccountManagement',
@@ -193,7 +193,7 @@
       })
       .state('promos', {
         url: '/promos',
-        templateUrl: 'client/promos/promos.html',
+        templateUrl: 'client/promos/promos.template.html',
         controller: 'PromosCtrl',
         data:{
           pageId: 'Promos',
@@ -212,7 +212,7 @@
       // AUCTION STATES
       .state('auction_dashboard', {
         url: '/act/home',
-        templateUrl: 'client/dashboard/auction/auction-dashboard.html',
+        templateUrl: 'client/dashboard/auction/auction-dashboard.template.html',
         controller: 'AuctionDashboardCtrl',
         data: {
           pageId: 'AuctionDashboard',
@@ -222,7 +222,7 @@
       })
       .state('auction_dealersearch', {
         url: '/act/dealersearch',
-        templateUrl: 'client/dealer-search/auction-dealer-search.html',
+        templateUrl: 'client/dealer-search/auction-dealer-search.template.html',
         controller: 'AuctionDealerSearchCtrl',
         data: {
           pageId: 'AuctionDealerSearch',
@@ -232,7 +232,7 @@
       })
       .state('auction_bulkflooring', {
         url: '/act/bulkflooring',
-        templateUrl: 'client/floor-vehicle/auction-bulk-flooring.html',
+        templateUrl: 'client/floor-vehicle/auction-bulk-flooring.template.html',
         controller: 'FloorCarCtrl',
         data: {
           pageId: 'AuctionFloorCar',
@@ -242,7 +242,7 @@
       })
       .state('auction_sellerfloorplan', {
         url: '/act/sellerfloorplan',
-        templateUrl: 'client/floor-plan/auction-seller-floor-plan.html',
+        templateUrl: 'client/floor-plan/auction-seller-floor-plan.template.html',
         controller: 'FloorplanCtrl',
         data: {
           pageId: 'AuctionFloorplan',
@@ -252,7 +252,7 @@
       })
       .state('auction_reports', {
         url: '/act/reports',
-        templateUrl: 'client/reports/auction/auction-reports.html',
+        templateUrl: 'client/reports/auction/auction-reports.template.html',
         controller: 'AuctionReportsCtrl',
         data: {
           pageId: 'AuctionReports',
@@ -262,7 +262,7 @@
       })
       .state('auction_documents', {
         url: '/act/documents',
-        templateUrl: 'client/resources/auction/auction-resources.html',
+        templateUrl: 'client/resources/auction/auction-resources.template.html',
         controller: 'AuctionDocumentsCtrl',
         data: {
           pageId: 'AuctionDocuments',
@@ -272,7 +272,7 @@
       })
       .state('auction_settings', {
         url: '/act/settings',
-        templateUrl: 'client/profile-settings/auction/auction-settings.html',
+        templateUrl: 'client/profile-settings/auction/auction-settings.template.html',
         controller: 'AuctionSettingsCtrl',
         data: {
           pageId: 'AuctionSettings',

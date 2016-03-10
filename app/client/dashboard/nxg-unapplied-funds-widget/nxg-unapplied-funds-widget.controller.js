@@ -24,7 +24,7 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.html',
+        templateUrl: 'client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html',
         controller: 'PayoutModalCtrl',
         resolve: {
           funds: function () {
@@ -56,7 +56,7 @@
               backdrop: true,
               keyboard: true,
               backdropClick: true,
-              templateUrl: 'client/shared/modals/message-box/message-box.html',
+              templateUrl: 'client/shared/modals/message-box/message-box.template.html',
               controller: 'MessageBoxCtrl',
               dialogClass: 'modal modal-medium',
               resolve: {

@@ -27,7 +27,7 @@
 
     return {
       restrict: 'A',
-      templateUrl: 'client/floor-vehicle/nxg-business-field/nxg-business-field.html',
+      templateUrl: 'client/floor-vehicle/nxg-business-field/nxg-business-field.template.html',
       replace: true,
       scope: {
         inputId: '@id',

@@ -11,7 +11,7 @@
 
     return {
       restrict: 'A',
-      templateUrl: 'client/floor-vehicle/nxg-vin-details/nxg-vin-details.html',
+      templateUrl: 'client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html',
       scope: {
         data: '=floorModel',
         validity: '=',

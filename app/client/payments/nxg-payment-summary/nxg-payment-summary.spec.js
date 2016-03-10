@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgPaymentSummary', function () {
-  beforeEach(module('nextgearWebApp', 'client/payments/nxg-payment-summary/nxg-payment-summary.html'));
+  beforeEach(module('nextgearWebApp', 'client/payments/nxg-payment-summary/nxg-payment-summary.template.html'));
 
   var element;
 

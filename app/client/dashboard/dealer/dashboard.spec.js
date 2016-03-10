@@ -384,7 +384,7 @@ describe('Controller: DashboardCtrl', function () {
 
         scope.onRequestCredIncr();
         expect($uibModal.open).toHaveBeenCalled();
-        expect($uibModal.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/request-credit-increase/request-credit-increase.html');
+        expect($uibModal.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/request-credit-increase/request-credit-increase.template.html');
         expect($uibModal.open.calls.mostRecent().args[0].controller).toBe('RequestCreditIncreaseCtrl');
       }));
     });

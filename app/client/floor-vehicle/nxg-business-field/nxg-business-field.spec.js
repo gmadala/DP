@@ -40,7 +40,7 @@ describe('Directive: nxgBusinessField', function () {
     });
   });
 
-  beforeEach(module('client/floor-vehicle/nxg-business-field/nxg-business-field.html'));
+  beforeEach(module('client/floor-vehicle/nxg-business-field/nxg-business-field.template.html'));
 
   var element,
     scope;

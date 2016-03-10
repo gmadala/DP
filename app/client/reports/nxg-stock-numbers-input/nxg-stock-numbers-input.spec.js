@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgStockNumbersInput', function () {
-  beforeEach(module('nextgearWebApp', 'client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.html'));
+  beforeEach(module('nextgearWebApp', 'client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html'));
 
   var element,
     scope,

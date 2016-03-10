@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: nxgUnappliedFundsWidget', function () {
-  beforeEach(module('nextgearWebApp', 'client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.html'));
+  beforeEach(module('nextgearWebApp', 'client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.template.html'));
 
   var element,
     isolateScope;

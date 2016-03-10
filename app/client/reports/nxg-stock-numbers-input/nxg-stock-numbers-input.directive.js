@@ -10,7 +10,7 @@
   function nxgStockNumbersInput() {
 
     return {
-      templateUrl: 'client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.html',
+      templateUrl: 'client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html',
       replace: true,
       scope: {
         data: '=data',

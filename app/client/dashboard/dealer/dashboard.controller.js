@@ -133,7 +133,7 @@
         backdrop: true,
         keyboard: false,
         backdropClick: false,
-        templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.html',
+        templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.template.html',
         controller: 'RequestCreditIncreaseCtrl'
       };
 

@@ -10,7 +10,7 @@
   function nxgUnappliedFundsWidget() {
 
     return {
-      templateUrl: 'client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.html',
+      templateUrl: 'client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.template.html',
       restrict: 'AC',
       replace: true,
       scope: {

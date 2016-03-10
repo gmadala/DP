@@ -69,7 +69,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     };
 
     httpBackend.whenGET('/info/v1_1/businesshours').respond($q.when({}));
-    httpBackend.whenGET('views/modals/message-box.html').respond($q.when({}));
+    httpBackend.whenGET('views/modals/message-box.template.html').respond($q.when({}));
 
     RequestCreditIncreaseCtrl = $controller('RequestCreditIncreaseCtrl', {
       $scope: scope,
