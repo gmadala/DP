@@ -1,13 +1,12 @@
 'use strict';
 
-describe('Controller: CreditQueryCtrl', function () {
+describe('Controller: CreditQueryCtrl', function() {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
   var CreditQueryCtrl,
     scope,
-    creditQuery,
     mockQuery,
     opts,
     dialog,
@@ -21,14 +20,12 @@ describe('Controller: CreditQueryCtrl', function () {
     mockRes;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $q, CreditQuery, $httpBackend, _metric_) {
+  beforeEach(inject(function($controller, $rootScope, $q, CreditQuery, $httpBackend, _metric_) {
     shouldSucceed = true;
-    mockRes = [
-      {
-        CreditType: 'foo',
-        CreditAvailable: 'bar'
-      }
-    ];
+    mockRes = [{
+      CreditType: 'foo',
+      CreditAvailable: 'bar'
+    }];
 
     mockQuery = {
       get: function() {
@@ -40,19 +37,19 @@ describe('Controller: CreditQueryCtrl', function () {
               failure(errMock);
             }
           }
-        }
+        };
       }
     };
 
     opts = {
       businessId: 123,
       businessNumber: 456,
-      auctionAccessNumbers: 12345,
+      businessAuctionAccessNumbers: 12345,
       businessName: 'foo',
-      address: 'blah',
-      city: 'anytown',
-      state: 'anystate',
-      zipCode: 53675,
+      businessAddress: 'blah',
+      businessCity: 'anytown',
+      businessState: 'anystate',
+      businessZip: 53675,
       autoQueryCredit: false
     };
 
@@ -66,10 +63,10 @@ describe('Controller: CreditQueryCtrl', function () {
         Success: true,
         Message: null,
         Data: []
-    });
+      });
 
     mockKissMetricInfo = {
-      getKissMetricInfo : function() {
+      getKissMetricInfo: function() {
         return $q.when({
           height: 1080,
           isBusinessHours: true,
@@ -98,12 +95,12 @@ describe('Controller: CreditQueryCtrl', function () {
       expect(typeof scope.business).toBe('object');
       expect(scope.business.id).toBe(opts.businessId);
       expect(scope.business.number).toBe(opts.businessNumber);
-      expect(scope.business.auctionAccessNumbers).toBe(opts.auctionAccessNumbers);
+      expect(scope.business.auctionAccessNumbers).toBe(opts.businessAuctionAccessNumbers);
       expect(scope.business.name).toBe(opts.businessName);
-      expect(scope.business.address).toBe(opts.address);
-      expect(scope.business.city).toBe(opts.city);
-      expect(scope.business.state).toBe(opts.state);
-      expect(scope.business.zipCode).toBe(opts.zipCode);
+      expect(scope.business.address).toBe(opts.businessAddress);
+      expect(scope.business.city).toBe(opts.businessCity);
+      expect(scope.business.state).toBe(opts.businessState);
+      expect(scope.business.zipCode).toBe(opts.businessZip);
     });
 
     it('should create a credit query object', function() {
@@ -112,7 +109,7 @@ describe('Controller: CreditQueryCtrl', function () {
       expect(scope.business.creditQuery.retrieved).toBeDefined(false);
       expect(scope.business.creditQuery.loading).toBe(false);
       expect(scope.business.creditQuery.error).toBe(null);
-    })
+    });
 
     describe('get function', function() {
       it('should call the credit query model function', function() {
@@ -130,7 +127,7 @@ describe('Controller: CreditQueryCtrl', function () {
         expect(scope.business.creditQuery.results).toBe(mockRes);
       });
 
-      it('should update the status variables and not populate results array if it fails', function(){
+      it('should update the status variables and not populate results array if it fails', function() {
         shouldSucceed = false;
         spyOn(errMock, 'dismiss');
         scope.business.creditQuery.get(opts.businessId);
@@ -155,14 +152,14 @@ describe('Controller: CreditQueryCtrl', function () {
     });
   });
 
-      it('should have a function to close the dialog', function() {
-        spyOn(dialog, 'close');
-        scope.close();
-        expect(dialog.close).toHaveBeenCalled();
-      });
+  it('should have a function to close the dialog', function() {
+    spyOn(dialog, 'close');
+    scope.close();
+    expect(dialog.close).toHaveBeenCalled();
+  });
 
   describe('autoQueryCredit conditional', function() {
-    beforeEach(inject(function ($httpBackend) {
+    beforeEach(inject(function($httpBackend) {
       spyOn(mockQuery, 'get').and.callThrough();
     }));
 
