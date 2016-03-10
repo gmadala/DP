@@ -166,7 +166,7 @@
       })
       .state('documents', {
         url: '/documents',
-        templateUrl: 'client/resources/dealer/documents.html',
+        templateUrl: 'client/resources/dealer/resources.html',
         controller: 'DocumentsCtrl',
         data: {
           pageId: 'Documents',
@@ -262,7 +262,7 @@
       })
       .state('auction_documents', {
         url: '/act/documents',
-        templateUrl: 'client/resources/auction/auction-documents.html',
+        templateUrl: 'client/resources/auction/auction-resources.html',
         controller: 'AuctionDocumentsCtrl',
         data: {
           pageId: 'AuctionDocuments',
