@@ -5,11 +5,11 @@ describe('Model: AccountManagement', function() {
   beforeEach(module('nextgearWebApp'));
 
   var httpBackend,
-      $q,
-      AccountManagement,
-      emailStub,
-      User,
-      success;
+    $q,
+    AccountManagement,
+    emailStub,
+    User,
+    success;
 
   beforeEach(inject(function ($httpBackend, _$q_, _AccountManagement_, _User_) {
     httpBackend = $httpBackend;
@@ -34,19 +34,19 @@ describe('Model: AccountManagement', function() {
     };
 
     var bankAccountData = {
-      "Success": true,
-      "Message": null,
-      "Data": {
-        "AccountId": "9e05f8c9-2e3b-4f80-a346-00004bceacb1",
-        "AccountName": "JP Morgan Chase Bank - 7905",
-        "BankName": "JP Morgan Chase Bank",
-        "IsActive": true,
-        "RoutingNumber": "349886738",
-        "City": "Phoenix",
-        "State": "77c78343-f0f1-4152-9f77-58a393f4099d",
-        "IsDefaultPayment": true,
-        "IsDefaultDisbursement": true,
-        "AccountNumber" : "4199137905"
+      Success: true,
+      Message: null,
+      Data: {
+        AccountId: "9e05f8c9-2e3b-4f80-a346-00004bceacb1",
+        AccountName: "JP Morgan Chase Bank - 7905",
+        BankName: "JP Morgan Chase Bank",
+        IsActive: true,
+        RoutingNumber: "349886738",
+        City: "Phoenix",
+        State: "77c78343-f0f1-4152-9f77-58a393f4099d",
+        IsDefaultPayment: true,
+        IsDefaultDisbursement: true,
+        AccountNumber : "4199137905"
       }
     };
     httpBackend.whenGET('/Dealer/bankAccount/9e05f8c9-2e3b-4f80-a346-00004bceacb1').respond(bankAccountData);
@@ -57,11 +57,11 @@ describe('Model: AccountManagement', function() {
       Success: true,
       Message: null,
       Data: {
-        "Username": "10264DG",
-        "Email": "diana.guarin@manheim.com",
-        "CellPhone": "2143301800",
-        "BusinessEmail": "diana.guarin@manheim.com",
-        "EnhancedRegistrationEnabled": false,
+        Username: "10264DG",
+        Email: "diana.guarin@manheim.com",
+        CellPhone: "2143301800",
+        BusinessEmail: "diana.guarin@manheim.com",
+        EnhancedRegistrationEnabled: false
       }
     });
 

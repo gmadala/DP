@@ -6,7 +6,7 @@ describe('Service: LastState', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var LastState, http, rootScope, $state, $cookieStore, User, $q;
+  var LastState, rootScope, $state, $cookieStore, User, $q;
 
   var username = {
     BusinessContactUserName: 'user'

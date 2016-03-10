@@ -2,6 +2,8 @@
 
 describe('Service: signupUrls', function () {
 
+  // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+
   // load the service's module
   beforeEach(module('nextgearWebApp'));
 

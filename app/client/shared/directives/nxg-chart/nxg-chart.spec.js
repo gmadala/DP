@@ -4,8 +4,8 @@ describe('Directive: nxgChart', function () {
   beforeEach(module('nextgearWebApp'));
 
   var element,
-      scope,
-      outerScope;
+    scope,
+    outerScope;
 
   beforeEach(inject(function($rootScope, $compile) {
     outerScope = $rootScope.$new();
@@ -14,7 +14,7 @@ describe('Directive: nxgChart', function () {
       ['label2', 20],
       ['label3', 30]
     ];
-    element = angular.element('<div nxg-chart nxg-chart-data="mockData" nxg-chart-type="bar" nxg-chart-description-x="Foo Description" nxg-chart-data-name="Foo Data Name" nxg-chart-tooltip="true"></div>')
+    element = angular.element('<div nxg-chart nxg-chart-data="mockData" nxg-chart-type="bar" nxg-chart-description-x="Foo Description" nxg-chart-data-name="Foo Data Name" nxg-chart-tooltip="true"></div>');
 
     element = $compile(element)(outerScope);
     $rootScope.$digest();

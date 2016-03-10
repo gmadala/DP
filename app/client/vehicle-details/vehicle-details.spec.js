@@ -4,28 +4,28 @@ describe('Controller: VehicleDetailsCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   var VehicleDetailsCtrl,
-      scope,
-      rootScope,
-      vehicleDetailsMock,
-      Payments,
-      state,
-      dialog,
-      stateParams,
-      api,
-      detailsMock,
-      paymentDetailsMock,
-      feeDetailsMock,
-      userMock,
-      titleReleasesMock,
-      paymentsMock,
-      floorplanMock,
-      initialize,
-      $q,
-      kissMetricData,
-      mockKissMetricInfo,
-      addressesMock,
-      cancelSucceed,
-      invAddr;
+    scope,
+    rootScope,
+    vehicleDetailsMock,
+    Payments,
+    state,
+    dialog,
+    stateParams,
+    api,
+    detailsMock,
+    paymentDetailsMock,
+    feeDetailsMock,
+    userMock,
+    titleReleasesMock,
+    paymentsMock,
+    floorplanMock,
+    initialize,
+    $q,
+    kissMetricData,
+    mockKissMetricInfo,
+    addressesMock,
+    cancelSucceed,
+    invAddr;
 
   beforeEach(inject(function ($controller, $rootScope, $stateParams, $state, _$q_, $uibModal, _api_, _Payments_) {
     rootScope = $rootScope;
@@ -223,8 +223,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
     floorplanMock = {
       editInventoryAddress: angular.noop,
       determineFloorPlanExtendability  : function() {
-      return $q.when(detailsMock);
-     }
+        return $q.when(detailsMock);
+      }
     };
 
     dialog = $uibModal;
@@ -380,7 +380,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
       it('should send a cartItem object if payment is already on the queue', function() {
         spyOn(paymentsMock, 'isPaymentOnQueue').and.returnValue(true);
         scope.launchPaymentOptions();
-        dialog.open.calls.mostRecent().args[0].resolve.object()
+        dialog.open.calls.mostRecent().args[0].resolve.object();
         expect(paymentsMock.getPaymentFromQueue).toHaveBeenCalled();
       });
 
@@ -542,7 +542,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
       it('should be false if there is only one inventory location', inject(function($rootScope) {
         spyOn(addressesMock, 'getActivePhysical').and.returnValue([
-            { Line1: 'foo' }
+          { Line1: 'foo' }
         ]);
         detailsMock.FloorplanInfo.FloorplanStatusName = 'Approved';
         initialize();

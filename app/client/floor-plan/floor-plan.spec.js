@@ -126,7 +126,7 @@ describe('Controller: FloorplanCtrl', function () {
         spyOn(angular, 'element').and.returnValue({
           scope: function() {
             return {
-              tt_isOpen: ''
+              tooltipIsOpen: ''
             };
           },
           next: function() {

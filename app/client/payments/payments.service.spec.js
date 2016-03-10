@@ -252,11 +252,11 @@ describe("Model: Payments", function () {
   describe('fetchFees function', function () {
     beforeEach(function () {
       httpBackend.whenGET('/payment/getaccountfees').respond({
-          Success: true,
-          Data: [
-            'bar'
-          ]
-        });
+        Success: true,
+        Data: [
+          'bar'
+        ]
+      });
     });
 
     it('should make the expected HTTP request', function () {
@@ -509,10 +509,10 @@ describe("Model: Payments", function () {
     var succeed = true;
 
     beforeEach(function () {
-      httpBackend.expectPOST('/payment/cancelscheduledpayment/schId').respond(function(method, url, data) {
+      httpBackend.expectPOST('/payment/cancelscheduledpayment/schId').respond(function() {
         return [200, {
-          "Success": succeed,
-          "Message": null
+          Success: succeed,
+          Message: null
         }, {}];
       });
     });
@@ -548,10 +548,10 @@ describe("Model: Payments", function () {
     var succeed = true;
 
     beforeEach(function () {
-      httpBackend.expectPOST('/payment/cancelscheduledaccountfeepayment/schId').respond(function(method, url, data) {
+      httpBackend.expectPOST('/payment/cancelscheduledaccountfeepayment/schId').respond(function() {
         return [200, {
-          "Success": succeed,
-          "Message": null
+          Success: succeed,
+          Message: null
         }, {}];
       });
     });
@@ -654,7 +654,7 @@ describe("Model: Payments", function () {
 
   describe('updatePaymentAmountOnDate function', function () {
     var callParams,
-        mockPaymentItem;
+      mockPaymentItem;
 
     beforeEach(function () {
       mockPaymentItem = {

@@ -22,9 +22,9 @@
       link: function postLink(scope, element, attrs) {
         /*jshint camelcase: false */
         attrs.$observe('tooltip', function (newValue) {
-          if (!newValue && scope.tt_isOpen) {
+          if (!newValue && scope.tooltipIsOpen) {
             // the content became empty with the tooltip showing; forcibly hide it
-            scope.tt_isOpen = false;
+            scope.tooltipIsOpen = false;
             angular.element(window.document).find('.tooltip').remove();
           }
         });

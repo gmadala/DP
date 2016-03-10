@@ -56,13 +56,13 @@ describe('Directive: nxgFinancialAccount', function () {
     };
 
     account = {
-      "BankAccountId": "123456789",
-      "BankAccountName": "Super Bank Account",
-      "AchAccountNumberLast4": "1098",
-      "IsActive": true,
-      "AchAbaNumber": "123456789",
-      "AchBankName": "Previous Wheel FCU",
-      "AllowPaymentByAch": true
+      BankAccountId: "123456789",
+      BankAccountName: "Super Bank Account",
+      AchAccountNumberLast4: "1098",
+      IsActive: true,
+      AchAbaNumber: "123456789",
+      AchBankName: "Previous Wheel FCU",
+      AllowPaymentByAch: true
     };
 
     transaction = {

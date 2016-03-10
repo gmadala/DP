@@ -40,8 +40,8 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
             return 60;
           },
           amount: 1,
-         scheduleDate: new Date()
-       }
+          scheduleDate: new Date()
+        }
       },
       payments: {
         'pmt1': {

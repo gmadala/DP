@@ -262,7 +262,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
   describe('selectedReceipts', function() {
     var mockReceipt1,
-        mockReceipt2;
+      mockReceipt2;
 
     beforeEach(function() {
       mockReceipt1 = {
@@ -419,6 +419,6 @@ describe('Controller: ReceiptsCtrl', function () {
       expect(scope.receipts.searchCriteria.query).toBe('fooSearch');
       expect(receipts.search).toHaveBeenCalled();
       expect(receipts.search.calls.mostRecent().args[0].query).toBe('fooSearch');
-  }));
+    }));
 
 });

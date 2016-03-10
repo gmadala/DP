@@ -4,11 +4,11 @@ describe('Directive: nxgSticky', function () {
   beforeEach(module('nextgearWebApp'));
 
   var elem,
-      scrollElem,
-      scope,
-      ctrl,
-      win,
-      offset;
+    scrollElem,
+    scope,
+    ctrl,
+    win,
+    offset;
 
   beforeEach(inject(function ($controller, $rootScope, $compile, $window) {
     scope = $rootScope.$new();
@@ -33,17 +33,17 @@ describe('Directive: nxgSticky', function () {
     spyOn(scope, 'adjustScroll').and.callThrough();
     spyOn(scope, 'sizeCallback').and.callThrough();
     spyOn(scope, 'getMaxAllowableElHeight').and.callFake(function() {
-        return 300;
+      return 300;
     });
     spyOn(scope, 'getElHeight').and.callFake(
       function() {
         return 300;
-    });
+      });
 
     spyOn(scope, 'getScrollElHeight').and.callFake(
       function() {
         return 250;
-    });
+      });
   }))
 
   it('should have functions to handle page scroll', inject(function () {

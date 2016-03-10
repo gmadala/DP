@@ -58,11 +58,11 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
     dialogMock = {
       open: function () {
         return {
-            result: {
-              then: function (callback) {
-                callback();
-              }
+          result: {
+            then: function (callback) {
+              callback();
             }
+          }
         }
       }
     };

@@ -21,7 +21,7 @@ describe('Controller: AuctionDealerSearchCtrl', function() {
       },
       dialog: function(options) {
         return {
-         open: this.open
+          open: this.open
         };
       }
     };

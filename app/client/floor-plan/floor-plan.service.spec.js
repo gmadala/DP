@@ -603,9 +603,9 @@ describe('Model: Floorplan', function () {
     });
 
     it('should return a promise even if no API request made', function() {
-            var returnVal = floorplan.overrideCompletionAddress([]);
+      var returnVal = floorplan.overrideCompletionAddress([]);
 
-      expect(httpBackend.flush).toThrow()
+      expect(httpBackend.flush).toThrow();
       expect(typeof returnVal.then).toEqual('function');
     });
 

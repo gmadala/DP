@@ -242,7 +242,7 @@ describe('Service: Addresses', function () {
   });
 
   it('should have a getDefaultTitleAddress function', function() {
-    expect(angular.isFunction(Addresses.getDefaultTitleAddress)).toBe(true)
+    expect(angular.isFunction(Addresses.getDefaultTitleAddress)).toBe(true);
   });
 
   it('getDefaultTitleAddress should return the default title address', function() {

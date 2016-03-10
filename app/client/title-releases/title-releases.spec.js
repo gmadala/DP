@@ -308,7 +308,7 @@ describe('Controller: TitleReleasesCtrl', function () {
     expect(scope.searchParams.proposedSearchCriteria.query).toBe(null);
     expect(scope.searchParams.proposedSearchCriteria.startDate).toBe(null);
     expect(scope.searchParams.proposedSearchCriteria.endDate).toBe(null);
-    expect(scope.searchParams.proposedSearchCriteria.filter).toBe(titleReleasesMock.filterValues.ALL)
+    expect(scope.searchParams.proposedSearchCriteria.filter).toBe(titleReleasesMock.filterValues.ALL);
   });
 
   it('should display message box when release is unavailable', function() {

@@ -165,7 +165,7 @@ describe('Service: Mmr', function () {
         spyOn(api, 'request').and.callThrough();
         $httpBackend.whenGET('/mmr/getVehicleValueByOptions?bodyId=style1&makeId=make1&mileage=1234&modelId=model1&yearId=yr1').respond(vehicleResponse);
 
-        Mmr.lookupByOptions(mock.year, mock.make, mock.model, mock.style, 1234).then(function(results) {
+        Mmr.lookupByOptions(mock.year, mock.make, mock.model, mock.style, 1234).then(function() {
           expect(api.request.calls.mostRecent().args[2]).toEqual({
             "yearId": mock.year.Id,
             "makeId": mock.make.Id,

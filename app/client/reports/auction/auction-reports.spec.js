@@ -94,7 +94,7 @@ describe('Controller: AuctionReportsCtrl', function() {
     });
 
     it('should create an api link and open the report in a new tab if the form is valid', function() {
-            scope.$apply();
+      scope.$apply();
 
       spyOn(window, 'open').and.returnValue();
       scope.disForm.$valid = true;

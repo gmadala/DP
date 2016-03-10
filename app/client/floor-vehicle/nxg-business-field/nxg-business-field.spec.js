@@ -3,7 +3,7 @@
 describe('Directive: nxgBusinessField', function () {
 
   var fakeBiz = {},
-      timeout;
+    timeout;
 
   // mock $dialog service (stand-in for actual business search modal)
   // that will instantly return the fakeBiz object above as its result
@@ -24,9 +24,9 @@ describe('Directive: nxgBusinessField', function () {
       });
 
       timeout = jasmine.createSpy().and.returnValue({
-          then: function (callback) {
-            return callback();
-          }
+        then: function (callback) {
+          return callback();
+        }
       });
 
       timeout.cancel = jasmine.createSpy();
@@ -106,19 +106,19 @@ describe('Directive: nxgBusinessField', function () {
 
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',
     inject(function ($uibModal, $compile, $rootScope) {
-    element = angular.element('<form name="myForm">' +
-      '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
-      'ng-disabled="model.disableMe" selected-business="model.bizness"' +
-      'ng-required="model.requireMe" form="theForm" validity="validity">' +
-      '</input></form>');
-    element = $compile(element)(scope);
-    $rootScope.$digest();
+      element = angular.element('<form name="myForm">' +
+        '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
+        'ng-disabled="model.disableMe" selected-business="model.bizness"' +
+        'ng-required="model.requireMe" form="theForm" validity="validity">' +
+        '</input></form>');
+      element = $compile(element)(scope);
+      $rootScope.$digest();
 
-    spyOn($uibModal, 'open').and.callThrough();
-    element.find('input').val('fooBiz');
-    element.find('input').scope().openBusinessSearch();
-    expect($uibModal.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
-  }));
+      spyOn($uibModal, 'open').and.callThrough();
+      element.find('input').val('fooBiz');
+      element.find('input').scope().openBusinessSearch();
+      expect($uibModal.open.calls.mostRecent().args[0].resolve.searchBuyersMode()).toBe(true);
+    }));
 
   it('should respect the ng-disabled attribute on the original input', function () {
     var iScope = element.find('input').scope();

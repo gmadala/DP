@@ -140,7 +140,7 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     describe('submit function', function() {
-         var succeed = true;
+      var succeed = true;
 
       beforeEach(inject(function() {
         scope.form = mockForm;
@@ -233,26 +233,26 @@ describe('Controller: FloorCarCtrl', function () {
 
       xit('should show a dialog if the flooring is successful', function() {
         $httpBackend.whenPOST('/floorplan/v1_1/create')
-        .respond(function() {
-          return [200, { Success: true , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
-        });
+          .respond(function() {
+            return [200, { Success: true , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
+          });
       });
 
       it('should do nothing if the flooring fails', function() {
         $httpBackend.whenPOST('/floorplan/v1_1/create')
           .respond(function() {
             return [200, { Success: false , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
-        });
+          });
         expect(dialog.open).not.toHaveBeenCalled();
       })
     });
 
     describe('cancel function', function() {
       var goHome = true,
-          goReset = false,
-          dialogMock,
-          q,
-          deferred;
+        goReset = false,
+        dialogMock,
+        q,
+        deferred;
 
       beforeEach(inject(function($q) {
         q = $q;
@@ -316,18 +316,18 @@ describe('Controller: FloorCarCtrl', function () {
 
     it('should populate the inventory address options based on the selected business', function() {
       var biz1 = {
-        BusinessId: '123id',
-        ActivePhysicalInventoryLocations: [
-          { AddressId: 'addr1' },
-          { AddressId: 'addr2' }
-        ]
-      },
-      biz2 = {
-        BusinessId: '456id',
-        ActivePhysicalInventoryLocations: [
-          { AddressId: 'addr3' }
-        ]
-      };
+          BusinessId: '123id',
+          ActivePhysicalInventoryLocations: [
+            { AddressId: 'addr1' },
+            { AddressId: 'addr2' }
+          ]
+        },
+        biz2 = {
+          BusinessId: '456id',
+          ActivePhysicalInventoryLocations: [
+            { AddressId: 'addr3' }
+          ]
+        };
 
       expect(scope.sellerLocations).toBe(null);
       scope.data.BusinessId = biz1;

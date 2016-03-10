@@ -66,7 +66,7 @@ describe('Controller: CreditQueryCtrl', function () {
         Success: true,
         Message: null,
         Data: []
-    });
+      });
 
     mockKissMetricInfo = {
       getKissMetricInfo : function() {
@@ -155,14 +155,14 @@ describe('Controller: CreditQueryCtrl', function () {
     });
   });
 
-      it('should have a function to close the dialog', function() {
-        spyOn(dialog, 'close');
-        scope.close();
-        expect(dialog.close).toHaveBeenCalled();
-      });
+  it('should have a function to close the dialog', function() {
+    spyOn(dialog, 'close');
+    scope.close();
+    expect(dialog.close).toHaveBeenCalled();
+  });
 
   describe('autoQueryCredit conditional', function() {
-    beforeEach(inject(function ($httpBackend) {
+    beforeEach(inject(function () {
       spyOn(mockQuery, 'get').and.callThrough();
     }));
 

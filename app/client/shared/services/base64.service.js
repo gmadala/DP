@@ -17,8 +17,8 @@
     /*jshint camelcase: false */
     /*jslint bitwise: true */
 
-    var _keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-    var _utf8_encode = function (string) {
+    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    var utf8Encode = function (string) {
       string = string.replace(/\r\n/g, '\n');
       var utftext = '';
 
@@ -42,7 +42,7 @@
     };
 
     // private method for UTF-8 decoding
-    var _utf8_decode = function (utftext) {
+    var utf8Decode = function (utftext) {
       var string = '';
       var i = 0;
       var c, c2, c3;
@@ -76,7 +76,7 @@
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
 
-        input = _utf8_encode(input);
+        input = utf8Encode(input);
 
         while (i < input.length) {
 
@@ -95,8 +95,8 @@
             enc4 = 64;
           }
           output = output +
-            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
-            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+            keyStr.charAt(enc1) + keyStr.charAt(enc2) +
+            keyStr.charAt(enc3) + keyStr.charAt(enc4);
         }
         return output;
       },
@@ -110,10 +110,10 @@
         input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
 
         while (i < input.length) {
-          enc1 = _keyStr.indexOf(input.charAt(i++));
-          enc2 = _keyStr.indexOf(input.charAt(i++));
-          enc3 = _keyStr.indexOf(input.charAt(i++));
-          enc4 = _keyStr.indexOf(input.charAt(i++));
+          enc1 = keyStr.indexOf(input.charAt(i++));
+          enc2 = keyStr.indexOf(input.charAt(i++));
+          enc3 = keyStr.indexOf(input.charAt(i++));
+          enc4 = keyStr.indexOf(input.charAt(i++));
 
           chr1 = (enc1 << 2) | (enc2 >> 4);
           chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
@@ -128,7 +128,7 @@
             output = output + String.fromCharCode(chr3);
           }
         }
-        output = _utf8_decode(output);
+        output = utf8Decode(output);
 
         return output;
       }

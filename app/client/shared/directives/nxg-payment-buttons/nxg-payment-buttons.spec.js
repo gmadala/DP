@@ -62,7 +62,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
     describe('fee mode (fee previously scheduled)', function() {
       var dialog,
-          iScope;
+        iScope;
 
       beforeEach(inject(function ($rootScope, $compile, $uibModal) {
         dialog = $uibModal;
@@ -109,8 +109,8 @@ describe('Directive: nxgPaymentButtons', function () {
 
   describe('cancel scheduled payment', function() {
     var myPayment,
-        dialog,
-        shouldBeCancelled;
+      dialog,
+      shouldBeCancelled;
 
     beforeEach(inject(function ($uibModal) {
       dialog = $uibModal;
@@ -247,7 +247,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   describe('payment mode (payment previously scheduled)', function () {
     var dialog,
-    iScope;
+      iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $uibModal) {
       dialog = $uibModal;
@@ -302,7 +302,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   describe('payment mode (payoff previously scheduled)', function () {
     var dialog,
-    iScope;
+      iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $uibModal) {
       dialog = $uibModal;
@@ -328,7 +328,7 @@ describe('Directive: nxgPaymentButtons', function () {
             angular.noop();
           }
         }
-    });
+      });
       iScope.togglePaymentInQueue(false);
       expect(dialog.open).toHaveBeenCalled();
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelPaymentCtrl');
@@ -416,7 +416,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   describe('payoff mode (payoff previously scheduled)', function () {
     var dialog,
-        iScope;
+      iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $uibModal) {
       dialog = $uibModal;
@@ -469,7 +469,7 @@ describe('Directive: nxgPaymentButtons', function () {
 
   describe('payoff mode (payment previously scheduled)', function () {
     var dialog,
-        iScope;
+      iScope;
 
     beforeEach(inject(function ($rootScope, $compile, $uibModal) {
       dialog = $uibModal;

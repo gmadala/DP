@@ -137,7 +137,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
       });
 
       it('should format a phone number correctly', function() {
-        scope.profile.dirtyData.phone = '(123)456-7890'
+        scope.profile.dirtyData.phone = '(123)456-7890';
         scope.profile.save();
         $rootScope.$digest();
 
@@ -148,7 +148,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
       it('should change security question text correctly', function() {
         // Make sure we actualyl are performing a change
         expect(scope.profile.data.questions[0].SecurityQuestionId).toBe(1);
-        expect(scope.profile.data.questions[0].QuestionText).toBe('What is the name of your favorite movie?')
+        expect(scope.profile.data.questions[0].QuestionText).toBe('What is the name of your favorite movie?');
 
         scope.profile.dirtyData.questions[0].SecurityQuestionId = 2;
         scope.profile.save();
@@ -168,7 +168,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
       it('should change security question text correctly', function() {
         // Make sure we actualyl are performing a change
         expect(scope.profile.data.questions[0].SecurityQuestionId).toBe(1);
-        expect(scope.profile.data.questions[0].QuestionText).toBe('What is the name of your favorite movie?')
+        expect(scope.profile.data.questions[0].QuestionText).toBe('What is the name of your favorite movie?');
 
         scope.profile.dirtyData.questions[0].SecurityQuestionId = 2;
         scope.profile.save();

@@ -46,9 +46,9 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
     };
     dialogMock = {
       close: function(){
-          angular.noop();
-        }
-      };
+        angular.noop();
+      }
+    };
 
     $dialogMock = {
       open: function () {
@@ -94,11 +94,11 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
 
   describe('multiple lines of credit scenario', function() {
     var scope,
-    RequestCreditIncreaseCtrl,
-    creditIncreaseMock,
-    rootScope,
-    q,
-    linesOfCreditMultiple;
+      RequestCreditIncreaseCtrl,
+      creditIncreaseMock,
+      rootScope,
+      q,
+      linesOfCreditMultiple;
 
     beforeEach(inject(function($rootScope, $controller, $q){
       scope = $rootScope.$new();
@@ -109,11 +109,11 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
         type: 'retail',
         amount: 123.45
       },
-      {
-        id: 'id2',
-        type: 'current',
-        amount: 1987.60
-      }];
+        {
+          id: 'id2',
+          type: 'current',
+          amount: 1987.60
+        }];
 
       creditIncreaseMock = {
         getActiveLinesOfCredit: function(){
@@ -129,7 +129,7 @@ describe('Controller: RequestCreditIncreaseCtrl', function () {
       });
     }));
 
-    it('should not set the selected line of credit an option if there are multiple lines of credit', inject(function($q) {
+    it('should not set the selected line of credit an option if there are multiple lines of credit', inject(function() {
       rootScope.$digest();
       expect(scope.selector.selectedLineOfCredit).toBe(null);
     }));

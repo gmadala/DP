@@ -17,7 +17,7 @@ describe('Controller: FloorplanCtrl', function() {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, $q, Floorplan, FloorplanUtil, $httpBackend) {
+  beforeEach(inject(function($controller, $rootScope, $q, Floorplan, FloorplanUtil) {
     scope = $rootScope.$new();
     stateParamsMock = {
       filter: 'fooFilter'

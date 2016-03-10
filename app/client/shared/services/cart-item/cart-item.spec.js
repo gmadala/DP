@@ -45,7 +45,7 @@ describe('Service: cartItem', function () {
       PrincipalPayoff: 4000,
       FeesPayoffTotal: 500,
       InterestPayoffTotal: 250,
-      CollateralProtectionPayoffTotal: 250,
+      CollateralProtectionPayoffTotal: 250
     };
 
     mockScheduled = {
@@ -60,7 +60,7 @@ describe('Service: cartItem', function () {
       PrincipalDue: 2000,
       FeesPayoffTotal: 500,
       InterestPayoffTotal: 250,
-      CollateralProtectionPayoffTotal: 250,
+      CollateralProtectionPayoffTotal: 250
     };
   }));
 
@@ -126,7 +126,7 @@ describe('Service: cartItem', function () {
       expect(result.stockNum).toBe('stock1');
 
       expect(result.isFee).toBe(false);
-      expect(result.paymentOption).toBe(PaymentOptions.TYPE_PAYMENT)
+      expect(result.paymentOption).toBe(PaymentOptions.TYPE_PAYMENT);
 
       expect(result.dueDate).toBe('2014-08-01');
       expect(result.scheduleDate).toBe(null);
@@ -188,7 +188,7 @@ describe('Service: cartItem', function () {
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(750);
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(5000);
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(250);
-      })
+      });
 
       it('should return the sum of principal, fees, interest, and cpp values + payment.additionalPrincipal if there is extra principal', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
@@ -202,7 +202,7 @@ describe('Service: cartItem', function () {
         var result = CartItem.fromPayment(mockPayment, 'foo');
 
         expect(result.getCheckoutAmount()).not.toBeDefined();
-      })
+      });
 
       it('should use the scheduledValues object for the given option if the payment is set to be scheduled', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);

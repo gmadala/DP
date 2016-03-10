@@ -72,7 +72,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
   }));
 
   it('should attach A COPY OF the payment being scheduled to the scope', function () {
-    run('payment')
+    run('payment');
     expect(scope.model.payment).toBeDefined();
     expect(scope.model.payment).not.toBe(CartItem.fromPayment(payment, PaymentOptions.TYPE_PAYMENT));
     expect(scope.model.fee).toBeFalsy();
@@ -114,9 +114,9 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
   describe('selectedDate watch functionality', function() {
     var $q,
-        $httpBackend,
-        clock,
-        shouldSucceed;
+      $httpBackend,
+      clock,
+      shouldSucceed;
 
     beforeEach(inject(function(_$q_, _$httpBackend_) {
       $q = _$q_;
@@ -141,7 +141,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     afterEach(function () {
       clock.restore();
-    })
+    });
 
     it('should do nothing if the item we are scheduling is a fee', function() {
       run('fee');
@@ -208,7 +208,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     });
 
     it('should set updateInProgress to false on failure', function () {
-       //spyOn(Payments, 'updatePaymentAmountOnDate').and.returnValue($q.reject('whatever'));
+      //spyOn(Payments, 'updatePaymentAmountOnDate').and.returnValue($q.reject('whatever'));
       shouldSucceed = false;
 
       run('payment');
@@ -221,12 +221,12 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
     });
 
     // it('should set updateInProgress to false on success', function () {
-      // spyOn(Payments, 'updatePaymentAmountOnDate').and.returnValue($q.when(100));
-      // spyOn(dialog, 'close');
-      // scope.finalize(null);
-      // scope.$apply();
-      // expect(scope.submitInProgress).toBe(false);
-      // expect(dialog.close).toHaveBeenCalled();
+    // spyOn(Payments, 'updatePaymentAmountOnDate').and.returnValue($q.when(100));
+    // spyOn(dialog, 'close');
+    // scope.finalize(null);
+    // scope.$apply();
+    // expect(scope.submitInProgress).toBe(false);
+    // expect(dialog.close).toHaveBeenCalled();
     // });
   });
 

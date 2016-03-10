@@ -7,11 +7,10 @@ describe('Directive: nxgStockNumbersInput', function () {
     scope,
     dScope;
 
-  beforeEach(inject(function ($rootScope, $compile, $controller) {
+  beforeEach(inject(function ($rootScope, $compile) {
     scope = $rootScope.$new();
 
-    element = angular.element(
-      '<div nxg-stock-numbers-input="foo" data="data" form="form"></div>');
+    element = angular.element('<div nxg-stock-numbers-input="foo" data="data" form="form"></div>');
     element = $compile(element)(scope);
     $rootScope.$digest();
 

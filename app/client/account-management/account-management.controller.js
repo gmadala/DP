@@ -462,7 +462,7 @@
             // make sure to close any tooltips left open
             angular.forEach(angular.element('.btn-help'), function (elem) {
               // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-              angular.element(elem).scope().tt_isOpen = false;
+              angular.element(elem).scope().tooltipIsOpen = false;
               // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             });
           },

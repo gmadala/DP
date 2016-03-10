@@ -217,7 +217,7 @@ describe('Model: dashboard', function () {
     });
 
 
-   it('should populate paymentChartData scheduledPayments with total of all scheduled payments', function () {
+    it('should populate paymentChartData scheduledPayments with total of all scheduled payments', function () {
       expect(resultData.paymentChartData.scheduledPayments).toBe(11510);
     });
 
@@ -280,9 +280,9 @@ describe('Model: dashboard', function () {
         ]
       };
 
-    /* TODO: fix broken test. "Expected false to be true"; the data above is not valid
-     expect(angular.equals(resultData.calendarData.eventsByDate, expected)).toBe(true);
-     */
+      /* TODO: fix broken test. "Expected false to be true"; the data above is not valid
+       expect(angular.equals(resultData.calendarData.eventsByDate, expected)).toBe(true);
+       */
 
     });
 
