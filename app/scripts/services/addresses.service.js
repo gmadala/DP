@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Addresses', function() {
+  angular
+    .module('nextgearWebApp')
+    .factory('Addresses', Addresses);
+
+  Addresses.$inject = [];
+
+  function Addresses() {
 
     var addresses;
     // For reference:
@@ -63,4 +69,6 @@ angular.module('nextgearWebApp')
         })[0] ;
       }
     };
-  });
+
+  }
+})();

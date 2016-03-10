@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .filter('truncate', truncate);
 
   /**
@@ -9,6 +10,7 @@
    * @returns {Function}
    */
   function truncate() {
+
     return function (text, length, end) {
       if (isNaN(length)) {
         length = 10;
@@ -25,6 +27,6 @@
         }
       }
     };
-  }
 
+  }
 })();

@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('LoginCreatePasswordCtrl', function($rootScope, $scope, User) {
+  angular
+    .module('nextgearWebApp')
+    .controller('LoginCreatePasswordCtrl', LoginCreatePasswordCtrl);
+
+  LoginCreatePasswordCtrl.$inject = ['$rootScope', '$scope', 'User'];
+
+  function LoginCreatePasswordCtrl($rootScope, $scope, User) {
 
     var prv = {
       passwordPattern: {
@@ -67,4 +73,5 @@ angular.module('nextgearWebApp')
       $rootScope.$emit('event:userRequestedLogout');
     };
 
-  });
+  }
+})();

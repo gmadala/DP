@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('DealerNumberSearch', function(api) {
+  angular
+    .module('nextgearWebApp')
+    .factory('DealerNumberSearch', DealerNumberSearch);
+
+  DealerNumberSearch.$inject = ['api'];
+
+  function DealerNumberSearch(api) {
 
     var prv = {
       createRequest: function() {
@@ -36,4 +42,6 @@ angular.module('nextgearWebApp')
         return prv.search(req);
       }
     };
-  });
+
+  }
+})();

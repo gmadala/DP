@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .filter('routingNumber', routingNumber);
 
   routingNumber.$inject = ['gettext', 'gettextCatalog'];
@@ -34,5 +35,6 @@
         return routingNumber.substr(4) + '-' + routingNumber.substr(1, 3);
       }
     }
+
   }
 })();

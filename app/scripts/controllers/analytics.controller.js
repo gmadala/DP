@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('AnalyticsCtrl', function ($scope, $uibModal, Analytics, segmentio, metric, User, kissMetricInfo) {
+  angular
+    .module('nextgearWebApp')
+    .controller('AnalyticsCtrl', AnalyticsCtrl);
+
+  AnalyticsCtrl.$inject = ['$scope', '$uibModal', 'Analytics', 'segmentio', 'metric', 'User', 'kissMetricInfo'];
+
+  function AnalyticsCtrl($scope, $uibModal, Analytics, segmentio, metric, User, kissMetricInfo) {
 
     var uibModal = $uibModal;
 
@@ -64,4 +70,6 @@ angular.module('nextgearWebApp')
     });
     //Checking for United States Dealer
     $scope.isUnitedStates = User.isUnitedStates();
-  });
+
+  }
+})();

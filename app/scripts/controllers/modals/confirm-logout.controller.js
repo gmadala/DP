@@ -1,8 +1,16 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ConfirmLogoutCtrl', function($rootScope, $scope, $uibModalInstance, User) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ConfirmLogoutCtrl', ConfirmLogoutCtrl);
+
+  ConfirmLogoutCtrl.$inject = ['$scope', '$uibModalInstance', 'User'];
+
+  function ConfirmLogoutCtrl($scope, $uibModalInstance, User) {
+
     var uibModalInstance = $uibModalInstance;
+
     $scope.logoutPending = false;
 
     $scope.close = function(confirmed) {
@@ -16,4 +24,6 @@ angular.module('nextgearWebApp')
         uibModalInstance.close(confirmed);
       }
     };
-  });
+
+  }
+})();

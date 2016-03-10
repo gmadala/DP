@@ -1,10 +1,16 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('DealerNameSearchCtrl', function($scope, $uibModal, $uibModalInstance, DealerNameSearch, User, options) {
+  angular
+    .module('nextgearWebApp')
+    .controller('DealerNameSearchCtrl', DealerNameSearchCtrl);
 
-    var uibModal = $uibModal,
-       uibModalInstance= $uibModalInstance;
+  DealerNameSearchCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'DealerNameSearch', 'User', 'options'];
+
+  function DealerNameSearchCtrl($scope, $uibModal, $uibModalInstance, DealerNameSearch, User, options) {
+
+    var uibModal          = $uibModal,
+        uibModalInstance  = $uibModalInstance;
 
 
     $scope.proposedQuery = {
@@ -61,13 +67,13 @@ angular.module('nextgearWebApp')
 
       $scope.data.loading = true;
       DealerNameSearch.search(
-          $scope.data.query.name,
-          $scope.data.query.city,
-          $scope.data.query.state,
-          $scope.data.sortBy,
-          $scope.data.sortDescending,
-          paginator
-        ).then(
+        $scope.data.query.name,
+        $scope.data.query.city,
+        $scope.data.query.state,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      ).then(
         function(result) {
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
@@ -130,4 +136,6 @@ angular.module('nextgearWebApp')
     User.getStatics().then(function(statics) {
       $scope.states = statics.states;
     });
-  });
+
+  }
+})();

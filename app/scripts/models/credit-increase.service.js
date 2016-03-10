@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('CreditIncrease', function(api) {
+  angular
+    .module('nextgearWebApp')
+    .factory('CreditIncrease', CreditIncrease);
+
+  CreditIncrease.$inject = ['api'];
+
+  function CreditIncrease(api) {
 
     return {
       getActiveLinesOfCredit: function() {
@@ -23,7 +29,8 @@ angular.module('nextgearWebApp')
         };
 
         return api.request('POST', '/dealer/requestCreditIncrease', data);
-
       }
     };
-  });
+
+  }
+})();

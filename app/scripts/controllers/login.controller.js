@@ -1,8 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('LoginCtrl', function ($rootScope, $scope, $location, User, $http, localStorageService, banner, signupUrls,
-                                     gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('LoginCtrl', LoginCtrl);
+
+  LoginCtrl.$inject = ['$rootScope', '$scope', 'User', 'localStorageService', 'banner', 'signupUrls', 'gettextCatalog'];
+
+  function LoginCtrl($rootScope, $scope, User, localStorageService, banner, signupUrls, gettextCatalog) {
 
     var savedUsername = localStorageService.get('rememberUsername');
 
@@ -91,4 +96,4 @@ angular.module('nextgearWebApp')
     );
 
   }
-);
+})();

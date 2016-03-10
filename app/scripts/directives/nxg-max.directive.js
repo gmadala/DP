@@ -1,15 +1,22 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * Validator directive for use on inputs. Differs from built-in max directive
- * by being designed for input type=text (avoiding number stepper control), and
- * allowing any expression for max value.
- *
- * Note that this will skip validation if the entered value cannot be parsed as a
- * number. You can use ng-pattern alongside this to enforce a numeric value.
- */
-angular.module('nextgearWebApp')
-  .directive('nxgMax', function() {
+  /**
+   * Validator directive for use on inputs. Differs from built-in max directive
+   * by being designed for input type=text (avoiding number stepper control), and
+   * allowing any expression for max value.
+   *
+   * Note that this will skip validation if the entered value cannot be parsed as a
+   * number. You can use ng-pattern alongside this to enforce a numeric value.
+   */
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgMax', nxgMax);
+
+  nxgMax.$inject = [];
+
+  function nxgMax() {
+
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -44,4 +51,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

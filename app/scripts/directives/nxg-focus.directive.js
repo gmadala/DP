@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgFocus', function ($parse) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgFocus', nxgFocus);
+
+  nxgFocus.$inject = ['$parse'];
+
+  function nxgFocus($parse) {
+
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
@@ -13,4 +20,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

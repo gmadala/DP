@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgStockNumbersInput', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgStockNumbersInput', nxgStockNumbersInput);
+
+  nxgStockNumbersInput.$inject = [];
+
+  function nxgStockNumbersInput() {
+
     return {
       templateUrl: 'scripts/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html',
       replace: true,
@@ -61,4 +68,6 @@ angular.module('nextgearWebApp')
         };
       }
     };
-  });
+
+  }
+})();

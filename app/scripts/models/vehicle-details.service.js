@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('VehicleDetails', function(api) {
+  angular
+    .module('nextgearWebApp')
+    .factory('VehicleDetails', VehicleDetails);
+
+  VehicleDetails.$inject = ['api'];
+
+  function VehicleDetails(api) {
 
     return {
       getDetails: function(stockNumber) {
@@ -25,4 +31,6 @@ angular.module('nextgearWebApp')
         return api.request('GET', '/floorplan/mobiledetails/financialsummary/fee/' + stockNumber + '/' + id);
       }
     };
-  });
+
+  }
+})();

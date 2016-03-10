@@ -1,39 +1,45 @@
-/**
- * Value lookup from MobileService/kbb (Kelley Blue Book) is accomplished in the following steps:
- *
- * For Manual lookup
- * 1. GET /kbb/vehicle/getyears/UsedCar/Dealer
- * 2. User selects the year
- * 3. GET /kbb/vehicle/getmakesbyyear/UsedCar/Dealer/{yearId}
- * 4. User selects the make
- * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/{makeId}/{yearId}
- * 6. User selects the model
- * 7. GET /kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/{modelId}/{yearId}
- * 8. User selects the style
- * 9. User enters the mileage
- * 10. User enters the ZIP code
- * 11. User clicks lookup
- * 12. GET /kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
- *
- * For VIN lookup
- * 1. User enters VIN
- * 2. User enters mileage
- * 3. User enters ZIP code
- * 4. User clicks lookup
- * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/{vin}/{mileage}/{zipCode}
- */
+(function() {
+  'use strict';
 
-'use strict';
+  /**
+   * Value lookup from MobileService/kbb (Kelley Blue Book) is accomplished in the following steps:
+   *
+   * For Manual lookup
+   * 1. GET /kbb/vehicle/getyears/UsedCar/Dealer
+   * 2. User selects the year
+   * 3. GET /kbb/vehicle/getmakesbyyear/UsedCar/Dealer/{yearId}
+   * 4. User selects the make
+   * 5. GET /kbb/vehicle/getmodelsbyyearandmake/UsedCar/Dealer/{makeId}/{yearId}
+   * 6. User selects the model
+   * 7. GET /kbb/vehicle/gettrimsandvehicleidsbyyearandmodel/UsedCar/Dealer/{modelId}/{yearId}
+   * 8. User selects the style
+   * 9. User enters the mileage
+   * 10. User enters the ZIP code
+   * 11. User clicks lookup
+   * 12. GET /kbb/value/getvehiclevaluesallconditions/UsedCar/Dealer/{vehicleId}/{mileage}/{zipCode}
+   *
+   * For VIN lookup
+   * 1. User enters VIN
+   * 2. User enters mileage
+   * 3. User enters ZIP code
+   * 4. User clicks lookup
+   * 5. GET /kbb/vehicle/getvehiclevaluesbyvinallconditions/UsedCar/Dealer/{vin}/{mileage}/{zipCode}
+   */
 
-angular.module('nextgearWebCommon')
-  .factory('Kbb', function(apiCommon, $q) {
+  angular
+    .module('nextgearWebCommon')
+    .factory('Kbb', Kbb);
+
+  Kbb.$inject = ['apiCommon', '$q'];
+
+  function Kbb(apiCommon, $q) {
 
     var api = apiCommon;
     // for the moment return a single value object
     // with values for AuctionExcellent, AuctionFair, AuctionGood, AuctionVeryGood
 
     /*
-    Price type enum from server side code
+     Price type enum from server side code
      (talked with Chris and it seems the server will return the number, not the enum name):
 
      BaseWholesale = 0,
@@ -90,20 +96,20 @@ angular.module('nextgearWebCommon')
         var property = null;
 
         switch (value.PriceType) {
-        case 14:
-          property = 'Excellent';
-          break;
-        case 17:
-          property = 'Fair';
-          break;
-        case 15:
-          property = 'Good';
-          break;
-        case 16:
-          property = 'VeryGood';
-          break;
-        default:
-          property = null;
+          case 14:
+            property = 'Excellent';
+            break;
+          case 17:
+            property = 'Fair';
+            break;
+          case 15:
+            property = 'Good';
+            break;
+          case 16:
+            property = 'VeryGood';
+            break;
+          default:
+            property = null;
         }
         if (property) {
           auctionValues[property] = value.Value || 0;
@@ -252,4 +258,6 @@ angular.module('nextgearWebCommon')
         });
       }
     };
-  });
+
+  }
+})();

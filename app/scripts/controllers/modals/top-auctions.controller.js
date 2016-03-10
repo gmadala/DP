@@ -1,9 +1,15 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('TopAuctionsCtrl', function ($scope, $uibModalInstance, auctions) {
+  angular
+    .module('nextgearWebApp')
+    .controller('TopAuctionsCtrl', TopAuctionsCtrl);
 
-    var uibModalInstance =$uibModalInstance;
+  TopAuctionsCtrl.$inject = ['$scope', '$uibModalInstance', 'auctions'];
+
+  function TopAuctionsCtrl($scope, $uibModalInstance, auctions) {
+
+    var uibModalInstance = $uibModalInstance;
     $scope.data = auctions;
 
     // Allow the dialog to close itself using the "Close" button.
@@ -11,4 +17,6 @@ angular.module('nextgearWebApp')
     $scope.close = function() {
       uibModalInstance.close();
     };
-  });
+
+  }
+})();

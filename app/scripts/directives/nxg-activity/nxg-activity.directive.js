@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgActivity', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgActivity', nxgActivity);
+
+  nxgActivity.$inject = [];
+
+  function nxgActivity() {
+
     return {
       templateUrl: 'scripts/directives/nxg-activity/nxg-activity.html',
       replace: true,
@@ -30,5 +37,8 @@ angular.module('nextgearWebApp')
           return showing;
         };
       }
+
     };
-  });
+
+  }
+})();

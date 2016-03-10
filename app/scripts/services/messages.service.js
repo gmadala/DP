@@ -1,10 +1,16 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('messages', function (gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('messages', messages);
+
+  messages.$inject = ['gettextCatalog'];
+
+  function messages(gettextCatalog) {
     // Private
     var items = [],
-        noop = function () {};
+      noop = function () {};
 
     // Public
     return {
@@ -30,4 +36,6 @@ angular.module('nextgearWebApp')
         return items;
       }
     };
-  });
+
+  }
+})();

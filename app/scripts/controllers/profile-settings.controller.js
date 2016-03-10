@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('ProfileSettingsCtrl', function($scope, ProfileSettings, $sce) {
+  angular
+    .module('nextgearWebApp')
+    .controller('ProfileSettingsCtrl', ProfileSettingsCtrl);
+
+  ProfileSettingsCtrl.$inject = ['$scope', 'ProfileSettings', '$sce'];
+
+  function ProfileSettingsCtrl($scope, ProfileSettings, $sce) {
 
     $scope.loading = false;
     $scope.passwordTooltip = $sce.trustAsHtml('<h5>Password Reset</h5><p>Passwords must consist of a minimum of 8 characters.</p><p>Passwords must contain 3 of the 4 following types of characters: uppercase, lowercase, number, or special characters.</p>');
@@ -281,4 +287,5 @@ angular.module('nextgearWebApp')
       }
     };
 
-  });
+  }
+})();

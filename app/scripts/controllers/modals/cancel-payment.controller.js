@@ -1,8 +1,16 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('CancelPaymentCtrl', function ($scope, $injector, $uibModalInstance, options, Payments, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .controller('CancelPaymentCtrl', CancelPaymentCtrl);
+
+  CancelPaymentCtrl.$inject = ['$scope', '$uibModalInstance', 'options', 'Payments', 'gettextCatalog'];
+
+  function CancelPaymentCtrl($scope, $uibModalInstance, options, Payments, gettextCatalog) {
+
     var uibModalInstance = $uibModalInstance;
+
     $scope.payment = options.payment;
     $scope.title = options.title ? options.title : gettextCatalog.getString('Cancel Payment');
 
@@ -25,4 +33,5 @@ angular.module('nextgearWebApp')
       );
     };
 
-  });
+  }
+})();

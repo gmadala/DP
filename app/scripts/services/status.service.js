@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('status', function () {
+  angular
+    .module('nextgearWebApp')
+    .factory('status', statusFn);
+
+  statusFn.$inject = [];
+
+  function statusFn() {
     // Private
 
     var showStatus = true;
@@ -18,4 +24,6 @@ angular.module('nextgearWebApp')
         return showStatus;
       }
     };
-  });
+
+  }
+})();

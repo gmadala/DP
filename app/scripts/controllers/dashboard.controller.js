@@ -1,10 +1,39 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('DashboardCtrl', function($scope, $state, $uibModal, $log, Dashboard, Floorplan, FloorplanUtil,
-                                        moment, $filter, gettext, gettextCatalog, capitalizeFilter, language) {
+  angular
+    .module('nextgearWebApp')
+    .controller('DashboardCtrl', DashboardCtrl);
+
+  DashboardCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$uibModal',
+    'Dashboard',
+    'FloorplanUtil',
+    'moment',
+    '$filter',
+    'gettext',
+    'gettextCatalog',
+    'capitalizeFilter',
+    'language'
+  ];
+
+  function DashboardCtrl(
+    $scope,
+    $state,
+    $uibModal,
+    Dashboard,
+    FloorplanUtil,
+    moment,
+    $filter,
+    gettext,
+    gettextCatalog,
+    capitalizeFilter,
+    language) {
 
     var uibModal = $uibModal;
+
     // for caching our week/month summary data
     $scope.paymentSummary = {
       month: null,
@@ -118,12 +147,12 @@ angular.module('nextgearWebApp')
     $scope.filterPayments = function(filter) {
       var param;
       switch(filter) {
-      case 'week':
-        filter = 'this-week';
-        break;
-      case 'month':
-        filter = 'this-month';
-        break;
+        case 'week':
+          filter = 'this-week';
+          break;
+        case 'month':
+          filter = 'this-month';
+          break;
       }
 
       if(filter) {
@@ -255,4 +284,5 @@ angular.module('nextgearWebApp')
       );
     });
 
-  });
+  }
+})();

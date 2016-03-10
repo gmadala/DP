@@ -1,15 +1,22 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * This directive differs in several ways from the native HTML5 "autofocus" attribute:
- *
- * - It works in IE9
- * - It works in Firefox when the element was added to page as part of a DOM change (without top-level document load)
- * - It can be applied to a parent container and it will find the first enclosed input or button element (by DOM order)
- * - It accepts an optional list of event names that can be used to trigger re-focus at a later time (e.g. on form reset)
- */
-angular.module('nextgearWebApp')
-  .directive('nxgAutofocus', function ($timeout) {
+  /**
+   * This directive differs in several ways from the native HTML5 "autofocus" attribute:
+   *
+   * - It works in IE9
+   * - It works in Firefox when the element was added to page as part of a DOM change (without top-level document load)
+   * - It can be applied to a parent container and it will find the first enclosed input or button element (by DOM order)
+   * - It accepts an optional list of event names that can be used to trigger re-focus at a later time (e.g. on form reset)
+   */
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgAutofocus', nxgAutofocus);
+
+  nxgAutofocus.$inject = ['$timeout'];
+
+  function nxgAutofocus($timeout) {
+
     return {
       restrict: 'AC',
       link: function (scope, element, attrs) {
@@ -62,4 +69,6 @@ angular.module('nextgearWebApp')
         }, 0);
       }
     };
-  });
+
+  }
+})();

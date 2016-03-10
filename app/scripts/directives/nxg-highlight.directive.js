@@ -1,8 +1,12 @@
-'use strict';
+(function() {
+  'use strict';
 
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgHighlight', nxgHighlight);
 
-angular.module('nextgearWebApp')
-  .directive('nxgHighlight', function ($filter) {
+  function nxgHighlight($filter) {
+
     return {
       restrict: 'A',
       scope: {
@@ -11,11 +15,11 @@ angular.module('nextgearWebApp')
       },
       link: function postLink(scope, element) {
         /**
-        * When nxgHighlight or highlight change, rerun the following:
-        * 1) Sanitize nxgHighlight value
-        * 2) Every occurance of highlight, put highlight around
-        * 3) Throw into innerHTML of element
-        */
+         * When nxgHighlight or highlight change, rerun the following:
+         * 1) Sanitize nxgHighlight value
+         * 2) Every occurance of highlight, put highlight around
+         * 3) Throw into innerHTML of element
+         */
 
         var sanitizeAndHighlight = function sanitizeAndHighlight() {
 
@@ -38,7 +42,8 @@ angular.module('nextgearWebApp')
 
         scope.$watch('nxgHighlight', sanitizeAndHighlight);
         scope.$watch('highlight', sanitizeAndHighlight);
-
       }
     };
-  });
+
+  }
+})();

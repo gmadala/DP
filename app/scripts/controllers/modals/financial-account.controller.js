@@ -1,12 +1,35 @@
 (function() {
+
   'use strict';
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .controller('FinancialAccountCtrl', FinancialAccountCtrl);
 
-  FinancialAccountCtrl.$inject = ['$scope', '$sce','AccountManagement', '$uibModal', '$uibModalInstance','options', 'segmentio', 'metric', 'kissMetricInfo', 'gettextCatalog'];
+  FinancialAccountCtrl.$inject = [
+    '$scope',
+    '$sce',
+    'AccountManagement',
+    '$uibModal',
+    '$uibModalInstance',
+    'options',
+    'segmentio',
+    'metric',
+    'kissMetricInfo',
+    'gettextCatalog'
+  ];
 
-  function FinancialAccountCtrl($scope, $sce, AccountManagement, $uibModal, $uibModalInstance, options, segmentio, metric, kissMetricInfo, gettextCatalog) {
+  function FinancialAccountCtrl(
+    $scope,
+    $sce,
+    AccountManagement,
+    $uibModal,
+    $uibModalInstance,
+    options,
+    segmentio,
+    metric,
+    kissMetricInfo,
+    gettextCatalog) {
 
     var uibModal = $uibModal,
       uibModalInstance= $uibModalInstance;
@@ -129,7 +152,7 @@
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: 'views/modals/message-box.html',
+        templateUrl: 'views/modals/messageBox.html',
         controller: 'MessageBoxCtrl',
         dialogClass: 'modal modal-medium',
         resolve: {
@@ -176,6 +199,6 @@
 
       $scope.accountNameDisplay = (bankName && accNumber) ? lastFour(accNumber, ' - ') + bankName : '';
     }
-  }
 
+  }
 })();

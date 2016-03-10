@@ -9,10 +9,12 @@
     {id: 3, key: 'es', name: 'Spanish'}
   ];
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .constant('supportedLanguages', supportedLanguages);
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .factory('language', language);
 
   language.$inject = ['$window', 'gettextCatalog'];

@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgPaymentButtons', function (gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgPaymentButtons', nxgPaymentButtons);
+
+  nxgPaymentButtons.$inject = ['gettextCatalog'];
+
+  function nxgPaymentButtons(gettextCatalog) {
+
     return {
       scope: {
         type:       '@nxgPaymentButtons', // fee | payment | payoff
@@ -160,4 +167,6 @@ angular.module('nextgearWebApp')
       templateUrl: 'scripts/directives/nxg-payment-buttons/nxg-payment-buttons.html',
       replace: true
     };
-  });
+
+  }
+})();

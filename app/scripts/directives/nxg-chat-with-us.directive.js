@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgChatWithUs', function($window, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgChatWithUs', nxgChatWithUs);
+
+  nxgChatWithUs.$inject = ['$window', 'gettextCatalog'];
+
+  function nxgChatWithUs($window, gettextCatalog) {
 
     var url = 'https://home-c4.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0a63c698-c417-4ade-8e0d-55cccf2b0d85&bu=4592556';
 
@@ -23,4 +29,6 @@ angular.module('nextgearWebApp')
         }
       }
     };
-  });
+
+  }
+})();

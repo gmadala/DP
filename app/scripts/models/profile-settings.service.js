@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('ProfileSettings', function($q, api, User) {
+  angular
+    .module('nextgearWebApp')
+    .factory('ProfileSettings', ProfileSettings);
+
+  ProfileSettings.$inject = ['$q', 'api', 'User'];
+
+  function ProfileSettings($q, api, User) {
 
     var prv = {
       getQuestionText: function(id, questions) {
@@ -27,28 +33,28 @@ angular.module('nextgearWebApp')
     return {
       get: function() {
         return $q.all([
-            api.request('GET', '/userAccount/v1_1/settings'),
-            User.getSecurityQuestions(),
-            api.request('GET', '/userAccount/availableNotifications')
-          ]).then(function(responses) {
-            var settings = responses[0],
-              questions = responses[1],
-              i;
+          api.request('GET', '/userAccount/v1_1/settings'),
+          User.getSecurityQuestions(),
+          api.request('GET', '/userAccount/availableNotifications')
+        ]).then(function(responses) {
+          var settings = responses[0],
+            questions = responses[1],
+            i;
 
-            settings.BusinessEmail = undefined;
+          settings.BusinessEmail = undefined;
 
-            // add available notifications
-            settings.AvailableNotifications = responses[2];
+          // add available notifications
+          settings.AvailableNotifications = responses[2];
 
-            // Fill in question data
-            for (i = 0; i < settings.SecurityQuestions.length; i++) {
-              var q = settings.SecurityQuestions[i];
-              q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
-            }
-            settings.AllSecurityQuestions = questions;
+          // Fill in question data
+          for (i = 0; i < settings.SecurityQuestions.length; i++) {
+            var q = settings.SecurityQuestions[i];
+            q.QuestionText = prv.getQuestionText(q.SecurityQuestionId, questions);
+          }
+          settings.AllSecurityQuestions = questions;
 
-            return settings;
-          });
+          return settings;
+        });
       },
       saveSecurityAnswers: function(securityAnswers) {
         var req = {
@@ -74,5 +80,6 @@ angular.module('nextgearWebApp')
         return api.request('POST', '/UserAccount/notificationSettings', notifications);
       }
     };
-  })
-;
+
+  }
+})();

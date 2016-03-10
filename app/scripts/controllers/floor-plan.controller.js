@@ -1,11 +1,35 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * WARNING: This controller is used for both dealer Floorplan AND auction Seller Floorplan. Understand
- * the ramifications to each view and test both when making any changes here!!
- */
-angular.module('nextgearWebApp')
-  .controller('FloorplanCtrl', function($scope, $stateParams, Floorplan, FloorplanUtil, User, $timeout, gettextCatalog, Addresses) {
+  /**
+   * WARNING: This controller is used for both dealer Floorplan AND auction Seller Floorplan. Understand
+   * the ramifications to each view and test both when making any changes here!!
+   */
+  angular
+    .module('nextgearWebApp')
+    .controller('FloorplanCtrl', FloorplanCtrl);
+
+  FloorplanCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    'Floorplan',
+    'FloorplanUtil',
+    'User',
+    '$timeout',
+    'gettextCatalog',
+    'Addresses'
+  ];
+
+  function FloorplanCtrl(
+    $scope,
+    $stateParams,
+    Floorplan,
+    FloorplanUtil,
+    User,
+    $timeout,
+    gettextCatalog,
+    Addresses) {
+
     $scope.isCollapsed = true;
 
     var isDealer = User.isDealer();
@@ -83,15 +107,15 @@ angular.module('nextgearWebApp')
     var filterParam = null;
 
     switch($stateParams.filter) {
-    case 'approved':
-      filterParam = Floorplan.filterValues.APPROVED;
-      break;
-    case 'pending':
-      filterParam = Floorplan.filterValues.PENDING;
-      break;
-    case 'denied':
-      filterParam = Floorplan.filterValues.DENIED;
-      break;
+      case 'approved':
+        filterParam = Floorplan.filterValues.APPROVED;
+        break;
+      case 'pending':
+        filterParam = Floorplan.filterValues.PENDING;
+        break;
+      case 'denied':
+        filterParam = Floorplan.filterValues.DENIED;
+        break;
     }
 
     // initial search
@@ -145,4 +169,6 @@ angular.module('nextgearWebApp')
         }
       );
     };
-  });
+
+  }
+})();

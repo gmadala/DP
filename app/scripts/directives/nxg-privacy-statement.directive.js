@@ -1,12 +1,16 @@
-/**
- * Created by gayathrimadala on 3/31/15.
- */
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgPrivacyStatement', function (gettext) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgPrivacyStatement', nxgPrivacyStatement);
+
+  nxgPrivacyStatement.$inject = ['gettext'];
+
+  function nxgPrivacyStatement(gettext) {
 
     var privacyStatement = gettext('Privacy Statement');
+
     return {
       restrict: 'E',
       replace: true,
@@ -24,5 +28,6 @@ angular.module('nextgearWebApp')
           });
       }
     };
-  });
 
+  }
+})();

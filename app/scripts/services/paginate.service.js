@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Paginate', function (nxgConfig) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Paginate', Paginate);
+
+  Paginate.$inject = ['nxgConfig'];
+
+  function Paginate(nxgConfig) {
     var pageIndexStart = 1;
 
     return {
@@ -30,4 +36,6 @@ angular.module('nextgearWebApp')
         });
       }
     };
-  });
+
+  }
+})();

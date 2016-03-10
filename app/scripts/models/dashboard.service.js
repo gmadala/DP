@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .factory('Dashboard', function ($q, $filter, api, moment, gettextCatalog) {
+  angular
+    .module('nextgearWebApp')
+    .factory('Dashboard', Dashboard);
+
+  Dashboard.$inject = ['$q', '$filter', 'api', 'moment', 'gettextCatalog'];
+
+  function Dashboard($q, $filter, api, moment, gettextCatalog) {
 
     function getReceiptURL(transactionId) {
       return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
@@ -52,110 +58,110 @@ angular.module('nextgearWebApp')
       extendLineOfCreditObject: extendLineOfCreditObject,
       fetchDealerDashboard: function (startDate, endDate) {
         return $q.all([
-            api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate),
-            api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate)
-          ]).then(function (responses) {
-            // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
-            var result = responses[0];
+          api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate),
+          api.request('GET', '/payment/possiblePaymentDates/' + startDate + '/' + endDate)
+        ]).then(function (responses) {
+          // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
+          var result = responses[0];
 
-            result.LinesOfCredit = _.map(result.LinesOfCredit, function(loc) {
-              var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
-              return extendLineOfCreditObject(loc, utilizedAmount);
-            });
-
-            // inserting view receipt URLs
-            angular.forEach(result.Receipts, function(receipt) {
-              receipt.$receiptURL = getReceiptURL(receipt.FinancialTransactionId);
-            });
-
-            // calculate .paymentChartData
-            var scheduledPaymentAmount = result.ScheduledPayments.reduce(function (prev, current) {
-              return prev + current.ScheduledPaymentAmount;
-            }, 0);
-
-            result.paymentChartData = {
-              fees: result.AccountFeeAmount,
-              payments: result.UpcomingPaymentsAmount - scheduledPaymentAmount, // we just want UN-scheduled payments
-              scheduledPayments: scheduledPaymentAmount,
-              total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
-              chartData: [
-                {name: gettextCatalog.getString('Fees'), color: '#9F9F9F', y: result.AccountFeeAmount},
-                {name: gettextCatalog.getString('Payments'), color: '#3399CC', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
-                {name: gettextCatalog.getString('Scheduled Payments'), color: '#1864A1', y: scheduledPaymentAmount}
-              ]
-            };
-
-            // calculate .calendarData
-            var dueRaw = responses[0].UpcomingPaymentsList || [],
-              scheduledRaw = responses[0].ScheduledPayments || [],
-              possibleRaw = responses[1] || [],
-              dueEvents = [],
-              scheduledEvents = [],
-              eventsByDate = {},
-              openDates = {},
-              formatMoney = $filter('currency'),
-              dateMap,
-              dateKey,
-              list,
-              sumPayments = function (accumulator, payment) {
-                return accumulator + (payment.ScheduledPaymentAmount || payment.PaymentDue);
-              },
-              addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
-                if (sourceList.length === 0) { return; }
-                var event = {
-                  title: '<span class="counter">' + sourceList.length + '</span> ' +
-                    (sourceList.length === 1 ? singularLabel : pluralLabel),
-                  subTitle: formatMoney(sourceList.reduce(sumPayments, 0)),
-                  start: dateKey
-                };
-                destList.push(event);
-                list = eventsByDate[dateKey] || (eventsByDate[dateKey] = []);
-                list.push(event);
-              };
-
-            // aggregate due payments list into a set of calendar events, max 2 per day, summarizing payments & payoffs due that day
-            dateMap = {};
-            dueRaw.forEach(function (payment) {
-              dateKey = payment.DueDate;
-              list = dateMap[dateKey] || (dateMap[dateKey] = { payments: [], payoffs: [] });
-              if (payment.PaymentDue === payment.PayoffDue) {
-                list.payoffs.push(payment);
-              } else {
-                list.payments.push(payment);
-              }
-            });
-            for (var key in dateMap) {
-              addEvent(dateMap[key].payments, dueEvents, gettextCatalog.getString('Payment Due'), gettextCatalog.getString('Payments Due'), key);
-              addEvent(dateMap[key].payoffs, dueEvents, gettextCatalog.getString('Payoff Due'), gettextCatalog.getString('Payoffs Due'), key);
-            }
-
-            // aggregate scheduled payments list into a set of calendar events, max 1 per day, summarizing payments scheduled that day
-            dateMap = {};
-            scheduledRaw.forEach(function (payment) {
-              dateKey = payment.ScheduledDate;
-              list = dateMap[dateKey] || (dateMap[dateKey] = []);
-              list.push(payment);
-            });
-            // We add empty space in front of these strings since translations strings won't match with leading spaces
-            for (var key2 in dateMap) {
-              addEvent(dateMap[key2], scheduledEvents, gettextCatalog.getString('Scheduled'), gettextCatalog.getString('Scheduled'), key2);
-            }
-
-            // convert possiblePaymentDates into a map of 'yyyy-MM-dd': true
-            possibleRaw.forEach(function (dateVal) {
-              dateKey = dateVal;
-              openDates[dateKey] = true;
-            });
-
-            result.calendarData = {
-              dueEvents: dueEvents,
-              scheduledEvents: scheduledEvents,
-              eventsByDate: eventsByDate,
-              openDates: openDates
-            };
-
-            return result;
+          result.LinesOfCredit = _.map(result.LinesOfCredit, function(loc) {
+            var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
+            return extendLineOfCreditObject(loc, utilizedAmount);
           });
+
+          // inserting view receipt URLs
+          angular.forEach(result.Receipts, function(receipt) {
+            receipt.$receiptURL = getReceiptURL(receipt.FinancialTransactionId);
+          });
+
+          // calculate .paymentChartData
+          var scheduledPaymentAmount = result.ScheduledPayments.reduce(function (prev, current) {
+            return prev + current.ScheduledPaymentAmount;
+          }, 0);
+
+          result.paymentChartData = {
+            fees: result.AccountFeeAmount,
+            payments: result.UpcomingPaymentsAmount - scheduledPaymentAmount, // we just want UN-scheduled payments
+            scheduledPayments: scheduledPaymentAmount,
+            total: result.AccountFeeAmount + result.UpcomingPaymentsAmount,
+            chartData: [
+              {name: gettextCatalog.getString('Fees'), color: '#9F9F9F', y: result.AccountFeeAmount},
+              {name: gettextCatalog.getString('Payments'), color: '#3399CC', y: result.UpcomingPaymentsAmount - scheduledPaymentAmount},
+              {name: gettextCatalog.getString('Scheduled Payments'), color: '#1864A1', y: scheduledPaymentAmount}
+            ]
+          };
+
+          // calculate .calendarData
+          var dueRaw = responses[0].UpcomingPaymentsList || [],
+            scheduledRaw = responses[0].ScheduledPayments || [],
+            possibleRaw = responses[1] || [],
+            dueEvents = [],
+            scheduledEvents = [],
+            eventsByDate = {},
+            openDates = {},
+            formatMoney = $filter('currency'),
+            dateMap,
+            dateKey,
+            list,
+            sumPayments = function (accumulator, payment) {
+              return accumulator + (payment.ScheduledPaymentAmount || payment.PaymentDue);
+            },
+            addEvent = function (sourceList, destList, singularLabel, pluralLabel, dateKey) {
+              if (sourceList.length === 0) { return; }
+              var event = {
+                title: '<span class="counter">' + sourceList.length + '</span> ' +
+                (sourceList.length === 1 ? singularLabel : pluralLabel),
+                subTitle: formatMoney(sourceList.reduce(sumPayments, 0)),
+                start: dateKey
+              };
+              destList.push(event);
+              list = eventsByDate[dateKey] || (eventsByDate[dateKey] = []);
+              list.push(event);
+            };
+
+          // aggregate due payments list into a set of calendar events, max 2 per day, summarizing payments & payoffs due that day
+          dateMap = {};
+          dueRaw.forEach(function (payment) {
+            dateKey = payment.DueDate;
+            list = dateMap[dateKey] || (dateMap[dateKey] = { payments: [], payoffs: [] });
+            if (payment.PaymentDue === payment.PayoffDue) {
+              list.payoffs.push(payment);
+            } else {
+              list.payments.push(payment);
+            }
+          });
+          for (var key in dateMap) {
+            addEvent(dateMap[key].payments, dueEvents, gettextCatalog.getString('Payment Due'), gettextCatalog.getString('Payments Due'), key);
+            addEvent(dateMap[key].payoffs, dueEvents, gettextCatalog.getString('Payoff Due'), gettextCatalog.getString('Payoffs Due'), key);
+          }
+
+          // aggregate scheduled payments list into a set of calendar events, max 1 per day, summarizing payments scheduled that day
+          dateMap = {};
+          scheduledRaw.forEach(function (payment) {
+            dateKey = payment.ScheduledDate;
+            list = dateMap[dateKey] || (dateMap[dateKey] = []);
+            list.push(payment);
+          });
+          // We add empty space in front of these strings since translations strings won't match with leading spaces
+          for (var key2 in dateMap) {
+            addEvent(dateMap[key2], scheduledEvents, gettextCatalog.getString('Scheduled'), gettextCatalog.getString('Scheduled'), key2);
+          }
+
+          // convert possiblePaymentDates into a map of 'yyyy-MM-dd': true
+          possibleRaw.forEach(function (dateVal) {
+            dateKey = dateVal;
+            openDates[dateKey] = true;
+          });
+
+          result.calendarData = {
+            dueEvents: dueEvents,
+            scheduledEvents: scheduledEvents,
+            eventsByDate: eventsByDate,
+            openDates: openDates
+          };
+
+          return result;
+        });
       },
 
       fetchAuctionDashboard: function () {
@@ -206,8 +212,8 @@ angular.module('nextgearWebApp')
             _.each(
               points,
               function (point) {
-                  result.data.push([point.$label, point.Y]);
-                }
+                result.data.push([point.$label, point.Y]);
+              }
             );
 
             return result;
@@ -215,4 +221,6 @@ angular.module('nextgearWebApp')
         );
       }
     };
-  });
+
+  }
+})();

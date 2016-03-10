@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgUnappliedFundsWidget', function () {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgUnappliedFundsWidget', nxgUnappliedFundsWidget);
+
+  nxgUnappliedFundsWidget.$inject = [];
+
+  function nxgUnappliedFundsWidget() {
+
     return {
       templateUrl: 'scripts/directives/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.html',
       restrict: 'AC',
@@ -12,120 +19,6 @@ angular.module('nextgearWebApp')
       },
       controller: 'UnappliedFundsWidgetCtrl'
     };
-  })
-  .controller('UnappliedFundsWidgetCtrl', function ($scope, $uibModal, $filter, api, gettextCatalog, AccountManagement) {
 
-    var uibModal = $uibModal;
-
-    AccountManagement.get().then(function (result) {
-      $scope.autoDisburseUnappliedFunds = result.AutoDisburseUnappliedFundsDaily;
-    });
-
-
-    $scope.openRequestPayout = function($event) {
-      $event.preventDefault();
-
-      var dialogOptions = {
-        dialogClass: 'modal request-unapplied-funds-modal',
-        backdrop: true,
-        keyboard: false,
-        backdropClick: false,
-        templateUrl: 'scripts/directives/nxg-unapplied-funds-widget/request-payout-modal.html',
-        controller: 'PayoutModalCtrl',
-        resolve: {
-          funds: function () {
-            return {
-              balance: $scope.fundsBalance,
-              available: $scope.fundsAvail
-            };
-          }
-        }
-      };
-
-      uibModal.open(dialogOptions).result.then(
-        function (result) {
-          if (result) {
-            // ** The endpoint returns a single updated balance but we got two
-            // to update (total, available) so we update manually **
-            result.amount = api.toFloat(result.amount);
-            $scope.fundsAvail -= Math.min(result.amount, $scope.fundsAvail);
-            $scope.fundsBalance -= Math.min(result.amount, $scope.fundsBalance);
-
-            // wireframes do not specify any kind of success display, so let's just do a simple one
-            var title = gettextCatalog.getString('Request submitted'),
-              message = gettextCatalog.getString('Your request for a payout in the amount of {{ amount }} to your account "{{ bankAccountName }}" has been successfully submitted.', {
-                amount: $filter('currency')(result.amount),
-                bankAccountName: result.account.BankAccountName
-              }),
-              buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
-            var dialogOptions = {
-              backdrop: true,
-              keyboard: true,
-              backdropClick: true,
-              templateUrl: 'views/modals/message-box.html',
-              controller: 'MessageBoxCtrl',
-              dialogClass: 'modal modal-medium',
-              resolve: {
-                title: function () {
-                  return title;
-                },
-                message : function() {
-                  return message;
-                },
-                buttons: function () {
-                  return buttons;
-                }
-              }
-            };
-            uibModal.open(dialogOptions);
-          }
-        }
-      );
-    };
-  })
-  .controller('PayoutModalCtrl', function($scope, $filter, $timeout, $uibModalInstance, funds, User, Payments, OptionDefaultHelper) {
-
-    var uibModalInstance = $uibModalInstance;
-
-    $scope.funds = funds;
-    $scope.selections = {
-      amount: null,
-      account: null
-    };
-
-    User.getInfo().then(function(info) {
-      $scope.bankAccounts = info.BankAccounts;
-
-      OptionDefaultHelper.create([
-        {
-          scopeSrc: 'bankAccounts',
-          modelDest: 'account'
-        }
-      ]).applyDefaults($scope, $scope.selections);
-    });
-
-    $scope.submit = function () {
-      // take a snapshot of form state -- view can bind to this for submit-time update of validation display
-      $scope.validity = angular.copy($scope.form);
-      if (!$scope.form.$valid) {
-        // form invalid, do not submit
-        return;
-      }
-      $scope.submitInProgress = true;
-      Payments.requestUnappliedFundsPayout($scope.selections.amount, $scope.selections.account.BankAccountId).then(
-        function (result) {
-          $scope.submitInProgress = false;
-          var resultData = angular.extend({}, $scope.selections, {
-            newAvailableAmount: result.BalanceAfter
-          });
-          uibModalInstance.close(resultData);
-        }, function (/*error*/) {
-          $scope.submitInProgress = false;
-        }
-      );
-    };
-
-    $scope.cancel = function () {
-      uibModalInstance.close();
-    };
-  });
+  }
+})();

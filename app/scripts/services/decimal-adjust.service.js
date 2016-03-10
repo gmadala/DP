@@ -4,8 +4,11 @@
   // Adapted from:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 
-  angular.module('nextgearWebApp')
+  angular
+    .module('nextgearWebApp')
     .factory('decimalAdjust', decimalAdjust);
+
+  decimalAdjust.$inject = [];
 
   function decimalAdjust() {
     var service;
@@ -36,6 +39,6 @@
     function round(value, exp) {
       return adjust('round', value, exp);
     }
-  }
 
+  }
 })();

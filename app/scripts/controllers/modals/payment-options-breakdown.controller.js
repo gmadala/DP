@@ -1,19 +1,44 @@
-'use strict';
+(function() {
+  'use strict';
 
-/*
- * This controller expects an object with payment information
- * (either a cartItem object or a payment object from vehicle
- * details) and an isOnQueue flag to determine which function the
- * paymentOptionsHelper service should use.
- *
- * Upon submission, if we started with a cartItem from the queue, we just
- * update that existing object. If we started with a cartItem created
- * from vehicle details, we add it to the queue first, and then edit its
- * properties according to the form inputs.
- *
-*/
-angular.module('nextgearWebApp')
-  .controller('PaymentOptionsBreakdownCtrl', function ($scope, $uibModalInstance, paymentOptionsHelper, Payments, PaymentOptions, object, isOnQueue, moment, BusinessHours) {
+  /*
+   * This controller expects an object with payment information
+   * (either a cartItem object or a payment object from vehicle
+   * details) and an isOnQueue flag to determine which function the
+   * paymentOptionsHelper service should use.
+   *
+   * Upon submission, if we started with a cartItem from the queue, we just
+   * update that existing object. If we started with a cartItem created
+   * from vehicle details, we add it to the queue first, and then edit its
+   * properties according to the form inputs.
+   *
+   */
+  angular
+    .module('nextgearWebApp')
+    .controller('PaymentOptionsBreakdownCtrl', PaymentOptionsBreakdownCtrl);
+
+  PaymentOptionsBreakdownCtrl.$inect = [
+    '$scope',
+    '$uibModalInstance',
+    'paymentOptionsHelper',
+    'Payments',
+    'PaymentOptions',
+    'object',
+    'isOnQueue',
+    'moment',
+    'BusinessHours'
+  ];
+
+  function PaymentOptionsBreakdownCtrl(
+    $scope,
+    $uibModalInstance,
+    paymentOptionsHelper,
+    Payments,
+    PaymentOptions,
+    object,
+    isOnQueue,
+    moment,
+    BusinessHours) {
 
     var uibModalInstance = $uibModalInstance;
     $scope.PaymentOptions = PaymentOptions;
@@ -101,16 +126,5 @@ angular.module('nextgearWebApp')
       uibModalInstance.close(true);
     };
 
-  })
-  .service('paymentOptionsHelper', function(CartItem) {
-    var paymentOptionsHelper = {
-      fromCartItem: function(cartItem) {
-        return angular.copy(cartItem);
-      },
-      fromVehicleDetails: function(object) {
-        return CartItem.fromPayment(object, null);
-      }
-    };
-
-    return paymentOptionsHelper;
-  });
+  }
+})();

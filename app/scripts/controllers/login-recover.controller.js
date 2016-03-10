@@ -1,9 +1,33 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('LoginRecoverCtrl', function ($scope, $state, $uibModal, User, gettextCatalog, kissMetricInfo, metric, segmentio) {
+  angular
+    .module('nextgearWebApp')
+    .controller('LoginRecoverCtrl', LoginRecoverCtrl);
+
+  LoginRecoverCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$uibModal',
+    'User',
+    'gettextCatalog',
+    'kissMetricInfo',
+    'metric',
+    'segmentio'
+  ];
+
+  function LoginRecoverCtrl(
+    $scope,
+    $state,
+    $uibModal,
+    User,
+    gettextCatalog,
+    kissMetricInfo,
+    metric,
+    segmentio) {
 
     var uibModal = $uibModal;
+
     $scope.userNameRecovery = {
       // forgotUserNameForm
       email: null,
@@ -150,4 +174,5 @@ angular.module('nextgearWebApp')
       );
     };
 
-  });
+  }
+})();

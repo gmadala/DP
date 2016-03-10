@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .directive('nxgGreaterThan', function ($parse) {
+  angular
+    .module('nextgearWebApp')
+    .directive('nxgGreaterThan', nxgGreaterThan);
+
+  nxgGreaterThan.$inject = ['$parse'];
+
+  function nxgGreaterThan($parse) {
+
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -18,7 +25,8 @@ angular.module('nextgearWebApp')
         }, function (greaterThan) {
           ctrl.$setValidity('greaterThan', greaterThan );
         });
-
       }
     };
-  });
+
+  }
+})();

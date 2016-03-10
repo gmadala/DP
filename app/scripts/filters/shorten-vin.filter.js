@@ -1,7 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .filter('shortenVIN', function () {
+  angular
+    .module('nextgearWebApp')
+    .filter('shortenVIN', shortenVIN);
+
+  shortenVIN.$inject = [];
+
+  function shortenVIN() {
+
     return function (input) {
       if (!angular.isString(input)) {
         return input;
@@ -13,4 +20,6 @@ angular.module('nextgearWebApp')
 
       return '...' + input.slice(-6);
     };
-  });
+
+  }
+})();
