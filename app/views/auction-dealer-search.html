@@ -1,7 +1,7 @@
 <div class="well">
   <h2 class="well-title" translate>Find a Dealer</h2>
 
-  <form name="dealerSearchForm" ng-submit="search()" class="search" novalidate>
+  <form name="dealerSearchForm" class="search" novalidate>
     <div class="row vertical-align">
       <div class="col-xs-6 custom form-block">
         Search by your Buyer's Business Number, NextGear Capital Number, AuctionACCESS Number, Business Name or Auction Buyer ID.
@@ -85,7 +85,7 @@
         </td>
         <td>
           <div class="center">
-            <span nxg-highlight="business.BusinessNumber" highlight="data.query"></span>
+            <span nxg-highlight="business.externalBusinessId" highlight="data.query"></span>
           </div>
         </td>
         <td>

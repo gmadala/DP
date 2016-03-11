@@ -35,7 +35,7 @@
           angular.forEach(results.SearchResults, function(dealer) {
             dealer.data = {query: name};
           });
-          return Paginate.addPaginator(results, response.headers['X-NGEN-Count'], params.PageNumber, params.PageSize);
+          return Paginate.addPaginator(results, response.headers('X-NGEN-Count'), params.pageNumber, params.pageSize);
         }
       );
     }
