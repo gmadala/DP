@@ -138,6 +138,7 @@ module.exports = function(grunt) {
       all: [
         //'Gruntfile.js',
         '<%= yeoman.app %>/client/**/*.js',
+        '!app/client/**/*.spec.js',
         '!app/client/config/nxg-config.mock.processed.js',
         '!app/scripts/translations.js',
         '!app/client/services/base64.service.js',
