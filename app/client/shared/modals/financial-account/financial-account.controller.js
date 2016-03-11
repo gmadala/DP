@@ -152,7 +152,7 @@
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: 'views/modals/messageBox.html',
+        templateUrl: 'client/shared/modals/message-box/message-box.template.html',
         controller: 'MessageBoxCtrl',
         dialogClass: 'modal modal-medium',
         resolve: {
