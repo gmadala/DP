@@ -1,7 +1,13 @@
-'use strict';
+(function() {
 
-angular.module('nextgearWebApp')
-  .controller('AuctionDealerSearchCtrl', function($scope, $uibModal, dealerSearch, User) {
+  'use strict';
+
+  angular.module('nextgearWebApp')
+    .controller('AuctionDealerSearchCtrl', AuctionDealerSearchCtrl);
+
+  AuctionDealerSearchCtrl.$inject = ['$scope', '$uibModal', 'dealerSearch', 'User'];
+
+  function AuctionDealerSearchCtrl($scope, $uibModal, dealerSearch, User) {
 
     $scope.proposedQuery = null;
     $scope.searchExecuted = false;
@@ -32,7 +38,7 @@ angular.module('nextgearWebApp')
       $scope.data.query = angular.copy($scope.proposedQuery);
 
       // don't execute if the query length is less than 3 chars
-      if($scope.validity && $scope.validity.$invalid) {
+      if ($scope.validity && $scope.validity.$invalid) {
         return;
       }
       $scope.searchExecuted = true;
@@ -60,13 +66,13 @@ angular.module('nextgearWebApp')
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           Array.prototype.push.apply($scope.data.results, result.SearchResults);
-        }, function (/*error*/) {
+        }, function(/*error*/) {
           $scope.data.loading = false;
         }
       );
     };
 
-    $scope.sortBy = function (fieldName) {
+    $scope.sortBy = function(fieldName) {
       if ($scope.data.sortBy === fieldName) {
         // already sorting by this field, just flip the direction
         $scope.data.sortDescending = !$scope.data.sortDescending;
@@ -81,36 +87,38 @@ angular.module('nextgearWebApp')
 
     /*** Private ***/
     function viewDealer(business) {
-        if (business) {
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'views/modals/credit-query.html',
-            controller: 'CreditQueryCtrl',
-            dialogClass: 'modal modal-medium',
-            resolve: {
-              options: function() {
-                return {
-                  businessId: business.businessId,
-                  businessNumber: business.businessNumber,
-                  businessAuctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
-                  businessName: business.businessName,
-                  businessAddress: business.businessAddress,
-                  businessCity: business.businessCity,
-                  businessState: business.businessState,
-                  businessZip: business.businessZip,
-                  externalBusinessId: business.externalBusinessId,
-                  autoQueryCredit: true
-                };
-              }
+      if (business) {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/credit-query.html',
+          controller: 'CreditQueryCtrl',
+          dialogClass: 'modal modal-medium',
+          resolve: {
+            options: function() {
+              return {
+                businessId: business.businessId,
+                businessNumber: business.businessNumber,
+                businessAuctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
+                businessName: business.businessName,
+                businessAddress: business.businessAddress,
+                businessCity: business.businessCity,
+                businessState: business.businessState,
+                businessZip: business.businessZip,
+                externalBusinessId: business.externalBusinessId,
+                autoQueryCredit: true
+              };
             }
-          };
-          $uibModal.open(dialogOptions).result.then(function(dirty) {
-            if (dirty) {
-              $scope.search();
-            }
-          });
-        }
+          }
+        };
+        $uibModal.open(dialogOptions).result.then(function(dirty) {
+          if (dirty) {
+            $scope.search();
+          }
+        });
       }
-  });
+    }
+  }
+})();
+
