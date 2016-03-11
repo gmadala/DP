@@ -18,7 +18,7 @@ describe('Controller: MultipleVehiclesCtrl', function () {
 
     matchListMock = [
       {someValue: 'foo'},
-      {someValue: 'bar'},
+      {someValue: 'bar'}
     ];
 
     scope = $rootScope.$new();

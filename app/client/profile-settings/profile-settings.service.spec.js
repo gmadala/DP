@@ -52,7 +52,7 @@ describe('Model: ProfileSettings', function() {
 
       profileSettings.saveSecurityAnswers(securityAnswersStub).then(function (result) {
         res = result;
-      })
+      });
       httpBackend.flush();
       expect(res).toBeDefined();
     });

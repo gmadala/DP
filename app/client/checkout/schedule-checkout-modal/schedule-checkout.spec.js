@@ -239,7 +239,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
 
     afterEach(function () {
       clock.restore();
-    })
+    });
 
     it('should return true if called with a null date', function () {
       expect(scope.disabled(null,0)).toBe(0);
@@ -318,7 +318,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       run('fee');
       scope.finalize();
       expect(Payments.updatePaymentAmountOnDate).not.toHaveBeenCalled();
-    })
+    });
 
     it('should pass the floorplan Id', function () {
       spyOn(Payments, 'updatePaymentAmountOnDate').and.returnValue($q.when(100));

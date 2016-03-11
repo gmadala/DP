@@ -95,9 +95,11 @@
     <div class="disbursements">
       <table class="table table-striped table-secondary">
         <thead>
-          <th translate>Date</th>
-          <th translate>No.</th>
-          <th translate>Amount</th>
+          <tr>
+            <th translate>Date</th>
+            <th translate>No.</th>
+            <th translate>Amount</th>
+          </tr>
         </thead>
         <tr ng-repeat="dis in dashboardData.Disbursements | orderBy:'DisbursementDate':true | limitTo:5">
           <td class="tabel-label center">{{ dis.DisbursementDate | moment }}</td>

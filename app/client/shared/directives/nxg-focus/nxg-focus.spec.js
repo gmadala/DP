@@ -14,7 +14,7 @@ describe('Directive: nxgFocus', function () {
       scope.event = event;
     };
 
-    element = angular.element('<input id="test-focus" type="text" nxg-focus="focusTasks($event, \'ok\')"></input>');
+    element = angular.element('<input id="test-focus" type="text" nxg-focus="focusTasks($event, \'ok\')">');
     element = $compile(element)(scope);
     $rootScope.$digest();
   }));

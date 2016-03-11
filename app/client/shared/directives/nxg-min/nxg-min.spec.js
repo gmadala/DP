@@ -13,7 +13,7 @@ describe('Directive: nxgMin', function () {
       scope = $rootScope;
       element = angular.element(
         '<form name="form">' +
-          '<input type="text" name="input" ng-model="model.data" nxg-min="100"></input>' +
+          '<input type="text" name="input" ng-model="model.data" nxg-min="100">' +
         '</form>'
       );
       scope.model = {data: undefined};
@@ -68,7 +68,7 @@ describe('Directive: nxgMin', function () {
       scope = $rootScope;
       element = angular.element(
         '<form name="form">' +
-          '<input type="text" name="input" ng-model="model.data" nxg-min="settings.minAllowed"></input>' +
+          '<input type="text" name="input" ng-model="model.data" nxg-min="settings.minAllowed">' +
           '</form>'
       );
       scope.model = {data: undefined};

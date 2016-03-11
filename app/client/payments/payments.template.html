@@ -33,31 +33,33 @@
 
       <table class="table table-striped table-primary">
         <thead>
-          <th class="sortable"
-              ng-click="sortFeesBy('EffectiveDate')"
-              ng-class="{ sorted : sortField.fee == 'EffectiveDate', desc : sortDescending.fee }">
-            <nxg-sortable sortable-text="{{ 'Due Date' | translate }}"></nxg-sortable>
-          </th>
-          <th class="sortable"
-              ng-click="sortFeesBy('FeeType')"
-              ng-class="{ sorted : sortField.fee == 'FeeType', desc : sortDescending.fee }">
-            <nxg-sortable sortable-text="{{ 'Fee Type' | translate }}"></nxg-sortable>
-          </th>
-          <th class="sortable"
-              ng-click="sortFeesBy('Description')"
-              ng-class="{ sorted : sortField.fee == 'Description', desc : sortDescending.fee }">
-            <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
-          </th>
-          <th class="sortable"
-              ng-click="sortFeesBy('Posted')"
-              ng-class="{ sorted : sortField.fee == 'Posted', desc : sortDescending.fee }">
-            <nxg-sortable sortable-text="{{ 'Posted' | translate }}"></nxg-sortable>
-          </th>
-          <th class="sortable"
-              ng-click="sortFeesBy('Balance')"
-              ng-class="{ sorted : sortField.fee == 'Balance', desc : sortDescending.fee }">
-            <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
-          </th>
+          <tr>
+            <th class="sortable"
+                ng-click="sortFeesBy('EffectiveDate')"
+                ng-class="{ sorted : sortField.fee == 'EffectiveDate', desc : sortDescending.fee }">
+              <nxg-sortable sortable-text="{{ 'Due Date' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable"
+                ng-click="sortFeesBy('FeeType')"
+                ng-class="{ sorted : sortField.fee == 'FeeType', desc : sortDescending.fee }">
+              <nxg-sortable sortable-text="{{ 'Fee Type' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable"
+                ng-click="sortFeesBy('Description')"
+                ng-class="{ sorted : sortField.fee == 'Description', desc : sortDescending.fee }">
+              <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable"
+                ng-click="sortFeesBy('Posted')"
+                ng-class="{ sorted : sortField.fee == 'Posted', desc : sortDescending.fee }">
+              <nxg-sortable sortable-text="{{ 'Posted' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable"
+                ng-click="sortFeesBy('Balance')"
+                ng-class="{ sorted : sortField.fee == 'Balance', desc : sortDescending.fee }">
+              <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
+            </th>
+          </tr>
         </thead>
         <tr ng-repeat="fee in fees.results | orderBy:sortField.fee:sortDescending.fee">
           <td class="paired paired-reversed">
@@ -105,36 +107,38 @@
          nxg-infinite-scroll-show-indicator="payments.loading">
         <table id="paymentsSearchTable" class="table table-striped table-primary">
           <thead>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('DueDate')"
-                ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Due Date' | translate }}"></nxg-sortable>
-            </th>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('UnitDescription')"
-                ng-class="{ sorted : sortField.payment == 'UnitDescription', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
-            </th>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('FlooringDate')"
-                ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Floored' | translate }}"></nxg-sortable>
-            </th>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('UnitStatus')"
-                ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Status' | translate }}"></nxg-sortable>
-            </th>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('AmountDue')"
-                ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Payment' | translate }}">
-            </th>
-            <th class="sortable"
-                ng-click="sortPaymentsBy('CurrentPayoff')"
-                ng-class="{ sorted : sortField.payment == 'CurrentPayoff', desc : sortDescending.payment }">
-              <nxg-sortable sortable-text="{{ 'Payoff' | translate }}"></nxg-sortable>
-            </th>
+            <tr>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('DueDate')"
+                  ng-class="{ sorted : sortField.payment == 'DueDate', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Due Date' | translate }}"></nxg-sortable>
+              </th>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('UnitDescription')"
+                  ng-class="{ sorted : sortField.payment == 'UnitDescription', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
+              </th>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('FlooringDate')"
+                  ng-class="{ sorted : sortField.payment == 'FlooringDate', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Floored' | translate }}"></nxg-sortable>
+              </th>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('UnitStatus')"
+                  ng-class="{ sorted : sortField.payment == 'UnitStatus', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Status' | translate }}"></nxg-sortable>
+              </th>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('AmountDue')"
+                  ng-class="{ sorted : sortField.payment == 'AmountDue', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Payment' | translate }}">
+              </th>
+              <th class="sortable"
+                  ng-click="sortPaymentsBy('CurrentPayoff')"
+                  ng-class="{ sorted : sortField.payment == 'CurrentPayoff', desc : sortDescending.payment }">
+                <nxg-sortable sortable-text="{{ 'Payoff' | translate }}"></nxg-sortable>
+              </th>
+            </tr>
           </thead>
           <!-- Vehicle Payments: table body -->
           <tr ng-repeat="payment in payments.results | orderBy:sortField.payment:sortDescending.payment">

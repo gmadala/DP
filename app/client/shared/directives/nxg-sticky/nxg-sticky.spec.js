@@ -27,7 +27,7 @@ describe('Directive: nxgSticky', function () {
 
     $compile(elem)(scope);
     ctrl = elem.controller('nxgSticky', {
-      $scope: scope,
+      $scope: scope
     });
 
     spyOn(scope, 'adjustScroll').and.callThrough();
@@ -44,7 +44,7 @@ describe('Directive: nxgSticky', function () {
       function() {
         return 250;
       });
-  }))
+  }));
 
   it('should have functions to handle page scroll', inject(function () {
     expect(scope.getMaxAllowableElHeight).toBeDefined();

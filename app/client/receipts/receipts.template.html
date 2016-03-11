@@ -25,29 +25,31 @@
              nxg-infinite-scroll-show-indicator="receipts.loading">
           <table class="table table-striped table-primary">
             <thead>
-              <th class="sortable"
-                  ng-click="sortBy('CreateDate')"
-                  ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
-                <nxg-sortable sortable-text="{{ 'Payment Date' | translate }}"></nxg-sortable>
-              </th>
-              <th class="sortable"
-                  ng-click="sortBy('TransactionNumber')"
-                  ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
-                <nxg-sortable sortable-text="{{ 'Receipt No.' | translate }}"></nxg-sortable>
-              </th>
-              <th class="sortable"
-                  ng-click="sortBy('PaymentMethod')"
-                  ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
-                <nxg-sortable sortable-text="{{ 'Payment Description' | translate }}"></nxg-sortable>
-              </th>
-              <th class="sortable"
-                  ng-click="sortBy('AmountProvided')"
-                  ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
-                <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
-              </th>
-              <th translate>
-                Export Receipt(s)
-              </th>
+              <tr>
+                <th class="sortable"
+                    ng-click="sortBy('CreateDate')"
+                    ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
+                  <nxg-sortable sortable-text="{{ 'Payment Date' | translate }}"></nxg-sortable>
+                </th>
+                <th class="sortable"
+                    ng-click="sortBy('TransactionNumber')"
+                    ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
+                  <nxg-sortable sortable-text="{{ 'Receipt No.' | translate }}"></nxg-sortable>
+                </th>
+                <th class="sortable"
+                    ng-click="sortBy('PaymentMethod')"
+                    ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
+                  <nxg-sortable sortable-text="{{ 'Payment Description' | translate }}"></nxg-sortable>
+                </th>
+                <th class="sortable"
+                    ng-click="sortBy('AmountProvided')"
+                    ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
+                  <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
+                </th>
+                <th translate>
+                  Export Receipt(s)
+                </th>
+              </tr>
             </thead>
             <tr ng-repeat="receipt in receipts.results">
               <td >

@@ -13,7 +13,7 @@ describe('Directive: nxgMax', function () {
       scope = $rootScope;
       element = angular.element(
         '<form name="form">' +
-          '<input type="text" name="input" ng-model="model.data" nxg-max="100"></input>' +
+          '<input type="text" name="input" ng-model="model.data" nxg-max="100">' +
         '</form>'
       );
       scope.model = {data: undefined};
@@ -68,7 +68,7 @@ describe('Directive: nxgMax', function () {
       scope = $rootScope;
       element = angular.element(
         '<form name="form">' +
-          '<input type="text" name="input" ng-model="model.data" nxg-max="settings.maxAllowed"></input>' +
+          '<input type="text" name="input" ng-model="model.data" nxg-max="settings.maxAllowed">' +
         '</form>'
       );
       scope.model = {data: undefined};

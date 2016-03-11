@@ -112,7 +112,7 @@ describe('Controller: CreditQueryCtrl', function () {
       expect(scope.business.creditQuery.retrieved).toBeDefined(false);
       expect(scope.business.creditQuery.loading).toBe(false);
       expect(scope.business.creditQuery.error).toBe(null);
-    })
+    });
 
     describe('get function', function() {
       it('should call the credit query model function', function() {

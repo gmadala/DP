@@ -74,7 +74,7 @@
                 return '<div>' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
               },
               itemStyle: {
-                fontFamily: defaultFontFamily,
+                fontFamily: defaultFontFamily
               },
               itemHoverStyle: {
                 color: '#274B6D' // same as non-hover color

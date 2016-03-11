@@ -564,7 +564,7 @@ describe('Controller: ExtensionRequestCtrl', function() {
       InterestAmount: 34,
       Fees: [
         { Type: 'fee1', Amount: 56 },
-        { Type: 'fee2', Amount: 78 },
+        { Type: 'fee2', Amount: 78 }
       ],
       CollateralProtectionAmount: 91,
       CanExtend: true
@@ -573,7 +573,7 @@ describe('Controller: ExtensionRequestCtrl', function() {
     floorplan = {
       getExtensionPreview: function() {
         return $q.when(prevMock);
-      },
+      }
     };
 
     dialog = {

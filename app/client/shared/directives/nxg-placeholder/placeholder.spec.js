@@ -13,7 +13,7 @@ describe('Directive: placeholder', function () {
     scope.foo = 'bar';
     timeout = $timeout;
 
-    element = angular.element('<input type="text" ng-model="foo" placeholder="1234"></input>');
+    element = angular.element('<input type="text" ng-model="foo" placeholder="1234">');
     element = $compile(element)(scope);
     $rootScope.$digest();
   }));

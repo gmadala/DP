@@ -67,7 +67,7 @@ describe('Controller: ProfileSettingsCtrl', function () {
           }
         }
       }
-    }
+    };
 
     $rootScope = _$rootScope_;
     scope = _$rootScope_.$new();

@@ -1,11 +1,15 @@
-/**
- * Created by gayathrimadala on 1/26/16.
- */
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('nextgearWebApp')
-  .controller('MessageBoxCtrl', function ($scope, title, message, buttons, $uibModalInstance) {
+  angular
+    .module('nextgearWebApp')
+    .controller('MessageBoxCtrl', MessageBoxCtrl);
+
+  MessageBoxCtrl.$inject = ['$scope', 'title', 'message', 'buttons', '$uibModalInstance'];
+
+  function MessageBoxCtrl($scope, title, message, buttons, $uibModalInstance) {
     var uibModalInstance = $uibModalInstance;
+
     $scope.title = title;
     $scope.message = message;
 
@@ -18,4 +22,5 @@ angular.module('nextgearWebApp')
       uibModalInstance.close();
     };
 
-  });
+  }
+})();

@@ -88,6 +88,7 @@
      * Generate web configuration based on the parameters.
      *
      * @param apiDomain
+     * @param ngenDomain
      * @param segmentIoKey
      * @param timeoutMs
      * @param isDemo

@@ -5,8 +5,7 @@ describe('Controller: FloorplanCtrl', function() {
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
-  var FloorplanCtrl,
-    stateParamsMock,
+  var stateParamsMock,
     floorplan,
     floorplanUtil,
     myPlan,

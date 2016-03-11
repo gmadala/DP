@@ -69,7 +69,7 @@
             dealerLinks.secondary.splice(1, 0, {
               name: gettextCatalog.getString('Value Lookup'),
               href: '#/valueLookup',
-              activeWhen: 'valueLookup',
+              activeWhen: 'valueLookup'
             });
             if($scope.eventSalesEnabled){
               dealerLinks.primary.push({

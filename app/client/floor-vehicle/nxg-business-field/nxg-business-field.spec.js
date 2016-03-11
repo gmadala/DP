@@ -46,7 +46,7 @@ describe('Directive: nxgBusinessField', function () {
     scope;
 
   beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
-    $httpBackend.whenGET('client/shared/directives/nxg-icon/nxg-icon.template.html').respond('<div></div>')
+    $httpBackend.whenGET('client/shared/directives/nxg-icon/nxg-icon.template.html').respond('<div></div>');
 
     scope = $rootScope.$new();
     scope.model = {

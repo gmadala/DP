@@ -14,7 +14,7 @@ describe('Directive: nxgBlur', function () {
       scope.event = event;
     };
 
-    element = angular.element('<input type="text" nxg-blur="blurTasks($event, \'ok\')"></input>');
+    element = angular.element('<input type="text" nxg-blur="blurTasks($event, \'ok\')">');
     element = $compile(element)(scope);
     $rootScope.$digest();
   }));

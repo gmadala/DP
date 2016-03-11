@@ -337,7 +337,7 @@ describe("Model: Payments", function () {
         FeesPayoffTotal: 1000,
         InterestPayoffTotal: 800,
         CollateralProtectionPayoffTotal: 200,
-        curtailmentDueDate: '2013-01-01',
+        curtailmentDueDate: '2013-01-01'
       };
       spyOn(cartItem, 'fromScheduledPayment').and.callThrough();
 
@@ -395,7 +395,7 @@ describe("Model: Payments", function () {
       payments.removeFromQueue(payments.getPaymentQueue().payments.payment123);
       expect(payments.removePaymentFromQueue).toHaveBeenCalled();
     });
-  })
+  });
 
   describe('removePaymentFromQueue', function () {
     it('should remove payments from the queue', function () {

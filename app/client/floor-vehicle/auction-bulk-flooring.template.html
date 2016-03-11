@@ -141,7 +141,7 @@
                required
                ng-class="{ 'nxg-invalid': validity.purchaseAuctionDatePicker.$error.required || validity.purchaseAuctionDatePicker.$error.past || validity.purchaseAuctionDatePicker.$error.date }"/>
         <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-        <button class="btn-alert" style="padding:0px;" ng-show="validity.purchaseAuctionDatePicker.$error.past || validity.purchaseAuctionDatePicker.$error.future"
+        <button class="btn-alert" style="padding:0;" ng-show="validity.purchaseAuctionDatePicker.$error.past || validity.purchaseAuctionDatePicker.$error.future"
                 tooltip-placement="right"
                 tooltip-trigger="mouseenter"
                 uib-tooltip="{{ 'To floor plan purchases older than 7 days, please contact NextGear Capital Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, and provide the customer’s NextGear Dealer Number.' | translate }}"

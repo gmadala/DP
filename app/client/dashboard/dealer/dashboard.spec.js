@@ -301,7 +301,7 @@ describe('Controller: DashboardCtrl', function () {
     $q = _$q_;
     mockState = {
       transitionTo: jasmine.createSpy()
-    }
+    };
 
     searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
       if(shouldSucceed) {
@@ -345,7 +345,7 @@ describe('Controller: DashboardCtrl', function () {
     it('should have an onClickButtonLink method to move to a new state', function() {
       scope.onClickButtonLink('payments');
       expect(mockState.transitionTo).toHaveBeenCalled();
-    })
+    });
 
     describe('getDueStatus method', function(){
       var p = { DueDate: "2014-06-02"},

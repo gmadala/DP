@@ -29,7 +29,7 @@ describe('Directive: nxgAlternateAddress', function () {
         "City": "Dallas",
         "IsTitleReleaseAddress": false,
         "Line1": "5333 West Kiest Blvd",
-        "State": "TX",
+        "State": "TX"
       },
       {
         "AddressId": "bedssss2cb-5896-4356-86a0-e932293faa6a",
@@ -37,14 +37,14 @@ describe('Directive: nxgAlternateAddress', function () {
         "IsTitleReleaseAddress": true,
         "Line1": "123 Elm St.",
         "Line2": "Apt. 4",
-        "State": "NY",
+        "State": "NY"
       },
       {
         "AddressId": "be9b22cb-5896-4356-86a0-e93rwrfaa6a",
         "City": "Beverly Hills",
         "IsTitleReleaseAddress": false,
         "Line1": "184 Dollar Ave.",
-        "State": "CA",
+        "State": "CA"
       }
     ];
 
@@ -53,7 +53,7 @@ describe('Directive: nxgAlternateAddress', function () {
       "City": "Rochester",
       "IsTitleReleaseAddress": true,
       "Line1": "123 Elm St.",
-      "State": "NY",
+      "State": "NY"
     };
 
     Addresses.getTitleAddresses = function() {

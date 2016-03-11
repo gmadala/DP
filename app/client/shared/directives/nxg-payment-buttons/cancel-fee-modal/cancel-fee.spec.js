@@ -66,7 +66,7 @@ describe('Controller: CancelFeeCtrl', function () {
 
   describe('handleYes function', function () {
 
-    var q, Payments
+    var q, Payments;
 
     beforeEach(inject(function ($q, _Payments_) {
       q = $q;

@@ -23,7 +23,7 @@ describe('Service: LastState', function () {
     User.infoLoaded = function(){ return true;};
     User.getInfoSync = function(){
       return username;
-    }
+    };
 
     $cookieStore.put('uiState', '');
 

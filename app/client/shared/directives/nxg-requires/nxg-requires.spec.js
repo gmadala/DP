@@ -16,7 +16,7 @@ describe('Directive: nxgRequires', function () {
 
     element = angular.element(
       '<form name="form">' +
-        '<input type="text" name="input" ng-model="model.data" nxg-requires="model.foo != null"></input>' +
+        '<input type="text" name="input" ng-model="model.data" nxg-requires="model.foo != null">' +
       '</form>'
     );
     element = $compile(element)(scope);

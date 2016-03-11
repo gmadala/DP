@@ -6,7 +6,6 @@ describe('Controller: FloorplanCtrl', function () {
   var FloorplanCtrl,
     stateParamsMock,
     floorplan,
-    modelMock,
     floorplanUtil,
     scope,
     searchSpy,

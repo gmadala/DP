@@ -33,7 +33,7 @@ describe('Controller: BusinessSearchCtrl', function () {
 
     var closeNowFunction = function() {
       return closeNow;
-    }
+    };
 
     scope = $rootScope.$new();
     BusinessSearchCtrl = $controller('BusinessSearchCtrl', {
@@ -234,7 +234,7 @@ describe('Controller: BusinessSearchCtrl', function () {
   });
 
   it('should have a select function that closes the dialog with the passed item', function () {
-    var item = {}
+    var item = {};
     spyOn(dialog, 'close');
     scope.select(item);
     expect(dialog.close).toHaveBeenCalledWith(item);

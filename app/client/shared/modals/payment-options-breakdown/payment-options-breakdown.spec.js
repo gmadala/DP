@@ -45,7 +45,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       PrincipalPayoff: 3000,
       FeesPayoffTotal: 1000,
       InterestPayoffTotal: 1000,
-      CollateralProtectionPayoffTotal: 0,
+      CollateralProtectionPayoffTotal: 0
     };
 
     fromCartItemMock = CartItem.fromPayment(mockPayment);

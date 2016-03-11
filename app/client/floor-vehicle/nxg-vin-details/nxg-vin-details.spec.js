@@ -247,7 +247,7 @@ describe('Directive: NxgVinDetails', function () {
         expect(uibModal.open.calls.mostRecent().args[0].resolve.matchList()).toBe(results);
 
         // expect(scope.data.$selectedVehicle).toBe(dialogChoice);
-      })
+      });
 
       it('should handle blackbook errors', function() {
         expect(scope.settings.vinMode).toBe('none');

@@ -118,7 +118,7 @@ describe('Model: AccountManagement', function() {
       LastPaymentAmount: 180.00,
       LastPaymentDate: '2013-01-01',
       UnappliedFundsTotal: 2222,
-      TotalAvailableUnappliedFunds: 1111,
+      TotalAvailableUnappliedFunds: 1111
     };
 
     expect(res.AvailableCredit).toBe(expected.TotalAvailableCredit);
