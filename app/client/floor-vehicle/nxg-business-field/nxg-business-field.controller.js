@@ -42,7 +42,7 @@
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'client/dealer-search/business-search/business-search.template.html',
+          templateUrl: 'client/dealer-search/business-search-modal/business-search.template.html',
           controller: 'BusinessSearchCtrl',
           resolve: {
             initialQuery: function() {
