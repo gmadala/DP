@@ -652,7 +652,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('PaymentDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/payment-details/payment-details.template.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/payment-details-modal/payment-details.template.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(paymentDetailsMock);
       }));
 
@@ -666,7 +666,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('FeeDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/fee-details/fee-details.template.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/fee-details-modal/fee-details.template.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(feeDetailsMock);
       }));
     });
