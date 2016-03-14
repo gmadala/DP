@@ -92,7 +92,7 @@ msgstr "{{ item.DaysOnFloorplan }} días"
 msgid "{{ item.FloorplanStatusName }}"
 msgstr "{{ item.FloorplanStatusName }}"
 
-#: app/client/payments/payments.template.html:166
+#: app/client/payments/payments.template.html:170
 msgid "{{ payment.DaysOnFloorplan }} days"
 msgstr "{{ payment.DaysOnFloorplan }} días"
 
@@ -106,7 +106,7 @@ msgstr[1] "{{ paymentQueue.sum.scheduledCount() }} Pagos Futuros"
 msgid "{{ results.mileage | numeral:'0,0' }} miles"
 msgstr "{{ results.mileage | numeral:'0,0' }} millas"
 
-#: app/client/receipts/receipts.template.html:117
+#: app/client/receipts/receipts.template.html:119
 msgid ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">out of</"
 "span> 20"
@@ -121,7 +121,7 @@ msgstr ""
 msgid "# of Cars Purchased"
 msgstr "# de automóviles comprados"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:133
+#: app/client/dashboard/auction/auction-dashboard.template.html:135
 msgid "# of Floored Vehicles"
 msgstr "# de vehículos financiados"
 
@@ -190,7 +190,7 @@ msgid "$"
 msgstr "$"
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:101
-#: app/client/receipts/receipts.template.html:144
+#: app/client/receipts/receipts.template.html:146
 msgid "1 VIN per page"
 msgstr "1 VIN por página"
 
@@ -222,7 +222,7 @@ msgstr "3. Artículos opcionales"
 msgid "a mistyped address"
 msgstr "dirección mal escrita"
 
-#: app/client/vehicle-details/vehicle-details.html:404
+#: app/client/vehicle-details/vehicle-details.html:406
 msgid ""
 "A payment is due this week. <br><a class=\"primary\" href=\"\" ng-show="
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
@@ -232,7 +232,7 @@ msgstr ""
 "show=\"showExtendLink()\" ng-click=\"requestExtension()\">¿Solicitar una "
 "extensión?</a>"
 
-#: app/client/vehicle-details/vehicle-details.html:399
+#: app/client/vehicle-details/vehicle-details.html:401
 msgid ""
 "A payment is due today. <br><a class=\"primary\" href=\"\" ng-show="
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension?</"
@@ -242,7 +242,7 @@ msgstr ""
 "showExtendLInk()\" ng-click=\"requestExtension()\">¿Solicitar una extensión?"
 "</a>"
 
-#: app/client/vehicle-details/vehicle-details.html:393
+#: app/client/vehicle-details/vehicle-details.html:395
 msgid ""
 "A payment is overdue. <br><a class=\"primary\" href=\"\" ng-show="
 "\"showExtendLink()\" ng-click=\"requestExtension()\">Request an extension? </"
@@ -292,7 +292,7 @@ msgstr "Acciones"
 msgid "Active"
 msgstr "Activa"
 
-#: app/client/vehicle-details/vehicle-details.html:194
+#: app/client/vehicle-details/vehicle-details.html:195
 msgid "Activity Date"
 msgstr "Fecha de la actividad"
 
@@ -312,11 +312,11 @@ msgstr ""
 msgid "Add Account"
 msgstr "Agregar cuenta"
 
-#: app/client/vehicle-details/vehicle-details.html:432
+#: app/client/vehicle-details/vehicle-details.html:434
 msgid "Add Additional Principal?"
 msgstr "¿Agregar capital adicional?"
 
-#: app/client/receipts/receipts.template.html:88
+#: app/client/receipts/receipts.template.html:90
 msgid "Add Receipt"
 msgstr "Agregar recibo"
 
@@ -333,7 +333,7 @@ msgstr ""
 
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:55
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:77
-#: app/client/vehicle-details/vehicle-details.html:426
+#: app/client/vehicle-details/vehicle-details.html:428
 msgid "Additional Principal"
 msgstr "Capital adicional"
 
@@ -378,7 +378,7 @@ msgstr ""
 "contrario."
 
 #: app/client/value-lookup/value-lookup.html:430
-#: app/client/vehicle-details/vehicle-details.html:329
+#: app/client/vehicle-details/vehicle-details.html:331
 msgid "All values are displayed in US Dollars."
 msgstr "Todos los valores se muestran en dólares estadounidenses."
 
@@ -386,11 +386,11 @@ msgstr "Todos los valores se muestran en dólares estadounidenses."
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:33
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:57
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:76
-#: app/client/dashboard/auction/auction-dashboard.template.html:100
+#: app/client/dashboard/auction/auction-dashboard.template.html:101
 #: app/client/dashboard/dealer/dashboard.template.html:254
 #: app/client/payments/nxg-payment-summary/nxg-payment-summary.template.html:29
-#: app/client/payments/payments.template.html:59
-#: app/client/receipts/receipts.template.html:46
+#: app/client/payments/payments.template.html:60
+#: app/client/receipts/receipts.template.html:47
 msgid "Amount"
 msgstr "Cantidad"
 
@@ -403,7 +403,7 @@ msgstr ""
 "number:2 }}% del Libro de NextGear Capital."
 
 #: app/client/payments/payments.template.html:28
-#: app/client/payments/payments.template.html:95
+#: app/client/payments/payments.template.html:97
 msgid ""
 "Amounts shown are valid through 8pm Eastern Time\n"
 "          <span ng-show=\"canPayNow\">today ({{ todayDate | moment }})</"
@@ -473,7 +473,7 @@ msgstr "¿Está seguro que desea salir?"
 msgid "Auction #"
 msgstr "# de subasta"
 
-#: app/client/dealer-search/business-search-modal/business-search.template.html:55
+#: app/client/dealer-search/business-search-modal/business-search.template.html:56
 msgid "Auction Access No."
 msgstr "Núm. de acceso a la subasta"
 
@@ -510,8 +510,8 @@ msgstr "Fondos no aplicados disponibles"
 
 #: app/client/value-lookup/value-lookup.html:509
 #: app/client/value-lookup/value-lookup.html:566
-#: app/client/vehicle-details/vehicle-details.html:345
-#: app/client/vehicle-details/vehicle-details.html:367
+#: app/client/vehicle-details/vehicle-details.html:347
+#: app/client/vehicle-details/vehicle-details.html:369
 msgid "Average"
 msgstr "Promedio"
 
@@ -527,11 +527,11 @@ msgstr "Precio de compra promedio"
 msgid "Average Turn"
 msgstr "Turno promedio"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:14
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:15
 msgid "Avg NextGear Capital Book Value"
 msgstr "Valor promedio en libros de NextGear Capital"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:13
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:14
 msgid "Avg Purchase Price"
 msgstr "Precio de compra promedio"
 
@@ -556,7 +556,7 @@ msgid "Awaiting Titles 30+ Days"
 msgstr "Títulos en espera de más de 30 días"
 
 #: app/client/floor-vehicle/floor-car.template.html:217
-#: app/client/vehicle-details/vehicle-details.html:459
+#: app/client/vehicle-details/vehicle-details.html:461
 msgid "Back of Title"
 msgstr "Reverso del título"
 
@@ -600,7 +600,7 @@ msgid "Best Movers"
 msgstr "Las de mejor movimiento"
 
 #: app/client/floor-vehicle/floor-car.template.html:215
-#: app/client/vehicle-details/vehicle-details.html:457
+#: app/client/vehicle-details/vehicle-details.html:459
 msgid "Bill of Sale"
 msgstr "Nota de venta"
 
@@ -608,8 +608,8 @@ msgstr "Nota de venta"
 msgid "Business Email"
 msgstr "Correo electrónico del negocio"
 
-#: app/client/dealer-search/business-search-modal/business-search.template.html:43
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:57
+#: app/client/dealer-search/business-search-modal/business-search.template.html:44
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:58
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:8
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:26
 #: app/client/shared/modals/credit-query/credit-query.template.html:18
@@ -620,8 +620,8 @@ msgstr "Nombre del negocio"
 msgid "Business Name or Number"
 msgstr "Nombre o número del negocio"
 
-#: app/client/dealer-search/business-search-modal/business-search.template.html:53
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:67
+#: app/client/dealer-search/business-search-modal/business-search.template.html:54
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:68
 msgid "Business No."
 msgstr "Núm. de negocio"
 
@@ -673,7 +673,7 @@ msgid "By Stock #, VIN, or Description"
 msgstr "Por número de inventario, VIN o descripción"
 
 #: app/client/floor-vehicle/floor-car.template.html:267
-#: app/client/vehicle-details/vehicle-details.html:510
+#: app/client/vehicle-details/vehicle-details.html:512
 msgid "Can't drag &amp; drop?"
 msgstr "¿No puede arrastrar y soltar?"
 
@@ -736,19 +736,19 @@ msgstr "Cambiar fecha de pago"
 msgid "Chat"
 msgstr "Chat"
 
-#: app/client/receipts/receipts.template.html:71
+#: app/client/receipts/receipts.template.html:73
 msgid "Check #"
 msgstr "Cheque #"
 
 #: app/client/payments/nxg-payment-summary/nxg-payment-summary.template.html:78
-#: app/client/vehicle-details/vehicle-details.html:443
+#: app/client/vehicle-details/vehicle-details.html:445
 msgid "Checkout"
 msgstr "Verificación"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:98
-#: app/client/dealer-search/business-search-modal/business-search.template.html:61
+#: app/client/dealer-search/business-search-modal/business-search.template.html:62
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:16
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:72
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:73
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:46
 msgid "City"
 msgstr "Ciudad"
@@ -764,7 +764,7 @@ msgid "Claim Form"
 msgstr "Formulario de reclamación"
 
 #: app/client/value-lookup/value-lookup.html:505
-#: app/client/vehicle-details/vehicle-details.html:341
+#: app/client/vehicle-details/vehicle-details.html:343
 msgid "Clean"
 msgstr "Limpio"
 
@@ -772,7 +772,7 @@ msgstr "Limpio"
 msgid "Clear Search"
 msgstr "Eliminar búsqueda"
 
-#: app/client/payments/payments.template.html:189
+#: app/client/payments/payments.template.html:193
 msgid "Click the Add button to add a payoff or a payment."
 msgstr "Haga clic en el botón Añadir para agregar una liquidación o un pago."
 
@@ -784,9 +784,9 @@ msgstr "Cerrar"
 msgid "Close Details"
 msgstr "Cerrar detalles"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:30
-#: app/client/dealer-search/business-search-modal/business-search.template.html:99
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:102
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:32
+#: app/client/dealer-search/business-search-modal/business-search.template.html:101
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:104
 #: app/client/floor-vehicle/nxg-vin-details/multiple-vehicles-modal/multiple-vehicles.template.html:23
 #: app/client/shared/modals/credit-query/credit-query.template.html:48
 #: app/client/shared/modals/extension-request/payment-extension.template.html:44
@@ -810,7 +810,7 @@ msgstr "Programa de protección de garantía"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:8
 #: app/client/floor-vehicle/floor-car.template.html:8
-#: app/client/vehicle-details/vehicle-details.html:266
+#: app/client/vehicle-details/vehicle-details.html:268
 msgid "Color"
 msgstr "Color"
 
@@ -921,7 +921,7 @@ msgstr "Tipo de crédito"
 msgid "Credits and Payments"
 msgstr "Créditos y pagos"
 
-#: app/client/vehicle-details/vehicle-details.html:274
+#: app/client/vehicle-details/vehicle-details.html:276
 msgid "Current Odometer"
 msgstr "Cuentakilómetros actual"
 
@@ -939,7 +939,7 @@ msgstr "Pago con reducción"
 msgid "Dashboard"
 msgstr "Tablero"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:98
+#: app/client/dashboard/auction/auction-dashboard.template.html:99
 #: app/client/promos/promos.template.html:19
 #: app/client/reports/dealer/reports.template.html:147
 #: app/client/reports/dealer/reports.template.html:20
@@ -967,7 +967,7 @@ msgstr "Fecha de envío"
 msgid "Dates"
 msgstr "Fechas "
 
-#: app/client/vehicle-details/vehicle-details.html:222
+#: app/client/vehicle-details/vehicle-details.html:224
 msgid "Days Floored"
 msgstr "Días de piso "
 
@@ -1048,8 +1048,8 @@ msgstr "Denegado/No pagado"
 #: app/client/dashboard/dealer/dashboard.template.html:349
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:34
 #: app/client/floor-plan/floor-plan.template.html:36
-#: app/client/payments/payments.template.html:116
-#: app/client/payments/payments.template.html:49
+#: app/client/payments/payments.template.html:119
+#: app/client/payments/payments.template.html:50
 #: app/client/promos/promos.template.html:17
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:7
 #: app/client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html:14
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "Disbursement"
 msgstr "Desembolso"
 
-#: app/client/vehicle-details/vehicle-details.html:309
+#: app/client/vehicle-details/vehicle-details.html:311
 msgid "Disbursement Date"
 msgstr "Fecha de desembolso"
 
@@ -1089,7 +1089,7 @@ msgid "Disbursement Groups"
 msgstr "Grupos de desembolso"
 
 #: app/client/floor-vehicle/floor-car.template.html:209
-#: app/client/vehicle-details/vehicle-details.html:451
+#: app/client/vehicle-details/vehicle-details.html:453
 msgid "Document Upload"
 msgstr "Cargar documento"
 
@@ -1110,15 +1110,15 @@ msgid "Download myNextGear mobile iOS"
 msgstr "Descargue myNextGear mobile para iOS"
 
 #: app/client/floor-vehicle/floor-car.template.html:241
-#: app/client/vehicle-details/vehicle-details.html:483
+#: app/client/vehicle-details/vehicle-details.html:485
 msgid "Drag files here..."
 msgstr "Arrastre los archivos aquí..."
 
 #: app/client/checkout/checkout.template.html:23
 #: app/client/checkout/checkout.template.html:83
 #: app/client/dashboard/dealer/dashboard.template.html:25
-#: app/client/payments/payments.template.html:111
-#: app/client/payments/payments.template.html:39
+#: app/client/payments/payments.template.html:114
+#: app/client/payments/payments.template.html:40
 msgid "Due Date"
 msgstr "Fecha de vencimiento"
 
@@ -1150,7 +1150,7 @@ msgstr[1] "Vencen hoy"
 msgid "Edit"
 msgstr "Editar"
 
-#: app/client/vehicle-details/vehicle-details.html:431
+#: app/client/vehicle-details/vehicle-details.html:433
 msgid "Edit Additional Principal"
 msgstr "Editar capital adicional"
 
@@ -1265,16 +1265,16 @@ msgstr "Evento de Venta"
 
 #: app/client/value-lookup/value-lookup.html:558
 #: app/client/value-lookup/value-lookup.html:623
-#: app/client/vehicle-details/vehicle-details.html:359
+#: app/client/vehicle-details/vehicle-details.html:361
 msgid "Excellent"
 msgstr "Excelente"
 
-#: app/client/receipts/receipts.template.html:156
-#: app/client/receipts/receipts.template.html:48
+#: app/client/receipts/receipts.template.html:158
+#: app/client/receipts/receipts.template.html:49
 msgid "Export Receipt(s)"
 msgstr "Exportar recibo(s)"
 
-#: app/client/receipts/receipts.template.html:109
+#: app/client/receipts/receipts.template.html:111
 msgid "Export Receipts"
 msgstr "Exportar recibos"
 
@@ -1291,13 +1291,13 @@ msgid "Extended Term"
 msgstr "Plazo ampliado"
 
 #: app/client/value-lookup/value-lookup.html:501
-#: app/client/vehicle-details/vehicle-details.html:337
+#: app/client/vehicle-details/vehicle-details.html:339
 msgid "Extra Clean"
 msgstr "Extra limpio"
 
 #: app/client/value-lookup/value-lookup.html:570
 #: app/client/value-lookup/value-lookup.html:635
-#: app/client/vehicle-details/vehicle-details.html:371
+#: app/client/vehicle-details/vehicle-details.html:373
 msgid "Fair"
 msgstr "Aceptable"
 
@@ -1322,7 +1322,7 @@ msgstr "Cargo - Servicios de registro"
 msgid "Fee Amount"
 msgstr "Monto del cargo"
 
-#: app/client/vehicle-details/vehicle-details.html:207
+#: app/client/vehicle-details/vehicle-details.html:209
 msgid "Fee Assessed for {{ activity.ActivityAmount | currency }}"
 msgstr "Cargo evaluado por {{ activity.ActivityAmount | currency }}"
 
@@ -1334,7 +1334,7 @@ msgstr "Detalles del cargo"
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:12
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:55
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:6
-#: app/client/payments/payments.template.html:44
+#: app/client/payments/payments.template.html:45
 #: app/client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html:15
 msgid "Fee Type"
 msgstr "Tipo de cargo"
@@ -1434,11 +1434,11 @@ msgstr "Comentarios de planes de piso"
 msgid "Floor Plan Total"
 msgstr "Total del plan de piso"
 
-#: app/client/vehicle-details/vehicle-details.html:323
+#: app/client/vehicle-details/vehicle-details.html:325
 msgid "Floor Plan Value Estimates"
 msgstr "Estimados del valor del plan de piso"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:121
+#: app/client/dashboard/auction/auction-dashboard.template.html:123
 msgid "Floor Plan Volume History"
 msgstr ""
 
@@ -1452,7 +1452,7 @@ msgstr "Vehículo en piso"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:51
 #: app/client/floor-plan/floor-plan.template.html:31
-#: app/client/payments/payments.template.html:121
+#: app/client/payments/payments.template.html:124
 #: app/client/title-releases/title-releases-checkout/title-release-checkout.html:34
 #: app/client/title-releases/title-releases.html:37
 msgid "Floored"
@@ -1485,7 +1485,7 @@ msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
 #: app/client/floor-vehicle/floor-car.template.html:211
-#: app/client/vehicle-details/vehicle-details.html:453
+#: app/client/vehicle-details/vehicle-details.html:455
 msgid ""
 "For faster funding, please upload your floor plan documents now. Document "
 "types should include:"
@@ -1510,7 +1510,7 @@ msgid "Forgot Your Username?"
 msgstr "¿Olvidó su nombre de usuario?"
 
 #: app/client/floor-vehicle/floor-car.template.html:216
-#: app/client/vehicle-details/vehicle-details.html:458
+#: app/client/vehicle-details/vehicle-details.html:460
 msgid "Front of Title"
 msgstr "Frente del título"
 
@@ -1533,12 +1533,12 @@ msgstr "Ir a la página principal"
 
 #: app/client/value-lookup/value-lookup.html:562
 #: app/client/value-lookup/value-lookup.html:631
-#: app/client/vehicle-details/vehicle-details.html:363
+#: app/client/vehicle-details/vehicle-details.html:365
 msgid "Good"
 msgstr "Bien"
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:96
-#: app/client/receipts/receipts.template.html:139
+#: app/client/receipts/receipts.template.html:141
 msgid "Grouped by transaction"
 msgstr "Agrupados por transacción"
 
@@ -1550,7 +1550,7 @@ msgstr "Lineamientos"
 msgid "Hide Old Promos"
 msgstr "Ocultar promociones antiguas"
 
-#: app/client/vehicle-details/vehicle-details.html:234
+#: app/client/vehicle-details/vehicle-details.html:236
 msgid "Hide Payment Activity"
 msgstr "Ocultar actividad de pago"
 
@@ -1631,7 +1631,7 @@ msgstr "Instrucciones para compradores"
 msgid "Instructions for Sellers"
 msgstr "Instrucciones para vendedores"
 
-#: app/client/receipts/receipts.template.html:56
+#: app/client/receipts/receipts.template.html:58
 msgid "Insufficient Funds"
 msgstr "Fondos insuficientes"
 
@@ -1671,7 +1671,7 @@ msgid "Invalid date range"
 msgstr "Rango de fechas no válido"
 
 #: app/client/floor-vehicle/floor-car.template.html:262
-#: app/client/vehicle-details/vehicle-details.html:505
+#: app/client/vehicle-details/vehicle-details.html:507
 msgid "invalid files."
 msgstr "archivos inválidos."
 
@@ -1714,8 +1714,8 @@ msgstr "Último pago"
 msgid "Last Payment Date"
 msgstr "Fecha del último pago"
 
-#: app/client/dealer-search/business-search-modal/business-search.template.html:48
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:62
+#: app/client/dealer-search/business-search-modal/business-search.template.html:49
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:63
 msgid "Legal Name"
 msgstr "Razón social"
 
@@ -1762,7 +1762,7 @@ msgstr "Número de lote"
 #: app/client/value-lookup/value-lookup.html:108
 #: app/client/value-lookup/value-lookup.html:222
 #: app/client/value-lookup/value-lookup.html:319
-#: app/client/vehicle-details/vehicle-details.html:254
+#: app/client/vehicle-details/vehicle-details.html:256
 msgid "Make"
 msgstr "Marca"
 
@@ -1832,11 +1832,11 @@ msgstr "Falta el estilo"
 msgid "Missing year"
 msgstr "Falta el año"
 
-#: app/client/vehicle-details/vehicle-details.html:355
+#: app/client/vehicle-details/vehicle-details.html:357
 msgid "MMR Values"
 msgstr "Valores MMR"
 
-#: app/client/vehicle-details/vehicle-details.html:356
+#: app/client/vehicle-details/vehicle-details.html:358
 msgid "MMR Values not found on record for this vehicle."
 msgstr "No se encontraron valores MMR registrados para este vehículo."
 
@@ -1861,11 +1861,11 @@ msgstr "Aplicaciones móviles"
 #: app/client/value-lookup/value-lookup.html:546
 #: app/client/value-lookup/value-lookup.html:590
 #: app/client/value-lookup/value-lookup.html:611
-#: app/client/vehicle-details/vehicle-details.html:258
+#: app/client/vehicle-details/vehicle-details.html:260
 msgid "Model"
 msgstr "Modelo"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:126
+#: app/client/dashboard/auction/auction-dashboard.template.html:128
 #: app/client/dashboard/dealer/dashboard.template.html:13
 msgid "Month"
 msgstr "Mes"
@@ -1919,12 +1919,12 @@ msgstr "n/a"
 msgid "New Password"
 msgstr "Contraseña nueva"
 
-#: app/client/vehicle-details/vehicle-details.html:414
+#: app/client/vehicle-details/vehicle-details.html:416
 msgid "Next payment due {{ financialSummary.NextPaymentDueDate | moment }}"
 msgstr ""
 "El siguiente pago vence {{ financialSummary.NextPaymentDueDate | moment }}"
 
-#: app/client/vehicle-details/vehicle-details.html:323
+#: app/client/vehicle-details/vehicle-details.html:325
 msgid "NextGear Capital &amp; MMR Valuation"
 msgstr "NextGear Capital & Valoración MMR"
 
@@ -1944,7 +1944,7 @@ msgstr ""
 "El libro de NextGear Capital es {{ businessSummary.DerivedPendingBook | "
 "number:2 }}% del precio de compra"
 
-#: app/client/vehicle-details/vehicle-details.html:334
+#: app/client/vehicle-details/vehicle-details.html:336
 msgid "NextGear Capital Book Values"
 msgstr "Valores de NextGear Capital Book"
 
@@ -1987,7 +1987,7 @@ msgstr "No"
 msgid "No notifications are currently enabled."
 msgstr "No hay ninguna notificación activada actualmente."
 
-#: app/client/vehicle-details/vehicle-details.html:238
+#: app/client/vehicle-details/vehicle-details.html:240
 msgid "No Payment Activity Available"
 msgstr "No hay ninguna actividad de pago disponible."
 
@@ -2012,7 +2012,7 @@ msgstr "Sin título/pagado"
 msgid "No, Thanks"
 msgstr "No, gracias"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:99
+#: app/client/dashboard/auction/auction-dashboard.template.html:100
 msgid "No."
 msgstr "Núm."
 
@@ -2040,7 +2040,7 @@ msgid "Not found <span>:(</span>"
 msgstr "No se encontró <span>:(</span>"
 
 #: app/client/floor-vehicle/floor-car.template.html:221
-#: app/client/vehicle-details/vehicle-details.html:463
+#: app/client/vehicle-details/vehicle-details.html:465
 msgid "Not sure what to send?"
 msgstr "¿No está seguro(a) de qué enviar?"
 
@@ -2071,7 +2071,7 @@ msgid "OK"
 msgstr "De acuerdo"
 
 #: app/client/floor-vehicle/floor-car.template.html:285
-#: app/client/vehicle-details/vehicle-details.html:528
+#: app/client/vehicle-details/vehicle-details.html:530
 msgid "One or more files exceeded the 5MB limit."
 msgstr "Hay uno o más archivos que exceden el límite de 5 MB."
 
@@ -2080,7 +2080,7 @@ msgid "Original Term"
 msgstr "Plazo original"
 
 #: app/client/floor-vehicle/floor-car.template.html:218
-#: app/client/vehicle-details/vehicle-details.html:460
+#: app/client/vehicle-details/vehicle-details.html:462
 msgid "Other required documents"
 msgstr "Otros documentos que deben presentarse"
 
@@ -2143,9 +2143,9 @@ msgid "payment"
 msgstr "pago"
 
 #: app/client/checkout/checkout.template.html:176
-#: app/client/payments/payments.template.html:131
-#: app/client/receipts/receipts.template.html:68
-#: app/client/vehicle-details/vehicle-details.html:417
+#: app/client/payments/payments.template.html:134
+#: app/client/receipts/receipts.template.html:70
+#: app/client/vehicle-details/vehicle-details.html:419
 msgid "Payment"
 msgstr "Pago"
 
@@ -2165,11 +2165,11 @@ msgstr "Desglose del pago"
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:32
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:56
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:75
-#: app/client/receipts/receipts.template.html:31
+#: app/client/receipts/receipts.template.html:32
 msgid "Payment Date"
 msgstr "Fecha de pago"
 
-#: app/client/receipts/receipts.template.html:41
+#: app/client/receipts/receipts.template.html:42
 msgid "Payment Description"
 msgstr "Descripción del pago"
 
@@ -2186,7 +2186,7 @@ msgstr "Pago vence"
 msgid "Payment Made"
 msgstr "Pago realizado"
 
-#: app/client/vehicle-details/vehicle-details.html:206
+#: app/client/vehicle-details/vehicle-details.html:208
 msgid "Payment Made for {{ activity.ActivityAmount | currency }}"
 msgstr "Pago hecho a {{ activity.ActivityAmount | currency }}"
 
@@ -2195,12 +2195,12 @@ msgid "Payment Method"
 msgstr "Método de pago"
 
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:10
-#: app/client/vehicle-details/vehicle-details.html:382
+#: app/client/vehicle-details/vehicle-details.html:384
 msgid "Payment Options"
 msgstr "Opciones de pago"
 
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:1
-#: app/client/vehicle-details/vehicle-details.html:437
+#: app/client/vehicle-details/vehicle-details.html:439
 msgid "Payment Options &amp; Breakdown"
 msgstr "Opciones de pago & desglose"
 
@@ -2252,8 +2252,8 @@ msgstr "Resumen de pagos"
 msgid "payoff"
 msgstr "pagado"
 
-#: app/client/payments/payments.template.html:136
-#: app/client/vehicle-details/vehicle-details.html:421
+#: app/client/payments/payments.template.html:139
+#: app/client/vehicle-details/vehicle-details.html:423
 msgid "Payoff"
 msgstr "Pagado"
 
@@ -2837,7 +2837,7 @@ msgstr ""
 msgid "Please select who has the title."
 msgstr "Por favor, seleccione quién tiene el título."
 
-#: app/client/payments/payments.template.html:54
+#: app/client/payments/payments.template.html:55
 msgid "Posted"
 msgstr "Publicado"
 
@@ -2845,7 +2845,7 @@ msgstr "Publicado"
 msgid "Posted Date"
 msgstr "Fecha de publicación"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:114
+#: app/client/dashboard/auction/auction-dashboard.template.html:116
 msgid "Previous Disbursements"
 msgstr "Desembolsos anteriores"
 
@@ -2867,7 +2867,7 @@ msgstr "Declaración de privacidad"
 msgid "Proceed to Step 2"
 msgstr "Proceda al Paso 2"
 
-#: app/client/receipts/receipts.template.html:58
+#: app/client/receipts/receipts.template.html:60
 msgid "Processed"
 msgstr "Procesado"
 
@@ -2909,7 +2909,7 @@ msgstr "Importe de la compra"
 msgid "Purchase Date"
 msgstr "Fecha de la compra"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:12
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:13
 #: app/client/floor-plan/floor-plan.template.html:46
 #: app/client/title-releases/title-releases-checkout/title-release-checkout.html:36
 #: app/client/title-releases/title-releases.html:47
@@ -2941,8 +2941,8 @@ msgid "Receipt Date"
 msgstr "Fecha de recibo"
 
 #: app/client/dashboard/dealer/dashboard.template.html:253
-#: app/client/receipts/receipts.template.html:129
-#: app/client/receipts/receipts.template.html:36
+#: app/client/receipts/receipts.template.html:131
+#: app/client/receipts/receipts.template.html:37
 #: app/client/vehicle-details/payment-details-modal/payment-details.template.html:8
 msgid "Receipt No."
 msgstr "Recibo Núm."
@@ -2964,11 +2964,11 @@ msgstr "Total del recibo"
 msgid "Receipts"
 msgstr "Recibos"
 
-#: app/client/receipts/receipts.template.html:136
+#: app/client/receipts/receipts.template.html:138
 msgid "Receipts formatting options"
 msgstr "Opciones para el formato de recibos"
 
-#: app/client/receipts/receipts.template.html:116
+#: app/client/receipts/receipts.template.html:118
 msgid "Receipts Selected"
 msgstr "Recibos seleccionados"
 
@@ -3018,7 +3018,7 @@ msgstr "Recuerde el nombre del usuario"
 msgid "Remove"
 msgstr "Eliminar"
 
-#: app/client/receipts/receipts.template.html:87
+#: app/client/receipts/receipts.template.html:89
 msgid "Remove Receipt"
 msgstr "Eliminar recibo"
 
@@ -3036,7 +3036,7 @@ msgstr "Reportes"
 msgid "Request a Credit Increase"
 msgstr "Solicitar un aumento de crédito"
 
-#: app/client/vehicle-details/vehicle-details.html:409
+#: app/client/vehicle-details/vehicle-details.html:411
 msgid "Request an extension?"
 msgstr "¿Desea solicitar una ampliación?"
 
@@ -3057,7 +3057,7 @@ msgstr "Solicitar pago"
 msgid "Request submitted"
 msgstr "Solicitud enviada"
 
-#: app/client/vehicle-details/vehicle-details.html:313
+#: app/client/vehicle-details/vehicle-details.html:315
 msgid "Request the Title"
 msgstr "Solicitar el título"
 
@@ -3069,7 +3069,7 @@ msgstr "Solicitar título"
 msgid "Request Unapplied Funds Payout"
 msgstr "Solicitar pago de fondos no aplicados"
 
-#: app/client/payments/payments.template.html:150
+#: app/client/payments/payments.template.html:154
 msgid "Request<br>Extension"
 msgstr "Solicitar<br>ampliación"
 
@@ -3110,7 +3110,7 @@ msgid "Review the following and submit your title release requests."
 msgstr "Revise lo siguiente y envíe sus solicitudes de liberación de título."
 
 #: app/client/value-lookup/value-lookup.html:513
-#: app/client/vehicle-details/vehicle-details.html:349
+#: app/client/vehicle-details/vehicle-details.html:351
 msgid "Rough"
 msgstr "Aproximado"
 
@@ -3138,7 +3138,7 @@ msgstr "Tipo de venta"
 msgid "Sales Date"
 msgstr "Fecha de venta"
 
-#: app/client/vehicle-details/vehicle-details.html:278
+#: app/client/vehicle-details/vehicle-details.html:280
 msgid "Salvage"
 msgstr "Recuperación"
 
@@ -3162,7 +3162,7 @@ msgstr "Guardar los cambios"
 msgid "Save Settings"
 msgstr "Guarde los ajustes"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:15
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:16
 msgid "Savings Per Purchase"
 msgstr "Ahorros por compra"
 
@@ -3262,7 +3262,7 @@ msgstr "Seleccione la fecha programada."
 msgid "Self-Service Links"
 msgstr "Vínculos de auto servicio"
 
-#: app/client/analytics/top-auctions-modal/top-auctions.template.html:11
+#: app/client/analytics/top-auctions-modal/top-auctions.template.html:12
 #: app/client/floor-plan/floor-plan.controller.js:168
 #: app/client/floor-plan/floor-plan.service.js:102
 #: app/client/floor-plan/floor-plan.template.html:51
@@ -3304,7 +3304,7 @@ msgstr "Ver detalles"
 msgid "Show Old Promos"
 msgstr "Mostrar promociones antiguas"
 
-#: app/client/vehicle-details/vehicle-details.html:233
+#: app/client/vehicle-details/vehicle-details.html:235
 msgid "Show Payment Activity"
 msgstr "Ver actividad de pago"
 
@@ -3353,7 +3353,7 @@ msgstr ""
 "\"floorplanData.resetSearch()\" title=\"New Search\">realice una nueva "
 "búsqueda</a>."
 
-#: app/client/payments/payments.template.html:100
+#: app/client/payments/payments.template.html:102
 msgid ""
 "Sorry, no results found. Please <a ng-click=\"payments.resetSearch()\" title="
 "\"New Search\">try a new search</a>."
@@ -3411,9 +3411,9 @@ msgid "Start Over"
 msgstr "Volver a iniciar"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:112
-#: app/client/dealer-search/business-search-modal/business-search.template.html:66
+#: app/client/dealer-search/business-search-modal/business-search.template.html:67
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:22
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:77
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:78
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:67
 msgid "State"
 msgstr "Estado"
@@ -3421,7 +3421,7 @@ msgstr "Estado"
 #: app/client/dashboard/dealer/dashboard.template.html:351
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:36
 #: app/client/floor-plan/floor-plan.template.html:41
-#: app/client/payments/payments.template.html:126
+#: app/client/payments/payments.template.html:129
 #: app/client/vehicle-details/vehicle-details.html:26
 msgid "Status"
 msgstr "Estatus"
@@ -3438,14 +3438,14 @@ msgstr "Paso 2 de 2: Agregue su cuenta"
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:39
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:82
 #: app/client/floor-plan/floor-plan.template.html:73
-#: app/client/payments/payments.template.html:160
+#: app/client/payments/payments.template.html:164
 #: app/client/title-releases/title-releases-checkout/title-release-checkout.html:51
 #: app/client/title-releases/title-releases.html:64
 msgid "STK"
 msgstr "STK"
 
 #: app/client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.template.html:10
-#: app/client/vehicle-details/vehicle-details.html:247
+#: app/client/vehicle-details/vehicle-details.html:249
 msgid "Stock #"
 msgstr "Inventario #"
 
@@ -3486,7 +3486,7 @@ msgstr "Filtro de número de inventario (opcional)"
 #: app/client/value-lookup/value-lookup.html:550
 #: app/client/value-lookup/value-lookup.html:595
 #: app/client/value-lookup/value-lookup.html:615
-#: app/client/vehicle-details/vehicle-details.html:262
+#: app/client/vehicle-details/vehicle-details.html:264
 msgid "Style"
 msgstr "Estilo"
 
@@ -3527,7 +3527,7 @@ msgid "Success"
 msgstr "Éxito"
 
 #: app/client/floor-vehicle/floor-car.template.html:225
-#: app/client/vehicle-details/vehicle-details.html:467
+#: app/client/vehicle-details/vehicle-details.html:469
 msgid "Supported formats: image, word, excel and pdf. 5MB max per file."
 msgstr ""
 "Formatos compatibles: imagen, word, excel y pdf. 5 MB máx. por archivo."
@@ -3614,11 +3614,11 @@ msgstr ""
 "Hay múltiples estilos de vehículos que corresponden a este VIN. Por favor, "
 "seleccione el estilo adecuado a continuación."
 
-#: app/client/dealer-search/business-search-modal/business-search.template.html:91
-#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:94
+#: app/client/dealer-search/business-search-modal/business-search.template.html:93
+#: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:96
 #: app/client/floor-plan/floor-plan.template.html:98
-#: app/client/payments/payments.template.html:185
-#: app/client/receipts/receipts.template.html:99
+#: app/client/payments/payments.template.html:189
+#: app/client/receipts/receipts.template.html:101
 #: app/client/title-releases/title-releases.html:96
 msgid ""
 "There are too many results to display, please refine your search further."
@@ -3733,12 +3733,12 @@ msgstr "Título"
 msgid "Title Absent"
 msgstr "Título ausente"
 
-#: app/client/vehicle-details/vehicle-details.html:287
+#: app/client/vehicle-details/vehicle-details.html:289
 msgid "Title Information"
 msgstr "Información del título"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:44
-#: app/client/vehicle-details/vehicle-details.html:297
+#: app/client/vehicle-details/vehicle-details.html:299
 msgid "Title Location"
 msgstr "Ubicación del título"
 
@@ -3808,7 +3808,7 @@ msgstr[1] "Títulos solicitados"
 msgid "Title Settings"
 msgstr "Configuraciones de títulos"
 
-#: app/client/vehicle-details/vehicle-details.html:301
+#: app/client/vehicle-details/vehicle-details.html:303
 msgid "Title State"
 msgstr "Estatus del título"
 
@@ -3947,7 +3947,7 @@ msgstr "Total pagado"
 msgid "Total Purchase Price"
 msgstr "Precio total de compra"
 
-#: app/client/vehicle-details/vehicle-details.html:305
+#: app/client/vehicle-details/vehicle-details.html:307
 msgid "Tracking Number"
 msgstr "Número de rastreo"
 
@@ -3959,7 +3959,7 @@ msgstr "Canje"
 msgid "Trade-in"
 msgstr "Canje"
 
-#: app/client/vehicle-details/vehicle-details.html:195
+#: app/client/vehicle-details/vehicle-details.html:196
 msgid "Transaction Details"
 msgstr "Detalles de la transacción"
 
@@ -4012,7 +4012,7 @@ msgid "Unschedule"
 msgstr "Desprogramar"
 
 #: app/client/floor-vehicle/floor-car.template.html:280
-#: app/client/vehicle-details/vehicle-details.html:524
+#: app/client/vehicle-details/vehicle-details.html:526
 msgid "Unsupported file found in selection."
 msgstr "Se encontró un archivo no compatible en la selección."
 
@@ -4020,7 +4020,7 @@ msgstr "Se encontró un archivo no compatible en la selección."
 msgid "Upcoming Curtailment / Payoff Quote (PDF)"
 msgstr "Próxima reducción / cotización de pago (PDF)"
 
-#: app/client/vehicle-details/vehicle-details.html:548
+#: app/client/vehicle-details/vehicle-details.html:550
 msgid "Upload"
 msgstr "Cargar"
 
@@ -4045,7 +4045,7 @@ msgid "Utilized"
 msgstr "Utilizado"
 
 #: app/client/floor-vehicle/floor-car.template.html:257
-#: app/client/vehicle-details/vehicle-details.html:499
+#: app/client/vehicle-details/vehicle-details.html:501
 msgid "valid files."
 msgstr "archivos válidos."
 
@@ -4065,16 +4065,16 @@ msgstr "Descripción del vehículo"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:3
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:40
-#: app/client/vehicle-details/vehicle-details.html:247
+#: app/client/vehicle-details/vehicle-details.html:249
 msgid "Vehicle Information"
 msgstr "Información del vehículo"
 
 #: app/client/checkout/checkout.template.html:79
-#: app/client/payments/payments.template.html:94
+#: app/client/payments/payments.template.html:96
 msgid "Vehicle Payments"
 msgstr "Pagos del vehículo"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:132
+#: app/client/dashboard/auction/auction-dashboard.template.html:134
 msgid "Vehicles Floored"
 msgstr "Vehículos puestos en piso"
 
@@ -4130,11 +4130,11 @@ msgid "View Report"
 msgstr "Ver informe"
 
 #: app/client/floor-vehicle/floor-car.template.html:222
-#: app/client/vehicle-details/vehicle-details.html:464
+#: app/client/vehicle-details/vehicle-details.html:466
 msgid "View the Dealer Funding Checklist."
 msgstr "Ver lista de verificación de financiamiento del distribuidor"
 
-#: app/client/vehicle-details/vehicle-details.html:290
+#: app/client/vehicle-details/vehicle-details.html:292
 msgid "View the Title"
 msgstr "Ver el título"
 
@@ -4150,7 +4150,7 @@ msgstr "Ver el informe detallado del historial del vehículo"
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:43
 #: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:2
 #: app/client/payments/nxg-payment-summary/nxg-payment-summary.template.html:48
-#: app/client/payments/payments.template.html:159
+#: app/client/payments/payments.template.html:163
 #: app/client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.template.html:7
 #: app/client/shared/modals/extension-request/payment-extension.template.html:6
 #: app/client/title-releases/nxg-requests-summary/nxg-requests-summary.html:20
@@ -4159,7 +4159,7 @@ msgstr "Ver el informe detallado del historial del vehículo"
 #: app/client/title-releases/title-releases.html:63
 #: app/client/value-lookup/value-lookup.html:12
 #: app/client/value-lookup/value-lookup.html:453
-#: app/client/vehicle-details/vehicle-details.html:250
+#: app/client/vehicle-details/vehicle-details.html:252
 msgid "VIN"
 msgstr "VIN"
 
@@ -4188,7 +4188,7 @@ msgstr ""
 msgid "VIN, Make, Model, or Year"
 msgstr "VIN, marca, modelo o año"
 
-#: app/client/receipts/receipts.template.html:57
+#: app/client/receipts/receipts.template.html:59
 #: app/client/reports/dealer/reports.controller.js:68
 msgid "Voided"
 msgstr "Anulado"
@@ -4275,7 +4275,7 @@ msgstr ""
 "momento. Si requiere más información acerca de dicho título, por favor llame "
 "a Servicio a Distribuidores al {{ phoneNumber }}."
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:127
+#: app/client/dashboard/auction/auction-dashboard.template.html:129
 #: app/client/dashboard/dealer/dashboard.template.html:12
 msgid "Week"
 msgstr "Semana"
@@ -4325,14 +4325,14 @@ msgstr "¿Desea cancelar su pago programado?"
 msgid "Would you like to disable Enhanced Registration?"
 msgstr "¿Desea desactivar Registro Mejorado?"
 
-#: app/client/dashboard/auction/auction-dashboard.template.html:125
+#: app/client/dashboard/auction/auction-dashboard.template.html:127
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:63
 #: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:56
 #: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:80
 #: app/client/value-lookup/value-lookup.html:143
 #: app/client/value-lookup/value-lookup.html:206
 #: app/client/value-lookup/value-lookup.html:303
-#: app/client/vehicle-details/vehicle-details.html:270
+#: app/client/vehicle-details/vehicle-details.html:272
 msgid "Year"
 msgstr "Año"
 
@@ -4372,7 +4372,7 @@ msgstr ""
 "Usted se dio de alta en Pagos Automáticos. Todos los pagos se procesarán "
 "automáticamente en la fecha de vencimiento."
 
-#: app/client/receipts/receipts.template.html:111
+#: app/client/receipts/receipts.template.html:113
 msgid ""
 "You can combine up to 20 receipts into a single pdf by selecting each "
 "receipt and clicking 'Export Receipt(s)' below."
