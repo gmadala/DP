@@ -27,7 +27,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-x-large',
-        templateUrl: 'client/analytics/top-auctions/top-auctions.template.html',
+        templateUrl: 'client/analytics/top-auctions-modal/top-auctions.template.html',
         controller: 'TopAuctionsCtrl',
         resolve: {
           auctions: function () {

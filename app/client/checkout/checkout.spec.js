@@ -301,7 +301,7 @@ describe('Controller: CheckoutCtrl', function () {
       var payment = {dueDate: '2013-01-10', isPayment: true, isFee: false };
       scope.paymentQueue.schedule(payment);
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/checkout/schedule-checkout/schedule-checkout.template.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/checkout/schedule-checkout-modal/schedule-checkout.template.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.payment()).toBe(payment);
     });
@@ -316,7 +316,7 @@ describe('Controller: CheckoutCtrl', function () {
       var fee = {dueDate: '2013-01-10', isPayment: false, isFee: true };
       scope.paymentQueue.schedule(fee);
       expect(dialog.open).toHaveBeenCalled();
-      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/checkout/schedule-checkout/schedule-checkout.template.html');
+      expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/checkout/schedule-checkout-modal/schedule-checkout.template.html');
       expect(dialog.open.calls.mostRecent().args[0].controller).toBe('ScheduleCheckoutCtrl');
       expect(dialog.open.calls.mostRecent().args[0].resolve.fee()).toBe(fee);
     });

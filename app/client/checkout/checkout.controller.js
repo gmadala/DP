@@ -148,7 +148,7 @@
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'client/checkout/schedule-checkout/schedule-checkout.template.html',
+          templateUrl: 'client/checkout/schedule-checkout-modal/schedule-checkout.template.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
             payment: function () { return !item.isFee && item; },
