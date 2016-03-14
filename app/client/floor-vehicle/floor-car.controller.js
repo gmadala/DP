@@ -219,7 +219,7 @@
         keyboard: true,
         backdropClick: true,
         dialogClass: 'modal modal-medium',
-        templateUrl: 'client/floor-vehicle/floor-car-confirm/floor-car-confirm.template.html',
+        templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
           formData: function () {
