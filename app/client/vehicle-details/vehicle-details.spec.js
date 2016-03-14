@@ -279,8 +279,8 @@ describe('Controller: VehicleDetailsCtrl', function () {
 
   describe('controller-wide functions', function() {
     beforeEach(inject(function($httpBackend) {
-      $httpBackend.whenGET('client/modals/payment-extension/payment-extension.template.html').respond('<div></div>');
-      $httpBackend.whenGET('client/modals/payment-options-breakdown/payment-options-breakdown.template.html').respond('<div></div>');
+      $httpBackend.whenGET('client/shared/modals/extension-request/payment-extension.template.html').respond('<div></div>');
+      $httpBackend.whenGET('client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html').respond('<div></div>');
     }));
 
     it('should have a paymentQueue.getQueueCount function to return the length of the queue', function() {
@@ -652,7 +652,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('PaymentDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/payment-details-modal/payment-details.template.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/vehicle-details/payment-details-modal/payment-details.template.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(paymentDetailsMock);
       }));
 
@@ -666,7 +666,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         expect(dialog.open).toHaveBeenCalled();
 
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('FeeDetailsCtrl');
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/modals/fee-details-modal/fee-details.template.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/vehicle-details/fee-details-modal/fee-details.template.html');
         expect(dialog.open.calls.mostRecent().args[0].resolve.activity()).toBe(feeDetailsMock);
       }));
     });

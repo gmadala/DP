@@ -92,7 +92,7 @@ describe('Directive: nxgPaymentButtons', function () {
         iScope.cancelScheduledFee();
 
         expect(dialog.open).toHaveBeenCalled();
-        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/modals/cancel-fee/cancel-fee.template.html');
+        expect(dialog.open.calls.mostRecent().args[0].templateUrl).toBe('client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html');
         expect(dialog.open.calls.mostRecent().args[0].controller).toBe('CancelFeeCtrl');
         expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.webScheduledAccountFeeId).toBe('webFee1');
         expect(dialog.open.calls.mostRecent().args[0].resolve.options().fee.feeType).toBe('FeeType');
