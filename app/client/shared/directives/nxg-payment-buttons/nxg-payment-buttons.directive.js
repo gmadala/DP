@@ -138,7 +138,7 @@
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            templateUrl: 'client/shared/modals/cancel-fee/cancel-fee.template.html',
+            templateUrl: 'client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html',
             controller: 'CancelFeeCtrl',
             resolve: {
               options: function() {
