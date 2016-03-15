@@ -67,6 +67,12 @@
         </td>
         <td class="buyer">
           <h5>{{ item.BuyerName }}</h5>
+          <p class="lockup-minor">
+            <span translate>Auction Buyer ID</span>: <span nxg-highlight="item.AuctionBuyerID" highlight="searchCriteria.query" class="break-word"></span>
+          </p>
+          <p class="lockup-minor">
+            <span translate>Auction Location</span>: <span nxg-highlight="item.AuctionLocation" highlight="searchCriteria.query" class="break-word"></span>
+          </p>
         </td>
         <td>
           <h4>{{ item.ConsignerTicketNumber }}</h4>
