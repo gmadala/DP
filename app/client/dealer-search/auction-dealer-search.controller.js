@@ -1,206 +1,124 @@
 (function() {
+
   'use strict';
 
   angular
     .module('nextgearWebApp')
     .controller('AuctionDealerSearchCtrl', AuctionDealerSearchCtrl);
 
-  AuctionDealerSearchCtrl.$inject = ['$scope', '$uibModal', 'User', 'DealerNumberSearch'];
+  AuctionDealerSearchCtrl.$inject = ['$scope', '$uibModal', 'dealerSearch', 'User'];
 
-  function AuctionDealerSearchCtrl($scope, $uibModal, User, DealerNumberSearch) {
+  function AuctionDealerSearchCtrl($scope, $uibModal, dealerSearch, User) {
 
-    var uibModal = $uibModal;
+    $scope.proposedQuery = null;
+    $scope.searchExecuted = false;
 
-    $scope.onlyNumbersPattern = /^\d+$/;
-
-    /*** Number Search ***/
-    $scope.numberSearch = {
-      dealerNumInactive: false,
-      auctionNumInactive: false,
-      searchInProgress: false,
-      query: {},
-      invalid: {},
-      noresults: {},
-      setDealerNumActive: function() {
-        this.dealerNumInactive = false;
-        this.auctionNumInactive = true;
-      },
-      setAuctionNumActive: function() {
-        this.dealerNumInactive = true;
-        this.auctionNumInactive = false;
-      },
-      search: function(whichButton) {
-        if(whichButton === 'dealerNum') {
-          $scope.numberSearch.setDealerNumActive();
-        } else if(whichButton === 'auctionNum') {
-          $scope.numberSearch.setAuctionNumActive();
-        }
-
-        this.noresults = {}; // reset the no result messages, we're doing a new search
-        var which = this;
-
-        if (this.validate()) {
-          this.searchInProgress = true;
-          if (!this.dealerNumInactive) {
-            DealerNumberSearch.searchByDealerNumber(this.query.dealerNumber).then(
-              // success
-              function(business) {
-                which.searchInProgress = false;
-                prv.searchByNumberHandler(business);
-              },
-              // failure
-              function() {
-                which.searchInProgress = false;
-              }
-            );
-          }
-          else {
-            DealerNumberSearch.searchByAuctionAccessNumber(this.query.auctionAccessNumber).then(
-              // success
-              function(business) {
-                which.searchInProgress = false;
-                prv.searchByNumberHandler(business);
-              },
-              // failure
-              function() {
-                which.searchInProgress = false;
-              }
-            );
-          }
-        }
-      },
-      validate: function() {
-        var isValid = false,
-          dealerNumInput = $scope.numberSearchForm.dealerNum,
-          auctionAccessNumInput = $scope.numberSearchForm.auctionAccessNum,
-          missingRequiredDealerNum = !(this.dealerNumInactive || dealerNumInput.$viewValue),
-          missingRequiredAuctionAccessNum = !(this.auctionNumInactive || auctionAccessNumInput.$viewValue);
-
-        this.invalid = {
-          required: {},
-          pattern: {}
-        };
-
-        if (missingRequiredDealerNum && missingRequiredAuctionAccessNum) {
-          this.invalid.required.dealerOrAccessNumber = true;
-        }
-        else if (missingRequiredDealerNum) {
-          this.invalid.required.dealerNumber = true;
-        }
-        else if (missingRequiredAuctionAccessNum) {
-          this.invalid.required.auctionAccessNumber = true;
-        }
-        else if (!this.dealerNumInactive && dealerNumInput.$error.pattern) {
-          this.invalid.pattern.dealerNumber = true;
-        }
-        else if (!this.auctionNumInactive && auctionAccessNumInput.$error.pattern) {
-          this.invalid.pattern.auctionAccessNumber = true;
-        }
-        else {
-          isValid = true;
-        }
-        return isValid;
-      }
-    };
-
-    /*** Name Search ***/
-    $scope.nameSearch = {
-      query: {},
-      invalid: {},
-      search: function() {
-        if (this.validate()) {
-          var dealerName = this.query.dealerName,
-            city = this.query.city,
-            state = this.query.state;
-
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html',
-            controller: 'DealerNameSearchCtrl',
-            dialogClass: 'modal modal-large',
-            resolve: {
-              options: function() {
-                return {
-                  dealerName: dealerName,
-                  city: city,
-                  state: state
-                };
-              }
-            }
-          };
-          uibModal.open(dialogOptions);
-        }
-      },
-      validate: function() {
-        var valid = true;
-        this.invalid = {};
-
-        if (!this.query.dealerName) {
-          this.invalid.dealerName = true;
-          valid = false;
-        } else if (this.query.dealerName.length < 3) {
-          this.invalid.minlength = true;
-          valid = false;
-        }
-
-        if (!this.query.city && !this.query.state) {
-          this.invalid.CityOrState = true;
-          valid = false;
-        }
-        if (this.query.city && !this.query.city.match(/^[A-Za-z ]*$/)) {
-          this.invalid.cityFormat = true;
-          valid = false;
-        }
-        return valid;
-      }
-    };
-
-    // Get list of states
-    User.getStatics().then(function(statics) {
-      $scope.states = statics.states;
+    User.getInfo().then(function(info) {
+      $scope.data = {
+        query: null, // proposed query is copied here on search
+        results: [],
+        loading: false,
+        paginator: null,
+        auction: info.BusinessId,
+        sortBy: 'BusinessName',
+        sortDescending: false,
+        hitInfiniteScrollMax: false
+      };
     });
 
-    /*** Private ***/
-    var prv = {
-      searchByNumberHandler: function(business) {
-        if (business) {
-          var dialogOptions = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
-            controller: 'CreditQueryCtrl',
-            dialogClass: 'modal modal-medium',
-            resolve: {
-              options: function() {
-                return {
-                  businessId: business.BusinessId,
-                  businessNumber: business.BusinessNumber,
-                  auctionAccessNumbers: business.AuctionAccessDealershipNumbers.join(', '),
-                  businessName: business.BusinessName,
-                  address: business.Address,
-                  city: business.City,
-                  state: business.State,
-                  zipCode: business.PostalCode,
-                  autoQueryCredit: false
-                };
-              }
-            }
-          };
-          uibModal.open(dialogOptions);
-        }
-        else {
-          if (this.auctionNumInactive) {
-            this.noresults.dealerNumber = true;
-          }
-          else {
-            this.noresults.auctionAccessNumber = true;
-          }
-        }
-      }.bind($scope.numberSearch)
+    $scope.search = function() {
+      // search means "start from the beginning with current criteria"
+
+      $scope.validity = angular.copy($scope.dealerSearchForm);
+
+      $scope.data.paginator = null;
+      $scope.data.hitInfiniteScrollMax = false;
+      $scope.data.results.length = 0;
+
+      // commit the proposed query
+      $scope.data.query = angular.copy($scope.proposedQuery);
+
+      // don't execute if the query length is less than 3 chars
+      if ($scope.validity && $scope.validity.$invalid) {
+        return;
+      }
+      $scope.searchExecuted = true;
+      $scope.fetchNextResults();
     };
 
+    $scope.fetchNextResults = function() {
+      var paginator = $scope.data.paginator;
+      if (paginator && !paginator.hasMore()) {
+        if (paginator.hitMaximumLimit()) {
+          $scope.data.hitInfiniteScrollMax = true;
+        }
+        return;
+      }
+
+      $scope.data.loading = true;
+      dealerSearch.search(
+        $scope.data.query,
+        $scope.data.auction,
+        $scope.data.sortBy,
+        $scope.data.sortDescending,
+        paginator
+      ).then(
+        function(result) {
+          $scope.data.loading = false;
+          $scope.data.paginator = result.$paginator;
+          Array.prototype.push.apply($scope.data.results, result.SearchResults);
+        }, function(/*error*/) {
+          $scope.data.loading = false;
+        }
+      );
+    };
+
+    $scope.sortBy = function(fieldName) {
+      if ($scope.data.sortBy === fieldName) {
+        // already sorting by this field, just flip the direction
+        $scope.data.sortDescending = !$scope.data.sortDescending;
+      } else {
+        $scope.data.sortBy = fieldName;
+        $scope.data.sortDescending = false;
+      }
+      $scope.search();
+    };
+
+    $scope.viewDealer = viewDealer;
+
+    /*** Private ***/
+    function viewDealer(business) {
+      if (business) {
+        var dialogOptions = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          templateUrl: 'views/modals/credit-query.html',
+          controller: 'CreditQueryCtrl',
+          dialogClass: 'modal modal-medium',
+          resolve: {
+            options: function() {
+              return {
+                businessId: business.businessId,
+                businessNumber: business.businessNumber,
+                businessAuctionAccessNumbers: business.businessAuctionAccessDealershipNumber,
+                businessName: business.businessName,
+                businessAddress: business.businessAddress,
+                businessCity: business.businessCity,
+                businessState: business.businessState,
+                businessZip: business.businessZip,
+                externalBusinessId: business.externalBusinessId,
+                autoQueryCredit: true
+              };
+            }
+          }
+        };
+        $uibModal.open(dialogOptions).result.then(function(dirty) {
+          if (dirty) {
+            $scope.search();
+          }
+        });
+      }
+    }
   }
 })();

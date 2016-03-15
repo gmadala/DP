@@ -85,6 +85,7 @@
     }
 
     var service = {
+      resetSessionTimeout: resetSessionTimeout,
       setAuth: function(authData) {
         // save authData on cookies to allow us to restore in case of reload
         $cookieStore.put('auth', authData);
