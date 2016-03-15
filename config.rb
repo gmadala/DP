@@ -5,7 +5,7 @@ http_path = "/"
 css_dir = "app/styles/"
 sass_dir = "app/styles/"
 images_dir = "images"
-javascripts_dir = "app/scripts/"
+javascripts_dir = "app/client/"
 
 output_style = :compressed
 
