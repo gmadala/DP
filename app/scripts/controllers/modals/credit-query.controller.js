@@ -1,25 +1,45 @@
 (function() {
   'use strict';
 
-  angular
-    .module('nextgearWebApp')
+  angular.module('nextgearWebApp')
     .controller('CreditQueryCtrl', CreditQueryCtrl);
 
-  CreditQueryCtrl.$inject = ['$scope', '$uibModalInstance', 'CreditQuery', 'options', 'kissMetricInfo', 'segmentio', 'metric'];
+  CreditQueryCtrl.$inject = [
+    '$scope',
+    '$uibModalInstance',
+    'CreditQuery',
+    'dealerSearch',
+    'options',
+    'kissMetricInfo',
+    'segmentio',
+    'User',
+    'metric'
+  ];
 
-  function CreditQueryCtrl($scope, $uibModalInstance, CreditQuery, options, kissMetricInfo, segmentio, metric) {
+  function CreditQueryCtrl(
+    $scope,
+    $uibModalInstance,
+    CreditQuery,
+    dealerSearch,
+    options,
+    kissMetricInfo,
+    segmentio,
+    User,
+    metric) {
 
     var uibModalInstance = $uibModalInstance;
 
+    $scope.dirty = false;
     $scope.business = {
       id: options.businessId,
       number: options.businessNumber,
-      auctionAccessNumbers: options.auctionAccessNumbers,
+      auctionAccessNumbers: options.businessAuctionAccessNumbers,
+      externalId: options.externalBusinessId,
       name: options.businessName,
-      address: options.address,
-      city: options.city,
-      state: options.state,
-      zipCode: options.zipCode,
+      address: options.businessAddress,
+      city: options.businessCity,
+      state: options.businessState,
+      zipCode: options.businessZip,
       creditQuery: {
         requested: false,
         retrieved: false,
@@ -32,7 +52,7 @@
           CreditQuery.get(options.businessId).then(
             function(data) {
               kissMetricInfo.getKissMetricInfo().then(
-                function(result){
+                function(result) {
                   segmentio.track(metric.AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE, result);
                   $scope.kissMetricData = result;
                 }
@@ -53,15 +73,28 @@
       }
     };
 
+    $scope.saveExternalId = function() {
+      User.getInfo()
+        .then(function(info) {
+          return dealerSearch.relateExternal($scope.business.number, info.BusinessId, $scope.externalId);
+        })
+        .then(function(response) {
+          if (response.key) {
+            $scope.business.externalId = $scope.externalId;
+            $scope.dirty = true;
+          }
+        });
+    };
+
     // Allow the dialog to close itself using the "Cancel" button.
     // The current `dialog` is magically injected thanks to AngularUI.
     $scope.close = function() {
-      uibModalInstance.close();
+      uibModalInstance.close($scope.dirty);
     };
 
     if (options.autoQueryCredit) {
       $scope.business.creditQuery.get();
     }
-
   }
+
 })();
