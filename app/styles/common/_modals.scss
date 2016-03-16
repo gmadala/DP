@@ -2,27 +2,26 @@
 //  MODALS
 // ========
 
-.modal-backdrop {
-  @include opacity(.50);
-  z-index: 1050;
-
-  // Modal to go over all other modals
-  // backdrop for the topmost modal should cover non-topmost modals
-  &.topmost {
-    z-index: 1090;
-  }
-}
+//.modal-backdrop {
+//  @include opacity(.50);
+//  z-index: 1050;
+//
+//  // Modal to go over all other modals
+//  // backdrop for the topmost modal should cover non-topmost modals
+//  &.topmost {
+//    z-index: 1090;
+//  }
+//}
 
 .modal {
-  @extend %small;
-  @include border-radius(0);
-  display: block;
-  height: 0;
-  background: #F2F2F2;
-  overflow: visible;
-  border: 0;
-  margin-top:60px;
-  z-index:2000;
+  //@extend %small;
+  //@include border-radius(0);
+  //display: block;
+  //height: 0;
+  //background: #F2F2F2;
+  //border: 0;
+  //margin-top:60px;
+  //z-index:2000;
 
   &.modal-long{
     height: 60%;
@@ -76,46 +75,46 @@
  * like payment or fee details. Use the extra "to-edge"
  * class for these modals.
  */
-.modal-body {
-  max-height: none;
-  border: 1px solid $border;
-  padding: 20px;
-  overflow:visible;
-  background: #F2F2F2;
-
-  &.to-edge {
-    padding: 0;
-    &.add-account{
-      border-bottom:0;
-    }
-  }
-
-  .modal-inner {
-    padding: 20px;
-    &.add-account{
-      padding: 0 20px 20px 20px;
-    }
-  }
-
-  .list-table {
-    padding: 10px 50px 10px 30px;
-  }
-
-  .table-secondary {
-    margin-bottom: 20px;
-  }
-
-  h3 {
-    margin: 0 0 5px 0;
-  }
-
-  h4 {
-    margin: 0 0 5px;
-    &.add-account{
-      margin:15px;
-    }
-  }
-}
+//.modal-body {
+//  max-height: none;
+//  border: 1px solid $border;
+//  padding: 20px;
+//  overflow:visible;
+//  background: #F2F2F2;
+//
+//  &.to-edge {
+//    padding: 0;
+//    &.add-account{
+//      border-bottom:0;
+//    }
+//  }
+//
+//  .modal-inner {
+//    padding: 20px;
+//    &.add-account{
+//      padding: 0 20px 20px 20px;
+//    }
+//  }
+//
+//  .list-table {
+//    padding: 10px 50px 10px 30px;
+//  }
+//
+//  .table-secondary {
+//    margin-bottom: 20px;
+//  }
+//
+//  h3 {
+//    margin: 0 0 5px 0;
+//  }
+//
+//  h4 {
+//    margin: 0 0 5px;
+//    &.add-account{
+//      margin:15px;
+//    }
+//  }
+//}
 
  .wizard-navigation{
    margin:10px;
@@ -175,9 +174,9 @@
 /*
  When a modal is open, stop the body from being able to scroll
  */
-body.modal-open {
-  overflow: hidden;
-}
+//body.modal-open {
+//  overflow: hidden;
+//}
 
 @media print {
   /*
