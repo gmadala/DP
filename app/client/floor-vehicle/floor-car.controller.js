@@ -218,7 +218,7 @@
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        dialogClass: 'modal modal-medium',
+        size: 'md',
         templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
