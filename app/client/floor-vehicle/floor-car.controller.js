@@ -340,43 +340,6 @@
       });
     };
 
-    $scope.cancel = function () {
-      var title = gettextCatalog.getString('Cancel'),
-        message = gettextCatalog.getString('What would you like to do?'),
-        buttons = [
-          {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary btn-sm'}
-        ];
-
-      var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
-        templateUrl: 'client/shared/modals/message-box/message-box.template.html',
-        controller: 'MessageBoxCtrl',
-        dialogClass: 'modal modal-medium',
-        resolve: {
-          title: function () {
-            return title;
-          },
-          message : function() {
-            return message;
-          },
-          buttons: function () {
-            return buttons;
-          }
-        }
-      };
-      uibModal.open(dialogOptions).result.then(function (choice) {
-        if (choice === 'home') {
-          $location.path('');
-        } else if (choice === 'reset') {
-          $scope.reset();
-        }
-      });
-    };
-
     //Checking for United States Dealer
 
     if(User.isUnitedStates()) {

@@ -1,5 +1,10 @@
-<div class="row floorcar">
-  <div class="container-fluid">
+<div class="container-fluid floorcar">
+  <div class="row">
+    <div class="col-xs-12">
+      <button ng-hide="profile.editable" class="btn-unstyle btn-clear right clear-search" ng-click="reset()"><strong translate>Clear Form</strong></button>
+    </div>
+  </div>
+  <div class="row">
     <form  name="form" novalidate>
       <!-- Vehicle Information -->
       <div class="col-sm-6">
@@ -161,7 +166,7 @@
               Please enter a Valid Sale Date.
             </label>
             <p>
-              <span class="scale-description" translate>The actual sale date must be used when flooring a car</span>
+              <span class="scale-description" translate>Actual sale date must be used when flooring a car</span>
               <button class="btn-help inline"
                       tooltip-placement="left"
                       tooltip-popup-delay="300"
@@ -181,14 +186,6 @@
                    ng-show="validity.inputDisburseAcct.$error.required" translate>
               Please select a Bank Account for Deposit.
             </label>
-            <!--<div class="form-footer button-group">-->
-              <!--<button class="btn-cta cta-secondary"-->
-                      <!--type="button"-->
-                      <!--ng-disabled="submitInProgress"-->
-                      <!--ng-click="cancel()" translate>-->
-                <!--Cancel-->
-              <!--</button>-->
-            <!--</div>-->
           </div>
           <button class="btn-cta cta-full cta-primary"
                   ng-disabled="submitInProgress"

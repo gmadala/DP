@@ -405,6 +405,10 @@
   &.right {
     @extend %float-r;
   }
+
+  &.btn-clear {
+    padding-bottom: 10px;
+  }
 }
 
 .link {

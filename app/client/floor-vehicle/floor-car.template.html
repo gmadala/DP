@@ -1,5 +1,10 @@
-<div class="row">
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <button ng-hide="profile.editable" class="btn-unstyle btn-clear right clear-search" ng-click="reset()"><strong translate>Clear Form</strong></button>
+    </div>
+  </div>
+  <div class="row">
     <form name="form" novalidate>
       <!-- Vehicle Information -->
       <div class="col-md-4">
@@ -31,7 +36,7 @@
                    required
                    nxg-validate-int="6"
                    ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
-              />
+            />
             <label for="inputMileage" class="text-error" ng-show="validity.inputMileage.$error.required">
               <span translate>Please enter the</span>
               <span>{{ mileageOrOdometer}}.</span>
@@ -264,10 +269,10 @@
 
               <div class="row">
                 <div class="col-xs-5 paragraph">
-              <span ng-show="files.length > 0">
-                <span class="glyphicon glyphicon-ok icon-spacing"></span>
-                <span>{{ files.length }} <span translate>valid files.</span></span>
-              </span>
+          <span ng-show="files.length > 0">
+            <span class="glyphicon glyphicon-ok icon-spacing"></span>
+            <span>{{ files.length }} <span translate>valid files.</span></span>
+          </span>
                 </div>
                 <div class="col-xs-7 paragraph" ng-show="invalidFiles.length > 0">
                   <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>

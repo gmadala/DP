@@ -3551,7 +3551,7 @@ msgstr ""
 "solicitada."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:160
-msgid "The actual sale date must be used when flooring a car"
+msgid "Actual sale date must be used when flooring a car"
 msgstr ""
 "Deberá utilizarse la fecha real de la venta cuando se ponga un automóvil en "
 "piso. "
