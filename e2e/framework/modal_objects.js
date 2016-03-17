@@ -1,43 +1,41 @@
 modal_objects = {
 
-  //Don't change
-  elements: {
-    //Locators
+  //Locators
 
-    modalHeader: function () {
+  modalHeader: function () {
 
-      return element(by.css('.modal-header'));
-
-    },
-    modalBody: function () {
-
-      return element(by.css('.modal-body'));
-
-    },
-    okButton: function () {
-
-      return element(by.css('button[type="submit"]'));
-
-    },
-
-  },//End of locators. Locators need to go before this
-
-  //Functions can go below
-  getmodalHeaderText: function () {
-
-    return this.elements.modalHeader().getText();
+    return element(by.css('.modal-header'));
 
   },
-  getmodalBodyText: function () {
+  modalBody: function () {
 
-    return this.elements.modalBody().getText();
+    return element(by.css('.modal-body'));
+
+  },
+  okButton: function () {
+
+    return element(by.css('button[type="submit"]'));
+
+  },
+
+  //End of locators. Locators need to go before this
+
+  //Functions can go below
+  header: function () {
+
+    return this.modalHeader().getText();
+
+  },
+  body: function () {
+
+    return this.modalBody().getText();
 
   },
 
   //LAST ONE
   clickOkButton: function () {
 
-    return this.elements.okButton().click();
+    return this.okButton().click();
 
   }
 };

@@ -1,266 +1,235 @@
-var validEmailAddress = 'test@gmail.com';
-var invalidEmailAddress = 'sad3e2@gmail.com';
-var validUserName = '36017RDT';
-var invalidEmailFormat = 'sdfsdf';
 var correctSecurityAnswer = 'a';
 var incorrectSecurityAnswer = 'f';
 var delay = 200;
 
 loginRecover = {
+  //userName: function () {
+  //
+  //  return browser.element(by.model('passwordRecovery.username'));
+  //
+  //},
 
+  //Locators
+  //Password error phone numbers
+  passwordErrorPhoneNumbers: function () {
 
-  elements: {
-    //Locators
-    //Password error phone numbers
-    passwordErrorPhoneNumbers: function () {
+    return element.all(by.css('table.error-table'));
 
-      return element.all(by.css('table.error-table'));
+  },
+  passwordErrorPhoneNumberText: function () {
 
-    },
-    passwordErrorPhoneNumberText: function () {
+    return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
 
-      return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
+  },
+  passwordErrorText: function () {
 
-    },
-    passwordErrorText: function () {
+    return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
 
-      return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
+  },
 
-    },
+  securityQuestion9Text: function () {
 
-    securityQuestion9Text: function () {
+    return element.all(by.css('.security-question')).get(2);
 
-      return element.all(by.css('.security-question')).get(2);
+  },
+  securityQuestion9: function () {
 
-    },
-    securityQuestion9: function () {
+    return element.all(by.id('question9'));
 
-      return element.all(by.id('question9'));
+  },
+  securityQuestion6Text: function () {
 
-    },
-    securityQuestion6Text: function () {
+    return element.all(by.css('.security-question')).get(1);
 
-      return element.all(by.css('.security-question')).get(1);
+  },
+  securityQuestion6: function () {
 
-    },
-    securityQuestion6: function () {
+    return element.all(by.id('question6'));
 
-      return element.all(by.id('question6'));
+  },
+  securityQuestion10Text: function () {
 
-    },
-    securityQuestion10Text: function () {
+    return element.all(by.css('.security-question')).get(0);
 
-      return element.all(by.css('.security-question')).get(0);
+  },
+  securityQuestion10: function () {
 
-    },
-    securityQuestion10: function () {
+    return element(by.id('question10'));
 
-      return element.all(by.id('question10'));
+  },
+  securityQuestion5: function () {
 
-    },
-    securityQuestion5: function () {
+    return element(by.id('question3'));
 
-      return element.all(by.id('question3'));
+  },
+  //What is the name of your favorite childhood friend?
+  securityQuestion3: function () {
 
-    },
-    //What is the name of your favorite childhood friend?
-    securityQuestion3: function () {
+    return element.all(by.id('question3'));
 
-      return element.all(by.id('question3'));
+  },
+  incorrectEmailFormat: function () {
 
-    },
-    incorrectEmailFormat: function () {
+    return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
 
-      return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
+  },
+  submitPassword: function () {
 
-    },
+    return element(by.id("forgotPasswordSubmit"));
 
-    passwordButton: function () {
+  },
+  userName: function () {
 
-      return element(by.id("forgotPasswordSubmit"));
+    return element(by.id("userName"));
 
-    },
-    //THis should be named "userName"
-    enterUserNamePassword: function () {
+  },
+  email: function () {
 
-      return element(by.id("userName"));
+    return element(by.id("email"));
 
-    },
-    userName: function () {
+  },
+  emailNotFound: function () {
 
-      return browser.element(by.model('passwordRecovery.username'));
+    return element(by.css('p[ng-show="userNameRecovery.failed"]'));
 
-    },
-    email: function () {
+  },
+  emailNotFoundNumbers: function () {
 
-      return element(by.id("email"));
+    return element.all(by.css('.error-table')).first();
 
-    },
-    emailNotFound: function () {
+  },
+  disabledFields: function () {
 
-      return element(by.css('p[ng-show="userNameRecovery.failed"]'));
+    return element.all(by.css('input[disabled="disabled"]'));
 
-    },
-    emailNotFoundNumbers: function () {
+  },
 
-      return element.all(by.css('.error-table')).first();
+  submitUsername: function () {
 
-    },
-    userNameDisabled: function () {
+    return element(by.id("forgotUsernameSubmit"));
 
-      return element.all(by.css('input[disabled="disabled"]'));
+  },
 
-    },
-
-    submitUsername: function () {
-
-      return element(by.id("forgotUsernameSubmit"));
-
-    }
-
-  }, //Locator End
+//Locator End
 
   //Clicking
-  clickPasswordButton: function () {
+  clickPasswordSubmit: function () {
 
-    this.elements.passwordButton().click();
+    this.submitPassword().click();
     browser.sleep(delay);
 
   },
-  clickSubmitButton: function () {
+  clickUsernameSubmit: function () {
 
-    this.elements.submitUsername().click();
+    this.submitUsername().click();
     browser.sleep(delay);
   },
 
   //Getting
   getPasswordErrorTextPhoneNumber: function () {
-
-
-    return this.elements.passwordErrorPhoneNumbers().getText();
+    return this.passwordErrorPhoneNumbers().get(2).getText();
 
   },
   getPasswordErrorText: function () {
 
 
-    return this.elements.passwordErrorText().getText();
+    return this.passwordErrorText().getText();
 
   },
   getSecurityQuestion6Text: function () {
 
 
-    return this.elements.securityQuestion6Text().getText();
+    return this.securityQuestion6Text().getText();
 
   },
   getSecurityQuestion9Text: function () {
 
 
-    return this.elements.securityQuestion9Text().getText();
+    return this.securityQuestion9Text().getText();
 
   },
   getSecurityQuestion10Text: function () {
 
 
-    return this.elements.securityQuestion10Text().getText();
+    return this.securityQuestion10Text().getText();
 
   },
   getIncorrectEmailFormat: function () {
 
 
-    return this.elements.incorrectEmailFormat().getText();
+    return this.incorrectEmailFormat().getText();
 
   },
   getemailNotFoundNumbers: function () {
 
 
-    return this.elements.emailNotFoundNumbers().getText();
+    return this.emailNotFoundNumbers().getText();
 
   },
 
   getemailNotFoundText: function () {
 
 
-    return this.elements.emailNotFound().getText();
+    return this.emailNotFound().getText();
 
   },
   getSubmitButtonText: function () {
 
 
-    return this.elements.submitUsername().getText();
+    return this.submitUsername().getText();
 
   },
 
   //Sending
-  enterQuestion9: function () {
+  enterQuestion9: function (param) {
 
-    return this.elements.securityQuestion9().clear().sendKeys(correctSecurityAnswer);
-
-  },
-  enterIncorrectQuestion9: function () {
-
-    return this.elements.securityQuestion9().sendKeys(incorrectSecurityAnswer);
+    return this.securityQuestion9().clear().sendKeys(param);
 
   },
-  enterIncorrectQuestion6: function () {
 
-    return this.elements.securityQuestion6().sendKeys(incorrectSecurityAnswer);
+  enterQuestion6: function (param) {
 
-  },
-  enterQuestion6: function () {
-
-    return this.elements.securityQuestion6().clear().sendKeys(correctSecurityAnswer);
+    return this.securityQuestion6().clear().sendKeys(param);
 
   },
-  enterIncorrectQuestion10: function () {
 
-    return this.elements.securityQuestion10().sendKeys(incorrectSecurityAnswer);
+  enterQuestion10: function (param) {
 
-  },
-  enterQuestion10: function () {
-
-    return this.elements.securityQuestion10().clear().sendKeys(correctSecurityAnswer);
+    return this.securityQuestion10().clear().sendKeys(param);
 
   },
-  enterQuestion5: function () {
 
-    return this.elements.securityQuestion5().sendKeys('a');
+  enterQuestion5: function (param) {
 
-  },
-  enterQuestion3: function () {
-
-    return this.elements.securityQuestion3().sendKeys('a');
+    return this.securityQuestion5().sendKeys(param);
 
   },
-  enterInvalidEmailFormat: function () {
+  enterQuestion3: function (param) {
 
-    return this.elements.email().clear().sendKeys(invalidEmailFormat);
+    return this.securityQuestion3().sendKeys(param);
 
   },
-  enterValidUserName: function () {
+  enterUsername: function (param) {
 
-    return this.elements.enterUserNamePassword().clear().sendKeys(validUserName);
+    return this.userName().clear().sendKeys(param);
 
   },
   enterEmail: function (param) {
 
-    return this.elements.email().clear().sendKeys(param);
+    this.email().clear().sendKeys(param);
     browser.sleep(delay);
   },
-  enterInvalidEmail: function () {
 
-    this.elements.email().sendKeys(invalidEmailAddress);
-    browser.sleep(delay);
-  },
   //Count
-  userNameDisabledCount: function () {
+  disabledCount: function () {
 
-    return this.elements.userNameDisabled().count();
+    return this.disabledFields().count();
 
   },
   //LAST ONE
   placeholder: function (index) {
 
-    this.elements._thumbnail(index).click();
+    this._thumbnail(index).click();
 
   }
 };
