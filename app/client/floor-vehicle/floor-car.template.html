@@ -1,9 +1,4 @@
 <div class="container-fluid">
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<button ng-hide="profile.editable" class="btn-unstyle btn-clear right clear-search" ng-click="reset()"><strong translate>Clear Form</strong></button>-->
-    <!--</div>-->
-  <!--</div>-->
   <div class="row">
     <form name="form" novalidate>
       <!-- Vehicle Information -->
@@ -28,18 +23,18 @@
             </label>
 
             <label for="inputMileage" class="input-title" translate>Odometer</label>
-            <input type="number" id="inputMileage"
+            <input type="number"
+                   id="inputMileage"
                    name="inputMileage"
                    ng-model="data.UnitMileage"
                    ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
                    nxg-min="1"
                    required
                    nxg-validate-int="6"
-                   ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"
-            />
+                   ng-class="{ 'nxg-invalid': validity.inputMileage.$error.required || validity.inputMileage.$error.pattern || validity.inputMileage.$error.maxlength || validity.inputMileage.$error.nxgMin }"/>
             <label for="inputMileage" class="text-error" ng-show="validity.inputMileage.$error.required">
               <span translate>Please enter the</span>
-              <span>{{ mileageOrOdometer}}.</span>
+              <span ng-bind="mileageOrOdometer"></span>.
             </label>
             <label for="inputMileage"
                    class="text-error"
@@ -261,7 +256,7 @@
                     <li ng-repeat="file in files">
                       <img ngf-thumbnail="file" class="thumb">
                       <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                      <div>{{ file.name | truncate:18 }}</div>
+                      <div ng-bind="file.name | truncate:18"></div>
                     </li>
                   </ul>
                 </div>
@@ -269,14 +264,14 @@
 
               <div class="row">
                 <div class="col-xs-5 paragraph">
-          <span ng-show="files.length > 0">
+          <div ng-show="files.length > 0">
             <span class="glyphicon glyphicon-ok icon-spacing"></span>
-            <span>{{ files.length }} <span translate>valid files.</span></span>
-          </span>
+            <span ng-bind="files.length"></span> <span translate>valid files.</span>
+          </div>
                 </div>
                 <div class="col-xs-7 paragraph" ng-show="invalidFiles.length > 0">
                   <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
-                  <span>{{ invalidFiles.length }} <span translate>invalid files.</span></span>
+                  <span ng-bind="invalidFiles.length"></span> <span translate>invalid files.</span>
                   <button class="btn-unstyle btn-link" ng-click="removeInvalidFiles()">clear</button>
                 </div>
               </div>
@@ -310,7 +305,7 @@
                     <li ng-repeat="file in files">
                       <img ngf-thumbnail="file" class="thumb">
                       <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                      <div>{{file.name}}</div>
+                      <div ng-bind="file.name"></div>
                     </li>
                   </ul>
                 </div>
