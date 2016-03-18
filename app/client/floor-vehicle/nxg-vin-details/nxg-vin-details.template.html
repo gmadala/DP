@@ -54,7 +54,7 @@
     <input id="outputModel" ng-model="data.$selectedVehicle.Model" disabled />
 
     <label for="outputYear" translate>Year</label>
-    <input id="outputYear" type="number" ng-model="data.$selectedVehicle.Year" disabled />
+    <input id="outputYear" ng-model="data.$selectedVehicle.Year" disabled />
 
     <label for="outputStyle" translate>Style</label>
     <input id="outputStyle" ng-model="data.$selectedVehicle.Style" disabled />
@@ -78,7 +78,7 @@
     </label>
 
     <label for="inputYear" translate>Year</label>
-    <input type="text" id="inputYear" name="inputYear" ng-model="data.UnitYear"
+    <input type="number" id="inputYear" name="inputYear" ng-model="data.UnitYear"
            required ng-pattern="/^\d{4}$/" nxg-min="1901" nxg-max="settings.maxYear" ng-class="{ 'nxg-invalid': (validity.inputYear.$error.required || validity.inputYear.$error.pattern || validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax) && errorFlag }" />
     <label for="inputYear" class="text-error"
            ng-show="validity.inputYear.$error.required && errorFlag" translate>
