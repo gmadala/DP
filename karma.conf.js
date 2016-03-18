@@ -40,10 +40,8 @@ module.exports = function (karma) {
       'app/private-components/angular-segmentio/angular-segmentio.js',
       'app/components/ng-file-upload/ng-file-upload.js',
       'app/components/ng-file-upload/ng-file-upload-shim.js',
-
-      // Once ui-bootstrap is updated to version 0.6.0 or greater this
-      // reference should go back to the minified bower installed version
-      'app/private-components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/components/angular-bootstrap/ui-bootstrap.js',
+      'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
 
       'app/components/sinon/lib/sinon/util/fake_timers.js',
       'app/components/lodash/lodash.js',
@@ -52,8 +50,8 @@ module.exports = function (karma) {
       'app/scripts/directives/**/*.html',
       'test/spec/**/*.js',
       'test/util/analytics.js',
-      'test/util/urlParser.js',
-      'test/util/disableOtherwise.js'
+      'test/util/url-parser.js',
+      'test/util/disable-otherwise.js'
     ],
 
     preprocessors: {
@@ -68,7 +66,7 @@ module.exports = function (karma) {
     // list of files to exclude
     exclude: [
       'app/scripts/dev/**/*.js',
-      'app/scripts/debugInfo.js'
+      'app/scripts/debug-info.js'
     ],
 
     // test results reporter to use

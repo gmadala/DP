@@ -32,6 +32,13 @@
   }
 }
 
+.request-credit-increase{
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+
 #AccountManagementPage, #AuctionSettingsPage {
   .btn-help-adjust {
     margin-top: 10px;
