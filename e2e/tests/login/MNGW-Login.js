@@ -20,7 +20,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("As a new dealer I want to signup to Mynextgear", function () {
+  it("1. As a new dealer I want to signup to Mynextgear", function () {
     //Check button text
     expect(login.textsignUpLogin()).toEqual("Sign Up");
 
@@ -30,7 +30,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
 
   });
-  it("As a dealer I forgot my user name. My email is correct and no problems", function () {
+  it("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
     //Check Forgot username or password link
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -49,7 +49,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
+  it("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
 
@@ -57,7 +57,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
 
     //Enter invalid email
-    loginRecover.enterEmail(invalidEmail);
+    loginRecover.enterEmail('asdso@gmail.com');
     //Check username box is disabled and submit
     expect(loginRecover.disabledCount()).toEqual(1);
     expect(element(By.model('passwordRecovery.username')).isEnabled()).toBe(false);
@@ -73,7 +73,7 @@ describe("Log In Suite  \n ", function () {
     expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
 
     //Enter incorrect email and submit
-    loginRecover.enterEmail(invalidEmail);
+    loginRecover.enterEmail('sdfsf');
     loginRecover.clickUsernameSubmit();
     expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
 
@@ -89,7 +89,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login");
 
   });
-  it("As a dealer I forgot my password. All my answers are correct", function () {
+  it("4. As a dealer I forgot my password. All my answers are correct", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -116,7 +116,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("As a dealer I forgot my password. All my answers are NOTcorrect", function () {
+  it("6. As a dealer I forgot my password. All my answers are NOTcorrect", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -128,11 +128,11 @@ describe("Log In Suite  \n ", function () {
     loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
     expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10(incorrectAnswer);
+    loginRecover.enterQuestion10('f');
     expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6(incorrectAnswer);
+    loginRecover.enterQuestion6('f');
     expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9(incorrectAnswer);
+    loginRecover.enterQuestion9('f');
     loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(loginRecover.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
