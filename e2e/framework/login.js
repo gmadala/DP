@@ -40,6 +40,7 @@ login = {
   clickLoginButton: function () {
 
     return this.elements.loginButton().click();
+    browser.sleep(delay);
 
   },
   clickforgotUsernamePassword: function () {

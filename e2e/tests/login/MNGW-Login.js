@@ -5,6 +5,11 @@ var login = require('../../framework/login.js');
 var modal = require('../../framework/modal_objects.js');
 var delay = 200;
 var longDelay = 500;
+var userName= '36017RDT';
+var incorrectAnswer ='f' ;
+var correctAnswer ='a' ;
+var validEmail= 'test@gmail.com';
+var invalidEmail= 'test@gmail.com';
 
 describe("Log In Suite  \n ", function () {
 
@@ -31,7 +36,7 @@ describe("Log In Suite  \n ", function () {
     login.clickforgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
 
-    loginRecover.enterEmail('test@gmail.com');
+    loginRecover.enterEmail(validEmail);
     expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
     loginRecover.clickUsernameSubmit();
 
@@ -52,7 +57,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
 
     //Enter invalid email
-    loginRecover.enterEmail('sad3e2@gmail.com');
+    loginRecover.enterEmail(invalidEmail);
     //Check username box is disabled and submit
     expect(loginRecover.disabledCount()).toEqual(1);
     expect(element(By.model('passwordRecovery.username')).isEnabled()).toBe(false);
@@ -68,12 +73,12 @@ describe("Log In Suite  \n ", function () {
     expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
 
     //Enter incorrect email and submit
-    loginRecover.enterEmail('sdfsdf');
+    loginRecover.enterEmail(invalidEmail);
     loginRecover.clickUsernameSubmit();
     expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
 
     //Enter correct email and submit
-    loginRecover.enterEmail('test@gmail.com');
+    loginRecover.enterEmail(validEmail);
     loginRecover.clickUsernameSubmit();
 
     //Verify Success Modal
@@ -90,17 +95,17 @@ describe("Log In Suite  \n ", function () {
     login.clickforgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
     //Enter Username
-    loginRecover.enterUsername('36017RDT');
+    loginRecover.enterUsername(userName);
     //Validate email address field is disabled and click
     expect(loginRecover.disabledCount()).toEqual(1);
     loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
     expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10('a');
+    loginRecover.enterQuestion10(correctAnswer);
     expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6('a');
+    loginRecover.enterQuestion6(correctAnswer);
     expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9('a');
+    loginRecover.enterQuestion9(correctAnswer);
     loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(modal.header()).toEqual("Success");
@@ -117,17 +122,17 @@ describe("Log In Suite  \n ", function () {
     login.clickforgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
     //Enter Username
-    loginRecover.enterUsername('36017RDT');
+    loginRecover.enterUsername(userName);
     //Validate email address field is disabled and click
     expect(loginRecover.disabledCount()).toEqual(1);
     loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
     expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10('f');
+    loginRecover.enterQuestion10(incorrectAnswer);
     expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6('f');
+    loginRecover.enterQuestion6(incorrectAnswer);
     expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9('f');
+    loginRecover.enterQuestion9(incorrectAnswer);
     loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(loginRecover.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
