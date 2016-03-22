@@ -175,6 +175,7 @@
  When a modal is open, stop the body from being able to scroll
  */
 body.modal-open {
+  position: fixed;
   overflow: hidden;
 }
 
