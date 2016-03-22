@@ -3227,8 +3227,8 @@ msgstr ""
 "A continuación seleccione un nombre de negocio para consultar la cuenta."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:24
-msgid "Select a business name below."
-msgstr "A continuación seleccione un nombre de negocio."
+msgid "Select a business below."
+msgstr "A continuación seleccione un negocio."
 
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:11
 msgid "Select a date from the picker below"

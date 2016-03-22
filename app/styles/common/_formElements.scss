@@ -166,6 +166,10 @@ input[type="file"]{
   padding-right: 0;
 }
 
+.no-padding {
+  padding: 0;
+}
+
 .small-left-padding {
   padding-left: 13px;
 }
@@ -175,6 +179,11 @@ input[type="file"]{
 
 .full-width {
   width: 100%;
+}
+
+.sort-by {
+  padding: 10px 0;
+  color: #404040;
 }
 
 // Overriding Bootstrap's input-prepend class to make it work for us.
