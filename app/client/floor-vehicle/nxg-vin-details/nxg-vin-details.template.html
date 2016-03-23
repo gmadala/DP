@@ -45,8 +45,8 @@
   </label>
 </div>
 
-<div class="row padding-left" ng-switch="settings.vinMode">
-  <div class="nxg-static" ng-switch-when="matched">
+<div ng-switch="settings.vinMode">
+  <div ng-switch-when="matched">
     <label for="outputMake" translate>Make</label>
     <input id="outputMake" ng-model="data.$selectedVehicle.Make" disabled />
 

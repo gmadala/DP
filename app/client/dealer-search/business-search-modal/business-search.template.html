@@ -121,15 +121,11 @@
               <h5 nxg-highlight="result.BusinessName" highlight="data.query" class="value"></h5>
               <div nxg-highlight="result.BusinessLegalName" hightlight="data.query"></div>
               <div>
-                <strong translate>Business Number: </strong>
+                <span translate>Business Number: </span>
                 <span nxg-highlight="result.BusinessNumber" hightlight="data.query"></span>
               </div>
               <div ng-show="data.searchBuyersMode"
-                   uib-tooltip="{{ result.AuctionAccessDealershipNumbers | list:'<br>' }}"
-                   tooltip-placement="right"
-                   tooltip-popup-delay="700"
-                   tooltip-append-to-body="true">
-                <strong translate>Auction Access Number: </strong>
+                <span translate>Auction Access Number: </span>
                 <span> {{ result.AuctionAccessDealershipNumbers | list }} </span>
               </div>
               <div>
