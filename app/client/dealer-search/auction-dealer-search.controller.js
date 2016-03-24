@@ -93,7 +93,7 @@
           backdrop: true,
           keyboard: true,
           backdropClick: true,
-          templateUrl: 'views/modals/credit-query.html',
+          templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
           controller: 'CreditQueryCtrl',
           dialogClass: 'modal modal-medium',
           resolve: {
