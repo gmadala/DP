@@ -9,7 +9,8 @@ var userName= '36017RDT';
 var incorrectAnswer ='f' ;
 var correctAnswer ='a' ;
 var validEmail= 'test@gmail.com';
-var invalidEmail= 'test@gmail.com';
+var invalidEmail= 'asdas@gmail.com';
+var invalidFormatEmail= 'sadsadas';
 
 describe("Log In Suite  \n ", function () {
 
@@ -57,7 +58,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
 
     //Enter invalid email
-    loginRecover.enterEmail('asdso@gmail.com');
+    loginRecover.enterEmail(invalidEmail);
     //Check username box is disabled and submit
     expect(loginRecover.disabledCount()).toEqual(1);
     expect(element(By.model('passwordRecovery.username')).isEnabled()).toBe(false);
@@ -73,7 +74,7 @@ describe("Log In Suite  \n ", function () {
     expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
 
     //Enter incorrect email and submit
-    loginRecover.enterEmail('sdfsf');
+    loginRecover.enterEmail(invalidFormatEmail);
     loginRecover.clickUsernameSubmit();
     expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
 
