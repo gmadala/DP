@@ -8,7 +8,7 @@
 /.idea
 .idea
 .DS_Store
-test/coverage
+test/coverage/
 libpeerconnection.log
 /app/styles/main.css
 /app/styles/main-blessed1.css
@@ -18,8 +18,8 @@ npm-debug.log
 *.processed.*
 *.mo
 *.pot
-app/scripts/translations.js
+app/client/scripts/translations.js
 app/languages/
 .metadata/
-maintenance
+#maintenance
 TESTS*.xml

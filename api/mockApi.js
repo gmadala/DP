@@ -114,7 +114,7 @@ module.exports = {
     }
 
     function contains(str, substring) {
-      return str !== undefined && str.indexOf(substring) > 0;
+      return str !== undefined && str.indexOf(substring) >= 0;
     }
 
     function serveDefault(folder, req, res) {
