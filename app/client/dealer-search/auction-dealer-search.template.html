@@ -4,7 +4,7 @@
   <form name="dealerSearchForm" class="search" novalidate>
     <div class="row vertical-align">
       <div class="col-xs-6 custom form-block">
-        Search by Dealer's NextGear Capital Business Number, Business Name, AuctionACCESS number, or External Buyer ID.
+        <span translate>Search by Dealer's NextGear Capital Business Number, Business Name, AuctionACCESS number, or External Buyer ID.</span>
       </div>
       <div class="col-xs-6 custom">
         <div class="styled-input with-btn">
@@ -54,7 +54,7 @@
       <th class="sortable"
           ng-click="sortBy('AuctionAccessNumber')"
           ng-class="{ sorted : data.sortBy == 'AuctionAccessNumber', desc : data.sortDescending }">
-        <nxg-sortable sortable-text="{{ 'AuctionACCESS No.' | translate }}"></nxg-sortable>
+        <nxg-sortable sortable-text="{{ 'AuctionACCESS #' | translate }}"></nxg-sortable>
       </th>
       <th class="sortable"
           ng-click="sortBy('City')"
