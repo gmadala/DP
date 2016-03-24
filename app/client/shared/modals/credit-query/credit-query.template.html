@@ -1,12 +1,10 @@
 <h3 class="modal-header" translate>
-  Buyer Business Line of Credit Query
+  Dealer Information
 </h3>
 
 <section class="modal-body" nxg-autofocus>
-  <h3 translate>Buyer Information</h3>
-
   <div class="row">
-    <div class="col-xs-5 paragraph" translate>Business No.</div>
+    <div class="col-xs-5 paragraph" translate>NGC Buyer #</div>
     <div class="col-xs-7 paragraph value">{{ business.number }}</div>
   </div>
   <div class="row">
@@ -14,7 +12,7 @@
     <div class="col-xs-7 paragraph value">{{ business.auctionAccessNumbers }}</div>
   </div>
   <div class="row">
-    <div class="col-xs-5 paragraph" translate>Auction Buyer No.</div>
+    <div class="col-xs-5 paragraph" translate>External Buyer ID</div>
     <div class="col-xs-7 value" ng-hide="business.externalId">
       <input type="text" ng-model="externalId">
       <button class="btn" ng-click="saveExternalId()">Save</button>
