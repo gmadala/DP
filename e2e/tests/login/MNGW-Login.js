@@ -11,11 +11,13 @@ var correctAnswer ='a' ;
 var validEmail= 'test@gmail.com';
 var invalidEmail= 'asdas@gmail.com';
 var invalidFormatEmail= 'sadsadas';
+var homepageUrl="https://test.nextgearcapital.com/test/#/login";
+var forgotUrl="https://test.nextgearcapital.com/test/#/login/recover";
 
 describe("Log In Suite  \n ", function () {
 
   beforeEach(function () {
-    browser.get("https://test.nextgearcapital.com/test/#/login");
+    browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
     browser.sleep(delay);
 
@@ -35,7 +37,7 @@ describe("Log In Suite  \n ", function () {
     //Check Forgot username or password link
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
+    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
 
     loginRecover.enterEmail(validEmail);
     expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
@@ -46,7 +48,7 @@ describe("Log In Suite  \n ", function () {
 
     //Exit out and verify back to main
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login");
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
 
@@ -55,7 +57,7 @@ describe("Log In Suite  \n ", function () {
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
 
     login.clickforgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
+    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
 
     //Enter invalid email
     loginRecover.enterEmail(invalidEmail);
@@ -87,14 +89,14 @@ describe("Log In Suite  \n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login");
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
   it("4. As a dealer I forgot my password. All my answers are correct", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
+    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
     loginRecover.enterUsername(userName);
     //Validate email address field is disabled and click
@@ -113,7 +115,7 @@ describe("Log In Suite  \n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login");
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
 
@@ -121,7 +123,7 @@ describe("Log In Suite  \n ", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login/recover");
+    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
     loginRecover.enterUsername(userName);
     //Validate email address field is disabled and click
@@ -129,11 +131,11 @@ describe("Log In Suite  \n ", function () {
     loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
     expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10('f');
+    loginRecover.enterQuestion10(incorrectAnswer);
     expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6('f');
+    loginRecover.enterQuestion6(incorrectAnswer);
     expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9('f');
+    loginRecover.enterQuestion9(incorrectAnswer);
     loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(loginRecover.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
@@ -141,15 +143,15 @@ describe("Log In Suite  \n ", function () {
     expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - Quebec 1.855.864.9291");
     expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - National 1.877.864.9291");
     //Exit out and verify back to main
-    loginRecover.enterQuestion10('a');
-    loginRecover.enterQuestion6('a');
-    loginRecover.enterQuestion9('a');
+    loginRecover.enterQuestion10(correctAnswer);
+    loginRecover.enterQuestion6(correctAnswer);
+    loginRecover.enterQuestion9(correctAnswer);
     loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/#/login");
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
 });
