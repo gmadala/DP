@@ -76,20 +76,25 @@ login = {
   },
 
   //Sending
-  enterUserName: function () {
+  enterUserName: function (test) {
 
-    return this.elements.userName().clear().sendKeys(userName);
+    return this.elements.userName().clear().sendKeys(test);
 
   },
-  enterPassword: function () {
+  enterPassword: function (test) {
 
-    return this.elements.password().clear().sendKeys(password);
+    return this.elements.password().clear().sendKeys(test);
 
   },
   //Functions
   login: function () {
     this.enterUserName(userName);
     this.enterPassword(password);
+    this.clickLoginButton();
+  },
+  login2: function (param1,param2) {
+    this.enterUserName(param1);
+    this.enterPassword(param2);
     this.clickLoginButton();
   },
 

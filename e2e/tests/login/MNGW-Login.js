@@ -23,7 +23,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("1. As a new dealer I want to signup to Mynextgear", function () {
+  xit("1. As a new dealer I want to signup to Mynextgear", function () {
     //Check button text
     expect(login.textsignUpLogin()).toEqual("Sign Up");
 
@@ -33,7 +33,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
 
   });
-  it("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
+ xit("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
     //Check Forgot username or password link
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -52,7 +52,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
+  xit("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
 
@@ -92,7 +92,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
-  it("4. As a dealer I forgot my password. All my answers are correct", function () {
+  xit("4. As a dealer I forgot my password. All my answers are correct", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -119,7 +119,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("6. As a dealer I forgot my password. All my answers are NOTcorrect", function () {
+  xit("6. As a dealer I forgot my password. All my answers are NOTcorrect", function () {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -153,5 +153,10 @@ describe("Log In Suite  \n ", function () {
     //Exit out and verify back to main
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  it("7. As a dealer I am trying to login with an invalid username", function () {
+  login.login2('53190md','incorrext');
+    browser.sleep(5000);
+
   });
 });

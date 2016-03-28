@@ -12,7 +12,7 @@ exports.config = {
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['tests/login/MNGW-Login.js'],
+  specs: ['tests/login/MNGW-Login.js','tests/login/credit-increase-request.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: true,
 
