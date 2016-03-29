@@ -6,7 +6,16 @@ login = {
 
   elements: {
     //Locators
+    invalidLoginError1: function () {
 
+      return element.all(by.css('p[ng-show="showLoginError"]')).get(0);
+
+    },
+    invalidLoginError2: function () {
+
+      return element.all(by.css('p[ng-show="showLoginError"]')).get(1);
+
+    },
     forgotUsernamePassword: function () {
 
       return element(by.id("forgotUsernamePassword"));
@@ -34,6 +43,7 @@ login = {
 
     }
 
+
   }, //Locator End
 
   //Clicking
@@ -57,6 +67,18 @@ login = {
   },
 
   //Getting
+  getInvalidLoginText1: function () {
+
+
+    return this.elements.invalidLoginError1().getText();
+
+  },
+  getInvalidLoginText2: function () {
+
+
+    return this.elements.invalidLoginError2().getText();
+
+  },
   getLoginButtonText: function () {
 
 
@@ -96,6 +118,7 @@ login = {
     this.enterUserName(param1);
     this.enterPassword(param2);
     this.clickLoginButton();
+    browser.sleep(longDelay);
   },
 
   //LAST ONE

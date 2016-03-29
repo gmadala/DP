@@ -53,9 +53,13 @@ describe("Log In Suite  \n ", function () {
   });
 
   xit("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
+    //Login with incorrect password
+    login.login2('53190md','incorrect');
+    expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
+    expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
-
+    //Click to login
     login.clickforgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
 
@@ -154,9 +158,7 @@ describe("Log In Suite  \n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  it("7. As a dealer I am trying to login with an invalid username", function () {
-  login.login2('53190md','incorrext');
-    browser.sleep(5000);
+  xit("7. As a dealer I am trying to login with an invalid username", function () {
 
   });
 });
