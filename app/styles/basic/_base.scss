@@ -204,3 +204,11 @@ section.col-xs-6 {
 .comment-box{
   width: 100%;
 }
+
+@media (max-width: $screen-sm-max) {
+  .uv-tab {
+    display: none;
+  }
+
+
+}

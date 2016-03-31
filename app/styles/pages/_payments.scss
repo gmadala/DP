@@ -65,19 +65,8 @@
     padding: 10px 8px;
   }
 
-  td.has-btns {
-    min-width: 100px;
-  }
-
-  td.description-narrow {
-    min-width: 190px;
-  }
-
-  .paired {
-    min-width: 115px;
-    .paired-media {
-      margin-left: 0;
-    }
+  .paired .paired-media {
+    margin-left: 0;
   }
 }
 

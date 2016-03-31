@@ -1,5 +1,5 @@
 <section class="row">
-  <section class="col-xs-9">
+  <section class="col-sm-9">
     <div ng-switch="paymentQueue.contents.isEmpty()">
 
       <!-- When there are no payments or fees -->
@@ -16,9 +16,9 @@
       <!-- When you have payments or fees in your cart -->
       <section ng-switch-when="false">
         <!-- Fees List -->
-        <div class="well" ng-show="paymentQueue.sum.feeCount() > 0">
+        <div class="panel panel-default" ng-show="paymentQueue.sum.feeCount() > 0">
           <h2 class="well-title" translate translate-n="2" translate-plural="Account Fees">Account Fee</h2>
-          <table class="table table-striped table-primary">
+          <table class="table table-striped table-primary table-hover">
             <thead>
               <th translate>Due Date</th>
               <th translate>Fee Type</th>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Payments List -->
-        <div class="well" ng-show="paymentQueue.sum.paymentCount() > 0">
+        <div class="panel panel-default" ng-show="paymentQueue.sum.paymentCount() > 0">
           <h2 class="well-title" translate>Vehicle Payments</h2>
 
           <table class="table table-striped table-primary">
@@ -153,134 +153,136 @@
     </div>
   </section>
 
-  <form class="col-xs-3 custom well sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer">
-    <h2 class="well-title" translate>Payment Summary</h2>
+  <div class="col-sm-3">
+    <form class="panel panel-default sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer" ng-class="">
+      <h2 class="well-title" translate>Payment Summary</h2>
 
-    <section class="nxg-sticky-scroll">
-      <section class="well-item well-dark">
-        <p translate>Please review the following and submit your payments below.</p>
-        <button type="button"
-                class="btn-cta cta-secondary btn-center"
-                ng-click="exportPaymentSummary()"
-                ng-disabled="paymentQueue.sum.todayCount() == 0"
-                nxg-track="{{metric.DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON}}"
-                track-properties="{{kissMetricData}}" >
-          <span translate>Export Summary</span> <span nxg-icon="icon-document" class="icon-small"></span>
-        </button>
-      </section>
+      <section class="nxg-sticky-scroll">
+        <section class="well-item well-dark">
+          <p translate>Please review the following and submit your payments below.</p>
+          <button type="button"
+                  class="btn-cta cta-secondary btn-center"
+                  ng-click="exportPaymentSummary()"
+                  ng-disabled="paymentQueue.sum.todayCount() == 0"
+                  nxg-track="{{metric.DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON}}"
+                  track-properties="{{kissMetricData}}" >
+            <span translate>Export Summary</span> <span nxg-icon="icon-document" class="icon-small"></span>
+          </button>
+        </section>
 
-      <section class="well-item well-light bordered">
-        <!-- Payments -->
-        <div class="alt-lockup">
-          <h2 class="subtitle">{{ paymentQueue.sum.todayCount() }}
-            <span ng-show="paymentQueue.sum.todayCount() == 1" translate>Payment</span>
-            <span ng-hide="paymentQueue.sum.todayCount() == 1" translate>Payments</span>
-            <span translate>Today</span>
-          </h2>
-
-          <p class="lockup-minor" translate>In the Amount of</p>
-          <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h3>
-        </div>
-
-        <!-- If User has Unapplied Funds -->
-        <!-- We add an inline style (display: none) here to avoid the flash
-        of our ng-show content before the page finishes compiling and knows
-        the ng-show expression should evaluate to false. -->
-        <div ng-show="unappliedFunds.available > 0">
+        <section class="well-item well-light bordered">
+          <!-- Payments -->
           <div class="alt-lockup">
-            <p class="lockup-minor" translate>Available Unapplied Funds</p>
-            <h3 class="lockup-major" ng-bind="unappliedFunds.available | currency"></h3>
+            <h2 class="subtitle">{{ paymentQueue.sum.todayCount() }}
+              <span ng-show="paymentQueue.sum.todayCount() == 1" translate>Payment</span>
+              <span ng-hide="paymentQueue.sum.todayCount() == 1" translate>Payments</span>
+              <span translate>Today</span>
+            </h2>
+
+            <p class="lockup-minor" translate>In the Amount of</p>
+            <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h3>
           </div>
 
-          <div class="alt-lockup">
-            <p class="lockup-minor" translate>Apply these Funds to Payment?</p>
-            <div class="cr-inline float-r">
-              <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
-                     ng-value="true" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
-              <label class="radio-img" for="unappliedYes"></label>
-              <label class="cr-label" for="unappliedYes" translate>Yes</label>
+          <!-- If User has Unapplied Funds -->
+          <!-- We add an inline style (display: none) here to avoid the flash
+          of our ng-show content before the page finishes compiling and knows
+          the ng-show expression should evaluate to false. -->
+          <div ng-show="unappliedFunds.available > 0">
+            <div class="alt-lockup">
+              <p class="lockup-minor" translate>Available Unapplied Funds</p>
+              <h3 class="lockup-major" ng-bind="unappliedFunds.available | currency"></h3>
+            </div>
 
-              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
-                     ng-value="false" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
-              <label class="radio-img" for="unappliedNo"></label>
-              <label class="cr-label" for="unappliedNo" translate>No</label>
+            <div class="alt-lockup">
+              <p class="lockup-minor" translate>Apply these Funds to Payment?</p>
+              <div class="cr-inline float-r">
+                <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
+                       ng-value="true" ng-model="unappliedFunds.useFunds"
+                       ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
+                <label class="radio-img" for="unappliedYes"></label>
+                <label class="cr-label" for="unappliedYes" translate>Yes</label>
+
+                <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
+                       ng-value="false" ng-model="unappliedFunds.useFunds"
+                       ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
+                <label class="radio-img" for="unappliedNo"></label>
+                <label class="cr-label" for="unappliedNo" translate>No</label>
+              </div>
+            </div>
+
+            <div class="alt-lockup align-right" ng-show="unappliedFunds.useFunds">
+              <label class="lockup-minor" for="unappliedAmt" translate>Unapplied Funds to Use</label>
+              <span class="input-prepend dollar">
+                <span class="add-on" translate>$</span>
+                <input id="unappliedAmt" name="unappliedAmt"
+                       class="input-small"
+                       type="text"
+                       placeholder="0.00"
+                       ng-model="unappliedFunds.useAmount"
+                       nxg-min="unappliedFunds.min()"
+                       nxg-max="unappliedFunds.max()"
+                       ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
+                       ng-required="unappliedFunds.useFunds"
+                       ng-disabled="submitInProgress"
+                       ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
+              </span>
+              <label class="text-error" ng-show="validity.unappliedAmt.$error.required" translate>
+                Please enter the amount of unapplied funds to use.
+              </label>
+              <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern" translate>
+                Please enter the amount of unapplied funds as a number with no more than 2 decimals.
+              </label>
+              <label class="text-error" ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax" translate>
+                  Unapplied funds must be <span ng-bind="unappliedFunds.min() | currency"></span> to <span ng-bind="unappliedFunds.max() | currency"></span>
+              </label>
+            </div>
+
+            <div class="alt-lockup" ng-show="unappliedFunds.useFunds">
+              <p class="lockup-minor" translate>Remaining Payment Balance</p>
+              <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() - sanitize(unappliedFunds.useAmount) | currency"></h3>
             </div>
           </div>
+        </section>
 
-          <div class="alt-lockup align-right" ng-show="unappliedFunds.useFunds">
-            <label class="lockup-minor" for="unappliedAmt" translate>Unapplied Funds to Use</label>
-            <span class="input-prepend dollar">
-              <span class="add-on" translate>$</span>
-              <input id="unappliedAmt" name="unappliedAmt"
-                     class="input-small"
-                     type="text"
-                     placeholder="0.00"
-                     ng-model="unappliedFunds.useAmount"
-                     nxg-min="unappliedFunds.min()"
-                     nxg-max="unappliedFunds.max()"
-                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
-                     ng-required="unappliedFunds.useFunds"
-                     ng-disabled="submitInProgress"
-                     ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
-            </span>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.required" translate>
-              Please enter the amount of unapplied funds to use.
-            </label>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern" translate>
-              Please enter the amount of unapplied funds as a number with no more than 2 decimals.
-            </label>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax" translate>
-                Unapplied funds must be <span ng-bind="unappliedFunds.min() | currency"></span> to <span ng-bind="unappliedFunds.max() | currency"></span>
-            </label>
+        <section class="well-item well-light bordered">
+          <div class="alt-lockup">
+            <h2 class="subtitle" translate translate-n="paymentQueue.sum.scheduledCount()" translate-plural="{{ paymentQueue.sum.scheduledCount() }} Future Payments">{{ paymentQueue.sum.scheduledCount() }} Future Payment</h2>
+            <p class="lockup-minor" translate>In the Amount of</p>
+            <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
           </div>
+        </section>
+      </section>
 
-          <div class="alt-lockup" ng-show="unappliedFunds.useFunds">
-            <p class="lockup-minor" translate>Remaining Payment Balance</p>
-            <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() - sanitize(unappliedFunds.useAmount) | currency"></h3>
+      <section class="well-footer">
+        <section class="well-item well-dark">
+          <!-- Bank Account -->
+          <label for="bankAccount" translate>Bank Account</label>
+          <p class="static-option" ng-show="bankAccounts.singleAccount">
+            {{ bankAccounts.selectedAccount.BankAccountName }}
+          </p>
+          <div class="style-select" ng-hide="bankAccounts.singleAccount">
+            <select name="bankAccount" id="bankAccount"
+                    ng-model="bankAccounts.selectedAccount"
+                    ng-disabled="submitInProgress"
+                    ng-options="account.BankAccountName for account in bankAccounts.getList()"
+                    ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
+              <option value="" translate>-- Select Bank --</option>
+            </select>
           </div>
-        </div>
+          <!-- We add an inline style (display: none) here to avoid the flash
+          of our ng-show content before the page finishes compiling and knows
+          the ng-show expression should evaluate to false. -->
+          <label style="display:none" class="text-error" ng-show="validity.bankAccount.$error.required" translate>Please select a bank account for payment.</label>
+
+
+        </section>
+
+        <button class="btn-cta cta-primary cta-full"
+                ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+                ng-click="submit()">
+          <span translate>Submit Payments</span> <span nxg-icon="icon-cart"></span>
+        </button>
       </section>
-
-      <section class="well-item well-light bordered">
-        <div class="alt-lockup">
-          <h2 class="subtitle" translate translate-n="paymentQueue.sum.scheduledCount()" translate-plural="{{ paymentQueue.sum.scheduledCount() }} Future Payments">{{ paymentQueue.sum.scheduledCount() }} Future Payment</h2>
-          <p class="lockup-minor" translate>In the Amount of</p>
-          <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
-        </div>
-      </section>
-    </section>
-
-    <section class="well-footer">
-      <section class="well-item well-dark">
-        <!-- Bank Account -->
-        <label for="bankAccount" translate>Bank Account</label>
-        <p class="static-option" ng-show="bankAccounts.singleAccount">
-          {{ bankAccounts.selectedAccount.BankAccountName }}
-        </p>
-        <div class="style-select" ng-hide="bankAccounts.singleAccount">
-          <select name="bankAccount" id="bankAccount"
-                  ng-model="bankAccounts.selectedAccount"
-                  ng-disabled="submitInProgress"
-                  ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
-            <option value="" translate>-- Select Bank --</option>
-          </select>
-        </div>
-        <!-- We add an inline style (display: none) here to avoid the flash
-        of our ng-show content before the page finishes compiling and knows
-        the ng-show expression should evaluate to false. -->
-        <label style="display:none" class="text-error" ng-show="validity.bankAccount.$error.required" translate>Please select a bank account for payment.</label>
-
-
-      </section>
-
-      <button class="btn-cta cta-primary cta-full"
-              ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
-              ng-click="submit()">
-        <span translate>Submit Payments</span> <span nxg-icon="icon-cart"></span>
-      </button>
-    </section>
-  </form>
+    </form>
+  </div>
 </section>
