@@ -5,8 +5,8 @@
      filter-label="{{ 'Filter by Status' | translate }}"
      filter-options="filterOptions"
      active-criteria="floorplanData.searchCriteria"
-     on-search="floorplanData.search(floorplanData.searchCriteria)"
-     on-clear="floorplanData.resetSearch(filterOptions)"
+     on-search="floorplanData.sellerSearch(floorplanData.searchCriteria)"
+     on-clear="floorplanData.resetSellerSearch(filterOptions)"
      help-text="{{ 'Date range based on Date Floored OR Disbursement Date.' | translate }}"
      filterable="true">
 </div>
@@ -14,7 +14,7 @@
 <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
   <h2 class="well-title" translate>Floor Plan</h2>
   <p class="notice-box" ng-switch-when="false" translate>
-    Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+    Sorry, no results found. Please <a ng-click="resetSellerSearch()" title="New Search">try a new search</a>.
   </p>
   <section ng-switch-when="true"
            nxg-infinite-scroll="floorplanData.fetchNextResults()"
@@ -56,7 +56,13 @@
         <td class="description-narrow">
           <p class="lockup-major" nxg-highlight="item.Description" highlight="item.data.query"></p>
           <p class="lockup-minor caps">
-            <span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
+            <span translate>VIN</span>: <span nxg-highlight="item.UnitVin" highlight="searchCriteria.query" class="break-word"></span>
+          </p>
+          <p class="lockup-minor caps">
+            <span><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="searchCriteria.query" class="break-word"></span></span>
+          </p>
+          <p class="lockup-minor caps" ng-show="item.AuctionStockNumber">
+            <span translate>Auction STK</span>: <span nxg-highlight="item.AuctionStockNumber" highlight="searchCriteria.query" class="break-word"></span>
           </p>
         </td>
         <td>
@@ -67,10 +73,10 @@
         </td>
         <td class="buyer">
           <h5>{{ item.BuyerName }}</h5>
-          <p class="lockup-minor">
-            <span translate>Auction Buyer ID</span>: <span nxg-highlight="item.AuctionBuyerID" highlight="searchCriteria.query" class="break-word"></span>
+          <p class="lockup-minor" ng-show="item.AuctionBuyerId">
+            <span translate>Auction Buyer ID</span>: <span nxg-highlight="item.AuctionBuyerId" highlight="searchCriteria.query" class="break-word"></span>
           </p>
-          <p class="lockup-minor">
+          <p class="lockup-minor" ng-show="item.AuctionLocation">
             <span translate>Auction Location</span>: <span nxg-highlight="item.AuctionLocation" highlight="searchCriteria.query" class="break-word"></span>
           </p>
         </td>

@@ -243,7 +243,7 @@
       .state('auction_sellerfloorplan', {
         url: '/act/sellerfloorplan',
         templateUrl: 'client/floor-plan/auction-seller-floor-plan.template.html',
-        controller: 'FloorplanCtrl',
+        controller: 'AuctionFloorplanCtrl',
         data: {
           pageId: 'AuctionFloorplan',
           isAuctionState: true,
