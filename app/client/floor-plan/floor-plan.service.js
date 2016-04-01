@@ -112,7 +112,6 @@
         );
       },
       sellerSearch: function (criteria, paginator) {
-        console.log(criteria.filter);
         var self = this,
           params = {
             businessId: criteria.businessId || undefined,
@@ -147,7 +146,6 @@
         }
 
         return api.request('POST', api.ngenContentLink('/floorplans/searchMobileSeller'), params, null, true, handleNgenRequest).then(function (response) {
-          console.log(response);
           var results = {
             Floorplans: response.data
           };
