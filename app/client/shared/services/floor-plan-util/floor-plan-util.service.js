@@ -35,7 +35,6 @@
       },
       sellerSearch: function (criteria) {
         this.paginator = null;
-        this.paginator = null;
         this.hitInfiniteScrollMax = false;
         this.results.length = 0;
         this.searchCriteria = criteria;
