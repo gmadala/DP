@@ -50,12 +50,12 @@
           break;
         case prv.profile.LOCAL_TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://localhost:8080';
+          ngenDomain = 'https://localhost:8080/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.UAT:
-          apiDomain = 'https://exp1uatdapp01.nextgearcapital.com/';
-          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com';
+          apiDomain = 'https://exp1uatdapp01.nextgearcapital.com';
+          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
           break;
         case prv.profile.DEMO:
@@ -75,7 +75,7 @@
           break;
         case prv.profile.PRODUCTION:
           apiDomain = 'https://customer.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.nextgearcapital.com';
+          ngenDomain = 'https://ngen-api.nextgearcapital.com/';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
           break;
         default:
