@@ -1,10 +1,6 @@
 (function () {
   'use strict';
 
-  /**
-   * WARNING: This controller is used for both dealer Floorplan AND auction Seller Floorplan. Understand
-   * the ramifications to each view and test both when making any changes here!!
-   */
   angular
     .module('nextgearWebApp')
     .controller('AuctionFloorplanCtrl', AuctionFloorplanCtrl);
