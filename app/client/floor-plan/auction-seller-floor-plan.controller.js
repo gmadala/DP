@@ -1,11 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('nextgearWebApp')
-    .controller('FloorplanCtrl', FloorplanCtrl);
+    .controller('AuctionFloorplanCtrl', AuctionFloorplanCtrl);
 
-  FloorplanCtrl.$inject = [
+  AuctionFloorplanCtrl.$inject = [
     '$scope',
     '$stateParams',
     'Floorplan',
@@ -16,15 +16,14 @@
     'Addresses'
   ];
 
-  function FloorplanCtrl(
-    $scope,
-    $stateParams,
-    Floorplan,
-    FloorplanUtil,
-    User,
-    $timeout,
-    gettextCatalog,
-    Addresses) {
+  function AuctionFloorplanCtrl($scope,
+                                $stateParams,
+                                Floorplan,
+                                FloorplanUtil,
+                                User,
+                                $timeout,
+                                gettextCatalog,
+                                Addresses) {
 
     $scope.isCollapsed = true;
 
@@ -98,11 +97,10 @@
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
 
 
-
     // Set up page-load filtering based on $stateParams
     var filterParam = null;
 
-    switch($stateParams.filter) {
+    switch ($stateParams.filter) {
       case 'approved':
         filterParam = Floorplan.filterValues.APPROVED;
         break;
@@ -115,9 +113,9 @@
     }
 
     // initial search
-    $scope.floorplanData.resetSearch(filterParam);
+    $scope.floorplanData.resetSellerSearch(filterParam);
 
-    $scope.showTooltip = function(sellerHasTitle, sellerHasTitleChanged) {
+    $scope.showTooltip = function (sellerHasTitle, sellerHasTitleChanged) {
       if (!!sellerHasTitleChanged) {
         return true;
       } else if (!sellerHasTitle) {
@@ -125,7 +123,7 @@
       }
     };
 
-    $scope.hideTooltip = function(sellerHasTitle, sellerHasTitleChanged) {
+    $scope.hideTooltip = function (sellerHasTitle, sellerHasTitleChanged) {
       if (!!sellerHasTitleChanged) {
         return false;
       } else if (sellerHasTitle) {
@@ -134,13 +132,13 @@
     };
 
     $scope.sellerTimeouts = {};
-    $scope.sellerHasTitle = function(floorplan, hasTitle) {
+    $scope.sellerHasTitle = function (floorplan, hasTitle) {
       if (!floorplan.sellerHasTitleChanged) {
         floorplan.sellerHasTitleChanged = !floorplan.sellerHasTitleChanged;
       }
 
-      var toggleTooltip = function(possibleTT, hide) {
-        if(possibleTT.hasClass('tooltip')) {
+      var toggleTooltip = function (possibleTT, hide) {
+        if (possibleTT.hasClass('tooltip')) {
           // the tooltip div exists, so we need to make sure its
           // completely gone or properly brought back
           var displayVal = hide ? 'none' : '';
@@ -149,13 +147,13 @@
       };
 
       Floorplan.sellerHasTitle(floorplan.FloorplanId, hasTitle).then(
-        function() {
+        function () {
           if ($scope.sellerTimeouts[floorplan.FloorplanId]) {
             // cancel any previous timeouts before setting a new one.
             $timeout.cancel($scope.sellerTimeouts[floorplan.FloorplanId]);
           }
 
-          $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function() {
+          $scope.sellerTimeouts[floorplan.FloorplanId] = $timeout(function () {
             var curFloorplan = angular.element('#' + floorplan.FloorplanId + '+ label');
             toggleTooltip(curFloorplan.next(), true);
           }, 2000);
