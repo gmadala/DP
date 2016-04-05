@@ -24,19 +24,19 @@
     <table class="table table-striped table-primary">
       <thead>
       <th class="sortable"
-          ng-click="floorplanData.sortBy('FlooringDate')"
+          ng-click="floorplanData.sortSellerBy('FlooringDate')"
           ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
         <nxg-sortable sortable-text="{{ 'Dates' | translate }}"></nxg-sortable>
       </th>
       <th class="sortable"
-          ng-click="floorplanData.sortBy('UnitMake')"
+          ng-click="floorplanData.sortSellerBy('UnitMake')"
           ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
         <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
       </th>
       <th translate>Status</th>
       <th translate>Purchased For</th>
       <th class="sortable"
-          ng-click="floorplanData.sortBy('BuyerBusinessName')"
+          ng-click="floorplanData.sortSellerBy('BuyerBusinessName')"
           ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'BuyerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
         <nxg-sortable sortable-text="{{ 'Buyer' | translate }}"></nxg-sortable>
       </th>
