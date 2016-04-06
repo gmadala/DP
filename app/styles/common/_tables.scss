@@ -280,23 +280,6 @@
   }
 }
 
-.row.ng-scope .col-xs-6{
-  &:first-child{
-    margin-left: 0;
-    margin-right: 2%;
-    &.no-right-margin{
-      margin-right: 0;
-    }
-  }
-
-  &:last-child{
-    margin-left: 2%;
-    margin-right: 0;
-    &.no-left-margin{
-      margin-left: 0;
-    }
-  }
-}
 
 .row .col-xs-2 ul{
   padding: 7px;
