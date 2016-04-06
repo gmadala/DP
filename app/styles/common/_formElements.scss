@@ -170,6 +170,10 @@ input[type="file"]{
   padding: 0;
 }
 
+.no-margin{
+  margin: 0;
+}
+
 .small-left-padding {
   padding-left: 13px;
 }
@@ -182,7 +186,6 @@ input[type="file"]{
 }
 
 .sort-by {
-  padding: 10px 0;
   color: #404040;
 }
 
