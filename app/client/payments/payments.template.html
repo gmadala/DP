@@ -112,7 +112,7 @@
     <div class="panel panel-default" ng-switch="payments.results.length > 0 || payments.loading">
       <h2 class="well-title">
         <span translate>Vehicle Payments</span>
-        <div uib-dropdown class="pull-right">
+        <div uib-dropdown class="pull-right visible-xs visible-sm">
           <button class="btn-unstyle dropdown-toggle sort-by no-padding no-margin" type="button" id="dropdownSort" uib-dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <strong translate>Sort By</strong>
             <span class="caret"></span>
@@ -120,6 +120,8 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownSort">
             <li ng-click="sortPaymentsBy('DueDate')"><a translate>Due Date</a></li>
             <li ng-click="sortPaymentsBy('UnitDescription')"><a translate>Description</a></li>
+            <li class="hidden-xs" ng-click="sortPaymentsBy('FlooringDate')"><a translate>Floored</a></li>
+            <li class="hidden-xs" ng-click="sortPaymentsBy('UnitStatus')"><a translate>Unit Status</a></li>
             <li ng-click="sortPaymentsBy('AmountDue')"><a translate>Due</a></li>
             <li ng-click="sortPaymentsBy('CurrentPayoff')"><a translate>Payoff</a></li>
           </ul>
