@@ -106,7 +106,7 @@
       configuration = {
         apiBase: apiDomain + '/MobileService/api',
         apiDomain: apiDomain,
-        ngenDomain: ngenDomain + '/ngen/',
+        ngenDomain: ngenDomain + '/ngen',
         masheryToken: mashToken,
         segmentIoKey: segmentIoKey,
         userVoice: {
