@@ -281,5 +281,19 @@
       return count;
     };
 
+    $scope.getTotal = function(){
+      var total = 0,
+        queue = Payments.getPaymentQueue();
+
+      angular.forEach(queue.fees, function (fee) {
+        total += fee.getCheckoutAmount();
+      });
+
+      angular.forEach(queue.payments, function (payment) {
+        total += payment.getCheckoutAmount();
+      });
+      return total;
+    };
+
   }
 })();

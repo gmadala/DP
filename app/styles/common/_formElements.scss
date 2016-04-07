@@ -961,6 +961,13 @@ ul.files-container li .file-delete:hover{
   }
 }
 
+#end-date-picker {
+  .dropdown-menu{
+    left: initial !important;
+    right: 15px;
+  }
+}
+
 .disbursement-date-picker {
   input {
     width: 97%;
