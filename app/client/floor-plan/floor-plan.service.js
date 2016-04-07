@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,8 +10,13 @@
   function Floorplan(api, Paginate, User, $q, gettextCatalog) {
     var overrideInProgress = false;
 
+    function handleNgenRequest(response) {
+      api.resetSessionTimeout();
+      return response;
+    }
+
     return {
-      create: function(data) {
+      create: function (data) {
         // transform data types as needed for API
         data = angular.copy(data);
 
@@ -25,8 +30,8 @@
           // date
           UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate),
           // option object values that need flattened to ids
-          UnitColorId:  data.UnitColorId ? data.UnitColorId.ColorId : null,
-          TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId: null,
+          UnitColorId: data.UnitColorId ? data.UnitColorId.ColorId : null,
+          TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId : null,
           TitleTypeId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleTypeId : null,
           PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.AddressId : null,
           LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
@@ -106,11 +111,63 @@
           }
         );
       },
+      sellerSearch: function (criteria, paginator) {
+        var self = this,
+          params = {
+            businessId: criteria.businessId || undefined,
+            searchText: criteria.query || undefined,
+            // optimization: only set filter params if they are false, since not setting them is same as true
+            // per Heath Matthias: "If true or not set, the search includes items, if set to false items are
+            // filtered out (this is how the status filters work)"
+            searchPending: criteria.filter.indexOf('pending') >= 0 ? undefined : false,
+            searchApproved: criteria.filter.indexOf('approved') >= 0 ? undefined : false,
+            searchCompleted: criteria.filter.indexOf('completed') >= 0 ? undefined : false,
+            searchDenied: criteria.filter.indexOf('denied') >= 0 ? undefined : false,
+            searchPaid: criteria.filter.indexOf('paidYes') >= 0 ? undefined : false,
+            searchUnPaid: criteria.filter.indexOf('paidNo') >= 0 ? undefined : false,
+            searchHasTitle: criteria.filter.indexOf('titleYes') >= 0 ? undefined : false,
+            searchHasNoTitle: criteria.filter.indexOf('titleNo') >= 0 ? undefined : false,
+            // default values for un-set dates may need adjusted during API integration
+            startDate: api.toShortISODate(criteria.startDate) || undefined,
+            endDate: api.toShortISODate(criteria.endDate) || undefined,
+            sort: {},
+            //orderBy: criteria.sortField || 'FlooringDate',
+            //orderByDirection: criteria.sortDescending === undefined || criteria.sortDescending === true ? 'DESC' : 'ASC',
+            pageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
+            pageSize: Paginate.PAGE_SIZE_MEDIUM,
+            physicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
+          };
+
+        if (criteria.sortField !== undefined) {
+          var orderDirection = criteria.sortDescending === undefined || criteria.sortDescending === true ? 'DESC' : 'ASC';
+          params.sort[criteria.sortField] = orderDirection;
+        } else {
+          params.sort = {FlooringDate: "ASC"};
+        }
+
+        return api.request('POST', api.ngenContentLink('/floorplans/searchMobileSeller'), params, null, true, handleNgenRequest).then(function (response) {
+          var results = {
+            Floorplans: response.data
+          };
+
+          angular.forEach(results.Floorplans, function (floorplan) {
+            floorplan.data = {query: criteria.query};
+            if (floorplan.TitleImageAvailable) {
+              self.addTitleURL(floorplan);
+            }
+            floorplan.sellerHasTitle = floorplan.TitleLocation === gettextCatalog.getString('Seller');
+            floorplan.Description = self.getVehicleDescription(floorplan);
+          });
+          return Paginate.addPaginator(results, response.headers('X-NGEN-Count'), params.PageNumber, params.PageSize);
+        });
+      },
       addTitleURL: function (item) {
-        if (!item.StockNumber) { return item; }
+        if (!item.StockNumber) {
+          return item;
+        }
 
         var buyerBusinessNumber, displayId;
-        User.getInfo().then(function(info) {
+        User.getInfo().then(function (info) {
           buyerBusinessNumber = item.BuyerBusinessNumber || info.BusinessNumber;
           displayId = buyerBusinessNumber + '-' + item.StockNumber;
           item.$titleURL = api.contentLink('/floorplan/title/' + displayId + '/0' + '/Title_' + item.StockNumber); // 0 = not first page only
@@ -118,17 +175,17 @@
 
         return item;
       },
-      sellerHasTitle: function(floorplanId, hasTitle) {
+      sellerHasTitle: function (floorplanId, hasTitle) {
         return api.request('POST', '/floorplan/SellerHasTitle', {
           FloorplanId: floorplanId,
           HasTitle: hasTitle
         });
       },
-      overrideCompletionAddress: function(payments) {
-        if(payments && payments.length && payments.length > 0) {
+      overrideCompletionAddress: function (payments) {
+        if (payments && payments.length && payments.length > 0) {
           var data = [];
 
-          _.each(payments, function(p) {
+          _.each(payments, function (p) {
             data.push({
               FloorplanId: p.id,
               TitleAddressId: p.overrideAddress.AddressId
@@ -136,10 +193,10 @@
           });
 
           overrideInProgress = true;
-          return api.request('POST', '/floorplan/overrideCompletionAddress', {OverrideCompletionAddressInformation: data} ).then(function(response) {
+          return api.request('POST', '/floorplan/overrideCompletionAddress', {OverrideCompletionAddressInformation: data}).then(function (response) {
             overrideInProgress = false;
             return response;
-          }, function(error) {
+          }, function (error) {
             overrideInProgress = false;
             // Rethrow error. Doing it this way propagates the rejection
             // Without an exception being throw at the end of the promise chain
@@ -149,10 +206,10 @@
           return $q.when(true);
         }
       },
-      overrideInProgress: function() {
+      overrideInProgress: function () {
         return overrideInProgress;
       },
-      getExtensionPreview: function(floorplanId) {
+      getExtensionPreview: function (floorplanId) {
         return api.request('GET', '/floorplan/extensionPreview/' + floorplanId);
       },
       getVehicleDescription: function (floorplan) {
@@ -164,17 +221,17 @@
           floorplan.Color
         ].join(' ');
       },
-      editInventoryAddress: function(address) {
+      editInventoryAddress: function (address) {
         return api.request('POST', '/floorplan/EditInventoryAddress', address);
       },
-      addComment: function(Comment) {
+      addComment: function (Comment) {
         return api.request('POST', '/floorplan/comment', Comment);
       },
-      determineFloorPlanExtendability : function (floorPlanIds){
+      determineFloorPlanExtendability: function (floorPlanIds) {
         var fpArray = [];
         fpArray.push(floorPlanIds);
         var fpJSON = JSON.stringify(fpArray);
-        return api.request('POST',api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'),fpJSON,null,true, api.ngenSuccessHandler);
+        return api.request('POST', api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'), fpJSON, null, true, api.ngenSuccessHandler);
       }
     };
 
