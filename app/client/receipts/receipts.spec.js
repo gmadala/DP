@@ -320,7 +320,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
         spyOn(window, 'open');
         scope.viewReceipt(receipt);
-        expect(window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=5656', '_blank');
+        expect(window.open).toHaveBeenCalledWith('/encodedReceipts?api_key=pqarrjbnqepfsppq5nnern7f&transactions=5656', '_blank');
       });
     });
   });
@@ -362,7 +362,7 @@ describe('Controller: ReceiptsCtrl', function () {
 
       spyOn(window, 'open');
       scope.onExport();
-      expect(window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=5656,3434,1212', '_blank');
+      expect(window.open).toHaveBeenCalledWith('/encodedReceipts?api_key=pqarrjbnqepfsppq5nnern7f&transactions=5656,3434,1212', '_blank');
     });
   });
 

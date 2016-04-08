@@ -209,6 +209,10 @@
 
         var queryParts = [];
 
+        if(nxgConfig.masheryToken) {
+          queryParts.push('api_key=' + nxgConfig.masheryToken);
+        }
+
         if (authToken) {
           queryParts.push('apiToken=' + authToken);
         }
