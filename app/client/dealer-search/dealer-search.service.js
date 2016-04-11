@@ -27,7 +27,7 @@
       };
       params.sort[sortField] = sortDesc ? 'DESC' : 'ASC';
 
-      return api.request('POST', api.ngenContentLink('businesses/searchMobile'), params, null, true, handleNgenRequest).then(
+      return api.request('POST', api.ngenContentLink('/businesses/searchMobile'), params, null, true, handleNgenRequest).then(
         function(response) {
           var results = {
             SearchResults: response.data
