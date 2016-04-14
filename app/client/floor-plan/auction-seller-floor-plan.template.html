@@ -59,12 +59,16 @@
             <span translate>VIN</span>: <span nxg-highlight="item.UnitVin" highlight="searchCriteria.query" class="break-word"></span>
           </p>
           <p class="lockup-minor caps">
-                        <span><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="searchCriteria.query"
+                        <span><span translate>NGC Stock #</span><span nxg-highlight="item.StockNumber" highlight="searchCriteria.query"
                                                                 class="break-word"></span></span>
           </p>
           <p class="lockup-minor caps" ng-show="item.ExternalStockNumber">
-            <span translate>External Stock #</span>: <span nxg-highlight="item.ExternalStockNumber" highlight="searchCriteria.query"
+            <span translate>External Stock #</span><span nxg-highlight="item.ExternalStockNumber" highlight="searchCriteria.query"
                                                            class="break-word"></span>
+          </p>
+          <p class="lockup-minor" ng-show="item.ExternalSellerId">
+            <span translate>External Seller ID</span>: <span nxg-highlight="item.ExternalSellerId" highlight="searchCriteria.query"
+                                                             class="break-word"></span>
           </p>
         </td>
         <td>
@@ -78,10 +82,6 @@
           <p class="lockup-minor" ng-show="item.ExternalBuyerId">
             <span translate>External Buyer ID</span>: <span nxg-highlight="item.ExternalBuyerId" highlight="searchCriteria.query"
                                                             class="break-word"></span>
-          </p>
-          <p class="lockup-minor" ng-show="item.ExternalSellerId">
-            <span translate>External Seller ID</span>: <span nxg-highlight="item.ExternalSellerId" highlight="searchCriteria.query"
-                                                             class="break-word"></span>
           </p>
         </td>
         <td>
