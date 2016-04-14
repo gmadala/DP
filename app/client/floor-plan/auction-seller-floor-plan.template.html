@@ -17,7 +17,7 @@
     Sorry, no results found. Please <a ng-click="resetSellerSearch()" title="New Search">try a new search</a>.
   </p>
   <section ng-switch-when="true"
-           nxg-infinite-scroll="floorplanData.fetchNextResults()"
+           nxg-infinite-scroll="floorplanData.fetchNextSellerResults()"
            nxg-infinite-scroll-disabled="floorplanData.loading"
            nxg-infinite-scroll-show-indicator="floorplanData.loading">
 
@@ -62,9 +62,9 @@
                         <span><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="searchCriteria.query"
                                                                 class="break-word"></span></span>
           </p>
-          <p class="lockup-minor caps" ng-show="item.AuctionStockNumber">
-            <span translate>Auction STK</span>: <span nxg-highlight="item.AuctionStockNumber" highlight="searchCriteria.query"
-                                                      class="break-word"></span>
+          <p class="lockup-minor caps" ng-show="item.ExternalStockNumber">
+            <span translate>External Stock #</span>: <span nxg-highlight="item.ExternalStockNumber" highlight="searchCriteria.query"
+                                                           class="break-word"></span>
           </p>
         </td>
         <td>
@@ -75,13 +75,13 @@
         </td>
         <td class="buyer">
           <h5>{{ item.BuyerName }}</h5>
-          <p class="lockup-minor" ng-show="item.AuctionBuyerId">
-            <span translate>Auction Buyer ID</span>: <span nxg-highlight="item.AuctionBuyerId" highlight="searchCriteria.query"
-                                                           class="break-word"></span>
+          <p class="lockup-minor" ng-show="item.ExternalBuyerId">
+            <span translate>External Buyer ID</span>: <span nxg-highlight="item.ExternalBuyerId" highlight="searchCriteria.query"
+                                                            class="break-word"></span>
           </p>
-          <p class="lockup-minor" ng-show="item.AuctionLocation">
-            <span translate>Auction Location</span>: <span nxg-highlight="item.AuctionLocation" highlight="searchCriteria.query"
-                                                           class="break-word"></span>
+          <p class="lockup-minor" ng-show="item.ExternalSellerId">
+            <span translate>External Seller ID</span>: <span nxg-highlight="item.ExternalSellerId" highlight="searchCriteria.query"
+                                                             class="break-word"></span>
           </p>
         </td>
         <td>

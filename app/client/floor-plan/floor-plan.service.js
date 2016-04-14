@@ -158,7 +158,7 @@
             floorplan.sellerHasTitle = floorplan.TitleLocation === gettextCatalog.getString('Seller');
             floorplan.Description = self.getVehicleDescription(floorplan);
           });
-          return Paginate.addPaginator(results, response.headers('X-NGEN-Count'), params.PageNumber, params.PageSize);
+          return Paginate.addPaginator(results, response.headers('X-NGEN-Count'), params.pageNumber, params.pageSize);
         });
       },
       addTitleURL: function (item) {

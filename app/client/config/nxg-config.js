@@ -40,43 +40,50 @@
       var config;
       var apiDomain;
       var ngenDomain;
+      var masheryKey;
 
       var isDemo = profile === prv.profile.DEMO;
       switch (profile) {
         case prv.profile.LOCAL:
           apiDomain = '';
           ngenDomain = '';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          masheryKey = null;
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.LOCAL_TEST:
           apiDomain = 'https://test.nextgearcapital.com';
           ngenDomain = 'https://localhost:8080/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo);
+          masheryKey = null;
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.UAT:
           apiDomain = 'https://exp1uatdapp01.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.uat.nextgearcapital.com/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://uat.api.nextgearcapital.com';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_UAT, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.DEMO:
           apiDomain = 'https://demo.nextgearcapital.com';
-          ngenDomain = 'https://dis-demo-ngen-api.nextgearcapital.com/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo);
+          ngenDomain = 'https://demo.api.nextgearcapital.com';
+          masheryKey = 'bad6uvx4f7kqa7rqsxxnxwpp';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo);
+          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.TRAINING:
           apiDomain = 'https://training.nextgearcapital.com';
-          ngenDomain = 'https://dis-training-ngen-api.nextgearcapital.com/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://training.api.nextgearcapital.com';
+          masheryKey = 'vu95mb2phq3xyp7np9gtmrx7';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.PRODUCTION:
           apiDomain = 'https://customer.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api.nextgearcapital.com/';
-          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo);
+          ngenDomain = 'https://api.nextgearcapital.com';
+          masheryKey = 'v8rjy9ddj48a9u569g836ez6';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_PRODUCTION, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         default:
           throw 'nxgConfig profile \'' + profile + '\' not found!';
@@ -92,13 +99,15 @@
      * @param segmentIoKey
      * @param timeoutMs
      * @param isDemo
+     * @param mashToken
      */
-    function generateConfig(apiDomain, ngenDomain, segmentIoKey, timeoutMs, isDemo) {
+    function generateConfig(apiDomain, ngenDomain, segmentIoKey, timeoutMs, isDemo, mashToken) {
       var configuration;
       configuration = {
         apiBase: apiDomain + '/MobileService/api',
         apiDomain: apiDomain,
-        ngenDomain: ngenDomain,
+        ngenDomain: mashToken ? ngenDomain + '/ngen' : ngenDomain,
+        masheryToken: mashToken,
         segmentIoKey: segmentIoKey,
         userVoice: {
           dealerApiKey: 'P3imRq4ZCgWgrh0XuqHyrA',
