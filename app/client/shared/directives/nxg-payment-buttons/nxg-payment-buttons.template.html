@@ -8,7 +8,7 @@
           ng-click="toggleFeeInQueue()"
           ng-disabled="paymentInProgress()"
           uib-tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null | translate }}"
-          tooltip-placement="left"
+          tooltip-placement="right"
           tooltip-popup-delay="700">
       <span class="paired-body">{{ item.Balance | currency }}</span>
       <span ng-show="!onQueue" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>

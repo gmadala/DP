@@ -9,23 +9,28 @@
       <div class="more-payments" >
       <table class="table table-striped table-secondary">
         <thead>
-          <th translate>Fee Type</th>
+          <th class="hidden-xs" translate>Fee Type</th>
           <th class="hidden-xs" translate>Payment Date</th>
-          <th translate>Amount</th>
+          <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesToday">
-          <td class="description heavy">
-            <div>
+          <td>
+            <div class="heavy">
               {{ fee.feeType || 'N/A' }}
             </div>
             <div class="visible-xs">
-              <span class="lockup-minor">Payment Date: </span>
-              {{ today | moment }}
+              <div class="lockup-minor">
+                <span>Payment Date: </span>
+                {{ today | moment }}
+              </div>
+              <div class="lockup-major pull-right">
+                {{ fee.amount | currency }}
+              </div>
             </div>
 
           </td>
           <td class="center hidden-xs">{{ today | moment }}</td>
-          <td class="numeric">{{ fee.amount | currency }}</td>
+          <td class="numeric hidden-xs">{{ fee.amount | currency }}</td>
         </tr>
       </table>
       </div>
@@ -37,9 +42,9 @@
       <div class="more-payments" >
       <table class="table table-striped table-secondary">
         <thead>
-          <th translate>Description</th>
+          <th class="hidden-xs" translate>Description</th>
           <th class="hidden-xs" translate>Payment Date</th>
-          <th translate>Amount</th>
+          <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsToday">
           <td class="description">
@@ -47,12 +52,17 @@
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
             <div class="visible-xs">
-              <span class="lockup-minor">Payment Date: </span>
-              {{ today | moment }}
+              <div>
+                <span class="lockup-minor" translate>Payment Date: </span>
+                {{ today | moment }}
+              </div>
+              <div class="lockup-major pull-right">
+                {{ payment.getCheckoutAmount() | currency }}
+              </div>
             </div>
           </td>
           <td class="center hidden-xs">{{ today | moment }}</td>
-          <td class="numeric">{{ payment.getCheckoutAmount() | currency }}</td>
+          <td class="numeric hidden-xs">{{ payment.getCheckoutAmount() | currency }}</td>
         </tr>
       </table>
       </div>
@@ -65,20 +75,27 @@
       <div class="more-payments" >
       <table class="table table-striped table-secondary">
         <thead>
-          <th translate>Fee Type</th>
+          <th class="hidden-xs" translate>Fee Type</th>
           <th class="hidden-xs" translate>Payment Date</th>
-          <th translate>Amount</th>
+          <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="fee in items.feesScheduled">
-          <td class="description heavy">
-            {{ fee.feeType || 'N/A' }}
+          <td>
+            <div class="heavy">
+              {{ fee.feeType || 'N/A' }}
+            </div>
             <div class="visible-xs">
-              <span class="lockup-minor">Payment Date: </span>
-              {{ fee.scheduleDate | moment }}
+              <div class="lockup-minor">
+                <span class="lockup-minor" translate>Payment Date: </span>
+                {{ fee.scheduleDate | moment }}
+              </div>
+              <div class="lockup-major pull-right">
+                {{ fee.amount | currency }}
+              </div>
             </div>
           </td>
           <td class="center hidden-xs">{{ fee.scheduleDate | moment }}</td>
-          <td class="numeric">{{ fee.amount | currency }}</td>
+          <td class="numeric hidden-xs">{{ fee.amount | currency }}</td>
         </tr>
       </table>
       </div>
@@ -90,9 +107,9 @@
     <div class="more-payments" >
       <table class="table table-striped table-secondary">
         <thead>
-          <th translate>Description</th>
+          <th class="hidden-xs" translate>Description</th>
           <th class="hidden-xs" translate>Payment Date</th>
-          <th translate>Amount</th>
+          <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsScheduled">
           <td class="description">
@@ -100,12 +117,17 @@
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
             <div class="visible-xs">
-              <span class="lockup-minor">Payment Date: </span>
-              {{ payment.scheduleDate | moment }}
+              <div>
+                <span class="lockup-minor" translate>Payment Date: </span>
+                {{ payment.scheduleDate | moment }}
+              </div>
+              <div class="lockup-major pull-right">
+                {{ payment.getCheckoutAmount() | currency }}
+              </div>
             </div>
           </td>
           <td class="center hidden-xs">{{ payment.scheduleDate | moment }}</td>
-          <td class="numeric">{{ payment.getCheckoutAmount() | currency }}</td>
+          <td class="numeric hidden-xs">{{ payment.getCheckoutAmount() | currency }}</td>
         </tr>
       </table>
       </div>
