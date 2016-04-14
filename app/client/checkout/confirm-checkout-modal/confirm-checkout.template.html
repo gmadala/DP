@@ -6,7 +6,7 @@
     <!-- Today's Fees -->
     <div class="future-payments" ng-show="items.feesToday.length > 0">
       <h3 class="bottom-padding"><span translate>Today's Fees</span>: <span class="color-dollar">{{ items.getTotals().feesToday | currency }}</span></h3>
-      <div class="more-payments" >
+      <div>
       <table class="table table-striped table-secondary">
         <thead>
           <th class="hidden-xs" translate>Fee Type</th>
@@ -39,7 +39,7 @@
     <!-- Today's Payments -->
     <div class="future-payments" ng-show="items.paymentsToday.length > 0">
       <h3 class="bottom-padding"><span translate>Payment Total</span>: <span class="color-dollar">{{ items.getTotals().paymentsToday | currency }}</span></h3>
-      <div class="more-payments" >
+      <div>
       <table class="table table-striped table-secondary">
         <thead>
           <th class="hidden-xs" translate>Description</th>
@@ -47,7 +47,7 @@
           <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsToday">
-          <td class="description">
+          <td>
             <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
@@ -72,7 +72,7 @@
     <!-- Scheduled Fees -->
     <div class="future-payments" ng-show="items.feesScheduled.length > 0">
       <h3 class="bottom-padding"><span translate>Future Fees</span>: <span class="color-dollar">{{ items.getTotals().feesScheduled | currency }}</span></h3>
-      <div class="more-payments" >
+      <div>
       <table class="table table-striped table-secondary">
         <thead>
           <th class="hidden-xs" translate>Fee Type</th>
@@ -104,7 +104,7 @@
     <!-- Scheduled Payments -->
     <div class="future-payments" ng-show="items.paymentsScheduled.length > 0">
       <h3 class="bottom-padding"><span translate>Future Payments</span>: <span class="color-dollar">{{ items.getTotals().paymentsScheduled | currency }}</span></h3>
-    <div class="more-payments" >
+    <div>
       <table class="table table-striped table-secondary">
         <thead>
           <th class="hidden-xs" translate>Description</th>
@@ -112,7 +112,7 @@
           <th class="hidden-xs" translate>Amount</th>
         </thead>
         <tr ng-repeat="payment in items.paymentsScheduled">
-          <td class="description">
+          <td>
             <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
             <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
             <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>

@@ -79,7 +79,7 @@
           ng-class="{'selected': onQueue == 'payoff'}"
           ng-click="togglePaymentInQueue(true)"
           uib-tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
-          tooltip-placement="left"
+          tooltip-placement="top"
           tooltip-popup-delay="700">
       <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
       <span ng-switch="onQueue">
