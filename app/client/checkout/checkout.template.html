@@ -77,10 +77,10 @@
                   </span>
                     </p>
 
-                    <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
+                    <p class="lockup-minor" ng-show="true">
                       <span translate>Unable to Schedule</span>
                       <button class="btn-help"
-                              tooltip-placement="right"
+                              tooltip-placement="bottom"
                               uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
                               tooltip-popup-delay="300">
                         <span nxg-icon="icon-help"></span>

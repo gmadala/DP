@@ -103,9 +103,7 @@
                 </div>
                 <div class="col-xs-6">
                   <p ng-show="item.LastPaymentDate"> <span translate>Last Payment: </span> {{ item.LastPaymentDate | moment }} </p>
-                  <!--<a class="btn btn-square" style="margin:5px 15px;" ng-show="item.TitleImageAvailable"-->
-                  <a class="btn btn-square" style="margin:5px 15px;"
-                     ng-show="true"
+                  <a class="btn btn-square" style="margin:5px 15px;" ng-show="item.TitleImageAvailable"
                      ng-href="{{ item.$titleURL }}"
                      target="_blank">
                     <span nxg-icon="icon-title"></span>
@@ -113,7 +111,7 @@
                 </div>
               </div>
 
-              <!--&lt;!&ndash;end mobile view—->-->
+              <!--end mobile view—->-->
                      </td>
                      <td class="hidden-xs">
                        <p translate> {{ item.FloorplanStatusName }} </p>

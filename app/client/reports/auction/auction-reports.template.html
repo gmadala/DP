@@ -1,22 +1,24 @@
 <div class="row">
-  <section class="col-xs-6 well">
-    <h2 class="well-title" translate>Current Reports</h2>
-    <div class="well-item">
-      <ul class="text-list zeroLeftPadding">
-        <li ng-repeat="doc in documents">
-          <a target="_blank" ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
-            {{ doc.title }}
-          </a>
-        </li>
-      </ul>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <h2 class="well-title" translate>Current Reports</h2>
+      <div class="well-item">
+        <ul class="text-list zeroLeftPadding">
+          <li ng-repeat="doc in documents">
+            <a target="_blank" ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
+              {{ doc.title }}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </section>
-
-  <section class="col-xs-6 well leftMarginMedium">
-    <h2 class="well-title" translate>Historical Reports</h2>
-    <div class="well-item">
-      <form id="disForm" name="disForm" class="row-fluid" novalidate>
-        <h4 translate>Disbursement Detail</h4>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <h2 class="well-title" translate>Historical Reports</h2>
+      <div class="well-item">
+        <form id="disForm" name="disForm" class="row-fluid" novalidate>
+          <h4 translate>Disbursement Detail</h4>
 
           <div class="form-row" ng-show="subsidiaries.length > 0">
             <label for="subsidiary" translate>Subsidiary Manufacturer</label>
@@ -51,18 +53,18 @@
             <button class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
           </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.future)" translate>
-              Please select a Valid Date.
-            </label>
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.future" translate>
-              Please select a Date in the past.
-            </label>
+          <div class="row">
+            <div class="col-xs-12">
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.future)" translate>
+                Please select a Valid Date.
+              </label>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.future" translate>
+                Please select a Date in the past.
+              </label>
+            </div>
           </div>
-        </div>
         </form>
       </div>
-    </section>
+    </div>
   </div>
 </div>
