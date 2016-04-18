@@ -124,8 +124,8 @@
         .then(function (result) {
           $scope.financial.data.activeBankAccounts = getActiveAchAccounts(result.BankAccounts);
           $scope.financial.data.inactiveBankAccounts = getInactiveAchAccounts(result.BankAccounts);
-          $scope.defaultPayment = getDefaultPayment(result.DefaultDisbursementBankAccountId, result.BankAccounts);
-          $scope.defaultDeposit = getDefaultDeposit(result.DefaultBillingBankAccountId, result.BankAccounts);
+          $scope.defaultPayment = getDefaultPayment(result.DefaultBillingBankAccountId, result.BankAccounts);
+          $scope.defaultDeposit = getDefaultDeposit(result.DefaultDisbursementBankAccountId, result.BankAccounts);
         });
     }
 
