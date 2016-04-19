@@ -60,16 +60,25 @@
 
     $scope.isAddModal = isAddModal();
     $scope.isEditModal = isEditModal();
-    $scope.confirmRequest = confirmRequest;
-    $scope.close = closeDialog;
-    $scope.agree = false;
-    $scope.AcceptChanges = AcceptChanges;
-    $scope.isTermsConditions = (accountNumber === '');
 
-    function AcceptChanges() {
-      $scope.isAddAccount = true;
-      $scope.isTermsConditions = false;
-      $scope.submit = true;
+    $scope.close = closeDialog;
+    $scope.confirmRequest = confirmRequest;
+
+    $scope.agree = false;
+    $scope.submit = false;
+    $scope.isAddAccount = true;
+    $scope.isTermsConditions = false;
+
+    $scope.acceptChanges = acceptChanges;
+
+    function acceptChanges() {
+      $scope.validity = angular.copy($scope.financialAccountForm);
+      var validSubmission = isValidSubmission();
+      if ($scope.validity.$valid && validSubmission) {
+        $scope.isAddAccount = false;
+        $scope.isTermsConditions = true;
+        $scope.submit = true;
+      }
     }
 
     /**
@@ -122,6 +131,7 @@
 
       if ($scope.validity.$valid && validSubmission) {
         if ($scope.isAddModal) {
+          $scope.account.IsActive = true;
           $scope.account.AccountName = $scope.account.BankName;
           AccountManagement.addBankAccount($scope.account).then(function(bankAccountId) {
             kissMetricInfo.getKissMetricInfo().then(

@@ -70,8 +70,7 @@
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://test.api.nextgearcapital.com';
-          masheryKey = 'pqarrjbnqepfsppq5nnern7f';
+          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.TRAINING:
@@ -100,13 +99,14 @@
      * @param segmentIoKey
      * @param timeoutMs
      * @param isDemo
+     * @param mashToken
      */
     function generateConfig(apiDomain, ngenDomain, segmentIoKey, timeoutMs, isDemo, mashToken) {
       var configuration;
       configuration = {
         apiBase: apiDomain + '/MobileService/api',
         apiDomain: apiDomain,
-        ngenDomain: ngenDomain + '/ngen',
+        ngenDomain: mashToken ? ngenDomain + '/ngen' : ngenDomain,
         masheryToken: mashToken,
         segmentIoKey: segmentIoKey,
         userVoice: {

@@ -195,7 +195,7 @@ describe('Controller: ConfirmCheckoutCtrl', function () {
       scope.format = 'single';
       scope.viewReceipts();
       expect(dialog.close).toHaveBeenCalled();
-      expect(_window.open).toHaveBeenCalledWith('/encodedReceipts?api_key=pqarrjbnqepfsppq5nnern7f&transactions=abc123', '_blank');
+      expect(_window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=abc123', '_blank');
       expect(state.transitionTo).toHaveBeenCalledWith('payments');
     });
   });

@@ -120,6 +120,17 @@
 
         this.search(this.searchCriteria);
       },
+      sortSellerBy: function (fieldName) {
+        if (this.searchCriteria.sortField === fieldName) {
+          // already sorting by this field, just flip the direction
+          this.searchCriteria.sortDescending = !this.searchCriteria.sortDescending;
+        } else {
+          this.searchCriteria.sortField = fieldName;
+          this.searchCriteria.sortDescending = false;
+        }
+
+        this.sellerSearch(this.searchCriteria);
+      },
       resetSearch: function (initialFilter) {
         this.searchCriteria = {
           query: null,
