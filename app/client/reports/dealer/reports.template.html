@@ -1,255 +1,257 @@
-<div class="row">
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <h2 class="well-title" translate>Current Reports</h2>
-      <div class="well-item">
-        <ul class="unstyled RecievableDetailMargin">
-          <li ng-repeat="report in currentReports">
-            <a target="_blank" ng-href="{{ report.url }}" nxg-track="{{report.metric}}">
-              {{ report.title }}
-            </a>
-          </li>
-        </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <h2 class="well-title" translate>Current Reports</h2>
+        <div class="well-item">
+          <ul class="unstyled RecievableDetailMargin">
+            <li ng-repeat="report in currentReports">
+              <a target="_blank" ng-href="{{ report.url }}" nxg-track="{{report.metric}}">
+                {{ report.title }}
+              </a>
+            </li>
+          </ul>
 
-        <hr/>
+          <hr/>
 
-        <!-- Curtailment Form -->
-        <form class="form-inline" name="curtailmentForm" novalidate>
-          <h3 class="form-title" translate>Upcoming Curtailment / Payoff Quote (PDF)</h3>
+          <!-- Curtailment Form -->
+          <form class="form-inline" name="curtailmentForm" novalidate>
+            <h3 class="form-title" translate>Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
-          <div class="form-row date-field date-picker custom disbursement-date-picker">
-            <label for="curtailmentDate" translate>Date</label>
-            <input id="curtailmentDate" name="curtailmentDate" nxg-date
-                   placeholder="mm/dd/yyyy"
-                   uib-datepicker-popup="{{dateFormat}}"
-                   show-weeks="false"
-                   min-date="maxDate"
-                   show-button-bar="false"
-                   is-open="upcomingDatePicker.opened"
-                   ng-model="data.curtailmentDate"
-                   ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }"
-                   required />
-            <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openUpcomingDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-          </div>
-          <div class="form-row button-group">
-            <button type="submit" class="btn" ng-click="viewCurtailment()" translate>View Report</button>
-          </div>
-
-          <div class="form-row">
-            <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date" translate>
-              Please select a Valid Date.
-            </label>
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
-              Please select a Date in the future.
-            </label>
-          </div>
-        </form>
-
-        <hr/>
-
-        <!-- Exportable Inventory Form -->
-        <form class="form-inline" name="expInvForm" novalidate>
-          <h3 class="form-title" translate>Exportable Inventory</h3>
-
-          <div class="form-row">
-            <label for="expInvStatus" translate>Flooring Status</label>
-            <div class="style-select small">
-              <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
+            <div class="form-row date-field date-picker custom disbursement-date-picker">
+              <label for="curtailmentDate" translate>Date</label>
+              <input id="curtailmentDate" name="curtailmentDate" nxg-date
+                     placeholder="mm/dd/yyyy"
+                     uib-datepicker-popup="{{dateFormat}}"
+                     show-weeks="false"
+                     min-date="maxDate"
+                     show-button-bar="false"
+                     is-open="upcomingDatePicker.opened"
+                     ng-model="data.curtailmentDate"
+                     ng-class="{ 'nxg-invalid': curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date }"
+                     required />
+              <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openUpcomingDatePicker()"><span nxg-icon="icon-calendar"></span></button>
             </div>
-          </div>
-          <div class="form-row button-group">
-            <button type="submit" class="btn" ng-click="viewExpInv()"
-                    nxg-track="{{metric.DEALER_REPORTS_EXPORTABLE_INVENTORY}}"
-                    track-properties="{{ kissMetricData }}" translate>View Report</button>
-          </div>
-        </form>
+            <div class="form-row button-group">
+              <button type="submit" class="btn" ng-click="viewCurtailment()" translate>View Report</button>
+            </div>
+
+            <div class="form-row">
+              <label for="curtailmentDate" class="text-error" ng-show="curtailmentFormValidity.curtailmentDate.$error.required || curtailmentFormValidity.curtailmentDate.$error.date" translate>
+                Please select a Valid Date.
+              </label>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
+                Please select a Date in the future.
+              </label>
+            </div>
+          </form>
+
+          <hr/>
+
+          <!-- Exportable Inventory Form -->
+          <form class="form-inline" name="expInvForm" novalidate>
+            <h3 class="form-title" translate>Exportable Inventory</h3>
+
+            <div class="form-row">
+              <label for="expInvStatus" translate>Flooring Status</label>
+              <div class="style-select small">
+                <select id="expInvStatus" name="expInvStatus" ng-model="expInvStatus.value" ng-options="o for o in expInvStatus.values" required> </select>
+              </div>
+            </div>
+            <div class="form-row button-group">
+              <button type="submit" class="btn" ng-click="viewExpInv()"
+                      nxg-track="{{metric.DEALER_REPORTS_EXPORTABLE_INVENTORY}}"
+                      track-properties="{{ kissMetricData }}" translate>View Report</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <h2 class="well-title" translate>Historical Reports</h2>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <h2 class="well-title" translate>Historical Reports</h2>
 
-      <div class="well-item">
-        <!-- Dealer Statement Form -->
-        <form class="form-inline" name="stmtForm" novalidate>
-          <h3 class="form-title" translate>Dealer Statement</h3>
+        <div class="well-item">
+          <!-- Dealer Statement Form -->
+          <form class="form-inline" name="stmtForm" novalidate>
+            <h3 class="form-title" translate>Dealer Statement</h3>
 
-          <div class="row form-row range">
-            <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
-              <label for="stmtStart" translate>Start Date</label>
-              <input id="stmtStart" name="stmtStart" style="width: 103%;"
-                     placeholder="mm/dd/yyyy" type="text"
-                     uib-datepicker-popup="{{dateFormat}}"
-                     ng-model="data.stmtStartDate"
-                     max-date="maxDate"
-                     show-weeks="false"
-                     show-button-bar="false"
-                     is-open="dealerStartDatePicker.opened"
-                     ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}"
-                     required />
-              <button tabindex="-1" type="button" style="right: 9%"
-                      class="btn-unstyle reports-btn-calendar"
-                      ng-click="openDealerStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+            <div class="row form-row range">
+              <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
+                <label for="stmtStart" translate>Start Date</label>
+                <input id="stmtStart" name="stmtStart" style="width: 103%;"
+                       placeholder="mm/dd/yyyy" type="text"
+                       uib-datepicker-popup="{{dateFormat}}"
+                       ng-model="data.stmtStartDate"
+                       max-date="maxDate"
+                       show-weeks="false"
+                       show-button-bar="false"
+                       is-open="dealerStartDatePicker.opened"
+                       ng-class="{ 'nxg-invalid': stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date}"
+                       required />
+                <button tabindex="-1" type="button" style="right: 9%"
+                        class="btn-unstyle reports-btn-calendar"
+                        ng-click="openDealerStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+              </div>
+
+              <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
+                <label for="stmtEnd" translate>End Date</label>
+                <input id="stmtEnd" name="stmtEnd" style="width: 103%;"
+                       placeholder="mm/dd/yyyy"
+                       uib-datepicker-popup="{{dateFormat}}"
+                       ng-model="data.stmtEndDate"
+                       min-date="data.stmtStartDate"
+                       max-date="maxDate"
+                       show-weeks="false"
+                       show-button-bar="false"
+                       is-open="dealerEndDatePicker.opened"
+                       ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
+                <button tabindex="-1" type="button" style="right: 9%"
+                        class="btn-unstyle reports-btn-calendar"
+                        ng-click="openDealerEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+              </div>
             </div>
 
-            <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
-              <label for="stmtEnd" translate>End Date</label>
-              <input id="stmtEnd" name="stmtEnd" style="width: 103%;"
-                     placeholder="mm/dd/yyyy"
-                     uib-datepicker-popup="{{dateFormat}}"
-                     ng-model="data.stmtEndDate"
-                     min-date="data.stmtStartDate"
-                     max-date="maxDate"
-                     show-weeks="false"
-                     show-button-bar="false"
-                     is-open="dealerEndDatePicker.opened"
-                     ng-class="{ 'nxg-invalid': stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date }" required />
-              <button tabindex="-1" type="button" style="right: 9%"
-                      class="btn-unstyle reports-btn-calendar"
-                      ng-click="openDealerEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-            </div>
-          </div>
-
-          <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date" translate>
-            Please select a Valid Start Date.
-          </label>
-          <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date" translate>
-            Please select a Valid End Date.
-          </label>
-          <label class="text-error" ng-show="stmtFormValidity.dateRangeError" translate>
-            Start Date should not be later than End Date.
-          </label>
-          <label class="text-error" ng-show="stmtFormValidity.endDateRangeError" translate>
-            Please select past End Date.
-          </label>
-
-          <div class="form-row">
-            <label for="stmtVinFilter" translate>Filter for VIN (optional)</label>
-            <div>
-              <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" ng-pattern="vinRegexp" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtVinFilter.$error.pattern }" />
-            </div>
-            <label class="text-error" ng-show="stmtFormValidity.stmtVinFilter.$error.pattern" translate>
-              Invalid character in VIN
-            </label>
-          </div>
-
-          <div class="form-row button-group">
-            <button type="submit" class="btn" ng-click="viewDealerStatement()" translate>View Report</button>
-          </div>
-        </form>
-
-        <hr/>
-
-        <!-- Disbursement Form -->
-        <form class="form-inline" name="disForm" novalidate>
-          <h3 class="form-title" translate>Disbursement Detail</h3>
-
-          <div class="form-row date-field date-picker custom disbursement-date-picker">
-            <label for="disDate" translate>Date</label>
-            <input id="disDate" name="disDate"
-                   placeholder="mm/dd/yyyy" nxg-date
-                   uib-datepicker-popup="{{dateFormat}}"
-                   show-weeks="false"
-                   max-date="maxDate"
-                   show-button-bar="false"
-                   is-open="disbursementDatePicker.opened"
-                   ng-model="data.disDate"
-                   ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }"
-                   required />
-            <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDisbursementDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-          </div>
-          <div class="form-row button-group">
-            <button type="submit" class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
-          </div>
-          <div class="form-row">
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.past)" translate>
-              Please select a Valid Date.
-            </label>
-            <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
-              Please select a Date in the past.
-            </label>
-          </div>
-        </form>
-
-        <hr/>
-
-        <!-- Paid Off Form -->
-        <form class="form-inline" name="paidOffForm" novalidate>
-          <h3 class="form-title" translate>Paid off Summary</h3>
-
-          <div class=" row form-row range">
-            <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
-              <label for="paidOffStart" translate>Start Date</label>
-              <input id="paidOffStart" name="paidOffStart" style="width: 103%;"
-                     placeholder="mm/dd/yyyy"
-                     uib-datepicker-popup="{{dateFormat}}"
-                     ng-model="data.paidOffStartDate"
-                     show-weeks="false"
-                     show-button-bar="false"
-                     is-open="paidStartDatePicker.opened"
-                     max-date="maxDate"
-                     ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required>
-
-              <button tabindex="-1" type="button" style="right: 9%"
-                      class="btn-unstyle reports-btn-calendar"
-                      ng-click="openPaidStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-            </div>
-
-            <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
-              <label for="paidOffEnd" translate>End Date</label>
-              <input id="paidOffEnd" name="paidOffEnd" style="width: 103%;"
-                     ng-model="data.paidOffEndDate"  type="text"
-                     placeholder="mm/dd/yyyy"
-                     uib-datepicker-popup="{{dateFormat}}"
-                     show-weeks="false"
-                     show-button-bar="false"
-                     is-open="paidEndDatePicker.opened"
-                     min-date="data.paidOffStartDate"
-                     max-date="maxDate"
-                     ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date }"
-                     required />
-              <button tabindex="-1" type="button" style="right: 9%"
-                      class="btn-unstyle reports-btn-calendar"
-                      ng-click="openPaidEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label for="paidOffStart" class="text-error"
-                   ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date" translate>
+            <label for="stmtStart" class="text-error" ng-show="stmtFormValidity.stmtStart.$error.required || stmtFormValidity.stmtStart.$error.date" translate>
               Please select a Valid Start Date.
             </label>
-            <label for="paidOffEnd" class="text-error"
-                   ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date" translate>
+            <label for="stmtEnd" class="text-error" ng-show="stmtFormValidity.stmtEnd.$error.required || stmtFormValidity.stmtEnd.$error.date" translate>
               Please select a Valid End Date.
             </label>
-            <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>
+            <label class="text-error" ng-show="stmtFormValidity.dateRangeError" translate>
               Start Date should not be later than End Date.
             </label>
-            <label class="text-error" ng-show="paidOffFormValidity.endDateRangeError" translate>
+            <label class="text-error" ng-show="stmtFormValidity.endDateRangeError" translate>
               Please select past End Date.
             </label>
-          </div>
 
-          <div class="form-row">
-            <label for="paidOffVinFilter" translate>Filter for VIN (optional)</label>
-            <div>
-              <input type="text" name="paidOffVinFilter" id="paidOffVinFilter" ng-pattern="vinRegexp" ng-model="data.paidOffVinFilter" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffVinFilter.$error.pattern }" />
-              <label class="text-error" ng-show="paidOffFormValidity.paidOffVinFilter.$error.pattern" translate>
+            <div class="form-row">
+              <label for="stmtVinFilter" translate>Filter for VIN (optional)</label>
+              <div>
+                <input type="text" id="stmtVinFilter" name="stmtVinFilter" ng-model="data.stmtVinFilter" ng-pattern="vinRegexp" ng-class="{ 'nxg-invalid': stmtFormValidity.stmtVinFilter.$error.pattern }" />
+              </div>
+              <label class="text-error" ng-show="stmtFormValidity.stmtVinFilter.$error.pattern" translate>
                 Invalid character in VIN
               </label>
             </div>
-          </div>
 
-          <div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
+            <div class="form-row button-group">
+              <button type="submit" class="btn" ng-click="viewDealerStatement()" translate>View Report</button>
+            </div>
+          </form>
 
-          <div class="form-row button-group">
-            <button type="submit" class="btn" ng-click="viewPaidOffSummary()" translate>View Report</button>
-          </div>
+          <hr/>
 
-        </form>
+          <!-- Disbursement Form -->
+          <form class="form-inline" name="disForm" novalidate>
+            <h3 class="form-title" translate>Disbursement Detail</h3>
+
+            <div class="form-row date-field date-picker custom disbursement-date-picker">
+              <label for="disDate" translate>Date</label>
+              <input id="disDate" name="disDate"
+                     placeholder="mm/dd/yyyy" nxg-date
+                     uib-datepicker-popup="{{dateFormat}}"
+                     show-weeks="false"
+                     max-date="maxDate"
+                     show-button-bar="false"
+                     is-open="disbursementDatePicker.opened"
+                     ng-model="data.disDate"
+                     ng-class="{ 'nxg-invalid': disFormValidity.disDate.$error.required || disFormValidity.disDate.$error.date || disFormValidity.disDate.$error.past }"
+                     required />
+              <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="openDisbursementDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+            </div>
+            <div class="form-row button-group">
+              <button type="submit" class="btn" ng-click="viewDisbursementDetail()" translate>View Report</button>
+            </div>
+            <div class="form-row">
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.required || (disFormValidity.disDate.$error.date && !disFormValidity.disDate.$error.past)" translate>
+                Please select a Valid Date.
+              </label>
+              <label for="disDate" class="text-error" ng-show="disFormValidity.disDate.$error.past" translate>
+                Please select a Date in the past.
+              </label>
+            </div>
+          </form>
+
+          <hr/>
+
+          <!-- Paid Off Form -->
+          <form class="form-inline" name="paidOffForm" novalidate>
+            <h3 class="form-title" translate>Paid off Summary</h3>
+
+            <div class=" row form-row range">
+              <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
+                <label for="paidOffStart" translate>Start Date</label>
+                <input id="paidOffStart" name="paidOffStart" style="width: 103%;"
+                       placeholder="mm/dd/yyyy"
+                       uib-datepicker-popup="{{dateFormat}}"
+                       ng-model="data.paidOffStartDate"
+                       show-weeks="false"
+                       show-button-bar="false"
+                       is-open="paidStartDatePicker.opened"
+                       max-date="maxDate"
+                       ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date }" required>
+
+                <button tabindex="-1" type="button" style="right: 9%"
+                        class="btn-unstyle reports-btn-calendar"
+                        ng-click="openPaidStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+              </div>
+
+              <div class="date-field date-picker col-xs-6 custom reports-search-date-picker">
+                <label for="paidOffEnd" translate>End Date</label>
+                <input id="paidOffEnd" name="paidOffEnd" style="width: 103%;"
+                       ng-model="data.paidOffEndDate"  type="text"
+                       placeholder="mm/dd/yyyy"
+                       uib-datepicker-popup="{{dateFormat}}"
+                       show-weeks="false"
+                       show-button-bar="false"
+                       is-open="paidEndDatePicker.opened"
+                       min-date="data.paidOffStartDate"
+                       max-date="maxDate"
+                       ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date }"
+                       required />
+                <button tabindex="-1" type="button" style="right: 9%"
+                        class="btn-unstyle reports-btn-calendar"
+                        ng-click="openPaidEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="paidOffStart" class="text-error"
+                     ng-show="paidOffFormValidity.paidOffStart.$error.required || paidOffFormValidity.paidOffStart.$error.date" translate>
+                Please select a Valid Start Date.
+              </label>
+              <label for="paidOffEnd" class="text-error"
+                     ng-show="paidOffFormValidity.paidOffEnd.$error.required || paidOffFormValidity.paidOffEnd.$error.date" translate>
+                Please select a Valid End Date.
+              </label>
+              <label class="text-error" ng-show="paidOffFormValidity.dateRangeError" translate>
+                Start Date should not be later than End Date.
+              </label>
+              <label class="text-error" ng-show="paidOffFormValidity.endDateRangeError" translate>
+                Please select past End Date.
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label for="paidOffVinFilter" translate>Filter for VIN (optional)</label>
+              <div>
+                <input type="text" name="paidOffVinFilter" id="paidOffVinFilter" ng-pattern="vinRegexp" ng-model="data.paidOffVinFilter" ng-class="{ 'nxg-invalid': paidOffFormValidity.paidOffVinFilter.$error.pattern }" />
+                <label class="text-error" ng-show="paidOffFormValidity.paidOffVinFilter.$error.pattern" translate>
+                  Invalid character in VIN
+                </label>
+              </div>
+            </div>
+
+            <div nxg-stock-numbers-input="placeholder" data="data" form="paidOffFormValidity"></div>
+
+            <div class="form-row button-group">
+              <button type="submit" class="btn" ng-click="viewPaidOffSummary()" translate>View Report</button>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   </div>
