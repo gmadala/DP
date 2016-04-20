@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row ng-scope">
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="currLang==='en'">
       <section class="panel panel-default video-well">
         <h2 class="well-title" translate>Video Walkthrough</h2>
         <div class="nxg-video">
@@ -9,55 +9,57 @@
       </section>
     </div>
 
-    <div class="col-md-3">
-      <div class="panel panel-default documents-well">
-        <h2 class="well-title" translate>Documents</h2>
-        <div class="well-item">
-          <ul class="text-list zeroLeftPadding">
-            <li>
-              <a ng-href="{{ feeScheduleUrl }}" target="_blank" nxg-track="{{metric.DEALER_RESOURCES_RATES_AND_FEES_PAGE}}" track-properties="{{ kissMetricData }}" translate>
-                Rates and Fees
-              </a>
-            </li>
-            <li ng-repeat="doc in documents">
-              <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
-                {{ doc.title }}
-              </a>
-            </li>
-          </ul>
-          <h4 translate>Collateral Protection Program</h4>
-          <ul class="text-list zeroLeftPadding">
-            <li ng-repeat="doc in collateralProtection">
-              <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
-                {{ doc.title }}
-              </a>
-            </li>
-          </ul>
+    <div class="col-md-6 no-padding">
+      <div class="col-md-6">
+        <div class="panel panel-default documents-well">
+          <h2 class="well-title" translate>Documents</h2>
+          <div class="well-item">
+            <ul class="text-list zeroLeftPadding">
+              <li>
+                <a ng-href="{{ feeScheduleUrl }}" target="_blank" nxg-track="{{metric.DEALER_RESOURCES_RATES_AND_FEES_PAGE}}" track-properties="{{ kissMetricData }}" translate>
+                  Rates and Fees
+                </a>
+              </li>
+              <li ng-repeat="doc in documents">
+                <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
+                  {{ doc.title }}
+                </a>
+              </li>
+            </ul>
+            <h4 translate>Collateral Protection Program</h4>
+            <ul class="text-list zeroLeftPadding">
+              <li ng-repeat="doc in collateralProtection">
+                <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}">
+                  {{ doc.title }}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3">
-      <div class="panel panel-default documents-well">
-        <h2 class="well-title" translate>Mobile Apps</h2>
-        <div class="well-item">
-          <p translate>Manage your business with NextGear Capital on the go.</p>
-          <ul class="text-list zeroLeftPadding">
-            <li>
-              <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8"
-                 nxg-track="{{ metric.DEALER_RESOURCES_IOS_APP }}" track-properties="{{ kissMetricData }}"
-                 target="_blank" translate>
-                Download myNextGear mobile iOS
-              </a>
-            </li>
-            <li>
-              <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile"
-                 nxg-track="{{ metric.DEALER_RESOURCES_ANDROID_APP }}" track-properties="{{ kissMetricData }}"
-                 target="_blank" translate>
-                Download myNextGear mobile Android
-              </a>
-            </li>
-          </ul>
+      <div class="col-md-6">
+        <div class="panel panel-default documents-well">
+          <h2 class="well-title" translate>Mobile Apps</h2>
+          <div class="well-item">
+            <p translate>Manage your business with NextGear Capital on the go.</p>
+            <ul class="text-list zeroLeftPadding">
+              <li>
+                <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8"
+                   nxg-track="{{ metric.DEALER_RESOURCES_IOS_APP }}" track-properties="{{ kissMetricData }}"
+                   target="_blank" translate>
+                  Download myNextGear mobile iOS
+                </a>
+              </li>
+              <li>
+                <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile"
+                   nxg-track="{{ metric.DEALER_RESOURCES_ANDROID_APP }}" track-properties="{{ kissMetricData }}"
+                   target="_blank" translate>
+                  Download myNextGear mobile Android
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

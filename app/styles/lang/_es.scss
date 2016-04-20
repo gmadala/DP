@@ -99,6 +99,16 @@ body.lang_es {
 
     }
 
+    @media (max-width: 400px){
+      .well-title{
+        font-size: 14px;
+
+        .well-sub-title, a, .right{
+          font-size: 10px !important;
+        }
+      }
+    }
+
     .filter-options {
       .col-md-5 {
         width: 120px;
@@ -148,15 +158,6 @@ body.lang_es {
           margin-top: 0;
         }
       }
-    }
-  }
-
-  #DocumentsPage {
-    .video-well {
-      display: none;
-    }
-    .documents-well {
-      width: 45%;
     }
   }
 

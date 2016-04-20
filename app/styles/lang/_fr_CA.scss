@@ -185,7 +185,7 @@ body.lang_fr_CA {
       .well-title {
         font-size: 15px;
 
-        .well-sub-title, a {
+        .well-sub-title, a, .right {
           font-size: 12px;
           margin-top: 4px;
         }
@@ -195,6 +195,16 @@ body.lang_fr_CA {
         }
       }
 
+    }
+
+    @media (max-width: 400px){
+      .well-title{
+        font-size: 14px;
+
+        .well-sub-title, a, .right{
+          font-size: 10px !important;
+        }
+      }
     }
 
     .well.sticky .well-footer {
@@ -281,15 +291,6 @@ body.lang_fr_CA {
 
     }
     .questText{font-size:11px;}
-  }
-
-  #DocumentsPage {
-    .video-well {
-      display: none;
-    }
-    .documents-well {
-      width: 45%;
-    }
   }
 
   #AuctionFloorplanPage {

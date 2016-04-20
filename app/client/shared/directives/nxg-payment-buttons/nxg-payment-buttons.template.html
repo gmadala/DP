@@ -6,10 +6,7 @@
           class="btn btn-adapts"
           ng-class="{'selected': onQueue}"
           ng-click="toggleFeeInQueue()"
-          ng-disabled="paymentInProgress()"
-          uib-tooltip="{{ !onQueue && 'Select the fees you want to pay by adding them to your payment queue.' || null | translate }}"
-          tooltip-placement="right"
-          tooltip-popup-delay="700">
+          ng-disabled="paymentInProgress()">
       <span class="paired-body">{{ item.Balance | currency }}</span>
       <span ng-show="!onQueue" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
       <span ng-show="onQueue" class="paired-media icon-x-small" nxg-icon="icon-minus"></span>
@@ -32,10 +29,7 @@
           id="togglePayment"
           class="btn btn-adapts"
           ng-class="{'selected': onQueue == 'payment'}"
-          ng-click="togglePaymentInQueue(false)"
-          uib-tooltip="{{ onQueue != 'payment' && tooltipText || null }}"
-          tooltip-placement="right"
-          tooltip-popup-delay="700">
+          ng-click="togglePaymentInQueue(false)">
         <span class="paired-body">{{ item.AmountDue | currency }}</span>
         <span ng-switch="onQueue">
           <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
@@ -60,10 +54,7 @@
           type="button"
           id="togglePayoff2"
           class="btn btn-adapts"
-          ng-click="togglePaymentInQueue(false)"
-          uib-tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
-          tooltip-placement="right"
-          tooltip-popup-delay="700">
+          ng-click="togglePaymentInQueue(false)">
     <span class="paired-body">{{ item.AmountDue | currency }}</span>
     <span ng-switch="onQueue">
         <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
@@ -77,10 +68,7 @@
           id="togglePayoff"
           class="btn btn-adapts"
           ng-class="{'selected': onQueue == 'payoff'}"
-          ng-click="togglePaymentInQueue(true)"
-          uib-tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
-          tooltip-placement="top"
-          tooltip-popup-delay="700">
+          ng-click="togglePaymentInQueue(true)">
       <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
       <span ng-switch="onQueue">
         <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
@@ -95,10 +83,7 @@
           class="btn btn-adapts"
           ng-class="{'selected': onQueue == 'payoff'}"
           ng-disabled="onQueue == 'payment' || paymentInProgress()"
-          ng-click="togglePaymentInQueue(true)"
-          uib-tooltip="{{ onQueue != 'payoff' && tooltipText || null }}"
-          tooltip-placement="right"
-          tooltip-popup-delay="700">
+          ng-click="togglePaymentInQueue(true)">
     <span class="paired-body">{{ item.CurrentPayoff | currency }}</span>
     <span ng-switch="onQueue">
       <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
