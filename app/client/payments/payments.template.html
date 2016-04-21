@@ -84,7 +84,7 @@
               <p class="lockup-major">{{ fee.FeeType || 'N/A' }}</p>
               <p class="visible-xs">{{ fee.Description }}</p>
               <div class="col-xs-12 vertical-spacing">
-                <p translate>Payment Due: </p>
+                <p class="visible-xs" translate>Payment Due: </p>
                 <div nxg-payment-buttons="fee"
                      item="fee"
                      on-queue="isFeeOnQueue(fee.FinancialRecordId)"
