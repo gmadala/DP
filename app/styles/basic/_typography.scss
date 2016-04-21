@@ -270,3 +270,21 @@ ul.document-list{
 .vertical-spacing{
   margin: 10px 0 5px 0;
 }
+
+@media (max-width: 1150px) {
+
+  .well-title {
+    font-size: 15px;
+
+    .well-sub-title, a {
+      .well-sub-title, a, .right {
+        font-size: 12px !important;
+        margin-top: 4px !important;
+      }
+    }
+    button {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}

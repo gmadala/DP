@@ -24,7 +24,7 @@
         <label class="cr-label col-xs-9" style="top: 5px" for="paymentOptionCurtailment">
           <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT) - curtailmentObject.additionalPrincipal | currency }}</strong> – <span translate>Curtailment Payment</span>
         </label>
-        <div class="form-row" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
+        <div class="form-row col-xs-12" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
           <span class="input-prepend dollar">
             <span class="add-on no-top">$</span>
             <input type="text"

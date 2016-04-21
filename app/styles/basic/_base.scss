@@ -31,7 +31,11 @@ body {
 }
 
 .nxg-main-view{
-  overflow: scroll;
+  overflow: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 
 

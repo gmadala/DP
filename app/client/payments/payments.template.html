@@ -213,8 +213,15 @@
                     <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-xs-6 visible-xs">
+                    <p class="lockup-minor vertical-spacing"><span translate>Payment Due:</span></p>
+                  </div>
+                  <div class="col-xs-6 visible-xs">
+                    <p class="lockup-minor vertical-spacing"><span translate>Payoff:</span></p>
+                  </div>
+                </div>
                 <div class="col-xs-6 visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>Payment Due:</span></p>
                   <div nxg-payment-buttons="payment" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                   <div class="paired-body">
                     <p class="lockup-minor vertical-spacing" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">
@@ -231,7 +238,6 @@
                   </div>
                 </div>
                 <div class="col-xs-6 visible-xs no-left-margin">
-                  <p class="lockup-minor vertical-spacing"><span translate>Payoff:</span></p>
                   <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
                 </div>
               </td>
